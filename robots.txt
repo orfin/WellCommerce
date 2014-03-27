@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /application/
+Disallow: /design/
+Disallow: /doc/
+Disallow: /upload/
+Disallow: /var/

@@ -1,0 +1,93 @@
+{
+    "name": "gekosale/gekosale",
+    "description": "E-commerce platform",
+    "minimum-stability": "dev",
+    "authors": [
+        {
+            "name": "Adam Piotrowski",
+            "email": "adam@wellcommerce.org",
+            "role": "Lead Developer"
+        },
+        {
+            "name": "Rafal Martonik",
+            "email": "rafal@wellcommerce.org",
+            "role": "Core Developer"
+        },
+        {
+            "name": "Adrian Potępa",
+            "email": "adrian@wellcommerce.org",
+            "role": "Core Developer"
+        },
+        {
+            "name": "Michal Gonciarz",
+            "email": "michal@wellcommerce.org",
+            "role": "Support Lead"
+        },
+        {
+            "name": "Igor Chudy",
+            "email": "igor@wellcommerce.org",
+            "role": "Lead Designer"
+        }
+    ],
+    "support": {
+        "email": "hello@gekosale.com"
+    },
+    "license": "LGPL-3.0+",
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "xajax/xajax",
+                "version": "1.0.0",
+                "dist": {
+                    "url": "http://www.gekosale.pl/packages/Xajax.zip",
+                    "type": "zip"
+                }
+            }
+        }
+    ],
+    "require": {
+        "symfony/browser-kit": "2.4.x-dev",
+        "symfony/config": "2.4.x-dev",
+        "symfony/console": "2.4.x-dev",
+        "symfony/expression-language": "2.4.x-dev",
+        "symfony/routing": "2.4.x-dev",
+        "symfony/process": "2.4.x-dev",
+        "symfony/options-resolver": "2.4.x-dev",
+        "symfony/http-kernel": "2.4.x-dev",
+        "symfony/http-foundation": "2.4.x-dev",
+        "symfony/finder": "2.4.x-dev",
+        "symfony/filesystem": "2.4.x-dev",
+        "symfony/intl": "2.4.x-dev",
+        "symfony/event-dispatcher": "2.4.x-dev",
+        "symfony/dependency-injection": "2.4.x-dev",
+        "symfony/debug": "2.4.x-dev",
+        "symfony/stopwatch": "2.4.x-dev",
+        "symfony/translation": "2.4.x-dev",
+        "symfony/yaml": "2.4.x-dev",
+        "predis/predis": "0.8.x-dev",
+        "monolog/monolog": "1.7.0",
+        "symfony/twig-bridge": "2.4.x-dev",
+        "kriswallsmith/assetic": "v1.1.2",
+        "twig/extensions": "1.0.x-dev",
+        "swiftmailer/swiftmailer": "5.1.x-dev",
+        "illuminate/database": "4.1",
+        "xajax/xajax": "1.0.0",
+        "symfony/property-access": "2.4.x-dev",
+        "sami/sami": "v1.3",
+        "doctrine/cache": "1.4.x-dev",
+        "illuminate/encryption": "4.1.x-dev",
+        "twitter/bootstrap": "v3.1.1",
+        "intervention/image": "1.6.0",
+        "intervention/imagecache": "0.6.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "WellCommerce": "application",
+            "": "application/"
+        },
+        "classmap": [
+        	"vendor/xajax/xajax"
+       	]
+    }
+}

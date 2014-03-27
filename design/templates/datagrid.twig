@@ -1,0 +1,49 @@
+{% import "macros.twig" as macros %}
+
+{% block datagrid_header %}
+<div class="block">
+    <div id="datagrid-{{ datagrid_options.id }}"></div>
+</div>
+{% endblock %}
+
+<script type="text/javascript">
+var DataGrid;
+{% if datagrid_options.event_handlers.edit_row %}
+function {{ datagrid_options.event_handlers.edit_row }}(dg, id) {
+    location.href = '{{ datagrid_options.routes.edit }}/' + id;
+}
+{% endif %}
+
+{% if datagrid_options.event_handlers.delete_row %}
+function deleteRow(dg, id) {
+    var oRow = DataGrid.GetRow(id);
+    var title = '{% trans %}Delete{% endtrans %}';
+    var msg = '{% trans %}Confirm deleting{% endtrans %} ' + oRow.name + '?';
+    var params = {
+        id: id
+    };
+    var func = function(p) {
+        oRequest = {
+            id: p.id
+        }
+        {{ datagrid_options.event_handlers.delete_row }}(oRequest, GCallback(function(eEvent){
+            DataGrid.LoadData();
+            DataGrid.ClearSelection();
+        }));
+    };
+    new GF_Alert(title, msg, func, true, params);
+}
+{% endif %}
+
+$(document).ready(function() {
+    {% for key,column in datagrid_columns %}
+    {{ macros.datagrid_column(key,column) }}
+    {% endfor %}
+
+    var options = {
+        {{ macros.datagrid_options(datagrid_columns, datagrid_options) }}
+    };
+
+    DataGrid = new GF_Datagrid($('#datagrid-{{ datagrid_options.id }}'), options);
+});
+</script>
