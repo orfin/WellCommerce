@@ -9,15 +9,15 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Core\Model;
+namespace WellCommerce\Plugin\Company\Model;
 
 use WellCommerce\Core\Model;
 
 /**
  * Class Company
  *
- * @package WellCommerce\Core\Model
- * @author  Adam Piotrowski <adam@wellcommerce.org>
+ * @package WellCommerce\Plugin\Company\Model
+ * @author  Adam Piotrowski <adam@gekosale.com>
  */
 class Company extends Model
 {
@@ -31,12 +31,12 @@ class Company extends Model
     protected $fillable = ['id'];
 
     /**
-     * Relation with
+     * Relation with Shop model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function shop()
     {
-        return $this->hasMany('WellCommerce\Core\Model\Shop');
+        return $this->hasMany('WellCommerce\Plugin\Shop\Model\Shop');
     }
 }

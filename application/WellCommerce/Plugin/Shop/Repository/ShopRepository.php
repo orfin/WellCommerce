@@ -12,8 +12,8 @@
 namespace WellCommerce\Plugin\Shop\Repository;
 
 use WellCommerce\Core\Repository;
-use WellCommerce\Core\Model\Shop;
-use WellCommerce\Core\Model\ShopTranslation;
+use WellCommerce\Plugin\Shop\Model\Shop;
+use WellCommerce\Plugin\Shop\Model\ShopTranslation;
 
 /**
  * Class ShopRepository

@@ -12,8 +12,7 @@
 namespace WellCommerce\Plugin\Layout\Repository;
 
 use WellCommerce\Core\Repository;
-use WellCommerce\Core\Model\LayoutTheme;
-use WellCommerce\Core\Model\LayoutThemeTranslation;
+use WellCommerce\Plugin\Layout\Model\LayoutTheme;
 
 /**
  * Class LayoutThemeRepository
@@ -23,28 +22,6 @@ use WellCommerce\Core\Model\LayoutThemeTranslation;
  */
 class LayoutThemeRepository extends Repository
 {
-
-    /**
-     * Returns all tax rates
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
-     */
-    public function all()
-    {
-        return LayoutTheme::all();
-    }
-
-    /**
-     * Returns a single tax rate
-     *
-     * @param $id
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|static
-     */
-    public function find($id)
-    {
-        return LayoutTheme::with('translation')->findOrFail($id);
-    }
 
     /**
      * Deletes layout_theme record by ID
@@ -74,18 +51,6 @@ class LayoutThemeRepository extends Repository
 
             $layout_theme->discount = $Data['discount'];
             $layout_theme->save();
-
-            foreach ($this->getLanguageIds() as $language) {
-
-                $translation = LayoutThemeTranslation::firstOrNew([
-                    'layout_theme_id' => $layout_theme->id,
-                    'language_id'     => $language
-                ]);
-
-                $translation->setTranslationData($Data, $language);
-                $translation->save();
-            }
-
         });
     }
 
@@ -111,8 +76,33 @@ class LayoutThemeRepository extends Repository
         return $populateData;
     }
 
+    /**
+     * Returns a single tax rate
+     *
+     * @param $id
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|static
+     */
+    public function find($id)
+    {
+        return LayoutTheme::with('translation')->findOrFail($id);
+    }
+
+    /**
+     * @return mixed
+     */
     public function getAllLayoutThemeToSelect()
     {
         return $this->all()->toSelect('id', 'name');
+    }
+
+    /**
+     * Returns all tax rates
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function all()
+    {
+        return LayoutTheme::all();
     }
 }

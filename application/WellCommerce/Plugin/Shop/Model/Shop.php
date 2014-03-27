@@ -9,17 +9,17 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Core\Model;
+namespace WellCommerce\Plugin\Shop\Model;
 
 use WellCommerce\Core\Model;
 
 /**
  * Class Shop
  *
- * @package WellCommerce\Core\Model
- * @author  Adam Piotrowski <adam@wellcommerce.org>
+ * @package WellCommerce\Plugin\Shop\Model
+ * @author  Adam Piotrowski <adam@gekosale.com>
  */
-class Shop extends Model implements TranslatableModelInterface
+class Shop extends Model implements Model\TranslatableModelInterface
 {
 
     protected $table = 'shop';
@@ -30,14 +30,24 @@ class Shop extends Model implements TranslatableModelInterface
 
     protected $fillable = ['id'];
 
+    /**
+     * Relation with ShopTranslation model
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
     public function translation()
     {
-        return $this->hasMany('WellCommerce\Core\Model\ShopTranslation');
+        return $this->hasMany('WellCommerce\Plugin\Shop\Model\ShopTranslation');
     }
 
+    /**
+     * Relation with Company model
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function company()
     {
-        return $this->belongsTo('WellCommerce\Core\Model\Company');
+        return $this->belongsTo('WellCommerce\Plugin\Company\Model\Company');
     }
 
     /**

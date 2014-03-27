@@ -9,21 +9,21 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Core\Model;
+namespace WellCommerce\Plugin\Language\Model;
 
 use WellCommerce\Core\Model;
 
 /**
  * Class Language
  *
- * @package WellCommerce\Core\Model
- * @author  Adam Piotrowski <adam@wellcommerce.org>
+ * @package WellCommerce\Plugin\Language\Model
+ * @author  Adam Piotrowski <adam@gekosale.com>
  */
 class Language extends Model
 {
 
-    protected $table = 'language';
     public $timestamps = true;
+    protected $table = 'language';
     protected $softDelete = false;
     protected $fillable = array('id');
 
