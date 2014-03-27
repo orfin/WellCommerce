@@ -9,14 +9,14 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Core\Model;
+namespace WellCommerce\Plugin\Contact\Model;
 
 use WellCommerce\Core\Model;
 
 /**
  * Class ContactTranslation
  *
- * @package WellCommerce\Core\Model
+ * @package WellCommerce\Plugin\Contact\Model
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class ContactTranslation extends Model
@@ -30,21 +30,5 @@ class ContactTranslation extends Model
 
     protected $fillable = ['contact_id', 'language_id'];
 
-    protected $translatable
-        = [
-            'name',
-            'email',
-            'phone',
-            'street',
-            'streetno',
-            'flatno',
-            'province',
-            'city',
-            'country'
-        ];
-
-    public function language()
-    {
-        return $this->belongsTo('WellCommerce\Core\Model\Language');
-    }
+    protected $translatable = ['name', 'email', 'phone', 'street', 'streetno', 'flatno', 'province', 'city', 'country'];
 }

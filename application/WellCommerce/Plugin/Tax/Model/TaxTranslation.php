@@ -9,14 +9,14 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Core\Model;
+namespace WellCommerce\Plugin\Tax\Model;
 
 use WellCommerce\Core\Model;
 
 /**
  * Class TaxTranslation
  *
- * @package WellCommerce\Core\Model
+ * @package WellCommerce\Plugin\Tax\Model
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class TaxTranslation extends Model
@@ -32,11 +32,11 @@ class TaxTranslation extends Model
 
     public function tax()
     {
-        return $this->belongsTo('WellCommerce\Core\Model\Tax');
+        return $this->belongsTo('WellCommerce\Plugin\Tax\Model\Tax');
     }
 
     public function language()
     {
-        return $this->belongsTo('WellCommerce\Core\Model\Language');
+        return $this->belongsTo('WellCommerce\Plugin\Tax\Model\Language');
     }
 }

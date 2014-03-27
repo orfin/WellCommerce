@@ -11,9 +11,9 @@
  */
 namespace WellCommerce\Plugin\Tax\Repository;
 
-use WellCommerce\Core\Repository,
-    WellCommerce\Core\Model\Tax,
-    WellCommerce\Core\Model\TaxTranslation;
+use WellCommerce\Core\Repository;
+use WellCommerce\Plugin\Tax\Model\Tax;
+use WellCommerce\Plugin\Tax\Model\TaxTranslation;
 
 /**
  * Class TaxRepository
@@ -82,10 +82,8 @@ class TaxRepository extends Repository
                 ]);
 
                 $translation->name = $name;
-
                 $translation->save();
             }
-
         });
     }
 

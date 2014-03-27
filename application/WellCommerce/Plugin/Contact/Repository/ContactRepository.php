@@ -12,8 +12,8 @@
 namespace WellCommerce\Plugin\Contact\Repository;
 
 use WellCommerce\Core\Repository;
-use WellCommerce\Core\Model\Contact;
-use WellCommerce\Core\Model\ContactTranslation;
+use WellCommerce\Plugin\Contact\Model\Contact;
+use WellCommerce\Plugin\Contact\Model\ContactTranslation;
 
 /**
  * Class ContactRepository

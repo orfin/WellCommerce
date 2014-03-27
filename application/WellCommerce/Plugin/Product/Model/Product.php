@@ -9,7 +9,7 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Core\Model;
+namespace WellCommerce\Plugin\Product\Model;
 
 use WellCommerce\Core\Model;
 use WellCommerce\Core\Helper;
@@ -17,10 +17,10 @@ use WellCommerce\Core\Helper;
 /**
  * Class Product
  *
- * @package WellCommerce\Core\Model
+ * @package WellCommerce\Plugin\Product\Model
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Product extends Model implements TranslatableModelInterface
+class Product extends Model implements Model\TranslatableModelInterface
 {
     /**
      * @var string
@@ -47,7 +47,7 @@ class Product extends Model implements TranslatableModelInterface
      */
     public function translation()
     {
-        return $this->hasMany('WellCommerce\Core\Model\ProductTranslation');
+        return $this->hasMany('WellCommerce\Plugin\Product\Model\ProductTranslation');
     }
 
     /**
@@ -57,7 +57,7 @@ class Product extends Model implements TranslatableModelInterface
      */
     public function shop()
     {
-        return $this->belongsToMany('WellCommerce\Core\Model\Shop', 'product_shop', 'product_id', 'shop_id');
+        return $this->belongsToMany('WellCommerce\Plugin\Shop\Model\Shop', 'product_shop', 'product_id', 'shop_id');
     }
 
     /**
@@ -67,7 +67,7 @@ class Product extends Model implements TranslatableModelInterface
      */
     public function category()
     {
-        return $this->belongsToMany('WellCommerce\Core\Model\Category', 'product_category', 'product_id', 'category_id');
+        return $this->belongsToMany('WellCommerce\Plugin\Category\Model\Category', 'product_category', 'product_id', 'category_id');
     }
 
     /**
@@ -77,7 +77,7 @@ class Product extends Model implements TranslatableModelInterface
      */
     public function deliverer()
     {
-        return $this->belongsToMany('WellCommerce\Core\Model\Deliverer', 'product_deliverer', 'product_id', 'deliverer_id');
+        return $this->belongsToMany('WellCommerce\Plugin\Deliverer\Model\Deliverer', 'product_deliverer', 'product_id', 'deliverer_id');
     }
 
     /**
@@ -87,7 +87,7 @@ class Product extends Model implements TranslatableModelInterface
      */
     public function photos()
     {
-        return $this->belongsToMany('WellCommerce\Core\Model\File', 'product_photo', 'product_id', 'file_id');
+        return $this->belongsToMany('WellCommerce\Plugin\File\Model\File', 'product_photo', 'product_id', 'file_id');
     }
 
     /**

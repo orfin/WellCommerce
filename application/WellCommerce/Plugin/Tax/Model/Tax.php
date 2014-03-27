@@ -9,17 +9,17 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Core\Model;
+namespace WellCommerce\Plugin\Tax\Model;
 
 use WellCommerce\Core\Model;
 
 /**
  * Class Tax
  *
- * @package WellCommerce\Core\Model
+ * @package WellCommerce\Plugin\Tax\Model
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Tax extends Model
+class Tax extends Model implements Model\TranslatableModelInterface
 {
 
     protected $table = 'tax';
@@ -32,7 +32,7 @@ class Tax extends Model
 
     public function translation()
     {
-        return $this->hasMany('WellCommerce\Core\Model\TaxTranslation');
+        return $this->hasMany('WellCommerce\Plugin\Tax\\Model\TaxTranslation');
     }
 
     /**

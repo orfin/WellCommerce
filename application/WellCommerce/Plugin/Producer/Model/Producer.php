@@ -9,7 +9,7 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Core\Model;
+namespace WellCommerce\Plugin\Producer\Model;
 
 use WellCommerce\Core\Model;
 
@@ -19,7 +19,7 @@ use WellCommerce\Core\Model;
  * @package WellCommerce\Core\Model
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Producer extends Model implements TranslatableModelInterface
+class Producer extends Model implements Model\TranslatableModelInterface
 {
     /**
      * @var string
@@ -46,7 +46,7 @@ class Producer extends Model implements TranslatableModelInterface
      */
     public function translation()
     {
-        return $this->hasMany('WellCommerce\Core\Model\ProducerTranslation');
+        return $this->hasMany('WellCommerce\Plugin\Producer\Model\ProducerTranslation');
     }
 
     /**
@@ -56,7 +56,7 @@ class Producer extends Model implements TranslatableModelInterface
      */
     public function shop()
     {
-        return $this->belongsToMany('WellCommerce\Core\Model\Shop', 'producer_shop', 'producer_id', 'shop_id');
+        return $this->belongsToMany('WellCommerce\Plugin\Shop\Model\Shop', 'producer_shop', 'producer_id', 'shop_id');
     }
 
     /**
@@ -66,7 +66,7 @@ class Producer extends Model implements TranslatableModelInterface
      */
     public function deliverer()
     {
-        return $this->belongsToMany('WellCommerce\Core\Model\Deliverer', 'producer_deliverer', 'producer_id', 'deliverer_id');
+        return $this->belongsToMany('WellCommerce\Plugin\Deliverer\Model\Deliverer', 'producer_deliverer', 'producer_id', 'deliverer_id');
     }
 
     /**

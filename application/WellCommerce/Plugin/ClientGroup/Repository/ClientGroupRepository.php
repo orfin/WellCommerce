@@ -12,8 +12,8 @@
 namespace WellCommerce\Plugin\ClientGroup\Repository;
 
 use WellCommerce\Core\Repository;
-use WellCommerce\Core\Model\ClientGroup;
-use WellCommerce\Core\Model\ClientGroupTranslation;
+use WellCommerce\Plugin\ClientGroup\Model\ClientGroup;
+use WellCommerce\Plugin\ClientGroup\Model\ClientGroupTranslation;
 
 /**
  * Class ClientGroupRepository

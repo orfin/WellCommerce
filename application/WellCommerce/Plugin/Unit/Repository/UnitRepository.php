@@ -11,9 +11,9 @@
  */
 namespace WellCommerce\Plugin\Unit\Repository;
 
-use WellCommerce\Core\Repository,
-    WellCommerce\Core\Model\Unit,
-    WellCommerce\Core\Model\UnitTranslation;
+use WellCommerce\Core\Repository;
+use WellCommerce\Plugin\Unit\Model\Unit;
+use WellCommerce\Plugin\Unit\Model\UnitTranslation;
 
 /**
  * Class UnitRepository

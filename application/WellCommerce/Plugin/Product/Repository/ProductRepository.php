@@ -12,8 +12,8 @@
 namespace WellCommerce\Plugin\Product\Repository;
 
 use WellCommerce\Core\Repository;
-use WellCommerce\Core\Model\Product;
-use WellCommerce\Core\Model\ProductTranslation;
+use WellCommerce\Plugin\Product\Model\Product;
+use WellCommerce\Plugin\Product\Model\ProductTranslation;
 
 /**
  * Class ProductRepository

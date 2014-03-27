@@ -9,17 +9,17 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Core\Model;
+namespace WellCommerce\Plugin\Contact\Model;
 
 use WellCommerce\Core\Model;
 
 /**
  * Class Contact
  *
- * @package WellCommerce\Core\Model
+ * @package WellCommerce\Plugin\Contact\Model
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Contact extends Model implements TranslatableModelInterface
+class Contact extends Model implements Model\TranslatableModelInterface
 {
 
     protected $table = 'contact';
@@ -37,7 +37,7 @@ class Contact extends Model implements TranslatableModelInterface
      */
     public function translation()
     {
-        return $this->hasMany('WellCommerce\Core\Model\ContactTranslation');
+        return $this->hasMany('WellCommerce\Plugin\Contact\Model\ContactTranslation');
     }
 
     /**

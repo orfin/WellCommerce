@@ -11,8 +11,8 @@
  */
 namespace WellCommerce\Plugin\Currency\Repository;
 
-use WellCommerce\Core\Model\Currency;
 use WellCommerce\Core\Repository;
+use WellCommerce\Plugin\Currency\Model\Currency;
 use Symfony\Component\Intl\Intl;
 
 /**

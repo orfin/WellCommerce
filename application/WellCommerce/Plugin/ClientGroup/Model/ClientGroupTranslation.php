@@ -9,14 +9,14 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Core\Model;
+namespace WellCommerce\Plugin\ClientGroup\Model;
 
 use WellCommerce\Core\Model;
 
 /**
  * Class ClientGroupTranslation
  *
- * @package WellCommerce\Core\Model
+ * @package WellCommerce\Plugin\ClientGroup\Model
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class ClientGroupTranslation extends Model
@@ -54,6 +54,6 @@ class ClientGroupTranslation extends Model
      */
     public function language()
     {
-        return $this->belongsTo('WellCommerce\Core\Model\Language');
+        return $this->belongsTo('WellCommerce\Plugin\Language\Model\Language');
     }
 }

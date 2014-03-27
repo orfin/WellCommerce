@@ -17,7 +17,7 @@ use WellCommerce\Core\Model;
  * Class Language
  *
  * @package WellCommerce\Plugin\Language\Model
- * @author  Adam Piotrowski <adam@gekosale.com>
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class Language extends Model
 {
@@ -29,6 +29,6 @@ class Language extends Model
 
     public function currency()
     {
-        return $this->belongsTo('WellCommerce\Core\Model\Currency');
+        return $this->belongsTo('WellCommerce\Plugin\Currency\Model\Currency');
     }
 }

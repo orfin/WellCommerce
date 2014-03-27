@@ -12,8 +12,8 @@
 namespace WellCommerce\Plugin\Availability\Repository;
 
 use WellCommerce\Core\Repository;
-use WellCommerce\Core\Model\Availability;
-use WellCommerce\Core\Model\AvailabilityTranslation;
+use WellCommerce\Plugin\Availability\Model\Availability;
+use WellCommerce\Plugin\Availability\Model\AvailabilityTranslation;
 
 /**
  * Class AvailabilityRepository

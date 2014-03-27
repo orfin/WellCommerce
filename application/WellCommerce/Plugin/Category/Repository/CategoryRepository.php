@@ -12,9 +12,9 @@
 namespace WellCommerce\Plugin\Category\Repository;
 
 use WellCommerce\Core\Helper;
-use WellCommerce\Core\Model\Category;
-use WellCommerce\Core\Model\CategoryTranslation;
 use WellCommerce\Core\Repository;
+use WellCommerce\Plugin\Category\Model\Category;
+use WellCommerce\Plugin\Category\Model\CategoryTranslation;
 
 /**
  * Class CategoryRepository

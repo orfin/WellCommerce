@@ -9,20 +9,20 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Core\Model;
+namespace WellCommerce\Plugin\File\Model;
 
 use WellCommerce\Core\Model;
 
 /**
  * Class File
  *
- * @package WellCommerce\Core\Model
+ * @package WellCommerce\Plugin\File\Model
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class File extends Model
 {
-    protected $table = 'file';
     public $timestamps = true;
+    protected $table = 'file';
     protected $softDelete = false;
     protected $fillable = ['id'];
 

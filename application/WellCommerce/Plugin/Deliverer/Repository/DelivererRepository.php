@@ -11,9 +11,9 @@
  */
 namespace WellCommerce\Plugin\Deliverer\Repository;
 
-use WellCommerce\Core\Repository;
-use WellCommerce\Core\Model\Deliverer;
 use WellCommerce\Core\Model\DelivererTranslation;
+use WellCommerce\Core\Repository;
+use WellCommerce\Plugin\Deliverer\Model\Deliverer;
 
 /**
  * Class DelivererRepository

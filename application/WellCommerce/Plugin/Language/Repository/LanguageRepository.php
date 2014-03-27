@@ -11,10 +11,9 @@
  */
 namespace WellCommerce\Plugin\Language\Repository;
 
-use WellCommerce\Core\Model\Language,
-    WellCommerce\Core\Repository;
-
 use Symfony\Component\Intl\Intl;
+use WellCommerce\Core\Repository;
+use WellCommerce\Plugin\Language\Model\Language;
 
 /**
  * Class LanguageRepository

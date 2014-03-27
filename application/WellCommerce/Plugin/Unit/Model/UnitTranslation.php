@@ -9,19 +9,18 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Core\Model;
+namespace WellCommerce\Plugin\Unit\Model;
 
 use WellCommerce\Core\Model;
 
 /**
  * Class UnitTranslation
  *
- * @package WellCommerce\Core\Model
+ * @package WellCommerce\Plugin\Unit\Model
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class UnitTranslation extends Model
 {
-
     protected $table = 'unit_translation';
 
     public $timestamps = true;
@@ -30,18 +29,5 @@ class UnitTranslation extends Model
 
     protected $fillable = ['unit_id', 'language_id'];
 
-    protected $translatable
-        = [
-            'name',
-        ];
-
-    public function unit()
-    {
-        return $this->belongsTo('WellCommerce\Core\Model\Unit');
-    }
-
-    public function language()
-    {
-        return $this->belongsTo('WellCommerce\Core\Model\Language');
-    }
+    protected $translatable = ['name'];
 }

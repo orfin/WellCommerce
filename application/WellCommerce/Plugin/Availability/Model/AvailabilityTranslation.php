@@ -9,14 +9,14 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Core\Model;
+namespace WellCommerce\Plugin\Availability\Model;
 
 use WellCommerce\Core\Model;
 
 /**
  * Class AvailabilityTranslation
  *
- * @package WellCommerce\Core\Model
+ * @package WellCommerce\Plugin\Availability\Model
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class AvailabilityTranslation extends Model
@@ -45,29 +45,5 @@ class AvailabilityTranslation extends Model
     /**
      * @var array
      */
-    protected $translatable
-        = [
-            'name',
-            'description'
-        ];
-
-    /**
-     * Relation with availability table
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function availability()
-    {
-        return $this->belongsTo('WellCommerce\Core\Model\Availability');
-    }
-
-    /**
-     * Relation with language table
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function language()
-    {
-        return $this->belongsTo('WellCommerce\Core\Model\Language');
-    }
+    protected $translatable = ['name', 'description'];
 }

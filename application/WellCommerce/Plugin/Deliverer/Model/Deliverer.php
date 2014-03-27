@@ -9,17 +9,17 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Core\Model;
+namespace WellCommerce\Plugin\Deliverer\Model;
 
 use WellCommerce\Core\Model;
 
 /**
  * Class Deliverer
  *
- * @package WellCommerce\Core\Model
+ * @package WellCommerce\Plugin\Deliverer\Model
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Deliverer extends Model
+class Deliverer extends Model implements Model\TranslatableModelInterface
 {
 
     /**
@@ -40,7 +40,7 @@ class Deliverer extends Model
      */
     public function translation()
     {
-        return $this->hasMany('WellCommerce\Core\Model\DelivererTranslation');
+        return $this->hasMany('WellCommerce\Plugin\Deliverer\Model\DelivererTranslation');
     }
 
     /**

@@ -11,10 +11,9 @@
  */
 namespace WellCommerce\Plugin\File\Repository;
 
-use WellCommerce\Core\Image;
 use WellCommerce\Core\Repository;
-use WellCommerce\Core\Model\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use WellCommerce\Plugin\File\Model\File;
 
 /**
  * Class FileRepository

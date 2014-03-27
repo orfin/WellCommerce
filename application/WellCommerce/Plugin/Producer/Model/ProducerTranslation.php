@@ -9,14 +9,14 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Core\Model;
+namespace WellCommerce\Plugin\Producer\Model;
 
 use WellCommerce\Core\Model;
 
 /**
  * Class ProducerTranslation
  *
- * @package WellCommerce\Core\Model
+ * @package WellCommerce\Plugin\Producer\Model
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class ProducerTranslation extends Model
@@ -67,7 +67,7 @@ class ProducerTranslation extends Model
      */
     public function producer()
     {
-        return $this->belongsTo('WellCommerce\Core\Model\Producer');
+        return $this->belongsTo('WellCommerce\Plugin\Producer\Model\Producer');
     }
 
     /**
@@ -77,6 +77,6 @@ class ProducerTranslation extends Model
      */
     public function language()
     {
-        return $this->belongsTo('WellCommerce\Core\Model\Language');
+        return $this->belongsTo('WellCommerce\Plugin\Language\Model\Language');
     }
 }

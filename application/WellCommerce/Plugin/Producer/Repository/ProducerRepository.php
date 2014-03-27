@@ -12,8 +12,8 @@
 namespace WellCommerce\Plugin\Producer\Repository;
 
 use WellCommerce\Core\Repository;
-use WellCommerce\Core\Model\Producer;
-use WellCommerce\Core\Model\ProducerTranslation;
+use WellCommerce\Plugin\Producer\Model\Producer;
+use WellCommerce\Plugin\Producer\Model\ProducerTranslation;
 
 /**
  * Class ProducerRepository

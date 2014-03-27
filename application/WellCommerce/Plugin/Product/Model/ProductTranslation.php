@@ -9,7 +9,7 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Core\Model;
+namespace WellCommerce\Plugin\Product\Model;
 
 use WellCommerce\Core\Model;
 
@@ -60,24 +60,4 @@ class ProductTranslation extends Model
             'meta_keywords',
             'meta_description'
         ];
-
-    /**
-     * Relation with product table
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function product()
-    {
-        return $this->belongsTo('WellCommerce\Core\Model\Product');
-    }
-
-    /**
-     * Relation with language table
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function language()
-    {
-        return $this->belongsTo('WellCommerce\Core\Model\Language');
-    }
 }

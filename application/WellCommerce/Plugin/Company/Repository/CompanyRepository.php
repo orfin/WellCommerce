@@ -12,7 +12,7 @@
 namespace WellCommerce\Plugin\Company\Repository;
 
 use WellCommerce\Core\Repository;
-use WellCommerce\Core\Model\Company;
+use WellCommerce\Plugin\Company\Model\Company;
 
 /**
  * Class CompanyRepository
