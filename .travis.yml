@@ -18,4 +18,4 @@ before_script:
     - COMPOSER_ROOT_VERSION=dev-master composer --prefer-source --dev install
 
 notifications:
-  email: "notifications@wellcommerce.org"
+    email: "notifications@wellcommerce.org"
