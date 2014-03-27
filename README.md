@@ -1,4 +1,4 @@
-Gekosale 3
+WellCommerce
 ============
 Open-source e-commerce platform
 
