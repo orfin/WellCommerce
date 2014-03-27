@@ -19,7 +19,7 @@ use WellCommerce\Core\Migration;
  * This class has been auto-generated
  * by the WellCommerce Console migrate:add command
  */
-class Migration1393512866 extends Migration
+class Migration1393512866 extends Migration implements MigrationInterface
 {
 
     public function up()

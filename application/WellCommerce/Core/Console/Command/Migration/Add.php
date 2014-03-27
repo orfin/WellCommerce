@@ -80,7 +80,7 @@ use WellCommerce\Core\Migration;
  * This class has been auto-generated
  * by the WellCommerce Console migrate:add command
  */
-class $class extends $baseClass
+class $class extends $baseClass implements MigrationInterface
 {
 EOF;
     }

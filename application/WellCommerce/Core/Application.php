@@ -100,8 +100,7 @@ class Application
     public function stop()
     {
         $this->container->get('kernel')->terminate($this->request, $this->response);
-        $event = $this->stopwatch->stop('application');
-//        echo $event->getDuration();
+        $this->stopwatch->stop('application');
     }
 
     /**
@@ -112,6 +111,7 @@ class Application
     protected function getKernelParameters()
     {
         return [
+            'application.root_path'  => ROOTPATH,
             'application.root_path'  => ROOTPATH,
             'application.debug_mode' => $this->isDebug
         ];

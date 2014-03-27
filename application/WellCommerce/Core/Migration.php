@@ -1,15 +1,13 @@
 <?php
-
-/**
- * WellCommerce, Open Source E-Commerce Solution
+/*
+ * WellCommerce Open-Source E-Commerce Platform
+ *
+ * This file is part of the WellCommerce package.
+ *
+ * (c) Adam Piotrowski <adam@wellcommerce.org>
  *
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
- *
- * @category    WellCommerce
- * @package     WellCommerce\Core
- * @author      Adam Piotrowski <adam@wellcommerce.org>
- * @copyright   Copyright (c) 2008-2014 WellCommerce sp. z o.o. (http://www.gekosale.com)
  */
 namespace WellCommerce\Core;
 
@@ -71,39 +69,4 @@ abstract class Migration
     {
         return $this->container->get('finder');
     }
-
-    public function check()
-    {
-        $this->migrationClass = get_class($this);
-
-        $sql  = 'SELECT COUNT(idmigration) AS total FROM migration WHERE migrationclass = :migrationclass';
-        $stmt = $this->getDb()->getConnection()->prepare($sql);
-        $stmt->bindValue('migrationclass', $this->migrationClass);
-        $stmt->execute();
-        $rs = $stmt->fetch();
-
-        return $rs['total'];
-    }
-
-    public function save()
-    {
-        $sql  = 'INSERT INTO migration SET migrationclass = :migrationclass';
-        $stmt = $this->getDb()->getConnection()->prepare($sql);
-        $stmt->bindValue('migrationclass', $this->migrationClass);
-        $stmt->execute();
-    }
-
-    /**
-     * Action needed to update application
-     *
-     * @return mixed
-     */
-    abstract function up();
-
-    /**
-     * Action needed to downgrade application
-     *
-     * @return mixed
-     */
-    abstract function down();
 }

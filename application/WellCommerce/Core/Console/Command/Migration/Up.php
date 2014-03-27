@@ -11,10 +11,13 @@
  */
 namespace WellCommerce\Core\Console\Command\Migration;
 
+use Symfony\Component\Finder\Finder;
 use WellCommerce\Core\Console\Command\AbstractCommand;
 use Symfony\Component\Console;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use WellCommerce\Core\Migration\MigrationInterface;
+use WellCommerce\Core\Model\Migration;
 
 /**
  * Class Up
@@ -34,6 +37,26 @@ class Up extends AbstractCommand
         $this->setHelp(sprintf('%Executes "up" command in migration classes.%s', PHP_EOL, PHP_EOL));
     }
 
+    private function getMigrations()
+    {
+        $migrations = Migration::all();
+        $classes    = [];
+
+        foreach ($migrations as $migration) {
+            $classes[] = $migration->name;
+        }
+
+        return $classes;
+    }
+
+    private function saveInfo($class)
+    {
+        $migration             = new Migration();
+        $migration->name       = $class;
+        $migration->created_at = date('Y-m-d H:i:s');
+        $migration->save();
+    }
+
     /**
      * Executes migration:up command
      *
@@ -44,14 +67,39 @@ class Up extends AbstractCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $files = $this->getFinder()->files()->in($this->getMigrationClassesPath());
-
-        foreach ($files as $file) {
-            $migrationClass = '\\WellCommerce\\Core\\Migration\\' . $file->getBasename('.php');
-            $migrationObj   = new $migrationClass();
-            $migrationObj->up();
+        if (!$this->getDatabaseManager()->schema()->hasTable('migration')) {
+            throw new \RuntimeException(sprintf('Table %s does not exists', 'migration'));
         }
 
+        $migrations = $this->getMigrations();
+        $finder     = new Finder();
+        $files      = $finder->files()->in(ROOTPATH . 'application')->name('Migration*.php')->notName('*Interface.php')->sortByName();
 
+        foreach ($files as $file) {
+            $namespace = str_replace(DS, '\\', $file->getRelativePath());
+            $className = str_replace(DS, '\\', $file->getBasename('.php'));
+            $class     = sprintf('%s\%s', $namespace, $className);
+
+            if (!in_array($class, $migrations)) {
+
+                $refClass  = new \ReflectionClass($class);
+                $interface = 'WellCommerce\\Core\\Migration\\MigrationInterface';
+                if ($refClass->implementsInterface($interface)) {
+
+                    // instantiate migration class
+                    $migrationObj = new $class();
+                    $migrationObj->up();
+
+                    // save info about migration
+                    $this->saveInfo($class);
+
+                    $out = sprintf('Migration %s executed.%s', $class, PHP_EOL);
+                    $output->write($out);
+                }
+            }
+        }
+
+        $out = sprintf('All migrations executed.%s', PHP_EOL);
+        $output->write($out);
     }
 }
