@@ -9,38 +9,64 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Core\Model;
+namespace WellCommerce\Plugin\Category\Model;
 
 use WellCommerce\Core\Model;
+use WellCommerce\Core\Model\TranslatableModelInterface;
 
 /**
  * Class Category
  *
- * @package WellCommerce\Core\Model
- * @author  Adam Piotrowski <adam@wellcommerce.org>
+ * @package WellCommerce\Plugin\Category\Model
+ * @author  Adam Piotrowski <adam@gekosale.com>
  */
 class Category extends Model implements TranslatableModelInterface
 {
     protected $table = 'category';
     public $timestamps = true;
     protected $softDelete = false;
-    protected $fillable = array('id');
+    protected $fillable = ['id'];
 
+    /**
+     * Relation with CategoryTranslation model
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
     public function translation()
     {
-        return $this->hasMany('WellCommerce\Core\Model\CategoryTranslation');
+        return $this->hasMany('WellCommerce\Plugin\Category\Model\CategoryTranslation');
     }
 
+    /**
+     * Relation with File model
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function photo()
     {
-        return $this->belongsToOne('WellCommerce\Core\Model\File');
+        return $this->belongsTo('WellCommerce\Core\Model\File');
     }
 
+    /**
+     * Scope for getting all parent categories
+     *
+     * @param $query
+     *
+     * @return mixed
+     */
     public function scopeParents($query)
     {
         return $query->whereNull('parent_id');
     }
 
+    /**
+     * Scope for getting all child categories for given parent category
+     *
+     * @param $query
+     * @param $parent
+     *
+     * @return mixed
+     */
     public function scopeChildren($query, $parent)
     {
         return $query->where('parent_id', '=', $parent);

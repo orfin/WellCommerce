@@ -12,7 +12,7 @@
 namespace WellCommerce\Plugin\AdminMenu\Repository;
 
 use WellCommerce\Core\Repository;
-use WellCommerce\Core\Model\AdminMenu;
+use WellCommerce\Plugin\AdminMenu\Model\AdminMenu;
 
 /**
  * Class AdminMenuRepository
@@ -54,7 +54,7 @@ class AdminMenuRepository extends Repository
     }
 
     /**
-     * Returns menu
+     * Returns admin menu sorted by sort_order value
      *
      * @return array
      */
@@ -79,7 +79,7 @@ class AdminMenuRepository extends Repository
      */
     protected function parseMenuTree($parent = null)
     {
-        $menuItems = Array();
+        $menuItems = [];
         foreach ($this->menuData as $menu) {
             if ($parent == null) {
                 if ($menu['parent_id'] != '') {

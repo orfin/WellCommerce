@@ -9,30 +9,36 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Core\Model;
+namespace WellCommerce\Plugin\Category\Model;
 
 use WellCommerce\Core\Model;
 
 /**
  * Class CategoryTranslation
  *
- * @package WellCommerce\Core\Model
- * @author  Adam Piotrowski <adam@wellcommerce.org>
+ * @package WellCommerce\Plugin\Category\Model
+ * @author  Adam Piotrowski <adam@gekosale.com>
  */
 class CategoryTranslation extends Model
 {
 
     /**
+     * Table name
+     *
      * @var string
      */
     protected $table = 'category_translation';
 
     /**
+     * Use timestamp columns
+     *
      * @var bool
      */
     public $timestamps = true;
 
     /**
+     * Use soft deletes
+     *
      * @var bool
      */
     protected $softDelete = false;
@@ -43,6 +49,8 @@ class CategoryTranslation extends Model
     protected $fillable = ['category_id', 'language_id'];
 
     /**
+     * All translatable columns in category_translation table
+     *
      * @var array
      */
     protected $translatable
@@ -56,13 +64,18 @@ class CategoryTranslation extends Model
             'meta_description'
         ];
 
+    /**
+     * Relation with Category model
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function category()
     {
-        return $this->belongsTo('WellCommerce\Core\Model\Category');
+        return $this->belongsTo('WellCommerce\Plugin\Category\Model\Category');
     }
 
     /**
-     * Relation with language table
+     * Relation with Language model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

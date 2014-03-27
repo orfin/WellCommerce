@@ -9,15 +9,15 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Core\Model;
+namespace WellCommerce\Plugin\AdminMenu\Model;
 
 use WellCommerce\Core\Model;
 
 /**
  * Class AdminMenu
  *
- * @package WellCommerce\Core\Model
- * @author  Adam Piotrowski <adam@wellcommerce.org>
+ * @package WellCommerce\Plugin\AdminMenu\Model
+ * @author  Adam Piotrowski <adam@gekosale.com>
  */
 class AdminMenu extends Model
 {
