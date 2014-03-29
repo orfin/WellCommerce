@@ -25,10 +25,11 @@
             </call>
         </service>
 
-        <service id="product.layout.configurator" class="WellCommerce\Plugin\Product\Layout\ProductBoxConfigurator">
+        <service id="product_box.layout.configurator" class="WellCommerce\Plugin\Product\Layout\ProductBoxConfigurator">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
+            <tag name="layout_box.configurator" />
         </service>
 
         <service id="product.subscriber" class="WellCommerce\Plugin\Product\Event\ProductEventSubscriber">

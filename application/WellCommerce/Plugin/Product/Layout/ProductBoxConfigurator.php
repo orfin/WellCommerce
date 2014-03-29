@@ -14,6 +14,7 @@ namespace WellCommerce\Plugin\Product\Layout;
 
 use WellCommerce\Core\Form;
 use WellCommerce\Core\Layout\Box\LayoutBoxConfigurator;
+use WellCommerce\Core\Layout\LayoutBoxConfiguratorInterface;
 
 /**
  * Class ProductBoxConfigurator
@@ -21,7 +22,7 @@ use WellCommerce\Core\Layout\Box\LayoutBoxConfigurator;
  * @package WellCommerce\Plugin\Product\Configurator\Box
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductBoxConfigurator extends LayoutBoxConfigurator
+class ProductBoxConfigurator extends LayoutBoxConfigurator implements LayoutBoxConfiguratorInterface
 {
     /**
      * {@inheritdoc}
@@ -50,8 +51,10 @@ class ProductBoxConfigurator extends LayoutBoxConfigurator
     /**
      * {@inheritdoc}
      */
-    public function getConfigurationFields(Form\Elements\Form $form)
+    public function addConfigurationFields(Form\Elements\Fieldset $fieldset)
     {
-        return false;
+        $fieldset->addChild($this->addTip([
+            'tip' => '<p>' . $this->trans('This layout box does not need to be configured. All done :).') . '</p>'
+        ]));
     }
 } 

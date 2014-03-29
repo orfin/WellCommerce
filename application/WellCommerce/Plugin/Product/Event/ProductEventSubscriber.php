@@ -11,7 +11,6 @@
  */
 namespace WellCommerce\Plugin\Product\Event;
 
-use WellCommerce\Plugin\Layout\Event\LayoutBoxFormEvent;
 use WellCommerce\Plugin\Layout\Event\LayoutPageFormEvent;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\EventDispatcher\Event;
@@ -31,8 +30,6 @@ class ProductEventSubscriber implements EventSubscriberInterface
         return [
             ProductDataGridEvent::DATAGRID_INIT_EVENT => 'onProductDataGridInitAction',
             LayoutPageFormEvent::TREE_INIT_EVENT      => 'onLayoutPageTreeInitAction',
-            LayoutBoxFormEvent::FORM_GET_BOX_TYPES    => 'onLayoutBoxGetTypesAction',
-            LayoutBoxFormEvent::FORM_INIT_EVENT       => 'onLayoutBoxFormInitAction'
         ];
     }
 
@@ -43,17 +40,5 @@ class ProductEventSubscriber implements EventSubscriberInterface
 
     public function onProductDataGridInitAction(Event $event)
     {
-    }
-
-    public function onLayoutBoxGetTypesAction(Event $event)
-    {
-        $configurator = $event->getDispatcher()->getContainer()->get('product.layout.configurator');
-        $event->setArgument($configurator->getAlias(), $configurator->getName());
-    }
-
-    public function onLayoutBoxFormInitAction(Event $event)
-    {
-        $configurator = $event->getDispatcher()->getContainer()->get('product.layout.configurator');
-        $configurator->getConfigurationFields($event->getForm());
     }
 }
