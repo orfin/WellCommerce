@@ -24,7 +24,19 @@
                 <argument type="service" id="service_container" />
             </call>
         </service>
-        
+
+        <service id="producer_box.layout.configurator" class="WellCommerce\Plugin\Producer\Layout\ProducerBoxConfigurator">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="producer_list_box.layout.configurator" class="WellCommerce\Plugin\Producer\Layout\ProducerListBoxConfigurator">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
         <service id="producer.subscriber" class="WellCommerce\Plugin\Producer\Event\ProducerEventSubscriber">
         	<tag name="kernel.event_subscriber" />
         </service>

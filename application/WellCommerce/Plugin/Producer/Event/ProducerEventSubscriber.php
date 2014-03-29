@@ -11,10 +11,7 @@
  */
 namespace WellCommerce\Plugin\Producer\Event;
 
-use Symfony\Component\EventDispatcher\Event,
-    Symfony\Component\EventDispatcher\EventSubscriberInterface;
-
-use WellCommerce\Plugin\AdminMenu\Event\AdminMenuInitEvent;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Class ProducerEventSubscriber
@@ -24,15 +21,8 @@ use WellCommerce\Plugin\AdminMenu\Event\AdminMenuInitEvent;
  */
 class ProducerEventSubscriber implements EventSubscriberInterface
 {
-
-    public function onAdminMenuInitAction(Event $event)
-    {
-    }
-
     public static function getSubscribedEvents()
     {
-        return array(
-            AdminMenuInitEvent::ADMIN_MENU_INIT_EVENT => 'onAdminMenuInitAction'
-        );
+        return [];
     }
 }

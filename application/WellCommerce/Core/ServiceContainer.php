@@ -51,6 +51,7 @@ class ServiceContainer extends Container
             'category.repository' => 'getCategory_RepositoryService',
             'category.subscriber' => 'getCategory_SubscriberService',
             'category.tree' => 'getCategory_TreeService',
+            'category_box.layout.configurator' => 'getCategoryBox_Layout_ConfiguratorService',
             'client_group.datagrid' => 'getClientGroup_DatagridService',
             'client_group.form' => 'getClientGroup_FormService',
             'client_group.repository' => 'getClientGroup_RepositoryService',
@@ -64,6 +65,7 @@ class ServiceContainer extends Container
             'contact.form' => 'getContact_FormService',
             'contact.repository' => 'getContact_RepositoryService',
             'contact.subscriber' => 'getContact_SubscriberService',
+            'contact_box.layout.configurator' => 'getContactBox_Layout_ConfiguratorService',
             'controller_resolver' => 'getControllerResolverService',
             'country.repository' => 'getCountry_RepositoryService',
             'currency.datagrid' => 'getCurrency_DatagridService',
@@ -93,6 +95,10 @@ class ServiceContainer extends Container
             'language.form' => 'getLanguage_FormService',
             'language.repository' => 'getLanguage_RepositoryService',
             'language.subscriber' => 'getLanguage_SubscriberService',
+            'layout_box.datagrid' => 'getLayoutBox_DatagridService',
+            'layout_box.form' => 'getLayoutBox_FormService',
+            'layout_box.repository' => 'getLayoutBox_RepositoryService',
+            'layout_box.subscriber' => 'getLayoutBox_SubscriberService',
             'layout_manager' => 'getLayoutManagerService',
             'layout_page.form' => 'getLayoutPage_FormService',
             'layout_page.repository' => 'getLayoutPage_RepositoryService',
@@ -120,8 +126,11 @@ class ServiceContainer extends Container
             'producer.form' => 'getProducer_FormService',
             'producer.repository' => 'getProducer_RepositoryService',
             'producer.subscriber' => 'getProducer_SubscriberService',
+            'producer_box.layout.configurator' => 'getProducerBox_Layout_ConfiguratorService',
+            'producer_list_box.layout.configurator' => 'getProducerListBox_Layout_ConfiguratorService',
             'product.datagrid' => 'getProduct_DatagridService',
             'product.form' => 'getProduct_FormService',
+            'product.layout.configurator' => 'getProduct_Layout_ConfiguratorService',
             'product.repository' => 'getProduct_RepositoryService',
             'product.subscriber' => 'getProduct_SubscriberService',
             'request' => 'getRequestService',
@@ -453,6 +462,23 @@ class ServiceContainer extends Container
     }
 
     /**
+     * Gets the 'category_box.layout.configurator' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Plugin\Category\Layout\CategoryBoxConfigurator A WellCommerce\Plugin\Category\Layout\CategoryBoxConfigurator instance.
+     */
+    protected function getCategoryBox_Layout_ConfiguratorService()
+    {
+        $this->services['category_box.layout.configurator'] = $instance = new \WellCommerce\Plugin\Category\Layout\CategoryBoxConfigurator();
+
+        $instance->setContainer($this);
+
+        return $instance;
+    }
+
+    /**
      * Gets the 'client_group.datagrid' service.
      *
      * This service is shared.
@@ -658,6 +684,23 @@ class ServiceContainer extends Container
     protected function getContact_SubscriberService()
     {
         return $this->services['contact.subscriber'] = new \WellCommerce\Plugin\Contact\Event\ContactEventSubscriber();
+    }
+
+    /**
+     * Gets the 'contact_box.layout.configurator' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Plugin\Contact\Layout\ContactBoxConfigurator A WellCommerce\Plugin\Contact\Layout\ContactBoxConfigurator instance.
+     */
+    protected function getContactBox_Layout_ConfiguratorService()
+    {
+        $this->services['contact_box.layout.configurator'] = $instance = new \WellCommerce\Plugin\Contact\Layout\ContactBoxConfigurator();
+
+        $instance->setContainer($this);
+
+        return $instance;
     }
 
     /**
@@ -931,6 +974,7 @@ class ServiceContainer extends Container
         $instance->addSubscriberService('language.subscriber', 'WellCommerce\\Plugin\\Language\\Event\\LanguageEventSubscriber');
         $instance->addSubscriberService('layout_theme.subscriber', 'WellCommerce\\Plugin\\Layout\\Event\\LayoutPageEventSubscriber');
         $instance->addSubscriberService('layout_page.subscriber', 'WellCommerce\\Plugin\\Layout\\Event\\LayoutPageEventSubscriber');
+        $instance->addSubscriberService('layout_box.subscriber', 'WellCommerce\\Plugin\\Layout\\Event\\LayoutBoxEventSubscriber');
         $instance->addSubscriberService('payment_method.subscriber', 'WellCommerce\\Plugin\\PaymentMethod\\Event\\PaymentMethodEventSubscriber');
         $instance->addSubscriberService('paypal.subscriber', 'WellCommerce\\Plugin\\PayPal\\Event\\PayPalEventSubscriber');
         $instance->addSubscriberService('plugin_manager.subscriber', 'WellCommerce\\Plugin\\PluginManager\\Event\\PluginManagerEventSubscriber');
@@ -1150,6 +1194,71 @@ class ServiceContainer extends Container
     }
 
     /**
+     * Gets the 'layout_box.datagrid' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Plugin\Layout\DataGrid\LayoutBoxDataGrid A WellCommerce\Plugin\Layout\DataGrid\LayoutBoxDataGrid instance.
+     */
+    protected function getLayoutBox_DatagridService()
+    {
+        $this->services['layout_box.datagrid'] = $instance = new \WellCommerce\Plugin\Layout\DataGrid\LayoutBoxDataGrid();
+
+        $instance->setRepository($this->get('layout_box.repository'));
+        $instance->setContainer($this);
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'layout_box.form' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Plugin\Layout\Form\LayoutBoxForm A WellCommerce\Plugin\Layout\Form\LayoutBoxForm instance.
+     */
+    protected function getLayoutBox_FormService()
+    {
+        $this->services['layout_box.form'] = $instance = new \WellCommerce\Plugin\Layout\Form\LayoutBoxForm();
+
+        $instance->setContainer($this);
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'layout_box.repository' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Plugin\Layout\Repository\LayoutBoxRepository A WellCommerce\Plugin\Layout\Repository\LayoutBoxRepository instance.
+     */
+    protected function getLayoutBox_RepositoryService()
+    {
+        $this->services['layout_box.repository'] = $instance = new \WellCommerce\Plugin\Layout\Repository\LayoutBoxRepository();
+
+        $instance->setContainer($this);
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'layout_box.subscriber' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Plugin\Layout\Event\LayoutBoxEventSubscriber A WellCommerce\Plugin\Layout\Event\LayoutBoxEventSubscriber instance.
+     */
+    protected function getLayoutBox_SubscriberService()
+    {
+        return $this->services['layout_box.subscriber'] = new \WellCommerce\Plugin\Layout\Event\LayoutBoxEventSubscriber();
+    }
+
+    /**
      * Gets the 'layout_manager' service.
      *
      * This service is shared.
@@ -1162,6 +1271,7 @@ class ServiceContainer extends Container
         $this->services['layout_manager'] = $instance = new \WellCommerce\Core\LayoutManager();
 
         $instance->setContainer($this);
+        $instance->addLayoutBoxConfigurator($this->get('contact_box.layout.configurator'));
 
         return $instance;
     }
@@ -1582,6 +1692,40 @@ class ServiceContainer extends Container
     }
 
     /**
+     * Gets the 'producer_box.layout.configurator' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Plugin\Producer\Layout\ProducerBoxConfigurator A WellCommerce\Plugin\Producer\Layout\ProducerBoxConfigurator instance.
+     */
+    protected function getProducerBox_Layout_ConfiguratorService()
+    {
+        $this->services['producer_box.layout.configurator'] = $instance = new \WellCommerce\Plugin\Producer\Layout\ProducerBoxConfigurator();
+
+        $instance->setContainer($this);
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'producer_list_box.layout.configurator' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Plugin\Producer\Layout\ProducerListBoxConfigurator A WellCommerce\Plugin\Producer\Layout\ProducerListBoxConfigurator instance.
+     */
+    protected function getProducerListBox_Layout_ConfiguratorService()
+    {
+        $this->services['producer_list_box.layout.configurator'] = $instance = new \WellCommerce\Plugin\Producer\Layout\ProducerListBoxConfigurator();
+
+        $instance->setContainer($this);
+
+        return $instance;
+    }
+
+    /**
      * Gets the 'product.datagrid' service.
      *
      * This service is shared.
@@ -1610,6 +1754,23 @@ class ServiceContainer extends Container
     protected function getProduct_FormService()
     {
         $this->services['product.form'] = $instance = new \WellCommerce\Plugin\Product\Form\ProductForm();
+
+        $instance->setContainer($this);
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'product.layout.configurator' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Plugin\Product\Layout\ProductBoxConfigurator A WellCommerce\Plugin\Product\Layout\ProductBoxConfigurator instance.
+     */
+    protected function getProduct_Layout_ConfiguratorService()
+    {
+        $this->services['product.layout.configurator'] = $instance = new \WellCommerce\Plugin\Product\Layout\ProductBoxConfigurator();
 
         $instance->setContainer($this);
 

@@ -12,10 +12,10 @@
 
 namespace WellCommerce\Plugin\ClientGroup\Extension;
 
-use Symfony\Component\HttpKernel\DependencyInjection\Extension,
-    Symfony\Component\DependencyInjection\Loader\XmlFileLoader,
-    Symfony\Component\Config\FileLocator,
-    Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * Class ClientGroupExtension
@@ -39,6 +39,6 @@ class ClientGroupExtension extends Extension
 
     public function getAlias()
     {
-        return 'gekosale.plugin.client_group';
+        return 'wellcommerce.plugin.client_group';
     }
 }

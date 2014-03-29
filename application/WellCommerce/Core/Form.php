@@ -363,6 +363,11 @@ class Form extends Component
         return new Form\Elements\Tree($options, $this->container);
     }
 
+    public function addSortableList(array $options)
+    {
+        return new Form\Elements\SortableList($options, $this->container);
+    }
+
     /**
      * Shortcut for adding RangeEditor element
      *

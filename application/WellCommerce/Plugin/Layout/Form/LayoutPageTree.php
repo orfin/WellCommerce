@@ -72,7 +72,7 @@ class LayoutPageTree extends Form
         $page   = $this->getParam('page');
         $active = ($page == null) ? $id : sprintf('%s,%s', $id, $page);
 
-        $form->addChild($this->addTree([
+        $form->addChild($this->addSortableList([
             'name'               => 'layout_page',
             'label'              => $this->trans('Pages'),
             'addLabel'           => $this->trans('Add layout_page'),
@@ -84,7 +84,8 @@ class LayoutPageTree extends Form
             'prevent_duplicates' => false,
             'items'              => $this->getTreeItems(),
             'onClick'            => 'openLayoutPageEditor',
-            'active'             => $active
+            'active'             => $active,
+            'clickable_root'     => false
         ]));
 
         $form->AddFilter($this->addFilterNoCode());

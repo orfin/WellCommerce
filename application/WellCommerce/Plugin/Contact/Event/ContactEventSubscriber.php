@@ -13,7 +13,9 @@ namespace WellCommerce\Plugin\Contact\Event;
 
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
 use WellCommerce\Plugin\AdminMenu\Event\AdminMenuInitEvent;
+use WellCommerce\Plugin\Layout\Event\LayoutBoxFormEvent;
 
 /**
  * Class ContactEventSubscriber
@@ -28,10 +30,17 @@ class ContactEventSubscriber implements EventSubscriberInterface
 
     }
 
+    public function onLayoutBoxGetTypesAction(GenericEvent $event)
+    {
+        $configurator = $event->getDispatcher()->getContainer()->get('contact_box.layout.configurator');
+        $event->setArgument($configurator->getAlias(), $configurator->getName());
+    }
+
     public static function getSubscribedEvents()
     {
         return array(
-            AdminMenuInitEvent::ADMIN_MENU_INIT_EVENT => 'onAdminMenuInitAction'
+            AdminMenuInitEvent::ADMIN_MENU_INIT_EVENT => 'onAdminMenuInitAction',
+            LayoutBoxFormEvent::FORM_GET_BOX_TYPES    => 'onLayoutBoxGetTypesAction'
         );
     }
 }

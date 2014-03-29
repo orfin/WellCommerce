@@ -38,6 +38,6 @@ class TaxExtension extends Extension
 
     public function getAlias()
     {
-        return 'gekosale.plugin.tax';
+        return 'wellcommerce.plugin.tax';
     }
 }

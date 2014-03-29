@@ -135,6 +135,25 @@ abstract class Container extends Node
         }
     }
 
+    public function getChildren()
+    {
+        return $this->_children;
+    }
+
+    public function getChild($name)
+    {
+        foreach ($this->form->fields as $child) {
+            if ($name === $child->getName()) {
+                return $child;
+            }
+        }
+    }
+
+    public function getFields()
+    {
+        return $this->form->fields;
+    }
+
     protected function renderChildren()
     {
         $render = Array();

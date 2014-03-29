@@ -38,6 +38,6 @@ class CategoryExtension extends Extension
 
     public function getAlias()
     {
-        return 'gekosale.plugin.category';
+        return 'wellcommerce.plugin.category';
     }
 }

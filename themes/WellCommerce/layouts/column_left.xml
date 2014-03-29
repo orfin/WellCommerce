@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<layout>
+    <column width="180">
+        <box id="%box.category%"/>
+    </column>
+</layout>

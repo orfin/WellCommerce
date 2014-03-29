@@ -11,12 +11,10 @@
  */
 namespace WellCommerce\Plugin\ShippingMethod\Extension;
 
-use WellCommerce\Plugin\ShippingMethod\Extension\Compiler\RegisterShippingCalculatorsPass;
-use Symfony\Component\DependencyInjection\Compiler\PassConfig;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension,
-    Symfony\Component\DependencyInjection\Loader\XmlFileLoader,
-    Symfony\Component\Config\FileLocator,
-    Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * Class ShippingMethodExtension
@@ -40,6 +38,6 @@ class ShippingMethodExtension extends Extension
 
     public function getAlias()
     {
-        return 'gekosale.plugin.shipping_method';
+        return 'wellcommerce.plugin.shipping_method';
     }
 }

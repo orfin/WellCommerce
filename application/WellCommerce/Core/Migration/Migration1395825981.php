@@ -31,6 +31,14 @@ class Migration1395825981 extends Migration implements MigrationInterface
             });
         }
 
+        if (!$this->getDb()->schema()->hasTable('layout_page')) {
+            $this->getDb()->schema()->create('layout_page', function ($table) {
+                $table->increments('id');
+                $table->string('name', 255);
+                $table->string('folder', 255);
+                $table->timestamps();
+            });
+        }
     }
 
     public function down()

@@ -11,10 +11,10 @@
  */
 namespace WellCommerce\Plugin\AdminMenu\Extension;
 
-use Symfony\Component\HttpKernel\DependencyInjection\Extension,
-    Symfony\Component\DependencyInjection\Loader\XmlFileLoader,
-    Symfony\Component\Config\FileLocator,
-    Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * Class AdminMenuExtension
@@ -25,19 +25,19 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension,
 class AdminMenuExtension extends Extension
 {
 
-    public function load (array $config, ContainerBuilder $container)
+    public function load(array $config, ContainerBuilder $container)
     {
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../config'));
         $loader->load('services.xml');
     }
 
-    public function getNamespace ()
+    public function getNamespace()
     {
         return 'http://symfony.com/schema/dic/services';
     }
 
-    public function getAlias ()
+    public function getAlias()
     {
-        return 'gekosale.plugin.admin_menu';
+        return 'wellcommerce.plugin.admin_menu';
     }
 }

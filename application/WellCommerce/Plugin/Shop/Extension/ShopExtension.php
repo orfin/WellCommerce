@@ -39,6 +39,6 @@ class ShopExtension extends Extension
 
     public function getAlias()
     {
-        return 'gekosale.plugin.shop';
+        return 'wellcommerce.plugin.shop';
     }
 }

@@ -1,0 +1,6 @@
+boxes:
+    category:
+        class:  CategoryBox
+        width:  100
+        span:   0
+

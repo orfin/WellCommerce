@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<columns>
+    <column width="180">
+        <box id="cart">
+            <default key="name">Cart</default>
+            <default key="controller">%box.cart%</default>
+        </box>
+    </column>
+</columns>

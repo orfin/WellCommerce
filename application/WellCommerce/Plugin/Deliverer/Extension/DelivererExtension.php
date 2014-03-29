@@ -11,10 +11,10 @@
  */
 namespace WellCommerce\Plugin\Deliverer\Extension;
 
-use Symfony\Component\HttpKernel\DependencyInjection\Extension,
-    Symfony\Component\DependencyInjection\Loader\XmlFileLoader,
-    Symfony\Component\Config\FileLocator,
-    Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * Class DelivererExtension
@@ -38,6 +38,6 @@ class DelivererExtension extends Extension
 
     public function getAlias()
     {
-        return 'gekosale.plugin.deliverer';
+        return 'wellcommerce.plugin.deliverer';
     }
 }

@@ -11,12 +11,11 @@
  */
 namespace WellCommerce\Plugin\Product\Event;
 
+use WellCommerce\Plugin\Layout\Event\LayoutBoxFormEvent;
 use WellCommerce\Plugin\Layout\Event\LayoutPageFormEvent;
-use Symfony\Component\EventDispatcher\Event,
-    Symfony\Component\EventDispatcher\EventSubscriberInterface;
-
-use WellCommerce\Plugin\AdminMenu\Event\AdminMenuInitEvent;
 use Symfony\Component\EventDispatcher\GenericEvent;
+use Symfony\Component\EventDispatcher\Event;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Class ProductEventSubscriber
@@ -27,25 +26,34 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 class ProductEventSubscriber implements EventSubscriberInterface
 {
 
+    public static function getSubscribedEvents()
+    {
+        return [
+            ProductDataGridEvent::DATAGRID_INIT_EVENT => 'onProductDataGridInitAction',
+            LayoutPageFormEvent::TREE_INIT_EVENT      => 'onLayoutPageTreeInitAction',
+            LayoutBoxFormEvent::FORM_GET_BOX_TYPES    => 'onLayoutBoxGetTypesAction',
+            LayoutBoxFormEvent::FORM_INIT_EVENT       => 'onLayoutBoxFormInitAction'
+        ];
+    }
+
     public function onLayoutPageTreeInitAction(GenericEvent $event)
     {
         $event->setArgument('product', 'Product');
-    }
-
-    public function onAdminMenuInitAction(Event $event)
-    {
     }
 
     public function onProductDataGridInitAction(Event $event)
     {
     }
 
-    public static function getSubscribedEvents()
+    public function onLayoutBoxGetTypesAction(Event $event)
     {
-        return array(
-            AdminMenuInitEvent::ADMIN_MENU_INIT_EVENT => 'onAdminMenuInitAction',
-            ProductDataGridEvent::DATAGRID_INIT_EVENT => 'onProductDataGridInitAction',
-            LayoutPageFormEvent::TREE_INIT_EVENT      => 'onLayoutPageTreeInitAction'
-        );
+        $configurator = $event->getDispatcher()->getContainer()->get('product.layout.configurator');
+        $event->setArgument($configurator->getAlias(), $configurator->getName());
+    }
+
+    public function onLayoutBoxFormInitAction(Event $event)
+    {
+        $configurator = $event->getDispatcher()->getContainer()->get('product.layout.configurator');
+        $configurator->getConfigurationFields($event->getForm());
     }
 }

@@ -12,6 +12,10 @@
 namespace WellCommerce\Plugin\Product\Controller\Frontend;
 
 use WellCommerce\Core\Controller\FrontendController;
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\Config\Loader\LoaderResolver;
+use Symfony\Component\Config\Loader\DelegatingLoader;
+use WellCommerce\Core\Layout\XmlFileLoader;
 
 /**
  * Class ProductController
@@ -24,8 +28,20 @@ class ProductController extends FrontendController
 
     public function indexAction()
     {
+
+        $configDirectories = [ROOTPATH . 'themes/WellCommerce/layout'];
+
+        $locator          = new FileLocator($configDirectories);
+        $loaderResolver   = new LoaderResolver(array(new XmlFileLoader($locator)));
+        $delegatingLoader = new DelegatingLoader($loaderResolver);
+
+        $collection = $delegatingLoader->load(ROOTPATH . 'themes/WellCommerce/layout/product.xml');
+
+        print_r($collection);
+
         $content = $this->forward('WellCommerce\Plugin\Product\Controller\Frontend\ProductBoxController');
 
-        print_r($content->getContent());die();
+        print_r($content->getContent());
+        die();
     }
 }

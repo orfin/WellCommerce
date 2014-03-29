@@ -12,10 +12,10 @@
 
 namespace WellCommerce\Plugin\PluginManager\Extension;
 
-use Symfony\Component\HttpKernel\DependencyInjection\Extension,
-    Symfony\Component\DependencyInjection\Loader\XmlFileLoader,
-    Symfony\Component\Config\FileLocator,
-    Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * Class PluginManagerExtension
@@ -39,6 +39,6 @@ class PluginManagerExtension extends Extension
 
     public function getAlias()
     {
-        return 'gekosale.plugin.plugin_manager';
+        return 'wellcommerce.plugin.plugin_manager';
     }
 }

@@ -11,7 +11,6 @@
  */
 namespace WellCommerce\Core\Form;
 
-use WellCommerce\Core\Form\Conditions\ConditionInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use xajaxResponse;
 
