@@ -39,6 +39,13 @@
             <tag name="layout_box.configurator" />
         </service>
 
+        <service id="producer_page.layout.configurator" class="WellCommerce\Plugin\Producer\Layout\ProducerPageLayoutConfigurator">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="layout_page.configurator" />
+        </service>
+
         <service id="producer.subscriber" class="WellCommerce\Plugin\Producer\Event\ProducerEventSubscriber">
         	<tag name="kernel.event_subscriber" />
         </service>

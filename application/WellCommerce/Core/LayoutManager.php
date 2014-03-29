@@ -12,6 +12,7 @@
 namespace WellCommerce\Core;
 
 use WellCommerce\Core\Layout\LayoutBoxConfiguratorInterface;
+use WellCommerce\Core\Layout\LayoutPageConfiguratorInterface;
 
 /**
  * Class LayoutManager
@@ -27,13 +28,28 @@ class LayoutManager extends Component
     private $layoutBoxConfigurators = [];
 
     /**
-     * Adds new configurator to stack
+     * @var array
+     */
+    private $layoutPageConfigurators = [];
+
+    /**
+     * Adds new layout box configurator to stack
      *
      * @param LayoutBoxConfiguratorInterface $configurator
      */
     public function addLayoutBoxConfigurator(LayoutBoxConfiguratorInterface $configurator)
     {
         $this->layoutBoxConfigurators[$configurator->getAlias()] = $configurator;
+    }
+
+    /**
+     * Adds new layout page configurator to stack
+     *
+     * @param LayoutPageConfiguratorInterface $configurator
+     */
+    public function addLayoutPageConfigurator(LayoutPageConfiguratorInterface $configurator)
+    {
+        $this->layoutPageConfigurators[$configurator->getAlias()] = $configurator;
     }
 
     /**
@@ -44,6 +60,16 @@ class LayoutManager extends Component
     public function getLayoutBoxConfigurators()
     {
         return $this->layoutBoxConfigurators;
+    }
+
+    /**
+     * Returns all layout page configurators
+     *
+     * @return array
+     */
+    public function getLayoutPageConfigurators()
+    {
+        return $this->layoutPageConfigurators;
     }
 
     public function renderLayout($layout)

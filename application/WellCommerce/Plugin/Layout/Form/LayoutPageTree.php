@@ -25,17 +25,14 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 class LayoutPageTree extends Form
 {
-
     /**
-     * Fetches all registered subpages system-wide using GenericEvent
+     * Fetches all registered layout pages
      *
      * @return array
      */
     private function getTreeItems()
     {
-        $event = new GenericEvent();
-
-        $this->getDispatcher()->dispatch(LayoutPageFormEvent::TREE_INIT_EVENT, $event);
+        $pages = $this->getLayoutManager()->getLayoutPageConfigurators();
 
         $items  = [];
         $themes = $this->get('layout_theme.repository')->getAllLayoutThemeToSelect();
@@ -48,10 +45,10 @@ class LayoutPageTree extends Form
                 'weight' => 0
             ];
 
-            foreach ($event->getArguments() as $id => $name) {
+            foreach ($pages as $id => $configurator) {
                 $treeId         = sprintf('%s,%s', $themeId, $id);
                 $items[$treeId] = [
-                    'name'   => $this->trans($name),
+                    'name'   => $this->trans($configurator->getName()).' <small>('.$id.')</small>',
                     'parent' => $themeId,
                     'weight' => 0
                 ];
@@ -72,7 +69,7 @@ class LayoutPageTree extends Form
         $page   = $this->getParam('page');
         $active = ($page == null) ? $id : sprintf('%s,%s', $id, $page);
 
-        $form->addChild($this->addSortableList([
+        $form->addChild($this->addTree([
             'name'               => 'layout_page',
             'label'              => $this->trans('Pages'),
             'addLabel'           => $this->trans('Add layout_page'),

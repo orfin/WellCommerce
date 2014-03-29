@@ -36,6 +36,13 @@
             <tag name="kernel.event_subscriber"/>
         </service>
 
+        <service id="contact_page.layout.configurator" class="WellCommerce\Plugin\Contact\Layout\ContactPageLayoutConfigurator">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="layout_page.configurator" />
+        </service>
+
         <service id="twig.extension.contact" class="WellCommerce\Plugin\Contact\Twig\Contact">
             <argument type="service" id="service_container" />
             <tag name="twig.extension" />
