@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Core\Layout;
 
+use WellCommerce\Core\Form\Elements\Fieldset;
 use WellCommerce\Core\Form\Elements\Form;
 
 /**
@@ -49,10 +50,10 @@ interface LayoutBoxConfiguratorInterface
     /**
      * Prepares layout box configuration fields
      *
-     * @param Form\Elements\Form $form
+     * @param Fieldset $fieldset
      *
      * @return mixed
      */
-    public function getConfigurationFields(Form $form);
+    public function addConfigurationFields(Fieldset $fieldset);
 
 } 

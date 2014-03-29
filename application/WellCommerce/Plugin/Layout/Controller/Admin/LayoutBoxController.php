@@ -23,8 +23,6 @@ class LayoutBoxController extends AdminController
 {
     public function addAction()
     {
-        $this->getLayoutManager()->getConfigurators();
-
         $form = $this->getForm()->init();
 
         if ($this->getRequest()->isMethod('POST') && $form->isValid()) {

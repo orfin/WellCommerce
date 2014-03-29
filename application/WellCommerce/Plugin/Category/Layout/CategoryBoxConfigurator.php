@@ -14,6 +14,7 @@ namespace WellCommerce\Plugin\Category\Layout;
 
 use WellCommerce\Core\Form;
 use WellCommerce\Core\Layout\Box\LayoutBoxConfigurator;
+use WellCommerce\Core\Layout\LayoutBoxConfiguratorInterface;
 
 /**
  * Class CategoryBoxConfigurator
@@ -21,7 +22,7 @@ use WellCommerce\Core\Layout\Box\LayoutBoxConfigurator;
  * @package WellCommerce\Plugin\Category\Configurator\Box
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CategoryBoxConfigurator extends LayoutBoxConfigurator
+class CategoryBoxConfigurator extends LayoutBoxConfigurator implements LayoutBoxConfiguratorInterface
 {
     /**
      * {@inheritdoc}
@@ -51,15 +52,13 @@ class CategoryBoxConfigurator extends LayoutBoxConfigurator
     /**
      * {@inheritdoc}
      */
-    public function getConfigurationFields(Form\Elements\Form $form)
+    public function addConfigurationFields(Form\Elements\Fieldset $fieldset)
     {
-        $settings = $this->addSettingsFieldSet($form);
-
-        $settings->addChild($this->addTip([
+        $fieldset->addChild($this->addTip([
             'tip' => '<p>' . $this->trans('Choose categories that should be visible in category box or leave empty.') . '</p>'
         ]));
 
-        $settings->addChild($this->addTree([
+        $fieldset->addChild($this->addTree([
             'name'       => 'category',
             'label'      => $this->trans('Categories'),
             'choosable'  => false,

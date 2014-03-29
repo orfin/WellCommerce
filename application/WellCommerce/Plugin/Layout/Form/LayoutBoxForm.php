@@ -24,6 +24,7 @@ use WellCommerce\Plugin\Layout\Event\LayoutBoxFormEvent;
 class LayoutBoxForm extends Form
 {
     private $types = [];
+    private $configurators = [];
 
     /**
      * Initializes layout_box Form
@@ -34,7 +35,8 @@ class LayoutBoxForm extends Form
      */
     public function init($layoutBoxData = [])
     {
-        $this->getLayoutBoxTypes();
+        $this->configurators = $this->getLayoutManager()->getLayoutBoxConfigurators();
+        $this->types         = $this->getLayoutBoxTypes();
 
         $form = $this->addForm([
             'name' => 'layout_box',
@@ -63,11 +65,24 @@ class LayoutBoxForm extends Form
             ]
         ]));
 
-        $requiredData->addChild($this->addSelect([
+        $alias = $requiredData->addChild($this->addSelect([
             'name'    => 'alias',
             'label'   => $this->trans('Box type'),
             'options' => $this->makeOptions($this->types, true)
         ]));
+
+        foreach ($this->configurators as $id => $configurator) {
+            $settings = $form->addChild($this->addFieldset([
+                'name'         => $configurator->getFieldSetName(),
+                'label'        => $this->trans('Settings'),
+                'dependencies' => [
+                    $this->addDependency(Form\Dependency::SHOW, $alias, new Form\Conditions\Equals($configurator->getAlias()), null)
+                ]
+            ]));
+
+            $configurator->addConfigurationFields($settings);
+
+        }
 
         $event = new LayoutBoxFormEvent($form, $layoutBoxData);
 
@@ -84,15 +99,19 @@ class LayoutBoxForm extends Form
         return $form;
     }
 
+    /**
+     * Prepares select containing all layout box types
+     *
+     * @return array
+     */
     private function getLayoutBoxTypes()
     {
-        $event = new GenericEvent();
-
-        $this->getDispatcher()->dispatch(LayoutBoxFormEvent::FORM_GET_BOX_TYPES, $event);
-
-        foreach ($event->getArguments() as $id => $name) {
-            $this->types[$id] = sprintf('%s - %s', $id, $this->trans($name));
+        $types = [];
+        foreach ($this->configurators as $id => $configurator) {
+            $types[$id] = sprintf('%s - %s', $id, $this->trans($configurator->getName()));
         }
+
+        return $types;
     }
 
 }

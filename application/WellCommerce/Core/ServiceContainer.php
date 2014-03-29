@@ -1271,6 +1271,7 @@ class ServiceContainer extends Container
         $this->services['layout_manager'] = $instance = new \WellCommerce\Core\LayoutManager();
 
         $instance->setContainer($this);
+        $instance->addLayoutBoxConfigurator($this->get('category_box.layout.configurator'));
         $instance->addLayoutBoxConfigurator($this->get('contact_box.layout.configurator'));
 
         return $instance;

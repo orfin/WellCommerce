@@ -51,8 +51,10 @@ class ContactBoxConfigurator extends LayoutBoxConfigurator implements LayoutBoxC
     /**
      * {@inheritdoc}
      */
-    public function getConfigurationFields(Form\Elements\Form $form)
+    public function addConfigurationFields(Form\Elements\Fieldset $fieldset)
     {
-
+        $fieldset->addChild($this->addTip([
+            'tip' => '<p>' . $this->trans('This layout box does not need to be configured. All done :).') . '</p>'
+        ]));
     }
 } 
