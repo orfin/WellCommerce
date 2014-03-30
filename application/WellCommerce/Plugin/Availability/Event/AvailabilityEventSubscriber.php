@@ -30,8 +30,8 @@ class AvailabilityEventSubscriber implements EventSubscriberInterface
 
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             AdminMenuInitEvent::ADMIN_MENU_INIT_EVENT => 'onAdminMenuInitAction'
-        );
+        ];
     }
 }
