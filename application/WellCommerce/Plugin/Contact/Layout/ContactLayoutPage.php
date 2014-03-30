@@ -10,26 +10,33 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Plugin\Producer\Layout;
+namespace WellCommerce\Plugin\Contact\Layout;
 
 use WellCommerce\Core\Form;
-use WellCommerce\Core\Layout\LayoutPageConfiguratorInterface;
-use WellCommerce\Core\Layout\Page\LayoutPageConfigurator;
+use WellCommerce\Core\Layout\Page\LayoutPage;
+use WellCommerce\Core\Layout\Page\LayoutPageInterface;
 
 /**
- * Class ProducerPageLayoutConfigurator
+ * Class ContactPageLayoutConfigurator
  *
- * @package WellCommerce\Plugin\Producer\Configurator\Box
+ * @package WellCommerce\Plugin\Contact\Configurator\Box
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProducerPageLayoutConfigurator extends LayoutPageConfigurator implements LayoutPageConfiguratorInterface
+class ContactLayoutPage extends LayoutPage implements LayoutPageInterface
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function getLayoutXml()
+    {
+        return 'contact.xml';
+    }
     /**
      * {@inheritdoc}
      */
     public function getName()
     {
-        return 'Producer';
+        return 'Contact';
     }
 
     /**
@@ -37,6 +44,6 @@ class ProducerPageLayoutConfigurator extends LayoutPageConfigurator implements L
      */
     public function getAlias()
     {
-        return 'Producer';
+        return 'Contact';
     }
 }

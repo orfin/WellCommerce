@@ -14,7 +14,7 @@ namespace WellCommerce\Plugin\Category\Layout;
 
 use WellCommerce\Core\Form;
 use WellCommerce\Core\Layout\Box\LayoutBoxConfigurator;
-use WellCommerce\Core\Layout\LayoutBoxConfiguratorInterface;
+use WellCommerce\Core\Layout\Box\LayoutBoxConfiguratorInterface;
 
 /**
  * Class CategoryBoxConfigurator
@@ -24,6 +24,14 @@ use WellCommerce\Core\Layout\LayoutBoxConfiguratorInterface;
  */
 class CategoryBoxConfigurator extends LayoutBoxConfigurator implements LayoutBoxConfiguratorInterface
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function getController()
+    {
+        return 'WellCommerce\\Plugin\\Category\\Controller\\Frontend\\CategoryBoxController';
+    }
+
     /**
      * {@inheritdoc}
      */

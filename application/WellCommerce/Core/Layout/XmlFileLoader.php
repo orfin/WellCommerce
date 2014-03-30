@@ -33,56 +33,40 @@ class XmlFileLoader extends FileLoader
         $xml  = $this->loadFile($path);
 
         $layoutColumnCollection = new LayoutColumnCollection();
-        $layoutBoxCollection    = new LayoutBoxCollection();
 
         foreach ($xml->documentElement->childNodes as $node) {
             if (!$node instanceof \DOMElement) {
                 continue;
             }
             switch ($node->localName) {
-                case 'boxes':
-                    if ('' !== $resource = $node->getAttribute('resource')) {
-                        $this->importBoxes($layoutBoxCollection, $node, $path, $file, $resource);
-                    } else {
-                        $this->parseBoxes($layoutBoxCollection, $node, $path, $file);
-                    }
-                    break;
                 case 'column':
                     if ('' !== $resource = $node->getAttribute('resource')) {
                         $this->importColumn($layoutColumnCollection, $node, $path, $file, $resource);
                     } else {
-                        echo $file.':'.$node->localName.PHP_EOL;
                         $this->parseColumn($layoutColumnCollection, $node, $path);
                     }
                     break;
             }
         }
 
-        return $layoutBoxCollection;
+        return $layoutColumnCollection;
     }
 
-    private function parseBoxes(LayoutBoxCollection $collection, \DOMElement $node, $path, $file)
+    private function parseBoxes(LayoutBoxCollection $collection, \DOMElement $node, $path)
     {
         foreach ($node->getElementsByTagName('box') as $n) {
             $layoutBox = new LayoutBox($n->getAttribute('id'), $n->getAttribute('class'));
             $collection->add($layoutBox);
         }
-    }
 
-    private function parseImport(\DOMElement $node, $path, $file)
-    {
-        if ('' === $resource = $node->getAttribute('resource')) {
-            throw new \InvalidArgumentException(sprintf('The "import" element in file "%s" must have a "resource" attribute.', $path));
-        }
-
-        $this->setCurrentDir(dirname($path));
-        $subCollection = $this->import($resource, null, false, $file);
+        return $collection;
     }
 
     protected function parseColumn(LayoutColumnCollection $collection, \DOMElement $node, $path)
     {
-        echo $node->getAttribute('width');
-        $column = new LayoutColumn($node->getAttribute('width'));
+        $boxCollection = new LayoutBoxCollection();
+        $boxes         = $this->parseBoxes($boxCollection, $node, $path);
+        $column        = new LayoutColumn($node->getAttribute('width'), $node->getAttribute('use'), $boxes->all());
         $collection->add($column);
     }
 
@@ -92,16 +76,6 @@ class XmlFileLoader extends FileLoader
         $subCollection = $this->import($resource);
         foreach ($subCollection->columns as $column) {
             $collection->add($column);
-        }
-    }
-
-    private function importBoxes(LayoutBoxCollection $collection, \DOMElement $node, $path, $file, $resource)
-    {
-        $this->setCurrentDir(dirname($path));
-
-        $subCollection = $this->import($resource);
-        foreach ($subCollection->boxes as $box) {
-            $collection->add($box);
         }
     }
 
@@ -117,10 +91,5 @@ class XmlFileLoader extends FileLoader
             $resource,
             PATHINFO_EXTENSION
         );
-    }
-
-    private static function convertDomElementToArray(\DomElement $element)
-    {
-        return XmlUtils::convertDomElementToArray($element);
     }
 }

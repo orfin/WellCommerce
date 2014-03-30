@@ -89,7 +89,7 @@ class LayoutBoxRepository extends Repository
                     ]);
 
                     $layoutBoxSettings->layout_box_id = $layoutBox->id;
-                    $layoutBoxSettings->value         = serialize($value);
+                    $layoutBoxSettings->value         = $value;
                     $layoutBoxSettings->save();
                 }
             }
@@ -128,7 +128,7 @@ class LayoutBoxRepository extends Repository
 
         foreach ($layoutBoxData->settings as $setting) {
             $accessor->setValue($populateData, $this->getFormNodeName($layoutBoxData->alias), [
-                $setting->param => unserialize($setting->value)
+                $setting->param => $setting->value
             ]);
         }
 

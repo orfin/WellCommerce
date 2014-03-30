@@ -16,16 +16,16 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * Class RegisterLayoutBoxConfiguratorPass
+ * Class RegisterLayoutPagesPass
  *
  * @package WellCommerce\Core\DependencyInjection\Compiler
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class RegisterLayoutPageConfiguratorPass implements CompilerPassInterface
+class RegisterLayoutPagesPass implements CompilerPassInterface
 {
 
     /**
-     * Registers all layout box configurators
+     * Registers all layout pages
      *
      * @param ContainerBuilder $container
      *
@@ -39,14 +39,15 @@ class RegisterLayoutPageConfiguratorPass implements CompilerPassInterface
 
         $definition = $container->getDefinition('layout_manager');
 
-        foreach ($container->findTaggedServiceIds('layout_page.configurator') as $id => $attributes) {
+        foreach ($container->findTaggedServiceIds('layout_page') as $id => $attributes) {
             $class     = $container->getDefinition($id)->getClass();
             $refClass  = new \ReflectionClass($class);
-            $interface = 'WellCommerce\\Core\\Layout\\LayoutPageConfiguratorInterface';
+            $interface = 'WellCommerce\\Core\\Layout\\Page\\LayoutPageInterface';
             if (!$refClass->implementsInterface($interface)) {
                 throw new \InvalidArgumentException(sprintf('Service "%s" must implement interface "%s".', $id, $interface));
             }
-            $definition->addMethodCall('addLayoutPageConfigurator', array(
+            $definition->addMethodCall('addLayoutPage', array(
+                $attributes[0]['alias'],
                 new Reference($id)
             ));
         }

@@ -36,11 +36,11 @@
             <tag name="kernel.event_subscriber"/>
         </service>
 
-        <service id="contact_page.layout.configurator" class="WellCommerce\Plugin\Contact\Layout\ContactPageLayoutConfigurator">
+        <service id="contact_page.layout" class="WellCommerce\Plugin\Contact\Layout\ContactLayoutPage">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
-            <tag name="layout_page.configurator" />
+            <tag name="layout_page" alias="Contact" columns="contact.xml" />
         </service>
 
         <service id="twig.extension.contact" class="WellCommerce\Plugin\Contact\Twig\Contact">

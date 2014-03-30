@@ -20,14 +20,24 @@ namespace WellCommerce\Core\Layout\Box;
  */
 class LayoutBox
 {
-    protected $id;
-    protected $class;
-    protected $defaults;
+    private $id;
+    private $class;
+    private $defaults;
 
     public function __construct($id, $class, $defaults = array())
     {
-        $this->id    = $id;
-        $this->class = $class;
+        $this->id       = $id;
+        $this->class    = $class;
         $this->defaults = $defaults;
+    }
+
+    /**
+     * Returns box identifier
+     *
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 } 

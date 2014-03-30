@@ -14,7 +14,7 @@ namespace WellCommerce\Plugin\Product\Layout;
 
 use WellCommerce\Core\Form;
 use WellCommerce\Core\Layout\Box\LayoutBoxConfigurator;
-use WellCommerce\Core\Layout\LayoutBoxConfiguratorInterface;
+use WellCommerce\Core\Layout\Box\LayoutBoxConfiguratorInterface;
 
 /**
  * Class ProductBoxConfigurator
@@ -24,6 +24,14 @@ use WellCommerce\Core\Layout\LayoutBoxConfiguratorInterface;
  */
 class ProductBoxConfigurator extends LayoutBoxConfigurator implements LayoutBoxConfiguratorInterface
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function getController()
+    {
+        return 'WellCommerce\\Plugin\\Product\\Controller\\Frontend\\ProductBoxController';
+    }
+
     /**
      * {@inheritdoc}
      */

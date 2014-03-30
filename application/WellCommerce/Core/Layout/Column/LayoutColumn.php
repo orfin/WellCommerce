@@ -21,12 +21,62 @@ namespace WellCommerce\Core\Layout\Column;
 class LayoutColumn
 {
 
-    protected $width;
-    protected $boxes;
+    /**
+     * @var
+     */
+    private $width;
 
-    public function __construct($width, $boxes = array())
+    /**
+     * @var
+     */
+    private $template;
+
+    /**
+     * @var array
+     */
+    private $boxes = [];
+
+    /**
+     * Constructor
+     *
+     * @param       $width
+     * @param       $template
+     * @param array $boxes
+     */
+    public function __construct($width, $template, $boxes = array())
     {
-        $this->width = $width;
-        $this->boxes = $boxes;
+        $this->width    = $width;
+        $this->template = $template;
+        $this->boxes    = $boxes;
+    }
+
+    /**
+     * Returns column width
+     *
+     * @return mixed
+     */
+    public function getWidth()
+    {
+        return $this->width;
+    }
+
+    /**
+     * Returns template which will be used as column placeholder
+     *
+     * @return mixed
+     */
+    public function getTemplate()
+    {
+        return $this->template;
+    }
+
+    /**
+     * Returns boxes added to column
+     *
+     * @return array
+     */
+    public function getBoxes()
+    {
+        return $this->boxes;
     }
 } 

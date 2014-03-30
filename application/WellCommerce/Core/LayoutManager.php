@@ -11,8 +11,9 @@
  */
 namespace WellCommerce\Core;
 
-use WellCommerce\Core\Layout\LayoutBoxConfiguratorInterface;
-use WellCommerce\Core\Layout\LayoutPageConfiguratorInterface;
+use WellCommerce\Core\Layout\Box\LayoutBoxConfiguratorInterface;
+use WellCommerce\Core\Layout\LayoutRenderer;
+use WellCommerce\Core\Layout\Page\LayoutPageInterface;
 
 /**
  * Class LayoutManager
@@ -30,7 +31,7 @@ class LayoutManager extends Component
     /**
      * @var array
      */
-    private $layoutPageConfigurators = [];
+    private $layoutPages = [];
 
     /**
      * Adds new layout box configurator to stack
@@ -42,14 +43,23 @@ class LayoutManager extends Component
         $this->layoutBoxConfigurators[$configurator->getAlias()] = $configurator;
     }
 
+    public function getLayoutBoxConfigurator($alias)
+    {
+        if (!isset($this->layoutBoxConfigurators[$alias])) {
+            throw new \RuntimeException(sprintf('LayoutBoxConfigurator "%s" is not registered', $alias));
+        }
+
+        return $this->layoutBoxConfigurators[$alias];
+    }
+
     /**
      * Adds new layout page configurator to stack
      *
-     * @param LayoutPageConfiguratorInterface $configurator
+     * @param LayoutPageInterface $configurator
      */
-    public function addLayoutPageConfigurator(LayoutPageConfiguratorInterface $configurator)
+    public function addLayoutPage($alias, LayoutPageInterface $layoutPage)
     {
-        $this->layoutPageConfigurators[$configurator->getAlias()] = $configurator;
+        $this->layoutPages[$alias] = $layoutPage;
     }
 
     /**
@@ -67,16 +77,26 @@ class LayoutManager extends Component
      *
      * @return array
      */
-    public function getLayoutPageConfigurators()
+    public function getLayoutPages()
     {
-        return $this->layoutPageConfigurators;
+        return $this->layoutPages;
     }
 
+    /**
+     * Renders layout from xml file using given renderer
+     *
+     * @param $layout Renderer alias
+     *
+     * @throws \RuntimeException
+     */
     public function renderLayout($layout)
     {
-        $content = $this->forward('WellCommerce\Plugin\HomePage\Controller\Frontend\FooterController')->getContent();
+        if (!isset($this->layoutPages[$layout])) {
+            throw new \RuntimeException(sprintf('Layout page "%s" is not registered', $layout));
+        }
 
-        return $content;
+        $layoutPage = $this->layoutPages[$layout];
+
+        return $layoutPage->render();
     }
-
 }

@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <layout>
     <column width="180" resource="column_left.xml"/>
-    <column width="680">
-        <box id="%box.category%"/>
-        <box id="%box.cart%"/>
-    </column>
-    <column width="180" resource="column_right.xml"/>
+
 </layout>

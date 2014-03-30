@@ -40,8 +40,6 @@ class LayoutPageForm extends Form
             'label' => $this->trans('Required data')
         ]));
 
-
-
         $form->addFilters([
             $this->addFilterNoCode(),
             $this->addFilterTrim(),

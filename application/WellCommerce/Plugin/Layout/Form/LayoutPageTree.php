@@ -34,25 +34,14 @@ class LayoutPageTree extends Form
     {
         $pages = $this->getLayoutManager()->getLayoutPageConfigurators();
 
-        $items  = [];
-        $themes = $this->get('layout_theme.repository')->getAllLayoutThemeToSelect();
+        $items = [];
 
-        foreach ($themes as $themeId => $themeName) {
-
-            $items[$themeId] = [
-                'name'   => $themeName,
+        foreach ($pages as $id => $configurator) {
+            $items[$id] = [
+                'name'   => $this->trans($configurator->getName()) . ' <small>(' . $id . ')</small>',
                 'parent' => null,
                 'weight' => 0
             ];
-
-            foreach ($pages as $id => $configurator) {
-                $treeId         = sprintf('%s,%s', $themeId, $id);
-                $items[$treeId] = [
-                    'name'   => $this->trans($configurator->getName()).' <small>('.$id.')</small>',
-                    'parent' => $themeId,
-                    'weight' => 0
-                ];
-            }
         }
 
         return $items;
@@ -71,8 +60,7 @@ class LayoutPageTree extends Form
 
         $form->addChild($this->addTree([
             'name'               => 'layout_page',
-            'label'              => $this->trans('Pages'),
-            'addLabel'           => $this->trans('Add layout_page'),
+            'label'              => $this->trans('Choose page to edit'),
             'sortable'           => false,
             'selectable'         => false,
             'clickable'          => true,

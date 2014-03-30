@@ -1292,20 +1292,16 @@ a.button-green span img,span.button-green span img {
     margin: 0 0 5px;
     float: none;
     text-align: left;
-}
-
-.GForm .field-tree>label {
-    position: absolute !important;
-    left: -2500px !important;
-    width: 20px !important;
-    height: 0 !important;
-    overflow: hidden !important;
+    font-weight: 700;
+    height: 0px;
 }
 
 .GForm .field-tree .tree-wrapper {
     padding: 0 5px;
     clear: both;
     overflow: auto;
+    top: -10px;
+    position: relative;
 }
 
 .GForm .field-tree .tree-wrapper ul {

@@ -20,7 +20,7 @@ namespace WellCommerce\Core\Layout\Column;
  */
 class LayoutColumnCollection implements \IteratorAggregate, \Countable
 {
-    private $columns = [];
+    public $columns = [];
 
     public function getIterator()
     {

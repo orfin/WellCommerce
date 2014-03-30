@@ -10,30 +10,34 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Core\Layout;
-
-use WellCommerce\Core\Form\Elements\Fieldset;
+namespace WellCommerce\Core\Layout\Page;
 
 /**
- * Interface LayoutPageConfiguratorInterface
+ * Interface LayoutPageInterface
  *
  * @package WellCommerce\Core\Layout
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface LayoutPageConfiguratorInterface
+interface LayoutPageInterface
 {
-
     /**
-     * Returns layout box human-friendly name
+     * Returns layout XML filename
      *
      * @return mixed
      */
-    public function getName();
+    public function getLayoutXml();
 
     /**
-     * Returns layout box alias
+     * Loads columns configuration for layout page
      *
      * @return mixed
      */
-    public function getAlias();
+    public function load();
+
+    /**
+     * Render layout page
+     *
+     * @return mixed
+     */
+    public function render();
 }

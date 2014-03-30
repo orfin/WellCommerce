@@ -66,7 +66,7 @@ class ServiceContainer extends Container
             'contact.repository' => 'getContact_RepositoryService',
             'contact.subscriber' => 'getContact_SubscriberService',
             'contact_box.layout.configurator' => 'getContactBox_Layout_ConfiguratorService',
-            'contact_page.layout.configurator' => 'getContactPage_Layout_ConfiguratorService',
+            'contact_page.layout' => 'getContactPage_LayoutService',
             'controller_resolver' => 'getControllerResolverService',
             'country.repository' => 'getCountry_RepositoryService',
             'currency.datagrid' => 'getCurrency_DatagridService',
@@ -105,6 +105,7 @@ class ServiceContainer extends Container
             'layout_page.repository' => 'getLayoutPage_RepositoryService',
             'layout_page.subscriber' => 'getLayoutPage_SubscriberService',
             'layout_page.tree' => 'getLayoutPage_TreeService',
+            'layout_renderer' => 'getLayoutRendererService',
             'layout_theme.datagrid' => 'getLayoutTheme_DatagridService',
             'layout_theme.form' => 'getLayoutTheme_FormService',
             'layout_theme.repository' => 'getLayoutTheme_RepositoryService',
@@ -129,13 +130,13 @@ class ServiceContainer extends Container
             'producer.subscriber' => 'getProducer_SubscriberService',
             'producer_box.layout.configurator' => 'getProducerBox_Layout_ConfiguratorService',
             'producer_list_box.layout.configurator' => 'getProducerListBox_Layout_ConfiguratorService',
-            'producer_page.layout.configurator' => 'getProducerPage_Layout_ConfiguratorService',
+            'producer_page.layout' => 'getProducerPage_LayoutService',
             'product.datagrid' => 'getProduct_DatagridService',
             'product.form' => 'getProduct_FormService',
             'product.repository' => 'getProduct_RepositoryService',
             'product.subscriber' => 'getProduct_SubscriberService',
             'product_box.layout.configurator' => 'getProductBox_Layout_ConfiguratorService',
-            'product_page.layout.configurator' => 'getProductPage_Layout_ConfiguratorService',
+            'product_page.layout' => 'getProductPage_LayoutService',
             'request' => 'getRequestService',
             'request_stack' => 'getRequestStackService',
             'router' => 'getRouterService',
@@ -707,16 +708,16 @@ class ServiceContainer extends Container
     }
 
     /**
-     * Gets the 'contact_page.layout.configurator' service.
+     * Gets the 'contact_page.layout' service.
      *
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return WellCommerce\Plugin\Contact\Layout\ContactPageLayoutConfigurator A WellCommerce\Plugin\Contact\Layout\ContactPageLayoutConfigurator instance.
+     * @return WellCommerce\Plugin\Contact\Layout\ContactLayoutPage A WellCommerce\Plugin\Contact\Layout\ContactLayoutPage instance.
      */
-    protected function getContactPage_Layout_ConfiguratorService()
+    protected function getContactPage_LayoutService()
     {
-        $this->services['contact_page.layout.configurator'] = $instance = new \WellCommerce\Plugin\Contact\Layout\ContactPageLayoutConfigurator();
+        $this->services['contact_page.layout'] = $instance = new \WellCommerce\Plugin\Contact\Layout\ContactLayoutPage();
 
         $instance->setContainer($this);
 
@@ -1296,9 +1297,9 @@ class ServiceContainer extends Container
         $instance->addLayoutBoxConfigurator($this->get('producer_box.layout.configurator'));
         $instance->addLayoutBoxConfigurator($this->get('producer_list_box.layout.configurator'));
         $instance->addLayoutBoxConfigurator($this->get('product_box.layout.configurator'));
-        $instance->addLayoutPageConfigurator($this->get('contact_page.layout.configurator'));
-        $instance->addLayoutPageConfigurator($this->get('producer_page.layout.configurator'));
-        $instance->addLayoutPageConfigurator($this->get('product_page.layout.configurator'));
+        $instance->addLayoutPage('Contact', $this->get('contact_page.layout'));
+        $instance->addLayoutPage('Producer', $this->get('producer_page.layout'));
+        $instance->addLayoutPage('Product', $this->get('product_page.layout'));
 
         return $instance;
     }
@@ -1363,6 +1364,24 @@ class ServiceContainer extends Container
         $this->services['layout_page.tree'] = $instance = new \WellCommerce\Plugin\Layout\Form\LayoutPageTree();
 
         $instance->setContainer($this);
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'layout_renderer' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Core\Layout\LayoutRenderer A WellCommerce\Core\Layout\LayoutRenderer instance.
+     */
+    protected function getLayoutRendererService()
+    {
+        $this->services['layout_renderer'] = $instance = new \WellCommerce\Core\Layout\LayoutRenderer();
+
+        $instance->setContainer($this);
+        $instance->setLayoutBoxRepository($this->get('layout_box.repository'));
 
         return $instance;
     }
@@ -1753,16 +1772,16 @@ class ServiceContainer extends Container
     }
 
     /**
-     * Gets the 'producer_page.layout.configurator' service.
+     * Gets the 'producer_page.layout' service.
      *
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return WellCommerce\Plugin\Producer\Layout\ProducerPageLayoutConfigurator A WellCommerce\Plugin\Producer\Layout\ProducerPageLayoutConfigurator instance.
+     * @return WellCommerce\Plugin\Producer\Layout\ProducerLayoutPage A WellCommerce\Plugin\Producer\Layout\ProducerLayoutPage instance.
      */
-    protected function getProducerPage_Layout_ConfiguratorService()
+    protected function getProducerPage_LayoutService()
     {
-        $this->services['producer_page.layout.configurator'] = $instance = new \WellCommerce\Plugin\Producer\Layout\ProducerPageLayoutConfigurator();
+        $this->services['producer_page.layout'] = $instance = new \WellCommerce\Plugin\Producer\Layout\ProducerLayoutPage();
 
         $instance->setContainer($this);
 
@@ -1852,16 +1871,16 @@ class ServiceContainer extends Container
     }
 
     /**
-     * Gets the 'product_page.layout.configurator' service.
+     * Gets the 'product_page.layout' service.
      *
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return WellCommerce\Plugin\Product\Layout\ProductPageLayoutConfigurator A WellCommerce\Plugin\Product\Layout\ProductPageLayoutConfigurator instance.
+     * @return WellCommerce\Plugin\Product\Layout\ProductLayoutPage A WellCommerce\Plugin\Product\Layout\ProductLayoutPage instance.
      */
-    protected function getProductPage_Layout_ConfiguratorService()
+    protected function getProductPage_LayoutService()
     {
-        $this->services['product_page.layout.configurator'] = $instance = new \WellCommerce\Plugin\Product\Layout\ProductPageLayoutConfigurator();
+        $this->services['product_page.layout'] = $instance = new \WellCommerce\Plugin\Product\Layout\ProductLayoutPage();
 
         $instance->setContainer($this);
 
@@ -2717,6 +2736,7 @@ class ServiceContainer extends Container
             'helper.class' => 'WellCommerce\\Core\\Helper',
             'kernel.class' => 'Symfony\\Component\\HttpKernel\\DependencyInjection\\ContainerAwareHttpKernel',
             'layout_manager.class' => 'WellCommerce\\Core\\LayoutManager',
+            'layout_renderer.class' => 'WellCommerce\\Core\\Layout\\LayoutRenderer',
             'image_gallery.class' => 'WellCommerce\\Core\\ImageGallery',
             'translation.class' => 'WellCommerce\\Core\\Translation',
             'xajax_manager.class' => 'WellCommerce\\Core\\XajaxManager',

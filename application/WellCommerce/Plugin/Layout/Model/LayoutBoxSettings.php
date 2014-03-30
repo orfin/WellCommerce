@@ -29,4 +29,26 @@ class LayoutBoxSettings extends Model
     protected $softDelete = false;
 
     protected $fillable = ['id', 'param'];
+
+    /**
+     * Mutator for value attribute
+     *
+     * @param $value
+     */
+    public function setValueAttribute($value)
+    {
+        $this->attributes['value'] = serialize($value);
+    }
+
+    /**
+     * Accessor for value attribute
+     *
+     * @param $value
+     *
+     * @return int
+     */
+    public function getValueAttribute($value)
+    {
+        return unserialize($value);
+    }
 }

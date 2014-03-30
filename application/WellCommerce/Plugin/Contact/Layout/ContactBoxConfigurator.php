@@ -14,7 +14,7 @@ namespace WellCommerce\Plugin\Contact\Layout;
 
 use WellCommerce\Core\Form;
 use WellCommerce\Core\Layout\Box\LayoutBoxConfigurator;
-use WellCommerce\Core\Layout\LayoutBoxConfiguratorInterface;
+use WellCommerce\Core\Layout\Box\LayoutBoxConfiguratorInterface;
 
 /**
  * Class ContactBoxConfigurator
@@ -24,6 +24,14 @@ use WellCommerce\Core\Layout\LayoutBoxConfiguratorInterface;
  */
 class ContactBoxConfigurator extends LayoutBoxConfigurator implements LayoutBoxConfiguratorInterface
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function getController()
+    {
+        return 'WellCommerce\\Plugin\\Contact\\Controller\\Frontend\\ContactBoxController';
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -54,7 +62,7 @@ class ContactBoxConfigurator extends LayoutBoxConfigurator implements LayoutBoxC
     public function addConfigurationFields(Form\Elements\Fieldset $fieldset)
     {
         $fieldset->addChild($this->addTip([
-            'tip' => '<p>' . $this->trans('This layout box does not need to be configured. All done :).') . '</p>'
+            'tip' => '<p>' . sprintf($this->trans('Choose configuration options related to box "%s".'), $this->getAlias()) . '</p>'
         ]));
     }
 } 

@@ -42,7 +42,7 @@ class RegisterLayoutBoxConfiguratorPass implements CompilerPassInterface
         foreach ($container->findTaggedServiceIds('layout_box.configurator') as $id => $attributes) {
             $class     = $container->getDefinition($id)->getClass();
             $refClass  = new \ReflectionClass($class);
-            $interface = 'WellCommerce\\Core\\Layout\\LayoutBoxConfiguratorInterface';
+            $interface = 'WellCommerce\\Core\\Layout\\Box\\LayoutBoxConfiguratorInterface';
             if (!$refClass->implementsInterface($interface)) {
                 throw new \InvalidArgumentException(sprintf('Service "%s" must implement interface "%s".', $id, $interface));
             }

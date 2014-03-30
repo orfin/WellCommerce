@@ -12,9 +12,9 @@
 
 namespace WellCommerce\Plugin\Product\Layout;
 
-use WellCommerce\Core\Form;
-use WellCommerce\Core\Layout\LayoutPageConfiguratorInterface;
-use WellCommerce\Core\Layout\Page\LayoutPageConfigurator;
+use WellCommerce\Core\Layout\Page\LayoutPage;
+use WellCommerce\Core\Layout\Page\LayoutPageInterface;
+use WellCommerce\Core\Layout\XmlFileLoader;
 
 /**
  * Class ProductPageLayoutConfigurator
@@ -22,21 +22,13 @@ use WellCommerce\Core\Layout\Page\LayoutPageConfigurator;
  * @package WellCommerce\Plugin\Product\Configurator\Box
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductPageLayoutConfigurator extends LayoutPageConfigurator implements LayoutPageConfiguratorInterface
+class ProductLayoutPage extends LayoutPage implements LayoutPageInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getLayoutXml()
     {
-        return 'Product';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAlias()
-    {
-        return 'Product';
+        return 'product.xml';
     }
 }

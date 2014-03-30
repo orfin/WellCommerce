@@ -32,11 +32,11 @@
             <tag name="layout_box.configurator" />
         </service>
 
-        <service id="product_page.layout.configurator" class="WellCommerce\Plugin\Product\Layout\ProductPageLayoutConfigurator">
+        <service id="product_page.layout" class="WellCommerce\Plugin\Product\Layout\ProductLayoutPage">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
-            <tag name="layout_page.configurator" />
+            <tag name="layout_page" alias="Product" columns="product.xml" />
         </service>
 
         <service id="product.subscriber" class="WellCommerce\Plugin\Product\Event\ProductEventSubscriber">

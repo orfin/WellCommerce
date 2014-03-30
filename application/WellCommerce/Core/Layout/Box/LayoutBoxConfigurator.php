@@ -36,4 +36,9 @@ abstract class LayoutBoxConfigurator extends Form
     {
 
     }
+
+    public function getHelp()
+    {
+
+    }
 }

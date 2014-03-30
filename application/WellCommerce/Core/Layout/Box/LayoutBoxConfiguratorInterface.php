@@ -10,10 +10,9 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Core\Layout;
+namespace WellCommerce\Core\Layout\Box;
 
 use WellCommerce\Core\Form\Elements\Fieldset;
-use WellCommerce\Core\Form\Elements\Form;
 
 /**
  * Interface LayoutBoxConfiguratorInterface
@@ -56,4 +55,17 @@ interface LayoutBoxConfiguratorInterface
      */
     public function addConfigurationFields(Fieldset $fieldset);
 
+    /**
+     * Every box should give the user instructions how to use it
+     *
+     * @return mixed
+     */
+    public function getHelp();
+
+    /**
+     * Return controller name which can handle such a configuration
+     *
+     * @return mixed
+     */
+    public function getController();
 } 

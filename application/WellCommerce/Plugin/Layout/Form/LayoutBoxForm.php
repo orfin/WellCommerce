@@ -68,7 +68,7 @@ class LayoutBoxForm extends Form
         $alias = $requiredData->addChild($this->addSelect([
             'name'    => 'alias',
             'label'   => $this->trans('Box type'),
-            'options' => $this->makeOptions($this->types, true)
+            'options' => $this->makeOptions($this->types, false),
         ]));
 
         foreach ($this->configurators as $id => $configurator) {
@@ -80,15 +80,39 @@ class LayoutBoxForm extends Form
                 ]
             ]));
 
-            $configurator->addConfigurationFields($settings);
+            $settings->addChild($this->addSelect([
+                'name'    => 'header',
+                'label'   => $this->trans('Show box header'),
+                'options' => [
+                    new Form\Option('0', $this->trans('Yes')),
+                    new Form\Option('1', $this->trans('No'))
+                ]
+            ]));
 
+            $settings->AddChild($this->addSelect([
+                'name'    => 'enable',
+                'label'   => $this->trans('Box visible'),
+                'options' => [
+                    new Form\Option('0', 'for all clients'),
+                    new Form\Option('1', 'only for logged-in ones'),
+                    new Form\Option('2', 'only for logged-out ones'),
+                    new Form\Option('3', 'for no one')
+                ]
+            ]));
+
+            $configurator->addConfigurationFields($settings);
         }
 
         $event = new LayoutBoxFormEvent($form, $layoutBoxData);
 
         $this->getDispatcher()->dispatch(LayoutBoxFormEvent::FORM_INIT_EVENT, $event);
 
-        $form->populate($event->getPopulateData());
+        $populateData = $event->getPopulateData();
+
+        if(!empty($populateData)){
+            $form->populate($populateData);
+        }
+
 
         $form->addFilters([
             $this->addFilterNoCode(),
@@ -106,7 +130,7 @@ class LayoutBoxForm extends Form
      */
     private function getLayoutBoxTypes()
     {
-        $types = [];
+        $types     = [];
         foreach ($this->configurators as $id => $configurator) {
             $types[$id] = sprintf('%s - %s', $id, $this->trans($configurator->getName()));
         }
