@@ -26,6 +26,8 @@ class CategoryBoxController extends FrontendController
 
     public function indexAction($slug)
     {
+        echo print_r($this->getSetting('category'));
+
         return new Response($slug);
     }
 } 

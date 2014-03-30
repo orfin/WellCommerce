@@ -25,14 +25,31 @@ use WellCommerce\Plugin\Layout\Repository\LayoutBoxRepository;
  */
 class LayoutRenderer extends Component
 {
+    /**
+     * @var array
+     */
     private $columns = [];
+    
+    /**
+     * @var array
+     */
     private $repository = [];
 
+    /**
+     * Sets layout box repository
+     *
+     * @param LayoutBoxRepository $repository
+     */
     public function setLayoutBoxRepository(LayoutBoxRepository $repository)
     {
         $this->repository = $repository;
     }
 
+    /**
+     * Returns all boxes from repository
+     *
+     * @return array
+     */
     private function getBoxes()
     {
         $collection = $this->repository->all()->toArray();
@@ -45,6 +62,13 @@ class LayoutRenderer extends Component
         return $items;
     }
 
+    /**
+     * Renders the whole layout
+     *
+     * @param LayoutColumnCollection $columns
+     *
+     * @return string
+     */
     public function render(LayoutColumnCollection $columns)
     {
         $this->boxes   = $this->getBoxes();
@@ -61,12 +85,41 @@ class LayoutRenderer extends Component
         return $content;
     }
 
+    /**
+     * Prepares settings and flattens array
+     *
+     * @param $collection
+     *
+     * @return array
+     */
+    private function prepareBoxSettings($collection)
+    {
+        $settings = [];
+        foreach ($collection as $setting) {
+            $settings[$setting['param']] = $setting['value'];
+        }
+
+        return $settings;
+    }
+
+    /**
+     * Forwards request to related box controller and returns its content
+     *
+     * @param LayoutBox $box
+     *
+     * @return mixed
+     */
     private function getBoxContent(LayoutBox $box)
     {
-        $alias        = $this->boxes[$box->getId()]['alias'];
+        $alias    = $this->boxes[$box->getId()]['alias'];
+        $settings = $this->prepareBoxSettings($this->boxes[$box->getId()]['settings']);
+
+        // get box configurator
         $configurator = $this->getLayoutManager()->getLayoutBoxConfigurator($alias);
 
-        $content = $this->forward($configurator->getController());
+        // forward request to box controller and pass additional settings
+        $content = $this->forward($configurator->getController(), 'indexAction', $settings);
+
         return $content->getContent();
     }
 } 

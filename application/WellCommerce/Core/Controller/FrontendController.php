@@ -22,4 +22,10 @@ use WellCommerce\Core\Controller;
 abstract class FrontendController extends Controller
 {
 
+    final protected function getSetting($id)
+    {
+        $accessor = $this->getPropertyAccessor();
+
+        return $accessor->getValue($this->getParam('_box_settings'), '[' . $id . ']');
+    }
 }
