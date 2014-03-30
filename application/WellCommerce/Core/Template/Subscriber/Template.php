@@ -66,6 +66,8 @@ class Template implements EventSubscriberInterface
         $templateVars     = $request->attributes->get('_template_vars');
         $mode             = $request->attributes->get('_mode');
         $parameters       = array_merge($templateVars, $controllerResult);
+
+        // immediately return controller result if raw response
         if ($controllerResult instanceof Response) {
             return $controllerResult;
         }
@@ -80,7 +82,7 @@ class Template implements EventSubscriberInterface
          * Guess template name
          */
         $guesser  = $this->getGuesser($mode);
-        $template = $guesser->guess($controller, $action);
+        $template = $guesser->guess($controller, $action, $event->getRequestType());
         $container->get($this->engine)->setLoader($container->get($this->getTemplateLoaderServiceName($mode)));
         $response = $container->get($this->engine)->render($template, $parameters);
 

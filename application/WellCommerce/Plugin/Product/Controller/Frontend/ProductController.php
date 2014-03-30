@@ -28,10 +28,8 @@ class ProductController extends FrontendController
 
     public function indexAction()
     {
-        echo $this->getLayoutManager()->renderLayout('Product');
-        die();
         return [
-            'layout' => $this->getLayoutManager()->renderLayout('Product')
+            'content' => $this->getLayoutManager()->renderLayout('Product')
         ];
     }
 }

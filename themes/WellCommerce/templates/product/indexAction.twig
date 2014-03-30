@@ -1,6 +1,6 @@
 {% extends 'layout.twig' %}
 {% block content %}
-
-    {{ layout }}
-
+    {% autoescape false %}
+    {{ content }}
+    {% endautoescape %}
 {% endblock %}

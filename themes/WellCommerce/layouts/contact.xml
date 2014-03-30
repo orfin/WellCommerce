@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <layout>
     <column width="180" resource="column_left.xml"/>
-    <column width="680" use="layout_column.twig">
-
+    <column width="880" use="layout_column.twig">
+        <box id="contact_form"/>
     </column>
-    <column width="180" resource="column_right.xml"/>
 </layout>

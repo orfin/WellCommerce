@@ -29,7 +29,7 @@ class LayoutRenderer extends Component
      * @var array
      */
     private $columns = [];
-    
+
     /**
      * @var array
      */
@@ -75,11 +75,18 @@ class LayoutRenderer extends Component
         $this->columns = $columns->all();
         $content       = '';
 
-        foreach ($this->columns as $column) {
-            $boxes = $column->getBoxes();
+        foreach ($this->columns as $index => $column) {
+            $boxes     = $column->getBoxes();
+            $boxesHtml = '';
             foreach ($boxes as $box) {
-                $content .= $this->getBoxContent($box);
+                $boxesHtml .= $this->getBoxContent($box);
             }
+
+            $content .= $this->get('twig')->render($column->getTemplate(), [
+                'id'    => $index,
+                'width' => $column->getWidth(),
+                'boxes' => $boxesHtml
+            ]);
         }
 
         return $content;

@@ -11,6 +11,8 @@
  */
 namespace WellCommerce\Core\Template\Guesser;
 
+use Symfony\Component\HttpKernel\HttpKernelInterface;
+
 /**
  * Class AdminTemplateGuesser
  *
@@ -25,19 +27,20 @@ class AdminTemplateGuesser implements TemplateGuesserInterface
     /**
      * {@inheritdoc}
      */
-    public function guess ($controller, $action)
+    public function guess($controller, $action, $requestType = HttpKernelInterface::MASTER_REQUEST)
     {
-        return sprintf('%s\%s.%s', $this->check($controller), $action, TemplateGuesserInterface::TEMPLATING_ENGINE);
+        return sprintf('%s\%s.%s', $this->check($controller, $requestType), $action, TemplateGuesserInterface::TEMPLATING_ENGINE);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function check ($controller)
+    public function check($controller, $requestType)
     {
-        if (! preg_match('/Controller\\\Admin\\\(.+)Controller$/', $controller, $matches)){
+        if (!preg_match('/Controller\\\Admin\\\(.+)Controller$/', $controller, $matches)) {
             throw new \InvalidArgumentException(sprintf('The "%s" class does not look like an admin controller class', $controller));
         }
+
         return strtolower($matches[1]);
     }
 }

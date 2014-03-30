@@ -41,10 +41,11 @@ interface TemplateGuesserInterface
      * Checks controller type 
      * 
      * @param string $controller
+     * @param $requestType
      * 
      * @throws \InvalidArgumentException if controller doesn't match pattern
      * 
      * @return array Controller name parts
      */
-    public function check ($controller);
+    public function check ($controller, $requestType);
 }

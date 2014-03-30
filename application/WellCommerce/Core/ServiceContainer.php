@@ -89,6 +89,7 @@ class ServiceContainer extends Container
             'finder' => 'getFinderService',
             'form_helper' => 'getFormHelperService',
             'helper' => 'getHelperService',
+            'home_page.layout' => 'getHomePage_LayoutService',
             'home_page.subscriber' => 'getHomePage_SubscriberService',
             'image_gallery' => 'getImageGalleryService',
             'kernel' => 'getKernelService',
@@ -1105,6 +1106,23 @@ class ServiceContainer extends Container
     }
 
     /**
+     * Gets the 'home_page.layout' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Plugin\HomePage\Layout\HomePageLayoutPage A WellCommerce\Plugin\HomePage\Layout\HomePageLayoutPage instance.
+     */
+    protected function getHomePage_LayoutService()
+    {
+        $this->services['home_page.layout'] = $instance = new \WellCommerce\Plugin\HomePage\Layout\HomePageLayoutPage();
+
+        $instance->setContainer($this);
+
+        return $instance;
+    }
+
+    /**
      * Gets the 'home_page.subscriber' service.
      *
      * This service is shared.
@@ -1298,6 +1316,7 @@ class ServiceContainer extends Container
         $instance->addLayoutBoxConfigurator($this->get('producer_list_box.layout.configurator'));
         $instance->addLayoutBoxConfigurator($this->get('product_box.layout.configurator'));
         $instance->addLayoutPage('Contact', $this->get('contact_page.layout'));
+        $instance->addLayoutPage('HomePage', $this->get('home_page.layout'));
         $instance->addLayoutPage('Producer', $this->get('producer_page.layout'));
         $instance->addLayoutPage('Product', $this->get('product_page.layout'));
 

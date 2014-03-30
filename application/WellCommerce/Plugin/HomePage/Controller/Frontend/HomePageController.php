@@ -25,13 +25,7 @@ class HomePageController extends FrontendController
     public function indexAction()
     {
         return [
-            'layout' => $this->getLayoutManager()->renderLayout($this->getLayout())
+            'content' => $this->getLayoutManager()->renderLayout('HomePage')
         ];
     }
-
-    private function getLayout()
-    {
-        return 'HomePage';
-    }
-
 }

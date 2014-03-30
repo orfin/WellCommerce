@@ -22,37 +22,37 @@ class AdminMenuEventSubscriber implements EventSubscriberInterface
 
     public function onKernelController(FilterControllerEvent $event)
     {
-        if($event->getRequestType() == HttpKernelInterface::SUB_REQUEST){
-            return;
-        }
-
-        $container = $event->getDispatcher()->getContainer();
-
-        if (!$container->get('session')->has('admin.menu')) {
-
-            $menuData = Array(
-                'menu' => Array(
-                    'sales',
-                    'crm'
-                )
-            );
-
-            $eventData = new AdminMenuInitEvent($menuData);
-
-            $event->getDispatcher()->dispatch(AdminMenuInitEvent::ADMIN_MENU_INIT_EVENT, $eventData);
-
-            $adminMenuData = $eventData->getMenuData();
-
-            $container->get('session')->set('admin.menu', $eventData->getMenuData());
-        }
-
-        $adminMenuData = [
-            'admin_menu' => $container->get('admin_menu.repository')->getMenuData()
-        ];
-
-        $templateVars = $event->getRequest()->attributes->get('_template_vars');
-
-        $event->getRequest()->attributes->set('_template_vars', array_merge($templateVars, $adminMenuData));
+//        if($event->getRequestType() == HttpKernelInterface::SUB_REQUEST){
+//            return;
+//        }
+//
+//        $container = $event->getDispatcher()->getContainer();
+//
+//        if (!$container->get('session')->has('admin.menu')) {
+//
+//            $menuData = Array(
+//                'menu' => Array(
+//                    'sales',
+//                    'crm'
+//                )
+//            );
+//
+//            $eventData = new AdminMenuInitEvent($menuData);
+//
+//            $event->getDispatcher()->dispatch(AdminMenuInitEvent::ADMIN_MENU_INIT_EVENT, $eventData);
+//
+//            $adminMenuData = $eventData->getMenuData();
+//
+//            $container->get('session')->set('admin.menu', $eventData->getMenuData());
+//        }
+//
+//        $adminMenuData = [
+//            'admin_menu' => $container->get('admin_menu.repository')->getMenuData()
+//        ];
+//
+//        $templateVars = $event->getRequest()->attributes->get('_template_vars');
+//
+//        $event->getRequest()->attributes->set('_template_vars', array_merge($templateVars, $adminMenuData));
     }
 
     public static function getSubscribedEvents()

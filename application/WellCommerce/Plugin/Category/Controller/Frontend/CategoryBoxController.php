@@ -24,10 +24,18 @@ use Symfony\Component\HttpFoundation\Response;
 class CategoryBoxController extends FrontendController
 {
 
-    public function indexAction($slug)
+    public function indexAction()
     {
-        echo print_r($this->getSetting('category'));
+        return [
+            'categories' => $this->getRepository()->getCategoriesTree()
+        ];
+    }
 
-        return new Response($slug);
+    /**
+     * {@inheritdoc}
+     */
+    protected function getRepository()
+    {
+        return $this->get('category.repository');
     }
 } 

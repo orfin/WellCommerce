@@ -7,5 +7,13 @@
         <service id="home_page.subscriber" class="WellCommerce\Plugin\HomePage\Event\HomePageEventSubscriber">
         	<tag name="kernel.event_subscriber" />
         </service>
+
+        <service id="home_page.layout" class="WellCommerce\Plugin\HomePage\Layout\HomePageLayoutPage">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="layout_page" alias="HomePage" columns="home_page.xml" />
+        </service>
+
     </services>
 </container>

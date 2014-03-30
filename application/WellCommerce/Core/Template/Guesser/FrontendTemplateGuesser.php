@@ -11,6 +11,8 @@
  */
 namespace WellCommerce\Core\Template\Guesser;
 
+use Symfony\Component\HttpKernel\HttpKernelInterface;
+
 class FrontendTemplateGuesser implements TemplateGuesserInterface
 {
 
@@ -19,20 +21,41 @@ class FrontendTemplateGuesser implements TemplateGuesserInterface
     /**
      * {@inheritdoc}
      */
-    public function guess ($controller, $action)
+    public function guess($controller, $action, $requestType = HttpKernelInterface::MASTER_REQUEST)
     {
-        return sprintf('%s\%s.%s', $this->check($controller), $action, TemplateGuesserInterface::TEMPLATING_ENGINE);
+        $controller = $this->check($controller, $requestType);
+        $extension  = TemplateGuesserInterface::TEMPLATING_ENGINE;
+
+        switch ($requestType) {
+            case HttpKernelInterface::SUB_REQUEST:
+                return sprintf('%s\box\%s.%s', $controller, $action, $extension);
+                break;
+            case HttpKernelInterface::MASTER_REQUEST:
+                return sprintf('%s\%s.%s', $controller, $action, $extension);
+                break;
+        }
     }
 
     /**
      * {@inheritdoc}
      */
-    public function check ($controller)
+    public function check($controller, $requestType)
     {
-        if (! preg_match('/Controller\\\Frontend\\\(.+)Controller$/', $controller, $matches)) {
-            throw new \InvalidArgumentException(sprintf('The "%s" class does not look like an frontend controller class', $controller));
+        // if request is forwarded we assume its LayoutBox
+        if (HttpKernelInterface::SUB_REQUEST == $requestType) {
+            if (!preg_match('/Controller\\\Frontend\\\(.+)BoxController$/', $controller, $matches)) {
+                throw new \InvalidArgumentException(sprintf('The "%s" class does not look like an box controller class', $controller));
+            }
+
+            return strtolower($matches[1]);
         }
-        
-        return strtolower($matches[1]);
+
+        if (HttpKernelInterface::MASTER_REQUEST == $requestType) {
+            if (!preg_match('/Controller\\\Frontend\\\(.+)Controller$/', $controller, $matches)) {
+                throw new \InvalidArgumentException(sprintf('The "%s" class does not look like an frontend controller class', $controller));
+            }
+
+            return strtolower($matches[1]);
+        }
     }
 }

@@ -7,8 +7,8 @@
     <title>Bootstrap 101 Template</title>
 
     <!-- Bootstrap -->
-    <link href="{{ asset('themes/Gekosale/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('themes/Gekosale/css/gekosale.css') }}" rel="stylesheet">
+    <link href="{{ asset('themes/WellCommerce/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('themes/WellCommerce/css/wellcommerce.css') }}" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -31,9 +31,9 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
+                    <li class="active"><a href="{{ path('frontend.home.index') }}">Home</a></li>
                     <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="{{ path('frontend.contact.index') }}">Contact</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
                         <ul class="dropdown-menu">

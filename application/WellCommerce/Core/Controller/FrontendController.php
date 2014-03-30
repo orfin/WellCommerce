@@ -22,6 +22,14 @@ use WellCommerce\Core\Controller;
 abstract class FrontendController extends Controller
 {
 
+    /**
+     * As box settings are passed as another key in forwarded requests
+     * we need to fetch them using accessor
+     *
+     * @param $id
+     *
+     * @return mixed
+     */
     final protected function getSetting($id)
     {
         $accessor = $this->getPropertyAccessor();
