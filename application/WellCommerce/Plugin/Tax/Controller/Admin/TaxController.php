@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Plugin\Tax\Controller\Admin;
 
-use WellCommerce\Core\Controller\AdminController;
+use WellCommerce\Core\Controller\AbstractAdminController;
 
 /**
  * Class TaxController
@@ -19,7 +19,7 @@ use WellCommerce\Core\Controller\AdminController;
  * @package WellCommerce\Plugin\Tax\Controller\Admin
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class TaxController extends AdminController
+class TaxController extends AbstractAdminController
 {
     /**
      * {@inheritdoc}

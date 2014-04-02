@@ -11,16 +11,16 @@
  */
 namespace WellCommerce\Plugin\PluginManager\Repository;
 
-use WellCommerce\Core\Repository;
+use WellCommerce\Core\Component\Repository\AbstractRepository;
 use WellCommerce\Core\Model\PluginManager;
 
 /**
- * Class PluginManagerRepository
+ * Class PluginManagerAbstractRepository
  *
- * @package WellCommerce\Plugin\PluginManager\Repository
+ * @package WellCommerce\Plugin\PluginManager\AbstractRepository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PluginManagerRepository extends Repository
+class PluginManagerRepository extends AbstractRepository
 {
 
     /**

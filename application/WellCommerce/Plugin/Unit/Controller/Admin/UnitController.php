@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Plugin\Unit\Controller\Admin;
 
-use WellCommerce\Core\Controller\AdminController;
+use WellCommerce\Core\Controller\AbstractAdminController;
 
 /**
  * Class UnitController
@@ -19,7 +19,7 @@ use WellCommerce\Core\Controller\AdminController;
  * @package WellCommerce\Plugin\Unit\Controller\Admin
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class UnitController extends AdminController
+class UnitController extends AbstractAdminController
 {
     /**
      * {@inheritdoc}

@@ -11,7 +11,8 @@
  */
 namespace WellCommerce\Plugin\Shop\Model;
 
-use WellCommerce\Core\Model;
+use WellCommerce\Core\Component\Model\AbstractModel;
+use WellCommerce\Core\Component\Model\TranslatableModelInterface;
 
 /**
  * Class Shop
@@ -19,7 +20,7 @@ use WellCommerce\Core\Model;
  * @package WellCommerce\Plugin\Shop\Model
  * @author  Adam Piotrowski <adam@gekosale.com>
  */
-class Shop extends Model implements Model\TranslatableModelInterface
+class Shop extends AbstractModel implements TranslatableModelInterface
 {
 
     protected $table = 'shop';
@@ -31,7 +32,7 @@ class Shop extends Model implements Model\TranslatableModelInterface
     protected $fillable = ['id'];
 
     /**
-     * Relation with ShopTranslation model
+     * Relation with ShopTranslationModel model
      *
      * @return \Illuminate\Database\Eloquent\Relations\hasMany
      */

@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Plugin\PaymentMethod\Controller\Admin;
 
-use WellCommerce\Core\Controller\AdminController;
+use WellCommerce\Core\Controller\AbstractAdminController;
 
 /**
  * Class PaymentMethodController
@@ -19,7 +19,7 @@ use WellCommerce\Core\Controller\AdminController;
  * @package WellCommerce\Plugin\PaymentMethod\Controller\Admin
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PaymentMethodController extends AdminController
+class PaymentMethodController extends AbstractAdminController
 {
     /**
      * {@inheritdoc}

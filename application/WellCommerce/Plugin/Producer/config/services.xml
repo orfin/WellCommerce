@@ -46,8 +46,5 @@
             <tag name="layout_page" alias="Producer" columns="producer.xml" />
         </service>
 
-        <service id="producer.subscriber" class="WellCommerce\Plugin\Producer\Event\ProducerEventSubscriber">
-        	<tag name="kernel.event_subscriber" />
-        </service>
     </services>
 </container>

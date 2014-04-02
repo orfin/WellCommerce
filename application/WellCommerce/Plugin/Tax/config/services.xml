@@ -24,9 +24,5 @@
                 <argument type="service" id="service_container" />
             </call>
         </service>
-        
-        <service id="tax.subscriber" class="WellCommerce\Plugin\Tax\Event\TaxEventSubscriber">
-        	<tag name="kernel.event_subscriber" />
-        </service>
     </services>
 </container>

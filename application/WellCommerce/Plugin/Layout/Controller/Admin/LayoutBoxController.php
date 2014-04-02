@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Plugin\Layout\Controller\Admin;
 
-use WellCommerce\Core\Controller\AdminController;
+use WellCommerce\Core\Controller\AbstractAdminController;
 
 /**
  * Class LayoutBoxController
@@ -19,7 +19,7 @@ use WellCommerce\Core\Controller\AdminController;
  * @package WellCommerce\Plugin\LayoutBox\Controller\Admin
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LayoutBoxController extends AdminController
+class LayoutBoxController extends AbstractAdminController
 {
     public function addAction()
     {

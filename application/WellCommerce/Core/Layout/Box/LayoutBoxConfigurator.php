@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Core\Layout\Box;
 
-use WellCommerce\Core\Form;
+use Symfony\Component\DomCrawler\Form;
 
 /**
  * Class LayoutBoxConfigurator

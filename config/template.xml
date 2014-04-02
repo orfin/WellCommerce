@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="template_guesser.class">WellCommerce\Core\Template\TemplateGuesser</parameter>
+        <parameter key="template_listener.class">WellCommerce\Core\EventListener\TemplateListener</parameter>
+    </parameters>
+
+    <services>
+
+        <service id="template_guesser" class="%template_guesser.class%" />
+
+        <service id="template_listener" class="WellCommerce\Core\EventListener\TemplateListener">
+            <argument type="service" id="template_guesser"/>
+            <argument type="service" id="twig.loader.admin"/>
+            <argument type="service" id="twig.loader.front"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="twig.loader.front" class="Twig_Loader_Filesystem">
+            <argument>%front.themes%</argument>
+        </service>
+
+        <service id="twig.loader.admin" class="Twig_Loader_Filesystem">
+            <argument>%admin.themes%</argument>
+        </service>
+
+        <service id="twig" class="Twig_Environment">
+            <argument type="service" id="twig.loader.front"/>
+            <argument type="collection">
+                <argument key="cache">%application.root_path%var/cache</argument>
+                <argument key="auto_reload">true</argument>
+                <argument key="autoescape">true</argument>
+                <argument key="debug">true</argument>
+            </argument>
+        </service>
+
+        <service id="twig.extension.translation" class="Symfony\Bridge\Twig\Extension\TranslationExtension">
+            <argument type="service" id="translation"/>
+            <tag name="twig.extension"/>
+        </service>
+
+        <service id="twig.extension.routing" class="WellCommerce\Core\Template\Twig\Extension\RoutingExtension">
+            <argument type="service" id="router"/>
+            <argument type="service" id="request"/>
+            <tag name="twig.extension"/>
+        </service>
+
+        <service id="twig.extension.intl" class="Twig_Extensions_Extension_Intl">
+            <tag name="twig.extension"/>
+        </service>
+
+        <service id="twig.extension.debug" class="Twig_Extension_Debug">
+            <tag name="twig.extension"/>
+        </service>
+
+        <service id="twig.extension.form" class="WellCommerce\Core\Template\Twig\Extension\FormExtension">
+            <argument type="service" id="service_container"/>
+            <tag name="twig.extension"/>
+        </service>
+
+        <service id="twig.extension.asset" class="WellCommerce\Core\Template\Twig\Extension\AssetExtension">
+            <argument type="service" id="service_container"/>
+            <tag name="twig.extension"/>
+        </service>
+
+        <service id="twig.extension.datagrid" class="WellCommerce\Core\Template\Twig\Extension\DataGridExtension">
+            <argument type="service" id="service_container"/>
+            <tag name="twig.extension"/>
+        </service>
+
+    </services>
+</container>

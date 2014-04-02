@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Plugin\Tax\DataGrid;
 
-use WellCommerce\Core\DataGrid;
+use WellCommerce\Core\DataGrid\AbstractDataGrid;
 use WellCommerce\Core\DataGrid\DataGridInterface;
 use WellCommerce\Plugin\Tax\Event\TaxDataGridEvent;
 
@@ -21,7 +21,7 @@ use WellCommerce\Plugin\Tax\Event\TaxDataGridEvent;
  * @package WellCommerce\Plugin\Tax\DataGrid
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class TaxDataGrid extends DataGrid implements DataGridInterface
+class TaxDataGrid extends AbstractDataGrid implements DataGridInterface
 {
     /**
      * {@inheritdoc}

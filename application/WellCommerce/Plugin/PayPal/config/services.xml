@@ -24,9 +24,5 @@
                 <argument type="service" id="service_container" />
             </call>
         </service>
-        
-        <service id="paypal.subscriber" class="WellCommerce\Plugin\PayPal\Event\PayPalEventSubscriber">
-        	<tag name="kernel.event_subscriber" />
-        </service>
     </services>
 </container>

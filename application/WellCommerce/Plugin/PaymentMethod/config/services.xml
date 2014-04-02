@@ -25,10 +25,6 @@
             </call>
         </service>
         
-        <service id="payment_method.subscriber" class="WellCommerce\Plugin\PaymentMethod\Event\PaymentMethodEventSubscriber">
-        	<tag name="kernel.event_subscriber" />
-        </service>
-
         <service id="payment_method.processor.paypal" class="WellCommerce\Plugin\PaymentMethod\Processor\PayPalProcessor">
         	<tag name="payment_method.processor" />
         </service>

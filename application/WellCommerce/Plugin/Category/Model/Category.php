@@ -11,8 +11,8 @@
  */
 namespace WellCommerce\Plugin\Category\Model;
 
-use WellCommerce\Core\Model;
-use WellCommerce\Core\Model\TranslatableModelInterface;
+use WellCommerce\Core\Component\Model\AbstractModel;
+use WellCommerce\Core\Component\Model\TranslatableModelInterface;
 
 /**
  * Class Category
@@ -20,7 +20,7 @@ use WellCommerce\Core\Model\TranslatableModelInterface;
  * @package WellCommerce\Plugin\Category\Model
  * @author  Adam Piotrowski <adam@gekosale.com>
  */
-class Category extends Model implements TranslatableModelInterface
+class Category extends AbstractModel implements TranslatableModelInterface
 {
     protected $table = 'category';
     public $timestamps = true;

@@ -11,17 +11,17 @@
  */
 namespace WellCommerce\Plugin\Currency\Repository;
 
-use WellCommerce\Core\Repository;
+use WellCommerce\Core\Component\Repository\AbstractRepository;
 use WellCommerce\Plugin\Currency\Model\Currency;
 use Symfony\Component\Intl\Intl;
 
 /**
- * Class CurrencyRepository
+ * Class CurrencyAbstractRepository
  *
- * @package WellCommerce\Plugin\Currency\Repository
+ * @package WellCommerce\Plugin\Currency\AbstractRepository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CurrencyRepository extends Repository
+class CurrencyRepository extends AbstractRepository
 {
 
     /**

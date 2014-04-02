@@ -11,16 +11,16 @@
  */
 namespace WellCommerce\Plugin\Country\Repository;
 
-use WellCommerce\Core\Repository;
+use WellCommerce\Core\Component\Repository\AbstractRepository;
 use Symfony\Component\Intl\Intl;
 
 /**
- * Class CountryRepository
+ * Class CountryAbstractRepository
  *
- * @package WellCommerce\Plugin\Country\Repository
+ * @package WellCommerce\Plugin\Country\AbstractRepository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CountryRepository extends Repository
+class CountryRepository extends AbstractRepository
 {
 
     /**

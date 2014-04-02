@@ -12,17 +12,17 @@
 namespace WellCommerce\Plugin\Category\Repository;
 
 use WellCommerce\Core\Helper;
-use WellCommerce\Core\Repository;
+use WellCommerce\Core\Component\Repository\AbstractRepository;
 use WellCommerce\Plugin\Category\Model\Category;
 use WellCommerce\Plugin\Category\Model\CategoryTranslation;
 
 /**
- * Class CategoryRepository
+ * Class CategoryAbstractRepository
  *
- * @package WellCommerce\Plugin\Category\Repository
+ * @package WellCommerce\Plugin\Category\AbstractRepository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CategoryRepository extends Repository
+class CategoryRepository extends AbstractRepository
 {
 
     /**

@@ -11,17 +11,17 @@
  */
 namespace WellCommerce\Plugin\Layout\Repository;
 
-use WellCommerce\Core\Repository;
+use WellCommerce\Core\Component\Repository\AbstractRepository;
 use WellCommerce\Plugin\Layout\Model\LayoutBox;
 use WellCommerce\Plugin\Layout\Model\LayoutBoxSettings;
 
 /**
- * Class LayoutBoxRepository
+ * Class LayoutBoxAbstractRepository
  *
- * @package WellCommerce\Plugin\LayoutBox\Repository
+ * @package WellCommerce\Plugin\LayoutBox\AbstractRepository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LayoutBoxRepository extends Repository
+class LayoutBoxRepository extends AbstractRepository
 {
 
     /**

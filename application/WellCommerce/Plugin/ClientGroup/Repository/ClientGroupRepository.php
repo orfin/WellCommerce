@@ -11,17 +11,17 @@
  */
 namespace WellCommerce\Plugin\ClientGroup\Repository;
 
-use WellCommerce\Core\Repository;
+use WellCommerce\Core\Component\Repository\AbstractRepository;
 use WellCommerce\Plugin\ClientGroup\Model\ClientGroup;
 use WellCommerce\Plugin\ClientGroup\Model\ClientGroupTranslation;
 
 /**
- * Class ClientGroupRepository
+ * Class ClientGroupAbstractRepository
  *
- * @package WellCommerce\Plugin\ClientGroup\Repository
+ * @package WellCommerce\Plugin\ClientGroup\AbstractRepository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientGroupRepository extends Repository
+class ClientGroupRepository extends AbstractRepository
 {
 
     /**

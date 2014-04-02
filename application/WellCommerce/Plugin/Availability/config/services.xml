@@ -3,7 +3,17 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
+    <parameters>
+        <parameter key="availability.admin.controller.class">WellCommerce\Plugin\Availability\Controller\Admin\AvailabilityController</parameter>
+    </parameters>
+
     <services>
+        <service id="availability.admin.controller" class="%availability.admin.controller.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
         <service id="availability.repository" class="WellCommerce\Plugin\Availability\Repository\AvailabilityRepository">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
@@ -23,10 +33,6 @@
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
-        </service>
-
-        <service id="availability.subscriber" class="WellCommerce\Plugin\Availability\Event\AvailabilityEventSubscriber">
-            <tag name="kernel.event_subscriber"/>
         </service>
     </services>
 </container>

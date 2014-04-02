@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Plugin\Company\Model;
 
-use WellCommerce\Core\Model;
+use WellCommerce\Core\Component\Model\AbstractModel;
 
 /**
  * Class Company
@@ -19,7 +19,7 @@ use WellCommerce\Core\Model;
  * @package WellCommerce\Plugin\Company\Model
  * @author  Adam Piotrowski <adam@gekosale.com>
  */
-class Company extends Model
+class Company extends AbstractModel
 {
 
     protected $table = 'company';

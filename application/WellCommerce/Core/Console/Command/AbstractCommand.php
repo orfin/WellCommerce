@@ -11,8 +11,8 @@
  */
 namespace WellCommerce\Core\Console\Command;
 
-use Symfony\Component\Console\Command\Command,
-    Symfony\Component\Filesystem\Exception\IOException;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Filesystem\Exception\IOException;
 
 /**
  * Class AbstractCommand

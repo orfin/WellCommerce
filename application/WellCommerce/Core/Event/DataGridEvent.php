@@ -11,8 +11,8 @@
  */
 namespace WellCommerce\Core\Event;
 
-use WellCommerce\Core\DataGrid;
 use Symfony\Component\EventDispatcher\Event;
+use WellCommerce\Core\Component\DataGrid\DataGridInterface;
 
 /**
  * Class DataGridEvent
@@ -28,9 +28,9 @@ class DataGridEvent extends Event
     /**
      * Constructor
      *
-     * @param DataGrid $datagrid
+     * @param DataGridInterface $datagrid
      */
-    public function __construct(DataGrid $datagrid)
+    public function __construct(DataGridInterface $datagrid)
     {
         $this->datagrid = $datagrid;
     }

@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Plugin\CacheManager\Controller\Admin;
 
-use WellCommerce\Core\Controller\AdminController;
+use WellCommerce\Core\Controller\AbstractAdminController;
 use Assetic\Extension\Twig\TwigResource;
 
 /**
@@ -20,7 +20,7 @@ use Assetic\Extension\Twig\TwigResource;
  * @package WellCommerce\Plugin\CacheManager\Controller\Admin
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CacheManagerController extends AdminController
+class CacheManagerController extends AbstractAdminController
 {
     public function deleteAction()
     {

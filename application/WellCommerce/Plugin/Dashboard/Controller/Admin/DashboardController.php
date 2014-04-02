@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Plugin\Dashboard\Controller\Admin;
 
-use WellCommerce\Core\Controller\AdminController;
+use WellCommerce\Core\Controller\AbstractAdminController;
 
 /**
  * Class DashboardController
@@ -19,7 +19,7 @@ use WellCommerce\Core\Controller\AdminController;
  * @package WellCommerce\Plugin\Dashboard\Controller\Admin
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class DashboardController extends AdminController
+class DashboardController extends AbstractAdminController
 {
     /**
      * {@inheritdoc}

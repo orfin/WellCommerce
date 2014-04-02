@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Plugin\Shop\Model;
 
-use WellCommerce\Core\Model;
+use WellCommerce\Core\Component\Model\AbstractModel;
 
 /**
  * Class ShopTranslation
@@ -19,7 +19,7 @@ use WellCommerce\Core\Model;
  * @package WellCommerce\Plugin\Shop\Model
  * @author  Adam Piotrowski <adam@gekosale.com>
  */
-class ShopTranslation extends Model
+class ShopTranslation extends AbstractModel
 {
 
     protected $table = 'shop_translation';

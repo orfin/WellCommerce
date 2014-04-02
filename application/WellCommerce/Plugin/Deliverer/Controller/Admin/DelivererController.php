@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Plugin\Deliverer\Controller\Admin;
 
-use WellCommerce\Core\Controller\AdminController;
+use WellCommerce\Core\Controller\AbstractAdminController;
 
 /**
  * Class DelivererController
@@ -19,7 +19,7 @@ use WellCommerce\Core\Controller\AdminController;
  * @package WellCommerce\Plugin\Deliverer\Controller\Admin
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class DelivererController extends AdminController
+class DelivererController extends AbstractAdminController
 {
     /**
      * {@inheritdoc}

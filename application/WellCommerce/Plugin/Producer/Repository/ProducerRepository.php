@@ -11,22 +11,21 @@
  */
 namespace WellCommerce\Plugin\Producer\Repository;
 
-use WellCommerce\Core\Repository;
+use WellCommerce\Core\Component\Repository\AbstractRepository;
+use WellCommerce\Core\Component\Repository\RepositoryInterface;
 use WellCommerce\Plugin\Producer\Model\Producer;
 use WellCommerce\Plugin\Producer\Model\ProducerTranslation;
 
 /**
- * Class ProducerRepository
+ * Class ProducerAbstractRepository
  *
- * @package WellCommerce\Plugin\Producer\Repository
+ * @package WellCommerce\Plugin\Producer\AbstractRepository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProducerRepository extends Repository
+class ProducerRepository extends AbstractRepository implements RepositoryInterface
 {
     /**
-     * Returns producer collection
-     *
-     * @return \Illuminate\Database\Eloquent\Collection
+     * {@inheritdoc}
      */
     public function all()
     {
@@ -34,11 +33,7 @@ class ProducerRepository extends Repository
     }
 
     /**
-     * Returns single producer model with all shop and deliverer data
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Database\Eloquent\Model|static
+     * {@inheritdoc}
      */
     public function find($id)
     {
@@ -46,9 +41,7 @@ class ProducerRepository extends Repository
     }
 
     /**
-     * Deletes producer by key or multiple producers if array of ids is passed
-     *
-     * @param array|int $id
+     * {@inheritdoc}
      */
     public function delete($id)
     {
@@ -58,10 +51,7 @@ class ProducerRepository extends Repository
     }
 
     /**
-     * Saves producer model
-     *
-     * @param array    $Data Submitted form data
-     * @param int|null $id   Producer ID or null if new producer
+     * {@inheritdoc}
      */
     public function save(array $Data, $id = null)
     {
@@ -89,11 +79,7 @@ class ProducerRepository extends Repository
     }
 
     /**
-     * Returns array containing values needed to populate the form
-     *
-     * @param int $id Producer ID
-     *
-     * @return array Populate data
+     * {@inheritdoc}
      */
     public function getPopulateData($id)
     {

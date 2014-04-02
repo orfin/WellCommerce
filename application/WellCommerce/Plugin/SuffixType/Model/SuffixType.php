@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Core\Model;
 
-use WellCommerce\Core\Model;
+use WellCommerce\Core\Component\Model\AbstractModel;
 
 /**
  * Class SuffixType
@@ -19,7 +19,7 @@ use WellCommerce\Core\Model;
  * @package WellCommerce\Core\Model
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class SuffixType extends Model
+class SuffixType extends AbstractModel
 {
 
     protected $table = 'suffix_type';

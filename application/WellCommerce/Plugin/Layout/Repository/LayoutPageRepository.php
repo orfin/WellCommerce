@@ -11,17 +11,17 @@
  */
 namespace WellCommerce\Plugin\Layout\Repository;
 
-use WellCommerce\Core\Repository;
+use WellCommerce\Core\Component\Repository\AbstractRepository;
 use WellCommerce\Core\Model\LayoutPage;
 use WellCommerce\Core\Model\LayoutPageTranslation;
 
 /**
- * Class LayoutPageRepository
+ * Class LayoutPageAbstractRepository
  *
- * @package WellCommerce\Plugin\LayoutPage\Repository
+ * @package WellCommerce\Plugin\LayoutPage\AbstractRepository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LayoutPageRepository extends Repository
+class LayoutPageRepository extends AbstractRepository
 {
 
     /**

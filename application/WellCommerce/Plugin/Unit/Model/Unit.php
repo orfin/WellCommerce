@@ -11,7 +11,8 @@
  */
 namespace WellCommerce\Plugin\Unit\Model;
 
-use WellCommerce\Core\Model;
+use WellCommerce\Core\Component\Model\AbstractModel;
+use WellCommerce\Core\Component\Model\TranslatableModelInterface;
 
 /**
  * Class Unit
@@ -19,7 +20,7 @@ use WellCommerce\Core\Model;
  * @package WellCommerce\Plugin\Unit\Model
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Unit extends Model implements Model\TranslatableModelInterface
+class Unit extends AbstractModel implements TranslatableModelInterface
 {
 
     protected $table = 'unit';

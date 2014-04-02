@@ -11,16 +11,17 @@
  */
 namespace WellCommerce\Plugin\AdminMenu\Repository;
 
-use WellCommerce\Core\Repository;
+use WellCommerce\Core\Component\Repository\AbstractRepository;
+use WellCommerce\Core\Component\Repository\RepositoryInterface;
 use WellCommerce\Plugin\AdminMenu\Model\AdminMenu;
 
 /**
- * Class AdminMenuRepository
+ * Class AdminMenuAbstractRepository
  *
- * @package WellCommerce\Plugin\AdminMenu\Repository
+ * @package WellCommerce\Plugin\AdminMenu\AbstractRepository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AdminMenuRepository extends Repository
+class AdminMenuRepository extends AbstractRepository implements RepositoryInterface
 {
 
     /**

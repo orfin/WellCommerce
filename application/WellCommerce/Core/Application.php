@@ -13,6 +13,8 @@ namespace WellCommerce\Core;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Stopwatch\Stopwatch;
+use WellCommerce\Core\DependencyInjection\ServiceContainer;
+use WellCommerce\Core\DependencyInjection\ServiceContainerBuilder;
 
 /**
  * Class Application

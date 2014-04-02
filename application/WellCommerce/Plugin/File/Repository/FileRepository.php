@@ -11,17 +11,17 @@
  */
 namespace WellCommerce\Plugin\File\Repository;
 
-use WellCommerce\Core\Repository;
+use WellCommerce\Core\Component\Repository\AbstractRepository;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use WellCommerce\Plugin\File\Model\File;
 
 /**
- * Class FileRepository
+ * Class FileAbstractRepository
  *
- * @package WellCommerce\Plugin\File\Repository
+ * @package WellCommerce\Plugin\File\AbstractRepository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class FileRepository extends Repository
+class FileRepository extends AbstractRepository
 {
     /**
      * Returns all files

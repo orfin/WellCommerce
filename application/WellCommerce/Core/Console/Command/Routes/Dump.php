@@ -18,10 +18,6 @@ use Symfony\Component\Routing\RouteCollection;
  */
 class Dump extends AbstractCommand
 {
-
-    /**
-     *
-     */
     protected function configure()
     {
         $this->setName('routes:dump');

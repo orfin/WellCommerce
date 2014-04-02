@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Plugin\HomePage\Controller\Frontend;
 
-use WellCommerce\Core\Controller\FrontendController;
+use WellCommerce\Core\Component\Controller\AbstractFrontendController;
 
 /**
  * Class HomePageController
@@ -19,7 +19,7 @@ use WellCommerce\Core\Controller\FrontendController;
  * @package WellCommerce\Plugin\HomePage\Controller\Frontend
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class HomePageController extends FrontendController
+class HomePageController extends AbstractFrontendController
 {
 
     public function indexAction()

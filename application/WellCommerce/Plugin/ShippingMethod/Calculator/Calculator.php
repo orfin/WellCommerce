@@ -12,9 +12,9 @@
 
 namespace WellCommerce\Plugin\ShippingMethod\Calculator;
 
-use WellCommerce\Core\Component;
+use WellCommerce\Core\Component\AbstractComponent;
 
-class Calculator extends Component implements CalculatorInterface
+class Calculator extends AbstractComponent implements CalculatorInterface
 {
     protected $calculators;
 

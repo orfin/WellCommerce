@@ -38,9 +38,5 @@
             </call>
             <tag name="layout_page" alias="Product" columns="product.xml" />
         </service>
-
-        <service id="product.subscriber" class="WellCommerce\Plugin\Product\Event\ProductEventSubscriber">
-        	<tag name="kernel.event_subscriber" />
-        </service>
     </services>
 </container>

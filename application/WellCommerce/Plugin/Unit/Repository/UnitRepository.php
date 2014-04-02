@@ -11,17 +11,17 @@
  */
 namespace WellCommerce\Plugin\Unit\Repository;
 
-use WellCommerce\Core\Repository;
+use WellCommerce\Core\Component\Repository\AbstractRepository;
 use WellCommerce\Plugin\Unit\Model\Unit;
 use WellCommerce\Plugin\Unit\Model\UnitTranslation;
 
 /**
- * Class UnitRepository
+ * Class UnitAbstractRepository
  *
- * @package WellCommerce\Plugin\Unit\Repository
+ * @package WellCommerce\Plugin\Unit\AbstractRepository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class UnitRepository extends Repository
+class UnitRepository extends AbstractRepository
 {
 
     /**

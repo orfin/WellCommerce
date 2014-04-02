@@ -31,10 +31,6 @@
             </call>
         </service>
 
-        <service id="shipping_method.subscriber" class="WellCommerce\Plugin\ShippingMethod\Event\ShippingMethodEventSubscriber">
-            <tag name="kernel.event_subscriber"/>
-        </service>
-
         <service id="shipping_method.calculator.cart_total_table" class="WellCommerce\Plugin\ShippingMethod\Calculator\CartTotalTableCalculator">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>

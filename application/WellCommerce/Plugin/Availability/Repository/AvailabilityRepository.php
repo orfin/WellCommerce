@@ -11,17 +11,17 @@
  */
 namespace WellCommerce\Plugin\Availability\Repository;
 
-use WellCommerce\Core\Repository;
+use WellCommerce\Core\Component\Repository\AbstractRepository;
 use WellCommerce\Plugin\Availability\Model\Availability;
 use WellCommerce\Plugin\Availability\Model\AvailabilityTranslation;
 
 /**
- * Class AvailabilityRepository
+ * Class AvailabilityAbstractRepository
  *
- * @package WellCommerce\Plugin\Availability\Repository
+ * @package WellCommerce\Plugin\Availability\AbstractRepository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AvailabilityRepository extends Repository
+class AvailabilityRepository extends AbstractRepository
 {
 
     /**

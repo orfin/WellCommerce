@@ -12,16 +12,16 @@
 namespace WellCommerce\Plugin\Deliverer\Repository;
 
 use WellCommerce\Core\Model\DelivererTranslation;
-use WellCommerce\Core\Repository;
+use WellCommerce\Core\Component\Repository\AbstractRepository;
 use WellCommerce\Plugin\Deliverer\Model\Deliverer;
 
 /**
- * Class DelivererRepository
+ * Class DelivererAbstractRepository
  *
- * @package WellCommerce\Plugin\Deliverer\Repository
+ * @package WellCommerce\Plugin\Deliverer\AbstractRepository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class DelivererRepository extends Repository
+class DelivererRepository extends AbstractRepository
 {
 
     /**

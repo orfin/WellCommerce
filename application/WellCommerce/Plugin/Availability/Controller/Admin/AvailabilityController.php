@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Plugin\Availability\Controller\Admin;
 
-use WellCommerce\Core\Controller\AdminController;
+use WellCommerce\Core\Component\Controller\AbstractAdminController;
 
 /**
  * Class AvailabilityController
@@ -19,7 +19,7 @@ use WellCommerce\Core\Controller\AdminController;
  * @package WellCommerce\Plugin\Availability\Controller\Admin
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AvailabilityController extends AdminController
+class AvailabilityController extends AbstractAdminController
 {
     /**
      * {@inheritdoc}
@@ -32,7 +32,7 @@ class AvailabilityController extends AdminController
     /**
      * {@inheritdoc}
      */
-    protected function getRepository()
+    public function getRepository()
     {
         return $this->get('availability.repository');
     }
@@ -40,7 +40,7 @@ class AvailabilityController extends AdminController
     /**
      * {@inheritdoc}
      */
-    protected function getForm()
+    public function getForm()
     {
         return $this->get('availability.form');
     }

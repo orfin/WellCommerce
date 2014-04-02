@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Core\Model;
 
-use WellCommerce\Core\Model;
+use WellCommerce\Core\Component\Model\AbstractModel;
 
 /**
  * Class Translation
@@ -19,7 +19,7 @@ use WellCommerce\Core\Model;
  * @package WellCommerce\Core\Model
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Translation extends Model
+class Translation extends AbstractModel
 {
 
     protected $table = 'translation';

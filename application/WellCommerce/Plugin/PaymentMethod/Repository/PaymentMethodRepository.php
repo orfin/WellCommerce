@@ -11,17 +11,17 @@
  */
 namespace WellCommerce\Plugin\PaymentMethod\Repository;
 
-use WellCommerce\Core\Repository;
+use WellCommerce\Core\Component\Repository\AbstractRepository;
 use WellCommerce\Core\Model\PaymentMethod;
 use WellCommerce\Core\Model\PaymentMethodTranslation;
 
 /**
- * Class PaymentMethodRepository
+ * Class PaymentMethodAbstractRepository
  *
- * @package WellCommerce\Plugin\PaymentMethod\Repository
+ * @package WellCommerce\Plugin\PaymentMethod\AbstractRepository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PaymentMethodRepository extends Repository
+class PaymentMethodRepository extends AbstractRepository
 {
     /**
      * Returns payment_method collection

@@ -11,17 +11,17 @@
  */
 namespace WellCommerce\Plugin\CacheManager\Repository;
 
-use WellCommerce\Core\Repository;
+use WellCommerce\Core\Component\Repository\AbstractRepository;
 use WellCommerce\Core\Model\CacheManager;
 use WellCommerce\Core\Model\CacheManagerTranslation;
 
 /**
- * Class CacheManagerRepository
+ * Class CacheManagerAbstractRepository
  *
- * @package WellCommerce\Plugin\CacheManager\Repository
+ * @package WellCommerce\Plugin\CacheManager\AbstractRepository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CacheManagerRepository extends Repository
+class CacheManagerRepository extends AbstractRepository
 {
 
     /**

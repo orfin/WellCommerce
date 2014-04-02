@@ -11,8 +11,8 @@
  */
 namespace WellCommerce\Plugin\Availability\DataGrid;
 
-use WellCommerce\Core\DataGrid,
-    WellCommerce\Core\DataGrid\DataGridInterface;
+use WellCommerce\Core\Component\DataGrid\AbstractDataGrid;
+use WellCommerce\Core\Component\DataGrid\DataGridInterface;
 use WellCommerce\Plugin\Availability\Event\AvailabilityDataGridEvent;
 
 /**
@@ -21,7 +21,7 @@ use WellCommerce\Plugin\Availability\Event\AvailabilityDataGridEvent;
  * @package WellCommerce\Plugin\Availability\DataGrid
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AvailabilityDataGrid extends DataGrid implements DataGridInterface
+class AvailabilityDataGrid extends AbstractDataGrid implements DataGridInterface
 {
     public function configure()
     {

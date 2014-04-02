@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Plugin\Currency\Controller\Admin;
 
-use WellCommerce\Core\Controller\AdminController;
+use WellCommerce\Core\Controller\AbstractAdminController;
 
 /**
  * Class CurrencyController
@@ -19,7 +19,7 @@ use WellCommerce\Core\Controller\AdminController;
  * @package WellCommerce\Plugin\Currency\Controller\Admin
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CurrencyController extends AdminController
+class CurrencyController extends AbstractAdminController
 {
     /**
      * {@inheritdoc}

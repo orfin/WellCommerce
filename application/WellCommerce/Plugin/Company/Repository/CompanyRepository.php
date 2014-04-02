@@ -11,16 +11,16 @@
  */
 namespace WellCommerce\Plugin\Company\Repository;
 
-use WellCommerce\Core\Repository;
+use WellCommerce\Core\Component\Repository\AbstractRepository;
 use WellCommerce\Plugin\Company\Model\Company;
 
 /**
- * Class CompanyRepository
+ * Class CompanyAbstractRepository
  *
- * @package WellCommerce\Plugin\Company\Repository
+ * @package WellCommerce\Plugin\Company\AbstractRepository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CompanyRepository extends Repository
+class CompanyRepository extends AbstractRepository
 {
 
     /**

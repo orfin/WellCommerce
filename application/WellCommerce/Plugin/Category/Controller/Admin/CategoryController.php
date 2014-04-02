@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Plugin\Category\Controller\Admin;
 
-use WellCommerce\Core\Controller\AdminController;
+use WellCommerce\Core\Controller\AbstractAdminController;
 
 /**
  * Class CategoryController
@@ -19,7 +19,7 @@ use WellCommerce\Core\Controller\AdminController;
  * @package WellCommerce\Plugin\Category\Controller\Admin
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CategoryController extends AdminController
+class CategoryController extends AbstractAdminController
 {
     public function indexAction()
     {
@@ -54,7 +54,7 @@ class CategoryController extends AdminController
     }
 
     /**
-     * Get Repository
+     * Get AbstractRepository
      */
     protected function getRepository()
     {

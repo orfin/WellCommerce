@@ -12,7 +12,8 @@
 namespace WellCommerce\Core\DependencyInjection\Extension;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Symfony\Component\DependencyInjection\Extension\Extension;
+use Symfony\Component\Finder\Finder;
 
 /**
  * Class PluginExtensionLoader
@@ -30,26 +31,27 @@ class PluginExtensionLoader
      */
     protected $containerBuilder;
 
-    public function __construct (ContainerBuilder $containerBuilder)
+    public function __construct(ContainerBuilder $containerBuilder)
     {
         $this->containerBuilder = $containerBuilder;
     }
 
-    public function registerExtensions ()
+    public function registerExtensions()
     {
-        $finder = $this->containerBuilder->get('finder');
-        
-        $files = $finder->files()->in(ROOTPATH . 'application')->name('*Extension.php');
-        
-        foreach ($files as $file){
+        $finder = new Finder();
+        $files  = $finder->files()->in(ROOTPATH . 'application')->name('*Extension.php');
+
+        foreach ($files as $file) {
             $namespace = $file->getRelativePath();
-            $class = $namespace . '\\' . $file->getBasename('.php');
-            
-            $extension = new $class();
-            if ($extension instanceof Extension){
+            $class     = $namespace . '\\' . $file->getBasename('.php');
+            $refClass  = new \ReflectionClass($class);
+            $interface = 'Symfony\\Component\\DependencyInjection\\Extension\\ExtensionInterface';
+            if ($refClass->isInstantiable() && $refClass->implementsInterface($interface)) {
+                $extension = new $class();
                 $this->containerBuilder->registerExtension($extension);
                 $this->containerBuilder->loadFromExtension($extension->getAlias());
             }
+
         }
     }
 }

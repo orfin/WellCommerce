@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Plugin\Contact\Controller\Admin;
 
-use WellCommerce\Core\Controller\AdminController;
+use WellCommerce\Core\Controller\AbstractAdminController;
 
 /**
  * Class ContactController
@@ -19,7 +19,7 @@ use WellCommerce\Core\Controller\AdminController;
  * @package WellCommerce\Plugin\Contact\Controller\Admin
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ContactController extends AdminController
+class ContactController extends AbstractAdminController
 {
     /**
      * {@inheritdoc}

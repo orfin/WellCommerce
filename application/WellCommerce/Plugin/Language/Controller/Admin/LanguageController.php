@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Plugin\Language\Controller\Admin;
 
-use WellCommerce\Core\Controller\AdminController;
+use WellCommerce\Core\Controller\AbstractAdminController;
 
 /**
  * Class LanguageController
@@ -19,7 +19,7 @@ use WellCommerce\Core\Controller\AdminController;
  * @package WellCommerce\Plugin\Language\Controller\Admin
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LanguageController extends AdminController
+class LanguageController extends AbstractAdminController
 {
     /**
      * {@inheritdoc}

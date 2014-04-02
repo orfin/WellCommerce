@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Plugin\Category\Model;
 
-use WellCommerce\Core\Model;
+use WellCommerce\Core\Component\Model\AbstractModel;
 
 /**
  * Class CategoryTranslation
@@ -19,7 +19,7 @@ use WellCommerce\Core\Model;
  * @package WellCommerce\Plugin\Category\Model
  * @author  Adam Piotrowski <adam@gekosale.com>
  */
-class CategoryTranslation extends Model
+class CategoryTranslation extends AbstractModel
 {
 
     /**

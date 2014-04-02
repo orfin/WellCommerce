@@ -11,17 +11,17 @@
  */
 namespace WellCommerce\Plugin\ShippingMethod\Repository;
 
-use WellCommerce\Core\Repository;
+use WellCommerce\Core\Component\Repository\AbstractRepository;
 use WellCommerce\Core\Model\ShippingMethod;
 use WellCommerce\Core\Model\ShippingMethodTranslation;
 
 /**
- * Class ShippingMethodRepository
+ * Class ShippingMethodAbstractRepository
  *
- * @package WellCommerce\Plugin\ShippingMethod\Repository
+ * @package WellCommerce\Plugin\ShippingMethod\AbstractRepository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ShippingMethodRepository extends Repository
+class ShippingMethodRepository extends AbstractRepository
 {
     /**
      * Returns shipping_method collection

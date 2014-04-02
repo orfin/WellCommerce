@@ -11,17 +11,17 @@
  */
 namespace WellCommerce\Plugin\Product\Repository;
 
-use WellCommerce\Core\Repository;
+use WellCommerce\Core\Component\Repository\AbstractRepository;
 use WellCommerce\Plugin\Product\Model\Product;
 use WellCommerce\Plugin\Product\Model\ProductTranslation;
 
 /**
- * Class ProductRepository
+ * Class ProductAbstractRepository
  *
- * @package WellCommerce\Plugin\Product\Repository
+ * @package WellCommerce\Plugin\Product\AbstractRepository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductRepository extends Repository
+class ProductRepository extends AbstractRepository
 {
     /**
      * Returns product collection

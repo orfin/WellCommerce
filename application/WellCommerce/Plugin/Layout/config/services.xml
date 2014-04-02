@@ -25,10 +25,6 @@
             </call>
         </service>
 
-        <service id="layout_theme.subscriber" class="WellCommerce\Plugin\Layout\Event\LayoutPageEventSubscriber">
-            <tag name="kernel.event_subscriber"/>
-        </service>
-
         <service id="layout_page.repository" class="WellCommerce\Plugin\Layout\Repository\LayoutPageRepository">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
@@ -45,10 +41,6 @@
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
-        </service>
-
-        <service id="layout_page.subscriber" class="WellCommerce\Plugin\Layout\Event\LayoutPageEventSubscriber">
-            <tag name="kernel.event_subscriber"/>
         </service>
 
         <service id="layout_box.repository" class="WellCommerce\Plugin\Layout\Repository\LayoutBoxRepository">
@@ -72,8 +64,5 @@
             </call>
         </service>
 
-        <service id="layout_box.subscriber" class="WellCommerce\Plugin\Layout\Event\LayoutBoxEventSubscriber">
-            <tag name="kernel.event_subscriber"/>
-        </service>
     </services>
 </container>

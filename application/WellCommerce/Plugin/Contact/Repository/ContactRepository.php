@@ -11,17 +11,17 @@
  */
 namespace WellCommerce\Plugin\Contact\Repository;
 
-use WellCommerce\Core\Repository;
+use WellCommerce\Core\Component\Repository\AbstractRepository;
 use WellCommerce\Plugin\Contact\Model\Contact;
 use WellCommerce\Plugin\Contact\Model\ContactTranslation;
 
 /**
- * Class ContactRepository
+ * Class ContactAbstractRepository
  *
- * @package WellCommerce\Plugin\Contact\Repository
+ * @package WellCommerce\Plugin\Contact\AbstractRepository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ContactRepository extends Repository
+class ContactRepository extends AbstractRepository
 {
 
     /**

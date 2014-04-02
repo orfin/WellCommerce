@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Plugin\Layout\Controller\Admin;
 
-use WellCommerce\Core\Controller\AdminController;
+use WellCommerce\Core\Controller\AbstractAdminController;
 
 /**
  * Class LayoutPageController
@@ -19,7 +19,7 @@ use WellCommerce\Core\Controller\AdminController;
  * @package WellCommerce\Plugin\LayoutPage\Controller\Admin
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LayoutPageController extends AdminController
+class LayoutPageController extends AbstractAdminController
 {
     public function indexAction()
     {

@@ -11,17 +11,18 @@
  */
 namespace WellCommerce\Plugin\Shop\Repository;
 
-use WellCommerce\Core\Repository;
+use WellCommerce\Core\Component\Repository\AbstractRepository;
+use WellCommerce\Core\Component\Repository\RepositoryInterface;
 use WellCommerce\Plugin\Shop\Model\Shop;
 use WellCommerce\Plugin\Shop\Model\ShopTranslation;
 
 /**
- * Class ShopRepository
+ * Class ShopAbstractRepository
  *
- * @package WellCommerce\Plugin\Shop\Repository
+ * @package WellCommerce\Plugin\Shop\AbstractRepository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ShopRepository extends Repository
+class ShopRepository extends AbstractRepository implements RepositoryInterface
 {
 
     /**
@@ -64,7 +65,7 @@ class ShopRepository extends Repository
      * @param      $Data
      * @param null $id
      */
-    public function save($Data, $id = null)
+    public function save(array $Data, $id = null)
     {
         $this->transaction(function () use ($Data, $id) {
 

@@ -12,11 +12,10 @@
 
 namespace WellCommerce\Core\Layout\Page;
 
-use WellCommerce\Core\Component;
+use WellCommerce\Core\Component\AbstractComponent;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Loader\DelegatingLoader;
 use Symfony\Component\Config\Loader\LoaderResolver;
-use WellCommerce\Core\Layout\LayoutRenderer;
 use WellCommerce\Core\Layout\XmlFileLoader;
 
 /**
@@ -25,7 +24,7 @@ use WellCommerce\Core\Layout\XmlFileLoader;
  * @package WellCommerce\Core\Layout\Box
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class LayoutPage extends Component
+abstract class LayoutPage extends AbstractComponent
 {
     /**
      * Returns all layout directories available in site themes

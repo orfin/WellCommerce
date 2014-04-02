@@ -17,9 +17,7 @@ $collection = new RouteCollection();
 $controller = 'WellCommerce\Plugin\Availability\Controller\Admin\AvailabilityController';
 
 $collection->add('admin.availability.index', new Route('/index', array(
-    '_controller' => $controller,
-    '_mode'       => 'admin',
-    '_action'     => 'indexAction'
+    '_controller' => 'availability.admin.controller:indexAction'
 )));
 
 $collection->add('admin.availability.add', new Route('/add', array(

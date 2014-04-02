@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Plugin\File\Controller\Admin;
 
-use WellCommerce\Core\Controller\AdminController;
+use WellCommerce\Core\Controller\AbstractAdminController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
  * @package WellCommerce\Plugin\File\Controller\Admin
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class FileController extends AdminController
+class FileController extends AbstractAdminController
 {
     public function addAction()
     {

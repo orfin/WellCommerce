@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Plugin\ShippingMethod\Controller\Admin;
 
-use WellCommerce\Core\Controller\AdminController;
+use WellCommerce\Core\Controller\AbstractAdminController;
 
 /**
  * Class ShippingMethodController
@@ -19,7 +19,7 @@ use WellCommerce\Core\Controller\AdminController;
  * @package WellCommerce\Plugin\ShippingMethod\Controller\Admin
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ShippingMethodController extends AdminController
+class ShippingMethodController extends AbstractAdminController
 {
     /**
      * {@inheritdoc}

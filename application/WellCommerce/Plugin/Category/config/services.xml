@@ -28,9 +28,5 @@
             </call>
             <tag name="layout_box.configurator" />
         </service>
-
-        <service id="category.subscriber" class="WellCommerce\Plugin\Category\Event\CategoryEventSubscriber">
-            <tag name="kernel.event_subscriber"/>
-        </service>
     </services>
 </container>

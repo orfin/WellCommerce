@@ -11,16 +11,16 @@
  */
 namespace WellCommerce\Plugin\Layout\Repository;
 
-use WellCommerce\Core\Repository;
+use WellCommerce\Core\Component\Repository\AbstractRepository;
 use WellCommerce\Plugin\Layout\Model\LayoutTheme;
 
 /**
- * Class LayoutThemeRepository
+ * Class LayoutThemeAbstractRepository
  *
- * @package WellCommerce\Plugin\LayoutTheme\Repository
+ * @package WellCommerce\Plugin\LayoutTheme\AbstractRepository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LayoutThemeRepository extends Repository
+class LayoutThemeRepository extends AbstractRepository
 {
 
     /**

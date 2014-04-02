@@ -11,17 +11,17 @@
  */
 namespace WellCommerce\Plugin\Tax\Repository;
 
-use WellCommerce\Core\Repository;
+use WellCommerce\Core\Component\Repository\AbstractRepository;
 use WellCommerce\Plugin\Tax\Model\Tax;
 use WellCommerce\Plugin\Tax\Model\TaxTranslation;
 
 /**
- * Class TaxRepository
+ * Class TaxAbstractRepository
  *
- * @package WellCommerce\Plugin\Tax\Repository
+ * @package WellCommerce\Plugin\Tax\AbstractRepository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class TaxRepository extends Repository
+class TaxRepository extends AbstractRepository
 {
     /**
      * Returns all tax rates

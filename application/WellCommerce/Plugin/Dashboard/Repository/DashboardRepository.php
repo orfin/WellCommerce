@@ -11,15 +11,15 @@
  */
 namespace WellCommerce\Plugin\Dashboard\Repository;
 
-use WellCommerce\Core\Repository;
+use WellCommerce\Core\Component\Repository\AbstractRepository;
 
 /**
- * Class DashboardRepository
+ * Class DashboardAbstractRepository
  *
- * @package WellCommerce\Plugin\Dashboard\Repository
+ * @package WellCommerce\Plugin\Dashboard\AbstractRepository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class DashboardRepository extends Repository
+class DashboardRepository extends AbstractRepository
 {
 
 }

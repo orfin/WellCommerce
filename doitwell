@@ -13,5 +13,5 @@
 
 include 'bootstrap.php';
 
-$console = new WellCommerce\Core\Console();
+$console = new \WellCommerce\Core\Console\Console();
 $console->run();

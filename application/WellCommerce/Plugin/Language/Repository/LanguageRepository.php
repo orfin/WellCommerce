@@ -12,16 +12,16 @@
 namespace WellCommerce\Plugin\Language\Repository;
 
 use Symfony\Component\Intl\Intl;
-use WellCommerce\Core\Repository;
+use WellCommerce\Core\Component\Repository\AbstractRepository;
 use WellCommerce\Plugin\Language\Model\Language;
 
 /**
- * Class LanguageRepository
+ * Class LanguageAbstractRepository
  *
- * @package WellCommerce\Plugin\Language\Repository
+ * @package WellCommerce\Plugin\Language\AbstractRepository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LanguageRepository extends Repository
+class LanguageRepository extends AbstractRepository
 {
 
     /**

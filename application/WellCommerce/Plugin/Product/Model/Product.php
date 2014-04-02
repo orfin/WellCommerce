@@ -11,8 +11,9 @@
  */
 namespace WellCommerce\Plugin\Product\Model;
 
-use WellCommerce\Core\Model;
+use WellCommerce\Core\AbstractModel;
 use WellCommerce\Core\Helper;
+use WellCommerce\Core\Model\TranslatableModelInterface;
 
 /**
  * Class Product
@@ -20,7 +21,7 @@ use WellCommerce\Core\Helper;
  * @package WellCommerce\Plugin\Product\Model
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Product extends Model implements Model\TranslatableModelInterface
+class Product extends AbstractModel implements TranslatableModelInterface
 {
     /**
      * @var string

@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Plugin\ClientGroup\Controller\Admin;
 
-use WellCommerce\Core\Controller\AdminController;
+use WellCommerce\Core\Controller\AbstractAdminController;
 
 /**
  * Class ClientGroupController
@@ -19,7 +19,7 @@ use WellCommerce\Core\Controller\AdminController;
  * @package WellCommerce\Plugin\ClientGroup\Controller\Admin
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientGroupController extends AdminController
+class ClientGroupController extends AbstractAdminController
 {
     /**
      * {@inheritdoc}

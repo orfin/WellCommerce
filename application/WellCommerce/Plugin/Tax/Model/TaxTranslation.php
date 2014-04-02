@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Plugin\Tax\Model;
 
-use WellCommerce\Core\Model;
+use WellCommerce\Core\Component\Model\AbstractModel;
 
 /**
  * Class TaxTranslation
@@ -19,7 +19,7 @@ use WellCommerce\Core\Model;
  * @package WellCommerce\Plugin\Tax\Model
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class TaxTranslation extends Model
+class TaxTranslation extends AbstractModel
 {
 
     protected $table = 'tax_translation';
