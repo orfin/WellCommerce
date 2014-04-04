@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Plugin\Language\Model;
 
-use WellCommerce\Core\Model;
+use WellCommerce\Core\Component\Model\AbstractModel;
 
 /**
  * Class Language
@@ -19,7 +19,7 @@ use WellCommerce\Core\Model;
  * @package WellCommerce\Plugin\Language\Model
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Language extends Model
+class Language extends AbstractModel
 {
 
     public $timestamps = true;

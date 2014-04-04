@@ -22,28 +22,33 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class TemplateGuesser
 {
+    const LOADER_ADMIN = 'twig.loader.admin';
+    const LOADER_FRONT = 'twig.loader.front';
+
     /**
-     * Guesses and returns the template name to render based on the controller
-     * and action names.
+     * Guesses and returns the template name
      *
-     * @param  array   $controller An array storing the controller object and action method
-     * @param  Request $request    A Request instance
-     * @param  string  $engine
+     * @param         $controller
+     * @param Request $request
+     * @param string  $engine
      *
-     * @return TemplateReference         template reference
+     * @return string
      * @throws \InvalidArgumentException
      */
-    public function guessTemplateName($controller, Request $request, $engine = 'twig')
+    public function guess($controller, Request $request, $engine = 'twig')
     {
-        print_r($controller[1]);die();
-
         $r = new \ReflectionClass($controller[0]);
-        if($r->implementsInterface('WellCommerce\\Core\\Component\\Controller\\AdminControllerInterface')){
-            echo $r->getNamespaceName();
+
+        // check if admin controller
+        if ($r->implementsInterface('WellCommerce\\Core\\Component\\Controller\\AdminControllerInterface')) {
+            if (!preg_match('/Controller\\\Admin\\\(.+)Controller$/', $r->getName(), $matches)) {
+                throw new \InvalidArgumentException(sprintf('The "%s" class does not look like an admin controller class', $controller));
+            }
+
+            return [
+                sprintf('%s/%s.%s.%s', strtolower($matches[1]), $controller[1], $request->getRequestFormat(), $engine),
+                self::LOADER_ADMIN
+            ];
         }
-
-
-
-        return new TemplateReference($bundleName, $matchController[1], $matchAction[1], $request->getRequestFormat(), $engine);
     }
 }

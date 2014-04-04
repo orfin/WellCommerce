@@ -11,6 +11,8 @@
  */
 namespace WellCommerce\Plugin\Availability\Form;
 
+use WellCommerce\Core\Component\Form\AbstractFormBuilder;
+use WellCommerce\Core\Component\Form\FormBuilderInterface;
 use WellCommerce\Core\Form;
 use WellCommerce\Plugin\Availability\Event\AvailabilityFormEvent;
 
@@ -20,7 +22,7 @@ use WellCommerce\Plugin\Availability\Event\AvailabilityFormEvent;
  * @package WellCommerce\Plugin\Availability\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AvailabilityForm extends Form
+class AvailabilityForm extends AbstractFormBuilder implements FormBuilderInterface
 {
     /**
      * Initializes availability Form

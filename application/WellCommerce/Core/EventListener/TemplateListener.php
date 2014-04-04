@@ -12,6 +12,7 @@
 namespace WellCommerce\Core\EventListener;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -31,22 +32,25 @@ use Twig_LoaderInterface as LoaderInterface;
 class TemplateListener implements EventSubscriberInterface
 {
 
+    /**
+     * @var \WellCommerce\Core\Template\TemplateGuesser
+     */
     private $guesser;
 
-    private $adminLoader;
-
-    private $frontLoader;
+    /**
+     * @var \Symfony\Component\DependencyInjection\ContainerInterface
+     */
+    private $container;
 
     /**
      * Constructor
      *
      * @param ContainerInterface $container
      */
-    public function __construct(TemplateGuesser $guesser, LoaderInterface $adminLoader, LoaderInterface $frontLoader)
+    public function __construct(ContainerInterface $container, TemplateGuesser $guesser)
     {
-        $this->guesser     = $guesser;
-        $this->adminLoader = $adminLoader;
-        $this->frontLoader = $frontLoader;
+        $this->guesser   = $guesser;
+        $this->container = $container;
     }
 
     /**
@@ -60,10 +64,12 @@ class TemplateListener implements EventSubscriberInterface
             return;
         }
 
-        $request  = $event->getRequest();
-        $guesser  = $this->container->get('template_guesser');
-        $template = $guesser->guessTemplateName($controller, $request);
-        $request->attributes->set('_template', $template);
+        $request = $event->getRequest();
+        $guesser = $this->container->get('template_guesser');
+        list($template, $loader) = $guesser->guess($controller, $request);
+
+        $request->attributes->set('_template_name', $template);
+        $request->attributes->set('_template_loader', $loader);
         $event->getRequest()->attributes->set('_template_vars', Array());
     }
 
@@ -74,38 +80,34 @@ class TemplateListener implements EventSubscriberInterface
      */
     public function onKernelView(GetResponseForControllerResultEvent $event)
     {
-        /*
-         * Fetch Request object
-         */
-        $request = $event->getRequest();
-
-        $controller       = $request->attributes->get('_controller');
-        $action           = $request->attributes->get('_action');
+        $request          = $event->getRequest();
         $controllerResult = $event->getControllerResult();
         $templateVars     = $request->attributes->get('_template_vars');
-        $mode             = $request->attributes->get('_mode');
         $parameters       = array_merge($templateVars, $controllerResult);
+        $template         = $request->attributes->get('_template_name');
+        $loader           = $this->container->get($request->attributes->get('_template_loader'));
+        $twig             = $this->container->get('twig');
 
         // immediately return controller result if raw response
         if ($controllerResult instanceof Response) {
             return $controllerResult;
         }
-        /*
-         * Always process Xajax requests
-         */
+
+        // process xajax requests before template rendering
         $this->container->get('xajax')->processRequest();
 
-        $parameters['xajax'] = $this->container->get('xajax')->getJavascript();
-
-        /*
-         * Guess template name
-         */
-        $guesser  = $this->getGuesser($mode);
-        $template = $guesser->guess($controller, $action, $event->getRequestType());
-        $this->container->get($this->engine)->setLoader($this->container->get($this->getTemplateLoaderServiceName($mode)));
-        $response = $this->container->get($this->engine)->render($template, $parameters);
-
+        $twig->setLoader($loader);
+        $response = $twig->render($template, $parameters);
         $event->setResponse(new Response($response));
+    }
+
+    /**
+     * Sets proper template loader depending on which system area is used
+     */
+    private function initLoader(Request $request)
+    {
+        $loader = $this->container->get($request->attributes->get('_template_loader'));
+        $this->container->get('twig')->setLoader($loader);
     }
 
     /**

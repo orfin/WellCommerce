@@ -35,6 +35,10 @@ class ServiceContainer extends Container
         $this->methodMap = array(
             'admin_menu.repository' => 'getAdminMenu_RepositoryService',
             'admin_menu.subscriber' => 'getAdminMenu_SubscriberService',
+            'assetic_factory' => 'getAsseticFactoryService',
+            'assetic_manager' => 'getAsseticManagerService',
+            'assetic_twig_loader' => 'getAsseticTwigLoaderService',
+            'assetic_writer' => 'getAsseticWriterService',
             'availability.admin.controller' => 'getAvailability_Admin_ControllerService',
             'availability.datagrid' => 'getAvailability_DatagridService',
             'availability.form' => 'getAvailability_FormService',
@@ -63,6 +67,7 @@ class ServiceContainer extends Container
             'currency.datagrid' => 'getCurrency_DatagridService',
             'currency.form' => 'getCurrency_FormService',
             'currency.repository' => 'getCurrency_RepositoryService',
+            'dashboard.admin.controller' => 'getDashboard_Admin_ControllerService',
             'dashboard.repository' => 'getDashboard_RepositoryService',
             'database_manager' => 'getDatabaseManagerService',
             'datagrid_renderer' => 'getDatagridRendererService',
@@ -145,6 +150,7 @@ class ServiceContainer extends Container
             'translation' => 'getTranslationService',
             'twig' => 'getTwigService',
             'twig.extension.asset' => 'getTwig_Extension_AssetService',
+            'twig.extension.assetic' => 'getTwig_Extension_AsseticService',
             'twig.extension.contact' => 'getTwig_Extension_ContactService',
             'twig.extension.datagrid' => 'getTwig_Extension_DatagridService',
             'twig.extension.debug' => 'getTwig_Extension_DebugService',
@@ -152,6 +158,7 @@ class ServiceContainer extends Container
             'twig.extension.intl' => 'getTwig_Extension_IntlService',
             'twig.extension.routing' => 'getTwig_Extension_RoutingService',
             'twig.extension.translation' => 'getTwig_Extension_TranslationService',
+            'twig.extension.xajax' => 'getTwig_Extension_XajaxService',
             'twig.loader.admin' => 'getTwig_Loader_AdminService',
             'twig.loader.front' => 'getTwig_Loader_FrontService',
             'unit.datagrid' => 'getUnit_DatagridService',
@@ -193,6 +200,62 @@ class ServiceContainer extends Container
     protected function getAdminMenu_SubscriberService()
     {
         return $this->services['admin_menu.subscriber'] = new \WellCommerce\Plugin\AdminMenu\Event\AdminMenuEventSubscriber();
+    }
+
+    /**
+     * Gets the 'assetic_factory' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Assetic\Factory\AssetFactory A Assetic\Factory\AssetFactory instance.
+     */
+    protected function getAsseticFactoryService()
+    {
+        return $this->services['assetic_factory'] = new \Assetic\Factory\AssetFactory('D:\\Git\\WellCommerce\\design');
+    }
+
+    /**
+     * Gets the 'assetic_manager' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Assetic\Factory\LazyAssetManager A Assetic\Factory\LazyAssetManager instance.
+     */
+    protected function getAsseticManagerService()
+    {
+        $this->services['assetic_manager'] = $instance = new \Assetic\Factory\LazyAssetManager($this->get('assetic_factory'));
+
+        $instance->setLoader('twig', $this->get('assetic_twig_loader'));
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'assetic_twig_loader' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Assetic\Extension\Twig\TwigFormulaLoader A Assetic\Extension\Twig\TwigFormulaLoader instance.
+     */
+    protected function getAsseticTwigLoaderService()
+    {
+        return $this->services['assetic_twig_loader'] = new \Assetic\Extension\Twig\TwigFormulaLoader($this->get('twig'));
+    }
+
+    /**
+     * Gets the 'assetic_writer' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Assetic\AssetWriter A Assetic\AssetWriter instance.
+     */
+    protected function getAsseticWriterService()
+    {
+        return $this->services['assetic_writer'] = new \Assetic\AssetWriter('D:\\Git\\WellCommerce\\design');
     }
 
     /**
@@ -661,6 +724,24 @@ class ServiceContainer extends Container
         $this->services['currency.repository'] = $instance = new \WellCommerce\Plugin\Currency\Repository\CurrencyRepository();
 
         $instance->setContainer($this);
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'dashboard.admin.controller' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Plugin\Dashboard\Controller\Admin\DashboardController A WellCommerce\Plugin\Dashboard\Controller\Admin\DashboardController instance.
+     */
+    protected function getDashboard_Admin_ControllerService()
+    {
+        $this->services['dashboard.admin.controller'] = $instance = new \WellCommerce\Plugin\Dashboard\Controller\Admin\DashboardController();
+
+        $instance->setContainer($this);
+        $instance->setRepository($this->get('dashboard.repository'));
 
         return $instance;
     }
@@ -1963,7 +2044,7 @@ class ServiceContainer extends Container
      */
     protected function getTemplateGuesserService()
     {
-        return $this->services['template_guesser'] = new \WellCommerce\Core\Template\TemplateGuesser($this);
+        return $this->services['template_guesser'] = new \WellCommerce\Core\Template\TemplateGuesser();
     }
 
     /**
@@ -1976,7 +2057,7 @@ class ServiceContainer extends Container
      */
     protected function getTemplateListenerService()
     {
-        return $this->services['template_listener'] = new \WellCommerce\Core\EventListener\TemplateListener($this);
+        return $this->services['template_listener'] = new \WellCommerce\Core\EventListener\TemplateListener($this, $this->get('template_guesser'));
     }
 
     /**
@@ -2008,8 +2089,10 @@ class ServiceContainer extends Container
         $d = $this->get('twig.extension.debug');
         $e = $this->get('twig.extension.form');
         $f = $this->get('twig.extension.asset');
-        $g = $this->get('twig.extension.datagrid');
-        $h = $this->get('twig.extension.contact');
+        $g = $this->get('twig.extension.xajax');
+        $h = $this->get('twig.extension.datagrid');
+        $i = $this->get('twig.extension.assetic');
+        $j = $this->get('twig.extension.contact');
 
         $this->services['twig'] = $instance = new \Twig_Environment($this->get('twig.loader.front'), array('cache' => 'D:\\Git\\WellCommerce\\var/cache', 'auto_reload' => true, 'autoescape' => true, 'debug' => true));
 
@@ -2020,13 +2103,8 @@ class ServiceContainer extends Container
         $instance->addExtension($e);
         $instance->addExtension($f);
         $instance->addExtension($g);
-        $instance->addExtension($a);
-        $instance->addExtension($b);
-        $instance->addExtension($c);
-        $instance->addExtension($d);
-        $instance->addExtension($e);
-        $instance->addExtension($f);
-        $instance->addExtension($g);
+        $instance->addExtension($h);
+        $instance->addExtension($i);
         $instance->addExtension($a);
         $instance->addExtension($b);
         $instance->addExtension($c);
@@ -2035,6 +2113,7 @@ class ServiceContainer extends Container
         $instance->addExtension($f);
         $instance->addExtension($g);
         $instance->addExtension($h);
+        $instance->addExtension($i);
         $instance->addExtension($a);
         $instance->addExtension($b);
         $instance->addExtension($c);
@@ -2043,6 +2122,18 @@ class ServiceContainer extends Container
         $instance->addExtension($f);
         $instance->addExtension($g);
         $instance->addExtension($h);
+        $instance->addExtension($i);
+        $instance->addExtension($j);
+        $instance->addExtension($a);
+        $instance->addExtension($b);
+        $instance->addExtension($c);
+        $instance->addExtension($d);
+        $instance->addExtension($e);
+        $instance->addExtension($f);
+        $instance->addExtension($g);
+        $instance->addExtension($h);
+        $instance->addExtension($i);
+        $instance->addExtension($j);
 
         return $instance;
     }
@@ -2058,6 +2149,19 @@ class ServiceContainer extends Container
     protected function getTwig_Extension_AssetService()
     {
         return $this->services['twig.extension.asset'] = new \WellCommerce\Core\Template\Twig\Extension\AssetExtension($this);
+    }
+
+    /**
+     * Gets the 'twig.extension.assetic' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Assetic\Extension\Twig\AsseticExtension A Assetic\Extension\Twig\AsseticExtension instance.
+     */
+    protected function getTwig_Extension_AsseticService()
+    {
+        return $this->services['twig.extension.assetic'] = new \Assetic\Extension\Twig\AsseticExtension($this->get('assetic_factory'));
     }
 
     /**
@@ -2149,6 +2253,19 @@ class ServiceContainer extends Container
     protected function getTwig_Extension_TranslationService()
     {
         return $this->services['twig.extension.translation'] = new \Symfony\Bridge\Twig\Extension\TranslationExtension($this->get('translation'));
+    }
+
+    /**
+     * Gets the 'twig.extension.xajax' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Core\Template\Twig\Extension\XajaxExtension A WellCommerce\Core\Template\Twig\Extension\XajaxExtension instance.
+     */
+    protected function getTwig_Extension_XajaxService()
+    {
+        return $this->services['twig.extension.xajax'] = new \WellCommerce\Core\Template\Twig\Extension\XajaxExtension($this);
     }
 
     /**
@@ -2392,6 +2509,7 @@ class ServiceContainer extends Container
             'template_guesser.class' => 'WellCommerce\\Core\\Template\\TemplateGuesser',
             'template_listener.class' => 'WellCommerce\\Core\\EventListener\\TemplateListener',
             'availability.admin.controller.class' => 'WellCommerce\\Plugin\\Availability\\Controller\\Admin\\AvailabilityController',
+            'dashboard.admin.controller.class' => 'WellCommerce\\Plugin\\Dashboard\\Controller\\Admin\\DashboardController',
             'deliverer.datagrid.class' => 'WellCommerce\\Plugin\\Deliverer\\DataGrid\\DelivererDataGrid',
         );
     }

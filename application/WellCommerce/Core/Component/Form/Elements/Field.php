@@ -12,9 +12,9 @@
 
 namespace WellCommerce\Core\Component\Form\Elements;
 
-use WellCommerce\Core\Component\Form\Dependency,
-    WellCommerce\Core\Form\Node,
-    WellCommerce\Core\Form\Rules\LanguageUnique;
+use WellCommerce\Core\Component\Form\Dependency;
+use WellCommerce\Core\Component\Form\Node;
+use WellCommerce\Core\Component\Form\Rules\LanguageUnique;
 
 /**
  * Class Field

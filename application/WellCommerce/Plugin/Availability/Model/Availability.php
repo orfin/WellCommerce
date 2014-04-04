@@ -12,22 +12,22 @@
 namespace WellCommerce\Plugin\Availability\Model;
 
 use WellCommerce\Core\Component\Model\AbstractModel;
+use WellCommerce\Core\Component\Model\TranslatableModelInterface;
 
 /**
- * Class AvailabilityTranslationModel
+ * Class Availability
  *
  * @package WellCommerce\Plugin\Availability\Model
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AvailabilityTranslationModel extends AbstractModel
+class Availability extends AbstractModel implements TranslatableModelInterface
 {
-
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'availability_translation';
+    protected $table = 'availability';
 
     /**
      * Indicates if the model should be timestamped.
@@ -48,12 +48,15 @@ class AvailabilityTranslationModel extends AbstractModel
      *
      * @var array
      */
-    protected $fillable = ['availability_id', 'language_id'];
+    protected $fillable = ['id'];
 
     /**
-     * The attributes that are translatable
+     * Relation with AvailabilityTranslationModel
      *
-     * @var array
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
      */
-    protected $translatable = ['name', 'description'];
+    public function translation()
+    {
+        return $this->hasMany('WellCommerce\Plugin\Availability\Model\AvailabilityTranslation');
+    }
 }

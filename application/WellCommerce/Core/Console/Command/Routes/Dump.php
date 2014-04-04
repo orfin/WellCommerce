@@ -2,6 +2,8 @@
 
 namespace WellCommerce\Core\Console\Command\Routes;
 
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\Routing\Loader\XmlFileLoader;
 use WellCommerce\Core\Console\Command\AbstractCommand;
 use Symfony\Component\Console;
 use Symfony\Component\Console\Input\InputInterface;
@@ -36,17 +38,12 @@ class Dump extends AbstractCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $rootCollection = new RouteCollection();
+        $files          = $this->getFinder()->files()->in(ROOTPATH . 'application')->name('routing.xml');
 
-        $collection = include_once(ROOTPATH . 'config' . DS . 'routing.php');
-        $rootCollection->addCollection($collection);
-
-        $files = $this->getFinder()
-            ->files()
-            ->in(ROOTPATH . 'application')
-            ->name('routing*.php')
-            ->contains('Symfony\Component\Routing\Route');
         foreach ($files as $file) {
-            $collection = include_once($file->getRealpath());
+            $locator    = new FileLocator(array($file->getPath()));
+            $loader     = new XmlFileLoader($locator);
+            $collection = $loader->load('routing.xml');
             $rootCollection->addCollection($collection);
         }
 

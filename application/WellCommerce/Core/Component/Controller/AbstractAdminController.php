@@ -19,7 +19,6 @@ namespace WellCommerce\Core\Component\Controller;
  */
 abstract class AbstractAdminController extends AbstractController implements AdminControllerInterface
 {
-
     /**
      * Default indexAction logic for all controllers
      *

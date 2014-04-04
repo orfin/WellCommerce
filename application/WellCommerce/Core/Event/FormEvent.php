@@ -12,7 +12,7 @@
 namespace WellCommerce\Core\Event;
 
 use Symfony\Component\EventDispatcher\Event;
-use WellCommerce\Core\Form\Elements\Form;
+use WellCommerce\Core\Component\Form\Elements\Form;
 
 /**
  * Class FormEvent

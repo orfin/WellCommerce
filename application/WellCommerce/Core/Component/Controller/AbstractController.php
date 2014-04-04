@@ -13,6 +13,9 @@ namespace WellCommerce\Core\Component\Controller;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use WellCommerce\Core\Component\AbstractComponent;
+use WellCommerce\Core\Component\DataGrid\DataGridInterface;
+use WellCommerce\Core\Component\Form\FormBuilderInterface;
+use WellCommerce\Core\Component\Repository\RepositoryInterface;
 
 /**
  * Class Controller
@@ -22,8 +25,20 @@ use WellCommerce\Core\Component\AbstractComponent;
  */
 abstract class AbstractController extends AbstractComponent
 {
+    /**
+     * @var Repository object
+     */
+    private $repository;
 
-    protected $parameters;
+    /**
+     * @var FormBuilder object
+     */
+    private $formBuilder;
+
+    /**
+     * @var DataGrid object
+     */
+    private $dataGrid;
 
     /**
      * Redirects user to a given url
@@ -36,5 +51,35 @@ abstract class AbstractController extends AbstractComponent
     public function redirect($url, $status = 302)
     {
         return new RedirectResponse($url, $status);
+    }
+
+    /**
+     * Sets Repository object for current controller
+     *
+     * @param RepositoryInterface $repository
+     */
+    public function setRepository(RepositoryInterface $repository)
+    {
+        $this->repository = $repository;
+    }
+
+    /**
+     * Sets FormBuilder object for current controller
+     *
+     * @param RepositoryInterface $repository
+     */
+    public function setFormBuilder(FormBuilderInterface $formBuilder)
+    {
+        $this->formBuilder = $formBuilder;
+    }
+
+    /**
+     * Sets DataGrid object for current controller
+     *
+     * @param RepositoryInterface $repository
+     */
+    public function setDataGrid(DataGridInterface $dataGrid)
+    {
+        $this->dataGrid = $dataGrid;
     }
 }

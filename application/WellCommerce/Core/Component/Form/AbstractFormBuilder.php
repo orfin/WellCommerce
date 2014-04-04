@@ -14,8 +14,7 @@ namespace WellCommerce\Core\Component\Form;
 use Closure;
 use WellCommerce\Core\Component\AbstractComponent;
 use WellCommerce\Core\Component\Form\Conditions\ConditionInterface;
-use WellCommerce\Core\Component\Form\Dependency;
-use WellCommerce\Core\Component\Form\Elements\ElementInterface;
+use WellCommerce\Core\Component\Elements\ElementInterface;
 
 /**
  * Class Form
@@ -23,18 +22,18 @@ use WellCommerce\Core\Component\Form\Elements\ElementInterface;
  * @package WellCommerce\Core
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class FormBuilder extends AbstractComponent
+class AbstractFormBuilder extends AbstractComponent
 {
     /**
      * Shortcut for adding Form
      *
      * @param array $options
      *
-     * @return Form\Elements\Form
+     * @return Elements\Form
      */
     public function addForm(array $options)
     {
-        return new Form\Elements\Form($options);
+        return new Elements\Form($options);
     }
 
     /**
@@ -42,11 +41,11 @@ class FormBuilder extends AbstractComponent
      *
      * @param array $options
      *
-     * @return Form\Elements\Fieldset
+     * @return Elements\Fieldset
      */
     public function addFieldset(array $options)
     {
-        return new Form\Elements\Fieldset($options);
+        return new Elements\Fieldset($options);
     }
 
     /**
@@ -54,13 +53,13 @@ class FormBuilder extends AbstractComponent
      *
      * @param array $options
      *
-     * @return Form\Elements\FieldsetLanguage
+     * @return Elements\FieldsetLanguage
      */
     public function addFieldsetLanguage(array $options)
     {
         $options['languages'] = $this->getLanguages();
 
-        return new Form\Elements\FieldsetLanguage($options);
+        return new Elements\FieldsetLanguage($options);
     }
 
     /**
@@ -68,13 +67,13 @@ class FormBuilder extends AbstractComponent
      *
      * @param $options
      *
-     * @return Form\Elements\Image
+     * @return Elements\Image
      */
     public function addImage($options)
     {
         $options['file_types_description'] = $this->trans('Files description');
 
-        return new Form\Elements\Image($options, $this->container);
+        return new Elements\Image($options, $this->container);
     }
 
     /**
@@ -82,13 +81,13 @@ class FormBuilder extends AbstractComponent
      *
      * @param $options
      *
-     * @return Form\Elements\LocalFile
+     * @return Elements\LocalFile
      */
     public function addLocalFile($options)
     {
         $options['file_types_description'] = $this->trans('Files description');
 
-        return new Form\Elements\LocalFile($options, $this->container);
+        return new Elements\LocalFile($options, $this->container);
     }
 
     /**
@@ -96,11 +95,11 @@ class FormBuilder extends AbstractComponent
      *
      * @param $options
      *
-     * @return Form\Elements\Tip
+     * @return Elements\Tip
      */
     public function addTip($options)
     {
-        return new Form\Elements\Tip($options);
+        return new Elements\Tip($options);
     }
 
     /**
@@ -108,11 +107,11 @@ class FormBuilder extends AbstractComponent
      *
      * @param array $options
      *
-     * @return Form\Elements\TextField
+     * @return Elements\TextField
      */
     public function addTextField(array $options)
     {
-        return new Form\Elements\TextField($options);
+        return new Elements\TextField($options);
     }
 
     /**
@@ -120,11 +119,11 @@ class FormBuilder extends AbstractComponent
      *
      * @param array $options
      *
-     * @return Form\Elements\Textarea
+     * @return Elements\Textarea
      */
     public function addTextArea(array $options)
     {
-        return new Form\Elements\Textarea($options);
+        return new Elements\Textarea($options);
     }
 
     /**
@@ -132,11 +131,11 @@ class FormBuilder extends AbstractComponent
      *
      * @param array $options
      *
-     * @return Form\Elements\RichTextEditor
+     * @return Elements\RichTextEditor
      */
     public function addRichTextEditor(array $options)
     {
-        return new Form\Elements\RichTextEditor($options);
+        return new Elements\RichTextEditor($options);
     }
 
     /**
@@ -144,13 +143,13 @@ class FormBuilder extends AbstractComponent
      *
      * @param array $options
      *
-     * @return Form\Elements\ShopSelector
+     * @return Elements\ShopSelector
      */
     public function addShopSelector(array $options)
     {
         $options['stores'] = $this->get('company.repository')->getShopsTree();
 
-        return new Form\Elements\ShopSelector($options);
+        return new Elements\ShopSelector($options);
     }
 
     /**
@@ -158,11 +157,11 @@ class FormBuilder extends AbstractComponent
      *
      * @param array $options
      *
-     * @return Form\Elements\Select
+     * @return Elements\Select
      */
     public function addSelect(array $options)
     {
-        return new Form\Elements\Select($options);
+        return new Elements\Select($options);
     }
 
     /**
@@ -170,11 +169,11 @@ class FormBuilder extends AbstractComponent
      *
      * @param array $options
      *
-     * @return Form\Elements\MultiSelect
+     * @return Elements\MultiSelect
      */
     public function addMultiSelect(array $options)
     {
-        return new Form\Elements\MultiSelect($options);
+        return new Elements\MultiSelect($options);
     }
 
     /**
@@ -182,11 +181,11 @@ class FormBuilder extends AbstractComponent
      *
      * @param array $options
      *
-     * @return Form\Elements\Checkbox
+     * @return Elements\Checkbox
      */
     public function addCheckBox(array $options)
     {
-        return new Form\Elements\Checkbox($options);
+        return new Elements\Checkbox($options);
     }
 
     /**
@@ -194,11 +193,11 @@ class FormBuilder extends AbstractComponent
      *
      * @param array $options
      *
-     * @return Form\Elements\StaticText
+     * @return Elements\StaticText
      */
     public function addStaticText(array $options)
     {
-        return new Form\Elements\StaticText($options);
+        return new Elements\StaticText($options);
     }
 
     /**
@@ -206,7 +205,7 @@ class FormBuilder extends AbstractComponent
      *
      * @param array $options
      *
-     * @return Form\Elements\Price
+     * @return Elements\Price
      */
     public function addPrice(array $options)
     {
@@ -215,47 +214,47 @@ class FormBuilder extends AbstractComponent
             $this->trans('gross'),
         ];
 
-        return new Form\Elements\Price($options);
+        return new Elements\Price($options);
     }
 
     /**
      * Shortcut for adding filter CommaToDotChanger
      *
-     * @return Form\Filters\CommaToDotChanger
+     * @return Filters\CommaToDotChanger
      */
     public function addFilterCommaToDotChanger()
     {
-        return new Form\Filters\CommaToDotChanger();
+        return new Filters\CommaToDotChanger();
     }
 
     /**
      * Shortcut for adding filter NoCode
      *
-     * @return Form\Filters\NoCode
+     * @return Filters\NoCode
      */
     public function addFilterNoCode()
     {
-        return new Form\Filters\NoCode();
+        return new Filters\NoCode();
     }
 
     /**
      * Shortcut for adding filter Trim
      *
-     * @return Form\Filters\Trim
+     * @return Filters\Trim
      */
     public function addFilterTrim()
     {
-        return new Form\Filters\Trim();
+        return new Filters\Trim();
     }
 
     /**
      * Shortcut for adding filter Secure
      *
-     * @return Form\Filters\Secure
+     * @return Filters\Secure
      */
     public function addFilterSecure()
     {
-        return new Form\Filters\Secure();
+        return new Filters\Secure();
     }
 
     /**
@@ -264,11 +263,11 @@ class FormBuilder extends AbstractComponent
      * @param $errorMessage
      * @param $pattern
      *
-     * @return Form\Rules\Format
+     * @return Rules\Format
      */
     public function addRuleFormat($errorMessage, $pattern)
     {
-        return new Form\Rules\Format($errorMessage, $pattern);
+        return new Rules\Format($errorMessage, $pattern);
     }
 
     /**
@@ -276,11 +275,11 @@ class FormBuilder extends AbstractComponent
      *
      * @param $errorMessage
      *
-     * @return Form\Rules\Email
+     * @return Rules\Email
      */
     public function addRuleEmail($errorMessage)
     {
-        return new Form\Rules\Email($errorMessage);
+        return new Rules\Email($errorMessage);
     }
 
     /**
@@ -290,11 +289,11 @@ class FormBuilder extends AbstractComponent
      * @param callable $function
      * @param array    $params
      *
-     * @return Form\Rules\Custom
+     * @return Rules\Custom
      */
     public function addRuleCustom($errorMessage, Closure $function, array $params = [])
     {
-        return new Form\Rules\Custom($errorMessage, $function, $params, $this->container);
+        return new Rules\Custom($errorMessage, $function, $params, $this->container);
     }
 
     /**
@@ -302,11 +301,11 @@ class FormBuilder extends AbstractComponent
      *
      * @param $errorMessage
      *
-     * @return Form\Rules\Required
+     * @return Rules\Required
      */
     public function addRuleRequired($errorMessage)
     {
-        return new Form\Rules\Required($errorMessage);
+        return new Rules\Required($errorMessage);
     }
 
     /**
@@ -315,11 +314,11 @@ class FormBuilder extends AbstractComponent
      * @param       $errorMessage
      * @param array $options
      *
-     * @return Form\Rules\Unique
+     * @return Rules\Unique
      */
     public function addRuleUnique($errorMessage, array $options)
     {
-        return new Form\Rules\Unique($errorMessage, $options, $this->container);
+        return new Rules\Unique($errorMessage, $options, $this->container);
     }
 
     /**
@@ -328,11 +327,11 @@ class FormBuilder extends AbstractComponent
      * @param       $errorMessage
      * @param array $options
      *
-     * @return Form\Rules\LanguageUnique
+     * @return Rules\LanguageUnique
      */
     public function addRuleLanguageUnique($errorMessage, array $options)
     {
-        return new Form\Rules\LanguageUnique($errorMessage, $options, $this->container);
+        return new Rules\LanguageUnique($errorMessage, $options, $this->container);
     }
 
     /**
@@ -357,16 +356,16 @@ class FormBuilder extends AbstractComponent
      *
      * @param array $options
      *
-     * @return Form\Elements\Tree
+     * @return Elements\Tree
      */
     public function addTree(array $options)
     {
-        return new Form\Elements\Tree($options, $this->container);
+        return new Elements\Tree($options, $this->container);
     }
 
     public function addSortableList(array $options)
     {
-        return new Form\Elements\SortableList($options, $this->container);
+        return new Elements\SortableList($options, $this->container);
     }
 
     /**
@@ -374,7 +373,7 @@ class FormBuilder extends AbstractComponent
      *
      * @param array $options
      *
-     * @return Form\Elements\RangeEditor
+     * @return Elements\RangeEditor
      */
     public function addRangeEditor(array $options)
     {
@@ -385,7 +384,7 @@ class FormBuilder extends AbstractComponent
 
         $options['vat_values'] = $this->get('tax.repository')->getAllTaxToSelect();
 
-        return new Form\Elements\RangeEditor($options);
+        return new Elements\RangeEditor($options);
     }
 
     /**
