@@ -20,18 +20,5 @@ namespace WellCommerce\Core\Component\Controller;
  */
 interface AdminControllerInterface
 {
-    /**
-     * Returns repository service for controller
-     *
-     * @return \WellCommerce\Core\Component\Repository|object
-     */
-    public function getRepository();
-
-    /**
-     * Returns Form service for controller
-     *
-     * @return \WellCommerce\Core\Component\Form|object
-     */
-    public function getForm();
 
 } 

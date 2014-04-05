@@ -16,6 +16,15 @@
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
+            <call method="setRepository">
+                <argument type="service" id="availability.repository"/>
+            </call>
+            <call method="setDataGrid">
+                <argument type="service" id="availability.datagrid"/>
+            </call>
+            <call method="setFormBuilder">
+                <argument type="service" id="availability.form"/>
+            </call>
         </service>
 
         <service id="availability.repository" class="%availability.repository.class%">

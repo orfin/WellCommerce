@@ -272,6 +272,9 @@ class ServiceContainer extends Container
         $this->services['availability.admin.controller'] = $instance = new \WellCommerce\Plugin\Availability\Controller\Admin\AvailabilityController();
 
         $instance->setContainer($this);
+        $instance->setRepository($this->get('availability.repository'));
+        $instance->setDataGrid($this->get('availability.datagrid'));
+        $instance->setFormBuilder($this->get('availability.form'));
 
         return $instance;
     }

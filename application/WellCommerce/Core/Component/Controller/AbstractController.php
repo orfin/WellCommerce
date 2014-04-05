@@ -28,17 +28,17 @@ abstract class AbstractController extends AbstractComponent
     /**
      * @var Repository object
      */
-    private $repository;
+    protected $repository;
 
     /**
      * @var FormBuilder object
      */
-    private $formBuilder;
+    protected $formBuilder;
 
     /**
      * @var DataGrid object
      */
-    private $dataGrid;
+    protected $datagrid;
 
     /**
      * Redirects user to a given url
@@ -66,7 +66,7 @@ abstract class AbstractController extends AbstractComponent
     /**
      * Sets FormBuilder object for current controller
      *
-     * @param RepositoryInterface $repository
+     * @param FormBuilderInterface $formBuilder
      */
     public function setFormBuilder(FormBuilderInterface $formBuilder)
     {
@@ -76,10 +76,10 @@ abstract class AbstractController extends AbstractComponent
     /**
      * Sets DataGrid object for current controller
      *
-     * @param RepositoryInterface $repository
+     * @param DataGridInterface $datagrid
      */
-    public function setDataGrid(DataGridInterface $dataGrid)
+    public function setDataGrid(DataGridInterface $datagrid)
     {
-        $this->dataGrid = $dataGrid;
+        $this->datagrid = $datagrid;
     }
 }

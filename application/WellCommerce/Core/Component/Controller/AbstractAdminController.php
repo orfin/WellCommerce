@@ -26,14 +26,12 @@ abstract class AbstractAdminController extends AbstractController implements Adm
      */
     public function indexAction()
     {
-        $datagrid = $this->getDataGrid();
+        $this->datagrid->configure();
 
-        $datagrid->configure();
-
-        $datagrid->init();
+        $this->datagrid->init();
 
         return [
-            'datagrid' => $datagrid,
+            'datagrid' => $this->datagrid,
         ];
     }
 
@@ -44,13 +42,13 @@ abstract class AbstractAdminController extends AbstractController implements Adm
      */
     public function addAction()
     {
-        $form = $this->getForm()->init();
+        $form = $this->formBuilder->init();
 
         if ($this->getRequest()->isMethod('POST') && $form->isValid()) {
 
-            $this->getRepository()->save($form->getSubmitValuesFlat());
+            $this->repository->save($form->getSubmitValuesFlat());
 
-            return $this->redirect($this->generateUrl($this->getDefaultRoute()));
+            return $this->redirect($this->getDefaultUrl());
         }
 
         return [
@@ -67,18 +65,32 @@ abstract class AbstractAdminController extends AbstractController implements Adm
      */
     public function editAction($id)
     {
-        $populateData = $this->getRepository()->getPopulateData($id);
-        $form         = $this->getForm()->init($populateData);
+        $populateData = $this->repository->getPopulateData($id);
+        $form         = $this->formBuilder->init($populateData);
 
         if ($this->getRequest()->isMethod('POST') && $form->isValid()) {
 
-            $this->getRepository()->save($form->getSubmitValuesFlat(), $id);
+            $this->repository->save($form->getSubmitValuesFlat(), $id);
 
-            return $this->redirect($this->generateUrl($this->getDefaultRoute()));
+            return $this->redirect($this->getDefaultUrl());
         }
 
         return [
             'form' => $form
         ];
+    }
+
+    /**
+     * Evaluates default route for current controller. All admin controllers must have indexAction
+     *
+     * @return string
+     */
+    protected function getDefaultUrl()
+    {
+        list($mode, $controller) = explode('.', $this->getRequest()->attributes->get('_route'), 3);
+
+        $url = sprintf('%s.%s.%s', $mode, $controller, 'index');
+
+        return $this->generateUrl($url);
     }
 }

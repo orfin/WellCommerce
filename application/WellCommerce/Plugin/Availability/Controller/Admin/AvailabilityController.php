@@ -21,35 +21,5 @@ use WellCommerce\Core\Component\Controller\AbstractAdminController;
  */
 class AvailabilityController extends AbstractAdminController
 {
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDataGrid()
-    {
-        return $this->get('availability.datagrid');
-    }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getRepository()
-    {
-        return $this->get('availability.repository');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getForm()
-    {
-        return $this->get('availability.form');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefaultRoute()
-    {
-        return 'admin.availability.index';
-    }
 }

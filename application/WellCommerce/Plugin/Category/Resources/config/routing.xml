@@ -7,7 +7,7 @@
         <default key="_controller">category.admin.controller:indexAction</default>
     </route>
 
-    <route id="admin.availability.add" pattern="/admin/category/add">
+    <route id="admin.category.add" pattern="/admin/category/add">
         <default key="_controller">category.admin.controller:addAction</default>
     </route>
 
