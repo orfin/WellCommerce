@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<routes xmlns="http://symfony.com/schema/routing"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+    <route id="admin.category.index" pattern="/admin/category/index">
+        <default key="_controller">category.admin.controller:indexAction</default>
+    </route>
+
+    <route id="admin.availability.add" pattern="/admin/category/add">
+        <default key="_controller">category.admin.controller:addAction</default>
+    </route>
+
+    <route id="admin.category.edit" pattern="/admin/category/edit/{id}">
+        <default key="_controller">category.admin.controller:editAction</default>
+        <default key="id"></default>
+    </route>
+
+    <route id="admin.category.duplicate" pattern="/admin/category/duplicate/{id}">
+        <default key="_controller">category.admin.controller:duplicateAction</default>
+        <default key="id"></default>
+    </route>
+</routes>

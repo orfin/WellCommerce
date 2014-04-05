@@ -14,12 +14,12 @@ namespace WellCommerce\Plugin\AdminMenu\Model;
 use WellCommerce\Core\Component\Model\AbstractModel;
 
 /**
- * Class AdminMenuModel
+ * Class AdminMenu
  *
  * @package WellCommerce\Plugin\AdminMenu\Model
  * @author  Adam Piotrowski <adam@gekosale.com>
  */
-class AdminMenuModel extends AbstractModel
+class AdminMenu extends AbstractModel
 {
 
     protected $table = 'admin_menu';

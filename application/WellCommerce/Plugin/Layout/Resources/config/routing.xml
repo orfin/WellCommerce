@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<routes xmlns="http://symfony.com/schema/routing"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+    <route id="admin.layout_theme.index" pattern="/admin/layout/theme/index">
+        <default key="_controller">layout_theme.admin.controller:indexAction</default>
+    </route>
+
+    <route id="admin.layout_theme.add" pattern="/admin/layout/theme/add">
+        <default key="_controller">layout_theme.admin.controller:addAction</default>
+    </route>
+
+    <route id="admin.layout_theme.edit" pattern="/admin/layout/theme/edit/{id}">
+        <default key="_controller">layout_theme.admin.controller:editAction</default>
+        <default key="id"></default>
+    </route>
+
+    <route id="admin.layout_box.index" pattern="/admin/layout/box/index">
+        <default key="_controller">layout_box.admin.controller:indexAction</default>
+    </route>
+
+    <route id="admin.layout_box.add" pattern="/admin/layout/box/add">
+        <default key="_controller">layout_box.admin.controller:addAction</default>
+    </route>
+
+    <route id="admin.layout_box.edit" pattern="/admin/layout/box/edit/{id}">
+        <default key="_controller">layout_box.admin.controller:editAction</default>
+        <default key="id"></default>
+    </route>
+
+    <route id="admin.layout_page.index" pattern="/admin/layout/page/index">
+        <default key="_controller">layout_page.admin.controller:indexAction</default>
+    </route>
+
+    <route id="admin.layout_page.add" pattern="/admin/layout/page/add">
+        <default key="_controller">layout_page.admin.controller:addAction</default>
+    </route>
+
+    <route id="admin.layout_page.edit" pattern="/admin/layout/page/edit/{id}">
+        <default key="_controller">layout_page.admin.controller:editAction</default>
+        <default key="id"></default>
+    </route>
+
+</routes>

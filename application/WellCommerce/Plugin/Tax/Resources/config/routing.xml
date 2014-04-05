@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<routes xmlns="http://symfony.com/schema/routing"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+    <route id="admin.tax.index" pattern="/admin/tax/index">
+        <default key="_controller">tax.admin.controller:indexAction</default>
+    </route>
+
+    <route id="admin.tax.add" pattern="/admin/tax/add">
+        <default key="_controller">tax.admin.controller:addAction</default>
+    </route>
+
+    <route id="admin.tax.edit" pattern="/admin/tax/edit/{id}">
+        <default key="_controller">tax.admin.controller:editAction</default>
+        <default key="id"></default>
+    </route>
+
+</routes>

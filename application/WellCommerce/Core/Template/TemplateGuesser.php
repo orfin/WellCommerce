@@ -11,7 +11,6 @@
  */
 namespace WellCommerce\Core\Template;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**

@@ -55,13 +55,4 @@ interface RepositoryInterface
      * @return mixed
      */
     public function save(array $Data, $id = null);
-
-    /**
-     * Returns array containing values needed to populate the form
-     *
-     * @param int $id Id
-     *
-     * @return array Populate data
-     */
-    public function getPopulateData($id);
-} 
+}

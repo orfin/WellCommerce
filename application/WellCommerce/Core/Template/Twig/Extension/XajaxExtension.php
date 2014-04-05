@@ -24,6 +24,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class XajaxExtension extends \Twig_Extension
 {
 
+    /**
+     * @var \Symfony\Component\DependencyInjection\ContainerInterface
+     */
     protected $container;
 
     /**
@@ -49,11 +52,9 @@ class XajaxExtension extends \Twig_Extension
     }
 
     /**
-     * Gets assets path
+     * Returns Xajax javascript
      *
-     * @param $path
-     *
-     * @return string
+     * @return mixed
      */
     public function getXajaxJavascript()
     {

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="category.admin.controller.class">WellCommerce\Plugin\Category\Controller\Admin\CategoryController</parameter>
+        <parameter key="category.repository.class">WellCommerce\Plugin\Category\Repository\CategoryRepository</parameter>
+        <parameter key="category.form.class">WellCommerce\Plugin\Category\Form\CategoryForm</parameter>
+        <parameter key="category.tree.class">WellCommerce\Plugin\Category\Form\CategoryTree</parameter>
+        <parameter key="category_box.layout.configurator">WellCommerce\Plugin\Category\Layout\CategoryBoxConfigurator</parameter>
+    </parameters>
+
+    <services>
+        <service id="category.admin.controller" class="%category.admin.controller.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="category.repository" class="%category.repository.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="category.form" class="%category.form.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="category.tree" class="%category.tree.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="category_box.layout.configurator" class="%category_box.layout.configurator%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="layout_box.configurator" />
+        </service>
+    </services>
+</container>

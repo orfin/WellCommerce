@@ -195,11 +195,11 @@ class ServiceContainer extends Container
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return WellCommerce\Plugin\AdminMenu\Event\AdminMenuEventSubscriber A WellCommerce\Plugin\AdminMenu\Event\AdminMenuEventSubscriber instance.
+     * @return WellCommerce\Plugin\AdminMenu\EventListener\AdminMenuListener A WellCommerce\Plugin\AdminMenu\EventListener\AdminMenuListener instance.
      */
     protected function getAdminMenu_SubscriberService()
     {
-        return $this->services['admin_menu.subscriber'] = new \WellCommerce\Plugin\AdminMenu\Event\AdminMenuEventSubscriber();
+        return $this->services['admin_menu.subscriber'] = new \WellCommerce\Plugin\AdminMenu\EventListener\AdminMenuListener($this);
     }
 
     /**
@@ -882,7 +882,7 @@ class ServiceContainer extends Container
         $instance->addSubscriberService('router.subscriber', 'Symfony\\Component\\HttpKernel\\EventListener\\RouterListener');
         $instance->addSubscriberService('locale.listener', 'Symfony\\Component\\HttpKernel\\EventListener\\LocaleListener');
         $instance->addSubscriberService('template_listener', 'WellCommerce\\Core\\EventListener\\TemplateListener');
-        $instance->addSubscriberService('admin_menu.subscriber', 'WellCommerce\\Plugin\\AdminMenu\\Event\\AdminMenuEventSubscriber');
+        $instance->addSubscriberService('admin_menu.subscriber', 'WellCommerce\\Plugin\\AdminMenu\\EventListener\\AdminMenuListener');
         $instance->addSubscriberService('language.subscriber', 'WellCommerce\\Plugin\\Language\\Event\\LanguageEventSubscriber');
         $instance->addSubscriberService('shop.subscriber', 'WellCommerce\\Plugin\\Shop\\Event\\ShopEventSubscriber');
 

@@ -24,6 +24,21 @@ use WellCommerce\Plugin\AdminMenu\Model\AdminMenu;
 class AdminMenuRepository extends AbstractRepository implements RepositoryInterface
 {
 
+    public function delete($id)
+    {
+
+    }
+
+    public function save(array $Data, $id = null)
+    {
+
+    }
+
+    public function find($id)
+    {
+
+    }
+
     /**
      * Returns a admin menu collection
      *
