@@ -51,6 +51,7 @@ class ServiceContainer extends Container
             'category.repository' => 'getCategory_RepositoryService',
             'category.tree' => 'getCategory_TreeService',
             'category_box.layout.configurator' => 'getCategoryBox_Layout_ConfiguratorService',
+            'client_group.admin.controller' => 'getClientGroup_Admin_ControllerService',
             'client_group.datagrid' => 'getClientGroup_DatagridService',
             'client_group.form' => 'getClientGroup_FormService',
             'client_group.repository' => 'getClientGroup_RepositoryService',
@@ -463,6 +464,26 @@ class ServiceContainer extends Container
         $this->services['category_box.layout.configurator'] = $instance = new \WellCommerce\Plugin\Category\Layout\CategoryBoxConfigurator();
 
         $instance->setContainer($this);
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'client_group.admin.controller' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Plugin\ClientGroup\Controller\Admin\ClientGroupController A WellCommerce\Plugin\ClientGroup\Controller\Admin\ClientGroupController instance.
+     */
+    protected function getClientGroup_Admin_ControllerService()
+    {
+        $this->services['client_group.admin.controller'] = $instance = new \WellCommerce\Plugin\ClientGroup\Controller\Admin\ClientGroupController();
+
+        $instance->setContainer($this);
+        $instance->setRepository($this->get('client_group.repository'));
+        $instance->setDataGrid($this->get('client_group.datagrid'));
+        $instance->setFormBuilder($this->get('client_group.form'));
 
         return $instance;
     }
@@ -2602,6 +2623,10 @@ class ServiceContainer extends Container
             'category.form.class' => 'WellCommerce\\Plugin\\Category\\Form\\CategoryForm',
             'category.tree.class' => 'WellCommerce\\Plugin\\Category\\Form\\CategoryTree',
             'category_box.layout.configurator' => 'WellCommerce\\Plugin\\Category\\Layout\\CategoryBoxConfigurator',
+            'client_group.admin.controller.class' => 'WellCommerce\\Plugin\\ClientGroup\\Controller\\Admin\\ClientGroupController',
+            'client_group.repository.class' => 'WellCommerce\\Plugin\\ClientGroup\\Repository\\ClientGroupRepository',
+            'client_group.datagrid.class' => 'WellCommerce\\Plugin\\ClientGroup\\DataGrid\\ClientGroupDataGrid',
+            'client_group.form.class' => 'WellCommerce\\Plugin\\ClientGroup\\Form\\ClientGroupForm',
             'dashboard.admin.controller.class' => 'WellCommerce\\Plugin\\Dashboard\\Controller\\Admin\\DashboardController',
             'deliverer.admin.controller.class' => 'WellCommerce\\Plugin\\Deliverer\\Controller\\Admin\\DelivererController',
             'deliverer.repository.class' => 'WellCommerce\\Plugin\\Deliverer\\Repository\\DelivererRepository',

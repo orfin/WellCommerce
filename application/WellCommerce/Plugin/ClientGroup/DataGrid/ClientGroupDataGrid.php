@@ -11,8 +11,8 @@
  */
 namespace WellCommerce\Plugin\ClientGroup\DataGrid;
 
-use WellCommerce\Core\DataGrid,
-    WellCommerce\Core\DataGrid\DataGridInterface;
+use WellCommerce\Core\Component\DataGrid\AbstractDataGrid;
+use WellCommerce\Core\Component\DataGrid\DataGridInterface;
 use WellCommerce\Plugin\ClientGroup\Event\ClientGroupDataGridEvent;
 
 /**
@@ -21,7 +21,7 @@ use WellCommerce\Plugin\ClientGroup\Event\ClientGroupDataGridEvent;
  * @package WellCommerce\Plugin\ClientGroup\DataGrid
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientGroupDataGrid extends DataGrid implements DataGridInterface
+class ClientGroupDataGrid extends AbstractDataGrid implements DataGridInterface
 {
     public function configure()
     {

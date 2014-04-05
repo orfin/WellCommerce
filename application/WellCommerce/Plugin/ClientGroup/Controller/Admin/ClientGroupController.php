@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Plugin\ClientGroup\Controller\Admin;
 
-use WellCommerce\Core\Controller\AbstractAdminController;
+use WellCommerce\Core\Component\Controller\AbstractAdminController;
 
 /**
  * Class ClientGroupController
@@ -21,35 +21,5 @@ use WellCommerce\Core\Controller\AbstractAdminController;
  */
 class ClientGroupController extends AbstractAdminController
 {
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDataGrid()
-    {
-        return $this->get('client_group.datagrid');
-    }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getRepository()
-    {
-        return $this->get('client_group.repository');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getForm()
-    {
-        return $this->get('client_group.form');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefaultRoute()
-    {
-        return 'admin.client_group.index';
-    }
 }

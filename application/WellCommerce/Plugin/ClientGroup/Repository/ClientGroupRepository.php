@@ -12,6 +12,7 @@
 namespace WellCommerce\Plugin\ClientGroup\Repository;
 
 use WellCommerce\Core\Component\Repository\AbstractRepository;
+use WellCommerce\Core\Component\Repository\RepositoryInterface;
 use WellCommerce\Plugin\ClientGroup\Model\ClientGroup;
 use WellCommerce\Plugin\ClientGroup\Model\ClientGroupTranslation;
 
@@ -21,7 +22,7 @@ use WellCommerce\Plugin\ClientGroup\Model\ClientGroupTranslation;
  * @package WellCommerce\Plugin\ClientGroup\AbstractRepository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientGroupRepository extends AbstractRepository
+class ClientGroupRepository extends AbstractRepository implements RepositoryInterface
 {
 
     /**
@@ -64,7 +65,7 @@ class ClientGroupRepository extends AbstractRepository
      * @param      $Data
      * @param null $id
      */
-    public function save($Data, $id = null)
+    public function save(array $Data, $id = null)
     {
         $this->transaction(function () use ($Data, $id) {
 

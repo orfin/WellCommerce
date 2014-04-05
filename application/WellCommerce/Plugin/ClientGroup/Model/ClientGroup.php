@@ -11,8 +11,9 @@
  */
 namespace WellCommerce\Plugin\ClientGroup\Model;
 
-use WellCommerce\Core\Helper;
-use WellCommerce\Core\Model;
+use WellCommerce\Core\Component\Model\AbstractModel;
+use WellCommerce\Core\Component\Model\TranslatableModelInterface;
+use WellCommerce\Core\Helper\Helper;
 
 /**
  * Class ClientGroup
@@ -20,7 +21,7 @@ use WellCommerce\Core\Model;
  * @package WellCommerce\Plugin\ClientGroup\Model
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientGroup extends Model implements Model\TranslatableModelInterface
+class ClientGroup extends AbstractModel implements TranslatableModelInterface
 {
 
     protected $table = 'client_group';

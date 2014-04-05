@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Plugin\ClientGroup\Model;
 
-use WellCommerce\Core\Model;
+use WellCommerce\Core\Component\Model\AbstractModel;
 
 /**
  * Class ClientGroupTranslation
@@ -19,7 +19,7 @@ use WellCommerce\Core\Model;
  * @package WellCommerce\Plugin\ClientGroup\Model
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientGroupTranslation extends Model
+class ClientGroupTranslation extends AbstractModel
 {
 
     /**

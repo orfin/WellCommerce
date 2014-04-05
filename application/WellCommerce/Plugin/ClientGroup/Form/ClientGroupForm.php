@@ -11,7 +11,8 @@
  */
 namespace WellCommerce\Plugin\ClientGroup\Form;
 
-use WellCommerce\Core\Form;
+use WellCommerce\Core\Component\Form\AbstractFormBuilder;
+use WellCommerce\Core\Component\Form\FormBuilderInterface;
 use WellCommerce\Plugin\ClientGroup\Event\ClientGroupFormEvent;
 
 /**
@@ -20,7 +21,7 @@ use WellCommerce\Plugin\ClientGroup\Event\ClientGroupFormEvent;
  * @package WellCommerce\Plugin\ClientGroup\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientGroupForm extends Form
+class ClientGroupForm extends AbstractFormBuilder implements FormBuilderInterface
 {
     /**
      * Initializes client_group Form
