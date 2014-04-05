@@ -3,13 +3,18 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
+    <parameters>
+        <parameter key="admin_menu.repository.class">WellCommerce\Plugin\AdminMenu\Repository\AdminMenuRepository</parameter>
+        <parameter key="admin_menu.subscriber.class">WellCommerce\Plugin\AdminMenu\EventListener\AdminMenuListener</parameter>
+    </parameters>
+
     <services>
-        <service id="admin_menu.repository" class="WellCommerce\Plugin\AdminMenu\Repository\AdminMenuRepository">
+        <service id="admin_menu.repository" class="%admin_menu.repository.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
-        <service id="admin_menu.subscriber" class="WellCommerce\Plugin\AdminMenu\EventListener\AdminMenuListener">
+        <service id="admin_menu.subscriber" class="%admin_menu.subscriber.class%">
             <argument type="service" id="service_container"/>
         	<tag name="kernel.event_subscriber" /> 
         </service>

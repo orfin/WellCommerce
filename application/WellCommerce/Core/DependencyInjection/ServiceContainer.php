@@ -46,6 +46,7 @@ class ServiceContainer extends Container
             'cache_manager' => 'getCacheManagerService',
             'cache_manager.datagrid' => 'getCacheManager_DatagridService',
             'cache_manager.repository' => 'getCacheManager_RepositoryService',
+            'category.admin.controller' => 'getCategory_Admin_ControllerService',
             'category.form' => 'getCategory_FormService',
             'category.repository' => 'getCategory_RepositoryService',
             'category.tree' => 'getCategory_TreeService',
@@ -369,6 +370,23 @@ class ServiceContainer extends Container
     protected function getCacheManager_RepositoryService()
     {
         $this->services['cache_manager.repository'] = $instance = new \WellCommerce\Plugin\CacheManager\Repository\CacheManagerRepository();
+
+        $instance->setContainer($this);
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'category.admin.controller' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Plugin\Category\Controller\Admin\CategoryController A WellCommerce\Plugin\Category\Controller\Admin\CategoryController instance.
+     */
+    protected function getCategory_Admin_ControllerService()
+    {
+        $this->services['category.admin.controller'] = $instance = new \WellCommerce\Plugin\Category\Controller\Admin\CategoryController();
 
         $instance->setContainer($this);
 
@@ -2508,7 +2526,17 @@ class ServiceContainer extends Container
             'session.storage.class' => 'Symfony\\Component\\HttpFoundation\\Session\\Storage\\NativeSessionStorage',
             'template_guesser.class' => 'WellCommerce\\Core\\Template\\TemplateGuesser',
             'template_listener.class' => 'WellCommerce\\Core\\EventListener\\TemplateListener',
+            'admin_menu.repository.class' => 'WellCommerce\\Plugin\\AdminMenu\\Repository\\AdminMenuRepository',
+            'admin_menu.subscriber.class' => 'WellCommerce\\Plugin\\AdminMenu\\EventListener\\AdminMenuListener',
             'availability.admin.controller.class' => 'WellCommerce\\Plugin\\Availability\\Controller\\Admin\\AvailabilityController',
+            'availability.repository.class' => 'WellCommerce\\Plugin\\Availability\\Repository\\AvailabilityRepository',
+            'availability.datagrid.class' => 'WellCommerce\\Plugin\\Availability\\DataGrid\\AvailabilityDataGrid',
+            'availability.form.class' => 'WellCommerce\\Plugin\\Availability\\Form\\AvailabilityForm',
+            'category.admin.controller.class' => 'WellCommerce\\Plugin\\Category\\Controller\\Admin\\CategoryController',
+            'category.repository.class' => 'WellCommerce\\Plugin\\Category\\Repository\\CategoryRepository',
+            'category.form.class' => 'WellCommerce\\Plugin\\Category\\Form\\CategoryForm',
+            'category.tree.class' => 'WellCommerce\\Plugin\\Category\\Form\\CategoryTree',
+            'category_box.layout.configurator' => 'WellCommerce\\Plugin\\Category\\Layout\\CategoryBoxConfigurator',
             'dashboard.admin.controller.class' => 'WellCommerce\\Plugin\\Dashboard\\Controller\\Admin\\DashboardController',
             'deliverer.datagrid.class' => 'WellCommerce\\Plugin\\Deliverer\\DataGrid\\DelivererDataGrid',
         );

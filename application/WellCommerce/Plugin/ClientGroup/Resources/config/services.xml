@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="client_group.repository" class="WellCommerce\Plugin\ClientGroup\Repository\ClientGroupRepository">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="client_group.datagrid" class="WellCommerce\Plugin\ClientGroup\DataGrid\ClientGroupDataGrid">
+            <call method="setRepository">
+                <argument type="service" id="client_group.repository"/>
+            </call>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="client_group.form" class="WellCommerce\Plugin\ClientGroup\Form\ClientGroupForm">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+    </services>
+</container>
