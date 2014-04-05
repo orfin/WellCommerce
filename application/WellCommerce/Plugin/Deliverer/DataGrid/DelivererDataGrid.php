@@ -11,8 +11,8 @@
  */
 namespace WellCommerce\Plugin\Deliverer\DataGrid;
 
-use WellCommerce\Core\DataGrid\AbstractDataGrid;
-use WellCommerce\Core\DataGrid\DataGridInterface;
+use WellCommerce\Core\Component\DataGrid\AbstractDataGrid;
+use WellCommerce\Core\Component\DataGrid\DataGridInterface;
 use WellCommerce\Plugin\Deliverer\Event\DelivererDataGridEvent;
 
 /**

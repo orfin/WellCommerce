@@ -72,6 +72,7 @@ class ServiceContainer extends Container
             'dashboard.repository' => 'getDashboard_RepositoryService',
             'database_manager' => 'getDatabaseManagerService',
             'datagrid_renderer' => 'getDatagridRendererService',
+            'deliverer.admin.controller' => 'getDeliverer_Admin_ControllerService',
             'deliverer.datagrid' => 'getDeliverer_DatagridService',
             'deliverer.form' => 'getDeliverer_FormService',
             'deliverer.repository' => 'getDeliverer_RepositoryService',
@@ -112,6 +113,7 @@ class ServiceContainer extends Container
             'plugin_manager.datagrid' => 'getPluginManager_DatagridService',
             'plugin_manager.form' => 'getPluginManager_FormService',
             'plugin_manager.repository' => 'getPluginManager_RepositoryService',
+            'producer.admin.controller' => 'getProducer_Admin_ControllerService',
             'producer.datagrid' => 'getProducer_DatagridService',
             'producer.form' => 'getProducer_FormService',
             'producer.repository' => 'getProducer_RepositoryService',
@@ -822,6 +824,26 @@ class ServiceContainer extends Container
     }
 
     /**
+     * Gets the 'deliverer.admin.controller' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Plugin\Deliverer\Controller\Admin\DelivererController A WellCommerce\Plugin\Deliverer\Controller\Admin\DelivererController instance.
+     */
+    protected function getDeliverer_Admin_ControllerService()
+    {
+        $this->services['deliverer.admin.controller'] = $instance = new \WellCommerce\Plugin\Deliverer\Controller\Admin\DelivererController();
+
+        $instance->setContainer($this);
+        $instance->setRepository($this->get('deliverer.repository'));
+        $instance->setDataGrid($this->get('deliverer.datagrid'));
+        $instance->setFormBuilder($this->get('deliverer.form'));
+
+        return $instance;
+    }
+
+    /**
      * Gets the 'deliverer.datagrid' service.
      *
      * This service is shared.
@@ -833,7 +855,6 @@ class ServiceContainer extends Container
     {
         $this->services['deliverer.datagrid'] = $instance = new \WellCommerce\Plugin\Deliverer\DataGrid\DelivererDataGrid();
 
-        $instance->setRepository($this->get('deliverer.repository'));
         $instance->setContainer($this);
 
         return $instance;
@@ -1497,6 +1518,26 @@ class ServiceContainer extends Container
         $this->services['plugin_manager.repository'] = $instance = new \WellCommerce\Plugin\PluginManager\Repository\PluginManagerRepository();
 
         $instance->setContainer($this);
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'producer.admin.controller' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Plugin\Producer\Controller\Admin\ProducerController A WellCommerce\Plugin\Producer\Controller\Admin\ProducerController instance.
+     */
+    protected function getProducer_Admin_ControllerService()
+    {
+        $this->services['producer.admin.controller'] = $instance = new \WellCommerce\Plugin\Producer\Controller\Admin\ProducerController();
+
+        $instance->setContainer($this);
+        $instance->setRepository($this->get('producer.repository'));
+        $instance->setDataGrid($this->get('producer.datagrid'));
+        $instance->setFormBuilder($this->get('producer.form'));
 
         return $instance;
     }
@@ -2562,7 +2603,14 @@ class ServiceContainer extends Container
             'category.tree.class' => 'WellCommerce\\Plugin\\Category\\Form\\CategoryTree',
             'category_box.layout.configurator' => 'WellCommerce\\Plugin\\Category\\Layout\\CategoryBoxConfigurator',
             'dashboard.admin.controller.class' => 'WellCommerce\\Plugin\\Dashboard\\Controller\\Admin\\DashboardController',
+            'deliverer.admin.controller.class' => 'WellCommerce\\Plugin\\Deliverer\\Controller\\Admin\\DelivererController',
+            'deliverer.repository.class' => 'WellCommerce\\Plugin\\Deliverer\\Repository\\DelivererRepository',
             'deliverer.datagrid.class' => 'WellCommerce\\Plugin\\Deliverer\\DataGrid\\DelivererDataGrid',
+            'deliverer.form.class' => 'WellCommerce\\Plugin\\Deliverer\\Form\\DelivererForm',
+            'producer.admin.controller.class' => 'WellCommerce\\Plugin\\Producer\\Controller\\Admin\\ProducerController',
+            'producer.repository.class' => 'WellCommerce\\Plugin\\Producer\\Repository\\ProducerRepository',
+            'producer.datagrid.class' => 'WellCommerce\\Plugin\\Producer\\DataGrid\\ProducerDataGrid',
+            'producer.form.class' => 'WellCommerce\\Plugin\\Producer\\Form\\ProducerForm',
             'product.admin.controller.class' => 'WellCommerce\\Plugin\\Product\\Controller\\Admin\\ProductController',
             'product.repository.class' => 'WellCommerce\\Plugin\\Product\\Repository\\ProductRepository',
             'product.datagrid.class' => 'WellCommerce\\Plugin\\Product\\DataGrid\\ProductDataGrid',

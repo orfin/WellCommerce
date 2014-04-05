@@ -11,8 +11,8 @@
  */
 namespace WellCommerce\Plugin\Producer\DataGrid;
 
-use WellCommerce\Core\DataGrid,
-    WellCommerce\Core\DataGrid\DataGridInterface;
+use WellCommerce\Core\Component\DataGrid\AbstractDataGrid;
+use WellCommerce\Core\Component\DataGrid\DataGridInterface;
 use WellCommerce\Plugin\Producer\Event\ProducerDataGridEvent;
 
 /**
@@ -21,7 +21,7 @@ use WellCommerce\Plugin\Producer\Event\ProducerDataGridEvent;
  * @package WellCommerce\Plugin\Producer\DataGrid
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProducerDataGrid extends DataGrid implements DataGridInterface
+class ProducerDataGrid extends AbstractDataGrid implements DataGridInterface
 {
     /**
      * {@inheritdoc}

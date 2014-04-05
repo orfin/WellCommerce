@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Plugin\Producer\Controller\Admin;
 
-use WellCommerce\Core\Controller\AbstractAdminController;
+use WellCommerce\Core\Component\Controller\AbstractAdminController;
 
 /**
  * Class ProducerController
@@ -21,35 +21,5 @@ use WellCommerce\Core\Controller\AbstractAdminController;
  */
 class ProducerController extends AbstractAdminController
 {
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDataGrid()
-    {
-        return $this->get('producer.datagrid');
-    }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getRepository()
-    {
-        return $this->get('producer.repository');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getForm()
-    {
-        return $this->get('producer.form');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefaultRoute()
-    {
-        return 'admin.producer.index';
-    }
 }

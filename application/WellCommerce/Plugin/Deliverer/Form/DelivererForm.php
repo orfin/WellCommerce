@@ -11,7 +11,8 @@
  */
 namespace WellCommerce\Plugin\Deliverer\Form;
 
-use WellCommerce\Core\Form;
+use WellCommerce\Core\Component\Form\AbstractFormBuilder;
+use WellCommerce\Core\Component\Form\FormBuilderInterface;
 use WellCommerce\Plugin\Deliverer\Event\DelivererFormEvent;
 
 /**
@@ -20,7 +21,7 @@ use WellCommerce\Plugin\Deliverer\Event\DelivererFormEvent;
  * @package WellCommerce\Plugin\Deliverer\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class DelivererForm extends Form
+class DelivererForm extends AbstractFormBuilder implements FormBuilderInterface
 {
 
     public function init($delivererData = [])

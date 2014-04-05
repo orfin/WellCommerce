@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Plugin\Deliverer\Controller\Admin;
 
-use WellCommerce\Core\Controller\AbstractAdminController;
+use WellCommerce\Core\Component\Controller\AbstractAdminController;
 
 /**
  * Class DelivererController
@@ -21,35 +21,5 @@ use WellCommerce\Core\Controller\AbstractAdminController;
  */
 class DelivererController extends AbstractAdminController
 {
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDataGrid()
-    {
-        return $this->get('deliverer.datagrid');
-    }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getRepository()
-    {
-        return $this->get('deliverer.repository');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getForm()
-    {
-        return $this->get('deliverer.form');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefaultRoute()
-    {
-        return 'admin.deliverer.index';
-    }
 }

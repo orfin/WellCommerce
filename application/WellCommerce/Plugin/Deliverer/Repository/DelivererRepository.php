@@ -11,9 +11,10 @@
  */
 namespace WellCommerce\Plugin\Deliverer\Repository;
 
-use WellCommerce\Core\Model\DelivererTranslation;
+use WellCommerce\Core\Component\Repository\RepositoryInterface;
 use WellCommerce\Core\Component\Repository\AbstractRepository;
 use WellCommerce\Plugin\Deliverer\Model\Deliverer;
+use WellCommerce\Plugin\Deliverer\Model\DelivererTranslation;
 
 /**
  * Class DelivererAbstractRepository
@@ -21,7 +22,7 @@ use WellCommerce\Plugin\Deliverer\Model\Deliverer;
  * @package WellCommerce\Plugin\Deliverer\AbstractRepository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class DelivererRepository extends AbstractRepository
+class DelivererRepository extends AbstractRepository implements RepositoryInterface
 {
 
     /**
@@ -64,7 +65,7 @@ class DelivererRepository extends AbstractRepository
      * @param      $Data
      * @param null $id
      */
-    public function save($Data, $id = null)
+    public function save(array $Data, $id = null)
     {
         $this->transaction(function () use ($Data, $id) {
             $deliverer = Deliverer::firstOrNew([
