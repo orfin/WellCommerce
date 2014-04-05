@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Plugin\Layout\Controller\Admin;
 
-use WellCommerce\Core\Controller\AbstractAdminController;
+use WellCommerce\Core\Component\Controller\AbstractAdminController;
 
 /**
  * Class LayoutPageController
@@ -32,15 +32,15 @@ class LayoutPageController extends AbstractAdminController
 
     public function editAction($id)
     {
-        $populateData = $this->getRepository()->getPopulateData($id);
-        $form         = $this->getForm()->init($populateData);
+        $populateData = $this->repository->getPopulateData($id);
+        $form         = $this->formBuilder->init($populateData);
         $tree         = $this->getTree()->init();
 
         if ($this->getRequest()->isMethod('POST') && $form->isValid()) {
 
-            $this->getRepository()->save($form->getSubmitValuesFlat(), $id);
+            $this->repository->save($form->getSubmitValuesGrouped(), $id);
 
-            return $this->redirect($this->generateUrl($this->getDefaultRoute()));
+            return $this->redirect($this->getDefaultUrl());
         }
 
         return [
@@ -55,29 +55,5 @@ class LayoutPageController extends AbstractAdminController
     protected function getTree()
     {
         return $this->get('layout_page.tree');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getRepository()
-    {
-        return $this->get('layout_page.repository');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getForm()
-    {
-        return $this->get('layout_page.form');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefaultRoute()
-    {
-        return 'admin.layout_page.index';
     }
 }

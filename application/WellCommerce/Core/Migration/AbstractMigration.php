@@ -9,15 +9,17 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Core;
+namespace WellCommerce\Core\Migration;
+
+use WellCommerce\Core\DependencyInjection\ServiceContainer;
 
 /**
- * Class Migration
+ * Class AbstractMigration
  *
- * @package WellCommerce\Core
+ * @package WellCommerce\Core\Migration
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class Migration
+abstract class AbstractMigration
 {
 
     /**

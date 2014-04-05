@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Plugin\Layout\Controller\Admin;
 
-use WellCommerce\Core\Controller\AbstractAdminController;
+use WellCommerce\Core\Component\Controller\AbstractAdminController;
 
 /**
  * Class LayoutBoxController
@@ -21,68 +21,5 @@ use WellCommerce\Core\Controller\AbstractAdminController;
  */
 class LayoutBoxController extends AbstractAdminController
 {
-    public function addAction()
-    {
-        $form = $this->getForm()->init();
 
-        if ($this->getRequest()->isMethod('POST') && $form->isValid()) {
-
-            $this->getRepository()->save($form->getSubmitValuesGrouped());
-
-            return $this->redirect($this->generateUrl($this->getDefaultRoute()));
-        }
-
-        return [
-            'form' => $form
-        ];
-    }
-
-    public function editAction($id)
-    {
-        $populateData = $this->getRepository()->getPopulateData($id);
-        $form         = $this->getForm()->init($populateData);
-
-        if ($this->getRequest()->isMethod('POST') && $form->isValid()) {
-
-            $this->getRepository()->save($form->getSubmitValuesGrouped(), $id);
-
-            return $this->redirect($this->generateUrl($this->getDefaultRoute()));
-        }
-
-        return [
-            'form' => $form
-        ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDataGrid()
-    {
-        return $this->get('layout_box.datagrid');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getRepository()
-    {
-        return $this->get('layout_box.repository');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getForm()
-    {
-        return $this->get('layout_box.form');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefaultRoute()
-    {
-        return 'admin.layout_box.index';
-    }
 }

@@ -11,7 +11,8 @@
  */
 namespace WellCommerce\Plugin\Layout\Form;
 
-use WellCommerce\Core\Form;
+use WellCommerce\Core\Component\Form\AbstractFormBuilder;
+use WellCommerce\Core\Component\Form\FormBuilderInterface;
 use WellCommerce\Plugin\Layout\Event\LayoutPageFormEvent;
 
 /**
@@ -20,7 +21,7 @@ use WellCommerce\Plugin\Layout\Event\LayoutPageFormEvent;
  * @package WellCommerce\Plugin\LayoutPage\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LayoutPageForm extends Form
+class LayoutPageForm extends AbstractFormBuilder implements FormBuilderInterface
 {
     /**
      * Initializes layout_theme Form
@@ -32,7 +33,7 @@ class LayoutPageForm extends Form
     public function init($layout_themeData = [])
     {
         $form = $this->addForm([
-            'name' => 'layout_theme',
+            'name' => 'layout_columns',
         ]);
 
         $requiredData = $form->addChild($this->addFieldset([

@@ -12,7 +12,6 @@
 namespace WellCommerce\Core\Helper;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use xajax;
 use xajaxResponse;
 
 /**
@@ -122,9 +121,10 @@ class XajaxManager
         $objResponse = new xajaxResponse();
         $response    = call_user_func($this->callbacks[$name], $request);
         if (!is_array($response)) {
-            $response = Array();
+            $response = [];
         }
-        $objResponse->script("{$responseHandler}(" . json_encode($response) . ")");
+        $script = sprintf('%s(%s)', $responseHandler, json_encode($response));
+        $objResponse->script($script);
 
         return $objResponse;
     }

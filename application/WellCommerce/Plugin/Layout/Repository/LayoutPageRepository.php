@@ -12,8 +12,8 @@
 namespace WellCommerce\Plugin\Layout\Repository;
 
 use WellCommerce\Core\Component\Repository\AbstractRepository;
-use WellCommerce\Core\Model\LayoutPage;
-use WellCommerce\Core\Model\LayoutPageTranslation;
+use WellCommerce\Core\Component\Repository\RepositoryInterface;
+use WellCommerce\Plugin\Layout\Model\LayoutColumn;
 
 /**
  * Class LayoutPageAbstractRepository
@@ -21,7 +21,7 @@ use WellCommerce\Core\Model\LayoutPageTranslation;
  * @package WellCommerce\Plugin\LayoutPage\AbstractRepository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LayoutPageRepository extends AbstractRepository
+class LayoutPageRepository extends AbstractRepository implements RepositoryInterface
 {
 
     /**
@@ -31,7 +31,7 @@ class LayoutPageRepository extends AbstractRepository
      */
     public function all()
     {
-        return LayoutPage::all();
+        return LayoutColumn::with('box')->get();
     }
 
     /**
@@ -43,7 +43,7 @@ class LayoutPageRepository extends AbstractRepository
      */
     public function find($id)
     {
-        return LayoutPage::with('translation')->findOrFail($id);
+        return LayoutColumn::with('box')->findOrFail($id);
     }
 
     /**
@@ -64,7 +64,7 @@ class LayoutPageRepository extends AbstractRepository
      * @param      $Data
      * @param null $id
      */
-    public function save($Data, $id = null)
+    public function save(array $Data, $id = null)
     {
         $this->transaction(function () use ($Data, $id) {
 
@@ -98,6 +98,7 @@ class LayoutPageRepository extends AbstractRepository
      */
     public function getPopulateData($id)
     {
+        return [];
         $layout_themeData = $this->find($id);
         $populateData     = [];
         $accessor         = $this->getPropertyAccessor();

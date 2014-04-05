@@ -11,8 +11,11 @@
  */
 namespace WellCommerce\Plugin\Layout\Form;
 
-use Symfony\Component\EventDispatcher\GenericEvent;
-use WellCommerce\Core\Form;
+use WellCommerce\Core\Component\Form\AbstractFormBuilder;
+use WellCommerce\Core\Component\Form\Conditions\Equals;
+use WellCommerce\Core\Component\Form\Dependency;
+use WellCommerce\Core\Component\Form\FormBuilderInterface;
+use WellCommerce\Core\Component\Form\Option;
 use WellCommerce\Plugin\Layout\Event\LayoutBoxFormEvent;
 
 /**
@@ -21,17 +24,17 @@ use WellCommerce\Plugin\Layout\Event\LayoutBoxFormEvent;
  * @package WellCommerce\Plugin\LayoutBox\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LayoutBoxForm extends Form
+class LayoutBoxForm extends AbstractFormBuilder implements FormBuilderInterface
 {
     private $types = [];
     private $configurators = [];
 
     /**
-     * Initializes layout_box Form
+     * Initializes Form
      *
      * @param array $layoutBoxData
      *
-     * @return Form\Elements\Form
+     * @return mixed|\WellCommerce\Core\Component\Form\Elements\Form
      */
     public function init($layoutBoxData = [])
     {
@@ -76,7 +79,7 @@ class LayoutBoxForm extends Form
                 'name'         => $configurator->getFieldSetName(),
                 'label'        => $this->trans('Settings'),
                 'dependencies' => [
-                    $this->addDependency(Form\Dependency::SHOW, $alias, new Form\Conditions\Equals($configurator->getAlias()), null)
+                    $this->addDependency(Dependency::SHOW, $alias, new Equals($configurator->getAlias()), null)
                 ]
             ]));
 
@@ -84,8 +87,8 @@ class LayoutBoxForm extends Form
                 'name'    => 'header',
                 'label'   => $this->trans('Show box header'),
                 'options' => [
-                    new Form\Option('0', $this->trans('Yes')),
-                    new Form\Option('1', $this->trans('No'))
+                    new Option('0', $this->trans('Yes')),
+                    new Option('1', $this->trans('No'))
                 ]
             ]));
 
@@ -93,10 +96,10 @@ class LayoutBoxForm extends Form
                 'name'    => 'enable',
                 'label'   => $this->trans('Box visible'),
                 'options' => [
-                    new Form\Option('0', 'for all clients'),
-                    new Form\Option('1', 'only for logged-in ones'),
-                    new Form\Option('2', 'only for logged-out ones'),
-                    new Form\Option('3', 'for no one')
+                    new Option('0', 'for all clients'),
+                    new Option('1', 'only for logged-in ones'),
+                    new Option('2', 'only for logged-out ones'),
+                    new Option('3', 'for no one')
                 ]
             ]));
 
@@ -109,7 +112,7 @@ class LayoutBoxForm extends Form
 
         $populateData = $event->getPopulateData();
 
-        if(!empty($populateData)){
+        if (!empty($populateData)) {
             $form->populate($populateData);
         }
 
@@ -130,7 +133,7 @@ class LayoutBoxForm extends Form
      */
     private function getLayoutBoxTypes()
     {
-        $types     = [];
+        $types = [];
         foreach ($this->configurators as $id => $configurator) {
             $types[$id] = sprintf('%s - %s', $id, $this->trans($configurator->getName()));
         }

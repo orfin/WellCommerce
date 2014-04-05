@@ -93,14 +93,17 @@ class ServiceContainer extends Container
             'language.form' => 'getLanguage_FormService',
             'language.repository' => 'getLanguage_RepositoryService',
             'language.subscriber' => 'getLanguage_SubscriberService',
+            'layout_box.admin.controller' => 'getLayoutBox_Admin_ControllerService',
             'layout_box.datagrid' => 'getLayoutBox_DatagridService',
             'layout_box.form' => 'getLayoutBox_FormService',
             'layout_box.repository' => 'getLayoutBox_RepositoryService',
             'layout_manager' => 'getLayoutManagerService',
+            'layout_page.admin.controller' => 'getLayoutPage_Admin_ControllerService',
             'layout_page.form' => 'getLayoutPage_FormService',
             'layout_page.repository' => 'getLayoutPage_RepositoryService',
             'layout_page.tree' => 'getLayoutPage_TreeService',
             'layout_renderer' => 'getLayoutRendererService',
+            'layout_theme.admin.controller' => 'getLayoutTheme_Admin_ControllerService',
             'layout_theme.datagrid' => 'getLayoutTheme_DatagridService',
             'layout_theme.form' => 'getLayoutTheme_FormService',
             'layout_theme.repository' => 'getLayoutTheme_RepositoryService',
@@ -1182,6 +1185,26 @@ class ServiceContainer extends Container
     }
 
     /**
+     * Gets the 'layout_box.admin.controller' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Plugin\Layout\Controller\Admin\LayoutBoxController A WellCommerce\Plugin\Layout\Controller\Admin\LayoutBoxController instance.
+     */
+    protected function getLayoutBox_Admin_ControllerService()
+    {
+        $this->services['layout_box.admin.controller'] = $instance = new \WellCommerce\Plugin\Layout\Controller\Admin\LayoutBoxController();
+
+        $instance->setContainer($this);
+        $instance->setRepository($this->get('layout_box.repository'));
+        $instance->setDataGrid($this->get('layout_box.datagrid'));
+        $instance->setFormBuilder($this->get('layout_box.form'));
+
+        return $instance;
+    }
+
+    /**
      * Gets the 'layout_box.datagrid' service.
      *
      * This service is shared.
@@ -1260,6 +1283,25 @@ class ServiceContainer extends Container
     }
 
     /**
+     * Gets the 'layout_page.admin.controller' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Plugin\Layout\Controller\Admin\LayoutPageController A WellCommerce\Plugin\Layout\Controller\Admin\LayoutPageController instance.
+     */
+    protected function getLayoutPage_Admin_ControllerService()
+    {
+        $this->services['layout_page.admin.controller'] = $instance = new \WellCommerce\Plugin\Layout\Controller\Admin\LayoutPageController();
+
+        $instance->setContainer($this);
+        $instance->setRepository($this->get('layout_page.repository'));
+        $instance->setFormBuilder($this->get('layout_page.form'));
+
+        return $instance;
+    }
+
+    /**
      * Gets the 'layout_page.form' service.
      *
      * This service is shared.
@@ -1324,6 +1366,26 @@ class ServiceContainer extends Container
 
         $instance->setContainer($this);
         $instance->setLayoutBoxRepository($this->get('layout_box.repository'));
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'layout_theme.admin.controller' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Plugin\Layout\Controller\Admin\LayoutThemeController A WellCommerce\Plugin\Layout\Controller\Admin\LayoutThemeController instance.
+     */
+    protected function getLayoutTheme_Admin_ControllerService()
+    {
+        $this->services['layout_theme.admin.controller'] = $instance = new \WellCommerce\Plugin\Layout\Controller\Admin\LayoutThemeController();
+
+        $instance->setContainer($this);
+        $instance->setRepository($this->get('layout_theme.repository'));
+        $instance->setDataGrid($this->get('layout_theme.datagrid'));
+        $instance->setFormBuilder($this->get('layout_theme.form'));
 
         return $instance;
     }
@@ -2653,6 +2715,18 @@ class ServiceContainer extends Container
             'deliverer.form.class' => 'WellCommerce\\Plugin\\Deliverer\\Form\\DelivererForm',
             'home_page.front.controller.class' => 'WellCommerce\\Plugin\\HomePage\\Controller\\Front\\HomePageController',
             'home_page.layout.class' => 'WellCommerce\\Plugin\\HomePage\\Layout\\HomePageLayoutPage',
+            'layout_theme.repository.class' => 'WellCommerce\\Plugin\\Layout\\Repository\\LayoutThemeRepository',
+            'layout_theme.datagrid.class' => 'WellCommerce\\Plugin\\Layout\\DataGrid\\LayoutThemeDataGrid',
+            'layout_theme.form.class' => 'WellCommerce\\Plugin\\Layout\\Form\\LayoutThemeForm',
+            'layout_theme.admin.controller.class' => 'WellCommerce\\Plugin\\Layout\\Controller\\Admin\\LayoutThemeController',
+            'layout_page.repository.class' => 'WellCommerce\\Plugin\\Layout\\Repository\\LayoutPageRepository',
+            'layout_page.tree.class' => 'WellCommerce\\Plugin\\Layout\\Form\\LayoutPageTree',
+            'layout_page.form.class' => 'WellCommerce\\Plugin\\Layout\\Form\\LayoutPageForm',
+            'layout_page.admin.controller.class' => 'WellCommerce\\Plugin\\Layout\\Controller\\Admin\\LayoutPageController',
+            'layout_box.repository.class' => 'WellCommerce\\Plugin\\Layout\\Repository\\LayoutBoxRepository',
+            'layout_box.datagrid.class' => 'WellCommerce\\Plugin\\Layout\\DataGrid\\LayoutBoxDataGrid',
+            'layout_box.form.class' => 'WellCommerce\\Plugin\\Layout\\Form\\LayoutBoxForm',
+            'layout_box.admin.controller.class' => 'WellCommerce\\Plugin\\Layout\\Controller\\Admin\\LayoutBoxController',
             'producer.admin.controller.class' => 'WellCommerce\\Plugin\\Producer\\Controller\\Admin\\ProducerController',
             'producer.repository.class' => 'WellCommerce\\Plugin\\Producer\\Repository\\ProducerRepository',
             'producer.datagrid.class' => 'WellCommerce\\Plugin\\Producer\\DataGrid\\ProducerDataGrid',

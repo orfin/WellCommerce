@@ -14,10 +14,9 @@ namespace WellCommerce\Plugin\Product\Layout;
 
 use WellCommerce\Core\Layout\Page\LayoutPage;
 use WellCommerce\Core\Layout\Page\LayoutPageInterface;
-use WellCommerce\Core\Layout\XmlFileLoader;
 
 /**
- * Class ProductPageLayoutConfigurator
+ * Class ProductLayoutPage
  *
  * @package WellCommerce\Plugin\Product\Configurator\Box
  * @author  Adam Piotrowski <adam@wellcommerce.org>

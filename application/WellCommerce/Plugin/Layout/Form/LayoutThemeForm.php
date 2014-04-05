@@ -11,7 +11,8 @@
  */
 namespace WellCommerce\Plugin\Layout\Form;
 
-use WellCommerce\Core\Form;
+use WellCommerce\Core\Component\Form\AbstractFormBuilder;
+use WellCommerce\Core\Component\Form\FormBuilderInterface;
 use WellCommerce\Plugin\Layout\Event\LayoutThemeFormEvent;
 
 /**
@@ -20,16 +21,16 @@ use WellCommerce\Plugin\Layout\Event\LayoutThemeFormEvent;
  * @package WellCommerce\Plugin\LayoutTheme\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LayoutThemeForm extends Form
+class LayoutThemeForm extends AbstractFormBuilder implements FormBuilderInterface
 {
     /**
-     * Initializes layout_theme Form
+     * Initializes Form
      *
      * @param array $layout_themeData
      *
-     * @return Form\Elements\Form
+     * @return mixed|\WellCommerce\Core\Component\Form\Elements\Form
      */
-    public function init($layout_themeData = [])
+    public function init($layoutThemeData = [])
     {
         $form = $this->addForm([
             'name' => 'layout_theme',
@@ -57,7 +58,7 @@ class LayoutThemeForm extends Form
             $this->addFilterSecure()
         ]);
 
-        $event = new LayoutThemeFormEvent($form, $layout_themeData);
+        $event = new LayoutThemeFormEvent($form, $layoutThemeData);
 
         $this->getDispatcher()->dispatch(LayoutThemeFormEvent::FORM_INIT_EVENT, $event);
 

@@ -12,12 +12,11 @@
 namespace WellCommerce\Core\Console\Command\Migration;
 
 use Symfony\Component\Finder\Finder;
+use WellCommerce\Core\Component\Model\Migration;
 use WellCommerce\Core\Console\Command\AbstractCommand;
 use Symfony\Component\Console;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use WellCommerce\Core\Migration\MigrationInterface;
-use WellCommerce\Core\Model\Migration;
 
 /**
  * Class Up

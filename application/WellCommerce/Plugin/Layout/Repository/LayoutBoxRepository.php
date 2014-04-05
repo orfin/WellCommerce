@@ -12,6 +12,7 @@
 namespace WellCommerce\Plugin\Layout\Repository;
 
 use WellCommerce\Core\Component\Repository\AbstractRepository;
+use WellCommerce\Core\Component\Repository\RepositoryInterface;
 use WellCommerce\Plugin\Layout\Model\LayoutBox;
 use WellCommerce\Plugin\Layout\Model\LayoutBoxSettings;
 
@@ -21,7 +22,7 @@ use WellCommerce\Plugin\Layout\Model\LayoutBoxSettings;
  * @package WellCommerce\Plugin\LayoutBox\AbstractRepository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LayoutBoxRepository extends AbstractRepository
+class LayoutBoxRepository extends AbstractRepository implements RepositoryInterface
 {
 
     /**
@@ -64,7 +65,7 @@ class LayoutBoxRepository extends AbstractRepository
      * @param      $Data
      * @param null $id
      */
-    public function save($Data, $id = null)
+    public function save(array $Data, $id = null)
     {
         $this->transaction(function () use ($Data, $id) {
 

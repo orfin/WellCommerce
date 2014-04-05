@@ -9,9 +9,7 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Core\Model;
-
-use WellCommerce\Core\Model;
+namespace WellCommerce\Core\Component\Model;
 
 /**
  * Class Migration
@@ -19,10 +17,10 @@ use WellCommerce\Core\Model;
  * @package WellCommerce\Core\Model
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Migration extends Model
+class Migration extends AbstractModel
 {
 
-    protected $table = 'Migration';
+    protected $table = 'migration';
 
     public $timestamps = false;
 

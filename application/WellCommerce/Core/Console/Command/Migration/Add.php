@@ -55,7 +55,7 @@ class Add extends AbstractCommand
 
     private function startClass($class)
     {
-        $baseClass     = 'Migration';
+        $baseClass     = 'AbstractMigration';
         $namespaceLine = "namespace WellCommerce\\Core\\Migration;\n";
 
 

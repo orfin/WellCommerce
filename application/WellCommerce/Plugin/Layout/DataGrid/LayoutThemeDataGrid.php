@@ -11,8 +11,8 @@
  */
 namespace WellCommerce\Plugin\Layout\DataGrid;
 
-use WellCommerce\Core\DataGrid,
-    WellCommerce\Core\DataGrid\DataGridInterface;
+use WellCommerce\Core\Component\DataGrid\AbstractDataGrid;
+use WellCommerce\Core\Component\DataGrid\DataGridInterface;
 use WellCommerce\Plugin\Layout\Event\LayoutThemeDataGridEvent;
 
 /**
@@ -21,7 +21,7 @@ use WellCommerce\Plugin\Layout\Event\LayoutThemeDataGridEvent;
  * @package WellCommerce\Plugin\LayoutTheme\DataGrid
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LayoutThemeDataGrid extends DataGrid implements DataGridInterface
+class LayoutThemeDataGrid extends AbstractDataGrid implements DataGridInterface
 {
     public function configure()
     {

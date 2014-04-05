@@ -11,11 +11,9 @@
  */
 namespace WellCommerce\Plugin\Layout\Form;
 
-use WellCommerce\Core\Form;
-use WellCommerce\Plugin\Category\Event\CategoryFormEvent;
+use WellCommerce\Core\Component\Form\AbstractFormBuilder;
+use WellCommerce\Core\Component\Form\FormBuilderInterface;
 use WellCommerce\Plugin\Layout\Event\LayoutPageFormEvent;
-use Symfony\Component\EventDispatcher\Event;
-use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * Class LayoutPageTree
@@ -23,7 +21,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  * @package WellCommerce\Plugin\Category\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LayoutPageTree extends Form
+class LayoutPageTree extends AbstractFormBuilder implements FormBuilderInterface
 {
     /**
      * Fetches all registered layout pages
@@ -32,13 +30,13 @@ class LayoutPageTree extends Form
      */
     private function getTreeItems()
     {
-        $pages = $this->getLayoutManager()->getLayoutPageConfigurators();
+        $themes = $this->get('layout_theme.repository')->all();
 
         $items = [];
 
-        foreach ($pages as $id => $configurator) {
-            $items[$id] = [
-                'name'   => $this->trans($configurator->getName()) . ' <small>(' . $id . ')</small>',
+        foreach ($themes as $theme) {
+            $items[$theme->id] = [
+                'name'   => $theme->name . ' <small>(' . $theme->folder . ')</small>',
                 'parent' => null,
                 'weight' => 0
             ];
@@ -60,7 +58,7 @@ class LayoutPageTree extends Form
 
         $form->addChild($this->addTree([
             'name'               => 'layout_page',
-            'label'              => $this->trans('Choose page to edit'),
+            'label'              => $this->trans('Choose site theme to edit'),
             'sortable'           => false,
             'selectable'         => false,
             'clickable'          => true,
@@ -76,9 +74,9 @@ class LayoutPageTree extends Form
         $form->AddFilter($this->addFilterNoCode());
         $form->AddFilter($this->addFilterSecure());
 
-        $event = new CategoryFormEvent($form, $layoutPageData);
+        $event = new LayoutPageFormEvent($form, $layoutPageData);
 
-        $this->getDispatcher()->dispatch(CategoryFormEvent::TREE_INIT_EVENT, $event);
+        $this->getDispatcher()->dispatch(LayoutPageFormEvent::TREE_INIT_EVENT, $event);
 
         $form->Populate($event->getPopulateData());
 
