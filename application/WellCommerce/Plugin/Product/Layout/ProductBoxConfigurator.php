@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Plugin\Product\Layout;
 
-use WellCommerce\Core\Form;
+use WellCommerce\Core\Component\Form\Elements\Fieldset;
 use WellCommerce\Core\Layout\Box\LayoutBoxConfigurator;
 use WellCommerce\Core\Layout\Box\LayoutBoxConfiguratorInterface;
 
@@ -59,7 +59,7 @@ class ProductBoxConfigurator extends LayoutBoxConfigurator implements LayoutBoxC
     /**
      * {@inheritdoc}
      */
-    public function addConfigurationFields(Form\Elements\Fieldset $fieldset)
+    public function addConfigurationFields(Fieldset $fieldset)
     {
         $fieldset->addChild($this->addTip([
             'tip' => '<p>' . $this->trans('This layout box does not need to be configured. All done :).') . '</p>'

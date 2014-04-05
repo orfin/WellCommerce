@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Core\Layout\Box;
 
-use WellCommerce\Core\Form\Elements\Fieldset;
+use WellCommerce\Core\Component\Form\Elements\Fieldset;
 
 /**
  * Interface LayoutBoxConfiguratorInterface

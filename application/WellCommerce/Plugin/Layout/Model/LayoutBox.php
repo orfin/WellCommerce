@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Plugin\Layout\Model;
 
-use WellCommerce\Core\Model;
+use WellCommerce\Core\Component\Model\AbstractModel;
 
 /**
  * Class LayoutBox
@@ -19,7 +19,7 @@ use WellCommerce\Core\Model;
  * @package WellCommerce\Plugin\LayoutBox\Model
  * @author  Adam Piotrowski <adam@gekosale.com>
  */
-class LayoutBox extends Model
+class LayoutBox extends AbstractModel
 {
 
     protected $table = 'layout_box';

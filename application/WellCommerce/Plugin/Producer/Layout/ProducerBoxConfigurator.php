@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Plugin\Producer\Layout;
 
-use WellCommerce\Core\Form;
+use WellCommerce\Core\Component\Form\Elements\Fieldset;
 use WellCommerce\Core\Layout\Box\LayoutBoxConfigurator;
 use WellCommerce\Core\Layout\Box\LayoutBoxConfiguratorInterface;
 
@@ -58,7 +58,7 @@ class ProducerBoxConfigurator extends LayoutBoxConfigurator implements LayoutBox
     /**
      * {@inheritdoc}
      */
-    public function addConfigurationFields(Form\Elements\Fieldset $fieldset)
+    public function addConfigurationFields(Fieldset $fieldset)
     {
         return false;
     }

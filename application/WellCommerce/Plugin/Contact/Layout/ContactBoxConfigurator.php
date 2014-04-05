@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Plugin\Contact\Layout;
 
-use WellCommerce\Core\Form;
+use WellCommerce\Core\Component\Form\Elements\Fieldset;
 use WellCommerce\Core\Layout\Box\LayoutBoxConfigurator;
 use WellCommerce\Core\Layout\Box\LayoutBoxConfiguratorInterface;
 
@@ -59,7 +59,7 @@ class ContactBoxConfigurator extends LayoutBoxConfigurator implements LayoutBoxC
     /**
      * {@inheritdoc}
      */
-    public function addConfigurationFields(Form\Elements\Fieldset $fieldset)
+    public function addConfigurationFields(Fieldset $fieldset)
     {
         $fieldset->addChild($this->addTip([
             'tip' => '<p>' . sprintf($this->trans('Choose configuration options related to box "%s".'), $this->getAlias()) . '</p>'

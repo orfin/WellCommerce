@@ -11,14 +11,31 @@
  */
 namespace WellCommerce\Core\Component\Controller;
 
+use WellCommerce\Core\Layout\Page\LayoutPageInterface;
+
 /**
- * Class AbstractFrontendController
+ * Class AbstractFrontController
  *
  * @package WellCommerce\Core\Component\Controller
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractFrontendController extends AbstractController
+abstract class AbstractFrontController extends AbstractController
 {
+
+    /**
+     * @var
+     */
+    protected $layout;
+
+    /**
+     * Sets Layout manager for controller
+     *
+     * @param LayoutPageInterface $layout
+     */
+    public function setLayout(LayoutPageInterface $layout)
+    {
+        $this->layout = $layout;
+    }
 
     /**
      * As box settings are passed as another key in forwarded requests

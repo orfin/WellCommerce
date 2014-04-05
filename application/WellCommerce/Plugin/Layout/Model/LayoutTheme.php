@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Plugin\Layout\Model;
 
-use WellCommerce\Core\Model;
+use WellCommerce\Core\Component\Model\AbstractModel;
 
 /**
  * Class LayoutTheme
@@ -19,7 +19,7 @@ use WellCommerce\Core\Model;
  * @package WellCommerce\Plugin\LayoutTheme\Model
  * @author  Adam Piotrowski <adam@gekosale.com>
  */
-class LayoutTheme extends Model
+class LayoutTheme extends AbstractModel
 {
 
     protected $table = 'layout_theme';

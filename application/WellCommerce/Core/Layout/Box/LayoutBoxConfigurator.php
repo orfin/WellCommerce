@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Core\Layout\Box;
 
-use Symfony\Component\DomCrawler\Form;
+use WellCommerce\Core\Component\Form\AbstractFormBuilder;
 
 /**
  * Class LayoutBoxConfigurator
@@ -20,7 +20,7 @@ use Symfony\Component\DomCrawler\Form;
  * @package WellCommerce\Core\Layout\Box
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class LayoutBoxConfigurator extends Form
+abstract class LayoutBoxConfigurator extends AbstractFormBuilder
 {
     /**
      * Replaces dots with dashes in alias and returns FieldSet name

@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Core\Layout;
 
-use WellCommerce\Core\Component;
+use WellCommerce\Core\Component\AbstractComponent;
 use WellCommerce\Core\Layout\Box\LayoutBox;
 use WellCommerce\Core\Layout\Column\LayoutColumnCollection;
 use WellCommerce\Plugin\Layout\Repository\LayoutBoxRepository;
@@ -23,7 +23,7 @@ use WellCommerce\Plugin\Layout\Repository\LayoutBoxRepository;
  * @package WellCommerce\Core\Layout
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LayoutRenderer extends Component
+class LayoutRenderer extends AbstractComponent
 {
     /**
      * @var array

@@ -9,10 +9,10 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Core;
+namespace WellCommerce\Core\Layout;
 
+use WellCommerce\Core\Component\AbstractComponent;
 use WellCommerce\Core\Layout\Box\LayoutBoxConfiguratorInterface;
-use WellCommerce\Core\Layout\LayoutRenderer;
 use WellCommerce\Core\Layout\Page\LayoutPageInterface;
 
 /**

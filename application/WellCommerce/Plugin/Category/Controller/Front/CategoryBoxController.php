@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Plugin\Category\Controller\Frontend;
 
-use WellCommerce\Core\Controller\FrontendController;
 use Symfony\Component\HttpFoundation\Response;
+use WellCommerce\Core\Component\Controller\AbstractFrontController;
 
 /**
  * Class CategoryBoxController
@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Response;
  * @package WellCommerce\Plugin\Category\Controller\Frontend
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CategoryBoxController extends FrontendController
+class CategoryBoxController extends AbstractFrontController
 {
 
     public function indexAction()

@@ -85,6 +85,7 @@ class ServiceContainer extends Container
             'finder' => 'getFinderService',
             'form_helper' => 'getFormHelperService',
             'helper' => 'getHelperService',
+            'home_page.front.controller' => 'getHomePage_Front_ControllerService',
             'home_page.layout' => 'getHomePage_LayoutService',
             'image_gallery' => 'getImageGalleryService',
             'kernel' => 'getKernelService',
@@ -1049,6 +1050,24 @@ class ServiceContainer extends Container
     }
 
     /**
+     * Gets the 'home_page.front.controller' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Plugin\HomePage\Controller\Front\HomePageController A WellCommerce\Plugin\HomePage\Controller\Front\HomePageController instance.
+     */
+    protected function getHomePage_Front_ControllerService()
+    {
+        $this->services['home_page.front.controller'] = $instance = new \WellCommerce\Plugin\HomePage\Controller\Front\HomePageController();
+
+        $instance->setContainer($this);
+        $instance->setLayout($this->get('home_page.layout'));
+
+        return $instance;
+    }
+
+    /**
      * Gets the 'home_page.layout' service.
      *
      * This service is shared.
@@ -1220,11 +1239,11 @@ class ServiceContainer extends Container
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return WellCommerce\Core\LayoutManager A WellCommerce\Core\LayoutManager instance.
+     * @return WellCommerce\Core\Layout\LayoutManager A WellCommerce\Core\Layout\LayoutManager instance.
      */
     protected function getLayoutManagerService()
     {
-        $this->services['layout_manager'] = $instance = new \WellCommerce\Core\LayoutManager();
+        $this->services['layout_manager'] = $instance = new \WellCommerce\Core\Layout\LayoutManager();
 
         $instance->setContainer($this);
         $instance->addLayoutBoxConfigurator($this->get('category_box.layout.configurator'));
@@ -2594,7 +2613,7 @@ class ServiceContainer extends Container
             'form_helper.class' => 'WellCommerce\\Core\\Form',
             'helper.class' => 'WellCommerce\\Core\\Helper',
             'kernel.class' => 'Symfony\\Component\\HttpKernel\\DependencyInjection\\ContainerAwareHttpKernel',
-            'layout_manager.class' => 'WellCommerce\\Core\\LayoutManager',
+            'layout_manager.class' => 'WellCommerce\\Core\\Layout\\LayoutManager',
             'layout_renderer.class' => 'WellCommerce\\Core\\Layout\\LayoutRenderer',
             'image_gallery.class' => 'WellCommerce\\Core\\Uploader\\ImageGallery',
             'translation.class' => 'WellCommerce\\Core\\Translation\\Translation',
@@ -2632,6 +2651,8 @@ class ServiceContainer extends Container
             'deliverer.repository.class' => 'WellCommerce\\Plugin\\Deliverer\\Repository\\DelivererRepository',
             'deliverer.datagrid.class' => 'WellCommerce\\Plugin\\Deliverer\\DataGrid\\DelivererDataGrid',
             'deliverer.form.class' => 'WellCommerce\\Plugin\\Deliverer\\Form\\DelivererForm',
+            'home_page.front.controller.class' => 'WellCommerce\\Plugin\\HomePage\\Controller\\Front\\HomePageController',
+            'home_page.layout.class' => 'WellCommerce\\Plugin\\HomePage\\Layout\\HomePageLayoutPage',
             'producer.admin.controller.class' => 'WellCommerce\\Plugin\\Producer\\Controller\\Admin\\ProducerController',
             'producer.repository.class' => 'WellCommerce\\Plugin\\Producer\\Repository\\ProducerRepository',
             'producer.datagrid.class' => 'WellCommerce\\Plugin\\Producer\\DataGrid\\ProducerDataGrid',

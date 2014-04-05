@@ -27,6 +27,7 @@ class LayoutColumnCollection implements \IteratorAggregate, \Countable
         return new \ArrayIterator($this->columns);
     }
 
+
     public function count()
     {
         return count($this->columns);
