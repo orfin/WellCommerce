@@ -12,6 +12,7 @@
 namespace WellCommerce\Plugin\Product\Repository;
 
 use WellCommerce\Core\Component\Repository\AbstractRepository;
+use WellCommerce\Core\Component\Repository\RepositoryInterface;
 use WellCommerce\Plugin\Product\Model\Product;
 use WellCommerce\Plugin\Product\Model\ProductTranslation;
 
@@ -21,7 +22,7 @@ use WellCommerce\Plugin\Product\Model\ProductTranslation;
  * @package WellCommerce\Plugin\Product\AbstractRepository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductRepository extends AbstractRepository
+class ProductRepository extends AbstractRepository implements RepositoryInterface
 {
     /**
      * Returns product collection

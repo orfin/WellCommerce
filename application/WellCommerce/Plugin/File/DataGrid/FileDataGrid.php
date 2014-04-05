@@ -11,8 +11,8 @@
  */
 namespace WellCommerce\Plugin\File\DataGrid;
 
-use WellCommerce\Core\DataGrid,
-    WellCommerce\Core\DataGrid\DataGridInterface;
+use WellCommerce\Core\Component\DataGrid\AbstractDataGrid;
+use WellCommerce\Core\Component\DataGrid\DataGridInterface;
 use WellCommerce\Plugin\File\Event\FileDataGridEvent;
 
 /**
@@ -21,7 +21,7 @@ use WellCommerce\Plugin\File\Event\FileDataGridEvent;
  * @package WellCommerce\Plugin\File\DataGrid
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class FileDataGrid extends DataGrid implements DataGridInterface
+class FileDataGrid extends AbstractDataGrid implements DataGridInterface
 {
     /**
      * {@inheritdoc}

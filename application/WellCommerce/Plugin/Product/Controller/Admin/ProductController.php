@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Plugin\Product\Controller\Admin;
 
-use WellCommerce\Core\Controller\AbstractAdminController;
+use WellCommerce\Core\Component\Controller\AbstractAdminController;
 
 /**
  * Class ProductController
@@ -21,35 +21,5 @@ use WellCommerce\Core\Controller\AbstractAdminController;
  */
 class ProductController extends AbstractAdminController
 {
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDataGrid()
-    {
-        return $this->get('product.datagrid');
-    }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getRepository()
-    {
-        return $this->get('product.repository');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getForm()
-    {
-        return $this->get('product.form');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefaultRoute()
-    {
-        return 'admin.product.index';
-    }
 }

@@ -348,7 +348,7 @@ class AbstractFormBuilder extends AbstractComponent
             $options['0'] = $this->trans('Choose option');
         }
 
-        return Form\Option::Make($options);
+        return Option::Make($options);
     }
 
     /**

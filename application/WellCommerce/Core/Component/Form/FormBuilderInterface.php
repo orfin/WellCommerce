@@ -20,5 +20,10 @@ namespace WellCommerce\Core\Component\Form;
  */
 interface FormBuilderInterface
 {
-
+    /**
+     * Initializes the form
+     *
+     * @return mixed
+     */
+    public function init();
 } 

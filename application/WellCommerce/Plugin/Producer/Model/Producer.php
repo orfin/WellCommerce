@@ -11,7 +11,8 @@
  */
 namespace WellCommerce\Plugin\Producer\Model;
 
-use WellCommerce\Core\Model;
+use WellCommerce\Core\Component\Model\AbstractModel;
+use WellCommerce\Core\Component\Model\TranslatableModelInterface;
 
 /**
  * Class Producer
@@ -19,7 +20,7 @@ use WellCommerce\Core\Model;
  * @package WellCommerce\Core\Model
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Producer extends Model implements Model\TranslatableModelInterface
+class Producer extends AbstractModel implements TranslatableModelInterface
 {
     /**
      * @var string

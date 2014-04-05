@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Plugin\Currency\Model;
 
-use WellCommerce\Core\Model;
+use WellCommerce\Core\Component\Model\AbstractModel;
 
 /**
  * Class Currency
@@ -19,7 +19,7 @@ use WellCommerce\Core\Model;
  * @package WellCommerce\Plugin\Currency\Model
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Currency extends Model
+class Currency extends AbstractModel
 {
     protected $table = 'currency';
     public $timestamps = true;

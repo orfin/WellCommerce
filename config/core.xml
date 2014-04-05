@@ -16,7 +16,7 @@
         <parameter key="kernel.class">Symfony\Component\HttpKernel\DependencyInjection\ContainerAwareHttpKernel</parameter>
         <parameter key="layout_manager.class">WellCommerce\Core\LayoutManager</parameter>
         <parameter key="layout_renderer.class">WellCommerce\Core\Layout\LayoutRenderer</parameter>
-        <parameter key="image_gallery.class">WellCommerce\Core\ImageGallery</parameter>
+        <parameter key="image_gallery.class">WellCommerce\Core\Uploader\ImageGallery</parameter>
         <parameter key="translation.class">WellCommerce\Core\Translation\Translation</parameter>
         <parameter key="xajax_manager.class">WellCommerce\Core\Helper\XajaxManager</parameter>
         <parameter key="uploader.class">WellCommerce\Core\Uploader</parameter>

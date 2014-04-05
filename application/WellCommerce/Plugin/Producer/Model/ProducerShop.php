@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Plugin\Producer\Model;
 
-use WellCommerce\Core\Model;
+use WellCommerce\Core\Component\Model\AbstractModel;
 
 /**
  * Class ProducerShop
@@ -19,7 +19,7 @@ use WellCommerce\Core\Model;
  * @package WellCommerce\Plugin\Producer\Model
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProducerShop extends Model
+class ProducerShop extends AbstractModel
 {
 
     protected $table = 'producer_shop';

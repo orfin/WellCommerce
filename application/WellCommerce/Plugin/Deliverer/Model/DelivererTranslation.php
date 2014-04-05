@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Plugin\Deliverer\Model;
 
-use WellCommerce\Core\Model;
+use WellCommerce\Core\Component\Model\AbstractModel;
 
 /**
  * Class DelivererTranslation
@@ -19,7 +19,7 @@ use WellCommerce\Core\Model;
  * @package WellCommerce\Plugin\Deliverer\Model
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class DelivererTranslation extends Model
+class DelivererTranslation extends AbstractModel
 {
 
     public $timestamps = true;

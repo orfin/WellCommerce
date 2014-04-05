@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Plugin\File\Model;
 
-use WellCommerce\Core\Model;
+use WellCommerce\Core\Component\Model\AbstractModel;
 
 /**
  * Class File
@@ -19,7 +19,7 @@ use WellCommerce\Core\Model;
  * @package WellCommerce\Plugin\File\Model
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class File extends Model
+class File extends AbstractModel
 {
     public $timestamps = true;
     protected $table = 'file';

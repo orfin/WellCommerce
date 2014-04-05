@@ -118,6 +118,7 @@ class ServiceContainer extends Container
             'producer_box.layout.configurator' => 'getProducerBox_Layout_ConfiguratorService',
             'producer_list_box.layout.configurator' => 'getProducerListBox_Layout_ConfiguratorService',
             'producer_page.layout' => 'getProducerPage_LayoutService',
+            'product.admin.controller' => 'getProduct_Admin_ControllerService',
             'product.datagrid' => 'getProduct_DatagridService',
             'product.form' => 'getProduct_FormService',
             'product.repository' => 'getProduct_RepositoryService',
@@ -1028,11 +1029,11 @@ class ServiceContainer extends Container
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return WellCommerce\Core\ImageGallery A WellCommerce\Core\ImageGallery instance.
+     * @return WellCommerce\Core\Uploader\ImageGallery A WellCommerce\Core\Uploader\ImageGallery instance.
      */
     protected function getImageGalleryService()
     {
-        $this->services['image_gallery'] = $instance = new \WellCommerce\Core\ImageGallery();
+        $this->services['image_gallery'] = $instance = new \WellCommerce\Core\Uploader\ImageGallery();
 
         $instance->setContainer($this);
         $instance->setPaths(array('original' => 'upload/gallery/original', 'cache' => 'upload/gallery/cache'));
@@ -1599,6 +1600,26 @@ class ServiceContainer extends Container
         $this->services['producer_page.layout'] = $instance = new \WellCommerce\Plugin\Producer\Layout\ProducerLayoutPage();
 
         $instance->setContainer($this);
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'product.admin.controller' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Plugin\Product\Controller\Admin\ProductController A WellCommerce\Plugin\Product\Controller\Admin\ProductController instance.
+     */
+    protected function getProduct_Admin_ControllerService()
+    {
+        $this->services['product.admin.controller'] = $instance = new \WellCommerce\Plugin\Product\Controller\Admin\ProductController();
+
+        $instance->setContainer($this);
+        $instance->setRepository($this->get('product.repository'));
+        $instance->setDataGrid($this->get('product.datagrid'));
+        $instance->setFormBuilder($this->get('product.form'));
 
         return $instance;
     }
@@ -2513,7 +2534,7 @@ class ServiceContainer extends Container
             'kernel.class' => 'Symfony\\Component\\HttpKernel\\DependencyInjection\\ContainerAwareHttpKernel',
             'layout_manager.class' => 'WellCommerce\\Core\\LayoutManager',
             'layout_renderer.class' => 'WellCommerce\\Core\\Layout\\LayoutRenderer',
-            'image_gallery.class' => 'WellCommerce\\Core\\ImageGallery',
+            'image_gallery.class' => 'WellCommerce\\Core\\Uploader\\ImageGallery',
             'translation.class' => 'WellCommerce\\Core\\Translation\\Translation',
             'xajax_manager.class' => 'WellCommerce\\Core\\Helper\\XajaxManager',
             'uploader.class' => 'WellCommerce\\Core\\Uploader',
@@ -2542,6 +2563,12 @@ class ServiceContainer extends Container
             'category_box.layout.configurator' => 'WellCommerce\\Plugin\\Category\\Layout\\CategoryBoxConfigurator',
             'dashboard.admin.controller.class' => 'WellCommerce\\Plugin\\Dashboard\\Controller\\Admin\\DashboardController',
             'deliverer.datagrid.class' => 'WellCommerce\\Plugin\\Deliverer\\DataGrid\\DelivererDataGrid',
+            'product.admin.controller.class' => 'WellCommerce\\Plugin\\Product\\Controller\\Admin\\ProductController',
+            'product.repository.class' => 'WellCommerce\\Plugin\\Product\\Repository\\ProductRepository',
+            'product.datagrid.class' => 'WellCommerce\\Plugin\\Product\\DataGrid\\ProductDataGrid',
+            'product.form.class' => 'WellCommerce\\Plugin\\Product\\Form\\ProductForm',
+            'product_box.layout.configurator.class' => 'WellCommerce\\Plugin\\Product\\Layout\\ProductBoxConfigurator',
+            'product_page.layout.class' => 'WellCommerce\\Plugin\\Product\\Layout\\ProductLayoutPage',
         );
     }
 }

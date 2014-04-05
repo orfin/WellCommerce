@@ -11,7 +11,10 @@
  */
 namespace WellCommerce\Plugin\Product\Form;
 
-use WellCommerce\Core\Form;
+use WellCommerce\Core\Component\Form\AbstractFormBuilder;
+use WellCommerce\Core\Component\Form\Elements\ElementInterface;
+use WellCommerce\Core\Component\Form\Elements\Tip;
+use WellCommerce\Core\Component\Form\FormBuilderInterface;
 use WellCommerce\Plugin\Product\Event\ProductFormEvent;
 
 /**
@@ -20,7 +23,7 @@ use WellCommerce\Plugin\Product\Event\ProductFormEvent;
  * @package WellCommerce\Plugin\Product\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductForm extends Form
+class ProductForm extends AbstractFormBuilder implements FormBuilderInterface
 {
     public function init($productData = [])
     {
@@ -322,14 +325,14 @@ class ProductForm extends Form
 
         $photosPane->addChild($this->addTip([
             'tip'       => '<p align="center">' . $this->trans('Please choose files from library or upload them from disk') . '</p>',
-            'direction' => Form\Elements\Tip::DOWN
+            'direction' => Tip::DOWN
         ]));
 
         $photosPane->addChild($this->addImage([
             'name'       => 'photo',
             'label'      => $this->trans('Photos'),
             'repeat_min' => 0,
-            'repeat_max' => Form\Elements\ElementInterface::INFINITE,
+            'repeat_max' => ElementInterface::INFINITE,
             'limit'      => 1000,
             'upload_url' => $this->generateUrl('admin.file.add'),
             'main_id'    => isset($productData['photos_pane']['main']) ? $productData['photos_pane']['main'] : ''

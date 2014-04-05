@@ -21,6 +21,5 @@ use WellCommerce\Core\Event\DataGridEvent;
  */
 final class ProductDataGridEvent extends DataGridEvent
 {
-
     const DATAGRID_INIT_EVENT = 'product.datagrid.init';
 }

@@ -114,10 +114,12 @@ abstract class AbstractDataGrid extends AbstractComponent
         $this->query->orderBy($request['order_by'], $request['order_dir']);
 
         $connection = $this->getDb()->getConnection();
+
         foreach ($this->columns as $key => $column) {
             $col = $connection->raw(sprintf('%s AS %s', $column['source'], $key));
             $this->query->addSelect($col);
         }
+
         foreach ($request['where'] as $where) {
             $column   = $this->columns[$where['column']]['source'];
             $operator = $this->getOperator($where['operator']);
@@ -134,11 +136,9 @@ abstract class AbstractDataGrid extends AbstractComponent
             }
 
         }
-
         $result = $this->query->get();
         $total  = count($result);
         $result = $this->processRows($result);
-
         return [
             'data_id'       => isset($request['id']) ? $request['id'] : '',
             'rows_num'      => $total,

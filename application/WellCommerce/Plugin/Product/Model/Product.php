@@ -11,9 +11,9 @@
  */
 namespace WellCommerce\Plugin\Product\Model;
 
-use WellCommerce\Core\AbstractModel;
-use WellCommerce\Core\Helper;
-use WellCommerce\Core\Model\TranslatableModelInterface;
+use WellCommerce\Core\Component\Model\AbstractModel;
+use WellCommerce\Core\Component\Model\TranslatableModelInterface;
+use WellCommerce\Core\Helper\Helper;
 
 /**
  * Class Product

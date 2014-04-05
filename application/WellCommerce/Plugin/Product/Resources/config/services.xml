@@ -3,14 +3,39 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
+    <parameters>
+        <parameter key="product.admin.controller.class">WellCommerce\Plugin\Product\Controller\Admin\ProductController</parameter>
+        <parameter key="product.repository.class">WellCommerce\Plugin\Product\Repository\ProductRepository</parameter>
+        <parameter key="product.datagrid.class">WellCommerce\Plugin\Product\DataGrid\ProductDataGrid</parameter>
+        <parameter key="product.form.class">WellCommerce\Plugin\Product\Form\ProductForm</parameter>
+        <parameter key="product_box.layout.configurator.class">WellCommerce\Plugin\Product\Layout\ProductBoxConfigurator</parameter>
+        <parameter key="product_page.layout.class">WellCommerce\Plugin\Product\Layout\ProductLayoutPage</parameter>
+    </parameters>
+    
     <services>
-        <service id="product.repository" class="WellCommerce\Plugin\Product\Repository\ProductRepository">
+
+        <service id="product.admin.controller" class="%product.admin.controller.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setRepository">
+                <argument type="service" id="product.repository"/>
+            </call>
+            <call method="setDataGrid">
+                <argument type="service" id="product.datagrid"/>
+            </call>
+            <call method="setFormBuilder">
+                <argument type="service" id="product.form"/>
+            </call>
+        </service>
+        
+        <service id="product.repository" class="%product.repository.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
         </service>
         
-        <service id="product.datagrid" class="WellCommerce\Plugin\Product\DataGrid\ProductDataGrid">
+        <service id="product.datagrid" class="%product.datagrid.class%">
             <call method="setRepository">
                 <argument type="service" id="product.repository" />
             </call>
@@ -19,20 +44,20 @@
             </call>
         </service>
         
-        <service id="product.form" class="WellCommerce\Plugin\Product\Form\ProductForm">
+        <service id="product.form" class="%product.form.class%">
         	<call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
         </service>
 
-        <service id="product_box.layout.configurator" class="WellCommerce\Plugin\Product\Layout\ProductBoxConfigurator">
+        <service id="product_box.layout.configurator" class="%product_box.layout.configurator.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
             <tag name="layout_box.configurator" />
         </service>
 
-        <service id="product_page.layout" class="WellCommerce\Plugin\Product\Layout\ProductLayoutPage">
+        <service id="product_page.layout" class="%product_page.layout.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

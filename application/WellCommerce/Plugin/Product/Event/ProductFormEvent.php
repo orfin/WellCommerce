@@ -21,6 +21,5 @@ use WellCommerce\Core\Event\FormEvent;
  */
 final class ProductFormEvent extends FormEvent
 {
-
     const FORM_INIT_EVENT = 'product.form.init';
 }

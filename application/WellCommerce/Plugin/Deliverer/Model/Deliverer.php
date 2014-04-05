@@ -11,7 +11,8 @@
  */
 namespace WellCommerce\Plugin\Deliverer\Model;
 
-use WellCommerce\Core\Model;
+use WellCommerce\Core\Component\Model\AbstractModel;
+use WellCommerce\Core\Component\Model\TranslatableModelInterface;
 
 /**
  * Class Deliverer
@@ -19,7 +20,7 @@ use WellCommerce\Core\Model;
  * @package WellCommerce\Plugin\Deliverer\Model
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Deliverer extends Model implements Model\TranslatableModelInterface
+class Deliverer extends AbstractModel implements TranslatableModelInterface
 {
 
     /**
