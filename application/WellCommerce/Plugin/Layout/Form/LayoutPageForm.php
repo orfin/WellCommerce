@@ -12,6 +12,7 @@
 namespace WellCommerce\Plugin\Layout\Form;
 
 use WellCommerce\Core\Component\Form\AbstractFormBuilder;
+use WellCommerce\Core\Component\Form\Elements\ElementInterface;
 use WellCommerce\Core\Component\Form\FormBuilderInterface;
 use WellCommerce\Plugin\Layout\Event\LayoutPageFormEvent;
 
@@ -26,20 +27,46 @@ class LayoutPageForm extends AbstractFormBuilder implements FormBuilderInterface
     /**
      * Initializes layout_theme Form
      *
-     * @param array $layout_themeData
+     * @param array $layoutThemeData
      *
      * @return Form\Elements\Form
      */
-    public function init($layout_themeData = [])
+    public function init($layoutThemeData = [])
     {
         $form = $this->addForm([
             'name' => 'layout_columns',
         ]);
 
-        $requiredData = $form->addChild($this->addFieldset([
-            'name'  => 'required_data',
-            'label' => $this->trans('Required data')
-        ]));
+        $pages = $this->get('layout_page.repository')->all();
+        $layoutBoxConfigurators = $this->getLayoutManager()->getLayoutBoxConfigurators();
+
+        echo "<pre>";
+        print_r($layoutBoxConfigurators);
+        die();
+
+        foreach ($pages as $page) {
+            $columnData = $form->addChild($this->addFieldset([
+                'name'  => $page->id,
+                'label' => $page->name
+            ]));
+
+            $columnDataColumns = $columnData->addChild($this->addFieldsetRepeatable([
+                'name'       => 'columns_data',
+                'repeat_min' => 1,
+                'repeat_max' => ElementInterface::INFINITE
+            ]));
+
+            $columnDataColumns->addChild($this->addTip([
+                'tip'         => '<p>' . $this->trans('To extend the column to all remaining width please enter') . ' <strong>0</strong>.</p>',
+                'retractable' => false
+            ]));
+
+            $boxData = $columnDataColumns->addChild($this->addLayoutBoxesList([
+                'name'  => 'layout_boxes',
+                'label' => $this->trans('Choose boxes'),
+                'boxes' => $this->makeOptions([])
+            ]));
+        }
 
         $form->addFilters([
             $this->addFilterNoCode(),
@@ -47,7 +74,7 @@ class LayoutPageForm extends AbstractFormBuilder implements FormBuilderInterface
             $this->addFilterSecure()
         ]);
 
-        $event = new LayoutPageFormEvent($form, $layout_themeData);
+        $event = new LayoutPageFormEvent($form, $layoutThemeData);
 
         $this->getDispatcher()->dispatch(LayoutPageFormEvent::FORM_INIT_EVENT, $event);
 

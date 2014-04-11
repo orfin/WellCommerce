@@ -8,12 +8,9 @@
         <parameter key="product.repository.class">WellCommerce\Plugin\Product\Repository\ProductRepository</parameter>
         <parameter key="product.datagrid.class">WellCommerce\Plugin\Product\DataGrid\ProductDataGrid</parameter>
         <parameter key="product.form.class">WellCommerce\Plugin\Product\Form\ProductForm</parameter>
-        <parameter key="product_box.layout.configurator.class">WellCommerce\Plugin\Product\Layout\ProductBoxConfigurator</parameter>
-        <parameter key="product_page.layout.class">WellCommerce\Plugin\Product\Layout\ProductLayoutPage</parameter>
     </parameters>
     
     <services>
-
         <service id="product.admin.controller" class="%product.admin.controller.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
@@ -48,20 +45,6 @@
         	<call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
-        </service>
-
-        <service id="product_box.layout.configurator" class="%product_box.layout.configurator.class%">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <tag name="layout_box.configurator" />
-        </service>
-
-        <service id="product_page.layout" class="%product_page.layout.class%">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <tag name="layout_page" alias="Product" columns="product.xml" />
         </service>
     </services>
 </container>

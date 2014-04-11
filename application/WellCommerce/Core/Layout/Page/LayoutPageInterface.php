@@ -21,13 +21,6 @@ namespace WellCommerce\Core\Layout\Page;
 interface LayoutPageInterface
 {
     /**
-     * Returns layout XML filename
-     *
-     * @return mixed
-     */
-    public function getLayoutXml();
-
-    /**
      * Loads columns configuration for layout page
      *
      * @return mixed

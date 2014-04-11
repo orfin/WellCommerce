@@ -14,7 +14,7 @@ namespace WellCommerce\Core\Component\Form;
 use Closure;
 use WellCommerce\Core\Component\AbstractComponent;
 use WellCommerce\Core\Component\Form\Conditions\ConditionInterface;
-use WellCommerce\Core\Component\Elements\ElementInterface;
+use WellCommerce\Core\Component\Form\Elements\ElementInterface;
 
 /**
  * Class Form
@@ -46,6 +46,30 @@ class AbstractFormBuilder extends AbstractComponent
     public function addFieldset(array $options)
     {
         return new Elements\Fieldset($options);
+    }
+
+    /**
+     * Shortcut for adding FieldsetRepeatable node
+     *
+     * @param array $options
+     *
+     * @return Elements\FieldsetRepeatable
+     */
+    public function addFieldsetRepeatable(array $options)
+    {
+        return new Elements\FieldsetRepeatable($options);
+    }
+
+    /**
+     * Shortcut for adding LayoutBoxesList element
+     *
+     * @param array $options
+     *
+     * @return Elements\FieldsetRepeatable
+     */
+    public function addLayoutBoxesList(array $options)
+    {
+        return new Elements\LayoutBoxesList($options);
     }
 
     /**

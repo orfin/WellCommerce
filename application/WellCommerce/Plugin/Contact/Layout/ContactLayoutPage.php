@@ -27,13 +27,6 @@ class ContactLayoutPage extends LayoutPage implements LayoutPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getLayoutXml()
-    {
-        return 'contact.xml';
-    }
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return 'Contact';

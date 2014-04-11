@@ -21,7 +21,7 @@ namespace WellCommerce\Core\Component\Form\Elements;
 class FieldsetRepeatable extends Fieldset implements ElementInterface
 {
 
-    protected function prepareAttributesJs()
+    public function prepareAttributesJs()
     {
         $attributes = Array(
             $this->formatAttributeJs('name', 'sName'),

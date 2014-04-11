@@ -14,24 +14,19 @@ namespace WellCommerce\Plugin\Layout\Model;
 use WellCommerce\Core\Component\Model\AbstractModel;
 
 /**
- * Class LayoutBox
+ * Class LayoutPageColumnBox
  *
- * @package WellCommerce\Plugin\LayoutBox\Model
+ * @package WellCommerce\Plugin\Layout\Model
  * @author  Adam Piotrowski <adam@gekosale.com>
  */
-class LayoutColumn extends AbstractModel
+class LayoutPageColumnBox extends AbstractModel
 {
 
-    protected $table = 'layout_column';
+    protected $table = 'layout_page_column_box';
 
     public $timestamps = true;
 
     protected $softDelete = false;
 
     protected $fillable = ['id'];
-
-    public function box()
-    {
-        return $this->hasMany('WellCommerce\Plugin\Layout\Model\LayoutColumnBox');
-    }
 }

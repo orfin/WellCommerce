@@ -24,28 +24,9 @@ use WellCommerce\Core\Layout\Box\LayoutBoxConfiguratorInterface;
  */
 class ProductBoxConfigurator extends LayoutBoxConfigurator implements LayoutBoxConfiguratorInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getController()
-    {
-        return 'WellCommerce\\Plugin\\Product\\Controller\\Frontend\\ProductBoxController';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return 'Product';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAlias()
-    {
-        return 'wellcommerce.box.product';
     }
 
     /**

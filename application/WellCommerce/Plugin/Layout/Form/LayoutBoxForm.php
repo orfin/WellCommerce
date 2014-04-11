@@ -79,7 +79,7 @@ class LayoutBoxForm extends AbstractFormBuilder implements FormBuilderInterface
                 'name'         => $configurator->getFieldSetName(),
                 'label'        => $this->trans('Settings'),
                 'dependencies' => [
-                    $this->addDependency(Dependency::SHOW, $alias, new Equals($configurator->getAlias()), null)
+                    $this->addDependency(Dependency::SHOW, $alias, new Equals($id), null)
                 ]
             ]));
 

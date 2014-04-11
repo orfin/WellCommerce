@@ -24,20 +24,6 @@ interface LayoutBoxConfiguratorInterface
 {
 
     /**
-     * Returns layout box human-friendly name
-     *
-     * @return mixed
-     */
-    public function getName();
-
-    /**
-     * Returns layout box alias
-     *
-     * @return mixed
-     */
-    public function getAlias();
-
-    /**
      * Checks whether given layout page can handle such a layout box
      *
      * @param string $layoutPage
@@ -62,10 +48,4 @@ interface LayoutBoxConfiguratorInterface
      */
     public function getHelp();
 
-    /**
-     * Return controller name which can handle such a configuration
-     *
-     * @return mixed
-     */
-    public function getController();
-} 
+}

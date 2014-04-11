@@ -47,6 +47,7 @@ class RegisterLayoutBoxConfiguratorPass implements CompilerPassInterface
                 throw new \InvalidArgumentException(sprintf('Service "%s" must implement interface "%s".', $id, $interface));
             }
             $definition->addMethodCall('addLayoutBoxConfigurator', array(
+                $id,
                 new Reference($id)
             ));
         }

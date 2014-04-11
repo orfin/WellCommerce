@@ -130,7 +130,6 @@ class ServiceContainer extends Container
             'product.form' => 'getProduct_FormService',
             'product.repository' => 'getProduct_RepositoryService',
             'product_box.layout.configurator' => 'getProductBox_Layout_ConfiguratorService',
-            'product_page.layout' => 'getProductPage_LayoutService',
             'request' => 'getRequestService',
             'request_stack' => 'getRequestStackService',
             'router' => 'getRouterService',
@@ -1269,15 +1268,11 @@ class ServiceContainer extends Container
         $this->services['layout_manager'] = $instance = new \WellCommerce\Core\Layout\LayoutManager();
 
         $instance->setContainer($this);
-        $instance->addLayoutBoxConfigurator($this->get('category_box.layout.configurator'));
-        $instance->addLayoutBoxConfigurator($this->get('contact_box.layout.configurator'));
-        $instance->addLayoutBoxConfigurator($this->get('producer_box.layout.configurator'));
-        $instance->addLayoutBoxConfigurator($this->get('producer_list_box.layout.configurator'));
-        $instance->addLayoutBoxConfigurator($this->get('product_box.layout.configurator'));
-        $instance->addLayoutPage('Contact', $this->get('contact_page.layout'));
-        $instance->addLayoutPage('HomePage', $this->get('home_page.layout'));
-        $instance->addLayoutPage('Producer', $this->get('producer_page.layout'));
-        $instance->addLayoutPage('Product', $this->get('product_page.layout'));
+        $instance->addLayoutBoxConfigurator('category_box.layout.configurator', $this->get('category_box.layout.configurator'));
+        $instance->addLayoutBoxConfigurator('contact_box.layout.configurator', $this->get('contact_box.layout.configurator'));
+        $instance->addLayoutBoxConfigurator('producer_box.layout.configurator', $this->get('producer_box.layout.configurator'));
+        $instance->addLayoutBoxConfigurator('producer_list_box.layout.configurator', $this->get('producer_list_box.layout.configurator'));
+        $instance->addLayoutBoxConfigurator('product_box.layout.configurator', $this->get('product_box.layout.configurator'));
 
         return $instance;
     }
@@ -1831,23 +1826,7 @@ class ServiceContainer extends Container
     {
         $this->services['product_box.layout.configurator'] = $instance = new \WellCommerce\Plugin\Product\Layout\ProductBoxConfigurator();
 
-        $instance->setContainer($this);
-
-        return $instance;
-    }
-
-    /**
-     * Gets the 'product_page.layout' service.
-     *
-     * This service is shared.
-     * This method always returns the same instance of the service.
-     *
-     * @return WellCommerce\Plugin\Product\Layout\ProductLayoutPage A WellCommerce\Plugin\Product\Layout\ProductLayoutPage instance.
-     */
-    protected function getProductPage_LayoutService()
-    {
-        $this->services['product_page.layout'] = $instance = new \WellCommerce\Plugin\Product\Layout\ProductLayoutPage();
-
+        $instance->setDefaults(array('name' => 'ProductBox'));
         $instance->setContainer($this);
 
         return $instance;
@@ -2736,7 +2715,6 @@ class ServiceContainer extends Container
             'product.datagrid.class' => 'WellCommerce\\Plugin\\Product\\DataGrid\\ProductDataGrid',
             'product.form.class' => 'WellCommerce\\Plugin\\Product\\Form\\ProductForm',
             'product_box.layout.configurator.class' => 'WellCommerce\\Plugin\\Product\\Layout\\ProductBoxConfigurator',
-            'product_page.layout.class' => 'WellCommerce\\Plugin\\Product\\Layout\\ProductLayoutPage',
         );
     }
 }

@@ -36,11 +36,12 @@ class LayoutManager extends AbstractComponent
     /**
      * Adds new layout box configurator to stack
      *
+     * @param                                $id
      * @param LayoutBoxConfiguratorInterface $configurator
      */
-    public function addLayoutBoxConfigurator(LayoutBoxConfiguratorInterface $configurator)
+    public function addLayoutBoxConfigurator($id, LayoutBoxConfiguratorInterface $configurator)
     {
-        $this->layoutBoxConfigurators[$configurator->getAlias()] = $configurator;
+        $this->layoutBoxConfigurators[$id] = $configurator;
     }
 
     public function getLayoutBoxConfigurator($alias)
@@ -53,16 +54,6 @@ class LayoutManager extends AbstractComponent
     }
 
     /**
-     * Adds new layout page configurator to stack
-     *
-     * @param LayoutPageInterface $configurator
-     */
-    public function addLayoutPage($alias, LayoutPageInterface $layoutPage)
-    {
-        $this->layoutPages[$alias] = $layoutPage;
-    }
-
-    /**
      * Returns all layout box configurators
      *
      * @return array
@@ -70,16 +61,6 @@ class LayoutManager extends AbstractComponent
     public function getLayoutBoxConfigurators()
     {
         return $this->layoutBoxConfigurators;
-    }
-
-    /**
-     * Returns all layout page configurators
-     *
-     * @return array
-     */
-    public function getLayoutPages()
-    {
-        return $this->layoutPages;
     }
 
     /**

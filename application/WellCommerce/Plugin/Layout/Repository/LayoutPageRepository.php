@@ -13,7 +13,7 @@ namespace WellCommerce\Plugin\Layout\Repository;
 
 use WellCommerce\Core\Component\Repository\AbstractRepository;
 use WellCommerce\Core\Component\Repository\RepositoryInterface;
-use WellCommerce\Plugin\Layout\Model\LayoutColumn;
+use WellCommerce\Plugin\Layout\Model\LayoutPage;
 
 /**
  * Class LayoutPageAbstractRepository
@@ -31,7 +31,7 @@ class LayoutPageRepository extends AbstractRepository implements RepositoryInter
      */
     public function all()
     {
-        return LayoutColumn::with('box')->get();
+        return LayoutPage::with('column', 'column.box')->orderBy('name')->get();
     }
 
     /**
@@ -43,7 +43,7 @@ class LayoutPageRepository extends AbstractRepository implements RepositoryInter
      */
     public function find($id)
     {
-        return LayoutColumn::with('box')->findOrFail($id);
+        return LayoutPage::with('column', 'column.box')->findOrFail($id);
     }
 
     /**

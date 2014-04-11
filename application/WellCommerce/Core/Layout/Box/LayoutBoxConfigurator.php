@@ -22,6 +22,13 @@ use WellCommerce\Core\Component\Form\AbstractFormBuilder;
  */
 abstract class LayoutBoxConfigurator extends AbstractFormBuilder
 {
+    protected $defaults;
+
+    public function setDefaults(array $defaults)
+    {
+        if (!preg_match('/Controller\\\Admin\\\(.+)Controller$/', get_class($this), $matches)) {
+    }
+
     /**
      * Replaces dots with dashes in alias and returns FieldSet name
      *

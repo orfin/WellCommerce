@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<layout>
-    <column width="180" use="layout_column.twig">
-        <box id="category_menu"/>
-    </column>
-</layout>
