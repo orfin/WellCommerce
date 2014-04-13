@@ -45,7 +45,7 @@ class ProductAggregator extends Field implements ElementInterface
 
     public function loadProductData($request)
     {
-        $products = Array();
+        $products = [];
         foreach ($request['products'] as $product) {
             $products[] = App::getModel('product/product')->getProductVariantDetails($product);
         }

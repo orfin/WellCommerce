@@ -37,7 +37,7 @@ abstract class Condition
             return "new GFormCondition({$this->_jsConditionName}, {$this->_argument->renderJs()})";
         }
         if (is_array($this->_argument) && isset($this->_argument[0]) && ($this->_argument[0] instanceof Condition)) {
-            $parts = Array();
+            $parts = [];
             foreach ($this->_argument as $part) {
                 $parts[] = $part->renderJs();
             }

@@ -41,7 +41,7 @@ class StaticListing extends Field implements ElementInterface
         if (!isset($this->attributes[$attributeName]) || !is_array($this->attributes[$attributeName])) {
             return '';
         }
-        $options = Array();
+        $options = [];
         foreach ($this->attributes[$attributeName] as $option) {
             $value     = addslashes($option->value);
             $label     = addslashes($option->label);

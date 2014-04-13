@@ -38,7 +38,7 @@ class FavouriteCategories extends Tree implements ElementInterface
 
     public function getSelectedInfo($request)
     {
-        $rows = Array();
+        $rows = [];
         if (!is_array($request['id'])) {
             $request['id'] = Array(
                 $request['id']
@@ -48,7 +48,7 @@ class FavouriteCategories extends Tree implements ElementInterface
             $path     = call_user_func($this->attributes['load_selected_info'], $rowId);
             $pathSize = count($path);
             if ($pathSize === 0) {
-                $path = array();
+                $path = [];
             } else {
                 $path[$pathSize - 1] = '<strong>' . $path[$pathSize - 1] . '</strong>';
                 if ($pathSize > 5) {

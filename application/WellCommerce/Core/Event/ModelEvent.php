@@ -21,26 +21,23 @@ use Symfony\Component\EventDispatcher\Event;
  */
 class ModelEvent extends Event
 {
+    protected $data;
+    protected $id;
 
-    /**
-     * @var array
-     */
-    protected $data = Array();
-
-    /**
-     * @var null
-     */
-    protected $id = null;
-
-    public function __construct($data, $id)
+    public function __construct(array $data, $id)
     {
         $this->data = $data;
         $this->id   = $id;
     }
 
-    public function getSubmittedData()
+    public function getData()
     {
         return $this->data;
+    }
+
+    public function setData($data)
+    {
+        $this->data = $data;
     }
 
     public function getId()

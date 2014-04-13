@@ -1,29 +1,93 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- *
+ * 
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- *
+ * 
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
+
 namespace WellCommerce\Core\Component\Form;
 
-use Closure;
 use WellCommerce\Core\Component\AbstractComponent;
 use WellCommerce\Core\Component\Form\Conditions\ConditionInterface;
 use WellCommerce\Core\Component\Form\Elements\ElementInterface;
+use WellCommerce\Core\Component\Model\ModelInterface;
+use WellCommerce\Core\Event\FormEvent;
 
 /**
- * Class Form
+ * Class FormBuilder
  *
- * @package WellCommerce\Core
+ * @package WellCommerce\Core\Component\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AbstractFormBuilder extends AbstractComponent
+class FormBuilder extends AbstractComponent
 {
+    const FORM_INIT = 'form.init';
+
+    protected $form;
+    protected $formData;
+    protected $options;
+
+    /**
+     * Creates the form, triggers init event and then populates form with values
+     *
+     * @param FormInterface  $form
+     * @param ModelInterface $model
+     * @param array          $options
+     *
+     * @return $this
+     */
+    public function create(FormInterface $form, ModelInterface $model, array $options)
+    {
+        $this->form     = $form->buildForm($this, $options);
+        $this->formData = $form->prepareData($model);
+        $this->options  = $options;
+        $this->formData = $this->dispatchEvent($this->getInitEventName());
+
+        $this->form->populate($this->formData);
+
+        return $this;
+    }
+
+    /**
+     * Dispatches the event for form action
+     *
+     * @param       $eventName
+     * @param array $data
+     * @param       $id
+     */
+    final protected function dispatchEvent($eventName)
+    {
+        $event = new FormEvent($this->form, $this->formData);
+        $this->getDispatcher()->dispatch($eventName, $event);
+
+        return $event->getData();
+    }
+
+    /**
+     * Returns init event name
+     *
+     * @return string
+     */
+    private function getInitEventName()
+    {
+        return sprintf('%s.%s', $this->options['name'], self::FORM_INIT);
+    }
+
+    /**
+     * Returns Form object
+     *
+     * @return mixed
+     */
+    public function getForm()
+    {
+        return $this->form;
+    }
+
     /**
      * Shortcut for adding Form
      *
@@ -425,5 +489,4 @@ class AbstractFormBuilder extends AbstractComponent
     {
         return new Dependency($type, $element, $condition, $argument, $this->container);
     }
-
 }

@@ -38,7 +38,7 @@ class RelatedCategories extends FavouriteCategories implements ElementInterface
 
     public function getSelectedInfo($request)
     {
-        $rows = Array();
+        $rows = [];
         if (!is_array($request['id'])) {
             $request['id'] = Array(
                 $request['id']

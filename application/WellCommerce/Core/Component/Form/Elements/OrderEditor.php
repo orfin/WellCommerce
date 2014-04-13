@@ -115,7 +115,7 @@ class OrderEditor extends Select implements ElementInterface
         }
         $rawVariants
                   = (App::getModel('product/product')->getAttributeCombinationsForProduct($productId, $this->attributes['clientgroupid'], $this->attributes['currencyid']));
-        $variants = Array();
+        $variants = [];
 
         $variants[] = Array(
             'id'      => '',
@@ -123,7 +123,7 @@ class OrderEditor extends Select implements ElementInterface
             'price'   => ''
         );
         foreach ($rawVariants as $variant) {
-            $caption = Array();
+            $caption = [];
             foreach ($variant['attributes'] as $attribute) {
                 $caption[] = str_replace('"', '\'', $attribute['name']);
             }

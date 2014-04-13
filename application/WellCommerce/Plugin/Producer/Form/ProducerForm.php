@@ -12,7 +12,7 @@
 namespace WellCommerce\Plugin\Producer\Form;
 
 use WellCommerce\Core\Component\Form\AbstractFormBuilder;
-use WellCommerce\Core\Component\Form\FormBuilderInterface;
+use WellCommerce\Core\Component\Form\FormInterface;
 use WellCommerce\Plugin\Producer\Event\ProducerFormEvent;
 
 /**
@@ -21,7 +21,7 @@ use WellCommerce\Plugin\Producer\Event\ProducerFormEvent;
  * @package WellCommerce\Plugin\Producer\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProducerForm extends AbstractFormBuilder implements FormBuilderInterface
+class ProducerForm extends AbstractFormBuilder implements FormInterface
 {
 
     public function init($producerData = [])

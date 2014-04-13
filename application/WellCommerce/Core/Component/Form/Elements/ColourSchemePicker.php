@@ -109,7 +109,7 @@ class ColourSchemePicker extends TextField implements ElementInterface
             throw new Exception('Deletion of file "' . $request['file'] . '" unsuccessful.');
         }
 
-        return Array();
+        return [];
     }
 
     public function LoadFiles($request)
@@ -122,8 +122,8 @@ class ColourSchemePicker extends TextField implements ElementInterface
             $inRoot = true;
         }
         $path  = ROOTPATH . $request['path'];
-        $files = Array();
-        $dirs  = Array();
+        $files = [];
+        $dirs  = [];
         if (($dir = opendir($path)) === false) {
             throw new Exception('Directory "' + $path + '" cannot be listed.');
         }

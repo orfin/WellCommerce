@@ -63,7 +63,7 @@ class Custom extends Rule implements RuleInterface
 
     public function checkValue($value)
     {
-        $params = Array();
+        $params = [];
         foreach ($this->params as $paramName => $paramValue) {
             if ($paramValue instanceof Node) {
                 $params[$paramName] = $paramValue->getValue();
@@ -78,7 +78,7 @@ class Custom extends Rule implements RuleInterface
     public function render()
     {
         $errorMsg = addslashes($this->errorMsg);
-        $params   = Array();
+        $params   = [];
         foreach ($this->params as $paramName => $paramValue) {
             if ($paramValue instanceof Node) {
                 $params['_field_' . $paramName] = $paramValue->getName();

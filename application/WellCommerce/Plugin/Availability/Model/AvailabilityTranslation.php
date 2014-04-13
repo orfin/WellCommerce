@@ -21,7 +21,6 @@ use WellCommerce\Core\Component\Model\AbstractModel;
  */
 class AvailabilityTranslation extends AbstractModel
 {
-
     /**
      * The table associated with the model.
      *

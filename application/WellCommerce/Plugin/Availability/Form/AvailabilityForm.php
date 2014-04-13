@@ -11,10 +11,10 @@
  */
 namespace WellCommerce\Plugin\Availability\Form;
 
-use WellCommerce\Core\Component\Form\AbstractFormBuilder;
-use WellCommerce\Core\Component\Form\FormBuilderInterface;
-use WellCommerce\Core\Form;
-use WellCommerce\Plugin\Availability\Event\AvailabilityFormEvent;
+use WellCommerce\Core\Component\Form\AbstractForm;
+use WellCommerce\Core\Component\Form\FormBuilder;
+use WellCommerce\Core\Component\Form\FormInterface;
+use WellCommerce\Plugin\Availability\Model\Availability;
 
 /**
  * Class AvailabilityForm
@@ -22,38 +22,37 @@ use WellCommerce\Plugin\Availability\Event\AvailabilityFormEvent;
  * @package WellCommerce\Plugin\Availability\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AvailabilityForm extends AbstractFormBuilder implements FormBuilderInterface
+class AvailabilityForm extends AbstractForm implements FormInterface
 {
     /**
-     * Initializes availability Form
+     * Builds form instance to add/edit Availability model
      *
-     * @param array $availabilityData
+     * @param FormBuilder $builder FormBuilder instance
+     * @param array       $options Form options
      *
-     * @return Form\Elements\Form
+     * @return mixed|\WellCommerce\Core\Component\Form\Elements\Form
      */
-    public function init($availabilityData = [])
+    public function buildForm(FormBuilder $builder, array $options)
     {
-        $form = $this->addForm([
-            'name'   => 'availability',
-        ]);
+        $form = $builder->addForm($options);
 
-        $requiredData = $form->addChild($this->addFieldset([
+        $requiredData = $form->addChild($builder->addFieldset([
             'name'  => 'required_data',
             'label' => $this->trans('Required data')
         ]));
 
-        $languageData = $requiredData->addChild($this->addFieldsetLanguage([
+        $languageData = $requiredData->addChild($builder->addFieldsetLanguage([
             'name'      => 'language_data',
             'label'     => $this->trans('Translations'),
             'languages' => $this->getLanguages()
         ]));
 
-        $languageData->addChild($this->addTextField([
+        $languageData->addChild($builder->addTextField([
             'name'  => 'name',
             'label' => $this->trans('Name'),
             'rules' => [
-                $this->addRuleRequired($this->trans('Name is required')),
-                $this->addRuleLanguageUnique($this->trans('Name already exists'),
+                $builder->addRuleRequired($this->trans('Name is required')),
+                $builder->addRuleLanguageUnique($this->trans('Name already exists'),
                     [
                         'table'   => 'availability_translation',
                         'column'  => 'name',
@@ -66,23 +65,37 @@ class AvailabilityForm extends AbstractFormBuilder implements FormBuilderInterfa
             ]
         ]));
 
-        $languageData->addChild($this->addTextArea([
+        $languageData->addChild($builder->addTextArea([
             'name'  => 'description',
             'label' => $this->trans('Description')
         ]));
 
         $form->addFilters([
-            $this->addFilterNoCode(),
-            $this->addFilterTrim(),
-            $this->addFilterSecure()
+            $builder->addFilterNoCode(),
+            $builder->addFilterTrim(),
+            $builder->addFilterSecure()
         ]);
 
-        $event = new AvailabilityFormEvent($form, $availabilityData);
-
-        $this->getDispatcher()->dispatch(AvailabilityFormEvent::FORM_INIT_EVENT, $event);
-
-        $form->populate($event->getPopulateData());
-
         return $form;
+    }
+
+    /**
+     * Prepares model data to populate the Availability form
+     *
+     * @param Availability $model
+     *
+     * @return array
+     */
+    public function prepareData(Availability $model)
+    {
+        $formData     = [];
+        $accessor     = $this->getPropertyAccessor();
+        $languageData = $model->getTranslationData();
+
+        $accessor->setValue($formData, '[required_data]', [
+            'language_data' => $languageData,
+        ]);
+
+        return $formData;
     }
 }

@@ -13,7 +13,7 @@ namespace WellCommerce\Plugin\Layout\Form;
 
 use WellCommerce\Core\Component\Form\AbstractFormBuilder;
 use WellCommerce\Core\Component\Form\Elements\ElementInterface;
-use WellCommerce\Core\Component\Form\FormBuilderInterface;
+use WellCommerce\Core\Component\Form\FormInterface;
 use WellCommerce\Plugin\Layout\Event\LayoutPageFormEvent;
 
 /**
@@ -22,7 +22,7 @@ use WellCommerce\Plugin\Layout\Event\LayoutPageFormEvent;
  * @package WellCommerce\Plugin\LayoutPage\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LayoutPageForm extends AbstractFormBuilder implements FormBuilderInterface
+class LayoutPageForm extends AbstractFormBuilder implements FormInterface
 {
     /**
      * Initializes layout_theme Form

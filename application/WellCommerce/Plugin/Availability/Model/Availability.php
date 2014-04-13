@@ -12,6 +12,7 @@
 namespace WellCommerce\Plugin\Availability\Model;
 
 use WellCommerce\Core\Component\Model\AbstractModel;
+use WellCommerce\Core\Component\Model\ModelInterface;
 use WellCommerce\Core\Component\Model\TranslatableModelInterface;
 
 /**
@@ -20,7 +21,7 @@ use WellCommerce\Core\Component\Model\TranslatableModelInterface;
  * @package WellCommerce\Plugin\Availability\Model
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Availability extends AbstractModel implements TranslatableModelInterface
+class Availability extends AbstractModel implements ModelInterface, TranslatableModelInterface
 {
     /**
      * The table associated with the model.

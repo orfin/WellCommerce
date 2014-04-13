@@ -49,7 +49,7 @@ abstract class Node
         $this->_jsNodeName   = 'GForm' . end($class);
         $this->form          = null;
         $this->parent        = null;
-        $this->_xajaxMethods = Array();
+        $this->_xajaxMethods = [];
     }
 
     public function render($mode = 'JS', $tabs = '')
@@ -68,20 +68,20 @@ abstract class Node
     public function addRule($rule)
     {
         if (!isset($this->attributes['rules']) || !is_array($this->attributes['rules'])) {
-            $this->attributes['rules'] = Array();
+            $this->attributes['rules'] = [];
         }
         $this->attributes['rules'][] = $rule;
     }
 
     public function clearRules()
     {
-        $this->attributes['rules'] = Array();
+        $this->attributes['rules'] = [];
     }
 
     public function addFilter($filter)
     {
         if (!isset($this->attributes['filters']) || !is_array($this->attributes['filters'])) {
-            $this->attributes['filters'] = Array();
+            $this->attributes['filters'] = [];
         }
         $this->attributes['filters'][] = $filter;
     }
@@ -89,20 +89,20 @@ abstract class Node
     public function setFilter($filter)
     {
         if (!isset($this->attributes['filters']) || !is_array($this->attributes['filters'])) {
-            $this->attributes['filters'] = Array();
+            $this->attributes['filters'] = [];
         }
         $this->attributes['filters'][] = $filter;
     }
 
     public function clearFilters()
     {
-        $this->attributes['filters'] = Array();
+        $this->attributes['filters'] = [];
     }
 
     public function addDependency($dependency)
     {
         if (!isset($this->attributes['dependencies']) || !is_array($this->attributes['dependencies'])) {
-            $this->attributes['dependencies'] = Array();
+            $this->attributes['dependencies'] = [];
         }
         $this->attributes['dependencies'][] = $dependency;
     }
@@ -163,10 +163,10 @@ abstract class Node
         return $value;
     }
 
-    protected function harvest($action, $levelsCount = 0, $levels = Array())
+    protected function harvest($action, $levelsCount = 0, $levels = [])
     {
         if (isset($this->_children)) {
-            $array = Array();
+            $array = [];
             foreach ($this->_children as $child) {
                 $name = $child->getName();
                 if (empty($name)) {
@@ -196,7 +196,7 @@ abstract class Node
     protected function harvestRepetitions($level = 0)
     {
         if (isset($this->_children)) {
-            $array = Array();
+            $array = [];
             foreach ($this->_children as $child) {
                 array_push($array, $child->harvestRepetitions($level));
             }
@@ -217,9 +217,9 @@ abstract class Node
                 return array_keys($array);
             }
 
-            return Array();
+            return [];
         }
-        $repetitions = Array();
+        $repetitions = [];
         foreach ($array as $value) {
             array_push($repetitions, $this->extractRepetitions($value, $targetLevel, $level + 1));
         }
@@ -330,7 +330,7 @@ abstract class Node
 
     protected function formatDependencyJs()
     {
-        $dependencies = Array();
+        $dependencies = [];
         if (isset($this->attributes['dependencies']) && is_array($this->attributes['dependencies'])) {
             foreach ($this->attributes['dependencies'] as $dependency) {
                 $dependencies[] = $dependency->renderJs();
@@ -359,7 +359,7 @@ abstract class Node
 
     protected function prepareAttributesJs()
     {
-        return Array();
+        return [];
     }
 
     public function renderStatic()
@@ -386,7 +386,7 @@ abstract class Node
 
     protected function prepareAutoAttributesJs()
     {
-        $attributes = Array();
+        $attributes = [];
         $attributes = array_merge($attributes, $this->_xajaxMethods);
 
         return $attributes;

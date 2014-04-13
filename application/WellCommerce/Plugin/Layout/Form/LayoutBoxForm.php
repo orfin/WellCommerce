@@ -14,7 +14,7 @@ namespace WellCommerce\Plugin\Layout\Form;
 use WellCommerce\Core\Component\Form\AbstractFormBuilder;
 use WellCommerce\Core\Component\Form\Conditions\Equals;
 use WellCommerce\Core\Component\Form\Dependency;
-use WellCommerce\Core\Component\Form\FormBuilderInterface;
+use WellCommerce\Core\Component\Form\FormInterface;
 use WellCommerce\Core\Component\Form\Option;
 use WellCommerce\Plugin\Layout\Event\LayoutBoxFormEvent;
 
@@ -24,7 +24,7 @@ use WellCommerce\Plugin\Layout\Event\LayoutBoxFormEvent;
  * @package WellCommerce\Plugin\LayoutBox\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LayoutBoxForm extends AbstractFormBuilder implements FormBuilderInterface
+class LayoutBoxForm extends AbstractFormBuilder implements FormInterface
 {
     private $types = [];
     private $configurators = [];

@@ -12,9 +12,12 @@
 namespace WellCommerce\Core\Component\Controller;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use WellCommerce\Core\Component\AbstractComponent;
 use WellCommerce\Core\Component\DataGrid\DataGridInterface;
 use WellCommerce\Core\Component\Form\FormBuilderInterface;
+use WellCommerce\Core\Component\Form\FormInterface;
+use WellCommerce\Core\Component\Model\ModelInterface;
 use WellCommerce\Core\Component\Repository\RepositoryInterface;
 
 /**
@@ -29,11 +32,6 @@ abstract class AbstractController extends AbstractComponent
      * @var Repository object
      */
     protected $repository;
-
-    /**
-     * @var FormBuilder object
-     */
-    protected $formBuilder;
 
     /**
      * @var DataGrid object
@@ -64,16 +62,6 @@ abstract class AbstractController extends AbstractComponent
     }
 
     /**
-     * Sets FormBuilder object for current controller
-     *
-     * @param FormBuilderInterface $formBuilder
-     */
-    public function setFormBuilder(FormBuilderInterface $formBuilder)
-    {
-        $this->formBuilder = $formBuilder;
-    }
-
-    /**
      * Sets DataGrid object for current controller
      *
      * @param DataGridInterface $datagrid
@@ -81,5 +69,32 @@ abstract class AbstractController extends AbstractComponent
     public function setDataGrid(DataGridInterface $datagrid)
     {
         $this->datagrid = $datagrid;
+    }
+
+    /**
+     * Creates a form
+     *
+     * @param FormInterface  $form    Form instance
+     * @param ModelInterface $model   Model instance
+     * @param array          $options Form options
+     *
+     * @return mixed
+     */
+    public function createForm(FormInterface $form, ModelInterface $model, array $options)
+    {
+        return $this->get('form_builder')->create($form, $model, $options)->getForm();
+    }
+
+    /**
+     * Returns a NotFoundHttpException.
+     *
+     * @param string     $message  A message
+     * @param \Exception $previous The previous exception
+     *
+     * @return NotFoundHttpException
+     */
+    public function createNotFoundException($message = 'Not Found', \Exception $previous = null)
+    {
+        return new NotFoundHttpException($message, $previous);
     }
 }

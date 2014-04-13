@@ -137,13 +137,13 @@ class ProductSelect extends Select implements ElementInterface
     public function processVariants($productId)
     {
         $rawVariants = App::getModel('product/product')->getAttributeCombinationsForProduct($productId);
-        $variants    = Array();
+        $variants    = [];
         $variants[]  = Array(
             'id'      => '',
             'caption' => Translation::get('TXT_ANY_VARIANT')
         );
         foreach ($rawVariants as $variant) {
-            $caption = Array();
+            $caption = [];
             foreach ($variant['attributes'] as $attribute) {
                 $caption[] = $attribute['name'];
             }

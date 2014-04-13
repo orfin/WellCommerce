@@ -12,7 +12,7 @@
 namespace WellCommerce\Plugin\Layout\Form;
 
 use WellCommerce\Core\Component\Form\AbstractFormBuilder;
-use WellCommerce\Core\Component\Form\FormBuilderInterface;
+use WellCommerce\Core\Component\Form\FormInterface;
 use WellCommerce\Plugin\Layout\Event\LayoutPageFormEvent;
 
 /**
@@ -21,7 +21,7 @@ use WellCommerce\Plugin\Layout\Event\LayoutPageFormEvent;
  * @package WellCommerce\Plugin\Category\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LayoutPageTree extends AbstractFormBuilder implements FormBuilderInterface
+class LayoutPageTree extends AbstractFormBuilder implements FormInterface
 {
     /**
      * Fetches all registered layout pages

@@ -45,7 +45,7 @@ class AllegroProductSelect extends ProductSelect implements ElementInterface
         $this->attributes['advanced_editor']      = true;
         $this->attributes['repeat_min']           = 1;
         $this->attributes['repeat_max']           = FE::INFINITE;
-        $this->attributes['favourite_categories'] = Array();
+        $this->attributes['favourite_categories'] = [];
         $favouriteCategories
                                                   = App::getModel('allegro/allegrocategories')->getAllegroFavouriteCategoriesALLToSelect();
         foreach ($favouriteCategories as $favouriteCategoryId => $favouriteCategoryCaption) {
@@ -70,7 +70,7 @@ class AllegroProductSelect extends ProductSelect implements ElementInterface
     {
         $children = call_user_func($this->attributes['load_allegro_category_children'], $request['parent']);
         if (!is_array($children)) {
-            $children = Array();
+            $children = [];
         }
 
         return Array(
@@ -121,8 +121,8 @@ class AllegroProductSelect extends ProductSelect implements ElementInterface
             );
         }
         foreach ($data as &$row) {
-            $tags   = Array();
-            $values = Array();
+            $tags   = [];
+            $values = [];
             foreach ($this->attributes['tags_translation_table'] as $tag => $column) {
                 $tags[] = $tag;
                 if ($column{0} == '$') {
@@ -182,7 +182,7 @@ class AllegroProductSelect extends ProductSelect implements ElementInterface
 
     public function processAllegroCategories($productId)
     {
-        $categories = Array();
+        $categories = [];
         $defaultCategories
                     = App::getModel('allegro/allegrocategories')->getDefaultAllegroCategoriesForProduct($productId);
         foreach ($defaultCategories as $key => $category) {
@@ -201,9 +201,9 @@ class AllegroProductSelect extends ProductSelect implements ElementInterface
     public function processVariants($productId)
     {
         $rawVariants = (App::getModel('product/product')->getAttributeCombinationsForProduct($productId));
-        $variants    = Array();
+        $variants    = [];
         foreach ($rawVariants as $variant) {
-            $caption = Array();
+            $caption = [];
             foreach ($variant['attributes'] as $attribute) {
                 $caption[] = str_replace('"', '\'', $attribute['name']);
             }
@@ -226,9 +226,9 @@ class AllegroProductSelect extends ProductSelect implements ElementInterface
     public function processVariantData($productId)
     {
         $rawVariants = (App::getModel('product/product')->getAttributeCombinationsForProduct($productId));
-        $variants    = Array();
+        $variants    = [];
         foreach ($rawVariants as $variant) {
-            $caption = Array();
+            $caption = [];
             foreach ($variant['attributes'] as $attribute) {
                 $caption[] = $attribute['name'];
             }

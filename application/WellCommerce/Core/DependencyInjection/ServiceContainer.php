@@ -83,7 +83,7 @@ class ServiceContainer extends Container
             'file.repository' => 'getFile_RepositoryService',
             'filesystem' => 'getFilesystemService',
             'finder' => 'getFinderService',
-            'form_helper' => 'getFormHelperService',
+            'form_builder' => 'getFormBuilderService',
             'helper' => 'getHelperService',
             'home_page.front.controller' => 'getHomePage_Front_ControllerService',
             'home_page.layout' => 'getHomePage_LayoutService',
@@ -281,7 +281,6 @@ class ServiceContainer extends Container
         $instance->setContainer($this);
         $instance->setRepository($this->get('availability.repository'));
         $instance->setDataGrid($this->get('availability.datagrid'));
-        $instance->setFormBuilder($this->get('availability.form'));
 
         return $instance;
     }
@@ -1018,16 +1017,16 @@ class ServiceContainer extends Container
     }
 
     /**
-     * Gets the 'form_helper' service.
+     * Gets the 'form_builder' service.
      *
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return WellCommerce\Core\Form A WellCommerce\Core\Form instance.
+     * @return WellCommerce\Core\Component\Form\FormBuilder A WellCommerce\Core\Component\Form\FormBuilder instance.
      */
-    protected function getFormHelperService()
+    protected function getFormBuilderService()
     {
-        $this->services['form_helper'] = $instance = new \WellCommerce\Core\Form();
+        $this->services['form_builder'] = $instance = new \WellCommerce\Core\Component\Form\FormBuilder();
 
         $instance->setContainer($this);
 
@@ -2651,7 +2650,7 @@ class ServiceContainer extends Container
             'encryption.class' => 'Illuminate\\Encryption\\Encrypter',
             'finder.class' => 'Symfony\\Component\\Finder\\Finder',
             'filesystem.class' => 'Symfony\\Component\\Filesystem\\Filesystem',
-            'form_helper.class' => 'WellCommerce\\Core\\Form',
+            'form_builder.class' => 'WellCommerce\\Core\\Component\\Form\\FormBuilder',
             'helper.class' => 'WellCommerce\\Core\\Helper',
             'kernel.class' => 'Symfony\\Component\\HttpKernel\\DependencyInjection\\ContainerAwareHttpKernel',
             'layout_manager.class' => 'WellCommerce\\Core\\Layout\\LayoutManager',

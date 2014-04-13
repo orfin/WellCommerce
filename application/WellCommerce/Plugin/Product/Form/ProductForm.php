@@ -14,7 +14,7 @@ namespace WellCommerce\Plugin\Product\Form;
 use WellCommerce\Core\Component\Form\AbstractFormBuilder;
 use WellCommerce\Core\Component\Form\Elements\ElementInterface;
 use WellCommerce\Core\Component\Form\Elements\Tip;
-use WellCommerce\Core\Component\Form\FormBuilderInterface;
+use WellCommerce\Core\Component\Form\FormInterface;
 use WellCommerce\Plugin\Product\Event\ProductFormEvent;
 
 /**
@@ -23,7 +23,7 @@ use WellCommerce\Plugin\Product\Event\ProductFormEvent;
  * @package WellCommerce\Plugin\Product\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductForm extends AbstractFormBuilder implements FormBuilderInterface
+class ProductForm extends AbstractFormBuilder implements FormInterface
 {
     public function init($productData = [])
     {

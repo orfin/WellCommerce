@@ -12,6 +12,9 @@
 namespace WellCommerce\Plugin\Availability\Controller\Admin;
 
 use WellCommerce\Core\Component\Controller\AbstractAdminController;
+use WellCommerce\Plugin\Availability\Event\AvailabilityFormEvent;
+use WellCommerce\Plugin\Availability\Form\AvailabilityDataTransformer;
+use WellCommerce\Plugin\Availability\Form\AvailabilityForm;
 
 /**
  * Class AvailabilityController
@@ -21,5 +24,25 @@ use WellCommerce\Core\Component\Controller\AbstractAdminController;
  */
 class AvailabilityController extends AbstractAdminController
 {
+    public function editAction($id)
+    {
+        $model = $this->repository->find($id);
 
+        $form = $this->createForm($this->get('availability.form'), $model, [
+            'name'   => 'availability',
+            'method' => 'POST',
+            'action' => $this->generateUrl('admin.availability.edit', ['id' => $model->id])
+        ]);
+
+        if ($form->isValid()) {
+            $this->repository->save($form->getSubmittedData(), $id);
+
+            return $this->redirect($this->generateUrl('admin.availability.index'));
+        }
+
+        return [
+            'model' => $model,
+            'form'  => $form
+        ];
+    }
 }

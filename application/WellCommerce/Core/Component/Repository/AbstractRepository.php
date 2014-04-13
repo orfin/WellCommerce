@@ -13,6 +13,7 @@ namespace WellCommerce\Core\Component\Repository;
 
 use Closure;
 use WellCommerce\Core\Component\AbstractComponent;
+use WellCommerce\Core\Event\RepositoryEvent;
 
 /**
  * Class AbstractRepository
@@ -34,5 +35,20 @@ abstract class AbstractRepository extends AbstractComponent
     final protected function transaction(Closure $callback)
     {
         return $this->container->get('database_manager')->getConnection()->transaction($callback);
+    }
+
+    /**
+     * Dispatches the event for repository action
+     *
+     * @param       $eventName
+     * @param array $data
+     * @param       $id
+     */
+    final protected function dispatchEvent($eventName, array $data, $id)
+    {
+        $event = new RepositoryEvent($data, $id);
+        $this->getDispatcher()->dispatch($eventName, $event);
+
+        return $event->getData();
     }
 }

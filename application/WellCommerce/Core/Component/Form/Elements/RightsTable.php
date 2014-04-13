@@ -34,7 +34,7 @@ class RightsTable extends Field implements ElementInterface
                 }
             }
         } else {
-            $this->_value = Array();
+            $this->_value = [];
         }
         if (is_array($value)) {
             foreach ($value as $c => $cV2) {

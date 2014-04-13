@@ -88,20 +88,16 @@ abstract class AbstractModel extends BaseModel
     /**
      * Sets translatable attributes in model
      *
-     * @param array $Data
+     * @param array $data
      * @param       $language
      */
-    public function setTranslationData(array $Data, $language)
+    public function setTranslationData(array $data)
     {
         $accessor = $this->getPropertyAccessor();
 
-        foreach ($this->getTranslatableAttributes() as $attribute) {
-            if ($this->isTranslatableAttribute($attribute)
-                && isset($Data[$attribute])
-                && is_array($Data[$attribute])
-                && isset($Data[$attribute][$language])
-            ) {
-                $accessor->setValue($this, $attribute, $Data[$attribute][$language]);
+        foreach ($data as $attribute => $value) {
+            if ($this->isTranslatableAttribute($attribute)) {
+                $accessor->setValue($this, $attribute, $value);
             }
         }
     }

@@ -11,7 +11,7 @@
         <parameter key="encryption.class">Illuminate\Encryption\Encrypter</parameter>
         <parameter key="finder.class">Symfony\Component\Finder\Finder</parameter>
         <parameter key="filesystem.class">Symfony\Component\Filesystem\Filesystem</parameter>
-        <parameter key="form_helper.class">WellCommerce\Core\Form</parameter>
+        <parameter key="form_builder.class">WellCommerce\Core\Component\Form\FormBuilder</parameter>
         <parameter key="helper.class">WellCommerce\Core\Helper</parameter>
         <parameter key="kernel.class">Symfony\Component\HttpKernel\DependencyInjection\ContainerAwareHttpKernel</parameter>
         <parameter key="layout_manager.class">WellCommerce\Core\Layout\LayoutManager</parameter>
@@ -69,7 +69,7 @@
             <argument type="service" id="service_container"/>
         </service>
 
-        <service id="form_helper" class="%form_helper.class%">
+        <service id="form_builder" class="%form_builder.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

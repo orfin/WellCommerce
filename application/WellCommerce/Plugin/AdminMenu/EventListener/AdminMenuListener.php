@@ -71,13 +71,68 @@ class AdminMenuListener implements EventSubscriberInterface
         $event->getRequest()->attributes->set('_template_vars', array_merge($templateVars, $adminMenuData));
     }
 
+    public function onAvailabilityFormInitAction($event)
+    {
+        $form    = $event->getForm();
+        $data    = $event->getData();
+        $builder = $this->container->get('form_builder');
+
+        $form->getChild('required_data')->addChild($builder->addTextField([
+            'name'  => 'Admin',
+            'label' => 'Admin'
+        ]));
+
+        $additionalData = $form->addChild($builder->addFieldset([
+            'name'  => 'Additional',
+            'label' => 'Additional data'
+        ]));
+
+        $additionalData->addChild($builder->addTextField([
+            'name'  => 'Admin',
+            'label' => 'Admin'
+        ]));
+
+        $data['Additional']['Admin'] = 'adam';
+
+        $event->setData($data);
+
+        echo "<pre>";
+        echo "INIT:";
+        print_r($data);
+        echo "</pre>";
+    }
+
+    public function onAvailabilityFormSubmitAction($event)
+    {
+        echo "<pre>";
+        echo "POST:";
+        print_r($_POST);
+        echo "SUBMIT:";
+        print_r($event->getData());
+        die();
+    }
+
+    public function onAvailabilityModelPreSaveAction(Event $event)
+    {
+        $data = $event->getData();
+
+        $data['required_data']['foo'] = 1;
+
+        $event->setData($data);
+
+        print_r($data);
+    }
+
     public static function getSubscribedEvents()
     {
         return array(
-            KernelEvents::CONTROLLER => array(
+            KernelEvents::CONTROLLER      => array(
                 'onKernelController',
                 -256
-            )
+            ),
+            //            'availability.form.init'   => 'onAvailabilityFormInitAction',
+            //            'availability.form.submit' => 'onAvailabilityFormSubmitAction'
+//            'availability.model.pre_save' => 'onAvailabilityModelPreSaveAction'
         );
     }
 }

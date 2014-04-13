@@ -30,7 +30,7 @@ abstract class Container extends Node
     public function __construct($attributes)
     {
         parent::__construct($attributes);
-        $this->_children   = Array();
+        $this->_children   = [];
         $this->_tabsOffset = '';
     }
 
@@ -105,7 +105,7 @@ abstract class Container extends Node
     {
         if (isset($value) && is_array($value) && $this->isIterated($value)) {
             foreach ($this->_children as $child) {
-                $valueArray = Array();
+                $valueArray = [];
                 if (isset($value) && is_array($value)) {
                     foreach ($value as $i => $repetition) {
                         $name = $child->getName();
@@ -156,7 +156,7 @@ abstract class Container extends Node
 
     protected function renderChildren()
     {
-        $render = Array();
+        $render = [];
         foreach ($this->_children as $child) {
             $render[] = $child->render($this->_renderMode, $this->_tabs . $this->_tabsOffset);
         }
@@ -164,7 +164,7 @@ abstract class Container extends Node
         return implode(',', $render);
     }
 
-    public function isValid($values = Array())
+    public function isValid($values = [])
     {
         $result = true;
         foreach ($this->_children as $child) {
@@ -178,7 +178,7 @@ abstract class Container extends Node
 
     protected function getValues()
     {
-        $values = Array();
+        $values = [];
         foreach ($this->_children as $child) {
             if ($child instanceof Container) {
                 $values[$child->getName()] = $child->getValues();

@@ -21,7 +21,7 @@ namespace WellCommerce\Core\Component\Form\Elements;
 class FieldsetLanguage extends Fieldset implements ElementInterface
 {
 
-    protected $languages = Array();
+    protected $languages = [];
 
     public function __construct($attributes)
     {
@@ -37,7 +37,7 @@ class FieldsetLanguage extends Fieldset implements ElementInterface
     protected function formatLanguagesJs()
     {
 
-        $options = Array();
+        $options = [];
         foreach ($this->languages as $language) {
             $value     = addslashes($language['id']);
             $label     = addslashes($language['translation']);

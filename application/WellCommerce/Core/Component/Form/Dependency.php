@@ -122,7 +122,7 @@ class Dependency
             } else {
                 $rawOptions = call_user_func($this->srcFunction, $request['value']);
             }
-            $options = Array();
+            $options = [];
             foreach ($rawOptions as $option) {
                 $value     = addslashes($option->value);
                 $label     = addslashes($option->label);

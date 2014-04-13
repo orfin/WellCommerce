@@ -26,7 +26,7 @@ abstract class OptionedField extends Field
         if (!isset($this->attributes['options']) || !is_array($this->attributes['options'])) {
             return '';
         }
-        $options = Array();
+        $options = [];
         foreach ($this->attributes['options'] as $option) {
             $value     = addslashes($option->value);
             $label     = addslashes($option->label);

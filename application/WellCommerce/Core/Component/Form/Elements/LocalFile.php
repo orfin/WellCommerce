@@ -112,7 +112,7 @@ class LocalFile extends File implements ElementInterface
             throw new Exception('Deletion of file "' . $request['file'] . '" unsuccessful.');
         }
 
-        return Array();
+        return [];
     }
 
     public function loadFiles($request)
@@ -125,8 +125,8 @@ class LocalFile extends File implements ElementInterface
             $inRoot = true;
         }
         $path  = ROOTPATH . $request['path'];
-        $files = Array();
-        $dirs  = Array();
+        $files = [];
+        $dirs  = [];
         if (($dir = opendir($path)) === false) {
             throw new Exception('Directory "' + $path + '" cannot be listed.');
         }

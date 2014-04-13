@@ -33,7 +33,7 @@ class Option
 
     public static function make($array, $default = '')
     {
-        $result = Array();
+        $result = [];
         if ($default && is_array($default)) {
             $result[] = new self('', $default[0]);
         }

@@ -22,9 +22,6 @@
             <call method="setDataGrid">
                 <argument type="service" id="availability.datagrid"/>
             </call>
-            <call method="setFormBuilder">
-                <argument type="service" id="availability.form"/>
-            </call>
         </service>
 
         <service id="availability.repository" class="%availability.repository.class%">

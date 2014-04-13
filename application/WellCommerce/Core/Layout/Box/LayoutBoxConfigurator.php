@@ -20,13 +20,12 @@ use WellCommerce\Core\Component\Form\AbstractFormBuilder;
  * @package WellCommerce\Core\Layout\Box
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class LayoutBoxConfigurator extends AbstractFormBuilder
+abstract class LayoutBoxConfigurator
 {
     protected $defaults;
 
     public function setDefaults(array $defaults)
     {
-        if (!preg_match('/Controller\\\Admin\\\(.+)Controller$/', get_class($this), $matches)) {
     }
 
     /**

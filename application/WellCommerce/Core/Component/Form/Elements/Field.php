@@ -38,7 +38,7 @@ class Field extends Node
         }
     }
 
-    public function isValid($values = Array())
+    public function isValid($values = [])
     {
         if (!isset($this->attributes['rules']) || !is_array($this->attributes['rules'])) {
             return true;
@@ -62,7 +62,7 @@ class Field extends Node
                         }
                         if (($checkResult = $rule->check($value)) !== true) {
                             if (!isset($this->attributes['error']) || !is_array($this->attributes['error'])) {
-                                $this->attributes['error'] = ($i > 0) ? array_fill(0, $i, '') : Array();
+                                $this->attributes['error'] = ($i > 0) ? array_fill(0, $i, '') : [];
                             } elseif ($i > 0) {
                                 $this->attributes['error'] = $this->attributes['error'] + array_fill(0, $i, '');
                             }
@@ -122,7 +122,7 @@ class Field extends Node
         if (!isset($this->attributes['rules']) || !is_array($this->attributes['rules'])) {
             return '';
         }
-        $rules = Array();
+        $rules = [];
         foreach ($this->attributes['rules'] as $rule) {
             $rules[] = $rule->render();
         }

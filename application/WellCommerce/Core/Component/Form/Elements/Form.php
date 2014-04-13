@@ -38,9 +38,9 @@ class Form extends Container
     {
         parent::__construct($attributes);
         $this->_populatingWholeForm = false;
-        $this->fields               = Array();
-        $this->_values              = Array();
-        $this->_flags               = Array();
+        $this->fields               = [];
+        $this->_values              = [];
+        $this->_flags               = [];
         $this->form                 = $this;
 
         if (!isset($this->attributes['class'])) {
@@ -104,7 +104,7 @@ class Form extends Container
     public function getValues($flags = 0)
     {
         if ($flags & self::FORMAT_FLAT) {
-            $values = Array();
+            $values = [];
             foreach ($this->fields as $field) {
                 if (is_object($field)) {
                     if ($field instanceof Field) {
@@ -129,7 +129,7 @@ class Form extends Container
             ));
         }
 
-        return Array();
+        return [];
     }
 
     public function getErrors()
@@ -166,7 +166,7 @@ class Form extends Container
         $this->_populatingWholeForm = false;
     }
 
-    public function isValid($values = Array())
+    public function isValid($values = [])
     {
         $values = $this->getSubmittedData();
 
