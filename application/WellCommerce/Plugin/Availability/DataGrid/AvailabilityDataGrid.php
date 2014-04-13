@@ -12,6 +12,7 @@
 namespace WellCommerce\Plugin\Availability\DataGrid;
 
 use WellCommerce\Core\Component\DataGrid\AbstractDataGrid;
+use WellCommerce\Core\Component\DataGrid\DataGridBuilder;
 use WellCommerce\Core\Component\DataGrid\DataGridInterface;
 use WellCommerce\Plugin\Availability\Event\AvailabilityDataGridEvent;
 
@@ -23,26 +24,7 @@ use WellCommerce\Plugin\Availability\Event\AvailabilityDataGridEvent;
  */
 class AvailabilityDataGrid extends AbstractDataGrid implements DataGridInterface
 {
-    public function configure()
-    {
-        $this->setOptions([
-            'id'             => 'availability',
-            'event_handlers' => [
-                'load'       => $this->getXajaxManager()->registerFunction(['LoadAvailability', $this, 'loadData']),
-                'edit_row'   => 'editAvailability',
-                'click_row'  => 'editAvailability',
-                'delete_row' => $this->getXajaxManager()->registerFunction(['DeleteAvailability', $this, 'deleteRow']),
-            ],
-            'routes'         => [
-                'edit' => $this->generateUrl('admin.availability.edit')
-            ]
-        ]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function init()
+    public function buildDataGrid()
     {
         $this->addColumn('id', [
             'source'     => 'availability.id',
@@ -76,8 +58,6 @@ class AvailabilityDataGrid extends AbstractDataGrid implements DataGridInterface
             ->join('availability_translation', 'availability_translation.availability_id', '=', 'availability.id')
             ->groupBy('availability.id');
 
-        $event = new AvailabilityDataGridEvent($this);
-
-        $this->getDispatcher()->dispatch(AvailabilityDataGridEvent::DATAGRID_INIT_EVENT, $event);
+        return $this;
     }
 }

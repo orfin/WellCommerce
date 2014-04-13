@@ -72,6 +72,7 @@ class ServiceContainer extends Container
             'dashboard.admin.controller' => 'getDashboard_Admin_ControllerService',
             'dashboard.repository' => 'getDashboard_RepositoryService',
             'database_manager' => 'getDatabaseManagerService',
+            'datagrid_builder' => 'getDatagridBuilderService',
             'datagrid_renderer' => 'getDatagridRendererService',
             'deliverer.admin.controller' => 'getDeliverer_Admin_ControllerService',
             'deliverer.datagrid' => 'getDeliverer_DatagridService',
@@ -280,7 +281,6 @@ class ServiceContainer extends Container
 
         $instance->setContainer($this);
         $instance->setRepository($this->get('availability.repository'));
-        $instance->setDataGrid($this->get('availability.datagrid'));
 
         return $instance;
     }
@@ -825,6 +825,23 @@ class ServiceContainer extends Container
         $instance->addConnection(array('driver' => 'mysql', 'host' => 'localhost', 'database' => 'gekosale3', 'username' => 'root', 'password' => '', 'charset' => 'utf8', 'collation' => 'utf8_unicode_ci', 'prefix' => ''));
         $instance->setAsGlobal();
         $instance->bootEloquent();
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'datagrid_builder' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Core\Component\DataGrid\DataGridBuilder A WellCommerce\Core\Component\DataGrid\DataGridBuilder instance.
+     */
+    protected function getDatagridBuilderService()
+    {
+        $this->services['datagrid_builder'] = $instance = new \WellCommerce\Core\Component\DataGrid\DataGridBuilder();
+
+        $instance->setContainer($this);
 
         return $instance;
     }
@@ -2646,6 +2663,7 @@ class ServiceContainer extends Container
             'cache_manager.class' => 'Doctrine\\Common\\Cache\\FilesystemCache',
             'config_locator.class' => 'Symfony\\Component\\Config\\FileLocator',
             'controller_resolver.class' => 'WellCommerce\\Core\\Component\\Controller\\ControllerResolver',
+            'datagrid_builder.class' => 'WellCommerce\\Core\\Component\\DataGrid\\DataGridBuilder',
             'event_dispatcher.class' => 'Symfony\\Component\\EventDispatcher\\ContainerAwareEventDispatcher',
             'encryption.class' => 'Illuminate\\Encryption\\Encrypter',
             'finder.class' => 'Symfony\\Component\\Finder\\Finder',

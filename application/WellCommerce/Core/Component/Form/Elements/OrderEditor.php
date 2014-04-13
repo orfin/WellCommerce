@@ -33,7 +33,7 @@ class OrderEditor extends Select implements ElementInterface
             $this,
             'loadProducts'
         ));
-        $this->attributes['load_category_children'] = App::getRegistry()->xajaxInterface->registerFunction(array(
+        $this->attributes['load_categorychildren'] = App::getRegistry()->xajaxInterface->registerFunction(array(
             'LoadCategoryChildren_' . $this->_id,
             $this,
             'loadCategoryChildren'
@@ -52,7 +52,7 @@ class OrderEditor extends Select implements ElementInterface
             $this->formatAttributeJs('on_before_change', 'fOnBeforeChange', ElementInterface::TYPE_FUNCTION),
             $this->formatAttributeJs('jsfunction', 'fLoadProducts', ElementInterface::TYPE_FUNCTION),
             $this->formatAttributeJs('datagrid_filter', 'ofilterData', ElementInterface::TYPE_OBJECT),
-            $this->formatAttributeJs('load_category_children', 'fLoadCategoryChildren', ElementInterface::TYPE_FUNCTION),
+            $this->formatAttributeJs('load_categorychildren', 'fLoadCategoryChildren', ElementInterface::TYPE_FUNCTION),
             $this->formatRepeatableJs(),
             $this->formatRulesJs(),
             $this->formatDependencyJs(),

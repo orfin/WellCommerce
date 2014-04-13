@@ -66,7 +66,7 @@ class Tree extends Field implements ElementInterface
             $this->formatAttributeJs('active', 'sActive'),
             $this->formatAttributeJs('onAfterDeleteId', 'sOnAfterDeleteId'),
             $this->formatAttributeJs('add_item_prompt', 'sAddItemPrompt'),
-            $this->formatAttributeJs('get_children', 'fGetChildren', ElementInterface::TYPE_FUNCTION),
+            $this->formatAttributeJs('getchildren', 'fGetChildren', ElementInterface::TYPE_FUNCTION),
             $this->formatAttributeJs('prevent_duplicates', 'bPreventDuplicates', ElementInterface::TYPE_BOOLEAN),
             $this->formatAttributeJs('prevent_duplicates_on_all_levels', 'bPreventDuplicatesOnAllLevels', ElementInterface::TYPE_BOOLEAN),
             $this->formatAttributeJs('set', 'sSet'),

@@ -165,9 +165,9 @@ abstract class Node
 
     protected function harvest($action, $levelsCount = 0, $levels = [])
     {
-        if (isset($this->_children)) {
+        if (isset($this->children)) {
             $array = [];
-            foreach ($this->_children as $child) {
+            foreach ($this->children as $child) {
                 $name = $child->getName();
                 if (empty($name)) {
                     continue;
@@ -195,9 +195,9 @@ abstract class Node
 
     protected function harvestRepetitions($level = 0)
     {
-        if (isset($this->_children)) {
+        if (isset($this->children)) {
             $array = [];
-            foreach ($this->_children as $child) {
+            foreach ($this->children as $child) {
                 array_push($array, $child->harvestRepetitions($level));
             }
 

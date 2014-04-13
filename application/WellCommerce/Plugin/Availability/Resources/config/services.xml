@@ -19,9 +19,6 @@
             <call method="setRepository">
                 <argument type="service" id="availability.repository"/>
             </call>
-            <call method="setDataGrid">
-                <argument type="service" id="availability.datagrid"/>
-            </call>
         </service>
 
         <service id="availability.repository" class="%availability.repository.class%">

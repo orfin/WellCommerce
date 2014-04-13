@@ -7,6 +7,7 @@
         <parameter key="cache_manager.class">Doctrine\Common\Cache\FilesystemCache</parameter>
         <parameter key="config_locator.class">Symfony\Component\Config\FileLocator</parameter>
         <parameter key="controller_resolver.class">WellCommerce\Core\Component\Controller\ControllerResolver</parameter>
+        <parameter key="datagrid_builder.class">WellCommerce\Core\Component\DataGrid\DataGridBuilder</parameter>
         <parameter key="event_dispatcher.class">Symfony\Component\EventDispatcher\ContainerAwareEventDispatcher</parameter>
         <parameter key="encryption.class">Illuminate\Encryption\Encrypter</parameter>
         <parameter key="finder.class">Symfony\Component\Finder\Finder</parameter>
@@ -70,6 +71,12 @@
         </service>
 
         <service id="form_builder" class="%form_builder.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="datagrid_builder" class="%datagrid_builder.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

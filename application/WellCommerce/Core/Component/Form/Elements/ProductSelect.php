@@ -35,7 +35,7 @@ class ProductSelect extends Select implements ElementInterface
             $this,
             'loadProducts_' . $this->_id
         ));
-        $this->attributes['load_category_children'] = App::getRegistry()->xajaxInterface->registerFunction(array(
+        $this->attributes['load_categorychildren'] = App::getRegistry()->xajaxInterface->registerFunction(array(
             'LoadCategoryChildren_' . $this->_id,
             $this,
             'loadCategoryChildren'
@@ -70,7 +70,7 @@ class ProductSelect extends Select implements ElementInterface
             $this->formatAttributeJs('jsfunction', 'fLoadProducts', ElementInterface::TYPE_FUNCTION),
             $this->formatAttributeJs('advanced_editor', 'bAdvancedEditor', ElementInterface::TYPE_BOOLEAN),
             $this->formatAttributeJs('datagrid_filter', 'ofilterData', ElementInterface::TYPE_OBJECT),
-            $this->formatAttributeJs('load_category_children', 'fLoadCategoryChildren', ElementInterface::TYPE_FUNCTION),
+            $this->formatAttributeJs('load_categorychildren', 'fLoadCategoryChildren', ElementInterface::TYPE_FUNCTION),
             $this->formatRepeatableJs(),
             $this->formatRulesJs(),
             $this->formatDependencyJs(),

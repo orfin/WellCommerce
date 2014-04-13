@@ -41,10 +41,10 @@ class FormBuilder extends AbstractComponent
      *
      * @return $this
      */
-    public function create(FormInterface $form, ModelInterface $model, array $options)
+    public function create(FormInterface $form, $model = null, array $options)
     {
         $this->form     = $form->buildForm($this, $options);
-        $this->formData = $form->prepareData($model);
+        $this->formData = (null === $model) ? [] : $form->prepareData($model);
         $this->options  = $options;
         $this->formData = $this->dispatchEvent($this->getInitEventName());
 

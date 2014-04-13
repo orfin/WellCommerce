@@ -139,6 +139,7 @@ abstract class AbstractDataGrid extends AbstractComponent
         $result = $this->query->get();
         $total  = count($result);
         $result = $this->processRows($result);
+
         return [
             'data_id'       => isset($request['id']) ? $request['id'] : '',
             'rows_num'      => $total,
@@ -258,6 +259,8 @@ abstract class AbstractDataGrid extends AbstractComponent
         ], $options);
 
         $this->options = $options;
+
+        return $this;
     }
 
     /**

@@ -17,7 +17,6 @@ use WellCommerce\Core\Component\AbstractComponent;
 use WellCommerce\Core\Component\DataGrid\DataGridInterface;
 use WellCommerce\Core\Component\Form\FormBuilderInterface;
 use WellCommerce\Core\Component\Form\FormInterface;
-use WellCommerce\Core\Component\Model\ModelInterface;
 use WellCommerce\Core\Component\Repository\RepositoryInterface;
 
 /**
@@ -62,16 +61,6 @@ abstract class AbstractController extends AbstractComponent
     }
 
     /**
-     * Sets DataGrid object for current controller
-     *
-     * @param DataGridInterface $datagrid
-     */
-    public function setDataGrid(DataGridInterface $datagrid)
-    {
-        $this->datagrid = $datagrid;
-    }
-
-    /**
      * Creates a form
      *
      * @param FormInterface  $form    Form instance
@@ -80,9 +69,22 @@ abstract class AbstractController extends AbstractComponent
      *
      * @return mixed
      */
-    public function createForm(FormInterface $form, ModelInterface $model, array $options)
+    public function createForm(FormInterface $form, $model = null, array $options)
     {
         return $this->get('form_builder')->create($form, $model, $options)->getForm();
+    }
+
+    /**
+     * Creates a datagrid
+     *
+     * @param DataGridInterface $dataGrid DataGrid instance
+     * @param array             $options  DataGrid options
+     *
+     * @return mixed
+     */
+    public function createDataGrid(DataGridInterface $dataGrid, array $options)
+    {
+        return $this->get('datagrid_builder')->create($dataGrid, $options)->getDataGrid();
     }
 
     /**

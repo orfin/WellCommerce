@@ -24,15 +24,17 @@ class DataGridEvent extends Event
 {
 
     protected $datagrid;
+    protected $options;
 
     /**
      * Constructor
      *
      * @param DataGridInterface $datagrid
      */
-    public function __construct(DataGridInterface $datagrid)
+    public function __construct(DataGridInterface $datagrid, array $options)
     {
         $this->datagrid = $datagrid;
+        $this->options  = $options;
     }
 
     /**
@@ -43,5 +45,25 @@ class DataGridEvent extends Event
     public function getDataGrid()
     {
         return $this->datagrid;
+    }
+
+    /**
+     * Returns DataGrid options
+     *
+     * @return mixed
+     */
+    public function getOptions()
+    {
+        return $this->options;
+    }
+
+    /**
+     * Sets DataGrid options
+     *
+     * @param array $options
+     */
+    public function setOptions(array $options)
+    {
+        $this->options = $options;
     }
 }

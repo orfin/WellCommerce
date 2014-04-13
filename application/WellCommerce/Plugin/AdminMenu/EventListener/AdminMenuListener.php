@@ -17,6 +17,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
+use WellCommerce\Core\Component\DataGrid\DataGridInterface;
 use WellCommerce\Plugin\AdminMenu\Event\AdminMenuInitEvent;
 
 /**
@@ -123,16 +124,42 @@ class AdminMenuListener implements EventSubscriberInterface
         print_r($data);
     }
 
+    public function onAvailabilityDataGridInitAction(Event $event)
+    {
+        $datagrid = $event->getDataGrid();
+
+        $options = $event->getOptions();
+
+        $options['mechanics']['rows_per_page'] = 10;
+
+        $event->setOptions($options);
+
+        $datagrid->addColumn('ud', [
+            'source'     => '1111',
+            'caption'    => 'UD',
+            'sorting'    => [
+                'default_order' => DataGridInterface::SORT_DIR_DESC
+            ],
+            'appearance' => [
+                'width'   => 90,
+            ],
+            'filter'     => [
+                'type' => DataGridInterface::FILTER_BETWEEN
+            ]
+        ]);
+    }
+
     public static function getSubscribedEvents()
     {
         return array(
-            KernelEvents::CONTROLLER      => array(
+            KernelEvents::CONTROLLER     => array(
                 'onKernelController',
                 -256
             ),
             //            'availability.form.init'   => 'onAvailabilityFormInitAction',
             //            'availability.form.submit' => 'onAvailabilityFormSubmitAction'
-//            'availability.model.pre_save' => 'onAvailabilityModelPreSaveAction'
+            //            'availability.model.pre_save' => 'onAvailabilityModelPreSaveAction'
+//            'availability.datagrid.init' => 'onAvailabilityDataGridInitAction'
         );
     }
 }

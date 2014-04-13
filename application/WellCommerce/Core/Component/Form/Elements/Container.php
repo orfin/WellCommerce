@@ -24,22 +24,22 @@ use WellCommerce\Core\Component\Form\Node;
 abstract class Container extends Node
 {
 
-    protected $_children;
-    protected $_tabsOffset;
+    protected $children;
+    protected $tabsOffset;
 
     public function __construct($attributes)
     {
         parent::__construct($attributes);
-        $this->_children   = [];
-        $this->_tabsOffset = '';
+        $this->children   = [];
+        $this->tabsOffset = '';
     }
 
     public function addChild($child)
     {
-        $this->_children[] = $child;
-        $child->form       = $this->form;
-        $child->parent     = $this;
-        $childName         = $child->getName();
+        $this->children[] = $child;
+        $child->form      = $this->form;
+        $child->parent    = $this;
+        $childName        = $child->getName();
         if (isset($this->form->fields[$childName])) {
             if (is_array($this->form->fields[$childName])) {
                 $this->form->fields[$childName][] = $child;
@@ -65,21 +65,21 @@ abstract class Container extends Node
 
     public function addRule($rule)
     {
-        foreach ($this->_children as $child) {
+        foreach ($this->children as $child) {
             $child->addRule($rule);
         }
     }
 
     public function clearRules()
     {
-        foreach ($this->_children as $child) {
+        foreach ($this->children as $child) {
             $child->clearRules();
         }
     }
 
     public function addFilter($filter)
     {
-        foreach ($this->_children as $child) {
+        foreach ($this->children as $child) {
             $child->addFilter($filter);
         }
     }
@@ -96,7 +96,7 @@ abstract class Container extends Node
 
     public function clearFilters()
     {
-        foreach ($this->_children as $child) {
+        foreach ($this->children as $child) {
             $child->clearFilters();
         }
     }
@@ -104,7 +104,7 @@ abstract class Container extends Node
     public function populate($value)
     {
         if (isset($value) && is_array($value) && $this->isIterated($value)) {
-            foreach ($this->_children as $child) {
+            foreach ($this->children as $child) {
                 $valueArray = [];
                 if (isset($value) && is_array($value)) {
                     foreach ($value as $i => $repetition) {
@@ -121,7 +121,7 @@ abstract class Container extends Node
                 $child->populate($valueArray);
             }
         } else { // simple value
-            foreach ($this->_children as $child) {
+            foreach ($this->children as $child) {
                 $name = $child->getName();
                 if (empty($name)) {
                     continue;
@@ -137,7 +137,7 @@ abstract class Container extends Node
 
     public function getChildren()
     {
-        return $this->_children;
+        return $this->children;
     }
 
     public function getChild($name)
@@ -157,8 +157,8 @@ abstract class Container extends Node
     protected function renderChildren()
     {
         $render = [];
-        foreach ($this->_children as $child) {
-            $render[] = $child->render($this->_renderMode, $this->_tabs . $this->_tabsOffset);
+        foreach ($this->children as $child) {
+            $render[] = $child->render($this->_renderMode, $this->_tabs . $this->tabsOffset);
         }
 
         return implode(',', $render);
@@ -167,7 +167,7 @@ abstract class Container extends Node
     public function isValid($values = [])
     {
         $result = true;
-        foreach ($this->_children as $child) {
+        foreach ($this->children as $child) {
             if (!$child->isValid()) {
                 $result = false;
             }
@@ -179,7 +179,7 @@ abstract class Container extends Node
     protected function getValues()
     {
         $values = [];
-        foreach ($this->_children as $child) {
+        foreach ($this->children as $child) {
             if ($child instanceof Container) {
                 $values[$child->getName()] = $child->getValues();
             } elseif ($child instanceof Field) {

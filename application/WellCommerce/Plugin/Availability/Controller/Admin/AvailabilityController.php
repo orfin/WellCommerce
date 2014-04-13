@@ -15,6 +15,7 @@ use WellCommerce\Core\Component\Controller\AbstractAdminController;
 use WellCommerce\Plugin\Availability\Event\AvailabilityFormEvent;
 use WellCommerce\Plugin\Availability\Form\AvailabilityDataTransformer;
 use WellCommerce\Plugin\Availability\Form\AvailabilityForm;
+use WellCommerce\Plugin\Availability\Model\Availability;
 
 /**
  * Class AvailabilityController
@@ -24,6 +25,47 @@ use WellCommerce\Plugin\Availability\Form\AvailabilityForm;
  */
 class AvailabilityController extends AbstractAdminController
 {
+    public function indexAction()
+    {
+        $grid = $this->get('availability.datagrid');
+
+        $datagrid = $this->createDataGrid($grid, [
+            'id'             => 'availability',
+            'event_handlers' => [
+                'load'       => $this->getXajaxManager()->registerFunction(['LoadAvailability', $grid, 'loadData']),
+                'edit_row'   => 'editAvailability',
+                'click_row'  => 'editAvailability',
+                'delete_row' => $this->getXajaxManager()->registerFunction(['DeleteAvailability', $grid, 'deleteRow']),
+            ],
+            'routes'         => [
+                'edit' => $this->generateUrl('admin.availability.edit')
+            ]
+        ]);
+
+        return [
+            'datagrid' => $datagrid
+        ];
+    }
+
+    public function addAction()
+    {
+        $form = $this->createForm($this->get('availability.form'), null, [
+            'name'   => 'availability',
+            'method' => 'POST',
+            'action' => $this->generateUrl('admin.availability.add')
+        ]);
+
+        if ($form->isValid()) {
+            $this->repository->save($form->getSubmittedData());
+
+            return $this->redirect($this->generateUrl('admin.availability.index'));
+        }
+
+        return [
+            'form' => $form
+        ];
+    }
+
     public function editAction($id)
     {
         $model = $this->repository->find($id);
