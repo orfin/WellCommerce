@@ -14,6 +14,7 @@ namespace WellCommerce\Plugin\Availability\Form;
 use WellCommerce\Core\Component\Form\AbstractForm;
 use WellCommerce\Core\Component\Form\FormBuilder;
 use WellCommerce\Core\Component\Form\FormInterface;
+use WellCommerce\Core\Component\Model\ModelInterface;
 use WellCommerce\Plugin\Availability\Model\Availability;
 
 /**
@@ -25,12 +26,7 @@ use WellCommerce\Plugin\Availability\Model\Availability;
 class AvailabilityForm extends AbstractForm implements FormInterface
 {
     /**
-     * Builds form instance to add/edit Availability model
-     *
-     * @param FormBuilder $builder FormBuilder instance
-     * @param array       $options Form options
-     *
-     * @return mixed|\WellCommerce\Core\Component\Form\Elements\Form
+     * {@inheritdoc}
      */
     public function buildForm(FormBuilder $builder, array $options)
     {
@@ -80,13 +76,9 @@ class AvailabilityForm extends AbstractForm implements FormInterface
     }
 
     /**
-     * Prepares model data to populate the Availability form
-     *
-     * @param Availability $model
-     *
-     * @return array
+     * {@inheritdoc}
      */
-    public function prepareData(Availability $model)
+    public function prepareData(ModelInterface $model)
     {
         $formData     = [];
         $accessor     = $this->getPropertyAccessor();

@@ -6,6 +6,7 @@
 	<parameters>
 		<parameter key="session.class">Symfony\Component\HttpFoundation\Session\Session</parameter>
 		<parameter key="session.handler.class">Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler</parameter>
+		<parameter key="session.attribute_bag.class">Symfony\Component\HttpFoundation\Session\Attribute\NamespacedAttributeBag</parameter>
 		<parameter key="session.storage.class">Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage</parameter>
     </parameters>
     
@@ -21,8 +22,11 @@
             <argument type="service" id="session.handler"/>
         </service>
 
+        <service id="session.attribute_bag" class="%session.attribute_bag.class%" />
+
         <service id="session" class="%session.class%">
             <argument type="service" id="session.storage"/>
+            <argument type="service" id="session.attribute_bag"/>
             <call method="start"/>
         </service>
 

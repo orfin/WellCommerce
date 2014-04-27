@@ -23,26 +23,10 @@ use WellCommerce\Plugin\ClientGroup\Event\ClientGroupDataGridEvent;
  */
 class ClientGroupDataGrid extends AbstractDataGrid implements DataGridInterface
 {
-    public function configure()
-    {
-        $this->setOptions([
-            'id'             => 'client_group',
-            'event_handlers' => [
-                'load'       => $this->getXajaxManager()->registerFunction(['LoadClientGroup', $this, 'loadData']),
-                'edit_row'   => 'editClientGroup',
-                'click_row'  => 'editClientGroup',
-                'delete_row' => $this->getXajaxManager()->registerFunction(['DeleteClientGroup', $this, 'deleteRow']),
-            ],
-            'routes'         => [
-                'edit' => $this->generateUrl('admin.client_group.edit')
-            ]
-        ]);
-    }
-
     /**
      * {@inheritdoc}
      */
-    public function init()
+    public function buildDataGrid()
     {
         $this->addColumn('id', [
             'source'     => 'client_group.id',
@@ -88,8 +72,6 @@ class ClientGroupDataGrid extends AbstractDataGrid implements DataGridInterface
             ->join('client_group_translation', 'client_group_translation.client_group_id', '=', 'client_group.id')
             ->groupBy('client_group.id');
 
-        $event = new ClientGroupDataGridEvent($this);
-
-        $this->getDispatcher()->dispatch(ClientGroupDataGridEvent::DATAGRID_INIT_EVENT, $event);
+        return $this;
     }
 }

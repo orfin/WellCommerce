@@ -21,5 +21,66 @@ use WellCommerce\Core\Component\Controller\AbstractAdminController;
  */
 class ClientGroupController extends AbstractAdminController
 {
+    public function indexAction()
+    {
+        $grid = $this->get('client_group.datagrid');
 
+        $datagrid = $this->createDataGrid($grid, [
+            'id'             => 'client_group',
+            'event_handlers' => [
+                'load'       => $this->getXajaxManager()->registerFunction(['LoadClientGroup', $grid, 'loadData']),
+                'edit_row'   => 'editClientGroup',
+                'click_row'  => 'editClientGroup',
+                'delete_row' => $this->getXajaxManager()->registerFunction(['DeleteClientGroup', $grid, 'deleteRow']),
+            ],
+            'routes'         => [
+                'edit' => $this->generateUrl('admin.client_group.edit')
+            ]
+        ]);
+
+        return [
+            'datagrid' => $datagrid
+        ];
+    }
+
+    public function addAction()
+    {
+        $form = $this->createForm($this->get('client_group.form'), null, [
+            'name'   => 'client_group',
+            'method' => 'POST',
+            'action' => $this->generateUrl('admin.client_group.add')
+        ]);
+
+        if ($form->isValid()) {
+            $this->repository->save($form->getSubmittedData());
+
+            return $this->redirect($this->generateUrl('admin.client_group.index'));
+        }
+
+        return [
+            'form' => $form
+        ];
+    }
+
+    public function editAction($id)
+    {
+        $model = $this->repository->find($id);
+
+        $form = $this->createForm($this->get('client_group.form'), $model, [
+            'name'   => 'client_group',
+            'method' => 'POST',
+            'action' => $this->generateUrl('admin.client_group.edit', ['id' => $model->id])
+        ]);
+
+        if ($form->isValid()) {
+            $this->repository->save($form->getSubmittedData(), $id);
+
+            return $this->redirect($this->generateUrl('admin.client_group.index'));
+        }
+
+        return [
+            'model' => $model,
+            'form'  => $form
+        ];
+    }
 }

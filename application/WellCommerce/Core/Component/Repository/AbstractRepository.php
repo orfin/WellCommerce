@@ -12,6 +12,7 @@
 namespace WellCommerce\Core\Component\Repository;
 
 use Closure;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use WellCommerce\Core\Component\AbstractComponent;
 use WellCommerce\Core\Event\RepositoryEvent;
 

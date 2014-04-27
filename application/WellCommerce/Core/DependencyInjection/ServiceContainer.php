@@ -35,6 +35,7 @@ class ServiceContainer extends Container
         $this->methodMap = array(
             'admin_menu.repository' => 'getAdminMenu_RepositoryService',
             'admin_menu.subscriber' => 'getAdminMenu_SubscriberService',
+            'admin_user_listener' => 'getAdminUserListenerService',
             'assetic_factory' => 'getAsseticFactoryService',
             'assetic_manager' => 'getAsseticManagerService',
             'assetic_twig_loader' => 'getAsseticTwigLoaderService',
@@ -137,6 +138,7 @@ class ServiceContainer extends Container
             'router.loader' => 'getRouter_LoaderService',
             'router.subscriber' => 'getRouter_SubscriberService',
             'session' => 'getSessionService',
+            'session.attribute_bag' => 'getSession_AttributeBagService',
             'session.handler' => 'getSession_HandlerService',
             'session.storage' => 'getSession_StorageService',
             'shipping_method.calculator' => 'getShippingMethod_CalculatorService',
@@ -167,6 +169,7 @@ class ServiceContainer extends Container
             'twig.extension.intl' => 'getTwig_Extension_IntlService',
             'twig.extension.routing' => 'getTwig_Extension_RoutingService',
             'twig.extension.translation' => 'getTwig_Extension_TranslationService',
+            'twig.extension.user' => 'getTwig_Extension_UserService',
             'twig.extension.xajax' => 'getTwig_Extension_XajaxService',
             'twig.loader.admin' => 'getTwig_Loader_AdminService',
             'twig.loader.front' => 'getTwig_Loader_FrontService',
@@ -174,6 +177,11 @@ class ServiceContainer extends Container
             'unit.form' => 'getUnit_FormService',
             'unit.repository' => 'getUnit_RepositoryService',
             'uploader' => 'getUploaderService',
+            'user.admin.controller' => 'getUser_Admin_ControllerService',
+            'user.datagrid' => 'getUser_DatagridService',
+            'user.form' => 'getUser_FormService',
+            'user.form_login' => 'getUser_FormLoginService',
+            'user.repository' => 'getUser_RepositoryService',
             'xajax' => 'getXajaxService',
             'xajax_manager' => 'getXajaxManagerService',
         );
@@ -209,6 +217,19 @@ class ServiceContainer extends Container
     protected function getAdminMenu_SubscriberService()
     {
         return $this->services['admin_menu.subscriber'] = new \WellCommerce\Plugin\AdminMenu\EventListener\AdminMenuListener($this);
+    }
+
+    /**
+     * Gets the 'admin_user_listener' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Core\EventListener\AdminUserListener A WellCommerce\Core\EventListener\AdminUserListener instance.
+     */
+    protected function getAdminUserListenerService()
+    {
+        return $this->services['admin_user_listener'] = new \WellCommerce\Core\EventListener\AdminUserListener($this);
     }
 
     /**
@@ -295,12 +316,7 @@ class ServiceContainer extends Container
      */
     protected function getAvailability_DatagridService()
     {
-        $this->services['availability.datagrid'] = $instance = new \WellCommerce\Plugin\Availability\DataGrid\AvailabilityDataGrid();
-
-        $instance->setRepository($this->get('availability.repository'));
-        $instance->setContainer($this);
-
-        return $instance;
+        return $this->services['availability.datagrid'] = new \WellCommerce\Plugin\Availability\DataGrid\AvailabilityDataGrid($this, $this->get('availability.repository'));
     }
 
     /**
@@ -484,8 +500,6 @@ class ServiceContainer extends Container
 
         $instance->setContainer($this);
         $instance->setRepository($this->get('client_group.repository'));
-        $instance->setDataGrid($this->get('client_group.datagrid'));
-        $instance->setFormBuilder($this->get('client_group.form'));
 
         return $instance;
     }
@@ -959,9 +973,11 @@ class ServiceContainer extends Container
     {
         $this->services['event_dispatcher'] = $instance = new \Symfony\Component\EventDispatcher\ContainerAwareEventDispatcher($this);
 
+        $instance->addSubscriberService('admin_user_listener', 'WellCommerce\\Core\\EventListener\\AdminUserListener');
         $instance->addSubscriberService('router.subscriber', 'Symfony\\Component\\HttpKernel\\EventListener\\RouterListener');
         $instance->addSubscriberService('locale.listener', 'Symfony\\Component\\HttpKernel\\EventListener\\LocaleListener');
         $instance->addSubscriberService('template_listener', 'WellCommerce\\Core\\EventListener\\TemplateListener');
+        $instance->addSubscriberService('admin_user_listener', 'WellCommerce\\Core\\EventListener\\AdminUserListener');
         $instance->addSubscriberService('router.subscriber', 'Symfony\\Component\\HttpKernel\\EventListener\\RouterListener');
         $instance->addSubscriberService('locale.listener', 'Symfony\\Component\\HttpKernel\\EventListener\\LocaleListener');
         $instance->addSubscriberService('template_listener', 'WellCommerce\\Core\\EventListener\\TemplateListener');
@@ -1923,11 +1939,24 @@ class ServiceContainer extends Container
      */
     protected function getSessionService()
     {
-        $this->services['session'] = $instance = new \Symfony\Component\HttpFoundation\Session\Session($this->get('session.storage'));
+        $this->services['session'] = $instance = new \Symfony\Component\HttpFoundation\Session\Session($this->get('session.storage'), $this->get('session.attribute_bag'));
 
         $instance->start();
 
         return $instance;
+    }
+
+    /**
+     * Gets the 'session.attribute_bag' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\HttpFoundation\Session\Attribute\NamespacedAttributeBag A Symfony\Component\HttpFoundation\Session\Attribute\NamespacedAttributeBag instance.
+     */
+    protected function getSession_AttributeBagService()
+    {
+        return $this->services['session.attribute_bag'] = new \Symfony\Component\HttpFoundation\Session\Attribute\NamespacedAttributeBag();
     }
 
     /**
@@ -2273,6 +2302,7 @@ class ServiceContainer extends Container
         $h = $this->get('twig.extension.datagrid');
         $i = $this->get('twig.extension.assetic');
         $j = $this->get('twig.extension.contact');
+        $k = $this->get('twig.extension.user');
 
         $this->services['twig'] = $instance = new \Twig_Environment($this->get('twig.loader.front'), array('cache' => 'D:\\Git\\WellCommerce\\var/cache', 'auto_reload' => true, 'autoescape' => true, 'debug' => true));
 
@@ -2304,6 +2334,7 @@ class ServiceContainer extends Container
         $instance->addExtension($h);
         $instance->addExtension($i);
         $instance->addExtension($j);
+        $instance->addExtension($k);
         $instance->addExtension($a);
         $instance->addExtension($b);
         $instance->addExtension($c);
@@ -2314,6 +2345,7 @@ class ServiceContainer extends Container
         $instance->addExtension($h);
         $instance->addExtension($i);
         $instance->addExtension($j);
+        $instance->addExtension($k);
 
         return $instance;
     }
@@ -2436,6 +2468,19 @@ class ServiceContainer extends Container
     }
 
     /**
+     * Gets the 'twig.extension.user' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Plugin\User\Twig\UserExtension A WellCommerce\Plugin\User\Twig\UserExtension instance.
+     */
+    protected function getTwig_Extension_UserService()
+    {
+        return $this->services['twig.extension.user'] = new \WellCommerce\Plugin\User\Twig\UserExtension($this);
+    }
+
+    /**
      * Gets the 'twig.extension.xajax' service.
      *
      * This service is shared.
@@ -2540,6 +2585,88 @@ class ServiceContainer extends Container
 
         $instance->setContainer($this);
         $instance->setPaths(array('original' => 'upload/gallery/original', 'cache' => 'upload/gallery/cache'));
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'user.admin.controller' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Plugin\User\Controller\Admin\UserController A WellCommerce\Plugin\User\Controller\Admin\UserController instance.
+     */
+    protected function getUser_Admin_ControllerService()
+    {
+        $this->services['user.admin.controller'] = $instance = new \WellCommerce\Plugin\User\Controller\Admin\UserController();
+
+        $instance->setContainer($this);
+        $instance->setRepository($this->get('user.repository'));
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'user.datagrid' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Plugin\User\DataGrid\UserDataGrid A WellCommerce\Plugin\User\DataGrid\UserDataGrid instance.
+     */
+    protected function getUser_DatagridService()
+    {
+        return $this->services['user.datagrid'] = new \WellCommerce\Plugin\User\DataGrid\UserDataGrid($this, $this->get('user.repository'));
+    }
+
+    /**
+     * Gets the 'user.form' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Plugin\User\Form\UserForm A WellCommerce\Plugin\User\Form\UserForm instance.
+     */
+    protected function getUser_FormService()
+    {
+        $this->services['user.form'] = $instance = new \WellCommerce\Plugin\User\Form\UserForm();
+
+        $instance->setContainer($this);
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'user.form_login' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Plugin\User\Form\UserLoginForm A WellCommerce\Plugin\User\Form\UserLoginForm instance.
+     */
+    protected function getUser_FormLoginService()
+    {
+        $this->services['user.form_login'] = $instance = new \WellCommerce\Plugin\User\Form\UserLoginForm();
+
+        $instance->setContainer($this);
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'user.repository' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Plugin\User\Repository\UserRepository A WellCommerce\Plugin\User\Repository\UserRepository instance.
+     */
+    protected function getUser_RepositoryService()
+    {
+        $this->services['user.repository'] = $instance = new \WellCommerce\Plugin\User\Repository\UserRepository();
+
+        $instance->setContainer($this);
 
         return $instance;
     }
@@ -2686,6 +2813,7 @@ class ServiceContainer extends Container
             'router.subscriber.class' => 'Symfony\\Component\\HttpKernel\\EventListener\\RouterListener',
             'session.class' => 'Symfony\\Component\\HttpFoundation\\Session\\Session',
             'session.handler.class' => 'Symfony\\Component\\HttpFoundation\\Session\\Storage\\Handler\\PdoSessionHandler',
+            'session.attribute_bag.class' => 'Symfony\\Component\\HttpFoundation\\Session\\Attribute\\NamespacedAttributeBag',
             'session.storage.class' => 'Symfony\\Component\\HttpFoundation\\Session\\Storage\\NativeSessionStorage',
             'template_guesser.class' => 'WellCommerce\\Core\\Template\\TemplateGuesser',
             'template_listener.class' => 'WellCommerce\\Core\\EventListener\\TemplateListener',
@@ -2732,6 +2860,12 @@ class ServiceContainer extends Container
             'product.datagrid.class' => 'WellCommerce\\Plugin\\Product\\DataGrid\\ProductDataGrid',
             'product.form.class' => 'WellCommerce\\Plugin\\Product\\Form\\ProductForm',
             'product_box.layout.configurator.class' => 'WellCommerce\\Plugin\\Product\\Layout\\ProductBoxConfigurator',
+            'user.admin.controller.class' => 'WellCommerce\\Plugin\\User\\Controller\\Admin\\UserController',
+            'user.repository.class' => 'WellCommerce\\Plugin\\User\\Repository\\UserRepository',
+            'user.datagrid.class' => 'WellCommerce\\Plugin\\User\\DataGrid\\UserDataGrid',
+            'user.form.class' => 'WellCommerce\\Plugin\\User\\Form\\UserForm',
+            'user.form_login.class' => 'WellCommerce\\Plugin\\User\\Form\\UserLoginForm',
+            'twig.extension.user.class' => 'WellCommerce\\Plugin\\User\\Twig\\UserExtension',
         );
     }
 }

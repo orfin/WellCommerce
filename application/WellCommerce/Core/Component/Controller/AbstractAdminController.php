@@ -11,6 +11,9 @@
  */
 namespace WellCommerce\Core\Component\Controller;
 
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use WellCommerce\Core\Component\Repository\RepositoryInterface;
+
 /**
  * Class AbstractAdminController
  *
@@ -20,64 +23,13 @@ namespace WellCommerce\Core\Component\Controller;
 abstract class AbstractAdminController extends AbstractController implements AdminControllerInterface
 {
     /**
-     * Default indexAction logic for all controllers
+     * Get user identifier
      *
-     * @return array
+     * @return mixed
      */
-    public function indexAction()
+    public function getUserId()
     {
-        $this->datagrid->configure();
-
-        $this->datagrid->init();
-
-        return [
-            'datagrid' => $this->datagrid,
-        ];
-    }
-
-    /**
-     * Default addAction logic for all controllers
-     *
-     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function addAction()
-    {
-        $form = $this->formBuilder->init();
-
-        if ($this->getRequest()->isMethod('POST') && $form->isValid()) {
-
-            $this->repository->save($form->getSubmitValuesFlat());
-
-            return $this->redirect($this->getDefaultUrl());
-        }
-
-        return [
-            'form' => $form
-        ];
-    }
-
-    /**
-     * Default editAction logic for all controllers
-     *
-     * @param $id
-     *
-     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function editAction($id)
-    {
-        $populateData = $this->repository->getPopulateData($id);
-        $form         = $this->formBuilder->init($populateData);
-
-        if ($this->getRequest()->isMethod('POST') && $form->isValid()) {
-
-            $this->repository->save($form->getSubmitValuesFlat(), $id);
-
-            return $this->redirect($this->getDefaultUrl());
-        }
-
-        return [
-            'form' => $form
-        ];
+        return $this->getSession()->get('user_id');
     }
 
     /**

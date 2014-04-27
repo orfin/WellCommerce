@@ -24,9 +24,13 @@ use WellCommerce\Core\Component\DataGrid\DataGridInterface;
  */
 class DataGridExtension extends \Twig_Extension
 {
-
     protected $container;
 
+    /**
+     * Constructor
+     *
+     * @param ContainerInterface $container
+     */
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
@@ -34,25 +38,25 @@ class DataGridExtension extends \Twig_Extension
 
     public function getFunctions()
     {
-        return array(
-            new \Twig_SimpleFunction('datagrid_renderer', array(
-                $this,
-                'render'
-            ), array(
-                'is_safe' => Array(
-                    'html'
-                )
-            ))
-        );
+        return [
+            new \Twig_SimpleFunction('datagrid_renderer', [$this, 'render'], ['is_safe' => ['html']])
+        ];
     }
 
-    public function render(DataGridInterface $dataGrid)
+    /**
+     * Renders DataGrid
+     *
+     * @param DataGridInterface $datagrid DataGrid instance
+     *
+     * @return mixed
+     */
+    public function render(DataGridInterface $datagrid)
     {
-        $columns = $dataGrid->getColumns();
-
         return $this->container->get('twig')->render('datagrid.twig', [
-            'datagrid_options' => $dataGrid->getOptions(),
-            'datagrid_columns' => $columns
+            'id'      => $datagrid->getId(),
+            'options' => $datagrid->getOptions(),
+            'routes'  => $datagrid->getRoutes(),
+            'columns' => $datagrid->getColumnCollection()->all()
         ]);
     }
 

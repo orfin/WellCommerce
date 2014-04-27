@@ -17,6 +17,8 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
+use WellCommerce\Core\Component\DataGrid\Column\ColumnInterface;
+use WellCommerce\Core\Component\DataGrid\Column\DataGridColumn;
 use WellCommerce\Core\Component\DataGrid\DataGridInterface;
 use WellCommerce\Plugin\AdminMenu\Event\AdminMenuInitEvent;
 
@@ -127,26 +129,28 @@ class AdminMenuListener implements EventSubscriberInterface
     public function onAvailabilityDataGridInitAction(Event $event)
     {
         $datagrid = $event->getDataGrid();
+        $options  = $datagrid->getOptions();
 
-        $options = $event->getOptions();
+        $options['foo'] = 1;
 
-        $options['mechanics']['rows_per_page'] = 10;
+        $datagrid->setOptions($options);
 
-        $event->setOptions($options);
+        $collection = $datagrid->getColumnCollection();
 
-        $datagrid->addColumn('ud', [
+        $collection->add(new DataGridColumn([
+            'id'         => 'test',
             'source'     => '1111',
             'caption'    => 'UD',
             'sorting'    => [
-                'default_order' => DataGridInterface::SORT_DIR_DESC
+                'default_order' => ColumnInterface::SORT_DIR_DESC
             ],
             'appearance' => [
-                'width'   => 90,
+                'width' => 90,
             ],
             'filter'     => [
-                'type' => DataGridInterface::FILTER_BETWEEN
+                'type' => ColumnInterface::FILTER_BETWEEN
             ]
-        ]);
+        ]));
     }
 
     public static function getSubscribedEvents()

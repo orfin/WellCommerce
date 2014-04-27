@@ -11,9 +11,11 @@
  */
 namespace WellCommerce\Plugin\ClientGroup\Form;
 
-use WellCommerce\Core\Component\Form\AbstractFormBuilder;
+use WellCommerce\Core\Component\Form\AbstractForm;
+use WellCommerce\Core\Component\Form\FormBuilder;
 use WellCommerce\Core\Component\Form\FormInterface;
 use WellCommerce\Plugin\ClientGroup\Event\ClientGroupFormEvent;
+use WellCommerce\Plugin\ClientGroup\Model\ClientGroup;
 
 /**
  * Class ClientGroupForm
@@ -21,53 +23,52 @@ use WellCommerce\Plugin\ClientGroup\Event\ClientGroupFormEvent;
  * @package WellCommerce\Plugin\ClientGroup\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientGroupForm extends AbstractFormBuilder implements FormInterface
+class ClientGroupForm extends AbstractForm implements FormInterface
 {
     /**
-     * Initializes client_group Form
+     * Builds form instance to add/edit ClientGroup model
      *
-     * @param array $client_groupData
+     * @param FormBuilder $builder FormBuilder instance
+     * @param array       $options Form options
      *
-     * @return Form\Elements\Form
+     * @return mixed|\WellCommerce\Core\Component\Form\Elements\Form
      */
-    public function init($client_groupData = [])
+    public function buildForm(FormBuilder $builder, array $options)
     {
-        $form = $this->addForm([
-            'name' => 'client_group',
-        ]);
+        $form = $builder->addForm($options);
 
-        $requiredData = $form->addChild($this->addFieldset([
+        $requiredData = $form->addChild($builder->addFieldset([
             'name'  => 'required_data',
             'label' => $this->trans('Required data')
         ]));
 
-        $requiredData->addChild($this->addTextField([
+        $requiredData->addChild($builder->addTextField([
             'name'    => 'discount',
             'label'   => $this->trans('Discount'),
             'comment' => $this->trans('Discount for particular client group'),
             'suffix'  => '%',
             'rules'   => [
-                $this->addRuleCustom($this->trans('Discount must be between 0-100'), function ($value) {
+                $builder->addRuleCustom($this->trans('Discount must be between 0-100'), function ($value) {
                     return ($value >= 0 && $value <= 100);
                 })
             ],
             'filters' => [
-                $this->addFilterCommaToDotChanger()
+                $builder->addFilterCommaToDotChanger()
             ],
         ]));
 
-        $languageData = $requiredData->addChild($this->addFieldsetLanguage([
+        $languageData = $requiredData->addChild($builder->addFieldsetLanguage([
             'name'      => 'language_data',
             'label'     => $this->trans('Translations'),
             'languages' => $this->getLanguages()
         ]));
 
-        $languageData->addChild($this->addTextField([
+        $languageData->addChild($builder->addTextField([
             'name'  => 'name',
             'label' => $this->trans('Name'),
             'rules' => [
-                $this->addRuleRequired($this->trans('Name is required')),
-                $this->addRuleLanguageUnique($this->trans('Name already exists'),
+                $builder->addRuleRequired($this->trans('Name is required')),
+                $builder->addRuleLanguageUnique($this->trans('Name already exists'),
                     [
                         'table'   => 'client_group_translation',
                         'column'  => 'name',
@@ -81,17 +82,32 @@ class ClientGroupForm extends AbstractFormBuilder implements FormInterface
         ]));
 
         $form->addFilters([
-            $this->addFilterNoCode(),
-            $this->addFilterTrim(),
-            $this->addFilterSecure()
+            $builder->addFilterNoCode(),
+            $builder->addFilterTrim(),
+            $builder->addFilterSecure()
         ]);
 
-        $event = new ClientGroupFormEvent($form, $client_groupData);
-
-        $this->getDispatcher()->dispatch(ClientGroupFormEvent::FORM_INIT_EVENT, $event);
-
-        $form->populate($event->getPopulateData());
-
         return $form;
+    }
+
+    /**
+     * Prepares model data to populate the ClientGroup form
+     *
+     * @param ClientGroup $model
+     *
+     * @return array
+     */
+    public function prepareData(ClientGroup $model)
+    {
+        $formData     = [];
+        $accessor     = $this->getPropertyAccessor();
+        $languageData = $model->getTranslationData();
+
+        $accessor->setValue($formData, '[required_data]', [
+            'discount'      => $model->discount,
+            'language_data' => $languageData,
+        ]);
+
+        return $formData;
     }
 }

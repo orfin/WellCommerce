@@ -23,7 +23,7 @@ use WellCommerce\Core\Event\DataGridEvent;
  */
 class DataGridBuilder extends AbstractComponent
 {
-    const DATAGRID_INIT = 'datagrid.init';
+    const DATAGRID_INIT_EVENT = 'datagrid.init';
 
     protected $datagrid;
     protected $options;
@@ -31,34 +31,32 @@ class DataGridBuilder extends AbstractComponent
     /**
      * Creates datagrid and triggers event after initialization
      *
-     * @param DataGridInterface $datagrid DataGrid instance
-     * @param array             $options  DataGrid options
+     * @param DataGridInterface $datagrid
      *
      * @return $this
      */
-    public function create(DataGridInterface $datagrid, array $options)
+    public function create(DataGridInterface $datagrid)
     {
-        $this->datagrid = $datagrid->buildDataGrid();
-        $this->options  = $options;
-        $this->datagrid = $this->dispatchEvent($this->getInitEventName());
+        $this->datagrid = $datagrid;
+        $this->datagrid->initColumns();
+        $this->datagrid->setQuery();
+        $this->dispatchEvent($this->getInitEventName());
 
-        return $this;
+        return $this->datagrid;
     }
 
     /**
-     * Dispatches the event for form action
+     * Triggers the event for form action
      *
      * @param       $eventName
      * @param array $data
      * @param       $id
      */
-    final protected function dispatchEvent($eventName)
+    private function dispatchEvent($eventName)
     {
-        $event = new DataGridEvent($this->datagrid, $this->options);
+        $event = new DataGridEvent($this->datagrid);
         $this->getDispatcher()->dispatch($eventName, $event);
-        $this->datagrid->setOptions($event->getOptions());
-
-        return $event->getDataGrid();
+        $this->datagrid = $event->getDataGrid();
     }
 
     /**
@@ -68,16 +66,6 @@ class DataGridBuilder extends AbstractComponent
      */
     private function getInitEventName()
     {
-        return sprintf('%s.%s', $this->options['id'], self::DATAGRID_INIT);
-    }
-
-    /**
-     * Returns DataGrid object
-     *
-     * @return mixed
-     */
-    public function getDataGrid()
-    {
-        return $this->datagrid;
+        return sprintf('%s.%s', $this->datagrid->getId(), self::DATAGRID_INIT_EVENT);
     }
 }

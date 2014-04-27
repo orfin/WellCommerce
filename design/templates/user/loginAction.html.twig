@@ -1,0 +1,14 @@
+{% include 'header.html.twig' %}
+<body class="welcome-screen">
+    <div id="header">
+        <div class="layout-container">
+            <h1><a href="{{ path('frontend.home_page.index') }}"><img src="{{ asset('design/_images_panel/logos/logo.png') }}" alt=""/></a></h1>
+        </div>
+    </div>
+    <div id="message-bar"></div>
+    <div id="content" class="layout-container">
+        <div id="capslock">{% trans %}Caps-lock is pressed{% endtrans %}</div>
+        {{ form(form) }}
+    </div>
+</body>
+{% include 'footer.html.twig' %}

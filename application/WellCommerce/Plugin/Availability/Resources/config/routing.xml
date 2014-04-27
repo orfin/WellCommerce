@@ -5,14 +5,17 @@
 
     <route id="admin.availability.index" pattern="/admin/availability/index">
         <default key="_controller">availability.admin.controller:indexAction</default>
+        <default key="_secure">true</default>
     </route>
 
     <route id="admin.availability.add" pattern="/admin/availability/add">
         <default key="_controller">availability.admin.controller:addAction</default>
+        <default key="_secure">true</default>
     </route>
 
     <route id="admin.availability.edit" pattern="/admin/availability/edit/{id}">
         <default key="_controller">availability.admin.controller:editAction</default>
+        <default key="_secure">true</default>
         <default key="id"></default>
     </route>
 </routes>

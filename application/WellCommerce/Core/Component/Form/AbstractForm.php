@@ -12,6 +12,7 @@
 namespace WellCommerce\Core\Component\Form;
 
 use WellCommerce\Core\Component\AbstractComponent;
+use WellCommerce\Core\Component\Model\ModelInterface;
 
 /**
  * Class AbstractForm
@@ -21,4 +22,11 @@ use WellCommerce\Core\Component\AbstractComponent;
  */
 class AbstractForm extends AbstractComponent
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function prepareData(ModelInterface $model)
+    {
+        return [];
+    }
 }

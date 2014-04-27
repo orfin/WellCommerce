@@ -20,7 +20,6 @@ namespace WellCommerce\Core\Component\Repository;
  */
 interface RepositoryInterface
 {
-
     /**
      * Returns items collection
      *

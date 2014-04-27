@@ -11,43 +11,93 @@
  */
 namespace WellCommerce\Core\Component\DataGrid;
 
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use WellCommerce\Core\Component\AbstractComponent;
-use WellCommerce\Core\Component\Repository\AbstractRepository;
+use WellCommerce\Core\Component\DataGrid\Column\ColumnCollection;
+use WellCommerce\Core\Component\Repository\RepositoryInterface;
 use xajaxResponse;
 
 /**
- * Class DataGrid
+ * Class AbstractDataGrid
  *
- * @package WellCommerce\Core
- * @author  Adam Piotrowski
+ * @package WellCommerce\Core\Component\DataGrid
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 abstract class AbstractDataGrid extends AbstractComponent
 {
-
-    /**
-     * @var
-     */
     protected $query;
-
-    /**
-     * @var
-     */
     protected $columns;
-
-    /**
-     * @var
-     */
     protected $warnings;
-
-    /**
-     * @var
-     */
     protected $container;
+    protected $repository;
+    private $options = [];
 
     /**
-     * @var
+     * Constructor
+     *
+     * @param ContainerInterface  $container  Service container
+     * @param RepositoryInterface $repository DataGrid related repository
+     * @param array               $options    DataGrid options
      */
-    protected $repository;
+    public function __construct(ContainerInterface $container, RepositoryInterface $repository, array $options = [])
+    {
+        parent::setContainer($container);
+        $this->repository = $repository;
+        $this->columns    = new ColumnCollection();
+        $this->setOptions($options);
+    }
+
+    /**
+     * Configures column options
+     *
+     * @param OptionsResolverInterface $resolver
+     */
+    public function configureOptions(array $options)
+    {
+        $id = $this->getId();
+
+        return array_replace_recursive([
+            'appearance'     => [
+                'column_select' => false
+            ],
+            'mechanics'      => [
+                'key'           => 'id',
+                'rows_per_page' => 25
+            ],
+            'event_handlers' => [
+                'load'       => $this->getXajaxManager()->registerFunction(['load_' . $id, $this, 'loadData']),
+                'edit_row'   => 'edit_' . $id,
+                'click_row'  => 'edit_' . $id,
+                'delete_row' => $this->getXajaxManager()->registerFunction(['delete_' . $id, $this, 'deleteRow'])
+            ],
+            'row_actions'    => [
+                DataGridInterface::ACTION_EDIT,
+                DataGridInterface::ACTION_DELETE
+            ]
+        ], $options);
+    }
+
+    /**
+     * Sets DataGrid options
+     *
+     * @param array $options
+     */
+    public function setOptions(array $options)
+    {
+        $this->options = $this->configureOptions($options);
+    }
+
+    /**
+     * Returns DataGrid options
+     *
+     * @return array
+     */
+    public function getOptions()
+    {
+        return $this->options;
+    }
 
     /**
      * Deletes DataGrid row
@@ -60,16 +110,6 @@ abstract class AbstractDataGrid extends AbstractComponent
     public function deleteRow($request)
     {
         return $this->repository->delete($request['id']);
-    }
-
-    /**
-     * Sets Repository service needed in datagrid
-     *
-     * @param Repository $repository
-     */
-    public function setRepository(AbstractRepository $repository)
-    {
-        $this->repository = $repository;
     }
 
     /**
@@ -116,12 +156,12 @@ abstract class AbstractDataGrid extends AbstractComponent
         $connection = $this->getDb()->getConnection();
 
         foreach ($this->columns as $key => $column) {
-            $col = $connection->raw(sprintf('%s AS %s', $column['source'], $key));
+            $col = $connection->raw(sprintf('%s AS %s', $column->getSource(), $key));
             $this->query->addSelect($col);
         }
 
         foreach ($request['where'] as $where) {
-            $column   = $this->columns[$where['column']]['source'];
+            $column   = $this->columns->get($where['column'])->getSource();
             $operator = $this->getOperator($where['operator']);
             $value    = $where['value'];
 
@@ -138,7 +178,8 @@ abstract class AbstractDataGrid extends AbstractComponent
         }
         $result = $this->query->get();
         $total  = count($result);
-        $result = $this->processRows($result);
+
+//        $result = $this->processRows($result);
 
         return [
             'data_id'       => isset($request['id']) ? $request['id'] : '',
@@ -180,43 +221,6 @@ abstract class AbstractDataGrid extends AbstractComponent
         }
     }
 
-    /**
-     * Adds datagrid column
-     *
-     * @param       $id
-     * @param array $options
-     */
-    public function addColumn($id, array $options)
-    {
-        $options = array_replace_recursive([
-            'editable'   => false,
-            'selectable' => false,
-            'sorting'    => [
-                'default_order' => DataGridInterface::SORT_DIR_DESC
-            ],
-            'appearance' => [
-                'visible' => true,
-                'width'   => DataGridInterface::WIDTH_AUTO,
-                'align'   => DataGridInterface::ALIGN_RIGHT
-            ],
-            'filter'     => [
-                'type' => DataGridInterface::FILTER_NONE
-            ]
-        ], $options);
-
-        $this->columns[$id] = $options;
-    }
-
-    /**
-     * Returns DataGrid columns
-     *
-     * @return mixed
-     */
-    public function getColumns()
-    {
-        return $this->columns;
-    }
-
     protected function processRows($rows)
     {
         static $transform = ["\r" => '\r', "\n" => '\n'];
@@ -238,49 +242,13 @@ abstract class AbstractDataGrid extends AbstractComponent
     }
 
     /**
-     * Sets DataGrid options
+     * Returns ColumnCollection
      *
-     * @param array $options
+     * @return \WellCommerce\Core\Component\DataGrid\Column\ColumnCollection
      */
-    public function setOptions(array $options)
+    public function getColumnCollection()
     {
-        $options = array_replace_recursive([
-            'appearance'  => [
-                'column_select' => false
-            ],
-            'mechanics'   => [
-                'key'           => 'id',
-                'rows_per_page' => 25
-            ],
-            'row_actions' => [
-                DataGridInterface::ACTION_EDIT,
-                DataGridInterface::ACTION_DELETE
-            ]
-        ], $options);
-
-        $this->options = $options;
-
-        return $this;
-    }
-
-    /**
-     * Returns DataGrid options
-     *
-     * @return mixed
-     */
-    public function getOptions()
-    {
-        return $this->options;
-    }
-
-    /**
-     * Sets new query
-     *
-     * @param $query
-     */
-    public function setQuery($query)
-    {
-        $this->query = $query;
+        return $this->columns;
     }
 
     /**

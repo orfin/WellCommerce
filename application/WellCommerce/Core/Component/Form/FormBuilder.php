@@ -54,13 +54,13 @@ class FormBuilder extends AbstractComponent
     }
 
     /**
-     * Dispatches the event for form action
+     * Triggers the event for form action
      *
      * @param       $eventName
      * @param array $data
      * @param       $id
      */
-    final protected function dispatchEvent($eventName)
+    private function dispatchEvent($eventName)
     {
         $event = new FormEvent($this->form, $this->formData);
         $this->getDispatcher()->dispatch($eventName, $event);
@@ -201,6 +201,31 @@ class FormBuilder extends AbstractComponent
     {
         return new Elements\TextField($options);
     }
+
+    /**
+     * Shortcut for adding Password element
+     *
+     * @param array $options
+     *
+     * @return Elements\Password
+     */
+    public function addPassword(array $options)
+    {
+        return new Elements\Password($options);
+    }
+
+    /**
+     * Shortcut for adding Submit buttons
+     *
+     * @param array $options
+     *
+     * @return Elements\Submit
+     */
+    public function addSubmitButton(array $options)
+    {
+        return new Elements\Submit($options);
+    }
+
 
     /**
      * Shortcut for adding Textarea element
@@ -379,7 +404,7 @@ class FormBuilder extends AbstractComponent
      *
      * @return Rules\Custom
      */
-    public function addRuleCustom($errorMessage, Closure $function, array $params = [])
+    public function addRuleCustom($errorMessage, \Closure $function, array $params = [])
     {
         return new Rules\Custom($errorMessage, $function, $params, $this->container);
     }

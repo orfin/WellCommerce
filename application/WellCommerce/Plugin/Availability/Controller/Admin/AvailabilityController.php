@@ -12,10 +12,7 @@
 namespace WellCommerce\Plugin\Availability\Controller\Admin;
 
 use WellCommerce\Core\Component\Controller\AbstractAdminController;
-use WellCommerce\Plugin\Availability\Event\AvailabilityFormEvent;
-use WellCommerce\Plugin\Availability\Form\AvailabilityDataTransformer;
-use WellCommerce\Plugin\Availability\Form\AvailabilityForm;
-use WellCommerce\Plugin\Availability\Model\Availability;
+use WellCommerce\Plugin\Availability\DataGrid\Config;
 
 /**
  * Class AvailabilityController
@@ -25,32 +22,23 @@ use WellCommerce\Plugin\Availability\Model\Availability;
  */
 class AvailabilityController extends AbstractAdminController
 {
+    /**
+     * {@inheritdoc}
+     */
     public function indexAction()
     {
-        $grid = $this->get('availability.datagrid');
-
-        $datagrid = $this->createDataGrid($grid, [
-            'id'             => 'availability',
-            'event_handlers' => [
-                'load'       => $this->getXajaxManager()->registerFunction(['LoadAvailability', $grid, 'loadData']),
-                'edit_row'   => 'editAvailability',
-                'click_row'  => 'editAvailability',
-                'delete_row' => $this->getXajaxManager()->registerFunction(['DeleteAvailability', $grid, 'deleteRow']),
-            ],
-            'routes'         => [
-                'edit' => $this->generateUrl('admin.availability.edit')
-            ]
-        ]);
-
         return [
-            'datagrid' => $datagrid
+            'datagrid' => $this->createDataGrid($this->get('availability.datagrid'))
         ];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function addAction()
     {
         $form = $this->createForm($this->get('availability.form'), null, [
-            'name'   => 'availability',
+            'name'   => 'add_availability',
             'method' => 'POST',
             'action' => $this->generateUrl('admin.availability.add')
         ]);
@@ -58,7 +46,7 @@ class AvailabilityController extends AbstractAdminController
         if ($form->isValid()) {
             $this->repository->save($form->getSubmittedData());
 
-            return $this->redirect($this->generateUrl('admin.availability.index'));
+            return $this->redirect($this->getDefaultUrl());
         }
 
         return [
@@ -66,12 +54,15 @@ class AvailabilityController extends AbstractAdminController
         ];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function editAction($id)
     {
         $model = $this->repository->find($id);
 
         $form = $this->createForm($this->get('availability.form'), $model, [
-            'name'   => 'availability',
+            'name'   => 'edit_availability',
             'method' => 'POST',
             'action' => $this->generateUrl('admin.availability.edit', ['id' => $model->id])
         ]);
@@ -79,12 +70,12 @@ class AvailabilityController extends AbstractAdminController
         if ($form->isValid()) {
             $this->repository->save($form->getSubmittedData(), $id);
 
-            return $this->redirect($this->generateUrl('admin.availability.index'));
+            return $this->redirect($this->getDefaultUrl());
         }
 
         return [
-            'model' => $model,
-            'form'  => $form
+            'availability' => $model,
+            'form'         => $form
         ];
     }
 }

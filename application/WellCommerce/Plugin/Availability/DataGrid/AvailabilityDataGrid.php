@@ -12,9 +12,9 @@
 namespace WellCommerce\Plugin\Availability\DataGrid;
 
 use WellCommerce\Core\Component\DataGrid\AbstractDataGrid;
-use WellCommerce\Core\Component\DataGrid\DataGridBuilder;
+use WellCommerce\Core\Component\DataGrid\Column\ColumnInterface;
+use WellCommerce\Core\Component\DataGrid\Column\DataGridColumn;
 use WellCommerce\Core\Component\DataGrid\DataGridInterface;
-use WellCommerce\Plugin\Availability\Event\AvailabilityDataGridEvent;
 
 /**
  * Class AvailabilityDataGrid
@@ -24,40 +24,67 @@ use WellCommerce\Plugin\Availability\Event\AvailabilityDataGridEvent;
  */
 class AvailabilityDataGrid extends AbstractDataGrid implements DataGridInterface
 {
-    public function buildDataGrid()
+    /**
+     * {@inheritdoc}
+     */
+    public function getId()
     {
-        $this->addColumn('id', [
+        return 'availability';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRoutes()
+    {
+        return [
+            'edit' => $this->generateUrl('admin.availability.edit')
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function initColumns()
+    {
+        $this->columns->add(new DataGridColumn([
+            'id'         => 'id',
             'source'     => 'availability.id',
             'caption'    => $this->trans('Id'),
             'sorting'    => [
-                'default_order' => DataGridInterface::SORT_DIR_DESC
+                'default_order' => ColumnInterface::SORT_DIR_DESC
             ],
             'appearance' => [
                 'width'   => 90,
                 'visible' => false
             ],
             'filter'     => [
-                'type' => DataGridInterface::FILTER_BETWEEN
+                'type' => ColumnInterface::FILTER_BETWEEN
             ]
-        ]);
+        ]));
 
-        $this->addColumn('name', [
+        $this->columns->add(new DataGridColumn([
+            'id'         => 'name',
             'source'     => 'availability_translation.name',
             'caption'    => $this->trans('Name'),
             'appearance' => [
                 'width' => 70,
-                'align' => DataGridInterface::ALIGN_LEFT
+                'align' => ColumnInterface::ALIGN_LEFT
             ],
             'filter'     => [
-                'type' => DataGridInterface::FILTER_INPUT
+                'type' => ColumnInterface::FILTER_INPUT
             ]
-        ]);
+        ]));
 
-        $this->query = $this->getDb()
-            ->table('availability')
-            ->join('availability_translation', 'availability_translation.availability_id', '=', 'availability.id')
-            ->groupBy('availability.id');
+    }
 
-        return $this;
+    /**
+     * {@inheritdoc}
+     */
+    public function setQuery()
+    {
+        $this->query = $this->getDb()->table('availability');
+        $this->query->join('availability_translation', 'availability_translation.availability_id', '=', 'availability.id');
+        $this->query->groupBy('availability.id');
     }
 }

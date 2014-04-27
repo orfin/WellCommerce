@@ -58,6 +58,6 @@ class Availability extends AbstractModel implements ModelInterface, Translatable
      */
     public function translation()
     {
-        return $this->hasMany('WellCommerce\Plugin\Availability\Model\AvailabilityTranslation');
+        return $this->hasMany(__NAMESPACE__ . '\AvailabilityTranslation');
     }
 }

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<routes xmlns="http://symfony.com/schema/routing"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+    <route id="admin.user.index" pattern="/admin/user/index">
+        <default key="_controller">user.admin.controller:indexAction</default>
+        <default key="_secure">true</default>
+    </route>
+
+    <route id="admin.user.add" pattern="/admin/user/add">
+        <default key="_controller">user.admin.controller:addAction</default>
+        <default key="_secure">true</default>
+    </route>
+
+    <route id="admin.user.edit" pattern="/admin/user/edit/{id}">
+        <default key="_controller">user.admin.controller:editAction</default>
+        <default key="_secure">true</default>
+        <default key="id"></default>
+    </route>
+
+    <route id="admin.user.login" pattern="/admin/user/login">
+        <default key="_controller">user.admin.controller:loginAction</default>
+    </route>
+
+    <route id="admin.user.logout" pattern="/admin/user/logout">
+        <default key="_controller">user.admin.controller:logoutAction</default>
+    </route>
+</routes>

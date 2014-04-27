@@ -18,12 +18,6 @@
             <call method="setRepository">
                 <argument type="service" id="client_group.repository"/>
             </call>
-            <call method="setDataGrid">
-                <argument type="service" id="client_group.datagrid"/>
-            </call>
-            <call method="setFormBuilder">
-                <argument type="service" id="client_group.form"/>
-            </call>
         </service>
         
         <service id="client_group.repository" class="%client_group.repository.class%">

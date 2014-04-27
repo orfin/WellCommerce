@@ -33,11 +33,6 @@ abstract class AbstractController extends AbstractComponent
     protected $repository;
 
     /**
-     * @var DataGrid object
-     */
-    protected $datagrid;
-
-    /**
      * Redirects user to a given url
      *
      * @param string $url
@@ -67,7 +62,7 @@ abstract class AbstractController extends AbstractComponent
      * @param ModelInterface $model   Model instance
      * @param array          $options Form options
      *
-     * @return mixed
+     * @return \WellCommerce\Core\Component\Form\FormInterface
      */
     public function createForm(FormInterface $form, $model = null, array $options)
     {
@@ -78,13 +73,12 @@ abstract class AbstractController extends AbstractComponent
      * Creates a datagrid
      *
      * @param DataGridInterface $dataGrid DataGrid instance
-     * @param array             $options  DataGrid options
      *
-     * @return mixed
+     * @return \WellCommerce\Core\Component\DataGrid\DataGridInterface
      */
-    public function createDataGrid(DataGridInterface $dataGrid, array $options)
+    public function createDataGrid(DataGridInterface $dataGrid)
     {
-        return $this->get('datagrid_builder')->create($dataGrid, $options)->getDataGrid();
+        return $this->get('datagrid_builder')->create($dataGrid);
     }
 
     /**

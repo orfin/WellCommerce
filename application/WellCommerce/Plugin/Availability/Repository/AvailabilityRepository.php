@@ -24,40 +24,52 @@ use WellCommerce\Plugin\Availability\Model\AvailabilityTranslation;
  */
 class AvailabilityRepository extends AbstractRepository implements RepositoryInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function all()
     {
         return Availability::with('translation')->get();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function find($id)
     {
         return Availability::with('translation')->findOrFail($id);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function delete($id)
     {
-        $this->dispatchEvent('availability.repository.pre_delete', [], $id);
+        $this->dispatchEvent(AvailabilityRepositoryEvents::PRE_DELETE, [], $id);
 
         $this->transaction(function () use ($id) {
             return Availability::destroy($id);
         });
 
-        $this->dispatchEvent('availability.repository.post_delete', [], $id);
+        $this->dispatchEvent(AvailabilityRepositoryEvents::POST_DELETE, [], $id);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function save(array $data, $id = null)
     {
-        $data = $this->dispatchEvent('availability.repository.pre_save', $data, $id);
+        $data = $this->dispatchEvent(AvailabilityRepositoryEvents::PRE_SAVE, $data, $id);
 
         $this->transaction(function () use ($data, $id) {
+
+            $accessor = $this->getPropertyAccessor();
 
             $availability = Availability::firstOrNew([
                 'id' => $id
             ]);
 
             $availability->save();
-
-            $accessor = $this->getPropertyAccessor();
 
             foreach ($this->getLanguageIds() as $language) {
 
@@ -73,6 +85,6 @@ class AvailabilityRepository extends AbstractRepository implements RepositoryInt
             }
         });
 
-        $this->dispatchEvent('availability.repository.post_save', $data, $id);
+        $this->dispatchEvent(AvailabilityRepositoryEvents::POST_SAVE, $data, $id);
     }
 }

@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "0e677e1616d042342cad85824d47959a",
+    "hash": "5517b105351462fb360a367cbb34feff",
     "packages": [
         {
             "name": "doctrine/cache",
@@ -78,6 +78,50 @@
                 "caching"
             ],
             "time": "2013-12-18 17:21:03"
+        },
+        {
+            "name": "hautelook/phpass",
+            "version": "0.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hautelook/phpass.git",
+                "reference": "da4c2c693aa4e1c616a350015c90af0da82a0fd8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hautelook/phpass/zipball/da4c2c693aa4e1c616a350015c90af0da82a0fd8",
+                "reference": "da4c2c693aa4e1c616a350015c90af0da82a0fd8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Hautelook": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Public Domain"
+            ],
+            "authors": [
+                {
+                    "name": "Solar Designer",
+                    "email": "solar@openwall.com",
+                    "homepage": "http://openwall.com/phpass/"
+                }
+            ],
+            "description": "Portable PHP password hashing framework",
+            "homepage": "http://github.com/hautelook/phpass/",
+            "keywords": [
+                "blowfish",
+                "crypt",
+                "password",
+                "security"
+            ],
+            "time": "2012-08-31 00:00:00"
         },
         {
             "name": "illuminate/cache",
@@ -2202,6 +2246,68 @@
             "time": "2014-01-07 13:29:57"
         },
         {
+            "name": "symfony/security-http",
+            "version": "2.4.x-dev",
+            "target-dir": "Symfony/Component/Security/Http",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/security-http.git",
+                "reference": "97349531402d10089a3f4cdb721803f5bc262659"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/security-http/zipball/97349531402d10089a3f4cdb721803f5bc262659",
+                "reference": "97349531402d10089a3f4cdb721803f5bc262659",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "symfony/event-dispatcher": "~2.1",
+                "symfony/http-foundation": "~2.4",
+                "symfony/http-kernel": "~2.4",
+                "symfony/security-core": "~2.4"
+            },
+            "require-dev": {
+                "psr/log": "~1.0",
+                "symfony/routing": "~2.2",
+                "symfony/security-csrf": "~2.4"
+            },
+            "suggest": {
+                "symfony/routing": "For using the HttpUtils class to create sub-requests, redirect the user, and match URLs",
+                "symfony/security-csrf": "For using tokens to protect authentication/logout attempts"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Symfony\\Component\\Security\\Http\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com",
+                    "homepage": "http://fabien.potencier.org",
+                    "role": "Lead Developer"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Security Component - HTTP Integration",
+            "homepage": "http://symfony.com",
+            "time": "2014-04-18 20:45:55"
+        },
+        {
             "name": "symfony/stopwatch",
             "version": "2.4.x-dev",
             "target-dir": "Symfony/Component/Stopwatch",
@@ -2619,7 +2725,8 @@
         "swiftmailer/swiftmailer": 20,
         "symfony/property-access": 20,
         "doctrine/cache": 20,
-        "illuminate/encryption": 20
+        "illuminate/encryption": 20,
+        "symfony/security-http": 20
     },
     "platform": [
 

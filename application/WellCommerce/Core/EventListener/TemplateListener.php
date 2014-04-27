@@ -18,10 +18,7 @@ use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
-use WellCommerce\Core\Template\Guesser\AdminTemplateGuesser;
-use WellCommerce\Core\Template\Guesser\FrontendTemplateGuesser;
 use WellCommerce\Core\Template\TemplateGuesser;
-use Twig_LoaderInterface as LoaderInterface;
 
 /**
  * Class Template
@@ -99,15 +96,6 @@ class TemplateListener implements EventSubscriberInterface
         $twig->setLoader($loader);
         $response = $twig->render($template, $parameters);
         $event->setResponse(new Response($response));
-    }
-
-    /**
-     * Sets proper template loader depending on which system area is used
-     */
-    private function initLoader(Request $request)
-    {
-        $loader = $this->container->get($request->attributes->get('_template_loader'));
-        $this->container->get('twig')->setLoader($loader);
     }
 
     /**

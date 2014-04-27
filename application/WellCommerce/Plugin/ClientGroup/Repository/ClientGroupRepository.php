@@ -24,91 +24,56 @@ use WellCommerce\Plugin\ClientGroup\Model\ClientGroupTranslation;
  */
 class ClientGroupRepository extends AbstractRepository implements RepositoryInterface
 {
-
-    /**
-     * Returns all tax rates
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
-     */
     public function all()
     {
-        return ClientGroup::all();
+        return ClientGroup::with('translation')->get();
     }
 
-    /**
-     * Returns a single tax rate
-     *
-     * @param $id
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|static
-     */
     public function find($id)
     {
         return ClientGroup::with('translation')->findOrFail($id);
     }
 
-    /**
-     * Deletes client_group record by ID
-     *
-     * @param int $id client_group ID to delete
-     */
     public function delete($id)
     {
+        $this->dispatchEvent('client_group.repository.pre_delete', [], $id);
+
         $this->transaction(function () use ($id) {
             return ClientGroup::destroy($id);
         });
+
+        $this->dispatchEvent('client_group.repository.post_delete', [], $id);
     }
 
-    /**
-     * Saves client_group
-     *
-     * @param      $Data
-     * @param null $id
-     */
-    public function save(array $Data, $id = null)
+    public function save(array $data, $id = null)
     {
-        $this->transaction(function () use ($Data, $id) {
+        $data = $this->dispatchEvent('client_group.repository.pre_save', $data, $id);
 
-            $client_group = ClientGroup::firstOrNew([
+        $this->transaction(function () use ($data, $id) {
+
+            $accessor = $this->getPropertyAccessor();
+
+            $clientGroup = ClientGroup::firstOrNew([
                 'id' => $id
             ]);
 
-            $client_group->discount = $Data['discount'];
-            $client_group->save();
+            $clientGroup->discount = $accessor->getValue($data, '[required_data][discount]');
+            $clientGroup->save();
 
             foreach ($this->getLanguageIds() as $language) {
 
                 $translation = ClientGroupTranslation::firstOrNew([
-                    'client_group_id' => $client_group->id,
+                    'client_group_id' => $clientGroup->id,
                     'language_id'     => $language
                 ]);
 
-                $translation->setTranslationData($Data, $language);
+                $languageData = $accessor->getValue($data, sprintf('[required_data][language_data][%s]', $language));
+
+                $translation->setTranslationData($languageData);
                 $translation->save();
             }
-
         });
-    }
 
-    /**
-     * Returns array containing values needed to populate the form
-     *
-     * @param $id
-     *
-     * @return array
-     */
-    public function getPopulateData($id)
-    {
-        $client_groupData = $this->find($id);
-        $populateData     = [];
-        $accessor         = $this->getPropertyAccessor();
-        $languageData     = $client_groupData->getTranslationData();
-
-        $accessor->setValue($populateData, '[required_data]', [
-            'discount'      => $client_groupData->discount,
-            'language_data' => $languageData,
-        ]);
-
-        return $populateData;
+        $this->dispatchEvent('client_group.repository.post_save', $data, $id);
     }
 }
