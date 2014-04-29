@@ -53,8 +53,7 @@ class AdminUserListener implements EventSubscriberInterface
         $request        = $event->getRequest();
         $requestMatcher = new RequestMatcher('^/admin');
         $currentRoute   = $request->attributes->get('_route');
-        $user           = $this->container->get('session')->get('user');
-
+        $user           = $this->container->get('session')->get('admin/user');
         if ($requestMatcher->matches($request) && !$user) {
             if ($currentRoute != self::LOGIN_ROUTE) {
                 $event->setResponse(new RedirectResponse($this->container->get('router')->generate(self::LOGIN_ROUTE)));

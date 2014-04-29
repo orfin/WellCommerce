@@ -70,7 +70,7 @@ class UserRepository extends AbstractRepository implements RepositoryInterface
             $user->first_name = $data['required_data']['first_name'];
             $user->last_name  = $data['required_data']['last_name'];
             $user->email      = $data['required_data']['email'];
-            $user->password   = Password::hash($data['required_data']['password']);
+            $user->password   = $data['required_data']['password'];
             $user->active     = $data['required_data']['active'];
             $user->global     = $data['required_data']['global'];
             $user->save();
@@ -92,10 +92,10 @@ class UserRepository extends AbstractRepository implements RepositoryInterface
             $checkPassword = Password::match($data['password'], $user->password);
             if ($checkPassword) {
 
-                $this->getSession()->set('user/id', $user->id);
-                $this->getSession()->set('user/first_name', $user->first_name);
-                $this->getSession()->set('user/last_name', $user->last_name);
-                $this->getSession()->set('user/global', $user->global);
+                $this->getSession()->set('admin/user/id', $user->id);
+                $this->getSession()->set('admin/user/first_name', $user->first_name);
+                $this->getSession()->set('admin/user/last_name', $user->last_name);
+                $this->getSession()->set('admin/user/global', $user->global);
 
                 $this->dispatchEvent(UserRepositoryEvents::LOGIN_SUCCEED, $data, $user->id);
             }

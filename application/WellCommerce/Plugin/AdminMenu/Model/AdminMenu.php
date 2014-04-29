@@ -21,7 +21,6 @@ use WellCommerce\Core\Component\Model\AbstractModel;
  */
 class AdminMenu extends AbstractModel
 {
-
     protected $table = 'admin_menu';
 
     public $timestamps = false;

@@ -13,7 +13,7 @@ namespace WellCommerce\Plugin\User\Model;
 
 use WellCommerce\Core\Component\Model\AbstractModel;
 use WellCommerce\Core\Component\Model\ModelInterface;
-use WellCommerce\Core\Component\Model\TranslatableModelInterface;
+use WellCommerce\Core\Helper\Password;
 
 /**
  * Class User
@@ -81,6 +81,16 @@ class User extends AbstractModel implements ModelInterface
     public function setGlobalAttribute($value)
     {
         $this->attributes['global'] = (int)$value;
+    }
+
+    /**
+     * Mutator for password attribute
+     *
+     * @param $value
+     */
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = Password::hash($value);
     }
 
     /**

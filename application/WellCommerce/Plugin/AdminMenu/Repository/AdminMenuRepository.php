@@ -16,9 +16,9 @@ use WellCommerce\Core\Component\Repository\RepositoryInterface;
 use WellCommerce\Plugin\AdminMenu\Model\AdminMenu;
 
 /**
- * Class AdminMenuAbstractRepository
+ * Class AdminMenuRepository
  *
- * @package WellCommerce\Plugin\AdminMenu\AbstractRepository
+ * @package WellCommerce\Plugin\AdminMenu\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class AdminMenuRepository extends AbstractRepository implements RepositoryInterface
@@ -117,5 +117,21 @@ class AdminMenuRepository extends AbstractRepository implements RepositoryInterf
         }
 
         return $menuItems;
+    }
+
+    public function getRootItems(){
+        return [
+            'Dashboard', 'dashboard', NULL, NULL, '0', NULL
+'Catalog', 'catalog', NULL, NULL, '10', NULL
+'Promotions', 'promotion', NULL, NULL, '20', NULL
+'Sales', 'sales', NULL, NULL, '30', NULL
+'Reports', 'reports', NULL, NULL, '40', NULL
+'CRM', 'crm', NULL, NULL, '50', NULL
+'CMS', 'cms', NULL, NULL, '60', NULL
+'Layout settings', 'layout', NULL, NULL, '70', NULL
+'Integration', 'external', NULL, NULL, '80', NULL
+'Configuration', 'configuration', NULL, NULL, '90', NULL
+
+        ];
     }
 }

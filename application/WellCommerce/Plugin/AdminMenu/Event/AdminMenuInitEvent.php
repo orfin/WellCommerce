@@ -16,11 +16,10 @@ use WellCommerce\Core\Event\AdminMenuEvent;
 /**
  * Class AdminMenuInitEvent
  *
- * @package WellCommerce\Plugin\Currency\Event
+ * @package WellCommerce\Plugin\AdminMenu\Event
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 final class AdminMenuInitEvent extends AdminMenuEvent
 {
-
     const ADMIN_MENU_INIT_EVENT = 'admin_menu.init';
 }

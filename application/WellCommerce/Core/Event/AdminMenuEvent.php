@@ -12,6 +12,7 @@
 namespace WellCommerce\Core\Event;
 
 use Symfony\Component\EventDispatcher\Event;
+use WellCommerce\Plugin\AdminMenu\Builder\AdminMenuBuilderInterface;
 
 /**
  * Class FormEvent
@@ -22,37 +23,28 @@ use Symfony\Component\EventDispatcher\Event;
 class AdminMenuEvent extends Event
 {
 
-    protected $menuData = Array();
+    /**
+     * @var \WellCommerce\Plugin\AdminMenu\Builder\AdminMenuBuilderInterface
+     */
+    protected $builder;
 
     /**
      * Constructor
      *
-     * @param Form $form
+     * @param AdminMenuBuilderInterface $builder
      */
-    public function __construct ($menuData)
+    public function __construct(AdminMenuBuilderInterface $builder)
     {
-        $this->menuData = $menuData;
+        $this->builder = $builder;
     }
 
     /**
-     * Returns an array containing current menu data
+     * Returns admin menu builder object
      *
-     * @return array
+     * @return AdminMenuBuilderInterface
      */
-    public function getMenuData ()
+    public function getBuilder()
     {
-        return $this->menuData;
-    }
-
-    /**
-     * Appends data to menu
-     *
-     * @param array $Data
-     *
-     * @return void
-     */
-    public function setMenuData (array $Data)
-    {
-        $this->menuData = array_merge_recursive($this->menuData, $Data);
+        return $this->builder;
     }
 }

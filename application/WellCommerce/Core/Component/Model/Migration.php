@@ -19,7 +19,6 @@ namespace WellCommerce\Core\Component\Model;
  */
 class Migration extends AbstractModel
 {
-
     protected $table = 'migration';
 
     public $timestamps = false;

@@ -141,7 +141,13 @@ abstract class AbstractModel extends BaseModel
         }
     }
 
-
+    /**
+     * Override default collection model
+     *
+     * @param array $models
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|CustomCollection
+     */
     public function newCollection(array $models = Array())
     {
         return new CustomCollection($models);

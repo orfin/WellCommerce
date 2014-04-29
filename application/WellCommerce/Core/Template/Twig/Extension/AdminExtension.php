@@ -9,18 +9,17 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Plugin\User\Twig;
+namespace WellCommerce\Core\Template\Twig\Extension;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Twig_Extension;
 
 /**
- * Class UserExtension
+ * Class AdminExtension
  *
- * @package WellCommerce\Plugin\User\Twig
+ * @package WellCommerce\Core\Template\Twig\Extension
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class UserExtension extends Twig_Extension
+class AdminExtension extends \Twig_Extension
 {
 
     protected $container;
@@ -35,37 +34,26 @@ class UserExtension extends Twig_Extension
         $this->container = $container;
     }
 
-    public function getGlobals()
-    {
-        return [
-            'user' => $this->container->get('session')->get('user')
-        ];
-    }
-
     /**
-     * Register extension functions
+     * Returns all global assignable admin template variables
      *
      * @return array
      */
-    public function getFunctions()
+    public function getGlobals()
     {
         return [
-            new \Twig_SimpleFunction('logout_url', [$this, 'getLogoutUrl'], ['is_safe' => ['html']]),
+            'user' => $this->container->get('session')->get('admin/user'),
+            'menu' => $this->container->get('session')->get('admin/menu')
         ];
     }
 
     /**
-     * Returns logout url
+     * Returns unique extensions name
      *
-     * @return mixed
+     * @return string
      */
-    public function getLogoutUrl()
-    {
-        return $this->container->get('router')->generate('admin.user.logout');
-    }
-
     public function getName()
     {
-        return 'user';
+        return 'admin';
     }
 }

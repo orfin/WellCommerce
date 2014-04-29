@@ -9,6 +9,7 @@
         <parameter key="category.form.class">WellCommerce\Plugin\Category\Form\CategoryForm</parameter>
         <parameter key="category.tree.class">WellCommerce\Plugin\Category\Form\CategoryTree</parameter>
         <parameter key="category_box.layout.configurator">WellCommerce\Plugin\Category\Layout\CategoryBoxConfigurator</parameter>
+        <parameter key="category.listener.class">WellCommerce\Plugin\Category\EventListener\CategoryListener</parameter>
     </parameters>
 
     <services>
@@ -41,6 +42,11 @@
                 <argument type="service" id="service_container"/>
             </call>
             <tag name="layout_box.configurator" />
+        </service>
+
+        <service id="category.listener" class="%category.listener.class%">
+            <argument type="service" id="service_container"/>
+            <tag name="kernel.event_subscriber" />
         </service>
     </services>
 </container>

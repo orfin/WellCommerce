@@ -20,14 +20,15 @@ namespace WellCommerce\Core\Component\DataGrid;
  */
 interface DataGridInterface
 {
-    const ACTION_EDIT   = 'GF_Datagrid.ACTION_EDIT';
-    const ACTION_DELETE = 'GF_Datagrid.ACTION_DELETE';
-    const REDIRECT      = 'GF_Datagrid.Redirect';
-    const OPERATOR_NE   = '!=';
-    const OPERATOR_LE   = '<=';
-    const OPERATOR_GE   = '>=';
-    const OPERATOR_LIKE = 'LIKE';
-    const OPERATOR_IN   = '=';
+    const ACTION_EDIT         = 'GF_Datagrid.ACTION_EDIT';
+    const ACTION_DELETE       = 'GF_Datagrid.ACTION_DELETE';
+    const REDIRECT            = 'GF_Datagrid.Redirect';
+    const OPERATOR_NE         = '!=';
+    const OPERATOR_LE         = '<=';
+    const OPERATOR_GE         = '>=';
+    const OPERATOR_LIKE       = 'LIKE';
+    const OPERATOR_IN         = '=';
+    const DATAGRID_INIT_EVENT = 'datagrid.init';
 
     /**
      * Sets DataGrid columns

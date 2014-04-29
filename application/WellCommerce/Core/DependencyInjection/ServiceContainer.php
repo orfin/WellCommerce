@@ -49,6 +49,7 @@ class ServiceContainer extends Container
             'cache_manager.repository' => 'getCacheManager_RepositoryService',
             'category.admin.controller' => 'getCategory_Admin_ControllerService',
             'category.form' => 'getCategory_FormService',
+            'category.listener' => 'getCategory_ListenerService',
             'category.repository' => 'getCategory_RepositoryService',
             'category.tree' => 'getCategory_TreeService',
             'category_box.layout.configurator' => 'getCategoryBox_Layout_ConfiguratorService',
@@ -130,6 +131,7 @@ class ServiceContainer extends Container
             'product.admin.controller' => 'getProduct_Admin_ControllerService',
             'product.datagrid' => 'getProduct_DatagridService',
             'product.form' => 'getProduct_FormService',
+            'product.listener' => 'getProduct_ListenerService',
             'product.repository' => 'getProduct_RepositoryService',
             'product_box.layout.configurator' => 'getProductBox_Layout_ConfiguratorService',
             'request' => 'getRequestService',
@@ -160,6 +162,7 @@ class ServiceContainer extends Container
             'template_listener' => 'getTemplateListenerService',
             'translation' => 'getTranslationService',
             'twig' => 'getTwigService',
+            'twig.extension.admin' => 'getTwig_Extension_AdminService',
             'twig.extension.asset' => 'getTwig_Extension_AssetService',
             'twig.extension.assetic' => 'getTwig_Extension_AsseticService',
             'twig.extension.contact' => 'getTwig_Extension_ContactService',
@@ -169,7 +172,6 @@ class ServiceContainer extends Container
             'twig.extension.intl' => 'getTwig_Extension_IntlService',
             'twig.extension.routing' => 'getTwig_Extension_RoutingService',
             'twig.extension.translation' => 'getTwig_Extension_TranslationService',
-            'twig.extension.user' => 'getTwig_Extension_UserService',
             'twig.extension.xajax' => 'getTwig_Extension_XajaxService',
             'twig.loader.admin' => 'getTwig_Loader_AdminService',
             'twig.loader.front' => 'getTwig_Loader_FrontService',
@@ -433,6 +435,19 @@ class ServiceContainer extends Container
         $instance->setContainer($this);
 
         return $instance;
+    }
+
+    /**
+     * Gets the 'category.listener' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Plugin\Category\EventListener\CategoryListener A WellCommerce\Plugin\Category\EventListener\CategoryListener instance.
+     */
+    protected function getCategory_ListenerService()
+    {
+        return $this->services['category.listener'] = new \WellCommerce\Plugin\Category\EventListener\CategoryListener($this);
     }
 
     /**
@@ -982,7 +997,9 @@ class ServiceContainer extends Container
         $instance->addSubscriberService('locale.listener', 'Symfony\\Component\\HttpKernel\\EventListener\\LocaleListener');
         $instance->addSubscriberService('template_listener', 'WellCommerce\\Core\\EventListener\\TemplateListener');
         $instance->addSubscriberService('admin_menu.subscriber', 'WellCommerce\\Plugin\\AdminMenu\\EventListener\\AdminMenuListener');
+        $instance->addSubscriberService('category.listener', 'WellCommerce\\Plugin\\Category\\EventListener\\CategoryListener');
         $instance->addSubscriberService('language.subscriber', 'WellCommerce\\Plugin\\Language\\Event\\LanguageEventSubscriber');
+        $instance->addSubscriberService('product.listener', 'WellCommerce\\Plugin\\Product\\EventListener\\ProductListener');
         $instance->addSubscriberService('shop.subscriber', 'WellCommerce\\Plugin\\Shop\\Event\\ShopEventSubscriber');
 
         return $instance;
@@ -1830,6 +1847,19 @@ class ServiceContainer extends Container
     }
 
     /**
+     * Gets the 'product.listener' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Plugin\Product\EventListener\ProductListener A WellCommerce\Plugin\Product\EventListener\ProductListener instance.
+     */
+    protected function getProduct_ListenerService()
+    {
+        return $this->services['product.listener'] = new \WellCommerce\Plugin\Product\EventListener\ProductListener($this);
+    }
+
+    /**
      * Gets the 'product.repository' service.
      *
      * This service is shared.
@@ -2300,9 +2330,9 @@ class ServiceContainer extends Container
         $f = $this->get('twig.extension.asset');
         $g = $this->get('twig.extension.xajax');
         $h = $this->get('twig.extension.datagrid');
-        $i = $this->get('twig.extension.assetic');
-        $j = $this->get('twig.extension.contact');
-        $k = $this->get('twig.extension.user');
+        $i = $this->get('twig.extension.admin');
+        $j = $this->get('twig.extension.assetic');
+        $k = $this->get('twig.extension.contact');
 
         $this->services['twig'] = $instance = new \Twig_Environment($this->get('twig.loader.front'), array('cache' => 'D:\\Git\\WellCommerce\\var/cache', 'auto_reload' => true, 'autoescape' => true, 'debug' => true));
 
@@ -2315,6 +2345,7 @@ class ServiceContainer extends Container
         $instance->addExtension($g);
         $instance->addExtension($h);
         $instance->addExtension($i);
+        $instance->addExtension($j);
         $instance->addExtension($a);
         $instance->addExtension($b);
         $instance->addExtension($c);
@@ -2324,6 +2355,7 @@ class ServiceContainer extends Container
         $instance->addExtension($g);
         $instance->addExtension($h);
         $instance->addExtension($i);
+        $instance->addExtension($j);
         $instance->addExtension($a);
         $instance->addExtension($b);
         $instance->addExtension($c);
@@ -2348,6 +2380,19 @@ class ServiceContainer extends Container
         $instance->addExtension($k);
 
         return $instance;
+    }
+
+    /**
+     * Gets the 'twig.extension.admin' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Core\Template\Twig\Extension\AdminExtension A WellCommerce\Core\Template\Twig\Extension\AdminExtension instance.
+     */
+    protected function getTwig_Extension_AdminService()
+    {
+        return $this->services['twig.extension.admin'] = new \WellCommerce\Core\Template\Twig\Extension\AdminExtension($this);
     }
 
     /**
@@ -2465,19 +2510,6 @@ class ServiceContainer extends Container
     protected function getTwig_Extension_TranslationService()
     {
         return $this->services['twig.extension.translation'] = new \Symfony\Bridge\Twig\Extension\TranslationExtension($this->get('translation'));
-    }
-
-    /**
-     * Gets the 'twig.extension.user' service.
-     *
-     * This service is shared.
-     * This method always returns the same instance of the service.
-     *
-     * @return WellCommerce\Plugin\User\Twig\UserExtension A WellCommerce\Plugin\User\Twig\UserExtension instance.
-     */
-    protected function getTwig_Extension_UserService()
-    {
-        return $this->services['twig.extension.user'] = new \WellCommerce\Plugin\User\Twig\UserExtension($this);
     }
 
     /**
@@ -2828,6 +2860,7 @@ class ServiceContainer extends Container
             'category.form.class' => 'WellCommerce\\Plugin\\Category\\Form\\CategoryForm',
             'category.tree.class' => 'WellCommerce\\Plugin\\Category\\Form\\CategoryTree',
             'category_box.layout.configurator' => 'WellCommerce\\Plugin\\Category\\Layout\\CategoryBoxConfigurator',
+            'category.listener.class' => 'WellCommerce\\Plugin\\Category\\EventListener\\CategoryListener',
             'client_group.admin.controller.class' => 'WellCommerce\\Plugin\\ClientGroup\\Controller\\Admin\\ClientGroupController',
             'client_group.repository.class' => 'WellCommerce\\Plugin\\ClientGroup\\Repository\\ClientGroupRepository',
             'client_group.datagrid.class' => 'WellCommerce\\Plugin\\ClientGroup\\DataGrid\\ClientGroupDataGrid',
@@ -2859,6 +2892,7 @@ class ServiceContainer extends Container
             'product.repository.class' => 'WellCommerce\\Plugin\\Product\\Repository\\ProductRepository',
             'product.datagrid.class' => 'WellCommerce\\Plugin\\Product\\DataGrid\\ProductDataGrid',
             'product.form.class' => 'WellCommerce\\Plugin\\Product\\Form\\ProductForm',
+            'product.listener.class' => 'WellCommerce\\Plugin\\Product\\EventListener\\ProductListener',
             'product_box.layout.configurator.class' => 'WellCommerce\\Plugin\\Product\\Layout\\ProductBoxConfigurator',
             'user.admin.controller.class' => 'WellCommerce\\Plugin\\User\\Controller\\Admin\\UserController',
             'user.repository.class' => 'WellCommerce\\Plugin\\User\\Repository\\UserRepository',

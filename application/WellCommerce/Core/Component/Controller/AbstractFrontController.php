@@ -21,7 +21,6 @@ use WellCommerce\Core\Layout\Page\LayoutPageInterface;
  */
 abstract class AbstractFrontController extends AbstractController
 {
-
     /**
      * @var
      */

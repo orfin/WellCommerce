@@ -8,6 +8,7 @@
         <parameter key="product.repository.class">WellCommerce\Plugin\Product\Repository\ProductRepository</parameter>
         <parameter key="product.datagrid.class">WellCommerce\Plugin\Product\DataGrid\ProductDataGrid</parameter>
         <parameter key="product.form.class">WellCommerce\Plugin\Product\Form\ProductForm</parameter>
+        <parameter key="product.listener.class">WellCommerce\Plugin\Product\EventListener\ProductListener</parameter>
     </parameters>
     
     <services>
@@ -45,6 +46,11 @@
         	<call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
+        </service>
+
+        <service id="product.listener" class="%product.listener.class%">
+            <argument type="service" id="service_container"/>
+            <tag name="kernel.event_subscriber" />
         </service>
     </services>
 </container>

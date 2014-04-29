@@ -23,8 +23,6 @@ use WellCommerce\Core\Event\DataGridEvent;
  */
 class DataGridBuilder extends AbstractComponent
 {
-    const DATAGRID_INIT_EVENT = 'datagrid.init';
-
     protected $datagrid;
     protected $options;
 
@@ -66,6 +64,6 @@ class DataGridBuilder extends AbstractComponent
      */
     private function getInitEventName()
     {
-        return sprintf('%s.%s', $this->datagrid->getId(), self::DATAGRID_INIT_EVENT);
+        return sprintf('%s.%s', $this->datagrid->getId(), DataGridInterface::DATAGRID_INIT_EVENT);
     }
 }

@@ -11,10 +11,10 @@
  */
 namespace WellCommerce\Plugin\AdminMenu\DependencyInjection;
 
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use WellCommerce\Core\DependencyInjection\AbstractExtension;
 
 /**
  * Class AdminMenuExtension
@@ -22,22 +22,11 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  * @package WellCommerce\Plugin\AdminMenu\DependencyInjection
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AdminMenuExtension extends Extension
+class AdminMenuExtension extends AbstractExtension
 {
-
     public function load(array $config, ContainerBuilder $container)
     {
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.xml');
-    }
-
-    public function getNamespace()
-    {
-        return 'http://symfony.com/schema/dic/services';
-    }
-
-    public function getAlias()
-    {
-        return 'wellcommerce.plugin.admin_menu';
     }
 }
