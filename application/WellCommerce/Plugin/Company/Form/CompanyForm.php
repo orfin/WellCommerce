@@ -11,8 +11,10 @@
  */
 namespace WellCommerce\Plugin\Company\Form;
 
-use WellCommerce\Core\Form;
-use WellCommerce\Plugin\Company\Event\CompanyFormEvent;
+use WellCommerce\Core\Component\Form\AbstractForm;
+use WellCommerce\Core\Component\Form\FormBuilder;
+use WellCommerce\Core\Component\Form\FormInterface;
+use WellCommerce\Core\Component\Model\ModelInterface;
 
 /**
  * Class CompanyForm
@@ -20,95 +22,109 @@ use WellCommerce\Plugin\Company\Event\CompanyFormEvent;
  * @package WellCommerce\Plugin\Company\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CompanyForm extends Form
+class CompanyForm extends AbstractForm implements FormInterface
 {
     /**
-     * Initializes CompanyForm
-     *
-     * @param array $companyData
-     *
-     * @return Form\Elements\Form
+     * {@inheritdoc}
      */
-    public function init($companyData = [])
+    public function buildForm(FormBuilder $builder, array $options)
     {
-        $form = $this->addForm([
-            'name' => 'company',
-        ]);
+        $form = $builder->addForm($options);
 
-        $requiredData = $form->addChild($this->addFieldset([
+        $requiredData = $form->addChild($builder->addFieldset([
             'name'  => 'required_data',
             'label' => $this->trans('Required data')
         ]));
 
-        $requiredData->addChild($this->addTextField([
+        $requiredData->addChild($builder->addTextField([
             'name'  => 'name',
             'label' => $this->trans('Name'),
             'rules' => [
-                $this->addRuleRequired($this->trans('Name is required')),
+                $builder->addRuleRequired($this->trans('Name is required')),
             ]
         ]));
 
-        $requiredData->addChild($this->addTextField([
+        $requiredData->addChild($builder->addTextField([
             'name'  => 'short_name',
             'label' => $this->trans('Short name'),
             'rules' => [
-                $this->addRuleRequired($this->trans('Short name is required')),
+                $builder->addRuleRequired($this->trans('Short name is required')),
             ]
         ]));
 
-        $addressData = $form->addChild($this->addFieldset([
+        $addressData = $form->addChild($builder->addFieldset([
             'name'  => 'address_data',
             'label' => $this->trans('Address data')
         ]));
 
-        $addressData->addChild($this->addTextField([
+        $addressData->addChild($builder->addTextField([
             'name'  => 'street',
             'label' => $this->trans('Street'),
         ]));
 
-        $addressData->addChild($this->addTextField([
+        $addressData->addChild($builder->addTextField([
             'name'  => 'streetno',
             'label' => $this->trans('Street number'),
         ]));
 
-        $addressData->addChild($this->addTextField([
+        $addressData->addChild($builder->addTextField([
             'name'  => 'flatno',
             'label' => $this->trans('Flat number'),
         ]));
 
-        $addressData->addChild($this->addTextField([
+        $addressData->addChild($builder->addTextField([
             'name'  => 'province',
             'label' => $this->trans('Province'),
         ]));
 
-        $addressData->addChild($this->addTextField([
+        $addressData->addChild($builder->addTextField([
             'name'  => 'postcode',
             'label' => $this->trans('Post code'),
         ]));
 
-        $addressData->addChild($this->addTextField([
+        $addressData->addChild($builder->addTextField([
             'name'  => 'city',
             'label' => $this->trans('City'),
         ]));
 
-        $addressData->addChild($this->addSelect([
+        $addressData->addChild($builder->addSelect([
             'name'    => 'country',
             'label'   => $this->trans('Country'),
-            'options' => $this->makeOptions($this->get('country.repository')->all())
+            'options' => $builder->makeOptions($this->get('country.repository')->all())
         ]));
 
-        $form->addFilter($this->addFilterNoCode());
-
-        $form->addFilter($this->addFilterTrim());
-
-        $form->addFilter($this->addFilterSecure());
-
-        $event = new CompanyFormEvent($form, $companyData);
-
-        $this->getDispatcher()->dispatch(CompanyFormEvent::FORM_INIT_EVENT, $event);
-
-        $form->populate($event->getPopulateData());
+        $form->addFilters([
+            $builder->addFilterNoCode(),
+            $builder->addFilterTrim(),
+            $builder->addFilterSecure()
+        ]);
 
         return $form;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function prepareData(ModelInterface $model)
+    {
+        $formData = [];
+        $accessor = $this->getPropertyAccessor();
+
+        $accessor->setValue($formData, '[required_data]', [
+            'name'       => $model->name,
+            'short_name' => $model->short_name
+        ]);
+
+        $accessor->setValue($formData, '[address_data]', [
+            'street'   => $model->street,
+            'streetno' => $model->streetno,
+            'flatno'   => $model->flatno,
+            'province' => $model->province,
+            'postcode' => $model->postcode,
+            'city'     => $model->city,
+            'country'  => $model->country
+        ]);
+
+        return $formData;
     }
 }

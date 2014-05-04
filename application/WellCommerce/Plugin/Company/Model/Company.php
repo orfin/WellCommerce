@@ -12,6 +12,7 @@
 namespace WellCommerce\Plugin\Company\Model;
 
 use WellCommerce\Core\Component\Model\AbstractModel;
+use WellCommerce\Core\Component\Model\ModelInterface;
 
 /**
  * Class Company
@@ -19,7 +20,7 @@ use WellCommerce\Core\Component\Model\AbstractModel;
  * @package WellCommerce\Plugin\Company\Model
  * @author  Adam Piotrowski <adam@gekosale.com>
  */
-class Company extends AbstractModel
+class Company extends AbstractModel implements ModelInterface
 {
 
     protected $table = 'company';

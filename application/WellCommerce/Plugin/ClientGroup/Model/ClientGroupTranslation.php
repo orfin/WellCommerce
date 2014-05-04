@@ -46,14 +46,4 @@ class ClientGroupTranslation extends AbstractModel
      * @var array
      */
     protected $translatable = ['name'];
-
-    /**
-     * Relation with language table
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function language()
-    {
-        return $this->belongsTo('WellCommerce\Plugin\Language\Model\Language');
-    }
 }

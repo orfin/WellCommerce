@@ -111,7 +111,7 @@ class UserController extends AbstractAdminController
      */
     public function logoutAction()
     {
-        $this->getSession()->remove('admin/user');
+        $this->getSession()->remove('admin');
         return $this->redirect($this->generateUrl('admin.user.login'));
     }
 }

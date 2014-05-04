@@ -43,6 +43,7 @@ class ServiceContainer extends Container
             'availability.admin.controller' => 'getAvailability_Admin_ControllerService',
             'availability.datagrid' => 'getAvailability_DatagridService',
             'availability.form' => 'getAvailability_FormService',
+            'availability.listener' => 'getAvailability_ListenerService',
             'availability.repository' => 'getAvailability_RepositoryService',
             'cache_manager' => 'getCacheManagerService',
             'cache_manager.datagrid' => 'getCacheManager_DatagridService',
@@ -56,9 +57,12 @@ class ServiceContainer extends Container
             'client_group.admin.controller' => 'getClientGroup_Admin_ControllerService',
             'client_group.datagrid' => 'getClientGroup_DatagridService',
             'client_group.form' => 'getClientGroup_FormService',
+            'client_group.listener' => 'getClientGroup_ListenerService',
             'client_group.repository' => 'getClientGroup_RepositoryService',
+            'company.admin.controller' => 'getCompany_Admin_ControllerService',
             'company.datagrid' => 'getCompany_DatagridService',
             'company.form' => 'getCompany_FormService',
+            'company.listener' => 'getCompany_ListenerService',
             'company.repository' => 'getCompany_RepositoryService',
             'config_locator' => 'getConfigLocatorService',
             'contact.datagrid' => 'getContact_DatagridService',
@@ -183,6 +187,7 @@ class ServiceContainer extends Container
             'user.datagrid' => 'getUser_DatagridService',
             'user.form' => 'getUser_FormService',
             'user.form_login' => 'getUser_FormLoginService',
+            'user.listener' => 'getUser_ListenerService',
             'user.repository' => 'getUser_RepositoryService',
             'xajax' => 'getXajaxService',
             'xajax_manager' => 'getXajaxManagerService',
@@ -336,6 +341,19 @@ class ServiceContainer extends Container
         $instance->setContainer($this);
 
         return $instance;
+    }
+
+    /**
+     * Gets the 'availability.listener' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Plugin\Availability\EventListener\AvailabilityListener A WellCommerce\Plugin\Availability\EventListener\AvailabilityListener instance.
+     */
+    protected function getAvailability_ListenerService()
+    {
+        return $this->services['availability.listener'] = new \WellCommerce\Plugin\Availability\EventListener\AvailabilityListener($this);
     }
 
     /**
@@ -529,12 +547,7 @@ class ServiceContainer extends Container
      */
     protected function getClientGroup_DatagridService()
     {
-        $this->services['client_group.datagrid'] = $instance = new \WellCommerce\Plugin\ClientGroup\DataGrid\ClientGroupDataGrid();
-
-        $instance->setRepository($this->get('client_group.repository'));
-        $instance->setContainer($this);
-
-        return $instance;
+        return $this->services['client_group.datagrid'] = new \WellCommerce\Plugin\ClientGroup\DataGrid\ClientGroupDataGrid($this, $this->get('client_group.repository'));
     }
 
     /**
@@ -555,6 +568,19 @@ class ServiceContainer extends Container
     }
 
     /**
+     * Gets the 'client_group.listener' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Plugin\ClientGroup\EventListener\ClientGroupListener A WellCommerce\Plugin\ClientGroup\EventListener\ClientGroupListener instance.
+     */
+    protected function getClientGroup_ListenerService()
+    {
+        return $this->services['client_group.listener'] = new \WellCommerce\Plugin\ClientGroup\EventListener\ClientGroupListener($this);
+    }
+
+    /**
      * Gets the 'client_group.repository' service.
      *
      * This service is shared.
@@ -572,6 +598,24 @@ class ServiceContainer extends Container
     }
 
     /**
+     * Gets the 'company.admin.controller' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Plugin\Company\Controller\Admin\CompanyController A WellCommerce\Plugin\Company\Controller\Admin\CompanyController instance.
+     */
+    protected function getCompany_Admin_ControllerService()
+    {
+        $this->services['company.admin.controller'] = $instance = new \WellCommerce\Plugin\Company\Controller\Admin\CompanyController();
+
+        $instance->setContainer($this);
+        $instance->setRepository($this->get('company.repository'));
+
+        return $instance;
+    }
+
+    /**
      * Gets the 'company.datagrid' service.
      *
      * This service is shared.
@@ -581,12 +625,7 @@ class ServiceContainer extends Container
      */
     protected function getCompany_DatagridService()
     {
-        $this->services['company.datagrid'] = $instance = new \WellCommerce\Plugin\Company\DataGrid\CompanyDataGrid();
-
-        $instance->setRepository($this->get('company.repository'));
-        $instance->setContainer($this);
-
-        return $instance;
+        return $this->services['company.datagrid'] = new \WellCommerce\Plugin\Company\DataGrid\CompanyDataGrid($this, $this->get('company.repository'));
     }
 
     /**
@@ -604,6 +643,19 @@ class ServiceContainer extends Container
         $instance->setContainer($this);
 
         return $instance;
+    }
+
+    /**
+     * Gets the 'company.listener' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Plugin\Company\EventListener\CompanyListener A WellCommerce\Plugin\Company\EventListener\CompanyListener instance.
+     */
+    protected function getCompany_ListenerService()
+    {
+        return $this->services['company.listener'] = new \WellCommerce\Plugin\Company\EventListener\CompanyListener($this);
     }
 
     /**
@@ -997,10 +1049,14 @@ class ServiceContainer extends Container
         $instance->addSubscriberService('locale.listener', 'Symfony\\Component\\HttpKernel\\EventListener\\LocaleListener');
         $instance->addSubscriberService('template_listener', 'WellCommerce\\Core\\EventListener\\TemplateListener');
         $instance->addSubscriberService('admin_menu.subscriber', 'WellCommerce\\Plugin\\AdminMenu\\EventListener\\AdminMenuListener');
+        $instance->addSubscriberService('availability.listener', 'WellCommerce\\Plugin\\Availability\\EventListener\\AvailabilityListener');
         $instance->addSubscriberService('category.listener', 'WellCommerce\\Plugin\\Category\\EventListener\\CategoryListener');
+        $instance->addSubscriberService('client_group.listener', 'WellCommerce\\Plugin\\ClientGroup\\EventListener\\ClientGroupListener');
+        $instance->addSubscriberService('company.listener', 'WellCommerce\\Plugin\\Company\\EventListener\\CompanyListener');
         $instance->addSubscriberService('language.subscriber', 'WellCommerce\\Plugin\\Language\\Event\\LanguageEventSubscriber');
         $instance->addSubscriberService('product.listener', 'WellCommerce\\Plugin\\Product\\EventListener\\ProductListener');
         $instance->addSubscriberService('shop.subscriber', 'WellCommerce\\Plugin\\Shop\\Event\\ShopEventSubscriber');
+        $instance->addSubscriberService('user.listener', 'WellCommerce\\Plugin\\User\\EventListener\\UserListener');
 
         return $instance;
     }
@@ -2687,6 +2743,19 @@ class ServiceContainer extends Container
     }
 
     /**
+     * Gets the 'user.listener' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Plugin\User\EventListener\UserListener A WellCommerce\Plugin\User\EventListener\UserListener instance.
+     */
+    protected function getUser_ListenerService()
+    {
+        return $this->services['user.listener'] = new \WellCommerce\Plugin\User\EventListener\UserListener($this);
+    }
+
+    /**
      * Gets the 'user.repository' service.
      *
      * This service is shared.
@@ -2855,6 +2924,7 @@ class ServiceContainer extends Container
             'availability.repository.class' => 'WellCommerce\\Plugin\\Availability\\Repository\\AvailabilityRepository',
             'availability.datagrid.class' => 'WellCommerce\\Plugin\\Availability\\DataGrid\\AvailabilityDataGrid',
             'availability.form.class' => 'WellCommerce\\Plugin\\Availability\\Form\\AvailabilityForm',
+            'availability.listener.class' => 'WellCommerce\\Plugin\\Availability\\EventListener\\AvailabilityListener',
             'category.admin.controller.class' => 'WellCommerce\\Plugin\\Category\\Controller\\Admin\\CategoryController',
             'category.repository.class' => 'WellCommerce\\Plugin\\Category\\Repository\\CategoryRepository',
             'category.form.class' => 'WellCommerce\\Plugin\\Category\\Form\\CategoryForm',
@@ -2865,6 +2935,12 @@ class ServiceContainer extends Container
             'client_group.repository.class' => 'WellCommerce\\Plugin\\ClientGroup\\Repository\\ClientGroupRepository',
             'client_group.datagrid.class' => 'WellCommerce\\Plugin\\ClientGroup\\DataGrid\\ClientGroupDataGrid',
             'client_group.form.class' => 'WellCommerce\\Plugin\\ClientGroup\\Form\\ClientGroupForm',
+            'client_group.listener.class' => 'WellCommerce\\Plugin\\ClientGroup\\EventListener\\ClientGroupListener',
+            'company.admin.controller.class' => 'WellCommerce\\Plugin\\Company\\Controller\\Admin\\CompanyController',
+            'company.repository.class' => 'WellCommerce\\Plugin\\Company\\Repository\\CompanyRepository',
+            'company.datagrid.class' => 'WellCommerce\\Plugin\\Company\\DataGrid\\CompanyDataGrid',
+            'company.form.class' => 'WellCommerce\\Plugin\\Company\\Form\\CompanyForm',
+            'company.listener.class' => 'WellCommerce\\Plugin\\Company\\EventListener\\CompanyListener',
             'dashboard.admin.controller.class' => 'WellCommerce\\Plugin\\Dashboard\\Controller\\Admin\\DashboardController',
             'deliverer.admin.controller.class' => 'WellCommerce\\Plugin\\Deliverer\\Controller\\Admin\\DelivererController',
             'deliverer.repository.class' => 'WellCommerce\\Plugin\\Deliverer\\Repository\\DelivererRepository',
@@ -2900,6 +2976,7 @@ class ServiceContainer extends Container
             'user.form.class' => 'WellCommerce\\Plugin\\User\\Form\\UserForm',
             'user.form_login.class' => 'WellCommerce\\Plugin\\User\\Form\\UserLoginForm',
             'twig.extension.user.class' => 'WellCommerce\\Plugin\\User\\Twig\\UserExtension',
+            'user.listener.class' => 'WellCommerce\\Plugin\\User\\EventListener\\UserListener',
         );
     }
 }

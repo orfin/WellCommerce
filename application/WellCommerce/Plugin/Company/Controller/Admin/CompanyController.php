@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Plugin\Company\Controller\Admin;
 
-use WellCommerce\Core\Controller\AbstractAdminController;
+use WellCommerce\Core\Component\Controller\AbstractAdminController;
 
 /**
  * Class CompanyController
@@ -24,32 +24,57 @@ class CompanyController extends AbstractAdminController
     /**
      * {@inheritdoc}
      */
-    protected function getDataGrid()
+    public function indexAction()
     {
-        return $this->get('company.datagrid');
+        return [
+            'datagrid' => $this->createDataGrid($this->get('company.datagrid'))
+        ];
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function getRepository()
+    public function addAction()
     {
-        return $this->get('company.repository');
+        $form = $this->createForm($this->get('company.form'), null, [
+            'name'   => 'add_company',
+            'method' => 'POST',
+            'action' => $this->generateUrl('admin.company.add')
+        ]);
+
+        if ($form->isValid()) {
+            $this->repository->save($form->getSubmittedData());
+
+            return $this->redirect($this->generateUrl('admin.company.index'));
+        }
+
+        return [
+            'form' => $form
+        ];
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function getForm()
+    public function editAction($id)
     {
-        return $this->get('company.form');
-    }
+        $model = $this->repository->find($id);
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefaultRoute()
-    {
-        return 'admin.company.index';
+        $form = $this->createForm($this->get('company.form'), $model, [
+            'name'   => 'edit_company',
+            'method' => 'POST',
+            'action' => $this->generateUrl('admin.company.edit', ['id' => $model->id])
+        ]);
+
+        if ($form->isValid()) {
+            $this->repository->save($form->getSubmittedData(), $id);
+
+            return $this->redirect($this->generateUrl('admin.company.index'));
+        }
+
+        return [
+            'company' => $model,
+            'form'    => $form
+        ];
     }
 }

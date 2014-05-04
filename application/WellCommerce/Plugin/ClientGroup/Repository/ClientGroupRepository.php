@@ -17,37 +17,49 @@ use WellCommerce\Plugin\ClientGroup\Model\ClientGroup;
 use WellCommerce\Plugin\ClientGroup\Model\ClientGroupTranslation;
 
 /**
- * Class ClientGroupAbstractRepository
+ * Class ClientGroupRepository
  *
- * @package WellCommerce\Plugin\ClientGroup\AbstractRepository
+ * @package WellCommerce\Plugin\ClientGroup\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class ClientGroupRepository extends AbstractRepository implements RepositoryInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function all()
     {
         return ClientGroup::with('translation')->get();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function find($id)
     {
         return ClientGroup::with('translation')->findOrFail($id);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function delete($id)
     {
-        $this->dispatchEvent('client_group.repository.pre_delete', [], $id);
+        $this->dispatchEvent(ClientGroupRepositoryEvents::PRE_DELETE, [], $id);
 
         $this->transaction(function () use ($id) {
             return ClientGroup::destroy($id);
         });
 
-        $this->dispatchEvent('client_group.repository.post_delete', [], $id);
+        $this->dispatchEvent(ClientGroupRepositoryEvents::POST_DELETE, [], $id);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function save(array $data, $id = null)
     {
-        $data = $this->dispatchEvent('client_group.repository.pre_save', $data, $id);
+        $data = $this->dispatchEvent(ClientGroupRepositoryEvents::PRE_SAVE, $data, $id);
 
         $this->transaction(function () use ($data, $id) {
 
@@ -74,6 +86,6 @@ class ClientGroupRepository extends AbstractRepository implements RepositoryInte
             }
         });
 
-        $this->dispatchEvent('client_group.repository.post_save', $data, $id);
+        $this->dispatchEvent(ClientGroupRepositoryEvents::POST_SAVE, $data, $id);
     }
 }

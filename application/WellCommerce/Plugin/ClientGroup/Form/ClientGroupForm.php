@@ -14,6 +14,7 @@ namespace WellCommerce\Plugin\ClientGroup\Form;
 use WellCommerce\Core\Component\Form\AbstractForm;
 use WellCommerce\Core\Component\Form\FormBuilder;
 use WellCommerce\Core\Component\Form\FormInterface;
+use WellCommerce\Core\Component\Model\ModelInterface;
 use WellCommerce\Plugin\ClientGroup\Event\ClientGroupFormEvent;
 use WellCommerce\Plugin\ClientGroup\Model\ClientGroup;
 
@@ -97,7 +98,7 @@ class ClientGroupForm extends AbstractForm implements FormInterface
      *
      * @return array
      */
-    public function prepareData(ClientGroup $model)
+    public function prepareData(ModelInterface $model)
     {
         $formData     = [];
         $accessor     = $this->getPropertyAccessor();

@@ -19,7 +19,6 @@ use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use WellCommerce\Core\Component\DataGrid\Column\ColumnInterface;
 use WellCommerce\Core\Component\DataGrid\Column\DataGridColumn;
-use WellCommerce\Core\Component\DataGrid\DataGridInterface;
 use WellCommerce\Plugin\AdminMenu\Builder\AdminMenuBuilder;
 use WellCommerce\Plugin\AdminMenu\Builder\AdminMenuItem;
 use WellCommerce\Plugin\AdminMenu\Event\AdminMenuInitEvent;

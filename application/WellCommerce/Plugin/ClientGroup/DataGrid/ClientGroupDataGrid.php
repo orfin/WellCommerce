@@ -12,8 +12,9 @@
 namespace WellCommerce\Plugin\ClientGroup\DataGrid;
 
 use WellCommerce\Core\Component\DataGrid\AbstractDataGrid;
+use WellCommerce\Core\Component\DataGrid\Column\ColumnInterface;
+use WellCommerce\Core\Component\DataGrid\Column\DataGridColumn;
 use WellCommerce\Core\Component\DataGrid\DataGridInterface;
-use WellCommerce\Plugin\ClientGroup\Event\ClientGroupDataGridEvent;
 
 /**
  * Class ClientGroupDataGrid
@@ -26,52 +27,76 @@ class ClientGroupDataGrid extends AbstractDataGrid implements DataGridInterface
     /**
      * {@inheritdoc}
      */
-    public function buildDataGrid()
+    public function getId()
     {
-        $this->addColumn('id', [
+        return 'client_group';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRoutes()
+    {
+        return [
+            'edit' => $this->generateUrl('admin.client_group.edit')
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function initColumns()
+    {
+        $this->columns->add(new DataGridColumn([
+            'id'         => 'id',
             'source'     => 'client_group.id',
             'caption'    => $this->trans('Id'),
             'sorting'    => [
-                'default_order' => DataGridInterface::SORT_DIR_DESC
+                'default_order' => ColumnInterface::SORT_DIR_DESC
             ],
             'appearance' => [
                 'width'   => 90,
                 'visible' => false
             ],
             'filter'     => [
-                'type' => DataGridInterface::FILTER_BETWEEN
+                'type' => ColumnInterface::FILTER_BETWEEN
             ]
-        ]);
+        ]));
 
-        $this->addColumn('name', [
+        $this->columns->add(new DataGridColumn([
+            'id'         => 'name',
             'source'     => 'client_group_translation.name',
             'caption'    => $this->trans('Name'),
             'appearance' => [
                 'width' => 600,
-                'align' => DataGridInterface::ALIGN_LEFT
+                'align' => ColumnInterface::ALIGN_LEFT
             ],
             'filter'     => [
-                'type' => DataGridInterface::FILTER_INPUT
+                'type' => ColumnInterface::FILTER_INPUT
             ]
-        ]);
+        ]));
 
-        $this->addColumn('discount', [
+        $this->columns->add(new DataGridColumn([
+            'id'         => 'discount',
             'source'     => 'client_group.discount',
             'caption'    => $this->trans('Discount'),
             'appearance' => [
                 'width' => 40,
-                'align' => DataGridInterface::ALIGN_LEFT
+                'align' => ColumnInterface::ALIGN_LEFT
             ],
             'filter'     => [
-                'type' => DataGridInterface::FILTER_BETWEEN
+                'type' => ColumnInterface::FILTER_BETWEEN
             ]
-        ]);
+        ]));
+    }
 
-        $this->query = $this->getDb()
-            ->table('client_group')
-            ->join('client_group_translation', 'client_group_translation.client_group_id', '=', 'client_group.id')
-            ->groupBy('client_group.id');
-
-        return $this;
+    /**
+     * {@inheritdoc}
+     */
+    public function setQuery()
+    {
+        $this->query = $this->getDb()->table('client_group');
+        $this->query->join('client_group_translation', 'client_group_translation.client_group_id', '=', 'client_group.id');
+        $this->query->groupBy('client_group.id');
     }
 }

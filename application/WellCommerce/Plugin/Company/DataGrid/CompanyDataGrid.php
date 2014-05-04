@@ -11,9 +11,10 @@
  */
 namespace WellCommerce\Plugin\Company\DataGrid;
 
-use WellCommerce\Core\DataGrid;
-use WellCommerce\Core\DataGrid\DataGridInterface;
-use WellCommerce\Plugin\Company\Event\CompanyDataGridEvent;
+use WellCommerce\Core\Component\DataGrid\AbstractDataGrid;
+use WellCommerce\Core\Component\DataGrid\Column\ColumnInterface;
+use WellCommerce\Core\Component\DataGrid\Column\DataGridColumn;
+use WellCommerce\Core\Component\DataGrid\DataGridInterface;
 
 /**
  * Class CompanyDataGrid
@@ -21,65 +22,67 @@ use WellCommerce\Plugin\Company\Event\CompanyDataGridEvent;
  * @package WellCommerce\Plugin\Company\DataGrid
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CompanyDataGrid extends DataGrid implements DataGridInterface
+class CompanyDataGrid extends AbstractDataGrid implements DataGridInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function configure()
+    public function getId()
     {
-        $this->setOptions([
-            'id'             => 'company',
-            'event_handlers' => [
-                'load'       => $this->getXajaxManager()->registerFunction(['LoadCompany', $this, 'loadData']),
-                'edit_row'   => 'editCompany',
-                'click_row'  => 'editCompany',
-                'delete_row' => $this->getXajaxManager()->registerFunction(['DeleteCompany', $this, 'deleteRow'])
-            ],
-            'routes'         => [
-                'edit' => $this->generateUrl('admin.company.edit')
-            ]
-        ]);
+        return 'company';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function init()
+    public function getRoutes()
     {
-        $this->addColumn('id', [
+        return [
+            'edit' => $this->generateUrl('admin.company.edit')
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function initColumns()
+    {
+        $this->columns->add(new DataGridColumn([
+            'id'         => 'id',
             'source'     => 'company.id',
             'caption'    => $this->trans('Id'),
             'sorting'    => [
-                'default_order' => DataGridInterface::SORT_DIR_DESC
+                'default_order' => ColumnInterface::SORT_DIR_DESC
             ],
             'appearance' => [
                 'width'   => 90,
                 'visible' => false
             ],
             'filter'     => [
-                'type' => DataGridInterface::FILTER_BETWEEN
+                'type' => ColumnInterface::FILTER_BETWEEN
             ]
-        ]);
+        ]));
 
-        $this->addColumn('name', [
+        $this->columns->add(new DataGridColumn([
+            'id'         => 'name',
             'source'     => 'company.name',
             'caption'    => $this->trans('Name'),
             'appearance' => [
                 'width' => 70,
-                'align' => DataGridInterface::ALIGN_LEFT
+                'align' => ColumnInterface::ALIGN_LEFT
             ],
             'filter'     => [
-                'type' => DataGridInterface::FILTER_INPUT
+                'type' => ColumnInterface::FILTER_INPUT
             ]
-        ]);
+        ]));
+    }
 
-        $this->query = $this->getDb()
-            ->table('company')
-            ->groupBy('company.id');
-
-        $event = new CompanyDataGridEvent($this);
-
-        $this->getDispatcher()->dispatch(CompanyDataGridEvent::DATAGRID_INIT_EVENT, $event);
+    /**
+     * {@inheritdoc}
+     */
+    public function setQuery()
+    {
+        $this->query = $this->getDb()->table('company');
+        $this->query->groupBy('company.id');
     }
 }

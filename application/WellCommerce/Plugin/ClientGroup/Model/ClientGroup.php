@@ -12,6 +12,7 @@
 namespace WellCommerce\Plugin\ClientGroup\Model;
 
 use WellCommerce\Core\Component\Model\AbstractModel;
+use WellCommerce\Core\Component\Model\ModelInterface;
 use WellCommerce\Core\Component\Model\TranslatableModelInterface;
 use WellCommerce\Core\Helper\Helper;
 
@@ -21,7 +22,7 @@ use WellCommerce\Core\Helper\Helper;
  * @package WellCommerce\Plugin\ClientGroup\Model
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientGroup extends AbstractModel implements TranslatableModelInterface
+class ClientGroup extends AbstractModel implements ModelInterface, TranslatableModelInterface
 {
 
     protected $table = 'client_group';
@@ -37,7 +38,7 @@ class ClientGroup extends AbstractModel implements TranslatableModelInterface
      */
     public function translation()
     {
-        return $this->hasMany('WellCommerce\Plugin\ClientGroup\Model\ClientGroupTranslation');
+        return $this->hasMany(__NAMESPACE__ . '\ClientGroupTranslation');
     }
 
     /**

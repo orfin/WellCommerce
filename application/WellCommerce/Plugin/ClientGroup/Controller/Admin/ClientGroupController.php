@@ -21,32 +21,23 @@ use WellCommerce\Core\Component\Controller\AbstractAdminController;
  */
 class ClientGroupController extends AbstractAdminController
 {
+    /**
+     * {@inheritdoc}
+     */
     public function indexAction()
     {
-        $grid = $this->get('client_group.datagrid');
-
-        $datagrid = $this->createDataGrid($grid, [
-            'id'             => 'client_group',
-            'event_handlers' => [
-                'load'       => $this->getXajaxManager()->registerFunction(['LoadClientGroup', $grid, 'loadData']),
-                'edit_row'   => 'editClientGroup',
-                'click_row'  => 'editClientGroup',
-                'delete_row' => $this->getXajaxManager()->registerFunction(['DeleteClientGroup', $grid, 'deleteRow']),
-            ],
-            'routes'         => [
-                'edit' => $this->generateUrl('admin.client_group.edit')
-            ]
-        ]);
-
         return [
-            'datagrid' => $datagrid
+            'datagrid' => $this->createDataGrid($this->get('client_group.datagrid'))
         ];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function addAction()
     {
         $form = $this->createForm($this->get('client_group.form'), null, [
-            'name'   => 'client_group',
+            'name'   => 'add_client_group',
             'method' => 'POST',
             'action' => $this->generateUrl('admin.client_group.add')
         ]);
@@ -62,12 +53,15 @@ class ClientGroupController extends AbstractAdminController
         ];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function editAction($id)
     {
         $model = $this->repository->find($id);
 
         $form = $this->createForm($this->get('client_group.form'), $model, [
-            'name'   => 'client_group',
+            'name'   => 'edit_client_group',
             'method' => 'POST',
             'action' => $this->generateUrl('admin.client_group.edit', ['id' => $model->id])
         ]);
@@ -79,8 +73,8 @@ class ClientGroupController extends AbstractAdminController
         }
 
         return [
-            'model' => $model,
-            'form'  => $form
+            'client_group' => $model,
+            'form'         => $form
         ];
     }
 }

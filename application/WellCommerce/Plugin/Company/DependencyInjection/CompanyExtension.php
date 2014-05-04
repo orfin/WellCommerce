@@ -12,10 +12,10 @@
 
 namespace WellCommerce\Plugin\Company\DependencyInjection;
 
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use WellCommerce\Core\DependencyInjection\AbstractExtension;
 
 /**
  * Class CompanyExtension
@@ -23,22 +23,11 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  * @package WellCommerce\Plugin\Company\DependencyInjection
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CompanyExtension extends Extension
+class CompanyExtension extends AbstractExtension
 {
-
     public function load(array $config, ContainerBuilder $container)
     {
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.xml');
-    }
-
-    public function getNamespace()
-    {
-        return 'http://symfony.com/schema/dic/services';
-    }
-
-    public function getAlias()
-    {
-        return 'wellcommerce.plugin.company';
     }
 }

@@ -12,6 +12,7 @@
 namespace WellCommerce\Plugin\Company\Repository;
 
 use WellCommerce\Core\Component\Repository\AbstractRepository;
+use WellCommerce\Core\Component\Repository\RepositoryInterface;
 use WellCommerce\Plugin\Company\Model\Company;
 
 /**
@@ -20,13 +21,10 @@ use WellCommerce\Plugin\Company\Model\Company;
  * @package WellCommerce\Plugin\Company\AbstractRepository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CompanyRepository extends AbstractRepository
+class CompanyRepository extends AbstractRepository implements RepositoryInterface
 {
-
     /**
-     * Returns a company collection
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     * {@inheritdoc}
      */
     public function all()
     {
@@ -34,11 +32,7 @@ class CompanyRepository extends AbstractRepository
     }
 
     /**
-     * Returns the company model
-     *
-     * @param $id
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|static
+     * {@inheritdoc}
      */
     public function find($id)
     {
@@ -46,72 +40,47 @@ class CompanyRepository extends AbstractRepository
     }
 
     /**
-     * Deletes company by ID
-     *
-     * @param $id
+     * {@inheritdoc}
      */
     public function delete($id)
     {
+        $this->dispatchEvent(CompanyRepositoryEvents::PRE_DELETE, [], $id);
+
         $this->transaction(function () use ($id) {
             return Company::destroy($id);
         });
+
+        $this->dispatchEvent(CompanyRepositoryEvents::POST_DELETE, [], $id);
     }
 
     /**
-     * Saves company
-     *
-     * @param      $Data
-     * @param null $id
+     * {@inheritdoc}
      */
-    public function save($Data, $id = null)
+    public function save(array $data, $id = null)
     {
-        $this->transaction(function () use ($Data, $id) {
+        $data = $this->dispatchEvent(CompanyRepositoryEvents::PRE_SAVE, $data, $id);
+
+        $this->transaction(function () use ($data, $id) {
+
+            $accessor = $this->getPropertyAccessor();
+
             $company = Company::firstOrNew([
                 'id' => $id
             ]);
 
-            $company->name       = $Data['name'];
-            $company->short_name = $Data['short_name'];
-            $company->street     = $Data['street'];
-            $company->streetno   = $Data['streetno'];
-            $company->flatno     = $Data['flatno'];
-            $company->province   = $Data['province'];
-            $company->postcode   = $Data['postcode'];
-            $company->city       = $Data['city'];
-            $company->country    = $Data['country'];
+            $company->name       = $accessor->getValue($data, '[required_data][name]');
+            $company->short_name = $accessor->getValue($data, '[required_data][short_name]');
+            $company->street     = $accessor->getValue($data, '[address_data][street]');
+            $company->streetno   = $accessor->getValue($data, '[address_data][streetno]');
+            $company->flatno     = $accessor->getValue($data, '[address_data][flatno]');
+            $company->province   = $accessor->getValue($data, '[address_data][province]');
+            $company->postcode   = $accessor->getValue($data, '[address_data][postcode]');
+            $company->city       = $accessor->getValue($data, '[address_data][city]');
+            $company->country    = $accessor->getValue($data, '[address_data][country]');
             $company->save();
         });
-    }
 
-    /**
-     * Returns array containing values needed to populate the form
-     *
-     * @param $id
-     *
-     * @return array
-     */
-    public function getPopulateData($id)
-    {
-        $companyData  = $this->find($id);
-        $populateData = [];
-        $accessor     = $this->getPropertyAccessor();
-
-        $accessor->setValue($populateData, '[required_data]', [
-            'name'       => $companyData->name,
-            'short_name' => $companyData->short_name
-        ]);
-
-        $accessor->setValue($populateData, '[address_data]', [
-            'street'   => $companyData->street,
-            'streetno' => $companyData->streetno,
-            'flatno'   => $companyData->flatno,
-            'province' => $companyData->province,
-            'postcode' => $companyData->postcode,
-            'city'     => $companyData->city,
-            'country'  => $companyData->country
-        ]);
-
-        return $populateData;
+        $this->dispatchEvent(CompanyRepositoryEvents::POST_SAVE, $data, $id);
     }
 
     /**
