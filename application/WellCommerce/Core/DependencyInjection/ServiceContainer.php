@@ -128,10 +128,8 @@ class ServiceContainer extends Container
             'producer.admin.controller' => 'getProducer_Admin_ControllerService',
             'producer.datagrid' => 'getProducer_DatagridService',
             'producer.form' => 'getProducer_FormService',
+            'producer.listener' => 'getProducer_ListenerService',
             'producer.repository' => 'getProducer_RepositoryService',
-            'producer_box.layout.configurator' => 'getProducerBox_Layout_ConfiguratorService',
-            'producer_list_box.layout.configurator' => 'getProducerListBox_Layout_ConfiguratorService',
-            'producer_page.layout' => 'getProducerPage_LayoutService',
             'product.admin.controller' => 'getProduct_Admin_ControllerService',
             'product.datagrid' => 'getProduct_DatagridService',
             'product.form' => 'getProduct_FormService',
@@ -1054,6 +1052,7 @@ class ServiceContainer extends Container
         $instance->addSubscriberService('client_group.listener', 'WellCommerce\\Plugin\\ClientGroup\\EventListener\\ClientGroupListener');
         $instance->addSubscriberService('company.listener', 'WellCommerce\\Plugin\\Company\\EventListener\\CompanyListener');
         $instance->addSubscriberService('language.subscriber', 'WellCommerce\\Plugin\\Language\\Event\\LanguageEventSubscriber');
+        $instance->addSubscriberService('producer.listener', 'WellCommerce\\Plugin\\Producer\\EventListener\\ProducerListener');
         $instance->addSubscriberService('product.listener', 'WellCommerce\\Plugin\\Product\\EventListener\\ProductListener');
         $instance->addSubscriberService('shop.subscriber', 'WellCommerce\\Plugin\\Shop\\Event\\ShopEventSubscriber');
         $instance->addSubscriberService('user.listener', 'WellCommerce\\Plugin\\User\\EventListener\\UserListener');
@@ -1375,8 +1374,6 @@ class ServiceContainer extends Container
         $instance->setContainer($this);
         $instance->addLayoutBoxConfigurator('category_box.layout.configurator', $this->get('category_box.layout.configurator'));
         $instance->addLayoutBoxConfigurator('contact_box.layout.configurator', $this->get('contact_box.layout.configurator'));
-        $instance->addLayoutBoxConfigurator('producer_box.layout.configurator', $this->get('producer_box.layout.configurator'));
-        $instance->addLayoutBoxConfigurator('producer_list_box.layout.configurator', $this->get('producer_list_box.layout.configurator'));
         $instance->addLayoutBoxConfigurator('product_box.layout.configurator', $this->get('product_box.layout.configurator'));
 
         return $instance;
@@ -1738,8 +1735,6 @@ class ServiceContainer extends Container
 
         $instance->setContainer($this);
         $instance->setRepository($this->get('producer.repository'));
-        $instance->setDataGrid($this->get('producer.datagrid'));
-        $instance->setFormBuilder($this->get('producer.form'));
 
         return $instance;
     }
@@ -1754,12 +1749,7 @@ class ServiceContainer extends Container
      */
     protected function getProducer_DatagridService()
     {
-        $this->services['producer.datagrid'] = $instance = new \WellCommerce\Plugin\Producer\DataGrid\ProducerDataGrid();
-
-        $instance->setRepository($this->get('producer.repository'));
-        $instance->setContainer($this);
-
-        return $instance;
+        return $this->services['producer.datagrid'] = new \WellCommerce\Plugin\Producer\DataGrid\ProducerDataGrid($this, $this->get('producer.repository'));
     }
 
     /**
@@ -1780,6 +1770,19 @@ class ServiceContainer extends Container
     }
 
     /**
+     * Gets the 'producer.listener' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Plugin\Producer\EventListener\ProducerListener A WellCommerce\Plugin\Producer\EventListener\ProducerListener instance.
+     */
+    protected function getProducer_ListenerService()
+    {
+        return $this->services['producer.listener'] = new \WellCommerce\Plugin\Producer\EventListener\ProducerListener($this);
+    }
+
+    /**
      * Gets the 'producer.repository' service.
      *
      * This service is shared.
@@ -1790,57 +1793,6 @@ class ServiceContainer extends Container
     protected function getProducer_RepositoryService()
     {
         $this->services['producer.repository'] = $instance = new \WellCommerce\Plugin\Producer\Repository\ProducerRepository();
-
-        $instance->setContainer($this);
-
-        return $instance;
-    }
-
-    /**
-     * Gets the 'producer_box.layout.configurator' service.
-     *
-     * This service is shared.
-     * This method always returns the same instance of the service.
-     *
-     * @return WellCommerce\Plugin\Producer\Layout\ProducerBoxConfigurator A WellCommerce\Plugin\Producer\Layout\ProducerBoxConfigurator instance.
-     */
-    protected function getProducerBox_Layout_ConfiguratorService()
-    {
-        $this->services['producer_box.layout.configurator'] = $instance = new \WellCommerce\Plugin\Producer\Layout\ProducerBoxConfigurator();
-
-        $instance->setContainer($this);
-
-        return $instance;
-    }
-
-    /**
-     * Gets the 'producer_list_box.layout.configurator' service.
-     *
-     * This service is shared.
-     * This method always returns the same instance of the service.
-     *
-     * @return WellCommerce\Plugin\Producer\Layout\ProducerListBoxConfigurator A WellCommerce\Plugin\Producer\Layout\ProducerListBoxConfigurator instance.
-     */
-    protected function getProducerListBox_Layout_ConfiguratorService()
-    {
-        $this->services['producer_list_box.layout.configurator'] = $instance = new \WellCommerce\Plugin\Producer\Layout\ProducerListBoxConfigurator();
-
-        $instance->setContainer($this);
-
-        return $instance;
-    }
-
-    /**
-     * Gets the 'producer_page.layout' service.
-     *
-     * This service is shared.
-     * This method always returns the same instance of the service.
-     *
-     * @return WellCommerce\Plugin\Producer\Layout\ProducerLayoutPage A WellCommerce\Plugin\Producer\Layout\ProducerLayoutPage instance.
-     */
-    protected function getProducerPage_LayoutService()
-    {
-        $this->services['producer_page.layout'] = $instance = new \WellCommerce\Plugin\Producer\Layout\ProducerLayoutPage();
 
         $instance->setContainer($this);
 
@@ -2964,6 +2916,7 @@ class ServiceContainer extends Container
             'producer.repository.class' => 'WellCommerce\\Plugin\\Producer\\Repository\\ProducerRepository',
             'producer.datagrid.class' => 'WellCommerce\\Plugin\\Producer\\DataGrid\\ProducerDataGrid',
             'producer.form.class' => 'WellCommerce\\Plugin\\Producer\\Form\\ProducerForm',
+            'producer.listener.class' => 'WellCommerce\\Plugin\\Producer\\EventListener\\ProducerListener',
             'product.admin.controller.class' => 'WellCommerce\\Plugin\\Product\\Controller\\Admin\\ProductController',
             'product.repository.class' => 'WellCommerce\\Plugin\\Product\\Repository\\ProductRepository',
             'product.datagrid.class' => 'WellCommerce\\Plugin\\Product\\DataGrid\\ProductDataGrid',

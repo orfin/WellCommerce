@@ -8,8 +8,9 @@
         <parameter key="producer.repository.class">WellCommerce\Plugin\Producer\Repository\ProducerRepository</parameter>
         <parameter key="producer.datagrid.class">WellCommerce\Plugin\Producer\DataGrid\ProducerDataGrid</parameter>
         <parameter key="producer.form.class">WellCommerce\Plugin\Producer\Form\ProducerForm</parameter>
+        <parameter key="producer.listener.class">WellCommerce\Plugin\Producer\EventListener\ProducerListener</parameter>
     </parameters>
-    
+
     <services>
         <service id="producer.admin.controller" class="%producer.admin.controller.class%">
             <call method="setContainer">
@@ -18,55 +19,28 @@
             <call method="setRepository">
                 <argument type="service" id="producer.repository"/>
             </call>
-            <call method="setDataGrid">
-                <argument type="service" id="producer.datagrid"/>
-            </call>
-            <call method="setFormBuilder">
-                <argument type="service" id="producer.form"/>
-            </call>
-        </service>
-        
-        <service id="producer.repository" class="WellCommerce\Plugin\Producer\Repository\ProducerRepository">
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
-        
-        <service id="producer.datagrid" class="WellCommerce\Plugin\Producer\DataGrid\ProducerDataGrid">
-            <call method="setRepository">
-                <argument type="service" id="producer.repository" />
-            </call>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
-        
-        <service id="producer.form" class="WellCommerce\Plugin\Producer\Form\ProducerForm">
-        	<call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
         </service>
 
-        <service id="producer_box.layout.configurator" class="WellCommerce\Plugin\Producer\Layout\ProducerBoxConfigurator">
+        <service id="producer.repository" class="%producer.repository.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
-            <tag name="layout_box.configurator" />
         </service>
 
-        <service id="producer_list_box.layout.configurator" class="WellCommerce\Plugin\Producer\Layout\ProducerListBoxConfigurator">
+        <service id="producer.datagrid" class="%producer.datagrid.class%">
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="producer.repository"/>
+        </service>
+
+        <service id="producer.form" class="%producer.form.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
-            <tag name="layout_box.configurator" />
         </service>
 
-        <service id="producer_page.layout" class="WellCommerce\Plugin\Producer\Layout\ProducerLayoutPage">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <tag name="layout_page" alias="Producer" columns="producer.xml" />
+        <service id="producer.listener" class="%producer.listener.class%">
+            <argument type="service" id="service_container"/>
+            <tag name="kernel.event_subscriber" />
         </service>
-
     </services>
 </container>

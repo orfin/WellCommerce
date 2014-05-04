@@ -12,6 +12,7 @@
 namespace WellCommerce\Plugin\Producer\Controller\Admin;
 
 use WellCommerce\Core\Component\Controller\AbstractAdminController;
+use WellCommerce\Plugin\Producer\DataGrid\Config;
 
 /**
  * Class ProducerController
@@ -21,5 +22,60 @@ use WellCommerce\Core\Component\Controller\AbstractAdminController;
  */
 class ProducerController extends AbstractAdminController
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function indexAction()
+    {
+        return [
+            'datagrid' => $this->createDataGrid($this->get('producer.datagrid'))
+        ];
+    }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function addAction()
+    {
+        $form = $this->createForm($this->get('producer.form'), null, [
+            'name'   => 'add_producer',
+            'method' => 'POST',
+            'action' => $this->generateUrl('admin.producer.add')
+        ]);
+
+        if ($form->isValid()) {
+            $this->repository->save($form->getSubmittedData());
+
+            return $this->redirect($this->getDefaultUrl());
+        }
+
+        return [
+            'form' => $form
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function editAction($id)
+    {
+        $model = $this->repository->find($id);
+
+        $form = $this->createForm($this->get('producer.form'), $model, [
+            'name'   => 'edit_producer',
+            'method' => 'POST',
+            'action' => $this->generateUrl('admin.producer.edit', ['id' => $model->id])
+        ]);
+
+        if ($form->isValid()) {
+            $this->repository->save($form->getSubmittedData(), $id);
+
+            return $this->redirect($this->getDefaultUrl());
+        }
+
+        return [
+            'producer' => $model,
+            'form'     => $form
+        ];
+    }
 }

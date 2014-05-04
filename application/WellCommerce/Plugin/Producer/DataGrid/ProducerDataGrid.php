@@ -12,8 +12,9 @@
 namespace WellCommerce\Plugin\Producer\DataGrid;
 
 use WellCommerce\Core\Component\DataGrid\AbstractDataGrid;
+use WellCommerce\Core\Component\DataGrid\Column\ColumnInterface;
+use WellCommerce\Core\Component\DataGrid\Column\DataGridColumn;
 use WellCommerce\Core\Component\DataGrid\DataGridInterface;
-use WellCommerce\Plugin\Producer\Event\ProducerDataGridEvent;
 
 /**
  * Class ProducerDataGrid
@@ -26,62 +27,63 @@ class ProducerDataGrid extends AbstractDataGrid implements DataGridInterface
     /**
      * {@inheritdoc}
      */
-    public function configure()
+    public function getId()
     {
-        $this->setOptions([
-            'id'             => 'producer',
-            'event_handlers' => [
-                'load'       => $this->getXajaxManager()->registerFunction(['LoadProducer', $this, 'loadData']),
-                'edit_row'   => 'editProducer',
-                'click_row'  => 'editProducer',
-                'delete_row' => $this->getXajaxManager()->registerFunction(['DeleteProducer', $this, 'deleteRow']),
-            ],
-            'routes'         => [
-                'edit'  => $this->generateUrl('admin.producer.edit')
-            ]
-        ]);
-
+        return 'producer';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function init()
+    public function getRoutes()
     {
-        $this->addColumn('id', [
+        return [
+            'edit' => $this->generateUrl('admin.producer.edit')
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function initColumns()
+    {
+        $this->columns->add(new DataGridColumn([
+            'id'         => 'id',
             'source'     => 'producer.id',
             'caption'    => $this->trans('Id'),
             'sorting'    => [
-                'default_order' => DataGridInterface::SORT_DIR_DESC
+                'default_order' => ColumnInterface::SORT_DIR_DESC
             ],
             'appearance' => [
                 'width'   => 90,
                 'visible' => false
             ],
             'filter'     => [
-                'type' => DataGridInterface::FILTER_BETWEEN
+                'type' => ColumnInterface::FILTER_BETWEEN
             ]
-        ]);
+        ]));
 
-        $this->addColumn('name', [
+        $this->columns->add(new DataGridColumn([
+            'id'         => 'name',
             'source'     => 'producer_translation.name',
             'caption'    => $this->trans('Name'),
             'appearance' => [
                 'width' => 570,
-                'align' => DataGridInterface::ALIGN_LEFT
+                'align' => ColumnInterface::ALIGN_LEFT
             ],
             'filter'     => [
-                'type' => DataGridInterface::FILTER_INPUT
+                'type' => ColumnInterface::FILTER_INPUT
             ]
-        ]);
+        ]));
+    }
 
-        $this->query = $this->getDb()
-            ->table('producer')
-            ->join('producer_translation', 'producer_translation.producer_id', '=', 'producer.id')
-            ->groupBy('producer.id');
-
-        $event = new ProducerDataGridEvent($this);
-
-        $this->getDispatcher()->dispatch(ProducerDataGridEvent::DATAGRID_INIT_EVENT, $event);
+    /**
+     * {@inheritdoc}
+     */
+    public function setQuery()
+    {
+        $this->query = $this->getDb()->table('producer');
+        $this->query->join('producer_translation', 'producer_translation.producer_id', '=', 'producer.id');
+        $this->query->groupBy('producer.id');
     }
 }

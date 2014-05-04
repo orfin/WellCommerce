@@ -29,7 +29,7 @@ class ProducerRepository extends AbstractRepository implements RepositoryInterfa
      */
     public function all()
     {
-        return Producer::all();
+        return Producer::with('translation', 'shop', 'deliverer')->get();
     }
 
     /**
@@ -45,17 +45,26 @@ class ProducerRepository extends AbstractRepository implements RepositoryInterfa
      */
     public function delete($id)
     {
+        $this->dispatchEvent(ProducerRepositoryEvents::PRE_DELETE, [], $id);
+
         $this->transaction(function () use ($id) {
             return Producer::destroy($id);
         });
+
+        $this->dispatchEvent(ProducerRepositoryEvents::POST_DELETE, [], $id);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function save(array $Data, $id = null)
+    public function save(array $data, $id = null)
     {
-        $this->transaction(function () use ($Data, $id) {
+        $data = $this->dispatchEvent(ProducerRepositoryEvents::PRE_SAVE, $data, $id);
+
+        $this->transaction(function () use ($data, $id) {
+
+            $accessor = $this->getPropertyAccessor();
+
             $producer = Producer::firstOrNew([
                 'id' => $id
             ]);
@@ -69,37 +78,27 @@ class ProducerRepository extends AbstractRepository implements RepositoryInterfa
                     'language_id' => $language
                 ]);
 
-                $translation->setTranslationData($Data, $language);
+                // set translations from required_data pane
+                $languageData = $accessor->getValue($data, sprintf('[required_data][language_data][%s]', $language));
+                $translation->setTranslationData($languageData);
+
+                // set translations from description_data pane
+                $descData = $accessor->getValue($data, sprintf('[description_data][language_data][%s]', $language));
+                $translation->setTranslationData($descData);
+
+                // set translations from meta_data pane
+                $metaData = $accessor->getValue($data, sprintf('[meta_data][language_data][%s]', $language));
+                $translation->setTranslationData($metaData);
+
+
                 $translation->save();
             }
 
-            $producer->sync($producer->deliverer(), $Data['deliverers']);
-            $producer->sync($producer->shop(), $Data['shops']);
+            $producer->sync($producer->deliverer(), $accessor->getValue($data, '[required_data][deliverers]'));
+            $producer->sync($producer->shop(), $accessor->getValue($data, '[shop_data][shops]'));
         });
-    }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getPopulateData($id)
-    {
-        $producerData = $this->find($id);
-        $populateData = [];
-        $accessor     = $this->getPropertyAccessor();
-        $languageData = $producerData->getTranslationData();
-
-        $accessor->setValue($populateData, '[required_data]', [
-            'language_data' => $languageData,
-            'deliverers'    => $producerData->getDeliverers(),
-        ]);
-
-        $accessor->setValue($populateData, '[description_data][language_data]', $languageData);
-
-        $accessor->setValue($populateData, '[meta_data][language_data]', $languageData);
-
-        $accessor->setValue($populateData, '[shop_data][shops]', $producerData->getShops());
-
-        return $populateData;
+        $this->dispatchEvent(ProducerRepositoryEvents::POST_SAVE, $data, $id);
     }
 
     /**

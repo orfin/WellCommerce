@@ -8,3 +8,4 @@ php-cs-fixer.phar
 .project
 .buildpath
 *.*.meta
+application/WellCommerce/Core/DependencyInjection/ServiceContainer.php

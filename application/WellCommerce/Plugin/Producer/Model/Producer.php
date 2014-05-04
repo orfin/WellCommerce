@@ -12,6 +12,7 @@
 namespace WellCommerce\Plugin\Producer\Model;
 
 use WellCommerce\Core\Component\Model\AbstractModel;
+use WellCommerce\Core\Component\Model\ModelInterface;
 use WellCommerce\Core\Component\Model\TranslatableModelInterface;
 
 /**
@@ -20,7 +21,7 @@ use WellCommerce\Core\Component\Model\TranslatableModelInterface;
  * @package WellCommerce\Core\Model
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Producer extends AbstractModel implements TranslatableModelInterface
+class Producer extends AbstractModel implements ModelInterface, TranslatableModelInterface
 {
     /**
      * @var string
@@ -47,7 +48,7 @@ class Producer extends AbstractModel implements TranslatableModelInterface
      */
     public function translation()
     {
-        return $this->hasMany('WellCommerce\Plugin\Producer\Model\ProducerTranslation');
+        return $this->hasMany(__NAMESPACE__ . '\ProducerTranslation');
     }
 
     /**
