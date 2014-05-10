@@ -12,18 +12,49 @@
 
 namespace WellCommerce\Core\Component\Form\Elements;
 
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
 /**
  * Class Checkbox
  *
- * @package WellCommerce\Core\Form\Elements
+ * @package WellCommerce\Core\Component\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class Checkbox extends Field implements ElementInterface
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function configureAttributes(OptionsResolverInterface $resolver)
+    {
+        $resolver->setRequired([
+            'name',
+            'label'
+        ]);
 
+        $resolver->setOptional([
+            'class',
+            'error',
+            'comment',
+            'default',
+        ]);
+
+        $resolver->setAllowedTypes([
+            'name'    => 'string',
+            'label'   => 'string',
+            'class'   => 'string',
+            'error'   => 'string',
+            'comment' => 'string',
+            'default' => 'integer'
+        ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function prepareAttributesJs()
     {
-        $attributes = Array(
+        $attributes = [
             $this->formatAttributeJs('name', 'sName'),
             $this->formatAttributeJs('label', 'sLabel'),
             $this->formatAttributeJs('comment', 'sComment'),
@@ -31,7 +62,7 @@ class Checkbox extends Field implements ElementInterface
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
             $this->formatDefaultsJs()
-        );
+        ];
 
         return $attributes;
     }

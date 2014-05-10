@@ -12,10 +12,12 @@
 
 namespace WellCommerce\Core\Component\Form;
 
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
 /**
  * Class Node
  *
- * @package WellCommerce\Core\Form
+ * @package WellCommerce\Core\Component\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 abstract class Node
@@ -41,9 +43,12 @@ abstract class Node
 
     public function __construct($attributes)
     {
+        $resolver = new OptionsResolver();
+        $this->configureAttributes($resolver);
+
+        $this->attributes    = $resolver->resolve($attributes);
         $this->_id           = self::$_nextId++;
-        $this->attributes   = $attributes;
-        $this->_renderMode   = 'Static';
+        $this->_renderMode   = 'JS';
         $this->_tabs         = '';
         $class               = explode('\\', get_class($this));
         $this->_jsNodeName   = 'GForm' . end($class);
@@ -130,6 +135,16 @@ abstract class Node
     public function getName()
     {
         return $this->attributes['name'];
+    }
+
+    public function getPropertyPath()
+    {
+        return $this->attributes['property_path'];
+    }
+
+    public function getAttributes()
+    {
+        return $this->attributes;
     }
 
     protected function harvestValues($node, $levels)
@@ -394,7 +409,7 @@ abstract class Node
 
     protected function registerXajaxMethod($name, $callback)
     {
-        $jsName                   = $name . '_' . $this->_id;
+        $jsName                  = $name . '_' . $this->_id;
         $this->attributes[$name] = 'xajax_' . $jsName;
         App::getRegistry()->xajaxInterface->registerFunction(array(
             $jsName,

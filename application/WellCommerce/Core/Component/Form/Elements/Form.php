@@ -12,78 +12,69 @@
 
 namespace WellCommerce\Core\Component\Form\Elements;
 
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
 /**
  * Class Form
  *
- * @package WellCommerce\Core\Form\Elements
+ * @package WellCommerce\Core\Component\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class Form extends Container
 {
-
     const FORMAT_GROUPED  = 0;
     const FORMAT_FLAT     = 1;
     const TABS_VERTICAL   = 0;
     const TABS_HORIZONTAL = 1;
 
-    public $fields;
+    public $fields = [];
+    public $_values = [];
+    public $_flags = [];
+    public $_populatingWholeForm = false;
 
-    protected $_values;
-
-    protected $_flags;
-
-    protected $_populatingWholeForm;
-
-    public function __construct($attributes)
+    /**
+     * Constructor
+     *
+     * @param array $attributes
+     */
+    public function __construct(array $attributes)
     {
         parent::__construct($attributes);
-        $this->_populatingWholeForm = false;
-        $this->fields               = [];
-        $this->_values              = [];
-        $this->_flags               = [];
-        $this->form                 = $this;
-
-        if (!isset($this->attributes['class'])) {
-            $this->attributes['class'] = '';
-        }
-        if (!isset($this->attributes['action'])) {
-            $this->attributes['action'] = '';
-        }
-        if (!isset($this->attributes['method'])) {
-            $this->attributes['method'] = 'post';
-        }
-        if (!isset($this->attributes['tabs'])) {
-            $this->attributes['tabs'] = self::TABS_VERTICAL;
-        }
+        $this->form = $this;
     }
 
-    public function renderJs()
+    /**
+     * Configures Form attributes
+     *
+     * @param OptionsResolverInterface $resolver
+     */
+    public function configureAttributes(OptionsResolverInterface $resolver)
     {
-        return "
-			<form id=\"{$this->attributes['name']}\" method=\"{$this->attributes['method']}\" action=\"{$this->attributes['action']}\">
-				<input type=\"hidden\" name=\"{$this->attributes['name']}_submitted\" value=\"1\"/>
-			</form>
-			<script type=\"text/javascript\">
-				/*<![CDATA[*/
-					GCore.OnLoad(function() {
-						$('#{$this->attributes['name']}').GForm({
-							sFormName: '{$this->attributes['name']}',
-							sClass: '{$this->attributes['class']}',
-							iTabs: " . (($this->attributes['tabs'] == self::TABS_VERTICAL) ? 'GForm.TABS_VERTICAL' : 'GForm.TABS_HORIZONTAL') . ",
-							aoFields: [
-								{$this->renderChildren()}
-							],
-							oValues: " . json_encode($this->getValues()) . ",
-							oErrors: " . json_encode($this->getErrors()) . "
-						});
-					});
-				/*]]>*/
-			</script>
-		";
-    }
+        $resolver->setRequired([
+            'name'
+        ]);
 
-    public function renderStatic()
-    {
+        $resolver->setOptional([
+            'class',
+            'action',
+            'method',
+            'tabs'
+        ]);
+
+        $resolver->setDefaults([
+            'action' => '',
+            'class'  => '',
+            'method' => 'POST',
+            'tabs'   => self::TABS_VERTICAL,
+        ]);
+
+        $resolver->setAllowedTypes([
+            'class'  => 'string',
+            'action' => 'string',
+            'method' => 'string',
+            'tabs'   => 'integer'
+        ]);
+
     }
 
     public function getSubmitValuesFlat()

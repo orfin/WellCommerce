@@ -90,7 +90,6 @@ class ProducerRepository extends AbstractRepository implements RepositoryInterfa
                 $metaData = $accessor->getValue($data, sprintf('[meta_data][language_data][%s]', $language));
                 $translation->setTranslationData($metaData);
 
-
                 $translation->save();
             }
 

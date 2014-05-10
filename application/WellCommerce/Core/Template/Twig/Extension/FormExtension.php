@@ -47,7 +47,12 @@ class FormExtension extends \Twig_Extension
 
     public function render($form)
     {
-        return $form->render();
+        return $this->container->get('twig')->render('form.html.twig', [
+            'attributes' => $form->getAttributes(),
+            'children'   => $form->renderChildren(),
+            'values'     => $form->getValues(),
+            'errors'     => $form->getErrors(),
+        ]);
     }
 
     public function getName()

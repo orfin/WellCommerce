@@ -12,14 +12,36 @@
 
 namespace WellCommerce\Core\Component\Form\Elements;
 
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
 /**
  * Class Fieldset
  *
- * @package WellCommerce\Core\Form\Elements
+ * @package WellCommerce\Core\Component\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class Fieldset extends Container implements ElementInterface
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function configureAttributes(OptionsResolverInterface $resolver)
+    {
+        $resolver->setRequired([
+            'name',
+            'label'
+        ]);
+
+        $resolver->setOptional([
+            'class',
+        ]);
+
+        $resolver->setAllowedTypes([
+            'name'          => 'string',
+            'label'         => 'string',
+            'class'         => 'string'
+        ]);
+    }
 
     /**
      * {@inheritdoc}

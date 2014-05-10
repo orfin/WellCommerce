@@ -15,7 +15,7 @@ namespace WellCommerce\Core\Component\Form\Elements;
 /**
  * Class Textarea
  *
- * @package WellCommerce\Core\Form\Elements
+ * @package WellCommerce\Core\Component\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class Textarea extends TextField implements ElementInterface

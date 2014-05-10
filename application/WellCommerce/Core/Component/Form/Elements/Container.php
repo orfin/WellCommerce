@@ -154,7 +154,7 @@ abstract class Container extends Node
         return $this->form->fields;
     }
 
-    protected function renderChildren()
+    public function renderChildren()
     {
         $render = [];
         foreach ($this->children as $child) {

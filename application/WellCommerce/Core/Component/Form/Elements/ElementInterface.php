@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Core\Component\Form\Elements;
 
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
 /**
  * Interface ElementInterface
  *
@@ -20,7 +22,6 @@ namespace WellCommerce\Core\Component\Form\Elements;
  */
 interface ElementInterface
 {
-
     const INFINITE      = 'inf';
     const TYPE_NUMBER   = 'number';
     const TYPE_STRING   = 'string';
@@ -28,6 +29,15 @@ interface ElementInterface
     const TYPE_ARRAY    = 'array';
     const TYPE_OBJECT   = 'object';
     const TYPE_BOOLEAN  = 'boolean';
+
+    /**
+     * Configures element attributes
+     *
+     * @param OptionsResolverInterface $resolver
+     *
+     * @return mixed
+     */
+    public function configureAttributes(OptionsResolverInterface $resolver);
 
     /**
      * Prepares form element attributes for Javascript rendering

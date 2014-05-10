@@ -88,7 +88,6 @@ class UserController extends AbstractAdminController
     {
         $form = $this->createForm($this->get('user.form_login'), null, [
             'name'   => 'login_user',
-            'method' => 'POST',
             'action' => $this->generateUrl('admin.user.login'),
             'class'  => 'login-form'
         ]);

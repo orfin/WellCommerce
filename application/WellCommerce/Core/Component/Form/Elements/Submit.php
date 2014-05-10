@@ -12,26 +12,52 @@
 
 namespace WellCommerce\Core\Component\Form\Elements;
 
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use WellCommerce\Core\Component\Form\Node;
 
 /**
  * Class Submit
  *
- * @package WellCommerce\Core\Form\Elements
+ * @package WellCommerce\Core\Component\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class Submit extends Node implements ElementInterface
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function configureAttributes(OptionsResolverInterface $resolver)
+    {
+        $resolver->setRequired([
+            'name',
+            'label'
+        ]);
 
+        $resolver->setOptional([
+            'class',
+            'icon'
+        ]);
+
+        $resolver->setAllowedTypes([
+            'name'  => 'string',
+            'class' => 'string',
+            'label' => 'string',
+            'icon'  => 'icon'
+        ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function prepareAttributesJs()
     {
-        $attributes = Array(
+        $attributes = [
             $this->formatAttributeJs('name', 'sName'),
             $this->formatAttributeJs('class', 'sClass'),
             $this->formatAttributeJs('label', 'sLabel'),
             $this->formatAttributeJs('icon', 'sIcon'),
             $this->formatDependencyJs()
-        );
+        ];
 
         return $attributes;
     }

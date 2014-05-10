@@ -12,6 +12,9 @@
 
 namespace WellCommerce\Core\Component\Form\Elements;
 
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
 /**
  * Class TextField
  *
@@ -24,9 +27,53 @@ class TextField extends Field implements ElementInterface
     const SIZE_MEDIUM = 'medium';
     const SIZE_LONG   = 'long';
 
+    /**
+     * {@inheritdoc}
+     */
+    public function configureAttributes(OptionsResolverInterface $resolver)
+    {
+        $resolver->setRequired([
+            'name',
+            'label'
+        ]);
+
+        $resolver->setOptional([
+            'comment',
+            'suffix',
+            'prefix',
+            'selector',
+            'wrap',
+            'class',
+            'css_attribute',
+            'max_length',
+            'error',
+            'rules',
+            'dependencies',
+        ]);
+
+        $resolver->setAllowedTypes([
+            'name'          => 'string',
+            'label'         => 'string',
+            'comment'       => 'string',
+            'suffix'        => 'string',
+            'prefix'        => 'string',
+            'selector'      => 'string',
+            'wrap'          => 'string',
+            'class'         => 'string',
+            'css_attribute' => 'string',
+            'max_length'    => 'integer',
+            'error'         => 'string',
+            'rules'         => 'array',
+            'dependencies'  => 'array'
+        ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function prepareAttributesJs()
     {
-        $attributes = Array(
+        $attributes = [
             $this->formatAttributeJs('name', 'sName'),
             $this->formatAttributeJs('label', 'sLabel'),
             $this->formatAttributeJs('comment', 'sComment'),
@@ -42,7 +89,7 @@ class TextField extends Field implements ElementInterface
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
             $this->formatDefaultsJs()
-        );
+        ];
 
         return $attributes;
     }

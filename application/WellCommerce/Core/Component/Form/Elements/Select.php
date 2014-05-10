@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Core\Component\Form\Elements;
 
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
 /**
  * Class Select
  *
@@ -20,10 +22,51 @@ namespace WellCommerce\Core\Component\Form\Elements;
  */
 class Select extends OptionedField implements ElementInterface
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function configureAttributes(OptionsResolverInterface $resolver)
+    {
+        $resolver->setRequired([
+            'name',
+            'label',
+            'options'
+        ]);
 
+        $resolver->setOptional([
+            'comment',
+            'suffix',
+            'prefix',
+            'error',
+            'selector',
+            'css_attribute',
+            'addable',
+            'onAdd',
+            'add_item_prompt',
+        ]);
+
+        $resolver->setAllowedTypes([
+            'name'            => 'string',
+            'label'           => 'string',
+            'options'         => 'array',
+            'comment'         => 'string',
+            'suffix'          => 'string',
+            'prefix'          => 'string',
+            'error'           => 'string',
+            'selector'        => 'string',
+            'css_attribute'   => 'string',
+            'addable'         => 'string',
+            'onAdd'           => 'function',
+            'add_item_prompt' => 'string',
+        ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function prepareAttributesJs()
     {
-        $attributes = Array(
+        $attributes = [
             $this->formatAttributeJs('name', 'sName'),
             $this->formatAttributeJs('label', 'sLabel'),
             $this->formatAttributeJs('comment', 'sComment'),
@@ -40,7 +83,7 @@ class Select extends OptionedField implements ElementInterface
             $this->formatDependencyJs(),
             $this->formatOptionsJs(),
             $this->formatDefaultsJs()
-        );
+        ];
 
         return $attributes;
     }
