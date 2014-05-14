@@ -15,14 +15,13 @@ namespace WellCommerce\Core\Component\Form\Filters;
 /**
  * Interface FilterInterface
  *
- * @package WellCommerce\Core\Form\filters
+ * @package WellCommerce\Core\Component\Form\Filters
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface FilterInterface
 {
-
     /**
-     * filters given value
+     * Filters given value
      *
      * @param $value
      *

@@ -11,10 +11,12 @@
  */
 namespace WellCommerce\Plugin\File\DependencyInjection;
 
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\Routing\Route;
+use Symfony\Component\Routing\RouteCollection;
+use WellCommerce\Core\DependencyInjection\AbstractExtension;
 
 /**
  * Class FileExtension
@@ -22,7 +24,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  * @package WellCommerce\Plugin\File\DependencyInjection
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class FileExtension extends Extension
+class FileExtension extends AbstractExtension
 {
 
     public function load(array $config, ContainerBuilder $container)
@@ -31,13 +33,28 @@ class FileExtension extends Extension
         $loader->load('services.xml');
     }
 
-    public function getNamespace()
+    /**
+     * {@inheritdoc}
+     */
+    public function registerRoutes(RouteCollection $collection)
     {
-        return 'http://symfony.com/schema/dic/services';
-    }
+        $extensionCollection = new RouteCollection();
 
-    public function getAlias()
-    {
-        return 'wellcommerce.plugin.file';
+        $extensionCollection->add('admin.file.index', new Route('/index', array(
+            '_controller' => 'file.admin.controller:indexAction',
+        )));
+
+        $extensionCollection->add('admin.file.add', new Route('/add', array(
+            '_controller' => 'file.admin.controller:addAction',
+        )));
+
+        $extensionCollection->add('admin.file.edit', new Route('/edit/{id}', array(
+            '_controller' => 'file.admin.controller:editAction',
+            'id'          => null
+        )));
+
+        $extensionCollection->addPrefix('/admin/file');
+
+        $collection->addCollection($extensionCollection);
     }
 }

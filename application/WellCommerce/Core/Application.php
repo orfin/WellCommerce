@@ -24,30 +24,29 @@ use WellCommerce\Core\DependencyInjection\ServiceContainerBuilder;
  */
 class Application
 {
-
     /**
-     * Container instance
+     * Container object
      *
      * @var object
      */
     protected $container;
 
     /**
-     * Request instance
+     * Request object
      *
      * @var object
      */
     protected $request;
 
     /**
-     * Response instance
+     * Response object
      *
      * @var object
      */
     protected $response;
 
     /**
-     * Stopwatch component instance
+     * Stopwatch object
      *
      * @var object
      */
@@ -84,7 +83,7 @@ class Application
     }
 
     /**
-     * Resolves controller and dispatch the application
+     * Resolves controller and dispatches the application
      *
      * @return  void
      */

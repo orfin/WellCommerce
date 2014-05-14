@@ -20,6 +20,7 @@ use Symfony\Component\DependencyInjection\Dumper\PhpDumper;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpKernel\DependencyInjection\RegisterListenersPass;
+use Symfony\Component\Routing\RouteCollection;
 use WellCommerce\Core\DependencyInjection\Compiler\RegisterTwigExtensionsPass;
 use WellCommerce\Core\DependencyInjection\Extension\PluginExtensionLoader;
 use Symfony\Component\DependencyInjection\Compiler\PassConfig;
@@ -136,8 +137,10 @@ final class ServiceContainerBuilder
      */
     protected function registerExtensions()
     {
-        $extensionLoader = new PluginExtensionLoader($this->containerBuilder);
+        $routeCollection = new RouteCollection();
+        $extensionLoader = new PluginExtensionLoader($this->containerBuilder, $routeCollection);
         $extensionLoader->registerExtensions();
+        $extensionLoader->dumpRouting();
     }
 
     /**

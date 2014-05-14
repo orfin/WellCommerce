@@ -15,6 +15,8 @@ namespace WellCommerce\Plugin\User\DependencyInjection;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\Routing\Route;
+use Symfony\Component\Routing\RouteCollection;
 use WellCommerce\Core\DependencyInjection\AbstractExtension;
 
 /**
@@ -32,5 +34,38 @@ class UserExtension extends AbstractExtension
     {
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.xml');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function registerRoutes(RouteCollection $collection)
+    {
+        $extensionCollection = new RouteCollection();
+
+        $extensionCollection->add('admin.user.index', new Route('/index', array(
+            '_controller' => 'user.admin.controller:indexAction',
+        )));
+
+        $extensionCollection->add('admin.user.add', new Route('/add', array(
+            '_controller' => 'user.admin.controller:addAction',
+        )));
+
+        $extensionCollection->add('admin.user.edit', new Route('/edit/{id}', array(
+            '_controller' => 'user.admin.controller:editAction',
+            'id'          => null
+        )));
+
+        $extensionCollection->add('admin.user.login', new Route('/login', array(
+            '_controller' => 'user.admin.controller:loginAction'
+        )));
+
+        $extensionCollection->add('admin.user.logout', new Route('/logout', array(
+            '_controller' => 'user.admin.controller:logoutAction'
+        )));
+
+        $extensionCollection->addPrefix('/admin/user');
+
+        $collection->addCollection($extensionCollection);
     }
 }

@@ -47,7 +47,6 @@
         }
     ],
     "require": {
-        "symfony/browser-kit": "2.4.x-dev",
         "symfony/config": "2.4.x-dev",
         "symfony/console": "2.4.x-dev",
         "symfony/expression-language": "2.4.x-dev",
@@ -80,7 +79,6 @@
         "twitter/bootstrap": "v3.1.1",
         "intervention/image": "1.6.0",
         "intervention/imagecache": "0.6.0",
-        "symfony/security-http": "2.4.x-dev",
         "hautelook/phpass": "0.3.0"
     },
     "autoload": {

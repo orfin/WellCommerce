@@ -12,10 +12,12 @@
 
 namespace WellCommerce\Plugin\Unit\DependencyInjection;
 
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\Routing\Route;
+use Symfony\Component\Routing\RouteCollection;
+use WellCommerce\Core\DependencyInjection\AbstractExtension;
 
 /**
  * Class UnitExtension
@@ -23,22 +25,39 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  * @package WellCommerce\Plugin\Unit\DependencyInjection
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class UnitExtension extends Extension
+class UnitExtension extends AbstractExtension
 {
-
+    /**
+     * {@inheritdoc}
+     */
     public function load(array $config, ContainerBuilder $container)
     {
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.xml');
     }
 
-    public function getNamespace()
+    /**
+     * {@inheritdoc}
+     */
+    public function registerRoutes(RouteCollection $collection)
     {
-        return 'http://symfony.com/schema/dic/services';
-    }
+        $extensionCollection = new RouteCollection();
 
-    public function getAlias()
-    {
-        return 'wellcommerce.plugin.unit';
+        $extensionCollection->add('admin.unit.index', new Route('/index', array(
+            '_controller' => 'unit.admin.controller:indexAction',
+        )));
+
+        $extensionCollection->add('admin.unit.add', new Route('/add', array(
+            '_controller' => 'unit.admin.controller:addAction',
+        )));
+
+        $extensionCollection->add('admin.unit.edit', new Route('/edit/{id}', array(
+            '_controller' => 'unit.admin.controller:editAction',
+            'id'          => null
+        )));
+
+        $extensionCollection->addPrefix('/admin/unit');
+
+        $collection->addCollection($extensionCollection);
     }
 }

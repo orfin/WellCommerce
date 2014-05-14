@@ -127,6 +127,38 @@ abstract class AbstractModel extends BaseModel
     }
 
     /**
+     * Updates model with new attributes
+     *
+     * @param array $attributes
+     *
+     * @return int|mixed
+     */
+    public function update(array $attributes = [])
+    {
+        if (!$this->exists) {
+            return $this->newQuery()->update($attributes);
+        }
+
+        return $this->set($attributes)->save();
+    }
+
+    /**
+     * Sets model attributes
+     *
+     * @param array $attributes
+     */
+    public function set(array $attributes = [])
+    {
+        foreach ($attributes as $key => $value) {
+            if (array_key_exists($key, $this->attributesToArray())) {
+                $this->setAttribute($key, $value);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
      * Synchronizes data in BelongsToMany relation
      *
      * @param BelongsToMany $relation

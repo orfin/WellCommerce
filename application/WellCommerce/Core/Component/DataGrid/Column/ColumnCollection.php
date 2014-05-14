@@ -20,7 +20,10 @@ namespace WellCommerce\Core\Component\DataGrid\Column;
  */
 class ColumnCollection implements \IteratorAggregate, \Countable
 {
-    private $columns;
+    /**
+     * @var array
+     */
+    private $columns = [];
 
     /**
      * Returns iterator
@@ -55,7 +58,6 @@ class ColumnCollection implements \IteratorAggregate, \Countable
     /**
      * Adds new DataGrid column to collection
      *
-     * @param                 $id
      * @param ColumnInterface $column
      */
     public function add(ColumnInterface $column)

@@ -11,10 +11,12 @@
  */
 namespace WellCommerce\Plugin\Tax\DependencyInjection;
 
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\Routing\Route;
+use Symfony\Component\Routing\RouteCollection;
+use WellCommerce\Core\DependencyInjection\AbstractExtension;
 
 /**
  * Class TaxExtension
@@ -22,22 +24,39 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  * @package WellCommerce\Plugin\Tax\DependencyInjection
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class TaxExtension extends Extension
+class TaxExtension extends AbstractExtension
 {
-
+    /**
+     * {@inheritdoc}
+     */
     public function load(array $config, ContainerBuilder $container)
     {
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.xml');
     }
 
-    public function getNamespace()
+    /**
+     * {@inheritdoc}
+     */
+    public function registerRoutes(RouteCollection $collection)
     {
-        return 'http://symfony.com/schema/dic/services';
-    }
+        $extensionCollection = new RouteCollection();
 
-    public function getAlias()
-    {
-        return 'wellcommerce.plugin.tax';
+        $extensionCollection->add('admin.tax.index', new Route('/index', array(
+            '_controller' => 'tax.admin.controller:indexAction',
+        )));
+
+        $extensionCollection->add('admin.tax.add', new Route('/add', array(
+            '_controller' => 'tax.admin.controller:addAction',
+        )));
+
+        $extensionCollection->add('admin.tax.edit', new Route('/edit/{id}', array(
+            '_controller' => 'tax.admin.controller:editAction',
+            'id'          => null
+        )));
+
+        $extensionCollection->addPrefix('/admin/tax');
+
+        $collection->addCollection($extensionCollection);
     }
 }

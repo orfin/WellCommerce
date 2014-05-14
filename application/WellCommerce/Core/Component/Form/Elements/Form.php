@@ -51,14 +51,15 @@ class Form extends Container
     public function configureAttributes(OptionsResolverInterface $resolver)
     {
         $resolver->setRequired([
-            'name'
+            'name',
+            'data_transformer'
         ]);
 
         $resolver->setOptional([
             'class',
             'action',
             'method',
-            'tabs'
+            'tabs',
         ]);
 
         $resolver->setDefaults([
@@ -77,19 +78,51 @@ class Form extends Container
 
     }
 
+    /**
+     * Returns flattened $_POST data
+     *
+     * @return array|mixed
+     */
     public function getSubmitValuesFlat()
     {
         return $this->getValues(self::FORMAT_FLAT);
     }
 
+    /**
+     * Returns grouped $_POST data
+     *
+     * @return array|mixed
+     */
     public function getSubmitValuesGrouped()
     {
         return $this->getValues(self::FORMAT_GROUPED);
     }
 
+    /**
+     * Returns value for given form element
+     *
+     * @param $element
+     *
+     * @return mixed
+     */
     public function getElementValue($element)
     {
         return $this->getValue($element);
+    }
+
+    public function convertData()
+    {
+        $values = [];
+        foreach ($this->fields as $field) {
+            if ($field instanceof Field) {
+                $values = array_merge_recursive($values, Array(
+                    $field->getName() => $field->getValue()
+                ));
+            }
+        }
+
+        print_r($values);
+        die();
     }
 
     public function getValues($flags = 0)
@@ -123,12 +156,14 @@ class Form extends Container
         return [];
     }
 
+    /**
+     * Returns an array containing all form errors
+     *
+     * @return array|mixed
+     */
     public function getErrors()
     {
-        return $this->harvest(Array(
-            $this,
-            'harvestErrors'
-        ));
+        return $this->harvest([$this, 'harvestErrors']);
     }
 
     public function getValue($element)

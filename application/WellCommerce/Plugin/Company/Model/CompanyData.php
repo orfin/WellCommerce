@@ -10,23 +10,24 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Core\Component\Form\Conditions;
+namespace WellCommerce\Plugin\Company\Model;
 
 /**
- * Interface ConditionInterface
+ * Class CompanyData
  *
- * @package WellCommerce\Core\Component\Form\Conditions
+ * @package WellCommerce\Plugin\Company\Model
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ConditionInterface
+class CompanyData
 {
-
     /**
-     * Evaluates condition value
+     * Constructor
      *
-     * @param $value
-     *
-     * @return mixed
+     * @param array $attributes
      */
-    public function evaluate($value);
+    public function __construct(array $attributes)
+    {
+        print_r($attributes);
+    }
+
 } 

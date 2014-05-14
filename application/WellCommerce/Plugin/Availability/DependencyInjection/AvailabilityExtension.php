@@ -15,6 +15,9 @@ namespace WellCommerce\Plugin\Availability\DependencyInjection;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\Routing\Route;
+use Symfony\Component\Routing\RouteCollection;
+use Symfony\Component\Routing\Loader\XmlFileLoader as RoutingLoader;
 use WellCommerce\Core\DependencyInjection\AbstractExtension;
 
 /**
@@ -32,5 +35,30 @@ class AvailabilityExtension extends AbstractExtension
     {
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.xml');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function registerRoutes(RouteCollection $collection)
+    {
+        $extensionCollection = new RouteCollection();
+
+        $extensionCollection->add('admin.availability.index', new Route('/index', array(
+            '_controller' => 'availability.admin.controller:indexAction',
+        )));
+
+        $extensionCollection->add('admin.availability.add', new Route('/add', array(
+            '_controller' => 'availability.admin.controller:addAction',
+        )));
+
+        $extensionCollection->add('admin.availability.edit', new Route('/edit/{id}', array(
+            '_controller' => 'availability.admin.controller:editAction',
+            'id'          => null
+        )));
+
+        $extensionCollection->addPrefix('/admin/availability');
+
+        $collection->addCollection($extensionCollection);
     }
 }

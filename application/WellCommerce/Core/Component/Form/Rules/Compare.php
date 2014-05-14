@@ -12,21 +12,17 @@
 
 namespace WellCommerce\Core\Component\Form\Rules;
 
-use WellCommerce\Core\Rules\RuleInterface;
+use WellCommerce\Core\Component\Form\Elements\Field;
 use WellCommerce\Core\Component\Form\Rule;
-use WellCommerce\Core\Elements\Field;
 
 /**
  * Class Compare
  *
- * Compares two fields
- *
- * @package WellCommerce\Core\Form\Rules
+ * @package WellCommerce\Core\Component\Form\Rules
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class Compare extends Rule implements RuleInterface
 {
-
     protected $_compareWith;
 
     public function __construct($errorMsg, Field $compareWith)
@@ -35,7 +31,7 @@ class Compare extends Rule implements RuleInterface
         $this->_compareWith = $compareWith;
     }
 
-    protected function checkValue($value)
+    public function checkValue($value)
     {
         return ($value == $this->_compareWith->getValue());
     }

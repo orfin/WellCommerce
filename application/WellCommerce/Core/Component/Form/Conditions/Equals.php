@@ -17,12 +17,18 @@ use WellCommerce\Core\Component\Form\Condition;
 /**
  * Class Equals
  *
- * @package FormEngine\Conditions
+ * @package WellCommerce\Core\Component\Form\Conditions
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class Equals extends Condition implements ConditionInterface
 {
-
+    /**
+     * Checks whether given values are equal
+     *
+     * @param $value
+     *
+     * @return bool|mixed
+     */
     public function evaluate($value)
     {
         if ($this->_argument instanceof Condition) {

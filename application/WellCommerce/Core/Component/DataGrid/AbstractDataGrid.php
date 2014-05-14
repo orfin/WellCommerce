@@ -32,7 +32,7 @@ abstract class AbstractDataGrid extends AbstractComponent
     protected $warnings;
     protected $container;
     protected $repository;
-    private $options = [];
+    protected $options = [];
 
     /**
      * Constructor

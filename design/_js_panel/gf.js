@@ -2541,7 +2541,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 				order_dir: (dDg.m_iOrderDirection == GF_Datagrid.SORT_DIR_ASC) ? 'asc' : 'desc',
 				where: aConditions
 			};
-			
+
 			if(this.m_oOptions.mechanics.persistent){
 				if(this.m_bFirstLoad){
 					if(sCookie){

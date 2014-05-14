@@ -12,6 +12,7 @@
 namespace WellCommerce\Plugin\Company\Controller\Admin;
 
 use WellCommerce\Core\Component\Controller\AbstractAdminController;
+use WellCommerce\Plugin\Company\Form\CompanyDataTransformer;
 
 /**
  * Class CompanyController
@@ -37,13 +38,12 @@ class CompanyController extends AbstractAdminController
     public function addAction()
     {
         $form = $this->createForm($this->get('company.form'), null, [
-            'name'   => 'add_company',
-            'method' => 'POST',
-            'action' => $this->generateUrl('admin.company.add')
+            'name'        => 'add_company',
+            'transformer' => new CompanyDataTransformer()
         ]);
 
         if ($form->isValid()) {
-            $this->repository->save($form->getSubmittedData());
+            $this->repository->save($form->getValues());
 
             return $this->redirect($this->generateUrl('admin.company.index'));
         }
@@ -61,13 +61,11 @@ class CompanyController extends AbstractAdminController
         $model = $this->repository->find($id);
 
         $form = $this->createForm($this->get('company.form'), $model, [
-            'name'   => 'edit_company',
-            'method' => 'POST',
-            'action' => $this->generateUrl('admin.company.edit', ['id' => $model->id])
+            'name' => 'edit_company'
         ]);
 
         if ($form->isValid()) {
-            $this->repository->save($form->getSubmittedData(), $id);
+            $this->repository->save($form->getValues(), $id);
 
             return $this->redirect($this->generateUrl('admin.company.index'));
         }

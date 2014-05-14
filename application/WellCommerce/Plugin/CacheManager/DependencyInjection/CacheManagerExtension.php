@@ -12,10 +12,12 @@
 
 namespace WellCommerce\Plugin\CacheManager\DependencyInjection;
 
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\Routing\Route;
+use Symfony\Component\Routing\RouteCollection;
+use WellCommerce\Core\DependencyInjection\AbstractExtension;
 
 /**
  * Class CacheManagerExtension
@@ -23,22 +25,39 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  * @package WellCommerce\Plugin\CacheManager\DependencyInjection
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CacheManagerExtension extends Extension
+class CacheManagerExtension extends AbstractExtension
 {
-
+    /**
+     * {@inheritdoc}
+     */
     public function load(array $config, ContainerBuilder $container)
     {
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.xml');
     }
 
-    public function getNamespace()
+    /**
+     * {@inheritdoc}
+     */
+    public function registerRoutes(RouteCollection $collection)
     {
-        return 'http://symfony.com/schema/dic/services';
-    }
+        $extensionCollection = new RouteCollection();
 
-    public function getAlias()
-    {
-        return 'wellcommerce.plugin.cache_manager';
+        $extensionCollection->add('admin.cache_manager.index', new Route('/index', array(
+            '_controller' => 'cache_manager.admin.controller:indexAction',
+        )));
+
+        $extensionCollection->add('admin.cache_manager.add', new Route('/add', array(
+            '_controller' => 'cache_manager.admin.controller:addAction',
+        )));
+
+        $extensionCollection->add('admin.cache_manager.edit', new Route('/edit/{id}', array(
+            '_controller' => 'cache_manager.admin.controller:editAction',
+            'id'          => null
+        )));
+
+        $extensionCollection->addPrefix('/admin/cache_manager');
+
+        $collection->addCollection($extensionCollection);
     }
 }

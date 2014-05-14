@@ -24,7 +24,13 @@ use WellCommerce\Core\Component\Form\Filter;
  */
 class NoCode extends Filter implements FilterInterface
 {
-
+    /**
+     * Strips all html code from value
+     *
+     * @param $value
+     *
+     * @return mixed|string
+     */
     public function filterValue($value)
     {
         return strip_tags($value);

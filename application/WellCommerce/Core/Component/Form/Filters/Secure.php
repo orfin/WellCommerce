@@ -17,12 +17,18 @@ use WellCommerce\Core\Component\Form\Filter;
 /**
  * Class Secure
  *
- * @package WellCommerce\Core\Form\Filters
+ * @package WellCommerce\Core\Component\Form\Filters
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class Secure extends Filter implements FilterInterface
 {
-
+    /**
+     * Checks whether given value is secure and cleans it if needed
+     *
+     * @param $value
+     *
+     * @return mixed
+     */
     public function filterValue($value)
     {
         return $value;

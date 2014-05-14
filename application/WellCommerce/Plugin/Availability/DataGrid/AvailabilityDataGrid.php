@@ -38,7 +38,7 @@ class AvailabilityDataGrid extends AbstractDataGrid implements DataGridInterface
     public function getRoutes()
     {
         return [
-            'edit' => $this->generateUrl('admin.availability.edit')
+            'edit'  => $this->generateUrl('admin.availability.edit')
         ];
     }
 

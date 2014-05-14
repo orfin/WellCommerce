@@ -43,6 +43,7 @@ class TemplateListener implements EventSubscriberInterface
      * Constructor
      *
      * @param ContainerInterface $container
+     * @param TemplateGuesser    $guesser
      */
     public function __construct(ContainerInterface $container, TemplateGuesser $guesser)
     {
@@ -85,7 +86,7 @@ class TemplateListener implements EventSubscriberInterface
         $loader           = $this->container->get($request->attributes->get('_template_loader'));
         $twig             = $this->container->get('twig');
 
-        // immediately return controller result if raw response
+        // immediately return controller result if Response object is given
         if ($controllerResult instanceof Response) {
             return $controllerResult;
         }

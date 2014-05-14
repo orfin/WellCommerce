@@ -12,17 +12,15 @@
 
 namespace WellCommerce\Core\Component\Form\Elements;
 
-use WellCommerce\Core\Component\Form\Elements\TextField;
-
 /**
  * Class Border
  *
- * @package WellCommerce\Core
+ * @package WellCommerce\Core\Component\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class Border extends TextField implements ElementInterface
 {
-    protected function prepareAttributesJs()
+    public function prepareAttributesJs()
     {
         $attributes = Array(
             $this->formatAttributeJs('name', 'sName'),

@@ -17,14 +17,18 @@ use WellCommerce\Core\Component\Form\Filter;
 /**
  * Class Trim
  *
- * Removes whitespaces from submitted value
- *
- * @package WellCommerce\Core\Form\Filters
+ * @package WellCommerce\Core\Component\Form\Filters
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class Trim extends Filter implements FilterInterface
 {
-
+    /**
+     * Removes spaces and line endings from value
+     *
+     * @param $value
+     *
+     * @return mixed|string
+     */
     public function filterValue($value)
     {
         return trim($value);

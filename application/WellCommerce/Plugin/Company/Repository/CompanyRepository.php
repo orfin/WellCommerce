@@ -62,22 +62,11 @@ class CompanyRepository extends AbstractRepository implements RepositoryInterfac
 
         $this->transaction(function () use ($data, $id) {
 
-            $accessor = $this->getPropertyAccessor();
-
             $company = Company::firstOrNew([
                 'id' => $id
             ]);
 
-            $company->name       = $accessor->getValue($data, '[required_data][name]');
-            $company->short_name = $accessor->getValue($data, '[required_data][short_name]');
-            $company->street     = $accessor->getValue($data, '[address_data][street]');
-            $company->streetno   = $accessor->getValue($data, '[address_data][streetno]');
-            $company->flatno     = $accessor->getValue($data, '[address_data][flatno]');
-            $company->province   = $accessor->getValue($data, '[address_data][province]');
-            $company->postcode   = $accessor->getValue($data, '[address_data][postcode]');
-            $company->city       = $accessor->getValue($data, '[address_data][city]');
-            $company->country    = $accessor->getValue($data, '[address_data][country]');
-            $company->save();
+            $company->update($data);
         });
 
         $this->dispatchEvent(CompanyRepositoryEvents::POST_SAVE, $data, $id);

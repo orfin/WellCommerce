@@ -11,10 +11,12 @@
  */
 namespace WellCommerce\Plugin\Country\DependencyInjection;
 
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\Routing\Route;
+use Symfony\Component\Routing\RouteCollection;
+use WellCommerce\Core\DependencyInjection\AbstractExtension;
 
 /**
  * Class CountryExtension
@@ -22,7 +24,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  * @package WellCommerce\Plugin\Country\DependencyInjection
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CountryExtension extends Extension
+class CountryExtension extends AbstractExtension
 {
 
     public function load(array $config, ContainerBuilder $container)
@@ -31,13 +33,28 @@ class CountryExtension extends Extension
         $loader->load('services.xml');
     }
 
-    public function getNamespace()
+    /**
+     * {@inheritdoc}
+     */
+    public function registerRoutes(RouteCollection $collection)
     {
-        return 'http://symfony.com/schema/dic/services';
-    }
+        $extensionCollection = new RouteCollection();
 
-    public function getAlias()
-    {
-        return 'wellcommerce.plugin.country';
+        $extensionCollection->add('admin.country.index', new Route('/index', array(
+            '_controller' => 'country.admin.controller:indexAction',
+        )));
+
+        $extensionCollection->add('admin.country.add', new Route('/add', array(
+            '_controller' => 'country.admin.controller:addAction',
+        )));
+
+        $extensionCollection->add('admin.country.edit', new Route('/edit/{id}', array(
+            '_controller' => 'country.admin.controller:editAction',
+            'id'          => null
+        )));
+
+        $extensionCollection->addPrefix('/admin/country');
+
+        $collection->addCollection($extensionCollection);
     }
 }

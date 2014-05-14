@@ -18,7 +18,7 @@ use WellCommerce\Core\Component\Form\Condition;
 /**
  * Class OrElse
  *
- * @package WellCommerce\Core\Form\Conditions
+ * @package WellCommerce\Core\Component\Form\Conditions
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class OrElse extends Condition implements ConditionInterface

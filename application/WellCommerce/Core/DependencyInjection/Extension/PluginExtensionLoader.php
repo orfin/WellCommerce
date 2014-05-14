@@ -12,7 +12,10 @@
 namespace WellCommerce\Core\DependencyInjection\Extension;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Extension\Extension;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Routing\Matcher\Dumper\PhpMatcherDumper;
+use Symfony\Component\Routing\Generator\Dumper\PhpGeneratorDumper;
+use Symfony\Component\Routing\RouteCollection;
 use Symfony\Component\Finder\Finder;
 
 /**
@@ -26,20 +29,30 @@ use Symfony\Component\Finder\Finder;
 class PluginExtensionLoader
 {
 
+    const ROUTING_GENERATOR_CLASS = 'WellCommerceUrlGenerator';
+    const ROUTING_MATCHER_CLASS   = 'WellCommerceUrlMatcher';
+
     /**
      * @var \Symfony\Component\DependencyInjection\ContainerBuilder
      */
     protected $containerBuilder;
 
-    public function __construct(ContainerBuilder $containerBuilder)
+    /**
+     * @var \Symfony\Component\Routing\RouteCollection
+     */
+    protected $routeCollection;
+
+    public function __construct(ContainerBuilder $containerBuilder, RouteCollection $routeCollection)
     {
         $this->containerBuilder = $containerBuilder;
+        $this->routeCollection  = $routeCollection;
     }
 
     public function registerExtensions()
     {
         $finder = new Finder();
         $files  = $finder->files()->in(ROOTPATH . 'application')->name('*Extension.php');
+
 
         foreach ($files as $file) {
             $namespace = $file->getRelativePath();
@@ -50,8 +63,23 @@ class PluginExtensionLoader
                 $extension = new $class();
                 $this->containerBuilder->registerExtension($extension);
                 $this->containerBuilder->loadFromExtension($extension->getAlias());
+                $extension->registerRoutes($this->routeCollection);
             }
 
         }
+    }
+
+    public function dumpRouting()
+    {
+        $filesystem = new Filesystem();
+        $dumper     = new PhpGeneratorDumper($this->routeCollection);
+        $filesystem->dumpFile(ROOTPATH . 'var' . DS . sprintf('%s.php', self::ROUTING_GENERATOR_CLASS), $dumper->dump(Array(
+            'class' => self::ROUTING_GENERATOR_CLASS
+        )));
+
+        $dumper = new PhpMatcherDumper($this->routeCollection);
+        $filesystem->dumpFile(ROOTPATH . 'var' . DS . sprintf('%s.php', self::ROUTING_MATCHER_CLASS), $dumper->dump(Array(
+            'class' => self::ROUTING_MATCHER_CLASS
+        )));
     }
 }

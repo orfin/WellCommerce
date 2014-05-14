@@ -29,7 +29,6 @@ class Console extends Application
 
         $this->addCommands([
             new Command\Documentation\Generate(),
-            new Command\Routes\Dump(),
             new Command\Migration\Add(),
             new Command\Migration\Up(),
             new Command\Migration\Down(),

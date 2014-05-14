@@ -18,11 +18,18 @@ use WellCommerce\Core\Component\Form\Condition;
 /**
  * Class GE
  *
- * @package WellCommerce\Core\Form\Conditions
+ * @package WellCommerce\Core\Component\Form\Conditions
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class GE extends Condition implements ConditionInterface
 {
+    /**
+     * Checks whether given value is greater or equal
+     *
+     * @param $value
+     *
+     * @return bool
+     */
     public function evaluate($value)
     {
         if ($this->_argument instanceof Condition) {

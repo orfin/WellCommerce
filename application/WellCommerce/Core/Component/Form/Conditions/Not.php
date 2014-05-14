@@ -18,12 +18,18 @@ use WellCommerce\Core\Component\Form\Condition;
 /**
  * Class Not
  *
- * @package WellCommerce\Core\Form\Conditions
+ * @package WellCommerce\Core\Component\Form\Conditions
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class Not extends Condition implements ConditionInterface
 {
-
+    /**
+     * Checks whether given value is not equal
+     *
+     * @param $value
+     *
+     * @return bool
+     */
     public function evaluate($value)
     {
         if ($this->_argument instanceof Condition) {

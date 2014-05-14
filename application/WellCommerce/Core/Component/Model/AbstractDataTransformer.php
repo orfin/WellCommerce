@@ -10,23 +10,20 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Core\Component\Form\Conditions;
+namespace WellCommerce\Core\Component\Model;
+
+use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**
- * Interface ConditionInterface
+ * Class AbstractDataTransformer
  *
- * @package WellCommerce\Core\Component\Form\Conditions
+ * @package WellCommerce\Core\Component\Model
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ConditionInterface
+abstract class AbstractDataTransformer
 {
-
-    /**
-     * Evaluates condition value
-     *
-     * @param $value
-     *
-     * @return mixed
-     */
-    public function evaluate($value);
+    final protected function getPropertyAccessor()
+    {
+        return PropertyAccess::createPropertyAccessor();
+    }
 } 
