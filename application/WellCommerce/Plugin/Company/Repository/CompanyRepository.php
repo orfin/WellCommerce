@@ -72,9 +72,7 @@ class CompanyRepository extends AbstractRepository implements CompanyRepositoryI
     }
 
     /**
-     * Gets all companies and returns them as key-value pairs
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function getAllCompanyToSelect()
     {
@@ -88,9 +86,7 @@ class CompanyRepository extends AbstractRepository implements CompanyRepositoryI
     }
 
     /**
-     * Returns a tree containing all companies and related shops
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function getShopsTree()
     {

@@ -9,8 +9,6 @@
         <parameter key="availability.datagrid.class">WellCommerce\Plugin\Availability\DataGrid\AvailabilityDataGrid</parameter>
         <parameter key="availability.form.class">WellCommerce\Plugin\Availability\Form\AvailabilityForm</parameter>
         <parameter key="availability.listener.class">WellCommerce\Plugin\Availability\EventListener\AvailabilityListener</parameter>
-        <parameter key="availability.model.class">WellCommerce\Plugin\Availability\Model\Availability</parameter>
-        <parameter key="availability_translation.model.class">WellCommerce\Plugin\Availability\Model\AvailabilityTranslation</parameter>
     </parameters>
 
     <services>
@@ -43,18 +41,6 @@
         <service id="availability.listener" class="%availability.listener.class%">
             <argument type="service" id="service_container"/>
             <tag name="kernel.event_subscriber" />
-        </service>
-
-        <service id="availability.model" class="%availability.model.class%" scope="prototype">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
-
-        <service id="availability_translation.model" class="%availability_translation.model.class%" scope="prototype">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
         </service>
     </services>
 </container>

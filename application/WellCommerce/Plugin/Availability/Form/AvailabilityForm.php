@@ -76,13 +76,17 @@ class AvailabilityForm extends AbstractForm implements FormInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Prepares form data using retrieved model
+     *
+     * @param Availability $availability Model
+     *
+     * @return array
      */
-    public function prepareData(ModelInterface $model)
+    public function prepareData(Availability $availability)
     {
         $formData     = [];
         $accessor     = $this->getPropertyAccessor();
-        $languageData = $model->getTranslationData();
+        $languageData = $availability->getTranslationData();
 
         $accessor->setValue($formData, '[required_data]', [
             'language_data' => $languageData

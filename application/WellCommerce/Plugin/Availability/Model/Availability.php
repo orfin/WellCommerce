@@ -60,4 +60,12 @@ class Availability extends AbstractModel implements ModelInterface, Translatable
     {
         return $this->hasMany(__NAMESPACE__ . '\AvailabilityTranslation');
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getValidationXmlMapping()
+    {
+        return __DIR__ . '/../Resources/config/validation.xml';
+    }
 }

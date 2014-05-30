@@ -46,9 +46,7 @@ class ServiceContainer extends Container
             'availability.datagrid' => 'getAvailability_DatagridService',
             'availability.form' => 'getAvailability_FormService',
             'availability.listener' => 'getAvailability_ListenerService',
-            'availability.model' => 'getAvailability_ModelService',
             'availability.repository' => 'getAvailability_RepositoryService',
-            'availability_translation.model' => 'getAvailabilityTranslation_ModelService',
             'cache_manager' => 'getCacheManagerService',
             'cache_manager.datagrid' => 'getCacheManager_DatagridService',
             'cache_manager.repository' => 'getCacheManager_RepositoryService',
@@ -361,20 +359,6 @@ class ServiceContainer extends Container
     }
 
     /**
-     * Gets the 'availability.model' service.
-     *
-     * @return WellCommerce\Plugin\Availability\Model\Availability A WellCommerce\Plugin\Availability\Model\Availability instance.
-     */
-    protected function getAvailability_ModelService()
-    {
-        $instance = new \WellCommerce\Plugin\Availability\Model\Availability();
-
-        $instance->setContainer($this);
-
-        return $instance;
-    }
-
-    /**
      * Gets the 'availability.repository' service.
      *
      * This service is shared.
@@ -385,20 +369,6 @@ class ServiceContainer extends Container
     protected function getAvailability_RepositoryService()
     {
         $this->services['availability.repository'] = $instance = new \WellCommerce\Plugin\Availability\Repository\AvailabilityRepository();
-
-        $instance->setContainer($this);
-
-        return $instance;
-    }
-
-    /**
-     * Gets the 'availability_translation.model' service.
-     *
-     * @return WellCommerce\Plugin\Availability\Model\AvailabilityTranslation A WellCommerce\Plugin\Availability\Model\AvailabilityTranslation instance.
-     */
-    protected function getAvailabilityTranslation_ModelService()
-    {
-        $instance = new \WellCommerce\Plugin\Availability\Model\AvailabilityTranslation();
 
         $instance->setContainer($this);
 
@@ -2944,8 +2914,6 @@ class ServiceContainer extends Container
             'availability.datagrid.class' => 'WellCommerce\\Plugin\\Availability\\DataGrid\\AvailabilityDataGrid',
             'availability.form.class' => 'WellCommerce\\Plugin\\Availability\\Form\\AvailabilityForm',
             'availability.listener.class' => 'WellCommerce\\Plugin\\Availability\\EventListener\\AvailabilityListener',
-            'availability.model.class' => 'WellCommerce\\Plugin\\Availability\\Model\\Availability',
-            'availability_translation.model.class' => 'WellCommerce\\Plugin\\Availability\\Model\\AvailabilityTranslation',
             'category.admin.controller.class' => 'WellCommerce\\Plugin\\Category\\Controller\\Admin\\CategoryController',
             'category.repository.class' => 'WellCommerce\\Plugin\\Category\\Repository\\CategoryRepository',
             'category.form.class' => 'WellCommerce\\Plugin\\Category\\Form\\CategoryForm',

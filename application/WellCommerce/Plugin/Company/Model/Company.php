@@ -36,6 +36,9 @@ class Company extends AbstractModel implements ModelInterface
         return $this->hasMany('WellCommerce\Plugin\Shop\Model\Shop');
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getValidationXmlMapping()
     {
         return __DIR__ . '/../Resources/config/validation.xml';

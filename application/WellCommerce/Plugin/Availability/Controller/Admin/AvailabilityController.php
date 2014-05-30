@@ -15,6 +15,7 @@ use WellCommerce\Core\Component\Controller\AbstractAdminController;
 use WellCommerce\Plugin\Availability\DataGrid\Config;
 use WellCommerce\Plugin\Availability\Form\AvailabilityDataConverter;
 use WellCommerce\Plugin\Availability\Model\AvailabilityData;
+use WellCommerce\Plugin\Availability\Repository\AvailabilityRepositoryInterface;
 
 /**
  * Class AvailabilityController
@@ -24,6 +25,7 @@ use WellCommerce\Plugin\Availability\Model\AvailabilityData;
  */
 class AvailabilityController extends AbstractAdminController
 {
+    private $repository;
     /**
      * {@inheritdoc}
      */
@@ -40,12 +42,11 @@ class AvailabilityController extends AbstractAdminController
     public function addAction()
     {
         $form = $this->createForm($this->get('availability.form'), null, [
-            'name'             => 'add_availability',
-            'data_transformer' => new AvailabilityData()
+            'name' => 'add_availability'
         ]);
 
         if ($form->isValid()) {
-            $this->repository->save($form->getData());
+            $this->repository->save($form->getSubmitValuesFlat());
 
             return $this->redirect($this->getDefaultUrl());
         }
@@ -63,13 +64,11 @@ class AvailabilityController extends AbstractAdminController
         $model = $this->repository->find($id);
 
         $form = $this->createForm($this->get('availability.form'), $model, [
-            'name'   => 'edit_availability',
-            'method' => 'POST',
-            'action' => $this->generateUrl('admin.availability.edit', ['id' => $model->id])
+            'name' => 'edit_availability'
         ]);
 
         if ($form->isValid()) {
-            $this->repository->save($form->getSubmittedData(), $id);
+            $this->repository->save($form->getSubmitValuesFlat(), $id);
 
             return $this->redirect($this->getDefaultUrl());
         }
@@ -78,5 +77,15 @@ class AvailabilityController extends AbstractAdminController
             'availability' => $model,
             'form'         => $form
         ];
+    }
+
+    /**
+     * Sets availability repository object
+     *
+     * @param AvailabilityRepositoryInterface $repository
+     */
+    public function setRepository(AvailabilityRepositoryInterface $repository)
+    {
+        $this->repository = $repository;
     }
 }

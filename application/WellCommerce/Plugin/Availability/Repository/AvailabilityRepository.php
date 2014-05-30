@@ -12,7 +12,6 @@
 namespace WellCommerce\Plugin\Availability\Repository;
 
 use WellCommerce\Core\Component\Repository\AbstractRepository;
-use WellCommerce\Core\Component\Repository\RepositoryInterface;
 use WellCommerce\Plugin\Availability\Model\Availability;
 use WellCommerce\Plugin\Availability\Model\AvailabilityTranslation;
 
@@ -22,7 +21,7 @@ use WellCommerce\Plugin\Availability\Model\AvailabilityTranslation;
  * @package WellCommerce\Plugin\Availability\AbstractRepository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AvailabilityRepository extends AbstractRepository implements RepositoryInterface
+class AvailabilityRepository extends AbstractRepository implements AvailabilityRepositoryInterface
 {
     /**
      * {@inheritdoc}
@@ -37,7 +36,7 @@ class AvailabilityRepository extends AbstractRepository implements RepositoryInt
      */
     public function find($id)
     {
-        return $this->get('availability.model')->with('translation')->findOrFail($id);
+        return Availability::with('translation')->findOrFail($id);
     }
 
     /**
@@ -45,13 +44,13 @@ class AvailabilityRepository extends AbstractRepository implements RepositoryInt
      */
     public function delete($id)
     {
-        $this->dispatchEvent(AvailabilityRepositoryEvents::PRE_DELETE, [], $id);
+        $this->dispatchEvent(AvailabilityRepositoryInterface::PRE_DELETE_EVENT, [], $id);
 
         $this->transaction(function () use ($id) {
             $this->find($id)->delete();
         });
 
-        $this->dispatchEvent(AvailabilityRepositoryEvents::POST_DELETE, [], $id);
+        $this->dispatchEvent(AvailabilityRepositoryInterface::POST_DELETE_EVENT, [], $id);
     }
 
     /**
@@ -59,17 +58,15 @@ class AvailabilityRepository extends AbstractRepository implements RepositoryInt
      */
     public function save(array $data, $id = null)
     {
-        $data = $this->dispatchEvent(AvailabilityRepositoryEvents::PRE_SAVE, $data, $id);
+        $data = $this->dispatchEvent(AvailabilityRepositoryInterface::PRE_SAVE_EVENT, $data, $id);
 
         $this->transaction(function () use ($data, $id) {
 
-            $accessor = $this->getPropertyAccessor();
-
-            $availability = $this->get('availability.model')->firstOrCreate([
+            $availability = Availability::firstOrCreate([
                 'id' => $id
             ]);
 
-            $availability->update();
+            $availability->update($data);
 
             foreach ($this->getLanguageIds() as $language) {
 
@@ -78,13 +75,11 @@ class AvailabilityRepository extends AbstractRepository implements RepositoryInt
                     'language_id'     => $language
                 ]);
 
-                $languageData = $accessor->getValue($data, sprintf('[required_data][language_data][%s]', $language));
-
-                $translation->setTranslationData($languageData);
-                $translation->update();
+                $translationData = $translation->getTranslation($data, $language);
+                $translation->update($translationData);
             }
         });
 
-        $this->dispatchEvent(AvailabilityRepositoryEvents::POST_SAVE, $data, $id);
+        $this->dispatchEvent(AvailabilityRepositoryInterface::POST_SAVE_EVENT, $data, $id);
     }
 }

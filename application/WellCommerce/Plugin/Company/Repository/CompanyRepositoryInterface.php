@@ -27,15 +27,52 @@ interface CompanyRepositoryInterface
     const PRE_SAVE_EVENT    = 'company.repository.pre_save';
     const POST_SAVE_EVENT   = 'company.repository.post_save';
 
+    /**
+     * Returns all companies as a collection
+     *
+     * @return mixed
+     */
     public function all();
 
+    /**
+     * Returns single company model
+     *
+     * @param $id
+     *
+     * @return mixed
+     */
     public function find($id);
 
+    /**
+     * Saves new or existing company model
+     *
+     * @param array $data
+     * @param null  $id
+     *
+     * @return mixed
+     */
     public function save(array $data, $id = null);
 
+    /**
+     * Deletes company model
+     *
+     * @param $id
+     *
+     * @return mixed
+     */
     public function delete($id);
 
+    /**
+     * Returns all companies as a key-value pairs
+     *
+     * @return mixed
+     */
     public function getAllCompanyToSelect();
 
+    /**
+     * Returns a tree containing companies as a root items and bound shops as a children
+     *
+     * @return mixed
+     */
     public function getShopsTree();
 } 

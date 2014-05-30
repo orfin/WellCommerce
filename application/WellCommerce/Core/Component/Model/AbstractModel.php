@@ -84,13 +84,26 @@ abstract class AbstractModel extends BaseModel
         return PropertyAccess::createPropertyAccessor();
     }
 
+    public function getTranslation(array $data, $language)
+    {
+        $translation = [];
+
+        foreach ($data as $attribute => $values) {
+            if ($this->isTranslatableAttribute($attribute)) {
+                $translation[$attribute] = $values[$language];
+            }
+        }
+
+        return $translation;
+    }
+
     /**
      * Sets translatable attributes in model
      *
      * @param array $data
      * @param       $language
      */
-    public function setTranslationData(array $data)
+    public function setTranslationData(array $data, $languageId)
     {
         $accessor = $this->getPropertyAccessor();
 
@@ -135,6 +148,8 @@ abstract class AbstractModel extends BaseModel
      */
     public function update(array $attributes = [])
     {
+        $this->set($attributes);
+
         $violations = $this->validate($attributes);
 
         if (count($violations) > 0) {
@@ -170,7 +185,7 @@ abstract class AbstractModel extends BaseModel
     public function set(array $attributes = [])
     {
         foreach ($attributes as $key => $value) {
-            if (array_key_exists($key, $this->attributesToArray())) {
+            if (array_key_exists($key, array_merge($this->attributesToArray(), array_flip($this->translatable)))) {
                 $this->setAttribute($key, $value);
             }
         }

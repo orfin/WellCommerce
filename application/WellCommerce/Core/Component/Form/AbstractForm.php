@@ -22,5 +22,5 @@ use WellCommerce\Core\Component\Model\ModelInterface;
  */
 class AbstractForm extends AbstractComponent
 {
-    
+
 }
