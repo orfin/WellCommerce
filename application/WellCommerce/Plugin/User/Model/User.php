@@ -104,4 +104,12 @@ class User extends AbstractModel implements ModelInterface
     {
         return (int)$value;
     }
+
+    public function getValidationRules()
+    {
+        return [
+            'name'       => 'required',
+            'short_name' => 'required',
+        ];
+    }
 }

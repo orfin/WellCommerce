@@ -12,9 +12,14 @@
 namespace WellCommerce\Core\Component\Model;
 
 use Illuminate\Database\Eloquent\Model as BaseModel;
+use Illuminate\Validation\Validator;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Symfony\Component\Translation\Translator;
+use Symfony\Component\Validator\Exception\ValidatorException;
 use WellCommerce\Core\Component\Model\Collection\CustomCollection;
+use Symfony\Component\Validator\Validation;
 
 /**
  * Class AbstractModel
@@ -26,22 +31,16 @@ use WellCommerce\Core\Component\Model\Collection\CustomCollection;
  */
 abstract class AbstractModel extends BaseModel
 {
+    public $timestamps = true;
+
+    protected $softDelete = false;
+
     /**
      * Translatable attributes in model
      *
      * @var array
      */
     protected $translatable = [];
-
-    /**
-     * Boots Illuminate\Database\Eloquent\Model
-     *
-     * @return void
-     */
-    public static function boot()
-    {
-        parent::boot();
-    }
 
     /**
      * Returns all model translatable attributes
@@ -132,14 +131,35 @@ abstract class AbstractModel extends BaseModel
      * @param array $attributes
      *
      * @return int|mixed
+     * @throws \Symfony\Component\Validator\Exception\ValidatorException
      */
     public function update(array $attributes = [])
     {
+        $violations = $this->validate($attributes);
+
+        if (count($violations) > 0) {
+            throw new ValidatorException((string)$violations);
+        }
+
         if (!$this->exists) {
             return $this->newQuery()->update($attributes);
         }
 
         return $this->set($attributes)->save();
+    }
+
+    /**
+     * Validates model attributes
+     *
+     * @return \Symfony\Component\Validator\ConstraintViolationListInterface
+     */
+    public function validate()
+    {
+        $validatorBuilder = Validation::createValidatorBuilder();
+        $validatorBuilder->addXmlMapping($this->getValidationXmlMapping());
+        $validator = $validatorBuilder->getValidator();
+
+        return $validator->validate($this);
     }
 
     /**

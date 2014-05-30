@@ -15,6 +15,7 @@ use WellCommerce\Core\Component\Repository\AbstractRepository;
 use WellCommerce\Core\Component\Repository\RepositoryInterface;
 use WellCommerce\Core\Helper\Password;
 use WellCommerce\Plugin\User\Model\User;
+use WellCommerce\Plugin\User\Model\UserDataInterface;
 use WellCommerce\Plugin\User\Model\UserTranslation;
 
 /**
@@ -23,7 +24,7 @@ use WellCommerce\Plugin\User\Model\UserTranslation;
  * @package WellCommerce\Plugin\User\AbstractRepository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class UserRepository extends AbstractRepository implements RepositoryInterface
+class UserRepository extends AbstractRepository implements UserRepositoryInterface
 {
     /**
      * {@inheritdoc}
@@ -58,7 +59,7 @@ class UserRepository extends AbstractRepository implements RepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function save(array $data, $id = null)
+    public function save(UserDataInterface $user)
     {
         $data = $this->dispatchEvent(UserRepositoryEvents::PRE_SAVE, $data, $id);
 

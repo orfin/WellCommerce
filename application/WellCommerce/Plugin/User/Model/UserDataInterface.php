@@ -10,24 +10,21 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Plugin\Company\Model;
+namespace WellCommerce\Plugin\User\Model;
 
 /**
- * Class CompanyData
+ * Interface UserDataInterface
  *
- * @package WellCommerce\Plugin\Company\Model
+ * @package WellCommerce\Plugin\User\Model
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CompanyData
+interface UserDataInterface
 {
-    /**
-     * Constructor
-     *
-     * @param array $attributes
-     */
-    public function __construct(array $attributes)
-    {
-        print_r($attributes);
-    }
+    public function setId();
 
+    public function setName();
+
+    public function setShortName();
+
+    public function setStreet();
 } 

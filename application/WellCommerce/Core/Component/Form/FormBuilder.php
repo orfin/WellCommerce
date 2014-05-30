@@ -45,8 +45,8 @@ class FormBuilder extends AbstractComponent
     {
         $this->form     = $form->buildForm($this, $options);
         $this->formData = (null === $model) ? [] : $form->prepareData($model);
-        $this->options  = $options;
         $this->formData = $this->dispatchEvent($this->getInitEventName());
+        $this->options  = $options;
 
         $this->form->populate($this->formData);
 

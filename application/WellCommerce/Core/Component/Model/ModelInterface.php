@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Core\Component\Model;
 
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+
 /**
  * Interface ModelInterface
  *
@@ -20,5 +22,10 @@ namespace WellCommerce\Core\Component\Model;
  */
 interface ModelInterface
 {
-
+    /**
+     * Returns path to validation.xml mapping file
+     *
+     * @return string
+     */
+    public function getValidationXmlMapping();
 } 

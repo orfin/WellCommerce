@@ -37,7 +37,7 @@ class AvailabilityRepository extends AbstractRepository implements RepositoryInt
      */
     public function find($id)
     {
-        return Availability::with('translation')->findOrFail($id);
+        return $this->get('availability.model')->with('translation')->findOrFail($id);
     }
 
     /**
@@ -48,7 +48,7 @@ class AvailabilityRepository extends AbstractRepository implements RepositoryInt
         $this->dispatchEvent(AvailabilityRepositoryEvents::PRE_DELETE, [], $id);
 
         $this->transaction(function () use ($id) {
-            return Availability::destroy($id);
+            $this->find($id)->delete();
         });
 
         $this->dispatchEvent(AvailabilityRepositoryEvents::POST_DELETE, [], $id);
@@ -65,15 +65,15 @@ class AvailabilityRepository extends AbstractRepository implements RepositoryInt
 
             $accessor = $this->getPropertyAccessor();
 
-            $availability = Availability::firstOrNew([
+            $availability = $this->get('availability.model')->firstOrCreate([
                 'id' => $id
             ]);
 
-            $availability->save();
+            $availability->update();
 
             foreach ($this->getLanguageIds() as $language) {
 
-                $translation = AvailabilityTranslation::firstOrNew([
+                $translation = AvailabilityTranslation::firstOrCreate([
                     'availability_id' => $availability->id,
                     'language_id'     => $language
                 ]);
@@ -81,7 +81,7 @@ class AvailabilityRepository extends AbstractRepository implements RepositoryInt
                 $languageData = $accessor->getValue($data, sprintf('[required_data][language_data][%s]', $language));
 
                 $translation->setTranslationData($languageData);
-                $translation->save();
+                $translation->update();
             }
         });
 

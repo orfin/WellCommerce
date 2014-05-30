@@ -18,11 +18,26 @@ use Symfony\Component\Routing\RouteCollection;
 
 abstract class AbstractExtension extends Extension
 {
+    const SCHEMA_URL = 'http://symfony.com/schema/dic/services';
+
+    /**
+     * Loads the extension
+     *
+     * @param array            $config
+     * @param ContainerBuilder $container
+     *
+     * @return mixed
+     */
     abstract public function load(array $config, ContainerBuilder $container);
 
+    /**
+     * Returns the namespace to be used for this extension
+     *
+     * @return string The XML namespace
+     */
     public function getNamespace()
     {
-        return 'http://symfony.com/schema/dic/services';
+        return self::SCHEMA_URL;
     }
 
     /**
@@ -40,9 +55,9 @@ abstract class AbstractExtension extends Extension
     }
 
     /**
-     * Registers routes for extension
+     * Registers routes for this extension
      *
-     * @param RouteCollection $collection
+     * @param RouteCollection $collection Route collection
      */
     abstract public function registerRoutes(RouteCollection $collection);
 } 

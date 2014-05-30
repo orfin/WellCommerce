@@ -13,6 +13,7 @@ namespace WellCommerce\Plugin\User\Controller\Admin;
 
 use WellCommerce\Core\Component\Controller\AbstractAdminController;
 use WellCommerce\Plugin\User\DataGrid\Config;
+use WellCommerce\Plugin\User\Repository\UserRepositoryInterface;
 
 /**
  * Class UserController
@@ -22,6 +23,8 @@ use WellCommerce\Plugin\User\DataGrid\Config;
  */
 class UserController extends AbstractAdminController
 {
+    private $repository;
+
     /**
      * {@inheritdoc}
      */
@@ -111,6 +114,17 @@ class UserController extends AbstractAdminController
     public function logoutAction()
     {
         $this->getSession()->remove('admin');
+
         return $this->redirect($this->generateUrl('admin.user.login'));
+    }
+
+    /**
+     * Sets user repository
+     *
+     * @param UserRepositoryInterface $repository
+     */
+    public function setRepository(UserRepositoryInterface $repository)
+    {
+        $this->repository = $repository;
     }
 }

@@ -37,11 +37,11 @@ abstract class AbstractDataGrid extends AbstractComponent
     /**
      * Constructor
      *
-     * @param ContainerInterface  $container  Service container
-     * @param RepositoryInterface $repository DataGrid related repository
-     * @param array               $options    DataGrid options
+     * @param ContainerInterface $container
+     * @param                    $repository
+     * @param array              $options
      */
-    public function __construct(ContainerInterface $container, RepositoryInterface $repository, array $options = [])
+    public function __construct(ContainerInterface $container, $repository, array $options = [])
     {
         parent::setContainer($container);
         $this->repository = $repository;

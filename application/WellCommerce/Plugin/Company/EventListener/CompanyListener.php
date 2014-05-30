@@ -25,16 +25,23 @@ use WellCommerce\Plugin\AdminMenu\Event\AdminMenuInitEvent;
  */
 class CompanyListener implements EventSubscriberInterface
 {
-    /**
-     * @var \Symfony\Component\DependencyInjection\ContainerInterface
-     */
     private $container;
 
+    /**
+     * Constructor
+     *
+     * @param ContainerInterface $container
+     */
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
     }
 
+    /**
+     * Adds new admin menu items to collection
+     *
+     * @param AdminMenuEvent $event
+     */
     public function onAdminMenuInitEvent(AdminMenuEvent $event)
     {
         $builder = $event->getBuilder();
@@ -48,10 +55,13 @@ class CompanyListener implements EventSubscriberInterface
         ]));
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             AdminMenuInitEvent::ADMIN_MENU_INIT_EVENT => 'onAdminMenuInitEvent'
-        );
+        ];
     }
 }

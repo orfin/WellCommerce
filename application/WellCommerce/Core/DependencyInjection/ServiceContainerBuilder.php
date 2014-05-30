@@ -193,6 +193,7 @@ final class ServiceContainerBuilder
         $loader->load('routing.xml');
         $loader->load('session.xml');
         $loader->load('template.xml');
+        $loader->load('validator.xml');
     }
 
     /**

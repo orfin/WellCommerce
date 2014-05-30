@@ -31,13 +31,4 @@ interface FormInterface
      * @return mixed
      */
     public function buildForm(FormBuilder $builder, array $options);
-
-    /**
-     * Prepares form default values using retrieved model data
-     *
-     * @param ModelInterface $model
-     *
-     * @return array
-     */
-    public function prepareData(ModelInterface $model);
 }

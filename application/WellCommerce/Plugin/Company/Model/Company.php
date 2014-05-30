@@ -22,12 +22,7 @@ use WellCommerce\Core\Component\Model\ModelInterface;
  */
 class Company extends AbstractModel implements ModelInterface
 {
-
     protected $table = 'company';
-
-    public $timestamps = true;
-
-    protected $softDelete = false;
 
     protected $fillable = ['id'];
 
@@ -39,5 +34,10 @@ class Company extends AbstractModel implements ModelInterface
     public function shop()
     {
         return $this->hasMany('WellCommerce\Plugin\Shop\Model\Shop');
+    }
+
+    public function getValidationXmlMapping()
+    {
+        return __DIR__ . '/../Resources/config/validation.xml';
     }
 }

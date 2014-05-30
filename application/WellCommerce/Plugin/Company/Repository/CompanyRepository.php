@@ -12,7 +12,6 @@
 namespace WellCommerce\Plugin\Company\Repository;
 
 use WellCommerce\Core\Component\Repository\AbstractRepository;
-use WellCommerce\Core\Component\Repository\RepositoryInterface;
 use WellCommerce\Plugin\Company\Model\Company;
 
 /**
@@ -21,7 +20,7 @@ use WellCommerce\Plugin\Company\Model\Company;
  * @package WellCommerce\Plugin\Company\AbstractRepository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CompanyRepository extends AbstractRepository implements RepositoryInterface
+class CompanyRepository extends AbstractRepository implements CompanyRepositoryInterface
 {
     /**
      * {@inheritdoc}
@@ -44,13 +43,13 @@ class CompanyRepository extends AbstractRepository implements RepositoryInterfac
      */
     public function delete($id)
     {
-        $this->dispatchEvent(CompanyRepositoryEvents::PRE_DELETE, [], $id);
+        $this->dispatchEvent(CompanyRepositoryInterface::PRE_DELETE_EVENT, [], $id);
 
         $this->transaction(function () use ($id) {
             return Company::destroy($id);
         });
 
-        $this->dispatchEvent(CompanyRepositoryEvents::POST_DELETE, [], $id);
+        $this->dispatchEvent(CompanyRepositoryInterface::POST_DELETE_EVENT, [], $id);
     }
 
     /**
@@ -58,7 +57,7 @@ class CompanyRepository extends AbstractRepository implements RepositoryInterfac
      */
     public function save(array $data, $id = null)
     {
-        $data = $this->dispatchEvent(CompanyRepositoryEvents::PRE_SAVE, $data, $id);
+        $data = $this->dispatchEvent(CompanyRepositoryInterface::PRE_SAVE_EVENT, $data, $id);
 
         $this->transaction(function () use ($data, $id) {
 
@@ -69,7 +68,7 @@ class CompanyRepository extends AbstractRepository implements RepositoryInterfac
             $company->update($data);
         });
 
-        $this->dispatchEvent(CompanyRepositoryEvents::POST_SAVE, $data, $id);
+        $this->dispatchEvent(CompanyRepositoryInterface::POST_SAVE_EVENT, $data, $id);
     }
 
     /**

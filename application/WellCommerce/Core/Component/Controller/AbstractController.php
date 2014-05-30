@@ -28,11 +28,6 @@ use WellCommerce\Core\Component\Repository\RepositoryInterface;
 abstract class AbstractController extends AbstractComponent
 {
     /**
-     * @var Repository object
-     */
-    protected $repository;
-
-    /**
      * Redirects user to a given url
      *
      * @param string $url
@@ -43,16 +38,6 @@ abstract class AbstractController extends AbstractComponent
     public function redirect($url, $status = 302)
     {
         return new RedirectResponse($url, $status);
-    }
-
-    /**
-     * Sets Repository object for current controller
-     *
-     * @param RepositoryInterface $repository
-     */
-    public function setRepository(RepositoryInterface $repository)
-    {
-        $this->repository = $repository;
     }
 
     /**

@@ -51,8 +51,7 @@ class Form extends Container
     public function configureAttributes(OptionsResolverInterface $resolver)
     {
         $resolver->setRequired([
-            'name',
-            'data_transformer'
+            'name'
         ]);
 
         $resolver->setOptional([

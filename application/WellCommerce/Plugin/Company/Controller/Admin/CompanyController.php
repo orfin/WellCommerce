@@ -11,8 +11,10 @@
  */
 namespace WellCommerce\Plugin\Company\Controller\Admin;
 
+use Symfony\Component\Validator\Validation;
 use WellCommerce\Core\Component\Controller\AbstractAdminController;
 use WellCommerce\Plugin\Company\Form\CompanyDataTransformer;
+use WellCommerce\Plugin\Company\Repository\CompanyRepositoryInterface;
 
 /**
  * Class CompanyController
@@ -22,6 +24,11 @@ use WellCommerce\Plugin\Company\Form\CompanyDataTransformer;
  */
 class CompanyController extends AbstractAdminController
 {
+    /**
+     * @var CompanyRepositoryInterface
+     */
+    private $repository;
+
     /**
      * {@inheritdoc}
      */
@@ -38,12 +45,11 @@ class CompanyController extends AbstractAdminController
     public function addAction()
     {
         $form = $this->createForm($this->get('company.form'), null, [
-            'name'        => 'add_company',
-            'transformer' => new CompanyDataTransformer()
+            'name' => 'add_company'
         ]);
 
         if ($form->isValid()) {
-            $this->repository->save($form->getValues());
+            $this->repository->save($form->getSubmitValuesFlat());
 
             return $this->redirect($this->generateUrl('admin.company.index'));
         }
@@ -65,7 +71,7 @@ class CompanyController extends AbstractAdminController
         ]);
 
         if ($form->isValid()) {
-            $this->repository->save($form->getValues(), $id);
+            $this->repository->save($form->getSubmitValuesFlat(), $id);
 
             return $this->redirect($this->generateUrl('admin.company.index'));
         }
@@ -74,5 +80,15 @@ class CompanyController extends AbstractAdminController
             'company' => $model,
             'form'    => $form
         ];
+    }
+
+    /**
+     * Sets company repository object
+     *
+     * @param CompanyRepositoryInterface $repository
+     */
+    public function setRepository(CompanyRepositoryInterface $repository)
+    {
+        $this->repository = $repository;
     }
 }

@@ -15,6 +15,7 @@ use WellCommerce\Core\Component\Form\AbstractForm;
 use WellCommerce\Core\Component\Form\FormBuilder;
 use WellCommerce\Core\Component\Form\FormInterface;
 use WellCommerce\Core\Component\Model\ModelInterface;
+use WellCommerce\Plugin\Company\Model\Company;
 
 /**
  * Class CompanyForm
@@ -103,26 +104,30 @@ class CompanyForm extends AbstractForm implements FormInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Prepares form data using retrieved model
+     *
+     * @param Company $company Model
+     *
+     * @return array
      */
-    public function prepareData(ModelInterface $model)
+    public function prepareData(Company $company)
     {
         $formData = [];
         $accessor = $this->getPropertyAccessor();
 
         $accessor->setValue($formData, '[required_data]', [
-            'name'       => $model->name,
-            'short_name' => $model->short_name
+            'name'       => $company->name,
+            'short_name' => $company->short_name
         ]);
 
         $accessor->setValue($formData, '[address_data]', [
-            'street'   => $model->street,
-            'streetno' => $model->streetno,
-            'flatno'   => $model->flatno,
-            'province' => $model->province,
-            'postcode' => $model->postcode,
-            'city'     => $model->city,
-            'country'  => $model->country
+            'street'   => $company->street,
+            'streetno' => $company->streetno,
+            'flatno'   => $company->flatno,
+            'province' => $company->province,
+            'postcode' => $company->postcode,
+            'city'     => $company->city,
+            'country'  => $company->country
         ]);
 
         return $formData;

@@ -17,6 +17,8 @@ use Symfony\Component\DependencyInjection\ParameterBag\FrozenParameterBag;
  */
 class ServiceContainer extends Container
 {
+    private $parameters;
+
     /**
      * Constructor.
      */
@@ -44,7 +46,9 @@ class ServiceContainer extends Container
             'availability.datagrid' => 'getAvailability_DatagridService',
             'availability.form' => 'getAvailability_FormService',
             'availability.listener' => 'getAvailability_ListenerService',
+            'availability.model' => 'getAvailability_ModelService',
             'availability.repository' => 'getAvailability_RepositoryService',
+            'availability_translation.model' => 'getAvailabilityTranslation_ModelService',
             'cache_manager' => 'getCacheManagerService',
             'cache_manager.datagrid' => 'getCacheManager_DatagridService',
             'cache_manager.repository' => 'getCacheManager_RepositoryService',
@@ -187,6 +191,8 @@ class ServiceContainer extends Container
             'user.form_login' => 'getUser_FormLoginService',
             'user.listener' => 'getUser_ListenerService',
             'user.repository' => 'getUser_RepositoryService',
+            'validator' => 'getValidatorService',
+            'validator.builder' => 'getValidator_BuilderService',
             'xajax' => 'getXajaxService',
             'xajax_manager' => 'getXajaxManagerService',
         );
@@ -355,6 +361,20 @@ class ServiceContainer extends Container
     }
 
     /**
+     * Gets the 'availability.model' service.
+     *
+     * @return WellCommerce\Plugin\Availability\Model\Availability A WellCommerce\Plugin\Availability\Model\Availability instance.
+     */
+    protected function getAvailability_ModelService()
+    {
+        $instance = new \WellCommerce\Plugin\Availability\Model\Availability();
+
+        $instance->setContainer($this);
+
+        return $instance;
+    }
+
+    /**
      * Gets the 'availability.repository' service.
      *
      * This service is shared.
@@ -365,6 +385,20 @@ class ServiceContainer extends Container
     protected function getAvailability_RepositoryService()
     {
         $this->services['availability.repository'] = $instance = new \WellCommerce\Plugin\Availability\Repository\AvailabilityRepository();
+
+        $instance->setContainer($this);
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'availability_translation.model' service.
+     *
+     * @return WellCommerce\Plugin\Availability\Model\AvailabilityTranslation A WellCommerce\Plugin\Availability\Model\AvailabilityTranslation instance.
+     */
+    protected function getAvailabilityTranslation_ModelService()
+    {
+        $instance = new \WellCommerce\Plugin\Availability\Model\AvailabilityTranslation();
 
         $instance->setContainer($this);
 
@@ -2725,6 +2759,36 @@ class ServiceContainer extends Container
     }
 
     /**
+     * Gets the 'validator' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Validator\ValidatorInterface A Symfony\Component\Validator\ValidatorInterface instance.
+     */
+    protected function getValidatorService()
+    {
+        return $this->services['validator'] = $this->get('validator.builder')->getValidator();
+    }
+
+    /**
+     * Gets the 'validator.builder' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Validator\ValidatorBuilderInterface A Symfony\Component\Validator\ValidatorBuilderInterface instance.
+     */
+    protected function getValidator_BuilderService()
+    {
+        $this->services['validator.builder'] = $instance = \Symfony\Component\Validator\Validation::createValidatorBuilder();
+
+        $instance->setTranslator($this->get('translation'));
+
+        return $instance;
+    }
+
+    /**
      * Gets the 'xajax' service.
      *
      * This service is shared.
@@ -2870,6 +2934,9 @@ class ServiceContainer extends Container
             'session.storage.class' => 'Symfony\\Component\\HttpFoundation\\Session\\Storage\\NativeSessionStorage',
             'template_guesser.class' => 'WellCommerce\\Core\\Template\\TemplateGuesser',
             'template_listener.class' => 'WellCommerce\\Core\\EventListener\\TemplateListener',
+            'validator.class' => 'Symfony\\Component\\Validator\\ValidatorInterface',
+            'validator.builder.class' => 'Symfony\\Component\\Validator\\ValidatorBuilderInterface',
+            'validator.builder.factory.class' => 'Symfony\\Component\\Validator\\Validation',
             'admin_menu.repository.class' => 'WellCommerce\\Plugin\\AdminMenu\\Repository\\AdminMenuRepository',
             'admin_menu.subscriber.class' => 'WellCommerce\\Plugin\\AdminMenu\\EventListener\\AdminMenuListener',
             'availability.admin.controller.class' => 'WellCommerce\\Plugin\\Availability\\Controller\\Admin\\AvailabilityController',
@@ -2877,6 +2944,8 @@ class ServiceContainer extends Container
             'availability.datagrid.class' => 'WellCommerce\\Plugin\\Availability\\DataGrid\\AvailabilityDataGrid',
             'availability.form.class' => 'WellCommerce\\Plugin\\Availability\\Form\\AvailabilityForm',
             'availability.listener.class' => 'WellCommerce\\Plugin\\Availability\\EventListener\\AvailabilityListener',
+            'availability.model.class' => 'WellCommerce\\Plugin\\Availability\\Model\\Availability',
+            'availability_translation.model.class' => 'WellCommerce\\Plugin\\Availability\\Model\\AvailabilityTranslation',
             'category.admin.controller.class' => 'WellCommerce\\Plugin\\Category\\Controller\\Admin\\CategoryController',
             'category.repository.class' => 'WellCommerce\\Plugin\\Category\\Repository\\CategoryRepository',
             'category.form.class' => 'WellCommerce\\Plugin\\Category\\Form\\CategoryForm',
