@@ -12,7 +12,6 @@
 namespace WellCommerce\Plugin\User\Repository;
 
 use WellCommerce\Core\Component\Repository\AbstractRepository;
-use WellCommerce\Core\Component\Repository\RepositoryInterface;
 use WellCommerce\Core\Helper\Password;
 use WellCommerce\Plugin\User\Model\User;
 use WellCommerce\Plugin\User\Model\UserDataInterface;
@@ -31,7 +30,7 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
      */
     public function all()
     {
-        return User::get();
+        return User::all();
     }
 
     /**
@@ -47,21 +46,21 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
      */
     public function delete($id)
     {
-        $this->dispatchEvent(UserRepositoryEvents::PRE_DELETE, [], $id);
+        $this->dispatchEvent(UserRepositoryInterface::PRE_DELETE_EVENT, [], $id);
 
         $this->transaction(function () use ($id) {
             return User::destroy($id);
         });
 
-        $this->dispatchEvent(UserRepositoryEvents::POST_DELETE, [], $id);
+        $this->dispatchEvent(UserRepositoryInterface::POST_DELETE_EVENT, [], $id);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function save(UserDataInterface $user)
+    public function save(array $data, $id = null)
     {
-        $data = $this->dispatchEvent(UserRepositoryEvents::PRE_SAVE, $data, $id);
+        $data = $this->dispatchEvent(UserRepositoryInterface::PRE_SAVE_EVENT, $data, $id);
 
         $this->transaction(function () use ($data, $id) {
             $user = User::firstOrNew([
@@ -77,7 +76,7 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
             $user->save();
         });
 
-        $this->dispatchEvent(UserRepositoryEvents::POST_SAVE, $data, $id);
+        $this->dispatchEvent(UserRepositoryInterface::POST_SAVE_EVENT, $data, $id);
     }
 
     /**
@@ -98,7 +97,7 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
                 $this->getSession()->set('admin/user/last_name', $user->last_name);
                 $this->getSession()->set('admin/user/global', $user->global);
 
-                $this->dispatchEvent(UserRepositoryEvents::LOGIN_SUCCEED, $data, $user->id);
+                $this->dispatchEvent(UserRepositoryInterface::LOGIN_SUCCEED, $data, $user->id);
             }
         }
     }

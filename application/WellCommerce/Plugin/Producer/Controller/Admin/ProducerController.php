@@ -13,6 +13,7 @@ namespace WellCommerce\Plugin\Producer\Controller\Admin;
 
 use WellCommerce\Core\Component\Controller\AbstractAdminController;
 use WellCommerce\Plugin\Producer\DataGrid\Config;
+use WellCommerce\Plugin\Producer\Repository\ProducerRepositoryInterface;
 
 /**
  * Class ProducerController
@@ -38,13 +39,11 @@ class ProducerController extends AbstractAdminController
     public function addAction()
     {
         $form = $this->createForm($this->get('producer.form'), null, [
-            'name'   => 'add_producer',
-            'method' => 'POST',
-            'action' => $this->generateUrl('admin.producer.add')
+            'name' => 'add_producer'
         ]);
 
         if ($form->isValid()) {
-            $this->repository->save($form->getSubmittedData());
+            $this->repository->save($form->getSubmitValuesFlat());
 
             return $this->redirect($this->getDefaultUrl());
         }
@@ -62,13 +61,15 @@ class ProducerController extends AbstractAdminController
         $model = $this->repository->find($id);
 
         $form = $this->createForm($this->get('producer.form'), $model, [
-            'name'   => 'edit_producer',
-            'method' => 'POST',
-            'action' => $this->generateUrl('admin.producer.edit', ['id' => $model->id])
+            'name' => 'edit_producer'
         ]);
 
         if ($form->isValid()) {
-            $this->repository->save($form->getSubmittedData(), $id);
+            $this->repository->save($form->getSubmitValuesFlat(), $id);
+
+            if ($form->isAction('continue')) {
+                return $this->redirect($this->generateUrl('admin.producer.edit', ['id' => $model->id]));
+            }
 
             return $this->redirect($this->getDefaultUrl());
         }
@@ -77,5 +78,15 @@ class ProducerController extends AbstractAdminController
             'producer' => $model,
             'form'     => $form
         ];
+    }
+
+    /**
+     * Sets producer repository object
+     *
+     * @param ProducerRepositoryInterface $repository
+     */
+    public function setRepository(ProducerRepositoryInterface $repository)
+    {
+        $this->repository = $repository;
     }
 }

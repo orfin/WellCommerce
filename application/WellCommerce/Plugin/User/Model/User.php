@@ -52,6 +52,13 @@ class User extends AbstractModel implements ModelInterface
     protected $fillable = ['id'];
 
     /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = ['password'];
+
+    /**
      * Mutator for active attribute
      *
      * @param $value
@@ -105,11 +112,11 @@ class User extends AbstractModel implements ModelInterface
         return (int)$value;
     }
 
-    public function getValidationRules()
+    /**
+     * {@inheritdoc}
+     */
+    public function getValidationXmlMapping()
     {
-        return [
-            'name'       => 'required',
-            'short_name' => 'required',
-        ];
+        return __DIR__ . '/../Resources/config/validation.xml';
     }
 }

@@ -12,9 +12,11 @@
 namespace WellCommerce\Plugin\User\Form;
 
 use WellCommerce\Core\Component\Form\AbstractForm;
+use WellCommerce\Core\Component\Form\Elements\Field;
+use WellCommerce\Core\Component\Form\Elements\Fieldset;
+use WellCommerce\Core\Component\Form\Elements\Form;
 use WellCommerce\Core\Component\Form\FormBuilder;
 use WellCommerce\Core\Component\Form\FormInterface;
-use WellCommerce\Core\Component\Model\ModelInterface;
 use WellCommerce\Plugin\User\Model\User;
 
 /**
@@ -106,18 +108,11 @@ class UserForm extends AbstractForm implements FormInterface
     /**
      * {@inheritdoc}
      */
-    public function prepareData(ModelInterface $model)
+    public function prepareData(User $user)
     {
         $formData = [];
         $accessor = $this->getPropertyAccessor();
-
-        $accessor->setValue($formData, '[required_data]', [
-            'first_name' => $model->first_name,
-            'last_name'  => $model->last_name,
-            'email'      => $model->email,
-            'active'     => $model->active,
-            'global'     => $model->global,
-        ]);
+        $accessor->setValue($formData, '[required_data]', $user->attributesToArray());
 
         return $formData;
     }

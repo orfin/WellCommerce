@@ -21,7 +21,6 @@ use WellCommerce\Core\Component\Model\AbstractModel;
  */
 class SuffixType extends AbstractModel
 {
-
     protected $table = 'suffix_type';
 
     public $timestamps = false;

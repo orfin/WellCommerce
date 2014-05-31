@@ -85,12 +85,12 @@ class ProducerForm extends AbstractForm implements FormInterface
             'options' => $builder->makeOptions($this->get('deliverer.repository')->getAllDelivererToSelect())
         ]));
 
-        $requiredData = $form->addChild($builder->addFieldset([
+        $descriptionData = $form->addChild($builder->addFieldset([
             'name'  => 'description_data',
             'label' => $this->trans('Description')
         ]));
 
-        $languageData = $requiredData->addChild($builder->addFieldsetLanguage([
+        $languageData = $descriptionData->addChild($builder->addFieldsetLanguage([
             'name'      => 'language_data',
             'label'     => $this->trans('Language settings'),
             'languages' => $this->getLanguages()
@@ -112,7 +112,7 @@ class ProducerForm extends AbstractForm implements FormInterface
         ]));
 
         $languageData = $metaData->addChild($builder->addFieldsetLanguage([
-            'name'      => 'language_data',
+            'name'  => 'language_data',
             'languages' => $this->getLanguages()
         ]));
 

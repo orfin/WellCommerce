@@ -30,21 +30,21 @@ interface CompanyRepositoryInterface
     /**
      * Returns all companies as a collection
      *
-     * @return mixed
+     * @return \Illuminate\Database\Eloquent\Collection
      */
     public function all();
 
     /**
-     * Returns single company model
+     * Returns a company model
      *
      * @param $id
      *
-     * @return mixed
+     * @return \WellCommerce\Plugin\Company\Model\Company
      */
     public function find($id);
 
     /**
-     * Saves new or existing company model
+     * Adds or updates a company
      *
      * @param array $data
      * @param null  $id
@@ -54,7 +54,7 @@ interface CompanyRepositoryInterface
     public function save(array $data, $id = null);
 
     /**
-     * Deletes company model
+     * Deletes a company
      *
      * @param $id
      *

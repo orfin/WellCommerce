@@ -12,7 +12,6 @@
 namespace WellCommerce\Plugin\Producer\Repository;
 
 use WellCommerce\Core\Component\Repository\AbstractRepository;
-use WellCommerce\Core\Component\Repository\RepositoryInterface;
 use WellCommerce\Plugin\Producer\Model\Producer;
 use WellCommerce\Plugin\Producer\Model\ProducerTranslation;
 
@@ -22,7 +21,7 @@ use WellCommerce\Plugin\Producer\Model\ProducerTranslation;
  * @package WellCommerce\Plugin\Producer\AbstractRepository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProducerRepository extends AbstractRepository implements RepositoryInterface
+class ProducerRepository extends AbstractRepository implements ProducerRepositoryInterface
 {
     /**
      * {@inheritdoc}
@@ -45,13 +44,13 @@ class ProducerRepository extends AbstractRepository implements RepositoryInterfa
      */
     public function delete($id)
     {
-        $this->dispatchEvent(ProducerRepositoryEvents::PRE_DELETE, [], $id);
+        $this->dispatchEvent(ProducerRepositoryInterface::PRE_DELETE_EVENT, [], $id);
 
         $this->transaction(function () use ($id) {
             return Producer::destroy($id);
         });
 
-        $this->dispatchEvent(ProducerRepositoryEvents::POST_DELETE, [], $id);
+        $this->dispatchEvent(ProducerRepositoryInterface::POST_DELETE_EVENT, [], $id);
     }
 
     /**
@@ -59,51 +58,36 @@ class ProducerRepository extends AbstractRepository implements RepositoryInterfa
      */
     public function save(array $data, $id = null)
     {
-        $data = $this->dispatchEvent(ProducerRepositoryEvents::PRE_SAVE, $data, $id);
+        $data = $this->dispatchEvent(ProducerRepositoryInterface::PRE_SAVE_EVENT, $data, $id);
 
         $this->transaction(function () use ($data, $id) {
 
-            $accessor = $this->getPropertyAccessor();
-
-            $producer = Producer::firstOrNew([
+            $producer = Producer::firstOrCreate([
                 'id' => $id
             ]);
 
-            $producer->save();
+            $producer->update();
 
             foreach ($this->getLanguageIds() as $language) {
 
-                $translation = ProducerTranslation::firstOrNew([
+                $translation = ProducerTranslation::firstOrCreate([
                     'producer_id' => $producer->id,
                     'language_id' => $language
                 ]);
 
-                // set translations from required_data pane
-                $languageData = $accessor->getValue($data, sprintf('[required_data][language_data][%s]', $language));
-                $translation->setTranslationData($languageData);
-
-                // set translations from description_data pane
-                $descData = $accessor->getValue($data, sprintf('[description_data][language_data][%s]', $language));
-                $translation->setTranslationData($descData);
-
-                // set translations from meta_data pane
-                $metaData = $accessor->getValue($data, sprintf('[meta_data][language_data][%s]', $language));
-                $translation->setTranslationData($metaData);
-
-                $translation->save();
+                $translationData = $translation->getTranslation($data, $language);
+                $translation->update($translationData);
             }
 
-            $producer->sync($producer->deliverer(), $accessor->getValue($data, '[required_data][deliverers]'));
-            $producer->sync($producer->shop(), $accessor->getValue($data, '[shop_data][shops]'));
+            $producer->sync($producer->deliverer(), $data['deliverers']);
+            $producer->sync($producer->shop(), $data['shops']);
         });
 
-        $this->dispatchEvent(ProducerRepositoryEvents::POST_SAVE, $data, $id);
+        $this->dispatchEvent(ProducerRepositoryInterface::POST_SAVE_EVENT, $data, $id);
     }
 
     /**
-     * Returns Collection as ke-value pairs ready to use in selects
-     *
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getAllProducerToSelect()
     {

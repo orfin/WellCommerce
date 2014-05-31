@@ -12,8 +12,6 @@
 
 namespace WellCommerce\Plugin\User\Repository;
 
-use WellCommerce\Plugin\User\Model\UserDataInterface;
-
 /**
  * Interface UserRepositoryInterface
  *
@@ -27,13 +25,47 @@ interface UserRepositoryInterface
     const PRE_SAVE_EVENT    = 'user.repository.pre_save';
     const POST_SAVE_EVENT   = 'user.repository.post_save';
 
+    /**
+     * Returns all users as a collection
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
     public function all();
 
+    /**
+     * Returns single user
+     *
+     * @param $id
+     *
+     * @return \WellCommerce\Plugin\User\Model\User
+     */
     public function find($id);
 
-    public function save(UserDataInterface $user);
+    /**
+     * Updates existing user or adds a new one
+     *
+     * @param array $data
+     * @param       $id
+     *
+     * @return void
+     */
+    public function save(array $data, $id);
 
+    /**
+     * Deletes user
+     *
+     * @param $id
+     *
+     * @return void
+     */
     public function delete($id);
 
+    /**
+     * Authorizes the user using given credentials
+     *
+     * @param array $data
+     *
+     * @return bool
+     */
     public function authProcess(array $data);
 }

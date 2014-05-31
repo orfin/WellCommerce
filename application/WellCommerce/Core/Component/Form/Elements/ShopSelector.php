@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Core\Component\Form\Elements;
 
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
 /**
  * Class ShopSelector
  *
@@ -24,6 +26,24 @@ class ShopSelector extends Field implements ElementInterface
     {
         $attributes['stores'] = $this->prepareShopsTree($attributes['stores']);
         parent::__construct($attributes);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureAttributes(OptionsResolverInterface $resolver)
+    {
+        $resolver->setRequired([
+            'name',
+            'label',
+            'stores',
+        ]);
+
+        $resolver->setAllowedTypes([
+            'name'   => 'string',
+            'label'  => 'string',
+            'stores' => 'array',
+        ]);
     }
 
     public function prepareAttributesJs()

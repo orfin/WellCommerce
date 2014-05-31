@@ -10,21 +10,17 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Plugin\User\Model;
+namespace WellCommerce\Plugin\Company\Form;
 
 /**
- * Interface UserDataInterface
+ * Class CompanyData
  *
- * @package WellCommerce\Plugin\User\Model
+ * @package WellCommerce\Plugin\Company\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface UserDataInterface
-{
-    public function setId();
+class CompanyData {
 
-    public function setName();
+    public function __construct(Request $request){
 
-    public function setShortName();
-
-    public function setStreet();
+    }
 } 

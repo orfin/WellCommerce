@@ -94,22 +94,29 @@ class CompanyRepository extends AbstractRepository implements CompanyRepositoryI
         $companies = $this->all();
 
         foreach ($companies as $company) {
-            $tree[$company->id] = [
-                'id'       => $company->id,
-                'name'     => $company->name,
-                'parent'   => null,
-                'children' => []
-            ];
+            $shops = $company->shop;
 
-            foreach ($company->shop as $shop) {
-
-                $translation = $shop->translation()->hasLanguageId($this->getCurrentLanguage());
-
-                $tree[$company->id]['children'][$shop->id] = [
-                    'id'   => $shop->id,
-                    'name' => $translation->name,
+            // add only companies having related shops
+            if (!$shops->isEmpty()) {
+                $tree[$company->id] = [
+                    'id'       => $company->id,
+                    'name'     => $company->name,
+                    'parent'   => null,
+                    'children' => []
                 ];
+
+                foreach ($shops as $shop) {
+
+                    // fetch translations
+                    $translation = $shop->translation()->hasLanguageId($this->getCurrentLanguage());
+
+                    $tree[$company->id]['children'][$shop->id] = [
+                        'id'   => $shop->id,
+                        'name' => $translation->name,
+                    ];
+                }
             }
+
         }
 
         return $tree;

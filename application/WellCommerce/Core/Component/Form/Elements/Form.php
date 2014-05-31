@@ -26,6 +26,7 @@ class Form extends Container
     const FORMAT_FLAT     = 1;
     const TABS_VERTICAL   = 0;
     const TABS_HORIZONTAL = 1;
+    const FORM_METHOD     = 'POST';
 
     public $fields = [];
     public $_values = [];
@@ -64,7 +65,7 @@ class Form extends Container
         $resolver->setDefaults([
             'action' => '',
             'class'  => '',
-            'method' => 'POST',
+            'method' => self::FORM_METHOD,
             'tabs'   => self::TABS_VERTICAL,
         ]);
 
@@ -109,38 +110,15 @@ class Form extends Container
         return $this->getValue($element);
     }
 
-    public function convertData()
-    {
-        $values = [];
-        foreach ($this->fields as $field) {
-            if ($field instanceof Field) {
-                $values = array_merge_recursive($values, Array(
-                    $field->getName() => $field->getValue()
-                ));
-            }
-        }
-
-        print_r($values);
-        die();
-    }
-
     public function getValues($flags = 0)
     {
         if ($flags & self::FORMAT_FLAT) {
             $values = [];
             foreach ($this->fields as $field) {
-                if (is_object($field)) {
-                    if ($field instanceof Field) {
-                        $values = array_merge_recursive($values, Array(
-                            $field->getName() => $field->getValue()
-                        ));
-                    }
-                } else {
-                    if ($field instanceof Field) {
-                        $values = array_merge_recursive($values, Array(
-                            $field->getName() => $field->getValue()
-                        ));
-                    }
+                if ($field instanceof Field) {
+                    $values = array_merge_recursive($values, [
+                        $field->getName() => $field->getValue()
+                    ]);
                 }
             }
 

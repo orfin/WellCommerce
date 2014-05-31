@@ -29,4 +29,12 @@ class ProducerDeliverer extends AbstractModel
     protected $softDelete = false;
 
     protected $fillable = ['producer_id', 'deliverer_id'];
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getValidationXmlMapping()
+    {
+        return __DIR__ . '/../Resources/config/validation.xml';
+    }
 }

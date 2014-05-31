@@ -42,12 +42,12 @@ class FieldsetLanguage extends Fieldset implements ElementInterface
     {
         $resolver->setRequired([
             'name',
-            'label',
             'languages'
         ]);
 
         $resolver->setOptional([
             'class',
+            'label',
             'repeat_min',
             'repeat_max',
         ]);

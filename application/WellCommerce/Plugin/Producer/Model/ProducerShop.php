@@ -49,4 +49,12 @@ class ProducerShop extends AbstractModel
     {
         return $this->belongsTo('WellCommerce\Core\Model\Shop');
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getValidationXmlMapping()
+    {
+        return __DIR__ . '/../Resources/config/validation.xml';
+    }
 }

@@ -100,4 +100,12 @@ class Producer extends AbstractModel implements ModelInterface, TranslatableMode
 
         return $deliverers;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getValidationXmlMapping()
+    {
+        return __DIR__ . '/../Resources/config/validation.xml';
+    }
 }

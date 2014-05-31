@@ -79,4 +79,12 @@ class ProducerTranslation extends AbstractModel
     {
         return $this->belongsTo('WellCommerce\Plugin\Language\Model\Language');
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getValidationXmlMapping()
+    {
+        return __DIR__ . '/../Resources/config/validation.xml';
+    }
 }
