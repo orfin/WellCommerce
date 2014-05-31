@@ -12,6 +12,7 @@
 namespace WellCommerce\Plugin\ClientGroup\Controller\Admin;
 
 use WellCommerce\Core\Component\Controller\AbstractAdminController;
+use WellCommerce\Plugin\ClientGroup\Repository\ClientGroupRepositoryInterface;
 
 /**
  * Class ClientGroupController
@@ -37,9 +38,7 @@ class ClientGroupController extends AbstractAdminController
     public function addAction()
     {
         $form = $this->createForm($this->get('client_group.form'), null, [
-            'name'   => 'add_client_group',
-            'method' => 'POST',
-            'action' => $this->generateUrl('admin.client_group.add')
+            'name' => 'add_client_group',
         ]);
 
         if ($form->isValid()) {
@@ -61,13 +60,15 @@ class ClientGroupController extends AbstractAdminController
         $model = $this->repository->find($id);
 
         $form = $this->createForm($this->get('client_group.form'), $model, [
-            'name'   => 'edit_client_group',
-            'method' => 'POST',
-            'action' => $this->generateUrl('admin.client_group.edit', ['id' => $model->id])
+            'name' => 'edit_client_group',
         ]);
 
         if ($form->isValid()) {
             $this->repository->save($form->getSubmittedData(), $id);
+
+            if ($form->isAction('continue')) {
+                return $this->redirect($this->generateUrl('admin.client_group.edit', ['id' => $model->id]));
+            }
 
             return $this->redirect($this->generateUrl('admin.client_group.index'));
         }
@@ -76,5 +77,15 @@ class ClientGroupController extends AbstractAdminController
             'client_group' => $model,
             'form'         => $form
         ];
+    }
+
+    /**
+     * Sets client group repository object
+     *
+     * @param ClientGroupRepositoryInterface $repository
+     */
+    public function setRepository(ClientGroupRepositoryInterface $repository)
+    {
+        $this->repository = $repository;
     }
 }

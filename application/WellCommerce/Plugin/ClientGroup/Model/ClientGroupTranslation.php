@@ -46,4 +46,12 @@ class ClientGroupTranslation extends AbstractModel
      * @var array
      */
     protected $translatable = ['name'];
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getValidationXmlMapping()
+    {
+        return __DIR__ . '/../Resources/config/validation.xml';
+    }
 }

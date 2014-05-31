@@ -10,39 +10,39 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Plugin\Producer\Repository;
+namespace WellCommerce\Plugin\ClientGroup\Repository;
 
 /**
- * Interface ProducerRepositoryInterface
+ * Interface ClientGroupRepositoryInterface
  *
- * @package WellCommerce\Plugin\Producer\Repository
+ * @package WellCommerce\Plugin\ClientGroup\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ProducerRepositoryInterface
+interface ClientGroupRepositoryInterface
 {
-    const PRE_DELETE_EVENT  = 'producer.repository.pre_delete';
-    const POST_DELETE_EVENT = 'producer.repository.post_delete';
-    const PRE_SAVE_EVENT    = 'producer.repository.pre_save';
-    const POST_SAVE_EVENT   = 'producer.repository.post_save';
+    const PRE_DELETE_EVENT  = 'client_group.repository.pre_delete';
+    const POST_DELETE_EVENT = 'client_group.repository.post_delete';
+    const PRE_SAVE_EVENT    = 'client_group.repository.pre_save';
+    const POST_SAVE_EVENT   = 'client_group.repository.post_save';
 
     /**
-     * Returns all producers as a collection
+     * Returns all client groups as a collection
      *
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public function all();
 
     /**
-     * Returns a producer model
+     * Returns a client group model
      *
      * @param $id
      *
-     * @return \WellCommerce\Plugin\Producer\Model\Producer
+     * @return \WellCommerce\Plugin\ClientGroup\Model\ClientGroup
      */
     public function find($id);
 
     /**
-     * Adds or updates a producer
+     * Adds or updates a client group
      *
      * @param array $data
      * @param null  $id
@@ -52,7 +52,7 @@ interface ProducerRepositoryInterface
     public function save(array $data, $id = null);
 
     /**
-     * Deletes a producer
+     * Deletes a client group
      *
      * @param $id
      *
@@ -65,5 +65,5 @@ interface ProducerRepositoryInterface
      *
      * @return mixed
      */
-    public function getAllProducerToSelect();
+    public function getAllClientGroupToSelect();
 }

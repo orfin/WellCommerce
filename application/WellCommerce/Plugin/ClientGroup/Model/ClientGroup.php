@@ -50,4 +50,12 @@ class ClientGroup extends AbstractModel implements ModelInterface, TranslatableM
     {
         $this->attributes['discount'] = Helper::changeCommaToDot($value);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getValidationXmlMapping()
+    {
+        return __DIR__ . '/../Resources/config/validation.xml';
+    }
 }

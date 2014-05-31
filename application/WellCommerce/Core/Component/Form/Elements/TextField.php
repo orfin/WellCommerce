@@ -48,6 +48,7 @@ class TextField extends Field implements ElementInterface
             'max_length',
             'error',
             'rules',
+            'filters',
             'dependencies',
         ]);
 
@@ -63,6 +64,7 @@ class TextField extends Field implements ElementInterface
             'css_attribute' => 'string',
             'max_length'    => 'integer',
             'error'         => 'string',
+            'filters'       => 'array',
             'rules'         => 'array',
             'dependencies'  => 'array'
         ]);

@@ -12,8 +12,6 @@
 
 namespace WellCommerce\Plugin\Deliverer\Repository;
 
-use WellCommerce\Plugin\Deliverer\Model\DelivererDataInterface;
-
 /**
  * Interface DelivererRepositoryInterface
  *
