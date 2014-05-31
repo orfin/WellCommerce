@@ -67,7 +67,7 @@ class AdminMenuItem implements AdminMenuItemInterface, \ArrayAccess
             'id'         => 'string',
             'name'       => 'string',
             'link'       => 'string',
-            'class'       => 'string',
+            'class'      => 'string',
             'sort_order' => 'integer',
         ));
 

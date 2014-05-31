@@ -11,9 +11,11 @@
  */
 namespace WellCommerce\Plugin\Contact\DataGrid;
 
-use WellCommerce\Core\DataGrid,
-    WellCommerce\Core\DataGrid\DataGridInterface;
-use WellCommerce\Plugin\Contact\Event\ContactDataGridEvent;
+use WellCommerce\Core\Component\DataGrid\AbstractDataGrid;
+use WellCommerce\Core\Component\DataGrid\Column\ColumnInterface;
+use WellCommerce\Core\Component\DataGrid\Column\DataGridColumn;
+use WellCommerce\Core\Component\DataGrid\DataGridInterface;
+use WellCommerce\Core\DataGrid;
 
 /**
  * Class ContactDataGrid
@@ -21,66 +23,68 @@ use WellCommerce\Plugin\Contact\Event\ContactDataGridEvent;
  * @package WellCommerce\Plugin\Contact\DataGrid
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ContactDataGrid extends DataGrid implements DataGridInterface
+class ContactDataGrid extends AbstractDataGrid implements DataGridInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function configure()
+    public function getId()
     {
-        $this->setOptions([
-            'id'             => 'contact',
-            'event_handlers' => [
-                'load'       => $this->getXajaxManager()->registerFunction(['LoadContact', $this, 'loadData']),
-                'edit_row'   => 'editContact',
-                'click_row'  => 'editContact',
-                'delete_row' => $this->getXajaxManager()->registerFunction(['DeleteContact', $this, 'deleteRow'])
-            ],
-            'routes'         => [
-                'edit' => $this->generateUrl('admin.contact.edit')
-            ]
-        ]);
+        return 'contact';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function init()
+    public function getRoutes()
     {
-        $this->addColumn('id', [
+        return [
+            'edit' => $this->generateUrl('admin.contact.edit')
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function initColumns()
+    {
+        $this->columns->add(new DataGridColumn([
+            'id'         => 'id',
             'source'     => 'contact.id',
             'caption'    => $this->trans('Id'),
             'sorting'    => [
-                'default_order' => DataGridInterface::SORT_DIR_DESC
+                'default_order' => ColumnInterface::SORT_DIR_DESC
             ],
             'appearance' => [
                 'width'   => 90,
                 'visible' => false
             ],
             'filter'     => [
-                'type' => DataGridInterface::FILTER_BETWEEN
+                'type' => ColumnInterface::FILTER_BETWEEN
             ]
-        ]);
+        ]));
 
-        $this->addColumn('name', [
+        $this->columns->add(new DataGridColumn([
+            'id'         => 'name',
             'source'     => 'contact_translation.name',
             'caption'    => $this->trans('Name'),
             'appearance' => [
                 'width' => 70,
-                'align' => DataGridInterface::ALIGN_LEFT
+                'align' => ColumnInterface::ALIGN_LEFT
             ],
             'filter'     => [
-                'type' => DataGridInterface::FILTER_INPUT
+                'type' => ColumnInterface::FILTER_INPUT
             ]
-        ]);
-        
-        $this->query = $this->getDb()
-            ->table('contact')
-            ->join('contact_translation', 'contact_translation.contact_id', '=', 'contact.id')
-            ->groupBy('contact.id');
+        ]));
+    }
 
-        $event = new ContactDataGridEvent($this);
-
-        $this->getDispatcher()->dispatch(ContactDataGridEvent::DATAGRID_INIT_EVENT, $event);
+    /**
+     * {@inheritdoc}
+     */
+    public function setQuery()
+    {
+        $this->query = $this->getDb()->table('contact');
+        $this->query->join('contact_translation', 'contact_translation.contact_id', '=', 'contact.id');
+        $this->query->groupBy('contact.id');
     }
 }

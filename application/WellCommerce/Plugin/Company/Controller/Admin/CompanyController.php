@@ -24,9 +24,6 @@ use WellCommerce\Plugin\Company\Repository\CompanyRepositoryInterface;
  */
 class CompanyController extends AbstractAdminController
 {
-    /**
-     * @var CompanyRepositoryInterface
-     */
     private $repository;
 
     /**

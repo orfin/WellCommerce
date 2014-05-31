@@ -11,7 +11,8 @@
  */
 namespace WellCommerce\Plugin\Contact\Model;
 
-use WellCommerce\Core\Model;
+use WellCommerce\Core\Component\Model\AbstractModel;
+use WellCommerce\Core\Component\Model\TranslatableModelInterface;
 
 /**
  * Class ContactTranslation
@@ -19,7 +20,7 @@ use WellCommerce\Core\Model;
  * @package WellCommerce\Plugin\Contact\Model
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ContactTranslation extends Model
+class ContactTranslation extends AbstractModel
 {
 
     protected $table = 'contact_translation';
@@ -31,4 +32,12 @@ class ContactTranslation extends Model
     protected $fillable = ['contact_id', 'language_id'];
 
     protected $translatable = ['name', 'email', 'phone', 'street', 'streetno', 'flatno', 'province', 'city', 'country'];
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getValidationXmlMapping()
+    {
+        return __DIR__ . '/../Resources/config/validation.xml';
+    }
 }

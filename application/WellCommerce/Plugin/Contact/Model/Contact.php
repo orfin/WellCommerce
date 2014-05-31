@@ -11,6 +11,9 @@
  */
 namespace WellCommerce\Plugin\Contact\Model;
 
+use WellCommerce\Core\Component\Model\AbstractModel;
+use WellCommerce\Core\Component\Model\ModelInterface;
+use WellCommerce\Core\Component\Model\TranslatableModelInterface;
 use WellCommerce\Core\Model;
 
 /**
@@ -19,9 +22,8 @@ use WellCommerce\Core\Model;
  * @package WellCommerce\Plugin\Contact\Model
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Contact extends Model implements Model\TranslatableModelInterface
+class Contact extends AbstractModel implements ModelInterface, TranslatableModelInterface
 {
-
     protected $table = 'contact';
 
     public $timestamps = true;
@@ -60,5 +62,13 @@ class Contact extends Model implements Model\TranslatableModelInterface
     public function getEnabledAttribute($value)
     {
         return (int)$value;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getValidationXmlMapping()
+    {
+        return __DIR__ . '/../Resources/config/validation.xml';
     }
 }

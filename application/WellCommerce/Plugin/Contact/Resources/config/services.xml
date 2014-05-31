@@ -3,43 +3,64 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
+    <parameters>
+        <parameter key="contact.admin.controller.class">WellCommerce\Plugin\Contact\Controller\Admin\ContactController</parameter>
+        <parameter key="contact.repository.class">WellCommerce\Plugin\Contact\Repository\ContactRepository</parameter>
+        <parameter key="contact.datagrid.class">WellCommerce\Plugin\Contact\DataGrid\ContactDataGrid</parameter>
+        <parameter key="contact.form.class">WellCommerce\Plugin\Contact\Form\ContactForm</parameter>
+        <parameter key="contact.listener.class">WellCommerce\Plugin\Contact\EventListener\ContactListener</parameter>
+        <parameter key="contact_box.layout.configurator.class">WellCommerce\Plugin\Contact\Layout\ContactBoxConfigurator</parameter>
+        <parameter key="contact_page.layout.class">WellCommerce\Plugin\Contact\Layout\ContactLayoutPage</parameter>
+        <parameter key="twig.extension.contact.class">WellCommerce\Plugin\Contact\Twig\Contact</parameter>
+    </parameters>
+
     <services>
-        <service id="contact.repository" class="WellCommerce\Plugin\Contact\Repository\ContactRepository">
+        <service id="contact.admin.controller" class="%contact.admin.controller.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
-        </service>
-
-        <service id="contact.datagrid" class="WellCommerce\Plugin\Contact\DataGrid\ContactDataGrid">
             <call method="setRepository">
                 <argument type="service" id="contact.repository"/>
             </call>
+        </service>
+
+        <service id="contact.repository" class="%contact.repository.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="contact.form" class="WellCommerce\Plugin\Contact\Form\ContactForm">
+        <service id="contact.datagrid" class="%contact.datagrid.class%">
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="contact.repository"/>
+        </service>
+
+        <service id="contact.form" class="%contact.form.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="contact_box.layout.configurator" class="WellCommerce\Plugin\Contact\Layout\ContactBoxConfigurator">
+        <service id="contact.listener" class="%contact.listener.class%">
+            <argument type="service" id="service_container"/>
+            <tag name="kernel.event_subscriber" />
+        </service>
+
+        <service id="contact_box.layout.configurator" class="%contact_box.layout.configurator.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
             <tag name="layout_box.configurator" />
         </service>
 
-        <service id="contact_page.layout" class="WellCommerce\Plugin\Contact\Layout\ContactLayoutPage">
+        <service id="contact_page.layout" class="%contact_page.layout.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
             <tag name="layout_page" alias="Contact" />
         </service>
 
-        <service id="twig.extension.contact" class="WellCommerce\Plugin\Contact\Twig\Contact">
+        <service id="twig.extension.contact" class="%twig.extension.contact.class%">
             <argument type="service" id="service_container" />
             <tag name="twig.extension" />
         </service>

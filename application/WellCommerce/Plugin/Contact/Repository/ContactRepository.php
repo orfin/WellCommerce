@@ -21,13 +21,10 @@ use WellCommerce\Plugin\Contact\Model\ContactTranslation;
  * @package WellCommerce\Plugin\Contact\AbstractRepository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ContactRepository extends AbstractRepository
+class ContactRepository extends AbstractRepository implements ContactRepositoryInterface
 {
-
     /**
-     * Returns all tax rates
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     * {@inheritdoc}
      */
     public function all()
     {
@@ -35,11 +32,7 @@ class ContactRepository extends AbstractRepository
     }
 
     /**
-     * Returns a single tax rate
-     *
-     * @param $id
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|static
+     * {@inheritdoc}
      */
     public function find($id)
     {
@@ -47,70 +40,54 @@ class ContactRepository extends AbstractRepository
     }
 
     /**
-     * Deletes tax rate by ID
-     *
-     * @param $id
+     * {@inheritdoc}
      */
     public function delete($id)
     {
+        $this->dispatchEvent(ContactRepositoryInterface::PRE_DELETE_EVENT, [], $id);
+
         $this->transaction(function () use ($id) {
             return Contact::destroy($id);
         });
+
+        $this->dispatchEvent(ContactRepositoryInterface::POST_DELETE_EVENT, [], $id);
     }
 
     /**
-     * Saves contact
-     *
-     * @param      $Data
-     * @param null $id
+     * {@inheritdoc}
      */
-    public function save($Data, $id = null)
+    public function save(array $data, $id = null)
     {
-        $this->transaction(function () use ($Data, $id) {
+        $data = $this->dispatchEvent(ContactRepositoryInterface::PRE_SAVE_EVENT, $data, $id);
 
-            $contact = Contact::firstOrNew([
+        $this->transaction(function () use ($data, $id) {
+
+            $contact = Contact::firstOrCreate([
                 'id' => $id
             ]);
 
-            $contact->enabled = $Data['enabled'];
-            $contact->save();
+            $contact->update($data);
 
             foreach ($this->getLanguageIds() as $language) {
 
-                $translation = ContactTranslation::firstOrNew([
+                $translation = ContactTranslation::firstOrCreate([
                     'contact_id'  => $contact->id,
                     'language_id' => $language
                 ]);
 
-                $translation->setTranslationData($Data, $language);
-                $translation->save();
+                $translationData = $translation->getTranslation($data, $language);
+                $translation->update($translationData);
             }
-
         });
+
+        $this->dispatchEvent(ContactRepositoryInterface::POST_SAVE_EVENT, $data, $id);
     }
 
     /**
-     * Returns array containing values needed to populate the form
-     *
-     * @param $id
-     *
-     * @return array
+     * {@inheritdoc}
      */
-    public function getPopulateData($id)
+    public function getAllContactToSelect()
     {
-        $contactData  = $this->find($id);
-        $populateData = [];
-        $accessor     = $this->getPropertyAccessor();
-        $languageData = $contactData->getTranslationData();
-
-        $accessor->setValue($populateData, '[required_data]', [
-            'enabled' => $contactData->enabled
-        ]);
-
-        $accessor->setValue($populateData, '[translation_data]', [
-            'language_data' => $languageData
-        ]);
-
-        return $populateData;
+        return $this->all()->toSelect('id', 'translation.name', $this->getCurrentLanguage());
     }
 }

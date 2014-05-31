@@ -11,8 +11,11 @@
  */
 namespace WellCommerce\Plugin\Contact\Form;
 
+use WellCommerce\Core\Component\Form\AbstractForm;
+use WellCommerce\Core\Component\Form\FormBuilder;
+use WellCommerce\Core\Component\Form\FormInterface;
 use WellCommerce\Core\Form;
-use WellCommerce\Plugin\Contact\Event\ContactFormEvent;
+use WellCommerce\Plugin\Contact\Model\Contact;
 
 /**
  * Class ContactForm
@@ -20,114 +23,124 @@ use WellCommerce\Plugin\Contact\Event\ContactFormEvent;
  * @package WellCommerce\Plugin\Contact\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ContactForm extends Form
+class ContactForm extends AbstractForm implements FormInterface
 {
     /**
-     * Initializes contact Form
-     *
-     * @param array $contactData
-     *
-     * @return Form\Elements\Form
+     * {@inheritdoc}
      */
-    public function init($contactData = [])
+    public function buildForm(FormBuilder $builder, array $options)
     {
-        $form = $this->addForm(Array(
-            'name'   => 'contact',
-            '_action' => '',
-            'method' => 'post'
-        ));
+        $form = $builder->addForm($options);
 
-        $requiredData = $form->addChild($this->addFieldset([
+        $requiredData = $form->addChild($builder->addFieldset([
             'name'  => 'required_data',
             'label' => $this->trans('Required data')
         ]));
 
-        $requiredData->addChild($this->addCheckBox([
+        $requiredData->addChild($builder->addCheckBox([
             'name'  => 'enabled',
             'label' => $this->trans('Enabled'),
         ]));
 
-        $translationData = $form->addChild($this->addFieldset([
+        $translationData = $form->addChild($builder->addFieldset([
             'name'  => 'translation_data',
             'label' => $this->trans('Translations')
         ]));
 
-        $languageData = $translationData->addChild($this->addFieldsetLanguage([
+        $languageData = $translationData->addChild($builder->addFieldsetLanguage([
             'name'      => 'language_data',
             'label'     => $this->trans('Translations'),
             'languages' => $this->getLanguages()
         ]));
 
-        $languageData->addChild($this->addTextField([
+        $languageData->addChild($builder->addTextField([
             'name'  => 'name',
             'label' => $this->trans('Name'),
             'rules' => [
-                $this->addRuleRequired($this->trans('Name is required')),
+                $builder->addRuleRequired($this->trans('Name is required')),
             ]
         ]));
 
-        $languageData->addChild($this->addTextField([
+        $languageData->addChild($builder->addTextField([
             'name'  => 'email',
             'label' => $this->trans('E-mail'),
             'rules' => [
-                $this->addRuleRequired($this->trans('E-mail is required')),
-                $this->addRuleEmail('E-mail is not valid')
+                $builder->addRuleRequired($this->trans('E-mail is required')),
+                $builder->addRuleEmail('E-mail is not valid')
             ]
         ]));
 
-        $languageData->addChild($this->addTextField([
+        $languageData->addChild($builder->addTextField([
             'name'  => 'phone',
             'label' => $this->trans('Phone'),
         ]));
 
-        $languageData->addChild($this->addTextField([
+        $languageData->addChild($builder->addTextField([
             'name'  => 'street',
             'label' => $this->trans('Street'),
         ]));
 
-        $languageData->addChild($this->addTextField([
+        $languageData->addChild($builder->addTextField([
             'name'  => 'streetno',
             'label' => $this->trans('Street number'),
         ]));
 
-        $languageData->addChild($this->addTextField([
+        $languageData->addChild($builder->addTextField([
             'name'  => 'flatno',
             'label' => $this->trans('Flat number'),
         ]));
 
-        $languageData->addChild($this->addTextField([
+        $languageData->addChild($builder->addTextField([
             'name'  => 'province',
             'label' => $this->trans('Province'),
         ]));
 
-        $languageData->addChild($this->addTextField([
+        $languageData->addChild($builder->addTextField([
             'name'  => 'postcode',
             'label' => $this->trans('Post code'),
         ]));
 
-        $languageData->addChild($this->addTextField([
+        $languageData->addChild($builder->addTextField([
             'name'  => 'city',
             'label' => $this->trans('City'),
         ]));
 
-        $languageData->addChild($this->addSelect([
+        $languageData->addChild($builder->addSelect([
             'name'    => 'country',
             'label'   => $this->trans('Country'),
-            'options' => $this->makeOptions($this->get('country.repository')->all())
+            'options' => $builder->makeOptions($this->get('country.repository')->all())
         ]));
 
-        $form->addFilter($this->addFilterNoCode());
-
-        $form->addFilter($this->addFilterTrim());
-
-        $form->addFilter($this->addFilterSecure());
-
-        $event = new ContactFormEvent($form, $contactData);
-
-        $this->getDispatcher()->dispatch(ContactFormEvent::FORM_INIT_EVENT, $event);
-
-        $form->populate($event->getPopulateData());
+        $form->addFilters([
+            $builder->addFilterNoCode(),
+            $builder->addFilterTrim(),
+            $builder->addFilterSecure()
+        ]);
 
         return $form;
+    }
+
+    /**
+     * Prepares form data using retrieved model
+     *
+     * @param Contact $contact Model
+     *
+     * @return array
+     */
+    public function prepareData(Contact $contact)
+    {
+        $formData     = [];
+        $accessor     = $this->getPropertyAccessor();
+        $languageData = $contact->getTranslationData();
+
+        $accessor->setValue($formData, '[required_data]', [
+            'enabled' => $contact->enabled
+        ]);
+
+        $accessor->setValue($formData, '[translation_data]', [
+            'language_data' => $languageData
+        ]);
+
+        return $formData;
     }
 }

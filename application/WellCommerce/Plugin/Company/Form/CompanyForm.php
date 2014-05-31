@@ -14,7 +14,6 @@ namespace WellCommerce\Plugin\Company\Form;
 use WellCommerce\Core\Component\Form\AbstractForm;
 use WellCommerce\Core\Component\Form\FormBuilder;
 use WellCommerce\Core\Component\Form\FormInterface;
-use WellCommerce\Core\Component\Model\ModelInterface;
 use WellCommerce\Plugin\Company\Model\Company;
 
 /**

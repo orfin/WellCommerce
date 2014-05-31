@@ -11,7 +11,8 @@
  */
 namespace WellCommerce\Plugin\Contact\Controller\Admin;
 
-use WellCommerce\Core\Controller\AbstractAdminController;
+use WellCommerce\Core\Component\Controller\AbstractAdminController;
+use WellCommerce\Plugin\Contact\Repository\ContactRepositoryInterface;
 
 /**
  * Class ContactController
@@ -21,35 +22,72 @@ use WellCommerce\Core\Controller\AbstractAdminController;
  */
 class ContactController extends AbstractAdminController
 {
+    private $repository;
+
     /**
      * {@inheritdoc}
      */
-    protected function getDataGrid()
+    public function indexAction()
     {
-        return $this->get('contact.datagrid');
+        return [
+            'datagrid' => $this->createDataGrid($this->get('contact.datagrid'))
+        ];
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function getRepository()
+    public function addAction()
     {
-        return $this->get('contact.repository');
+        $form = $this->createForm($this->get('contact.form'), null, [
+            'name' => 'add_contact',
+        ]);
+
+        if ($form->isValid()) {
+            $this->repository->save($form->getSubmitValuesFlat());
+
+            return $this->redirect($this->generateUrl('admin.contact.index'));
+        }
+
+        return [
+            'form' => $form
+        ];
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function getForm()
+    public function editAction($id)
     {
-        return $this->get('contact.form');
+        $model = $this->repository->find($id);
+
+        $form = $this->createForm($this->get('contact.form'), $model, [
+            'name' => 'edit_contact',
+        ]);
+
+        if ($form->isValid()) {
+            $this->repository->save($form->getSubmitValuesFlat(), $id);
+
+            if ($form->isAction('continue')) {
+                return $this->redirect($this->generateUrl('admin.contact.edit', ['id' => $model->id]));
+            }
+
+            return $this->redirect($this->generateUrl('admin.contact.index'));
+        }
+
+        return [
+            'contact' => $model,
+            'form'    => $form
+        ];
     }
 
     /**
-     * {@inheritdoc}
+     * Sets contact repository object
+     *
+     * @param ContactRepositoryInterface $repository
      */
-    protected function getDefaultRoute()
+    public function setRepository(ContactRepositoryInterface $repository)
     {
-        return 'admin.contact.index';
+        $this->repository = $repository;
     }
 }
