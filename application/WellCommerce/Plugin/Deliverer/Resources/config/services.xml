@@ -8,6 +8,7 @@
         <parameter key="deliverer.repository.class">WellCommerce\Plugin\Deliverer\Repository\DelivererRepository</parameter>
         <parameter key="deliverer.datagrid.class">WellCommerce\Plugin\Deliverer\DataGrid\DelivererDataGrid</parameter>
         <parameter key="deliverer.form.class">WellCommerce\Plugin\Deliverer\Form\DelivererForm</parameter>
+        <parameter key="deliverer.listener.class">WellCommerce\Plugin\Deliverer\EventListener\DelivererListener</parameter>
     </parameters>
     
     <services>
@@ -18,12 +19,6 @@
             <call method="setRepository">
                 <argument type="service" id="deliverer.repository"/>
             </call>
-            <call method="setDataGrid">
-                <argument type="service" id="deliverer.datagrid"/>
-            </call>
-            <call method="setFormBuilder">
-                <argument type="service" id="deliverer.form"/>
-            </call>
         </service>
         
         <service id="deliverer.repository" class="%deliverer.repository.class%">
@@ -33,9 +28,8 @@
         </service>
         
         <service id="deliverer.datagrid" class="%deliverer.datagrid.class%">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="deliverer.repository"/>
         </service>
 
         <service id="deliverer.form" class="%deliverer.form.class%">
@@ -44,5 +38,9 @@
             </call>
         </service>
 
+        <service id="deliverer.listener" class="%deliverer.listener.class%">
+            <argument type="service" id="service_container"/>
+            <tag name="kernel.event_subscriber" />
+        </service>
     </services>
 </container>

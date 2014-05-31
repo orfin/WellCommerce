@@ -12,7 +12,6 @@
 namespace WellCommerce\Plugin\Producer\Controller\Admin;
 
 use WellCommerce\Core\Component\Controller\AbstractAdminController;
-use WellCommerce\Plugin\Producer\DataGrid\Config;
 use WellCommerce\Plugin\Producer\Repository\ProducerRepositoryInterface;
 
 /**

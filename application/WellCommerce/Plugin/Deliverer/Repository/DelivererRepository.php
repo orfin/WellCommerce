@@ -11,7 +11,6 @@
  */
 namespace WellCommerce\Plugin\Deliverer\Repository;
 
-use WellCommerce\Core\Component\Repository\RepositoryInterface;
 use WellCommerce\Core\Component\Repository\AbstractRepository;
 use WellCommerce\Plugin\Deliverer\Model\Deliverer;
 use WellCommerce\Plugin\Deliverer\Model\DelivererTranslation;
@@ -22,13 +21,10 @@ use WellCommerce\Plugin\Deliverer\Model\DelivererTranslation;
  * @package WellCommerce\Plugin\Deliverer\AbstractRepository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class DelivererRepository extends AbstractRepository implements RepositoryInterface
+class DelivererRepository extends AbstractRepository implements DelivererRepositoryInterface
 {
-
     /**
-     * Returns all tax rates
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     * {@inheritdoc}
      */
     public function all()
     {
@@ -36,11 +32,7 @@ class DelivererRepository extends AbstractRepository implements RepositoryInterf
     }
 
     /**
-     * Returns a single tax rate
-     *
-     * @param $id
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|static
+     * {@inheritdoc}
      */
     public function find($id)
     {
@@ -48,68 +40,50 @@ class DelivererRepository extends AbstractRepository implements RepositoryInterf
     }
 
     /**
-     * Deletes tax rate by ID
-     *
-     * @param $id
+     * {@inheritdoc}
      */
     public function delete($id)
     {
+        $this->dispatchEvent(DelivererRepositoryInterface::PRE_DELETE_EVENT, [], $id);
+
         $this->transaction(function () use ($id) {
             return Deliverer::destroy($id);
         });
+
+        $this->dispatchEvent(DelivererRepositoryInterface::POST_DELETE_EVENT, [], $id);
     }
 
     /**
-     * Saves deliverer
-     *
-     * @param      $Data
-     * @param null $id
+     * {@inheritdoc}
      */
-    public function save(array $Data, $id = null)
+    public function save(array $data, $id = null)
     {
-        $this->transaction(function () use ($Data, $id) {
-            $deliverer = Deliverer::firstOrNew([
+        $data = $this->dispatchEvent(DelivererRepositoryInterface::PRE_SAVE_EVENT, $data, $id);
+
+        $this->transaction(function () use ($data, $id) {
+            $deliverer = Deliverer::firstOrCreate([
                 'id' => $id
             ]);
 
-            $deliverer->save();
+            $deliverer->update();
 
-            foreach ($Data['name'] as $languageId => $name) {
+            foreach ($this->getLanguageIds() as $language) {
 
-                $translation = DelivererTranslation::firstOrNew([
+                $translation = DelivererTranslation::firstOrCreate([
                     'deliverer_id' => $deliverer->id,
-                    'language_id'  => $languageId
+                    'language_id'  => $language
                 ]);
 
-                $translation->name = $name;
-
-                $translation->save();
+                $translationData = $translation->getTranslation($data, $language);
+                $translation->update($translationData);
             }
         });
+
+        $this->dispatchEvent(DelivererRepositoryInterface::POST_SAVE_EVENT, $data, $id);
     }
 
     /**
-     * Returns array containing values needed to populate the form
-     *
-     * @param $id
-     *
-     * @return array
-     */
-    public function getPopulateData($id)
-    {
-        $delivererData = $this->find($id);
-
-        return [
-            'required_data' => [
-                'language_data' => $delivererData->getLanguageData()
-            ]
-        ];
-    }
-
-    /**
-     * Returns Collection as key-value pairs ready to use in selects
-     *
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getAllDelivererToSelect()
     {

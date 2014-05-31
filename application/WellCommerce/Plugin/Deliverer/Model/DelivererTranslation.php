@@ -31,4 +31,12 @@ class DelivererTranslation extends AbstractModel
     protected $fillable = ['deliverer_id', 'language_id', 'name'];
 
     protected $translatable = ['name'];
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getValidationXmlMapping()
+    {
+        return __DIR__ . '/../Resources/config/validation.xml';
+    }
 }

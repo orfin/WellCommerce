@@ -11,9 +11,10 @@
  */
 namespace WellCommerce\Plugin\Deliverer\Form;
 
-use WellCommerce\Core\Component\Form\AbstractFormBuilder;
+use WellCommerce\Core\Component\Form\AbstractForm;
+use WellCommerce\Core\Component\Form\FormBuilder;
 use WellCommerce\Core\Component\Form\FormInterface;
-use WellCommerce\Plugin\Deliverer\Event\DelivererFormEvent;
+use WellCommerce\Plugin\Deliverer\Model\Deliverer;
 
 /**
  * Class DelivererForm
@@ -21,32 +22,34 @@ use WellCommerce\Plugin\Deliverer\Event\DelivererFormEvent;
  * @package WellCommerce\Plugin\Deliverer\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class DelivererForm extends AbstractFormBuilder implements FormInterface
+class DelivererForm extends AbstractForm implements FormInterface
 {
-
-    public function init($delivererData = [])
+    /**
+     * {@inheritdoc}
+     */
+    public function buildForm(FormBuilder $builder, array $options)
     {
-        $form = $this->addForm([
+        $form = $builder->addForm([
             'name' => 'deliverer'
         ]);
 
-        $requiredData = $form->addChild($this->addFieldset([
+        $requiredData = $form->addChild($builder->addFieldset([
             'name'  => 'required_data',
             'label' => $this->trans('Basic settings')
         ]));
 
-        $languageData = $requiredData->addChild($this->addFieldsetLanguage([
+        $languageData = $requiredData->addChild($builder->addFieldsetLanguage([
             'name'      => 'language_data',
             'label'     => $this->trans('Language settings'),
             'languages' => $this->getLanguages()
         ]));
 
-        $languageData->addChild($this->addTextField([
+        $languageData->addChild($builder->addTextField([
             'name'  => 'name',
             'label' => $this->trans('Name'),
             'rules' => [
-                $this->addRuleRequired($this->trans('Name is required')),
-                $this->addRuleUnique($this->trans('Deliverer already exists'),
+                $builder->addRuleRequired($this->trans('Name is required')),
+                $builder->addRuleUnique($this->trans('Deliverer already exists'),
                     [
                         'table'   => 'deliverer_translation',
                         'column'  => 'name',
@@ -59,16 +62,28 @@ class DelivererForm extends AbstractFormBuilder implements FormInterface
             ]
         ]));
 
-        $form->addFilter($this->addFilterNoCode());
-        $form->addFilter($this->addFilterTrim());
-        $form->addFilter($this->addFilterSecure());
-
-        $event = new DelivererFormEvent($form, $delivererData);
-
-        $this->getDispatcher()->dispatch(DelivererFormEvent::FORM_INIT_EVENT, $event);
-
-        $form->populate($event->getPopulateData());
+        $form->addFilters([
+            $builder->addFilterTrim(),
+            $builder->addFilterSecure(),
+            $builder->addFilterNoCode()
+        ]);
 
         return $form;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function prepareData(Deliverer $deliverer)
+    {
+        $populateData = [];
+        $accessor     = $this->getPropertyAccessor();
+        $languageData = $deliverer->getTranslationData();
+
+        $accessor->setValue($populateData, '[required_data]', [
+            'language_data' => $languageData
+        ]);
+
+        return $populateData;
     }
 }

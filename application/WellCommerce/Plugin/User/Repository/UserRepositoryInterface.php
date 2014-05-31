@@ -24,6 +24,7 @@ interface UserRepositoryInterface
     const POST_DELETE_EVENT = 'user.repository.post_delete';
     const PRE_SAVE_EVENT    = 'user.repository.pre_save';
     const POST_SAVE_EVENT   = 'user.repository.post_save';
+    const LOGIN_SUCCEED     = 'user.login.succeed';
 
     /**
      * Returns all users as a collection

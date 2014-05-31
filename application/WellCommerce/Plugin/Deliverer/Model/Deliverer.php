@@ -60,4 +60,12 @@ class Deliverer extends AbstractModel implements TranslatableModelInterface
 
         return $languageData;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getValidationXmlMapping()
+    {
+        return __DIR__ . '/../Resources/config/validation.xml';
+    }
 }

@@ -12,7 +12,6 @@
 namespace WellCommerce\Plugin\Producer\Form;
 
 use WellCommerce\Core\Component\Form\AbstractForm;
-use WellCommerce\Core\Component\Form\AbstractFormBuilder;
 use WellCommerce\Core\Component\Form\FormBuilder;
 use WellCommerce\Core\Component\Form\FormInterface;
 use WellCommerce\Core\Component\Model\ModelInterface;
