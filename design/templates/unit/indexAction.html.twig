@@ -3,8 +3,7 @@
     <h2>{% trans %}Units{% endtrans %}</h2>
 
     <ul class="possibilities">
-        <li><a href="{{ path('admin.unit.add') }}" class="button" title="{% trans %}Add{% endtrans %}"><span>{% trans %}
-                    Add{% endtrans %}</span></a></li>
+        <li><a href="{{ path('admin.unit.add') }}" class="button" title="{% trans %}Add{% endtrans %}"><span>{% trans %}Add{% endtrans %}</span></a></li>
     </ul>
 
     {{ datagrid_renderer(datagrid) }}

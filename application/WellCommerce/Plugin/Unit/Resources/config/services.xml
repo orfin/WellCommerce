@@ -3,26 +3,44 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
+    <parameters>
+        <parameter key="unit.admin.controller.class">WellCommerce\Plugin\Unit\Controller\Admin\UnitController</parameter>
+        <parameter key="unit.repository.class">WellCommerce\Plugin\Unit\Repository\UnitRepository</parameter>
+        <parameter key="unit.datagrid.class">WellCommerce\Plugin\Unit\DataGrid\UnitDataGrid</parameter>
+        <parameter key="unit.form.class">WellCommerce\Plugin\Unit\Form\UnitForm</parameter>
+        <parameter key="unit.listener.class">WellCommerce\Plugin\Unit\EventListener\UnitListener</parameter>
+    </parameters>
+
     <services>
-        <service id="unit.repository" class="WellCommerce\Plugin\Unit\Repository\UnitRepository">
+        <service id="unit.admin.controller" class="%unit.admin.controller.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
-        </service>
-
-        <service id="unit.datagrid" class="WellCommerce\Plugin\Unit\DataGrid\UnitDataGrid">
             <call method="setRepository">
                 <argument type="service" id="unit.repository"/>
             </call>
+        </service>
+
+        <service id="unit.repository" class="%unit.repository.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="unit.form" class="WellCommerce\Plugin\Unit\Form\UnitForm">
+        <service id="unit.datagrid" class="%unit.datagrid.class%">
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="unit.repository"/>
+        </service>
+
+        <service id="unit.form" class="%unit.form.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
+        </service>
+
+        <service id="unit.listener" class="%unit.listener.class%">
+            <argument type="service" id="service_container"/>
+            <tag name="kernel.event_subscriber" />
         </service>
     </services>
 </container>

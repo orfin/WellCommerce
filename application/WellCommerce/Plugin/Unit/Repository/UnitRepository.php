@@ -16,18 +16,15 @@ use WellCommerce\Plugin\Unit\Model\Unit;
 use WellCommerce\Plugin\Unit\Model\UnitTranslation;
 
 /**
- * Class UnitAbstractRepository
+ * Class UnitRepository
  *
- * @package WellCommerce\Plugin\Unit\AbstractRepository
+ * @package WellCommerce\Plugin\Unit\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class UnitRepository extends AbstractRepository
+class UnitRepository extends AbstractRepository implements UnitRepositoryInterface
 {
-
     /**
-     * Returns Unit Collection
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     * {@inheritdoc}
      */
     public function all()
     {
@@ -35,11 +32,7 @@ class UnitRepository extends AbstractRepository
     }
 
     /**
-     * Returns a Unit Model
-     *
-     * @param $id
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|static
+     * {@inheritdoc}
      */
     public function find($id)
     {
@@ -47,65 +40,50 @@ class UnitRepository extends AbstractRepository
     }
 
     /**
-     * Deletes Unit Model
-     *
-     * @param $id
+     * {@inheritdoc}
      */
     public function delete($id)
     {
-        $this->transaction(function () use ($id) {
-            return Unit::destroy($id);
-        });
-
+        $unit = $this->find($id);
+        $unit->delete();
+        $this->dispatchEvent(UnitRepositoryInterface::POST_DELETE_EVENT, $unit);
     }
 
     /**
-     * Saves Unit
-     *
-     * @param      $Data
-     * @param null $id
+     * {@inheritdoc}
      */
-    public function save($Data, $id = null)
+    public function save(array $data, $id = null)
     {
-        $this->transaction(function () use ($Data, $id) {
+        $this->transaction(function () use ($data, $id) {
 
-            $unit = Unit::firstOrNew([
+            $unit = Unit::firstOrCreate([
                 'id' => $id
             ]);
 
-            $unit->save();
+            $data = $this->dispatchEvent(UnitRepositoryInterface::PRE_SAVE_EVENT, $unit, $data);
+
+            $unit->update($data);
 
             foreach ($this->getLanguageIds() as $language) {
 
-                $translation = UnitTranslation::firstOrNew([
-                    'unit_id'     => $unit->id,
+                $translation = UnitTranslation::firstOrCreate([
+                    'unit_id'      => $unit->id,
                     'language_id' => $language
                 ]);
 
-                $translation->setTranslationData($Data, $language);
-                $translation->save();
+                $translationData = $translation->getTranslation($data, $language);
+                $translation->update($translationData);
             }
+
+            $this->dispatchEvent(UnitRepositoryInterface::POST_SAVE_EVENT, $unit, $data);
         });
     }
 
     /**
-     * Returns array containing values needed to populate the form
-     *
-     * @param $id
-     *
-     * @return array
+     * {@inheritdoc}
      */
-    public function getPopulateData($id)
+    public function getAllUnitToSelect()
     {
-        $unitData = $this->find($id);
-        $populateData     = [];
-        $accessor         = $this->getPropertyAccessor();
-        $languageData     = $unitData->getTranslationData();
-
-        $accessor->setValue($populateData, '[required_data]', [
-            'language_data' => $languageData,
-        ]);
-
-        return $populateData;
+        return $this->all()->toSelect('id', 'translation.name', $this->getCurrentLanguage());
     }
 }

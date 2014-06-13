@@ -11,7 +11,9 @@
  */
 namespace WellCommerce\Plugin\Unit\Controller\Admin;
 
-use WellCommerce\Core\Controller\AbstractAdminController;
+use Symfony\Component\Validator\Exception\ValidatorException;
+use WellCommerce\Core\Component\Controller\AbstractAdminController;
+use WellCommerce\Plugin\Unit\Repository\UnitRepositoryInterface;
 
 /**
  * Class UnitController
@@ -21,35 +23,80 @@ use WellCommerce\Core\Controller\AbstractAdminController;
  */
 class UnitController extends AbstractAdminController
 {
+    private $repository;
+
     /**
      * {@inheritdoc}
      */
-    protected function getDataGrid()
+    public function indexAction()
     {
-        return $this->get('unit.datagrid');
+        return [
+            'datagrid' => $this->createDataGrid($this->get('unit.datagrid'))
+        ];
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function getRepository()
+    public function addAction()
     {
-        return $this->get('unit.repository');
+        $form = $this->createForm($this->get('unit.form'), null, [
+            'name' => 'add_unit'
+        ]);
+
+        if ($form->isValid()) {
+            try {
+                $this->repository->save($form->getSubmitValuesFlat());
+                $this->addSuccessMessage('Changes saved successfully.');
+
+                return $this->redirect($this->getDefaultUrl());
+
+            } catch (ValidatorException $exception) {
+                $this->addErrorMessage($exception->getMessage());
+            }
+        }
+
+        return [
+            'form' => $form
+        ];
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function getForm()
+    public function editAction($id)
     {
-        return $this->get('unit.form');
+        $model = $this->repository->find($id);
+
+        $form = $this->createForm($this->get('unit.form'), $model, [
+            'name' => 'edit_unit'
+        ]);
+
+        if ($form->isValid()) {
+            try {
+                $this->repository->save($form->getSubmitValuesFlat(), $id);
+                $this->addSuccessMessage('Changes saved successfully.');
+
+                return $this->redirect($this->getDefaultUrl());
+
+            } catch (ValidatorException $exception) {
+                $this->addErrorMessage($exception->getMessage());
+            }
+        }
+
+        return [
+            'unit' => $model,
+            'form'    => $form
+        ];
     }
 
     /**
-     * {@inheritdoc}
+     * Sets unit repository object
+     *
+     * @param UnitRepositoryInterface $repository
      */
-    protected function getDefaultRoute()
+    public function setRepository(UnitRepositoryInterface $repository)
     {
-        return 'admin.unit.index';
+        $this->repository = $repository;
     }
 }

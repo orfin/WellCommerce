@@ -11,8 +11,10 @@
  */
 namespace WellCommerce\Plugin\Unit\Form;
 
-use WellCommerce\Core\Form,
-    WellCommerce\Plugin\Unit\Event\UnitFormEvent;
+use WellCommerce\Core\Component\Form\AbstractForm;
+use WellCommerce\Core\Component\Form\FormBuilder;
+use WellCommerce\Core\Component\Form\FormInterface;
+use WellCommerce\Plugin\Unit\Model\Unit;
 
 /**
  * Class UnitForm
@@ -20,40 +22,32 @@ use WellCommerce\Core\Form,
  * @package WellCommerce\Plugin\Unit\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class UnitForm extends Form
+class UnitForm extends AbstractForm implements FormInterface
 {
     /**
-     * Initializes UnitForm
-     *
-     * @param array $unitData
-     *
-     * @return Form\Elements\Form
+     * {@inheritdoc}
      */
-    public function init($unitData = [])
+    public function buildForm(FormBuilder $builder, array $options)
     {
-        $form = $this->addForm(Array(
-            'name'   => 'unit',
-            '_action' => '',
-            'method' => 'post'
-        ));
+        $form = $builder->addForm($options);
 
-        $requiredData = $form->addChild($this->addFieldset([
+        $requiredData = $form->addChild($builder->addFieldset([
             'name'  => 'required_data',
             'label' => $this->trans('Required data')
         ]));
 
-        $languageData = $requiredData->addChild($this->addFieldsetLanguage([
+        $languageData = $requiredData->addChild($builder->addFieldsetLanguage([
             'name'      => 'language_data',
             'label'     => $this->trans('Translations'),
             'languages' => $this->getLanguages()
         ]));
 
-        $languageData->addChild($this->addTextField([
+        $languageData->addChild($builder->addTextField([
             'name'  => 'name',
             'label' => $this->trans('Name'),
             'rules' => [
-                $this->addRuleRequired($this->trans('Name is required')),
-                $this->addRuleLanguageUnique($this->trans('Name already exists'),
+                $builder->addRuleRequired($this->trans('Name is required')),
+                $builder->addRuleLanguageUnique($this->trans('Name already exists'),
                     [
                         'table'   => 'unit_translation',
                         'column'  => 'name',
@@ -66,18 +60,28 @@ class UnitForm extends Form
             ]
         ]));
 
-        $form->addFilter($this->addFilterNoCode());
-
-        $form->addFilter($this->addFilterTrim());
-
-        $form->addFilter($this->addFilterSecure());
-
-        $event = new UnitFormEvent($form, $unitData);
-
-        $this->getDispatcher()->dispatch(UnitFormEvent::FORM_INIT_EVENT, $event);
-
-        $form->populate($event->getPopulateData());
+        $form->addFilters([
+            $builder->addFilterNoCode(),
+            $builder->addFilterTrim(),
+            $builder->addFilterSecure()
+        ]);
 
         return $form;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function prepareData(Unit $unit)
+    {
+        $populateData = [];
+        $accessor     = $this->getPropertyAccessor();
+        $languageData = $unit->translation->getTranslations();
+
+        $accessor->setValue($populateData, '[required_data]', [
+            'language_data' => $languageData
+        ]);
+
+        return $populateData;
     }
 }

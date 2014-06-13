@@ -11,6 +11,8 @@
  */
 namespace WellCommerce\Plugin\Unit\Model;
 
+use WellCommerce\Core\Component\Model\AbstractModel;
+use WellCommerce\Core\Component\Model\ModelInterface;
 use WellCommerce\Core\Model;
 
 /**
@@ -19,15 +21,16 @@ use WellCommerce\Core\Model;
  * @package WellCommerce\Plugin\Unit\Model
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class UnitTranslation extends Model
+class UnitTranslation extends AbstractModel implements ModelInterface
 {
     protected $table = 'unit_translation';
-
-    public $timestamps = true;
-
-    protected $softDelete = false;
-
     protected $fillable = ['unit_id', 'language_id'];
 
-    protected $translatable = ['name'];
+    /**
+     * {@inheritdoc}
+     */
+    public function getValidationXmlMapping()
+    {
+        return __DIR__ . '/../Resources/config/validation.xml';
+    }
 }
