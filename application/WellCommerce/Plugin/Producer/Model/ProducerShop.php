@@ -21,13 +21,7 @@ use WellCommerce\Core\Component\Model\AbstractModel;
  */
 class ProducerShop extends AbstractModel
 {
-
     protected $table = 'producer_shop';
-
-    public $timestamps = true;
-
-    protected $softDelete = false;
-
     protected $fillable = ['producer_id', 'shop_id'];
 
     /**

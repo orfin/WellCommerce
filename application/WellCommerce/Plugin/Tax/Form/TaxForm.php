@@ -11,8 +11,11 @@
  */
 namespace WellCommerce\Plugin\Tax\Form;
 
-use WellCommerce\Core\Form,
-    WellCommerce\Plugin\Tax\Event\TaxFormEvent;
+use WellCommerce\Core\Component\Form\AbstractForm;
+use WellCommerce\Core\Component\Form\FormBuilder;
+use WellCommerce\Core\Component\Form\FormInterface;
+use WellCommerce\Plugin\Tax\Model\Tax;
+
 
 /**
  * Class TaxForm
@@ -20,39 +23,31 @@ use WellCommerce\Core\Form,
  * @package WellCommerce\Plugin\Tax\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class TaxForm extends Form
+class TaxForm extends AbstractForm implements FormInterface
 {
-
     /**
-     * Initializes TaxForm
-     *
-     * @param array $taxData
-     *
-     * @return Form\Elements\Form
+     * {@inheritdoc}
      */
-    public function init($taxData = [])
+    public function buildForm(FormBuilder $builder, array $options)
     {
-        $form = $this->addForm([
-            'name' => 'tax'
-        ]);
+        $form = $builder->addForm($options);
 
-        $requiredData = $form->addChild($this->addFieldset([
+        $requiredData = $form->addChild($builder->addFieldset([
             'name'  => 'required_data',
             'label' => $this->trans('Basic settings')
         ]));
 
-        $languageData = $requiredData->addChild($this->addFieldsetLanguage([
-            'name'      => 'language_data',
-            'label'     => $this->trans('Language settings'),
-            'languages' => $this->getLanguages()
+        $languageData = $requiredData->addChild($builder->addFieldsetLanguage([
+            'name'  => 'language_data',
+            'label' => $this->trans('Language settings')
         ]));
 
-        $languageData->addChild($this->addTextField([
+        $languageData->addChild($builder->addTextField([
             'name'  => 'name',
             'label' => $this->trans('Name'),
             'rules' => [
-                $this->addRuleRequired($this->trans('Name is required')),
-                $this->addRuleUnique($this->trans('Tax rate already exists'),
+                $builder->addRuleRequired($this->trans('Name is required')),
+                $builder->addRuleUnique($this->trans('Tax rate already exists'),
                     [
                         'table'   => 'tax_translation',
                         'column'  => 'name',
@@ -65,13 +60,13 @@ class TaxForm extends Form
             ]
         ]));
 
-        $requiredData->addChild($this->addTextField([
+        $requiredData->addChild($builder->addTextField([
             'name'    => 'value',
             'label'   => $this->trans('Tax value'),
             'comment' => $this->trans('Tax value given in %'),
             'rules'   => [
-                $this->addRuleRequired($this->trans('Tax value is required')),
-                $this->addRuleUnique($this->trans('Tax value already exists'),
+                $builder->addRuleRequired($this->trans('Tax value is required')),
+                $builder->addRuleUnique($this->trans('Tax value already exists'),
                     [
                         'table'   => 'tax',
                         'column'  => 'value',
@@ -84,20 +79,33 @@ class TaxForm extends Form
             ],
             'suffix'  => '%',
             'filters' => [
-                $this->addFilterCommaToDotChanger()
+                $builder->addFilterCommaToDotChanger()
             ]
         ]));
 
-        $form->addFilter($this->addFilterNoCode());
-        $form->addFilter($this->addFilterTrim());
-        $form->addFilter($this->addFilterSecure());
-
-        $event = new TaxFormEvent($form, $taxData);
-
-        $this->getDispatcher()->dispatch(TaxFormEvent::FORM_INIT_EVENT, $event);
-
-        $form->Populate($event->getPopulateData());
+        $form->addFilters([
+            $builder->addFilterNoCode(),
+            $builder->addFilterTrim(),
+            $builder->addFilterSecure()
+        ]);
 
         return $form;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function prepareData(Tax $tax)
+    {
+        $populateData = [];
+        $accessor     = $this->getPropertyAccessor();
+        $languageData = $tax->translation->getTranslations();
+
+        $accessor->setValue($populateData, '[required_data]', [
+            'value'         => $tax->value,
+            'language_data' => $languageData
+        ]);
+
+        return $populateData;
     }
 }

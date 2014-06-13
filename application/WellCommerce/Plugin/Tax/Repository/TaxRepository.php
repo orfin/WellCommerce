@@ -16,17 +16,15 @@ use WellCommerce\Plugin\Tax\Model\Tax;
 use WellCommerce\Plugin\Tax\Model\TaxTranslation;
 
 /**
- * Class TaxAbstractRepository
+ * Class TaxRepository
  *
- * @package WellCommerce\Plugin\Tax\AbstractRepository
+ * @package WellCommerce\Plugin\Tax\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class TaxRepository extends AbstractRepository
+class TaxRepository extends AbstractRepository implements TaxRepositoryInterface
 {
     /**
-     * Returns all tax rates
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     * {@inheritdoc}
      */
     public function all()
     {
@@ -34,11 +32,7 @@ class TaxRepository extends AbstractRepository
     }
 
     /**
-     * Returns a single tax rate
-     *
-     * @param $id
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|static
+     * {@inheritdoc}
      */
     public function find($id)
     {
@@ -46,70 +40,47 @@ class TaxRepository extends AbstractRepository
     }
 
     /**
-     * Deletes tax rate by ID
-     *
-     * @param $id
+     * {@inheritdoc}
      */
     public function delete($id)
     {
-        $this->transaction(function () use ($id) {
-            return Tax::destroy($id);
-        });
+        $tax = $this->find($id);
+        $tax->delete();
+        $this->dispatchEvent(TaxRepositoryInterface::POST_DELETE_EVENT, $tax);
     }
 
     /**
-     * Saves tax rate
-     *
-     * @param      $Data
-     * @param null $id
+     * {@inheritdoc}
      */
-    public function save($Data, $id = null)
+    public function save(array $data, $id = null)
     {
-        $this->transaction(function () use ($Data, $id) {
+        $this->transaction(function () use ($data, $id) {
 
-            $tax = Tax::firstOrNew([
+            $tax = Tax::firstOrCreate([
                 'id' => $id
             ]);
 
-            $tax->value = $Data['value'];
-            $tax->save();
+            $data = $this->dispatchEvent(TaxRepositoryInterface::PRE_SAVE_EVENT, $tax, $data);
 
-            foreach ($Data['name'] as $languageId => $name) {
+            $tax->update($data);
 
-                $translation = TaxTranslation::firstOrNew([
+            foreach ($this->getLanguageIds() as $language) {
+
+                $translation = TaxTranslation::firstOrCreate([
                     'tax_id'      => $tax->id,
-                    'language_id' => $languageId
+                    'language_id' => $language
                 ]);
 
-                $translation->name = $name;
-                $translation->save();
+                $translationData = $translation->getTranslation($data, $language);
+                $translation->update($translationData);
             }
+
+            $this->dispatchEvent(TaxRepositoryInterface::POST_SAVE_EVENT, $tax, $data);
         });
     }
 
     /**
-     * Returns array containing values needed to populate the form
-     *
-     * @param $id
-     *
-     * @return array
-     */
-    public function getPopulateData($id)
-    {
-        $taxData = $this->find($id);
-
-        return [
-            'required_data' => [
-                'value'         => $taxData->value,
-                'language_data' => $taxData->getLanguageData()
-            ]
-        ];
-    }
-
-    /**
-     * Returns Collection as ke-value pairs ready to use in selects
-     *
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getAllTaxToSelect()
     {

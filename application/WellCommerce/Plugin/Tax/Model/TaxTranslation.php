@@ -21,13 +21,7 @@ use WellCommerce\Core\Component\Model\AbstractModel;
  */
 class TaxTranslation extends AbstractModel
 {
-
     protected $table = 'tax_translation';
-
-    public $timestamps = true;
-
-    protected $softDelete = false;
-    
     protected $fillable = ['tax_id', 'language_id', 'name'];
 
     public function tax()
@@ -38,5 +32,13 @@ class TaxTranslation extends AbstractModel
     public function language()
     {
         return $this->belongsTo('WellCommerce\Plugin\Tax\Model\Language');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getValidationXmlMapping()
+    {
+        return __DIR__ . '/../Resources/config/validation.xml';
     }
 }

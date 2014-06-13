@@ -11,7 +11,9 @@
  */
 namespace WellCommerce\Plugin\Tax\Controller\Admin;
 
-use WellCommerce\Core\Controller\AbstractAdminController;
+use Symfony\Component\Validator\Exception\ValidatorException;
+use WellCommerce\Core\Component\Controller\AbstractAdminController;
+use WellCommerce\Plugin\Tax\Repository\TaxRepositoryInterface;
 
 /**
  * Class TaxController
@@ -21,35 +23,80 @@ use WellCommerce\Core\Controller\AbstractAdminController;
  */
 class TaxController extends AbstractAdminController
 {
+    private $repository;
+
     /**
      * {@inheritdoc}
      */
-    protected function getDataGrid()
+    public function indexAction()
     {
-        return $this->get('tax.datagrid');
+        return [
+            'datagrid' => $this->createDataGrid($this->get('tax.datagrid'))
+        ];
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function getRepository()
+    public function addAction()
     {
-        return $this->get('tax.repository');
+        $form = $this->createForm($this->get('tax.form'), null, [
+            'name' => 'add_tax'
+        ]);
+
+        if ($form->isValid()) {
+            try {
+                $this->repository->save($form->getSubmitValuesFlat());
+                $this->addSuccessMessage('Changes saved successfully.');
+
+                return $this->redirect($this->getDefaultUrl());
+
+            } catch (ValidatorException $exception) {
+                $this->addErrorMessage($exception->getMessage());
+            }
+        }
+
+        return [
+            'form' => $form
+        ];
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function getForm()
+    public function editAction($id)
     {
-        return $this->get('tax.form');
+        $model = $this->repository->find($id);
+
+        $form = $this->createForm($this->get('tax.form'), $model, [
+            'name' => 'edit_tax'
+        ]);
+
+        if ($form->isValid()) {
+            try {
+                $this->repository->save($form->getSubmitValuesFlat(), $id);
+                $this->addSuccessMessage('Changes saved successfully.');
+
+                return $this->redirect($this->getDefaultUrl());
+
+            } catch (ValidatorException $exception) {
+                $this->addErrorMessage($exception->getMessage());
+            }
+        }
+
+        return [
+            'tax' => $model,
+            'form'    => $form
+        ];
     }
 
     /**
-     * {@inheritdoc}
+     * Sets tax repository object
+     *
+     * @param TaxRepositoryInterface $repository
      */
-    protected function getDefaultRoute()
+    public function setRepository(TaxRepositoryInterface $repository)
     {
-        return 'admin.tax.index';
+        $this->repository = $repository;
     }
 }

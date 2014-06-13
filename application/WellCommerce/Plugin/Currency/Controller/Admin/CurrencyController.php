@@ -13,7 +13,6 @@ namespace WellCommerce\Plugin\Currency\Controller\Admin;
 
 use Symfony\Component\Validator\Exception\ValidatorException;
 use WellCommerce\Core\Component\Controller\AbstractAdminController;
-use WellCommerce\Plugin\Currency\Form\CurrencyDataTransformer;
 use WellCommerce\Plugin\Currency\Repository\CurrencyRepositoryInterface;
 
 /**

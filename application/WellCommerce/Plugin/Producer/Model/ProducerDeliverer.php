@@ -23,11 +23,6 @@ class ProducerDeliverer extends AbstractModel
 {
 
     protected $table = 'producer_deliverer';
-
-    public $timestamps = true;
-
-    protected $softDelete = false;
-
     protected $fillable = ['producer_id', 'deliverer_id'];
 
     /**

@@ -23,24 +23,7 @@ use WellCommerce\Core\Component\Model\TranslatableModelInterface;
  */
 class Producer extends AbstractModel implements ModelInterface, TranslatableModelInterface
 {
-    /**
-     * @var string
-     */
     protected $table = 'producer';
-
-    /**
-     * @var bool
-     */
-    public $timestamps = true;
-
-    /**
-     * @var bool
-     */
-    protected $softDelete = false;
-
-    /**
-     * @var array
-     */
     protected $fillable = ['id'];
 
     /**
@@ -69,36 +52,6 @@ class Producer extends AbstractModel implements ModelInterface, TranslatableMode
     public function deliverer()
     {
         return $this->belongsToMany('WellCommerce\Plugin\Deliverer\Model\Deliverer', 'producer_deliverer', 'producer_id', 'deliverer_id');
-    }
-
-    /**
-     * Fetch shop ids from model
-     *
-     * @return array
-     */
-    public function getShops()
-    {
-        $shops = [];
-        foreach ($this->shop as $shop) {
-            $shops[] = $shop->id;
-        }
-
-        return $shops;
-    }
-
-    /**
-     * Fetch deliverer ids from model
-     *
-     * @return array
-     */
-    public function getDeliverers()
-    {
-        $deliverers = [];
-        foreach ($this->deliverer as $deliverer) {
-            $deliverers[] = $deliverer->id;
-        }
-
-        return $deliverers;
     }
 
     /**

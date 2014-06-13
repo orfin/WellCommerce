@@ -12,6 +12,7 @@
 namespace WellCommerce\Plugin\Tax\Model;
 
 use WellCommerce\Core\Component\Model\AbstractModel;
+use WellCommerce\Core\Component\Model\ModelInterface;
 use WellCommerce\Core\Component\Model\TranslatableModelInterface;
 
 /**
@@ -20,7 +21,7 @@ use WellCommerce\Core\Component\Model\TranslatableModelInterface;
  * @package WellCommerce\Plugin\Tax\Model
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Tax extends AbstractModel implements TranslatableModelInterface
+class Tax extends AbstractModel implements ModelInterface, TranslatableModelInterface
 {
 
     protected $table = 'tax';
@@ -37,19 +38,10 @@ class Tax extends AbstractModel implements TranslatableModelInterface
     }
 
     /**
-     * Get translations for tax rate
-     *
-     * @return array
+     * {@inheritdoc}
      */
-    public function getLanguageData()
+    public function getValidationXmlMapping()
     {
-        $languageData = [];
-        foreach ($this->translation as $translation) {
-            $languageData[$translation->language_id] = [
-                'name' => $translation->name,
-            ];
-        }
-
-        return $languageData;
+        return __DIR__ . '/../Resources/config/validation.xml';
     }
 }

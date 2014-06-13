@@ -15,6 +15,7 @@ use WellCommerce\Core\Component\Form\AbstractForm;
 use WellCommerce\Core\Component\Form\FormBuilder;
 use WellCommerce\Core\Component\Form\FormInterface;
 use WellCommerce\Core\Component\Model\ModelInterface;
+use WellCommerce\Plugin\Producer\Model\Producer;
 
 /**
  * Class ProducerForm
@@ -111,7 +112,7 @@ class ProducerForm extends AbstractForm implements FormInterface
         ]));
 
         $languageData = $metaData->addChild($builder->addFieldsetLanguage([
-            'name'  => 'language_data',
+            'name'      => 'language_data',
             'languages' => $this->getLanguages()
         ]));
 
@@ -152,22 +153,22 @@ class ProducerForm extends AbstractForm implements FormInterface
     /**
      * {@inheritdoc}
      */
-    public function prepareData(ModelInterface $model)
+    public function prepareData(Producer $producer)
     {
         $populateData = [];
         $accessor     = $this->getPropertyAccessor();
-        $languageData = $model->translation->getTranslations();
+        $languageData = $producer->translation->getTranslations();
 
         $accessor->setValue($populateData, '[required_data]', [
             'language_data' => $languageData,
-            'deliverers'    => $model->deliverer->getPrimaryKeys(),
+            'deliverers'    => $producer->deliverer->getPrimaryKeys(),
         ]);
 
         $accessor->setValue($populateData, '[description_data][language_data]', $languageData);
 
         $accessor->setValue($populateData, '[meta_data][language_data]', $languageData);
 
-        $accessor->setValue($populateData, '[shop_data][shops]', $model->getShops());
+        $accessor->setValue($populateData, '[shop_data][shops]', $producer->shop->getPrimaryKeys());
 
         return $populateData;
     }

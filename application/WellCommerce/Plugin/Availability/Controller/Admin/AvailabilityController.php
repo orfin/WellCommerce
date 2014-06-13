@@ -11,10 +11,8 @@
  */
 namespace WellCommerce\Plugin\Availability\Controller\Admin;
 
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Exception\ValidatorException;
 use WellCommerce\Core\Component\Controller\AbstractAdminController;
-use WellCommerce\Core\Helper\TableInfo;
 use WellCommerce\Plugin\Availability\DataGrid\Config;
 use WellCommerce\Plugin\Availability\Form\AvailabilityDataConverter;
 use WellCommerce\Plugin\Availability\Model\AvailabilityData;
