@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Core\Component\Form\Elements;
 
+use Symfony\Component\OptionsResolver\Options;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use WellCommerce\Core\Component\Form\Node;
 
 /**
@@ -29,15 +31,51 @@ class Tip extends Node implements ElementInterface
     const EXPANDED  = 'expanded';
     const RETRACTED = 'retracted';
 
-    public function __construct($attributes)
+    /**
+     * {@inheritdoc}
+     */
+    public function configureAttributes(OptionsResolverInterface $resolver)
     {
-        parent::__construct($attributes);
-        $this->attributes['name'] = '';
-        if (isset($this->attributes['short_tip']) && strlen($this->attributes['short_tip'])) {
-            $this->attributes['retractable'] = true;
-        }
+        $resolver->setRequired([
+            'tip',
+            'direction'
+        ]);
+
+        $resolver->setOptional([
+            'name',
+            'short_tip',
+            'retractable',
+            'default_state'
+        ]);
+
+        $resolver->setDefaults([
+            'name'        => '',
+            'retractable' => function (Options $options) {
+                    if (isset($options['short_tip']) && strlen($options['short_tip'])) {
+                        return true;
+                    }
+
+                    return false;
+                },
+        ]);
+
+        $resolver->setAllowedValues(array(
+            'direction'     => [self::UP, self::DOWN],
+            'default_state' => [self::EXPANDED, self::RETRACTED]
+        ));
+
+        $resolver->setAllowedTypes([
+            'tip'           => 'string',
+            'direction'     => 'string',
+            'short_tip'     => 'string',
+            'retractable'   => 'bool',
+            'default_state' => 'string',
+        ]);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function prepareAttributesJs()
     {
         $attributes = Array(
@@ -52,10 +90,16 @@ class Tip extends Node implements ElementInterface
         return $attributes;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function renderStatic()
     {
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function populate($value)
     {
     }

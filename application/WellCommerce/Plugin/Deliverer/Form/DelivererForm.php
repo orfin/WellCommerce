@@ -78,7 +78,7 @@ class DelivererForm extends AbstractForm implements FormInterface
     {
         $populateData = [];
         $accessor     = $this->getPropertyAccessor();
-        $languageData = $deliverer->getTranslationData();
+        $languageData = $deliverer->translation->getTranslations();
 
         $accessor->setValue($populateData, '[required_data]', [
             'language_data' => $languageData

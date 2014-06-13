@@ -11,7 +11,9 @@
  */
 namespace WellCommerce\Plugin\Company\DataGrid;
 
+use Illuminate\Database\Capsule\Manager;
 use WellCommerce\Core\Component\DataGrid\AbstractDataGrid;
+use WellCommerce\Core\Component\DataGrid\Column\ColumnCollection;
 use WellCommerce\Core\Component\DataGrid\Column\ColumnInterface;
 use WellCommerce\Core\Component\DataGrid\Column\DataGridColumn;
 use WellCommerce\Core\Component\DataGrid\DataGridInterface;
@@ -45,9 +47,9 @@ class CompanyDataGrid extends AbstractDataGrid implements DataGridInterface
     /**
      * {@inheritdoc}
      */
-    public function initColumns()
+    public function initColumns(ColumnCollection $collection)
     {
-        $this->columns->add(new DataGridColumn([
+        $collection->add(new DataGridColumn([
             'id'         => 'id',
             'source'     => 'company.id',
             'caption'    => $this->trans('Id'),
@@ -63,7 +65,7 @@ class CompanyDataGrid extends AbstractDataGrid implements DataGridInterface
             ]
         ]));
 
-        $this->columns->add(new DataGridColumn([
+        $collection->add(new DataGridColumn([
             'id'         => 'name',
             'source'     => 'company.name',
             'caption'    => $this->trans('Name'),
@@ -80,9 +82,9 @@ class CompanyDataGrid extends AbstractDataGrid implements DataGridInterface
     /**
      * {@inheritdoc}
      */
-    public function setQuery()
+    public function setQuery(Manager $manager)
     {
-        $this->query = $this->getDb()->table('company');
+        $this->query = $manager->table('company');
         $this->query->groupBy('company.id');
     }
 }

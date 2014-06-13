@@ -11,6 +11,7 @@
  */
 namespace WellCommerce\Plugin\Deliverer\Controller\Admin;
 
+use Symfony\Component\Validator\Exception\ValidatorException;
 use WellCommerce\Core\Component\Controller\AbstractAdminController;
 use WellCommerce\Plugin\Deliverer\Repository\DelivererRepositoryInterface;
 
@@ -42,9 +43,15 @@ class DelivererController extends AbstractAdminController
         ]);
 
         if ($form->isValid()) {
-            $this->repository->save($form->getSubmitValuesFlat());
+            try {
+                $this->repository->save($form->getSubmitValuesFlat());
+                $this->addSuccessMessage('Changes saved successfully.');
 
-            return $this->redirect($this->getDefaultUrl());
+                return $this->redirect($this->getDefaultUrl());
+
+            } catch (ValidatorException $exception) {
+                $this->addErrorMessage($exception->getMessage());
+            }
         }
 
         return [
@@ -64,13 +71,19 @@ class DelivererController extends AbstractAdminController
         ]);
 
         if ($form->isValid()) {
-            $this->repository->save($form->getSubmitValuesFlat(), $id);
+            try {
+                $this->repository->save($form->getSubmitValuesFlat(), $id);
+                $this->addSuccessMessage('Changes saved successfully.');
 
-            if ($form->isAction('continue')) {
-                return $this->redirect($this->generateUrl('admin.deliverer.edit', ['id' => $model->id]));
+                if ($form->isAction('continue')) {
+                    return $this->redirect($this->generateUrl('admin.deliverer.edit', ['id' => $model->id]));
+                }
+
+                return $this->redirect($this->getDefaultUrl());
+
+            } catch (ValidatorException $exception) {
+                $this->addErrorMessage($exception->getMessage());
             }
-
-            return $this->redirect($this->getDefaultUrl());
         }
 
         return [

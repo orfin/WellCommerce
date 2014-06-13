@@ -11,7 +11,9 @@
  */
 namespace WellCommerce\Plugin\Deliverer\DataGrid;
 
+use Illuminate\Database\Capsule\Manager;
 use WellCommerce\Core\Component\DataGrid\AbstractDataGrid;
+use WellCommerce\Core\Component\DataGrid\Column\ColumnCollection;
 use WellCommerce\Core\Component\DataGrid\Column\ColumnInterface;
 use WellCommerce\Core\Component\DataGrid\Column\DataGridColumn;
 use WellCommerce\Core\Component\DataGrid\DataGridInterface;
@@ -46,9 +48,9 @@ class DelivererDataGrid extends AbstractDataGrid implements DataGridInterface
     /**
      * {@inheritdoc}
      */
-    public function initColumns()
+    public function initColumns(ColumnCollection $collection)
     {
-        $this->columns->add(new DataGridColumn([
+        $collection->add(new DataGridColumn([
             'id'         => 'id',
             'source'     => 'deliverer.id',
             'caption'    => $this->trans('Id'),
@@ -64,7 +66,7 @@ class DelivererDataGrid extends AbstractDataGrid implements DataGridInterface
             ]
         ]));
 
-        $this->columns->add(new DataGridColumn([
+        $collection->add(new DataGridColumn([
             'id'         => 'name',
             'source'     => 'deliverer_translation.name',
             'caption'    => $this->trans('Name'),
@@ -81,9 +83,9 @@ class DelivererDataGrid extends AbstractDataGrid implements DataGridInterface
     /**
      * {@inheritdoc}
      */
-    public function setQuery()
+    public function setQuery(Manager $manager)
     {
-        $this->query = $this->getDb()->table('deliverer');
+        $this->query = $manager->table('deliverer');
         $this->query->join('deliverer_translation', 'deliverer_translation.deliverer_id', '=', 'deliverer.id');
         $this->query->groupBy('deliverer.id');
     }

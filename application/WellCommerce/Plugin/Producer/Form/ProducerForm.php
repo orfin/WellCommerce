@@ -156,11 +156,11 @@ class ProducerForm extends AbstractForm implements FormInterface
     {
         $populateData = [];
         $accessor     = $this->getPropertyAccessor();
-        $languageData = $model->getTranslationData();
+        $languageData = $model->translation->getTranslations();
 
         $accessor->setValue($populateData, '[required_data]', [
             'language_data' => $languageData,
-            'deliverers'    => $model->getDeliverers(),
+            'deliverers'    => $model->deliverer->getPrimaryKeys(),
         ]);
 
         $accessor->setValue($populateData, '[description_data][language_data]', $languageData);

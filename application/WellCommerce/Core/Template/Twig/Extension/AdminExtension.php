@@ -42,8 +42,9 @@ class AdminExtension extends \Twig_Extension
     public function getGlobals()
     {
         return [
-            'user' => $this->container->get('session')->get('admin/user'),
-            'menu' => $this->container->get('session')->get('admin/menu')
+            'user'     => $this->container->get('session')->get('admin/user'),
+            'menu'     => $this->container->get('session')->get('admin/menu'),
+            'flashbag' => $this->container->get('session')->getFlashBag()
         ];
     }
 

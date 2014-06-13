@@ -13,6 +13,7 @@ namespace WellCommerce\Plugin\File\Repository;
 
 use WellCommerce\Core\Component\Repository\AbstractRepository;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use WellCommerce\Core\Component\Repository\RepositoryInterface;
 use WellCommerce\Plugin\File\Model\File;
 
 /**
@@ -21,7 +22,7 @@ use WellCommerce\Plugin\File\Model\File;
  * @package WellCommerce\Plugin\File\AbstractRepository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class FileRepository extends AbstractRepository
+class FileRepository extends AbstractRepository implements FileRepositoryInterface
 {
     /**
      * Returns all files
@@ -46,18 +47,51 @@ class FileRepository extends AbstractRepository
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function delete($id)
+    {
+        $this->dispatchEvent(FileRepositoryInterface::PRE_DELETE_EVENT, [], $id);
+
+        $this->transaction(function () use ($id) {
+            return File::destroy($id);
+        });
+
+        $this->dispatchEvent(FileRepositoryInterface::POST_DELETE_EVENT, [], $id);
+    }
+
+    /**
      * Stores uploaded file data
      *
      * @param UploadedFile $file
      */
     public function save(UploadedFile $uploadedFile)
     {
-        $file            = new File();
-        $file->name      = $uploadedFile->getClientOriginalName();
-        $file->size      = $uploadedFile->getClientSize();
-        $file->extension = $uploadedFile->getClientOriginalExtension();
-        $file->type      = $uploadedFile->getClientMimeType();
-        $file->save();
+        $id = null;
+
+        $data = [
+            'name'      => $uploadedFile->getClientOriginalName(),
+            'size'      => $uploadedFile->getClientSize(),
+            'extension' => $uploadedFile->getClientOriginalExtension(),
+            'type'      => $uploadedFile->getClientMimeType(),
+        ];
+
+        $data = $this->dispatchEvent(FileRepositoryInterface::PRE_SAVE_EVENT, $data, null);
+
+        $file = $this->transaction(function () use ($data, $id) {
+
+            $file = File::firstOrCreate([
+                'id' => $id
+            ]);
+
+            $file->update($data);
+
+            return $file;
+        });
+
+        $id = $file->id;
+
+        $this->dispatchEvent(FileRepositoryInterface::POST_SAVE_EVENT, $data, $id);
 
         return $file;
     }

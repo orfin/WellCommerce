@@ -11,6 +11,7 @@
  */
 namespace WellCommerce\Plugin\Contact\Controller\Admin;
 
+use Symfony\Component\Validator\Exception\ValidatorException;
 use WellCommerce\Core\Component\Controller\AbstractAdminController;
 use WellCommerce\Plugin\Contact\Repository\ContactRepositoryInterface;
 
@@ -44,9 +45,16 @@ class ContactController extends AbstractAdminController
         ]);
 
         if ($form->isValid()) {
-            $this->repository->save($form->getSubmitValuesFlat());
+            try {
+                $this->repository->save($form->getSubmitValuesFlat());
+                $this->addSuccessMessage('Changes saved successfully.');
 
-            return $this->redirect($this->generateUrl('admin.contact.index'));
+                return $this->redirect($this->getDefaultUrl());
+
+            } catch (ValidatorException $exception) {
+                $this->addErrorMessage($exception->getMessage());
+                $this->getFlashBag()->add(self::MESSAGE_TYPE_ERROR, $this->trans($exception->getMessage()));
+            }
         }
 
         return [
@@ -66,13 +74,19 @@ class ContactController extends AbstractAdminController
         ]);
 
         if ($form->isValid()) {
-            $this->repository->save($form->getSubmitValuesFlat(), $id);
+            try {
+                $this->repository->save($form->getSubmitValuesFlat(), $id);
+                $this->addSuccessMessage('Changes saved successfully.');
 
-            if ($form->isAction('continue')) {
-                return $this->redirect($this->generateUrl('admin.contact.edit', ['id' => $model->id]));
+                if ($form->isAction('continue')) {
+                    return $this->redirect($this->generateUrl('admin.contact.edit', ['id' => $model->id]));
+                }
+
+                return $this->redirect($this->getDefaultUrl());
+
+            } catch (ValidatorException $exception) {
+                $this->addErrorMessage($exception->getMessage());
             }
-
-            return $this->redirect($this->generateUrl('admin.contact.index'));
         }
 
         return [

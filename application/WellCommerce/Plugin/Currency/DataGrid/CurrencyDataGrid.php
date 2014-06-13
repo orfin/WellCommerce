@@ -11,8 +11,12 @@
  */
 namespace WellCommerce\Plugin\Currency\DataGrid;
 
-use WellCommerce\Core\DataGrid,
-    WellCommerce\Core\DataGrid\DataGridInterface;
+use Illuminate\Database\Capsule\Manager;
+use WellCommerce\Core\Component\DataGrid\AbstractDataGrid;
+use WellCommerce\Core\Component\DataGrid\Column\ColumnCollection;
+use WellCommerce\Core\Component\DataGrid\Column\ColumnInterface;
+use WellCommerce\Core\Component\DataGrid\Column\DataGridColumn;
+use WellCommerce\Core\Component\DataGrid\DataGridInterface;
 
 /**
  * Class CurrencyDataGrid
@@ -20,73 +24,80 @@ use WellCommerce\Core\DataGrid,
  * @package WellCommerce\Plugin\Currency\DataGrid
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CurrencyDataGrid extends DataGrid implements DataGridInterface
+class CurrencyDataGrid extends AbstractDataGrid implements DataGridInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function configure()
+    public function getId()
     {
-        $this->setOptions([
-            'id'             => 'currency',
-            'event_handlers' => [
-                'load'       => $this->getXajaxManager()->registerFunction(['LoadCurrency', $this, 'loadData']),
-                'edit_row'   => 'editCurrency',
-                'click_row'  => 'editCurrency',
-                'delete_row' => $this->getXajaxManager()->registerFunction(['DeleteCurrency', $this, 'deleteRow'])
-            ],
-            'routes'         => [
-                'edit' => $this->generateUrl('admin.currency.edit')
-            ]
-        ]);
+        return 'currency';
     }
-    
+
     /**
      * {@inheritdoc}
      */
-    public function init()
+    public function getRoutes()
     {
-        $this->addColumn('id', [
+        return [
+            'edit' => $this->generateUrl('admin.currency.edit')
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function initColumns(ColumnCollection $collection)
+    {
+        $collection->add(new DataGridColumn([
+            'id'         => 'id',
             'source'     => 'currency.id',
             'caption'    => $this->trans('Id'),
             'sorting'    => [
-                'default_order' => DataGridInterface::SORT_DIR_DESC
+                'default_order' => ColumnInterface::SORT_DIR_DESC
             ],
             'appearance' => [
                 'width'   => 90,
                 'visible' => false
             ],
             'filter'     => [
-                'type' => DataGridInterface::FILTER_BETWEEN
+                'type' => ColumnInterface::FILTER_BETWEEN
             ]
-        ]);
+        ]));
 
-        $this->addColumn('name', [
+        $collection->add(new DataGridColumn([
+            'id'         => 'name',
             'source'     => 'currency.name',
             'caption'    => $this->trans('Name'),
             'appearance' => [
                 'width' => 70,
-                'align' => DataGridInterface::ALIGN_LEFT
+                'align' => ColumnInterface::ALIGN_LEFT
             ],
             'filter'     => [
-                'type' => DataGridInterface::FILTER_INPUT
+                'type' => ColumnInterface::FILTER_INPUT
             ]
-        ]);
+        ]));
 
-        $this->addColumn('symbol', [
+        $collection->add(new DataGridColumn([
+            'id'         => 'symbol',
             'source'     => 'currency.symbol',
             'caption'    => $this->trans('Symbol'),
             'appearance' => [
                 'width' => 70,
-                'align' => DataGridInterface::ALIGN_LEFT
+                'align' => ColumnInterface::ALIGN_LEFT
             ],
             'filter'     => [
-                'type' => DataGridInterface::FILTER_INPUT
+                'type' => ColumnInterface::FILTER_INPUT
             ]
-        ]);
-        
-        $this->query = $this->getDb()
-            ->table('currency')
-            ->groupBy('currency.id');
+        ]));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setQuery(Manager $manager)
+    {
+        $this->query = $manager->table('currency');
+        $this->query->groupBy('currency.id');
     }
 }

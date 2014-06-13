@@ -12,6 +12,7 @@
 namespace WellCommerce\Plugin\Currency\Model;
 
 use WellCommerce\Core\Component\Model\AbstractModel;
+use WellCommerce\Core\Component\Model\ModelInterface;
 
 /**
  * Class Currency
@@ -19,11 +20,16 @@ use WellCommerce\Core\Component\Model\AbstractModel;
  * @package WellCommerce\Plugin\Currency\Model
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Currency extends AbstractModel
+class Currency extends AbstractModel implements ModelInterface
 {
     protected $table = 'currency';
-    public $timestamps = true;
-    protected $softDelete = false;
     protected $fillable = array('id');
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getValidationXmlMapping()
+    {
+        return __DIR__ . '/../Resources/config/validation.xml';
+    }
 }

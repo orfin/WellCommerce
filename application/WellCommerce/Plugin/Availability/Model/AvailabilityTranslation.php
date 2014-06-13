@@ -50,13 +50,6 @@ class AvailabilityTranslation extends AbstractModel
     protected $fillable = ['availability_id', 'language_id'];
 
     /**
-     * The attributes that are translatable
-     *
-     * @var array
-     */
-    protected $translatable = ['name', 'description'];
-
-    /**
      * {@inheritdoc}
      */
     public function getValidationXmlMapping()

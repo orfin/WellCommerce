@@ -11,8 +11,9 @@
  */
 namespace WellCommerce\Plugin\File\Controller\Admin;
 
-use WellCommerce\Core\Controller\AbstractAdminController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use WellCommerce\Core\Component\Controller\AbstractAdminController;
+use WellCommerce\Plugin\File\Repository\FileRepositoryInterface;
 
 /**
  * Class FileController
@@ -22,6 +23,21 @@ use Symfony\Component\HttpFoundation\JsonResponse;
  */
 class FileController extends AbstractAdminController
 {
+    private $repository;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function indexAction()
+    {
+        return [
+            'datagrid' => $this->createDataGrid($this->get('producer.datagrid'))
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function addAction()
     {
         $request  = $this->getRequest();
@@ -29,7 +45,7 @@ class FileController extends AbstractAdminController
         $files    = $uploader->getFiles($request->files);
 
         foreach ($files as $file) {
-            $data = $this->getRepository()->save($file);
+            $data = $this->repository->save($file);
             $name = sprintf('%s.%s', $data->id, $data->extension);
             $uploader->upload($file, $name);
         }
@@ -51,32 +67,37 @@ class FileController extends AbstractAdminController
     /**
      * {@inheritdoc}
      */
-    protected function getDataGrid()
+    public function editAction($id)
     {
-        return $this->get('product.datagrid');
+        $model = $this->repository->find($id);
+
+        $form = $this->createForm($this->get('producer.form'), $model, [
+            'name' => 'edit_producer'
+        ]);
+
+        if ($form->isValid()) {
+            $this->repository->save($form->getSubmitValuesFlat(), $id);
+
+            if ($form->isAction('continue')) {
+                return $this->redirect($this->generateUrl('admin.producer.edit', ['id' => $model->id]));
+            }
+
+            return $this->redirect($this->getDefaultUrl());
+        }
+
+        return [
+            'producer' => $model,
+            'form'     => $form
+        ];
     }
 
     /**
-     * {@inheritdoc}
+     * Sets producer repository object
+     *
+     * @param FileRepositoryInterface $repository
      */
-    protected function getRepository()
+    public function setRepository(FileRepositoryInterface $repository)
     {
-        return $this->get('file.repository');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getForm()
-    {
-        return $this->get('file.form');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefaultRoute()
-    {
-        return 'admin.file.index';
+        $this->repository = $repository;
     }
 }

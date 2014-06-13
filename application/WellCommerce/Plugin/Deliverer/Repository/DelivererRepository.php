@@ -44,13 +44,9 @@ class DelivererRepository extends AbstractRepository implements DelivererReposit
      */
     public function delete($id)
     {
-        $this->dispatchEvent(DelivererRepositoryInterface::PRE_DELETE_EVENT, [], $id);
-
-        $this->transaction(function () use ($id) {
-            return Deliverer::destroy($id);
-        });
-
-        $this->dispatchEvent(DelivererRepositoryInterface::POST_DELETE_EVENT, [], $id);
+        $deliverer = $this->find($id);
+        $deliverer->delete();
+        $this->dispatchEvent(DelivererRepositoryInterface::POST_DELETE_EVENT, $deliverer);
     }
 
     /**
@@ -58,14 +54,14 @@ class DelivererRepository extends AbstractRepository implements DelivererReposit
      */
     public function save(array $data, $id = null)
     {
-        $data = $this->dispatchEvent(DelivererRepositoryInterface::PRE_SAVE_EVENT, $data, $id);
-
         $this->transaction(function () use ($data, $id) {
             $deliverer = Deliverer::firstOrCreate([
                 'id' => $id
             ]);
 
-            $deliverer->update();
+            $data = $this->dispatchEvent(DelivererRepositoryInterface::PRE_SAVE_EVENT, $deliverer, $data);
+
+            $deliverer->update($data);
 
             foreach ($this->getLanguageIds() as $language) {
 
@@ -77,9 +73,9 @@ class DelivererRepository extends AbstractRepository implements DelivererReposit
                 $translationData = $translation->getTranslation($data, $language);
                 $translation->update($translationData);
             }
-        });
 
-        $this->dispatchEvent(DelivererRepositoryInterface::POST_SAVE_EVENT, $data, $id);
+            $this->dispatchEvent(DelivererRepositoryInterface::POST_SAVE_EVENT, $deliverer, $data);
+        });
     }
 
     /**

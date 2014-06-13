@@ -1,0 +1,11 @@
+<script type="text/javascript">
+    $(document).ready(function(){
+        {% for flashMessage in flashbag.get('error') %}
+        GError('{% trans %}An error has occured!{% endtrans %}', '{{ flashMessage }}');
+        {% endfor %}
+
+        {% for flashMessage in flashbag.get('success') %}
+        GMessage('{% trans %}Success!{% endtrans %}', '{{ flashMessage }}');
+        {% endfor %}
+    });
+</script>

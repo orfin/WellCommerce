@@ -12,7 +12,10 @@
 
 namespace WellCommerce\Core\Component\DataGrid;
 
+use Illuminate\Database\Capsule\Manager;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use WellCommerce\Core\Component\AbstractComponent;
+use WellCommerce\Core\Component\DataGrid\Column\ColumnCollection;
 use WellCommerce\Core\Event\DataGridEvent;
 
 /**
@@ -24,7 +27,17 @@ use WellCommerce\Core\Event\DataGridEvent;
 class DataGridBuilder extends AbstractComponent
 {
     protected $datagrid;
-    protected $options;
+    protected $manager;
+
+    /**
+     * Sets Database Manager instance on class
+     *
+     * @param Manager $manager
+     */
+    public function setDatabaseManager(Manager $manager)
+    {
+        $this->manager = $manager;
+    }
 
     /**
      * Creates datagrid and triggers event after initialization
@@ -35,9 +48,11 @@ class DataGridBuilder extends AbstractComponent
      */
     public function create(DataGridInterface $datagrid)
     {
-        $this->datagrid = $datagrid;
-        $this->datagrid->initColumns();
-        $this->datagrid->setQuery();
+        $this->datagrid   = $datagrid;
+        $columnCollection = new ColumnCollection();
+        $this->datagrid->initColumns($columnCollection);
+        $this->datagrid->setColumns($columnCollection);
+        $this->datagrid->setQuery($this->manager);
         $this->dispatchEvent($this->getInitEventName());
 
         return $this->datagrid;

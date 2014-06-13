@@ -11,7 +11,9 @@
  */
 namespace WellCommerce\Plugin\ClientGroup\DataGrid;
 
+use Illuminate\Database\Capsule\Manager;
 use WellCommerce\Core\Component\DataGrid\AbstractDataGrid;
+use WellCommerce\Core\Component\DataGrid\Column\ColumnCollection;
 use WellCommerce\Core\Component\DataGrid\Column\ColumnInterface;
 use WellCommerce\Core\Component\DataGrid\Column\DataGridColumn;
 use WellCommerce\Core\Component\DataGrid\DataGridInterface;
@@ -45,9 +47,9 @@ class ClientGroupDataGrid extends AbstractDataGrid implements DataGridInterface
     /**
      * {@inheritdoc}
      */
-    public function initColumns()
+    public function initColumns(ColumnCollection $columns)
     {
-        $this->columns->add(new DataGridColumn([
+        $columns->add(new DataGridColumn([
             'id'         => 'id',
             'source'     => 'client_group.id',
             'caption'    => $this->trans('Id'),
@@ -63,7 +65,7 @@ class ClientGroupDataGrid extends AbstractDataGrid implements DataGridInterface
             ]
         ]));
 
-        $this->columns->add(new DataGridColumn([
+        $columns->add(new DataGridColumn([
             'id'         => 'name',
             'source'     => 'client_group_translation.name',
             'caption'    => $this->trans('Name'),
@@ -76,7 +78,7 @@ class ClientGroupDataGrid extends AbstractDataGrid implements DataGridInterface
             ]
         ]));
 
-        $this->columns->add(new DataGridColumn([
+        $columns->add(new DataGridColumn([
             'id'         => 'discount',
             'source'     => 'client_group.discount',
             'caption'    => $this->trans('Discount'),
@@ -93,9 +95,9 @@ class ClientGroupDataGrid extends AbstractDataGrid implements DataGridInterface
     /**
      * {@inheritdoc}
      */
-    public function setQuery()
+    public function setQuery(Manager $manager)
     {
-        $this->query = $this->getDb()->table('client_group');
+        $this->query = $manager->table('client_group');
         $this->query->join('client_group_translation', 'client_group_translation.client_group_id', '=', 'client_group.id');
         $this->query->groupBy('client_group.id');
     }

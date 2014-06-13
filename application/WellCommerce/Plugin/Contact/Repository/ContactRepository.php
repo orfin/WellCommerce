@@ -44,13 +44,9 @@ class ContactRepository extends AbstractRepository implements ContactRepositoryI
      */
     public function delete($id)
     {
-        $this->dispatchEvent(ContactRepositoryInterface::PRE_DELETE_EVENT, [], $id);
-
-        $this->transaction(function () use ($id) {
-            return Contact::destroy($id);
-        });
-
-        $this->dispatchEvent(ContactRepositoryInterface::POST_DELETE_EVENT, [], $id);
+        $contact = $this->find($id);
+        $contact->delete();
+        $this->dispatchEvent(ContactRepositoryInterface::POST_DELETE_EVENT, $contact);
     }
 
     /**
@@ -58,13 +54,13 @@ class ContactRepository extends AbstractRepository implements ContactRepositoryI
      */
     public function save(array $data, $id = null)
     {
-        $data = $this->dispatchEvent(ContactRepositoryInterface::PRE_SAVE_EVENT, $data, $id);
-
         $this->transaction(function () use ($data, $id) {
 
             $contact = Contact::firstOrCreate([
                 'id' => $id
             ]);
+
+            $data = $this->dispatchEvent(ContactRepositoryInterface::PRE_SAVE_EVENT, $contact, $data);
 
             $contact->update($data);
 
@@ -78,9 +74,9 @@ class ContactRepository extends AbstractRepository implements ContactRepositoryI
                 $translationData = $translation->getTranslation($data, $language);
                 $translation->update($translationData);
             }
-        });
 
-        $this->dispatchEvent(ContactRepositoryInterface::POST_SAVE_EVENT, $data, $id);
+            $this->dispatchEvent(ContactRepositoryInterface::POST_SAVE_EVENT, $contact, $data);
+        });
     }
 
     /**

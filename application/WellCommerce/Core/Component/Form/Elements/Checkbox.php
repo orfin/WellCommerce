@@ -45,7 +45,7 @@ class Checkbox extends Field implements ElementInterface
             'class'   => 'string',
             'error'   => 'string',
             'comment' => 'string',
-            'default' => 'integer'
+            'default' => ['string', 'integer']
         ]);
     }
 

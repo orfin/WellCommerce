@@ -11,7 +11,9 @@
  */
 namespace WellCommerce\Plugin\Contact\DataGrid;
 
+use Illuminate\Database\Capsule\Manager;
 use WellCommerce\Core\Component\DataGrid\AbstractDataGrid;
+use WellCommerce\Core\Component\DataGrid\Column\ColumnCollection;
 use WellCommerce\Core\Component\DataGrid\Column\ColumnInterface;
 use WellCommerce\Core\Component\DataGrid\Column\DataGridColumn;
 use WellCommerce\Core\Component\DataGrid\DataGridInterface;
@@ -46,9 +48,9 @@ class ContactDataGrid extends AbstractDataGrid implements DataGridInterface
     /**
      * {@inheritdoc}
      */
-    public function initColumns()
+    public function initColumns(ColumnCollection $columns)
     {
-        $this->columns->add(new DataGridColumn([
+        $columns->add(new DataGridColumn([
             'id'         => 'id',
             'source'     => 'contact.id',
             'caption'    => $this->trans('Id'),
@@ -64,7 +66,7 @@ class ContactDataGrid extends AbstractDataGrid implements DataGridInterface
             ]
         ]));
 
-        $this->columns->add(new DataGridColumn([
+        $columns->add(new DataGridColumn([
             'id'         => 'name',
             'source'     => 'contact_translation.name',
             'caption'    => $this->trans('Name'),
@@ -81,9 +83,9 @@ class ContactDataGrid extends AbstractDataGrid implements DataGridInterface
     /**
      * {@inheritdoc}
      */
-    public function setQuery()
+    public function setQuery(Manager $manager)
     {
-        $this->query = $this->getDb()->table('contact');
+        $this->query = $manager->table('contact');
         $this->query->join('contact_translation', 'contact_translation.contact_id', '=', 'contact.id');
         $this->query->groupBy('contact.id');
     }

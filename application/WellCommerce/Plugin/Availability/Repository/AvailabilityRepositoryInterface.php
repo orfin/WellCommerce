@@ -22,7 +22,6 @@ use WellCommerce\Plugin\Availability\Model\AvailabilityDataInterface;
  */
 interface AvailabilityRepositoryInterface
 {
-    const PRE_DELETE_EVENT  = 'availability.repository.pre_delete';
     const POST_DELETE_EVENT = 'availability.repository.post_delete';
     const PRE_SAVE_EVENT    = 'availability.repository.pre_save';
     const POST_SAVE_EVENT   = 'availability.repository.post_save';

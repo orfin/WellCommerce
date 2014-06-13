@@ -13,6 +13,7 @@
 namespace WellCommerce\Core\Component\Form\Elements;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Class File
@@ -32,9 +33,8 @@ class File extends Field implements ElementInterface
         parent::__construct($attributes);
 
         $this->container                  = $container;
-        $this->datagrid                   = $container->get('file.datagrid');
-        $this->attributes['session_name'] = session_name();
-        $this->attributes['session_id']   = session_id();
+        $datagridBuilder                  = $container->get('datagrid_builder');
+        $this->datagrid                   = $datagridBuilder->create($container->get('file.datagrid'));
         $this->jsFunction                 = 'LoadFiles_' . $this->_id;
         $this->attributes['load_handler'] = 'xajax_' . $this->jsFunction;
 
@@ -43,8 +43,22 @@ class File extends Field implements ElementInterface
             $this,
             'doLoadFilesForDatagrid_' . $this->_id
         ]);
+    }
 
-        $this->datagrid->init();
+    /**
+     * {@inheritdoc}
+     */
+    public function configureAttributes(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults([
+            'session_name' => session_name(),
+            'session_id'   => session_id(),
+        ]);
+
+        $resolver->setAllowedTypes([
+            'session_name' => 'string',
+            'session_name' => 'string'
+        ]);
     }
 
     public function __call($function, $arguments)

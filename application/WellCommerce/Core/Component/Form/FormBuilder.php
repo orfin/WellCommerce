@@ -322,11 +322,6 @@ class FormBuilder extends AbstractComponent
      */
     public function addPrice(array $options)
     {
-        $options['prefixes'] = [
-            $this->trans('net'),
-            $this->trans('gross'),
-        ];
-
         return new Elements\Price($options);
     }
 

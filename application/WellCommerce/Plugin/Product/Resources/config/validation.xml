@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
+
+    <class name="WellCommerce\Plugin\Producer\Model\ProducerShop">
+        <property name="attributes">
+            <constraint name="Collection">
+                <option name="fields">
+                    <value key="producer_id">
+                        <constraint name="NotNull"/>
+                    </value>
+                    <value key="shop_id">
+                        <constraint name="NotNull"/>
+                    </value>
+                </option>
+                <option name="allowMissingFields">false</option>
+                <option name="allowExtraFields">true</option>
+            </constraint>
+        </property>
+    </class>
+
+    <class name="WellCommerce\Plugin\Producer\Model\ProducerDeliverer">
+        <property name="attributes">
+            <constraint name="Collection">
+                <option name="fields">
+                    <value key="producer_id">
+                        <constraint name="NotNull"/>
+                    </value>
+                    <value key="deliverer_id">
+                        <constraint name="NotNull"/>
+                    </value>
+                </option>
+                <option name="allowMissingFields">false</option>
+                <option name="allowExtraFields">true</option>
+            </constraint>
+        </property>
+    </class>
+
+    <class name="WellCommerce\Plugin\Producer\Model\ProducerTranslation">
+        <property name="attributes">
+            <constraint name="Collection">
+                <option name="fields">
+                    <value key="name">
+                        <constraint name="NotNull"/>
+                    </value>
+                    <value key="description">
+                        <constraint name="NotNull"/>
+                    </value>
+                    <value key="language_id">
+                        <constraint name="NotNull"/>
+                    </value>
+                </option>
+                <option name="allowMissingFields">false</option>
+                <option name="allowExtraFields">true</option>
+            </constraint>
+        </property>
+    </class>
+</constraint-mapping>

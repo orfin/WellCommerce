@@ -11,7 +11,10 @@
  */
 namespace WellCommerce\Plugin\Availability\Controller\Admin;
 
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Exception\ValidatorException;
 use WellCommerce\Core\Component\Controller\AbstractAdminController;
+use WellCommerce\Core\Helper\TableInfo;
 use WellCommerce\Plugin\Availability\DataGrid\Config;
 use WellCommerce\Plugin\Availability\Form\AvailabilityDataConverter;
 use WellCommerce\Plugin\Availability\Model\AvailabilityData;
@@ -26,6 +29,7 @@ use WellCommerce\Plugin\Availability\Repository\AvailabilityRepositoryInterface;
 class AvailabilityController extends AbstractAdminController
 {
     private $repository;
+
     /**
      * {@inheritdoc}
      */
@@ -46,9 +50,15 @@ class AvailabilityController extends AbstractAdminController
         ]);
 
         if ($form->isValid()) {
-            $this->repository->save($form->getSubmitValuesFlat());
+            try {
+                $this->repository->save($form->getSubmitValuesFlat());
+                $this->addSuccessMessage('Changes saved successfully.');
 
-            return $this->redirect($this->getDefaultUrl());
+                return $this->redirect($this->getDefaultUrl());
+
+            } catch (ValidatorException $exception) {
+                $this->addErrorMessage($exception->getMessage());
+            }
         }
 
         return [
@@ -64,13 +74,19 @@ class AvailabilityController extends AbstractAdminController
         $model = $this->repository->find($id);
 
         $form = $this->createForm($this->get('availability.form'), $model, [
-            'name' => 'edit_availability'
+            'name' => 'edit_availability',
         ]);
 
         if ($form->isValid()) {
-            $this->repository->save($form->getSubmitValuesFlat(), $id);
+            try {
+                $this->repository->save($form->getSubmitValuesFlat(), $id);
+                $this->addSuccessMessage('Changes saved successfully.');
 
-            return $this->redirect($this->getDefaultUrl());
+                return $this->redirect($this->getDefaultUrl());
+
+            } catch (ValidatorException $exception) {
+                $this->addErrorMessage($exception->getMessage());
+            }
         }
 
         return [

@@ -179,7 +179,7 @@ abstract class AbstractDataGrid extends AbstractComponent
         $result = $this->query->get();
         $total  = count($result);
 
-//        $result = $this->processRows($result);
+        $result = $this->processRows($result);
 
         return [
             'data_id'       => isset($request['id']) ? $request['id'] : '',
@@ -229,8 +229,9 @@ abstract class AbstractDataGrid extends AbstractComponent
         foreach ($rows as $row) {
             $columns = [];
             foreach ($row as $param => $value) {
-                if (isset($this->columns[$param]) && isset($this->columns[$param]['process_function']) && $this->columns[$param]['process_function']) {
-                    $value = call_user_func($this->columns[$param]['process_function'], $value);
+                $processFunction = $this->columns->get($param)->getProcessFunction();
+                if (null != $processFunction) {
+                    $value = call_user_func($processFunction, $value);
                 }
 
                 $columns[$param] = strtr(addslashes($value), $transform);
@@ -242,13 +243,23 @@ abstract class AbstractDataGrid extends AbstractComponent
     }
 
     /**
-     * Returns ColumnCollection
+     * Returns columns collection
      *
      * @return \WellCommerce\Core\Component\DataGrid\Column\ColumnCollection
      */
-    public function getColumnCollection()
+    public function getColumns()
     {
         return $this->columns;
+    }
+
+    /**
+     * Sets columns collection
+     *
+     * @param ColumnCollection $columns
+     */
+    public function setColumns(ColumnCollection $columns)
+    {
+        $this->columns = $columns;
     }
 
     /**

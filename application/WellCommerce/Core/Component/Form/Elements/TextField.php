@@ -50,6 +50,7 @@ class TextField extends Field implements ElementInterface
             'rules',
             'filters',
             'dependencies',
+            'default',
         ]);
 
         $resolver->setAllowedTypes([
@@ -66,7 +67,8 @@ class TextField extends Field implements ElementInterface
             'error'         => 'string',
             'filters'       => 'array',
             'rules'         => 'array',
-            'dependencies'  => 'array'
+            'dependencies'  => 'array',
+            'default'       => ['string', 'integer']
         ]);
     }
 

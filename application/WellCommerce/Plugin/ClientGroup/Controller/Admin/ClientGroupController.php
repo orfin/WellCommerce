@@ -11,6 +11,7 @@
  */
 namespace WellCommerce\Plugin\ClientGroup\Controller\Admin;
 
+use Symfony\Component\Validator\Exception\ValidatorException;
 use WellCommerce\Core\Component\Controller\AbstractAdminController;
 use WellCommerce\Plugin\ClientGroup\Repository\ClientGroupRepositoryInterface;
 
@@ -42,9 +43,15 @@ class ClientGroupController extends AbstractAdminController
         ]);
 
         if ($form->isValid()) {
-            $this->repository->save($form->getSubmittedData());
+            try {
+                $this->repository->save($form->getSubmitValuesFlat());
+                $this->addSuccessMessage('Changes saved successfully.');
 
-            return $this->redirect($this->generateUrl('admin.client_group.index'));
+                return $this->redirect($this->getDefaultUrl());
+
+            } catch (ValidatorException $exception) {
+                $this->addErrorMessage($exception->getMessage());
+            }
         }
 
         return [
@@ -64,13 +71,15 @@ class ClientGroupController extends AbstractAdminController
         ]);
 
         if ($form->isValid()) {
-            $this->repository->save($form->getSubmittedData(), $id);
+            try {
+                $this->repository->save($form->getSubmitValuesFlat(), $id);
+                $this->addSuccessMessage('Changes saved successfully.');
 
-            if ($form->isAction('continue')) {
-                return $this->redirect($this->generateUrl('admin.client_group.edit', ['id' => $model->id]));
+                return $this->redirect($this->getDefaultUrl());
+
+            } catch (ValidatorException $exception) {
+                $this->addErrorMessage($exception->getMessage());
             }
-
-            return $this->redirect($this->generateUrl('admin.client_group.index'));
         }
 
         return [

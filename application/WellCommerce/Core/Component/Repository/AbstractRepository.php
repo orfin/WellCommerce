@@ -45,9 +45,9 @@ abstract class AbstractRepository extends AbstractComponent
      * @param array $data
      * @param       $id
      */
-    final protected function dispatchEvent($eventName, array $data, $id)
+    final protected function dispatchEvent($eventName, $model, array $data = [])
     {
-        $event = new RepositoryEvent($data, $id);
+        $event = new RepositoryEvent($model, $data);
         $this->getDispatcher()->dispatch($eventName, $event);
 
         return $event->getData();

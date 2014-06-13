@@ -12,14 +12,12 @@
 namespace WellCommerce\Core\Component\Model;
 
 use Illuminate\Database\Eloquent\Model as BaseModel;
-use Illuminate\Validation\Validator;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Symfony\Component\Translation\Translator;
 use Symfony\Component\Validator\Exception\ValidatorException;
 use WellCommerce\Core\Component\Model\Collection\CustomCollection;
 use Symfony\Component\Validator\Validation;
+use WellCommerce\Core\Helper\TableInfo;
 
 /**
  * Class AbstractModel
@@ -36,106 +34,15 @@ abstract class AbstractModel extends BaseModel
     protected $softDelete = false;
 
     /**
-     * Translatable attributes in model
+     * Wraps every delete operation into transaction
      *
-     * @var array
+     * @return bool|null|void
      */
-    protected $translatable = [];
-
-    /**
-     * Returns all model translatable attributes
-     *
-     * @return array
-     */
-    protected function getTranslatableAttributes()
+    public function delete()
     {
-        return $this->translatable;
-    }
-
-    /**
-     * Adds new translatable attribute
-     *
-     * @param $attribute
-     */
-    public function addTranslatableAttribute($attribute)
-    {
-        $this->translatable[] = $attribute;
-    }
-
-    /**
-     * Checks if attribute is translatable
-     *
-     * @param $key
-     *
-     * @return bool
-     */
-    protected function isTranslatableAttribute($key)
-    {
-        return array_key_exists($key, array_flip($this->translatable));
-    }
-
-    /**
-     * Shortcut to get PropertyAccessor
-     *
-     * @return \Symfony\Component\PropertyAccess\PropertyAccessor
-     */
-    protected function getPropertyAccessor()
-    {
-        return PropertyAccess::createPropertyAccessor();
-    }
-
-    public function getTranslation(array $data, $language)
-    {
-        $translation = [];
-
-        foreach ($data as $attribute => $values) {
-            if ($this->isTranslatableAttribute($attribute)) {
-                $translation[$attribute] = $values[$language];
-            }
-        }
-
-        return $translation;
-    }
-
-    /**
-     * Sets translatable attributes in model
-     *
-     * @param array $data
-     * @param       $language
-     */
-    public function setTranslationData(array $data, $languageId)
-    {
-        $accessor = $this->getPropertyAccessor();
-
-        foreach ($data as $attribute => $value) {
-            if ($this->isTranslatableAttribute($attribute)) {
-                $accessor->setValue($this, $attribute, $value);
-            }
-        }
-    }
-
-    /**
-     * Returns translation data
-     *
-     * @return array
-     * @throws \LogicException
-     */
-    public function getTranslationData()
-    {
-        if (!$this instanceof TranslatableModelInterface) {
-            throw new \LogicException('Model must implement TranslatableModelInterface to get translations from it.');
-        }
-
-        $collection   = $this->translation;
-        $languageData = [];
-
-        foreach ($collection as $item) {
-            foreach ($item->translatable as $attribute) {
-                $languageData[$item->language_id][$attribute] = $item->$attribute;
-            }
-        }
-
-        return $languageData;
+        $this->getConnection()->transaction(function () {
+            parent::delete();
+        });
     }
 
     /**
@@ -149,18 +56,9 @@ abstract class AbstractModel extends BaseModel
     public function update(array $attributes = [])
     {
         $this->set($attributes);
+        $this->validate();
 
-        $violations = $this->validate($attributes);
-
-        if (count($violations) > 0) {
-            throw new ValidatorException((string)$violations);
-        }
-
-        if (!$this->exists) {
-            return $this->newQuery()->update($attributes);
-        }
-
-        return $this->set($attributes)->save();
+        parent::update($attributes);
     }
 
     /**
@@ -174,7 +72,46 @@ abstract class AbstractModel extends BaseModel
         $validatorBuilder->addXmlMapping($this->getValidationXmlMapping());
         $validator = $validatorBuilder->getValidator();
 
-        return $validator->validate($this);
+        $violations = $validator->validate($this);
+
+        if (count($violations) > 0) {
+            $exceptionMessage = '';
+            foreach ($violations as $violation) {
+                $exceptionMessage .= $violation->getMessage();
+            }
+            throw new ValidatorException($exceptionMessage);
+        }
+    }
+
+    /**
+     * Prepares passed translation data for use in update method
+     *
+     * @param array $data
+     * @param       $language
+     */
+    public function getTranslation(array $data, $language)
+    {
+        $translation = [];
+        $attributes  = $this->getAccessibleAttributes();
+
+        foreach ($data as $attribute => $values) {
+            if (in_array($attribute, $attributes) && isset($values[$language])) {
+                $translation[$attribute] = $values[$language];
+            }
+        }
+
+        return $translation;
+    }
+
+    /**
+     * Returns all accessible attributes for model
+     * using information fetched from db schema
+     *
+     * @return mixed
+     */
+    private function getAccessibleAttributes()
+    {
+        return TableInfo::getColumns($this->table);
     }
 
     /**
@@ -184,8 +121,10 @@ abstract class AbstractModel extends BaseModel
      */
     public function set(array $attributes = [])
     {
+        $possibleAttributes = $this->getAccessibleAttributes();
+
         foreach ($attributes as $key => $value) {
-            if (array_key_exists($key, array_merge($this->attributesToArray(), array_flip($this->translatable)))) {
+            if (in_array($key, $possibleAttributes) && !is_array($value)) {
                 $this->setAttribute($key, $value);
             }
         }

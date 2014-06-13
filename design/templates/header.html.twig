@@ -32,16 +32,5 @@
         GF_Debug.s_iLevel = GF_Debug.LEVEL_ALL;
     </script>
     {{ xajax_javascript() }}
-    {% if error is defined %}
-        <script type="text/javascript">
-            GError('{% trans %}TXT_ERROR_OCCURED{% endtrans %}', '{{ error }}');
-        </script>
-    {% endif %}
-    {% if message is defined %}
-        <script type="text/javascript">
-            $(document).ready(function () {
-                GMessage('{{ message }}');
-            });
-        </script>
-    {% endif %}
+    {% include 'flashes.html.twig' %}
 </head>

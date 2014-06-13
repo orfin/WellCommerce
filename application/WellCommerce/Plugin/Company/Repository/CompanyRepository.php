@@ -43,13 +43,9 @@ class CompanyRepository extends AbstractRepository implements CompanyRepositoryI
      */
     public function delete($id)
     {
-        $this->dispatchEvent(CompanyRepositoryInterface::PRE_DELETE_EVENT, [], $id);
-
-        $this->transaction(function () use ($id) {
-            return Company::destroy($id);
-        });
-
-        $this->dispatchEvent(CompanyRepositoryInterface::POST_DELETE_EVENT, [], $id);
+        $company = $this->find($id);
+        $company->delete();
+        $this->dispatchEvent(CompanyRepositoryInterface::POST_DELETE_EVENT, $company);
     }
 
     /**
@@ -57,18 +53,18 @@ class CompanyRepository extends AbstractRepository implements CompanyRepositoryI
      */
     public function save(array $data, $id = null)
     {
-        $data = $this->dispatchEvent(CompanyRepositoryInterface::PRE_SAVE_EVENT, $data, $id);
-
         $this->transaction(function () use ($data, $id) {
 
-            $company = Company::firstOrNew([
+            $company = Company::firstOrCreate([
                 'id' => $id
             ]);
 
-            $company->update($data);
-        });
+            $data = $this->dispatchEvent(CompanyRepositoryInterface::PRE_SAVE_EVENT, $company, $data);
 
-        $this->dispatchEvent(CompanyRepositoryInterface::POST_SAVE_EVENT, $data, $id);
+            $company->update($data);
+
+            $this->dispatchEvent(CompanyRepositoryInterface::POST_SAVE_EVENT, $company, $data);
+        });
     }
 
     /**
@@ -76,13 +72,7 @@ class CompanyRepository extends AbstractRepository implements CompanyRepositoryI
      */
     public function getAllCompanyToSelect()
     {
-        $companies = $this->all();
-        $Data      = Array();
-        foreach ($companies as $company) {
-            $Data[$company->id] = $company->name;
-        }
-
-        return $Data;
+        return $this->all()->toSelect('id', 'name');
     }
 
     /**

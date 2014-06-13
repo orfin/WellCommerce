@@ -45,4 +45,28 @@ abstract class AbstractAdminController extends AbstractController implements Adm
 
         return $this->generateUrl($url);
     }
+
+    /**
+     * Shorthand for adding a flash success message
+     *
+     * @param $message
+     *
+     * @return mixed
+     */
+    public function addSuccessMessage($message)
+    {
+        return $this->getFlashBag()->add(self::MESSAGE_TYPE_SUCCESS, $this->trans($message));
+    }
+
+    /**
+     * Shorthand for adding a flash error message
+     *
+     * @param $message
+     *
+     * @return mixed
+     */
+    public function addErrorMessage($message)
+    {
+        return $this->getFlashBag()->add(self::MESSAGE_TYPE_ERROR, $this->trans($message));
+    }
 }

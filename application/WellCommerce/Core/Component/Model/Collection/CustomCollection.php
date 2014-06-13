@@ -12,6 +12,7 @@
 namespace WellCommerce\Core\Component\Model\Collection;
 
 use Illuminate\Database\Eloquent\Collection;
+use WellCommerce\Core\Helper\TableInfo;
 
 /**
  * Class CustomCollection
@@ -33,6 +34,25 @@ class CustomCollection extends Collection
                 return $item;
             }
         }
+    }
+
+    /**
+     * Returns translation data from collection
+     *
+     * @return array
+     */
+    public function getTranslations()
+    {
+        foreach ($this as $item) {
+            $attributes = TableInfo::getColumns($item->getTable());
+            foreach ($attributes as $attribute) {
+                if (isset($item->$attribute) && $value = $item->$attribute) {
+                    $languageData[$item->language_id][$attribute] = $value;
+                }
+            }
+        }
+
+        return $languageData;
     }
 
     /**
@@ -73,5 +93,20 @@ class CustomCollection extends Collection
         });
 
         return $select;
+    }
+
+    /**
+     * Returns an array containing only primary keys for all items in collection
+     *
+     * @return array
+     */
+    public function getPrimaryKeys()
+    {
+        $data = [];
+        foreach ($this->items as $item) {
+            $data[] = $item->id;
+        }
+
+        return $data;
     }
 }

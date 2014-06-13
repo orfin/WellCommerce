@@ -9,12 +9,13 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Core;
+namespace WellCommerce\Core\Uploader;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\FileBag;
 use RecursiveArrayIterator;
 use RecursiveIteratorIterator;
+use WellCommerce\Core\Component\AbstractComponent;
 
 /**
  * Class Uploader

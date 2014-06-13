@@ -53,7 +53,6 @@ class PluginExtensionLoader
         $finder = new Finder();
         $files  = $finder->files()->in(ROOTPATH . 'application')->name('*Extension.php');
 
-
         foreach ($files as $file) {
             $namespace = $file->getRelativePath();
             $class     = $namespace . '\\' . $file->getBasename('.php');

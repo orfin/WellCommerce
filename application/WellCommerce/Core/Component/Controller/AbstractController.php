@@ -27,6 +27,10 @@ use WellCommerce\Core\Component\Repository\RepositoryInterface;
  */
 abstract class AbstractController extends AbstractComponent
 {
+    const MESSAGE_TYPE_SUCCESS = 'success';
+    const MESSAGE_TYPE_NOTICE  = 'notice';
+    const MESSAGE_TYPE_ERROR   = 'error';
+
     /**
      * Redirects user to a given url
      *

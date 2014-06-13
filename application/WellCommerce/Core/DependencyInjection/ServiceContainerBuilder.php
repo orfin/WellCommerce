@@ -18,12 +18,14 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Dumper\PhpDumper;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpKernel\DependencyInjection\RegisterListenersPass;
 use Symfony\Component\Routing\RouteCollection;
 use WellCommerce\Core\DependencyInjection\Compiler\RegisterTwigExtensionsPass;
 use WellCommerce\Core\DependencyInjection\Extension\PluginExtensionLoader;
 use Symfony\Component\DependencyInjection\Compiler\PassConfig;
+use WellCommerce\Core\DependencyInjection\Schema\Dumper;
 
 /**
  * Class ServiceContainerBuilder
@@ -40,6 +42,7 @@ final class ServiceContainerBuilder
      * @var string
      */
     const SERVICE_CONTAINER_CLASS = 'ServiceContainer';
+    const DATABASE_COLUMNS_CLASS  = 'TableInfo';
 
     /**
      * Cached container parent class name
@@ -121,6 +124,8 @@ final class ServiceContainerBuilder
 
             $this->registerCompilerPasses();
 
+            $this->dumpDatabaseColumns();
+
             foreach ($this->compilerPasses as $compilerPass) {
                 $this->containerBuilder->addCompilerPass($compilerPass, PassConfig::TYPE_AFTER_REMOVING);
                 $compilerPass->process($this->containerBuilder);
@@ -129,6 +134,27 @@ final class ServiceContainerBuilder
             $this->compileAndSaveContainer();
         }
     }
+
+    /**
+     * Dumps all database column names into one class
+     *
+     * @return void
+     */
+    private function dumpDatabaseColumns()
+    {
+        $dumper = new Dumper($this->containerBuilder);
+
+        $options = Array(
+            'class'     => self::DATABASE_COLUMNS_CLASS,
+            'namespace' => 'WellCommerce\\Core\\Helper',
+            'path'      => ROOTPATH . 'WellCommerce' . DS . 'Core' . DS . 'Helper' . DS . self::DATABASE_COLUMNS_CLASS . '.php'
+        );
+
+        $path       = __DIR__ . '/../' . DS . 'Helper' . DS . self::DATABASE_COLUMNS_CLASS . '.php';
+        $filesystem = new Filesystem();
+        $filesystem->dumpFile($path, $dumper->dump($options));
+    }
+
 
     /**
      * Register extensions using recursive scan

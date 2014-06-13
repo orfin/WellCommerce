@@ -94,4 +94,11 @@ interface ColumnInterface
      * @return array
      */
     public function getOptions();
+
+    /**
+     * Returns columns processing function
+     *
+     * @return array
+     */
+    public function getProcessFunction();
 }

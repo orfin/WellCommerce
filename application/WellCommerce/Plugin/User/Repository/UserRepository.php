@@ -97,7 +97,7 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
                 $this->getSession()->set('admin/user/last_name', $user->last_name);
                 $this->getSession()->set('admin/user/global', $user->global);
 
-                $this->dispatchEvent(UserRepositoryInterface::LOGIN_SUCCEED, $data, $user->id);
+                $this->dispatchEvent(UserRepositoryInterface::LOGIN_SUCCEED, $user, $data);
             }
         }
     }

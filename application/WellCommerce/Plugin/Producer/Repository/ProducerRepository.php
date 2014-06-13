@@ -44,13 +44,9 @@ class ProducerRepository extends AbstractRepository implements ProducerRepositor
      */
     public function delete($id)
     {
-        $this->dispatchEvent(ProducerRepositoryInterface::PRE_DELETE_EVENT, [], $id);
-
-        $this->transaction(function () use ($id) {
-            return Producer::destroy($id);
-        });
-
-        $this->dispatchEvent(ProducerRepositoryInterface::POST_DELETE_EVENT, [], $id);
+        $producer = $this->find($id);
+        $producer->delete();
+        $this->dispatchEvent(ProducerRepositoryInterface::POST_DELETE_EVENT, $producer);
     }
 
     /**
@@ -58,15 +54,15 @@ class ProducerRepository extends AbstractRepository implements ProducerRepositor
      */
     public function save(array $data, $id = null)
     {
-        $data = $this->dispatchEvent(ProducerRepositoryInterface::PRE_SAVE_EVENT, $data, $id);
-
         $this->transaction(function () use ($data, $id) {
 
             $producer = Producer::firstOrCreate([
                 'id' => $id
             ]);
 
-            $producer->update();
+            $data = $this->dispatchEvent(ProducerRepositoryInterface::PRE_SAVE_EVENT, $producer, $data);
+
+            $producer->update($data);
 
             foreach ($this->getLanguageIds() as $language) {
 
@@ -81,9 +77,9 @@ class ProducerRepository extends AbstractRepository implements ProducerRepositor
 
             $producer->sync($producer->deliverer(), $data['deliverers']);
             $producer->sync($producer->shop(), $data['shops']);
-        });
 
-        $this->dispatchEvent(ProducerRepositoryInterface::POST_SAVE_EVENT, $data, $id);
+            $this->dispatchEvent(ProducerRepositoryInterface::POST_SAVE_EVENT, $producer, $data);
+        });
     }
 
     /**

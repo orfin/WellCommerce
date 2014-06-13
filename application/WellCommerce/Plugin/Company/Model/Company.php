@@ -23,7 +23,6 @@ use WellCommerce\Core\Component\Model\ModelInterface;
 class Company extends AbstractModel implements ModelInterface
 {
     protected $table = 'company';
-
     protected $fillable = ['id'];
 
     /**

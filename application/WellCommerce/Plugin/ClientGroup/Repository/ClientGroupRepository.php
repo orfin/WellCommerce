@@ -45,13 +45,9 @@ class ClientGroupRepository extends AbstractRepository implements ClientGroupRep
      */
     public function delete($id)
     {
-        $this->dispatchEvent(ClientGroupRepositoryInterface::PRE_DELETE_EVENT, [], $id);
-
-        $this->transaction(function () use ($id) {
-            return ClientGroup::destroy($id);
-        });
-
-        $this->dispatchEvent(ClientGroupRepositoryInterface::POST_DELETE_EVENT, [], $id);
+        $clientGroup = $this->find($id);
+        $clientGroup->delete();
+        $this->dispatchEvent(ClientGroupRepositoryInterface::POST_DELETE_EVENT, $clientGroup);
     }
 
     /**
@@ -59,13 +55,13 @@ class ClientGroupRepository extends AbstractRepository implements ClientGroupRep
      */
     public function save(array $data, $id = null)
     {
-        $data = $this->dispatchEvent(ClientGroupRepositoryInterface::PRE_SAVE_EVENT, $data, $id);
-
         $this->transaction(function () use ($data, $id) {
 
             $clientGroup = ClientGroup::firstOrCreate([
                 'id' => $id
             ]);
+
+            $data = $this->dispatchEvent(ClientGroupRepositoryInterface::PRE_SAVE_EVENT, $clientGroup, $data);
 
             $clientGroup->update($data);
 
@@ -79,9 +75,9 @@ class ClientGroupRepository extends AbstractRepository implements ClientGroupRep
                 $translationData = $translation->getTranslation($data, $language);
                 $translation->update($translationData);
             }
-        });
 
-        $this->dispatchEvent(ClientGroupRepositoryInterface::POST_SAVE_EVENT, $data, $id);
+            $this->dispatchEvent(ClientGroupRepositoryInterface::POST_SAVE_EVENT, $clientGroup, $data);
+        });
     }
 
     /**

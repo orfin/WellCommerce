@@ -22,6 +22,7 @@ use WellCommerce\Core\Component\DataGrid\Column\DataGridColumn;
 use WellCommerce\Plugin\AdminMenu\Builder\AdminMenuBuilder;
 use WellCommerce\Plugin\AdminMenu\Builder\AdminMenuItem;
 use WellCommerce\Plugin\AdminMenu\Event\AdminMenuInitEvent;
+use WellCommerce\Plugin\Availability\Repository\AvailabilityRepositoryInterface;
 
 /**
  * Class AdminMenuListener
@@ -195,13 +196,16 @@ class AdminMenuListener implements EventSubscriberInterface
 
     public function onAvailabilityModelPreSaveAction(Event $event)
     {
-        $data = $event->getData();
+//        $data                   = $event->getData();
+//        $data[1]                = 1;
+////        $event->getModel()->foo = 1111;
+//        $event->setData($data);
+    }
 
-        $data['required_data']['foo'] = 1;
-
-        $event->setData($data);
-
-        print_r($data);
+    public function onAvailabilityModelPostSaveAction(Event $event)
+    {
+//        print_r($event->getData());
+//        die();
     }
 
     public function onAvailabilityDataGridInitAction(Event $event)
@@ -234,13 +238,14 @@ class AdminMenuListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            KernelEvents::CONTROLLER => array(
+            KernelEvents::CONTROLLER                         => array(
                 'onKernelController',
                 -256
             ),
             //            'availability.form.init'   => 'onAvailabilityFormInitAction',
             //            'availability.form.submit' => 'onAvailabilityFormSubmitAction'
-            //            'availability.model.pre_save' => 'onAvailabilityModelPreSaveAction'
+            AvailabilityRepositoryInterface::PRE_SAVE_EVENT  => 'onAvailabilityModelPreSaveAction',
+            AvailabilityRepositoryInterface::POST_SAVE_EVENT => 'onAvailabilityModelPostSaveAction'
             //            'availability.datagrid.init' => 'onAvailabilityDataGridInitAction'
         );
     }

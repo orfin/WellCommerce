@@ -20,7 +20,7 @@
         <parameter key="image_gallery.class">WellCommerce\Core\Uploader\ImageGallery</parameter>
         <parameter key="translation.class">WellCommerce\Core\Translation\Translation</parameter>
         <parameter key="xajax_manager.class">WellCommerce\Core\Helper\XajaxManager</parameter>
-        <parameter key="uploader.class">WellCommerce\Core\Uploader</parameter>
+        <parameter key="uploader.class">WellCommerce\Core\Uploader\Uploader</parameter>
         <parameter key="xajax.class">xajax</parameter>
         <parameter key="request_stack.class">Symfony\Component\HttpFoundation\RequestStack</parameter>
     </parameters>
@@ -79,6 +79,9 @@
         <service id="datagrid_builder" class="%datagrid_builder.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
+            </call>
+            <call method="setDatabaseManager">
+                <argument type="service" id="database_manager"/>
             </call>
         </service>
 

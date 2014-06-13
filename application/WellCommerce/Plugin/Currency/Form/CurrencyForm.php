@@ -11,8 +11,12 @@
  */
 namespace WellCommerce\Plugin\Currency\Form;
 
+use WellCommerce\Core\Component\Form\AbstractForm;
+use WellCommerce\Core\Component\Form\FormBuilder;
+use WellCommerce\Core\Component\Form\FormInterface;
 use WellCommerce\Core\Form;
 use WellCommerce\Plugin\Currency\Event\CurrencyFormEvent;
+use WellCommerce\Plugin\Currency\Model\Currency;
 
 /**
  * Class CurrencyForm
@@ -20,87 +24,111 @@ use WellCommerce\Plugin\Currency\Event\CurrencyFormEvent;
  * @package WellCommerce\Plugin\Currency\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CurrencyForm extends Form
+class CurrencyForm extends AbstractForm implements FormInterface
 {
-
-    public function init($currencyData = Array())
+    /**
+     * {@inheritdoc}
+     */
+    public function buildForm(FormBuilder $builder, array $options)
     {
-        $form = $this->addForm([
-            'name' => 'currency',
-        ]);
+        $form = $builder->addForm($options);
 
-        $requiredData = $form->addChild($this->addFieldset([
+        $requiredData = $form->addChild($builder->addFieldset([
             'name'  => 'required_data',
             'label' => $this->trans('Basic information')
         ]));
 
-        $requiredData->addChild($this->addTextField([
+        $requiredData->addChild($builder->addTextField([
             'name'  => 'name',
             'label' => $this->trans('Name'),
             'rules' => [
-                $this->addRuleRequired($this->trans('Name is required'))
+                $builder->addRuleRequired($this->trans('Name is required'))
             ]
         ]));
 
-        $requiredData->addChild($this->addSelect([
+        $requiredData->addChild($builder->addSelect([
             'name'    => 'symbol',
             'label'   => $this->trans('Symbol'),
-            'options' => $this->makeOptions($this->get('currency.repository')->getCurrencySymbols()),
+            'options' => $builder->makeOptions($this->get('currency.repository')->getCurrencySymbols()),
             'rules'   => [
-                $this->addRuleRequired($this->trans('Symbol is required'))
+                $builder->addRuleRequired($this->trans('Symbol is required'))
             ]
         ]));
 
-        $requiredData->addChild($this->addTextField([
+        $requiredData->addChild($builder->addTextField([
             'name'  => 'decimal_separator',
             'label' => $this->trans('Decimal separator'),
             'rules' => [
-                $this->addRuleRequired($this->trans('Decimal separator is required'))
+                $builder->addRuleRequired($this->trans('Decimal separator is required'))
             ]
         ]));
 
-        $requiredData->addChild($this->addTextField([
+        $requiredData->addChild($builder->addTextField([
             'name'  => 'decimal_count',
             'label' => $this->trans('Decimal count'),
             'rules' => [
-                $this->addRuleRequired($this->trans('Decimal count is required'))
+                $builder->addRuleRequired($this->trans('Decimal count is required'))
             ]
         ]));
 
-        $requiredData->addChild($this->addTextField([
+        $requiredData->addChild($builder->addTextField([
             'name'  => 'thousand_separator',
             'label' => $this->trans('Thousands separator')
         ]));
 
-        $requiredData->addChild($this->addTextField([
+        $requiredData->addChild($builder->addTextField([
             'name'  => 'positive_prefix',
             'label' => $this->trans('Positive prefix')
         ]));
 
-        $requiredData->addChild($this->addTextField([
+        $requiredData->addChild($builder->addTextField([
             'name'  => 'positive_suffix',
             'label' => $this->trans('Positive suffix')
         ]));
 
-        $requiredData->addChild($this->addTextField([
+        $requiredData->addChild($builder->addTextField([
             'name'  => 'negative_prefix',
             'label' => $this->trans('Negative prefix')
         ]));
 
-        $requiredData->addChild($this->addTextField([
+        $requiredData->addChild($builder->addTextField([
             'name'  => 'negative_suffix',
             'label' => $this->trans('Negative suffix')
         ]));
 
-        $form->AddFilter($this->addFilterNoCode());
-        $form->AddFilter($this->addFilterSecure());
-
-        $event = new CurrencyFormEvent($form, $currencyData);
-
-        $this->getDispatcher()->dispatch(CurrencyFormEvent::FORM_INIT_EVENT, $event);
-
-        $form->Populate($event->getPopulateData());
+        $form->addFilters([
+            $builder->addFilterNoCode(),
+            $builder->addFilterTrim(),
+            $builder->addFilterSecure()
+        ]);
 
         return $form;
+    }
+
+    /**
+     * Prepares form data using retrieved model
+     *
+     * @param Currency $currency Model
+     *
+     * @return array
+     */
+    public function prepareData(Currency $currency)
+    {
+        $formData = [];
+        $accessor = $this->getPropertyAccessor();
+
+        $accessor->setValue($formData, '[required_data]', [
+            'name'               => $currency->name,
+            'symbol'             => $currency->symbol,
+            'decimal_separator'  => $currency->decimal_separator,
+            'decimal_count'      => $currency->decimal_count,
+            'thousand_separator' => $currency->thousand_separator,
+            'positive_prefix'    => $currency->positive_prefix,
+            'positive_suffix'    => $currency->positive_suffix,
+            'negative_prefix'    => $currency->negative_prefix,
+            'negative_suffix'    => $currency->negative_suffix
+        ]);
+
+        return $formData;
     }
 }

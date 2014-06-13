@@ -11,7 +11,9 @@
  */
 namespace WellCommerce\Plugin\Availability\DataGrid;
 
+use Illuminate\Database\Capsule\Manager;
 use WellCommerce\Core\Component\DataGrid\AbstractDataGrid;
+use WellCommerce\Core\Component\DataGrid\Column\ColumnCollection;
 use WellCommerce\Core\Component\DataGrid\Column\ColumnInterface;
 use WellCommerce\Core\Component\DataGrid\Column\DataGridColumn;
 use WellCommerce\Core\Component\DataGrid\DataGridInterface;
@@ -38,16 +40,16 @@ class AvailabilityDataGrid extends AbstractDataGrid implements DataGridInterface
     public function getRoutes()
     {
         return [
-            'edit'  => $this->generateUrl('admin.availability.edit')
+            'edit' => $this->generateUrl('admin.availability.edit')
         ];
     }
 
     /**
      * {@inheritdoc}
      */
-    public function initColumns()
+    public function initColumns(ColumnCollection $columns)
     {
-        $this->columns->add(new DataGridColumn([
+        $columns->add(new DataGridColumn([
             'id'         => 'id',
             'source'     => 'availability.id',
             'caption'    => $this->trans('Id'),
@@ -63,7 +65,7 @@ class AvailabilityDataGrid extends AbstractDataGrid implements DataGridInterface
             ]
         ]));
 
-        $this->columns->add(new DataGridColumn([
+        $columns->add(new DataGridColumn([
             'id'         => 'name',
             'source'     => 'availability_translation.name',
             'caption'    => $this->trans('Name'),
@@ -81,9 +83,9 @@ class AvailabilityDataGrid extends AbstractDataGrid implements DataGridInterface
     /**
      * {@inheritdoc}
      */
-    public function setQuery()
+    public function setQuery(Manager $manager)
     {
-        $this->query = $this->getDb()->table('availability');
+        $this->query = $manager->table('availability');
         $this->query->join('availability_translation', 'availability_translation.availability_id', '=', 'availability.id');
         $this->query->groupBy('availability.id');
     }

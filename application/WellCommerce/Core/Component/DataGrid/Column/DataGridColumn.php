@@ -47,17 +47,18 @@ class DataGridColumn implements ColumnInterface
     private function configureOptions(array $options)
     {
         return array_replace_recursive([
-            'editable'   => false,
-            'selectable' => false,
-            'sorting'    => [
+            'editable'         => false,
+            'selectable'       => false,
+            'process_function' => false,
+            'sorting'          => [
                 'default_order' => ColumnInterface::SORT_DIR_DESC
             ],
-            'appearance' => [
+            'appearance'       => [
                 'visible' => true,
                 'width'   => ColumnInterface::WIDTH_AUTO,
                 'align'   => ColumnInterface::ALIGN_RIGHT
             ],
-            'filter'     => [
+            'filter'           => [
                 'type' => ColumnInterface::FILTER_NONE
             ]
         ], $options);
@@ -133,5 +134,13 @@ class DataGridColumn implements ColumnInterface
     public function getOptions()
     {
         return $this->options;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getProcessFunction()
+    {
+        return $this->options['process_function'];
     }
 } 

@@ -86,7 +86,7 @@ class AvailabilityForm extends AbstractForm implements FormInterface
     {
         $formData     = [];
         $accessor     = $this->getPropertyAccessor();
-        $languageData = $availability->getTranslationData();
+        $languageData = $availability->translation->getTranslations();
 
         $accessor->setValue($formData, '[required_data]', [
             'language_data' => $languageData

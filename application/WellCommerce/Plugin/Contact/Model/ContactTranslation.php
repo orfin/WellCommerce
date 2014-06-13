@@ -31,8 +31,6 @@ class ContactTranslation extends AbstractModel
 
     protected $fillable = ['contact_id', 'language_id'];
 
-    protected $translatable = ['name', 'email', 'phone', 'street', 'streetno', 'flatno', 'province', 'city', 'country'];
-
     /**
      * {@inheritdoc}
      */

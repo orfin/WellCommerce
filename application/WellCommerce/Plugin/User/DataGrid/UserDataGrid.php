@@ -11,7 +11,9 @@
  */
 namespace WellCommerce\Plugin\User\DataGrid;
 
+use Illuminate\Database\Capsule\Manager;
 use WellCommerce\Core\Component\DataGrid\AbstractDataGrid;
+use WellCommerce\Core\Component\DataGrid\Column\ColumnCollection;
 use WellCommerce\Core\Component\DataGrid\Column\ColumnInterface;
 use WellCommerce\Core\Component\DataGrid\Column\DataGridColumn;
 use WellCommerce\Core\Component\DataGrid\DataGridInterface;
@@ -45,9 +47,9 @@ class UserDataGrid extends AbstractDataGrid implements DataGridInterface
     /**
      * {@inheritdoc}
      */
-    public function initColumns()
+    public function initColumns(ColumnCollection $collection)
     {
-        $this->columns->add(new DataGridColumn([
+        $collection->add(new DataGridColumn([
             'id'         => 'id',
             'source'     => 'user.id',
             'caption'    => $this->trans('Id'),
@@ -63,7 +65,7 @@ class UserDataGrid extends AbstractDataGrid implements DataGridInterface
             ]
         ]));
 
-        $this->columns->add(new DataGridColumn([
+        $collection->add(new DataGridColumn([
             'id'         => 'first_name',
             'source'     => 'user.first_name',
             'caption'    => $this->trans('First name'),
@@ -75,7 +77,7 @@ class UserDataGrid extends AbstractDataGrid implements DataGridInterface
             ]
         ]));
 
-        $this->columns->add(new DataGridColumn([
+        $collection->add(new DataGridColumn([
             'id'         => 'last_name',
             'source'     => 'user.last_name',
             'caption'    => $this->trans('Last name'),
@@ -87,7 +89,7 @@ class UserDataGrid extends AbstractDataGrid implements DataGridInterface
             ]
         ]));
 
-        $this->columns->add(new DataGridColumn([
+        $collection->add(new DataGridColumn([
             'id'         => 'email',
             'source'     => 'user.email',
             'caption'    => $this->trans('E-mail'),
@@ -104,9 +106,9 @@ class UserDataGrid extends AbstractDataGrid implements DataGridInterface
     /**
      * {@inheritdoc}
      */
-    public function setQuery()
+    public function setQuery(Manager $manager)
     {
-        $this->query = $this->getDb()->table('user');
+        $this->query = $manager->table('user');
         $this->query->groupBy('user.id');
     }
 }

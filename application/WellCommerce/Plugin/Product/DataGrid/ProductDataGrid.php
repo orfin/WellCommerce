@@ -12,8 +12,9 @@
 namespace WellCommerce\Plugin\Product\DataGrid;
 
 use WellCommerce\Core\Component\DataGrid\AbstractDataGrid;
+use WellCommerce\Core\Component\DataGrid\Column\ColumnInterface;
+use WellCommerce\Core\Component\DataGrid\Column\DataGridColumn;
 use WellCommerce\Core\Component\DataGrid\DataGridInterface;
-use WellCommerce\Plugin\Product\Event\ProductDataGridEvent;
 
 /**
  * Class ProductDataGrid
@@ -26,63 +27,77 @@ class ProductDataGrid extends AbstractDataGrid implements DataGridInterface
     /**
      * {@inheritdoc}
      */
-    public function configure()
+    public function getId()
     {
-        $this->setOptions([
-            'id'             => 'product',
-            'event_handlers' => [
-                'load'       => $this->getXajaxManager()->registerFunction(['LoadProduct', $this, 'loadData']),
-                'delete_row' => $this->getXajaxManager()->registerFunction(['DeleteProduct', $this, 'deleteRow']),
-                'edit_row'   => 'editProduct',
-                'click_row'  => 'editProduct',
-                'update_row' => $this->getXajaxManager()->registerFunction(['UpdateProduct', $this, 'updateRow']),
-                'process'    => 'processProduct',
-                'loaded'     => 'dataLoaded'
-            ],
-            'routes'         => [
-                'index' => $this->generateUrl('admin.product.index'),
-                'edit'  => $this->generateUrl('admin.product.edit')
-            ]
-        ]);
+        return 'product';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function init()
+    public function getRoutes()
     {
-        $this->addColumn('id', [
+        return [
+            'index' => $this->generateUrl('admin.product.index'),
+            'edit'  => $this->generateUrl('admin.product.edit')
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(array $options)
+    {
+        $id                        = $this->getId();
+        $options['event_handlers'] = [
+            'update_row' => $this->getXajaxManager()->registerFunction(['update_' . $id, $this, 'updateRow']),
+            'process'    => 'processProduct',
+            'loaded'     => 'dataLoaded'
+        ];
+
+        return parent::configureOptions($options);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function initColumns()
+    {
+        $this->columns->add(new DataGridColumn([
+            'id'         => 'id',
             'source'     => 'product.id',
             'caption'    => $this->trans('Id'),
             'sorting'    => [
-                'default_order' => DataGridInterface::SORT_DIR_DESC
+                'default_order' => ColumnInterface::SORT_DIR_DESC
             ],
             'appearance' => [
                 'width'   => 90,
                 'visible' => false
             ],
             'filter'     => [
-                'type' => DataGridInterface::FILTER_BETWEEN
+                'type' => ColumnInterface::FILTER_BETWEEN
             ]
-        ]);
+        ]));
 
-        $this->addColumn('name', [
+        $this->columns->add(new DataGridColumn([
+            'id'         => 'name',
             'source'     => 'product_translation.name',
             'caption'    => $this->trans('Name'),
             'appearance' => [
                 'width' => 70,
-                'align' => DataGridInterface::ALIGN_LEFT
+                'align' => ColumnInterface::ALIGN_LEFT
             ],
             'filter'     => [
-                'type' => DataGridInterface::FILTER_INPUT
+                'type' => ColumnInterface::FILTER_INPUT
             ]
-        ]);
+        ]));
 
-        $this->addColumn('preview', [
+        $this->columns->add(new DataGridColumn([
+            'id'               => 'preview',
             'source'           => 'product.photo_id',
             'caption'          => $this->trans('Thumb'),
             'sorting'          => [
-                'default_order' => DataGridInterface::SORT_DIR_DESC
+                'default_order' => ColumnInterface::SORT_DIR_DESC
             ],
             'appearance'       => [
                 'width'   => 90,
@@ -95,31 +110,34 @@ class ProductDataGrid extends AbstractDataGrid implements DataGridInterface
 
                     return $this->getImageGallery()->getImageUrl($id, 100, 100);
                 }
-        ]);
+        ]));
 
-        $this->addColumn('sku', [
+        $this->columns->add(new DataGridColumn([
+            'id'         => 'sku',
             'source'     => 'product.sku',
             'caption'    => $this->trans('SKU'),
             'appearance' => [
                 'width' => 20,
             ],
             'filter'     => [
-                'type' => DataGridInterface::FILTER_INPUT
+                'type' => ColumnInterface::FILTER_INPUT
             ]
-        ]);
+        ]));
 
-        $this->addColumn('category', [
+        $this->columns->add(new DataGridColumn([
+            'id'         => 'category',
             'source'     => 'GROUP_CONCAT(DISTINCT SUBSTRING(CONCAT(\' \', category_translation.name), 1))',
             'caption'    => $this->trans('Category'),
             'appearance' => [
                 'width' => 120,
             ],
             'filter'     => [
-                'type' => DataGridInterface::FILTER_INPUT
+                'type' => ColumnInterface::FILTER_INPUT
             ]
-        ]);
+        ]));
 
-        $this->addColumn('ean', [
+        $this->columns->add(new DataGridColumn([
+            'id'         => 'ean',
             'source'     => 'product.ean',
             'caption'    => $this->trans('EAN'),
             'editable'   => true,
@@ -127,11 +145,12 @@ class ProductDataGrid extends AbstractDataGrid implements DataGridInterface
                 'width' => 60,
             ],
             'filter'     => [
-                'type' => DataGridInterface::FILTER_INPUT
+                'type' => ColumnInterface::FILTER_INPUT
             ]
-        ]);
+        ]));
 
-        $this->addColumn('sell_price', [
+        $this->columns->add(new DataGridColumn([
+            'id'         => 'sell_price',
             'source'     => 'product.sell_price',
             'caption'    => $this->trans('Price net'),
             'editable'   => true,
@@ -139,11 +158,12 @@ class ProductDataGrid extends AbstractDataGrid implements DataGridInterface
                 'width' => 40,
             ],
             'filter'     => [
-                'type' => DataGridInterface::FILTER_BETWEEN
+                'type' => ColumnInterface::FILTER_BETWEEN
             ]
-        ]);
+        ]));
 
-        $this->addColumn('sell_price_gross', [
+        $this->columns->add(new DataGridColumn([
+            'id'         => 'sell_price_gross',
             'source'     => 'product.sell_price',
             'caption'    => $this->trans('Price gross'),
             'editable'   => true,
@@ -151,11 +171,12 @@ class ProductDataGrid extends AbstractDataGrid implements DataGridInterface
                 'width' => 40,
             ],
             'filter'     => [
-                'type' => DataGridInterface::FILTER_BETWEEN
+                'type' => ColumnInterface::FILTER_BETWEEN
             ]
-        ]);
+        ]));
 
-        $this->addColumn('stock', [
+        $this->columns->add(new DataGridColumn([
+            'id'         => 'stock',
             'source'     => 'product.stock',
             'caption'    => $this->trans('Stock'),
             'editable'   => true,
@@ -163,11 +184,12 @@ class ProductDataGrid extends AbstractDataGrid implements DataGridInterface
                 'width' => 40,
             ],
             'filter'     => [
-                'type' => DataGridInterface::FILTER_BETWEEN
+                'type' => ColumnInterface::FILTER_BETWEEN
             ]
-        ]);
+        ]));
 
-        $this->addColumn('hierarchy', [
+        $this->columns->add(new DataGridColumn([
+            'id'         => 'hierarchy',
             'source'     => 'product.hierarchy',
             'caption'    => $this->trans('Hierarchy'),
             'editable'   => true,
@@ -175,11 +197,12 @@ class ProductDataGrid extends AbstractDataGrid implements DataGridInterface
                 'width' => 40,
             ],
             'filter'     => [
-                'type' => DataGridInterface::FILTER_BETWEEN
+                'type' => ColumnInterface::FILTER_BETWEEN
             ]
-        ]);
+        ]));
 
-        $this->addColumn('weight', [
+        $this->columns->add(new DataGridColumn([
+            'id'         => 'weight',
             'source'     => 'product.weight',
             'caption'    => $this->trans('Weight'),
             'editable'   => true,
@@ -187,19 +210,20 @@ class ProductDataGrid extends AbstractDataGrid implements DataGridInterface
                 'width' => 40,
             ],
             'filter'     => [
-                'type' => DataGridInterface::FILTER_BETWEEN
+                'type' => ColumnInterface::FILTER_BETWEEN
             ]
-        ]);
+        ]));
+    }
 
-        $this->query = $this->getDb()
-            ->table('product')
-            ->join('product_translation', 'product_translation.product_id', '=', 'product.id')
-            ->leftJoin('product_category', 'product_category.product_id', '=', 'product.id')
-            ->leftJoin('category_translation', 'category_translation.category_id', '=', 'product_category.category_id')
-            ->groupBy('product.id');
-
-        $event = new ProductDataGridEvent($this);
-
-        $this->getDispatcher()->dispatch(ProductDataGridEvent::DATAGRID_INIT_EVENT, $event);
+    /**
+     * {@inheritdoc}
+     */
+    public function setQuery()
+    {
+        $this->query = $this->getDb()->table('product');
+        $this->query->join('product_translation', 'product_translation.product_id', '=', 'product.id');
+        $this->query->leftJoin('product_category', 'product_category.product_id', '=', 'product.id');
+        $this->query->leftJoin('category_translation', 'category_translation.category_id', '=', 'product_category.category_id');
+        $this->query->groupBy('product.id');
     }
 }

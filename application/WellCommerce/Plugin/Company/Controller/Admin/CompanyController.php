@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Plugin\Company\Controller\Admin;
 
-use Symfony\Component\Validator\Validation;
+use Symfony\Component\Validator\Exception\ValidatorException;
 use WellCommerce\Core\Component\Controller\AbstractAdminController;
 use WellCommerce\Plugin\Company\Form\CompanyDataTransformer;
 use WellCommerce\Plugin\Company\Repository\CompanyRepositoryInterface;
@@ -46,9 +46,15 @@ class CompanyController extends AbstractAdminController
         ]);
 
         if ($form->isValid()) {
-            $this->repository->save($form->getSubmitValuesFlat());
+            try {
+                $this->repository->save($form->getSubmitValuesFlat());
+                $this->addSuccessMessage('Changes saved successfully.');
 
-            return $this->redirect($this->generateUrl('admin.company.index'));
+                return $this->redirect($this->getDefaultUrl());
+
+            } catch (ValidatorException $exception) {
+                $this->addErrorMessage($exception->getMessage());
+            }
         }
 
         return [
@@ -68,9 +74,15 @@ class CompanyController extends AbstractAdminController
         ]);
 
         if ($form->isValid()) {
-            $this->repository->save($form->getSubmitValuesFlat(), $id);
+            try {
+                $this->repository->save($form->getSubmitValuesFlat(), $id);
+                $this->addSuccessMessage('Changes saved successfully.');
 
-            return $this->redirect($this->generateUrl('admin.company.index'));
+                return $this->redirect($this->getDefaultUrl());
+
+            } catch (ValidatorException $exception) {
+                $this->addErrorMessage($exception->getMessage());
+            }
         }
 
         return [

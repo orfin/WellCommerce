@@ -12,6 +12,7 @@
 namespace WellCommerce\Plugin\File\Model;
 
 use WellCommerce\Core\Component\Model\AbstractModel;
+use WellCommerce\Core\Component\Model\ModelInterface;
 
 /**
  * Class File
@@ -19,11 +20,18 @@ use WellCommerce\Core\Component\Model\AbstractModel;
  * @package WellCommerce\Plugin\File\Model
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class File extends AbstractModel
+class File extends AbstractModel implements ModelInterface
 {
     public $timestamps = true;
     protected $table = 'file';
     protected $softDelete = false;
     protected $fillable = ['id'];
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getValidationXmlMapping()
+    {
+        return __DIR__ . '/../Resources/config/validation.xml';
+    }
 }

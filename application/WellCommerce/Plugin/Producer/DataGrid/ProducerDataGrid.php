@@ -11,7 +11,9 @@
  */
 namespace WellCommerce\Plugin\Producer\DataGrid;
 
+use Illuminate\Database\Capsule\Manager;
 use WellCommerce\Core\Component\DataGrid\AbstractDataGrid;
+use WellCommerce\Core\Component\DataGrid\Column\ColumnCollection;
 use WellCommerce\Core\Component\DataGrid\Column\ColumnInterface;
 use WellCommerce\Core\Component\DataGrid\Column\DataGridColumn;
 use WellCommerce\Core\Component\DataGrid\DataGridInterface;
@@ -45,9 +47,9 @@ class ProducerDataGrid extends AbstractDataGrid implements DataGridInterface
     /**
      * {@inheritdoc}
      */
-    public function initColumns()
+    public function initColumns(ColumnCollection $collection)
     {
-        $this->columns->add(new DataGridColumn([
+        $collection->add(new DataGridColumn([
             'id'         => 'id',
             'source'     => 'producer.id',
             'caption'    => $this->trans('Id'),
@@ -63,7 +65,7 @@ class ProducerDataGrid extends AbstractDataGrid implements DataGridInterface
             ]
         ]));
 
-        $this->columns->add(new DataGridColumn([
+        $collection->add(new DataGridColumn([
             'id'         => 'name',
             'source'     => 'producer_translation.name',
             'caption'    => $this->trans('Name'),
@@ -80,9 +82,9 @@ class ProducerDataGrid extends AbstractDataGrid implements DataGridInterface
     /**
      * {@inheritdoc}
      */
-    public function setQuery()
+    public function setQuery(Manager $manager)
     {
-        $this->query = $this->getDb()->table('producer');
+        $this->query = $manager->table('producer');
         $this->query->join('producer_translation', 'producer_translation.producer_id', '=', 'producer.id');
         $this->query->groupBy('producer.id');
     }

@@ -21,27 +21,59 @@ use Symfony\Component\EventDispatcher\Event;
  */
 class RepositoryEvent extends Event
 {
-    protected $data;
-    protected $id;
+    /**
+     * Passed model
+     *
+     * @var object
+     */
+    private $model;
 
-    public function __construct(array $data, $id)
+    /**
+     * Passed data
+     *
+     * @var array
+     */
+    private $data;
+
+    /**
+     * Constructor
+     *
+     * @param object $model
+     * @param array  $data
+     */
+    public function __construct($model, array $data = [])
     {
-        $this->data = $data;
-        $this->id   = $id;
+        $this->model = $model;
+        $this->data  = $data;
     }
 
+    /**
+     * Returns passed model object
+     *
+     * @return mixed
+     */
+    public function getModel()
+    {
+        return $this->model;
+    }
+
+    /**
+     * Returns event data
+     *
+     * @return array
+     */
     public function getData()
     {
         return $this->data;
     }
 
-    public function setData($data)
+    /**
+     * Sets event data
+     *
+     * @param array $data
+     */
+    public function setData(array $data = [])
     {
         $this->data = $data;
-    }
-
-    public function getId()
-    {
-        return $this->id;
     }
 }

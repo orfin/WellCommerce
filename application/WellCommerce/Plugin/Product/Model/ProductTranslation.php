@@ -60,4 +60,12 @@ class ProductTranslation extends AbstractModel
             'meta_keywords',
             'meta_description'
         ];
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getValidationXmlMapping()
+    {
+        return __DIR__ . '/../Resources/config/validation.xml';
+    }
 }

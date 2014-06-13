@@ -36,7 +36,7 @@ class AvailabilityRepository extends AbstractRepository implements AvailabilityR
      */
     public function find($id)
     {
-        return Availability::with('translation')->findOrFail($id);
+        return Availability::with('translation')->find($id);
     }
 
     /**
@@ -44,13 +44,9 @@ class AvailabilityRepository extends AbstractRepository implements AvailabilityR
      */
     public function delete($id)
     {
-        $this->dispatchEvent(AvailabilityRepositoryInterface::PRE_DELETE_EVENT, [], $id);
-
-        $this->transaction(function () use ($id) {
-            $this->find($id)->delete();
-        });
-
-        $this->dispatchEvent(AvailabilityRepositoryInterface::POST_DELETE_EVENT, [], $id);
+        $availability = $this->find($id);
+        $availability->delete();
+        $this->dispatchEvent(AvailabilityRepositoryInterface::POST_DELETE_EVENT, $availability);
     }
 
     /**
@@ -58,13 +54,13 @@ class AvailabilityRepository extends AbstractRepository implements AvailabilityR
      */
     public function save(array $data, $id = null)
     {
-        $data = $this->dispatchEvent(AvailabilityRepositoryInterface::PRE_SAVE_EVENT, $data, $id);
-
         $this->transaction(function () use ($data, $id) {
 
             $availability = Availability::firstOrCreate([
                 'id' => $id
             ]);
+
+            $data = $this->dispatchEvent(AvailabilityRepositoryInterface::PRE_SAVE_EVENT, $availability, $data);
 
             $availability->update($data);
 
@@ -78,8 +74,8 @@ class AvailabilityRepository extends AbstractRepository implements AvailabilityR
                 $translationData = $translation->getTranslation($data, $language);
                 $translation->update($translationData);
             }
-        });
 
-        $this->dispatchEvent(AvailabilityRepositoryInterface::POST_SAVE_EVENT, $data, $id);
+            $this->dispatchEvent(AvailabilityRepositoryInterface::POST_SAVE_EVENT, $availability, $data);
+        });
     }
 }

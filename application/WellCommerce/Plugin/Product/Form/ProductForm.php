@@ -11,11 +11,12 @@
  */
 namespace WellCommerce\Plugin\Product\Form;
 
+use WellCommerce\Core\Component\Form\AbstractForm;
 use WellCommerce\Core\Component\Form\AbstractFormBuilder;
-use WellCommerce\Core\Component\Form\Elements\ElementInterface;
 use WellCommerce\Core\Component\Form\Elements\Tip;
+use WellCommerce\Core\Component\Form\FormBuilder;
 use WellCommerce\Core\Component\Form\FormInterface;
-use WellCommerce\Plugin\Product\Event\ProductFormEvent;
+use WellCommerce\Plugin\Product\Model\Product;
 
 /**
  * Class ProductForm
@@ -23,11 +24,15 @@ use WellCommerce\Plugin\Product\Event\ProductFormEvent;
  * @package WellCommerce\Plugin\Product\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductForm extends AbstractFormBuilder implements FormInterface
+class ProductForm extends AbstractForm implements FormInterface
 {
-    public function init($productData = [])
+    /**
+     * {@inheritdoc}
+     */
+    public function buildForm(FormBuilder $builder, array $options)
     {
-        $languages = $this->getLanguages();
+        $languages  = $this->getLanguages();
+        $currencies = $this->get('currency.repository')->getAllCurrencyToSelect();
 
         $this->getXajaxManager()->registerFunctions([
             'AddProducer'  => [$this->get('producer.repository'), 'addSimpleProducer'],
@@ -35,35 +40,33 @@ class ProductForm extends AbstractFormBuilder implements FormInterface
             'AddTax'       => [$this->get('tax.repository'), 'addSimpleTax']
         ]);
 
-        $form = $this->addForm([
-            'name' => 'product'
-        ]);
+        $form = $builder->addForm($options);
 
-        $basicPane = $form->addChild($this->addFieldset([
+        $basicPane = $form->addChild($builder->addFieldset([
             'name'  => 'basic_pane',
             'label' => $this->trans('Basic settings')
         ]));
 
-        $basicLanguageData = $basicPane->addChild($this->addFieldsetLanguage([
+        $basicLanguageData = $basicPane->addChild($builder->addFieldsetLanguage([
             'name'      => 'language_data',
             'label'     => $this->trans('Translations'),
             'languages' => $languages
         ]));
 
-        $basicLanguageData->addChild($this->addTextField([
+        $basicLanguageData->addChild($builder->addTextField([
             'name'  => 'name',
             'label' => $this->trans('Name'),
             'rules' => [
-                $this->addRuleRequired($this->trans('Name is required'))
+                $builder->addRuleRequired($this->trans('Name is required'))
             ]
         ]));
 
-        $basicLanguageData->addChild($this->addTextField([
+        $basicLanguageData->addChild($builder->addTextField([
             'name'  => 'slug',
             'label' => $this->trans('Slug'),
             'rules' => [
-                $this->addRuleRequired($this->trans('Slug is required')),
-                $this->addRuleUnique($this->trans('Slug already exists'),
+                $builder->addRuleRequired($this->trans('Slug is required')),
+                $builder->addRuleUnique($this->trans('Slug already exists'),
                     [
                         'table'   => 'product_translation',
                         'column'  => 'slug',
@@ -73,97 +76,97 @@ class ProductForm extends AbstractFormBuilder implements FormInterface
                         ]
                     ]
                 ),
-                $this->addRuleFormat($this->trans('Only alphanumeric characters are allowed'), '/^[A-Za-z0-9-_\",\'\s]+$/')
+                $builder->addRuleFormat($this->trans('Only alphanumeric characters are allowed'), '/^[A-Za-z0-9-_\",\'\s]+$/')
             ]
         ]));
 
-        $basicPane->addChild($this->addCheckbox([
+        $basicPane->addChild($builder->addCheckbox([
             'name'    => 'enabled',
             'label'   => $this->trans('Enabled'),
             'default' => '0'
         ]));
 
-        $basicPane->addChild($this->addTextField([
+        $basicPane->addChild($builder->addTextField([
             'name'  => 'ean',
             'label' => $this->trans('EAN')
         ]));
 
-        $basicPane->addChild($this->addTextField([
+        $basicPane->addChild($builder->addTextField([
             'name'  => 'sku',
             'label' => $this->trans('SKU')
         ]));
 
-        $basicPane->addChild($this->addSelect([
+        $basicPane->addChild($builder->addSelect([
             'name'            => 'producer_id',
             'label'           => $this->trans('Producer'),
             'addable'         => true,
             'onAdd'           => 'xajax_AddProducer',
             'add_item_prompt' => $this->trans('Enter producer name'),
-            'options'         => $this->makeOptions($this->get('producer.repository')->getAllProducerToSelect(), true)
+            'options'         => $builder->makeOptions($this->get('producer.repository')->getAllProducerToSelect(), true)
         ]));
 
-        $basicPane->addChild($this->addMultiSelect([
+        $basicPane->addChild($builder->addMultiSelect([
             'name'            => 'deliverers',
             'label'           => $this->trans('Deliverers'),
             'addable'         => true,
             'onAdd'           => 'xajax_AddDeliverer',
             'add_item_prompt' => $this->trans('Enter deliverer name'),
-            'options'         => $this->makeOptions($this->get('deliverer.repository')->getAllDelivererToSelect())
+            'options'         => $builder->makeOptions($this->get('deliverer.repository')->getAllDelivererToSelect())
         ]));
 
-        $metaData = $form->addChild($this->addFieldset([
+        $metaData = $form->addChild($builder->addFieldset([
             'name'  => 'meta_data',
             'label' => $this->trans('Meta settings')
         ]));
 
-        $languageData = $metaData->addChild($this->addFieldsetLanguage([
+        $languageData = $metaData->addChild($builder->addFieldsetLanguage([
             'name'      => 'language_data',
             'label'     => $this->trans('Translations'),
             'languages' => $languages
         ]));
 
-        $languageData->addChild($this->addTextField([
+        $languageData->addChild($builder->addTextField([
             'name'  => 'meta_title',
             'label' => $this->trans('Title')
         ]));
 
-        $languageData->addChild($this->addTextArea([
+        $languageData->addChild($builder->addTextArea([
             'name'  => 'meta_keywords',
             'label' => $this->trans('Keywords'),
         ]));
 
-        $languageData->addChild($this->addTextArea([
+        $languageData->addChild($builder->addTextArea([
             'name'  => 'description',
             'label' => $this->trans('Description'),
         ]));
 
-        $stockPane = $form->addChild($this->addFieldset([
+        $stockPane = $form->addChild($builder->addFieldset([
             'name'  => 'stock_pane',
             'label' => $this->trans('Stock settings')
         ]));
 
-        $stockPane->addChild($this->addTextField([
+        $stockPane->addChild($builder->addTextField([
             'name'    => 'stock',
             'label'   => $this->trans('Stock'),
             'rules'   => [
-                $this->addRuleRequired($this->trans('Stock is required')),
-                $this->addRuleFormat($this->trans('Only numeric characters are allowed'), '/[0-9]{1,}/')
+                $builder->addRuleRequired($this->trans('Stock is required')),
+                $builder->addRuleFormat($this->trans('Only numeric characters are allowed'), '/[0-9]{1,}/')
             ],
             'suffix'  => $this->trans('pcs'),
             'default' => 0
         ]));
 
-        $stockPane->addChild($this->addCheckbox([
+        $stockPane->addChild($builder->addCheckbox([
             'name'  => 'track_stock',
             'label' => $this->trans('Track stock')
         ]));
 
-        $categoryPane = $form->addChild($this->addFieldset([
+        $categoryPane = $form->addChild($builder->addFieldset([
             'name'  => 'category_pane',
             'label' => $this->trans('Categories')
         ]));
 
-        $categoryPane->addChild($this->addTree([
+        $categoryPane->addChild($builder->addTree([
             'name'       => 'category',
             'label'      => $this->trans('Categories'),
             'choosable'  => false,
@@ -173,193 +176,249 @@ class ProductForm extends AbstractFormBuilder implements FormInterface
             'items'      => $this->get('category.repository')->getCategoriesTree()
         ]));
 
-        $pricePane = $form->addChild($this->addFieldset([
+        $pricePane = $form->addChild($builder->addFieldset([
             'name'  => 'price_pane',
             'label' => $this->trans('Price settings')
         ]));
 
-        $vat = $pricePane->addChild($this->addSelect([
+        $vat = $pricePane->addChild($builder->addSelect([
             'name'            => 'tax_id',
             'label'           => $this->trans('Tax'),
-            'options'         => $this->makeOptions($this->get('tax.repository')->getAllTaxToSelect(), true),
+            'options'         => $builder->makeOptions($this->get('tax.repository')->getAllTaxToSelect(), true),
             'addable'         => true,
             'onAdd'           => 'xajax_AddTax',
             'add_item_prompt' => $this->trans('Enter tax value')
         ]));
 
-        $currencies = $this->get('currency.repository')->getAllCurrencyToSelect();
 
-        $pricePane->addChild($this->addSelect([
+        $pricePane->addChild($builder->addSelect([
             'name'    => 'sell_currency_id',
             'label'   => $this->trans('Currency for sell prices'),
-            'options' => $this->makeOptions($currencies)
+            'options' => $builder->makeOptions($currencies)
         ]));
 
-        $pricePane->addChild($this->addSelect([
+        $pricePane->addChild($builder->addSelect([
             'name'    => 'buy_currency_id',
             'label'   => $this->trans('Currency for buy prices'),
-            'options' => $this->makeOptions($currencies)
+            'options' => $builder->makeOptions($currencies)
         ]));
 
-        $pricePane->addChild($this->addPrice([
+        $pricePane->addChild($builder->addPrice([
             'name'      => 'buy_price',
             'label'     => $this->trans('Buy price'),
             'rules'     => [
-                $this->addRuleRequired($this->trans('Buy price is required')),
-                $this->addRuleFormat($this->trans('Only numeric characters are allowed'), '/[0-9]{1,}/')
+                $builder->addRuleRequired($this->trans('Buy price is required')),
+                $builder->addRuleFormat($this->trans('Only numeric characters are allowed'), '/[0-9]{1,}/')
             ],
             'filters'   => [
-                $this->addFilterCommaToDotChanger()
+                $builder->addFilterCommaToDotChanger()
             ],
             'vat_field' => $vat
         ]));
 
-        $standardPrice = $pricePane->addChild($this->addFieldset([
+        $standardPrice = $pricePane->addChild($builder->addFieldset([
             'name'  => 'standard_price',
             'label' => $this->trans('Standard sell price'),
             'class' => 'priceGroup'
         ]));
 
-        $standardPrice->addChild($this->addPrice([
+        $standardPrice->addChild($builder->addPrice([
             'name'      => 'sell_price',
             'label'     => $this->trans('Sell price'),
             'rules'     => [
-                $this->addRuleRequired($this->trans('Sell price is required')),
-                $this->addRuleFormat($this->trans('Only numeric characters are allowed'), '/[0-9]{1,}/')
+                $builder->addRuleRequired($this->trans('Sell price is required')),
+                $builder->addRuleFormat($this->trans('Only numeric characters are allowed'), '/[0-9]{1,}/')
             ],
             'filters'   => [
-                $this->addFilterCommaToDotChanger()
+                $builder->addFilterCommaToDotChanger()
             ],
             'vat_field' => $vat
         ]));
 
-        $measurementsPane = $form->addChild($this->addFieldset([
+        $measurementsPane = $form->addChild($builder->addFieldset([
             'name'  => 'measurements_pane',
             'label' => $this->trans('Measurements')
         ]));
 
-        $measurementsPane->addChild($this->addTextField([
+        $measurementsPane->addChild($builder->addTextField([
             'name'    => 'weight',
             'label'   => $this->trans('Weight'),
             'rules'   => [
-                $this->addRuleRequired($this->trans('Weight is required')),
-                $this->addRuleFormat($this->trans('Only numeric characters are allowed'), '/[0-9]{1,}/')
+                $builder->addRuleRequired($this->trans('Weight is required')),
+                $builder->addRuleFormat($this->trans('Only numeric characters are allowed'), '/[0-9]{1,}/')
             ],
             'filters' => [
-                $this->addFilterCommaToDotChanger()
+                $builder->addFilterCommaToDotChanger()
             ],
             'default' => 0
         ]));
 
-        $measurementsPane->addChild($this->addTextField([
+        $measurementsPane->addChild($builder->addTextField([
             'name'    => 'width',
             'label'   => $this->trans('Width'),
             'filters' => [
-                $this->addFilterCommaToDotChanger()
+                $builder->addFilterCommaToDotChanger()
             ]
         ]));
 
-        $measurementsPane->addChild($this->addTextField([
+        $measurementsPane->addChild($builder->addTextField([
             'name'    => 'height',
             'label'   => $this->trans('Height'),
             'filters' => [
-                $this->addFilterCommaToDotChanger()
+                $builder->addFilterCommaToDotChanger()
             ]
         ]));
 
-        $measurementsPane->addChild($this->addTextField([
+        $measurementsPane->addChild($builder->addTextField([
             'name'    => 'depth',
             'label'   => $this->trans('Depth'),
             'suffix'  => 'cm',
             'filters' => [
-                $this->addFilterCommaToDotChanger()
+                $builder->addFilterCommaToDotChanger()
             ]
         ]));
 
-        $measurementsPane->addChild($this->addTextField([
+        $measurementsPane->addChild($builder->addTextField([
             'name'    => 'package_size',
             'label'   => $this->trans('Package size'),
             'rules'   => [
-                $this->addRuleRequired($this->trans('Package size is required')),
-                $this->addRuleFormat($this->trans('Only numeric characters are allowed'), '/[0-9]{1,}/')
+                $builder->addRuleRequired($this->trans('Package size is required')),
+                $builder->addRuleFormat($this->trans('Only numeric characters are allowed'), '/[0-9]{1,}/')
             ],
             'filters' => [
-                $this->addFilterCommaToDotChanger()
+                $builder->addFilterCommaToDotChanger()
             ],
             'default' => 1
         ]));
 
-        $descriptionPane = $form->addChild($this->addFieldset([
+        $descriptionPane = $form->addChild($builder->addFieldset([
             'name'  => 'description_pane',
             'label' => $this->trans('Product descriptions')
         ]));
 
-        $descriptionLanguageData = $descriptionPane->addChild($this->addFieldsetLanguage([
+        $descriptionLanguageData = $descriptionPane->addChild($builder->addFieldsetLanguage([
             'name'      => 'language_data',
             'label'     => $this->trans('Translations'),
             'languages' => $languages
         ]));
 
-        $descriptionLanguageData->addChild($this->addRichTextEditor([
+        $descriptionLanguageData->addChild($builder->addRichTextEditor([
             'name'  => 'short_description',
             'label' => $this->trans('Short description'),
             'rows'  => 20
         ]));
 
-        $descriptionLanguageData->addChild($this->addRichTextEditor([
+        $descriptionLanguageData->addChild($builder->addRichTextEditor([
             'name'  => 'description',
             'label' => $this->trans('Description'),
             'rows'  => 30
         ]));
 
-        $descriptionLanguageData->addChild($this->addRichTextEditor([
+        $descriptionLanguageData->addChild($builder->addRichTextEditor([
             'name'  => 'long_description',
             'label' => $this->trans('Long description'),
             'rows'  => 30
         ]));
 
-        $photosPane = $form->addChild($this->addFieldset([
+        $photosPane = $form->addChild($builder->addFieldset([
             'name'  => 'photos_pane',
             'label' => $this->trans('Photos')
         ]));
 
-        $photosPane->addChild($this->addTip([
+        $photosPane->addChild($builder->addTip([
             'tip'       => '<p align="center">' . $this->trans('Please choose files from library or upload them from disk') . '</p>',
             'direction' => Tip::DOWN
         ]));
 
-        $photosPane->addChild($this->addImage([
+        $photosPane->addChild($builder->addImage([
             'name'       => 'photo',
             'label'      => $this->trans('Photos'),
-            'repeat_min' => 0,
-            'repeat_max' => ElementInterface::INFINITE,
-            'limit'      => 1000,
             'upload_url' => $this->generateUrl('admin.file.add'),
             'main_id'    => isset($productData['photos_pane']['main']) ? $productData['photos_pane']['main'] : ''
         ]));
 
-        $shopData = $form->addChild($this->addFieldset([
+        $shopData = $form->addChild($builder->addFieldset([
             'name'  => 'shop_data',
             'label' => $this->trans('Shops')
         ]));
 
-        $shopData->addChild($this->addShopSelector([
+        $shopData->addChild($builder->addShopSelector([
             'name'   => 'shops',
             'label'  => $this->trans('Shops'),
             'stores' => $this->get('company.repository')->getShopsTree()
         ]));
 
         $form->addFilters([
-            $this->addFilterTrim(),
-            $this->addFilterSecure()
+            $builder->addFilterTrim(),
+            $builder->addFilterSecure()
         ]);
 
-        $event = new ProductFormEvent($form, $productData);
-
-        $this->getDispatcher()->dispatch(ProductFormEvent::FORM_INIT_EVENT, $event);
-
-        $form->populate($event->getPopulateData());
-
         return $form;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function prepareData(Product $product)
+    {
+        $formData     = [];
+        $accessor     = $this->getPropertyAccessor();
+        $languageData = $product->getTranslationData();
+
+        $accessor->setValue($formData, '[basic_pane]', [
+            'language_data' => $languageData,
+            'enabled'       => $product->enabled,
+            'ean'           => $product->ean,
+            'sku'           => $product->sku,
+            'producer_id'   => $product->producer_id,
+            'deliverers'    => $product->deliverer->getPrimaryKeys(),
+        ]);
+
+        $accessor->setValue($formData, '[stock_pane]', [
+            'stock'       => $product->stock,
+            'track_stock' => $product->track_stock,
+        ]);
+
+        $accessor->setValue($formData, '[category_pane]', [
+            'category' => $product->category->getPrimaryKeys(),
+        ]);
+
+        $accessor->setValue($formData, '[description_data]', [
+            'language_data' => $languageData
+        ]);
+
+        $accessor->setValue($formData, '[meta_data]', [
+            'language_data' => $languageData
+        ]);
+
+        $accessor->setValue($formData, '[price_pane]', [
+            'tax_id'           => $product->tax_id,
+            'sell_currency_id' => $product->sell_currency_id,
+            'buy_currency_id'  => $product->buy_currency_id,
+            'buy_price'        => $product->buy_price,
+            'standard_price'   => [
+                'sell_price' => $product->sell_price,
+            ]
+        ]);
+
+        $accessor->setValue($formData, '[measurements_pane]', [
+            'weight'       => $product->weight,
+            'width'        => $product->width,
+            'height'       => $product->height,
+            'depth'        => $product->depth,
+            'package_size' => $product->package_size,
+
+        ]);
+
+        $accessor->setValue($formData, '[photos_pane]', [
+            'photo' => $product->photos->getPrimaryKeys(),
+            'main'  => $product->photo_id
+        ]);
+
+        $accessor->setValue($formData, '[shop_data]', [
+            'shops' => $product->shop->getPrimaryKeys()
+        ]);
+
+        return $formData;
     }
 }

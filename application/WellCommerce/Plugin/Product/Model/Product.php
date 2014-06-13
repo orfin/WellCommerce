@@ -92,66 +92,6 @@ class Product extends AbstractModel implements TranslatableModelInterface
     }
 
     /**
-     * Fetch shop ids from model
-     *
-     * @return array
-     */
-    public function getShops()
-    {
-        $shops = [];
-        foreach ($this->shop as $shop) {
-            $shops[] = $shop->id;
-        }
-
-        return $shops;
-    }
-
-    /**
-     * Fetch photo ids from model
-     *
-     * @return array
-     */
-    public function getPhotos()
-    {
-        $photos = [];
-        foreach ($this->photos as $photo) {
-            $photos[] = $photo->id;
-        }
-
-        return $photos;
-    }
-
-    /**
-     * Fetch category ids from model
-     *
-     * @return array
-     */
-    public function getCategories()
-    {
-        $categories = [];
-        foreach ($this->category as $category) {
-            $categories[] = $category->id;
-        }
-
-        return $categories;
-    }
-
-    /**
-     * Fetch deliverer ids from model
-     *
-     * @return array
-     */
-    public function getDeliverers()
-    {
-        $deliverers = [];
-        foreach ($this->deliverer as $deliverer) {
-            $deliverers[] = $deliverer->id;
-        }
-
-        return $deliverers;
-    }
-
-    /**
      * Mutator for enabled attribute
      *
      * @param $value
@@ -235,5 +175,13 @@ class Product extends AbstractModel implements TranslatableModelInterface
     public function setSellPriceAttribute($value)
     {
         $this->attributes['sell_price'] = Helper::changeCommaToDot($value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getValidationXmlMapping()
+    {
+        return __DIR__ . '/../Resources/config/validation.xml';
     }
 }

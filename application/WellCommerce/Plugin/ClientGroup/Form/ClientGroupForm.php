@@ -98,14 +98,14 @@ class ClientGroupForm extends AbstractForm implements FormInterface
      *
      * @return array
      */
-    public function prepareData(ModelInterface $model)
+    public function prepareData(ClientGroup $clientGroup)
     {
         $formData     = [];
         $accessor     = $this->getPropertyAccessor();
-        $languageData = $model->getTranslationData();
+        $languageData = $clientGroup->translation->getTranslations();
 
         $accessor->setValue($formData, '[required_data]', [
-            'discount'      => $model->discount,
+            'discount'      => $clientGroup->discount,
             'language_data' => $languageData,
         ]);
 

@@ -43,6 +43,9 @@ class Select extends OptionedField implements ElementInterface
             'addable',
             'onAdd',
             'add_item_prompt',
+            'default',
+            'rules',
+            'dependencies'
         ]);
 
         $resolver->setAllowedTypes([
@@ -55,9 +58,12 @@ class Select extends OptionedField implements ElementInterface
             'error'           => 'string',
             'selector'        => 'string',
             'css_attribute'   => 'string',
-            'addable'         => 'string',
-            'onAdd'           => 'function',
+            'addable'         => 'bool',
+            'onAdd'           => 'string',
             'add_item_prompt' => 'string',
+            'default'         => ['string', 'integer'],
+            'rules'           => 'array',
+            'dependencies'    => 'array',
         ]);
     }
 

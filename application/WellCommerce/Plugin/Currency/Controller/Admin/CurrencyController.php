@@ -11,7 +11,10 @@
  */
 namespace WellCommerce\Plugin\Currency\Controller\Admin;
 
-use WellCommerce\Core\Controller\AbstractAdminController;
+use Symfony\Component\Validator\Exception\ValidatorException;
+use WellCommerce\Core\Component\Controller\AbstractAdminController;
+use WellCommerce\Plugin\Currency\Form\CurrencyDataTransformer;
+use WellCommerce\Plugin\Currency\Repository\CurrencyRepositoryInterface;
 
 /**
  * Class CurrencyController
@@ -21,35 +24,80 @@ use WellCommerce\Core\Controller\AbstractAdminController;
  */
 class CurrencyController extends AbstractAdminController
 {
+    private $repository;
+
     /**
      * {@inheritdoc}
      */
-    protected function getDataGrid()
+    public function indexAction()
     {
-        return $this->get('currency.datagrid');
+        return [
+            'datagrid' => $this->createDataGrid($this->get('currency.datagrid'))
+        ];
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function getRepository()
+    public function addAction()
     {
-        return $this->get('currency.repository');
+        $form = $this->createForm($this->get('currency.form'), null, [
+            'name' => 'add_currency'
+        ]);
+
+        if ($form->isValid()) {
+            try {
+                $this->repository->save($form->getSubmitValuesFlat());
+                $this->addSuccessMessage('Changes saved successfully.');
+
+                return $this->redirect($this->getDefaultUrl());
+
+            } catch (ValidatorException $exception) {
+                $this->addErrorMessage($exception->getMessage());
+            }
+        }
+
+        return [
+            'form' => $form
+        ];
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function getForm()
+    public function editAction($id)
     {
-        return $this->get('currency.form');
+        $model = $this->repository->find($id);
+
+        $form = $this->createForm($this->get('currency.form'), $model, [
+            'name' => 'edit_currency'
+        ]);
+
+        if ($form->isValid()) {
+            try {
+                $this->repository->save($form->getSubmitValuesFlat(), $id);
+                $this->addSuccessMessage('Changes saved successfully.');
+
+                return $this->redirect($this->getDefaultUrl());
+
+            } catch (ValidatorException $exception) {
+                $this->addErrorMessage($exception->getMessage());
+            }
+        }
+
+        return [
+            'currency' => $model,
+            'form'    => $form
+        ];
     }
 
     /**
-     * {@inheritdoc}
+     * Sets currency repository object
+     *
+     * @param CurrencyRepositoryInterface $repository
      */
-    protected function getDefaultRoute()
+    public function setRepository(CurrencyRepositoryInterface $repository)
     {
-        return 'admin.currency.index';
+        $this->repository = $repository;
     }
 }

@@ -56,7 +56,7 @@ class DataGridExtension extends \Twig_Extension
             'id'      => $datagrid->getId(),
             'options' => $datagrid->getOptions(),
             'routes'  => $datagrid->getRoutes(),
-            'columns' => $datagrid->getColumnCollection()->all()
+            'columns' => $datagrid->getColumns()->all()
         ]);
     }
 

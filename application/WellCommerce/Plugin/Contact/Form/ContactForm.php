@@ -131,7 +131,7 @@ class ContactForm extends AbstractForm implements FormInterface
     {
         $formData     = [];
         $accessor     = $this->getPropertyAccessor();
-        $languageData = $contact->getTranslationData();
+        $languageData = $contact->translation->getTranslations();
 
         $accessor->setValue($formData, '[required_data]', [
             'enabled' => $contact->enabled

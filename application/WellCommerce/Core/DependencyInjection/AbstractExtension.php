@@ -60,4 +60,4 @@ abstract class AbstractExtension extends Extension
      * @param RouteCollection $collection Route collection
      */
     abstract public function registerRoutes(RouteCollection $collection);
-} 
+}

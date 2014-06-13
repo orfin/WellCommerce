@@ -13,6 +13,7 @@
 namespace WellCommerce\Core\Component\Form\Elements;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Class Tree
@@ -22,21 +23,89 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class Tree extends Field implements ElementInterface
 {
-
     protected $jsGetChildren;
     protected $container;
 
     public function __construct($attributes, ContainerInterface $container)
     {
         parent::__construct($attributes);
-        $this->container      = $container;
-        $this->_jsGetChildren = 'GetChildren_' . $this->_id;
-
-        if (!isset($this->attributes['retractable'])) {
-            $this->attributes['retractable'] = true;
-        }
-
+        $this->container           = $container;
+        $this->_jsGetChildren      = 'GetChildren_' . $this->_id;
         $this->attributes['total'] = count($this->attributes['items']);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureAttributes(OptionsResolverInterface $resolver)
+    {
+        $resolver->setRequired([
+            'name',
+            'label',
+        ]);
+
+        $resolver->setOptional([
+            'addLabel',
+            'error',
+            'selectable',
+            'error',
+            'selector',
+            'choosable',
+            'clickable',
+            'deletable',
+            'sortable',
+            'retractable',
+            'addable',
+            'total',
+            'restrict',
+            'items',
+            'onClick',
+            'onDuplicate',
+            'onAdd',
+            'onAfterAdd',
+            'onDelete',
+            'onAfterDelete',
+            'onSaveOrder',
+            'active',
+            'onAfterDeleteId',
+            'add_item_prompt',
+            'getchildren',
+            'prevent_duplicates',
+            'prevent_duplicates_on_all_levels',
+            'set'
+        ]);
+
+        $resolver->setAllowedTypes([
+            'name'                             => 'string',
+            'label'                            => 'string',
+            'addLabel'                         => 'string',
+            'error'                            => 'string',
+            'selectable'                       => 'bool',
+            'selector'                         => 'string',
+            'choosable'                        => 'bool',
+            'clickable'                        => 'bool',
+            'deletable'                        => 'bool',
+            'sortable'                         => 'bool',
+            'retractable'                      => 'bool',
+            'addable'                          => 'bool',
+            'total'                            => 'int',
+            'restrict'                         => ['bool', 'array', 'int'],
+            'items'                            => 'array',
+            'onClick'                          => 'string',
+            'onDuplicate'                      => 'string',
+            'onAdd'                            => 'string',
+            'onAfterAdd'                       => 'string',
+            'onDelete'                         => 'string',
+            'onAfterDelete'                    => 'string',
+            'onSaveOrder'                      => 'string',
+            'active'                           => ['string', 'array', 'int'],
+            'onAfterDeleteId'                  => 'int',
+            'add_item_prompt'                  => 'string',
+            'getchildren'                      => 'object',
+            'prevent_duplicates'               => 'bool',
+            'prevent_duplicates_on_all_levels' => 'bool',
+            'set'                              => 'string'
+        ]);
     }
 
     public function prepareAttributesJs()
