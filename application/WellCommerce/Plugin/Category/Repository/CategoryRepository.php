@@ -11,7 +11,6 @@
  */
 namespace WellCommerce\Plugin\Category\Repository;
 
-use WellCommerce\Core\Helper;
 use WellCommerce\Core\Component\Repository\AbstractRepository;
 use WellCommerce\Plugin\Category\Model\Category;
 use WellCommerce\Plugin\Category\Model\CategoryTranslation;
@@ -25,21 +24,15 @@ use WellCommerce\Plugin\Category\Model\CategoryTranslation;
 class CategoryRepository extends AbstractRepository implements CategoryRepositoryInterface
 {
     /**
-     * Returns all currencies
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     * {@inheritdoc}
      */
     public function all()
     {
-        return Category::with('translation')->get();
+        return Category::with('translation', 'shop')->get();
     }
 
     /**
-     * Returns a single category data
-     *
-     * @param $id
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|static
+     * {@inheritdoc}
      */
     public function find($id)
     {
@@ -71,62 +64,68 @@ class CategoryRepository extends AbstractRepository implements CategoryRepositor
     }
 
     /**
-     * Deletes category by ID
-     *
-     * @param $id
+     * {@inheritdoc}
      */
-    public function delete($request)
+    public function delete($id)
     {
-        $this->transaction(function () use ($request) {
-            return Category::destroy($request['id']);
-        });
+        // delete function triggered from xajax
+        if (is_array($id) && isset($id['id'])) {
+            $id = (int)$id['id'];
+        }
+
+        $category = $this->find($id);
+        $category->delete();
+        $this->dispatchEvent(CategoryRepositoryInterface::POST_DELETE_EVENT, $category);
     }
 
     /**
-     * Saves category
-     *
-     * @param      $Data
-     * @param null $id
+     * {@inheritdoc}
      */
     public function save(array $data, $id = null)
     {
-        $category = Category::firstOrCreate([
-            'id' => $id
-        ]);
+        $this->transaction(function () use ($data, $id) {
+            $category = Category::firstOrCreate([
+                'id' => $id
+            ]);
 
-        $requiredData = $data['required_data'];
+            $data = $this->dispatchEvent(CategoryRepositoryInterface::PRE_SAVE_EVENT, $category, $data);
 
-        $category->name               = $requiredData['name'];
-        $category->symbol             = $requiredData['symbol'];
-        $category->decimal_separator  = $requiredData['decimal_separator'];
-        $category->decimal_count      = $requiredData['decimal_count'];
-        $category->thousand_separator = $requiredData['thousand_separator'];
-        $category->positive_prefix    = $requiredData['positive_prefix'];
-        $category->positive_suffix    = $requiredData['positive_suffix'];
-        $category->negative_prefix    = $requiredData['negative_prefix'];
-        $category->negative_suffix    = $requiredData['negative_suffix'];
-
-        $category->save();
-    }
-
-    public function quickAddCategory($request)
-    {
-        $id = $this->transaction(function () use ($request) {
-            $category            = new Category();
-            $category->parent_id = isset($request['parent']) ? $request['parent'] : null;
-            $category->save();
+            $category->update($data);
 
             foreach ($this->getLanguageIds() as $language) {
-
-                $translation = CategoryTranslation::firstOrNew([
+                $translation = CategoryTranslation::firstOrCreate([
                     'category_id' => $category->id,
                     'language_id' => $language
                 ]);
 
-                $translation->name = $request['name'];
-                $translation->slug = Helper::makeSlug($request['name']);
-                $translation->save();
+                $translationData = $translation->getTranslation($data, $language);
+                $translation->update($translationData);
             }
+
+            $category->sync($category->shop(), $data['shops']);
+
+            $this->dispatchEvent(CategoryRepositoryInterface::POST_SAVE_EVENT, $category, $data);
+        });
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function quickAddCategory($request)
+    {
+        $id = $this->transaction(function () use ($request) {
+            $category            = new Category();
+            $category->enabled   = 1;
+            $category->hierarchy = 0;
+            $category->parent_id = isset($request['parent']) ? $request['parent'] : 0;
+            $category->save();
+
+            $translation              = new CategoryTranslation();
+            $translation->category_id = $category->id;
+            $translation->language_id = $this->getCurrentLanguage();
+            $translation->name        = $request['name'];
+            $translation->slug        = $request['name'];
+            $translation->save();
 
             return $category->id;
         });
@@ -137,33 +136,8 @@ class CategoryRepository extends AbstractRepository implements CategoryRepositor
     }
 
     /**
-     * Returns data required for populating a form
-     *
-     * @param $id
-     *
-     * @return array
+     * {@inheritdoc}
      */
-    public function getPopulateData($id)
-    {
-        $categoryData = $this->find($id);
-
-        $populateData = [
-            'required_data' => [
-                'name'               => $categoryData->name,
-                'symbol'             => $categoryData->symbol,
-                'decimal_separator'  => $categoryData->decimal_separator,
-                'decimal_count'      => $categoryData->decimal_count,
-                'thousand_separator' => $categoryData->thousand_separator,
-                'positive_prefix'    => $categoryData->positive_prefix,
-                'positive_suffix'    => $categoryData->positive_suffix,
-                'negative_prefix'    => $categoryData->negative_prefix,
-                'negative_suffix'    => $categoryData->negative_suffix
-            ]
-        ];
-
-        return $populateData;
-    }
-
     public function changeCategoryOrder($request)
     {
         $this->transaction(function () use ($request) {

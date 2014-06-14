@@ -27,6 +27,7 @@ class TableInfo
         'availability' => ['id','created_at','updated_at'],
         'availability_translation' => ['id','name','description','availability_id','language_id','created_at','updated_at'],
         'category' => ['id','hierarchy','enabled','parent_id','file_id','created_at','updated_at'],
+        'category_shop' => ['id','category_id','shop_id','created_at','updated_at'],
         'category_translation' => ['id','name','slug','short_description','description','meta_keywords','meta_title','meta_description','category_id','language_id','created_at','updated_at'],
         'client_group' => ['id','discount','created_at','updated_at'],
         'client_group_translation' => ['id','name','client_group_id','language_id','created_at','updated_at'],

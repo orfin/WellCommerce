@@ -12,6 +12,7 @@
 namespace WellCommerce\Plugin\Category\Model;
 
 use WellCommerce\Core\Component\Model\AbstractModel;
+use WellCommerce\Core\Component\Model\ModelInterface;
 use WellCommerce\Core\Component\Model\TranslatableModelInterface;
 
 /**
@@ -20,12 +21,22 @@ use WellCommerce\Core\Component\Model\TranslatableModelInterface;
  * @package WellCommerce\Plugin\Category\Model
  * @author  Adam Piotrowski <adam@gekosale.com>
  */
-class Category extends AbstractModel implements TranslatableModelInterface
+class Category extends AbstractModel implements ModelInterface, TranslatableModelInterface
 {
     protected $table = 'category';
     public $timestamps = true;
     protected $softDelete = false;
     protected $fillable = ['id'];
+
+    /**
+     * Relation with Shop model through pivot table category_shop
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function shop()
+    {
+        return $this->belongsToMany('WellCommerce\Plugin\Shop\Model\Shop', 'category_shop', 'category_id', 'shop_id');
+    }
 
     /**
      * Relation with CategoryTranslation model
@@ -112,5 +123,13 @@ class Category extends AbstractModel implements TranslatableModelInterface
     public function setHierarchyAttribute($value)
     {
         $this->attributes['hierarchy'] = (int)$value;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getValidationXmlMapping()
+    {
+        return __DIR__ . '/../Resources/config/validation.xml';
     }
 }

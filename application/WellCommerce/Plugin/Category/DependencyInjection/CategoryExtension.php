@@ -48,10 +48,6 @@ class CategoryExtension extends AbstractExtension
             '_controller' => 'category.admin.controller:indexAction',
         )));
 
-        $adminCollection->add('admin.category.add', new Route('/add', array(
-            '_controller' => 'category.admin.controller:addAction',
-        )));
-
         $adminCollection->add('admin.category.edit', new Route('/edit/{id}', array(
             '_controller' => 'category.admin.controller:editAction',
             'id'          => null

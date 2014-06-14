@@ -11,8 +11,9 @@
  */
 namespace WellCommerce\Plugin\Category\Form;
 
-use WellCommerce\Core\Form;
-use WellCommerce\Plugin\Category\Event\CategoryFormEvent;
+use WellCommerce\Core\Component\Form\AbstractForm;
+use WellCommerce\Core\Component\Form\FormBuilder;
+use WellCommerce\Core\Component\Form\FormInterface;
 
 /**
  * Class CategoryTree
@@ -20,47 +21,74 @@ use WellCommerce\Plugin\Category\Event\CategoryFormEvent;
  * @package WellCommerce\Plugin\Category\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CategoryTree extends Form
+class CategoryTree extends AbstractForm implements FormInterface
 {
-
-    public function init($categoryData = Array())
+    /**
+     * Registers functions needed in categories tree
+     */
+    private function registerFunctions()
     {
-        $form = $this->addForm([
-            'name'  => 'category_tree',
-            'class' => 'category-select',
+        $this->getXajax()->registerFunction(Array(
+            'DuplicateCategory',
+            $this->get('category.repository'),
+            'duplicateCategory'
+        ));
+
+        $this->getXajaxManager()->registerFunction([
+            'AddCategory',
+            $this->get('category.repository'),
+            'quickAddCategory'
         ]);
 
-        $form->addChild($this->addTree([
-            'name'               => 'categories',
-            'label'              => $this->trans('Categories'),
-            'add_item_prompt'    => $this->trans('Category name'),
-            'addLabel'           => $this->trans('Add category'),
-            'sortable'           => true,
-            'selectable'         => false,
-            'clickable'          => true,
-            'deletable'          => true,
-            'addable'            => true,
-            'prevent_duplicates' => true,
-            'items'              => $this->get('category.repository')->getCategoriesTree(),
-            'onClick'            => 'openCategoryEditor',
-            'onDuplicate'        => 'xajax_DuplicateCategory',
-            'onSaveOrder'        => 'xajax_ChangeCategoryOrder',
-            'onAdd'              => 'xajax_AddCategory',
-            'onAfterAdd'         => 'openCategoryEditor',
-            'onDelete'           => 'xajax_DeleteCategory',
-            'onAfterDelete'      => 'openCategoryEditor',
-            //            'onAfterDeleteId'    => $categoryData['next'],
-            'active'             => $this->getParam('id')
+        $this->getXajaxManager()->registerFunction([
+            'DeleteCategory',
+            $this->get('category.repository'),
+            'delete'
+        ]);
+
+        $this->getXajaxManager()->registerFunction([
+            'ChangeCategoryOrder',
+            $this->get('category.repository'),
+            'changeCategoryOrder'
+        ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function buildForm(FormBuilder $builder, array $options)
+    {
+        $this->registerFunctions();
+
+        $form = $builder->addForm($options);
+
+        $form->addChild($builder->addTree([
+            'name'                             => 'categories',
+            'label'                            => $this->trans('Categories'),
+            'add_item_prompt'                  => $this->trans('Category name'),
+            'addLabel'                         => $this->trans('Add category'),
+            'sortable'                         => true,
+            'selectable'                       => false,
+            'clickable'                        => true,
+            'deletable'                        => true,
+            'addable'                          => true,
+            'prevent_duplicates'               => true,
+            'items'                            => $this->get('category.repository')->getCategoriesTree(),
+            'onClick'                          => 'openCategoryEditor',
+            'onDuplicate'                      => 'xajax_DuplicateCategory',
+            'onSaveOrder'                      => 'xajax_ChangeCategoryOrder',
+            'onAdd'                            => 'xajax_AddCategory',
+            'onAfterAdd'                       => 'openCategoryEditor',
+            'onDelete'                         => 'xajax_DeleteCategory',
+            'onAfterDelete'                    => 'openCategoryEditor',
+            'active'                           => (int)$this->getParam('id')
         ]));
 
-        $form->AddFilter($this->addFilterNoCode());
-        $form->AddFilter($this->addFilterSecure());
-
-        $event = new CategoryFormEvent($form, $categoryData);
-
-        $this->getDispatcher()->dispatch(CategoryFormEvent::TREE_INIT_EVENT, $event);
-
-        $form->Populate($event->getPopulateData());
+        $form->addFilters([
+            $builder->addFilterTrim(),
+            $builder->addFilterNoCode(),
+            $builder->addFilterSecure()
+        ]);
 
         return $form;
     }

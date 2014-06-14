@@ -72,7 +72,9 @@ class Tree extends Field implements ElementInterface
             'getchildren',
             'prevent_duplicates',
             'prevent_duplicates_on_all_levels',
-            'set'
+            'set',
+            'rules',
+            'dependencies',
         ]);
 
         $resolver->setAllowedTypes([
@@ -89,7 +91,7 @@ class Tree extends Field implements ElementInterface
             'retractable'                      => 'bool',
             'addable'                          => 'bool',
             'total'                            => 'int',
-            'restrict'                         => ['bool', 'array', 'int'],
+            'restrict'                         => ['bool', 'array', 'int', 'string'],
             'items'                            => 'array',
             'onClick'                          => 'string',
             'onDuplicate'                      => 'string',
@@ -104,7 +106,9 @@ class Tree extends Field implements ElementInterface
             'getchildren'                      => 'object',
             'prevent_duplicates'               => 'bool',
             'prevent_duplicates_on_all_levels' => 'bool',
-            'set'                              => 'string'
+            'set'                              => 'string',
+            'rules'                            => 'array',
+            'dependencies'                     => 'array',
         ]);
     }
 

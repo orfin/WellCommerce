@@ -31,7 +31,6 @@ class ProductForm extends AbstractForm implements FormInterface
      */
     public function buildForm(FormBuilder $builder, array $options)
     {
-        $languages  = $this->getLanguages();
         $currencies = $this->get('currency.repository')->getAllCurrencyToSelect();
 
         $this->getXajaxManager()->registerFunctions([
@@ -50,7 +49,6 @@ class ProductForm extends AbstractForm implements FormInterface
         $basicLanguageData = $basicPane->addChild($builder->addFieldsetLanguage([
             'name'      => 'language_data',
             'label'     => $this->trans('Translations'),
-            'languages' => $languages
         ]));
 
         $basicLanguageData->addChild($builder->addTextField([
@@ -122,7 +120,6 @@ class ProductForm extends AbstractForm implements FormInterface
         $languageData = $metaData->addChild($builder->addFieldsetLanguage([
             'name'      => 'language_data',
             'label'     => $this->trans('Translations'),
-            'languages' => $languages
         ]));
 
         $languageData->addChild($builder->addTextField([
@@ -136,7 +133,7 @@ class ProductForm extends AbstractForm implements FormInterface
         ]));
 
         $languageData->addChild($builder->addTextArea([
-            'name'  => 'description',
+            'name'  => 'meta_description',
             'label' => $this->trans('Description'),
         ]));
 
@@ -299,7 +296,6 @@ class ProductForm extends AbstractForm implements FormInterface
         $descriptionLanguageData = $descriptionPane->addChild($builder->addFieldsetLanguage([
             'name'      => 'language_data',
             'label'     => $this->trans('Translations'),
-            'languages' => $languages
         ]));
 
         $descriptionLanguageData->addChild($builder->addRichTextEditor([
@@ -344,7 +340,6 @@ class ProductForm extends AbstractForm implements FormInterface
         $shopData->addChild($builder->addShopSelector([
             'name'   => 'shops',
             'label'  => $this->trans('Shops'),
-            'stores' => $this->get('company.repository')->getShopsTree()
         ]));
 
         $form->addFilters([

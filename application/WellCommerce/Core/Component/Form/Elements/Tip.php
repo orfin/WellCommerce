@@ -41,6 +41,10 @@ class Tip extends Node implements ElementInterface
             'direction'
         ]);
 
+        $resolver->setDefaults([
+            'direction' => self::DOWN
+        ]);
+
         $resolver->setOptional([
             'name',
             'short_tip',

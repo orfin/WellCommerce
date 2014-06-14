@@ -12,6 +12,7 @@
 namespace WellCommerce\Plugin\Category\Model;
 
 use WellCommerce\Core\Component\Model\AbstractModel;
+use WellCommerce\Core\Helper\Helper;
 
 /**
  * Class CategoryTranslation
@@ -21,48 +22,8 @@ use WellCommerce\Core\Component\Model\AbstractModel;
  */
 class CategoryTranslation extends AbstractModel
 {
-
-    /**
-     * Table name
-     *
-     * @var string
-     */
     protected $table = 'category_translation';
-
-    /**
-     * Use timestamp columns
-     *
-     * @var bool
-     */
-    public $timestamps = true;
-
-    /**
-     * Use soft deletes
-     *
-     * @var bool
-     */
-    protected $softDelete = false;
-
-    /**
-     * @var array
-     */
     protected $fillable = ['category_id', 'language_id'];
-
-    /**
-     * All translatable columns in category_translation table
-     *
-     * @var array
-     */
-    protected $translatable
-        = [
-            'name',
-            'slug',
-            'short_description',
-            'description',
-            'meta_title',
-            'meta_keywords',
-            'meta_description'
-        ];
 
     /**
      * Relation with Category model
@@ -82,5 +43,23 @@ class CategoryTranslation extends AbstractModel
     public function language()
     {
         return $this->belongsTo('WellCommerce\Core\Model\Language');
+    }
+
+    /**
+     * Mutator for enabled attribute
+     *
+     * @param $value
+     */
+    public function setSlugAttribute($value)
+    {
+        $this->attributes['slug'] = Helper::makeSlug($value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getValidationXmlMapping()
+    {
+        return __DIR__ . '/../Resources/config/validation.xml';
     }
 }

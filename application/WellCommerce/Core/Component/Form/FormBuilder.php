@@ -456,6 +456,8 @@ class FormBuilder extends AbstractComponent
             $options['0'] = $this->trans('Choose option');
         }
 
+        ksort($options);
+
         return Option::Make($options);
     }
 

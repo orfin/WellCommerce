@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Core\Component\Form\Elements;
 
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use WellCommerce\Core\Component\Form\Node;
 
 /**
@@ -23,10 +24,28 @@ use WellCommerce\Core\Component\Form\Node;
 class StaticText extends Node implements ElementInterface
 {
 
-    public function __construct($attributes)
+    /**
+     * {@inheritdoc}
+     */
+    public function configureAttributes(OptionsResolverInterface $resolver)
     {
-        parent::__construct($attributes);
-        $this->attributes['name'] = '';
+        $resolver->setRequired([
+            'text',
+        ]);
+
+        $resolver->setOptional([
+            'class',
+            'name',
+        ]);
+
+        $resolver->setDefaults([
+            'name' => ''
+        ]);
+
+        $resolver->setAllowedTypes([
+            'text'  => 'string',
+            'class' => 'string',
+        ]);
     }
 
     public function prepareAttributesJs()
@@ -39,13 +58,4 @@ class StaticText extends Node implements ElementInterface
 
         return $attributes;
     }
-
-    public function renderStatic()
-    {
-    }
-
-    public function populate($value)
-    {
-    }
-
 }

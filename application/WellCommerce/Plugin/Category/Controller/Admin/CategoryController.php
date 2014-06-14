@@ -11,7 +11,9 @@
  */
 namespace WellCommerce\Plugin\Category\Controller\Admin;
 
-use WellCommerce\Core\Controller\AbstractAdminController;
+use Symfony\Component\Validator\Exception\ValidatorException;
+use WellCommerce\Core\Component\Controller\AbstractAdminController;
+use WellCommerce\Plugin\Category\Repository\CategoryRepositoryInterface;
 
 /**
  * Class CategoryController
@@ -21,109 +23,67 @@ use WellCommerce\Core\Controller\AbstractAdminController;
  */
 class CategoryController extends AbstractAdminController
 {
+    private $repository;
+
+    /**
+     * {@inheritdoc}
+     */
     public function indexAction()
     {
-        $tree = $this->getTree()->init();
-
-        $this->registerFunctions();
+        $tree = $this->createForm($this->get('category.tree'), null, [
+            'name'  => 'category_tree',
+            'class' => 'category-select'
+        ]);
 
         return Array(
             'tree' => $tree
         );
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function editAction($id)
     {
-        $this->registerFunctions();
+        $category = $this->repository->find($id);
 
-        $tree         = $this->getTree()->init();
-        $populateData = $this->getRepository()->getPopulateData($id);
-        $form         = $this->getForm()->init($populateData);
+        // render tree
+        $tree = $this->createForm($this->get('category.tree'), null, [
+            'name'  => 'category_tree',
+            'class' => 'category-select'
+        ]);
+
+        // render edit form
+        $form = $this->createForm($this->get('category.form'), $category, [
+            'name' => 'edit_category'
+        ]);
 
         if ($form->isValid()) {
+            try {
+                $this->repository->save($form->getSubmitValuesFlat(), $id);
+                $this->addSuccessMessage(sprintf('Category "%s" saved successfully.', $category->translation->first()->name));
 
-            $this->getRepository()->save($form->getSubmitValues(), $id);
+                return $this->redirect($this->generateUrl('admin.category.edit', ['id' => $category->id]));
 
-            return $this->redirect($this->generateUrl($this->getDefaultRoute()));
+            } catch (ValidatorException $exception) {
+                $this->addErrorMessage($exception->getMessage());
+            }
         }
 
         return Array(
-            'tree' => $tree,
-            'form' => $form
+            'tree'     => $tree,
+            'category' => $category,
+            'form'     => $form
         );
     }
 
     /**
-     * Get AbstractRepository
-     */
-    protected function getRepository()
-    {
-        return $this->get('category.repository');
-    }
-
-    /**
-     * Get Form
-     */
-    protected function getForm()
-    {
-        return $this->get('category.form');
-    }
-
-    /**
-     * Get Tree
-     */
-    protected function getTree()
-    {
-        return $this->get('category.tree');
-    }
-
-    /**
-     * Get default route
+     * Sets category repository object
      *
-     * @return string
+     * @param CategoryRepositoryInterface $repository
      */
-    protected function getDefaultRoute()
+    public function setRepository(CategoryRepositoryInterface $repository)
     {
-        return 'admin.category.index';
-    }
-
-    /**
-     * Registers all needed xajax functions
-     */
-    protected function registerFunctions()
-    {
-        $this->getXajax()->registerFunction(Array(
-            'DuplicateCategory',
-            $this->getRepository(),
-            'duplicateCategory'
-        ));
-
-        $this->getXajax()->registerFunction([
-            'doAJAXRefreshSeoCategory',
-            $this->getRepository(),
-            'doAJAXRefreshSeoCategory'
-        ]);
-
-        $this->getXajaxManager()->registerFunction([
-            'AddCategory',
-            $this->getRepository(),
-            'quickAddCategory'
-        ]);
-
-        $this->getXajaxManager()->registerFunction([
-            'DeleteCategory',
-            $this->getRepository(),
-            'delete'
-        ]);
-
-        $this->getXajaxManager()->registerFunction([
-            'ChangeCategoryOrder',
-            $this->getRepository(),
-            'changeCategoryOrder'
-        ]);
-
-        $this->getXajaxManager()->registerFunctions([
-            'doAJAXCreateSeoCategory' => [$this->getRepository(), 'doAJAXCreateSeoCategory'],
-        ]);
+        $this->repository = $repository;
     }
 }

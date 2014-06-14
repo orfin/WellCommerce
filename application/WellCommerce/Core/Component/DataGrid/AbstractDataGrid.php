@@ -162,9 +162,10 @@ abstract class AbstractDataGrid extends AbstractComponent
         }
 
         foreach ($request['where'] as $where) {
-            $id         = $this->columns->get($where['column'])->getId();
-            $source     = $this->columns->get($where['column'])->getSource();
-            $aggregated = $this->columns->get($where['column'])->isAggregated();
+            $column     = $this->columns->get($where['column']);
+            $id         = $column->getId();
+            $source     = $column->getSource();
+            $aggregated = $column->isAggregated();
             $operator   = $this->getOperator($where['operator']);
             $value      = $where['value'];
 

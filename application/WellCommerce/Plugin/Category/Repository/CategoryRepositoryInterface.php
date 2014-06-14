@@ -25,14 +25,14 @@ interface CategoryRepositoryInterface
     const POST_SAVE_EVENT   = 'category.repository.post_save';
 
     /**
-     * Returns all categorys as a collection
+     * Returns all categories as a collection
      *
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public function all();
 
     /**
-     * Returns a category model
+     * Returns a single category model
      *
      * @param $id
      *
@@ -41,7 +41,7 @@ interface CategoryRepositoryInterface
     public function find($id);
 
     /**
-     * Adds or updates a category
+     * Adds or updates a category model
      *
      * @param array $data
      * @param null  $id
@@ -51,11 +51,30 @@ interface CategoryRepositoryInterface
     public function save(array $data, $id = null);
 
     /**
-     * Deletes a category
+     * Deletes a category model
      *
      * @param $id
      *
      * @return mixed
      */
     public function delete($id);
+
+    /**
+     * Changes categories order and parent ids
+     *
+     * @param $request
+     *
+     * @return mixed
+     */
+    public function changeCategoryOrder($request);
+
+    /**
+     * Quick add a new category using xajax call
+     *
+     * @param $request
+     *
+     * @return mixed
+     */
+    public function quickAddCategory($request);
+
 }
