@@ -9,7 +9,6 @@
         <parameter key="user.datagrid.class">WellCommerce\Plugin\User\DataGrid\UserDataGrid</parameter>
         <parameter key="user.form.class">WellCommerce\Plugin\User\Form\UserForm</parameter>
         <parameter key="user.form_login.class">WellCommerce\Plugin\User\Form\UserLoginForm</parameter>
-        <parameter key="twig.extension.user.class">WellCommerce\Plugin\User\Twig\UserExtension</parameter>
         <parameter key="user.listener.class">WellCommerce\Plugin\User\EventListener\UserListener</parameter>
     </parameters>
 

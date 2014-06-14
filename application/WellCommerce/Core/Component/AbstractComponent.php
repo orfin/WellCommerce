@@ -110,6 +110,16 @@ abstract class AbstractComponent extends ContainerAware
     }
 
     /**
+     * Shortcut to return query log
+     *
+     * @return mixed
+     */
+    final protected function getQueryLog()
+    {
+        return $this->getDb()->getConnection()->getQueryLog();
+    }
+
+    /**
      * Shortcut to return the session service
      *
      * @return object Session service

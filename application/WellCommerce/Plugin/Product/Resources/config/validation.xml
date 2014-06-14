@@ -3,15 +3,18 @@
                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
 
-    <class name="WellCommerce\Plugin\Producer\Model\ProducerShop">
+    <class name="WellCommerce\Plugin\Product\Model\Product">
         <property name="attributes">
             <constraint name="Collection">
                 <option name="fields">
                     <value key="producer_id">
                         <constraint name="NotNull"/>
                     </value>
-                    <value key="shop_id">
-                        <constraint name="NotNull"/>
+                    <value key="stock">
+                        <constraint name="GreaterThanOrEqual">
+                            <option name="value">0</option>
+                            <option name="message">Stock should be greater or equal to 0.</option>
+                        </constraint>
                     </value>
                 </option>
                 <option name="allowMissingFields">false</option>
@@ -20,24 +23,7 @@
         </property>
     </class>
 
-    <class name="WellCommerce\Plugin\Producer\Model\ProducerDeliverer">
-        <property name="attributes">
-            <constraint name="Collection">
-                <option name="fields">
-                    <value key="producer_id">
-                        <constraint name="NotNull"/>
-                    </value>
-                    <value key="deliverer_id">
-                        <constraint name="NotNull"/>
-                    </value>
-                </option>
-                <option name="allowMissingFields">false</option>
-                <option name="allowExtraFields">true</option>
-            </constraint>
-        </property>
-    </class>
-
-    <class name="WellCommerce\Plugin\Producer\Model\ProducerTranslation">
+    <class name="WellCommerce\Plugin\Product\Model\ProductTranslation">
         <property name="attributes">
             <constraint name="Collection">
                 <option name="fields">

@@ -47,9 +47,9 @@ abstract class AbstractController extends AbstractComponent
     /**
      * Creates a form
      *
-     * @param FormInterface  $form    Form instance
-     * @param ModelInterface $model   Model instance
-     * @param array          $options Form options
+     * @param FormInterface $form    Form instance
+     * @param null          $model   Model instance
+     * @param array         $options Form options
      *
      * @return \WellCommerce\Core\Component\Form\FormInterface
      */

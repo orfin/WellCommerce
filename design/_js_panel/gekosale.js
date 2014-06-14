@@ -13432,7 +13432,7 @@ var GFormImage = GCore.ExtendClass(GFormFile, function() {
 		}
 		if (gThis.m_bRepeatable) {
 			gThis.m_jField.empty();
-			gThis.m_oOptions.asDefaults = GCore.Duplicate(mValue);
+			gThis.m_oOptions.asDefaults.photos = GCore.Duplicate(mValue);
 		}
 		else {
 			gThis.m_oOptions.sDefault = mValue;
@@ -13470,17 +13470,15 @@ var GFormImage = GCore.ExtendClass(GFormFile, function() {
 			var jFileTr = $('<tr class="file__' + sId + '"/>');
 			jFileTr.append('<th scope="row"><span class="' + gThis._GetClass('Thumb') + '"><img src="' + oFile.preview + '" alt=""/></span><span class="' + gThis._GetClass('Name') + '">' + oFile.name + '</span></th>');
 			var jRadio = $('<input type="radio" name="' + gThis.GetName() + '[main]" value="' + sId + '"/>');
-			if (gThis.m_oOptions.sMainId) {
+			if (gThis.m_oOptions.asDefaults.main_photo_id) {
 				
 				if (!gThis.m_bLoadedDefaults) {
-					if (sId == gThis.m_oOptions.sMainId) {
-						
+					if (sId == gThis.m_oOptions.asDefaults.main_photo_id) {
 						jRadio.attr('checked', 'checked');
 					}
 				}
 				else {
-					if (sId == gThis.m_oOptions.sMainId) {
-						
+					if (sId == gThis.m_oOptions.asDefaults.main_photo_id) {
 						jRadio.attr('checked', 'checked');
 					}
 					if (!gThis.m_jSelectedFiles.children('tr').length) {
@@ -13551,7 +13549,7 @@ var GFormImage = GCore.ExtendClass(GFormFile, function() {
 			gThis._InitFilesDatagrid();
 			gThis._InitUploader();
 			if (gThis.m_bRepeatable) {
-				gThis.Populate(gThis.m_oOptions.asDefaults);
+				gThis.Populate(gThis.m_oOptions.asDefaults.photos);
 			}
 			else {
 				gThis.Populate(gThis.m_oOptions.sDefault);
@@ -13717,7 +13715,7 @@ var GFormImage = GCore.ExtendClass(GFormFile, function() {
 		if (gThis.m_bRepeatable) {
 			oRequest.where = [{
 				column: 'id',
-				value: gThis.m_oOptions.asDefaults,
+				value: gThis.m_oOptions.asDefaults.photos,
 				operator: 'IN'
 			}];
 		}

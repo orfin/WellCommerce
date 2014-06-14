@@ -333,8 +333,7 @@ class ProductForm extends AbstractForm implements FormInterface
         $photosPane->addChild($builder->addImage([
             'name'       => 'photo',
             'label'      => $this->trans('Photos'),
-            'upload_url' => $this->generateUrl('admin.file.add'),
-            'main_id'    => isset($productData['photos_pane']['main']) ? $productData['photos_pane']['main'] : ''
+            'upload_url' => $this->generateUrl('admin.file.add')
         ]));
 
         $shopData = $form->addChild($builder->addFieldset([
@@ -363,7 +362,7 @@ class ProductForm extends AbstractForm implements FormInterface
     {
         $formData     = [];
         $accessor     = $this->getPropertyAccessor();
-        $languageData = $product->getTranslationData();
+        $languageData = $product->translation->getTranslations();
 
         $accessor->setValue($formData, '[basic_pane]', [
             'language_data' => $languageData,
@@ -411,8 +410,10 @@ class ProductForm extends AbstractForm implements FormInterface
         ]);
 
         $accessor->setValue($formData, '[photos_pane]', [
-            'photo' => $product->photos->getPrimaryKeys(),
-            'main'  => $product->photo_id
+            'photo' => [
+                'photos'        => $product->photos->getPrimaryKeys(),
+                'main_photo_id' => $product->photo_id
+            ]
         ]);
 
         $accessor->setValue($formData, '[shop_data]', [

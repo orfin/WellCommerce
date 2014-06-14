@@ -23,7 +23,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class File extends Field implements ElementInterface
 {
-
     public $datagrid;
 
     protected $jsFunction;
@@ -57,7 +56,6 @@ class File extends Field implements ElementInterface
 
         $resolver->setAllowedTypes([
             'session_name' => 'string',
-            'session_name' => 'string'
         ]);
     }
 
@@ -77,11 +75,11 @@ class File extends Field implements ElementInterface
             if (!isset($request['where']) || !is_array($request['where'])) {
                 $request['where'] = [];
             }
-            $request['where'][] = Array(
+            $request['where'][] = [
                 'operator' => 'IN',
                 'column'   => 'extension',
                 'value'    => $this->attributes['file_types']
-            );
+            ];
             $request['limit']   = !empty($this->attributes['limit']) ? $this->attributes['limit'] : 10;
         }
 

@@ -47,6 +47,13 @@ interface ColumnInterface
     public function getSource();
 
     /**
+     * Returns true if column uses aggregation
+     *
+     * @return string
+     */
+    public function isAggregated();
+
+    /**
      * Returns column editable status
      *
      * @return boolean

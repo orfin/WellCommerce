@@ -40,13 +40,18 @@ class ShopEventSubscriber implements EventSubscriberInterface
         $request   = $event->getRequest();
         $session   = $container->get('session');
 
-        if (!$session->has('shop.settings')) {
+        if (!$session->has('shop/settings')) {
             $shop = $container->get('shop.repository')->getShopByHost();
-            $container->get('session')->set('shop.settings', $shop);
+            $container->get('session')->set('shop/settings', $shop);
+        }
+
+        if (!$session->has('shop/shops')) {
+            $shops = $container->get('shop.repository')->getAllShopToSelect();
+            $container->get('session')->set('shop/shops', $shops);
         }
 
         $templateVars                  = $request->attributes->get('_template_vars');
-        $templateVars['shop_settings'] = $container->get('session')->get('shop.settings');
+        $templateVars['shop'] = $container->get('session')->get('shop');
         $templateVars['shops']         = $container->get('shop.repository')->getAllShopToSelect();
 
         $request->attributes->set('_template_vars', $templateVars);

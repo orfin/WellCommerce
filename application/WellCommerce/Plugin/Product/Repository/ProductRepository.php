@@ -44,13 +44,9 @@ class ProductRepository extends AbstractRepository implements ProductRepositoryI
      */
     public function delete($id)
     {
-        $this->dispatchEvent(ProductRepositoryInterface::PRE_DELETE_EVENT, [], $id);
-
-        $this->transaction(function () use ($id) {
-            return Product::destroy($id);
-        });
-
-        $this->dispatchEvent(ProductRepositoryInterface::POST_DELETE_EVENT, [], $id);
+        $product = $this->find($id);
+        $product->delete();
+        $this->dispatchEvent(ProductRepositoryInterface::POST_DELETE_EVENT, $product);
     }
 
     /**
@@ -58,16 +54,18 @@ class ProductRepository extends AbstractRepository implements ProductRepositoryI
      */
     public function save(array $data, $id = null)
     {
-        $data = $this->dispatchEvent(ProductRepositoryInterface::PRE_SAVE_EVENT, $data, $id);
-
         $this->transaction(function () use ($data, $id) {
+
             $product = Product::firstOrCreate([
                 'id' => $id
             ]);
 
+            $data = $this->dispatchEvent(ProductRepositoryInterface::PRE_SAVE_EVENT, $product, $data);
+
             // handle photos
             $data['photo_id'] = $this->checkMainPhoto($data['photo'], $product);
             $photos           = $this->checkPhotos($data['photo'], $product);
+
             $product->update($data);
 
             foreach ($this->getLanguageIds() as $language) {
@@ -85,9 +83,9 @@ class ProductRepository extends AbstractRepository implements ProductRepositoryI
             $product->sync($product->category(), $data['category']);
             $product->sync($product->shop(), $data['shops']);
             $product->sync($product->photos(), $photos);
-        });
 
-        $this->dispatchEvent(ProductRepositoryInterface::POST_SAVE_EVENT, $data, $id);
+            $this->dispatchEvent(ProductRepositoryInterface::POST_SAVE_EVENT, $product, $data);
+        });
     }
 
     /**
@@ -115,14 +113,17 @@ class ProductRepository extends AbstractRepository implements ProductRepositoryI
     private function checkPhotos(array $photos, Product $product)
     {
         if (0 == $photos['unmodified']) {
-            $photos = array_filter(array_map(function ($key, $value) {
-                if (!is_array($key) && is_int($key) && ($value > 0)) {
-                    return $value;
+            $data = [];
+            foreach ($photos as $key => $photo) {
+                if (!is_array($key) && is_int($key) && ($photo > 0)) {
+                    $data[] = $photo;
                 }
-            }, array_keys($photos), array_values($photos)));
+            }
         } else {
-            return $product->photos->getPrimaryKeys();
+            $data = $product->photos->getPrimaryKeys();
         }
+
+        return $data;
     }
 
     /**
@@ -133,14 +134,13 @@ class ProductRepository extends AbstractRepository implements ProductRepositoryI
         $id   = $request['id'];
         $data = $request['data'];
 
-        $data = $this->dispatchEvent(ProductRepositoryInterface::PRE_UPDATE_DATAGRID_EVENT, $data, $id);
-
         $this->transaction(function () use ($id, $data) {
             $product = $this->find($id);
-            $product->update($data);
-        });
 
-        $this->dispatchEvent(ProductRepositoryInterface::POST_UPDATE_DATAGRID_EVENT, $data, $id);
+            $data = $this->dispatchEvent(ProductRepositoryInterface::PRE_UPDATE_DATAGRID_EVENT, $product, $data);
+            $product->update($data);
+            $this->dispatchEvent(ProductRepositoryInterface::POST_UPDATE_DATAGRID_EVENT, $product, $data);
+        });
 
         return [
             'updated' => true

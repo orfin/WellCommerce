@@ -11,6 +11,7 @@
  */
 namespace WellCommerce\Plugin\Product\Controller\Admin;
 
+use Symfony\Component\Validator\Exception\ValidatorException;
 use WellCommerce\Core\Component\Controller\AbstractAdminController;
 use WellCommerce\Plugin\Product\Repository\ProductRepositoryInterface;
 
@@ -22,6 +23,8 @@ use WellCommerce\Plugin\Product\Repository\ProductRepositoryInterface;
  */
 class ProductController extends AbstractAdminController
 {
+    private $repository;
+
     /**
      * {@inheritdoc}
      */
@@ -42,9 +45,15 @@ class ProductController extends AbstractAdminController
         ]);
 
         if ($form->isValid()) {
-            $this->repository->save($form->getSubmitValuesFlat());
+            try {
+                $this->repository->save($form->getSubmitValuesFlat());
+                $this->addSuccessMessage('Changes saved successfully.');
 
-            return $this->redirect($this->getDefaultUrl());
+                return $this->redirect($this->getDefaultUrl());
+
+            } catch (ValidatorException $exception) {
+                $this->addErrorMessage($exception->getMessage());
+            }
         }
 
         return [
@@ -64,13 +73,19 @@ class ProductController extends AbstractAdminController
         ]);
 
         if ($form->isValid()) {
-            $this->repository->save($form->getSubmitValuesFlat(), $id);
+            try {
+                $this->repository->save($form->getSubmitValuesFlat(), $id);
+                $this->addSuccessMessage(sprintf('Product %s saved successfully.', $model->translation->first()->name));
 
-            if ($form->isAction('continue')) {
-                return $this->redirect($this->generateUrl('admin.product.edit', ['id' => $model->id]));
+                if ($form->isAction('continue')) {
+                    return $this->redirect($this->generateUrl('admin.product.edit', ['id' => $model->id]));
+                }
+
+                return $this->redirect($this->getDefaultUrl());
+
+            } catch (ValidatorException $exception) {
+                $this->addErrorMessage($exception->getMessage());
             }
-
-            return $this->redirect($this->getDefaultUrl());
         }
 
         return [

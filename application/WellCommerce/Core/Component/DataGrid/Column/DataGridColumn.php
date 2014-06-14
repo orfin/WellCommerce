@@ -60,7 +60,8 @@ class DataGridColumn implements ColumnInterface
             ],
             'filter'           => [
                 'type' => ColumnInterface::FILTER_NONE
-            ]
+            ],
+            'aggregated'       => false
         ], $options);
     }
 
@@ -94,6 +95,14 @@ class DataGridColumn implements ColumnInterface
     public function getSource()
     {
         return $this->options['source'];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isAggregated()
+    {
+        return $this->options['aggregated'];
     }
 
     /**

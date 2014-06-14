@@ -13,9 +13,6 @@ namespace WellCommerce\Plugin\Availability\Controller\Admin;
 
 use Symfony\Component\Validator\Exception\ValidatorException;
 use WellCommerce\Core\Component\Controller\AbstractAdminController;
-use WellCommerce\Plugin\Availability\DataGrid\Config;
-use WellCommerce\Plugin\Availability\Form\AvailabilityDataConverter;
-use WellCommerce\Plugin\Availability\Model\AvailabilityData;
 use WellCommerce\Plugin\Availability\Repository\AvailabilityRepositoryInterface;
 
 /**

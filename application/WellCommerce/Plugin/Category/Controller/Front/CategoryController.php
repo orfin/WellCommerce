@@ -26,6 +26,11 @@ class CategoryController extends AbstractFrontController
 
     public function indexAction($slug)
     {
+        $this->repository->all();
+
+        print_r($this->getQueryLog());
+
+
     }
 
     /**

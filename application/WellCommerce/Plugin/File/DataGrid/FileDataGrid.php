@@ -11,7 +11,9 @@
  */
 namespace WellCommerce\Plugin\File\DataGrid;
 
+use Illuminate\Database\Capsule\Manager;
 use WellCommerce\Core\Component\DataGrid\AbstractDataGrid;
+use WellCommerce\Core\Component\DataGrid\Column\ColumnCollection;
 use WellCommerce\Core\Component\DataGrid\Column\ColumnInterface;
 use WellCommerce\Core\Component\DataGrid\Column\DataGridColumn;
 use WellCommerce\Core\Component\DataGrid\DataGridInterface;
@@ -45,9 +47,9 @@ class FileDataGrid extends AbstractDataGrid implements DataGridInterface
     /**
      * {@inheritdoc}
      */
-    public function initColumns()
+    public function initColumns(ColumnCollection $collection)
     {
-        $this->columns->add(new DataGridColumn([
+        $collection->add(new DataGridColumn([
             'id'         => 'id',
             'source'     => 'file.id',
             'caption'    => $this->trans('Id'),
@@ -63,7 +65,7 @@ class FileDataGrid extends AbstractDataGrid implements DataGridInterface
             ]
         ]));
 
-        $this->columns->add(new DataGridColumn([
+        $collection->add(new DataGridColumn([
             'id'         => 'name',
             'source'     => 'file.name',
             'caption'    => $this->trans('Name'),
@@ -78,7 +80,7 @@ class FileDataGrid extends AbstractDataGrid implements DataGridInterface
             ]
         ]));
 
-        $this->columns->add(new DataGridColumn([
+        $collection->add(new DataGridColumn([
             'id'         => 'extension',
             'source'     => 'file.extension',
             'caption'    => $this->trans('Extension'),
@@ -93,7 +95,7 @@ class FileDataGrid extends AbstractDataGrid implements DataGridInterface
             ]
         ]));
 
-        $this->columns->add(new DataGridColumn([
+        $collection->add(new DataGridColumn([
             'id'               => 'preview',
             'source'           => 'file.id',
             'caption'          => $this->trans('Thumb'),
@@ -103,21 +105,18 @@ class FileDataGrid extends AbstractDataGrid implements DataGridInterface
             'appearance'       => [
                 'width' => 90,
             ],
-            'process_function' => [$this, 'getPreview']
+            'process_function' => function ($id) {
+                    return $this->getImageGallery()->getImageUrl($id, 100, 100);
+                }
         ]));
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setQuery()
+    public function setQuery(Manager $manager)
     {
-        $this->query = $this->getDb()->table('file');
+        $this->query = $manager->table('file');
         $this->query->groupBy('file.id');
-    }
-
-    protected function getPreview($id)
-    {
-        return $this->getImageGallery()->getImageUrl($id, 100, 100);
     }
 }

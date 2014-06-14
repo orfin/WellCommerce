@@ -22,30 +22,12 @@ use WellCommerce\Core\Component\Model\AbstractModel;
 class AvailabilityTranslation extends AbstractModel
 {
     /**
-     * The table associated with the model.
-     *
-     * @var string
+     * {@inheritdoc}
      */
     protected $table = 'availability_translation';
 
     /**
-     * Indicates if the model should be timestamped.
-     *
-     * @var bool
-     */
-    public $timestamps = true;
-
-    /**
-     * Indicates if the model should soft delete.
-     *
-     * @var bool
-     */
-    protected $softDelete = false;
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
+     * {@inheritdoc}
      */
     protected $fillable = ['availability_id', 'language_id'];
 

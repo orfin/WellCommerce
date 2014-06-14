@@ -11,12 +11,10 @@
  */
 namespace WellCommerce\Core\Component\DataGrid;
 
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use WellCommerce\Core\Component\AbstractComponent;
 use WellCommerce\Core\Component\DataGrid\Column\ColumnCollection;
-use WellCommerce\Core\Component\Repository\RepositoryInterface;
 use xajaxResponse;
 
 /**
@@ -149,8 +147,11 @@ abstract class AbstractDataGrid extends AbstractComponent
      */
     public function loadData($request)
     {
-        $this->query->skip((int)$request['starting_from']);
-        $this->query->take((int)$request['limit']);
+        $offset = (int)$request['starting_from'];
+        $limit  = (int)$request['limit'];
+
+        $this->query->skip($offset);
+        $this->query->take($limit);
         $this->query->orderBy($request['order_by'], $request['order_dir']);
 
         $connection = $this->getDb()->getConnection();
@@ -161,18 +162,24 @@ abstract class AbstractDataGrid extends AbstractComponent
         }
 
         foreach ($request['where'] as $where) {
-            $column   = $this->columns->get($where['column'])->getSource();
-            $operator = $this->getOperator($where['operator']);
-            $value    = $where['value'];
+            $id         = $this->columns->get($where['column'])->getId();
+            $source     = $this->columns->get($where['column'])->getSource();
+            $aggregated = $this->columns->get($where['column'])->isAggregated();
+            $operator   = $this->getOperator($where['operator']);
+            $value      = $where['value'];
 
-            if (is_array($value)) {
-                if (!empty($value)) {
-                    $this->query->whereIn($column, $value);
-                } else {
-                    $this->query->where($column, '=', 0);
-                }
+            if ($aggregated) {
+                $this->query->having($id, $operator, $value);
             } else {
-                $this->query->where($column, $operator, $value);
+                if (is_array($value)) {
+                    if (!empty($value)) {
+                        $this->query->whereIn($source, $value);
+                    } else {
+                        $this->query->where($source, '=', 0);
+                    }
+                } else {
+                    $this->query->where($source, $operator, $value);
+                }
             }
 
         }
