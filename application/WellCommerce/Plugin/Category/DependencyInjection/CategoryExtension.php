@@ -41,23 +41,36 @@ class CategoryExtension extends AbstractExtension
      */
     public function registerRoutes(RouteCollection $collection)
     {
-        $extensionCollection = new RouteCollection();
+        // admin collection
+        $adminCollection = new RouteCollection();
 
-        $extensionCollection->add('admin.category.index', new Route('/index', array(
+        $adminCollection->add('admin.category.index', new Route('/index', array(
             '_controller' => 'category.admin.controller:indexAction',
         )));
 
-        $extensionCollection->add('admin.category.add', new Route('/add', array(
+        $adminCollection->add('admin.category.add', new Route('/add', array(
             '_controller' => 'category.admin.controller:addAction',
         )));
 
-        $extensionCollection->add('admin.category.edit', new Route('/edit/{id}', array(
+        $adminCollection->add('admin.category.edit', new Route('/edit/{id}', array(
             '_controller' => 'category.admin.controller:editAction',
             'id'          => null
         )));
 
-        $extensionCollection->addPrefix('/admin/category');
+        $adminCollection->addPrefix('/admin/category');
 
-        $collection->addCollection($extensionCollection);
+        $collection->addCollection($adminCollection);
+
+        // frontend collection
+        $frontendCollection = new RouteCollection();
+
+        $frontendCollection->add('front.category.index', new Route('/{slug}', array(
+            '_controller' => 'category.front.controller:indexAction',
+            'slug'        => null
+        )));
+
+        $frontendCollection->addPrefix('/category');
+
+        $collection->addCollection($frontendCollection);
     }
 }

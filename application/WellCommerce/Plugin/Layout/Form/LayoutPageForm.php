@@ -40,10 +40,6 @@ class LayoutPageForm extends AbstractFormBuilder implements FormInterface
         $pages = $this->get('layout_page.repository')->all();
         $layoutBoxConfigurators = $this->getLayoutManager()->getLayoutBoxConfigurators();
 
-        echo "<pre>";
-        print_r($layoutBoxConfigurators);
-        die();
-
         foreach ($pages as $page) {
             $columnData = $form->addChild($this->addFieldset([
                 'name'  => $page->id,

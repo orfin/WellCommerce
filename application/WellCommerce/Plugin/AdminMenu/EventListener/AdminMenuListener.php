@@ -177,35 +177,19 @@ class AdminMenuListener implements EventSubscriberInterface
         $data['Additional']['Admin'] = 'adam';
 
         $event->setData($data);
-
-        echo "<pre>";
-        echo "INIT:";
-        print_r($data);
-        echo "</pre>";
     }
 
     public function onAvailabilityFormSubmitAction($event)
     {
-        echo "<pre>";
-        echo "POST:";
-        print_r($_POST);
-        echo "SUBMIT:";
-        print_r($event->getData());
-        die();
+
     }
 
     public function onAvailabilityModelPreSaveAction(Event $event)
     {
-//        $data                   = $event->getData();
-//        $data[1]                = 1;
-////        $event->getModel()->foo = 1111;
-//        $event->setData($data);
     }
 
     public function onAvailabilityModelPostSaveAction(Event $event)
     {
-//        print_r($event->getData());
-//        die();
     }
 
     public function onAvailabilityDataGridInitAction(Event $event)
@@ -238,14 +222,14 @@ class AdminMenuListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            KernelEvents::CONTROLLER                         => array(
+            KernelEvents::CONTROLLER => array(
                 'onKernelController',
                 -256
             ),
             //            'availability.form.init'   => 'onAvailabilityFormInitAction',
             //            'availability.form.submit' => 'onAvailabilityFormSubmitAction'
-            AvailabilityRepositoryInterface::PRE_SAVE_EVENT  => 'onAvailabilityModelPreSaveAction',
-            AvailabilityRepositoryInterface::POST_SAVE_EVENT => 'onAvailabilityModelPostSaveAction'
+            //            AvailabilityRepositoryInterface::PRE_SAVE_EVENT  => 'onAvailabilityModelPreSaveAction',
+            //            AvailabilityRepositoryInterface::POST_SAVE_EVENT => 'onAvailabilityModelPostSaveAction'
             //            'availability.datagrid.init' => 'onAvailabilityDataGridInitAction'
         );
     }

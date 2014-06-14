@@ -12,7 +12,6 @@
 namespace WellCommerce\Core\Component\Model;
 
 use Illuminate\Database\Eloquent\Model as BaseModel;
-use Symfony\Component\PropertyAccess\PropertyAccess;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Symfony\Component\Validator\Exception\ValidatorException;
 use WellCommerce\Core\Component\Model\Collection\CustomCollection;

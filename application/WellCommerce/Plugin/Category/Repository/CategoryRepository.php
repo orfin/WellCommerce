@@ -22,9 +22,8 @@ use WellCommerce\Plugin\Category\Model\CategoryTranslation;
  * @package WellCommerce\Plugin\Category\AbstractRepository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CategoryRepository extends AbstractRepository
+class CategoryRepository extends AbstractRepository implements CategoryRepositoryInterface
 {
-
     /**
      * Returns all currencies
      *
@@ -47,6 +46,30 @@ class CategoryRepository extends AbstractRepository
         return Category::findOrFail($id);
     }
 
+    public function findBySlug($slug)
+    {
+        $languageId = $this->getCurrentLanguage();
+
+        return Category::with([
+            'translation' => function ($query) use ($languageId) {
+                    $query->where('language_id', '=', $languageId);
+                },
+            'product'
+        ])->whereHas('translation', function ($q) use ($slug) {
+                $q->where('slug', '=', $slug);
+            })->first();
+
+        return Category::has('translation')->where('category_translation.slug', '=', $slug)->get();
+
+        return Category::has(array(
+            'translation' => function ($query) use ($slug) {
+                    $query->where('slug', '=', $slug);
+                }
+        ))
+            ->with('translation')
+            ->get();
+    }
+
     /**
      * Deletes category by ID
      *
@@ -65,13 +88,13 @@ class CategoryRepository extends AbstractRepository
      * @param      $Data
      * @param null $id
      */
-    public function save($Data, $id = null)
+    public function save(array $data, $id = null)
     {
         $category = Category::firstOrCreate([
             'id' => $id
         ]);
 
-        $requiredData = $Data['required_data'];
+        $requiredData = $data['required_data'];
 
         $category->name               = $requiredData['name'];
         $category->symbol             = $requiredData['symbol'];

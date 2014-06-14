@@ -41,7 +41,7 @@ class DelivererListener implements EventSubscriberInterface
 
         $builder->add(new AdminMenuItem([
             'id'         => 'deliverer',
-            'name'       => $this->container->get('translation')->trans('Deliverer'),
+            'name'       => $this->container->get('translation')->trans('Deliverers'),
             'link'       => $this->container->get('router')->generate('admin.deliverer.index'),
             'path'       => '[menu][catalog][deliverer]',
             'sort_order' => 40

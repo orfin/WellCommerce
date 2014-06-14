@@ -5,6 +5,7 @@
 
     <parameters>
         <parameter key="category.admin.controller.class">WellCommerce\Plugin\Category\Controller\Admin\CategoryController</parameter>
+        <parameter key="category.front.controller.class">WellCommerce\Plugin\Category\Controller\Front\CategoryController</parameter>
         <parameter key="category.repository.class">WellCommerce\Plugin\Category\Repository\CategoryRepository</parameter>
         <parameter key="category.form.class">WellCommerce\Plugin\Category\Form\CategoryForm</parameter>
         <parameter key="category.tree.class">WellCommerce\Plugin\Category\Form\CategoryTree</parameter>
@@ -16,6 +17,15 @@
         <service id="category.admin.controller" class="%category.admin.controller.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="category.front.controller" class="%category.front.controller.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setRepository">
+                <argument type="service" id="category.repository"/>
             </call>
         </service>
 

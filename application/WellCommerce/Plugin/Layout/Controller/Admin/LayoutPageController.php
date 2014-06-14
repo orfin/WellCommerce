@@ -38,8 +38,6 @@ class LayoutPageController extends AbstractAdminController
 
         if ($this->getRequest()->isMethod('POST') && $form->isValid()) {
 
-            echo "<pre>";
-            print_r($form->getSubmitValuesGrouped());die();
             $this->repository->save($form->getSubmitValuesGrouped(), $id);
 
             return $this->redirect($this->getDefaultUrl());

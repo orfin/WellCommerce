@@ -189,7 +189,6 @@ abstract class Node
                 }
                 if ($this instanceof Elements\FieldsetRepeatable) {
                     $repetitions = $child->harvestRepetitions($levelsCount);
-                    print_r($repetitions);die();
                     foreach ($repetitions as $repetition) {
                         $levelsCopy                = $levels + [$repetition];
                         $array[$repetition][$name] = $child->harvest($action, $levelsCount + 1, $levelsCopy);
