@@ -25,9 +25,7 @@ use WellCommerce\Plugin\File\Model\File;
 class FileRepository extends AbstractRepository implements FileRepositoryInterface
 {
     /**
-     * Returns all files
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     * {@inheritdoc}
      */
     public function all()
     {
@@ -35,11 +33,7 @@ class FileRepository extends AbstractRepository implements FileRepositoryInterfa
     }
 
     /**
-     * Returns single file by ID
-     *
-     * @param $id
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|static
+     * {@inheritdoc}
      */
     public function find($id)
     {
@@ -61,9 +55,7 @@ class FileRepository extends AbstractRepository implements FileRepositoryInterfa
     }
 
     /**
-     * Stores uploaded file data
-     *
-     * @param UploadedFile $file
+     * {@inheritdoc}
      */
     public function save(UploadedFile $uploadedFile)
     {
@@ -76,7 +68,6 @@ class FileRepository extends AbstractRepository implements FileRepositoryInterfa
             'type'      => $uploadedFile->getClientMimeType(),
         ];
 
-        $data = $this->dispatchEvent(FileRepositoryInterface::PRE_SAVE_EVENT, $data, null);
 
         $file = $this->transaction(function () use ($data, $id) {
 
@@ -84,14 +75,12 @@ class FileRepository extends AbstractRepository implements FileRepositoryInterfa
                 'id' => $id
             ]);
 
+            $data = $this->dispatchEvent(FileRepositoryInterface::PRE_SAVE_EVENT, $file, $data);
             $file->update($data);
+            $this->dispatchEvent(FileRepositoryInterface::POST_SAVE_EVENT, $file, $data);
 
             return $file;
         });
-
-        $id = $file->id;
-
-        $this->dispatchEvent(FileRepositoryInterface::POST_SAVE_EVENT, $data, $id);
 
         return $file;
     }

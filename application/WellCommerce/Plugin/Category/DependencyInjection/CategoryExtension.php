@@ -11,13 +11,13 @@
  */
 namespace WellCommerce\Plugin\Category\DependencyInjection;
 
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
 use WellCommerce\Core\DependencyInjection\AbstractExtension;
+use WellCommerce\Plugin\Category\Model\CategoryTranslation;
 
 /**
  * Class CategoryExtension
@@ -39,7 +39,7 @@ class CategoryExtension extends AbstractExtension
     /**
      * {@inheritdoc}
      */
-    public function registerRoutes(RouteCollection $collection)
+    public function registerRoutes(RouteCollection $collection, ContainerBuilder $container)
     {
         // admin collection
         $adminCollection = new RouteCollection();

@@ -167,12 +167,12 @@ class ProductDataGrid extends AbstractDataGrid implements DataGridInterface
             ],
             'filter'     => [
                 'type' => ColumnInterface::FILTER_BETWEEN
-            ]
+            ],
         ]));
 
         $collection->add(new DataGridColumn([
             'id'         => 'sell_price_gross',
-            'source'     => 'product.sell_price',
+            'source'     => 'ROUND(product.sell_price * (1 + (tax.value / 100)), 2)',
             'caption'    => $this->trans('Price gross'),
             'editable'   => true,
             'appearance' => [
@@ -180,7 +180,8 @@ class ProductDataGrid extends AbstractDataGrid implements DataGridInterface
             ],
             'filter'     => [
                 'type' => ColumnInterface::FILTER_BETWEEN
-            ]
+            ],
+            'aggregated' => true
         ]));
 
         $collection->add(new DataGridColumn([
@@ -232,6 +233,7 @@ class ProductDataGrid extends AbstractDataGrid implements DataGridInterface
         $this->query->join('product_translation', 'product_translation.product_id', '=', 'product.id');
         $this->query->leftJoin('product_category', 'product_category.product_id', '=', 'product.id');
         $this->query->leftJoin('category_translation', 'category_translation.category_id', '=', 'product_category.category_id');
+        $this->query->leftJoin('tax', 'product.tax_id', '=', 'tax.id');
         $this->query->groupBy('product.id');
     }
 }

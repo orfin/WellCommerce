@@ -38,7 +38,7 @@ class HomePageExtension extends AbstractExtension
     /**
      * {@inheritdoc}
      */
-    public function registerRoutes(RouteCollection $collection)
+    public function registerRoutes(RouteCollection $collection, ContainerBuilder $container)
     {
         $extensionCollection = new RouteCollection();
 

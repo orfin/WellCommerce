@@ -21,11 +21,8 @@ use WellCommerce\Core\Component\Model\AbstractModel;
  */
 class Language extends AbstractModel
 {
-
-    public $timestamps = true;
     protected $table = 'language';
-    protected $softDelete = false;
-    protected $fillable = array('id');
+    protected $fillable = ['id'];
 
     public function currency()
     {

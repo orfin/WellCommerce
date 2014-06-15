@@ -62,7 +62,7 @@ class PluginExtensionLoader
                 $extension = new $class();
                 $this->containerBuilder->registerExtension($extension);
                 $this->containerBuilder->loadFromExtension($extension->getAlias());
-                $extension->registerRoutes($this->routeCollection);
+                $extension->registerRoutes($this->routeCollection, $this->containerBuilder);
             }
 
         }
