@@ -22,13 +22,10 @@ use WellCommerce\Plugin\Shop\Model\ShopTranslation;
  * @package WellCommerce\Plugin\Shop\AbstractRepository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ShopRepository extends AbstractRepository implements RepositoryInterface
+class ShopRepository extends AbstractRepository implements ShopRepositoryInterface
 {
-
     /**
-     * Returns a shop collection
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     * {@inheritdoc}
      */
     public function all()
     {
@@ -36,11 +33,7 @@ class ShopRepository extends AbstractRepository implements RepositoryInterface
     }
 
     /**
-     * Returns the shop model
-     *
-     * @param $id
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|static
+     * {@inheritdoc}
      */
     public function find($id)
     {
@@ -48,36 +41,29 @@ class ShopRepository extends AbstractRepository implements RepositoryInterface
     }
 
     /**
-     * Deletes shop by ID
-     *
-     * @param $id
+     * {@inheritdoc}
      */
     public function delete($id)
     {
-        $this->transaction(function () use ($id) {
-            return Shop::destroy($id);
-        });
+        $shop = $this->find($id);
+        $shop->delete();
+        $this->dispatchEvent(ShopRepositoryInterface::POST_DELETE_EVENT, $shop);
     }
 
     /**
-     * Saves shop
-     *
-     * @param      $Data
-     * @param null $id
+     * {@inheritdoc}
      */
-    public function save(array $Data, $id = null)
+    public function save(array $data, $id = null)
     {
-        $this->transaction(function () use ($Data, $id) {
+        $this->transaction(function () use ($data, $id) {
 
-            $shop = Shop::firstOrNew([
+            $shop = Shop::firstOrCreate([
                 'id' => $id
             ]);
 
-            $shop->url             = $Data['url'];
-            $shop->offline         = $Data['offline'];
-            $shop->company_id      = $Data['company_id'];
-            $shop->layout_theme_id = $Data['layout_theme_id'];
-            $shop->save();
+            $data = $this->dispatchEvent(ShopRepositoryInterface::PRE_SAVE_EVENT, $shop, $data);
+
+            $shop->update($data);
 
             foreach ($this->getLanguageIds() as $language) {
 
@@ -86,29 +72,27 @@ class ShopRepository extends AbstractRepository implements RepositoryInterface
                     'language_id' => $language
                 ]);
 
-                $translation->setTranslationData($Data, $language);
-                $translation->save();
+                $translationData = $translation->getTranslation($data, $language);
+                $translation->update($translationData);
             }
+
+            $this->dispatchEvent(ShopRepositoryInterface::POST_SAVE_EVENT, $shop, $data);
         });
     }
 
     /**
-     * Saves basic shop values directly from DataGrid
-     *
-     * @param array $request
-     *
-     * @return array
+     * {@inheritdoc}
      */
-    public function updateDataGridRow($request)
+    public function updateDataGridRow(array $request)
     {
         $id   = $request['id'];
         $data = $request['data'];
 
         $this->transaction(function () use ($id, $data) {
-            $shop                  = $this->find($id);
-            $shop->offline         = $data['offline'];
-            $shop->layout_theme_id = $data['layout_theme_id'];
-            $shop->save();
+            $shop = $this->find($id);
+            $data = $this->dispatchEvent(ShopRepositoryInterface::PRE_UPDATE_DATAGRID_EVENT, $shop, $data);
+            $shop->update($data);
+            $this->dispatchEvent(ShopRepositoryInterface::POST_UPDATE_DATAGRID_EVENT, $shop, $data);
         });
 
         return [

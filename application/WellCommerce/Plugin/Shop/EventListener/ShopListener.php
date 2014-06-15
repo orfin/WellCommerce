@@ -1,33 +1,41 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- *
+ * 
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- *
+ * 
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Plugin\Shop\Event;
+namespace WellCommerce\Plugin\Shop\EventListener;
 
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
+use WellCommerce\Core\Event\AdminMenuEvent;
+use WellCommerce\Plugin\AdminMenu\Builder\AdminMenuItem;
 use WellCommerce\Plugin\AdminMenu\Event\AdminMenuInitEvent;
 
 /**
- * Class ShopEventSubscriber
+ * Class ShopListener
  *
- * @package WellCommerce\Plugin\Shop\Event
+ * @package WellCommerce\Plugin\Shop\EventListener
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ShopEventSubscriber implements EventSubscriberInterface
+class ShopListener implements EventSubscriberInterface
 {
-    public function onAdminMenuInitAction(Event $event)
-    {
+    /**
+     * @var \Symfony\Component\DependencyInjection\ContainerInterface
+     */
+    private $container;
 
+    public function __construct(ContainerInterface $container)
+    {
+        $this->container = $container;
     }
 
     public function onKernelController(Event $event)
@@ -50,12 +58,25 @@ class ShopEventSubscriber implements EventSubscriberInterface
             $container->get('session')->set('shop/shops', $shops);
         }
 
-        $templateVars                  = $request->attributes->get('_template_vars');
-        $templateVars['shop'] = $container->get('session')->get('shop');
-        $templateVars['shops']         = $container->get('shop.repository')->getAllShopToSelect();
+        $templateVars          = $request->attributes->get('_template_vars');
+        $templateVars['shop']  = $container->get('session')->get('shop');
+        $templateVars['shops'] = $container->get('shop.repository')->getAllShopToSelect();
 
         $request->attributes->set('_template_vars', $templateVars);
 
+    }
+
+    public function onAdminMenuInitEvent(AdminMenuEvent $event)
+    {
+        $builder = $event->getBuilder();
+
+        $builder->add(new AdminMenuItem([
+            'id'         => 'shop',
+            'name'       => $this->container->get('translation')->trans('Shops'),
+            'link'       => $this->container->get('router')->generate('admin.shop.index'),
+            'path'       => '[menu][configuration][shop]',
+            'sort_order' => 10
+        ]));
     }
 
     public static function getSubscribedEvents()
@@ -65,7 +86,7 @@ class ShopEventSubscriber implements EventSubscriberInterface
                 'onKernelController',
                 -256
             ],
-            AdminMenuInitEvent::ADMIN_MENU_INIT_EVENT => 'onAdminMenuInitAction',
+            AdminMenuInitEvent::ADMIN_MENU_INIT_EVENT => 'onAdminMenuInitEvent'
         ];
     }
 }

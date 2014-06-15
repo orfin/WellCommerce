@@ -11,7 +11,9 @@
  */
 namespace WellCommerce\Plugin\Shop\Controller\Admin;
 
-use WellCommerce\Core\Controller\AbstractAdminController;
+use Symfony\Component\Validator\Exception\ValidatorException;
+use WellCommerce\Core\Component\Controller\AbstractAdminController;
+use WellCommerce\Plugin\Shop\Repository\ShopRepositoryInterface;
 
 /**
  * Class ShopController
@@ -21,35 +23,84 @@ use WellCommerce\Core\Controller\AbstractAdminController;
  */
 class ShopController extends AbstractAdminController
 {
+    private $repository;
+
     /**
      * {@inheritdoc}
      */
-    protected function getDataGrid()
+    public function indexAction()
     {
-        return $this->get('shop.datagrid');
+        return [
+            'datagrid' => $this->createDataGrid($this->get('shop.datagrid'))
+        ];
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function getRepository()
+    public function addAction()
     {
-        return $this->get('shop.repository');
+        $form = $this->createForm($this->get('shop.form'), null, [
+            'name' => 'add_shop'
+        ]);
+
+        if ($form->isValid()) {
+            try {
+                $this->repository->save($form->getSubmitValuesFlat());
+                $this->addSuccessMessage('Changes saved successfully.');
+
+                return $this->redirect($this->getDefaultUrl());
+
+            } catch (ValidatorException $exception) {
+                $this->addErrorMessage($exception->getMessage());
+            }
+        }
+
+        return [
+            'form' => $form
+        ];
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function getForm()
+    public function editAction($id)
     {
-        return $this->get('shop.form');
+        $model = $this->repository->find($id);
+
+        $form = $this->createForm($this->get('shop.form'), $model, [
+            'name' => 'edit_shop'
+        ]);
+
+        if ($form->isValid()) {
+            try {
+                $this->repository->save($form->getSubmitValuesFlat(), $id);
+                $this->addSuccessMessage(sprintf('Shop %s saved successfully.', $model->translation->first()->name));
+
+                if ($form->isAction('continue')) {
+                    return $this->redirect($this->generateUrl('admin.shop.edit', ['id' => $model->id]));
+                }
+
+                return $this->redirect($this->getDefaultUrl());
+
+            } catch (ValidatorException $exception) {
+                $this->addErrorMessage($exception->getMessage());
+            }
+        }
+
+        return [
+            'shop' => $model,
+            'form'    => $form
+        ];
     }
 
     /**
-     * {@inheritdoc}
+     * Sets shop repository object
+     *
+     * @param ShopRepositoryInterface $repository
      */
-    protected function getDefaultRoute()
+    public function setRepository(ShopRepositoryInterface $repository)
     {
-        return 'admin.shop.index';
+        $this->repository = $repository;
     }
 }

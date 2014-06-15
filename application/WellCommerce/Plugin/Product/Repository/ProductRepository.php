@@ -136,7 +136,6 @@ class ProductRepository extends AbstractRepository implements ProductRepositoryI
 
         $this->transaction(function () use ($id, $data) {
             $product = $this->find($id);
-
             $data = $this->dispatchEvent(ProductRepositoryInterface::PRE_UPDATE_DATAGRID_EVENT, $product, $data);
             $product->update($data);
             $this->dispatchEvent(ProductRepositoryInterface::POST_UPDATE_DATAGRID_EVENT, $product, $data);

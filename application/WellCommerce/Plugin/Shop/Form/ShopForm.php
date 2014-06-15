@@ -11,8 +11,10 @@
  */
 namespace WellCommerce\Plugin\Shop\Form;
 
-use WellCommerce\Core\Form;
-use WellCommerce\Plugin\Shop\Event\ShopFormEvent;
+use WellCommerce\Core\Component\Form\AbstractForm;
+use WellCommerce\Core\Component\Form\FormBuilder;
+use WellCommerce\Core\Component\Form\FormInterface;
+use WellCommerce\Plugin\Shop\Model\Shop;
 
 /**
  * Class ShopForm
@@ -20,112 +22,122 @@ use WellCommerce\Plugin\Shop\Event\ShopFormEvent;
  * @package WellCommerce\Plugin\Shop\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ShopForm extends Form
+class ShopForm extends AbstractForm implements FormInterface
 {
     /**
-     * Initializes ShopForm
-     *
-     * @param array $shopData
-     *
-     * @return Form\Elements\Form
+     * {@inheritdoc}
      */
-    public function init($shopData = [])
+    public function buildForm(FormBuilder $builder, array $options)
     {
-        $form = $this->addForm([
-            'name' => 'shop',
-        ]);
+        $form = $builder->addForm($options);
 
-        $requiredData = $form->addChild($this->addFieldset([
+        $requiredData = $form->addChild($builder->addFieldset([
             'name'  => 'required_data',
             'label' => $this->trans('Required data')
         ]));
 
-        $languageData = $requiredData->addChild($this->addFieldsetLanguage([
+        $languageData = $requiredData->addChild($builder->addFieldsetLanguage([
             'name'      => 'language_data',
             'languages' => $this->getLanguages()
         ]));
 
-        $languageData->addChild($this->addTextField([
+        $languageData->addChild($builder->addTextField([
             'name'  => 'name',
             'label' => $this->trans('Name'),
             'rules' => [
-                $this->addRuleRequired($this->trans('Name is required')),
+                $builder->addRuleRequired($this->trans('Name is required')),
             ]
         ]));
 
-        $requiredData->addChild($this->addTextField([
+        $requiredData->addChild($builder->addTextField([
             'name'    => 'url',
             'label'   => $this->trans('Url'),
             'comment' => $this->trans('Enter shop URL address'),
             'rules'   => [
-                $this->addRuleRequired($this->trans('Url is required')),
-                $this->addRuleCustom($this->trans('Url address is not valid'), function ($value) {
+                $builder->addRuleRequired($this->trans('Url is required')),
+                $builder->addRuleCustom($this->trans('Url address is not valid'), function ($value) {
                     return filter_var($value, FILTER_VALIDATE_URL);
                 })
             ]
         ]));
 
-        $requiredData->addChild($this->addCheckBox([
+        $requiredData->addChild($builder->addCheckBox([
             'name'    => 'offline',
             'label'   => $this->trans('Offline mode'),
             'comment' => $this->trans('Turn shop into offline mode.')
         ]));
 
-        $requiredData->addChild($this->addSelect([
+        $requiredData->addChild($builder->addSelect([
             'name'    => 'company_id',
             'label'   => $this->trans('Company'),
-            'options' => $this->makeOptions($this->get('company.repository')->getAllCompanyToSelect()),
+            'options' => $builder->makeOptions($this->get('company.repository')->getAllCompanyToSelect()),
             'rules'   => [
-                $this->addRuleRequired($this->trans('Company is required'))
+                $builder->addRuleRequired($this->trans('Company is required'))
             ]
         ]));
 
-        $requiredData->addChild($this->addSelect([
+        $requiredData->addChild($builder->addSelect([
             'name'    => 'layout_theme_id',
             'label'   => $this->trans('Theme'),
-            'options' => $this->makeOptions($this->get('layout_theme.repository')->getAllLayoutThemeToSelect()),
+            'options' => $builder->makeOptions($this->get('layout_theme.repository')->getAllLayoutThemeToSelect()),
             'rules'   => [
-                $this->addRuleRequired($this->trans('Theme is required'))
+                $builder->addRuleRequired($this->trans('Theme is required'))
             ]
         ]));
 
-        $metaData = $form->addChild($this->addFieldset([
+        $metaData = $form->addChild($builder->addFieldset([
             'name'  => 'meta_data',
             'label' => $this->trans('Seo settings')
         ]));
 
-        $languageData = $metaData->addChild($this->addFieldsetLanguage([
-            'name'      => 'language_data',
-            'languages' => $this->getLanguages()
+        $languageData = $metaData->addChild($builder->addFieldsetLanguage([
+            'name' => 'language_data',
         ]));
 
-        $languageData->addChild($this->addTextField([
+        $languageData->addChild($builder->addTextField([
             'name'  => 'meta_title',
             'label' => $this->trans('Meta title'),
         ]));
 
-        $languageData->addChild($this->addTextArea([
+        $languageData->addChild($builder->addTextArea([
             'name'  => 'meta_keywords',
             'label' => $this->trans('Meta keywords'),
         ]));
 
-        $languageData->addChild($this->addTextArea([
+        $languageData->addChild($builder->addTextArea([
             'name'  => 'meta_description',
             'label' => $this->trans('Meta description'),
         ]));
 
-        $form->addFilter($this->addFilterNoCode());
-
-        $form->addFilter($this->addFilterTrim());
-
-        $form->addFilter($this->addFilterSecure());
-
-        $event = new ShopFormEvent($form, $shopData);
-
-        $this->getDispatcher()->dispatch(ShopFormEvent::FORM_INIT_EVENT, $event);
-
-        $form->populate($event->getPopulateData());
+        $form->addFilters([
+            $builder->addFilterTrim(),
+            $builder->addFilterSecure()
+        ]);
 
         return $form;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function prepareData(Shop $shop)
+    {
+        $formData     = [];
+        $accessor     = $this->getPropertyAccessor();
+        $languageData = $shop->translation->getTranslations();
+
+        $accessor->setValue($formData, '[required_data]', [
+            'url'             => $shop->url,
+            'offline'         => $shop->offline,
+            'company_id'      => $shop->company_id,
+            'layout_theme_id' => $shop->layout_theme_id,
+            'language_data'   => $languageData
+        ]);
+
+        $accessor->setValue($formData, '[meta_data]', [
+            'language_data' => $languageData
+        ]);
+
+        return $formData;
     }
 }

@@ -23,24 +23,7 @@ use WellCommerce\Core\Helper\Helper;
  */
 class Product extends AbstractModel implements TranslatableModelInterface
 {
-    /**
-     * @var string
-     */
     protected $table = 'product';
-
-    /**
-     * @var bool
-     */
-    public $timestamps = true;
-
-    /**
-     * @var bool
-     */
-    protected $softDelete = false;
-
-    /**
-     * @var array
-     */
     protected $fillable = ['id'];
 
     /**

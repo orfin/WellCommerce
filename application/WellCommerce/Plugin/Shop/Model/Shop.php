@@ -12,6 +12,7 @@
 namespace WellCommerce\Plugin\Shop\Model;
 
 use WellCommerce\Core\Component\Model\AbstractModel;
+use WellCommerce\Core\Component\Model\ModelInterface;
 use WellCommerce\Core\Component\Model\TranslatableModelInterface;
 
 /**
@@ -20,15 +21,10 @@ use WellCommerce\Core\Component\Model\TranslatableModelInterface;
  * @package WellCommerce\Plugin\Shop\Model
  * @author  Adam Piotrowski <adam@gekosale.com>
  */
-class Shop extends AbstractModel implements TranslatableModelInterface
+class Shop extends AbstractModel implements ModelInterface, TranslatableModelInterface
 {
 
     protected $table = 'shop';
-
-    public $timestamps = true;
-
-    protected $softDelete = false;
-
     protected $fillable = ['id'];
 
     /**
@@ -71,5 +67,13 @@ class Shop extends AbstractModel implements TranslatableModelInterface
     public function getOfflineAttribute($value)
     {
         return (int)$value;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getValidationXmlMapping()
+    {
+        return __DIR__ . '/../Resources/config/validation.xml';
     }
 }

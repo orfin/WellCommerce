@@ -12,6 +12,7 @@
 namespace WellCommerce\Plugin\Shop\Model;
 
 use WellCommerce\Core\Component\Model\AbstractModel;
+use WellCommerce\Core\Component\Model\ModelInterface;
 
 /**
  * Class ShopTranslation
@@ -19,21 +20,21 @@ use WellCommerce\Core\Component\Model\AbstractModel;
  * @package WellCommerce\Plugin\Shop\Model
  * @author  Adam Piotrowski <adam@gekosale.com>
  */
-class ShopTranslation extends AbstractModel
+class ShopTranslation extends AbstractModel implements ModelInterface
 {
-
     protected $table = 'shop_translation';
-
-    public $timestamps = true;
-
-    protected $softDelete = false;
-
     protected $fillable = ['shop_id', 'language_id'];
-
-    protected $translatable = ['name', 'meta_title', 'meta_keywords', 'meta_description'];
 
     public function scopeHasLanguageId($query, $language)
     {
         return $query->whereLanguageId($language)->first();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getValidationXmlMapping()
+    {
+        return __DIR__ . '/../Resources/config/validation.xml';
     }
 }

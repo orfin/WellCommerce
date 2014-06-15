@@ -3,29 +3,43 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
+    <parameters>
+        <parameter key="shop.admin.controller.class">WellCommerce\Plugin\Shop\Controller\Admin\ShopController</parameter>
+        <parameter key="shop.repository.class">WellCommerce\Plugin\Shop\Repository\ShopRepository</parameter>
+        <parameter key="shop.datagrid.class">WellCommerce\Plugin\Shop\DataGrid\ShopDataGrid</parameter>
+        <parameter key="shop.form.class">WellCommerce\Plugin\Shop\Form\ShopForm</parameter>
+        <parameter key="shop.listener.class">WellCommerce\Plugin\Shop\EventListener\ShopListener</parameter>
+    </parameters>
+
     <services>
-        <service id="shop.repository" class="WellCommerce\Plugin\Shop\Repository\ShopRepository">
+        <service id="shop.admin.controller" class="%shop.admin.controller.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
-        </service>
-
-        <service id="shop.datagrid" class="WellCommerce\Plugin\Shop\DataGrid\ShopDataGrid">
             <call method="setRepository">
                 <argument type="service" id="shop.repository"/>
             </call>
+        </service>
+
+        <service id="shop.repository" class="%shop.repository.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="shop.form" class="WellCommerce\Plugin\Shop\Form\ShopForm">
+        <service id="shop.datagrid" class="%shop.datagrid.class%">
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="shop.repository"/>
+        </service>
+
+        <service id="shop.form" class="%shop.form.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="shop.subscriber" class="WellCommerce\Plugin\Shop\Event\ShopEventSubscriber">
+        <service id="shop.listener" class="%shop.listener.class%">
+            <argument type="service" id="service_container"/>
             <tag name="kernel.event_subscriber"/>
         </service>
     </services>
