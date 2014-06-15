@@ -12,6 +12,7 @@
 namespace WellCommerce\Plugin\Language\Model;
 
 use WellCommerce\Core\Component\Model\AbstractModel;
+use WellCommerce\Core\Component\Model\ModelInterface;
 
 /**
  * Class Language
@@ -19,7 +20,7 @@ use WellCommerce\Core\Component\Model\AbstractModel;
  * @package WellCommerce\Plugin\Language\Model
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Language extends AbstractModel
+class Language extends AbstractModel implements ModelInterface
 {
     protected $table = 'language';
     protected $fillable = ['id'];
@@ -27,5 +28,13 @@ class Language extends AbstractModel
     public function currency()
     {
         return $this->belongsTo('WellCommerce\Plugin\Currency\Model\Currency');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getValidationXmlMapping()
+    {
+        return __DIR__ . '/../Resources/config/validation.xml';
     }
 }

@@ -11,8 +11,10 @@
  */
 namespace WellCommerce\Plugin\Language\Form;
 
-use WellCommerce\Core\Form,
-    WellCommerce\Plugin\Language\Event\LanguageFormEvent;
+use WellCommerce\Core\Component\Form\AbstractForm;
+use WellCommerce\Core\Component\Form\FormBuilder;
+use WellCommerce\Core\Component\Form\FormInterface;
+use WellCommerce\Plugin\Language\Model\Language;
 
 /**
  * Class LanguageForm
@@ -20,72 +22,84 @@ use WellCommerce\Core\Form,
  * @package WellCommerce\Plugin\Language\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LanguageForm extends Form
+class LanguageForm extends AbstractForm implements FormInterface
 {
-
     /**
-     * Initializes LanguageForm
-     *
-     * @param array $languageData
-     *
-     * @return Form\Elements\Form
+     * {@inheritdoc}
      */
-    public function init($languageData = [])
+    public function buildForm(FormBuilder $builder, array $options)
     {
-        $form = $this->addForm([
-            'name' => 'language',
-        ]);
+        $form = $builder->addForm($options);
 
-        $requiredData = $form->addChild($this->addFieldset([
+        $requiredData = $form->addChild($builder->addFieldset([
             'name'  => 'required_data',
             'label' => $this->trans('Basic settings')
         ]));
 
-        $requiredData->addChild($this->addTextField([
+        $requiredData->addChild($builder->addTextField([
             'name'  => 'name',
             'label' => $this->trans('Name'),
             'rules' => [
-                $this->addRuleRequired($this->trans('Name is required'))
+                $builder->addRuleRequired($this->trans('Name is required'))
             ]
         ]));
 
-        $requiredData->addChild($this->addTextField([
+        $requiredData->addChild($builder->addTextField([
             'name'  => 'translation',
             'label' => $this->trans('Translation'),
             'rules' => [
-                $this->addRuleRequired($this->trans('Translation is required'))
+                $builder->addRuleRequired($this->trans('Translation is required'))
             ]
         ]));
 
-        $requiredData->addChild($this->addSelect([
+        $requiredData->addChild($builder->addSelect([
             'name'    => 'locale',
             'label'   => $this->trans('Preferred locale'),
-            'options' => $this->makeOptions($this->get('language.repository')->getAllLocaleToSelect())
+            'options' => $builder->makeOptions($this->get('language.repository')->getAllLocaleToSelect())
         ]));
 
-        $currencyData = $form->addChild($this->addFieldset([
+        $currencyData = $form->addChild($builder->addFieldset([
             'name'  => 'currency_data',
             'label' => $this->trans('Currency settings')
         ]));
 
-        $currencyData->addChild($this->addSelect([
+        $currencyData->addChild($builder->addSelect([
             'name'    => 'currency_id',
             'label'   => $this->trans('Default currency'),
-            'options' => $this->makeOptions($this->get('currency.repository')->getAllCurrencyToSelect())
+            'options' => $builder->makeOptions($this->get('currency.repository')->getAllCurrencyToSelect())
         ]));
 
         $form->addFilters([
-            $this->addFilterNoCode(),
-            $this->addFilterTrim(),
-            $this->addFilterSecure()
+            $builder->addFilterNoCode(),
+            $builder->addFilterTrim(),
+            $builder->addFilterSecure()
         ]);
 
-        $event = new LanguageFormEvent($form, $languageData);
-
-        $this->getDispatcher()->dispatch(LanguageFormEvent::FORM_INIT_EVENT, $event);
-
-        $form->Populate($event->getPopulateData());
-
         return $form;
+    }
+
+    /**
+     * Prepares form data using retrieved model
+     *
+     * @param Currency $currency Model
+     *
+     * @return array
+     */
+    public function prepareData(Language $language)
+    {
+        $formData = [];
+        $accessor = $this->getPropertyAccessor();
+
+        $accessor->setValue($formData, '[required_data]', [
+            'name'        => $language->name,
+            'translation' => $language->translation,
+            'locale'      => $language->locale
+        ]);
+
+        $accessor->setValue($formData, '[currency_data]', [
+            'currency_id' => $language->currency_id
+        ]);
+
+        return $formData;
     }
 }

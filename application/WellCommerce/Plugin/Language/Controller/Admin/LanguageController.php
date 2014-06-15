@@ -11,7 +11,9 @@
  */
 namespace WellCommerce\Plugin\Language\Controller\Admin;
 
-use WellCommerce\Core\Controller\AbstractAdminController;
+use Symfony\Component\Validator\Exception\ValidatorException;
+use WellCommerce\Core\Component\Controller\AbstractAdminController;
+use WellCommerce\Plugin\Language\Repository\LanguageRepositoryInterface;
 
 /**
  * Class LanguageController
@@ -21,35 +23,80 @@ use WellCommerce\Core\Controller\AbstractAdminController;
  */
 class LanguageController extends AbstractAdminController
 {
+    private $repository;
+
     /**
      * {@inheritdoc}
      */
-    protected function getDataGrid()
+    public function indexAction()
     {
-        return $this->get('language.datagrid');
+        return [
+            'datagrid' => $this->createDataGrid($this->get('language.datagrid'))
+        ];
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function getRepository()
+    public function addAction()
     {
-        return $this->get('language.repository');
+        $form = $this->createForm($this->get('language.form'), null, [
+            'name' => 'add_language'
+        ]);
+
+        if ($form->isValid()) {
+            try {
+                $this->repository->save($form->getSubmitValuesFlat());
+                $this->addSuccessMessage('Changes saved successfully.');
+
+                return $this->redirect($this->getDefaultUrl());
+
+            } catch (ValidatorException $exception) {
+                $this->addErrorMessage($exception->getMessage());
+            }
+        }
+
+        return [
+            'form' => $form
+        ];
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function getForm()
+    public function editAction($id)
     {
-        return $this->get('language.form');
+        $model = $this->repository->find($id);
+
+        $form = $this->createForm($this->get('language.form'), $model, [
+            'name' => 'edit_language'
+        ]);
+
+        if ($form->isValid()) {
+            try {
+                $this->repository->save($form->getSubmitValuesFlat(), $id);
+                $this->addSuccessMessage('Changes saved successfully.');
+
+                return $this->redirect($this->getDefaultUrl());
+
+            } catch (ValidatorException $exception) {
+                $this->addErrorMessage($exception->getMessage());
+            }
+        }
+
+        return [
+            'language' => $model,
+            'form'    => $form
+        ];
     }
 
     /**
-     * {@inheritdoc}
+     * Sets language repository object
+     *
+     * @param LanguageRepositoryInterface $repository
      */
-    protected function getDefaultRoute()
+    public function setRepository(LanguageRepositoryInterface $repository)
     {
-        return 'admin.language.index';
+        $this->repository = $repository;
     }
 }

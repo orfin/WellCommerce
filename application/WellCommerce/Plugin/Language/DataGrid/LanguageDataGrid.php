@@ -11,9 +11,12 @@
  */
 namespace WellCommerce\Plugin\Language\DataGrid;
 
-use WellCommerce\Core\DataGrid;
-use WellCommerce\Core\DataGrid\DataGridInterface;
-use WellCommerce\Plugin\Language\Event\LanguageDataGridEvent;
+use Illuminate\Database\Capsule\Manager;
+use WellCommerce\Core\Component\DataGrid\AbstractDataGrid;
+use WellCommerce\Core\Component\DataGrid\Column\ColumnCollection;
+use WellCommerce\Core\Component\DataGrid\Column\ColumnInterface;
+use WellCommerce\Core\Component\DataGrid\Column\DataGridColumn;
+use WellCommerce\Core\Component\DataGrid\DataGridInterface;
 
 /**
  * Class LanguageDataGrid
@@ -21,87 +24,82 @@ use WellCommerce\Plugin\Language\Event\LanguageDataGridEvent;
  * @package WellCommerce\Plugin\Language\DataGrid
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LanguageDataGrid extends DataGrid implements DataGridInterface
+class LanguageDataGrid extends AbstractDataGrid implements DataGridInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function configure()
+    public function getId()
     {
-        $this->setOptions([
-            'id'             => 'language',
-            'event_handlers' => [
-                'load'       => $this->getXajaxManager()->registerFunction(['LoadLanguage', $this, 'loadData']),
-                'edit_row'   => 'editLanguage',
-                'click_row'  => 'editLanguage',
-                'delete_row' => $this->getXajaxManager()->registerFunction(['DeleteLanguage', $this, 'deleteRow']),
-            ],
-            'routes'         => [
-                'edit' => $this->generateUrl('admin.language.edit')
-            ]
-        ]);
+        return 'currency';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function init()
+    public function getRoutes()
     {
-        $this->addColumn('id', [
+        return [
+            'edit' => $this->generateUrl('admin.language.edit')
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function initColumns(ColumnCollection $collection)
+    {
+        $collection->add(new DataGridColumn([
+            'id'         => 'id',
             'source'     => 'language.id',
             'caption'    => $this->trans('Id'),
             'sorting'    => [
-                'default_order' => DataGridInterface::SORT_DIR_DESC
+                'default_order' => ColumnInterface::SORT_DIR_DESC
             ],
             'appearance' => [
                 'width'   => 90,
                 'visible' => false
             ],
             'filter'     => [
-                'type' => DataGridInterface::FILTER_BETWEEN
+                'type' => ColumnInterface::FILTER_BETWEEN
             ]
-        ]);
+        ]));
 
-        $this->addColumn('name', [
+        $collection->add(new DataGridColumn([
+            'id'         => 'name',
             'source'     => 'language.name',
             'caption'    => $this->trans('Name'),
             'appearance' => [
                 'width' => 70,
-                'align' => DataGridInterface::ALIGN_LEFT
+                'align' => ColumnInterface::ALIGN_LEFT
             ],
             'filter'     => [
-                'type' => DataGridInterface::FILTER_INPUT
+                'type' => ColumnInterface::FILTER_INPUT
             ]
-        ]);
+        ]));
 
-        $this->addColumn('locale', [
+        $collection->add(new DataGridColumn([
+            'id'         => 'locale',
             'source'     => 'language.locale',
             'caption'    => $this->trans('Locale'),
             'appearance' => [
                 'width' => 70,
-                'align' => DataGridInterface::ALIGN_LEFT
+                'align' => ColumnInterface::ALIGN_LEFT
             ],
             'filter'     => [
-                'type' => DataGridInterface::FILTER_INPUT
+                'type' => ColumnInterface::FILTER_INPUT
             ]
-        ]);
-
-        $this->query = $this->getDb()
-            ->table('language')
-            ->groupBy('language.id');
-
-        $event = new LanguageDataGridEvent($this);
-
-        $this->getDispatcher()->dispatch(LanguageDataGridEvent::DATAGRID_INIT_EVENT, $event);
+        ]));
     }
 
     /**
-     * Returns route for editAction
-     *
-     * @return string
+     * {@inheritdoc}
      */
-    protected function getEditActionRoute()
+    public function setQuery(Manager $manager)
     {
-        return 'admin.language.edit';
+        $this->query = $manager->table('language');
+        $this->query->groupBy('language.id');
     }
+
+
 }

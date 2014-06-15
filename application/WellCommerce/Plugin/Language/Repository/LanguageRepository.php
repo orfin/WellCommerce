@@ -21,13 +21,10 @@ use WellCommerce\Plugin\Language\Model\Language;
  * @package WellCommerce\Plugin\Language\AbstractRepository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LanguageRepository extends AbstractRepository
+class LanguageRepository extends AbstractRepository implements LanguageRepositoryInterface
 {
-
     /**
-     * Returns all currencies
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     * {@inheritdoc}
      */
     public function all()
     {
@@ -35,11 +32,7 @@ class LanguageRepository extends AbstractRepository
     }
 
     /**
-     * Returns a language record
-     *
-     * @param $id
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|static
+     * {@inheritdoc}
      */
     public function find($id)
     {
@@ -47,44 +40,36 @@ class LanguageRepository extends AbstractRepository
     }
 
     /**
-     * Deletes language model by ID
-     *
-     * @param $id
+     * {@inheritdoc}
      */
     public function delete($id)
     {
-        $this->transaction(function () use ($id) {
-            return Language::destroy($id);
-        });
+        $language = $this->find($id);
+        $language->delete();
+        $this->dispatchEvent(LanguageRepositoryInterface::POST_DELETE_EVENT, $language);
     }
 
     /**
-     * Saves language data
-     *
-     * @param      $Data
-     * @param null $id
+     * {@inheritdoc}
      */
-    public function save($Data, $id = null)
+    public function save(array $data, $id = null)
     {
-        $this->transaction(function () use ($Data, $id) {
+        $this->transaction(function () use ($data, $id) {
+
             $language = Language::firstOrCreate([
                 'id' => $id
             ]);
 
-            $language->name        = $Data['name'];
-            $language->locale      = $Data['locale'];
-            $language->translation = $Data['translation'];
-            $language->currency_id = $Data['currency_id'];
-            $language->save();
+            $data = $this->dispatchEvent(LanguageRepositoryInterface::PRE_SAVE_EVENT, $language, $data);
+
+            $language->update($data);
+
+            $this->dispatchEvent(LanguageRepositoryInterface::POST_SAVE_EVENT, $language, $data);
         });
     }
 
     /**
-     * Returns data required for populating a form
-     *
-     * @param $id
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function getPopulateData($id)
     {
@@ -106,9 +91,15 @@ class LanguageRepository extends AbstractRepository
     }
 
     /**
-     * Gets all currencies and returns them as key-value pairs
-     *
-     * @return array
+     * {@inheritdoc}
+     */
+    public function getAllLanguageToSelect()
+    {
+        return $this->all()->toSelect('id', 'name');
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function getAllLocaleToSelect()
     {
