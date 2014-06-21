@@ -31,7 +31,7 @@ class FileController extends AbstractAdminController
     public function indexAction()
     {
         return [
-            'datagrid' => $this->createDataGrid($this->get('producer.datagrid'))
+            'datagrid' => $this->createDataGrid($this->get('file.datagrid'))
         ];
     }
 

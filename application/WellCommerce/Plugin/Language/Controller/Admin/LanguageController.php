@@ -41,7 +41,7 @@ class LanguageController extends AbstractAdminController
     public function addAction()
     {
         $form = $this->createForm($this->get('language.form'), null, [
-            'name' => 'add_language'
+            'name' => 'language'
         ]);
 
         if ($form->isValid()) {
@@ -69,7 +69,7 @@ class LanguageController extends AbstractAdminController
         $model = $this->repository->find($id);
 
         $form = $this->createForm($this->get('language.form'), $model, [
-            'name' => 'edit_language'
+            'name' => 'language'
         ]);
 
         if ($form->isValid()) {

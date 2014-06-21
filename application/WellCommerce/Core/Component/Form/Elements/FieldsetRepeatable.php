@@ -20,7 +20,6 @@ namespace WellCommerce\Core\Component\Form\Elements;
  */
 class FieldsetRepeatable extends Fieldset implements ElementInterface
 {
-
     public function prepareAttributesJs()
     {
         $attributes = Array(

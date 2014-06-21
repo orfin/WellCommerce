@@ -45,13 +45,9 @@ class FileRepository extends AbstractRepository implements FileRepositoryInterfa
      */
     public function delete($id)
     {
-        $this->dispatchEvent(FileRepositoryInterface::PRE_DELETE_EVENT, [], $id);
-
-        $this->transaction(function () use ($id) {
-            return File::destroy($id);
-        });
-
-        $this->dispatchEvent(FileRepositoryInterface::POST_DELETE_EVENT, [], $id);
+        $file = $this->find($id);
+        $file->delete();
+        $this->dispatchEvent(FileRepositoryInterface::POST_DELETE_EVENT, $file);
     }
 
     /**

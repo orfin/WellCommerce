@@ -78,4 +78,12 @@ class AvailabilityRepository extends AbstractRepository implements AvailabilityR
             $this->dispatchEvent(AvailabilityRepositoryInterface::POST_SAVE_EVENT, $availability, $data);
         });
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAllAvailabilityToSelect()
+    {
+        return $this->all()->toSelect('id', 'translation.name', $this->getCurrentLanguage());
+    }
 }

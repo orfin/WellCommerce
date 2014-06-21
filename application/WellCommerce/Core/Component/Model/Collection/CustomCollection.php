@@ -96,6 +96,30 @@ class CustomCollection extends Collection
     }
 
     /**
+     * Flatten Collection to use it in datagrid filters
+     *
+     * @param            $idKey
+     * @param            $translationPath
+     * @param            $language
+     *
+     * @return array
+     */
+    public function toDataGridFilter($idKey, $translationPath, $language = null)
+    {
+        $data   = $this->toSelect($idKey, $translationPath, $language);
+        $filter = [];
+
+        foreach ($data as $id => $caption) {
+            $filter[] = [
+                'id'      => $id,
+                'caption' => $caption
+            ];
+        }
+
+        return $filter;
+    }
+
+    /**
      * Returns an array containing only primary keys for all items in collection
      *
      * @return array

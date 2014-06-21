@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\Dumper\PhpDumper;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
-use Symfony\Component\HttpKernel\DependencyInjection\RegisterListenersPass;
+use Symfony\Component\EventDispatcher\DependencyInjection\RegisterListenersPass;
 use Symfony\Component\Routing\RouteCollection;
 use WellCommerce\Core\DependencyInjection\Compiler\RegisterTwigExtensionsPass;
 use WellCommerce\Core\DependencyInjection\Extension\PluginExtensionLoader;
@@ -87,7 +87,7 @@ final class ServiceContainerBuilder
     protected $compilerClassPath;
 
     /**
-     * Config instance class
+     * Config cache object
      *
      * @var ConfigCache
      */
@@ -117,13 +117,9 @@ final class ServiceContainerBuilder
         if (!$this->containerConfigCache->isFresh()) {
 
             $this->initContainerBuilder();
-
             $this->loadXmlConfiguration();
-
             $this->registerExtensions();
-
             $this->registerCompilerPasses();
-
             $this->dumpDatabaseColumns();
 
             foreach ($this->compilerPasses as $compilerPass) {
@@ -241,26 +237,22 @@ final class ServiceContainerBuilder
      */
     protected function registerCompilerPasses()
     {
-        /*
-         * RegisterListenersPass for all event listeners
-         */
+        // RegisterListenersPass for all event listeners
         $this->registerCompilerPass(new RegisterListenersPass());
 
-        /*
-         * RegisterTwigExtensionsPass for all services tagged with twig.extension
-         */
+        // RegisterTwigExtensionsPass for all services tagged with twig.extension
         $this->registerCompilerPass(new RegisterTwigExtensionsPass());
 
-        $finder = new Finder();
-
-        $files = $finder->files()
-            ->in(ROOTPATH . 'application')
-            ->name('*Pass.php')
-            ->contains('CompilerPassInterface');
+        $finder    = new Finder();
+        $files     = $finder->files()->in(ROOTPATH . 'application')->name('*Pass.php');
+        $interface = 'Symfony\\Component\\DependencyInjection\\Compiler\\CompilerPassInterface';
         foreach ($files as $file) {
             $namespace    = $file->getRelativePath();
             $compilerPass = $namespace . '\\' . $file->getBasename('.php');
-            $this->registerCompilerPass(new $compilerPass);
+            $refClass     = new \ReflectionClass($compilerPass);
+            if ($refClass->implementsInterface($interface)) {
+                $this->registerCompilerPass(new $compilerPass);
+            }
         }
     }
 }

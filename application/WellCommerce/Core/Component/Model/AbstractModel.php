@@ -123,7 +123,7 @@ abstract class AbstractModel extends BaseModel
         $possibleAttributes = $this->getAccessibleAttributes();
 
         foreach ($attributes as $key => $value) {
-            if (in_array($key, $possibleAttributes) && !is_array($value)) {
+            if (in_array($key, $possibleAttributes)) {
                 $this->setAttribute($key, $value);
             }
         }

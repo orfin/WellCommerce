@@ -6,10 +6,10 @@
     <parameters>
         <parameter key="category.admin.controller.class">WellCommerce\Plugin\Category\Controller\Admin\CategoryController</parameter>
         <parameter key="category.front.controller.class">WellCommerce\Plugin\Category\Controller\Front\CategoryController</parameter>
+        <parameter key="category.front.box.controller.class">WellCommerce\Plugin\Category\Controller\Front\CategoryBoxController</parameter>
         <parameter key="category.repository.class">WellCommerce\Plugin\Category\Repository\CategoryRepository</parameter>
         <parameter key="category.form.class">WellCommerce\Plugin\Category\Form\CategoryForm</parameter>
         <parameter key="category.tree.class">WellCommerce\Plugin\Category\Form\CategoryTree</parameter>
-        <parameter key="category_box.layout.configurator">WellCommerce\Plugin\Category\Layout\CategoryBoxConfigurator</parameter>
         <parameter key="category.listener.class">WellCommerce\Plugin\Category\EventListener\CategoryListener</parameter>
     </parameters>
 
@@ -24,6 +24,15 @@
         </service>
 
         <service id="category.front.controller" class="%category.front.controller.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setRepository">
+                <argument type="service" id="category.repository"/>
+            </call>
+        </service>
+
+        <service id="category.front.box.controller" class="%category.front.box.controller.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -48,13 +57,6 @@
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
-        </service>
-
-        <service id="category_box.layout.configurator" class="%category_box.layout.configurator%">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <tag name="layout_box.configurator" />
         </service>
 
         <service id="category.listener" class="%category.listener.class%">

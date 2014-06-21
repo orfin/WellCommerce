@@ -29,17 +29,23 @@ class Fieldset extends Container implements ElementInterface
     {
         $resolver->setRequired([
             'name',
-            'label'
         ]);
 
         $resolver->setOptional([
+            'label',
             'class',
+            'repeat_min',
+            'repeat_max',
+            'dependencies',
         ]);
 
         $resolver->setAllowedTypes([
-            'name'          => 'string',
-            'label'         => 'string',
-            'class'         => 'string'
+            'name'         => ['int', 'string'],
+            'label'        => 'string',
+            'class'        => 'string',
+            'repeat_min'   => ['int', 'string'],
+            'repeat_max'   => ['int', 'string'],
+            'dependencies' => 'array',
         ]);
     }
 

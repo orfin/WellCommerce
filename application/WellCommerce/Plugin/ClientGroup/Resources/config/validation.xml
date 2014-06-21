@@ -8,7 +8,12 @@
             <constraint name="Collection">
                 <option name="fields">
                     <value key="discount">
-                        <constraint name="NotNull"/>
+                        <constraint name="Range">
+                            <option name="min">0</option>
+                            <option name="max">100</option>
+                            <option name="minMessage">Discount must be greater or equals 0%</option>
+                            <option name="maxMessage">Discount should not be greater than 100%</option>
+                        </constraint>
                     </value>
                 </option>
                 <option name="allowMissingFields">false</option>

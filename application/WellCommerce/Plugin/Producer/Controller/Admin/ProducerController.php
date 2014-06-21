@@ -39,7 +39,7 @@ class ProducerController extends AbstractAdminController
     public function addAction()
     {
         $form = $this->createForm($this->get('producer.form'), null, [
-            'name' => 'add_producer'
+            'name' => 'producer'
         ]);
 
         if ($form->isValid()) {
@@ -67,7 +67,7 @@ class ProducerController extends AbstractAdminController
         $model = $this->repository->find($id);
 
         $form = $this->createForm($this->get('producer.form'), $model, [
-            'name' => 'edit_producer'
+            'name' => 'producer'
         ]);
 
         if ($form->isValid()) {

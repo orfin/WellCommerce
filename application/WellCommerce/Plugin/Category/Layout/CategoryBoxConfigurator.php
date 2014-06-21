@@ -12,7 +12,10 @@
 
 namespace WellCommerce\Plugin\Category\Layout;
 
-use WellCommerce\Core\Component\Form\Elements\Fieldset;
+use WellCommerce\Core\Component\Form\Conditions\Equals;
+use WellCommerce\Core\Component\Form\Dependency;
+use WellCommerce\Core\Component\Form\Option;
+use WellCommerce\Core\Event\FormEvent;
 use WellCommerce\Core\Layout\Box\LayoutBoxConfigurator;
 use WellCommerce\Core\Layout\Box\LayoutBoxConfiguratorInterface;
 
@@ -25,48 +28,30 @@ use WellCommerce\Core\Layout\Box\LayoutBoxConfiguratorInterface;
 class CategoryBoxConfigurator extends LayoutBoxConfigurator implements LayoutBoxConfiguratorInterface
 {
     /**
-     * {@inheritdoc}
+     * @var string CategoryBoxConfigurator type
      */
-    public function getController()
-    {
-        return 'WellCommerce\\Plugin\\Category\\Controller\\Frontend\\CategoryBoxController';
-    }
+    public $type;
+
+    /**
+     * @var string CategoryBoxController service name
+     */
+    public $controller;
+
+    /**
+     * @var string CategoryBoxController box name
+     */
+    public $name = 'CategoryBox';
 
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function addBoxConfiguration()
     {
-        return 'Category';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAlias()
-    {
-        return 'wellcommerce.box.category';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isAvailableForLayoutPage($layoutPage)
-    {
-        // available on all layout pages
-        return true;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addConfigurationFields(Fieldset $fieldset)
-    {
-        $fieldset->addChild($this->addTip([
+        $this->fieldset->addChild($this->builder->addTip([
             'tip' => '<p>' . $this->trans('Choose categories that should be visible in category box or leave empty.') . '</p>'
         ]));
 
-        $fieldset->addChild($this->addTree([
+        $this->fieldset->addChild($this->builder->addTree([
             'name'       => 'category',
             'label'      => $this->trans('Categories'),
             'choosable'  => false,

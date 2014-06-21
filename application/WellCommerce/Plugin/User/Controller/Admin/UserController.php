@@ -41,7 +41,7 @@ class UserController extends AbstractAdminController
     public function addAction()
     {
         $form = $this->createForm($this->get('user.form'), null, [
-            'name'   => 'add_user',
+            'name'   => 'user',
             'method' => 'POST',
             'action' => $this->generateUrl('admin.user.add')
         ]);
@@ -65,7 +65,7 @@ class UserController extends AbstractAdminController
         $model = $this->repository->find($id);
 
         $form = $this->createForm($this->get('user.form'), $model, [
-            'name'   => 'edit_user',
+            'name'   => 'user',
             'method' => 'POST',
             'action' => $this->generateUrl('admin.user.edit', ['id' => $model->id])
         ]);
@@ -90,7 +90,7 @@ class UserController extends AbstractAdminController
     public function loginAction()
     {
         $form = $this->createForm($this->get('user.form_login'), null, [
-            'name'   => 'login_user',
+            'name'   => 'user_login',
             'action' => $this->generateUrl('admin.user.login'),
             'class'  => 'login-form'
         ]);

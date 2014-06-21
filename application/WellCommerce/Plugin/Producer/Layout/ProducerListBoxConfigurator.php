@@ -13,6 +13,7 @@
 namespace WellCommerce\Plugin\Producer\Layout;
 
 use WellCommerce\Core\Component\Form\Elements\Fieldset;
+use WellCommerce\Core\Event\FormEvent;
 use WellCommerce\Core\Layout\Box\LayoutBoxConfigurator;
 use WellCommerce\Core\Layout\Box\LayoutBoxConfiguratorInterface;
 
@@ -59,7 +60,7 @@ class ProducerListBoxConfigurator extends LayoutBoxConfigurator implements Layou
     /**
      * {@inheritdoc}
      */
-    public function addConfigurationFields(Fieldset $fieldset)
+    public function addConfigurationFields(FormEvent $event)
     {
         return false;
     }

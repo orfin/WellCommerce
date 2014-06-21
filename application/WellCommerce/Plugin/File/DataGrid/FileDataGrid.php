@@ -47,6 +47,20 @@ class FileDataGrid extends AbstractDataGrid implements DataGridInterface
     /**
      * {@inheritdoc}
      */
+    public function configureOptions(array $options)
+    {
+        $event_handlers            = [
+            'process'    => 'processFile',
+            'loaded'     => 'dataLoaded'
+        ];
+        $options['event_handlers'] = $event_handlers;
+
+        return parent::configureOptions($options);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function initColumns(ColumnCollection $collection)
     {
         $collection->add(new DataGridColumn([
@@ -76,7 +90,7 @@ class FileDataGrid extends AbstractDataGrid implements DataGridInterface
                 'width' => 190,
             ],
             'filter'     => [
-                'type' => ColumnInterface::FILTER_BETWEEN
+                'type' => ColumnInterface::FILTER_INPUT
             ]
         ]));
 

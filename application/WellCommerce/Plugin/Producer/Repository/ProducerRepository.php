@@ -89,4 +89,12 @@ class ProducerRepository extends AbstractRepository implements ProducerRepositor
     {
         return $this->all()->toSelect('id', 'translation.name', $this->getCurrentLanguage());
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAllProducerToFilter()
+    {
+        return $this->all()->toDataGridFilter('id', 'translation.name', $this->getCurrentLanguage());
+    }
 }

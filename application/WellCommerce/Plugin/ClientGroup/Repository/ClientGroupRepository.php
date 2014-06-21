@@ -83,6 +83,26 @@ class ClientGroupRepository extends AbstractRepository implements ClientGroupRep
     /**
      * {@inheritdoc}
      */
+    public function updateDataGridRow(array $request)
+    {
+        $id   = $request['id'];
+        $data = $request['data'];
+
+        $this->transaction(function () use ($id, $data) {
+            $clientGroup = $this->find($id);
+            $data = $this->dispatchEvent(ClientGroupRepositoryInterface::PRE_UPDATE_DATAGRID_EVENT, $clientGroup, $data);
+            $clientGroup->update($data);
+            $this->dispatchEvent(ClientGroupRepositoryInterface::POST_UPDATE_DATAGRID_EVENT, $clientGroup, $data);
+        });
+
+        return [
+            'updated' => true
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getAllClientGroupToSelect()
     {
         return $this->all()->toSelect('id', 'translation.name', $this->getCurrentLanguage());

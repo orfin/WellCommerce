@@ -9,15 +9,11 @@
 
     <services>
         <service id="product_box.layout.configurator" class="%product_box.layout.configurator.class%">
-            <call method="setDefaults">
-                <argument type="collection">
-                    <argument key="name">ProductBox</argument>
-                </argument>
-            </call>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
-            <tag name="layout_box.configurator" />
+            <tag name="layout_box.configurator" type="wellcommerce_product_box" controller="product.front.box.controller" />
+            <tag name="kernel.event_listener" event="layout_box.form.init" method="addConfigurationFields" />
         </service>
     </services>
 </container>

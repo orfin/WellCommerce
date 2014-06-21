@@ -66,4 +66,11 @@ interface ProducerRepositoryInterface
      * @return mixed
      */
     public function getAllProducerToSelect();
+
+    /**
+     * Returns Collection as ke-value pairs ready to use in datagrid filters
+     *
+     * @return mixed
+     */
+    public function getAllProducerToFilter();
 }

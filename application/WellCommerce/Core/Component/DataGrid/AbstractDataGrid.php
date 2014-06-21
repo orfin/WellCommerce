@@ -13,6 +13,7 @@ namespace WellCommerce\Core\Component\DataGrid;
 
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Validator\Exception\ValidatorException;
 use WellCommerce\Core\Component\AbstractComponent;
 use WellCommerce\Core\Component\DataGrid\Column\ColumnCollection;
 use xajaxResponse;
@@ -73,7 +74,8 @@ abstract class AbstractDataGrid extends AbstractComponent
             'row_actions'    => [
                 DataGridInterface::ACTION_EDIT,
                 DataGridInterface::ACTION_DELETE
-            ]
+            ],
+            'filters'         => []
         ], $options);
     }
 
@@ -134,7 +136,14 @@ abstract class AbstractDataGrid extends AbstractComponent
      */
     public function updateRow($request)
     {
-        return $this->repository->updateDataGridRow($request);
+        try {
+            $this->repository->updateDataGridRow($request);
+
+        } catch (ValidatorException $exception) {
+            return [
+                'error' => $exception->getMessage()
+            ];
+        }
     }
 
     /**

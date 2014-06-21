@@ -65,7 +65,7 @@ class ColumnCollection implements \IteratorAggregate, \Countable
         $this->columns[$column->getId()] = $column;
     }
 
-    /**
+    /**s
      * Returns DataGrid column by identifier
      *
      * @param $id

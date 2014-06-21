@@ -12,6 +12,7 @@
 namespace WellCommerce\Plugin\Availability\Model;
 
 use WellCommerce\Core\Component\Model\AbstractModel;
+use WellCommerce\Core\Component\Model\ModelInterface;
 
 /**
  * Class AvailabilityTranslation
@@ -19,7 +20,7 @@ use WellCommerce\Core\Component\Model\AbstractModel;
  * @package WellCommerce\Plugin\Availability\Model
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AvailabilityTranslation extends AbstractModel
+class AvailabilityTranslation extends AbstractModel implements ModelInterface
 {
     /**
      * {@inheritdoc}

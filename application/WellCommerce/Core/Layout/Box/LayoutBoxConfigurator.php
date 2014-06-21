@@ -12,7 +12,11 @@
 
 namespace WellCommerce\Core\Layout\Box;
 
-use WellCommerce\Core\Component\Form\AbstractFormBuilder;
+use WellCommerce\Core\Component\AbstractComponent;
+use WellCommerce\Core\Component\Form\Conditions\Equals;
+use WellCommerce\Core\Component\Form\Dependency;
+use WellCommerce\Core\Component\Form\Option;
+use WellCommerce\Core\Event\FormEvent;
 
 /**
  * Class LayoutBoxConfigurator
@@ -20,31 +24,49 @@ use WellCommerce\Core\Component\Form\AbstractFormBuilder;
  * @package WellCommerce\Core\Layout\Box
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class LayoutBoxConfigurator
+abstract class LayoutBoxConfigurator extends AbstractComponent implements LayoutBoxConfiguratorInterface
 {
-    protected $defaults;
+    protected $builder;
+    protected $form;
+    protected $typeSelect;
+    protected $fieldset;
 
-    public function setDefaults(array $defaults)
+    /**
+     * {@inheritdoc}
+     */
+    public function isAvailableForLayoutPage($layoutPage)
     {
+        // available on all layout pages
+        return true;
     }
 
     /**
-     * Replaces dots with dashes in alias and returns FieldSet name
-     *
-     * @return string
+     * {@inheritdoc}
      */
-    public function getFieldSetName()
+    public function addConfigurationFields(FormEvent $event)
     {
-        return strtr($this->getAlias(), '.', '_');
+        $this->builder    = $event->getFormBuilder();
+        $this->form       = $this->builder->getForm();
+        $this->typeSelect = $this->form->getChild('required_data')->getChild('type');
+
+        $this->typeSelect->addOption(new Option($this->type, sprintf('%s (%s)', $this->name, $this->type)));
+
+        $this->fieldset = $this->form->addChild($this->builder->addFieldset([
+            'name'         => $this->type,
+            'label'        => $this->trans('Box settings'),
+            'dependencies' => [
+                $this->builder->addDependency(Dependency::SHOW, $this->typeSelect, new Equals($this->type), null)
+            ]
+        ]));
+
+        $this->addBoxConfiguration();
     }
 
-    public function saveSettings($Data)
+    /**
+     * {@inheritdoc}
+     */
+    public function addBoxConfiguration()
     {
-
-    }
-
-    public function getHelp()
-    {
-
+        return false;
     }
 }

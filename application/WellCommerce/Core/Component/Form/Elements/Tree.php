@@ -75,10 +75,11 @@ class Tree extends Field implements ElementInterface
             'set',
             'rules',
             'dependencies',
+            'clickable_root'
         ]);
 
         $resolver->setAllowedTypes([
-            'name'                             => 'string',
+            'name'                             => ['int', 'string'],
             'label'                            => 'string',
             'addLabel'                         => 'string',
             'error'                            => 'string',
@@ -106,6 +107,7 @@ class Tree extends Field implements ElementInterface
             'getchildren'                      => 'object',
             'prevent_duplicates'               => 'bool',
             'prevent_duplicates_on_all_levels' => 'bool',
+            'clickable_root'                   => 'bool',
             'set'                              => 'string',
             'rules'                            => 'array',
             'dependencies'                     => 'array',

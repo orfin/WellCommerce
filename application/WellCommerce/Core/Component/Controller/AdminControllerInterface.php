@@ -20,5 +20,18 @@ namespace WellCommerce\Core\Component\Controller;
  */
 interface AdminControllerInterface
 {
+    /**
+     * @return mixed
+     */
+    public function indexAction();
 
-} 
+    /**
+     * @return mixed
+     */
+    public function addAction();
+
+    /**
+     * @return mixed
+     */
+    public function editAction($id);
+}

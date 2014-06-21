@@ -1,12 +1,15 @@
 {% extends "layout.html.twig" %}
 {% block content %}
-    <h2>{% trans %}Deliverers{% endtrans %}</h2>
+    <h2>{% trans %}Files{% endtrans %}</h2>
+    <script type="text/javascript">
+        function processFile(row) {
+            row.preview = '<a title="" href="' + row.preview + '" class="show-thumb"><img src="{{ asset('design/_images_panel/icons/datagrid/details.png') }}" style="vertical-align: middle;" /></a>';
+            return row;
+        }
 
-    <ul class="possibilities">
-        <li><a href="{{ path('admin.deliverer.add') }}" class="button"
-               title="{% trans %}Add{% endtrans %}"><span>{% trans %}Add{% endtrans %}</span></a></li>
-    </ul>
-
+        function dataLoaded(dDg) {
+            dDg.m_jBody.find('.show-thumb').mouseenter(GTooltip.ShowThumbForThis).mouseleave(GTooltip.HideThumbForThis);
+        }
+    </script>
     {{ datagrid_renderer(datagrid) }}
-
 {% endblock %}

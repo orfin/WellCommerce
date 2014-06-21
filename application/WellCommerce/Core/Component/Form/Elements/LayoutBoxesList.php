@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Core\Component\Form\Elements;
 
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
 /**
  * Class LayoutBoxesList
  *
@@ -20,6 +22,29 @@ namespace WellCommerce\Core\Component\Form\Elements;
  */
 class LayoutBoxesList extends Field implements ElementInterface
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function configureAttributes(OptionsResolverInterface $resolver)
+    {
+        $resolver->setRequired([
+            'name',
+            'boxes',
+        ]);
+
+        $resolver->setOptional([
+            'label',
+            'comment',
+        ]);
+
+        $resolver->setAllowedTypes([
+            'name'    => ['int', 'string'],
+            'label'   => 'string',
+            'comment' => 'string',
+            'boxes'   => 'array',
+        ]);
+    }
+
     public function prepareAttributesJs()
     {
         $attributes = Array(

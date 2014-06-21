@@ -41,7 +41,7 @@ class AvailabilityController extends AbstractAdminController
     public function addAction()
     {
         $form = $this->createForm($this->get('availability.form'), null, [
-            'name' => 'add_availability'
+            'name' => 'availability'
         ]);
 
         if ($form->isValid()) {
@@ -69,7 +69,7 @@ class AvailabilityController extends AbstractAdminController
         $model = $this->repository->find($id);
 
         $form = $this->createForm($this->get('availability.form'), $model, [
-            'name' => 'edit_availability',
+            'name' => 'availability',
         ]);
 
         if ($form->isValid()) {

@@ -58,7 +58,6 @@ class AdminUserListener implements EventSubscriberInterface
             if ($currentRoute != self::LOGIN_ROUTE) {
                 $event->setResponse(new RedirectResponse($this->container->get('router')->generate(self::LOGIN_ROUTE)));
             }
-
         }
     }
 

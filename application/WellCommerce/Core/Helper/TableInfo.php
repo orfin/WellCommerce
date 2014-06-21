@@ -39,8 +39,7 @@ class TableInfo
         'deliverer_translation' => ['id','name','deliverer_id','language_id','created_at','updated_at'],
         'file' => ['id','name','extension','type','width','height','size','created_at','updated_at'],
         'language' => ['id','created_at','updated_at','name','translation','currency_id','locale'],
-        'layout_box' => ['id','identifier','alias','created_at','updated_at'],
-        'layout_box_settings' => ['id','param','value','layout_box_id','created_at','updated_at'],
+        'layout_box' => ['id','type','settings','visibility','show_header','created_at','updated_at'],
         'layout_box_translation' => ['id','name','content','layout_box_id','language_id','created_at','updated_at'],
         'layout_page' => ['id','name','created_at','updated_at'],
         'layout_page_column' => ['id','layout_theme_id','layout_page_id','hierarchy','width','created_at','updated_at'],
@@ -81,6 +80,7 @@ class TableInfo
         if(!isset(self::$columns[$table])){
             throw new \InvalidArgumentException(sprintf('Table %s does not exists in schema information', $table));
         }
+
         return self::$columns[$table];
     }
 

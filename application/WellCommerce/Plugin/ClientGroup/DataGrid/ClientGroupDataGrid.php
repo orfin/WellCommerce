@@ -47,6 +47,23 @@ class ClientGroupDataGrid extends AbstractDataGrid implements DataGridInterface
     /**
      * {@inheritdoc}
      */
+    public function configureOptions(array $options)
+    {
+        $event_handlers            = [
+            'update_row' => $this->getXajaxManager()->registerFunction([
+                    'update_' . $this->getId(),
+                    $this,
+                    'updateRow'
+                ])
+        ];
+        $options['event_handlers'] = $event_handlers;
+
+        return parent::configureOptions($options);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function initColumns(ColumnCollection $columns)
     {
         $columns->add(new DataGridColumn([
@@ -82,6 +99,7 @@ class ClientGroupDataGrid extends AbstractDataGrid implements DataGridInterface
             'id'         => 'discount',
             'source'     => 'client_group.discount',
             'caption'    => $this->trans('Discount'),
+            'editable'   => true,
             'appearance' => [
                 'width' => 40,
                 'align' => ColumnInterface::ALIGN_LEFT

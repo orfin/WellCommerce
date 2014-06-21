@@ -21,7 +21,7 @@ use WellCommerce\Plugin\Layout\Model\LayoutPage;
  * @package WellCommerce\Plugin\LayoutPage\AbstractRepository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LayoutPageRepository extends AbstractRepository implements RepositoryInterface
+class LayoutPageRepository extends AbstractRepository implements LayoutPageRepositoryInterface
 {
 
     /**
@@ -31,7 +31,7 @@ class LayoutPageRepository extends AbstractRepository implements RepositoryInter
      */
     public function all()
     {
-        return LayoutPage::with('column', 'column.box')->orderBy('name')->get();
+        return LayoutPage::with('column', 'column.box')->orderBy('name', 'ASC')->get();
     }
 
     /**

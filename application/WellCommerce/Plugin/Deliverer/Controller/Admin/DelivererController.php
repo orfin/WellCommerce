@@ -39,7 +39,7 @@ class DelivererController extends AbstractAdminController
     public function addAction()
     {
         $form = $this->createForm($this->get('deliverer.form'), null, [
-            'name' => 'add_deliverer'
+            'name' => 'deliverer'
         ]);
 
         if ($form->isValid()) {
@@ -67,7 +67,7 @@ class DelivererController extends AbstractAdminController
         $model = $this->repository->find($id);
 
         $form = $this->createForm($this->get('deliverer.form'), $model, [
-            'name' => 'edit_deliverer'
+            'name' => 'deliverer'
         ]);
 
         if ($form->isValid()) {

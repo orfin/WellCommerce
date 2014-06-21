@@ -29,19 +29,14 @@ class LayoutManager extends AbstractComponent
     private $layoutBoxConfigurators = [];
 
     /**
-     * @var array
-     */
-    private $layoutPages = [];
-
-    /**
      * Adds new layout box configurator to stack
      *
      * @param                                $id
      * @param LayoutBoxConfiguratorInterface $configurator
      */
-    public function addLayoutBoxConfigurator($id, LayoutBoxConfiguratorInterface $configurator)
+    public function addLayoutBoxConfigurator($alias, LayoutBoxConfiguratorInterface $configurator)
     {
-        $this->layoutBoxConfigurators[$id] = $configurator;
+        $this->layoutBoxConfigurators[$alias] = $configurator;
     }
 
     public function getLayoutBoxConfigurator($alias)
@@ -61,23 +56,5 @@ class LayoutManager extends AbstractComponent
     public function getLayoutBoxConfigurators()
     {
         return $this->layoutBoxConfigurators;
-    }
-
-    /**
-     * Renders layout from xml file using given renderer
-     *
-     * @param $layout Renderer alias
-     *
-     * @throws \RuntimeException
-     */
-    public function renderLayout($layout)
-    {
-        if (!isset($this->layoutPages[$layout])) {
-            throw new \RuntimeException(sprintf('Layout page "%s" is not registered', $layout));
-        }
-
-        $layoutPage = $this->layoutPages[$layout];
-
-        return $layoutPage->render();
     }
 }

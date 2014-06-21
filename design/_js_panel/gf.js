@@ -4381,6 +4381,9 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
             };
 
             dDg.m_oOptions.event_handlers.update_row(oRequest, GCallback(function(eEvent){
+                if(eEvent.error){
+                    GError(GF_Debug.Language.error_occured, eEvent.error);
+                }
                 dDg.LoadData();
             }));
 			return true;
@@ -4403,6 +4406,9 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
             };
 
             dDg.m_oOptions.event_handlers.update_row(oRequest, GCallback(function(eEvent){
+                if(eEvent.error){
+                    GError(GF_Debug.Language.error_occured, eEvent.error);
+                }
                 dDg.LoadData();
             }));
 			return true;

@@ -55,6 +55,7 @@ class Contact extends Twig_Extension
      */
     public function renderContactForm()
     {
+
         $form = $this->container->get('contact.form')->init();
 
         return $form->renderStatic();

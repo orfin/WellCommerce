@@ -33,7 +33,7 @@ function deleteRow(dg, id) {
 
 $(document).ready(function() {
     {% for key,column in columns %}
-    {{ macros.datagrid_column(key, column) }}
+    {{ macros.datagrid_column(key, column, options.filters) }}
     {% endfor %}
 
     var options = {

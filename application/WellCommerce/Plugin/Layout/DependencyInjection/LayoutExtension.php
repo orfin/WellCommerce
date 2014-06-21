@@ -43,19 +43,18 @@ class LayoutExtension extends AbstractExtension
     public function registerRoutes(RouteCollection $collection, ContainerBuilder $container)
     {
         // LayoutTheme
-
         $layoutThemeCollection = new RouteCollection();
 
         $layoutThemeCollection->add('admin.layout_theme.index', new Route('/index', array(
-            '_controller' => 'language.admin.controller:indexAction',
+            '_controller' => 'layout_theme.admin.controller:indexAction',
         )));
 
         $layoutThemeCollection->add('admin.layout_theme.add', new Route('/add', array(
-            '_controller' => 'language.admin.controller:addAction',
+            '_controller' => 'layout_theme.admin.controller:addAction',
         )));
 
         $layoutThemeCollection->add('admin.layout_theme.edit', new Route('/edit/{id}', array(
-            '_controller' => 'language.admin.controller:editAction',
+            '_controller' => 'layout_theme.admin.controller:editAction',
             'id'          => null
         )));
 
@@ -69,32 +68,33 @@ class LayoutExtension extends AbstractExtension
             '_controller' => 'layout_box.admin.controller:indexAction',
         )));
 
-        $layoutThemeCollection->add('admin.layout_box.add', new Route('/add', array(
+        $layoutBoxCollection->add('admin.layout_box.add', new Route('/add', array(
             '_controller' => 'layout_box.admin.controller:addAction',
         )));
 
-        $layoutThemeCollection->add('admin.layout_box.edit', new Route('/edit/{id}', array(
+        $layoutBoxCollection->add('admin.layout_box.edit', new Route('/edit/{id}', array(
             '_controller' => 'layout_box.admin.controller:editAction',
             'id'          => null
         )));
 
-        $layoutThemeCollection->addPrefix('/admin/layout/box');
+        $layoutBoxCollection->addPrefix('/admin/layout/box');
 
         // LayoutPage
 
         $layoutPageCollection = new RouteCollection();
 
         $layoutPageCollection->add('admin.layout_page.index', new Route('/index', array(
-            '_controller' => 'language.admin.controller:indexAction',
+            '_controller' => 'layout_page.admin.controller:indexAction',
         )));
 
         $layoutPageCollection->add('admin.layout_page.add', new Route('/add', array(
-            '_controller' => 'language.admin.controller:addAction',
+            '_controller' => 'layout_page.admin.controller:addAction',
         )));
 
-        $layoutPageCollection->add('admin.layout_page.edit', new Route('/edit/{id}', array(
-            '_controller' => 'language.admin.controller:editAction',
-            'id'          => null
+        $layoutPageCollection->add('admin.layout_page.edit', new Route('/edit/{id},{page}', array(
+            '_controller' => 'layout_page.admin.controller:editAction',
+            'id'          => null,
+            'page'        => null
         )));
 
         $layoutPageCollection->addPrefix('/admin/layout/page');

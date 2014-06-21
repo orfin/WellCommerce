@@ -20,10 +20,11 @@ namespace WellCommerce\Plugin\ClientGroup\Repository;
  */
 interface ClientGroupRepositoryInterface
 {
-    const PRE_DELETE_EVENT  = 'client_group.repository.pre_delete';
-    const POST_DELETE_EVENT = 'client_group.repository.post_delete';
-    const PRE_SAVE_EVENT    = 'client_group.repository.pre_save';
-    const POST_SAVE_EVENT   = 'client_group.repository.post_save';
+    const POST_DELETE_EVENT          = 'client_group.repository.post_delete';
+    const PRE_SAVE_EVENT             = 'client_group.repository.pre_save';
+    const POST_SAVE_EVENT            = 'client_group.repository.post_save';
+    const PRE_UPDATE_DATAGRID_EVENT  = 'client_group.repository.pre_datagrid_save';
+    const POST_UPDATE_DATAGRID_EVENT = 'client_group.repository.post_datagrid_save';
 
     /**
      * Returns all client groups as a collection

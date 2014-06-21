@@ -41,7 +41,7 @@ class ShopController extends AbstractAdminController
     public function addAction()
     {
         $form = $this->createForm($this->get('shop.form'), null, [
-            'name' => 'add_shop'
+            'name' => 'shop'
         ]);
 
         if ($form->isValid()) {
@@ -69,7 +69,7 @@ class ShopController extends AbstractAdminController
         $model = $this->repository->find($id);
 
         $form = $this->createForm($this->get('shop.form'), $model, [
-            'name' => 'edit_shop'
+            'name' => 'shop'
         ]);
 
         if ($form->isValid()) {

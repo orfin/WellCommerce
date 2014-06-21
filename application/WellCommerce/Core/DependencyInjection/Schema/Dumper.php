@@ -105,6 +105,7 @@ class {$options['class']}
         if(!isset(self::\$columns[\$table])){
             throw new \InvalidArgumentException(sprintf('Table %s does not exists in schema information', \$table));
         }
+
         return self::\$columns[\$table];
     }
 

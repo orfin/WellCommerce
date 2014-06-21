@@ -42,7 +42,7 @@ class CompanyController extends AbstractAdminController
     public function addAction()
     {
         $form = $this->createForm($this->get('company.form'), null, [
-            'name' => 'add_company'
+            'name' => 'company'
         ]);
 
         if ($form->isValid()) {
@@ -70,7 +70,7 @@ class CompanyController extends AbstractAdminController
         $model = $this->repository->find($id);
 
         $form = $this->createForm($this->get('company.form'), $model, [
-            'name' => 'edit_company'
+            'name' => 'company'
         ]);
 
         if ($form->isValid()) {

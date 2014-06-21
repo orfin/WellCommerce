@@ -12,9 +12,8 @@
 namespace WellCommerce\Plugin\Layout\Repository;
 
 use WellCommerce\Core\Component\Repository\AbstractRepository;
-use WellCommerce\Core\Component\Repository\RepositoryInterface;
 use WellCommerce\Plugin\Layout\Model\LayoutBox;
-use WellCommerce\Plugin\Layout\Model\LayoutBoxSettings;
+use WellCommerce\Plugin\Layout\Model\LayoutBoxTranslation;
 
 /**
  * Class LayoutBoxAbstractRepository
@@ -22,122 +21,90 @@ use WellCommerce\Plugin\Layout\Model\LayoutBoxSettings;
  * @package WellCommerce\Plugin\LayoutBox\AbstractRepository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LayoutBoxRepository extends AbstractRepository implements RepositoryInterface
+class LayoutBoxRepository extends AbstractRepository implements LayoutBoxRepositoryInterface
 {
-
     /**
-     * Returns all tax rates
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     * {@inheritdoc}
      */
     public function all()
     {
-        return LayoutBox::with('settings')->get();
+        return LayoutBox::with('translation')->get();
     }
 
     /**
-     * Returns a single tax rate
-     *
-     * @param $id
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|static
+     * {@inheritdoc}
      */
     public function find($id)
     {
-        return LayoutBox::with('settings')->findOrFail($id);
+        return LayoutBox::with('translation')->findOrFail($id);
     }
 
     /**
-     * Deletes layout_theme record by ID
-     *
-     * @param int $id layout_theme ID to delete
+     * {@inheritdoc}
      */
     public function delete($id)
     {
-        $this->transaction(function () use ($id) {
-            return LayoutBox::destroy($id);
-        });
+        $layoutBox = $this->find($id);
+        $layoutBox->delete();
+        $this->dispatchEvent(LayoutBoxRepositoryInterface::POST_DELETE_EVENT, $layoutBox);
     }
 
     /**
-     * Saves layout_theme
-     *
-     * @param      $Data
-     * @param null $id
+     * {@inheritdoc}
      */
-    public function save(array $Data, $id = null)
+    public function save(array $data, $id = null)
     {
-        $this->transaction(function () use ($Data, $id) {
+        $data = $this->filterValues($data);
 
-            $layoutBox = LayoutBox::firstOrNew([
+        print_r($data);
+
+        $this->transaction(function () use ($data, $id) {
+
+            $layoutBox = LayoutBox::firstOrCreate([
                 'id' => $id
             ]);
 
-            $layoutBox->identifier = $Data['required_data']['identifier'];
-            $layoutBox->alias      = $Data['required_data']['alias'];
-            $layoutBox->save();
+            $data = $this->dispatchEvent(LayoutBoxRepositoryInterface::PRE_SAVE_EVENT, $layoutBox, $data);
+            $layoutBox->update($data);
 
-            $accessor = $this->getPropertyAccessor();
-            $settings = $accessor->getValue($Data, $this->getFormNodeName($layoutBox->alias));
+            foreach ($this->getLanguageIds() as $language) {
 
-            LayoutBoxSettings::where('layout_box_id', '=', $id)->delete();
+                $translation = LayoutBoxTranslation::firstOrCreate([
+                    'layout_box_id' => $layoutBox->id,
+                    'language_id'   => $language
+                ]);
 
-            if (!empty($settings)) {
-                foreach ($settings as $param => $value) {
-                    $layoutBoxSettings = LayoutBoxSettings::firstOrNew([
-                        'layout_box_id' => $layoutBox->id,
-                        'param'         => $param
-                    ]);
-
-                    $layoutBoxSettings->layout_box_id = $layoutBox->id;
-                    $layoutBoxSettings->value         = $value;
-                    $layoutBoxSettings->save();
-                }
+                $translationData = $translation->getTranslation($data, $language);
+                $translation->update($translationData);
             }
+
+            $this->dispatchEvent(LayoutBoxRepositoryInterface::POST_SAVE_EVENT, $layoutBox, $data);
         });
     }
 
     /**
-     * Replaces dots with dashes in node name
+     * Filters passed values to avoid collisions with multiple form nodes
      *
-     * @param $alias
-     *
-     * @return string
-     */
-    private function getFormNodeName($alias)
-    {
-        return '[' . strtr($alias, '.', '_') . ']';
-    }
-
-    /**
-     * Returns array containing values needed to populate the form
-     *
-     * @param $id
+     * @param array $data
      *
      * @return array
      */
-    public function getPopulateData($id)
+    private function filterValues(array $data)
     {
-        $layoutBoxData = $this->find($id);
-        $populateData  = [];
-        $accessor      = $this->getPropertyAccessor();
+        $filteredData             = $data['required_data'];
+        $languageData             = $data['required_data']['language_data'];
+        $type                     = $data['required_data']['type'];
+        $filteredData['settings'] = $data[$type];
 
-        $accessor->setValue($populateData, '[required_data]', [
-            'identifier' => $layoutBoxData->identifier,
-            'alias'      => $layoutBoxData->alias,
-        ]);
-
-        foreach ($layoutBoxData->settings as $setting) {
-            $accessor->setValue($populateData, $this->getFormNodeName($layoutBoxData->alias), [
-                $setting->param => $setting->value
-            ]);
+        foreach ($languageData as $attribute => $values) {
+            $filteredData[$attribute] = $values;
         }
 
-        return $populateData;
+        return $filteredData;
     }
 
     public function getAllLayoutBoxToSelect()
     {
-        return $this->all()->toSelect('id', 'name');
+        return $this->all()->toSelect('id', 'translation.name');
     }
 }

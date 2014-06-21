@@ -11,7 +11,9 @@
  */
 namespace WellCommerce\Plugin\Layout\Controller\Admin;
 
+use Symfony\Component\Validator\Exception\ValidatorException;
 use WellCommerce\Core\Component\Controller\AbstractAdminController;
+use WellCommerce\Plugin\Layout\Repository\LayoutPageRepositoryInterface;
 
 /**
  * Class LayoutPageController
@@ -21,39 +23,73 @@ use WellCommerce\Core\Component\Controller\AbstractAdminController;
  */
 class LayoutPageController extends AbstractAdminController
 {
+    /**
+     * {@inheritdoc}
+     */
     public function indexAction()
     {
-        $tree = $this->getTree()->init();
+        $tree = $this->createForm($this->get('layout_page.tree'), null, [
+            'name'  => 'layout_page_tree',
+            'class' => 'category-select',
+        ]);
 
         return Array(
             'tree' => $tree
         );
     }
 
-    public function editAction($id)
+    /**
+     * {@inheritdoc}
+     */
+    public function addAction()
     {
-        $populateData = $this->repository->getPopulateData($id);
-        $form         = $this->formBuilder->init($populateData);
-        $tree         = $this->getTree()->init();
-
-        if ($this->getRequest()->isMethod('POST') && $form->isValid()) {
-
-            $this->repository->save($form->getSubmitValuesGrouped(), $id);
-
-            return $this->redirect($this->getDefaultUrl());
-        }
-
-        return [
-            'form' => $form,
-            'tree' => $tree,
-        ];
+        return false;
     }
 
     /**
-     * Get Tree
+     * {@inheritdoc}
      */
-    protected function getTree()
+    public function editAction($id)
     {
-        return $this->get('layout_page.tree');
+        $layoutPage = $this->repository->find($id);
+
+        // render tree
+        $tree = $this->createForm($this->get('layout_page.tree'), null, [
+            'name'  => 'layout_page_tree',
+            'class' => 'category-select'
+        ]);
+
+        // render edit form
+        $form = $this->createForm($this->get('layout_page.form'), $layoutPage, [
+            'name' => 'layout_page'
+        ]);
+
+        if ($form->isValid()) {
+            try {
+                $this->repository->save($form->getSubmitValuesFlat(), $id);
+                $this->addSuccessMessage(sprintf('Page "%s" saved successfully.', $layoutPage->translation->first()->name));
+
+                return $this->redirect($this->generateUrl('admin.layout_page.edit', ['id' => $layoutPage->id]));
+
+            } catch (ValidatorException $exception) {
+                $this->addErrorMessage($exception->getMessage());
+            }
+        }
+
+        return Array(
+            'tree'        => $tree,
+            'layout_page' => $layoutPage,
+            'form'        => $form
+        );
+    }
+
+    /**
+     * Sets layout_page repository object
+     *
+     * @param LayoutPageRepositoryInterface $repository
+     */
+    public function setRepository(LayoutPageRepositoryInterface $repository)
+    {
+        $this->repository = $repository;
     }
 }

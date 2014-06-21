@@ -76,9 +76,12 @@ class Price extends TextField implements ElementInterface
         ]);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function prepareAttributesJs()
     {
-        $attributes = Array(
+        $attributes = [
             $this->formatAttributeJs('name', 'sName'),
             $this->formatAttributeJs('label', 'sLabel'),
             $this->formatAttributeJs('comment', 'sComment'),
@@ -89,7 +92,7 @@ class Price extends TextField implements ElementInterface
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
             $this->formatDefaultsJs()
-        );
+        ];
 
         return $attributes;
     }

@@ -11,12 +11,11 @@
  */
 namespace WellCommerce\Plugin\Layout\Form;
 
-use WellCommerce\Core\Component\Form\AbstractFormBuilder;
-use WellCommerce\Core\Component\Form\Conditions\Equals;
-use WellCommerce\Core\Component\Form\Dependency;
+use WellCommerce\Core\Component\Form\AbstractForm;
+use WellCommerce\Core\Component\Form\FormBuilder;
 use WellCommerce\Core\Component\Form\FormInterface;
 use WellCommerce\Core\Component\Form\Option;
-use WellCommerce\Plugin\Layout\Event\LayoutBoxFormEvent;
+use WellCommerce\Plugin\Layout\Model\LayoutBox;
 
 /**
  * Class LayoutBoxForm
@@ -24,121 +23,112 @@ use WellCommerce\Plugin\Layout\Event\LayoutBoxFormEvent;
  * @package WellCommerce\Plugin\LayoutBox\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LayoutBoxForm extends AbstractFormBuilder implements FormInterface
+class LayoutBoxForm extends AbstractForm implements FormInterface
 {
-    private $types = [];
-    private $configurators = [];
-
     /**
-     * Initializes Form
-     *
-     * @param array $layoutBoxData
-     *
-     * @return mixed|\WellCommerce\Core\Component\Form\Elements\Form
+     * {@inheritdoc}
      */
-    public function init($layoutBoxData = [])
+    public function buildForm(FormBuilder $builder, array $options)
     {
-        $this->configurators = $this->getLayoutManager()->getLayoutBoxConfigurators();
-        $this->types         = $this->getLayoutBoxTypes();
+        $form = $builder->addForm($options);
 
-        $form = $this->addForm([
-            'name' => 'layout_box',
-        ]);
-
-        $requiredData = $form->addChild($this->addFieldset([
+        $requiredData = $form->addChild($builder->addFieldset([
             'name'  => 'required_data',
             'label' => $this->trans('Required data')
         ]));
 
-        $requiredData->addChild($this->addTextField([
-            'name'  => 'identifier',
-            'label' => $this->trans('Identifier'),
+        $languageData = $requiredData->addChild($builder->addFieldsetLanguage([
+            'name'      => 'language_data',
+            'label'     => $this->trans('Translations'),
+            'languages' => $this->getLanguages()
+        ]));
+
+        $languageData->addChild($builder->addTextField([
+            'name'  => 'name',
+            'label' => $this->trans('Name'),
             'rules' => [
-                $this->addRuleRequired($this->trans('Identifier is required')),
-                $this->addRuleUnique($this->trans('Identifier already exists'),
+                $builder->addRuleRequired($this->trans('Name is required')),
+                $builder->addRuleLanguageUnique($this->trans('Name already exists'),
                     [
-                        'table'   => 'layout_box',
-                        'column'  => 'identifier',
+                        'table'   => 'layout_box_translation',
+                        'column'  => 'name',
                         'exclude' => [
-                            'column' => 'id',
+                            'column' => 'layout_box_id',
                             'values' => $this->getParam('id')
                         ]
                     ]
-                ),
+                )
             ]
         ]));
 
-        $alias = $requiredData->addChild($this->addSelect([
-            'name'    => 'alias',
-            'label'   => $this->trans('Box type'),
-            'options' => $this->makeOptions($this->types, false),
+        $requiredData->addChild($builder->addTip([
+            'tip' => '<p>' . $this->trans('Choose content type for box. Most box types require additional configuration which can be found in Box settings tab.') . '</p>'
         ]));
 
-        foreach ($this->configurators as $id => $configurator) {
-            $settings = $form->addChild($this->addFieldset([
-                'name'         => $configurator->getFieldSetName(),
-                'label'        => $this->trans('Settings'),
-                'dependencies' => [
-                    $this->addDependency(Dependency::SHOW, $alias, new Equals($id), null)
-                ]
-            ]));
+        $requiredData->addChild($builder->addSelect([
+            'name'    => 'type',
+            'label'   => $this->trans('Box type'),
+            'options' => [],
+        ]));
 
-            $settings->addChild($this->addSelect([
-                'name'    => 'header',
-                'label'   => $this->trans('Show box header'),
-                'options' => [
-                    new Option('0', $this->trans('Yes')),
-                    new Option('1', $this->trans('No'))
-                ]
-            ]));
+        $requiredData->addChild($builder->addTip([
+            'tip' => '<p>' . $this->trans("Enable or disable header rendering in box. Graphical boxes often don't require header.") . '</p>'
+        ]));
 
-            $settings->AddChild($this->addSelect([
-                'name'    => 'enable',
-                'label'   => $this->trans('Box visible'),
-                'options' => [
-                    new Option('0', 'for all clients'),
-                    new Option('1', 'only for logged-in ones'),
-                    new Option('2', 'only for logged-out ones'),
-                    new Option('3', 'for no one')
-                ]
-            ]));
+        $requiredData->addChild($builder->addSelect([
+            'name'    => 'show_header',
+            'label'   => $this->trans('Show header'),
+            'options' => [
+                new Option('1', $this->trans('Yes')),
+                new Option('0', $this->trans('No'))
+            ]
+        ]));
 
-            $configurator->addConfigurationFields($settings);
-        }
+        $requiredData->addChild($builder->addTip([
+            'tip' => '<p>' . $this->trans('Choose who can see box. You can also hide box from all customers without deleting it.') . '</p>'
+        ]));
 
-        $event = new LayoutBoxFormEvent($form, $layoutBoxData);
-
-        $this->getDispatcher()->dispatch(LayoutBoxFormEvent::FORM_INIT_EVENT, $event);
-
-        $populateData = $event->getPopulateData();
-
-        if (!empty($populateData)) {
-            $form->populate($populateData);
-        }
-
+        $requiredData->AddChild($builder->addSelect([
+            'name'    => 'visibility',
+            'label'   => $this->trans('Visibility'),
+            'options' => [
+                new Option('0', 'for all customers'),
+                new Option('1', 'only for logged-in customers'),
+                new Option('2', 'only for logged-out customers'),
+                new Option('3', 'hidden')
+            ]
+        ]));
 
         $form->addFilters([
-            $this->addFilterNoCode(),
-            $this->addFilterTrim(),
-            $this->addFilterSecure()
+            $builder->addFilterTrim(),
+            $builder->addFilterSecure()
         ]);
 
         return $form;
     }
 
     /**
-     * Prepares select containing all layout box types
+     * Prepares form data using retrieved model
+     *
+     * @param LayoutBox $layoutBox Model
      *
      * @return array
      */
-    private function getLayoutBoxTypes()
+    public function prepareData(LayoutBox $layoutBox)
     {
-        $types = [];
-        foreach ($this->configurators as $id => $configurator) {
-            $types[$id] = sprintf('%s - %s', $id, $this->trans($configurator->getName()));
-        }
+        $formData     = [];
+        $accessor     = $this->getPropertyAccessor();
+        $languageData = $layoutBox->translation->getTranslations();
 
-        return $types;
+        $accessor->setValue($formData, '[required_data]', [
+            'language_data' => $languageData,
+            'type'          => $layoutBox->type,
+            'show_header'   => $layoutBox->show_header,
+            'visibility'    => $layoutBox->visibility,
+        ]);
+
+        $accessor->setValue($formData, '[' . $layoutBox->type . ']', $layoutBox->settings);
+
+        return $formData;
     }
-
 }

@@ -13,6 +13,7 @@ namespace WellCommerce\Core\Event;
 
 use Symfony\Component\EventDispatcher\Event;
 use WellCommerce\Core\Component\Form\Elements\Form;
+use WellCommerce\Core\Component\Form\FormBuilder;
 use WellCommerce\Core\Component\Model\ModelInterface;
 
 /**
@@ -23,19 +24,16 @@ use WellCommerce\Core\Component\Model\ModelInterface;
  */
 class FormEvent extends Event
 {
-
-    protected $form;
-    protected $data;
+    protected $formBuilder;
 
     /**
      * Constructor
      *
      * @param Form $form
      */
-    public function __construct(Form $form, $data)
+    public function __construct(FormBuilder $formBuilder)
     {
-        $this->form = $form;
-        $this->data = $data;
+        $this->formBuilder = $formBuilder;
     }
 
     /**
@@ -43,28 +41,8 @@ class FormEvent extends Event
      *
      * @return FormInterface|Form
      */
-    public function getForm()
+    public function getFormBuilder()
     {
-        return $this->form;
-    }
-
-    /**
-     * Returns data
-     *
-     * @return mixed
-     */
-    public function getData()
-    {
-        return $this->data;
-    }
-
-    /**
-     * Sets new data to populate the form
-     *
-     * @param $data
-     */
-    public function setData($data)
-    {
-        $this->data = $data;
+        return $this->formBuilder;
     }
 }

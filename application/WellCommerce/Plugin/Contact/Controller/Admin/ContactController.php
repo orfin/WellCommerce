@@ -41,7 +41,7 @@ class ContactController extends AbstractAdminController
     public function addAction()
     {
         $form = $this->createForm($this->get('contact.form'), null, [
-            'name' => 'add_contact',
+            'name' => 'contact',
         ]);
 
         if ($form->isValid()) {
@@ -70,7 +70,7 @@ class ContactController extends AbstractAdminController
         $model = $this->repository->find($id);
 
         $form = $this->createForm($this->get('contact.form'), $model, [
-            'name' => 'edit_contact',
+            'name' => 'contact',
         ]);
 
         if ($form->isValid()) {

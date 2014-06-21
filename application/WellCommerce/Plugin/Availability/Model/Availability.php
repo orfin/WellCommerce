@@ -34,9 +34,7 @@ class Availability extends AbstractModel implements ModelInterface, Translatable
     protected $fillable = ['id'];
 
     /**
-     * Relation with AvailabilityTranslationModel
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     * {@inheritdoc}
      */
     public function translation()
     {

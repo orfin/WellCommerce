@@ -143,7 +143,7 @@ abstract class Container extends Node
     public function getChild($name)
     {
         foreach ($this->form->fields as $child) {
-            if ($name === $child->getName()) {
+            if (method_exists($child, 'getName') && $name === $child->getName()) {
                 return $child;
             }
         }

@@ -41,7 +41,7 @@ class UnitController extends AbstractAdminController
     public function addAction()
     {
         $form = $this->createForm($this->get('unit.form'), null, [
-            'name' => 'add_unit'
+            'name' => 'unit'
         ]);
 
         if ($form->isValid()) {
@@ -69,7 +69,7 @@ class UnitController extends AbstractAdminController
         $model = $this->repository->find($id);
 
         $form = $this->createForm($this->get('unit.form'), $model, [
-            'name' => 'edit_unit'
+            'name' => 'unit'
         ]);
 
         if ($form->isValid()) {

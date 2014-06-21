@@ -50,7 +50,8 @@
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
-            <tag name="layout_box.configurator" />
+            <tag name="layout_box.configurator" type="wellcommerce_contact_box" controller="contact.front.box.controller" />
+            <tag name="kernel.event_listener" event="layout_box.form.init" method="addConfigurationFields" />
         </service>
 
         <service id="contact_page.layout" class="%contact_page.layout.class%">

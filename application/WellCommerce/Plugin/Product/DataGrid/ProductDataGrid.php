@@ -50,16 +50,19 @@ class ProductDataGrid extends AbstractDataGrid implements DataGridInterface
      */
     public function configureOptions(array $options)
     {
-        $event_handlers            = [
+        $options['event_handlers'] = [
             'update_row' => $this->getXajaxManager()->registerFunction([
                     'update_' . $this->getId(),
                     $this,
                     'updateRow'
                 ]),
             'process'    => 'processProduct',
-            'loaded'     => 'dataLoaded'
+            'loaded'     => 'dataLoaded',
         ];
-        $options['event_handlers'] = $event_handlers;
+
+        $options['filters'] = [
+            'producer_id' => $this->get('producer.repository')->getAllProducerToFilter()
+        ];
 
         return parent::configureOptions($options);
     }
@@ -90,7 +93,7 @@ class ProductDataGrid extends AbstractDataGrid implements DataGridInterface
             'source'     => 'product_translation.name',
             'caption'    => $this->trans('Name'),
             'appearance' => [
-                'width' => 70,
+                'width' => 170,
                 'align' => ColumnInterface::ALIGN_LEFT
             ],
             'filter'     => [
@@ -132,16 +135,29 @@ class ProductDataGrid extends AbstractDataGrid implements DataGridInterface
         ]));
 
         $collection->add(new DataGridColumn([
-            'id'            => 'category',
-            'source'        => 'GROUP_CONCAT(DISTINCT SUBSTRING(CONCAT(\' \', category_translation.name), 1))',
-            'caption'       => $this->trans('Category'),
-            'appearance'    => [
+            'id'         => 'category',
+            'source'     => 'GROUP_CONCAT(DISTINCT SUBSTRING(CONCAT(\' \', category_translation.name), 1))',
+            'caption'    => $this->trans('Category'),
+            'appearance' => [
                 'width' => 120,
             ],
-            'filter'        => [
+            'filter'     => [
                 'type' => ColumnInterface::FILTER_INPUT
             ],
             'aggregated' => true
+        ]));
+
+        $collection->add(new DataGridColumn([
+            'id'         => 'producer_id',
+            'source'     => 'product.producer_id',
+            'caption'    => $this->trans('Producer'),
+            'selectable' => true,
+            'appearance' => [
+                'width' => 120,
+            ],
+            'filter'     => [
+                'type' => ColumnInterface::FILTER_SELECT
+            ]
         ]));
 
         $collection->add(new DataGridColumn([
@@ -163,7 +179,8 @@ class ProductDataGrid extends AbstractDataGrid implements DataGridInterface
             'caption'    => $this->trans('Price net'),
             'editable'   => true,
             'appearance' => [
-                'width' => 40,
+                'width'   => 40,
+                'visible' => false
             ],
             'filter'     => [
                 'type' => ColumnInterface::FILTER_BETWEEN
@@ -230,7 +247,7 @@ class ProductDataGrid extends AbstractDataGrid implements DataGridInterface
     public function setQuery(Manager $manager)
     {
         $this->query = $manager->table('product');
-        $this->query->join('product_translation', 'product_translation.product_id', '=', 'product.id');
+        $this->query->leftJoin('product_translation', 'product_translation.product_id', '=', 'product.id');
         $this->query->leftJoin('product_category', 'product_category.product_id', '=', 'product.id');
         $this->query->leftJoin('category_translation', 'category_translation.category_id', '=', 'product_category.category_id');
         $this->query->leftJoin('tax', 'product.tax_id', '=', 'tax.id');

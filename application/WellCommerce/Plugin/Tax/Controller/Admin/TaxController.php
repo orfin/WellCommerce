@@ -41,7 +41,7 @@ class TaxController extends AbstractAdminController
     public function addAction()
     {
         $form = $this->createForm($this->get('tax.form'), null, [
-            'name' => 'add_tax'
+            'name' => 'tax'
         ]);
 
         if ($form->isValid()) {
@@ -69,7 +69,7 @@ class TaxController extends AbstractAdminController
         $model = $this->repository->find($id);
 
         $form = $this->createForm($this->get('tax.form'), $model, [
-            'name' => 'edit_tax'
+            'name' => 'tax'
         ]);
 
         if ($form->isValid()) {

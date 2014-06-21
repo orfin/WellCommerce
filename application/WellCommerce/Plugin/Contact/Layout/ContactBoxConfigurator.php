@@ -12,7 +12,10 @@
 
 namespace WellCommerce\Plugin\Contact\Layout;
 
-use WellCommerce\Core\Component\Form\Elements\Fieldset;
+use WellCommerce\Core\Component\Form\Conditions\Equals;
+use WellCommerce\Core\Component\Form\Dependency;
+use WellCommerce\Core\Component\Form\Option;
+use WellCommerce\Core\Event\FormEvent;
 use WellCommerce\Core\Layout\Box\LayoutBoxConfigurator;
 use WellCommerce\Core\Layout\Box\LayoutBoxConfiguratorInterface;
 
@@ -25,44 +28,30 @@ use WellCommerce\Core\Layout\Box\LayoutBoxConfiguratorInterface;
 class ContactBoxConfigurator extends LayoutBoxConfigurator implements LayoutBoxConfiguratorInterface
 {
     /**
-     * {@inheritdoc}
+     * @var string ContactBoxConfigurator type
      */
-    public function getController()
-    {
-        return 'WellCommerce\\Plugin\\Contact\\Controller\\Frontend\\ContactBoxController';
-    }
+    public $type;
+
+    /**
+     * @var string ContactBoxController service name
+     */
+    public $controller;
+
+    /**
+     * @var string ContactBoxConfigurator box name
+     */
+    public $name = 'ContactBox';
 
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function addBoxConfiguration()
     {
-        return 'Contact';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAlias()
-    {
-        return 'wellcommerce.box.contact';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isAvailableForLayoutPage($layoutPage)
-    {
-        return true;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addConfigurationFields(Fieldset $fieldset)
-    {
-        $fieldset->addChild($this->addTip([
-            'tip' => '<p>' . sprintf($this->trans('Choose configuration options related to box "%s".'), $this->getAlias()) . '</p>'
+        $this->fieldset->addChild($this->builder->addCheckbox([
+            'name'  => 'contact_form_enabled',
+            'label' => 'Enable contact form',
+            'comment' => $this->trans('Check if contact box should allow customers to send e-mails through contact form.')
         ]));
+
     }
 } 

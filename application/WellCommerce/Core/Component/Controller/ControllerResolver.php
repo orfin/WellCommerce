@@ -60,9 +60,9 @@ class ControllerResolver extends BaseControllerResolver
     {
         list($service, $method) = explode(':', $class, 2);
 
-        return Array(
+        return [
             $this->container->get($service),
             $method
-        );
+        ];
     }
 }

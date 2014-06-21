@@ -34,6 +34,7 @@ class CategoryExtension extends AbstractExtension
     {
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.xml');
+        $loader->load('layout.xml');
     }
 
     /**

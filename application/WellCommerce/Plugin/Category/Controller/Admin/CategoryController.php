@@ -43,6 +43,14 @@ class CategoryController extends AbstractAdminController
     /**
      * {@inheritdoc}
      */
+    public function addAction()
+    {
+        return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function editAction($id)
     {
         $category = $this->repository->find($id);

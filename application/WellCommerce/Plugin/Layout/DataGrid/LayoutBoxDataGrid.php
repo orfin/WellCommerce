@@ -11,9 +11,12 @@
  */
 namespace WellCommerce\Plugin\Layout\DataGrid;
 
+use Illuminate\Database\Capsule\Manager;
 use WellCommerce\Core\Component\DataGrid\AbstractDataGrid;
+use WellCommerce\Core\Component\DataGrid\Column\ColumnCollection;
+use WellCommerce\Core\Component\DataGrid\Column\ColumnInterface;
+use WellCommerce\Core\Component\DataGrid\Column\DataGridColumn;
 use WellCommerce\Core\Component\DataGrid\DataGridInterface;
-use WellCommerce\Plugin\Layout\Event\LayoutBoxDataGridEvent;
 
 /**
  * Class LayoutBoxDataGrid
@@ -23,72 +26,79 @@ use WellCommerce\Plugin\Layout\Event\LayoutBoxDataGridEvent;
  */
 class LayoutBoxDataGrid extends AbstractDataGrid implements DataGridInterface
 {
-    public function configure()
+    /**
+     * {@inheritdoc}
+     */
+    public function getId()
     {
-        $this->setOptions([
-            'id'             => 'layout_box',
-            'event_handlers' => [
-                'load'       => $this->getXajaxManager()->registerFunction(['LoadLayoutBox', $this, 'loadData']),
-                'edit_row'   => 'editLayoutBox',
-                'click_row'  => 'editLayoutBox',
-                'delete_row' => $this->getXajaxManager()->registerFunction(['DeleteLayoutBox', $this, 'deleteRow']),
-            ],
-            'routes'         => [
-                'edit' => $this->generateUrl('admin.layout_box.edit')
-            ]
-        ]);
+        return 'layout_box';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function init()
+    public function getRoutes()
     {
-        $this->addColumn('id', [
+        return [
+            'edit' => $this->generateUrl('admin.layout_box.edit')
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function initColumns(ColumnCollection $columns)
+    {
+        $columns->add(new DataGridColumn([
+            'id'         => 'id',
             'source'     => 'layout_box.id',
             'caption'    => $this->trans('Id'),
             'sorting'    => [
-                'default_order' => DataGridInterface::SORT_DIR_DESC
+                'default_order' => ColumnInterface::SORT_DIR_DESC
             ],
             'appearance' => [
                 'width'   => 90,
                 'visible' => false
             ],
             'filter'     => [
-                'type' => DataGridInterface::FILTER_BETWEEN
+                'type' => ColumnInterface::FILTER_BETWEEN
             ]
-        ]);
+        ]));
 
-        $this->addColumn('identifier', [
-            'source'     => 'layout_box.identifier',
-            'caption'    => $this->trans('Identifier'),
+        $columns->add(new DataGridColumn([
+            'id'         => 'name',
+            'source'     => 'layout_box_translation.name',
+            'caption'    => $this->trans('Name'),
             'appearance' => [
-                'width' => 150,
-                'align' => DataGridInterface::ALIGN_LEFT
+                'width' => 60,
+                'align' => ColumnInterface::ALIGN_LEFT
             ],
             'filter'     => [
-                'type' => DataGridInterface::FILTER_INPUT
+                'type' => ColumnInterface::FILTER_INPUT
             ]
-        ]);
+        ]));
 
-        $this->addColumn('alias', [
-            'source'     => 'layout_box.alias',
+        $columns->add(new DataGridColumn([
+            'id'         => 'type',
+            'source'     => 'layout_box.type',
             'caption'    => $this->trans('Type'),
             'appearance' => [
                 'width' => 60,
-                'align' => DataGridInterface::ALIGN_LEFT
+                'align' => ColumnInterface::ALIGN_LEFT
             ],
             'filter'     => [
-                'type' => DataGridInterface::FILTER_INPUT
+                'type' => ColumnInterface::FILTER_INPUT
             ]
-        ]);
+        ]));
+    }
 
-        $this->query = $this->getDb()
-            ->table('layout_box')
-            ->groupBy('layout_box.id');
-
-        $event = new LayoutBoxDataGridEvent($this);
-
-        $this->getDispatcher()->dispatch(LayoutBoxDataGridEvent::DATAGRID_INIT_EVENT, $event);
+    /**
+     * {@inheritdoc}
+     */
+    public function setQuery(Manager $manager)
+    {
+        $this->query = $manager->table('layout_box');
+        $this->query->leftJoin('layout_box_translation', 'layout_box_translation.layout_box_id', '=', 'layout_box.id');
+        $this->query->groupBy('layout_box.id');
     }
 }

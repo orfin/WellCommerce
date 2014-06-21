@@ -6,7 +6,7 @@
     {% endautoescape %}
 {% endmacro %}
 
-{% macro datagrid_column(id,options) %}
+{% macro datagrid_column(id, options, filters) %}
 
     var column_{{ id }} = new GF_Datagrid_Column({
         id: '{{ id }}',
@@ -22,8 +22,8 @@
         },
         filter: {
             type: {{ options.filter.type }},
-            {% if options.filter.type == 'GF_Datagrid.FILTER_SELECT' %}
-            options: {{ options.filter.options|json_encode|raw }}
+            {% if options.filter.type == 'GF_Datagrid.FILTER_SELECT' and filters[id] is defined %}
+            options: {{ filters[id]|json_encode|raw }}
             {% endif %}
         }
     });

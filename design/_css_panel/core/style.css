@@ -1300,7 +1300,7 @@ a.button-green span img,span.button-green span img {
     padding: 0 5px;
     clear: both;
     overflow: auto;
-    top: -10px;
+    top: -30px;
     position: relative;
 }
 
@@ -7228,20 +7228,14 @@ form {
 .GF_Datagrid_Col_name span img {
     margin-right: 5px;
 }
-td.GF_Datagrid_Col_enable.selectable span .field-select .field,
-td.GF_Datagrid_Col_variant.selectable span .field-select .field,
-td.GF_Datagrid_Col_producer.selectable span .field-select .field{
+td.selectable span .field-select .field{
     background: white;
     height: 23px;
 }
-td.GF_Datagrid_Col_enable.selectable span .field-select .field select,
-td.GF_Datagrid_Col_variant.selectable span .field-select .field select,
-td.GF_Datagrid_Col_producer.selectable span .field-select .field select {
+td.selectable span .field-select .field select {
     height: 22px;
 }
-td.GF_Datagrid_Col_enable.selectable span .field-select .field .faux,
-td.GF_Datagrid_Col_variant.selectable span .field-select .field .faux,
-td.GF_Datagrid_Col_producer.selectable span .field-select .field .faux {
+td.selectable span .field-select .field .faux {
     background-position: 100% 0px;
     line-height: 22px;
     height: 21px;

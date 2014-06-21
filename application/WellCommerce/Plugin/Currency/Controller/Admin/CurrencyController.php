@@ -41,7 +41,7 @@ class CurrencyController extends AbstractAdminController
     public function addAction()
     {
         $form = $this->createForm($this->get('currency.form'), null, [
-            'name' => 'add_currency'
+            'name' => 'currency'
         ]);
 
         if ($form->isValid()) {
@@ -69,7 +69,7 @@ class CurrencyController extends AbstractAdminController
         $model = $this->repository->find($id);
 
         $form = $this->createForm($this->get('currency.form'), $model, [
-            'name' => 'edit_currency'
+            'name' => 'currency'
         ]);
 
         if ($form->isValid()) {

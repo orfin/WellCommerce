@@ -41,7 +41,7 @@ class ProductController extends AbstractAdminController
     public function addAction()
     {
         $form = $this->createForm($this->get('product.form'), null, [
-            'name' => 'add_product'
+            'name' => 'product'
         ]);
 
         if ($form->isValid()) {
@@ -69,7 +69,7 @@ class ProductController extends AbstractAdminController
         $model = $this->repository->find($id);
 
         $form = $this->createForm($this->get('product.form'), $model, [
-            'name' => 'edit_product'
+            'name' => 'product'
         ]);
 
         if ($form->isValid()) {

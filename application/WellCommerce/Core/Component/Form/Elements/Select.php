@@ -12,8 +12,6 @@
 
 namespace WellCommerce\Core\Component\Form\Elements;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-
 /**
  * Class Select
  *
@@ -22,51 +20,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class Select extends OptionedField implements ElementInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function configureAttributes(OptionsResolverInterface $resolver)
-    {
-        $resolver->setRequired([
-            'name',
-            'label',
-            'options'
-        ]);
-
-        $resolver->setOptional([
-            'comment',
-            'suffix',
-            'prefix',
-            'error',
-            'selector',
-            'css_attribute',
-            'addable',
-            'onAdd',
-            'add_item_prompt',
-            'default',
-            'rules',
-            'dependencies'
-        ]);
-
-        $resolver->setAllowedTypes([
-            'name'            => 'string',
-            'label'           => 'string',
-            'options'         => 'array',
-            'comment'         => 'string',
-            'suffix'          => 'string',
-            'prefix'          => 'string',
-            'error'           => 'string',
-            'selector'        => 'string',
-            'css_attribute'   => 'string',
-            'addable'         => 'bool',
-            'onAdd'           => 'string',
-            'add_item_prompt' => 'string',
-            'default'         => ['string', 'integer'],
-            'rules'           => 'array',
-            'dependencies'    => 'array',
-        ]);
-    }
-
     /**
      * {@inheritdoc}
      */

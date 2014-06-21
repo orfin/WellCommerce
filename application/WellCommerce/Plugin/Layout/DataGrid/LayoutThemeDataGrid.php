@@ -11,9 +11,12 @@
  */
 namespace WellCommerce\Plugin\Layout\DataGrid;
 
+use Illuminate\Database\Capsule\Manager;
 use WellCommerce\Core\Component\DataGrid\AbstractDataGrid;
+use WellCommerce\Core\Component\DataGrid\Column\ColumnCollection;
+use WellCommerce\Core\Component\DataGrid\Column\ColumnInterface;
+use WellCommerce\Core\Component\DataGrid\Column\DataGridColumn;
 use WellCommerce\Core\Component\DataGrid\DataGridInterface;
-use WellCommerce\Plugin\Layout\Event\LayoutThemeDataGridEvent;
 
 /**
  * Class LayoutThemeDataGrid
@@ -23,72 +26,78 @@ use WellCommerce\Plugin\Layout\Event\LayoutThemeDataGridEvent;
  */
 class LayoutThemeDataGrid extends AbstractDataGrid implements DataGridInterface
 {
-    public function configure()
+    /**
+     * {@inheritdoc}
+     */
+    public function getId()
     {
-        $this->setOptions([
-            'id'             => 'layout_theme',
-            'event_handlers' => [
-                'load'       => $this->getXajaxManager()->registerFunction(['LoadLayoutTheme', $this, 'loadData']),
-                'edit_row'   => 'editLayoutTheme',
-                'click_row'  => 'editLayoutTheme',
-                'delete_row' => $this->getXajaxManager()->registerFunction(['DeleteLayoutTheme', $this, 'deleteRow']),
-            ],
-            'routes'         => [
-                'edit' => $this->generateUrl('admin.layout_theme.edit')
-            ]
-        ]);
+        return 'availability';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function init()
+    public function getRoutes()
     {
-        $this->addColumn('id', [
+        return [
+            'edit' => $this->generateUrl('admin.availability.edit')
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function initColumns(ColumnCollection $columns)
+    {
+        $columns->add(new DataGridColumn([
+            'id'         => 'id',
             'source'     => 'layout_theme.id',
             'caption'    => $this->trans('Id'),
             'sorting'    => [
-                'default_order' => DataGridInterface::SORT_DIR_DESC
+                'default_order' => ColumnInterface::SORT_DIR_DESC
             ],
             'appearance' => [
                 'width'   => 90,
                 'visible' => false
             ],
             'filter'     => [
-                'type' => DataGridInterface::FILTER_BETWEEN
+                'type' => ColumnInterface::FILTER_BETWEEN
             ]
-        ]);
+        ]));
 
-        $this->addColumn('name', [
+        $columns->add(new DataGridColumn([
+            'id'         => 'name',
             'source'     => 'layout_theme.name',
             'caption'    => $this->trans('Name'),
             'appearance' => [
                 'width' => 150,
-                'align' => DataGridInterface::ALIGN_LEFT
+                'align' => ColumnInterface::ALIGN_LEFT
             ],
             'filter'     => [
-                'type' => DataGridInterface::FILTER_INPUT
+                'type' => ColumnInterface::FILTER_INPUT
             ]
-        ]);
+        ]));
 
-        $this->addColumn('folder', [
+        $columns->add(new DataGridColumn([
+            'id'         => 'folder',
             'source'     => 'layout_theme.folder',
             'caption'    => $this->trans('Folder'),
             'appearance' => [
                 'width' => 60,
-                'align' => DataGridInterface::ALIGN_LEFT
+                'align' => ColumnInterface::ALIGN_LEFT
             ],
             'filter'     => [
-                'type' => DataGridInterface::FILTER_INPUT
+                'type' => ColumnInterface::FILTER_INPUT
             ]
-        ]);
+        ]));
+    }
 
-        $this->query = $this->getDb()
-            ->table('layout_theme')
-            ->groupBy('layout_theme.id');
-
-        $event = new LayoutThemeDataGridEvent($this);
-
-        $this->getDispatcher()->dispatch(LayoutThemeDataGridEvent::DATAGRID_INIT_EVENT, $event);
+    /**
+     * {@inheritdoc}
+     */
+    public function setQuery(Manager $manager)
+    {
+        $this->query = $manager->table('layout_theme');
+        $this->query->groupBy('layout_theme.id');
     }
 }

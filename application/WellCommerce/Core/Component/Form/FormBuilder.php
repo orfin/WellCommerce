@@ -26,7 +26,7 @@ use WellCommerce\Core\Event\FormEvent;
  */
 class FormBuilder extends AbstractComponent
 {
-    const FORM_INIT = 'form.init';
+    const FORM_INIT_EVENT = 'form.init';
 
     protected $form;
     protected $formData;
@@ -45,9 +45,8 @@ class FormBuilder extends AbstractComponent
     {
         $this->form     = $form->buildForm($this, $options);
         $this->formData = (null === $model) ? [] : $form->prepareData($model);
-        $this->formData = $this->dispatchEvent($this->getInitEventName());
-        $this->options  = $options;
-
+        $this->dispatchEvent($this->getInitEventName($options['name']));
+        $this->options = $options;
         $this->form->populate($this->formData);
 
         return $this;
@@ -62,20 +61,20 @@ class FormBuilder extends AbstractComponent
      */
     private function dispatchEvent($eventName)
     {
-        $event = new FormEvent($this->form, $this->formData);
+        $event = new FormEvent($this);
         $this->getDispatcher()->dispatch($eventName, $event);
-
-        return $event->getData();
     }
 
     /**
      * Returns init event name
      *
+     * @param $formName
+     *
      * @return string
      */
-    private function getInitEventName()
+    private function getInitEventName($formName)
     {
-        return sprintf('%s.%s', $this->options['name'], self::FORM_INIT);
+        return sprintf('%s.%s', $formName, self::FORM_INIT_EVENT);
     }
 
     /**
@@ -86,6 +85,26 @@ class FormBuilder extends AbstractComponent
     public function getForm()
     {
         return $this->form;
+    }
+
+    /**
+     * Returns form data
+     *
+     * @return mixed
+     */
+    public function getFormData()
+    {
+        return $this->formData;
+    }
+
+    /**
+     * Sets new form data
+     *
+     * @return mixed
+     */
+    public function setFormData(array $data)
+    {
+        $this->formData = $data;
     }
 
     /**

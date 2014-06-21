@@ -11,7 +11,8 @@
  */
 namespace WellCommerce\Plugin\Layout\Form;
 
-use WellCommerce\Core\Component\Form\AbstractFormBuilder;
+use WellCommerce\Core\Component\Form\AbstractForm;
+use WellCommerce\Core\Component\Form\FormBuilder;
 use WellCommerce\Core\Component\Form\FormInterface;
 use WellCommerce\Plugin\Layout\Event\LayoutPageFormEvent;
 
@@ -21,7 +22,7 @@ use WellCommerce\Plugin\Layout\Event\LayoutPageFormEvent;
  * @package WellCommerce\Plugin\Category\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LayoutPageTree extends AbstractFormBuilder implements FormInterface
+class LayoutPageTree extends AbstractForm implements FormInterface
 {
     /**
      * Fetches all registered layout pages
@@ -31,32 +32,28 @@ class LayoutPageTree extends AbstractFormBuilder implements FormInterface
     private function getTreeItems()
     {
         $themes = $this->get('layout_theme.repository')->all();
-
-        $items = [];
+        $items  = [];
 
         foreach ($themes as $theme) {
             $items[$theme->id] = [
-                'name'   => $theme->name . ' <small>(' . $theme->folder . ')</small>',
-                'parent' => null,
-                'weight' => 0
+                'name'        => $theme->name . ' <small>(' . $theme->folder . ')</small>',
+                'parent'      => null,
+                'weight'      => 0,
+                'hasChildren' => false
             ];
         }
 
         return $items;
     }
 
-    public function init($layoutPageData = Array())
+    /**
+     * {@inheritdoc}
+     */
+    public function buildForm(FormBuilder $builder, array $options)
     {
-        $form = $this->addForm([
-            'name'  => 'layout_page_tree',
-            'class' => 'category-select',
-        ]);
+        $form = $builder->addForm($options);
 
-        $id     = $this->getParam('id');
-        $page   = $this->getParam('page');
-        $active = ($page == null) ? $id : sprintf('%s,%s', $id, $page);
-
-        $form->addChild($this->addTree([
+        $form->addChild($builder->addTree([
             'name'               => 'layout_page',
             'label'              => $this->trans('Choose site theme to edit'),
             'sortable'           => false,
@@ -67,18 +64,15 @@ class LayoutPageTree extends AbstractFormBuilder implements FormInterface
             'prevent_duplicates' => false,
             'items'              => $this->getTreeItems(),
             'onClick'            => 'openLayoutPageEditor',
-            'active'             => $active,
+            'active'             => (int)$this->getParam('id'),
             'clickable_root'     => false
         ]));
 
-        $form->AddFilter($this->addFilterNoCode());
-        $form->AddFilter($this->addFilterSecure());
-
-        $event = new LayoutPageFormEvent($form, $layoutPageData);
-
-        $this->getDispatcher()->dispatch(LayoutPageFormEvent::TREE_INIT_EVENT, $event);
-
-        $form->Populate($event->getPopulateData());
+        $form->addFilters([
+            $builder->addFilterNoCode(),
+            $builder->addFilterTrim(),
+            $builder->addFilterSecure()
+        ]);
 
         return $form;
     }

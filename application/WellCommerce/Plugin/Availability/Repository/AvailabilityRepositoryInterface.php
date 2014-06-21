@@ -12,8 +12,6 @@
 
 namespace WellCommerce\Plugin\Availability\Repository;
 
-use WellCommerce\Plugin\Availability\Model\AvailabilityDataInterface;
-
 /**
  * Interface AvailabilityRepositoryInterface
  *
@@ -60,4 +58,11 @@ interface AvailabilityRepositoryInterface
      * @return mixed
      */
     public function delete($id);
+
+    /**
+     * Returns Collection as ke-value pairs ready to use in selects
+     *
+     * @return mixed
+     */
+    public function getAllAvailabilityToSelect();
 }

@@ -22,7 +22,7 @@ use WellCommerce\Core\Component\Form\Node;
  * @package WellCommerce\Core\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Tip extends Node implements ElementInterface
+class Tip extends Field implements ElementInterface
 {
 
     const UP   = 'up';
@@ -55,11 +55,7 @@ class Tip extends Node implements ElementInterface
         $resolver->setDefaults([
             'name'        => '',
             'retractable' => function (Options $options) {
-                    if (isset($options['short_tip']) && strlen($options['short_tip'])) {
-                        return true;
-                    }
-
-                    return false;
+                    return (isset($options['short_tip']) && strlen($options['short_tip']));
                 },
         ]);
 
