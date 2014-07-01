@@ -13,7 +13,6 @@ namespace WellCommerce\Core\Layout;
 
 use WellCommerce\Core\Component\AbstractComponent;
 use WellCommerce\Core\Layout\Box\LayoutBoxConfiguratorInterface;
-use WellCommerce\Core\Layout\Page\LayoutPageInterface;
 
 /**
  * Class LayoutManager
@@ -24,7 +23,7 @@ use WellCommerce\Core\Layout\Page\LayoutPageInterface;
 class LayoutManager extends AbstractComponent
 {
     /**
-     * @var array
+     * @var array Array containing all layout box configurators
      */
     private $layoutBoxConfigurators = [];
 
@@ -39,6 +38,14 @@ class LayoutManager extends AbstractComponent
         $this->layoutBoxConfigurators[$alias] = $configurator;
     }
 
+    /**
+     * Returns a configurator by its alias
+     *
+     * @param $alias
+     *
+     * @return mixed
+     * @throws \RuntimeException
+     */
     public function getLayoutBoxConfigurator($alias)
     {
         if (!isset($this->layoutBoxConfigurators[$alias])) {

@@ -12,7 +12,7 @@
 namespace WellCommerce\Plugin\File\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
-use WellCommerce\Core\Component\Controller\AbstractAdminController;
+use WellCommerce\Core\Component\Controller\Admin\AbstractAdminController;
 use WellCommerce\Plugin\File\Repository\FileRepositoryInterface;
 
 /**

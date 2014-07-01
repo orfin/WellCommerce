@@ -62,14 +62,14 @@ class ImageGallery extends AbstractComponent
      */
     public function setFiles()
     {
-        if ($this->getCache()->contains('files')) {
-            $this->files = $this->getCache()->fetch('files');
+        if ($this->getCache()->hasItem('files')) {
+            $this->files = $this->getCache()->getItem('files');
         } else {
             $files = $this->get('file.repository')->all()->toArray();
             foreach ($files as $file) {
                 $this->files[$file['id']] = $file;
             }
-            $this->getCache()->save('files', $this->files);
+            $this->getCache()->addItem('files', $this->files);
         }
     }
 

@@ -1,0 +1,157 @@
+<?php
+/*
+ * WellCommerce Open-Source E-Commerce Platform
+ * 
+ * This file is part of the WellCommerce package.
+ *
+ * (c) Adam Piotrowski <adam@wellcommerce.org>
+ * 
+ * For the full copyright and license information,
+ * please view the LICENSE file that was distributed with this source code.
+ */
+
+namespace WellCommerce\Core\Layout;
+
+use WellCommerce\Core\Component\AbstractComponent;
+use WellCommerce\Core\Layout\Box\LayoutBox;
+use WellCommerce\Core\Layout\Box\LayoutBoxCollection;
+use WellCommerce\Core\Layout\Column\LayoutColumn;
+use WellCommerce\Core\Layout\Column\LayoutColumnCollection;
+use WellCommerce\Plugin\Layout\Repository\LayoutRepositoryInterface;
+
+/**
+ * Class LayoutRenderer
+ *
+ * @package WellCommerce\Core\Layout
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
+ */
+class LayoutRenderer extends AbstractComponent
+{
+    const DEFAULT_ACTION = 'indexAction';
+
+    /**
+     * @var array
+     */
+    private $repository = [];
+
+    /**
+     * Sets repository object
+     *
+     * @param LayoutRepositoryInterface $repository
+     */
+    public function setLayoutRepository(LayoutRepositoryInterface $repository)
+    {
+        $this->repository = $repository;
+    }
+
+    /**
+     * Returns cache name
+     *
+     * @param $layout
+     *
+     * @return string
+     */
+    private function getCacheKey($layout)
+    {
+        return sprintf('layout_%s', $layout);
+    }
+
+    /**
+     * Loads layout and returns a column collection with boxes
+     *
+     * @param LayoutInterface $layout Layout object
+     *
+     * @return LayoutColumnCollection
+     */
+    public function load(LayoutInterface $layout)
+    {
+        if ($layout->isCacheEnabled()) {
+            $cacheKey = $this->getCacheKey($layout->getName());
+            if ($this->getCache()->contains($cacheKey)) {
+                $collection = $this->getCache()->fetch($cacheKey);
+            } else {
+                $collection = $this->getLayoutColumnCollection($layout->getName());
+                $this->getCache()->save($cacheKey, $collection, $layout->getCacheTtl());
+            }
+        } else {
+            $collection = $this->getLayoutColumnCollection($layout->getName());
+        }
+
+        return $collection;
+    }
+
+    /**
+     * Returns LayoutColumnCollection for Layout
+     *
+     * @param $name Layout name
+     *
+     * @return LayoutColumnCollection
+     */
+    private function getLayoutColumnCollection($name)
+    {
+        $layoutPage = $this->repository->find($name);
+        if (!$layoutPage) {
+            throw new \InvalidArgumentException(sprintf('Layout page "%s" not found. Maybe you misspelled name or page is not registered?', $name));
+        }
+        $collection = new LayoutColumnCollection();
+        foreach ($layoutPage->column as $item) {
+            $this->addColumn($collection, $item);
+        }
+
+        return $collection;
+    }
+
+    /**
+     * Adds new column to collection
+     *
+     * @param LayoutColumnCollection $collection
+     * @param                        $item
+     */
+    private function addColumn(LayoutColumnCollection $collection, $layoutPageColumn)
+    {
+        $boxCollection = new LayoutBoxCollection();
+        foreach ($layoutPageColumn->boxes as $item) {
+            $this->addBox($boxCollection, $item->box);
+        }
+
+        $column = new LayoutColumn($layoutPageColumn->width, $boxCollection);
+        $collection->add($column);
+    }
+
+    /**
+     * Adds new box to related column collection
+     *
+     * @param LayoutBoxCollection $collection
+     * @param                     $box
+     */
+    private function addBox(LayoutBoxCollection $collection, $box)
+    {
+        // prepare layout box
+        $configurator = $this->getLayoutManager()->getLayoutBoxConfigurator($box->type);
+        $layoutBox    = new LayoutBox($box, $this->getBoxController($configurator));
+
+        // add box to collection
+        $collection->add($layoutBox);
+    }
+
+    /**
+     * Returns full service name with action used in forwarded requests
+     *
+     * @param $configurator
+     *
+     * @return mixed
+     */
+    private function getBoxController($configurator)
+    {
+        $refClass      = new \ReflectionClass($configurator->class);
+        $currentAction = $this->getControllerActionFromRequest();
+        if ($refClass->hasMethod($this->getControllerActionFromRequest())) {
+            $action = $currentAction;
+        } else {
+            $action = self::DEFAULT_ACTION;
+        }
+        $controller = sprintf('%s:%s', $configurator->controller, $action);
+
+        return $controller;
+    }
+}

@@ -12,6 +12,8 @@
 namespace WellCommerce\Plugin\Product\Model;
 
 use WellCommerce\Core\Component\Model\AbstractModel;
+use WellCommerce\Core\Component\Model\Collection\TranslationCollection;
+use WellCommerce\Core\Component\Model\ModelInterface;
 
 /**
  * Class ProductTranslation
@@ -19,47 +21,22 @@ use WellCommerce\Core\Component\Model\AbstractModel;
  * @package WellCommerce\Core\Model
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductTranslation extends AbstractModel
+class ProductTranslation extends AbstractModel implements ModelInterface
 {
-
-    /**
-     * @var string
-     */
     protected $table = 'product_translation';
+    protected $fillable = ['product_id', 'language_id'];
 
     /**
-     * @var bool
+     * Override default collection model
+     *
+     * @param array $models
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|\WellCommerce\Core\Component\Model\Collection\CustomCollection|TranslationCollection
      */
-    public $timestamps = true;
-
-    /**
-     * @var bool
-     */
-    protected $softDelete = false;
-
-    /**
-     * @var array
-     */
-    protected $fillable
-        = [
-            'product_id',
-            'language_id'
-        ];
-
-    /**
-     * @var array
-     */
-    protected $translatable
-        = [
-            'name',
-            'slug',
-            'short_description',
-            'description',
-            'long_description',
-            'meta_title',
-            'meta_keywords',
-            'meta_description'
-        ];
+    public function newCollection(array $models = [])
+    {
+        return new TranslationCollection($models);
+    }
 
     /**
      * {@inheritdoc}

@@ -24,7 +24,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class ControllerResolver extends BaseControllerResolver
 {
-
     /**
      * @var \Symfony\Component\DependencyInjection\ContainerInterface
      */

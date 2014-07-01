@@ -28,7 +28,6 @@ use Symfony\Component\Finder\Finder;
  */
 class PluginExtensionLoader
 {
-
     const ROUTING_GENERATOR_CLASS = 'WellCommerceUrlGenerator';
     const ROUTING_MATCHER_CLASS   = 'WellCommerceUrlMatcher';
 
@@ -48,6 +47,9 @@ class PluginExtensionLoader
         $this->routeCollection  = $routeCollection;
     }
 
+    /**
+     * Registers all available extensions using recursive directory search
+     */
     public function registerExtensions()
     {
         $finder = new Finder();
@@ -66,19 +68,5 @@ class PluginExtensionLoader
             }
 
         }
-    }
-
-    public function dumpRouting()
-    {
-        $filesystem = new Filesystem();
-        $dumper     = new PhpGeneratorDumper($this->routeCollection);
-        $filesystem->dumpFile(ROOTPATH . 'var' . DS . sprintf('%s.php', self::ROUTING_GENERATOR_CLASS), $dumper->dump(Array(
-            'class' => self::ROUTING_GENERATOR_CLASS
-        )));
-
-        $dumper = new PhpMatcherDumper($this->routeCollection);
-        $filesystem->dumpFile(ROOTPATH . 'var' . DS . sprintf('%s.php', self::ROUTING_MATCHER_CLASS), $dumper->dump(Array(
-            'class' => self::ROUTING_MATCHER_CLASS
-        )));
     }
 }

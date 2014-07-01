@@ -103,6 +103,7 @@ class LayoutBoxRepository extends AbstractRepository implements LayoutBoxReposit
         return $filteredData;
     }
 
+
     public function getAllLayoutBoxToSelect()
     {
         return $this->all()->toSelect('id', 'translation.name');

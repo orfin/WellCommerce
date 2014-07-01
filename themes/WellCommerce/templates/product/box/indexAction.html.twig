@@ -1,0 +1,8 @@
+{% extends 'layout_box.twig' %}
+{% block content %}
+    <h1>{{ product.translation.name }}</h1>
+    {%  for photo in product.photos %}
+        <img src="{{ image_url(photo, 100, 100) }}" alt="{{ photo.name }}" />
+    {%  endfor %}
+{% endblock %}
+

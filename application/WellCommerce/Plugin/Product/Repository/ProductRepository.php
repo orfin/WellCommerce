@@ -42,6 +42,30 @@ class ProductRepository extends AbstractRepository implements ProductRepositoryI
     /**
      * {@inheritdoc}
      */
+    public function findBySlug($slug, $language = null)
+    {
+        $language = (null != $language) ? : $this->getCurrentLanguage();
+
+        $product = Product::loadBySlug($slug, $language);
+
+        return $product->first();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findById($id, $language = null)
+    {
+        $language = (null != $language) ? : $this->getCurrentLanguage();
+
+        $product = Product::loadById($id, $language);
+
+        return $product->first();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function delete($id)
     {
         $product = $this->find($id);
@@ -136,7 +160,7 @@ class ProductRepository extends AbstractRepository implements ProductRepositoryI
 
         $this->transaction(function () use ($id, $data) {
             $product = $this->find($id);
-            $data = $this->dispatchEvent(ProductRepositoryInterface::PRE_UPDATE_DATAGRID_EVENT, $product, $data);
+            $data    = $this->dispatchEvent(ProductRepositoryInterface::PRE_UPDATE_DATAGRID_EVENT, $product, $data);
             $product->update($data);
             $this->dispatchEvent(ProductRepositoryInterface::POST_UPDATE_DATAGRID_EVENT, $product, $data);
         });

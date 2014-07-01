@@ -20,24 +20,38 @@ namespace WellCommerce\Core\Layout\Column;
  */
 class LayoutColumnCollection implements \IteratorAggregate, \Countable
 {
+    /**
+     * @var array Column collection
+     */
     public $columns = [];
 
+    /**
+     * {@inheritdoc}
+     */
     public function getIterator()
     {
         return new \ArrayIterator($this->columns);
     }
 
-
+    /**
+     * {@inheritdoc}
+     */
     public function count()
     {
         return count($this->columns);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function add(LayoutColumn $column)
     {
         $this->columns[] = $column;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function all()
     {
         return $this->columns;

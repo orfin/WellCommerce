@@ -4,7 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="cache_manager.class">Doctrine\Common\Cache\FilesystemCache</parameter>
+        <parameter key="cache_manager.class">Zend\Cache\StorageFactory</parameter>
         <parameter key="config_locator.class">Symfony\Component\Config\FileLocator</parameter>
         <parameter key="controller_resolver.class">WellCommerce\Core\Component\Controller\ControllerResolver</parameter>
         <parameter key="datagrid_builder.class">WellCommerce\Core\Component\DataGrid\DataGridBuilder</parameter>
@@ -37,8 +37,19 @@
             <argument>%application.root_path%config</argument>
         </service>
 
-        <service id="cache_manager" class="%cache_manager.class%">
-            <argument>%application.root_path%var/serialization</argument>
+        <service id="cache_manager" class="%cache_manager.class%" factory-class="%cache_manager.class%" factory-method="factory">
+            <argument type="collection">
+                <argument key="adapter" type="collection">
+                    <argument key="name">filesystem</argument>
+                </argument>
+                <argument key="plugins" type="collection">
+                    <argument>Serializer</argument>
+                </argument>
+                <argument key="options" type="collection">
+                    <argument key="namespace">wellcommerce</argument>
+                    <argument key="cacheDir">%application.root_path%var/serialization</argument>
+                </argument>
+            </argument>
         </service>
 
         <service id="encryption" class="%encryption.class%">
@@ -61,8 +72,8 @@
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
-            <call method="setLayoutBoxRepository">
-                <argument type="service" id="layout_box.repository"/>
+            <call method="setLayoutRepository">
+                <argument type="service" id="layout.repository"/>
             </call>
         </service>
 

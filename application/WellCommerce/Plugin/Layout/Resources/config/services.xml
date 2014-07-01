@@ -4,6 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
+        <parameter key="layout.repository.class">WellCommerce\Plugin\Layout\Repository\LayoutRepository</parameter>
         <parameter key="layout_theme.repository.class">WellCommerce\Plugin\Layout\Repository\LayoutThemeRepository</parameter>
         <parameter key="layout_theme.datagrid.class">WellCommerce\Plugin\Layout\DataGrid\LayoutThemeDataGrid</parameter>
         <parameter key="layout_theme.form.class">WellCommerce\Plugin\Layout\Form\LayoutThemeForm</parameter>
@@ -44,6 +45,12 @@
             </call>
             <call method="setRepository">
                 <argument type="service" id="layout_box.repository"/>
+            </call>
+        </service>
+
+        <service id="layout.repository" class="%layout.repository.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
             </call>
         </service>
 

@@ -105,4 +105,12 @@ class LayoutThemeRepository extends AbstractRepository implements LayoutThemeRep
     {
         return LayoutTheme::all();
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAllLayoutThemeToFilter()
+    {
+        return $this->all()->toDataGridFilter('id', 'name');
+    }
 }

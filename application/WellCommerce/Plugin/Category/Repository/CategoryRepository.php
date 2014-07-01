@@ -39,28 +39,16 @@ class CategoryRepository extends AbstractRepository implements CategoryRepositor
         return Category::findOrFail($id);
     }
 
-    public function findBySlug($slug)
+    /**
+     * {@inheritdoc}
+     */
+    public function findBySlug($slug, $language = null)
     {
-        $languageId = $this->getCurrentLanguage();
+        $language = (null != $language) ? : $this->getCurrentLanguage();
 
-        return Category::with([
-            'translation' => function ($query) use ($languageId) {
-                    $query->where('language_id', '=', $languageId);
-                },
-            'product'
-        ])->whereHas('translation', function ($q) use ($slug) {
-                $q->where('slug', '=', $slug);
-            })->first();
+        $category = Category::loadBySlug($slug, $language)->filterBy('shop', 'shop_id', 6);
 
-        return Category::has('translation')->where('category_translation.slug', '=', $slug)->get();
-
-        return Category::has(array(
-            'translation' => function ($query) use ($slug) {
-                    $query->where('slug', '=', $slug);
-                }
-        ))
-            ->with('translation')
-            ->get();
+        return $category->first();
     }
 
     /**
@@ -161,6 +149,10 @@ class CategoryRepository extends AbstractRepository implements CategoryRepositor
      */
     public function getCategoriesTree()
     {
+        if ($this->getCache()->hasItem('categoriesTree')) {
+            return $this->getCache()->getItem('categoriesTree');
+        }
+
         $categories     = $this->all();
         $categoriesTree = [];
 
@@ -169,14 +161,19 @@ class CategoryRepository extends AbstractRepository implements CategoryRepositor
             $children     = Category::children($category->id)->get();
             $languageData = $category->translation->getCurrentTranslation($this->getCurrentLanguage());
 
+            $link = $this->generateUrl('front.category.index', ['slug' => $languageData->slug]);
+
             $categoriesTree[$category->id] = [
                 'id'          => $category->id,
                 'name'        => $languageData->name,
+                'link'        => $link,
                 'hasChildren' => count($children),
                 'parent'      => $category->parent_id,
                 'weight'      => $category->hierarchy
             ];
         }
+
+        $this->getCache()->addItem('categoriesTree', $categoriesTree);
 
         return $categoriesTree;
     }

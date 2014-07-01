@@ -12,6 +12,7 @@
 namespace WellCommerce\Plugin\Layout\Model;
 
 use WellCommerce\Core\Component\Model\AbstractModel;
+use WellCommerce\Core\Component\Model\ModelInterface;
 
 /**
  * Class LayoutPage
@@ -19,19 +20,26 @@ use WellCommerce\Core\Component\Model\AbstractModel;
  * @package WellCommerce\Plugin\Layout\Model
  * @author  Adam Piotrowski <adam@gekosale.com>
  */
-class LayoutPage extends AbstractModel
+class LayoutPage extends AbstractModel implements ModelInterface
 {
-
     protected $table = 'layout_page';
+    protected $fillable = ['id', 'name'];
 
-    public $timestamps = true;
-
-    protected $softDelete = false;
-
-    protected $fillable = ['id','name'];
-
+    /**
+     * Relation with layout_page_column table
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function column()
     {
-        return $this->hasMany('WellCommerce\Plugin\Layout\Model\LayoutPageColumn');
+        return $this->hasMany(__NAMESPACE__ . '\LayoutPageColumn');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getValidationXmlMapping()
+    {
+        return __DIR__ . '/../Resources/config/validation.xml';
     }
 }

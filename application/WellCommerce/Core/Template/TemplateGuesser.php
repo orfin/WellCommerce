@@ -21,8 +21,14 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class TemplateGuesser
 {
+    // loader modes
     const LOADER_ADMIN = 'twig.loader.admin';
     const LOADER_FRONT = 'twig.loader.front';
+
+    // controller modes
+    const CONTROLLER_MODE_ADMIN = 1;
+    const CONTROLLER_MODE_FRONT = 2;
+    const CONTROLLER_MODE_BOX   = 3;
 
     /**
      * Guesses and returns the template name
@@ -39,15 +45,42 @@ class TemplateGuesser
         $r = new \ReflectionClass($controller[0]);
 
         // check if admin controller
-        if ($r->implementsInterface('WellCommerce\\Core\\Component\\Controller\\AdminControllerInterface')) {
+        if ($r->implementsInterface('WellCommerce\\Core\\Component\\Controller\\Admin\\AdminControllerInterface')) {
             if (!preg_match('/Controller\\\Admin\\\(.+)Controller$/', $r->getName(), $matches)) {
                 throw new \InvalidArgumentException(sprintf('The "%s" class does not look like an admin controller class', $controller));
             }
 
             return [
                 sprintf('%s/%s.%s.%s', strtolower($matches[1]), $controller[1], $request->getRequestFormat(), $engine),
-                self::LOADER_ADMIN
+                self::LOADER_ADMIN,
+                self::CONTROLLER_MODE_ADMIN
             ];
         }
+
+        // check if front controller
+        if ($r->implementsInterface('WellCommerce\\Core\\Component\\Controller\\Front\FrontControllerInterface')) {
+            if (!preg_match('/Controller\\\Front\\\(.+)Controller$/', $r->getName(), $matches)) {
+                throw new \InvalidArgumentException(sprintf('The "%s" class does not look like an front controller class', $controller));
+            }
+
+            return [
+                sprintf('%s/%s.%s.%s', strtolower($matches[1]), $controller[1], $request->getRequestFormat(), $engine),
+                self::LOADER_FRONT,
+                self::CONTROLLER_MODE_FRONT
+            ];
+        }
+
+        if ($r->implementsInterface('WellCommerce\\Core\\Component\\Controller\\Box\BoxControllerInterface')) {
+            if (!preg_match('/Controller\\\Box\\\(.+)BoxController$/', $r->getName(), $matches)) {
+                throw new \InvalidArgumentException(sprintf('The "%s" class does not look like an box controller class', $controller));
+            }
+
+            return [
+                sprintf('%s/box/%s.%s.%s', strtolower($matches[1]), $controller[1], $request->getRequestFormat(), $engine),
+                self::LOADER_FRONT,
+                self::CONTROLLER_MODE_BOX
+            ];
+        }
+
     }
 }

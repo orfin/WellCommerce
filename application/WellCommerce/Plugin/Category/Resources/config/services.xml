@@ -6,11 +6,13 @@
     <parameters>
         <parameter key="category.admin.controller.class">WellCommerce\Plugin\Category\Controller\Admin\CategoryController</parameter>
         <parameter key="category.front.controller.class">WellCommerce\Plugin\Category\Controller\Front\CategoryController</parameter>
-        <parameter key="category.front.box.controller.class">WellCommerce\Plugin\Category\Controller\Front\CategoryBoxController</parameter>
+        <parameter key="category.box.controller.class">WellCommerce\Plugin\Category\Controller\Box\CategoryBoxController</parameter>
+        <parameter key="category_info.box.controller.class">WellCommerce\Plugin\Category\Controller\Box\CategoryInfoBoxController</parameter>
         <parameter key="category.repository.class">WellCommerce\Plugin\Category\Repository\CategoryRepository</parameter>
         <parameter key="category.form.class">WellCommerce\Plugin\Category\Form\CategoryForm</parameter>
         <parameter key="category.tree.class">WellCommerce\Plugin\Category\Form\CategoryTree</parameter>
         <parameter key="category.listener.class">WellCommerce\Plugin\Category\EventListener\CategoryListener</parameter>
+        <parameter key="category.provider.class">WellCommerce\Plugin\Category\Provider\CategoryProvider</parameter>
     </parameters>
 
     <services>
@@ -30,14 +32,25 @@
             <call method="setRepository">
                 <argument type="service" id="category.repository"/>
             </call>
+            <call method="setLayout">
+                <argument>Category</argument>
+                <argument>true</argument>
+                <argument>3600</argument>
+            </call>
         </service>
 
-        <service id="category.front.box.controller" class="%category.front.box.controller.class%">
+        <service id="category.box.controller" class="%category.box.controller.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
             <call method="setRepository">
                 <argument type="service" id="category.repository"/>
+            </call>
+        </service>
+
+        <service id="category_info.box.controller" class="%category_info.box.controller.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
             </call>
         </service>
 
@@ -58,6 +71,8 @@
                 <argument type="service" id="service_container"/>
             </call>
         </service>
+
+        <service id="category.provider" class="%category.provider.class%" />
 
         <service id="category.listener" class="%category.listener.class%">
             <argument type="service" id="service_container"/>

@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Core\Layout\Column;
 
+use WellCommerce\Core\Layout\Box\LayoutBoxCollection;
+
 /**
  * Class LayoutColumn
  *
@@ -20,21 +22,15 @@ namespace WellCommerce\Core\Layout\Column;
  */
 class LayoutColumn
 {
+    /**
+     * @var int Column width
+     */
+    public $width;
 
     /**
-     * @var
+     * @var array An array containing all boxes bound to column
      */
-    private $width;
-
-    /**
-     * @var
-     */
-    private $template;
-
-    /**
-     * @var array
-     */
-    private $boxes = [];
+    public $boxes = [];
 
     /**
      * Constructor
@@ -43,40 +39,9 @@ class LayoutColumn
      * @param       $template
      * @param array $boxes
      */
-    public function __construct($width, $template, $boxes = array())
+    public function __construct($width, LayoutBoxCollection $boxes)
     {
-        $this->width    = $width;
-        $this->template = $template;
-        $this->boxes    = $boxes;
+        $this->width = $width;
+        $this->boxes = $boxes->all();
     }
-
-    /**
-     * Returns column width
-     *
-     * @return mixed
-     */
-    public function getWidth()
-    {
-        return $this->width;
-    }
-
-    /**
-     * Returns template which will be used as column placeholder
-     *
-     * @return mixed
-     */
-    public function getTemplate()
-    {
-        return $this->template;
-    }
-
-    /**
-     * Returns boxes added to column
-     *
-     * @return array
-     */
-    public function getBoxes()
-    {
-        return $this->boxes;
-    }
-} 
+}

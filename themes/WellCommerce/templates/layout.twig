@@ -6,7 +6,20 @@
     </div>
 
     <div id="content" class="row layout-boxes">
-        {% block content %}{% endblock %}
+        {% block content %}
+            {% for key, column in layout %}
+                {% if column.width == 0 %}
+                    {% set width = '100%' %}
+                {% else %}
+                    {% set width = column.width ~ 'px' %}
+                {% endif %}
+                <div class="layout-column" id="layout-column-{{ key }}" style="width: {{ width }}; float: left;">
+                    {% for box in column.boxes %}
+                        {{ layout_box(box.controller, box.settings) }}
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        {% endblock %}
     </div>
 </div>
 {% include 'footer.twig' %}

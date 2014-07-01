@@ -22,11 +22,6 @@
             "name": "Michal Gonciarz",
             "email": "michal@wellcommerce.org",
             "role": "Support Lead"
-        },
-        {
-            "name": "Igor Chudy",
-            "email": "igor@wellcommerce.org",
-            "role": "Lead Designer"
         }
     ],
     "support": {
@@ -70,15 +65,14 @@
         "kriswallsmith/assetic": "v1.1.2",
         "twig/extensions": "1.0.x-dev",
         "illuminate/database": "4.3.*",
-        "illuminate/validation": "4.3.*",
         "xajax/xajax": "1.0.0",
-        "sami/sami": "v1.3",
-        "doctrine/cache": "1.4.x-dev",
         "twitter/bootstrap": "v3.1.1",
         "intervention/image": "1.6.0",
         "intervention/imagecache": "0.6.0",
         "hautelook/phpass": "0.3.0",
-        "symfony/validator": "2.5.x-dev"
+        "symfony/validator": "2.5.x-dev",
+        "zend/cache": "dev-master",
+        "symfony/serializer": "2.5.x-dev"
     },
     "autoload": {
         "psr-0": {

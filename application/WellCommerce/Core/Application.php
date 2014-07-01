@@ -102,7 +102,7 @@ class Application
     {
         $this->container->get('kernel')->terminate($this->request, $this->response);
         $event = $this->stopwatch->stop('application');
-//        echo $event->getDuration();
+        echo $event->getDuration();
     }
 
     /**

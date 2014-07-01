@@ -52,16 +52,23 @@ class XajaxManager
     }
 
     /**
-     * Registers new callback function
+     * Registers a new callback function
      *
-     * @param string  $name
-     * @param unknown $callback
+     * @param $name
+     * @param $callback
      */
     public function registerCallback($name, $callback)
     {
         $this->callbacks[$name] = $callback;
     }
 
+    /**
+     * Redirects to another location using javascript function
+     *
+     * @param $path
+     *
+     * @return $this
+     */
     public function redirect($path)
     {
         $objResponse = new xajaxResponse();

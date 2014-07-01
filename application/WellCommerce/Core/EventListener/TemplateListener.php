@@ -15,6 +15,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
+use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,7 +30,6 @@ use WellCommerce\Core\Template\TemplateGuesser;
  */
 class TemplateListener implements EventSubscriberInterface
 {
-
     /**
      * @var \WellCommerce\Core\Template\TemplateGuesser
      */
@@ -64,10 +65,11 @@ class TemplateListener implements EventSubscriberInterface
 
         $request = $event->getRequest();
         $guesser = $this->container->get('template_guesser');
-        list($template, $loader) = $guesser->guess($controller, $request);
+        list($template, $loader, $mode) = $guesser->guess($controller, $request);
 
         $request->attributes->set('_template_name', $template);
         $request->attributes->set('_template_loader', $loader);
+        $request->attributes->set('_controller_mode', $mode);
         $event->getRequest()->attributes->set('_template_vars', Array());
     }
 
@@ -100,18 +102,41 @@ class TemplateListener implements EventSubscriberInterface
     }
 
     /**
+     * Set new response if exception is triggered
+     *
+     * @param GetResponseForExceptionEvent $event
+     */
+    public function onKernelException(GetResponseForExceptionEvent $event)
+    {
+        $masterRequest = $this->container->get('request_stack')->getMasterRequest();
+        $exception     = $event->getException();
+        $response      = new Response();
+        $response->setContent($exception->getMessage());
+
+        if ($exception instanceof HttpExceptionInterface) {
+            $response->setStatusCode($exception->getStatusCode());
+            $response->headers->replace($exception->getHeaders());
+        } else {
+            $response->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+
+        $event->setResponse($response);
+    }
+
+    /**
      * Returns subscribed events
      *
      * @return array
      */
     public static function getSubscribedEvents()
     {
-        return array(
-            KernelEvents::CONTROLLER => array(
+        return [
+            KernelEvents::CONTROLLER => [
                 'onKernelController',
                 -128
-            ),
+            ],
+//            KernelEvents::EXCEPTION  => 'onKernelException',
             KernelEvents::VIEW       => 'onKernelView'
-        );
+        ];
     }
 }

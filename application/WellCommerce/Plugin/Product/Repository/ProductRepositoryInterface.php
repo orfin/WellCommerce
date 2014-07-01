@@ -70,4 +70,24 @@ interface ProductRepositoryInterface
      * @return array
      */
     public function updateDataGridRow(array $request);
+
+    /**
+     * Returns product model by slug
+     *
+     * @param      $slug
+     * @param null $language
+     *
+     * @return mixed
+     */
+    public function findBySlug($slug, $language = null);
+
+    /**
+     * Returns product model by id
+     *
+     * @param      $id
+     * @param null $language
+     *
+     * @return mixed
+     */
+    public function findById($id, $language = null);
 }

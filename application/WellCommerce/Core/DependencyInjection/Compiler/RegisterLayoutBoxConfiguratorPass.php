@@ -23,7 +23,6 @@ use Symfony\Component\DependencyInjection\Reference;
  */
 class RegisterLayoutBoxConfiguratorPass implements CompilerPassInterface
 {
-
     /**
      * Registers all layout box configurators
      *
@@ -45,16 +44,19 @@ class RegisterLayoutBoxConfiguratorPass implements CompilerPassInterface
             $refClass     = new \ReflectionClass($class);
             $interface    = 'WellCommerce\\Core\\Layout\\Box\\LayoutBoxConfiguratorInterface';
 
+            $service = $container->getDefinition($attributes[0]['controller'])->getClass();
+
             $configurator->setProperty('type', $attributes[0]['type']);
             $configurator->setProperty('controller', $attributes[0]['controller']);
+            $configurator->setProperty('class', $service);
 
             if (!$refClass->implementsInterface($interface)) {
                 throw new \InvalidArgumentException(sprintf('Service "%s" must implement interface "%s".', $id, $interface));
             }
-            $definition->addMethodCall('addLayoutBoxConfigurator', array(
+            $definition->addMethodCall('addLayoutBoxConfigurator', [
                 $attributes[0]['type'],
                 new Reference($id)
-            ));
+            ]);
         }
     }
 }

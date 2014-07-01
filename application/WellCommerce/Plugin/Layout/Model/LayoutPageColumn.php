@@ -12,6 +12,7 @@
 namespace WellCommerce\Plugin\Layout\Model;
 
 use WellCommerce\Core\Component\Model\AbstractModel;
+use WellCommerce\Core\Component\Model\ModelInterface;
 
 /**
  * Class LayoutPageColumn
@@ -19,19 +20,21 @@ use WellCommerce\Core\Component\Model\AbstractModel;
  * @package WellCommerce\Plugin\Layout\Model
  * @author  Adam Piotrowski <adam@gekosale.com>
  */
-class LayoutPageColumn extends AbstractModel
+class LayoutPageColumn extends AbstractModel implements ModelInterface
 {
-
     protected $table = 'layout_page_column';
+    protected $fillable = ['id', 'layout_page_id', 'layout_theme_id', 'width'];
 
-    public $timestamps = true;
-
-    protected $softDelete = false;
-
-    protected $fillable = ['id'];
-
-    public function box()
+    public function boxes()
     {
-        return $this->hasMany('WellCommerce\Plugin\Layout\Model\LayoutPageColumnBox');
+        return $this->hasMany(__NAMESPACE__ . '\LayoutPageColumnBox');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getValidationXmlMapping()
+    {
+        return __DIR__ . '/../Resources/config/validation.xml';
     }
 }

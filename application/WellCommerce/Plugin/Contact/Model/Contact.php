@@ -25,11 +25,6 @@ use WellCommerce\Core\Model;
 class Contact extends AbstractModel implements ModelInterface, TranslatableModelInterface
 {
     protected $table = 'contact';
-
-    public $timestamps = true;
-
-    protected $softDelete = false;
-
     protected $fillable = ['id'];
 
     /**

@@ -41,6 +41,15 @@ interface LayoutPageRepositoryInterface
     public function find($id);
 
     /**
+     * Returns all pages bound to particular theme
+     *
+     * @param int $id Theme id
+     *
+     * @return mixed
+     */
+    public function findPagesByThemeId($id);
+
+    /**
      * Saves new or existing LayoutPage model
      *
      * @param array $data
@@ -58,4 +67,11 @@ interface LayoutPageRepositoryInterface
      * @return mixed
      */
     public function delete($id);
+
+    /**
+     * Returns Collection as ke-value pairs ready to use in selects
+     *
+     * @return mixed
+     */
+    public function getAllLayoutPageToSelect();
 }

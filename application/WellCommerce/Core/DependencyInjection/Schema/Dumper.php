@@ -23,13 +23,26 @@ use Symfony\Component\Filesystem\Filesystem;
  */
 class Dumper
 {
+    /**
+     * @var \Symfony\Component\DependencyInjection\ContainerBuilder
+     */
     private $containerBuilder;
 
+    /**
+     * Constructor
+     *
+     * @param ContainerBuilder $containerBuilder
+     */
     public function __construct(ContainerBuilder $containerBuilder)
     {
         $this->containerBuilder = $containerBuilder;
     }
 
+    /**
+     * Returns all database columns as an array
+     *
+     * @return array
+     */
     private function getAllColumns()
     {
         $connection = $this->containerBuilder->get('database_manager')->connection();
@@ -58,6 +71,9 @@ class Dumper
         return "select table_name, column_name from information_schema.columns where table_schema = ?";
     }
 
+    /**
+     * @return string
+     */
     private function generateColumns()
     {
         $allColumns = $this->getAllColumns();

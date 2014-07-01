@@ -26,27 +26,17 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
  */
 abstract class AbstractComponent extends ContainerAware
 {
-
     /**
-     * Forwards request to another controller
-     *
-     * @param        $controller
-     * @param string $action
-     * @param array  $path
-     * @param array  $query
+     * Returns current controller action
      *
      * @return mixed
      */
-    public function forward($controller, $action = 'indexAction', $parameters = [])
+    public function getControllerActionFromRequest()
     {
-        $currentRequest           = $this->container->get('request_stack')->getCurrentRequest();
-        $request                  = $currentRequest->attributes->all();
-        $request['_controller']   = $controller;
-        $request['_action']       = $action;
-        $request['_box_settings'] = $parameters;
-        $subRequest               = $currentRequest->duplicate($currentRequest->query->all(), null, $request);
+        $currentController = $this->getRequest()->attributes->get('_controller');
+        list($controller, $action) = explode(':', $currentController);
 
-        return $this->container->get('kernel')->handle($subRequest, HttpKernelInterface::SUB_REQUEST);
+        return $action;
     }
 
     /**
@@ -247,6 +237,16 @@ abstract class AbstractComponent extends ContainerAware
     final public function getLayoutManager()
     {
         return $this->container->get('layout_manager');
+    }
+
+    /**
+     * Shortcut to get LayoutRenderer service
+     *
+     * @return object LayoutRenderer
+     */
+    final public function getLayoutRenderer()
+    {
+        return $this->container->get('layout_renderer');
     }
 
     /**

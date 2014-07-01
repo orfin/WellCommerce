@@ -26,9 +26,39 @@ use WellCommerce\Core\Event\FormEvent;
  */
 abstract class LayoutBoxConfigurator extends AbstractComponent implements LayoutBoxConfiguratorInterface
 {
+    /**
+     * @var string Box type
+     */
+    public $type;
+
+    /**
+     * @var string Controller service name
+     */
+    public $controller;
+
+    /**
+     * @var string Class name
+     */
+    public $class;
+
+    /**
+     * @var object FormBuilder instance
+     */
     protected $builder;
+
+    /**
+     * @var object FormInterface
+     */
     protected $form;
+
+    /**
+     * @var object Select form element for choosing box type
+     */
     protected $typeSelect;
+
+    /**
+     * @var object Default settings fieldset element
+     */
     protected $fieldset;
 
     /**
@@ -36,7 +66,6 @@ abstract class LayoutBoxConfigurator extends AbstractComponent implements Layout
      */
     public function isAvailableForLayoutPage($layoutPage)
     {
-        // available on all layout pages
         return true;
     }
 
@@ -49,7 +78,7 @@ abstract class LayoutBoxConfigurator extends AbstractComponent implements Layout
         $this->form       = $this->builder->getForm();
         $this->typeSelect = $this->form->getChild('required_data')->getChild('type');
 
-        $this->typeSelect->addOption(new Option($this->type, sprintf('%s (%s)', $this->name, $this->type)));
+        $this->typeSelect->addOption($this->getBoxTypeOption());
 
         $this->fieldset = $this->form->addChild($this->builder->addFieldset([
             'name'         => $this->type,
@@ -68,5 +97,15 @@ abstract class LayoutBoxConfigurator extends AbstractComponent implements Layout
     public function addBoxConfiguration()
     {
         return false;
+    }
+
+    /**
+     * Adds new option to select for current box configurator
+     *
+     * @return Option An option element
+     */
+    private function getBoxTypeOption()
+    {
+        return new Option($this->type, sprintf('%s (%s)', $this->name, $this->type));
     }
 }

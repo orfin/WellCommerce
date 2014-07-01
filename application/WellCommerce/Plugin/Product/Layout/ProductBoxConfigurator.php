@@ -25,19 +25,6 @@ use WellCommerce\Core\Layout\Box\LayoutBoxConfiguratorInterface;
  */
 class ProductBoxConfigurator extends LayoutBoxConfigurator implements LayoutBoxConfiguratorInterface
 {
-    /**
-     * @var string ProductBoxConfigurator type
-     */
-    public $type;
-
-    /**
-     * @var string ProductBoxController service name
-     */
-    public $controller;
-
-    /**
-     * @var string ProductBoxConfigurator box name
-     */
     public $name = 'ProductBox';
 
     /**
@@ -48,11 +35,5 @@ class ProductBoxConfigurator extends LayoutBoxConfigurator implements LayoutBoxC
         return ($layoutPage == 'Product');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function addBoxConfiguration()
-    {
 
-    }
 } 

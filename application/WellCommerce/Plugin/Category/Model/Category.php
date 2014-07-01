@@ -24,9 +24,51 @@ use WellCommerce\Core\Component\Model\TranslatableModelInterface;
 class Category extends AbstractModel implements ModelInterface, TranslatableModelInterface
 {
     protected $table = 'category';
-    public $timestamps = true;
-    protected $softDelete = false;
     protected $fillable = ['id'];
+
+    /**
+     * Returns category query with relations
+     *
+     * @param $query
+     * @param $languageId
+     *
+     * @return mixed
+     */
+    private function getCategoryQuery($query, $language)
+    {
+        $query->with([
+            'translation' =>
+                function ($query) use ($language) {
+                    $query->where('language_id', '=', $language);
+                }
+        ]);
+
+        $query->with([
+            'shop',
+            'photo'
+        ]);
+
+        return $query;
+    }
+
+    /**
+     * Scope which loads category model by its slug
+     *
+     * @param $query
+     * @param $slug
+     * @param $languageId
+     *
+     * @return mixed
+     */
+    public function scopeLoadBySlug($query, $slug, $language)
+    {
+        $this->getCategoryQuery($query, $language);
+
+        return $query->whereHas('translation', function ($q) use ($slug, $language) {
+            $q->where('slug', '=', $slug);
+            $q->where('language_id', '=', $language);
+        });
+    }
 
     /**
      * Relation with Shop model through pivot table category_shop
@@ -43,9 +85,19 @@ class Category extends AbstractModel implements ModelInterface, TranslatableMode
      *
      * @return \Illuminate\Database\Eloquent\Relations\hasMany
      */
-    public function translation()
+    public function translations()
     {
         return $this->hasMany('WellCommerce\Plugin\Category\Model\CategoryTranslation');
+    }
+
+    /**
+     * Relation with CategoryTranslation model
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasOne
+     */
+    public function translation()
+    {
+        return $this->hasOne('WellCommerce\Plugin\Category\Model\CategoryTranslation');
     }
 
     /**
@@ -55,7 +107,7 @@ class Category extends AbstractModel implements ModelInterface, TranslatableMode
      */
     public function photo()
     {
-        return $this->belongsTo('WellCommerce\Core\Model\File');
+        return $this->belongsTo('WellCommerce\Plugin\File\Model\File');
     }
 
     /**

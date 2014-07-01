@@ -12,7 +12,7 @@
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
-            <tag name="layout_box.configurator" type="wellcommerce_product_box" controller="product.front.box.controller" />
+            <tag name="layout_box.configurator" type="wellcommerce_product_box" controller="product.box.controller" />
             <tag name="kernel.event_listener" event="layout_box.form.init" method="addConfigurationFields" />
         </service>
     </services>

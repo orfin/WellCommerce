@@ -12,6 +12,7 @@
 namespace WellCommerce\Core\Template\Twig\Extension;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use WellCommerce\Plugin\File\Model\File;
 
 /**
  * Class AssetExtension
@@ -44,7 +45,8 @@ class AssetExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('asset', [$this, 'getAsset'], ['is_safe' => ['html']])
+            new \Twig_SimpleFunction('asset', [$this, 'getAsset'], ['is_safe' => ['html']]),
+            new \Twig_SimpleFunction('image_url', [$this, 'getImage'], ['is_safe' => ['html']]),
         ];
     }
 
@@ -58,6 +60,16 @@ class AssetExtension extends \Twig_Extension
     public function getAsset($path)
     {
         return sprintf('%s/%s', $this->container->get('request')->getSchemeAndHttpHost(), $path);
+    }
+
+    /**
+     * Returns image link
+     *
+     * @param File $file
+     */
+    public function getImage(File $file, $width = null, $height = null)
+    {
+        return $this->container->get('image_gallery')->getImageUrl($file->id, $width, $height);
     }
 
     /**

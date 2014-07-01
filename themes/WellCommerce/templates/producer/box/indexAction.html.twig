@@ -1,0 +1,9 @@
+{% extends 'layout_box.twig' %}
+{% block content %}
+    <ul>
+    {% for id, name in producers %}
+        <li><a href="#">{{ name }}</a></li>
+    {% endfor %}
+    </ul>
+{% endblock %}
+

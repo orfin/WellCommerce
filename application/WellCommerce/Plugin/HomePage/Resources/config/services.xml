@@ -5,7 +5,6 @@
 
     <parameters>
         <parameter key="home_page.front.controller.class">WellCommerce\Plugin\HomePage\Controller\Front\HomePageController</parameter>
-        <parameter key="home_page.layout.class">WellCommerce\Plugin\HomePage\Layout\HomePageLayoutPage</parameter>
     </parameters>
 
     <services>
@@ -14,15 +13,10 @@
                 <argument type="service" id="service_container"/>
             </call>
             <call method="setLayout">
-                <argument type="service" id="home_page.layout"/>
+                <argument>HomePage</argument>
+                <argument>true</argument>
+                <argument>3600</argument>
             </call>
-        </service>
-
-        <service id="home_page.layout" class="%home_page.layout.class%">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <tag name="layout_page" alias="HomePage" columns="home_page.xml" />
         </service>
     </services>
 </container>

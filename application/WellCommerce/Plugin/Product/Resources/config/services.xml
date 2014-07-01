@@ -5,10 +5,13 @@
 
     <parameters>
         <parameter key="product.admin.controller.class">WellCommerce\Plugin\Product\Controller\Admin\ProductController</parameter>
+        <parameter key="product.front.controller.class">WellCommerce\Plugin\Product\Controller\Front\ProductController</parameter>
+        <parameter key="product.box.controller.class">WellCommerce\Plugin\Product\Controller\Box\ProductBoxController</parameter>
         <parameter key="product.repository.class">WellCommerce\Plugin\Product\Repository\ProductRepository</parameter>
         <parameter key="product.datagrid.class">WellCommerce\Plugin\Product\DataGrid\ProductDataGrid</parameter>
         <parameter key="product.form.class">WellCommerce\Plugin\Product\Form\ProductForm</parameter>
         <parameter key="product.listener.class">WellCommerce\Plugin\Product\EventListener\ProductListener</parameter>
+        <parameter key="product.provider.class">WellCommerce\Plugin\Product\Provider\ProductProvider</parameter>
     </parameters>
 
     <services>
@@ -18,6 +21,26 @@
             </call>
             <call method="setRepository">
                 <argument type="service" id="product.repository"/>
+            </call>
+        </service>
+
+        <service id="product.front.controller" class="%product.front.controller.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setRepository">
+                <argument type="service" id="product.repository"/>
+            </call>
+            <call method="setLayout">
+                <argument>Product</argument>
+                <argument>true</argument>
+                <argument>3600</argument>
+            </call>
+        </service>
+
+        <service id="product.box.controller" class="%product.box.controller.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
             </call>
         </service>
 
@@ -37,6 +60,8 @@
                 <argument type="service" id="service_container"/>
             </call>
         </service>
+
+        <service id="product.provider" class="%product.provider.class%" />
 
         <service id="product.listener" class="%product.listener.class%">
             <argument type="service" id="service_container"/>

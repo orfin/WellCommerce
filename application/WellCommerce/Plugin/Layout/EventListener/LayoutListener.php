@@ -64,6 +64,9 @@ class LayoutListener implements EventSubscriberInterface
         ]));
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public static function getSubscribedEvents()
     {
         return array(

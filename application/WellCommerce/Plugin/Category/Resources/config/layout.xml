@@ -5,6 +5,7 @@
 
     <parameters>
         <parameter key="category_box.layout.configurator.class">WellCommerce\Plugin\Category\Layout\CategoryBoxConfigurator</parameter>
+        <parameter key="category_info_box.layout.configurator.class">WellCommerce\Plugin\Category\Layout\CategoryInfoBoxConfigurator</parameter>
     </parameters>
 
     <services>
@@ -12,7 +13,15 @@
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
-            <tag name="layout_box.configurator" type="wellcommerce_category_box" controller="category.front.box.controller"/>
+            <tag name="layout_box.configurator" type="wellcommerce_category_box" controller="category.box.controller"/>
+            <tag name="kernel.event_listener" event="layout_box.form.init" method="addConfigurationFields" />
+        </service>
+
+        <service id="category_info_box.layout.configurator" class="%category_info_box.layout.configurator.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="layout_box.configurator" type="wellcommerce_category_info_box" controller="category_info.box.controller"/>
             <tag name="kernel.event_listener" event="layout_box.form.init" method="addConfigurationFields" />
         </service>
     </services>

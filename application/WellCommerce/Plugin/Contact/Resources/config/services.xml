@@ -5,17 +5,38 @@
 
     <parameters>
         <parameter key="contact.admin.controller.class">WellCommerce\Plugin\Contact\Controller\Admin\ContactController</parameter>
+        <parameter key="contact.front.controller.class">WellCommerce\Plugin\Contact\Controller\Front\ContactController</parameter>
+        <parameter key="contact.box.controller.class">WellCommerce\Plugin\Contact\Controller\Box\ContactBoxController</parameter>
         <parameter key="contact.repository.class">WellCommerce\Plugin\Contact\Repository\ContactRepository</parameter>
         <parameter key="contact.datagrid.class">WellCommerce\Plugin\Contact\DataGrid\ContactDataGrid</parameter>
         <parameter key="contact.form.class">WellCommerce\Plugin\Contact\Form\ContactForm</parameter>
         <parameter key="contact.listener.class">WellCommerce\Plugin\Contact\EventListener\ContactListener</parameter>
         <parameter key="contact_box.layout.configurator.class">WellCommerce\Plugin\Contact\Layout\ContactBoxConfigurator</parameter>
-        <parameter key="contact_page.layout.class">WellCommerce\Plugin\Contact\Layout\ContactLayoutPage</parameter>
         <parameter key="twig.extension.contact.class">WellCommerce\Plugin\Contact\Twig\Contact</parameter>
     </parameters>
 
     <services>
         <service id="contact.admin.controller" class="%contact.admin.controller.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setRepository">
+                <argument type="service" id="contact.repository"/>
+            </call>
+        </service>
+
+        <service id="contact.front.controller" class="%contact.front.controller.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setLayout">
+                <argument>Contact</argument>
+                <argument>true</argument>
+                <argument>3600</argument>
+            </call>
+        </service>
+
+        <service id="contact.box.controller" class="%contact.box.controller.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -44,21 +65,6 @@
         <service id="contact.listener" class="%contact.listener.class%">
             <argument type="service" id="service_container"/>
             <tag name="kernel.event_subscriber" />
-        </service>
-
-        <service id="contact_box.layout.configurator" class="%contact_box.layout.configurator.class%">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <tag name="layout_box.configurator" type="wellcommerce_contact_box" controller="contact.front.box.controller" />
-            <tag name="kernel.event_listener" event="layout_box.form.init" method="addConfigurationFields" />
-        </service>
-
-        <service id="contact_page.layout" class="%contact_page.layout.class%">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <tag name="layout_page" alias="Contact" />
         </service>
 
         <service id="twig.extension.contact" class="%twig.extension.contact.class%">

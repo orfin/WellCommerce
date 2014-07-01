@@ -1,0 +1,9 @@
+{% extends 'layout_box.twig' %}
+{% block header %}
+    <h2>{{ category.translation.name }}</h2>
+{% endblock %}
+{% block content %}
+    <p>{{ category.translation.short_description }}</p>
+    <p>{{ category.translation.description }}</p>
+{% endblock %}
+

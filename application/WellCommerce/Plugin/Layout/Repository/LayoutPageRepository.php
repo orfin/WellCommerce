@@ -14,6 +14,8 @@ namespace WellCommerce\Plugin\Layout\Repository;
 use WellCommerce\Core\Component\Repository\AbstractRepository;
 use WellCommerce\Core\Component\Repository\RepositoryInterface;
 use WellCommerce\Plugin\Layout\Model\LayoutPage;
+use WellCommerce\Plugin\Layout\Model\LayoutPageColumn;
+use WellCommerce\Plugin\Layout\Model\LayoutPageColumnBox;
 
 /**
  * Class LayoutPageAbstractRepository
@@ -23,33 +25,32 @@ use WellCommerce\Plugin\Layout\Model\LayoutPage;
  */
 class LayoutPageRepository extends AbstractRepository implements LayoutPageRepositoryInterface
 {
-
     /**
-     * Returns all tax rates
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     * {@inheritdoc}
      */
     public function all()
     {
-        return LayoutPage::with('column', 'column.box')->orderBy('name', 'ASC')->get();
+        return LayoutPage::with('column', 'column.boxes')->orderBy('name', 'ASC')->get();
     }
 
     /**
-     * Returns a single tax rate
-     *
-     * @param $id
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|static
+     * {@inheritdoc}
      */
     public function find($id)
     {
-        return LayoutPage::with('column', 'column.box')->findOrFail($id);
+        return LayoutPage::with('column', 'column.boxes')->findOrFail($id);
     }
 
     /**
-     * Deletes layout_theme record by ID
-     *
-     * @param int $id layout_theme ID to delete
+     * {@inheritdoc}
+     */
+    public function findPagesByThemeId($id)
+    {
+        return LayoutPageColumn::with('boxes')->where('layout_theme_id', '=', $id)->get();
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function delete($id)
     {
@@ -59,59 +60,48 @@ class LayoutPageRepository extends AbstractRepository implements LayoutPageRepos
     }
 
     /**
-     * Saves layout_theme
-     *
-     * @param      $Data
-     * @param null $id
+     * {@inheritdoc}
      */
-    public function save(array $Data, $id = null)
+    public function save(array $data, $id = null)
     {
-        $this->transaction(function () use ($Data, $id) {
+        $this->transaction(function () use ($data, $id) {
 
-            $layout_theme = LayoutPage::firstOrNew([
-                'id' => $id
-            ]);
+            // delete all layout columns
+            LayoutPageColumn::where('layout_theme_id', '=', $id)->delete();
 
-            $layout_theme->discount = $Data['discount'];
-            $layout_theme->save();
+            foreach ($data as $pageId => $columnsData) {
 
-            foreach ($this->getLanguageIds() as $language) {
+                $pageId = substr($pageId, 12);
 
-                $translation = LayoutPageTranslation::firstOrNew([
-                    'layout_theme_id' => $layout_theme->id,
-                    'language_id'     => $language
-                ]);
+                foreach ($columnsData['columns_data'] as $column) {
+                    // save layout column
+                    $layoutPageColumn = LayoutPageColumn::create([
+                        'layout_page_id'  => $pageId,
+                        'layout_theme_id' => $id,
+                        'width'           => $column['width'],
+                    ]);
 
-                $translation->setTranslationData($Data, $language);
-                $translation->save();
+                    // save boxes in layout column
+                    if (!empty($column['layout_boxes'])) {
+                        foreach ($column['layout_boxes'] as $box) {
+
+                            LayoutPageColumnBox::create([
+                                'layout_page_column_id' => $layoutPageColumn->id,
+                                'layout_box_id'         => $box['layoutbox'],
+                                'span'                  => $box['span'],
+                            ]);
+                        }
+                    }
+                }
             }
-
         });
+
+        $this->getCache()->clearByPrefix('layout_');
     }
 
     /**
-     * Returns array containing values needed to populate the form
-     *
-     * @param $id
-     *
-     * @return array
+     * {@inheritdoc}
      */
-    public function getPopulateData($id)
-    {
-        return [];
-        $layout_themeData = $this->find($id);
-        $populateData     = [];
-        $accessor         = $this->getPropertyAccessor();
-        $languageData     = $layout_themeData->getTranslationData();
-
-        $accessor->setValue($populateData, '[required_data]', [
-            'discount'      => $layout_themeData->discount,
-            'language_data' => $languageData,
-        ]);
-
-        return $populateData;
-    }
-
     public function getAllLayoutPageToSelect()
     {
         return $this->all()->toSelect('id', 'name');

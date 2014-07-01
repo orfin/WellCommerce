@@ -21,12 +21,6 @@ use WellCommerce\Core\Component\Model\AbstractModel;
  */
 class LayoutTheme extends AbstractModel
 {
-
     protected $table = 'layout_theme';
-
-    public $timestamps = true;
-
-    protected $softDelete = false;
-
     protected $fillable = ['id'];
 }

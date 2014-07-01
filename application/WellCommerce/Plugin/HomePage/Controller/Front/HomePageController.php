@@ -11,7 +11,8 @@
  */
 namespace WellCommerce\Plugin\HomePage\Controller\Front;
 
-use WellCommerce\Core\Component\Controller\AbstractFrontController;
+use WellCommerce\Core\Component\Controller\Front\AbstractFrontController;
+use WellCommerce\Plugin\HomePage\Layout\HomePageLayout;
 
 /**
  * Class HomePageController
@@ -21,11 +22,10 @@ use WellCommerce\Core\Component\Controller\AbstractFrontController;
  */
 class HomePageController extends AbstractFrontController
 {
-
     public function indexAction()
     {
         return [
-            'content' => $this->getLayoutManager()->renderLayout('HomePage')
+            'layout' => $this->renderLayout()
         ];
     }
 }

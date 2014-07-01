@@ -20,24 +20,37 @@ namespace WellCommerce\Core\Layout\Box;
  */
 class LayoutBox
 {
-    private $id;
-    private $class;
-    private $defaults;
-
-    public function __construct($id, $class, $defaults = array())
-    {
-        $this->id       = $id;
-        $this->class    = $class;
-        $this->defaults = $defaults;
-    }
+    /**
+     * @var int Box id
+     */
+    public $id;
 
     /**
-     * Returns box identifier
-     *
-     * @return mixed
+     * @var array Box settings
      */
-    public function getId()
+    public $settings;
+
+    /**
+     * @var string Box type
+     */
+    public $type;
+
+    /**
+     * @var string Controller service name
+     */
+    public $controller;
+
+    /**
+     * Constructor
+     *
+     * @param $box
+     * @param $controller
+     */
+    public function __construct($box, $controller)
     {
-        return $this->id;
+        $this->id         = $box->id;
+        $this->settings   = $box->settings;
+        $this->type       = $box->type;
+        $this->controller = $controller;
     }
-} 
+}

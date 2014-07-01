@@ -12,8 +12,6 @@
 
 namespace WellCommerce\Core\Layout\Box;
 
-use WellCommerce\Core\Component\Form\Elements\Fieldset;
-use WellCommerce\Core\Component\Form\FormBuilder;
 use WellCommerce\Core\Event\FormEvent;
 
 /**
@@ -29,7 +27,7 @@ interface LayoutBoxConfiguratorInterface
      *
      * @param string $layoutPage
      *
-     * @return mixed
+     * @return bool
      */
     public function isAvailableForLayoutPage($layoutPage);
 
@@ -38,14 +36,14 @@ interface LayoutBoxConfiguratorInterface
      *
      * @param FormEvent $event
      *
-     * @return mixed
+     * @return void|bool
      */
     public function addConfigurationFields(FormEvent $event);
 
     /**
      * Adds box configuration options to settings fieldset
      *
-     * @return mixed
+     * @return void|bool
      */
     public function addBoxConfiguration();
 }

@@ -41,23 +41,35 @@ class ProductExtension extends AbstractExtension
      */
     public function registerRoutes(RouteCollection $collection, ContainerBuilder $container)
     {
-        $extensionCollection = new RouteCollection();
+        $adminCollection = new RouteCollection();
 
-        $extensionCollection->add('admin.product.index', new Route('/index', array(
+        $adminCollection->add('admin.product.index', new Route('/index', array(
             '_controller' => 'product.admin.controller:indexAction',
         )));
 
-        $extensionCollection->add('admin.product.add', new Route('/add', array(
+        $adminCollection->add('admin.product.add', new Route('/add', array(
             '_controller' => 'product.admin.controller:addAction',
         )));
 
-        $extensionCollection->add('admin.product.edit', new Route('/edit/{id}', array(
+        $adminCollection->add('admin.product.edit', new Route('/edit/{id}', array(
             '_controller' => 'product.admin.controller:editAction',
             'id'          => null
         )));
 
-        $extensionCollection->addPrefix('/admin/product');
+        $adminCollection->addPrefix('/admin/product');
 
-        $collection->addCollection($extensionCollection);
+        $collection->addCollection($adminCollection);
+
+        // front collection
+        $frontCollection = new RouteCollection();
+
+        $frontCollection->add('front.product.index', new Route('/{slug}', array(
+            '_controller' => 'product.front.controller:indexAction',
+            'slug'        => null
+        )));
+
+        $frontCollection->addPrefix('/product');
+
+        $collection->addCollection($frontCollection);
     }
 }

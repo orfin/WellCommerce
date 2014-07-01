@@ -12,7 +12,7 @@
 namespace WellCommerce\Plugin\Layout\Controller\Admin;
 
 use Symfony\Component\Validator\Exception\ValidatorException;
-use WellCommerce\Core\Component\Controller\AbstractAdminController;
+use WellCommerce\Core\Component\Controller\Admin\AbstractAdminController;
 use WellCommerce\Plugin\Layout\Repository\LayoutPageRepositoryInterface;
 
 /**
@@ -51,7 +51,7 @@ class LayoutPageController extends AbstractAdminController
      */
     public function editAction($id)
     {
-        $layoutPage = $this->repository->find($id);
+        $layoutPageColumns = $this->repository->findPagesByThemeId($id);
 
         // render tree
         $tree = $this->createForm($this->get('layout_page.tree'), null, [
@@ -60,16 +60,16 @@ class LayoutPageController extends AbstractAdminController
         ]);
 
         // render edit form
-        $form = $this->createForm($this->get('layout_page.form'), $layoutPage, [
-            'name' => 'layout_page'
+        $form = $this->createForm($this->get('layout_page.form'), $layoutPageColumns, [
+            'name' => 'layout_page_columns'
         ]);
 
         if ($form->isValid()) {
             try {
-                $this->repository->save($form->getSubmitValuesFlat(), $id);
-                $this->addSuccessMessage(sprintf('Page "%s" saved successfully.', $layoutPage->translation->first()->name));
+                $this->repository->save($form->getSubmitValuesGrouped(), $id);
+                $this->addSuccessMessage(sprintf('Layout pages saved successfully.'));
 
-                return $this->redirect($this->generateUrl('admin.layout_page.edit', ['id' => $layoutPage->id]));
+                return $this->redirect($this->generateUrl('admin.layout_page.edit', ['id' => $id]));
 
             } catch (ValidatorException $exception) {
                 $this->addErrorMessage($exception->getMessage());
@@ -78,7 +78,6 @@ class LayoutPageController extends AbstractAdminController
 
         return Array(
             'tree'        => $tree,
-            'layout_page' => $layoutPage,
             'form'        => $form
         );
     }

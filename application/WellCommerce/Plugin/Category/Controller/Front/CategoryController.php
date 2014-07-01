@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Plugin\Category\Controller\Front;
 
-use WellCommerce\Core\Component\Controller\AbstractFrontController;
+use WellCommerce\Core\Component\Controller\Front\AbstractFrontController;
 use WellCommerce\Plugin\Category\Repository\CategoryRepositoryInterface;
 
 /**
@@ -22,15 +22,19 @@ use WellCommerce\Plugin\Category\Repository\CategoryRepositoryInterface;
  */
 class CategoryController extends AbstractFrontController
 {
-    private $repository;
-
     public function indexAction($slug)
     {
-        $this->repository->all();
+        $category = $this->repository->findBySlug($slug);
 
-        print_r($this->getQueryLog());
+        if (!$category) {
+            throw $this->createNotFoundException($this->trans('The category does not exist'));
+        }
 
+        $this->get('category.provider')->setCurrent($category);
 
+        return [
+            'layout' => $this->renderLayout()
+        ];
     }
 
     /**

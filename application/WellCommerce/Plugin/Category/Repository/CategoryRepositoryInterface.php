@@ -41,6 +41,16 @@ interface CategoryRepositoryInterface
     public function find($id);
 
     /**
+     * Returns category model by slug
+     *
+     * @param      $slug
+     * @param null $language
+     *
+     * @return mixed
+     */
+    public function findBySlug($slug, $language = null);
+
+    /**
      * Adds or updates a category model
      *
      * @param array $data

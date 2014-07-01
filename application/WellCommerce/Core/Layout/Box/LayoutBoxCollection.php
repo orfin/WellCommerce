@@ -20,23 +20,38 @@ namespace WellCommerce\Core\Layout\Box;
  */
 class LayoutBoxCollection implements \IteratorAggregate, \Countable
 {
+    /**
+     * @var array An array containing all boxes in collection
+     */
     public $boxes = [];
 
+    /**
+     * {@inheritdoc}
+     */
     public function getIterator()
     {
         return new \ArrayIterator($this->boxes);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function count()
     {
         return count($this->boxes);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function add(LayoutBox $layoutBox)
     {
         $this->boxes[] = $layoutBox;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function all()
     {
         return $this->boxes;

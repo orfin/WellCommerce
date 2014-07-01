@@ -50,14 +50,21 @@ class ShopDataGrid extends AbstractDataGrid implements DataGridInterface
      */
     public function configureOptions(array $options)
     {
-        $event_handlers            = [
+        $event_handlers = [
             'update_row' => $this->getXajaxManager()->registerFunction([
                     'update_' . $this->getId(),
                     $this,
                     'updateRow'
                 ]),
         ];
+
         $options['event_handlers'] = $event_handlers;
+
+        $options['filters'] = [
+            'layout_theme_id' => $this->get('layout_theme.repository')->getAllLayoutThemeToFilter(),
+            'offline'         => $this->getOfflineFilterOptions()
+        ];
+
 
         return parent::configureOptions($options);
     }
@@ -119,8 +126,7 @@ class ShopDataGrid extends AbstractDataGrid implements DataGridInterface
                 'align' => ColumnInterface::ALIGN_LEFT
             ],
             'filter'     => [
-                'type'    => ColumnInterface::FILTER_SELECT,
-                'options' => $this->getLayoutThemeFilterOptions()
+                'type' => ColumnInterface::FILTER_SELECT
             ]
         ]));
 
@@ -134,8 +140,7 @@ class ShopDataGrid extends AbstractDataGrid implements DataGridInterface
                 'align' => ColumnInterface::ALIGN_LEFT
             ],
             'filter'     => [
-                'type'    => ColumnInterface::FILTER_SELECT,
-                'options' => $this->getOfflineFilterOptions()
+                'type' => ColumnInterface::FILTER_SELECT
             ]
         ]));
     }
@@ -166,26 +171,6 @@ class ShopDataGrid extends AbstractDataGrid implements DataGridInterface
             'id'      => 1,
             'caption' => $this->trans('Online'),
         ];
-
-        return $options;
-    }
-
-    /**
-     * Returns options for layout theme filter
-     *
-     * @return array
-     */
-    private function getLayoutThemeFilterOptions()
-    {
-        $themes  = $this->get('layout_theme.repository')->getAllLayoutThemeToSelect();
-        $options = [];
-
-        foreach ($themes as $id => $name) {
-            $options[] = [
-                'id'      => $id,
-                'caption' => $name
-            ];
-        }
 
         return $options;
     }

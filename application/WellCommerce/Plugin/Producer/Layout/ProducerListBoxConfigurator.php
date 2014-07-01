@@ -12,42 +12,18 @@
 
 namespace WellCommerce\Plugin\Producer\Layout;
 
-use WellCommerce\Core\Component\Form\Elements\Fieldset;
-use WellCommerce\Core\Event\FormEvent;
 use WellCommerce\Core\Layout\Box\LayoutBoxConfigurator;
 use WellCommerce\Core\Layout\Box\LayoutBoxConfiguratorInterface;
 
 /**
- * Class ProducerBoxConfigurator
+ * Class ProducerListBoxConfigurator
  *
  * @package WellCommerce\Plugin\Producer\Layout
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class ProducerListBoxConfigurator extends LayoutBoxConfigurator implements LayoutBoxConfiguratorInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getController()
-    {
-        return 'WellCommerce\\Plugin\\ProducerList\\Controller\\Frontend\\ProducerListBoxController';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'Producer list';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAlias()
-    {
-        return 'wellcommerce.box.producer_list';
-    }
+    public $name = 'ProducerListBox';
 
     /**
      * {@inheritdoc}
@@ -56,12 +32,4 @@ class ProducerListBoxConfigurator extends LayoutBoxConfigurator implements Layou
     {
         return ($layoutPage == 'ProducerList');
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addConfigurationFields(FormEvent $event)
-    {
-        return false;
-    }
-} 
+}

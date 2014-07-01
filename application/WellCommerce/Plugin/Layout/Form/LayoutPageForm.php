@@ -15,7 +15,7 @@ use WellCommerce\Core\Component\Form\AbstractForm;
 use WellCommerce\Core\Component\Form\Elements\ElementInterface;
 use WellCommerce\Core\Component\Form\FormBuilder;
 use WellCommerce\Core\Component\Form\FormInterface;
-use WellCommerce\Plugin\Layout\Model\LayoutPage;
+use WellCommerce\Core\Component\Model\Collection\CustomCollection;
 
 /**
  * Class LayoutPageForm
@@ -25,23 +25,21 @@ use WellCommerce\Plugin\Layout\Model\LayoutPage;
  */
 class LayoutPageForm extends AbstractForm implements FormInterface
 {
+    private $layoutBoxes;
+
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilder $builder, array $options)
     {
-        $form = $builder->addForm($options);
+        $form              = $builder->addForm($options);
+        $layoutPages       = $this->get('layout_page.repository')->all();
+        $this->layoutBoxes = $this->get('layout_box.repository')->all();
 
-        $pages = $this->get('layout_page.repository')->all();
-
-//        print_r($pages);die();
-
-//        $layoutBoxConfigurators = $this->getLayoutManager()->getLayoutBoxConfigurators();
-
-        foreach ($pages as $page) {
+        foreach ($layoutPages as $page) {
 
             $columnData = $form->addChild($builder->addFieldset([
-                'name'  => $page->id,
+                'name'  => 'layout_page_' . $page->id,
                 'label' => $page->name
             ]));
 
@@ -56,10 +54,21 @@ class LayoutPageForm extends AbstractForm implements FormInterface
                 'retractable' => false
             ]));
 
+            $columnDataColumns->addChild($builder->addTextField([
+                'name'    => 'width',
+                'label'   => $this->trans('Width'),
+                'rules'   => [
+                    $builder->addRuleRequired('Column width is required')
+                ],
+                'default' => 0
+            ]));
+
+            $boxes = $this->getBoxesForPage($page->name);
+
             $boxData = $columnDataColumns->addChild($builder->addLayoutBoxesList([
                 'name'  => 'layout_boxes',
                 'label' => $this->trans('Choose boxes'),
-                'boxes' => $builder->makeOptions([])
+                'boxes' => $builder->makeOptions($boxes)
             ]));
         }
 
@@ -73,33 +82,49 @@ class LayoutPageForm extends AbstractForm implements FormInterface
     }
 
     /**
+     * Returns only boxes available for chosen page
+     *
+     * @param $page
+     *
+     * @return array
+     */
+    public function getBoxesForPage($page)
+    {
+        $boxes = [];
+        foreach ($this->layoutBoxes as $box) {
+            $configurator = $this->getLayoutManager()->getLayoutBoxConfigurator($box->type);
+            if ($configurator->isAvailableForLayoutPage($page)) {
+                $boxes[$box->id] = $box->translation->first()->name;
+            }
+        }
+
+        return $boxes;
+    }
+
+    /**
      * {@inheritdoc}
      */
-    public function prepareData(LayoutPage $layoutPage)
+    public function prepareData(CustomCollection $layoutPageColumns)
     {
-        $formData     = [];
-//        $accessor     = $this->getPropertyAccessor();
-//        $languageData = $category->translation->getTranslations();
-//
-//        $accessor->setValue($formData, '[required_data]', [
-//            'enabled'       => $category->enabled,
-//            'parent_id'     => $category->parent_id,
-//            'hierarchy'     => $category->hierarchy,
-//            'language_data' => $languageData
-//        ]);
-//
-//        $accessor->setValue($formData, '[meta_data]', [
-//            'language_data' => $languageData
-//        ]);
-//
-//        $accessor->setValue($formData, '[description_data]', [
-//            'language_data' => $languageData
-//        ]);
-//
-//        $accessor->setValue($formData, '[shop_data]', [
-//            'shops' => $category->shop->getPrimaryKeys()
-//        ]);
-//
+        $formData = [];
+
+        foreach ($layoutPageColumns as $column) {
+
+            $boxes = [];
+            foreach ($column->boxes as $box) {
+                $boxes[] = [
+                    'box'       => $box->layout_box_id,
+                    'span'      => $box->span,
+                    'collapsed' => 0
+                ];
+            }
+
+            $formData['layout_page_' . $column->layout_page_id]['columns_data'][$column->id] = [
+                'width'        => $column->width,
+                'layout_boxes' => $boxes
+            ];
+        }
+
         return $formData;
     }
 }

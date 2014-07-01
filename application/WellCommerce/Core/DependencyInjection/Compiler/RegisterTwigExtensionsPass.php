@@ -44,9 +44,9 @@ class RegisterTwigExtensionsPass implements CompilerPassInterface
             if (! $refClass->implementsInterface($interface)){
                 throw new \InvalidArgumentException(sprintf('Service "%s" must implement interface "%s".', $id, $interface));
             }
-            $definition->addMethodCall('addExtension', array(
+            $definition->addMethodCall('addExtension', [
                 new Reference($id)
-            ));
+            ]);
         }
     }
 }

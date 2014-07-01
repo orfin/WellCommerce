@@ -34,6 +34,7 @@ class ContactExtension extends AbstractExtension
     {
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.xml');
+        $loader->load('layout.xml');
     }
 
     /**
@@ -41,23 +42,35 @@ class ContactExtension extends AbstractExtension
      */
     public function registerRoutes(RouteCollection $collection, ContainerBuilder $container)
     {
-        $extensionCollection = new RouteCollection();
+        // admin routes
+        $adminCollection = new RouteCollection();
 
-        $extensionCollection->add('admin.contact.index', new Route('/index', array(
+        $adminCollection->add('admin.contact.index', new Route('/index', array(
             '_controller' => 'contact.admin.controller:indexAction',
         )));
 
-        $extensionCollection->add('admin.contact.add', new Route('/add', array(
+        $adminCollection->add('admin.contact.add', new Route('/add', array(
             '_controller' => 'contact.admin.controller:addAction',
         )));
 
-        $extensionCollection->add('admin.contact.edit', new Route('/edit/{id}', array(
+        $adminCollection->add('admin.contact.edit', new Route('/edit/{id}', array(
             '_controller' => 'contact.admin.controller:editAction',
             'id'          => null
         )));
 
-        $extensionCollection->addPrefix('/admin/contact');
+        $adminCollection->addPrefix('/admin/contact');
 
-        $collection->addCollection($extensionCollection);
+        $collection->addCollection($adminCollection);
+
+        // front routes
+        $frontCollection = new RouteCollection();
+
+        $frontCollection->add('front.contact.index', new Route('/contact', array(
+            '_controller' => 'contact.front.controller:indexAction',
+        )));
+
+        $collection->addCollection($frontCollection);
+
+
     }
 }

@@ -29,7 +29,6 @@ use WellCommerce\Core\Helper\TableInfo;
 abstract class AbstractModel extends BaseModel
 {
     public $timestamps = true;
-
     protected $softDelete = false;
 
     /**
@@ -59,6 +58,24 @@ abstract class AbstractModel extends BaseModel
 
         parent::update($attributes);
     }
+
+    /**
+     * Scope that filters query using given parameters
+     *
+     * @param $query
+     * @param $relation
+     * @param $column
+     * @param $value
+     *
+     * @return mixed
+     */
+    public function scopeFilterBy($query, $relation, $column, $value)
+    {
+        return $query->whereHas($relation, function ($q) use ($column, $value) {
+            $q->where($column, '=', $value);
+        });
+    }
+
 
     /**
      * Validates model attributes
@@ -153,7 +170,7 @@ abstract class AbstractModel extends BaseModel
      *
      * @return \Illuminate\Database\Eloquent\Collection|CustomCollection
      */
-    public function newCollection(array $models = Array())
+    public function newCollection(array $models = [])
     {
         return new CustomCollection($models);
     }

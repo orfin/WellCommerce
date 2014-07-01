@@ -5,6 +5,9 @@
 
     <parameters>
         <parameter key="producer.admin.controller.class">WellCommerce\Plugin\Producer\Controller\Admin\ProducerController</parameter>
+        <parameter key="producer.front.controller.class">WellCommerce\Plugin\Producer\Controller\Front\ProducerController</parameter>
+        <parameter key="producer.box.controller.class">WellCommerce\Plugin\Producer\Controller\Box\ProducerBoxController</parameter>
+        <parameter key="producer_list.box.controller.class">WellCommerce\Plugin\Producer\Controller\Box\ProducerListBoxController</parameter>
         <parameter key="producer.repository.class">WellCommerce\Plugin\Producer\Repository\ProducerRepository</parameter>
         <parameter key="producer.datagrid.class">WellCommerce\Plugin\Producer\DataGrid\ProducerDataGrid</parameter>
         <parameter key="producer.form.class">WellCommerce\Plugin\Producer\Form\ProducerForm</parameter>
@@ -13,6 +16,30 @@
 
     <services>
         <service id="producer.admin.controller" class="%producer.admin.controller.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setRepository">
+                <argument type="service" id="producer.repository"/>
+            </call>
+        </service>
+        <service id="producer.front.controller" class="%producer.front.controller.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setRepository">
+                <argument type="service" id="producer.repository"/>
+            </call>
+        </service>
+        <service id="producer.box.controller" class="%producer.box.controller.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setRepository">
+                <argument type="service" id="producer.repository"/>
+            </call>
+        </service>
+        <service id="producer_list.box.controller" class="%producer_list.box.controller.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

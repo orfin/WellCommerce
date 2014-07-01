@@ -12,7 +12,7 @@
 namespace WellCommerce\Plugin\Contact\Controller\Admin;
 
 use Symfony\Component\Validator\Exception\ValidatorException;
-use WellCommerce\Core\Component\Controller\AbstractAdminController;
+use WellCommerce\Core\Component\Controller\Admin\AbstractAdminController;
 use WellCommerce\Plugin\Contact\Repository\ContactRepositoryInterface;
 
 /**
@@ -50,10 +50,8 @@ class ContactController extends AbstractAdminController
                 $this->addSuccessMessage('Changes saved successfully.');
 
                 return $this->redirect($this->getDefaultUrl());
-
             } catch (ValidatorException $exception) {
                 $this->addErrorMessage($exception->getMessage());
-                $this->getFlashBag()->add(self::MESSAGE_TYPE_ERROR, $this->trans($exception->getMessage()));
             }
         }
 

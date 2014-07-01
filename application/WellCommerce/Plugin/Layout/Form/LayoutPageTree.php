@@ -14,6 +14,7 @@ namespace WellCommerce\Plugin\Layout\Form;
 use WellCommerce\Core\Component\Form\AbstractForm;
 use WellCommerce\Core\Component\Form\FormBuilder;
 use WellCommerce\Core\Component\Form\FormInterface;
+use WellCommerce\Core\Component\Form\Option;
 use WellCommerce\Plugin\Layout\Event\LayoutPageFormEvent;
 
 /**

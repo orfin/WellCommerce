@@ -46,7 +46,7 @@ class HomePageExtension extends AbstractExtension
             '_controller' => 'home_page.admin.controller:indexAction',
         )));
 
-        $extensionCollection->add('front.home_page.index', new Route('/index', array(
+        $extensionCollection->add('front.home_page.index', new Route('/', array(
             '_controller' => 'home_page.front.controller:indexAction',
         )));
 
