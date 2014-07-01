@@ -357,7 +357,7 @@ class ProductForm extends AbstractForm implements FormInterface
     {
         $formData     = [];
         $accessor     = $this->getPropertyAccessor();
-        $languageData = $product->translation->getTranslations();
+        $languageData = $product->translations->getTranslations();
 
         $accessor->setValue($formData, '[basic_pane]', [
             'language_data' => $languageData,

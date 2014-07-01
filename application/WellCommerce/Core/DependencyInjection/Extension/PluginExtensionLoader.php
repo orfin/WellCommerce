@@ -69,4 +69,21 @@ class PluginExtensionLoader
 
         }
     }
+
+    /**
+     * Dumps route collection
+     */
+    public function dumpRouting()
+    {
+        $filesystem = new Filesystem();
+        $dumper     = new PhpGeneratorDumper($this->routeCollection);
+        $filesystem->dumpFile(ROOTPATH . 'var' . DS . sprintf('%s.php', self::ROUTING_GENERATOR_CLASS), $dumper->dump(Array(
+            'class' => self::ROUTING_GENERATOR_CLASS
+        )));
+
+        $dumper = new PhpMatcherDumper($this->routeCollection);
+        $filesystem->dumpFile(ROOTPATH . 'var' . DS . sprintf('%s.php', self::ROUTING_MATCHER_CLASS), $dumper->dump(Array(
+            'class' => self::ROUTING_MATCHER_CLASS
+        )));
+    }
 }

@@ -35,14 +35,19 @@ use WellCommerce\Core\DependencyInjection\Schema\Dumper;
  */
 final class ServiceContainerBuilder
 {
-
     /**
      * Cached container class name
      *
      * @var string
      */
     const SERVICE_CONTAINER_CLASS = 'ServiceContainer';
-    const DATABASE_COLUMNS_CLASS  = 'TableInfo';
+
+    /**
+     * Class name for table info helper
+     *
+     * @var string
+     */
+    const DATABASE_COLUMNS_CLASS = 'TableInfo';
 
     /**
      * Cached container parent class name

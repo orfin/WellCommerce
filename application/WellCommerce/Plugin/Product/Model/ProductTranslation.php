@@ -27,18 +27,6 @@ class ProductTranslation extends AbstractModel implements ModelInterface
     protected $fillable = ['product_id', 'language_id'];
 
     /**
-     * Override default collection model
-     *
-     * @param array $models
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|\WellCommerce\Core\Component\Model\Collection\CustomCollection|TranslationCollection
-     */
-    public function newCollection(array $models = [])
-    {
-        return new TranslationCollection($models);
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function getValidationXmlMapping()

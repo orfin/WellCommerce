@@ -83,21 +83,21 @@ class Category extends AbstractModel implements ModelInterface, TranslatableMode
     /**
      * Relation with CategoryTranslation model
      *
-     * @return \Illuminate\Database\Eloquent\Relations\hasMany
-     */
-    public function translations()
-    {
-        return $this->hasMany('WellCommerce\Plugin\Category\Model\CategoryTranslation');
-    }
-
-    /**
-     * Relation with CategoryTranslation model
-     *
      * @return \Illuminate\Database\Eloquent\Relations\hasOne
      */
     public function translation()
     {
         return $this->hasOne('WellCommerce\Plugin\Category\Model\CategoryTranslation');
+    }
+
+    /**
+     * Relation with CategoryTranslation model
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function translations()
+    {
+        return $this->hasMany('WellCommerce\Plugin\Category\Model\CategoryTranslation');
     }
 
     /**

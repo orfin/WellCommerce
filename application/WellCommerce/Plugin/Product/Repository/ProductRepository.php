@@ -28,7 +28,7 @@ class ProductRepository extends AbstractRepository implements ProductRepositoryI
      */
     public function all()
     {
-        return Product::with('translation', 'shop', 'deliverer', 'photos', 'category')->get();
+        return Product::with('translations', 'shop', 'deliverer', 'photos', 'category')->get();
     }
 
     /**
@@ -36,7 +36,7 @@ class ProductRepository extends AbstractRepository implements ProductRepositoryI
      */
     public function find($id)
     {
-        return Product::with('translation', 'shop', 'deliverer', 'photos', 'category')->findOrFail($id);
+        return Product::with('translations', 'shop', 'deliverer', 'photos', 'category')->findOrFail($id);
     }
 
     /**

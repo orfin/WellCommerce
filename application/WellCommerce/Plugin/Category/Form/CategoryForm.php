@@ -14,8 +14,6 @@ namespace WellCommerce\Plugin\Category\Form;
 use WellCommerce\Core\Component\Form\AbstractForm;
 use WellCommerce\Core\Component\Form\FormBuilder;
 use WellCommerce\Core\Component\Form\FormInterface;
-use WellCommerce\Core\Form;
-use WellCommerce\Plugin\Category\Event\CategoryFormEvent;
 use WellCommerce\Plugin\Category\Model\Category;
 
 /**
@@ -204,7 +202,7 @@ class CategoryForm extends AbstractForm implements FormInterface
     {
         $formData     = [];
         $accessor     = $this->getPropertyAccessor();
-        $languageData = $category->translation->getTranslations();
+        $languageData = $category->translations->getTranslations();
 
         $accessor->setValue($formData, '[required_data]', [
             'enabled'       => $category->enabled,

@@ -72,6 +72,8 @@ class Dumper
     }
 
     /**
+     * Generates string containing columns as a variable which is used in class generator
+     *
      * @return string
      */
     private function generateColumns()
@@ -87,6 +89,13 @@ class Dumper
         return $columns;
     }
 
+    /**
+     * Dumps generated class as a file
+     *
+     * @param array $options
+     *
+     * @return string
+     */
     public function dump(array $options = [])
     {
         return <<<EOF

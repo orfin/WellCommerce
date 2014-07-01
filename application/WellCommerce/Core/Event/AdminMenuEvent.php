@@ -22,7 +22,6 @@ use WellCommerce\Plugin\AdminMenu\Builder\AdminMenuBuilderInterface;
  */
 class AdminMenuEvent extends Event
 {
-
     /**
      * @var \WellCommerce\Plugin\AdminMenu\Builder\AdminMenuBuilderInterface
      */

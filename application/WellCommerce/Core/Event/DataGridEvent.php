@@ -22,7 +22,6 @@ use WellCommerce\Core\Component\DataGrid\DataGridInterface;
  */
 class DataGridEvent extends Event
 {
-
     /**
      * @var \WellCommerce\Core\Component\DataGrid\DataGridInterface
      */
