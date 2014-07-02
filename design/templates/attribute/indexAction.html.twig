@@ -1,0 +1,8 @@
+{% extends "layout.html.twig" %}
+{% block content %}
+    <h2>{% trans %}Attributes{% endtrans %}</h2>
+    <ul class="possibilities">
+        <li><a href="{{ path('admin.attribute.add') }}" class="button"><span>{% trans %}Add{% endtrans %}</span></a></li>
+    </ul>
+    {{ form(form) }}
+{% endblock %}

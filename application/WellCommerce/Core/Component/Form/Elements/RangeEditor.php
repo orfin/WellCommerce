@@ -12,6 +12,10 @@
 
 namespace WellCommerce\Core\Component\Form\Elements;
 
+use Symfony\Component\OptionsResolver\Options;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use WellCommerce\Plugin\Tax\Repository\TaxRepositoryInterface;
+
 /**
  * Class RangeEditor
  *
@@ -20,28 +24,81 @@ namespace WellCommerce\Core\Component\Form\Elements;
  */
 class RangeEditor extends OptionedField implements ElementInterface
 {
+    const RANGE_PRECISION = 2;
+    const PRICE_PRECISION = 2;
+    /**
+     * @var TaxRepositoryInterface
+     */
+    private $repository;
 
-    public function __construct($attributes)
+    /**
+     * Constructor
+     *
+     * @param                        $attributes Element options
+     * @param TaxRepositoryInterface $repository Tax repository
+     */
+    public function __construct($attributes, TaxRepositoryInterface $repository)
     {
+        $this->repository = $repository;
         parent::__construct($attributes);
-        if (isset($this->attributes['allow_vat']) && !$this->attributes['allow_vat']) {
-            $this->attributes['vat_values'] = [];
-        } else {
-            $this->attributes['vat_values'] = $attributes['vat_values'];
-        }
-
-        if (!isset($this->attributes['range_precision'])) {
-            $this->attributes['range_precision'] = 2;
-        }
-
-        if (!isset($this->attributes['price_precision'])) {
-            $this->attributes['price_precision'] = 2;
-        }
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function configureAttributes(OptionsResolverInterface $resolver)
+    {
+        $resolver->setRequired([
+            'name',
+            'label',
+        ]);
+
+        $resolver->setOptional([
+            'comment',
+            'suffix',
+            'price_precision',
+            'range_precision',
+            'range_suffix',
+            'prefixes',
+            'allow_vat',
+            'error',
+            'vat_values',
+        ]);
+
+        $resolver->setDefaults([
+            'range_precision' => self::RANGE_PRECISION,
+            'price_precision' => self::PRICE_PRECISION,
+            'vat_values'      =>
+                function (Options $options) {
+                    if (isset($options['allow_vat']) && !$options['allow_vat']) {
+                        return [];
+                    }
+
+                    return $options['vat_values'];
+                },
+        ]);
+
+        $resolver->setAllowedTypes([
+            'name'            => 'string',
+            'label'           => 'string',
+            'comment'         => 'string',
+            'suffix'          => 'string',
+            'price_precision' => 'int',
+            'range_precision' => 'int',
+            'range_suffix'    => 'string',
+            'prefixes'        => 'array',
+            'allow_vat'       => 'bool',
+            'error'           => 'string',
+            'vat_values'      => 'array',
+        ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function prepareAttributesJs()
     {
-        $attributes = Array(
+        return [
             $this->formatAttributeJs('name', 'sName'),
             $this->formatAttributeJs('label', 'sLabel'),
             $this->formatAttributeJs('comment', 'sComment'),
@@ -57,8 +114,6 @@ class RangeEditor extends OptionedField implements ElementInterface
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
             $this->formatDefaultsJs()
-        );
-
-        return $attributes;
+        ];
     }
 }

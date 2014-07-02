@@ -279,9 +279,7 @@ class FormBuilder extends AbstractComponent
      */
     public function addShopSelector(array $options)
     {
-        $options['stores'] = $this->get('company.repository')->getShopsTree();
-
-        return new Elements\ShopSelector($options);
+        return new Elements\ShopSelector($options, $this->get('company.repository'));
     }
 
     /**
@@ -330,6 +328,18 @@ class FormBuilder extends AbstractComponent
     public function addStaticText(array $options)
     {
         return new Elements\StaticText($options);
+    }
+
+    /**
+     * Shortcut for adding AttributeEditor element
+     *
+     * @param array $options
+     *
+     * @return Elements\AttributeEditor
+     */
+    public function addAttributeEditor(array $options)
+    {
+        return new Elements\AttributeEditor($options, $this->get('attribute.repository'));
     }
 
     /**
@@ -513,7 +523,7 @@ class FormBuilder extends AbstractComponent
 
         $options['vat_values'] = $this->get('tax.repository')->getAllTaxToSelect();
 
-        return new Elements\RangeEditor($options);
+        return new Elements\RangeEditor($options, $this->get('tax.repository'));
     }
 
     /**

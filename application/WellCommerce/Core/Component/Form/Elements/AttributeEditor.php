@@ -11,6 +11,9 @@
  */
 namespace WellCommerce\Core\Component\Form\Elements;
 
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use WellCommerce\Plugin\Attribute\Repository\AttributeRepositoryInterface;
+
 /**
  * Class AttributeEditor
  *
@@ -19,9 +22,15 @@ namespace WellCommerce\Core\Component\Form\Elements;
  */
 class AttributeEditor extends Field implements ElementInterface
 {
+    /**
+     * @var AttributeRepositoryInterface Repository
+     */
+    private $repository;
 
-    public function __construct($attributes)
+    public function __construct($attributes, AttributeRepositoryInterface $repository)
     {
+        $this->repository = $repository;
+
         $attributes['attributes'] = App::getModel('attributeproduct/attributeproduct')->getAttributeProductFull();
         parent::__construct($attributes);
         App::getRegistry()->xajaxInterface->registerFunction(array(
@@ -96,9 +105,50 @@ class AttributeEditor extends Field implements ElementInterface
         );
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function configureAttributes(OptionsResolverInterface $resolver)
+    {
+        $resolver->setRequired([
+            'name',
+            'label',
+            'set',
+            'attributes',
+            'onAfterDelete',
+            'deleteAttributeFunction',
+            'renameAttributeFunction',
+            'renameValueFunction',
+        ]);
+
+        $resolver->setOptional([
+            'error',
+            'comment',
+        ]);
+
+        $resolver->setDefaults([
+            'attributes',
+            'comment',
+        ]);
+
+        $resolver->setAllowedTypes([
+            'name'                    => ['int', 'string'],
+            'label'                   => 'string',
+            'set'                     => ['int', 'string'],
+            'attributes'              => 'array',
+            'onAfterDelete'           => 'string',
+            'deleteAttributeFunction' => 'string',
+            'renameAttributeFunction' => 'string',
+            'renameValueFunction'     => 'string'
+        ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function prepareAttributesJs()
     {
-        $attributes = Array(
+        return [
             $this->formatAttributeJs('name', 'sName'),
             $this->formatAttributeJs('label', 'sLabel'),
             $this->formatAttributeJs('comment', 'sComment'),
@@ -113,8 +163,6 @@ class AttributeEditor extends Field implements ElementInterface
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
             $this->formatDefaultsJs()
-        );
-
-        return $attributes;
+        ];
     }
 }

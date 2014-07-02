@@ -13,6 +13,7 @@
 namespace WellCommerce\Core\Component\Form\Elements;
 
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use WellCommerce\Plugin\Company\Repository\CompanyRepositoryInterface;
 
 /**
  * Class ShopSelector
@@ -22,9 +23,20 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class ShopSelector extends Field implements ElementInterface
 {
-    public function __construct($attributes)
+    /**
+     * @var CompanyRepositoryInterface Repository
+     */
+    private $repository;
+
+    /**Constructor
+     *
+     * @param                            $attributes Element options
+     * @param CompanyRepositoryInterface $repository Repositorys
+     */
+    public function __construct($attributes, CompanyRepositoryInterface $repository)
     {
-        $attributes['stores'] = $this->prepareShopsTree($attributes['stores']);
+        $this->repository     = $repository;
+        $attributes['stores'] = $this->prepareShopsTree($this->repository->getShopsTree());
         parent::__construct($attributes);
     }
 
