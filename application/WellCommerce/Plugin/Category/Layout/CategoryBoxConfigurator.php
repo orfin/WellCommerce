@@ -27,6 +27,11 @@ use WellCommerce\Core\Layout\Box\LayoutBoxConfiguratorInterface;
  */
 class CategoryBoxConfigurator extends LayoutBoxConfigurator implements LayoutBoxConfiguratorInterface
 {
+    /**
+     * Layout box name
+     *
+     * @var string
+     */
     public $name = 'CategoryBox';
 
     /**

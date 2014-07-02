@@ -10,31 +10,32 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Plugin\Category\Layout;
+namespace WellCommerce\Plugin\Cart\Layout;
 
 use WellCommerce\Core\Layout\Box\LayoutBoxConfigurator;
 use WellCommerce\Core\Layout\Box\LayoutBoxConfiguratorInterface;
 
 /**
- * Class CategoryInfoBoxConfigurator
+ * Class CartBoxConfigurator
  *
- * @package WellCommerce\Plugin\Category\Configurator\Box
+ * @package WellCommerce\Plugin\Cart\Configurator\Box
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CategoryInfoBoxConfigurator extends LayoutBoxConfigurator implements LayoutBoxConfiguratorInterface
+class CartBoxConfigurator extends LayoutBoxConfigurator implements LayoutBoxConfiguratorInterface
 {
     /**
-     * Layout box name
-     *
-     * @var string
+     * @var string CartBoxConfigurator type
      */
-    public $name = 'CategoryInfoBox';
+    public $type;
 
     /**
-     * {@inheritdoc}
+     * @var string CartBoxController service name
      */
-    public function isAvailableForLayoutPage($layoutPage)
-    {
-        return ($layoutPage == 'Category');
-    }
+    public $controller;
+
+    /**
+     * @var string CartBoxConfigurator box name
+     */
+    public $name = 'CartBox';
+
 }

@@ -56,8 +56,6 @@ class LayoutBoxRepository extends AbstractRepository implements LayoutBoxReposit
     {
         $data = $this->filterValues($data);
 
-        print_r($data);
-
         $this->transaction(function () use ($data, $id) {
 
             $layoutBox = LayoutBox::firstOrCreate([

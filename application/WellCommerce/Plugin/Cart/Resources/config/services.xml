@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="contact.admin.controller.class">WellCommerce\Plugin\Cart\Controller\Admin\CartController</parameter>
+        <parameter key="contact.front.controller.class">WellCommerce\Plugin\Cart\Controller\Front\CartController</parameter>
+        <parameter key="contact.box.controller.class">WellCommerce\Plugin\Cart\Controller\Box\CartBoxController</parameter>
+        <parameter key="contact.repository.class">WellCommerce\Plugin\Cart\Repository\CartRepository</parameter>
+        <parameter key="contact.datagrid.class">WellCommerce\Plugin\Cart\DataGrid\CartDataGrid</parameter>
+        <parameter key="contact.form.class">WellCommerce\Plugin\Cart\Form\CartForm</parameter>
+        <parameter key="contact.listener.class">WellCommerce\Plugin\Cart\EventListener\CartListener</parameter>
+        <parameter key="contact_box.layout.configurator.class">WellCommerce\Plugin\Cart\Layout\CartBoxConfigurator</parameter>
+        <parameter key="twig.extension.contact.class">WellCommerce\Plugin\Cart\Twig\Cart</parameter>
+    </parameters>
+
+    <services>
+        <service id="contact.admin.controller" class="%contact.admin.controller.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setRepository">
+                <argument type="service" id="contact.repository"/>
+            </call>
+        </service>
+
+        <service id="contact.front.controller" class="%contact.front.controller.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setLayout">
+                <argument>Cart</argument>
+                <argument>true</argument>
+                <argument>3600</argument>
+            </call>
+        </service>
+
+        <service id="contact.box.controller" class="%contact.box.controller.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setRepository">
+                <argument type="service" id="contact.repository"/>
+            </call>
+        </service>
+
+        <service id="contact.repository" class="%contact.repository.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="contact.datagrid" class="%contact.datagrid.class%">
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="contact.repository"/>
+        </service>
+
+        <service id="contact.form" class="%contact.form.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="contact.listener" class="%contact.listener.class%">
+            <argument type="service" id="service_container"/>
+            <tag name="kernel.event_subscriber" />
+        </service>
+
+        <service id="twig.extension.contact" class="%twig.extension.contact.class%">
+            <argument type="service" id="service_container" />
+            <tag name="twig.extension" />
+        </service>
+
+    </services>
+</container>
