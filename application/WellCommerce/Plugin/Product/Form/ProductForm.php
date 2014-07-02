@@ -47,8 +47,8 @@ class ProductForm extends AbstractForm implements FormInterface
         ]));
 
         $basicLanguageData = $basicPane->addChild($builder->addFieldsetLanguage([
-            'name'      => 'language_data',
-            'label'     => $this->trans('Translations'),
+            'name'  => 'language_data',
+            'label' => $this->trans('Translations'),
         ]));
 
         $basicLanguageData->addChild($builder->addTextField([
@@ -118,8 +118,8 @@ class ProductForm extends AbstractForm implements FormInterface
         ]));
 
         $languageData = $metaData->addChild($builder->addFieldsetLanguage([
-            'name'      => 'language_data',
-            'label'     => $this->trans('Translations'),
+            'name'  => 'language_data',
+            'label' => $this->trans('Translations'),
         ]));
 
         $languageData->addChild($builder->addTextField([
@@ -237,6 +237,12 @@ class ProductForm extends AbstractForm implements FormInterface
             'label' => $this->trans('Measurements')
         ]));
 
+        $measurementsPane->addChild($builder->addSelect([
+            'name'    => 'unit_id',
+            'label'   => $this->trans('Unit'),
+            'options' => $builder->makeOptions($this->get('unit.repository')->getAllUnitToSelect())
+        ]));
+
         $measurementsPane->addChild($builder->addTextField([
             'name'    => 'weight',
             'label'   => $this->trans('Weight'),
@@ -269,7 +275,6 @@ class ProductForm extends AbstractForm implements FormInterface
         $measurementsPane->addChild($builder->addTextField([
             'name'    => 'depth',
             'label'   => $this->trans('Depth'),
-            'suffix'  => 'cm',
             'filters' => [
                 $builder->addFilterCommaToDotChanger()
             ]
@@ -294,8 +299,8 @@ class ProductForm extends AbstractForm implements FormInterface
         ]));
 
         $descriptionLanguageData = $descriptionPane->addChild($builder->addFieldsetLanguage([
-            'name'      => 'language_data',
-            'label'     => $this->trans('Translations'),
+            'name'  => 'language_data',
+            'label' => $this->trans('Translations'),
         ]));
 
         $descriptionLanguageData->addChild($builder->addRichTextEditor([
@@ -338,8 +343,8 @@ class ProductForm extends AbstractForm implements FormInterface
         ]));
 
         $shopData->addChild($builder->addShopSelector([
-            'name'   => 'shops',
-            'label'  => $this->trans('Shops'),
+            'name'  => 'shops',
+            'label' => $this->trans('Shops'),
         ]));
 
         $form->addFilters([
@@ -400,6 +405,7 @@ class ProductForm extends AbstractForm implements FormInterface
             'width'        => $product->width,
             'height'       => $product->height,
             'depth'        => $product->depth,
+            'unit_id'      => $product->unit_id,
             'package_size' => $product->package_size,
 
         ]);

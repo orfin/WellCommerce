@@ -24,8 +24,8 @@ class TechnicalDataEditor extends Field implements ElementInterface
     public function __construct($attributes)
     {
         parent::__construct($attributes);
-        $this->attributes['attribute_groups']     = $this->GetAttributeGroups();
-        $this->attributes['technicalattributes'] = $this->GetTechnicalAttributes();
+        $this->attributes['attribute_groups']    = $this->getAttributeGroups();
+        $this->attributes['technicalattributes'] = $this->getTechnicalAttributes();
         $this->registerXajaxMethod('fGetTechnicalAttributesForSet', Array(
             $this,
             'getTechnicalAttributesForSet'
@@ -66,7 +66,7 @@ class TechnicalDataEditor extends Field implements ElementInterface
 
     public function prepareAttributesJs()
     {
-        $attributes = Array(
+        $attributes = [
             $this->formatAttributeJs('name', 'sName'),
             $this->formatAttributeJs('label', 'sLabel'),
             $this->formatAttributeJs('error', 'sError'),
@@ -78,7 +78,7 @@ class TechnicalDataEditor extends Field implements ElementInterface
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
             $this->formatDefaultsJs()
-        );
+        ];
 
         return $attributes;
     }
@@ -89,18 +89,18 @@ class TechnicalDataEditor extends Field implements ElementInterface
             $request['attributeGroupId'] = 'new';
         }
 
-        return Array(
+        return [
             'attributeGroupId' => App::GetModel('TechnicalData')->saveGroup($request['attributeGroupId'], $request['attributeGroupName'])
-        );
+        ];
     }
 
     public function deleteAttributeGroup($request)
     {
         App::GetModel('TechnicalData')->DeleteGroup($request['attributeGroupId']);
 
-        return Array(
+        return [
             'attributeGroupId' => $request['attributeGroupId']
-        );
+        ];
     }
 
     public function saveAttribute($request)
@@ -109,51 +109,51 @@ class TechnicalDataEditor extends Field implements ElementInterface
             $request['attributeId'] = 'new';
         }
 
-        return Array(
+        return [
             'attributeId' => App::GetModel('TechnicalData')->saveAttribute($request['attributeId'], $request['attributeName'], $request['attributeType'])
-        );
+        ];
     }
 
     public function deleteAttribute($request)
     {
         App::GetModel('TechnicalData')->deleteAttribute($request['attributeId']);
 
-        return Array(
+        return [
             'attributeId' => $request['attributeId']
-        );
+        ];
     }
 
     public function saveSet($request)
     {
         $setId = App::GetModel('TechnicalData')->saveSet($request['setId'], $request['setName'], $request['setData']);
 
-        return Array(
+        return [
             'setId' => $setId
-        );
+        ];
     }
 
     public function deleteSet($request)
     {
         App::GetModel('TechnicalData')->deleteSet($request['setId']);
 
-        return Array(
+        return [
             'setId' => $request['setId']
-        );
+        ];
     }
 
     public function getSets($request)
     {
-        return Array(
+        return [
             'aoSets' => App::GetModel('TechnicalData')->getSets($request['productId'], $request['categoryIds'])
-        );
+        ];
     }
 
-    public function GetAttributeGroups()
+    public function getAttributeGroups()
     {
         return App::getModel('TechnicalData')->GetGroups();
     }
 
-    public function GetTechnicalAttributes()
+    public function getTechnicalAttributes()
     {
         return App::getModel('TechnicalData')->getAttributes();
     }
@@ -165,10 +165,10 @@ class TechnicalDataEditor extends Field implements ElementInterface
 
     public function getTechnicalAttributesForSet($request)
     {
-        return Array(
+        return [
             'setId'        => $request['setId'],
             'aoAttributes' => App::getModel('TechnicalData')->GetSetData($request['setId'])
-        );
+        ];
     }
 
 }
