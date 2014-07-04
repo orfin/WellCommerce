@@ -67,4 +67,11 @@ interface ClientGroupRepositoryInterface
      * @return mixed
      */
     public function getAllClientGroupToSelect();
+
+    /**
+     * Returns Collection as ke-value pairs ready to use in datagrid filters
+     *
+     * @return mixed
+     */
+    public function getAllClientGroupToFilter();
 }

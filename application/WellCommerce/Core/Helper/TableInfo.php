@@ -37,6 +37,8 @@ class TableInfo
         'category' => ['id','hierarchy','enabled','parent_id','file_id','created_at','updated_at'],
         'category_shop' => ['id','category_id','shop_id','created_at','updated_at'],
         'category_translation' => ['id','name','slug','short_description','description','meta_keywords','meta_title','meta_description','category_id','language_id','created_at','updated_at'],
+        'client' => ['id','first_name','last_name','phone','email','password','client_group_id','shop_id','discount','active','created_at','updated_at'],
+        'client_address' => ['id','client_id','type','first_name','last_name','phone','street','street_no','flat_no','post_code','city','company_name','vat_id','country','created_at','updated_at'],
         'client_group' => ['id','discount','created_at','updated_at'],
         'client_group_translation' => ['id','name','client_group_id','language_id','created_at','updated_at'],
         'company' => ['id','name','short_name','street','streetno','flatno','postcode','province','city','country','created_at','updated_at'],

@@ -62,16 +62,6 @@ class AttributeForm extends AbstractForm implements FormInterface
             ]
         ]));
 
-        $groupData->addChild($builder->addTree([
-            'name'       => 'category',
-            'label'      => $this->trans('Categories'),
-            'choosable'  => false,
-            'selectable' => true,
-            'sortable'   => false,
-            'clickable'  => false,
-            'items'      => $this->get('category.repository')->getCategoriesTree()
-        ]));
-
         $attributeData = $form->addChild($builder->addFieldset([
             'name'  => 'attribute_data',
             'class' => 'attribute-data',

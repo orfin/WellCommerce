@@ -75,7 +75,7 @@ abstract class AbstractDataGrid extends AbstractComponent
                 DataGridInterface::ACTION_EDIT,
                 DataGridInterface::ACTION_DELETE
             ],
-            'filters'         => []
+            'filters'        => []
         ], $options);
     }
 
@@ -149,18 +149,22 @@ abstract class AbstractDataGrid extends AbstractComponent
     /**
      * Returns datagrid data
      *
-     * @param $request
-     * @param $processFunction
+     * @param array $request
      *
-     * @return xajaxResponse
+     * @return array
      */
-    public function loadData($request)
+    public function loadData(array $request)
     {
         $offset = (int)$request['starting_from'];
         $limit  = (int)$request['limit'];
 
+        // set offset
         $this->query->skip($offset);
+
+        // set limit
         $this->query->take($limit);
+
+        // add order by clause
         $this->query->orderBy($request['order_by'], $request['order_dir']);
 
         $connection = $this->getDb()->getConnection();
@@ -201,7 +205,7 @@ abstract class AbstractDataGrid extends AbstractComponent
         return [
             'data_id'       => isset($request['id']) ? $request['id'] : '',
             'rows_num'      => $total,
-            'starting_from' => $request['starting_from'],
+            'starting_from' => $offset,
             'total'         => $total,
             'filtered'      => $total,
             'rows'          => $result

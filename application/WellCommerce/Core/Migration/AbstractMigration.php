@@ -57,14 +57,19 @@ abstract class AbstractMigration
      *
      * @return object Service
      */
-    protected function get($id)
+    final protected function get($id)
     {
         return $this->container->get($id);
     }
 
-    protected function getDb()
+    final protected function getDb()
     {
         return $this->container->get('database_manager');
+    }
+
+    final protected function transaction(\Closure $callback)
+    {
+        return $this->getDb()->getConnection()->transaction($callback);
     }
 
     protected function getFinder()

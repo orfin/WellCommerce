@@ -22,12 +22,13 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
  */
 class AdminMenuBuilder implements \IteratorAggregate, \Countable, AdminMenuBuilderInterface
 {
+    /**
+     * @var array Items collection
+     */
     private $items = [];
 
     /**
-     * Returns iterator
-     *
-     * @return \ArrayIterator|\Traversable
+     * {@inheritdoc}
      */
     public function getIterator()
     {
@@ -35,9 +36,7 @@ class AdminMenuBuilder implements \IteratorAggregate, \Countable, AdminMenuBuild
     }
 
     /**
-     * Returns menu items count
-     *
-     * @return int
+     * {@inheritdoc}
      */
     public function count()
     {
@@ -45,15 +44,16 @@ class AdminMenuBuilder implements \IteratorAggregate, \Countable, AdminMenuBuild
     }
 
     /**
-     * Returns all columns
-     *
-     * @return mixed
+     * {@inheritdoc}
      */
     public function all()
     {
         return $this->items;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getMenu()
     {
         $tree = $this->items['menu'];
@@ -63,6 +63,9 @@ class AdminMenuBuilder implements \IteratorAggregate, \Countable, AdminMenuBuild
         return $tree;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function sortMenu($a, $b)
     {
         $a->sortChildren();
@@ -71,16 +74,14 @@ class AdminMenuBuilder implements \IteratorAggregate, \Countable, AdminMenuBuild
         if ($a->getSortOrder() == $b->getSortOrder()) {
             return 0;
         }
+
         return $a->getSortOrder() > $b->getSortOrder() ? 1 : -1;
     }
 
     /**
-     * Adds new admin menu element
-     *
-     * @param AdminMenuItem $item Menu item
-     * @param               $path Property path
+     * {@inheritdoc}
      */
-    public function add(AdminMenuItem $item)
+    public function add(AdminMenuItemInterface $item)
     {
         $accessor = PropertyAccess::createPropertyAccessor();
         $accessor->setValue($this->items, $item->getPath(), $item);

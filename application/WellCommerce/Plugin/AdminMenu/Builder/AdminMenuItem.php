@@ -23,7 +23,14 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class AdminMenuItem implements AdminMenuItemInterface, \ArrayAccess
 {
+    /**
+     * @var array Item options
+     */
     public $options = [];
+
+    /**
+     * @var array Item children
+     */
     public $children = [];
 
     /**

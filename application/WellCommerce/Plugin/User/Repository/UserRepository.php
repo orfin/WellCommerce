@@ -18,9 +18,9 @@ use WellCommerce\Plugin\User\Model\UserDataInterface;
 use WellCommerce\Plugin\User\Model\UserTranslation;
 
 /**
- * Class UserAbstractRepository
+ * Class UserRepository
  *
- * @package WellCommerce\Plugin\User\AbstractRepository
+ * @package WellCommerce\Plugin\User\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class UserRepository extends AbstractRepository implements UserRepositoryInterface

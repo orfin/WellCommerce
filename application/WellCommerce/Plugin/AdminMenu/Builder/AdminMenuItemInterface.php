@@ -12,7 +12,12 @@
 
 namespace WellCommerce\Plugin\AdminMenu\Builder;
 
-
+/**
+ * Interface AdminMenuItemInterface
+ *
+ * @package WellCommerce\Plugin\AdminMenu\Builder
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
+ */
 interface AdminMenuItemInterface
 {
     /**
