@@ -13,7 +13,6 @@ namespace WellCommerce\Plugin\Attribute\Model;
 
 use WellCommerce\Core\Component\Model\AbstractModel;
 use WellCommerce\Core\Component\Model\ModelInterface;
-use WellCommerce\Core\Component\Model\TranslatableModelInterface;
 
 /**
  * Class Attribute

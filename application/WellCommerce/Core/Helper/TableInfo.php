@@ -24,6 +24,14 @@ class TableInfo
 {
     private static $columns  = [
         'admin_menu' => ['id','name','icon','route','controller','sort_order','parent_id'],
+        'attribute' => ['id','created_at','updated_at'],
+        'attribute_attribute_value' => ['id','attribute_id','attribute_value_id','created_at','updated_at'],
+        'attribute_group' => ['id','created_at','updated_at'],
+        'attribute_group_attribute' => ['id','attribute_id','attribute_group_id','created_at','updated_at'],
+        'attribute_group_translation' => ['id','name','attribute_group_id','language_id','created_at','updated_at'],
+        'attribute_translation' => ['id','name','attribute_id','language_id','created_at','updated_at'],
+        'attribute_value' => ['id','created_at','updated_at'],
+        'attribute_value_translation' => ['id','name','attribute_value_id','language_id','created_at','updated_at'],
         'availability' => ['id','created_at','updated_at'],
         'availability_translation' => ['id','name','description','availability_id','language_id','created_at','updated_at'],
         'category' => ['id','hierarchy','enabled','parent_id','file_id','created_at','updated_at'],

@@ -11,7 +11,9 @@
  */
 namespace WellCommerce\Core\Component\Form\Elements;
 
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use WellCommerce\Core\Helper\XajaxManager;
 use WellCommerce\Plugin\Attribute\Repository\AttributeRepositoryInterface;
 
 /**
@@ -23,36 +25,56 @@ use WellCommerce\Plugin\Attribute\Repository\AttributeRepositoryInterface;
 class AttributeEditor extends Field implements ElementInterface
 {
     /**
-     * @var AttributeRepositoryInterface Repository
+     * @var AttributeRepositoryInterface
      */
     private $repository;
 
-    public function __construct($attributes, AttributeRepositoryInterface $repository)
-    {
-        $this->repository = $repository;
+    /**
+     * @var \WellCommerce\Core\Helper\XajaxManager
+     */
+    private $xajaxManager;
 
-        $attributes['attributes'] = App::getModel('attributeproduct/attributeproduct')->getAttributeProductFull();
-        parent::__construct($attributes);
-        App::getRegistry()->xajaxInterface->registerFunction(array(
+    /**
+     * Constructor
+     *
+     * @param          array               $attributes Element options
+     * @param AttributeRepositoryInterface $repository
+     * @param XajaxManager                 $xajaxManager
+     */
+    public function __construct($attributes, AttributeRepositoryInterface $repository, XajaxManager $xajaxManager)
+    {
+        $this->repository         = $repository;
+        $this->xajaxManager       = $xajaxManager;
+        $attributes['attributes'] = $this->repository->getAttributeProductFull();
+
+        $this->attributes['deleteAttributeFunction'] = $this->xajaxManager->registerFunction([
             'DeleteAttribute',
             $this,
             'deleteAttribute'
-        ));
-        App::getRegistry()->xajaxInterface->registerFunction(array(
+        ]);
+
+        $this->attributes['renameAttributeFunction'] = $this->xajaxManager->registerFunction([
             'RenameAttribute',
             $this,
             'renameAttribute'
-        ));
-        App::getRegistry()->xajaxInterface->registerFunction(array(
+        ]);
+
+        $this->attributes['renameValueFunction'] = $this->xajaxManager->registerFunction([
             'RenameValue',
             $this,
             'renameValue'
-        ));
-        $this->attributes['deleteAttributeFunction'] = 'xajax_DeleteAttribute';
-        $this->attributes['renameAttributeFunction'] = 'xajax_RenameAttribute';
-        $this->attributes['renameValueFunction']     = 'xajax_RenameValue';
+        ]);
+
+        parent::__construct($attributes);
     }
 
+    /**
+     * Renames attribute using xajax request
+     *
+     * @param $request
+     *
+     * @return array
+     */
     public function renameAttribute($request)
     {
         $status  = true;
@@ -70,6 +92,13 @@ class AttributeEditor extends Field implements ElementInterface
         );
     }
 
+    /**
+     * Renames value using xajax request
+     *
+     * @param $request
+     *
+     * @return array
+     */
     public function renameValue($request)
     {
         $status  = true;
@@ -87,6 +116,13 @@ class AttributeEditor extends Field implements ElementInterface
         );
     }
 
+    /**
+     * Deletes attribute using xajax request
+     *
+     * @param $request
+     *
+     * @return array
+     */
     public function deleteAttribute($request)
     {
         $status  = true;
@@ -115,15 +151,15 @@ class AttributeEditor extends Field implements ElementInterface
             'label',
             'set',
             'attributes',
-            'onAfterDelete',
-            'deleteAttributeFunction',
-            'renameAttributeFunction',
-            'renameValueFunction',
         ]);
 
         $resolver->setOptional([
             'error',
             'comment',
+            'onAfterDelete',
+            'deleteAttributeFunction',
+            'renameAttributeFunction',
+            'renameValueFunction',
         ]);
 
         $resolver->setDefaults([
@@ -134,7 +170,7 @@ class AttributeEditor extends Field implements ElementInterface
         $resolver->setAllowedTypes([
             'name'                    => ['int', 'string'],
             'label'                   => 'string',
-            'set'                     => ['int', 'string'],
+            'set'                     => ['int', 'string', 'null'],
             'attributes'              => 'array',
             'onAfterDelete'           => 'string',
             'deleteAttributeFunction' => 'string',

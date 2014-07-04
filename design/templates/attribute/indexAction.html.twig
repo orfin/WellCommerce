@@ -4,5 +4,40 @@
     <ul class="possibilities">
         <li><a href="{{ path('admin.attribute.add') }}" class="button"><span>{% trans %}Add{% endtrans %}</span></a></li>
     </ul>
-    {{ form(form) }}
+    <div class="block">
+        {% if groups|length > 0 %}
+            <div class="scrollable-tabs">
+                <ul>
+                    {% for group in groups %}
+                        <li><a href="{{ path('admin.attribute.edit', {"id": group.id }) }}">{{ group.translation.first().name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        <p>{% trans %}Please choose attribute group to edit or add a new one.{% endtrans %}</p>
+    </div>
+    <script type="text/javascript">
+        GCore.OnLoad(function() {
+            $('a[href="{{ path('admin.attribute.add') }}"]').click(function() {
+                GPrompt('{% trans %}Enter name for new attribute group{% endtrans %}', function(sName) {
+                    GCore.StartWaiting();
+                    xajax_AddGroup({
+                        name: sName
+                    }, GCallback(function(eEvent) {
+                        if(eEvent.error != undefined){
+                            GMessage(eEvent.error);
+                        }else{
+                            if (eEvent.id == undefined) {
+                                window.location = '{{ path('admin.attribute.index') }}';
+                            }
+                            else {
+                                window.location = '{{ path('admin.attribute.edit') }}/' + eEvent.id;
+                            }
+                        }
+                    }));
+                });
+                return false;
+            });
+        });
+    </script>
 {% endblock %}

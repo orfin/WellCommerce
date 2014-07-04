@@ -39,7 +39,8 @@ class RangeEditor extends OptionedField implements ElementInterface
      */
     public function __construct($attributes, TaxRepositoryInterface $repository)
     {
-        $this->repository = $repository;
+        $this->repository         = $repository;
+        $attributes['vat_values'] = $this->repository->getAllTaxToSelect();
         parent::__construct($attributes);
     }
 

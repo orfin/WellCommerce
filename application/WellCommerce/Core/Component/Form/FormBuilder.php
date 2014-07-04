@@ -26,11 +26,25 @@ use WellCommerce\Core\Event\FormEvent;
  */
 class FormBuilder extends AbstractComponent
 {
+    /**
+     * form.init event name
+     */
     const FORM_INIT_EVENT = 'form.init';
 
-    protected $form;
-    protected $formData;
-    protected $options;
+    /**
+     * @var FormInterface Form instance
+     */
+    private $form;
+
+    /**
+     * @var array Data needed to populate the form
+     */
+    private $formData;
+
+    /**
+     * @var array Form options
+     */
+    private $options;
 
     /**
      * Creates the form, triggers init event and then populates form with values
@@ -339,7 +353,7 @@ class FormBuilder extends AbstractComponent
      */
     public function addAttributeEditor(array $options)
     {
-        return new Elements\AttributeEditor($options, $this->get('attribute.repository'));
+        return new Elements\AttributeEditor($options, $this->get('attribute.repository'), $this->get('xajax_manager'));
     }
 
     /**
@@ -520,8 +534,6 @@ class FormBuilder extends AbstractComponent
             $this->trans('net'),
             $this->trans('gross')
         ];
-
-        $options['vat_values'] = $this->get('tax.repository')->getAllTaxToSelect();
 
         return new Elements\RangeEditor($options, $this->get('tax.repository'));
     }

@@ -30,7 +30,7 @@ class AttributeGroupTranslation extends AbstractModel implements ModelInterface
     /**
      * {@inheritdoc}
      */
-    protected $fillable = ['attribute_id', 'language_id'];
+    protected $fillable = ['attribute_group_id', 'language_id'];
 
     /**
      * {@inheritdoc}

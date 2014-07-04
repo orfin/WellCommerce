@@ -15,6 +15,7 @@ use WellCommerce\Core\Component\Form\AbstractForm;
 use WellCommerce\Core\Component\Form\FormBuilder;
 use WellCommerce\Core\Component\Form\FormInterface;
 use WellCommerce\Plugin\Attribute\Model\Attribute;
+use WellCommerce\Plugin\Attribute\Model\AttributeGroup;
 
 /**
  * Class AttributeForm
@@ -37,8 +38,13 @@ class AttributeForm extends AbstractForm implements FormInterface
             'label' => $this->trans('Attribute groups')
         ]));
 
-        $groupData->addChild($builder->addTextField([
-            'name'  => 'attribute_group_name',
+        $basicLanguageData = $groupData->addChild($builder->addFieldsetLanguage([
+            'name'  => 'language_data',
+            'label' => $this->trans('Translations'),
+        ]));
+
+        $basicLanguageData->addChild($builder->addTextField([
+            'name'  => 'name',
             'label' => $this->trans('Group name'),
             'rules' => [
                 $builder->addRuleRequired('Group name is required'),
@@ -94,13 +100,13 @@ class AttributeForm extends AbstractForm implements FormInterface
      *
      * @return array
      */
-    public function prepareData(Attribute $attribute)
+    public function prepareData(AttributeGroup $attributeGroup)
     {
         $formData     = [];
         $accessor     = $this->getPropertyAccessor();
-        $languageData = $attribute->translation->getTranslations();
+        $languageData = $attributeGroup->translations->getTranslations();
 
-        $accessor->setValue($formData, '[required_data]', [
+        $accessor->setValue($formData, '[group_data]', [
             'language_data' => $languageData
         ]);
 

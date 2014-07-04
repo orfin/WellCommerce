@@ -16,9 +16,9 @@ use WellCommerce\Plugin\Availability\Model\Availability;
 use WellCommerce\Plugin\Availability\Model\AvailabilityTranslation;
 
 /**
- * Class AvailabilityAbstractRepository
+ * Class AvailabilityRepository
  *
- * @package WellCommerce\Plugin\Availability\AbstractRepository
+ * @package WellCommerce\Plugin\Availability\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class AvailabilityRepository extends AbstractRepository implements AvailabilityRepositoryInterface

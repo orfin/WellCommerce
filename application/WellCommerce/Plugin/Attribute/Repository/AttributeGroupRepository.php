@@ -18,19 +18,19 @@ use WellCommerce\Plugin\Attribute\Model\AttributeGroupTranslation;
 use WellCommerce\Plugin\Attribute\Model\AttributeTranslation;
 
 /**
- * Class AttributeAbstractRepository
+ * Class AttributeRepository
  *
- * @package WellCommerce\Plugin\Attribute\AbstractRepository
+ * @package WellCommerce\Plugin\Attribute\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AttributeRepository extends AbstractRepository implements AttributeRepositoryInterface
+class AttributeRepository extends AbstractRepository implements AttributeGroupRepositoryInterface
 {
     /**
      * {@inheritdoc}
      */
     public function all()
     {
-        return AttributeGroup::with(['translations', 'attributes'])->get();
+        return AttributeGroup::with('translation')->get();
     }
 
     /**
@@ -38,7 +38,7 @@ class AttributeRepository extends AbstractRepository implements AttributeReposit
      */
     public function find($id)
     {
-        return AttributeGroup::with(['translations', 'attributes'])->find($id);
+        return AttributeGroup::with('translation')->find($id);
     }
 
     /**
@@ -46,9 +46,9 @@ class AttributeRepository extends AbstractRepository implements AttributeReposit
      */
     public function delete($id)
     {
-        $attribute = $this->find($id);
-        $attribute->delete();
-        $this->dispatchEvent(AttributeRepositoryInterface::POST_DELETE_EVENT, $attribute);
+        $attributeGroup = $this->find($id);
+        $attributeGroup->delete();
+        $this->dispatchEvent(AttributeGroupRepositoryInterface::POST_DELETE_EVENT, $attributeGroup);
     }
 
     /**
@@ -58,18 +58,18 @@ class AttributeRepository extends AbstractRepository implements AttributeReposit
     {
         $this->transaction(function () use ($data, $id) {
 
-            $attribute = Attribute::firstOrCreate([
+            $attributeGroup = AttributeGroup::firstOrCreate([
                 'id' => $id
             ]);
 
-            $data = $this->dispatchEvent(AttributeRepositoryInterface::PRE_SAVE_EVENT, $attribute, $data);
+            $data = $this->dispatchEvent(AttributeGroupRepositoryInterface::PRE_SAVE_EVENT, $attributeGroup, $data);
 
-            $attribute->update($data);
+            $attributeGroup->update($data);
 
             foreach ($this->getLanguageIds() as $language) {
 
                 $translation = AttributeTranslation::firstOrCreate([
-                    'attribute_id' => $attribute->id,
+                    'attribute_id' => $attributeGroup->id,
                     'language_id'  => $language
                 ]);
 
@@ -77,29 +77,8 @@ class AttributeRepository extends AbstractRepository implements AttributeReposit
                 $translation->update($translationData);
             }
 
-            $this->dispatchEvent(AttributeRepositoryInterface::POST_SAVE_EVENT, $attribute, $data);
+            $this->dispatchEvent(AttributeGroupRepositoryInterface::POST_SAVE_EVENT, $attributeGroup, $data);
         });
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAllAttributeToSelect()
-    {
-        return $this->all()->toSelect('id', 'translation.name', $this->getCurrentLanguage());
-    }
-
-    public function getAllAttributeGroups()
-    {
-        return [];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAttributeProductFull()
-    {
-        return [];
     }
 
     /**

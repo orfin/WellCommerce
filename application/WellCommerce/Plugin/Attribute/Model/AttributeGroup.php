@@ -13,7 +13,6 @@ namespace WellCommerce\Plugin\Attribute\Model;
 
 use WellCommerce\Core\Component\Model\AbstractModel;
 use WellCommerce\Core\Component\Model\ModelInterface;
-use WellCommerce\Core\Component\Model\TranslatableModelInterface;
 
 /**
  * Class Attribute
@@ -36,9 +35,14 @@ class AttributeGroup extends AbstractModel implements ModelInterface
     /**
      * {@inheritdoc}
      */
-    public function translation()
+    public function translations()
     {
         return $this->hasMany(__NAMESPACE__ . '\AttributeGroupTranslation');
+    }
+
+    public function attributes()
+    {
+        return $this->belongsToMany(__NAMESPACE__ . '\Attribute', 'attribute_group_attribute', 'attribute_id', 'attribute_id');
     }
 
     /**

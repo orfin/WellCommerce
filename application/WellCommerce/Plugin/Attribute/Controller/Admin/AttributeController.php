@@ -33,13 +33,20 @@ class AttributeController extends AbstractAdminController
      */
     public function indexAction()
     {
-        $form = $this->createForm($this->get('attribute.form'), null, [
-            'name'  => 'attribute_group',
-            'class' => 'attributeGroupEditor'
+        $this->getXajaxManager()->registerFunction([
+            'AddGroup',
+            $this->repository,
+            'addAttributeGroup'
         ]);
 
+        $groups = $this->repository->all();
+
+        if (!$groups->isEmpty()) {
+            return $this->redirect($this->generateUrl('admin.attribute.edit', ['id' => $groups->first()->id]));
+        }
+
         return [
-            'form' => $form
+            'groups' => $this->repository->all()
         ];
     }
 
@@ -48,25 +55,7 @@ class AttributeController extends AbstractAdminController
      */
     public function addAction()
     {
-        $form = $this->createForm($this->get('attribute.form'), null, [
-            'name' => 'attribute'
-        ]);
-
-        if ($form->isValid()) {
-            try {
-                $this->repository->save($form->getSubmitValuesFlat());
-                $this->addSuccessMessage('Changes saved successfully.');
-
-                return $this->redirect($this->getDefaultUrl());
-
-            } catch (ValidatorException $exception) {
-                $this->addErrorMessage($exception->getMessage());
-            }
-        }
-
-        return [
-            'form' => $form
-        ];
+        throw new \LogicException($this->trans('Attribute editor does not have typical "addAction". Instead of it xajax call is used to create new attribute groups.'));
     }
 
     /**
@@ -77,7 +66,8 @@ class AttributeController extends AbstractAdminController
         $model = $this->repository->find($id);
 
         $form = $this->createForm($this->get('attribute.form'), $model, [
-            'name' => 'attribute',
+            'name'  => 'attribute_group',
+            'class' => 'attributeGroupEditor'
         ]);
 
         if ($form->isValid()) {
@@ -94,6 +84,7 @@ class AttributeController extends AbstractAdminController
 
         return [
             'attribute' => $model,
+            'groups'    => $this->repository->all(),
             'form'      => $form
         ];
     }

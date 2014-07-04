@@ -13,26 +13,26 @@
 namespace WellCommerce\Plugin\Attribute\Repository;
 
 /**
- * Interface AttributeRepositoryInterface
+ * Interface AttributeGroupRepositoryInterface
  *
  * @package WellCommerce\Plugin\Attribute\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface AttributeRepositoryInterface
+interface AttributeGroupRepositoryInterface
 {
-    const POST_DELETE_EVENT = 'attribute.repository.post_delete';
-    const PRE_SAVE_EVENT    = 'attribute.repository.pre_save';
-    const POST_SAVE_EVENT   = 'attribute.repository.post_save';
+    const POST_DELETE_EVENT = 'attribute_group.repository.post_delete';
+    const PRE_SAVE_EVENT    = 'attribute_group.repository.pre_save';
+    const POST_SAVE_EVENT   = 'attribute_group.repository.post_save';
 
     /**
-     * Returns all companies as a collection
+     * Returns all attribute groups as a collection
      *
      * @return mixed
      */
     public function all();
 
     /**
-     * Returns single attribute model
+     * Returns single attribute group model
      *
      * @param $id
      *
@@ -41,7 +41,7 @@ interface AttributeRepositoryInterface
     public function find($id);
 
     /**
-     * Saves new or existing attribute model
+     * Saves new or existing attribute group model
      *
      * @param array $data
      * @param null  $id
@@ -51,27 +51,13 @@ interface AttributeRepositoryInterface
     public function save(array $data, $id = null);
 
     /**
-     * Deletes attribute model
+     * Deletes attribute group model
      *
      * @param $id
      *
      * @return mixed
      */
     public function delete($id);
-
-    /**
-     * Returns Collection as ke-value pairs ready to use in selects
-     *
-     * @return mixed
-     */
-    public function getAllAttributeToSelect();
-
-    /**
-     * Returns a collection of all attribute groups
-     *
-     * @return mixed
-     */
-    public function getAllAttributeGroups();
 
     /**
      * Adds new attribute group. Used mostly in direct xajax calls
