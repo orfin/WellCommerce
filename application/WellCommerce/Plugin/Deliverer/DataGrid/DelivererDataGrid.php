@@ -17,7 +17,6 @@ use WellCommerce\Core\Component\DataGrid\Column\ColumnCollection;
 use WellCommerce\Core\Component\DataGrid\Column\ColumnInterface;
 use WellCommerce\Core\Component\DataGrid\Column\DataGridColumn;
 use WellCommerce\Core\Component\DataGrid\DataGridInterface;
-use WellCommerce\Plugin\Deliverer\Event\DelivererDataGridEvent;
 
 /**
  * Class DelivererDataGrid

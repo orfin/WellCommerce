@@ -11,9 +11,12 @@
  */
 namespace WellCommerce\Plugin\ShippingMethod\DataGrid;
 
-use WellCommerce\Core\DataGrid,
-    WellCommerce\Core\DataGrid\DataGridInterface;
-use WellCommerce\Plugin\ShippingMethod\Event\ShippingMethodDataGridEvent;
+use Illuminate\Database\Capsule\Manager;
+use WellCommerce\Core\Component\DataGrid\AbstractDataGrid;
+use WellCommerce\Core\Component\DataGrid\Column\ColumnCollection;
+use WellCommerce\Core\Component\DataGrid\Column\ColumnInterface;
+use WellCommerce\Core\Component\DataGrid\Column\DataGridColumn;
+use WellCommerce\Core\Component\DataGrid\DataGridInterface;
 
 /**
  * Class ShippingMethodDataGrid
@@ -21,116 +24,68 @@ use WellCommerce\Plugin\ShippingMethod\Event\ShippingMethodDataGridEvent;
  * @package WellCommerce\Plugin\ShippingMethod\DataGrid
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ShippingMethodDataGrid extends DataGrid implements DataGridInterface
+class ShippingMethodDataGrid extends AbstractDataGrid implements DataGridInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function init()
+    public function getId()
     {
-        $editEvent = $this->getXajaxManager()->registerFunction(['editRow', $this, 'editRow']);
+        return 'shipping_method';
+    }
 
-        $this->setOptions([
-            'id'             => 'shipping_method',
-            'appearance'     => [
-                'column_select' => false
-            ],
-            'mechanics'      => [
-                'key' => 'id',
-            ],
-            'event_handlers' => [
-                'load'       => $this->getXajaxManager()->registerFunction(['loadData', $this, 'loadData']),
-                'edit_row'   => $editEvent,
-                'click_row'  => $editEvent,
-                'delete_row' => $this->getXajaxManager()->registerFunction(['deleteRow', $this, 'deleteRow']),
-                'update_row' => $this->getXajaxManager()->registerFunction(['updateRow', $this, 'updateRow']),
-            ],
-        ]);
+    /**
+     * {@inheritdoc}
+     */
+    public function getRoutes()
+    {
+        return [
+            'edit' => $this->generateUrl('admin.shipping_method.edit')
+        ];
+    }
 
-        $this->addColumn('id', [
+    /**
+     * {@inheritdoc}
+     */
+    public function initColumns(ColumnCollection $collection)
+    {
+        $collection->add(new DataGridColumn([
+            'id'         => 'id',
             'source'     => 'shipping_method.id',
             'caption'    => $this->trans('Id'),
             'sorting'    => [
-                'default_order' => DataGridInterface::SORT_DIR_DESC
+                'default_order' => ColumnInterface::SORT_DIR_DESC
             ],
             'appearance' => [
                 'width'   => 90,
                 'visible' => false
             ],
             'filter'     => [
-                'type' => DataGridInterface::FILTER_BETWEEN
+                'type' => ColumnInterface::FILTER_BETWEEN
             ]
-        ]);
+        ]));
 
-        $this->addColumn('name', [
+        $collection->add(new DataGridColumn([
+            'id'         => 'name',
             'source'     => 'shipping_method_translation.name',
             'caption'    => $this->trans('Name'),
             'appearance' => [
                 'width' => 70,
-                'align' => DataGridInterface::ALIGN_LEFT
+                'align' => ColumnInterface::ALIGN_LEFT
             ],
             'filter'     => [
-                'type' => DataGridInterface::FILTER_INPUT
+                'type' => ColumnInterface::FILTER_INPUT
             ]
-        ]);
-
-        $this->addColumn('enabled', [
-            'source'     => 'shipping_method.enabled',
-            'caption'    => $this->trans('Enabled'),
-            'selectable' => true,
-            'appearance' => [
-                'width' => 20,
-            ],
-            'filter'     => [
-                'type'    => DataGridInterface::FILTER_SELECT,
-                'options' => $this->getEnabledFilterOptions()
-            ]
-        ]);
-
-        $this->addColumn('hierarchy', [
-            'source'     => 'shipping_method.hierarchy',
-            'caption'    => $this->trans('Hierarchy'),
-            'editable'   => true,
-            'appearance' => [
-                'width' => 40,
-            ],
-            'filter'     => [
-                'type' => DataGridInterface::FILTER_BETWEEN
-            ]
-        ]);
-
-        $this->query = $this->getDb()
-            ->table('shipping_method')
-            ->join('shipping_method_translation', 'shipping_method_translation.shipping_method_id', '=', 'shipping_method.id')
-            ->groupBy('shipping_method.id');
-
-        $event = new ShippingMethodDataGridEvent($this);
-
-        $this->getDispatcher()->dispatch(ShippingMethodDataGridEvent::DATAGRID_INIT_EVENT, $event);
-    }
-
-    protected function getEnabledFilterOptions()
-    {
-        $options   = [];
-        $options[] = [
-            'id'      => 0,
-            'caption' => $this->trans('Yes'),
-        ];
-        $options[] = [
-            'id'      => 1,
-            'caption' => $this->trans('No'),
-        ];
-
-        return $options;
+        ]));
     }
 
     /**
-     * Returns route for editAction
-     *
-     * @return string
+     * {@inheritdoc}
      */
-    protected function getEditActionRoute()
+    public function setQuery(Manager $manager)
     {
-        return 'admin.shipping_method.edit';
+        $this->query = $manager->table('shipping_method');
+        $this->query->join('shipping_method_translation', 'shipping_method_translation.shipping_method_id', '=', 'shipping_method.id');
+        $this->query->groupBy('shipping_method.id');
     }
 }

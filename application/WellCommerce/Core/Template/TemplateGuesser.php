@@ -12,6 +12,7 @@
 namespace WellCommerce\Core\Template;
 
 use Symfony\Component\HttpFoundation\Request;
+use WellCommerce\Core\Helper\Helper;
 
 /**
  * Class TemplateGuesser
@@ -50,8 +51,10 @@ class TemplateGuesser
                 throw new \InvalidArgumentException(sprintf('The "%s" class does not look like an admin controller class', $controller));
             }
 
+            $folder = Helper::snake($matches[1]);
+
             return [
-                sprintf('%s/%s.%s.%s', strtolower($matches[1]), $controller[1], $request->getRequestFormat(), $engine),
+                sprintf('%s/%s.%s.%s', $folder, $controller[1], $request->getRequestFormat(), $engine),
                 self::LOADER_ADMIN,
                 self::CONTROLLER_MODE_ADMIN
             ];
@@ -63,8 +66,10 @@ class TemplateGuesser
                 throw new \InvalidArgumentException(sprintf('The "%s" class does not look like an front controller class', $controller));
             }
 
+            $folder = Helper::snake($matches[1]);
+
             return [
-                sprintf('%s/%s.%s.%s', strtolower($matches[1]), $controller[1], $request->getRequestFormat(), $engine),
+                sprintf('%s/%s.%s.%s', $folder, $controller[1], $request->getRequestFormat(), $engine),
                 self::LOADER_FRONT,
                 self::CONTROLLER_MODE_FRONT
             ];
@@ -75,8 +80,10 @@ class TemplateGuesser
                 throw new \InvalidArgumentException(sprintf('The "%s" class does not look like an box controller class', $controller));
             }
 
+            $folder = Helper::snake($matches[1]);
+
             return [
-                sprintf('%s/box/%s.%s.%s', strtolower($matches[1]), $controller[1], $request->getRequestFormat(), $engine),
+                sprintf('%s/box/%s.%s.%s', $folder, $controller[1], $request->getRequestFormat(), $engine),
                 self::LOADER_FRONT,
                 self::CONTROLLER_MODE_BOX
             ];

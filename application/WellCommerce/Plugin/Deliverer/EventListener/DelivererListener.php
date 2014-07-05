@@ -20,7 +20,7 @@ use WellCommerce\Plugin\AdminMenu\Event\AdminMenuInitEvent;
 /**
  * Class DelivererListener
  *
- * @package WellCommerce\Plugin\Category\EventListener
+ * @package WellCommerce\Plugin\Deliverer\EventListener
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class DelivererListener implements EventSubscriberInterface

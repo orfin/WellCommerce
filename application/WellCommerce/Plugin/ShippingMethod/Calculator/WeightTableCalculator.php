@@ -9,32 +9,20 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-
 namespace WellCommerce\Plugin\ShippingMethod\Calculator;
 
-
-class WeightTableCalculator extends Calculator
+/**
+ * Class WeightTableCalculator
+ *
+ * @package WellCommerce\Plugin\ShippingMethod\Calculator
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
+ */
+class WeightTableCalculator extends AbstractShippingMethodCalculator implements ShippingMethodCalculatorInterface
 {
-    public function getAlias(){
-
-    }
-
-    public function getName()
-    {
-        return $this->trans('Weight table');
-    }
-
-    public function getRange()
-    {
-
-    }
-
+    /**
+     * {@inheritdoc}
+     */
     public function calculate()
-    {
-
-    }
-
-    public function calculateProduct()
     {
 
     }

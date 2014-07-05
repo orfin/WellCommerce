@@ -12,8 +12,6 @@
 namespace WellCommerce\Plugin\PaymentMethod\Repository;
 
 use WellCommerce\Core\Component\Repository\AbstractRepository;
-use WellCommerce\Core\Model\PaymentMethod;
-use WellCommerce\Core\Model\PaymentMethodTranslation;
 
 /**
  * Class PaymentMethodAbstractRepository
@@ -21,47 +19,36 @@ use WellCommerce\Core\Model\PaymentMethodTranslation;
  * @package WellCommerce\Plugin\PaymentMethod\AbstractRepository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PaymentMethodRepository extends AbstractRepository
+class PaymentMethodRepository extends AbstractRepository implements PaymentMethodRepositoryInterface
 {
     /**
-     * Returns payment_method collection
-     *
-     * @return \Illuminate\Database\Eloquent\Collection
+     * {@inheritdoc}
      */
     public function all()
     {
-        return PaymentMethod::all();
+        return $this->get('payment_method.model')->with('translation', 'shop')->all();
     }
 
     /**
-     * Returns single payment_method model with all shop and deliverer data
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Database\Eloquent\Model|static
+     * {@inheritdoc}
      */
     public function find($id)
     {
-        return PaymentMethod::with('translation', 'shop', 'deliverer')->findOrFail($id);
+        return $this->get('payment_method.model')->with('translation', 'shop')->findOrFail($id);
     }
 
     /**
-     * Deletes payment_method by key or multiple payment_methods if array of ids is passed
-     *
-     * @param array|int $id
+     * {@inheritdoc}
      */
     public function delete($id)
     {
-        $this->transaction(function () use ($id) {
-            return PaymentMethod::destroy($id);
-        });
+        $paymentMethod = $this->find($id);
+        $paymentMethod->delete();
+        $this->dispatchEvent(PaymentMethodRepositoryInterface::POST_DELETE_EVENT, $paymentMethod);
     }
 
     /**
-     * Saves payment_method model
-     *
-     * @param array    $Data Submitted form data
-     * @param int|null $id   PaymentMethod ID or null if new payment_method
+     * {@inheritdoc}
      */
     public function save(array $Data, $id = null)
     {
@@ -106,95 +93,10 @@ class PaymentMethodRepository extends AbstractRepository
     }
 
     /**
-     * Saves basic payment_method values directly from DataGrid
-     *
-     * @param array $request
-     *
-     * @return array
+     * {@inheritdoc}
      */
-    public function updateDataGridRow($request)
+    public function getAllPaymentMethodToSelect()
     {
-        $id   = $request['id'];
-        $data = $request['data'];
-
-        $this->transaction(function () use ($id, $data) {
-            $payment_method             = $this->find($id);
-            $payment_method->ean        = $data['ean'];
-            $payment_method->stock      = $data['stock'];
-            $payment_method->sell_price = $data['sell_price'];
-            $payment_method->hierarchy  = $data['hierarchy'];
-            $payment_method->weight     = $data['weight'];
-            $payment_method->save();
-        });
-
-        return [
-            'updated' => true
-        ];
-    }
-
-    /**
-     * Returns array containing values needed to populate the form
-     *
-     * @param int $id PaymentMethod ID
-     *
-     * @return array Populate data
-     */
-    public function getPopulateData($id)
-    {
-        $payment_methodData  = $this->find($id);
-        $populateData = [];
-        $accessor     = $this->getPropertyAccessor();
-        $languageData = $payment_methodData->getTranslationData();
-
-        $accessor->setValue($populateData, '[basic_pane]', [
-            'language_data' => $languageData,
-            'enabled'       => $payment_methodData->enabled,
-            'ean'           => $payment_methodData->ean,
-            'sku'           => $payment_methodData->sku,
-            'producer_id'   => $payment_methodData->producer_id,
-            'deliverers'    => $payment_methodData->getDeliverers(),
-        ]);
-
-        $accessor->setValue($populateData, '[stock_pane]', [
-            'stock'       => $payment_methodData->stock,
-            'track_stock' => $payment_methodData->track_stock,
-        ]);
-
-        $accessor->setValue($populateData, '[category_pane]', [
-            'category' => $payment_methodData->getCategories()
-        ]);
-
-        $accessor->setValue($populateData, '[description_data]', [
-            'language_data' => $languageData
-        ]);
-
-        $accessor->setValue($populateData, '[meta_data]', [
-            'language_data' => $languageData
-        ]);
-
-        $accessor->setValue($populateData, '[price_pane]', [
-            'tax_id'           => $payment_methodData->tax_id,
-            'sell_currency_id' => $payment_methodData->sell_currency_id,
-            'buy_currency_id'  => $payment_methodData->buy_currency_id,
-            'buy_price'        => $payment_methodData->buy_price,
-            'standard_price'   => [
-                'sell_price' => $payment_methodData->sell_price,
-            ]
-        ]);
-
-        $accessor->setValue($populateData, '[measurements_pane]', [
-            'weight'       => $payment_methodData->weight,
-            'width'        => $payment_methodData->width,
-            'height'       => $payment_methodData->height,
-            'depth'        => $payment_methodData->depth,
-            'package_size' => $payment_methodData->package_size,
-
-        ]);
-
-        $accessor->setValue($populateData, '[shop_data]', [
-            'shops' => $payment_methodData->getShops()
-        ]);
-
-        return $populateData;
+        return $this->all()->toSelect('id', 'translation.name', $this->getCurrentLanguage());
     }
 }

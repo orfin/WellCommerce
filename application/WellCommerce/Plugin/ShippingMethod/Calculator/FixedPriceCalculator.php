@@ -12,25 +12,18 @@
 
 namespace WellCommerce\Plugin\ShippingMethod\Calculator;
 
-
-class FixedPriceCalculator extends Calculator
+/**
+ * Class FixedPriceCalculator
+ *
+ * @package WellCommerce\Plugin\ShippingMethod\Calculator
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
+ */
+class FixedPriceCalculator extends AbstractShippingMethodCalculator implements ShippingMethodCalculatorInterface
 {
-    public function getName()
-    {
-        return $this->trans('Fixed price');
-    }
-
-    public function getRange()
-    {
-
-    }
-
+    /**
+     * {@inheritdoc}
+     */
     public function calculate()
-    {
-
-    }
-
-    public function calculateProduct()
     {
 
     }

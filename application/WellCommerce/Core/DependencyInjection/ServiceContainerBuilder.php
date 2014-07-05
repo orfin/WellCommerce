@@ -128,7 +128,7 @@ final class ServiceContainerBuilder
             $this->dumpDatabaseColumns();
 
             foreach ($this->compilerPasses as $compilerPass) {
-                $this->containerBuilder->addCompilerPass($compilerPass, PassConfig::TYPE_AFTER_REMOVING);
+                $this->containerBuilder->addCompilerPass($compilerPass, PassConfig::TYPE_OPTIMIZE);
                 $compilerPass->process($this->containerBuilder);
             }
 

@@ -55,7 +55,7 @@ class PaymentMethodExtension extends AbstractExtension
             'id'          => null
         )));
 
-        $extensionCollection->addPrefix('/admin/payment_method');
+        $extensionCollection->addPrefix('/admin/payment/method');
 
         $collection->addCollection($extensionCollection);
     }

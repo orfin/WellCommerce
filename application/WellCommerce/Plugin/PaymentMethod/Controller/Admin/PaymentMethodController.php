@@ -11,7 +11,9 @@
  */
 namespace WellCommerce\Plugin\PaymentMethod\Controller\Admin;
 
-use WellCommerce\Core\Controller\AbstractAdminController;
+use Symfony\Component\Validator\Exception\ValidatorException;
+use WellCommerce\Core\Component\Controller\Admin\AbstractAdminController;
+use WellCommerce\Plugin\PaymentMethod\Repository\PaymentMethodRepositoryInterface;
 
 /**
  * Class PaymentMethodController
@@ -24,32 +26,79 @@ class PaymentMethodController extends AbstractAdminController
     /**
      * {@inheritdoc}
      */
-    protected function getDataGrid()
+    public function indexAction()
     {
-        return $this->get('payment_method.datagrid');
+        return [
+            'datagrid' => $this->createDataGrid($this->get('payment_method.datagrid'))
+        ];
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function getRepository()
+    public function addAction()
     {
-        return $this->get('payment_method.repository');
+        $form = $this->createForm($this->get('payment_method.form'), null, [
+            'name' => 'payment_method'
+        ]);
+
+        if ($form->isValid()) {
+            try {
+                $this->repository->save($form->getSubmitValuesFlat());
+                $this->addSuccessMessage('New payment method added successfully.');
+
+                return $this->redirect($this->getDefaultUrl());
+
+            } catch (ValidatorException $exception) {
+                $this->addErrorMessage($exception->getMessage());
+            }
+        }
+
+        return [
+            'form' => $form
+        ];
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function getForm()
+    public function editAction($id)
     {
-        return $this->get('payment_method.form');
+        $model = $this->repository->find($id);
+
+        $form = $this->createForm($this->get('payment_method.form'), $model, [
+            'name' => 'payment_method'
+        ]);
+
+        if ($form->isValid()) {
+            try {
+                $this->repository->save($form->getSubmitValuesFlat(), $id);
+                $this->addSuccessMessage('Payment method saved successfully.');
+
+                if ($form->isAction('continue')) {
+                    return $this->redirect($this->generateUrl('admin.payment_method.edit', ['id' => $model->id]));
+                }
+
+                return $this->redirect($this->getDefaultUrl());
+
+            } catch (ValidatorException $exception) {
+                $this->addErrorMessage($exception->getMessage());
+            }
+        }
+
+        return [
+            'payment_method' => $model,
+            'form'           => $form
+        ];
     }
 
     /**
-     * {@inheritdoc}
+     * Sets payment_method repository object
+     *
+     * @param PaymentMethodRepositoryInterface $repository
      */
-    protected function getDefaultRoute()
+    public function setRepository(PaymentMethodRepositoryInterface $repository)
     {
-        return 'admin.payment_method.index';
+        $this->repository = $repository;
     }
 }

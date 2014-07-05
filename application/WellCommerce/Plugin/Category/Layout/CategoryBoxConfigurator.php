@@ -12,10 +12,6 @@
 
 namespace WellCommerce\Plugin\Category\Layout;
 
-use WellCommerce\Core\Component\Form\Conditions\Equals;
-use WellCommerce\Core\Component\Form\Dependency;
-use WellCommerce\Core\Component\Form\Option;
-use WellCommerce\Core\Event\FormEvent;
 use WellCommerce\Core\Layout\Box\LayoutBoxConfigurator;
 use WellCommerce\Core\Layout\Box\LayoutBoxConfiguratorInterface;
 

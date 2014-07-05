@@ -37,23 +37,17 @@ class FileDataGrid extends AbstractDataGrid implements DataGridInterface
     /**
      * {@inheritdoc}
      */
-    public function getRoutes()
-    {
-        return [
-            'edit' => $this->generateUrl('admin.file.edit')
-        ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(array $options)
     {
-        $event_handlers            = [
-            'process'    => 'processFile',
-            'loaded'     => 'dataLoaded'
+
+        $options['event_handlers'] = [
+            'process' => 'processFile',
+            'loaded'  => 'dataLoaded'
         ];
-        $options['event_handlers'] = $event_handlers;
+
+        $options['row_actions'] = [
+            DataGridInterface::ACTION_DELETE
+        ];
 
         return parent::configureOptions($options);
     }

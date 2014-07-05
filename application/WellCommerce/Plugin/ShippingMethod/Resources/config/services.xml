@@ -3,60 +3,47 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
+    <parameters>
+        <parameter key="shipping_method.admin.controller.class">WellCommerce\Plugin\ShippingMethod\Controller\Admin\ShippingMethodController</parameter>
+        <parameter key="shipping_method.repository.class">WellCommerce\Plugin\ShippingMethod\Repository\ShippingMethodRepository</parameter>
+        <parameter key="shipping_method.datagrid.class">WellCommerce\Plugin\ShippingMethod\DataGrid\ShippingMethodDataGrid</parameter>
+        <parameter key="shipping_method.form.class">WellCommerce\Plugin\ShippingMethod\Form\ShippingMethodForm</parameter>
+        <parameter key="shipping_method.listener.class">WellCommerce\Plugin\ShippingMethod\EventListener\ShippingMethodListener</parameter>
+        <parameter key="shipping_method.calculator.collection.class">WellCommerce\Plugin\ShippingMethod\Calculator\ShippingMethodCalculatorCollection</parameter>
+    </parameters>
+    
     <services>
-        <service id="shipping_method.calculator" class="WellCommerce\Plugin\ShippingMethod\Calculator\Calculator">
+        <service id="shipping_method.admin.controller" class="%shipping_method.admin.controller.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
-        </service>
-
-        <service id="shipping_method.repository" class="WellCommerce\Plugin\ShippingMethod\Repository\ShippingMethodRepository">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
-
-        <service id="shipping_method.datagrid" class="WellCommerce\Plugin\ShippingMethod\DataGrid\ShippingMethodDataGrid">
             <call method="setRepository">
                 <argument type="service" id="shipping_method.repository"/>
             </call>
+        </service>
+
+        <service id="shipping_method.calculator.collection" class="%shipping_method.calculator.collection.class%" />
+
+        <service id="shipping_method.repository" class="%shipping_method.repository.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="shipping_method.form" class="WellCommerce\Plugin\ShippingMethod\Form\ShippingMethodForm">
+        <service id="shipping_method.datagrid" class="%shipping_method.datagrid.class%">
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="shipping_method.repository"/>
+        </service>
+
+        <service id="shipping_method.form" class="%shipping_method.form.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="shipping_method.calculator.cart_total_table" class="WellCommerce\Plugin\ShippingMethod\Calculator\CartTotalTableCalculator">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <tag name="shipping.calculator" alias="cart_total_table"/>
-        </service>
-
-        <service id="shipping_method.calculator.fixed_price" class="WellCommerce\Plugin\ShippingMethod\Calculator\FixedPriceCalculator">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <tag name="shipping.calculator" alias="fixed_price"/>
-        </service>
-
-        <service id="shipping_method.calculator.item_quantity" class="WellCommerce\Plugin\ShippingMethod\Calculator\ItemQuantityCalculator">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <tag name="shipping.calculator" alias="item_quantity"/>
-        </service>
-
-        <service id="shipping_method.calculator.weight_table" class="WellCommerce\Plugin\ShippingMethod\Calculator\WeightTableCalculator">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <tag name="shipping.calculator" alias="weight_table"/>
+        <service id="shipping_method.listener" class="%shipping_method.listener.class%">
+            <argument type="service" id="service_container"/>
+            <tag name="kernel.event_subscriber" />
         </service>
     </services>
 </container>

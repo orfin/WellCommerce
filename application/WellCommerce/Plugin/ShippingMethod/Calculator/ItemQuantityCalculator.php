@@ -12,25 +12,18 @@
 
 namespace WellCommerce\Plugin\ShippingMethod\Calculator;
 
-
-class ItemQuantityCalculator extends Calculator
+/**
+ * Class ItemQuantityCalculator
+ *
+ * @package WellCommerce\Plugin\ShippingMethod\Calculator
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
+ */
+class ItemQuantityCalculator extends AbstractShippingMethodCalculator implements ShippingMethodCalculatorInterface
 {
-    public function getName()
-    {
-        return $this->trans('Item quantity');
-    }
-
-    public function getRange()
-    {
-
-    }
-
+    /**
+     * {@inheritdoc}
+     */
     public function calculate()
-    {
-
-    }
-
-    public function calculateProduct()
     {
 
     }

@@ -50,4 +50,19 @@ class Helper extends AbstractComponent
 
         return $clean;
     }
+
+    /**
+     * Converts string to snake-case
+     *
+     * @param        $value
+     * @param string $delimiter
+     *
+     * @return string
+     */
+    public static function snake($value, $delimiter = '_')
+    {
+        $replace = '$1' . $delimiter . '$2';
+
+        return ctype_lower($value) ? $value : strtolower(preg_replace('/(.)([A-Z])/', $replace, $value));
+    }
 }

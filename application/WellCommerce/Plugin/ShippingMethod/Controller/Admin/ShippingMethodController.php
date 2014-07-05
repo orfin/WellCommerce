@@ -11,7 +11,9 @@
  */
 namespace WellCommerce\Plugin\ShippingMethod\Controller\Admin;
 
-use WellCommerce\Core\Controller\AbstractAdminController;
+use Symfony\Component\Validator\Exception\ValidatorException;
+use WellCommerce\Core\Component\Controller\Admin\AbstractAdminController;
+use WellCommerce\Plugin\ShippingMethod\Repository\ShippingMethodRepositoryInterface;
 
 /**
  * Class ShippingMethodController
@@ -24,32 +26,79 @@ class ShippingMethodController extends AbstractAdminController
     /**
      * {@inheritdoc}
      */
-    protected function getDataGrid()
+    public function indexAction()
     {
-        return $this->get('shipping_method.datagrid');
+        return [
+            'datagrid' => $this->createDataGrid($this->get('shipping_method.datagrid'))
+        ];
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function getRepository()
+    public function addAction()
     {
-        return $this->get('shipping_method.repository');
+        $form = $this->createForm($this->get('shipping_method.form'), null, [
+            'name' => 'shipping_method'
+        ]);
+
+        if ($form->isValid()) {
+            try {
+                $this->repository->save($form->getSubmitValuesFlat());
+                $this->addSuccessMessage('New shipping method added successfully.');
+
+                return $this->redirect($this->getDefaultUrl());
+
+            } catch (ValidatorException $exception) {
+                $this->addErrorMessage($exception->getMessage());
+            }
+        }
+
+        return [
+            'form' => $form
+        ];
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function getForm()
+    public function editAction($id)
     {
-        return $this->get('shipping_method.form');
+        $model = $this->repository->find($id);
+
+        $form = $this->createForm($this->get('shipping_method.form'), $model, [
+            'name' => 'shipping_method'
+        ]);
+
+        if ($form->isValid()) {
+            try {
+                $this->repository->save($form->getSubmitValuesFlat(), $id);
+                $this->addSuccessMessage('Shipping method saved successfully.');
+
+                if ($form->isAction('continue')) {
+                    return $this->redirect($this->generateUrl('admin.shipping_method.edit', ['id' => $model->id]));
+                }
+
+                return $this->redirect($this->getDefaultUrl());
+
+            } catch (ValidatorException $exception) {
+                $this->addErrorMessage($exception->getMessage());
+            }
+        }
+
+        return [
+            'shipping_method' => $model,
+            'form'            => $form
+        ];
     }
 
     /**
-     * {@inheritdoc}
+     * Sets shipping_method repository object
+     *
+     * @param ShippingMethodRepositoryInterface $repository
      */
-    protected function getDefaultRoute()
+    public function setRepository(ShippingMethodRepositoryInterface $repository)
     {
-        return 'admin.shipping_method.index';
+        $this->repository = $repository;
     }
 }

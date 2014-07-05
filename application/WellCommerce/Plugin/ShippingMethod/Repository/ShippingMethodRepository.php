@@ -12,8 +12,6 @@
 namespace WellCommerce\Plugin\ShippingMethod\Repository;
 
 use WellCommerce\Core\Component\Repository\AbstractRepository;
-use WellCommerce\Core\Model\ShippingMethod;
-use WellCommerce\Core\Model\ShippingMethodTranslation;
 
 /**
  * Class ShippingMethodAbstractRepository
@@ -21,7 +19,7 @@ use WellCommerce\Core\Model\ShippingMethodTranslation;
  * @package WellCommerce\Plugin\ShippingMethod\AbstractRepository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ShippingMethodRepository extends AbstractRepository
+class ShippingMethodRepository extends AbstractRepository implements ShippingMethodRepositoryInterface
 {
     /**
      * Returns shipping_method collection
@@ -91,8 +89,8 @@ class ShippingMethodRepository extends AbstractRepository
             foreach ($this->getLanguageIds() as $language) {
 
                 $translation = ShippingMethodTranslation::firstOrNew([
-                    'shipping_method_id'  => $shipping_method->id,
-                    'language_id' => $language
+                    'shipping_method_id' => $shipping_method->id,
+                    'language_id'        => $language
                 ]);
 
                 $translation->setTranslationData($Data, $language);
@@ -106,95 +104,10 @@ class ShippingMethodRepository extends AbstractRepository
     }
 
     /**
-     * Saves basic shipping_method values directly from DataGrid
-     *
-     * @param array $request
-     *
-     * @return array
+     * {@inheritdoc}
      */
-    public function updateDataGridRow($request)
+    public function getAllShippingMethodToSelect()
     {
-        $id   = $request['id'];
-        $data = $request['data'];
-
-        $this->transaction(function () use ($id, $data) {
-            $shipping_method             = $this->find($id);
-            $shipping_method->ean        = $data['ean'];
-            $shipping_method->stock      = $data['stock'];
-            $shipping_method->sell_price = $data['sell_price'];
-            $shipping_method->hierarchy  = $data['hierarchy'];
-            $shipping_method->weight     = $data['weight'];
-            $shipping_method->save();
-        });
-
-        return [
-            'updated' => true
-        ];
-    }
-
-    /**
-     * Returns array containing values needed to populate the form
-     *
-     * @param int $id ShippingMethod ID
-     *
-     * @return array Populate data
-     */
-    public function getPopulateData($id)
-    {
-        $shipping_methodData  = $this->find($id);
-        $populateData = [];
-        $accessor     = $this->getPropertyAccessor();
-        $languageData = $shipping_methodData->getTranslationData();
-
-        $accessor->setValue($populateData, '[basic_pane]', [
-            'language_data' => $languageData,
-            'enabled'       => $shipping_methodData->enabled,
-            'ean'           => $shipping_methodData->ean,
-            'sku'           => $shipping_methodData->sku,
-            'producer_id'   => $shipping_methodData->producer_id,
-            'deliverers'    => $shipping_methodData->getDeliverers(),
-        ]);
-
-        $accessor->setValue($populateData, '[stock_pane]', [
-            'stock'       => $shipping_methodData->stock,
-            'track_stock' => $shipping_methodData->track_stock,
-        ]);
-
-        $accessor->setValue($populateData, '[category_pane]', [
-            'category' => $shipping_methodData->getCategories()
-        ]);
-
-        $accessor->setValue($populateData, '[description_data]', [
-            'language_data' => $languageData
-        ]);
-
-        $accessor->setValue($populateData, '[meta_data]', [
-            'language_data' => $languageData
-        ]);
-
-        $accessor->setValue($populateData, '[price_pane]', [
-            'tax_id'           => $shipping_methodData->tax_id,
-            'sell_currency_id' => $shipping_methodData->sell_currency_id,
-            'buy_currency_id'  => $shipping_methodData->buy_currency_id,
-            'buy_price'        => $shipping_methodData->buy_price,
-            'standard_price'   => [
-                'sell_price' => $shipping_methodData->sell_price,
-            ]
-        ]);
-
-        $accessor->setValue($populateData, '[measurements_pane]', [
-            'weight'       => $shipping_methodData->weight,
-            'width'        => $shipping_methodData->width,
-            'height'       => $shipping_methodData->height,
-            'depth'        => $shipping_methodData->depth,
-            'package_size' => $shipping_methodData->package_size,
-
-        ]);
-
-        $accessor->setValue($populateData, '[shop_data]', [
-            'shops' => $shipping_methodData->getShops()
-        ]);
-
-        return $populateData;
+        return $this->all()->toSelect('id', 'translation.name', $this->getCurrentLanguage());
     }
 }

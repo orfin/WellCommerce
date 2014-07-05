@@ -80,6 +80,14 @@ abstract class AbstractDataGrid extends AbstractComponent
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getRoutes()
+    {
+        return [];
+    }
+
+    /**
      * Sets DataGrid options
      *
      * @param array $options

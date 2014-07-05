@@ -12,31 +12,37 @@
 
 namespace WellCommerce\Plugin\PayPal\Processor;
 
+use WellCommerce\Plugin\PaymentMethod\Processor\AbstractPaymentMethodProcessor;
+use WellCommerce\Plugin\PaymentMethod\Processor\PaymentMethodProcessorInterface;
 
-class PayPalProcessor extends PaymentProcessor implements PaymentProcessorInterface
+/**
+ * Class PayPalProcessor
+ *
+ * @package WellCommerce\Plugin\PayPal\Processor
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
+ */
+class PayPalProcessor extends AbstractPaymentMethodProcessor implements PaymentMethodProcessorInterface
 {
-    public function getName()
-    {
-        return 'PayPal';
+    public function getSettings(){
+
     }
 
-    public function getAlias()
-    {
-        return 'paypal';
-    }
-
-    public function getConfigurationFields($form)
+    public function onPaymentAdd()
     {
 
     }
 
-    public function onPreSaveOrderAction()
+    public function onPaymentConfirm()
     {
 
     }
 
-    public function onPostSaveOrderAction()
+    public function onPaymentReport()
     {
+
+    }
+
+    public function onPaymentCancel(){
 
     }
 }

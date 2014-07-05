@@ -11,9 +11,12 @@
  */
 namespace WellCommerce\Plugin\PaymentMethod\DataGrid;
 
-use WellCommerce\Core\DataGrid,
-    WellCommerce\Core\DataGrid\DataGridInterface;
-use WellCommerce\Plugin\PaymentMethod\Event\PaymentMethodDataGridEvent;
+use Illuminate\Database\Capsule\Manager;
+use WellCommerce\Core\Component\DataGrid\AbstractDataGrid;
+use WellCommerce\Core\Component\DataGrid\Column\ColumnCollection;
+use WellCommerce\Core\Component\DataGrid\Column\ColumnInterface;
+use WellCommerce\Core\Component\DataGrid\Column\DataGridColumn;
+use WellCommerce\Core\Component\DataGrid\DataGridInterface;
 
 /**
  * Class PaymentMethodDataGrid
@@ -21,116 +24,68 @@ use WellCommerce\Plugin\PaymentMethod\Event\PaymentMethodDataGridEvent;
  * @package WellCommerce\Plugin\PaymentMethod\DataGrid
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PaymentMethodDataGrid extends DataGrid implements DataGridInterface
+class PaymentMethodDataGrid extends AbstractDataGrid implements DataGridInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function init()
+    public function getId()
     {
-        $editEvent = $this->getXajaxManager()->registerFunction(['editRow', $this, 'editRow']);
+        return 'payment_method';
+    }
 
-        $this->setOptions([
-            'id'             => 'payment_method',
-            'appearance'     => [
-                'column_select' => false
-            ],
-            'mechanics'      => [
-                'key' => 'id',
-            ],
-            'event_handlers' => [
-                'load'       => $this->getXajaxManager()->registerFunction(['loadData', $this, 'loadData']),
-                'edit_row'   => $editEvent,
-                'click_row'  => $editEvent,
-                'delete_row' => $this->getXajaxManager()->registerFunction(['deleteRow', $this, 'deleteRow']),
-                'update_row' => $this->getXajaxManager()->registerFunction(['updateRow', $this, 'updateRow']),
-            ],
-        ]);
+    /**
+     * {@inheritdoc}
+     */
+    public function getRoutes()
+    {
+        return [
+            'edit' => $this->generateUrl('admin.payment_method.edit')
+        ];
+    }
 
-        $this->addColumn('id', [
+    /**
+     * {@inheritdoc}
+     */
+    public function initColumns(ColumnCollection $collection)
+    {
+        $collection->add(new DataGridColumn([
+            'id'         => 'id',
             'source'     => 'payment_method.id',
             'caption'    => $this->trans('Id'),
             'sorting'    => [
-                'default_order' => DataGridInterface::SORT_DIR_DESC
+                'default_order' => ColumnInterface::SORT_DIR_DESC
             ],
             'appearance' => [
                 'width'   => 90,
                 'visible' => false
             ],
             'filter'     => [
-                'type' => DataGridInterface::FILTER_BETWEEN
+                'type' => ColumnInterface::FILTER_BETWEEN
             ]
-        ]);
+        ]));
 
-        $this->addColumn('name', [
+        $collection->add(new DataGridColumn([
+            'id'         => 'name',
             'source'     => 'payment_method_translation.name',
             'caption'    => $this->trans('Name'),
             'appearance' => [
                 'width' => 70,
-                'align' => DataGridInterface::ALIGN_LEFT
+                'align' => ColumnInterface::ALIGN_LEFT
             ],
             'filter'     => [
-                'type' => DataGridInterface::FILTER_INPUT
+                'type' => ColumnInterface::FILTER_INPUT
             ]
-        ]);
-
-        $this->addColumn('enabled', [
-            'source'     => 'payment_method.enabled',
-            'caption'    => $this->trans('Enabled'),
-            'selectable' => true,
-            'appearance' => [
-                'width' => 20,
-            ],
-            'filter'     => [
-                'type'    => DataGridInterface::FILTER_SELECT,
-                'options' => $this->getEnabledFilterOptions()
-            ]
-        ]);
-
-        $this->addColumn('hierarchy', [
-            'source'     => 'payment_method.hierarchy',
-            'caption'    => $this->trans('Hierarchy'),
-            'editable'   => true,
-            'appearance' => [
-                'width' => 40,
-            ],
-            'filter'     => [
-                'type' => DataGridInterface::FILTER_BETWEEN
-            ]
-        ]);
-
-        $this->query = $this->getDb()
-            ->table('payment_method')
-            ->join('payment_method_translation', 'payment_method_translation.payment_method_id', '=', 'payment_method.id')
-            ->groupBy('payment_method.id');
-
-        $event = new PaymentMethodDataGridEvent($this);
-
-        $this->getDispatcher()->dispatch(PaymentMethodDataGridEvent::DATAGRID_INIT_EVENT, $event);
-    }
-
-    protected function getEnabledFilterOptions()
-    {
-        $options   = [];
-        $options[] = [
-            'id'      => 0,
-            'caption' => $this->trans('Yes'),
-        ];
-        $options[] = [
-            'id'      => 1,
-            'caption' => $this->trans('No'),
-        ];
-
-        return $options;
+        ]));
     }
 
     /**
-     * Returns route for editAction
-     *
-     * @return string
+     * {@inheritdoc}
      */
-    protected function getEditActionRoute()
+    public function setQuery(Manager $manager)
     {
-        return 'admin.payment_method.edit';
+        $this->query = $manager->table('payment_method');
+        $this->query->join('payment_method_translation', 'payment_method_translation.payment_method_id', '=', 'payment_method.id');
+        $this->query->groupBy('payment_method.id');
     }
 }

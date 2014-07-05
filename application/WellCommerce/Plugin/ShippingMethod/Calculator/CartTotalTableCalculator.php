@@ -12,25 +12,18 @@
 
 namespace WellCommerce\Plugin\ShippingMethod\Calculator;
 
-
-class CartTotalTableCalculator extends Calculator
+/**
+ * Class CartTotalTableCalculator
+ *
+ * @package WellCommerce\Plugin\ShippingMethod\Calculator
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
+ */
+class CartTotalTableCalculator extends AbstractShippingMethodCalculator implements ShippingMethodCalculatorInterface
 {
-    public function getName()
-    {
-        return $this->trans('Cart total');
-    }
-
-    public function getRange()
-    {
-
-    }
-
+    /**
+     * {@inheritdoc}
+     */
     public function calculate()
-    {
-
-    }
-
-    public function calculateProduct()
     {
 
     }
