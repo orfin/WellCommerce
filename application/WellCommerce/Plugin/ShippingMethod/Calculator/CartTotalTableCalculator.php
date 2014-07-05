@@ -23,8 +23,24 @@ class CartTotalTableCalculator extends AbstractShippingMethodCalculator implemen
     /**
      * {@inheritdoc}
      */
+    public function getName()
+    {
+        return $this->trans('Cart total table');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function calculate()
     {
 
     }
-} 
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addMethodConfiguration(){
+
+    }
+
+}

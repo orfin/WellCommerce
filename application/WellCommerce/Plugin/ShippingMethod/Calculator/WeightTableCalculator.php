@@ -22,8 +22,23 @@ class WeightTableCalculator extends AbstractShippingMethodCalculator implements 
     /**
      * {@inheritdoc}
      */
+    public function getName()
+    {
+        return $this->trans('Weight table');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function calculate()
     {
+
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addMethodConfiguration(){
 
     }
 } 

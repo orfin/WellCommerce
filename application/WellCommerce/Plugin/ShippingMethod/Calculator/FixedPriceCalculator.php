@@ -23,8 +23,23 @@ class FixedPriceCalculator extends AbstractShippingMethodCalculator implements S
     /**
      * {@inheritdoc}
      */
+    public function getName()
+    {
+        return $this->trans('Fixed price');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function calculate()
     {
+
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addMethodConfiguration(){
 
     }
 } 

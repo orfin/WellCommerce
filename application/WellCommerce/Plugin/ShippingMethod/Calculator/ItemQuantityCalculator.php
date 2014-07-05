@@ -23,8 +23,23 @@ class ItemQuantityCalculator extends AbstractShippingMethodCalculator implements
     /**
      * {@inheritdoc}
      */
+    public function getName()
+    {
+        return $this->trans('Item quantity');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function calculate()
     {
+
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addMethodConfiguration(){
 
     }
 } 

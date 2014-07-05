@@ -13,6 +13,10 @@
 namespace WellCommerce\Plugin\ShippingMethod\Calculator;
 
 use WellCommerce\Core\Component\AbstractComponent;
+use WellCommerce\Core\Component\Form\Conditions\Equals;
+use WellCommerce\Core\Component\Form\Dependency;
+use WellCommerce\Core\Component\Form\Option;
+use WellCommerce\Core\Event\FormEvent;
 
 /**
  * Class AbstractShippingMethodCalculator
@@ -22,5 +26,38 @@ use WellCommerce\Core\Component\AbstractComponent;
  */
 class AbstractShippingMethodCalculator extends AbstractComponent
 {
+    /**
+     * @var string Shipping calculator alias
+     */
+    public $alias;
 
+    /**
+     * {@inheritdoc}
+     */
+    public function addConfigurationFields(FormEvent $event)
+    {
+        $this->builder    = $event->getFormBuilder();
+        $this->form       = $this->builder->getForm();
+        $this->typeSelect = $this->form->getChild('required_data')->getChild('type');
+
+        $this->typeSelect->addOption($this->getBoxTypeOption());
+
+        $this->fieldset = $this->form->addChild($this->builder->addFieldset([
+            'name'         => $this->alias,
+            'label'        => $this->getName(),
+            'dependencies' => [
+                $this->builder->addDependency(Dependency::SHOW, $this->typeSelect, new Equals($this->alias), null)
+            ]
+        ]));
+
+        $this->addMethodConfiguration();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBoxTypeOption()
+    {
+        return new Option($this->alias, $this->getName());
+    }
 } 

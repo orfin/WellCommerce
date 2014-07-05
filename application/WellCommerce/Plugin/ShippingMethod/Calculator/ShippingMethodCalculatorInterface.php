@@ -20,5 +20,24 @@ namespace WellCommerce\Plugin\ShippingMethod\Calculator;
  */
 interface ShippingMethodCalculatorInterface
 {
+    /**
+     * Returns calculators name
+     *
+     * @return mixed
+     */
+    public function getName();
+
+    /**
+     * Calculates shipping costs for given parameters
+     *
+     * @return mixed
+     */
     public function calculate();
+
+    /**
+     * Adds fields to settings pane to allow cost editing for this calculator
+     *
+     * @return mixed
+     */
+    public function addMethodConfiguration();
 }

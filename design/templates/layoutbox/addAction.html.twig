@@ -1,9 +1,0 @@
-{% extends "layout.html.twig" %}
-{% block content %}
-    <h2>{% trans %}Add layout box{% endtrans %}</h2>
-    <ul class="possibilities">
-        <li><a href="{{ path('admin.layout_box.index') }}" class="button return"><span></span></a></li>
-        <li><a href="#layout_box" rel="submit" class="button"><span>{% trans %}Save and finish{% endtrans %}</span></a></li>
-    </ul>
-    {{ form(form) }}
-{% endblock %}

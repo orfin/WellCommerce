@@ -38,13 +38,17 @@ class RegisterShippingCalculatorsPass implements CompilerPassInterface
         $definition = $container->getDefinition('shipping_method.calculator.collection');
 
         foreach ($container->findTaggedServiceIds('shipping_method.calculator') as $id => $attributes) {
-            $class     = $container->getDefinition($id)->getClass();
-            $refClass  = new \ReflectionClass($class);
-            $interface = 'WellCommerce\\Plugin\\ShippingMethod\\Calculator\\ShippingMethodCalculatorInterface';
+            $calculator = $container->getDefinition($id);
+            $class        = $calculator->getClass();
+            $refClass     = new \ReflectionClass($class);
+            $interface    = 'WellCommerce\\Plugin\\ShippingMethod\\Calculator\\ShippingMethodCalculatorInterface';
+
+            $calculator->setProperty('alias', $attributes[0]['alias']);
             if (!$refClass->implementsInterface($interface)) {
                 throw new \InvalidArgumentException(sprintf('Service "%s" must implement interface "%s".', $id, $interface));
             }
             $definition->addMethodCall('add', array(
+                $attributes[0]['alias'],
                 new Reference($id)
             ));
         }

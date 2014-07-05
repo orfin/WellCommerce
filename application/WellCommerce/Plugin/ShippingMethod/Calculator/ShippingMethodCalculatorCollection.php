@@ -44,9 +44,9 @@ class ShippingMethodCalculatorCollection implements \IteratorAggregate, \Countab
     /**
      * {@inheritdoc}
      */
-    public function add(ShippingMethodCalculatorInterface $calculator)
+    public function add($alias, ShippingMethodCalculatorInterface $calculator)
     {
-        $this->calculators[] = $calculator;
+        $this->calculators[$alias] = $calculator;
     }
 
     /**

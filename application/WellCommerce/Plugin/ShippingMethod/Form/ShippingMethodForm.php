@@ -11,8 +11,11 @@
  */
 namespace WellCommerce\Plugin\ShippingMethod\Form;
 
-use WellCommerce\Core\Form;
-use WellCommerce\Plugin\ShippingMethod\Event\ShippingMethodFormEvent;
+use WellCommerce\Core\Component\Form\AbstractForm;
+use WellCommerce\Core\Component\Form\FormBuilderInterface;
+use WellCommerce\Core\Component\Form\FormInterface;
+use WellCommerce\Core\Component\Form\Option;
+use WellCommerce\Plugin\ShippingMethod\Model\ShippingMethod;
 
 /**
  * Class ShippingMethodForm
@@ -20,30 +23,32 @@ use WellCommerce\Plugin\ShippingMethod\Event\ShippingMethodFormEvent;
  * @package WellCommerce\Plugin\ShippingMethod\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ShippingMethodForm extends Form
+class ShippingMethodForm extends AbstractForm implements FormInterface
 {
-    public function init($shipping_methodData = [])
+    /**
+     * {@inheritdoc}
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $form = $this->addForm([
-            'name' => 'shipping_method'
-        ]);
+        $form = $builder->addForm($options);
 
-        $basicPane = $form->addChild($this->addFieldset([
-            'name'  => 'basic_pane',
-            'label' => $this->trans('Basic settings')
+        $requiredData = $form->addChild($builder->addFieldset([
+            'name'  => 'required_data',
+            'label' => $this->trans('Required data')
         ]));
 
-        $basicLanguageData = $basicPane->addChild($this->addFieldsetLanguage([
-            'name'  => 'language_data',
-            'label' => $this->trans('Translations'),
+        $languageData = $requiredData->addChild($builder->addFieldsetLanguage([
+            'name'      => 'language_data',
+            'label'     => $this->trans('Translations'),
+            'languages' => $this->getLanguages()
         ]));
 
-        $basicLanguageData->addChild($this->addTextField([
+        $languageData->addChild($builder->addTextField([
             'name'  => 'name',
             'label' => $this->trans('Name'),
             'rules' => [
-                $this->addRuleRequired($this->trans('Name is required')),
-                $this->addRuleUnique($this->trans('Name already exists'),
+                $builder->addRuleRequired($this->trans('Name is required')),
+                $builder->addRuleLanguageUnique($this->trans('Name already exists'),
                     [
                         'table'   => 'shipping_method_translation',
                         'column'  => 'name',
@@ -52,88 +57,73 @@ class ShippingMethodForm extends Form
                             'values' => $this->getParam('id')
                         ]
                     ]
-                ),
+                )
             ]
         ]));
 
-        $basicPane->addChild($this->addCheckbox([
+        $requiredData->addChild($builder->addTip([
+            'tip' => '<p>' . $this->trans('Choose type of costs calculation. Every shipping method may have different settings.') . '</p>'
+        ]));
+
+        $requiredData->addChild($builder->addSelect([
+            'name'    => 'type',
+            'label'   => $this->trans('Type of costs calculation'),
+            'options' => [],
+        ]));
+
+        $requiredData->addChild($builder->addCheckBox([
             'name'    => 'enabled',
             'label'   => $this->trans('Enabled'),
-            'default' => '0'
+            'comment' => $this->trans('Only enabled shipping methods are visible in shop'),
+            'default' => '1'
         ]));
 
-        $basicPane->addChild($this->addTextField([
+        $requiredData->addChild($builder->addTextField([
             'name'    => 'hierarchy',
             'label'   => $this->trans('Hierarchy'),
-            'default' => '0'
+            'comment' => $this->trans('Hierarchy uses ascending order'),
         ]));
 
-        $costsPane = $form->addChild($this->addFieldset([
-            'name'  => 'cost_data',
-            'label' => $this->trans('Shipping costs')
-        ]));
-
-        $type = $costsPane->AddChild($this->addSelect([
-            'name'    => 'type',
-            'label'   => 'Shipping calculation',
-            'options' => [
-                new Form\Option('1', 'by cart value'),
-                new Form\Option('2', 'by cart weight'),
-            ],
-            'rules'   => [
-                $this->addRuleRequired('Cost type is required')
-            ]
-        ]));
-
-        $cartValue = $costsPane->addChild($this->addRangeEditor([
-            'name'            => 'cart_value',
-            'label'           => 'Cart value',
-            'allow_vat'       => true,
-            'range_precision' => 4,
-            'price_precision' => 4,
-            'dependencies'    => [
-                $this->addDependency(Form\Dependency::SHOW, $type, new Form\Conditions\Equals(1), null)
-            ]
-        ]));
-
-        $cartWeight = $costsPane->addChild($this->addRangeEditor([
-            'name'            => 'cart_weight',
-            'label'           => 'Cart weight',
-            'allow_vat'       => true,
-            'range_precision' => 4,
-            'price_precision' => 4,
-            'dependencies'    => [
-                $this->addDependency(Form\Dependency::SHOW, $type, new Form\Conditions\Equals(2), null)
-            ]
-        ]));
-
-        foreach ($this->get('shipping_method.calculator')->getCalculators() as $alias => $calculator) {
-            $costsPane->addChild($calculator->getConfigurationForm());
-        }
-
-        $this->get('shipping_method.calculator')->getCalculatorsToSelect();
-
-        $shopData = $form->addChild($this->addFieldset([
+        $shopData = $form->addChild($builder->addFieldset([
             'name'  => 'shop_data',
             'label' => $this->trans('Shops')
         ]));
 
-        $shopData->addChild($this->addShopSelector([
+        $shopData->addChild($builder->addShopSelector([
             'name'  => 'shops',
-            'label' => $this->trans('Shops'),
+            'label' => $this->trans('Shops')
         ]));
-
+        
         $form->addFilters([
-            $this->addFilterTrim(),
-            $this->addFilterSecure()
+            $builder->addFilterTrim(),
+            $builder->addFilterSecure()
         ]);
 
-        $event = new ShippingMethodFormEvent($form, $shipping_methodData);
-
-        $this->getDispatcher()->dispatch(ShippingMethodFormEvent::FORM_INIT_EVENT, $event);
-
-        $form->populate($event->getPopulateData());
-
         return $form;
+    }
+
+    /**
+     * Prepares form data using retrieved model
+     *
+     * @param ShippingMethod $shippingMethod Model
+     *
+     * @return array
+     */
+    public function prepareData(ShippingMethod $shippingMethod)
+    {
+        $formData     = [];
+        $accessor     = $this->getPropertyAccessor();
+        $languageData = $shippingMethod->translation->getTranslations();
+
+        $accessor->setValue($formData, '[required_data]', [
+            'language_data' => $languageData,
+            'type'          => $shippingMethod->type,
+            'show_header'   => $shippingMethod->show_header,
+            'visibility'    => $shippingMethod->visibility,
+        ]);
+
+        $accessor->setValue($formData, '[' . $shippingMethod->type . ']', $shippingMethod->settings);
+
+        return $formData;
     }
 }

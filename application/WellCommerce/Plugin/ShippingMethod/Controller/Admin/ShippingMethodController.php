@@ -28,6 +28,9 @@ class ShippingMethodController extends AbstractAdminController
      */
     public function indexAction()
     {
+        echo 1;
+        print_r($this->get('shipping_method.calculator.collection')->all());
+        die();
         return [
             'datagrid' => $this->createDataGrid($this->get('shipping_method.datagrid'))
         ];
