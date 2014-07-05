@@ -5,6 +5,7 @@
 
     <parameters>
         <parameter key="product_box.layout.configurator.class">WellCommerce\Plugin\Product\Layout\ProductBoxConfigurator</parameter>
+        <parameter key="product_list_box.layout.configurator.class">WellCommerce\Plugin\Product\Layout\ProductListBoxConfigurator</parameter>
     </parameters>
 
     <services>
@@ -13,6 +14,13 @@
                 <argument type="service" id="service_container"/>
             </call>
             <tag name="layout_box.configurator" type="wellcommerce_product_box" controller="product.box.controller" />
+            <tag name="kernel.event_listener" event="layout_box.form.init" method="addConfigurationFields" />
+        </service>
+        <service id="product_list_box.layout.configurator" class="%product_list_box.layout.configurator.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="layout_box.configurator" type="wellcommerce_product_list_box" controller="product_list.box.controller" />
             <tag name="kernel.event_listener" event="layout_box.form.init" method="addConfigurationFields" />
         </service>
     </services>

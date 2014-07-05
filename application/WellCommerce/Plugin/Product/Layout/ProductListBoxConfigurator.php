@@ -21,17 +21,27 @@ use WellCommerce\Core\Layout\Box\LayoutBoxConfiguratorInterface;
  * @package WellCommerce\Plugin\Product\Configurator\Box
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductBoxConfigurator extends LayoutBoxConfigurator implements LayoutBoxConfiguratorInterface
+class ProductListBoxConfigurator extends LayoutBoxConfigurator implements LayoutBoxConfiguratorInterface
 {
-    public $name = 'ProductBox';
+    public $name = 'ProductListBox';
 
     /**
      * {@inheritdoc}
      */
     public function isAvailableForLayoutPage($layoutPage)
     {
-        return ($layoutPage == 'Product');
+        return ($layoutPage == 'Category');
     }
 
-
-} 
+    /**
+     * {@inheritdoc}
+     */
+    public function addBoxConfiguration()
+    {
+        $this->fieldset->addChild($this->builder->addCheckbox([
+            'name'    => 'pagination_enabled',
+            'label'   => $this->trans('Pagination enabled'),
+            'default' => 1
+        ]));
+    }
+}

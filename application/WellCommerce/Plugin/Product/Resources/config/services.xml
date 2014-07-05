@@ -7,6 +7,7 @@
         <parameter key="product.admin.controller.class">WellCommerce\Plugin\Product\Controller\Admin\ProductController</parameter>
         <parameter key="product.front.controller.class">WellCommerce\Plugin\Product\Controller\Front\ProductController</parameter>
         <parameter key="product.box.controller.class">WellCommerce\Plugin\Product\Controller\Box\ProductBoxController</parameter>
+        <parameter key="product_list.box.controller.class">WellCommerce\Plugin\Product\Controller\Box\ProductListBoxController</parameter>
         <parameter key="product.repository.class">WellCommerce\Plugin\Product\Repository\ProductRepository</parameter>
         <parameter key="product.datagrid.class">WellCommerce\Plugin\Product\DataGrid\ProductDataGrid</parameter>
         <parameter key="product.form.class">WellCommerce\Plugin\Product\Form\ProductForm</parameter>
@@ -39,6 +40,12 @@
         </service>
 
         <service id="product.box.controller" class="%product.box.controller.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="product_list.box.controller" class="%product_list.box.controller.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
