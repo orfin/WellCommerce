@@ -27,8 +27,7 @@ class Migration1404562788 extends AbstractMigration implements MigrationInterfac
             $this->getDb()->schema()->create('address_type', function ($table) {
                 $table->increments('id');
                 $table->integer('type');
-                $table->string('name',);
-
+                $table->string('name');
             });
         }
     }

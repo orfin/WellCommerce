@@ -30,7 +30,7 @@ class Billing implements AddressTypeInterface
         return 'billing';
     }
 
-    public function getFields(FormBuilder)
+    public function getFields()
     {
 
     }

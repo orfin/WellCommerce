@@ -13,7 +13,6 @@ namespace WellCommerce\Plugin\Category\Model;
 
 use WellCommerce\Core\Component\Model\AbstractModel;
 use WellCommerce\Core\Component\Model\ModelInterface;
-use WellCommerce\Core\Component\Model\TranslatableModelInterface;
 
 /**
  * Class Category
@@ -21,7 +20,7 @@ use WellCommerce\Core\Component\Model\TranslatableModelInterface;
  * @package WellCommerce\Plugin\Category\Model
  * @author  Adam Piotrowski <adam@gekosale.com>
  */
-class Category extends AbstractModel implements ModelInterface, TranslatableModelInterface
+class Category extends AbstractModel implements ModelInterface
 {
     protected $table = 'category';
     protected $fillable = ['id'];

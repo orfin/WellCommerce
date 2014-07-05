@@ -47,7 +47,7 @@ class TaxController extends AbstractAdminController
         if ($form->isValid()) {
             try {
                 $this->repository->save($form->getSubmitValuesFlat());
-                $this->addSuccessMessage('Changes saved successfully.');
+                $this->addSuccessMessage('New tax rate was added successfully.');
 
                 return $this->redirect($this->getDefaultUrl());
 
@@ -75,7 +75,7 @@ class TaxController extends AbstractAdminController
         if ($form->isValid()) {
             try {
                 $this->repository->save($form->getSubmitValuesFlat(), $id);
-                $this->addSuccessMessage('Changes saved successfully.');
+                $this->addSuccessMessage('Tax rate was saved successfully.');
 
                 return $this->redirect($this->getDefaultUrl());
 

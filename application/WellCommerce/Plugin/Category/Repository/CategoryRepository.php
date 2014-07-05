@@ -28,6 +28,7 @@ class CategoryRepository extends AbstractRepository implements CategoryRepositor
      */
     public function all()
     {
+
         return Category::with('translation', 'shop')->get();
     }
 

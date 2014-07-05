@@ -93,7 +93,7 @@ class ShippingMethodForm extends AbstractForm implements FormInterface
             'name'  => 'shops',
             'label' => $this->trans('Shops')
         ]));
-        
+
         $form->addFilters([
             $builder->addFilterTrim(),
             $builder->addFilterSecure()

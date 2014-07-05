@@ -32,7 +32,7 @@ class CategoryTranslation extends AbstractModel
      */
     public function category()
     {
-        return $this->belongsTo('WellCommerce\Plugin\Category\Model\Category');
+        return $this->belongsTo(__NAMESPACE__ . '\Category');
     }
 
     /**
