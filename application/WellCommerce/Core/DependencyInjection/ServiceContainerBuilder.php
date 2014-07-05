@@ -128,12 +128,14 @@ final class ServiceContainerBuilder
             $this->dumpDatabaseColumns();
 
             foreach ($this->compilerPasses as $compilerPass) {
-                $this->containerBuilder->addCompilerPass($compilerPass, PassConfig::TYPE_OPTIMIZE);
+                $this->containerBuilder->addCompilerPass($compilerPass, PassConfig::TYPE_AFTER_REMOVING);
                 $compilerPass->process($this->containerBuilder);
             }
 
             $this->compileAndSaveContainer();
         }
+
+        return new ServiceContainer();
     }
 
     /**
@@ -166,7 +168,7 @@ final class ServiceContainerBuilder
     {
         $routeCollection = new RouteCollection();
         $extensionLoader = new PluginExtensionLoader($this->containerBuilder, $routeCollection);
-        $extensionLoader->registerExtensions();
+        $extensionLoader->register();
         $extensionLoader->dumpRouting();
     }
 

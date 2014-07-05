@@ -25,10 +25,10 @@ interface FormInterface
     /**
      * Builds the form
      *
-     * @param FormBuilder $builder FormBuilder instance
-     * @param array       $options Form options
+     * @param FormBuilderInterface $builder FormBuilder instance
+     * @param array                $options Form options
      *
      * @return mixed
      */
-    public function buildForm(FormBuilder $builder, array $options);
+    public function buildForm(FormBuilderInterface $builder, array $options);
 }

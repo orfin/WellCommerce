@@ -19,6 +19,7 @@ use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
 use Symfony\Component\Routing\Loader\XmlFileLoader as RoutingLoader;
 use WellCommerce\Core\DependencyInjection\AbstractExtension;
+use WellCommerce\Plugin\Language\Model\Language;
 
 /**
  * Class AvailabilityExtension

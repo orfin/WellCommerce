@@ -41,32 +41,101 @@ class PluginExtensionLoader
      */
     protected $routeCollection;
 
+    /**
+     * @var array Plugin classes
+     */
+    private $classes = [];
+
+    /**
+     * Constructor
+     *
+     * @param ContainerBuilder $containerBuilder
+     * @param RouteCollection  $routeCollection
+     */
     public function __construct(ContainerBuilder $containerBuilder, RouteCollection $routeCollection)
     {
         $this->containerBuilder = $containerBuilder;
         $this->routeCollection  = $routeCollection;
+        $this->classes          = $this->getPluginClasses();
+    }
+
+    public function register()
+    {
+        $this->registerExtensions();
+        $this->registerRoutes();
+        $this->postProcess();
     }
 
     /**
-     * Registers all available extensions using recursive directory search
+     * Returns all plugin fetched during recursive filesystem scan
+     *
+     * @return array
      */
-    public function registerExtensions()
+    private function getPluginClasses()
     {
-        $finder = new Finder();
-        $files  = $finder->files()->in(ROOTPATH . 'application')->name('*Extension.php');
-
+        $finder  = new Finder();
+        $files   = $finder->files()->in(ROOTPATH . 'application')->name('*Extension.php');
+        $classes = [];
         foreach ($files as $file) {
             $namespace = $file->getRelativePath();
             $class     = $namespace . '\\' . $file->getBasename('.php');
             $refClass  = new \ReflectionClass($class);
             $interface = 'Symfony\\Component\\DependencyInjection\\Extension\\ExtensionInterface';
             if ($refClass->isInstantiable() && $refClass->implementsInterface($interface)) {
-                $extension = new $class();
-                $this->containerBuilder->registerExtension($extension);
-                $this->containerBuilder->loadFromExtension($extension->getAlias());
-                $extension->registerRoutes($this->routeCollection, $this->containerBuilder);
+                $vendor             = $this->getVendor($refClass->getNamespaceName());
+                $classes[] = $class;
             }
+        }
 
+        return $classes;
+    }
+
+    /**
+     * Returns plugin vendor from full namespace path
+     *
+     * @param $namespace
+     *
+     * @return mixed
+     */
+    private function getVendor($namespace)
+    {
+        $namespacePath = explode('\\', $namespace);
+
+        return $namespacePath[0];
+    }
+
+    /**
+     * Registers all extensions
+     */
+    private function registerExtensions()
+    {
+        foreach ($this->classes as $class) {
+            $extension = new $class();
+            $this->containerBuilder->registerExtension($extension);
+            $this->containerBuilder->loadFromExtension($extension->getAlias());
+        }
+    }
+
+    /**
+     * Register routing definition found in extension
+     */
+    private function registerRoutes()
+    {
+        foreach ($this->classes as $class) {
+            $extension = new $class();
+            $extension->registerRoutes($this->routeCollection, $this->containerBuilder);
+        }
+    }
+
+    /**
+     * Triggers post-process function in extension.
+     * May be used to quickly override other DI definitions.
+     */
+    private function postProcess()
+    {
+        foreach ($this->classes as $class) {
+            $extension = new $class();
+            $extension->postProcess($this->containerBuilder);
         }
     }
 

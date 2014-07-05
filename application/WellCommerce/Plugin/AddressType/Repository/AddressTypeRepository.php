@@ -1,25 +1,29 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- *
+ * 
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- *
+ * 
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Core\Model;
 
-use WellCommerce\Core\Component\Model\AbstractModel;
+namespace WellCommerce\Plugin\AddressType\Repository;
 
 /**
- * Class SuffixType
+ * Class AddressTypeRepository
  *
- * @package WellCommerce\Core\Model
+ * @package WellCommerce\Plugin\AddressType\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class SuffixType extends AbstractModel
+class AddressTypeRepository implements R
 {
-    protected $table = 'suffix_type';
-}
+
+    public function all()
+    {
+        $this->get('address_type.model')->all();
+    }
+
+} 

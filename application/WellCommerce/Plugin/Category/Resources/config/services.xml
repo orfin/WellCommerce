@@ -16,6 +16,7 @@
     </parameters>
 
     <services>
+
         <service id="category.admin.controller" class="%category.admin.controller.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>

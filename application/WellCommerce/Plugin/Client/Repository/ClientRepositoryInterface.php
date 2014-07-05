@@ -20,11 +20,13 @@ namespace WellCommerce\Plugin\Client\Repository;
  */
 interface ClientRepositoryInterface
 {
-    const PRE_DELETE_EVENT  = 'client.repository.pre_delete';
-    const POST_DELETE_EVENT = 'client.repository.post_delete';
-    const PRE_SAVE_EVENT    = 'client.repository.pre_save';
-    const POST_SAVE_EVENT   = 'client.repository.post_save';
-    const LOGIN_SUCCEED     = 'client.login.succeed';
+    const PRE_DELETE_EVENT      = 'client.repository.pre_delete';
+    const POST_DELETE_EVENT     = 'client.repository.post_delete';
+    const PRE_SAVE_EVENT        = 'client.repository.pre_save';
+    const POST_SAVE_EVENT       = 'client.repository.post_save';
+    const LOGIN_SUCCEED         = 'client.login.succeed';
+    const ADDRESS_TYPE_BILLING  = 1;
+    const ADDRESS_TYPE_SHIPPING = 2;
 
     /**
      * Returns all clients as a collection

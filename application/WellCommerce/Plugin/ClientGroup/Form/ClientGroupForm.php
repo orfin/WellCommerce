@@ -12,10 +12,8 @@
 namespace WellCommerce\Plugin\ClientGroup\Form;
 
 use WellCommerce\Core\Component\Form\AbstractForm;
-use WellCommerce\Core\Component\Form\FormBuilder;
+use WellCommerce\Core\Component\Form\FormBuilderInterface;
 use WellCommerce\Core\Component\Form\FormInterface;
-use WellCommerce\Core\Component\Model\ModelInterface;
-use WellCommerce\Plugin\ClientGroup\Event\ClientGroupFormEvent;
 use WellCommerce\Plugin\ClientGroup\Model\ClientGroup;
 
 /**
@@ -27,14 +25,9 @@ use WellCommerce\Plugin\ClientGroup\Model\ClientGroup;
 class ClientGroupForm extends AbstractForm implements FormInterface
 {
     /**
-     * Builds form instance to add/edit ClientGroup model
-     *
-     * @param FormBuilder $builder FormBuilder instance
-     * @param array       $options Form options
-     *
-     * @return mixed|\WellCommerce\Core\Component\Form\Elements\Form
+     * {@inheritdoc}
      */
-    public function buildForm(FormBuilder $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $form = $builder->addForm($options);
 

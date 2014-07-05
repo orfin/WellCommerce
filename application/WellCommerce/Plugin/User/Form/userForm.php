@@ -12,10 +12,7 @@
 namespace WellCommerce\Plugin\User\Form;
 
 use WellCommerce\Core\Component\Form\AbstractForm;
-use WellCommerce\Core\Component\Form\Elements\Field;
-use WellCommerce\Core\Component\Form\Elements\Fieldset;
-use WellCommerce\Core\Component\Form\Elements\Form;
-use WellCommerce\Core\Component\Form\FormBuilder;
+use WellCommerce\Core\Component\Form\FormBuilderInterface;
 use WellCommerce\Core\Component\Form\FormInterface;
 use WellCommerce\Plugin\User\Model\User;
 
@@ -30,7 +27,7 @@ class UserForm extends AbstractForm implements FormInterface
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilder $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $form = $builder->addForm($options);
 

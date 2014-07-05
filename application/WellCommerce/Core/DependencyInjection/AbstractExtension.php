@@ -60,4 +60,15 @@ abstract class AbstractExtension extends Extension
      * @param RouteCollection $collection Route collection
      */
     abstract public function registerRoutes(RouteCollection $collection, ContainerBuilder $container);
+
+    /**
+     *
+     * @param ContainerBuilder $container
+     *
+     * @return mixed
+     */
+    public function postProcess(ContainerBuilder $container)
+    {
+        return false;
+    }
 }

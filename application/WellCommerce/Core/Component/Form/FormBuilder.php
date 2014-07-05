@@ -15,7 +15,6 @@ namespace WellCommerce\Core\Component\Form;
 use WellCommerce\Core\Component\AbstractComponent;
 use WellCommerce\Core\Component\Form\Conditions\ConditionInterface;
 use WellCommerce\Core\Component\Form\Elements\ElementInterface;
-use WellCommerce\Core\Component\Model\ModelInterface;
 use WellCommerce\Core\Event\FormEvent;
 
 /**
@@ -24,13 +23,8 @@ use WellCommerce\Core\Event\FormEvent;
  * @package WellCommerce\Core\Component\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class FormBuilder extends AbstractComponent
+class FormBuilder extends AbstractComponent implements FormBuilderInterface
 {
-    /**
-     * form.init event name
-     */
-    const FORM_INIT_EVENT = 'form.init';
-
     /**
      * @var FormInterface Form instance
      */
@@ -47,13 +41,7 @@ class FormBuilder extends AbstractComponent
     private $options;
 
     /**
-     * Creates the form, triggers init event and then populates form with values
-     *
-     * @param FormInterface  $form
-     * @param ModelInterface $model
-     * @param array          $options
-     *
-     * @return $this
+     * {@inheritdoc}
      */
     public function create(FormInterface $form, $model = null, array $options)
     {
@@ -88,13 +76,11 @@ class FormBuilder extends AbstractComponent
      */
     private function getInitEventName($formName)
     {
-        return sprintf('%s.%s', $formName, self::FORM_INIT_EVENT);
+        return sprintf('%s.%s', $formName, FormBuilderInterface::FORM_INIT_EVENT);
     }
 
     /**
-     * Returns Form object
-     *
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getForm()
     {
@@ -102,9 +88,7 @@ class FormBuilder extends AbstractComponent
     }
 
     /**
-     * Returns form data
-     *
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getFormData()
     {
@@ -112,9 +96,7 @@ class FormBuilder extends AbstractComponent
     }
 
     /**
-     * Sets new form data
-     *
-     * @return mixed
+     * {@inheritdoc}
      */
     public function setFormData(array $data)
     {
@@ -122,11 +104,7 @@ class FormBuilder extends AbstractComponent
     }
 
     /**
-     * Shortcut for adding Form
-     *
-     * @param array $options
-     *
-     * @return Elements\Form
+     * {@inheritdoc}
      */
     public function addForm(array $options)
     {
@@ -134,11 +112,7 @@ class FormBuilder extends AbstractComponent
     }
 
     /**
-     * Shortcut for adding Fieldset node
-     *
-     * @param array $options
-     *
-     * @return Elements\Fieldset
+     * {@inheritdoc}
      */
     public function addFieldset(array $options)
     {
@@ -146,11 +120,7 @@ class FormBuilder extends AbstractComponent
     }
 
     /**
-     * Shortcut for adding FieldsetRepeatable node
-     *
-     * @param array $options
-     *
-     * @return Elements\FieldsetRepeatable
+     * {@inheritdoc}
      */
     public function addFieldsetRepeatable(array $options)
     {
@@ -158,11 +128,7 @@ class FormBuilder extends AbstractComponent
     }
 
     /**
-     * Shortcut for adding LayoutBoxesList element
-     *
-     * @param array $options
-     *
-     * @return Elements\FieldsetRepeatable
+     * {@inheritdoc}
      */
     public function addLayoutBoxesList(array $options)
     {
@@ -170,11 +136,7 @@ class FormBuilder extends AbstractComponent
     }
 
     /**
-     * Shortcut for adding FieldsetLanguage node
-     *
-     * @param array $options
-     *
-     * @return Elements\FieldsetLanguage
+     * {@inheritdoc}
      */
     public function addFieldsetLanguage(array $options)
     {
@@ -184,11 +146,7 @@ class FormBuilder extends AbstractComponent
     }
 
     /**
-     * Shortcut for adding Image element
-     *
-     * @param $options
-     *
-     * @return Elements\Image
+     * {@inheritdoc}
      */
     public function addImage($options)
     {
@@ -198,11 +156,7 @@ class FormBuilder extends AbstractComponent
     }
 
     /**
-     * Shortcut for adding LocalFile element
-     *
-     * @param $options
-     *
-     * @return Elements\LocalFile
+     * {@inheritdoc}
      */
     public function addLocalFile($options)
     {
@@ -212,11 +166,7 @@ class FormBuilder extends AbstractComponent
     }
 
     /**
-     * Shortcut for adding Tip element
-     *
-     * @param $options
-     *
-     * @return Elements\Tip
+     * {@inheritdoc}
      */
     public function addTip($options)
     {
@@ -224,11 +174,7 @@ class FormBuilder extends AbstractComponent
     }
 
     /**
-     * Shortcut for adding TextField element
-     *
-     * @param array $options
-     *
-     * @return Elements\TextField
+     * {@inheritdoc}
      */
     public function addTextField(array $options)
     {
@@ -236,11 +182,7 @@ class FormBuilder extends AbstractComponent
     }
 
     /**
-     * Shortcut for adding Password element
-     *
-     * @param array $options
-     *
-     * @return Elements\Password
+     * {@inheritdoc}
      */
     public function addPassword(array $options)
     {
@@ -248,11 +190,7 @@ class FormBuilder extends AbstractComponent
     }
 
     /**
-     * Shortcut for adding Submit buttons
-     *
-     * @param array $options
-     *
-     * @return Elements\Submit
+     * {@inheritdoc}
      */
     public function addSubmitButton(array $options)
     {
@@ -261,11 +199,7 @@ class FormBuilder extends AbstractComponent
 
 
     /**
-     * Shortcut for adding Textarea element
-     *
-     * @param array $options
-     *
-     * @return Elements\Textarea
+     * {@inheritdoc}
      */
     public function addTextArea(array $options)
     {
@@ -273,11 +207,7 @@ class FormBuilder extends AbstractComponent
     }
 
     /**
-     * Shortcut for adding RichTextEditor element
-     *
-     * @param array $options
-     *
-     * @return Elements\RichTextEditor
+     * {@inheritdoc}
      */
     public function addRichTextEditor(array $options)
     {
@@ -285,11 +215,7 @@ class FormBuilder extends AbstractComponent
     }
 
     /**
-     * Shortcut for adding ShopSelector element
-     *
-     * @param array $options
-     *
-     * @return Elements\ShopSelector
+     * {@inheritdoc}
      */
     public function addShopSelector(array $options)
     {
@@ -297,11 +223,7 @@ class FormBuilder extends AbstractComponent
     }
 
     /**
-     * Shortcut for adding Select element
-     *
-     * @param array $options
-     *
-     * @return Elements\Select
+     * {@inheritdoc}
      */
     public function addSelect(array $options)
     {
@@ -309,11 +231,7 @@ class FormBuilder extends AbstractComponent
     }
 
     /**
-     * Shortcut for adding MultiSelect element
-     *
-     * @param array $options
-     *
-     * @return Elements\MultiSelect
+     * {@inheritdoc}
      */
     public function addMultiSelect(array $options)
     {
@@ -321,11 +239,7 @@ class FormBuilder extends AbstractComponent
     }
 
     /**
-     * Shortcut for adding Checkbox element
-     *
-     * @param array $options
-     *
-     * @return Elements\Checkbox
+     * {@inheritdoc}
      */
     public function addCheckBox(array $options)
     {
@@ -333,11 +247,7 @@ class FormBuilder extends AbstractComponent
     }
 
     /**
-     * Shortcut for adding StaticText element
-     *
-     * @param array $options
-     *
-     * @return Elements\StaticText
+     * {@inheritdoc}
      */
     public function addStaticText(array $options)
     {
@@ -345,11 +255,7 @@ class FormBuilder extends AbstractComponent
     }
 
     /**
-     * Shortcut for adding AttributeEditor element
-     *
-     * @param array $options
-     *
-     * @return Elements\AttributeEditor
+     * {@inheritdoc}
      */
     public function addAttributeEditor(array $options)
     {
@@ -357,11 +263,7 @@ class FormBuilder extends AbstractComponent
     }
 
     /**
-     * Shortcut for adding Price element
-     *
-     * @param array $options
-     *
-     * @return Elements\Price
+     * {@inheritdoc}
      */
     public function addPrice(array $options)
     {
@@ -369,9 +271,7 @@ class FormBuilder extends AbstractComponent
     }
 
     /**
-     * Shortcut for adding filter CommaToDotChanger
-     *
-     * @return Filters\CommaToDotChanger
+     * {@inheritdoc}
      */
     public function addFilterCommaToDotChanger()
     {
@@ -379,9 +279,7 @@ class FormBuilder extends AbstractComponent
     }
 
     /**
-     * Shortcut for adding filter NoCode
-     *
-     * @return Filters\NoCode
+     * {@inheritdoc}
      */
     public function addFilterNoCode()
     {
@@ -389,9 +287,7 @@ class FormBuilder extends AbstractComponent
     }
 
     /**
-     * Shortcut for adding filter Trim
-     *
-     * @return Filters\Trim
+     * {@inheritdoc}
      */
     public function addFilterTrim()
     {
@@ -399,9 +295,7 @@ class FormBuilder extends AbstractComponent
     }
 
     /**
-     * Shortcut for adding filter Secure
-     *
-     * @return Filters\Secure
+     * {@inheritdoc}
      */
     public function addFilterSecure()
     {
@@ -409,12 +303,7 @@ class FormBuilder extends AbstractComponent
     }
 
     /**
-     * Shortcut for adding rule Format
-     *
-     * @param $errorMessage
-     * @param $pattern
-     *
-     * @return Rules\Format
+     * {@inheritdoc}
      */
     public function addRuleFormat($errorMessage, $pattern)
     {
@@ -422,11 +311,7 @@ class FormBuilder extends AbstractComponent
     }
 
     /**
-     * Shortcut for adding rule Email
-     *
-     * @param $errorMessage
-     *
-     * @return Rules\Email
+     * {@inheritdoc}
      */
     public function addRuleEmail($errorMessage)
     {
@@ -434,13 +319,7 @@ class FormBuilder extends AbstractComponent
     }
 
     /**
-     * Shortcut for adding rule Custom
-     *
-     * @param          $errorMessage
-     * @param callable $function
-     * @param array    $params
-     *
-     * @return Rules\Custom
+     * {@inheritdoc}
      */
     public function addRuleCustom($errorMessage, \Closure $function, array $params = [])
     {
@@ -448,11 +327,7 @@ class FormBuilder extends AbstractComponent
     }
 
     /**
-     * Shortcut for adding rule Required
-     *
-     * @param $errorMessage
-     *
-     * @return Rules\Required
+     * {@inheritdoc}
      */
     public function addRuleRequired($errorMessage)
     {
@@ -460,12 +335,7 @@ class FormBuilder extends AbstractComponent
     }
 
     /**
-     * Shortcut for adding rule Unique
-     *
-     * @param       $errorMessage
-     * @param array $options
-     *
-     * @return Rules\Unique
+     * {@inheritdoc}
      */
     public function addRuleUnique($errorMessage, array $options)
     {
@@ -473,12 +343,7 @@ class FormBuilder extends AbstractComponent
     }
 
     /**
-     * Shortcut for adding rule LanguageUnique
-     *
-     * @param       $errorMessage
-     * @param array $options
-     *
-     * @return Rules\LanguageUnique
+     * {@inheritdoc}
      */
     public function addRuleLanguageUnique($errorMessage, array $options)
     {
@@ -486,12 +351,7 @@ class FormBuilder extends AbstractComponent
     }
 
     /**
-     * Processes options for using them in Select
-     *
-     * @param      $options
-     * @param bool $appendDefaultValue
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function makeOptions($options, $appendDefaultValue = false)
     {
@@ -505,28 +365,23 @@ class FormBuilder extends AbstractComponent
     }
 
     /**
-     * Shortcut for adding Tree element
-     *
-     * @param array $options
-     *
-     * @return Elements\Tree
+     * {@inheritdoc}
      */
     public function addTree(array $options)
     {
         return new Elements\Tree($options, $this->container);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function addSortableList(array $options)
     {
         return new Elements\SortableList($options, $this->container);
     }
 
     /**
-     * Shortcut for adding RangeEditor element
-     *
-     * @param array $options
-     *
-     * @return Elements\RangeEditor
+     * {@inheritdoc}
      */
     public function addRangeEditor(array $options)
     {
@@ -539,14 +394,7 @@ class FormBuilder extends AbstractComponent
     }
 
     /**
-     * Shortcut for adding Dependency
-     *
-     * @param                    $type
-     * @param ElementInterface   $element
-     * @param ConditionInterface $condition
-     * @param                    $argument
-     *
-     * @return Dependency
+     * {@inheritdoc}
      */
     public function addDependency($type, ElementInterface $element, ConditionInterface $condition, $argument)
     {

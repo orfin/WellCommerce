@@ -12,9 +12,8 @@
 namespace WellCommerce\Plugin\Product\Form;
 
 use WellCommerce\Core\Component\Form\AbstractForm;
-use WellCommerce\Core\Component\Form\AbstractFormBuilder;
 use WellCommerce\Core\Component\Form\Elements\Tip;
-use WellCommerce\Core\Component\Form\FormBuilder;
+use WellCommerce\Core\Component\Form\FormBuilderInterface;
 use WellCommerce\Core\Component\Form\FormInterface;
 use WellCommerce\Plugin\Product\Model\Product;
 
@@ -29,7 +28,7 @@ class ProductForm extends AbstractForm implements FormInterface
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilder $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $currencies = $this->get('currency.repository')->getAllCurrencyToSelect();
 

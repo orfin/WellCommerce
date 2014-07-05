@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="address_type.repository.class">WellCommerce\Plugin\AddressType\Repository\AddressTypeRepository</parameter>
+        <parameter key="address_type.model.class">WellCommerce\Plugin\AddressType\Model\AddressType</parameter>
+    </parameters>
+
+    <services>
+        <service id="address_type.repository" class="%address_type.repository.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="address_type.model" class="%address_type.model.class%"/>
+    </services>
+</container>

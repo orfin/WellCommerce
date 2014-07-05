@@ -76,10 +76,7 @@ class Application
 
         // Check if service container exists and/or needs to be regenerated
         $serviceContainerBuilder = new ServiceContainerBuilder($this->getKernelParameters(), $this->isDebug);
-        $serviceContainerBuilder->check();
-
-        // Init Service Container
-        $this->container = new ServiceContainer();
+        $this->container = $serviceContainerBuilder->check();
     }
 
     /**

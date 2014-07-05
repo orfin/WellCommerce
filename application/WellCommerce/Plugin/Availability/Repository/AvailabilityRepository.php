@@ -11,6 +11,7 @@
  */
 namespace WellCommerce\Plugin\Availability\Repository;
 
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use WellCommerce\Core\Component\Repository\AbstractRepository;
 use WellCommerce\Plugin\Availability\Model\Availability;
 use WellCommerce\Plugin\Availability\Model\AvailabilityTranslation;
@@ -28,7 +29,7 @@ class AvailabilityRepository extends AbstractRepository implements AvailabilityR
      */
     public function all()
     {
-        return Availability::with('translation')->get();
+        return $this->get('availability.model')->with('translation')->get();
     }
 
     /**
@@ -36,7 +37,7 @@ class AvailabilityRepository extends AbstractRepository implements AvailabilityR
      */
     public function find($id)
     {
-        return Availability::with('translation')->find($id);
+        return $this->get('availability.model')->with('translation')->find($id);
     }
 
     /**
@@ -56,7 +57,7 @@ class AvailabilityRepository extends AbstractRepository implements AvailabilityR
     {
         $this->transaction(function () use ($data, $id) {
 
-            $availability = Availability::firstOrCreate([
+            $availability = $this->get('availability.model')->firstOrCreate([
                 'id' => $id
             ]);
 
@@ -66,7 +67,7 @@ class AvailabilityRepository extends AbstractRepository implements AvailabilityR
 
             foreach ($this->getLanguageIds() as $language) {
 
-                $translation = AvailabilityTranslation::firstOrCreate([
+                $translation = $this->get('availability_translation.model')->firstOrCreate([
                     'availability_id' => $availability->id,
                     'language_id'     => $language
                 ]);

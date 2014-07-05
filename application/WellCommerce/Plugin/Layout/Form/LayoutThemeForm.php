@@ -11,9 +11,8 @@
  */
 namespace WellCommerce\Plugin\Layout\Form;
 
-use WellCommerce\Core\Component\Form\AbstractFormBuilder;
+use WellCommerce\Core\Component\Form\AbstractForm;
 use WellCommerce\Core\Component\Form\FormInterface;
-use WellCommerce\Plugin\Layout\Event\LayoutThemeFormEvent;
 
 /**
  * Class LayoutThemeForm
@@ -21,7 +20,7 @@ use WellCommerce\Plugin\Layout\Event\LayoutThemeFormEvent;
  * @package WellCommerce\Plugin\LayoutTheme\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LayoutThemeForm extends AbstractFormBuilder implements FormInterface
+class LayoutThemeForm extends AbstractForm implements FormInterface
 {
     /**
      * Initializes Form

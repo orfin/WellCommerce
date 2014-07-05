@@ -5,6 +5,8 @@
 
     <parameters>
         <parameter key="availability.admin.controller.class">WellCommerce\Plugin\Availability\Controller\Admin\AvailabilityController</parameter>
+        <parameter key="availability.model.class">WellCommerce\Plugin\Availability\Model\Availability</parameter>
+        <parameter key="availability_translation.model.class">WellCommerce\Plugin\Availability\Model\AvailabilityTranslation</parameter>
         <parameter key="availability.repository.class">WellCommerce\Plugin\Availability\Repository\AvailabilityRepository</parameter>
         <parameter key="availability.datagrid.class">WellCommerce\Plugin\Availability\DataGrid\AvailabilityDataGrid</parameter>
         <parameter key="availability.form.class">WellCommerce\Plugin\Availability\Form\AvailabilityForm</parameter>
@@ -20,6 +22,10 @@
                 <argument type="service" id="availability.repository"/>
             </call>
         </service>
+
+        <service id="availability.model" class="%availability.model.class%" />
+
+        <service id="availability_translation.model" class="%availability_translation.model.class%" />
 
         <service id="availability.repository" class="%availability.repository.class%">
             <call method="setContainer">
