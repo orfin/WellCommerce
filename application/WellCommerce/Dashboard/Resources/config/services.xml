@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="dashboard.admin.controller.class">WellCommerce\Dashboard\Controller\Admin\DashboardController</parameter>
+    </parameters>
+
+    <services>
+        <!-- Repository -->
+        <service id="dashboard.repository" class="WellCommerce\Dashboard\Repository\DashboardRepository">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <!-- Controller -->
+        <service id="dashboard.admin.controller" class="%dashboard.admin.controller.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setRepository">
+                <argument type="service" id="dashboard.repository"/>
+            </call>
+        </service>
+
+    </services>
+</container>

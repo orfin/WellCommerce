@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="shipping_method.calculator.cart_total_table.class">WellCommerce\ShippingMethod\Calculator\CartTotalTableCalculator</parameter>
+        <parameter key="shipping_method.calculator.fixed_price.class">WellCommerce\ShippingMethod\Calculator\FixedPriceCalculator</parameter>
+        <parameter key="shipping_method.calculator.item_quantity.class">WellCommerce\ShippingMethod\Calculator\ItemQuantityCalculator</parameter>
+        <parameter key="shipping_method.calculator.weight_table.class">WellCommerce\ShippingMethod\Calculator\WeightTableCalculator</parameter>
+    </parameters>
+
+    <services>
+        <service id="shipping_method.calculator.cart_total_table" class="%shipping_method.calculator.cart_total_table.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="shipping_method.calculator" alias="cart_total_table"/>
+            <tag name="kernel.event_listener" event="shipping_method.form.init" method="addConfigurationFieldset" />
+        </service>
+
+        <service id="shipping_method.calculator.fixed_price" class="%shipping_method.calculator.fixed_price.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="shipping_method.calculator" alias="fixed_price"/>
+            <tag name="kernel.event_listener" event="shipping_method.form.init" method="addConfigurationFieldset" />
+        </service>
+
+        <service id="shipping_method.calculator.item_quantity" class="%shipping_method.calculator.item_quantity.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="shipping_method.calculator" alias="item_quantity"/>
+            <tag name="kernel.event_listener" event="shipping_method.form.init" method="addConfigurationFieldset" />
+        </service>
+
+        <service id="shipping_method.calculator.weight_table" class="%shipping_method.calculator.weight_table.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="shipping_method.calculator" alias="weight_table"/>
+            <tag name="kernel.event_listener" event="shipping_method.form.init" method="addConfigurationFieldset" />
+        </service>
+    </services>
+</container>

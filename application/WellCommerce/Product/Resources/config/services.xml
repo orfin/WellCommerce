@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="product.admin.controller.class">WellCommerce\Product\Controller\Admin\ProductController</parameter>
+        <parameter key="product.front.controller.class">WellCommerce\Product\Controller\Front\ProductController</parameter>
+        <parameter key="product.box.controller.class">WellCommerce\Product\Controller\Box\ProductBoxController</parameter>
+        <parameter key="product_list.box.controller.class">WellCommerce\Product\Controller\Box\ProductListBoxController</parameter>
+        <parameter key="product.repository.class">WellCommerce\Product\Repository\ProductRepository</parameter>
+        <parameter key="product.datagrid.class">WellCommerce\Product\DataGrid\ProductDataGrid</parameter>
+        <parameter key="product.form.class">WellCommerce\Product\Form\ProductForm</parameter>
+        <parameter key="product.listener.class">WellCommerce\Product\EventListener\ProductListener</parameter>
+        <parameter key="product.provider.class">WellCommerce\Product\Provider\ProductProvider</parameter>
+    </parameters>
+
+    <services>
+        <service id="product.admin.controller" class="%product.admin.controller.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setRepository">
+                <argument type="service" id="product.repository"/>
+            </call>
+        </service>
+
+        <service id="product.front.controller" class="%product.front.controller.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setRepository">
+                <argument type="service" id="product.repository"/>
+            </call>
+            <call method="setLayout">
+                <argument>Product</argument>
+                <argument>true</argument>
+                <argument>3600</argument>
+            </call>
+        </service>
+
+        <service id="product.box.controller" class="%product.box.controller.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="product_list.box.controller" class="%product_list.box.controller.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="product.repository" class="%product.repository.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="product.datagrid" class="%product.datagrid.class%">
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="product.repository"/>
+        </service>
+
+        <service id="product.form" class="%product.form.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="product.provider" class="%product.provider.class%" />
+
+        <service id="product.listener" class="%product.listener.class%">
+            <argument type="service" id="service_container"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+    </services>
+</container>

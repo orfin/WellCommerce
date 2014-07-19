@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
+
+    <class name="WellCommerce\AddressType\Model\AddressType">
+        <property name="attributes">
+            <constraint name="Collection">
+                <option name="fields">
+                    <value key="type">
+                        <constraint name="Choice">
+                            <option name="choices">
+                                <value>1</value>
+                                <value>0</value>
+                            </option>
+                            <option name="message">Choose a valid address type.</option>
+                        </constraint>
+                    </value>
+                </option>
+                <option name="allowMissingFields">false</option>
+                <option name="allowExtraFields">true</option>
+            </constraint>
+        </property>
+    </class>
+</constraint-mapping>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="shipping_method.admin.controller.class">WellCommerce\ShippingMethod\Controller\Admin\ShippingMethodController</parameter>
+        <parameter key="shipping_method.repository.class">WellCommerce\ShippingMethod\Repository\ShippingMethodRepository</parameter>
+        <parameter key="shipping_method.datagrid.class">WellCommerce\ShippingMethod\DataGrid\ShippingMethodDataGrid</parameter>
+        <parameter key="shipping_method.form.class">WellCommerce\ShippingMethod\Form\ShippingMethodForm</parameter>
+        <parameter key="shipping_method.listener.class">WellCommerce\ShippingMethod\EventListener\ShippingMethodListener</parameter>
+        <parameter key="shipping_method.calculator.collection.class">WellCommerce\ShippingMethod\Calculator\ShippingMethodCalculatorCollection</parameter>
+    </parameters>
+    
+    <services>
+        <service id="shipping_method.admin.controller" class="%shipping_method.admin.controller.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setRepository">
+                <argument type="service" id="shipping_method.repository"/>
+            </call>
+        </service>
+
+        <service id="shipping_method.calculator.collection" class="%shipping_method.calculator.collection.class%" />
+
+        <service id="shipping_method.repository" class="%shipping_method.repository.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="shipping_method.datagrid" class="%shipping_method.datagrid.class%">
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="shipping_method.repository"/>
+        </service>
+
+        <service id="shipping_method.form" class="%shipping_method.form.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="shipping_method.listener" class="%shipping_method.listener.class%">
+            <argument type="service" id="service_container"/>
+            <tag name="kernel.event_subscriber" />
+        </service>
+    </services>
+</container>

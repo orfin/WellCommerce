@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="attribute.admin.controller.class">WellCommerce\Attribute\Controller\Admin\AttributeController</parameter>
+        <parameter key="attribute.repository.class">WellCommerce\Attribute\Repository\AttributeRepository</parameter>
+        <parameter key="attribute.form.class">WellCommerce\Attribute\Form\AttributeForm</parameter>
+        <parameter key="attribute.listener.class">WellCommerce\Attribute\EventListener\AttributeListener</parameter>
+    </parameters>
+
+    <services>
+        <service id="attribute.admin.controller" class="%attribute.admin.controller.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setRepository">
+                <argument type="service" id="attribute.repository"/>
+            </call>
+        </service>
+
+        <service id="attribute.repository" class="%attribute.repository.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="attribute.form" class="%attribute.form.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="attribute.listener" class="%attribute.listener.class%">
+            <argument type="service" id="service_container"/>
+            <tag name="kernel.event_subscriber" />
+        </service>
+    </services>
+</container>

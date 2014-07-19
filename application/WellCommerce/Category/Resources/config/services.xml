@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="category.admin.controller.class">WellCommerce\Category\Controller\Admin\CategoryController</parameter>
+        <parameter key="category.front.controller.class">WellCommerce\Category\Controller\Front\CategoryController</parameter>
+        <parameter key="category.box.controller.class">WellCommerce\Category\Controller\Box\CategoryBoxController</parameter>
+        <parameter key="category_info.box.controller.class">WellCommerce\Category\Controller\Box\CategoryInfoBoxController</parameter>
+        <parameter key="category.repository.class">WellCommerce\Category\Repository\CategoryRepository</parameter>
+        <parameter key="category.form.class">WellCommerce\Category\Form\CategoryForm</parameter>
+        <parameter key="category.tree.class">WellCommerce\Category\Form\CategoryTree</parameter>
+        <parameter key="category.listener.class">WellCommerce\Category\EventListener\CategoryListener</parameter>
+        <parameter key="category.provider.class">WellCommerce\Category\Provider\CategoryProvider</parameter>
+    </parameters>
+
+    <services>
+
+        <service id="category.admin.controller" class="%category.admin.controller.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setRepository">
+                <argument type="service" id="category.repository"/>
+            </call>
+        </service>
+
+        <service id="category.front.controller" class="%category.front.controller.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setRepository">
+                <argument type="service" id="category.repository"/>
+            </call>
+            <call method="setLayout">
+                <argument>Category</argument>
+                <argument>true</argument>
+                <argument>3600</argument>
+            </call>
+        </service>
+
+        <service id="category.box.controller" class="%category.box.controller.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setRepository">
+                <argument type="service" id="category.repository"/>
+            </call>
+        </service>
+
+        <service id="category_info.box.controller" class="%category_info.box.controller.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="category.repository" class="%category.repository.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="category.form" class="%category.form.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="category.tree" class="%category.tree.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="category.provider" class="%category.provider.class%" />
+
+        <service id="category.listener" class="%category.listener.class%">
+            <argument type="service" id="service_container"/>
+            <tag name="kernel.event_subscriber" />
+        </service>
+    </services>
+</container>

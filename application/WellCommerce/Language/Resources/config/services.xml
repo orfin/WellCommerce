@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="language.admin.controller.class">WellCommerce\Language\Controller\Admin\LanguageController</parameter>
+        <parameter key="language.repository.class">WellCommerce\Language\Repository\LanguageRepository</parameter>
+        <parameter key="language.datagrid.class">WellCommerce\Language\DataGrid\LanguageDataGrid</parameter>
+        <parameter key="language.form.class">WellCommerce\Language\Form\LanguageForm</parameter>
+        <parameter key="language.listener.class">WellCommerce\Language\EventListener\LanguageListener</parameter>
+    </parameters>
+
+    <services>
+        <service id="language.admin.controller" class="%language.admin.controller.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setRepository">
+                <argument type="service" id="language.repository"/>
+            </call>
+        </service>
+
+        <service id="language.repository" class="%language.repository.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="language.datagrid" class="%language.datagrid.class%">
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="language.repository"/>
+        </service>
+
+        <service id="language.form" class="%language.form.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="language.listener" class="%language.listener.class%">
+            <argument type="service" id="service_container"/>
+            <tag name="kernel.event_subscriber" />
+        </service>
+    </services>
+</container>
