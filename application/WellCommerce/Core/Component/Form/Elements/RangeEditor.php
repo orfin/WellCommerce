@@ -14,7 +14,7 @@ namespace WellCommerce\Core\Component\Form\Elements;
 
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use WellCommerce\Plugin\Tax\Repository\TaxRepositoryInterface;
+use WellCommerce\Tax\Repository\TaxRepositoryInterface;
 
 /**
  * Class RangeEditor
@@ -26,6 +26,7 @@ class RangeEditor extends OptionedField implements ElementInterface
 {
     const RANGE_PRECISION = 2;
     const PRICE_PRECISION = 2;
+
     /**
      * @var TaxRepositoryInterface
      */
@@ -69,6 +70,7 @@ class RangeEditor extends OptionedField implements ElementInterface
         $resolver->setDefaults([
             'range_precision' => self::RANGE_PRECISION,
             'price_precision' => self::PRICE_PRECISION,
+            'options'         => [],
             'vat_values'      =>
                 function (Options $options) {
                     if (isset($options['allow_vat']) && !$options['allow_vat']) {

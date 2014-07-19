@@ -1008,7 +1008,7 @@ var GLayoutBoxes = function() {
     };
 
     gThis._CreateBoxes = function() {
-        var jBoxes = $(gThis).children('.layout-box');
+        var jBoxes = $(gThis).find('.layout-box');
         gThis.m_iBoxes = jBoxes.length;
         for (var i = 0; i < gThis.m_iBoxes; i++) {
             var sName = jBoxes.eq(i).attr('id').substr("layout-box-".length);
@@ -1019,6 +1019,8 @@ var GLayoutBoxes = function() {
                 oLayoutBoxes: gThis
             });
         }
+
+        console.log(jBoxes.length);
     };
 
     gThis._CreateColumns = function() {

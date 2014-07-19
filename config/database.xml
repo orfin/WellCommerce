@@ -6,7 +6,7 @@
 	<parameters>
 		<parameter key="database_manager.class">Illuminate\Database\Capsule\Manager</parameter>
     </parameters>
-    
+
     <services>
         <service id="database_manager" class="%database_manager.class%" >
             <call method="addConnection">

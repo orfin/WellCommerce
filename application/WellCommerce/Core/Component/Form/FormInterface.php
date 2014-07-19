@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Core\Component\Form;
 
-use WellCommerce\Core\Component\Model\ModelInterface;
+use WellCommerce\Core\Component\Form\Builder\FormBuilderInterface;
 
 /**
  * Interface FormInterface
@@ -28,7 +28,7 @@ interface FormInterface
      * @param FormBuilderInterface $builder FormBuilder instance
      * @param array                $options Form options
      *
-     * @return mixed
+     * @return object
      */
     public function buildForm(FormBuilderInterface $builder, array $options);
 }

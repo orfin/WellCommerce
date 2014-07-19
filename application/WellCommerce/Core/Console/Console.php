@@ -32,7 +32,7 @@ class Console extends Application
             new Command\Migration\Add(),
             new Command\Migration\Up(),
             new Command\Migration\Down(),
-            new Command\Plugin\Add(),
+            new Command\Add(),
         ]);
     }
 

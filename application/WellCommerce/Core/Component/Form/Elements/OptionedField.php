@@ -31,10 +31,10 @@ abstract class OptionedField extends Field
         $resolver->setRequired([
             'name',
             'label',
-            'options'
         ]);
 
         $resolver->setOptional([
+            'options',
             'comment',
             'suffix',
             'prefix',
@@ -47,6 +47,10 @@ abstract class OptionedField extends Field
             'default',
             'rules',
             'dependencies'
+        ]);
+
+        $resolver->setDefaults([
+            'options' => []
         ]);
 
         $resolver->setAllowedTypes([

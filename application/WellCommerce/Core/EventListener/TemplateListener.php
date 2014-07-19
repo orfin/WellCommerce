@@ -70,7 +70,6 @@ class TemplateListener implements EventSubscriberInterface
         $request->attributes->set('_template_name', $template);
         $request->attributes->set('_template_loader', $loader);
         $request->attributes->set('_controller_mode', $mode);
-        $event->getRequest()->attributes->set('_template_vars', Array());
     }
 
     /**
@@ -83,7 +82,8 @@ class TemplateListener implements EventSubscriberInterface
         $request          = $event->getRequest();
         $controllerResult = $event->getControllerResult();
         $templateVars     = $request->attributes->get('_template_vars');
-        $parameters       = array_merge($templateVars, $controllerResult);
+        $boxVars          = $request->attributes->get('_box_id');
+        $parameters       = array_merge($templateVars, (array)$boxVars, $controllerResult);
         $template         = $request->attributes->get('_template_name');
         $loader           = $this->container->get($request->attributes->get('_template_loader'));
         $twig             = $this->container->get('twig');
@@ -135,7 +135,7 @@ class TemplateListener implements EventSubscriberInterface
                 'onKernelController',
                 -128
             ],
-//            KernelEvents::EXCEPTION  => 'onKernelException',
+            //            KernelEvents::EXCEPTION  => 'onKernelException',
             KernelEvents::VIEW       => 'onKernelView'
         ];
     }

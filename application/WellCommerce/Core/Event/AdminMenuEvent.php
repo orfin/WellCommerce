@@ -12,7 +12,7 @@
 namespace WellCommerce\Core\Event;
 
 use Symfony\Component\EventDispatcher\Event;
-use WellCommerce\Plugin\AdminMenu\Builder\AdminMenuBuilderInterface;
+use WellCommerce\AdminMenu\Builder\AdminMenuBuilderInterface;
 
 /**
  * Class FormEvent
@@ -23,7 +23,7 @@ use WellCommerce\Plugin\AdminMenu\Builder\AdminMenuBuilderInterface;
 class AdminMenuEvent extends Event
 {
     /**
-     * @var \WellCommerce\Plugin\AdminMenu\Builder\AdminMenuBuilderInterface
+     * @var \WellCommerce\AdminMenu\Builder\AdminMenuBuilderInterface
      */
     protected $builder;
 

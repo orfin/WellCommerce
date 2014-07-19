@@ -41,6 +41,11 @@ class LayoutBox
     public $controller;
 
     /**
+     * @var int Column span for box
+     */
+    public $span;
+
+    /**
      * Constructor
      *
      * @param $box
@@ -48,9 +53,10 @@ class LayoutBox
      */
     public function __construct($box, $controller)
     {
-        $this->id         = $box->id;
-        $this->settings   = $box->settings;
-        $this->type       = $box->type;
+        $this->id         = $box->box->id;
+        $this->settings   = $box->box->settings;
+        $this->type       = $box->box->type;
+        $this->span       = $box->span;
         $this->controller = $controller;
     }
 }

@@ -12,17 +12,11 @@
 
 include 'bootstrap.php';
 
-/*
- * Init application and set debug mode 
- */
+// init application and set debug mode
 $application = new WellCommerce\Core\Application(true);
 
-/*
- * Execute application
- */
+// execute application
 $application->run();
 
-/*
- * Stop application and trigger terminate events
- */
+// stop application and trigger terminate events
 $application->stop();

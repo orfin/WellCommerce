@@ -12,7 +12,7 @@
 namespace WellCommerce\Core\Template\Twig\Extension;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use WellCommerce\Plugin\File\Model\File;
+use WellCommerce\File\Model\File;
 
 /**
  * Class AssetExtension

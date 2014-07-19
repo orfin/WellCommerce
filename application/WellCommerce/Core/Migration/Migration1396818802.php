@@ -12,7 +12,7 @@
 namespace WellCommerce\Core\Migration;
 
 use WellCommerce\Core\Migration;
-use WellCommerce\Plugin\Layout\Model\LayoutPage;
+use WellCommerce\Layout\Model\LayoutPage;
 
 /**
  * Migration1396818802

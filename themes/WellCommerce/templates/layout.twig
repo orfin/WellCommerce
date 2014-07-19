@@ -1,3 +1,4 @@
+{% import "macros.twig" as macros %}
 {% include 'header.twig' %}
 <div class="container-fluid">
 
@@ -13,11 +14,9 @@
                 {% else %}
                     {% set width = column.width ~ 'px' %}
                 {% endif %}
-                <div class="layout-column" id="layout-column-{{ key }}" style="width: {{ width }}; float: left;">
                     {% for box in column.boxes %}
-                        {{ layout_box(box.controller, box.settings) }}
+                        {{ layout_box(box) }}
                     {% endfor %}
-                </div>
             {% endfor %}
         {% endblock %}
     </div>

@@ -17,7 +17,8 @@ use WellCommerce\Core\Layout\Box\LayoutBox;
 use WellCommerce\Core\Layout\Box\LayoutBoxCollection;
 use WellCommerce\Core\Layout\Column\LayoutColumn;
 use WellCommerce\Core\Layout\Column\LayoutColumnCollection;
-use WellCommerce\Plugin\Layout\Repository\LayoutRepositoryInterface;
+use WellCommerce\Layout\Model\LayoutPageColumnBox;
+use WellCommerce\Layout\Repository\LayoutRepositoryInterface;
 
 /**
  * Class LayoutRenderer
@@ -114,7 +115,7 @@ class LayoutRenderer extends AbstractComponent
     {
         $boxCollection = new LayoutBoxCollection();
         foreach ($layoutPageColumn->boxes as $item) {
-            $this->addBox($boxCollection, $item->box);
+            $this->addBox($boxCollection, $item);
         }
 
         $column = new LayoutColumn($layoutPageColumn->width, $boxCollection);
@@ -125,12 +126,12 @@ class LayoutRenderer extends AbstractComponent
      * Adds new box to related column collection
      *
      * @param LayoutBoxCollection $collection
-     * @param                     $box
+     * @param LayoutPageColumnBox $box
      */
-    private function addBox(LayoutBoxCollection $collection, $box)
+    private function addBox(LayoutBoxCollection $collection, LayoutPageColumnBox $box)
     {
         // prepare layout box
-        $configurator = $this->getLayoutManager()->getLayoutBoxConfigurator($box->type);
+        $configurator = $this->getLayoutManager()->getLayoutBoxConfigurator($box->box->type);
         $layoutBox    = new LayoutBox($box, $this->getBoxController($configurator));
 
         // add box to collection

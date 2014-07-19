@@ -12,7 +12,6 @@
 namespace WellCommerce\Core\Component\Form;
 
 use WellCommerce\Core\Component\AbstractComponent;
-use WellCommerce\Core\Component\Model\ModelInterface;
 
 /**
  * Class AbstractForm

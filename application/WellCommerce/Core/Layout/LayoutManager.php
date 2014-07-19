@@ -36,7 +36,7 @@ class LayoutManager extends AbstractComponent
     public function addLayoutBoxConfigurator($alias, LayoutBoxConfiguratorInterface $configurator)
     {
         if (isset($this->layoutBoxConfigurators[$alias])) {
-            throw new \LogicException(sprintf('LayoutBoxConfigurator "%s" is already registered'), $alias);
+            throw new \LogicException(sprintf('LayoutBoxConfigurator "%s" is already registered. Cannot register twice the same configurator. Please change its alias.'), $alias);
         }
         $this->layoutBoxConfigurators[$alias] = $configurator;
     }

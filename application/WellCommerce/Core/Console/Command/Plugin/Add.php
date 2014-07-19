@@ -9,7 +9,7 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Core\Console\Command\Plugin;
+namespace WellCommerce\Core\Console\Command;
 
 use WellCommerce\Core\Console\Command\AbstractCommand;
 
@@ -111,13 +111,13 @@ class Add extends AbstractCommand
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="{$serviceBaseName}.repository'" class="{$this->namespace}\\Plugin\\{$this->plugin}\\Repository\\{$this->plugin}Repository">
+        <service id="{$serviceBaseName}.repository'" class="{$this->namespace}\\\{$this->plugin}\\Repository\\{$this->plugin}Repository">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="{$serviceBaseName}.datagrid" class="{$this->namespace}\\Plugin\\{$this->plugin}\\DataGrid\\{$this->plugin}DataGrid">
+        <service id="{$serviceBaseName}.datagrid" class="{$this->namespace}\\\{$this->plugin}\\DataGrid\\{$this->plugin}DataGrid">
             <call method="setRepository">
                 <argument type="service" id="{$serviceBaseName}.repository"/>
             </call>
@@ -126,13 +126,13 @@ class Add extends AbstractCommand
             </call>
         </service>
 
-        <service id="{$serviceBaseName}.form" class="{$this->namespace}\\Plugin\\{$this->plugin}\\Form\\{$this->plugin}Form">
+        <service id="{$serviceBaseName}.form" class="{$this->namespace}\\\{$this->plugin}\\Form\\{$this->plugin}Form">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="{$serviceBaseName}.subscriber" class="{$this->namespace}\\Plugin\\{$this->plugin}\\Event\\{$this->plugin}EventSubscriber">
+        <service id="{$serviceBaseName}.subscriber" class="{$this->namespace}\\\{$this->plugin}\\Event\\{$this->plugin}EventSubscriber">
             <tag name="kernel.event_subscriber"/>
         </service>
     </services>
@@ -144,7 +144,7 @@ EOF;
     private function writeRoutingFile()
     {
         $plugin          = $this->plugin;
-        $controller      = 'WellCommerce\\Plugin\\' . $plugin . '\\Controller\\Admin\\' . $plugin . 'Controller';
+        $controller      = 'WellCommerce\\\' . $plugin . '\\Controller\\Admin\\' . $plugin . 'Controller';
 
         $content
             = <<<EOF

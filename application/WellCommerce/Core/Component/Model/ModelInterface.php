@@ -23,7 +23,7 @@ use Symfony\Component\Validator\Mapping\ClassMetadata;
 interface ModelInterface
 {
     /**
-     * Returns path to validation.xml mapping file
+     * Returns path to validation file
      *
      * @return string
      */

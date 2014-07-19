@@ -72,7 +72,7 @@ class TableInfo
         'product_translation' => ['id','name','slug','short_description','description','long_description','meta_keywords','meta_title','meta_description','product_id','language_id','created_at','updated_at'],
         'session' => ['sess_id','sess_data','sess_time'],
         'shipping_method' => ['id','hierarchy','enabled','type','file_id','created_at','updated_at'],
-        'shipping_method_cost' => ['id','shipping_method_id','from','to','cost','tax_id','created_at','updated_at'],
+        'shipping_method_cost' => ['id','shipping_method_id','from','to','cost','tax_id','currency_id','created_at','updated_at'],
         'shipping_method_payment_method' => ['id','payment_method_id','shipping_method_id','created_at','updated_at'],
         'shipping_method_shop' => ['id','shipping_method_id','shop_id','created_at','updated_at'],
         'shipping_method_translation' => ['id','name','shipping_method_id','language_id','created_at','updated_at'],

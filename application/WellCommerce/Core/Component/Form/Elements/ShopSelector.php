@@ -13,7 +13,7 @@
 namespace WellCommerce\Core\Component\Form\Elements;
 
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use WellCommerce\Plugin\Company\Repository\CompanyRepositoryInterface;
+use WellCommerce\Company\Repository\CompanyRepositoryInterface;
 
 /**
  * Class ShopSelector

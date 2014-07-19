@@ -14,6 +14,7 @@ namespace WellCommerce\Core\Component\DataGrid;
 
 use Illuminate\Database\Capsule\Manager;
 use WellCommerce\Core\Component\DataGrid\Column\ColumnCollection;
+use WellCommerce\Core\Component\DataGrid\Configuration\OptionsInterface;
 
 /**
  * Interface DataGridInterface
@@ -32,36 +33,4 @@ interface DataGridInterface
     const OPERATOR_LIKE       = 'LIKE';
     const OPERATOR_IN         = '=';
     const DATAGRID_INIT_EVENT = 'datagrid.init';
-
-    /**
-     * Initializes DataGrid columns
-     *
-     * @param ColumnCollection $columns
-     *
-     * @return mixed
-     */
-    public function initColumns(ColumnCollection $columns);
-
-    /**
-     * Returns DataGrid identifier
-     *
-     * @return mixed
-     */
-    public function getId();
-
-    /**
-     * Returns routes used in DataGrid
-     *
-     * @return array
-     */
-    public function getRoutes();
-
-    /**
-     * Sets query builder object
-     *
-     * @param Manager $manager
-     *
-     * @return mixed
-     */
-    public function setQuery(Manager $manager);
 }

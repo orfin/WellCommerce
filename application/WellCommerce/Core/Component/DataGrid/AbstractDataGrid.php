@@ -11,11 +11,19 @@
  */
 namespace WellCommerce\Core\Component\DataGrid;
 
+use Composer\Repository\RepositoryInterface;
+use phpDocumentor\Descriptor\Filter\Filter;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Validator\Exception\ValidatorException;
 use WellCommerce\Core\Component\AbstractComponent;
 use WellCommerce\Core\Component\DataGrid\Column\ColumnCollection;
+use WellCommerce\Core\Component\DataGrid\Configuration\Appearance;
+use WellCommerce\Core\Component\DataGrid\Configuration\EventHandlers;
+use WellCommerce\Core\Component\DataGrid\Configuration\Filters;
+use WellCommerce\Core\Component\DataGrid\Configuration\Mechanics;
+use WellCommerce\Core\Component\DataGrid\Configuration\RowActions;
+use WellCommerce\Core\Component\Form\Elements\Container;
 use xajaxResponse;
 
 /**
@@ -24,59 +32,145 @@ use xajaxResponse;
  * @package WellCommerce\Core\Component\DataGrid
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractDataGrid extends AbstractComponent
+abstract class AbstractDataGrid extends AbstractComponent implements DataGridInterface
 {
+    protected $id;
     protected $query;
     protected $columns;
     protected $warnings;
-    protected $container;
     protected $repository;
-    protected $options = [];
+    protected $appearance;
+    protected $mechanics;
+    protected $eventHandlers;
+    protected $filters;
+    protected $rowActions;
 
-    /**
-     * Constructor
-     *
-     * @param ContainerInterface $container
-     * @param                    $repository
-     * @param array              $options
-     */
-    public function __construct(ContainerInterface $container, $repository, array $options = [])
-    {
-        parent::setContainer($container);
-        $this->repository = $repository;
-        $this->columns    = new ColumnCollection();
-        $this->setOptions($options);
+    public function __construct(ContainerInterface $container){
+
     }
 
     /**
-     * Configures column options
-     *
-     * @param OptionsResolverInterface $resolver
+     * {@inheritdoc}
      */
-    public function configureOptions(array $options)
+    public function configure()
     {
-        $id = $this->getId();
+        $this->setAppearance(new Appearance());
+        $this->setMechanics(new Mechanics());
+        $this->setEventHandlers(new EventHandlers());
+        $this->setFilters(new Filters());
+        $this->setRowActions(new RowActions());
+    }
 
-        return array_replace_recursive([
-            'appearance'     => [
-                'column_select' => false
-            ],
-            'mechanics'      => [
-                'key'           => 'id',
-                'rows_per_page' => 25
-            ],
-            'event_handlers' => [
-                'load'       => $this->getXajaxManager()->registerFunction(['load_' . $id, $this, 'loadData']),
-                'edit_row'   => 'edit_' . $id,
-                'click_row'  => 'edit_' . $id,
-                'delete_row' => $this->getXajaxManager()->registerFunction(['delete_' . $id, $this, 'deleteRow'])
-            ],
-            'row_actions'    => [
-                DataGridInterface::ACTION_EDIT,
-                DataGridInterface::ACTION_DELETE
-            ],
-            'filters'        => []
-        ], $options);
+    /**
+     * {@inheritdoc}
+     */
+    public function setRepository(RepositoryInterface $repository)
+    {
+        $this->repository = $repository;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRepository()
+    {
+        return $this->repository;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setId($identifier)
+    {
+        $this->id = $identifier;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setAppearance(Appearance $appearance)
+    {
+        $this->appearance = $appearance;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAppearance()
+    {
+        return $this->appearance;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setMechanics(Mechanics $mechanics)
+    {
+        $this->mechanics = $mechanics;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getMechanics()
+    {
+        return new Mechanics();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setEventHandlers(EventHandlers $eventHandlers)
+    {
+        $this->eventHandlers = $eventHandlers;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getEventHandlers()
+    {
+        return new EventHandlers();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setRowActions(RowActions $actions)
+    {
+        $this->rowActions = $actions;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRowActions()
+    {
+        return $this->rowActions;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setFilters(Filters $filters)
+    {
+        $this->filters = $filters;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFilters()
+    {
+        return $this->filters;
     }
 
     /**
@@ -88,32 +182,39 @@ abstract class AbstractDataGrid extends AbstractComponent
     }
 
     /**
-     * Sets DataGrid options
-     *
-     * @param array $options
+     * {@inheritdoc}
      */
-    public function setOptions(array $options)
+    public function getColumns()
     {
-        $this->options = $this->configureOptions($options);
+        return $this->columns;
     }
 
     /**
-     * Returns DataGrid options
-     *
-     * @return array
+     * {@inheritdoc}
      */
-    public function getOptions()
+    public function setColumns(ColumnCollection $columns)
     {
-        return $this->options;
+        $this->columns = $columns;
     }
 
     /**
-     * Deletes DataGrid row
-     *
-     * @param $datagrid
-     * @param $id
-     *
-     * @return xajaxResponse
+     * {@inheritdoc}
+     */
+    public function setQuery(DataGridQueryInterface $query)
+    {
+        $this->query = $query;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getQuery()
+    {
+        return $this->query;
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function deleteRow($request)
     {
@@ -121,11 +222,7 @@ abstract class AbstractDataGrid extends AbstractComponent
     }
 
     /**
-     * Refreshes datagrid instance by id
-     *
-     * @param $datagridId
-     *
-     * @return xajaxResponse
+     * {@inheritdoc}
      */
     public function refresh($datagridId)
     {
@@ -136,11 +233,7 @@ abstract class AbstractDataGrid extends AbstractComponent
     }
 
     /**
-     * Updates DataGrid row
-     *
-     * @param $request
-     *
-     * @return mixed
+     * {@inheritdoc}
      */
     public function updateRow($request)
     {
@@ -155,11 +248,7 @@ abstract class AbstractDataGrid extends AbstractComponent
     }
 
     /**
-     * Returns datagrid data
-     *
-     * @param array $request
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function loadData(array $request)
     {
@@ -221,11 +310,7 @@ abstract class AbstractDataGrid extends AbstractComponent
     }
 
     /**
-     * Get real operator
-     *
-     * @param $operator
-     *
-     * @return string
+     * {@inheritdoc}
      */
     private function getOperator($operator)
     {
@@ -250,6 +335,9 @@ abstract class AbstractDataGrid extends AbstractComponent
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function processRows($rows)
     {
         static $transform = ["\r" => '\r', "\n" => '\n'];
@@ -271,33 +359,5 @@ abstract class AbstractDataGrid extends AbstractComponent
         return $rowData;
     }
 
-    /**
-     * Returns columns collection
-     *
-     * @return \WellCommerce\Core\Component\DataGrid\Column\ColumnCollection
-     */
-    public function getColumns()
-    {
-        return $this->columns;
-    }
 
-    /**
-     * Sets columns collection
-     *
-     * @param ColumnCollection $columns
-     */
-    public function setColumns(ColumnCollection $columns)
-    {
-        $this->columns = $columns;
-    }
-
-    /**
-     * Returns query
-     *
-     * @return mixed
-     */
-    public function getQuery()
-    {
-        return $this->query;
-    }
 }

@@ -16,6 +16,8 @@ use Illuminate\Database\Capsule\Manager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use WellCommerce\Core\Component\AbstractComponent;
 use WellCommerce\Core\Component\DataGrid\Column\ColumnCollection;
+use WellCommerce\Core\Component\DataGrid\Column\ColumnInterface;
+use WellCommerce\Core\Component\DataGrid\Configuration\Options;
 use WellCommerce\Core\Event\DataGridEvent;
 
 /**
@@ -28,6 +30,8 @@ class DataGridBuilder extends AbstractComponent
 {
     protected $datagrid;
     protected $manager;
+    protected $options;
+    protected $columns;
 
     /**
      * Sets Database Manager instance on class
@@ -48,7 +52,14 @@ class DataGridBuilder extends AbstractComponent
      */
     public function create(DataGridInterface $datagrid)
     {
-        $this->datagrid   = $datagrid;
+        $this->options  = new Options();
+        $this->columns  = new ColumnCollection();
+        $this->datagrid = $datagrid;
+        $this->datagrid->configure($this->options);
+        $this->datagrid->build($this->columns);
+
+        die();
+
         $columnCollection = new ColumnCollection();
         $this->datagrid->initColumns($columnCollection);
         $this->datagrid->setColumns($columnCollection);
@@ -56,6 +67,11 @@ class DataGridBuilder extends AbstractComponent
         $this->dispatchEvent($this->getInitEventName());
 
         return $this->datagrid;
+    }
+
+    public function addColumn(ColumnInterface $column)
+    {
+        $this->columns->add($column);
     }
 
     /**

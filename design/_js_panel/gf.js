@@ -1001,7 +1001,7 @@ GF_Autosuggest = GF_Instance.GF_Extend('GF_Autosuggest', function(target, option
 	*/
 	this.InitializeEvents = function() {
 		this.m_jInput.blur(this.BlurInput).focus(this.FocusInput).click(this.ClickedInput).keypress(this.KeyPressed).keydown(this.KeyDown);
-		$('#autosuggest-suggestions li').live('click', this.SuggestionChosen).live('mouseover', this.ChangeActiveSuggestion);
+		$('#auto_suggest-suggestions li').live('click', this.SuggestionChosen).live('mouseover', this.ChangeActiveSuggestion);
 	};
 	
 	/**
@@ -1009,15 +1009,15 @@ GF_Autosuggest = GF_Instance.GF_Extend('GF_Autosuggest', function(target, option
 	* 
 	* Handles the Focus event for input field.
 	* 
-	* Changes the field's name to disable the browser's built-in autosuggest,
+	* Changes the field's name to disable the browser's built-in auto_suggest,
 	* changes the active field indicator and passes command to the GetSuggestions() method.
 	* 
 	* @return bool - Always true.
 	*/
 	this.FocusInput = GF.NewEventHandler(function(event) {
-		var autosuggest = GF_Autosuggest.GetCurrentInstance(this);
-		autosuggest.m_jInput.attr('name', autosuggest.m_sName + '_' + Math.floor(Math.random() * 1000000));
-		GF_Autosuggest.active = autosuggest.m_iId;
+		var auto_suggest = GF_Autosuggest.GetCurrentInstance(this);
+		auto_suggest.m_jInput.attr('name', auto_suggest.m_sName + '_' + Math.floor(Math.random() * 1000000));
+		GF_Autosuggest.active = auto_suggest.m_iId;
 		if (!GF_Autosuggest.enabled) {
 			GF_Autosuggest.enabled = true;
 			return true;
@@ -1037,11 +1037,11 @@ GF_Autosuggest = GF_Instance.GF_Extend('GF_Autosuggest', function(target, option
 	* @return bool - Always true.
 	*/
 	this.BlurInput = GF.NewEventHandler(function(event) {
-		var autosuggest = GF_Autosuggest.GetCurrentInstance(this);
-		autosuggest.m_jInput.attr('name', autosuggest.m_sName);
+		var auto_suggest = GF_Autosuggest.GetCurrentInstance(this);
+		auto_suggest.m_jInput.attr('name', auto_suggest.m_sName);
 		GF_Autosuggest.last = GF_Autosuggest.active;
 		GF_Autosuggest.active = -1;
-		autosuggest.RetractSuggestions();
+		auto_suggest.RetractSuggestions();
 		return true;
 	});
 	
@@ -1071,15 +1071,15 @@ GF_Autosuggest = GF_Instance.GF_Extend('GF_Autosuggest', function(target, option
 	*/
 	this.ChangeActiveSuggestion = GF.NewEventHandler(function(newSuggestion) {
 		if (this instanceof GF_Autosuggest) {
-			var autosuggest = this;
-			autosuggest.m_iCurrentSuggestion = newSuggestion;
+			var auto_suggest = this;
+			auto_suggest.m_iCurrentSuggestion = newSuggestion;
 		}
 		else {
-			var autosuggest = GF_Autosuggest.ReturnInstance(GF_Autosuggest.active);
-			autosuggest.m_iCurrentSuggestion = $('#autosuggest-suggestions li').index(this);
+			var auto_suggest = GF_Autosuggest.ReturnInstance(GF_Autosuggest.active);
+			auto_suggest.m_iCurrentSuggestion = $('#auto_suggest-suggestions li').index(this);
 		}
-		$('#autosuggest-suggestions li').removeClass('active');
-		$('#autosuggest-suggestions li:eq(' + autosuggest.m_iCurrentSuggestion + ')').addClass('active');
+		$('#auto_suggest-suggestions li').removeClass('active');
+		$('#auto_suggest-suggestions li:eq(' + auto_suggest.m_iCurrentSuggestion + ')').addClass('active');
 		return true;
 	});
 	
@@ -1092,14 +1092,14 @@ GF_Autosuggest = GF_Instance.GF_Extend('GF_Autosuggest', function(target, option
 	*/
 	this.SuggestionChosen = GF.NewEventHandler(function(event) {
 		if (GF_Autosuggest.active >= 0)
-			var autosuggest = GF_Autosuggest.ReturnInstance(GF_Autosuggest.active);
+			var auto_suggest = GF_Autosuggest.ReturnInstance(GF_Autosuggest.active);
 		else if (GF_Autosuggest.last >= 0)
-			var autosuggest = GF_Autosuggest.ReturnInstance(GF_Autosuggest.last);
+			var auto_suggest = GF_Autosuggest.ReturnInstance(GF_Autosuggest.last);
 		else
 			return true;
-		autosuggest.m_jInput.val($('#autosuggest-suggestions li:eq(' + autosuggest.m_iCurrentSuggestion + ')').text()).change();
+		auto_suggest.m_jInput.val($('#auto_suggest-suggestions li:eq(' + auto_suggest.m_iCurrentSuggestion + ')').text()).change();
 		GF_Autosuggest.enabled = false;
-		autosuggest.m_jInput.focus();
+		auto_suggest.m_jInput.focus();
 		return true;
 	});
 	
@@ -1120,8 +1120,8 @@ GF_Autosuggest = GF_Instance.GF_Extend('GF_Autosuggest', function(target, option
 			case 38: //up
 				if (!(GF_Autosuggest.suggestions instanceof jQuery) || !GF_Autosuggest.suggestions.length)
 					return false;
-				var autosuggest = GF_Autosuggest.ReturnInstance(GF_Autosuggest.active);
-				autosuggest.ChangeActiveSuggestion(Math.max(0, autosuggest.m_iCurrentSuggestion - 1));
+				var auto_suggest = GF_Autosuggest.ReturnInstance(GF_Autosuggest.active);
+				auto_suggest.ChangeActiveSuggestion(Math.max(0, auto_suggest.m_iCurrentSuggestion - 1));
 				return false;
 			case 40: //down
 				if (!(GF_Autosuggest.suggestions instanceof jQuery) || !GF_Autosuggest.suggestions.length) {
@@ -1129,28 +1129,28 @@ GF_Autosuggest = GF_Instance.GF_Extend('GF_Autosuggest', function(target, option
 					return false;
 				}
 				else {
-					var autosuggest = GF_Autosuggest.ReturnInstance(GF_Autosuggest.active);
-					autosuggest.ChangeActiveSuggestion(Math.min(autosuggest.m_aSuggestions.length - 1, autosuggest.m_iCurrentSuggestion + 1));
+					var auto_suggest = GF_Autosuggest.ReturnInstance(GF_Autosuggest.active);
+					auto_suggest.ChangeActiveSuggestion(Math.min(auto_suggest.m_aSuggestions.length - 1, auto_suggest.m_iCurrentSuggestion + 1));
 				}
 				return false;
 			case 13: //enter
 				if (!(GF_Autosuggest.suggestions instanceof jQuery) || !GF_Autosuggest.suggestions.length)
 					return true;
-				var autosuggest = GF_Autosuggest.ReturnInstance(GF_Autosuggest.active);
-				autosuggest.SuggestionChosen();
-				autosuggest.RetractSuggestions();
+				var auto_suggest = GF_Autosuggest.ReturnInstance(GF_Autosuggest.active);
+				auto_suggest.SuggestionChosen();
+				auto_suggest.RetractSuggestions();
 				return false;
 			case 27: //esc
 				if (!(GF_Autosuggest.suggestions instanceof jQuery) || !GF_Autosuggest.suggestions.length)
 					return true;
-				var autosuggest = GF_Autosuggest.ReturnInstance(GF_Autosuggest.active);
-				autosuggest.RetractSuggestions();
+				var auto_suggest = GF_Autosuggest.ReturnInstance(GF_Autosuggest.active);
+				auto_suggest.RetractSuggestions();
 				return false;
 		}
 		if (window.opera || e.keyCode == 8 || e.keyCode == 46) {
-			var autosuggest = GF_Autosuggest.ReturnInstance(GF_Autosuggest.active);
-			if (!autosuggest.pending)
-				setTimeout(GF_Autosuggest.GetSuggestions, autosuggest.m_iDelay);
+			var auto_suggest = GF_Autosuggest.ReturnInstance(GF_Autosuggest.active);
+			if (!auto_suggest.pending)
+				setTimeout(GF_Autosuggest.GetSuggestions, auto_suggest.m_iDelay);
 			return true;
 		}
 	});
@@ -1168,15 +1168,15 @@ GF_Autosuggest = GF_Instance.GF_Extend('GF_Autosuggest', function(target, option
 		if (e.keyCode == 13) {
 			if (!(GF_Autosuggest.suggestions instanceof jQuery) || !GF_Autosuggest.suggestions.length)
 				return true;
-			var autosuggest = GF_Autosuggest.ReturnInstance(GF_Autosuggest.active);
-			autosuggest.SuggestionChosen();
-			autosuggest.RetractSuggestions();
+			var auto_suggest = GF_Autosuggest.ReturnInstance(GF_Autosuggest.active);
+			auto_suggest.SuggestionChosen();
+			auto_suggest.RetractSuggestions();
 			return false;
 		}
 		if (e.charCode) {
-			var autosuggest = GF_Autosuggest.ReturnInstance(GF_Autosuggest.active);
-			if (!autosuggest.pending)
-				setTimeout(GF_Autosuggest.GetSuggestions, autosuggest.m_iDelay);
+			var auto_suggest = GF_Autosuggest.ReturnInstance(GF_Autosuggest.active);
+			if (!auto_suggest.pending)
+				setTimeout(GF_Autosuggest.GetSuggestions, auto_suggest.m_iDelay);
 			return true;
 		}
 	});
@@ -1230,7 +1230,7 @@ GF_Autosuggest = GF_Instance.GF_Extend('GF_Autosuggest', function(target, option
 	* @return void
 	*/
 	this.CreateSuggestions = function() {
-		GF_Autosuggest.suggestions = $('<div id="autosuggest-suggestions"></div>');
+		GF_Autosuggest.suggestions = $('<div id="auto_suggest-suggestions"></div>');
 		GF_Autosuggest.suggestions.append('<div class="ne"></div>');
 		GF_Autosuggest.suggestions.append('<div class="nw"></div>');
 		GF_Autosuggest.suggestions.append('<div class="se"></div>');
@@ -1262,12 +1262,12 @@ GF_Autosuggest = GF_Instance.GF_Extend('GF_Autosuggest', function(target, option
 	* @return void
 	*/
 	this.ExpandSuggestions = function() {
-		var autosuggest = GF_Autosuggest.GetCurrentInstance(this);
+		var auto_suggest = GF_Autosuggest.GetCurrentInstance(this);
 		if (!(GF_Autosuggest.suggestions instanceof jQuery) || !GF_Autosuggest.suggestions.length) {
-			autosuggest.CreateSuggestions();
-			GF_Autosuggest.suggestions.css('width', autosuggest.m_jInput.width() + 12);
-			GF_Autosuggest.suggestions.css('left', autosuggest.m_jInput.offset().left - 1);
-			GF_Autosuggest.suggestions.css('top', autosuggest.m_jInput.offset().top + autosuggest.m_jInput.height() + 14);
+			auto_suggest.CreateSuggestions();
+			GF_Autosuggest.suggestions.css('width', auto_suggest.m_jInput.width() + 12);
+			GF_Autosuggest.suggestions.css('left', auto_suggest.m_jInput.offset().left - 1);
+			GF_Autosuggest.suggestions.css('top', auto_suggest.m_jInput.offset().top + auto_suggest.m_jInput.height() + 14);
 			GF_Autosuggest.suggestions.fadeIn(200);
 		}
 	};
@@ -1282,8 +1282,8 @@ GF_Autosuggest = GF_Instance.GF_Extend('GF_Autosuggest', function(target, option
 	this.RetractSuggestions = function() {
 		if (!(GF_Autosuggest.suggestions instanceof jQuery) || !GF_Autosuggest.suggestions.length)
 			return;
-		var autosuggest = GF_Autosuggest.GetCurrentInstance(this);
-		GF_Autosuggest.suggestions.fadeOut(200, autosuggest.DeleteSuggestions);
+		var auto_suggest = GF_Autosuggest.GetCurrentInstance(this);
+		GF_Autosuggest.suggestions.fadeOut(200, auto_suggest.DeleteSuggestions);
 	};
 	
 	/* Constructor call */
@@ -1292,20 +1292,20 @@ GF_Autosuggest = GF_Instance.GF_Extend('GF_Autosuggest', function(target, option
 	
 }, {
 	
-	enabled: true,           // Is the autosuggest enabled? It's temporarily disabled when user presses ESC.
-	active: -1,              // The active autosuggest.
-	last: -1,                // The last autosuggest that was selected - useful when handling the Blur event.
+	enabled: true,           // Is the auto_suggest enabled? It's temporarily disabled when user presses ESC.
+	active: -1,              // The active auto_suggest.
+	last: -1,                // The last auto_suggest that was selected - useful when handling the Blur event.
 	suggestions: GF.NULL,    // jQuery pointer to the suggestion list.
 	
 	/**
 	* GF_Autosuggest.GetSuggestions()
 	* 
-	* Requests suggestions for the currently active autosuggest using
+	* Requests suggestions for the currently active auto_suggest using
 	* its source function.
 	* 
 	* It sends a two-parameter request to the source function:
 	* - request object:
-	*   > id - autosuggest Id,
+	*   > id - auto_suggest Id,
 	*   > q - query typed by the user,
 	*   > n - max. number of suggestions expected.
 	* - name of the JS function to invoke when the answer is ready.
@@ -1316,32 +1316,32 @@ GF_Autosuggest = GF_Instance.GF_Extend('GF_Autosuggest', function(target, option
 		if (GF_Autosuggest.active < 0) {
 			return;
 		}
-		var autosuggest = GF_Autosuggest.ReturnInstance(GF_Autosuggest.active);
-		var query = autosuggest.m_jInput.val();
-		if (query.length < autosuggest.m_iMinLength) {
-			autosuggest.RetractSuggestions();
+		var auto_suggest = GF_Autosuggest.ReturnInstance(GF_Autosuggest.active);
+		var query = auto_suggest.m_jInput.val();
+		if (query.length < auto_suggest.m_iMinLength) {
+			auto_suggest.RetractSuggestions();
 			return;
 		}
-		if (autosuggest.pending)
+		if (auto_suggest.pending)
 			return;
-		autosuggest.pending = true;
-		autosuggest.m_fSource({
-			id: autosuggest.m_iId,
+		auto_suggest.pending = true;
+		auto_suggest.m_fSource({
+			id: auto_suggest.m_iId,
 			q: query,
-			n: autosuggest.m_iMaxSuggestions
+			n: auto_suggest.m_iMaxSuggestions
 		}, 'GF_Autosuggest.ProcessSuggestions');
 	},
 	
 	/**
 	* GF_Autosuggest.ProcessSuggestions(data)
 	* 
-	* Method that passes the response to the proper autosuggest object.
+	* Method that passes the response to the proper auto_suggest object.
 	* 
 	* It should be called by the server/source function when the response
 	* is ready. The response should be passed as its argument.
 	* 
 	* Response should consist of following attributed:
-	* - id - id of the autosuggest (same as acquired in the request)
+	* - id - id of the auto_suggest (same as acquired in the request)
 	* - q - the query for which the suggestions are
 	* - s - array of objects for each of the suggestions:
 	*   > name - the name that will be displayed in the list
@@ -1350,10 +1350,10 @@ GF_Autosuggest = GF_Instance.GF_Extend('GF_Autosuggest', function(target, option
 	*/
 	ProcessSuggestions: function(data) {
 		if (GF_Autosuggest.ReturnInstance(data.id) != undefined) {
-			var autosuggest = GF_Autosuggest.ReturnInstance(data.id);
-			autosuggest.pending = false;
-			autosuggest.LoadSuggestions(data);
-			if (data.q != autosuggest.m_jInput.val()) {
+			var auto_suggest = GF_Autosuggest.ReturnInstance(data.id);
+			auto_suggest.pending = false;
+			auto_suggest.LoadSuggestions(data);
+			if (data.q != auto_suggest.m_jInput.val()) {
 				GF_Autosuggest.GetSuggestions();
 			}
 		}
@@ -3625,7 +3625,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 				this.m_jAdditionalRows.find('.GF_Datagrid_Col_' + oC.id).children('span').css('width', oC.appearance.width - 2 * this.m_iPadding + this.m_iScrollbarWidth);
 			}
 			if (this.m_jFilter) {
-				this.m_jFilter.find('.GF_Datagrid_Col_' + oC.id).find('.GF_Datagrid_filter_input input, .GF_Datagrid_filter_autosuggest input').css('width', oC.appearance.width - 2 * this.m_iPadding - 6);
+				this.m_jFilter.find('.GF_Datagrid_Col_' + oC.id).find('.GF_Datagrid_filter_input input, .GF_Datagrid_filter_auto_suggest input').css('width', oC.appearance.width - 2 * this.m_iPadding - 6);
 				this.m_jFilter.find('.GF_Datagrid_Col_' + oC.id).find('.GF_Datagrid_filter_between input').css('width', oC.appearance.width - 2 * this.m_iPadding - 4 - 30);
 			}
 			this.m_jBody.find('.GF_Datagrid_Col_' + oC.id + '.editable input').css('width', oC.appearance.width - 2 * this.m_iPadding - 6);
@@ -3766,7 +3766,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 				break;
 			
 			case GF_Datagrid.FILTER_AUTOSUGGEST:
-				jFilter.addClass('GF_Datagrid_filter_autosuggest');
+				jFilter.addClass('GF_Datagrid_filter_auto_suggest');
 				var jField = $('<input type="text" value="' + default_value.replace(/%/g,"") + '"/>');
 				jField.change(this.LoadData);
 				jField.change(this._HandleGoToFirst);
@@ -3774,9 +3774,9 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 				jFilter.append(jField);
 				new GF_Autosuggest(jFilter, {
 					source: oF.source,
-					delay: this.m_oOptions.mechanics.autosuggest_delay,
-					maxSuggestions: this.m_oOptions.mechanics.autosuggest_suggestions,
-					minLength: this.m_oOptions.mechanics.autosuggest_min_length
+					delay: this.m_oOptions.mechanics.auto_suggest_delay,
+					maxSuggestions: this.m_oOptions.mechanics.auto_suggest_suggestions,
+					minLength: this.m_oOptions.mechanics.auto_suggest_min_length
 				});
 				break;
 			
@@ -4512,9 +4512,9 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 			key: GF.NULL,
 			default_sorting: GF.NULL,
 			right_click_menu: false,
-			autosuggest_delay: 500,
-			autosuggest_min_length: 1,
-			autosuggest_suggestions: 5,
+			auto_suggest_delay: 500,
+			auto_suggest_min_length: 1,
+			auto_suggest_suggestions: 5,
 			only_one_selected: false,
 			no_column_modification: false,
 			no_column_resizing: false,
