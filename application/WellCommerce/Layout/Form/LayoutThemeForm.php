@@ -11,8 +11,8 @@
  */
 namespace WellCommerce\Layout\Form;
 
-use WellCommerce\Core\Component\Form\AbstractForm;
-use WellCommerce\Core\Component\Form\FormInterface;
+use WellCommerce\Core\Form\AbstractForm;
+use WellCommerce\Core\Form\FormInterface;
 
 /**
  * Class LayoutThemeForm
@@ -27,7 +27,7 @@ class LayoutThemeForm extends AbstractForm implements FormInterface
      *
      * @param array $layout_themeData
      *
-     * @return mixed|\WellCommerce\Core\Component\Form\Elements\Form
+     * @return mixed|\WellCommerce\Core\Form\Elements\Form
      */
     public function init($layoutThemeData = [])
     {

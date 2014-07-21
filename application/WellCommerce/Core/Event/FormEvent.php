@@ -12,8 +12,8 @@
 namespace WellCommerce\Core\Event;
 
 use Symfony\Component\EventDispatcher\Event;
-use WellCommerce\Core\Component\Form\Elements\Form;
-use WellCommerce\Core\Component\Form\FormBuilder;
+use WellCommerce\Core\Form\Elements\Form;
+use WellCommerce\Core\Form\Builder\FormBuilder;
 
 /**
  * Class FormEvent
@@ -26,7 +26,7 @@ class FormEvent extends Event
     /**
      * Form builder instance
      *
-     * @var \WellCommerce\Core\Component\Form\FormBuilder
+     * @var \WellCommerce\Core\Form\Builder\FormBuilder
      */
     protected $formBuilder;
 

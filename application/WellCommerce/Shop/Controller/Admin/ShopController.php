@@ -12,7 +12,7 @@
 namespace WellCommerce\Shop\Controller\Admin;
 
 use Symfony\Component\Validator\Exception\ValidatorException;
-use WellCommerce\Core\Component\Controller\Admin\AbstractAdminController;
+use WellCommerce\Core\Controller\Admin\AbstractAdminController;
 use WellCommerce\Shop\Repository\ShopRepositoryInterface;
 
 /**

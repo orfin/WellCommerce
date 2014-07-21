@@ -11,9 +11,9 @@
  */
 namespace WellCommerce\File\Repository;
 
-use WellCommerce\Core\Component\Repository\AbstractRepository;
+use WellCommerce\Core\Repository\AbstractRepository;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use WellCommerce\Core\Component\Repository\RepositoryInterface;
+use WellCommerce\Core\Repository\RepositoryInterface;
 use WellCommerce\File\Model\File;
 
 /**

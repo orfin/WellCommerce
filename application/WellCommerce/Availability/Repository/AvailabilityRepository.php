@@ -12,7 +12,7 @@
 namespace WellCommerce\Availability\Repository;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use WellCommerce\Core\Component\Repository\AbstractRepository;
+use WellCommerce\Core\Repository\AbstractRepository;
 use WellCommerce\Availability\Model\Availability;
 use WellCommerce\Availability\Model\AvailabilityTranslation;
 

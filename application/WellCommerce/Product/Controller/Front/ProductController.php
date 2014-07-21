@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Product\Controller\Front;
 
-use WellCommerce\Core\Component\Controller\Front\AbstractFrontController;
+use WellCommerce\Core\Controller\Front\AbstractFrontController;
 use WellCommerce\Product\Layout\ProductLayout;
 use WellCommerce\Product\Repository\ProductRepositoryInterface;
 

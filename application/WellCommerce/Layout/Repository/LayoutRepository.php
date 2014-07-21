@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Layout\Repository;
 
-use WellCommerce\Core\Component\Repository\AbstractRepository;
+use WellCommerce\Core\Repository\AbstractRepository;
 use WellCommerce\Layout\Model\LayoutPage;
 
 /**

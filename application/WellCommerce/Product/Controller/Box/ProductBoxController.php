@@ -13,7 +13,7 @@
 namespace WellCommerce\Product\Controller\Box;
 
 use Symfony\Component\HttpFoundation\Request;
-use WellCommerce\Core\Component\Controller\Box\AbstractBoxController;
+use WellCommerce\Core\Controller\Box\AbstractBoxController;
 use WellCommerce\Product\Repository\ProductRepositoryInterface;
 
 /**

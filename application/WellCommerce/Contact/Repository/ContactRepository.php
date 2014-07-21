@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Contact\Repository;
 
-use WellCommerce\Core\Component\Repository\AbstractRepository;
+use WellCommerce\Core\Repository\AbstractRepository;
 use WellCommerce\Contact\Model\Contact;
 use WellCommerce\Contact\Model\ContactTranslation;
 

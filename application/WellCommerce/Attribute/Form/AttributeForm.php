@@ -11,9 +11,9 @@
  */
 namespace WellCommerce\Attribute\Form;
 
-use WellCommerce\Core\Component\Form\AbstractForm;
-use WellCommerce\Core\Component\Form\FormBuilder;
-use WellCommerce\Core\Component\Form\FormInterface;
+use WellCommerce\Core\Form\AbstractForm;
+use WellCommerce\Core\Form\Builder\FormBuilder;
+use WellCommerce\Core\Form\FormInterface;
 use WellCommerce\Attribute\Model\Attribute;
 use WellCommerce\Attribute\Model\AttributeGroup;
 

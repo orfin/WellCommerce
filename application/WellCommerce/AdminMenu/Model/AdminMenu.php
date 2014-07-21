@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\AdminMenu\Model;
 
-use WellCommerce\Core\Component\Model\AbstractModel;
+use WellCommerce\Core\Model\AbstractModel;
 
 /**
  * Class AdminMenu

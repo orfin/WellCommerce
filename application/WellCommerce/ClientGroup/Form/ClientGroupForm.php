@@ -11,9 +11,9 @@
  */
 namespace WellCommerce\ClientGroup\Form;
 
-use WellCommerce\Core\Component\Form\AbstractForm;
-use WellCommerce\Core\Component\Form\FormBuilderInterface;
-use WellCommerce\Core\Component\Form\FormInterface;
+use WellCommerce\Core\Form\AbstractForm;
+use WellCommerce\Core\Form\Builder\FormBuilderInterface;
+use WellCommerce\Core\Form\FormInterface;
 use WellCommerce\ClientGroup\Model\ClientGroup;
 
 /**

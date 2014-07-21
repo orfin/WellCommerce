@@ -12,10 +12,10 @@
 
 namespace WellCommerce\ShippingMethod\Calculator;
 
-use WellCommerce\Core\Component\AbstractComponent;
-use WellCommerce\Core\Component\Form\Conditions\Equals;
-use WellCommerce\Core\Component\Form\Dependency;
-use WellCommerce\Core\Component\Form\Option;
+use WellCommerce\Core\AbstractComponent;
+use WellCommerce\Core\Form\Conditions\Equals;
+use WellCommerce\Core\Form\Dependency;
+use WellCommerce\Core\Form\Option;
 use WellCommerce\Core\Event\FormEvent;
 
 /**
@@ -32,22 +32,22 @@ class AbstractShippingMethodCalculator extends AbstractComponent
     public $alias;
 
     /**
-     * @var \WellCommerce\Core\Component\Form\FormBuilderInterface
+     * @var \WellCommerce\Core\Form\Builder\FormBuilderInterface
      */
     public $builder;
 
     /**
-     * @var \WellCommerce\Core\Component\Form\FormInterface
+     * @var \WellCommerce\Core\Form\FormInterface
      */
     public $form;
 
     /**
-     * @var \WellCommerce\Core\Component\Form\Elements\Select
+     * @var \WellCommerce\Core\Form\Elements\Select
      */
     public $typeSelect;
 
     /**
-     * @var \WellCommerce\Core\Component\Form\Elements\Fieldset
+     * @var \WellCommerce\Core\Form\Elements\Fieldset
      */
     public $fieldset;
 

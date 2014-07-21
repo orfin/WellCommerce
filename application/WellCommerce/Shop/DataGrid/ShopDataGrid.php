@@ -12,11 +12,11 @@
 namespace WellCommerce\Shop\DataGrid;
 
 use Illuminate\Database\Capsule\Manager;
-use WellCommerce\Core\Component\DataGrid\AbstractDataGrid;
-use WellCommerce\Core\Component\DataGrid\Column\ColumnCollection;
-use WellCommerce\Core\Component\DataGrid\Column\ColumnInterface;
-use WellCommerce\Core\Component\DataGrid\Column\DataGridColumn;
-use WellCommerce\Core\Component\DataGrid\DataGridInterface;
+use WellCommerce\Core\DataGrid\AbstractDataGrid;
+use WellCommerce\Core\DataGrid\Column\ColumnCollection;
+use WellCommerce\Core\DataGrid\Column\ColumnInterface;
+use WellCommerce\Core\DataGrid\Column\DataGridColumn;
+use WellCommerce\Core\DataGrid\DataGridInterface;
 
 /**
  * Class ShopDataGrid

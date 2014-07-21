@@ -13,7 +13,7 @@
 namespace WellCommerce\Product\DataGrid;
 
 use Illuminate\Support\Manager;
-use WellCommerce\Core\Component\DataGrid\DataGridQueryInterface;
+use WellCommerce\Core\DataGrid\DataGridQueryInterface;
 
 /**
  * Class ProductDataGridQuery

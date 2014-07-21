@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\FileBag;
 use RecursiveArrayIterator;
 use RecursiveIteratorIterator;
-use WellCommerce\Core\Component\AbstractComponent;
+use WellCommerce\Core\AbstractComponent;
 
 /**
  * Class Uploader

@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Core\Helper;
 
-use WellCommerce\Core\Component\AbstractComponent;
+use WellCommerce\Core\AbstractComponent;
 
 /**
  * Class Helper

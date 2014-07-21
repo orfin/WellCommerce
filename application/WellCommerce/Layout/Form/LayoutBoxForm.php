@@ -11,10 +11,10 @@
  */
 namespace WellCommerce\Layout\Form;
 
-use WellCommerce\Core\Component\Form\AbstractForm;
-use WellCommerce\Core\Component\Form\FormBuilderInterface;
-use WellCommerce\Core\Component\Form\FormInterface;
-use WellCommerce\Core\Component\Form\Option;
+use WellCommerce\Core\Form\AbstractForm;
+use WellCommerce\Core\Form\Builder\FormBuilderInterface;
+use WellCommerce\Core\Form\FormInterface;
+use WellCommerce\Core\Form\Option;
 use WellCommerce\Layout\Model\LayoutBox;
 
 /**

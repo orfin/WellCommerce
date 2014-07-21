@@ -12,7 +12,7 @@
 namespace WellCommerce\Core\Template\Twig\Extension;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use WellCommerce\Core\Component\DataGrid\DataGridInterface;
+use WellCommerce\Core\DataGrid\DataGridInterface;
 
 /**
  * Class DataGridExtension

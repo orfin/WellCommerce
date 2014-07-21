@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Producer\Controller\Box;
 
-use WellCommerce\Core\Component\Controller\Box\AbstractBoxController;
+use WellCommerce\Core\Controller\Box\AbstractBoxController;
 use WellCommerce\Producer\Repository\ProducerRepositoryInterface;
 
 /**

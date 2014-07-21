@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\User\Controller\Admin;
 
-use WellCommerce\Core\Component\Controller\Admin\AbstractAdminController;
+use WellCommerce\Core\Controller\Admin\AbstractAdminController;
 use WellCommerce\User\Repository\UserRepositoryInterface;
 
 /**

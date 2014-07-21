@@ -12,7 +12,7 @@
 namespace WellCommerce\Core\Uploader;
 
 use Intervention\Image\Image;
-use WellCommerce\Core\Component\AbstractComponent;
+use WellCommerce\Core\AbstractComponent;
 
 class ImageGallery extends AbstractComponent
 {

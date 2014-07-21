@@ -5,15 +5,35 @@
 
     <parameters>
         <parameter key="datagrid_renderer.class">WellCommerce\Core\DataGrid\Renderer</parameter>
+        <parameter key="datagrid_builder.class">WellCommerce\Core\DataGrid\DataGridBuilder</parameter>
+        <parameter key="datagrid_loader.class">WellCommerce\Core\DataGrid\Loader\Loader</parameter>
+        <parameter key="datagrid_options.class">WellCommerce\Core\DataGrid\Options\Options</parameter>
+        <parameter key="datagrid_columns.class">WellCommerce\Core\DataGrid\Column\ColumnCollection</parameter>
+        <parameter key="datagrid_configurator.class">WellCommerce\Core\DataGrid\Configurator</parameter>
     </parameters>
 
     <services>
+        <service id="datagrid_loader" class="%datagrid_loader.class%" />
+
+        <service id="datagrid_options" class="%datagrid_options.class%" />
+
+        <service id="datagrid_columns" class="%datagrid_columns.class%" />
+
+        <service id="datagrid_configurator" class="%datagrid_configurator.class%" />
+
+        <service id="datagrid_builder" class="%datagrid_builder.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
 
         <service id="datagrid_renderer" class="%datagrid_renderer.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
+
+
         
     </services>
 </container>

@@ -11,8 +11,8 @@
  */
 namespace WellCommerce\Layout\Model;
 
-use WellCommerce\Core\Component\Model\AbstractModel;
-use WellCommerce\Core\Component\Model\ModelInterface;
+use WellCommerce\Core\Model\AbstractModel;
+use WellCommerce\Core\Model\ModelInterface;
 
 /**
  * Class LayoutPageColumn

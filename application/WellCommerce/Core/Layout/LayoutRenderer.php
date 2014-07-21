@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Core\Layout;
 
-use WellCommerce\Core\Component\AbstractComponent;
+use WellCommerce\Core\AbstractComponent;
 use WellCommerce\Core\Layout\Box\LayoutBox;
 use WellCommerce\Core\Layout\Box\LayoutBoxCollection;
 use WellCommerce\Core\Layout\Column\LayoutColumn;

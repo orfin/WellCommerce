@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Attribute\Repository;
 
-use WellCommerce\Core\Component\Repository\AbstractRepository;
+use WellCommerce\Core\Repository\AbstractRepository;
 use WellCommerce\Attribute\Model\Attribute;
 use WellCommerce\Attribute\Model\AttributeGroup;
 use WellCommerce\Attribute\Model\AttributeGroupTranslation;

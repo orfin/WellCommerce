@@ -1,0 +1,25 @@
+{% macro layout_js(container, layout) %}
+<script type="text/javascript">
+GCore.OnLoad(function() {
+    $('{{ container }}').GLayoutBoxes({
+        aoColumns: [
+            {% for column in layout.columns %}
+            new GLayoutColumn({
+                sClass: 'col-md-2',
+                asBoxes: [
+                    {% for box in column.boxes %}
+                    {
+                        sName: '{{ box.id }}',
+                        bCollapsed: false,
+                        iSpan: {{ box.span }}
+                    },
+                    {% endfor %}
+                ]
+            }),
+            {%  endfor %}
+        ],
+        sLayoutHash: 'c2a0d1f38b1700a03c0536310807ade5'
+    });
+});
+</script>
+{% endmacro %}

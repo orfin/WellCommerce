@@ -11,8 +11,8 @@
  */
 namespace WellCommerce\Contact\Model;
 
-use WellCommerce\Core\Component\Model\AbstractModel;
-use WellCommerce\Core\Component\Model\TranslatableModelInterface;
+use WellCommerce\Core\Model\AbstractModel;
+use WellCommerce\Core\Model\TranslatableModelInterface;
 
 /**
  * Class ContactTranslation

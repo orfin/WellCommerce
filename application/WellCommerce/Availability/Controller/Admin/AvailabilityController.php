@@ -12,7 +12,7 @@
 namespace WellCommerce\Availability\Controller\Admin;
 
 use Symfony\Component\Validator\Exception\ValidatorException;
-use WellCommerce\Core\Component\Controller\Admin\AbstractAdminController;
+use WellCommerce\Core\Controller\Admin\AbstractAdminController;
 use WellCommerce\Availability\Repository\AvailabilityRepositoryInterface;
 
 /**
@@ -31,7 +31,7 @@ class AvailabilityController extends AbstractAdminController
     public function indexAction()
     {
         return [
-            'datagrid' => $this->createDataGrid($this->get('availability.datagrid'))
+            'datagrid' => $this->getDataGrid($this->get('availability.datagrid'))
         ];
     }
 

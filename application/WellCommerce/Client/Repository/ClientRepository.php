@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Client\Repository;
 
-use WellCommerce\Core\Component\Repository\AbstractRepository;
+use WellCommerce\Core\Repository\AbstractRepository;
 use WellCommerce\Core\Helper\Password;
 use WellCommerce\Client\Model\Client;
 use WellCommerce\Client\Model\ClientDataInterface;

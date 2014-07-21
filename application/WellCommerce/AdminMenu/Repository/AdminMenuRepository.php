@@ -11,8 +11,8 @@
  */
 namespace WellCommerce\AdminMenu\Repository;
 
-use WellCommerce\Core\Component\Repository\AbstractRepository;
-use WellCommerce\Core\Component\Repository\RepositoryInterface;
+use WellCommerce\Core\Repository\AbstractRepository;
+use WellCommerce\Core\Repository\RepositoryInterface;
 use WellCommerce\AdminMenu\Model\AdminMenu;
 
 /**

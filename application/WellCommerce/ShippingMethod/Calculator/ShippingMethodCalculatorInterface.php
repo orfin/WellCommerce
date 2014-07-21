@@ -12,7 +12,7 @@
 
 namespace WellCommerce\ShippingMethod\Calculator;
 
-use WellCommerce\Core\Component\Form\FormBuilderInterface;
+use WellCommerce\Core\Form\Builder\FormBuilderInterface;
 
 /**
  * Interface ShippingMethodCalculatorInterface

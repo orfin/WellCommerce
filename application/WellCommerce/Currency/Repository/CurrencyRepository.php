@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Currency\Repository;
 
-use WellCommerce\Core\Component\Repository\AbstractRepository;
+use WellCommerce\Core\Repository\AbstractRepository;
 use WellCommerce\Currency\Model\Currency;
 use Symfony\Component\Intl\Intl;
 

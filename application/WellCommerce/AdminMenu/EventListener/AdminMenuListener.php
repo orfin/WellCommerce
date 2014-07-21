@@ -17,12 +17,13 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
-use WellCommerce\Core\Component\DataGrid\Column\ColumnInterface;
-use WellCommerce\Core\Component\DataGrid\Column\DataGridColumn;
+use WellCommerce\Core\DataGrid\Column\ColumnInterface;
+use WellCommerce\Core\DataGrid\Column\DataGridColumn;
 use WellCommerce\AdminMenu\Builder\AdminMenuBuilder;
 use WellCommerce\AdminMenu\Builder\AdminMenuItem;
 use WellCommerce\AdminMenu\Event\AdminMenuInitEvent;
-use WellCommerce\Availability\Repository\AvailabilityRepositoryInterface;
+use WellCommerce\Core\DataGrid\Configuration\Appearance;
+use WellCommerce\Core\Event\DataGridEvent;
 
 /**
  * Class AdminMenuListener
@@ -192,31 +193,35 @@ class AdminMenuListener implements EventSubscriberInterface
     {
     }
 
-    public function onAvailabilityDataGridInitAction(Event $event)
+    public function onAvailabilityDataGridInitAction(DataGridEvent $event)
     {
-        $datagrid = $event->getDataGrid();
-        $options  = $datagrid->getOptions();
+//        $datagrid = $event->getDataGrid();
+//        $options  = $datagrid->getOptions();
+//
+//        $options->setAppearance(new Appearance(['header' =>true]));
+//
+//        $datagrid->setOptions($options);
 
-        $options['foo'] = 1;
-
-        $datagrid->setOptions($options);
-
-        $collection = $datagrid->getColumnCollection();
-
-        $collection->add(new DataGridColumn([
-            'id'         => 'test',
-            'source'     => '1111',
-            'caption'    => 'UD',
-            'sorting'    => [
-                'default_order' => ColumnInterface::SORT_DIR_DESC
-            ],
-            'appearance' => [
-                'width' => 90,
-            ],
-            'filter'     => [
-                'type' => ColumnInterface::FILTER_BETWEEN
-            ]
-        ]));
+//        $options['foo'] = 1;
+//
+//        $datagrid->setOptions($options);
+//
+//        $collection = $datagrid->getColumnCollection();
+//
+//        $collection->add(new DataGridColumn([
+//            'id'         => 'test',
+//            'source'     => '1111',
+//            'caption'    => 'UD',
+//            'sorting'    => [
+//                'default_order' => ColumnInterface::SORT_DIR_DESC
+//            ],
+//            'appearance' => [
+//                'width' => 90,
+//            ],
+//            'filter'     => [
+//                'type' => ColumnInterface::FILTER_BETWEEN
+//            ]
+//        ]));
     }
 
     public static function getSubscribedEvents()
@@ -230,7 +235,7 @@ class AdminMenuListener implements EventSubscriberInterface
             //            'availability.form.submit' => 'onAvailabilityFormSubmitAction'
             //            AvailabilityRepositoryInterface::PRE_SAVE_EVENT  => 'onAvailabilityModelPreSaveAction',
             //            AvailabilityRepositoryInterface::POST_SAVE_EVENT => 'onAvailabilityModelPostSaveAction'
-            //            'availability.datagrid.init' => 'onAvailabilityDataGridInitAction'
+                        'availability.datagrid.init' => 'onAvailabilityDataGridInitAction'
         );
     }
 }

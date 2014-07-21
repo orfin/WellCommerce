@@ -12,10 +12,10 @@
 
 namespace WellCommerce\Core\Layout\Box;
 
-use WellCommerce\Core\Component\AbstractComponent;
-use WellCommerce\Core\Component\Form\Conditions\Equals;
-use WellCommerce\Core\Component\Form\Dependency;
-use WellCommerce\Core\Component\Form\Option;
+use WellCommerce\Core\AbstractComponent;
+use WellCommerce\Core\Form\Conditions\Equals;
+use WellCommerce\Core\Form\Dependency;
+use WellCommerce\Core\Form\Option;
 use WellCommerce\Core\Event\FormEvent;
 
 /**

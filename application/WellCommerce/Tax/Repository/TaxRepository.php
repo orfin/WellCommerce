@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Tax\Repository;
 
-use WellCommerce\Core\Component\Repository\AbstractRepository;
+use WellCommerce\Core\Repository\AbstractRepository;
 use WellCommerce\Tax\Model\Tax;
 use WellCommerce\Tax\Model\TaxTranslation;
 

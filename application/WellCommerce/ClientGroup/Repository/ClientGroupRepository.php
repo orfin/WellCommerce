@@ -11,8 +11,8 @@
  */
 namespace WellCommerce\ClientGroup\Repository;
 
-use WellCommerce\Core\Component\Repository\AbstractRepository;
-use WellCommerce\Core\Component\Repository\RepositoryInterface;
+use WellCommerce\Core\Repository\AbstractRepository;
+use WellCommerce\Core\Repository\RepositoryInterface;
 use WellCommerce\ClientGroup\Model\ClientGroup;
 use WellCommerce\ClientGroup\Model\ClientGroupTranslation;
 

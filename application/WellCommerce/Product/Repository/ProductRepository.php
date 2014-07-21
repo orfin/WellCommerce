@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Product\Repository;
 
-use WellCommerce\Core\Component\Repository\AbstractRepository;
+use WellCommerce\Core\Repository\AbstractRepository;
 use WellCommerce\Product\Model\Product;
 use WellCommerce\Product\Model\ProductTranslation;
 

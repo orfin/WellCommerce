@@ -11,8 +11,8 @@
  */
 namespace WellCommerce\User\Model;
 
-use WellCommerce\Core\Component\Model\AbstractModel;
-use WellCommerce\Core\Component\Model\ModelInterface;
+use WellCommerce\Core\Model\AbstractModel;
+use WellCommerce\Core\Model\ModelInterface;
 use WellCommerce\Core\Helper\Password;
 
 /**

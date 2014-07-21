@@ -12,8 +12,8 @@
 namespace WellCommerce\Core\Template\Twig\Extension;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use WellCommerce\Core\Component\Form\Elements\Form;
-use WellCommerce\Core\Component\Form\FormInterface;
+use WellCommerce\Core\Form\Elements\Form;
+use WellCommerce\Core\Form\FormInterface;
 
 /**
  * Class FormExtension

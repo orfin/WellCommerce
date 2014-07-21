@@ -11,11 +11,11 @@
  */
 namespace WellCommerce\Layout\Form;
 
-use WellCommerce\Core\Component\Form\AbstractForm;
-use WellCommerce\Core\Component\Form\Elements\ElementInterface;
-use WellCommerce\Core\Component\Form\FormBuilderInterface;
-use WellCommerce\Core\Component\Form\FormInterface;
-use WellCommerce\Core\Component\Model\Collection\CustomCollection;
+use WellCommerce\Core\Form\AbstractForm;
+use WellCommerce\Core\Form\Elements\ElementInterface;
+use WellCommerce\Core\Form\Builder\FormBuilderInterface;
+use WellCommerce\Core\Form\FormInterface;
+use WellCommerce\Core\Model\Collection\CustomCollection;
 
 /**
  * Class LayoutPageForm

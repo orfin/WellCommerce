@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Category\Model;
 
-use WellCommerce\Core\Component\Model\AbstractModel;
+use WellCommerce\Core\Model\AbstractModel;
 use WellCommerce\Core\Helper\Helper;
 
 /**

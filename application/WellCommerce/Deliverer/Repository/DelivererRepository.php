@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Deliverer\Repository;
 
-use WellCommerce\Core\Component\Repository\AbstractRepository;
+use WellCommerce\Core\Repository\AbstractRepository;
 use WellCommerce\Deliverer\Model\Deliverer;
 use WellCommerce\Deliverer\Model\DelivererTranslation;
 

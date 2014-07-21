@@ -11,8 +11,7 @@
  */
 namespace WellCommerce\HomePage\Controller\Front;
 
-use WellCommerce\Core\Component\Controller\Front\AbstractFrontController;
-use WellCommerce\HomePage\Layout\HomePageLayout;
+use WellCommerce\Core\Controller\Front\AbstractFrontController;
 
 /**
  * Class HomePageController

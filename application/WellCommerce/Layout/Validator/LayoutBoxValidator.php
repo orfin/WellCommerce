@@ -13,7 +13,7 @@
 namespace WellCommerce\Layout\Validator;
 
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
-use WellCommerce\Core\Component\AbstractComponent;
+use WellCommerce\Core\AbstractComponent;
 
 /**
  * Class LayoutBoxValidator

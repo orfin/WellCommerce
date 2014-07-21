@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Core\Layout;
 
-use WellCommerce\Core\Component\AbstractComponent;
+use WellCommerce\Core\AbstractComponent;
 use WellCommerce\Core\Layout\Box\LayoutBoxConfiguratorInterface;
 
 /**

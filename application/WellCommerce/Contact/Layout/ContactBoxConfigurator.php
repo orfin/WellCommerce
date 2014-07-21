@@ -12,9 +12,9 @@
 
 namespace WellCommerce\Contact\Layout;
 
-use WellCommerce\Core\Component\Form\Conditions\Equals;
-use WellCommerce\Core\Component\Form\Dependency;
-use WellCommerce\Core\Component\Form\Option;
+use WellCommerce\Core\Form\Conditions\Equals;
+use WellCommerce\Core\Form\Dependency;
+use WellCommerce\Core\Form\Option;
 use WellCommerce\Core\Event\FormEvent;
 use WellCommerce\Core\Layout\Box\LayoutBoxConfigurator;
 use WellCommerce\Core\Layout\Box\LayoutBoxConfiguratorInterface;

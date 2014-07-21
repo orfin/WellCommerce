@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Contact\Controller\Box;
 
-use WellCommerce\Core\Component\Controller\Box\AbstractBoxController;
+use WellCommerce\Core\Controller\Box\AbstractBoxController;
 
 /**
  * Class ContactBoxController

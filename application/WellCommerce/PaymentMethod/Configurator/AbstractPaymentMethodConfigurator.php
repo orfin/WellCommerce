@@ -12,7 +12,7 @@
 
 namespace WellCommerce\PaymentMethod\Configurator;
 
-use WellCommerce\Core\Component\AbstractComponent;
+use WellCommerce\Core\AbstractComponent;
 
 /**
  * Class AbstractPaymentMethodConfigurator

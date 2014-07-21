@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\CacheManager\Repository;
 
-use WellCommerce\Core\Component\Repository\AbstractRepository;
+use WellCommerce\Core\Repository\AbstractRepository;
 use WellCommerce\Core\Model\CacheManager;
 use WellCommerce\Core\Model\CacheManagerTranslation;
 

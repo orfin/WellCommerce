@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\User\Repository;
 
-use WellCommerce\Core\Component\Repository\AbstractRepository;
+use WellCommerce\Core\Repository\AbstractRepository;
 use WellCommerce\Core\Helper\Password;
 use WellCommerce\User\Model\User;
 use WellCommerce\User\Model\UserDataInterface;

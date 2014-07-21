@@ -12,7 +12,7 @@
 
 namespace WellCommerce\AddressType\Type;
 
-use WellCommerce\Core\Component\Form\FormBuilder;
+use WellCommerce\Core\Form\Builder\FormBuilder;
 
 /**
  * Class Billing

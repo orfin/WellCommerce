@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\PluginManager\Repository;
 
-use WellCommerce\Core\Component\Repository\AbstractRepository;
+use WellCommerce\Core\Repository\AbstractRepository;
 use WellCommerce\Core\Model\PluginManager;
 
 /**

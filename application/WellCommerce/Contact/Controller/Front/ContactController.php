@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Contact\Controller\Front;
 
-use WellCommerce\Core\Component\Controller\Front\AbstractFrontController;
+use WellCommerce\Core\Controller\Front\AbstractFrontController;
 
 /**
  * Class ContactController

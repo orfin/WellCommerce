@@ -46,7 +46,7 @@ class TemplateGuesser
         $r = new \ReflectionClass($controller[0]);
 
         // check if admin controller
-        if ($r->implementsInterface('WellCommerce\\Core\\Component\\Controller\\Admin\\AdminControllerInterface')) {
+        if ($r->implementsInterface('WellCommerce\\Core\\Controller\\Admin\\AdminControllerInterface')) {
             if (!preg_match('/Controller\\\Admin\\\(.+)Controller$/', $r->getName(), $matches)) {
                 throw new \InvalidArgumentException(sprintf('The "%s" class does not look like an admin controller class', $controller));
             }
@@ -61,7 +61,7 @@ class TemplateGuesser
         }
 
         // check if front controller
-        if ($r->implementsInterface('WellCommerce\\Core\\Component\\Controller\\Front\FrontControllerInterface')) {
+        if ($r->implementsInterface('WellCommerce\\Core\\Controller\\Front\FrontControllerInterface')) {
             if (!preg_match('/Controller\\\Front\\\(.+)Controller$/', $r->getName(), $matches)) {
                 throw new \InvalidArgumentException(sprintf('The "%s" class does not look like an front controller class', $controller));
             }
@@ -75,7 +75,7 @@ class TemplateGuesser
             ];
         }
 
-        if ($r->implementsInterface('WellCommerce\\Core\\Component\\Controller\\Box\BoxControllerInterface')) {
+        if ($r->implementsInterface('WellCommerce\\Core\\Controller\\Box\BoxControllerInterface')) {
             if (!preg_match('/Controller\\\Box\\\(.+)BoxController$/', $r->getName(), $matches)) {
                 throw new \InvalidArgumentException(sprintf('The "%s" class does not look like an box controller class', $controller));
             }

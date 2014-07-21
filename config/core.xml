@@ -6,13 +6,12 @@
     <parameters>
         <parameter key="cache_manager.class">Zend\Cache\StorageFactory</parameter>
         <parameter key="config_locator.class">Symfony\Component\Config\FileLocator</parameter>
-        <parameter key="controller_resolver.class">WellCommerce\Core\Component\Controller\ControllerResolver</parameter>
-        <parameter key="datagrid_builder.class">WellCommerce\Core\Component\DataGrid\DataGridBuilder</parameter>
+        <parameter key="controller_resolver.class">WellCommerce\Core\Controller\ControllerResolver</parameter>
         <parameter key="event_dispatcher.class">Symfony\Component\EventDispatcher\ContainerAwareEventDispatcher</parameter>
         <parameter key="encryption.class">Illuminate\Encryption\Encrypter</parameter>
         <parameter key="finder.class">Symfony\Component\Finder\Finder</parameter>
         <parameter key="filesystem.class">Symfony\Component\Filesystem\Filesystem</parameter>
-        <parameter key="form_builder.class">WellCommerce\Core\Component\Form\FormBuilder</parameter>
+        <parameter key="form_builder.class">WellCommerce\Core\Form\Builder\FormBuilder</parameter>
         <parameter key="helper.class">WellCommerce\Core\Helper</parameter>
         <parameter key="kernel.class">Symfony\Component\HttpKernel\DependencyInjection\ContainerAwareHttpKernel</parameter>
         <parameter key="layout_manager.class">WellCommerce\Core\Layout\LayoutManager</parameter>
@@ -84,15 +83,6 @@
         <service id="form_builder" class="%form_builder.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
-            </call>
-        </service>
-
-        <service id="datagrid_builder" class="%datagrid_builder.class%">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <call method="setDatabaseManager">
-                <argument type="service" id="database_manager"/>
             </call>
         </service>
 

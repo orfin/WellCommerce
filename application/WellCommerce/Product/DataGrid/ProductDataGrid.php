@@ -13,14 +13,14 @@ namespace WellCommerce\Product\DataGrid;
 
 use Illuminate\Database\Capsule\Manager;
 use Symfony\Component\Routing\Route;
-use WellCommerce\Core\Component\DataGrid\AbstractDataGrid;
-use WellCommerce\Core\Component\DataGrid\Collection\RoutesCollection;
-use WellCommerce\Core\Component\DataGrid\Column\ColumnCollection;
-use WellCommerce\Core\Component\DataGrid\Column\ColumnInterface;
-use WellCommerce\Core\Component\DataGrid\Column\DataGridColumn;
-use WellCommerce\Core\Component\DataGrid\DataGridInterface;
-use WellCommerce\Core\Component\DataGrid\DataGridOptions;
-use WellCommerce\Core\Component\DataGrid\DataGridOptionsInterface;
+use WellCommerce\Core\DataGrid\AbstractDataGrid;
+use WellCommerce\Core\DataGrid\Collection\RoutesCollection;
+use WellCommerce\Core\DataGrid\Column\ColumnCollection;
+use WellCommerce\Core\DataGrid\Column\ColumnInterface;
+use WellCommerce\Core\DataGrid\Column\DataGridColumn;
+use WellCommerce\Core\DataGrid\DataGridInterface;
+use WellCommerce\Core\DataGrid\DataGridOptions;
+use WellCommerce\Core\DataGrid\DataGridOptionsInterface;
 
 /**
  * Class ProductDataGrid

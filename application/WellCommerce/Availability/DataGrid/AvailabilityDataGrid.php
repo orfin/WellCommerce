@@ -11,9 +11,11 @@
  */
 namespace WellCommerce\Availability\DataGrid;
 
-use WellCommerce\Core\Component\DataGrid\AbstractDataGrid;
-use WellCommerce\Core\Component\DataGrid\Column\ColumnInterface;
-use WellCommerce\Core\Component\DataGrid\Column\DataGridColumn;
+use WellCommerce\Core\DataGrid\AbstractDataGrid;
+use WellCommerce\Core\DataGrid\Column\Column;
+use WellCommerce\Core\DataGrid\Column\ColumnCollection;
+use WellCommerce\Core\DataGrid\Column\ColumnInterface;
+use WellCommerce\Core\DataGrid\DataGridInterface;
 
 /**
  * Class AvailabilityDataGrid
@@ -21,13 +23,14 @@ use WellCommerce\Core\Component\DataGrid\Column\DataGridColumn;
  * @package WellCommerce\Availability\DataGrid
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AvailabilityDataGrid extends AbstractDataGrid
+class AvailabilityDataGrid extends AbstractDataGrid implements DataGridInterface
 {
-    protected $id = 'availability';
-
-    public function addColumns(ColumnCollection $collection)
+    /**
+     * {@inheritdoc}
+     */
+    public function addColumns()
     {
-        $collection->add(new DataGridColumn([
+        $this->columns->add(new Column([
             'id'         => 'id',
             'source'     => 'availability.id',
             'caption'    => $this->trans('Id'),
@@ -43,7 +46,7 @@ class AvailabilityDataGrid extends AbstractDataGrid
             ]
         ]));
 
-        $collection->add(new DataGridColumn([
+        $this->columns->add(new Column([
             'id'         => 'name',
             'source'     => 'availability_translation.name',
             'caption'    => $this->trans('Name'),
@@ -55,14 +58,5 @@ class AvailabilityDataGrid extends AbstractDataGrid
                 'type' => ColumnInterface::FILTER_INPUT
             ]
         ]));
-    }
-
-    public function getQuery(Manager $manager)
-    {
-        $query = $manager->table('availability');
-        $query->join('availability_translation', 'availability_translation.availability_id', '=', 'availability.id');
-        $query->groupBy('availability.id');
-
-        return $query;
     }
 }

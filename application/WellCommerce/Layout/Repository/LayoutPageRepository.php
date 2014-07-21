@@ -11,8 +11,8 @@
  */
 namespace WellCommerce\Layout\Repository;
 
-use WellCommerce\Core\Component\Repository\AbstractRepository;
-use WellCommerce\Core\Component\Repository\RepositoryInterface;
+use WellCommerce\Core\Repository\AbstractRepository;
+use WellCommerce\Core\Repository\RepositoryInterface;
 use WellCommerce\Layout\Model\LayoutPage;
 use WellCommerce\Layout\Model\LayoutPageColumn;
 use WellCommerce\Layout\Model\LayoutPageColumnBox;

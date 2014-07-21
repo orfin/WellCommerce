@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\PaymentMethod\Repository;
 
-use WellCommerce\Core\Component\Repository\AbstractRepository;
+use WellCommerce\Core\Repository\AbstractRepository;
 
 /**
  * Class PaymentMethodAbstractRepository

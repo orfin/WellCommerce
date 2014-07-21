@@ -11,8 +11,8 @@
  */
 namespace WellCommerce\Layout\DataGrid;
 
-use WellCommerce\Core\Component\DataGrid\AbstractDataGrid;
-use WellCommerce\Core\Component\DataGrid\DataGridInterface;
+use WellCommerce\Core\DataGrid\AbstractDataGrid;
+use WellCommerce\Core\DataGrid\DataGridInterface;
 use WellCommerce\Layout\Event\LayoutThemeDataGridEvent;
 
 /**

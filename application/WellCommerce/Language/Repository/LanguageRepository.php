@@ -12,7 +12,7 @@
 namespace WellCommerce\Language\Repository;
 
 use Symfony\Component\Intl\Intl;
-use WellCommerce\Core\Component\Repository\AbstractRepository;
+use WellCommerce\Core\Repository\AbstractRepository;
 use WellCommerce\Language\Model\Language;
 
 /**

@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Product\Provider;
 
-use WellCommerce\Core\Component\AbstractComponent;
+use WellCommerce\Core\AbstractComponent;
 use WellCommerce\Product\Model\Product;
 
 /**
