@@ -31,7 +31,7 @@ class ProductController extends AbstractAdminController
     public function indexAction()
     {
         return [
-            'datagrid' => $this->createDataGrid($this->get('product.datagrid'))
+            'datagrid' => $this->getDataGrid($this->get('product.datagrid'))
         ];
     }
 

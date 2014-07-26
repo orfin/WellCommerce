@@ -12,25 +12,40 @@
 
 namespace WellCommerce\Core\DataGrid\Configuration\EventHandler;
 
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use WellCommerce\Core\DataGrid\Configuration\OptionInterface;
+
 /**
  * Class Loaded
  *
  * @package WellCommerce\Core\DataGrid\Configuration\EventHandler
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Loaded
+class Loaded extends AbstractEventHandler implements EventHandlerInterface
 {
-    public function getEventName()
+    /**
+     * {@inheritdoc}
+     */
+    public function getFunctionName()
     {
-        return 'update_row';
+        return 'loaded';
     }
 
-    public function configure(OptionsResolverInterface $resolver)
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setRequired([
-            'callback',
-            'success_message',
-            'error_message',
+            'function',
+        ]);
+
+        $resolver->setDefaults([
+            'function' => OptionInterface::GF_NULL,
+        ]);
+
+        $resolver->setAllowedTypes([
+            'function' => ['string'],
         ]);
     }
 } 

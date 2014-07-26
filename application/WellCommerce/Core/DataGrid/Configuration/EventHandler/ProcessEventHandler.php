@@ -12,7 +12,40 @@
 
 namespace WellCommerce\Core\DataGrid\Configuration\EventHandler;
 
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use WellCommerce\Core\DataGrid\Configuration\OptionInterface;
 
-class ProcessEventHandler {
+/**
+ * Class ProcessEventHandler
+ *
+ * @package WellCommerce\Core\DataGrid\Configuration\EventHandler
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
+ */
+class ProcessEventHandler extends AbstractEventHandler implements EventHandlerInterface
+{
+    /**
+     * {@inheritdoc}
+     */
+    public function getFunctionName()
+    {
+        return 'process';
+    }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setRequired([
+            'function',
+        ]);
+
+        $resolver->setDefaults([
+            'function' => OptionInterface::GF_NULL,
+        ]);
+
+        $resolver->setAllowedTypes([
+            'function' => ['string'],
+        ]);
+    }
 } 

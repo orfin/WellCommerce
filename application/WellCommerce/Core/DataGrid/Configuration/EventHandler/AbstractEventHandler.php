@@ -47,27 +47,15 @@ class AbstractEventHandler
     public function configureOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setRequired([
-            'function',
-            'callback',
-            'row_action',
-            'group_action',
-            'context_action',
+            'function'
         ]);
 
         $resolver->setDefaults([
-            'function'       => OptionInterface::GF_NULL,
-            'callback'       => OptionInterface::GF_NULL,
-            'row_action'     => false,
-            'group_action'   => false,
-            'context_action' => false,
+            'function'       => OptionInterface::GF_NULL
         ]);
 
         $resolver->setAllowedTypes([
-            'function'       => ['string', 'int'],
-            'callback'       => ['string', 'int'],
-            'row_action'     => ['bool', 'string'],
-            'group_action'   => ['bool', 'string'],
-            'context_action' => ['bool', 'string'],
+            'function'       => ['string', 'int']
         ]);
     }
 

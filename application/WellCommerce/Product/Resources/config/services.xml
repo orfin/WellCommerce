@@ -10,6 +10,8 @@
         <parameter key="product_list.box.controller.class">WellCommerce\Product\Controller\Box\ProductListBoxController</parameter>
         <parameter key="product.repository.class">WellCommerce\Product\Repository\ProductRepository</parameter>
         <parameter key="product.datagrid.class">WellCommerce\Product\DataGrid\ProductDataGrid</parameter>
+        <parameter key="product.datagrid.configurator.class">WellCommerce\Product\DataGrid\ProductDataGridConfigurator</parameter>
+        <parameter key="product.datagrid.query.class">WellCommerce\Product\DataGrid\ProductDataGridQuery</parameter>
         <parameter key="product.form.class">WellCommerce\Product\Form\ProductForm</parameter>
         <parameter key="product.listener.class">WellCommerce\Product\EventListener\ProductListener</parameter>
         <parameter key="product.provider.class">WellCommerce\Product\Provider\ProductProvider</parameter>
@@ -57,9 +59,25 @@
             </call>
         </service>
 
+        <service id="product.datagrid.query" class="%product.datagrid.query.class%">
+            <argument type="service" id="database_manager"/>
+        </service>
+
+        <service id="product.datagrid.configurator" class="%product.datagrid.configurator.class%">
+            <argument key="identifier">product</argument>
+            <argument type="service" id="datagrid_options" />
+            <argument type="service" id="datagrid_columns" />
+            <argument type="service" id="product.datagrid.query" />
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
         <service id="product.datagrid" class="%product.datagrid.class%">
             <argument type="service" id="service_container"/>
             <argument type="service" id="product.repository"/>
+            <argument type="service" id="datagrid_loader" />
+            <configurator service="product.datagrid.configurator" method="configure" />
         </service>
 
         <service id="product.form" class="%product.form.class%">

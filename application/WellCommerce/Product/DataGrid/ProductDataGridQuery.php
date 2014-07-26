@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Product\DataGrid;
 
-use Illuminate\Support\Manager;
-use WellCommerce\Core\DataGrid\DataGridQueryInterface;
+use WellCommerce\Core\DataGrid\QueryBuilder\AbstractQueryBuilder;
+use WellCommerce\Core\DataGrid\QueryBuilder\QueryBuilderInterface;
 
 /**
  * Class ProductDataGridQuery
@@ -21,21 +21,20 @@ use WellCommerce\Core\DataGrid\DataGridQueryInterface;
  * @package WellCommerce\Product\DataGrid
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductDataGridQuery implements DataGridQueryInterface
+class ProductDataGridQuery extends AbstractQueryBuilder implements QueryBuilderInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function getQuery(Manager $manager)
+    public function getQuery()
     {
-        $query = $manager->table('product');
-        $query->leftJoin('product_translation', 'product_translation.product_id', '=', 'product.id');
-        $query->leftJoin('product_category', 'product_category.product_id', '=', 'product.id');
-        $query->leftJoin('category_translation', 'category_translation.category_id', '=', 'product_category.category_id');
-        $query->leftJoin('tax', 'product.tax_id', '=', 'tax.id');
-        $query->groupBy('product.id');
-
-        return $query;
+        $qb = $this->getManager()->table('product');
+        $qb->leftJoin('product_translation', 'product_translation.product_id', '=', 'product.id');
+        $qb->leftJoin('product_category', 'product_category.product_id', '=', 'product.id');
+        $qb->leftJoin('category_translation', 'category_translation.category_id', '=', 'product_category.category_id');
+        $qb->leftJoin('tax', 'product.tax_id', '=', 'tax.id');
+        $qb->groupBy('product.id');
+        
+        return $qb;
     }
-
 } 
