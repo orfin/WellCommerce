@@ -13,9 +13,8 @@ namespace WellCommerce\Unit\DataGrid;
 
 use Illuminate\Database\Capsule\Manager;
 use WellCommerce\Core\DataGrid\AbstractDataGrid;
-use WellCommerce\Core\DataGrid\Column\ColumnCollection;
+use WellCommerce\Core\DataGrid\Column\Column;
 use WellCommerce\Core\DataGrid\Column\ColumnInterface;
-use WellCommerce\Core\DataGrid\Column\DataGridColumn;
 use WellCommerce\Core\DataGrid\DataGridInterface;
 
 /**
@@ -29,27 +28,9 @@ class UnitDataGrid extends AbstractDataGrid implements DataGridInterface
     /**
      * {@inheritdoc}
      */
-    public function getId()
+    public function addColumns()
     {
-        return 'producer';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getRoutes()
-    {
-        return [
-            'edit' => $this->generateUrl('admin.unit.edit')
-        ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function initColumns(ColumnCollection $collection)
-    {
-        $collection->add(new DataGridColumn([
+        $this->columns->add(new Column([
             'id'         => 'id',
             'source'     => 'unit.id',
             'caption'    => $this->trans('Id'),
@@ -65,7 +46,7 @@ class UnitDataGrid extends AbstractDataGrid implements DataGridInterface
             ]
         ]));
 
-        $collection->add(new DataGridColumn([
+        $this->columns->add(new Column([
             'id'         => 'name',
             'source'     => 'unit_translation.name',
             'caption'    => $this->trans('Name'),
@@ -77,15 +58,5 @@ class UnitDataGrid extends AbstractDataGrid implements DataGridInterface
                 'type' => ColumnInterface::FILTER_INPUT
             ]
         ]));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setQuery(Manager $manager)
-    {
-        $this->query = $manager->table('unit');
-        $this->query->join('unit_translation', 'unit_translation.unit_id', '=', 'unit.id');
-        $this->query->groupBy('unit.id');
     }
 }

@@ -7,6 +7,8 @@
         <parameter key="unit.admin.controller.class">WellCommerce\Unit\Controller\Admin\UnitController</parameter>
         <parameter key="unit.repository.class">WellCommerce\Unit\Repository\UnitRepository</parameter>
         <parameter key="unit.datagrid.class">WellCommerce\Unit\DataGrid\UnitDataGrid</parameter>
+        <parameter key="unit.datagrid.configurator.class">WellCommerce\Unit\DataGrid\UnitDataGridConfigurator</parameter>
+        <parameter key="unit.datagrid.query.class">WellCommerce\Unit\DataGrid\UnitDataGridQuery</parameter>
         <parameter key="unit.form.class">WellCommerce\Unit\Form\UnitForm</parameter>
         <parameter key="unit.listener.class">WellCommerce\Unit\EventListener\UnitListener</parameter>
     </parameters>
@@ -27,11 +29,27 @@
             </call>
         </service>
 
+        <service id="unit.datagrid.query" class="%unit.datagrid.query.class%">
+            <argument type="service" id="database_manager"/>
+        </service>
+
+        <service id="unit.datagrid.configurator" class="%unit.datagrid.configurator.class%">
+            <argument key="identifier">unit</argument>
+            <argument type="service" id="datagrid_options" />
+            <argument type="service" id="datagrid_columns" />
+            <argument type="service" id="unit.datagrid.query" />
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
         <service id="unit.datagrid" class="%unit.datagrid.class%">
             <argument type="service" id="service_container"/>
             <argument type="service" id="unit.repository"/>
+            <argument type="service" id="datagrid_loader" />
+            <configurator service="unit.datagrid.configurator" method="configure" />
         </service>
-
+        
         <service id="unit.form" class="%unit.form.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>

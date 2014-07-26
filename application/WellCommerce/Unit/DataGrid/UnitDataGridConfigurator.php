@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Tax\DataGrid;
+namespace WellCommerce\Unit\DataGrid;
 
 use WellCommerce\Core\DataGrid\Configuration\EventHandler\DeleteRowEventHandler;
 use WellCommerce\Core\DataGrid\Configuration\EventHandler\EditRowEventHandler;
@@ -21,12 +21,12 @@ use WellCommerce\Core\DataGrid\Configurator\ConfiguratorInterface;
 use WellCommerce\Core\DataGrid\DataGridInterface;
 
 /**
- * Class TaxDataGridConfigurator
+ * Class UnitDataGridConfigurator
  *
- * @package WellCommerce\Tax\DataGrid
+ * @package WellCommerce\Unit\DataGrid
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class TaxDataGridConfigurator extends AbstractConfigurator implements ConfiguratorInterface
+class UnitDataGridConfigurator extends AbstractConfigurator implements ConfiguratorInterface
 {
     /**
      * {@inheritdoc}
@@ -49,7 +49,7 @@ class TaxDataGridConfigurator extends AbstractConfigurator implements Configurat
             'function'   => $function = $this->getFunction('edit'),
             'callback'   => $function,
             'row_action' => OptionInterface::ACTION_EDIT,
-            'route'      => $this->generateUrl('admin.tax.edit')
+            'route'      => $this->generateUrl('admin.unit.edit')
         ]));
 
         $eventHandlers->add(new DeleteRowEventHandler([

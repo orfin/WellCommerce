@@ -31,7 +31,7 @@ class UnitController extends AbstractAdminController
     public function indexAction()
     {
         return [
-            'datagrid' => $this->createDataGrid($this->get('unit.datagrid'))
+            'datagrid' => $this->getDataGrid($this->get('unit.datagrid'))
         ];
     }
 
