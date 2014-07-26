@@ -1,72 +1,19 @@
 {% import "macros.twig" as macros %}
 
-{{ macros.datagrid_header(id) }}
+{{ macros.datagrid_header(datagrid.getIdentifier()) }}
 
 <script type="text/javascript">
 var DataGrid;
-{% if options.event_handlers.edit_row %}
-function {{ options.event_handlers.edit_row }}(dg, id) {
-    location.href = '{{ routes.edit }}/' + id;
-}
-{% endif %}
-
-{% if options.event_handlers.delete_row %}
-function deleteRow(dg, id) {
-    var oRow = DataGrid.GetRow(id);
-    var title = '{% trans %}Delete{% endtrans %}';
-    var msg = '{% trans %}Are you sure to delete {% endtrans %} ' + oRow.name + '?';
-    var params = {
-        id: id
-    };
-    var func = function(p) {
-        oRequest = {
-            id: p.id
-        }
-        {{ options.event_handlers.delete_row }}(oRequest, GCallback(function(eEvent){
-            DataGrid.LoadData();
-            DataGrid.ClearSelection();
-        }));
-    };
-    new GF_Alert(title, msg, func, true, params);
-}
-{% endif %}
+{% for event in datagrid.getOptions().getEventHandlers() %}
+    {{ include(template_from_string(event.getJavascriptFunction())) }}
+{% endfor %}
 
 $(document).ready(function() {
-    {% for key,column in columns %}
+    {% for key, column in datagrid.getColumns() %}
     {{ macros.datagrid_column(key, column, options.filters) }}
     {% endfor %}
+    {{ macros.datagrid_options(datagrid) }}
 
-    var options = {
-        id: '{{ id }}',
-        appearance: {
-            column_select: {{ options.appearance.column_select ? options.appearance.column_select : 'false' }}
-        },
-        mechanics: {
-            key: '{{ options.mechanics.key }}',
-            rows_per_page: {{ options.mechanics.rows_per_page }}
-        },
-        event_handlers: {
-            load: {{ options.event_handlers.load ? options.event_handlers.load : 'false' }},
-            process: {{ options.event_handlers.process ? options.event_handlers.process : 'false' }},
-            delete_row: {{ options.event_handlers.delete_row ? 'deleteRow' : 'false' }},
-            loaded: {{ options.event_handlers.loaded ? options.event_handlers.loaded : 'false' }},
-            edit_row: {{ options.event_handlers.edit_row ? options.event_handlers.edit_row : 'false' }},
-            delete_group: {{ options.event_handlers.delete_group ? options.event_handlers.delete_group : 'false' }},
-            update_row: {{ options.event_handlers.update_row ? options.event_handlers.update_row : 'false' }},
-            click_row: {{ options.event_handlers.click_row ? options.event_handlers.click_row : 'false' }}
-        },
-        columns: [
-            {% for key, column in columns %}
-            column_{{ key }},
-            {%  endfor %}
-        ],
-        row_actions: [
-            {% for action in options.row_actions %}
-            {{ action }},
-            {%  endfor %}
-        ]
-    };
-
-    DataGrid = new GF_Datagrid($('#datagrid-{{ id }}'), options);
+    DataGrid = new GF_Datagrid($('#datagrid-{{ datagrid.getIdentifier() }}'), options);
 });
 </script>

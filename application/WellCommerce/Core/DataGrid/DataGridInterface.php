@@ -13,9 +13,9 @@
 namespace WellCommerce\Core\DataGrid;
 
 use WellCommerce\Core\DataGrid\Column\ColumnCollection;
-use WellCommerce\Core\DataGrid\Loader\LoaderInterface;
 use WellCommerce\Core\DataGrid\Options\OptionsInterface;
-use WellCommerce\Core\DataGrid\Query\QueryInterface;
+use WellCommerce\Core\DataGrid\QueryBuilder\QueryBuilderInterface;
+use WellCommerce\Core\DataGrid\Request\RequestInterface;
 
 /**
  * Interface DataGridInterface
@@ -68,13 +68,27 @@ interface DataGridInterface
     public function setColumns(ColumnCollection $columns);
 
     /**
+     * Returns columns collection
+     *
+     * @return ColumnCollection
+     */
+    public function getColumns();
+
+    /**
      * Sets query builder object
      *
-     * @param QueryInterface $query
+     * @param QueryBuilderInterface $queryBuilder
      *
      * @return mixed
      */
-    public function setQuery(QueryInterface $query);
+    public function setQueryBuilder(QueryBuilderInterface $queryBuilder);
+
+    /**
+     * Returns query builder object
+     *
+     * @return QueryBuilderInterface
+     */
+    public function getQueryBuilder();
 
     /**
      * Sets DataGrid options
@@ -84,4 +98,27 @@ interface DataGridInterface
      * @return void
      */
     public function setOptions(OptionsInterface $options);
+
+    /**
+     * Returns DataGrid options
+     *
+     * @return OptionsInterface
+     */
+    public function getOptions();
+
+    /**
+     * Sets current DataGrid request
+     *
+     * @param RequestInterface $request
+     *
+     * @return mixed
+     */
+    public function setCurrentRequest(RequestInterface $request);
+
+    /**
+     * Returns current DataGrid request
+     *
+     * @return RequestInterface
+     */
+    public function getCurrentRequest();
 }

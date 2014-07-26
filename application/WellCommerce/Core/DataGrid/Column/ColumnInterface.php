@@ -47,6 +47,13 @@ interface ColumnInterface
     public function getSource();
 
     /**
+     * Returns prepared select column string
+     *
+     * @return string
+     */
+    public function getRawSelect();
+
+    /**
      * Returns true if column uses aggregation
      *
      * @return string

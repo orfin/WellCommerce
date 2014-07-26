@@ -13,7 +13,15 @@
 namespace WellCommerce\Availability\DataGrid;
 
 use WellCommerce\Core\DataGrid\Configuration\Appearance;
-use WellCommerce\Core\DataGrid\Configuration\Mechanics;
+use WellCommerce\Core\DataGrid\Configuration\EventHandler\DeleteGroupEventHandler;
+use WellCommerce\Core\DataGrid\Configuration\EventHandler\DeleteRow;
+use WellCommerce\Core\DataGrid\Configuration\EventHandler\DeleteRowEventHandler;
+use WellCommerce\Core\DataGrid\Configuration\EventHandler\EditRow;
+use WellCommerce\Core\DataGrid\Configuration\EventHandler\EditRowEventHandler;
+use WellCommerce\Core\DataGrid\Configuration\EventHandler\Load;
+use WellCommerce\Core\DataGrid\Configuration\EventHandler\LoadEventHandler;
+use WellCommerce\Core\DataGrid\Configuration\EventHandlers;
+use WellCommerce\Core\DataGrid\Configuration\OptionInterface;
 use WellCommerce\Core\DataGrid\Configurator\AbstractConfigurator;
 use WellCommerce\Core\DataGrid\Configurator\ConfiguratorInterface;
 use WellCommerce\Core\DataGrid\DataGridInterface;
@@ -31,18 +39,39 @@ class AvailabilityDataGridConfigurator extends AbstractConfigurator implements C
      */
     public function configure(DataGridInterface $datagrid)
     {
-        $datagrid->setIdentifier('availability');
+        $datagrid->setIdentifier($this->identifier);
 
         $datagrid->setColumns($this->columns);
 
-        $datagrid->setQuery($this->query);
+        $datagrid->setQueryBuilder($this->queryBuilder);
 
         $this->options->setAppearance(new Appearance([
-            'header' => false
+            'column_select' => false
         ]));
 
-        $this->options->setMechanics(new Mechanics([
-            'rows_per_page' => 500
+        $eventHandlers = $this->options->getEventHandlers();
+
+        $eventHandlers->add(new LoadEventHandler([
+            'function' => $this->getXajaxManager()->register([$this->getFunction('load'), $datagrid, 'load']),
+        ]));
+
+        $eventHandlers->add(new EditRowEventHandler([
+            'function'   => $function = $this->getFunction('edit'),
+            'callback'   => $function,
+            'row_action' => OptionInterface::ACTION_EDIT,
+            'route'      => $this->generateUrl('admin.availability.edit')
+        ]));
+
+        $eventHandlers->add(new DeleteRowEventHandler([
+            'function'   => $function = $this->getFunction('delete'),
+            'callback'   => $this->getXajaxManager()->register([$function, $datagrid, 'delete']),
+            'row_action' => OptionInterface::ACTION_DELETE,
+        ]));
+
+        $eventHandlers->add(new DeleteGroupEventHandler([
+            'function'     => $function = $this->getFunction('deleteGroup'),
+            'callback'     => $this->getXajaxManager()->register([$function, $datagrid, 'deleteGroup']),
+            'group_action' => OptionInterface::ACTION_DELETE_GROUP
         ]));
 
         $datagrid->setOptions($this->options);

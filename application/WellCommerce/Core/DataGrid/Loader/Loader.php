@@ -12,8 +12,7 @@
 
 namespace WellCommerce\Core\DataGrid\Loader;
 
-use WellCommerce\Core\DataGrid\Query\QueryInterface;
-use WellCommerce\Core\DataGrid\Request\RequestInterface;
+use WellCommerce\Core\DataGrid\DataGridInterface;
 
 /**
  * Class Loader
@@ -24,104 +23,97 @@ use WellCommerce\Core\DataGrid\Request\RequestInterface;
 class Loader implements LoaderInterface
 {
     /**
-     * @var object Query object
+     * String transformers
+     *
+     * @var array
      */
-    protected $query;
+    private $transformers = ["\r" => '\r', "\n" => '\n'];
 
     /**
-     * @var array Request options
+     * @var DataGridInterface
      */
-    protected $request = [];
+    private $dataGrid;
 
     /**
-     * {@inheritdoc}
+     * @var \WellCommerce\Core\DataGrid\Column\ColumnCollection
      */
-    public function get(array $options)
-    {
-        $this->request = new Request([
-            'starting_from' => $options['starting_from'],
-            'limit'         => $options['limit'],
-            'order_by'      => $options['order_by'],
-            'order_dir'     => $options['order_dir'],
-        ]);
-
-
-    }
-
-    public function setQuery(QueryInterface $query)
-    {
-        $this->query = $query;
-    }
+    private $columns;
 
     /**
-     * {@inheritdoc}
+     * @var array
      */
-    public function load(RequestInterface $request)
+    private $result;
+
+    public function loadResults()
     {
-        $offset = (int)$request['starting_from'];
-        $limit  = (int)$request['limit'];
+        $request       = $this->dataGrid->getCurrentRequest();
+        $queryBuilder  = $this->dataGrid->getQueryBuilder();
+        $query         = $queryBuilder->getQuery();
+        $manager       = $queryBuilder->getManager();
+        $connection    = $manager->getConnection();
+        $this->columns = $this->dataGrid->getColumns();
 
-        // set offset
-        $this->query->skip($offset);
-
-        // set limit
-        $this->query->take($limit);
-
-        // add order by clause
-        $this->query->orderBy($request['order_by'], $request['order_dir']);
-
-        $connection = $this->getDb()->getConnection();
-
-        foreach ($this->columns as $key => $column) {
-            $col = $connection->raw(sprintf('%s AS %s', $column->getSource(), $key));
-            $this->query->addSelect($col);
+        foreach ($this->columns as $column) {
+            $col = $connection->raw($column->getRawSelect());
+            $query->addSelect($col);
         }
 
-        foreach ($request['where'] as $where) {
+        foreach ($request->getWhere() as $where) {
             $column     = $this->columns->get($where['column']);
             $id         = $column->getId();
             $source     = $column->getSource();
             $aggregated = $column->isAggregated();
-            $operator   = $this->getOperator($where['operator']);
+            $operator   = $queryBuilder->getOperator($where['operator']);
             $value      = $where['value'];
 
             if ($aggregated) {
-                $this->query->having($id, $operator, $value);
+                $query->having($id, $operator, $value);
             } else {
                 if (is_array($value)) {
                     if (!empty($value)) {
-                        $this->query->whereIn($source, $value);
+                        $query->whereIn($source, $value);
                     } else {
-                        $this->query->where($source, '=', 0);
+                        $query->where($source, '=', 0);
                     }
                 } else {
-                    $this->query->where($source, $operator, $value);
+                    $query->where($source, $operator, $value);
                 }
             }
 
         }
-        $result = $this->query->get();
+
+        $query->skip($request->getStartingFrom());
+        $query->take($request->getLimit());
+        $query->orderBy($request->getOrderBy(), $request->getOrderDir());
+
+        $result = $query->get();
         $total  = count($result);
 
-        $result = $this->processRows($result);
-
         return [
-            'data_id'       => isset($request['id']) ? $request['id'] : '',
+            'data_id'       => $request->getId(),
             'rows_num'      => $total,
-            'starting_from' => $offset,
+            'starting_from' => $request->getStartingFrom(),
             'total'         => $total,
             'filtered'      => $total,
-            'rows'          => $result
+            'rows'          => $this->processResults($result)
         ];
     }
 
     /**
      * {@inheritdoc}
      */
-    public function process($result)
+    public function getResults(DataGridInterface $dataGrid)
     {
-        static $transform = ["\r" => '\r', "\n" => '\n'];
+        $this->dataGrid = $dataGrid;
 
+        return $this->loadResults();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function processResults($rows)
+    {
         $rowData = [];
         foreach ($rows as $row) {
             $columns = [];
@@ -131,11 +123,20 @@ class Loader implements LoaderInterface
                     $value = call_user_func($processFunction, $value);
                 }
 
-                $columns[$param] = strtr(addslashes($value), $transform);
+                $columns[$param] = $this->transform($value);
             }
             $rowData[] = $columns;
         }
 
         return $rowData;
     }
-} 
+
+    private function prepareSelectColumn($column){
+
+    }
+
+    public function transform($value)
+    {
+        return strtr(addslashes($value), $this->transformers);
+    }
+}

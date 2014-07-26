@@ -100,6 +100,14 @@ class Column implements ColumnInterface
     /**
      * {@inheritdoc}
      */
+    public function getRawSelect()
+    {
+        return sprintf('%s AS %s', $this->getSource(), $this->getId());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function isAggregated()
     {
         return $this->options['aggregated'];

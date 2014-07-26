@@ -3287,7 +3287,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		for (var i in aoActions) {
 			var oA = aoActions[i];
 			switch (oA) {
-				case GF_Datagrid.ACTION_DELETE:
+				case GF_Datagrid.ACTION_DELETE_GROUP:
 					if (!(this.m_oOptions.event_handlers.delete_group instanceof Function)) {
 						GF_Debug.Error('Datagrid\'s delete group action is not set.');
 					}
@@ -4460,7 +4460,8 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 	ACTION_EDIT: 1,
 	ACTION_DELETE: 2,
 	ACTION_VIEW: 3,
-	
+    ACTION_DELETE_GROUP: 3,
+
 	RefreshAll: GF.NewSafeMethod(function() {
 		for (var i in GF_Instance.s_aoInstances) {
 			if (GF_Instance.s_aoInstances[i].IsInstanceOf('GF_Datagrid')) {
@@ -4488,11 +4489,11 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
  *
  * Copyright (c) 2009 Gekosale
  *
- * This library is free software; you can redistribute it and/or 
+ * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version. 
- * 
+ * version 2.1 of the License, or (at your option) any later version.
+ *
  */
  GF_Datagrid_Config = GF_Config.GF_Extend('GF_Datagrid_Config', function(options) {
 	

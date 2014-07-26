@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Availability\DataGrid;
 
-use WellCommerce\Core\DataGrid\Query\AbstractQuery;
-use WellCommerce\Core\DataGrid\Query\QueryInterface;
+use WellCommerce\Core\DataGrid\QueryBuilder\AbstractQueryBuilder;
+use WellCommerce\Core\DataGrid\QueryBuilder\QueryBuilderInterface;
 
 /**
  * Class AvailabilityDataGridQuery
@@ -21,17 +21,17 @@ use WellCommerce\Core\DataGrid\Query\QueryInterface;
  * @package WellCommerce\Availability\DataGrid
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AvailabilityDataGridQuery extends AbstractQuery implements QueryInterface
+class AvailabilityDataGridQuery extends AbstractQueryBuilder implements QueryBuilderInterface
 {
     /**
      * {@inheritdoc}
      */
     public function getQuery()
     {
-        $query = $this->getManager()->table('availability');
-        $query->join('availability_translation', 'availability_translation.availability_id', '=', 'availability.id');
-        $query->groupBy('availability.id');
+        $qb = $this->getManager()->table('availability');
+        $qb->join('availability_translation', 'availability_translation.availability_id', '=', 'availability.id');
+        $qb->groupBy('availability.id');
 
-        return $query;
+        return $qb;
     }
 } 

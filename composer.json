@@ -63,7 +63,7 @@
         "monolog/monolog": "1.7.0",
         "symfony/twig-bridge": "2.4.x-dev",
         "kriswallsmith/assetic": "v1.1.2",
-        "twig/extensions": "1.0.x-dev",
+        "twig/extensions": "1.1.*@dev",
         "illuminate/database": "4.3.*",
         "xajax/xajax": "1.0.0",
         "twitter/bootstrap": "v3.1.1",

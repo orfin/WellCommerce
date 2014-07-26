@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Core\DataGrid\Loader;
 
+use WellCommerce\Core\DataGrid\DataGridInterface;
 use WellCommerce\Core\DataGrid\Query\QueryInterface;
 use WellCommerce\Core\DataGrid\Request\RequestInterface;
 
@@ -24,34 +25,27 @@ use WellCommerce\Core\DataGrid\Request\RequestInterface;
 interface LoaderInterface
 {
     /**
-     * Sets query object
-     *
-     * @param QueryInterface $query
+     * Executes bounded query and returns results
      *
      * @return mixed
      */
-    public function setQuery(QueryInterface $query);
-
-    /**
-     * Loads DataGrid results
-     *
-     * @param RequestInterface $request
-     *
-     * @return mixed
-     */
-    public function load(RequestInterface $request);
+    public function loadResults();
 
     /**
      * Returns DataGrid results
      *
-     * @return array
+     * @param DataGridInterface $dataGrid
+     *
+     * @return mixed
      */
-    public function get(array $options);
+    public function getResults(DataGridInterface $dataGrid);
 
     /**
      * Post-processes returned rows
      *
-     * @return array
+     * @param $rows
+     *
+     * @return mixed
      */
-    public function process($result);
+    public function processResults($rows);
 } 

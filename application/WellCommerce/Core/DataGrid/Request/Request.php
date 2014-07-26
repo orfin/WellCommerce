@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Core\DataGrid;
+namespace WellCommerce\Core\DataGrid\Request;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -18,10 +18,10 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 /**
  * Class Request
  *
- * @package WellCommerce\Core\DataGrid
+ * @package WellCommerce\Core\DataGrid\Request
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Request
+class Request implements RequestInterface
 {
     /**
      * @var array
@@ -46,6 +46,7 @@ class Request
     public function configureOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setRequired([
+            'id',
             'starting_from',
             'limit',
             'order_by',
@@ -53,13 +54,26 @@ class Request
             'where'
         ]);
 
+        $resolver->setDefaults([
+            'id' => ''
+        ]);
+
         $resolver->setAllowedTypes([
+            'id'            => ['int', 'string'],
             'starting_from' => ['int'],
             'limit'         => ['int'],
             'order_by'      => ['string'],
             'order_dir'     => ['string'],
             'where'         => ['array']
         ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getId()
+    {
+        return $this->options['id'];
     }
 
     /**

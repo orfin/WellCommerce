@@ -12,10 +12,12 @@
 
 namespace WellCommerce\Core\DataGrid\Configurator;
 
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use WellCommerce\Core\AbstractComponent;
 use WellCommerce\Core\DataGrid\Column\ColumnCollection;
-use WellCommerce\Core\DataGrid\Loader\LoaderInterface;
 use WellCommerce\Core\DataGrid\Options\OptionsInterface;
-use WellCommerce\Core\DataGrid\Query\QueryInterface;
+use WellCommerce\Core\DataGrid\QueryBuilder\QueryInterface;
+use WellCommerce\Core\DataGrid\QueryBuilder\QueryBuilderInterface;
 
 /**
  * Class AbstractConfigurator
@@ -23,17 +25,17 @@ use WellCommerce\Core\DataGrid\Query\QueryInterface;
  * @package WellCommerce\Core\DataGrid\Configurator
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AbstractConfigurator
+class AbstractConfigurator extends AbstractComponent
 {
+    /**
+     * @var string
+     */
+    protected $identifier;
+
     /**
      * @var OptionsInterface
      */
     protected $options;
-
-    /**
-     * @var LoaderInterface
-     */
-    protected $loader;
 
     /**
      * @var ColumnCollection
@@ -41,23 +43,36 @@ class AbstractConfigurator
     protected $columns;
 
     /**
-     * @var QueryInterface
+     * @var QueryBuilderInterface
      */
-    protected $query;
+    protected $queryBuilder;
 
     /**
      * Constructor
      *
-     * @param OptionsInterface $options Configurator options
-     * @param LoaderInterface  $loader  DataGrid loader instance
-     * @param ColumnCollection $columns Collection of DataGrid columns
-     * @param QueryInterface   $query   DataGrid query object
+     * @param                       $identifier
+     * @param OptionsInterface      $options
+     * @param ColumnCollection      $columns
+     * @param QueryBuilderInterface $queryBuilder
      */
-    public function __construct(OptionsInterface $options, LoaderInterface $loader, ColumnCollection $columns, QueryInterface $query)
+    public function __construct($identifier, OptionsInterface $options, ColumnCollection $columns, QueryBuilderInterface $queryBuilder)
     {
-        $this->options = $options;
-        $this->loader  = $loader;
-        $this->columns = $columns;
-        $this->query   = $query;
+        $this->identifier   = $identifier;
+        $this->options      = $options;
+        $this->columns      = $columns;
+        $this->queryBuilder = $queryBuilder;
     }
-} 
+
+    /**
+     * Returns a function name used in DataGrid events and actions
+     *
+     * @param $name
+     *
+     * @return string
+     */
+    public function getFunction($name)
+    {
+        return sprintf('%s%s', $name, ucfirst($this->identifier));
+    }
+
+}

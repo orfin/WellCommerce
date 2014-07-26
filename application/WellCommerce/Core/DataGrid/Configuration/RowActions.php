@@ -32,11 +32,19 @@ class RowActions extends AbstractOption implements OptionInterface
         ]);
 
         $resolver->setDefaults([
-            'actions' => []
+            'actions' => [
+                OptionInterface::ACTION_EDIT,
+                OptionInterface::ACTION_DELETE,
+            ]
         ]);
 
         $resolver->setAllowedTypes([
             'actions' => 'array'
         ]);
+    }
+
+    public function __toString()
+    {
+        return implode(",\n", $this->options['actions']);
     }
 } 

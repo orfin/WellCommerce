@@ -11,13 +11,15 @@
  */
 namespace WellCommerce\Core\DataGrid;
 
-use phpDocumentor\Descriptor\Filter\Filter;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Validator\Exception\ValidatorException;
 use WellCommerce\Core\AbstractComponent;
 use WellCommerce\Core\DataGrid\Column\ColumnCollection;
+use WellCommerce\Core\DataGrid\Loader\LoaderInterface;
 use WellCommerce\Core\DataGrid\Options\OptionsInterface;
-use WellCommerce\Core\DataGrid\Query\QueryInterface;
+use WellCommerce\Core\DataGrid\QueryBuilder\QueryBuilderInterface;
+use WellCommerce\Core\DataGrid\Request\Request;
+use WellCommerce\Core\DataGrid\Request\RequestInterface;
 use WellCommerce\Core\Repository\RepositoryInterface;
 use xajaxResponse;
 
@@ -34,19 +36,22 @@ abstract class AbstractDataGrid extends AbstractComponent
     protected $repository;
     protected $loader;
     protected $options;
-    protected $query;
+    protected $queryBuilder;
     protected $container;
+    protected $request;
 
     /**
      * Constructor
      *
      * @param ContainerInterface  $container
      * @param RepositoryInterface $repository
+     * @param LoaderInterface     $loader
      */
-    public function __construct(ContainerInterface $container, RepositoryInterface $repository)
+    public function __construct(ContainerInterface $container, RepositoryInterface $repository, LoaderInterface $loader)
     {
         $this->container  = $container;
         $this->repository = $repository;
+        $this->loader     = $loader;
     }
 
     public function setColumns(ColumnCollection $columns)
@@ -79,14 +84,20 @@ abstract class AbstractDataGrid extends AbstractComponent
         return $this->options;
     }
 
-    public function setQuery(QueryInterface $query)
+    /**
+     * {@inheritdoc}
+     */
+    public function setQueryBuilder(QueryBuilderInterface $queryBuilder)
     {
-        $this->query = $query;
+        $this->queryBuilder = $queryBuilder;
     }
 
-    public function getQuery()
+    /**
+     * {@inheritdoc}
+     */
+    public function getQueryBuilder()
     {
-        return $this->query;
+        return $this->queryBuilder;
     }
 
     /**
@@ -100,9 +111,17 @@ abstract class AbstractDataGrid extends AbstractComponent
     /**
      * {@inheritdoc}
      */
-    public function deleteRow($request)
+    public function setCurrentRequest(RequestInterface $request)
     {
-        return $this->repository->delete($request['id']);
+        $this->request = $request;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCurrentRequest()
+    {
+        return $this->request;
     }
 
     /**
@@ -131,31 +150,29 @@ abstract class AbstractDataGrid extends AbstractComponent
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function delete($request)
+    {
+        return $this->repository->delete($request['id']);
+    }
 
     /**
      * {@inheritdoc}
      */
-    private function getOperator($operator)
+    public function load(array $options)
     {
-        switch ($operator) {
-            case 'NE':
-                return '!=';
-                break;
-            case 'LE':
-                return '<=';
-                break;
-            case 'GE':
-                return '>=';
-                break;
-            case 'LIKE':
-                return 'LIKE';
-                break;
-            case 'IN':
-                return '=';
-                break;
-            default:
-                return '=';
-        }
+        $this->setCurrentRequest(new Request([
+            'id'            => $options['id'],
+            'starting_from' => (int)$options['starting_from'],
+            'limit'         => (int)$options['limit'],
+            'order_by'      => $options['order_by'],
+            'order_dir'     => $options['order_dir'],
+            'where'         => $options['where']
+        ]));
+
+        return $this->loader->getResults($this);
     }
 
 

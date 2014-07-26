@@ -12,13 +12,8 @@
 
 namespace WellCommerce\Core\DataGrid;
 
-use Illuminate\Database\Capsule\Manager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use WellCommerce\Core\AbstractComponent;
-use WellCommerce\Core\DataGrid\Column\ColumnCollection;
-use WellCommerce\Core\DataGrid\Configuration\OptionInterface;
-use WellCommerce\Core\DataGrid\Loader\LoaderInterface;
-use WellCommerce\Core\DataGrid\Options\OptionsInterface;
 use WellCommerce\Core\Event\DataGridEvent;
 
 /**
@@ -30,39 +25,21 @@ use WellCommerce\Core\Event\DataGridEvent;
 class DataGridBuilder extends AbstractComponent
 {
     /**
-     * @var DataGridInterface DataGrid instance
-     */
-    private $datagrid;
-
-    /**
      * Creates datagrid and triggers event after initialization
      *
      * @param DataGridInterface $datagrid
      *
-     * @return $this
+     * @return DataGridInterface
      */
     public function create(DataGridInterface $datagrid)
     {
-        $this->datagrid = $datagrid;
-        $this->datagrid->addColumns();
+        $datagrid->addColumns();
 
-        $this->dispatchEvent($this->getInitEventName());
-
-        return $this->datagrid;
-    }
-
-    /**
-     * Triggers the event for form action
-     *
-     * @param       $eventName
-     * @param array $data
-     * @param       $id
-     */
-    private function dispatchEvent($eventName)
-    {
-        $event = new DataGridEvent($this->datagrid);
+        $eventName = $this->getInitEventName($datagrid->getIdentifier());
+        $event     = new DataGridEvent($datagrid);
         $this->getDispatcher()->dispatch($eventName, $event);
-        $this->datagrid = $event->getDataGrid();
+
+        return $event->getDataGrid();
     }
 
     /**
@@ -70,8 +47,8 @@ class DataGridBuilder extends AbstractComponent
      *
      * @return string
      */
-    private function getInitEventName()
+    private function getInitEventName($identifier)
     {
-        return sprintf('%s.%s', $this->datagrid->getIdentifier(), DataGridInterface::DATAGRID_INIT_EVENT);
+        return sprintf('%s.%s', $identifier, DataGridInterface::DATAGRID_INIT_EVENT);
     }
 }

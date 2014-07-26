@@ -70,6 +70,8 @@ class ColumnCollection implements \IteratorAggregate, \Countable
      *
      * @param $id
      *
+     * @return ColumnInterface Column
+     *
      * @throws \InvalidArgumentException
      */
     public function get($id)
@@ -80,4 +82,4 @@ class ColumnCollection implements \IteratorAggregate, \Countable
 
         return $this->columns[$id];
     }
-} 
+}

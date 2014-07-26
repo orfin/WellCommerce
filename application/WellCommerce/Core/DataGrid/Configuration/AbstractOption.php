@@ -28,6 +28,11 @@ abstract class AbstractOption
     protected $options;
 
     /**
+     * @var array
+     */
+    protected $types = [];
+
+    /**
      * Constructor
      *
      * @param array $options
@@ -66,5 +71,42 @@ abstract class AbstractOption
         }
 
         return $this->options[$key];
+    }
+
+    /**
+     * Prepares value to use in DataGrid JS configuration
+     *
+     * @param $value
+     *
+     * @return string
+     */
+    protected function prepareValue($value)
+    {
+        switch (gettype($value)) {
+            case OptionInterface::TYPE_BOOLEAN:
+                return ($value) ? 'true' : 'false';
+                break;
+            case OptionInterface::TYPE_NUMBER:
+                return $value;
+                break;
+            case OptionInterface::TYPE_STRING:
+                return "'" . $value . "'";
+                break;
+        }
+    }
+
+    /**
+     * Returns string containing all DataGrid options
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        $attributes = [];
+        foreach ($this->options as $option => $value) {
+            $attributes[] = sprintf('%s: %s', $option, $this->prepareValue($value));
+        }
+
+        return implode(",\n", $attributes);
     }
 }

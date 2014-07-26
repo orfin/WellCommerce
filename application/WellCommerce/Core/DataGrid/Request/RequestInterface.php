@@ -32,6 +32,13 @@ interface RequestInterface
     public function configureOptions(OptionsResolverInterface $resolver);
 
     /**
+     * Returns request identifier
+     *
+     * @return int
+     */
+    public function getId();
+
+    /**
      * Returns start offset for results
      *
      * @return int

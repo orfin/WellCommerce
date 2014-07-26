@@ -22,6 +22,23 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class Mechanics extends AbstractOption implements OptionInterface
 {
+    protected $types
+        = [
+            'rows_per_page'            => OptionInterface::TYPE_NUMBER,
+            'key'                      => OptionInterface::TYPE_STRING,
+            'default_sorting'          => OptionInterface::TYPE_STRING,
+            'right_click_menu'         => OptionInterface::TYPE_BOOLEAN,
+            'auto_suggest_delay'       => OptionInterface::TYPE_NUMBER,
+            'auto_suggest_min_length'  => OptionInterface::TYPE_NUMBER,
+            'auto_suggest_suggestions' => OptionInterface::TYPE_NUMBER,
+            'only_one_selected'        => OptionInterface::TYPE_BOOLEAN,
+            'no_column_modification'   => OptionInterface::TYPE_BOOLEAN,
+            'no_column_resizing'       => OptionInterface::TYPE_BOOLEAN,
+            'create_input'             => OptionInterface::TYPE_BOOLEAN,
+            'save_column_modification' => OptionInterface::TYPE_BOOLEAN,
+            'persistent'               => OptionInterface::TYPE_BOOLEAN,
+        ];
+
     /**
      * {@inheritdoc}
      */
@@ -30,6 +47,9 @@ class Mechanics extends AbstractOption implements OptionInterface
         $resolver->setRequired([
             'rows_per_page',
             'key',
+        ]);
+
+        $resolver->setOptional([
             'default_sorting',
             'right_click_menu',
             'auto_suggest_delay',
@@ -40,23 +60,12 @@ class Mechanics extends AbstractOption implements OptionInterface
             'no_column_resizing',
             'create_input',
             'save_column_modification',
-            'persistent',
+            'persistent'
         ]);
 
         $resolver->setDefaults([
-            'rows_per_page'            => 50,
-            'key'                      => OptionInterface::GF_NULL,
-            'default_sorting'          => OptionInterface::GF_NULL,
-            'right_click_menu'         => false,
-            'auto_suggest_delay'       => 500,
-            'auto_suggest_min_length'  => 1,
-            'auto_suggest_suggestions' => 5,
-            'only_one_selected'        => false,
-            'no_column_modification'   => false,
-            'no_column_resizing'       => false,
-            'create_input'             => false,
-            'save_column_modification' => true,
-            'persistent'               => true,
+            'rows_per_page' => 50,
+            'key'           => 'id',
         ]);
 
         $resolver->setAllowedTypes([

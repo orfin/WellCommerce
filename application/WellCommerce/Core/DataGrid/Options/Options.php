@@ -17,6 +17,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use WellCommerce\Core\DataGrid\Configuration\Appearance;
 use WellCommerce\Core\DataGrid\Configuration\EventHandlers;
 use WellCommerce\Core\DataGrid\Configuration\Mechanics;
+use WellCommerce\Core\DataGrid\Configuration\RowActions;
 
 /**
  * Class Options
@@ -29,7 +30,7 @@ class Options implements OptionsInterface
     /**
      * @var array
      */
-    protected $options;
+    private $options;
 
     /**
      * Constructor
@@ -43,58 +44,110 @@ class Options implements OptionsInterface
         $this->options = $resolver->resolve($options);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function configureOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setRequired([
             'appearance',
             'mechanics',
-            'event_handlers'
+            'event_handlers',
+            'row_actions'
         ]);
 
         $resolver->setDefaults([
             'appearance'     => new Appearance(),
             'mechanics'      => new Mechanics(),
-            'event_handlers' => new EventHandlers()
+            'event_handlers' => new EventHandlers(),
+            'row_actions'    => new RowActions()
         ]);
 
         $resolver->setAllowedTypes([
             'appearance'     => 'object',
             'mechanics'      => 'object',
-            'event_handlers' => 'object'
+            'event_handlers' => 'object',
+            'row_actions'    => 'object'
         ]);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setIdentifier($identifier)
     {
         $this->options['identifier'] = $identifier;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getIdentifier()
     {
         return $this->options['identifier'];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setAppearance(Appearance $appearance)
     {
         $this->options['appearance'] = $appearance;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getAppearance()
     {
         return $this->options['appearance'];
     }
 
-    public function setMechanics($options)
+    /**
+     * {@inheritdoc}
+     */
+    public function setMechanics(Mechanics $mechanics)
     {
-        if (!$options instanceof Mechanics) {
-            $options = new Mechanics($options);
-        }
-
-        $this->options['mechanics'] = $options;
+        $this->options['mechanics'] = $mechanics;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getMechanics()
     {
         return $this->options['mechanics'];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setEventHandlers(EventHandlers $eventHandlers)
+    {
+        $this->options['event_handlers'] = $eventHandlers;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getEventHandlers()
+    {
+        return $this->options['event_handlers'];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setRowActions(RowActions $rowActions)
+    {
+        $this->options['row_actions'] = $rowActions;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRowActions()
+    {
+        return $this->options['row_actions'];
     }
 } 

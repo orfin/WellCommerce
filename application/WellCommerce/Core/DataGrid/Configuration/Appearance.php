@@ -22,27 +22,36 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class Appearance extends AbstractOption implements OptionInterface
 {
+    protected $types
+        = [
+            'column_select'  => OptionInterface::TYPE_BOOLEAN,
+            'column_options' => OptionInterface::TYPE_BOOLEAN,
+            'header'         => OptionInterface::TYPE_BOOLEAN,
+            'filter'         => OptionInterface::TYPE_BOOLEAN,
+            'footer'         => OptionInterface::TYPE_BOOLEAN,
+            'max_height'     => OptionInterface::TYPE_NUMBER,
+        ];
+
     /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setRequired([
+            'column_select',
+            'column_options',
+        ]);
+
+        $resolver->setOptional([
             'header',
             'filter',
             'footer',
-            'column_select',
-            'column_options',
             'max_height',
         ]);
 
         $resolver->setDefaults([
-            'header'         => true,
-            'filter'         => true,
-            'footer'         => true,
             'column_select'  => true,
             'column_options' => true,
-            'max_height'     => 0,
         ]);
 
         $resolver->setAllowedTypes([

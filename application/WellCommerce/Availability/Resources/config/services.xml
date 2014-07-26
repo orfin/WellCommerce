@@ -40,15 +40,19 @@
         </service>
 
         <service id="availability.datagrid.configurator" class="%availability.datagrid.configurator.class%">
+            <argument key="identifier">availability</argument>
             <argument type="service" id="datagrid_options" />
-            <argument type="service" id="datagrid_loader" />
             <argument type="service" id="datagrid_columns" />
             <argument type="service" id="availability.datagrid.query" />
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
         </service>
 
         <service id="availability.datagrid" class="%availability.datagrid.class%">
             <argument type="service" id="service_container"/>
             <argument type="service" id="availability.repository"/>
+            <argument type="service" id="datagrid_loader" />
             <configurator service="availability.datagrid.configurator" method="configure" />
         </service>
 

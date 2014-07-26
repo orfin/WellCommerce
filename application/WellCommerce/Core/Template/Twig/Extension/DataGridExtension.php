@@ -39,7 +39,7 @@ class DataGridExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('datagrid_renderer', [$this, 'render'], ['is_safe' => ['html']])
+            new \Twig_SimpleFunction('datagrid_renderer', [$this, 'render'], ['is_safe' => ['html','javascript']])
         ];
     }
 
@@ -53,10 +53,7 @@ class DataGridExtension extends \Twig_Extension
     public function render(DataGridInterface $datagrid)
     {
         return $this->container->get('twig')->render('datagrid.twig', [
-            'id'      => $datagrid->getId(),
-            'options' => $datagrid->getOptions(),
-            'routes'  => $datagrid->getRoutes(),
-            'columns' => $datagrid->getColumns()->all()
+            'datagrid' => $datagrid
         ]);
     }
 
