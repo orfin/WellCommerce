@@ -31,7 +31,7 @@ class ClientController extends AbstractAdminController
     public function indexAction()
     {
         return [
-            'datagrid' => $this->createDataGrid($this->get('client.datagrid'))
+            'datagrid' => $this->getDataGrid($this->get('client.datagrid'))
         ];
     }
 

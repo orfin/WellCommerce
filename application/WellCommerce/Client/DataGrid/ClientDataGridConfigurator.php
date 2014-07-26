@@ -10,24 +10,25 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Availability\DataGrid;
+namespace WellCommerce\Client\DataGrid;
 
 use WellCommerce\Core\DataGrid\Configuration\EventHandler\DeleteGroupEventHandler;
 use WellCommerce\Core\DataGrid\Configuration\EventHandler\DeleteRowEventHandler;
 use WellCommerce\Core\DataGrid\Configuration\EventHandler\EditRowEventHandler;
 use WellCommerce\Core\DataGrid\Configuration\EventHandler\LoadEventHandler;
+use WellCommerce\Core\DataGrid\Configuration\EventHandlers;
 use WellCommerce\Core\DataGrid\Configuration\OptionInterface;
 use WellCommerce\Core\DataGrid\Configurator\AbstractConfigurator;
 use WellCommerce\Core\DataGrid\Configurator\ConfiguratorInterface;
 use WellCommerce\Core\DataGrid\DataGridInterface;
 
 /**
- * Class AvailabilityDataGridConfigurator
+ * Class ClientDataGridConfigurator
  *
- * @package WellCommerce\Availability\DataGrid
+ * @package WellCommerce\Client\DataGrid
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AvailabilityDataGridConfigurator extends AbstractConfigurator implements ConfiguratorInterface
+class ClientDataGridConfigurator extends AbstractConfigurator implements ConfiguratorInterface
 {
     /**
      * {@inheritdoc}
@@ -50,7 +51,7 @@ class AvailabilityDataGridConfigurator extends AbstractConfigurator implements C
             'function'   => $function = $this->getFunction('edit'),
             'callback'   => $function,
             'row_action' => OptionInterface::ACTION_EDIT,
-            'route'      => $this->generateUrl('admin.availability.edit')
+            'route'      => $this->generateUrl('admin.client.edit')
         ]));
 
         $eventHandlers->add(new DeleteRowEventHandler([

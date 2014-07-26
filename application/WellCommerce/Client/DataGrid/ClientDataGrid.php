@@ -11,11 +11,9 @@
  */
 namespace WellCommerce\Client\DataGrid;
 
-use Illuminate\Database\Capsule\Manager;
 use WellCommerce\Core\DataGrid\AbstractDataGrid;
-use WellCommerce\Core\DataGrid\Column\ColumnCollection;
+use WellCommerce\Core\DataGrid\Column\Column;
 use WellCommerce\Core\DataGrid\Column\ColumnInterface;
-use WellCommerce\Core\DataGrid\Column\DataGridColumn;
 use WellCommerce\Core\DataGrid\DataGridInterface;
 
 /**
@@ -67,9 +65,9 @@ class ClientDataGrid extends AbstractDataGrid implements DataGridInterface
     /**
      * {@inheritdoc}
      */
-    public function initColumns(ColumnCollection $collection)
+    public function addColumns()
     {
-        $collection->add(new DataGridColumn([
+        $this->columns->add(new Column([
             'id'         => 'id',
             'source'     => 'client.id',
             'caption'    => $this->trans('Id'),
@@ -85,7 +83,7 @@ class ClientDataGrid extends AbstractDataGrid implements DataGridInterface
             ]
         ]));
 
-        $collection->add(new DataGridColumn([
+        $this->columns->add(new Column([
             'id'         => 'first_name',
             'source'     => 'client.first_name',
             'caption'    => $this->trans('First name'),
@@ -97,7 +95,7 @@ class ClientDataGrid extends AbstractDataGrid implements DataGridInterface
             ]
         ]));
 
-        $collection->add(new DataGridColumn([
+        $this->columns->add(new Column([
             'id'         => 'last_name',
             'source'     => 'client.last_name',
             'caption'    => $this->trans('Last name'),
@@ -109,7 +107,7 @@ class ClientDataGrid extends AbstractDataGrid implements DataGridInterface
             ]
         ]));
 
-        $collection->add(new DataGridColumn([
+        $this->columns->add(new Column([
             'id'         => 'email',
             'source'     => 'client.email',
             'caption'    => $this->trans('E-mail'),
@@ -121,7 +119,7 @@ class ClientDataGrid extends AbstractDataGrid implements DataGridInterface
             ]
         ]));
 
-        $collection->add(new DataGridColumn([
+        $this->columns->add(new Column([
             'id'         => 'phone',
             'source'     => 'client.phone',
             'caption'    => $this->trans('Phone'),
@@ -133,7 +131,7 @@ class ClientDataGrid extends AbstractDataGrid implements DataGridInterface
             ]
         ]));
 
-        $collection->add(new DataGridColumn([
+        $this->columns->add(new Column([
             'id'         => 'client_group_id',
             'source'     => 'client.client_group_id',
             'caption'    => $this->trans('Group'),
@@ -146,7 +144,7 @@ class ClientDataGrid extends AbstractDataGrid implements DataGridInterface
             ]
         ]));
 
-        $collection->add(new DataGridColumn([
+        $this->columns->add(new Column([
             'id'         => 'discount',
             'source'     => 'client.discount',
             'caption'    => $this->trans('Discount'),
@@ -158,14 +156,5 @@ class ClientDataGrid extends AbstractDataGrid implements DataGridInterface
                 'type' => ColumnInterface::FILTER_BETWEEN
             ]
         ]));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setQuery(Manager $manager)
-    {
-        $this->query = $manager->table('client');
-        $this->query->groupBy('client.id');
     }
 }

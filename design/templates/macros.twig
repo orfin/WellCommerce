@@ -49,17 +49,17 @@
             {%  endfor %}
         ],
         row_actions: [
-            {% for event in datagrid.getOptions().getEventHandlers() if event.get('row_action') != false %}
+            {% for event in datagrid.getOptions().getEventHandlers() if event.has('row_action') and event.get('row_action') != false %}
                 {{ event.get('row_action') }},
             {% endfor %}
         ],
         group_actions: [
-            {% for event in datagrid.getOptions().getEventHandlers() if event.get('group_action') != false %}
+            {% for event in datagrid.getOptions().getEventHandlers() if event.has('group_action') and event.get('group_action') != false %}
                 {{ event.get('group_action') }},
             {% endfor %}
         ],
         context_actions: [
-            {% for event in datagrid.getOptions().getEventHandlers() if event.get('context_action') != false %}
+            {% for event in datagrid.getOptions().getEventHandlers() if event.has('context_action') and event.get('context_action') != false %}
                 {{ event.get('context_action') }},
             {% endfor %}
         ]

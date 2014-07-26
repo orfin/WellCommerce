@@ -74,7 +74,7 @@ class AbstractEventHandler
     /**
      * Returns options value by its name
      *
-     * @param $option
+     * @param string $option
      *
      * @return mixed
      * @throws \InvalidArgumentException
@@ -82,9 +82,21 @@ class AbstractEventHandler
     public function get($option)
     {
         if (!isset($this->options[$option])) {
-            throw new \InvalidArgumentException(sprintf('Option "%s" does not exists.'));
+            throw new \InvalidArgumentException(sprintf('Option "%s" does not exists.', $option));
         }
 
         return $this->options[$option];
+    }
+
+    /**
+     * Checks whether event handler has passed option
+     *
+     * @param $option
+     *
+     * @return bool
+     */
+    public function has($option)
+    {
+        return isset($this->options[$option]);
     }
 } 

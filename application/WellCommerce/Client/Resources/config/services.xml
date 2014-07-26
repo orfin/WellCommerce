@@ -7,6 +7,8 @@
         <parameter key="client.admin.controller.class">WellCommerce\Client\Controller\Admin\ClientController</parameter>
         <parameter key="client.repository.class">WellCommerce\Client\Repository\ClientRepository</parameter>
         <parameter key="client.datagrid.class">WellCommerce\Client\DataGrid\ClientDataGrid</parameter>
+        <parameter key="client.datagrid.configurator.class">WellCommerce\Client\DataGrid\ClientDataGridConfigurator</parameter>
+        <parameter key="client.datagrid.query.class">WellCommerce\Client\DataGrid\ClientDataGridQuery</parameter>
         <parameter key="client.form.class">WellCommerce\Client\Form\ClientForm</parameter>
         <parameter key="client.form_login.class">WellCommerce\Client\Form\ClientLoginForm</parameter>
         <parameter key="client.listener.class">WellCommerce\Client\EventListener\ClientListener</parameter>
@@ -28,9 +30,25 @@
             </call>
         </service>
 
+        <service id="client.datagrid.query" class="%client.datagrid.query.class%">
+            <argument type="service" id="database_manager"/>
+        </service>
+
+        <service id="client.datagrid.configurator" class="%client.datagrid.configurator.class%">
+            <argument key="identifier">client</argument>
+            <argument type="service" id="datagrid_options" />
+            <argument type="service" id="datagrid_columns" />
+            <argument type="service" id="client.datagrid.query" />
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
         <service id="client.datagrid" class="%client.datagrid.class%">
             <argument type="service" id="service_container"/>
             <argument type="service" id="client.repository"/>
+            <argument type="service" id="datagrid_loader" />
+            <configurator service="client.datagrid.configurator" method="configure" />
         </service>
 
         <service id="client.form" class="%client.form.class%">

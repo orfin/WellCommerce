@@ -27,16 +27,16 @@
 
         <service id="availability.model" class="%availability.model.class%" />
 
-        <service id="availability.datagrid.query" class="%availability.datagrid.query.class%">
-            <argument type="service" id="database_manager"/>
-        </service>
-
         <service id="availability_translation.model" class="%availability_translation.model.class%" />
 
         <service id="availability.repository" class="%availability.repository.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
+        </service>
+
+        <service id="availability.datagrid.query" class="%availability.datagrid.query.class%">
+            <argument type="service" id="database_manager"/>
         </service>
 
         <service id="availability.datagrid.configurator" class="%availability.datagrid.configurator.class%">
