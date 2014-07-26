@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Shop\DataGrid;
+namespace WellCommerce\Tax\DataGrid;
 
 use WellCommerce\Core\DataGrid\Configuration\EventHandler\DeleteRowEventHandler;
 use WellCommerce\Core\DataGrid\Configuration\EventHandler\EditRowEventHandler;
@@ -23,12 +23,12 @@ use WellCommerce\Core\DataGrid\Configurator\ConfiguratorInterface;
 use WellCommerce\Core\DataGrid\DataGridInterface;
 
 /**
- * Class ShopDataGridConfigurator
+ * Class TaxDataGridConfigurator
  *
- * @package WellCommerce\Shop\DataGrid
+ * @package WellCommerce\Tax\DataGrid
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ShopDataGridConfigurator extends AbstractConfigurator implements ConfiguratorInterface
+class TaxDataGridConfigurator extends AbstractConfigurator implements ConfiguratorInterface
 {
     /**
      * {@inheritdoc}
@@ -51,7 +51,7 @@ class ShopDataGridConfigurator extends AbstractConfigurator implements Configura
             'function'   => $function = $this->getFunction('edit'),
             'callback'   => $function,
             'row_action' => OptionInterface::ACTION_EDIT,
-            'route'      => $this->generateUrl('admin.shop.edit')
+            'route'      => $this->generateUrl('admin.tax.edit')
         ]));
 
         $eventHandlers->add(new DeleteRowEventHandler([
@@ -60,35 +60,6 @@ class ShopDataGridConfigurator extends AbstractConfigurator implements Configura
             'row_action' => OptionInterface::ACTION_DELETE,
         ]));
 
-        $eventHandlers->add(new UpdateRowEventHandler([
-            'function' => $this->getXajaxManager()->register([$this->getFunction('update'), $datagrid, 'update']),
-        ]));
-
-        $filters = $this->options->getFilters();
-
-        $filters->add(new Filter('layout_theme_id', $this->get('layout_theme.repository')->getAllLayoutThemeToFilter()));
-        $filters->add(new Filter('offline', $this->getOfflineFilterOptions()));
-
         $datagrid->setOptions($this->options);
-    }
-
-    /**
-     * Returns options for offline filter
-     *
-     * @return array
-     */
-    private function getOfflineFilterOptions()
-    {
-        $options   = [];
-        $options[] = [
-            'id'      => 0,
-            'caption' => $this->trans('Offline'),
-        ];
-        $options[] = [
-            'id'      => 1,
-            'caption' => $this->trans('Online'),
-        ];
-
-        return $options;
     }
 }

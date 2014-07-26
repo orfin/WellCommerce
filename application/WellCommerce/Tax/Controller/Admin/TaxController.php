@@ -31,7 +31,7 @@ class TaxController extends AbstractAdminController
     public function indexAction()
     {
         return [
-            'datagrid' => $this->createDataGrid($this->get('tax.datagrid'))
+            'datagrid' => $this->getDataGrid($this->get('tax.datagrid'))
         ];
     }
 

@@ -7,6 +7,8 @@
         <parameter key="tax.admin.controller.class">WellCommerce\Tax\Controller\Admin\TaxController</parameter>
         <parameter key="tax.repository.class">WellCommerce\Tax\Repository\TaxRepository</parameter>
         <parameter key="tax.datagrid.class">WellCommerce\Tax\DataGrid\TaxDataGrid</parameter>
+        <parameter key="tax.datagrid.configurator.class">WellCommerce\Tax\DataGrid\TaxDataGridConfigurator</parameter>
+        <parameter key="tax.datagrid.query.class">WellCommerce\Tax\DataGrid\TaxDataGridQuery</parameter>
         <parameter key="tax.form.class">WellCommerce\Tax\Form\TaxForm</parameter>
         <parameter key="tax.listener.class">WellCommerce\Tax\EventListener\TaxListener</parameter>
     </parameters>
@@ -27,9 +29,25 @@
             </call>
         </service>
 
+        <service id="tax.datagrid.query" class="%tax.datagrid.query.class%">
+            <argument type="service" id="database_manager"/>
+        </service>
+
+        <service id="tax.datagrid.configurator" class="%tax.datagrid.configurator.class%">
+            <argument key="identifier">tax</argument>
+            <argument type="service" id="datagrid_options" />
+            <argument type="service" id="datagrid_columns" />
+            <argument type="service" id="tax.datagrid.query" />
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
         <service id="tax.datagrid" class="%tax.datagrid.class%">
             <argument type="service" id="service_container"/>
             <argument type="service" id="tax.repository"/>
+            <argument type="service" id="datagrid_loader" />
+            <configurator service="tax.datagrid.configurator" method="configure" />
         </service>
 
         <service id="tax.form" class="%tax.form.class%">
