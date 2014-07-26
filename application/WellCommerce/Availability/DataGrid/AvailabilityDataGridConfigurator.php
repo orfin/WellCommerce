@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Availability\DataGrid;
 
+use WellCommerce\Core\DataGrid\Configuration\Appearance;
 use WellCommerce\Core\DataGrid\Configuration\EventHandler\DeleteGroupEventHandler;
 use WellCommerce\Core\DataGrid\Configuration\EventHandler\DeleteRowEventHandler;
 use WellCommerce\Core\DataGrid\Configuration\EventHandler\EditRowEventHandler;
@@ -39,6 +40,10 @@ class AvailabilityDataGridConfigurator extends AbstractConfigurator implements C
         $datagrid->setColumns($this->columns);
 
         $datagrid->setQueryBuilder($this->queryBuilder);
+
+        $this->options->setAppearance(new Appearance([
+            'column_select' => true
+        ]));
 
         $eventHandlers = $this->options->getEventHandlers();
 
