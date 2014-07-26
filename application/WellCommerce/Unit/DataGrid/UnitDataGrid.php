@@ -11,7 +11,6 @@
  */
 namespace WellCommerce\Unit\DataGrid;
 
-use Illuminate\Database\Capsule\Manager;
 use WellCommerce\Core\DataGrid\AbstractDataGrid;
 use WellCommerce\Core\DataGrid\Column\Column;
 use WellCommerce\Core\DataGrid\Column\ColumnInterface;

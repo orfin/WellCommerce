@@ -7,6 +7,8 @@
         <parameter key="user.admin.controller.class">WellCommerce\User\Controller\Admin\UserController</parameter>
         <parameter key="user.repository.class">WellCommerce\User\Repository\UserRepository</parameter>
         <parameter key="user.datagrid.class">WellCommerce\User\DataGrid\UserDataGrid</parameter>
+        <parameter key="user.datagrid.configurator.class">WellCommerce\User\DataGrid\UserDataGridConfigurator</parameter>
+        <parameter key="user.datagrid.query.class">WellCommerce\User\DataGrid\UserDataGridQuery</parameter>
         <parameter key="user.form.class">WellCommerce\User\Form\UserForm</parameter>
         <parameter key="user.form_login.class">WellCommerce\User\Form\UserLoginForm</parameter>
         <parameter key="user.listener.class">WellCommerce\User\EventListener\UserListener</parameter>
@@ -28,9 +30,25 @@
             </call>
         </service>
 
+        <service id="user.datagrid.query" class="%user.datagrid.query.class%">
+            <argument type="service" id="database_manager"/>
+        </service>
+
+        <service id="user.datagrid.configurator" class="%user.datagrid.configurator.class%">
+            <argument key="identifier">user</argument>
+            <argument type="service" id="datagrid_options" />
+            <argument type="service" id="datagrid_columns" />
+            <argument type="service" id="user.datagrid.query" />
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
         <service id="user.datagrid" class="%user.datagrid.class%">
             <argument type="service" id="service_container"/>
             <argument type="service" id="user.repository"/>
+            <argument type="service" id="datagrid_loader" />
+            <configurator service="user.datagrid.configurator" method="configure" />
         </service>
 
         <service id="user.form" class="%user.form.class%">

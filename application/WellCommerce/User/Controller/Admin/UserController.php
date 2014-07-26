@@ -30,7 +30,7 @@ class UserController extends AbstractAdminController
     public function indexAction()
     {
         return [
-            'datagrid' => $this->createDataGrid($this->get('user.datagrid'))
+            'datagrid' => $this->getDataGrid($this->get('user.datagrid'))
         ];
     }
 
