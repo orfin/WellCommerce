@@ -99,4 +99,12 @@ class AbstractEventHandler
     {
         return isset($this->options[$option]);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getJavascriptFunction()
+    {
+        return "";
+    }
 } 

@@ -38,37 +38,14 @@ class UpdateRowEventHandler extends AbstractEventHandler implements EventHandler
     {
         $resolver->setRequired([
             'function',
-            'callback',
         ]);
 
         $resolver->setDefaults([
             'function'       => OptionInterface::GF_NULL,
-            'callback'       => OptionInterface::GF_NULL,
         ]);
 
         $resolver->setAllowedTypes([
-            'function'       => ['string', 'int'],
-            'callback'       => ['string', 'int'],
+            'function'       => ['string'],
         ]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getJavascriptFunction()
-    {
-        return "
-        function {$this->options['function']}(sId, oRow, sColumn, sPreviousValue) {
-            var oRequest = {
-                id: sId,
-				row: oRow,
-				column: sColumn,
-				previous: sPreviousValue
-            };
-
-            {$this->options['callback']}(oRequest, GCallback(function(eEvent) {
-			    theDatagrid.LoadData();
-			}));
-        }";
     }
 }

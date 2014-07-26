@@ -121,4 +121,13 @@ interface DataGridInterface
      * @return RequestInterface
      */
     public function getCurrentRequest();
+
+    /**
+     * Updates DataGrid row. Transfers request to bound repository
+     *
+     * @param array $request
+     *
+     * @return mixed
+     */
+    public function update(array $request);
 }

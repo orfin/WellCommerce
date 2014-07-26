@@ -13,6 +13,7 @@
 namespace WellCommerce\Core\DataGrid\Configuration\EventHandler;
 
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use WellCommerce\Core\DataGrid\Configuration\OptionInterface;
 
 /**
  * Class Load
@@ -33,9 +34,18 @@ class LoadEventHandler extends AbstractEventHandler implements EventHandlerInter
     /**
      * {@inheritdoc}
      */
-    public function getJavascriptFunction()
+    public function configureOptions(OptionsResolverInterface $resolver)
     {
-        return '';
-    }
+        $resolver->setRequired([
+            'function',
+        ]);
 
+        $resolver->setDefaults([
+            'function'       => OptionInterface::GF_NULL,
+        ]);
+
+        $resolver->setAllowedTypes([
+            'function'       => ['string'],
+        ]);
+    }
 }

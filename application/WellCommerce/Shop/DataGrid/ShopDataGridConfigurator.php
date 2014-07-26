@@ -64,8 +64,7 @@ class ShopDataGridConfigurator extends AbstractConfigurator implements Configura
         ]));
 
         $eventHandlers->add(new UpdateRowEventHandler([
-            'function' => $function = $this->getFunction('update'),
-            'callback' => $this->getXajaxManager()->register([$function, $datagrid, 'update']),
+            'function' => $this->getXajaxManager()->register([$this->getFunction('update'), $datagrid, 'update']),
         ]));
 
         $filters = $this->options->getFilters();

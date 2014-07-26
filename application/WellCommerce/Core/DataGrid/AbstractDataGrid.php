@@ -141,7 +141,7 @@ abstract class AbstractDataGrid extends AbstractComponent
     /**
      * {@inheritdoc}
      */
-    public function updateRow($request)
+    public function update(array $request)
     {
         try {
             $this->repository->updateDataGridRow($request);
