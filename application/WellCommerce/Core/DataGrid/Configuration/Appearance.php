@@ -50,7 +50,7 @@ class Appearance extends AbstractOption implements OptionInterface
         ]);
 
         $resolver->setDefaults([
-            'column_select'  => true,
+            'column_select'  => false,
             'column_options' => true,
         ]);
 

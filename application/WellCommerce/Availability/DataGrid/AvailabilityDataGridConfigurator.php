@@ -45,10 +45,6 @@ class AvailabilityDataGridConfigurator extends AbstractConfigurator implements C
 
         $datagrid->setQueryBuilder($this->queryBuilder);
 
-        $this->options->setAppearance(new Appearance([
-            'column_select' => false
-        ]));
-
         $eventHandlers = $this->options->getEventHandlers();
 
         $eventHandlers->add(new LoadEventHandler([
