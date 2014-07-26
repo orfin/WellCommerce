@@ -12,6 +12,9 @@
 
 namespace WellCommerce\Core\DataGrid\Configuration\EventHandler;
 
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use WellCommerce\Core\DataGrid\Configuration\OptionInterface;
+
 /**
  * Class DeleteGroupEventHandler
  *
@@ -26,6 +29,33 @@ class DeleteGroupEventHandler extends AbstractEventHandler implements EventHandl
     public function getFunctionName()
     {
         return 'delete_group';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setRequired([
+            'function',
+            'callback',
+            'group_action',
+            'context_action',
+        ]);
+
+        $resolver->setDefaults([
+            'function'       => OptionInterface::GF_NULL,
+            'callback'       => OptionInterface::GF_NULL,
+            'group_action'   => false,
+            'context_action' => false,
+        ]);
+
+        $resolver->setAllowedTypes([
+            'function'       => ['string', 'int'],
+            'callback'       => ['string', 'int'],
+            'group_action'   => ['bool', 'string'],
+            'context_action' => ['bool', 'string'],
+        ]);
     }
 
     /**

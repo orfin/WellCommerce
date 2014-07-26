@@ -31,6 +31,33 @@ class DeleteRowEventHandler extends AbstractEventHandler implements EventHandler
         return 'delete_row';
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setRequired([
+            'function',
+            'callback',
+            'row_action',
+            'context_action',
+        ]);
+
+        $resolver->setDefaults([
+            'function'       => OptionInterface::GF_NULL,
+            'callback'       => OptionInterface::GF_NULL,
+            'row_action'     => false,
+            'context_action' => false,
+        ]);
+
+        $resolver->setAllowedTypes([
+            'function'       => ['string', 'int'],
+            'callback'       => ['string', 'int'],
+            'row_action'     => ['bool', 'string'],
+            'context_action' => ['bool', 'string'],
+        ]);
+    }
+
     public function getJavascriptFunction()
     {
         return "
