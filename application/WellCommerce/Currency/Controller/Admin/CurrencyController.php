@@ -31,7 +31,7 @@ class CurrencyController extends AbstractAdminController
     public function indexAction()
     {
         return [
-            'datagrid' => $this->createDataGrid($this->get('currency.datagrid'))
+            'datagrid' => $this->getDataGrid($this->get('currency.datagrid'))
         ];
     }
 

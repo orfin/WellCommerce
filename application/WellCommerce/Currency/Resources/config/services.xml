@@ -7,6 +7,8 @@
         <parameter key="currency.admin.controller.class">WellCommerce\Currency\Controller\Admin\CurrencyController</parameter>
         <parameter key="currency.repository.class">WellCommerce\Currency\Repository\CurrencyRepository</parameter>
         <parameter key="currency.datagrid.class">WellCommerce\Currency\DataGrid\CurrencyDataGrid</parameter>
+        <parameter key="currency.datagrid.configurator.class">WellCommerce\Currency\DataGrid\CurrencyDataGridConfigurator</parameter>
+        <parameter key="currency.datagrid.query.class">WellCommerce\Currency\DataGrid\CurrencyDataGridQuery</parameter>
         <parameter key="currency.form.class">WellCommerce\Currency\Form\CurrencyForm</parameter>
         <parameter key="currency.listener.class">WellCommerce\Currency\EventListener\CurrencyListener</parameter>
     </parameters>
@@ -27,9 +29,25 @@
             </call>
         </service>
 
+        <service id="currency.datagrid.query" class="%currency.datagrid.query.class%">
+            <argument type="service" id="database_manager"/>
+        </service>
+
+        <service id="currency.datagrid.configurator" class="%currency.datagrid.configurator.class%">
+            <argument key="identifier">currency</argument>
+            <argument type="service" id="datagrid_options" />
+            <argument type="service" id="datagrid_columns" />
+            <argument type="service" id="currency.datagrid.query" />
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
         <service id="currency.datagrid" class="%currency.datagrid.class%">
             <argument type="service" id="service_container"/>
             <argument type="service" id="currency.repository"/>
+            <argument type="service" id="datagrid_loader" />
+            <configurator service="currency.datagrid.configurator" method="configure" />
         </service>
 
         <service id="currency.form" class="%currency.form.class%">

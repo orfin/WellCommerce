@@ -13,9 +13,9 @@ namespace WellCommerce\Currency\DataGrid;
 
 use Illuminate\Database\Capsule\Manager;
 use WellCommerce\Core\DataGrid\AbstractDataGrid;
+use WellCommerce\Core\DataGrid\Column\Column;
 use WellCommerce\Core\DataGrid\Column\ColumnCollection;
 use WellCommerce\Core\DataGrid\Column\ColumnInterface;
-use WellCommerce\Core\DataGrid\Column\DataGridColumn;
 use WellCommerce\Core\DataGrid\DataGridInterface;
 
 /**
@@ -29,27 +29,9 @@ class CurrencyDataGrid extends AbstractDataGrid implements DataGridInterface
     /**
      * {@inheritdoc}
      */
-    public function getId()
+    public function addColumns()
     {
-        return 'currency';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getRoutes()
-    {
-        return [
-            'edit' => $this->generateUrl('admin.currency.edit')
-        ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function initColumns(ColumnCollection $collection)
-    {
-        $collection->add(new DataGridColumn([
+        $this->columns->add(new Column([
             'id'         => 'id',
             'source'     => 'currency.id',
             'caption'    => $this->trans('Id'),
@@ -65,7 +47,7 @@ class CurrencyDataGrid extends AbstractDataGrid implements DataGridInterface
             ]
         ]));
 
-        $collection->add(new DataGridColumn([
+        $this->columns->add(new Column([
             'id'         => 'name',
             'source'     => 'currency.name',
             'caption'    => $this->trans('Name'),
@@ -78,7 +60,7 @@ class CurrencyDataGrid extends AbstractDataGrid implements DataGridInterface
             ]
         ]));
 
-        $collection->add(new DataGridColumn([
+        $this->columns->add(new Column([
             'id'         => 'symbol',
             'source'     => 'currency.symbol',
             'caption'    => $this->trans('Symbol'),
@@ -90,14 +72,5 @@ class CurrencyDataGrid extends AbstractDataGrid implements DataGridInterface
                 'type' => ColumnInterface::FILTER_INPUT
             ]
         ]));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setQuery(Manager $manager)
-    {
-        $this->query = $manager->table('currency');
-        $this->query->groupBy('currency.id');
     }
 }
