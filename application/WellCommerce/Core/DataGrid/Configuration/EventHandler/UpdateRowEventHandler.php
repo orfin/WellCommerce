@@ -12,22 +12,63 @@
 
 namespace WellCommerce\Core\DataGrid\Configuration\EventHandler;
 
-
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use WellCommerce\Core\DataGrid\Configuration\OptionInterface;
 
-class UpdateRowEventHandler
+/**
+ * Class UpdateRowEventHandler
+ *
+ * @package WellCommerce\Core\DataGrid\Configuration\EventHandler
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
+ */
+class UpdateRowEventHandler extends AbstractEventHandler implements EventHandlerInterface
 {
-    public function getEventName()
+    /**
+     * {@inheritdoc}
+     */
+    public function getFunctionName()
     {
         return 'update_row';
     }
 
-    public function configure(OptionsResolverInterface $resolver)
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setRequired([
+            'function',
             'callback',
-            'success_message',
-            'error_message',
         ]);
+
+        $resolver->setDefaults([
+            'function'       => OptionInterface::GF_NULL,
+            'callback'       => OptionInterface::GF_NULL,
+        ]);
+
+        $resolver->setAllowedTypes([
+            'function'       => ['string', 'int'],
+            'callback'       => ['string', 'int'],
+        ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getJavascriptFunction()
+    {
+        return "
+        function {$this->options['function']}(sId, oRow, sColumn, sPreviousValue) {
+            var oRequest = {
+                id: sId,
+				row: oRow,
+				column: sColumn,
+				previous: sPreviousValue
+            };
+
+            {$this->options['callback']}(oRequest, GCallback(function(eEvent) {
+			    theDatagrid.LoadData();
+			}));
+        }";
     }
 }

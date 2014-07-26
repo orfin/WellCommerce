@@ -13,6 +13,7 @@
 namespace WellCommerce\Core\DataGrid\Configuration;
 
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use WellCommerce\Core\DataGrid\Configuration\Filter\FilterInterface;
 
 /**
  * Class Filters
@@ -20,23 +21,76 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  * @package WellCommerce\Core\DataGrid\Configuration
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Filters extends AbstractOption implements OptionInterface
+class Filters implements \IteratorAggregate, \Countable
 {
+    private $filters;
+
     /**
-     * {@inheritdoc}
+     * Returns iterator
+     *
+     * @return \ArrayIterator|\Traversable
      */
-    public function configureOptions(OptionsResolverInterface $resolver)
+    public function getIterator()
     {
-        $resolver->setRequired([
-            'filters',
-        ]);
-
-        $resolver->setDefaults([
-            'filters' => []
-        ]);
-
-        $resolver->setAllowedTypes([
-            'filters' => 'array'
-        ]);
+        return new \ArrayIterator($this->filters);
     }
-} 
+
+    /**
+     * Returns filters count
+     *
+     * @return int
+     */
+    public function count()
+    {
+        return count($this->filters);
+    }
+
+    /**
+     * Returns all filters
+     *
+     * @return mixed
+     */
+    public function all()
+    {
+        return $this->filters;
+    }
+
+    /**
+     * Adds new event handler to collection
+     *
+     * @param FilterInterface $filter
+     */
+    public function add(FilterInterface $filter)
+    {
+        $this->filters[$filter->getColumn()] = $filter->getValues();
+    }
+
+    /**
+     * Returns filter values for column
+     *
+     * @param $column
+     *
+     * @return mixed
+     * @throws \InvalidArgumentException
+     */
+    public function get($column)
+    {
+        if (!isset($this->filters[$column])) {
+            throw new \InvalidArgumentException(sprintf('DataGrid filters for column "%s" not found', $column));
+        }
+
+        return $this->filters[$column];
+    }
+
+    /**
+     * Checks whether column has related filter data
+     *
+     * @param $column
+     *
+     * @return bool
+     */
+    public function has($column)
+    {
+        return isset($this->filters[$column]);
+    }
+}

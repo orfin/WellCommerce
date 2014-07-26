@@ -16,6 +16,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use WellCommerce\Core\DataGrid\Configuration\Appearance;
 use WellCommerce\Core\DataGrid\Configuration\EventHandlers;
+use WellCommerce\Core\DataGrid\Configuration\Filters;
 use WellCommerce\Core\DataGrid\Configuration\Mechanics;
 use WellCommerce\Core\DataGrid\Configuration\RowActions;
 
@@ -53,21 +54,24 @@ class Options implements OptionsInterface
             'appearance',
             'mechanics',
             'event_handlers',
-            'row_actions'
+            'row_actions',
+            'filters'
         ]);
 
         $resolver->setDefaults([
             'appearance'     => new Appearance(),
             'mechanics'      => new Mechanics(),
             'event_handlers' => new EventHandlers(),
-            'row_actions'    => new RowActions()
+            'row_actions'    => new RowActions(),
+            'filters'        => new Filters()
         ]);
 
         $resolver->setAllowedTypes([
             'appearance'     => 'object',
             'mechanics'      => 'object',
             'event_handlers' => 'object',
-            'row_actions'    => 'object'
+            'row_actions'    => 'object',
+            'filters'        => 'object'
         ]);
     }
 
@@ -149,5 +153,21 @@ class Options implements OptionsInterface
     public function getRowActions()
     {
         return $this->options['row_actions'];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setFilters(Filters $filters)
+    {
+        $this->options['filters'] = $filters;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFilters()
+    {
+        return $this->options['filters'];
     }
 } 

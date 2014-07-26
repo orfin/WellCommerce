@@ -7,6 +7,8 @@
         <parameter key="shop.admin.controller.class">WellCommerce\Shop\Controller\Admin\ShopController</parameter>
         <parameter key="shop.repository.class">WellCommerce\Shop\Repository\ShopRepository</parameter>
         <parameter key="shop.datagrid.class">WellCommerce\Shop\DataGrid\ShopDataGrid</parameter>
+        <parameter key="shop.datagrid.configurator.class">WellCommerce\Shop\DataGrid\ShopDataGridConfigurator</parameter>
+        <parameter key="shop.datagrid.query.class">WellCommerce\Shop\DataGrid\ShopDataGridQuery</parameter>
         <parameter key="shop.form.class">WellCommerce\Shop\Form\ShopForm</parameter>
         <parameter key="shop.listener.class">WellCommerce\Shop\EventListener\ShopListener</parameter>
     </parameters>
@@ -27,9 +29,25 @@
             </call>
         </service>
 
+        <service id="shop.datagrid.query" class="%shop.datagrid.query.class%">
+            <argument type="service" id="database_manager"/>
+        </service>
+
+        <service id="shop.datagrid.configurator" class="%shop.datagrid.configurator.class%">
+            <argument key="identifier">shop</argument>
+            <argument type="service" id="datagrid_options" />
+            <argument type="service" id="datagrid_columns" />
+            <argument type="service" id="shop.datagrid.query" />
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
         <service id="shop.datagrid" class="%shop.datagrid.class%">
             <argument type="service" id="service_container"/>
             <argument type="service" id="shop.repository"/>
+            <argument type="service" id="datagrid_loader" />
+            <configurator service="shop.datagrid.configurator" method="configure" />
         </service>
 
         <service id="shop.form" class="%shop.form.class%">

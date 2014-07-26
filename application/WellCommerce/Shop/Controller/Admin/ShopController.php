@@ -31,7 +31,7 @@ class ShopController extends AbstractAdminController
     public function indexAction()
     {
         return [
-            'datagrid' => $this->createDataGrid($this->get('shop.datagrid'))
+            'datagrid' => $this->getDataGrid($this->get('shop.datagrid'))
         ];
     }
 

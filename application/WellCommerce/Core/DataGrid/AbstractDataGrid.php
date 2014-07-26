@@ -31,6 +31,9 @@ use xajaxResponse;
  */
 abstract class AbstractDataGrid extends AbstractComponent
 {
+    /**
+     * @var \WellCommerce\Core\DataGrid\Column\ColumnCollection
+     */
     protected $columns;
     protected $identifier;
     protected $repository;

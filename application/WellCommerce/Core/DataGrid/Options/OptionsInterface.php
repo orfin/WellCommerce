@@ -15,6 +15,7 @@ namespace WellCommerce\Core\DataGrid\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use WellCommerce\Core\DataGrid\Configuration\Appearance;
 use WellCommerce\Core\DataGrid\Configuration\EventHandlers;
+use WellCommerce\Core\DataGrid\Configuration\Filters;
 use WellCommerce\Core\DataGrid\Configuration\Mechanics;
 use WellCommerce\Core\DataGrid\Configuration\RowActions;
 
@@ -114,4 +115,20 @@ interface OptionsInterface
      * @return RowActions
      */
     public function getRowActions();
+
+    /**
+     * Sets filters as DataGrid options
+     *
+     * @param Filters $filters
+     *
+     * @return void
+     */
+    public function setFilters(Filters $filters);
+
+    /**
+     * Returns DataGrid filters
+     *
+     * @return Filters
+     */
+    public function getFilters();
 } 

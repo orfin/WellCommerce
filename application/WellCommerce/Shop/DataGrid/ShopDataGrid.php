@@ -13,6 +13,7 @@ namespace WellCommerce\Shop\DataGrid;
 
 use Illuminate\Database\Capsule\Manager;
 use WellCommerce\Core\DataGrid\AbstractDataGrid;
+use WellCommerce\Core\DataGrid\Column\Column;
 use WellCommerce\Core\DataGrid\Column\ColumnCollection;
 use WellCommerce\Core\DataGrid\Column\ColumnInterface;
 use WellCommerce\Core\DataGrid\Column\DataGridColumn;
@@ -26,25 +27,6 @@ use WellCommerce\Core\DataGrid\DataGridInterface;
  */
 class ShopDataGrid extends AbstractDataGrid implements DataGridInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getId()
-    {
-        return 'shop';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getRoutes()
-    {
-        return [
-            'index' => $this->generateUrl('admin.shop.index'),
-            'edit'  => $this->generateUrl('admin.shop.edit')
-        ];
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -72,9 +54,9 @@ class ShopDataGrid extends AbstractDataGrid implements DataGridInterface
     /**
      * {@inheritdoc}
      */
-    public function initColumns(ColumnCollection $collection)
+    public function addColumns()
     {
-        $collection->add(new DataGridColumn([
+        $this->columns->add(new Column([
             'id'         => 'id',
             'source'     => 'shop.id',
             'caption'    => $this->trans('Id'),
@@ -90,7 +72,7 @@ class ShopDataGrid extends AbstractDataGrid implements DataGridInterface
             ]
         ]));
 
-        $collection->add(new DataGridColumn([
+        $this->columns->add(new Column([
             'id'         => 'name',
             'source'     => 'shop_translation.name',
             'caption'    => $this->trans('Name'),
@@ -103,7 +85,7 @@ class ShopDataGrid extends AbstractDataGrid implements DataGridInterface
             ]
         ]));
 
-        $collection->add(new DataGridColumn([
+        $this->columns->add(new Column([
             'id'         => 'url',
             'source'     => 'shop.url',
             'caption'    => $this->trans('Url address'),
@@ -116,7 +98,7 @@ class ShopDataGrid extends AbstractDataGrid implements DataGridInterface
             ]
         ]));
 
-        $collection->add(new DataGridColumn([
+        $this->columns->add(new Column([
             'id'         => 'layout_theme_id',
             'source'     => 'shop.layout_theme_id',
             'caption'    => $this->trans('Theme'),
@@ -130,7 +112,7 @@ class ShopDataGrid extends AbstractDataGrid implements DataGridInterface
             ]
         ]));
 
-        $collection->add(new DataGridColumn([
+        $this->columns->add(new Column([
             'id'         => 'offline',
             'source'     => 'shop.offline',
             'caption'    => $this->trans('Offline mode'),
@@ -143,16 +125,6 @@ class ShopDataGrid extends AbstractDataGrid implements DataGridInterface
                 'type' => ColumnInterface::FILTER_SELECT
             ]
         ]));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setQuery(Manager $manager)
-    {
-        $this->query = $manager->table('shop');
-        $this->query->join('shop_translation', 'shop_translation.shop_id', '=', 'shop.id');
-        $this->query->groupBy('shop.id');
     }
 
     /**

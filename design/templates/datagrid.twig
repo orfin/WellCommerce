@@ -10,7 +10,7 @@ var DataGrid;
 
 $(document).ready(function() {
     {% for key, column in datagrid.getColumns() %}
-    {{ macros.datagrid_column(key, column, options.filters) }}
+    {{ macros.datagrid_column(key, column, datagrid.getOptions().getFilters()) }}
     {% endfor %}
     {{ macros.datagrid_options(datagrid) }}
 
