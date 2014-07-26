@@ -29,7 +29,7 @@ class ProducerController extends AbstractAdminController
     public function indexAction()
     {
         return [
-            'datagrid' => $this->createDataGrid($this->get('producer.datagrid'))
+            'datagrid' => $this->getDataGrid($this->get('producer.datagrid'))
         ];
     }
 

@@ -10,6 +10,8 @@
         <parameter key="producer_list.box.controller.class">WellCommerce\Producer\Controller\Box\ProducerListBoxController</parameter>
         <parameter key="producer.repository.class">WellCommerce\Producer\Repository\ProducerRepository</parameter>
         <parameter key="producer.datagrid.class">WellCommerce\Producer\DataGrid\ProducerDataGrid</parameter>
+        <parameter key="producer.datagrid.configurator.class">WellCommerce\Producer\DataGrid\ProducerDataGridConfigurator</parameter>
+        <parameter key="producer.datagrid.query.class">WellCommerce\Producer\DataGrid\ProducerDataGridQuery</parameter>
         <parameter key="producer.form.class">WellCommerce\Producer\Form\ProducerForm</parameter>
         <parameter key="producer.listener.class">WellCommerce\Producer\EventListener\ProducerListener</parameter>
     </parameters>
@@ -54,9 +56,25 @@
             </call>
         </service>
 
+        <service id="producer.datagrid.query" class="%producer.datagrid.query.class%">
+            <argument type="service" id="database_manager"/>
+        </service>
+
+        <service id="producer.datagrid.configurator" class="%producer.datagrid.configurator.class%">
+            <argument key="identifier">producer</argument>
+            <argument type="service" id="datagrid_options" />
+            <argument type="service" id="datagrid_columns" />
+            <argument type="service" id="producer.datagrid.query" />
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
         <service id="producer.datagrid" class="%producer.datagrid.class%">
             <argument type="service" id="service_container"/>
             <argument type="service" id="producer.repository"/>
+            <argument type="service" id="datagrid_loader" />
+            <configurator service="producer.datagrid.configurator" method="configure" />
         </service>
 
         <service id="producer.form" class="%producer.form.class%">
