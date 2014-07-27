@@ -11,11 +11,10 @@
  */
 namespace WellCommerce\Company\DataGrid;
 
-use Illuminate\Database\Capsule\Manager;
 use WellCommerce\Core\DataGrid\AbstractDataGrid;
+use WellCommerce\Core\DataGrid\Column\Column;
 use WellCommerce\Core\DataGrid\Column\ColumnCollection;
 use WellCommerce\Core\DataGrid\Column\ColumnInterface;
-use WellCommerce\Core\DataGrid\Column\DataGridColumn;
 use WellCommerce\Core\DataGrid\DataGridInterface;
 
 /**
@@ -29,27 +28,9 @@ class CompanyDataGrid extends AbstractDataGrid implements DataGridInterface
     /**
      * {@inheritdoc}
      */
-    public function getId()
+    public function addColumns()
     {
-        return 'company';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getRoutes()
-    {
-        return [
-            'edit' => $this->generateUrl('admin.company.edit')
-        ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function initColumns(ColumnCollection $collection)
-    {
-        $collection->add(new DataGridColumn([
+        $this->columns->add(new Column([
             'id'         => 'id',
             'source'     => 'company.id',
             'caption'    => $this->trans('Id'),
@@ -65,7 +46,7 @@ class CompanyDataGrid extends AbstractDataGrid implements DataGridInterface
             ]
         ]));
 
-        $collection->add(new DataGridColumn([
+        $this->columns->add(new Column([
             'id'         => 'name',
             'source'     => 'company.name',
             'caption'    => $this->trans('Name'),
@@ -79,12 +60,4 @@ class CompanyDataGrid extends AbstractDataGrid implements DataGridInterface
         ]));
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setQuery(Manager $manager)
-    {
-        $this->query = $manager->table('company');
-        $this->query->groupBy('company.id');
-    }
 }

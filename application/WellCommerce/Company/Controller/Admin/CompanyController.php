@@ -24,6 +24,9 @@ use WellCommerce\Company\Repository\CompanyRepositoryInterface;
  */
 class CompanyController extends AbstractAdminController
 {
+    /**
+     * @var CompanyRepositoryInterface
+     */
     private $repository;
 
     /**
@@ -32,7 +35,7 @@ class CompanyController extends AbstractAdminController
     public function indexAction()
     {
         return [
-            'datagrid' => $this->createDataGrid($this->get('company.datagrid'))
+            'datagrid' => $this->getDataGrid($this->get('company.datagrid'))
         ];
     }
 
@@ -48,7 +51,7 @@ class CompanyController extends AbstractAdminController
         if ($form->isValid()) {
             try {
                 $this->repository->save($form->getSubmitValuesFlat());
-                $this->addSuccessMessage('Changes saved successfully.');
+                $this->addSuccessMessage('New company added successfully.');
 
                 return $this->redirect($this->getDefaultUrl());
 
@@ -76,7 +79,7 @@ class CompanyController extends AbstractAdminController
         if ($form->isValid()) {
             try {
                 $this->repository->save($form->getSubmitValuesFlat(), $id);
-                $this->addSuccessMessage('Changes saved successfully.');
+                $this->addSuccessMessage('Company saved successfully.');
 
                 return $this->redirect($this->getDefaultUrl());
 

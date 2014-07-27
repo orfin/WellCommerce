@@ -7,6 +7,8 @@
         <parameter key="company.admin.controller.class">WellCommerce\Company\Controller\Admin\CompanyController</parameter>
         <parameter key="company.repository.class">WellCommerce\Company\Repository\CompanyRepository</parameter>
         <parameter key="company.datagrid.class">WellCommerce\Company\DataGrid\CompanyDataGrid</parameter>
+        <parameter key="company.datagrid.configurator.class">WellCommerce\Company\DataGrid\CompanyDataGridConfigurator</parameter>
+        <parameter key="company.datagrid.query.class">WellCommerce\Company\DataGrid\CompanyDataGridQuery</parameter>
         <parameter key="company.form.class">WellCommerce\Company\Form\CompanyForm</parameter>
         <parameter key="company.listener.class">WellCommerce\Company\EventListener\CompanyListener</parameter>
     </parameters>
@@ -27,9 +29,25 @@
             </call>
         </service>
 
+        <service id="company.datagrid.query" class="%company.datagrid.query.class%">
+            <argument type="service" id="database_manager"/>
+        </service>
+
+        <service id="company.datagrid.configurator" class="%company.datagrid.configurator.class%">
+            <argument key="identifier">company</argument>
+            <argument type="service" id="datagrid_options" />
+            <argument type="service" id="datagrid_columns" />
+            <argument type="service" id="company.datagrid.query" />
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
         <service id="company.datagrid" class="%company.datagrid.class%">
             <argument type="service" id="service_container"/>
             <argument type="service" id="company.repository"/>
+            <argument type="service" id="datagrid_loader" />
+            <configurator service="company.datagrid.configurator" method="configure" />
         </service>
 
         <service id="company.form" class="%company.form.class%">
