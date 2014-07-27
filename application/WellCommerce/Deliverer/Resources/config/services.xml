@@ -7,10 +7,12 @@
         <parameter key="deliverer.admin.controller.class">WellCommerce\Deliverer\Controller\Admin\DelivererController</parameter>
         <parameter key="deliverer.repository.class">WellCommerce\Deliverer\Repository\DelivererRepository</parameter>
         <parameter key="deliverer.datagrid.class">WellCommerce\Deliverer\DataGrid\DelivererDataGrid</parameter>
+        <parameter key="deliverer.datagrid.configurator.class">WellCommerce\Deliverer\DataGrid\DelivererDataGridConfigurator</parameter>
+        <parameter key="deliverer.datagrid.query.class">WellCommerce\Deliverer\DataGrid\DelivererDataGridQuery</parameter>
         <parameter key="deliverer.form.class">WellCommerce\Deliverer\Form\DelivererForm</parameter>
         <parameter key="deliverer.listener.class">WellCommerce\Deliverer\EventListener\DelivererListener</parameter>
     </parameters>
-    
+
     <services>
         <service id="deliverer.admin.controller" class="%deliverer.admin.controller.class%">
             <call method="setContainer">
@@ -20,18 +22,34 @@
                 <argument type="service" id="deliverer.repository"/>
             </call>
         </service>
-        
+
         <service id="deliverer.repository" class="%deliverer.repository.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
-        
+
+        <service id="deliverer.datagrid.query" class="%deliverer.datagrid.query.class%">
+            <argument type="service" id="database_manager"/>
+        </service>
+
+        <service id="deliverer.datagrid.configurator" class="%deliverer.datagrid.configurator.class%">
+            <argument key="identifier">deliverer</argument>
+            <argument type="service" id="datagrid_options"/>
+            <argument type="service" id="datagrid_columns"/>
+            <argument type="service" id="deliverer.datagrid.query"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
         <service id="deliverer.datagrid" class="%deliverer.datagrid.class%">
             <argument type="service" id="service_container"/>
             <argument type="service" id="deliverer.repository"/>
+            <argument type="service" id="datagrid_loader"/>
+            <configurator service="deliverer.datagrid.configurator" method="configure"/>
         </service>
-
+        
         <service id="deliverer.form" class="%deliverer.form.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
@@ -40,7 +58,7 @@
 
         <service id="deliverer.listener" class="%deliverer.listener.class%">
             <argument type="service" id="service_container"/>
-            <tag name="kernel.event_subscriber" />
+            <tag name="kernel.event_subscriber"/>
         </service>
     </services>
 </container>

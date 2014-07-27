@@ -11,11 +11,10 @@
  */
 namespace WellCommerce\Deliverer\DataGrid;
 
-use Illuminate\Database\Capsule\Manager;
 use WellCommerce\Core\DataGrid\AbstractDataGrid;
+use WellCommerce\Core\DataGrid\Column\Column;
 use WellCommerce\Core\DataGrid\Column\ColumnCollection;
 use WellCommerce\Core\DataGrid\Column\ColumnInterface;
-use WellCommerce\Core\DataGrid\Column\DataGridColumn;
 use WellCommerce\Core\DataGrid\DataGridInterface;
 
 /**
@@ -29,27 +28,9 @@ class DelivererDataGrid extends AbstractDataGrid implements DataGridInterface
     /**
      * {@inheritdoc}
      */
-    public function getId()
+    public function addColumns()
     {
-        return 'deliverer';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getRoutes()
-    {
-        return [
-            'edit' => $this->generateUrl('admin.deliverer.edit')
-        ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function initColumns(ColumnCollection $collection)
-    {
-        $collection->add(new DataGridColumn([
+        $this->columns->add(new Column([
             'id'         => 'id',
             'source'     => 'deliverer.id',
             'caption'    => $this->trans('Id'),
@@ -65,7 +46,7 @@ class DelivererDataGrid extends AbstractDataGrid implements DataGridInterface
             ]
         ]));
 
-        $collection->add(new DataGridColumn([
+        $this->columns->add(new Column([
             'id'         => 'name',
             'source'     => 'deliverer_translation.name',
             'caption'    => $this->trans('Name'),
@@ -77,15 +58,5 @@ class DelivererDataGrid extends AbstractDataGrid implements DataGridInterface
                 'type' => ColumnInterface::FILTER_INPUT
             ]
         ]));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setQuery(Manager $manager)
-    {
-        $this->query = $manager->table('deliverer');
-        $this->query->join('deliverer_translation', 'deliverer_translation.deliverer_id', '=', 'deliverer.id');
-        $this->query->groupBy('deliverer.id');
     }
 }

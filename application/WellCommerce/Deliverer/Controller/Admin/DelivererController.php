@@ -29,7 +29,7 @@ class DelivererController extends AbstractAdminController
     public function indexAction()
     {
         return [
-            'datagrid' => $this->createDataGrid($this->get('deliverer.datagrid'))
+            'datagrid' => $this->getDataGrid($this->get('deliverer.datagrid'))
         ];
     }
 
