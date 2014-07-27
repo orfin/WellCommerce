@@ -12,7 +12,7 @@ before_script:
     - java -jar selenium.jar > /dev/null &
 
 script:
-    - bin/codecept run -c ./
+    - vendor/bin/codecept run -c ./
 
 notifications:
     email: "travis@wellcommerce.org"
