@@ -15,10 +15,7 @@
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class AdminLoginPage
+class AdminProductPage
 {
-    public static $URL = '/admin/user/login';
-    public static $usernameField = 'email';
-    public static $passwordField = 'password';
-    public static $loginButton = 'button[type=submit]';
+    public static $URL = '/admin/product/index';
 }

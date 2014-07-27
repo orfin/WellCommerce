@@ -13,7 +13,6 @@ namespace WellCommerce\AddressType\Model;
 
 use WellCommerce\Core\Model\AbstractModel;
 use WellCommerce\Core\Model\ModelInterface;
-use WellCommerce\Core\Helper\Password;
 
 /**
  * Class AddressType
