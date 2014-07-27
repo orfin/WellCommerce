@@ -13734,7 +13734,6 @@ var GFormImage = GCore.ExtendClass(GFormFile, function() {
 	};
 	
 	gThis._DefaultsLoaded = function(oData) {
-		console.log(oData);
 		for (var i = 0; i < oData.rows.length; i++) {
 			gThis._AddImage(oData.rows[i].id, oData.rows[i]);
 		}
