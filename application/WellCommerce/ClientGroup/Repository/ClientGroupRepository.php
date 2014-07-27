@@ -12,7 +12,6 @@
 namespace WellCommerce\ClientGroup\Repository;
 
 use WellCommerce\Core\Repository\AbstractRepository;
-use WellCommerce\Core\Repository\RepositoryInterface;
 use WellCommerce\ClientGroup\Model\ClientGroup;
 use WellCommerce\ClientGroup\Model\ClientGroupTranslation;
 
@@ -90,8 +89,7 @@ class ClientGroupRepository extends AbstractRepository implements ClientGroupRep
 
         $this->transaction(function () use ($id, $data) {
             $clientGroup = $this->find($id);
-            $data
-                         = $this->dispatchEvent(ClientGroupRepositoryInterface::PRE_UPDATE_DATAGRID_EVENT, $clientGroup, $data);
+            $data = $this->dispatchEvent(ClientGroupRepositoryInterface::PRE_UPDATE_DATAGRID_EVENT, $clientGroup, $data);
             $clientGroup->update($data);
             $this->dispatchEvent(ClientGroupRepositoryInterface::POST_UPDATE_DATAGRID_EVENT, $clientGroup, $data);
         });

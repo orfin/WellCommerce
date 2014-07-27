@@ -24,12 +24,17 @@ use WellCommerce\ClientGroup\Repository\ClientGroupRepositoryInterface;
 class ClientGroupController extends AbstractAdminController
 {
     /**
+     * @var ClientGroupRepositoryInterface
+     */
+    private $repository;
+
+    /**
      * {@inheritdoc}
      */
     public function indexAction()
     {
         return [
-            'datagrid' => $this->createDataGrid($this->get('client_group.datagrid'))
+            'datagrid' => $this->getDataGrid($this->get('client_group.datagrid'))
         ];
     }
 
@@ -45,7 +50,7 @@ class ClientGroupController extends AbstractAdminController
         if ($form->isValid()) {
             try {
                 $this->repository->save($form->getSubmitValuesFlat());
-                $this->addSuccessMessage('Changes saved successfully.');
+                $this->addSuccessMessage('New client group added successfully.');
 
                 return $this->redirect($this->getDefaultUrl());
 
@@ -73,7 +78,7 @@ class ClientGroupController extends AbstractAdminController
         if ($form->isValid()) {
             try {
                 $this->repository->save($form->getSubmitValuesFlat(), $id);
-                $this->addSuccessMessage('Changes saved successfully.');
+                $this->addSuccessMessage('Client group saved successfully.');
 
                 return $this->redirect($this->getDefaultUrl());
 

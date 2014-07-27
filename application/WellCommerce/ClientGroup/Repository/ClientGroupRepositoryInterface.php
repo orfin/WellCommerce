@@ -29,7 +29,7 @@ interface ClientGroupRepositoryInterface
     /**
      * Returns all client groups as a collection
      *
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @return \WellCommerce\Core\Model\Collection\CustomCollection
      */
     public function all();
 
@@ -74,4 +74,13 @@ interface ClientGroupRepositoryInterface
      * @return mixed
      */
     public function getAllClientGroupToFilter();
+
+    /**
+     * Updates a record directly from datagrid request
+     *
+     * @param array $request
+     *
+     * @return mixed
+     */
+    public function updateDataGridRow(array $request);
 }

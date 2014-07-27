@@ -13,6 +13,7 @@ namespace WellCommerce\ClientGroup\DataGrid;
 
 use Illuminate\Database\Capsule\Manager;
 use WellCommerce\Core\DataGrid\AbstractDataGrid;
+use WellCommerce\Core\DataGrid\Column\Column;
 use WellCommerce\Core\DataGrid\Column\ColumnCollection;
 use WellCommerce\Core\DataGrid\Column\ColumnInterface;
 use WellCommerce\Core\DataGrid\Column\DataGridColumn;
@@ -29,44 +30,9 @@ class ClientGroupDataGrid extends AbstractDataGrid implements DataGridInterface
     /**
      * {@inheritdoc}
      */
-    public function getId()
+    public function addColumns()
     {
-        return 'client_group';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getRoutes()
-    {
-        return [
-            'edit' => $this->generateUrl('admin.client_group.edit')
-        ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function configureOptions(array $options)
-    {
-        $event_handlers            = [
-            'update_row' => $this->getXajaxManager()->registerFunction([
-                    'update_' . $this->getId(),
-                    $this,
-                    'updateRow'
-                ])
-        ];
-        $options['event_handlers'] = $event_handlers;
-
-        return parent::configureOptions($options);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function initColumns(ColumnCollection $columns)
-    {
-        $columns->add(new DataGridColumn([
+        $this->columns->add(new Column([
             'id'         => 'id',
             'source'     => 'client_group.id',
             'caption'    => $this->trans('Id'),
@@ -82,7 +48,7 @@ class ClientGroupDataGrid extends AbstractDataGrid implements DataGridInterface
             ]
         ]));
 
-        $columns->add(new DataGridColumn([
+        $this->columns->add(new Column([
             'id'         => 'name',
             'source'     => 'client_group_translation.name',
             'caption'    => $this->trans('Name'),
@@ -95,7 +61,7 @@ class ClientGroupDataGrid extends AbstractDataGrid implements DataGridInterface
             ]
         ]));
 
-        $columns->add(new DataGridColumn([
+        $this->columns->add(new Column([
             'id'         => 'discount',
             'source'     => 'client_group.discount',
             'caption'    => $this->trans('Discount'),
@@ -108,15 +74,5 @@ class ClientGroupDataGrid extends AbstractDataGrid implements DataGridInterface
                 'type' => ColumnInterface::FILTER_BETWEEN
             ]
         ]));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setQuery(Manager $manager)
-    {
-        $this->query = $manager->table('client_group');
-        $this->query->join('client_group_translation', 'client_group_translation.client_group_id', '=', 'client_group.id');
-        $this->query->groupBy('client_group.id');
     }
 }

@@ -7,6 +7,8 @@
         <parameter key="client_group.admin.controller.class">WellCommerce\ClientGroup\Controller\Admin\ClientGroupController</parameter>
         <parameter key="client_group.repository.class">WellCommerce\ClientGroup\Repository\ClientGroupRepository</parameter>
         <parameter key="client_group.datagrid.class">WellCommerce\ClientGroup\DataGrid\ClientGroupDataGrid</parameter>
+        <parameter key="client_group.datagrid.configurator.class">WellCommerce\ClientGroup\DataGrid\ClientGroupDataGridConfigurator</parameter>
+        <parameter key="client_group.datagrid.query.class">WellCommerce\ClientGroup\DataGrid\ClientGroupDataGridQuery</parameter>
         <parameter key="client_group.form.class">WellCommerce\ClientGroup\Form\ClientGroupForm</parameter>
         <parameter key="client_group.listener.class">WellCommerce\ClientGroup\EventListener\ClientGroupListener</parameter>
     </parameters>
@@ -27,9 +29,25 @@
             </call>
         </service>
 
+        <service id="client_group.datagrid.query" class="%client_group.datagrid.query.class%">
+            <argument type="service" id="database_manager"/>
+        </service>
+
+        <service id="client_group.datagrid.configurator" class="%client_group.datagrid.configurator.class%">
+            <argument key="identifier">client_group</argument>
+            <argument type="service" id="datagrid_options" />
+            <argument type="service" id="datagrid_columns" />
+            <argument type="service" id="client_group.datagrid.query" />
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
         <service id="client_group.datagrid" class="%client_group.datagrid.class%">
             <argument type="service" id="service_container"/>
             <argument type="service" id="client_group.repository"/>
+            <argument type="service" id="datagrid_loader" />
+            <configurator service="client_group.datagrid.configurator" method="configure" />
         </service>
 
         <service id="client_group.form" class="%client_group.form.class%">
