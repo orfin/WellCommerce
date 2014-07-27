@@ -47,7 +47,7 @@ abstract class AbstractController extends AbstractComponent
      * @param null          $model   Model instance
      * @param array         $options Form options
      *
-     * @return \WellCommerce\Core\Form\FormInterface
+     * @return \WellCommerce\Core\Form\Elements\Form
      */
     public function createForm(FormInterface $form, $model = null, array $options)
     {

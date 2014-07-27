@@ -16,6 +16,7 @@ use WellCommerce\Core\AbstractComponent;
 use WellCommerce\Core\Form\Conditions\ConditionInterface;
 use WellCommerce\Core\Form\Elements\ElementInterface;
 use WellCommerce\Core\Form\FormInterface;
+use WellCommerce\Core\Form\Option;
 use WellCommerce\Core\Model\ModelInterface;
 use WellCommerce\Core\Event\FormEvent;
 use WellCommerce\Core\Form\Elements;

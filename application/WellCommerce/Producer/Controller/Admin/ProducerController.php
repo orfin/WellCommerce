@@ -24,6 +24,11 @@ use WellCommerce\Producer\Repository\ProducerRepositoryInterface;
 class ProducerController extends AbstractAdminController
 {
     /**
+     * @var ProducerRepositoryInterface
+     */
+    private $repository;
+
+    /**
      * {@inheritdoc}
      */
     public function indexAction()
@@ -45,7 +50,7 @@ class ProducerController extends AbstractAdminController
         if ($form->isValid()) {
             try {
                 $this->repository->save($form->getSubmitValuesFlat());
-                $this->addSuccessMessage('Changes saved successfully.');
+                $this->addSuccessMessage('Producer added successfully.');
 
                 return $this->redirect($this->getDefaultUrl());
 
@@ -73,7 +78,7 @@ class ProducerController extends AbstractAdminController
         if ($form->isValid()) {
             try {
                 $this->repository->save($form->getSubmitValuesFlat(), $id);
-                $this->addSuccessMessage('Changes saved successfully.');
+                $this->addSuccessMessage('Producer saved successfully.');
 
                 if ($form->isAction('continue')) {
                     return $this->redirect($this->generateUrl('admin.producer.edit', ['id' => $model->id]));
