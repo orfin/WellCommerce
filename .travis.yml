@@ -8,6 +8,11 @@ branches:
 before_script:
     - composer self-update
     - composer update
+    - curl http://selenium-release.storage.googleapis.com/2.41/selenium-server-standalone-2.42.2.jar > selenium.jar
+    - java -jar selenium.jar > /dev/null &
+
+script:
+    - bin/codecept run -c ./
 
 notifications:
     email: "travis@wellcommerce.org"
