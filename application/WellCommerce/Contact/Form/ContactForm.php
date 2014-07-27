@@ -57,6 +57,16 @@ class ContactForm extends AbstractForm implements FormInterface
             'label' => $this->trans('Name'),
             'rules' => [
                 $builder->addRuleRequired($this->trans('Name is required')),
+                $builder->addRuleLanguageUnique($this->trans('Name already exists'),
+                    [
+                        'table'   => 'contact_translation',
+                        'column'  => 'name',
+                        'exclude' => [
+                            'column' => 'contact_id',
+                            'values' => $this->getParam('id')
+                        ]
+                    ]
+                )
             ]
         ]));
 

@@ -11,13 +11,10 @@
  */
 namespace WellCommerce\Contact\DataGrid;
 
-use Illuminate\Database\Capsule\Manager;
 use WellCommerce\Core\DataGrid\AbstractDataGrid;
-use WellCommerce\Core\DataGrid\Column\ColumnCollection;
+use WellCommerce\Core\DataGrid\Column\Column;
 use WellCommerce\Core\DataGrid\Column\ColumnInterface;
-use WellCommerce\Core\DataGrid\Column\DataGridColumn;
 use WellCommerce\Core\DataGrid\DataGridInterface;
-use WellCommerce\Core\DataGrid;
 
 /**
  * Class ContactDataGrid
@@ -30,27 +27,9 @@ class ContactDataGrid extends AbstractDataGrid implements DataGridInterface
     /**
      * {@inheritdoc}
      */
-    public function getId()
+    public function addColumns()
     {
-        return 'contact';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getRoutes()
-    {
-        return [
-            'edit' => $this->generateUrl('admin.contact.edit')
-        ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function initColumns(ColumnCollection $columns)
-    {
-        $columns->add(new DataGridColumn([
+        $this->columns->add(new Column([
             'id'         => 'id',
             'source'     => 'contact.id',
             'caption'    => $this->trans('Id'),
@@ -66,7 +45,7 @@ class ContactDataGrid extends AbstractDataGrid implements DataGridInterface
             ]
         ]));
 
-        $columns->add(new DataGridColumn([
+        $this->columns->add(new Column([
             'id'         => 'name',
             'source'     => 'contact_translation.name',
             'caption'    => $this->trans('Name'),
@@ -78,15 +57,5 @@ class ContactDataGrid extends AbstractDataGrid implements DataGridInterface
                 'type' => ColumnInterface::FILTER_INPUT
             ]
         ]));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setQuery(Manager $manager)
-    {
-        $this->query = $manager->table('contact');
-        $this->query->join('contact_translation', 'contact_translation.contact_id', '=', 'contact.id');
-        $this->query->groupBy('contact.id');
     }
 }

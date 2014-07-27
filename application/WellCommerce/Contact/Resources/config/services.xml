@@ -9,6 +9,8 @@
         <parameter key="contact.box.controller.class">WellCommerce\Contact\Controller\Box\ContactBoxController</parameter>
         <parameter key="contact.repository.class">WellCommerce\Contact\Repository\ContactRepository</parameter>
         <parameter key="contact.datagrid.class">WellCommerce\Contact\DataGrid\ContactDataGrid</parameter>
+        <parameter key="contact.datagrid.configurator.class">WellCommerce\Contact\DataGrid\ContactDataGridConfigurator</parameter>
+        <parameter key="contact.datagrid.query.class">WellCommerce\Contact\DataGrid\ContactDataGridQuery</parameter>
         <parameter key="contact.form.class">WellCommerce\Contact\Form\ContactForm</parameter>
         <parameter key="contact.listener.class">WellCommerce\Contact\EventListener\ContactListener</parameter>
         <parameter key="contact_box.layout.configurator.class">WellCommerce\Contact\Layout\ContactBoxConfigurator</parameter>
@@ -51,9 +53,25 @@
             </call>
         </service>
 
+        <service id="contact.datagrid.query" class="%contact.datagrid.query.class%">
+            <argument type="service" id="database_manager"/>
+        </service>
+
+        <service id="contact.datagrid.configurator" class="%contact.datagrid.configurator.class%">
+            <argument key="identifier">contact</argument>
+            <argument type="service" id="datagrid_options"/>
+            <argument type="service" id="datagrid_columns"/>
+            <argument type="service" id="contact.datagrid.query"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
         <service id="contact.datagrid" class="%contact.datagrid.class%">
             <argument type="service" id="service_container"/>
             <argument type="service" id="contact.repository"/>
+            <argument type="service" id="datagrid_loader"/>
+            <configurator service="contact.datagrid.configurator" method="configure"/>
         </service>
 
         <service id="contact.form" class="%contact.form.class%">

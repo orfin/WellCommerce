@@ -23,6 +23,9 @@ use WellCommerce\Contact\Repository\ContactRepositoryInterface;
  */
 class ContactController extends AbstractAdminController
 {
+    /**
+     * @var ContactRepositoryInterface
+     */
     private $repository;
 
     /**
@@ -31,7 +34,7 @@ class ContactController extends AbstractAdminController
     public function indexAction()
     {
         return [
-            'datagrid' => $this->createDataGrid($this->get('contact.datagrid'))
+            'datagrid' => $this->getDataGrid($this->get('contact.datagrid'))
         ];
     }
 
@@ -47,7 +50,7 @@ class ContactController extends AbstractAdminController
         if ($form->isValid()) {
             try {
                 $this->repository->save($form->getSubmitValuesFlat());
-                $this->addSuccessMessage('Changes saved successfully.');
+                $this->addSuccessMessage('New contact added successfully.');
 
                 return $this->redirect($this->getDefaultUrl());
             } catch (ValidatorException $exception) {
@@ -74,7 +77,7 @@ class ContactController extends AbstractAdminController
         if ($form->isValid()) {
             try {
                 $this->repository->save($form->getSubmitValuesFlat(), $id);
-                $this->addSuccessMessage('Changes saved successfully.');
+                $this->addSuccessMessage('Contact saved successfully.');
 
                 if ($form->isAction('continue')) {
                     return $this->redirect($this->generateUrl('admin.contact.edit', ['id' => $model->id]));
