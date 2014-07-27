@@ -1,5 +1,5 @@
 {
-    "name": "gekosale/gekosale",
+    "name": "wellcommerce/wellcommerce",
     "description": "E-commerce platform",
     "minimum-stability": "dev",
     "authors": [
@@ -25,7 +25,7 @@
         }
     ],
     "support": {
-        "email": "hello@gekosale.com"
+        "email": "hello@wellcommerce.org"
     },
     "license": "LGPL-3.0+",
     "repositories": [
@@ -64,7 +64,7 @@
         "symfony/twig-bridge": "2.4.x-dev",
         "kriswallsmith/assetic": "v1.1.2",
         "twig/extensions": "1.1.*@dev",
-        "illuminate/database": "4.3.*",
+        "illuminate/database": "4.3.x-dev",
         "xajax/xajax": "1.0.0",
         "twitter/bootstrap": "v3.1.1",
         "intervention/image": "1.6.0",
