@@ -13,9 +13,9 @@ namespace WellCommerce\Layout\DataGrid;
 
 use Illuminate\Database\Capsule\Manager;
 use WellCommerce\Core\DataGrid\AbstractDataGrid;
+use WellCommerce\Core\DataGrid\Column\Column;
 use WellCommerce\Core\DataGrid\Column\ColumnCollection;
 use WellCommerce\Core\DataGrid\Column\ColumnInterface;
-use WellCommerce\Core\DataGrid\Column\DataGridColumn;
 use WellCommerce\Core\DataGrid\DataGridInterface;
 
 /**
@@ -29,27 +29,9 @@ class LayoutThemeDataGrid extends AbstractDataGrid implements DataGridInterface
     /**
      * {@inheritdoc}
      */
-    public function getId()
+    public function addColumns()
     {
-        return 'availability';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getRoutes()
-    {
-        return [
-            'edit' => $this->generateUrl('admin.availability.edit')
-        ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function initColumns(ColumnCollection $columns)
-    {
-        $columns->add(new DataGridColumn([
+        $this->columns->add(new Column([
             'id'         => 'id',
             'source'     => 'layout_theme.id',
             'caption'    => $this->trans('Id'),
@@ -65,7 +47,7 @@ class LayoutThemeDataGrid extends AbstractDataGrid implements DataGridInterface
             ]
         ]));
 
-        $columns->add(new DataGridColumn([
+        $this->columns->add(new Column([
             'id'         => 'name',
             'source'     => 'layout_theme.name',
             'caption'    => $this->trans('Name'),
@@ -78,7 +60,7 @@ class LayoutThemeDataGrid extends AbstractDataGrid implements DataGridInterface
             ]
         ]));
 
-        $columns->add(new DataGridColumn([
+        $this->columns->add(new Column([
             'id'         => 'folder',
             'source'     => 'layout_theme.folder',
             'caption'    => $this->trans('Folder'),
@@ -90,14 +72,5 @@ class LayoutThemeDataGrid extends AbstractDataGrid implements DataGridInterface
                 'type' => ColumnInterface::FILTER_INPUT
             ]
         ]));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setQuery(Manager $manager)
-    {
-        $this->query = $manager->table('layout_theme');
-        $this->query->groupBy('layout_theme.id');
     }
 }

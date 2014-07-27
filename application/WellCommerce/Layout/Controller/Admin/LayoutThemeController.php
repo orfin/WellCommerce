@@ -23,6 +23,9 @@ use WellCommerce\Layout\Repository\LayoutThemeRepositoryInterface;
  */
 class LayoutThemeController extends AbstractAdminController
 {
+    /**
+     * @var LayoutThemeRepositoryInterface
+     */
     private $repository;
 
     /**
@@ -31,7 +34,7 @@ class LayoutThemeController extends AbstractAdminController
     public function indexAction()
     {
         return [
-            'datagrid' => $this->createDataGrid($this->get('layout_theme.datagrid'))
+            'datagrid' => $this->getDataGrid($this->get('layout_theme.datagrid'))
         ];
     }
 
@@ -47,7 +50,7 @@ class LayoutThemeController extends AbstractAdminController
         if ($form->isValid()) {
             try {
                 $this->repository->save($form->getSubmitValuesFlat());
-                $this->addSuccessMessage('Changes saved successfully.');
+                $this->addSuccessMessage('New layout theme added successfully.');
 
                 return $this->redirect($this->getDefaultUrl());
 
@@ -75,7 +78,7 @@ class LayoutThemeController extends AbstractAdminController
         if ($form->isValid()) {
             try {
                 $this->repository->save($form->getSubmitValuesFlat(), $id);
-                $this->addSuccessMessage('Changes saved successfully.');
+                $this->addSuccessMessage('Layout theme saved successfully.');
 
                 return $this->redirect($this->getDefaultUrl());
 

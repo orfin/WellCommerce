@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Currency\DataGrid;
 
+use WellCommerce\Core\DataGrid\Configuration\EventHandler\ClickRowEventHandler;
 use WellCommerce\Core\DataGrid\Configuration\EventHandler\DeleteRowEventHandler;
 use WellCommerce\Core\DataGrid\Configuration\EventHandler\EditRowEventHandler;
 use WellCommerce\Core\DataGrid\Configuration\EventHandler\LoadEventHandler;
@@ -46,9 +47,13 @@ class CurrencyDataGridConfigurator extends AbstractConfigurator implements Confi
         ]));
 
         $eventHandlers->add(new EditRowEventHandler([
-            'function'   => $function = $this->getFunction('edit'),
-            'callback'   => $function,
+            'function'   => $this->getFunction('edit'),
             'row_action' => OptionInterface::ACTION_EDIT,
+            'route'      => $this->generateUrl('admin.currency.edit')
+        ]));
+
+        $eventHandlers->add(new ClickRowEventHandler([
+            'function'   => $this->getFunction('click'),
             'route'      => $this->generateUrl('admin.currency.edit')
         ]));
 

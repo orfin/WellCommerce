@@ -47,15 +47,13 @@ class ProducerDataGridConfigurator extends AbstractConfigurator implements Confi
         ]));
 
         $eventHandlers->add(new EditRowEventHandler([
-            'function'   => $function = $this->getFunction('edit'),
-            'callback'   => $function,
+            'function'   => $this->getFunction('edit'),
             'row_action' => OptionInterface::ACTION_EDIT,
             'route'      => $this->generateUrl('admin.producer.edit')
         ]));
 
         $eventHandlers->add(new ClickRowEventHandler([
-            'function'   => $function = $this->getFunction('click'),
-            'callback'   => $function,
+            'function'   => $this->getFunction('click'),
             'route'      => $this->generateUrl('admin.producer.edit')
         ]));
 

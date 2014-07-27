@@ -18,6 +18,7 @@ use WellCommerce\Core\DataGrid\Column\ColumnCollection;
 use WellCommerce\Core\DataGrid\Options\OptionsInterface;
 use WellCommerce\Core\DataGrid\QueryBuilder\QueryInterface;
 use WellCommerce\Core\DataGrid\QueryBuilder\QueryBuilderInterface;
+use WellCommerce\Core\Helper\Helper;
 
 /**
  * Class AbstractConfigurator
@@ -72,7 +73,9 @@ class AbstractConfigurator extends AbstractComponent
      */
     public function getFunction($name)
     {
-        return sprintf('%s%s', $name, ucfirst($this->identifier));
+        $functionName = sprintf('%s%s', $name, ucfirst($this->identifier));
+
+        return lcfirst(Helper::studly($functionName));
     }
 
 }

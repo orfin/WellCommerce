@@ -7,6 +7,8 @@
         <parameter key="layout.repository.class">WellCommerce\Layout\Repository\LayoutRepository</parameter>
         <parameter key="layout_theme.repository.class">WellCommerce\Layout\Repository\LayoutThemeRepository</parameter>
         <parameter key="layout_theme.datagrid.class">WellCommerce\Layout\DataGrid\LayoutThemeDataGrid</parameter>
+        <parameter key="layout_theme.datagrid.configurator.class">WellCommerce\Layout\DataGrid\LayoutThemeDataGridConfigurator</parameter>
+        <parameter key="layout_theme.datagrid.query.class">WellCommerce\Layout\DataGrid\LayoutThemeDataGridQuery</parameter>
         <parameter key="layout_theme.form.class">WellCommerce\Layout\Form\LayoutThemeForm</parameter>
         <parameter key="layout_theme.admin.controller.class">WellCommerce\Layout\Controller\Admin\LayoutThemeController</parameter>
         <parameter key="layout_page.repository.class">WellCommerce\Layout\Repository\LayoutPageRepository</parameter>
@@ -61,9 +63,25 @@
             </call>
         </service>
 
+        <service id="layout_theme.datagrid.query" class="%layout_theme.datagrid.query.class%">
+            <argument type="service" id="database_manager"/>
+        </service>
+
+        <service id="layout_theme.datagrid.configurator" class="%layout_theme.datagrid.configurator.class%">
+            <argument key="identifier">layout_theme</argument>
+            <argument type="service" id="datagrid_options" />
+            <argument type="service" id="datagrid_columns" />
+            <argument type="service" id="layout_theme.datagrid.query" />
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
         <service id="layout_theme.datagrid" class="%layout_theme.datagrid.class%">
             <argument type="service" id="service_container"/>
             <argument type="service" id="layout_theme.repository"/>
+            <argument type="service" id="datagrid_loader" />
+            <configurator service="layout_theme.datagrid.configurator" method="configure" />
         </service>
 
         <service id="layout_theme.form" class="%layout_theme.form.class%">

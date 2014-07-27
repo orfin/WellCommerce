@@ -47,15 +47,13 @@ class DelivererDataGridConfigurator extends AbstractConfigurator implements Conf
         ]));
 
         $eventHandlers->add(new EditRowEventHandler([
-            'function'   => $function = $this->getFunction('edit'),
-            'callback'   => $function,
+            'function'   => $this->getFunction('edit'),
             'row_action' => OptionInterface::ACTION_EDIT,
             'route'      => $this->generateUrl('admin.deliverer.edit')
         ]));
 
         $eventHandlers->add(new ClickRowEventHandler([
-            'function'   => $function = $this->getFunction('click'),
-            'callback'   => $function,
+            'function'   => $this->getFunction('click'),
             'route'      => $this->generateUrl('admin.deliverer.edit')
         ]));
 

@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Unit\DataGrid;
+namespace WellCommerce\Layout\DataGrid;
 
 use WellCommerce\Core\DataGrid\Configuration\EventHandler\ClickRowEventHandler;
 use WellCommerce\Core\DataGrid\Configuration\EventHandler\DeleteRowEventHandler;
@@ -22,12 +22,12 @@ use WellCommerce\Core\DataGrid\Configurator\ConfiguratorInterface;
 use WellCommerce\Core\DataGrid\DataGridInterface;
 
 /**
- * Class UnitDataGridConfigurator
+ * Class LayoutThemeDataGridConfigurator
  *
- * @package WellCommerce\Unit\DataGrid
+ * @package WellCommerce\LayoutTheme\DataGrid
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class UnitDataGridConfigurator extends AbstractConfigurator implements ConfiguratorInterface
+class LayoutThemeDataGridConfigurator extends AbstractConfigurator implements ConfiguratorInterface
 {
     /**
      * {@inheritdoc}
@@ -49,12 +49,12 @@ class UnitDataGridConfigurator extends AbstractConfigurator implements Configura
         $eventHandlers->add(new EditRowEventHandler([
             'function'   => $this->getFunction('edit'),
             'row_action' => OptionInterface::ACTION_EDIT,
-            'route'      => $this->generateUrl('admin.unit.edit')
+            'route'      => $this->generateUrl('admin.layout_theme.edit')
         ]));
 
         $eventHandlers->add(new ClickRowEventHandler([
             'function'   => $this->getFunction('click'),
-            'route'      => $this->generateUrl('admin.unit.edit')
+            'route'      => $this->generateUrl('admin.layout_theme.edit')
         ]));
 
         $eventHandlers->add(new DeleteRowEventHandler([

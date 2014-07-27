@@ -54,7 +54,7 @@ class Helper extends AbstractComponent
     /**
      * Converts string to snake-case
      *
-     * @param        $value
+     * @param string $value
      * @param string $delimiter
      *
      * @return string
@@ -64,5 +64,19 @@ class Helper extends AbstractComponent
         $replace = '$1' . $delimiter . '$2';
 
         return ctype_lower($value) ? $value : strtolower(preg_replace('/(.)([A-Z])/', $replace, $value));
+    }
+
+    /**
+     * Converts string to studly-case
+     *
+     * @param string $value
+     *
+     * @return string
+     */
+    public static function studly($value)
+    {
+        $value = ucwords(str_replace(['-', '_'], ' ', $value));
+
+        return str_replace(' ', '', $value);
     }
 }

@@ -53,16 +53,14 @@ class AvailabilityDataGridConfigurator extends AbstractConfigurator implements C
         ]));
 
         $eventHandlers->add(new EditRowEventHandler([
-            'function'   => $function = $this->getFunction('edit'),
-            'callback'   => $function,
+            'function'   => $this->getFunction('edit'),
             'row_action' => OptionInterface::ACTION_EDIT,
             'route'      => $this->generateUrl('admin.availability.edit')
         ]));
 
         $eventHandlers->add(new ClickRowEventHandler([
-            'function'   => $function = $this->getFunction('click'),
-            'callback'   => $function,
-            'route'      => $this->generateUrl('admin.availability.edit')
+            'function' => $this->getFunction('click'),
+            'route'    => $this->generateUrl('admin.availability.edit')
         ]));
 
         $eventHandlers->add(new DeleteRowEventHandler([
