@@ -74,7 +74,7 @@ class ShopListener implements EventSubscriberInterface
             'id'         => 'shop',
             'name'       => $this->container->get('translation')->trans('Shops'),
             'link'       => $this->container->get('router')->generate('admin.shop.index'),
-            'path'       => '[menu][configuration][shop]',
+            'path'       => '[menu][configuration][store_management][shop]',
             'sort_order' => 10
         ]));
     }

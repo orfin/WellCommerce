@@ -144,6 +144,32 @@ class AdminMenuListener implements EventSubscriberInterface
                 'sort_order' => 100
             ]));
 
+            $builder->add(new AdminMenuItem([
+                'id'         => 'localization',
+                'class'      => 'localization',
+                'name'       => $this->container->get('translation')->trans('Localization'),
+                'link'       => '',
+                'path'       => '[menu][configuration][localization]',
+                'sort_order' => 10
+            ]));
+
+            $builder->add(new AdminMenuItem([
+                'id'         => 'store_management',
+                'class'      => 'store_management',
+                'name'       => $this->container->get('translation')->trans('Store management'),
+                'link'       => '',
+                'path'       => '[menu][configuration][store_management]',
+                'sort_order' => 20
+            ]));
+
+            $builder->add(new AdminMenuItem([
+                'id'         => 'user_management',
+                'name'       => $this->container->get('translation')->trans('User management'),
+                'link'       => '',
+                'path'       => '[menu][configuration][user_management]',
+                'sort_order' => 30
+            ]));
+
             $adminMenuEvent = new AdminMenuInitEvent($builder);
 
             $event->getDispatcher()->dispatch(AdminMenuInitEvent::ADMIN_MENU_INIT_EVENT, $adminMenuEvent);

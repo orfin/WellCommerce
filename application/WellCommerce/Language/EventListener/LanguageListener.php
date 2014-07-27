@@ -50,8 +50,8 @@ class LanguageListener implements EventSubscriberInterface
             'id'         => 'language',
             'name'       => $this->container->get('translation')->trans('Languages'),
             'link'       => $this->container->get('router')->generate('admin.language.index'),
-            'path'       => '[menu][configuration][language]',
-            'sort_order' => 30
+            'path'       => '[menu][configuration][localization][language]',
+            'sort_order' => 10
         ]));
     }
 

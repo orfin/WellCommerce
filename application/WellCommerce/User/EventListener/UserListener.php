@@ -40,14 +40,6 @@ class UserListener implements EventSubscriberInterface
         $builder = $event->getBuilder();
 
         $builder->add(new AdminMenuItem([
-            'id'         => 'user_management',
-            'name'       => $this->container->get('translation')->trans('User management'),
-            'link'       => $this->container->get('router')->generate('admin.user.index'),
-            'path'       => '[menu][configuration][user_management]',
-            'sort_order' => 20
-        ]));
-
-        $builder->add(new AdminMenuItem([
             'id'         => 'user',
             'name'       => $this->container->get('translation')->trans('Users'),
             'link'       => $this->container->get('router')->generate('admin.user.index'),

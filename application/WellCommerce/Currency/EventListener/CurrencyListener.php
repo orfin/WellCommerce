@@ -50,7 +50,7 @@ class CurrencyListener implements EventSubscriberInterface
             'id'         => 'currency',
             'name'       => $this->container->get('translation')->trans('Currencies'),
             'link'       => $this->container->get('router')->generate('admin.currency.index'),
-            'path'       => '[menu][configuration][currency]',
+            'path'       => '[menu][configuration][localization][currency]',
             'sort_order' => 20
         ]));
     }

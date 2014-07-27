@@ -50,7 +50,7 @@ class CompanyListener implements EventSubscriberInterface
             'id'         => 'company',
             'name'       => $this->container->get('translation')->trans('Companies'),
             'link'       => $this->container->get('router')->generate('admin.company.index'),
-            'path'       => '[menu][configuration][company]',
+            'path'       => '[menu][configuration][store_management][company]',
             'sort_order' => 20
         ]));
     }
