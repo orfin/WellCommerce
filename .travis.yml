@@ -5,5 +5,9 @@ php:
 branches:
     only:
         - development
+before_script:
+    - composer self-update
+    - composer update
+
 notifications:
     email: "travis@wellcommerce.org"
