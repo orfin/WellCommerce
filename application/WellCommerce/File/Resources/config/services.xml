@@ -7,6 +7,8 @@
         <parameter key="file.admin.controller.class">WellCommerce\File\Controller\Admin\FileController</parameter>
         <parameter key="file.repository.class">WellCommerce\File\Repository\FileRepository</parameter>
         <parameter key="file.datagrid.class">WellCommerce\File\DataGrid\FileDataGrid</parameter>
+        <parameter key="file.datagrid.configurator.class">WellCommerce\File\DataGrid\FileDataGridConfigurator</parameter>
+        <parameter key="file.datagrid.query.class">WellCommerce\File\DataGrid\FileDataGridQuery</parameter>
         <parameter key="file.form.class">WellCommerce\File\Form\FileForm</parameter>
         <parameter key="file.listener.class">WellCommerce\File\EventListener\FileListener</parameter>
     </parameters>
@@ -27,9 +29,25 @@
             </call>
         </service>
 
+        <service id="file.datagrid.query" class="%file.datagrid.query.class%">
+            <argument type="service" id="database_manager"/>
+        </service>
+
+        <service id="file.datagrid.configurator" class="%file.datagrid.configurator.class%">
+            <argument key="identifier">file</argument>
+            <argument type="service" id="datagrid_options"/>
+            <argument type="service" id="datagrid_columns"/>
+            <argument type="service" id="file.datagrid.query"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
         <service id="file.datagrid" class="%file.datagrid.class%">
             <argument type="service" id="service_container"/>
             <argument type="service" id="file.repository"/>
+            <argument type="service" id="datagrid_loader"/>
+            <configurator service="file.datagrid.configurator" method="configure"/>
         </service>
 
         <service id="file.form" class="%file.form.class%">

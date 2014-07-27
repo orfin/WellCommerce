@@ -13570,7 +13570,7 @@ var GFormImage = GCore.ExtendClass(GFormFile, function() {
 		var uploader = new plupload.Uploader({
 		    runtimes : 'html5',
 		    browse_button : gThis.GetId() + '__upload',
-		    container: document.getElementById(gThis.GetId() + '__queue'), //photos_pane__photo__queue
+		    container: document.getElementById(gThis.GetId() + '__queue'),
 		    url : gThis.m_oOptions.sUploadUrl,
 		    filters : {
 		        max_file_size : '10mb',
@@ -13726,6 +13726,7 @@ var GFormImage = GCore.ExtendClass(GFormFile, function() {
 				operator: 'IN'
 			}];
 		}
+		oRequest.id = 0;
 		oRequest.starting_from = 0;
 		oRequest.order_by = 'id';
 		oRequest.order_dir = 'desc';
@@ -13733,6 +13734,7 @@ var GFormImage = GCore.ExtendClass(GFormFile, function() {
 	};
 	
 	gThis._DefaultsLoaded = function(oData) {
+		console.log(oData);
 		for (var i = 0; i < oData.rows.length; i++) {
 			gThis._AddImage(oData.rows[i].id, oData.rows[i]);
 		}

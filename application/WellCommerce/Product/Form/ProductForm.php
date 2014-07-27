@@ -420,6 +420,9 @@ class ProductForm extends AbstractForm implements FormInterface
             'shops' => $product->shop->getPrimaryKeys()
         ]);
 
+//        print_r($formData);
+//        die();
+
         return $formData;
     }
 }

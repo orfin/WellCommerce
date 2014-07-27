@@ -12,7 +12,7 @@
 namespace WellCommerce\Product\Model;
 
 use WellCommerce\Core\Model\AbstractModel;
-use WellCommerce\Core\Model\TranslatableModelInterface;
+use WellCommerce\Core\Model\ModelInterface;
 use WellCommerce\Core\Helper\Helper;
 
 /**
@@ -21,7 +21,7 @@ use WellCommerce\Core\Helper\Helper;
  * @package WellCommerce\Product\Model
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Product extends AbstractModel implements TranslatableModelInterface
+class Product extends AbstractModel implements ModelInterface
 {
     protected $table = 'product';
     protected $fillable = ['id'];
@@ -31,7 +31,7 @@ class Product extends AbstractModel implements TranslatableModelInterface
      */
     public function translation()
     {
-        return $this->hasOne('WellCommerce\Product\Model\ProductTranslation');
+        return $this->hasOne(__NAMESPACE__.'\ProductTranslation');
     }
 
     /**
@@ -39,7 +39,7 @@ class Product extends AbstractModel implements TranslatableModelInterface
      */
     public function translations()
     {
-        return $this->hasMany('WellCommerce\Product\Model\ProductTranslation');
+        return $this->hasMany(__NAMESPACE__.'\ProductTranslation');
     }
 
     /**

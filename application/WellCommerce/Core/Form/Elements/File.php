@@ -83,7 +83,7 @@ class File extends Field implements ElementInterface
             $request['limit']   = !empty($this->attributes['limit']) ? $this->attributes['limit'] : 10;
         }
 
-        return $this->datagrid->loadData($request);
+        return $this->datagrid->load($request);
     }
 
     public function prepareAttributesJs()

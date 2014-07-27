@@ -13,9 +13,9 @@ namespace WellCommerce\File\DataGrid;
 
 use Illuminate\Database\Capsule\Manager;
 use WellCommerce\Core\DataGrid\AbstractDataGrid;
+use WellCommerce\Core\DataGrid\Column\Column;
 use WellCommerce\Core\DataGrid\Column\ColumnCollection;
 use WellCommerce\Core\DataGrid\Column\ColumnInterface;
-use WellCommerce\Core\DataGrid\Column\DataGridColumn;
 use WellCommerce\Core\DataGrid\DataGridInterface;
 
 /**
@@ -29,35 +29,9 @@ class FileDataGrid extends AbstractDataGrid implements DataGridInterface
     /**
      * {@inheritdoc}
      */
-    public function getId()
+    public function addColumns()
     {
-        return 'file';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function configureOptions(array $options)
-    {
-
-        $options['event_handlers'] = [
-            'process' => 'processFile',
-            'loaded'  => 'dataLoaded'
-        ];
-
-        $options['row_actions'] = [
-            DataGridInterface::ACTION_DELETE
-        ];
-
-        return parent::configureOptions($options);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function initColumns(ColumnCollection $collection)
-    {
-        $collection->add(new DataGridColumn([
+        $this->columns->add(new Column([
             'id'         => 'id',
             'source'     => 'file.id',
             'caption'    => $this->trans('Id'),
@@ -73,7 +47,7 @@ class FileDataGrid extends AbstractDataGrid implements DataGridInterface
             ]
         ]));
 
-        $collection->add(new DataGridColumn([
+        $this->columns->add(new Column([
             'id'         => 'name',
             'source'     => 'file.name',
             'caption'    => $this->trans('Name'),
@@ -88,7 +62,7 @@ class FileDataGrid extends AbstractDataGrid implements DataGridInterface
             ]
         ]));
 
-        $collection->add(new DataGridColumn([
+        $this->columns->add(new Column([
             'id'         => 'extension',
             'source'     => 'file.extension',
             'caption'    => $this->trans('Extension'),
@@ -103,7 +77,7 @@ class FileDataGrid extends AbstractDataGrid implements DataGridInterface
             ]
         ]));
 
-        $collection->add(new DataGridColumn([
+        $this->columns->add(new Column([
             'id'               => 'preview',
             'source'           => 'file.id',
             'caption'          => $this->trans('Thumb'),
@@ -117,14 +91,5 @@ class FileDataGrid extends AbstractDataGrid implements DataGridInterface
                     return $this->getImageGallery()->getImageUrl($id, 100, 100);
                 }
         ]));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setQuery(Manager $manager)
-    {
-        $this->query = $manager->table('file');
-        $this->query->groupBy('file.id');
     }
 }

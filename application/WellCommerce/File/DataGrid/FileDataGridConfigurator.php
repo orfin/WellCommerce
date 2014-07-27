@@ -10,28 +10,25 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Product\DataGrid;
+namespace WellCommerce\File\DataGrid;
 
-use WellCommerce\Core\DataGrid\Configuration\EventHandler\ClickRowEventHandler;
+use Symfony\Component\Process\Process;
 use WellCommerce\Core\DataGrid\Configuration\EventHandler\DeleteRowEventHandler;
-use WellCommerce\Core\DataGrid\Configuration\EventHandler\EditRowEventHandler;
 use WellCommerce\Core\DataGrid\Configuration\EventHandler\LoadedEventHandler;
 use WellCommerce\Core\DataGrid\Configuration\EventHandler\LoadEventHandler;
 use WellCommerce\Core\DataGrid\Configuration\EventHandler\ProcessEventHandler;
-use WellCommerce\Core\DataGrid\Configuration\EventHandler\UpdateRowEventHandler;
-use WellCommerce\Core\DataGrid\Configuration\Filter\Filter;
 use WellCommerce\Core\DataGrid\Configuration\OptionInterface;
 use WellCommerce\Core\DataGrid\Configurator\AbstractConfigurator;
 use WellCommerce\Core\DataGrid\Configurator\ConfiguratorInterface;
 use WellCommerce\Core\DataGrid\DataGridInterface;
 
 /**
- * Class ProductDataGridConfigurator
+ * Class FileDataGridConfigurator
  *
- * @package WellCommerce\Product\DataGrid
+ * @package WellCommerce\File\DataGrid
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductDataGridConfigurator extends AbstractConfigurator implements ConfiguratorInterface
+class FileDataGridConfigurator extends AbstractConfigurator implements ConfiguratorInterface
 {
     /**
      * {@inheritdoc}
@@ -50,28 +47,10 @@ class ProductDataGridConfigurator extends AbstractConfigurator implements Config
             'function' => $this->getXajaxManager()->register([$this->getFunction('load'), $datagrid, 'load']),
         ]));
 
-        $eventHandlers->add(new EditRowEventHandler([
-            'function'   => $function = $this->getFunction('edit'),
-            'callback'   => $function,
-            'row_action' => OptionInterface::ACTION_EDIT,
-            'route'      => $this->generateUrl('admin.product.edit')
-        ]));
-
-        $eventHandlers->add(new ClickRowEventHandler([
-            'function'   => $function = $this->getFunction('click'),
-            'callback'   => $function,
-            'row_action' => OptionInterface::ACTION_EDIT,
-            'route'      => $this->generateUrl('admin.product.edit')
-        ]));
-
         $eventHandlers->add(new DeleteRowEventHandler([
             'function'   => $function = $this->getFunction('delete'),
             'callback'   => $this->getXajaxManager()->register([$function, $datagrid, 'delete']),
             'row_action' => OptionInterface::ACTION_DELETE,
-        ]));
-
-        $eventHandlers->add(new UpdateRowEventHandler([
-            'function' => $this->getXajaxManager()->register([$this->getFunction('update'), $datagrid, 'update']),
         ]));
 
         $eventHandlers->add(new ProcessEventHandler([
@@ -81,10 +60,6 @@ class ProductDataGridConfigurator extends AbstractConfigurator implements Config
         $eventHandlers->add(new LoadedEventHandler([
             'function' => $this->getFunction('dataLoaded')
         ]));
-
-        $filters = $this->options->getFilters();
-
-        $filters->add(new Filter('producer_id', $this->get('producer.repository')->getAllProducerToFilter()));
 
         $datagrid->setOptions($this->options);
     }

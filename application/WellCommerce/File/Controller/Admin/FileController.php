@@ -23,6 +23,9 @@ use WellCommerce\File\Repository\FileRepositoryInterface;
  */
 class FileController extends AbstractAdminController
 {
+    /**
+     * @var FileRepositoryInterface
+     */
     private $repository;
 
     /**
@@ -31,7 +34,7 @@ class FileController extends AbstractAdminController
     public function indexAction()
     {
         return [
-            'datagrid' => $this->createDataGrid($this->get('file.datagrid'))
+            'datagrid' => $this->getDataGrid($this->get('file.datagrid'))
         ];
     }
 
@@ -51,7 +54,7 @@ class FileController extends AbstractAdminController
         }
 
         // delete file cache
-        $this->getCache()->delete('files');
+        $this->getCache()->removeItem('files');
 
         $response = [
             'sId'        => $data->id,
