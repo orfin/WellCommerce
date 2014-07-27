@@ -40,7 +40,17 @@ class LanguageForm extends AbstractForm implements FormInterface
             'name'  => 'name',
             'label' => $this->trans('Name'),
             'rules' => [
-                $builder->addRuleRequired($this->trans('Name is required'))
+                $builder->addRuleRequired($this->trans('Name is required')),
+                $builder->addRuleUnique($this->trans('Name already exists'),
+                    [
+                        'table'   => 'language',
+                        'column'  => 'name',
+                        'exclude' => [
+                            'column' => 'id',
+                            'values' => $this->getParam('id')
+                        ]
+                    ]
+                )
             ]
         ]));
 
@@ -79,9 +89,9 @@ class LanguageForm extends AbstractForm implements FormInterface
     }
 
     /**
-     * Prepares form data using retrieved model
+     * Prepares form data using retrieved Language model
      *
-     * @param Currency $currency Model
+     * @param Language $language
      *
      * @return array
      */

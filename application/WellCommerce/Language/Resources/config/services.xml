@@ -7,6 +7,8 @@
         <parameter key="language.admin.controller.class">WellCommerce\Language\Controller\Admin\LanguageController</parameter>
         <parameter key="language.repository.class">WellCommerce\Language\Repository\LanguageRepository</parameter>
         <parameter key="language.datagrid.class">WellCommerce\Language\DataGrid\LanguageDataGrid</parameter>
+        <parameter key="language.datagrid.configurator.class">WellCommerce\Language\DataGrid\LanguageDataGridConfigurator</parameter>
+        <parameter key="language.datagrid.query.class">WellCommerce\Language\DataGrid\LanguageDataGridQuery</parameter>
         <parameter key="language.form.class">WellCommerce\Language\Form\LanguageForm</parameter>
         <parameter key="language.listener.class">WellCommerce\Language\EventListener\LanguageListener</parameter>
     </parameters>
@@ -27,9 +29,25 @@
             </call>
         </service>
 
+        <service id="language.datagrid.query" class="%language.datagrid.query.class%">
+            <argument type="service" id="database_manager"/>
+        </service>
+
+        <service id="language.datagrid.configurator" class="%language.datagrid.configurator.class%">
+            <argument key="identifier">language</argument>
+            <argument type="service" id="datagrid_options" />
+            <argument type="service" id="datagrid_columns" />
+            <argument type="service" id="language.datagrid.query" />
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
         <service id="language.datagrid" class="%language.datagrid.class%">
             <argument type="service" id="service_container"/>
             <argument type="service" id="language.repository"/>
+            <argument type="service" id="datagrid_loader" />
+            <configurator service="language.datagrid.configurator" method="configure" />
         </service>
 
         <service id="language.form" class="%language.form.class%">

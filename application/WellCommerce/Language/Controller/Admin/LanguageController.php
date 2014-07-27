@@ -23,6 +23,9 @@ use WellCommerce\Language\Repository\LanguageRepositoryInterface;
  */
 class LanguageController extends AbstractAdminController
 {
+    /**
+     * @var LanguageRepositoryInterface
+     */
     private $repository;
 
     /**
@@ -31,7 +34,7 @@ class LanguageController extends AbstractAdminController
     public function indexAction()
     {
         return [
-            'datagrid' => $this->createDataGrid($this->get('language.datagrid'))
+            'datagrid' => $this->getDataGrid($this->get('language.datagrid'))
         ];
     }
 
@@ -47,7 +50,7 @@ class LanguageController extends AbstractAdminController
         if ($form->isValid()) {
             try {
                 $this->repository->save($form->getSubmitValuesFlat());
-                $this->addSuccessMessage('Changes saved successfully.');
+                $this->addSuccessMessage('New language added successfully.');
 
                 return $this->redirect($this->getDefaultUrl());
 
@@ -75,7 +78,7 @@ class LanguageController extends AbstractAdminController
         if ($form->isValid()) {
             try {
                 $this->repository->save($form->getSubmitValuesFlat(), $id);
-                $this->addSuccessMessage('Changes saved successfully.');
+                $this->addSuccessMessage('Language saved successfully.');
 
                 return $this->redirect($this->getDefaultUrl());
 
