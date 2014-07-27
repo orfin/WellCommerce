@@ -30,12 +30,12 @@ interface AdminMenuBuilderInterface
     /**
      * Sorting function for admin menu items
      *
-     * @param $a
-     * @param $b
+     * @param AdminMenuItemInterface $a
+     * @param AdminMenuItemInterface $b
      *
      * @return mixed
      */
-    public function sortMenu($a, $b);
+    public function sortMenu(AdminMenuItemInterface $a, AdminMenuItemInterface $b);
 
     /**
      * @param AdminMenuItemInterface $item

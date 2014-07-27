@@ -66,7 +66,7 @@ class AdminMenuBuilder implements \IteratorAggregate, \Countable, AdminMenuBuild
     /**
      * {@inheritdoc}
      */
-    public function sortMenu($a, $b)
+    public function sortMenu(AdminMenuItemInterface $a, AdminMenuItemInterface $b)
     {
         $a->sortChildren();
         $b->sortChildren();

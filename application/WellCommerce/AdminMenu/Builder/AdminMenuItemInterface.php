@@ -70,7 +70,7 @@ interface AdminMenuItemInterface
     public function getPath();
 
     /**
-     * Sort element children by sort_order propertys
+     * Sort element children by sort_order property
      *
      * @return mixed
      */
