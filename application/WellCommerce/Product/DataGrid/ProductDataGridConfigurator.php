@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Product\DataGrid;
 
+use WellCommerce\Core\DataGrid\Configuration\EventHandler\ClickRowEventHandler;
 use WellCommerce\Core\DataGrid\Configuration\EventHandler\DeleteRowEventHandler;
 use WellCommerce\Core\DataGrid\Configuration\EventHandler\EditRowEventHandler;
 use WellCommerce\Core\DataGrid\Configuration\EventHandler\Loaded;
@@ -53,7 +54,14 @@ class ProductDataGridConfigurator extends AbstractConfigurator implements Config
             'function'   => $function = $this->getFunction('edit'),
             'callback'   => $function,
             'row_action' => OptionInterface::ACTION_EDIT,
-            'route'      => $this->generateUrl('admin.producer.edit')
+            'route'      => $this->generateUrl('admin.product.edit')
+        ]));
+
+        $eventHandlers->add(new ClickRowEventHandler([
+            'function'   => $function = $this->getFunction('click'),
+            'callback'   => $function,
+            'row_action' => OptionInterface::ACTION_EDIT,
+            'route'      => $this->generateUrl('admin.product.edit')
         ]));
 
         $eventHandlers->add(new DeleteRowEventHandler([

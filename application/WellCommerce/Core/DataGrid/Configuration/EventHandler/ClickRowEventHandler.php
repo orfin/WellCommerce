@@ -12,17 +12,62 @@
 
 namespace WellCommerce\Core\DataGrid\Configuration\EventHandler;
 
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use WellCommerce\Core\DataGrid\Configuration\OptionInterface;
+
 /**
  * Class ClickRowEventHandler
  *
  * @package WellCommerce\Core\DataGrid\Configuration\EventHandler
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClickRowEventHandler implements EventHandlerInterface
+class ClickRowEventHandler extends AbstractEventHandler implements EventHandlerInterface
 {
-
+    /**
+     * {@inheritdoc}
+     */
     public function getFunctionName()
     {
         return 'click_row';
     }
-} 
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setRequired([
+            'function',
+            'callback',
+            'row_action',
+            'context_action',
+            'route'
+        ]);
+
+        $resolver->setDefaults([
+            'function'       => OptionInterface::GF_NULL,
+            'callback'       => OptionInterface::GF_NULL,
+            'row_action'     => false,
+            'context_action' => false,
+        ]);
+
+        $resolver->setAllowedTypes([
+            'function'       => ['string', 'int'],
+            'callback'       => ['string', 'int'],
+            'row_action'     => ['bool', 'string'],
+            'context_action' => ['bool'],
+            'route'          => ['string'],
+        ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getJavascriptFunction()
+    {
+        return "
+        function {$this->options['function']}(dg, id) {
+            return window.location.href = '{$this->options['route']}/' + id;
+        }";
+    }
+}
