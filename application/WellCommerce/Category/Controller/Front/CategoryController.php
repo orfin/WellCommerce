@@ -22,6 +22,11 @@ use WellCommerce\Category\Repository\CategoryRepositoryInterface;
  */
 class CategoryController extends AbstractFrontController
 {
+    /**
+     * @var CategoryRepositoryInterface
+     */
+    private $repository;
+
     public function indexAction($slug)
     {
         $category = $this->repository->findBySlug($slug);
@@ -30,7 +35,10 @@ class CategoryController extends AbstractFrontController
             throw $this->createNotFoundException($this->trans('The category does not exist'));
         }
 
-        $this->get('category.provider')->setCurrent($category);
+        $this->getCategoryProvider()->setCurrent($category);
+
+        print_r($this->getCategoryProvider()->getCurrent());
+        die();
 
         $params = [
 
@@ -47,7 +55,7 @@ class CategoryController extends AbstractFrontController
             'value'    => 32
         ];
 
-        $result  = $datagrid->loadData([
+        $result = $datagrid->loadData([
             'limit'         => 100,
             'starting_from' => 0,
             'order_by'      => 'product_translation.name',

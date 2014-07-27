@@ -48,4 +48,14 @@ abstract class AbstractFrontController extends AbstractController implements Fro
 
         return $this->getLayoutRenderer()->load($this->layout);
     }
+
+    /**
+     * Returns the category provider
+     *
+     * @return \WellCommerce\Category\Provider\CategoryProviderInterface
+     */
+    public function getCategoryProvider()
+    {
+        return $this->get('category.provider');
+    }
 }

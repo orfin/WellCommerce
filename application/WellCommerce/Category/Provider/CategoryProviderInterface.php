@@ -12,35 +12,27 @@
 
 namespace WellCommerce\Category\Provider;
 
-use WellCommerce\Core\AbstractComponent;
 use WellCommerce\Category\Model\Category;
 
 /**
- * Class CategoryProvider
+ * Interface CategoryProviderInterface
  *
  * @package WellCommerce\Category\Provider
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CategoryProvider implements CategoryProviderInterface
+interface CategoryProviderInterface
 {
     /**
-     * @var Category
+     * Sets current category data
+     *
+     * @param Category $category Category model
      */
-    private $data;
+    public function setCurrent(Category $category);
 
     /**
-     * {@inheritdoc}
+     * Returns current category data
+     *
+     * @return mixed
      */
-    public function setCurrent(Category $category)
-    {
-        $this->data = $category;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCurrent()
-    {
-        return $this->data;
-    }
+    public function getCurrent();
 } 

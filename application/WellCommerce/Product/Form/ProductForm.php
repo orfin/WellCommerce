@@ -80,7 +80,8 @@ class ProductForm extends AbstractForm implements FormInterface
         $basicPane->addChild($builder->addCheckbox([
             'name'    => 'enabled',
             'label'   => $this->trans('Enabled'),
-            'default' => '0'
+            'default' => '0',
+            'comment' => $this->trans('Only enabled products are visible in shop.')
         ]));
 
         $basicPane->addChild($builder->addTextField([
