@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Tax\DataGrid;
 
+use WellCommerce\Core\DataGrid\Configuration\EventHandler\ClickRowEventHandler;
 use WellCommerce\Core\DataGrid\Configuration\EventHandler\DeleteRowEventHandler;
 use WellCommerce\Core\DataGrid\Configuration\EventHandler\EditRowEventHandler;
 use WellCommerce\Core\DataGrid\Configuration\EventHandler\LoadEventHandler;
@@ -49,6 +50,12 @@ class TaxDataGridConfigurator extends AbstractConfigurator implements Configurat
             'function'   => $function = $this->getFunction('edit'),
             'callback'   => $function,
             'row_action' => OptionInterface::ACTION_EDIT,
+            'route'      => $this->generateUrl('admin.tax.edit')
+        ]));
+
+        $eventHandlers->add(new ClickRowEventHandler([
+            'function'   => $function = $this->getFunction('click'),
+            'callback'   => $function,
             'route'      => $this->generateUrl('admin.tax.edit')
         ]));
 

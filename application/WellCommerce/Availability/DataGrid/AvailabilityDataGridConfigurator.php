@@ -13,6 +13,7 @@
 namespace WellCommerce\Availability\DataGrid;
 
 use WellCommerce\Core\DataGrid\Configuration\Appearance;
+use WellCommerce\Core\DataGrid\Configuration\EventHandler\ClickRowEventHandler;
 use WellCommerce\Core\DataGrid\Configuration\EventHandler\DeleteGroupEventHandler;
 use WellCommerce\Core\DataGrid\Configuration\EventHandler\DeleteRowEventHandler;
 use WellCommerce\Core\DataGrid\Configuration\EventHandler\EditRowEventHandler;
@@ -55,6 +56,12 @@ class AvailabilityDataGridConfigurator extends AbstractConfigurator implements C
             'function'   => $function = $this->getFunction('edit'),
             'callback'   => $function,
             'row_action' => OptionInterface::ACTION_EDIT,
+            'route'      => $this->generateUrl('admin.availability.edit')
+        ]));
+
+        $eventHandlers->add(new ClickRowEventHandler([
+            'function'   => $function = $this->getFunction('click'),
+            'callback'   => $function,
             'route'      => $this->generateUrl('admin.availability.edit')
         ]));
 
