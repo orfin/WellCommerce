@@ -39,24 +39,7 @@ class ProfilerStorage implements ProfilerStorageInterface
      */
     public function find($ip, $url, $limit, $method, $start = null, $end = null)
     {
-        if (null === $start) {
-            $start = 0;
-        }
 
-        if (null === $end) {
-            $end = time();
-        }
-
-        list($criteria, $args) = $this->buildCriteria($ip, $url, $start, $end, $limit, $method);
-
-        $criteria = $criteria ? 'WHERE ' . implode(' AND ', $criteria) : '';
-
-        $db = $this->initDb();
-        $tokens
-            = $this->fetch($db, 'SELECT token, ip, method, url, time, parent FROM sf_profiler_data ' . $criteria . ' ORDER BY time DESC LIMIT ' . ((int)$limit), $args);
-        $this->close($db);
-
-        return $tokens;
     }
 
     /**
@@ -64,14 +47,6 @@ class ProfilerStorage implements ProfilerStorageInterface
      */
     public function read($token)
     {
-        $db   = $this->initDb();
-        $args = array(':token' => $token);
-        $data
-              = $this->fetch($db, 'SELECT data, parent, ip, method, url, time FROM sf_profiler_data WHERE token = :token LIMIT 1', $args);
-        $this->close($db);
-        if (isset($data[0]['data'])) {
-            return $this->createProfileFromData($token, $data[0]);
-        }
     }
 
     /**
@@ -89,40 +64,59 @@ class ProfilerStorage implements ProfilerStorageInterface
      */
     public function purge()
     {
-        $db = $this->initDb();
-        $this->exec($db, 'DELETE FROM sf_profiler_data');
-        $this->close($db);
+
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function initDb()
     {
 
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function cleanup()
     {
 
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function exec($db, $query, array $args = array())
     {
 
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function prepareStatement($db, $query)
     {
 
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function fetch($db, $query, array $args = array())
     {
 
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function close($db)
     {
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function createProfileFromData($token, $data, $parent = null)
     {
         $profile = new Profile($token);
@@ -145,31 +139,16 @@ class ProfilerStorage implements ProfilerStorageInterface
         return $profile;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function readChildren($token, $parent)
     {
-        $db = $this->initDb();
-        $data
-            = $this->fetch($db, 'SELECT token, data, ip, method, url, time FROM sf_profiler_data WHERE parent = :token', array(':token' => $token));
-        $this->close($db);
 
-        if (!$data) {
-            return array();
-        }
-
-        $profiles = array();
-        foreach ($data as $d) {
-            $profiles[] = $this->createProfileFromData($d['token'], $d, $parent);
-        }
-
-        return $profiles;
     }
 
     /**
-     * Returns whether data for the given token already exists in storage.
-     *
-     * @param string $token The profile token
-     *
-     * @return string
+     * {@inheritdoc}
      */
     protected function has($token)
     {
