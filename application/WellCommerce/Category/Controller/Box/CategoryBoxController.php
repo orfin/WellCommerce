@@ -23,6 +23,9 @@ use WellCommerce\Category\Repository\CategoryRepositoryInterface;
  */
 class CategoryBoxController extends AbstractBoxController
 {
+    /**
+     * @var CategoryRepositoryInterface
+     */
     private $repository;
 
     public function indexAction()

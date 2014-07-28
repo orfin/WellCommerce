@@ -37,13 +37,6 @@ class CategoryController extends AbstractFrontController
 
         $this->getCategoryProvider()->setCurrent($category);
 
-        print_r($this->getCategoryProvider()->getCurrent());
-        die();
-
-        $params = [
-
-        ];
-
         $collection = $this->get('product.collection')->get();
 
         $datagrid = $this->createDataGrid($this->get('product.datagrid'));

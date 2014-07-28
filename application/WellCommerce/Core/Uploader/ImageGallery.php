@@ -146,6 +146,9 @@ class ImageGallery extends AbstractComponent
      */
     public function getImageUrl($id, $width = null, $height = null)
     {
+        if ((int)$id == 0) {
+            return '';
+        }
         $file         = $this->files[$id];
         $fileName     = $this->getImageFileName($file);
         $originalPath = $this->getImageOriginalPath($fileName);

@@ -11,17 +11,10 @@
  */
 namespace WellCommerce\Product\DataGrid;
 
-use Illuminate\Database\Capsule\Manager;
-use Symfony\Component\Routing\Route;
 use WellCommerce\Core\DataGrid\AbstractDataGrid;
-use WellCommerce\Core\DataGrid\Collection\RoutesCollection;
 use WellCommerce\Core\DataGrid\Column\Column;
-use WellCommerce\Core\DataGrid\Column\ColumnCollection;
 use WellCommerce\Core\DataGrid\Column\ColumnInterface;
-use WellCommerce\Core\DataGrid\Column\DataGridColumn;
 use WellCommerce\Core\DataGrid\DataGridInterface;
-use WellCommerce\Core\DataGrid\DataGridOptions;
-use WellCommerce\Core\DataGrid\DataGridOptionsInterface;
 
 /**
  * Class ProductDataGrid
@@ -77,10 +70,6 @@ class ProductDataGrid extends AbstractDataGrid implements DataGridInterface
                 'visible' => false
             ],
             'process_function' => function ($id) {
-                    if ((int)$id == 0) {
-                        return '';
-                    }
-
                     return $this->getImageGallery()->getImageUrl($id, 100, 100);
                 }
         ]));

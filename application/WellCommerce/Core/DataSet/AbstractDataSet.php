@@ -10,30 +10,17 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Core\DataGrid;
+namespace WellCommerce\Core\DataSet;
 
 /**
- * Class Renderer
+ * Class AbstractDataSet
  *
- * @package WellCommerce\Core\DataGrid
+ * @package WellCommerce\Core\DataSet
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Renderer
-{
-    private $dataGrid;
+class AbstractDataSet {
 
-    public function __construct(DataGridInterface $dataGrid)
-    {
-        $this->dataGrid = $dataGrid;
-    }
+    public function __construct(){
 
-    public function render()
-    {
-        $content
-            = <<<EOF
-
-EOF;
-
-        return $content;
     }
 } 

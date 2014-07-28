@@ -87,4 +87,11 @@ interface CategoryRepositoryInterface
      */
     public function quickAddCategory($request);
 
+    /**
+     * Returns categories tree
+     *
+     * @return mixed
+     */
+    public function getCategoriesTree();
+
 }

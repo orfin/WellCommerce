@@ -12,11 +12,9 @@
 
 namespace WellCommerce\Core\DataGrid\Configurator;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use WellCommerce\Core\AbstractComponent;
 use WellCommerce\Core\DataGrid\Column\ColumnCollection;
 use WellCommerce\Core\DataGrid\Options\OptionsInterface;
-use WellCommerce\Core\DataGrid\QueryBuilder\QueryInterface;
 use WellCommerce\Core\DataGrid\QueryBuilder\QueryBuilderInterface;
 use WellCommerce\Core\Helper\Helper;
 

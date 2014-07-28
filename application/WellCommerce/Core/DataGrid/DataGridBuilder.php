@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Core\DataGrid;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use WellCommerce\Core\AbstractComponent;
 use WellCommerce\Core\Event\DataGridEvent;
 

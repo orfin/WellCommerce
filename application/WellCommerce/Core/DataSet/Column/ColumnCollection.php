@@ -10,12 +10,12 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Core\DataGrid\Column;
+namespace WellCommerce\Core\DataSet\Column;
 
 /**
  * Class ColumnCollection
  *
- * @package WellCommerce\Core\DataGrid\Column
+ * @package WellCommerce\Core\DataSet\Column
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class ColumnCollection implements \IteratorAggregate, \Countable

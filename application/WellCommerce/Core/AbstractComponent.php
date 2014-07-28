@@ -353,7 +353,7 @@ abstract class AbstractComponent extends ContainerAware
     /**
      * Shortcut to get ImageGallery service
      *
-     * @return object
+     * @return \WellCommerce\Core\Uploader\ImageGallery
      */
     final protected function getImageGallery()
     {
