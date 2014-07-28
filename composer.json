@@ -1,33 +1,25 @@
 {
     "name": "wellcommerce/wellcommerce",
     "description": "E-commerce platform",
+    "keywords": ["symfony","e-commerce","open-source"],
     "minimum-stability": "dev",
+    "homepage": "http://wellcommerce.org",
     "authors": [
         {
             "name": "Adam Piotrowski",
-            "email": "adam@wellcommerce.org",
-            "role": "Lead Developer"
+            "email": "adam@wellcommerce.org"
         },
         {
-            "name": "Rafal Martonik",
-            "email": "rafal@wellcommerce.org",
-            "role": "Core Developer"
-        },
-        {
-            "name": "Adrian Potępa",
-            "email": "adrian@wellcommerce.org",
-            "role": "Core Developer"
-        },
-        {
-            "name": "Michal Gonciarz",
-            "email": "michal@wellcommerce.org",
-            "role": "Support Lead"
+            "name": "WellCommerce Developers",
+            "email": "developers@wellcommerce.org"
         }
     ],
     "support": {
-        "email": "hello@wellcommerce.org"
+        "email": "support@wellcommerce.org",
+        "issues": "https://github.com/WellCommerce/WellCommerce/issues",
+        "source": "https://github.com/WellCommerce/WellCommerce/"
     },
-    "license": "LGPL-3.0+",
+    "license": "OSL-3.0",
     "repositories": [
         {
             "type": "package",
@@ -42,41 +34,41 @@
         }
     ],
     "require": {
+        "php": ">=5.4.0",
         "symfony/config": "2.6.x-dev",
         "symfony/console": "2.6.x-dev",
-        "symfony/expression-language": "2.6.x-dev",
-        "symfony/routing": "2.6.x-dev",
-        "symfony/process": "2.6.x-dev",
-        "symfony/options-resolver": "2.6.x-dev",
-        "symfony/http-kernel": "2.6.x-dev",
-        "symfony/http-foundation": "2.6.x-dev",
-        "symfony/finder": "2.6.x-dev",
-        "symfony/filesystem": "2.6.x-dev",
-        "symfony/intl": "2.6.x-dev",
-        "symfony/event-dispatcher": "2.6.x-dev",
-        "symfony/dependency-injection": "2.6.x-dev",
         "symfony/debug": "2.6.x-dev",
+        "symfony/dependency-injection": "2.6.x-dev",
+        "symfony/expression-language": "2.6.x-dev",
+        "symfony/event-dispatcher": "2.6.x-dev",
+        "symfony/filesystem": "2.6.x-dev",
+        "symfony/finder": "2.6.x-dev",
+        "symfony/http-foundation": "2.6.x-dev",
+        "symfony/http-kernel": "2.6.x-dev",
+        "symfony/intl": "2.6.x-dev",
+        "symfony/options-resolver": "2.6.x-dev",
+        "symfony/process": "2.6.x-dev",
         "symfony/property-access": "2.6.x-dev",
+        "symfony/routing": "2.6.x-dev",
+        "symfony/serializer": "2.5.x-dev",
         "symfony/stopwatch": "2.6.x-dev",
         "symfony/translation": "2.6.x-dev",
+        "symfony/twig-bridge": "2.4.x-dev",
+        "symfony/validator": "2.5.x-dev",
         "symfony/yaml": "2.6.x-dev",
         "monolog/monolog": "1.7.0",
-        "symfony/twig-bridge": "2.4.x-dev",
-        "kriswallsmith/assetic": "v1.1.2",
         "twig/extensions": "1.1.*@dev",
         "illuminate/database": "4.3.*@dev",
         "xajax/xajax": "1.0.0",
-        "twitter/bootstrap": "v3.1.1",
         "intervention/image": "1.6.0",
         "intervention/imagecache": "0.6.0",
         "hautelook/phpass": "0.3.0",
-        "symfony/validator": "2.5.x-dev",
-        "symfony/serializer": "2.5.x-dev",
         "zendframework/zend-cache": "2.3.0",
         "zendframework/zend-serializer": "2.3.0",
         "phpunit/phpunit": "4.2.x-dev",
         "codeception/codeception": "2.0.3"
     },
+    "optimize-autoloader": "true",
     "autoload": {
         "psr-0": {
             "WellCommerce": "application",

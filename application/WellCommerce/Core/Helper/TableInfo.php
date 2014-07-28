@@ -23,6 +23,7 @@ namespace WellCommerce\Core\Helper;
 class TableInfo
 {
     private static $columns  = [
+        'address_type' => ['id','type','name'],
         'admin_menu' => ['id','name','icon','route','controller','sort_order','parent_id'],
         'attribute' => ['id','created_at','updated_at'],
         'attribute_attribute_value' => ['id','attribute_id','attribute_value_id','created_at','updated_at'],
@@ -70,6 +71,7 @@ class TableInfo
         'product_photo' => ['id','product_id','file_id','created_at','updated_at'],
         'product_shop' => ['id','product_id','shop_id','created_at','updated_at'],
         'product_translation' => ['id','name','slug','short_description','description','long_description','meta_keywords','meta_title','meta_description','product_id','language_id','created_at','updated_at'],
+        'profiler_data' => ['id','token','parent','data','ip','method','url','time','created_at','updated_at'],
         'session' => ['sess_id','sess_data','sess_time'],
         'shipping_method' => ['id','hierarchy','enabled','type','file_id','created_at','updated_at'],
         'shipping_method_cost' => ['id','shipping_method_id','from','to','cost','tax_id','currency_id','created_at','updated_at'],

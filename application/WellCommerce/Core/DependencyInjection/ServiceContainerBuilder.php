@@ -115,7 +115,7 @@ final class ServiceContainerBuilder
     /**
      * Checks if optimised container class needs to be regenerated
      *
-     * @return void
+     * @return ServiceContainer
      */
     public function check()
     {
@@ -222,7 +222,6 @@ final class ServiceContainerBuilder
         $loader->load('routing.xml');
         $loader->load('session.xml');
         $loader->load('template.xml');
-        $loader->load('validator.xml');
     }
 
     /**

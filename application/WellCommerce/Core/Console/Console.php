@@ -12,6 +12,8 @@
 namespace WellCommerce\Core\Console;
 
 use Symfony\Component\Console\Application;
+use WellCommerce\Core\Console\Command\Migration\Add;
+use WellCommerce\Core\Console\Command\Migration\Up;
 use WellCommerce\Core\DependencyInjection\ServiceContainer;
 
 /**
@@ -29,10 +31,8 @@ class Console extends Application
 
         $this->addCommands([
             new Command\Documentation\Generate(),
-            new Command\Migration\Add(),
-            new Command\Migration\Up(),
-            new Command\Migration\Down(),
-            new Command\Add(),
+            new Add(),
+            new Up()
         ]);
     }
 
