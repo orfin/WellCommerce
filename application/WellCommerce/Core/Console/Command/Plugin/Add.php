@@ -144,7 +144,7 @@ EOF;
     private function writeRoutingFile()
     {
         $plugin          = $this->plugin;
-        $controller      = 'WellCommerce\\\' . $plugin . '\\Controller\\Admin\\' . $plugin . 'Controller';
+        $controller      = 'WellCommerce\\' . $plugin . '\\Controller\\Admin\\' . $plugin . 'Controller';
 
         $content
             = <<<EOF
