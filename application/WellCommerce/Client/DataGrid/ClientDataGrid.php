@@ -27,44 +27,6 @@ class ClientDataGrid extends AbstractDataGrid implements DataGridInterface
     /**
      * {@inheritdoc}
      */
-    public function getId()
-    {
-        return 'client';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getRoutes()
-    {
-        return [
-            'edit' => $this->generateUrl('admin.client.edit')
-        ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function configureOptions(array $options)
-    {
-        $options['event_handlers'] = [
-            'update_row' => $this->getXajaxManager()->registerFunction([
-                    'update_' . $this->getId(),
-                    $this,
-                    'updateRow'
-                ]),
-        ];
-
-        $options['filters'] = [
-            'client_group_id' => $this->get('client_group.repository')->getAllClientGroupToFilter()
-        ];
-
-        return parent::configureOptions($options);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function addColumns()
     {
         $this->columns->add(new Column([
