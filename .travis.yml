@@ -5,6 +5,8 @@ php:
 branches:
     only:
         - development
+env:
+  - DB_USER=root
 
 before_install:
     - sudo apt-get update > /dev/null
@@ -23,8 +25,11 @@ before_script:
     - "wget http://selenium-release.storage.googleapis.com/2.42/selenium-server-standalone-2.42.2.jar"
     - "java -jar selenium-server-standalone-2.42.2.jar > /dev/null &"
     - sleep 5
+    - sh -c "mysql -u$DB_USER -e 'CREATE DATABASE IF NOT EXISTS wellcommerce;'; fi"
+    - sh -c "mysql -u$DB_USER -h localhost wellcommerce < sql/dump.sql"
 
 script:
+    - php doitwell database:install --host=localhost --username=$DB_USER --database=wellcommerce
     - vendor/bin/codecept run -c ./
 
 notifications:
