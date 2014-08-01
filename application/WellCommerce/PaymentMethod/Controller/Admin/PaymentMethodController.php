@@ -29,7 +29,7 @@ class PaymentMethodController extends AbstractAdminController
     public function indexAction()
     {
         return [
-            'datagrid' => $this->createDataGrid($this->get('payment_method.datagrid'))
+            'datagrid' => $this->getDataGrid($this->get('payment_method.datagrid'))
         ];
     }
 

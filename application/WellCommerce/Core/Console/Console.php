@@ -12,6 +12,7 @@
 namespace WellCommerce\Core\Console;
 
 use Symfony\Component\Console\Application;
+use WellCommerce\Core\Console\Command\Install\Database;
 use WellCommerce\Core\Console\Command\Migration\Add;
 use WellCommerce\Core\Console\Command\Migration\Up;
 use WellCommerce\Core\DependencyInjection\ServiceContainer;
@@ -32,7 +33,8 @@ class Console extends Application
         $this->addCommands([
             new Command\Documentation\Generate(),
             new Add(),
-            new Up()
+            new Up(),
+            new Database()
         ]);
     }
 

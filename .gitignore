@@ -1,5 +1,5 @@
 *.idea
-application/.idea
+/application/.idea
 /config/parameters.xml
 /upload
 /var
@@ -9,5 +9,5 @@ php-cs-fixer.phar
 .project
 .buildpath
 *.*.meta
-application/WellCommerce/Core/DependencyInjection/ServiceContainer.php
+/application/WellCommerce/Core/DependencyInjection/ServiceContainer.php
 tests/_output/*
