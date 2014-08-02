@@ -50,8 +50,9 @@ abstract class AbstractExtension extends Extension
         $r      = new \ReflectionObject($this);
         $parts  = explode('\\', $r->getNamespaceName());
         $vendor = array_shift($parts);
+        $name   = str_replace('Extension', '', $r->getShortName());
 
-        return strtolower(sprintf('%s.%s', $vendor, $r->getShortName()));
+        return strtolower(sprintf('%s_%s', $vendor, $name));
     }
 
     /**

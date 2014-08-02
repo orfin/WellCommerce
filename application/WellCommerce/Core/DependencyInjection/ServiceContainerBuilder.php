@@ -13,7 +13,10 @@ namespace WellCommerce\Core\DependencyInjection;
 
 use Symfony\Component\Config\ConfigCache;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\Config\Loader\DelegatingLoader;
+use Symfony\Component\Config\Loader\LoaderResolver;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Dumper\PhpDumper;
@@ -22,6 +25,7 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\EventDispatcher\DependencyInjection\RegisterListenersPass;
 use Symfony\Component\Routing\RouteCollection;
+use WellCommerce\Core\Configuration\Loader\YamlConfigurationLoader;
 use WellCommerce\Core\DependencyInjection\Compiler\RegisterTwigExtensionsPass;
 use WellCommerce\Core\DependencyInjection\Extension\PluginExtensionLoader;
 use Symfony\Component\DependencyInjection\Compiler\PassConfig;
@@ -157,9 +161,9 @@ final class ServiceContainerBuilder
             $parameterBag     = new ParameterBag($this->parameters);
             $containerBuilder = new ContainerBuilder($parameterBag);
 
-
-            $this->loadConfiguration($containerBuilder);
             $this->registerExtensions($containerBuilder);
+            $this->loadConfiguration($containerBuilder);
+
             $this->registerCompilerPasses();
             $this->dumpDatabaseColumns($containerBuilder);
 
@@ -223,16 +227,21 @@ final class ServiceContainerBuilder
      */
     protected function loadConfiguration(ContainerBuilder $builder)
     {
-        $locator = new FileLocator(ROOTPATH . 'config');
-        $loader  = new XmlFileLoader($builder, $locator);
+        $locator        = new FileLocator(ROOTPATH . 'config');
+        $loaderResolver = new LoaderResolver([
+            new YamlFileLoader($builder, $locator),
+            new XmlFileLoader($builder, $locator)
+        ]);
 
-        $loader->load('parameters.xml');
-        $loader->load('core.xml');
-        $loader->load('database.xml');
-        $loader->load('datagrid.xml');
-        $loader->load('routing.xml');
-        $loader->load('session.xml');
-        $loader->load('template.xml');
+        $delegatingLoader = new DelegatingLoader($loaderResolver);
+        $delegatingLoader->load('parameters.yml');
+        $delegatingLoader->load('parameters.xml');
+        $delegatingLoader->load('core.xml');
+        $delegatingLoader->load('database.xml');
+        $delegatingLoader->load('datagrid.xml');
+        $delegatingLoader->load('routing.xml');
+        $delegatingLoader->load('session.xml');
+        $delegatingLoader->load('template.xml');
     }
 
     /**
