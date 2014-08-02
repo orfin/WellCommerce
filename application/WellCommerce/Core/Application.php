@@ -77,6 +77,16 @@ class Application implements TerminableInterface, HttpKernelInterface
     }
 
     /**
+     * Returns Container instance
+     *
+     * @return \Symfony\Component\DependencyInjection\ContainerInterface
+     */
+    public function getContainer()
+    {
+        return $this->container;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function handle(Request $request, $type = HttpKernel::MASTER_REQUEST, $catch = true)

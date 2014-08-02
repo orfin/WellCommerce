@@ -13,5 +13,12 @@
 
 include 'bootstrap.php';
 
-$console = new \WellCommerce\Core\Console\Console();
-$console->run();
+use Symfony\Component\Console\Input\ArgvInput;
+
+$input = new ArgvInput();
+$env = $input->getParameterOption(['--env', '-e'], getenv('WELLCOMMERCE_ENV') ? : 'dev');
+$debug = getenv('WELLCOMMERCE_DEBUG') !== '0' && !$input->hasParameterOption(['--no-debug', '']) && $env !== 'prod';
+
+$application = new \WellCommerce\Core\Application($env, $debug);
+$console = new \WellCommerce\Core\Console\Application($application);
+$console->run($input);
