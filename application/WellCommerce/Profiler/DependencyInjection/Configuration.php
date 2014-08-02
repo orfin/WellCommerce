@@ -30,7 +30,7 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-            ->booleanNode('enabled')->isRequired()->cannotBeEmpty()->end()
+            ->booleanNode('enabled')->isRequired()->end()
             ->end();
 
         return $treeBuilder;
