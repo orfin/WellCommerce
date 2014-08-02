@@ -31,7 +31,9 @@ class ProfilerExtension extends AbstractExtension
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        if (false === $container->getParameter('profiler_enabled')) {
+        $config = $this->processConfiguration(new Configuration(), $config);
+
+        if (false === $config['enabled']) {
             return;
         }
 
