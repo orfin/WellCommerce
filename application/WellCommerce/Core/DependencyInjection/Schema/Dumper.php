@@ -13,7 +13,6 @@
 namespace WellCommerce\Core\DependencyInjection\Schema;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * Class Dumper
@@ -39,15 +38,25 @@ class Dumper
     }
 
     /**
+     * Returns DB connection
+     *
+     * @return \Illuminate\Database\Connection
+     */
+    private function getConnection()
+    {
+        return $this->containerBuilder->get('database_manager')->connection();
+    }
+
+    /**
      * Returns all database columns as an array
      *
      * @return array
      */
     private function getAllColumns()
     {
-        $connection = $this->containerBuilder->get('database_manager')->connection();
+        $connection = $this->getConnection();
 
-        $sql = $this->compileColumnExists();
+        $sql = $this->getSchemaInfoQuery();
 
         $database = $connection->getDatabaseName();
 
@@ -62,13 +71,13 @@ class Dumper
     }
 
     /**
-     * Returns SQL statement to execute on database to fetch column and table info
+     * Returns SQL to execute on database to fetch column and table info
      *
      * @return string
      */
-    private function compileColumnExists()
+    private function getSchemaInfoQuery()
     {
-        return "select table_name, column_name from information_schema.columns where table_schema = ?";
+        return "SELECT table_name, column_name FROM information_schema.columns WHERE table_schema = ?";
     }
 
     /**
