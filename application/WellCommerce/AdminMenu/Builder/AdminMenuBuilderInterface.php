@@ -38,6 +38,8 @@ interface AdminMenuBuilderInterface
     public function sortMenu(AdminMenuItemInterface $a, AdminMenuItemInterface $b);
 
     /**
+     * Adds new element to menu
+     *
      * @param AdminMenuItemInterface $item
      *
      * @return mixed
