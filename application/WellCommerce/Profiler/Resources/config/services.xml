@@ -12,6 +12,7 @@
         <parameter key="profiler.data_collector.request.class">Symfony\Component\HttpKernel\DataCollector\RequestDataCollector</parameter>
         <parameter key="profiler.data_collector.router.class">Symfony\Component\HttpKernel\DataCollector\RouterDataCollector</parameter>
         <parameter key="profiler.data_collector.event.class">Symfony\Component\HttpKernel\DataCollector\EventDataCollector</parameter>
+        <parameter key="profiler.data_collector.time.class">Symfony\Component\HttpKernel\DataCollector\TimeDataCollector</parameter>
     </parameters>
 
     <services>
@@ -61,5 +62,11 @@
             <tag name="data_collector" id="events" priority="255" />
             <argument type="service" id="event_dispatcher" />
         </service>
+
+        <!--<service id="profiler.data_collector.time" class="%profiler.data_collector.time.class%" >-->
+            <!--<tag name="data_collector" id="events" priority="255" />-->
+            <!--<argument type="service" id="kernel" />-->
+            <!--<argument type="service" id="stopwatch" />-->
+        <!--</service>-->
     </services>
 </container>

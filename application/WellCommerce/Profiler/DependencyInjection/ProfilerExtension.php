@@ -31,8 +31,12 @@ class ProfilerExtension extends AbstractExtension
      */
     public function load(array $config, ContainerBuilder $container)
     {
-//        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
-//        $loader->load('services.xml');
+        if (false === $container->getParameter('profiler_enabled')) {
+            return;
+        }
+
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader->load('services.xml');
     }
 
     /**
