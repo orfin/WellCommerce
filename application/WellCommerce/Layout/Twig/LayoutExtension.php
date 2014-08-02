@@ -63,7 +63,7 @@ class LayoutExtension extends \Twig_Extension
         $request['_template_vars']['box'] = $this->getBoxTemplateVars($layoutBox);
         $subRequest                       = $currentRequest->duplicate($currentRequest->query->all(), null, $request);
 
-        $content = $this->container->get('kernel')->handle($subRequest, HttpKernelInterface::SUB_REQUEST);
+        $content = $this->container->get('http_kernel')->handle($subRequest, HttpKernelInterface::SUB_REQUEST);
 
         return $content->getContent();
     }
