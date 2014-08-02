@@ -10,12 +10,12 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-DEFINE('DS', DIRECTORY_SEPARATOR);
+include 'bootstrap.php';
 
-DEFINE('ROOTPATH', dirname(__FILE__) . DS);
+use Symfony\Component\HttpFoundation\Request;
+$application = new WellCommerce\Core\Application('prod', false);
+$request     = Request::createFromGlobals();
+$response    = $application->handle($request);
+$response->send();
+$application->terminate($request, $response);
 
-setlocale(LC_ALL, "en_EN");
-
-date_default_timezone_set('Europe/London');
-
-$loader = require ROOTPATH . 'vendor/autoload.php';

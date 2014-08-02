@@ -12,7 +12,10 @@
 namespace WellCommerce\Core;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Stopwatch\Stopwatch;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\HttpKernel;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
+use Symfony\Component\HttpKernel\TerminableInterface;
 use WellCommerce\Core\DependencyInjection\ServiceContainerBuilder;
 
 /**
@@ -21,7 +24,7 @@ use WellCommerce\Core\DependencyInjection\ServiceContainerBuilder;
  * @package WellCommerce\Core
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Application
+class Application implements TerminableInterface, HttpKernelInterface
 {
     /**
      * Container object
@@ -31,74 +34,84 @@ class Application
     protected $container;
 
     /**
-     * Request object
+     * Application environment
      *
-     * @var object
+     * @var string
      */
-    protected $request;
+    protected $environment;
 
     /**
-     * Response object
-     *
-     * @var object
-     */
-    protected $response;
-
-    /**
-     * Stopwatch object
-     *
-     * @var object
-     */
-    protected $stopwatch;
-
-    /**
-     * True if the debug mode is enabled, false otherwise
+     * Debug mode
      *
      * @var bool
      */
-    protected $isDebug;
+    protected $debug;
+
+    /**
+     * Booted status
+     *
+     * @var bool
+     */
+    protected $booted = false;
 
     /**
      * Constructor
      *
-     * @param bool $isDebug Enable or disable debug mode in application
+     * @param string $environment Application environment
+     * @param bool   $debug       Whether to enable debugging or not
      */
-    public function __construct($isDebug)
+    public function __construct($environment, $debug)
     {
-        $this->isDebug   = (bool)$isDebug;
-        $this->stopwatch = new Stopwatch();
-
-        $this->stopwatch->start('application');
-
-        // Create request instance
-        $this->request = Request::createFromGlobals();
-
-        // Check if service container exists and/or needs to be regenerated
-        $serviceContainerBuilder = new ServiceContainerBuilder($this->getKernelParameters(), $this->isDebug);
-        $this->container = $serviceContainerBuilder->check();
+        $this->environment = $environment;
+        $this->debug       = (bool)$debug;
     }
 
     /**
-     * Resolves controller and dispatches the application
-     *
-     * @return  void
+     * Boots the Application
      */
-    public function run()
+    public function boot()
     {
-        $this->response = $this->container->get('kernel')->handle($this->request);
-        $this->response->send();
+        $builder         = new ServiceContainerBuilder($this->getKernelParameters(), $this->environment, $this->debug);
+        $this->container = $builder->getContainer();
+        $this->booted    = true;
     }
 
     /**
-     * Stops application and triggers termination events
-     *
-     * @return  void
+     * {@inheritdoc}
      */
-    public function stop()
+    public function handle(Request $request, $type = HttpKernel::MASTER_REQUEST, $catch = true)
     {
-        $this->container->get('kernel')->terminate($this->request, $this->response);
-        $event = $this->stopwatch->stop('application');
+        if (false === $this->booted) {
+            $this->boot();
+        }
+
+        return $this->getHttpKernel()->handle($request, $type, $catch);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function terminate(Request $request, Response $response)
+    {
+        if (false === $this->booted) {
+            return;
+        }
+
+        if ($this->getHttpKernel() instanceof TerminableInterface) {
+            $this->getHttpKernel()->terminate($request, $response);
+        }
+    }
+
+    /**
+     * Returns HttpKernel service
+     *
+     * @return \Symfony\Component\HttpKernel\DependencyInjection\ContainerAwareHttpKernel
+     */
+    protected function getHttpKernel()
+    {
+        return $this->container->get('http_kernel');
+    }
+
 
     /**
      * Returns all globally accessible kernel parameters
@@ -108,8 +121,9 @@ class Application
     protected function getKernelParameters()
     {
         return [
-            'application.root_path'  => ROOTPATH,
-            'application.debug_mode' => $this->isDebug
+            'application.root_path'   => ROOTPATH,
+            'application.debug'       => $this->debug,
+            'application.environment' => $this->environment
         ];
     }
 }

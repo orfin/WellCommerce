@@ -82,7 +82,6 @@ class PluginExtensionLoader
             $refClass  = new \ReflectionClass($class);
             $interface = 'Symfony\\Component\\DependencyInjection\\Extension\\ExtensionInterface';
             if ($refClass->isInstantiable() && $refClass->implementsInterface($interface)) {
-                $vendor             = $this->getVendor($refClass->getNamespaceName());
                 $classes[] = $class;
             }
         }

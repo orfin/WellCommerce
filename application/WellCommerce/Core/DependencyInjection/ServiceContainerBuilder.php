@@ -26,6 +26,7 @@ use WellCommerce\Core\DependencyInjection\Compiler\RegisterTwigExtensionsPass;
 use WellCommerce\Core\DependencyInjection\Extension\PluginExtensionLoader;
 use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 use WellCommerce\Core\DependencyInjection\Schema\Dumper;
+use WellCommerce\Core\Form\Elements\Container;
 
 /**
  * Class ServiceContainerBuilder
@@ -75,7 +76,14 @@ final class ServiceContainerBuilder
      *
      * @var bool
      */
-    protected $isDebug;
+    protected $debug;
+
+    /**
+     * Application environment
+     *
+     * @var string
+     */
+    protected $environment;
 
     /**
      * Compiler passes registered to run during container build process
@@ -85,57 +93,95 @@ final class ServiceContainerBuilder
     protected $compilerPasses;
 
     /**
-     * Path to cached container class
-     *
-     * @var string
+     * @var \Symfony\Component\DependencyInjection\Container
      */
-    protected $compilerClassPath;
-
-    /**
-     * Config cache object
-     *
-     * @var ConfigCache
-     */
-    protected $containerConfigCache;
+    protected $container;
 
     /**
      * Constructor
      *
      * @param array $parameters
-     * @param bool  $isDebug
+     * @param bool  $debug
      */
-    public function __construct(array $parameters, $isDebug = false)
+    public function __construct(array $parameters, $environment, $debug = false)
     {
-        $this->parameters           = $parameters;
-        $this->isDebug              = (bool)$isDebug;
-        $this->compilerClassPath    = __DIR__ . DS . self::SERVICE_CONTAINER_CLASS . '.php';
-        $this->containerConfigCache = new ConfigCache($this->compilerClassPath, $this->isDebug);
+        $this->parameters     = $parameters;
+        $this->environment    = $environment;
+        $this->debug          = (bool)$debug;
+        $this->containerClass = $this->getContainerClass();
+        $this->initializeContainer();
     }
 
     /**
-     * Checks if optimised container class needs to be regenerated
+     * Returns cached container class name
      *
-     * @return ServiceContainer
+     * @return string
      */
-    public function check()
+    private function getContainerClass()
     {
-        if (!$this->containerConfigCache->isFresh()) {
+        return self::SERVICE_CONTAINER_CLASS . ucfirst($this->environment) . ($this->debug ? 'Debug' : '');
+    }
 
-            $this->initContainerBuilder();
-            $this->loadXmlConfiguration();
-            $this->registerExtensions();
+    /**
+     * Returns container object
+     *
+     * @return \Symfony\Component\DependencyInjection\Container
+     */
+    public function getContainer()
+    {
+        return $this->container;
+    }
+
+    /**
+     * Returns path to cache dir
+     *
+     * @return string
+     */
+    public function getCacheDir()
+    {
+        return ROOTPATH . 'var' . DS . $this->environment;
+    }
+
+    /**
+     * Initializes the Container
+     *
+     * @return \Symfony\Component\DependencyInjection\ContainerInterface
+     */
+    public function initializeContainer()
+    {
+        $class = $this->getContainerClass();
+        $cache = new ConfigCache($this->getCacheDir() . DS . $class . '.php', $this->debug);
+
+        if (!$cache->isFresh()) {
+
+            $parameterBag     = new ParameterBag($this->parameters);
+            $containerBuilder = new ContainerBuilder($parameterBag);
+
+
+            $this->loadConfiguration($containerBuilder);
+            $this->registerExtensions($containerBuilder);
             $this->registerCompilerPasses();
-            $this->dumpDatabaseColumns();
+            $this->dumpDatabaseColumns($containerBuilder);
 
             foreach ($this->compilerPasses as $compilerPass) {
-                $this->containerBuilder->addCompilerPass($compilerPass, PassConfig::TYPE_OPTIMIZE);
-                $compilerPass->process($this->containerBuilder);
+                $containerBuilder->addCompilerPass($compilerPass, PassConfig::TYPE_OPTIMIZE);
+                $compilerPass->process($containerBuilder);
             }
 
-            $this->compileAndSaveContainer();
+            $containerBuilder->compile();
+
+            $dumper  = new PhpDumper($containerBuilder);
+            $content = $dumper->dump([
+                'class'      => $this->getContainerClass(),
+                'base_class' => self::SERVICE_CONTAINER_BASE_CLASS
+            ]);
+
+            $cache->write($content, $containerBuilder->getResources());
         }
 
-        return new ServiceContainer();
+        require_once $cache;
+
+        $this->container = new $class();
     }
 
     /**
@@ -143,77 +189,42 @@ final class ServiceContainerBuilder
      *
      * @return void
      */
-    private function dumpDatabaseColumns()
+    private function dumpDatabaseColumns(ContainerBuilder $builder)
     {
-        $dumper = new Dumper($this->containerBuilder);
-
-        $options = Array(
-            'class'     => self::DATABASE_COLUMNS_CLASS,
-            'namespace' => 'WellCommerce\\Core\\Helper',
-            'path'      => ROOTPATH . 'WellCommerce' . DS . 'Core' . DS . 'Helper' . DS . self::DATABASE_COLUMNS_CLASS . '.php'
-        );
+        $dumper = new Dumper($builder);
 
         $path       = __DIR__ . '/../' . DS . 'Helper' . DS . self::DATABASE_COLUMNS_CLASS . '.php';
         $filesystem = new Filesystem();
-        $filesystem->dumpFile($path, $dumper->dump($options));
+        $filesystem->dumpFile($path, $dumper->dump([
+            'class'     => self::DATABASE_COLUMNS_CLASS,
+            'namespace' => 'WellCommerce\\Core\\Helper',
+            'path'      => ROOTPATH . 'WellCommerce' . DS . 'Core' . DS . 'Helper' . DS . self::DATABASE_COLUMNS_CLASS . '.php'
+        ]));
     }
 
 
     /**
-     * Register extensions using recursive scan
+     * Registers application extensions
      *
-     * @return void
+     * @param ContainerBuilder $builder
      */
-    protected function registerExtensions()
+    protected function registerExtensions(ContainerBuilder $builder)
     {
         $routeCollection = new RouteCollection();
-        $extensionLoader = new PluginExtensionLoader($this->containerBuilder, $routeCollection);
+        $extensionLoader = new PluginExtensionLoader($builder, $routeCollection);
         $extensionLoader->register();
         $extensionLoader->dumpRouting();
     }
 
     /**
-     * Compiles container and saves it as an optimized class
+     * Loads services configuration
      *
-     * @return void
+     * @param ContainerBuilder $builder
      */
-    protected function compileAndSaveContainer()
-    {
-        $this->containerBuilder->compile();
-
-        $dumper = new PhpDumper($this->containerBuilder);
-
-        $options = Array(
-            'class'      => self::SERVICE_CONTAINER_CLASS,
-            'base_class' => self::SERVICE_CONTAINER_BASE_CLASS,
-            'namespace'  => __NAMESPACE__
-        );
-
-        $content = $dumper->dump($options);
-
-        $this->containerConfigCache->write($content, $this->containerBuilder->getResources());
-    }
-
-    /**
-     * Initializes Container Builder instance
-     *
-     * @return void
-     */
-    protected function initContainerBuilder()
-    {
-        $parameterBag           = new ParameterBag($this->parameters);
-        $this->containerBuilder = new ContainerBuilder($parameterBag);
-    }
-
-    /**
-     * Loads services configuration and predefined parameters from XML config file
-     *
-     * @return void
-     */
-    protected function loadXmlConfiguration()
+    protected function loadConfiguration(ContainerBuilder $builder)
     {
         $locator = new FileLocator(ROOTPATH . 'config');
-        $loader  = new XmlFileLoader($this->containerBuilder, $locator);
+        $loader  = new XmlFileLoader($builder, $locator);
 
         $loader->load('parameters.xml');
         $loader->load('core.xml');
@@ -225,7 +236,7 @@ final class ServiceContainerBuilder
     }
 
     /**
-     * Registers Compiler passess used in process of compiling the container
+     * Registers Compiler passes used in process of compiling the container
      *
      * @param CompilerPassInterface $compilerPass
      *
