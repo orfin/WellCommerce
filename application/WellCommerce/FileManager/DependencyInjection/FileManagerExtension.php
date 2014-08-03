@@ -9,7 +9,7 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\File\DependencyInjection;
+namespace WellCommerce\FileManager\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\Config\FileLocator;
@@ -19,12 +19,12 @@ use Symfony\Component\Routing\RouteCollection;
 use WellCommerce\Core\DependencyInjection\AbstractExtension;
 
 /**
- * Class FileExtension
+ * Class FileManagerExtension
  *
- * @package WellCommerce\File\DependencyInjection
+ * @package WellCommerce\FileManager\DependencyInjection
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class FileExtension extends AbstractExtension
+class FileManagerExtension extends AbstractExtension
 {
 
     public function load(array $config, ContainerBuilder $container)
@@ -40,20 +40,20 @@ class FileExtension extends AbstractExtension
     {
         $extensionCollection = new RouteCollection();
 
-        $extensionCollection->add('admin.file.index', new Route('/index', array(
-            '_controller' => 'file.admin.controller:indexAction',
+        $extensionCollection->add('admin.file_manager.index', new Route('/index', array(
+            '_controller' => 'file_manager.admin.controller:indexAction',
         )));
 
-        $extensionCollection->add('admin.file.add', new Route('/add', array(
-            '_controller' => 'file.admin.controller:addAction',
+        $extensionCollection->add('admin.file_manager.add', new Route('/add', array(
+            '_controller' => 'file_manager.admin.controller:addAction',
         )));
 
-        $extensionCollection->add('admin.file.edit', new Route('/edit/{id}', array(
-            '_controller' => 'file.admin.controller:editAction',
+        $extensionCollection->add('admin.file_manager.edit', new Route('/edit/{id}', array(
+            '_controller' => 'file_manager.admin.controller:editAction',
             'id'          => null
         )));
 
-        $extensionCollection->addPrefix('/admin/file');
+        $extensionCollection->addPrefix('/admin/file_manager');
 
         $collection->addCollection($extensionCollection);
     }

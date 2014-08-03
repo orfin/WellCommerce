@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\File\Repository;
+namespace WellCommerce\FileManager\Repository;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -20,12 +20,12 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  * @package WellCommerce\File\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface FileRepositoryInterface
+interface FileManagerRepositoryInterface
 {
-    const PRE_DELETE_EVENT  = 'file.repository.pre_delete';
-    const POST_DELETE_EVENT = 'file.repository.post_delete';
-    const PRE_SAVE_EVENT    = 'file.repository.pre_save';
-    const POST_SAVE_EVENT   = 'file.repository.post_save';
+    const PRE_DELETE_EVENT  = 'file_manager.repository.pre_delete';
+    const POST_DELETE_EVENT = 'file_manager.repository.post_delete';
+    const PRE_SAVE_EVENT    = 'file_manager.repository.pre_save';
+    const POST_SAVE_EVENT   = 'file_manager.repository.post_save';
 
     /**
      * Returns all files as a collection
@@ -39,7 +39,7 @@ interface FileRepositoryInterface
      *
      * @param $id
      *
-     * @return \WellCommerce\File\Model\File
+     * @return \WellCommerce\FileManager\Model\File
      */
     public function find($id);
 

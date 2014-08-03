@@ -9,12 +9,10 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\File\DataGrid;
+namespace WellCommerce\FileManager\DataGrid;
 
-use Illuminate\Database\Capsule\Manager;
 use WellCommerce\Core\DataGrid\AbstractDataGrid;
 use WellCommerce\Core\DataGrid\Column\Column;
-use WellCommerce\Core\DataGrid\Column\ColumnCollection;
 use WellCommerce\Core\DataGrid\Column\ColumnInterface;
 use WellCommerce\Core\DataGrid\DataGridInterface;
 

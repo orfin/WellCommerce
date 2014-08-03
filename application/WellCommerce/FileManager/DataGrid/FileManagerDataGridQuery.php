@@ -10,18 +10,18 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\File\DataGrid;
+namespace WellCommerce\FileManager\DataGrid;
 
 use WellCommerce\Core\DataGrid\QueryBuilder\AbstractQueryBuilder;
 use WellCommerce\Core\DataGrid\QueryBuilder\QueryBuilderInterface;
 
 /**
- * Class FileDataGridQuery
+ * Class FileManagerDataGridQuery
  *
  * @package WellCommerce\File\DataGrid
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class FileDataGridQuery extends AbstractQueryBuilder implements QueryBuilderInterface
+class FileManagerDataGridQuery extends AbstractQueryBuilder implements QueryBuilderInterface
 {
     /**
      * {@inheritdoc}

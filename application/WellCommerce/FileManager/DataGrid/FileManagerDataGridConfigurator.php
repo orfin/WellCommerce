@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\File\DataGrid;
+namespace WellCommerce\FileManager\DataGrid;
 
 use Symfony\Component\Process\Process;
 use WellCommerce\Core\DataGrid\Configuration\EventHandler\DeleteRowEventHandler;
@@ -23,12 +23,12 @@ use WellCommerce\Core\DataGrid\Configurator\ConfiguratorInterface;
 use WellCommerce\Core\DataGrid\DataGridInterface;
 
 /**
- * Class FileDataGridConfigurator
+ * Class FileManagerDataGridConfigurator
  *
  * @package WellCommerce\File\DataGrid
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class FileDataGridConfigurator extends AbstractConfigurator implements ConfiguratorInterface
+class FileManagerDataGridConfigurator extends AbstractConfigurator implements ConfiguratorInterface
 {
     /**
      * {@inheritdoc}

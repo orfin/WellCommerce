@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="file_manager.admin.controller.class">WellCommerce\FileManager\Controller\Admin\FileManagerController</parameter>
+        <parameter key="file_manager.repository.class">WellCommerce\FileManager\Repository\FileManagerRepository</parameter>
+        <parameter key="file_manager.datagrid.class">WellCommerce\FileManager\DataGrid\FileManagerDataGrid</parameter>
+        <parameter key="file_manager.datagrid.configurator.class">WellCommerce\FileManager\DataGrid\FileManagerDataGridConfigurator</parameter>
+        <parameter key="file_manager.datagrid.query.class">WellCommerce\FileManager\DataGrid\FileManagerDataGridQuery</parameter>
+        <parameter key="file_manager.form.class">WellCommerce\FileManager\Form\FileManagerForm</parameter>
+        <parameter key="file_manager.listener.class">WellCommerce\FileManager\EventListener\FileManagerListener</parameter>
+        <parameter key="file_manager.uploader.class">WellCommerce\FileManager\Uploader\Uploader</parameter>
+        <parameter key="file_manager.gallery.image.class">WellCommerce\FileManager\Uploader\ImageGallery</parameter>
+    </parameters>
+
+    <services>
+        <service id="file_manager.admin.controller" class="%file_manager.admin.controller.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setRepository">
+                <argument type="service" id="file_manager.repository"/>
+            </call>
+        </service>
+
+        <service id="file_manager.repository" class="%file_manager.repository.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="file_manager.datagrid.query" class="%file_manager.datagrid.query.class%">
+            <argument type="service" id="database_manager"/>
+        </service>
+
+        <service id="file_manager.datagrid.configurator" class="%file_manager.datagrid.configurator.class%">
+            <argument key="identifier">file</argument>
+            <argument type="service" id="datagrid_options"/>
+            <argument type="service" id="datagrid_columns"/>
+            <argument type="service" id="file_manager.datagrid.query"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="file_manager.datagrid" class="%file_manager.datagrid.class%">
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="file_manager.repository"/>
+            <argument type="service" id="datagrid_loader"/>
+            <configurator service="file_manager.datagrid.configurator" method="configure"/>
+        </service>
+
+        <service id="file_manager.form" class="%file_manager.form.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="file_manager.listener" class="%file_manager.listener.class%">
+            <argument type="service" id="service_container"/>
+            <tag name="kernel.event_subscriber" />
+        </service>
+
+        <service id="file_manager.gallery.image" class="%file_manager.gallery.image.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setPaths">
+                <argument>%application.gallery_paths%</argument>
+            </call>
+            <call method="setFiles" />
+        </service>
+
+        <service id="file_manager.uploader" class="%file_manager.uploader.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setPaths">
+                <argument>%application.gallery_paths%</argument>
+            </call>
+        </service>
+    </services>
+</container>

@@ -9,7 +9,7 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\File\EventListener;
+namespace WellCommerce\FileManager\EventListener;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -18,12 +18,12 @@ use WellCommerce\AdminMenu\Builder\AdminMenuItem;
 use WellCommerce\AdminMenu\Event\AdminMenuInitEvent;
 
 /**
- * Class FileListener
+ * Class FileManagerListener
  *
- * @package WellCommerce\Category\EventListener
+ * @package WellCommerce\FileManager\EventListener
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class FileListener implements EventSubscriberInterface
+class FileManagerListener implements EventSubscriberInterface
 {
     /**
      * @var \Symfony\Component\DependencyInjection\ContainerInterface
@@ -42,8 +42,8 @@ class FileListener implements EventSubscriberInterface
         $builder->add(new AdminMenuItem([
             'id'         => 'file',
             'name'       => $this->container->get('translation')->trans('Files'),
-            'link'       => $this->container->get('router')->generate('admin.file.index'),
-            'path'       => '[menu][cms][file]',
+            'link'       => $this->container->get('router')->generate('admin.file_manager.index'),
+            'path'       => '[menu][cms][file_manager]',
             'sort_order' => 10
         ]));
     }

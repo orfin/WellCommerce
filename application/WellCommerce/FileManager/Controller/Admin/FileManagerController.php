@@ -9,19 +9,19 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\File\Controller\Admin;
+namespace WellCommerce\FileManager\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 use WellCommerce\Core\Controller\Admin\AbstractAdminController;
 use WellCommerce\File\Repository\FileRepositoryInterface;
 
 /**
- * Class FileController
+ * Class FileManagerController
  *
- * @package WellCommerce\File\Controller\Admin
+ * @package WellCommerce\FileManager\Controller\Admin
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class FileController extends AbstractAdminController
+class FileManagerController extends AbstractAdminController
 {
     /**
      * @var FileRepositoryInterface
@@ -34,7 +34,7 @@ class FileController extends AbstractAdminController
     public function indexAction()
     {
         return [
-            'datagrid' => $this->getDataGrid($this->get('file.datagrid'))
+            'datagrid' => $this->getDataGrid($this->get('file_manager.datagrid'))
         ];
     }
 

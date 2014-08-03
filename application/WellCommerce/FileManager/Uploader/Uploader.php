@@ -9,7 +9,7 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Core\Uploader;
+namespace WellCommerce\FileManager\Uploader;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\FileBag;
@@ -20,7 +20,7 @@ use WellCommerce\Core\AbstractComponent;
 /**
  * Class Uploader
  *
- * @package WellCommerce\Core
+ * @package WellCommerce\File\Uploader
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class Uploader extends AbstractComponent

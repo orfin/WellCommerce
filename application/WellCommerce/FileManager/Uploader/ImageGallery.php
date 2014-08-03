@@ -9,11 +9,17 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Core\Uploader;
+namespace WellCommerce\FileManager\Uploader;
 
 use Intervention\Image\Image;
 use WellCommerce\Core\AbstractComponent;
 
+/**
+ * Class ImageGallery
+ *
+ * @package WellCommerce\File\Uploader
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
+ */
 class ImageGallery extends AbstractComponent
 {
     protected $files;

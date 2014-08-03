@@ -9,12 +9,11 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\File\Repository;
+namespace WellCommerce\FileManager\Repository;
 
 use WellCommerce\Core\Repository\AbstractRepository;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use WellCommerce\Core\Repository\RepositoryInterface;
-use WellCommerce\File\Model\File;
+use WellCommerce\FileManager\Model\File;
 
 /**
  * Class FileAbstractRepository
@@ -22,7 +21,7 @@ use WellCommerce\File\Model\File;
  * @package WellCommerce\File\AbstractRepository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class FileRepository extends AbstractRepository implements FileRepositoryInterface
+class FileRepository extends AbstractRepository implements FileManagerRepositoryInterface
 {
     /**
      * {@inheritdoc}
@@ -47,7 +46,7 @@ class FileRepository extends AbstractRepository implements FileRepositoryInterfa
     {
         $file = $this->find($id);
         $file->delete();
-        $this->dispatchEvent(FileRepositoryInterface::POST_DELETE_EVENT, $file);
+        $this->dispatchEvent(FileManagerRepositoryInterface::POST_DELETE_EVENT, $file);
     }
 
     /**
@@ -71,9 +70,9 @@ class FileRepository extends AbstractRepository implements FileRepositoryInterfa
                 'id' => $id
             ]);
 
-            $data = $this->dispatchEvent(FileRepositoryInterface::PRE_SAVE_EVENT, $file, $data);
+            $data = $this->dispatchEvent(FileManagerRepositoryInterface::PRE_SAVE_EVENT, $file, $data);
             $file->update($data);
-            $this->dispatchEvent(FileRepositoryInterface::POST_SAVE_EVENT, $file, $data);
+            $this->dispatchEvent(FileManagerRepositoryInterface::POST_SAVE_EVENT, $file, $data);
 
             return $file;
         });
