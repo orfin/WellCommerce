@@ -58,7 +58,6 @@ class ProductDataGridConfigurator extends AbstractConfigurator implements Config
 
         $eventHandlers->add(new ClickRowEventHandler([
             'function'   => $this->getFunction('click'),
-            'row_action' => OptionInterface::ACTION_EDIT,
             'route'      => $this->generateUrl('admin.product.edit')
         ]));
 
