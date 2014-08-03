@@ -8,7 +8,7 @@ WellCommerce is an e-commerce platform for PHP 5.4+. It can be used to develop a
 
 The code is still hot but it only gets cooler :). Here are most important things which we have used to create this solution:
 
-- Symfony2 components as a base for customized application core
+- Symfony2 components as a solid foundation of application core
   - Config
   - Console
   - Debug
