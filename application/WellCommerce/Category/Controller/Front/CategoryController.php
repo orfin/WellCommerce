@@ -37,29 +37,19 @@ class CategoryController extends AbstractFrontController
 
         $this->getCategoryProvider()->setCurrent($category);
 
-        $collection = $this->get('product.collection')->get();
+        $dataset = $this->getDataSet($this->get('product.dataset'));
 
-        $datagrid = $this->createDataGrid($this->get('product.datagrid'));
-
-        $where   = [];
-        $where[] = [
-            'column'   => 'category_id',
-            'operator' => '=',
-            'value'    => 32
-        ];
-
-        $result = $datagrid->loadData([
-            'limit'         => 100,
+        $dataset->load([
             'starting_from' => 0,
+            'limit'         => 100,
             'order_by'      => 'product_translation.name',
-            'order_dir'     => 'ASC',
-            'where'         => $where
+            'order_dir'     => 'asc'
         ]);
-        print_r($result);
-        die();
+        $dataset->getRows();
 
         return [
-            'layout' => $this->renderLayout()
+            'layout'  => $this->renderLayout(),
+            'dataset' => $dataset,
         ];
     }
 
