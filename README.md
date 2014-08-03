@@ -2,7 +2,7 @@ README
 ======
 
 What is WellCommerce?
------------------
+---------------------
 
 WellCommerce is an e-commerce platform for PHP 5.4+. It can be used to develop all kind of shops and extend them in the way you like.
 
@@ -37,7 +37,7 @@ The code is still hot but it only gets cooler :). Here are most important things
 - Twitter Bootstrap 3 as a base HTML framework
 - ZF2 Cache component
 
-Although WellCommerce does not use Symfony2 Full-stack, every Symfony developer should feel here like home.
+Although WellCommerce does not use Symfony2 Full-Stack framework, every Symfony developer should feel here like home.
 
 Requirements
 ------------
