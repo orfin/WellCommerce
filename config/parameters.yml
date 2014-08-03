@@ -1,2 +1,10 @@
 wellcommerce_profiler:
     enabled:  false
+
+wellcommerce_core:
+    database:
+        host: localhost
+        name: geko3
+        user: root
+        pass:
+        port: 3006

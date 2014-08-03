@@ -165,7 +165,7 @@ final class ServiceContainerBuilder
             $this->loadConfiguration($containerBuilder);
 
             $this->registerCompilerPasses();
-            $this->dumpDatabaseColumns($containerBuilder);
+//            $this->dumpDatabaseColumns($containerBuilder);
 
             foreach ($this->compilerPasses as $compilerPass) {
                 $containerBuilder->addCompilerPass($compilerPass, PassConfig::TYPE_OPTIMIZE);
@@ -236,12 +236,6 @@ final class ServiceContainerBuilder
         $delegatingLoader = new DelegatingLoader($loaderResolver);
         $delegatingLoader->load('parameters.yml');
         $delegatingLoader->load('parameters.xml');
-        $delegatingLoader->load('core.xml');
-        $delegatingLoader->load('database.xml');
-        $delegatingLoader->load('datagrid.xml');
-        $delegatingLoader->load('routing.xml');
-        $delegatingLoader->load('session.xml');
-        $delegatingLoader->load('template.xml');
     }
 
     /**
