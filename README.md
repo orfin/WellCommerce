@@ -1,6 +1,8 @@
 README
 ======
 
+[![Build Status](https://travis-ci.org/WellCommerce/WellCommerce.svg?branch=development)](https://travis-ci.org/WellCommerce/WellCommerce) [![Dependencies Status](https://depending.in/WellCommerce/WellCommerce.png)](http://depending.in/WellCommerce/WellCommerce)
+
 What is WellCommerce?
 ---------------------
 
