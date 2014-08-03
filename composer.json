@@ -68,7 +68,8 @@
         "phpunit/phpunit": "4.2.x-dev",
         "codeception/codeception": "2.0.3",
         "incenteev/composer-parameter-handler": "2.1.x-dev",
-        "kriswallsmith/assetic": "1.1.x-dev"
+        "kriswallsmith/assetic": "1.1.x-dev",
+        "moxiecode/plupload": "v2.1.2"
     },
     "scripts": {
         "post-install-cmd": [
