@@ -83,7 +83,6 @@
             "file": "config/parameters.yml"
         }
     },
-    "optimize-autoloader": "true",
     "autoload": {
         "psr-0": {
             "WellCommerce": "application",
