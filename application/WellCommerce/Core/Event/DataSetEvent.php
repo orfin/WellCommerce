@@ -13,6 +13,7 @@ namespace WellCommerce\Core\Event;
 
 use Symfony\Component\EventDispatcher\Event;
 use WellCommerce\Core\DataGrid\DataGridInterface;
+use WellCommerce\Core\DataSet\DataSetInterface;
 
 /**
  * Class DataGridEvent
@@ -20,30 +21,30 @@ use WellCommerce\Core\DataGrid\DataGridInterface;
  * @package WellCommerce\Core\Event
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class DataGridEvent extends Event
+class DataSetEvent extends Event
 {
     /**
-     * @var \WellCommerce\Core\DataGrid\DataGridInterface
+     * @var \WellCommerce\Core\DataSet\DataSetInterface
      */
-    protected $datagrid;
+    protected $dataset;
 
     /**
      * Constructor
      *
-     * @param DataGridInterface $datagrid
+     * @param DataSetInterface $dataset
      */
-    public function __construct(DataGridInterface $datagrid)
+    public function __construct(DataSetInterface $dataset)
     {
-        $this->datagrid = $datagrid;
+        $this->dataset = $dataset;
     }
 
     /**
-     * Returns DataGrid
+     * Returns DataSet
      *
-     * @return DataGridInterface
+     * @return DataSetInterface
      */
-    public function getDataGrid()
+    public function getDataSet()
     {
-        return $this->datagrid;
+        return $this->dataset;
     }
 }

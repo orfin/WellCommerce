@@ -39,11 +39,6 @@ class Loader implements LoaderInterface
      */
     private $columns;
 
-    /**
-     * @var array
-     */
-    private $result;
-
     public function loadResults()
     {
         $request       = $this->dataGrid->getCurrentRequest();
@@ -129,10 +124,6 @@ class Loader implements LoaderInterface
         }
 
         return $rowData;
-    }
-
-    private function prepareSelectColumn($column){
-
     }
 
     public function transform($value)

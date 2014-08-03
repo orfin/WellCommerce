@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use WellCommerce\Core\AbstractComponent;
 use WellCommerce\Core\DataGrid\DataGridInterface;
+use WellCommerce\Core\DataSet\DataSetInterface;
 use WellCommerce\Core\Form\Builder\FormBuilderInterface;
 use WellCommerce\Core\Form\FormInterface;
 use WellCommerce\Core\Repository\RepositoryInterface;
@@ -64,6 +65,18 @@ abstract class AbstractController extends AbstractComponent
     public function getDataGrid(DataGridInterface $dataGrid)
     {
         return $this->get('datagrid_builder')->create($dataGrid);
+    }
+
+    /**
+     * Creates and returns the dataset
+     *
+     * @param DataSetInterface $dataSet DataSet instance
+     *
+     * @return \WellCommerce\Core\DataSet\DataSetInterface
+     */
+    public function getDataSet(DataSetInterface $dataSet)
+    {
+        return $this->get('dataset_builder')->create($dataSet);
     }
 
     /**

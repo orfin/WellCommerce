@@ -68,11 +68,8 @@ class AdminUserListener implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(
-            KernelEvents::REQUEST => [
-                'onKernelRequest',
-                -256
-            ]
-        );
+        return [
+            KernelEvents::REQUEST => ['onKernelRequest', -256]
+        ];
     }
 }

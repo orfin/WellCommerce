@@ -33,7 +33,7 @@ class ProfilerExtension extends AbstractExtension
     {
         $config = $this->processConfiguration(new Configuration(), $config);
 
-        if (false === $config['enabled']) {
+        if (!$this->isConfigEnabled($container, $config)) {
             return;
         }
 

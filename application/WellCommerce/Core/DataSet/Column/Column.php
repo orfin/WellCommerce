@@ -12,6 +12,9 @@
 
 namespace WellCommerce\Core\DataSet\Column;
 
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
 /**
  * Class Column
  *
@@ -34,35 +37,29 @@ class Column implements ColumnInterface
      */
     public function __construct(array $options)
     {
-        $this->options = $this->configureOptions($options);
+        $resolver = new OptionsResolver();
+        $this->configureOptions($resolver);
+        $this->options = $resolver->resolve($options);
     }
 
-    /**
-     * Configure column options
-     *
-     * @param array $options
-     *
-     * @return array
-     */
-    private function configureOptions(array $options)
+    public function configureOptions(OptionsResolverInterface $resolver)
     {
-        return array_replace_recursive([
-            'editable'         => false,
-            'selectable'       => false,
-            'process_function' => false,
-            'sorting'          => [
-                'default_order' => ColumnInterface::SORT_DIR_DESC
-            ],
-            'appearance'       => [
-                'visible' => true,
-                'width'   => ColumnInterface::WIDTH_AUTO,
-                'align'   => ColumnInterface::ALIGN_RIGHT
-            ],
-            'filter'           => [
-                'type' => ColumnInterface::FILTER_NONE
-            ],
-            'aggregated'       => false
-        ], $options);
+        $resolver->setRequired([
+            'id',
+            'source',
+        ]);
+
+        $resolver->setOptional([
+            'process_function',
+            'aggregated'
+        ]);
+
+        $resolver->setAllowedTypes([
+            'id'               => 'string',
+            'source'           => 'string',
+            'process_function' => 'string',
+            'aggregated'       => 'bool'
+        ]);
     }
 
     /**
@@ -71,22 +68,6 @@ class Column implements ColumnInterface
     public function getId()
     {
         return $this->options['id'];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getEditable()
-    {
-        return $this->options['editable'];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getSelectable()
-    {
-        return $this->options['selectable'];
     }
 
     /**
@@ -111,46 +92,6 @@ class Column implements ColumnInterface
     public function isAggregated()
     {
         return $this->options['aggregated'];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCaption()
-    {
-        return $this->options['caption'];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getSorting()
-    {
-        return $this->options['sorting'];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAppearance()
-    {
-        return $this->options['appearance'];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getFilter()
-    {
-        return $this->options['filter'];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getOptions()
-    {
-        return $this->options;
     }
 
     /**

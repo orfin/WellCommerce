@@ -56,7 +56,7 @@ class ColumnCollection implements \IteratorAggregate, \Countable
     }
 
     /**
-     * Adds new DataGrid column to collection
+     * Adds column to collection
      *
      * @param ColumnInterface $column
      */
@@ -66,7 +66,7 @@ class ColumnCollection implements \IteratorAggregate, \Countable
     }
 
     /**
-     * Returns DataGrid column by identifier
+     * Returns column by identifier
      *
      * @param $id
      *

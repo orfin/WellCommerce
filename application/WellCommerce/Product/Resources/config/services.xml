@@ -12,6 +12,9 @@
         <parameter key="product.datagrid.class">WellCommerce\Product\DataGrid\ProductDataGrid</parameter>
         <parameter key="product.datagrid.configurator.class">WellCommerce\Product\DataGrid\ProductDataGridConfigurator</parameter>
         <parameter key="product.datagrid.query.class">WellCommerce\Product\DataGrid\ProductDataGridQuery</parameter>
+        <parameter key="product.dataset.class">WellCommerce\Product\DataSet\ProductDataSet</parameter>
+        <parameter key="product.dataset.configurator.class">WellCommerce\Product\DataSet\ProductDataSetConfigurator</parameter>
+        <parameter key="product.dataset.query.class">WellCommerce\Product\DataSet\ProductDataSetQuery</parameter>
         <parameter key="product.form.class">WellCommerce\Product\Form\ProductForm</parameter>
         <parameter key="product.listener.class">WellCommerce\Product\EventListener\ProductListener</parameter>
         <parameter key="product.provider.class">WellCommerce\Product\Provider\ProductProvider</parameter>
@@ -78,6 +81,27 @@
             <argument type="service" id="product.repository"/>
             <argument type="service" id="datagrid_loader" />
             <configurator service="product.datagrid.configurator" method="configure" />
+        </service>
+
+        <service id="product.dataset.query" class="%product.dataset.query.class%">
+            <argument type="service" id="database_manager"/>
+        </service>
+
+        <service id="product.dataset.configurator" class="%product.dataset.configurator.class%">
+            <argument key="identifier">product</argument>
+            <argument type="service" id="dataset_columns" />
+            <argument type="service" id="product.dataset.query" />
+            <argument type="service" id="dataset_paginator" />
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="product.dataset" class="%product.dataset.class%">
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="product.repository"/>
+            <argument type="service" id="dataset_loader" />
+            <configurator service="product.dataset.configurator" method="configure" />
         </service>
 
         <service id="product.form" class="%product.form.class%">

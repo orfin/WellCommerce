@@ -32,37 +32,11 @@ interface RequestInterface
     public function configureOptions(OptionsResolverInterface $resolver);
 
     /**
-     * Returns start offset for results
+     * Returns DataSet option by its name
      *
-     * @return int
-     */
-    public function getStartingFrom();
-
-    /**
-     * Returns limit
-     *
-     * @return int
-     */
-    public function getLimit();
-
-    /**
-     * Returns column name used for sorting results
+     * @param $key
      *
      * @return mixed
      */
-    public function getOrderBy();
-
-    /**
-     * Returns the sorting direction
-     *
-     * @return string
-     */
-    public function getOrderDir();
-
-    /**
-     * Returns where conditions
-     *
-     * @return array
-     */
-    public function getWhere();
-} 
+    public function get($key);
+}

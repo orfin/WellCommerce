@@ -22,16 +22,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class Appearance extends AbstractOption implements OptionInterface
 {
-    protected $types
-        = [
-            'column_select'  => OptionInterface::TYPE_BOOLEAN,
-            'column_options' => OptionInterface::TYPE_BOOLEAN,
-            'header'         => OptionInterface::TYPE_BOOLEAN,
-            'filter'         => OptionInterface::TYPE_BOOLEAN,
-            'footer'         => OptionInterface::TYPE_BOOLEAN,
-            'max_height'     => OptionInterface::TYPE_NUMBER,
-        ];
-
     /**
      * {@inheritdoc}
      */

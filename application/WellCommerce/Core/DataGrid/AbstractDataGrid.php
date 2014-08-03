@@ -177,6 +177,4 @@ abstract class AbstractDataGrid extends AbstractComponent
 
         return $this->loader->getResults($this);
     }
-
-
 }
