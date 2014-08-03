@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\HttpKernel;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\TerminableInterface;
-use WellCommerce\Core\DependencyInjection\ServiceContainerBuilder;
+use WellCommerce\Core\DependencyInjection\Builder\ServiceContainerBuilder;
 
 /**
  * Class Application
@@ -131,9 +131,15 @@ class Application implements TerminableInterface, HttpKernelInterface
     protected function getKernelParameters()
     {
         return [
-            'application.root_path'   => ROOTPATH,
-            'application.debug'       => $this->debug,
-            'application.environment' => $this->environment
+            'application.root_path'     => ROOTPATH,
+            'application.debug'         => $this->debug,
+            'application.environment'   => $this->environment,
+            'application.design_path'   => ROOTPATH . 'design',
+            'application.themes_path'   => ROOTPATH . 'themes',
+            'application.gallery_paths' => [
+                'original' => 'upload/gallery/original',
+                'cache'    => 'upload/gallery/cache',
+            ]
         ];
     }
 }

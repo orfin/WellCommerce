@@ -18,7 +18,11 @@
         <service id="router" class="%router.class%">
             <argument type="service" id="router.loader"/>
             <argument></argument>
-            <argument>%router.options%</argument>
+            <argument type="collection">
+                <argument key="cache_dir">%router.cache_dir%</argument>
+                <argument key="generator_cache_class">%router.generator_cache_class%</argument>
+                <argument key="matcher_cache_class">%router.matcher_cache_class%</argument>
+            </argument>
         </service>
         
         <service id="router.subscriber" class="Symfony\Component\HttpKernel\EventListener\RouterListener">
@@ -32,6 +36,5 @@
         <service id="locale.listener" class="Symfony\Component\HttpKernel\EventListener\LocaleListener">
             <tag name="kernel.event_subscriber" />
         </service>
-		
     </services>
 </container>

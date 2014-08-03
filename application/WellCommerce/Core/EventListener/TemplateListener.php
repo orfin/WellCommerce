@@ -110,7 +110,7 @@ class TemplateListener implements EventSubscriberInterface
         $masterRequest = $this->container->get('request_stack')->getMasterRequest();
         $exception     = $event->getException();
         $response      = new Response();
-        $response->setContent($exception->getMessage());
+        $response->setContent($exception->getTraceAsString());
 
         if ($exception instanceof HttpExceptionInterface) {
             $response->setStatusCode($exception->getStatusCode());
@@ -130,11 +130,8 @@ class TemplateListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            KernelEvents::CONTROLLER => [
-                'onKernelController',
-                -128
-            ],
-            //            KernelEvents::EXCEPTION  => 'onKernelException',
+            KernelEvents::CONTROLLER => ['onKernelController', -128],
+//            KernelEvents::EXCEPTION  => 'onKernelException',
             KernelEvents::VIEW       => 'onKernelView'
         ];
     }

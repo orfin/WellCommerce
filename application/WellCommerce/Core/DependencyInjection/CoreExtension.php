@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Core\DependencyInjection;
 
+use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -30,15 +31,77 @@ class CoreExtension extends AbstractExtension
     /**
      * {@inheritdoc}
      */
-    public function load(array $config, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container)
     {
+        $configuration = $this->getConfiguration($configs, $container);
+        $config        = $this->processConfiguration($configuration, $configs);
+
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.xml');
-        $loader->load('database.xml');
         $loader->load('datagrid.xml');
         $loader->load('dataset.xml');
+
+        $this->registerDatabaseConfiguration($config['database'], $container, $loader);
+        $this->registerRouterConfiguration($config['router'], $container, $loader);
+        $this->registerSessionConfiguration($config['session'], $container, $loader);
+        $this->registerTemplateConfiguration($config['session'], $container, $loader);
+
+    }
+
+    private function registerDatabaseConfiguration($config, ContainerBuilder $container, LoaderInterface $loader)
+    {
+        $container->setParameter('database.driver', $config['driver']);
+        $container->setParameter('database.host', $config['host']);
+        $container->setParameter('database.database', $config['database']);
+        $container->setParameter('database.username', $config['username']);
+        $container->setParameter('database.password', $config['password']);
+        $container->setParameter('database.charset', $config['charset']);
+        $container->setParameter('database.collation', $config['collation']);
+        $container->setParameter('database.prefix', $config['prefix']);
+
+        $loader->load('database.xml');
+    }
+
+    /**
+     * Registers router configuration
+     *
+     * @param                  $config
+     * @param ContainerBuilder $container
+     * @param LoaderInterface  $loader
+     */
+    private function registerRouterConfiguration($config, ContainerBuilder $container, LoaderInterface $loader)
+    {
         $loader->load('routing.xml');
+
+        $container->setParameter('router.cache_dir', $config['cache_dir']);
+        $container->setParameter('router.generator_cache_class', $config['generator_cache_class']);
+        $container->setParameter('router.matcher_cache_class', $config['matcher_cache_class']);
+    }
+
+    /**
+     * Registers session configuration
+     *
+     * @param                  $config
+     * @param ContainerBuilder $container
+     * @param LoaderInterface  $loader
+     */
+    private function registerSessionConfiguration($config, ContainerBuilder $container, LoaderInterface $loader)
+    {
         $loader->load('session.xml');
+
+        $container->setParameter('session.db_table', $config['db_table']);
+    }
+
+    private function registerTemplateConfiguration($config, ContainerBuilder $container, LoaderInterface $loader)
+    {
+        $container->setParameter('front_themes', [
+            $container->getParameter('application.themes_path') . '/WellCommerce/templates'
+        ]);
+
+        $container->setParameter('admin_themes', [
+            $container->getParameter('application.design_path') . '/templates'
+        ]);
+
         $loader->load('template.xml');
     }
 

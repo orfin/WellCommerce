@@ -16,13 +16,11 @@
         <parameter key="http_kernel.class">Symfony\Component\HttpKernel\DependencyInjection\ContainerAwareHttpKernel</parameter>
         <parameter key="layout_manager.class">WellCommerce\Core\Layout\LayoutManager</parameter>
         <parameter key="layout_renderer.class">WellCommerce\Core\Layout\LayoutRenderer</parameter>
-        <parameter key="image_gallery.class">WellCommerce\Core\Uploader\ImageGallery</parameter>
-        <parameter key="translation.class">WellCommerce\Core\Translation\Translation</parameter>
         <parameter key="xajax_manager.class">WellCommerce\Core\Helper\XajaxManager</parameter>
-        <parameter key="uploader.class">WellCommerce\Core\Uploader\Uploader</parameter>
         <parameter key="xajax.class">xajax</parameter>
         <parameter key="request_stack.class">Symfony\Component\HttpFoundation\RequestStack</parameter>
         <parameter key="stopwatch.class">Symfony\Component\Stopwatch\Stopwatch</parameter>
+        <parameter key="translator.class">WellCommerce\Core\Translation\Translator</parameter>
     </parameters>
 
     <services>
@@ -53,7 +51,7 @@
         </service>
 
         <service id="encryption" class="%encryption.class%">
-            <argument>%security.encryption_key%</argument>
+            <argument>%secret%</argument>
         </service>
 
         <service id="helper" class="%helper.class%">
@@ -101,25 +99,6 @@
             <argument type="service" id="service_container"/>
         </service>
 
-        <service id="image_gallery" class="%image_gallery.class%">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <call method="setPaths">
-                <argument>%application.gallery_paths%</argument>
-            </call>
-            <call method="setFiles" />
-        </service>
-
-        <service id="uploader" class="%uploader.class%">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <call method="setPaths">
-                <argument>%application.gallery_paths%</argument>
-            </call>
-        </service>
-
         <service id="http_kernel" class="%http_kernel.class%">
             <argument type="service" id="event_dispatcher"/>
             <argument type="service" id="service_container"/>
@@ -131,14 +110,14 @@
 
         <service id="request_stack" class="%request_stack.class%" />
 
-        <service id="translation" class="%translation.class%">
-            <argument type="service" id="service_container"/>
-            <argument>%locale%</argument>
-        </service>
-
         <service id="admin_user_listener" class="WellCommerce\Core\EventListener\AdminUserListener">
             <argument type="service" id="service_container"/>
             <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="translator" class="%translator.class%">
+            <argument type="service" id="service_container"/>
+            <argument>%locale%</argument>
         </service>
     </services>
 </container>

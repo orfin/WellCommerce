@@ -14,7 +14,9 @@
 
         <service id="session.handler" class="%session.handler.class%">
         	<argument type="expression">service('database_manager').getConnection().getPdo()</argument>
-            <argument>%session.config%</argument>
+            <argument type="collection">
+                <argument key="db_table">%session.db_table%</argument>
+            </argument>
         </service>
 
         <service id="session.storage" class="%session.storage.class%">

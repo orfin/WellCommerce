@@ -85,7 +85,7 @@ abstract class AbstractComponent extends ContainerAware
      */
     final protected function trans($id)
     {
-        return $this->container->get('translation')->trans($id);
+        return $this->container->get('translator')->trans($id);
     }
 
     /**
@@ -141,7 +141,7 @@ abstract class AbstractComponent extends ContainerAware
     /**
      * Shortcut to return the request service
      *
-     * @return Request
+     * @return \Symfony\Component\HttpFoundation\Request
      */
     final protected function getRequest()
     {
@@ -353,11 +353,11 @@ abstract class AbstractComponent extends ContainerAware
     /**
      * Shortcut to get ImageGallery service
      *
-     * @return \WellCommerce\Core\Uploader\ImageGallery
+     * @return \WellCommerce\FileManager\Uploader\ImageGallery
      */
     final protected function getImageGallery()
     {
-        return $this->container->get('image_gallery');
+        return $this->container->get('file_manager.gallery.image');
     }
 
     /**
