@@ -69,6 +69,19 @@
         "codeception/codeception": "2.0.3",
         "incenteev/composer-parameter-handler": "2.1.x-dev"
     },
+    "scripts": {
+        "post-install-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
+        ],
+        "post-update-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
+        ]
+    },
+    "extra": {
+        "incenteev-parameters": {
+            "file": "config/parameters.yml"
+        }
+    },
     "optimize-autoloader": "true",
     "autoload": {
         "psr-0": {
