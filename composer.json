@@ -67,7 +67,8 @@
         "zendframework/zend-serializer": "2.3.0",
         "phpunit/phpunit": "4.2.x-dev",
         "codeception/codeception": "2.0.3",
-        "incenteev/composer-parameter-handler": "2.1.x-dev"
+        "incenteev/composer-parameter-handler": "2.1.x-dev",
+        "kriswallsmith/assetic": "1.1.x-dev"
     },
     "scripts": {
         "post-install-cmd": [
