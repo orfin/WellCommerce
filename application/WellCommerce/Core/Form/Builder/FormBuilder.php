@@ -14,6 +14,7 @@ namespace WellCommerce\Core\Form\Builder;
 
 use WellCommerce\Core\AbstractComponent;
 use WellCommerce\Core\Form\Conditions\ConditionInterface;
+use WellCommerce\Core\Form\Dependency;
 use WellCommerce\Core\Form\Elements\ElementInterface;
 use WellCommerce\Core\Form\FormInterface;
 use WellCommerce\Core\Form\Option;
@@ -52,10 +53,10 @@ class FormBuilder extends AbstractComponent implements FormBuilderInterface
      */
     public function create(FormInterface $form, ModelInterface $model = null, array $options)
     {
-        $this->form     = $form->buildForm($this, $options);
+        $this->options  = $options;
+        $this->form     = $form->buildForm($this, $this->options);
         $this->formData = (null === $model) ? [] : $form->prepareData($model);
         $this->dispatchEvent($this->getInitEventName($options['name']));
-        $this->options = $options;
         $this->form->populate($this->formData);
 
         return $this;
