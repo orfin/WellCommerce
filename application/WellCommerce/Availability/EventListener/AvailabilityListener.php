@@ -13,6 +13,8 @@ namespace WellCommerce\Availability\EventListener;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 use WellCommerce\Core\Event\AdminMenuEvent;
 use WellCommerce\AdminMenu\Builder\AdminMenuItem;
 use WellCommerce\AdminMenu\Event\AdminMenuInitEvent;
@@ -30,9 +32,21 @@ class AvailabilityListener implements EventSubscriberInterface
      */
     private $container;
 
-    public function __construct(ContainerInterface $container)
+    /**
+     * @var \Symfony\Component\Translation\TranslatorInterface
+     */
+    private $translator;
+
+    /**
+     * @var \Symfony\Component\Routing\RouterInterface
+     */
+    private $router;
+
+    public function __construct(ContainerInterface $container, TranslatorInterface $translator, RouterInterface $router)
     {
-        $this->container = $container;
+        $this->container  = $container;
+        $this->translator = $translator;
+        $this->router     = $router;
     }
 
     public function onAdminMenuInitEvent(AdminMenuEvent $event)
@@ -41,8 +55,8 @@ class AvailabilityListener implements EventSubscriberInterface
 
         $builder->add(new AdminMenuItem([
             'id'         => 'availability',
-            'name'       => $this->container->get('translation')->trans('Availability'),
-            'link'       => $this->container->get('router')->generate('admin.availability.index'),
+            'name'       => $this->translator->trans('Availability'),
+            'link'       => $this->router->generate('admin.availability.index'),
             'path'       => '[menu][configuration][availability]',
             'sort_order' => 10
         ]));
@@ -50,8 +64,8 @@ class AvailabilityListener implements EventSubscriberInterface
 
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             AdminMenuInitEvent::ADMIN_MENU_INIT_EVENT => 'onAdminMenuInitEvent'
-        );
+        ];
     }
 }

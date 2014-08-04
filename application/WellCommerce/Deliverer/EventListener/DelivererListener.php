@@ -13,6 +13,8 @@ namespace WellCommerce\Deliverer\EventListener;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 use WellCommerce\Core\Event\AdminMenuEvent;
 use WellCommerce\AdminMenu\Builder\AdminMenuItem;
 use WellCommerce\AdminMenu\Event\AdminMenuInitEvent;
@@ -30,9 +32,21 @@ class DelivererListener implements EventSubscriberInterface
      */
     private $container;
 
-    public function __construct(ContainerInterface $container)
+    /**
+     * @var \Symfony\Component\Translation\TranslatorInterface
+     */
+    private $translator;
+
+    /**
+     * @var \Symfony\Component\Routing\RouterInterface
+     */
+    private $router;
+
+    public function __construct(ContainerInterface $container, TranslatorInterface $translator, RouterInterface $router)
     {
-        $this->container = $container;
+        $this->container  = $container;
+        $this->translator = $translator;
+        $this->router     = $router;
     }
 
     public function onAdminMenuInitEvent(AdminMenuEvent $event)
@@ -41,8 +55,8 @@ class DelivererListener implements EventSubscriberInterface
 
         $builder->add(new AdminMenuItem([
             'id'         => 'deliverer',
-            'name'       => $this->container->get('translation')->trans('Deliverers'),
-            'link'       => $this->container->get('router')->generate('admin.deliverer.index'),
+            'name'       => $this->translator->trans('Deliverers'),
+            'link'       => $this->router->generate('admin.deliverer.index'),
             'path'       => '[menu][catalog][deliverer]',
             'sort_order' => 40
         ]));
@@ -50,8 +64,8 @@ class DelivererListener implements EventSubscriberInterface
 
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             AdminMenuInitEvent::ADMIN_MENU_INIT_EVENT => 'onAdminMenuInitEvent'
-        );
+        ];
     }
 }

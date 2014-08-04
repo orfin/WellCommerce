@@ -13,6 +13,8 @@ namespace WellCommerce\User\EventListener;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 use WellCommerce\Core\Event\AdminMenuEvent;
 use WellCommerce\AdminMenu\Builder\AdminMenuItem;
 use WellCommerce\AdminMenu\Event\AdminMenuInitEvent;
@@ -30,9 +32,21 @@ class UserListener implements EventSubscriberInterface
      */
     private $container;
 
-    public function __construct(ContainerInterface $container)
+    /**
+     * @var \Symfony\Component\Translation\TranslatorInterface
+     */
+    private $translator;
+
+    /**
+     * @var \Symfony\Component\Routing\RouterInterface
+     */
+    private $router;
+
+    public function __construct(ContainerInterface $container, TranslatorInterface $translator, RouterInterface $router)
     {
-        $this->container = $container;
+        $this->container  = $container;
+        $this->translator = $translator;
+        $this->router     = $router;
     }
 
     public function onAdminMenuInitEvent(AdminMenuEvent $event)
@@ -41,16 +55,16 @@ class UserListener implements EventSubscriberInterface
 
         $builder->add(new AdminMenuItem([
             'id'         => 'user',
-            'name'       => $this->container->get('translation')->trans('Users'),
-            'link'       => $this->container->get('router')->generate('admin.user.index'),
+            'name'       => $this->translator->trans('Users'),
+            'link'       => $this->router->generate('admin.user.index'),
             'path'       => '[menu][configuration][user_management][user]',
             'sort_order' => 10
         ]));
 
         $builder->add(new AdminMenuItem([
             'id'         => 'user_group',
-            'name'       => $this->container->get('translation')->trans('User groups'),
-            'link'       => $this->container->get('router')->generate('admin.user.index'),
+            'name'       => $this->translator->trans('User groups'),
+            'link'       => $this->router->generate('admin.user.index'),
             'path'       => '[menu][configuration][user_management][user_group]',
             'sort_order' => 20
         ]));
@@ -58,8 +72,8 @@ class UserListener implements EventSubscriberInterface
 
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             AdminMenuInitEvent::ADMIN_MENU_INIT_EVENT => 'onAdminMenuInitEvent'
-        );
+        ];
     }
 }

@@ -13,6 +13,8 @@ namespace WellCommerce\Language\EventListener;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 use WellCommerce\Core\Event\AdminMenuEvent;
 use WellCommerce\AdminMenu\Builder\AdminMenuItem;
 use WellCommerce\AdminMenu\Event\AdminMenuInitEvent;
@@ -25,16 +27,26 @@ use WellCommerce\AdminMenu\Event\AdminMenuInitEvent;
  */
 class LanguageListener implements EventSubscriberInterface
 {
+    /**
+     * @var \Symfony\Component\DependencyInjection\ContainerInterface
+     */
     private $container;
 
     /**
-     * Constructor
-     *
-     * @param ContainerInterface $container
+     * @var \Symfony\Component\Translation\TranslatorInterface
      */
-    public function __construct(ContainerInterface $container)
+    private $translator;
+
+    /**
+     * @var \Symfony\Component\Routing\RouterInterface
+     */
+    private $router;
+
+    public function __construct(ContainerInterface $container, TranslatorInterface $translator, RouterInterface $router)
     {
-        $this->container = $container;
+        $this->container  = $container;
+        $this->translator = $translator;
+        $this->router     = $router;
     }
 
     /**
@@ -48,8 +60,8 @@ class LanguageListener implements EventSubscriberInterface
 
         $builder->add(new AdminMenuItem([
             'id'         => 'language',
-            'name'       => $this->container->get('translation')->trans('Languages'),
-            'link'       => $this->container->get('router')->generate('admin.language.index'),
+            'name'       => $this->translator->trans('Languages'),
+            'link'       => $this->router->generate('admin.language.index'),
             'path'       => '[menu][configuration][localization][language]',
             'sort_order' => 10
         ]));

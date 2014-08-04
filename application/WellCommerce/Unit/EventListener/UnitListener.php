@@ -13,6 +13,8 @@ namespace WellCommerce\Unit\EventListener;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 use WellCommerce\Core\Event\AdminMenuEvent;
 use WellCommerce\AdminMenu\Builder\AdminMenuItem;
 use WellCommerce\AdminMenu\Event\AdminMenuInitEvent;
@@ -30,9 +32,21 @@ class UnitListener implements EventSubscriberInterface
      */
     private $container;
 
-    public function __construct(ContainerInterface $container)
+    /**
+     * @var \Symfony\Component\Translation\TranslatorInterface
+     */
+    private $translator;
+
+    /**
+     * @var \Symfony\Component\Routing\RouterInterface
+     */
+    private $router;
+
+    public function __construct(ContainerInterface $container, TranslatorInterface $translator, RouterInterface $router)
     {
-        $this->container = $container;
+        $this->container  = $container;
+        $this->translator = $translator;
+        $this->router     = $router;
     }
 
     public function onAdminMenuInitEvent(AdminMenuEvent $event)
@@ -41,8 +55,8 @@ class UnitListener implements EventSubscriberInterface
 
         $builder->add(new AdminMenuItem([
             'id'         => 'unit',
-            'name'       => $this->container->get('translation')->trans('Units'),
-            'link'       => $this->container->get('router')->generate('admin.unit.index'),
+            'name'       => $this->translator->trans('Units'),
+            'link'       => $this->router->generate('admin.unit.index'),
             'path'       => '[menu][configuration][unit]',
             'sort_order' => 10
         ]));
@@ -50,8 +64,8 @@ class UnitListener implements EventSubscriberInterface
 
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             AdminMenuInitEvent::ADMIN_MENU_INIT_EVENT => 'onAdminMenuInitEvent'
-        );
+        ];
     }
 }

@@ -13,6 +13,8 @@ namespace WellCommerce\Layout\EventListener;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 use WellCommerce\Core\Event\AdminMenuEvent;
 use WellCommerce\AdminMenu\Builder\AdminMenuItem;
 use WellCommerce\AdminMenu\Event\AdminMenuInitEvent;
@@ -30,9 +32,21 @@ class LayoutListener implements EventSubscriberInterface
      */
     private $container;
 
-    public function __construct(ContainerInterface $container)
+    /**
+     * @var \Symfony\Component\Translation\TranslatorInterface
+     */
+    private $translator;
+
+    /**
+     * @var \Symfony\Component\Routing\RouterInterface
+     */
+    private $router;
+
+    public function __construct(ContainerInterface $container, TranslatorInterface $translator, RouterInterface $router)
     {
-        $this->container = $container;
+        $this->container  = $container;
+        $this->translator = $translator;
+        $this->router     = $router;
     }
 
     public function onAdminMenuInitEvent(AdminMenuEvent $event)
@@ -41,24 +55,24 @@ class LayoutListener implements EventSubscriberInterface
 
         $builder->add(new AdminMenuItem([
             'id'         => 'theme',
-            'name'       => $this->container->get('translation')->trans('Themes'),
-            'link'       => $this->container->get('router')->generate('admin.layout_theme.index'),
+            'name'       => $this->translator->trans('Themes'),
+            'link'       => $this->router->generate('admin.layout_theme.index'),
             'path'       => '[menu][layout][theme]',
             'sort_order' => 10
         ]));
 
         $builder->add(new AdminMenuItem([
             'id'         => 'page',
-            'name'       => $this->container->get('translation')->trans('Pages'),
-            'link'       => $this->container->get('router')->generate('admin.layout_page.index'),
+            'name'       => $this->translator->trans('Pages'),
+            'link'       => $this->router->generate('admin.layout_page.index'),
             'path'       => '[menu][layout][page]',
             'sort_order' => 20
         ]));
 
         $builder->add(new AdminMenuItem([
             'id'         => 'box',
-            'name'       => $this->container->get('translation')->trans('Boxes'),
-            'link'       => $this->container->get('router')->generate('admin.layout_box.index'),
+            'name'       => $this->translator->trans('Boxes'),
+            'link'       => $this->router->generate('admin.layout_box.index'),
             'path'       => '[menu][layout][box]',
             'sort_order' => 30
         ]));
@@ -69,8 +83,8 @@ class LayoutListener implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             AdminMenuInitEvent::ADMIN_MENU_INIT_EVENT => 'onAdminMenuInitEvent'
-        );
+        ];
     }
 }

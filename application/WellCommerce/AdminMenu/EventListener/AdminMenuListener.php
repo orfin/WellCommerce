@@ -17,13 +17,11 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
-use WellCommerce\Core\DataGrid\Column\ColumnInterface;
-use WellCommerce\Core\DataGrid\Column\DataGridColumn;
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 use WellCommerce\AdminMenu\Builder\AdminMenuBuilder;
 use WellCommerce\AdminMenu\Builder\AdminMenuItem;
 use WellCommerce\AdminMenu\Event\AdminMenuInitEvent;
-use WellCommerce\Core\DataGrid\Configuration\Appearance;
-use WellCommerce\Core\Event\DataGridEvent;
 
 /**
  * Class AdminMenuListener
@@ -38,9 +36,21 @@ class AdminMenuListener implements EventSubscriberInterface
      */
     private $container;
 
-    public function __construct(ContainerInterface $container)
+    /**
+     * @var \Symfony\Component\Translation\TranslatorInterface
+     */
+    private $translator;
+
+    /**
+     * @var \Symfony\Component\Routing\RouterInterface
+     */
+    private $router;
+
+    public function __construct(ContainerInterface $container, TranslatorInterface $translator, RouterInterface $router)
     {
-        $this->container = $container;
+        $this->container  = $container;
+        $this->translator = $translator;
+        $this->router     = $router;
     }
 
     public function onKernelController(FilterControllerEvent $event)
@@ -57,8 +67,8 @@ class AdminMenuListener implements EventSubscriberInterface
             $builder->add(new AdminMenuItem([
                 'id'         => 'dashboard',
                 'class'      => 'dashboard',
-                'name'       => $this->container->get('translation')->trans('Dashboard'),
-                'link'       => $this->container->get('router')->generate('admin.dashboard.index'),
+                'name'       => $this->translator->trans('Dashboard'),
+                'link'       => $this->router->generate('admin.dashboard.index'),
                 'path'       => '[menu][dashboard]',
                 'sort_order' => 10,
             ]));
@@ -66,8 +76,8 @@ class AdminMenuListener implements EventSubscriberInterface
             $builder->add(new AdminMenuItem([
                 'id'         => 'catalog',
                 'class'      => 'catalog',
-                'name'       => $this->container->get('translation')->trans('Catalog'),
-                'link'       => $this->container->get('router')->generate('admin.product.index'),
+                'name'       => $this->translator->trans('Catalog'),
+                'link'       => $this->router->generate('admin.product.index'),
                 'path'       => '[menu][catalog]',
                 'sort_order' => 20
             ]));
@@ -75,8 +85,8 @@ class AdminMenuListener implements EventSubscriberInterface
             $builder->add(new AdminMenuItem([
                 'id'         => 'promotions',
                 'class'      => 'promotions',
-                'name'       => $this->container->get('translation')->trans('Promotions'),
-                'link'       => $this->container->get('router')->generate('admin.product.index'),
+                'name'       => $this->translator->trans('Promotions'),
+                'link'       => $this->router->generate('admin.product.index'),
                 'path'       => '[menu][promotions]',
                 'sort_order' => 30
             ]));
@@ -84,8 +94,8 @@ class AdminMenuListener implements EventSubscriberInterface
             $builder->add(new AdminMenuItem([
                 'id'         => 'sales',
                 'class'      => 'sales',
-                'name'       => $this->container->get('translation')->trans('Sales'),
-                'link'       => $this->container->get('router')->generate('admin.product.index'),
+                'name'       => $this->translator->trans('Sales'),
+                'link'       => $this->router->generate('admin.product.index'),
                 'path'       => '[menu][sales]',
                 'sort_order' => 40
             ]));
@@ -93,8 +103,8 @@ class AdminMenuListener implements EventSubscriberInterface
             $builder->add(new AdminMenuItem([
                 'id'         => 'reports',
                 'class'      => 'reports',
-                'name'       => $this->container->get('translation')->trans('Reports'),
-                'link'       => $this->container->get('router')->generate('admin.product.index'),
+                'name'       => $this->translator->trans('Reports'),
+                'link'       => $this->router->generate('admin.product.index'),
                 'path'       => '[menu][reports]',
                 'sort_order' => 50
             ]));
@@ -102,8 +112,8 @@ class AdminMenuListener implements EventSubscriberInterface
             $builder->add(new AdminMenuItem([
                 'id'         => 'crm',
                 'class'      => 'crm',
-                'name'       => $this->container->get('translation')->trans('CRM'),
-                'link'       => $this->container->get('router')->generate('admin.product.index'),
+                'name'       => $this->translator->trans('CRM'),
+                'link'       => $this->router->generate('admin.product.index'),
                 'path'       => '[menu][crm]',
                 'sort_order' => 60
             ]));
@@ -111,8 +121,8 @@ class AdminMenuListener implements EventSubscriberInterface
             $builder->add(new AdminMenuItem([
                 'id'         => 'cms',
                 'class'      => 'cms',
-                'name'       => $this->container->get('translation')->trans('CMS'),
-                'link'       => $this->container->get('router')->generate('admin.product.index'),
+                'name'       => $this->translator->trans('CMS'),
+                'link'       => $this->router->generate('admin.product.index'),
                 'path'       => '[menu][cms]',
                 'sort_order' => 70
             ]));
@@ -120,8 +130,8 @@ class AdminMenuListener implements EventSubscriberInterface
             $builder->add(new AdminMenuItem([
                 'id'         => 'layout',
                 'class'      => 'layout',
-                'name'       => $this->container->get('translation')->trans('Layout settings'),
-                'link'       => $this->container->get('router')->generate('admin.product.index'),
+                'name'       => $this->translator->trans('Layout settings'),
+                'link'       => $this->router->generate('admin.product.index'),
                 'path'       => '[menu][layout]',
                 'sort_order' => 80
             ]));
@@ -129,8 +139,8 @@ class AdminMenuListener implements EventSubscriberInterface
             $builder->add(new AdminMenuItem([
                 'id'         => 'integration',
                 'class'      => 'integration',
-                'name'       => $this->container->get('translation')->trans('Integration'),
-                'link'       => $this->container->get('router')->generate('admin.product.index'),
+                'name'       => $this->translator->trans('Integration'),
+                'link'       => $this->router->generate('admin.product.index'),
                 'path'       => '[menu][integration]',
                 'sort_order' => 90
             ]));
@@ -138,8 +148,8 @@ class AdminMenuListener implements EventSubscriberInterface
             $builder->add(new AdminMenuItem([
                 'id'         => 'configuration',
                 'class'      => 'configuration',
-                'name'       => $this->container->get('translation')->trans('Configuration'),
-                'link'       => $this->container->get('router')->generate('admin.product.index'),
+                'name'       => $this->translator->trans('Configuration'),
+                'link'       => $this->router->generate('admin.product.index'),
                 'path'       => '[menu][configuration]',
                 'sort_order' => 100
             ]));
@@ -147,7 +157,7 @@ class AdminMenuListener implements EventSubscriberInterface
             $builder->add(new AdminMenuItem([
                 'id'         => 'localization',
                 'class'      => 'localization',
-                'name'       => $this->container->get('translation')->trans('Localization'),
+                'name'       => $this->translator->trans('Localization'),
                 'link'       => '',
                 'path'       => '[menu][configuration][localization]',
                 'sort_order' => 10
@@ -156,7 +166,7 @@ class AdminMenuListener implements EventSubscriberInterface
             $builder->add(new AdminMenuItem([
                 'id'         => 'store_management',
                 'class'      => 'store_management',
-                'name'       => $this->container->get('translation')->trans('Store management'),
+                'name'       => $this->translator->trans('Store management'),
                 'link'       => '',
                 'path'       => '[menu][configuration][store_management]',
                 'sort_order' => 20
@@ -164,7 +174,7 @@ class AdminMenuListener implements EventSubscriberInterface
 
             $builder->add(new AdminMenuItem([
                 'id'         => 'user_management',
-                'name'       => $this->container->get('translation')->trans('User management'),
+                'name'       => $this->translator->trans('User management'),
                 'link'       => '',
                 'path'       => '[menu][configuration][user_management]',
                 'sort_order' => 30
@@ -180,88 +190,10 @@ class AdminMenuListener implements EventSubscriberInterface
         }
     }
 
-    public function onAvailabilityFormInitAction($event)
-    {
-        $form    = $event->getForm();
-        $data    = $event->getData();
-        $builder = $this->container->get('form_builder');
-
-        $form->getChild('required_data')->addChild($builder->addTextField([
-            'name'  => 'Admin',
-            'label' => 'Admin'
-        ]));
-
-        $additionalData = $form->addChild($builder->addFieldset([
-            'name'  => 'Additional',
-            'label' => 'Additional data'
-        ]));
-
-        $additionalData->addChild($builder->addTextField([
-            'name'  => 'Admin',
-            'label' => 'Admin'
-        ]));
-
-        $data['Additional']['Admin'] = 'adam';
-
-        $event->setData($data);
-    }
-
-    public function onAvailabilityFormSubmitAction($event)
-    {
-
-    }
-
-    public function onAvailabilityModelPreSaveAction(Event $event)
-    {
-    }
-
-    public function onAvailabilityModelPostSaveAction(Event $event)
-    {
-    }
-
-    public function onAvailabilityDataGridInitAction(DataGridEvent $event)
-    {
-//        $datagrid = $event->getDataGrid();
-//        $options  = $datagrid->getOptions();
-//
-//        $options->setAppearance(new Appearance(['header' =>true]));
-//
-//        $datagrid->setOptions($options);
-
-//        $options['foo'] = 1;
-//
-//        $datagrid->setOptions($options);
-//
-//        $collection = $datagrid->getColumnCollection();
-//
-//        $collection->add(new DataGridColumn([
-//            'id'         => 'test',
-//            'source'     => '1111',
-//            'caption'    => 'UD',
-//            'sorting'    => [
-//                'default_order' => ColumnInterface::SORT_DIR_DESC
-//            ],
-//            'appearance' => [
-//                'width' => 90,
-//            ],
-//            'filter'     => [
-//                'type' => ColumnInterface::FILTER_BETWEEN
-//            ]
-//        ]));
-    }
-
     public static function getSubscribedEvents()
     {
-        return array(
-            KernelEvents::CONTROLLER => array(
-                'onKernelController',
-                -256
-            ),
-            //            'availability.form.init'   => 'onAvailabilityFormInitAction',
-            //            'availability.form.submit' => 'onAvailabilityFormSubmitAction'
-            //            AvailabilityRepositoryInterface::PRE_SAVE_EVENT  => 'onAvailabilityModelPreSaveAction',
-            //            AvailabilityRepositoryInterface::POST_SAVE_EVENT => 'onAvailabilityModelPostSaveAction'
-                        'availability.datagrid.init' => 'onAvailabilityDataGridInitAction'
-        );
+        return [
+            KernelEvents::CONTROLLER => ['onKernelController', -256],
+        ];
     }
 }
