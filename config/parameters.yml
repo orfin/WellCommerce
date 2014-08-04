@@ -1,0 +1,18 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_driver: mysql
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: 
+    database_user: root
+    database_pass: null
+    database_prefix: null
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    locale: en_EN
+    timezone: Europe/London
+    secret: abcdefghijklmnoprstuwxyz12345678
+    profiler: false
+    session_db_table: session
