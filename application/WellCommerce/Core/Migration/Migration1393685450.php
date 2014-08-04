@@ -11,6 +11,7 @@
  */
 namespace WellCommerce\Core\Migration;
 
+use Illuminate\Database\Schema\Blueprint;
 use WellCommerce\Core\Migration;
 
 /**
@@ -19,7 +20,7 @@ use WellCommerce\Core\Migration;
  * This class has been auto-generated
  * by the WellCommerce Console migrate:add command
  */
-class Migration1393685450 extends Migration implements MigrationInterface
+class Migration1393685450 extends AbstractMigration implements MigrationInterface
 {
     public function up()
     {
@@ -27,7 +28,7 @@ class Migration1393685450 extends Migration implements MigrationInterface
          * Create unit table
         */
         if (!$this->getDb()->schema()->hasTable('unit')) {
-            $this->getDb()->schema()->create('unit', function ($table) {
+            $this->getDb()->schema()->create('unit', function (Blueprint $table) {
                 $table->increments('id');
                 $table->timestamps();
             });
@@ -37,7 +38,7 @@ class Migration1393685450 extends Migration implements MigrationInterface
          * Create unit_translation table
          */
         if (!$this->getDb()->schema()->hasTable('unit_translation')) {
-            $this->getDb()->schema()->create('unit_translation', function ($table) {
+            $this->getDb()->schema()->create('unit_translation', function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('name', 64);
                 $table->integer('unit_id')->unsigned();

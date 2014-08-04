@@ -11,6 +11,7 @@
  */
 namespace WellCommerce\Core\Migration;
 
+use Illuminate\Database\Schema\Blueprint;
 use WellCommerce\Core\Migration;
 
 /**
@@ -27,7 +28,7 @@ class Migration1393675136 extends Migration implements MigrationInterface
          * Create company table
         */
         if (!$this->getDb()->schema()->hasTable('company')) {
-            $this->getDb()->schema()->create('company', function ($table) {
+            $this->getDb()->schema()->create('company', function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('name', 255);
                 $table->string('short_name', 255);

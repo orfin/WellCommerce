@@ -11,6 +11,7 @@
  */
 namespace WellCommerce\Core\Migration;
 
+use Illuminate\Database\Schema\Blueprint;
 use WellCommerce\Core\Migration;
 
 /**
@@ -25,7 +26,7 @@ class Migration1393512866 extends Migration implements MigrationInterface
     public function up()
     {
         if (!$this->getDb()->schema()->hasTable('language')) {
-            $this->getDb()->schema()->create('language', function ($table) {
+            $this->getDb()->schema()->create('language', function (Blueprint $table) {
                 $table->increments('id');
                 $table->timestamps();
                 $table->string('name', 12)->unique();

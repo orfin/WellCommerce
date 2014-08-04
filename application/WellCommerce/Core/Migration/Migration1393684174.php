@@ -11,6 +11,7 @@
  */
 namespace WellCommerce\Core\Migration;
 
+use Illuminate\Database\Schema\Blueprint;
 use WellCommerce\Core\Migration;
 
 /**
@@ -27,7 +28,7 @@ class Migration1393684174 extends Migration implements MigrationInterface
          * Create shop table
         */
         if (!$this->getDb()->schema()->hasTable('shop')) {
-            $this->getDb()->schema()->create('shop', function ($table) {
+            $this->getDb()->schema()->create('shop', function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('url', 255);
                 $table->integer('offline')->default(0);
@@ -41,7 +42,7 @@ class Migration1393684174 extends Migration implements MigrationInterface
          * Create shop_translation table
          */
         if (!$this->getDb()->schema()->hasTable('shop_translation')) {
-            $this->getDb()->schema()->create('shop_translation', function ($table) {
+            $this->getDb()->schema()->create('shop_translation', function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('name', 64);
                 $table->text('meta_keywords');

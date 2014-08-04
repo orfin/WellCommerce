@@ -11,6 +11,7 @@
  */
 namespace WellCommerce\Core\Migration;
 
+use Illuminate\Database\Schema\Blueprint;
 use WellCommerce\Core\Migration;
 
 /**
@@ -28,7 +29,7 @@ class Migration1393537998 extends Migration implements MigrationInterface
          * Create tax table
         */
         if (!$this->getDb()->schema()->hasTable('tax')) {
-            $this->getDb()->schema()->create('tax', function ($table) {
+            $this->getDb()->schema()->create('tax', function (Blueprint $table) {
                 $table->increments('id');
                 $table->decimal('value')->unique();
                 $table->timestamps();
@@ -39,7 +40,7 @@ class Migration1393537998 extends Migration implements MigrationInterface
          * Create tax_translation table
          */
         if (!$this->getDb()->schema()->hasTable('tax_translation')) {
-            $this->getDb()->schema()->create('tax_translation', function ($table) {
+            $this->getDb()->schema()->create('tax_translation', function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('name', 64);
                 $table->integer('tax_id')->unsigned();

@@ -11,6 +11,7 @@
  */
 namespace WellCommerce\Core\Migration;
 
+use Illuminate\Database\Schema\Blueprint;
 use WellCommerce\Core\Migration;
 
 /**
@@ -27,7 +28,7 @@ class Migration1393608880 extends Migration implements MigrationInterface
          * Create category table
          */
         if (!$this->getDb()->schema()->hasTable('category')) {
-            $this->getDb()->schema()->create('category', function ($table) {
+            $this->getDb()->schema()->create('category', function (Blueprint $table) {
                 $table->increments('id');
                 $table->integer('hierarchy')->unsigned()->default(0);
                 $table->integer('enabled')->default(1);
@@ -43,7 +44,7 @@ class Migration1393608880 extends Migration implements MigrationInterface
          * Create category_translation table
          */
         if (!$this->getDb()->schema()->hasTable('category_translation')) {
-            $this->getDb()->schema()->create('category_translation', function ($table) {
+            $this->getDb()->schema()->create('category_translation', function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('name', 255);
                 $table->string('slug', 255);

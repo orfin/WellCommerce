@@ -11,6 +11,7 @@
  */
 namespace WellCommerce\Core\Migration;
 
+use Illuminate\Database\Schema\Blueprint;
 use WellCommerce\Core\Migration;
 
 /**
@@ -27,7 +28,7 @@ class Migration1393600715 extends Migration implements MigrationInterface
          * Create deliverer table
         */
         if (!$this->getDb()->schema()->hasTable('deliverer')) {
-            $this->getDb()->schema()->create('deliverer', function ($table) {
+            $this->getDb()->schema()->create('deliverer', function (Blueprint $table) {
                 $table->increments('id');
                 $table->timestamps();
             });
@@ -37,7 +38,7 @@ class Migration1393600715 extends Migration implements MigrationInterface
          * Create deliverer_translation table
          */
         if (!$this->getDb()->schema()->hasTable('deliverer_translation')) {
-            $this->getDb()->schema()->create('deliverer_translation', function ($table) {
+            $this->getDb()->schema()->create('deliverer_translation', function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('name', 64);
                 $table->integer('deliverer_id')->unsigned();

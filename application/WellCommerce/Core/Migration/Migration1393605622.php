@@ -11,6 +11,7 @@
  */
 namespace WellCommerce\Core\Migration;
 
+use Illuminate\Database\Schema\Blueprint;
 use WellCommerce\Core\Migration;
 
 /**
@@ -27,7 +28,7 @@ class Migration1393605622 extends Migration implements MigrationInterface
          * Create file table
         */
         if (!$this->getDb()->schema()->hasTable('file')) {
-            $this->getDb()->schema()->create('file', function ($table) {
+            $this->getDb()->schema()->create('file', function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('name', 255);
                 $table->string('extension', 12);

@@ -11,6 +11,7 @@
  */
 namespace WellCommerce\Core\Migration;
 
+use Illuminate\Database\Schema\Blueprint;
 use WellCommerce\Core\Migration;
 
 /**
@@ -27,7 +28,7 @@ class Migration1393625996 extends Migration implements MigrationInterface
          * Create availability table
         */
         if (!$this->getDb()->schema()->hasTable('availability')) {
-            $this->getDb()->schema()->create('availability', function ($table) {
+            $this->getDb()->schema()->create('availability', function (Blueprint $table) {
                 $table->increments('id');
                 $table->timestamps();
             });
@@ -37,7 +38,7 @@ class Migration1393625996 extends Migration implements MigrationInterface
          * Create availability_translation table
          */
         if (!$this->getDb()->schema()->hasTable('availability_translation')) {
-            $this->getDb()->schema()->create('availability_translation', function ($table) {
+            $this->getDb()->schema()->create('availability_translation', function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('name', 64);
                 $table->text('description');
