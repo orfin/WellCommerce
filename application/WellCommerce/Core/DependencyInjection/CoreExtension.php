@@ -18,7 +18,6 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
-use WellCommerce\Core\DependencyInjection\AbstractExtension;
 
 /**
  * Class CoreExtension
@@ -45,9 +44,15 @@ class CoreExtension extends AbstractExtension
         $this->registerRouterConfiguration($config['router'], $container, $loader);
         $this->registerSessionConfiguration($config['session'], $container, $loader);
         $this->registerTemplateConfiguration($config['session'], $container, $loader);
-
     }
 
+    /**
+     * Registers database configuration
+     *
+     * @param                  $config
+     * @param ContainerBuilder $container
+     * @param LoaderInterface  $loader
+     */
     private function registerDatabaseConfiguration($config, ContainerBuilder $container, LoaderInterface $loader)
     {
         $container->setParameter('database.driver', $config['driver']);
@@ -92,6 +97,13 @@ class CoreExtension extends AbstractExtension
         $container->setParameter('session.db_table', $config['db_table']);
     }
 
+    /**
+     * Registers template configuration
+     *
+     * @param                  $config
+     * @param ContainerBuilder $container
+     * @param LoaderInterface  $loader
+     */
     private function registerTemplateConfiguration($config, ContainerBuilder $container, LoaderInterface $loader)
     {
         $container->setParameter('front_themes', [
