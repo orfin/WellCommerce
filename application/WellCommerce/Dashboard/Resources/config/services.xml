@@ -8,14 +8,12 @@
     </parameters>
 
     <services>
-        <!-- Repository -->
         <service id="dashboard.repository" class="WellCommerce\Dashboard\Repository\DashboardRepository">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <!-- Controller -->
         <service id="dashboard.admin.controller" class="%dashboard.admin.controller.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>

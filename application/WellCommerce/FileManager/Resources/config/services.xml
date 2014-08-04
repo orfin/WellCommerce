@@ -60,6 +60,8 @@
 
         <service id="file_manager.listener" class="%file_manager.listener.class%">
             <argument type="service" id="service_container"/>
+            <argument type="service" id="translator"/>
+            <argument type="service" id="router"/>
             <tag name="kernel.event_subscriber" />
         </service>
 
