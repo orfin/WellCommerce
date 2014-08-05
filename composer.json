@@ -1,9 +1,9 @@
 {
     "name": "wellcommerce/wellcommerce",
-    "description": "E-commerce platform",
+    "license": "OSL-3.0",
+    "type": "project",
+    "description": "WellCommerce Open-Source edition",
     "keywords": ["symfony","e-commerce","open-source"],
-    "minimum-stability": "dev",
-    "homepage": "http://wellcommerce.org",
     "authors": [
         {
             "name": "Adam Piotrowski",
@@ -19,78 +19,62 @@
         "issues": "https://github.com/WellCommerce/WellCommerce/issues",
         "source": "https://github.com/WellCommerce/WellCommerce/"
     },
-    "license": "OSL-3.0",
-    "repositories": [
-        {
-            "type": "package",
-            "package": {
-                "name": "xajax/xajax",
-                "version": "1.0.0",
-                "dist": {
-                    "url": "http://www.gekosale.pl/packages/Xajax.zip",
-                    "type": "zip"
-                }
-            }
-        }
-    ],
+    "autoload": {
+        "psr-0": { "": "src/", "SymfonyStandard": "app/" }
+    },
     "require": {
-        "php": ">=5.4.0",
-        "symfony/config": "2.6.x-dev",
-        "symfony/console": "2.6.x-dev",
-        "symfony/debug": "2.6.x-dev",
-        "symfony/dependency-injection": "2.6.x-dev",
-        "symfony/expression-language": "2.6.x-dev",
-        "symfony/event-dispatcher": "2.6.x-dev",
-        "symfony/filesystem": "2.6.x-dev",
-        "symfony/finder": "2.6.x-dev",
-        "symfony/http-foundation": "2.6.x-dev",
-        "symfony/http-kernel": "2.6.x-dev",
-        "symfony/intl": "2.6.x-dev",
-        "symfony/options-resolver": "2.6.x-dev",
-        "symfony/process": "2.6.x-dev",
-        "symfony/property-access": "2.6.x-dev",
-        "symfony/routing": "2.6.x-dev",
-        "symfony/serializer": "2.5.x-dev",
-        "symfony/stopwatch": "2.6.x-dev",
-        "symfony/translation": "2.6.x-dev",
-        "symfony/twig-bridge": "2.4.x-dev",
-        "symfony/validator": "2.5.x-dev",
-        "symfony/yaml": "2.6.x-dev",
-        "monolog/monolog": "1.7.0",
-        "twig/extensions": "1.1.*@dev",
-        "illuminate/database": "4.3.*@dev",
-        "xajax/xajax": "1.0.0",
-        "intervention/image": "1.6.0",
-        "intervention/imagecache": "0.6.0",
-        "hautelook/phpass": "0.3.0",
-        "zendframework/zend-cache": "2.3.0",
-        "zendframework/zend-serializer": "2.3.0",
-        "phpunit/phpunit": "4.2.x-dev",
-        "codeception/codeception": "2.0.3",
-        "incenteev/composer-parameter-handler": "2.1.x-dev",
-        "kriswallsmith/assetic": "1.1.x-dev",
-        "moxiecode/plupload": "v2.1.2"
+        "php": ">=5.3.3",
+        "symfony/symfony": "2.5.*",
+        "doctrine/orm": "~2.2,>=2.2.3",
+        "doctrine/doctrine-bundle": "~1.2",
+        "twig/extensions": "~1.0",
+        "symfony/assetic-bundle": "~2.3",
+        "symfony/swiftmailer-bundle": "~2.3",
+        "symfony/monolog-bundle": "~2.4",
+        "sensio/distribution-bundle": "~3.0",
+        "sensio/framework-extra-bundle": "~3.0",
+        "incenteev/composer-parameter-handler": "~2.0"
+    },
+    "require-dev": {
+        "sensio/generator-bundle": "~2.3"
     },
     "scripts": {
+        "post-root-package-install": [
+            "SymfonyStandard\\Composer::hookRootPackageInstall"
+        ],
         "post-install-cmd": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles"
         ],
         "post-update-cmd": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles"
         ]
     },
-    "extra": {
-        "incenteev-parameters": {
-            "file": "config/parameters.yml"
-        }
-    },
     "autoload": {
-        "psr-0": {
-            "WellCommerce": "application",
-            "": "application/"
+        "psr-0": { "WellCommerce\\": "src/" }
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "extra": {
+        "symfony-app-dir": "app",
+        "symfony-web-dir": "web",
+        "incenteev-parameters": {
+            "symfony-app-dir": "app",
+            "symfony-web-dir": "web",
+            "file": "app/config/parameters.yml"
         },
-        "classmap": [
-        	"vendor/xajax/xajax"
-       	]
+        "branch-alias": {
+            "dev-master": "2.5-dev"
+        }
     }
 }
