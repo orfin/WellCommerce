@@ -1,0 +1,4 @@
+well_commerce_core:
+    resource: "@WellCommerceCoreBundle/Resources/config/routing.xml"
+    prefix:   /
+
