@@ -2,7 +2,7 @@ README
 ======
 
 [![Build Status](https://travis-ci.org/WellCommerce/WellCommerce.svg?branch=development)](https://travis-ci.org/WellCommerce/WellCommerce)
-[![Dependencies Status](https://depending.in/WellCommerce/WellCommerce.png)](http://depending.in/WellCommerce/WellCommerce)
+[![Latest Stable Version](https://poser.pugx.org/wellcommerce/wellcommerce/v/stable.svg)](https://packagist.org/packages/wellcommerce/wellcommerce) [![Total Downloads](https://poser.pugx.org/wellcommerce/wellcommerce/downloads.svg)](https://packagist.org/packages/wellcommerce/wellcommerce) [![Latest Unstable Version](https://poser.pugx.org/wellcommerce/wellcommerce/v/unstable.svg)](https://packagist.org/packages/wellcommerce/wellcommerce) [![License](https://poser.pugx.org/wellcommerce/wellcommerce/license.svg)](https://packagist.org/packages/wellcommerce/wellcommerce)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/a6f6c588-b8a5-4e82-937e-17ccce617f35/mini.png)](https://insight.sensiolabs.com/projects/a6f6c588-b8a5-4e82-937e-17ccce617f35)
 
 What is WellCommerce?
