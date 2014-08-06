@@ -12,8 +12,8 @@
 namespace WellCommerce\Bundle\CoreBundle\Twig\Extension;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use WellCommerce\Core\Form\Elements\Form;
-use WellCommerce\Core\Form\FormInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 
 /**
  * Class FormExtension
@@ -48,9 +48,9 @@ class FormExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            new \Twig_SimpleFunction('form', array(
+            new \Twig_SimpleFunction('form_javascript', array(
                 $this,
-                'render'
+                'getJavascript'
             ), array(
                 'is_safe' => Array(
                     'html'
@@ -60,20 +60,13 @@ class FormExtension extends \Twig_Extension
     }
 
     /**
-     * Renders the form
-     *
-     * @param Form $form
+     * @param FormInterface $form
      *
      * @return mixed
      */
-    public function render(Form $form)
+    public function getJavascript(FormView $form)
     {
-        return $this->container->get('twig')->render('form.html.twig', [
-            'attributes' => $form->getAttributes(),
-            'children'   => $form->renderChildren(),
-            'values'     => $form->getValues(),
-            'errors'     => $form->getErrors(),
-        ]);
+
     }
 
     /**
@@ -83,6 +76,6 @@ class FormExtension extends \Twig_Extension
      */
     public function getName()
     {
-        return 'form';
+        return 'wellcommerce.form';
     }
 }

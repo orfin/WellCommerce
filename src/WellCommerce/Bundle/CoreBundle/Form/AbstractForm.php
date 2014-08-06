@@ -22,4 +22,7 @@ use WellCommerce\Bundle\CoreBundle\AbstractComponent;
 class AbstractForm extends AbstractComponent
 {
 
+    public function getJavascript(){
+
+    }
 }

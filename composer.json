@@ -1,7 +1,7 @@
 {
     "name": "wellcommerce/wellcommerce",
     "license": "OSL-3.0",
-    "type": "project",
+    "minimum-stability": "dev",
     "description": "WellCommerce Open-Source edition",
     "keywords": ["symfony","e-commerce","open-source"],
     "authors": [
@@ -27,6 +27,8 @@
         "symfony/symfony": "2.5.*",
         "doctrine/orm": "~2.2,>=2.2.3",
         "doctrine/doctrine-bundle": "~1.2",
+        "doctrine/migrations": "dev-master",
+        "doctrine/doctrine-migrations-bundle": "dev-master",
         "twig/extensions": "~1.0",
         "symfony/assetic-bundle": "~2.3",
         "symfony/swiftmailer-bundle": "~2.3",
@@ -37,7 +39,8 @@
         "illuminate/database": "4.2.x-dev",
         "zendframework/zend-cache": "2.3.0",
         "zendframework/zend-serializer": "2.3.0",
-        "moxiecode/plupload": "v2.1.2"
+        "moxiecode/plupload": "v2.1.2",
+        "gedmo/doctrine-extensions": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

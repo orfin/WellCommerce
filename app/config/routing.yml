@@ -1,4 +1,13 @@
-well_commerce_core:
+wellcommerce_company:
+    resource: "@WellCommerceCompanyBundle/Controller/Admin/"
+    type:     annotation
+    prefix:   /admin
+
+wellcommerce_tax:
+    resource: "@WellCommerceTaxBundle/Controller"
+    type:     annotation
+
+wellcommerce_core:
     resource: "@WellCommerceCoreBundle/Resources/config/routing.xml"
     prefix:   /
 
