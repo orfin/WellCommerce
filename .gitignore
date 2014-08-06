@@ -1,4 +1,7 @@
 web/bundles/
+web/css/
+web/js/
+web/js/compiled/
 app/bootstrap.php.cache
 /app/cache/*
 /app/cache/dev/*
@@ -15,3 +18,4 @@ app/bootstrap.php.cache
 /upload
 /var
 /tests/_output
+
