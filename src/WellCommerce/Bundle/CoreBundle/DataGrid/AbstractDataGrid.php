@@ -22,6 +22,7 @@ use WellCommerce\Bundle\CoreBundle\DataGrid\Options\OptionsInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\QueryBuilder\QueryBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Request\Request;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Request\RequestInterface;
+use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 use xajaxResponse;
 
 /**
@@ -37,7 +38,7 @@ abstract class AbstractDataGrid extends AbstractComponent
      */
     protected $columns;
     protected $identifier;
-    protected $em;
+    protected $repository;
     protected $loader;
     protected $options;
     protected $queryBuilder;
@@ -47,15 +48,15 @@ abstract class AbstractDataGrid extends AbstractComponent
     /**
      * Constructor
      *
-     * @param ContainerInterface $container
-     * @param EntityRepository   $repository
-     * @param LoaderInterface    $loader
+     * @param ContainerInterface  $container
+     * @param RepositoryInterface $repository
+     * @param LoaderInterface     $loader
      */
-    public function __construct(ContainerInterface $container, EntityManager $em, LoaderInterface $loader)
+    public function __construct(ContainerInterface $container, RepositoryInterface $repository, LoaderInterface $loader)
     {
-        $this->container = $container;
-        $this->em        = $em;
-        $this->loader    = $loader;
+        $this->container  = $container;
+        $this->repository = $repository;
+        $this->loader     = $loader;
     }
 
     public function setColumns(ColumnCollection $columns)

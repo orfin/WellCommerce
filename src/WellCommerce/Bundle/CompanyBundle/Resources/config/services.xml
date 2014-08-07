@@ -19,6 +19,10 @@
             </call>
         </service>
 
+        <service id="company.repository" class="%company.repository.class%" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceCompanyBundle:Company</argument>
+        </service>
+
         <service id="company.datagrid.configurator" class="%company.datagrid.configurator.class%">
             <argument key="identifier">company</argument>
             <argument type="service" id="datagrid_options" />
@@ -30,7 +34,7 @@
 
         <service id="company.datagrid" class="%company.datagrid.class%">
             <argument type="service" id="service_container"/>
-            <argument type="service" id="doctrine.orm.entity_manager"/>
+            <argument type="service" id="company.repository"/>
             <argument type="service" id="datagrid_loader" />
             <configurator service="company.datagrid.configurator" method="configure" />
         </service>
