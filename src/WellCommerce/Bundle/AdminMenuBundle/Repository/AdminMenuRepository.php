@@ -24,6 +24,9 @@ use WellCommerce\Bundle\AdminMenuBundle\Model\AdminMenu;
 class AdminMenuRepository extends AbstractRepository implements RepositoryInterface
 {
 
+    public function createQueryBuilder($alias, $indexBy = null){
+
+    }
     public function delete($id)
     {
 

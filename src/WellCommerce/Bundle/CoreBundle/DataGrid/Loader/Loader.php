@@ -63,7 +63,7 @@ class Loader implements LoaderInterface
         $queryBuilder->setMaxResults($request->getLimit());
         $query = $queryBuilder->getQuery();
 
-        $query->useResultCache($this->dataGrid->getIdentifier());
+        $query->useResultCache(true, 3600, $this->dataGrid->getIdentifier());
         $result = $query->getArrayResult();
         $total  = count($result);
 
