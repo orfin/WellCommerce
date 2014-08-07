@@ -28,11 +28,11 @@ interface QueryBuilderInterface
     public function getQuery();
 
     /**
-     * Returns database manager
+     * Returns entity repository
      *
-     * @return \Illuminate\Database\Capsule\Manager
+     * @return \Doctrine\ORM\EntityRepository
      */
-    public function getManager();
+    public function getRepository();
 
     /**
      * Transforms and returns operator used in where clauses

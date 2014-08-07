@@ -20,8 +20,27 @@
         "source": "https://github.com/WellCommerce/WellCommerce/"
     },
     "autoload": {
-        "psr-0": { "": "src/", "SymfonyStandard": "app/" }
+        "psr-0": {
+            "": "src/",
+            "SymfonyStandard": "app/"
+        },
+        "classmap": [
+            "vendor/xajax/xajax"
+        ]
     },
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "xajax/xajax",
+                "version": "1.0.0",
+                "dist": {
+                    "url": "http://www.gekosale.pl/packages/Xajax.zip",
+                    "type": "zip"
+                }
+            }
+        }
+    ],
     "require": {
         "php": ">=5.3.3",
         "symfony/symfony": "2.5.*",
@@ -42,7 +61,8 @@
         "moxiecode/plupload": "v2.1.2",
         "stof/doctrine-extensions-bundle": "~1.1@dev",
         "jms/di-extra-bundle": "1.4.0",
-        "doctrine/doctrine-fixtures-bundle": "2.2.x-dev"
+        "doctrine/doctrine-fixtures-bundle": "2.2.x-dev",
+        "xajax/xajax": "1.0.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
@@ -67,9 +87,6 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles"
         ]
-    },
-    "autoload": {
-        "psr-0": { "WellCommerce\\": "src/" }
     },
     "config": {
         "bin-dir": "bin"

@@ -11,6 +11,7 @@
  */
 namespace WellCommerce\Bundle\CoreBundle\DataGrid;
 
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Validator\Exception\ValidatorException;
 use WellCommerce\Bundle\CoreBundle\AbstractComponent;
@@ -46,11 +47,11 @@ abstract class AbstractDataGrid extends AbstractComponent
     /**
      * Constructor
      *
-     * @param ContainerInterface  $container
-     * @param RepositoryInterface $repository
-     * @param LoaderInterface     $loader
+     * @param ContainerInterface $container
+     * @param EntityRepository   $repository
+     * @param LoaderInterface    $loader
      */
-    public function __construct(ContainerInterface $container, RepositoryInterface $repository, LoaderInterface $loader)
+    public function __construct(ContainerInterface $container, EntityRepository $repository, LoaderInterface $loader)
     {
         $this->container  = $container;
         $this->repository = $repository;

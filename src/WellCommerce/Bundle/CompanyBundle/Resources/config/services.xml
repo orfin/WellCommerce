@@ -5,7 +5,7 @@
 
     <parameters>
         <parameter key="company.admin.controller.class">WellCommerce\Bundle\CompanyBundle\Controller\Admin\CompanyController</parameter>
-        <parameter key="company.repository.class">WellCommerce\Bundle\CompanyBundle\Repository\CompanyRepository</parameter>
+        <parameter key="company.repository.class">WellCommerce\Bundle\CompanyBundle\Entity\CompanyRepository</parameter>
         <parameter key="company.datagrid.class">WellCommerce\Bundle\CompanyBundle\DataGrid\CompanyDataGrid</parameter>
         <parameter key="company.datagrid.configurator.class">WellCommerce\Bundle\CompanyBundle\DataGrid\CompanyDataGridConfigurator</parameter>
         <parameter key="company.datagrid.query.class">WellCommerce\Bundle\CompanyBundle\DataGrid\CompanyDataGridQuery</parameter>
@@ -18,19 +18,17 @@
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
-            <call method="setRepository">
-                <argument type="service" id="company.repository"/>
-            </call>
         </service>
 
-        <service id="company.repository" class="%company.repository.class%">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
+        <service id="company.repository"
+                 class="%company.repository.class%"
+                 factory-service="doctrine.orm.entity_manager"
+                 factory-method="getRepository">
+            <argument>WellCommerce\Bundle\CompanyBundle\Entity\Company</argument>
         </service>
 
         <service id="company.datagrid.query" class="%company.datagrid.query.class%">
-            <argument type="service" id="doctrine"/>
+            <argument type="service" id="company.repository"/>
         </service>
 
         <service id="company.datagrid.configurator" class="%company.datagrid.configurator.class%">

@@ -12,10 +12,10 @@
 namespace WellCommerce\Bundle\CoreBundle\Event;
 
 use Symfony\Component\EventDispatcher\Event;
-use WellCommerce\AdminMenu\Builder\AdminMenuBuilderInterface;
+use WellCommerce\Bundle\AdminMenuBundle\Builder\AdminMenuBuilderInterface;
 
 /**
- * Class FormEvent
+ * Class AdminMenuEvent
  *
  * @package WellCommerce\Bundle\CoreBundle\Event
  * @author  Adam Piotrowski <adam@wellcommerce.org>

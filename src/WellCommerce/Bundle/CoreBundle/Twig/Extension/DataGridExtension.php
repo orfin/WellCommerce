@@ -12,7 +12,7 @@
 namespace WellCommerce\Bundle\CoreBundle\Twig\Extension;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use WellCommerce\Core\DataGrid\DataGridInterface;
+use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
 
 /**
  * Class DataGridExtension
@@ -52,7 +52,7 @@ class DataGridExtension extends \Twig_Extension
      */
     public function render(DataGridInterface $datagrid)
     {
-        return $this->container->get('twig')->render('datagrid.twig', [
+        return $this->container->get('templating')->render('WellCommerceCoreBundle:DataGrid:datagrid.html.twig', [
             'datagrid' => $datagrid
         ]);
     }

@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DataGrid\QueryBuilder;
 
-use Illuminate\Database\Capsule\Manager;
+use Doctrine\ORM\EntityRepository;
 
 /**
  * Class AbstractQueryBuilder
@@ -23,28 +23,28 @@ use Illuminate\Database\Capsule\Manager;
 abstract class AbstractQueryBuilder
 {
     /**
-     * @var \Illuminate\Database\Capsule\Manager
+     * @var \Doctrine\ORM\EntityRepository
      */
-    private $manager;
+    private $repository;
 
     /**
      * Constructor
      *
-     * @param Manager $manager
+     * @param EntityRepository $repository
      */
-    public function __construct(Manager $manager)
+    public function __construct(EntityRepository $repository)
     {
-        $this->manager = $manager;
+        $this->repository = $repository;
     }
 
     /**
-     * Returns database manager instance
+     * Returns entity repository
      *
-     * @return Manager
+     * @return EntityRepository
      */
-    public function getManager()
+    public function getRepository()
     {
-        return $this->manager;
+        return $this->repository;
     }
 
     /**

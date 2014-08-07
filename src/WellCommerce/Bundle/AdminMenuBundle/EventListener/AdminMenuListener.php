@@ -113,7 +113,7 @@ class AdminMenuListener implements EventSubscriberInterface
                 'id'         => 'crm',
                 'class'      => 'crm',
                 'name'       => $this->translator->trans('CRM'),
-                'link'       => $this->router->generate('admin.product.index'),
+                'link'       => '',
                 'path'       => '[menu][crm]',
                 'sort_order' => 60
             ]));

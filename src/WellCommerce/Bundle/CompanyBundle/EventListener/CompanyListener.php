@@ -61,7 +61,7 @@ class CompanyListener implements EventSubscriberInterface
         $builder->add(new AdminMenuItem([
             'id'         => 'company',
             'name'       => $this->translator->trans('Companies'),
-            'link'       => $this->router->generate('admin.company.index'),
+            'link'       => '',
             'path'       => '[menu][configuration][store_management][company]',
             'sort_order' => 20
         ]));

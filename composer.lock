@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2e69702e1ec1a8b30dfddae66b1c22d8",
+    "hash": "2b9e912a49ea35ac6c695a74ad60ab18",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1192,12 +1192,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "ef743be8d05a91b0f4ead06d40a0767952f5b5ad"
+                "reference": "1bf9666e695685cc6281ffd131c81ff2a6f37fbd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/ef743be8d05a91b0f4ead06d40a0767952f5b5ad",
-                "reference": "ef743be8d05a91b0f4ead06d40a0767952f5b5ad",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/1bf9666e695685cc6281ffd131c81ff2a6f37fbd",
+                "reference": "1bf9666e695685cc6281ffd131c81ff2a6f37fbd",
                 "shasum": ""
             },
             "require": {
@@ -1231,7 +1231,7 @@
                     "email": "taylorotwell@gmail.com"
                 }
             ],
-            "time": "2014-08-05 12:08:34"
+            "time": "2014-08-06 13:48:13"
         },
         {
             "name": "incenteev/composer-parameter-handler",
@@ -2326,12 +2326,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "fba2393297c0832dd56a5ecf7adda31bdb5a8b96"
+                "reference": "8bedf86f3101057cd52933dbf7fe0f0429b268b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/fba2393297c0832dd56a5ecf7adda31bdb5a8b96",
-                "reference": "fba2393297c0832dd56a5ecf7adda31bdb5a8b96",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/8bedf86f3101057cd52933dbf7fe0f0429b268b6",
+                "reference": "8bedf86f3101057cd52933dbf7fe0f0429b268b6",
                 "shasum": ""
             },
             "require": {
@@ -2432,7 +2432,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2014-08-06 13:00:40"
+            "time": "2014-08-07 07:58:17"
         },
         {
             "name": "twig/extensions",
@@ -2542,6 +2542,17 @@
                 "templating"
             ],
             "time": "2014-08-06 06:46:32"
+        },
+        {
+            "name": "xajax/xajax",
+            "version": "1.0.0",
+            "dist": {
+                "type": "zip",
+                "url": "http://www.gekosale.pl/packages/Xajax.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "type": "library"
         },
         {
             "name": "zendframework/zend-cache",

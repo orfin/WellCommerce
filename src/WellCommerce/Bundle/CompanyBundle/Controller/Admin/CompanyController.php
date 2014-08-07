@@ -18,38 +18,21 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
  * @package WellCommerce\Bundle\CompanyBundle\Controller
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
- * @Route("/company")
+ * @Template()
  */
 class CompanyController extends AbstractAdminController
 {
-    private $em;
-
     /**
-     * @InjectParams({
-     *     "em" = @Inject("doctrine.orm.entity_manager"),
-     * })
-     */
-    public function __construct(EntityManager $em)
-    {
-        $this->em = $em;
-    }
-
-    /**
-     * @Route("/index")
      * @Template()
      */
     public function indexAction()
     {
-        print_r($this->datagrid);
-        $entities = $this->em->getRepository('WellCommerceCompanyBundle:Company')->findAll();
-
         return [
-
+            'datagrid' => $this->getDataGrid($this->get('company.datagrid'))
         ];
     }
 
     /**
-     * @Route("/add")
      * @Template()
      */
     public function addAction()
@@ -63,7 +46,6 @@ class CompanyController extends AbstractAdminController
     }
 
     /**
-     * @Route("/edit/{id}")
      * @Template()
      * @ParamConverter("company", class="WellCommerceCompanyBundle:Company")
      */

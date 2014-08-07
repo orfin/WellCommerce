@@ -1,7 +1,6 @@
 wellcommerce_company:
-    resource: "@WellCommerceCompanyBundle/Controller/Admin/"
-    type:     annotation
-    prefix:   /admin
+    resource: "@WellCommerceCompanyBundle/Resources/config/routing.xml"
+    prefix:   /admin/company
 
 wellcommerce_tax:
     resource: "@WellCommerceTaxBundle/Controller"
