@@ -41,7 +41,8 @@
         "zendframework/zend-serializer": "2.3.0",
         "moxiecode/plupload": "v2.1.2",
         "stof/doctrine-extensions-bundle": "~1.1@dev",
-        "jms/di-extra-bundle": "1.4.0"
+        "jms/di-extra-bundle": "1.4.0",
+        "doctrine/doctrine-fixtures-bundle": "2.2.x-dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

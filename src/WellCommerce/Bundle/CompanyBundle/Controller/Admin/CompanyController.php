@@ -38,9 +38,7 @@ class CompanyController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('WellCommerceCompanyBundle:Company')->findAll();
+        $entities = $this->em->getRepository('WellCommerceCompanyBundle:Company')->findAll();
 
         return [
 
