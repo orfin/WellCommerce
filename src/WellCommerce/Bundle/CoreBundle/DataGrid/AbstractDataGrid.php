@@ -107,14 +107,6 @@ abstract class AbstractDataGrid extends AbstractComponent
     /**
      * {@inheritdoc}
      */
-    public function getDoctrine()
-    {
-        return $this->em;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function setCurrentRequest(RequestInterface $request)
     {
         $this->request = $request;

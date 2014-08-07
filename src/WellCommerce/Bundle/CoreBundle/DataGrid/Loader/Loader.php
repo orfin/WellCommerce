@@ -40,20 +40,32 @@ class Loader implements LoaderInterface
      */
     private $columns;
 
+    public function getSelectClause()
+    {
+        $columns = [];
+        foreach ($this->columns as $column) {
+            $columns[] = $column->getSource();
+        }
+
+        return implode(', ', $columns);
+    }
+
     public function loadResults()
     {
         $request       = $this->dataGrid->getCurrentRequest();
         $this->columns = $this->dataGrid->getColumns();
         $queryBuilder  = $this->dataGrid->getQueryBuilder();
+        $orderBy       = $this->columns->get($request->getOrderBy())->getSource();
 
+        $queryBuilder->select($this->getSelectClause());
+        $queryBuilder->addOrderBy($orderBy, $request->getOrderDir());
         $queryBuilder->setFirstResult($request->getStartingFrom());
         $queryBuilder->setMaxResults($request->getLimit());
-//        $queryBuilder->addOrderBy($request->getOrderBy(), $request->getOrderDir());
         $query = $queryBuilder->getQuery();
 
-        $result    = $query->getArrayResult();
-        $paginator = new Paginator($query);
-        $total = $paginator->count();
+        $query->useResultCache($this->dataGrid->getIdentifier());
+        $result = $query->getArrayResult();
+        $total  = count($result);
 
         return [
             'data_id'       => $request->getId(),

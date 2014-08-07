@@ -57,6 +57,19 @@ class CompanyDataGrid extends AbstractDataGrid implements DataGridInterface
                 'type' => ColumnInterface::FILTER_INPUT
             ]
         ]));
+
+        $this->columns->add(new Column([
+            'id'         => 'shortName',
+            'source'     => 'company.shortName',
+            'caption'    => $this->trans('Short name'),
+            'appearance' => [
+                'width' => 70,
+                'align' => ColumnInterface::ALIGN_LEFT
+            ],
+            'filter'     => [
+                'type' => ColumnInterface::FILTER_INPUT
+            ]
+        ]));
     }
 
     public function getQueryBuilder()
