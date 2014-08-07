@@ -2,7 +2,13 @@
 <body>
 <div id="header">
     <div class="layout-container">
-        <h1><a href=""><img src="{{ asset('design/_images_panel/logos/logo.png') }}" alt=""/></a></h1>
+        <h1>
+            <a href="">
+                {% image '@WellCommerceCoreBundle/Resources/public/images/logo.png' %}
+                <img src="{{ asset_url }}" alt="Example" />
+                {% endimage %}
+            </a>
+        </h1>
 
         <div id="livesearch">
             <input type="text" name="search" id="search" placeholder="{% trans %}Search{% endtrans %}"/>
@@ -35,5 +41,5 @@
 <div id="content" class="layout-container">
     {% block content %}{% endblock %}
 </div>
-
+</body>
 {% include 'WellCommerceCoreBundle:Admin:footer.html.twig' %}

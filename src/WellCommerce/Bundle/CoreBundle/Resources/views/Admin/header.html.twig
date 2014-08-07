@@ -6,11 +6,15 @@
     <meta http-equiv="Author" content="WellCommerce sp. z o.o."/>
     <meta name="robots" content="noindex, nofollow"/>
     <link rel="shortcut icon" href="favicon.ico"/>
-    {% block stylesheet %}
-        <link rel="stylesheet" href="{{ asset('design/_css_panel/core/style.css') }}" type="text/css"/>
-    {% endblock %}
-    {% javascripts '@WellCommerceCoreBundle/Resources/public/js/*' %}
+    {% stylesheets 'bundles/wellcommercecore/css/*' filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+    <script type="text/javascript">
+        var url = '{{ asset('bundles/bm/swf/')}}';
+    </script>
+    {% javascripts '@WellCommerceCoreBundle/Resources/public/js/*' output='js/compiled/all.js' %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
+    {{ xajax_javascript() }}
     {% include 'WellCommerceCoreBundle:Admin:flashes.html.twig' %}
 </head>
