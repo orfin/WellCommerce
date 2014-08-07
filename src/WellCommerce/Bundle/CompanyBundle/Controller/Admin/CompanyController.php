@@ -8,7 +8,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use JMS\DiExtraBundle\Annotation\InjectParams;
 use JMS\DiExtraBundle\Annotation\Inject;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use WellCommerce\Bundle\CompanyBundle\Entity\Company;
+use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
  * Class CompanyController
@@ -18,7 +20,7 @@ use WellCommerce\Bundle\CompanyBundle\Entity\Company;
  *
  * @Route("/company")
  */
-class CompanyController extends Controller
+class CompanyController extends AbstractAdminController
 {
     private $em;
 
@@ -38,6 +40,7 @@ class CompanyController extends Controller
      */
     public function indexAction()
     {
+        print_r($this->datagrid);
         $entities = $this->em->getRepository('WellCommerceCompanyBundle:Company')->findAll();
 
         return [
@@ -57,5 +60,14 @@ class CompanyController extends Controller
         $this->em->flush();
 
         return [];
+    }
+
+    /**
+     * @Route("/edit/{id}")
+     * @Template()
+     * @ParamConverter("company", class="WellCommerceCompanyBundle:Company")
+     */
+    public function editAction(Company $company)
+    {
     }
 }

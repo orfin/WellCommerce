@@ -11,6 +11,7 @@
  */
 namespace WellCommerce\Bundle\CoreBundle\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use WellCommerce\Bundle\CoreBundle\AbstractComponent;
@@ -26,7 +27,7 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
  * @package WellCommerce\Bundle\CoreBundle\Controller
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractController extends AbstractComponent
+abstract class AbstractController extends Controller
 {
     /**
      * Redirects user to a given url
@@ -50,7 +51,7 @@ abstract class AbstractController extends AbstractComponent
      *
      * @return \WellCommerce\Bundle\CoreBundle\Form\Elements\Form
      */
-    public function createForm(FormInterface $form, $model = null, array $options)
+    public function getFormBuilder(FormInterface $form, $model = null, array $options)
     {
         return $this->get('form_builder')->create($form, $model, $options)->getForm();
     }

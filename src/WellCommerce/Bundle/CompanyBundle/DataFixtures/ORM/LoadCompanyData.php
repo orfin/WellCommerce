@@ -24,7 +24,14 @@ class LoadCompanyData implements FixtureInterface
     public function load(ObjectManager $manager)
     {
         $company = new Company();
-        $company->setName('WellCommerce');
+        $company->setName('Your Company Inc.');
+        $company->setShortName('Company');
+        $company->setCountry('US');
+        $company->setStreet('E-Commerce Blvd.');
+        $company->setStreetNo('111');
+        $company->setFlatNo('22');
+        $company->setPostCode('00000');
+        $company->setCity('Los Angeles');
         $manager->persist($company);
         $manager->flush();
     }

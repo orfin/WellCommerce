@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="datagrid_renderer.class">WellCommerce\Bundle\CoreBundle\DataGrid\Renderer</parameter>
+        <parameter key="datagrid_builder.class">WellCommerce\Bundle\CoreBundle\DataGrid\DataGridBuilder</parameter>
+        <parameter key="datagrid_loader.class">WellCommerce\Bundle\CoreBundle\DataGrid\Loader\Loader</parameter>
+        <parameter key="datagrid_options.class">WellCommerce\Bundle\CoreBundle\DataGrid\Options\Options</parameter>
+        <parameter key="datagrid_columns.class">WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnCollection</parameter>
+        <parameter key="datagrid_configurator.class">WellCommerce\Bundle\CoreBundle\DataGrid\Configurator</parameter>
+    </parameters>
+
+    <services>
+        <service id="datagrid_loader" class="%datagrid_loader.class%" />
+
+        <service id="datagrid_options" class="%datagrid_options.class%" />
+
+        <service id="datagrid_columns" class="%datagrid_columns.class%" />
+
+        <service id="datagrid_configurator" class="%datagrid_configurator.class%" />
+
+        <service id="datagrid_builder" class="%datagrid_builder.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="datagrid_renderer" class="%datagrid_renderer.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+    </services>
+</container>

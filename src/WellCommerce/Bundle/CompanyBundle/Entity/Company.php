@@ -74,6 +74,13 @@ class Company
     /**
      * @var string
      *
+     * @ORM\Column(name="city", type="string", length=255, nullable=true)
+     */
+    private $city;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="country", type="string", length=3, nullable=true)
      */
     private $country;
@@ -97,7 +104,6 @@ class Company
 
     /**
      * Get id.
-    
      *
      * @return integer
      */
@@ -108,7 +114,6 @@ class Company
 
     /**
      * Set name.
-    
      *
      * @param string $name
      *
@@ -117,13 +122,12 @@ class Company
     public function setName($name)
     {
         $this->name = $name;
-    
+
         return $this;
     }
 
     /**
      * Get name.
-    
      *
      * @return string
      */
@@ -134,7 +138,6 @@ class Company
 
     /**
      * Set shortName.
-    
      *
      * @param string $shortName
      *
@@ -143,13 +146,12 @@ class Company
     public function setShortName($shortName)
     {
         $this->shortName = $shortName;
-    
+
         return $this;
     }
 
     /**
      * Get shortName.
-    
      *
      * @return string
      */
@@ -160,7 +162,6 @@ class Company
 
     /**
      * Set street.
-    
      *
      * @param string $street
      *
@@ -169,13 +170,12 @@ class Company
     public function setStreet($street)
     {
         $this->street = $street;
-    
+
         return $this;
     }
 
     /**
      * Get street.
-    
      *
      * @return string
      */
@@ -186,7 +186,6 @@ class Company
 
     /**
      * Set streetNo.
-    
      *
      * @param string $streetNo
      *
@@ -195,13 +194,12 @@ class Company
     public function setStreetNo($streetNo)
     {
         $this->streetNo = $streetNo;
-    
+
         return $this;
     }
 
     /**
      * Get streetNo.
-    
      *
      * @return string
      */
@@ -212,7 +210,6 @@ class Company
 
     /**
      * Set flatNo.
-    
      *
      * @param string $flatNo
      *
@@ -221,13 +218,12 @@ class Company
     public function setFlatNo($flatNo)
     {
         $this->flatNo = $flatNo;
-    
+
         return $this;
     }
 
     /**
      * Get flatNo.
-    
      *
      * @return string
      */
@@ -238,7 +234,6 @@ class Company
 
     /**
      * Set postCode.
-    
      *
      * @param string $postCode
      *
@@ -247,13 +242,12 @@ class Company
     public function setPostCode($postCode)
     {
         $this->postCode = $postCode;
-    
+
         return $this;
     }
 
     /**
      * Get postCode.
-    
      *
      * @return string
      */
@@ -263,8 +257,31 @@ class Company
     }
 
     /**
+     * Set city.
+     *
+     * @param string $city
+     *
+     * @return Company
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * Get city.
+     *
+     * @return string
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
      * Set province.
-    
      *
      * @param string $province
      *
@@ -273,13 +290,12 @@ class Company
     public function setProvince($province)
     {
         $this->province = $province;
-    
+
         return $this;
     }
 
     /**
      * Get province.
-    
      *
      * @return string
      */
@@ -290,7 +306,6 @@ class Company
 
     /**
      * Set country.
-    
      *
      * @param string $country
      *
@@ -299,13 +314,12 @@ class Company
     public function setCountry($country)
     {
         $this->country = $country;
-    
+
         return $this;
     }
 
     /**
      * Get country.
-    
      *
      * @return string
      */
@@ -316,7 +330,6 @@ class Company
 
     /**
      * Set createdAt.
-    
      *
      * @param \DateTime $createdAt
      *
@@ -325,13 +338,12 @@ class Company
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
-    
+
         return $this;
     }
 
     /**
      * Get createdAt.
-    
      *
      * @return \DateTime
      */
@@ -342,7 +354,6 @@ class Company
 
     /**
      * Set updatedAt.
-    
      *
      * @param \DateTime $updatedAt
      *
@@ -351,13 +362,12 @@ class Company
     public function setUpdatedAt($updatedAt)
     {
         $this->updatedAt = $updatedAt;
-    
+
         return $this;
     }
 
     /**
      * Get updatedAt.
-    
      *
      * @return \DateTime
      */

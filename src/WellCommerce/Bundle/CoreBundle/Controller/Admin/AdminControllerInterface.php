@@ -25,27 +25,6 @@ interface AdminControllerInterface
     const MESSAGE_TYPE_ERROR   = 'error';
     
     /**
-     * Controller index action
-     *
-     * @return mixed
-     */
-    public function indexAction();
-
-    /**
-     * Controller add action
-     *
-     * @return mixed
-     */
-    public function addAction();
-
-    /**
-     * Controller edit action
-     *
-     * @return mixed
-     */
-    public function editAction($id);
-
-    /**
      * Get admin user id
      *
      * @return mixed
