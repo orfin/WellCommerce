@@ -86,7 +86,7 @@ interface DataGridInterface
     /**
      * Returns query builder object
      *
-     * @return QueryBuilderInterface
+     * @return \Doctrine\ORM\QueryBuilder
      */
     public function getQueryBuilder();
 

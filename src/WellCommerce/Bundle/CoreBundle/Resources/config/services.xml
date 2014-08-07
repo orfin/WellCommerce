@@ -6,6 +6,7 @@
 
     <parameters>
         <parameter key="xajax_manager.class">WellCommerce\Bundle\CoreBundle\Helper\XajaxManager</parameter>
+        <parameter key="xajax_listener.class">WellCommerce\Bundle\CoreBundle\EventListener\XajaxListener</parameter>
         <parameter key="xajax.class">xajax</parameter>
     </parameters>
 
@@ -14,6 +15,11 @@
 
         <service id="xajax_manager" class="%xajax_manager.class%">
             <argument type="service" id="service_container"/>
+        </service>
+
+        <service id="xajax_listener" class="%xajax_listener.class%">
+            <argument type="service" id="service_container"/>
+            <tag name="kernel.event_subscriber"/>
         </service>
     </services>
 </container>

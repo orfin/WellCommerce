@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DataGrid\Loader;
 
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
 
 /**
@@ -42,47 +43,17 @@ class Loader implements LoaderInterface
     public function loadResults()
     {
         $request       = $this->dataGrid->getCurrentRequest();
-        $queryBuilder  = $this->dataGrid->getQueryBuilder();
-        $query         = $queryBuilder->getQuery();
-        $manager       = $queryBuilder->getManager();
-        $connection    = $manager->getConnection();
         $this->columns = $this->dataGrid->getColumns();
+        $queryBuilder  = $this->dataGrid->getQueryBuilder();
 
-        foreach ($this->columns as $column) {
-            $col = $connection->raw($column->getRawSelect());
-            $query->addSelect($col);
-        }
+        $queryBuilder->setFirstResult($request->getStartingFrom());
+        $queryBuilder->setMaxResults($request->getLimit());
+//        $queryBuilder->addOrderBy($request->getOrderBy(), $request->getOrderDir());
+        $query = $queryBuilder->getQuery();
 
-        foreach ($request->getWhere() as $where) {
-            $column     = $this->columns->get($where['column']);
-            $id         = $column->getId();
-            $source     = $column->getSource();
-            $aggregated = $column->isAggregated();
-            $operator   = $queryBuilder->getOperator($where['operator']);
-            $value      = $where['value'];
-
-            if ($aggregated) {
-                $query->having($id, $operator, $value);
-            } else {
-                if (is_array($value)) {
-                    if (!empty($value)) {
-                        $query->whereIn($source, $value);
-                    } else {
-                        $query->where($source, '=', 0);
-                    }
-                } else {
-                    $query->where($source, $operator, $value);
-                }
-            }
-
-        }
-
-        $query->skip($request->getStartingFrom());
-        $query->take($request->getLimit());
-        $query->orderBy($request->getOrderBy(), $request->getOrderDir());
-
-        $result = $query->get();
-        $total  = count($result);
+        $result    = $query->getArrayResult();
+        $paginator = new Paginator($query);
+        $total = $paginator->count();
 
         return [
             'data_id'       => $request->getId(),
@@ -90,7 +61,7 @@ class Loader implements LoaderInterface
             'starting_from' => $request->getStartingFrom(),
             'total'         => $total,
             'filtered'      => $total,
-            'rows'          => $this->processResults($result)
+            'rows'          => $result
         ];
     }
 

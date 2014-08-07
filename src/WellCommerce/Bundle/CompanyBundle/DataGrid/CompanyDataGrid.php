@@ -59,4 +59,12 @@ class CompanyDataGrid extends AbstractDataGrid implements DataGridInterface
         ]));
     }
 
+    public function getQueryBuilder()
+    {
+        $qb = $this->em->getRepository('WellCommerceCompanyBundle:Company')->createQueryBuilder('company');
+        $qb->groupBy('company.id');
+
+        return $qb;
+    }
+
 }

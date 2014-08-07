@@ -11,6 +11,7 @@
  */
 namespace WellCommerce\Bundle\CoreBundle\DataGrid;
 
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Validator\Exception\ValidatorException;
@@ -21,7 +22,6 @@ use WellCommerce\Bundle\CoreBundle\DataGrid\Options\OptionsInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\QueryBuilder\QueryBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Request\Request;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Request\RequestInterface;
-use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 use xajaxResponse;
 
 /**
@@ -37,7 +37,7 @@ abstract class AbstractDataGrid extends AbstractComponent
      */
     protected $columns;
     protected $identifier;
-    protected $repository;
+    protected $em;
     protected $loader;
     protected $options;
     protected $queryBuilder;
@@ -51,11 +51,11 @@ abstract class AbstractDataGrid extends AbstractComponent
      * @param EntityRepository   $repository
      * @param LoaderInterface    $loader
      */
-    public function __construct(ContainerInterface $container, EntityRepository $repository, LoaderInterface $loader)
+    public function __construct(ContainerInterface $container, EntityManager $em, LoaderInterface $loader)
     {
-        $this->container  = $container;
-        $this->repository = $repository;
-        $this->loader     = $loader;
+        $this->container = $container;
+        $this->em        = $em;
+        $this->loader    = $loader;
     }
 
     public function setColumns(ColumnCollection $columns)
@@ -107,9 +107,9 @@ abstract class AbstractDataGrid extends AbstractComponent
     /**
      * {@inheritdoc}
      */
-    public function getRepository()
+    public function getDoctrine()
     {
-        return $this->repository;
+        return $this->em;
     }
 
     /**

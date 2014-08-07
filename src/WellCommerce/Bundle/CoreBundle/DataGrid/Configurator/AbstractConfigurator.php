@@ -52,14 +52,12 @@ class AbstractConfigurator extends AbstractComponent
      * @param                       $identifier
      * @param OptionsInterface      $options
      * @param ColumnCollection      $columns
-     * @param QueryBuilderInterface $queryBuilder
      */
-    public function __construct($identifier, OptionsInterface $options, ColumnCollection $columns, QueryBuilderInterface $queryBuilder)
+    public function __construct($identifier, OptionsInterface $options, ColumnCollection $columns)
     {
         $this->identifier   = $identifier;
         $this->options      = $options;
         $this->columns      = $columns;
-        $this->queryBuilder = $queryBuilder;
     }
 
     /**

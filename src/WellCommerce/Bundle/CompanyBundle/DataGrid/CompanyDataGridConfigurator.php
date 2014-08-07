@@ -24,7 +24,7 @@ use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
 /**
  * Class CompanyDataGridConfigurator
  *
- * @package WellCommerce\Company\DataGrid
+ * @package WellCommerce\Bundle\CompanyBundle\DataGrid
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class CompanyDataGridConfigurator extends AbstractConfigurator implements ConfiguratorInterface
@@ -37,8 +37,6 @@ class CompanyDataGridConfigurator extends AbstractConfigurator implements Config
         $datagrid->setIdentifier($this->identifier);
 
         $datagrid->setColumns($this->columns);
-
-        $datagrid->setQueryBuilder($this->queryBuilder);
 
         $eventHandlers = $this->options->getEventHandlers();
 

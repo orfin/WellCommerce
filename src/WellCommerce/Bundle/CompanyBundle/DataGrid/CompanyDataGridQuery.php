@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\CompanyBundle\DataGrid;
 
 use WellCommerce\Bundle\CoreBundle\DataGrid\QueryBuilder\AbstractQueryBuilder;
 use WellCommerce\Bundle\CoreBundle\DataGrid\QueryBuilder\QueryBuilderInterface;
-
+use WellCommerce\Bundle\CompanyBundle\Entity\Company;
 /**
  * Class CompanyDataGridQuery
  *
@@ -28,9 +28,14 @@ class CompanyDataGridQuery extends AbstractQueryBuilder implements QueryBuilderI
      */
     public function getQuery()
     {
-        $qb = $this->getManager()->table('company');
-        $qb->groupBy('company.id');
+        $query = $this->getDoctrine()->createQuery("SELECT c FROM Company c");
+        $companies = $query->getResult();
+        print_r($companies);
 
-        return $qb;
+        $repository = $this->getDoctrine()->getRepository('WellCommerceCompanyBundle:Company');
+
+        $query = $repository->createQueryBuilder('c')->getQuery();
+
+        return $query;
     }
 } 

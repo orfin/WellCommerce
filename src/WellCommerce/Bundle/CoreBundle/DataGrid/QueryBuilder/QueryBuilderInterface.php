@@ -30,9 +30,9 @@ interface QueryBuilderInterface
     /**
      * Returns entity repository
      *
-     * @return \Doctrine\ORM\EntityRepository
+     * @return \Doctrine\ORM\EntityManager
      */
-    public function getRepository();
+    public function getDoctrine();
 
     /**
      * Transforms and returns operator used in where clauses

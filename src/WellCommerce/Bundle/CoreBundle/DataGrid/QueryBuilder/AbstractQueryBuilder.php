@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DataGrid\QueryBuilder;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\EntityManager;
 
 /**
  * Class AbstractQueryBuilder
@@ -23,28 +23,28 @@ use Doctrine\ORM\EntityRepository;
 abstract class AbstractQueryBuilder
 {
     /**
-     * @var \Doctrine\ORM\EntityRepository
+     * @var \Doctrine\ORM\EntityManager
      */
-    private $repository;
+    private $em;
 
     /**
      * Constructor
      *
-     * @param EntityRepository $repository
+     * @param EntityManager $em
      */
-    public function __construct(EntityRepository $repository)
+    public function __construct(EntityManager $em)
     {
-        $this->repository = $repository;
+        $this->em = $em;
     }
 
     /**
      * Returns entity repository
      *
-     * @return EntityRepository
+     * @return EntityManager
      */
-    public function getRepository()
+    public function getDoctrine()
     {
-        return $this->repository;
+        return $this->em;
     }
 
     /**
