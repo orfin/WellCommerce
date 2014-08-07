@@ -73,7 +73,7 @@ class Loader implements LoaderInterface
             'starting_from' => $request->getStartingFrom(),
             'total'         => $total,
             'filtered'      => $total,
-            'rows'          => $result
+            'rows'          => $this->processResults($result)
         ];
     }
 
