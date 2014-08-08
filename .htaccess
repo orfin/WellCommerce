@@ -1,6 +1,0 @@
-<IfModule mod_rewrite.c>
-SetEnv HTTP_MOD_REWRITE On
-RewriteEngine On
-RewriteBase /
-RewriteRule !(\.(php|jpg|jpeg|png|gif|ico|css|ppt|pdf|js|swf|flv|htm|html|txt|xml|woff|svg|eot|ttf|less)$) app_dev.php [NC,L]
-</IfModule>
