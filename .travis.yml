@@ -7,8 +7,6 @@ php:
 branches:
     only:
         - development
-env:
-  - DB_USER=root
 
 before_install:
     - sudo apt-get update > /dev/null
