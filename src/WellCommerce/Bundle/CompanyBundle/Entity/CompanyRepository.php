@@ -24,11 +24,17 @@ class CompanyRepository extends EntityRepository implements DataGridRepositoryIn
         $this->_em->flush();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function updateRow(array $request)
     {
 
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function deleteMultipleRows(array $ids)
     {
         return false;
