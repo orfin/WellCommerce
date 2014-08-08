@@ -1,0 +1,21 @@
+<?php
+use \AcceptanceTester;
+
+class AdminCompanyCest
+{
+    public function _before()
+    {
+    }
+
+    public function _after()
+    {
+    }
+
+    // tests
+    public function tryToTest(AcceptanceTester $I)
+    {
+        $I->wantTo('Check if company module is working');
+        $I->amOnPage('/admin/company/index');
+        $I->see('Companies');
+    }
+}

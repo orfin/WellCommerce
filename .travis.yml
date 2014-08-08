@@ -31,7 +31,7 @@ before_script:
     - php app/console doctrine:fixtures:load --purge-with-truncate --no-interaction > /dev/null
 
 script:
-    - vendor/bin/codecept run -c ./
+    - bin/codecept run -c ./
 
 notifications:
     email: "travis@wellcommerce.org"

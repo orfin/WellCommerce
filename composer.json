@@ -62,7 +62,8 @@
         "stof/doctrine-extensions-bundle": "~1.1@dev",
         "jms/di-extra-bundle": "1.4.0",
         "doctrine/doctrine-fixtures-bundle": "2.2.x-dev",
-        "xajax/xajax": "1.0.0"
+        "xajax/xajax": "1.0.0",
+        "codeception/codeception": "2.0.4"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
