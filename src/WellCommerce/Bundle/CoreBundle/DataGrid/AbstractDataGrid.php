@@ -20,6 +20,7 @@ use WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnCollection;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Loader\LoaderInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Options\OptionsInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\QueryBuilder\QueryBuilderInterface;
+use WellCommerce\Bundle\CoreBundle\DataGrid\Repository\DataGridRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Request\Request;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Request\RequestInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
@@ -48,11 +49,11 @@ abstract class AbstractDataGrid extends AbstractComponent
     /**
      * Constructor
      *
-     * @param ContainerInterface  $container
-     * @param RepositoryInterface $repository
-     * @param LoaderInterface     $loader
+     * @param ContainerInterface          $container
+     * @param DataGridRepositoryInterface $repository
+     * @param LoaderInterface             $loader
      */
-    public function __construct(ContainerInterface $container, RepositoryInterface $repository, LoaderInterface $loader)
+    public function __construct(ContainerInterface $container, DataGridRepositoryInterface $repository, LoaderInterface $loader)
     {
         $this->container  = $container;
         $this->repository = $repository;
@@ -138,7 +139,7 @@ abstract class AbstractDataGrid extends AbstractComponent
     public function update(array $request)
     {
         try {
-            $this->repository->updateDataGridRow($request);
+            $this->repository->updateRow($request);
 
         } catch (ValidatorException $exception) {
             return [
@@ -152,7 +153,7 @@ abstract class AbstractDataGrid extends AbstractComponent
      */
     public function delete($request)
     {
-        return $this->repository->delete($request['id']);
+        return $this->repository->deleteRow($request['id']);
     }
 
     /**
