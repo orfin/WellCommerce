@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{{ asset_url }}" />
     {% endstylesheets %}
     <script type="text/javascript">
-        var url = '{{ asset('bundles/bm/swf/')}}';
+        var BUNDLES_WEB_URL = '{{ asset('bundles')}}';
     </script>
     {% javascripts '@WellCommerceCoreBundle/Resources/public/js/*' output='js/compiled/all.js' %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
