@@ -27,10 +27,10 @@ before_script:
     - wget http://selenium-release.storage.googleapis.com/2.42/selenium-server-standalone-2.42.2.jar
     - java -jar selenium-server-standalone-2.42.2.jar > /dev/null &
     - sleep 5
-    - app/console doctrine:database:create --env=test > /dev/null
-    - app/console doctrine:schema:create > /dev/null
-    - app/console doctrine:fixtures:load > /dev/null
-    - app/console doctrine:fixtures:load --purge-with-truncate --no-interaction > /dev/null
+    - php app/console doctrine:database:create --env=test > /dev/null
+    - php app/console doctrine:schema:create > /dev/null
+    - php app/console doctrine:fixtures:load > /dev/null
+    - php app/console doctrine:fixtures:load --purge-with-truncate --no-interaction > /dev/null
 
 script:
     - vendor/bin/codecept run -c ./
