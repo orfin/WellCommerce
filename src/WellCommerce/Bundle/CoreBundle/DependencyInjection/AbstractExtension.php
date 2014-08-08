@@ -12,10 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\Container;
-use Symfony\Component\DependencyInjection\Exception\BadMethodCallException;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 
 /**
  * Class AbstractExtension
@@ -25,5 +22,5 @@ use WellCommerce\Bundle\CoreBundle\Helper\Helper;
  */
 abstract class AbstractExtension extends Extension
 {
-    
+
 } 

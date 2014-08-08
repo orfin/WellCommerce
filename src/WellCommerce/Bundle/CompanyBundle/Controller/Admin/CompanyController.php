@@ -16,6 +16,7 @@ use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use WellCommerce\Bundle\CompanyBundle\Entity\Company;
+use WellCommerce\Bundle\CompanyBundle\Entity\CompanyRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
@@ -28,6 +29,11 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
  */
 class CompanyController extends AbstractAdminController
 {
+    /**
+     * @var CompanyRepositoryInterface
+     */
+    private $repository;
+
     public function indexAction()
     {
         return [
@@ -37,12 +43,25 @@ class CompanyController extends AbstractAdminController
 
     public function addAction()
     {
-        $entity = new Company();
-        $entity->setName(11111);
-        $this->em->persist($entity);
-        $this->em->flush();
+        $form = $this->getFormBuilder($this->get('company.form'), null, [
+            'name' => 'company'
+        ]);
 
-        return [];
+        if ($form->isValid()) {
+            try {
+                $this->repository->save($form->getSubmitValuesFlat());
+                $this->addSuccessMessage('New company added successfully.');
+
+                return $this->redirect($this->getDefaultUrl());
+
+            } catch (ValidatorException $exception) {
+                $this->addErrorMessage($exception->getMessage());
+            }
+        }
+
+        return [
+            'form' => $form
+        ];
     }
 
     /**
@@ -50,5 +69,16 @@ class CompanyController extends AbstractAdminController
      */
     public function editAction(Company $company)
     {
+
+    }
+
+    /**
+     * Sets repository object
+     *
+     * @param CompanyRepositoryInterface $repository
+     */
+    public function setRepository(CompanyRepositoryInterface $repository)
+    {
+        $this->repository = $repository;
     }
 }

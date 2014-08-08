@@ -17,6 +17,9 @@
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
+            <call method="setRepository">
+                <argument type="service" id="company.repository"/>
+            </call>
         </service>
 
         <service id="company.repository" class="%company.repository.class%" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">

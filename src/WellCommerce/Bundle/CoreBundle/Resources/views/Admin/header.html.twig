@@ -9,12 +9,35 @@
     {% stylesheets 'bundles/wellcommercecore/css/*' filter='cssrewrite' %}
     <link rel="stylesheet" href="{{ asset_url }}" />
     {% endstylesheets %}
-    <script type="text/javascript">
-        var BUNDLES_WEB_URL = '{{ asset('bundles')}}';
-    </script>
-    {% javascripts '@WellCommerceCoreBundle/Resources/public/js/*' output='js/compiled/all.js' %}
+    {% javascripts '@WellCommerceCoreBundle/Resources/public/js/libs/*' output='js/libs/all.js' %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
+    {% javascripts '@WellCommerceCoreBundle/Resources/public/js/core/10.gekosale.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    <script type="text/javascript">
+        new GCore({
+            iCookieLifetime: 30,
+            sDesignPath: '{{ asset('bundles/wellcommercecore/') }}',
+            iActiveView: '',
+            iActiveLanguage: '',
+            aoLanguages: '',
+            aoVatValues: '',
+            sUrl: '{{ app.request.getBaseURL() }}',
+            sCurrentController: '',
+            sCurrentAction: ''
+        });
+    </script>
+    {% javascripts
+        '@WellCommerceCoreBundle/Resources/public/js/core/30.gf.js'
+        '@WellCommerceCoreBundle/Resources/public/js/core/40.init.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    <script type="text/javascript">
+        GF_Debug.s_iLevel = GF_Debug.LEVEL_ALL;
+    </script>
+
     {{ xajax_javascript() }}
     {% include 'WellCommerceCoreBundle:Admin:flashes.html.twig' %}
 </head>

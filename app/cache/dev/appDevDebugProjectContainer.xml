@@ -15,8 +15,17 @@
       <parameter key="SwiftmailerBundle">Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle</parameter>
       <parameter key="AsseticBundle">Symfony\Bundle\AsseticBundle\AsseticBundle</parameter>
       <parameter key="DoctrineBundle">Doctrine\Bundle\DoctrineBundle\DoctrineBundle</parameter>
+      <parameter key="DoctrineMigrationsBundle">Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle</parameter>
+      <parameter key="DoctrineFixturesBundle">Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle</parameter>
       <parameter key="SensioFrameworkExtraBundle">Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle</parameter>
+      <parameter key="JMSDiExtraBundle">JMS\DiExtraBundle\JMSDiExtraBundle</parameter>
+      <parameter key="JMSAopBundle">JMS\AopBundle\JMSAopBundle</parameter>
+      <parameter key="StofDoctrineExtensionsBundle">Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle</parameter>
       <parameter key="WellCommerceCoreBundle">WellCommerce\Bundle\CoreBundle\WellCommerceCoreBundle</parameter>
+      <parameter key="WellCommerceAdminMenuBundle">WellCommerce\Bundle\AdminMenuBundle\WellCommerceAdminMenuBundle</parameter>
+      <parameter key="WellCommerceTaxBundle">WellCommerce\Bundle\TaxBundle\WellCommerceTaxBundle</parameter>
+      <parameter key="WellCommerceUnitBundle">WellCommerce\Bundle\UnitBundle\WellCommerceUnitBundle</parameter>
+      <parameter key="WellCommerceCompanyBundle">WellCommerce\Bundle\CompanyBundle\WellCommerceCompanyBundle</parameter>
       <parameter key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</parameter>
       <parameter key="SensioDistributionBundle">Sensio\Bundle\DistributionBundle\SensioDistributionBundle</parameter>
       <parameter key="SensioGeneratorBundle">Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle</parameter>
@@ -26,7 +35,7 @@
     <parameter key="database_driver">pdo_mysql</parameter>
     <parameter key="database_host">127.0.0.1</parameter>
     <parameter key="database_port">null</parameter>
-    <parameter key="database_name">gekosale3</parameter>
+    <parameter key="database_name">symfony</parameter>
     <parameter key="database_user">root</parameter>
     <parameter key="database_password">null</parameter>
     <parameter key="mailer_transport">smtp</parameter>
@@ -35,7 +44,7 @@
     <parameter key="mailer_password">null</parameter>
     <parameter key="locale">en</parameter>
     <parameter key="secret">ThisTokenIsNotSoSecretChangeIt</parameter>
-    <parameter key="debug_toolbar">true</parameter>
+    <parameter key="debug_toolbar">false</parameter>
     <parameter key="debug_redirects">false</parameter>
     <parameter key="use_assetic_controller">true</parameter>
     <parameter key="controller_resolver.class">Symfony\Bundle\FrameworkBundle\Controller\ControllerResolver</parameter>
@@ -114,14 +123,6 @@
     <parameter key="session.save_path">D:/Git/WellCommerce/app/cache/dev/sessions</parameter>
     <parameter key="session.metadata.update_threshold">0</parameter>
     <parameter key="security.secure_random.class">Symfony\Component\Security\Core\Util\SecureRandom</parameter>
-    <parameter key="form.resolved_type_factory.class">Symfony\Component\Form\ResolvedFormTypeFactory</parameter>
-    <parameter key="form.registry.class">Symfony\Component\Form\FormRegistry</parameter>
-    <parameter key="form.factory.class">Symfony\Component\Form\FormFactory</parameter>
-    <parameter key="form.extension.class">Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension</parameter>
-    <parameter key="form.type_guesser.validator.class">Symfony\Component\Form\Extension\Validator\ValidatorTypeGuesser</parameter>
-    <parameter key="form.type_extension.form.request_handler.class">Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationRequestHandler</parameter>
-    <parameter key="form.type_extension.csrf.enabled">true</parameter>
-    <parameter key="form.type_extension.csrf.field_name">_token</parameter>
     <parameter key="security.csrf.token_generator.class">Symfony\Component\Security\Csrf\TokenGenerator\UriSafeTokenGenerator</parameter>
     <parameter key="security.csrf.token_storage.class">Symfony\Component\Security\Csrf\TokenStorage\SessionTokenStorage</parameter>
     <parameter key="security.csrf.token_manager.class">Symfony\Component\Security\Csrf\CsrfTokenManager</parameter>
@@ -166,12 +167,11 @@
     <parameter key="validator.mapping.cache.apc.class">Symfony\Component\Validator\Mapping\Cache\ApcCache</parameter>
     <parameter key="validator.mapping.cache.prefix"></parameter>
     <parameter key="validator.validator_factory.class">Symfony\Bundle\FrameworkBundle\Validator\ConstraintValidatorFactory</parameter>
+    <parameter key="validator.legacy_validator_factory.class">Symfony\Bundle\FrameworkBundle\Validator\LegacyConstraintValidatorFactory</parameter>
     <parameter key="validator.expression.class">Symfony\Component\Validator\Constraints\ExpressionValidator</parameter>
     <parameter key="validator.email.class">Symfony\Component\Validator\Constraints\EmailValidator</parameter>
     <parameter key="validator.translation_domain">validators</parameter>
     <parameter key="fragment.listener.class">Symfony\Component\HttpKernel\EventListener\FragmentListener</parameter>
-    <parameter key="form.resolved_type_factory.data_collector_proxy.class">Symfony\Component\Form\Extension\DataCollector\Proxy\ResolvedTypeFactoryDataCollectorProxy</parameter>
-    <parameter key="form.type_extension.form.data_collector.class">Symfony\Component\Form\Extension\DataCollector\Type\DataCollectorTypeExtension</parameter>
     <parameter key="profiler.class">Symfony\Component\HttpKernel\Profiler\Profiler</parameter>
     <parameter key="profiler_listener.class">Symfony\Component\HttpKernel\EventListener\ProfilerListener</parameter>
     <parameter key="data_collector.config.class">Symfony\Component\HttpKernel\DataCollector\ConfigDataCollector</parameter>
@@ -302,7 +302,7 @@
     <parameter key="twig.extension.code.class">Symfony\Bridge\Twig\Extension\CodeExtension</parameter>
     <parameter key="twig.extension.routing.class">Symfony\Bridge\Twig\Extension\RoutingExtension</parameter>
     <parameter key="twig.extension.yaml.class">Symfony\Bridge\Twig\Extension\YamlExtension</parameter>
-    <parameter key="twig.extension.form.class">Symfony\Bridge\Twig\Extension\FormExtension</parameter>
+    <parameter key="twig.extension.form.class">WellCommerce\Bundle\CoreBundle\Twig\Extension\FormExtension</parameter>
     <parameter key="twig.extension.httpkernel.class">Symfony\Bridge\Twig\Extension\HttpKernelExtension</parameter>
     <parameter key="twig.extension.debug.stopwatch.class">Symfony\Bridge\Twig\Extension\StopwatchExtension</parameter>
     <parameter key="twig.extension.expression.class">Symfony\Bridge\Twig\Extension\ExpressionExtension</parameter>
@@ -314,6 +314,7 @@
     <parameter key="twig.exception_listener.controller">twig.controller.exception:showAction</parameter>
     <parameter key="twig.form.resources" type="collection">
       <parameter>form_div_layout.html.twig</parameter>
+      <parameter>WellCommerceCoreBundle::fields.html.twig</parameter>
     </parameter>
     <parameter key="debug.templating.engine.twig.class">Symfony\Bundle\TwigBundle\Debug\TimedTwigEngine</parameter>
     <parameter key="twig.options" type="collection">
@@ -414,16 +415,19 @@
     <parameter key="assetic.directory_resource.class">Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource</parameter>
     <parameter key="assetic.filter_manager.class">Symfony\Bundle\AsseticBundle\FilterManager</parameter>
     <parameter key="assetic.worker.ensure_filter.class">Assetic\Factory\Worker\EnsureFilterWorker</parameter>
+    <parameter key="assetic.worker.cache_busting.class">Assetic\Factory\Worker\CacheBustingWorker</parameter>
     <parameter key="assetic.value_supplier.class">Symfony\Bundle\AsseticBundle\DefaultValueSupplier</parameter>
     <parameter key="assetic.node.paths" type="collection"/>
     <parameter key="assetic.cache_dir">D:/Git/WellCommerce/app/cache/dev/assetic</parameter>
-    <parameter key="assetic.bundles" type="collection"/>
+    <parameter key="assetic.bundles" type="collection">
+      <parameter>WellCommerceCoreBundle</parameter>
+    </parameter>
     <parameter key="assetic.twig_extension.class">Symfony\Bundle\AsseticBundle\Twig\AsseticExtension</parameter>
     <parameter key="assetic.twig_formula_loader.class">Assetic\Extension\Twig\TwigFormulaLoader</parameter>
     <parameter key="assetic.helper.dynamic.class">Symfony\Bundle\AsseticBundle\Templating\DynamicAsseticHelper</parameter>
     <parameter key="assetic.helper.static.class">Symfony\Bundle\AsseticBundle\Templating\StaticAsseticHelper</parameter>
     <parameter key="assetic.php_formula_loader.class">Symfony\Bundle\AsseticBundle\Factory\Loader\AsseticHelperFormulaLoader</parameter>
-    <parameter key="assetic.debug">true</parameter>
+    <parameter key="assetic.debug">false</parameter>
     <parameter key="assetic.use_controller">true</parameter>
     <parameter key="assetic.enable_profiler">false</parameter>
     <parameter key="assetic.read_from">D:/Git/WellCommerce/app/../web</parameter>
@@ -440,6 +444,39 @@
     <parameter key="assetic.cache.class">Assetic\Cache\FilesystemCache</parameter>
     <parameter key="assetic.use_controller_worker.class">Symfony\Bundle\AsseticBundle\Factory\Worker\UseControllerWorker</parameter>
     <parameter key="assetic.request_listener.class">Symfony\Bundle\AsseticBundle\EventListener\RequestListener</parameter>
+    <parameter key="doctrine_cache.apc.class">Doctrine\Common\Cache\ApcCache</parameter>
+    <parameter key="doctrine_cache.array.class">Doctrine\Common\Cache\ArrayCache</parameter>
+    <parameter key="doctrine_cache.file_system.class">Doctrine\Common\Cache\FilesystemCache</parameter>
+    <parameter key="doctrine_cache.php_file.class">Doctrine\Common\Cache\PhpFileCache</parameter>
+    <parameter key="doctrine_cache.mongodb.class">Doctrine\Common\Cache\MongoDBCache</parameter>
+    <parameter key="doctrine_cache.mongodb.collection.class">MongoCollection</parameter>
+    <parameter key="doctrine_cache.mongodb.connection.class">MongoClient</parameter>
+    <parameter key="doctrine_cache.mongodb.server">localhost:27017</parameter>
+    <parameter key="doctrine_cache.riak.class">Doctrine\Common\Cache\RiakCache</parameter>
+    <parameter key="doctrine_cache.riak.bucket.class">Riak\Bucket</parameter>
+    <parameter key="doctrine_cache.riak.connection.class">Riak\Connection</parameter>
+    <parameter key="doctrine_cache.riak.bucket_property_list.class">Riak\BucketPropertyList</parameter>
+    <parameter key="doctrine_cache.riak.host">localhost</parameter>
+    <parameter key="doctrine_cache.riak.port">8087</parameter>
+    <parameter key="doctrine_cache.memcache.class">Doctrine\Common\Cache\MemcacheCache</parameter>
+    <parameter key="doctrine_cache.memcache.connection.class">Memcache</parameter>
+    <parameter key="doctrine_cache.memcache.host">localhost</parameter>
+    <parameter key="doctrine_cache.memcache.port">11211</parameter>
+    <parameter key="doctrine_cache.memcached.class">Doctrine\Common\Cache\MemcachedCache</parameter>
+    <parameter key="doctrine_cache.memcached.connection.class">Memcached</parameter>
+    <parameter key="doctrine_cache.memcached.host">localhost</parameter>
+    <parameter key="doctrine_cache.memcached.port">11211</parameter>
+    <parameter key="doctrine_cache.redis.class">Doctrine\Common\Cache\RedisCache</parameter>
+    <parameter key="doctrine_cache.redis.connection.class">Redis</parameter>
+    <parameter key="doctrine_cache.redis.host">localhost</parameter>
+    <parameter key="doctrine_cache.redis.port">6379</parameter>
+    <parameter key="doctrine_cache.couchbase.class">Doctrine\Common\Cache\CouchbaseCache</parameter>
+    <parameter key="doctrine_cache.couchbase.connection.class">Couchbase</parameter>
+    <parameter key="doctrine_cache.couchbase.hostnames">localhost:8091</parameter>
+    <parameter key="doctrine_cache.wincache.class">Doctrine\Common\Cache\WinCacheCache</parameter>
+    <parameter key="doctrine_cache.xcache.class">Doctrine\Common\Cache\XcacheCache</parameter>
+    <parameter key="doctrine_cache.zenddata.class">Doctrine\Common\Cache\ZendDataCache</parameter>
+    <parameter key="doctrine_cache.security.acl.cache.class">Doctrine\Bundle\DoctrineCacheBundle\Acl\Model\AclCache</parameter>
     <parameter key="doctrine.dbal.logger.chain.class">Doctrine\DBAL\Logging\LoggerChain</parameter>
     <parameter key="doctrine.dbal.logger.profiling.class">Doctrine\DBAL\Logging\DebugStack</parameter>
     <parameter key="doctrine.dbal.logger.class">Symfony\Bridge\Doctrine\Logger\DbalLogger</parameter>
@@ -479,7 +516,7 @@
     <parameter key="doctrine.orm.cache.xcache.class">Doctrine\Common\Cache\XcacheCache</parameter>
     <parameter key="doctrine.orm.cache.wincache.class">Doctrine\Common\Cache\WinCacheCache</parameter>
     <parameter key="doctrine.orm.cache.zenddata.class">Doctrine\Common\Cache\ZendDataCache</parameter>
-    <parameter key="doctrine.orm.metadata.driver_chain.class">Doctrine\ORM\Mapping\Driver\DriverChain</parameter>
+    <parameter key="doctrine.orm.metadata.driver_chain.class">Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain</parameter>
     <parameter key="doctrine.orm.metadata.annotation.class">Doctrine\ORM\Mapping\Driver\AnnotationDriver</parameter>
     <parameter key="doctrine.orm.metadata.xml.class">Doctrine\ORM\Mapping\Driver\SimplifiedXmlDriver</parameter>
     <parameter key="doctrine.orm.metadata.yml.class">Doctrine\ORM\Mapping\Driver\SimplifiedYamlDriver</parameter>
@@ -491,11 +528,24 @@
     <parameter key="doctrine.orm.validator_initializer.class">Symfony\Bridge\Doctrine\Validator\DoctrineInitializer</parameter>
     <parameter key="doctrine.orm.security.user.provider.class">Symfony\Bridge\Doctrine\Security\User\EntityUserProvider</parameter>
     <parameter key="doctrine.orm.listeners.resolve_target_entity.class">Doctrine\ORM\Tools\ResolveTargetEntityListener</parameter>
+    <parameter key="doctrine.orm.listeners.attach_entity_listeners.class">Doctrine\ORM\Tools\AttachEntityListenersListener</parameter>
     <parameter key="doctrine.orm.naming_strategy.default.class">Doctrine\ORM\Mapping\DefaultNamingStrategy</parameter>
     <parameter key="doctrine.orm.naming_strategy.underscore.class">Doctrine\ORM\Mapping\UnderscoreNamingStrategy</parameter>
+    <parameter key="doctrine.orm.entity_listener_resolver.class">Doctrine\ORM\Mapping\DefaultEntityListenerResolver</parameter>
+    <parameter key="doctrine.orm.second_level_cache.default_cache_factory.class">Doctrine\ORM\Cache\DefaultCacheFactory</parameter>
+    <parameter key="doctrine.orm.second_level_cache.default_region.class">Doctrine\ORM\Cache\Region\DefaultRegion</parameter>
+    <parameter key="doctrine.orm.second_level_cache.filelock_region.class">Doctrine\ORM\Cache\Region\FileLockRegion</parameter>
+    <parameter key="doctrine.orm.second_level_cache.logger_chain.class">Doctrine\ORM\Cache\Logging\CacheLoggerChain</parameter>
+    <parameter key="doctrine.orm.second_level_cache.logger_statistics.class">Doctrine\ORM\Cache\Logging\StatisticsCacheLogger</parameter>
+    <parameter key="doctrine.orm.second_level_cache.cache_configuration.class">Doctrine\ORM\Cache\CacheConfiguration</parameter>
+    <parameter key="doctrine.orm.second_level_cache.regions_configuration.class">Doctrine\ORM\Cache\RegionsConfiguration</parameter>
     <parameter key="doctrine.orm.auto_generate_proxy_classes">true</parameter>
     <parameter key="doctrine.orm.proxy_dir">D:/Git/WellCommerce/app/cache/dev/doctrine/orm/Proxies</parameter>
     <parameter key="doctrine.orm.proxy_namespace">Proxies</parameter>
+    <parameter key="doctrine_migrations.dir_name">D:/Git/WellCommerce/app/sql/migrations</parameter>
+    <parameter key="doctrine_migrations.namespace">WellCommerce\Migration</parameter>
+    <parameter key="doctrine_migrations.table_name">migration</parameter>
+    <parameter key="doctrine_migrations.name">WellCommerce Migrations</parameter>
     <parameter key="sensio_framework_extra.view.guesser.class">Sensio\Bundle\FrameworkExtraBundle\Templating\TemplateGuesser</parameter>
     <parameter key="sensio_framework_extra.controller.listener.class">Sensio\Bundle\FrameworkExtraBundle\EventListener\ControllerListener</parameter>
     <parameter key="sensio_framework_extra.routing.loader.annot_dir.class">Symfony\Component\Routing\Loader\AnnotationDirectoryLoader</parameter>
@@ -506,15 +556,79 @@
     <parameter key="sensio_framework_extra.converter.doctrine.class">Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\DoctrineParamConverter</parameter>
     <parameter key="sensio_framework_extra.converter.datetime.class">Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\DateTimeParamConverter</parameter>
     <parameter key="sensio_framework_extra.view.listener.class">Sensio\Bundle\FrameworkExtraBundle\EventListener\TemplateListener</parameter>
+    <parameter key="jms_di_extra.metadata.driver.annotation_driver.class">JMS\DiExtraBundle\Metadata\Driver\AnnotationDriver</parameter>
+    <parameter key="jms_di_extra.metadata.driver.configured_controller_injections.class">JMS\DiExtraBundle\Metadata\Driver\ConfiguredControllerInjectionsDriver</parameter>
+    <parameter key="jms_di_extra.metadata.driver.lazy_loading_driver.class">Metadata\Driver\LazyLoadingDriver</parameter>
+    <parameter key="jms_di_extra.metadata.metadata_factory.class">Metadata\MetadataFactory</parameter>
+    <parameter key="jms_di_extra.metadata.cache.file_cache.class">Metadata\Cache\FileCache</parameter>
+    <parameter key="jms_di_extra.metadata.converter.class">JMS\DiExtraBundle\Metadata\MetadataConverter</parameter>
+    <parameter key="jms_di_extra.controller_resolver.class">JMS\DiExtraBundle\HttpKernel\ControllerResolver</parameter>
+    <parameter key="jms_di_extra.controller_injectors_warmer.class">JMS\DiExtraBundle\HttpKernel\ControllerInjectorsWarmer</parameter>
+    <parameter key="jms_di_extra.all_bundles">false</parameter>
+    <parameter key="jms_di_extra.bundles" type="collection"/>
+    <parameter key="jms_di_extra.directories" type="collection"/>
+    <parameter key="jms_di_extra.cache_dir">D:/Git/WellCommerce/app/cache/dev/jms_diextra</parameter>
+    <parameter key="jms_di_extra.disable_grep">true</parameter>
+    <parameter key="jms_di_extra.doctrine_integration">true</parameter>
+    <parameter key="jms_di_extra.cache_warmer.controller_file_blacklist" type="collection"/>
+    <parameter key="jms_di_extra.doctrine_integration.entity_manager.file">D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53e559badf101.php</parameter>
+    <parameter key="jms_di_extra.doctrine_integration.entity_manager.class">EntityManager53e559badf101_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager</parameter>
+    <parameter key="jms_aop.cache_dir">D:/Git/WellCommerce/app/cache/dev/jms_aop</parameter>
+    <parameter key="jms_aop.interceptor_loader.class">JMS\AopBundle\Aop\InterceptorLoader</parameter>
+    <parameter key="stof_doctrine_extensions.event_listener.locale.class">Stof\DoctrineExtensionsBundle\EventListener\LocaleListener</parameter>
+    <parameter key="stof_doctrine_extensions.event_listener.logger.class">Stof\DoctrineExtensionsBundle\EventListener\LoggerListener</parameter>
+    <parameter key="stof_doctrine_extensions.event_listener.blame.class">Stof\DoctrineExtensionsBundle\EventListener\BlameListener</parameter>
+    <parameter key="stof_doctrine_extensions.uploadable.manager.class">Stof\DoctrineExtensionsBundle\Uploadable\UploadableManager</parameter>
+    <parameter key="stof_doctrine_extensions.uploadable.mime_type_guesser.class">Stof\DoctrineExtensionsBundle\Uploadable\MimeTypeGuesserAdapter</parameter>
+    <parameter key="stof_doctrine_extensions.uploadable.default_file_info.class">Stof\DoctrineExtensionsBundle\Uploadable\UploadedFileInfo</parameter>
+    <parameter key="stof_doctrine_extensions.default_locale">en_US</parameter>
+    <parameter key="stof_doctrine_extensions.default_file_path">null</parameter>
+    <parameter key="stof_doctrine_extensions.translation_fallback">false</parameter>
+    <parameter key="stof_doctrine_extensions.persist_default_translation">false</parameter>
+    <parameter key="stof_doctrine_extensions.skip_translation_on_load">false</parameter>
+    <parameter key="stof_doctrine_extensions.uploadable.validate_writable_directory">true</parameter>
+    <parameter key="stof_doctrine_extensions.listener.translatable.class">Gedmo\Translatable\TranslatableListener</parameter>
+    <parameter key="stof_doctrine_extensions.listener.timestampable.class">Gedmo\Timestampable\TimestampableListener</parameter>
+    <parameter key="stof_doctrine_extensions.listener.blameable.class">Gedmo\Blameable\BlameableListener</parameter>
+    <parameter key="stof_doctrine_extensions.listener.sluggable.class">Gedmo\Sluggable\SluggableListener</parameter>
+    <parameter key="stof_doctrine_extensions.listener.tree.class">Gedmo\Tree\TreeListener</parameter>
+    <parameter key="stof_doctrine_extensions.listener.loggable.class">Gedmo\Loggable\LoggableListener</parameter>
+    <parameter key="stof_doctrine_extensions.listener.sortable.class">Gedmo\Sortable\SortableListener</parameter>
+    <parameter key="stof_doctrine_extensions.listener.softdeleteable.class">Gedmo\SoftDeleteable\SoftDeleteableListener</parameter>
+    <parameter key="stof_doctrine_extensions.listener.uploadable.class">Gedmo\Uploadable\UploadableListener</parameter>
+    <parameter key="stof_doctrine_extensions.listener.reference_integrity.class">Gedmo\ReferenceIntegrity\ReferenceIntegrityListener</parameter>
+    <parameter key="form_builder.class">WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilder</parameter>
+    <parameter key="xajax_manager.class">WellCommerce\Bundle\CoreBundle\Helper\XajaxManager</parameter>
+    <parameter key="xajax_listener.class">WellCommerce\Bundle\CoreBundle\EventListener\XajaxListener</parameter>
+    <parameter key="xajax.class">xajax</parameter>
+    <parameter key="datagrid_renderer.class">WellCommerce\Bundle\CoreBundle\DataGrid\Renderer</parameter>
+    <parameter key="datagrid_builder.class">WellCommerce\Bundle\CoreBundle\DataGrid\DataGridBuilder</parameter>
+    <parameter key="datagrid_loader.class">WellCommerce\Bundle\CoreBundle\DataGrid\Loader\Loader</parameter>
+    <parameter key="datagrid_options.class">WellCommerce\Bundle\CoreBundle\DataGrid\Options\Options</parameter>
+    <parameter key="datagrid_columns.class">WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnCollection</parameter>
+    <parameter key="datagrid_configurator.class">WellCommerce\Bundle\CoreBundle\DataGrid\Configurator</parameter>
+    <parameter key="twig.extension.datagrid.class">WellCommerce\Bundle\CoreBundle\Twig\Extension\DataGridExtension</parameter>
+    <parameter key="twig.extension.string_loader.class">Twig_Extension_StringLoader</parameter>
+    <parameter key="twig.extension.xajax.class">WellCommerce\Bundle\CoreBundle\Twig\Extension\XajaxExtension</parameter>
+    <parameter key="admin_menu.repository.class">WellCommerce\Bundle\AdminMenuBundle\Repository\AdminMenuRepository</parameter>
+    <parameter key="admin_menu.subscriber.class">WellCommerce\Bundle\AdminMenuBundle\EventListener\AdminMenuListener</parameter>
+    <parameter key="tax.admin.controller.class">WellCommerce\Bundle\TaxBundle\Controller\AdminController</parameter>
+    <parameter key="company.admin.controller.class">WellCommerce\Bundle\CompanyBundle\Controller\Admin\CompanyController</parameter>
+    <parameter key="company.repository.class">WellCommerce\Bundle\CompanyBundle\Entity\CompanyRepository</parameter>
+    <parameter key="company.datagrid.class">WellCommerce\Bundle\CompanyBundle\DataGrid\CompanyDataGrid</parameter>
+    <parameter key="company.datagrid.configurator.class">WellCommerce\Bundle\CompanyBundle\DataGrid\CompanyDataGridConfigurator</parameter>
+    <parameter key="company.form.class">WellCommerce\Bundle\CompanyBundle\Form\CompanyForm</parameter>
+    <parameter key="company.listener.class">WellCommerce\Bundle\CompanyBundle\EventListener\CompanyListener</parameter>
     <parameter key="web_profiler.controller.profiler.class">Symfony\Bundle\WebProfilerBundle\Controller\ProfilerController</parameter>
     <parameter key="web_profiler.controller.router.class">Symfony\Bundle\WebProfilerBundle\Controller\RouterController</parameter>
     <parameter key="web_profiler.controller.exception.class">Symfony\Bundle\WebProfilerBundle\Controller\ExceptionController</parameter>
     <parameter key="twig.extension.webprofiler.class">Symfony\Bundle\WebProfilerBundle\Twig\WebProfilerExtension</parameter>
     <parameter key="web_profiler.debug_toolbar.position">bottom</parameter>
-    <parameter key="web_profiler.debug_toolbar.class">Symfony\Bundle\WebProfilerBundle\EventListener\WebDebugToolbarListener</parameter>
-    <parameter key="web_profiler.debug_toolbar.intercept_redirects">false</parameter>
-    <parameter key="web_profiler.debug_toolbar.mode">2</parameter>
     <parameter key="sensio_distribution.webconfigurator.class">Sensio\Bundle\DistributionBundle\Configurator\Configurator</parameter>
+    <parameter key="sensio_distribution.webconfigurator.doctrine_step.class">Sensio\Bundle\DistributionBundle\Configurator\Step\DoctrineStep</parameter>
+    <parameter key="sensio_distribution.webconfigurator.secret_step.class">Sensio\Bundle\DistributionBundle\Configurator\Step\SecretStep</parameter>
+    <parameter key="sensio_distribution.security_checker.class">SensioLabs\Security\SecurityChecker</parameter>
+    <parameter key="sensio_distribution.security_checker.command.class">SensioLabs\Security\Command\SecurityCheckerCommand</parameter>
     <parameter key="data_collector.templates" type="collection">
       <parameter key="data_collector.config" type="collection">
         <parameter>config</parameter>
@@ -562,10 +676,12 @@
       </parameter>
       <parameter key="data_collector.doctrine" type="collection">
         <parameter>db</parameter>
-        <parameter>DoctrineBundle:Collector:db</parameter>
+        <parameter>@Doctrine/Collector/db.html.twig</parameter>
       </parameter>
     </parameter>
-    <parameter key="console.command.ids" type="collection"/>
+    <parameter key="console.command.ids" type="collection">
+      <parameter>sensio_distribution.security_checker.command</parameter>
+    </parameter>
   </parameters>
   <services>
     <service id="controller_name_converter" class="Symfony\Bundle\FrameworkBundle\Controller\ControllerNameParser" public="false">
@@ -636,6 +752,14 @@
           <service class="Symfony\Bridge\Doctrine\CacheWarmer\ProxyCacheWarmer" public="false">
             <tag name="kernel.cache_warmer"/>
             <argument type="service" id="doctrine"/>
+          </service>
+        </argument>
+        <argument type="service">
+          <service class="JMS\DiExtraBundle\HttpKernel\ControllerInjectorsWarmer" public="false">
+            <tag name="kernel.cache_warmer"/>
+            <argument type="service" id="kernel"/>
+            <argument type="service" id="jms_di_extra.controller_resolver"/>
+            <argument type="collection"/>
           </service>
         </argument>
       </argument>
@@ -1043,19 +1167,20 @@
         <argument>Sensio\Bundle\FrameworkExtraBundle\EventListener\SecurityListener</argument>
       </call>
       <call method="addSubscriberService">
-        <argument>web_profiler.debug_toolbar</argument>
-        <argument>Symfony\Bundle\WebProfilerBundle\EventListener\WebDebugToolbarListener</argument>
+        <argument>xajax_listener</argument>
+        <argument>WellCommerce\Bundle\CoreBundle\EventListener\XajaxListener</argument>
+      </call>
+      <call method="addSubscriberService">
+        <argument>admin_menu.subscriber</argument>
+        <argument>WellCommerce\Bundle\AdminMenuBundle\EventListener\AdminMenuListener</argument>
+      </call>
+      <call method="addSubscriberService">
+        <argument>company.listener</argument>
+        <argument>WellCommerce\Bundle\CompanyBundle\EventListener\CompanyListener</argument>
       </call>
     </service>
     <service id="debug.controller_resolver" class="Symfony\Component\HttpKernel\Controller\TraceableControllerResolver">
-      <argument type="service">
-        <service class="Symfony\Bundle\FrameworkBundle\Controller\ControllerResolver" public="false">
-          <tag name="monolog.logger" channel="request"/>
-          <argument type="service" id="service_container"/>
-          <argument type="service" id="controller_name_converter"/>
-          <argument type="service" id="monolog.logger.request" on-invalid="ignore"/>
-        </service>
-      </argument>
+      <argument type="service" id="jms_di_extra.controller_resolver"/>
       <argument type="service" id="debug.stopwatch"/>
     </service>
     <service id="debug.deprecation_logger_listener" class="Symfony\Component\HttpKernel\EventListener\ErrorsLoggerListener">
@@ -1109,197 +1234,6 @@
       <tag name="monolog.logger" channel="security"/>
       <argument>D:/Git/WellCommerce/app/cache/dev/secure_random.seed</argument>
       <argument type="service" id="monolog.logger.security" on-invalid="ignore"/>
-    </service>
-    <service id="form.resolved_type_factory" class="Symfony\Component\Form\Extension\DataCollector\Proxy\ResolvedTypeFactoryDataCollectorProxy">
-      <argument type="service" id="c4a66353474aefaa3d2f59f0ff615b759b84ee073ec3425c1f7a6465954b59e4_1"/>
-      <argument type="service" id="data_collector.form"/>
-    </service>
-    <service id="form.registry" class="Symfony\Component\Form\FormRegistry">
-      <argument type="collection">
-        <argument type="service">
-          <service class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension" public="false">
-            <argument type="service" id="service_container"/>
-            <argument type="collection">
-              <argument key="form">form.type.form</argument>
-              <argument key="birthday">form.type.birthday</argument>
-              <argument key="checkbox">form.type.checkbox</argument>
-              <argument key="choice">form.type.choice</argument>
-              <argument key="collection">form.type.collection</argument>
-              <argument key="country">form.type.country</argument>
-              <argument key="date">form.type.date</argument>
-              <argument key="datetime">form.type.datetime</argument>
-              <argument key="email">form.type.email</argument>
-              <argument key="file">form.type.file</argument>
-              <argument key="hidden">form.type.hidden</argument>
-              <argument key="integer">form.type.integer</argument>
-              <argument key="language">form.type.language</argument>
-              <argument key="locale">form.type.locale</argument>
-              <argument key="money">form.type.money</argument>
-              <argument key="number">form.type.number</argument>
-              <argument key="password">form.type.password</argument>
-              <argument key="percent">form.type.percent</argument>
-              <argument key="radio">form.type.radio</argument>
-              <argument key="repeated">form.type.repeated</argument>
-              <argument key="search">form.type.search</argument>
-              <argument key="textarea">form.type.textarea</argument>
-              <argument key="text">form.type.text</argument>
-              <argument key="time">form.type.time</argument>
-              <argument key="timezone">form.type.timezone</argument>
-              <argument key="url">form.type.url</argument>
-              <argument key="button">form.type.button</argument>
-              <argument key="submit">form.type.submit</argument>
-              <argument key="reset">form.type.reset</argument>
-              <argument key="currency">form.type.currency</argument>
-              <argument key="entity">form.type.entity</argument>
-            </argument>
-            <argument type="collection">
-              <argument key="form" type="collection">
-                <argument>form.type_extension.form.http_foundation</argument>
-                <argument>form.type_extension.form.validator</argument>
-                <argument>form.type_extension.csrf</argument>
-                <argument>form.type_extension.form.data_collector</argument>
-              </argument>
-              <argument key="repeated" type="collection">
-                <argument>form.type_extension.repeated.validator</argument>
-              </argument>
-              <argument key="submit" type="collection">
-                <argument>form.type_extension.submit.validator</argument>
-              </argument>
-            </argument>
-            <argument type="collection">
-              <argument>form.type_guesser.validator</argument>
-              <argument>form.type_guesser.doctrine</argument>
-            </argument>
-          </service>
-        </argument>
-      </argument>
-      <argument type="service" id="form.resolved_type_factory"/>
-    </service>
-    <service id="form.factory" class="Symfony\Component\Form\FormFactory">
-      <argument type="service" id="form.registry"/>
-      <argument type="service" id="form.resolved_type_factory"/>
-    </service>
-    <service id="form.type_guesser.validator" class="Symfony\Component\Form\Extension\Validator\ValidatorTypeGuesser">
-      <tag name="form.type_guesser"/>
-      <argument type="service" id="validator"/>
-    </service>
-    <service id="form.type.form" class="Symfony\Component\Form\Extension\Core\Type\FormType">
-      <tag name="form.type" alias="form"/>
-      <argument type="service" id="property_accessor"/>
-    </service>
-    <service id="form.type.birthday" class="Symfony\Component\Form\Extension\Core\Type\BirthdayType">
-      <tag name="form.type" alias="birthday"/>
-    </service>
-    <service id="form.type.checkbox" class="Symfony\Component\Form\Extension\Core\Type\CheckboxType">
-      <tag name="form.type" alias="checkbox"/>
-    </service>
-    <service id="form.type.choice" class="Symfony\Component\Form\Extension\Core\Type\ChoiceType">
-      <tag name="form.type" alias="choice"/>
-    </service>
-    <service id="form.type.collection" class="Symfony\Component\Form\Extension\Core\Type\CollectionType">
-      <tag name="form.type" alias="collection"/>
-    </service>
-    <service id="form.type.country" class="Symfony\Component\Form\Extension\Core\Type\CountryType">
-      <tag name="form.type" alias="country"/>
-    </service>
-    <service id="form.type.date" class="Symfony\Component\Form\Extension\Core\Type\DateType">
-      <tag name="form.type" alias="date"/>
-    </service>
-    <service id="form.type.datetime" class="Symfony\Component\Form\Extension\Core\Type\DateTimeType">
-      <tag name="form.type" alias="datetime"/>
-    </service>
-    <service id="form.type.email" class="Symfony\Component\Form\Extension\Core\Type\EmailType">
-      <tag name="form.type" alias="email"/>
-    </service>
-    <service id="form.type.file" class="Symfony\Component\Form\Extension\Core\Type\FileType">
-      <tag name="form.type" alias="file"/>
-    </service>
-    <service id="form.type.hidden" class="Symfony\Component\Form\Extension\Core\Type\HiddenType">
-      <tag name="form.type" alias="hidden"/>
-    </service>
-    <service id="form.type.integer" class="Symfony\Component\Form\Extension\Core\Type\IntegerType">
-      <tag name="form.type" alias="integer"/>
-    </service>
-    <service id="form.type.language" class="Symfony\Component\Form\Extension\Core\Type\LanguageType">
-      <tag name="form.type" alias="language"/>
-    </service>
-    <service id="form.type.locale" class="Symfony\Component\Form\Extension\Core\Type\LocaleType">
-      <tag name="form.type" alias="locale"/>
-    </service>
-    <service id="form.type.money" class="Symfony\Component\Form\Extension\Core\Type\MoneyType">
-      <tag name="form.type" alias="money"/>
-    </service>
-    <service id="form.type.number" class="Symfony\Component\Form\Extension\Core\Type\NumberType">
-      <tag name="form.type" alias="number"/>
-    </service>
-    <service id="form.type.password" class="Symfony\Component\Form\Extension\Core\Type\PasswordType">
-      <tag name="form.type" alias="password"/>
-    </service>
-    <service id="form.type.percent" class="Symfony\Component\Form\Extension\Core\Type\PercentType">
-      <tag name="form.type" alias="percent"/>
-    </service>
-    <service id="form.type.radio" class="Symfony\Component\Form\Extension\Core\Type\RadioType">
-      <tag name="form.type" alias="radio"/>
-    </service>
-    <service id="form.type.repeated" class="Symfony\Component\Form\Extension\Core\Type\RepeatedType">
-      <tag name="form.type" alias="repeated"/>
-    </service>
-    <service id="form.type.search" class="Symfony\Component\Form\Extension\Core\Type\SearchType">
-      <tag name="form.type" alias="search"/>
-    </service>
-    <service id="form.type.textarea" class="Symfony\Component\Form\Extension\Core\Type\TextareaType">
-      <tag name="form.type" alias="textarea"/>
-    </service>
-    <service id="form.type.text" class="Symfony\Component\Form\Extension\Core\Type\TextType">
-      <tag name="form.type" alias="text"/>
-    </service>
-    <service id="form.type.time" class="Symfony\Component\Form\Extension\Core\Type\TimeType">
-      <tag name="form.type" alias="time"/>
-    </service>
-    <service id="form.type.timezone" class="Symfony\Component\Form\Extension\Core\Type\TimezoneType">
-      <tag name="form.type" alias="timezone"/>
-    </service>
-    <service id="form.type.url" class="Symfony\Component\Form\Extension\Core\Type\UrlType">
-      <tag name="form.type" alias="url"/>
-    </service>
-    <service id="form.type.button" class="Symfony\Component\Form\Extension\Core\Type\ButtonType">
-      <tag name="form.type" alias="button"/>
-    </service>
-    <service id="form.type.submit" class="Symfony\Component\Form\Extension\Core\Type\SubmitType">
-      <tag name="form.type" alias="submit"/>
-    </service>
-    <service id="form.type.reset" class="Symfony\Component\Form\Extension\Core\Type\ResetType">
-      <tag name="form.type" alias="reset"/>
-    </service>
-    <service id="form.type.currency" class="Symfony\Component\Form\Extension\Core\Type\CurrencyType">
-      <tag name="form.type" alias="currency"/>
-    </service>
-    <service id="form.type_extension.form.http_foundation" class="Symfony\Component\Form\Extension\HttpFoundation\Type\FormTypeHttpFoundationExtension">
-      <tag name="form.type_extension" alias="form"/>
-      <argument type="service">
-        <service class="Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationRequestHandler" public="false"/>
-      </argument>
-    </service>
-    <service id="form.type_extension.form.validator" class="Symfony\Component\Form\Extension\Validator\Type\FormTypeValidatorExtension">
-      <tag name="form.type_extension" alias="form"/>
-      <argument type="service" id="validator"/>
-    </service>
-    <service id="form.type_extension.repeated.validator" class="Symfony\Component\Form\Extension\Validator\Type\RepeatedTypeValidatorExtension">
-      <tag name="form.type_extension" alias="repeated"/>
-    </service>
-    <service id="form.type_extension.submit.validator" class="Symfony\Component\Form\Extension\Validator\Type\SubmitTypeValidatorExtension">
-      <tag name="form.type_extension" alias="submit"/>
-    </service>
-    <service id="form.csrf_provider" class="Symfony\Component\Form\Extension\Csrf\CsrfProvider\CsrfTokenManagerAdapter">
-      <argument type="service" id="security.csrf.token_manager"/>
-    </service>
-    <service id="form.type_extension.csrf" class="Symfony\Component\Form\Extension\Csrf\Type\FormTypeCsrfExtension">
-      <tag name="form.type_extension" alias="form"/>
-      <argument type="service" id="form.csrf_provider"/>
-      <argument>true</argument>
-      <argument>_token</argument>
-      <argument type="service" id="translator.default"/>
-      <argument>validators</argument>
     </service>
     <service id="security.csrf.token_manager" class="Symfony\Component\Security\Csrf\CsrfTokenManager">
       <argument type="service">
@@ -1376,7 +1310,7 @@
               </argument>
             </service>
           </argument>
-          <argument type="service" id="form.csrf_provider" on-invalid="null"/>
+          <argument>null</argument>
         </service>
       </argument>
     </service>
@@ -1388,7 +1322,7 @@
       <argument type="service" id="service_container"/>
     </service>
     <service id="validator" class="Symfony\Component\Validator\ValidatorInterface" factory-method="getValidator" factory-service="validator.builder"/>
-    <service id="validator.builder" class="Symfony\Component\Validator\ValidatorBuilderInterface" factory-method="createValidatorBuilder">
+    <service id="validator.builder" class="Symfony\Component\Validator\ValidatorBuilderInterface" factory-method="createValidatorBuilder" factory-class="%validator.builder.factory.class%">
       <call method="setConstraintValidatorFactory">
         <argument type="service">
           <service class="Symfony\Bundle\FrameworkBundle\Validator\ConstraintValidatorFactory" public="false">
@@ -1437,11 +1371,6 @@
       <tag name="kernel.event_subscriber"/>
       <argument type="service" id="uri_signer"/>
       <argument>/_fragment</argument>
-    </service>
-    <service id="c4a66353474aefaa3d2f59f0ff615b759b84ee073ec3425c1f7a6465954b59e4_1" class="Symfony\Component\Form\ResolvedFormTypeFactory"/>
-    <service id="form.type_extension.form.data_collector" class="Symfony\Component\Form\Extension\DataCollector\Type\DataCollectorTypeExtension">
-      <tag name="form.type_extension" alias="form"/>
-      <argument type="service" id="data_collector.form"/>
     </service>
     <service id="profiler" class="Symfony\Component\HttpKernel\Profiler\Profiler">
       <tag name="monolog.logger" channel="profiler"/>
@@ -1532,7 +1461,7 @@
       <call method="add">
         <argument type="service">
           <service class="Doctrine\Bundle\DoctrineBundle\DataCollector\DoctrineDataCollector" public="false">
-            <tag name="data_collector" template="DoctrineBundle:Collector:db" id="db"/>
+            <tag name="data_collector" template="@Doctrine/Collector/db.html.twig" id="db"/>
             <argument type="service" id="doctrine"/>
             <call method="addLogger">
               <argument>default</argument>
@@ -1598,6 +1527,7 @@
               <service class="Symfony\Bundle\AsseticBundle\Routing\AsseticLoader" public="false">
                 <tag name="routing.loader"/>
                 <argument type="service" id="assetic.asset_manager"/>
+                <argument type="collection"/>
               </service>
             </argument>
           </call>
@@ -1665,7 +1595,7 @@
       <argument type="collection">
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>53e0decac9cc1</argument>
+            <argument>53e559bab0eae</argument>
           </service>
         </argument>
       </argument>
@@ -1781,7 +1711,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.context"/>
-            <argument>53e0decac9cc1</argument>
+            <argument>53e559bab0eae</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
           </service>
         </argument>
@@ -1917,23 +1847,7 @@
         </argument>
       </call>
       <call method="addExtension">
-        <argument type="service">
-          <service class="Symfony\Bridge\Twig\Extension\FormExtension" public="false">
-            <tag name="twig.extension"/>
-            <argument type="service">
-              <service class="Symfony\Bridge\Twig\Form\TwigRenderer" public="false">
-                <argument type="service">
-                  <service class="Symfony\Bridge\Twig\Form\TwigRendererEngine" public="false">
-                    <argument type="collection">
-                      <argument>form_div_layout.html.twig</argument>
-                    </argument>
-                  </service>
-                </argument>
-                <argument type="service" id="form.csrf_provider" on-invalid="null"/>
-              </service>
-            </argument>
-          </service>
-        </argument>
+        <argument type="service" id="twig.extension.form"/>
       </call>
       <call method="addExtension">
         <argument type="service">
@@ -1951,8 +1865,14 @@
             <argument type="service" id="templating.name_parser"/>
             <argument>true</argument>
             <argument type="collection"/>
-            <argument type="collection"/>
-            <argument type="service" id="assetic.value_supplier.default" on-invalid="null"/>
+            <argument type="collection">
+              <argument>WellCommerceCoreBundle</argument>
+            </argument>
+            <argument type="service">
+              <service class="Symfony\Bundle\AsseticBundle\DefaultValueSupplier" public="false">
+                <argument type="service" id="service_container"/>
+              </service>
+            </argument>
           </service>
         </argument>
       </call>
@@ -1962,6 +1882,15 @@
             <tag name="twig.extension"/>
           </service>
         </argument>
+      </call>
+      <call method="addExtension">
+        <argument type="service" id="twig.extension.string_loader"/>
+      </call>
+      <call method="addExtension">
+        <argument type="service" id="twig.extension.datagrid"/>
+      </call>
+      <call method="addExtension">
+        <argument type="service" id="twig.extension.xajax"/>
       </call>
       <call method="addExtension">
         <argument type="service">
@@ -1974,6 +1903,10 @@
         <argument>app</argument>
         <argument type="service" id="templating.globals"/>
       </call>
+    </service>
+    <service id="twig.extension.form" class="WellCommerce\Bundle\CoreBundle\Twig\Extension\FormExtension">
+      <tag name="twig.extension"/>
+      <argument type="service" id="service_container"/>
     </service>
     <service id="twig.translation.extractor" class="Symfony\Bridge\Twig\Translation\TwigExtractor">
       <tag name="translation.extractor" alias="twig"/>
@@ -2001,12 +1934,13 @@
       <argument>false</argument>
       <argument type="collection"/>
     </service>
-    <service id="45b8503f7c81ecf86e007cefa315dd13bce66306f5c1d14b17417bdf2f866704_3" class="Swift_Transport_Esmtp_Auth_PlainAuthenticator"/>
-    <service id="45b8503f7c81ecf86e007cefa315dd13bce66306f5c1d14b17417bdf2f866704_2" class="Swift_Transport_Esmtp_Auth_LoginAuthenticator"/>
-    <service id="45b8503f7c81ecf86e007cefa315dd13bce66306f5c1d14b17417bdf2f866704_1" class="Swift_Transport_Esmtp_Auth_CramMd5Authenticator"/>
+    <service id="9add69bc6fb9f594c7aff7f91553270137e4cd6f34fdd21b5e258ec96675da25_3" class="Swift_Transport_Esmtp_Auth_PlainAuthenticator"/>
+    <service id="9add69bc6fb9f594c7aff7f91553270137e4cd6f34fdd21b5e258ec96675da25_2" class="Swift_Transport_Esmtp_Auth_LoginAuthenticator"/>
+    <service id="9add69bc6fb9f594c7aff7f91553270137e4cd6f34fdd21b5e258ec96675da25_1" class="Swift_Transport_Esmtp_Auth_CramMd5Authenticator"/>
     <service id="swiftmailer.email_sender.listener" class="Symfony\Bundle\SwiftmailerBundle\EventListener\EmailSenderListener">
       <tag name="kernel.event_subscriber"/>
       <argument type="service" id="service_container"/>
+      <argument type="service" id="logger" on-invalid="null"/>
     </service>
     <service id="swiftmailer.mailer.default.transport.eventdispatcher" class="Swift_Events_SimpleEventDispatcher" public="false"/>
     <service id="swiftmailer.mailer.default" class="Swift_Mailer">
@@ -2031,7 +1965,9 @@
             <argument type="service">
               <service class="Assetic\Extension\Twig\TwigFormulaLoader" public="false">
                 <tag name="assetic.templating.twig"/>
+                <tag name="monolog.logger" channel="assetic"/>
                 <argument type="service" id="twig"/>
+                <argument type="service" id="monolog.logger.assetic" on-invalid="ignore"/>
               </service>
             </argument>
             <argument type="service">
@@ -2043,6 +1979,33 @@
           </service>
         </argument>
       </argument>
+      <call method="addResource">
+        <argument type="service">
+          <service class="Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource" public="false">
+            <tag name="assetic.templating.twig"/>
+            <tag name="assetic.formula_resource" loader="twig"/>
+            <argument type="collection">
+              <argument type="service">
+                <service class="%assetic.directory_resource.class%" public="false">
+                  <argument type="service" id="templating.loader"/>
+                  <argument>WellCommerceCoreBundle</argument>
+                  <argument>D:/Git/WellCommerce/app/Resources/WellCommerceCoreBundle/views</argument>
+                  <argument>/\.[^.]+\.twig$/</argument>
+                </service>
+              </argument>
+              <argument type="service">
+                <service class="%assetic.directory_resource.class%" public="false">
+                  <argument type="service" id="templating.loader"/>
+                  <argument>WellCommerceCoreBundle</argument>
+                  <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\CoreBundle/Resources/views</argument>
+                  <argument>/\.[^.]+\.twig$/</argument>
+                </service>
+              </argument>
+            </argument>
+          </service>
+        </argument>
+        <argument>twig</argument>
+      </call>
       <call method="addResource">
         <argument type="service">
           <service class="Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource" public="false">
@@ -2064,7 +2027,7 @@
         <service class="Symfony\Component\DependencyInjection\ParameterBag\ParameterBag" factory-method="getParameterBag" factory-service="service_container" public="false"/>
       </argument>
       <argument>D:/Git/WellCommerce/app/../web</argument>
-      <argument>true</argument>
+      <argument>false</argument>
       <call method="addWorker">
         <argument type="service">
           <service class="Symfony\Bundle\AsseticBundle\Factory\Worker\UseControllerWorker" public="false">
@@ -2072,9 +2035,6 @@
           </service>
         </argument>
       </call>
-    </service>
-    <service id="assetic.value_supplier.default" class="Symfony\Bundle\AsseticBundle\DefaultValueSupplier" public="false">
-      <argument type="service" id="service_container"/>
     </service>
     <service id="assetic.filter.cssrewrite" class="Assetic\Filter\CssRewriteFilter">
       <tag name="assetic.filter" alias="cssrewrite"/>
@@ -2085,9 +2045,6 @@
       <argument type="service" id="assetic.cache"/>
       <argument>false</argument>
       <argument type="service" id="profiler" on-invalid="null"/>
-      <call method="setValueSupplier">
-        <argument type="service" id="assetic.value_supplier.default" on-invalid="ignore"/>
-      </call>
     </service>
     <service id="assetic.cache" class="Assetic\Cache\FilesystemCache" public="false">
       <argument>D:/Git/WellCommerce/app/cache/dev/assetic/assets</argument>
@@ -2110,12 +2067,12 @@
       <argument>default</argument>
     </service>
     <service id="doctrine.dbal.logger.profiling.default" class="Doctrine\DBAL\Logging\DebugStack" public="false"/>
-    <service id="doctrine.dbal.default_connection" class="stdClass" factory-method="createConnection" factory-service="doctrine.dbal.connection_factory">
+    <service id="doctrine.dbal.default_connection" class="Doctrine\DBAL\Connection" factory-method="createConnection" factory-service="doctrine.dbal.connection_factory">
       <argument type="collection">
         <argument key="driver">pdo_mysql</argument>
         <argument key="host">127.0.0.1</argument>
         <argument key="port">null</argument>
-        <argument key="dbname">gekosale3</argument>
+        <argument key="dbname">symfony</argument>
         <argument key="user">root</argument>
         <argument key="password">null</argument>
         <argument key="charset">UTF8</argument>
@@ -2146,6 +2103,26 @@
       <argument type="service">
         <service class="Symfony\Bridge\Doctrine\ContainerAwareEventManager" public="false">
           <argument type="service" id="service_container"/>
+          <call method="addEventSubscriber">
+            <argument type="service">
+              <service class="Gedmo\Timestampable\TimestampableListener" public="false">
+                <tag name="doctrine.event_subscriber" connection="default"/>
+                <call method="setAnnotationReader">
+                  <argument type="service" id="annotation_reader"/>
+                </call>
+              </service>
+            </argument>
+          </call>
+          <call method="addEventSubscriber">
+            <argument type="service">
+              <service class="Gedmo\Tree\TreeListener" public="false">
+                <tag name="doctrine.event_subscriber" connection="default"/>
+                <call method="setAnnotationReader">
+                  <argument type="service" id="annotation_reader"/>
+                </call>
+              </service>
+            </argument>
+          </call>
         </service>
       </argument>
       <argument type="collection"/>
@@ -2166,72 +2143,183 @@
       <tag name="validator.initializer"/>
       <argument type="service" id="doctrine"/>
     </service>
+    <service id="doctrine_cache.providers.doctrine.orm.default_metadata_cache" class="Doctrine\Common\Cache\ArrayCache">
+      <call method="setNamespace">
+        <argument>sf2orm_default_57f7d8d58fbfa6d9cd5f587f86128742827bd6624293cd080624608f84ebcf49</argument>
+      </call>
+    </service>
+    <service id="doctrine_cache.providers.doctrine.orm.default_result_cache" class="Doctrine\Common\Cache\ArrayCache">
+      <call method="setNamespace">
+        <argument>sf2orm_default_57f7d8d58fbfa6d9cd5f587f86128742827bd6624293cd080624608f84ebcf49</argument>
+      </call>
+    </service>
+    <service id="doctrine_cache.providers.doctrine.orm.default_query_cache" class="Doctrine\Common\Cache\ArrayCache">
+      <call method="setNamespace">
+        <argument>sf2orm_default_57f7d8d58fbfa6d9cd5f587f86128742827bd6624293cd080624608f84ebcf49</argument>
+      </call>
+    </service>
+    <service id="doctrine.orm.default_entity_listener_resolver" class="Doctrine\ORM\Mapping\DefaultEntityListenerResolver"/>
     <service id="doctrine.orm.default_manager_configurator" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator">
       <argument type="collection"/>
       <argument type="collection"/>
     </service>
-    <service id="doctrine.orm.default_entity_manager" class="Doctrine\ORM\EntityManager" factory-method="create">
-      <argument type="service" id="doctrine.dbal.default_connection"/>
+    <service id="doctrine.orm.default_entity_manager" class="EntityManager53e559badf101_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager">
+      <file>D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53e559badf101.php</file>
       <argument type="service">
-        <service class="Doctrine\ORM\Configuration" public="false">
-          <call method="setEntityNamespaces">
-            <argument type="collection"/>
-          </call>
-          <call method="setMetadataCacheImpl">
-            <argument type="service">
-              <service class="Doctrine\Common\Cache\ArrayCache" public="false">
-                <call method="setNamespace">
-                  <argument>sf2orm_default_57f7d8d58fbfa6d9cd5f587f86128742827bd6624293cd080624608f84ebcf49</argument>
-                </call>
-              </service>
-            </argument>
-          </call>
-          <call method="setQueryCacheImpl">
-            <argument type="service">
-              <service class="Doctrine\Common\Cache\ArrayCache" public="false">
-                <call method="setNamespace">
-                  <argument>sf2orm_default_57f7d8d58fbfa6d9cd5f587f86128742827bd6624293cd080624608f84ebcf49</argument>
-                </call>
-              </service>
-            </argument>
-          </call>
-          <call method="setResultCacheImpl">
-            <argument type="service">
-              <service class="Doctrine\Common\Cache\ArrayCache" public="false">
-                <call method="setNamespace">
-                  <argument>sf2orm_default_57f7d8d58fbfa6d9cd5f587f86128742827bd6624293cd080624608f84ebcf49</argument>
-                </call>
-              </service>
-            </argument>
-          </call>
-          <call method="setMetadataDriverImpl">
-            <argument type="service">
-              <service class="Doctrine\ORM\Mapping\Driver\DriverChain" public="false"/>
-            </argument>
-          </call>
-          <call method="setProxyDir">
-            <argument>D:/Git/WellCommerce/app/cache/dev/doctrine/orm/Proxies</argument>
-          </call>
-          <call method="setProxyNamespace">
-            <argument>Proxies</argument>
-          </call>
-          <call method="setAutoGenerateProxyClasses">
-            <argument>true</argument>
-          </call>
-          <call method="setClassMetadataFactoryName">
-            <argument>Doctrine\ORM\Mapping\ClassMetadataFactory</argument>
-          </call>
-          <call method="setDefaultRepositoryClassName">
-            <argument>Doctrine\ORM\EntityRepository</argument>
-          </call>
-          <call method="setNamingStrategy">
-            <argument type="service">
-              <service class="Doctrine\ORM\Mapping\DefaultNamingStrategy" public="false"/>
-            </argument>
-          </call>
+        <service class="Doctrine\ORM\EntityManager" factory-method="create" factory-class="%doctrine.orm.entity_manager.class%" public="false">
+          <argument type="service" id="doctrine.dbal.default_connection"/>
+          <argument type="service">
+            <service class="Doctrine\ORM\Configuration" public="false">
+              <call method="setEntityNamespaces">
+                <argument type="collection">
+                  <argument key="GedmoTranslatable">Gedmo\Translatable\Entity</argument>
+                  <argument key="GedmoTranslator">Gedmo\Translator\Entity</argument>
+                  <argument key="GedmoLoggable">Gedmo\Loggable\Entity</argument>
+                  <argument key="GedmoTree">Gedmo\Tree\Entity</argument>
+                  <argument key="WellCommerceTaxBundle">WellCommerce\Bundle\TaxBundle\Entity</argument>
+                  <argument key="WellCommerceCompanyBundle">WellCommerce\Bundle\CompanyBundle\Entity</argument>
+                </argument>
+              </call>
+              <call method="setMetadataCacheImpl">
+                <argument type="service" id="doctrine_cache.providers.doctrine.orm.default_metadata_cache"/>
+              </call>
+              <call method="setQueryCacheImpl">
+                <argument type="service" id="doctrine_cache.providers.doctrine.orm.default_query_cache"/>
+              </call>
+              <call method="setResultCacheImpl">
+                <argument type="service" id="doctrine_cache.providers.doctrine.orm.default_result_cache"/>
+              </call>
+              <call method="setMetadataDriverImpl">
+                <argument type="service">
+                  <service class="Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain" public="false">
+                    <call method="addDriver">
+                      <argument type="service">
+                        <service class="Doctrine\ORM\Mapping\Driver\AnnotationDriver" public="false">
+                          <argument type="service" id="annotation_reader"/>
+                          <argument type="collection">
+                            <argument>D:\Git\WellCommerce\vendor\gedmo\doctrine-extensions\lib\Gedmo\Translatable\Entity\MappedSuperclass</argument>
+                            <argument>D:\Git\WellCommerce\vendor\gedmo\doctrine-extensions\lib\Gedmo\Translator\Entity</argument>
+                            <argument>D:\Git\WellCommerce\vendor\gedmo\doctrine-extensions\lib\Gedmo\Loggable\Entity</argument>
+                            <argument>D:\Git\WellCommerce\vendor\gedmo\doctrine-extensions\lib\Gedmo\Tree\Entity</argument>
+                            <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\TaxBundle\Entity</argument>
+                            <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\CompanyBundle\Entity</argument>
+                          </argument>
+                        </service>
+                      </argument>
+                      <argument>Gedmo\Translatable\Entity</argument>
+                    </call>
+                    <call method="addDriver">
+                      <argument type="service">
+                        <service class="Doctrine\ORM\Mapping\Driver\AnnotationDriver" public="false">
+                          <argument type="service" id="annotation_reader"/>
+                          <argument type="collection">
+                            <argument>D:\Git\WellCommerce\vendor\gedmo\doctrine-extensions\lib\Gedmo\Translatable\Entity\MappedSuperclass</argument>
+                            <argument>D:\Git\WellCommerce\vendor\gedmo\doctrine-extensions\lib\Gedmo\Translator\Entity</argument>
+                            <argument>D:\Git\WellCommerce\vendor\gedmo\doctrine-extensions\lib\Gedmo\Loggable\Entity</argument>
+                            <argument>D:\Git\WellCommerce\vendor\gedmo\doctrine-extensions\lib\Gedmo\Tree\Entity</argument>
+                            <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\TaxBundle\Entity</argument>
+                            <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\CompanyBundle\Entity</argument>
+                          </argument>
+                        </service>
+                      </argument>
+                      <argument>Gedmo\Translator\Entity</argument>
+                    </call>
+                    <call method="addDriver">
+                      <argument type="service">
+                        <service class="Doctrine\ORM\Mapping\Driver\AnnotationDriver" public="false">
+                          <argument type="service" id="annotation_reader"/>
+                          <argument type="collection">
+                            <argument>D:\Git\WellCommerce\vendor\gedmo\doctrine-extensions\lib\Gedmo\Translatable\Entity\MappedSuperclass</argument>
+                            <argument>D:\Git\WellCommerce\vendor\gedmo\doctrine-extensions\lib\Gedmo\Translator\Entity</argument>
+                            <argument>D:\Git\WellCommerce\vendor\gedmo\doctrine-extensions\lib\Gedmo\Loggable\Entity</argument>
+                            <argument>D:\Git\WellCommerce\vendor\gedmo\doctrine-extensions\lib\Gedmo\Tree\Entity</argument>
+                            <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\TaxBundle\Entity</argument>
+                            <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\CompanyBundle\Entity</argument>
+                          </argument>
+                        </service>
+                      </argument>
+                      <argument>Gedmo\Loggable\Entity</argument>
+                    </call>
+                    <call method="addDriver">
+                      <argument type="service">
+                        <service class="Doctrine\ORM\Mapping\Driver\AnnotationDriver" public="false">
+                          <argument type="service" id="annotation_reader"/>
+                          <argument type="collection">
+                            <argument>D:\Git\WellCommerce\vendor\gedmo\doctrine-extensions\lib\Gedmo\Translatable\Entity\MappedSuperclass</argument>
+                            <argument>D:\Git\WellCommerce\vendor\gedmo\doctrine-extensions\lib\Gedmo\Translator\Entity</argument>
+                            <argument>D:\Git\WellCommerce\vendor\gedmo\doctrine-extensions\lib\Gedmo\Loggable\Entity</argument>
+                            <argument>D:\Git\WellCommerce\vendor\gedmo\doctrine-extensions\lib\Gedmo\Tree\Entity</argument>
+                            <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\TaxBundle\Entity</argument>
+                            <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\CompanyBundle\Entity</argument>
+                          </argument>
+                        </service>
+                      </argument>
+                      <argument>Gedmo\Tree\Entity</argument>
+                    </call>
+                    <call method="addDriver">
+                      <argument type="service">
+                        <service class="Doctrine\ORM\Mapping\Driver\AnnotationDriver" public="false">
+                          <argument type="service" id="annotation_reader"/>
+                          <argument type="collection">
+                            <argument>D:\Git\WellCommerce\vendor\gedmo\doctrine-extensions\lib\Gedmo\Translatable\Entity\MappedSuperclass</argument>
+                            <argument>D:\Git\WellCommerce\vendor\gedmo\doctrine-extensions\lib\Gedmo\Translator\Entity</argument>
+                            <argument>D:\Git\WellCommerce\vendor\gedmo\doctrine-extensions\lib\Gedmo\Loggable\Entity</argument>
+                            <argument>D:\Git\WellCommerce\vendor\gedmo\doctrine-extensions\lib\Gedmo\Tree\Entity</argument>
+                            <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\TaxBundle\Entity</argument>
+                            <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\CompanyBundle\Entity</argument>
+                          </argument>
+                        </service>
+                      </argument>
+                      <argument>WellCommerce\Bundle\TaxBundle\Entity</argument>
+                    </call>
+                    <call method="addDriver">
+                      <argument type="service">
+                        <service class="Doctrine\ORM\Mapping\Driver\AnnotationDriver" public="false">
+                          <argument type="service" id="annotation_reader"/>
+                          <argument type="collection">
+                            <argument>D:\Git\WellCommerce\vendor\gedmo\doctrine-extensions\lib\Gedmo\Translatable\Entity\MappedSuperclass</argument>
+                            <argument>D:\Git\WellCommerce\vendor\gedmo\doctrine-extensions\lib\Gedmo\Translator\Entity</argument>
+                            <argument>D:\Git\WellCommerce\vendor\gedmo\doctrine-extensions\lib\Gedmo\Loggable\Entity</argument>
+                            <argument>D:\Git\WellCommerce\vendor\gedmo\doctrine-extensions\lib\Gedmo\Tree\Entity</argument>
+                            <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\TaxBundle\Entity</argument>
+                            <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\CompanyBundle\Entity</argument>
+                          </argument>
+                        </service>
+                      </argument>
+                      <argument>WellCommerce\Bundle\CompanyBundle\Entity</argument>
+                    </call>
+                  </service>
+                </argument>
+              </call>
+              <call method="setProxyDir">
+                <argument>D:/Git/WellCommerce/app/cache/dev/doctrine/orm/Proxies</argument>
+              </call>
+              <call method="setProxyNamespace">
+                <argument>Proxies</argument>
+              </call>
+              <call method="setAutoGenerateProxyClasses">
+                <argument>true</argument>
+              </call>
+              <call method="setClassMetadataFactoryName">
+                <argument>Doctrine\ORM\Mapping\ClassMetadataFactory</argument>
+              </call>
+              <call method="setDefaultRepositoryClassName">
+                <argument>Doctrine\ORM\EntityRepository</argument>
+              </call>
+              <call method="setNamingStrategy">
+                <argument type="service">
+                  <service class="Doctrine\ORM\Mapping\DefaultNamingStrategy" public="false"/>
+                </argument>
+              </call>
+              <call method="setEntityListenerResolver">
+                <argument type="service" id="doctrine.orm.default_entity_listener_resolver"/>
+              </call>
+            </service>
+          </argument>
+          <configurator service="doctrine.orm.default_manager_configurator" method="configure"/>
         </service>
       </argument>
-      <configurator service="doctrine.orm.default_manager_configurator" method="configure"/>
+      <argument type="service" id="service_container"/>
     </service>
     <service id="sensio_framework_extra.view.guesser" class="Sensio\Bundle\FrameworkExtraBundle\Templating\TemplateGuesser">
       <argument type="service" id="kernel"/>
@@ -2279,6 +2367,140 @@
       </argument>
       <argument type="service" id="security.authentication.trust_resolver" on-invalid="null"/>
       <argument type="service" id="security.role_hierarchy" on-invalid="null"/>
+    </service>
+    <service id="jms_di_extra.metadata.metadata_factory" class="Metadata\MetadataFactory">
+      <argument type="service">
+        <service class="Metadata\Driver\LazyLoadingDriver" public="false">
+          <argument type="service" id="service_container"/>
+          <argument>jms_di_extra.metadata_driver</argument>
+        </service>
+      </argument>
+      <argument>Metadata\ClassHierarchyMetadata</argument>
+      <argument>true</argument>
+      <call method="setCache">
+        <argument type="service">
+          <service class="Metadata\Cache\FileCache" public="false">
+            <argument>D:/Git/WellCommerce/app/cache/dev/jms_diextra/metadata</argument>
+          </service>
+        </argument>
+      </call>
+    </service>
+    <service id="jms_di_extra.metadata.converter" class="JMS\DiExtraBundle\Metadata\MetadataConverter"/>
+    <service id="jms_di_extra.controller_resolver" class="JMS\DiExtraBundle\HttpKernel\ControllerResolver" public="false">
+      <tag name="monolog.logger" channel="request"/>
+      <argument type="service" id="service_container"/>
+      <argument type="service" id="controller_name_converter"/>
+      <argument type="service" id="monolog.logger.request" on-invalid="ignore"/>
+    </service>
+    <service id="jms_aop.pointcut_container" class="JMS\AopBundle\Aop\PointcutContainer"/>
+    <service id="jms_aop.interceptor_loader" class="JMS\AopBundle\Aop\InterceptorLoader">
+      <argument type="service" id="service_container"/>
+    </service>
+    <service id="stof_doctrine_extensions.uploadable.manager" class="Stof\DoctrineExtensionsBundle\Uploadable\UploadableManager">
+      <argument type="service">
+        <service class="Gedmo\Uploadable\UploadableListener" public="false">
+          <argument type="service">
+            <service class="Stof\DoctrineExtensionsBundle\Uploadable\MimeTypeGuesserAdapter" public="false"/>
+          </argument>
+          <call method="setAnnotationReader">
+            <argument type="service" id="annotation_reader"/>
+          </call>
+          <call method="setDefaultFileInfoClass">
+            <argument>Stof\DoctrineExtensionsBundle\Uploadable\UploadedFileInfo</argument>
+          </call>
+        </service>
+      </argument>
+      <argument>Stof\DoctrineExtensionsBundle\Uploadable\UploadedFileInfo</argument>
+    </service>
+    <service id="form_builder" class="WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilder">
+      <call method="setContainer">
+        <argument type="service" id="service_container"/>
+      </call>
+    </service>
+    <service id="xajax" class="xajax"/>
+    <service id="xajax_manager" class="WellCommerce\Bundle\CoreBundle\Helper\XajaxManager">
+      <argument type="service" id="service_container"/>
+    </service>
+    <service id="xajax_listener" class="WellCommerce\Bundle\CoreBundle\EventListener\XajaxListener">
+      <tag name="kernel.event_subscriber"/>
+      <argument type="service" id="service_container"/>
+    </service>
+    <service id="datagrid_loader" class="WellCommerce\Bundle\CoreBundle\DataGrid\Loader\Loader"/>
+    <service id="datagrid_options" class="WellCommerce\Bundle\CoreBundle\DataGrid\Options\Options"/>
+    <service id="datagrid_columns" class="WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnCollection"/>
+    <service id="datagrid_configurator" class="WellCommerce\Bundle\CoreBundle\DataGrid\Configurator"/>
+    <service id="datagrid_builder" class="WellCommerce\Bundle\CoreBundle\DataGrid\DataGridBuilder">
+      <call method="setContainer">
+        <argument type="service" id="service_container"/>
+      </call>
+    </service>
+    <service id="datagrid_renderer" class="WellCommerce\Bundle\CoreBundle\DataGrid\Renderer">
+      <call method="setContainer">
+        <argument type="service" id="service_container"/>
+      </call>
+    </service>
+    <service id="twig.extension.string_loader" class="Twig_Extension_StringLoader">
+      <tag name="twig.extension"/>
+    </service>
+    <service id="twig.extension.datagrid" class="WellCommerce\Bundle\CoreBundle\Twig\Extension\DataGridExtension">
+      <tag name="twig.extension"/>
+      <argument type="service" id="service_container"/>
+    </service>
+    <service id="twig.extension.xajax" class="WellCommerce\Bundle\CoreBundle\Twig\Extension\XajaxExtension">
+      <tag name="twig.extension"/>
+      <argument type="service" id="service_container"/>
+    </service>
+    <service id="admin_menu.repository" class="WellCommerce\Bundle\AdminMenuBundle\Repository\AdminMenuRepository">
+      <call method="setContainer">
+        <argument type="service" id="service_container"/>
+      </call>
+    </service>
+    <service id="admin_menu.subscriber" class="WellCommerce\Bundle\AdminMenuBundle\EventListener\AdminMenuListener">
+      <tag name="kernel.event_subscriber"/>
+      <argument type="service" id="service_container"/>
+      <argument type="service" id="translator"/>
+      <argument type="service" id="router"/>
+    </service>
+    <service id="tax.admin.controller" class="WellCommerce\Bundle\TaxBundle\Controller\AdminController">
+      <call method="setContainer">
+        <argument type="service" id="service_container"/>
+      </call>
+    </service>
+    <service id="company.admin.controller" class="WellCommerce\Bundle\CompanyBundle\Controller\Admin\CompanyController">
+      <call method="setContainer">
+        <argument type="service" id="service_container"/>
+      </call>
+      <call method="setRepository">
+        <argument type="service" id="company.repository"/>
+      </call>
+    </service>
+    <service id="company.repository" class="WellCommerce\Bundle\CompanyBundle\Entity\CompanyRepository" factory-method="getRepository" factory-service="doctrine.orm.entity_manager">
+      <argument>WellCommerceCompanyBundle:Company</argument>
+    </service>
+    <service id="company.datagrid.configurator" class="WellCommerce\Bundle\CompanyBundle\DataGrid\CompanyDataGridConfigurator">
+      <argument key="identifier">company</argument>
+      <argument key="1" type="service" id="datagrid_options"/>
+      <argument key="2" type="service" id="datagrid_columns"/>
+      <call method="setContainer">
+        <argument type="service" id="service_container"/>
+      </call>
+    </service>
+    <service id="company.datagrid" class="WellCommerce\Bundle\CompanyBundle\DataGrid\CompanyDataGrid">
+      <argument type="service" id="service_container"/>
+      <argument type="service" id="company.repository"/>
+      <argument type="service" id="datagrid_loader"/>
+      <configurator service="company.datagrid.configurator" method="configure"/>
+    </service>
+    <service id="company.form" class="WellCommerce\Bundle\CompanyBundle\Form\CompanyForm">
+      <call method="setContainer">
+        <argument type="service" id="service_container"/>
+      </call>
+    </service>
+    <service id="company.listener" class="WellCommerce\Bundle\CompanyBundle\EventListener\CompanyListener">
+      <tag name="kernel.event_subscriber"/>
+      <argument type="service" id="service_container"/>
+      <argument type="service" id="translator"/>
+      <argument type="service" id="router"/>
     </service>
     <service id="web_profiler.controller.profiler" class="Symfony\Bundle\WebProfilerBundle\Controller\ProfilerController">
       <argument type="service" id="router" on-invalid="null"/>
@@ -2331,7 +2553,7 @@
         </argument>
         <argument key="data_collector.doctrine" type="collection">
           <argument>db</argument>
-          <argument>DoctrineBundle:Collector:db</argument>
+          <argument>@Doctrine/Collector/db.html.twig</argument>
         </argument>
       </argument>
       <argument>bottom</argument>
@@ -2346,16 +2568,29 @@
       <argument type="service" id="twig"/>
       <argument>true</argument>
     </service>
-    <service id="web_profiler.debug_toolbar" class="Symfony\Bundle\WebProfilerBundle\EventListener\WebDebugToolbarListener">
-      <tag name="kernel.event_subscriber"/>
-      <argument type="service" id="twig"/>
-      <argument>false</argument>
-      <argument>2</argument>
-      <argument>bottom</argument>
-      <argument type="service" id="router" on-invalid="ignore"/>
-    </service>
     <service id="sensio_distribution.webconfigurator" class="Sensio\Bundle\DistributionBundle\Configurator\Configurator">
       <argument>D:/Git/WellCommerce/app</argument>
+      <call method="addStep">
+        <argument type="service">
+          <service class="Sensio\Bundle\DistributionBundle\Configurator\Step\DoctrineStep" public="false">
+            <tag name="webconfigurator.step" priority="10"/>
+          </service>
+        </argument>
+        <argument>10</argument>
+      </call>
+      <call method="addStep">
+        <argument type="service">
+          <service class="Sensio\Bundle\DistributionBundle\Configurator\Step\SecretStep" public="false">
+            <tag name="webconfigurator.step"/>
+          </service>
+        </argument>
+        <argument>0</argument>
+      </call>
+    </service>
+    <service id="sensio_distribution.security_checker" class="SensioLabs\Security\SecurityChecker"/>
+    <service id="sensio_distribution.security_checker.command" class="SensioLabs\Security\Command\SecurityCheckerCommand">
+      <tag name="console.command"/>
+      <argument type="service" id="sensio_distribution.security_checker"/>
     </service>
     <service id="monolog.logger.request" class="Symfony\Bridge\Monolog\Logger">
       <argument>request</argument>
@@ -2465,6 +2700,18 @@
         <argument type="service" id="monolog.handler.debug"/>
       </call>
     </service>
+    <service id="monolog.logger.assetic" class="Symfony\Bridge\Monolog\Logger">
+      <argument>assetic</argument>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.console"/>
+      </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.main"/>
+      </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.debug"/>
+      </call>
+    </service>
     <service id="monolog.logger.doctrine" class="Symfony\Bridge\Monolog\Logger">
       <argument>doctrine</argument>
       <call method="pushHandler">
@@ -2544,6 +2791,7 @@
         <argument key="matcher_dumper_class">Symfony\Component\Routing\Matcher\Dumper\PhpMatcherDumper</argument>
         <argument key="matcher_cache_class">appDevUrlMatcher</argument>
         <argument key="strict_requirements">true</argument>
+        <argument key="resource_type">yaml</argument>
       </argument>
       <argument type="service" id="router.request_context" on-invalid="ignore"/>
       <argument type="service" id="monolog.logger.router" on-invalid="ignore"/>
@@ -2575,16 +2823,28 @@
         <argument>Twig</argument>
       </call>
       <call method="addPath">
-        <argument>D:\Git\WellCommerce\vendor\symfony\swiftmailer-bundle\Symfony\Bundle\SwiftmailerBundle/Resources/views</argument>
+        <argument>D:\Git\WellCommerce\vendor\symfony\swiftmailer-bundle/Resources/views</argument>
         <argument>Swiftmailer</argument>
       </call>
       <call method="addPath">
-        <argument>D:\Git\WellCommerce\vendor\doctrine\doctrine-bundle\Doctrine\Bundle\DoctrineBundle/Resources/views</argument>
+        <argument>D:\Git\WellCommerce\vendor\doctrine\doctrine-bundle/Resources/views</argument>
         <argument>Doctrine</argument>
       </call>
       <call method="addPath">
         <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\CoreBundle/Resources/views</argument>
         <argument>WellCommerceCore</argument>
+      </call>
+      <call method="addPath">
+        <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\TaxBundle/Resources/views</argument>
+        <argument>WellCommerceTax</argument>
+      </call>
+      <call method="addPath">
+        <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\UnitBundle/Resources/views</argument>
+        <argument>WellCommerceUnit</argument>
+      </call>
+      <call method="addPath">
+        <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\CompanyBundle/Resources/views</argument>
+        <argument>WellCommerceCompany</argument>
       </call>
       <call method="addPath">
         <argument>D:\Git\WellCommerce\vendor\symfony\symfony\src\Symfony\Bundle\WebProfilerBundle/Resources/views</argument>
@@ -2596,9 +2856,6 @@
       </call>
       <call method="addPath">
         <argument>D:/Git/WellCommerce/app/Resources/views</argument>
-      </call>
-      <call method="addPath">
-        <argument>D:\Git\WellCommerce\vendor\symfony\symfony\src\Symfony\Bridge\Twig/Resources/views/Form</argument>
       </call>
     </service>
     <service id="logger" class="Symfony\Bridge\Monolog\Logger">
@@ -2633,9 +2890,9 @@
         <argument type="service">
           <service class="Swift_Transport_Esmtp_AuthHandler" public="false">
             <argument type="collection">
-              <argument type="service" id="45b8503f7c81ecf86e007cefa315dd13bce66306f5c1d14b17417bdf2f866704_1"/>
-              <argument type="service" id="45b8503f7c81ecf86e007cefa315dd13bce66306f5c1d14b17417bdf2f866704_2"/>
-              <argument type="service" id="45b8503f7c81ecf86e007cefa315dd13bce66306f5c1d14b17417bdf2f866704_3"/>
+              <argument type="service" id="9add69bc6fb9f594c7aff7f91553270137e4cd6f34fdd21b5e258ec96675da25_1"/>
+              <argument type="service" id="9add69bc6fb9f594c7aff7f91553270137e4cd6f34fdd21b5e258ec96675da25_2"/>
+              <argument type="service" id="9add69bc6fb9f594c7aff7f91553270137e4cd6f34fdd21b5e258ec96675da25_3"/>
             </argument>
             <call method="setUsername">
               <argument>null</argument>
@@ -2666,6 +2923,9 @@
         <argument>null</argument>
       </call>
     </service>
+    <service id="jms_di_extra.metadata_driver" class="JMS\DiExtraBundle\Metadata\Driver\AnnotationDriver">
+      <argument type="service" id="annotation_reader"/>
+    </service>
     <service id="event_dispatcher" alias="debug.event_dispatcher"/>
     <service id="session.storage" alias="session.storage.native"/>
     <service id="debug.templating.engine.twig" alias="templating"/>
@@ -2677,6 +2937,10 @@
     <service id="mailer" alias="swiftmailer.mailer.default"/>
     <service id="database_connection" alias="doctrine.dbal.default_connection"/>
     <service id="doctrine.orm.entity_manager" alias="doctrine.orm.default_entity_manager"/>
+    <service id="doctrine.orm.default_metadata_cache" alias="doctrine_cache.providers.doctrine.orm.default_metadata_cache"/>
+    <service id="doctrine.orm.default_result_cache" alias="doctrine_cache.providers.doctrine.orm.default_result_cache"/>
+    <service id="doctrine.orm.default_query_cache" alias="doctrine_cache.providers.doctrine.orm.default_query_cache"/>
     <service id="sensio.distribution.webconfigurator" alias="sensio_distribution.webconfigurator"/>
+    <service id="console.command.sensiolabs_security_command_securitycheckercommand" alias="sensio_distribution.security_checker.command"/>
   </services>
 </container>

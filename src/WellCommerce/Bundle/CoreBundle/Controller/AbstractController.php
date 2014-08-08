@@ -14,12 +14,9 @@ namespace WellCommerce\Bundle\CoreBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use WellCommerce\Bundle\CoreBundle\AbstractComponent;
 use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
 use WellCommerce\Bundle\CoreBundle\DataSet\DataSetInterface;
-use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
-use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
  * Class Controller
@@ -29,19 +26,6 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
  */
 abstract class AbstractController extends Controller
 {
-    /**
-     * Redirects user to a given url
-     *
-     * @param string $url
-     * @param number $status
-     *
-     * @return RedirectResponse
-     */
-    public function redirect($url, $status = 302)
-    {
-        return new RedirectResponse($url, $status);
-    }
-
     /**
      * Creates and returns the form element
      *
@@ -78,18 +62,5 @@ abstract class AbstractController extends Controller
     public function getDataSet(DataSetInterface $dataSet)
     {
         return $this->get('dataset_builder')->create($dataSet);
-    }
-
-    /**
-     * Returns a NotFoundHttpException.
-     *
-     * @param string     $message  A message
-     * @param \Exception $previous The previous exception
-     *
-     * @return NotFoundHttpException
-     */
-    public function createNotFoundException($message = 'Not Found', \Exception $previous = null)
-    {
-        return new NotFoundHttpException($message, $previous);
     }
 }

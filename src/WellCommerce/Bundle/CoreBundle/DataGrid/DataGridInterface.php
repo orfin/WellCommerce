@@ -123,7 +123,7 @@ interface DataGridInterface
     public function getCurrentRequest();
 
     /**
-     * Updates DataGrid row. Transfers request to bound repository
+     * Updates DataGrid row. Transfers request to repository
      *
      * @param array $request
      *

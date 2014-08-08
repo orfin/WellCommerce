@@ -21,7 +21,7 @@ use WellCommerce\Bundle\CoreBundle\DataGrid\Repository\DataGridRepositoryInterfa
  * @package WellCommerce\Bundle\CompanyBundle\Entity
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CompanyRepository extends EntityRepository implements DataGridRepositoryInterface
+class CompanyRepository extends EntityRepository implements CompanyRepositoryInterface, DataGridRepositoryInterface
 {
     /**
      * {@inheritdoc}
@@ -47,5 +47,10 @@ class CompanyRepository extends EntityRepository implements DataGridRepositoryIn
     public function deleteMultipleRows(array $ids)
     {
         return false;
+    }
+
+
+    public function save(){
+
     }
 }
