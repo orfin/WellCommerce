@@ -27,4 +27,6 @@ class WellCommerceCoreExtension extends Extension
         $loader->load('datagrid.xml');
         $loader->load('twig.xml');
     }
+
+
 }

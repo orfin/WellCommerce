@@ -13,11 +13,7 @@
 namespace WellCommerce\Bundle\CompanyBundle\Controller\Admin;
 
 use Doctrine\ORM\EntityManager;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use JMS\DiExtraBundle\Annotation\InjectParams;
-use JMS\DiExtraBundle\Annotation\Inject;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use WellCommerce\Bundle\CompanyBundle\Entity\Company;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
@@ -32,9 +28,6 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
  */
 class CompanyController extends AbstractAdminController
 {
-    /**
-     * @Template()
-     */
     public function indexAction()
     {
         return [
@@ -42,9 +35,6 @@ class CompanyController extends AbstractAdminController
         ];
     }
 
-    /**
-     * @Template()
-     */
     public function addAction()
     {
         $entity = new Company();
@@ -56,7 +46,6 @@ class CompanyController extends AbstractAdminController
     }
 
     /**
-     * @Template()
      * @ParamConverter("company", class="WellCommerceCompanyBundle:Company")
      */
     public function editAction(Company $company)

@@ -12,6 +12,7 @@
 namespace WellCommerce\Bundle\CoreBundle\Repository;
 
 use Closure;
+use Doctrine\Entity;
 use WellCommerce\Bundle\CoreBundle\AbstractComponent;
 use WellCommerce\Bundle\CoreBundle\Event\RepositoryEvent;
 
@@ -26,27 +27,15 @@ use WellCommerce\Bundle\CoreBundle\Event\RepositoryEvent;
 abstract class AbstractRepository extends AbstractComponent implements RepositoryInterface
 {
     /**
-     * Wraps callback function into DB transaction
-     *
-     * @param callable $callback
-     *
-     * @return mixed
-     */
-    final protected function transaction(Closure $callback)
-    {
-        return $this->container->get('database_manager')->getConnection()->transaction($callback);
-    }
-
-    /**
      * Dispatches the event for repository action
      *
      * @param       $eventName
      * @param array $data
      * @param       $id
      */
-    final protected function dispatchEvent($eventName, $model, array $data = [])
+    final protected function dispatchEvent($eventName, Entity $entity, array $data = [])
     {
-        $event = new RepositoryEvent($model, $data);
+        $event = new RepositoryEvent($entity, $data);
         $this->getDispatcher()->dispatch($eventName, $event);
 
         return $event->getData();
