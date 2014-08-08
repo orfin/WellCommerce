@@ -1,7 +1,9 @@
 language: php
+
 php:
   - 5.5
   - 5.4
+
 branches:
     only:
         - development
@@ -19,14 +21,16 @@ install:
 
 before_script:
     - composer self-update
-    - composer update
+    - composer install --prefer-source --no-interaction
     - sh -e /etc/init.d/xvfb start
     - export DISPLAY=:99.0
     - wget http://selenium-release.storage.googleapis.com/2.42/selenium-server-standalone-2.42.2.jar
     - java -jar selenium-server-standalone-2.42.2.jar > /dev/null &
     - sleep 5
-    - sh -c "mysql -u$DB_USER -e 'CREATE DATABASE IF NOT EXISTS wellcommerce;'"
-    - sh -c "mysql -u$DB_USER -h localhost wellcommerce < sql/dump.sql"
+    - app/console doctrine:database:create --env=test > /dev/null
+    - app/console doctrine:schema:create > /dev/null
+    - app/console doctrine:fixtures:load > /dev/null
+    - app/console doctrine:fixtures:load --purge-with-truncate --no-interaction > /dev/null
 
 script:
     - vendor/bin/codecept run -c ./
