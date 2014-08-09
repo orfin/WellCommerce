@@ -69,7 +69,22 @@ class CompanyController extends AbstractAdminController
      */
     public function editAction(Company $company)
     {
+        $form = $this->getCompanyForm($company);
 
+        if ($form->isValid()) {
+            $form->handleRequest();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($company);
+            $em->flush();
+
+            $this->addSuccessMessage('New company added successfully.');
+
+            return $this->redirect($this->getDefaultUrl());
+        }
+
+        return [
+            'form' => $form
+        ];
     }
 
     /**

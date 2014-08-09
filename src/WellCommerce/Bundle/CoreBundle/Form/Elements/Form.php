@@ -34,6 +34,7 @@ class Form extends Container
     public $_flags = [];
     public $_populatingWholeForm = false;
     protected $defaultData;
+    protected $isSubmitted = false;
 
     /**
      * Constructor
@@ -160,6 +161,7 @@ class Form extends Container
     public function populate($value, $flags = 0)
     {
         if ($flags & self::FORMAT_FLAT) {
+
             return;
         } else {
             $this->_values = $this->_values + $value;
@@ -198,6 +200,12 @@ class Form extends Container
     public function isValid($values = [])
     {
         $values = $this->getSubmittedData();
+
+        if (!isset($values[$this->attributes['name'] . '_submitted']) || !$values[$this->attributes['name'] . '_submitted']) {
+            return false;
+        }
+
+        $values = $this->getSubmittedData();
         $this->populate($values);
 
         return parent::isValid();
@@ -205,7 +213,7 @@ class Form extends Container
 
     public function getSubmittedData()
     {
-        return Request::createFromGlobals()->request->all();
+        return $_POST;
     }
 
     public function isAction($actionName)

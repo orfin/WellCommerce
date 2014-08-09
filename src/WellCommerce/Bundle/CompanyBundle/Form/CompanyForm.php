@@ -11,10 +11,10 @@
  */
 namespace WellCommerce\Bundle\CompanyBundle\Form;
 
+use WellCommerce\Bundle\CompanyBundle\Entity\Company;
 use WellCommerce\Bundle\CoreBundle\Form\AbstractForm;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
-use WellCommerce\Company\Model\Company;
 
 /**
  * Class CompanyForm
@@ -37,9 +37,9 @@ class CompanyForm extends AbstractForm implements FormInterface
         ]));
 
         $requiredData->addChild($builder->addTextField([
-            'name'          => 'name',
-            'label'         => $this->trans('Name'),
-            'rules'         => [
+            'name'  => 'name',
+            'label' => $this->trans('Name'),
+            'rules' => [
                 $builder->addRuleRequired($this->trans('Name is required')),
             ],
         ]));
@@ -103,30 +103,30 @@ class CompanyForm extends AbstractForm implements FormInterface
     }
 
     /**
-     * Prepares form data using retrieved model
+     * Prepares form data using retrieved entity
      *
      * @param Company $company Model
      *
      * @return array
      */
-    public function prepareData(Company $company)
+    public function getDefaultData(Company $company)
     {
         $formData = [];
         $accessor = $this->getPropertyAccessor();
 
         $accessor->setValue($formData, '[required_data]', [
-            'name'       => $company->name,
-            'short_name' => $company->short_name
+            'name'      => $company->getName(),
+            'shortName' => $company->getShortName()
         ]);
 
         $accessor->setValue($formData, '[address_data]', [
-            'street'   => $company->street,
-            'streetno' => $company->streetno,
-            'flatno'   => $company->flatno,
-            'province' => $company->province,
-            'postcode' => $company->postcode,
-            'city'     => $company->city,
-            'country'  => $company->country
+            'street'   => $company->getStreet(),
+            'streetNo' => $company->getStreetNo(),
+            'flatNo'   => $company->getFlatNo(),
+            'province' => $company->getProvince(),
+            'postCode' => $company->getPostCode(),
+            'city'     => $company->getCity(),
+            'country'  => $company->getCountry()
         ]);
 
         return $formData;

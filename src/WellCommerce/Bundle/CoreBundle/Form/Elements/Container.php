@@ -23,7 +23,6 @@ use WellCommerce\Bundle\CoreBundle\Form\Node;
  */
 abstract class Container extends Node
 {
-
     protected $children;
     protected $tabsOffset;
 
@@ -34,6 +33,13 @@ abstract class Container extends Node
         $this->tabsOffset = '';
     }
 
+    /**
+     * Adds child element to node
+     *
+     * @param $child
+     *
+     * @return mixed
+     */
     public function addChild($child)
     {
         $this->children[] = $child;

@@ -1734,8 +1734,8 @@ var oDefaults = {
 		sActiveClass: 'active'
 	},
 	oImages: {
-		sLeft: '_images_panel/icons/buttons/arrow-left-gray.png',
-		sRight: '_images_panel/icons/buttons/arrow-right-gray.png'
+		sLeft: 'images/icons/buttons/arrow-left-gray.png',
+		sRight: 'images/icons/buttons/arrow-right-gray.png'
 	}
 };
 
@@ -1924,9 +1924,9 @@ var oDefaults = {
 		sTabbedHorizontalClass: 'tabbed-horizontal'
 	},
 	oImages: {
-		sArrowLeftGray: '_images_panel/icons/buttons/arrow-left-gray.png',
-		sArrowRightGreen: '_images_panel/icons/buttons/arrow-right-green.png',
-		sSave: '_images_panel/icons/buttons/check.png'
+		sArrowLeftGray: 'images/icons/buttons/arrow-left-gray.png',
+		sArrowRightGreen: 'images/icons/buttons/arrow-right-green.png',
+		sSave: 'images/icons/buttons/check.png'
 	},
 	iType: 0
 };
@@ -3292,8 +3292,8 @@ var oDefaults = {
 		sRemoveRepetitionClass: 'remove-field-repetition'
 	},
 	oImages: {
-		sAddRepetition: '_images_panel/icons/buttons/add.png',
-		sRemoveRepetition: '_images_panel/icons/buttons/delete.png'
+		sAddRepetition: 'images/icons/buttons/add.png',
+		sRemoveRepetition: 'images/icons/buttons/delete.png'
 	},
 	aoRules: [],
 	sComment: ''
@@ -3659,8 +3659,8 @@ var oDefaults = {
 		sDeleteButtonClass: 'delete-repetition'
 	},
 	oImages: {
-		sDelete: '_images_panel/buttons/small-delete.png',
-		sAdd: '_images_panel/buttons/small-add.png'
+		sDelete: 'images/buttons/small-delete.png',
+		sAdd: 'images/buttons/small-add.png'
 	},
 	aoFields: [],
 	aoLanguages: [],
@@ -3727,8 +3727,8 @@ var oDefaults = {
 		sDeleteButtonClass: 'delete-repetition'
 	},
 	oImages: {
-		sDelete: '_images_panel/buttons/small-delete.png',
-		sAdd: '_images_panel/buttons/small-add.png'
+		sDelete: 'images/buttons/small-delete.png',
+		sAdd: 'images/buttons/small-add.png'
 	},
 	aoFields: [],
 	agFields: [],
@@ -3839,9 +3839,9 @@ var oDefaults = {
 		sTabbedClass: 'tabbed'
 	},
 	oImages: {
-		sArrowLeftGray: '_images_panel/icons/buttons/arrow-left-gray.png',
-		sArrowRightGreen: '_images_panel/icons/buttons/arrow-right-green.png',
-		sSave: '_images_panel/icons/buttons/check.png'
+		sArrowLeftGray: 'images/icons/buttons/arrow-left-gray.png',
+		sArrowRightGreen: 'images/icons/buttons/arrow-right-green.png',
+		sSave: 'images/icons/buttons/check.png'
 	},
 	aoFields: [],
 	agFields: [],
@@ -4030,11 +4030,11 @@ var oDefaults = {
 		sRetractAllClass: 'retract-all'
 	},
 	oImages: {
-		sAdd: '_images_panel/icons/buttons/add.png',
-		sDelete: '_images_panel/icons/buttons/delete.png',
-		sSave: '_images_panel/icons/buttons/save.png',
-		sRestore: '_images_panel/icons/buttons/clean.png',
-		sWaiting: '_images_panel/icons/loading/indicator.gif'
+		sAdd: 'images/icons/buttons/add.png',
+		sDelete: 'images/icons/buttons/delete.png',
+		sSave: 'images/icons/buttons/save.png',
+		sRestore: 'images/icons/buttons/clean.png',
+		sWaiting: 'images/icons/loading/indicator.gif'
 	},
 	aoOptions: [],
 	sDefault: '',
@@ -4768,7 +4768,7 @@ var oDefaults = {
 		sWaitingClass: 'waiting'
 	},
 	oImages: {
-		sCalendarIcon: '_images_panel/icons/buttons/calendar.png'
+		sCalendarIcon: 'images/icons/buttons/calendar.png'
 	},
 	aoOptions: [],
 	sDefault: '',
@@ -4909,8 +4909,8 @@ var oDefaults = {
 		sRemoveRepetitionClass: 'remove-field-repetition'
 	},
 	oImages: {
-		sAddRepetition: '_images_panel/icons/buttons/add.png',
-		sRemoveRepetition: '_images_panel/icons/buttons/delete.png'
+		sAddRepetition: 'images/icons/buttons/add.png',
+		sRemoveRepetition: 'images/icons/buttons/delete.png'
 	},
 	aoOptions: [],
 	sDefault: '',
@@ -5148,11 +5148,11 @@ var oDefaults = {
 		sRetractAllClass: 'retract-all'
 	},
 	oImages: {
-		sAdd: '_images_panel/icons/buttons/add.png',
-		sDelete: '_images_panel/icons/buttons/delete.png',
-		sSave: '_images_panel/icons/buttons/save.png',
-		sRestore: '_images_panel/icons/buttons/clean.png',
-		sWaiting: '_images_panel/icons/loading/indicator.gif'
+		sAdd: 'images/icons/buttons/add.png',
+		sDelete: 'images/icons/buttons/delete.png',
+		sSave: 'images/icons/buttons/save.png',
+		sRestore: 'images/icons/buttons/clean.png',
+		sWaiting: 'images/icons/loading/indicator.gif'
 	},
 	aoOptions: [],
 	sDefault: '',
@@ -5637,13 +5637,13 @@ var oDefaults = {
 		sAttributeClass: 'attribute'
 	},
 	oImages: {
-		sDeleteIcon: '_images_panel/icons/datagrid/delete.png',
-		sSaveIcon: '_images_panel/icons/datagrid/save.png',
-		sAddIcon: '_images_panel/icons/datagrid/add.png',
-		sBlankIcon: '_images_panel/icons/buttons/blank.png',
-		sEditIcon: '_images_panel/icons/datagrid/edit.png',
-		sDelete: '_images_panel/buttons/small-delete.png',
-		sAdd: '_images_panel/buttons/small-add.png'
+		sDeleteIcon: 'images/icons/datagrid/delete.png',
+		sSaveIcon: 'images/icons/datagrid/save.png',
+		sAddIcon: 'images/icons/datagrid/add.png',
+		sBlankIcon: 'images/icons/buttons/blank.png',
+		sEditIcon: 'images/icons/datagrid/edit.png',
+		sDelete: 'images/buttons/small-delete.png',
+		sAdd: 'images/buttons/small-add.png'
 	},
 	fGetSets: GCore.NULL,
 	fGetTechnicalAttributesForSet: GCore.NULL,
@@ -6671,8 +6671,8 @@ var oDefaults = {
 		sRemoveRepetitionClass: 'remove-field-repetition'
 	},
 	oImages: {
-		sAddRepetition: '_images_panel/icons/buttons/add.png',
-		sRemoveRepetition: '_images_panel/icons/buttons/delete.png'
+		sAddRepetition: 'images/icons/buttons/add.png',
+		sRemoveRepetition: 'images/icons/buttons/delete.png'
 	},
 	sFieldType: 'text',
 	sDefault: '',
@@ -6999,12 +6999,12 @@ var oDefaults = {
 		sRetractAllClass: 'retract-all'
 	},
 	oImages: {
-		sAdd: '_images_panel/icons/buttons/add.png',
-		sDuplicate: '_images_panel/icons/buttons/duplicate.png',
-		sDelete: '_images_panel/icons/buttons/delete.png',
-		sSave: '_images_panel/icons/buttons/save.png',
-		sRestore: '_images_panel/icons/buttons/clean.png',
-		sWaiting: '_images_panel/icons/loading/indicator.gif'
+		sAdd: 'images/icons/buttons/add.png',
+		sDuplicate: 'images/icons/buttons/duplicate.png',
+		sDelete: 'images/icons/buttons/delete.png',
+		sSave: 'images/icons/buttons/save.png',
+		sRestore: 'images/icons/buttons/clean.png',
+		sWaiting: 'images/icons/loading/indicator.gif'
 	},
 	aoOptions: [],
 	sDefault: '',
@@ -7564,16 +7564,16 @@ var oDefaults = {
 		sColourPreviewClass: 'colour-preview'
 	},
 	oImages: {
-		sBold: '_images_panel/icons/font-style-bold.png',
-		sUnderline: '_images_panel/icons/font-style-underline.png',
-		sItalic: '_images_panel/icons/font-style-italic.png',
-		sAddRepetition: '_images_panel/icons/buttons/add.png',
-		sRemoveRepetition: '_images_panel/icons/buttons/delete.png',
-		sSideAll: '_images_panel/icons/buttons/border-all.png',
-		sSide_top: '_images_panel/icons/buttons/border-top.png',
-		sSide_right: '_images_panel/icons/buttons/border-right.png',
-		sSide_bottom: '_images_panel/icons/buttons/border-bottom.png',
-		sSide_left: '_images_panel/icons/buttons/border-left.png'
+		sBold: 'images/icons/font-style-bold.png',
+		sUnderline: 'images/icons/font-style-underline.png',
+		sItalic: 'images/icons/font-style-italic.png',
+		sAddRepetition: 'images/icons/buttons/add.png',
+		sRemoveRepetition: 'images/icons/buttons/delete.png',
+		sSideAll: 'images/icons/buttons/border-all.png',
+		sSide_top: 'images/icons/buttons/border-top.png',
+		sSide_right: 'images/icons/buttons/border-right.png',
+		sSide_bottom: 'images/icons/buttons/border-bottom.png',
+		sSide_left: 'images/icons/buttons/border-left.png'
 	},
 	sFieldType: 'text',
 	sDefault: '',
@@ -7895,9 +7895,9 @@ var oDefaults = {
 		sUploadSuccessClass: 'upload-success'
 	},
 	oImages: {
-		sChooseIcon: '_images_panel/icons/datagrid/edit.png',
-		sDeleteIcon: '_images_panel/icons/datagrid/delete.png',
-		sUploadButton: '_images_panel/buttons/add-pictures.png'
+		sChooseIcon: 'images/icons/datagrid/edit.png',
+		sDeleteIcon: 'images/icons/datagrid/delete.png',
+		sUploadButton: 'images/buttons/add-pictures.png'
 	},
 	sFieldType: 'text',
 	sDefault: '',
@@ -8671,8 +8671,8 @@ var oDefaults = {
 		sRemoveRepetitionClass: 'remove-field-repetition'
 	},
 	oImages: {
-		sAddRepetition: '_images_panel/icons/buttons/add.png',
-		sRemoveRepetition: '_images_panel/icons/buttons/delete.png'
+		sAddRepetition: 'images/icons/buttons/add.png',
+		sRemoveRepetition: 'images/icons/buttons/delete.png'
 	},
 	sFieldType: 'text',
 	sDefault: '',
@@ -8801,7 +8801,7 @@ var oDefaults = {
 		sRemoveRepetitionClass: 'remove-field-repetition'
 	},
 	oImages: {
-		sCalendarIcon: '_images_panel/icons/buttons/calendar.png'
+		sCalendarIcon: 'images/icons/buttons/calendar.png'
 	},
 	sFieldType: 'text',
 	sDefault: '',
@@ -8878,11 +8878,11 @@ var oDefaults = {
 		sListClass: 'selected-list'
 	},
 	oImages: {
-		sAdd: '_images_panel/icons/buttons/add.png',
-		sDelete: '_images_panel/icons/buttons/delete.png',
-		sSave: '_images_panel/icons/buttons/save.png',
-		sRestore: '_images_panel/icons/buttons/clean.png',
-		sWaiting: '_images_panel/icons/loading/indicator.gif'
+		sAdd: 'images/icons/buttons/add.png',
+		sDelete: 'images/icons/buttons/delete.png',
+		sSave: 'images/icons/buttons/save.png',
+		sRestore: 'images/icons/buttons/clean.png',
+		sWaiting: 'images/icons/loading/indicator.gif'
 	},
 	aoOptions: [],
 	sDefault: '',
@@ -9061,8 +9061,8 @@ var oDefaults = {
 		sDeleteButtonClass: 'delete-repetition'
 	},
 	oImages: {
-		sDelete: '_images_panel/buttons/small-delete.png',
-		sAdd: '_images_panel/buttons/small-add.png'
+		sDelete: 'images/buttons/small-delete.png',
+		sAdd: 'images/buttons/small-add.png'
 	},
 	aoFields: [],
 	agFields: [],
@@ -9098,8 +9098,8 @@ var oDefaults = {
 		sRemoveRepetitionClass: 'remove-field-repetition'
 	},
 	oImages: {
-		sAddRepetition: '_images_panel/icons/buttons/add.png',
-		sRemoveRepetition: '_images_panel/icons/buttons/delete.png'
+		sAddRepetition: 'images/icons/buttons/add.png',
+		sRemoveRepetition: 'images/icons/buttons/delete.png'
 	},
 	sFieldType: 'file',
 	sDefault: '',
@@ -9153,12 +9153,12 @@ var oDefaults = {
 			sFontPreviewClass: 'font-preview'
 		},
 		oImages: {
-			sBold: '_images_panel/icons/font-style-bold.png',
-			sUnderline: '_images_panel/icons/font-style-underline.png',
-			sItalic: '_images_panel/icons/font-style-italic.png',
-			sUppercase: '_images_panel/icons/font-style-uppercase.png',
-			sAddRepetition: '_images_panel/icons/buttons/add.png',
-			sRemoveRepetition: '_images_panel/icons/buttons/delete.png'
+			sBold: 'images/icons/font-style-bold.png',
+			sUnderline: 'images/icons/font-style-underline.png',
+			sItalic: 'images/icons/font-style-italic.png',
+			sUppercase: 'images/icons/font-style-uppercase.png',
+			sAddRepetition: 'images/icons/buttons/add.png',
+			sRemoveRepetition: 'images/icons/buttons/delete.png'
 		},
 		sFieldType: 'text',
 		sDefault: '',
@@ -9493,8 +9493,8 @@ var oDefaults = {
 		sGrossPriceClass: 'gross-price'
 	},
 	oImages: {
-		sAdd: '_images_panel/icons/buttons/add.png',
-		sRemove: '_images_panel/icons/buttons/delete.png'
+		sAdd: 'images/icons/buttons/add.png',
+		sRemove: 'images/icons/buttons/delete.png'
 	},
 	sFieldType: 'text',
 	sDefault: '',
@@ -9877,8 +9877,8 @@ var oDefaults = {
 		sRemoveRepetitionClass: 'remove-field-repetition'
 	},
 	oImages: {
-		sAddRepetition: '_images_panel/icons/buttons/add.png',
-		sRemoveRepetition: '_images_panel/icons/buttons/delete.png'
+		sAddRepetition: 'images/icons/buttons/add.png',
+		sRemoveRepetition: 'images/icons/buttons/delete.png'
 	},
 	aoOptions: [],
 	sDefault: '',
@@ -10027,8 +10027,8 @@ var oDefaults = {
 		sRemoveRepetitionClass: 'remove-field-repetition'
 	},
 	oImages: {
-		sAddRepetition: '_images_panel/icons/buttons/add.png',
-		sRemoveRepetition: '_images_panel/icons/buttons/delete.png'
+		sAddRepetition: 'images/icons/buttons/add.png',
+		sRemoveRepetition: 'images/icons/buttons/delete.png'
 	},
 	sFieldType: 'password',
 	sDefault: '',
@@ -10066,8 +10066,8 @@ var oDefaults = {
 		sGrossPriceClass: 'gross-price'
 	},
 	oImages: {
-		sAddRepetition: '_images_panel/icons/buttons/add.png',
-		sRemoveRepetition: '_images_panel/icons/buttons/delete.png'
+		sAddRepetition: 'images/icons/buttons/add.png',
+		sRemoveRepetition: 'images/icons/buttons/delete.png'
 	},
 	sFieldType: 'text',
 	sDefault: '',
@@ -10536,8 +10536,8 @@ var oDefaults = {
 		sUploadSuccessClass: 'upload-success'
 	},
 	oImages: {
-		sDeleteIcon: '_images_panel/icons/datagrid/delete.png',
-		sUploadButton: '_images_panel/buttons/add-pictures.png'
+		sDeleteIcon: 'images/icons/datagrid/delete.png',
+		sUploadButton: 'images/buttons/add-pictures.png'
 	},
 	aoOptions: [],
 	sDefault: '',
@@ -10693,8 +10693,8 @@ var oDefaults = {
 		sUploadSuccessClass: 'upload-success'
 	},
 	oImages: {
-		sDeleteIcon: '_images_panel/icons/datagrid/delete.png',
-		sUploadButton: '_images_panel/buttons/add-pictures.png'
+		sDeleteIcon: 'images/icons/datagrid/delete.png',
+		sUploadButton: 'images/buttons/add-pictures.png'
 	},
 	aoOptions: [],
 	sDefault: '',
@@ -10783,8 +10783,8 @@ var oDefaults = {
 		sGrossPriceClass: 'gross-price'
 	},
 	oImages: {
-		sAdd: '_images_panel/icons/buttons/add.png',
-		sRemove: '_images_panel/icons/buttons/delete.png'
+		sAdd: 'images/icons/buttons/add.png',
+		sRemove: 'images/icons/buttons/delete.png'
 	},
 	sFieldType: 'text',
 	sDefault: '',
@@ -11718,8 +11718,8 @@ var oDefaults = {
 		sRemoveRepetitionClass: 'remove-field-repetition'
 	},
 	oImages: {
-		sAddRepetition: '_images_panel/icons/buttons/add.png',
-		sRemoveRepetition: '_images_panel/icons/buttons/delete.png'
+		sAddRepetition: 'images/icons/buttons/add.png',
+		sRemoveRepetition: 'images/icons/buttons/delete.png'
 	},
 	iRows: 3,
 	iCols: 60,
@@ -11792,8 +11792,8 @@ var oDefaults = {
 		sRemoveRepetitionClass: 'remove-field-repetition'
 	},
 	oImages: {
-		sAddRepetition: '_images_panel/icons/buttons/add.png',
-		sRemoveRepetition: '_images_panel/icons/buttons/delete.png'
+		sAddRepetition: 'images/icons/buttons/add.png',
+		sRemoveRepetition: 'images/icons/buttons/delete.png'
 	},
 	iRows: 3,
 	iCols: 60,
@@ -11882,8 +11882,8 @@ var oDefaults = {
 		sTriggerClass: 'trigger'
 	},
 	oImages: {
-		sAddIcon: '_images_panel/icons/buttons/add-customer.png',
-		sDeselectIcon: '_images_panel/icons/datagrid/delete.png'
+		sAddIcon: 'images/icons/buttons/add-customer.png',
+		sDeselectIcon: 'images/icons/datagrid/delete.png'
 	},
 	aoOptions: [],
 	sDefault: '',
@@ -12367,7 +12367,7 @@ var oDefaults = {
 		sFieldRepetitionClass: 'repetition'
 	},
 	oImages: {
-		sDeselectIcon: '_images_panel/icons/datagrid/delete.png'
+		sDeselectIcon: 'images/icons/datagrid/delete.png'
 	},
 	aoOptions: [],
 	sDefault: '',
@@ -12701,7 +12701,7 @@ var oDefaults = {
 		sRemoveRepetitionClass: 'remove-field-repetition'
 	},
 	oImages: {
-		sCalendarIcon: '_images_panel/icons/buttons/calendar.png'
+		sCalendarIcon: 'images/icons/buttons/calendar.png'
 	},
 	sFieldType: 'text',
 	sDefault: '',
@@ -12831,9 +12831,9 @@ var oDefaults = {
 		sUploadSuccessClass: 'upload-success'
 	},
 	oImages: {
-		sChooseIcon: '_images_panel/icons/filetypes/directory.png',
-		sDeleteIcon: '_images_panel/icons/datagrid/delete.png',
-		sUploadButton: '_images_panel/buttons/add-pictures.png'
+		sChooseIcon: 'images/icons/filetypes/directory.png',
+		sDeleteIcon: 'images/icons/datagrid/delete.png',
+		sUploadButton: 'images/buttons/add-pictures.png'
 	},
 	aoOptions: [],
 	sDefault: '',
@@ -13059,7 +13059,7 @@ var GFormDownloader = GCore.ExtendClass(GFormFile, function() {
 
 	gThis._ProcessFile = function(oRow) {
 		if (oRow.thumb != '') {
-			oRow.thumbpreview = '<a href="' + oRow.thumb + '" class="show-thumb"><img src="' + GCore.DESIGN_PATH + '_images_panel/icons/datagrid/details.png" style="vertical-align: middle;" alt="' + GForm.Language.file_selector_show_thumb + '"/></a>';
+			oRow.thumbpreview = '<a href="' + oRow.thumb + '" class="show-thumb"><img src="' + GCore.DESIGN_PATH + 'images/icons/datagrid/details.png" style="vertical-align: middle;" alt="' + GForm.Language.file_selector_show_thumb + '"/></a>';
 		}
 		return oRow;
 	};
@@ -13303,9 +13303,9 @@ var oDefaults = {
 		sUploadSuccessClass: 'upload-success'
 	},
 	oImages: {
-		sChooseIcon: '_images_panel/icons/filetypes/directory.png',
-		sDeleteIcon: '_images_panel/icons/datagrid/delete.png',
-		sUploadButton: '_images_panel/buttons/add-pictures.png'
+		sChooseIcon: 'images/icons/filetypes/directory.png',
+		sDeleteIcon: 'images/icons/datagrid/delete.png',
+		sUploadButton: 'images/buttons/add-pictures.png'
 	},
 	aoOptions: [],
 	sDefault: '',
@@ -13810,9 +13810,9 @@ var oDefaults = {
 		sUploadSuccessClass: 'upload-success'
 	},
 	oImages: {
-		sChooseIcon: '_images_panel/icons/filetypes/directory.png',
-		sDeleteIcon: '_images_panel/icons/datagrid/delete.png',
-		sUploadButton: '_images_panel/buttons/add-pictures.png'
+		sChooseIcon: 'images/icons/filetypes/directory.png',
+		sDeleteIcon: 'images/icons/datagrid/delete.png',
+		sUploadButton: 'images/buttons/add-pictures.png'
 	},
 	aoOptions: [],
 	sDefault: '',
@@ -14312,8 +14312,8 @@ var oDefaults = {
 		sGrossPriceClass: 'gross-price'
 	},
 	oImages: {
-		sAddRepetition: '_images_panel/icons/buttons/add.png',
-		sRemoveRepetition: '_images_panel/icons/buttons/delete.png'
+		sAddRepetition: 'images/icons/buttons/add.png',
+		sRemoveRepetition: 'images/icons/buttons/delete.png'
 	},
 	sFieldType: 'text',
 	sDefault: '',
@@ -14626,7 +14626,7 @@ var oDefaults = {
 		sFieldRepetitionClass: 'repetition'
 	},
 	oImages: {
-		sDeselectIcon: '_images_panel/icons/datagrid/delete.png'
+		sDeselectIcon: 'images/icons/datagrid/delete.png'
 	},
 	aoOptions: [],
 	sDefault: '',
@@ -15370,7 +15370,7 @@ var oDefaults = {
 		sFieldRepetitionClass: 'repetition'
 	},
 	oImages: {
-		sDeselectIcon: '_images_panel/icons/datagrid/delete.png'
+		sDeselectIcon: 'images/icons/datagrid/delete.png'
 	},
 	aoOptions: [],
 	sDefault: '',
@@ -16054,8 +16054,8 @@ var oDefaults = {
 		sLanguage: 'pl'
 	},
 	oImages: {
-		sAddRepetition: '_images_panel/icons/buttons/add.png',
-		sRemoveRepetition: '_images_panel/icons/buttons/delete.png'
+		sAddRepetition: 'images/icons/buttons/add.png',
+		sRemoveRepetition: 'images/icons/buttons/delete.png'
 	},
 	iRows: 3,
 	iCols: 60,
@@ -16121,7 +16121,7 @@ var GHelp = function() {
 		gThis.bLoaded = false;
 		gThis.m_jLi = $('<li>');
 		gThis.m_jA = $('<a class="button" href="#"/>');
-		gThis.m_jA.append('<span><img src="'+GCore.DESIGN_PATH+'_images_panel/icons/buttons/help.png" alt=""/>' + GForm.Language.help + '</span>');
+		gThis.m_jA.append('<span><img src="'+GCore.DESIGN_PATH+'images/icons/buttons/help.png" alt=""/>' + GForm.Language.help + '</span>');
 		gThis.m_jA.appendTo(gThis.m_jLi);	
 		gThis.m_jLi.appendTo($('.possibilities'));
 		gThis.m_jA.bind('click', gThis._OnExpandHelp);
@@ -16582,11 +16582,11 @@ var oDefaults = {
 		sNameClass: 'name'
 	},
 	oImages: {
-		sAdd: '_images_panel/icons/buttons/add.png',
-		sEdit: '_images_panel/icons/buttons/edit.png',
-		sRename: '_images_panel/icons/buttons/edit.png',
-		sDeleteFromBase: '_images_panel/icons/buttons/delete.png',
-		sDelete: '_images_panel/icons/buttons/delete-2.png'
+		sAdd: 'images/icons/buttons/add.png',
+		sEdit: 'images/icons/buttons/edit.png',
+		sRename: 'images/icons/buttons/edit.png',
+		sDeleteFromBase: 'images/icons/buttons/delete.png',
+		sDelete: 'images/icons/buttons/delete-2.png'
 	}
 };
 
@@ -16995,11 +16995,11 @@ var oDefaults = {
 		sNameClass: 'name'
 	},
 	oImages: {
-		sAdd: '_images_panel/icons/buttons/add.png',
-		sEdit: '_images_panel/icons/buttons/edit.png',
-		sRename: '_images_panel/icons/buttons/edit.png',
-		sDeleteFromBase: '_images_panel/icons/buttons/delete.png',
-		sDelete: '_images_panel/icons/buttons/delete-2.png'
+		sAdd: 'images/icons/buttons/add.png',
+		sEdit: 'images/icons/buttons/edit.png',
+		sRename: 'images/icons/buttons/edit.png',
+		sDeleteFromBase: 'images/icons/buttons/delete.png',
+		sDelete: 'images/icons/buttons/delete-2.png'
 	}
 };
 
@@ -17632,8 +17632,8 @@ var oDefaults = {
 		sTriggerClass: 'trigger'
 	},
 	oImages: {
-		sAddIcon: '_images_panel/icons/buttons/add.png',
-		sDeselectIcon: '_images_panel/icons/datagrid/delete.png'
+		sAddIcon: 'images/icons/buttons/add.png',
+		sDeselectIcon: 'images/icons/datagrid/delete.png'
 	},
 	aoOptions: [],
 	sDefault: '',
@@ -17820,9 +17820,9 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 	gThis._ProcessSelectedProduct = function(oProduct) {
 		oProduct = gThis.m_fProcessProduct(oProduct);
 		if (oProduct.thumb != '') {
-			oProduct.name = '<a title="" href="' + oProduct.thumb + '" class="show-thumb"><img src="' + GCore.DESIGN_PATH + '_images_panel/icons/datagrid/details.png" style="vertical-align: middle;" /></a> '+ oProduct.name + ((oProduct.ean != '') ? '<br /><small>EAN: ' + oProduct.ean + '</small>' : '');
+			oProduct.name = '<a title="" href="' + oProduct.thumb + '" class="show-thumb"><img src="' + GCore.DESIGN_PATH + 'images/icons/datagrid/details.png" style="vertical-align: middle;" /></a> '+ oProduct.name + ((oProduct.ean != '') ? '<br /><small>EAN: ' + oProduct.ean + '</small>' : '');
 		}else{
-			oProduct.name = '<img style="opacity: 0.2;vertical-align: middle;" src="' + GCore.DESIGN_PATH + '_images_panel/icons/datagrid/details.png" style="vertical-align: middle;" /> '+ oProduct.name + ((oProduct.ean != '') ? '<br /><small>EAN: ' + oProduct.ean + '</small>' : '');
+			oProduct.name = '<img style="opacity: 0.2;vertical-align: middle;" src="' + GCore.DESIGN_PATH + 'images/icons/datagrid/details.png" style="vertical-align: middle;" /> '+ oProduct.name + ((oProduct.ean != '') ? '<br /><small>EAN: ' + oProduct.ean + '</small>' : '');
 		}
 		return oProduct;
 	};
@@ -18318,9 +18318,9 @@ var oDefaults = {
 		sWaitingClass: 'waiting'
 	},
 	oImages: {
-		sDeleteIcon: '_images_panel/icons/datagrid/delete.png',
-		sSaveIcon: '_images_panel/icons/datagrid/save.png',
-		sAddIcon: '_images_panel/icons/datagrid/add.png'
+		sDeleteIcon: 'images/icons/datagrid/delete.png',
+		sSaveIcon: 'images/icons/datagrid/save.png',
+		sAddIcon: 'images/icons/datagrid/add.png'
 	},
 	aoOptions: [],
 	asDefaults: '',
@@ -19478,8 +19478,8 @@ var oDefaults = {
 		sDeleteButtonClass: 'delete-repetition'
 	},
 	oImages: {
-		sDelete: '_images_panel/buttons/small-delete.png',
-		sAdd: '_images_panel/buttons/small-add.png'
+		sDelete: 'images/buttons/small-delete.png',
+		sAdd: 'images/buttons/small-add.png'
 	},
 	aoLanguages: [],
 	aoFields: [],
@@ -19516,8 +19516,8 @@ var oDefaults = {
 		sDeleteButtonClass: 'delete-repetition'
 	},
 	oImages: {
-		sDelete: '_images_panel/buttons/small-delete.png',
-		sAdd: '_images_panel/buttons/small-add.png'
+		sDelete: 'images/buttons/small-delete.png',
+		sAdd: 'images/buttons/small-add.png'
 	},
 	aoFields: [],
 	agFields: []
