@@ -44,29 +44,19 @@ class CompanyController extends AbstractAdminController
         ];
     }
 
-    public function addAction(Request $request)
+    public function addAction()
     {
-//        $form = $this->getCompanyForm();
+        $company = new Company();
+        $form    = $this->getCompanyForm($company);
 
-        if ($form->isValid()) {
+        if ($form->handleRequest()->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($company);
+            $em->flush();
 
-            $propertyAccessor = PropertyAccess::createPropertyAccessor();
+            $this->addSuccessMessage('New company added successfully.');
 
-            $entity = new Company();
-
-            $propertyAccessor->setValue($entity, 'shortName', 111);
-            print_r($entity);
-            print_r($form->getSubmitValuesFlat());
-            die();
-            try {
-                $this->repository->save($form->getSubmitValuesFlat());
-                $this->addSuccessMessage('New company added successfully.');
-
-                return $this->redirect($this->getDefaultUrl());
-
-            } catch (ValidatorException $exception) {
-                $this->addErrorMessage($exception->getMessage());
-            }
+            return $this->redirect($this->getDefaultUrl());
         }
 
         return [
