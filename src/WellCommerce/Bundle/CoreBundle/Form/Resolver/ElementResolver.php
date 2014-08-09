@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\ContainerAware;
  * @package WellCommerce\Bundle\CoreBundle\Form\Resolver
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ElementResolver extends ContainerAware implements ElementResolverInterface
+class ElementResolver extends ContainerAware implements ResolverInterface
 {
     /**
      * {@inheritdoc}
@@ -29,7 +29,7 @@ class ElementResolver extends ContainerAware implements ElementResolverInterface
     {
         $service = sprintf('form.element.%s', $type);
         if (!$this->container->has($service)) {
-            throw new \InvalidArgumentException(sprintf('Tried to get %s which does not exists in container', $service));
+            throw new \InvalidArgumentException(sprintf('Tried to get element "%s" which does not exists in container', $service));
         }
 
         return $this->container->get($service);

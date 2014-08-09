@@ -49,7 +49,7 @@ class appDevDebugProjectContainer extends Container
             'assetic.request_listener' => 'getAssetic_RequestListenerService',
             'cache_clearer' => 'getCacheClearerService',
             'cache_warmer' => 'getCacheWarmerService',
-            'company.admin.controller' => 'getCompany_Admin_ControllerService',
+            'company.controller.admin' => 'getCompany_Controller_AdminService',
             'company.datagrid' => 'getCompany_DatagridService',
             'company.datagrid.configurator' => 'getCompany_Datagrid_ConfiguratorService',
             'company.form' => 'getCompany_FormService',
@@ -88,9 +88,16 @@ class appDevDebugProjectContainer extends Container
             'doctrine_cache.providers.doctrine.orm.default_result_cache' => 'getDoctrineCache_Providers_Doctrine_Orm_DefaultResultCacheService',
             'file_locator' => 'getFileLocatorService',
             'filesystem' => 'getFilesystemService',
+            'form.builder' => 'getForm_BuilderService',
+            'form.element.attribute_editor' => 'getForm_Element_AttributeEditorService',
+            'form.element.fieldset' => 'getForm_Element_FieldsetService',
+            'form.element.form' => 'getForm_Element_FormService',
+            'form.element.select' => 'getForm_Element_SelectService',
+            'form.element.text_field' => 'getForm_Element_TextFieldService',
+            'form.resolver.element' => 'getForm_Resolver_ElementService',
+            'form.resolver.filter' => 'getForm_Resolver_FilterService',
             'form.type.entity' => 'getForm_Type_EntityService',
             'form.type_guesser.doctrine' => 'getForm_TypeGuesser_DoctrineService',
-            'form_builder' => 'getFormBuilderService',
             'fragment.handler' => 'getFragment_HandlerService',
             'fragment.listener' => 'getFragment_ListenerService',
             'fragment.renderer.esi' => 'getFragment_Renderer_EsiService',
@@ -236,6 +243,7 @@ class appDevDebugProjectContainer extends Container
             'web_profiler.controller.exception' => 'getWebProfiler_Controller_ExceptionService',
             'web_profiler.controller.profiler' => 'getWebProfiler_Controller_ProfilerService',
             'web_profiler.controller.router' => 'getWebProfiler_Controller_RouterService',
+            'web_profiler.debug_toolbar' => 'getWebProfiler_DebugToolbarService',
             'xajax' => 'getXajaxService',
             'xajax_listener' => 'getXajaxListenerService',
             'xajax_manager' => 'getXajaxManagerService',
@@ -443,16 +451,16 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
-     * Gets the 'company.admin.controller' service.
+     * Gets the 'company.controller.admin' service.
      *
      * This service is shared.
      * This method always returns the same instance of the service.
      *
      * @return WellCommerce\Bundle\CompanyBundle\Controller\Admin\CompanyController A WellCommerce\Bundle\CompanyBundle\Controller\Admin\CompanyController instance.
      */
-    protected function getCompany_Admin_ControllerService()
+    protected function getCompany_Controller_AdminService()
     {
-        $this->services['company.admin.controller'] = $instance = new \WellCommerce\Bundle\CompanyBundle\Controller\Admin\CompanyController();
+        $this->services['company.controller.admin'] = $instance = new \WellCommerce\Bundle\CompanyBundle\Controller\Admin\CompanyController();
 
         $instance->setContainer($this);
         $instance->setRepository($this->get('company.repository'));
@@ -767,6 +775,7 @@ class appDevDebugProjectContainer extends Container
         $instance->addSubscriberService('xajax_listener', 'WellCommerce\\Bundle\\CoreBundle\\EventListener\\XajaxListener');
         $instance->addSubscriberService('admin_menu.subscriber', 'WellCommerce\\Bundle\\AdminMenuBundle\\EventListener\\AdminMenuListener');
         $instance->addSubscriberService('company.listener', 'WellCommerce\\Bundle\\CompanyBundle\\EventListener\\CompanyListener');
+        $instance->addSubscriberService('web_profiler.debug_toolbar', 'Symfony\\Bundle\\WebProfilerBundle\\EventListener\\WebDebugToolbarListener');
 
         return $instance;
     }
@@ -892,11 +901,11 @@ class appDevDebugProjectContainer extends Container
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return EntityManager53e559badf101_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager A EntityManager53e559badf101_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager instance.
+     * @return EntityManager53e62da782454_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager A EntityManager53e62da782454_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager instance.
      */
     protected function getDoctrine_Orm_DefaultEntityManagerService()
     {
-        require_once 'D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53e559badf101.php';
+        require_once 'D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53e62da782454.php';
 
         $a = $this->get('annotation_reader');
 
@@ -927,7 +936,7 @@ class appDevDebugProjectContainer extends Container
         $e = \Doctrine\ORM\EntityManager::create($this->get('doctrine.dbal.default_connection'), $d);
         $this->get('doctrine.orm.default_manager_configurator')->configure($e);
 
-        return $this->services['doctrine.orm.default_entity_manager'] = new \EntityManager53e559badf101_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager($e, $this);
+        return $this->services['doctrine.orm.default_entity_manager'] = new \EntityManager53e62da782454_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager($e, $this);
     }
 
     /**
@@ -1047,6 +1056,142 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
+     * Gets the 'form.builder' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilder A WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilder instance.
+     */
+    protected function getForm_BuilderService()
+    {
+        $this->services['form.builder'] = $instance = new \WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilder();
+
+        $instance->setContainer($this);
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'form.element.attribute_editor' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Bundle\CoreBundle\Form\Elements\AttributeEditor A WellCommerce\Bundle\CoreBundle\Form\Elements\AttributeEditor instance.
+     */
+    protected function getForm_Element_AttributeEditorService()
+    {
+        $this->services['form.element.attribute_editor'] = $instance = new \WellCommerce\Bundle\CoreBundle\Form\Elements\AttributeEditor();
+
+        $instance->setContainer($this);
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'form.element.fieldset' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Bundle\CoreBundle\Form\Elements\Fieldset A WellCommerce\Bundle\CoreBundle\Form\Elements\Fieldset instance.
+     */
+    protected function getForm_Element_FieldsetService()
+    {
+        $this->services['form.element.fieldset'] = $instance = new \WellCommerce\Bundle\CoreBundle\Form\Elements\Fieldset();
+
+        $instance->setContainer($this);
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'form.element.form' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Bundle\CoreBundle\Form\Elements\Form A WellCommerce\Bundle\CoreBundle\Form\Elements\Form instance.
+     */
+    protected function getForm_Element_FormService()
+    {
+        $this->services['form.element.form'] = $instance = new \WellCommerce\Bundle\CoreBundle\Form\Elements\Form();
+
+        $instance->setContainer($this);
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'form.element.select' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Bundle\CoreBundle\Form\Elements\Select A WellCommerce\Bundle\CoreBundle\Form\Elements\Select instance.
+     */
+    protected function getForm_Element_SelectService()
+    {
+        $this->services['form.element.select'] = $instance = new \WellCommerce\Bundle\CoreBundle\Form\Elements\Select();
+
+        $instance->setContainer($this);
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'form.element.text_field' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Bundle\CoreBundle\Form\Elements\TextField A WellCommerce\Bundle\CoreBundle\Form\Elements\TextField instance.
+     */
+    protected function getForm_Element_TextFieldService()
+    {
+        $this->services['form.element.text_field'] = $instance = new \WellCommerce\Bundle\CoreBundle\Form\Elements\TextField();
+
+        $instance->setContainer($this);
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'form.resolver.element' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Bundle\CoreBundle\Form\Resolver\ElementResolver A WellCommerce\Bundle\CoreBundle\Form\Resolver\ElementResolver instance.
+     */
+    protected function getForm_Resolver_ElementService()
+    {
+        $this->services['form.resolver.element'] = $instance = new \WellCommerce\Bundle\CoreBundle\Form\Resolver\ElementResolver();
+
+        $instance->setContainer($this);
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'form.resolver.filter' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Bundle\CoreBundle\Form\Resolver\FilterResolver A WellCommerce\Bundle\CoreBundle\Form\Resolver\FilterResolver instance.
+     */
+    protected function getForm_Resolver_FilterService()
+    {
+        $this->services['form.resolver.filter'] = $instance = new \WellCommerce\Bundle\CoreBundle\Form\Resolver\FilterResolver();
+
+        $instance->setContainer($this);
+
+        return $instance;
+    }
+
+    /**
      * Gets the 'form.type.entity' service.
      *
      * This service is shared.
@@ -1070,23 +1215,6 @@ class appDevDebugProjectContainer extends Container
     protected function getForm_TypeGuesser_DoctrineService()
     {
         return $this->services['form.type_guesser.doctrine'] = new \Symfony\Bridge\Doctrine\Form\DoctrineOrmTypeGuesser($this->get('doctrine'));
-    }
-
-    /**
-     * Gets the 'form_builder' service.
-     *
-     * This service is shared.
-     * This method always returns the same instance of the service.
-     *
-     * @return WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilder A WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilder instance.
-     */
-    protected function getFormBuilderService()
-    {
-        $this->services['form_builder'] = $instance = new \WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilder();
-
-        $instance->setContainer($this);
-
-        return $instance;
     }
 
     /**
@@ -1777,7 +1905,7 @@ class appDevDebugProjectContainer extends Container
 
         $d = new \Symfony\Component\Security\Http\AccessMap();
 
-        return $this->services['security.firewall.map.context.default'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($d, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => new \Symfony\Component\Security\Core\User\InMemoryUserProvider()), 'default', $a, $this->get('debug.event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE)), 2 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '53e559bab0eae', $a), 3 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, $this->get('security.access.decision_manager'), $d, $this->get('security.authentication.manager'))), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $this->get('security.authentication.trust_resolver'), new \Symfony\Component\Security\Http\HttpUtils($c, $c), 'default', NULL, NULL, NULL, $a));
+        return $this->services['security.firewall.map.context.default'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($d, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => new \Symfony\Component\Security\Core\User\InMemoryUserProvider()), 'default', $a, $this->get('debug.event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE)), 2 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '53e62da756142', $a), 3 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, $this->get('security.access.decision_manager'), $d, $this->get('security.authentication.manager'))), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $this->get('security.authentication.trust_resolver'), new \Symfony\Component\Security\Http\HttpUtils($c, $c), 'default', NULL, NULL, NULL, $a));
     }
 
     /**
@@ -3118,6 +3246,19 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
+     * Gets the 'web_profiler.debug_toolbar' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Bundle\WebProfilerBundle\EventListener\WebDebugToolbarListener A Symfony\Bundle\WebProfilerBundle\EventListener\WebDebugToolbarListener instance.
+     */
+    protected function getWebProfiler_DebugToolbarService()
+    {
+        return $this->services['web_profiler.debug_toolbar'] = new \Symfony\Bundle\WebProfilerBundle\EventListener\WebDebugToolbarListener($this->get('twig'), false, 2, 'bottom', $this->get('router', ContainerInterface::NULL_ON_INVALID_REFERENCE));
+    }
+
+    /**
      * Gets the 'xajax' service.
      *
      * This service is shared.
@@ -3296,7 +3437,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getSecurity_Authentication_ManagerService()
     {
-        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('53e559bab0eae')), true);
+        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('53e62da756142')), true);
 
         $instance->setEventDispatcher($this->get('debug.event_dispatcher'));
 
@@ -3499,7 +3640,7 @@ class appDevDebugProjectContainer extends Container
             'mailer_password' => NULL,
             'locale' => 'en',
             'secret' => 'ThisTokenIsNotSoSecretChangeIt',
-            'debug_toolbar' => false,
+            'debug_toolbar' => true,
             'debug_redirects' => false,
             'use_assetic_controller' => true,
             'controller_resolver.class' => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\ControllerResolver',
@@ -4050,8 +4191,8 @@ class appDevDebugProjectContainer extends Container
             'jms_di_extra.cache_warmer.controller_file_blacklist' => array(
 
             ),
-            'jms_di_extra.doctrine_integration.entity_manager.file' => 'D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53e559badf101.php',
-            'jms_di_extra.doctrine_integration.entity_manager.class' => 'EntityManager53e559badf101_546a8d27f194334ee012bfe64f629947b07e4919\\__CG__\\Doctrine\\ORM\\EntityManager',
+            'jms_di_extra.doctrine_integration.entity_manager.file' => 'D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53e62da782454.php',
+            'jms_di_extra.doctrine_integration.entity_manager.class' => 'EntityManager53e62da782454_546a8d27f194334ee012bfe64f629947b07e4919\\__CG__\\Doctrine\\ORM\\EntityManager',
             'jms_aop.cache_dir' => 'D:/Git/WellCommerce/app/cache/dev/jms_aop',
             'jms_aop.interceptor_loader.class' => 'JMS\\AopBundle\\Aop\\InterceptorLoader',
             'stof_doctrine_extensions.event_listener.locale.class' => 'Stof\\DoctrineExtensionsBundle\\EventListener\\LocaleListener',
@@ -4076,10 +4217,76 @@ class appDevDebugProjectContainer extends Container
             'stof_doctrine_extensions.listener.softdeleteable.class' => 'Gedmo\\SoftDeleteable\\SoftDeleteableListener',
             'stof_doctrine_extensions.listener.uploadable.class' => 'Gedmo\\Uploadable\\UploadableListener',
             'stof_doctrine_extensions.listener.reference_integrity.class' => 'Gedmo\\ReferenceIntegrity\\ReferenceIntegrityListener',
-            'form_builder.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Builder\\FormBuilder',
             'xajax_manager.class' => 'WellCommerce\\Bundle\\CoreBundle\\Helper\\XajaxManager',
             'xajax_listener.class' => 'WellCommerce\\Bundle\\CoreBundle\\EventListener\\XajaxListener',
             'xajax.class' => 'xajax',
+            'form.builder.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Builder\\FormBuilder',
+            'form.resolver.element.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Resolver\\ElementResolver',
+            'form.resolver.condition.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Resolver\\ConditionResolver',
+            'form.resolver.rule.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Resolver\\RuleResolver',
+            'form.resolver.filter.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Resolver\\FilterResolver',
+            'form.element.attribute_editor.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\AttributeEditor',
+            'form.element.border.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\Border',
+            'form.element.checkbox.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\Checkbox',
+            'form.element.client_select.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\ClientSelect',
+            'form.element.code_editor.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\CodeEditor',
+            'form.element.colour_scheme_picker.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\ColourSchemePicker',
+            'form.element.columns.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\Columns',
+            'form.element.combo.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\Combo',
+            'form.element.constant.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\Constant',
+            'form.element.container.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\container',
+            'form.element.datagrid_select.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\DataGridSelect',
+            'form.element.date.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\Date',
+            'form.element.date_time.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\DateTime',
+            'form.element.downloader.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\Downloader',
+            'form.element.favourite_categories.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\FavouriteCategories',
+            'form.element.field.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\Field',
+            'form.element.fieldset.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\Fieldset',
+            'form.element.fieldset_language.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\FieldsetLanguage',
+            'form.element.fieldset_repeatable.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\FieldsetRepeatable',
+            'form.element.file.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\File',
+            'form.element.font_style.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\FontStyle',
+            'form.element.form.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\Form',
+            'form.element.hidden.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\Hidden',
+            'form.element.image.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\Image',
+            'form.element.layout_boxes_list.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\LayoutBoxesList',
+            'form.element.layout_box_scheme_preview.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\LayoutBoxSchemePreview',
+            'form.element.list_of_selects.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\ListOfSelects',
+            'form.element.local_file.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\LocalFile',
+            'form.element.multi_select.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\MultiSelect',
+            'form.element.optioned_field.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\OptionedField',
+            'form.element.order_editor.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\OrderEditor',
+            'form.element.password.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\Password',
+            'form.element.price.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\Price',
+            'form.element.price_modifier.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\PriceModifier',
+            'form.element.product_aggregator.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\ProductAggregator',
+            'form.element.product_select.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\ProductSelect',
+            'form.element.product_select_related.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\ProductSelectRelated',
+            'form.element.product_variants_editor.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\ProductVariantsEditor',
+            'form.element.progress_bar.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\ProgressBar',
+            'form.element.progress_indicator.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\ProgressIndicator',
+            'form.element.radio_group.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\RadioGroup',
+            'form.element.radio_value_group.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\RadioValueGroup',
+            'form.element.range_editor.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\RangeEditor',
+            'form.element.related_categories.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\RelatedCategories',
+            'form.element.rich_text_editor.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\RichTextEditor',
+            'form.element.rights_table.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\RightsTable',
+            'form.element.select.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\Select',
+            'form.element.shop_selector.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\ShopSelector',
+            'form.element.sortable_list.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\SortableList',
+            'form.element.static_listing.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\StaticListing',
+            'form.element.static_text.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\StaticText',
+            'form.element.submit.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\Submit',
+            'form.element.technical_attribute_editor.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\TechnicalAttributeEditor',
+            'form.element.technical_data_editor.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\TechnicalDataEditor',
+            'form.element.text_area.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\TextArea',
+            'form.element.text_field.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\TextField',
+            'form.element.tip.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\Tip',
+            'form.element.tree.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\Tree',
+            'form.filter.no_code.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Filters\\NoCode',
+            'form.filter.secure.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Filters\\Secure',
+            'form.filter.trim.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Filters\\Trim',
+            'form.filter.comma_to_dot_changer.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Filters\\CommaToDotChanger',
             'datagrid_renderer.class' => 'WellCommerce\\Bundle\\CoreBundle\\DataGrid\\Renderer',
             'datagrid_builder.class' => 'WellCommerce\\Bundle\\CoreBundle\\DataGrid\\DataGridBuilder',
             'datagrid_loader.class' => 'WellCommerce\\Bundle\\CoreBundle\\DataGrid\\Loader\\Loader',
@@ -4092,7 +4299,7 @@ class appDevDebugProjectContainer extends Container
             'admin_menu.repository.class' => 'WellCommerce\\Bundle\\AdminMenuBundle\\Repository\\AdminMenuRepository',
             'admin_menu.subscriber.class' => 'WellCommerce\\Bundle\\AdminMenuBundle\\EventListener\\AdminMenuListener',
             'tax.admin.controller.class' => 'WellCommerce\\Bundle\\TaxBundle\\Controller\\AdminController',
-            'company.admin.controller.class' => 'WellCommerce\\Bundle\\CompanyBundle\\Controller\\Admin\\CompanyController',
+            'company.controller.admin.class' => 'WellCommerce\\Bundle\\CompanyBundle\\Controller\\Admin\\CompanyController',
             'company.repository.class' => 'WellCommerce\\Bundle\\CompanyBundle\\Entity\\CompanyRepository',
             'company.datagrid.class' => 'WellCommerce\\Bundle\\CompanyBundle\\DataGrid\\CompanyDataGrid',
             'company.datagrid.configurator.class' => 'WellCommerce\\Bundle\\CompanyBundle\\DataGrid\\CompanyDataGridConfigurator',
@@ -4103,6 +4310,9 @@ class appDevDebugProjectContainer extends Container
             'web_profiler.controller.exception.class' => 'Symfony\\Bundle\\WebProfilerBundle\\Controller\\ExceptionController',
             'twig.extension.webprofiler.class' => 'Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension',
             'web_profiler.debug_toolbar.position' => 'bottom',
+            'web_profiler.debug_toolbar.class' => 'Symfony\\Bundle\\WebProfilerBundle\\EventListener\\WebDebugToolbarListener',
+            'web_profiler.debug_toolbar.intercept_redirects' => false,
+            'web_profiler.debug_toolbar.mode' => 2,
             'sensio_distribution.webconfigurator.class' => 'Sensio\\Bundle\\DistributionBundle\\Configurator\\Configurator',
             'sensio_distribution.webconfigurator.doctrine_step.class' => 'Sensio\\Bundle\\DistributionBundle\\Configurator\\Step\\DoctrineStep',
             'sensio_distribution.webconfigurator.secret_step.class' => 'Sensio\\Bundle\\DistributionBundle\\Configurator\\Step\\SecretStep',

@@ -24,19 +24,7 @@ use WellCommerce\Bundle\CoreBundle\Form\Rules\LanguageUnique;
  */
 class Field extends Node
 {
-
-    protected $_value;
-    protected $_globalvalue;
-
-    public function __construct($attributes)
-    {
-        parent::__construct($attributes);
-        $this->_value       = '';
-        $this->_globalvalue = '';
-        if (isset($this->attributes['default'])) {
-            $this->populate($attributes['default']);
-        }
-    }
+    protected $_value = '';
 
     public function isValid($values = [])
     {

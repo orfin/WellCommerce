@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Filters;
 
-use WellCommerce\Bundle\CoreBundle\Form\Filter;
+use WellCommerce\Bundle\CoreBundle\Form\AbstractFilter;
 
 /**
  * Class Secure
@@ -20,7 +20,7 @@ use WellCommerce\Bundle\CoreBundle\Form\Filter;
  * @package WellCommerce\Bundle\CoreBundle\Form\Filters
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Secure extends Filter implements FilterInterface
+class Secure extends AbstractFilter implements FilterInterface
 {
     /**
      * Checks whether given value is secure and cleans it if needed

@@ -26,35 +26,6 @@ abstract class Container extends Node
     protected $children = [];
     protected $tabsOffset = '';
 
-    /**
-     * Adds child element to node
-     *
-     * @param $child
-     *
-     * @return mixed
-     */
-    public function addChild($child)
-    {
-        $this->children[] = $child;
-        $child->form      = $this->form;
-        $child->parent    = $this;
-        $childName        = $child->getName();
-        if (isset($this->form->fields[$childName])) {
-            if (is_array($this->form->fields[$childName])) {
-                $this->form->fields[$childName][] = $child;
-            } else {
-                $this->form->fields[$childName] = Array(
-                    $this->form->fields[$childName],
-                    $child
-                );
-            }
-        } else {
-            $this->form->fields[$childName] = $child;
-        }
-
-        return $child;
-    }
-
     final public function addChildren($children)
     {
         foreach ($children as $child) {
@@ -76,20 +47,13 @@ abstract class Container extends Node
         }
     }
 
-    public function addFilter($filter)
+    /**
+     * {@inheritdoc}
+     */
+    public function addFilter($type, $options = [])
     {
         foreach ($this->children as $child) {
-            $child->addFilter($filter);
-        }
-    }
-
-    public function addFilters(array $filters)
-    {
-        foreach ($filters as $filter) {
-            if (!$filter instanceof FilterInterface) {
-                throw new \LogicException('Filter must implement FilterInterface');
-            }
-            $this->addFilter($filter);
+            $child->addFilter($type, $options);
         }
     }
 

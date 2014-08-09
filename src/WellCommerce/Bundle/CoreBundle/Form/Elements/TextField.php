@@ -57,6 +57,7 @@ class TextField extends Field implements ElementInterface
         ]);
 
         $resolver->setDefaults([
+            'filters'       => [],
             'property_path' => function (Options $options) {
                     return new PropertyPath($options['name']);
                 },

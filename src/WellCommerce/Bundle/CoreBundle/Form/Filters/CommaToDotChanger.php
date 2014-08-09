@@ -12,17 +12,15 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Filters;
 
-use WellCommerce\Bundle\CoreBundle\Form\Filter;
+use WellCommerce\Bundle\CoreBundle\Form\AbstractFilter;
 
 /**
  * Class CommaToDotChanger
  *
- * Replaces commas with dots. Required to normalize submitted decimals.
- *
  * @package WellCommerce\Bundle\CoreBundle\Form\Filters
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CommaToDotChanger extends Filter implements FilterInterface
+class CommaToDotChanger extends AbstractFilter implements FilterInterface
 {
 
     public function filterValue($value)

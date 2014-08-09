@@ -6,67 +6,132 @@
 
     <parameters>
         <parameter key="form.builder.class">WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilder</parameter>
-        <parameter key="form.resolver.element.class">WellCommerce\Bundle\CoreBundle\Form\Resolver\ElementResolver</parameter>
-        <parameter key="form.resolver.condition.class">WellCommerce\Bundle\CoreBundle\Form\Resolver\ConditionResolver</parameter>
+        <parameter key="form.resolver.element.class">WellCommerce\Bundle\CoreBundle\Form\Resolver\ElementResolver
+        </parameter>
+        <parameter key="form.resolver.condition.class">WellCommerce\Bundle\CoreBundle\Form\Resolver\ConditionResolver
+        </parameter>
         <parameter key="form.resolver.rule.class">WellCommerce\Bundle\CoreBundle\Form\Resolver\RuleResolver</parameter>
-        <parameter key="form.resolver.filter.class">WellCommerce\Bundle\CoreBundle\Form\Resolver\FilterResolver</parameter>
-        <parameter key="form.element.attribute_editor.class">WellCommerce\Bundle\CoreBundle\Form\Elements\AttributeEditor</parameter>
+        <parameter key="form.resolver.filter.class">WellCommerce\Bundle\CoreBundle\Form\Resolver\FilterResolver
+        </parameter>
+        <parameter key="form.element.attribute_editor.class">
+            WellCommerce\Bundle\CoreBundle\Form\Elements\AttributeEditor
+        </parameter>
         <parameter key="form.element.border.class">WellCommerce\Bundle\CoreBundle\Form\Elements\Border</parameter>
         <parameter key="form.element.checkbox.class">WellCommerce\Bundle\CoreBundle\Form\Elements\Checkbox</parameter>
-        <parameter key="form.element.client_select.class">WellCommerce\Bundle\CoreBundle\Form\Elements\ClientSelect</parameter>
-        <parameter key="form.element.code_editor.class">WellCommerce\Bundle\CoreBundle\Form\Elements\CodeEditor</parameter>
-        <parameter key="form.element.colour_scheme_picker.class">WellCommerce\Bundle\CoreBundle\Form\Elements\ColourSchemePicker</parameter>
+        <parameter key="form.element.client_select.class">WellCommerce\Bundle\CoreBundle\Form\Elements\ClientSelect
+        </parameter>
+        <parameter key="form.element.code_editor.class">WellCommerce\Bundle\CoreBundle\Form\Elements\CodeEditor
+        </parameter>
+        <parameter key="form.element.colour_scheme_picker.class">
+            WellCommerce\Bundle\CoreBundle\Form\Elements\ColourSchemePicker
+        </parameter>
         <parameter key="form.element.columns.class">WellCommerce\Bundle\CoreBundle\Form\Elements\Columns</parameter>
         <parameter key="form.element.combo.class">WellCommerce\Bundle\CoreBundle\Form\Elements\Combo</parameter>
         <parameter key="form.element.constant.class">WellCommerce\Bundle\CoreBundle\Form\Elements\Constant</parameter>
         <parameter key="form.element.container.class">WellCommerce\Bundle\CoreBundle\Form\Elements\container</parameter>
-        <parameter key="form.element.datagrid_select.class">WellCommerce\Bundle\CoreBundle\Form\Elements\DataGridSelect</parameter>
+        <parameter key="form.element.datagrid_select.class">
+            WellCommerce\Bundle\CoreBundle\Form\Elements\DataGridSelect
+        </parameter>
         <parameter key="form.element.date.class">WellCommerce\Bundle\CoreBundle\Form\Elements\Date</parameter>
         <parameter key="form.element.date_time.class">WellCommerce\Bundle\CoreBundle\Form\Elements\DateTime</parameter>
-        <parameter key="form.element.downloader.class">WellCommerce\Bundle\CoreBundle\Form\Elements\Downloader</parameter>
-        <parameter key="form.element.favourite_categories.class">WellCommerce\Bundle\CoreBundle\Form\Elements\FavouriteCategories</parameter>
+        <parameter key="form.element.downloader.class">WellCommerce\Bundle\CoreBundle\Form\Elements\Downloader
+        </parameter>
+        <parameter key="form.element.favourite_categories.class">
+            WellCommerce\Bundle\CoreBundle\Form\Elements\FavouriteCategories
+        </parameter>
         <parameter key="form.element.field.class">WellCommerce\Bundle\CoreBundle\Form\Elements\Field</parameter>
         <parameter key="form.element.fieldset.class">WellCommerce\Bundle\CoreBundle\Form\Elements\Fieldset</parameter>
-        <parameter key="form.element.fieldset_language.class">WellCommerce\Bundle\CoreBundle\Form\Elements\FieldsetLanguage</parameter>
-        <parameter key="form.element.fieldset_repeatable.class">WellCommerce\Bundle\CoreBundle\Form\Elements\FieldsetRepeatable</parameter>
+        <parameter key="form.element.fieldset_language.class">
+            WellCommerce\Bundle\CoreBundle\Form\Elements\FieldsetLanguage
+        </parameter>
+        <parameter key="form.element.fieldset_repeatable.class">
+            WellCommerce\Bundle\CoreBundle\Form\Elements\FieldsetRepeatable
+        </parameter>
         <parameter key="form.element.file.class">WellCommerce\Bundle\CoreBundle\Form\Elements\File</parameter>
-        <parameter key="form.element.font_style.class">WellCommerce\Bundle\CoreBundle\Form\Elements\FontStyle</parameter>
+        <parameter key="form.element.font_style.class">WellCommerce\Bundle\CoreBundle\Form\Elements\FontStyle
+        </parameter>
         <parameter key="form.element.form.class">WellCommerce\Bundle\CoreBundle\Form\Elements\Form</parameter>
         <parameter key="form.element.hidden.class">WellCommerce\Bundle\CoreBundle\Form\Elements\Hidden</parameter>
         <parameter key="form.element.image.class">WellCommerce\Bundle\CoreBundle\Form\Elements\Image</parameter>
-        <parameter key="form.element.layout_boxes_list.class">WellCommerce\Bundle\CoreBundle\Form\Elements\LayoutBoxesList</parameter>
-        <parameter key="form.element.layout_box_scheme_preview.class">WellCommerce\Bundle\CoreBundle\Form\Elements\LayoutBoxSchemePreview</parameter>
-        <parameter key="form.element.list_of_selects.class">WellCommerce\Bundle\CoreBundle\Form\Elements\ListOfSelects</parameter>
-        <parameter key="form.element.local_file.class">WellCommerce\Bundle\CoreBundle\Form\Elements\LocalFile</parameter>
-        <parameter key="form.element.multi_select.class">WellCommerce\Bundle\CoreBundle\Form\Elements\MultiSelect</parameter>
-        <parameter key="form.element.optioned_field.class">WellCommerce\Bundle\CoreBundle\Form\Elements\OptionedField</parameter>
-        <parameter key="form.element.order_editor.class">WellCommerce\Bundle\CoreBundle\Form\Elements\OrderEditor</parameter>
+        <parameter key="form.element.layout_boxes_list.class">
+            WellCommerce\Bundle\CoreBundle\Form\Elements\LayoutBoxesList
+        </parameter>
+        <parameter key="form.element.layout_box_scheme_preview.class">
+            WellCommerce\Bundle\CoreBundle\Form\Elements\LayoutBoxSchemePreview
+        </parameter>
+        <parameter key="form.element.list_of_selects.class">WellCommerce\Bundle\CoreBundle\Form\Elements\ListOfSelects
+        </parameter>
+        <parameter key="form.element.local_file.class">WellCommerce\Bundle\CoreBundle\Form\Elements\LocalFile
+        </parameter>
+        <parameter key="form.element.multi_select.class">WellCommerce\Bundle\CoreBundle\Form\Elements\MultiSelect
+        </parameter>
+        <parameter key="form.element.optioned_field.class">WellCommerce\Bundle\CoreBundle\Form\Elements\OptionedField
+        </parameter>
+        <parameter key="form.element.order_editor.class">WellCommerce\Bundle\CoreBundle\Form\Elements\OrderEditor
+        </parameter>
         <parameter key="form.element.password.class">WellCommerce\Bundle\CoreBundle\Form\Elements\Password</parameter>
         <parameter key="form.element.price.class">WellCommerce\Bundle\CoreBundle\Form\Elements\Price</parameter>
-        <parameter key="form.element.price_modifier.class">WellCommerce\Bundle\CoreBundle\Form\Elements\PriceModifier</parameter>
-        <parameter key="form.element.product_aggregator.class">WellCommerce\Bundle\CoreBundle\Form\Elements\ProductAggregator</parameter>
-        <parameter key="form.element.product_select.class">WellCommerce\Bundle\CoreBundle\Form\Elements\ProductSelect</parameter>
-        <parameter key="form.element.product_select_related.class">WellCommerce\Bundle\CoreBundle\Form\Elements\ProductSelectRelated</parameter>
-        <parameter key="form.element.product_variants_editor.class">WellCommerce\Bundle\CoreBundle\Form\Elements\ProductVariantsEditor</parameter>
-        <parameter key="form.element.progress_bar.class">WellCommerce\Bundle\CoreBundle\Form\Elements\ProgressBar</parameter>
-        <parameter key="form.element.progress_indicator.class">WellCommerce\Bundle\CoreBundle\Form\Elements\ProgressIndicator</parameter>
-        <parameter key="form.element.radio_group.class">WellCommerce\Bundle\CoreBundle\Form\Elements\RadioGroup</parameter>
-        <parameter key="form.element.radio_value_group.class">WellCommerce\Bundle\CoreBundle\Form\Elements\RadioValueGroup</parameter>
-        <parameter key="form.element.range_editor.class">WellCommerce\Bundle\CoreBundle\Form\Elements\RangeEditor</parameter>
-        <parameter key="form.element.related_categories.class">WellCommerce\Bundle\CoreBundle\Form\Elements\RelatedCategories</parameter>
-        <parameter key="form.element.rich_text_editor.class">WellCommerce\Bundle\CoreBundle\Form\Elements\RichTextEditor</parameter>
-        <parameter key="form.element.rights_table.class">WellCommerce\Bundle\CoreBundle\Form\Elements\RightsTable</parameter>
-        <parameter key="form.element.shop_selector.class">WellCommerce\Bundle\CoreBundle\Form\Elements\ShopSelector</parameter>
-        <parameter key="form.element.sortable_list.class">WellCommerce\Bundle\CoreBundle\Form\Elements\SortableList</parameter>
-        <parameter key="form.element.static_listing.class">WellCommerce\Bundle\CoreBundle\Form\Elements\StaticListing</parameter>
-        <parameter key="form.element.static_text.class">WellCommerce\Bundle\CoreBundle\Form\Elements\StaticText</parameter>
+        <parameter key="form.element.price_modifier.class">WellCommerce\Bundle\CoreBundle\Form\Elements\PriceModifier
+        </parameter>
+        <parameter key="form.element.product_aggregator.class">
+            WellCommerce\Bundle\CoreBundle\Form\Elements\ProductAggregator
+        </parameter>
+        <parameter key="form.element.product_select.class">WellCommerce\Bundle\CoreBundle\Form\Elements\ProductSelect
+        </parameter>
+        <parameter key="form.element.product_select_related.class">
+            WellCommerce\Bundle\CoreBundle\Form\Elements\ProductSelectRelated
+        </parameter>
+        <parameter key="form.element.product_variants_editor.class">
+            WellCommerce\Bundle\CoreBundle\Form\Elements\ProductVariantsEditor
+        </parameter>
+        <parameter key="form.element.progress_bar.class">WellCommerce\Bundle\CoreBundle\Form\Elements\ProgressBar
+        </parameter>
+        <parameter key="form.element.progress_indicator.class">
+            WellCommerce\Bundle\CoreBundle\Form\Elements\ProgressIndicator
+        </parameter>
+        <parameter key="form.element.radio_group.class">WellCommerce\Bundle\CoreBundle\Form\Elements\RadioGroup
+        </parameter>
+        <parameter key="form.element.radio_value_group.class">
+            WellCommerce\Bundle\CoreBundle\Form\Elements\RadioValueGroup
+        </parameter>
+        <parameter key="form.element.range_editor.class">WellCommerce\Bundle\CoreBundle\Form\Elements\RangeEditor
+        </parameter>
+        <parameter key="form.element.related_categories.class">
+            WellCommerce\Bundle\CoreBundle\Form\Elements\RelatedCategories
+        </parameter>
+        <parameter key="form.element.rich_text_editor.class">
+            WellCommerce\Bundle\CoreBundle\Form\Elements\RichTextEditor
+        </parameter>
+        <parameter key="form.element.rights_table.class">WellCommerce\Bundle\CoreBundle\Form\Elements\RightsTable
+        </parameter>
+        <parameter key="form.element.select.class">WellCommerce\Bundle\CoreBundle\Form\Elements\Select</parameter>
+        <parameter key="form.element.shop_selector.class">WellCommerce\Bundle\CoreBundle\Form\Elements\ShopSelector
+        </parameter>
+        <parameter key="form.element.sortable_list.class">WellCommerce\Bundle\CoreBundle\Form\Elements\SortableList
+        </parameter>
+        <parameter key="form.element.static_listing.class">WellCommerce\Bundle\CoreBundle\Form\Elements\StaticListing
+        </parameter>
+        <parameter key="form.element.static_text.class">WellCommerce\Bundle\CoreBundle\Form\Elements\StaticText
+        </parameter>
         <parameter key="form.element.submit.class">WellCommerce\Bundle\CoreBundle\Form\Elements\Submit</parameter>
-        <parameter key="form.element.technical_attribute_editor.class">WellCommerce\Bundle\CoreBundle\Form\Elements\TechnicalAttributeEditor</parameter>
-        <parameter key="form.element.technical_data_editor.class">WellCommerce\Bundle\CoreBundle\Form\Elements\TechnicalDataEditor</parameter>
+        <parameter key="form.element.technical_attribute_editor.class">
+            WellCommerce\Bundle\CoreBundle\Form\Elements\TechnicalAttributeEditor
+        </parameter>
+        <parameter key="form.element.technical_data_editor.class">
+            WellCommerce\Bundle\CoreBundle\Form\Elements\TechnicalDataEditor
+        </parameter>
         <parameter key="form.element.text_area.class">WellCommerce\Bundle\CoreBundle\Form\Elements\TextArea</parameter>
-        <parameter key="form.element.text_field.class">WellCommerce\Bundle\CoreBundle\Form\Elements\TextField</parameter>
+        <parameter key="form.element.text_field.class">WellCommerce\Bundle\CoreBundle\Form\Elements\TextField
+        </parameter>
         <parameter key="form.element.tip.class">WellCommerce\Bundle\CoreBundle\Form\Elements\Tip</parameter>
         <parameter key="form.element.tree.class">WellCommerce\Bundle\CoreBundle\Form\Elements\Tree</parameter>
+        <parameter key="form.filter.no_code.class">WellCommerce\Bundle\CoreBundle\Form\Filters\NoCode</parameter>
+        <parameter key="form.filter.no_code.class">WellCommerce\Bundle\CoreBundle\Form\Filters\NoCode</parameter>
+        <parameter key="form.filter.secure.class">WellCommerce\Bundle\CoreBundle\Form\Filters\Secure</parameter>
+        <parameter key="form.filter.trim.class">WellCommerce\Bundle\CoreBundle\Form\Filters\Trim</parameter>
+        <parameter key="form.filter.comma_to_dot_changer.class">
+            WellCommerce\Bundle\CoreBundle\Form\Filters\CommaToDotChanger
+        </parameter>
     </parameters>
 
     <services>
@@ -77,6 +142,12 @@
         </service>
 
         <service id="form.resolver.element" class="%form.resolver.element.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.resolver.filter" class="%form.resolver.filter.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -94,6 +165,12 @@
             </call>
         </service>
 
+        <service id="form.element.select" class="%form.element.select.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
         <service id="form.element.fieldset" class="%form.element.fieldset.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
@@ -101,6 +178,24 @@
         </service>
 
         <service id="form.element.form" class="%form.element.form.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.filter.no_code" class="%form.filter.no_code.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.filter.secure" class="%form.filter.secure.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.filter.secure" class="%form.filter.secure.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

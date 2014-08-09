@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Filters;
 
-use WellCommerce\Bundle\CoreBundle\Form\Filter;
+use WellCommerce\Bundle\CoreBundle\Form\AbstractFilter;
 
 /**
  * Class Trim
@@ -20,7 +20,7 @@ use WellCommerce\Bundle\CoreBundle\Form\Filter;
  * @package WellCommerce\Bundle\CoreBundle\Form\Filters
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Trim extends Filter implements FilterInterface
+class Trim extends AbstractFilter implements FilterInterface
 {
     /**
      * Removes spaces and line endings from value

@@ -16,6 +16,7 @@ use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
+use WellCommerce\Bundle\CoreBundle\Form\Filters\FilterInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Resolver\ElementResolverInterface;
 
 /**
@@ -72,7 +73,38 @@ abstract class Node extends ContainerAware
      */
     public function addElement($type, $options)
     {
-        return $this->container->get('form.resolver.element')->resolve($type)->setOptions($options);
+        $element = $this->container->get('form.resolver.element')->resolve($type)->setOptions($options);
+
+        return $this->addChild($element);
+    }
+
+    /**
+     * Adds child element to node
+     *
+     * @param $child
+     *
+     * @return mixed
+     */
+    public function addChild($child)
+    {
+        $this->children[] = $child;
+        $child->form      = $this->form;
+        $child->parent    = $this;
+        $childName        = $child->getName();
+        if (isset($this->form->fields[$childName])) {
+            if (is_array($this->form->fields[$childName])) {
+                $this->form->fields[$childName][] = $child;
+            } else {
+                $this->form->fields[$childName] = [
+                    $this->form->fields[$childName],
+                    $child
+                ];
+            }
+        } else {
+            $this->form->fields[$childName] = $child;
+        }
+
+        return $child;
     }
 
     public function getOptions()
@@ -106,10 +138,19 @@ abstract class Node extends ContainerAware
         $this->attributes['rules'] = [];
     }
 
-    public function addFilter($filter)
+    /**
+     * Adds filter to form element
+     *
+     * @param       $type
+     * @param array $options
+     *
+     * @throws \LogicException
+     */
+    public function addFilter($type, $options = [])
     {
-        if (!isset($this->attributes['filters']) || !is_array($this->attributes['filters'])) {
-            $this->attributes['filters'] = [];
+        $filter = $this->container->get('form.resolver.filter')->resolve($type)->setOptions($options);
+        if (!$filter instanceof FilterInterface) {
+            throw new \LogicException('Filter must implement FilterInterface');
         }
         $this->attributes['filters'][] = $filter;
     }

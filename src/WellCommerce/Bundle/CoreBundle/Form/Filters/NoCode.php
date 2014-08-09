@@ -12,17 +12,15 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Filters;
 
-use WellCommerce\Bundle\CoreBundle\Form\Filter;
+use WellCommerce\Bundle\CoreBundle\Form\AbstractFilter;
 
 /**
  * Class NoCode
  *
- * Strips all html tags from submitted values
- *
  * @package WellCommerce\Bundle\CoreBundle\Form\Filters
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class NoCode extends Filter implements FilterInterface
+class NoCode extends AbstractFilter implements FilterInterface
 {
     /**
      * Strips all html code from value
