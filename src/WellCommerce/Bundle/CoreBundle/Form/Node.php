@@ -62,6 +62,14 @@ abstract class Node extends ContainerAware
         ]);
     }
 
+    /**
+     * Returns form element
+     *
+     * @param $type
+     * @param $options
+     *
+     * @return \WellCommerce\Bundle\CoreBundle\Form\Node
+     */
     public function addElement($type, $options)
     {
         return $this->container->get('form.resolver.element')->resolve($type)->setOptions($options);
