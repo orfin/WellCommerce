@@ -571,8 +571,8 @@
     <parameter key="jms_di_extra.disable_grep">true</parameter>
     <parameter key="jms_di_extra.doctrine_integration">true</parameter>
     <parameter key="jms_di_extra.cache_warmer.controller_file_blacklist" type="collection"/>
-    <parameter key="jms_di_extra.doctrine_integration.entity_manager.file">D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53e62da782454.php</parameter>
-    <parameter key="jms_di_extra.doctrine_integration.entity_manager.class">EntityManager53e62da782454_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager</parameter>
+    <parameter key="jms_di_extra.doctrine_integration.entity_manager.file">D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53e6325cc4a96.php</parameter>
+    <parameter key="jms_di_extra.doctrine_integration.entity_manager.class">EntityManager53e6325cc4a96_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager</parameter>
     <parameter key="jms_aop.cache_dir">D:/Git/WellCommerce/app/cache/dev/jms_aop</parameter>
     <parameter key="jms_aop.interceptor_loader.class">JMS\AopBundle\Aop\InterceptorLoader</parameter>
     <parameter key="stof_doctrine_extensions.event_listener.locale.class">Stof\DoctrineExtensionsBundle\EventListener\LocaleListener</parameter>
@@ -1668,7 +1668,7 @@
       <argument type="collection">
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>53e62da756142</argument>
+            <argument>53e6325c9163a</argument>
           </service>
         </argument>
       </argument>
@@ -1784,7 +1784,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.context"/>
-            <argument>53e62da756142</argument>
+            <argument>53e6325c9163a</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
           </service>
         </argument>
@@ -2236,8 +2236,8 @@
       <argument type="collection"/>
       <argument type="collection"/>
     </service>
-    <service id="doctrine.orm.default_entity_manager" class="EntityManager53e62da782454_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager">
-      <file>D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53e62da782454.php</file>
+    <service id="doctrine.orm.default_entity_manager" class="EntityManager53e6325cc4a96_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager">
+      <file>D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53e6325cc4a96.php</file>
       <argument type="service">
         <service class="Doctrine\ORM\EntityManager" factory-method="create" factory-class="%doctrine.orm.entity_manager.class%" public="false">
           <argument type="service" id="doctrine.dbal.default_connection"/>
@@ -2508,27 +2508,47 @@
         <argument type="service" id="service_container"/>
       </call>
     </service>
-    <service id="form.element.attribute_editor" class="WellCommerce\Bundle\CoreBundle\Form\Elements\AttributeEditor">
+    <service id="form.element.attribute_editor" class="WellCommerce\Bundle\CoreBundle\Form\Elements\AttributeEditor" scope="prototype">
       <call method="setContainer">
         <argument type="service" id="service_container"/>
       </call>
     </service>
-    <service id="form.element.text_field" class="WellCommerce\Bundle\CoreBundle\Form\Elements\TextField">
+    <service id="form.element.text_field" class="WellCommerce\Bundle\CoreBundle\Form\Elements\TextField" scope="prototype">
       <call method="setContainer">
         <argument type="service" id="service_container"/>
       </call>
     </service>
-    <service id="form.element.select" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Select">
+    <service id="form.element.select" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Select" scope="prototype">
       <call method="setContainer">
         <argument type="service" id="service_container"/>
       </call>
     </service>
-    <service id="form.element.fieldset" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Fieldset">
+    <service id="form.element.fieldset" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Fieldset" scope="prototype">
       <call method="setContainer">
         <argument type="service" id="service_container"/>
       </call>
     </service>
-    <service id="form.element.form" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Form">
+    <service id="form.element.form" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Form" scope="prototype">
+      <call method="setContainer">
+        <argument type="service" id="service_container"/>
+      </call>
+    </service>
+    <service id="form.filter.no_code" class="WellCommerce\Bundle\CoreBundle\Form\Filters\NoCode" scope="prototype">
+      <call method="setContainer">
+        <argument type="service" id="service_container"/>
+      </call>
+    </service>
+    <service id="form.filter.secure" class="WellCommerce\Bundle\CoreBundle\Form\Filters\Secure" scope="prototype">
+      <call method="setContainer">
+        <argument type="service" id="service_container"/>
+      </call>
+    </service>
+    <service id="form.filter.trim" class="WellCommerce\Bundle\CoreBundle\Form\Filters\Trim" scope="prototype">
+      <call method="setContainer">
+        <argument type="service" id="service_container"/>
+      </call>
+    </service>
+    <service id="form.filter.comma_to_dot_changer" class="WellCommerce\Bundle\CoreBundle\Form\Filters\CommaToDotChanger" scope="prototype">
       <call method="setContainer">
         <argument type="service" id="service_container"/>
       </call>

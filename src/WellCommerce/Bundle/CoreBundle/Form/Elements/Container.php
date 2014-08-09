@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
-use WellCommerce\Bundle\CoreBundle\Form\Filters\FilterInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Node;
 
 /**
@@ -25,13 +24,6 @@ abstract class Container extends Node
 {
     protected $children = [];
     protected $tabsOffset = '';
-
-    final public function addChildren($children)
-    {
-        foreach ($children as $child) {
-            $this->addChild($child);
-        }
-    }
 
     public function addRule($rule)
     {
@@ -83,7 +75,8 @@ abstract class Container extends Node
                 }
                 $child->populate($valueArray);
             }
-        } else { // simple value
+        } else {
+            // simple value
             foreach ($this->children as $child) {
                 $name = $child->getName();
                 if (empty($name)) {

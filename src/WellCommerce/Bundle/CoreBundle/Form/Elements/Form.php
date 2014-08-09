@@ -35,6 +35,12 @@ class Form extends Container
     protected $defaultData;
     protected $isSubmitted = false;
 
+    public function __construct()
+    {
+        parent::__construct();
+        $this->form = $this;
+    }
+
     /**
      * Configures Form attributes
      *

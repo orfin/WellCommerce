@@ -78,6 +78,11 @@ class FormBuilder extends ContainerAware implements FormBuilderInterface
         $this->getDispatcher()->dispatch($eventName, $event);
     }
 
+    private function getDispatcher()
+    {
+        return $this->container->get('event_dispatcher');
+    }
+
     /**
      * Returns init event name
      *

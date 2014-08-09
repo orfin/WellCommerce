@@ -73,7 +73,8 @@ abstract class Node extends ContainerAware
      */
     public function addElement($type, $options)
     {
-        $element = $this->container->get('form.resolver.element')->resolve($type)->setOptions($options);
+        $element = $this->container->get('form.resolver.element')->resolve($type);
+        $element->setOptions($options);
 
         return $this->addChild($element);
     }
@@ -85,7 +86,7 @@ abstract class Node extends ContainerAware
      *
      * @return mixed
      */
-    public function addChild($child)
+    private function addChild($child)
     {
         $this->children[] = $child;
         $child->form      = $this->form;
@@ -148,7 +149,9 @@ abstract class Node extends ContainerAware
      */
     public function addFilter($type, $options = [])
     {
-        $filter = $this->container->get('form.resolver.filter')->resolve($type)->setOptions($options);
+        $filter = $this->container->get('form.resolver.filter')->resolve($type);
+        $filter->setOptions($options);
+
         if (!$filter instanceof FilterInterface) {
             throw new \LogicException('Filter must implement FilterInterface');
         }

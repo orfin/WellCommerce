@@ -94,6 +94,10 @@ class appDevDebugProjectContainer extends Container
             'form.element.form' => 'getForm_Element_FormService',
             'form.element.select' => 'getForm_Element_SelectService',
             'form.element.text_field' => 'getForm_Element_TextFieldService',
+            'form.filter.comma_to_dot_changer' => 'getForm_Filter_CommaToDotChangerService',
+            'form.filter.no_code' => 'getForm_Filter_NoCodeService',
+            'form.filter.secure' => 'getForm_Filter_SecureService',
+            'form.filter.trim' => 'getForm_Filter_TrimService',
             'form.resolver.element' => 'getForm_Resolver_ElementService',
             'form.resolver.filter' => 'getForm_Resolver_FilterService',
             'form.type.entity' => 'getForm_Type_EntityService',
@@ -901,11 +905,11 @@ class appDevDebugProjectContainer extends Container
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return EntityManager53e62da782454_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager A EntityManager53e62da782454_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager instance.
+     * @return EntityManager53e6325cc4a96_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager A EntityManager53e6325cc4a96_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager instance.
      */
     protected function getDoctrine_Orm_DefaultEntityManagerService()
     {
-        require_once 'D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53e62da782454.php';
+        require_once 'D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53e6325cc4a96.php';
 
         $a = $this->get('annotation_reader');
 
@@ -936,7 +940,7 @@ class appDevDebugProjectContainer extends Container
         $e = \Doctrine\ORM\EntityManager::create($this->get('doctrine.dbal.default_connection'), $d);
         $this->get('doctrine.orm.default_manager_configurator')->configure($e);
 
-        return $this->services['doctrine.orm.default_entity_manager'] = new \EntityManager53e62da782454_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager($e, $this);
+        return $this->services['doctrine.orm.default_entity_manager'] = new \EntityManager53e6325cc4a96_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager($e, $this);
     }
 
     /**
@@ -1075,14 +1079,11 @@ class appDevDebugProjectContainer extends Container
     /**
      * Gets the 'form.element.attribute_editor' service.
      *
-     * This service is shared.
-     * This method always returns the same instance of the service.
-     *
      * @return WellCommerce\Bundle\CoreBundle\Form\Elements\AttributeEditor A WellCommerce\Bundle\CoreBundle\Form\Elements\AttributeEditor instance.
      */
     protected function getForm_Element_AttributeEditorService()
     {
-        $this->services['form.element.attribute_editor'] = $instance = new \WellCommerce\Bundle\CoreBundle\Form\Elements\AttributeEditor();
+        $instance = new \WellCommerce\Bundle\CoreBundle\Form\Elements\AttributeEditor();
 
         $instance->setContainer($this);
 
@@ -1092,14 +1093,11 @@ class appDevDebugProjectContainer extends Container
     /**
      * Gets the 'form.element.fieldset' service.
      *
-     * This service is shared.
-     * This method always returns the same instance of the service.
-     *
      * @return WellCommerce\Bundle\CoreBundle\Form\Elements\Fieldset A WellCommerce\Bundle\CoreBundle\Form\Elements\Fieldset instance.
      */
     protected function getForm_Element_FieldsetService()
     {
-        $this->services['form.element.fieldset'] = $instance = new \WellCommerce\Bundle\CoreBundle\Form\Elements\Fieldset();
+        $instance = new \WellCommerce\Bundle\CoreBundle\Form\Elements\Fieldset();
 
         $instance->setContainer($this);
 
@@ -1109,14 +1107,11 @@ class appDevDebugProjectContainer extends Container
     /**
      * Gets the 'form.element.form' service.
      *
-     * This service is shared.
-     * This method always returns the same instance of the service.
-     *
      * @return WellCommerce\Bundle\CoreBundle\Form\Elements\Form A WellCommerce\Bundle\CoreBundle\Form\Elements\Form instance.
      */
     protected function getForm_Element_FormService()
     {
-        $this->services['form.element.form'] = $instance = new \WellCommerce\Bundle\CoreBundle\Form\Elements\Form();
+        $instance = new \WellCommerce\Bundle\CoreBundle\Form\Elements\Form();
 
         $instance->setContainer($this);
 
@@ -1126,14 +1121,11 @@ class appDevDebugProjectContainer extends Container
     /**
      * Gets the 'form.element.select' service.
      *
-     * This service is shared.
-     * This method always returns the same instance of the service.
-     *
      * @return WellCommerce\Bundle\CoreBundle\Form\Elements\Select A WellCommerce\Bundle\CoreBundle\Form\Elements\Select instance.
      */
     protected function getForm_Element_SelectService()
     {
-        $this->services['form.element.select'] = $instance = new \WellCommerce\Bundle\CoreBundle\Form\Elements\Select();
+        $instance = new \WellCommerce\Bundle\CoreBundle\Form\Elements\Select();
 
         $instance->setContainer($this);
 
@@ -1143,14 +1135,67 @@ class appDevDebugProjectContainer extends Container
     /**
      * Gets the 'form.element.text_field' service.
      *
-     * This service is shared.
-     * This method always returns the same instance of the service.
-     *
      * @return WellCommerce\Bundle\CoreBundle\Form\Elements\TextField A WellCommerce\Bundle\CoreBundle\Form\Elements\TextField instance.
      */
     protected function getForm_Element_TextFieldService()
     {
-        $this->services['form.element.text_field'] = $instance = new \WellCommerce\Bundle\CoreBundle\Form\Elements\TextField();
+        $instance = new \WellCommerce\Bundle\CoreBundle\Form\Elements\TextField();
+
+        $instance->setContainer($this);
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'form.filter.comma_to_dot_changer' service.
+     *
+     * @return WellCommerce\Bundle\CoreBundle\Form\Filters\CommaToDotChanger A WellCommerce\Bundle\CoreBundle\Form\Filters\CommaToDotChanger instance.
+     */
+    protected function getForm_Filter_CommaToDotChangerService()
+    {
+        $instance = new \WellCommerce\Bundle\CoreBundle\Form\Filters\CommaToDotChanger();
+
+        $instance->setContainer($this);
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'form.filter.no_code' service.
+     *
+     * @return WellCommerce\Bundle\CoreBundle\Form\Filters\NoCode A WellCommerce\Bundle\CoreBundle\Form\Filters\NoCode instance.
+     */
+    protected function getForm_Filter_NoCodeService()
+    {
+        $instance = new \WellCommerce\Bundle\CoreBundle\Form\Filters\NoCode();
+
+        $instance->setContainer($this);
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'form.filter.secure' service.
+     *
+     * @return WellCommerce\Bundle\CoreBundle\Form\Filters\Secure A WellCommerce\Bundle\CoreBundle\Form\Filters\Secure instance.
+     */
+    protected function getForm_Filter_SecureService()
+    {
+        $instance = new \WellCommerce\Bundle\CoreBundle\Form\Filters\Secure();
+
+        $instance->setContainer($this);
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'form.filter.trim' service.
+     *
+     * @return WellCommerce\Bundle\CoreBundle\Form\Filters\Trim A WellCommerce\Bundle\CoreBundle\Form\Filters\Trim instance.
+     */
+    protected function getForm_Filter_TrimService()
+    {
+        $instance = new \WellCommerce\Bundle\CoreBundle\Form\Filters\Trim();
 
         $instance->setContainer($this);
 
@@ -1905,7 +1950,7 @@ class appDevDebugProjectContainer extends Container
 
         $d = new \Symfony\Component\Security\Http\AccessMap();
 
-        return $this->services['security.firewall.map.context.default'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($d, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => new \Symfony\Component\Security\Core\User\InMemoryUserProvider()), 'default', $a, $this->get('debug.event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE)), 2 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '53e62da756142', $a), 3 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, $this->get('security.access.decision_manager'), $d, $this->get('security.authentication.manager'))), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $this->get('security.authentication.trust_resolver'), new \Symfony\Component\Security\Http\HttpUtils($c, $c), 'default', NULL, NULL, NULL, $a));
+        return $this->services['security.firewall.map.context.default'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($d, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => new \Symfony\Component\Security\Core\User\InMemoryUserProvider()), 'default', $a, $this->get('debug.event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE)), 2 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '53e6325c9163a', $a), 3 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, $this->get('security.access.decision_manager'), $d, $this->get('security.authentication.manager'))), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $this->get('security.authentication.trust_resolver'), new \Symfony\Component\Security\Http\HttpUtils($c, $c), 'default', NULL, NULL, NULL, $a));
     }
 
     /**
@@ -3437,7 +3482,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getSecurity_Authentication_ManagerService()
     {
-        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('53e62da756142')), true);
+        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('53e6325c9163a')), true);
 
         $instance->setEventDispatcher($this->get('debug.event_dispatcher'));
 
@@ -4191,8 +4236,8 @@ class appDevDebugProjectContainer extends Container
             'jms_di_extra.cache_warmer.controller_file_blacklist' => array(
 
             ),
-            'jms_di_extra.doctrine_integration.entity_manager.file' => 'D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53e62da782454.php',
-            'jms_di_extra.doctrine_integration.entity_manager.class' => 'EntityManager53e62da782454_546a8d27f194334ee012bfe64f629947b07e4919\\__CG__\\Doctrine\\ORM\\EntityManager',
+            'jms_di_extra.doctrine_integration.entity_manager.file' => 'D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53e6325cc4a96.php',
+            'jms_di_extra.doctrine_integration.entity_manager.class' => 'EntityManager53e6325cc4a96_546a8d27f194334ee012bfe64f629947b07e4919\\__CG__\\Doctrine\\ORM\\EntityManager',
             'jms_aop.cache_dir' => 'D:/Git/WellCommerce/app/cache/dev/jms_aop',
             'jms_aop.interceptor_loader.class' => 'JMS\\AopBundle\\Aop\\InterceptorLoader',
             'stof_doctrine_extensions.event_listener.locale.class' => 'Stof\\DoctrineExtensionsBundle\\EventListener\\LocaleListener',
