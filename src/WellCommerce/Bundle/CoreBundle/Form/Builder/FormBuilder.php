@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Builder;
 
+use Doctrine\Entity;
 use WellCommerce\Bundle\CoreBundle\AbstractComponent;
 use WellCommerce\Bundle\CoreBundle\Form\Conditions\ConditionInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Dependency;
@@ -39,9 +40,9 @@ class FormBuilder extends AbstractComponent implements FormBuilderInterface
     private $form;
 
     /**
-     * @var array Data needed to populate the form
+     * @var object Data passed to form instance
      */
-    private $formData;
+    private $data;
 
     /**
      * @var array Form options
@@ -51,13 +52,12 @@ class FormBuilder extends AbstractComponent implements FormBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function create(FormInterface $form, ModelInterface $model = null, array $options)
+    public function create(FormInterface $form, Entity $entity = null, array $options)
     {
-        $this->options  = $options;
-        $this->form     = $form->buildForm($this, $this->options);
-        $this->formData = (null === $model) ? [] : $form->prepareData($model);
+        $this->options = $options;
+        $this->data    = $entity;
+        $this->form    = $form->buildForm($this, $this->options)->prepareData($this->data);
         $this->dispatchEvent($this->getInitEventName($options['name']));
-        $this->form->populate($this->formData);
 
         return $this;
     }
@@ -98,17 +98,33 @@ class FormBuilder extends AbstractComponent implements FormBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function getFormData()
+    public function getData()
     {
-        return $this->formData;
+        return $this->data;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setFormData(array $data)
+    public function getOptions()
     {
-        $this->formData = $data;
+        return $this->options;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setOptions(array $options)
+    {
+        $this->options = $options;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setData(array $data)
+    {
+        $this->data = $data;
     }
 
     /**

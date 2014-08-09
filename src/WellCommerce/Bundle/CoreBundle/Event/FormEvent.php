@@ -12,8 +12,8 @@
 namespace WellCommerce\Bundle\CoreBundle\Event;
 
 use Symfony\Component\EventDispatcher\Event;
+use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\Form;
-use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilder;
 
 /**
  * Class FormEvent
@@ -35,15 +35,15 @@ class FormEvent extends Event
      *
      * @param Form $form
      */
-    public function __construct(FormBuilder $formBuilder)
+    public function __construct(FormBuilderInterface $formBuilder)
     {
         $this->formBuilder = $formBuilder;
     }
 
     /**
-     * Returns form instance
+     * Returns form builder instance
      *
-     * @return FormInterface|Form
+     * @return FormBuilderInterface
      */
     public function getFormBuilder()
     {

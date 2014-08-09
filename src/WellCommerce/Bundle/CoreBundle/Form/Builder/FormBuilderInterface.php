@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Builder;
 
+use Doctrine\Entity;
 use WellCommerce\Bundle\CoreBundle\Form\Conditions\ConditionInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
@@ -37,13 +38,13 @@ interface FormBuilderInterface
     /**
      * Creates the form, triggers init event and then populates form with values
      *
-     * @param FormInterface  $form
-     * @param ModelInterface $model
-     * @param array          $options
+     * @param FormInterface $form
+     * @param Entity        $entity
+     * @param array         $options
      *
-     * @return $this
+     * @return mixed
      */
-    public function create(FormInterface $form, ModelInterface $model = null, array $options);
+    public function create(FormInterface $form, Entity $entity = null, array $options);
 
     /**
      * Returns Form object
@@ -55,16 +56,32 @@ interface FormBuilderInterface
     /**
      * Returns form data
      *
-     * @return mixed
+     * @return object|null
      */
-    public function getFormData();
+    public function getData();
+
+    /**
+     * Sets form options
+     *
+     * @param array $options
+     *
+     * @return void
+     */
+    public function setOptions(array $options);
+
+    /**
+     * Returns form options
+     *
+     * @return array
+     */
+    public function getOptions();
 
     /**
      * Sets new form data
      *
      * @return mixed
      */
-    public function setFormData(array $data);
+    public function setData(array $data);
 
     /**
      * Shortcut for adding Form
