@@ -20,14 +20,16 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
  */
 class Hidden extends Field implements ElementInterface
 {
-
-    protected function prepareAttributesJs()
+    /**
+     * {@inheritdoc}
+     */
+    public function prepareAttributesJs()
     {
-        $attributes = Array(
+        $attributes = [
             $this->formatAttributeJs('name', 'sName'),
             $this->formatDependencyJs(),
             $this->formatDefaultsJs()
-        );
+        ];
 
         return $attributes;
     }

@@ -37,6 +37,13 @@ class Checkbox extends Field implements ElementInterface
             'error',
             'comment',
             'default',
+            'filters',
+            'rules'
+        ]);
+
+        $resolver->setDefaults([
+            'filters' => [],
+            'rules'   => [],
         ]);
 
         $resolver->setAllowedTypes([

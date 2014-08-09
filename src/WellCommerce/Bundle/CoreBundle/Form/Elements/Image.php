@@ -52,6 +52,10 @@ class Image extends File implements ElementInterface
             'file_types_description',
             'delete_handler',
             'load_handler',
+            'property_path',
+            'dependencies',
+            'filters',
+            'rules'
         ]);
 
         $resolver->setDefaults([
@@ -61,7 +65,11 @@ class Image extends File implements ElementInterface
             'session_name'           => session_name(),
             'session_id'             => session_id(),
             'file_types_description' => 'file_types_description',
-            'file_types'             => ['jpg', 'jpeg', 'png', 'gif']
+            'file_types'             => ['jpg', 'jpeg', 'png', 'gif'],
+            'property_path'          => null,
+            'dependencies'           => [],
+            'filters'                => [],
+            'rules'                  => [],
         ]);
 
         $resolver->setAllowedTypes([

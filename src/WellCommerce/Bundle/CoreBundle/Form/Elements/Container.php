@@ -25,10 +25,10 @@ abstract class Container extends Node
     protected $children = [];
     protected $tabsOffset = '';
 
-    public function addRule($rule)
+    public function addRule($type, $options = [])
     {
         foreach ($this->children as $child) {
-            $child->addRule($rule);
+            $child->addRule($type, $options);
         }
     }
 

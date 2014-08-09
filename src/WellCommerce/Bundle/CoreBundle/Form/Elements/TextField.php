@@ -49,15 +49,18 @@ class TextField extends Field implements ElementInterface
             'css_attribute',
             'max_length',
             'error',
-            'rules',
             'filters',
             'dependencies',
+            'rules',
+            'filters',
             'default',
             'property_path'
         ]);
 
         $resolver->setDefaults([
+            'dependencies'  => [],
             'filters'       => [],
+            'rules'         => [],
             'property_path' => function (Options $options) {
                     return new PropertyPath($options['name']);
                 },

@@ -50,6 +50,17 @@ class FieldsetLanguage extends Fieldset implements ElementInterface
             'label',
             'repeat_min',
             'repeat_max',
+            'property_path',
+            'dependencies',
+            'filters',
+            'rules',
+        ]);
+
+        $resolver->setDefaults([
+            'property_path' => null,
+            'dependencies'  => [],
+            'filters'       => [],
+            'rules'         => [],
         ]);
 
         $resolver->setAllowedTypes([
@@ -80,14 +91,14 @@ class FieldsetLanguage extends Fieldset implements ElementInterface
      */
     public function prepareAttributesJs()
     {
-        $attributes = Array(
+        $attributes = [
             $this->formatAttributeJs('name', 'sName'),
             $this->formatAttributeJs('label', 'sLabel'),
             $this->formatRepeatableJs(),
             $this->formatDependencyJs(),
             $this->formatLanguagesJs(),
             'aoFields: [' . $this->renderChildren() . ']'
-        );
+        ];
 
         return $attributes;
     }

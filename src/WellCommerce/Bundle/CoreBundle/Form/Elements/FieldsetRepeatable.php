@@ -22,13 +22,13 @@ class FieldsetRepeatable extends Fieldset implements ElementInterface
 {
     public function prepareAttributesJs()
     {
-        $attributes = Array(
+        $attributes = [
             $this->formatAttributeJs('name', 'sName'),
             $this->formatAttributeJs('label', 'sLabel'),
             $this->formatRepeatableJs(),
             $this->formatDependencyJs(),
             'aoFields: [' . $this->renderChildren() . ']'
-        );
+        ];
 
         return $attributes;
     }

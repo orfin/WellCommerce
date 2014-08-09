@@ -40,9 +40,9 @@ class CompanyForm extends AbstractForm implements FormInterface
             'name'  => 'name',
             'label' => $this->trans('Name'),
             'rules' => [
-//                $form->addRule('required', [
-//                    'message' => $this->trans('Name is required')
-//                ])
+                $form->addRule('required', [
+                    'message' => $this->trans('Name is required')
+                ])
             ]
         ]);
 

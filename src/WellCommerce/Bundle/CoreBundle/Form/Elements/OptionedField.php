@@ -45,14 +45,18 @@ abstract class OptionedField extends Field
             'onAdd',
             'add_item_prompt',
             'default',
-            'rules',
+            'property_path',
             'dependencies',
-            'property_path'
+            'filters',
+            'rules',
         ]);
 
         $resolver->setDefaults([
+            'options'       => [],
             'property_path' => null,
-            'options'       => []
+            'dependencies'  => [],
+            'filters'       => [],
+            'rules'         => [],
         ]);
 
         $resolver->setAllowedTypes([

@@ -57,6 +57,12 @@ class Form extends Container
             'action',
             'method',
             'tabs',
+            'property_path',
+            'dependencies',
+            'property_path',
+            'dependencies',
+            'filters',
+            'rules'
         ]);
 
         $resolver->setDefaults([
@@ -64,6 +70,10 @@ class Form extends Container
             'class'  => '',
             'method' => self::FORM_METHOD,
             'tabs'   => self::TABS_VERTICAL,
+            'property_path' => null,
+            'dependencies'  => [],
+            'filters'       => [],
+            'rules'         => [],
         ]);
 
         $resolver->setAllowedTypes([
