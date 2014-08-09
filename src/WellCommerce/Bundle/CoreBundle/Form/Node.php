@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\CoreBundle\Form;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**
  * Class Node
@@ -135,6 +136,11 @@ abstract class Node
     public function getName()
     {
         return $this->attributes['name'];
+    }
+
+    public function getPropertyAccessor()
+    {
+        return PropertyAccess::createPropertyAccessor();
     }
 
     public function getPropertyPath()

@@ -12,8 +12,6 @@
 namespace WellCommerce\Bundle\CoreBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
 use WellCommerce\Bundle\CoreBundle\DataSet\DataSetInterface;
 use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
@@ -27,17 +25,39 @@ use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
 abstract class AbstractController extends Controller
 {
     /**
+     * Shortcut to return the session flashbag
+     *
+     * @return object FlashBag from session service
+     */
+    protected function getFlashBag()
+    {
+        return $this->container->get('session')->getFlashBag();
+    }
+
+    /**
+     * Translates a string using the translation service
+     *
+     * @param string $id Message to translate
+     *
+     * @return string The message
+     */
+    protected function trans($id)
+    {
+        return $this->container->get('translator')->trans($id);
+    }
+
+    /**
      * Creates and returns the form element
      *
      * @param FormInterface $form    Form instance
-     * @param null|object   $model   Model instance
+     * @param null|object   $data    Initial form data
      * @param array         $options Form options
      *
      * @return \WellCommerce\Bundle\CoreBundle\Form\Elements\Form
      */
-    public function getFormBuilder(FormInterface $form, $model = null, array $options)
+    public function getFormBuilder(FormInterface $form, $data = null, array $options)
     {
-        return $this->get('form_builder')->create($form, $model, $options)->getForm();
+        return $this->get('form_builder')->create($form, $data, $options)->getForm();
     }
 
     /**

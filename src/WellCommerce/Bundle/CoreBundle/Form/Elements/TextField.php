@@ -12,8 +12,10 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\PropertyAccess\PropertyPath;
 
 /**
  * Class TextField
@@ -51,6 +53,13 @@ class TextField extends Field implements ElementInterface
             'filters',
             'dependencies',
             'default',
+            'property_path'
+        ]);
+
+        $resolver->setDefaults([
+            'property_path' => function (Options $options) {
+                    return new PropertyPath($options['name']);
+                },
         ]);
 
         $resolver->setAllowedTypes([

@@ -52,11 +52,11 @@ class FormBuilder extends AbstractComponent implements FormBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function create(FormInterface $form, Entity $entity = null, array $options)
+    public function create(FormInterface $form, $data = null, array $options)
     {
         $this->options = $options;
-        $this->data    = $entity;
-        $this->form    = $form->buildForm($this, $this->options)->prepareData($this->data);
+        $this->data    = $data;
+        $this->form    = $form->buildForm($this, $this->options)->setDefaultData($this->data);
         $this->dispatchEvent($this->getInitEventName($options['name']));
 
         return $this;

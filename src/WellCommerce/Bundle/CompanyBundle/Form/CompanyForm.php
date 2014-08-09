@@ -37,19 +37,19 @@ class CompanyForm extends AbstractForm implements FormInterface
         ]));
 
         $requiredData->addChild($builder->addTextField([
-            'name'  => 'name',
-            'label' => $this->trans('Name'),
-            'rules' => [
+            'name'          => 'name',
+            'label'         => $this->trans('Name'),
+            'rules'         => [
                 $builder->addRuleRequired($this->trans('Name is required')),
-            ]
+            ],
         ]));
 
         $requiredData->addChild($builder->addTextField([
-            'name'  => 'short_name',
+            'name'  => 'shortName',
             'label' => $this->trans('Short name'),
             'rules' => [
                 $builder->addRuleRequired($this->trans('Short name is required')),
-            ]
+            ],
         ]));
 
         $addressData = $form->addChild($builder->addFieldset([
@@ -63,12 +63,12 @@ class CompanyForm extends AbstractForm implements FormInterface
         ]));
 
         $addressData->addChild($builder->addTextField([
-            'name'  => 'streetno',
+            'name'  => 'streetNo',
             'label' => $this->trans('Street number'),
         ]));
 
         $addressData->addChild($builder->addTextField([
-            'name'  => 'flatno',
+            'name'  => 'flatNo',
             'label' => $this->trans('Flat number'),
         ]));
 
@@ -78,7 +78,7 @@ class CompanyForm extends AbstractForm implements FormInterface
         ]));
 
         $addressData->addChild($builder->addTextField([
-            'name'  => 'postcode',
+            'name'  => 'postCode',
             'label' => $this->trans('Post code'),
         ]));
 
@@ -88,9 +88,9 @@ class CompanyForm extends AbstractForm implements FormInterface
         ]));
 
         $addressData->addChild($builder->addSelect([
-            'name'    => 'country',
-            'label'   => $this->trans('Country'),
-//            'options' => $builder->makeOptions($this->get('country.repository')->all())
+            'name'  => 'country',
+            'label' => $this->trans('Country'),
+            //            'options' => $builder->makeOptions($this->get('country.repository')->all())
         ]));
 
         $form->addFilters([

@@ -37,6 +37,11 @@ class Fieldset extends Container implements ElementInterface
             'repeat_min',
             'repeat_max',
             'dependencies',
+            'property_path'
+        ]);
+
+        $resolver->setDefaults([
+            'property_path' => null
         ]);
 
         $resolver->setAllowedTypes([

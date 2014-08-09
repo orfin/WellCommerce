@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
@@ -32,6 +33,7 @@ class Form extends Container
     public $_values = [];
     public $_flags = [];
     public $_populatingWholeForm = false;
+    protected $defaultData;
 
     /**
      * Constructor
@@ -129,8 +131,6 @@ class Form extends Container
                 'harvestValues'
             ));
         }
-
-        return [];
     }
 
     /**
@@ -169,13 +169,35 @@ class Form extends Container
         $this->_populatingWholeForm = false;
     }
 
+    public function setDefaultData($data)
+    {
+        $this->defaultData = $data;
+
+        return $this;
+    }
+
+    /**
+     * @return \WellCommerce\Bundle\CoreBundle\Form\Elements\Form
+     */
+    public function handleRequest()
+    {
+        $values   = $this->getSubmittedData();
+        $accessor = $this->getPropertyAccessor();
+
+        $this->populate($values);
+
+        foreach ($this->fields as $field) {
+            if (null != $field->getPropertyPath()) {
+                $accessor->setValue($this->defaultData, $field->getPropertyPath(), $field->getValue());
+            }
+        }
+
+        return $this;
+    }
+
     public function isValid($values = [])
     {
         $values = $this->getSubmittedData();
-
-        if (!isset($values[$this->attributes['name'] . '_submitted']) || !$values[$this->attributes['name'] . '_submitted']) {
-            return false;
-        }
         $this->populate($values);
 
         return parent::isValid();
@@ -183,7 +205,7 @@ class Form extends Container
 
     public function getSubmittedData()
     {
-        return $_POST;
+        return Request::createFromGlobals()->request->all();
     }
 
     public function isAction($actionName)

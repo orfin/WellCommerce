@@ -46,11 +46,13 @@ abstract class OptionedField extends Field
             'add_item_prompt',
             'default',
             'rules',
-            'dependencies'
+            'dependencies',
+            'property_path'
         ]);
 
         $resolver->setDefaults([
-            'options' => []
+            'property_path' => null,
+            'options'       => []
         ]);
 
         $resolver->setAllowedTypes([
