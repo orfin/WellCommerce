@@ -12,12 +12,15 @@
 
 namespace WellCommerce\Bundle\CompanyBundle\Controller\Admin;
 
-use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\PropertyAccess\PropertyAccess;
+use Symfony\Component\PropertyAccess\PropertyAccessor;
 use WellCommerce\Bundle\CompanyBundle\Entity\Company;
 use WellCommerce\Bundle\CompanyBundle\Entity\CompanyRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
+use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
 
 /**
  * Class CompanyController
@@ -41,13 +44,20 @@ class CompanyController extends AbstractAdminController
         ];
     }
 
-    public function addAction()
+    public function addAction(Request $request)
     {
-        $form = $this->getFormBuilder($this->get('company.form'), null, [
-            'name' => 'company'
-        ]);
+//        $form = $this->getCompanyForm();
 
         if ($form->isValid()) {
+
+            $propertyAccessor = PropertyAccess::createPropertyAccessor();
+
+            $entity = new Company();
+
+            $propertyAccessor->setValue($entity, 'shortName', 111);
+            print_r($entity);
+            print_r($form->getSubmitValuesFlat());
+            die();
             try {
                 $this->repository->save($form->getSubmitValuesFlat());
                 $this->addSuccessMessage('New company added successfully.');
@@ -70,6 +80,20 @@ class CompanyController extends AbstractAdminController
     public function editAction(Company $company)
     {
 
+    }
+
+    /**
+     * Returns company form
+     *
+     * @param Company $company
+     *
+     * @return \WellCommerce\Bundle\CoreBundle\Form\Elements\Form
+     */
+    public function getCompanyForm(Company $company)
+    {
+        return $this->getFormBuilder($this->get('company.form'), $company, [
+            'name' => 'company'
+        ]);
     }
 
     /**
