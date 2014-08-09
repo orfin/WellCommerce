@@ -29,20 +29,24 @@ class CompanyForm extends AbstractForm implements FormInterface
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $form = $builder->addForm($options);
+        $form = $builder->init($options);
 
-        $requiredData = $form->addChild($builder->addFieldset([
+        $requiredData = $form->addElement('fieldset', [
             'name'  => 'required_data',
             'label' => $this->trans('Required data')
-        ]));
+        ]);
 
-        $requiredData->addChild($builder->addTextField([
+        $requiredData->addElement('text_field', [
             'name'  => 'name',
             'label' => $this->trans('Name'),
             'rules' => [
-                $builder->addRuleRequired($this->trans('Name is required')),
+                $form->addRule('required', [
+                    'message' => $this->trans('Name is required')
+                ])
             ],
-        ]));
+        ]);
+
+        die();
 
         $requiredData->addChild($builder->addTextField([
             'name'  => 'shortName',

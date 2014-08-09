@@ -57,7 +57,6 @@ class AdminMenuBuilder implements \IteratorAggregate, \Countable, AdminMenuBuild
     public function getMenu()
     {
         $tree = $this->items['menu'];
-
         usort($tree, [$this, 'sortMenu']);
 
         return $tree;

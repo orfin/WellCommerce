@@ -57,7 +57,7 @@ abstract class AbstractController extends Controller
      */
     public function getFormBuilder(FormInterface $form, $data = null, array $options)
     {
-        return $this->get('form_builder')->create($form, $data, $options)->getForm();
+        return $this->get('form.builder')->create($form, $data, $options)->getForm();
     }
 
     /**

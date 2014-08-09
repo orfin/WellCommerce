@@ -12,8 +12,11 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form;
 
+use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
+use WellCommerce\Bundle\CoreBundle\Form\Resolver\ElementResolverInterface;
 
 /**
  * Class Node
@@ -21,41 +24,52 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
  * @package WellCommerce\Bundle\CoreBundle\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class Node
+abstract class Node extends ContainerAware
 {
-
-    public $form;
-
-    public $parent;
-
+    protected $form = null;
+    protected $parent = null;
     protected $_id;
-
     protected $attributes;
-
-    protected $_renderMode;
-
-    protected $_tabs;
-
+    protected $_renderMode = 'JS';
+    protected $_tabs = '';
     protected $_jsNodeName;
-
-    protected $_xajaxMethods;
-
+    protected $_xajaxMethods = [];
     protected static $_nextId = 0;
+    protected $optionsResolver;
+    protected $elementResolver;
+    protected $options;
 
-    public function __construct($attributes)
+    public function __construct()
     {
-        $resolver = new OptionsResolver();
-        $this->configureAttributes($resolver);
+        $this->optionsResolver = new OptionsResolver();
+        $this->_id             = self::$_nextId++;
+        $class                 = explode('\\', get_class($this));
+        $this->_jsNodeName     = 'GForm' . end($class);
+    }
 
-        $this->attributes    = $resolver->resolve($attributes);
-        $this->_id           = self::$_nextId++;
-        $this->_renderMode   = 'JS';
-        $this->_tabs         = '';
-        $class               = explode('\\', get_class($this));
-        $this->_jsNodeName   = 'GForm' . end($class);
-        $this->form          = null;
-        $this->parent        = null;
-        $this->_xajaxMethods = [];
+    public function setOptions($options)
+    {
+        $this->configureAttributes($this->optionsResolver);
+        $this->attributes = $this->optionsResolver->resolve($options);
+
+        return $this;
+    }
+
+    public function configureAttributes(OptionsResolverInterface $resolver)
+    {
+        $resolver->setRequired([
+            'name'
+        ]);
+    }
+
+    public function addElement($type, $options)
+    {
+        return $this->container->get('form.resolver.element')->resolve($type)->setOptions($options);
+    }
+
+    public function getOptions()
+    {
+        return $this->options;
     }
 
     public function render($mode = 'JS', $tabs = '')
@@ -63,7 +77,7 @@ abstract class Node
         $this->_tabs       = $tabs;
         $this->_renderMode = $mode;
         $renderFunction    = 'render' . $mode;
-        $lines             = explode("\n", $this->$renderFunction());
+        $lines             = explode(PHP_EOL, $this->$renderFunction());
         foreach ($lines as &$line) {
             $line = $this->_tabs . $line;
         }

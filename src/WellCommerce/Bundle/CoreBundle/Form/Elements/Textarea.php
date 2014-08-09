@@ -15,12 +15,12 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Class Textarea
+ * Class TextArea
  *
  * @package WellCommerce\Bundle\CoreBundle\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Textarea extends TextField implements ElementInterface
+class TextArea extends TextField implements ElementInterface
 {
 
     /**

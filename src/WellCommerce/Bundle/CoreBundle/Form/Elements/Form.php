@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
@@ -35,17 +34,6 @@ class Form extends Container
     public $_populatingWholeForm = false;
     protected $defaultData;
     protected $isSubmitted = false;
-
-    /**
-     * Constructor
-     *
-     * @param array $attributes
-     */
-    public function __construct(array $attributes)
-    {
-        parent::__construct($attributes);
-        $this->form = $this;
-    }
 
     /**
      * Configures Form attributes

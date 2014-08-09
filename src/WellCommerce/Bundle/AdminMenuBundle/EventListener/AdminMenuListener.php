@@ -145,14 +145,15 @@ class AdminMenuListener implements EventSubscriberInterface
 //                'sort_order' => 90
 //            ]));
 //
-//            $builder->add(new AdminMenuItem([
-//                'id'         => 'configuration',
-//                'class'      => 'configuration',
-//                'name'       => $this->translator->trans('Configuration'),
-//                'link'       => $this->router->generate('admin.product.index'),
-//                'path'       => '[menu][configuration]',
-//                'sort_order' => 100
-//            ]));
+            $builder->add(new AdminMenuItem([
+                'id'         => 'configuration',
+                'class'      => 'configuration',
+                'name'       => $this->translator->trans('Configuration'),
+                //                'link'       => $this->router->generate('admin.product.index'),
+                'link'       => '',
+                'path'       => '[menu][configuration]',
+                'sort_order' => 100
+            ]));
 //
 //            $builder->add(new AdminMenuItem([
 //                'id'         => 'localization',
@@ -163,14 +164,14 @@ class AdminMenuListener implements EventSubscriberInterface
 //                'sort_order' => 10
 //            ]));
 //
-//            $builder->add(new AdminMenuItem([
-//                'id'         => 'store_management',
-//                'class'      => 'store_management',
-//                'name'       => $this->translator->trans('Store management'),
-//                'link'       => '',
-//                'path'       => '[menu][configuration][store_management]',
-//                'sort_order' => 20
-//            ]));
+            $builder->add(new AdminMenuItem([
+                'id'         => 'store_management',
+                'class'      => 'store_management',
+                'name'       => $this->translator->trans('Store management'),
+                'link'       => '',
+                'path'       => '[menu][configuration][store_management]',
+                'sort_order' => 20
+            ]));
 //
 //            $builder->add(new AdminMenuItem([
 //                'id'         => 'user_management',
