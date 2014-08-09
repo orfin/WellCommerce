@@ -12,9 +12,10 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Rules;
 
-use WellCommerce\Bundle\CoreBundle\Form\Rule;
 
-class Required extends Rule implements RuleInterface
+use WellCommerce\Bundle\CoreBundle\Form\AbstractRule;
+
+class Required extends AbstractRule implements RuleInterface
 {
 
     public function checkValue($value)

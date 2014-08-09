@@ -12,9 +12,8 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Rules;
 
-use WellCommerce\Bundle\CoreBundle\Rules\RuleInterface;
-use WellCommerce\Bundle\CoreBundle\Form\Rule;
-use WellCommerce\Bundle\CoreBundle\Elements\Field;
+use WellCommerce\Bundle\CoreBundle\Form\AbstractRule;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\Field;
 
 /**
  * Class DateTo
@@ -22,7 +21,7 @@ use WellCommerce\Bundle\CoreBundle\Elements\Field;
  * @package WellCommerce\Bundle\CoreBundle\Form\Rules
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class DateTo extends Rule implements RuleInterface
+class DateTo extends AbstractRule implements RuleInterface
 {
     protected $_compareWith;
 
@@ -32,7 +31,7 @@ class DateTo extends Rule implements RuleInterface
         $this->_compareWith = $compareWith;
     }
 
-    protected function checkValue($value)
+    public function checkValue($value)
     {
         if (strlen($value) > 0 && strlen($this->_compareWith->getValue()) > 0) {
             return ($value >= $this->_compareWith->getValue());

@@ -100,6 +100,16 @@ class appDevDebugProjectContainer extends Container
             'form.filter.trim' => 'getForm_Filter_TrimService',
             'form.resolver.element' => 'getForm_Resolver_ElementService',
             'form.resolver.filter' => 'getForm_Resolver_FilterService',
+            'form.resolver.rule' => 'getForm_Resolver_RuleService',
+            'form.rule.compare' => 'getForm_Rule_CompareService',
+            'form.rule.custom' => 'getForm_Rule_CustomService',
+            'form.rule.date_to' => 'getForm_Rule_DateToService',
+            'form.rule.email' => 'getForm_Rule_EmailService',
+            'form.rule.format' => 'getForm_Rule_FormatService',
+            'form.rule.language_unique' => 'getForm_Rule_LanguageUniqueService',
+            'form.rule.required' => 'getForm_Rule_RequiredService',
+            'form.rule.unique' => 'getForm_Rule_UniqueService',
+            'form.rule.vat' => 'getForm_Rule_VatService',
             'form.type.entity' => 'getForm_Type_EntityService',
             'form.type_guesser.doctrine' => 'getForm_TypeGuesser_DoctrineService',
             'fragment.handler' => 'getFragment_HandlerService',
@@ -905,11 +915,11 @@ class appDevDebugProjectContainer extends Container
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return EntityManager53e6325cc4a96_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager A EntityManager53e6325cc4a96_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager instance.
+     * @return EntityManager53e68b6e536c3_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager A EntityManager53e68b6e536c3_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager instance.
      */
     protected function getDoctrine_Orm_DefaultEntityManagerService()
     {
-        require_once 'D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53e6325cc4a96.php';
+        require_once 'D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53e68b6e536c3.php';
 
         $a = $this->get('annotation_reader');
 
@@ -940,7 +950,7 @@ class appDevDebugProjectContainer extends Container
         $e = \Doctrine\ORM\EntityManager::create($this->get('doctrine.dbal.default_connection'), $d);
         $this->get('doctrine.orm.default_manager_configurator')->configure($e);
 
-        return $this->services['doctrine.orm.default_entity_manager'] = new \EntityManager53e6325cc4a96_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager($e, $this);
+        return $this->services['doctrine.orm.default_entity_manager'] = new \EntityManager53e68b6e536c3_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager($e, $this);
     }
 
     /**
@@ -1230,6 +1240,149 @@ class appDevDebugProjectContainer extends Container
     protected function getForm_Resolver_FilterService()
     {
         $this->services['form.resolver.filter'] = $instance = new \WellCommerce\Bundle\CoreBundle\Form\Resolver\FilterResolver();
+
+        $instance->setContainer($this);
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'form.resolver.rule' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Bundle\CoreBundle\Form\Resolver\RuleResolver A WellCommerce\Bundle\CoreBundle\Form\Resolver\RuleResolver instance.
+     */
+    protected function getForm_Resolver_RuleService()
+    {
+        $this->services['form.resolver.rule'] = $instance = new \WellCommerce\Bundle\CoreBundle\Form\Resolver\RuleResolver();
+
+        $instance->setContainer($this);
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'form.rule.compare' service.
+     *
+     * @return WellCommerce\Bundle\CoreBundle\Form\Rules\Compare A WellCommerce\Bundle\CoreBundle\Form\Rules\Compare instance.
+     */
+    protected function getForm_Rule_CompareService()
+    {
+        $instance = new \WellCommerce\Bundle\CoreBundle\Form\Rules\Compare();
+
+        $instance->setContainer($this);
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'form.rule.custom' service.
+     *
+     * @return WellCommerce\Bundle\CoreBundle\Form\Rules\Custom A WellCommerce\Bundle\CoreBundle\Form\Rules\Custom instance.
+     */
+    protected function getForm_Rule_CustomService()
+    {
+        $instance = new \WellCommerce\Bundle\CoreBundle\Form\Rules\Custom();
+
+        $instance->setContainer($this);
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'form.rule.date_to' service.
+     *
+     * @return WellCommerce\Bundle\CoreBundle\Form\Rules\DateTo A WellCommerce\Bundle\CoreBundle\Form\Rules\DateTo instance.
+     */
+    protected function getForm_Rule_DateToService()
+    {
+        $instance = new \WellCommerce\Bundle\CoreBundle\Form\Rules\DateTo();
+
+        $instance->setContainer($this);
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'form.rule.email' service.
+     *
+     * @return WellCommerce\Bundle\CoreBundle\Form\Rules\Email A WellCommerce\Bundle\CoreBundle\Form\Rules\Email instance.
+     */
+    protected function getForm_Rule_EmailService()
+    {
+        $instance = new \WellCommerce\Bundle\CoreBundle\Form\Rules\Email();
+
+        $instance->setContainer($this);
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'form.rule.format' service.
+     *
+     * @return WellCommerce\Bundle\CoreBundle\Form\Rules\Format A WellCommerce\Bundle\CoreBundle\Form\Rules\Format instance.
+     */
+    protected function getForm_Rule_FormatService()
+    {
+        $instance = new \WellCommerce\Bundle\CoreBundle\Form\Rules\Format();
+
+        $instance->setContainer($this);
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'form.rule.language_unique' service.
+     *
+     * @return WellCommerce\Bundle\CoreBundle\Form\Rules\LanguageUnique A WellCommerce\Bundle\CoreBundle\Form\Rules\LanguageUnique instance.
+     */
+    protected function getForm_Rule_LanguageUniqueService()
+    {
+        $instance = new \WellCommerce\Bundle\CoreBundle\Form\Rules\LanguageUnique();
+
+        $instance->setContainer($this);
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'form.rule.required' service.
+     *
+     * @return WellCommerce\Bundle\CoreBundle\Form\Rules\Required A WellCommerce\Bundle\CoreBundle\Form\Rules\Required instance.
+     */
+    protected function getForm_Rule_RequiredService()
+    {
+        $instance = new \WellCommerce\Bundle\CoreBundle\Form\Rules\Required();
+
+        $instance->setContainer($this);
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'form.rule.unique' service.
+     *
+     * @return WellCommerce\Bundle\CoreBundle\Form\Rules\Unique A WellCommerce\Bundle\CoreBundle\Form\Rules\Unique instance.
+     */
+    protected function getForm_Rule_UniqueService()
+    {
+        $instance = new \WellCommerce\Bundle\CoreBundle\Form\Rules\Unique();
+
+        $instance->setContainer($this);
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'form.rule.vat' service.
+     *
+     * @return WellCommerce\Bundle\CoreBundle\Form\Rules\Vat A WellCommerce\Bundle\CoreBundle\Form\Rules\Vat instance.
+     */
+    protected function getForm_Rule_VatService()
+    {
+        $instance = new \WellCommerce\Bundle\CoreBundle\Form\Rules\Vat();
 
         $instance->setContainer($this);
 
@@ -1950,7 +2103,7 @@ class appDevDebugProjectContainer extends Container
 
         $d = new \Symfony\Component\Security\Http\AccessMap();
 
-        return $this->services['security.firewall.map.context.default'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($d, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => new \Symfony\Component\Security\Core\User\InMemoryUserProvider()), 'default', $a, $this->get('debug.event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE)), 2 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '53e6325c9163a', $a), 3 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, $this->get('security.access.decision_manager'), $d, $this->get('security.authentication.manager'))), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $this->get('security.authentication.trust_resolver'), new \Symfony\Component\Security\Http\HttpUtils($c, $c), 'default', NULL, NULL, NULL, $a));
+        return $this->services['security.firewall.map.context.default'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($d, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => new \Symfony\Component\Security\Core\User\InMemoryUserProvider()), 'default', $a, $this->get('debug.event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE)), 2 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '53e68b6e2a67a', $a), 3 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, $this->get('security.access.decision_manager'), $d, $this->get('security.authentication.manager'))), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $this->get('security.authentication.trust_resolver'), new \Symfony\Component\Security\Http\HttpUtils($c, $c), 'default', NULL, NULL, NULL, $a));
     }
 
     /**
@@ -3482,7 +3635,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getSecurity_Authentication_ManagerService()
     {
-        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('53e6325c9163a')), true);
+        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('53e68b6e2a67a')), true);
 
         $instance->setEventDispatcher($this->get('debug.event_dispatcher'));
 
@@ -4236,8 +4389,8 @@ class appDevDebugProjectContainer extends Container
             'jms_di_extra.cache_warmer.controller_file_blacklist' => array(
 
             ),
-            'jms_di_extra.doctrine_integration.entity_manager.file' => 'D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53e6325cc4a96.php',
-            'jms_di_extra.doctrine_integration.entity_manager.class' => 'EntityManager53e6325cc4a96_546a8d27f194334ee012bfe64f629947b07e4919\\__CG__\\Doctrine\\ORM\\EntityManager',
+            'jms_di_extra.doctrine_integration.entity_manager.file' => 'D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53e68b6e536c3.php',
+            'jms_di_extra.doctrine_integration.entity_manager.class' => 'EntityManager53e68b6e536c3_546a8d27f194334ee012bfe64f629947b07e4919\\__CG__\\Doctrine\\ORM\\EntityManager',
             'jms_aop.cache_dir' => 'D:/Git/WellCommerce/app/cache/dev/jms_aop',
             'jms_aop.interceptor_loader.class' => 'JMS\\AopBundle\\Aop\\InterceptorLoader',
             'stof_doctrine_extensions.event_listener.locale.class' => 'Stof\\DoctrineExtensionsBundle\\EventListener\\LocaleListener',
@@ -4332,6 +4485,15 @@ class appDevDebugProjectContainer extends Container
             'form.filter.secure.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Filters\\Secure',
             'form.filter.trim.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Filters\\Trim',
             'form.filter.comma_to_dot_changer.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Filters\\CommaToDotChanger',
+            'form.rule.compare.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Rules\\Compare',
+            'form.rule.custom.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Rules\\Custom',
+            'form.rule.date_to.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Rules\\DateTo',
+            'form.rule.email.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Rules\\Email',
+            'form.rule.format.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Rules\\Format',
+            'form.rule.language_unique.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Rules\\LanguageUnique',
+            'form.rule.required.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Rules\\Required',
+            'form.rule.unique.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Rules\\Unique',
+            'form.rule.vat.class' => 'WellCommerce\\Bundle\\CoreBundle\\Form\\Rules\\Vat',
             'datagrid_renderer.class' => 'WellCommerce\\Bundle\\CoreBundle\\DataGrid\\Renderer',
             'datagrid_builder.class' => 'WellCommerce\\Bundle\\CoreBundle\\DataGrid\\DataGridBuilder',
             'datagrid_loader.class' => 'WellCommerce\\Bundle\\CoreBundle\\DataGrid\\Loader\\Loader',

@@ -73,6 +73,15 @@
         <parameter key="form.filter.secure.class">WellCommerce\Bundle\CoreBundle\Form\Filters\Secure</parameter>
         <parameter key="form.filter.trim.class">WellCommerce\Bundle\CoreBundle\Form\Filters\Trim</parameter>
         <parameter key="form.filter.comma_to_dot_changer.class">WellCommerce\Bundle\CoreBundle\Form\Filters\CommaToDotChanger</parameter>
+        <parameter key="form.rule.compare.class">WellCommerce\Bundle\CoreBundle\Form\Rules\Compare</parameter>
+        <parameter key="form.rule.custom.class">WellCommerce\Bundle\CoreBundle\Form\Rules\Custom</parameter>
+        <parameter key="form.rule.date_to.class">WellCommerce\Bundle\CoreBundle\Form\Rules\DateTo</parameter>
+        <parameter key="form.rule.email.class">WellCommerce\Bundle\CoreBundle\Form\Rules\Email</parameter>
+        <parameter key="form.rule.format.class">WellCommerce\Bundle\CoreBundle\Form\Rules\Format</parameter>
+        <parameter key="form.rule.language_unique.class">WellCommerce\Bundle\CoreBundle\Form\Rules\LanguageUnique</parameter>
+        <parameter key="form.rule.required.class">WellCommerce\Bundle\CoreBundle\Form\Rules\Required</parameter>
+        <parameter key="form.rule.unique.class">WellCommerce\Bundle\CoreBundle\Form\Rules\Unique</parameter>
+        <parameter key="form.rule.vat.class">WellCommerce\Bundle\CoreBundle\Form\Rules\Vat</parameter>
     </parameters>
 
     <services>
@@ -89,6 +98,12 @@
         </service>
 
         <service id="form.resolver.filter" class="%form.resolver.filter.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.resolver.rule" class="%form.resolver.rule.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -143,6 +158,60 @@
         </service>
 
         <service id="form.filter.comma_to_dot_changer" class="%form.filter.comma_to_dot_changer.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.rule.compare" class="%form.rule.compare.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.rule.custom" class="%form.rule.custom.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.rule.date_to" class="%form.rule.date_to.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.rule.email" class="%form.rule.email.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.rule.format" class="%form.rule.format.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.rule.language_unique" class="%form.rule.language_unique.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.rule.required" class="%form.rule.required.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.rule.unique" class="%form.rule.unique.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.rule.vat" class="%form.rule.vat.class%" scope="prototype">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

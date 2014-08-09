@@ -571,8 +571,8 @@
     <parameter key="jms_di_extra.disable_grep">true</parameter>
     <parameter key="jms_di_extra.doctrine_integration">true</parameter>
     <parameter key="jms_di_extra.cache_warmer.controller_file_blacklist" type="collection"/>
-    <parameter key="jms_di_extra.doctrine_integration.entity_manager.file">D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53e6325cc4a96.php</parameter>
-    <parameter key="jms_di_extra.doctrine_integration.entity_manager.class">EntityManager53e6325cc4a96_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager</parameter>
+    <parameter key="jms_di_extra.doctrine_integration.entity_manager.file">D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53e68b6e536c3.php</parameter>
+    <parameter key="jms_di_extra.doctrine_integration.entity_manager.class">EntityManager53e68b6e536c3_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager</parameter>
     <parameter key="jms_aop.cache_dir">D:/Git/WellCommerce/app/cache/dev/jms_aop</parameter>
     <parameter key="jms_aop.interceptor_loader.class">JMS\AopBundle\Aop\InterceptorLoader</parameter>
     <parameter key="stof_doctrine_extensions.event_listener.locale.class">Stof\DoctrineExtensionsBundle\EventListener\LocaleListener</parameter>
@@ -667,6 +667,15 @@
     <parameter key="form.filter.secure.class">WellCommerce\Bundle\CoreBundle\Form\Filters\Secure</parameter>
     <parameter key="form.filter.trim.class">WellCommerce\Bundle\CoreBundle\Form\Filters\Trim</parameter>
     <parameter key="form.filter.comma_to_dot_changer.class">WellCommerce\Bundle\CoreBundle\Form\Filters\CommaToDotChanger</parameter>
+    <parameter key="form.rule.compare.class">WellCommerce\Bundle\CoreBundle\Form\Rules\Compare</parameter>
+    <parameter key="form.rule.custom.class">WellCommerce\Bundle\CoreBundle\Form\Rules\Custom</parameter>
+    <parameter key="form.rule.date_to.class">WellCommerce\Bundle\CoreBundle\Form\Rules\DateTo</parameter>
+    <parameter key="form.rule.email.class">WellCommerce\Bundle\CoreBundle\Form\Rules\Email</parameter>
+    <parameter key="form.rule.format.class">WellCommerce\Bundle\CoreBundle\Form\Rules\Format</parameter>
+    <parameter key="form.rule.language_unique.class">WellCommerce\Bundle\CoreBundle\Form\Rules\LanguageUnique</parameter>
+    <parameter key="form.rule.required.class">WellCommerce\Bundle\CoreBundle\Form\Rules\Required</parameter>
+    <parameter key="form.rule.unique.class">WellCommerce\Bundle\CoreBundle\Form\Rules\Unique</parameter>
+    <parameter key="form.rule.vat.class">WellCommerce\Bundle\CoreBundle\Form\Rules\Vat</parameter>
     <parameter key="datagrid_renderer.class">WellCommerce\Bundle\CoreBundle\DataGrid\Renderer</parameter>
     <parameter key="datagrid_builder.class">WellCommerce\Bundle\CoreBundle\DataGrid\DataGridBuilder</parameter>
     <parameter key="datagrid_loader.class">WellCommerce\Bundle\CoreBundle\DataGrid\Loader\Loader</parameter>
@@ -1668,7 +1677,7 @@
       <argument type="collection">
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>53e6325c9163a</argument>
+            <argument>53e68b6e2a67a</argument>
           </service>
         </argument>
       </argument>
@@ -1784,7 +1793,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.context"/>
-            <argument>53e6325c9163a</argument>
+            <argument>53e68b6e2a67a</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
           </service>
         </argument>
@@ -2236,8 +2245,8 @@
       <argument type="collection"/>
       <argument type="collection"/>
     </service>
-    <service id="doctrine.orm.default_entity_manager" class="EntityManager53e6325cc4a96_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager">
-      <file>D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53e6325cc4a96.php</file>
+    <service id="doctrine.orm.default_entity_manager" class="EntityManager53e68b6e536c3_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager">
+      <file>D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53e68b6e536c3.php</file>
       <argument type="service">
         <service class="Doctrine\ORM\EntityManager" factory-method="create" factory-class="%doctrine.orm.entity_manager.class%" public="false">
           <argument type="service" id="doctrine.dbal.default_connection"/>
@@ -2508,6 +2517,11 @@
         <argument type="service" id="service_container"/>
       </call>
     </service>
+    <service id="form.resolver.rule" class="WellCommerce\Bundle\CoreBundle\Form\Resolver\RuleResolver">
+      <call method="setContainer">
+        <argument type="service" id="service_container"/>
+      </call>
+    </service>
     <service id="form.element.attribute_editor" class="WellCommerce\Bundle\CoreBundle\Form\Elements\AttributeEditor" scope="prototype">
       <call method="setContainer">
         <argument type="service" id="service_container"/>
@@ -2549,6 +2563,51 @@
       </call>
     </service>
     <service id="form.filter.comma_to_dot_changer" class="WellCommerce\Bundle\CoreBundle\Form\Filters\CommaToDotChanger" scope="prototype">
+      <call method="setContainer">
+        <argument type="service" id="service_container"/>
+      </call>
+    </service>
+    <service id="form.rule.compare" class="WellCommerce\Bundle\CoreBundle\Form\Rules\Compare" scope="prototype">
+      <call method="setContainer">
+        <argument type="service" id="service_container"/>
+      </call>
+    </service>
+    <service id="form.rule.custom" class="WellCommerce\Bundle\CoreBundle\Form\Rules\Custom" scope="prototype">
+      <call method="setContainer">
+        <argument type="service" id="service_container"/>
+      </call>
+    </service>
+    <service id="form.rule.date_to" class="WellCommerce\Bundle\CoreBundle\Form\Rules\DateTo" scope="prototype">
+      <call method="setContainer">
+        <argument type="service" id="service_container"/>
+      </call>
+    </service>
+    <service id="form.rule.email" class="WellCommerce\Bundle\CoreBundle\Form\Rules\Email" scope="prototype">
+      <call method="setContainer">
+        <argument type="service" id="service_container"/>
+      </call>
+    </service>
+    <service id="form.rule.format" class="WellCommerce\Bundle\CoreBundle\Form\Rules\Format" scope="prototype">
+      <call method="setContainer">
+        <argument type="service" id="service_container"/>
+      </call>
+    </service>
+    <service id="form.rule.language_unique" class="WellCommerce\Bundle\CoreBundle\Form\Rules\LanguageUnique" scope="prototype">
+      <call method="setContainer">
+        <argument type="service" id="service_container"/>
+      </call>
+    </service>
+    <service id="form.rule.required" class="WellCommerce\Bundle\CoreBundle\Form\Rules\Required" scope="prototype">
+      <call method="setContainer">
+        <argument type="service" id="service_container"/>
+      </call>
+    </service>
+    <service id="form.rule.unique" class="WellCommerce\Bundle\CoreBundle\Form\Rules\Unique" scope="prototype">
+      <call method="setContainer">
+        <argument type="service" id="service_container"/>
+      </call>
+    </service>
+    <service id="form.rule.vat" class="WellCommerce\Bundle\CoreBundle\Form\Rules\Vat" scope="prototype">
       <call method="setContainer">
         <argument type="service" id="service_container"/>
       </call>

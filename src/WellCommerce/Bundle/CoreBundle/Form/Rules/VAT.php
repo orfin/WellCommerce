@@ -12,16 +12,13 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Rules;
 
-use WellCommerce\Bundle\CoreBundle\Rules\RuleInterface;
-use WellCommerce\Bundle\CoreBundle\Form\Rules\Format;
-
 /**
- * Class VAT
+ * Class Vat
  *
  * @package WellCommerce\Bundle\CoreBundle\Form\Rules
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class VAT extends Format implements RuleInterface
+class Vat extends Format implements RuleInterface
 {
 
     public function __construct($errorMsg)

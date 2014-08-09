@@ -12,10 +12,16 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Rules;
 
-use WellCommerce\Bundle\CoreBundle\Form\Rule;
+use WellCommerce\Bundle\CoreBundle\Form\AbstractRule;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class Unique extends Rule implements RuleInterface
+/**
+ * Class Unique
+ *
+ * @package WellCommerce\Bundle\CoreBundle\Form\Rules
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
+ */
+class Unique extends AbstractRule implements RuleInterface
 {
     protected $errorMsg;
     protected $container;

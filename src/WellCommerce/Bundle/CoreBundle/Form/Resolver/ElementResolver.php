@@ -12,7 +12,8 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Resolver;
 
-use Symfony\Component\DependencyInjection\ContainerAware;
+use WellCommerce\Bundle\CoreBundle\Form\AbstractResolver;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 
 /**
  * Class ElementResolver
@@ -20,18 +21,29 @@ use Symfony\Component\DependencyInjection\ContainerAware;
  * @package WellCommerce\Bundle\CoreBundle\Form\Resolver
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ElementResolver extends ContainerAware implements ResolverInterface
+class ElementResolver extends AbstractResolver implements ResolverInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function resolve($type)
+    public function get($type, array $options = [])
     {
-        $service = sprintf('form.element.%s', $type);
-        if (!$this->container->has($service)) {
-            throw new \InvalidArgumentException(sprintf('Tried to get element "%s" which does not exists in container', $service));
+        $service = $this->container->get($this->guess($type));
+
+        if (!$service instanceof ElementInterface) {
+            throw new \LogicException('Element must implement ElementInterface');
         }
 
-        return $this->container->get($service);
+        $service->setOptions($options);
+
+        return $service;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getServiceNamePattern()
+    {
+        return 'form.element.%s';
     }
 } 

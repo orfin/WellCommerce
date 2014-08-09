@@ -45,4 +45,13 @@ interface ElementInterface
      * @return mixed
      */
     public function prepareAttributesJs();
+
+    /**
+     * Sets element options
+     *
+     * @param array $options
+     *
+     * @return mixed
+     */
+    public function setOptions(array $options = []);
 } 

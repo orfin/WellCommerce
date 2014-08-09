@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Rules;
 
-use WellCommerce\Bundle\CoreBundle\Form\Rule;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use WellCommerce\Bundle\CoreBundle\Form\AbstractRule;
 
 /**
  * Class LanguageUnique
@@ -21,7 +21,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * @package WellCommerce\Bundle\CoreBundle\Form\Rules
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LanguageUnique extends Rule implements RuleInterface
+class LanguageUnique extends AbstractRule implements RuleInterface
 {
 
     protected $errorMsg;

@@ -12,8 +12,6 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Rules;
 
-use WellCommerce\Bundle\CoreBundle\Form\Rules\Format;
-
 /**
  * Class Email
  *

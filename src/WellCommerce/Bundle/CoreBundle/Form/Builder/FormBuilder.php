@@ -12,20 +12,12 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Builder;
 
-use Doctrine\Entity;
 use Symfony\Component\DependencyInjection\ContainerAware;
-use WellCommerce\Bundle\CoreBundle\AbstractComponent;
-use WellCommerce\Bundle\CoreBundle\Form\Conditions\ConditionInterface;
-use WellCommerce\Bundle\CoreBundle\Form\Dependency;
-use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
+use WellCommerce\Bundle\CoreBundle\Form\Dependencies\DependencyInterface;
+use WellCommerce\Bundle\CoreBundle\Form\Filters\FilterInterface;
 use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
-use WellCommerce\Bundle\CoreBundle\Form\Option;
-use WellCommerce\Bundle\CoreBundle\Model\ModelInterface;
 use WellCommerce\Bundle\CoreBundle\Event\FormEvent;
-use WellCommerce\Bundle\CoreBundle\Form\Elements;
-use WellCommerce\Bundle\CoreBundle\Form\Filters;
-use WellCommerce\Bundle\CoreBundle\Form\Rules;
-use WellCommerce\Bundle\CoreBundle\Form\Conditions;
+use WellCommerce\Bundle\CoreBundle\Form\Rules\RuleInterface;
 
 /**
  * Class FormBuilder
@@ -141,5 +133,38 @@ class FormBuilder extends ContainerAware implements FormBuilderInterface
     public function init($options)
     {
         return $this->container->get('form.element.form')->setOptions($options);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getElement($type, array $options = [])
+    {
+        return $this->container->get('form.resolver.element')->get($type, $options);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRule($type, array $options = [])
+    {
+        return $this->container->get('form.resolver.rule')->get($type, $options);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFilter($type, array $options = [])
+    {
+        return $this->container->get('form.resolver.filter')->get($type, $options);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDependency($type, $options)
+    {
+        return $this->container->get('form.resolver.dependency')->get($type, $options);
+
     }
 }

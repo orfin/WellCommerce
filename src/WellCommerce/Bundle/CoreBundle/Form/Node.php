@@ -16,7 +16,6 @@ use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use WellCommerce\Bundle\CoreBundle\Form\Filters\FilterInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Resolver\ElementResolverInterface;
 
 /**
@@ -48,7 +47,7 @@ abstract class Node extends ContainerAware
         $this->_jsNodeName     = 'GForm' . end($class);
     }
 
-    public function setOptions($options)
+    public function setOptions(array $options = [])
     {
         $this->configureAttributes($this->optionsResolver);
         $this->attributes = $this->optionsResolver->resolve($options);
@@ -64,29 +63,13 @@ abstract class Node extends ContainerAware
     }
 
     /**
-     * Returns form element
-     *
-     * @param $type
-     * @param $options
-     *
-     * @return \WellCommerce\Bundle\CoreBundle\Form\Node
-     */
-    public function addElement($type, $options)
-    {
-        $element = $this->container->get('form.resolver.element')->resolve($type);
-        $element->setOptions($options);
-
-        return $this->addChild($element);
-    }
-
-    /**
      * Adds child element to node
      *
      * @param $child
      *
      * @return mixed
      */
-    private function addChild($child)
+    public function addChild($child)
     {
         $this->children[] = $child;
         $child->form      = $this->form;
@@ -126,56 +109,29 @@ abstract class Node extends ContainerAware
         return implode("\n", $lines);
     }
 
-    public function addRule($rule)
-    {
-        if (!isset($this->attributes['rules']) || !is_array($this->attributes['rules'])) {
-            $this->attributes['rules'] = [];
-        }
-        $this->attributes['rules'][] = $rule;
-    }
-
     public function clearRules()
     {
         $this->attributes['rules'] = [];
     }
 
-    /**
-     * Adds filter to form element
-     *
-     * @param       $type
-     * @param array $options
-     *
-     * @throws \LogicException
-     */
+    public function addRule($type, $options = [])
+    {
+        $rule = $this->container->get('form.resolver.rule')->get($type, $options);
+
+        $this->attributes['rules'][] = $rule;
+    }
+
     public function addFilter($type, $options = [])
     {
-        $filter = $this->container->get('form.resolver.filter')->resolve($type);
-        $filter->setOptions($options);
+        $filter = $this->container->get('form.resolver.filter')->get($type, $options);
 
-        if (!$filter instanceof FilterInterface) {
-            throw new \LogicException('Filter must implement FilterInterface');
-        }
         $this->attributes['filters'][] = $filter;
     }
 
-    public function setFilter($filter)
+    public function addDependency($type, $options = [])
     {
-        if (!isset($this->attributes['filters']) || !is_array($this->attributes['filters'])) {
-            $this->attributes['filters'] = [];
-        }
-        $this->attributes['filters'][] = $filter;
-    }
+        $dependency = $this->container->get('form.resolver.dependency')->get($type, $options);
 
-    public function clearFilters()
-    {
-        $this->attributes['filters'] = [];
-    }
-
-    public function addDependency($dependency)
-    {
-        if (!isset($this->attributes['dependencies']) || !is_array($this->attributes['dependencies'])) {
-            $this->attributes['dependencies'] = [];
-        }
         $this->attributes['dependencies'][] = $dependency;
     }
 

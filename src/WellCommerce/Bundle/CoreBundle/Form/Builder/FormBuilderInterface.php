@@ -78,4 +78,44 @@ interface FormBuilderInterface
      * @return mixed
      */
     public function setData(array $data);
+
+    /**
+     * Returns an element object by its type
+     *
+     * @param       $type
+     * @param array $options
+     *
+     * @return mixed
+     */
+    public function getElement($type, array $options = []);
+
+    /**
+     * Returns a rule object by its type
+     *
+     * @param       $type
+     * @param array $options
+     *
+     * @return \WellCommerce\Bundle\CoreBundle\Form\Rules\RuleInterface
+     */
+    public function getRule($type, array $options = []);
+
+    /**
+     * Returns a filter object by its type
+     *
+     * @param       $type
+     * @param array $options
+     *
+     * @return \WellCommerce\Bundle\CoreBundle\Form\Filters\FilterInterface
+     */
+    public function getFilter($type, array $options = []);
+
+    /**
+     * Returns a dependency object by its type
+     *
+     * @param $type
+     * @param $options
+     *
+     * @return \WellCommerce\Bundle\CoreBundle\Form\Dependencies\DependencyInterface
+     */
+    public function getDependency($type, $options);
 }

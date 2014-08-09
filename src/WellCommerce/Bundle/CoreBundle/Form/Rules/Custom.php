@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Rules;
 
-use WellCommerce\Bundle\CoreBundle\Form\Rule;
+use WellCommerce\Bundle\CoreBundle\Form\AbstractRule;
 use WellCommerce\Bundle\CoreBundle\Form\Node;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -25,7 +25,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * @package WellCommerce\Bundle\CoreBundle\Form\Rules
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Custom extends Rule implements RuleInterface
+class Custom extends AbstractRule implements RuleInterface
 {
 
     protected $errorMsg;

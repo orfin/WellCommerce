@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Rules;
 
-use WellCommerce\Bundle\CoreBundle\Form\Rule;
+use WellCommerce\Bundle\CoreBundle\Form\AbstractRule;
 
 /**
  * Class Format
@@ -20,9 +20,8 @@ use WellCommerce\Bundle\CoreBundle\Form\Rule;
  * @package WellCommerce\Bundle\CoreBundle\Form\Rules
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Format extends Rule
+class Format extends AbstractRule
 {
-
     protected $_format;
 
     public function __construct($errorMsg, $format)
@@ -31,7 +30,7 @@ class Format extends Rule
         $this->_format = $format;
     }
 
-    protected function checkValue($value)
+    public function checkValue($value)
     {
         if (strlen($value) == 0) {
             return true;

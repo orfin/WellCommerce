@@ -32,13 +32,6 @@ abstract class Container extends Node
         }
     }
 
-    public function clearRules()
-    {
-        foreach ($this->children as $child) {
-            $child->clearRules();
-        }
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -46,13 +39,6 @@ abstract class Container extends Node
     {
         foreach ($this->children as $child) {
             $child->addFilter($type, $options);
-        }
-    }
-
-    public function clearFilters()
-    {
-        foreach ($this->children as $child) {
-            $child->clearFilters();
         }
     }
 

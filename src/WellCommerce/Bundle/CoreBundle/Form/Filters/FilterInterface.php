@@ -28,4 +28,13 @@ interface FilterInterface
      * @return mixed
      */
     public function filterValue($value);
+
+    /**
+     * Sets rule options
+     *
+     * @param array $options
+     *
+     * @return mixed
+     */
+    public function setOptions(array $options = []);
 } 

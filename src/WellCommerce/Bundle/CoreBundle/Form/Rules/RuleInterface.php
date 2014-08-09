@@ -36,4 +36,13 @@ interface RuleInterface
      * @return mixed
      */
     public function render();
+
+    /**
+     * Sets rule options
+     *
+     * @param array $options
+     *
+     * @return mixed
+     */
+    public function setOptions(array $options = []);
 } 

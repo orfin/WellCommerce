@@ -107,9 +107,6 @@ class Field extends Node
 
     protected function formatRulesJs()
     {
-        if (!isset($this->attributes['rules']) || !is_array($this->attributes['rules'])) {
-            return '';
-        }
         $rules = [];
         foreach ($this->attributes['rules'] as $rule) {
             $rules[] = $rule->render();

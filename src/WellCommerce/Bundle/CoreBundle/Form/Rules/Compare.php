@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Rules;
 
+use WellCommerce\Bundle\CoreBundle\Form\AbstractRule;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\Field;
-use WellCommerce\Bundle\CoreBundle\Form\Rule;
 
 /**
  * Class Compare
@@ -21,7 +21,7 @@ use WellCommerce\Bundle\CoreBundle\Form\Rule;
  * @package WellCommerce\Bundle\CoreBundle\Form\Rules
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Compare extends Rule implements RuleInterface
+class Compare extends AbstractRule implements RuleInterface
 {
     protected $_compareWith;
 

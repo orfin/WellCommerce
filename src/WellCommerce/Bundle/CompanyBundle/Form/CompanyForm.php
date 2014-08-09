@@ -31,22 +31,22 @@ class CompanyForm extends AbstractForm implements FormInterface
     {
         $form = $builder->init($options);
 
-        $requiredData = $form->addElement('fieldset', [
+        $requiredData = $form->addChild($builder->getElement('fieldset', [
             'name'  => 'required_data',
             'label' => $this->trans('Required data')
-        ]);
+        ]));
 
-        $requiredData->addElement('text_field', [
+        $requiredData->addChild($builder->getElement('text_field', [
             'name'  => 'name',
             'label' => $this->trans('Name'),
             'rules' => [
-                $form->addRule('required', [
+                $builder->getRule('required', [
                     'message' => $this->trans('Name is required')
                 ])
             ]
-        ]);
+        ]));
 
-        $requiredData->addElement('text_field', [
+        $requiredData->addChild($builder->getElement('text_field', [
             'name'  => 'shortName',
             'label' => $this->trans('Short name'),
             'rules' => [
@@ -54,48 +54,48 @@ class CompanyForm extends AbstractForm implements FormInterface
 //                    'message' => $this->trans('Short name is required')
 //                ])
             ]
-        ]);
+        ]));
 
-        $addressData = $form->addElement('fieldset', [
+        $addressData = $form->addChild($builder->getElement('fieldset', [
             'name'  => 'address_data',
             'label' => $this->trans('Address data')
-        ]);
+        ]));
 
-        $addressData->addElement('text_field', [
+        $addressData->addChild($builder->getElement('text_field', [
             'name'  => 'street',
             'label' => $this->trans('Street'),
-        ]);
+        ]));
 
-        $addressData->addElement('text_field', [
+        $addressData->addChild($builder->getElement('text_field', [
             'name'  => 'streetNo',
             'label' => $this->trans('Street number'),
-        ]);
+        ]));
 
-        $addressData->addElement('text_field', [
+        $addressData->addChild($builder->getElement('text_field', [
             'name'  => 'flatNo',
             'label' => $this->trans('Flat number'),
-        ]);
+        ]));
 
-        $addressData->addElement('text_field', [
+        $addressData->addChild($builder->getElement('text_field', [
             'name'  => 'province',
             'label' => $this->trans('Province'),
-        ]);
+        ]));
 
-        $addressData->addElement('text_field', [
+        $addressData->addChild($builder->getElement('text_field', [
             'name'  => 'postCode',
             'label' => $this->trans('Post code'),
-        ]);
+        ]));
 
-        $addressData->addElement('text_field', [
+        $addressData->addChild($builder->getElement('text_field', [
             'name'  => 'city',
             'label' => $this->trans('City'),
-        ]);
+        ]));
 
-        $addressData->addElement('select', [
+        $addressData->addChild($builder->getElement('select', [
             'name'  => 'country',
             'label' => $this->trans('Country'),
             //            'options' => $builder->makeOptions($this->get('country.repository')->all())
-        ]);
+        ]));
 
         $form->addFilter('no_code');
         $form->addFilter('trim');

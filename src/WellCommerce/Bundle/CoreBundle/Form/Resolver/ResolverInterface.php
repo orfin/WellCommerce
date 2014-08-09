@@ -21,12 +21,29 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Resolver;
 interface ResolverInterface
 {
     /**
-     * Resolves and returns service
+     * Guesses service name by type
      *
      * @param $type
      *
-     * @throws \InvalidArgumentException if the service was not found
-     * @return object
+     * @throws \Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
+     * @return mixed
      */
-    public function resolve($type);
+    public function guess($type);
+
+    /**
+     * Returns resolved service
+     *
+     * @param       $type
+     * @param array $options
+     *
+     * @return mixed
+     */
+    public function get($type, array $options = []);
+
+    /**
+     * Returns service name pattern
+     *
+     * @return string
+     */
+    public function getServiceNamePattern();
 } 
