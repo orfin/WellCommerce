@@ -15,6 +15,7 @@ use WellCommerce\Bundle\ClientBundle\Entity\ClientGroup;
 use WellCommerce\Bundle\CoreBundle\Form\AbstractForm;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
+use WellCommerce\Bundle\ClientBundle\Repository\ClientGroupRepositoryInterface;
 
 /**
  * Class ClientGroupForm
@@ -24,6 +25,11 @@ use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
  */
 class ClientGroupForm extends AbstractForm implements FormInterface
 {
+    /**
+     * @var ClientGroupRepositoryInterface
+     */
+    private $repository;
+
     /**
      * {@inheritdoc}
      */
@@ -86,29 +92,35 @@ class ClientGroupForm extends AbstractForm implements FormInterface
      */
     public function getDefaultData(ClientGroup $clientGroup)
     {
-        $result = $this->get('client_group.repository')->findAll();
-        $formData = [];
-//        print_r($result);
-//        die();
-//
-//        $formData = [];
-//        $accessor = $this->getPropertyAccessor();
-//
-//        $accessor->setValue($formData, '[required_data]', [
-//            'name'      => $company->getName(),
-//            'shortName' => $company->getShortName()
-//        ]);
-//
-//        $accessor->setValue($formData, '[address_data]', [
-//            'street'   => $company->getStreet(),
-//            'streetNo' => $company->getStreetNo(),
-//            'flatNo'   => $company->getFlatNo(),
-//            'province' => $company->getProvince(),
-//            'postCode' => $company->getPostCode(),
-//            'city'     => $company->getCity(),
-//            'country'  => $company->getCountry()
-//        ]);
+        $translations = $this->repository->findTranslations($clientGroup);
+        $formData     = [];
+        $accessor     = $this->getPropertyAccessor();
+
+        $accessor->setValue($formData, '[required_data]', [
+            'name'      => $company->getName(),
+            'shortName' => $company->getShortName()
+        ]);
+
+        $accessor->setValue($formData, '[address_data]', [
+            'street'   => $company->getStreet(),
+            'streetNo' => $company->getStreetNo(),
+            'flatNo'   => $company->getFlatNo(),
+            'province' => $company->getProvince(),
+            'postCode' => $company->getPostCode(),
+            'city'     => $company->getCity(),
+            'country'  => $company->getCountry()
+        ]);
 
         return $formData;
+    }
+
+    /**
+     * Sets client group repository
+     *
+     * @param ClientGroupRepositoryInterface $repository
+     */
+    public function setRepository(ClientGroupRepositoryInterface $repository)
+    {
+        $this->repository = $repository;
     }
 }

@@ -12,12 +12,22 @@
 
 namespace WellCommerce\Bundle\ClientBundle\Repository;
 
+use WellCommerce\Bundle\CompanyBundle\Entity\Company;
+
 /**
  * Interface ClientGroupRepositoryInterface
  *
  * @package WellCommerce\Bundle\ClientBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ClientGroupRepositoryInterface {
-
+interface ClientGroupRepositoryInterface
+{
+    /**
+     * Returns translations for given entity
+     *
+     * @param Company $company
+     *
+     * @return mixed
+     */
+    public function findTranslations($company);
 } 

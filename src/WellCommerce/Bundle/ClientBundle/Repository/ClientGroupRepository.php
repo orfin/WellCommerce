@@ -52,6 +52,6 @@ class ClientGroupRepository extends TranslatableRepository implements DataGridRe
     public function findAll()
     {
         $qb = $this->createQueryBuilder('client_group');
-        return $this->getResult($qb, 'en_US');
+        return $this->getResult($qb, 'fr_FRa');
     }
 }
