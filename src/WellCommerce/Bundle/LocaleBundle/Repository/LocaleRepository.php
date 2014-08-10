@@ -50,6 +50,22 @@ class LocaleRepository extends EntityRepository implements DataGridRepositoryInt
         return false;
     }
 
+    /**
+     * Returns locales as list containing  key-value pairs
+     *
+     * @return array
+     */
+    public function getLocalesFlattened()
+    {
+        $locales = $this->findAll();
+        $data    = [];
+        foreach ($locales as $locale) {
+            $data[$locale->getId()] = $locale->getCode();
+        }
+
+        return $data;
+    }
+
     public function getLocaleNames()
     {
         $locales = Intl::getLocaleBundle()->getLocaleNames();

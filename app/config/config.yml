@@ -12,7 +12,7 @@ framework:
         strict_requirements: ~
     #form:            ~
     csrf_protection: ~
-    validation:      { enable_annotations: true }
+    validation:      { enable_annotations: false }
     templating:
         engines: ['twig']
         #assets_version: SomeVersionScheme
@@ -29,9 +29,6 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
-    form:
-        resources:
-            - 'WellCommerceCoreBundle::fields.html.twig'
 
 # Assetic Configuration
 assetic:
@@ -65,6 +62,7 @@ doctrine:
         entity_managers:
             default:
                 auto_mapping: true
+
 # Swiftmailer Configuration
 swiftmailer:
     transport: "%mailer_transport%"

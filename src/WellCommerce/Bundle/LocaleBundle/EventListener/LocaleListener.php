@@ -13,6 +13,9 @@ namespace WellCommerce\Bundle\LocaleBundle\EventListener;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
+use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use WellCommerce\Bundle\AdminMenuBundle\Builder\AdminMenuItem;
@@ -49,6 +52,21 @@ class LocaleListener implements EventSubscriberInterface
         $this->router     = $router;
     }
 
+    public function onKernelController(FilterControllerEvent $event)
+    {
+        // fetch locales only when HttpKernelInterface::MASTER_REQUEST
+        if ($event->getRequestType() == HttpKernelInterface::SUB_REQUEST) {
+            return;
+        }
+
+        if (!$this->container->get('session')->has('admin/locales')) {
+
+            $locales = $this->container->get('locale.repository')->getLocalesFlattened();
+
+            $this->container->get('session')->set('admin/locales', $locales);
+        }
+    }
+
     /**
      * Adds new admin menu items to collection
      *
@@ -73,6 +91,7 @@ class LocaleListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
+            KernelEvents::CONTROLLER                  => ['onKernelController', -256],
             AdminMenuInitEvent::ADMIN_MENU_INIT_EVENT => 'onAdminMenuInitEvent'
         ];
     }
