@@ -23,6 +23,7 @@ class AppKernel extends Kernel
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             // WellCommerce bundles
             new WellCommerce\Bundle\CoreBundle\WellCommerceCoreBundle(),
+            new WellCommerce\Bundle\CountryBundle\WellCommerceCountryBundle(),
             new WellCommerce\Bundle\AdminMenuBundle\WellCommerceAdminMenuBundle(),
             new WellCommerce\Bundle\TaxBundle\WellCommerceTaxBundle(),
             new WellCommerce\Bundle\UnitBundle\WellCommerceUnitBundle(),
