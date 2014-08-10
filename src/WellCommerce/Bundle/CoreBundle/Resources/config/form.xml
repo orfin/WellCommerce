@@ -133,6 +133,12 @@
             </call>
         </service>
 
+        <service id="form.element.fieldset_language" class="%form.element.fieldset_language.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
         <service id="form.element.form" class="%form.element.form.class%" scope="prototype">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>

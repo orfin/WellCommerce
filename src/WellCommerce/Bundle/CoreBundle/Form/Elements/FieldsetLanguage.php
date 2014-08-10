@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
@@ -22,19 +23,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class FieldsetLanguage extends Fieldset implements ElementInterface
 {
-    protected $languages = [];
-
-    public function __construct($attributes)
-    {
-        parent::__construct($attributes);
-
-        $this->languages = $attributes['languages'];
-        $count           = count($this->languages);
-
-        $this->attributes['repeat_min'] = $count;
-        $this->attributes['repeat_max'] = $count;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -61,6 +49,12 @@ class FieldsetLanguage extends Fieldset implements ElementInterface
             'dependencies'  => [],
             'filters'       => [],
             'rules'         => [],
+            'repeat_min' => function (Options $options) {
+                    return count($options['languages']);
+                },
+            'repeat_max' => function (Options $options) {
+                    return count($options['languages']);
+                },
         ]);
 
         $resolver->setAllowedTypes([

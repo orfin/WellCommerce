@@ -41,7 +41,7 @@ class ClientGroupController extends AbstractAdminController
 //        $em = $this->getDoctrine()->getManager();
 //        $em->persist($clientGroup);
 //        $em->flush();
-//
+////
 //        die();
 
         return [
@@ -108,10 +108,10 @@ class ClientGroupController extends AbstractAdminController
      *
      * @return \WellCommerce\Bundle\CoreBundle\Form\Elements\Form
      */
-    public function getClientGroupForm(ClientGroup $company)
+    public function getClientGroupForm(ClientGroup $clientGroup)
     {
-        return $this->getFormBuilder($this->get('company.form'), $company, [
-            'name' => 'company'
+        return $this->getFormBuilder($this->get('client_group.form'), $clientGroup, [
+            'name' => 'client_group'
         ]);
     }
 
