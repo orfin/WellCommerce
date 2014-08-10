@@ -10,3 +10,7 @@ wellcommerce_company:
     resource: "@WellCommerceCompanyBundle/Resources/config/routing.xml"
     prefix:   /admin/company
 
+wellcommerce_unit:
+    resource: "@WellCommerceUnitBundle/Resources/config/routing.xml"
+    prefix:   /admin/unit
+

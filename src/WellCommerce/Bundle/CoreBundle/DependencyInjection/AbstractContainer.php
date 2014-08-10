@@ -257,4 +257,16 @@ class AbstractContainer extends ContainerAware
     {
         return $this->get('doctrine.orm.default_entity_manager');
     }
+
+    /**
+     * Returns current locale
+     *
+     * @return mixed
+     */
+    public function getCurrentLocale()
+    {
+        $request = $this->get('request');
+
+        return $request->getLocale();
+    }
 }

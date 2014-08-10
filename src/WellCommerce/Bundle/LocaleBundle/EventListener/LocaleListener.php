@@ -78,9 +78,9 @@ class LocaleListener implements EventSubscriberInterface
 
         $builder->add(new AdminMenuItem([
             'id'         => 'locale',
-            'name'       => $this->translator->trans('menu.configuration.locale'),
+            'name'       => $this->translator->trans('menu.configuration.localization.locale'),
             'link'       => $this->router->generate('admin.locale.index'),
-            'path'       => '[menu][configuration][locale]',
+            'path'       => '[menu][configuration][localization][locale]',
             'sort_order' => 20
         ]));
     }

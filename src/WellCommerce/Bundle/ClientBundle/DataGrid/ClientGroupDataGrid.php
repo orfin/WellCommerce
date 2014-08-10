@@ -62,8 +62,13 @@ class ClientGroupDataGrid extends AbstractDataGrid implements DataGridInterface
     public function getQueryBuilder()
     {
         $qb = $this->repository->createQueryBuilder('cg');
-        $qb->leftJoin('WellCommerce\Bundle\ClientBundle\Entity\ClientGroupTranslation', 'cgt', 'WITH', 'cg.id = cgt.translatable AND cgt.locale = :locale');
-        $qb->setParameter('locale', 'en_US');
+        $qb->leftJoin(
+            'WellCommerce\Bundle\ClientBundle\Entity\ClientGroupTranslation',
+            'cgt',
+            'WITH',
+            'cg.id = cgt.translatable AND cgt.locale = :locale'
+        );
+        $qb->setParameter('locale', $this->getCurrentLocale());
 
         return $qb;
     }

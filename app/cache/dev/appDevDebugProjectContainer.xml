@@ -20,12 +20,14 @@
       <parameter key="SensioFrameworkExtraBundle">Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle</parameter>
       <parameter key="JMSDiExtraBundle">JMS\DiExtraBundle\JMSDiExtraBundle</parameter>
       <parameter key="JMSAopBundle">JMS\AopBundle\JMSAopBundle</parameter>
-      <parameter key="StofDoctrineExtensionsBundle">Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle</parameter>
       <parameter key="WellCommerceCoreBundle">WellCommerce\Bundle\CoreBundle\WellCommerceCoreBundle</parameter>
+      <parameter key="WellCommerceCountryBundle">WellCommerce\Bundle\CountryBundle\WellCommerceCountryBundle</parameter>
       <parameter key="WellCommerceAdminMenuBundle">WellCommerce\Bundle\AdminMenuBundle\WellCommerceAdminMenuBundle</parameter>
       <parameter key="WellCommerceTaxBundle">WellCommerce\Bundle\TaxBundle\WellCommerceTaxBundle</parameter>
       <parameter key="WellCommerceUnitBundle">WellCommerce\Bundle\UnitBundle\WellCommerceUnitBundle</parameter>
       <parameter key="WellCommerceCompanyBundle">WellCommerce\Bundle\CompanyBundle\WellCommerceCompanyBundle</parameter>
+      <parameter key="WellCommerceClientBundle">WellCommerce\Bundle\ClientBundle\WellCommerceClientBundle</parameter>
+      <parameter key="WellCommerceLocaleBundle">WellCommerce\Bundle\LocaleBundle\WellCommerceLocaleBundle</parameter>
       <parameter key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</parameter>
       <parameter key="SensioDistributionBundle">Sensio\Bundle\DistributionBundle\SensioDistributionBundle</parameter>
       <parameter key="SensioGeneratorBundle">Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle</parameter>
@@ -42,11 +44,33 @@
     <parameter key="mailer_host">127.0.0.1</parameter>
     <parameter key="mailer_user">null</parameter>
     <parameter key="mailer_password">null</parameter>
-    <parameter key="locale">en</parameter>
+    <parameter key="locale">en_US</parameter>
     <parameter key="secret">ThisTokenIsNotSoSecretChangeIt</parameter>
     <parameter key="debug_toolbar">true</parameter>
     <parameter key="debug_redirects">false</parameter>
     <parameter key="use_assetic_controller">true</parameter>
+    <parameter key="knp.doctrine_behaviors.reflection.class_analyzer.class">Knp\DoctrineBehaviors\Reflection\ClassAnalyzer</parameter>
+    <parameter key="knp.doctrine_behaviors.reflection.is_recursive">true</parameter>
+    <parameter key="knp.doctrine_behaviors.translatable_listener.class">Knp\DoctrineBehaviors\ORM\Translatable\TranslatableListener</parameter>
+    <parameter key="knp.doctrine_behaviors.translatable_listener.current_locale_callable.class">Knp\DoctrineBehaviors\ORM\Translatable\CurrentLocaleCallable</parameter>
+    <parameter key="knp.doctrine_behaviors.translatable_listener.translatable_trait">Knp\DoctrineBehaviors\Model\Translatable\Translatable</parameter>
+    <parameter key="knp.doctrine_behaviors.translatable_listener.translation_trait">Knp\DoctrineBehaviors\Model\Translatable\Translation</parameter>
+    <parameter key="knp.doctrine_behaviors.translatable_listener.translatable_fetch_method">LAZY</parameter>
+    <parameter key="knp.doctrine_behaviors.translatable_listener.translation_fetch_method">LAZY</parameter>
+    <parameter key="knp.doctrine_behaviors.softdeletable_listener.class">Knp\DoctrineBehaviors\ORM\SoftDeletable\SoftDeletableListener</parameter>
+    <parameter key="knp.doctrine_behaviors.softdeletable_listener.softdeletable_trait">Knp\DoctrineBehaviors\Model\SoftDeletable\SoftDeletable</parameter>
+    <parameter key="knp.doctrine_behaviors.timestampable_listener.class">Knp\DoctrineBehaviors\ORM\Timestampable\TimestampableListener</parameter>
+    <parameter key="knp.doctrine_behaviors.timestampable_listener.timestampable_trait">Knp\DoctrineBehaviors\Model\Timestampable\Timestampable</parameter>
+    <parameter key="knp.doctrine_behaviors.blameable_listener.class">Knp\DoctrineBehaviors\ORM\Blameable\BlameableListener</parameter>
+    <parameter key="knp.doctrine_behaviors.blameable_listener.blameable_trait">Knp\DoctrineBehaviors\Model\Blameable\Blameable</parameter>
+    <parameter key="knp.doctrine_behaviors.blameable_listener.user_callable.class">Knp\DoctrineBehaviors\ORM\Blameable\UserCallable</parameter>
+    <parameter key="knp.doctrine_behaviors.blameable_listener.user_entity">null</parameter>
+    <parameter key="knp.doctrine_behaviors.loggable_listener.class">Knp\DoctrineBehaviors\ORM\Loggable\LoggableListener</parameter>
+    <parameter key="knp.doctrine_behaviors.loggable_listener.logger_callable.class">Knp\DoctrineBehaviors\ORM\Loggable\LoggerCallable</parameter>
+    <parameter key="knp.doctrine_behaviors.geocodable_listener.class">Knp\DoctrineBehaviors\ORM\Geocodable\GeocodableListener</parameter>
+    <parameter key="knp.doctrine_behaviors.geocodable_listener.geocodable_trait">Knp\DoctrineBehaviors\Model\Geocodable\Geocodable</parameter>
+    <parameter key="knp.doctrine_behaviors.sluggable_listener.class">Knp\DoctrineBehaviors\ORM\Sluggable\SluggableListener</parameter>
+    <parameter key="knp.doctrine_behaviors.sluggable_listener.sluggable_trait">Knp\DoctrineBehaviors\Model\Sluggable\Sluggable</parameter>
     <parameter key="controller_resolver.class">Symfony\Bundle\FrameworkBundle\Controller\ControllerResolver</parameter>
     <parameter key="controller_name_converter.class">Symfony\Bundle\FrameworkBundle\Controller\ControllerNameParser</parameter>
     <parameter key="response_listener.class">Symfony\Component\HttpKernel\EventListener\ResponseListener</parameter>
@@ -105,7 +129,7 @@
     <parameter key="kernel.http_method_override">true</parameter>
     <parameter key="kernel.trusted_hosts" type="collection"/>
     <parameter key="kernel.trusted_proxies" type="collection"/>
-    <parameter key="kernel.default_locale">en</parameter>
+    <parameter key="kernel.default_locale">en_US</parameter>
     <parameter key="session.class">Symfony\Component\HttpFoundation\Session\Session</parameter>
     <parameter key="session.flashbag.class">Symfony\Component\HttpFoundation\Session\Flash\FlashBag</parameter>
     <parameter key="session.attribute_bag.class">Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag</parameter>
@@ -167,7 +191,6 @@
     <parameter key="validator.mapping.cache.apc.class">Symfony\Component\Validator\Mapping\Cache\ApcCache</parameter>
     <parameter key="validator.mapping.cache.prefix"></parameter>
     <parameter key="validator.validator_factory.class">Symfony\Bundle\FrameworkBundle\Validator\ConstraintValidatorFactory</parameter>
-    <parameter key="validator.legacy_validator_factory.class">Symfony\Bundle\FrameworkBundle\Validator\LegacyConstraintValidatorFactory</parameter>
     <parameter key="validator.expression.class">Symfony\Component\Validator\Constraints\ExpressionValidator</parameter>
     <parameter key="validator.email.class">Symfony\Component\Validator\Constraints\EmailValidator</parameter>
     <parameter key="validator.translation_domain">validators</parameter>
@@ -314,7 +337,6 @@
     <parameter key="twig.exception_listener.controller">twig.controller.exception:showAction</parameter>
     <parameter key="twig.form.resources" type="collection">
       <parameter>form_div_layout.html.twig</parameter>
-      <parameter>WellCommerceCoreBundle::fields.html.twig</parameter>
     </parameter>
     <parameter key="debug.templating.engine.twig.class">Symfony\Bundle\TwigBundle\Debug\TimedTwigEngine</parameter>
     <parameter key="twig.options" type="collection">
@@ -571,32 +593,10 @@
     <parameter key="jms_di_extra.disable_grep">true</parameter>
     <parameter key="jms_di_extra.doctrine_integration">true</parameter>
     <parameter key="jms_di_extra.cache_warmer.controller_file_blacklist" type="collection"/>
-    <parameter key="jms_di_extra.doctrine_integration.entity_manager.file">D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53e68b6e536c3.php</parameter>
-    <parameter key="jms_di_extra.doctrine_integration.entity_manager.class">EntityManager53e68b6e536c3_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager</parameter>
+    <parameter key="jms_di_extra.doctrine_integration.entity_manager.file">D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53e7f550611fe.php</parameter>
+    <parameter key="jms_di_extra.doctrine_integration.entity_manager.class">EntityManager53e7f550611fe_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager</parameter>
     <parameter key="jms_aop.cache_dir">D:/Git/WellCommerce/app/cache/dev/jms_aop</parameter>
     <parameter key="jms_aop.interceptor_loader.class">JMS\AopBundle\Aop\InterceptorLoader</parameter>
-    <parameter key="stof_doctrine_extensions.event_listener.locale.class">Stof\DoctrineExtensionsBundle\EventListener\LocaleListener</parameter>
-    <parameter key="stof_doctrine_extensions.event_listener.logger.class">Stof\DoctrineExtensionsBundle\EventListener\LoggerListener</parameter>
-    <parameter key="stof_doctrine_extensions.event_listener.blame.class">Stof\DoctrineExtensionsBundle\EventListener\BlameListener</parameter>
-    <parameter key="stof_doctrine_extensions.uploadable.manager.class">Stof\DoctrineExtensionsBundle\Uploadable\UploadableManager</parameter>
-    <parameter key="stof_doctrine_extensions.uploadable.mime_type_guesser.class">Stof\DoctrineExtensionsBundle\Uploadable\MimeTypeGuesserAdapter</parameter>
-    <parameter key="stof_doctrine_extensions.uploadable.default_file_info.class">Stof\DoctrineExtensionsBundle\Uploadable\UploadedFileInfo</parameter>
-    <parameter key="stof_doctrine_extensions.default_locale">en_US</parameter>
-    <parameter key="stof_doctrine_extensions.default_file_path">null</parameter>
-    <parameter key="stof_doctrine_extensions.translation_fallback">false</parameter>
-    <parameter key="stof_doctrine_extensions.persist_default_translation">false</parameter>
-    <parameter key="stof_doctrine_extensions.skip_translation_on_load">false</parameter>
-    <parameter key="stof_doctrine_extensions.uploadable.validate_writable_directory">true</parameter>
-    <parameter key="stof_doctrine_extensions.listener.translatable.class">Gedmo\Translatable\TranslatableListener</parameter>
-    <parameter key="stof_doctrine_extensions.listener.timestampable.class">Gedmo\Timestampable\TimestampableListener</parameter>
-    <parameter key="stof_doctrine_extensions.listener.blameable.class">Gedmo\Blameable\BlameableListener</parameter>
-    <parameter key="stof_doctrine_extensions.listener.sluggable.class">Gedmo\Sluggable\SluggableListener</parameter>
-    <parameter key="stof_doctrine_extensions.listener.tree.class">Gedmo\Tree\TreeListener</parameter>
-    <parameter key="stof_doctrine_extensions.listener.loggable.class">Gedmo\Loggable\LoggableListener</parameter>
-    <parameter key="stof_doctrine_extensions.listener.sortable.class">Gedmo\Sortable\SortableListener</parameter>
-    <parameter key="stof_doctrine_extensions.listener.softdeleteable.class">Gedmo\SoftDeleteable\SoftDeleteableListener</parameter>
-    <parameter key="stof_doctrine_extensions.listener.uploadable.class">Gedmo\Uploadable\UploadableListener</parameter>
-    <parameter key="stof_doctrine_extensions.listener.reference_integrity.class">Gedmo\ReferenceIntegrity\ReferenceIntegrityListener</parameter>
     <parameter key="xajax_manager.class">WellCommerce\Bundle\CoreBundle\Helper\XajaxManager</parameter>
     <parameter key="xajax_listener.class">WellCommerce\Bundle\CoreBundle\EventListener\XajaxListener</parameter>
     <parameter key="xajax.class">xajax</parameter>
@@ -685,15 +685,35 @@
     <parameter key="twig.extension.datagrid.class">WellCommerce\Bundle\CoreBundle\Twig\Extension\DataGridExtension</parameter>
     <parameter key="twig.extension.string_loader.class">Twig_Extension_StringLoader</parameter>
     <parameter key="twig.extension.xajax.class">WellCommerce\Bundle\CoreBundle\Twig\Extension\XajaxExtension</parameter>
+    <parameter key="twig.extension.admin.class">WellCommerce\Bundle\CoreBundle\Twig\Extension\AdminExtension</parameter>
     <parameter key="admin_menu.repository.class">WellCommerce\Bundle\AdminMenuBundle\Repository\AdminMenuRepository</parameter>
     <parameter key="admin_menu.subscriber.class">WellCommerce\Bundle\AdminMenuBundle\EventListener\AdminMenuListener</parameter>
     <parameter key="tax.admin.controller.class">WellCommerce\Bundle\TaxBundle\Controller\AdminController</parameter>
+    <parameter key="unit.controller.admin.class">WellCommerce\Bundle\UnitBundle\Controller\Admin\UnitController</parameter>
+    <parameter key="unit.repository.class">WellCommerce\Bundle\UnitBundle\Repository\UnitRepository</parameter>
+    <parameter key="unit.datagrid.class">WellCommerce\Bundle\UnitBundle\DataGrid\UnitDataGrid</parameter>
+    <parameter key="unit.datagrid.configurator.class">WellCommerce\Bundle\UnitBundle\DataGrid\UnitDataGridConfigurator</parameter>
+    <parameter key="unit.form.class">WellCommerce\Bundle\UnitBundle\Form\UnitForm</parameter>
+    <parameter key="unit.listener.class">WellCommerce\Bundle\UnitBundle\EventListener\UnitListener</parameter>
     <parameter key="company.controller.admin.class">WellCommerce\Bundle\CompanyBundle\Controller\Admin\CompanyController</parameter>
     <parameter key="company.repository.class">WellCommerce\Bundle\CompanyBundle\Entity\CompanyRepository</parameter>
     <parameter key="company.datagrid.class">WellCommerce\Bundle\CompanyBundle\DataGrid\CompanyDataGrid</parameter>
     <parameter key="company.datagrid.configurator.class">WellCommerce\Bundle\CompanyBundle\DataGrid\CompanyDataGridConfigurator</parameter>
     <parameter key="company.form.class">WellCommerce\Bundle\CompanyBundle\Form\CompanyForm</parameter>
     <parameter key="company.listener.class">WellCommerce\Bundle\CompanyBundle\EventListener\CompanyListener</parameter>
+    <parameter key="client_group.controller.admin.class">WellCommerce\Bundle\ClientBundle\Controller\Admin\ClientGroupController</parameter>
+    <parameter key="client_group.repository.class">WellCommerce\Bundle\ClientBundle\Repository\ClientGroupRepository</parameter>
+    <parameter key="client_group.datagrid.class">WellCommerce\Bundle\ClientBundle\DataGrid\ClientGroupDataGrid</parameter>
+    <parameter key="client_group.datagrid.configurator.class">WellCommerce\Bundle\ClientBundle\DataGrid\ClientGroupDataGridConfigurator</parameter>
+    <parameter key="client_group.form.class">WellCommerce\Bundle\ClientBundle\Form\ClientGroupForm</parameter>
+    <parameter key="client_group.listener.class">WellCommerce\Bundle\ClientBundle\EventListener\ClientGroupListener</parameter>
+    <parameter key="client_group.manager.class">WellCommerce\Bundle\ClientBundle\Manager\ClientGroupManager</parameter>
+    <parameter key="locale.controller.admin.class">WellCommerce\Bundle\LocaleBundle\Controller\Admin\LocaleController</parameter>
+    <parameter key="locale.repository.class">WellCommerce\Bundle\LocaleBundle\Repository\LocaleRepository</parameter>
+    <parameter key="locale.datagrid.class">WellCommerce\Bundle\LocaleBundle\DataGrid\LocaleDataGrid</parameter>
+    <parameter key="locale.datagrid.configurator.class">WellCommerce\Bundle\LocaleBundle\DataGrid\LocaleDataGridConfigurator</parameter>
+    <parameter key="locale.form.class">WellCommerce\Bundle\LocaleBundle\Form\LocaleForm</parameter>
+    <parameter key="locale.listener.class">WellCommerce\Bundle\LocaleBundle\EventListener\LocaleListener</parameter>
     <parameter key="web_profiler.controller.profiler.class">Symfony\Bundle\WebProfilerBundle\Controller\ProfilerController</parameter>
     <parameter key="web_profiler.controller.router.class">Symfony\Bundle\WebProfilerBundle\Controller\RouterController</parameter>
     <parameter key="web_profiler.controller.exception.class">Symfony\Bundle\WebProfilerBundle\Controller\ExceptionController</parameter>
@@ -775,7 +795,7 @@
     </service>
     <service id="locale_listener" class="Symfony\Component\HttpKernel\EventListener\LocaleListener">
       <tag name="kernel.event_subscriber"/>
-      <argument>en</argument>
+      <argument>en_US</argument>
       <argument type="service" id="router" on-invalid="ignore"/>
       <argument type="service" id="request_stack"/>
     </service>
@@ -1253,8 +1273,20 @@
         <argument>WellCommerce\Bundle\AdminMenuBundle\EventListener\AdminMenuListener</argument>
       </call>
       <call method="addSubscriberService">
+        <argument>unit.listener</argument>
+        <argument>WellCommerce\Bundle\UnitBundle\EventListener\UnitListener</argument>
+      </call>
+      <call method="addSubscriberService">
         <argument>company.listener</argument>
         <argument>WellCommerce\Bundle\CompanyBundle\EventListener\CompanyListener</argument>
+      </call>
+      <call method="addSubscriberService">
+        <argument>client_group.listener</argument>
+        <argument>WellCommerce\Bundle\ClientBundle\EventListener\ClientGroupListener</argument>
+      </call>
+      <call method="addSubscriberService">
+        <argument>locale.listener</argument>
+        <argument>WellCommerce\Bundle\LocaleBundle\EventListener\LocaleListener</argument>
       </call>
       <call method="addSubscriberService">
         <argument>web_profiler.debug_toolbar</argument>
@@ -1427,10 +1459,8 @@
       <call method="addXmlMappings">
         <argument type="collection">
           <argument>D:\Git\WellCommerce\vendor\symfony\symfony\src\Symfony\Component\Form/Resources/config/validation.xml</argument>
+          <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\CompanyBundle\Resources\config\validation.xml</argument>
         </argument>
-      </call>
-      <call method="enableAnnotationMapping">
-        <argument type="service" id="annotation_reader"/>
       </call>
       <call method="addMethodMapping">
         <argument>loadValidatorMetadata</argument>
@@ -1677,7 +1707,7 @@
       <argument type="collection">
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>53e68b6e2a67a</argument>
+            <argument>53e7f550254e8</argument>
           </service>
         </argument>
       </argument>
@@ -1793,7 +1823,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.context"/>
-            <argument>53e68b6e2a67a</argument>
+            <argument>53e7f550254e8</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
           </service>
         </argument>
@@ -1973,6 +2003,9 @@
       </call>
       <call method="addExtension">
         <argument type="service" id="twig.extension.xajax"/>
+      </call>
+      <call method="addExtension">
+        <argument type="service" id="twig.extension.admin"/>
       </call>
       <call method="addExtension">
         <argument type="service">
@@ -2187,21 +2220,104 @@
           <argument type="service" id="service_container"/>
           <call method="addEventSubscriber">
             <argument type="service">
-              <service class="Gedmo\Timestampable\TimestampableListener" public="false">
-                <tag name="doctrine.event_subscriber" connection="default"/>
-                <call method="setAnnotationReader">
-                  <argument type="service" id="annotation_reader"/>
-                </call>
+              <service class="Knp\DoctrineBehaviors\ORM\Translatable\TranslatableListener" public="false">
+                <tag name="doctrine.event_subscriber"/>
+                <argument type="service">
+                  <service class="Knp\DoctrineBehaviors\Reflection\ClassAnalyzer" public="false"/>
+                </argument>
+                <argument>true</argument>
+                <argument type="service">
+                  <service class="Knp\DoctrineBehaviors\ORM\Translatable\CurrentLocaleCallable" public="false">
+                    <argument type="service" id="service_container"/>
+                  </service>
+                </argument>
+                <argument>Knp\DoctrineBehaviors\Model\Translatable\Translatable</argument>
+                <argument>Knp\DoctrineBehaviors\Model\Translatable\Translation</argument>
+                <argument>LAZY</argument>
+                <argument>LAZY</argument>
               </service>
             </argument>
           </call>
           <call method="addEventSubscriber">
             <argument type="service">
-              <service class="Gedmo\Tree\TreeListener" public="false">
-                <tag name="doctrine.event_subscriber" connection="default"/>
-                <call method="setAnnotationReader">
-                  <argument type="service" id="annotation_reader"/>
-                </call>
+              <service class="Knp\DoctrineBehaviors\ORM\SoftDeletable\SoftDeletableListener" public="false">
+                <tag name="doctrine.event_subscriber"/>
+                <argument type="service">
+                  <service class="Knp\DoctrineBehaviors\Reflection\ClassAnalyzer" public="false"/>
+                </argument>
+                <argument>true</argument>
+                <argument>Knp\DoctrineBehaviors\Model\SoftDeletable\SoftDeletable</argument>
+              </service>
+            </argument>
+          </call>
+          <call method="addEventSubscriber">
+            <argument type="service">
+              <service class="Knp\DoctrineBehaviors\ORM\Geocodable\GeocodableListener" public="false">
+                <tag name="doctrine.event_subscriber"/>
+                <argument type="service">
+                  <service class="Knp\DoctrineBehaviors\Reflection\ClassAnalyzer" public="false"/>
+                </argument>
+                <argument>true</argument>
+                <argument>Knp\DoctrineBehaviors\Model\Geocodable\Geocodable</argument>
+                <argument>null</argument>
+              </service>
+            </argument>
+          </call>
+          <call method="addEventSubscriber">
+            <argument type="service">
+              <service class="Knp\DoctrineBehaviors\ORM\Timestampable\TimestampableListener" public="false">
+                <tag name="doctrine.event_subscriber"/>
+                <argument type="service">
+                  <service class="Knp\DoctrineBehaviors\Reflection\ClassAnalyzer" public="false"/>
+                </argument>
+                <argument>true</argument>
+                <argument>Knp\DoctrineBehaviors\Model\Timestampable\Timestampable</argument>
+              </service>
+            </argument>
+          </call>
+          <call method="addEventSubscriber">
+            <argument type="service">
+              <service class="Knp\DoctrineBehaviors\ORM\Loggable\LoggableListener" public="false">
+                <tag name="doctrine.event_subscriber"/>
+                <argument type="service">
+                  <service class="Knp\DoctrineBehaviors\Reflection\ClassAnalyzer" public="false"/>
+                </argument>
+                <argument>true</argument>
+                <argument type="service">
+                  <service class="Knp\DoctrineBehaviors\ORM\Loggable\LoggerCallable" public="false">
+                    <argument type="service" id="logger"/>
+                  </service>
+                </argument>
+              </service>
+            </argument>
+          </call>
+          <call method="addEventSubscriber">
+            <argument type="service">
+              <service class="Knp\DoctrineBehaviors\ORM\Blameable\BlameableListener" public="false">
+                <tag name="doctrine.event_subscriber"/>
+                <argument type="service">
+                  <service class="Knp\DoctrineBehaviors\Reflection\ClassAnalyzer" public="false"/>
+                </argument>
+                <argument>true</argument>
+                <argument>Knp\DoctrineBehaviors\Model\Blameable\Blameable</argument>
+                <argument type="service">
+                  <service class="Knp\DoctrineBehaviors\ORM\Blameable\UserCallable" public="false">
+                    <argument type="service" id="service_container"/>
+                  </service>
+                </argument>
+                <argument>null</argument>
+              </service>
+            </argument>
+          </call>
+          <call method="addEventSubscriber">
+            <argument type="service">
+              <service class="Knp\DoctrineBehaviors\ORM\Sluggable\SluggableListener" public="false">
+                <tag name="doctrine.event_subscriber"/>
+                <argument type="service">
+                  <service class="Knp\DoctrineBehaviors\Reflection\ClassAnalyzer" public="false"/>
+                </argument>
+                <argument>true</argument>
+                <argument>Knp\DoctrineBehaviors\Model\Sluggable\Sluggable</argument>
               </service>
             </argument>
           </call>
@@ -2245,8 +2361,8 @@
       <argument type="collection"/>
       <argument type="collection"/>
     </service>
-    <service id="doctrine.orm.default_entity_manager" class="EntityManager53e68b6e536c3_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager">
-      <file>D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53e68b6e536c3.php</file>
+    <service id="doctrine.orm.default_entity_manager" class="EntityManager53e7f550611fe_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager">
+      <file>D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53e7f550611fe.php</file>
       <argument type="service">
         <service class="Doctrine\ORM\EntityManager" factory-method="create" factory-class="%doctrine.orm.entity_manager.class%" public="false">
           <argument type="service" id="doctrine.dbal.default_connection"/>
@@ -2254,12 +2370,11 @@
             <service class="Doctrine\ORM\Configuration" public="false">
               <call method="setEntityNamespaces">
                 <argument type="collection">
-                  <argument key="GedmoTranslatable">Gedmo\Translatable\Entity</argument>
-                  <argument key="GedmoTranslator">Gedmo\Translator\Entity</argument>
-                  <argument key="GedmoLoggable">Gedmo\Loggable\Entity</argument>
-                  <argument key="GedmoTree">Gedmo\Tree\Entity</argument>
                   <argument key="WellCommerceTaxBundle">WellCommerce\Bundle\TaxBundle\Entity</argument>
+                  <argument key="WellCommerceUnitBundle">WellCommerce\Bundle\UnitBundle\Entity</argument>
                   <argument key="WellCommerceCompanyBundle">WellCommerce\Bundle\CompanyBundle\Entity</argument>
+                  <argument key="WellCommerceClientBundle">WellCommerce\Bundle\ClientBundle\Entity</argument>
+                  <argument key="WellCommerceLocaleBundle">WellCommerce\Bundle\LocaleBundle\Entity</argument>
                 </argument>
               </call>
               <call method="setMetadataCacheImpl">
@@ -2279,76 +2394,11 @@
                         <service class="Doctrine\ORM\Mapping\Driver\AnnotationDriver" public="false">
                           <argument type="service" id="annotation_reader"/>
                           <argument type="collection">
-                            <argument>D:\Git\WellCommerce\vendor\gedmo\doctrine-extensions\lib\Gedmo\Translatable\Entity\MappedSuperclass</argument>
-                            <argument>D:\Git\WellCommerce\vendor\gedmo\doctrine-extensions\lib\Gedmo\Translator\Entity</argument>
-                            <argument>D:\Git\WellCommerce\vendor\gedmo\doctrine-extensions\lib\Gedmo\Loggable\Entity</argument>
-                            <argument>D:\Git\WellCommerce\vendor\gedmo\doctrine-extensions\lib\Gedmo\Tree\Entity</argument>
                             <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\TaxBundle\Entity</argument>
+                            <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\UnitBundle\Entity</argument>
                             <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\CompanyBundle\Entity</argument>
-                          </argument>
-                        </service>
-                      </argument>
-                      <argument>Gedmo\Translatable\Entity</argument>
-                    </call>
-                    <call method="addDriver">
-                      <argument type="service">
-                        <service class="Doctrine\ORM\Mapping\Driver\AnnotationDriver" public="false">
-                          <argument type="service" id="annotation_reader"/>
-                          <argument type="collection">
-                            <argument>D:\Git\WellCommerce\vendor\gedmo\doctrine-extensions\lib\Gedmo\Translatable\Entity\MappedSuperclass</argument>
-                            <argument>D:\Git\WellCommerce\vendor\gedmo\doctrine-extensions\lib\Gedmo\Translator\Entity</argument>
-                            <argument>D:\Git\WellCommerce\vendor\gedmo\doctrine-extensions\lib\Gedmo\Loggable\Entity</argument>
-                            <argument>D:\Git\WellCommerce\vendor\gedmo\doctrine-extensions\lib\Gedmo\Tree\Entity</argument>
-                            <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\TaxBundle\Entity</argument>
-                            <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\CompanyBundle\Entity</argument>
-                          </argument>
-                        </service>
-                      </argument>
-                      <argument>Gedmo\Translator\Entity</argument>
-                    </call>
-                    <call method="addDriver">
-                      <argument type="service">
-                        <service class="Doctrine\ORM\Mapping\Driver\AnnotationDriver" public="false">
-                          <argument type="service" id="annotation_reader"/>
-                          <argument type="collection">
-                            <argument>D:\Git\WellCommerce\vendor\gedmo\doctrine-extensions\lib\Gedmo\Translatable\Entity\MappedSuperclass</argument>
-                            <argument>D:\Git\WellCommerce\vendor\gedmo\doctrine-extensions\lib\Gedmo\Translator\Entity</argument>
-                            <argument>D:\Git\WellCommerce\vendor\gedmo\doctrine-extensions\lib\Gedmo\Loggable\Entity</argument>
-                            <argument>D:\Git\WellCommerce\vendor\gedmo\doctrine-extensions\lib\Gedmo\Tree\Entity</argument>
-                            <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\TaxBundle\Entity</argument>
-                            <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\CompanyBundle\Entity</argument>
-                          </argument>
-                        </service>
-                      </argument>
-                      <argument>Gedmo\Loggable\Entity</argument>
-                    </call>
-                    <call method="addDriver">
-                      <argument type="service">
-                        <service class="Doctrine\ORM\Mapping\Driver\AnnotationDriver" public="false">
-                          <argument type="service" id="annotation_reader"/>
-                          <argument type="collection">
-                            <argument>D:\Git\WellCommerce\vendor\gedmo\doctrine-extensions\lib\Gedmo\Translatable\Entity\MappedSuperclass</argument>
-                            <argument>D:\Git\WellCommerce\vendor\gedmo\doctrine-extensions\lib\Gedmo\Translator\Entity</argument>
-                            <argument>D:\Git\WellCommerce\vendor\gedmo\doctrine-extensions\lib\Gedmo\Loggable\Entity</argument>
-                            <argument>D:\Git\WellCommerce\vendor\gedmo\doctrine-extensions\lib\Gedmo\Tree\Entity</argument>
-                            <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\TaxBundle\Entity</argument>
-                            <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\CompanyBundle\Entity</argument>
-                          </argument>
-                        </service>
-                      </argument>
-                      <argument>Gedmo\Tree\Entity</argument>
-                    </call>
-                    <call method="addDriver">
-                      <argument type="service">
-                        <service class="Doctrine\ORM\Mapping\Driver\AnnotationDriver" public="false">
-                          <argument type="service" id="annotation_reader"/>
-                          <argument type="collection">
-                            <argument>D:\Git\WellCommerce\vendor\gedmo\doctrine-extensions\lib\Gedmo\Translatable\Entity\MappedSuperclass</argument>
-                            <argument>D:\Git\WellCommerce\vendor\gedmo\doctrine-extensions\lib\Gedmo\Translator\Entity</argument>
-                            <argument>D:\Git\WellCommerce\vendor\gedmo\doctrine-extensions\lib\Gedmo\Loggable\Entity</argument>
-                            <argument>D:\Git\WellCommerce\vendor\gedmo\doctrine-extensions\lib\Gedmo\Tree\Entity</argument>
-                            <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\TaxBundle\Entity</argument>
-                            <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\CompanyBundle\Entity</argument>
+                            <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\ClientBundle\Entity</argument>
+                            <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\LocaleBundle\Entity</argument>
                           </argument>
                         </service>
                       </argument>
@@ -2359,16 +2409,60 @@
                         <service class="Doctrine\ORM\Mapping\Driver\AnnotationDriver" public="false">
                           <argument type="service" id="annotation_reader"/>
                           <argument type="collection">
-                            <argument>D:\Git\WellCommerce\vendor\gedmo\doctrine-extensions\lib\Gedmo\Translatable\Entity\MappedSuperclass</argument>
-                            <argument>D:\Git\WellCommerce\vendor\gedmo\doctrine-extensions\lib\Gedmo\Translator\Entity</argument>
-                            <argument>D:\Git\WellCommerce\vendor\gedmo\doctrine-extensions\lib\Gedmo\Loggable\Entity</argument>
-                            <argument>D:\Git\WellCommerce\vendor\gedmo\doctrine-extensions\lib\Gedmo\Tree\Entity</argument>
                             <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\TaxBundle\Entity</argument>
+                            <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\UnitBundle\Entity</argument>
                             <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\CompanyBundle\Entity</argument>
+                            <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\ClientBundle\Entity</argument>
+                            <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\LocaleBundle\Entity</argument>
+                          </argument>
+                        </service>
+                      </argument>
+                      <argument>WellCommerce\Bundle\UnitBundle\Entity</argument>
+                    </call>
+                    <call method="addDriver">
+                      <argument type="service">
+                        <service class="Doctrine\ORM\Mapping\Driver\AnnotationDriver" public="false">
+                          <argument type="service" id="annotation_reader"/>
+                          <argument type="collection">
+                            <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\TaxBundle\Entity</argument>
+                            <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\UnitBundle\Entity</argument>
+                            <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\CompanyBundle\Entity</argument>
+                            <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\ClientBundle\Entity</argument>
+                            <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\LocaleBundle\Entity</argument>
                           </argument>
                         </service>
                       </argument>
                       <argument>WellCommerce\Bundle\CompanyBundle\Entity</argument>
+                    </call>
+                    <call method="addDriver">
+                      <argument type="service">
+                        <service class="Doctrine\ORM\Mapping\Driver\AnnotationDriver" public="false">
+                          <argument type="service" id="annotation_reader"/>
+                          <argument type="collection">
+                            <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\TaxBundle\Entity</argument>
+                            <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\UnitBundle\Entity</argument>
+                            <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\CompanyBundle\Entity</argument>
+                            <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\ClientBundle\Entity</argument>
+                            <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\LocaleBundle\Entity</argument>
+                          </argument>
+                        </service>
+                      </argument>
+                      <argument>WellCommerce\Bundle\ClientBundle\Entity</argument>
+                    </call>
+                    <call method="addDriver">
+                      <argument type="service">
+                        <service class="Doctrine\ORM\Mapping\Driver\AnnotationDriver" public="false">
+                          <argument type="service" id="annotation_reader"/>
+                          <argument type="collection">
+                            <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\TaxBundle\Entity</argument>
+                            <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\UnitBundle\Entity</argument>
+                            <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\CompanyBundle\Entity</argument>
+                            <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\ClientBundle\Entity</argument>
+                            <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\LocaleBundle\Entity</argument>
+                          </argument>
+                        </service>
+                      </argument>
+                      <argument>WellCommerce\Bundle\LocaleBundle\Entity</argument>
                     </call>
                   </service>
                 </argument>
@@ -2478,22 +2572,6 @@
     <service id="jms_aop.interceptor_loader" class="JMS\AopBundle\Aop\InterceptorLoader">
       <argument type="service" id="service_container"/>
     </service>
-    <service id="stof_doctrine_extensions.uploadable.manager" class="Stof\DoctrineExtensionsBundle\Uploadable\UploadableManager">
-      <argument type="service">
-        <service class="Gedmo\Uploadable\UploadableListener" public="false">
-          <argument type="service">
-            <service class="Stof\DoctrineExtensionsBundle\Uploadable\MimeTypeGuesserAdapter" public="false"/>
-          </argument>
-          <call method="setAnnotationReader">
-            <argument type="service" id="annotation_reader"/>
-          </call>
-          <call method="setDefaultFileInfoClass">
-            <argument>Stof\DoctrineExtensionsBundle\Uploadable\UploadedFileInfo</argument>
-          </call>
-        </service>
-      </argument>
-      <argument>Stof\DoctrineExtensionsBundle\Uploadable\UploadedFileInfo</argument>
-    </service>
     <service id="xajax" class="xajax"/>
     <service id="xajax_manager" class="WellCommerce\Bundle\CoreBundle\Helper\XajaxManager">
       <argument type="service" id="service_container"/>
@@ -2538,6 +2616,12 @@
       </call>
     </service>
     <service id="form.element.fieldset" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Fieldset" scope="prototype">
+      <call method="setContainer">
+        <argument type="service" id="service_container"/>
+      </call>
+    </service>
+    <service id="form.element.fieldset_language" class="WellCommerce\Bundle\CoreBundle\Form\Elements\FieldsetLanguage" scope="prototype">
+      <argument type="service" id="locale.repository"/>
       <call method="setContainer">
         <argument type="service" id="service_container"/>
       </call>
@@ -2637,6 +2721,15 @@
       <tag name="twig.extension"/>
       <argument type="service" id="service_container"/>
     </service>
+    <service id="twig.extension.admin" class="WellCommerce\Bundle\CoreBundle\Twig\Extension\AdminExtension">
+      <tag name="twig.extension"/>
+      <argument type="service" id="service_container"/>
+    </service>
+    <service id="country.repository" class="WellCommerce\Bundle\CountryBundle\Repository\CountryRepository">
+      <call method="setContainer">
+        <argument type="service" id="service_container"/>
+      </call>
+    </service>
     <service id="admin_menu.repository" class="WellCommerce\Bundle\AdminMenuBundle\Repository\AdminMenuRepository">
       <call method="setContainer">
         <argument type="service" id="service_container"/>
@@ -2652,6 +2745,45 @@
       <call method="setContainer">
         <argument type="service" id="service_container"/>
       </call>
+    </service>
+    <service id="unit.controller.admin" class="WellCommerce\Bundle\UnitBundle\Controller\Admin\UnitController">
+      <call method="setContainer">
+        <argument type="service" id="service_container"/>
+      </call>
+      <call method="setRepository">
+        <argument type="service" id="unit.repository"/>
+      </call>
+    </service>
+    <service id="unit.repository" class="WellCommerce\Bundle\UnitBundle\Repository\UnitRepository" factory-method="getRepository" factory-service="doctrine.orm.entity_manager">
+      <argument>WellCommerceUnitBundle:Unit</argument>
+    </service>
+    <service id="unit.datagrid.configurator" class="WellCommerce\Bundle\UnitBundle\DataGrid\UnitDataGridConfigurator">
+      <argument key="identifier">unit</argument>
+      <argument key="1" type="service" id="datagrid_options"/>
+      <argument key="2" type="service" id="datagrid_columns"/>
+      <call method="setContainer">
+        <argument type="service" id="service_container"/>
+      </call>
+    </service>
+    <service id="unit.datagrid" class="WellCommerce\Bundle\UnitBundle\DataGrid\UnitDataGrid">
+      <argument type="service" id="service_container"/>
+      <argument type="service" id="unit.repository"/>
+      <argument type="service" id="datagrid_loader"/>
+      <configurator service="unit.datagrid.configurator" method="configure"/>
+    </service>
+    <service id="unit.form" class="WellCommerce\Bundle\UnitBundle\Form\UnitForm">
+      <call method="setContainer">
+        <argument type="service" id="service_container"/>
+      </call>
+      <call method="setRepository">
+        <argument type="service" id="unit.repository"/>
+      </call>
+    </service>
+    <service id="unit.listener" class="WellCommerce\Bundle\UnitBundle\EventListener\UnitListener">
+      <tag name="kernel.event_subscriber"/>
+      <argument type="service" id="service_container"/>
+      <argument type="service" id="translator"/>
+      <argument type="service" id="router"/>
     </service>
     <service id="company.controller.admin" class="WellCommerce\Bundle\CompanyBundle\Controller\Admin\CompanyController">
       <call method="setContainer">
@@ -2682,8 +2814,86 @@
       <call method="setContainer">
         <argument type="service" id="service_container"/>
       </call>
+      <call method="setRepository">
+        <argument type="service" id="company.repository"/>
+      </call>
     </service>
     <service id="company.listener" class="WellCommerce\Bundle\CompanyBundle\EventListener\CompanyListener">
+      <tag name="kernel.event_subscriber"/>
+      <argument type="service" id="service_container"/>
+      <argument type="service" id="translator"/>
+      <argument type="service" id="router"/>
+    </service>
+    <service id="client_group.controller.admin" class="WellCommerce\Bundle\ClientBundle\Controller\Admin\ClientGroupController">
+      <call method="setContainer">
+        <argument type="service" id="service_container"/>
+      </call>
+      <call method="setRepository">
+        <argument type="service" id="client_group.repository"/>
+      </call>
+    </service>
+    <service id="client_group.repository" class="WellCommerce\Bundle\ClientBundle\Repository\ClientGroupRepository" factory-method="getRepository" factory-service="doctrine.orm.entity_manager">
+      <argument>WellCommerceClientBundle:ClientGroup</argument>
+    </service>
+    <service id="client_group.datagrid.configurator" class="WellCommerce\Bundle\ClientBundle\DataGrid\ClientGroupDataGridConfigurator">
+      <argument key="identifier">client_group</argument>
+      <argument key="1" type="service" id="datagrid_options"/>
+      <argument key="2" type="service" id="datagrid_columns"/>
+      <call method="setContainer">
+        <argument type="service" id="service_container"/>
+      </call>
+    </service>
+    <service id="client_group.datagrid" class="WellCommerce\Bundle\ClientBundle\DataGrid\ClientGroupDataGrid">
+      <argument type="service" id="service_container"/>
+      <argument type="service" id="client_group.repository"/>
+      <argument type="service" id="datagrid_loader"/>
+      <configurator service="client_group.datagrid.configurator" method="configure"/>
+    </service>
+    <service id="client_group.form" class="WellCommerce\Bundle\ClientBundle\Form\ClientGroupForm">
+      <call method="setContainer">
+        <argument type="service" id="service_container"/>
+      </call>
+    </service>
+    <service id="client_group.listener" class="WellCommerce\Bundle\ClientBundle\EventListener\ClientGroupListener">
+      <tag name="kernel.event_subscriber"/>
+      <argument type="service" id="service_container"/>
+      <argument type="service" id="translator"/>
+      <argument type="service" id="router"/>
+    </service>
+    <service id="locale.controller.admin" class="WellCommerce\Bundle\LocaleBundle\Controller\Admin\LocaleController">
+      <call method="setContainer">
+        <argument type="service" id="service_container"/>
+      </call>
+      <call method="setRepository">
+        <argument type="service" id="locale.repository"/>
+      </call>
+    </service>
+    <service id="locale.repository" class="WellCommerce\Bundle\LocaleBundle\Repository\LocaleRepository" factory-method="getRepository" factory-service="doctrine.orm.entity_manager">
+      <argument>WellCommerceLocaleBundle:Locale</argument>
+    </service>
+    <service id="locale.datagrid.configurator" class="WellCommerce\Bundle\LocaleBundle\DataGrid\LocaleDataGridConfigurator">
+      <argument key="identifier">locale</argument>
+      <argument key="1" type="service" id="datagrid_options"/>
+      <argument key="2" type="service" id="datagrid_columns"/>
+      <call method="setContainer">
+        <argument type="service" id="service_container"/>
+      </call>
+    </service>
+    <service id="locale.datagrid" class="WellCommerce\Bundle\LocaleBundle\DataGrid\LocaleDataGrid">
+      <argument type="service" id="service_container"/>
+      <argument type="service" id="locale.repository"/>
+      <argument type="service" id="datagrid_loader"/>
+      <configurator service="locale.datagrid.configurator" method="configure"/>
+    </service>
+    <service id="locale.form" class="WellCommerce\Bundle\LocaleBundle\Form\LocaleForm">
+      <call method="setContainer">
+        <argument type="service" id="service_container"/>
+      </call>
+      <call method="setRepository">
+        <argument type="service" id="locale.repository"/>
+      </call>
+    </service>
+    <service id="locale.listener" class="WellCommerce\Bundle\LocaleBundle\EventListener\LocaleListener">
       <tag name="kernel.event_subscriber"/>
       <argument type="service" id="service_container"/>
       <argument type="service" id="translator"/>
@@ -3040,6 +3250,14 @@
       <call method="addPath">
         <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\CompanyBundle/Resources/views</argument>
         <argument>WellCommerceCompany</argument>
+      </call>
+      <call method="addPath">
+        <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\ClientBundle/Resources/views</argument>
+        <argument>WellCommerceClient</argument>
+      </call>
+      <call method="addPath">
+        <argument>D:\Git\WellCommerce\src\WellCommerce\Bundle\LocaleBundle/Resources/views</argument>
+        <argument>WellCommerceLocale</argument>
       </call>
       <call method="addPath">
         <argument>D:\Git\WellCommerce\vendor\symfony\symfony\src\Symfony\Bundle\WebProfilerBundle/Resources/views</argument>
