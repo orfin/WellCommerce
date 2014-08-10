@@ -45,7 +45,11 @@ class CompanyController extends AbstractAdminController
         $company = new Company();
         $form    = $this->getCompanyForm($company);
 
-        if ($form->handleRequest()->isValid()) {
+        if ($form->isValid()) {
+            $form->handleRequest();
+            $validator = $this->get('validator');
+            $errors = $validator->validate($company);
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($company);
             $em->flush();
