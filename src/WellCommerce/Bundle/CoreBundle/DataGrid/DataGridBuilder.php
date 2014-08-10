@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DataGrid;
 
-use WellCommerce\Bundle\CoreBundle\AbstractComponent;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
 use WellCommerce\Bundle\CoreBundle\Event\DataGridEvent;
 
 /**
@@ -21,7 +21,7 @@ use WellCommerce\Bundle\CoreBundle\Event\DataGridEvent;
  * @package WellCommerce\Bundle\CoreBundle\DataGrid
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class DataGridBuilder extends AbstractComponent
+class DataGridBuilder extends AbstractContainer
 {
     /**
      * Creates datagrid and triggers event after initialization

@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Bundle\CoreBundle\Layout;
 
-use WellCommerce\Bundle\CoreBundle\AbstractComponent;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
 use WellCommerce\Bundle\CoreBundle\Layout\Box\LayoutBoxConfiguratorInterface;
 
 /**
@@ -20,7 +20,7 @@ use WellCommerce\Bundle\CoreBundle\Layout\Box\LayoutBoxConfiguratorInterface;
  * @package WellCommerce\Bundle\CoreBundle
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LayoutManager extends AbstractComponent
+class LayoutManager extends AbstractContainer
 {
     /**
      * @var array Array containing all layout box configurators

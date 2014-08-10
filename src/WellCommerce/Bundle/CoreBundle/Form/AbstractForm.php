@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Bundle\CoreBundle\Form;
 
-use WellCommerce\Bundle\CoreBundle\AbstractComponent;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
 
 /**
  * Class AbstractForm
@@ -19,10 +19,7 @@ use WellCommerce\Bundle\CoreBundle\AbstractComponent;
  * @package WellCommerce\Bundle\CoreBundle\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AbstractForm extends AbstractComponent
+class AbstractForm extends AbstractContainer
 {
 
-    public function getJavascript(){
-
-    }
 }

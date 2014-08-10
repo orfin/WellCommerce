@@ -11,11 +11,8 @@
  */
 namespace WellCommerce\Bundle\CoreBundle\DataGrid;
 
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityRepository;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Validator\Exception\ValidatorException;
-use WellCommerce\Bundle\CoreBundle\AbstractComponent;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnCollection;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Loader\LoaderInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Options\OptionsInterface;
@@ -23,6 +20,7 @@ use WellCommerce\Bundle\CoreBundle\DataGrid\QueryBuilder\QueryBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Repository\DataGridRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Request\Request;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Request\RequestInterface;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 use xajaxResponse;
 
@@ -32,7 +30,7 @@ use xajaxResponse;
  * @package WellCommerce\Bundle\CoreBundle\DataGrid
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractDataGrid extends AbstractComponent
+abstract class AbstractDataGrid extends AbstractContainer
 {
     /**
      * @var \WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnCollection

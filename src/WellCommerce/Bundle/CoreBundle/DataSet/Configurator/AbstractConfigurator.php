@@ -12,10 +12,10 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DataSet\Configurator;
 
-use WellCommerce\Bundle\CoreBundle\AbstractComponent;
 use WellCommerce\Bundle\CoreBundle\DataSet\Column\ColumnCollection;
 use WellCommerce\Bundle\CoreBundle\DataSet\Paginator\PaginatorInterface;
 use WellCommerce\Bundle\CoreBundle\DataSet\QueryBuilder\QueryBuilderInterface;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
 
 /**
  * Class AbstractConfigurator
@@ -23,7 +23,7 @@ use WellCommerce\Bundle\CoreBundle\DataSet\QueryBuilder\QueryBuilderInterface;
  * @package WellCommerce\Bundle\CoreBundle\DataSet\Configurator
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AbstractConfigurator extends AbstractComponent
+class AbstractConfigurator extends AbstractContainer
 {
     /**
      * @var string

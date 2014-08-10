@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Layout\Box;
 
-use WellCommerce\Bundle\CoreBundle\AbstractComponent;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
 use WellCommerce\Bundle\CoreBundle\Form\Conditions\Equals;
 use WellCommerce\Bundle\CoreBundle\Form\Dependency;
 use WellCommerce\Bundle\CoreBundle\Form\Option;
@@ -24,7 +24,7 @@ use WellCommerce\Bundle\CoreBundle\Event\FormEvent;
  * @package WellCommerce\Bundle\CoreBundle\Layout\Box
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class LayoutBoxConfigurator extends AbstractComponent implements LayoutBoxConfiguratorInterface
+abstract class LayoutBoxConfigurator extends AbstractContainer implements LayoutBoxConfiguratorInterface
 {
     /**
      * @var string Box type

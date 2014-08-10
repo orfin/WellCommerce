@@ -1,29 +1,26 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- *
+ * 
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- *
+ * 
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Bundle\CoreBundle;
+
+namespace WellCommerce\Bundle\CoreBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerAware;
-use Symfony\Component\PropertyAccess\PropertyAccess;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
- * Class AbstractComponent
+ * Class AbstractContainer
  *
- * Provides common methods needed in all components
- *
- * @package WellCommerce\Core\Component
+ * @package WellCommerce\Bundle\CoreBundle\DependencyInjection
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractComponent extends ContainerAware
+class AbstractContainer extends ContainerAware
 {
     /**
      * Returns current controller action
@@ -369,4 +366,4 @@ abstract class AbstractComponent extends ContainerAware
     {
         return $this->container->get('filesystem');
     }
-}
+} 

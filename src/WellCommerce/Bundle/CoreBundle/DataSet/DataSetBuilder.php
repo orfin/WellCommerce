@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DataSet;
 
-use WellCommerce\Bundle\CoreBundle\AbstractComponent;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
 use WellCommerce\Bundle\CoreBundle\Event\DataSetEvent;
 
 /**
@@ -21,7 +21,7 @@ use WellCommerce\Bundle\CoreBundle\Event\DataSetEvent;
  * @package WellCommerce\Bundle\CoreBundle\DataSet
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class DataSetBuilder extends AbstractComponent
+class DataSetBuilder extends AbstractContainer
 {
     /**
      * Creates the DataSet

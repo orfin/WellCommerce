@@ -13,7 +13,7 @@ namespace WellCommerce\Bundle\CoreBundle\Repository;
 
 use Closure;
 use Doctrine\Entity;
-use WellCommerce\Bundle\CoreBundle\AbstractComponent;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
 use WellCommerce\Bundle\CoreBundle\Event\RepositoryEvent;
 
 /**
@@ -24,7 +24,7 @@ use WellCommerce\Bundle\CoreBundle\Event\RepositoryEvent;
  * @package WellCommerce\Bundle\CoreBundle\Component\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractRepository extends AbstractComponent implements RepositoryInterface
+abstract class AbstractRepository extends AbstractContainer implements RepositoryInterface
 {
     /**
      * Dispatches the event for repository action

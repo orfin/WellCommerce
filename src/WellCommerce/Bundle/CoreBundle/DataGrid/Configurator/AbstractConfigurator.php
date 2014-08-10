@@ -12,10 +12,10 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DataGrid\Configurator;
 
-use WellCommerce\Bundle\CoreBundle\AbstractComponent;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnCollection;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Options\OptionsInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\QueryBuilder\QueryBuilderInterface;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
 use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 
 /**
@@ -24,7 +24,7 @@ use WellCommerce\Bundle\CoreBundle\Helper\Helper;
  * @package WellCommerce\Bundle\CoreBundle\DataGrid\Configurator
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AbstractConfigurator extends AbstractComponent
+class AbstractConfigurator extends AbstractContainer
 {
     /**
      * @var string

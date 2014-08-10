@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Bundle\CoreBundle\Helper;
 
-use WellCommerce\Bundle\CoreBundle\AbstractComponent;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
 
 /**
  * Class Helper
@@ -19,7 +19,7 @@ use WellCommerce\Bundle\CoreBundle\AbstractComponent;
  * @package WellCommerce\Bundle\CoreBundle
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Helper extends AbstractComponent
+class Helper extends AbstractContainer
 {
     /**
      * Replaces commas with dots
