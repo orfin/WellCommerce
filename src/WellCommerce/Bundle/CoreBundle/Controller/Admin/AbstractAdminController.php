@@ -12,7 +12,6 @@
 namespace WellCommerce\Bundle\CoreBundle\Controller\Admin;
 
 use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
-use WellCommerce\Bundle\CoreBundle\Controller\Admin\AdminControllerInterface;
 
 /**
  * Class AbstractAdminController
@@ -22,14 +21,6 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AdminControllerInterface;
  */
 abstract class AbstractAdminController extends AbstractController implements AdminControllerInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getUserId()
-    {
-        return $this->getSession()->get('user_id');
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -47,7 +38,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
      */
     public function addSuccessMessage($message)
     {
-        return $this->getFlashBag()->add(AdminControllerInterface::MESSAGE_TYPE_SUCCESS, $this->trans($message));
+        return $this->getFlashBag()->add(AdminControllerInterface::MESSAGE_TYPE_SUCCESS, $this->trans($message, [], 'flashes'));
     }
 
     /**
@@ -55,6 +46,14 @@ abstract class AbstractAdminController extends AbstractController implements Adm
      */
     public function addErrorMessage($message)
     {
-        return $this->getFlashBag()->add(AdminControllerInterface::MESSAGE_TYPE_ERROR, $this->trans($message));
+        return $this->getFlashBag()->add(AdminControllerInterface::MESSAGE_TYPE_ERROR, $this->trans($message, [], 'flashes'));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function trans($id, $params = [], $domain = 'admin')
+    {
+        return $this->getTranslator()->trans($id, $params, $domain);
     }
 }

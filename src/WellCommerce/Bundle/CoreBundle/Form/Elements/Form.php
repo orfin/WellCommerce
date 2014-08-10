@@ -66,10 +66,10 @@ class Form extends Container
         ]);
 
         $resolver->setDefaults([
-            'action' => '',
-            'class'  => '',
-            'method' => self::FORM_METHOD,
-            'tabs'   => self::TABS_VERTICAL,
+            'action'        => '',
+            'class'         => '',
+            'method'        => self::FORM_METHOD,
+            'tabs'          => self::TABS_VERTICAL,
             'property_path' => null,
             'dependencies'  => [],
             'filters'       => [],
@@ -201,15 +201,17 @@ class Form extends Container
         return $this;
     }
 
+    public function isSubmitted()
+    {
+        $values = $this->getSubmittedData();
+
+        return isset($values[$this->attributes['name'] . '_submitted']);
+    }
+
     public function isValid($values = [])
     {
         $values = $this->getSubmittedData();
 
-        if (!isset($values[$this->attributes['name'] . '_submitted']) || !$values[$this->attributes['name'] . '_submitted']) {
-            return false;
-        }
-
-        $values = $this->getSubmittedData();
         $this->populate($values);
 
         return parent::isValid();

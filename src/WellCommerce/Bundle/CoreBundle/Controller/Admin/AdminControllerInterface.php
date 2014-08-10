@@ -25,13 +25,6 @@ interface AdminControllerInterface
     const MESSAGE_TYPE_ERROR   = 'error';
     
     /**
-     * Get admin user id
-     *
-     * @return mixed
-     */
-    public function getUserId();
-
-    /**
      * Evaluates default route for current controller. All admin controllers must have an indexAction
      *
      * @return string
@@ -55,4 +48,13 @@ interface AdminControllerInterface
      * @return mixed
      */
     public function addErrorMessage($message);
+
+    /**
+     * Translates a string using the translation service
+     *
+     * @param string $id Message to translate
+     *
+     * @return string The message
+     */
+    public function trans($id, $params = [], $domain = 'admin');
 }

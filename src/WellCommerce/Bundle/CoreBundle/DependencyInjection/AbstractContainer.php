@@ -25,33 +25,6 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 class AbstractContainer extends ContainerAware
 {
     /**
-     * Returns current controller action
-     *
-     * @return mixed
-     */
-    public function getControllerActionFromRequest()
-    {
-        $currentController = $this->getRequest()->attributes->get('_controller');
-        list(, $action) = explode(':', $currentController);
-
-        return $action;
-    }
-
-    /**
-     * Generates relative or absolute url based on given route and parameters
-     *
-     * @param string $route
-     * @param array  $parameters
-     * @param string $referenceType
-     *
-     * @return string Generated url
-     */
-    public function generateUrl($route, $parameters = [], $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH)
-    {
-        return $this->container->get('router')->generate($route, $parameters, $referenceType);
-    }
-
-    /**
      * Returns true if the service id is defined.
      *
      * @param string $id The service id
@@ -76,35 +49,25 @@ class AbstractContainer extends ContainerAware
     }
 
     /**
+     * Returns translation service
+     *
+     * @return \Symfony\Component\Translation\Translator
+     */
+    public function getTranslator()
+    {
+        return $this->container->get('translator.default');
+    }
+
+    /**
      * Translates a string using the translation service
      *
      * @param string $id Message to translate
      *
      * @return string The message
      */
-    final protected function trans($id)
+    protected function trans($id, $params = [], $domain = 'messages')
     {
-        return $this->container->get('translator.default')->trans($id, [], 'admin');
-    }
-
-    /**
-     * Shortcut to return the database service
-     *
-     * @return object Database manager service
-     */
-    final protected function getDb()
-    {
-        return $this->container->get('database_manager');
-    }
-
-    /**
-     * Shortcut to return query log
-     *
-     * @return mixed
-     */
-    final protected function getQueryLog()
-    {
-        return $this->getDb()->getConnection()->getQueryLog();
+        return $this->container->get('translator.default')->trans($id, $params, $domain);
     }
 
     /**
@@ -144,7 +107,7 @@ class AbstractContainer extends ContainerAware
      */
     final protected function getRequest()
     {
-        return $this->container->get('request');
+        return $this->get('request_stack')->getCurrentRequest();
     }
 
     /**
@@ -204,20 +167,6 @@ class AbstractContainer extends ContainerAware
     }
 
     /**
-     * Shortcut to get PDO instance
-     *
-     * @return object PDO
-     */
-    final protected function getPdo()
-    {
-        if (!$this->container->has('database_manager')) {
-            throw new \LogicException('Method getPdo requires Container to have database_manager service');
-        }
-
-        return $this->container->get('database_manager')->getConnection()->getPdo();
-    }
-
-    /**
      * Shortcut to get PropertyAccessor
      *
      * @return \Symfony\Component\PropertyAccess\PropertyAccessor
@@ -248,64 +197,6 @@ class AbstractContainer extends ContainerAware
     }
 
     /**
-     * Shortcut to get all available languages
-     *
-     * @return mixed
-     * @throws \LogicException
-     */
-    final protected function getLanguages()
-    {
-        if (!$this->container->has('language.repository')) {
-            throw new \LogicException('Method getLanguages requires Container to have language.repository service');
-        }
-
-        return $this->container->get('language.repository')->all()->toArray();
-    }
-
-    /**
-     * Shortcut to get all available language ids
-     *
-     * @return mixed
-     * @throws \LogicException
-     */
-    final protected function getLanguageIds()
-    {
-        $collection = $this->getLanguages();
-        $data       = [];
-
-        foreach ($collection as $item) {
-            $data[] = $item['id'];
-        }
-
-        return $data;
-    }
-
-    /**
-     * Shortcut to get all available shops
-     *
-     * @return mixed
-     * @throws \LogicException
-     */
-    final protected function getShops()
-    {
-        if (!$this->container->has('shop.repository')) {
-            throw new \LogicException('Method getShops requires Container to have shop.repository service');
-        }
-
-        return $this->container->get('shop.repository')->all();
-    }
-
-    /**
-     * Returns current language id
-     *
-     * @return int
-     */
-    final protected function getCurrentLanguage()
-    {
-        return 2;
-    }
-
-    /**
      * Shortcut to get Cache Manager service
      *
      * @return object
@@ -313,30 +204,6 @@ class AbstractContainer extends ContainerAware
     final protected function getCache()
     {
         return $this->container->get('cache_manager');
-    }
-
-    /**
-     * Shortcut to encrypt value using encryption service
-     *
-     * @param $value
-     *
-     * @return mixed
-     */
-    final protected function encrypt($value)
-    {
-        return $this->get('encryption')->encrypt($value);
-    }
-
-    /**
-     * Shortcut to decrypt value using encryption service
-     *
-     * @param $value
-     *
-     * @return mixed
-     */
-    final protected function decrypt($value)
-    {
-        return $this->get('encryption')->decrypt($value);
     }
 
     /**
@@ -360,12 +227,24 @@ class AbstractContainer extends ContainerAware
     }
 
     /**
-     * Shortcut to get Filesystem service
+     * Generates relative or absolute url based on given route and parameters
      *
-     * @return object
+     * @param string $route
+     * @param array  $parameters
+     * @param string $referenceType
+     *
+     * @return string Generated url
      */
-    final protected function getFilesystem()
+    public function generateUrl($route, $parameters = [], $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH)
     {
-        return $this->container->get('filesystem');
+        return $this->container->get('router')->generate($route, $parameters, $referenceType);
     }
-} 
+
+    /**
+     * Shortcut to return the Doctrine Registry service.
+     */
+    public function getDoctrine()
+    {
+        return $this->get('doctrine');
+    }
+}

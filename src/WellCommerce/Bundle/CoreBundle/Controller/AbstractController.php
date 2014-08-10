@@ -11,9 +11,12 @@
  */
 namespace WellCommerce\Bundle\CoreBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
 use WellCommerce\Bundle\CoreBundle\DataSet\DataSetInterface;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
 use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
 
 /**
@@ -22,30 +25,8 @@ use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
  * @package WellCommerce\Bundle\CoreBundle\Controller
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractController extends Controller
+abstract class AbstractController extends AbstractContainer
 {
-    /**
-     * Shortcut to return the session flashbag
-     *
-     * @return object FlashBag from session service
-     */
-    protected function getFlashBag()
-    {
-        return $this->container->get('session')->getFlashBag();
-    }
-
-    /**
-     * Translates a string using the translation service
-     *
-     * @param string $id Message to translate
-     *
-     * @return string The message
-     */
-    protected function trans($id)
-    {
-        return $this->container->get('translator')->trans($id);
-    }
-
     /**
      * Creates and returns the form element
      *
@@ -82,5 +63,18 @@ abstract class AbstractController extends Controller
     public function getDataSet(DataSetInterface $dataSet)
     {
         return $this->get('dataset_builder')->create($dataSet);
+    }
+
+    /**
+     * Returns a RedirectResponse to the given URL.
+     *
+     * @param string $url    The URL to redirect to
+     * @param int    $status The status code to use for the Response
+     *
+     * @return RedirectResponse
+     */
+    public function redirect($url, $status = 302)
+    {
+        return new RedirectResponse($url, $status);
     }
 }

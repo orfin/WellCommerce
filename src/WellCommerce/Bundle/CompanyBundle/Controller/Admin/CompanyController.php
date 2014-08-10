@@ -45,18 +45,19 @@ class CompanyController extends AbstractAdminController
         $company = new Company();
         $form    = $this->getCompanyForm($company);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted()) {
             $form->handleRequest();
-            $validator = $this->get('validator');
-            $errors = $validator->validate($company);
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($company);
+                $em->flush();
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($company);
-            $em->flush();
+                $this->addSuccessMessage('company.success');
 
-            $this->addSuccessMessage('New company added successfully.');
+                return $this->redirect($this->getDefaultUrl());
+            }
 
-            return $this->redirect($this->getDefaultUrl());
+            $this->addErrorMessage($form->getErrors());
         }
 
         return [
@@ -71,15 +72,19 @@ class CompanyController extends AbstractAdminController
     {
         $form = $this->getCompanyForm($company);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted()) {
             $form->handleRequest();
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($company);
-            $em->flush();
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($company);
+                $em->flush();
 
-            $this->addSuccessMessage('New company added successfully.');
+                $this->addSuccessMessage('company.success');
 
-            return $this->redirect($this->getDefaultUrl());
+                return $this->redirect($this->getDefaultUrl());
+            }
+
+            $this->addErrorMessage($form->getErrors());
         }
 
         return [
