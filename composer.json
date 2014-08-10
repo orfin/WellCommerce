@@ -59,7 +59,7 @@
         "zendframework/zend-cache": "2.3.0",
         "zendframework/zend-serializer": "2.3.0",
         "moxiecode/plupload": "v2.1.2",
-        "stof/doctrine-extensions-bundle": "~1.1@dev",
+        "gedmo/doctrine-extensions": "dev-master",
         "jms/di-extra-bundle": "1.4.0",
         "doctrine/doctrine-fixtures-bundle": "2.2.x-dev",
         "xajax/xajax": "1.0.0",

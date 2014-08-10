@@ -68,6 +68,7 @@ class AdminMenuItem implements AdminMenuItemInterface, \ArrayAccess
         $resolver->setDefaults(array(
             'sort_order' => 0,
             'class'      => '',
+            'link'       => ''
         ));
 
         $resolver->setAllowedTypes(array(

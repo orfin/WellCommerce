@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7380d9b04982761c58a64a090de1b9cd",
+    "hash": "d664c2f588a8b33592173ac9717dfe5b",
     "packages": [
         {
             "name": "codeception/codeception",
@@ -494,12 +494,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineBundle.git",
-                "reference": "12a9b24987890469a4534eac464cdcea1c5bcb94"
+                "reference": "b20a34c360431b961a4bff58edcd9ebdd9317d84"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/12a9b24987890469a4534eac464cdcea1c5bcb94",
-                "reference": "12a9b24987890469a4534eac464cdcea1c5bcb94",
+                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/b20a34c360431b961a4bff58edcd9ebdd9317d84",
+                "reference": "b20a34c360431b961a4bff58edcd9ebdd9317d84",
                 "shasum": ""
             },
             "require": {
@@ -541,12 +541,6 @@
             ],
             "authors": [
                 {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com",
-                    "homepage": "http://fabien.potencier.org",
-                    "role": "Lead Developer"
-                },
-                {
                     "name": "Symfony Community",
                     "homepage": "http://symfony.com/contributors"
                 },
@@ -557,6 +551,10 @@
                 {
                     "name": "Doctrine Project",
                     "homepage": "http://www.doctrine-project.org/"
+                },
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
                 }
             ],
             "description": "Symfony DoctrineBundle",
@@ -567,7 +565,7 @@
                 "orm",
                 "persistence"
             ],
-            "time": "2014-07-09 09:07:46"
+            "time": "2014-08-09 07:27:40"
         },
         {
             "name": "doctrine/doctrine-cache-bundle",
@@ -1161,12 +1159,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "448f2c2076cf0fb756230611491c4f7ecb735a29"
+                "reference": "50a80ef0d5fe8786d1786dc7604210580bf881f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/448f2c2076cf0fb756230611491c4f7ecb735a29",
-                "reference": "448f2c2076cf0fb756230611491c4f7ecb735a29",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/50a80ef0d5fe8786d1786dc7604210580bf881f6",
+                "reference": "50a80ef0d5fe8786d1786dc7604210580bf881f6",
                 "shasum": ""
             },
             "require": {
@@ -1218,7 +1216,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2014-08-08 01:30:43"
+            "time": "2014-08-08 22:10:18"
         },
         {
             "name": "guzzlehttp/streams",
@@ -1226,12 +1224,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/streams.git",
-                "reference": "78f73ec74a87d5c6c29279119773693cc732789e"
+                "reference": "d84f2d7055029aac36137de6eeff2647e814dc23"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/streams/zipball/78f73ec74a87d5c6c29279119773693cc732789e",
-                "reference": "78f73ec74a87d5c6c29279119773693cc732789e",
+                "url": "https://api.github.com/repos/guzzle/streams/zipball/d84f2d7055029aac36137de6eeff2647e814dc23",
+                "reference": "d84f2d7055029aac36137de6eeff2647e814dc23",
                 "shasum": ""
             },
             "require": {
@@ -1271,7 +1269,7 @@
                 "Guzzle",
                 "stream"
             ],
-            "time": "2014-08-08 01:24:01"
+            "time": "2014-08-08 19:26:00"
         },
         {
             "name": "illuminate/container",
@@ -1280,12 +1278,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/container.git",
-                "reference": "6336effea94a905b88b2a8c2828fab6f40659bdc"
+                "reference": "c490520f0a030360b9cf605d81721becbcce6573"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/container/zipball/6336effea94a905b88b2a8c2828fab6f40659bdc",
-                "reference": "6336effea94a905b88b2a8c2828fab6f40659bdc",
+                "url": "https://api.github.com/repos/illuminate/container/zipball/c490520f0a030360b9cf605d81721becbcce6573",
+                "reference": "c490520f0a030360b9cf605d81721becbcce6573",
                 "shasum": ""
             },
             "require": {
@@ -1309,12 +1307,10 @@
             "authors": [
                 {
                     "name": "Taylor Otwell",
-                    "email": "taylorotwell@gmail.com",
-                    "homepage": "https://github.com/taylorotwell",
-                    "role": "Creator of Laravel"
+                    "email": "taylorotwell@gmail.com"
                 }
             ],
-            "time": "2014-07-18 22:26:34"
+            "time": "2014-08-07 12:15:10"
         },
         {
             "name": "illuminate/database",
@@ -1323,12 +1319,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/database.git",
-                "reference": "7bb62a4f4b4771d8c241cc462bb8fb79967a490a"
+                "reference": "ea82fa1023aa31b6c2a6ba70c9a12c78cade2963"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/database/zipball/7bb62a4f4b4771d8c241cc462bb8fb79967a490a",
-                "reference": "7bb62a4f4b4771d8c241cc462bb8fb79967a490a",
+                "url": "https://api.github.com/repos/illuminate/database/zipball/ea82fa1023aa31b6c2a6ba70c9a12c78cade2963",
+                "reference": "ea82fa1023aa31b6c2a6ba70c9a12c78cade2963",
                 "shasum": ""
             },
             "require": {
@@ -1372,7 +1368,7 @@
                 "orm",
                 "sql"
             ],
-            "time": "2014-08-05 19:35:51"
+            "time": "2014-08-07 12:15:10"
         },
         {
             "name": "illuminate/events",
@@ -1424,12 +1420,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "1bf9666e695685cc6281ffd131c81ff2a6f37fbd"
+                "reference": "83792969d776b612f98201f91d7d94449b46696c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/1bf9666e695685cc6281ffd131c81ff2a6f37fbd",
-                "reference": "1bf9666e695685cc6281ffd131c81ff2a6f37fbd",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/83792969d776b612f98201f91d7d94449b46696c",
+                "reference": "83792969d776b612f98201f91d7d94449b46696c",
                 "shasum": ""
             },
             "require": {
@@ -1463,7 +1459,7 @@
                     "email": "taylorotwell@gmail.com"
                 }
             ],
-            "time": "2014-08-06 13:48:13"
+            "time": "2014-08-07 12:15:10"
         },
         {
             "name": "incenteev/composer-parameter-handler",
@@ -2619,21 +2615,24 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/diff.git",
-                "reference": "ac84cfdec593945f36f24074d6ea17d296e86f76"
+                "reference": "2bbf893712032f479b11afd9f3af68abb552aff7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/diff/zipball/ac84cfdec593945f36f24074d6ea17d296e86f76",
-                "reference": "ac84cfdec593945f36f24074d6ea17d296e86f76",
+                "url": "https://api.github.com/repos/sebastianbergmann/diff/zipball/2bbf893712032f479b11afd9f3af68abb552aff7",
+                "reference": "2bbf893712032f479b11afd9f3af68abb552aff7",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
+            "require-dev": {
+                "phpunit/phpunit": "~4.2"
+            },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1-dev"
+                    "dev-master": "1.2-dev"
                 }
             },
             "autoload": {
@@ -2647,13 +2646,12 @@
             ],
             "authors": [
                 {
-                    "name": "Sebastian Bergmann",
-                    "email": "sebastian@phpunit.de",
-                    "role": "lead"
-                },
-                {
                     "name": "Kore Nordmann",
                     "email": "mail@kore-nordmann.de"
+                },
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sebastian@phpunit.de"
                 }
             ],
             "description": "Diff implementation",
@@ -2661,7 +2659,7 @@
             "keywords": [
                 "diff"
             ],
-            "time": "2014-05-12 05:21:40"
+            "time": "2014-08-10 08:30:31"
         },
         {
             "name": "sebastian/environment",
@@ -2876,12 +2874,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioFrameworkExtraBundle.git",
-                "reference": "93c39f8f8dc84604c82799bd09691162f1dd3c6f"
+                "reference": "0555b8f98cb27e178e089f45b75af677ca5b586a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/93c39f8f8dc84604c82799bd09691162f1dd3c6f",
-                "reference": "93c39f8f8dc84604c82799bd09691162f1dd3c6f",
+                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/0555b8f98cb27e178e089f45b75af677ca5b586a",
+                "reference": "0555b8f98cb27e178e089f45b75af677ca5b586a",
                 "shasum": ""
             },
             "require": {
@@ -2922,7 +2920,7 @@
                 "annotations",
                 "controllers"
             ],
-            "time": "2014-07-22 11:36:49"
+            "time": "2014-08-08 10:32:46"
         },
         {
             "name": "sensiolabs/security-checker",
@@ -2968,68 +2966,6 @@
             ],
             "description": "A security checker for your composer.lock",
             "time": "2014-07-19 10:52:35"
-        },
-        {
-            "name": "stof/doctrine-extensions-bundle",
-            "version": "dev-master",
-            "target-dir": "Stof/DoctrineExtensionsBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/stof/StofDoctrineExtensionsBundle.git",
-                "reference": "085cda7ce5dc12b807a5a7856f178c93725a9166"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/stof/StofDoctrineExtensionsBundle/zipball/085cda7ce5dc12b807a5a7856f178c93725a9166",
-                "reference": "085cda7ce5dc12b807a5a7856f178c93725a9166",
-                "shasum": ""
-            },
-            "require": {
-                "gedmo/doctrine-extensions": "~2.3.1",
-                "php": ">=5.3.2",
-                "symfony/framework-bundle": "~2.1"
-            },
-            "suggest": {
-                "doctrine/doctrine-bundle": "to use the ORM extensions",
-                "doctrine/mongodb-odm-bundle": "to use the MongoDB ODM extensions"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Stof\\DoctrineExtensionsBundle": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Christophe Coevoet",
-                    "email": "stof@notk.org"
-                }
-            ],
-            "description": "Integration of the gedmo/doctrine-extensions with Symfony2",
-            "homepage": "https://github.com/stof/StofDoctrineExtensionsBundle",
-            "keywords": [
-                "behaviors",
-                "doctrine2",
-                "extensions",
-                "gedmo",
-                "loggable",
-                "nestedset",
-                "sluggable",
-                "sortable",
-                "timestampable",
-                "translatable",
-                "tree"
-            ],
-            "time": "2014-07-08 17:06:10"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -3319,12 +3255,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "8bedf86f3101057cd52933dbf7fe0f0429b268b6"
+                "reference": "2cf1205ef5063ed496840cbef107b0650a2e20e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/8bedf86f3101057cd52933dbf7fe0f0429b268b6",
-                "reference": "8bedf86f3101057cd52933dbf7fe0f0429b268b6",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/2cf1205ef5063ed496840cbef107b0650a2e20e8",
+                "reference": "2cf1205ef5063ed496840cbef107b0650a2e20e8",
                 "shasum": ""
             },
             "require": {
@@ -3425,7 +3361,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2014-08-07 07:58:17"
+            "time": "2014-08-09 10:38:44"
         },
         {
             "name": "twig/extensions",
@@ -3433,12 +3369,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fabpot/Twig-extensions.git",
-                "reference": "6af92b642604f560157001bb85b597f70fed640b"
+                "reference": "b092fb785ef82eb99132deadaf8ca1823a4d75dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Twig-extensions/zipball/6af92b642604f560157001bb85b597f70fed640b",
-                "reference": "6af92b642604f560157001bb85b597f70fed640b",
+                "url": "https://api.github.com/repos/fabpot/Twig-extensions/zipball/b092fb785ef82eb99132deadaf8ca1823a4d75dd",
+                "reference": "b092fb785ef82eb99132deadaf8ca1823a4d75dd",
                 "shasum": ""
             },
             "require": {
@@ -3477,7 +3413,7 @@
                 "i18n",
                 "text"
             ],
-            "time": "2014-08-05 11:34:11"
+            "time": "2014-08-08 06:16:10"
         },
         {
             "name": "twig/twig",
@@ -3895,12 +3831,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioGeneratorBundle.git",
-                "reference": "44f23fe619bcea1e85b477f11bfad0b2ad8f5a6a"
+                "reference": "3acd15b9287d1d887e443b57f6c68b5d7ffc20db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioGeneratorBundle/zipball/44f23fe619bcea1e85b477f11bfad0b2ad8f5a6a",
-                "reference": "44f23fe619bcea1e85b477f11bfad0b2ad8f5a6a",
+                "url": "https://api.github.com/repos/sensiolabs/SensioGeneratorBundle/zipball/3acd15b9287d1d887e443b57f6c68b5d7ffc20db",
+                "reference": "3acd15b9287d1d887e443b57f6c68b5d7ffc20db",
                 "shasum": ""
             },
             "require": {
@@ -3934,7 +3870,7 @@
                 }
             ],
             "description": "This bundle generates code for you",
-            "time": "2014-08-05 13:10:20"
+            "time": "2014-08-08 10:34:11"
         }
     ],
     "aliases": [
@@ -3945,7 +3881,7 @@
         "doctrine/migrations": 20,
         "doctrine/doctrine-migrations-bundle": 20,
         "illuminate/database": 20,
-        "stof/doctrine-extensions-bundle": 20,
+        "gedmo/doctrine-extensions": 20,
         "doctrine/doctrine-fixtures-bundle": 20
     },
     "prefer-stable": false,

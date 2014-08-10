@@ -20,7 +20,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             new JMS\AopBundle\JMSAopBundle(),
-            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+
             // WellCommerce bundles
             new WellCommerce\Bundle\CoreBundle\WellCommerceCoreBundle(),
             new WellCommerce\Bundle\CountryBundle\WellCommerceCountryBundle(),
@@ -29,7 +29,6 @@ class AppKernel extends Kernel
             new WellCommerce\Bundle\UnitBundle\WellCommerceUnitBundle(),
             new WellCommerce\Bundle\CompanyBundle\WellCommerceCompanyBundle(),
             new WellCommerce\Bundle\ClientBundle\WellCommerceClientBundle(),
-            new WellCommerce\Bundle\ConfigurationBundle\WellCommerceConfigurationBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

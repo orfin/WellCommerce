@@ -65,31 +65,6 @@ doctrine:
         entity_managers:
             default:
                 auto_mapping: true
-                mappings:
-                    gedmo_translatable:
-                        type: annotation
-                        prefix: Gedmo\Translatable\Entity
-                        dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Translatable/Entity/MappedSuperclass"
-                        alias: GedmoTranslatable # this one is optional and will default to the name set for the mapping
-                        is_bundle: false
-                    gedmo_translator:
-                        type: annotation
-                        prefix: Gedmo\Translator\Entity
-                        dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Translator/Entity"
-                        alias: GedmoTranslator # this one is optional and will default to the name set for the mapping
-                        is_bundle: false
-                    gedmo_loggable:
-                        type: annotation
-                        prefix: Gedmo\Loggable\Entity
-                        dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Loggable/Entity"
-                        alias: GedmoLoggable # this one is optional and will default to the name set for the mapping
-                        is_bundle: false
-                    gedmo_tree:
-                        type: annotation
-                        prefix: Gedmo\Tree\Entity
-                        dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Tree/Entity"
-                        alias: GedmoTree # this one is optional and will default to the name set for the mapping
-                        is_bundle: false
 # Swiftmailer Configuration
 swiftmailer:
     transport: "%mailer_transport%"
@@ -107,9 +82,20 @@ doctrine_migrations:
 jms_di_extra:
     disable_grep: true
 
-stof_doctrine_extensions:
-    default_locale: en
-    orm:
-        default:
-            tree: true
-            timestampable: true
+services:
+    # Doctrine Extension listeners to handle behaviors
+    gedmo.listener.translatable:
+        class: Gedmo\Translatable\TranslatableListener
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+        calls:
+            - [ setAnnotationReader, [ @annotation_reader ] ]
+            - [ setDefaultLocale, [ en ] ]
+            - [ setTranslationFallback, [ true ] ]
+            
+    gedmo.listener.timestampable:
+        class: Gedmo\Timestampable\TimestampableListener
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+        calls:
+            - [ setAnnotationReader, [ @annotation_reader ] ]

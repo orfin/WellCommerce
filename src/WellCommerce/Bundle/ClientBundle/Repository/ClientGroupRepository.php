@@ -10,18 +10,18 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CompanyBundle\Entity;
+namespace WellCommerce\Bundle\ClientBundle\Repository;
 
-use Doctrine\ORM\EntityRepository;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Repository\DataGridRepositoryInterface;
+use WellCommerce\Bundle\CoreBundle\Repository\TranslatableRepository;
 
 /**
- * Class CompanyRepository
+ * Class ClientGroupRepository
  *
- * @package WellCommerce\Bundle\CompanyBundle\Entity
+ * @package WellCommerce\Bundle\ClientBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CompanyRepository extends EntityRepository implements CompanyRepositoryInterface, DataGridRepositoryInterface
+class ClientGroupRepository extends TranslatableRepository implements DataGridRepositoryInterface, ClientGroupRepositoryInterface
 {
     /**
      * {@inheritdoc}
@@ -47,5 +47,11 @@ class CompanyRepository extends EntityRepository implements CompanyRepositoryInt
     public function deleteMultipleRows(array $ids)
     {
         return false;
+    }
+
+    public function findAll()
+    {
+        $qb = $this->createQueryBuilder('post');
+        return $this->getResult($qb, 'fr');
     }
 }

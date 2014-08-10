@@ -1,7 +1,3 @@
-wellcommerce_configuration:
-    resource: "@WellCommerceConfigurationBundle/Resources/config/routing.xml"
-    prefix:   /admin/configuration
-
 wellcommerce_client:
     resource: "@WellCommerceClientBundle/Resources/config/routing.xml"
     prefix:   /admin/client
