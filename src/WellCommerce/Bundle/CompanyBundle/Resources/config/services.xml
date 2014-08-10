@@ -46,6 +46,9 @@
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
+            <call method="setRepository">
+                <argument type="service" id="company.repository"/>
+            </call>
         </service>
 
         <service id="company.listener" class="%company.listener.class%">

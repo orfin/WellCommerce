@@ -12,6 +12,7 @@
 namespace WellCommerce\Bundle\CompanyBundle\Form;
 
 use WellCommerce\Bundle\CompanyBundle\Entity\Company;
+use WellCommerce\Bundle\CompanyBundle\Entity\CompanyRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Form\AbstractForm;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
@@ -24,6 +25,11 @@ use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
  */
 class CompanyForm extends AbstractForm implements FormInterface
 {
+    /**
+     * @var CompanyRepositoryInterface
+     */
+    private $repository;
+
     /**
      * {@inheritdoc}
      */
@@ -132,5 +138,15 @@ class CompanyForm extends AbstractForm implements FormInterface
         ]);
 
         return $formData;
+    }
+
+    /**
+     * Sets repository object
+     *
+     * @param CompanyRepositoryInterface $repository
+     */
+    public function setRepository(CompanyRepositoryInterface $repository)
+    {
+        $this->repository = $repository;
     }
 }

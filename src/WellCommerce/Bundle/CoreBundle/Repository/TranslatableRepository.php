@@ -12,11 +12,11 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Repository;
 
-use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\Query;
 
+use Gedmo\Translatable\Entity\Repository\TranslationRepository;
 use Gedmo\Translatable\TranslatableListener;
 
 /**
@@ -25,7 +25,7 @@ use Gedmo\Translatable\TranslatableListener;
  * @package WellCommerce\Bundle\CoreBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class TranslatableRepository extends EntityRepository
+class TranslatableRepository extends TranslationRepository
 {
     /**
      * @var string Default locale

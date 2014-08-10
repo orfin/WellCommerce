@@ -47,6 +47,9 @@
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
+            <call method="setRepository">
+                <argument type="service" id="client_group.repository"/>
+            </call>
         </service>
 
         <service id="client_group.listener" class="%client_group.listener.class%">
