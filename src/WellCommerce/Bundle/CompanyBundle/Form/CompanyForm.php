@@ -92,9 +92,9 @@ class CompanyForm extends AbstractForm implements FormInterface
         ]));
 
         $addressData->addChild($builder->getElement('select', [
-            'name'  => 'country',
-            'label' => $this->trans('Country'),
-            //            'options' => $builder->makeOptions($this->get('country.repository')->all())
+            'name'    => 'country',
+            'label'   => $this->trans('Country'),
+            'options' => $this->get('country.repository')->all()
         ]));
 
         $form->addFilter('no_code');

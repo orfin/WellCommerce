@@ -12,7 +12,9 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\PropertyAccess\PropertyPath;
 use WellCommerce\Bundle\CoreBundle\Form\Option;
 
 /**
@@ -53,7 +55,9 @@ abstract class OptionedField extends Field
 
         $resolver->setDefaults([
             'options'       => [],
-            'property_path' => null,
+            'property_path' => function (Options $options) {
+                    return new PropertyPath($options['name']);
+                },
             'dependencies'  => [],
             'filters'       => [],
             'rules'         => [],
@@ -96,9 +100,9 @@ abstract class OptionedField extends Field
     protected function formatOptionsJs()
     {
         $options = [];
-        foreach ($this->attributes['options'] as $option) {
-            $value     = addslashes($option->value);
-            $label     = addslashes($option->label);
+        foreach ($this->attributes['options'] as $value => $label) {
+            $value     = addslashes($value);
+            $label     = addslashes($label);
             $options[] = "{sValue: '{$value}', sLabel: '{$label}'}";
         }
 
