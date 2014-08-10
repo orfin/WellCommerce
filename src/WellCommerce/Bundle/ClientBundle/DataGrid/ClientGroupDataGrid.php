@@ -47,7 +47,7 @@ class ClientGroupDataGrid extends AbstractDataGrid implements DataGridInterface
 
         $this->columns->add(new Column([
             'id'         => 'name',
-            'source'     => 'client_group_translation.name',
+            'source'     => 'client_group.name',
             'caption'    => $this->trans('Name'),
             'appearance' => [
                 'width' => 70,
@@ -62,7 +62,6 @@ class ClientGroupDataGrid extends AbstractDataGrid implements DataGridInterface
     public function getQueryBuilder()
     {
         $qb = $this->repository->createQueryBuilder('client_group');
-        $qb->leftJoin('client_group.client_group_client', 'k');
         $qb->groupBy('client_group.id');
 
         return $qb;

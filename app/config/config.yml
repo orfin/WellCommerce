@@ -92,7 +92,7 @@ services:
             - [ setAnnotationReader, [ @annotation_reader ] ]
             - [ setDefaultLocale, [ en ] ]
             - [ setTranslationFallback, [ true ] ]
-            
+
     gedmo.listener.timestampable:
         class: Gedmo\Timestampable\TimestampableListener
         tags:

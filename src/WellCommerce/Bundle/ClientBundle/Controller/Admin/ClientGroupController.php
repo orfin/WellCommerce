@@ -35,14 +35,14 @@ class ClientGroupController extends AbstractAdminController
 
     public function indexAction()
     {
-        $clientGroup = new ClientGroup();
-        $clientGroup->setName('my title in en');
-        $clientGroup->setDiscount(11);
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($clientGroup);
-        $em->flush();
-
-        die();
+//        $clientGroup = new ClientGroup();
+//        $clientGroup->setName('my title in en');
+//        $clientGroup->setDiscount(11);
+//        $em = $this->getDoctrine()->getManager();
+//        $em->persist($clientGroup);
+//        $em->flush();
+//
+//        die();
 
         return [
             'datagrid' => $this->getDataGrid($this->get('client_group.datagrid'))
