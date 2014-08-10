@@ -1,12 +1,12 @@
+wellcommerce_configuration:
+    resource: "@WellCommerceConfigurationBundle/Resources/config/routing.xml"
+    prefix:   /admin/configuration
+
+wellcommerce_client:
+    resource: "@WellCommerceClientBundle/Resources/config/routing.xml"
+    prefix:   /admin/client
+
 wellcommerce_company:
     resource: "@WellCommerceCompanyBundle/Resources/config/routing.xml"
     prefix:   /admin/company
-
-wellcommerce_tax:
-    resource: "@WellCommerceTaxBundle/Controller"
-    type:     annotation
-
-wellcommerce_core:
-    resource: "@WellCommerceCoreBundle/Resources/config/routing.xml"
-    prefix:   /
 
