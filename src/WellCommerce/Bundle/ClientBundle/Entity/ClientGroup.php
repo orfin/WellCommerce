@@ -12,8 +12,7 @@
 namespace WellCommerce\Bundle\ClientBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Gedmo\Translatable\Translatable;
+use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 /**
  * ClientGroup
@@ -21,10 +20,12 @@ use Gedmo\Translatable\Translatable;
  * @ORM\Table(name="client_group")
  * @ORM\Entity(repositoryClass="WellCommerce\Bundle\ClientBundle\Repository\ClientGroupRepository")
  * @ORM\HasLifecycleCallbacks
- * @Gedmo\TranslationEntity(class="WellCommerce\Bundle\ClientBundle\Entity\Translation\ClientGroupTranslation")
  */
-class ClientGroup implements Translatable
+class ClientGroup
 {
+    use ORMBehaviors\Translatable\Translatable;
+    use ORMBehaviors\Timestampable\Timestampable;
+
     /**
      * @var integer
      *
@@ -37,38 +38,9 @@ class ClientGroup implements Translatable
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="text", length=250, nullable=true)
-     * @Gedmo\Translatable
-     */
-    private $name;
-
-    /**
-     * @Gedmo\Locale
-     */
-    private $locale;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="discount", type="decimal", precision=15, scale=4)
      */
     private $discount;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="created_at", type="datetime")
-     * @Gedmo\Timestampable(on="create")
-     */
-    private $createdAt;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="updated_at", type="datetime")
-     * @Gedmo\Timestampable(on="update")
-     */
-    private $updatedAt;
 
     /**
      * Get id.
@@ -102,69 +74,6 @@ class ClientGroup implements Translatable
     public function getDiscount()
     {
         return $this->discount;
-    }
-
-    /**
-     * Set createdAt.
-     *
-     * @param \DateTime $createdAt
-     *
-     * @return ClientGroup
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Get createdAt.
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * Set updatedAt.
-     *
-     * @param \DateTime $updatedAt
-     *
-     * @return ClientGroup
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    /**
-     * Get updatedAt.
-     *
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * Sets translatable locale
-     *
-     * @param string $locale
-     */
-    public function setTranslatableLocale($locale)
-    {
-        $this->locale = $locale;
-    }
-
-    public function setName($name)
-    {
-        $this->name = $name;
     }
 }
 

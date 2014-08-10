@@ -134,6 +134,7 @@
         </service>
 
         <service id="form.element.fieldset_language" class="%form.element.fieldset_language.class%" scope="prototype">
+            <argument type="service" id="locale.repository" />
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

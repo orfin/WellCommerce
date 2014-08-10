@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d664c2f588a8b33592173ac9717dfe5b",
+    "hash": "ea0cbcc9273233a08e4e06f3dfcfa96c",
     "packages": [
         {
             "name": "codeception/codeception",
@@ -1779,6 +1779,66 @@
                 "yaml"
             ],
             "time": "2014-07-12 07:13:19"
+        },
+        {
+            "name": "knplabs/doctrine-behaviors",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/KnpLabs/DoctrineBehaviors.git",
+                "reference": "f2d424d198946aef5b0073ed11184828754dac52"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/KnpLabs/DoctrineBehaviors/zipball/f2d424d198946aef5b0073ed11184828754dac52",
+                "reference": "f2d424d198946aef5b0073ed11184828754dac52",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/common": ">=2.2",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "doctrine/mongodb-odm": "dev-master",
+                "doctrine/orm": ">=2.2",
+                "ext-pdo_pgsql": "*",
+                "ext-pdo_sqlite": "*",
+                "phpunit/phpunit": "~3.7"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Knp\\DoctrineBehaviors": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "KnpLabs",
+                    "homepage": "http://knplabs.com"
+                }
+            ],
+            "description": "Doctrine2 behavior traits",
+            "homepage": "http://knplabs.com",
+            "keywords": [
+                "Blameable",
+                "behaviors",
+                "doctrine2",
+                "filterable",
+                "softdeletable",
+                "timestampable",
+                "translatable",
+                "tree"
+            ],
+            "time": "2014-07-24 08:44:16"
         },
         {
             "name": "kriswallsmith/assetic",
@@ -3882,7 +3942,8 @@
         "doctrine/doctrine-migrations-bundle": 20,
         "illuminate/database": 20,
         "gedmo/doctrine-extensions": 20,
-        "doctrine/doctrine-fixtures-bundle": 20
+        "doctrine/doctrine-fixtures-bundle": 20,
+        "knplabs/doctrine-behaviors": 20
     },
     "prefer-stable": false,
     "platform": {

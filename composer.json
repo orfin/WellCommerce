@@ -44,7 +44,7 @@
     "require": {
         "php": ">=5.3.3",
         "symfony/symfony": "2.5.*",
-        "doctrine/orm": "~2.2,>=2.2.3",
+        "doctrine/orm": ">=2.4.0-RC1",
         "doctrine/doctrine-bundle": "~1.2",
         "doctrine/migrations": "dev-master",
         "doctrine/doctrine-migrations-bundle": "dev-master",
@@ -63,7 +63,8 @@
         "jms/di-extra-bundle": "1.4.0",
         "doctrine/doctrine-fixtures-bundle": "2.2.x-dev",
         "xajax/xajax": "1.0.0",
-        "codeception/codeception": "2.0.4"
+        "codeception/codeception": "2.0.4",
+        "knplabs/doctrine-behaviors": "1.0.x-dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

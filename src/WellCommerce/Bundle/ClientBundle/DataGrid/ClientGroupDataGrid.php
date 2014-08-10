@@ -31,7 +31,7 @@ class ClientGroupDataGrid extends AbstractDataGrid implements DataGridInterface
     {
         $this->columns->add(new Column([
             'id'         => 'id',
-            'source'     => 'client_group.id',
+            'source'     => 'cg.id',
             'caption'    => $this->trans('Id'),
             'sorting'    => [
                 'default_order' => ColumnInterface::SORT_DIR_DESC
@@ -47,7 +47,7 @@ class ClientGroupDataGrid extends AbstractDataGrid implements DataGridInterface
 
         $this->columns->add(new Column([
             'id'         => 'name',
-            'source'     => 'client_group.name',
+            'source'     => 'cgt.name',
             'caption'    => $this->trans('Name'),
             'appearance' => [
                 'width' => 70,
@@ -61,8 +61,9 @@ class ClientGroupDataGrid extends AbstractDataGrid implements DataGridInterface
 
     public function getQueryBuilder()
     {
-        $qb = $this->repository->createQueryBuilder('client_group');
-        $qb->groupBy('client_group.id');
+        $qb = $this->repository->createQueryBuilder('cg');
+        $qb->leftJoin('WellCommerce\Bundle\ClientBundle\Entity\ClientGroupTranslation', 'cgt', 'WITH', 'cg.id = cgt.translatable AND cgt.locale = :locale');
+        $qb->setParameter('locale', 'en_US');
 
         return $qb;
     }

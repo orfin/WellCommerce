@@ -13,6 +13,7 @@ namespace WellCommerce\Bundle\LocaleBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Intl\Intl;
+use Symfony\Component\Intl\Locale\Locale;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Repository\DataGridRepositoryInterface;
 use WellCommerce\Bundle\LocaleBundle\Repository\LocaleRepositoryInterface;
 
@@ -51,21 +52,31 @@ class LocaleRepository extends EntityRepository implements DataGridRepositoryInt
     }
 
     /**
-     * Returns locales as list containing  key-value pairs
-     *
-     * @return array
+     * {@inheritdoc}
      */
-    public function getLocalesFlattened()
+    public function getAvailableLocales()
     {
-        $locales = $this->findAll();
-        $data    = [];
-        foreach ($locales as $locale) {
-            $data[$locale->getId()] = $locale->getCode();
-        }
-
-        return $data;
+        return $this->findAll();
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getAvailableLocaleCodes()
+    {
+        $locales = $this->getAvailableLocales();
+        $codes   = [];
+        foreach ($locales as $locale) {
+            $codes[$locale->getCode()] = $locale->getCode();
+        }
+
+        return $codes;
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
     public function getLocaleNames()
     {
         $locales = Intl::getLocaleBundle()->getLocaleNames();

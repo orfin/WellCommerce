@@ -62,8 +62,7 @@ class ClientGroupForm extends AbstractForm implements FormInterface
 
         $languageData = $requiredData->addChild($builder->getElement('fieldset_language', [
             'name'      => 'language_data',
-            'label'     => $this->trans('form.required_data.language_data.label'),
-            'languages' => []
+            'label'     => $this->trans('form.required_data.language_data.label')
         ]));
 
         $languageData->addChild($builder->getElement('text_field', [
@@ -92,23 +91,18 @@ class ClientGroupForm extends AbstractForm implements FormInterface
      */
     public function getDefaultData(ClientGroup $clientGroup)
     {
-        $translations = $this->repository->findTranslations($clientGroup);
         $formData     = [];
+        $languageData = [];
         $accessor     = $this->getPropertyAccessor();
+        $translations = $clientGroup->getTranslations();
+
+        foreach($translations as $translation){
+            $languageData['name'][$translation->getLocale()] = $translation->getName();
+        }
 
         $accessor->setValue($formData, '[required_data]', [
-            'name'      => $company->getName(),
-            'shortName' => $company->getShortName()
-        ]);
-
-        $accessor->setValue($formData, '[address_data]', [
-            'street'   => $company->getStreet(),
-            'streetNo' => $company->getStreetNo(),
-            'flatNo'   => $company->getFlatNo(),
-            'province' => $company->getProvince(),
-            'postCode' => $company->getPostCode(),
-            'city'     => $company->getCity(),
-            'country'  => $company->getCountry()
+            'discount'      => $clientGroup->getDiscount(),
+            'language_data' => $languageData
         ]);
 
         return $formData;

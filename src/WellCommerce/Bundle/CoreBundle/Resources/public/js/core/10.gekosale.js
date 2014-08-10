@@ -2939,9 +2939,6 @@ var GFormContainerLanguage = GCore.ExtendClass(GFormNode, function() {
 			var sFieldName = gThis.m_oOptions.aoFields[iFieldIndex].sName;
 
 			for (var sRepetitionId in mData[sFieldName]) {
-				if (gThis.m_oContainerRepetitions[sRepetitionId] == undefined) {
-//					gThis.AddRepetition(sRepetitionId);
-				}
 				var oValueObject = {};
 				oValueObject[sFieldName] = mData[sFieldName][sRepetitionId];
 				gThis.m_oContainerRepetitions[sRepetitionId].Populate(oValueObject);
@@ -6096,7 +6093,7 @@ var GFormTechnicalDataEditor = GCore.ExtendClass(GFormField, function() {
 			top: $(this).offset().top + 21
 		});
 		for (var l in GCore.aoLanguages) {
-			var jLanguage = $('<div class="field-text"><span class="prefix"><img src="' + GCore.DESIGN_PATH + '_images_common/icons/languages/' + GCore.aoLanguages[l].flag + '" alt="' + GCore.aoLanguages[l].name + '"/></span><span class="field"><input class="language-' + l + '" type="text" value="' + ((oGroup.caption[l] == undefined) ? '' : oGroup.caption[l]) + '"/></span></div>');
+			var jLanguage = $('<div class="field-text"><span class="prefix"><img src="' + GCore.DESIGN_PATH + '_images_common/icons/images/languages//' + GCore.aoLanguages[l].flag + '" alt="' + GCore.aoLanguages[l].name + '"/></span><span class="field"><input class="language-' + l + '" type="text" value="' + ((oGroup.caption[l] == undefined) ? '' : oGroup.caption[l]) + '"/></span></div>');
 			jOverlay.append(jLanguage);
 		}
 		var jSaveButton = $('<a class="button ok" href="#"><span>' + GForm.Language.technical_data_save_group + '</span></a>');
@@ -6265,7 +6262,7 @@ var GFormTechnicalDataEditor = GCore.ExtendClass(GFormField, function() {
 			top: $(this).offset().top + 21
 		});
 		for (var l in GCore.aoLanguages) {
-			var jLanguage = $('<div class="field-text"><span class="prefix"><img src="' + GCore.DESIGN_PATH + '_images_common/icons/languages/' + GCore.aoLanguages[l].flag + '" alt="' + GCore.aoLanguages[l].name + '"/></span><span class="field"><input class="language-' + l + '" type="text" value="' + ((oAttribute.caption[l] == undefined) ? '' : oAttribute.caption[l]) + '"/></span></div>');
+			var jLanguage = $('<div class="field-text"><span class="prefix"><img src="' + GCore.DESIGN_PATH + 'images/languages/' + GCore.aoLanguages[l].flag + '" alt="' + GCore.aoLanguages[l].name + '"/></span><span class="field"><input class="language-' + l + '" type="text" value="' + ((oAttribute.caption[l] == undefined) ? '' : oAttribute.caption[l]) + '"/></span></div>');
 			jOverlay.append(jLanguage);
 		}
 		var jTypeSelect = $('<select class="type"/>');
@@ -6491,7 +6488,7 @@ var GFormTechnicalDataEditor = GCore.ExtendClass(GFormField, function() {
 				top: $(this).offset().top + 21
 			});
 			for (var l in GCore.aoLanguages) {
-				var jLanguage = $('<div class="field-text"><span class="prefix"><img src="' + GCore.DESIGN_PATH + '_images_common/icons/languages/' + GCore.aoLanguages[l].flag + '" alt="' + GCore.aoLanguages[l].name + '"/></span><span class="field"><input class="language-' + l + '" type="text" value="' + (((oAttribute.value == undefined) || (oAttribute.value[l] == undefined)) ? '' : oAttribute.value[l]) + '"/></span></div>');
+				var jLanguage = $('<div class="field-text"><span class="prefix"><img src="' + GCore.DESIGN_PATH + 'images/languages/' + GCore.aoLanguages[l].flag + '" alt="' + GCore.aoLanguages[l].name + '"/></span><span class="field"><input class="language-' + l + '" type="text" value="' + (((oAttribute.value == undefined) || (oAttribute.value[l] == undefined)) ? '' : oAttribute.value[l]) + '"/></span></div>');
 				jOverlay.append(jLanguage);
 			}
 			var jSaveButton = $('<a class="button wide" href="#"><span>' + GForm.Language.technical_data_save_attribute + '</span></a>');
@@ -17090,7 +17087,7 @@ var GFormTechnicalAttributeEditor = GCore.ExtendClass(GFormField, function() {
 				top: $(this).offset().top + 21
 			});
 			for (var l in GCore.aoLanguages) {
-				var jLanguage = $('<div class="field-text"><span class="prefix"><img style="margin-top: 4px;margin-left: 4px;" src="' + GCore.DESIGN_PATH + '_images_common/icons/languages/' + GCore.aoLanguages[l].flag + '" alt="' + GCore.aoLanguages[l].name + '"/></span><span class="field"><input class="language-' + l + '" type="text" value="' + oValue.name[l] + '"/></span></div>');
+				var jLanguage = $('<div class="field-text"><span class="prefix"><img style="margin-top: 4px;margin-left: 4px;" src="' + GCore.DESIGN_PATH + 'images/languages/' + GCore.aoLanguages[l].flag + '" alt="' + GCore.aoLanguages[l].name + '"/></span><span class="field"><input class="language-' + l + '" type="text" value="' + oValue.name[l] + '"/></span></div>');
 				jOverlay.append(jLanguage);
 			}
 			var jSaveButton = $('<a class="button" href="#"><span>' + GForm.Language.technical_data_save_group + '</span></a>');
@@ -17186,7 +17183,7 @@ var GFormTechnicalAttributeEditor = GCore.ExtendClass(GFormField, function() {
 				top: $(this).offset().top + 21
 			});
 			for (var l in GCore.aoLanguages) {
-				var jLanguage = $('<div class="field-text"><span class="prefix"><img style="margin-top: 4px;margin-left: 4px;" src="' + GCore.DESIGN_PATH + '_images_common/icons/languages/' + GCore.aoLanguages[l].flag + '" alt="' + GCore.aoLanguages[l].name + '"/></span><span class="field"><input class="language-' + l + '" type="text" value="' + oAttribute.name[l] + '"/></span></div>');
+				var jLanguage = $('<div class="field-text"><span class="prefix"><img style="margin-top: 4px;margin-left: 4px;" src="' + GCore.DESIGN_PATH + 'images/languages/' + GCore.aoLanguages[l].flag + '" alt="' + GCore.aoLanguages[l].name + '"/></span><span class="field"><input class="language-' + l + '" type="text" value="' + oAttribute.name[l] + '"/></span></div>');
 				jOverlay.append(jLanguage);
 			}
 			var jSaveButton = $('<a class="button" href="#"><span>' + GForm.Language.technical_data_save_group + '</span></a>');
@@ -19495,7 +19492,7 @@ var GFormRepetitionLanguage = GCore.ExtendClass(GFormContainer, function(options
 		$.each(options.aoLanguages,function(l,language){
 			if(language.sValue == options.sName)
 			{
-			jFlag.append('<img src="' + GCore.DESIGN_PATH+"_images_common/icons/languages/"+language.sFlag + '" alt="' + language.sLabel + '" title="' + language.sLabel + '"/>');	
+			jFlag.append('<img src="' + GCore.DESIGN_PATH+"images/languages/"+language.sFlag + '" alt="' + language.sLabel + '" title="' + language.sLabel + '"/>');	
 			}
 		});
 		

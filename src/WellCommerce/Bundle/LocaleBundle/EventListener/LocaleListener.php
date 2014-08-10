@@ -61,7 +61,7 @@ class LocaleListener implements EventSubscriberInterface
 
         if (!$this->container->get('session')->has('admin/locales')) {
 
-            $locales = $this->container->get('locale.repository')->getLocalesFlattened();
+            $locales = $this->container->get('locale.repository')->getAvailableLocales();
 
             $this->container->get('session')->set('admin/locales', $locales);
         }

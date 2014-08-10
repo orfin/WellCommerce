@@ -414,9 +414,14 @@ abstract class Node extends ContainerAware
         return true;
     }
 
+    public function isLocale($key)
+    {
+        return in_array($key, $this->container->get('locale.repository')->getAvailableLocaleCodes());
+    }
+
     protected function isIterated($array)
     {
-        if (is_numeric(key($array)) || substr(key($array), 0, 4) == 'new-') {
+        if (is_numeric(key($array)) || substr(key($array), 0, 4) == 'new-' || $this->isLocale(key($array))) {
             return true;
         }
 

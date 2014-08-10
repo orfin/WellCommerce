@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\ClientBundle\Repository;
 
+use Doctrine\ORM\EntityRepository;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Repository\DataGridRepositoryInterface;
-use WellCommerce\Bundle\CoreBundle\Repository\TranslatableRepository;
 
 /**
  * Class ClientGroupRepository
@@ -21,7 +21,7 @@ use WellCommerce\Bundle\CoreBundle\Repository\TranslatableRepository;
  * @package WellCommerce\Bundle\ClientBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientGroupRepository extends TranslatableRepository implements DataGridRepositoryInterface, ClientGroupRepositoryInterface
+class ClientGroupRepository extends EntityRepository implements DataGridRepositoryInterface, ClientGroupRepositoryInterface
 {
     /**
      * {@inheritdoc}
@@ -47,11 +47,5 @@ class ClientGroupRepository extends TranslatableRepository implements DataGridRe
     public function deleteMultipleRows(array $ids)
     {
         return false;
-    }
-
-    public function findAll()
-    {
-        $qb = $this->createQueryBuilder('client_group');
-        return $this->getResult($qb, 'fr_FRa');
     }
 }

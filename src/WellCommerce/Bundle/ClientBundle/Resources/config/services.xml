@@ -47,9 +47,6 @@
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
-            <call method="setRepository">
-                <argument type="service" id="client_group.repository"/>
-            </call>
         </service>
 
         <service id="client_group.listener" class="%client_group.listener.class%">
@@ -57,14 +54,6 @@
             <argument type="service" id="translator"/>
             <argument type="service" id="router"/>
             <tag name="kernel.event_subscriber" />
-        </service>
-
-        <service id="client_group.manager.post" class="%client_group.manager.class%" public="true">
-            <argument type="service" id="doctrine.orm.default_entity_manager" />
-            <argument>WellCommerceClientBundle:ClientGroup</argument>
-            <call method="setRepositoryLocale">
-                <argument type="service" id="service_container" />
-            </call>
         </service>
     </services>
 </container>

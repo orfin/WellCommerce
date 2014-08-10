@@ -35,6 +35,9 @@ class Form extends Container
     protected $defaultData;
     protected $isSubmitted = false;
 
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         parent::__construct();
@@ -131,10 +134,10 @@ class Form extends Container
 
             return $values;
         } else {
-            return $this->harvest(Array(
+            return $this->harvest([
                 $this,
                 'harvestValues'
-            ));
+            ]);
         }
     }
 
@@ -157,7 +160,7 @@ class Form extends Container
         }
     }
 
-    public function GetFlags()
+    public function getFlags()
     {
         return $this->_flags;
     }
@@ -187,18 +190,51 @@ class Form extends Container
      */
     public function handleRequest()
     {
-        $values   = $this->getSubmittedData();
-        $accessor = $this->getPropertyAccessor();
-
+        $values          = $this->getSubmittedData();
+        $accessor        = $this->getPropertyAccessor();
+        $hasTranslations = false;
         $this->populate($values);
 
         foreach ($this->fields as $field) {
-            if (null != $field->getPropertyPath()) {
+            if (null != $field->getPropertyPath() && !$field->parent instanceof FieldsetLanguage) {
                 $accessor->setValue($this->defaultData, $field->getPropertyPath(), $field->getValue());
+            }
+            if ($field->parent instanceof FieldsetLanguage) {
+                $hasTranslations = true;
+            }
+        }
+
+        if ($hasTranslations) {
+            foreach ($this->fields as $field) {
+                if ($field->parent instanceof FieldsetLanguage) {
+                    $values = $field->getValue();
+                    foreach ($values as $locale => $value) {
+                        $translation = $this->defaultData->translate($locale);
+                        $accessor->setValue($translation, $field->getName(), $value);
+                    }
+                    $this->defaultData->mergeNewTranslations();
+                }
             }
         }
 
         return $this;
+    }
+
+    private function harvestTranslatableValues($values)
+    {
+
+        $fields = [];
+        foreach ($this->fields as $field) {
+            if ($field instanceof FieldsetLanguage) {
+
+
+                foreach ($field->children as $child) {
+                    echo $child->path;
+                }
+            }
+        }
+        print_r($values);
+//        die();
     }
 
     public function isSubmitted()

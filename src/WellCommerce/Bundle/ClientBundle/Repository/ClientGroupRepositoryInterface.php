@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\ClientBundle\Repository;
 
+use WellCommerce\Bundle\ClientBundle\Entity\ClientGroup;
 use WellCommerce\Bundle\CompanyBundle\Entity\Company;
 
 /**
@@ -22,12 +23,5 @@ use WellCommerce\Bundle\CompanyBundle\Entity\Company;
  */
 interface ClientGroupRepositoryInterface
 {
-    /**
-     * Returns translations for given entity
-     *
-     * @param Company $company
-     *
-     * @return mixed
-     */
-    public function findTranslations($company);
+
 } 

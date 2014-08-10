@@ -20,5 +20,17 @@ namespace WellCommerce\Bundle\LocaleBundle\Repository;
  */
 interface LocaleRepositoryInterface
 {
+    /**
+     * Returns an array of locales fetched from intl component
+     *
+     * @return mixed
+     */
     public function getLocaleNames();
+
+    /**
+     * Returns defined locales as an array
+     *
+     * @return mixed
+     */
+    public function getAvailableLocales();
 } 

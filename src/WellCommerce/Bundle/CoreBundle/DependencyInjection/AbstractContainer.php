@@ -247,4 +247,14 @@ class AbstractContainer extends ContainerAware
     {
         return $this->get('doctrine');
     }
+
+    /**
+     * Shortcut for getting default entity manager
+     *
+     * @return \Doctrine\ORM\EntityManager
+     */
+    public function getEntityManager()
+    {
+        return $this->get('doctrine.orm.default_entity_manager');
+    }
 }

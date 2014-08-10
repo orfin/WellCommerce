@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use WellCommerce\Bundle\LocaleBundle\Repository\LocaleRepositoryInterface;
 
 /**
  * Class FieldsetLanguage
@@ -23,6 +24,23 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class FieldsetLanguage extends Fieldset implements ElementInterface
 {
+    /**
+     * @var LocaleRepositoryInterface
+     */
+    private $repository;
+
+    /**
+     * Constructor
+     *
+     * @param LocaleRepositoryInterface $repository
+     */
+    public function __construct(LocaleRepositoryInterface $repository)
+    {
+        $this->repository           = $repository;
+        $this->options['languages'] = $repository->getAvailableLocales();
+        parent::__construct($this->options);
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -49,10 +67,11 @@ class FieldsetLanguage extends Fieldset implements ElementInterface
             'dependencies'  => [],
             'filters'       => [],
             'rules'         => [],
-            'repeat_min' => function (Options $options) {
+            'languages'     => [],
+            'repeat_min'    => function (Options $options) {
                     return count($options['languages']);
                 },
-            'repeat_max' => function (Options $options) {
+            'repeat_max'    => function (Options $options) {
                     return count($options['languages']);
                 },
         ]);
@@ -67,13 +86,18 @@ class FieldsetLanguage extends Fieldset implements ElementInterface
         ]);
     }
 
+    /**
+     * Formats field javascript
+     *
+     * @return string
+     */
     protected function formatLanguagesJs()
     {
         $options = [];
-        foreach ($this->languages as $language) {
-            $value     = addslashes($language['id']);
-            $label     = addslashes($language['translation']);
-            $flag      = addslashes(sprintf('%s.png', substr($language['name'], 0, 2)));
+        foreach ($this->options['languages'] as $language) {
+            $value     = addslashes($language->getCode());
+            $label     = addslashes($language->getCode());
+            $flag      = addslashes(sprintf('%s.png', substr($label, 0, 2)));
             $options[] = "{sValue: '{$value}', sLabel: '{$label}',sFlag: '{$flag}' }";
         }
 

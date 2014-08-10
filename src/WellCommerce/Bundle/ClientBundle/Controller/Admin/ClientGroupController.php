@@ -35,15 +35,6 @@ class ClientGroupController extends AbstractAdminController
 
     public function indexAction()
     {
-//        $clientGroup = new ClientGroup();
-//        $clientGroup->setName('my title in en');
-//        $clientGroup->setDiscount(11);
-//        $em = $this->getDoctrine()->getManager();
-//        $em->persist($clientGroup);
-//        $em->flush();
-////
-//        die();
-
         return [
             'datagrid' => $this->getDataGrid($this->get('client_group.datagrid'))
         ];
@@ -57,10 +48,9 @@ class ClientGroupController extends AbstractAdminController
         if ($form->isSubmitted()) {
             $form->handleRequest();
             if ($form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
+                $em = $this->getEntityManager();
                 $em->persist($company);
                 $em->flush();
-
                 $this->addSuccessMessage('company.success');
 
                 return $this->redirect($this->getDefaultUrl());
@@ -84,7 +74,7 @@ class ClientGroupController extends AbstractAdminController
         if ($form->isSubmitted()) {
             $form->handleRequest();
             if ($form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
+                $em = $this->getEntityManager();
                 $em->persist($company);
                 $em->flush();
 
@@ -111,7 +101,7 @@ class ClientGroupController extends AbstractAdminController
     public function getClientGroupForm(ClientGroup $clientGroup)
     {
         return $this->getFormBuilder($this->get('client_group.form'), $clientGroup, [
-            'name' => 'client_group'
+            'name'         => 'client_group'
         ]);
     }
 
