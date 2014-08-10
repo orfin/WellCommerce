@@ -65,7 +65,7 @@ class AbstractContainer extends ContainerAware
      *
      * @return string The message
      */
-    protected function trans($id, $params = [], $domain = 'messages')
+    protected function trans($id, $params = [], $domain = 'admin')
     {
         return $this->container->get('translator.default')->trans($id, $params, $domain);
     }
