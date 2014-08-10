@@ -1,6 +1,6 @@
 {% extends 'WellCommerceCoreBundle:Admin:layout.html.twig' %}
 {% block content %}
-    <h2>{% trans %}wellcommerce.company.edit{% endtrans %}</h2>
+    <h2>{% trans from "admin" %}company.edit{% endtrans %}</h2>
     <ul class="possibilities">
         <li><a href="{{ path('admin.company.index') }}" class="button return"><span></span></a></li>
         <li><a href="#{{ form.name }}" rel="submit" class="button"><span>{% trans %}wellcommerce.save_and_finish{% endtrans %}</span></a></li>

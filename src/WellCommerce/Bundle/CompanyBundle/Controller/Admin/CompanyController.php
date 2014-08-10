@@ -14,13 +14,9 @@ namespace WellCommerce\Bundle\CompanyBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\PropertyAccess\PropertyAccess;
-use Symfony\Component\PropertyAccess\PropertyAccessor;
 use WellCommerce\Bundle\CompanyBundle\Entity\Company;
 use WellCommerce\Bundle\CompanyBundle\Entity\CompanyRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
-use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
 
 /**
  * Class CompanyController

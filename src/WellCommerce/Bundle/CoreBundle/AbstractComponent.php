@@ -33,7 +33,7 @@ abstract class AbstractComponent extends ContainerAware
     public function getControllerActionFromRequest()
     {
         $currentController = $this->getRequest()->attributes->get('_controller');
-        list($controller, $action) = explode(':', $currentController);
+        list(, $action) = explode(':', $currentController);
 
         return $action;
     }
@@ -85,7 +85,7 @@ abstract class AbstractComponent extends ContainerAware
      */
     final protected function trans($id)
     {
-        return $this->container->get('translator')->trans($id);
+        return $this->container->get('translator.default')->trans($id, [], 'admin');
     }
 
     /**
