@@ -45,12 +45,4 @@ class CompanyRepository extends AbstractEntityRepository implements CompanyRepos
     {
         return false;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAlias()
-    {
-        return 'company';
-    }
 }

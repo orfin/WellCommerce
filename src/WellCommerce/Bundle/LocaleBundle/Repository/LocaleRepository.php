@@ -97,12 +97,4 @@ class LocaleRepository extends AbstractEntityRepository implements DataGridRepos
 
         return $Data;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAlias()
-    {
-        return 'locale';
-    }
 }
