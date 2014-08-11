@@ -25,6 +25,9 @@
 
         <service id="client_group.repository" class="%client_group.repository.class%" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument>WellCommerceClientBundle:ClientGroup</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
         </service>
 
         <service id="client_group.datagrid.configurator" class="%client_group.datagrid.configurator.class%">

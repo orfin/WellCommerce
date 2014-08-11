@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\ClientBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Repository\DataGridRepositoryInterface;
+use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 
 /**
  * Class ClientGroupRepository
@@ -21,8 +22,19 @@ use WellCommerce\Bundle\CoreBundle\DataGrid\Repository\DataGridRepositoryInterfa
  * @package WellCommerce\Bundle\ClientBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientGroupRepository extends EntityRepository implements DataGridRepositoryInterface, ClientGroupRepositoryInterface
+class ClientGroupRepository extends AbstractEntityRepository implements DataGridRepositoryInterface, ClientGroupRepositoryInterface
 {
+    public function getDataGridQueryBuilder()
+    {
+        return parent::getQueryBuilder()
+            ->leftJoin(
+                'WellCommerce\Bundle\ClientBundle\Entity\ClientGroupTranslation',
+                'client_group_translation',
+                'WITH',
+                'client_group.id = client_group_translation.translatable AND client_group_translation.locale = :locale')
+            ->setParameter('locale', $this->getCurrentLocale());
+    }
+
     /**
      * {@inheritdoc}
      */

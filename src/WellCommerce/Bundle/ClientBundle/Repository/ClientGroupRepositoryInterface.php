@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\ClientBundle\Repository;
 
-use WellCommerce\Bundle\ClientBundle\Entity\ClientGroup;
-use WellCommerce\Bundle\CompanyBundle\Entity\Company;
+use WellCommerce\Bundle\CoreBundle\DataGrid\Repository\DataGridRepositoryInterface;
+use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
  * Interface ClientGroupRepositoryInterface
@@ -21,7 +21,7 @@ use WellCommerce\Bundle\CompanyBundle\Entity\Company;
  * @package WellCommerce\Bundle\ClientBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ClientGroupRepositoryInterface
+interface ClientGroupRepositoryInterface extends RepositoryInterface, DataGridRepositoryInterface
 {
 
 } 
