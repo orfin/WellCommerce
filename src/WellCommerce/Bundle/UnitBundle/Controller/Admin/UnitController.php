@@ -14,6 +14,8 @@ namespace WellCommerce\Bundle\UnitBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Exception\ValidatorException;
 use WellCommerce\Bundle\UnitBundle\Repository\UnitRepositoryInterface;
 use WellCommerce\Bundle\UnitBundle\Entity\Unit;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
@@ -40,24 +42,23 @@ class UnitController extends AbstractAdminController
         ];
     }
 
-    public function addAction()
+    public function addAction(Request $request)
     {
-        $locale = new Unit();
-        $form    = $this->getUnitForm($locale);
+        $unit = new Unit();
+        $form    = $this->getUnitForm($unit);
 
-        if ($form->isSubmitted()) {
-            $form->handleRequest();
-            if ($form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($locale);
+        if ($form->handleRequest($request)->isValid()) {
+            try {
+                $em = $this->getEntityManager();
+                $em->persist($unit);
                 $em->flush();
-
-                $this->addSuccessMessage('unit.success');
+                $this->addSuccessMessage('unit.added.success');
 
                 return $this->redirect($this->getDefaultUrl());
-            }
 
-            $this->addErrorMessage($form->getErrors());
+            } catch (ValidatorException $exception) {
+                $this->addErrorMessage($exception->getMessage());
+            }
         }
 
         return [
@@ -66,25 +67,24 @@ class UnitController extends AbstractAdminController
     }
 
     /**
-     * @ParamConverter("locale", class="WellCommerceUnitBundle:Unit")
+     * @ParamConverter("unit", class="WellCommerceUnitBundle:Unit")
      */
-    public function editAction(Unit $locale)
+    public function editAction(Request $request, Unit $unit)
     {
-        $form = $this->getUnitForm($locale);
+        $form = $this->getUnitForm($unit);
 
-        if ($form->isSubmitted()) {
-            $form->handleRequest();
-            if ($form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($locale);
+        if ($form->handleRequest($request)->isValid()) {
+            try {
+                $em = $this->getEntityManager();
+                $em->persist($unit);
                 $em->flush();
-
-                $this->addSuccessMessage('unit.success');
+                $this->addSuccessMessage('unit.saved.success');
 
                 return $this->redirect($this->getDefaultUrl());
-            }
 
-            $this->addErrorMessage($form->getErrors());
+            } catch (ValidatorException $exception) {
+                $this->addErrorMessage($exception->getMessage());
+            }
         }
 
         return [
