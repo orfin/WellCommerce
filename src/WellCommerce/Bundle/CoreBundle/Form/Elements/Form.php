@@ -190,6 +190,10 @@ class Form extends Container
      */
     public function handleRequest()
     {
+        if (!$this->isSubmitted()) {
+            return false;
+        }
+
         $values          = $this->getSubmittedData();
         $accessor        = $this->getPropertyAccessor();
         $hasTranslations = false;
@@ -218,23 +222,6 @@ class Form extends Container
         }
 
         return $this;
-    }
-
-    private function harvestTranslatableValues($values)
-    {
-
-        $fields = [];
-        foreach ($this->fields as $field) {
-            if ($field instanceof FieldsetLanguage) {
-
-
-                foreach ($field->children as $child) {
-                    echo $child->path;
-                }
-            }
-        }
-        print_r($values);
-//        die();
     }
 
     public function isSubmitted()

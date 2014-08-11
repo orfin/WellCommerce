@@ -44,13 +44,14 @@ class ClientGroupController extends AbstractAdminController
     {
         $company = new ClientGroup();
         $form    = $this->getClientGroupForm($company);
+        $form->handleRequest();
 
         if ($form->isSubmitted()) {
-            $form->handleRequest();
             if ($form->isValid()) {
                 $em = $this->getEntityManager();
                 $em->persist($company);
                 $em->flush();
+
                 $this->addSuccessMessage('company.success');
 
                 return $this->redirect($this->getDefaultUrl());
@@ -101,7 +102,7 @@ class ClientGroupController extends AbstractAdminController
     public function getClientGroupForm(ClientGroup $clientGroup)
     {
         return $this->getFormBuilder($this->get('client_group.form'), $clientGroup, [
-            'name'         => 'client_group'
+            'name' => 'client_group'
         ]);
     }
 
