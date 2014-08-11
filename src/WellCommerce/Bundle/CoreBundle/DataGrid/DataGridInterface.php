@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\CoreBundle\DataGrid;
 
 use WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnCollection;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Options\OptionsInterface;
-use WellCommerce\Bundle\CoreBundle\DataGrid\QueryBuilder\QueryBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Request\RequestInterface;
 
 /**
@@ -52,9 +51,9 @@ interface DataGridInterface
     public function getIdentifier();
 
     /**
-     * Adds new columns to collection
+     * Adds datagrid columns to collection
      *
-     * @return void
+     * @return mixed
      */
     public function addColumns();
 

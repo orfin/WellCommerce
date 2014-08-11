@@ -4,6 +4,10 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
+    <route id="admin.client_group.grid" path="/group/grid">
+        <default key="_controller">client_group.controller.admin:gridAction</default>
+    </route>
+
     <route id="admin.client_group.index" path="/group/index">
         <default key="_controller">client_group.controller.admin:indexAction</default>
     </route>

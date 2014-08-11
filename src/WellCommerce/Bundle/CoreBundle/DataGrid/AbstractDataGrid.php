@@ -51,8 +51,11 @@ abstract class AbstractDataGrid extends AbstractContainer
      * @param DataGridRepositoryInterface $repository
      * @param LoaderInterface             $loader
      */
-    public function __construct(ContainerInterface $container, DataGridRepositoryInterface $repository, LoaderInterface $loader)
-    {
+    public function __construct(
+        ContainerInterface $container,
+        DataGridRepositoryInterface $repository,
+        LoaderInterface $loader
+    ) {
         $this->container  = $container;
         $this->repository = $repository;
         $this->loader     = $loader;

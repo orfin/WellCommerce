@@ -14,11 +14,14 @@ namespace WellCommerce\Bundle\ClientBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Exception\ValidatorException;
+use WellCommerce\Bundle\ClientBundle\DataGrid\ClientGroupDataGrid;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientGroup;
 use WellCommerce\Bundle\ClientBundle\Repository\ClientGroupRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
+use WellCommerce\Bundle\CoreBundle\Controller\Admin\Traits\DataGrid;
 
 /**
  * Class ClientGroupController
@@ -42,6 +45,11 @@ class ClientGroupController extends AbstractAdminController
         ];
     }
 
+    public function gridAction($request)
+    {
+        print_r($request);
+    }
+
     public function addAction(Request $request)
     {
         $company = new ClientGroup();
@@ -53,9 +61,10 @@ class ClientGroupController extends AbstractAdminController
                 $em->persist($company);
                 $em->flush();
                 $this->addSuccessMessage('client_group.added.success');
+
                 return $this->redirect($this->getDefaultUrl());
 
-            } catch (ValidatorException $exception){
+            } catch (ValidatorException $exception) {
                 $this->addErrorMessage($exception->getMessage());
             }
         }
@@ -78,9 +87,10 @@ class ClientGroupController extends AbstractAdminController
                 $em->persist($company);
                 $em->flush();
                 $this->addSuccessMessage('client_group.saved.success');
+
                 return $this->redirect($this->getDefaultUrl());
 
-            } catch (ValidatorException $exception){
+            } catch (ValidatorException $exception) {
                 $this->addErrorMessage($exception->getMessage());
             }
         }

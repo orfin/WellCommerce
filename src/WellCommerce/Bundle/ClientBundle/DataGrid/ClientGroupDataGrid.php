@@ -13,6 +13,7 @@ namespace WellCommerce\Bundle\ClientBundle\DataGrid;
 
 use WellCommerce\Bundle\CoreBundle\DataGrid\AbstractDataGrid;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Column\Column;
+use WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnCollection;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
 
