@@ -12,8 +12,6 @@
 
 namespace WellCommerce\Bundle\ClientBundle\Repository;
 
-use Doctrine\ORM\EntityRepository;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Repository\DataGridRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 
 /**
@@ -22,7 +20,7 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
  * @package WellCommerce\Bundle\ClientBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientGroupRepository extends AbstractEntityRepository implements DataGridRepositoryInterface, ClientGroupRepositoryInterface
+class ClientGroupRepository extends AbstractEntityRepository implements ClientGroupRepositoryInterface
 {
     public function getDataGridQueryBuilder()
     {

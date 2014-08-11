@@ -20,7 +20,7 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
  * @package WellCommerce\Bundle\UnitBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class UnitRepository extends AbstractEntityRepository implements DataGridRepositoryInterface, UnitRepositoryInterface
+class UnitRepository extends AbstractEntityRepository implements UnitRepositoryInterface
 {
     /**
      * {@inheritdoc}
