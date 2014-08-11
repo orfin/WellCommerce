@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "481c44826bea3b645f2a5aa264e9ae80",
+    "hash": "ad8a5f9e9804d09fa7f09278cb5235bb",
     "packages": [
         {
             "name": "codeception/codeception",
@@ -79,6 +79,54 @@
                 "unit testing"
             ],
             "time": "2014-08-05 02:15:03"
+        },
+        {
+            "name": "codeception/notifier",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Codeception/Notifier.git",
+                "reference": "d28022ca3ecae0aa8b68e39e7dd38406bde0a46d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Codeception/Notifier/zipball/d28022ca3ecae0aa8b68e39e7dd38406bde0a46d",
+                "reference": "d28022ca3ecae0aa8b68e39e7dd38406bde0a46d",
+                "shasum": ""
+            },
+            "require": {
+                "namshi/notificator": "1.0.*"
+            },
+            "require-dev": {
+                "codeception/codeception": "@dev"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Codeception": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Bodnarchuk",
+                    "email": "davert.php@mailican.com",
+                    "homepage": "http://codeception.com"
+                }
+            ],
+            "description": "Notification Extension for Codeception",
+            "homepage": "http://codeception.com/",
+            "keywords": [
+                "TDD",
+                "acceptance testing",
+                "functional testing",
+                "notification",
+                "unit testing"
+            ],
+            "time": "2013-07-17 00:18:54"
         },
         {
             "name": "doctrine/annotations",
@@ -1751,6 +1799,54 @@
                 "plupload"
             ],
             "time": "2014-05-16 13:22:33"
+        },
+        {
+            "name": "namshi/notificator",
+            "version": "1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/namshi/notificator.git",
+                "reference": "fa90c0306fd2673da64f3a9dc22567382ea84e4b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/namshi/notificator/zipball/fa90c0306fd2673da64f3a9dc22567382ea84e4b",
+                "reference": "fa90c0306fd2673da64f3a9dc22567382ea84e4b",
+                "shasum": ""
+            },
+            "require-dev": {
+                "hipchat/hipchat-php": "1.2.*",
+                "oldsound/rabbitmq-bundle": "1.1.3",
+                "phpunit/phpunit": "3.7.*",
+                "symfony/process": "v2.2.3"
+            },
+            "suggest": {
+                "hipchat/hipchat-php": "To send notifications over HipChat",
+                "oldsound/rabbitmq-bundle": "To send RabbitMQ notifications in Symfony2",
+                "phpunit/phpunit": "To easily run tests locally",
+                "symfony/process": "To trigger notify-send notifications under Ubuntu",
+                "videlalvaro/php-amqplib": "To send notifications through RabbitMQ"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Namshi\\Notificator": "src/",
+                    "Namshi\\Notificator\\Test": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alessandro Nadalin",
+                    "email": "alessandro.nadalin@gmail.com",
+                    "homepage": "http://www.odino.org"
+                }
+            ],
+            "description": "A lightweight library to handle notifications the smart way.",
+            "time": "2013-08-22 09:06:02"
         },
         {
             "name": "ocramius/instantiator",
@@ -3625,7 +3721,8 @@
         "doctrine/migrations": 20,
         "doctrine/doctrine-migrations-bundle": 20,
         "doctrine/doctrine-fixtures-bundle": 20,
-        "knplabs/doctrine-behaviors": 20
+        "knplabs/doctrine-behaviors": 20,
+        "codeception/notifier": 20
     },
     "prefer-stable": false,
     "platform": {
