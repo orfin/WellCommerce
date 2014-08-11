@@ -48,12 +48,9 @@ interface DataGridRepositoryInterface
     public function deleteMultipleRows(array $ids);
 
     /**
-     * Creates a new QueryBuilder instance that is prepopulated for this entity name.
+     * Returns DataGrid query builder object
      *
-     * @param string $alias
-     * @param string $indexBy The index for the from.
-     *
-     * @return \Doctrine\ORM\QueryBuilder
+     * @return mixed
      */
-    public function createQueryBuilder($alias, $indexBy = null);
+    public function getDataGridQueryBuilder();
 } 

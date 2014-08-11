@@ -24,6 +24,21 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
     /**
      * {@inheritdoc}
      */
+    public function createNew()
+    {
+        $entity = $this->getClassName();
+
+        return new $entity;
+    }
+
+    protected function getQueryBuilder()
+    {
+        return $this->createQueryBuilder($this->getAlias());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function deleteRow($id)
     {
         $entity = $this->find($id);
@@ -45,6 +60,11 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
     public function deleteMultipleRows(array $ids)
     {
         return false;
+    }
+
+    public function getAlias()
+    {
+        return 'o';
     }
 
 }

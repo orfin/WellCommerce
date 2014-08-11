@@ -91,17 +91,9 @@ abstract class AbstractDataGrid extends AbstractContainer
     /**
      * {@inheritdoc}
      */
-    public function setQueryBuilder(QueryBuilderInterface $queryBuilder)
+    public function getDataGridQueryBuilder()
     {
-        $this->queryBuilder = $queryBuilder;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getQueryBuilder()
-    {
-        return $this->queryBuilder;
+        return $this->repository->getDataGridQueryBuilder();
     }
 
     /**

@@ -22,7 +22,7 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\CompanyBundle\Entity\CompanyRepository")
+ * @ORM\Entity(repositoryClass="WellCommerce\Bundle\CompanyBundle\Repository\CompanyRepository")
  */
 class Company
 {

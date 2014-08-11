@@ -17,7 +17,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Exception\ValidatorException;
 use WellCommerce\Bundle\CompanyBundle\Entity\Company;
-use WellCommerce\Bundle\CompanyBundle\Entity\CompanyRepositoryInterface;
+use WellCommerce\Bundle\CompanyBundle\Repository\CompanyRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
@@ -44,11 +44,14 @@ class CompanyController extends AbstractAdminController
 
     public function addAction(Request $request)
     {
-        $company = new Company();
+        $company = $this->repository->createNew();
         $form    = $this->getCompanyForm($company);
 
         if ($form->handleRequest($request)->isValid()) {
             try {
+
+                $company = $this->repository->createNew();
+
                 $em = $this->getEntityManager();
                 $em->persist($company);
                 $em->flush();

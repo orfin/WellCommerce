@@ -12,13 +12,16 @@
 
 namespace WellCommerce\Bundle\LocaleBundle\Repository;
 
+use WellCommerce\Bundle\CoreBundle\DataGrid\Repository\DataGridRepositoryInterface;
+use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
+
 /**
  * Interface LocaleRepositoryInterface
  *
  * @package WellCommerce\Bundle\ClientBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface LocaleRepositoryInterface
+interface LocaleRepositoryInterface extends DataGridRepositoryInterface, RepositoryInterface
 {
     /**
      * Returns an array of locales fetched from intl component

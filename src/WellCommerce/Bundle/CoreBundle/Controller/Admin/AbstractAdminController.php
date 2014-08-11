@@ -11,7 +11,9 @@
  */
 namespace WellCommerce\Bundle\CoreBundle\Controller\Admin;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
+use WellCommerce\Bundle\CoreBundle\DataGrid\Request\Request;
 
 /**
  * Class AbstractAdminController
@@ -21,6 +23,7 @@ use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
  */
 abstract class AbstractAdminController extends AbstractController implements AdminControllerInterface
 {
+
     /**
      * {@inheritdoc}
      */

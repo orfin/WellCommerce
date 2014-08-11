@@ -21,6 +21,13 @@ namespace WellCommerce\Bundle\CoreBundle\Repository;
 interface RepositoryInterface
 {
     /**
+     * Creates new entity
+     *
+     * @return \Doctrine\Entity
+     */
+    public function createNew();
+
+    /**
      * Creates a new QueryBuilder instance that is prepopulated for this entity name.
      *
      * @param string $alias
@@ -29,4 +36,12 @@ interface RepositoryInterface
      * @return \Doctrine\ORM\QueryBuilder
      */
     public function createQueryBuilder($alias, $indexBy = null);
+
+    /**
+     * Returns entity alias
+     *
+     * @return string
+     */
+    public function getAlias();
+
 } 

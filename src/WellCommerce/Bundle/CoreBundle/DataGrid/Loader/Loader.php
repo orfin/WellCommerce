@@ -54,7 +54,7 @@ class Loader implements LoaderInterface
     {
         $request       = $this->dataGrid->getCurrentRequest();
         $this->columns = $this->dataGrid->getColumns();
-        $queryBuilder  = $this->dataGrid->getQueryBuilder();
+        $queryBuilder  = $this->dataGrid->getDataGridQueryBuilder();
         $orderBy       = $this->columns->get($request->getOrderBy())->getSource();
 
         $queryBuilder->select($this->getSelectClause());

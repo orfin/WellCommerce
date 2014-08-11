@@ -71,13 +71,4 @@ class CompanyDataGrid extends AbstractDataGrid implements DataGridInterface
             ]
         ]));
     }
-
-    public function getQueryBuilder()
-    {
-        $qb = $this->repository->createQueryBuilder('company');
-        $qb->groupBy('company.id');
-
-        return $qb;
-    }
-
 }

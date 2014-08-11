@@ -10,8 +10,8 @@ parameters:
     mailer_host: 127.0.0.1
     mailer_user: null
     mailer_password: null
-    locale: en_US
+    locale: en
     secret: ThisTokenIsNotSoSecretChangeIt
-    debug_toolbar: false
+    debug_toolbar: true
     debug_redirects: false
     use_assetic_controller: true

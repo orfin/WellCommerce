@@ -58,13 +58,4 @@ class LocaleDataGrid extends AbstractDataGrid implements DataGridInterface
             ]
         ]));
     }
-
-    public function getQueryBuilder()
-    {
-        $qb = $this->repository->createQueryBuilder('locale');
-        $qb->groupBy('locale.id');
-
-        return $qb;
-    }
-
 }

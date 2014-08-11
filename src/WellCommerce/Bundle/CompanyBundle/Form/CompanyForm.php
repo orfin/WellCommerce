@@ -12,7 +12,7 @@
 namespace WellCommerce\Bundle\CompanyBundle\Form;
 
 use WellCommerce\Bundle\CompanyBundle\Entity\Company;
-use WellCommerce\Bundle\CompanyBundle\Entity\CompanyRepositoryInterface;
+use WellCommerce\Bundle\CompanyBundle\Repository\CompanyRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Form\AbstractForm;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\Form\FormInterface;

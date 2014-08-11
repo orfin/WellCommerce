@@ -75,20 +75,11 @@ interface DataGridInterface
     public function getColumns();
 
     /**
-     * Sets query builder object
-     *
-     * @param QueryBuilderInterface $queryBuilder
-     *
-     * @return mixed
-     */
-    public function setQueryBuilder(QueryBuilderInterface $queryBuilder);
-
-    /**
      * Returns query builder object
      *
      * @return \Doctrine\ORM\QueryBuilder
      */
-    public function getQueryBuilder();
+    public function getDataGridQueryBuilder();
 
     /**
      * Sets DataGrid options
