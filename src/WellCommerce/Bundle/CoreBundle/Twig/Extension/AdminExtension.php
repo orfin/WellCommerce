@@ -12,6 +12,9 @@
 namespace WellCommerce\Bundle\CoreBundle\Twig\Extension;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\Session\Storage\SessionStorageInterface;
 
 /**
  * Class AdminExtension
@@ -22,16 +25,19 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class AdminExtension extends \Twig_Extension
 {
 
-    protected $container;
+    /**
+     * @var \Symfony\Component\HttpFoundation\Session\Session|\Symfony\Component\HttpFoundation\Session\SessionInterface
+     */
+    protected $session;
 
     /**
      * Constructor
      *
-     * @param ContainerInterface $container
+     * @param SessionInterface $session
      */
-    public function __construct(ContainerInterface $container)
+    public function __construct(Session $session)
     {
-        $this->container = $container;
+        $this->session = $session;
     }
 
     /**
@@ -42,9 +48,9 @@ class AdminExtension extends \Twig_Extension
     public function getGlobals()
     {
         return [
-            'user'     => $this->container->get('session')->get('admin/user'),
-            'menu'     => $this->container->get('session')->get('admin/menu'),
-            'flashbag' => $this->container->get('session')->getFlashBag()
+            'user'     => $this->session->get('admin/user'),
+            'menu'     => $this->session->get('admin/menu'),
+            'flashbag' => $this->session->getFlashBag()
         ];
     }
 
