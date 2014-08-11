@@ -62,8 +62,7 @@
         "doctrine/doctrine-fixtures-bundle": "2.2.x-dev",
         "xajax/xajax": "1.0.0",
         "codeception/codeception": "2.0.4",
-        "knplabs/doctrine-behaviors": "1.0.x-dev",
-        "codeception/notifier": "dev-master"
+        "knplabs/doctrine-behaviors": "1.0.x-dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
