@@ -19,3 +19,4 @@ app/bootstrap.php.cache
 /var
 /tests/_output
 
+/app/config/parameters.yml
