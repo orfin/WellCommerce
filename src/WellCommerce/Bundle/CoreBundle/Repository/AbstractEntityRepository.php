@@ -12,6 +12,9 @@
 namespace WellCommerce\Bundle\CoreBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
+use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 
 /**
  * Class AbstractEntityRepository
@@ -21,6 +24,46 @@ use Doctrine\ORM\EntityRepository;
  */
 abstract class AbstractEntityRepository extends EntityRepository implements RepositoryInterface
 {
+    /**
+     * @var ContainerInterface
+     */
+    private $container;
+
+    /**
+     * Constructor
+     *
+     * @param ContainerInterface $container
+     */
+    public function setContainer(ContainerInterface $container)
+    {
+        $this->container = $container;
+    }
+
+    /**
+     * Shortcut to get any service from container
+     *
+     * @param $id
+     *
+     * @return object
+     * @throws \Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
+     */
+    public function get($id)
+    {
+        if (!$this->container->has($id)) {
+            throw new ServiceNotFoundException($id);
+        }
+
+        return $this->container->get($id);
+    }
+
+    /**
+     * Returns current locale from request
+     */
+    public function getCurrentLocale()
+    {
+        return $this->container->get('request')->getLocale();
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -62,9 +105,15 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
         return false;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getAlias()
     {
-        return 'o';
+        $parts      = explode('\\', $this->getEntityName());
+        $entityName = end($parts);
+
+        return Helper::snake($entityName);
     }
 
 }

@@ -24,6 +24,9 @@
 
         <service id="unit.repository" class="%unit.repository.class%" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument>WellCommerceUnitBundle:Unit</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
         </service>
 
         <service id="unit.datagrid.configurator" class="%unit.datagrid.configurator.class%">
