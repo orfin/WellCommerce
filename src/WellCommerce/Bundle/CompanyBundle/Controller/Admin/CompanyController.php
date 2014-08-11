@@ -14,6 +14,8 @@ namespace WellCommerce\Bundle\CompanyBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Exception\ValidatorException;
 use WellCommerce\Bundle\CompanyBundle\Entity\Company;
 use WellCommerce\Bundle\CompanyBundle\Entity\CompanyRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
@@ -40,24 +42,23 @@ class CompanyController extends AbstractAdminController
         ];
     }
 
-    public function addAction()
+    public function addAction(Request $request)
     {
         $company = new Company();
         $form    = $this->getCompanyForm($company);
 
-        if ($form->isSubmitted()) {
-            $form->handleRequest();
-            if ($form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
+        if ($form->handleRequest($request)->isValid()) {
+            try {
+                $em = $this->getEntityManager();
                 $em->persist($company);
                 $em->flush();
-
-                $this->addSuccessMessage('company.success');
+                $this->addSuccessMessage('company.added.success');
 
                 return $this->redirect($this->getDefaultUrl());
-            }
 
-            $this->addErrorMessage($form->getErrors());
+            } catch (ValidatorException $exception) {
+                $this->addErrorMessage($exception->getMessage());
+            }
         }
 
         return [
@@ -68,23 +69,22 @@ class CompanyController extends AbstractAdminController
     /**
      * @ParamConverter("company", class="WellCommerceCompanyBundle:Company")
      */
-    public function editAction(Company $company)
+    public function editAction(Request $request, Company $company)
     {
         $form = $this->getCompanyForm($company);
 
-        if ($form->isSubmitted()) {
-            $form->handleRequest();
-            if ($form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
+        if ($form->handleRequest($request)->isValid()) {
+            try {
+                $em = $this->getEntityManager();
                 $em->persist($company);
                 $em->flush();
-
-                $this->addSuccessMessage('company.success');
+                $this->addSuccessMessage('company.saved.success');
 
                 return $this->redirect($this->getDefaultUrl());
-            }
 
-            $this->addErrorMessage($form->getErrors());
+            } catch (ValidatorException $exception) {
+                $this->addErrorMessage($exception->getMessage());
+            }
         }
 
         return [
