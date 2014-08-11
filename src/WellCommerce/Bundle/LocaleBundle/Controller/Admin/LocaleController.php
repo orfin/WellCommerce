@@ -14,6 +14,8 @@ namespace WellCommerce\Bundle\LocaleBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Exception\ValidatorException;
 use WellCommerce\Bundle\LocaleBundle\Repository\LocaleRepositoryInterface;
 use WellCommerce\Bundle\LocaleBundle\Entity\Locale;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
@@ -40,24 +42,22 @@ class LocaleController extends AbstractAdminController
         ];
     }
 
-    public function addAction()
+    public function addAction(Request $request)
     {
         $locale = new Locale();
         $form    = $this->getLocaleForm($locale);
 
-        if ($form->isSubmitted()) {
-            $form->handleRequest();
-            if ($form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
+        if ($form->handleRequest($request)->isValid()) {
+            try {
+                $em = $this->getEntityManager();
                 $em->persist($locale);
                 $em->flush();
-
-                $this->addSuccessMessage('locale.success');
-
+                $this->addSuccessMessage('locale.added.success');
                 return $this->redirect($this->getDefaultUrl());
-            }
 
-            $this->addErrorMessage($form->getErrors());
+            } catch (ValidatorException $exception){
+                $this->addErrorMessage($exception->getMessage());
+            }
         }
 
         return [
@@ -68,23 +68,21 @@ class LocaleController extends AbstractAdminController
     /**
      * @ParamConverter("locale", class="WellCommerceLocaleBundle:Locale")
      */
-    public function editAction(Locale $locale)
+    public function editAction(Request $request, Locale $locale)
     {
         $form = $this->getLocaleForm($locale);
 
-        if ($form->isSubmitted()) {
-            $form->handleRequest();
-            if ($form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
+        if ($form->handleRequest($request)->isValid()) {
+            try {
+                $em = $this->getEntityManager();
                 $em->persist($locale);
                 $em->flush();
-
-                $this->addSuccessMessage('locale.success');
-
+                $this->addSuccessMessage('locale.saved.success');
                 return $this->redirect($this->getDefaultUrl());
-            }
 
-            $this->addErrorMessage($form->getErrors());
+            } catch (ValidatorException $exception){
+                $this->addErrorMessage($exception->getMessage());
+            }
         }
 
         return [
