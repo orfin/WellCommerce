@@ -13,17 +13,18 @@
 namespace WellCommerce\Bundle\LocaleBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
+use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 /**
  * Locale
  *
  * @ORM\Table()
- * @ORM\HasLifecycleCallbacks
  * @ORM\Entity(repositoryClass="WellCommerce\Bundle\LocaleBundle\Repository\LocaleRepository")
  */
 class Locale
 {
+    use ORMBehaviors\Timestampable\Timestampable;
+
     /**
      * @var integer
      *
@@ -39,23 +40,6 @@ class Locale
      * @ORM\Column(name="code", type="string", length=12)
      */
     private $code;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="created_at", type="datetime")
-     * @Gedmo\Timestampable(on="create")
-     */
-    private $createdAt;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="updated_at", type="datetime")
-     * @Gedmo\Timestampable(on="update")
-     */
-    private $updatedAt;
-
 
     /**
      * Get id.
@@ -92,58 +76,6 @@ class Locale
     public function getCode()
     {
         return $this->code;
-    }
-
-    /**
-     * Set createdAt.
-    
-     *
-     * @param \DateTime $createdAt
-     *
-     * @return Locale
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-    
-        return $this;
-    }
-
-    /**
-     * Get createdAt.
-    
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * Set updatedAt.
-    
-     *
-     * @param string $updatedAt
-     *
-     * @return Locale
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-    
-        return $this;
-    }
-
-    /**
-     * Get updatedAt.
-    
-     *
-     * @return string
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
     }
 }
 
