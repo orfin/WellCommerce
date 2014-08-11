@@ -52,7 +52,7 @@ class ClientGroupController extends AbstractAdminController
                 $em = $this->getEntityManager();
                 $em->persist($company);
                 $em->flush();
-                $this->addSuccessMessage('company.added.success');
+                $this->addSuccessMessage('client_group.added.success');
                 return $this->redirect($this->getDefaultUrl());
 
             } catch (ValidatorException $exception){
@@ -77,7 +77,7 @@ class ClientGroupController extends AbstractAdminController
                 $em = $this->getEntityManager();
                 $em->persist($company);
                 $em->flush();
-                $this->addSuccessMessage('company.saved.success');
+                $this->addSuccessMessage('client_group.saved.success');
                 return $this->redirect($this->getDefaultUrl());
 
             } catch (ValidatorException $exception){
