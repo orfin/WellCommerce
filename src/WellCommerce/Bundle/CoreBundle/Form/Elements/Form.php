@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
@@ -34,6 +35,7 @@ class Form extends Container
     public $_populatingWholeForm = false;
     protected $defaultData;
     protected $isSubmitted = false;
+    protected $request;
 
     /**
      * Constructor
@@ -188,10 +190,13 @@ class Form extends Container
     /**
      * @return \WellCommerce\Bundle\CoreBundle\Form\Elements\Form
      */
-    public function handleRequest()
+    public function handleRequest(Request $request)
     {
+        $this->request = $request;
+
+        // don't validate the form if it wasn't submitted
         if (!$this->isSubmitted()) {
-            return false;
+            return $this;
         }
 
         $values          = $this->getSubmittedData();
@@ -224,15 +229,31 @@ class Form extends Container
         return $this;
     }
 
+    /**
+     * Checks whether form is submitted.
+     * Submitted form adds additional parameter to request
+     *
+     * @return bool
+     */
     public function isSubmitted()
     {
-        $values = $this->getSubmittedData();
-
-        return isset($values[$this->attributes['name'] . '_submitted']);
+        return $this->request->request->has($this->attributes['name'] . '_submitted');
     }
 
+    /**
+     * Validates the form
+     *
+     * @param array $values
+     *
+     * @return bool
+     */
     public function isValid($values = [])
     {
+        // don't validate the form if it wasn't submitted
+        if (!$this->isSubmitted()) {
+            return false;
+        }
+
         $values = $this->getSubmittedData();
 
         $this->populate($values);
@@ -242,7 +263,7 @@ class Form extends Container
 
     public function getSubmittedData()
     {
-        return $_POST;
+        return $this->request->request->all();
     }
 
     public function isAction($actionName)

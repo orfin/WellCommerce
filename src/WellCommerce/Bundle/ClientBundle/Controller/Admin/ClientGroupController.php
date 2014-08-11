@@ -14,6 +14,8 @@ namespace WellCommerce\Bundle\ClientBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Exception\ValidatorException;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientGroup;
 use WellCommerce\Bundle\ClientBundle\Repository\ClientGroupRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
@@ -40,24 +42,22 @@ class ClientGroupController extends AbstractAdminController
         ];
     }
 
-    public function addAction()
+    public function addAction(Request $request)
     {
         $company = new ClientGroup();
         $form    = $this->getClientGroupForm($company);
-        $form->handleRequest();
 
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
+        if ($form->handleRequest($request)->isValid()) {
+            try {
                 $em = $this->getEntityManager();
                 $em->persist($company);
                 $em->flush();
-
-                $this->addSuccessMessage('company.success');
-
+                $this->addSuccessMessage('company.added.success');
                 return $this->redirect($this->getDefaultUrl());
-            }
 
-            $this->addErrorMessage($form->getErrors());
+            } catch (ValidatorException $exception){
+                $this->addErrorMessage($exception->getMessage());
+            }
         }
 
         return [
@@ -68,23 +68,21 @@ class ClientGroupController extends AbstractAdminController
     /**
      * @ParamConverter("company", class="WellCommerceClientBundle:ClientGroup")
      */
-    public function editAction(ClientGroup $company)
+    public function editAction(Request $request, ClientGroup $company)
     {
         $form = $this->getClientGroupForm($company);
 
-        if ($form->isSubmitted()) {
-            $form->handleRequest();
-            if ($form->isValid()) {
+        if ($form->handleRequest($request)->isValid()) {
+            try {
                 $em = $this->getEntityManager();
                 $em->persist($company);
                 $em->flush();
-
-                $this->addSuccessMessage('company.success');
-
+                $this->addSuccessMessage('company.saved.success');
                 return $this->redirect($this->getDefaultUrl());
-            }
 
-            $this->addErrorMessage($form->getErrors());
+            } catch (ValidatorException $exception){
+                $this->addErrorMessage($exception->getMessage());
+            }
         }
 
         return [
@@ -95,7 +93,7 @@ class ClientGroupController extends AbstractAdminController
     /**
      * Returns company form
      *
-     * @param ClientGroup $company
+     * @param ClientGroup $clientGroup
      *
      * @return \WellCommerce\Bundle\CoreBundle\Form\Elements\Form
      */
