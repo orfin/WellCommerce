@@ -16,6 +16,12 @@ use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use WellCommerce\Bundle\CompanyBundle\Entity\Company;
 
+/**
+ * Class LoadCompanyData
+ *
+ * @package WellCommerce\Bundle\CompanyBundle\DataFixtures\ORM
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
+ */
 class LoadCompanyData implements FixtureInterface
 {
     /**
