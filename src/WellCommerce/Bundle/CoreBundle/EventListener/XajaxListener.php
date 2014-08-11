@@ -19,6 +19,7 @@ use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
+use WellCommerce\Bundle\CoreBundle\Helper\XajaxManager;
 
 /**
  * Class XajaxListener
@@ -29,34 +30,27 @@ use Symfony\Component\HttpFoundation\Response;
 class XajaxListener implements EventSubscriberInterface
 {
     /**
-     * @var \Symfony\Component\DependencyInjection\ContainerInterface
+     * @var \WellCommerce\Bundle\CoreBundle\Helper\XajaxManager
      */
-    private $container;
+    private $manager;
 
     /**
      * Constructor
      *
-     * @param ContainerInterface $container
+     * @param XajaxManager $manager
      */
-    public function __construct(ContainerInterface $container)
+    public function __construct(XajaxManager $manager)
     {
-        $this->container = $container;
+        $this->manager = $manager;
+    }
+
+    public function onKernelView()
+    {
+        $this->manager->processRequest();
     }
 
     /**
-     * Called through KernelEvents::VIEW event
-     *
-     * @param GetResponseForControllerResultEvent $event
-     */
-    public function onKernelView(GetResponseForControllerResultEvent $event)
-    {
-        $this->container->get('xajax')->processRequest();
-    }
-
-    /**
-     * Returns subscribed events
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public static function getSubscribedEvents()
     {

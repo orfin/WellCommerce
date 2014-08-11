@@ -132,4 +132,14 @@ class XajaxManager
 
         return $objResponse;
     }
+
+    public function processRequest()
+    {
+        $this->xajax->processRequest();
+    }
+
+    public function getJavascript()
+    {
+        return $this->xajax->getJavascript();
+    }
 }
