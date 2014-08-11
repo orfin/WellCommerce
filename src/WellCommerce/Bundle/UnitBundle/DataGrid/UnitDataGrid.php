@@ -31,7 +31,7 @@ class UnitDataGrid extends AbstractDataGrid implements DataGridInterface
     {
         $this->columns->add(new Column([
             'id'         => 'id',
-            'source'     => 'u.id',
+            'source'     => 'unit.id',
             'caption'    => $this->trans('unit.id'),
             'sorting'    => [
                 'default_order' => ColumnInterface::SORT_DIR_DESC
@@ -47,7 +47,7 @@ class UnitDataGrid extends AbstractDataGrid implements DataGridInterface
 
         $this->columns->add(new Column([
             'id'         => 'name',
-            'source'     => 'ut.name',
+            'source'     => 'unit_translation.name',
             'caption'    => $this->trans('unit.name'),
             'appearance' => [
                 'width' => 70,
@@ -58,19 +58,4 @@ class UnitDataGrid extends AbstractDataGrid implements DataGridInterface
             ]
         ]));
     }
-
-    public function getQueryBuilder()
-    {
-        $qb = $this->repository->createQueryBuilder('u');
-        $qb->leftJoin(
-            'WellCommerce\Bundle\UnitBundle\Entity\UnitTranslation',
-            'ut',
-            'WITH',
-            'u.id = ut.translatable AND ut.locale = :locale'
-        );
-        $qb->setParameter('locale', $this->getCurrentLocale());
-
-        return $qb;
-    }
-
 }

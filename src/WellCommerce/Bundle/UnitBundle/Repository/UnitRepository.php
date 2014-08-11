@@ -22,5 +22,18 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
  */
 class UnitRepository extends AbstractEntityRepository implements DataGridRepositoryInterface, UnitRepositoryInterface
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function getDataGridQueryBuilder()
+    {
+        return parent::getQueryBuilder()->groupBy('unit.id')
+            ->leftJoin(
+                'WellCommerce\Bundle\UnitBundle\Entity\UnitTranslation',
+                'unit_translation',
+                'WITH',
+                'unit.id = unit_translation.translatable AND unit_translation.locale = :locale')
+            ->setParameter('locale', $this->getCurrentLocale());
 
+    }
 }

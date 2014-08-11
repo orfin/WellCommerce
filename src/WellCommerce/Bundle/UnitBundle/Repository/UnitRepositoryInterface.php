@@ -12,13 +12,16 @@
 
 namespace WellCommerce\Bundle\UnitBundle\Repository;
 
+use WellCommerce\Bundle\CoreBundle\DataGrid\Repository\DataGridRepositoryInterface;
+use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
+
 /**
  * Interface LocaleRepositoryInterface
  *
  * @package WellCommerce\Bundle\UnitBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface UnitRepositoryInterface
+interface UnitRepositoryInterface extends RepositoryInterface, DataGridRepositoryInterface
 {
 
 } 
