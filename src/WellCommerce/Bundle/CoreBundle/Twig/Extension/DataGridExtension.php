@@ -12,6 +12,7 @@
 namespace WellCommerce\Bundle\CoreBundle\Twig\Extension;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Templating\EngineInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
 
 /**
@@ -24,22 +25,22 @@ use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
  */
 class DataGridExtension extends \Twig_Extension
 {
-    protected $container;
+    protected $engine;
 
     /**
      * Constructor
      *
-     * @param ContainerInterface $container
+     * @param EngineInterface $engine
      */
-    public function __construct(ContainerInterface $container)
+    public function __construct(EngineInterface $engine)
     {
-        $this->container = $container;
+        $this->engine = $engine;
     }
 
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('datagrid_renderer', [$this, 'render'], ['is_safe' => ['html','javascript']])
+            new \Twig_SimpleFunction('datagrid_renderer', [$this, 'render'], ['is_safe' => ['html', 'javascript']])
         ];
     }
 
@@ -52,7 +53,7 @@ class DataGridExtension extends \Twig_Extension
      */
     public function render(DataGridInterface $datagrid)
     {
-        return $this->container->get('templating')->render('WellCommerceCoreBundle:DataGrid:datagrid.html.twig', [
+        return $this->engine->render('WellCommerceCoreBundle:DataGrid:datagrid.html.twig', [
             'datagrid' => $datagrid
         ]);
     }
