@@ -24,31 +24,13 @@ use xajaxResponse;
  */
 class XajaxManager
 {
-
-    /**
-     * Registered Xajax callbacks
-     *
-     * @var array
-     */
-    protected $callbacks = Array();
-
-    /**
-     * Index required to make unique auto-callbacks
-     *
-     * @var int
-     */
+    protected $callbacks = [];
     protected $autoId = 0;
+    protected $xajax;
 
-    /**
-     * Container instance
-     *
-     * @var ContainerInterface
-     */
-    protected $container;
-
-    public function __construct(ContainerInterface $container)
+    public function __construct(\xajax $xajax)
     {
-        $this->container = $container;
+        $this->xajax = $xajax;
     }
 
     /**
@@ -84,7 +66,7 @@ class XajaxManager
     public function registerFunctions(array $functions)
     {
         foreach ($functions as $name => $callback) {
-            $this->container->get('xajax')->registerFunction([
+            $this->xajax->registerFunction([
                 $name,
                 $callback[0],
                 $callback[1]
@@ -105,7 +87,7 @@ class XajaxManager
         $callback     = $function;
         $callbackName = '_auto_callback_' . $this->autoId++;
         $this->registerCallback($callbackName, $callback);
-        $this->container->get('xajax')->registerFunction(Array(
+        $this->xajax->registerFunction(Array(
             $name,
             $this,
             $callbackName
@@ -120,7 +102,7 @@ class XajaxManager
         $callback     = $function;
         $callbackName = '_auto_callback_' . $this->autoId++;
         $this->registerCallback($callbackName, $callback);
-        $this->container->get('xajax')->registerFunction(Array(
+        $this->xajax->registerFunction(Array(
             $name,
             $this,
             $callbackName
