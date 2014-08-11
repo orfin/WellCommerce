@@ -27,7 +27,6 @@ before_script:
     - sleep 5
     - php app/console doctrine:database:create --env=test > /dev/null
     - php app/console doctrine:schema:create > /dev/null
-    - php app/console doctrine:fixtures:load > /dev/null
     - php app/console doctrine:fixtures:load --purge-with-truncate --no-interaction > /dev/null
 
 script:
