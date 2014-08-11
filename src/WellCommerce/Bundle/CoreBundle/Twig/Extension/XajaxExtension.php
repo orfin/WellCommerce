@@ -12,6 +12,7 @@
 namespace WellCommerce\Bundle\CoreBundle\Twig\Extension;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use WellCommerce\Bundle\CoreBundle\Helper\XajaxManager;
 
 /**
  * Class XajaxExtension
@@ -23,20 +24,19 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class XajaxExtension extends \Twig_Extension
 {
-
     /**
-     * @var \Symfony\Component\DependencyInjection\ContainerInterface
+     * @var \WellCommerce\Bundle\CoreBundle\Helper\XajaxManager
      */
-    protected $container;
+    protected $manager;
 
     /**
      * Constructor
      *
-     * @param ContainerInterface $container
+     * @param XajaxManager $manager
      */
-    public function __construct(ContainerInterface $container)
+    public function __construct(XajaxManager $manager)
     {
-        $this->container = $container;
+        $this->manager = $manager;
     }
 
     /**
@@ -58,7 +58,7 @@ class XajaxExtension extends \Twig_Extension
      */
     public function getXajaxJavascript()
     {
-        return $this->container->get('xajax')->getJavascript();
+        return $this->manager->getJavascript();
     }
 
     /**
