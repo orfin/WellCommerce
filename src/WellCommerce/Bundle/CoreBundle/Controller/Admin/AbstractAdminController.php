@@ -12,7 +12,9 @@
 namespace WellCommerce\Bundle\CoreBundle\Controller\Admin;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
+use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Request\Request;
 
 /**
@@ -23,6 +25,31 @@ use WellCommerce\Bundle\CoreBundle\DataGrid\Request\Request;
  */
 abstract class AbstractAdminController extends AbstractController implements AdminControllerInterface
 {
+    /**
+     * @var \WellCommerce\Bundle\CoreBundle\Helper\FlashHelper
+     */
+    protected $flashHelper;
+
+    /**
+     * @var \WellCommerce\Bundle\CoreBundle\Helper\RedirectHelper
+     */
+    protected $redirectHelper;
+    protected $dataGrid;
+
+    public function setContainer(ContainerInterface $container = null)
+    {
+        parent::setContainer($container);
+        $this->flashHelper    = $container->get('flash_helper');
+        $this->redirectHelper = $container->get('redirect_helper');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDataGrid(DataGridInterface $dataGrid)
+    {
+        $this->dataGrid = $dataGrid;
+    }
 
     /**
      * {@inheritdoc}
