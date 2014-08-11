@@ -11,6 +11,5 @@ modules:
         - AcceptanceHelper
     config:
         WebDriver:
-            url: 'http://127.0.0.1/app_test.php'
-            port: 80
+            url: 'http://127.0.0.1:8080/app_dev.php'
             browser: firefox

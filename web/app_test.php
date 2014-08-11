@@ -29,10 +29,7 @@ require_once __DIR__ . '/../app/AppKernel.php';
 
 $kernel  = new AppKernel('test', true);
 $request = Request::createFromGlobals();
-
 Request::enableHttpMethodParameterOverride();
-
 $response = $kernel->handle($request);
 $response->send();
-
 $kernel->terminate($request, $response);
