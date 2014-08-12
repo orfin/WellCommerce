@@ -1,8 +1,0 @@
-{% extends "layout.html.twig" %}
-{% block content %}
-    <h2>{% trans %}Users{% endtrans %}</h2>
-    <ul class="possibilities">
-        <li><a href="{{ path('admin.user.add') }}" class="button"><span>{% trans %}Add{% endtrans %}</span></a></li>
-    </ul>
-    {{ datagrid_renderer(datagrid) }}
-{% endblock %}
