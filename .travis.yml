@@ -21,10 +21,10 @@ before_script:
     - cp app/config/parameters.yml.dist app/config/parameters.yml
     - composer self-update
     - composer install --prefer-source --no-interaction
-    - php app/console doctrine:database:create --env=dev > /dev/null
-    - php app/console doctrine:schema:create --env=dev > /dev/null
-    - php app/console doctrine:fixtures:load --purge-with-truncate --no-interaction > /dev/null
-    - php app/console cache:warmup --env=dev > /dev/null
+    - php app/console doctrine:database:create --env=dev -vvv
+    - php app/console doctrine:schema:create --env=dev -vvv
+    - php app/console doctrine:fixtures:load --purge-with-truncate --no-interaction -vvv
+    - php app/console cache:warmup --env=dev -vvv
 
     - sh -e /etc/init.d/xvfb start
     - export DISPLAY=:99.0
