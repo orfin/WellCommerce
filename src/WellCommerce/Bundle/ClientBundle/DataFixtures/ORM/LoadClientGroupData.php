@@ -32,13 +32,13 @@ class LoadClientGroupData extends AbstractDataFixture implements FixtureInterfac
      */
     public function load(ObjectManager $manager)
     {
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 1; $i <= 10; $i++) {
             $clientGroup = new ClientGroup();
             $clientGroup->setDiscount(10);
-            $clientGroup->translate('pl')->setName('Gość ' . $i);
-            $clientGroup->translate('en')->setName('Guest ' . $i);
-            $clientGroup->translate('de')->setName('Gast ' . $i);
-            $clientGroup->translate('fr')->setName('Convié ' . $i);
+            $clientGroup->translate('pl')->setName('Grupa ' . $i);
+            $clientGroup->translate('en')->setName('Group ' . $i);
+            $clientGroup->translate('de')->setName('Gruppe ' . $i);
+            $clientGroup->translate('fr')->setName('Groupe ' . $i);
             $clientGroup->mergeNewTranslations();
             $manager->persist($clientGroup);
         }
