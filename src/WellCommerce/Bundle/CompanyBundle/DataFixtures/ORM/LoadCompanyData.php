@@ -31,23 +31,19 @@ class LoadCompanyData extends AbstractDataFixture implements FixtureInterface, O
      */
     public function load(ObjectManager $manager)
     {
-        for ($i=0; $i < 10; $i++) {
-            echo $this->fakerGenerator->company.PHP_EOL;
+        for ($i = 0; $i < 10; $i++) {
+            $company = new Company();
+            $company->setName($this->fakerGenerator->company.' '.$this->fakerGenerator->companySuffix);
+            $company->setShortName($this->fakerGenerator->company);
+            $company->setCountry($this->fakerGenerator->countryCode);
+            $company->setStreet($this->fakerGenerator->streetName);
+            $company->setStreetNo($this->fakerGenerator->streetSuffix);
+            $company->setFlatNo($this->fakerGenerator->randomNumber());
+            $company->setPostCode($this->fakerGenerator->postcode);
+            $company->setCity($this->fakerGenerator->city);
+            $manager->persist($company);
         }
-        die();
 
-        $this->fakerGenerator->company;
-
-        $company = new Company();
-        $company->setName('Your Company Inc.');
-        $company->setShortName('Company');
-        $company->setCountry('US');
-        $company->setStreet('E-Commerce Blvd.');
-        $company->setStreetNo('111');
-        $company->setFlatNo('22');
-        $company->setPostCode('00000');
-        $company->setCity('Los Angeles');
-        $manager->persist($company);
         $manager->flush();
     }
 
