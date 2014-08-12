@@ -4,12 +4,12 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="datagrid_renderer.class">WellCommerce\Bundle\CoreBundle\DataGrid\Renderer</parameter>
         <parameter key="datagrid_builder.class">WellCommerce\Bundle\CoreBundle\DataGrid\DataGridBuilder</parameter>
         <parameter key="datagrid_loader.class">WellCommerce\Bundle\CoreBundle\DataGrid\Loader\Loader</parameter>
         <parameter key="datagrid_options.class">WellCommerce\Bundle\CoreBundle\DataGrid\Options\Options</parameter>
         <parameter key="datagrid_columns.class">WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnCollection</parameter>
         <parameter key="datagrid_configurator.class">WellCommerce\Bundle\CoreBundle\DataGrid\Configurator</parameter>
+        <parameter key="datagrid_manager.class">WellCommerce\Bundle\CoreBundle\DataGrid\Manager\DataGridManager</parameter>
     </parameters>
 
     <services>
@@ -27,10 +27,13 @@
             </call>
         </service>
 
-        <service id="datagrid_renderer" class="%datagrid_renderer.class%">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
+        <service id="datagrid_manager" class="%datagrid_manager.class%">
+            <argument type="service" id="datagrid_columns" />
+            <argument type="service" id="datagrid_options" />
+            <argument type="service" id="datagrid_loader" />
+            <argument type="service" id="event_dispatcher" />
+            <argument type="service" id="router" />
+            <argument type="service" id="xajax_manager" />
         </service>
     </services>
 </container>

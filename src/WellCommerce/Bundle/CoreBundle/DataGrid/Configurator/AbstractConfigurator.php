@@ -24,7 +24,7 @@ use WellCommerce\Bundle\CoreBundle\Helper\Helper;
  * @package WellCommerce\Bundle\CoreBundle\DataGrid\Configurator
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AbstractConfigurator extends AbstractContainer
+class AbstractConfigurator
 {
     /**
      * @var string

@@ -20,41 +20,5 @@ namespace WellCommerce\Bundle\CoreBundle\Controller\Admin;
  */
 interface AdminControllerInterface
 {
-    const MESSAGE_TYPE_SUCCESS = 'success';
-    const MESSAGE_TYPE_NOTICE  = 'notice';
-    const MESSAGE_TYPE_ERROR   = 'error';
-    
-    /**
-     * Evaluates default route for current controller. All admin controllers must have an indexAction
-     *
-     * @return string
-     */
-    public function getDefaultUrl();
 
-    /**
-     * Shorthand for adding a flash success message
-     *
-     * @param $message
-     *
-     * @return mixed
-     */
-    public function addSuccessMessage($message);
-
-    /**
-     * Shorthand for adding a flash error message
-     *
-     * @param $message
-     *
-     * @return mixed
-     */
-    public function addErrorMessage($message);
-
-    /**
-     * Translates a string using the translation service
-     *
-     * @param string $id Message to translate
-     *
-     * @return string The message
-     */
-    public function trans($id, $params = [], $domain = 'admin');
 }

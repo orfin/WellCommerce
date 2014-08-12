@@ -593,13 +593,15 @@
     <parameter key="jms_di_extra.disable_grep">true</parameter>
     <parameter key="jms_di_extra.doctrine_integration">true</parameter>
     <parameter key="jms_di_extra.cache_warmer.controller_file_blacklist" type="collection"/>
-    <parameter key="jms_di_extra.doctrine_integration.entity_manager.file">D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53e8cd3589c4d.php</parameter>
-    <parameter key="jms_di_extra.doctrine_integration.entity_manager.class">EntityManager53e8cd3589c4d_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager</parameter>
+    <parameter key="jms_di_extra.doctrine_integration.entity_manager.file">D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53e9c3df6dae6.php</parameter>
+    <parameter key="jms_di_extra.doctrine_integration.entity_manager.class">EntityManager53e9c3df6dae6_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager</parameter>
     <parameter key="jms_aop.cache_dir">D:/Git/WellCommerce/app/cache/dev/jms_aop</parameter>
     <parameter key="jms_aop.interceptor_loader.class">JMS\AopBundle\Aop\InterceptorLoader</parameter>
     <parameter key="xajax_manager.class">WellCommerce\Bundle\CoreBundle\Helper\XajaxManager</parameter>
     <parameter key="xajax_listener.class">WellCommerce\Bundle\CoreBundle\EventListener\XajaxListener</parameter>
     <parameter key="xajax.class">xajax</parameter>
+    <parameter key="flash_helper.class">WellCommerce\Bundle\CoreBundle\Helper\Flash\FlashHelper</parameter>
+    <parameter key="redirect_helper.class">WellCommerce\Bundle\CoreBundle\Helper\Redirect\RedirectHelper</parameter>
     <parameter key="form.builder.class">WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilder</parameter>
     <parameter key="form.resolver.element.class">WellCommerce\Bundle\CoreBundle\Form\Resolver\ElementResolver</parameter>
     <parameter key="form.resolver.condition.class">WellCommerce\Bundle\CoreBundle\Form\Resolver\ConditionResolver</parameter>
@@ -676,12 +678,12 @@
     <parameter key="form.rule.required.class">WellCommerce\Bundle\CoreBundle\Form\Rules\Required</parameter>
     <parameter key="form.rule.unique.class">WellCommerce\Bundle\CoreBundle\Form\Rules\Unique</parameter>
     <parameter key="form.rule.vat.class">WellCommerce\Bundle\CoreBundle\Form\Rules\Vat</parameter>
-    <parameter key="datagrid_renderer.class">WellCommerce\Bundle\CoreBundle\DataGrid\Renderer</parameter>
     <parameter key="datagrid_builder.class">WellCommerce\Bundle\CoreBundle\DataGrid\DataGridBuilder</parameter>
     <parameter key="datagrid_loader.class">WellCommerce\Bundle\CoreBundle\DataGrid\Loader\Loader</parameter>
     <parameter key="datagrid_options.class">WellCommerce\Bundle\CoreBundle\DataGrid\Options\Options</parameter>
     <parameter key="datagrid_columns.class">WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnCollection</parameter>
     <parameter key="datagrid_configurator.class">WellCommerce\Bundle\CoreBundle\DataGrid\Configurator</parameter>
+    <parameter key="datagrid_manager.class">WellCommerce\Bundle\CoreBundle\DataGrid\Manager\DataGridManager</parameter>
     <parameter key="twig.extension.datagrid.class">WellCommerce\Bundle\CoreBundle\Twig\Extension\DataGridExtension</parameter>
     <parameter key="twig.extension.string_loader.class">Twig_Extension_StringLoader</parameter>
     <parameter key="twig.extension.xajax.class">WellCommerce\Bundle\CoreBundle\Twig\Extension\XajaxExtension</parameter>
@@ -698,7 +700,6 @@
     <parameter key="company.controller.admin.class">WellCommerce\Bundle\CompanyBundle\Controller\Admin\CompanyController</parameter>
     <parameter key="company.repository.class">WellCommerce\Bundle\CompanyBundle\Entity\CompanyRepository</parameter>
     <parameter key="company.datagrid.class">WellCommerce\Bundle\CompanyBundle\DataGrid\CompanyDataGrid</parameter>
-    <parameter key="company.datagrid.configurator.class">WellCommerce\Bundle\CompanyBundle\DataGrid\CompanyDataGridConfigurator</parameter>
     <parameter key="company.form.class">WellCommerce\Bundle\CompanyBundle\Form\CompanyForm</parameter>
     <parameter key="company.listener.class">WellCommerce\Bundle\CompanyBundle\EventListener\CompanyListener</parameter>
     <parameter key="client_group.controller.admin.class">WellCommerce\Bundle\ClientBundle\Controller\Admin\ClientGroupController</parameter>
@@ -1707,7 +1708,7 @@
       <argument type="collection">
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>53e8cd356081b</argument>
+            <argument>53e9c3df38b31</argument>
           </service>
         </argument>
       </argument>
@@ -1823,7 +1824,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.context"/>
-            <argument>53e8cd356081b</argument>
+            <argument>53e9c3df38b31</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
           </service>
         </argument>
@@ -1997,9 +1998,6 @@
       </call>
       <call method="addExtension">
         <argument type="service" id="twig.extension.string_loader"/>
-      </call>
-      <call method="addExtension">
-        <argument type="service" id="twig.extension.datagrid"/>
       </call>
       <call method="addExtension">
         <argument type="service" id="twig.extension.xajax"/>
@@ -2361,8 +2359,8 @@
       <argument type="collection"/>
       <argument type="collection"/>
     </service>
-    <service id="doctrine.orm.default_entity_manager" class="EntityManager53e8cd3589c4d_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager">
-      <file>D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53e8cd3589c4d.php</file>
+    <service id="doctrine.orm.default_entity_manager" class="EntityManager53e9c3df6dae6_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager">
+      <file>D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53e9c3df6dae6.php</file>
       <argument type="service">
         <service class="Doctrine\ORM\EntityManager" factory-method="create" factory-class="%doctrine.orm.entity_manager.class%" public="false">
           <argument type="service" id="doctrine.dbal.default_connection"/>
@@ -2574,11 +2572,18 @@
     </service>
     <service id="xajax" class="xajax"/>
     <service id="xajax_manager" class="WellCommerce\Bundle\CoreBundle\Helper\XajaxManager">
-      <argument type="service" id="service_container"/>
+      <argument type="service" id="xajax"/>
     </service>
     <service id="xajax_listener" class="WellCommerce\Bundle\CoreBundle\EventListener\XajaxListener">
       <tag name="kernel.event_subscriber"/>
-      <argument type="service" id="service_container"/>
+      <argument type="service" id="xajax_manager"/>
+    </service>
+    <service id="flash_helper" class="WellCommerce\Bundle\CoreBundle\Helper\Flash\FlashHelper">
+      <argument type="service" id="session"/>
+      <argument type="service" id="translator"/>
+    </service>
+    <service id="redirect_helper" class="WellCommerce\Bundle\CoreBundle\Helper\Redirect\RedirectHelper">
+      <argument type="service" id="router"/>
     </service>
     <service id="form.builder" class="WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilder">
       <call method="setContainer">
@@ -2705,25 +2710,24 @@
         <argument type="service" id="service_container"/>
       </call>
     </service>
-    <service id="datagrid_renderer" class="WellCommerce\Bundle\CoreBundle\DataGrid\Renderer">
-      <call method="setContainer">
-        <argument type="service" id="service_container"/>
-      </call>
+    <service id="datagrid_manager" class="WellCommerce\Bundle\CoreBundle\DataGrid\Manager\DataGridManager">
+      <argument type="service" id="datagrid_columns"/>
+      <argument type="service" id="datagrid_options"/>
+      <argument type="service" id="datagrid_loader"/>
+      <argument type="service" id="debug.event_dispatcher"/>
+      <argument type="service" id="router"/>
+      <argument type="service" id="xajax_manager"/>
     </service>
     <service id="twig.extension.string_loader" class="Twig_Extension_StringLoader">
       <tag name="twig.extension"/>
     </service>
-    <service id="twig.extension.datagrid" class="WellCommerce\Bundle\CoreBundle\Twig\Extension\DataGridExtension">
-      <tag name="twig.extension"/>
-      <argument type="service" id="service_container"/>
-    </service>
     <service id="twig.extension.xajax" class="WellCommerce\Bundle\CoreBundle\Twig\Extension\XajaxExtension">
       <tag name="twig.extension"/>
-      <argument type="service" id="service_container"/>
+      <argument type="service" id="xajax_manager"/>
     </service>
     <service id="twig.extension.admin" class="WellCommerce\Bundle\CoreBundle\Twig\Extension\AdminExtension">
       <tag name="twig.extension"/>
-      <argument type="service" id="service_container"/>
+      <argument type="service" id="session"/>
     </service>
     <service id="country.repository" class="WellCommerce\Bundle\CountryBundle\Repository\CountryRepository">
       <call method="setContainer">
@@ -2756,6 +2760,9 @@
     </service>
     <service id="unit.repository" class="WellCommerce\Bundle\UnitBundle\Repository\UnitRepository" factory-method="getRepository" factory-service="doctrine.orm.entity_manager">
       <argument>WellCommerceUnitBundle:Unit</argument>
+      <call method="setContainer">
+        <argument type="service" id="service_container"/>
+      </call>
     </service>
     <service id="unit.datagrid.configurator" class="WellCommerce\Bundle\UnitBundle\DataGrid\UnitDataGridConfigurator">
       <argument key="identifier">unit</argument>
@@ -2786,29 +2793,17 @@
       <argument type="service" id="router"/>
     </service>
     <service id="company.controller.admin" class="WellCommerce\Bundle\CompanyBundle\Controller\Admin\CompanyController">
-      <call method="setContainer">
-        <argument type="service" id="service_container"/>
-      </call>
-      <call method="setRepository">
-        <argument type="service" id="company.repository"/>
-      </call>
+      <argument type="service" id="service_container"/>
+      <argument type="service" id="company.repository"/>
+      <argument type="service" id="company.datagrid"/>
+      <argument type="service" id="company.form"/>
     </service>
     <service id="company.repository" class="WellCommerce\Bundle\CompanyBundle\Entity\CompanyRepository" factory-method="getRepository" factory-service="doctrine.orm.entity_manager">
       <argument>WellCommerceCompanyBundle:Company</argument>
     </service>
-    <service id="company.datagrid.configurator" class="WellCommerce\Bundle\CompanyBundle\DataGrid\CompanyDataGridConfigurator">
-      <argument key="identifier">company</argument>
-      <argument key="1" type="service" id="datagrid_options"/>
-      <argument key="2" type="service" id="datagrid_columns"/>
-      <call method="setContainer">
-        <argument type="service" id="service_container"/>
-      </call>
-    </service>
     <service id="company.datagrid" class="WellCommerce\Bundle\CompanyBundle\DataGrid\CompanyDataGrid">
-      <argument type="service" id="service_container"/>
+      <argument type="service" id="datagrid_manager"/>
       <argument type="service" id="company.repository"/>
-      <argument type="service" id="datagrid_loader"/>
-      <configurator service="company.datagrid.configurator" method="configure"/>
     </service>
     <service id="company.form" class="WellCommerce\Bundle\CompanyBundle\Form\CompanyForm">
       <call method="setContainer">
@@ -2834,6 +2829,9 @@
     </service>
     <service id="client_group.repository" class="WellCommerce\Bundle\ClientBundle\Repository\ClientGroupRepository" factory-method="getRepository" factory-service="doctrine.orm.entity_manager">
       <argument>WellCommerceClientBundle:ClientGroup</argument>
+      <call method="setContainer">
+        <argument type="service" id="service_container"/>
+      </call>
     </service>
     <service id="client_group.datagrid.configurator" class="WellCommerce\Bundle\ClientBundle\DataGrid\ClientGroupDataGridConfigurator">
       <argument key="identifier">client_group</argument>

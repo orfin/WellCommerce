@@ -30,65 +30,10 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
  */
 class UnitController extends AbstractAdminController
 {
-    /**
-     * @var UnitRepositoryInterface
-     */
-    private $repository;
-
     public function indexAction()
     {
         return [
             'datagrid' => $this->getDataGrid($this->get('unit.datagrid'))
-        ];
-    }
-
-    public function addAction(Request $request)
-    {
-        $unit = new Unit();
-        $form    = $this->getUnitForm($unit);
-
-        if ($form->handleRequest($request)->isValid()) {
-            try {
-                $em = $this->getEntityManager();
-                $em->persist($unit);
-                $em->flush();
-                $this->addSuccessMessage('unit.added.success');
-
-                return $this->redirect($this->getDefaultUrl());
-
-            } catch (ValidatorException $exception) {
-                $this->addErrorMessage($exception->getMessage());
-            }
-        }
-
-        return [
-            'form' => $form
-        ];
-    }
-
-    /**
-     * @ParamConverter("unit", class="WellCommerceUnitBundle:Unit")
-     */
-    public function editAction(Request $request, Unit $unit)
-    {
-        $form = $this->getUnitForm($unit);
-
-        if ($form->handleRequest($request)->isValid()) {
-            try {
-                $em = $this->getEntityManager();
-                $em->persist($unit);
-                $em->flush();
-                $this->addSuccessMessage('unit.saved.success');
-
-                return $this->redirect($this->getDefaultUrl());
-
-            } catch (ValidatorException $exception) {
-                $this->addErrorMessage($exception->getMessage());
-            }
-        }
-
-        return [
-            'form' => $form
         ];
     }
 

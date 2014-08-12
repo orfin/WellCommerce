@@ -6,10 +6,12 @@
 
     <parameters>
         <parameter key="form.builder.class">WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilder</parameter>
+        <!-- form resolvers -->
         <parameter key="form.resolver.element.class">WellCommerce\Bundle\CoreBundle\Form\Resolver\ElementResolver</parameter>
         <parameter key="form.resolver.condition.class">WellCommerce\Bundle\CoreBundle\Form\Resolver\ConditionResolver</parameter>
         <parameter key="form.resolver.rule.class">WellCommerce\Bundle\CoreBundle\Form\Resolver\RuleResolver</parameter>
         <parameter key="form.resolver.filter.class">WellCommerce\Bundle\CoreBundle\Form\Resolver\FilterResolver</parameter>
+        <!-- form elements -->
         <parameter key="form.element.attribute_editor.class">WellCommerce\Bundle\CoreBundle\Form\Elements\AttributeEditor</parameter>
         <parameter key="form.element.border.class">WellCommerce\Bundle\CoreBundle\Form\Elements\Border</parameter>
         <parameter key="form.element.checkbox.class">WellCommerce\Bundle\CoreBundle\Form\Elements\Checkbox</parameter>
@@ -68,11 +70,13 @@
         <parameter key="form.element.text_field.class">WellCommerce\Bundle\CoreBundle\Form\Elements\TextField</parameter>
         <parameter key="form.element.tip.class">WellCommerce\Bundle\CoreBundle\Form\Elements\Tip</parameter>
         <parameter key="form.element.tree.class">WellCommerce\Bundle\CoreBundle\Form\Elements\Tree</parameter>
+        <!-- form filters -->
         <parameter key="form.filter.no_code.class">WellCommerce\Bundle\CoreBundle\Form\Filters\NoCode</parameter>
         <parameter key="form.filter.no_code.class">WellCommerce\Bundle\CoreBundle\Form\Filters\NoCode</parameter>
         <parameter key="form.filter.secure.class">WellCommerce\Bundle\CoreBundle\Form\Filters\Secure</parameter>
         <parameter key="form.filter.trim.class">WellCommerce\Bundle\CoreBundle\Form\Filters\Trim</parameter>
         <parameter key="form.filter.comma_to_dot_changer.class">WellCommerce\Bundle\CoreBundle\Form\Filters\CommaToDotChanger</parameter>
+        <!-- form rules -->
         <parameter key="form.rule.compare.class">WellCommerce\Bundle\CoreBundle\Form\Rules\Compare</parameter>
         <parameter key="form.rule.custom.class">WellCommerce\Bundle\CoreBundle\Form\Rules\Custom</parameter>
         <parameter key="form.rule.date_to.class">WellCommerce\Bundle\CoreBundle\Form\Rules\DateTo</parameter>

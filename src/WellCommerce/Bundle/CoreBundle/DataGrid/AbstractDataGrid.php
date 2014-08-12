@@ -12,9 +12,11 @@
 namespace WellCommerce\Bundle\CoreBundle\DataGrid;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Validator\Exception\ValidatorException;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnCollection;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Loader\LoaderInterface;
+use WellCommerce\Bundle\CoreBundle\DataGrid\Manager\DataGridManagerInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Options\OptionsInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\QueryBuilder\QueryBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Repository\DataGridRepositoryInterface;
@@ -30,35 +32,25 @@ use xajaxResponse;
  * @package WellCommerce\Bundle\CoreBundle\DataGrid
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractDataGrid extends AbstractContainer
+abstract class AbstractDataGrid
 {
-    /**
-     * @var \WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnCollection
-     */
     protected $columns;
     protected $identifier;
     protected $repository;
     protected $loader;
     protected $options;
     protected $queryBuilder;
-    protected $container;
     protected $request;
+    protected $manager;
 
     /**
      * Constructor
      *
-     * @param ContainerInterface          $container
-     * @param DataGridRepositoryInterface $repository
-     * @param LoaderInterface             $loader
+     * @param DataGridManagerInterface $manager
      */
-    public function __construct(
-        ContainerInterface $container,
-        DataGridRepositoryInterface $repository,
-        LoaderInterface $loader
-    ) {
-        $this->container  = $container;
-        $this->repository = $repository;
-        $this->loader     = $loader;
+    public function __construct(DataGridManagerInterface $manager)
+    {
+        $this->manager = $manager;
     }
 
     public function setColumns(ColumnCollection $columns)

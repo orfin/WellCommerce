@@ -6,12 +6,17 @@
 
     <parameters>
         <parameter key="flash_helper.class">WellCommerce\Bundle\CoreBundle\Helper\Flash\FlashHelper</parameter>
+        <parameter key="redirect_helper.class">WellCommerce\Bundle\CoreBundle\Helper\Redirect\RedirectHelper</parameter>
     </parameters>
 
     <services>
         <service id="flash_helper" class="%flash_helper.class%">
             <argument type="service" id="session"/>
             <argument type="service" id="translator"/>
+        </service>
+
+        <service id="redirect_helper" class="%redirect_helper.class%">
+            <argument type="service" id="router"/>
         </service>
     </services>
 </container>

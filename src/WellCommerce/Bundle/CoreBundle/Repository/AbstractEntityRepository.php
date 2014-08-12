@@ -116,4 +116,10 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
         return Helper::snake($entityName);
     }
 
+    public function getName()
+    {
+        return $this->getEntityName();
+    }
+
+
 }

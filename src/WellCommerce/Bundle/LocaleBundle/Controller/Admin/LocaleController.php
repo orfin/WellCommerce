@@ -30,11 +30,6 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
  */
 class LocaleController extends AbstractAdminController
 {
-    /**
-     * @var LocaleRepositoryInterface
-     */
-    private $repository;
-
     public function indexAction()
     {
         return [
@@ -42,53 +37,6 @@ class LocaleController extends AbstractAdminController
         ];
     }
 
-    public function addAction(Request $request)
-    {
-        $locale = new Locale();
-        $form    = $this->getLocaleForm($locale);
-
-        if ($form->handleRequest($request)->isValid()) {
-            try {
-                $em = $this->getEntityManager();
-                $em->persist($locale);
-                $em->flush();
-                $this->addSuccessMessage('locale.added.success');
-                return $this->redirect($this->getDefaultUrl());
-
-            } catch (ValidatorException $exception){
-                $this->addErrorMessage($exception->getMessage());
-            }
-        }
-
-        return [
-            'form' => $form
-        ];
-    }
-
-    /**
-     * @ParamConverter("locale", class="WellCommerceLocaleBundle:Locale")
-     */
-    public function editAction(Request $request, Locale $locale)
-    {
-        $form = $this->getLocaleForm($locale);
-
-        if ($form->handleRequest($request)->isValid()) {
-            try {
-                $em = $this->getEntityManager();
-                $em->persist($locale);
-                $em->flush();
-                $this->addSuccessMessage('locale.saved.success');
-                return $this->redirect($this->getDefaultUrl());
-
-            } catch (ValidatorException $exception){
-                $this->addErrorMessage($exception->getMessage());
-            }
-        }
-
-        return [
-            'form' => $form
-        ];
-    }
 
     /**
      * Returns locale form

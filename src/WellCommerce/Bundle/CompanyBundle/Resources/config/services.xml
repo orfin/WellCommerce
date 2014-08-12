@@ -7,39 +7,25 @@
         <parameter key="company.controller.admin.class">WellCommerce\Bundle\CompanyBundle\Controller\Admin\CompanyController</parameter>
         <parameter key="company.repository.class">WellCommerce\Bundle\CompanyBundle\Entity\CompanyRepository</parameter>
         <parameter key="company.datagrid.class">WellCommerce\Bundle\CompanyBundle\DataGrid\CompanyDataGrid</parameter>
-        <parameter key="company.datagrid.configurator.class">WellCommerce\Bundle\CompanyBundle\DataGrid\CompanyDataGridConfigurator</parameter>
         <parameter key="company.form.class">WellCommerce\Bundle\CompanyBundle\Form\CompanyForm</parameter>
         <parameter key="company.listener.class">WellCommerce\Bundle\CompanyBundle\EventListener\CompanyListener</parameter>
     </parameters>
 
     <services>
         <service id="company.controller.admin" class="%company.controller.admin.class%">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <call method="setRepository">
-                <argument type="service" id="company.repository"/>
-            </call>
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="company.repository"/>
+            <argument type="service" id="company.datagrid"/>
+            <argument type="service" id="company.form"/>
         </service>
 
         <service id="company.repository" class="%company.repository.class%" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument>WellCommerceCompanyBundle:Company</argument>
         </service>
 
-        <service id="company.datagrid.configurator" class="%company.datagrid.configurator.class%">
-            <argument key="identifier">company</argument>
-            <argument type="service" id="datagrid_options" />
-            <argument type="service" id="datagrid_columns" />
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
-
         <service id="company.datagrid" class="%company.datagrid.class%">
-            <argument type="service" id="service_container"/>
+            <argument type="service" id="datagrid_manager"/>
             <argument type="service" id="company.repository"/>
-            <argument type="service" id="datagrid_loader" />
-            <configurator service="company.datagrid.configurator" method="configure" />
         </service>
 
         <service id="company.form" class="%company.form.class%">

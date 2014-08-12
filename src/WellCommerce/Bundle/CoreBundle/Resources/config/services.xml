@@ -8,8 +8,6 @@
         <parameter key="xajax_manager.class">WellCommerce\Bundle\CoreBundle\Helper\XajaxManager</parameter>
         <parameter key="xajax_listener.class">WellCommerce\Bundle\CoreBundle\EventListener\XajaxListener</parameter>
         <parameter key="xajax.class">xajax</parameter>
-        <parameter key="flash_helper.class">WellCommerce\Bundle\CoreBundle\Helper\FlashHelper</parameter>
-        <parameter key="redirect_helper.class">WellCommerce\Bundle\CoreBundle\Helper\RedirectHelper</parameter>
     </parameters>
 
     <services>
@@ -22,15 +20,6 @@
         <service id="xajax_listener" class="%xajax_listener.class%">
             <argument type="service" id="xajax_manager"/>
             <tag name="kernel.event_subscriber"/>
-        </service>
-
-        <service id="flash_helper" class="%flash_helper.class%">
-            <argument type="service" id="session"/>
-            <argument type="service" id="translator"/>
-        </service>
-
-        <service id="redirect_helper" class="%redirect_helper.class%">
-            <argument type="service" id="router"/>
         </service>
     </services>
 </container>
