@@ -33,7 +33,7 @@ before_script:
     - sleep 5
 
 script:
-    - bin/codecept run -c ./
+    - bin/codecept run --steps --debug --html
 
 notifications:
     email: "travis@wellcommerce.org"
