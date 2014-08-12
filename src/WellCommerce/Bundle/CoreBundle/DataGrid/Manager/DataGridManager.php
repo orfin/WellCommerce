@@ -14,9 +14,9 @@ namespace WellCommerce\Bundle\CoreBundle\DataGrid\Manager;
 
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnCollection;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Loader\LoaderInterface;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Options\Options;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Options\OptionsInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\XajaxManager;
 
@@ -28,67 +28,105 @@ use WellCommerce\Bundle\CoreBundle\Helper\XajaxManager;
  */
 class DataGridManager implements DataGridManagerInterface
 {
-    protected $collection;
+    protected $columnCollection;
     protected $options;
     protected $loader;
     protected $eventDispatcher;
     protected $router;
     protected $xajaxManager;
+    protected $translator;
 
     /**
      * Constructor
      *
-     * @param ColumnCollection         $collection
+     * @param ColumnCollection         $columnCollection
      * @param OptionsInterface         $options
      * @param LoaderInterface          $loader
      * @param EventDispatcherInterface $eventDispatcher
      * @param RouterInterface          $router
      * @param XajaxManager             $xajaxManager
+     * @param TranslatorInterface      $translator
      */
     public function __construct(
-        ColumnCollection $collection,
+        ColumnCollection $columnCollection,
         OptionsInterface $options,
         LoaderInterface $loader,
         EventDispatcherInterface $eventDispatcher,
         RouterInterface $router,
-        XajaxManager $xajaxManager
+        XajaxManager $xajaxManager,
+        TranslatorInterface $translator
     ) {
-        $this->collection      = $collection;
-        $this->options         = $options;
-        $this->loader          = $loader;
-        $this->eventDispatcher = $eventDispatcher;
-        $this->router          = $router;
-        $this->xajaxManager    = $xajaxManager;
+        $this->columnCollection = $columnCollection;
+        $this->options          = $options;
+        $this->loader           = $loader;
+        $this->eventDispatcher  = $eventDispatcher;
+        $this->router           = $router;
+        $this->xajaxManager     = $xajaxManager;
+        $this->translator       = $translator;
 
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getColumnCollection()
     {
-        return $this->collection;
+        return $this->columnCollection;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getOptions()
     {
         return $this->options;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getLoader()
     {
         return $this->loader;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getEventDispatcher()
     {
         return $this->eventDispatcher;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getRouter()
     {
         return $this->router;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getXajaxManager()
     {
         return $this->xajaxManager;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTranslator()
+    {
+        return $this->translator;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function translate($message)
+    {
+        return $this->translator->trans($message, [], 'admin');
     }
 } 

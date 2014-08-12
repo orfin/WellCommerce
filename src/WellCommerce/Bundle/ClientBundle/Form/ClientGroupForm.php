@@ -47,14 +47,6 @@ class ClientGroupForm extends AbstractForm implements FormInterface
             'label'   => $this->trans('client_group.discount.label'),
             'comment' => $this->trans('client_group.discount.comment'),
             'suffix'  => '%',
-            'rules'   => [
-//                $builder->getRule('custom', [
-//                    'message' => $this->trans('client_group.discount.rule.custom'),
-//                    'function' => function ($value) {
-//                            return ($value >= 0 && $value <= 100);
-//                    }
-//                ])
-            ],
             'filters' => [
                 $builder->getFilter('comma_to_dot_changer')
             ],

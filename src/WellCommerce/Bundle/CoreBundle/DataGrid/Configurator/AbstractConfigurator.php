@@ -13,9 +13,11 @@
 namespace WellCommerce\Bundle\CoreBundle\DataGrid\Configurator;
 
 use WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnCollection;
+use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
+use WellCommerce\Bundle\CoreBundle\DataGrid\Manager\DataGridManagerInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Options\OptionsInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\QueryBuilder\QueryBuilderInterface;
-use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
+use WellCommerce\Bundle\CoreBundle\DataGrid\Repository\DataGridAwareRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 
 /**
@@ -24,7 +26,7 @@ use WellCommerce\Bundle\CoreBundle\Helper\Helper;
  * @package WellCommerce\Bundle\CoreBundle\DataGrid\Configurator
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AbstractConfigurator
+class AbstractConfigurator implements ConfiguratorInterface
 {
     /**
      * @var string
@@ -32,32 +34,37 @@ class AbstractConfigurator
     protected $identifier;
 
     /**
-     * @var OptionsInterface
+     * @var DataGridManagerInterface
      */
-    protected $options;
+    protected $manager;
 
     /**
-     * @var ColumnCollection
+     * @var DataGridAwareRepositoryInterface
      */
-    protected $columns;
-
-    /**
-     * @var QueryBuilderInterface
-     */
-    protected $queryBuilder;
+    protected $repository;
 
     /**
      * Constructor
      *
-     * @param                       $identifier
-     * @param OptionsInterface      $options
-     * @param ColumnCollection      $columns
+     * @param                                  $identifier
+     * @param DataGridManagerInterface         $manager
+     * @param DataGridAwareRepositoryInterface $repository
      */
-    public function __construct($identifier, OptionsInterface $options, ColumnCollection $columns)
+    public function __construct($identifier, DataGridManagerInterface $manager, DataGridAwareRepositoryInterface $repository)
     {
-        $this->identifier   = $identifier;
-        $this->options      = $options;
-        $this->columns      = $columns;
+        $this->identifier = $identifier;
+        $this->manager    = $manager;
+        $this->repository = $repository;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configure(DataGridInterface $dataGrid)
+    {
+        $dataGrid->setIdentifier($this->identifier);
+
+        $dataGrid->setColumns($this->manager->getColumnCollection());
     }
 
     /**
@@ -67,11 +74,10 @@ class AbstractConfigurator
      *
      * @return string
      */
-    public function getFunction($name)
+    protected function getFunction($name)
     {
         $functionName = sprintf('%s%s', $name, ucfirst($this->identifier));
 
         return lcfirst(Helper::studly($functionName));
     }
-
 }

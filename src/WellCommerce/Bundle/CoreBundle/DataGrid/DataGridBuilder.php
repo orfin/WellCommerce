@@ -32,7 +32,7 @@ class DataGridBuilder extends AbstractContainer
      */
     public function create(DataGridInterface $datagrid)
     {
-        $datagrid->addColumns();
+        $datagrid->init();
 
         $eventName = $this->getInitEventName($datagrid->getIdentifier());
         $event     = new DataGridEvent($datagrid);

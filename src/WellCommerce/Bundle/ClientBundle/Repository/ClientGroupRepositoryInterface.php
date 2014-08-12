@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\ClientBundle\Repository;
 
-use WellCommerce\Bundle\CoreBundle\DataGrid\Repository\DataGridRepositoryInterface;
+use WellCommerce\Bundle\CoreBundle\DataGrid\Repository\DataGridAwareRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
@@ -21,7 +21,7 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
  * @package WellCommerce\Bundle\ClientBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ClientGroupRepositoryInterface extends RepositoryInterface, DataGridRepositoryInterface
+interface ClientGroupRepositoryInterface extends RepositoryInterface, DataGridAwareRepositoryInterface
 {
 
 } 

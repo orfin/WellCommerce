@@ -187,9 +187,6 @@ class Form extends Container
         return $this;
     }
 
-    /**
-     * @return \WellCommerce\Bundle\CoreBundle\Form\Elements\Form
-     */
     public function handleRequest(Request $request)
     {
         $this->request = $request;
@@ -216,11 +213,14 @@ class Form extends Container
         if ($hasTranslations) {
             foreach ($this->fields as $field) {
                 if ($field->parent instanceof FieldsetLanguage) {
-                    $values = $field->getValue();
+                    $values
+                        = $field->getValue();
                     foreach ($values as $locale => $value) {
-                        $translation = $this->defaultData->translate($locale);
+                        $translation
+                            = $this->defaultData->translate($locale);
                         $accessor->setValue($translation, $field->getName(), $value);
                     }
+
                     $this->defaultData->mergeNewTranslations();
                 }
             }
@@ -235,7 +235,8 @@ class Form extends Container
      *
      * @return bool
      */
-    public function isSubmitted()
+    public
+    function isSubmitted()
     {
         return $this->request->request->has($this->attributes['name'] . '_submitted');
     }
@@ -247,8 +248,9 @@ class Form extends Container
      *
      * @return bool
      */
-    public function isValid($values = [])
-    {
+    public
+    function isValid($values = []
+    ) {
         // don't validate the form if it wasn't submitted
         if (!$this->isSubmitted()) {
             return false;
@@ -261,13 +263,15 @@ class Form extends Container
         return parent::isValid();
     }
 
-    public function getSubmittedData()
+    public
+    function getSubmittedData()
     {
         return $this->request->request->all();
     }
 
-    public function isAction($actionName)
-    {
+    public
+    function isAction($actionName
+    ) {
         $actionName = '_Action_' . $actionName;
 
         return (isset($_POST[$actionName]) && ($_POST[$actionName] == '1'));

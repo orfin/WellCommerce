@@ -15,12 +15,11 @@
 
     <services>
         <service id="locale.controller.admin" class="%locale.controller.admin.class%">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <call method="setRepository">
-                <argument type="service" id="locale.repository"/>
-            </call>
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="admin_manager"/>
+            <argument type="service" id="locale.repository"/>
+            <argument type="service" id="locale.datagrid"/>
+            <argument type="service" id="locale.form"/>
         </service>
 
         <service id="locale.repository" class="%locale.repository.class%" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
@@ -29,11 +28,8 @@
 
         <service id="locale.datagrid.configurator" class="%locale.datagrid.configurator.class%">
             <argument key="identifier">locale</argument>
-            <argument type="service" id="datagrid_options" />
-            <argument type="service" id="datagrid_columns" />
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
+            <argument type="service" id="datagrid_manager"/>
+            <argument type="service" id="locale.repository"/>
         </service>
 
         <service id="locale.provider" class="%locale.provider.class%">
@@ -41,9 +37,6 @@
         </service>
 
         <service id="locale.datagrid" class="%locale.datagrid.class%">
-            <argument type="service" id="service_container"/>
-            <argument type="service" id="locale.repository"/>
-            <argument type="service" id="datagrid_loader" />
             <configurator service="locale.datagrid.configurator" method="configure" />
         </service>
 

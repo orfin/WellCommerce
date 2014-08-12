@@ -13,6 +13,7 @@ namespace WellCommerce\Bundle\LocaleBundle\DataGrid;
 
 use WellCommerce\Bundle\CoreBundle\DataGrid\AbstractDataGrid;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Column\Column;
+use WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnCollection;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
 
@@ -27,9 +28,9 @@ class LocaleDataGrid extends AbstractDataGrid implements DataGridInterface
     /**
      * {@inheritdoc}
      */
-    public function addColumns()
+    public function addColumns(ColumnCollection $collection)
     {
-        $this->columns->add(new Column([
+        $collection->add(new Column([
             'id'         => 'id',
             'source'     => 'locale.id',
             'caption'    => $this->trans('locale.id'),
@@ -45,7 +46,7 @@ class LocaleDataGrid extends AbstractDataGrid implements DataGridInterface
             ]
         ]));
 
-        $this->columns->add(new Column([
+        $collection->add(new Column([
             'id'         => 'code',
             'source'     => 'locale.code',
             'caption'    => $this->trans('locale.code'),

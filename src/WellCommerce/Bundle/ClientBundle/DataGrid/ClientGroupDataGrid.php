@@ -28,9 +28,9 @@ class ClientGroupDataGrid extends AbstractDataGrid implements DataGridInterface
     /**
      * {@inheritdoc}
      */
-    public function addColumns()
+    public function addColumns(ColumnCollection $collection)
     {
-        $this->columns->add(new Column([
+        $collection->add(new Column([
             'id'         => 'id',
             'source'     => 'client_group.id',
             'caption'    => $this->trans('Id'),
@@ -46,7 +46,7 @@ class ClientGroupDataGrid extends AbstractDataGrid implements DataGridInterface
             ]
         ]));
 
-        $this->columns->add(new Column([
+        $collection->add(new Column([
             'id'         => 'name',
             'source'     => 'client_group_translation.name',
             'caption'    => $this->trans('Name'),

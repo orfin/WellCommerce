@@ -36,31 +36,31 @@ class LocaleDataGridConfigurator extends AbstractConfigurator implements Configu
     {
         $datagrid->setIdentifier($this->identifier);
 
-        $datagrid->setColumns($this->columns);
-
-        $eventHandlers = $this->options->getEventHandlers();
+        $eventHandlers = $this->manager->getOptions()->getEventHandlers();
 
         $eventHandlers->add(new LoadEventHandler([
-            'function' => $this->getXajaxManager()->register([$this->getFunction('load'), $datagrid, 'load']),
+            'function' => $this->manager->getXajaxManager()->register([$this->getFunction('load'), $datagrid, 'load'])
         ]));
 
         $eventHandlers->add(new EditRowEventHandler([
             'function'   => $this->getFunction('edit'),
             'row_action' => OptionInterface::ACTION_EDIT,
-            'route'      => $this->generateUrl('admin.locale.edit')
+            'route'      => $this->manager->getRouter()->generate('admin.locale.edit')
         ]));
 
         $eventHandlers->add(new ClickRowEventHandler([
-            'function'   => $this->getFunction('click'),
-            'route'      => $this->generateUrl('admin.locale.edit')
+            'function' => $this->getFunction('click'),
+            'route'    => $this->manager->getRouter()->generate('admin.locale.edit')
         ]));
 
         $eventHandlers->add(new DeleteRowEventHandler([
             'function'   => $function = $this->getFunction('delete'),
-            'callback'   => $this->getXajaxManager()->register([$function, $datagrid, 'delete']),
+            'callback'   => $this->manager->getXajaxManager()->register([$function, $datagrid, 'delete']),
             'row_action' => OptionInterface::ACTION_DELETE,
         ]));
 
-        $datagrid->setOptions($this->options);
+        $datagrid->setRepository($this->repository);
+
+        $datagrid->setManager($this->manager);
     }
 }

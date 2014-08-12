@@ -6,6 +6,6 @@
         <li><a href="{{ path('admin.company.add') }}" class="button" title="{% trans %}Add{% endtrans %}"><span>{% trans %}Add{% endtrans %}</span></a></li>
     </ul>
 
-    {#{% include 'WellCommerceCoreBundle:DataGrid:datagrid.html.twig' with datagrid %}#}
+    {{ form(form) }}
 
 {% endblock %}

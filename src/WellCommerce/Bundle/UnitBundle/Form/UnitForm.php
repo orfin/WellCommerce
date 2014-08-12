@@ -11,6 +11,8 @@
  */
 namespace WellCommerce\Bundle\UnitBundle\Form;
 
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\BaseSubjectInterface;
 use WellCommerce\Bundle\UnitBundle\Entity\Unit;
 use WellCommerce\Bundle\CoreBundle\Form\AbstractForm;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
@@ -64,6 +66,9 @@ class UnitForm extends AbstractForm implements FormInterface
         return $form;
     }
 
+    public function setDefaults(OptionsResolverInterface $resolver){
+
+    }
     /**
      * Prepares form data using retrieved entity
      *
@@ -71,7 +76,7 @@ class UnitForm extends AbstractForm implements FormInterface
      *
      * @return array
      */
-    public function getDefaultData(Unit $unit)
+    public function getDefaultData(BaseSubjectInterface $unit)
     {
         $formData     = [];
         $languageData = [];

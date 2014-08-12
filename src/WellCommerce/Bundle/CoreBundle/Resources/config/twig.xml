@@ -10,6 +10,7 @@
         <parameter key="twig.extension.xajax.class">WellCommerce\Bundle\CoreBundle\Twig\Extension\XajaxExtension</parameter>
         <parameter key="twig.extension.form.class">WellCommerce\Bundle\CoreBundle\Twig\Extension\FormExtension</parameter>
         <parameter key="twig.extension.admin.class">WellCommerce\Bundle\CoreBundle\Twig\Extension\AdminExtension</parameter>
+        <parameter key="twig.extension.datagrid.class">WellCommerce\Bundle\CoreBundle\Twig\Extension\DataGridExtension</parameter>
     </parameters>
 
     <services>
@@ -29,6 +30,11 @@
 
         <service id="twig.extension.admin" class="%twig.extension.admin.class%">
             <argument type="service" id="session"/>
+            <tag name="twig.extension"/>
+        </service>
+
+        <service id="twig.extension.datagrid" class="%twig.extension.datagrid.class%">
+            <argument type="service" id="service_container"/>
             <tag name="twig.extension"/>
         </service>
     </services>

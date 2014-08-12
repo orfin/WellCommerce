@@ -13,7 +13,9 @@
 namespace WellCommerce\Bundle\CoreBundle\DataGrid;
 
 use WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnCollection;
+use WellCommerce\Bundle\CoreBundle\DataGrid\Manager\DataGridManagerInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Options\OptionsInterface;
+use WellCommerce\Bundle\CoreBundle\DataGrid\Repository\DataGridAwareRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Request\RequestInterface;
 
 /**
@@ -51,11 +53,13 @@ interface DataGridInterface
     public function getIdentifier();
 
     /**
-     * Adds datagrid columns to collection
+     * Add columns to collection
+     *
+     * @param ColumnCollection $columnCollection
      *
      * @return mixed
      */
-    public function addColumns();
+    public function addColumns(ColumnCollection $columnCollection);
 
     /**
      * Sets columns collection
@@ -65,6 +69,24 @@ interface DataGridInterface
      * @return mixed
      */
     public function setColumns(ColumnCollection $columns);
+
+    /**
+     * Sets datagrid repository
+     *
+     * @param DataGridAwareRepositoryInterface $repository
+     *
+     * @return mixed
+     */
+    public function setRepository(DataGridAwareRepositoryInterface $repository);
+
+    /**
+     * Sets manager instance
+     *
+     * @param DataGridManagerInterface $manager
+     *
+     * @return mixed
+     */
+    public function setManager(DataGridManagerInterface $manager);
 
     /**
      * Returns columns collection

@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form;
 
+use Doctrine\ORM\EntityRepository;
+use WellCommerce\Bundle\CoreBundle\Entity\BaseSubjectInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 
 /**
@@ -31,4 +33,5 @@ interface FormInterface
      * @return object
      */
     public function buildForm(FormBuilderInterface $builder, array $options);
+
 }

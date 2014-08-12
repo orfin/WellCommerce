@@ -106,7 +106,7 @@ abstract class Node extends ContainerAware
             $line = $this->_tabs . $line;
         }
 
-        return implode("\n", $lines);
+        return implode(PHP_EOL, $lines);
     }
 
     public function clearRules()
@@ -393,11 +393,7 @@ abstract class Node extends ContainerAware
 
     public function renderJs()
     {
-        $render = "
-			{fType: {$this->_jsNodeName},{$this->formatAttributesJs($this->prepareAttributesJs())}}
-		";
-
-        return $render;
+        return "{fType: {$this->_jsNodeName},{$this->formatAttributesJs($this->prepareAttributesJs())}}";;
     }
 
     protected function prepareAttributesJs()

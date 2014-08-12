@@ -37,6 +37,7 @@ class appDevDebugProjectContainer extends Container
             '9add69bc6fb9f594c7aff7f91553270137e4cd6f34fdd21b5e258ec96675da25_1' => 'get9add69bc6fb9f594c7aff7f91553270137e4cd6f34fdd21b5e258ec96675da251Service',
             '9add69bc6fb9f594c7aff7f91553270137e4cd6f34fdd21b5e258ec96675da25_2' => 'get9add69bc6fb9f594c7aff7f91553270137e4cd6f34fdd21b5e258ec96675da252Service',
             '9add69bc6fb9f594c7aff7f91553270137e4cd6f34fdd21b5e258ec96675da25_3' => 'get9add69bc6fb9f594c7aff7f91553270137e4cd6f34fdd21b5e258ec96675da253Service',
+            'admin_manager' => 'getAdminManagerService',
             'admin_menu.repository' => 'getAdminMenu_RepositoryService',
             'admin_menu.subscriber' => 'getAdminMenu_SubscriberService',
             'annotation_reader' => 'getAnnotationReaderService',
@@ -60,6 +61,7 @@ class appDevDebugProjectContainer extends Container
             'company.form' => 'getCompany_FormService',
             'company.listener' => 'getCompany_ListenerService',
             'company.repository' => 'getCompany_RepositoryService',
+            'controller_listener' => 'getControllerListenerService',
             'controller_name_converter' => 'getControllerNameConverterService',
             'country.repository' => 'getCountry_RepositoryService',
             'data_collector.form' => 'getDataCollector_FormService',
@@ -138,6 +140,7 @@ class appDevDebugProjectContainer extends Container
             'locale.datagrid.configurator' => 'getLocale_Datagrid_ConfiguratorService',
             'locale.form' => 'getLocale_FormService',
             'locale.listener' => 'getLocale_ListenerService',
+            'locale.provider' => 'getLocale_ProviderService',
             'locale.repository' => 'getLocale_RepositoryService',
             'locale_listener' => 'getLocaleListenerService',
             'logger' => 'getLoggerService',
@@ -258,6 +261,7 @@ class appDevDebugProjectContainer extends Container
             'twig.controller.exception' => 'getTwig_Controller_ExceptionService',
             'twig.exception_listener' => 'getTwig_ExceptionListenerService',
             'twig.extension.admin' => 'getTwig_Extension_AdminService',
+            'twig.extension.datagrid' => 'getTwig_Extension_DatagridService',
             'twig.extension.form' => 'getTwig_Extension_FormService',
             'twig.extension.string_loader' => 'getTwig_Extension_StringLoaderService',
             'twig.extension.xajax' => 'getTwig_Extension_XajaxService',
@@ -339,6 +343,19 @@ class appDevDebugProjectContainer extends Container
     protected function get9add69bc6fb9f594c7aff7f91553270137e4cd6f34fdd21b5e258ec96675da253Service()
     {
         return $this->services['9add69bc6fb9f594c7aff7f91553270137e4cd6f34fdd21b5e258ec96675da25_3'] = new \Swift_Transport_Esmtp_Auth_PlainAuthenticator();
+    }
+
+    /**
+     * Gets the 'admin_manager' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Bundle\CoreBundle\Controller\Admin\Manager\AdminManager A WellCommerce\Bundle\CoreBundle\Controller\Admin\Manager\AdminManager instance.
+     */
+    protected function getAdminManagerService()
+    {
+        return $this->services['admin_manager'] = new \WellCommerce\Bundle\CoreBundle\Controller\Admin\Manager\AdminManager($this->get('flash_helper'), $this->get('redirect_helper'), $this->get('debug.event_dispatcher'), $this->get('doctrine.orm.default_entity_manager'));
     }
 
     /**
@@ -494,12 +511,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getClientGroup_Controller_AdminService()
     {
-        $this->services['client_group.controller.admin'] = $instance = new \WellCommerce\Bundle\ClientBundle\Controller\Admin\ClientGroupController();
-
-        $instance->setContainer($this);
-        $instance->setRepository($this->get('client_group.repository'));
-
-        return $instance;
+        return $this->services['client_group.controller.admin'] = new \WellCommerce\Bundle\ClientBundle\Controller\Admin\ClientGroupController($this, $this->get('admin_manager'), $this->get('client_group.repository'), $this->get('client_group.datagrid'), $this->get('client_group.form'));
     }
 
     /**
@@ -512,7 +524,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getClientGroup_DatagridService()
     {
-        $this->services['client_group.datagrid'] = $instance = new \WellCommerce\Bundle\ClientBundle\DataGrid\ClientGroupDataGrid($this, $this->get('client_group.repository'), $this->get('datagrid_loader'));
+        $this->services['client_group.datagrid'] = $instance = new \WellCommerce\Bundle\ClientBundle\DataGrid\ClientGroupDataGrid();
 
         $this->get('client_group.datagrid.configurator')->configure($instance);
 
@@ -529,11 +541,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getClientGroup_Datagrid_ConfiguratorService()
     {
-        $this->services['client_group.datagrid.configurator'] = $instance = new \WellCommerce\Bundle\ClientBundle\DataGrid\ClientGroupDataGridConfigurator('client_group', $this->get('datagrid_options'), $this->get('datagrid_columns'));
-
-        $instance->setContainer($this);
-
-        return $instance;
+        return $this->services['client_group.datagrid.configurator'] = new \WellCommerce\Bundle\ClientBundle\DataGrid\ClientGroupDataGridConfigurator('client_group', $this->get('datagrid_manager'), $this->get('client_group.repository'));
     }
 
     /**
@@ -593,7 +601,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getCompany_Controller_AdminService()
     {
-        return $this->services['company.controller.admin'] = new \WellCommerce\Bundle\CompanyBundle\Controller\Admin\CompanyController($this, $this->get('company.repository'), $this->get('company.datagrid'), $this->get('company.form'));
+        return $this->services['company.controller.admin'] = new \WellCommerce\Bundle\CompanyBundle\Controller\Admin\CompanyController($this, $this->get('admin_manager'), $this->get('company.repository'), $this->get('company.datagrid'), $this->get('company.form'));
     }
 
     /**
@@ -651,6 +659,19 @@ class appDevDebugProjectContainer extends Container
     protected function getCompany_RepositoryService()
     {
         return $this->services['company.repository'] = $this->get('doctrine.orm.default_entity_manager')->getRepository('WellCommerceCompanyBundle:Company');
+    }
+
+    /**
+     * Gets the 'controller_listener' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Bundle\CoreBundle\EventListener\ControllerListener A WellCommerce\Bundle\CoreBundle\EventListener\ControllerListener instance.
+     */
+    protected function getControllerListenerService()
+    {
+        return $this->services['controller_listener'] = new \WellCommerce\Bundle\CoreBundle\EventListener\ControllerListener($this->get('kernel'));
     }
 
     /**
@@ -788,7 +809,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getDatagridManagerService()
     {
-        return $this->services['datagrid_manager'] = new \WellCommerce\Bundle\CoreBundle\DataGrid\Manager\DataGridManager($this->get('datagrid_columns'), $this->get('datagrid_options'), $this->get('datagrid_loader'), $this->get('debug.event_dispatcher'), $this->get('router'), $this->get('xajax_manager'));
+        return $this->services['datagrid_manager'] = new \WellCommerce\Bundle\CoreBundle\DataGrid\Manager\DataGridManager($this->get('datagrid_columns'), $this->get('datagrid_options'), $this->get('datagrid_loader'), $this->get('debug.event_dispatcher'), $this->get('router'), $this->get('xajax_manager'), $this->get('translator'));
     }
 
     /**
@@ -894,6 +915,7 @@ class appDevDebugProjectContainer extends Container
         $instance->addSubscriberService('sensio_framework_extra.cache.listener', 'Sensio\\Bundle\\FrameworkExtraBundle\\EventListener\\HttpCacheListener');
         $instance->addSubscriberService('sensio_framework_extra.security.listener', 'Sensio\\Bundle\\FrameworkExtraBundle\\EventListener\\SecurityListener');
         $instance->addSubscriberService('xajax_listener', 'WellCommerce\\Bundle\\CoreBundle\\EventListener\\XajaxListener');
+        $instance->addSubscriberService('controller_listener', 'WellCommerce\\Bundle\\CoreBundle\\EventListener\\ControllerListener');
         $instance->addSubscriberService('admin_menu.subscriber', 'WellCommerce\\Bundle\\AdminMenuBundle\\EventListener\\AdminMenuListener');
         $instance->addSubscriberService('unit.listener', 'WellCommerce\\Bundle\\UnitBundle\\EventListener\\UnitListener');
         $instance->addSubscriberService('company.listener', 'WellCommerce\\Bundle\\CompanyBundle\\EventListener\\CompanyListener');
@@ -1024,11 +1046,11 @@ class appDevDebugProjectContainer extends Container
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return EntityManager53e9c3df6dae6_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager A EntityManager53e9c3df6dae6_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager instance.
+     * @return EntityManager53ea616bb5ea9_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager A EntityManager53ea616bb5ea9_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager instance.
      */
     protected function getDoctrine_Orm_DefaultEntityManagerService()
     {
-        require_once 'D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53e9c3df6dae6.php';
+        require_once 'D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53ea616bb5ea9.php';
 
         $a = $this->get('annotation_reader');
 
@@ -1058,7 +1080,7 @@ class appDevDebugProjectContainer extends Container
         $e = \Doctrine\ORM\EntityManager::create($this->get('doctrine.dbal.default_connection'), $d);
         $this->get('doctrine.orm.default_manager_configurator')->configure($e);
 
-        return $this->services['doctrine.orm.default_entity_manager'] = new \EntityManager53e9c3df6dae6_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager($e, $this);
+        return $this->services['doctrine.orm.default_entity_manager'] = new \EntityManager53ea616bb5ea9_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager($e, $this);
     }
 
     /**
@@ -1738,12 +1760,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getLocale_Controller_AdminService()
     {
-        $this->services['locale.controller.admin'] = $instance = new \WellCommerce\Bundle\LocaleBundle\Controller\Admin\LocaleController();
-
-        $instance->setContainer($this);
-        $instance->setRepository($this->get('locale.repository'));
-
-        return $instance;
+        return $this->services['locale.controller.admin'] = new \WellCommerce\Bundle\LocaleBundle\Controller\Admin\LocaleController($this, $this->get('admin_manager'), $this->get('locale.repository'), $this->get('locale.datagrid'), $this->get('locale.form'));
     }
 
     /**
@@ -1756,7 +1773,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getLocale_DatagridService()
     {
-        $this->services['locale.datagrid'] = $instance = new \WellCommerce\Bundle\LocaleBundle\DataGrid\LocaleDataGrid($this, $this->get('locale.repository'), $this->get('datagrid_loader'));
+        $this->services['locale.datagrid'] = $instance = new \WellCommerce\Bundle\LocaleBundle\DataGrid\LocaleDataGrid();
 
         $this->get('locale.datagrid.configurator')->configure($instance);
 
@@ -1773,11 +1790,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getLocale_Datagrid_ConfiguratorService()
     {
-        $this->services['locale.datagrid.configurator'] = $instance = new \WellCommerce\Bundle\LocaleBundle\DataGrid\LocaleDataGridConfigurator('locale', $this->get('datagrid_options'), $this->get('datagrid_columns'));
-
-        $instance->setContainer($this);
-
-        return $instance;
+        return $this->services['locale.datagrid.configurator'] = new \WellCommerce\Bundle\LocaleBundle\DataGrid\LocaleDataGridConfigurator('locale', $this->get('datagrid_manager'), $this->get('locale.repository'));
     }
 
     /**
@@ -1809,6 +1822,19 @@ class appDevDebugProjectContainer extends Container
     protected function getLocale_ListenerService()
     {
         return $this->services['locale.listener'] = new \WellCommerce\Bundle\LocaleBundle\EventListener\LocaleListener($this, $this->get('translator'), $this->get('router'));
+    }
+
+    /**
+     * Gets the 'locale.provider' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Bundle\LocaleBundle\Provider\LocaleProvider A WellCommerce\Bundle\LocaleBundle\Provider\LocaleProvider instance.
+     */
+    protected function getLocale_ProviderService()
+    {
+        return $this->services['locale.provider'] = new \WellCommerce\Bundle\LocaleBundle\Provider\LocaleProvider($this->get('locale.repository'));
     }
 
     /**
@@ -2347,7 +2373,7 @@ class appDevDebugProjectContainer extends Container
 
         $d = new \Symfony\Component\Security\Http\AccessMap();
 
-        return $this->services['security.firewall.map.context.default'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($d, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => new \Symfony\Component\Security\Core\User\InMemoryUserProvider()), 'default', $a, $this->get('debug.event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE)), 2 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '53e9c3df38b31', $a), 3 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, $this->get('security.access.decision_manager'), $d, $this->get('security.authentication.manager'))), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $this->get('security.authentication.trust_resolver'), new \Symfony\Component\Security\Http\HttpUtils($c, $c), 'default', NULL, NULL, NULL, $a));
+        return $this->services['security.firewall.map.context.default'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($d, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => new \Symfony\Component\Security\Core\User\InMemoryUserProvider()), 'default', $a, $this->get('debug.event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE)), 2 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '53ea616b8bebf', $a), 3 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, $this->get('security.access.decision_manager'), $d, $this->get('security.authentication.manager'))), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $this->get('security.authentication.trust_resolver'), new \Symfony\Component\Security\Http\HttpUtils($c, $c), 'default', NULL, NULL, NULL, $a));
     }
 
     /**
@@ -3431,6 +3457,7 @@ class appDevDebugProjectContainer extends Container
         $instance->addExtension($this->get('twig.extension.string_loader'));
         $instance->addExtension($this->get('twig.extension.xajax'));
         $instance->addExtension($this->get('twig.extension.admin'));
+        $instance->addExtension($this->get('twig.extension.datagrid'));
         $instance->addExtension(new \Symfony\Bundle\WebProfilerBundle\Twig\WebProfilerExtension());
         $instance->addGlobal('app', $this->get('templating.globals'));
 
@@ -3474,6 +3501,19 @@ class appDevDebugProjectContainer extends Container
     protected function getTwig_Extension_AdminService()
     {
         return $this->services['twig.extension.admin'] = new \WellCommerce\Bundle\CoreBundle\Twig\Extension\AdminExtension($this->get('session'));
+    }
+
+    /**
+     * Gets the 'twig.extension.datagrid' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Bundle\CoreBundle\Twig\Extension\DataGridExtension A WellCommerce\Bundle\CoreBundle\Twig\Extension\DataGridExtension instance.
+     */
+    protected function getTwig_Extension_DatagridService()
+    {
+        return $this->services['twig.extension.datagrid'] = new \WellCommerce\Bundle\CoreBundle\Twig\Extension\DataGridExtension($this);
     }
 
     /**
@@ -3963,7 +4003,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getSecurity_Authentication_ManagerService()
     {
-        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('53e9c3df38b31')), true);
+        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('53ea616b8bebf')), true);
 
         $instance->setEventDispatcher($this->get('debug.event_dispatcher'));
 
@@ -4739,10 +4779,12 @@ class appDevDebugProjectContainer extends Container
             'jms_di_extra.cache_warmer.controller_file_blacklist' => array(
 
             ),
-            'jms_di_extra.doctrine_integration.entity_manager.file' => 'D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53e9c3df6dae6.php',
-            'jms_di_extra.doctrine_integration.entity_manager.class' => 'EntityManager53e9c3df6dae6_546a8d27f194334ee012bfe64f629947b07e4919\\__CG__\\Doctrine\\ORM\\EntityManager',
+            'jms_di_extra.doctrine_integration.entity_manager.file' => 'D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53ea616bb5ea9.php',
+            'jms_di_extra.doctrine_integration.entity_manager.class' => 'EntityManager53ea616bb5ea9_546a8d27f194334ee012bfe64f629947b07e4919\\__CG__\\Doctrine\\ORM\\EntityManager',
             'jms_aop.cache_dir' => 'D:/Git/WellCommerce/app/cache/dev/jms_aop',
             'jms_aop.interceptor_loader.class' => 'JMS\\AopBundle\\Aop\\InterceptorLoader',
+            'controller_listener.class' => 'WellCommerce\\Bundle\\CoreBundle\\EventListener\\ControllerListener',
+            'admin_manager.class' => 'WellCommerce\\Bundle\\CoreBundle\\Controller\\Admin\\Manager\\AdminManager',
             'xajax_manager.class' => 'WellCommerce\\Bundle\\CoreBundle\\Helper\\XajaxManager',
             'xajax_listener.class' => 'WellCommerce\\Bundle\\CoreBundle\\EventListener\\XajaxListener',
             'xajax.class' => 'xajax',
@@ -4861,6 +4903,7 @@ class appDevDebugProjectContainer extends Container
             'locale.datagrid.configurator.class' => 'WellCommerce\\Bundle\\LocaleBundle\\DataGrid\\LocaleDataGridConfigurator',
             'locale.form.class' => 'WellCommerce\\Bundle\\LocaleBundle\\Form\\LocaleForm',
             'locale.listener.class' => 'WellCommerce\\Bundle\\LocaleBundle\\EventListener\\LocaleListener',
+            'locale.provider.class' => 'WellCommerce\\Bundle\\LocaleBundle\\Provider\\LocaleProvider',
             'web_profiler.controller.profiler.class' => 'Symfony\\Bundle\\WebProfilerBundle\\Controller\\ProfilerController',
             'web_profiler.controller.router.class' => 'Symfony\\Bundle\\WebProfilerBundle\\Controller\\RouterController',
             'web_profiler.controller.exception.class' => 'Symfony\\Bundle\\WebProfilerBundle\\Controller\\ExceptionController',

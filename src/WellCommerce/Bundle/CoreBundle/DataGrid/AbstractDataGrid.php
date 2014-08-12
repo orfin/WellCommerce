@@ -15,15 +15,11 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Validator\Exception\ValidatorException;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnCollection;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Loader\LoaderInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Manager\DataGridManagerInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Options\OptionsInterface;
-use WellCommerce\Bundle\CoreBundle\DataGrid\QueryBuilder\QueryBuilderInterface;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Repository\DataGridRepositoryInterface;
+use WellCommerce\Bundle\CoreBundle\DataGrid\Repository\DataGridAwareRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Request\Request;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Request\RequestInterface;
-use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
-use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 use xajaxResponse;
 
 /**
@@ -32,25 +28,71 @@ use xajaxResponse;
  * @package WellCommerce\Bundle\CoreBundle\DataGrid
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractDataGrid
+abstract class AbstractDataGrid implements DataGridInterface
 {
     protected $columns;
     protected $identifier;
+
+    /**
+     * @var DataGridAwareRepositoryInterface
+     */
     protected $repository;
     protected $loader;
     protected $options;
     protected $queryBuilder;
     protected $request;
+
+    /**
+     * @var DataGridManagerInterface
+     */
     protected $manager;
 
     /**
-     * Constructor
-     *
-     * @param DataGridManagerInterface $manager
+     * {@inheritdoc}
      */
-    public function __construct(DataGridManagerInterface $manager)
+    public function setIdentifier($identifier)
+    {
+        $this->identifier = $identifier;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getIdentifier()
+    {
+        return $this->identifier;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setManager(DataGridManagerInterface $manager)
     {
         $this->manager = $manager;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getManager()
+    {
+        return $this->manager;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setRepository(DataGridAwareRepositoryInterface $repository)
+    {
+        $this->repository = $repository;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRepository()
+    {
+        return $this->repository;
     }
 
     public function setColumns(ColumnCollection $columns)
@@ -60,18 +102,29 @@ abstract class AbstractDataGrid
 
     public function getColumns()
     {
-        return $this->columns;
+        return $this->manager->getColumnCollection();
     }
 
-    public function setIdentifier($identifier)
+    public function init()
     {
-        $this->identifier = $identifier;
+        $columnCollection = $this->manager->getColumnCollection();
+
+        // adds new columns do collection
+        $this->addColumns($columnCollection);
+
+        // sets columns for current datagrid
+        $this->setColumns($columnCollection);
+
+        $this->setOptions($this->manager->getOptions());
+
+        return $this;
     }
 
-    public function getIdentifier()
+    protected function trans($message)
     {
-        return $this->identifier;
+        return $this->manager->translate($message);
     }
+
 
     public function setOptions(OptionsInterface $options)
     {
@@ -155,6 +208,6 @@ abstract class AbstractDataGrid
             'where'         => $options['where']
         ]));
 
-        return $this->loader->getResults($this);
+        return $this->manager->getLoader()->getResults($this);
     }
 }
