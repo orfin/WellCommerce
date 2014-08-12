@@ -11,5 +11,5 @@ modules:
         - AcceptanceHelper
     config:
         WebDriver:
-            url: 'http://localhost/'
+            url: 'http://localhost/app_dev.php'
             browser: firefox
