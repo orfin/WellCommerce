@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f1653e22397b7d9fa97491394c9058d4",
+    "hash": "e5521b71dfbde4c8dc3ad42676f6f5a1",
     "packages": [
         {
             "name": "codeception/codeception",
@@ -3383,10 +3383,10 @@
         },
         {
             "name": "xajax/xajax",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "dist": {
                 "type": "zip",
-                "url": "http://www.gekosale.pl/packages/Xajax.zip",
+                "url": "http://www.gekosale.pl/xajax.zip",
                 "reference": null,
                 "shasum": null
             },

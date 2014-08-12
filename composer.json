@@ -35,7 +35,7 @@
                 "name": "xajax/xajax",
                 "version": "1.0.1",
                 "dist": {
-                    "url": "http://www.gekosale.pl/packages/xajax.zip",
+                    "url": "http://www.gekosale.pl/xajax.zip",
                     "type": "zip"
                 }
             }
