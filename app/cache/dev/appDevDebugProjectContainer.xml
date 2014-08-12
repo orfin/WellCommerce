@@ -593,8 +593,8 @@
     <parameter key="jms_di_extra.disable_grep">true</parameter>
     <parameter key="jms_di_extra.doctrine_integration">true</parameter>
     <parameter key="jms_di_extra.cache_warmer.controller_file_blacklist" type="collection"/>
-    <parameter key="jms_di_extra.doctrine_integration.entity_manager.file">D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53ea616bb5ea9.php</parameter>
-    <parameter key="jms_di_extra.doctrine_integration.entity_manager.class">EntityManager53ea616bb5ea9_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager</parameter>
+    <parameter key="jms_di_extra.doctrine_integration.entity_manager.file">D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53ea67434d4ff.php</parameter>
+    <parameter key="jms_di_extra.doctrine_integration.entity_manager.class">EntityManager53ea67434d4ff_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager</parameter>
     <parameter key="jms_aop.cache_dir">D:/Git/WellCommerce/app/cache/dev/jms_aop</parameter>
     <parameter key="jms_aop.interceptor_loader.class">JMS\AopBundle\Aop\InterceptorLoader</parameter>
     <parameter key="controller_listener.class">WellCommerce\Bundle\CoreBundle\EventListener\ControllerListener</parameter>
@@ -699,6 +699,7 @@
     <parameter key="unit.datagrid.configurator.class">WellCommerce\Bundle\UnitBundle\DataGrid\UnitDataGridConfigurator</parameter>
     <parameter key="unit.form.class">WellCommerce\Bundle\UnitBundle\Form\UnitForm</parameter>
     <parameter key="unit.listener.class">WellCommerce\Bundle\UnitBundle\EventListener\UnitListener</parameter>
+    <parameter key="unit.manager.class">WellCommerce\Bundle\UnitBundle\Manager\UnitManager</parameter>
     <parameter key="company.controller.admin.class">WellCommerce\Bundle\CompanyBundle\Controller\Admin\CompanyController</parameter>
     <parameter key="company.repository.class">WellCommerce\Bundle\CompanyBundle\Entity\CompanyRepository</parameter>
     <parameter key="company.datagrid.class">WellCommerce\Bundle\CompanyBundle\DataGrid\CompanyDataGrid</parameter>
@@ -1715,7 +1716,7 @@
       <argument type="collection">
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>53ea616b8bebf</argument>
+            <argument>53ea674324c85</argument>
           </service>
         </argument>
       </argument>
@@ -1831,7 +1832,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.context"/>
-            <argument>53ea616b8bebf</argument>
+            <argument>53ea674324c85</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
           </service>
         </argument>
@@ -2369,8 +2370,8 @@
       <argument type="collection"/>
       <argument type="collection"/>
     </service>
-    <service id="doctrine.orm.default_entity_manager" class="EntityManager53ea616bb5ea9_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager">
-      <file>D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53ea616bb5ea9.php</file>
+    <service id="doctrine.orm.default_entity_manager" class="EntityManager53ea67434d4ff_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager">
+      <file>D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53ea67434d4ff.php</file>
       <argument type="service">
         <service class="Doctrine\ORM\EntityManager" factory-method="create" factory-class="%doctrine.orm.entity_manager.class%" public="false">
           <argument type="service" id="doctrine.dbal.default_connection"/>
@@ -2738,6 +2739,7 @@
       <argument type="service" id="router"/>
       <argument type="service" id="xajax_manager"/>
       <argument type="service" id="translator"/>
+      <argument type="service" id="redirect_helper"/>
     </service>
     <service id="twig.extension.string_loader" class="Twig_Extension_StringLoader">
       <tag name="twig.extension"/>
@@ -2776,12 +2778,11 @@
       </call>
     </service>
     <service id="unit.controller.admin" class="WellCommerce\Bundle\UnitBundle\Controller\Admin\UnitController">
-      <call method="setContainer">
-        <argument type="service" id="service_container"/>
-      </call>
-      <call method="setRepository">
-        <argument type="service" id="unit.repository"/>
-      </call>
+      <argument type="service" id="service_container"/>
+      <argument type="service" id="admin_manager"/>
+      <argument type="service" id="unit.repository"/>
+      <argument type="service" id="unit.datagrid"/>
+      <argument type="service" id="unit.form"/>
     </service>
     <service id="unit.repository" class="WellCommerce\Bundle\UnitBundle\Repository\UnitRepository" factory-method="getRepository" factory-service="doctrine.orm.entity_manager">
       <argument>WellCommerceUnitBundle:Unit</argument>
@@ -2789,26 +2790,17 @@
         <argument type="service" id="service_container"/>
       </call>
     </service>
+    <service id="unit.datagrid" class="WellCommerce\Bundle\UnitBundle\DataGrid\UnitDataGrid">
+      <configurator service="unit.datagrid.configurator" method="configure"/>
+    </service>
     <service id="unit.datagrid.configurator" class="WellCommerce\Bundle\UnitBundle\DataGrid\UnitDataGridConfigurator">
       <argument key="identifier">unit</argument>
-      <argument key="1" type="service" id="datagrid_options"/>
-      <argument key="2" type="service" id="datagrid_columns"/>
-      <call method="setContainer">
-        <argument type="service" id="service_container"/>
-      </call>
-    </service>
-    <service id="unit.datagrid" class="WellCommerce\Bundle\UnitBundle\DataGrid\UnitDataGrid">
-      <argument type="service" id="service_container"/>
-      <argument type="service" id="unit.repository"/>
-      <argument type="service" id="datagrid_loader"/>
-      <configurator service="unit.datagrid.configurator" method="configure"/>
+      <argument key="1" type="service" id="datagrid_manager"/>
+      <argument key="2" type="service" id="unit.repository"/>
     </service>
     <service id="unit.form" class="WellCommerce\Bundle\UnitBundle\Form\UnitForm">
       <call method="setContainer">
         <argument type="service" id="service_container"/>
-      </call>
-      <call method="setRepository">
-        <argument type="service" id="unit.repository"/>
       </call>
     </service>
     <service id="unit.listener" class="WellCommerce\Bundle\UnitBundle\EventListener\UnitListener">

@@ -18,7 +18,8 @@ namespace WellCommerce\Bundle\CoreBundle\Helper\Redirect;
  * @package WellCommerce\Bundle\CoreBundle\Helper\Redirect
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface RedirectHelperInterface {
+interface RedirectHelperInterface
+{
 
     /**
      * Redirects user to another resource
@@ -39,4 +40,13 @@ interface RedirectHelperInterface {
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function redirectToAction($action, array $params = []);
+
+    /**
+     * Resolves route for given action
+     *
+     * @param $action
+     *
+     * @return mixed
+     */
+    public function getActionForCurrentController($action);
 } 

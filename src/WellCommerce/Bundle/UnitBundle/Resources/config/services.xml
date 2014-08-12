@@ -10,16 +10,16 @@
         <parameter key="unit.datagrid.configurator.class">WellCommerce\Bundle\UnitBundle\DataGrid\UnitDataGridConfigurator</parameter>
         <parameter key="unit.form.class">WellCommerce\Bundle\UnitBundle\Form\UnitForm</parameter>
         <parameter key="unit.listener.class">WellCommerce\Bundle\UnitBundle\EventListener\UnitListener</parameter>
+        <parameter key="unit.manager.class">WellCommerce\Bundle\UnitBundle\Manager\UnitManager</parameter>
     </parameters>
 
     <services>
         <service id="unit.controller.admin" class="%unit.controller.admin.class%">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <call method="setRepository">
-                <argument type="service" id="unit.repository"/>
-            </call>
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="admin_manager"/>
+            <argument type="service" id="unit.repository"/>
+            <argument type="service" id="unit.datagrid"/>
+            <argument type="service" id="unit.form"/>
         </service>
 
         <service id="unit.repository" class="%unit.repository.class%" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
@@ -29,28 +29,19 @@
             </call>
         </service>
 
-        <service id="unit.datagrid.configurator" class="%unit.datagrid.configurator.class%">
-            <argument key="identifier">unit</argument>
-            <argument type="service" id="datagrid_options" />
-            <argument type="service" id="datagrid_columns" />
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
+        <service id="unit.datagrid" class="%unit.datagrid.class%">
+            <configurator service="unit.datagrid.configurator" method="configure" />
         </service>
 
-        <service id="unit.datagrid" class="%unit.datagrid.class%">
-            <argument type="service" id="service_container"/>
+        <service id="unit.datagrid.configurator" class="%unit.datagrid.configurator.class%">
+            <argument key="identifier">unit</argument>
+            <argument type="service" id="datagrid_manager"/>
             <argument type="service" id="unit.repository"/>
-            <argument type="service" id="datagrid_loader" />
-            <configurator service="unit.datagrid.configurator" method="configure" />
         </service>
 
         <service id="unit.form" class="%unit.form.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
-            </call>
-            <call method="setRepository">
-                <argument type="service" id="unit.repository"/>
             </call>
         </service>
 

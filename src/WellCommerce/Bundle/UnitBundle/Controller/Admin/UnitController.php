@@ -13,11 +13,6 @@
 namespace WellCommerce\Bundle\UnitBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Validator\Exception\ValidatorException;
-use WellCommerce\Bundle\UnitBundle\Repository\UnitRepositoryInterface;
-use WellCommerce\Bundle\UnitBundle\Entity\Unit;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
@@ -30,34 +25,5 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
  */
 class UnitController extends AbstractAdminController
 {
-    public function indexAction()
-    {
-        return [
-            'datagrid' => $this->getDataGrid($this->get('unit.datagrid'))
-        ];
-    }
 
-    /**
-     * Returns unit form
-     *
-     * @param Unit $unit
-     *
-     * @return \WellCommerce\Bundle\CoreBundle\Form\Elements\Form
-     */
-    public function getUnitForm(Unit $unit)
-    {
-        return $this->getFormBuilder($this->get('unit.form'), $unit, [
-            'name' => 'unit'
-        ]);
-    }
-
-    /**
-     * Sets repository object
-     *
-     * @param UnitRepositoryInterface $repository
-     */
-    public function setRepository(UnitRepositoryInterface $repository)
-    {
-        $this->repository = $repository;
-    }
 }

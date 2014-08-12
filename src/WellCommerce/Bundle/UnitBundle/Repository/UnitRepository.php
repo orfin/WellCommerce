@@ -11,7 +11,6 @@
  */
 namespace WellCommerce\Bundle\UnitBundle\Repository;
 
-use WellCommerce\Bundle\CoreBundle\DataGrid\Repository\DataGridAwareRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 
 /**

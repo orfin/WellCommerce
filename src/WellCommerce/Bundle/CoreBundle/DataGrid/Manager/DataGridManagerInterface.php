@@ -71,4 +71,13 @@ interface DataGridManagerInterface
      * @return mixed
      */
     public function translate($message);
+
+    /**
+     * Returns a route for given action in scope of current controller
+     *
+     * @param $action
+     *
+     * @return mixed
+     */
+    public function getRouteForAction($action);
 } 

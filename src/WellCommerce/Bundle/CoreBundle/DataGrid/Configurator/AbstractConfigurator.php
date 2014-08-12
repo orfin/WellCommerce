@@ -12,11 +12,13 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DataGrid\Configurator;
 
-use WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnCollection;
+use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\EventHandler\ClickRowEventHandler;
+use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\EventHandler\DeleteRowEventHandler;
+use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\EventHandler\EditRowEventHandler;
+use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\EventHandler\LoadEventHandler;
 use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Manager\DataGridManagerInterface;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Options\OptionsInterface;
-use WellCommerce\Bundle\CoreBundle\DataGrid\QueryBuilder\QueryBuilderInterface;
+use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\OptionInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Repository\DataGridAwareRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 
@@ -50,8 +52,11 @@ class AbstractConfigurator implements ConfiguratorInterface
      * @param DataGridManagerInterface         $manager
      * @param DataGridAwareRepositoryInterface $repository
      */
-    public function __construct($identifier, DataGridManagerInterface $manager, DataGridAwareRepositoryInterface $repository)
-    {
+    public function __construct(
+        $identifier,
+        DataGridManagerInterface $manager,
+        DataGridAwareRepositoryInterface $repository
+    ) {
         $this->identifier = $identifier;
         $this->manager    = $manager;
         $this->repository = $repository;
@@ -60,11 +65,38 @@ class AbstractConfigurator implements ConfiguratorInterface
     /**
      * {@inheritdoc}
      */
-    public function configure(DataGridInterface $dataGrid)
+    public function configure(DataGridInterface $datagrid)
     {
-        $dataGrid->setIdentifier($this->identifier);
+        $datagrid->setIdentifier($this->identifier);
 
-        $dataGrid->setColumns($this->manager->getColumnCollection());
+        $eventHandlers = $this->manager->getOptions()->getEventHandlers();
+
+        $eventHandlers->add(new LoadEventHandler([
+            'function' => $this->manager->getXajaxManager()->register([$this->getFunction('load'), $datagrid, 'load'])
+        ]));
+
+        $editRoute = $this->manager->getRouteForAction('edit');
+
+        $eventHandlers->add(new EditRowEventHandler([
+            'function'   => $this->getFunction('edit'),
+            'row_action' => OptionInterface::ACTION_EDIT,
+            'route'      => $this->manager->getRouter()->generate($editRoute)
+        ]));
+
+        $eventHandlers->add(new ClickRowEventHandler([
+            'function' => $this->getFunction('click'),
+            'route'    => $this->manager->getRouter()->generate($editRoute)
+        ]));
+
+        $eventHandlers->add(new DeleteRowEventHandler([
+            'function'   => $function = $this->getFunction('delete'),
+            'callback'   => $this->manager->getXajaxManager()->register([$function, $datagrid, 'delete']),
+            'row_action' => OptionInterface::ACTION_DELETE,
+        ]));
+
+        $datagrid->setRepository($this->repository);
+
+        $datagrid->setManager($this->manager);
     }
 
     /**

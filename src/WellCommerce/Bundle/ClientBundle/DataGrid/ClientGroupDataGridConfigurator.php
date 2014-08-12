@@ -29,38 +29,5 @@ use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
  */
 class ClientGroupDataGridConfigurator extends AbstractConfigurator implements ConfiguratorInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function configure(DataGridInterface $datagrid)
-    {
-        $datagrid->setIdentifier($this->identifier);
 
-        $eventHandlers = $this->manager->getOptions()->getEventHandlers();
-
-        $eventHandlers->add(new LoadEventHandler([
-            'function' => $this->manager->getXajaxManager()->register([$this->getFunction('load'), $datagrid, 'load'])
-        ]));
-
-        $eventHandlers->add(new EditRowEventHandler([
-            'function'   => $this->getFunction('edit'),
-            'row_action' => OptionInterface::ACTION_EDIT,
-            'route'      => $this->manager->getRouter()->generate('admin.client_group.edit')
-        ]));
-
-        $eventHandlers->add(new ClickRowEventHandler([
-            'function' => $this->getFunction('click'),
-            'route'    => $this->manager->getRouter()->generate('admin.client_group.edit')
-        ]));
-
-        $eventHandlers->add(new DeleteRowEventHandler([
-            'function'   => $function = $this->getFunction('delete'),
-            'callback'   => $this->manager->getXajaxManager()->register([$function, $datagrid, 'delete']),
-            'row_action' => OptionInterface::ACTION_DELETE,
-        ]));
-
-        $datagrid->setRepository($this->repository);
-
-        $datagrid->setManager($this->manager);
-    }
 }

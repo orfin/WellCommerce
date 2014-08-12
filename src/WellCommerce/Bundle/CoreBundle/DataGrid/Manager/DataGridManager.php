@@ -18,6 +18,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnCollection;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Loader\LoaderInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Options\OptionsInterface;
+use WellCommerce\Bundle\CoreBundle\Helper\Redirect\RedirectHelperInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\XajaxManager;
 
 /**
@@ -35,6 +36,7 @@ class DataGridManager implements DataGridManagerInterface
     protected $router;
     protected $xajaxManager;
     protected $translator;
+    protected $redirectHelper;
 
     /**
      * Constructor
@@ -46,6 +48,7 @@ class DataGridManager implements DataGridManagerInterface
      * @param RouterInterface          $router
      * @param XajaxManager             $xajaxManager
      * @param TranslatorInterface      $translator
+     * @param RedirectHelperInterface  $redirectHelper
      */
     public function __construct(
         ColumnCollection $columnCollection,
@@ -54,7 +57,8 @@ class DataGridManager implements DataGridManagerInterface
         EventDispatcherInterface $eventDispatcher,
         RouterInterface $router,
         XajaxManager $xajaxManager,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        RedirectHelperInterface $redirectHelper
     ) {
         $this->columnCollection = $columnCollection;
         $this->options          = $options;
@@ -63,7 +67,7 @@ class DataGridManager implements DataGridManagerInterface
         $this->router           = $router;
         $this->xajaxManager     = $xajaxManager;
         $this->translator       = $translator;
-
+        $this->redirectHelper   = $redirectHelper;
     }
 
     /**
@@ -128,5 +132,13 @@ class DataGridManager implements DataGridManagerInterface
     public function translate($message)
     {
         return $this->translator->trans($message, [], 'admin');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRouteForAction($action)
+    {
+        return $this->redirectHelper->getActionForCurrentController($action);
     }
 } 

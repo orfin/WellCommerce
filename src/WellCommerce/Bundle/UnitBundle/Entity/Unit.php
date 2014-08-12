@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\UnitBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
-use WellCommerce\Bundle\CoreBundle\Entity\BaseSubjectInterface;
 
 /**
  * Class Locale
@@ -26,7 +25,7 @@ use WellCommerce\Bundle\CoreBundle\Entity\BaseSubjectInterface;
  * @ORM\HasLifecycleCallbacks
  * @ORM\Entity(repositoryClass="WellCommerce\Bundle\UnitBundle\Repository\UnitRepository")
  */
-class Unit implements BaseSubjectInterface
+class Unit
 {
     use ORMBehaviors\Translatable\Translatable;
     use ORMBehaviors\Timestampable\Timestampable;
