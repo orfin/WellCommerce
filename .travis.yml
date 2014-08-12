@@ -13,8 +13,11 @@ before_install:
     - sudo rm -rf /dev/shm && sudo ln -s /run/shm /dev/shm
 
 install:
-    - sudo apt-get install -y --force-yes apache2 libapache2-mod-php5 php5-curl php5-intl > /dev/null
+    - sudo apt-get install -y --force-yes apache2 libapache2-mod-php5 php5-curl php5-mysql php5-intl > /dev/null
+    # Create VirtualHost
     - sudo sed -i -e "s,/var/www,$(pwd)/web,g" /etc/apache2/sites-available/default
+    - sudo sed -i -e "/DocumentRoot/i\ServerName wellcommerce.tpl" /etc/apache2/sites-available/default
+    - echo "127.0.0.1 wellcommerce.tpl" | sudo tee -a /etc/hosts
     - sudo /etc/init.d/apache2 restart
 
 before_script:
@@ -25,15 +28,19 @@ before_script:
     - php app/console doctrine:schema:create --env=dev -vvv
     - php app/console doctrine:fixtures:load --purge-with-truncate --no-interaction -vvv
     - php app/console cache:warmup --env=dev -vvv
+    - php app/console assets:install
+    - php app/console assetic:dump
 
-    - sh -e /etc/init.d/xvfb start
-    - export DISPLAY=:99.0
-    - wget http://selenium-release.storage.googleapis.com/2.42/selenium-server-standalone-2.42.2.jar
-    - java -jar selenium-server-standalone-2.42.2.jar > /dev/null &
+    - "sh -e /etc/init.d/xvfb start"
+    - "export DISPLAY=:99.0"
+    - "wget http://selenium-release.storage.googleapis.com/2.42/selenium-server-standalone-2.42.2.jar"
+    - "java -jar selenium-server-standalone-2.42.2.jar > /dev/null &"
     - sleep 5
 
 script:
     - bin/codecept run --steps --debug --html
+    - php -v
+    -
 
 notifications:
     email: "travis@wellcommerce.org"
