@@ -11,9 +11,11 @@
  */
 namespace WellCommerce\Bundle\CoreBundle\Repository;
 
+use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
+use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 
 /**
@@ -121,5 +123,26 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
         return $this->getEntityName();
     }
 
+    public function findResource(Request $request, array $criteria = [])
+    {
+        $params = [];
+        if ($request->attributes->has('id')) {
+            $params = [
+                'id' => $request->attributes->get('id')
+            ];
+        }
+        if ($request->attributes->has('slug')) {
+            $params = [
+                'slug' => $request->attributes->get('slug')
+            ];
+        }
 
+        $criteria = array_merge($params, $criteria);
+
+        if (!$resource = $this->findOneBy($criteria)) {
+            throw new EntityNotFoundException($this->getEntityName());
+        }
+
+        return $resource;
+    }
 }

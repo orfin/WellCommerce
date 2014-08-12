@@ -18,6 +18,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 use WellCommerce\Bundle\AdminMenuBundle\Builder\AdminMenuItem;
 use WellCommerce\Bundle\AdminMenuBundle\Event\AdminMenuInitEvent;
 use WellCommerce\Bundle\CoreBundle\Event\AdminMenuEvent;
+use WellCommerce\Bundle\CoreBundle\Event\ResourceEvent;
 
 /**
  * Class CompanyListener

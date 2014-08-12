@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Repository;
 
+use Symfony\Component\HttpFoundation\Request;
+
 /**
  * Interface RepositoryInterface
  *
@@ -43,5 +45,15 @@ interface RepositoryInterface
      * @return string
      */
     public function getAlias();
+
+    /**
+     * Tries to find a resource using request parameters
+     *
+     * @param Request $request
+     * @param array   $criteria
+     *
+     * @return mixed
+     */
+    public function findResource(Request $request, array $criteria = []);
 
 } 

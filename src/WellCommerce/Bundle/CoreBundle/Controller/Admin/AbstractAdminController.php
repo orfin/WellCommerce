@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Validator\Exception\ValidatorException;
 use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
+use WellCommerce\Bundle\CoreBundle\Controller\Admin\Manager\AdminManagerInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
 use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
@@ -28,16 +29,6 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
  */
 abstract class AbstractAdminController extends AbstractController implements AdminControllerInterface
 {
-    /**
-     * @var \WellCommerce\Bundle\CoreBundle\Helper\Flash\FlashHelper
-     */
-    protected $flashHelper;
-
-    /**
-     * @var \WellCommerce\Bundle\CoreBundle\Helper\Redirect\RedirectHelperInterface
-     */
-    protected $redirectHelper;
-
     /**
      * @var DataGridInterface
      */
@@ -54,53 +45,38 @@ abstract class AbstractAdminController extends AbstractController implements Adm
     protected $form;
 
     /**
-     * @var \Doctrine\Common\Persistence\ObjectManager
+     * @var AdminManagerInterface
      */
-    protected $objectManager;
+    protected $manager;
 
     /**
      * Constructor
      *
-     * @param ContainerInterface  $container
-     * @param RepositoryInterface $repository
-     * @param DataGridInterface   $dataGrid
-     * @param FormInterface       $form
+     * @param ContainerInterface    $container
+     * @param RepositoryInterface   $repository
+     * @param DataGridInterface     $dataGrid
+     * @param FormInterface         $form
+     * @param AdminManagerInterface $manager
      */
     public function __construct(
         ContainerInterface $container,
+        AdminManagerInterface $manager,
         RepositoryInterface $repository,
         DataGridInterface $dataGrid,
         FormInterface $form
     ) {
         $this->setContainer($container);
-        $this->flashHelper    = $container->get('flash_helper');
-        $this->redirectHelper = $container->get('redirect_helper');
-        $this->repository     = $repository;
-        $this->dataGrid       = $dataGrid;
-        $this->form           = $form;
-        $this->objectManager  = $container->get('doctrine')->getManager();
+        $this->repository = $repository;
+        $this->dataGrid   = $dataGrid;
+        $this->form       = $form;
+        $this->manager    = $manager;
     }
 
     public function getForm($resource)
     {
         return $this->getFormBuilder($this->form, $resource, [
-            'name' => 'company'
+            'name' => $this->repository->getAlias()
         ]);
-    }
-
-    /**
-     * Updates a resource
-     *
-     * @param $resource
-     *
-     * @return mixed
-     */
-    protected function saveResource($resource)
-    {
-        $this->objectManager->persist($resource);
-        $this->objectManager->flush();
-
-        return $resource;
     }
 
     public function indexAction()
@@ -116,15 +92,9 @@ abstract class AbstractAdminController extends AbstractController implements Adm
         $form     = $this->getForm($resource);
 
         if ($form->handleRequest($request)->isValid()) {
-            try {
-                $this->saveResource($resource);
-                $this->flashHelper->addSuccess('success');
+            $this->manager->create($resource, $request);
 
-                return $this->redirectHelper->redirectToAction('index');
-
-            } catch (ValidatorException $exception) {
-                $this->flashHelper->addError($exception->getMessage());
-            }
+            return $this->manager->getRedirectHelper()->redirectToAction('index');
         }
 
         return [
@@ -134,49 +104,21 @@ abstract class AbstractAdminController extends AbstractController implements Adm
 
     public function editAction(Request $request)
     {
-        $resource = $this->findOrFail($request);
+        $resource = $this->repository->findResource($request);
         $form     = $this->getForm($resource);
 
         if ($form->handleRequest($request)->isValid()) {
-            try {
-                $this->saveResource($resource);
-                $this->flashHelper->addSuccess('success');
-                if ($form->isAction('continue')) {
-                    return $this->redirectHelper->redirectToAction('edit', ['id' => $resource->getId()]);
-                }
+            $this->manager->update($resource, $request);
 
-                return $this->redirectHelper->redirectToAction('index');
-
-            } catch (ValidatorException $exception) {
-                $this->flashHelper->addError($exception->getMessage());
+            if ($form->isAction('continue')) {
+                return $this->manager->getRedirectHelper()->redirectToAction('edit', $resource);
             }
+
+            return $this->manager->getRedirectHelper()->redirectToAction('index');
         }
 
         return [
             'form' => $form
         ];
-    }
-
-    protected function findOrFail(Request $request, array $criteria = [])
-    {
-        $params = [];
-        if ($request->attributes->has('id')) {
-            $params = [
-                'id' => $request->attributes->get('id')
-            ];
-        }
-        if ($request->attributes->has('slug')) {
-            $params = [
-                'slug' => $request->attributes->get('slug')
-            ];
-        }
-
-        $criteria = array_merge($params, $criteria);
-
-        if (!$resource = $this->repository->findOneBy($criteria)) {
-            throw new NotFoundHttpException('Resource not found');
-        }
-
-        return $resource;
     }
 }
