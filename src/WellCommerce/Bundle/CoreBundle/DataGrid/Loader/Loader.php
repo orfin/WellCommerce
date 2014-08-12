@@ -13,7 +13,9 @@
 namespace WellCommerce\Bundle\CoreBundle\DataGrid\Loader;
 
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Pagerfanta\Pagerfanta;
 use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
 
 /**
  * Class Loader
@@ -52,20 +54,23 @@ class Loader implements LoaderInterface
 
     public function loadResults()
     {
-        $request       = $this->dataGrid->getCurrentRequest();
-        $this->columns = $this->dataGrid->getColumns();
-        $queryBuilder  = $this->dataGrid->getDataGridQueryBuilder();
-        $orderBy       = $this->columns->get($request->getOrderBy())->getSource();
+        $request        = $this->dataGrid->getCurrentRequest();
+        $this->columns  = $this->dataGrid->getColumns();
+        $queryBuilder   = $this->dataGrid->getDataGridQueryBuilder();
+        $orderBy        = $this->columns->get($request->getOrderBy())->getSource();
+        $paginatorQuery = $queryBuilder->getQuery();
+        $paginator      = new Paginator($paginatorQuery, $fetchJoinCollection = true);
+        $total          = $paginator->count();
 
-        $queryBuilder->select($this->getSelectClause());
         $queryBuilder->addOrderBy($orderBy, $request->getOrderDir());
+        $queryBuilder->select($this->getSelectClause());
         $queryBuilder->setFirstResult($request->getStartingFrom());
         $queryBuilder->setMaxResults($request->getLimit());
+
         $query = $queryBuilder->getQuery();
 
         $query->useResultCache(true, 3600, $this->dataGrid->getIdentifier());
         $result = $query->getArrayResult();
-        $total  = count($result);
 
         return [
             'data_id'       => $request->getId(),
