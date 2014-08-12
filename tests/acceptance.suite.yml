@@ -11,5 +11,5 @@ modules:
         - AcceptanceHelper
     config:
         WebDriver:
-            url: 'http://wellcommerce.tpl/app_dev.php'
+            url: 'http://wellcommerce.tpl'
             browser: firefox
