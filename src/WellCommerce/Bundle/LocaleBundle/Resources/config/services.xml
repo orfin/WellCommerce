@@ -10,6 +10,7 @@
         <parameter key="locale.datagrid.configurator.class">WellCommerce\Bundle\LocaleBundle\DataGrid\LocaleDataGridConfigurator</parameter>
         <parameter key="locale.form.class">WellCommerce\Bundle\LocaleBundle\Form\LocaleForm</parameter>
         <parameter key="locale.listener.class">WellCommerce\Bundle\LocaleBundle\EventListener\LocaleListener</parameter>
+        <parameter key="locale.provider.class">WellCommerce\Bundle\LocaleBundle\Provider\LocaleProvider</parameter>
     </parameters>
 
     <services>
@@ -33,6 +34,10 @@
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
+        </service>
+
+        <service id="locale.provider" class="%locale.provider.class%">
+            <argument type="service" id="locale.repository"/>
         </service>
 
         <service id="locale.datagrid" class="%locale.datagrid.class%">

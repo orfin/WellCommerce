@@ -13,8 +13,6 @@ namespace WellCommerce\Bundle\CoreBundle\Controller\Admin;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Validator\Exception\ValidatorException;
 use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\Manager\AdminManagerInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;

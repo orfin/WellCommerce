@@ -28,17 +28,33 @@ class ResourceEvent extends Event
     private $resource;
     private $request;
 
+    /**
+     * Constructor
+     *
+     * @param         $resource
+     * @param Request $request
+     */
     public function __construct($resource, Request $request)
     {
         $this->request  = $request;
         $this->resource = $resource;
     }
 
+    /**
+     * Returns current resource
+     *
+     * @return mixed
+     */
     public function getResource()
     {
         return $this->resource;
     }
 
+    /**
+     * Returns request object passed from manager
+     *
+     * @return Request
+     */
     public function getRequest()
     {
         return $this->request;

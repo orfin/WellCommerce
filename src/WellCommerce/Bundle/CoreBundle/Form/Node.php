@@ -419,13 +419,21 @@ abstract class Node extends ContainerAware
         return in_array($key, $this->container->get('locale.repository')->getAvailableLocaleCodes());
     }
 
+    private function isNew($key)
+    {
+        return substr($key, 0, 4) == 'new-';
+    }
+
+    private function isNumeric($key)
+    {
+        return is_numeric($key);
+    }
+
     protected function isIterated($array)
     {
-        if (is_numeric(key($array)) || substr(key($array), 0, 4) == 'new-' || $this->isLocale(key($array))) {
-            return true;
-        }
+        $key = key($array);
 
-        return false;
+        return ($this->isNumeric($key) || $this->isNew($key) || $this->isLocale($key));
     }
 
     public function populate($value)

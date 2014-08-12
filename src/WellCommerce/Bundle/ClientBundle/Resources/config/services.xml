@@ -15,12 +15,11 @@
 
     <services>
         <service id="client_group.controller.admin" class="%client_group.controller.admin.class%">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <call method="setRepository">
-                <argument type="service" id="client_group.repository"/>
-            </call>
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="admin_manager"/>
+            <argument type="service" id="client_group.repository"/>
+            <argument type="service" id="client_group.datagrid"/>
+            <argument type="service" id="client_group.form"/>
         </service>
 
         <service id="client_group.repository" class="%client_group.repository.class%" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
@@ -30,20 +29,9 @@
             </call>
         </service>
 
-        <service id="client_group.datagrid.configurator" class="%client_group.datagrid.configurator.class%">
-            <argument key="identifier">client_group</argument>
-            <argument type="service" id="datagrid_options" />
-            <argument type="service" id="datagrid_columns" />
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
-
         <service id="client_group.datagrid" class="%client_group.datagrid.class%">
-            <argument type="service" id="service_container"/>
-            <argument type="service" id="client_group.repository"/>
-            <argument type="service" id="datagrid_loader" />
-            <configurator service="client_group.datagrid.configurator" method="configure" />
+            <argument type="service" id="datagrid_manager"/>
+            <argument type="service" id="company.repository"/>
         </service>
 
         <service id="client_group.form" class="%client_group.form.class%">

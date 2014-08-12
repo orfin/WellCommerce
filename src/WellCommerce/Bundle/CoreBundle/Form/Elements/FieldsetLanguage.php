@@ -95,8 +95,8 @@ class FieldsetLanguage extends Fieldset implements ElementInterface
     {
         $options = [];
         foreach ($this->options['languages'] as $language) {
-            $value     = addslashes($language->getCode());
-            $label     = addslashes($language->getCode());
+            $value     = addslashes($language['code']);
+            $label     = addslashes($language['code']);
             $flag      = addslashes(sprintf('%s.png', substr($label, 0, 2)));
             $options[] = "{sValue: '{$value}', sLabel: '{$label}',sFlag: '{$flag}' }";
         }

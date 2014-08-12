@@ -61,7 +61,10 @@ class LocaleRepository extends AbstractEntityRepository implements LocaleReposit
      */
     public function getAvailableLocales()
     {
-        return $this->findAll();
+        $qb    = $this->createQueryBuilder('locale');
+        $query = $qb->getQuery();
+
+        return $query->getArrayResult();
     }
 
     /**
@@ -71,8 +74,9 @@ class LocaleRepository extends AbstractEntityRepository implements LocaleReposit
     {
         $locales = $this->getAvailableLocales();
         $codes   = [];
+
         foreach ($locales as $locale) {
-            $codes[$locale->getCode()] = $locale->getCode();
+            $codes[$locale['code']] = $locale['code'];
         }
 
         return $codes;
