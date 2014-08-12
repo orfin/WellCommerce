@@ -26,7 +26,7 @@ before_script:
     - composer install --prefer-source --no-interaction
     - php app/console doctrine:database:create --env=dev -vvv
     - php app/console doctrine:schema:create --env=dev -vvv
-    - php app/console doctrine:fixtures:load --purge-with-truncate --no-interaction -vvv
+    - php app/console doctrine:fixtures:load --no-interaction -vvv
     - php app/console cache:warmup --env=dev -vvv
     - php app/console assets:install
     - php app/console assetic:dump
