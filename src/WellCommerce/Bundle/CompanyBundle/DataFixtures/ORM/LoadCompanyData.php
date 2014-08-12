@@ -13,8 +13,10 @@
 namespace WellCommerce\Bundle\CompanyBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use WellCommerce\Bundle\CompanyBundle\Entity\Company;
+use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
 
 /**
  * Class LoadCompanyData
@@ -22,13 +24,20 @@ use WellCommerce\Bundle\CompanyBundle\Entity\Company;
  * @package WellCommerce\Bundle\CompanyBundle\DataFixtures\ORM
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LoadCompanyData implements FixtureInterface
+class LoadCompanyData extends AbstractDataFixture implements FixtureInterface, OrderedFixtureInterface
 {
     /**
      * {@inheritDoc}
      */
     public function load(ObjectManager $manager)
     {
+        for ($i=0; $i < 10; $i++) {
+            echo $this->fakerGenerator->company.PHP_EOL;
+        }
+        die();
+
+        $this->fakerGenerator->company;
+
         $company = new Company();
         $company->setName('Your Company Inc.');
         $company->setShortName('Company');
@@ -40,5 +49,10 @@ class LoadCompanyData implements FixtureInterface
         $company->setCity('Los Angeles');
         $manager->persist($company);
         $manager->flush();
+    }
+
+    public function getOrder()
+    {
+        return 0;
     }
 }

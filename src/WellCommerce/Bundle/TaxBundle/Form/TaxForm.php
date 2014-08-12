@@ -9,26 +9,26 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Bundle\UnitBundle\Form;
+namespace WellCommerce\Bundle\TaxBundle\Form;
 
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\BaseSubjectInterface;
-use WellCommerce\Bundle\UnitBundle\Entity\Unit;
+use WellCommerce\Bundle\TaxBundle\Entity\Tax;
 use WellCommerce\Bundle\CoreBundle\Form\AbstractForm;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
-use WellCommerce\Bundle\UnitBundle\Repository\UnitRepositoryInterface;
+use WellCommerce\Bundle\TaxBundle\Repository\TaxRepositoryInterface;
 
 /**
- * Class UnitForm
+ * Class TaxForm
  *
- * @package WellCommerce\Unit\Form
+ * @package WellCommerce\Tax\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class UnitForm extends AbstractForm implements FormInterface
+class TaxForm extends AbstractForm implements FormInterface
 {
     /**
-     * @var UnitRepositoryInterface
+     * @var TaxRepositoryInterface
      */
     private $repository;
 
@@ -44,14 +44,27 @@ class UnitForm extends AbstractForm implements FormInterface
             'label' => $this->trans('form.required_data.label')
         ]));
 
+        $requiredData->addChild($builder->getElement('text_field', [
+            'name'    => 'value',
+            'label'   => $this->trans('tax.required_data.value.label'),
+            'rules'   => [
+                $builder->getRule('required', [
+                    'message' => $this->trans('Value is required')
+                ]),
+            ],
+            'filters' => [
+                $builder->getFilter('comma_to_dot_changer')
+            ]
+        ]));
+
         $languageData = $requiredData->addChild($builder->getElement('fieldset_language', [
-            'name'      => 'language_data',
-            'label'     => $this->trans('form.required_data.language_data.label')
+            'name'  => 'language_data',
+            'label' => $this->trans('form.required_data.language_data.label')
         ]));
 
         $languageData->addChild($builder->getElement('text_field', [
             'name'  => 'name',
-            'label' => $this->trans('unit.language_data.name.label'),
+            'label' => $this->trans('tax.language_data.name.label'),
             'rules' => [
                 $builder->getRule('required', [
                     'message' => $this->trans('Name is required')
@@ -66,28 +79,31 @@ class UnitForm extends AbstractForm implements FormInterface
         return $form;
     }
 
-    public function setDefaults(OptionsResolverInterface $resolver){
+    public function setDefaults(OptionsResolverInterface $resolver)
+    {
 
     }
+
     /**
      * Prepares form data using retrieved entity
      *
-     * @param Unit $unit Model
+     * @param Tax $tax Model
      *
      * @return array
      */
-    public function getDefaultData(Unit $unit)
+    public function getDefaultData(Tax $tax)
     {
         $formData     = [];
         $languageData = [];
         $accessor     = $this->getPropertyAccessor();
-        $translations = $unit->getTranslations();
+        $translations = $tax->getTranslations();
 
-        foreach($translations as $translation){
+        foreach ($translations as $translation) {
             $languageData['name'][$translation->getLocale()] = $translation->getName();
         }
 
         $accessor->setValue($formData, '[required_data]', [
+            'value'         => $tax->getValue(),
             'language_data' => $languageData
         ]);
 
@@ -97,9 +113,9 @@ class UnitForm extends AbstractForm implements FormInterface
     /**
      * Sets client group repository
      *
-     * @param UnitRepositoryInterface $repository
+     * @param TaxRepositoryInterface $repository
      */
-    public function setRepository(UnitRepositoryInterface $repository)
+    public function setRepository(TaxRepositoryInterface $repository)
     {
         $this->repository = $repository;
     }

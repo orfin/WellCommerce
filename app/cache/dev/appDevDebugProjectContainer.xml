@@ -593,8 +593,8 @@
     <parameter key="jms_di_extra.disable_grep">true</parameter>
     <parameter key="jms_di_extra.doctrine_integration">true</parameter>
     <parameter key="jms_di_extra.cache_warmer.controller_file_blacklist" type="collection"/>
-    <parameter key="jms_di_extra.doctrine_integration.entity_manager.file">D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53ea67da85229.php</parameter>
-    <parameter key="jms_di_extra.doctrine_integration.entity_manager.class">EntityManager53ea67da85229_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager</parameter>
+    <parameter key="jms_di_extra.doctrine_integration.entity_manager.file">D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53ea6d0ee0018.php</parameter>
+    <parameter key="jms_di_extra.doctrine_integration.entity_manager.class">EntityManager53ea6d0ee0018_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager</parameter>
     <parameter key="jms_aop.cache_dir">D:/Git/WellCommerce/app/cache/dev/jms_aop</parameter>
     <parameter key="jms_aop.interceptor_loader.class">JMS\AopBundle\Aop\InterceptorLoader</parameter>
     <parameter key="controller_listener.class">WellCommerce\Bundle\CoreBundle\EventListener\ControllerListener</parameter>
@@ -692,7 +692,13 @@
     <parameter key="twig.extension.admin.class">WellCommerce\Bundle\CoreBundle\Twig\Extension\AdminExtension</parameter>
     <parameter key="admin_menu.repository.class">WellCommerce\Bundle\AdminMenuBundle\Repository\AdminMenuRepository</parameter>
     <parameter key="admin_menu.subscriber.class">WellCommerce\Bundle\AdminMenuBundle\EventListener\AdminMenuListener</parameter>
-    <parameter key="tax.admin.controller.class">WellCommerce\Bundle\TaxBundle\Controller\AdminController</parameter>
+    <parameter key="tax.controller.admin.class">WellCommerce\Bundle\TaxBundle\Controller\Admin\TaxController</parameter>
+    <parameter key="tax.repository.class">WellCommerce\Bundle\TaxBundle\Repository\TaxRepository</parameter>
+    <parameter key="tax.datagrid.class">WellCommerce\Bundle\TaxBundle\DataGrid\TaxDataGrid</parameter>
+    <parameter key="tax.datagrid.configurator.class">WellCommerce\Bundle\TaxBundle\DataGrid\TaxDataGridConfigurator</parameter>
+    <parameter key="tax.form.class">WellCommerce\Bundle\TaxBundle\Form\TaxForm</parameter>
+    <parameter key="tax.listener.class">WellCommerce\Bundle\TaxBundle\EventListener\TaxListener</parameter>
+    <parameter key="tax.manager.class">WellCommerce\Bundle\TaxBundle\Manager\TaxManager</parameter>
     <parameter key="unit.controller.admin.class">WellCommerce\Bundle\UnitBundle\Controller\Admin\UnitController</parameter>
     <parameter key="unit.repository.class">WellCommerce\Bundle\UnitBundle\Repository\UnitRepository</parameter>
     <parameter key="unit.datagrid.class">WellCommerce\Bundle\UnitBundle\DataGrid\UnitDataGrid</parameter>
@@ -1284,6 +1290,10 @@
         <argument>WellCommerce\Bundle\AdminMenuBundle\EventListener\AdminMenuListener</argument>
       </call>
       <call method="addSubscriberService">
+        <argument>tax.listener</argument>
+        <argument>WellCommerce\Bundle\TaxBundle\EventListener\TaxListener</argument>
+      </call>
+      <call method="addSubscriberService">
         <argument>unit.listener</argument>
         <argument>WellCommerce\Bundle\UnitBundle\EventListener\UnitListener</argument>
       </call>
@@ -1718,7 +1728,7 @@
       <argument type="collection">
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>53ea67da5e11f</argument>
+            <argument>53ea6d0eb585e</argument>
           </service>
         </argument>
       </argument>
@@ -1834,7 +1844,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.context"/>
-            <argument>53ea67da5e11f</argument>
+            <argument>53ea6d0eb585e</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
           </service>
         </argument>
@@ -2372,8 +2382,8 @@
       <argument type="collection"/>
       <argument type="collection"/>
     </service>
-    <service id="doctrine.orm.default_entity_manager" class="EntityManager53ea67da85229_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager">
-      <file>D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53ea67da85229.php</file>
+    <service id="doctrine.orm.default_entity_manager" class="EntityManager53ea6d0ee0018_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager">
+      <file>D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53ea6d0ee0018.php</file>
       <argument type="service">
         <service class="Doctrine\ORM\EntityManager" factory-method="create" factory-class="%doctrine.orm.entity_manager.class%" public="false">
           <argument type="service" id="doctrine.dbal.default_connection"/>
@@ -2774,10 +2784,37 @@
       <argument type="service" id="translator"/>
       <argument type="service" id="router"/>
     </service>
-    <service id="tax.admin.controller" class="WellCommerce\Bundle\TaxBundle\Controller\AdminController">
+    <service id="tax.controller.admin" class="WellCommerce\Bundle\TaxBundle\Controller\Admin\TaxController">
+      <argument type="service" id="service_container"/>
+      <argument type="service" id="admin_manager"/>
+      <argument type="service" id="tax.repository"/>
+      <argument type="service" id="tax.datagrid"/>
+      <argument type="service" id="tax.form"/>
+    </service>
+    <service id="tax.repository" class="WellCommerce\Bundle\TaxBundle\Repository\TaxRepository" factory-method="getRepository" factory-service="doctrine.orm.entity_manager">
+      <argument>WellCommerceTaxBundle:Tax</argument>
       <call method="setContainer">
         <argument type="service" id="service_container"/>
       </call>
+    </service>
+    <service id="tax.datagrid" class="WellCommerce\Bundle\TaxBundle\DataGrid\TaxDataGrid">
+      <configurator service="tax.datagrid.configurator" method="configure"/>
+    </service>
+    <service id="tax.datagrid.configurator" class="WellCommerce\Bundle\TaxBundle\DataGrid\TaxDataGridConfigurator">
+      <argument key="identifier">tax</argument>
+      <argument key="1" type="service" id="datagrid_manager"/>
+      <argument key="2" type="service" id="tax.repository"/>
+    </service>
+    <service id="tax.form" class="WellCommerce\Bundle\TaxBundle\Form\TaxForm">
+      <call method="setContainer">
+        <argument type="service" id="service_container"/>
+      </call>
+    </service>
+    <service id="tax.listener" class="WellCommerce\Bundle\TaxBundle\EventListener\TaxListener">
+      <tag name="kernel.event_subscriber"/>
+      <argument type="service" id="service_container"/>
+      <argument type="service" id="translator"/>
+      <argument type="service" id="router"/>
     </service>
     <service id="unit.controller.admin" class="WellCommerce\Bundle\UnitBundle\Controller\Admin\UnitController">
       <argument type="service" id="service_container"/>

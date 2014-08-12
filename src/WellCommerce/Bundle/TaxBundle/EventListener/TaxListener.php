@@ -9,7 +9,7 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Bundle\UnitBundle\EventListener;
+namespace WellCommerce\Bundle\TaxBundle\EventListener;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -23,12 +23,12 @@ use WellCommerce\Bundle\AdminMenuBundle\Event\AdminMenuInitEvent;
 use WellCommerce\Bundle\CoreBundle\Event\AdminMenuEvent;
 
 /**
- * Class UnitListener
+ * Class TaxListener
  *
- * @package WellCommerce\Unit\EventListener
+ * @package WellCommerce\Tax\EventListener
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class UnitListener implements EventSubscriberInterface
+class TaxListener implements EventSubscriberInterface
 {
     /**
      * @var \Symfony\Component\DependencyInjection\ContainerInterface
@@ -62,10 +62,10 @@ class UnitListener implements EventSubscriberInterface
         $builder = $event->getBuilder();
 
         $builder->add(new AdminMenuItem([
-            'id'         => 'unit',
-            'name'       => $this->translator->trans('menu.configuration.unit'),
-            'link'       => $this->router->generate('admin.unit.index'),
-            'path'       => '[menu][configuration][unit]',
+            'id'         => 'tax',
+            'name'       => $this->translator->trans('menu.configuration.tax'),
+            'link'       => $this->router->generate('admin.tax.index'),
+            'path'       => '[menu][configuration][tax]',
             'sort_order' => 20
         ]));
     }
