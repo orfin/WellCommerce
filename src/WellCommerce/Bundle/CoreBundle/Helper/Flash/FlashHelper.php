@@ -65,9 +65,7 @@ class FlashHelper implements FlashHelperInterface
      */
     public function addSuccess($message, array $params = [])
     {
-        $message = $this->translate($message, $params);
-
-        return $this->getFlashBag()->add(FlashHelperInterface::FLASH_TYPE_SUCCESS, $message);
+        return $this->addMessage(FlashHelperInterface::FLASH_TYPE_SUCCESS, $message, $params);
     }
 
     /**
@@ -75,9 +73,7 @@ class FlashHelper implements FlashHelperInterface
      */
     public function addNotice($message, array $params = [])
     {
-        $message = $this->translate($message, $params);
-
-        return $this->getFlashBag()->add(FlashHelperInterface::FLASH_TYPE_NOTICE, $message);
+        return $this->addMessage(FlashHelperInterface::FLASH_TYPE_NOTICE, $message, $params);
     }
 
     /**
@@ -85,9 +81,23 @@ class FlashHelper implements FlashHelperInterface
      */
     public function addError($message, array $params = [])
     {
+        return $this->addMessage(FlashHelperInterface::FLASH_TYPE_ERROR, $message, $params);
+    }
+
+    /**
+     * Shortcut to add new flash message to bag
+     *
+     * @param $type
+     * @param $message
+     * @param $params
+     *
+     * @return mixed
+     */
+    private function addMessage($type, $message, $params)
+    {
         $message = $this->translate($message, $params);
 
-        return $this->getFlashBag()->add(FlashHelperInterface::FLASH_TYPE_ERROR, $message);
+        return $this->getFlashBag()->add($type, $message);
     }
 
     /**
