@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "be0609809bde44017bb7de7277c830d3",
+    "hash": "f1653e22397b7d9fa97491394c9058d4",
     "packages": [
         {
             "name": "codeception/codeception",
@@ -423,12 +423,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "6d0b0486bd6284d0886fef22fea164f7349990fb"
+                "reference": "fba4a3547b4bc9d3b6656f924b9c6dbff6067647"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/6d0b0486bd6284d0886fef22fea164f7349990fb",
-                "reference": "6d0b0486bd6284d0886fef22fea164f7349990fb",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/fba4a3547b4bc9d3b6656f924b9c6dbff6067647",
+                "reference": "fba4a3547b4bc9d3b6656f924b9c6dbff6067647",
                 "shasum": ""
             },
             "require": {
@@ -486,7 +486,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2014-08-05 18:04:50"
+            "time": "2014-08-12 22:16:37"
         },
         {
             "name": "doctrine/doctrine-bundle",
@@ -965,12 +965,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/doctrine2.git",
-                "reference": "723529ffff4880ab97499d03b23f90911db2e0b3"
+                "reference": "6ac19b04bfbd7a97aad5ed8c2abd6279ff5e0022"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/723529ffff4880ab97499d03b23f90911db2e0b3",
-                "reference": "723529ffff4880ab97499d03b23f90911db2e0b3",
+                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/6ac19b04bfbd7a97aad5ed8c2abd6279ff5e0022",
+                "reference": "6ac19b04bfbd7a97aad5ed8c2abd6279ff5e0022",
                 "shasum": ""
             },
             "require": {
@@ -1031,7 +1031,7 @@
                 "database",
                 "orm"
             ],
-            "time": "2014-08-04 14:17:11"
+            "time": "2014-08-12 08:16:17"
         },
         {
             "name": "facebook/webdriver",
@@ -1804,16 +1804,16 @@
         },
         {
             "name": "ocramius/instantiator",
-            "version": "1.0.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Ocramius/Instantiator.git",
-                "reference": "cc754c2289ffd4483c319f6ed6ee88ce21676f64"
+                "reference": "8aa99efa86c51319afc26d23254fe6a8b5a5144a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Ocramius/Instantiator/zipball/cc754c2289ffd4483c319f6ed6ee88ce21676f64",
-                "reference": "cc754c2289ffd4483c319f6ed6ee88ce21676f64",
+                "url": "https://api.github.com/repos/Ocramius/Instantiator/zipball/8aa99efa86c51319afc26d23254fe6a8b5a5144a",
+                "reference": "8aa99efa86c51319afc26d23254fe6a8b5a5144a",
                 "shasum": ""
             },
             "require": {
@@ -1822,6 +1822,7 @@
             },
             "require-dev": {
                 "athletic/athletic": "~0.1.8",
+                "ext-pdo": "*",
                 "ext-phar": "*",
                 "phpunit/phpunit": "~4.0",
                 "squizlabs/php_codesniffer": "2.0.*@ALPHA"
@@ -1845,8 +1846,7 @@
                 {
                     "name": "Marco Pivetta",
                     "email": "ocramius@gmail.com",
-                    "homepage": "http://ocramius.github.com/",
-                    "role": "Developer"
+                    "homepage": "http://ocramius.github.com/"
                 }
             ],
             "description": "A small, lightweight utility to instantiate objects in PHP without invoking their constructors",
@@ -1855,7 +1855,7 @@
                 "constructor",
                 "instantiate"
             ],
-            "time": "2014-06-15 11:44:46"
+            "time": "2014-08-11 23:48:35"
         },
         {
             "name": "ocramius/lazy-map",
@@ -2236,12 +2236,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "c8616e918b4ea31784ce461a9c4c7eea09a8bf55"
+                "reference": "1760c16978a363bfcc4c08e9ca35cccdb8e024f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/c8616e918b4ea31784ce461a9c4c7eea09a8bf55",
-                "reference": "c8616e918b4ea31784ce461a9c4c7eea09a8bf55",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/1760c16978a363bfcc4c08e9ca35cccdb8e024f0",
+                "reference": "1760c16978a363bfcc4c08e9ca35cccdb8e024f0",
                 "shasum": ""
             },
             "require": {
@@ -2302,7 +2302,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2014-08-11 17:37:29"
+            "time": "2014-08-12 09:46:17"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -3116,12 +3116,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "72834831852fadca1c84d916e70f7c6171ab8658"
+                "reference": "1ce0ad50017513ae85d44c4bc68bd7a1cb055abe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/72834831852fadca1c84d916e70f7c6171ab8658",
-                "reference": "72834831852fadca1c84d916e70f7c6171ab8658",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/1ce0ad50017513ae85d44c4bc68bd7a1cb055abe",
+                "reference": "1ce0ad50017513ae85d44c4bc68bd7a1cb055abe",
                 "shasum": ""
             },
             "require": {
@@ -3222,7 +3222,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2014-08-11 09:13:50"
+            "time": "2014-08-12 14:04:33"
         },
         {
             "name": "twig/extensions",
