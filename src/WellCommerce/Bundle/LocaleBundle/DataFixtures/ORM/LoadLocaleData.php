@@ -13,7 +13,9 @@
 namespace WellCommerce\Bundle\LocaleBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
 use WellCommerce\Bundle\LocaleBundle\Entity\Locale;
 
 /**
@@ -22,7 +24,7 @@ use WellCommerce\Bundle\LocaleBundle\Entity\Locale;
  * @package WellCommerce\Bundle\CompanyBundle\DataFixtures\ORM
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LoadLocaleData implements FixtureInterface
+class LoadLocaleData extends AbstractDataFixture implements FixtureInterface, OrderedFixtureInterface
 {
     /**
      * {@inheritDoc}
@@ -46,5 +48,13 @@ class LoadLocaleData implements FixtureInterface
         $manager->persist($fr);
 
         $manager->flush();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getOrder()
+    {
+        return 0;
     }
 }

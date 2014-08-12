@@ -13,9 +13,11 @@
 namespace WellCommerce\Bundle\ClientBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientGroup;
 use WellCommerce\Bundle\CompanyBundle\Entity\Company;
+use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
 
 /**
  * Class LoadClientGroupData
@@ -23,22 +25,32 @@ use WellCommerce\Bundle\CompanyBundle\Entity\Company;
  * @package WellCommerce\Bundle\ClientBundle\DataFixtures\ORM
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LoadClientGroupData implements FixtureInterface
+class LoadClientGroupData extends AbstractDataFixture implements FixtureInterface, OrderedFixtureInterface
 {
     /**
      * {@inheritDoc}
      */
     public function load(ObjectManager $manager)
     {
-        $clientGroup = new ClientGroup();
-        $clientGroup->setDiscount(10);
-        $clientGroup->translate('pl')->setName('Gość');
-        $clientGroup->translate('en')->setName('Guest');
-        $clientGroup->translate('de')->setName('Gast');
-        $clientGroup->translate('fr')->setName('Convié');
-        $clientGroup->mergeNewTranslations();
+        for ($i = 0; $i < 10; $i++) {
+            $clientGroup = new ClientGroup();
+            $clientGroup->setDiscount(10);
+            $clientGroup->translate('pl')->setName('Gość ' . $i);
+            $clientGroup->translate('en')->setName('Guest ' . $i);
+            $clientGroup->translate('de')->setName('Gast ' . $i);
+            $clientGroup->translate('fr')->setName('Convié ' . $i);
+            $clientGroup->mergeNewTranslations();
+            $manager->persist($clientGroup);
+        }
 
-        $manager->persist($clientGroup);
         $manager->flush();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getOrder()
+    {
+        return 3;
     }
 }

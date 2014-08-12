@@ -47,6 +47,9 @@ class LoadCompanyData extends AbstractDataFixture implements FixtureInterface, O
         $manager->flush();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getOrder()
     {
         return 0;
