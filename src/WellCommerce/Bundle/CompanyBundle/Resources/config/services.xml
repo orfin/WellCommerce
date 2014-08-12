@@ -5,10 +5,12 @@
 
     <parameters>
         <parameter key="company.controller.admin.class">WellCommerce\Bundle\CompanyBundle\Controller\Admin\CompanyController</parameter>
-        <parameter key="company.repository.class">WellCommerce\Bundle\CompanyBundle\Entity\CompanyRepository</parameter>
+        <parameter key="company.repository.class">WellCommerce\Bundle\CompanyBundle\Repository\CompanyRepository</parameter>
         <parameter key="company.datagrid.class">WellCommerce\Bundle\CompanyBundle\DataGrid\CompanyDataGrid</parameter>
+        <parameter key="company.datagrid.configurator.class">WellCommerce\Bundle\CompanyBundle\DataGrid\CompanyDataGridConfigurator</parameter>
         <parameter key="company.form.class">WellCommerce\Bundle\CompanyBundle\Form\CompanyForm</parameter>
         <parameter key="company.listener.class">WellCommerce\Bundle\CompanyBundle\EventListener\CompanyListener</parameter>
+        <parameter key="company.manager.class">WellCommerce\Bundle\CompanyBundle\Manager\CompanyManager</parameter>
     </parameters>
 
     <services>
@@ -22,9 +24,17 @@
 
         <service id="company.repository" class="%company.repository.class%" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument>WellCommerceCompanyBundle:Company</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
         </service>
 
         <service id="company.datagrid" class="%company.datagrid.class%">
+            <configurator service="company.datagrid.configurator" method="configure" />
+        </service>
+
+        <service id="company.datagrid.configurator" class="%company.datagrid.configurator.class%">
+            <argument key="identifier">company</argument>
             <argument type="service" id="datagrid_manager"/>
             <argument type="service" id="company.repository"/>
         </service>
@@ -32,9 +42,6 @@
         <service id="company.form" class="%company.form.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
-            </call>
-            <call method="setRepository">
-                <argument type="service" id="company.repository"/>
             </call>
         </service>
 

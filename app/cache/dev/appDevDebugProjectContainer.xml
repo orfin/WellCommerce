@@ -593,8 +593,8 @@
     <parameter key="jms_di_extra.disable_grep">true</parameter>
     <parameter key="jms_di_extra.doctrine_integration">true</parameter>
     <parameter key="jms_di_extra.cache_warmer.controller_file_blacklist" type="collection"/>
-    <parameter key="jms_di_extra.doctrine_integration.entity_manager.file">D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53ea67434d4ff.php</parameter>
-    <parameter key="jms_di_extra.doctrine_integration.entity_manager.class">EntityManager53ea67434d4ff_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager</parameter>
+    <parameter key="jms_di_extra.doctrine_integration.entity_manager.file">D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53ea67da85229.php</parameter>
+    <parameter key="jms_di_extra.doctrine_integration.entity_manager.class">EntityManager53ea67da85229_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager</parameter>
     <parameter key="jms_aop.cache_dir">D:/Git/WellCommerce/app/cache/dev/jms_aop</parameter>
     <parameter key="jms_aop.interceptor_loader.class">JMS\AopBundle\Aop\InterceptorLoader</parameter>
     <parameter key="controller_listener.class">WellCommerce\Bundle\CoreBundle\EventListener\ControllerListener</parameter>
@@ -701,10 +701,12 @@
     <parameter key="unit.listener.class">WellCommerce\Bundle\UnitBundle\EventListener\UnitListener</parameter>
     <parameter key="unit.manager.class">WellCommerce\Bundle\UnitBundle\Manager\UnitManager</parameter>
     <parameter key="company.controller.admin.class">WellCommerce\Bundle\CompanyBundle\Controller\Admin\CompanyController</parameter>
-    <parameter key="company.repository.class">WellCommerce\Bundle\CompanyBundle\Entity\CompanyRepository</parameter>
+    <parameter key="company.repository.class">WellCommerce\Bundle\CompanyBundle\Repository\CompanyRepository</parameter>
     <parameter key="company.datagrid.class">WellCommerce\Bundle\CompanyBundle\DataGrid\CompanyDataGrid</parameter>
+    <parameter key="company.datagrid.configurator.class">WellCommerce\Bundle\CompanyBundle\DataGrid\CompanyDataGridConfigurator</parameter>
     <parameter key="company.form.class">WellCommerce\Bundle\CompanyBundle\Form\CompanyForm</parameter>
     <parameter key="company.listener.class">WellCommerce\Bundle\CompanyBundle\EventListener\CompanyListener</parameter>
+    <parameter key="company.manager.class">WellCommerce\Bundle\CompanyBundle\Manager\CompanyManager</parameter>
     <parameter key="client_group.controller.admin.class">WellCommerce\Bundle\ClientBundle\Controller\Admin\ClientGroupController</parameter>
     <parameter key="client_group.repository.class">WellCommerce\Bundle\ClientBundle\Repository\ClientGroupRepository</parameter>
     <parameter key="client_group.datagrid.class">WellCommerce\Bundle\ClientBundle\DataGrid\ClientGroupDataGrid</parameter>
@@ -1716,7 +1718,7 @@
       <argument type="collection">
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>53ea674324c85</argument>
+            <argument>53ea67da5e11f</argument>
           </service>
         </argument>
       </argument>
@@ -1832,7 +1834,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.context"/>
-            <argument>53ea674324c85</argument>
+            <argument>53ea67da5e11f</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
           </service>
         </argument>
@@ -2370,8 +2372,8 @@
       <argument type="collection"/>
       <argument type="collection"/>
     </service>
-    <service id="doctrine.orm.default_entity_manager" class="EntityManager53ea67434d4ff_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager">
-      <file>D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53ea67434d4ff.php</file>
+    <service id="doctrine.orm.default_entity_manager" class="EntityManager53ea67da85229_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager">
+      <file>D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53ea67da85229.php</file>
       <argument type="service">
         <service class="Doctrine\ORM\EntityManager" factory-method="create" factory-class="%doctrine.orm.entity_manager.class%" public="false">
           <argument type="service" id="doctrine.dbal.default_connection"/>
@@ -2816,19 +2818,23 @@
       <argument type="service" id="company.datagrid"/>
       <argument type="service" id="company.form"/>
     </service>
-    <service id="company.repository" class="WellCommerce\Bundle\CompanyBundle\Entity\CompanyRepository" factory-method="getRepository" factory-service="doctrine.orm.entity_manager">
+    <service id="company.repository" class="WellCommerce\Bundle\CompanyBundle\Repository\CompanyRepository" factory-method="getRepository" factory-service="doctrine.orm.entity_manager">
       <argument>WellCommerceCompanyBundle:Company</argument>
+      <call method="setContainer">
+        <argument type="service" id="service_container"/>
+      </call>
     </service>
     <service id="company.datagrid" class="WellCommerce\Bundle\CompanyBundle\DataGrid\CompanyDataGrid">
-      <argument type="service" id="datagrid_manager"/>
-      <argument type="service" id="company.repository"/>
+      <configurator service="company.datagrid.configurator" method="configure"/>
+    </service>
+    <service id="company.datagrid.configurator" class="WellCommerce\Bundle\CompanyBundle\DataGrid\CompanyDataGridConfigurator">
+      <argument key="identifier">company</argument>
+      <argument key="1" type="service" id="datagrid_manager"/>
+      <argument key="2" type="service" id="company.repository"/>
     </service>
     <service id="company.form" class="WellCommerce\Bundle\CompanyBundle\Form\CompanyForm">
       <call method="setContainer">
         <argument type="service" id="service_container"/>
-      </call>
-      <call method="setRepository">
-        <argument type="service" id="company.repository"/>
       </call>
     </service>
     <service id="company.listener" class="WellCommerce\Bundle\CompanyBundle\EventListener\CompanyListener">

@@ -58,6 +58,7 @@ class appDevDebugProjectContainer extends Container
             'client_group.repository' => 'getClientGroup_RepositoryService',
             'company.controller.admin' => 'getCompany_Controller_AdminService',
             'company.datagrid' => 'getCompany_DatagridService',
+            'company.datagrid.configurator' => 'getCompany_Datagrid_ConfiguratorService',
             'company.form' => 'getCompany_FormService',
             'company.listener' => 'getCompany_ListenerService',
             'company.repository' => 'getCompany_RepositoryService',
@@ -614,7 +615,24 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getCompany_DatagridService()
     {
-        return $this->services['company.datagrid'] = new \WellCommerce\Bundle\CompanyBundle\DataGrid\CompanyDataGrid($this->get('datagrid_manager'), $this->get('company.repository'));
+        $this->services['company.datagrid'] = $instance = new \WellCommerce\Bundle\CompanyBundle\DataGrid\CompanyDataGrid();
+
+        $this->get('company.datagrid.configurator')->configure($instance);
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'company.datagrid.configurator' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return WellCommerce\Bundle\CompanyBundle\DataGrid\CompanyDataGridConfigurator A WellCommerce\Bundle\CompanyBundle\DataGrid\CompanyDataGridConfigurator instance.
+     */
+    protected function getCompany_Datagrid_ConfiguratorService()
+    {
+        return $this->services['company.datagrid.configurator'] = new \WellCommerce\Bundle\CompanyBundle\DataGrid\CompanyDataGridConfigurator('company', $this->get('datagrid_manager'), $this->get('company.repository'));
     }
 
     /**
@@ -630,7 +648,6 @@ class appDevDebugProjectContainer extends Container
         $this->services['company.form'] = $instance = new \WellCommerce\Bundle\CompanyBundle\Form\CompanyForm();
 
         $instance->setContainer($this);
-        $instance->setRepository($this->get('company.repository'));
 
         return $instance;
     }
@@ -654,11 +671,15 @@ class appDevDebugProjectContainer extends Container
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return WellCommerce\Bundle\CompanyBundle\Entity\CompanyRepository A WellCommerce\Bundle\CompanyBundle\Entity\CompanyRepository instance.
+     * @return WellCommerce\Bundle\CompanyBundle\Repository\CompanyRepository A WellCommerce\Bundle\CompanyBundle\Repository\CompanyRepository instance.
      */
     protected function getCompany_RepositoryService()
     {
-        return $this->services['company.repository'] = $this->get('doctrine.orm.default_entity_manager')->getRepository('WellCommerceCompanyBundle:Company');
+        $this->services['company.repository'] = $instance = $this->get('doctrine.orm.default_entity_manager')->getRepository('WellCommerceCompanyBundle:Company');
+
+        $instance->setContainer($this);
+
+        return $instance;
     }
 
     /**
@@ -1046,11 +1067,11 @@ class appDevDebugProjectContainer extends Container
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return EntityManager53ea67434d4ff_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager A EntityManager53ea67434d4ff_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager instance.
+     * @return EntityManager53ea67da85229_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager A EntityManager53ea67da85229_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager instance.
      */
     protected function getDoctrine_Orm_DefaultEntityManagerService()
     {
-        require_once 'D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53ea67434d4ff.php';
+        require_once 'D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53ea67da85229.php';
 
         $a = $this->get('annotation_reader');
 
@@ -1080,7 +1101,7 @@ class appDevDebugProjectContainer extends Container
         $e = \Doctrine\ORM\EntityManager::create($this->get('doctrine.dbal.default_connection'), $d);
         $this->get('doctrine.orm.default_manager_configurator')->configure($e);
 
-        return $this->services['doctrine.orm.default_entity_manager'] = new \EntityManager53ea67434d4ff_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager($e, $this);
+        return $this->services['doctrine.orm.default_entity_manager'] = new \EntityManager53ea67da85229_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager($e, $this);
     }
 
     /**
@@ -2373,7 +2394,7 @@ class appDevDebugProjectContainer extends Container
 
         $d = new \Symfony\Component\Security\Http\AccessMap();
 
-        return $this->services['security.firewall.map.context.default'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($d, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => new \Symfony\Component\Security\Core\User\InMemoryUserProvider()), 'default', $a, $this->get('debug.event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE)), 2 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '53ea674324c85', $a), 3 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, $this->get('security.access.decision_manager'), $d, $this->get('security.authentication.manager'))), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $this->get('security.authentication.trust_resolver'), new \Symfony\Component\Security\Http\HttpUtils($c, $c), 'default', NULL, NULL, NULL, $a));
+        return $this->services['security.firewall.map.context.default'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($d, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => new \Symfony\Component\Security\Core\User\InMemoryUserProvider()), 'default', $a, $this->get('debug.event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE)), 2 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '53ea67da5e11f', $a), 3 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, $this->get('security.access.decision_manager'), $d, $this->get('security.authentication.manager'))), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $this->get('security.authentication.trust_resolver'), new \Symfony\Component\Security\Http\HttpUtils($c, $c), 'default', NULL, NULL, NULL, $a));
     }
 
     /**
@@ -3993,7 +4014,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getSecurity_Authentication_ManagerService()
     {
-        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('53ea674324c85')), true);
+        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('53ea67da5e11f')), true);
 
         $instance->setEventDispatcher($this->get('debug.event_dispatcher'));
 
@@ -4769,8 +4790,8 @@ class appDevDebugProjectContainer extends Container
             'jms_di_extra.cache_warmer.controller_file_blacklist' => array(
 
             ),
-            'jms_di_extra.doctrine_integration.entity_manager.file' => 'D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53ea67434d4ff.php',
-            'jms_di_extra.doctrine_integration.entity_manager.class' => 'EntityManager53ea67434d4ff_546a8d27f194334ee012bfe64f629947b07e4919\\__CG__\\Doctrine\\ORM\\EntityManager',
+            'jms_di_extra.doctrine_integration.entity_manager.file' => 'D:/Git/WellCommerce/app/cache/dev/jms_diextra/doctrine/EntityManager_53ea67da85229.php',
+            'jms_di_extra.doctrine_integration.entity_manager.class' => 'EntityManager53ea67da85229_546a8d27f194334ee012bfe64f629947b07e4919\\__CG__\\Doctrine\\ORM\\EntityManager',
             'jms_aop.cache_dir' => 'D:/Git/WellCommerce/app/cache/dev/jms_aop',
             'jms_aop.interceptor_loader.class' => 'JMS\\AopBundle\\Aop\\InterceptorLoader',
             'controller_listener.class' => 'WellCommerce\\Bundle\\CoreBundle\\EventListener\\ControllerListener',
@@ -4877,10 +4898,12 @@ class appDevDebugProjectContainer extends Container
             'unit.listener.class' => 'WellCommerce\\Bundle\\UnitBundle\\EventListener\\UnitListener',
             'unit.manager.class' => 'WellCommerce\\Bundle\\UnitBundle\\Manager\\UnitManager',
             'company.controller.admin.class' => 'WellCommerce\\Bundle\\CompanyBundle\\Controller\\Admin\\CompanyController',
-            'company.repository.class' => 'WellCommerce\\Bundle\\CompanyBundle\\Entity\\CompanyRepository',
+            'company.repository.class' => 'WellCommerce\\Bundle\\CompanyBundle\\Repository\\CompanyRepository',
             'company.datagrid.class' => 'WellCommerce\\Bundle\\CompanyBundle\\DataGrid\\CompanyDataGrid',
+            'company.datagrid.configurator.class' => 'WellCommerce\\Bundle\\CompanyBundle\\DataGrid\\CompanyDataGridConfigurator',
             'company.form.class' => 'WellCommerce\\Bundle\\CompanyBundle\\Form\\CompanyForm',
             'company.listener.class' => 'WellCommerce\\Bundle\\CompanyBundle\\EventListener\\CompanyListener',
+            'company.manager.class' => 'WellCommerce\\Bundle\\CompanyBundle\\Manager\\CompanyManager',
             'client_group.controller.admin.class' => 'WellCommerce\\Bundle\\ClientBundle\\Controller\\Admin\\ClientGroupController',
             'client_group.repository.class' => 'WellCommerce\\Bundle\\ClientBundle\\Repository\\ClientGroupRepository',
             'client_group.datagrid.class' => 'WellCommerce\\Bundle\\ClientBundle\\DataGrid\\ClientGroupDataGrid',
