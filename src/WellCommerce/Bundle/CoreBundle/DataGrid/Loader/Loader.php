@@ -58,8 +58,8 @@ class Loader implements LoaderInterface
         $this->columns  = $this->dataGrid->getColumns();
         $queryBuilder   = $this->dataGrid->getDataGridQueryBuilder();
         $orderBy        = $this->columns->get($request->getOrderBy())->getSource();
-        $paginatorQuery = $queryBuilder->getQuery();
-        $paginator      = new Paginator($paginatorQuery, $fetchJoinCollection = true);
+        $paginatorQuery = clone $queryBuilder;
+        $paginator      = new Paginator($paginatorQuery->getQuery(), $fetchJoinCollection = true);
         $total          = $paginator->count();
 
         $queryBuilder->addOrderBy($orderBy, $request->getOrderDir());
