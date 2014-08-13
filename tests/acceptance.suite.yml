@@ -11,5 +11,5 @@ modules:
         - AcceptanceHelper
     config:
         WebDriver:
-            url: 'http://wellcommerce.tpl'
+            url: 'http://127.0.0.1'
             browser: firefox
