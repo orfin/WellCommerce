@@ -40,13 +40,13 @@ before_script:
 
 script:
     - bin/codecept run
-    - curl wellcommerce.dev
-    - curl wellcommerce.dev/app_dev.php
-    - curl wellcommerce.dev/app_test.php
-    - curl wellcommerce.dev/app_test.php/admin
-    - curl wellcommerce.dev/app_dev.php/admin
-    - curl wellcommerce.dev/app_dev.php/admin/company/index
-    - curl wellcommerce.dev/app_test.php/admin/company/index
+    - curl wellcommerce.dev -v --trace
+    - curl wellcommerce.dev/app_dev.php -v --trace
+    - curl wellcommerce.dev/app_test.php -v --trace
+    - curl wellcommerce.dev/app_test.php/admin -v --trace
+    - curl wellcommerce.dev/app_dev.php/admin -v --trace
+    - curl wellcommerce.dev/app_dev.php/admin/company/index -v --trace
+    - curl wellcommerce.dev/app_test.php/admin/company/index -v --trace
 
 
 notifications:
