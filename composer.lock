@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e5521b71dfbde4c8dc3ad42676f6f5a1",
+    "hash": "5112d8191891e63e24c5b57606889916",
     "packages": [
         {
             "name": "codeception/codeception",
@@ -423,12 +423,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "fba4a3547b4bc9d3b6656f924b9c6dbff6067647"
+                "reference": "83f92c3f28e927917ddcb7cf214ce99c0b72004b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/fba4a3547b4bc9d3b6656f924b9c6dbff6067647",
-                "reference": "fba4a3547b4bc9d3b6656f924b9c6dbff6067647",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/83f92c3f28e927917ddcb7cf214ce99c0b72004b",
+                "reference": "83f92c3f28e927917ddcb7cf214ce99c0b72004b",
                 "shasum": ""
             },
             "require": {
@@ -486,7 +486,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2014-08-12 22:16:37"
+            "time": "2014-08-13 07:14:49"
         },
         {
             "name": "doctrine/doctrine-bundle",
@@ -2236,12 +2236,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "1760c16978a363bfcc4c08e9ca35cccdb8e024f0"
+                "reference": "28daba62ae19b28bfcb239c54876ba0f8e5fdb36"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/1760c16978a363bfcc4c08e9ca35cccdb8e024f0",
-                "reference": "1760c16978a363bfcc4c08e9ca35cccdb8e024f0",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/28daba62ae19b28bfcb239c54876ba0f8e5fdb36",
+                "reference": "28daba62ae19b28bfcb239c54876ba0f8e5fdb36",
                 "shasum": ""
             },
             "require": {
@@ -2302,7 +2302,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2014-08-12 09:46:17"
+            "time": "2014-08-13 08:49:50"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -3380,17 +3380,6 @@
                 "paging"
             ],
             "time": "2013-03-30 22:08:55"
-        },
-        {
-            "name": "xajax/xajax",
-            "version": "1.0.1",
-            "dist": {
-                "type": "zip",
-                "url": "http://www.gekosale.pl/xajax.zip",
-                "reference": null,
-                "shasum": null
-            },
-            "type": "library"
         },
         {
             "name": "zendframework/zend-cache",

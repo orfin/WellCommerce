@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\CoreBundle\DataGrid\Loader;
 
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Pagerfanta\Pagerfanta;
+use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 
@@ -42,6 +43,17 @@ class Loader implements LoaderInterface
      */
     private $columns;
 
+    /**
+     * @var Request
+     */
+    private $request;
+
+    private $orderBy;
+    private $orderDir;
+    private $limit;
+    private $offset;
+    private $requestId;
+
     public function getSelectClause()
     {
         $columns = [];
@@ -54,18 +66,17 @@ class Loader implements LoaderInterface
 
     public function loadResults()
     {
-        $request        = $this->dataGrid->getCurrentRequest();
         $this->columns  = $this->dataGrid->getColumns();
         $queryBuilder   = $this->dataGrid->getDataGridQueryBuilder();
-        $orderBy        = $this->columns->get($request->getOrderBy())->getSource();
+        $orderBy        = $this->columns->get($this->orderBy)->getSource();
         $paginatorQuery = clone $queryBuilder;
         $paginator      = new Paginator($paginatorQuery->getQuery(), $fetchJoinCollection = true);
         $total          = $paginator->count();
 
-        $queryBuilder->addOrderBy($orderBy, $request->getOrderDir());
+        $queryBuilder->addOrderBy($orderBy, $this->orderDir);
         $queryBuilder->select($this->getSelectClause());
-        $queryBuilder->setFirstResult($request->getStartingFrom());
-        $queryBuilder->setMaxResults($request->getLimit());
+        $queryBuilder->setFirstResult($this->offset);
+        $queryBuilder->setMaxResults($this->limit);
 
         $query = $queryBuilder->getQuery();
 
@@ -73,9 +84,9 @@ class Loader implements LoaderInterface
         $result = $query->getArrayResult();
 
         return [
-            'data_id'       => $request->getId(),
+            'data_id'       => $this->requestId,
             'rows_num'      => $total,
-            'starting_from' => $request->getStartingFrom(),
+            'starting_from' => $this->offset,
             'total'         => $total,
             'filtered'      => $total,
             'rows'          => $this->processResults($result)
@@ -85,11 +96,21 @@ class Loader implements LoaderInterface
     /**
      * {@inheritdoc}
      */
-    public function getResults(DataGridInterface $dataGrid)
+    public function getResults(DataGridInterface $dataGrid, Request $request)
     {
         $this->dataGrid = $dataGrid;
+        $this->parseRequest($request);
 
         return $this->loadResults();
+    }
+
+    private function parseRequest(Request $request)
+    {
+        $this->requestId = $request->request->get('id');
+        $this->orderBy   = $request->request->get('order_by');
+        $this->orderDir  = $request->request->get('order_dir');
+        $this->offset    = $request->request->get('starting_from');
+        $this->limit     = $request->request->get('limit');
     }
 
     /**

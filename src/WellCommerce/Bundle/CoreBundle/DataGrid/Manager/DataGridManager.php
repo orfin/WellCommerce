@@ -19,7 +19,6 @@ use WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnCollection;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Loader\LoaderInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Options\OptionsInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Redirect\RedirectHelperInterface;
-use WellCommerce\Bundle\CoreBundle\Helper\XajaxManager;
 
 /**
  * Class DataGridManager
@@ -46,7 +45,6 @@ class DataGridManager implements DataGridManagerInterface
      * @param LoaderInterface          $loader
      * @param EventDispatcherInterface $eventDispatcher
      * @param RouterInterface          $router
-     * @param XajaxManager             $xajaxManager
      * @param TranslatorInterface      $translator
      * @param RedirectHelperInterface  $redirectHelper
      */
@@ -56,7 +54,6 @@ class DataGridManager implements DataGridManagerInterface
         LoaderInterface $loader,
         EventDispatcherInterface $eventDispatcher,
         RouterInterface $router,
-        XajaxManager $xajaxManager,
         TranslatorInterface $translator,
         RedirectHelperInterface $redirectHelper
     ) {
@@ -65,7 +62,6 @@ class DataGridManager implements DataGridManagerInterface
         $this->loader           = $loader;
         $this->eventDispatcher  = $eventDispatcher;
         $this->router           = $router;
-        $this->xajaxManager     = $xajaxManager;
         $this->translator       = $translator;
         $this->redirectHelper   = $redirectHelper;
     }
@@ -108,14 +104,6 @@ class DataGridManager implements DataGridManagerInterface
     public function getRouter()
     {
         return $this->router;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getXajaxManager()
-    {
-        return $this->xajaxManager;
     }
 
     /**

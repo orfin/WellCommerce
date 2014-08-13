@@ -72,7 +72,7 @@ class AbstractConfigurator implements ConfiguratorInterface
         $eventHandlers = $this->manager->getOptions()->getEventHandlers();
 
         $eventHandlers->add(new LoadEventHandler([
-            'function' => $this->manager->getXajaxManager()->register([$this->getFunction('load'), $datagrid, 'load'])
+            'route'      => $this->manager->getRouter()->generate($this->manager->getRouteForAction('grid'))
         ]));
 
         $editRoute = $this->manager->getRouteForAction('edit');
@@ -90,7 +90,6 @@ class AbstractConfigurator implements ConfiguratorInterface
 
         $eventHandlers->add(new DeleteRowEventHandler([
             'function'   => $function = $this->getFunction('delete'),
-            'callback'   => $this->manager->getXajaxManager()->register([$function, $datagrid, 'delete']),
             'row_action' => OptionInterface::ACTION_DELETE,
         ]));
 

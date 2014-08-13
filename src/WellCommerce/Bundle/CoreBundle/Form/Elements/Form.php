@@ -262,7 +262,7 @@ class Form extends Container
     }
 
     public function getSubmittedData()
-    { 
+    {
         return $this->request->request->all();
     }
 

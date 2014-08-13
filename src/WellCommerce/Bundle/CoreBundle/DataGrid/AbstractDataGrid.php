@@ -11,16 +11,13 @@
  */
 namespace WellCommerce\Bundle\CoreBundle\DataGrid;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Exception\ValidatorException;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnCollection;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Manager\DataGridManagerInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Options\OptionsInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Repository\DataGridAwareRepositoryInterface;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Request\Request;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Request\RequestInterface;
-use xajaxResponse;
 
 /**
  * Class AbstractDataGrid
@@ -30,6 +27,7 @@ use xajaxResponse;
  */
 abstract class AbstractDataGrid implements DataGridInterface
 {
+    protected $booted = false;
     protected $columns;
     protected $identifier;
 
@@ -105,7 +103,12 @@ abstract class AbstractDataGrid implements DataGridInterface
         return $this->manager->getColumnCollection();
     }
 
-    public function init()
+    /**
+     * Boots DataGrid if it was not booted
+     *
+     * @return void
+     */
+    public function boot()
     {
         $columnCollection = $this->manager->getColumnCollection();
 
@@ -116,6 +119,28 @@ abstract class AbstractDataGrid implements DataGridInterface
         $this->setColumns($columnCollection);
 
         $this->setOptions($this->manager->getOptions());
+
+        $this->booted = true;
+    }
+
+    /**
+     * Reboots current DataGrid
+     */
+    public function reboot()
+    {
+        $this->booted = false;
+    }
+
+    /**
+     * Returns current DataGrid
+     *
+     * @return DataGridInterface
+     */
+    public function get()
+    {
+        if (!$this->booted) {
+            $this->boot();
+        }
 
         return $this;
     }
@@ -147,14 +172,6 @@ abstract class AbstractDataGrid implements DataGridInterface
     /**
      * {@inheritdoc}
      */
-    public function setCurrentRequest(RequestInterface $request)
-    {
-        $this->request = $request;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getCurrentRequest()
     {
         return $this->request;
@@ -165,10 +182,10 @@ abstract class AbstractDataGrid implements DataGridInterface
      */
     public function refresh($datagridId)
     {
-        $objResponse = new xajaxResponse();
-        $objResponse->script('' . 'try {' . 'GF_Datagrid.ReturnInstance(' . (int)$datagridId . ').LoadData();' . '}' . 'catch (xException) {' . 'GF_Debug.HandleException(xException);' . '}' . '');
-
-        return $objResponse;
+//        $objResponse = new xajaxResponse();
+//        $objResponse->script('' . 'try {' . 'GF_Datagrid.ReturnInstance(' . (int)$datagridId . ').LoadData();' . '}' . 'catch (xException) {' . 'GF_Debug.HandleException(xException);' . '}' . '');
+//
+//        return $objResponse;
     }
 
     /**
@@ -197,17 +214,8 @@ abstract class AbstractDataGrid implements DataGridInterface
     /**
      * {@inheritdoc}
      */
-    public function load(array $options)
+    public function load(Request $request)
     {
-        $this->setCurrentRequest(new Request([
-            'id'            => $options['id'],
-            'starting_from' => (int)$options['starting_from'],
-            'limit'         => (int)$options['limit'],
-            'order_by'      => $options['order_by'],
-            'order_dir'     => $options['order_dir'],
-            'where'         => $options['where']
-        ]));
-
-        return $this->manager->getLoader()->getResults($this);
+        return $this->manager->getLoader()->getResults($this, $request);
     }
 }

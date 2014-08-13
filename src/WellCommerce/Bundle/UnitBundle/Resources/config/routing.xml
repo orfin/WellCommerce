@@ -8,6 +8,10 @@
         <default key="_controller">unit.controller.admin:indexAction</default>
     </route>
 
+    <route id="admin.unit.grid" path="/grid">
+        <default key="_controller">unit.controller.admin:gridAction</default>
+    </route>
+
     <route id="admin.unit.add" path="/add">
         <default key="_controller">unit.controller.admin:addAction</default>
     </route>

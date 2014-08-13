@@ -37,15 +37,15 @@ class LoadEventHandler extends AbstractEventHandler implements EventHandlerInter
     public function configureOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setRequired([
-            'function',
+            'route',
         ]);
 
         $resolver->setDefaults([
-            'function'       => OptionInterface::GF_NULL,
+            'route'    => OptionInterface::GF_NULL,
         ]);
 
         $resolver->setAllowedTypes([
-            'function'       => ['string'],
+            'route'    => ['string'],
         ]);
     }
 }

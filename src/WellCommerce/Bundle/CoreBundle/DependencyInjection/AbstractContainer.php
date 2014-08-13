@@ -133,30 +133,6 @@ class AbstractContainer extends ContainerAware
     }
 
     /**
-     * Shortcut to get Xajax service
-     *
-     * @return object Xajax
-     */
-    final protected function getXajax()
-    {
-        return $this->container->get('xajax');
-    }
-
-    /**
-     * Shortcut to get XajaxManager service
-     *
-     * @return object XajaxManager
-     */
-    final protected function getXajaxManager()
-    {
-        if (!$this->container->has('xajax_manager')) {
-            throw new \LogicException('Method getXajaxManager requires Container to have xajax_manager service');
-        }
-
-        return $this->container->get('xajax_manager');
-    }
-
-    /**
      * Shortcut to get Helper service
      *
      * @return object Helper

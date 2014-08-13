@@ -119,22 +119,6 @@ interface DataGridInterface
     public function getOptions();
 
     /**
-     * Sets current DataGrid request
-     *
-     * @param RequestInterface $request
-     *
-     * @return mixed
-     */
-    public function setCurrentRequest(RequestInterface $request);
-
-    /**
-     * Returns current DataGrid request
-     *
-     * @return RequestInterface
-     */
-    public function getCurrentRequest();
-
-    /**
      * Updates DataGrid row. Transfers request to repository
      *
      * @param array $request

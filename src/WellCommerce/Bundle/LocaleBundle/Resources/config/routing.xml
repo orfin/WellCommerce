@@ -8,6 +8,10 @@
         <default key="_controller">locale.controller.admin:indexAction</default>
     </route>
 
+    <route id="admin.locale.grid" path="/grid">
+        <default key="_controller">client_group.locale.admin:gridAction</default>
+    </route>
+
     <route id="admin.locale.add" path="/add">
         <default key="_controller">locale.controller.admin:addAction</default>
     </route>

@@ -8,6 +8,10 @@
         <default key="_controller">tax.controller.admin:indexAction</default>
     </route>
 
+    <route id="admin.tax.grid" path="/grid">
+        <default key="_controller">tax.controller.admin:gridAction</default>
+    </route>
+
     <route id="admin.tax.add" path="/add">
         <default key="_controller">tax.controller.admin:addAction</default>
     </route>

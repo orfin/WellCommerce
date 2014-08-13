@@ -28,19 +28,6 @@
             "vendor/xajax/xajax"
         ]
     },
-    "repositories": [
-        {
-            "type": "package",
-            "package": {
-                "name": "xajax/xajax",
-                "version": "1.0.1",
-                "dist": {
-                    "url": "http://www.gekosale.pl/xajax.zip",
-                    "type": "zip"
-                }
-            }
-        }
-    ],
     "require": {
         "php": ">=5.3.3",
         "symfony/symfony": "2.5.*",
@@ -60,7 +47,6 @@
         "moxiecode/plupload": "v2.1.2",
         "jms/di-extra-bundle": "1.4.0",
         "doctrine/doctrine-fixtures-bundle": "2.2.x-dev",
-        "xajax/xajax": "1.0.1",
         "codeception/codeception": "2.0.4",
         "knplabs/doctrine-behaviors": "1.0.x-dev",
         "fzaninotto/faker": "1.5.x-dev",

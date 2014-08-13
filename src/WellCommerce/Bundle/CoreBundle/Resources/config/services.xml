@@ -7,23 +7,9 @@
     <parameters>
         <parameter key="controller_listener.class">WellCommerce\Bundle\CoreBundle\EventListener\ControllerListener</parameter>
         <parameter key="admin_manager.class">WellCommerce\Bundle\CoreBundle\Controller\Admin\Manager\AdminManager</parameter>
-        <parameter key="xajax_manager.class">WellCommerce\Bundle\CoreBundle\Helper\XajaxManager</parameter>
-        <parameter key="xajax_listener.class">WellCommerce\Bundle\CoreBundle\EventListener\XajaxListener</parameter>
-        <parameter key="xajax.class">xajax</parameter>
     </parameters>
 
     <services>
-        <service id="xajax" class="%xajax.class%"/>
-
-        <service id="xajax_manager" class="%xajax_manager.class%">
-            <argument type="service" id="xajax"/>
-        </service>
-
-        <service id="xajax_listener" class="%xajax_listener.class%">
-            <argument type="service" id="xajax_manager"/>
-            <tag name="kernel.event_subscriber"/>
-        </service>
-
         <service id="controller_listener" class="%controller_listener.class%">
             <argument type="service" id="kernel" />
             <tag name="kernel.event_subscriber"/>

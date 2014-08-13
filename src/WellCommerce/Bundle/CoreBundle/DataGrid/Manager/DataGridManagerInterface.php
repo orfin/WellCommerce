@@ -57,13 +57,6 @@ interface DataGridManagerInterface
     public function getRouter();
 
     /**
-     * Returns xajax helper
-     *
-     * @return \WellCommerce\Bundle\CoreBundle\Helper\XajaxManager
-     */
-    public function getXajaxManager();
-
-    /**
      * Translates message using translator service
      *
      * @param $message

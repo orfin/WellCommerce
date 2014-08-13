@@ -33,7 +33,6 @@
             <argument type="service" id="datagrid_loader" />
             <argument type="service" id="event_dispatcher" />
             <argument type="service" id="router" />
-            <argument type="service" id="xajax_manager" />
             <argument type="service" id="translator"/>
             <argument type="service" id="redirect_helper"/>
         </service>

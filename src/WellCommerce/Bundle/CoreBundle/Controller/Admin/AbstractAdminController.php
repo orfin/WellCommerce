@@ -12,6 +12,7 @@
 namespace WellCommerce\Bundle\CoreBundle\Controller\Admin;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\Manager\AdminManagerInterface;
@@ -80,8 +81,13 @@ abstract class AbstractAdminController extends AbstractController implements Adm
     public function indexAction()
     {
         return [
-            'datagrid' => $this->getDataGrid($this->dataGrid)
+            'datagrid' => $this->dataGrid->get()
         ];
+    }
+
+    public function gridAction(Request $request)
+    {
+        return new JsonResponse($this->dataGrid->get()->load($request));
     }
 
     public function addAction(Request $request)

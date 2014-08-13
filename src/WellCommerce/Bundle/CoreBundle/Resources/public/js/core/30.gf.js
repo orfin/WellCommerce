@@ -2559,13 +2559,25 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 				
 				this._ChangeOrderIndicator(oRequest.order_by,  oRequest.order_dir);
 			}
-            dDg.m_oOptions.event_handlers.load(oRequest, GCallback(function(eEvent){
-                GF_Datagrid.ProcessIncomingData(eEvent);
-            }));
+			
+			this.MakeRequest(dDg.m_oOptions.event_handlers.load, oRequest, function(oData){
+				 GF_Datagrid.ProcessIncomingData(oData);
+			});
+			
 			this.m_bFirstLoad = false;
 		});
 
 	};
+	
+	this.MakeRequest = function(sUrl, oRequest, fCallBack) {
+		$.ajax({
+		  type: "POST",
+		  url: sUrl,
+		  data: oRequest,
+		  success: fCallBack,
+		  dataType: 'json'
+		});
+	}
 	
 	this.Reset = function() {
 		
@@ -2809,21 +2821,11 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 			$(this).remove();
 		}));
 	};
-
-//	this.WaitingScreenShow = function(fCompletionHandler) {
-//		var dDg = this;
-//		fCompletionHandler.apply(dDg);
-//	};
-//
-//	this.WaitingScreenHide = function() {
-//		$(this).remove();
-//	};
 	
 	this._ParseOptions = function(oOptions) {
 		this.m_oOptions = new GF_Datagrid_Config(oOptions);
 		
 		if ((this.m_oOptions.id == GF.NULL) || !(this.m_oOptions.id.length)) GF_Debug.Error('Datagrid\'s id isn\'t set correctly. Datagrid initialization failed.');
-		if ((this.m_oOptions.event_handlers.load == GF.NULL) || !(this.m_oOptions.event_handlers.load instanceof Function)) GF_Debug.Error('Datagrid\'s load function isn\'t set correctly. Datagrid initialization failed.');
 		
 		this._ParseColumnOptions();
 		
@@ -3191,9 +3193,9 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 			var bSkip = false;
 			switch (oA) {
 				case GF_Datagrid.ACTION_DELETE:
-					if (!(this.m_oOptions.event_handlers.delete_row instanceof Function)) {
-						GF_Debug.Error('Datagrid\'s delete row action is not set.');
-					}
+//					if (!(this.m_oOptions.event_handlers.delete_row instanceof Function)) {
+//						GF_Debug.Error('Datagrid\'s delete row action is not set.');
+//					}
 					oA = new GF_Action({
 						img: GF_Datagrid.Files.delete_row_icon,
 						caption: GF_Datagrid.Language.delete_row,
@@ -3201,9 +3203,9 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 					});
 					break;
 				case GF_Datagrid.ACTION_EDIT:
-					if (!(this.m_oOptions.event_handlers.edit_row instanceof Function)) {
-						GF_Debug.Error('Datagrid\'s edit row action is not set.');
-					}
+//					if (!(this.m_oOptions.event_handlers.edit_row instanceof Function)) {
+//						GF_Debug.Error('Datagrid\'s edit row action is not set.');
+//					}
 					oA = new GF_Action({
 						img: GF_Datagrid.Files.edit_row_icon,
 						caption: GF_Datagrid.Language.edit_row,
@@ -3211,9 +3213,9 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 					});
 					break;
 				case GF_Datagrid.ACTION_VIEW:
-					if (!(this.m_oOptions.event_handlers.view_row instanceof Function)) {
-						GF_Debug.Error('Datagrid\'s view row action is not set.');
-					}
+//					if (!(this.m_oOptions.event_handlers.view_row instanceof Function)) {
+//						GF_Debug.Error('Datagrid\'s view row action is not set.');
+//					}
 					oA = new GF_Action({
 						img: GF_Datagrid.Files.view_row_icon,
 						caption: GF_Datagrid.Language.view_row,
@@ -4471,6 +4473,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 	}),
 	
 	ProcessIncomingData: GF.NewEventHandler(function(oData) {
+		console.log(oData);
 		if ((oData.data_id == undefined) || !(GF_Instance.s_aoInstances[oData.data_id] instanceof GF_Datagrid)) {
 			GF_Debug.Error('The server has responded with an invalid datagrid id (' + oData.data_id + ').');
 		}
