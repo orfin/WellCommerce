@@ -18,6 +18,7 @@ use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\Appearance;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\EventHandlers;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\Filters;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\Mechanics;
+use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\Routes;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\RowActions;
 
 /**
@@ -55,7 +56,8 @@ class Options implements OptionsInterface
             'mechanics',
             'event_handlers',
             'row_actions',
-            'filters'
+            'filters',
+            'routes',
         ]);
 
         $resolver->setDefaults([
@@ -63,7 +65,8 @@ class Options implements OptionsInterface
             'mechanics'      => new Mechanics(),
             'event_handlers' => new EventHandlers(),
             'row_actions'    => new RowActions(),
-            'filters'        => new Filters()
+            'filters'        => new Filters(),
+            'routes'         => new Routes(),
         ]);
 
         $resolver->setAllowedTypes([
@@ -71,7 +74,8 @@ class Options implements OptionsInterface
             'mechanics'      => 'object',
             'event_handlers' => 'object',
             'row_actions'    => 'object',
-            'filters'        => 'object'
+            'filters'        => 'object',
+            'routes'         => 'object'
         ]);
     }
 
@@ -169,5 +173,21 @@ class Options implements OptionsInterface
     public function getFilters()
     {
         return $this->options['filters'];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setRoutes(Routes $routes)
+    {
+        $this->options['routes'] = $routes;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRoutes()
+    {
+        return $this->options['routes'];
     }
 } 

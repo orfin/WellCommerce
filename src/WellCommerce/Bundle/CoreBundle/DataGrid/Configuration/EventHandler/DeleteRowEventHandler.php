@@ -38,23 +38,23 @@ class DeleteRowEventHandler extends AbstractEventHandler implements EventHandler
     {
         $resolver->setRequired([
             'function',
-            'callback',
             'row_action',
             'context_action',
+            'route'
         ]);
 
         $resolver->setDefaults([
             'function'       => OptionInterface::GF_NULL,
-            'callback'       => OptionInterface::GF_NULL,
             'row_action'     => false,
             'context_action' => false,
+            'route'          => false
         ]);
 
         $resolver->setAllowedTypes([
             'function'       => ['string', 'int'],
-            'callback'       => ['string', 'int'],
             'row_action'     => ['bool', 'string'],
             'context_action' => ['bool', 'string'],
+            'route'          => ['bool', 'string'],
         ]);
     }
 
@@ -72,7 +72,7 @@ class DeleteRowEventHandler extends AbstractEventHandler implements EventHandler
                 oRequest = {
                     id: p.id
                 }
-                {$this->options['callback']}(oRequest, GCallback(function(eEvent){
+                DataGrid.MakeRequest(Routing.generate('{$this->options['route']}', {id: p.id}), {}, GCallback(function(eEvent){
                     DataGrid.LoadData();
                     DataGrid.ClearSelection();
                 }));

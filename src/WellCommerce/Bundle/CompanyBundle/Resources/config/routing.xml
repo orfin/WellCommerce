@@ -15,10 +15,15 @@
 
     <route id="admin.company.add" path="/add">
         <default key="_controller">company.controller.admin:addAction</default>
+        <option key="expose">true</option>
     </route>
 
     <route id="admin.company.edit" path="/edit/{id}">
         <default key="_controller">company.controller.admin:editAction</default>
-        <default key="id">null</default>
+        <option key="expose">true</option>
+    </route>
+    <route id="admin.company.delete" path="/delete/{id}">
+        <default key="_controller">company.controller.admin:deleteAction</default>
+        <option key="expose">true</option>
     </route>
 </routes>

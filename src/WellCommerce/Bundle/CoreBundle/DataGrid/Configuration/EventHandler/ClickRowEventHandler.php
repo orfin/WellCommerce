@@ -49,6 +49,7 @@ class ClickRowEventHandler extends AbstractEventHandler implements EventHandlerI
             'callback'       => OptionInterface::GF_NULL,
             'row_action'     => false,
             'context_action' => false,
+            'route'          => false,
         ]);
 
         $resolver->setAllowedTypes([
@@ -56,7 +57,7 @@ class ClickRowEventHandler extends AbstractEventHandler implements EventHandlerI
             'callback'       => ['string', 'int'],
             'row_action'     => ['bool', 'string'],
             'context_action' => ['bool'],
-            'route'          => ['string'],
+            'route'          => ['bool', 'string'],
         ]);
     }
 
@@ -67,7 +68,7 @@ class ClickRowEventHandler extends AbstractEventHandler implements EventHandlerI
     {
         return "
         function {$this->options['function']}(dg, id) {
-            return window.location.href = '{$this->options['route']}/' + id;
+            return window.location.href = Routing.generate('{$this->options['route']}', {id: id});
         }";
     }
 }

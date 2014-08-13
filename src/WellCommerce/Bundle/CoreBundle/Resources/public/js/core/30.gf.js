@@ -2560,9 +2560,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 				this._ChangeOrderIndicator(oRequest.order_by,  oRequest.order_dir);
 			}
 			
-			this.MakeRequest(dDg.m_oOptions.event_handlers.load, oRequest, function(oData){
-				 GF_Datagrid.ProcessIncomingData(oData);
-			});
+			dDg.m_oOptions.event_handlers.load(oRequest);
 			
 			this.m_bFirstLoad = false;
 		});
@@ -2972,7 +2970,6 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		return false;
 	});
 	
-	
 	this._ProcessData = function(oData) {
 		this.m_iRows = parseInt(oData.rows_num);
 		this.m_iTotalRows = parseInt(oData.total);
@@ -2984,7 +2981,6 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		this.m_aoAdditionalRows = oData.additional_rows ? oData.additional_rows : [];
 		this.Rewrite();
 	};
-	
 	
 	this._WriteRow = function(oR) {
 		var jTr = $('<tr></tr>');
@@ -3193,9 +3189,6 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 			var bSkip = false;
 			switch (oA) {
 				case GF_Datagrid.ACTION_DELETE:
-//					if (!(this.m_oOptions.event_handlers.delete_row instanceof Function)) {
-//						GF_Debug.Error('Datagrid\'s delete row action is not set.');
-//					}
 					oA = new GF_Action({
 						img: GF_Datagrid.Files.delete_row_icon,
 						caption: GF_Datagrid.Language.delete_row,
@@ -3203,9 +3196,6 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 					});
 					break;
 				case GF_Datagrid.ACTION_EDIT:
-//					if (!(this.m_oOptions.event_handlers.edit_row instanceof Function)) {
-//						GF_Debug.Error('Datagrid\'s edit row action is not set.');
-//					}
 					oA = new GF_Action({
 						img: GF_Datagrid.Files.edit_row_icon,
 						caption: GF_Datagrid.Language.edit_row,
@@ -3213,9 +3203,6 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 					});
 					break;
 				case GF_Datagrid.ACTION_VIEW:
-//					if (!(this.m_oOptions.event_handlers.view_row instanceof Function)) {
-//						GF_Debug.Error('Datagrid\'s view row action is not set.');
-//					}
 					oA = new GF_Action({
 						img: GF_Datagrid.Files.view_row_icon,
 						caption: GF_Datagrid.Language.view_row,
@@ -3290,9 +3277,6 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 			var oA = aoActions[i];
 			switch (oA) {
 				case GF_Datagrid.ACTION_DELETE_GROUP:
-					if (!(this.m_oOptions.event_handlers.delete_group instanceof Function)) {
-						GF_Debug.Error('Datagrid\'s delete group action is not set.');
-					}
 					oA = new GF_Action({
 						img: GF_Datagrid.Files.delete_group_icon,
 						caption: GF_Datagrid.Language.delete_group,
@@ -3329,7 +3313,6 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		jTr.addClass('selected');
 		GF.CheckboxesCheck(jTr);
 	};
-	
 	
 	this._ChangeOrder = GF.NewEventHandler(function(eEvent) {
 		var dDg = GF_Datagrid.GetCurrentInstance(this);

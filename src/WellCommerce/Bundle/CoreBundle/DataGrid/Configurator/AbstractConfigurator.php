@@ -72,25 +72,25 @@ class AbstractConfigurator implements ConfiguratorInterface
         $eventHandlers = $this->manager->getOptions()->getEventHandlers();
 
         $eventHandlers->add(new LoadEventHandler([
-            'route'      => $this->manager->getRouter()->generate($this->manager->getRouteForAction('grid'))
+            'function' => $this->getFunction('load'),
+            'route'    => $this->manager->getRouteForAction('grid')
         ]));
-
-        $editRoute = $this->manager->getRouteForAction('edit');
 
         $eventHandlers->add(new EditRowEventHandler([
             'function'   => $this->getFunction('edit'),
             'row_action' => OptionInterface::ACTION_EDIT,
-            'route'      => $this->manager->getRouter()->generate($editRoute)
+            'route'      => $this->manager->getRouteForAction('edit')
         ]));
 
         $eventHandlers->add(new ClickRowEventHandler([
             'function' => $this->getFunction('click'),
-            'route'    => $this->manager->getRouter()->generate($editRoute)
+            'route'    => $this->manager->getRouteForAction('edit')
         ]));
 
         $eventHandlers->add(new DeleteRowEventHandler([
-            'function'   => $function = $this->getFunction('delete'),
+            'function'   => $this->getFunction('delete'),
             'row_action' => OptionInterface::ACTION_DELETE,
+            'route'      => $this->manager->getRouteForAction('delete')
         ]));
 
         $datagrid->setRepository($this->repository);

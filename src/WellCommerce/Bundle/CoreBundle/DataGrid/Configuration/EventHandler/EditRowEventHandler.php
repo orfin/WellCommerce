@@ -64,7 +64,7 @@ class EditRowEventHandler extends AbstractEventHandler implements EventHandlerIn
     {
         return "
         function {$this->options['function']}(dg, id) {
-            return window.location.href = '{$this->options['route']}/' + id;
+            return window.location.href = Routing.generate('{$this->options['route']}', {id: id});
         }";
     }
 }

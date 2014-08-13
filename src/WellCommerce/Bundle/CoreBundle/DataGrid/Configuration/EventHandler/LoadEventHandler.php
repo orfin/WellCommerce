@@ -37,15 +37,26 @@ class LoadEventHandler extends AbstractEventHandler implements EventHandlerInter
     public function configureOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setRequired([
+            'function',
             'route',
         ]);
 
         $resolver->setDefaults([
+            'function' => OptionInterface::GF_NULL,
             'route'    => OptionInterface::GF_NULL,
         ]);
 
         $resolver->setAllowedTypes([
+            'function' => ['string'],
             'route'    => ['string'],
         ]);
+    }
+
+    public function getJavascriptFunction()
+    {
+        return "
+        function {$this->options['function']}(oRequest) {
+            DataGrid.MakeRequest(Routing.generate('{$this->options['route']}'), oRequest, GF_Datagrid.ProcessIncomingData);
+        }";
     }
 }

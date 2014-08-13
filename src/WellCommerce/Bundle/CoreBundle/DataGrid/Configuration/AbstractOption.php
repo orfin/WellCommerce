@@ -28,11 +28,6 @@ abstract class AbstractOption
     protected $options;
 
     /**
-     * @var array
-     */
-    protected $types = [];
-
-    /**
      * Constructor
      *
      * @param array $options

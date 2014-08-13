@@ -40,7 +40,7 @@
         },
         event_handlers: {
             {% for name, options in datagrid.getOptions().getEventHandlers() %}
-            {{ name }}: {% if options.has('route') %}'{{ options.get('route') }}'{% else %}{{ options.get('function') }}{% endif %},
+            {{ name }}: {{ options.get('function') }},
             {% endfor %}
         },
         columns: [
