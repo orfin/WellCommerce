@@ -39,12 +39,13 @@ before_script:
     - sleep 5
 
 script:
-    - bin/codecept run --env test1 -vvv
-    - bin/codecept run --env test2 -vvv
-    - bin/codecept run --env test3 -vvv
-    - bin/codecept run --env test4 -vvv
-    - bin/codecept run --env test5 -vvv
-    - bin/codecept run --env test6 -vvv
+    - bin/codecept run
+    - bin/codecept run --env test1
+    - bin/codecept run --env test2
+    - bin/codecept run --env test3
+    - bin/codecept run --env test4
+    - bin/codecept run --env test5
+    - bin/codecept run --env test6
 
 notifications:
     email: "travis@wellcommerce.org"
