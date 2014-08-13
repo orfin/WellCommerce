@@ -10,6 +10,7 @@
 
     <route id="admin.company.grid" path="/grid">
         <default key="_controller">company.controller.admin:gridAction</default>
+        <option key="expose">true</option>
     </route>
 
     <route id="admin.company.add" path="/add">

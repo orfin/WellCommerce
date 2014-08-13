@@ -23,10 +23,7 @@
         "psr-0": {
             "": "src/",
             "SymfonyStandard": "app/"
-        },
-        "classmap": [
-            "vendor/xajax/xajax"
-        ]
+        }
     },
     "require": {
         "php": ">=5.3.3",
@@ -50,7 +47,8 @@
         "codeception/codeception": "2.0.4",
         "knplabs/doctrine-behaviors": "1.0.x-dev",
         "fzaninotto/faker": "1.5.x-dev",
-        "white-october/pagerfanta-bundle": "2.1.x-dev"
+        "white-october/pagerfanta-bundle": "2.1.x-dev",
+        "friendsofsymfony/jsrouting-bundle": "1.5.3"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

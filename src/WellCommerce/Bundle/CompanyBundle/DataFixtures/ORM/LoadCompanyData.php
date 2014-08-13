@@ -31,7 +31,7 @@ class LoadCompanyData extends AbstractDataFixture implements FixtureInterface, O
      */
     public function load(ObjectManager $manager)
     {
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 10000; $i++) {
             $company = new Company();
             $company->setName($this->fakerGenerator->company.' '.$this->fakerGenerator->companySuffix);
             $company->setShortName($this->fakerGenerator->company);
