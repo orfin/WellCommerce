@@ -40,12 +40,14 @@ before_script:
 
 script:
     - bin/codecept run
-    - bin/codecept run --env test1
-    - bin/codecept run --env test2
-    - bin/codecept run --env test3
-    - bin/codecept run --env test4
-    - bin/codecept run --env test5
-    - bin/codecept run --env test6
+    - curl wellcommerce.dev
+    - curl wellcommerce.dev/app_dev.php
+    - curl wellcommerce.dev/app_test.php
+    - curl wellcommerce.dev/app_test.php/admin
+    - curl wellcommerce.dev/app_dev.php/admin
+    - curl wellcommerce.dev/app_dev.php/admin/company/index
+    - curl wellcommerce.dev/app_test.php/admin/company/index
+
 
 notifications:
     email: "travis@wellcommerce.org"
