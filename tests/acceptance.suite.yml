@@ -11,5 +11,51 @@ modules:
         - AcceptanceHelper
     config:
         WebDriver:
-            url: 'http://wellcommerce.dev/'
+            url: 'http://wellcommerce.dev/app_test.php'
             browser: firefox
+env:
+    test1:
+        modules:
+            enabled:
+                - WebDriver
+                - AcceptanceHelper
+            config:
+                WebDriver:
+                    url: 'http://wellcommerce.dev/app_test.php'
+                    browser: firefox
+    test2:
+        modules:
+            enabled:
+                - WebDriver
+                - AcceptanceHelper
+            config:
+                WebDriver:
+                    url: 'http://wellcommerce.dev/app_dev.php'
+                    browser: firefox
+    test3:
+        modules:
+            enabled:
+                - WebDriver
+                - AcceptanceHelper
+            config:
+                WebDriver:
+                    url: 'http://wellcommerce.dev/'
+                    browser: firefox
+    test4:
+        modules:
+            enabled:
+                - WebDriver
+                - AcceptanceHelper
+            config:
+                WebDriver:
+                    url: 'http://wellcommerce.dev'
+                    browser: firefox
+    test5:
+        modules:
+            enabled:
+                - WebDriver
+                - AcceptanceHelper
+            config:
+                WebDriver:
+                    url: 'http://localhost'
+                    browser: firefox

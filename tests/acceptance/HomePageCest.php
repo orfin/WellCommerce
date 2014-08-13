@@ -14,7 +14,7 @@ class HomePageCest
     public function tryToTest(AcceptanceTester $I)
     {
         $I->wantTo('Check if home page triggers error');
-        $I->amOnPage('/app_test.php');
+        $I->amOnPage('/');
         $I->see('No route found for');
     }
 }
