@@ -68,3 +68,12 @@ env:
                     WebDriver:
                         url: 'http://localhost/'
                         browser: firefox
+      test7:
+            modules:
+                enabled:
+                    - WebDriver
+                    - AcceptanceHelper
+                config:
+                    WebDriver:
+                        url: 'http://wellcommerce.dev:8081'
+                        browser: firefox
