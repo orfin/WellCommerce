@@ -2,6 +2,7 @@ web/bundles/
 web/css/
 web/js/
 web/js/compiled/
+web/bundles
 app/bootstrap.php.cache
 app/cache/*
 app/cache/dev/*

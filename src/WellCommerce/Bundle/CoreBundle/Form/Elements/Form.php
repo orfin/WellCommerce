@@ -235,8 +235,7 @@ class Form extends Container
      *
      * @return bool
      */
-    public
-    function isSubmitted()
+    public function isSubmitted()
     {
         return $this->request->request->has($this->attributes['name'] . '_submitted');
     }
@@ -248,9 +247,8 @@ class Form extends Container
      *
      * @return bool
      */
-    public
-    function isValid($values = []
-    ) {
+    public function isValid($values = [])
+    {
         // don't validate the form if it wasn't submitted
         if (!$this->isSubmitted()) {
             return false;
@@ -263,17 +261,15 @@ class Form extends Container
         return parent::isValid();
     }
 
-    public
-    function getSubmittedData()
+    public function getSubmittedData()
     {
         return $this->request->request->all();
     }
 
-    public
-    function isAction($actionName
-    ) {
+    public function isAction($actionName)
+    {
         $actionName = '_Action_' . $actionName;
 
-        return (isset($_POST[$actionName]) && ($_POST[$actionName] == '1'));
+        return $this->request->request->has($actionName);
     }
 }
