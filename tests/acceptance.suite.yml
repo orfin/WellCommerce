@@ -59,3 +59,12 @@ env:
                 WebDriver:
                     url: 'http://localhost'
                     browser: firefox
+    test6:
+            modules:
+                enabled:
+                    - WebDriver
+                    - AcceptanceHelper
+                config:
+                    WebDriver:
+                        url: 'http://localhost/'
+                        browser: firefox
