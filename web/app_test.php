@@ -24,6 +24,7 @@ if (!in_array(@$_SERVER['REMOTE_ADDR'], array(
 }
 
 $loader = require_once __DIR__ . '/../app/bootstrap.php.cache';
+\Symfony\Component\Debug\Debug::enable();
 
 require_once __DIR__ . '/../app/AppKernel.php';
 
