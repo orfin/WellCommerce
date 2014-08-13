@@ -27,7 +27,7 @@ before_script:
     - php app/console doctrine:schema:create --env=test -vvv
     - php app/console doctrine:fixtures:load --no-interaction -vvv
     - chmod -R 777 app/cache app/logs
-    - app/console --env=test cache:warmup
+    - php app/console --env=test cache:warmup
     - chmod -R 777 app/cache app/logs
     - php app/console assets:install
     - php app/console assetic:dump
