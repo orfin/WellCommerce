@@ -17,17 +17,18 @@ install:
     - sudo sed -i -e "s,/var/www,$(pwd)/web,g" /etc/apache2/sites-available/default
     - sudo sed -i -e "/DocumentRoot/i\ServerName wellcommerce.dev" /etc/apache2/sites-available/default
     - echo "127.0.0.1 wellcommerce.dev" | sudo tee -a /etc/hosts
-    - sudo a2enmod rewrite
     - sudo /etc/init.d/apache2 restart
 
 before_script:
     - cp app/config/parameters.yml.travis app/config/parameters.yml
     - composer self-update
     - composer install --prefer-source --no-interaction
-    - php app/console doctrine:database:create --env=dev -vvv
-    - php app/console doctrine:schema:create --env=dev -vvv
+    - php app/console doctrine:database:create --env=test -vvv
+    - php app/console doctrine:schema:create --env=test -vvv
     - php app/console doctrine:fixtures:load --no-interaction -vvv
-    - php app/console cache:warmup --env=dev -vvv
+    - chmod -R 777 app/cache app/logs
+    - app/console --env=test cache:warmup
+    - chmod -R 777 app/cache app/logs
     - php app/console assets:install
     - php app/console assetic:dump
 
