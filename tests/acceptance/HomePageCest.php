@@ -1,4 +1,5 @@
 <?php
+use \AcceptanceTester;
 
 class HomePageCest
 {
