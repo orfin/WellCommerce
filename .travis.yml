@@ -38,8 +38,7 @@ before_script:
 
 script:
     - bin/codecept run --steps --debug --html
-    - cd /home/travis/build/WellCommerce/WellCommerce/tests/_output
-    - ls
+    - cat /home/travis/build/WellCommerce/WellCommerce/tests/_output/report.html
 
 notifications:
     email: "travis@wellcommerce.org"
