@@ -18,6 +18,7 @@ install:
     - sudo sed -i -e "s,/var/www,$(pwd)/web,g" /etc/apache2/sites-available/default
     - sudo sed -i -e "/DocumentRoot/i\ServerName wellcommerce.tpl" /etc/apache2/sites-available/default
     - echo "127.0.0.1 wellcommerce.tpl" | sudo tee -a /etc/hosts
+    - sudo a2enmod rewrite
     - sudo /etc/init.d/apache2 restart
 
 before_script:
