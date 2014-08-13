@@ -32,7 +32,7 @@ abstract class AbstractFrontController extends AbstractController implements Fro
     /**
      * {@inheritdoc}
      */
-    public function setLayout($name, $cache = true, $ttl = LayoutInterface::CACHE_TTL)
+    protected function setLayout($name, $cache = true, $ttl = LayoutInterface::CACHE_TTL)
     {
         $this->layout = new Layout($name, $cache, $ttl);
     }
@@ -40,22 +40,12 @@ abstract class AbstractFrontController extends AbstractController implements Fro
     /**
      * {@inheritdoc}
      */
-    public function renderLayout()
+    protected function renderLayout()
     {
         if (null === $this->layout) {
             throw new \LogicException(sprintf('Layout for controller is not set. You must use setLayout method in controller service definition.'));
         }
 
         return $this->getLayoutRenderer()->load($this->layout);
-    }
-
-    /**
-     * Returns the category provider
-     *
-     * @return \WellCommerce\Category\Provider\CategoryProviderInterface
-     */
-    public function getCategoryProvider()
-    {
-        return $this->get('category.provider');
     }
 }

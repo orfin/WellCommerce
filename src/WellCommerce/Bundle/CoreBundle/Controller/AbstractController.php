@@ -36,7 +36,7 @@ abstract class AbstractController extends AbstractContainer
      *
      * @return \WellCommerce\Bundle\CoreBundle\Form\Elements\Form
      */
-    public function getFormBuilder(FormInterface $form, $data = null, array $options)
+    protected function getFormBuilder(FormInterface $form, $data = null, array $options)
     {
         return $this->get('form.builder')->create($form, $data, $options)->getForm();
     }
@@ -48,7 +48,7 @@ abstract class AbstractController extends AbstractContainer
      *
      * @return \WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface
      */
-    public function getDataGrid(DataGridInterface $dataGrid)
+    protected function getDataGrid(DataGridInterface $dataGrid)
     {
         return $this->get('datagrid_builder')->create($dataGrid);
     }
@@ -60,7 +60,7 @@ abstract class AbstractController extends AbstractContainer
      *
      * @return \WellCommerce\Bundle\CoreBundle\DataSet\DataSetInterface
      */
-    public function getDataSet(DataSetInterface $dataSet)
+    protected function getDataSet(DataSetInterface $dataSet)
     {
         return $this->get('dataset_builder')->create($dataSet);
     }
@@ -73,7 +73,7 @@ abstract class AbstractController extends AbstractContainer
      *
      * @return RedirectResponse
      */
-    public function redirect($url, $status = 302)
+    protected function redirect($url, $status = 302)
     {
         return new RedirectResponse($url, $status);
     }

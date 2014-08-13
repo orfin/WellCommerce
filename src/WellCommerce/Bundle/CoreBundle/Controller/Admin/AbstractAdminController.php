@@ -70,7 +70,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
         $this->manager    = $manager;
     }
 
-    public function getForm($resource)
+    protected function getForm($resource)
     {
         return $this->getFormBuilder($this->form, $resource, [
             'name' => $this->repository->getAlias()

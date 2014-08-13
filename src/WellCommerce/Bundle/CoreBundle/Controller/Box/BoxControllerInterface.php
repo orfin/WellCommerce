@@ -20,18 +20,5 @@ namespace WellCommerce\Bundle\CoreBundle\Controller\Box;
  */
 interface BoxControllerInterface
 {
-    /**
-     * @return int Internal box id
-     */
-    public function getBoxId();
 
-    /**
-     * As box settings are passed as another key in forwarded requests
-     * we need to fetch them using accessor
-     *
-     * @param $id
-     *
-     * @return mixed
-     */
-    public function getBoxSetting($id);
 }

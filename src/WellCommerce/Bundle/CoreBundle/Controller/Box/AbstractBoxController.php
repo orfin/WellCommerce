@@ -24,7 +24,7 @@ abstract class AbstractBoxController extends AbstractController implements BoxCo
     /**
      * {@inheritdoc}
      */
-    public function getBoxId()
+    protected function getBoxId()
     {
         return $this->getParam('_box_id');
     }
@@ -32,7 +32,7 @@ abstract class AbstractBoxController extends AbstractController implements BoxCo
     /**
      * {@inheritdoc}
      */
-    public function getBoxSetting($id)
+    protected function getBoxSetting($id)
     {
         $accessor = $this->getPropertyAccessor();
 

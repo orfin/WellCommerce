@@ -24,22 +24,4 @@ interface FrontControllerInterface
 {
     const MASTER_CONTROLLER = 1;
     const SUB_CONTROLLER    = 2;
-
-    /**
-     * Initializes layout for controller
-     *
-     * @param      $name
-     * @param bool $cache Is cache enabled
-     * @param int  $ttl   Cache lifetime
-     */
-
-    public function setLayout($name, $cache = true, $ttl = LayoutInterface::CACHE_TTL);
-
-    /**
-     * Returns rendered layout
-     *
-     * @return mixed
-     * @throws \LogicException
-     */
-    public function renderLayout();
 }
