@@ -3,10 +3,10 @@ web/css/
 web/js/
 web/js/compiled/
 app/bootstrap.php.cache
-/app/cache/*
-/app/cache/dev/*
-/app/config/parameters.yml
-/app/logs/*
+app/cache/*
+app/cache/dev/*
+app/config/parameters.yml
+app/logs/*
 !app/cache/.gitkeep
 !app/logs/.gitkeep
 /build/
@@ -20,3 +20,5 @@ app/bootstrap.php.cache
 /tests/_output
 
 /app/config/parameters.yml
+app/cache/dev/appDevDebugProjectContainer.php
+app/cache/dev/appDevDebugProjectContainer.xml
