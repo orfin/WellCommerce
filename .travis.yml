@@ -20,6 +20,7 @@ install:
 
 before_script:
     - cp app/config/parameters.yml.dist app/config/parameters.yml
+    - cp web/htaccess.dist web/.htaccess
     - composer self-update
     - composer install --prefer-source --no-interaction
     - php app/console doctrine:database:create --env=dev -vvv
