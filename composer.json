@@ -1,7 +1,7 @@
 {
     "name": "wellcommerce/wellcommerce",
     "license": "OSL-3.0",
-    "minimum-stability": "dev",
+    "minimum-stability": "alpha",
     "description": "WellCommerce Open-Source edition",
     "keywords": ["symfony","e-commerce","open-source"],
     "authors": [
@@ -49,7 +49,7 @@
         "fzaninotto/faker": "1.5.x-dev",
         "white-october/pagerfanta-bundle": "2.1.x-dev",
         "friendsofsymfony/jsrouting-bundle": "1.5.3",
-        "willdurand/js-translation-bundle": "1.2.2"
+        "willdurand/js-translation-bundle": "2.1.*@dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
