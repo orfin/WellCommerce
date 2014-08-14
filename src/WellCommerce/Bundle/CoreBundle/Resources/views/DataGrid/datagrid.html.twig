@@ -4,9 +4,8 @@
 
 <script type="text/javascript">
 var DataGrid;
-
 {% for event in datagrid.getOptions().getEventHandlers() %}
-    {{ include(template_from_string(event.getJavascriptFunction())) }}
+{{ include(template_from_string(event.getJavascriptFunction())) }}
 {% endfor %}
 
 $(document).ready(function() {

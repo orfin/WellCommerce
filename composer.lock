@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cfa5f7f12bd0331ceaf7f8ef7c4f1a3a",
+    "hash": "1f929c5cd6adc48088e6fdabc9fc15a4",
     "packages": [
         {
             "name": "codeception/codeception",
@@ -3437,6 +3437,63 @@
                 "paging"
             ],
             "time": "2013-03-30 22:08:55"
+        },
+        {
+            "name": "willdurand/js-translation-bundle",
+            "version": "1.2.2",
+            "target-dir": "Bazinga/ExposeTranslationBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/willdurand/BazingaJsTranslationBundle.git",
+                "reference": "dee69aa0a1424a067c4608a3278e07cfba903ae7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/willdurand/BazingaJsTranslationBundle/zipball/dee69aa0a1424a067c4608a3278e07cfba903ae7",
+                "reference": "dee69aa0a1424a067c4608a3278e07cfba903ae7",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/console": "~2.1",
+                "symfony/finder": "~2.1",
+                "symfony/framework-bundle": "~2.1"
+            },
+            "replace": {
+                "willdurand/expose-translation-bundle": "1.2.*"
+            },
+            "require-dev": {
+                "symfony/browser-kit": "~2.1",
+                "symfony/yaml": "~2.1"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Bazinga\\ExposeTranslationBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "William Durand",
+                    "email": "william.durand1@gmail.com",
+                    "homepage": "http://www.willdurand.fr"
+                }
+            ],
+            "description": "A pretty nice way to expose your translation messages to your JavaScript.",
+            "keywords": [
+                "javascript",
+                "symfony",
+                "translation"
+            ],
+            "time": "2014-01-31 09:56:04"
         },
         {
             "name": "willdurand/jsonp-callback-validator",

@@ -48,7 +48,8 @@
         "knplabs/doctrine-behaviors": "1.0.x-dev",
         "fzaninotto/faker": "1.5.x-dev",
         "white-october/pagerfanta-bundle": "2.1.x-dev",
-        "friendsofsymfony/jsrouting-bundle": "1.5.3"
+        "friendsofsymfony/jsrouting-bundle": "1.5.3",
+        "willdurand/js-translation-bundle": "1.2.2"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
