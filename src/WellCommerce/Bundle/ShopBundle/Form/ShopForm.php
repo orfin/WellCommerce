@@ -76,12 +76,13 @@ class ShopForm extends AbstractForm implements FormInterface
      */
     public function getDefaultData(Shop $shop)
     {
-        $formData = [];
-        $accessor = $this->getPropertyAccessor();
+        $formData    = [];
+        $accessor    = $this->getPropertyAccessor();
+        $transformer = new CompanyToNumberTransformer($this->getEntityManager());
 
         $accessor->setValue($formData, '[required_data]', [
             'name'    => $shop->getName(),
-            'company' => $shop->getCompany()->getId()
+            'company' => $transformer->transform($shop->getCompany())
         ]);
 
         return $formData;
