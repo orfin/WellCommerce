@@ -72,10 +72,13 @@ class DeleteRowEventHandler extends AbstractEventHandler implements EventHandler
                 oRequest = {
                     id: p.id
                 }
-                DataGrid.MakeRequest(Routing.generate('{$this->options['route']}', {id: p.id}), {}, GCallback(function(eEvent){
-                    DataGrid.LoadData();
-                    DataGrid.ClearSelection();
-                }));
+                DataGrid.MakeRequest(Routing.generate('{$this->options['route']}', {id: p.id}), {}, function(oData){
+                    if(oData.success){
+                        GMessage(oRow.name + ' successfully deleted');
+                        DataGrid.LoadData();
+                        DataGrid.ClearSelection();
+                    }
+                });
             };
             new GF_Alert(title, msg, func, true, params);
         }";
