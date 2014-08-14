@@ -14,16 +14,15 @@ The code is still hot but it only gets cooler :). Here are most important things
 
 - Symfony2 Full-stack framework
 - Doctrine2 ORM
-- Codeception for BDD testing
-- Twig
-- Assetic for asset management
+- Codeception PHP testing framework
+- Twig template engine
+- Assetic
 - Twitter Bootstrap 3 as a base HTML framework
-- ZF2 Cache component
 
 Requirements
 ------------
 
-WellCommerce is only supported on PHP 5.4 and up.
+WellCommerce is only supported on PHP 5.4 and up. 
 
 Installation
 ------------
