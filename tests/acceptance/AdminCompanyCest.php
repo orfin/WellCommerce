@@ -14,7 +14,7 @@ class AdminCompanyCest
     public function tryToTest(AcceptanceTester $I)
     {
         $I->wantTo('Check if company module is working');
-        $I->amOnPage('/admin/company/index');
+        $I->amOnPage('/admin/configuration/company/index');
         $I->see('Companies');
     }
 }
