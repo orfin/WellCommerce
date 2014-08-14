@@ -33,11 +33,10 @@ interface RepositoryInterface
      * Creates a new QueryBuilder instance that is prepopulated for this entity name.
      *
      * @param string $alias
-     * @param string $indexBy The index for the from.
      *
      * @return \Doctrine\ORM\QueryBuilder
      */
-    public function createQueryBuilder($alias, $indexBy = null);
+    public function createQueryBuilder($alias);
 
     /**
      * Returns entity alias
