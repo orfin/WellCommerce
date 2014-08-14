@@ -23,7 +23,7 @@ use WellCommerce\Bundle\AdminMenuBundle\Builder\AdminMenuBuilderInterface;
 class AdminMenuEvent extends Event
 {
     /**
-     * @var \WellCommerce\AdminMenu\Builder\AdminMenuBuilderInterface
+     * @var AdminMenuBuilderInterface
      */
     protected $builder;
 

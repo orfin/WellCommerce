@@ -15,11 +15,8 @@ app/logs/*
 /composer.phar
 /application/.idea
 *.idea
-/upload
-/var
 /tests/_output
-
-/app/config/parameters.yml
+app/config/parameters.yml
 app/cache/dev/appDevDebugProjectContainer.php
 app/cache/dev/appDevDebugProjectContainer.xml
 *.project
