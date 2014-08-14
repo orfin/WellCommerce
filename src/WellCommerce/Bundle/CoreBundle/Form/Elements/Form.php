@@ -201,6 +201,7 @@ class Form extends Container
         $accessor        = $this->getPropertyAccessor();
         $hasTranslations = false;
 
+
         foreach ($this->fields as $field) {
             if (null != $field->getPropertyPath() && !$field->parent instanceof FieldsetLanguage) {
                 $value = $field->getValue();

@@ -78,6 +78,10 @@ class DeleteRowEventHandler extends AbstractEventHandler implements EventHandler
                         DataGrid.LoadData();
                         DataGrid.ClearSelection();
                     }
+                    if(oData.error){
+                        GError(oData.error);
+                        DataGrid.ClearSelection();
+                    }
                 });
             };
             new GF_Alert(title, msg, func, true, params);

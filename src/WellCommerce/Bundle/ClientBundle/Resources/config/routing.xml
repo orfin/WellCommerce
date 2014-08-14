@@ -22,7 +22,7 @@
         <option key="expose">true</option>
     </route>
 
-    <route id="admin.client_group.edit" path="/group/delete/{id}">
+    <route id="admin.client_group.delete" path="/group/delete/{id}">
         <default key="_controller">client_group.controller.admin:deleteAction</default>
         <option key="expose">true</option>
     </route>
