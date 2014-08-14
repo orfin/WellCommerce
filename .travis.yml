@@ -29,8 +29,8 @@ before_script:
     - chmod -R 777 app/cache app/logs
     - php app/console --env=test cache:warmup
     - chmod -R 777 app/cache app/logs
-    - php app/console bazinga:js-translation:dump
     - php app/console assets:install
+    - php app/console bazinga:js-translation:dump
     - php app/console assetic:dump
 
     - "sh -e /etc/init.d/xvfb start"
