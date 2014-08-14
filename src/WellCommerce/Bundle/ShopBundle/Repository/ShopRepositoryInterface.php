@@ -10,24 +10,18 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CompanyBundle\Repository;
+namespace WellCommerce\Bundle\ShopBundle\Repository;
 
 use WellCommerce\Bundle\CoreBundle\DataGrid\Repository\DataGridAwareRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
- * Interface CompanyRepositoryInterface
+ * Interface ShopRepositoryInterface
  *
- * @package WellCommerce\Bundle\CompanyBundle\Repository
+ * @package WellCommerce\Bundle\ShopBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface CompanyRepositoryInterface extends RepositoryInterface, DataGridAwareRepositoryInterface
+interface ShopRepositoryInterface extends RepositoryInterface, DataGridAwareRepositoryInterface
 {
-    /**
-     * Returns all companies as key-value pairs
-     * Mostly used in form select element
-     *
-     * @return mixed
-     */
-    public function allToSelect();
+
 } 

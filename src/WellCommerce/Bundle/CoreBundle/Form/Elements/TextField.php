@@ -53,7 +53,8 @@ class TextField extends Field implements ElementInterface
             'rules',
             'filters',
             'default',
-            'property_path'
+            'property_path',
+            'transformer'
         ]);
 
         $resolver->setDefaults([
@@ -63,6 +64,7 @@ class TextField extends Field implements ElementInterface
             'property_path' => function (Options $options) {
                     return new PropertyPath($options['name']);
                 },
+            'transformer'   => null
         ]);
 
         $resolver->setAllowedTypes([

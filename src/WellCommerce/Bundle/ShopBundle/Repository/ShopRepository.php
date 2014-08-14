@@ -10,24 +10,24 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CompanyBundle\Repository;
+namespace WellCommerce\Bundle\ShopBundle\Repository;
 
 use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 
 /**
- * Class CompanyRepository
+ * Class ShopRepository
  *
- * @package WellCommerce\Bundle\CompanyBundle\Repository
+ * @package WellCommerce\Bundle\ShopBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CompanyRepository extends AbstractEntityRepository implements CompanyRepositoryInterface
+class ShopRepository extends AbstractEntityRepository implements ShopRepositoryInterface
 {
     /**
      * {@inheritdoc}
      */
     public function getDataGridQueryBuilder()
     {
-        return parent::getQueryBuilder()->groupBy('company.id');
+        return parent::getQueryBuilder()->groupBy('shop.id');
     }
 
     /**
@@ -44,16 +44,5 @@ class CompanyRepository extends AbstractEntityRepository implements CompanyRepos
     public function deleteMultipleRows(array $ids)
     {
         return false;
-    }
-
-    public function allToSelect()
-    {
-        $companies = [];
-        $result    = $this->createQueryBuilder('company')->getQuery()->getResult();
-        foreach ($result as $company) {
-            $companies[$company->getId()] = $company->getName();
-        }
-
-        return $companies;
     }
 }

@@ -203,7 +203,11 @@ class Form extends Container
 
         foreach ($this->fields as $field) {
             if (null != $field->getPropertyPath() && !$field->parent instanceof FieldsetLanguage) {
-                $accessor->setValue($this->defaultData, $field->getPropertyPath(), $field->getValue());
+                $value = $field->getValue();
+                if($field->hasTransformer()){
+                    $value = $field->getTransformer()->reverseTransform($field->getValue());
+                }
+                $accessor->setValue($this->defaultData, $field->getPropertyPath(), $value);
             }
             if ($field->parent instanceof FieldsetLanguage) {
                 $hasTranslations = true;

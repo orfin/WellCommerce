@@ -170,6 +170,16 @@ abstract class Node extends ContainerAware
         return $this->attributes['property_path'];
     }
 
+    public function hasTransformer()
+    {
+        return (null !== $this->attributes['transformer']);
+    }
+
+    public function getTransformer()
+    {
+        return $this->attributes['transformer'];
+    }
+
     public function getAttributes()
     {
         return $this->attributes;

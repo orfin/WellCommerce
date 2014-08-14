@@ -51,6 +51,7 @@ abstract class OptionedField extends Field
             'dependencies',
             'filters',
             'rules',
+            'transformer'
         ]);
 
         $resolver->setDefaults([
@@ -61,6 +62,7 @@ abstract class OptionedField extends Field
             'dependencies'  => [],
             'filters'       => [],
             'rules'         => [],
+            'transformer'   => null
         ]);
 
         $resolver->setAllowedTypes([
@@ -79,6 +81,7 @@ abstract class OptionedField extends Field
             'default'         => ['string', 'integer'],
             'rules'           => 'array',
             'dependencies'    => 'array',
+            'transformer'     => ['null', 'object'],
         ]);
     }
 
