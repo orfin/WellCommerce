@@ -52,7 +52,7 @@ script:
     - curl wellcommerce.dev/app_dev.php/admin -v --trace -
     - curl wellcommerce.dev/app_dev.php/admin/company/index -v --trace -
     - curl wellcommerce.dev/app_test.php/admin/company/index -v --trace -
-   cat error.logero
+    - cat error.log
     - ls
 
 notifications:
