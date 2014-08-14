@@ -18,7 +18,7 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
  * @package WellCommerce\Bundle\CoreBundle\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class RichTextEditor extends Textarea implements ElementInterface
+class RichTextEditor extends TextArea implements ElementInterface
 {
 
     public function __construct($attributes)

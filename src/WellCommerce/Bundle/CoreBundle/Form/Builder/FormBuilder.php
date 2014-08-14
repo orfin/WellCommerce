@@ -13,8 +13,11 @@
 namespace WellCommerce\Bundle\CoreBundle\Form\Builder;
 
 use Symfony\Component\DependencyInjection\ContainerAware;
+use WellCommerce\Bundle\CoreBundle\Form\Dependencies\DependencyInterface;
+use WellCommerce\Bundle\CoreBundle\Form\Filters\FilterInterface;
 use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
 use WellCommerce\Bundle\CoreBundle\Event\FormEvent;
+use WellCommerce\Bundle\CoreBundle\Form\Rules\RuleInterface;
 
 /**
  * Class FormBuilder

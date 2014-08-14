@@ -196,10 +196,10 @@ class Form extends Container
             return $this;
         }
 
-        $values          = $this->getSubmittedData();
+        $this->populate($this->getSubmittedData());
+
         $accessor        = $this->getPropertyAccessor();
         $hasTranslations = false;
-        $this->populate($values);
 
         foreach ($this->fields as $field) {
             if (null != $field->getPropertyPath() && !$field->parent instanceof FieldsetLanguage) {
@@ -207,23 +207,16 @@ class Form extends Container
             }
             if ($field->parent instanceof FieldsetLanguage) {
                 $hasTranslations = true;
+                $fieldValues = $field->getValue();
+                foreach ($fieldValues as $locale => $value) {
+                    $translation = $this->defaultData->translate($locale);
+                    $accessor->setValue($translation, $field->getName(), $value);
+                }
             }
         }
 
-        if ($hasTranslations) {
-            foreach ($this->fields as $field) {
-                if ($field->parent instanceof FieldsetLanguage) {
-                    $values
-                        = $field->getValue();
-                    foreach ($values as $locale => $value) {
-                        $translation
-                            = $this->defaultData->translate($locale);
-                        $accessor->setValue($translation, $field->getName(), $value);
-                    }
-
-                    $this->defaultData->mergeNewTranslations();
-                }
-            }
+        if($hasTranslations){
+            $this->defaultData->mergeNewTranslations();
         }
 
         return $this;

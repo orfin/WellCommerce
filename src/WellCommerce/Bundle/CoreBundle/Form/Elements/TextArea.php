@@ -17,13 +17,14 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\PropertyAccess\PropertyPath;
 
 /**
- * Class Checkbox
+ * Class TextArea
  *
  * @package WellCommerce\Bundle\CoreBundle\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Checkbox extends Field implements ElementInterface
+class TextArea extends TextField implements ElementInterface
 {
+
     /**
      * {@inheritdoc}
      */
@@ -35,12 +36,20 @@ class Checkbox extends Field implements ElementInterface
         ]);
 
         $resolver->setOptional([
-            'class',
-            'error',
+            'rows',
             'comment',
-            'default',
+            'suffix',
+            'prefix',
+            'selector',
+            'wrap',
+            'class',
+            'css_attribute',
+            'max_length',
+            'error',
+            'rules',
             'filters',
-            'rules'
+            'dependencies',
+            'default',
         ]);
 
         $resolver->setDefaults([
@@ -52,26 +61,37 @@ class Checkbox extends Field implements ElementInterface
                 },
         ]);
 
+
         $resolver->setAllowedTypes([
-            'name'    => 'string',
-            'label'   => 'string',
-            'class'   => 'string',
-            'error'   => 'string',
-            'comment' => 'string',
-            'default' => ['string', 'integer']
+            'name'          => 'string',
+            'rows'          => 'int',
+            'label'         => 'string',
+            'comment'       => 'string',
+            'suffix'        => 'string',
+            'prefix'        => 'string',
+            'selector'      => 'string',
+            'wrap'          => 'string',
+            'class'         => 'string',
+            'css_attribute' => 'string',
+            'max_length'    => 'integer',
+            'error'         => 'string',
+            'filters'       => 'array',
+            'rules'         => 'array',
+            'dependencies'  => 'array',
+            'default'       => ['string', 'integer']
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function prepareAttributesJs()
     {
         $attributes = [
             $this->formatAttributeJs('name', 'sName'),
             $this->formatAttributeJs('label', 'sLabel'),
+            $this->formatAttributeJs('rows', 'iRows', ElementInterface::TYPE_NUMBER),
+            $this->formatAttributeJs('cols', 'iCols', ElementInterface::TYPE_NUMBER),
             $this->formatAttributeJs('comment', 'sComment'),
             $this->formatAttributeJs('error', 'sError'),
+            $this->formatRepeatableJs(),
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
             $this->formatDefaultsJs()

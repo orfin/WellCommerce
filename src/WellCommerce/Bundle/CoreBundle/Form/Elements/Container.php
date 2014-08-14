@@ -77,6 +77,10 @@ abstract class Container extends Node
         }
     }
 
+    protected function setDefaults($value){
+
+    }
+
     public function getChildren()
     {
         return $this->children;

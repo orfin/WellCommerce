@@ -9,7 +9,8 @@
     </route>
 
     <route id="admin.locale.grid" path="/grid">
-        <default key="_controller">client_group.locale.admin:gridAction</default>
+        <default key="_controller">locale.controller.admin:gridAction</default>
+        <option key="expose">true</option>
     </route>
 
     <route id="admin.locale.add" path="/add">
@@ -18,6 +19,11 @@
 
     <route id="admin.locale.edit" path="/edit/{id}">
         <default key="_controller">locale.controller.admin:editAction</default>
-        <default key="id">null</default>
+        <option key="expose">true</option>
+    </route>
+
+    <route id="admin.locale.delete" path="/delete/{id}">
+        <default key="_controller">locale.controller.admin:deleteAction</default>
+        <option key="expose">true</option>
     </route>
 </routes>

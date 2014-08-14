@@ -11725,7 +11725,7 @@ var oDefaults = {
 	sComment: ''
 };
 
-var GFormTextarea = GCore.ExtendClass(GFormTextField, function() {
+var GFormTextArea = GCore.ExtendClass(GFormTextField, function() {
 	
 	var gThis = this;
 	
@@ -16063,7 +16063,7 @@ var oDefaults = {
 	sLanguage: 'pl'
 };
 
-var GFormRichTextEditor = GCore.ExtendClass(GFormTextarea, function() {
+var GFormRichTextEditor = GCore.ExtendClass(GFormTextArea, function() {
 	
 	var gThis = this;
 	

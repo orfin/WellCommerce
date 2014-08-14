@@ -30,6 +30,7 @@ class AppKernel extends Kernel
             new WellCommerce\Bundle\TaxBundle\WellCommerceTaxBundle(),
             new WellCommerce\Bundle\UnitBundle\WellCommerceUnitBundle(),
             new WellCommerce\Bundle\CompanyBundle\WellCommerceCompanyBundle(),
+            new WellCommerce\Bundle\ContactBundle\WellCommerceContactBundle(),
             new WellCommerce\Bundle\ClientBundle\WellCommerceClientBundle(),
             new WellCommerce\Bundle\LocaleBundle\WellCommerceLocaleBundle(),
         );

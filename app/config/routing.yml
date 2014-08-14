@@ -6,21 +6,25 @@ _bazinga_jstranslation:
 
 wellcommerce_locale:
     resource: "@WellCommerceLocaleBundle/Resources/config/routing.xml"
-    prefix:   /admin/locale
+    prefix:   /admin/configuration/locale
 
 wellcommerce_client:
     resource: "@WellCommerceClientBundle/Resources/config/routing.xml"
-    prefix:   /admin/client
+    prefix:   /admin/crm/client
 
 wellcommerce_company:
     resource: "@WellCommerceCompanyBundle/Resources/config/routing.xml"
-    prefix:   /admin/company
+    prefix:   /admin/configuration/company
 
 wellcommerce_unit:
     resource: "@WellCommerceUnitBundle/Resources/config/routing.xml"
-    prefix:   /admin/unit
+    prefix:   /admin/configuration/unit
 
 wellcommerce_tax:
     resource: "@WellCommerceTaxBundle/Resources/config/routing.xml"
-    prefix:   /admin/tax
+    prefix:   /admin/configuration/tax
+
+wellcommerce_contact:
+    resource: "@WellCommerceContactBundle/Resources/config/routing.xml"
+    prefix:   /admin/configuration/contact
 

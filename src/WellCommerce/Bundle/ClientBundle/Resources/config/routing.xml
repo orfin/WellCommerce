@@ -4,16 +4,13 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <route id="admin.client_group.grid" path="/group/grid">
-        <default key="_controller">client_group.controller.admin:gridAction</default>
-    </route>
-
     <route id="admin.client_group.index" path="/group/index">
         <default key="_controller">client_group.controller.admin:indexAction</default>
     </route>
 
     <route id="admin.client_group.grid" path="/group/grid">
         <default key="_controller">client_group.controller.admin:gridAction</default>
+        <option key="expose">true</option>
     </route>
 
     <route id="admin.client_group.add" path="/group/add">
@@ -22,6 +19,11 @@
 
     <route id="admin.client_group.edit" path="/group/edit/{id}">
         <default key="_controller">client_group.controller.admin:editAction</default>
-        <default key="id">null</default>
+        <option key="expose">true</option>
+    </route>
+
+    <route id="admin.client_group.edit" path="/group/delete/{id}">
+        <default key="_controller">client_group.controller.admin:deleteAction</default>
+        <option key="expose">true</option>
     </route>
 </routes>
