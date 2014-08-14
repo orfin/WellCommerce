@@ -11,5 +11,5 @@ modules:
         - AcceptanceHelper
     config:
         WebDriver:
-            url: 'http://wellcommerce.dev'
+            url: 'http://wellcommerce.dev:80/'
             browser: firefox
