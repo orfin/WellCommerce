@@ -13,7 +13,7 @@ before_install:
     - sudo rm -rf /dev/shm && sudo ln -s /run/shm /dev/shm
 
 install:
-   - sudo apt-get install apache2 libapache2-mod-fastcgi libapache2-mod-php5 php5-curl php5-mysql php5-intl
+   - sudo apt-get install apache2 libapache2-mod-fastcgi php5-curl php5-mysql php5-intl
    - sudo cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf
    - sudo a2enmod rewrite actions fastcgi alias
    - echo "cgi.fix_pathinfo = 1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
