@@ -47,10 +47,8 @@ script:
     - curl wellcommerce.dev/app_dev.php/admin -v --trace -
     - curl wellcommerce.dev/app_dev.php/admin/company/index -v --trace -
     - curl wellcommerce.dev/app_test.php/admin/company/index -v --trace -
-    - cat /home/travis/build/WellCommerce/WellCommerce/tests/_output/AdminCompanyCest.fail.html
-    - cat /home/travis/build/WellCommerce/WellCommerce/tests/_output/HomePageCest.fail.html
-    - cat /home/travis/build/WellCommerce/WellCommerce/tests/_output/HomeCept.fail.html
-
+    - cd /home/travis/builds/evantahler/actionHero
+    - ls
 
 notifications:
     email: "travis@wellcommerce.org"

@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{ app.request.locale }}">
 <head>
     <title>Administration</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -13,6 +13,12 @@
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    {% javascripts
+        'bundles/bazingajstranslation/js/translator.min.js'
+        'js/translations/config.js'
+        'js/translations/*/*.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
     <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
     {% javascripts '@WellCommerceCoreBundle/Resources/public/js/core/10.gekosale.js' %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
