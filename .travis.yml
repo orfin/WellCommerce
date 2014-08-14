@@ -13,14 +13,14 @@ before_install:
     - sudo rm -rf /dev/shm && sudo ln -s /run/shm /dev/shm
 
 install:
-    - sudo apt-get install -y --force-yes apache2 libapache2-mod-php5 php5-curl php5-mysql php5-intl > /dev/null
-    - sudo cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf
-    - echo '' > ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
-    - echo "memory_limit=4096M" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
-    - sudo sed -i -e "s,/var/www,$(pwd)/web,g" /etc/apache2/sites-available/default
-    - sudo sed -i -e "/DocumentRoot/i\ServerName wellcommerce.dev" /etc/apache2/sites-available/default
-    - echo "127.0.0.1 wellcommerce.dev" | sudo tee -a /etc/hosts
-    - sudo /etc/init.d/apache2 restart
+   - sudo apt-get install apache2 libapache2-mod-fastcgi libapache2-mod-php5 php5-curl php5-mysql php5-intl
+   - sudo cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf
+   - sudo a2enmod rewrite actions fastcgi alias
+   - echo "cgi.fix_pathinfo = 1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+   - ~/.phpenv/versions/$(phpenv version-name)/sbin/php-fpm
+   - sudo cp -f travis-ci-apache /etc/apache2/sites-available/default
+   - sudo sed -e "s?%TRAVIS_BUILD_DIR%?$(pwd)?g" --in-place /etc/apache2/sites-available/default
+   - sudo service apache2 restart
 
 before_script:
     - cp app/config/parameters.yml.travis app/config/parameters.yml
@@ -51,7 +51,7 @@ script:
     - curl wellcommerce.dev/app_dev.php/admin -v --trace -
     - curl wellcommerce.dev/app_dev.php/admin/company/index -v --trace -
     - curl wellcommerce.dev/app_test.php/admin/company/index -v --trace -
-    - cd /home/travis/builds/evantahler/actionHero
+    - cat error.log
     - ls
 
 notifications:
