@@ -44,12 +44,9 @@ before_script:
     - sleep 5
 
 script:
-    - php -v
     - bin/codecept run
-    - curl wellcommerce.dev -v --trace -
-    - curl wellcommerce.dev/admin/company/index -v --trace -
-    - cat error.log
-    - ls
 
+after_failure:
+    - cat error.log
 notifications:
     email: "travis@wellcommerce.org"
