@@ -48,5 +48,6 @@ script:
 
 after_failure:
     - cat error.log
+
 notifications:
     email: "travis@wellcommerce.org"
