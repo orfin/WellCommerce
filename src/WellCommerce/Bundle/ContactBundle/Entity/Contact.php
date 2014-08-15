@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\ContactBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
-use WellCommerce\Bundle\CoreBundle\Form\Transformer\TranslatableTransformer;
 
 /**
  * Contact

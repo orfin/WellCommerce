@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="category.controller.admin.class">WellCommerce\Bundle\CategoryBundle\Controller\Admin\CategoryController</parameter>
+        <parameter key="category.repository.class">WellCommerce\Bundle\CategoryBundle\Repository\CategoryRepository</parameter>
+        <parameter key="category.form.class">WellCommerce\Bundle\CategoryBundle\Form\CategoryForm</parameter>
+        <parameter key="category.tree.class">WellCommerce\Bundle\CategoryBundle\Form\CategoryTree</parameter>
+        <parameter key="category.listener.class">WellCommerce\Bundle\CategoryBundle\EventListener\CategoryListener</parameter>
+        <parameter key="category.manager.class">WellCommerce\Bundle\CategoryBundle\Manager\CategoryManager</parameter>
+    </parameters>
+
+    <services>
+        <service id="category.controller.admin" class="%category.controller.admin.class%">
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="admin_manager"/>
+            <argument type="service" id="category.repository"/>
+            <argument>null</argument>
+            <argument type="service" id="category.form"/>
+        </service>
+
+        <service id="category.repository" class="%category.repository.class%" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceCategoryBundle:Category</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="category.form" class="%category.form.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="category.tree" class="%category.tree.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setRepository">
+                <argument type="service" id="category.repository"/>
+            </call>
+        </service>
+
+        <service id="category.listener" class="%category.listener.class%">
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="translator"/>
+            <argument type="service" id="router"/>
+            <tag name="kernel.event_subscriber" />
+        </service>
+    </services>
+</container>

@@ -9,18 +9,17 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Bundle\CoreBundle\Form;
 
-use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
+namespace WellCommerce\Bundle\CategoryBundle;
+
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Class AbstractForm
+ * Class WellCommerceCategoryBundle
  *
- * @package WellCommerce\Bundle\CoreBundle\Form
+ * @package WellCommerce\Bundle\CategoryBundle
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AbstractForm extends AbstractContainer
+class WellCommerceCategoryBundle extends Bundle
 {
-
-
 }

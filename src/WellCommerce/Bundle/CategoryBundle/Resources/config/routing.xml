@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<routes xmlns="http://symfony.com/schema/routing"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+    <route id="admin.category.index" path="/index">
+        <default key="_controller">category.controller.admin:indexAction</default>
+    </route>
+
+    <route id="admin.category.add" path="/add">
+        <default key="_controller">category.controller.admin:addAction</default>
+        <option key="expose">true</option>
+    </route>
+
+    <route id="admin.category.create" path="/add">
+        <default key="_controller">category.controller.admin:createAction</default>
+        <option key="expose">true</option>
+    </route>
+
+    <route id="admin.category.edit" path="/edit/{id}">
+        <default key="_controller">category.controller.admin:editAction</default>
+    </route>
+
+    <route id="admin.category.update" path="/update">
+        <default key="_controller">category.controller.admin:updateAction</default>
+    </route>
+
+    <route id="admin.category.delete" path="/delete/{id}">
+        <default key="_controller">category.controller.admin:deleteAction</default>
+        <option key="expose">true</option>
+    </route>
+</routes>

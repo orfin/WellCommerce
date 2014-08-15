@@ -11,7 +11,6 @@
  */
 namespace WellCommerce\Bundle\ContactBundle\Form;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use WellCommerce\Bundle\ContactBundle\Entity\Contact;
 use WellCommerce\Bundle\CoreBundle\Form\AbstractForm;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
@@ -55,7 +54,7 @@ class ContactForm extends AbstractForm implements FormInterface
 
         $languageData->addChild($builder->getElement('text_field', [
             'name'  => 'name',
-            'label' => $this->trans('contact.name'),
+            'label' => $this->trans('address.name'),
             'rules' => [
                 $builder->getRule('required', [
                     'message' => $this->trans('Name is required')
@@ -65,12 +64,12 @@ class ContactForm extends AbstractForm implements FormInterface
 
         $languageData->addChild($builder->getElement('text_field', [
             'name'  => 'email',
-            'label' => $this->trans('contact.email'),
+            'label' => $this->trans('address.email'),
         ]));
 
         $languageData->addChild($builder->getElement('text_field', [
             'name'  => 'phone',
-            'label' => $this->trans('contact.phone'),
+            'label' => $this->trans('address.phone'),
         ]));
 
         $languageData->addChild($builder->getElement('text_area', [
@@ -80,47 +79,47 @@ class ContactForm extends AbstractForm implements FormInterface
 
         $addressData = $form->addChild($builder->getElement('fieldset', [
             'name'  => 'address_data',
-            'label' => $this->trans('Address data')
+            'label' => $this->trans('fieldset.address_data')
         ]));
 
         $languageData = $addressData->addChild($builder->getElement('fieldset_language', [
             'name'  => 'address_data_translation',
-            'label' => $this->trans('form.required_data.language_data.label')
+            'label' => $this->trans('fieldset.address_data.translation')
         ]));
 
         $languageData->addChild($builder->getElement('text_field', [
             'name'  => 'street',
-            'label' => $this->trans('Street'),
+            'label' => $this->trans('address.street'),
         ]));
 
         $languageData->addChild($builder->getElement('text_field', [
             'name'  => 'streetNo',
-            'label' => $this->trans('Street number'),
+            'label' => $this->trans('address.street_no'),
         ]));
 
         $languageData->addChild($builder->getElement('text_field', [
             'name'  => 'flatNo',
-            'label' => $this->trans('Flat number'),
+            'label' => $this->trans('address.flat_no'),
         ]));
 
         $languageData->addChild($builder->getElement('text_field', [
             'name'  => 'province',
-            'label' => $this->trans('Province'),
+            'label' => $this->trans('address.province'),
         ]));
 
         $languageData->addChild($builder->getElement('text_field', [
             'name'  => 'postCode',
-            'label' => $this->trans('Post code'),
+            'label' => $this->trans('address.post_code'),
         ]));
 
         $languageData->addChild($builder->getElement('text_field', [
             'name'  => 'city',
-            'label' => $this->trans('City'),
+            'label' => $this->trans('address.city'),
         ]));
 
         $languageData->addChild($builder->getElement('select', [
             'name'    => 'country',
-            'label'   => $this->trans('Country'),
+            'label'   => $this->trans('address.country'),
             'options' => $this->get('country.repository')->all()
         ]));
 

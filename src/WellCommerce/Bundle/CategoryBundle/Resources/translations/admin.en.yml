@@ -1,0 +1,8 @@
+category:
+   edit:        Edit category
+   name:        Name
+   short_name:  Short name
+   street:      Street
+   street_no:   Street no
+   flat_no:     Flat no
+   success:     Category saved successfully

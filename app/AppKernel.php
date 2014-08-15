@@ -23,6 +23,7 @@ class AppKernel extends Kernel
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle(),
             // WellCommerce bundles
+            new WellCommerce\Bundle\CategoryBundle\WellCommerceCategoryBundle(),
             new WellCommerce\Bundle\CoreBundle\WellCommerceCoreBundle(),
             new WellCommerce\Bundle\CountryBundle\WellCommerceCountryBundle(),
             new WellCommerce\Bundle\AdminMenuBundle\WellCommerceAdminMenuBundle(),

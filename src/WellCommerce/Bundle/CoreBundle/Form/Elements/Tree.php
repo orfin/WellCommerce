@@ -12,8 +12,9 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\PropertyAccess\PropertyPath;
 
 /**
  * Class Tree
@@ -23,17 +24,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class Tree extends Field implements ElementInterface
 {
-    protected $jsGetChildren;
-    protected $container;
-
-    public function __construct($attributes, ContainerInterface $container)
-    {
-        parent::__construct($attributes);
-        $this->container           = $container;
-        $this->_jsGetChildren      = 'GetChildren_' . $this->_id;
-        $this->attributes['total'] = count($this->attributes['items']);
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -78,6 +68,19 @@ class Tree extends Field implements ElementInterface
             'clickable_root'
         ]);
 
+        $resolver->setDefaults([
+            'dependencies'  => [],
+            'filters'       => [],
+            'rules'         => [],
+            'property_path' => function (Options $options) {
+                    return new PropertyPath($options['name']);
+                },
+            'total'         => function (Options $options) {
+                    return count($options['items']);
+                },
+            'transformer'   => null
+        ]);
+
         $resolver->setAllowedTypes([
             'name'                             => ['int', 'string'],
             'label'                            => 'string',
@@ -93,7 +96,7 @@ class Tree extends Field implements ElementInterface
             'addable'                          => 'bool',
             'total'                            => 'int',
             'restrict'                         => ['bool', 'array', 'int', 'string'],
-            'items'                            => 'array',
+            'items'                            => ['array', 'null'],
             'onClick'                          => 'string',
             'onDuplicate'                      => 'string',
             'onAdd'                            => 'string',
@@ -116,7 +119,7 @@ class Tree extends Field implements ElementInterface
 
     public function prepareAttributesJs()
     {
-        $attributes = Array(
+        $attributes = [
             $this->formatAttributeJs('name', 'sName'),
             $this->formatAttributeJs('label', 'sLabel'),
             $this->formatAttributeJs('addLabel', 'sAddLabel'),
@@ -149,7 +152,7 @@ class Tree extends Field implements ElementInterface
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
             $this->formatDefaultsJs()
-        );
+        ];
 
         return $attributes;
     }

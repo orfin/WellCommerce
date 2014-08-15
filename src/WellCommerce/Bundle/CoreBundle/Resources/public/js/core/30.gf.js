@@ -4557,6 +4557,16 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 	
 });
 
+GF_Ajax_Request = function(sUrl, oRequest, fCallBack){
+	$.ajax({
+		type: "POST",
+		url: sUrl,
+		data: oRequest,
+		success: fCallBack,
+		dataType: 'json'
+	});
+};
+
 GF_Datagrid_Column = GF_Config.GF_Extend('GF_Datagrid_Column', function(options) {
 	
 	this.GF_Datagrid_Column = GF.NewConstructor(function(options) {
@@ -4633,6 +4643,7 @@ GF_Action = GF_Config.GF_Extend('GF_Action', function(options) {
 	return this.GF_Action(options);
 	
 });
+
 
 GF_Slider = GF_Instance.GF_Extend('GF_Slider', function(jTarget, oOptions) {
 	

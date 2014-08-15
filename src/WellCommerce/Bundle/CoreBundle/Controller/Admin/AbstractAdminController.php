@@ -31,7 +31,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
     /**
      * @var DataGridInterface
      */
-    protected $dataGrid;
+    protected $datagrid;
 
     /**
      * @var RepositoryInterface
@@ -53,7 +53,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
      *
      * @param ContainerInterface    $container
      * @param RepositoryInterface   $repository
-     * @param DataGridInterface     $dataGrid
+     * @param DataGridInterface     $datagrid
      * @param FormInterface         $form
      * @param AdminManagerInterface $manager
      */
@@ -61,12 +61,12 @@ abstract class AbstractAdminController extends AbstractController implements Adm
         ContainerInterface $container,
         AdminManagerInterface $manager,
         RepositoryInterface $repository,
-        DataGridInterface $dataGrid,
+        DataGridInterface $datagrid = null,
         FormInterface $form
     ) {
         $this->setContainer($container);
         $this->repository = $repository;
-        $this->dataGrid   = $dataGrid;
+        $this->datagrid   = $datagrid;
         $this->form       = $form;
         $this->manager    = $manager;
     }
@@ -81,13 +81,13 @@ abstract class AbstractAdminController extends AbstractController implements Adm
     public function indexAction()
     {
         return [
-            'datagrid' => $this->dataGrid->get()
+            'datagrid' => $this->datagrid->get()
         ];
     }
 
     public function gridAction(Request $request)
     {
-        return new JsonResponse($this->dataGrid->get()->load($request));
+        return new JsonResponse($this->datagrid->get()->load($request));
     }
 
     public function addAction(Request $request)
@@ -128,7 +128,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
 
     public function deleteAction($id)
     {
-        $em       = $this->getEntityManager();
+        $em = $this->getEntityManager();
 
         try {
             $resource = $this->repository->find($id);

@@ -131,6 +131,12 @@
             </call>
         </service>
 
+        <service id="form.element.tree" class="%form.element.tree.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
         <service id="form.element.checkbox" class="%form.element.checkbox.class%" scope="prototype">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
