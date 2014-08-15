@@ -24,9 +24,6 @@
 
         <service id="contact.repository" class="%contact.repository.class%" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument>WellCommerceContactBundle:Contact</argument>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
         </service>
 
         <service id="contact.datagrid" class="%contact.datagrid.class%">

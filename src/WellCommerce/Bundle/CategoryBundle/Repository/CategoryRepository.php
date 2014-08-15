@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\CategoryBundle\Repository;
 
 use Knp\DoctrineBehaviors\ORM\Tree\Tree;
 use Symfony\Component\HttpFoundation\Request;
+use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 
 /**
@@ -55,6 +56,9 @@ class CategoryRepository extends AbstractEntityRepository implements CategoryRep
      */
     public function getTreeItems()
     {
+//        $items = $this->getTree('','t');
+//        print_r($items);die();
+
         $queryBuilder = $this->getFlatTreeQB('', 'category');
         $queryBuilder->select('category.id, category_translation.name');
         $queryBuilder->leftJoin(
@@ -62,9 +66,12 @@ class CategoryRepository extends AbstractEntityRepository implements CategoryRep
             'category_translation',
             'WITH',
             'category.id = category_translation.translatable AND category_translation.locale = :locale');
-        $queryBuilder->setParameter('locale', $this->getCurrentLocale());
+        $queryBuilder->setParameter('locale', $this->createNew()->getLocale());
         $query = $queryBuilder->getQuery();
         $items = $query->getArrayResult();
+
+        print_r($items);
+        die();
 
         $categoriesTree = [];
         foreach ($items as $item) {
@@ -92,4 +99,22 @@ class CategoryRepository extends AbstractEntityRepository implements CategoryRep
 
         return $category;
     }
+
+    public function changeOrder(array $items = [])
+    {
+        foreach($items as $item){
+            if($item['parent'] > 0){
+                $parent = $this->find($item['parent']);
+                $child = $this->find($item['id']);
+                $child->setId($item['id']);
+                $child->setChildNodeOf($parent);
+                $this->_em->persist($child);
+            }
+        }
+
+        $this->_em->flush();
+
+        die();
+    }
+
 }

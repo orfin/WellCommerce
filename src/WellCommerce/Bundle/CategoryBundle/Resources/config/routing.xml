@@ -26,4 +26,9 @@
         <default key="_controller">category.controller.admin:deleteAction</default>
         <option key="expose">true</option>
     </route>
+
+    <route id="admin.category.sort" path="/sort">
+        <default key="_controller">category.controller.admin:sortAction</default>
+        <option key="expose">true</option>
+    </route>
 </routes>

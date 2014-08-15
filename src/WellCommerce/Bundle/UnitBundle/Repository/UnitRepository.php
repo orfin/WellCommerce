@@ -31,8 +31,7 @@ class UnitRepository extends AbstractEntityRepository implements UnitRepositoryI
                 'WellCommerce\Bundle\UnitBundle\Entity\UnitTranslation',
                 'unit_translation',
                 'WITH',
-                'unit.id = unit_translation.translatable AND unit_translation.locale = :locale')
-            ->setParameter('locale', $this->getCurrentLocale());
+                'unit.id = unit_translation.translatable AND unit_translation.locale = :locale');
 
     }
 }

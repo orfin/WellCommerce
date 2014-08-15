@@ -62,12 +62,20 @@ class CategoryController extends AbstractAdminController
         ]);
 
         $form = $this->getFormBuilder($this->get('category.form'), $resource, [
-            'name'  => 'category',
+            'name' => 'category',
         ]);
 
         return [
             'tree' => $tree,
             'form' => $form
         ];
+    }
+
+    public function sortAction(Request $request)
+    {
+        $items = $request->request->get('items');
+        $this->repository->changeOrder($items);
+
+        return new JsonResponse(['success' => true]);
     }
 }

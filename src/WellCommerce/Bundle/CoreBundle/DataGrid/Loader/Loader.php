@@ -64,10 +64,29 @@ class Loader implements LoaderInterface
         return implode(', ', $columns);
     }
 
-    public function loadResults()
+    /**
+     * Checks whether :locale placeholder is available in DQL
+     *
+     * @param $dql
+     *
+     * @return bool
+     */
+    private function hasLocalePlaceholder($dql)
     {
-        $this->columns  = $this->dataGrid->getColumns();
-        $queryBuilder   = $this->dataGrid->getDataGridQueryBuilder();
+        return (bool)preg_match('/:locale/', $dql);
+    }
+
+    public function loadResults(Request $request)
+    {
+        $this->columns = $this->dataGrid->getColumns();
+        $queryBuilder  = $this->dataGrid->getDataGridQueryBuilder();
+
+        // quickest way to automatically bind current locale QB without injecting
+        // whole container in repository or fighting with request-scope issues
+        if ($this->hasLocalePlaceholder($queryBuilder->getDQL())) {
+            $queryBuilder->setParameter('locale', $request->getLocale());
+        }
+
         $orderBy        = $this->columns->get($this->orderBy)->getSource();
         $paginatorQuery = clone $queryBuilder;
         $paginator      = new Paginator($paginatorQuery->getQuery(), $fetchJoinCollection = true);
@@ -101,7 +120,7 @@ class Loader implements LoaderInterface
         $this->dataGrid = $dataGrid;
         $this->parseRequest($request);
 
-        return $this->loadResults();
+        return $this->loadResults($request);
     }
 
     private function parseRequest(Request $request)

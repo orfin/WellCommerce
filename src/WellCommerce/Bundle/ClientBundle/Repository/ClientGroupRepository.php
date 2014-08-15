@@ -29,8 +29,7 @@ class ClientGroupRepository extends AbstractEntityRepository implements ClientGr
                 'WellCommerce\Bundle\ClientBundle\Entity\ClientGroupTranslation',
                 'client_group_translation',
                 'WITH',
-                'client_group.id = client_group_translation.translatable AND client_group_translation.locale = :locale')
-            ->setParameter('locale', $this->getCurrentLocale());
+                'client_group.id = client_group_translation.translatable AND client_group_translation.locale = :locale');
     }
 
     /**

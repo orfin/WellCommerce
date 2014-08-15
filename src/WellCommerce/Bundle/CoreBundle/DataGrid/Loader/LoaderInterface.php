@@ -14,8 +14,6 @@ namespace WellCommerce\Bundle\CoreBundle\DataGrid\Loader;
 
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Query\QueryInterface;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Request\RequestInterface;
 
 /**
  * Interface LoaderInterface
@@ -30,7 +28,7 @@ interface LoaderInterface
      *
      * @return mixed
      */
-    public function loadResults();
+    public function loadResults(Request $request);
 
     /**
      * Returns DataGrid results

@@ -27,46 +27,6 @@ use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 abstract class AbstractEntityRepository extends EntityRepository implements RepositoryInterface
 {
     /**
-     * @var ContainerInterface
-     */
-    private $container;
-
-    /**
-     * Constructor
-     *
-     * @param ContainerInterface $container
-     */
-    public function setContainer(ContainerInterface $container)
-    {
-        $this->container = $container;
-    }
-
-    /**
-     * Shortcut to get any service from container
-     *
-     * @param $id
-     *
-     * @return object
-     * @throws \Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
-     */
-    public function get($id)
-    {
-        if (!$this->container->has($id)) {
-            throw new ServiceNotFoundException($id);
-        }
-
-        return $this->container->get($id);
-    }
-
-    /**
-     * Returns current locale from request
-     */
-    public function getCurrentLocale()
-    {
-        return $this->container->get('request')->getLocale();
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function createNew()

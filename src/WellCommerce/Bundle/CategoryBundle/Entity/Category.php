@@ -16,6 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 use Knp\DoctrineBehaviors\Model\Tree\Node;
+use Knp\DoctrineBehaviors\Model\Tree\NodeInterface;
 
 /**
  * Class Category
@@ -26,7 +27,7 @@ use Knp\DoctrineBehaviors\Model\Tree\Node;
  * @ORM\Table("category")
  * @ORM\Entity(repositoryClass="WellCommerce\Bundle\CategoryBundle\Repository\CategoryRepository")
  */
-class Category
+class Category implements NodeInterface, \ArrayAccess
 {
     use Node,
         Translatable,
@@ -47,6 +48,16 @@ class Category
      * @ORM\Column(name="hierarchy", type="integer", options={"default" = 0})
      */
     private $hierarchy;
+
+    /**
+     * @param  string
+     *
+     * @return null
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
 
     /**
      * Get id.
