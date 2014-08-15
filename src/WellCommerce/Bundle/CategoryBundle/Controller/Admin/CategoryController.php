@@ -52,7 +52,7 @@ class CategoryController extends AbstractAdminController
         return new JsonResponse(['id' => $category->getId()]);
     }
 
-    public function editAction()
+    public function editAction(Request $request)
     {
         $tree = $this->getFormBuilder($this->get('category.tree'), null, [
             'name'  => 'category_tree',

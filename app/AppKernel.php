@@ -20,7 +20,9 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             new JMS\AopBundle\JMSAopBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+            new FOS\RestBundle\FOSRestBundle(),
             new Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle(),
             // WellCommerce bundles
             new WellCommerce\Bundle\CategoryBundle\WellCommerceCategoryBundle(),
