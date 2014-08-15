@@ -15,6 +15,7 @@
 
     <route id="admin.category.add" path="/add">
         <default key="_controller">category.controller.admin:addAction</default>
+        <option key="expose">true</option>
     </route>
 
     <route id="admin.category.edit" path="/edit/{id}">

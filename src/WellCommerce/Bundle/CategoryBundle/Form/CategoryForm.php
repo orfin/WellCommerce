@@ -60,6 +60,8 @@ class CategoryForm extends AbstractForm implements FormInterface
             'transformer' => new CompanyToNumberTransformer($this->getEntityManager())
         ]));
 
+
+
         $form->addFilter('no_code');
         $form->addFilter('trim');
         $form->addFilter('secure');

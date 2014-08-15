@@ -31,22 +31,4 @@ interface CategoryRepositoryInterface extends RepositoryInterface
      */
     public function getTreeItems();
 
-    /**
-     * Adds new category from ajax request
-     *
-     * @param Request $request
-     *
-     * @return mixed
-     */
-    public function quickAddCategory(Request $request);
-
-    /**
-     * Changes sort order of categories
-     *
-     * @param array $items
-     *
-     * @return void
-     */
-    public function changeOrder(array $items = []);
-
 } 

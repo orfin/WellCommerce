@@ -30,7 +30,6 @@ class LoadCategoryData extends AbstractDataFixture implements FixtureInterface, 
      */
     public function load(ObjectManager $manager)
     {
-
     }
 
     /**

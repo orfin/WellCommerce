@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\CategoryBundle\Controller\Admin;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CategoryBundle\Repository\CategoryRepository;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
@@ -47,7 +48,14 @@ class CategoryController extends AbstractAdminController
 
     public function addAction(Request $request)
     {
-        $category = $this->repository->quickAddCategory($request);
+        $name     = $request->request->get('name');
+        $em       = $this->getEntityManager();
+        $category = new Category();
+        $category->setHierarchy(0);
+        $category->translate()->setName($name);
+        $category->mergeNewTranslations();
+        $em->persist($category);
+        $em->flush();
 
         return new JsonResponse(['id' => $category->getId()]);
     }

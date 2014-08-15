@@ -12,11 +12,10 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
-use Knp\DoctrineBehaviors\Model\Tree\Node;
-use Knp\DoctrineBehaviors\Model\Tree\NodeInterface;
 
 /**
  * Class Category
@@ -27,10 +26,9 @@ use Knp\DoctrineBehaviors\Model\Tree\NodeInterface;
  * @ORM\Table("category")
  * @ORM\Entity(repositoryClass="WellCommerce\Bundle\CategoryBundle\Repository\CategoryRepository")
  */
-class Category implements NodeInterface, \ArrayAccess
+class Category
 {
-    use Node,
-        Translatable,
+    use Translatable,
         Timestampable;
 
     /**
@@ -50,35 +48,123 @@ class Category implements NodeInterface, \ArrayAccess
     private $hierarchy;
 
     /**
-     * @param  string
-     *
-     * @return null
+     * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\CategoryBundle\Entity\Category", mappedBy="parent")
      */
-    public function setId($id)
+    protected $children;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\CategoryBundle\Entity\Category", inversedBy="children")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+     */
+    private $parent;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\ShopBundle\Entity\Shop")
+     * @ORM\JoinTable(name="shop_category",
+     *      joinColumns={@ORM\JoinColumn(name="shop_id", referencedColumnName="id", onDelete="CASCADE")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="CASCADE")}
+     * )
+     */
+    private $shops;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
     {
-        $this->id = $id;
+        $this->children = new ArrayCollection();
+        $this->shops    = new ArrayCollection();
     }
 
     /**
-     * Get id.
+     * Get id
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * Returns hierarchy for category
+     *
+     * @return int
+     */
     public function getHierarchy()
     {
         return $this->hierarchy;
     }
 
+    /**
+     * Sets hierarchy for category
+     *
+     * @param $hierarchy
+     */
     public function setHierarchy($hierarchy)
     {
         $this->hierarchy = $hierarchy;
     }
 
+    /**
+     * Returns category parent
+     *
+     * @return mixed
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
 
+    /**
+     * Returns category children
+     *
+     * @return mixed
+     */
+    public function getChildren()
+    {
+        return $this->children;
+    }
+
+    /**
+     * Adds new child to category
+     *
+     * @param Category $child
+     */
+    public function addChild(Category $child)
+    {
+        $this->children[] = $child;
+        $child->setParent($this);
+    }
+
+    /**
+     * Sets category parent
+     *
+     * @param Category $parent
+     */
+    public function setParent(Category $parent)
+    {
+        $this->parent = $parent;
+    }
+
+    /**
+     * Sets shops for category
+     *
+     * @param $shops
+     */
+    public function setShops($shops)
+    {
+        $this->shops = $shops;
+    }
+
+    /**
+     * Get shops for category
+     *
+     * @return mixed
+     */
+    public function getShops()
+    {
+        return $this->shops;
+    }
 }
 
