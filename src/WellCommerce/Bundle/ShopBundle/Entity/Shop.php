@@ -12,8 +12,10 @@
 
 namespace WellCommerce\Bundle\ShopBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 
 /**
  * Class Shop
@@ -49,6 +51,11 @@ class Shop
      * @ORM\JoinColumn(name="company_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $company;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\CategoryBundle\Entity\Category", mappedBy="shops")
+     */
+    private $categories;
 
     /**
      * Get id.
@@ -102,6 +109,34 @@ class Shop
     public function setCompany($company)
     {
         $this->company = $company;
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->categories = new ArrayCollection();
+    }
+
+    /**
+     * Returns shop categories
+     *
+     * @return ArrayCollection
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+
+    /**
+     * Adds new category to shop
+     *
+     * @param Category $category
+     */
+    public function addCategory(Category $category)
+    {
+        $this->categories[] = $category;
     }
 }
 

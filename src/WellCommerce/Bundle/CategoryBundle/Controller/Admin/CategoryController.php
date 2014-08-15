@@ -54,6 +54,8 @@ class CategoryController extends AbstractAdminController
         $category->setHierarchy(0);
         $category->translate()->setName($name);
         $category->mergeNewTranslations();
+        $shop = $this->get('shop.repository')->find(1);
+        $category->addShop($shop);
         $em->persist($category);
         $em->flush();
 
