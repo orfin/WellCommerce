@@ -129,7 +129,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
     public function deleteAction($id)
     {
         $em       = $this->getEntityManager();
-        
+
         try {
             $resource = $this->repository->find($id);
             $em->remove($resource);
