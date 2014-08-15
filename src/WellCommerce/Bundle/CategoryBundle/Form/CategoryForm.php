@@ -53,11 +53,24 @@ class CategoryForm extends AbstractForm implements FormInterface
             ]
         ]));
 
-        $requiredData->addChild($builder->getElement('select', [
-            'name'        => 'company',
-            'label'       => $this->trans('category.company'),
-            'options'     => $this->get('company.repository')->allToSelect(),
-            'transformer' => new CompanyToNumberTransformer($this->getEntityManager())
+        $requiredData->addChild($builder->add('tip', [
+            'tip' => '<p>' . $this->trans('Choose parent category') . '</p>'
+        ]));
+
+        $requiredData->addChild($builder->addTree([
+            'name'       => 'parent_id',
+            'label'      => $this->trans('Parent category'),
+            'choosable'  => true,
+            'selectable' => false,
+            'sortable'   => false,
+            'clickable'  => false,
+            'items'      => $this->get('category.repository')->getCategoriesTree(),
+            'restrict'   => $this->getParam('id'),
+            'rules'      => [
+                $builder->addRuleCustom($this->trans('Category cannot be parent itself'), function ($id) {
+                    return ($id != $this->getParam('id'));
+                })
+            ],
         ]));
 
 

@@ -125,6 +125,12 @@
             </call>
         </service>
 
+        <service id="form.element.tip" class="%form.element.tip.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
         <service id="form.element.text_area" class="%form.element.text_area.class%" scope="prototype">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>

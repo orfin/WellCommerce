@@ -51,11 +51,10 @@ class CategoryController extends AbstractAdminController
         $name     = $request->request->get('name');
         $em       = $this->getEntityManager();
         $category = new Category();
+
         $category->setHierarchy(0);
         $category->translate()->setName($name);
         $category->mergeNewTranslations();
-        $shop = $this->get('shop.repository')->find(1);
-        $category->addShop($shop);
         $em->persist($category);
         $em->flush();
 
