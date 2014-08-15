@@ -66,7 +66,7 @@ class CategoryRepository extends AbstractEntityRepository implements CategoryRep
             'category_translation',
             'WITH',
             'category.id = category_translation.translatable AND category_translation.locale = :locale');
-        $queryBuilder->setParameter('locale', $this->createNew()->getLocale());
+        $queryBuilder->setParameter('locale', $this->currentLocale);
         $query = $queryBuilder->getQuery();
         $items = $query->getArrayResult();
 

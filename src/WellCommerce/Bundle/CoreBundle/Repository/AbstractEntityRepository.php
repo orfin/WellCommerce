@@ -13,8 +13,6 @@ namespace WellCommerce\Bundle\CoreBundle\Repository;
 
 use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\EntityRepository;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 
@@ -26,6 +24,13 @@ use WellCommerce\Bundle\CoreBundle\Helper\Helper;
  */
 abstract class AbstractEntityRepository extends EntityRepository implements RepositoryInterface
 {
+    protected $currentLocale;
+
+    public function setCurrentLocale($currentLocale)
+    {
+        $this->currentLocale = $currentLocale;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -49,22 +54,6 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
         $entity = $this->find($id);
         $this->_em->remove($entity);
         $this->_em->flush();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function updateRow(array $request)
-    {
-        return false;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function deleteMultipleRows(array $ids)
-    {
-        return false;
     }
 
     /**
