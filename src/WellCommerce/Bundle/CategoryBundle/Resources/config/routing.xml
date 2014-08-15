@@ -8,22 +8,18 @@
         <default key="_controller">category.controller.admin:indexAction</default>
     </route>
 
-    <route id="admin.category.add" path="/add">
-        <default key="_controller">category.controller.admin:addAction</default>
+    <route id="admin.category.grid" path="/grid">
+        <default key="_controller">category.controller.admin:gridAction</default>
         <option key="expose">true</option>
     </route>
 
-    <route id="admin.category.create" path="/add">
-        <default key="_controller">category.controller.admin:createAction</default>
-        <option key="expose">true</option>
+    <route id="admin.category.add" path="/add">
+        <default key="_controller">category.controller.admin:addAction</default>
     </route>
 
     <route id="admin.category.edit" path="/edit/{id}">
         <default key="_controller">category.controller.admin:editAction</default>
-    </route>
-
-    <route id="admin.category.update" path="/update">
-        <default key="_controller">category.controller.admin:updateAction</default>
+        <option key="expose">true</option>
     </route>
 
     <route id="admin.category.delete" path="/delete/{id}">

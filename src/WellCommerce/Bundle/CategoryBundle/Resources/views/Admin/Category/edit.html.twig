@@ -5,5 +5,15 @@
         <li><a href="{{ path('admin.category.index') }}" class="button return"><span></span></a></li>
         <li><a href="#{{ form.name }}" rel="submit" class="button"><span>{% trans %}wellcommerce.save_and_finish{% endtrans %}</span></a></li>
     </ul>
-    {{ form(form) }}
+    <div class="layout-two-columns">
+        <div class="column narrow-collapsed">
+            <div class="block">
+                {{ form(tree) }}
+            </div>
+        </div>
+        <div class="column wide-collapsed">
+            {{ form(form) }}
+        </div>
+    </div>
+    {% include 'WellCommerceCategoryBundle:Admin:Category/category_javascript.html.twig' %}
 {% endblock %}

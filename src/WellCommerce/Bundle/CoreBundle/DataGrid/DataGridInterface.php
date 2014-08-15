@@ -103,6 +103,13 @@ interface DataGridInterface
     public function getDataGridQueryBuilder();
 
     /**
+     * Returns current DataGrid
+     *
+     * @return mixed
+     */
+    public function get();
+
+    /**
      * Sets DataGrid options
      *
      * @param OptionsInterface $options

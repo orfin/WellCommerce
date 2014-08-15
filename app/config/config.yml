@@ -1,7 +1,6 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
-    - { resource: @WellCommerceCoreBundle/Resources/config/parameters.yml }
     - { resource: ../../vendor/knplabs/doctrine-behaviors/config/orm-services.yml }
 
 framework:

@@ -32,6 +32,9 @@
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
+            <call method="setRepository">
+                <argument type="service" id="category.repository"/>
+            </call>
         </service>
 
         <service id="category.tree" class="%category.tree.class%">

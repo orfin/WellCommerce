@@ -42,6 +42,13 @@ class Category
     private $id;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="hierarchy", type="integer", options={"default" = 0})
+     */
+    private $hierarchy;
+
+    /**
      * Get id.
      *
      * @return integer
@@ -49,6 +56,16 @@ class Category
     public function getId()
     {
         return $this->id;
+    }
+
+    public function getHierarchy()
+    {
+        return $this->hierarchy;
+    }
+
+    public function setHierarchy($hierarchy)
+    {
+        $this->hierarchy = $hierarchy;
     }
 
 

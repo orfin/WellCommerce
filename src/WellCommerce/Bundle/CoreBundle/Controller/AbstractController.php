@@ -11,11 +11,8 @@
  */
 namespace WellCommerce\Bundle\CoreBundle\Controller;
 
-use Symfony\Component\DependencyInjection\ContainerAware;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
-use WellCommerce\Bundle\CoreBundle\DataSet\DataSetInterface;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
 use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
 
@@ -51,30 +48,5 @@ abstract class AbstractController extends AbstractContainer
     protected function getDataGrid(DataGridInterface $dataGrid)
     {
         return $this->get('datagrid_builder')->create($dataGrid);
-    }
-
-    /**
-     * Creates and returns the dataset
-     *
-     * @param DataSetInterface $dataSet DataSet instance
-     *
-     * @return \WellCommerce\Bundle\CoreBundle\DataSet\DataSetInterface
-     */
-    protected function getDataSet(DataSetInterface $dataSet)
-    {
-        return $this->get('dataset_builder')->create($dataSet);
-    }
-
-    /**
-     * Returns a RedirectResponse to the given URL.
-     *
-     * @param string $url    The URL to redirect to
-     * @param int    $status The status code to use for the Response
-     *
-     * @return RedirectResponse
-     */
-    protected function redirect($url, $status = 302)
-    {
-        return new RedirectResponse($url, $status);
     }
 }
