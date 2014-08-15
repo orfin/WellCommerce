@@ -56,8 +56,7 @@ class CategoryRepository extends AbstractEntityRepository implements CategoryRep
      */
     public function getTreeItems()
     {
-//        $items = $this->getTree('','t');
-//        print_r($items);die();
+        $items = $this->getTree('','t');
 
         $queryBuilder = $this->getFlatTreeQB('', 'category');
         $queryBuilder->select('category.id, category_translation.name');

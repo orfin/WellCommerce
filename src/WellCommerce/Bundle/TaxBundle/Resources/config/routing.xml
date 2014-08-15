@@ -10,6 +10,7 @@
 
     <route id="admin.tax.grid" path="/grid">
         <default key="_controller">tax.controller.admin:gridAction</default>
+        <option key="expose">true</option>
     </route>
 
     <route id="admin.tax.add" path="/add">
@@ -18,6 +19,11 @@
 
     <route id="admin.tax.edit" path="/edit/{id}">
         <default key="_controller">tax.controller.admin:editAction</default>
-        <default key="id">null</default>
+        <option key="expose">true</option>
+    </route>
+
+    <route id="admin.tax.delete" path="/delete/{id}">
+        <default key="_controller">tax.controller.admin:deleteAction</default>
+        <option key="expose">true</option>
     </route>
 </routes>

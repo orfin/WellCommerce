@@ -54,6 +54,9 @@ class Loader implements LoaderInterface
     private $offset;
     private $requestId;
 
+    /**
+     * {@inheritdoc}
+     */
     public function getSelectClause()
     {
         $columns = [];
@@ -76,6 +79,9 @@ class Loader implements LoaderInterface
         return (bool)preg_match('/:locale/', $dql);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function loadResults(Request $request)
     {
         $this->columns = $this->dataGrid->getColumns();
@@ -123,6 +129,11 @@ class Loader implements LoaderInterface
         return $this->loadResults($request);
     }
 
+    /**
+     * Fetches needed parameters from request
+     *
+     * @param Request $request
+     */
     private function parseRequest(Request $request)
     {
         $this->requestId = $request->request->get('id');
@@ -154,6 +165,13 @@ class Loader implements LoaderInterface
         return $rowData;
     }
 
+    /**
+     * Transforms output data to avoid json structure errors
+     *
+     * @param $value
+     *
+     * @return string
+     */
     public function transform($value)
     {
         return strtr(addslashes($value), $this->transformers);

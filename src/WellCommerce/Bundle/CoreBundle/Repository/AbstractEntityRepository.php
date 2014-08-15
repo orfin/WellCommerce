@@ -24,11 +24,29 @@ use WellCommerce\Bundle\CoreBundle\Helper\Helper;
  */
 abstract class AbstractEntityRepository extends EntityRepository implements RepositoryInterface
 {
-    protected $currentLocale;
+    /**
+     * @var string Current locale
+     */
+    private $currentLocale = null;
 
+    /**
+     * Sets current locale for repository
+     *
+     * @param $currentLocale
+     */
     public function setCurrentLocale($currentLocale)
     {
         $this->currentLocale = $currentLocale;
+    }
+
+    /**
+     * Returns current repository locale
+     *
+     * @return null|string
+     */
+    public function getCurrentLocale()
+    {
+        return $this->currentLocale;
     }
 
     /**
@@ -67,11 +85,25 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
         return Helper::snake($entityName);
     }
 
+    /**
+     * Returns entity name
+     *
+     * @return string
+     */
     public function getName()
     {
         return $this->getEntityName();
     }
 
+    /**
+     * Resolves request parameters and tries to find corresponding entity
+     *
+     * @param Request $request
+     * @param array   $criteria
+     *
+     * @return mixed|null|object
+     * @throws \Doctrine\ORM\EntityNotFoundException
+     */
     public function findResource(Request $request, array $criteria = [])
     {
         $params = [];

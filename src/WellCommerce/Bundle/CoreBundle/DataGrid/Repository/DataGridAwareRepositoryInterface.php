@@ -21,33 +21,6 @@ namespace WellCommerce\Bundle\CoreBundle\DataGrid\Repository;
 interface DataGridAwareRepositoryInterface
 {
     /**
-     * Updates DataGrid row
-     *
-     * @param array $request
-     *
-     * @return mixed
-     */
-    public function updateRow(array $request);
-
-    /**
-     * Deletes DataGrid row by its id
-     *
-     * @param $id
-     *
-     * @return mixed
-     */
-    public function deleteRow($id);
-
-    /**
-     * Deletes multiple DataGrid rows
-     *
-     * @param array $ids
-     *
-     * @return mixed
-     */
-    public function deleteMultipleRows(array $ids);
-
-    /**
      * Returns DataGrid query builder object
      *
      * @return mixed
