@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="producer.controller.admin.class">WellCommerce\Bundle\ProducerBundle\Controller\Admin\ProducerController</parameter>
+        <parameter key="producer.repository.class">WellCommerce\Bundle\ProducerBundle\Repository\ProducerRepository</parameter>
+        <parameter key="producer.datagrid.class">WellCommerce\Bundle\ProducerBundle\DataGrid\ProducerDataGrid</parameter>
+        <parameter key="producer.datagrid.configurator.class">WellCommerce\Bundle\ProducerBundle\DataGrid\ProducerDataGridConfigurator</parameter>
+        <parameter key="producer.form.class">WellCommerce\Bundle\ProducerBundle\Form\ProducerForm</parameter>
+        <parameter key="producer.listener.class">WellCommerce\Bundle\ProducerBundle\EventListener\ProducerListener</parameter>
+        <parameter key="producer.manager.class">WellCommerce\Bundle\ProducerBundle\Manager\ProducerManager</parameter>
+    </parameters>
+
+    <services>
+        <service id="producer.controller.admin" class="%producer.controller.admin.class%">
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="admin_manager"/>
+            <argument type="service" id="producer.repository"/>
+            <argument type="service" id="producer.datagrid"/>
+            <argument type="service" id="producer.form"/>
+        </service>
+
+        <service id="producer.repository" class="%producer.repository.class%" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceProducerBundle:Producer</argument>
+            <call method="setCurrentLocale">
+                <argument type="expression">service('request').getLocale()</argument>
+            </call>
+        </service>
+
+        <service id="producer.datagrid" class="%producer.datagrid.class%">
+            <configurator service="producer.datagrid.configurator" method="configure" />
+        </service>
+
+        <service id="producer.datagrid.configurator" class="%producer.datagrid.configurator.class%">
+            <argument key="identifier">producer</argument>
+            <argument type="service" id="datagrid_manager"/>
+            <argument type="service" id="producer.repository"/>
+        </service>
+
+        <service id="producer.form" class="%producer.form.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="producer.listener" class="%producer.listener.class%">
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="translator"/>
+            <argument type="service" id="router"/>
+            <tag name="kernel.event_subscriber" />
+        </service>
+    </services>
+</container>

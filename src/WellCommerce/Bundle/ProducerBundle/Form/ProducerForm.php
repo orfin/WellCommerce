@@ -9,21 +9,20 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Bundle\CategoryBundle\Form;
+namespace WellCommerce\Bundle\ProducerBundle\Form;
 
 use WellCommerce\Bundle\CoreBundle\Form\AbstractForm;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
-use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\EntityToIdentifierTransformer;
 use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
 
 /**
- * Class CategoryForm
+ * Class ProducerForm
  *
- * @package WellCommerce\Category\Form
+ * @package WellCommerce\Producer\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CategoryForm extends AbstractForm implements FormInterface
+class ProducerForm extends AbstractForm implements FormInterface
 {
     /**
      * {@inheritdoc}
@@ -34,38 +33,22 @@ class CategoryForm extends AbstractForm implements FormInterface
 
         $requiredData = $form->addChild($builder->getElement('fieldset', [
             'name'  => 'required_data',
-            'label' => $this->trans('form.required_data')
+            'label' => $this->trans('form.required_data.label')
         ]));
 
         $languageData = $requiredData->addChild($builder->getElement('fieldset_language', [
             'name'  => 'translations',
-            'label' => $this->trans('form.required_data.language_data.label'),
+            'label' => $this->trans('form.required_data.language_data.label')
         ]));
 
         $languageData->addChild($builder->getElement('text_field', [
             'name'  => 'name',
-            'label' => $this->trans('category.name'),
+            'label' => $this->trans('producer.name'),
             'rules' => [
                 $builder->getRule('required', [
                     'message' => $this->trans('Name is required')
-                ])
+                ]),
             ]
-        ]));
-
-        $requiredData->addChild($builder->getElement('tip', [
-            'tip' => '<p>' . $this->trans('Choose parent category') . '</p>'
-        ]));
-
-        $requiredData->addChild($builder->getElement('tree', [
-            'name'        => 'parent',
-            'label'       => $this->trans('category.parent'),
-            'choosable'   => true,
-            'selectable'  => false,
-            'sortable'    => false,
-            'clickable'   => false,
-            'items'       => $this->get('category.repository')->getTreeItems(),
-            'restrict'    => $this->getParam('id'),
-            'transformer' => new EntityToIdentifierTransformer($this->get('category.repository'))
         ]));
 
         $shopData = $form->addChild($builder->getElement('fieldset', [

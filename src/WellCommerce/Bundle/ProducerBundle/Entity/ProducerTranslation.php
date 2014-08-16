@@ -1,6 +1,16 @@
 <?php
+/*
+ * WellCommerce Open-Source E-Commerce Platform
+ *
+ * This file is part of the WellCommerce package.
+ *
+ * (c) Adam Piotrowski <adam@wellcommerce.org>
+ *
+ * For the full copyright and license information,
+ * please view the LICENSE file that was distributed with this source code.
+ */
 
-namespace WellCommerce\Bundle\CategoryBundle\Entity;
+namespace WellCommerce\Bundle\ProducerBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Sluggable\Sluggable;
@@ -8,12 +18,12 @@ use Knp\DoctrineBehaviors\Model\Translatable\Translation;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\MetaDataTrait;
 
 /**
- * CategoryTranslation
+ * ProducerTranslation
  *
- * @ORM\Table("category_translation")
+ * @ORM\Table(name="producer_translation")
  * @ORM\Entity
  */
-class CategoryTranslation
+class ProducerTranslation
 {
     use Translation;
     use Sluggable;
@@ -41,11 +51,11 @@ class CategoryTranslation
     private $description;
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
      *
-     * @return CategoryTranslation
+     * @return ProducerTranslation
      */
     public function setName($name)
     {
@@ -55,7 +65,7 @@ class CategoryTranslation
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -68,8 +78,6 @@ class CategoryTranslation
      * Set shortDescription
      *
      * @param string $shortDescription
-     *
-     * @return CategoryTranslation
      */
     public function setShortDescription($shortDescription)
     {
@@ -92,8 +100,6 @@ class CategoryTranslation
      * Set description
      *
      * @param string $description
-     *
-     * @return CategoryTranslation
      */
     public function setDescription($description)
     {
@@ -120,3 +126,4 @@ class CategoryTranslation
         return ['name'];
     }
 }
+
