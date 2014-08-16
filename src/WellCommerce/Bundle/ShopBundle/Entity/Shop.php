@@ -47,7 +47,7 @@ class Shop
     private $name;
 
     /**
-     * @ORM\OneToOne(targetEntity="WellCommerce\Bundle\CompanyBundle\Entity\Company", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\CompanyBundle\Entity\Company")
      * @ORM\JoinColumn(name="company_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $company;
