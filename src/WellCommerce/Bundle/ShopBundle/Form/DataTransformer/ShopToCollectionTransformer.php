@@ -51,6 +51,9 @@ class ShopToCollectionTransformer implements DataTransformerInterface
     public function reverseTransform($ids)
     {
         $collection = new ArrayCollection();
+        if (null == $ids) {
+            return $collection;
+        }
         foreach ($ids as $id) {
             $shop = $this->manager->getRepository('WellCommerceShopBundle:Shop')->find($id);
             $collection->add($shop);
