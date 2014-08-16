@@ -171,7 +171,7 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
         $metadata   = $this->getMetadata();
         $identifier = $metadata->getSingleIdentifierFieldName();
         $tableName  = $metadata->getTableName();
-        $accessor   = PropertyAccess::createPropertyAccessor();
+        $accessor   = $this->getPropertyAccessor();
         $select     = [];
 
         if (!$metadata->hasField($labelField)) {
