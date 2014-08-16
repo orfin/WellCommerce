@@ -9,23 +9,23 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Bundle\LocaleBundle\Form;
+namespace WellCommerce\Bundle\CurrencyBundle\Form;
 
 use WellCommerce\Bundle\CoreBundle\Form\AbstractForm;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
-use WellCommerce\Bundle\LocaleBundle\Repository\LocaleRepositoryInterface;
+use WellCommerce\Bundle\CurrencyBundle\Repository\CurrencyRepositoryInterface;
 
 /**
- * Class LocaleForm
+ * Class CurrencyForm
  *
- * @package WellCommerce\Locale\Form
+ * @package WellCommerce\Currency\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LocaleForm extends AbstractForm implements FormInterface
+class CurrencyForm extends AbstractForm implements FormInterface
 {
     /**
-     * @var LocaleRepositoryInterface
+     * @var CurrencyRepositoryInterface
      */
     private $repository;
 
@@ -43,8 +43,8 @@ class LocaleForm extends AbstractForm implements FormInterface
 
         $requiredData->addChild($builder->getElement('select', [
             'name'    => 'code',
-            'label'   => $this->trans('locale.code'),
-            'options' => $this->repository->getLocaleNames()
+            'label'   => $this->trans('currency.code'),
+            'options' => $this->repository->getCurrenciesToSelect()
         ]));
 
         $form->addFilter('no_code');
@@ -55,11 +55,11 @@ class LocaleForm extends AbstractForm implements FormInterface
     }
 
     /**
-     * Sets locale repository
+     * Sets currency repository
      *
-     * @param LocaleRepositoryInterface $repository
+     * @param CurrencyRepositoryInterface $repository
      */
-    public function setRepository(LocaleRepositoryInterface $repository)
+    public function setRepository(CurrencyRepositoryInterface $repository)
     {
         $this->repository = $repository;
     }

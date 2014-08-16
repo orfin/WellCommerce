@@ -10,20 +10,20 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\LocaleBundle\Controller\Admin;
+namespace WellCommerce\Bundle\CurrencyBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
- * Class LocaleController
+ * Class CurrencyController
  *
- * @package WellCommerce\Bundle\LocaleBundle\Controller
+ * @package WellCommerce\Bundle\CurrencyBundle\Controller
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * @Template()
  */
-class LocaleController extends AbstractAdminController
+class CurrencyController extends AbstractAdminController
 {
 
 }

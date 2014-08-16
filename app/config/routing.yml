@@ -8,6 +8,10 @@ wellcommerce_locale:
     resource: "@WellCommerceLocaleBundle/Resources/config/routing.xml"
     prefix:   /admin/configuration/locale
 
+wellcommerce_currency:
+    resource: "@WellCommerceCurrencyBundle/Resources/config/routing.xml"
+    prefix:   /admin/configuration/currency
+
 wellcommerce_category:
     resource: "@WellCommerceCategoryBundle/Resources/config/routing.xml"
     prefix:   /admin/catalog/category
