@@ -16,6 +16,10 @@ wellcommerce_availability:
     resource: "@WellCommerceAvailabilityBundle/Resources/config/routing.xml"
     prefix:   /admin/catalog/availability
 
+wellcommerce_deliverer:
+    resource: "@WellCommerceDelivererBundle/Resources/config/routing.xml"
+    prefix:   /admin/catalog/deliverer
+
 wellcommerce_category:
     resource: "@WellCommerceCategoryBundle/Resources/config/routing.xml"
     prefix:   /admin/catalog/category
