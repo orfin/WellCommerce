@@ -1,0 +1,12 @@
+{% extends 'WellCommerceCoreBundle:Admin:layout.html.twig' %}
+{% block content %}
+    <h2>{% trans %}heading.availability.list{% endtrans %}</h2>
+
+    <ul class="possibilities">
+        <li><a href="{{ path('admin.availability.add') }}" class="button"
+               title="{% trans %}Add{% endtrans %}"><span>{% trans %}Add{% endtrans %}</span></a></li>
+    </ul>
+
+    {{ datagrid_renderer(datagrid) }}
+
+{% endblock %}
