@@ -20,6 +20,11 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
  */
 class FontStyle extends TextField implements ElementInterface
 {
+    /**
+     * Formats font styles to use them in layout editor
+     *
+     * @return string
+     */
     public function formatStylesJs()
     {
         $options = [];
@@ -54,6 +59,9 @@ class FontStyle extends TextField implements ElementInterface
         return sprintf("{sValue: '%s', sLabel: '%s'}", $style, $label);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function prepareAttributesJs()
     {
         $attributes = [
