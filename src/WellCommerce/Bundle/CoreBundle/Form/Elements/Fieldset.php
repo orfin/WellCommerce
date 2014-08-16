@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
 /**
  * Class Fieldset
@@ -75,4 +76,24 @@ class Fieldset extends Container implements ElementInterface
         return $attributes;
     }
 
+    public function setPropertyPath()
+    {
+        $this->attributes['property_path'] = null;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getValue()
+    {
+        return null;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function handleRequest($data)
+    {
+        return null;
+    }
 }

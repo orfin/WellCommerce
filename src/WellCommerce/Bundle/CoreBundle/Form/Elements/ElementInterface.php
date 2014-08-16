@@ -35,7 +35,7 @@ interface ElementInterface
      *
      * @param OptionsResolverInterface $resolver
      *
-     * @return mixed
+     * @return void
      */
     public function configureAttributes(OptionsResolverInterface $resolver);
 
@@ -51,7 +51,24 @@ interface ElementInterface
      *
      * @param array $options
      *
-     * @return mixed
+     * @return void
      */
     public function setOptions(array $options = []);
+
+    /**
+     * Sets property path for form field
+     *
+     * @return void
+     */
+    public function setPropertyPath();
+
+    /**
+     * Returns field value
+     */
+    public function getValue();
+
+    /**
+     * Handles submit request
+     */
+    public function handleRequest($data);
 } 

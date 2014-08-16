@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
+use Symfony\Component\PropertyAccess\PropertyPath;
 use WellCommerce\Bundle\CoreBundle\Form\Dependency;
 use WellCommerce\Bundle\CoreBundle\Form\Node;
 use WellCommerce\Bundle\CoreBundle\Form\Rules\LanguageUnique;
@@ -55,7 +56,7 @@ class Field extends Node
                                 $this->attributes['error'] = $this->attributes['error'] + array_fill(0, $i, '');
                             }
                             $this->attributes['error'][$i] = $checkResult;
-                            $result                         = false;
+                            $result                        = false;
                         }
                     }
                 }
@@ -69,7 +70,7 @@ class Field extends Node
                 }
                 if (($checkResult = $rule->check($this->_value)) !== true) {
                     $this->attributes['error'] = $checkResult;
-                    $result                     = false;
+                    $result                    = false;
                 }
             }
         }
@@ -113,5 +114,43 @@ class Field extends Node
         }
 
         return 'aoRules: [' . implode(', ', $rules) . ']';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPropertyPath()
+    {
+        $this->attributes['property_path'] = new PropertyPath($this->getName());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDefaults($values)
+    {
+        $accessor = $this->getPropertyAccessor();
+        if (null !== $this->getPropertyPath() && $accessor->isReadable($values, $this->getPropertyPath())) {
+            $value = $accessor->getValue($values, $this->getPropertyPath());
+            if ($this->hasTransformer()) {
+                $value = $this->getTransformer()->transform($value);
+            }
+            $this->populate($value);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function handleRequest($data)
+    {
+        $accessor = $this->getPropertyAccessor();
+        if (null !== $this->getPropertyPath() && $accessor->isReadable($data, $this->getPropertyPath())) {
+            $value = $this->getValue();
+            if ($this->hasTransformer()) {
+                $value = $this->getTransformer()->reverseTransform($value);
+            }
+            $accessor->setValue($data, $this->getName(), $value);
+        }
     }
 }

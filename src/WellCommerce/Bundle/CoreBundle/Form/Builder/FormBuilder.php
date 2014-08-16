@@ -47,12 +47,10 @@ class FormBuilder extends ContainerAware implements FormBuilderInterface
      */
     public function create(FormInterface $form, $data = null, array $options)
     {
-        $this->options  = $options;
-        $this->data     = $data;
-        $this->form     = $form->buildForm($this, $this->options)->setDefaultData($this->data);
-        $this->formData = $form->getDefaultData($this->data);
+        $this->options = $options;
+        $this->data    = $data;
+        $this->form    = $form->buildForm($this, $this->options)->setDefaultData($this->data);
         $this->dispatchEvent($this->getInitEventName($options['name']));
-        $this->form->populate($this->formData);
 
         return $this;
     }

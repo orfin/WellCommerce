@@ -27,11 +27,6 @@ use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
 class ShopForm extends AbstractForm implements FormInterface
 {
     /**
-     * @var ShopRepositoryInterface
-     */
-    private $repository;
-
-    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -65,36 +60,5 @@ class ShopForm extends AbstractForm implements FormInterface
         $form->addFilter('secure');
 
         return $form;
-    }
-
-    /**
-     * Prepares form data using retrieved entity
-     *
-     * @param Shop $shop Model
-     *
-     * @return array
-     */
-    public function getDefaultData(Shop $shop)
-    {
-        $formData    = [];
-        $accessor    = $this->getPropertyAccessor();
-        $transformer = new CompanyToNumberTransformer($this->getEntityManager());
-
-        $accessor->setValue($formData, '[required_data]', [
-            'name'    => $shop->getName(),
-            'company' => $transformer->transform($shop->getCompany())
-        ]);
-
-        return $formData;
-    }
-
-    /**
-     * Sets repository object
-     *
-     * @param ShopRepositoryInterface $repository
-     */
-    public function setRepository(ShopRepositoryInterface $repository)
-    {
-        $this->repository = $repository;
     }
 }

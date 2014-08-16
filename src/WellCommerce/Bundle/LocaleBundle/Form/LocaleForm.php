@@ -56,25 +56,6 @@ class LocaleForm extends AbstractForm implements FormInterface
     }
 
     /**
-     * Prepares form data using retrieved entity
-     *
-     * @param Locale $locale
-     *
-     * @return array
-     */
-    public function getDefaultData(Locale $locale)
-    {
-        $formData = [];
-        $accessor = $this->getPropertyAccessor();
-
-        $accessor->setValue($formData, '[required_data]', [
-            'code' => $locale->getCode(),
-        ]);
-
-        return $formData;
-    }
-
-    /**
      * Sets locale repository
      *
      * @param LocaleRepositoryInterface $repository

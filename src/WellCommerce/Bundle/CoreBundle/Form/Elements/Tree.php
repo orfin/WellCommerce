@@ -72,12 +72,10 @@ class Tree extends Field implements ElementInterface
             'dependencies'  => [],
             'filters'       => [],
             'rules'         => [],
-            'property_path' => function (Options $options) {
-                    return new PropertyPath($options['name']);
-                },
             'total'         => function (Options $options) {
                     return count($options['items']);
                 },
+            'property_path' => null,
             'transformer'   => null
         ]);
 

@@ -28,11 +28,6 @@ use WellCommerce\Bundle\UnitBundle\Repository\UnitRepositoryInterface;
 class UnitForm extends AbstractForm implements FormInterface
 {
     /**
-     * @var UnitRepositoryInterface
-     */
-    private $repository;
-
-    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -45,7 +40,7 @@ class UnitForm extends AbstractForm implements FormInterface
         ]));
 
         $languageData = $requiredData->addChild($builder->getElement('fieldset_language', [
-            'name'      => 'language_data',
+            'name'      => 'translations',
             'label'     => $this->trans('form.required_data.language_data.label')
         ]));
 
@@ -64,43 +59,5 @@ class UnitForm extends AbstractForm implements FormInterface
         $form->addFilter('secure');
 
         return $form;
-    }
-
-    public function setDefaults(OptionsResolverInterface $resolver){
-
-    }
-    /**
-     * Prepares form data using retrieved entity
-     *
-     * @param Unit $unit Model
-     *
-     * @return array
-     */
-    public function getDefaultData(Unit $unit)
-    {
-        $formData     = [];
-        $languageData = [];
-        $accessor     = $this->getPropertyAccessor();
-        $translations = $unit->getTranslations();
-
-        foreach($translations as $translation){
-            $languageData['name'][$translation->getLocale()] = $translation->getName();
-        }
-
-        $accessor->setValue($formData, '[required_data]', [
-            'language_data' => $languageData
-        ]);
-
-        return $formData;
-    }
-
-    /**
-     * Sets client group repository
-     *
-     * @param UnitRepositoryInterface $repository
-     */
-    public function setRepository(UnitRepositoryInterface $repository)
-    {
-        $this->repository = $repository;
     }
 }

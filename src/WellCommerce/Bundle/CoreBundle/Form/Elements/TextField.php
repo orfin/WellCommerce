@@ -61,9 +61,7 @@ class TextField extends Field implements ElementInterface
             'dependencies'  => [],
             'filters'       => [],
             'rules'         => [],
-            'property_path' => function (Options $options) {
-                    return new PropertyPath($options['name']);
-                },
+            'property_path' => null,
             'transformer'   => null
         ]);
 

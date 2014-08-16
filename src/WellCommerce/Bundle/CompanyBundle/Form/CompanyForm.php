@@ -26,11 +26,6 @@ use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
 class CompanyForm extends AbstractForm implements FormInterface
 {
     /**
-     * @var CompanyRepositoryInterface
-     */
-    private $repository;
-
-    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -108,45 +103,5 @@ class CompanyForm extends AbstractForm implements FormInterface
         $form->addFilter('secure');
 
         return $form;
-    }
-
-    /**
-     * Prepares form data using retrieved entity
-     *
-     * @param Company $company Model
-     *
-     * @return array
-     */
-    public function getDefaultData(Company $company)
-    {
-        $formData = [];
-        $accessor = $this->getPropertyAccessor();
-
-        $accessor->setValue($formData, '[required_data]', [
-            'name'      => $company->getName(),
-            'shortName' => $company->getShortName()
-        ]);
-
-        $accessor->setValue($formData, '[address_data]', [
-            'street'   => $company->getStreet(),
-            'streetNo' => $company->getStreetNo(),
-            'flatNo'   => $company->getFlatNo(),
-            'province' => $company->getProvince(),
-            'postCode' => $company->getPostCode(),
-            'city'     => $company->getCity(),
-            'country'  => $company->getCountry()
-        ]);
-
-        return $formData;
-    }
-
-    /**
-     * Sets repository object
-     *
-     * @param CompanyRepositoryInterface $repository
-     */
-    public function setRepository(CompanyRepositoryInterface $repository)
-    {
-        $this->repository = $repository;
     }
 }

@@ -45,4 +45,15 @@ class ShopRepository extends AbstractEntityRepository implements ShopRepositoryI
     {
         return false;
     }
+
+    public function getShopsToSelect()
+    {
+        $shops  = $this->findAll();
+        $select = [];
+        foreach ($shops as $shop) {
+            $select[$shop->getId()] = $shop->getName();
+        }
+
+        return $select;
+    }
 }

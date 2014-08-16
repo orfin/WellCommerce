@@ -31,7 +31,8 @@ class Checkbox extends Field implements ElementInterface
     {
         $resolver->setRequired([
             'name',
-            'label'
+            'label',
+            'property_path'
         ]);
 
         $resolver->setOptional([
@@ -40,25 +41,27 @@ class Checkbox extends Field implements ElementInterface
             'comment',
             'default',
             'filters',
-            'rules'
+            'rules',
+            'transformer'
         ]);
 
         $resolver->setDefaults([
             'dependencies'  => [],
             'filters'       => [],
             'rules'         => [],
-            'property_path' => function (Options $options) {
-                    return new PropertyPath($options['name']);
-                },
+            'property_path' => null,
+            'transformer'   => null
         ]);
 
         $resolver->setAllowedTypes([
-            'name'    => 'string',
-            'label'   => 'string',
-            'class'   => 'string',
-            'error'   => 'string',
-            'comment' => 'string',
-            'default' => ['string', 'integer']
+            'name'          => 'string',
+            'label'         => 'string',
+            'class'         => 'string',
+            'error'         => 'string',
+            'comment'       => 'string',
+            'default'       => ['string', 'integer'],
+            'property_path' => ['null', 'object'],
+            'transformer'   => ['null', 'object'],
         ]);
     }
 

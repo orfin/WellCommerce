@@ -126,4 +126,5 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
 
         return $resource;
     }
+
 }

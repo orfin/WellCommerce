@@ -26,11 +26,6 @@ use WellCommerce\Bundle\ClientBundle\Repository\ClientGroupRepositoryInterface;
 class ClientGroupForm extends AbstractForm implements FormInterface
 {
     /**
-     * @var ClientGroupRepositoryInterface
-     */
-    private $repository;
-
-    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -53,7 +48,7 @@ class ClientGroupForm extends AbstractForm implements FormInterface
         ]));
 
         $languageData = $requiredData->addChild($builder->getElement('fieldset_language', [
-            'name'      => 'language_data',
+            'name'      => 'translations',
             'label'     => $this->trans('form.required_data.language_data.label')
         ]));
 
@@ -72,41 +67,5 @@ class ClientGroupForm extends AbstractForm implements FormInterface
         $form->addFilter('secure');
 
         return $form;
-    }
-
-    /**
-     * Prepares form data using retrieved entity
-     *
-     * @param ClientGroup $clientGroup Model
-     *
-     * @return array
-     */
-    public function getDefaultData(ClientGroup $clientGroup)
-    {
-        $formData     = [];
-        $languageData = [];
-        $accessor     = $this->getPropertyAccessor();
-        $translations = $clientGroup->getTranslations();
-
-        foreach($translations as $translation){
-            $languageData['name'][$translation->getLocale()] = $translation->getName();
-        }
-
-        $accessor->setValue($formData, '[required_data]', [
-            'discount'      => $clientGroup->getDiscount(),
-            'language_data' => $languageData
-        ]);
-
-        return $formData;
-    }
-
-    /**
-     * Sets client group repository
-     *
-     * @param ClientGroupRepositoryInterface $repository
-     */
-    public function setRepository(ClientGroupRepositoryInterface $repository)
-    {
-        $this->repository = $repository;
     }
 }

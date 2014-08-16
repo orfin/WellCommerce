@@ -14,6 +14,8 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\PropertyAccess\PropertyPath;
+use Symfony\Component\PropertyAccess\PropertyPathInterface;
 use WellCommerce\Bundle\LocaleBundle\Repository\LocaleRepositoryInterface;
 
 /**
@@ -60,10 +62,12 @@ class FieldsetLanguage extends Fieldset implements ElementInterface
             'dependencies',
             'filters',
             'rules',
+            'transformer'
         ]);
 
         $resolver->setDefaults([
             'property_path' => null,
+            'transformer'   => null,
             'dependencies'  => [],
             'filters'       => [],
             'rules'         => [],
@@ -121,4 +125,48 @@ class FieldsetLanguage extends Fieldset implements ElementInterface
         return $attributes;
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function setPropertyPath()
+    {
+        $this->attributes['property_path'] = new PropertyPath($this->getName());
+    }
+
+    /**
+     * Sets default data for all translatable fields bound to fieldset
+     *
+     * @param $data
+     */
+    public function setDefaults($data)
+    {
+        $values       = [];
+        $accessor     = $this->getPropertyAccessor();
+        $translations = $accessor->getValue($data, $this->getPropertyPath());
+        foreach ($this->children as $child) {
+            foreach ($translations as $translation) {
+                $values[$translation->getLocale()] = $accessor->getValue($translation, $child->getPropertyPath());
+                $child->populate($values);
+            }
+        }
+    }
+
+    /**
+     * Handles submit request and sets translations for entity
+     *
+     * @param $data
+     */
+    public function handleRequest($data)
+    {
+        $accessor     = $this->getPropertyAccessor();
+        foreach ($this->children as $child) {
+            $childValues = $child->getValue();
+            foreach ($childValues as $locale => $value) {
+                $translation = $data->translate($locale);
+                $accessor->setValue($translation, $child->getName(), $value);
+            }
+        }
+
+        $data->mergeNewTranslations();
+    }
 }

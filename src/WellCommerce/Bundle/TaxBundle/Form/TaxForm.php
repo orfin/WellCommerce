@@ -28,11 +28,6 @@ use WellCommerce\Bundle\TaxBundle\Repository\TaxRepositoryInterface;
 class TaxForm extends AbstractForm implements FormInterface
 {
     /**
-     * @var TaxRepositoryInterface
-     */
-    private $repository;
-
-    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -58,7 +53,7 @@ class TaxForm extends AbstractForm implements FormInterface
         ]));
 
         $languageData = $requiredData->addChild($builder->getElement('fieldset_language', [
-            'name'  => 'language_data',
+            'name'  => 'translations',
             'label' => $this->trans('form.required_data.language_data.label')
         ]));
 
@@ -77,46 +72,5 @@ class TaxForm extends AbstractForm implements FormInterface
         $form->addFilter('secure');
 
         return $form;
-    }
-
-    public function setDefaults(OptionsResolverInterface $resolver)
-    {
-
-    }
-
-    /**
-     * Prepares form data using retrieved entity
-     *
-     * @param Tax $tax Model
-     *
-     * @return array
-     */
-    public function getDefaultData(Tax $tax)
-    {
-        $formData     = [];
-        $languageData = [];
-        $accessor     = $this->getPropertyAccessor();
-        $translations = $tax->getTranslations();
-
-        foreach ($translations as $translation) {
-            $languageData['name'][$translation->getLocale()] = $translation->getName();
-        }
-
-        $accessor->setValue($formData, '[required_data]', [
-            'value'         => $tax->getValue(),
-            'language_data' => $languageData
-        ]);
-
-        return $formData;
-    }
-
-    /**
-     * Sets client group repository
-     *
-     * @param TaxRepositoryInterface $repository
-     */
-    public function setRepository(TaxRepositoryInterface $repository)
-    {
-        $this->repository = $repository;
     }
 }

@@ -141,9 +141,9 @@ class Category
     /**
      * Sets category parent
      *
-     * @param Category $parent
+     * @param null|Category $parent
      */
-    public function setParent(Category $parent)
+    public function setParent(Category $parent = null)
     {
         $this->parent = $parent;
     }

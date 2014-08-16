@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use WellCommerce\Bundle\CoreBundle\Form\Node;
 
 /**
  * Class Tip
@@ -49,14 +48,18 @@ class Tip extends Field implements ElementInterface
             'name',
             'short_tip',
             'retractable',
-            'default_state'
+            'default_state',
+            'property_path',
+            'transformer'
         ]);
 
         $resolver->setDefaults([
-            'name'        => '',
-            'retractable' => function (Options $options) {
+            'name'          => '',
+            'transformer'   => null,
+            'property_path' => null,
+            'retractable'   => function (Options $options) {
                     return (isset($options['short_tip']) && strlen($options['short_tip']));
-                },
+                }
         ]);
 
         $resolver->setAllowedValues(array(
@@ -102,6 +105,14 @@ class Tip extends Field implements ElementInterface
      */
     public function populate($value)
     {
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPropertyPath()
+    {
+        $this->attributes['property_path'] = null;
     }
 
 }

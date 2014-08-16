@@ -16,6 +16,8 @@ use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
+use Symfony\Component\PropertyAccess\PropertyPath;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\Field;
 use WellCommerce\Bundle\CoreBundle\Form\Resolver\ElementResolverInterface;
 
 /**
@@ -75,6 +77,8 @@ abstract class Node extends ContainerAware
         $child->form      = $this->form;
         $child->parent    = $this;
         $childName        = $child->getName();
+        $child->setPropertyPath();
+
         if (isset($this->form->fields[$childName])) {
             if (is_array($this->form->fields[$childName])) {
                 $this->form->fields[$childName][] = $child;
@@ -452,22 +456,5 @@ abstract class Node extends ContainerAware
         $attributes = array_merge($attributes, $this->_xajaxMethods);
 
         return $attributes;
-    }
-
-    protected function registerXajaxMethod($name, $callback)
-    {
-        $jsName                  = $name . '_' . $this->_id;
-        $this->attributes[$name] = 'xajax_' . $jsName;
-        App::getRegistry()->xajaxInterface->registerFunction(array(
-            $jsName,
-            $callback[0],
-            $callback[1]
-        ));
-        $this->_xajaxMethods[] = $this->formatAttributeJs($name, $name, FE::TYPE_FUNCTION);
-    }
-
-    public function __get($attributeName)
-    {
-        return isset($this->attributes[$attributeName]) ? $this->attributes[$attributeName] : null;
     }
 }

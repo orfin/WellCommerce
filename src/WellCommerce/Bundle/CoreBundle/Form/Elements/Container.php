@@ -42,6 +42,13 @@ abstract class Container extends Node
         }
     }
 
+    public function setDefaults($values)
+    {
+        foreach ($this->children as $child) {
+            $child->setDefaults($values);
+        }
+    }
+
     public function populate($value)
     {
         if (isset($value) && is_array($value) && $this->isIterated($value)) {
@@ -75,10 +82,6 @@ abstract class Container extends Node
                 }
             }
         }
-    }
-
-    protected function setDefaults($value){
-
     }
 
     public function getChildren()

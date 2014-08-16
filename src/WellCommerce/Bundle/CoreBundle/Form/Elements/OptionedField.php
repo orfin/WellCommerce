@@ -56,12 +56,10 @@ abstract class OptionedField extends Field
 
         $resolver->setDefaults([
             'options'       => [],
-            'property_path' => function (Options $options) {
-                    return new PropertyPath($options['name']);
-                },
             'dependencies'  => [],
             'filters'       => [],
             'rules'         => [],
+            'property_path' => null,
             'transformer'   => null
         ]);
 
@@ -81,6 +79,7 @@ abstract class OptionedField extends Field
             'default'         => ['string', 'integer'],
             'rules'           => 'array',
             'dependencies'    => 'array',
+            'property_path'   => ['null', 'object'],
             'transformer'     => ['null', 'object'],
         ]);
     }

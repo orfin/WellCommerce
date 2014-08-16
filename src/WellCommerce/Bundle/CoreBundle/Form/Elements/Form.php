@@ -162,11 +162,22 @@ class Form extends Container
         }
     }
 
+    /**
+     * Returns form data flag
+     *
+     * @return array
+     */
     public function getFlags()
     {
         return $this->_flags;
     }
 
+    /**
+     * Populates the form with values
+     *
+     * @param     $value
+     * @param int $flags
+     */
     public function populate($value, $flags = 0)
     {
         if ($flags & self::FORMAT_FLAT) {
@@ -180,13 +191,28 @@ class Form extends Container
         $this->_populatingWholeForm = false;
     }
 
+    /**
+     * Sets default data for each field
+     *
+     * @param $data
+     *
+     * @return $this
+     */
     public function setDefaultData($data)
     {
         $this->defaultData = $data;
+        parent::setDefaults($this->defaultData);
 
         return $this;
     }
 
+    /**
+     * Handles form request. Modifies default entity data using field values
+     *
+     * @param Request $request
+     *
+     * @return $this
+     */
     public function handleRequest(Request $request)
     {
         $this->request = $request;
@@ -196,32 +222,19 @@ class Form extends Container
             return $this;
         }
 
+        // first populate the form with submitted values
         $this->populate($this->getSubmittedData());
 
-        $accessor        = $this->getPropertyAccessor();
-        $hasTranslations = false;
-
-
+        // iterate through each field and handle form request
         foreach ($this->fields as $field) {
-            if (null != $field->getPropertyPath() && !$field->parent instanceof FieldsetLanguage) {
-                $value = $field->getValue();
-                if($field->hasTransformer()){
-                    $value = $field->getTransformer()->reverseTransform($field->getValue());
+            if (is_array($field)) {
+                foreach ($field as $element) {
+                    $element->handleRequest($this->defaultData);
                 }
-                $accessor->setValue($this->defaultData, $field->getPropertyPath(), $value);
+            } else {
+                $field->handleRequest($this->defaultData);
             }
-            if ($field->parent instanceof FieldsetLanguage) {
-                $hasTranslations = true;
-                $fieldValues = $field->getValue();
-                foreach ($fieldValues as $locale => $value) {
-                    $translation = $this->defaultData->translate($locale);
-                    $accessor->setValue($translation, $field->getName(), $value);
-                }
-            }
-        }
 
-        if($hasTranslations){
-            $this->defaultData->mergeNewTranslations();
         }
 
         return $this;
@@ -247,7 +260,6 @@ class Form extends Container
      */
     public function isValid($values = [])
     {
-        // don't validate the form if it wasn't submitted
         if (!$this->isSubmitted()) {
             return false;
         }

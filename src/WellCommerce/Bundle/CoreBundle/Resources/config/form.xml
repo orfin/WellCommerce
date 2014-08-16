@@ -59,7 +59,6 @@
         <parameter key="form.element.rich_text_editor.class">WellCommerce\Bundle\CoreBundle\Form\Elements\RichTextEditor</parameter>
         <parameter key="form.element.rights_table.class">WellCommerce\Bundle\CoreBundle\Form\Elements\RightsTable</parameter>
         <parameter key="form.element.select.class">WellCommerce\Bundle\CoreBundle\Form\Elements\Select</parameter>
-        <parameter key="form.element.shop_selector.class">WellCommerce\Bundle\CoreBundle\Form\Elements\ShopSelector</parameter>
         <parameter key="form.element.sortable_list.class">WellCommerce\Bundle\CoreBundle\Form\Elements\SortableList</parameter>
         <parameter key="form.element.static_listing.class">WellCommerce\Bundle\CoreBundle\Form\Elements\StaticListing</parameter>
         <parameter key="form.element.static_text.class">WellCommerce\Bundle\CoreBundle\Form\Elements\StaticText</parameter>
@@ -150,6 +149,12 @@
         </service>
 
         <service id="form.element.select" class="%form.element.select.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.element.multi_select" class="%form.element.multi_select.class%" scope="prototype">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

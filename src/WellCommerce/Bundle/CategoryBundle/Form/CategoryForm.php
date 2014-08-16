@@ -11,12 +11,13 @@
  */
 namespace WellCommerce\Bundle\CategoryBundle\Form;
 
-use WellCommerce\Bundle\CompanyBundle\Form\DataTransformer\CompanyToNumberTransformer;
+use WellCommerce\Bundle\CategoryBundle\Form\DataTransformer\CategoryToNumberTransformer;
 use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CategoryBundle\Repository\CategoryRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Form\AbstractForm;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
+use WellCommerce\Bundle\ShopBundle\Form\DataTransformer\ShopToCollectionTransformer;
 
 /**
  * Class CategoryForm
@@ -26,11 +27,6 @@ use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
  */
 class CategoryForm extends AbstractForm implements FormInterface
 {
-    /**
-     * @var CategoryRepositoryInterface
-     */
-    private $repository;
-
     /**
      * {@inheritdoc}
      */
@@ -43,7 +39,12 @@ class CategoryForm extends AbstractForm implements FormInterface
             'label' => $this->trans('form.required_data')
         ]));
 
-        $requiredData->addChild($builder->getElement('text_field', [
+        $languageData = $requiredData->addChild($builder->getElement('fieldset_language', [
+            'name'  => 'translations',
+            'label' => $this->trans('form.required_data.language_data.label'),
+        ]));
+
+        $languageData->addChild($builder->getElement('text_field', [
             'name'  => 'name',
             'label' => $this->trans('category.name'),
             'rules' => [
@@ -53,26 +54,33 @@ class CategoryForm extends AbstractForm implements FormInterface
             ]
         ]));
 
-        $requiredData->addChild($builder->add('tip', [
+        $requiredData->addChild($builder->getElement('tip', [
             'tip' => '<p>' . $this->trans('Choose parent category') . '</p>'
         ]));
 
-        $requiredData->addChild($builder->addTree([
-            'name'       => 'parent_id',
-            'label'      => $this->trans('Parent category'),
-            'choosable'  => true,
-            'selectable' => false,
-            'sortable'   => false,
-            'clickable'  => false,
-            'items'      => $this->get('category.repository')->getCategoriesTree(),
-            'restrict'   => $this->getParam('id'),
-            'rules'      => [
-                $builder->addRuleCustom($this->trans('Category cannot be parent itself'), function ($id) {
-                    return ($id != $this->getParam('id'));
-                })
-            ],
+        $requiredData->addChild($builder->getElement('tree', [
+            'name'        => 'parent',
+            'label'       => $this->trans('category.parent'),
+            'choosable'   => true,
+            'selectable'  => false,
+            'sortable'    => false,
+            'clickable'   => false,
+            'items'       => $this->get('category.repository')->getTreeItems(),
+            'restrict'    => $this->getParam('id'),
+            'transformer' => new CategoryToNumberTransformer($this->getEntityManager())
         ]));
 
+        $shopData = $form->addChild($builder->getElement('fieldset', [
+            'name'  => 'shop_data',
+            'label' => $this->trans('shops')
+        ]));
+
+        $shopData->addChild($builder->getElement('multi_select', [
+            'name'        => 'shops',
+            'label'       => $this->trans('shops'),
+            'options'     => $this->get('shop.repository')->getShopsToSelect(),
+            'transformer' => new ShopToCollectionTransformer($this->getEntityManager())
+        ]));
 
 
         $form->addFilter('no_code');
@@ -80,35 +88,5 @@ class CategoryForm extends AbstractForm implements FormInterface
         $form->addFilter('secure');
 
         return $form;
-    }
-
-    /**
-     * Prepares form data using retrieved entity
-     *
-     * @param Category $category Model
-     *
-     * @return array
-     */
-    public function getDefaultData(Category $category)
-    {
-        $formData    = [];
-        $accessor    = $this->getPropertyAccessor();
-        $translations = $category->getTranslations();
-
-        $accessor->setValue($formData, '[required_data]', [
-//            'name'    => $translations->getName()
-        ]);
-
-        return $formData;
-    }
-
-    /**
-     * Sets repository object
-     *
-     * @param CategoryRepositoryInterface $repository
-     */
-    public function setRepository(CategoryRepositoryInterface $repository)
-    {
-        $this->repository = $repository;
     }
 }

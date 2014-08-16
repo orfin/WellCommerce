@@ -50,15 +50,16 @@ class TextArea extends TextField implements ElementInterface
             'filters',
             'dependencies',
             'default',
+            'property_path',
+            'transformer'
         ]);
 
         $resolver->setDefaults([
             'dependencies'  => [],
             'filters'       => [],
             'rules'         => [],
-            'property_path' => function (Options $options) {
-                    return new PropertyPath($options['name']);
-                },
+            'transformer'   => null,
+            'property_path' => null,
         ]);
 
 

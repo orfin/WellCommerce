@@ -26,11 +26,6 @@ use WellCommerce\Bundle\ContactBundle\Repository\ContactRepositoryInterface;
 class ContactForm extends AbstractForm implements FormInterface
 {
     /**
-     * @var ContactRepositoryInterface
-     */
-    private $repository;
-
-    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -48,7 +43,7 @@ class ContactForm extends AbstractForm implements FormInterface
         ]));
 
         $languageData = $requiredData->addChild($builder->getElement('fieldset_language', [
-            'name'  => 'required_data_translation',
+            'name'  => 'translations',
             'label' => $this->trans('form.required_data.language_data.label')
         ]));
 
@@ -83,7 +78,7 @@ class ContactForm extends AbstractForm implements FormInterface
         ]));
 
         $languageData = $addressData->addChild($builder->getElement('fieldset_language', [
-            'name'  => 'address_data_translation',
+            'name'  => 'translations',
             'label' => $this->trans('fieldset.address_data.translation')
         ]));
 
@@ -128,55 +123,5 @@ class ContactForm extends AbstractForm implements FormInterface
         $form->addFilter('secure');
 
         return $form;
-    }
-
-    /**
-     * Prepares form data using retrieved entity
-     *
-     * @param Contact $Contact
-     *
-     * @return array
-     */
-    public function getDefaultData(Contact $contact)
-    {
-        $formData     = [];
-        $languageData = [];
-        $accessor     = $this->getPropertyAccessor();
-        $translations = $contact->getTranslations();
-
-        foreach ($translations as $translation) {
-            $languageData['name'][$translation->getLocale()]           = $translation->getName();
-            $languageData['business_hours'][$translation->getLocale()] = $translation->getBusinessHours();
-            $languageData['email'][$translation->getLocale()]          = $translation->getBusinessHours();
-            $languageData['phone'][$translation->getLocale()]          = $translation->getBusinessHours();
-            $languageData['street'][$translation->getLocale()]         = $translation->getStreet();
-            $languageData['streetNo'][$translation->getLocale()]       = $translation->getStreetNo();
-            $languageData['flatNo'][$translation->getLocale()]         = $translation->getFlatNo();
-            $languageData['province'][$translation->getLocale()]       = $translation->getProvince();
-            $languageData['postCode'][$translation->getLocale()]       = $translation->getPostCode();
-            $languageData['city'][$translation->getLocale()]           = $translation->getCity();
-            $languageData['country'][$translation->getLocale()]        = $translation->getCountry();
-        }
-
-        $accessor->setValue($formData, '[required_data]', [
-            'enabled'                   => $contact->getEnabled(),
-            'required_data_translation' => $languageData
-        ]);
-
-        $accessor->setValue($formData, '[address_data]', [
-            'address_data_translation' => $languageData
-        ]);
-
-        return $formData;
-    }
-
-    /**
-     * Sets client group repository
-     *
-     * @param ContactRepositoryInterface $repository
-     */
-    public function setRepository(ContactRepositoryInterface $repository)
-    {
-        $this->repository = $repository;
     }
 }

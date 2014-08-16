@@ -74,6 +74,15 @@ class CategoryController extends AbstractAdminController
             'name' => 'category',
         ]);
 
+        if ($form->handleRequest($request)->isValid()) {
+            $this->manager->update($resource, $request);
+            if ($form->isAction('continue')) {
+                return $this->manager->getRedirectHelper()->redirectToAction('edit', $resource);
+            }
+
+            return $this->manager->getRedirectHelper()->redirectToAction('index');
+        }
+
         return [
             'tree' => $tree,
             'form' => $form

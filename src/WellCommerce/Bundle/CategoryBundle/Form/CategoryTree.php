@@ -27,11 +27,6 @@ use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
 class CategoryTree extends AbstractForm implements FormInterface
 {
     /**
-     * @var CategoryRepositoryInterface
-     */
-    private $repository;
-
-    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -61,20 +56,5 @@ class CategoryTree extends AbstractForm implements FormInterface
         ]));
 
         return $form;
-    }
-
-    public function getDefaultData()
-    {
-        return [];
-    }
-
-    /**
-     * Sets repository object
-     *
-     * @param CategoryRepositoryInterface $repository
-     */
-    public function setRepository(CategoryRepositoryInterface $repository)
-    {
-        $this->repository = $repository;
     }
 }
