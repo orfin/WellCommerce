@@ -51,6 +51,18 @@ class ProducerForm extends AbstractForm implements FormInterface
             ]
         ]));
 
+        $delivererData = $form->addChild($builder->getElement('fieldset', [
+            'name'  => 'deliverers_data',
+            'label' => $this->trans('producer.deliverers')
+        ]));
+
+        $delivererData->addChild($builder->getElement('multi_select', [
+            'name'        => 'deliverers',
+            'label'       => $this->trans('deliverers'),
+            'options'     => $this->get('deliverer.repository')->getCollectionToSelect(),
+            'transformer' => new CollectionToArrayTransformer($this->get('deliverer.repository'))
+        ]));
+
         $shopData = $form->addChild($builder->getElement('fieldset', [
             'name'  => 'shop_data',
             'label' => $this->trans('shops')

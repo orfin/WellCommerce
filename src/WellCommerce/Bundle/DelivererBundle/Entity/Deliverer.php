@@ -42,11 +42,7 @@ class Deliverer
     private $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\ProducerBundle\Entity\Producer", inversedBy="deliverers")
-     * @ORM\JoinTable(name="producer_deliverer",
-     *      joinColumns={@ORM\JoinColumn(name="deliverer_id", referencedColumnName="id", onDelete="CASCADE")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="producer_id", referencedColumnName="id", onDelete="CASCADE")}
-     * )
+     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\ProducerBundle\Entity\Producer", mappedBy="deliverers")
      */
     private $producers;
 

@@ -52,7 +52,11 @@ class Producer
     private $shops;
 
     /**
-     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\DelivererBundle\Entity\Deliverer", mappedBy="producers")
+     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\DelivererBundle\Entity\Deliverer", inversedBy="producers")
+     * @ORM\JoinTable(name="producer_deliverer",
+     *      joinColumns={@ORM\JoinColumn(name="producer_id", referencedColumnName="id", onDelete="CASCADE")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="deliverer_id", referencedColumnName="id", onDelete="CASCADE")}
+     * )
      */
     private $deliverers;
 
@@ -122,6 +126,7 @@ class Producer
 
     public function setDeliverers(ArrayCollection $collection)
     {
+        echo $collection->count().PHP_EOL;
         $this->deliverers = $collection;
     }
 }

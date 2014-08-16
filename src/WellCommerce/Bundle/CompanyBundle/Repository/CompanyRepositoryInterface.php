@@ -23,11 +23,5 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
  */
 interface CompanyRepositoryInterface extends RepositoryInterface, DataGridAwareRepositoryInterface
 {
-    /**
-     * Returns all companies as key-value pairs
-     * Mostly used in form select element
-     *
-     * @return mixed
-     */
-    public function allToSelect();
+
 } 

@@ -30,18 +30,5 @@ class CompanyRepository extends AbstractEntityRepository implements CompanyRepos
         return parent::getQueryBuilder()->groupBy('company.id');
     }
 
-    public function getCollectionToSelect($labelField = 'name')
-    {
-        $companies = [];
-        $accessor  = $this->getPropertyAccessor();
-        $result    = $this->createQueryBuilder('company')->getQuery()->getResult();
 
-        foreach ($result as $company) {
-            $id             = $accessor->getValue($company, 'id');
-            $label          = $accessor->getValue($company, $labelField);
-            $companies[$id] = $label;
-        }
-
-        return $companies;
-    }
 }

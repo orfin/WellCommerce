@@ -11,10 +11,12 @@
  */
 namespace WellCommerce\Bundle\CoreBundle\Repository;
 
+use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PropertyAccess\PropertyAccess;
+use Symfony\Component\PropertyAccess\PropertyPath;
 use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 
 /**
@@ -129,24 +131,85 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
     }
 
     /**
+     * Builds and executes query to fetch collection of items to use in optioned fields
+     *
+     * @param $identifier
+     * @param $labelField
+     * @param $targetClass
+     * @param $tableName
+     * @param $associationTableName
+     *
+     * @return array
+     */
+    private function getCollection($identifier, $labelField, $targetClass, $tableName, $associationTableName)
+    {
+        $identifierField  = sprintf('%s.%s', $tableName, $identifier);
+        $translationField = sprintf('%s.%s', $associationTableName, $labelField);
+        $queryBuilder     = $this->getQueryBuilder($this->getName());
+        $queryBuilder->select("
+            {$identifierField},
+            {$translationField}
+        ");
+        $queryBuilder->leftJoin(
+            $targetClass,
+            $associationTableName,
+            "WITH",
+            "{$identifierField} = {$associationTableName}.translatable AND {$associationTableName}.locale = :locale");
+        $queryBuilder->groupBy($identifierField);
+        $queryBuilder->setParameter('locale', $this->getCurrentLocale());
+        $query      = $queryBuilder->getQuery();
+        $collection = $query->getResult();
+
+        return $collection;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getCollectionToSelect($labelField = 'name')
     {
-        $collection = $this->findAll();
         $metadata   = $this->getMetadata();
         $identifier = $metadata->getSingleIdentifierFieldName();
-        $labelField = $metadata->hasField($labelField) ? $labelField : '';
+        $tableName  = $metadata->getTableName();
         $accessor   = PropertyAccess::createPropertyAccessor();
         $select     = [];
 
-        foreach ($collection as $item) {
-            $id          = $accessor->getValue($item, $identifier);
-            $label       = $accessor->getValue($item, $labelField);
-            $select[$id] = $label;
+        if (!$metadata->hasField($labelField)) {
+            if ($metadata->hasAssociation('translations')) {
+                $association         = $metadata->getAssociationTargetClass('translations');
+                $associationMetaData = $this->_em->getClassMetadata($association);
+                if ($associationMetaData->hasField($labelField)) {
+                    $associationTableName = $associationMetaData->getTableName();
+
+                    $collection = $this->getCollection(
+                        $identifier,
+                        $labelField,
+                        $association,
+                        $tableName,
+                        $associationTableName
+                    );
+
+                    foreach ($collection as $item) {
+                        $id          = $accessor->getValue($item, '[' . $identifier . ']');
+                        $select[$id] = $accessor->getValue($item, '[' . $labelField . ']');
+                    }
+
+                    return $select;
+                }
+            }
+        } else {
+            $collection = $this->findAll();
+
+            foreach ($collection as $item) {
+                $id          = $accessor->getValue($item, $identifier);
+                $label       = $accessor->getValue($item, $labelField);
+                $select[$id] = $label;
+            }
+
+            return $select;
         }
 
-        return $select;
+        throw new \InvalidArgumentException('Cannot find field named %s or association named "translations".', $labelField);
     }
 
     /**
