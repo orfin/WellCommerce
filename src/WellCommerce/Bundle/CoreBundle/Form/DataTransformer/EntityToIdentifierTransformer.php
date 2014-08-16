@@ -12,11 +12,15 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\DataTransformer;
 
-
-use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
+/**
+ * Class EntityToIdentifierTransformer
+ *
+ * @package WellCommerce\Bundle\CoreBundle\Form\DataTransformer
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
+ */
 class EntityToIdentifierTransformer
 {
     /**
@@ -35,7 +39,11 @@ class EntityToIdentifierTransformer
     }
 
     /**
-     * {@inheritdoc}
+     * Transforms entity to primary key identifier
+     *
+     * @param $entity
+     *
+     * @return int|mixed
      */
     public function transform($entity)
     {
@@ -50,7 +58,11 @@ class EntityToIdentifierTransformer
     }
 
     /**
-     * {@inheritdoc}
+     * Transforms identifier to entity
+     *
+     * @param $id
+     *
+     * @return mixed
      */
     public function reverseTransform($id)
     {

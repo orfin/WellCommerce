@@ -40,7 +40,11 @@ class CollectionToArrayTransformer
     }
 
     /**
-     * {@inheritdoc}
+     * Transforms entity collection to array containing only primary keys
+     *
+     * @param $collection
+     *
+     * @return array
      */
     public function transform($collection)
     {
@@ -56,7 +60,11 @@ class CollectionToArrayTransformer
     }
 
     /**
-     * {@inheritdoc}
+     * Transforms passed identifiers to collection of entities
+     *
+     * @param $ids
+     *
+     * @return ArrayCollection
      */
     public function reverseTransform($ids)
     {
