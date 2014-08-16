@@ -15,7 +15,13 @@
         </div>
         <div id="top-menu">
             <ul>
-
+                <li>
+                    <a href="{{ path('admin.user.edit', {"id": app.user.id}) }}">{{ app.user.username }}</a>
+                    (<a href="{{ path('admin.user.logout') }}">{% trans %}Logout{% endtrans %}</a>)
+                </li>
+                <li>
+                    <a target="_blank" href="http://wellcommerce.org/professional-services">{% trans %}Help{% endtrans %}</a>
+                </li>
             </ul>
         </div>
     </div>

@@ -71,4 +71,21 @@ class Submit extends Node implements ElementInterface
     {
     }
 
+    public function setPropertyPath()
+    {
+        $this->attributes['property_path'] = null;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function handleRequest($data)
+    {
+        return null;
+    }
+
+    public function setDefaults($data){
+
+    }
+
 }

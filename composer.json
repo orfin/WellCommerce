@@ -50,7 +50,8 @@
         "willdurand/js-translation-bundle": "2.1.*@dev",
         "friendsofsymfony/rest-bundle": "1.4.1",
         "jms/serializer-bundle": "0.13.0",
-        "nelmio/api-doc-bundle": "2.7.0"
+        "nelmio/api-doc-bundle": "2.7.0",
+        "ircmaxell/password-compat": "1.0.3"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",

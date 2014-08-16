@@ -4,6 +4,11 @@ fos_js_routing:
 _bazinga_jstranslation:
     resource: "@BazingaJsTranslationBundle/Resources/config/routing/routing.yml"
 
+
+wellcommerce_user:
+    resource: "@WellCommerceUserBundle/Resources/config/routing.xml"
+    prefix:   /admin/user
+
 wellcommerce_locale:
     resource: "@WellCommerceLocaleBundle/Resources/config/routing.xml"
     prefix:   /admin/configuration/locale

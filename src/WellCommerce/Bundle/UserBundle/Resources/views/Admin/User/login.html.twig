@@ -1,0 +1,20 @@
+{% include 'WellCommerceCoreBundle:Admin:header.html.twig' %}
+<body class="welcome-screen">
+<div id="header">
+    <div class="layout-container">
+        <h1>
+            <a href="">
+                {% image '@WellCommerceCoreBundle/Resources/public/images/logo.png' %}
+                <img src="{{ asset_url }}" alt="Example" />
+                {% endimage %}
+            </a>
+        </h1>
+    </div>
+</div>
+<div id="message-bar"></div>
+<div id="content" class="layout-container">
+    {{ error }}
+    {{ form(form) }}
+</div>
+</body>
+{% include 'WellCommerceCoreBundle:Admin:footer.html.twig' %}

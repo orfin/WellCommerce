@@ -166,7 +166,7 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
     /**
      * {@inheritdoc}
      */
-    public function getCollectionToSelect($labelField = 'name')
+    public function getCollectionToSelect($labelField = 'name', $associationName = 'translations')
     {
         $metadata   = $this->getMetadata();
         $identifier = $metadata->getSingleIdentifierFieldName();
@@ -175,8 +175,8 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
         $select     = [];
 
         if (!$metadata->hasField($labelField)) {
-            if ($metadata->hasAssociation('translations')) {
-                $association         = $metadata->getAssociationTargetClass('translations');
+            if ($metadata->hasAssociation($associationName)) {
+                $association         = $metadata->getAssociationTargetClass($associationName);
                 $associationMetaData = $this->_em->getClassMetadata($association);
                 if ($associationMetaData->hasField($labelField)) {
                     $associationTableName = $associationMetaData->getTableName();
@@ -209,7 +209,7 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
             return $select;
         }
 
-        throw new \InvalidArgumentException('Cannot find field named %s or association named "translations".', $labelField);
+        throw new \InvalidArgumentException('Cannot find field named %s or association named "%s".', $labelField, $associationName);
     }
 
     /**
