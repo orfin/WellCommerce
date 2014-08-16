@@ -10,12 +10,12 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CoreBundle\Entity\Behaviours\Address;
+namespace WellCommerce\Bundle\CoreBundle\Entity\Behaviours;
 
 /**
- * Trait AddressTrait
+ * Class AddressTrait
  *
- * @package WellCommerce\Bundle\CoreBundle\Entity\Behaviours\Address
+ * @package WellCommerce\Bundle\CoreBundle\Entity\Behaviours
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 trait AddressTrait {

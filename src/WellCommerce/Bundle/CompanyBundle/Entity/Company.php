@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\CompanyBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
-use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\Address\AddressTrait;
+use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\AddressTrait;
 
 /**
  * Class Company
