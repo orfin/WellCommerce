@@ -18,8 +18,10 @@
         });
     }
 
-    function deleteCategory(sId) {
-        GF_Ajax_Request(Routing.generate('admin.category.delete',{id: sId}));
+    function deleteCategory(oRequest) {
+        GF_Ajax_Request(Routing.generate('admin.category.delete',{id: oRequest.id}), function(oData){
+            window.location = Routing.generate('admin.category.index');
+        });
     }
 
     function changeOrder(oRequest) {

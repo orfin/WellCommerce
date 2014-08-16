@@ -82,7 +82,6 @@ class CategoryForm extends AbstractForm implements FormInterface
             'transformer' => new ShopToCollectionTransformer($this->getEntityManager())
         ]));
 
-
         $form->addFilter('no_code');
         $form->addFilter('trim');
         $form->addFilter('secure');

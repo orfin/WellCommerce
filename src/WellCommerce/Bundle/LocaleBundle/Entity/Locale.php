@@ -42,6 +42,11 @@ class Locale
     private $code;
 
     /**
+     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\ShopBundle\Entity\Shop", mappedBy="availableLocales")
+     */
+    private $shops;
+
+    /**
      * Get id.
     
      *

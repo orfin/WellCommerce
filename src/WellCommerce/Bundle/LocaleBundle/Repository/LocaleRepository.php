@@ -33,32 +33,6 @@ class LocaleRepository extends AbstractEntityRepository implements LocaleReposit
     /**
      * {@inheritdoc}
      */
-    public function deleteRow($id)
-    {
-        $entity = $this->find($id);
-        $this->_em->remove($entity);
-        $this->_em->flush();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function updateRow(array $request)
-    {
-
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function deleteMultipleRows(array $ids)
-    {
-        return false;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getAvailableLocales()
     {
         $qb    = $this->createQueryBuilder('locale');
@@ -80,6 +54,18 @@ class LocaleRepository extends AbstractEntityRepository implements LocaleReposit
         }
 
         return $codes;
+    }
+
+    public function getLocalesToSelect()
+    {
+        $locales = $this->getAvailableLocales();
+        $ids     = [];
+
+        foreach ($locales as $locale) {
+            $ids[$locale['id']] = $locale['code'];
+        }
+
+        return $ids;
     }
 
     /**

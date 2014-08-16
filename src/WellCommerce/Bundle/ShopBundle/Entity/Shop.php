@@ -16,6 +16,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use WellCommerce\Bundle\CategoryBundle\Entity\Category;
+use WellCommerce\Bundle\LocaleBundle\Entity\Locale;
 
 /**
  * Class Shop
@@ -56,6 +57,15 @@ class Shop
      * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\CategoryBundle\Entity\Category", mappedBy="shops")
      */
     private $categories;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\LocaleBundle\Entity\Locale", inversedBy="shops")
+     * @ORM\JoinTable(name="shop_locale",
+     *      joinColumns={@ORM\JoinColumn(name="shop_id", referencedColumnName="id", onDelete="CASCADE")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="locale_id", referencedColumnName="id", onDelete="CASCADE")}
+     * )
+     */
+    private $availableLocales;
 
     /**
      * Get id.
@@ -116,7 +126,8 @@ class Shop
      */
     public function __construct()
     {
-        $this->categories = new ArrayCollection();
+        $this->categories       = new ArrayCollection();
+        $this->availableLocales = new ArrayCollection();
     }
 
     /**
@@ -137,6 +148,31 @@ class Shop
     public function addCategory(Category $category)
     {
         $this->categories[] = $category;
+    }
+
+    /**
+     * Returns all available locales for shop entity
+     *
+     * @return ArrayCollection
+     */
+    public function getAvailableLocales()
+    {
+        return $this->availableLocales;
+    }
+
+    /**
+     * Adds new locale for shop
+     *
+     * @param Locale $locale
+     */
+    public function addAvailableLocale(Locale $locale)
+    {
+        $this->availableLocales = $locale;
+    }
+
+    public function setAvailableLocales(ArrayCollection $collection)
+    {
+        $this->availableLocales = $collection;
     }
 }
 
