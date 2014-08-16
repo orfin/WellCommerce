@@ -55,4 +55,11 @@ interface RepositoryInterface
      */
     public function findResource(Request $request, array $criteria = []);
 
+    /**
+     * Returns class metadata
+     *
+     * @return \Doctrine\ORM\Mapping\ClassMetadata
+     */
+    public function getMetadata();
+
 } 

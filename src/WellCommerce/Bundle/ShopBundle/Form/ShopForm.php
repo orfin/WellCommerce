@@ -12,11 +12,9 @@
 namespace WellCommerce\Bundle\ShopBundle\Form;
 
 use WellCommerce\Bundle\CompanyBundle\Form\DataTransformer\CompanyToNumberTransformer;
-use WellCommerce\Bundle\LocaleBundle\Form\DataTransformer\LocaleToCollectionTransformer;
-use WellCommerce\Bundle\ShopBundle\Entity\Shop;
-use WellCommerce\Bundle\ShopBundle\Repository\ShopRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Form\AbstractForm;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
 use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
 
 /**
@@ -65,7 +63,7 @@ class ShopForm extends AbstractForm implements FormInterface
             'name'        => 'availableLocales',
             'label'       => $this->trans('Available locales'),
             'options'     => $this->get('locale.repository')->getLocalesToSelect(),
-            'transformer' => new LocaleToCollectionTransformer($this->getEntityManager())
+            'transformer' => new CollectionToArrayTransformer($this->get('locale.repository'))
         ]));
 
         $form->addFilter('no_code');

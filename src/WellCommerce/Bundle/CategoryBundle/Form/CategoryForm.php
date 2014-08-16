@@ -16,6 +16,8 @@ use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CategoryBundle\Repository\CategoryRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Form\AbstractForm;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
+use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\EntityToIdentifierTransformer;
 use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
 use WellCommerce\Bundle\ShopBundle\Form\DataTransformer\ShopToCollectionTransformer;
 
@@ -67,7 +69,7 @@ class CategoryForm extends AbstractForm implements FormInterface
             'clickable'   => false,
             'items'       => $this->get('category.repository')->getTreeItems(),
             'restrict'    => $this->getParam('id'),
-            'transformer' => new CategoryToNumberTransformer($this->getEntityManager())
+            'transformer' => new EntityToIdentifierTransformer($this->get('category.repository'))
         ]));
 
         $shopData = $form->addChild($builder->getElement('fieldset', [
@@ -79,7 +81,7 @@ class CategoryForm extends AbstractForm implements FormInterface
             'name'        => 'shops',
             'label'       => $this->trans('shops'),
             'options'     => $this->get('shop.repository')->getShopsToSelect(),
-            'transformer' => new ShopToCollectionTransformer($this->getEntityManager())
+            'transformer' => new CollectionToArrayTransformer($this->get('shop.repository'))
         ]));
 
         $form->addFilter('no_code');

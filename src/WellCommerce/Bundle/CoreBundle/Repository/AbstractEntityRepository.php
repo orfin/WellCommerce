@@ -127,4 +127,11 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
         return $resource;
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getMetadata()
+    {
+        return $this->_class;
+    }
 }
