@@ -12,8 +12,10 @@
 
 namespace WellCommerce\Bundle\DelivererBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use WellCommerce\Bundle\ProducerBundle\Entity\Producer;
 
 /**
  * Class Locale
@@ -40,6 +42,15 @@ class Deliverer
     private $id;
 
     /**
+     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\ProducerBundle\Entity\Producer", inversedBy="deliverers")
+     * @ORM\JoinTable(name="producer_deliverer",
+     *      joinColumns={@ORM\JoinColumn(name="deliverer_id", referencedColumnName="id", onDelete="CASCADE")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="producer_id", referencedColumnName="id", onDelete="CASCADE")}
+     * )
+     */
+    private $producers;
+
+    /**
      * Get id.
     
      *
@@ -48,6 +59,31 @@ class Deliverer
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Sets producers for deliverer
+     *
+     * @param $shops
+     */
+    public function setProducers(ArrayCollection $collection)
+    {
+        $this->producers = $collection;
+    }
+
+    /**
+     * Get producers for deliverer
+     *
+     * @return mixed
+     */
+    public function getProducers()
+    {
+        return $this->producers;
+    }
+
+    public function addProducer(Producer $producer)
+    {
+        $this->producers[] = $producer;
     }
 }
 

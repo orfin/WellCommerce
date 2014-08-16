@@ -29,31 +29,4 @@ class ShopRepository extends AbstractEntityRepository implements ShopRepositoryI
     {
         return parent::getQueryBuilder()->groupBy('shop.id');
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function updateRow(array $request)
-    {
-
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function deleteMultipleRows(array $ids)
-    {
-        return false;
-    }
-
-    public function getShopsToSelect()
-    {
-        $shops  = $this->findAll();
-        $select = [];
-        foreach ($shops as $shop) {
-            $select[$shop->getId()] = $shop->getName();
-        }
-
-        return $select;
-    }
 }

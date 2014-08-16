@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\CoreBundle\Repository;
 use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 
 /**
@@ -133,5 +134,26 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
     public function getMetadata()
     {
         return $this->_class;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCollectionToSelect($labelField = 'name')
+    {
+        $collection = $this->findAll();
+        $metadata   = $this->getMetadata();
+        $identifier = $metadata->getSingleIdentifierFieldName();
+        $labelField = $metadata->hasField($labelField) ? $labelField : '';
+        $accessor   = PropertyAccess::createPropertyAccessor();
+        $select     = [];
+
+        foreach ($collection as $item) {
+            $id          = $accessor->getValue($item, $identifier);
+            $label       = $accessor->getValue($item, $labelField);
+            $select[$id] = $label;
+        }
+
+        return $select;
     }
 }

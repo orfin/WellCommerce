@@ -59,7 +59,7 @@ class ProducerForm extends AbstractForm implements FormInterface
         $shopData->addChild($builder->getElement('multi_select', [
             'name'        => 'shops',
             'label'       => $this->trans('shops'),
-            'options'     => $this->get('shop.repository')->getShopsToSelect(),
+            'options'     => $this->get('shop.repository')->getCollectionToSelect(),
             'transformer' => new CollectionToArrayTransformer($this->get('shop.repository'))
         ]));
 

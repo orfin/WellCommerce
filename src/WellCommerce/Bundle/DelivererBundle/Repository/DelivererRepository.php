@@ -32,6 +32,5 @@ class DelivererRepository extends AbstractEntityRepository implements DelivererR
                 'deliverer_translation',
                 'WITH',
                 'deliverer.id = deliverer_translation.translatable AND deliverer_translation.locale = :locale');
-
     }
 }

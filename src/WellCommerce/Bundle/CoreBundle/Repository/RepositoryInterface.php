@@ -62,4 +62,13 @@ interface RepositoryInterface
      */
     public function getMetadata();
 
+    /**
+     * Returns collection prepared to use in optioned form fields
+     *
+     * @param string $labelField
+     *
+     * @return array
+     */
+    public function getCollectionToSelect($labelField = 'name');
+
 } 

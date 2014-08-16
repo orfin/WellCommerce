@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\ProducerBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use WellCommerce\Bundle\DelivererBundle\Entity\Deliverer;
 use WellCommerce\Bundle\ShopBundle\Entity\Shop;
 
 /**
@@ -51,8 +52,12 @@ class Producer
     private $shops;
 
     /**
+     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\DelivererBundle\Entity\Deliverer", mappedBy="producers")
+     */
+    private $deliverers;
+
+    /**
      * Get id.
-    
      *
      * @return integer
      */
@@ -66,7 +71,8 @@ class Producer
      */
     public function __construct()
     {
-        $this->shops    = new ArrayCollection();
+        $this->shops      = new ArrayCollection();
+        $this->deliverers = new ArrayCollection();
     }
 
     /**
@@ -92,6 +98,31 @@ class Producer
     public function addShop(Shop $shop)
     {
         $this->shops[] = $shop;
+    }
+
+    /**
+     * Returns all available deliverers for producer
+     *
+     * @return ArrayCollection
+     */
+    public function getDeliverers()
+    {
+        return $this->deliverers;
+    }
+
+    /**
+     * Adds new deliverer to producer
+     *
+     * @param Deliverer $deliverer
+     */
+    public function addDeliverer(Deliverer $deliverer)
+    {
+        $this->deliverers = $deliverer;
+    }
+
+    public function setDeliverers(ArrayCollection $collection)
+    {
+        $this->deliverers = $collection;
     }
 }
 
