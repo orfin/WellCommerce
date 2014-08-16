@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\ContactBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
-use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\Address\Address;
+use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\Address\AddressTrait;
 
 /**
  * ContactTranslation
@@ -25,7 +25,7 @@ use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\Address\Address;
 class ContactTranslation
 {
     use ORMBehaviors\Translatable\Translation;
-    use Address;
+    use AddressTrait;
 
     /**
      * @var string
