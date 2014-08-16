@@ -20,30 +20,43 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
  */
 class FontStyle extends TextField implements ElementInterface
 {
-
     public function formatStylesJs()
     {
+        $options = [];
 
-        $options[] = "{sValue: 'Arial,Arial,Helvetica,sans-serif', sLabel: 'Arial'}";
-        $options[] = "{sValue: 'Arial Black,Arial Black,Gadget,sans-serif', sLabel: 'Arial Black'}";
-        $options[] = "{sValue: 'Comic Sans MS,Comic Sans MS,cursive', sLabel: 'Comic Sans MS'}";
-        $options[] = "{sValue: 'Courier New,Courier New,Courier,monospace', sLabel: 'Courier New'}";
-        $options[] = "{sValue: 'Georgia,Georgia,serif', sLabel: 'Georgia'}";
-        $options[] = "{sValue: 'Impact,Charcoal,sans-serif', sLabel: 'Impact'}";
-        $options[] = "{sValue: 'Lucida Console,Monaco,monospace', sLabel: 'Lucida Console'}";
-        $options[] = "{sValue: 'Lucida Sans Unicode,Lucida Grande,sans-serif', sLabel: 'Lucida Sans'}";
-        $options[] = "{sValue: 'Palatino Linotype,Book Antiqua,Palatino,serif', sLabel: 'Palatino Linotype'}";
-        $options[] = "{sValue: 'Tahoma,Geneva,sans-serif', sLabel: 'Tahoma'}";
-        $options[] = "{sValue: 'Times New Roman,Times,serif', sLabel: 'Times New Roman'}";
-        $options[] = "{sValue: 'Trebuchet MS,Helvetica,sans-serif', sLabel: 'Trebuchet'}";
-        $options[] = "{sValue: 'Verdana,Geneva,sans-serif', sLabel: 'Verdana'}";
+        $options[] = $this->formatStyle('Arial,Arial,Helvetica,sans-serif', 'Arial');
+        $options[] = $this->formatStyle('Arial Black,Arial Black,Gadget,sans-serif', 'Arial Black');
+        $options[] = $this->formatStyle('Comic Sans MS,Comic Sans MS,cursive', 'Comic Sans MS');
+        $options[] = $this->formatStyle('Courier New,Courier New,Courier,monospace', 'Courier New');
+        $options[] = $this->formatStyle('Georgia,Georgia,serif', 'Georgia');
+        $options[] = $this->formatStyle('Impact,Charcoal,sans-serif', 'Impact');
+        $options[] = $this->formatStyle('Lucida Console,Monaco,monospace', 'Lucida Console');
+        $options[] = $this->formatStyle('Lucida Sans Unicode,Lucida Grande,sans-serif', 'Lucida Sans');
+        $options[] = $this->formatStyle('Palatino Linotype,Book Antiqua,Palatino,serif', 'Palatino Linotype');
+        $options[] = $this->formatStyle('Tahoma,Geneva,sans-serif', 'Tahoma');
+        $options[] = $this->formatStyle('Times New Roman,Times,serif', 'Times New Roman');
+        $options[] = $this->formatStyle('Trebuchet MS,Helvetica,sans-serif', 'Trebuchet');
+        $options[] = $this->formatStyle('Verdana,Geneva,sans-serif', 'Verdana');
 
         return 'aoTypes: [' . implode(', ', $options) . ']';
     }
 
+    /**
+     * Formats the font style as json value
+     *
+     * @param $style
+     * @param $label
+     *
+     * @return string
+     */
+    private function formatStyle($style, $label)
+    {
+        return sprintf("{sValue: '%s', sLabel: '%s'}", $style, $label);
+    }
+
     public function prepareAttributesJs()
     {
-        $attributes = Array(
+        $attributes = [
             $this->formatAttributeJs('name', 'sName'),
             $this->formatAttributeJs('label', 'sLabel'),
             $this->formatAttributeJs('comment', 'sComment'),
@@ -53,7 +66,7 @@ class FontStyle extends TextField implements ElementInterface
             $this->formatStylesJs(),
             $this->formatDependencyJs(),
             $this->formatDefaultsJs()
-        );
+        ];
 
         return $attributes;
     }
