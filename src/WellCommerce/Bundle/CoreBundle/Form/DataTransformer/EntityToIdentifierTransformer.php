@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\DataTransformer;
 
-use Symfony\Component\PropertyAccess\PropertyAccess;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
@@ -52,9 +51,9 @@ class EntityToIdentifierTransformer
         }
         $meta       = $this->repository->getMetadata();
         $identifier = $meta->getSingleIdentifierFieldName();
-        $accessor   = PropertyAccess::createPropertyAccessor();
+        $accessor   = $this->repository->getPropertyAccessor();
 
-        return $accessor->getValue($entity, $identifier);;
+        return $accessor->getValue($entity, $identifier);
     }
 
     /**

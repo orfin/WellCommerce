@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\CoreBundle\Form\DataTransformer;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\PropertyAccess\PropertyAccess;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
@@ -50,7 +49,7 @@ class CollectionToArrayTransformer
     {
         $meta       = $this->repository->getMetadata();
         $identifier = $meta->getSingleIdentifierFieldName();
-        $accessor   = PropertyAccess::createPropertyAccessor();
+        $accessor   = $this->repository->getPropertyAccessor();
         $items      = [];
         foreach ($collection as $item) {
             $items[] = $accessor->getValue($item, $identifier);

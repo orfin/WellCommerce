@@ -87,9 +87,7 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
     }
 
     /**
-     * Returns entity name
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getName()
     {
@@ -97,13 +95,7 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
     }
 
     /**
-     * Resolves request parameters and tries to find corresponding entity
-     *
-     * @param Request $request
-     * @param array   $criteria
-     *
-     * @return mixed|null|object
-     * @throws \Doctrine\ORM\EntityNotFoundException
+     * {@inheritdoc}
      */
     public function findResource(Request $request, array $criteria = [])
     {
@@ -155,5 +147,13 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
         }
 
         return $select;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPropertyAccessor()
+    {
+        return PropertyAccess::createPropertyAccessor();
     }
 }

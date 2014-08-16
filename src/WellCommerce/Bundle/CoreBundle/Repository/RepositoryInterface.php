@@ -46,12 +46,20 @@ interface RepositoryInterface
     public function getAlias();
 
     /**
-     * Tries to find a resource using request parameters
+     * Returns entities name
+     *
+     * @return string
+     */
+    public function getName();
+
+    /**
+     * Resolves request parameters and tries to find corresponding entity
      *
      * @param Request $request
      * @param array   $criteria
      *
-     * @return mixed
+     * @return mixed|null|object
+     * @throws \Doctrine\ORM\EntityNotFoundException
      */
     public function findResource(Request $request, array $criteria = []);
 
@@ -70,5 +78,12 @@ interface RepositoryInterface
      * @return array
      */
     public function getCollectionToSelect($labelField = 'name');
+
+    /**
+     * Returns property accessor
+     *
+     * @return \Symfony\Component\PropertyAccess\PropertyAccessor
+     */
+    public function getPropertyAccessor();
 
 } 
