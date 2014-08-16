@@ -15,6 +15,7 @@ use WellCommerce\Bundle\CompanyBundle\Form\DataTransformer\CompanyToNumberTransf
 use WellCommerce\Bundle\CoreBundle\Form\AbstractForm;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
+use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\EntityToIdentifierTransformer;
 use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
 
 /**
@@ -51,7 +52,7 @@ class ShopForm extends AbstractForm implements FormInterface
             'name'        => 'company',
             'label'       => $this->trans('shop.company'),
             'options'     => $this->get('company.repository')->allToSelect(),
-            'transformer' => new CompanyToNumberTransformer($this->getEntityManager())
+            'transformer' => new EntityToIdentifierTransformer($this->get('company.repository'))
         ]));
 
         $localizationData = $form->addChild($builder->getElement('fieldset', [
