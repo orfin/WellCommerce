@@ -11,6 +11,7 @@
  */
 
 $I = new AcceptanceTester\AdminUserSteps($scenario);
-$I->wantTo('Log in as an admin user');
+$I->wantTo('Logout from administration area');
 $I->login('admin', 'admin');
 $I->see('John Doe');
+$I->click('Logout');
