@@ -23,9 +23,16 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class RedirectingController extends Controller
 {
+    /**
+     * Action used to remove trailing slash in url
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function removeTrailingSlashAction(Request $request)
     {
-        $pathInfo = $request->getPathInfo();
+        $pathInfo   = $request->getPathInfo();
         $requestUri = $request->getRequestUri();
 
         $url = str_replace($pathInfo, rtrim($pathInfo, ' /'), $requestUri);
