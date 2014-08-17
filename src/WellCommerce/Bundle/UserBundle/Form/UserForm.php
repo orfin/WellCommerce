@@ -41,10 +41,24 @@ class UserForm extends AbstractForm implements FormInterface
             'label' => $this->trans('form.required_data')
         ]));
 
-        $requiredData->addChild($builder->getElement('select', [
-            'name'    => 'code',
-            'label'   => $this->trans('user.code'),
-            'options' => $this->repository->getCurrenciesToSelect()
+        $requiredData->addChild($builder->getElement('text_field', [
+            'name'    => 'firstName',
+            'label'   => $this->trans('user.firstName'),
+        ]));
+
+        $requiredData->addChild($builder->getElement('text_field', [
+            'name'    => 'lastName',
+            'label'   => $this->trans('user.lastName'),
+        ]));
+
+        $requiredData->addChild($builder->getElement('text_field', [
+            'name'    => 'username',
+            'label'   => $this->trans('user.username'),
+        ]));
+
+        $requiredData->addChild($builder->getElement('text_field', [
+            'name'    => 'email',
+            'label'   => $this->trans('user.email'),
         ]));
 
         $form->addFilter('no_code');

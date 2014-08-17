@@ -38,8 +38,10 @@ class LoadUserData extends AbstractDataFixture implements FixtureInterface, Orde
         $manager->persist($role);
 
         $user = new User();
+        $user->setFirstName('John');
+        $user->setLastName('Doe');
         $user->setUsername('admin');
-        $user->setEmail('admin@wellcommerce.org');
+        $user->setEmail('admin@domain.org');
         $user->setIsActive(1);
         $password = password_hash('admin', PASSWORD_BCRYPT, ['cost' => 12]);
         $user->setPassword($password);

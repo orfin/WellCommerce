@@ -16,7 +16,7 @@
         <div id="top-menu">
             <ul>
                 <li>
-                    <a href="{{ path('admin.user.edit', {"id": app.user.id}) }}">{{ app.user.username }}</a>
+                    <a href="{{ path('admin.user.edit', {"id": app.user.id}) }}">{{ app.user.firstName }} {{ app.user.lastName }}</a>
                     (<a href="{{ path('admin.user.logout') }}">{% trans %}Logout{% endtrans %}</a>)
                 </li>
                 <li>

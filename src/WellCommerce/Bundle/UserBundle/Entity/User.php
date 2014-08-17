@@ -36,6 +36,16 @@ class User implements \Serializable, UserInterface, EquatableInterface
     private $id;
 
     /**
+     * @ORM\Column(type="string", length=64, unique=false)
+     */
+    private $firstName;
+
+    /**
+     * @ORM\Column(type="string", length=64, unique=false)
+     */
+    private $lastName;
+
+    /**
      * @ORM\Column(type="string", length=25, unique=true)
      */
     private $username;
@@ -75,6 +85,46 @@ class User implements \Serializable, UserInterface, EquatableInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Returns first name
+     *
+     * @return mixed
+     */
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * Sets first name
+     *
+     * @param $firstName
+     */
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
+    }
+
+    /**
+     * Returns last name
+     *
+     * @return mixed
+     */
+    public function getLastName()
+    {
+        return $this->lastName;
+    }
+
+    /**
+     * Sets first name
+     *
+     * @param $lastName
+     */
+    public function setLastName($lastName)
+    {
+        $this->lastName = $lastName;
     }
 
     /**
