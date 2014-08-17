@@ -4,7 +4,13 @@ fos_js_routing:
 _bazinga_jstranslation:
     resource: "@BazingaJsTranslationBundle/Resources/config/routing/routing.yml"
 
-
+remove_trailing_slash:
+    path: /{url}
+    defaults: { _controller: WellCommerceCoreBundle:Redirecting:removeTrailingSlash }
+    requirements:
+        url: .*/$
+    methods: [GET]
+    
 wellcommerce_user:
     resource: "@WellCommerceUserBundle/Resources/config/routing.xml"
     prefix:   /admin/user
@@ -56,4 +62,11 @@ wellcommerce_tax:
 wellcommerce_contact:
     resource: "@WellCommerceContactBundle/Resources/config/routing.xml"
     prefix:   /admin/configuration/contact
+
+root:
+    path: /admin
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: admin.user.index
+        permanent: true
 
