@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\UserBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Security\Core\SecurityContextInterface;
@@ -58,5 +59,26 @@ class UserController extends AbstractAdminController
 
     public function loginCheckAction(Request $request)
     {
+    }
+
+    public function deleteAction($id)
+    {
+        $user = $this->getUser();
+        if ($user->getId() == $id) {
+            return new JsonResponse(['error' => 'You cannot delete your own admin account.']);
+        }
+
+        $em = $this->getEntityManager();
+
+        try {
+            $resource = $this->repository->find($id);
+            $em->remove($resource);
+        } catch (\Exception $e) {
+            return new JsonResponse(['error' => $e->getMessage()]);
+        }
+
+        $em->flush();
+
+        return new JsonResponse(['success' => true]);
     }
 }

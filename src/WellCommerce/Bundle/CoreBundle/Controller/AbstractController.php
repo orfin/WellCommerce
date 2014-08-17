@@ -49,4 +49,14 @@ abstract class AbstractController extends AbstractContainer
     {
         return $this->get('datagrid_builder')->create($dataGrid);
     }
+
+    /**
+     * Returns current user
+     *
+     * @return \WellCommerce\Bundle\UserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->get('security.context')->getToken()->getUser();
+    }
 }
