@@ -63,6 +63,10 @@ wellcommerce_contact:
     resource: "@WellCommerceContactBundle/Resources/config/routing.xml"
     prefix:   /admin/configuration/contact
 
+wellcommerce_web:
+    resource: "@WellCommerceWebBundle/Resources/config/routing.xml"
+    prefix:   /
+
 root:
     path: /admin
     defaults:

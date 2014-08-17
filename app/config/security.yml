@@ -4,7 +4,7 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         admin:
-            pattern:   ^/
+            pattern:   ^/admin
             anonymous: ~
             form_login:
                 login_path: admin.user.login

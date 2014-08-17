@@ -35,6 +35,7 @@ before_script:
     - chmod -R 777 app/cache app/logs
     - php app/console assets:install
     - php app/console bazinga:js-translation:dump web/js
+    - php app/console fos:js-routing:dump
     - php app/console assetic:dump
 
     - "sh -e /etc/init.d/xvfb start"
