@@ -14,8 +14,8 @@ class HomePageCest
     // tests
     public function tryToTest(AcceptanceTester $I)
     {
-        $I->wantTo('Check if home page triggers error');
+        $I->wantTo('Check if home page contains readme');
         $I->amOnPage('/');
-        $I->see('No route found for');
+        $I->see('What is WellCommerce?');
     }
 }
