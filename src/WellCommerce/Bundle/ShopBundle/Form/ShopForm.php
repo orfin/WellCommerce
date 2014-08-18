@@ -51,7 +51,7 @@ class ShopForm extends AbstractForm implements FormInterface
         $requiredData->addChild($builder->getElement('select', [
             'name'        => 'company',
             'label'       => $this->trans('shop.company'),
-            'options'     => $this->get('company.repository')->allToSelect(),
+            'options'     => $this->get('company.repository')->getCollectionToSelect(),
             'transformer' => new EntityToIdentifierTransformer($this->get('company.repository'))
         ]));
 
