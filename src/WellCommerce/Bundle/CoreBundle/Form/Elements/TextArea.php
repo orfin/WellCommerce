@@ -24,7 +24,6 @@ use Symfony\Component\PropertyAccess\PropertyPath;
  */
 class TextArea extends TextField implements ElementInterface
 {
-
     /**
      * {@inheritdoc}
      */

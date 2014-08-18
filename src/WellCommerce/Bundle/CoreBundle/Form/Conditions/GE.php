@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Conditions;
 
-use WellCommerce\Bundle\CoreBundle\ConditionInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Condition;
 
 /**
