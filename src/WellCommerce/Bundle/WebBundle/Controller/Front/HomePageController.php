@@ -23,13 +23,15 @@ use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
  *
  * @package WellCommerce\Bundle\UnitBundle\Controller
  * @author  Adam Piotrowski <adam@wellcommerce.org>
+ *
+ * @Template()
  */
 class HomePageController extends Controller
 {
 
     public function indexAction(Request $request)
     {
-        return $this->render('WellCommerceWebBundle:Front/HomePage:index.html.twig');
+        return [];
     }
 
 }
