@@ -12,12 +12,11 @@ WellCommerce is an e-commerce platform for PHP 5.4+. It can be used to develop a
 
 The code is still hot but it only gets cooler :). Here are most important things which we have used to create this solution:
 
-- Symfony2 Full-stack framework
-- Doctrine2 ORM
-- Codeception PHP testing framework
-- Twig template engine
-- Assetic
-- Twitter Bootstrap 3 as a base HTML framework
+- [Symfony2 Full-stack framework][1]
+- [Doctrine2 ORM][2]
+- [Codeception PHP testing framework][3]
+- [Twig template engine][4]
+- [Twitter Bootstrap 3 as a base HTML framework][5]
 
 Requirements
 ------------
@@ -27,10 +26,28 @@ WellCommerce is only supported on PHP 5.4 and up.
 Installation
 ------------
 
-information will be revealed with first public beta, expected to be released 20.09.2014.
+As WellCommerce uses [Composer][6] to manage its dependencies, the recommended way
+to create a new project is to use it.
+
+If you don't have Composer yet, download it following the instructions on
+http://getcomposer.org/ or just run the following command:
+
+    curl -s http://getcomposer.org/installer | php
+
+Then, use the `create-project` command to generate a new WellCommerce application:
+
+    php composer.phar create-project wellcommerce/wellcommerce -s dev path/
+
+Composer will install WellCommerce and all its dependencies under the `path/` directory.
 
 Contributors
 ------------
 
 Every contributor is WellComme :). If you'd like to join us, please send a message at contributors@wellcommerce.org
 
+[1]:  http://symfony.com
+[2]:  http://doctrine-project.org
+[3]:  http://codeception.com
+[4]:  http://twig.sensiolabs.org
+[5]:  http://getbootstrap.com
+[6]:  http://getcomposer.org/
