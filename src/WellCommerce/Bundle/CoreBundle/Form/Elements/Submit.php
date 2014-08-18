@@ -62,15 +62,24 @@ class Submit extends Node implements ElementInterface
         return $attributes;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getValue()
     {
         return '';
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function populate($value)
     {
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setPropertyPath()
     {
         $this->attributes['property_path'] = null;
@@ -84,8 +93,12 @@ class Submit extends Node implements ElementInterface
         return null;
     }
 
-    public function setDefaults($data){
-
+    /**
+     * {@inheritdoc}
+     */
+    public function setDefaults($data)
+    {
+        // submit element does not needs to be populated
     }
 
 }

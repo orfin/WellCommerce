@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
 /**
  * Class ProgressIndicator
  *
@@ -20,39 +22,43 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
  */
 class ProgressIndicator extends Field implements ElementInterface
 {
-
-    public $datagrid;
-
-    protected static $_filesLoadHandlerSet = false;
-    protected $_jsFunction;
-
-    public function __construct($attributes)
+    /**
+     * {@inheritdoc}
+     */
+    public function configureAttributes(OptionsResolverInterface $resolver)
     {
-        parent::__construct($attributes);
-        $this->attributes['load']
-            = App::getRegistry()->xajaxInterface->registerFunction(array(
-            'ProgressIndicator_OnLoad_' . $this->_id,
-            $this->attributes['load'][0],
-            $this->attributes['load'][1]
-        ));
-        $this->attributes['process']
-            = App::getRegistry()->xajaxInterface->registerFunction(array(
-            'ProgressIndicator_OnProcess_' . $this->_id,
-            $this->attributes['process'][0],
-            $this->attributes['process'][1]
-        ));
-        $this->attributes['success']
-            = App::getRegistry()->xajaxInterface->registerFunction(array(
-            'ProgressIndicator_OnSuccess_' . $this->_id,
-            $this->attributes['success'][0],
-            $this->attributes['success'][1]
-        ));
+        $resolver->setRequired([
+            'name',
+            'label',
+            'chunks',
+            'load',
+            'process',
+            'success',
+            'preventSubmit',
+        ]);
+
+        $resolver->setOptional([
+            'comment',
+            'error',
+        ]);
+
+        $resolver->setAllowedTypes([
+            'name'          => 'string',
+            'label'         => 'string',
+            'chunks'        => 'int',
+            'load'          => 'string',
+            'process'       => 'string',
+            'success'       => 'string',
+            'preventSubmit' => 'bool',
+        ]);
     }
 
-
+    /**
+     * {@inheritdoc}
+     */
     public function prepareAttributesJs()
     {
-        $attributes = Array(
+        $attributes = [
             $this->formatAttributeJs('name', 'sName'),
             $this->formatAttributeJs('label', 'sLabel'),
             $this->formatAttributeJs('comment', 'sComment'),
@@ -66,9 +72,8 @@ class ProgressIndicator extends Field implements ElementInterface
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
             $this->formatDefaultsJs()
-        );
+        ];
 
         return $attributes;
     }
-
 }

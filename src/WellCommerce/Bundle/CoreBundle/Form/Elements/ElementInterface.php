@@ -64,11 +64,33 @@ interface ElementInterface
 
     /**
      * Returns field value
+     *
+     * @return mixed
      */
     public function getValue();
 
     /**
      * Handles submit request
+     *
+     * @return void
      */
     public function handleRequest($data);
+
+    /**
+     * Populates the form element with values
+     *
+     * @param mixed $value
+     *
+     * @return void
+     */
+    public function populate($value);
+
+    /**
+     * Sets default data for form element
+     *
+     * @param $data
+     *
+     * @return void
+     */
+    public function setDefaults($data);
 } 
