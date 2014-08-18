@@ -47,7 +47,8 @@ class AppKernel extends Kernel
             new WellCommerce\Bundle\ClientBundle\WellCommerceClientBundle(),
             new WellCommerce\Bundle\LocaleBundle\WellCommerceLocaleBundle(),
             new WellCommerce\Bundle\ShopBundle\WellCommerceShopBundle(),
-            new WellCommerce\Bundle\UserBundle\WellCommerceUserBundle()
+            new WellCommerce\Bundle\UserBundle\WellCommerceUserBundle(),
+            new WellCommerce\Bundle\LayoutBundle\WellCommerceLayoutBundle()
         ];
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

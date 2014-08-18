@@ -17,19 +17,23 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
+use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
+use WellCommerce\Bundle\LayoutBundle\Theme\ShopTheme;
 
 /**
  * Class UnitController
  *
  * @package WellCommerce\Bundle\UnitBundle\Controller
  * @author  Adam Piotrowski <adam@wellcommerce.org>
+ *
+ * @Template()
  */
-class HomePageController extends Controller
+class HomePageController extends Controller implements FrontControllerInterface
 {
 
     public function indexAction(Request $request)
     {
-        return $this->render('WellCommerceWebBundle:Front/HomePage:index.html.twig');
+        return [];
     }
 
 }
