@@ -51,20 +51,7 @@ class FileLocator extends BaseFileLocator
         $this->path          = $path;
         $this->shopTheme     = $shopTheme;
         $this->activeTheme   = $this->shopTheme->getCurrentTheme();
-
-        $defaultPathPatterns = [
-            'app_resource'        => [
-                '%app_path%/themes/%current_theme%/%template%',
-                '%app_path%/views/%template%',
-            ],
-            'bundle_resource'     => [
-                '%app_path%/themes/%current_theme%/%template%',
-            ],
-            'bundle_resource_dir' => [
-            ]
-        ];
-
-        $this->pathPatterns = $defaultPathPatterns;
+        $this->pathPatterns  = $this->shopTheme->getPathPatterns();
 
         $this->setCurrentTheme($this->activeTheme);
     }

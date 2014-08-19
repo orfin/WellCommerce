@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="media.controller.admin.class">WellCommerce\Bundle\MediaBundle\Controller\Admin\MediaController</parameter>
+        <parameter key="media.repository.class">WellCommerce\Bundle\MediaBundle\Repository\MediaRepository</parameter>
+        <parameter key="media.datagrid.class">WellCommerce\Bundle\MediaBundle\DataGrid\MediaDataGrid</parameter>
+        <parameter key="media.datagrid.configurator.class">WellCommerce\Bundle\MediaBundle\DataGrid\MediaDataGridConfigurator</parameter>
+        <parameter key="media.form.class">WellCommerce\Bundle\MediaBundle\Form\MediaForm</parameter>
+        <parameter key="media.listener.class">WellCommerce\Bundle\MediaBundle\EventListener\MediaListener</parameter>
+        <parameter key="media.manager.class">WellCommerce\Bundle\MediaBundle\Manager\MediaManager</parameter>
+    </parameters>
+
+    <services>
+        <service id="media.controller.admin" class="%media.controller.admin.class%">
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="admin_manager"/>
+            <argument type="service" id="media.repository"/>
+            <argument type="service" id="media.datagrid"/>
+            <argument type="service" id="media.form"/>
+        </service>
+
+        <service id="media.repository" class="%media.repository.class%" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceMediaBundle:Media</argument>
+            <call method="setCurrentLocale">
+                <argument type="expression">service('request').getLocale()</argument>
+            </call>
+        </service>
+
+        <service id="media.datagrid" class="%media.datagrid.class%">
+            <configurator service="media.datagrid.configurator" method="configure" />
+        </service>
+
+        <service id="media.datagrid.configurator" class="%media.datagrid.configurator.class%">
+            <argument key="identifier">media</argument>
+            <argument type="service" id="datagrid_manager"/>
+            <argument type="service" id="media.repository"/>
+        </service>
+
+        <service id="media.form" class="%media.form.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="media.listener" class="%media.listener.class%">
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="translator"/>
+            <argument type="service" id="router"/>
+            <tag name="kernel.event_subscriber" />
+        </service>
+    </services>
+</container>

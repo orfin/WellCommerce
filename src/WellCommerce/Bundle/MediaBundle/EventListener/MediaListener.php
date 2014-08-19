@@ -9,15 +9,11 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Bundle\LayoutBundle\EventListener;
+namespace WellCommerce\Bundle\MediaBundle\EventListener;
 
-use Symfony\Component\BrowserKit\Response;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
-use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Routing\RouterInterface;
@@ -25,16 +21,14 @@ use Symfony\Component\Translation\TranslatorInterface;
 use WellCommerce\Bundle\AdminMenuBundle\Builder\AdminMenuItem;
 use WellCommerce\Bundle\AdminMenuBundle\Event\AdminMenuInitEvent;
 use WellCommerce\Bundle\CoreBundle\Event\AdminMenuEvent;
-use WellCommerce\Bundle\CoreBundle\Helper\Helper;
-use WellCommerce\Bundle\LayoutBundle\Theme\ShopTheme;
 
 /**
- * Class LayoutListener
+ * Class MediaListener
  *
- * @package WellCommerce\Bundle\LayoutBundle\EventListener
+ * @package WellCommerce\Media\EventListener
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LayoutListener implements EventSubscriberInterface
+class MediaListener implements EventSubscriberInterface
 {
     /**
      * @var \Symfony\Component\DependencyInjection\ContainerInterface
@@ -51,21 +45,11 @@ class LayoutListener implements EventSubscriberInterface
      */
     private $router;
 
-    /**
-     * @var \WellCommerce\Bundle\LayoutBundle\Theme\ShopTheme
-     */
-    private $shopTheme;
-
-    public function __construct(
-        ContainerInterface $container,
-        TranslatorInterface $translator,
-        RouterInterface $router,
-        ShopTheme $shopTheme
-    ) {
+    public function __construct(ContainerInterface $container, TranslatorInterface $translator, RouterInterface $router)
+    {
         $this->container  = $container;
         $this->translator = $translator;
         $this->router     = $router;
-        $this->shopTheme  = $shopTheme;
     }
 
     /**
@@ -78,23 +62,12 @@ class LayoutListener implements EventSubscriberInterface
         $builder = $event->getBuilder();
 
         $builder->add(new AdminMenuItem([
-            'id'         => 'layout_page',
-            'name'       => $this->translator->trans('menu.layout.layout_page'),
-            //            'link'       => $this->router->generate('admin.layout_page.index'),
-            'path'       => '[menu][layout][layout_page]',
+            'id'         => 'media',
+            'name'       => $this->translator->trans('menu.cms.media'),
+            'link'       => $this->router->generate('admin.media.index'),
+            'path'       => '[menu][cms][media]',
             'sort_order' => 10
         ]));
-    }
-
-    protected function getShopThemeByHost($host)
-    {
-        return $host;
-    }
-
-    public function onKernelController(FilterControllerEvent $event)
-    {
-        $host = $event->getRequest()->server->get('SERVER_NAME');
-        $this->shopTheme->setCurrentTheme($this->getShopThemeByHost($host));
     }
 
     /**
@@ -103,8 +76,7 @@ class LayoutListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            AdminMenuInitEvent::ADMIN_MENU_INIT_EVENT => 'onAdminMenuInitEvent',
-            KernelEvents::CONTROLLER                  => ['onKernelController', -256],
+            AdminMenuInitEvent::ADMIN_MENU_INIT_EVENT => 'onAdminMenuInitEvent'
         ];
     }
 }

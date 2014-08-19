@@ -32,6 +32,7 @@ class AppKernel extends Kernel
             new Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle(),
             // WellCommerce bundles
             new WellCommerce\Bundle\WebBundle\WellCommerceWebBundle(),
+            new WellCommerce\Bundle\MediaBundle\WellCommerceMediaBundle(),
             new WellCommerce\Bundle\CurrencyBundle\WellCommerceCurrencyBundle(),
             new WellCommerce\Bundle\AvailabilityBundle\WellCommerceAvailabilityBundle(),
             new WellCommerce\Bundle\DelivererBundle\WellCommerceDelivererBundle(),

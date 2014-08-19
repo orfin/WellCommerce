@@ -27,17 +27,6 @@ class ShopTheme
     protected $kernel;
     protected $path;
 
-    public function __construct(KernelInterface $kernel, $path = null)
-    {
-        $this->kernel = $kernel;
-        $this->path   = $path;
-    }
-
-    public function getKernel()
-    {
-        return $this->kernel;
-    }
-
     public function getCurrentTheme()
     {
         return $this->activeTheme;
@@ -46,5 +35,21 @@ class ShopTheme
     public function setCurrentTheme($activeTheme)
     {
         $this->activeTheme = $activeTheme;
+    }
+
+    public function getPathPatterns()
+    {
+        return [
+            'app_resource'        => [
+                '%app_path%/themes/%current_theme%/%template%',
+                '%app_path%/views/%template%',
+            ],
+            'bundle_resource'     => [
+                '%app_path%/themes/%current_theme%/%template%',
+            ],
+            'bundle_resource_dir' => [
+            ]
+        ];
+
     }
 } 
