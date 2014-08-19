@@ -185,6 +185,12 @@
             </call>
         </service>
 
+        <service id="form.element.image" class="%form.element.image.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
         <service id="form.element.form" class="%form.element.form.class%" scope="prototype">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>

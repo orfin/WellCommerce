@@ -39,19 +39,9 @@ class MediaForm extends AbstractForm implements FormInterface
             'label' => $this->trans('form.required_data.label')
         ]));
 
-        $languageData = $requiredData->addChild($builder->getElement('fieldset_language', [
-            'name'      => 'translations',
-            'label'     => $this->trans('form.required_data.language_data.label')
-        ]));
-
-        $languageData->addChild($builder->getElement('text_field', [
-            'name'  => 'name',
-            'label' => $this->trans('media.language_data.name.label'),
-            'rules' => [
-                $builder->getRule('required', [
-                    'message' => $this->trans('Name is required')
-                ]),
-            ]
+        $requiredData->addChild($builder->getElement('image', [
+            'name'  => 'required_data',
+            'label' => $this->trans('form.required_data.label')
         ]));
 
         $form->addFilter('no_code');

@@ -88,7 +88,7 @@ class File extends Field implements ElementInterface
 
     public function prepareAttributesJs()
     {
-        $attributes = Array(
+        $attributes = [
             $this->formatAttributeJs('name', 'sName'),
             $this->formatAttributeJs('label', 'sLabel'),
             $this->formatAttributeJs('comment', 'sComment'),
@@ -106,7 +106,7 @@ class File extends Field implements ElementInterface
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
             $this->formatDefaultsJs()
-        );
+        ];
 
         return $attributes;
     }

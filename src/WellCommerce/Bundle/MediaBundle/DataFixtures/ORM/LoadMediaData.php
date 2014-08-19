@@ -30,14 +30,6 @@ class LoadMediaData implements FixtureInterface
      */
     public function load(ObjectManager $manager)
     {
-        $media = new Media();
-        $media->translate('pl')->setName('szt');
-        $media->translate('en')->setName('pcs');
-        $media->translate('de')->setName('pcs');
-        $media->translate('fr')->setName('pcs');
-        $media->mergeNewTranslations();
-
-        $manager->persist($media);
-        $manager->flush();
+        
     }
 }
