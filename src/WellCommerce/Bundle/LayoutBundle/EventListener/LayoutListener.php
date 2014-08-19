@@ -59,11 +59,13 @@ class LayoutListener implements EventSubscriberInterface
     public function __construct(
         ContainerInterface $container,
         TranslatorInterface $translator,
-        RouterInterface $router
+        RouterInterface $router,
+        ShopTheme $shopTheme
     ) {
         $this->container  = $container;
         $this->translator = $translator;
         $this->router     = $router;
+        $this->shopTheme  = $shopTheme;
     }
 
     /**
@@ -84,6 +86,11 @@ class LayoutListener implements EventSubscriberInterface
         ]));
     }
 
+    public function onKernelController(FilterControllerEvent $event)
+    {
+        $this->shopTheme->setCurrentTheme('web');
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -91,6 +98,7 @@ class LayoutListener implements EventSubscriberInterface
     {
         return [
             AdminMenuInitEvent::ADMIN_MENU_INIT_EVENT => 'onAdminMenuInitEvent',
+            KernelEvents::CONTROLLER                  => ['onKernelController', -256],
         ];
     }
 }

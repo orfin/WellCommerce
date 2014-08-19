@@ -42,4 +42,9 @@ class ShopTheme
     {
         return $this->activeTheme;
     }
+
+    public function setCurrentTheme($activeTheme)
+    {
+        $this->activeTheme = $activeTheme;
+    }
 } 
