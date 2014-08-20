@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\MediaBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
@@ -25,5 +26,15 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
  */
 class MediaController extends AbstractAdminController
 {
+    public function addAction(Request $request)
+    {
+        $uploader = $this->getUploader();
+        $files    = $uploader->getFiles($request->files);
 
+        print_r($request);die();
+    }
+
+    protected function getUploader(){
+        return $this->get('media.uploader');
+    }
 }

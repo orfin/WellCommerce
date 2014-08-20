@@ -189,7 +189,7 @@ class AbstractContainer extends ContainerAware
      */
     final protected function getUploader()
     {
-        return $this->container->get('uploader');
+        return $this->container->get('media.uploader');
     }
 
     /**
