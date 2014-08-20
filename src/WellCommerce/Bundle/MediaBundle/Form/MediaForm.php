@@ -40,8 +40,9 @@ class MediaForm extends AbstractForm implements FormInterface
         ]));
 
         $requiredData->addChild($builder->getElement('image', [
-            'name'  => 'required_data',
-            'label' => $this->trans('form.required_data.label')
+            'name'     => 'required_data',
+            'label'    => $this->trans('form.required_data.label'),
+            'datagrid' => $this->get('media.datagrid')
         ]));
 
         $form->addFilter('no_code');

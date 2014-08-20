@@ -13306,6 +13306,7 @@ var oDefaults = {
 	},
 	aoOptions: [],
 	sDefault: '',
+	asDefaults: [],
 	aoRules: [],
 	sComment: '',
 	sUploadUrl: '',
@@ -13727,8 +13728,12 @@ var GFormImage = GCore.ExtendClass(GFormFile, function() {
 		oRequest.starting_from = 0;
 		oRequest.order_by = 'id';
 		oRequest.order_dir = 'desc';
-		gThis.m_oOptions.fLoadFiles(oRequest, GCallback(gThis._DefaultsLoaded));
+		gThis.LoadFiles(oRequest);
 	};
+	
+	gThis.LoadFiles = function(oRequest) {
+		gThis.m_gFilesDatagrid.MakeRequest(Routing.generate(gThis.m_oOptions.sLoadRoute), oRequest, gThis._DefaultsLoaded);
+    };
 	
 	gThis._DefaultsLoaded = function(oData) {
 		for (var i = 0; i < oData.rows.length; i++) {
@@ -13760,9 +13765,7 @@ var GFormImage = GCore.ExtendClass(GFormFile, function() {
 						gThis._LoadDefaults(GCore.Duplicate(true, oRequest));
 						gThis.m_bLoadedDefaults = true;
 					}
-					gThis.m_oOptions.fLoadFiles(oRequest, GCallback(function(eEvent){
-		                GF_Datagrid.ProcessIncomingData(eEvent);
-		            }));
+					gThis.m_gFilesDatagrid.MakeRequest(Routing.generate(gThis.m_oOptions.sLoadRoute), oRequest, GF_Datagrid.ProcessIncomingData);
 				},
 				loaded: gThis._OnDataLoaded,
 				process: gThis._ProcessFile,

@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\MediaBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use WellCommerce\Bundle\CompanyBundle\Entity\Company;
 use WellCommerce\Bundle\MediaBundle\Entity\Media;
 
 /**
@@ -30,6 +29,6 @@ class LoadMediaData implements FixtureInterface
      */
     public function load(ObjectManager $manager)
     {
-        
+
     }
 }

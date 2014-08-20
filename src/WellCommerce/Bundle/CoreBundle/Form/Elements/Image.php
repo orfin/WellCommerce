@@ -12,8 +12,9 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use WellCommerce\Bundle\MediaBundle\DataGrid\MediaDataGrid;
 
 /**
  * Class Image
@@ -30,11 +31,14 @@ class Image extends File implements ElementInterface
     {
         $resolver->setRequired([
             'name',
-            'label'
+            'label',
+            'property_path',
+            'datagrid',
+            'delete_handler',
+            'load_handler',
         ]);
 
         $resolver->setOptional([
-            'comment',
             'comment',
             'repeat_min',
             'repeat_max',
@@ -50,31 +54,92 @@ class Image extends File implements ElementInterface
             'session_id',
             'file_types',
             'file_types_description',
-            'delete_handler',
-            'load_handler',
-            'property_path',
             'dependencies',
             'filters',
-            'rules'
+            'rules',
+            'transformer',
+            'photos'
         ]);
 
         $resolver->setDefaults([
             'repeat_min'             => 0,
             'repeat_max'             => ElementInterface::INFINITE,
             'limit'                  => 1000,
-            'session_name'           => $this->container->get('request')->getSession()->get('id'),
-            'session_id'             => $this->container->get('request')->getSession()->get('id'),
+            'session_name'           => session_name(),
+            'session_id'             => session_id(),
             'file_types_description' => 'file_types_description',
             'file_types'             => ['jpg', 'jpeg', 'png', 'gif'],
             'property_path'          => null,
             'dependencies'           => [],
             'filters'                => [],
             'rules'                  => [],
+            'photos'                 => [],
+            'load_handler'           => function (Options $options) {
+                    $eventHandlers      = $options->get('datagrid')->getManager()->getOptions()->getEventHandlers();
+
+                    return $eventHandlers->get('load')->get('route');
+                },
+            'delete_handler'           => function (Options $options) {
+                    $eventHandlers      = $options->get('datagrid')->getManager()->getOptions()->getEventHandlers();
+
+                    return $eventHandlers->get('delete_row')->get('route');
+                }
         ]);
 
         $resolver->setAllowedTypes([
+            'name'                   => 'string',
+            'label'                  => 'string',
+            'dependencies'           => 'array',
+            'filters'                => 'array',
+            'rules'                  => 'array',
+            'property_path'          => ['null', 'object'],
+            'transformer'            => ['null', 'object'],
+            'datagrid'               => ['object'],
+            'session_name'           => 'string',
             'file_types_description' => 'string',
-            'file_types'             => 'array'
+            'file_types'             => 'array',
+            'photos'                 => 'array'
         ]);
+    }
+
+    /**
+     * Returns a DataGrid bound to image field
+     *
+     * @return MediaDataGrid
+     * @throws \Exception
+     */
+    private function getDataGrid()
+    {
+        if (!$this->attributes['datagrid'] instanceof MediaDataGrid) {
+            throw new \Exception('Wrong DataGrid instance for image field. Expected MediaDataGrid');
+        }
+
+        return $this->attributes['datagrid'];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function prepareAttributesJs()
+    {
+        return [
+            $this->formatAttributeJs('name', 'sName'),
+            $this->formatAttributeJs('label', 'sLabel'),
+            $this->formatAttributeJs('comment', 'sComment'),
+            $this->formatAttributeJs('error', 'sError'),
+            $this->formatAttributeJs('main_id', 'sMainId'),
+            $this->formatAttributeJs('visibility_change', 'bVisibilityChangeable'),
+            $this->formatAttributeJs('upload_url', 'sUploadUrl'),
+            $this->formatAttributeJs('session_name', 'sSessionName'),
+            $this->formatAttributeJs('session_id', 'sSessionId'),
+            $this->formatAttributeJs('file_types', 'asFileTypes'),
+            $this->formatAttributeJs('file_types_description', 'sFileTypesDescription'),
+            $this->formatAttributeJs('delete_handler', 'sDeleteRoute'),
+            $this->formatAttributeJs('load_handler', 'sLoadRoute'),
+            $this->formatRepeatableJs(),
+            $this->formatRulesJs(),
+            $this->formatDependencyJs(),
+            $this->formatDefaultsJs()
+        ];
     }
 }

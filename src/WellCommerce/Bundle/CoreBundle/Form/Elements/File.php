@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
 
 /**
  * Class File
@@ -23,50 +24,44 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class File extends Field implements ElementInterface
 {
-    public $datagrid;
-
-    protected $jsFunction;
-
-    public function __construct($attributes, ContainerInterface $container)
-    {
-        parent::__construct($attributes);
-
-        $this->container                  = $container;
-        $datagridBuilder                  = $container->get('datagrid_builder');
-        $this->datagrid                   = $datagridBuilder->create($container->get('file.datagrid'));
-        $this->jsFunction                 = 'LoadFiles_' . $this->_id;
-        $this->attributes['load_handler'] = 'xajax_' . $this->jsFunction;
-
-        $this->container->get('xajax_manager')->registerFunction([
-            $this->jsFunction,
-            $this,
-            'doLoadFilesForDatagrid_' . $this->_id
-        ]);
-    }
-
     /**
      * {@inheritdoc}
      */
     public function configureAttributes(OptionsResolverInterface $resolver)
     {
+        $resolver->setRequired([
+            'name',
+            'label',
+            'property_path',
+            'datagrid'
+        ]);
+
+        $resolver->setOptional([
+            'filters',
+            'rules',
+            'transformer'
+        ]);
+
         $resolver->setDefaults([
-            'session_name' => session_name(),
-            'session_id'   => session_id(),
+            'session_name'  => session_name(),
+            'session_id'    => session_id(),
+            'filters'       => [],
+            'rules'         => [],
+            'property_path' => null,
+            'transformer'   => null
         ]);
 
         $resolver->setAllowedTypes([
-            'session_name' => 'string',
+            'name'          => 'string',
+            'label'         => 'string',
+            'dependencies'  => 'array',
+            'filters'       => 'array',
+            'rules'         => 'array',
+            'property_path' => ['null', 'object'],
+            'transformer'   => ['null', 'object'],
+            'datagrid'      => ['object'],
+            'session_name'  => 'string',
         ]);
-    }
-
-    public function __call($function, $arguments)
-    {
-        if (substr($function, 0, strlen('doLoadFilesForDatagrid_')) == 'doLoadFilesForDatagrid_') {
-            return call_user_func_array([
-                $this,
-                'doLoadFilesForDatagrid'
-            ], $arguments);
-        }
     }
 
     public function doLoadFilesForDatagrid($request)
@@ -86,9 +81,12 @@ class File extends Field implements ElementInterface
         return $this->datagrid->load($request);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function prepareAttributesJs()
     {
-        $attributes = [
+        return [
             $this->formatAttributeJs('name', 'sName'),
             $this->formatAttributeJs('label', 'sLabel'),
             $this->formatAttributeJs('comment', 'sComment'),
@@ -107,8 +105,6 @@ class File extends Field implements ElementInterface
             $this->formatDependencyJs(),
             $this->formatDefaultsJs()
         ];
-
-        return $attributes;
     }
 
 }
