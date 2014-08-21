@@ -1,9 +1,0 @@
-{% extends 'layout_box.twig' %}
-{% block content %}
-    <ul>
-        {% for category in categories %}
-            <li><a href="{{ category.link }}">{{ category.name }}</a></li>
-        {% endfor %}
-    </ul>
-{% endblock %}
-

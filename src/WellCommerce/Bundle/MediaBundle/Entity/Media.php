@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\MediaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -103,6 +104,62 @@ class Media
     public function setPath($path)
     {
         $this->path = $path;
+    }
+
+    /**
+     * Sets file
+     *
+     * @param UploadedFile $file
+     */
+    public function setFile(UploadedFile $file = null)
+    {
+        $this->file = $file;
+        if (isset($this->path)) {
+            $this->temp = $this->path;
+            $this->path = null;
+        } else {
+            $this->path = 'initial';
+        }
+    }
+
+    /**
+     * Returns absolute path to upload dir
+     *
+     * @return null|string
+     */
+    public function getAbsolutePath()
+    {
+        return null === $this->path ? null : $this->getUploadRootDir() . '/' . $this->path;
+    }
+
+    /**
+     * Returns web path to upload dir
+     *
+     * @return null|string
+     */
+    public function getWebPath()
+    {
+        return null === $this->path ? null : $this->getUploadDir() . '/' . $this->path;
+    }
+
+    /**
+     * Returns full path to upload dir
+     *
+     * @return string
+     */
+    protected function getUploadRootDir()
+    {
+        return __DIR__ . '/../../../../web/' . $this->getUploadDir();
+    }
+
+    /**
+     * Returns file to uploads dir
+     *
+     * @return string
+     */
+    protected function getUploadDir()
+    {
+        return 'upload/media';
     }
 }
 

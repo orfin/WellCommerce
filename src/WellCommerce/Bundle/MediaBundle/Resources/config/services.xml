@@ -10,7 +10,7 @@
         <parameter key="media.datagrid.configurator.class">WellCommerce\Bundle\MediaBundle\DataGrid\MediaDataGridConfigurator</parameter>
         <parameter key="media.form.class">WellCommerce\Bundle\MediaBundle\Form\MediaForm</parameter>
         <parameter key="media.listener.class">WellCommerce\Bundle\MediaBundle\EventListener\MediaListener</parameter>
-        <parameter key="media.manager.class">WellCommerce\Bundle\MediaBundle\Manager\MediaManager</parameter>
+        <parameter key="media.uploader.class">WellCommerce\Bundle\MediaBundle\Uploader\MediaUploader</parameter>
     </parameters>
 
     <services>
@@ -27,6 +27,10 @@
             <call method="setCurrentLocale">
                 <argument type="expression">service('request').getLocale()</argument>
             </call>
+        </service>
+
+        <service id="media.uploader" class="%media.uploader.class%">
+            <argument type="service" id="media.repository" />
         </service>
 
         <service id="media.datagrid" class="%media.datagrid.class%">

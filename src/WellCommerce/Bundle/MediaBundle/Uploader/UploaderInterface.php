@@ -25,12 +25,16 @@ interface UploaderInterface
     /**
      * Checks whether passed request object is valid
      *
+     * @param Request $request
+     *
      * @return mixed
      */
-    public function check();
+    public function check(Request $request);
 
     /**
      * Processes the request object
+     *
+     * @param Request $request
      *
      * @return mixed
      */

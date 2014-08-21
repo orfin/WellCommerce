@@ -1,9 +1,0 @@
-{% extends 'layout.twig' %}
-{% block content %}
-    {% for column in columns %}
-    <div class="layout-column" id="layout-column-{{ column.id }}" style="width: {{ column.width }}px">
-        {% for box in column.boxes %}
-        {% endfor %}
-    </div>
-    {% endfor %}
-{% endblock %}
