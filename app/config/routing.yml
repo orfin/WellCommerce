@@ -4,6 +4,9 @@ fos_js_routing:
 _bazinga_jstranslation:
     resource: "@BazingaJsTranslationBundle/Resources/config/routing/routing.yml"
 
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.xml"
+
 remove_trailing_slash:
     path: /{url}
     defaults: { _controller: WellCommerceCoreBundle:Redirecting:removeTrailingSlash }
