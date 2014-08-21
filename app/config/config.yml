@@ -71,7 +71,10 @@ doctrine_migrations:
     name: WellCommerce Migrations
 
 liip_imagine:
-    data_root: %kernel.root_dir%/../web/media/images
+    loaders:
+        default:
+            filesystem:
+                data_root: %kernel.root_dir%/../web/media/images
     filter_sets:
         image_smallest:
             filters:
