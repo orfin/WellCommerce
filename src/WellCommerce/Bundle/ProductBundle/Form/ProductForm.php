@@ -15,6 +15,7 @@ use WellCommerce\Bundle\CoreBundle\Form\AbstractForm;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\EntityToIdentifierTransformer;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
 use WellCommerce\Bundle\MediaBundle\Form\DataTransformer\MediaEntityToIdentifierTransformer;
 
@@ -97,13 +98,13 @@ class ProductForm extends AbstractForm implements FormInterface
         ]));
 
         $categoryPane->addChild($builder->getElement('tree', [
-            'name'       => 'categories',
-            'label'      => $this->trans('Categories'),
-            'choosable'  => false,
-            'selectable' => true,
-            'sortable'   => false,
-            'clickable'  => false,
-            'items'      => $this->get('category.repository')->getTreeItems(),
+            'name'        => 'categories',
+            'label'       => $this->trans('Categories'),
+            'choosable'   => false,
+            'selectable'  => true,
+            'sortable'    => false,
+            'clickable'   => false,
+            'items'       => $this->get('category.repository')->getTreeItems(),
             'transformer' => new CollectionToArrayTransformer($this->get('category.repository'))
         ]));
 
@@ -112,14 +113,14 @@ class ProductForm extends AbstractForm implements FormInterface
             'label' => $this->trans('Price settings')
         ]));
 
+        $currencies = $this->get('currency.repository')->getCollectionToSelect('code');
+
         $vat = $pricePane->addChild($builder->getElement('select', [
             'name'        => 'taxId',
             'label'       => $this->trans('Tax'),
             'options'     => $this->get('tax.repository')->getCollectionToSelect(),
             'transformer' => new EntityToIdentifierTransformer($this->get('tax.repository'))
         ]));
-
-        $currencies = $this->get('currency.repository')->getCollectionToSelect('code');
 
         $pricePane->addChild($builder->getElement('select', [
             'name'        => 'sellCurrency',
@@ -136,17 +137,17 @@ class ProductForm extends AbstractForm implements FormInterface
         ]));
 
         $pricePane->addChild($builder->getElement('price', [
-            'name'           => 'buyPrice',
-            'label'          => $this->trans('Buy price'),
-            'rules'          => [
+            'name'      => 'buyPrice',
+            'label'     => $this->trans('Buy price'),
+            'rules'     => [
                 $builder->getRule('required', [
                     'message' => $this->trans('Buy price is required')
                 ]),
             ],
-            'filters'        => [
+            'filters'   => [
                 $builder->getFilter('comma_to_dot_changer')
             ],
-            'vat_field'      => $vat,
+            'vat_field' => $vat,
         ]));
 
         $standardPrice = $pricePane->addChild($builder->getElement('fieldset', [
@@ -166,7 +167,7 @@ class ProductForm extends AbstractForm implements FormInterface
             'filters'   => [
                 $builder->getFilter('comma_to_dot_changer')
             ],
-            'vat_field'      => $vat,
+            'vat_field' => $vat,
         ]));
 
         $stockData = $form->addChild($builder->getElement('fieldset', [
@@ -217,7 +218,7 @@ class ProductForm extends AbstractForm implements FormInterface
             'load_route'  => $this->generateUrl('admin.media.grid'),
             'upload_url'  => $this->generateUrl('admin.media.add'),
             'repeat_min'  => 0,
-            'repeat_max'  => 1,
+            'repeat_max'  => ElementInterface::INFINITE,
             'transformer' => new MediaEntityToIdentifierTransformer($this->get('media.repository'))
         ]));
 

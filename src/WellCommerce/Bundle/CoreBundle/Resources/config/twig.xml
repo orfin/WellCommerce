@@ -24,6 +24,7 @@
 
         <service id="twig.extension.admin" class="%twig.extension.admin.class%">
             <argument type="service" id="session"/>
+            <argument type="service" id="tax.repository"/>
             <tag name="twig.extension"/>
         </service>
 

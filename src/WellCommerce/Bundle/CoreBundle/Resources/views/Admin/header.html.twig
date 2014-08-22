@@ -34,7 +34,7 @@
             iActiveView: '',
             iActiveLanguage: '',
             aoLanguages: '',
-            aoVatValues: '',
+            aoVatValues: {{ taxes|json_encode|raw }},
             sUrl: '{{ app.request.getBaseURL() }}',
             sCurrentController: '',
             sCurrentAction: ''
