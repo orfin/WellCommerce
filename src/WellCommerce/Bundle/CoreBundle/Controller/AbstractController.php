@@ -56,7 +56,7 @@ abstract class AbstractController extends AbstractContainer
      *
      * @return \WellCommerce\Bundle\UserBundle\Entity\User
      */
-    public function getUser()
+    protected function getUser()
     {
         return $this->get('security.context')->getToken()->getUser();
     }
