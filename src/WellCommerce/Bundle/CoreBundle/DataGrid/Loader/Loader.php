@@ -102,8 +102,20 @@ class Loader implements LoaderInterface
                     case 'IN':
                         $expression = $queryBuilder->expr()->in($source, ':' . $identifier);
                         break;
+                    case 'NE':
+                        $expression = $queryBuilder->expr()->neq($source, ':' . $identifier);
+                        break;
+                    case 'LE':
+                        $expression = $queryBuilder->expr()->lte($source, ':' . $identifier);
+                        break;
+                    case 'GE':
+                        $expression = $queryBuilder->expr()->gte($source, ':' . $identifier);
+                        break;
                     case 'LIKE':
                         $expression = $queryBuilder->expr()->like($source, ':' . $identifier);
+                        break;
+                    default:
+                        $expression = $queryBuilder->expr()->eq($source, ':' . $identifier);
                         break;
                 }
 
