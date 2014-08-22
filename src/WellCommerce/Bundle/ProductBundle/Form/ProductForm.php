@@ -91,6 +91,22 @@ class ProductForm extends AbstractForm implements FormInterface
             'label' => $this->trans('Description'),
         ]));
 
+        $categoryPane = $form->addChild($builder->getElement('fieldset', [
+            'name'  => 'category_pane',
+            'label' => $this->trans('Categories')
+        ]));
+
+        $categoryPane->addChild($builder->getElement('tree', [
+            'name'       => 'categories',
+            'label'      => $this->trans('Categories'),
+            'choosable'  => false,
+            'selectable' => true,
+            'sortable'   => false,
+            'clickable'  => false,
+            'items'      => $this->get('category.repository')->getTreeItems(),
+            'transformer' => new CollectionToArrayTransformer($this->get('category.repository'))
+        ]));
+
         $pricePane = $form->addChild($builder->getElement('fieldset', [
             'name'  => 'price_pane',
             'label' => $this->trans('Price settings')
