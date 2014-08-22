@@ -142,7 +142,7 @@ class AdminMenuItem implements AdminMenuItemInterface, \ArrayAccess
      */
     public function sortChildren()
     {
-        usort($this->children, function ($a, $b) {
+        usort($this->children, function (AdminMenuItem $a, AdminMenuItem $b) {
             if ($a->getSortOrder() == $b->getSortOrder()) {
                 return 0;
             }
