@@ -39,59 +39,28 @@ class MediaController extends AbstractAdminController
      */
     public function addAction(Request $request)
     {
-        $file = $request->files->get('file');
+        $file     = $request->files->get('file');
+        $uploader = $this->get('file_uploader');
 
-        // check whether file is instance of UploadedFile
-        if (!$file instanceof UploadedFile || !$file->isValid()) {
+        try {
+            $media = $uploader->upload($file);
+
             $response = [
-                'sError'   => $this->trans('uploader.error'),
-                'sMessage' => $this->trans('uploader.error.missing_file'),
+                'sId'        => $media->getId(),
+                'sThumb'     => $this->getImageGallery()->getImageUrl($file->getId(), 100, 100),
+                'sFilename'  => $media->getName(),
+                'sExtension' => $media->getExtension(),
+                'sFileType'  => $media->getMime()
             ];
 
-            return new JsonResponse($response);
-        }
+        } catch (\Exception $e) {
 
-        $fileConstraints = new File([
-            'maxSize' => 10000
-        ]);
-
-        // check whether file size is valid
-        $errors = $this->get('validator')->validateValue($file, $fileConstraints);
-
-        if (count($errors) > 0) {
             $response = [
                 'sError'   => $this->trans('uploader.error'),
-                'sMessage' => $this->trans('uploader.error.invalid_file'),
+                'sMessage' => $this->trans($e->getMessage()),
             ];
-
-            return new JsonResponse($response);
         }
-
-        // check whether file was uploaded
-        if (!is_file($file->__toString())) {
-            $response = [
-                'sError'   => $this->trans('uploader.error'),
-                'sMessage' => $this->trans('uploader.error.not_uploaded'),
-            ];
-
-            return new JsonResponse($response);
-        }
-
-        $file->move($directory, $filename = sprintf('%s.%s', uniqid(), $file->guessExtension()));
-
-        $file = $this->getUploader()->uploadFile($request->files->get('file'));
-
-        $file = new Media();
-
-        $response = [
-            'sId'        => $file->getId(),
-            'sThumb'     => $this->getImageGallery()->getImageUrl($file->getId(), 100, 100),
-            'sFilename'  => $file->getName(),
-            'sExtension' => $file->getExtension(),
-            'sFileType'  => $file->getType()
-        ];
 
         return new JsonResponse($response);
     }
-
 }

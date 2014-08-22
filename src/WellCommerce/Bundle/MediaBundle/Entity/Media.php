@@ -59,17 +59,7 @@ class Media
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
      */
-    private $type;
-
-    /**
-     * @ORM\Column(type="string", length=12, nullable=true)
-     */
-    private $width;
-
-    /**
-     * @ORM\Column(type="string", length=12, nullable=true)
-     */
-    private $height;
+    private $mime;
 
     /**
      * @ORM\Column(type="string", length=12, nullable=true)
@@ -86,80 +76,104 @@ class Media
         return $this->id;
     }
 
+    /**
+     * Returns real file name
+     *
+     * @return string
+     */
     public function getName()
     {
         return $this->name;
     }
 
+    /**
+     * Sets file name
+     *
+     * @param $name
+     */
     public function setName($name)
     {
         $this->name = $name;
     }
 
+    /**
+     * Returns path
+     *
+     * @return string
+     */
     public function getPath()
     {
         return $this->path;
     }
 
+    /**
+     * Sets path
+     *
+     * @param $path
+     */
     public function setPath($path)
     {
         $this->path = $path;
     }
 
     /**
-     * Sets file
-     *
-     * @param UploadedFile $file
-     */
-    public function setFile(UploadedFile $file = null)
-    {
-        $this->file = $file;
-        if (isset($this->path)) {
-            $this->temp = $this->path;
-            $this->path = null;
-        } else {
-            $this->path = 'initial';
-        }
-    }
-
-    /**
-     * Returns absolute path to upload dir
-     *
-     * @return null|string
-     */
-    public function getAbsolutePath()
-    {
-        return null === $this->path ? null : $this->getUploadRootDir() . '/' . $this->path;
-    }
-
-    /**
-     * Returns web path to upload dir
-     *
-     * @return null|string
-     */
-    public function getWebPath()
-    {
-        return null === $this->path ? null : $this->getUploadDir() . '/' . $this->path;
-    }
-
-    /**
-     * Returns full path to upload dir
+     * Returns mime type
      *
      * @return string
      */
-    protected function getUploadRootDir()
+    public function getMime()
     {
-        return __DIR__ . '/../../../../web/' . $this->getUploadDir();
+        return $this->mime;
     }
 
     /**
-     * Returns file to uploads dir
+     * Sets mime type
+     *
+     * @param $mime
+     */
+    public function setMime($mime)
+    {
+        $this->mime = $mime;
+    }
+
+    /**
+     * Returns extension
      *
      * @return string
      */
-    protected function getUploadDir()
+    public function getExtension()
     {
-        return 'upload/media';
+        return $this->extension;
+    }
+
+    /**
+     * Sets extension
+     *
+     * @param $extension
+     */
+    public function setExtension($extension)
+    {
+        $this->extension = $extension;
+    }
+
+    /**
+     * Returns file size in bytes
+     *
+     * @return integer
+     */
+    public function getSize()
+    {
+        return $this->size;
+    }
+
+    /**
+     * Sets file size in bytes
+     *
+     * @param $size
+     */
+    public function setSize($size)
+    {
+        $this->size = $size;
     }
 }
 

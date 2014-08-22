@@ -11,6 +11,7 @@
  */
 namespace WellCommerce\Bundle\MediaBundle\Repository;
 
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 
 /**
@@ -28,4 +29,10 @@ class MediaRepository extends AbstractEntityRepository implements MediaRepositor
     {
         return parent::getQueryBuilder()->groupBy('media.id');
     }
+
+    public function save(UploadedFile $file)
+    {
+        $media = $this->createNew();
+    }
+
 }

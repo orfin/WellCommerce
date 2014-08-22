@@ -10,26 +10,34 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\MediaBundle\Repository;
+namespace WellCommerce\Bundle\CoreBundle\Uploader;
 
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Repository\DataGridAwareRepositoryInterface;
-use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
- * Interface LocaleRepositoryInterface
+ * Interface FileUploaderInterface
  *
- * @package WellCommerce\Bundle\MediaBundle\Repository
+ * @package WellCommerce\Bundle\CoreBundle\Uploader
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface MediaRepositoryInterface extends RepositoryInterface, DataGridAwareRepositoryInterface
+interface FileUploaderInterface
 {
     /**
-     * Saves uploaded file info
+     * Uploads the file
      *
      * @param UploadedFile $file
      *
      * @return \WellCommerce\Bundle\MediaBundle\Entity\Media
      */
-    public function save(UploadedFile $file);
+    public function upload(UploadedFile $file);
+
+    /**
+     * Removes the file from filesystem
+     *
+     * @param File $file
+     *
+     * @return mixed
+     */
+    public function delete(File $file);
 } 
