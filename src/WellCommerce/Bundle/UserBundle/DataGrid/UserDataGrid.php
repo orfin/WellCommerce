@@ -73,9 +73,9 @@ class UserDataGrid extends AbstractDataGrid implements DataGridInterface
         ]));
 
         $collection->add(new Column([
-            'id'         => 'isActive',
-            'source'     => 'user.isActive',
-            'caption'    => $this->trans('user.is_active'),
+            'id'         => 'enabled',
+            'source'     => 'user.enabled',
+            'caption'    => $this->trans('user.enabled'),
             'appearance' => [
                 'width' => 70,
                 'align' => ColumnInterface::ALIGN_LEFT

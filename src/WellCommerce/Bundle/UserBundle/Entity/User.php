@@ -38,12 +38,12 @@ class User implements \Serializable, UserInterface, EquatableInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=64, unique=false)
+     * @ORM\Column(name="first_name", type="string", length=64, unique=false)
      */
     private $firstName;
 
     /**
-     * @ORM\Column(type="string", length=64, unique=false)
+     * @ORM\Column(name="last_name", type="string", length=64, unique=false)
      */
     private $lastName;
 
@@ -68,9 +68,9 @@ class User implements \Serializable, UserInterface, EquatableInterface
     private $salt;
 
     /**
-     * @ORM\Column(name="is_active", type="boolean")
+     * @ORM\Column(name="enabled", type="boolean")
      */
-    private $isActive;
+    private $enabled;
 
     /**
      * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\UserBundle\Entity\Role", inversedBy="users")
@@ -79,7 +79,7 @@ class User implements \Serializable, UserInterface, EquatableInterface
 
     public function __construct()
     {
-        $this->isActive = true;
+        $this->enabled = true;
         $this->roles    = new ArrayCollection();
         $this->salt     = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
     }
@@ -152,14 +152,14 @@ class User implements \Serializable, UserInterface, EquatableInterface
         return $this->email;
     }
 
-    public function getIsActive()
+    public function getEnabled()
     {
-        return $this->isActive;
+        return $this->enabled;
     }
 
-    public function setIsActive($isActive)
+    public function setEnabled($enabled)
     {
-        $this->isActive = $isActive;
+        $this->enabled = $enabled;
     }
 
     public function setPassword($password)
