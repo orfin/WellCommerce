@@ -20,31 +20,23 @@ use WellCommerce\Bundle\CoreBundle\Form\AbstractRule;
  * @package WellCommerce\Bundle\CoreBundle\Form\Rules
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Format extends AbstractRule
+class Format extends AbstractRule implements RuleInterface
 {
-    protected $_format;
-
-    public function __construct($errorMsg, $format)
-    {
-        parent::__construct($errorMsg);
-        $this->_format = $format;
-    }
-
     public function checkValue($value)
     {
         if (strlen($value) == 0) {
             return true;
         }
 
-        return (preg_match($this->_format, $value) == 1);
+        return (preg_match($this->options['pattern'], $value) == 1);
     }
 
     public function render()
     {
-        $format   = addslashes($this->_format);
-        $errorMsg = addslashes($this->_errorMsg);
+        $format   = addslashes($this->options['pattern']);
+        $errorMsg = addslashes($this->options['message']);
 
-        return "{sType: '{$this->getType()}', sErrorMessage: '{$errorMsg}', sFormat: '{$format}'}";
+        return "{sType: '{$this->getType()}', sErrorMessage: '{$format}', sFormat: '{$errorMsg}'}";
     }
 
 }

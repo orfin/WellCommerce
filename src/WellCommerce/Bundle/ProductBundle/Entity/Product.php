@@ -96,6 +96,46 @@ class Product
     private $categories;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="stock", type="decimal", precision=15, scale=4)
+     */
+    private $stock;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="buy_price", type="decimal", precision=15, scale=4)
+     */
+    private $buyPrice;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="sell_price", type="decimal", precision=15, scale=4)
+     */
+    private $sellPrice;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\CurrencyBundle\Entity\Currency")
+     * @ORM\JoinColumn(name="buy_currency_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    private $buyCurrency;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\CurrencyBundle\Entity\Currency")
+     * @ORM\JoinColumn(name="sell_currency_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    private $sellCurrency;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="track_stock", type="boolean")
+     */
+    private $trackStock;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -173,6 +213,46 @@ class Product
     public function setTax($tax)
     {
         $this->tax = $tax;
+    }
+
+    /**
+     * Returns product stock
+     *
+     * @return mixed
+     */
+    public function getStock()
+    {
+        return $this->stock;
+    }
+
+    /**
+     * Sets product stock
+     *
+     * @param $stock
+     */
+    public function setStock($stock)
+    {
+        $this->stock = $stock;
+    }
+
+    /**
+     * Returns product stock
+     *
+     * @return mixed
+     */
+    public function getTrackStock()
+    {
+        return $this->trackStock;
+    }
+
+    /**
+     * Sets product stock tracking status
+     *
+     * @param $trackStock
+     */
+    public function setTrackStock($trackStock)
+    {
+        $this->trackStock = $trackStock;
     }
 
     /**
@@ -273,6 +353,46 @@ class Product
     public function setCategories(ArrayCollection $collection)
     {
         $this->categories = $collection;
+    }
+
+    public function getBuyCurrency()
+    {
+        return $this->buyCurrency;
+    }
+
+    public function setBuyCurrency($buyCurrency)
+    {
+        $this->buyCurrency = $buyCurrency;
+    }
+
+    public function getSellCurrency()
+    {
+        return $this->sellCurrency;
+    }
+
+    public function setSellCurrency($sellCurrency)
+    {
+        $this->sellCurrency = $sellCurrency;
+    }
+
+    public function getSellPrice()
+    {
+        return $this->sellPrice;
+    }
+
+    public function setSellPrice($sellPrice)
+    {
+        $this->sellPrice = $sellPrice;
+    }
+
+    public function getBuyPrice()
+    {
+        return $this->buyPrice;
+    }
+
+    public function setBuyPrice($buyPrice)
+    {
+        $this->buyPrice = $buyPrice;
     }
 }
 

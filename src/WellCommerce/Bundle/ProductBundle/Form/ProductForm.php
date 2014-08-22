@@ -91,9 +91,89 @@ class ProductForm extends AbstractForm implements FormInterface
             'label' => $this->trans('Description'),
         ]));
 
+        $pricePane = $form->addChild($builder->getElement('fieldset', [
+            'name'  => 'price_pane',
+            'label' => $this->trans('Price settings')
+        ]));
+
+        $vat = $pricePane->addChild($builder->getElement('select', [
+            'name'        => 'taxId',
+            'label'       => $this->trans('Tax'),
+            'options'     => $this->get('tax.repository')->getCollectionToSelect(),
+            'transformer' => new EntityToIdentifierTransformer($this->get('tax.repository'))
+        ]));
+
+        $currencies = $this->get('currency.repository')->getCollectionToSelect('code');
+
+        $pricePane->addChild($builder->getElement('select', [
+            'name'        => 'sellCurrency',
+            'label'       => $this->trans('Currency for sell prices'),
+            'options'     => $currencies,
+            'transformer' => new EntityToIdentifierTransformer($this->get('currency.repository'))
+        ]));
+
+        $pricePane->addChild($builder->getElement('select', [
+            'name'        => 'buyCurrency',
+            'label'       => $this->trans('Currency for buy prices'),
+            'options'     => $currencies,
+            'transformer' => new EntityToIdentifierTransformer($this->get('currency.repository'))
+        ]));
+
+        $pricePane->addChild($builder->getElement('price', [
+            'name'           => 'buyPrice',
+            'label'          => $this->trans('Buy price'),
+            'rules'          => [
+                $builder->getRule('required', [
+                    'message' => $this->trans('Buy price is required')
+                ]),
+            ],
+            'filters'        => [
+                $builder->getFilter('comma_to_dot_changer')
+            ],
+            'vat_field'      => $vat,
+        ]));
+
+        $standardPrice = $pricePane->addChild($builder->getElement('fieldset', [
+            'name'  => 'standard_price',
+            'label' => $this->trans('Standard sell price'),
+            'class' => 'priceGroup'
+        ]));
+
+        $standardPrice->addChild($builder->getElement('price', [
+            'name'      => 'sellPrice',
+            'label'     => $this->trans('Sell price'),
+            'rules'     => [
+                $builder->getRule('required', [
+                    'message' => $this->trans('Sell price is required')
+                ])
+            ],
+            'filters'   => [
+                $builder->getFilter('comma_to_dot_changer')
+            ],
+            'vat_field'      => $vat,
+        ]));
+
         $stockData = $form->addChild($builder->getElement('fieldset', [
             'name'  => 'stock_data',
             'label' => $this->trans('Stock settings')
+        ]));
+
+        $stockData->addChild($builder->getElement('text_field', [
+            'name'    => 'stock',
+            'label'   => $this->trans('Stock'),
+            'rules'   => [
+                $builder->getRule('required', [
+                    'message' => $this->trans('Stock is required')
+                ])
+            ],
+            'suffix'  => $this->trans('pcs'),
+            'default' => 0
+        ]));
+
+        $stockData->addChild($builder->getElement('checkbox', [
+            'name'    => 'trackStock',
+            'label'   => $this->trans('Track stock'),
+            'comment' => $this->trans('Enable stock tracking for product'),
         ]));
 
         $stockData->addChild($builder->getElement('select', [

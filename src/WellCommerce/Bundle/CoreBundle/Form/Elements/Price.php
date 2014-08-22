@@ -12,19 +12,11 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class Price extends TextField implements ElementInterface
 {
-
-    public function __construct($attributes)
-    {
-        parent::__construct($attributes);
-        if (isset($this->attributes['vat_field']) && $this->attributes['vat_field'] instanceof Field) {
-            $this->attributes['vat_field_name'] = $this->attributes['vat_field']->getName();
-        }
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -37,11 +29,26 @@ class Price extends TextField implements ElementInterface
         ]);
 
         $resolver->setDefaults([
-            'prefixes' => ['net', 'gross']
+            'prefixes'       => ['net', 'gross'],
+            'vat_field'      => null,
+            'vat_field_name' => function (Options $options) {
+                    if (isset($options['vat_field']) && $options['vat_field'] instanceof Field) {
+                        return $options['vat_field']->getName();
+                    }
+
+                    return null;
+                },
+            'dependencies'   => [],
+            'filters'        => [],
+            'rules'          => [],
+            'property_path'  => null,
+            'transformer'    => null
+
         ]);
 
         $resolver->setOptional([
             'vat_field',
+            'vat_field_name',
             'comment',
             'suffix',
             'prefix',
@@ -55,6 +62,8 @@ class Price extends TextField implements ElementInterface
             'filters',
             'dependencies',
             'default',
+            'transformer',
+            'property_path',
         ]);
 
         $resolver->setAllowedTypes([
@@ -72,7 +81,9 @@ class Price extends TextField implements ElementInterface
             'filters'       => 'array',
             'rules'         => 'array',
             'dependencies'  => 'array',
-            'default'       => ['string', 'integer']
+            'default'       => ['string', 'integer'],
+            'property_path' => ['null', 'object'],
+            'transformer'   => ['null', 'object'],
         ]);
     }
 

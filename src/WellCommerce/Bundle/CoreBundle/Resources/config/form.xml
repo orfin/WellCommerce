@@ -130,6 +130,12 @@
             </call>
         </service>
 
+        <service id="form.element.price" class="%form.element.price.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
         <service id="form.element.password" class="%form.element.password.class%" scope="prototype">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
