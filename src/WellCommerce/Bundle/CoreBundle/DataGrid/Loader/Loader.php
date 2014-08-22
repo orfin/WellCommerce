@@ -61,7 +61,7 @@ class Loader implements LoaderInterface
     {
         $columns = [];
         foreach ($this->columns as $column) {
-            $columns[] = $column->getSource();
+            $columns[] = sprintf('%s AS %s', $column->getSource(), $column->getId());
         }
 
         return implode(', ', $columns);

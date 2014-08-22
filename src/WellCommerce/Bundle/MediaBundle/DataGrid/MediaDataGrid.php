@@ -99,7 +99,7 @@ class MediaDataGrid extends AbstractDataGrid implements DataGridInterface
         ]));
 
         $collection->add(new Column([
-            'id'               => 'path',
+            'id'               => 'preview',
             'source'           => 'media.path',
             'caption'          => $this->trans('media.preview'),
             'appearance'       => [
