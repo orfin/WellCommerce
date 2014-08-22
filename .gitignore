@@ -20,3 +20,4 @@ app/config/parameters.yml
 app/cache/dev/appDevDebugProjectContainer.php
 app/cache/dev/appDevDebugProjectContainer.xml
 *.project
+web/media/*

@@ -34,13 +34,14 @@ class MediaRepository extends AbstractEntityRepository implements MediaRepositor
     /**
      * {@inheritdoc}
      */
-    public function save(UploadedFile $file)
+    public function save(UploadedFile $file, $dir)
     {
         $media = new Media();
         $media->setName($file->getClientOriginalName());
         $media->setExtension($file->guessClientExtension());
         $media->setMime($file->getClientMimeType());
         $media->setSize($file->getClientSize());
+        $media->setPath($dir);
         $this->_em->persist($media);
         $this->_em->flush();
 

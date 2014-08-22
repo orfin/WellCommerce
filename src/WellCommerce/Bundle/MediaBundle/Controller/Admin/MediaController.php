@@ -43,11 +43,12 @@ class MediaController extends AbstractAdminController
         $uploader = $this->get('file_uploader');
 
         try {
-            $media = $uploader->upload($file);
+            $media     = $uploader->upload($file, 'images');
+            $thumbnail = $this->get('liip_imagine.cache.manager')->getBrowserPath($media->getFullName(), 'medium');
 
             $response = [
                 'sId'        => $media->getId(),
-                'sThumb'     => $this->getImageGallery()->getImageUrl($file->getId(), 100, 100),
+                'sThumb'     => $thumbnail,
                 'sFilename'  => $media->getName(),
                 'sExtension' => $media->getExtension(),
                 'sFileType'  => $media->getMime()

@@ -28,8 +28,9 @@ interface MediaRepositoryInterface extends RepositoryInterface, DataGridAwareRep
      * Saves uploaded file info
      *
      * @param UploadedFile $file
+     * @param              $dir
      *
-     * @return \WellCommerce\Bundle\MediaBundle\Entity\Media
+     * @return mixed
      */
-    public function save(UploadedFile $file);
+    public function save(UploadedFile $file, $dir);
 } 

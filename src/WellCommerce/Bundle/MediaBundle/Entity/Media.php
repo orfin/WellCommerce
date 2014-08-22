@@ -175,5 +175,10 @@ class Media
     {
         $this->size = $size;
     }
+
+    public function getFullName()
+    {
+        return sprintf('%s.%s', $this->id, $this->extension);
+    }
 }
 

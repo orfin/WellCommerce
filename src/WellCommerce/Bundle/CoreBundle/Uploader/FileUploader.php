@@ -17,6 +17,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use WellCommerce\Bundle\MediaBundle\Entity\Media;
 use WellCommerce\Bundle\MediaBundle\Repository\MediaRepositoryInterface;
 
 /**
@@ -91,17 +92,38 @@ class FileUploader implements FileUploaderInterface
             throw new \Exception('Passed file object is not valid');
         }
 
-        $media      = $this->repository->save($file);
+        $media      = $this->repository->save($file, $dir);
         $uploadPath = $this->getUploadRootDir($dir);
+        $file->move(
+            $uploadPath,
+            sprintf('%s.%s', $media->getId(), $media->getExtension())
+        );
 
         $this->dispatchEvent(self::POST_UPLOAD_EVENT, $file);
 
         return $media;
     }
 
+    /**
+     * Returns relative path to file
+     *
+     * @param Media $media
+     *
+     * @return string
+     */
+    public function getRelativePath(Media $media)
+    {
+        return sprintf('%s/%s.%s',
+            $media->getPath(),
+            $media->getId(),
+            $media->getExtension()
+        );
+    }
+
     private function getUploadRootDir($dir)
     {
-        //%kernel.root_dir%/../web/media/images
+        $dir = rtrim($dir, '/\\');
+
         return sprintf('%s/../web/media/%s', $this->kernelDir, $dir);
     }
 
