@@ -57,10 +57,10 @@ class ProducerForm extends AbstractForm implements FormInterface
         ]));
 
         $mediaData->addChild($builder->getElement('image', [
-            'name'       => 'photos',
-            'label'      => $this->trans('form.media_data.image_id'),
-            'datagrid'   => $this->get('media.datagrid'),
-            'upload_url' => $this->generateUrl('admin.media.add')
+            'name'         => 'photos',
+            'label'        => $this->trans('form.media_data.image_id'),
+            'load_route'   => 'admin.media.grid',
+            'upload_url'   => $this->generateUrl('admin.media.add')
         ]));
 
         $delivererData = $form->addChild($builder->getElement('fieldset', [

@@ -64,23 +64,6 @@ class File extends Field implements ElementInterface
         ]);
     }
 
-    public function doLoadFilesForDatagrid($request)
-    {
-        if (isset($this->attributes['file_types']) && is_array($this->attributes['file_types']) && count($this->attributes['file_types'])) {
-            if (!isset($request['where']) || !is_array($request['where'])) {
-                $request['where'] = [];
-            }
-            $request['where'][] = [
-                'operator' => 'IN',
-                'column'   => 'extension',
-                'value'    => $this->attributes['file_types']
-            ];
-            $request['limit']   = !empty($this->attributes['limit']) ? $this->attributes['limit'] : 10;
-        }
-
-        return $this->datagrid->load($request);
-    }
-
     /**
      * {@inheritdoc}
      */

@@ -33,9 +33,7 @@ class Image extends File implements ElementInterface
             'name',
             'label',
             'property_path',
-            'datagrid',
-            'delete_handler',
-            'load_handler',
+            'load_route',
         ]);
 
         $resolver->setOptional([
@@ -74,16 +72,6 @@ class Image extends File implements ElementInterface
             'filters'                => [],
             'rules'                  => [],
             'photos'                 => [],
-            'load_handler'           => function (Options $options) {
-                    $eventHandlers      = $options->get('datagrid')->getManager()->getOptions()->getEventHandlers();
-
-                    return $eventHandlers->get('load')->get('route');
-                },
-            'delete_handler'           => function (Options $options) {
-                    $eventHandlers      = $options->get('datagrid')->getManager()->getOptions()->getEventHandlers();
-
-                    return $eventHandlers->get('delete_row')->get('route');
-                }
         ]);
 
         $resolver->setAllowedTypes([
@@ -94,27 +82,11 @@ class Image extends File implements ElementInterface
             'rules'                  => 'array',
             'property_path'          => ['null', 'object'],
             'transformer'            => ['null', 'object'],
-            'datagrid'               => ['object'],
             'session_name'           => 'string',
             'file_types_description' => 'string',
             'file_types'             => 'array',
             'photos'                 => 'array'
         ]);
-    }
-
-    /**
-     * Returns a DataGrid bound to image field
-     *
-     * @return MediaDataGrid
-     * @throws \Exception
-     */
-    private function getDataGrid()
-    {
-        if (!$this->attributes['datagrid'] instanceof MediaDataGrid) {
-            throw new \Exception('Wrong DataGrid instance for image field. Expected MediaDataGrid');
-        }
-
-        return $this->attributes['datagrid'];
     }
 
     /**
@@ -134,8 +106,7 @@ class Image extends File implements ElementInterface
             $this->formatAttributeJs('session_id', 'sSessionId'),
             $this->formatAttributeJs('file_types', 'asFileTypes'),
             $this->formatAttributeJs('file_types_description', 'sFileTypesDescription'),
-            $this->formatAttributeJs('delete_handler', 'sDeleteRoute'),
-            $this->formatAttributeJs('load_handler', 'sLoadRoute'),
+            $this->formatAttributeJs('load_route', 'sLoadRoute'),
             $this->formatRepeatableJs(),
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
