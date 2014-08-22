@@ -11,11 +11,10 @@
  */
 namespace WellCommerce\Bundle\CompanyBundle\Form;
 
-use WellCommerce\Bundle\CompanyBundle\Entity\Company;
-use WellCommerce\Bundle\CompanyBundle\Repository\CompanyRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Form\AbstractForm;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
+use WellCommerce\Bundle\MediaBundle\Form\DataTransformer\MediaEntityToIdentifierTransformer;
 
 /**
  * Class CompanyForm
@@ -96,6 +95,21 @@ class CompanyForm extends AbstractForm implements FormInterface
             'name'    => 'country',
             'label'   => $this->trans('Country'),
             'options' => $this->get('country.repository')->all()
+        ]));
+
+        $mediaData = $form->addChild($builder->getElement('fieldset', [
+            'name'  => 'media_data',
+            'label' => $this->trans('fieldset.media')
+        ]));
+
+        $mediaData->addChild($builder->getElement('image', [
+            'name'        => 'photo',
+            'label'       => $this->trans('Company logo'),
+            'load_route'  => $this->generateUrl('admin.media.grid'),
+            'upload_url'  => $this->generateUrl('admin.media.add'),
+            'repeat_min'  => 0,
+            'repeat_max'  => 1,
+            'transformer' => new MediaEntityToIdentifierTransformer($this->get('media.repository'))
         ]));
 
         $form->addFilter('no_code');

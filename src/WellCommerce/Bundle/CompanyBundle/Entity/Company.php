@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\CompanyBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\AddressTrait;
+use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\PhotoTrait;
 
 /**
  * Class Company
@@ -29,6 +30,7 @@ class Company
 {
     use ORMBehaviors\Timestampable\Timestampable;
     use AddressTrait;
+    use PhotoTrait;
 
     /**
      * @var integer
