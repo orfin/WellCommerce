@@ -38,6 +38,10 @@ wellcommerce_producer:
     resource: "@WellCommerceProducerBundle/Resources/config/routing.xml"
     prefix:   /admin/catalog/producer
 
+wellcommerce_product:
+    resource: "@WellCommerceProductBundle/Resources/config/routing.xml"
+    prefix:   /admin/catalog/product
+
 wellcommerce_category:
     resource: "@WellCommerceCategoryBundle/Resources/config/routing.xml"
     prefix:   /admin/catalog/category

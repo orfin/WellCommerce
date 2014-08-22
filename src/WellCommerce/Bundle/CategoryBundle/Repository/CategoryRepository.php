@@ -76,10 +76,7 @@ class CategoryRepository extends AbstractEntityRepository implements CategoryRep
                 $this->_em->persist($child);
             }
         }
-
         $this->_em->flush();
-
-        die();
     }
 
 }

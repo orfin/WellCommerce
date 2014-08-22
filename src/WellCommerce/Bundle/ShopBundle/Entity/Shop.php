@@ -18,6 +18,7 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\LocaleBundle\Entity\Locale;
 use WellCommerce\Bundle\ProducerBundle\Entity\Producer;
+use WellCommerce\Bundle\ProductBundle\Entity\Product;
 
 /**
  * Class Shop
@@ -58,6 +59,11 @@ class Shop
      * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\CategoryBundle\Entity\Category", mappedBy="shops")
      */
     private $categories;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\Product", mappedBy="products")
+     */
+    private $products;
 
     /**
      * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\ProducerBundle\Entity\Producer", mappedBy="shops")
@@ -133,6 +139,7 @@ class Shop
     public function __construct()
     {
         $this->categories       = new ArrayCollection();
+        $this->products         = new ArrayCollection();
         $this->producers        = new ArrayCollection();
         $this->availableLocales = new ArrayCollection();
     }
@@ -155,6 +162,26 @@ class Shop
     public function addCategory(Category $category)
     {
         $this->categories[] = $category;
+    }
+
+    /**
+     * Returns shop products
+     *
+     * @return ArrayCollection
+     */
+    public function getProducts()
+    {
+        return $this->products;
+    }
+
+    /**
+     * Adds new product to shop
+     *
+     * @param Category $category
+     */
+    public function addProduct(Product $product)
+    {
+        $this->products[] = $product;
     }
 
     /**

@@ -16,6 +16,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
+use WellCommerce\Bundle\ProductBundle\Entity\Product;
 use WellCommerce\Bundle\ShopBundle\Entity\Shop;
 
 /**
@@ -69,12 +70,18 @@ class Category
     private $shops;
 
     /**
+     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\Product", mappedBy="categories")
+     */
+    private $products;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->children = new ArrayCollection();
         $this->shops    = new ArrayCollection();
+        $this->products = new ArrayCollection();
     }
 
     /**
@@ -171,6 +178,31 @@ class Category
     public function addShop(Shop $shop)
     {
         $this->shops[] = $shop;
+    }
+
+    /**
+     * Sets products in category
+     *
+     * @param $shops
+     */
+    public function setProducts($products)
+    {
+        $this->products = $products;
+    }
+
+    /**
+     * Get products in category
+     *
+     * @return mixed
+     */
+    public function getProducts()
+    {
+        return $this->products;
+    }
+
+    public function addProduct(Product $product)
+    {
+        $this->products[] = $product;
     }
 }
 
