@@ -13732,7 +13732,7 @@ var GFormImage = GCore.ExtendClass(GFormFile, function() {
 	};
 	
 	gThis.LoadFiles = function(oRequest) {
-		gThis.m_gFilesDatagrid.MakeRequest(Routing.generate(gThis.m_oOptions.sLoadRoute), oRequest, gThis._DefaultsLoaded);
+		gThis.m_gFilesDatagrid.MakeRequest(gThis.m_oOptions.sLoadRoute, oRequest, gThis._DefaultsLoaded);
     };
 	
 	gThis._DefaultsLoaded = function(oData) {
@@ -13765,7 +13765,7 @@ var GFormImage = GCore.ExtendClass(GFormFile, function() {
 						gThis._LoadDefaults(GCore.Duplicate(true, oRequest));
 						gThis.m_bLoadedDefaults = true;
 					}
-					gThis.m_gFilesDatagrid.MakeRequest(Routing.generate(gThis.m_oOptions.sLoadRoute), oRequest, GF_Datagrid.ProcessIncomingData);
+					gThis.m_gFilesDatagrid.MakeRequest(gThis.m_oOptions.sLoadRoute, oRequest, GF_Datagrid.ProcessIncomingData);
 				},
 				loaded: gThis._OnDataLoaded,
 				process: gThis._ProcessFile,

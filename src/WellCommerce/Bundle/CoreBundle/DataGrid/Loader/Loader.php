@@ -12,6 +12,9 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DataGrid\Loader;
 
+use Doctrine\DBAL\Query\Expression\ExpressionBuilder;
+use Doctrine\ORM\Query\Expr;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\Request;
@@ -47,7 +50,7 @@ class Loader implements LoaderInterface
      * @var Request
      */
     private $request;
-
+    private $where;
     private $orderBy;
     private $orderDir;
     private $limit;
@@ -80,12 +83,48 @@ class Loader implements LoaderInterface
     }
 
     /**
+     * Adds where clauses to QB
+     *
+     * @param QueryBuilder $queryBuilder
+     */
+    private function prepareWhere(QueryBuilder $queryBuilder)
+    {
+        if (is_array($this->where)) {
+            foreach ($this->where as $where) {
+                $column     = $this->columns->get($where['column']);
+                $source     = $column->getSource();
+                $identifier = $column->getId();
+                $operator   = $where['operator'];
+                $value      = $where['value'];
+                $expression = null;
+
+                switch ($operator) {
+                    case 'IN':
+                        $expression = $queryBuilder->expr()->in($source, ':' . $identifier);
+                        break;
+                    case 'LIKE':
+                        $expression = $queryBuilder->expr()->like($source, ':' . $identifier);
+                        break;
+                }
+
+                if (null !== $expression) {
+                    $queryBuilder->add('where', $expression);
+                    $queryBuilder->setParameter($identifier, $value);
+                }
+            }
+        }
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function loadResults(Request $request)
     {
         $this->columns = $this->dataGrid->getColumns();
         $queryBuilder  = $this->dataGrid->getDataGridQueryBuilder();
+
+        // parses where clauses and adds them to QB
+        $this->prepareWhere($queryBuilder);
 
         // quickest way to automatically bind current locale to QB without injecting
         // whole container in repository or fighting with request-scope issues
@@ -144,6 +183,7 @@ class Loader implements LoaderInterface
         $this->orderDir  = $request->request->get('order_dir');
         $this->offset    = $request->request->get('starting_from');
         $this->limit     = $request->request->get('limit');
+        $this->where     = $request->request->get('where');
     }
 
     /**
