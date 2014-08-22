@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CoreBundle\Form\DataTransformer;
+namespace WellCommerce\Bundle\MediaBundle\Form\DataTransformer;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
@@ -21,7 +21,7 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
  * @package WellCommerce\Bundle\CoreBundle\Form\DataTransformer
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CollectionToArrayTransformer
+class MediaCollectionToArrayTransformer
 {
     /**
      * @var \WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface
