@@ -23,10 +23,8 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class Tip extends Field implements ElementInterface
 {
-
-    const UP   = 'up';
-    const DOWN = 'down';
-
+    const UP        = 'up';
+    const DOWN      = 'down';
     const EXPANDED  = 'expanded';
     const RETRACTED = 'retracted';
 
@@ -81,14 +79,14 @@ class Tip extends Field implements ElementInterface
      */
     public function prepareAttributesJs()
     {
-        $attributes = Array(
+        $attributes = [
             $this->formatAttributeJs('tip', 'sTip'),
             $this->formatAttributeJs('direction', 'sDirection'),
             $this->formatAttributeJs('short_tip', 'sShortTip'),
             $this->formatAttributeJs('retractable', 'bRetractable', ElementInterface::TYPE_BOOLEAN),
             $this->formatAttributeJs('default_state', 'sDefaultState'),
             $this->formatDependencyJs()
-        );
+        ];
 
         return $attributes;
     }
