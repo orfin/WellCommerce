@@ -61,7 +61,7 @@ class Shop
     private $categories;
 
     /**
-     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\Product", mappedBy="products")
+     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\Product", mappedBy="shops")
      */
     private $products;
 
