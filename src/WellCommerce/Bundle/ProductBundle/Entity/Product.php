@@ -17,6 +17,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\EnableableTrait;
+use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\MetaDataTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\PhotoTrait;
 use WellCommerce\Bundle\DelivererBundle\Entity\Deliverer;
 use WellCommerce\Bundle\ShopBundle\Entity\Shop;
@@ -46,6 +47,11 @@ class Product
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @ORM\Column(name="sku", type="string", length=64, unique=false)
+     */
+    private $sku;
 
     /**
      * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\ProducerBundle\Entity\Producer")
@@ -90,6 +96,16 @@ class Product
     private $categories;
 
     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->shops      = new ArrayCollection();
+        $this->categories = new ArrayCollection();
+        $this->categories = new ArrayCollection();
+    }
+
+    /**
      * Get id.
      *
      * @return integer
@@ -100,13 +116,23 @@ class Product
     }
 
     /**
-     * Constructor
+     * Returns product sku
+     *
+     * @return mixed
      */
-    public function __construct()
+    public function getSku()
     {
-        $this->shops      = new ArrayCollection();
-        $this->categories = new ArrayCollection();
-        $this->categories = new ArrayCollection();
+        return $this->sku;
+    }
+
+    /**
+     * Returns products sku
+     *
+     * @param $sku
+     */
+    public function setSku($sku)
+    {
+        $this->sku = $sku;
     }
 
     /**

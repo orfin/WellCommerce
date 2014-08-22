@@ -66,6 +66,31 @@ class ProductForm extends AbstractForm implements FormInterface
             'transformer' => new EntityToIdentifierTransformer($this->get('producer.repository'))
         ]));
 
+        $metaData = $form->addChild($builder->getElement('fieldset', [
+            'name'  => 'meta_data',
+            'label' => $this->trans('Meta settings')
+        ]));
+
+        $languageData = $metaData->addChild($builder->getElement('fieldset_language', [
+            'name'  => 'translations',
+            'label' => $this->trans('Translations'),
+        ]));
+
+        $languageData->addChild($builder->getElement('text_field', [
+            'name'  => 'metaTitle',
+            'label' => $this->trans('Title')
+        ]));
+
+        $languageData->addChild($builder->getElement('text_field', [
+            'name'  => 'metaKeywords',
+            'label' => $this->trans('Keywords'),
+        ]));
+
+        $languageData->addChild($builder->getElement('text_area', [
+            'name'  => 'metaDescription',
+            'label' => $this->trans('Description'),
+        ]));
+
         $stockData = $form->addChild($builder->getElement('fieldset', [
             'name'  => 'stock_data',
             'label' => $this->trans('Stock settings')
