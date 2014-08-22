@@ -136,6 +136,41 @@ class Product
     private $trackStock;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="weight", type="decimal", precision=15, scale=4)
+     */
+    private $weight;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="width", type="decimal", precision=15, scale=4)
+     */
+    private $width;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="height", type="decimal", precision=15, scale=4)
+     */
+    private $height;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="depth", type="decimal", precision=15, scale=4)
+     */
+    private $depth;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="package_size", type="decimal", precision=15, scale=4)
+     */
+    private $packageSize;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -393,6 +428,56 @@ class Product
     public function setBuyPrice($buyPrice)
     {
         $this->buyPrice = $buyPrice;
+    }
+
+    public function getWeight()
+    {
+        return $this->weight;
+    }
+
+    public function setWeight($weight)
+    {
+        $this->weight = $weight;
+    }
+
+    public function getWidth()
+    {
+        return $this->width;
+    }
+
+    public function setWidth($width)
+    {
+        $this->width = $width;
+    }
+
+    public function getHeight()
+    {
+        return $this->height;
+    }
+
+    public function setHeight($height)
+    {
+        $this->height = $height;
+    }
+
+    public function getDepth()
+    {
+        return $this->depth;
+    }
+
+    public function setDepth($depth)
+    {
+        $this->depth = $depth;
+    }
+
+    public function getPackageSize()
+    {
+        return $this->packageSize;
+    }
+
+    public function setPackageSize($packageSize)
+    {
+        $this->packageSize = $packageSize;
     }
 }
 

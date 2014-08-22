@@ -200,6 +200,58 @@ class ProductForm extends AbstractForm implements FormInterface
             'transformer' => new EntityToIdentifierTransformer($this->get('unit.repository'))
         ]));
 
+        $stockData->addChild($builder->getElement('text_field', [
+            'name'    => 'weight',
+            'label'   => $this->trans('Weight'),
+            'rules'   => [
+                $builder->getRule('required', [
+                    'message' => $this->trans('Weight is required')
+                ])
+            ],
+            'filters'   => [
+                $builder->getFilter('comma_to_dot_changer')
+            ],
+            'default' => 0
+        ]));
+
+        $stockData->addChild($builder->getElement('text_field', [
+            'name'    => 'width',
+            'label'   => $this->trans('Width'),
+            'filters'   => [
+                $builder->getFilter('comma_to_dot_changer')
+            ],
+        ]));
+
+        $stockData->addChild($builder->getElement('text_field', [
+            'name'    => 'height',
+            'label'   => $this->trans('Height'),
+            'filters'   => [
+                $builder->getFilter('comma_to_dot_changer')
+            ],
+        ]));
+
+        $stockData->addChild($builder->getElement('text_field', [
+            'name'    => 'depth',
+            'label'   => $this->trans('Depth'),
+            'filters'   => [
+                $builder->getFilter('comma_to_dot_changer')
+            ],
+        ]));
+
+        $stockData->addChild($builder->getElement('text_field', [
+            'name'    => 'package_size',
+            'label'   => $this->trans('Package size'),
+            'rules'   => [
+                $builder->getRule('required', [
+                    'message' => $this->trans('Package size is required')
+                ])
+            ],
+            'filters'   => [
+                $builder->getFilter('comma_to_dot_changer')
+            ],
+            'default' => 1
+        ]));
+
         $stockData->addChild($builder->getElement('select', [
             'name'        => 'availability',
             'label'       => $this->trans('Availability'),
