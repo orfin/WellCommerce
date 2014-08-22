@@ -180,5 +180,17 @@ class Media
     {
         return sprintf('%s.%s', $this->id, $this->extension);
     }
+
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function preUpload()
+    {
+        if (null !== $this->getExtension()) {
+            $filename   = sha1(uniqid(mt_rand(), true));
+            $this->path = sprintf('%s.%s', $filename, $this->getExtension());
+        }
+    }
 }
 

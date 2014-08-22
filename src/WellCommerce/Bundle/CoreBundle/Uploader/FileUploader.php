@@ -96,7 +96,7 @@ class FileUploader implements FileUploaderInterface
         $uploadPath = $this->getUploadRootDir($dir);
         $file->move(
             $uploadPath,
-            sprintf('%s.%s', $media->getId(), $media->getExtension())
+            $media->getPath()
         );
 
         $this->dispatchEvent(self::POST_UPLOAD_EVENT, $file);

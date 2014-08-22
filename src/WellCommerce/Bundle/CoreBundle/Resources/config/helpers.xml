@@ -7,6 +7,7 @@
     <parameters>
         <parameter key="flash_helper.class">WellCommerce\Bundle\CoreBundle\Helper\Flash\FlashHelper</parameter>
         <parameter key="redirect_helper.class">WellCommerce\Bundle\CoreBundle\Helper\Redirect\RedirectHelper</parameter>
+        <parameter key="image_helper.class">WellCommerce\Bundle\CoreBundle\Helper\Image\ImageHelper</parameter>
     </parameters>
 
     <services>
@@ -17,6 +18,10 @@
 
         <service id="redirect_helper" class="%redirect_helper.class%">
             <argument type="service" id="router"/>
+        </service>
+
+        <service id="image_helper" class="%image_helper.class%">
+            <argument type="service" id="liip_imagine.cache.manager"/>
         </service>
     </services>
 </container>

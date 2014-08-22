@@ -73,4 +73,15 @@ interface DataGridManagerInterface
      * @return mixed
      */
     public function getRouteForAction($action);
+
+    /**
+     * Returns image path using helper service
+     *
+     * @param       $path
+     * @param       $filter
+     * @param array $config
+     *
+     * @return mixed
+     */
+    public function getImage($path, $filter, array $config = []);
 } 

@@ -41,7 +41,6 @@ class MediaRepository extends AbstractEntityRepository implements MediaRepositor
         $media->setExtension($file->guessClientExtension());
         $media->setMime($file->getClientMimeType());
         $media->setSize($file->getClientSize());
-        $media->setPath($dir);
         $this->_em->persist($media);
         $this->_em->flush();
 

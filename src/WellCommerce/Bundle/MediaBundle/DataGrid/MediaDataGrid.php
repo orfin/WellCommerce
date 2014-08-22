@@ -60,9 +60,9 @@ class MediaDataGrid extends AbstractDataGrid implements DataGridInterface
         ]));
 
         $collection->add(new Column([
-            'id'         => 'type',
-            'source'     => 'media.type',
-            'caption'    => $this->trans('media.type'),
+            'id'         => 'mime',
+            'source'     => 'media.mime',
+            'caption'    => $this->trans('media.mime'),
             'appearance' => [
                 'width' => 70,
                 'align' => ColumnInterface::ALIGN_LEFT
@@ -96,6 +96,22 @@ class MediaDataGrid extends AbstractDataGrid implements DataGridInterface
             'filter'     => [
                 'type' => ColumnInterface::FILTER_INPUT
             ]
+        ]));
+
+        $collection->add(new Column([
+            'id'               => 'path',
+            'source'           => 'media.path',
+            'caption'          => $this->trans('media.preview'),
+            'appearance'       => [
+                'width' => 70,
+                'align' => ColumnInterface::ALIGN_LEFT
+            ],
+            'filter'           => [
+                'type' => ColumnInterface::FILTER_INPUT
+            ],
+            'process_function' => function ($path) {
+                    return $this->getManager()->getImage($path, 'medium');
+                }
         ]));
     }
 }

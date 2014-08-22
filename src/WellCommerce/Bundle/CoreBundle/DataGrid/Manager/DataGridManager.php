@@ -18,6 +18,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnCollection;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Loader\LoaderInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Options\OptionsInterface;
+use WellCommerce\Bundle\CoreBundle\Helper\Image\ImageHelperInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Redirect\RedirectHelperInterface;
 
 /**
@@ -36,6 +37,7 @@ class DataGridManager implements DataGridManagerInterface
     protected $xajaxManager;
     protected $translator;
     protected $redirectHelper;
+    protected $imageHelper;
 
     /**
      * Constructor
@@ -55,7 +57,8 @@ class DataGridManager implements DataGridManagerInterface
         EventDispatcherInterface $eventDispatcher,
         RouterInterface $router,
         TranslatorInterface $translator,
-        RedirectHelperInterface $redirectHelper
+        RedirectHelperInterface $redirectHelper,
+        ImageHelperInterface $imageHelper
     ) {
         $this->columnCollection = $columnCollection;
         $this->options          = $options;
@@ -64,6 +67,7 @@ class DataGridManager implements DataGridManagerInterface
         $this->router           = $router;
         $this->translator       = $translator;
         $this->redirectHelper   = $redirectHelper;
+        $this->imageHelper      = $imageHelper;
     }
 
     /**
@@ -128,5 +132,13 @@ class DataGridManager implements DataGridManagerInterface
     public function getRouteForAction($action)
     {
         return $this->redirectHelper->getActionForCurrentController($action);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getImage($path, $filter, array $config = [])
+    {
+        return $this->imageHelper->getImage($path, $filter, $config);
     }
 } 

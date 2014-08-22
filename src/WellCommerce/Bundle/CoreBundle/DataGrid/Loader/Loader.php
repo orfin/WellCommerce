@@ -87,7 +87,7 @@ class Loader implements LoaderInterface
         $this->columns = $this->dataGrid->getColumns();
         $queryBuilder  = $this->dataGrid->getDataGridQueryBuilder();
 
-        // quickest way to automatically bind current locale QB without injecting
+        // quickest way to automatically bind current locale to QB without injecting
         // whole container in repository or fighting with request-scope issues
         if ($this->hasLocalePlaceholder($queryBuilder->getDQL())) {
             $queryBuilder->setParameter('locale', $request->getLocale());
@@ -101,7 +101,10 @@ class Loader implements LoaderInterface
         $queryBuilder->addOrderBy($orderBy, $this->orderDir);
         $queryBuilder->select($this->getSelectClause());
         $queryBuilder->setFirstResult($this->offset);
-        $queryBuilder->setMaxResults($this->limit);
+        if ($this->limit > 0) {
+            $queryBuilder->setMaxResults($this->limit);
+        }
+
 
         $query = $queryBuilder->getQuery();
 
