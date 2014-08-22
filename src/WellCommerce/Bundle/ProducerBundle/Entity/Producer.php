@@ -16,6 +16,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use WellCommerce\Bundle\DelivererBundle\Entity\Deliverer;
+use WellCommerce\Bundle\MediaBundle\Entity\Media;
 use WellCommerce\Bundle\ShopBundle\Entity\Shop;
 
 /**
@@ -41,6 +42,12 @@ class Producer
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\MediaBundle\Entity\Media")
+     * @ORM\JoinColumn(name="photo_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    private $photo;
 
     /**
      * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\ShopBundle\Entity\Shop", inversedBy="producers")
@@ -126,8 +133,27 @@ class Producer
 
     public function setDeliverers(ArrayCollection $collection)
     {
-        echo $collection->count().PHP_EOL;
         $this->deliverers = $collection;
+    }
+
+    /**
+     * Returns producer photo
+     *
+     * @return mixed
+     */
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+
+    /**
+     * Sets producer photo
+     *
+     * @param Media $photo
+     */
+    public function setPhoto(Media $photo = null)
+    {
+        $this->photo = $photo;
     }
 }
 

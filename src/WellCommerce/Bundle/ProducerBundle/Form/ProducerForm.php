@@ -14,7 +14,9 @@ namespace WellCommerce\Bundle\ProducerBundle\Form;
 use WellCommerce\Bundle\CoreBundle\Form\AbstractForm;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
+use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\EntityToIdentifierTransformer;
 use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
+use WellCommerce\Bundle\MediaBundle\Form\DataTransformer\MediaEntityToIdentifierTransformer;
 
 /**
  * Class ProducerForm
@@ -57,10 +59,13 @@ class ProducerForm extends AbstractForm implements FormInterface
         ]));
 
         $mediaData->addChild($builder->getElement('image', [
-            'name'         => 'photos',
-            'label'        => $this->trans('form.media_data.image_id'),
-            'load_route'   => $this->generateUrl('admin.media.grid'),
-            'upload_url'   => $this->generateUrl('admin.media.add')
+            'name'        => 'photo',
+            'label'       => $this->trans('form.media_data.image_id'),
+            'load_route'  => $this->generateUrl('admin.media.grid'),
+            'upload_url'  => $this->generateUrl('admin.media.add'),
+            'repeat_min'  => 0,
+            'repeat_max'  => 1,
+            'transformer' => new MediaEntityToIdentifierTransformer($this->get('media.repository'))
         ]));
 
         $delivererData = $form->addChild($builder->getElement('fieldset', [

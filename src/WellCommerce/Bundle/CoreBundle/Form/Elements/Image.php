@@ -113,4 +113,21 @@ class Image extends File implements ElementInterface
             $this->formatDefaultsJs()
         ];
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function handleRequest($data)
+    {
+
+        $accessor = $this->getPropertyAccessor();
+
+        if (null !== $this->getPropertyPath() && $accessor->isReadable($data, $this->getPropertyPath())) {
+            $value = $this->getValue();
+            if ($this->hasTransformer()) {
+                $value = $this->getTransformer()->reverseTransform($value);
+            }
+            $accessor->setValue($data, $this->getName(), $value);
+        }
+    }
 }
