@@ -83,5 +83,5 @@ root:
     defaults:
         _controller: FrameworkBundle:Redirect:redirect
         route: admin.user.index
-        permanent: true
+        permanent: false
 
