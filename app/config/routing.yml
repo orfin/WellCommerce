@@ -7,13 +7,6 @@ _bazinga_jstranslation:
 _liip_imagine:
     resource: "@LiipImagineBundle/Resources/config/routing.xml"
 
-remove_trailing_slash:
-    path: /{url}
-    defaults: { _controller: WellCommerceCoreBundle:Redirecting:removeTrailingSlash }
-    requirements:
-        url: .*/$
-    methods: [GET]
-
 wellcommerce_user:
     resource: "@WellCommerceUserBundle/Resources/config/routing.xml"
     prefix:   /admin/user
@@ -85,3 +78,9 @@ root:
         route: admin.user.index
         permanent: false
 
+remove_trailing_slash:
+    path: /{url}
+    defaults: { _controller: WellCommerceCoreBundle:Redirecting:removeTrailingSlash }
+    requirements:
+        url: .*/$
+    methods: [GET]
