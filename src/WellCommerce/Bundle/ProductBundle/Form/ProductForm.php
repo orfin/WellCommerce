@@ -53,14 +53,46 @@ class ProductForm extends AbstractForm implements FormInterface
             ]
         ]));
 
+        $requiredData->addChild($builder->getElement('checkbox', [
+            'name'    => 'enabled',
+            'label'   => $this->trans('Enabled'),
+            'comment' => $this->trans('Only enabled products are visible in shops')
+        ]));
+
+        $requiredData->addChild($builder->getElement('select', [
+            'name'        => 'producer',
+            'label'       => $this->trans('Producer'),
+            'options'     => $this->get('producer.repository')->getCollectionToSelect(),
+            'transformer' => new EntityToIdentifierTransformer($this->get('producer.repository'))
+        ]));
+
+        $stockData = $form->addChild($builder->getElement('fieldset', [
+            'name'  => 'stock_data',
+            'label' => $this->trans('Stock settings')
+        ]));
+
+        $stockData->addChild($builder->getElement('select', [
+            'name'        => 'unit',
+            'label'       => $this->trans('Unit'),
+            'options'     => $this->get('unit.repository')->getCollectionToSelect(),
+            'transformer' => new EntityToIdentifierTransformer($this->get('unit.repository'))
+        ]));
+
+        $stockData->addChild($builder->getElement('select', [
+            'name'        => 'availability',
+            'label'       => $this->trans('Availability'),
+            'options'     => $this->get('availability.repository')->getCollectionToSelect(),
+            'transformer' => new EntityToIdentifierTransformer($this->get('availability.repository'))
+        ]));
+
         $mediaData = $form->addChild($builder->getElement('fieldset', [
             'name'  => 'media_data',
-            'label' => $this->trans('fieldset.media')
+            'label' => $this->trans('Photos')
         ]));
 
         $mediaData->addChild($builder->getElement('image', [
-            'name'        => 'photo',
-            'label'       => $this->trans('form.media_data.image_id'),
+            'name'        => 'photos',
+            'label'       => $this->trans('Photos'),
             'load_route'  => $this->generateUrl('admin.media.grid'),
             'upload_url'  => $this->generateUrl('admin.media.add'),
             'repeat_min'  => 0,
@@ -68,21 +100,9 @@ class ProductForm extends AbstractForm implements FormInterface
             'transformer' => new MediaEntityToIdentifierTransformer($this->get('media.repository'))
         ]));
 
-        $delivererData = $form->addChild($builder->getElement('fieldset', [
-            'name'  => 'deliverers_data',
-            'label' => $this->trans('product.deliverers')
-        ]));
-
-        $delivererData->addChild($builder->getElement('multi_select', [
-            'name'        => 'deliverers',
-            'label'       => $this->trans('deliverers'),
-            'options'     => $this->get('deliverer.repository')->getCollectionToSelect(),
-            'transformer' => new CollectionToArrayTransformer($this->get('deliverer.repository'))
-        ]));
-
         $shopData = $form->addChild($builder->getElement('fieldset', [
             'name'  => 'shop_data',
-            'label' => $this->trans('shops')
+            'label' => $this->trans('Shops')
         ]));
 
         $shopData->addChild($builder->getElement('multi_select', [

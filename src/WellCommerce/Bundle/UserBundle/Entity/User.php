@@ -17,6 +17,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\EnableableTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\PhotoTrait;
 
 /**
@@ -29,6 +30,7 @@ class User implements \Serializable, UserInterface, EquatableInterface
 {
     use Timestampable;
     use PhotoTrait;
+    use EnableableTrait;
 
     /**
      * @ORM\Column(type="integer")
@@ -66,11 +68,6 @@ class User implements \Serializable, UserInterface, EquatableInterface
      * @ORM\Column(name="salt", type="string", length=40)
      */
     private $salt;
-
-    /**
-     * @ORM\Column(name="enabled", type="boolean")
-     */
-    private $enabled;
 
     /**
      * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\UserBundle\Entity\Role", inversedBy="users")
@@ -150,16 +147,6 @@ class User implements \Serializable, UserInterface, EquatableInterface
     public function getEmail()
     {
         return $this->email;
-    }
-
-    public function getEnabled()
-    {
-        return $this->enabled;
-    }
-
-    public function setEnabled($enabled)
-    {
-        $this->enabled = $enabled;
     }
 
     public function setPassword($password)

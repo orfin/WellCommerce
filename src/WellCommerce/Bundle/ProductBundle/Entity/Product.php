@@ -15,6 +15,8 @@ namespace WellCommerce\Bundle\ProductBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use WellCommerce\Bundle\CategoryBundle\Entity\Category;
+use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\EnableableTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\PhotoTrait;
 use WellCommerce\Bundle\DelivererBundle\Entity\Deliverer;
 use WellCommerce\Bundle\ShopBundle\Entity\Shop;
@@ -34,6 +36,7 @@ class Product
     use ORMBehaviors\Translatable\Translatable;
     use ORMBehaviors\Timestampable\Timestampable;
     use PhotoTrait;
+    use EnableableTrait;
 
     /**
      * @var integer
@@ -102,7 +105,88 @@ class Product
     public function __construct()
     {
         $this->shops      = new ArrayCollection();
-        $this->deliverers = new ArrayCollection();
+        $this->categories = new ArrayCollection();
+        $this->categories = new ArrayCollection();
+    }
+
+    /**
+     * Returns product producer
+     *
+     * @return mixed
+     */
+    public function getProducer()
+    {
+        return $this->producer;
+    }
+
+    /**
+     * Sets product producer
+     *
+     * @param $producer
+     */
+    public function setProducer($producer)
+    {
+        $this->producer = $producer;
+    }
+
+    /**
+     * Returns product producer
+     *
+     * @return mixed
+     */
+    public function getTax()
+    {
+        return $this->tax;
+    }
+
+    /**
+     * Sets product tax
+     *
+     * @param $tax
+     */
+    public function setTax($tax)
+    {
+        $this->tax = $tax;
+    }
+
+    /**
+     * Returns product producer
+     *
+     * @return mixed
+     */
+    public function getUnit()
+    {
+        return $this->unit;
+    }
+
+    /**
+     * Sets product unit
+     *
+     * @param $unit
+     */
+    public function setUnit($unit)
+    {
+        $this->unit = $unit;
+    }
+
+    /**
+     * Returns product availability
+     *
+     * @return mixed
+     */
+    public function getAvailability()
+    {
+        return $this->availability;
+    }
+
+    /**
+     * Sets product availability status
+     *
+     * @param $availability
+     */
+    public function setAvailability($availability)
+    {
+        $this->availability = $availability;
     }
 
     /**
@@ -125,34 +209,44 @@ class Product
         return $this->shops;
     }
 
+    /**
+     * Adds product to shop
+     *
+     * @param Shop $shop
+     */
     public function addShop(Shop $shop)
     {
         $this->shops[] = $shop;
     }
 
     /**
-     * Returns all available deliverers for product
+     * Returns all available categories for product
      *
      * @return ArrayCollection
      */
-    public function getDeliverers()
+    public function getCategories()
     {
-        return $this->deliverers;
+        return $this->categories;
     }
 
     /**
-     * Adds new deliverer to product
+     * Adds new category to product
      *
      * @param Deliverer $deliverer
      */
-    public function addDeliverer(Deliverer $deliverer)
+    public function addCategory(Category $category)
     {
-        $this->deliverers = $deliverer;
+        $this->categories[] = $category;
     }
 
-    public function setDeliverers(ArrayCollection $collection)
+    /**
+     * Sets product category collection
+     *
+     * @param ArrayCollection $collection
+     */
+    public function setCategories(ArrayCollection $collection)
     {
-        $this->deliverers = $collection;
+        $this->categories = $collection;
     }
 }
 
