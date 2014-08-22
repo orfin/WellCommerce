@@ -33,6 +33,11 @@ class FileUploader implements FileUploaderInterface
     const POST_DELETE_EVENT = 'file.post_delete';
 
     /**
+     * @var string
+     */
+    protected $kernelDir;
+
+    /**
      * @var Filesystem
      */
     protected $filesystem;
@@ -47,14 +52,17 @@ class FileUploader implements FileUploaderInterface
      */
     protected $repository;
 
+    protected $uploadPath;
+
     /**
      * Constructor
      *
      * @param Filesystem               $filesystem
      * @param EventDispatcherInterface $eventDispatcher
      */
-    public function __construct(Filesystem $filesystem, EventDispatcherInterface $eventDispatcher, MediaRepositoryInterface $repository)
+    public function __construct($kernelDir, Filesystem $filesystem, EventDispatcherInterface $eventDispatcher, MediaRepositoryInterface $repository)
     {
+        $this->kernelDir       = $kernelDir;
         $this->filesystem      = $filesystem;
         $this->eventDispatcher = $eventDispatcher;
         $this->repository      = $repository;
@@ -75,7 +83,7 @@ class FileUploader implements FileUploaderInterface
     /**
      * {@inheritdoc}
      */
-    public function upload(UploadedFile $file)
+    public function upload(UploadedFile $file, $dir)
     {
         $this->dispatchEvent(self::PRE_UPLOAD_EVENT, $file);
 
@@ -83,11 +91,18 @@ class FileUploader implements FileUploaderInterface
             throw new \Exception('Passed file object is not valid');
         }
 
-        $media = $this->repository->save($file);
+        $media      = $this->repository->save($file);
+        $uploadPath = $this->getUploadRootDir($dir);
 
         $this->dispatchEvent(self::POST_UPLOAD_EVENT, $file);
 
         return $media;
+    }
+
+    private function getUploadRootDir($dir)
+    {
+        //%kernel.root_dir%/../web/media/images
+        return sprintf('%s/../web/media/%s', $this->kernelDir, $dir);
     }
 
     /**

@@ -27,10 +27,11 @@ interface FileUploaderInterface
      * Uploads the file
      *
      * @param UploadedFile $file
+     * @param              $dir
      *
-     * @return \WellCommerce\Bundle\MediaBundle\Entity\Media
+     * @return mixed
      */
-    public function upload(UploadedFile $file);
+    public function upload(UploadedFile $file, $dir);
 
     /**
      * Removes the file from filesystem
