@@ -38,14 +38,43 @@ class UpdateRowEventHandler extends AbstractEventHandler implements EventHandler
     {
         $resolver->setRequired([
             'function',
+            'route',
         ]);
 
         $resolver->setDefaults([
-            'function'       => OptionInterface::GF_NULL,
+            'function' => OptionInterface::GF_NULL,
+            'route'    => OptionInterface::GF_NULL,
         ]);
 
         $resolver->setAllowedTypes([
-            'function'       => ['string'],
+            'function' => ['string'],
+            'route'    => ['string'],
         ]);
+    }
+
+    public function getJavascriptFunction()
+    {
+        return "
+        function {$this->options['function']}(sId, oRow, sColumn, sPreviousValue) {
+            var oRequest = {
+                id:        sId,
+                product:   oRow,
+                column:    sColumn,
+                previous:  sPreviousValue,
+            };
+
+            DataGrid.MakeRequest(Routing.generate('{$this->options['route']}'), oRequest, function(oData){
+                if(oData.success){
+                   GMessage(oRow.name + ' successfully saved');
+                   DataGrid.LoadData();
+                   DataGrid.ClearSelection();
+                }
+
+                if(oData.error){
+                    GError(oData.error);
+                    DataGrid.ClearSelection();
+                }
+            });
+        }";
     }
 }
