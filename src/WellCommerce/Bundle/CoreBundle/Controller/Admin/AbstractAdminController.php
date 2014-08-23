@@ -71,6 +71,13 @@ abstract class AbstractAdminController extends AbstractController implements Adm
         $this->manager    = $manager;
     }
 
+    /**
+     * Returns a form for particular resource
+     *
+     * @param $resource
+     *
+     * @return \WellCommerce\Bundle\CoreBundle\Form\Elements\Form
+     */
     protected function getForm($resource)
     {
         return $this->getFormBuilder($this->form, $resource, [
@@ -78,6 +85,11 @@ abstract class AbstractAdminController extends AbstractController implements Adm
         ]);
     }
 
+    /**
+     * Default index action
+     *
+     * @return array
+     */
     public function indexAction()
     {
         return [
@@ -85,11 +97,25 @@ abstract class AbstractAdminController extends AbstractController implements Adm
         ];
     }
 
+    /**
+     * Default DataGrid view action
+     *
+     * @param Request $request
+     *
+     * @return JsonResponse
+     */
     public function gridAction(Request $request)
     {
         return new JsonResponse($this->datagrid->get()->load($request));
     }
 
+    /**
+     * Default add action
+     *
+     * @param Request $request
+     *
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function addAction(Request $request)
     {
         $resource = $this->repository->createNew();
@@ -106,6 +132,13 @@ abstract class AbstractAdminController extends AbstractController implements Adm
         ];
     }
 
+    /**
+     * Default edit action
+     *
+     * @param Request $request
+     *
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function editAction(Request $request)
     {
         $resource = $this->repository->findResource($request);
@@ -125,6 +158,13 @@ abstract class AbstractAdminController extends AbstractController implements Adm
         ];
     }
 
+    /**
+     * Default delete action
+     *
+     * @param $id
+     *
+     * @return JsonResponse
+     */
     public function deleteAction($id)
     {
         $em = $this->getEntityManager();
