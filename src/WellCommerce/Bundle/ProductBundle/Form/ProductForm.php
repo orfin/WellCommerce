@@ -117,9 +117,12 @@ class ProductForm extends AbstractForm implements FormInterface
         $currencies = $this->get('currency.repository')->getCollectionToSelect('code');
 
         $vat = $pricePane->addChild($builder->getElement('select', [
-            'name'        => 'tax',
-            'label'       => $this->trans('Tax'),
-            'options'     => $this->get('tax.repository')->getCollectionToSelect(),
+            'name'            => 'tax',
+            'label'           => $this->trans('Tax'),
+            'options'         => $this->get('tax.repository')->getCollectionToSelect(),
+            'addable'         => true,
+            'onAdd'           => 'onTaxAdd',
+            'add_item_prompt' => $this->trans('Enter tax value'),
             'transformer' => new EntityToIdentifierTransformer($this->get('tax.repository'))
         ]));
 

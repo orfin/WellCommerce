@@ -394,11 +394,29 @@ class Product
      *
      * @param ArrayCollection $photos
      */
-    public function setProductPhotos(ArrayCollection $photos)
+    public function setProductPhotos(array $data)
     {
+        $params        = $data['data'];
+        $collection    = $data['collection'];
+        $productPhotos = new ArrayCollection();
+
+        // if collection was not modified, do nothing
+        if ($params['unmodified'] == 1) {
+            return false;
+        }
+
+        foreach ($collection as $photo) {
+            $mainPhoto    = (int)($photo->getId() == $params['main']);
+            $productPhoto = new ProductPhoto();
+            $productPhoto->setPhoto($photo);
+            $productPhoto->setMainPhoto($mainPhoto);
+            $productPhoto->setProduct($this);
+            $productPhotos->add($productPhoto);
+        }
+
         // loop through old photos and remove those which haven't been submitted
         foreach ($this->productPhotos as $oldPhoto) {
-            if (!$photos->contains($oldPhoto)) {
+            if (!$productPhotos->contains($oldPhoto)) {
                 $this->productPhotos->removeElement($oldPhoto);
             }
         }
@@ -408,8 +426,7 @@ class Product
          *
          * @var ProductPhoto $photo
          */
-        foreach ($photos as $photo) {
-            $photo->setProduct($this);
+        foreach ($productPhotos as $photo) {
             // if one of photos is main, set it as main product photo
             if ($photo->getMainPhoto() == 1) {
                 $this->setPhoto($photo->getPhoto());
@@ -417,10 +434,10 @@ class Product
         }
 
         // if we don't have any photos, reset main product photo
-        if ($photos->count() == 0) {
+        if ($productPhotos->count() == 0) {
             $this->setPhoto(null);
         }
-        $this->productPhotos = $photos;
+        $this->productPhotos = $productPhotos;
     }
 
     /**

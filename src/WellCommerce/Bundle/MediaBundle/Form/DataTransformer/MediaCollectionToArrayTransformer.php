@@ -69,19 +69,18 @@ class MediaCollectionToArrayTransformer
     public function reverseTransform($data)
     {
         $collection = new ArrayCollection();
-        $photoIds   = $this->getIdsFromData($data);
-        if (empty($photoIds)) {
-            return $collection;
-        }
-        foreach ($photoIds as $id) {
-            $photo        = $this->repository->find($id);
-            $productPhoto = new ProductPhoto();
-            $productPhoto->setPhoto($photo);
-            $productPhoto->setMainPhoto((int)($id == $data['main']));
-            $collection->add($productPhoto);
+
+        foreach ($data as $key => $id) {
+            if (is_int($key)) {
+                $photo = $this->repository->find($id);
+                $collection->add($photo);
+            }
         }
 
-        return $collection;
+        return [
+            'data'       => $data,
+            'collection' => $collection
+        ];
     }
 
     private function getIdsFromData($data)
