@@ -406,30 +406,23 @@ class Product
         }
 
         foreach ($collection as $photo) {
-            $mainPhoto    = (int)($photo->getId() == $params['main']);
+            $mainPhoto = (int)($photo->getId() == $params['main']);
             $productPhoto = new ProductPhoto();
             $productPhoto->setPhoto($photo);
             $productPhoto->setMainPhoto($mainPhoto);
             $productPhoto->setProduct($this);
             $productPhotos->add($productPhoto);
+
+            // ad main photo as product default photo
+            if ($mainPhoto == 1) {
+                $this->setPhoto($photo);
+            }
         }
 
         // loop through old photos and remove those which haven't been submitted
         foreach ($this->productPhotos as $oldPhoto) {
             if (!$productPhotos->contains($oldPhoto)) {
                 $this->productPhotos->removeElement($oldPhoto);
-            }
-        }
-
-        /**
-         * Loop through passed photos collection and set product subject on them
-         *
-         * @var ProductPhoto $photo
-         */
-        foreach ($productPhotos as $photo) {
-            // if one of photos is main, set it as main product photo
-            if ($photo->getMainPhoto() == 1) {
-                $this->setPhoto($photo->getPhoto());
             }
         }
 
