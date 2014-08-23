@@ -396,20 +396,28 @@ class Product
      */
     public function setProductPhotos(ArrayCollection $photos)
     {
+        // loop through old photos and remove those which haven't been submitted
         foreach ($this->productPhotos as $oldPhoto) {
             if (!$photos->contains($oldPhoto)) {
                 $this->productPhotos->removeElement($oldPhoto);
             }
         }
 
+        /**
+         * Loop through passed photos collection and set product subject on them
+         *
+         * @var ProductPhoto $photo
+         */
         foreach ($photos as $photo) {
             $photo->setProduct($this);
+            // if one of photos is main, set it as main product photo
             if ($photo->getMainPhoto() == 1) {
                 $this->setPhoto($photo->getPhoto());
             }
         }
 
-        if($photos->count() == 0){
+        // if we don't have any photos, reset main product photo
+        if ($photos->count() == 0) {
             $this->setPhoto(null);
         }
         $this->productPhotos = $photos;
