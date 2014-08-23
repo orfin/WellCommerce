@@ -401,8 +401,16 @@ class Product
                 $this->productPhotos->removeElement($oldPhoto);
             }
         }
+
         foreach ($photos as $photo) {
             $photo->setProduct($this);
+            if ($photo->getMainPhoto() == 1) {
+                $this->setPhoto($photo->getPhoto());
+            }
+        }
+
+        if($photos->count() == 0){
+            $this->setPhoto(null);
         }
         $this->productPhotos = $photos;
     }

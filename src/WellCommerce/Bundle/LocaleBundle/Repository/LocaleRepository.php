@@ -22,6 +22,8 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
  */
 class LocaleRepository extends AbstractEntityRepository implements LocaleRepositoryInterface
 {
+    private $currentLocales = [];
+
     /**
      * {@inheritdoc}
      */
@@ -46,10 +48,13 @@ class LocaleRepository extends AbstractEntityRepository implements LocaleReposit
      */
     public function getAvailableLocaleCodes()
     {
-        $locales = $this->getAvailableLocales();
-        $codes   = [];
+        if (empty($this->currentLocales)) {
+            $this->currentLocales = $this->getAvailableLocales();
+        }
 
-        foreach ($locales as $locale) {
+        $codes = [];
+
+        foreach ($this->currentLocales as $locale) {
             $codes[$locale['code']] = $locale['code'];
         }
 
@@ -58,10 +63,12 @@ class LocaleRepository extends AbstractEntityRepository implements LocaleReposit
 
     public function getLocalesToSelect()
     {
-        $locales = $this->getAvailableLocales();
+        if (empty($this->currentLocales)) {
+            $this->currentLocales = $this->getAvailableLocales();
+        }
         $ids     = [];
 
-        foreach ($locales as $locale) {
+        foreach ($this->currentLocales as $locale) {
             $ids[$locale['id']] = $locale['code'];
         }
 

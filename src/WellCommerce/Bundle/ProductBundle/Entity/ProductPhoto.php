@@ -72,6 +72,11 @@ class ProductPhoto
         return $this->photo;
     }
 
+    public function getMainPhoto()
+    {
+        return $this->mainPhoto;
+    }
+
     public function setMainPhoto($mainPhoto)
     {
         $this->mainPhoto = $mainPhoto;
