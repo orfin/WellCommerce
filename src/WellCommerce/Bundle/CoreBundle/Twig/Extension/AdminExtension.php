@@ -32,13 +32,19 @@ class AdminExtension extends \Twig_Extension
     protected $session;
 
     /**
+     * @var \WellCommerce\Bundle\TaxBundle\Repository\TaxRepositoryInterface
+     */
+    protected $taxRepository;
+
+    /**
      * Constructor
      *
      * @param SessionInterface $session
      */
-    public function __construct(Session $session)
+    public function __construct(Session $session, TaxRepositoryInterface $taxRepository)
     {
-        $this->session = $session;
+        $this->session       = $session;
+        $this->taxRepository = $taxRepository;
     }
 
     /**
@@ -51,7 +57,8 @@ class AdminExtension extends \Twig_Extension
         return [
             'user'     => $this->session->get('admin/user'),
             'menu'     => $this->session->get('admin/menu'),
-            'flashbag' => $this->session->getFlashBag()
+            'flashbag' => $this->session->getFlashBag(),
+            'taxes'    => $this->taxRepository->getCollectionToSelect('value')
         ];
     }
 
