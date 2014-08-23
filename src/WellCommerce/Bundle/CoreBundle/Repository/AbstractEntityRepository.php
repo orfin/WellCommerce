@@ -15,6 +15,7 @@ use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyPath;
 use WellCommerce\Bundle\CoreBundle\Helper\Helper;
@@ -28,18 +29,18 @@ use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 abstract class AbstractEntityRepository extends EntityRepository implements RepositoryInterface
 {
     /**
-     * @var string Current locale
+     * @var RequestStack
      */
-    private $currentLocale = null;
+    private $requestStack;
 
     /**
      * Sets current locale for repository
      *
      * @param $currentLocale
      */
-    public function setCurrentLocale($currentLocale)
+    public function setRequest(RequestStack $requestStack)
     {
-        $this->currentLocale = $currentLocale;
+        $this->requestStack = $requestStack;
     }
 
     /**
@@ -49,7 +50,7 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
      */
     public function getCurrentLocale()
     {
-        return $this->currentLocale;
+        return $this->requestStack->getCurrentRequest()->getLocale();
     }
 
     /**

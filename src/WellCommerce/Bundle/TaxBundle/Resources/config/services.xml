@@ -24,8 +24,8 @@
 
         <service id="tax.repository" class="%tax.repository.class%" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument>WellCommerceTaxBundle:Tax</argument>
-            <call method="setCurrentLocale">
-                <argument type="expression">service('request').getLocale()</argument>
+            <call method="setRequest">
+                <argument type="service" id="request_stack" />
             </call>
         </service>
 
