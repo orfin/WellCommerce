@@ -17,9 +17,11 @@ use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\EnableableTrait;
+use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\HierarchyTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\MetaDataTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\PhotoTrait;
 use WellCommerce\Bundle\DelivererBundle\Entity\Deliverer;
+use WellCommerce\Bundle\MediaBundle\Entity\Media;
 use WellCommerce\Bundle\ShopBundle\Entity\Shop;
 
 /**
@@ -38,6 +40,7 @@ class Product
     use ORMBehaviors\Timestampable\Timestampable;
     use PhotoTrait;
     use EnableableTrait;
+    use HierarchyTrait;
 
     /**
      * @var integer
@@ -94,6 +97,11 @@ class Product
      * )
      */
     private $categories;
+
+    /**
+     * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\ProductPhoto", mappedBy="product", cascade={"persist"}, orphanRemoval=true)
+     */
+    private $productPhotos;
 
     /**
      * @var string
@@ -175,9 +183,10 @@ class Product
      */
     public function __construct()
     {
-        $this->shops      = new ArrayCollection();
-        $this->categories = new ArrayCollection();
-        $this->categories = new ArrayCollection();
+        $this->shops         = new ArrayCollection();
+        $this->categories    = new ArrayCollection();
+        $this->categories    = new ArrayCollection();
+        $this->productPhotos = new ArrayCollection();
     }
 
     /**
@@ -358,6 +367,44 @@ class Product
     public function addShop(Shop $shop)
     {
         $this->shops[] = $shop;
+    }
+
+    /**
+     * Get product photos
+     *
+     * @return mixed
+     */
+    public function getProductPhotos()
+    {
+        return $this->productPhotos;
+    }
+
+    /**
+     * Adds product photo
+     *
+     * @param ProductPhoto $photo
+     */
+    public function addProductPhoto(ProductPhoto $photo)
+    {
+        $this->productPhotos[] = $photo;
+    }
+
+    /**
+     * Sets product photos
+     *
+     * @param ArrayCollection $photos
+     */
+    public function setProductPhotos(ArrayCollection $photos)
+    {
+        foreach ($this->productPhotos as $oldPhoto) {
+            if (!$photos->contains($oldPhoto)) {
+                $this->productPhotos->removeElement($oldPhoto);
+            }
+        }
+        foreach ($photos as $photo) {
+            $photo->setProduct($this);
+        }
+        $this->productPhotos = $photos;
     }
 
     /**

@@ -68,6 +68,7 @@ class Image extends File implements ElementInterface
             'file_types_description' => 'file_types_description',
             'file_types'             => ['jpg', 'jpeg', 'png', 'gif'],
             'property_path'          => null,
+            'transformer'            => null,
             'dependencies'           => [],
             'filters'                => [],
             'rules'                  => [],

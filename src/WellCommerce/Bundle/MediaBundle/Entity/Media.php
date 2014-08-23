@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\MediaBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -65,6 +66,16 @@ class Media
      * @ORM\Column(type="string", length=12, nullable=true)
      */
     private $size;
+
+    /**
+     * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\ProductPhoto", mappedBy="photo", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    protected $productPhotos;
+
+    public function __construct()
+    {
+        $this->productPhotos = new ArrayCollection();
+    }
 
     /**
      * Get id.

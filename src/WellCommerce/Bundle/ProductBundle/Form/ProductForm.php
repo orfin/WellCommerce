@@ -17,6 +17,7 @@ use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransfo
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\EntityToIdentifierTransformer;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
+use WellCommerce\Bundle\MediaBundle\Form\DataTransformer\MediaCollectionToArrayTransformer;
 use WellCommerce\Bundle\MediaBundle\Form\DataTransformer\MediaEntityToIdentifierTransformer;
 
 /**
@@ -208,7 +209,7 @@ class ProductForm extends AbstractForm implements FormInterface
                     'message' => $this->trans('Weight is required')
                 ])
             ],
-            'filters'   => [
+            'filters' => [
                 $builder->getFilter('comma_to_dot_changer')
             ],
             'default' => 0
@@ -217,7 +218,7 @@ class ProductForm extends AbstractForm implements FormInterface
         $stockData->addChild($builder->getElement('text_field', [
             'name'    => 'width',
             'label'   => $this->trans('Width'),
-            'filters'   => [
+            'filters' => [
                 $builder->getFilter('comma_to_dot_changer')
             ],
         ]));
@@ -225,7 +226,7 @@ class ProductForm extends AbstractForm implements FormInterface
         $stockData->addChild($builder->getElement('text_field', [
             'name'    => 'height',
             'label'   => $this->trans('Height'),
-            'filters'   => [
+            'filters' => [
                 $builder->getFilter('comma_to_dot_changer')
             ],
         ]));
@@ -233,7 +234,7 @@ class ProductForm extends AbstractForm implements FormInterface
         $stockData->addChild($builder->getElement('text_field', [
             'name'    => 'depth',
             'label'   => $this->trans('Depth'),
-            'filters'   => [
+            'filters' => [
                 $builder->getFilter('comma_to_dot_changer')
             ],
         ]));
@@ -246,7 +247,7 @@ class ProductForm extends AbstractForm implements FormInterface
                     'message' => $this->trans('Package size is required')
                 ])
             ],
-            'filters'   => [
+            'filters' => [
                 $builder->getFilter('comma_to_dot_changer')
             ],
             'default' => 1
@@ -265,13 +266,13 @@ class ProductForm extends AbstractForm implements FormInterface
         ]));
 
         $mediaData->addChild($builder->getElement('image', [
-            'name'        => 'photos',
+            'name'        => 'productPhotos',
             'label'       => $this->trans('Photos'),
             'load_route'  => $this->generateUrl('admin.media.grid'),
             'upload_url'  => $this->generateUrl('admin.media.add'),
             'repeat_min'  => 0,
             'repeat_max'  => ElementInterface::INFINITE,
-            'transformer' => new MediaEntityToIdentifierTransformer($this->get('media.repository'))
+            'transformer' => new MediaCollectionToArrayTransformer($this->get('media.repository'))
         ]));
 
         $shopData = $form->addChild($builder->getElement('fieldset', [

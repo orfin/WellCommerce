@@ -13430,7 +13430,7 @@ var GFormImage = GCore.ExtendClass(GFormFile, function() {
 		}
 		if (gThis.m_bRepeatable) {
 			gThis.m_jField.empty();
-			gThis.m_oOptions.asDefaults.photos = GCore.Duplicate(mValue);
+			gThis.m_oOptions.asDefaultstos = GCore.Duplicate(mValue);
 		}
 		else {
 			gThis.m_oOptions.sDefault = mValue;
@@ -13547,7 +13547,7 @@ var GFormImage = GCore.ExtendClass(GFormFile, function() {
 			gThis._InitFilesDatagrid();
 			gThis._InitUploader();
 			if (gThis.m_bRepeatable) {
-				gThis.Populate(gThis.m_oOptions.asDefaults.photos);
+				gThis.Populate(gThis.m_oOptions.asDefaults);
 			}
 			else {
 				gThis.Populate(gThis.m_oOptions.sDefault);
@@ -13713,7 +13713,7 @@ var GFormImage = GCore.ExtendClass(GFormFile, function() {
 		if (gThis.m_bRepeatable) {
 			oRequest.where = [{
 				column: 'id',
-				value: gThis.m_oOptions.asDefaults.photos,
+				value: gThis.m_oOptions.asDefaults,
 				operator: 'IN'
 			}];
 		}

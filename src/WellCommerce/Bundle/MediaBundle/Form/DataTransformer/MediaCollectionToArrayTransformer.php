@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\MediaBundle\Form\DataTransformer;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductPhoto;
 
 /**
  * Class CollectionToArrayTransformer
@@ -47,12 +48,12 @@ class MediaCollectionToArrayTransformer
      */
     public function transform($collection)
     {
-        $meta       = $this->repository->getMetadata();
-        $identifier = $meta->getSingleIdentifierFieldName();
-        $accessor   = $this->repository->getPropertyAccessor();
-        $items      = [];
+        if (null == $collection) {
+            return null;
+        }
+        $items = [];
         foreach ($collection as $item) {
-            $items[] = $accessor->getValue($item, $identifier);
+            $items[] = $item->getPhoto()->getId();
         }
 
         return $items;
@@ -65,18 +66,33 @@ class MediaCollectionToArrayTransformer
      *
      * @return ArrayCollection
      */
-    public function reverseTransform($ids)
+    public function reverseTransform($data)
     {
         $collection = new ArrayCollection();
-        if (null == $ids) {
+        $photoIds   = $this->getIdsFromData($data);
+        if (empty($photoIds)) {
             return $collection;
         }
-        foreach ($ids as $id) {
-            $item = $this->repository->find($id);
-            $collection->add($item);
+        foreach ($photoIds as $id) {
+            $photo        = $this->repository->find($id);
+            $productPhoto = new ProductPhoto();
+            $productPhoto->setPhoto($photo);
+            $productPhoto->setMainPhoto((int)($id == $data['main']));
+            $collection->add($productPhoto);
         }
 
         return $collection;
     }
 
-} 
+    private function getIdsFromData($data)
+    {
+        $ids = [];
+        foreach ($data as $key => $id) {
+            if (is_int($key)) {
+                $ids[] = $id;
+            }
+        }
+
+        return $ids;
+    }
+}

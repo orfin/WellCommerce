@@ -13,25 +13,25 @@
 namespace WellCommerce\Bundle\CoreBundle\Entity\Behaviours;
 
 /**
- * Class EnableableTrait
+ * Class ActivatableTrait
  *
  * @package WellCommerce\Bundle\CoreBundle\Entity\Behaviours
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-trait EnableableTrait
+trait HierarchyTrait
 {
     /**
-     * @ORM\Column(name="enabled", type="boolean")
+     * @ORM\Column(name="hierarchy", type="integer", nullable=true, options={"default":0})
      */
-    private $enabled;
+    private $hierarchy;
 
-    public function getEnabled()
+    public function getHierarchy()
     {
-        return $this->enabled;
+        return $this->hierarchy;
     }
 
-    public function setEnabled($enabled)
+    public function setHierarchy($hierarchy)
     {
-        $this->enabled = $enabled;
+        $this->hierarchy = $hierarchy;
     }
 } 
