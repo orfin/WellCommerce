@@ -38,9 +38,8 @@ class LayoutBox
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="type", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\LayoutBundle\Entity\LayoutBoxType")
+     * @ORM\JoinColumn(name="layout_box_type_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $type;
 
@@ -78,7 +77,7 @@ class LayoutBox
         return $this->type;
     }
 
-    public function setType($type)
+    public function setType(LayoutBoxType $type)
     {
         $this->type = $type;
     }
