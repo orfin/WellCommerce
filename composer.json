@@ -41,8 +41,6 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "zendframework/zend-cache": "2.3.0",
         "zendframework/zend-serializer": "2.3.0",
-        "moxiecode/plupload": "v2.1.2",
-        "jms/di-extra-bundle": "1.4.0",
         "knplabs/doctrine-behaviors": "1.0.x-dev",
         "fzaninotto/faker": "1.5.x-dev",
         "white-october/pagerfanta-bundle": "2.1.x-dev",
