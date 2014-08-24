@@ -11,8 +11,6 @@
  */
 namespace WellCommerce\Bundle\CategoryBundle\Form;
 
-use WellCommerce\Bundle\CompanyBundle\Form\DataTransformer\CompanyToNumberTransformer;
-use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CategoryBundle\Repository\CategoryRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Form\AbstractForm;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;

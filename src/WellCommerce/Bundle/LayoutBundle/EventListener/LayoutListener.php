@@ -84,6 +84,14 @@ class LayoutListener implements EventSubscriberInterface
             'path'       => '[menu][layout][layout_theme]',
             'sort_order' => 10
         ]));
+
+        $builder->add(new AdminMenuItem([
+            'id'         => 'layout_page',
+            'name'       => $this->translator->trans('menu.layout.layout_page'),
+            'link'       => $this->router->generate('admin.layout_page.index'),
+            'path'       => '[menu][layout][layout_page]',
+            'sort_order' => 20
+        ]));
     }
 
     protected function getShopThemeByHost($host)
