@@ -3199,6 +3199,7 @@ form {
 .GForm > .GBlock > fieldset fieldset.priceGroup {
     padding-top: 10px;
     margin-bottom: 30px;
+	border: 1px solid #dfdfdf;
 }
 
 .GForm>.GBlock>fieldset fieldset fieldset {
