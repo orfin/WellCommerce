@@ -40,25 +40,26 @@ class LayoutBox
     /**
      * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\LayoutBundle\Entity\LayoutBoxType")
      * @ORM\JoinColumn(name="layout_box_type_id", referencedColumnName="id", onDelete="SET NULL")
+     * @ORM\OrderBy({"type" = "ASC"})
      */
     private $type;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="settings", type="json_array")
+     * @ORM\Column(name="settings", type="json_array", nullable=true)
      */
     private $settings;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="visibility", type="integer")
+     * @ORM\Column(name="visibility", type="integer", nullable=true, options={"default":1})
      */
     private $visibility;
 
     /**
-     * @ORM\Column(name="show_header", type="boolean", options={"default":1})
+     * @ORM\Column(name="show_header", type="boolean", nullable=true, options={"default":1})
      */
     private $showHeader;
 

@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\LayoutBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use WellCommerce\Bundle\LayoutBundle\Entity\LayoutBoxType;
 use WellCommerce\Bundle\LayoutBundle\Entity\LayoutPage;
 use WellCommerce\Bundle\LayoutBundle\Entity\LayoutTheme;
 
@@ -40,6 +41,14 @@ class LoadLayoutData implements FixtureInterface
             $layoutPage = new LayoutPage();
             $layoutPage->setName($page);
             $manager->persist($layoutPage);
+        }
+
+        $types = $this->getLayoutBoxTypes();
+        foreach ($types as $type) {
+            $layoutBoxType = new LayoutBoxType();
+            $layoutBoxType->setType($type);
+            $layoutBoxType->setVendor('WellCommerce');
+            $manager->persist($layoutBoxType);
         }
 
         $manager->flush();
@@ -72,6 +81,32 @@ class LoadLayoutData implements FixtureInterface
             'Blog',
             'Newsletter',
         ];
+    }
 
+    private function getLayoutBoxTypes()
+    {
+        return [
+            'CategoryBox',
+            'ProducerBox',
+            'ProductBox',
+            'PromotionsBox',
+            'NewsBox',
+            'SearchBox',
+            'CartBox',
+            'CheckoutBox',
+            'FinalizationBox',
+            'PaymentBox',
+            'ClientWishListBox',
+            'ClientOrderBox',
+            'ClientAddressBox',
+            'ClientSettingsBox',
+            'LoginBox',
+            'RegistrationBox',
+            'ForgotPasswordBox',
+            'PageBox',
+            'SiteMapBox',
+            'BlogBox',
+            'NewsletterBox',
+        ];
     }
 }

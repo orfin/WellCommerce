@@ -69,6 +69,11 @@ class LayoutBoxType
         $this->type = $type;
     }
 
+    public function setVendor($vendor)
+    {
+        $this->vendor = $vendor;
+    }
+
     public function getVendor()
     {
         return $this->vendor;

@@ -14,18 +14,15 @@ namespace WellCommerce\Bundle\LayoutBundle\EventListener;
 use Symfony\Component\BrowserKit\Response;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
-use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use WellCommerce\Bundle\AdminMenuBundle\Builder\AdminMenuItem;
 use WellCommerce\Bundle\AdminMenuBundle\Event\AdminMenuInitEvent;
 use WellCommerce\Bundle\CoreBundle\Event\AdminMenuEvent;
-use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 use WellCommerce\Bundle\LayoutBundle\Theme\ShopTheme;
 
 /**
@@ -91,6 +88,14 @@ class LayoutListener implements EventSubscriberInterface
             'link'       => $this->router->generate('admin.layout_page.index'),
             'path'       => '[menu][layout][layout_page]',
             'sort_order' => 20
+        ]));
+
+        $builder->add(new AdminMenuItem([
+            'id'         => 'layout_box',
+            'name'       => $this->translator->trans('menu.layout.layout_box'),
+            'link'       => $this->router->generate('admin.layout_box.index'),
+            'path'       => '[menu][layout][layout_box]',
+            'sort_order' => 30
         ]));
     }
 
