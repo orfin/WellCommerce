@@ -82,16 +82,4 @@ class MediaCollectionToArrayTransformer
             'collection' => $collection
         ];
     }
-
-    private function getIdsFromData($data)
-    {
-        $ids = [];
-        foreach ($data as $key => $id) {
-            if (is_int($key)) {
-                $ids[] = $id;
-            }
-        }
-
-        return $ids;
-    }
 }
