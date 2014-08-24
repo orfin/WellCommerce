@@ -17,12 +17,12 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\EnableableTrait;
 
 /**
- * LayoutTheme
+ * LayoutPage
  *
- * @ORM\Table("layout_theme")
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\LayoutBundle\Repository\LayoutThemeRepository")
+ * @ORM\Table("layout_page")
+ * @ORM\Entity(repositoryClass="WellCommerce\Bundle\LayoutBundle\Repository\LayoutPageRepository")
  */
-class LayoutTheme
+class LayoutPage
 {
     use ORMBehaviors\Timestampable\Timestampable;
 
@@ -43,13 +43,6 @@ class LayoutTheme
     private $name;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="folder", type="string", length=255)
-     */
-    private $folder;
-
-    /**
      * Get id
      *
      * @return integer
@@ -67,15 +60,5 @@ class LayoutTheme
     public function setName($name)
     {
         $this->name = $name;
-    }
-
-    public function getFolder()
-    {
-        return $this->folder;
-    }
-
-    public function setFolder($folder)
-    {
-        $this->folder = $folder;
     }
 }
