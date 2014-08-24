@@ -16,6 +16,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use WellCommerce\Bundle\CategoryBundle\Entity\Category;
+use WellCommerce\Bundle\LayoutBundle\Entity\LayoutTheme;
 use WellCommerce\Bundle\LocaleBundle\Entity\Locale;
 use WellCommerce\Bundle\ProducerBundle\Entity\Producer;
 use WellCommerce\Bundle\ProductBundle\Entity\Product;
@@ -80,6 +81,23 @@ class Shop
     private $availableLocales;
 
     /**
+     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\LayoutBundle\Entity\LayoutTheme")
+     * @ORM\JoinColumn(name="layout_theme_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    private $layoutTheme;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->categories       = new ArrayCollection();
+        $this->products         = new ArrayCollection();
+        $this->producers        = new ArrayCollection();
+        $this->availableLocales = new ArrayCollection();
+    }
+
+    /**
      * Get id.
      *
      * @return integer
@@ -114,6 +132,26 @@ class Shop
     }
 
     /**
+     * Returns default shop theme
+     *
+     * @return mixed
+     */
+    public function getLayoutTheme()
+    {
+        return $this->layoutTheme;
+    }
+
+    /**
+     * Sets default shop theme
+     *
+     * @param LayoutTheme $layoutTheme
+     */
+    public function setLayoutTheme(LayoutTheme $layoutTheme)
+    {
+        $this->layoutTheme = $layoutTheme;
+    }
+
+    /**
      * Get company.
      *
      * @return string
@@ -131,17 +169,6 @@ class Shop
     public function setCompany($company)
     {
         $this->company = $company;
-    }
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->categories       = new ArrayCollection();
-        $this->products         = new ArrayCollection();
-        $this->producers        = new ArrayCollection();
-        $this->availableLocales = new ArrayCollection();
     }
 
     /**
