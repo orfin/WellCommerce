@@ -38,6 +38,7 @@ class Product
 {
     use ORMBehaviors\Translatable\Translatable;
     use ORMBehaviors\Timestampable\Timestampable;
+    use ORMBehaviors\Blameable\Blameable;
     use PhotoTrait;
     use EnableableTrait;
     use HierarchyTrait;

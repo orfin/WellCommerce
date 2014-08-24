@@ -24,6 +24,7 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 class Locale
 {
     use ORMBehaviors\Timestampable\Timestampable;
+    use ORMBehaviors\Blameable\Blameable;
 
     /**
      * @var integer

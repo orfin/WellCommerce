@@ -29,6 +29,7 @@ use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\PhotoTrait;
 class Company
 {
     use ORMBehaviors\Timestampable\Timestampable;
+    use ORMBehaviors\Blameable\Blameable;
     use AddressTrait;
     use PhotoTrait;
 

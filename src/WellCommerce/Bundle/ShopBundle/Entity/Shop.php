@@ -33,6 +33,7 @@ use WellCommerce\Bundle\ProductBundle\Entity\Product;
 class Shop
 {
     use ORMBehaviors\Timestampable\Timestampable;
+    use ORMBehaviors\Blameable\Blameable;
 
     /**
      * @var integer

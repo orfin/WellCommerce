@@ -70,6 +70,9 @@ doctrine_migrations:
     table_name: migration
     name: WellCommerce Migrations
 
+parameters:
+    knp.doctrine_behaviors.blameable_listener.user_entity: WellCommerce\Bundle\UserBundle\Entity\User
+
 liip_imagine:
     loaders:
         default:

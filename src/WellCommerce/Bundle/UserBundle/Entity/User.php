@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\UserBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -29,6 +30,7 @@ use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\PhotoTrait;
 class User implements \Serializable, UserInterface, EquatableInterface
 {
     use Timestampable;
+    use Blameable;
     use PhotoTrait;
     use EnableableTrait;
 

@@ -31,6 +31,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Media
 {
     use ORMBehaviors\Timestampable\Timestampable;
+    use ORMBehaviors\Blameable\Blameable;
 
     /**
      * @var integer

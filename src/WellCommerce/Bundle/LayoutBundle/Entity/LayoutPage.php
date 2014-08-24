@@ -25,6 +25,7 @@ use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\EnableableTrait;
 class LayoutPage
 {
     use ORMBehaviors\Timestampable\Timestampable;
+    use ORMBehaviors\Blameable\Blameable;
 
     /**
      * @var integer

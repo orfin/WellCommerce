@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\CategoryBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 use WellCommerce\Bundle\ProductBundle\Entity\Product;
@@ -30,8 +31,9 @@ use WellCommerce\Bundle\ShopBundle\Entity\Shop;
  */
 class Category
 {
-    use Translatable,
-        Timestampable;
+    use Translatable;
+    use Timestampable;
+    use Blameable;
 
     /**
      * @var integer
