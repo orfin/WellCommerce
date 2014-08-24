@@ -71,6 +71,10 @@ wellcommerce_media:
     resource: "@WellCommerceMediaBundle/Resources/config/routing.xml"
     prefix:   /admin/media
 
+wellcommerce_layout:
+    resource: "@WellCommerceLayoutBundle/Resources/config/routing.xml"
+    prefix:   /admin/layout
+
 root:
     path: /admin
     defaults:

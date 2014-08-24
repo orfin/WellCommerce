@@ -78,10 +78,10 @@ class LayoutListener implements EventSubscriberInterface
         $builder = $event->getBuilder();
 
         $builder->add(new AdminMenuItem([
-            'id'         => 'layout_page',
-            'name'       => $this->translator->trans('menu.layout.layout_page'),
-            //            'link'       => $this->router->generate('admin.layout_page.index'),
-            'path'       => '[menu][layout][layout_page]',
+            'id'         => 'layout_theme',
+            'name'       => $this->translator->trans('menu.layout.layout_theme'),
+            'link'       => $this->router->generate('admin.layout_theme.index'),
+            'path'       => '[menu][layout][layout_theme]',
             'sort_order' => 10
         ]));
     }

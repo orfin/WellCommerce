@@ -11,11 +11,9 @@
  */
 namespace WellCommerce\Bundle\ContactBundle\Form;
 
-use WellCommerce\Bundle\ContactBundle\Entity\Contact;
 use WellCommerce\Bundle\CoreBundle\Form\AbstractForm;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
-use WellCommerce\Bundle\ContactBundle\Repository\ContactRepositoryInterface;
 
 /**
  * Class ContactForm
