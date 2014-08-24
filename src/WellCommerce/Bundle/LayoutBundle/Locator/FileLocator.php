@@ -47,11 +47,11 @@ class FileLocator extends BaseFileLocator
      */
     public function __construct(KernelInterface $kernel, $path = null, ShopTheme $shopTheme)
     {
-        $this->kernel        = $kernel;
-        $this->path          = $path;
-        $this->shopTheme     = $shopTheme;
-        $this->activeTheme   = $this->shopTheme->getCurrentTheme();
-        $this->pathPatterns  = $this->shopTheme->getPathPatterns();
+        $this->kernel       = $kernel;
+        $this->path         = $path;
+        $this->shopTheme    = $shopTheme;
+        $this->activeTheme  = $this->shopTheme->getCurrentTheme();
+        $this->pathPatterns = $this->shopTheme->getPathPatterns();
 
         $this->setCurrentTheme($this->activeTheme);
     }
@@ -133,38 +133,40 @@ class FileLocator extends BaseFileLocator
             '%template%'      => substr($path, strlen('Resources/views/')),
         );
 
-        foreach ($bundles as $bundle) {
-            $parameters = array_merge($parameters, array(
-                '%bundle_path%' => $bundle->getPath(),
-                '%bundle_name%' => $bundle->getName(),
-            ));
+        if (!empty($bundles)) {
+            foreach ($bundles as $bundle) {
+                $parameters = array_merge($parameters, array(
+                    '%bundle_path%' => $bundle->getPath(),
+                    '%bundle_name%' => $bundle->getName(),
+                ));
 
-            $checkPaths = $this->getPathsForBundleResource($parameters);
+                $checkPaths = $this->getPathsForBundleResource($parameters);
 
-            foreach ($checkPaths as $checkPath) {
-                if (file_exists($checkPath)) {
-                    if (null !== $resourceBundle) {
-                        throw new \RuntimeException(sprintf('"%s" resource is hidden by a resource from the "%s" derived bundle. Create a "%s" file to override the bundle resource.',
-                            $path,
-                            $resourceBundle,
-                            $checkPath
-                        ));
+                foreach ($checkPaths as $checkPath) {
+                    if (file_exists($checkPath)) {
+                        if (null !== $resourceBundle) {
+                            throw new \RuntimeException(sprintf('"%s" resource is hidden by a resource from the "%s" derived bundle. Create a "%s" file to override the bundle resource.',
+                                $path,
+                                $resourceBundle,
+                                $checkPath
+                            ));
+                        }
+
+                        if ($first) {
+                            return $checkPath;
+                        }
+                        $files[] = $checkPath;
                     }
+                }
 
+                $file = $bundle->getPath() . '/' . $path;
+                if (file_exists($file)) {
                     if ($first) {
-                        return $checkPath;
+                        return $file;
                     }
-                    $files[] = $checkPath;
+                    $files[]        = $file;
+                    $resourceBundle = $bundle->getName();
                 }
-            }
-
-            $file = $bundle->getPath() . '/' . $path;
-            if (file_exists($file)) {
-                if ($first) {
-                    return $file;
-                }
-                $files[]        = $file;
-                $resourceBundle = $bundle->getName();
             }
         }
 
