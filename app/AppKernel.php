@@ -13,6 +13,11 @@
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
 
+/**
+ * Class AppKernel
+ *
+ * @author Adam Piotrowski <adam@wellcommerce.org>
+ */
 class AppKernel extends Kernel
 {
     public function registerBundles()
