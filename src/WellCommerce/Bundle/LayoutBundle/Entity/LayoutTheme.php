@@ -51,6 +51,11 @@ class LayoutTheme
     private $folder;
 
     /**
+     * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\LayoutBundle\Entity\LayoutPageColumn", mappedBy="theme", cascade={"persist"}, orphanRemoval=true)
+     */
+    private $columns;
+
+    /**
      * Get id
      *
      * @return integer

@@ -44,6 +44,11 @@ class LayoutPage
     private $name;
 
     /**
+     * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\LayoutBundle\Entity\LayoutPageColumn", mappedBy="page", cascade={"persist"}, orphanRemoval=true)
+     */
+    private $columns;
+
+    /**
      * Get id
      *
      * @return integer
