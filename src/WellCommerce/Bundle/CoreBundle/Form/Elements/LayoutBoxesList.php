@@ -30,24 +30,42 @@ class LayoutBoxesList extends Field implements ElementInterface
         $resolver->setRequired([
             'name',
             'boxes',
+            'property_path',
         ]);
 
         $resolver->setOptional([
             'label',
             'comment',
+            'dependencies',
+            'filters',
+            'rules',
+            'transformer',
+        ]);
+
+        $resolver->setDefaults([
+            'property_path' => null,
+            'transformer'   => null,
+            'dependencies'  => [],
+            'filters'       => [],
+            'rules'         => [],
         ]);
 
         $resolver->setAllowedTypes([
-            'name'    => ['int', 'string'],
-            'label'   => 'string',
-            'comment' => 'string',
-            'boxes'   => 'array',
+            'name'          => ['int', 'string'],
+            'label'         => 'string',
+            'comment'       => 'string',
+            'boxes'         => 'array',
+            'dependencies'  => 'array',
+            'filters'       => 'array',
+            'rules'         => 'array',
+            'property_path' => ['null', 'object'],
+            'transformer'   => ['null', 'object'],
         ]);
     }
 
     public function prepareAttributesJs()
     {
-        $attributes = Array(
+        $attributes = [
             $this->formatAttributeJs('name', 'sName'),
             $this->formatAttributeJs('label', 'sLabel'),
             $this->formatAttributeJs('comment', 'sComment'),
@@ -56,7 +74,7 @@ class LayoutBoxesList extends Field implements ElementInterface
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
             $this->formatDefaultsJs()
-        );
+        ];
 
         return $attributes;
     }

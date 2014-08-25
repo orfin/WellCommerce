@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\LayoutBundle\Form;
 use Symfony\Component\Finder\Finder;
 use WellCommerce\Bundle\CoreBundle\Form\AbstractForm;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
 
 /**
@@ -29,55 +30,54 @@ class LayoutPageForm extends AbstractForm implements FormInterface
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $layoutPages = $this->get('layout_page.repository')->findAll();
+
         $form = $builder->init($options);
 
-        $requiredData = $form->addChild($builder->getElement('fieldset', [
-            'name'  => 'required_data',
-            'label' => $this->trans('Required data')
-        ]));
+        /**
+         * @var \WellCommerce\Bundle\LayoutBundle\Entity\LayoutPage $layoutPage
+         */
+        foreach ($layoutPages as $layoutPage) {
 
-        $requiredData->addChild($builder->getElement('text_field', [
-            'name'  => 'name',
-            'label' => $this->trans('Theme name'),
-            'rules' => [
-                $builder->getRule('required', [
-                    'message' => $this->trans('Theme name is required')
-                ]),
-            ]
-        ]));
+            $columnData = $form->addChild($builder->getElement('fieldset', [
+                'name'  => 'layout_page_' . $layoutPage->getId(),
+                'label' => $layoutPage->getName()
+            ]));
 
-        $requiredData->addChild($builder->getElement('select', [
-            'name'    => 'folder',
-            'label'   => $this->trans('Theme folder'),
-            'comment' => $this->trans('Select theme folder from list'),
-            'options' => $this->getFolderDirectories()
-        ]));
+            $columnDataColumns = $columnData->addChild($builder->getElement('fieldset_repeatable', [
+                'name'       => 'columns_data',
+                'repeat_min' => 1,
+                'repeat_max' => ElementInterface::INFINITE
+            ]));
+
+            $columnDataColumns->addChild($builder->getElement('tip', [
+                'tip'         => '<p>' . $this->trans('To extend the column to all remaining width please enter') . ' <strong>0</strong>.</p>',
+                'retractable' => false
+            ]));
+
+            $columnDataColumns->addChild($builder->getElement('text_field', [
+                'name'    => 'width',
+                'label'   => $this->trans('Width'),
+                'rules'   => [
+                    $builder->getRule('required', [
+                        'message' => $this->trans('Width is required')
+                    ]),
+                ],
+                'default' => 0
+            ]));
+
+            $columnDataColumns->addChild($builder->getElement('layout_boxes_list', [
+                'name'  => 'layout_boxes',
+                'label' => $this->trans('Choose boxes'),
+                'boxes' => []
+            ]));
+        }
+
 
         $form->addFilter('no_code');
         $form->addFilter('trim');
         $form->addFilter('secure');
 
         return $form;
-    }
-
-    /**
-     * Lists all themes available in app/Resources/themes directory
-     *
-     * @return array
-     */
-    private function getFolderDirectories()
-    {
-        $finder       = new Finder();
-        $kernelDir    = $this->get('kernel')->getRootDir();
-        $searchDir    = $kernelDir . DIRECTORY_SEPARATOR . 'Resources' . DIRECTORY_SEPARATOR . 'themes';
-        $directories  = $finder->directories()->in($searchDir)->sortByName()->depth('== 1');
-        $themeFolders = [];
-
-        foreach ($directories as $directory) {
-            $name                = $directory->getRelativePath();
-            $themeFolders[$name] = $name;
-        }
-
-        return $themeFolders;
     }
 }

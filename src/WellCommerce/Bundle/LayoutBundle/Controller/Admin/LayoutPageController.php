@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\LayoutBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
@@ -34,6 +35,23 @@ class LayoutPageController extends AbstractAdminController
 
         return [
             'tree' => $tree
+        ];
+    }
+
+    public function editAction(Request $request)
+    {
+        $tree = $this->getFormBuilder($this->get('layout_page.tree'), null, [
+            'name'  => 'layout_page_tree',
+            'class' => 'category-select',
+        ]);
+
+        $form = $this->getFormBuilder($this->get('layout_page.form'), null, [
+            'name' => 'layout_page_form',
+        ]);
+
+        return [
+            'tree' => $tree,
+            'form' => $form
         ];
     }
 }

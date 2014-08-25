@@ -21,12 +21,8 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
  */
 class LayoutPageRepository extends AbstractEntityRepository implements LayoutPageRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getDataGridQueryBuilder()
+    public function findAll()
     {
-        return parent::getQueryBuilder();
-
+        return $this->findBy([], ['name' => 'ASC']);
     }
 }
