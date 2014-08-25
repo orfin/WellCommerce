@@ -57,6 +57,11 @@ class LayoutPageColumn
     protected $theme;
 
     /**
+     * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\LayoutBundle\Entity\LayoutPageColumnBox", mappedBy="column", cascade={"persist"}, orphanRemoval=true)
+     */
+    private $boxes;
+
+    /**
      * Get id
      *
      * @return integer
