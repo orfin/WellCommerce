@@ -59,14 +59,17 @@ class LayoutPageController extends AbstractAdminController
             $formData = $form->getSubmitValuesGrouped();
             $theme    = $this->get('layout_theme.repository')->find($this->getParam('id'));
 
+            // first delete all columns
             foreach ($pageColumns as $page) {
                 $this->getEntityManager()->remove($page);
             }
 
+            // iterate through submitted data
             foreach ($formData as $pageId => $columnsData) {
                 $pageId     = substr($pageId, 12);
                 $layoutPage = $this->get('layout_page.repository')->find($pageId);
 
+                // iterate through all columns and add them to page
                 foreach ($columnsData['columns_data'] as $column) {
                     $layoutPageColumn = new LayoutPageColumn();
                     $layoutPageColumn->setTheme($theme);
@@ -74,6 +77,7 @@ class LayoutPageController extends AbstractAdminController
                     $layoutPageColumn->setWidth($column['width']);
                     $this->getEntityManager()->persist($layoutPageColumn);
 
+                    // add boxes to each column
                     $this->saveColumnBoxes($column['layout_boxes'], $layoutPageColumn);
                 }
             }
