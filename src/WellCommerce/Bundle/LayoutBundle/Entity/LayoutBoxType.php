@@ -52,9 +52,9 @@ class LayoutBoxType
     /**
      * @var string
      *
-     * @ORM\Column(name="service", type="string", length=255)
+     * @ORM\Column(name="configurator_service", type="string", nullable=true, length=255)
      */
-    private $service;
+    private $configuratorService;
 
     /**
      * Get id
@@ -86,13 +86,18 @@ class LayoutBoxType
         return $this->vendor;
     }
 
-    public function setService($service)
+    public function setConfiguratorService($configuratorService)
     {
-        $this->service = $service;
+        $this->configuratorService = $configuratorService;
     }
 
-    public function getService()
+    public function getConfiguratorService()
     {
-        return $this->service;
+        return $this->configuratorService;
+    }
+
+    public function hasConfiguratorService()
+    {
+        return !is_null($this->configuratorService);
     }
 }

@@ -16,6 +16,7 @@ use WellCommerce\Bundle\CoreBundle\Form\AbstractForm;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
+use WellCommerce\Bundle\CoreBundle\Form\Option;
 
 /**
  * Class LayoutPageForm
@@ -67,10 +68,12 @@ class LayoutPageForm extends AbstractForm implements FormInterface
                 'default' => 0
             ]));
 
+            $pageBoxes = $this->getBoxesForPage($layoutPage->getName(), $layoutBoxes);
+
             $columnDataColumns->addChild($builder->getElement('layout_boxes_list', [
                 'name'  => 'layout_boxes',
                 'label' => $this->trans('Choose boxes'),
-                'boxes' => $this->getBoxesForPage($layoutPage->getName(), $layoutBoxes)
+                'boxes' => Option::make($pageBoxes)
             ]));
         }
 
@@ -98,9 +101,14 @@ class LayoutPageForm extends AbstractForm implements FormInterface
          * @var \WellCommerce\Bundle\LayoutBundle\Entity\LayoutBox $layoutBox
          */
         foreach ($layoutBoxes as $layoutBox) {
-            $configurator = $this->getLayoutManager()->getLayoutBoxConfigurator($layoutBox->getBoxType()->getType());
-            if ($configurator->isAvailableForLayoutPage($page)) {
-                $boxes[$box->id] = $layoutBox->translation->first()->name;
+            $layoutBoxType = $layoutBox->getBoxType();
+            if ($layoutBoxType->hasConfiguratorService()) {
+                $configurator = $layoutBoxType->getConfiguratorService();
+                if ($configurator->isAvailableForLayoutPage($page)) {
+                    $boxes[$layoutBox->getId()] = $layoutBox->translate()->getName();
+                }
+            } else {
+                $boxes[$layoutBox->getId()] = $layoutBox->translate()->getName();
             }
         }
 

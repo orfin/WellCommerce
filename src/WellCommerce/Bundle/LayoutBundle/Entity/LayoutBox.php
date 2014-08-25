@@ -73,6 +73,9 @@ class LayoutBox
         return $this->id;
     }
 
+    /**
+     * @return \WellCommerce\Bundle\LayoutBundle\Entity\LayoutBoxType
+     */
     public function getBoxType()
     {
         return $this->boxType;

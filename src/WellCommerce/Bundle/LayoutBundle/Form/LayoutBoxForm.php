@@ -53,7 +53,7 @@ class LayoutBoxForm extends AbstractForm implements FormInterface
         ]));
 
         $requiredData->addChild($builder->getElement('select', [
-            'name'        => 'type',
+            'name'        => 'boxType',
             'label'       => $this->trans('Box type'),
             'options'     => $this->get('layout_box_type.repository')->getCollectionToSelect('type'),
             'transformer' => new EntityToIdentifierTransformer($this->get('layout_box_type.repository'))

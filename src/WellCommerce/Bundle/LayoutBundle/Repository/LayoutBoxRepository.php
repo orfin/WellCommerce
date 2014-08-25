@@ -36,7 +36,7 @@ class LayoutBoxRepository extends AbstractEntityRepository implements LayoutBoxR
                 'WellCommerce\Bundle\LayoutBundle\Entity\LayoutBoxType',
                 'layout_box_type',
                 'WITH',
-                'layout_box.type = layout_box_type.id');
+                'layout_box.boxType = layout_box_type.id');
 
     }
 }
