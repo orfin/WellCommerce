@@ -21,6 +21,7 @@
         <!-- pages -->
         <parameter key="layout_page.controller.admin.class">WellCommerce\Bundle\LayoutBundle\Controller\Admin\LayoutPageController</parameter>
         <parameter key="layout_page.repository.class">WellCommerce\Bundle\LayoutBundle\Repository\LayoutPageRepository</parameter>
+        <parameter key="layout_page_column.repository.class">WellCommerce\Bundle\LayoutBundle\Repository\LayoutPageColumnRepository</parameter>
         <parameter key="layout_page.form.class">WellCommerce\Bundle\LayoutBundle\Form\LayoutPageForm</parameter>
         <parameter key="layout_page.tree.class">WellCommerce\Bundle\LayoutBundle\Form\LayoutPageTree</parameter>
         <!-- boxes -->
@@ -101,6 +102,13 @@
 
         <service id="layout_page.repository" class="%layout_page.repository.class%" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument>WellCommerceLayoutBundle:LayoutPage</argument>
+            <call method="setRequest">
+                <argument type="service" id="request_stack" />
+            </call>
+        </service>
+
+        <service id="layout_page_column.repository" class="%layout_page_column.repository.class%" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceLayoutBundle:LayoutPageColumn</argument>
             <call method="setRequest">
                 <argument type="service" id="request_stack" />
             </call>

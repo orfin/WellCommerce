@@ -20,7 +20,7 @@ use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\HierarchyTrait;
 /**
  * LayoutPageColumnBox
  *
- * @ORM\Table("layout_column_column_box")
+ * @ORM\Table("layout_page_column_box")
  * @ORM\Entity(repositoryClass="WellCommerce\Bundle\LayoutBundle\Repository\LayoutPageColumnBoxRepository")
  */
 class LayoutPageColumnBox
@@ -46,7 +46,7 @@ class LayoutPageColumnBox
 
     /**
      * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\LayoutBundle\Entity\LayoutPageColumn", inversedBy="boxes")
-     * @ORM\JoinColumn(name="layout_column_column_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="layout_page_column_id", referencedColumnName="id", nullable=false)
      */
     protected $column;
 

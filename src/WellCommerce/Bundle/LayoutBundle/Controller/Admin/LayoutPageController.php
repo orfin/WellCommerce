@@ -15,6 +15,8 @@ namespace WellCommerce\Bundle\LayoutBundle\Controller\Admin;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
+use WellCommerce\Bundle\LayoutBundle\Entity\LayoutPageColumn;
+use WellCommerce\Bundle\LayoutBundle\Entity\LayoutPageColumnBox;
 
 /**
  * Class LayoutPageController
@@ -49,9 +51,82 @@ class LayoutPageController extends AbstractAdminController
             'name' => 'layout_page_form',
         ]);
 
+        $pageColumns = $this->get('layout_page_column.repository')->findBy(['theme' => $this->getParam('id')]);
+
+        $form->populate($this->prepareData($pageColumns));
+
+        if ($form->handleRequest($request)->isValid()) {
+            $formData = $form->getSubmitValuesGrouped();
+            $theme    = $this->get('layout_theme.repository')->find($this->getParam('id'));
+
+            foreach ($pageColumns as $page) {
+                $this->getEntityManager()->remove($page);
+            }
+
+            foreach ($formData as $pageId => $columnsData) {
+                $pageId     = substr($pageId, 12);
+                $layoutPage = $this->get('layout_page.repository')->find($pageId);
+
+                foreach ($columnsData['columns_data'] as $column) {
+                    $layoutPageColumn = new LayoutPageColumn();
+                    $layoutPageColumn->setTheme($theme);
+                    $layoutPageColumn->setPage($layoutPage);
+                    $layoutPageColumn->setWidth($column['width']);
+                    $this->getEntityManager()->persist($layoutPageColumn);
+
+                    $this->saveColumnBoxes($column['layout_boxes'], $layoutPageColumn);
+                }
+            }
+
+            $this->getEntityManager()->flush();
+
+            return $this->manager->getRedirectHelper()->redirectTo('admin.layout_page.edit', [
+                'id' => $this->getParam('id')
+            ]);
+        }
+
         return [
             'tree' => $tree,
             'form' => $form
         ];
+    }
+
+    protected function saveColumnBoxes($boxes, LayoutPageColumn $column)
+    {
+        if (!empty($boxes)) {
+            foreach ($boxes as $box) {
+                $boxId               = $box['layoutbox'];
+                $layoutBox           = $this->get('layout_box.repository')->find($boxId);
+                $layoutPageColumnBox = new LayoutPageColumnBox();
+                $layoutPageColumnBox->setBox($layoutBox);
+                $layoutPageColumnBox->setColumn($column);
+                $layoutPageColumnBox->setSpan($box['span']);
+                $this->getEntityManager()->persist($layoutPageColumnBox);
+            }
+        }
+    }
+
+    protected  function prepareData($pageColumns)
+    {
+        $formData = [];
+
+        foreach ($pageColumns as $column) {
+
+            $boxes = [];
+            foreach ($column->getBoxes() as $box) {
+                $boxes[] = [
+                    'box'       => $box->getBox()->getId(),
+                    'span'      => $box->getSpan(),
+                    'collapsed' => 0
+                ];
+            }
+
+            $formData['layout_page_' . $column->getPage()->getId()]['columns_data'][$column->getId()] = [
+                'width'        => $column->getWidth(),
+                'layout_boxes' => $boxes
+            ];
+        }
+
+        return $formData;
     }
 }

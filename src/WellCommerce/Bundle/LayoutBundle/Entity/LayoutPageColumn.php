@@ -101,4 +101,9 @@ class LayoutPageColumn
         $this->theme = $theme;
     }
 
+    public function getBoxes()
+    {
+        return $this->boxes;
+    }
+
 }
