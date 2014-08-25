@@ -50,6 +50,13 @@ class LayoutBoxType
     private $vendor;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="service", type="string", length=255)
+     */
+    private $service;
+
+    /**
      * Get id
      *
      * @return integer
@@ -77,5 +84,15 @@ class LayoutBoxType
     public function getVendor()
     {
         return $this->vendor;
+    }
+
+    public function setService($service)
+    {
+        $this->service = $service;
+    }
+
+    public function getService()
+    {
+        return $this->service;
     }
 }

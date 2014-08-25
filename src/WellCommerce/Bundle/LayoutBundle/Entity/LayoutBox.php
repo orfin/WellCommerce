@@ -42,7 +42,7 @@ class LayoutBox
      * @ORM\JoinColumn(name="layout_box_type_id", referencedColumnName="id", onDelete="SET NULL")
      * @ORM\OrderBy({"type" = "ASC"})
      */
-    private $type;
+    private $boxType;
 
     /**
      * @var string
@@ -73,14 +73,14 @@ class LayoutBox
         return $this->id;
     }
 
-    public function getType()
+    public function getBoxType()
     {
-        return $this->type;
+        return $this->boxType;
     }
 
-    public function setType(LayoutBoxType $type)
+    public function setBoxType(LayoutBoxType $boxType)
     {
-        $this->type = $type;
+        $this->boxType = $boxType;
     }
 
     public function getVisibility()

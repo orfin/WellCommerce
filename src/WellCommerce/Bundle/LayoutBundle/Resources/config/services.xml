@@ -10,6 +10,8 @@
         <parameter key="layout.listener.class">WellCommerce\Bundle\LayoutBundle\EventListener\LayoutListener</parameter>
         <parameter key="layout.shop_theme.class">WellCommerce\Bundle\LayoutBundle\Theme\ShopTheme</parameter>
         <parameter key="layout_box_type.repository.class">WellCommerce\Bundle\LayoutBundle\Repository\LayoutBoxTypeRepository</parameter>
+        <parameter key="layout_manager.class">WellCommerce\Bundle\LayoutBundle\Manager\LayoutManager</parameter>
+        <parameter key="layout_renderer.class">WellCommerce\Bundle\LayoutBundle\Manager\LayoutRenderer</parameter>
         <!-- themes -->
         <parameter key="layout_theme.controller.admin.class">WellCommerce\Bundle\LayoutBundle\Controller\Admin\LayoutThemeController</parameter>
         <parameter key="layout_theme.repository.class">WellCommerce\Bundle\LayoutBundle\Repository\LayoutThemeRepository</parameter>
@@ -151,6 +153,21 @@
             <argument>WellCommerceLayoutBundle:LayoutBoxType</argument>
             <call method="setRequest">
                 <argument type="service" id="request_stack" />
+            </call>
+        </service>
+
+        <service id="layout_manager" class="%layout_manager.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="layout_renderer" class="%layout_renderer.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setLayoutRepository">
+                <argument type="service" id="layout_theme.repository"/>
             </call>
         </service>
     </services>

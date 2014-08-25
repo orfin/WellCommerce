@@ -31,6 +31,7 @@ class LayoutPageForm extends AbstractForm implements FormInterface
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $layoutPages = $this->get('layout_page.repository')->findAll();
+        $layoutBoxes = $this->get('layout_box.repository')->findAll();
 
         $form = $builder->init($options);
 
@@ -69,7 +70,7 @@ class LayoutPageForm extends AbstractForm implements FormInterface
             $columnDataColumns->addChild($builder->getElement('layout_boxes_list', [
                 'name'  => 'layout_boxes',
                 'label' => $this->trans('Choose boxes'),
-                'boxes' => []
+                'boxes' => $this->getBoxesForPage($layoutPage->getName(), $layoutBoxes)
             ]));
         }
 
@@ -79,5 +80,30 @@ class LayoutPageForm extends AbstractForm implements FormInterface
         $form->addFilter('secure');
 
         return $form;
+    }
+
+    /**
+     * Returns only boxes available for chosen page
+     *
+     * @param $page
+     * @param $layoutBoxes
+     *
+     * @return array
+     */
+    public function getBoxesForPage($page, $layoutBoxes)
+    {
+        $boxes = [];
+
+        /**
+         * @var \WellCommerce\Bundle\LayoutBundle\Entity\LayoutBox $layoutBox
+         */
+        foreach ($layoutBoxes as $layoutBox) {
+            $configurator = $this->getLayoutManager()->getLayoutBoxConfigurator($layoutBox->getBoxType()->getType());
+            if ($configurator->isAvailableForLayoutPage($page)) {
+                $boxes[$box->id] = $layoutBox->translation->first()->name;
+            }
+        }
+
+        return $boxes;
     }
 }
