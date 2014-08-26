@@ -31,4 +31,23 @@ interface CategoryRepositoryInterface extends RepositoryInterface
      */
     public function getTreeItems();
 
+    /**
+     * Adds category using only its name
+     * Mostly used in alert prompt on category index/edit screen
+     *
+     * @param $name
+     *
+     * @return mixed
+     */
+    public function quickAddCategory($name);
+
+    /**
+     * Changes categories hierarchy
+     *
+     * @param $items
+     *
+     * @return mixed
+     */
+    public function changeOrder($items);
+
 } 

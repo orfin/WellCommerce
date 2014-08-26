@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\Repository;
 
+use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Request\Request;
 use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 
@@ -77,6 +78,18 @@ class CategoryRepository extends AbstractEntityRepository implements CategoryRep
             }
         }
         $this->_em->flush();
+    }
+
+    public function quickAddCategory($name)
+    {
+        $category = new Category();
+        $category->setHierarchy(0);
+        $category->translate()->setName($name);
+        $category->mergeNewTranslations();
+        $this->getEntityManager()->persist($category);
+        $this->getEntityManager()->flush();
+
+        return $category;
     }
 
 }
