@@ -14,6 +14,8 @@ namespace WellCommerce\Bundle\LayoutBundle\Repository;
 
 use WellCommerce\Bundle\CoreBundle\DataGrid\Repository\DataGridAwareRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
+use WellCommerce\Bundle\LayoutBundle\Entity\LayoutTheme;
+use WellCommerce\Bundle\LayoutBundle\Manager\Layout;
 
 /**
  * Interface LayoutThemeRepositoryInterface
@@ -23,5 +25,22 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
  */
 interface LayoutThemeRepositoryInterface extends RepositoryInterface, DataGridAwareRepositoryInterface
 {
+    /**
+     * Returns columns for passed layout and theme
+     *
+     * @param LayoutTheme $theme
+     * @param Layout      $layout
+     *
+     * @return mixed
+     */
+    public function getLayoutColumns(LayoutTheme $theme, Layout $layout);
 
+    /**
+     * Returns layout theme
+     *
+     * @param $themeId
+     *
+     * @return LayoutTheme
+     */
+    public function find($themeId);
 } 

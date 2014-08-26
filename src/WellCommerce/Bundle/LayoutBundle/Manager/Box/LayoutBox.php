@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Bundle\LayoutBundle\Manager\Box;
 
+use WellCommerce\Bundle\LayoutBundle\Entity\LayoutBox as LayoutBoxModel;
+
 /**
  * Class LayoutBox
  *
@@ -51,12 +53,12 @@ class LayoutBox
      * @param $box
      * @param $controller
      */
-    public function __construct($box, $controller)
+    public function __construct(LayoutBoxModel $box, $controller, $span)
     {
-        $this->id         = $box->box->id;
-        $this->settings   = $box->box->settings;
-        $this->type       = $box->box->type;
-        $this->span       = $box->span;
+        $this->id         = $box->getId();
+        $this->settings   = $box->getSettings();
+        $this->type       = $box->getBoxType()->getType();
+        $this->span       = $span;
         $this->controller = $controller;
     }
 }

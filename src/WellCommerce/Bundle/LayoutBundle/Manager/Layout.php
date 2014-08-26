@@ -12,42 +12,36 @@
 
 namespace WellCommerce\Bundle\LayoutBundle\Manager;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * Class Layout
  *
  * @package WellCommerce\Bundle\LayoutBundle\Manager
  * @author  Adam Piotrowski <adam@wellcommerce.org>
+ *
+ * @Annotation
  */
 class Layout implements LayoutInterface
 {
     /**
      * @var string Layout name
      */
-    private $name;
+    public $name;
 
     /**
      * @var bool Cache status
      */
-    private $cacheEnabled;
+    public $cacheEnabled;
 
     /**
      * @var int Cache lifetime in seconds
      */
-    private $ttl;
+    public $ttl;
 
-    /**
-     * Constructor
-     *
-     * @param string $name
-     * @param bool   $cache
-     * @param int    $ttl
-     */
-    public function __construct($name, $cache, $ttl)
-    {
-        $this->name         = $name;
-        $this->cacheEnabled = (bool)$cache;
-        $this->ttl          = (int)$ttl;
-    }
+    public $theme;
+
+    private $columns;
 
     /**
      * {@inheritdoc}
@@ -72,4 +66,24 @@ class Layout implements LayoutInterface
     {
         return (int)$this->ttl;
     }
-} 
+
+    public function setTheme($theme)
+    {
+        $this->theme = $theme;
+    }
+
+    public function getTheme()
+    {
+        return $this->theme;
+    }
+
+    public function setColumns(array $columns)
+    {
+        $this->columns = $columns;
+    }
+
+    public function getColumns()
+    {
+        return $this->columns;
+    }
+}

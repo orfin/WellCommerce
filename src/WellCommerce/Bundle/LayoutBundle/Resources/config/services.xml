@@ -47,6 +47,8 @@
             <argument type="service" id="translator"/>
             <argument type="service" id="router"/>
             <argument type="service" id="layout.shop_theme"/>
+            <argument type="service" id="annotation_reader"/>
+            <argument type="service" id="layout_theme.repository"/>
             <tag name="kernel.event_subscriber" />
         </service>
 
@@ -173,9 +175,6 @@
         <service id="layout_renderer" class="%layout_renderer.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
-            </call>
-            <call method="setLayoutRepository">
-                <argument type="service" id="layout_theme.repository"/>
             </call>
         </service>
     </services>

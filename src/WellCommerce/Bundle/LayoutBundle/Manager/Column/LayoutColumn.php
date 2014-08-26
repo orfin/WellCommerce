@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\LayoutBundle\Manager\Column;
 
-use WellCommerce\Bundle\CoreBundle\Layout\Box\LayoutBoxCollection;
+use WellCommerce\Bundle\LayoutBundle\Manager\Box\LayoutBoxCollection;
 
 /**
  * Class LayoutColumn

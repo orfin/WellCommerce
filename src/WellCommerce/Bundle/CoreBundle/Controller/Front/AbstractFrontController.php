@@ -12,8 +12,8 @@
 namespace WellCommerce\Bundle\CoreBundle\Controller\Front;
 
 use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
-use WellCommerce\Bundle\CoreBundle\Layout\Layout;
-use WellCommerce\Bundle\CoreBundle\Layout\LayoutInterface;
+use WellCommerce\Bundle\LayoutBundle\Manager\Layout;
+use WellCommerce\Bundle\LayoutBundle\Manager\LayoutInterface;
 
 /**
  * Class AbstractFrontController
@@ -23,18 +23,17 @@ use WellCommerce\Bundle\CoreBundle\Layout\LayoutInterface;
  */
 abstract class AbstractFrontController extends AbstractController implements FrontControllerInterface
 {
-    /**s
-     *
-     * @var \WellCommerce\Bundle\CoreBundle\Layout\LayoutInterface
+    /**
+     * @var null|Layout
      */
     private $layout = null;
 
     /**
      * {@inheritdoc}
      */
-    protected function setLayout($name, $cache = true, $ttl = LayoutInterface::CACHE_TTL)
+    public function setLayout(Layout $layout)
     {
-        $this->layout = new Layout($name, $cache, $ttl);
+        $this->layout = $layout;
     }
 
     /**

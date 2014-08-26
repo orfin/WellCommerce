@@ -42,4 +42,11 @@ interface LayoutInterface
      * @return int
      */
     public function getCacheTtl();
+
+    /**
+     * Returns column collection for current layout page
+     *
+     * @return mixed
+     */
+    public function getColumns();
 } 

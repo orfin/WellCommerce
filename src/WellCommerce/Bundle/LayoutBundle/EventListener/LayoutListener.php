@@ -11,6 +11,7 @@
  */
 namespace WellCommerce\Bundle\LayoutBundle\EventListener;
 
+use Doctrine\Common\Annotations\Reader;
 use Symfony\Component\BrowserKit\Response;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -23,6 +24,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 use WellCommerce\Bundle\AdminMenuBundle\Builder\AdminMenuItem;
 use WellCommerce\Bundle\AdminMenuBundle\Event\AdminMenuInitEvent;
 use WellCommerce\Bundle\CoreBundle\Event\AdminMenuEvent;
+use WellCommerce\Bundle\LayoutBundle\Repository\LayoutThemeRepositoryInterface;
 use WellCommerce\Bundle\LayoutBundle\Theme\ShopTheme;
 
 /**
@@ -34,35 +36,49 @@ use WellCommerce\Bundle\LayoutBundle\Theme\ShopTheme;
 class LayoutListener implements EventSubscriberInterface
 {
     /**
-     * @var \Symfony\Component\DependencyInjection\ContainerInterface
+     * @var ContainerInterface
      */
     private $container;
 
     /**
-     * @var \Symfony\Component\Translation\TranslatorInterface
+     * @var TranslatorInterface
      */
     private $translator;
 
     /**
-     * @var \Symfony\Component\Routing\RouterInterface
+     * @var RouterInterface
      */
     private $router;
 
     /**
-     * @var \WellCommerce\Bundle\LayoutBundle\Theme\ShopTheme
+     * @var ShopTheme
      */
     private $shopTheme;
+
+    /**
+     * @var Reader
+     */
+    private $reader;
+
+    /**
+     * @var LayoutThemeRepositoryInterface
+     */
+    private $layoutThemeRepository;
 
     public function __construct(
         ContainerInterface $container,
         TranslatorInterface $translator,
         RouterInterface $router,
-        ShopTheme $shopTheme
+        ShopTheme $shopTheme,
+        Reader $reader,
+        LayoutThemeRepositoryInterface $layoutThemeRepository
     ) {
-        $this->container  = $container;
-        $this->translator = $translator;
-        $this->router     = $router;
-        $this->shopTheme  = $shopTheme;
+        $this->container             = $container;
+        $this->translator            = $translator;
+        $this->router                = $router;
+        $this->shopTheme             = $shopTheme;
+        $this->reader                = $reader;
+        $this->layoutThemeRepository = $layoutThemeRepository;
     }
 
     /**
@@ -99,15 +115,20 @@ class LayoutListener implements EventSubscriberInterface
         ]));
     }
 
-    protected function getShopThemeByHost($host)
-    {
-        return $host;
-    }
-
     public function onKernelController(FilterControllerEvent $event)
     {
-        $host = $event->getRequest()->server->get('SERVER_NAME');
-        $this->shopTheme->setCurrentTheme($this->getShopThemeByHost($host));
+        list($controller,) = $event->getController();
+
+        $host     = $event->getRequest()->server->get('SERVER_NAME');
+        $refClass = new \ReflectionClass($controller);
+        $layout   = $this->reader->getClassAnnotation($refClass, 'WellCommerce\\Bundle\\LayoutBundle\\Manager\\Layout');
+        if (null !== $layout) {
+            $theme   = $this->layoutThemeRepository->find(4);
+            $columns = $this->layoutThemeRepository->getLayoutColumns($theme, $layout);
+            $layout->setColumns($columns);
+            $this->shopTheme->setCurrentTheme($theme->getFolder());
+            $controller->setLayout($layout);
+        }
     }
 
     /**
