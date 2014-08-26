@@ -68,6 +68,7 @@ class AdminMenuListener implements EventSubscriberInterface
                 'id'         => 'dashboard',
                 'class'      => 'dashboard',
                 'name'       => $this->translator->trans('Dashboard'),
+                'link'       => $this->router->generate('admin.dashboard.index'),
                 'path'       => '[menu][dashboard]',
                 'sort_order' => 10,
             ]));

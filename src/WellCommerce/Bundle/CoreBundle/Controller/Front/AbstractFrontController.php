@@ -41,10 +41,10 @@ abstract class AbstractFrontController extends AbstractController implements Fro
      */
     protected function renderLayout()
     {
-        if (null === $this->layout) {
-            throw new \LogicException(sprintf('Layout for controller is not set. You must use setLayout method in controller service definition.'));
+        if (null !== $this->layout) {
+            $this->getLayoutRenderer()->load($this->layout);
         }
 
-        return $this->getLayoutRenderer()->load($this->layout);
+        return '';
     }
 }

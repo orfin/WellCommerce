@@ -51,18 +51,18 @@ abstract class AbstractAdminController extends AbstractController implements Adm
     /**
      * Constructor
      *
-     * @param ContainerInterface    $container
-     * @param RepositoryInterface   $repository
-     * @param DataGridInterface     $datagrid
-     * @param FormInterface         $form
-     * @param AdminManagerInterface $manager
+     * @param ContainerInterface       $container
+     * @param null|RepositoryInterface $repository
+     * @param null|DataGridInterface   $datagrid
+     * @param null|FormInterface       $form
+     * @param AdminManagerInterface    $manager
      */
     public function __construct(
         ContainerInterface $container,
         AdminManagerInterface $manager,
-        RepositoryInterface $repository,
+        RepositoryInterface $repository = null,
         DataGridInterface $datagrid = null,
-        FormInterface $form
+        FormInterface $form = null
     ) {
         $this->setContainer($container);
         $this->repository = $repository;
