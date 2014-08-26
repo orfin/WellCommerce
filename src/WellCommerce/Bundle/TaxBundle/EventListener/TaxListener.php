@@ -63,7 +63,7 @@ class TaxListener implements EventSubscriberInterface
 
         $builder->add(new AdminMenuItem([
             'id'         => 'tax',
-            'name'       => $this->translator->trans('menu.configuration.tax'),
+            'name'       => $this->translator->trans('menu.configuration.tax', [], 'admin'),
             'link'       => $this->router->generate('admin.tax.index'),
             'path'       => '[menu][configuration][tax]',
             'sort_order' => 20

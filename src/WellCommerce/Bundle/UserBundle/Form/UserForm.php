@@ -11,6 +11,7 @@
  */
 namespace WellCommerce\Bundle\UserBundle\Form;
 
+use Symfony\Component\Validator\Constraints\Email;
 use WellCommerce\Bundle\CoreBundle\Form\AbstractForm;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\Form\FormInterface;

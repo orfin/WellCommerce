@@ -48,6 +48,6 @@ interface CategoryRepositoryInterface extends RepositoryInterface
      *
      * @return mixed
      */
-    public function changeOrder($items);
+    public function changeOrder(array $items = []);
 
 } 
