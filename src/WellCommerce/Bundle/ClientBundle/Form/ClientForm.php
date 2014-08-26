@@ -16,12 +16,12 @@ use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
 
 /**
- * Class ClientGroupForm
+ * Class ClientForm
  *
  * @package WellCommerce\Bundle\ClientBundle\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientGroupForm extends AbstractForm implements FormInterface
+class ClientForm extends AbstractForm implements FormInterface
 {
     /**
      * {@inheritdoc}
@@ -36,26 +36,21 @@ class ClientGroupForm extends AbstractForm implements FormInterface
         ]));
 
         $requiredData->addChild($builder->getElement('text_field', [
-            'name'    => 'discount',
-            'label'   => $this->trans('client_group.discount.label'),
-            'comment' => $this->trans('client_group.discount.comment'),
-            'suffix'  => '%',
-            'filters' => [
-                $builder->getFilter('comma_to_dot_changer')
-            ],
-        ]));
-
-        $languageData = $requiredData->addChild($builder->getElement('fieldset_language', [
-            'name'      => 'translations',
-            'label'     => $this->trans('form.required_data.language_data.label')
-        ]));
-
-        $languageData->addChild($builder->getElement('text_field', [
-            'name'  => 'name',
-            'label' => $this->trans('client_group.language_data.name.label'),
+            'name'    => 'firstName',
+            'label'   => $this->trans('First name'),
             'rules' => [
                 $builder->getRule('required', [
-                    'message' => $this->trans('Name is required')
+                    'message' => $this->trans('First name is required')
+                ]),
+            ]
+        ]));
+
+        $requiredData->addChild($builder->getElement('text_field', [
+            'name'    => 'lastName',
+            'label'   => $this->trans('Last name'),
+            'rules' => [
+                $builder->getRule('required', [
+                    'message' => $this->trans('Last name is required')
                 ]),
             ]
         ]));
