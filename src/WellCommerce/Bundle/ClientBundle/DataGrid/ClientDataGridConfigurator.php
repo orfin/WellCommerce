@@ -16,12 +16,12 @@ use WellCommerce\Bundle\CoreBundle\DataGrid\Configurator\AbstractConfigurator;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Configurator\ConfiguratorInterface;
 
 /**
- * Class ClientGroupDataGridConfigurator
+ * Class ClientDataGridConfigurator
  *
  * @package WellCommerce\Bundle\ClientBundle\DataGrid
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientGroupDataGridConfigurator extends AbstractConfigurator implements ConfiguratorInterface
+class ClientDataGridConfigurator extends AbstractConfigurator implements ConfiguratorInterface
 {
 
 }

@@ -61,6 +61,7 @@ class ClientListener implements EventSubscriberInterface
         $builder->add(new AdminMenuItem([
             'id'         => 'client',
             'name'       => $this->translator->trans('menu.crm.clients'),
+            'link'       => $this->router->generate('admin.client.index'),
             'path'       => '[menu][crm][client]',
             'sort_order' => 10
         ]));

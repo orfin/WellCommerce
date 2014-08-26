@@ -20,15 +20,10 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
  * @package WellCommerce\Bundle\ClientBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientGroupRepository extends AbstractEntityRepository implements ClientGroupRepositoryInterface
+class ClientRepository extends AbstractEntityRepository implements ClientGroupRepositoryInterface
 {
     public function getDataGridQueryBuilder()
     {
-        return parent::getQueryBuilder()
-            ->leftJoin(
-                'WellCommerce\Bundle\ClientBundle\Entity\ClientGroupTranslation',
-                'client_group_translation',
-                'WITH',
-                'client_group.id = client_group_translation.translatable AND client_group_translation.locale = :locale');
+        return parent::getQueryBuilder();
     }
 }
