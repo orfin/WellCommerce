@@ -11,7 +11,6 @@
  */
 namespace WellCommerce\Bundle\ShopBundle\Form;
 
-use WellCommerce\Bundle\CompanyBundle\Form\DataTransformer\CompanyToNumberTransformer;
 use WellCommerce\Bundle\CoreBundle\Form\AbstractForm;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
@@ -38,7 +37,12 @@ class ShopForm extends AbstractForm implements FormInterface
             'label' => $this->trans('form.required_data')
         ]));
 
-        $requiredData->addChild($builder->getElement('text_field', [
+        $languageData = $requiredData->addChild($builder->getElement('fieldset_language', [
+            'name'  => 'translations',
+            'label' => $this->trans('Translations'),
+        ]));
+
+        $languageData->addChild($builder->getElement('text_field', [
             'name'  => 'name',
             'label' => $this->trans('shop.name'),
             'rules' => [
@@ -73,6 +77,31 @@ class ShopForm extends AbstractForm implements FormInterface
             'label'       => $this->trans('Available locales'),
             'options'     => $this->get('locale.repository')->getLocalesToSelect(),
             'transformer' => new CollectionToArrayTransformer($this->get('locale.repository'))
+        ]));
+
+        $metaData = $form->addChild($builder->getElement('fieldset', [
+            'name'  => 'meta_data',
+            'label' => $this->trans('Meta settings')
+        ]));
+
+        $languageData = $metaData->addChild($builder->getElement('fieldset_language', [
+            'name'  => 'translations',
+            'label' => $this->trans('Translations'),
+        ]));
+
+        $languageData->addChild($builder->getElement('text_field', [
+            'name'  => 'metaTitle',
+            'label' => $this->trans('Title')
+        ]));
+
+        $languageData->addChild($builder->getElement('text_field', [
+            'name'  => 'metaKeywords',
+            'label' => $this->trans('Keywords'),
+        ]));
+
+        $languageData->addChild($builder->getElement('text_area', [
+            'name'  => 'metaDescription',
+            'label' => $this->trans('Description'),
         ]));
 
         $form->addFilter('no_code');

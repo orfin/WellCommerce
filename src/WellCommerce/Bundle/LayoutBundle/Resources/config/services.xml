@@ -8,7 +8,7 @@
         <import resource="pages.xml"/>
         <import resource="boxes.xml"/>
     </imports>
-    
+
     <parameters>
         <parameter key="layout.templating_locator.class">WellCommerce\Bundle\LayoutBundle\Locator\TemplateLocator</parameter>
         <parameter key="layout.file_locator.class">WellCommerce\Bundle\LayoutBundle\Locator\FileLocator</parameter>

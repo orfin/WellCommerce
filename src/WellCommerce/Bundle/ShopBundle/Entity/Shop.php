@@ -16,6 +16,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use WellCommerce\Bundle\CategoryBundle\Entity\Category;
+use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\MetaDataTrait;
 use WellCommerce\Bundle\LayoutBundle\Entity\LayoutTheme;
 use WellCommerce\Bundle\LocaleBundle\Entity\Locale;
 use WellCommerce\Bundle\ProducerBundle\Entity\Producer;
@@ -34,6 +35,7 @@ class Shop
 {
     use ORMBehaviors\Timestampable\Timestampable;
     use ORMBehaviors\Blameable\Blameable;
+    use ORMBehaviors\Translatable\Translatable;
 
     /**
      * @var integer
@@ -43,13 +45,6 @@ class Shop
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255, nullable=false)
-     */
-    private $name;
 
     /**
      * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\CompanyBundle\Entity\Company")
@@ -109,30 +104,6 @@ class Shop
     }
 
     /**
-     * Set name.
-     *
-     * @param string $name
-     *
-     * @return Shop
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name.
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
      * Returns default shop theme
      *
      * @return mixed
@@ -147,7 +118,7 @@ class Shop
      *
      * @param LayoutTheme $layoutTheme
      */
-    public function setLayoutTheme(LayoutTheme $layoutTheme)
+    public function setLayoutTheme(LayoutTheme $layoutTheme = null)
     {
         $this->layoutTheme = $layoutTheme;
     }

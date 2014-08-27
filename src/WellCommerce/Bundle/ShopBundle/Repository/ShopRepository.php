@@ -27,6 +27,13 @@ class ShopRepository extends AbstractEntityRepository implements ShopRepositoryI
      */
     public function getDataGridQueryBuilder()
     {
-        return parent::getQueryBuilder()->groupBy('shop.id');
+        return parent::getQueryBuilder()
+            ->groupBy('shop.id')
+            ->leftJoin(
+                'WellCommerce\Bundle\ShopBundle\Entity\ShopTranslation',
+                'shop_translation',
+                'WITH',
+                'shop.id = shop_translation.translatable AND shop_translation.locale = :locale');
+
     }
 }

@@ -26,7 +26,8 @@ class ProducerRepository extends AbstractEntityRepository implements ProducerRep
      */
     public function getDataGridQueryBuilder()
     {
-        return parent::getQueryBuilder()->groupBy('producer.id')
+        return parent::getQueryBuilder()
+            ->groupBy('producer.id')
             ->leftJoin(
                 'WellCommerce\Bundle\ProducerBundle\Entity\ProducerTranslation',
                 'producer_translation',

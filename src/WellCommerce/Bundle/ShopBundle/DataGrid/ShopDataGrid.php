@@ -48,7 +48,7 @@ class ShopDataGrid extends AbstractDataGrid implements DataGridInterface
 
         $collection->add(new Column([
             'id'         => 'name',
-            'source'     => 'shop.name',
+            'source'     => 'shop_translation.name',
             'caption'    => $this->trans('Name'),
             'appearance' => [
                 'width' => 70,
