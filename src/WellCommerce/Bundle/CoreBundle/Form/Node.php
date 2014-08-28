@@ -12,13 +12,11 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form;
 
+use Doctrine\Common\Util\ClassUtils;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use Symfony\Component\PropertyAccess\PropertyPath;
-use WellCommerce\Bundle\CoreBundle\Form\Elements\Field;
-use WellCommerce\Bundle\CoreBundle\Form\Resolver\ElementResolverInterface;
 
 /**
  * Class Node
@@ -32,21 +30,26 @@ abstract class Node extends ContainerAware
     protected $parent = null;
     protected $_id;
     protected $attributes;
-    protected $_renderMode = 'JS';
-    protected $_tabs = '';
-    protected $_jsNodeName;
-    protected $_xajaxMethods = [];
-    protected static $_nextId = 0;
+    protected $renderMode = 'JS';
+    protected $tabs = '';
     protected $optionsResolver;
     protected $elementResolver;
     protected $options;
+    protected $children = [];
+    protected static $_nextId = 0;
 
     public function __construct()
     {
         $this->optionsResolver = new OptionsResolver();
         $this->_id             = self::$_nextId++;
-        $class                 = explode('\\', get_class($this));
-        $this->_jsNodeName     = 'GForm' . end($class);
+    }
+
+    protected function getJavascriptNodeName()
+    {
+        $class = ClassUtils::getRealClass(ltrim(get_class($this), '\\'));
+        $parts = explode('\\', $class);
+
+        return 'GForm' . end($parts);
     }
 
     public function setOptions(array $options = [])
@@ -102,12 +105,12 @@ abstract class Node extends ContainerAware
 
     public function render($mode = 'JS', $tabs = '')
     {
-        $this->_tabs       = $tabs;
-        $this->_renderMode = $mode;
-        $renderFunction    = 'render' . $mode;
-        $lines             = explode(PHP_EOL, $this->$renderFunction());
+        $this->tabs       = $tabs;
+        $this->renderMode = $mode;
+        $renderFunction   = 'render' . $mode;
+        $lines            = explode(PHP_EOL, $this->$renderFunction());
         foreach ($lines as &$line) {
-            $line = $this->_tabs . $line;
+            $line = $this->tabs . $line;
         }
 
         return implode(PHP_EOL, $lines);
@@ -159,27 +162,27 @@ abstract class Node extends ContainerAware
         return $values;
     }
 
-    public function getName()
+    protected function getName()
     {
         return $this->attributes['name'];
     }
 
-    public function getPropertyAccessor()
+    protected function getPropertyAccessor()
     {
         return PropertyAccess::createPropertyAccessor();
     }
 
-    public function getPropertyPath()
+    protected function getPropertyPath()
     {
         return $this->attributes['property_path'];
     }
 
-    public function hasTransformer()
+    protected function hasTransformer()
     {
         return (null !== $this->attributes['transformer']);
     }
 
-    public function getTransformer()
+    protected function getTransformer()
     {
         return $this->attributes['transformer'];
     }
@@ -286,11 +289,10 @@ abstract class Node extends ContainerAware
 
     protected function formatAttributesJs($attributes)
     {
-        $attributes       = array_merge($attributes, $this->prepareAutoAttributesJs());
         $attributesString = PHP_EOL;
         foreach ($attributes as $attribute) {
             if (!empty($attribute)) {
-                $attributesString .= $this->_tabs . $attribute . ",\n";
+                $attributesString .= $this->tabs . $attribute . ",\n";
             }
         }
 
@@ -407,7 +409,10 @@ abstract class Node extends ContainerAware
 
     public function renderJs()
     {
-        return "{fType: {$this->_jsNodeName},{$this->formatAttributesJs($this->prepareAttributesJs())}}";;
+        $jsNodeName   = $this->getJavascriptNodeName();
+        $jsAttributes = $this->formatAttributesJs($this->prepareAttributesJs());
+
+        return "{fType: {$jsNodeName},{$jsAttributes}}";
     }
 
     protected function prepareAttributesJs()
@@ -448,13 +453,5 @@ abstract class Node extends ContainerAware
 
     public function populate($value)
     {
-    }
-
-    protected function prepareAutoAttributesJs()
-    {
-        $attributes = [];
-        $attributes = array_merge($attributes, $this->_xajaxMethods);
-
-        return $attributes;
     }
 }

@@ -1,47 +1,35 @@
 /**
- * Gekosale, Open Source E-Commerce Solution
- * http://www.gekosale.com
+ * GF()
  *
- * Copyright (c) 2009 Gekosale
- *
- * This library is free software; you can redistribute it and/or 
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version. 
- * 
+ * Groups elemetary methods that are used widely in the whole GexoFramework.
+ * The class mainly consists of static methods availble to call from
+ * any place in the application.
  */
- /**
-* GF()
-* 
-* Groups elemetary methods that are used widely in the whole GexoFramework.
-* The class mainly consists of static methods availble to call from
-* any place in the application.
-*/
 function GF() {};
 
 /**
-* const GF.NULL - Null equivalent.
-*/
+ * const GF.NULL - Null equivalent.
+ */
 GF.NULL = -9999;
 
 /**
-* GF.ExtendClass(sType, fChild[, oChildStatic])
-* 
-* Function that realises the classical inheritance model.
-* 
-* Treats the current class as the base class and extends it with the one
-* passed as the second argument. The first argument specifies the child
-* class' name. The third argument, if defined, is an object consisting
-* of the child class' static members.
-* 
-* @return function - New class implementing both source classes.
-* @param sType string - Name of the new class.
-* @param fChild function - The definition of the derived class.
-* @param fChildStatic object - An object consisting of the child class'
-*  static members. It should be built of name-definition pairs.
-* @param bNoBaseConstructor bool - If set to true, the base class'
-*  constructor isn't invoked when derived object is created.
-*/
+ * GF.ExtendClass(sType, fChild[, oChildStatic])
+ *
+ * Function that realises the classical inheritance model.
+ *
+ * Treats the current class as the base class and extends it with the one
+ * passed as the second argument. The first argument specifies the child
+ * class' name. The third argument, if defined, is an object consisting
+ * of the child class' static members.
+ *
+ * @return function - New class implementing both source classes.
+ * @param sType string - Name of the new class.
+ * @param fChild function - The definition of the derived class.
+ * @param fChildStatic object - An object consisting of the child class static members.
+ * It should be built of name-definition pairs.
+ * @param bNoBaseConstructor bool - If set to true, the base class'
+ *  constructor isn't invoked when derived object is created.
+ */
 GF.ExtendClass = function(sType, fChild, oChildStatic, bNoBaseConstructor) {
 	var fBase = this;
 	var fExtended = function() {
@@ -108,16 +96,17 @@ GF.ImplementStaticMembers = function(oProto, sType) {
 };
 
 /**
-* GF.NewConstructor(fConstructor)
-* 
-* Prepares a safe constructor that catches all the thrown exceptions during
-* its evaluation. It is recommended that all newly created constructors should
-* be processed using this method. Otherwise you should manually ensure to 
-* correctly apply exception catching.
-* 
-* @return function - Safe object constructor.
-* @param fConstructor function - A function pointer to the base constructor.
-*/
+ * GF.NewConstructor(fConstructor)
+ *
+ * Prepares a safe constructor that catches all the thrown exceptions during
+ * its evaluation. It is recommended that all newly created constructors should
+ * be processed using this method. Otherwise you should manually ensure to
+ * correctly apply exception catching.
+ *
+ * @param fConstructor          A function pointer to the base constructor
+ * @returns {fSafeConstructor}  Safe object constructor
+ * @constructor
+ */
 GF.NewConstructor = function(fConstructor) {
 	var fSafeConstructor = function(jTarget, oOptions) {
 		try {
@@ -129,20 +118,22 @@ GF.NewConstructor = function(fConstructor) {
 			return false;
 		}
 	};
+
 	return fSafeConstructor;
 };
 
 /**
-* GF.NewEventHandler(fHandler)
-* 
-* Prepares a safe event handler that catches all the thrown exceptions. It is
-* recommended that all newly created event handlers should be processed using
-* this method. Otherwise you should manually ensure to correctly apply
-* exception catching.
-* 
-* @return function - Safe event handler.
-* @param fHandler function - A function pointer to the base event handler.
-*/
+ * GF.NewEventHandler(fHandler)
+ *
+ * Prepares a safe event handler that catches all the thrown exceptions. It is
+ * recommended that all newly created event handlers should be processed using
+ * this method. Otherwise you should manually ensure to correctly apply
+ * exception catching.
+ *
+ * @param fHandler          A function pointer to the base event handler
+ * @returns {fSafeHandler}  Safe event handler
+ * @constructor
+ */
 GF.NewEventHandler = function(fHandler) {
 	var fSafeHandler = function(eEvent) {
 		try {
@@ -157,16 +148,17 @@ GF.NewEventHandler = function(fHandler) {
 };
 
 /**
-* GF.NewSafeMethod(fMethod)
-* 
-* Prepares a safe method that catches all the thrown exceptions. It is
-* recommended that all newly created methods that can be invoked externally
-* should be processed using this method. Otherwise you should manually 
-* ensure to correctly apply exception catching.
-* 
-* @return function - Safe method.
-* @param fHandler function - A function pointer to the base method.
-*/
+ * GF.NewSafeMethod(fMethod)
+ *
+ * Prepares a safe method that catches all the thrown exceptions. It is
+ * recommended that all newly created methods that can be invoked externally
+ * should be processed using this method. Otherwise you should manually
+ * ensure to correctly apply exception catching.
+ *
+ * @param fMethod           A function pointer to the base method
+ * @returns {fSafeHandler}  Safe method
+ * @constructor
+ */
 GF.NewSafeMethod = function(fMethod) {
 	var fSafeHandler = function(eEvent) {
 		try {
@@ -181,27 +173,29 @@ GF.NewSafeMethod = function(fMethod) {
 };
 
 /**
-* GF.GetClasses(jNode)
-* 
-* Returns an array of the node's classes.
-* 
-* @return array - Classname array.
-* @param jNode jQuery - Target DOM node.
-*/
+ * GF.GetClasses(jNode)
+ *
+ * Returns an array of the node's classes
+ *
+ * @param jNode         Target DOM node
+ * @returns {Array|*}   Classname array
+ * @constructor
+ */
 GF.GetClasses = function(jNode) {
 	return jNode.attr('class').split(' ');
 };
 
 /**
-* GF.GetChunkFromClass(jNode, sNeedle)
-* 
-* Looks int he node's class string for a chunk that starts with sNeedle.
-* When found, returns the remaining part of such chunk.
-* 
-* @return string - Remaining part of the found chunk or an empty string.
-* @param jNode jQuery - Node which classes are subject to search.
-* @param sNeedle string - Beginning of the chunk that we want to find.
-*/
+ * GF.GetChunkFromClass(jNode, sNeedle)
+ *
+ * Looks int he node's class string for a chunk that starts with sNeedle.
+ * When found, returns the remaining part of such chunk.
+ *
+ * @param jNode         Node which classes are subject to search
+ * @param sNeedle       Beginning of the chunk that we want to find
+ * @returns {string}
+ * @constructor
+ */
 GF.GetChunkFromClass = function(jNode, sNeedle) {
 	var aClasses = GF.GetClasses(jNode);
 	for (var i in aClasses) {
@@ -2275,18 +2269,6 @@ GF_Datagrid_Data_Provider.ChangeData = function(oData) {
 };
 
 /**
- * Gekosale, Open Source E-Commerce Solution
- * http://www.gekosale.com
- *
- * Copyright (c) 2009 Gekosale
- *
- * This library is free software; you can redistribute it and/or 
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version. 
- * 
- */
- /**
 * GF_Datagrid(jTarget, oOptions)
 * 
 * 
@@ -2545,10 +2527,10 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 			if(this.m_oOptions.mechanics.persistent){
 				if(this.m_bFirstLoad){
 					if(sCookie){
-						var oRequest =  $.parseJSON(Base64.decode(sCookie));
+						oRequest =  $.parseJSON(Base64.decode(sCookie));
 					}
 					else if((window.location.hash).length){
-						var oRequest =  $.parseJSON(Base64.decode(window.location.hash));
+						oRequest =  $.parseJSON(Base64.decode(window.location.hash));
 					}
 				}
 				

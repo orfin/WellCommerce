@@ -89,15 +89,6 @@ abstract class Container extends Node
         return $this->children;
     }
 
-    public function getChild($name)
-    {
-        foreach ($this->form->fields as $child) {
-            if (method_exists($child, 'getName') && $name === $child->getName()) {
-                return $child;
-            }
-        }
-    }
-
     public function getFields()
     {
         return $this->form->fields;
@@ -107,7 +98,7 @@ abstract class Container extends Node
     {
         $render = [];
         foreach ($this->children as $child) {
-            $render[] = $child->render($this->_renderMode, $this->_tabs . $this->tabsOffset);
+            $render[] = $child->render($this->renderMode, $this->tabs . $this->tabsOffset);
         }
 
         return implode(',', $render);
