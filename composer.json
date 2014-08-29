@@ -50,7 +50,9 @@
         "jms/serializer-bundle": "0.13.0",
         "nelmio/api-doc-bundle": "2.7.0",
         "ircmaxell/password-compat": "1.0.3",
-        "liip/imagine-bundle": "1.0.4"
+        "liip/imagine-bundle": "1.0.4",
+        "behat/behat": "3.0.x-dev",
+        "behat/symfony2-extension": "2.0.x-dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
