@@ -1,0 +1,16 @@
+default:
+    formatters:
+        pretty:
+            verbose:  true
+            paths:    false
+            snippets: false
+    extensions:
+            Behat\MinkExtension:
+                sessions:
+                    default:
+                        symfony2: ~
+                    javascript:
+                        selenium2: ~
+                browser_name: firefox
+                show_auto:    false
+            Behat\Symfony2Extension: ~
