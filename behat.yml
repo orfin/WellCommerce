@@ -17,8 +17,9 @@ default:
         Behat\MinkExtension:
             sessions:
                 default:
-                    selenium2: ~
-            browser_name: firefox
+                    selenium2:
+                      wd_host: http://127.0.0.1:4444/wd/hub/session
             show_auto:    false
+            browser_name: firefox
             base_url: http://wellcommerce.dev
         Behat\Symfony2Extension: ~
