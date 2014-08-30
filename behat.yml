@@ -4,13 +4,21 @@ default:
             verbose:  true
             paths:    false
             snippets: false
+
+    suites:
+        dashboard:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - WellCommerce\Bundle\DashboardBundle\Behat\DashboardContext
+            filters:
+                tags: "@dashboard"
+
     extensions:
-            Behat\MinkExtension:
-                sessions:
-                    default:
-                        symfony2: ~
-                    javascript:
-                        selenium2: ~
-                browser_name: firefox
-                show_auto:    false
-            Behat\Symfony2Extension: ~
+        Behat\MinkExtension:
+            sessions:
+                default:
+                    selenium2: ~
+            browser_name: firefox
+            show_auto:    false
+            base_url: http://wellcommerce.dev
+        Behat\Symfony2Extension: ~

@@ -45,7 +45,7 @@ before_script:
     - sleep 10
 
 script:
-    - bin/codecept run
+    - bin/behat --suite=dashboard --stop-on-failure
 
 after_failure:
     - cat error.log

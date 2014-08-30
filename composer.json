@@ -22,7 +22,7 @@
     "autoload": {
         "psr-0": {
             "": "src/",
-            "SymfonyStandard": "app/"
+            "Context": "features/"
         }
     },
     "require": {
@@ -60,7 +60,6 @@
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
         "doctrine/doctrine-fixtures-bundle": "2.2.x-dev",
-        "codeception/codeception": "2.0.4"
     },
     "scripts": {
         "post-root-package-install": [
