@@ -13,6 +13,13 @@ default:
             filters:
                 tags: "@dashboard"
 
+        product:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - WellCommerce\Bundle\ProductBundle\Behat\ProductContext
+            filters:
+                tags: "@product"
+
         user:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
