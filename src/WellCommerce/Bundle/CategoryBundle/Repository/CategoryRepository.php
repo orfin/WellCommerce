@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\CategoryBundle\Repository;
 
 use WellCommerce\Bundle\CategoryBundle\Entity\Category;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Request\Request;
 use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 
 /**
