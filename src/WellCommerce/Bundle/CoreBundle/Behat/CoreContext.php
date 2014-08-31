@@ -85,7 +85,6 @@ class CoreContext extends RawMinkContext implements SnippetAcceptingContext, Ker
     {
         $username = 'admin';
         $password = 'admin';
-        $user     = $this->getService('user.repository')->findOneBy(['email' => $username]);
 
         $this->getSession()->visit($this->generateUrl('admin.user.login'));
 

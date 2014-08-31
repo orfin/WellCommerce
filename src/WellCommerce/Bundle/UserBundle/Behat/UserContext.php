@@ -10,23 +10,23 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\DashboardBundle\Behat;
+namespace WellCommerce\Bundle\UserBundle\Behat;
 
 use WellCommerce\Bundle\CoreBundle\Behat\CoreContext;
 
 /**
- * Class DashboardContext
+ * Class UserContext
  *
- * @package WellCommerce\Bundle\DashboardBundle\Behat
+ * @package WellCommerce\Bundle\UserBundle\Behat
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class DashboardContext extends CoreContext
+class UserContext extends CoreContext
 {
     /**
-     * @Given I am on the dashboard page
+     * @Given I am on the index page
      */
-    public function iAmOnTheDashboardPage()
+    public function iAmOnTheIndexPage()
     {
-        $this->getSession()->visit($this->generateUrl('admin.dashboard.index'));
+        $this->getSession()->visit($this->generateUrl('admin.user.index'));
     }
 }

@@ -24,7 +24,6 @@ install:
    - sudo service apache2 restart
 
 before_script:
-    - export MINK_EXTENSION_PARAMS='base_url=http://wellcommerce.dev/app_test.php'
     - cp app/config/parameters.yml.travis app/config/parameters.yml
     - composer self-update
     - composer install --prefer-source --no-interaction
@@ -47,6 +46,7 @@ before_script:
 
 script:
     - bin/behat --suite=dashboard --stop-on-failure
+    - bin/behat --suite=user --stop-on-failure
 
 after_failure:
     - cat error.log
