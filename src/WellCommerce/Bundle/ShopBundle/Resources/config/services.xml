@@ -10,7 +10,7 @@
         <parameter key="shop.datagrid.configurator.class">WellCommerce\Bundle\ShopBundle\DataGrid\ShopDataGridConfigurator</parameter>
         <parameter key="shop.form.class">WellCommerce\Bundle\ShopBundle\Form\ShopForm</parameter>
         <parameter key="shop.listener.class">WellCommerce\Bundle\ShopBundle\EventListener\ShopListener</parameter>
-        <parameter key="shop.manager.class">WellCommerce\Bundle\ShopBundle\Manager\ShopManager</parameter>
+        <parameter key="twig.extension.shop.class">WellCommerce\Bundle\ShopBundle\Twig\Extension\ShopExtension</parameter>
     </parameters>
 
     <services>
@@ -50,6 +50,11 @@
             <argument type="service" id="translator"/>
             <argument type="service" id="router"/>
             <tag name="kernel.event_subscriber" />
+        </service>
+
+        <service id="twig.extension.shop" class="%twig.extension.shop.class%">
+            <argument type="service" id="shop.repository"/>
+            <tag name="twig.extension"/>
         </service>
     </services>
 </container>

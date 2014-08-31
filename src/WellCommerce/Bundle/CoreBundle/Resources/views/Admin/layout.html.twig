@@ -35,8 +35,10 @@
             <span class="icon"></span>
 
             <div class="field-select">
-                <select name="view-switcher" onchange="xajax_ChangeActiveView(this.value);">
-
+                <select name="view-switcher">
+                    {% for id, name in shops %}
+                        <option value="{{ id }}">{{ name }}</option>
+                    {% endfor %}
                 </select>
             </div>
         </div>
