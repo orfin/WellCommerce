@@ -35,7 +35,7 @@
             <span class="icon"></span>
 
             <div class="field-select">
-                <select name="view-switcher">
+                <select name="view-switcher" onchange="window.location.href = Routing.generate('admin.shop.switch');">
                     {% for id, name in shops %}
                         <option value="{{ id }}">{{ name }}</option>
                     {% endfor %}

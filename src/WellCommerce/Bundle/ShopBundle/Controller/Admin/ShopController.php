@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
@@ -25,5 +26,13 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
  */
 class ShopController extends AbstractAdminController
 {
-
+    /**
+     * Switches current shop
+     *
+     * @param Request $request
+     */
+    public function switchAction(Request $request)
+    {
+        echo 1;die();
+    }
 }

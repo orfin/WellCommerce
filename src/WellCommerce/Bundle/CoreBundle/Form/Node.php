@@ -17,6 +17,7 @@ use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 
 /**
  * Class Node
@@ -70,11 +71,11 @@ abstract class Node extends ContainerAware
     /**
      * Adds child element to node
      *
-     * @param $child
+     * @param ElementInterface $child
      *
-     * @return mixed
+     * @return ElementInterface
      */
-    public function addChild($child)
+    public function addChild(ElementInterface $child)
     {
         $this->children[] = $child;
         $child->form      = $this->form;

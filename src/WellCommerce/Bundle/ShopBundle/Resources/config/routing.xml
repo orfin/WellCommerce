@@ -22,8 +22,14 @@
         <default key="_controller">shop.controller.admin:editAction</default>
         <option key="expose">true</option>
     </route>
+
     <route id="admin.shop.delete" path="/delete/{id}">
         <default key="_controller">shop.controller.admin:deleteAction</default>
+        <option key="expose">true</option>
+    </route>
+
+    <route id="admin.shop.switch" path="/switch">
+        <default key="_controller">shop.controller.admin:switchAction</default>
         <option key="expose">true</option>
     </route>
 </routes>
