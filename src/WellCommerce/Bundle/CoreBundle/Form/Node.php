@@ -17,7 +17,6 @@ use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 
 /**
  * Class Node
@@ -33,16 +32,19 @@ abstract class Node extends ContainerAware
     protected $attributes;
     protected $renderMode = 'JS';
     protected $tabs = '';
+    protected $jsNodeName;
+    protected $_xajaxMethods = [];
+    protected static $_nextId = 0;
     protected $optionsResolver;
     protected $elementResolver;
     protected $options;
-    protected $children = [];
-    protected static $_nextId = 0;
 
     public function __construct()
     {
         $this->optionsResolver = new OptionsResolver();
         $this->_id             = self::$_nextId++;
+        $class                 = explode('\\', get_class($this));
+        $this->jsNodeName     = 'GForm' . end($class);
     }
 
     protected function getJavascriptNodeName()
@@ -71,11 +73,11 @@ abstract class Node extends ContainerAware
     /**
      * Adds child element to node
      *
-     * @param ElementInterface $child
+     * @param $child
      *
-     * @return ElementInterface
+     * @return mixed
      */
-    public function addChild(ElementInterface $child)
+    public function addChild($child)
     {
         $this->children[] = $child;
         $child->form      = $this->form;
@@ -193,7 +195,7 @@ abstract class Node extends ContainerAware
         return $this->attributes;
     }
 
-    protected function harvestValues($node, $levels)
+    public function harvestValues($node, $levels)
     {
         $value = $node->getValue();
         foreach ($levels as $level) {
@@ -224,16 +226,19 @@ abstract class Node extends ContainerAware
         return $value;
     }
 
-    protected function harvest($action, $levelsCount = 0, $levels = [])
+    public function harvest($action, $levelsCount = 0, $levels = [])
     {
         if (isset($this->children)) {
             $array = [];
             foreach ($this->children as $child) {
                 $name = $child->getName();
+
                 if (empty($name)) {
                     continue;
                 }
+
                 if ($this instanceof Elements\FieldsetRepeatable) {
+
                     $repetitions = $child->harvestRepetitions($levelsCount);
                     foreach ($repetitions as $repetition) {
                         $levelsCopy                = $levels + [$repetition];

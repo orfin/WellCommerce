@@ -125,7 +125,6 @@ class Form extends Container
     public function getValues($flags = 0)
     {
         if ($flags & self::FORMAT_FLAT) {
-            $values = [];
             foreach ($this->fields as $field) {
                 if ($field instanceof Field) {
                     $values = array_merge_recursive($values, [
@@ -135,6 +134,7 @@ class Form extends Container
             }
 
             return $values;
+
         } else {
             return $this->harvest([
                 $this,
