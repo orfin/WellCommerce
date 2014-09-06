@@ -13,11 +13,8 @@
 namespace WellCommerce\Bundle\CoreBundle\Form\Builder;
 
 use Symfony\Component\DependencyInjection\ContainerAware;
-use WellCommerce\Bundle\CoreBundle\Form\Dependencies\DependencyInterface;
-use WellCommerce\Bundle\CoreBundle\Form\Filters\FilterInterface;
 use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
 use WellCommerce\Bundle\CoreBundle\Event\FormEvent;
-use WellCommerce\Bundle\CoreBundle\Form\Rules\RuleInterface;
 
 /**
  * Class FormBuilder
@@ -65,12 +62,7 @@ class FormBuilder extends ContainerAware implements FormBuilderInterface
     private function dispatchEvent($eventName)
     {
         $event = new FormEvent($this);
-        $this->getDispatcher()->dispatch($eventName, $event);
-    }
-
-    private function getDispatcher()
-    {
-        return $this->container->get('event_dispatcher');
+        $this->container->get('event_dispatcher')->dispatch($eventName, $event);
     }
 
     /**

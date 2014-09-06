@@ -22,5 +22,5 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  */
 class WellCommerceAdminMenuBundle extends Bundle
 {
-    
+
 }
