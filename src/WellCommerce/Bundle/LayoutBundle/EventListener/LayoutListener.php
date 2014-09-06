@@ -123,7 +123,7 @@ class LayoutListener implements EventSubscriberInterface
         $refClass = new \ReflectionClass($controller);
         $layout   = $this->reader->getClassAnnotation($refClass, 'WellCommerce\\Bundle\\LayoutBundle\\Manager\\Layout');
         if (null !== $layout) {
-            $theme = $this->layoutThemeRepository->find(4);
+            $theme = $this->layoutThemeRepository->find(1);
             if (null != $theme) {
                 $columns = $this->layoutThemeRepository->getLayoutColumns($theme, $layout);
                 $layout->setColumns($columns);

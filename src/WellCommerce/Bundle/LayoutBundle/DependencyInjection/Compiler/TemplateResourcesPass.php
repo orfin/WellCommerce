@@ -29,7 +29,7 @@ use Symfony\Component\DependencyInjection\Exception\LogicException;
  */
 class TemplateResourcesPass implements CompilerPassInterface
 {
-    private $themes = ['web', 'tablet', 'phone'];
+    private $themes = ['development'];
 
     /**
      * @param ContainerBuilder $container
@@ -73,6 +73,7 @@ class TemplateResourcesPass implements CompilerPassInterface
                     $bundleDirName . '/Resources/themes/' . $theme,
                 ]
             );
+            echo $bundleDirName.PHP_EOL;
         }
 
         $container->getDefinition('assetic.' . $engine . '_directory_resource.' . $bundleName)->replaceArgument(0, $resources);

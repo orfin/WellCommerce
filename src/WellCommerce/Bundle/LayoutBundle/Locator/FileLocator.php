@@ -112,7 +112,7 @@ class FileLocator extends BaseFileLocator
         }
 
         $bundleName = substr($name, 1);
-        $path       = '';
+        $path = '';
         if (false !== strpos($bundleName, '/')) {
             list($bundleName, $path) = explode('/', $bundleName, 2);
         }
@@ -122,8 +122,8 @@ class FileLocator extends BaseFileLocator
         }
 
         $resourceBundle = null;
-        $bundles        = $this->kernel->getBundle($bundleName, false);
-        $files          = array();
+        $bundles = $this->kernel->getBundle($bundleName, false);
+        $files = array();
 
         $parameters = array(
             '%app_path%'      => $this->path,
@@ -133,40 +133,38 @@ class FileLocator extends BaseFileLocator
             '%template%'      => substr($path, strlen('Resources/views/')),
         );
 
-        if (!empty($bundles)) {
-            foreach ($bundles as $bundle) {
-                $parameters = array_merge($parameters, array(
-                    '%bundle_path%' => $bundle->getPath(),
-                    '%bundle_name%' => $bundle->getName(),
-                ));
+        foreach ($bundles as $bundle) {
+            $parameters = array_merge($parameters, array(
+                '%bundle_path%' => $bundle->getPath(),
+                '%bundle_name%' => $bundle->getName(),
+            ));
 
-                $checkPaths = $this->getPathsForBundleResource($parameters);
+            $checkPaths = $this->getPathsForBundleResource($parameters);
 
-                foreach ($checkPaths as $checkPath) {
-                    if (file_exists($checkPath)) {
-                        if (null !== $resourceBundle) {
-                            throw new \RuntimeException(sprintf('"%s" resource is hidden by a resource from the "%s" derived bundle. Create a "%s" file to override the bundle resource.',
-                                $path,
-                                $resourceBundle,
-                                $checkPath
-                            ));
-                        }
-
-                        if ($first) {
-                            return $checkPath;
-                        }
-                        $files[] = $checkPath;
+            foreach ($checkPaths as $checkPath) {
+                if (file_exists($checkPath)) {
+                    if (null !== $resourceBundle) {
+                        throw new \RuntimeException(sprintf('"%s" resource is hidden by a resource from the "%s" derived bundle. Create a "%s" file to override the bundle resource.',
+                            $path,
+                            $resourceBundle,
+                            $checkPath
+                        ));
                     }
-                }
 
-                $file = $bundle->getPath() . '/' . $path;
-                if (file_exists($file)) {
                     if ($first) {
-                        return $file;
+                        return $checkPath;
                     }
-                    $files[]        = $file;
-                    $resourceBundle = $bundle->getName();
+                    $files[] = $checkPath;
                 }
+            }
+
+            $file = $bundle->getPath().'/'.$path;
+            if (file_exists($file)) {
+                if ($first) {
+                    return $file;
+                }
+                $files[] = $file;
+                $resourceBundle = $bundle->getName();
             }
         }
 
@@ -192,7 +190,7 @@ class FileLocator extends BaseFileLocator
             throw new \RuntimeException(sprintf('File name "%s" contains invalid characters (..).', $name));
         }
 
-        $files      = array();
+        $files = array();
         $parameters = array(
             '%app_path%'      => $this->path,
             '%current_theme%' => $this->lastTheme,
@@ -214,7 +212,7 @@ class FileLocator extends BaseFileLocator
     protected function getPathsForBundleResource($parameters)
     {
         $pathPatterns = array();
-        $paths        = array();
+        $paths = array();
 
         if (!empty($parameters['%dir%'])) {
             $pathPatterns = array_merge($pathPatterns, $this->pathPatterns['bundle_resource_dir']);
