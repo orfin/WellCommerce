@@ -11,13 +11,12 @@
  */
 namespace WellCommerce\Bundle\CoreBundle\Repository;
 
-use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use Symfony\Component\PropertyAccess\PropertyPath;
+use Symfony\Component\Translation\TranslatorInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 
 /**
@@ -29,18 +28,18 @@ use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 abstract class AbstractEntityRepository extends EntityRepository implements RepositoryInterface
 {
     /**
-     * @var RequestStack
+     * @var TranslatorInterface
      */
-    private $requestStack;
+    private $translator;
 
     /**
-     * Sets current locale for repository
+     * Sets translator service
      *
-     * @param $currentLocale
+     * @param TranslatorInterface $translator
      */
-    public function setRequest(RequestStack $requestStack)
+    public function setTranslator(TranslatorInterface $translator)
     {
-        $this->requestStack = $requestStack;
+        $this->translator = $translator;
     }
 
     /**
@@ -50,7 +49,7 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
      */
     public function getCurrentLocale()
     {
-        return $this->requestStack->getCurrentRequest()->getLocale();
+        return $this->translator->getLocale();
     }
 
     /**

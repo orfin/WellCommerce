@@ -25,8 +25,8 @@
 
         <service id="user.repository" class="%user.repository.class%" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument>WellCommerceUserBundle:User</argument>
-            <call method="setRequest">
-                <argument type="service" id="request_stack" />
+            <call method="setTranslator">
+                <argument type="service" id="translator" />
             </call>
         </service>
 
