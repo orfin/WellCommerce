@@ -9,7 +9,7 @@
         <parameter key="tax.datagrid.class">WellCommerce\Bundle\TaxBundle\DataGrid\TaxDataGrid</parameter>
         <parameter key="tax.datagrid.configurator.class">WellCommerce\Bundle\TaxBundle\DataGrid\TaxDataGridConfigurator</parameter>
         <parameter key="tax.form.class">WellCommerce\Bundle\TaxBundle\Form\TaxForm</parameter>
-        <parameter key="tax.listener.class">WellCommerce\Bundle\TaxBundle\EventListener\TaxListener</parameter>
+        <parameter key="tax.subscriber.class">WellCommerce\Bundle\TaxBundle\EventListener\TaxSubscriber</parameter>
         <parameter key="twig.extension.tax.class">WellCommerce\Bundle\TaxBundle\Twig\Extension\TaxExtension</parameter>
     </parameters>
 
@@ -45,10 +45,16 @@
             </call>
         </service>
 
-        <service id="tax.listener" class="%tax.listener.class%">
-            <argument type="service" id="service_container"/>
-            <argument type="service" id="translator"/>
-            <argument type="service" id="router"/>
+        <service id="tax.subscriber" class="%tax.subscriber.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setTranslator">
+                <argument type="service" id="translator"/>
+            </call>
+            <call method="setRouter">
+                <argument type="service" id="router"/>
+            </call>
             <tag name="kernel.event_subscriber" />
         </service>
 

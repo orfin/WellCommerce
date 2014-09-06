@@ -9,7 +9,7 @@
         <parameter key="locale.datagrid.class">WellCommerce\Bundle\LocaleBundle\DataGrid\LocaleDataGrid</parameter>
         <parameter key="locale.datagrid.configurator.class">WellCommerce\Bundle\LocaleBundle\DataGrid\LocaleDataGridConfigurator</parameter>
         <parameter key="locale.form.class">WellCommerce\Bundle\LocaleBundle\Form\LocaleForm</parameter>
-        <parameter key="locale.listener.class">WellCommerce\Bundle\LocaleBundle\EventListener\LocaleListener</parameter>
+        <parameter key="locale.subscriber.class">WellCommerce\Bundle\LocaleBundle\EventListener\LocaleSubscriber</parameter>
         <parameter key="locale.provider.class">WellCommerce\Bundle\LocaleBundle\Provider\LocaleProvider</parameter>
     </parameters>
 
@@ -52,10 +52,16 @@
             </call>
         </service>
 
-        <service id="locale.listener" class="%locale.listener.class%">
-            <argument type="service" id="service_container"/>
-            <argument type="service" id="translator"/>
-            <argument type="service" id="router"/>
+        <service id="locale.subscriber" class="%locale.subscriber.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setTranslator">
+                <argument type="service" id="translator"/>
+            </call>
+            <call method="setRouter">
+                <argument type="service" id="router"/>
+            </call>
             <tag name="kernel.event_subscriber" />
         </service>
     </services>

@@ -9,7 +9,7 @@
         <parameter key="media.datagrid.class">WellCommerce\Bundle\MediaBundle\DataGrid\MediaDataGrid</parameter>
         <parameter key="media.datagrid.configurator.class">WellCommerce\Bundle\MediaBundle\DataGrid\MediaDataGridConfigurator</parameter>
         <parameter key="media.form.class">WellCommerce\Bundle\MediaBundle\Form\MediaForm</parameter>
-        <parameter key="media.listener.class">WellCommerce\Bundle\MediaBundle\EventListener\MediaListener</parameter>
+        <parameter key="media.subscriber.class">WellCommerce\Bundle\MediaBundle\EventListener\MediaSubscriber</parameter>
         <parameter key="media.uploader.class">WellCommerce\Bundle\MediaBundle\Uploader\MediaUploader</parameter>
     </parameters>
 
@@ -49,10 +49,16 @@
             </call>
         </service>
 
-        <service id="media.listener" class="%media.listener.class%">
-            <argument type="service" id="service_container"/>
-            <argument type="service" id="translator"/>
-            <argument type="service" id="router"/>
+        <service id="media.subscriber" class="%media.subscriber.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setTranslator">
+                <argument type="service" id="translator"/>
+            </call>
+            <call method="setRouter">
+                <argument type="service" id="router"/>
+            </call>
             <tag name="kernel.event_subscriber" />
         </service>
     </services>

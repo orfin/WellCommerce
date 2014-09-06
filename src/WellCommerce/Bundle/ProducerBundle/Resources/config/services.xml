@@ -9,7 +9,7 @@
         <parameter key="producer.datagrid.class">WellCommerce\Bundle\ProducerBundle\DataGrid\ProducerDataGrid</parameter>
         <parameter key="producer.datagrid.configurator.class">WellCommerce\Bundle\ProducerBundle\DataGrid\ProducerDataGridConfigurator</parameter>
         <parameter key="producer.form.class">WellCommerce\Bundle\ProducerBundle\Form\ProducerForm</parameter>
-        <parameter key="producer.listener.class">WellCommerce\Bundle\ProducerBundle\EventListener\ProducerListener</parameter>
+        <parameter key="producer.subscriber.class">WellCommerce\Bundle\ProducerBundle\EventListener\ProducerSubscriber</parameter>
         <parameter key="producer.manager.class">WellCommerce\Bundle\ProducerBundle\Manager\ProducerManager</parameter>
     </parameters>
 
@@ -45,10 +45,16 @@
             </call>
         </service>
 
-        <service id="producer.listener" class="%producer.listener.class%">
-            <argument type="service" id="service_container"/>
-            <argument type="service" id="translator"/>
-            <argument type="service" id="router"/>
+        <service id="producer.subscriber" class="%producer.subscriber.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setTranslator">
+                <argument type="service" id="translator"/>
+            </call>
+            <call method="setRouter">
+                <argument type="service" id="router"/>
+            </call>
             <tag name="kernel.event_subscriber" />
         </service>
     </services>

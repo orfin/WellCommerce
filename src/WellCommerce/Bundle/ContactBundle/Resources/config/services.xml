@@ -9,7 +9,7 @@
         <parameter key="contact.datagrid.class">WellCommerce\Bundle\ContactBundle\DataGrid\ContactDataGrid</parameter>
         <parameter key="contact.datagrid.configurator.class">WellCommerce\Bundle\ContactBundle\DataGrid\ContactDataGridConfigurator</parameter>
         <parameter key="contact.form.class">WellCommerce\Bundle\ContactBundle\Form\ContactForm</parameter>
-        <parameter key="contact.listener.class">WellCommerce\Bundle\ContactBundle\EventListener\ContactListener</parameter>
+        <parameter key="contact.subscriber.class">WellCommerce\Bundle\ContactBundle\EventListener\ContactSubscriber</parameter>
         <parameter key="contact.manager.class">WellCommerce\Bundle\ContactBundle\Manager\ContactManager</parameter>
     </parameters>
 
@@ -45,10 +45,16 @@
             </call>
         </service>
 
-        <service id="contact.listener" class="%contact.listener.class%">
-            <argument type="service" id="service_container"/>
-            <argument type="service" id="translator"/>
-            <argument type="service" id="router"/>
+        <service id="contact.subscriber" class="%contact.subscriber.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setTranslator">
+                <argument type="service" id="translator"/>
+            </call>
+            <call method="setRouter">
+                <argument type="service" id="router"/>
+            </call>
             <tag name="kernel.event_subscriber" />
         </service>
     </services>

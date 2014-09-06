@@ -9,7 +9,7 @@
         <parameter key="shop.datagrid.class">WellCommerce\Bundle\ShopBundle\DataGrid\ShopDataGrid</parameter>
         <parameter key="shop.datagrid.configurator.class">WellCommerce\Bundle\ShopBundle\DataGrid\ShopDataGridConfigurator</parameter>
         <parameter key="shop.form.class">WellCommerce\Bundle\ShopBundle\Form\ShopForm</parameter>
-        <parameter key="shop.listener.class">WellCommerce\Bundle\ShopBundle\EventListener\ShopListener</parameter>
+        <parameter key="shop.subscriber.class">WellCommerce\Bundle\ShopBundle\EventListener\ShopSubscriber</parameter>
         <parameter key="twig.extension.shop.class">WellCommerce\Bundle\ShopBundle\Twig\Extension\ShopExtension</parameter>
     </parameters>
 
@@ -45,10 +45,16 @@
             </call>
         </service>
 
-        <service id="shop.listener" class="%shop.listener.class%">
-            <argument type="service" id="service_container"/>
-            <argument type="service" id="translator"/>
-            <argument type="service" id="router"/>
+        <service id="shop.subscriber" class="%shop.subscriber.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setTranslator">
+                <argument type="service" id="translator"/>
+            </call>
+            <call method="setRouter">
+                <argument type="service" id="router"/>
+            </call>
             <tag name="kernel.event_subscriber" />
         </service>
 

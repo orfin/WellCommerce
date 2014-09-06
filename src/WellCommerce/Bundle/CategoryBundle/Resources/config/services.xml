@@ -8,7 +8,7 @@
         <parameter key="category.repository.class">WellCommerce\Bundle\CategoryBundle\Repository\CategoryRepository</parameter>
         <parameter key="category.form.class">WellCommerce\Bundle\CategoryBundle\Form\CategoryForm</parameter>
         <parameter key="category.tree.class">WellCommerce\Bundle\CategoryBundle\Form\CategoryTree</parameter>
-        <parameter key="category.listener.class">WellCommerce\Bundle\CategoryBundle\EventListener\CategoryListener</parameter>
+        <parameter key="category.subscriber.class">WellCommerce\Bundle\CategoryBundle\EventListener\CategorySubscriber</parameter>
         <parameter key="category.manager.class">WellCommerce\Bundle\CategoryBundle\Manager\CategoryManager</parameter>
     </parameters>
 
@@ -43,10 +43,16 @@
             </call>
         </service>
 
-        <service id="category.listener" class="%category.listener.class%">
-            <argument type="service" id="service_container"/>
-            <argument type="service" id="translator"/>
-            <argument type="service" id="router"/>
+        <service id="category.subscriber" class="%category.subscriber.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setTranslator">
+                <argument type="service" id="translator"/>
+            </call>
+            <call method="setRouter">
+                <argument type="service" id="router"/>
+            </call>
             <tag name="kernel.event_subscriber" />
         </service>
     </services>

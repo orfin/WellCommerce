@@ -9,7 +9,7 @@
         <parameter key="company.datagrid.class">WellCommerce\Bundle\CompanyBundle\DataGrid\CompanyDataGrid</parameter>
         <parameter key="company.datagrid.configurator.class">WellCommerce\Bundle\CompanyBundle\DataGrid\CompanyDataGridConfigurator</parameter>
         <parameter key="company.form.class">WellCommerce\Bundle\CompanyBundle\Form\CompanyForm</parameter>
-        <parameter key="company.listener.class">WellCommerce\Bundle\CompanyBundle\EventListener\CompanyListener</parameter>
+        <parameter key="company.subscriber.class">WellCommerce\Bundle\CompanyBundle\EventListener\CompanySubscriber</parameter>
         <parameter key="company.manager.class">WellCommerce\Bundle\CompanyBundle\Manager\CompanyManager</parameter>
     </parameters>
 
@@ -45,10 +45,16 @@
             </call>
         </service>
 
-        <service id="company.listener" class="%company.listener.class%">
-            <argument type="service" id="service_container"/>
-            <argument type="service" id="translator"/>
-            <argument type="service" id="router"/>
+        <service id="company.subscriber" class="%company.subscriber.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setTranslator">
+                <argument type="service" id="translator"/>
+            </call>
+            <call method="setRouter">
+                <argument type="service" id="router"/>
+            </call>
             <tag name="kernel.event_subscriber" />
         </service>
     </services>

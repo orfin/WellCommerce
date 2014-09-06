@@ -7,7 +7,6 @@
     <parameters>
         <parameter key="controller_listener.class">WellCommerce\Bundle\CoreBundle\EventListener\ControllerListener</parameter>
         <parameter key="admin_manager.class">WellCommerce\Bundle\CoreBundle\Controller\Admin\Manager\AdminManager</parameter>
-        <parameter key="entity.subscriber.class">WellCommerce\Bundle\CoreBundle\EventListener\EntityListener</parameter>
         <parameter key="file_uploader.class">WellCommerce\Bundle\CoreBundle\Uploader\FileUploader</parameter>
     </parameters>
 

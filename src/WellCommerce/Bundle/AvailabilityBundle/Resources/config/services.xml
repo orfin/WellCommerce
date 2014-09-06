@@ -9,7 +9,7 @@
         <parameter key="availability.datagrid.class">WellCommerce\Bundle\AvailabilityBundle\DataGrid\AvailabilityDataGrid</parameter>
         <parameter key="availability.datagrid.configurator.class">WellCommerce\Bundle\AvailabilityBundle\DataGrid\AvailabilityDataGridConfigurator</parameter>
         <parameter key="availability.form.class">WellCommerce\Bundle\AvailabilityBundle\Form\AvailabilityForm</parameter>
-        <parameter key="availability.listener.class">WellCommerce\Bundle\AvailabilityBundle\EventListener\AvailabilityListener</parameter>
+        <parameter key="availability.subscriber.class">WellCommerce\Bundle\AvailabilityBundle\EventListener\AvailabilitySubscriber</parameter>
         <parameter key="availability.manager.class">WellCommerce\Bundle\AvailabilityBundle\Manager\AvailabilityManager</parameter>
     </parameters>
 
@@ -45,10 +45,16 @@
             </call>
         </service>
 
-        <service id="availability.listener" class="%availability.listener.class%">
-            <argument type="service" id="service_container"/>
-            <argument type="service" id="translator"/>
-            <argument type="service" id="router"/>
+        <service id="availability.subscriber" class="%availability.subscriber.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setTranslator">
+                <argument type="service" id="translator"/>
+            </call>
+            <call method="setRouter">
+                <argument type="service" id="router"/>
+            </call>
             <tag name="kernel.event_subscriber" />
         </service>
     </services>
