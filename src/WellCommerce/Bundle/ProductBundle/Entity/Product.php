@@ -21,7 +21,6 @@ use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\HierarchyTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\MetaDataTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\PhotoTrait;
 use WellCommerce\Bundle\DelivererBundle\Entity\Deliverer;
-use WellCommerce\Bundle\MediaBundle\Entity\Media;
 use WellCommerce\Bundle\ShopBundle\Entity\Shop;
 
 /**

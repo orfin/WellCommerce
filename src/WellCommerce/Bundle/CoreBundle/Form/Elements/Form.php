@@ -124,6 +124,7 @@ class Form extends Container
 
     public function getValues($flags = 0)
     {
+        $values = [];
         if ($flags & self::FORMAT_FLAT) {
             foreach ($this->fields as $field) {
                 if ($field instanceof Field) {
@@ -151,15 +152,6 @@ class Form extends Container
     public function getErrors()
     {
         return $this->harvest([$this, 'harvestErrors']);
-    }
-
-    public function getValue($element)
-    {
-        foreach ($this->fields as $field) {
-            if ($field->getName() == $element) {
-                return $field->getValue();
-            }
-        }
     }
 
     /**
@@ -204,6 +196,11 @@ class Form extends Container
         parent::setDefaults($this->defaultData);
 
         return $this;
+    }
+
+    public function getDefaultData()
+    {
+        return $this->defaultData;
     }
 
     /**

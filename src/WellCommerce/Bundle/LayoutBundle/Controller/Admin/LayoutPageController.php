@@ -52,7 +52,6 @@ class LayoutPageController extends AbstractAdminController
         ]);
 
         $pageColumns = $this->get('layout_page_column.repository')->findBy(['theme' => $this->getParam('id')]);
-
         $form->populate($this->prepareData($pageColumns));
 
         if ($form->handleRequest($request)->isValid()) {

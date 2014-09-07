@@ -42,7 +42,7 @@ class FormBuilder extends ContainerAware implements FormBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function create(FormInterface $form, $data = null, array $options)
+    public function create(FormInterface $form, $data, array $options)
     {
         $this->options = $options;
         $this->data    = $data;

@@ -44,7 +44,7 @@ abstract class Node extends ContainerAware
         $this->optionsResolver = new OptionsResolver();
         $this->_id             = self::$_nextId++;
         $class                 = explode('\\', get_class($this));
-        $this->jsNodeName     = 'GForm' . end($class);
+        $this->jsNodeName      = 'GForm' . end($class);
     }
 
     protected function getJavascriptNodeName()
@@ -185,6 +185,11 @@ abstract class Node extends ContainerAware
         return (null !== $this->attributes['transformer']);
     }
 
+    /**
+     * Returns data transformer object
+     *
+     * @return DataTransformerInterface
+     */
     protected function getTransformer()
     {
         return $this->attributes['transformer'];

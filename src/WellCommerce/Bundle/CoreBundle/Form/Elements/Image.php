@@ -118,7 +118,6 @@ class Image extends File implements ElementInterface
      */
     public function handleRequest($data)
     {
-
         $accessor = $this->getPropertyAccessor();
 
         if (null !== $this->getPropertyPath() && $accessor->isReadable($data, $this->getPropertyPath())) {

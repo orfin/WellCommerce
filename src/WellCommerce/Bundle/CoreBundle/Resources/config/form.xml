@@ -124,6 +124,18 @@
             </call>
         </service>
 
+        <service id="form.element.colour_scheme_picker" class="%form.element.colour_scheme_picker.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.element.font_style" class="%form.element.font_style.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
         <service id="form.element.submit" class="%form.element.submit.class%" scope="prototype">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>

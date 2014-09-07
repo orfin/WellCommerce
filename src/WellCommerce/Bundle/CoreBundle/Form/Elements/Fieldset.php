@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
 /**
  * Class Fieldset
@@ -65,17 +64,18 @@ class Fieldset extends Container implements ElementInterface
      */
     public function prepareAttributesJs()
     {
-        $attributes = [
+        return [
             $this->formatAttributeJs('name', 'sName'),
             $this->formatAttributeJs('label', 'sLabel'),
             $this->formatAttributeJs('class', 'sClass'),
             $this->formatDependencyJs(),
             'aoFields: [' . $this->renderChildren() . ']'
         ];
-
-        return $attributes;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setPropertyPath()
     {
         $this->attributes['property_path'] = null;

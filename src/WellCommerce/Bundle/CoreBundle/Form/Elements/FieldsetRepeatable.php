@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
+use Symfony\Component\PropertyAccess\PropertyPath;
+
 /**
  * Class FieldsetRepeatable
  *
@@ -20,17 +22,31 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
  */
 class FieldsetRepeatable extends Fieldset implements ElementInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function prepareAttributesJs()
     {
-        $attributes = [
+        return [
             $this->formatAttributeJs('name', 'sName'),
             $this->formatAttributeJs('label', 'sLabel'),
             $this->formatRepeatableJs(),
             $this->formatDependencyJs(),
             'aoFields: [' . $this->renderChildren() . ']'
         ];
+    }
 
-        return $attributes;
+    /**
+     * {@inheritdoc}
+     */
+    public function setPropertyPath()
+    {
+        $this->attributes['property_path'] = new PropertyPath($this->getName());
+    }
+
+    public function setDefaults($data)
+    {
+
     }
 
 }

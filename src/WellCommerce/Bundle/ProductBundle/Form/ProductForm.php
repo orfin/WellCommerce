@@ -18,7 +18,6 @@ use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\EntityToIdentifierTransf
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
 use WellCommerce\Bundle\MediaBundle\Form\DataTransformer\MediaCollectionToArrayTransformer;
-use WellCommerce\Bundle\MediaBundle\Form\DataTransformer\MediaEntityToIdentifierTransformer;
 
 /**
  * Class ProductForm
@@ -40,6 +39,16 @@ class ProductForm extends AbstractForm implements FormInterface
             'label' => $this->trans('Required data')
         ]));
 
+        $requiredData->addChild($builder->getElement('text_field', [
+            'name'  => 'sku',
+            'label' => $this->trans('product.sku'),
+            'rules' => [
+                $builder->getRule('required', [
+                    'message' => $this->trans('SKU is required')
+                ]),
+            ]
+        ]));
+
         $languageData = $requiredData->addChild($builder->getElement('fieldset_language', [
             'name'  => 'translations',
             'label' => $this->trans('Language data')
@@ -58,7 +67,8 @@ class ProductForm extends AbstractForm implements FormInterface
         $requiredData->addChild($builder->getElement('checkbox', [
             'name'    => 'enabled',
             'label'   => $this->trans('Enabled'),
-            'comment' => $this->trans('Only enabled products are visible in shops')
+            'comment' => $this->trans('Only enabled products are visible in shops'),
+            'default' => 1
         ]));
 
         $requiredData->addChild($builder->getElement('select', [

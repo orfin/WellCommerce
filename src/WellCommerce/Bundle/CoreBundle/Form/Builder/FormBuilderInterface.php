@@ -35,12 +35,12 @@ interface FormBuilderInterface
      * Creates the form, triggers init event and then populates form with values
      *
      * @param FormInterface $form
-     * @param array|object  $data
+     * @param object        $data
      * @param array         $options
      *
      * @return mixed
      */
-    public function create(FormInterface $form, $data = null, array $options);
+    public function create(FormInterface $form, $data, array $options);
 
     /**
      * Returns Form object
@@ -55,6 +55,13 @@ interface FormBuilderInterface
      * @return object|null
      */
     public function getData();
+
+    /**
+     * Returns form element
+     *
+     * @return mixed
+     */
+    public function getForm();
 
     /**
      * Sets form options

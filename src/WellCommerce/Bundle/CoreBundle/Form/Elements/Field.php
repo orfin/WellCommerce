@@ -106,9 +106,18 @@ class Field extends Node
         }
     }
 
+    /**
+     * Returns formatted rules string
+     *
+     * @return string
+     */
     protected function formatRulesJs()
     {
         $rules = [];
+
+        /**
+         * @var $rule \WellCommerce\Bundle\CoreBundle\Form\Rules\RuleInterface
+         */
         foreach ($this->attributes['rules'] as $rule) {
             $rules[] = $rule->render();
         }
@@ -130,13 +139,25 @@ class Field extends Node
     public function setDefaults($values)
     {
         $accessor = $this->getPropertyAccessor();
+
         if (null !== $this->getPropertyPath() && $accessor->isReadable($values, $this->getPropertyPath())) {
             $value = $accessor->getValue($values, $this->getPropertyPath());
+
             if ($this->hasTransformer()) {
                 $value = $this->getTransformer()->transform($value);
             }
+
             $this->populate($value);
         }
+    }
+
+    protected function getDefaultValue()
+    {
+        if (isset($this->attributes['default'])) {
+            return $this->attributes['default'];
+        }
+
+        return null;
     }
 
     /**

@@ -9,6 +9,8 @@
         <parameter key="layout_theme.datagrid.class">WellCommerce\Bundle\LayoutBundle\DataGrid\LayoutThemeDataGrid</parameter>
         <parameter key="layout_theme.datagrid.configurator.class">WellCommerce\Bundle\LayoutBundle\DataGrid\LayoutThemeDataGridConfigurator</parameter>
         <parameter key="layout_theme.form.class">WellCommerce\Bundle\LayoutBundle\Form\LayoutThemeForm</parameter>
+        <parameter key="theme_fields_generator.class">WellCommerce\Bundle\LayoutBundle\Generator\ThemeFieldsGenerator</parameter>
+        <parameter key="layout_theme.subscriber.class">WellCommerce\Bundle\LayoutBundle\EventListener\LayoutThemeSubscriber</parameter>
     </parameters>
 
     <services>
@@ -41,6 +43,22 @@
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
+        </service>
+
+        <service id="theme_fields_generator" class="%theme_fields_generator.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="layout_theme.subscriber" class="%layout_theme.subscriber.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setTranslator">
+                <argument type="service" id="translator"/>
+            </call>
+            <tag name="kernel.event_subscriber" />
         </service>
     </services>
 </container>
