@@ -12,9 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
-use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use WellCommerce\Bundle\MediaBundle\DataGrid\MediaDataGrid;
 
 /**
  * Class Image
@@ -63,8 +61,8 @@ class Image extends File implements ElementInterface
             'repeat_min'             => 0,
             'repeat_max'             => ElementInterface::INFINITE,
             'limit'                  => 1000,
-            'session_name'           => session_name(),
-            'session_id'             => session_id(),
+            'session_name'           => $this->container->get('session')->getName(),
+            'session_id'             => $this->container->get('session')->getId(),
             'file_types_description' => 'file_types_description',
             'file_types'             => ['jpg', 'jpeg', 'png', 'gif'],
             'property_path'          => null,
