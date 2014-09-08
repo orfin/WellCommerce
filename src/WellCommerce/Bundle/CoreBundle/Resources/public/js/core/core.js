@@ -107,7 +107,7 @@ var oDefaults = {
 	aoLanguages:'',
 	aoVatValues:'',
 	sCurrentController: '',
-	sCurrentAction: '',
+	sCurrentAction: ''
 };
 
 GCore = function(oParams) {
@@ -139,8 +139,7 @@ GCore.GetArgumentsArray = function(oArguments) {
 };
 
 GCore.Duplicate = function(oA, bDeep) {
-	var oB = $.extend((bDeep == true), {}, oA);
-	return oB;
+	return $.extend((bDeep == true), {}, oA);
 };
 
 GCore.OnLoad = function(fTarget) {
