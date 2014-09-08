@@ -12,15 +12,13 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Conditions;
 
-use WellCommerce\Bundle\CoreBundle\Form\Condition;
-
 /**
  * Class Equals
  *
  * @package WellCommerce\Bundle\CoreBundle\Form\Conditions
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Equals extends Condition implements ConditionInterface
+class Equals extends AbstractCondition implements ConditionInterface
 {
     /**
      * Checks whether given values are equal
@@ -31,7 +29,7 @@ class Equals extends Condition implements ConditionInterface
      */
     public function evaluate($value)
     {
-        if ($this->_argument instanceof Condition) {
+        if ($this->_argument instanceof ConditionInterface) {
             return false;
         }
         if (is_array($this->_argument)) {

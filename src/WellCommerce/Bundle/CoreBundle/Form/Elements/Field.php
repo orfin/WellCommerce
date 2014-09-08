@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
 use Symfony\Component\PropertyAccess\PropertyPath;
 use WellCommerce\Bundle\CoreBundle\Form\Dependency;
-use WellCommerce\Bundle\CoreBundle\Form\Node;
 use WellCommerce\Bundle\CoreBundle\Form\Rules\LanguageUnique;
 
 /**
@@ -23,7 +22,7 @@ use WellCommerce\Bundle\CoreBundle\Form\Rules\LanguageUnique;
  * @package WellCommerce\Bundle\CoreBundle\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Field extends Node
+class Field extends AbstractNode
 {
     protected $_value = '';
 

@@ -71,7 +71,7 @@ class AdminManager implements AdminManagerInterface
     /**
      * Persists given resource
      *
-     * @param $resource
+     * @param object $resource
      *
      * @return mixed
      */
@@ -86,7 +86,7 @@ class AdminManager implements AdminManagerInterface
     /**
      * Manager method used to create new resource
      *
-     * @param         $resource
+     * @param object  $resource
      * @param Request $request
      *
      * @return mixed|void
@@ -102,7 +102,7 @@ class AdminManager implements AdminManagerInterface
     /**
      * Manager method used to update existing resource
      *
-     * @param         $resource
+     * @param object  $resource
      * @param Request $request
      *
      * @return mixed|void
@@ -126,7 +126,7 @@ class AdminManager implements AdminManagerInterface
     /**
      * Returns event name for bundle
      *
-     * @param         $name
+     * @param string  $name
      * @param Request $request
      *
      * @return string

@@ -45,7 +45,6 @@ class TextField extends Field implements ElementInterface
             'selector',
             'wrap',
             'class',
-            'size',
             'css_attribute',
             'max_length',
             'error',
@@ -75,7 +74,6 @@ class TextField extends Field implements ElementInterface
             'selector'      => 'string',
             'wrap'          => 'string',
             'class'         => 'string',
-            'size'          => 'string',
             'css_attribute' => 'string',
             'max_length'    => 'integer',
             'error'         => 'string',
@@ -91,7 +89,7 @@ class TextField extends Field implements ElementInterface
      */
     public function prepareAttributesJs()
     {
-        return [
+        $attributes = [
             $this->formatAttributeJs('name', 'sName'),
             $this->formatAttributeJs('label', 'sLabel'),
             $this->formatAttributeJs('comment', 'sComment'),
@@ -108,5 +106,7 @@ class TextField extends Field implements ElementInterface
             $this->formatDependencyJs(),
             $this->formatDefaultsJs()
         ];
+
+        return $attributes;
     }
 }

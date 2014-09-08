@@ -12,16 +12,13 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Conditions;
 
-use WellCommerce\Bundle\CoreBundle\ConditionInterface;
-use WellCommerce\Bundle\CoreBundle\Form\Condition;
-
 /**
  * Class Not
  *
  * @package WellCommerce\Bundle\CoreBundle\Form\Conditions
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Not extends Condition implements ConditionInterface
+class Not extends AbstractCondition implements ConditionInterface
 {
     /**
      * Checks whether given value is not equal
@@ -32,7 +29,7 @@ class Not extends Condition implements ConditionInterface
      */
     public function evaluate($value)
     {
-        if ($this->_argument instanceof Condition) {
+        if ($this->_argument instanceof ConditionInterface) {
             return !$this->_argument->evaluate($value);
         }
 

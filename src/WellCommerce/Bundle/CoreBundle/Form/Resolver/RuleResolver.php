@@ -12,8 +12,6 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Resolver;
 
-use Symfony\Component\DependencyInjection\ContainerAware;
-use WellCommerce\Bundle\CoreBundle\Form\AbstractResolver;
 use WellCommerce\Bundle\CoreBundle\Form\Rules\RuleInterface;
 
 /**

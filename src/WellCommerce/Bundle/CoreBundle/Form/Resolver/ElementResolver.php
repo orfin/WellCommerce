@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Resolver;
 
-use WellCommerce\Bundle\CoreBundle\Form\AbstractResolver;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 
 /**

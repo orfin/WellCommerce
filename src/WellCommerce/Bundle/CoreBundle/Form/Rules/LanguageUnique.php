@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\CoreBundle\Form\Rules;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use WellCommerce\Bundle\CoreBundle\Form\AbstractRule;
 
 /**
  * Class LanguageUnique

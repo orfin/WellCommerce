@@ -12,9 +12,12 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Rules;
 
-
-use WellCommerce\Bundle\CoreBundle\Form\AbstractRule;
-
+/**
+ * Class Required
+ *
+ * @package WellCommerce\Bundle\CoreBundle\Form\Rules
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
+ */
 class Required extends AbstractRule implements RuleInterface
 {
 

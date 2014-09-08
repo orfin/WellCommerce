@@ -18,7 +18,7 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
  * @package WellCommerce\Bundle\CoreBundle\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Columns extends Container implements ElementInterface
+class Columns extends AbstractContainer implements ElementInterface
 {
 
     protected function prepareAttributesJs()

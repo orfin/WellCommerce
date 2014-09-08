@@ -11,7 +11,6 @@
  */
 namespace WellCommerce\Bundle\ClientBundle\Form;
 
-use WellCommerce\Bundle\CoreBundle\Form\AbstractForm;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
 
@@ -21,7 +20,7 @@ use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
  * @package WellCommerce\Bundle\ClientBundle\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientForm extends AbstractForm implements FormInterface
+class ClientForm implements FormInterface
 {
     /**
      * {@inheritdoc}

@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Rules;
 
-use WellCommerce\Bundle\CoreBundle\Form\AbstractRule;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**

@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  * @package WellCommerce\Bundle\CoreBundle\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Fieldset extends Container implements ElementInterface
+class Fieldset extends AbstractContainer implements ElementInterface
 {
     /**
      * {@inheritdoc}

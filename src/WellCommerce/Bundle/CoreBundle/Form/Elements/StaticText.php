@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use WellCommerce\Bundle\CoreBundle\Form\Node;
 
 /**
  * Class StaticText
@@ -21,7 +20,7 @@ use WellCommerce\Bundle\CoreBundle\Form\Node;
  * @package WellCommerce\Bundle\CoreBundle\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class StaticText extends Node implements ElementInterface
+class StaticText extends AbstractNode implements ElementInterface
 {
 
     /**
@@ -50,12 +49,10 @@ class StaticText extends Node implements ElementInterface
 
     public function prepareAttributesJs()
     {
-        $attributes = Array(
+        return [
             $this->formatAttributeJs('text', 'sText'),
             $this->formatAttributeJs('class', 'sClass'),
             $this->formatDependencyJs()
-        );
-
-        return $attributes;
+        ];
     }
 }

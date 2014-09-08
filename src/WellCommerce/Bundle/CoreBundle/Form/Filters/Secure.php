@@ -12,8 +12,6 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Filters;
 
-use WellCommerce\Bundle\CoreBundle\Form\AbstractFilter;
-
 /**
  * Class Secure
  *

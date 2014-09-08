@@ -121,7 +121,6 @@ abstract class AbstractAdminController extends AbstractController implements Adm
         $resource = $this->repository->createNew();
         $form     = $this->getForm($resource);
 
-        print_r($this->getEntityManager()->getUnitOfWork()->getEntityState($resource));
         if ($form->handleRequest($request)->isValid()) {
             $this->manager->create($resource, $request);
 

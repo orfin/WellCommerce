@@ -12,15 +12,13 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Conditions;
 
-use WellCommerce\Bundle\CoreBundle\Form\Condition;
-
 /**
  * Class GE
  *
  * @package WellCommerce\Bundle\CoreBundle\Form\Conditions
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class GE extends Condition implements ConditionInterface
+class GE extends AbstractCondition implements ConditionInterface
 {
     /**
      * Checks whether given value is greater or equal
@@ -31,7 +29,7 @@ class GE extends Condition implements ConditionInterface
      */
     public function evaluate($value)
     {
-        if ($this->_argument instanceof Condition) {
+        if ($this->_argument instanceof ConditionInterface) {
             return false;
         }
 

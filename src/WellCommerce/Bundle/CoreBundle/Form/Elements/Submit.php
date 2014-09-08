@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use WellCommerce\Bundle\CoreBundle\Form\Node;
 
 /**
  * Class Submit
@@ -21,7 +20,7 @@ use WellCommerce\Bundle\CoreBundle\Form\Node;
  * @package WellCommerce\Bundle\CoreBundle\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Submit extends Node implements ElementInterface
+class Submit extends AbstractNode implements ElementInterface
 {
     /**
      * {@inheritdoc}
@@ -100,5 +99,4 @@ class Submit extends Node implements ElementInterface
     {
         // submit element does not needs to be populated
     }
-
 }

@@ -23,6 +23,11 @@ use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
  */
 class LayoutThemeSubscriber extends AbstractEventSubscriber
 {
+    /**
+     * Adds theme configuration fields to main theme edit form
+     *
+     * @param FormEvent $event
+     */
     public function onLayoutThemeFormInit(FormEvent $event)
     {
         $builder        = $event->getFormBuilder();

@@ -21,7 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  * @package WellCommerce\Bundle\CoreBundle\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Form extends Container
+class Form extends AbstractContainer
 {
     const FORMAT_GROUPED  = 0;
     const FORMAT_FLAT     = 1;
@@ -222,9 +222,14 @@ class Form extends Container
         // first populate the form with submitted values
         $this->populate($this->getSubmittedData());
 
-        // iterate through each field and handle form request
+        /**
+         * @var $field ElementInterface
+         */
         foreach ($this->fields as $field) {
             if (is_array($field)) {
+                /**
+                 * @var $element ElementInterface
+                 */
                 foreach ($field as $element) {
                     $element->handleRequest($this->defaultData);
                 }

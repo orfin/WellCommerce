@@ -45,7 +45,6 @@ class ColourSchemePicker extends TextField implements ElementInterface
             'session_name',
             'session_id',
             'error',
-            'filters',
             'dependencies',
             'rules',
             'filters',
