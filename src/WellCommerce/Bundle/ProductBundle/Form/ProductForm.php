@@ -183,7 +183,7 @@ class ProductForm extends AbstractForm implements FormInterface
             ],
             'vat_field' => $vat,
         ]));
-
+//
         $stockData = $form->addChild($builder->getElement('fieldset', [
             'name'  => 'stock_data',
             'label' => $this->trans('Stock settings')

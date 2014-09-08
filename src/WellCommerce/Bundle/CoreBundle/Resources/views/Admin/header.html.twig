@@ -24,7 +24,9 @@
     %}
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
-    {% javascripts '@WellCommerceCoreBundle/Resources/public/js/core/10.gekosale.js' %}
+    {% javascripts
+        '@WellCommerceCoreBundle/Resources/public/js/core/wellcommerce.js'
+    %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
     <script type="text/javascript">
@@ -41,8 +43,8 @@
         });
     </script>
     {% javascripts
-        '@WellCommerceCoreBundle/Resources/public/js/core/30.gf.js'
-        '@WellCommerceCoreBundle/Resources/public/js/core/40.init.js'
+        '@WellCommerceCoreBundle/Resources/public/js/core/gf.js'
+        '@WellCommerceCoreBundle/Resources/public/js/core/init.js'
     %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}

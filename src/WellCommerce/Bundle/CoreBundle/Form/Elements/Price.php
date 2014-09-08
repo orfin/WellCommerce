@@ -32,7 +32,7 @@ class Price extends TextField implements ElementInterface
             'prefixes'       => ['net', 'gross'],
             'vat_field'      => null,
             'vat_field_name' => function (Options $options) {
-                    if (isset($options['vat_field']) && $options['vat_field'] instanceof Field) {
+                    if (isset($options['vat_field']) && $options['vat_field'] instanceof AbstractField) {
                         return $options['vat_field']->getName();
                     }
 
