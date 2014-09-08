@@ -21,7 +21,7 @@ use WellCommerce\Bundle\CoreBundle\Form\Option;
  * @package WellCommerce\Bundle\CoreBundle\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class OptionedField extends Field
+abstract class OptionedField extends AbstractField
 {
     /**
      * {@inheritdoc}

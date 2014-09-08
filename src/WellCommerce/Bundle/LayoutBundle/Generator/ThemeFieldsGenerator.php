@@ -330,15 +330,14 @@ class ThemeFieldsGenerator extends ContainerAware implements ContainerAwareInter
     protected function addFieldBackground(\DOMElement $field)
     {
         $attributes = $this->getFieldAttributes($field);
-
-        $item = simplexml_import_dom($field);
+        $xml        = simplexml_import_dom($field);
 
         return $this->builder->getElement('colour_scheme_picker', $attributes + [
-                'gradient_height' => (string)$item->height,
+                'gradient_height' => (string)$xml->height,
                 'file_source'     => $this->themeDir . '/assets/images',
-                'type_colour'     => (boolean)$item->type['colour'],
-                'type_gradient'   => (boolean)$item->type['gradient'],
-                'type_image'      => (boolean)$item->type['image']
+                'type_colour'     => (boolean)$xml->type['colour'],
+                'type_gradient'   => (boolean)$xml->type['gradient'],
+                'type_image'      => (boolean)$xml->type['image']
             ]);
     }
 

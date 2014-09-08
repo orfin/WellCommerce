@@ -22,7 +22,7 @@ use Symfony\Component\PropertyAccess\PropertyPath;
  * @package WellCommerce\Bundle\CoreBundle\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Checkbox extends Field implements ElementInterface
+class Checkbox extends AbstractField implements ElementInterface
 {
     /**
      * {@inheritdoc}

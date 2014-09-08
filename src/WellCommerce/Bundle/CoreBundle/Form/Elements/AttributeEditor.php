@@ -22,7 +22,7 @@ use WellCommerce\Attribute\Repository\AttributeRepositoryInterface;
  * @package WellCommerce\Bundle\CoreBundle\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AttributeEditor extends Field implements ElementInterface
+class AttributeEditor extends AbstractField implements ElementInterface
 {
     /**
      * @var AttributeRepositoryInterface

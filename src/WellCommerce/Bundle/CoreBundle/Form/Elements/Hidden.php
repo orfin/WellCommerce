@@ -18,7 +18,7 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
  * @package WellCommerce\Bundle\CoreBundle\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Hidden extends Field implements ElementInterface
+class Hidden extends AbstractField implements ElementInterface
 {
     /**
      * {@inheritdoc}

@@ -21,7 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  * @package WellCommerce\Bundle\CoreBundle\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Tip extends Field implements ElementInterface
+class Tip extends AbstractField implements ElementInterface
 {
     const UP        = 'up';
     const DOWN      = 'down';

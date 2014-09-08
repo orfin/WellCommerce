@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  * @package WellCommerce\Bundle\CoreBundle\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProgressIndicator extends Field implements ElementInterface
+class ProgressIndicator extends AbstractField implements ElementInterface
 {
     /**
      * {@inheritdoc}

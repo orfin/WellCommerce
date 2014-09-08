@@ -18,7 +18,7 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
  * @package WellCommerce\Bundle\CoreBundle\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class SortableList extends Field implements ElementInterface
+class SortableList extends AbstractField implements ElementInterface
 {
     public function prepareAttributesJs()
     {

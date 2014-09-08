@@ -21,7 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  * @package WellCommerce\Bundle\CoreBundle\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Tree extends Field implements ElementInterface
+class Tree extends AbstractField implements ElementInterface
 {
     /**
      * {@inheritdoc}

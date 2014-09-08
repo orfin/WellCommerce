@@ -18,7 +18,7 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
  * @package WellCommerce\Bundle\CoreBundle\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductAggregator extends Field implements ElementInterface
+class ProductAggregator extends AbstractField implements ElementInterface
 {
     protected $_jsFunction;
 

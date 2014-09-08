@@ -18,7 +18,7 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
  * @package WellCommerce\Bundle\CoreBundle\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>s
  */
-class TechnicalAttributeEditor extends Field implements ElementInterface
+class TechnicalAttributeEditor extends AbstractField implements ElementInterface
 {
 
     public function __construct($attributes)

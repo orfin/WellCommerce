@@ -12,9 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
-use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\PropertyAccess\PropertyPath;
 
 /**
  * Class TextField
@@ -22,7 +20,7 @@ use Symfony\Component\PropertyAccess\PropertyPath;
  * @package WellCommerce\Bundle\CoreBundle\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class TextField extends Field implements ElementInterface
+class TextField extends AbstractField implements ElementInterface
 {
     const SIZE_SHORT  = 'short';
     const SIZE_MEDIUM = 'medium';
@@ -89,7 +87,7 @@ class TextField extends Field implements ElementInterface
      */
     public function prepareAttributesJs()
     {
-        $attributes = [
+        return [
             $this->formatAttributeJs('name', 'sName'),
             $this->formatAttributeJs('label', 'sLabel'),
             $this->formatAttributeJs('comment', 'sComment'),
@@ -106,7 +104,5 @@ class TextField extends Field implements ElementInterface
             $this->formatDependencyJs(),
             $this->formatDefaultsJs()
         ];
-
-        return $attributes;
     }
 }

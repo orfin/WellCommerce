@@ -22,7 +22,7 @@ use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
  * @package WellCommerce\Bundle\CoreBundle\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class File extends Field implements ElementInterface
+class File extends AbstractField implements ElementInterface
 {
     /**
      * {@inheritdoc}
