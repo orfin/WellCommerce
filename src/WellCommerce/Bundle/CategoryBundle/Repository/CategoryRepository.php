@@ -69,14 +69,13 @@ class CategoryRepository extends AbstractEntityRepository implements CategoryRep
     public function changeOrder(array $items = [])
     {
         foreach ($items as $item) {
-            if ($item['parent'] > 0) {
-                $parent = $this->find($item['parent']);
-                $child  = $this->find($item['id']);
-                $child->setId($item['id']);
-                $child->setChildNodeOf($parent);
-                $this->_em->persist($child);
-            }
+            $parent = $this->find($item['parent']);
+            $child  = $this->find($item['id']);
+            $child->setParent($parent);
+            $child->setHierarchy($item['weight']);
+            $this->_em->persist($child);
         }
+
         $this->_em->flush();
     }
 
