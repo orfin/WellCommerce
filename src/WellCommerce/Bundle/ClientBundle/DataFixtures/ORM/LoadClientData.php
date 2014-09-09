@@ -15,31 +15,36 @@ namespace WellCommerce\Bundle\ClientBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use WellCommerce\Bundle\ClientBundle\Entity\ClientGroup;
+use WellCommerce\Bundle\ClientBundle\Entity\Client;
 use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
 
 /**
- * Class LoadClientGroupData
+ * Class LoadClientData
  *
  * @package WellCommerce\Bundle\ClientBundle\DataFixtures\ORM
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LoadClientGroupData extends AbstractDataFixture implements FixtureInterface, OrderedFixtureInterface
+class LoadClientData extends AbstractDataFixture implements FixtureInterface, OrderedFixtureInterface
 {
     /**
      * {@inheritDoc}
      */
     public function load(ObjectManager $manager)
     {
-        for ($i = 1; $i <= 10; $i++) {
-            $clientGroup = new ClientGroup();
-            $clientGroup->setDiscount(10);
-            $clientGroup->translate('pl')->setName('Grupa ' . $i);
-            $clientGroup->translate('en')->setName('Group ' . $i);
-            $clientGroup->translate('de')->setName('Gruppe ' . $i);
-            $clientGroup->translate('fr')->setName('Groupe ' . $i);
-            $clientGroup->mergeNewTranslations();
-            $manager->persist($clientGroup);
+        $clientGroup
+            = $manager->getRepository('WellCommerce\Bundle\ClientBundle\Entity\ClientGroup')->findOneBy(['discount' => 10]);
+
+        for ($i = 1; $i <= 100; $i++) {
+            $client = new Client();
+            $client->setFirstName($this->fakerGenerator->firstName);
+            $client->setLastName($this->fakerGenerator->lastName);
+            $client->setUsername($this->fakerGenerator->userName . $i);
+            $client->setEmail($this->fakerGenerator->email);
+            $client->setPhone($this->fakerGenerator->phoneNumber);
+            $client->setDiscount(rand(0, 100));
+            $client->setPassword(time());
+            $client->setGroup($clientGroup);
+            $manager->persist($client);
         }
 
         $manager->flush();
@@ -50,6 +55,6 @@ class LoadClientGroupData extends AbstractDataFixture implements FixtureInterfac
      */
     public function getOrder()
     {
-        return 3;
+        return 4;
     }
 }
