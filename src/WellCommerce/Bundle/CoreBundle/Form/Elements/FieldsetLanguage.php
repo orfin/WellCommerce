@@ -64,6 +64,10 @@ class FieldsetLanguage extends Fieldset implements ElementInterface
             'transformer'
         ]);
 
+        $languagesCount = function (Options $options) {
+            return count($options['languages']);
+        };
+
         $resolver->setDefaults([
             'property_path' => null,
             'transformer'   => null,
@@ -71,13 +75,10 @@ class FieldsetLanguage extends Fieldset implements ElementInterface
             'filters'       => [],
             'rules'         => [],
             'languages'     => [],
-            'repeat_min'    => function (Options $options) {
-                    return count($options['languages']);
-                },
-            'repeat_max'    => function (Options $options) {
-                    return count($options['languages']);
-                },
+            'repeat_min'    => $languagesCount,
+            'repeat_max'    => $languagesCount
         ]);
+
 
         $resolver->setAllowedTypes([
             'name'       => 'string',
@@ -157,7 +158,7 @@ class FieldsetLanguage extends Fieldset implements ElementInterface
      */
     public function handleRequest($data)
     {
-        $accessor     = $this->getPropertyAccessor();
+        $accessor = $this->getPropertyAccessor();
         foreach ($this->children as $child) {
             $childValues = $child->getValue();
             foreach ($childValues as $locale => $value) {
