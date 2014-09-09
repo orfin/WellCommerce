@@ -41,7 +41,7 @@ class CategoryRepository extends AbstractEntityRepository implements CategoryRep
             'WellCommerceCategoryBundle:Category',
             'category_children',
             'WITH',
-            'category.parent = category_children.id');
+            'category_children.parent = category.id');
         $queryBuilder->leftJoin(
             'WellCommerceCategoryBundle:CategoryTranslation',
             'category_translation',
@@ -57,7 +57,7 @@ class CategoryRepository extends AbstractEntityRepository implements CategoryRep
             $categoriesTree[$item['id']] = [
                 'id'          => $item['id'],
                 'name'        => $item['name'],
-                'hasChildren' => (bool)$item['children'],
+                'hasChildren' => (bool)($item['children'] > 0),
                 'parent'      => $item['parent'],
                 'weight'      => $item['hierarchy']
             ];
