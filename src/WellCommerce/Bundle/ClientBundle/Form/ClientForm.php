@@ -11,7 +11,9 @@
  */
 namespace WellCommerce\Bundle\ClientBundle\Form;
 
+use WellCommerce\Bundle\CoreBundle\Form\AbstractForm;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\EntityToIdentifierTransformer;
 use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
 
 /**
@@ -20,7 +22,7 @@ use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
  * @package WellCommerce\Bundle\ClientBundle\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientForm implements FormInterface
+class ClientForm extends AbstractForm implements FormInterface
 {
     /**
      * {@inheritdoc}
@@ -35,8 +37,8 @@ class ClientForm implements FormInterface
         ]));
 
         $requiredData->addChild($builder->getElement('text_field', [
-            'name'    => 'firstName',
-            'label'   => $this->trans('First name'),
+            'name'  => 'firstName',
+            'label' => $this->trans('First name'),
             'rules' => [
                 $builder->getRule('required', [
                     'message' => $this->trans('First name is required')
@@ -45,13 +47,70 @@ class ClientForm implements FormInterface
         ]));
 
         $requiredData->addChild($builder->getElement('text_field', [
-            'name'    => 'lastName',
-            'label'   => $this->trans('Last name'),
+            'name'  => 'lastName',
+            'label' => $this->trans('Last name'),
             'rules' => [
                 $builder->getRule('required', [
                     'message' => $this->trans('Last name is required')
                 ]),
             ]
+        ]));
+
+        $requiredData->addChild($builder->getElement('text_field', [
+            'name'  => 'username',
+            'label' => $this->trans('Username'),
+            'rules' => [
+                $builder->getRule('required', [
+                    'message' => $this->trans('E-mail is required')
+                ]),
+            ]
+        ]));
+
+        $requiredData->addChild($builder->getElement('text_field', [
+            'name'  => 'email',
+            'label' => $this->trans('E-mail'),
+            'rules' => [
+                $builder->getRule('required', [
+                    'message' => $this->trans('E-mail is required')
+                ]),
+            ]
+        ]));
+
+        $requiredData->addChild($builder->getElement('password', [
+            'name'  => 'password',
+            'label' => $this->trans('Password'),
+            'rules' => [
+                $builder->getRule('required', [
+                    'message' => $this->trans('Password is required')
+                ]),
+            ]
+        ]));
+
+        $requiredData->addChild($builder->getElement('text_field', [
+            'name'  => 'phone',
+            'label' => $this->trans('Phone'),
+            'rules' => [
+                $builder->getRule('required', [
+                    'message' => $this->trans('Phone is required')
+                ]),
+            ]
+        ]));
+
+
+        $requiredData->addChild($builder->getElement('select', [
+            'name'        => 'group',
+            'label'       => $this->trans('Group'),
+            'options'     => $this->get('client_group.repository')->getCollectionToSelect(),
+            'transformer' => new EntityToIdentifierTransformer($this->get('client_group.repository'))
+        ]));
+
+        $requiredData->addChild($builder->getElement('text_field', [
+            'name'    => 'discount',
+            'label'   => $this->trans('Discount'),
+            'suffix'  => '%',
+            'filters' => [
+                $builder->getFilter('comma_to_dot_changer')
+            ],
         ]));
 
         $form->addFilter('no_code');

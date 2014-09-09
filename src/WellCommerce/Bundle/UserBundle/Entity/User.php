@@ -128,9 +128,6 @@ class User implements \Serializable, UserInterface, EquatableInterface
         $this->lastName = $lastName;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getUsername()
     {
         return $this->username;

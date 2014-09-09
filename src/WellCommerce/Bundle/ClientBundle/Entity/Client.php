@@ -11,6 +11,7 @@
  */
 namespace WellCommerce\Bundle\ClientBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
@@ -81,10 +82,24 @@ class Client
     private $salt;
 
     /**
+     * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\ClientBundle\Entity\ClientAddress", mappedBy="client", cascade={"persist"}, orphanRemoval=true)
+     */
+    private $addresses;
+
+    /**
      * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\ClientBundle\Entity\ClientGroup")
      * @ORM\JoinColumn(name="client_group_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $group;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->addresses = new ArrayCollection();
+        $this->salt      = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
+    }
 
     /**
      * Get id.
@@ -118,6 +133,96 @@ class Client
     public function getDiscount()
     {
         return $this->discount;
+    }
+
+    public function getAddresses()
+    {
+        return $this->addresses;
+    }
+
+    public function addAddress(ClientAddress $address)
+    {
+        $this->addresses[] = $address;
+    }
+
+    public function setAddresses(ArrayCollection $addresses)
+    {
+        $this->addresses = $addresses;
+    }
+
+    public function getGroup()
+    {
+        return $this->group;
+    }
+
+    public function setGroup(ClientGroup $clientGroup)
+    {
+        $this->group = $clientGroup;
+    }
+
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
+    }
+
+    public function getLastName()
+    {
+        return $this->lastName;
+    }
+
+    public function setLastName($lastName)
+    {
+        $this->lastName = $lastName;
+    }
+
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    public function setUsername($username)
+    {
+        $this->username = $username;
+    }
+
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    public function setPassword($password)
+    {
+        $this->password = $password;
+    }
+
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+    }
+
+    public function getSalt()
+    {
+        return null;
     }
 }
 
