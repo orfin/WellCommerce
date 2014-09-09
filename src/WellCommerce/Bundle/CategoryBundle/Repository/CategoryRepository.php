@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\Repository;
 
+use Symfony\Component\HttpFoundation\ParameterBag;
 use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 
@@ -79,11 +80,19 @@ class CategoryRepository extends AbstractEntityRepository implements CategoryRep
         $this->_em->flush();
     }
 
-    public function quickAddCategory($name)
+    public function quickAddCategory(ParameterBag $parameters)
     {
+        $name     = $parameters->get('name');
+        $parent   = $this->find($parameters->get('parent'));
+        $locales  = $this->_em->getRepository('WellCommerce\Bundle\LocaleBundle\Entity\Locale')->findAll();
         $category = new Category();
         $category->setHierarchy(0);
-        $category->translate()->setName($name);
+        $category->setParent($parent);
+
+        /** @var $locale \WellCommerce\Bundle\LocaleBundle\Entity\Locale */
+        foreach ($locales as $locale) {
+            $category->translate($locale->getCode())->setName($name);
+        }
         $category->mergeNewTranslations();
         $this->getEntityManager()->persist($category);
         $this->getEntityManager()->flush();

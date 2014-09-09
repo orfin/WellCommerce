@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\Repository;
 
+use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
@@ -35,11 +36,11 @@ interface CategoryRepositoryInterface extends RepositoryInterface
      * Adds category using only its name
      * Mostly used in alert prompt on category index/edit screen
      *
-     * @param $name
+     * @param ParameterBag $parameters
      *
-     * @return mixed
+     * @return \WellCommerce\Bundle\CategoryBundle\Entity\Category
      */
-    public function quickAddCategory($name);
+    public function quickAddCategory(ParameterBag $parameters);
 
     /**
      * Changes categories hierarchy
