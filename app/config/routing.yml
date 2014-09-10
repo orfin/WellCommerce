@@ -75,6 +75,10 @@ wellcommerce_layout:
     resource: "@WellCommerceLayoutBundle/Resources/config/routing.xml"
     prefix:   /admin/layout
 
+wellcommerce_payment:
+    resource: "@WellCommercePaymentBundle/Resources/config/routing.xml"
+    prefix:   /admin/payment
+
 wellcommerce_dashboard:
     resource: "@WellCommerceDashboardBundle/Resources/config/routing.xml"
     prefix:   /admin/dashboard
