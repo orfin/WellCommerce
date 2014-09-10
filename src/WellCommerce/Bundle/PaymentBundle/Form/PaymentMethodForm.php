@@ -50,6 +50,23 @@ class PaymentMethodForm extends AbstractForm implements FormInterface
             ]
         ]));
 
+        $requiredData->addChild($builder->getElement('checkbox', [
+            'name'    => 'enabled',
+            'label'   => $this->trans('Enabled'),
+            'default' => 1
+        ]));
+
+        $requiredData->addChild($builder->getElement('text_field', [
+            'name'  => 'hierarchy',
+            'label' => $this->trans('Hierarchy'),
+            'rules' => [
+                $builder->getRule('required', [
+                    'message' => $this->trans('Hierarchy is required')
+                ])
+            ],
+            'default' => 0
+        ]));
+
         $form->addFilter('no_code');
         $form->addFilter('trim');
         $form->addFilter('secure');

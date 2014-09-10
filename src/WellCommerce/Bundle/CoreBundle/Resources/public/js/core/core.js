@@ -121,7 +121,6 @@ GCore = function(oParams) {
 	GCore.sCurrentController = GCore.p_oParams.sCurrentController;
 	GCore.sAdminUrl = GCore.p_oParams.sUrl;
 	GCore.sCurrentAction = GCore.p_oParams.sCurrentAction;
-	GXajaxInterface.Initialize();
 	GCore.StartWaiting();
 };
 
@@ -462,55 +461,18 @@ GPlugin.GetInstance = function(iId) {
 };
 
 /*
- * XAJAX INTERFACE
+ * LINK
  */
 
-var GXajaxInterface = function() {
-
-    var gThis = this;
-
-    gThis.m_iNextRequestId = 0;
-    gThis.m_ofErrorHandlers = {};
-
-    gThis.Constructor = function() {
-        if (window.xajax == undefined) {
-            return;
-        }
-        window.xajax.callback.global.onRequest = gThis.OnRequest;
-        window.xajax.callback.global.onComplete = gThis.OnComplete;
-    };
-
-    gThis.OnRequest = function(eEvent) {
-        var xRequest = eEvent.request;
-        xRequest['_id'] = gThis.m_iNextRequestId++;
-    };
-
-    gThis.OnComplete = function(eEvent) {
-        var xRequest = eEvent.request;
-        if (!xRequest.status || (parseInt(xRequest.status) < 200) || (parseInt(xRequest.status) >= 400) || (!xRequest.responseText.match(/^<\?xml[^>]+\?><xjx>.+<\/xjx>$/))) {
-            gThis.OnError(eEvent);
-        }
-    };
-
-    gThis.OnError = function(eEvent) {
-        if (gThis.m_ofErrorHandlers[eEvent.request['_id']] != undefined) {
-            gThis.m_ofErrorHandlers[eEvent.request['_id']](eEvent);
-        }
-    };
-
-    GCore.OnLoad(gThis.Constructor);
-
-};
-
-GXajaxInterface.s_pgInstance;
-
-GXajaxInterface.Initialize = function() {
-    GXajaxInterface.s_pgInstance = new GXajaxInterface();
-};
-
-GXajaxInterface.Invoke = function(fFunction, amArguments, fOnError) {
-    if ((fOnError != undefined) && (fOnError instanceof Function)) {
-        GXajaxInterface.s_pgInstance.m_ofErrorHandlers[GXajaxInterface.s_pgInstance.m_iNextRequestId] = fOnError;
+var GLink = function(jA, mLink) {
+    if (mLink instanceof Function) {
+        jA.attr('href', '#');
+        jA.click(function(eEvent) {
+            mLink.apply(jA, [eEvent]);
+            return false;
+        });
     }
-    fFunction.apply(window, amArguments);
+    else {
+        jA.attr('href', mLink);
+    }
 };

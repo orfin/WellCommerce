@@ -262,7 +262,7 @@ var GFormColourSchemePicker = GCore.ExtendClass(GFormTextField, function() {
 		gThis.m_jFileSelector.append(gThis.m_jSwfUpload);
 		gThis.m_jChooseButton = $('<a href="#" class="button"><span><img src="' + gThis._GetImage('ChooseIcon') + '" alt=""/>' + GForm.Language.localfile_select + '</span></a>');
 		gThis.m_jFileSelector.append($('<span class="browse-pictures"/>').append(gThis.m_jChooseButton));
-		gThis.m_jQueue = $('<ul class="' + gThis._GetClass('Queue') + '"/>');
+        gThis.m_jQueue = $('<ul class="' + gThis._GetClass('Queue') + '" id="' + gThis.GetId() + '__queue"/>');
 		gThis.m_jFileSelector.append(gThis.m_jQueue);
 		gThis.m_jFilesDatagrid = $('<div/>');
 		gThis.m_jFileSelector.append(gThis.m_jFilesDatagrid);
@@ -393,7 +393,6 @@ var GFormColourSchemePicker = GCore.ExtendClass(GFormTextField, function() {
 	};
 	
 	gThis.Focus = function() {
-		/*gThis.m_jFieldColourType.focus();*/
 		return true;
 	};
 	
@@ -465,80 +464,75 @@ var GFormColourSchemePicker = GCore.ExtendClass(GFormTextField, function() {
 		return oRow;
 	};
 
-	gThis._InitUploader = function() {
-		var sFileTypes = '';
-		for (var i = 0; i < gThis.m_oOptions.asFileTypes.length; i++) {
-			sFileTypes += '; *.' + gThis.m_oOptions.asFileTypes[i];
-		}
-		sFileTypes = sFileTypes.substr(2);
-		var oPostParams = {};
-		oPostParams[gThis.m_oOptions.sSessionName] = gThis.m_oOptions.sSessionId;
-		gThis.m_jSwfUpload.swfupload({
-			upload_url: gThis.m_oOptions.sUploadUrl,
-			file_size_limit: gThis.m_oOptions.iMaxFileSize,
-			file_types: sFileTypes,
-			file_types_description: gThis.m_oOptions.sFileTypesDescription,
-			file_upload_limit: 0,
-			file_queue_limit: 0,
-			button_image_url: gThis._GetImage('UploadButton'),
-			button_placeholder_id: gThis.GetId() + '__upload',
-			button_width: gThis.m_oOptions.iWidth,
-			button_height: gThis.m_oOptions.iHeight,
-			button_window_mode: SWFUpload.WINDOW_MODE.TRANSPARENT,
-			flash_url: GCore.DESIGN_PATH + gThis.m_oOptions.sSwfUploadUrl,
-			post_params: oPostParams
-		});
-		gThis.m_jSwfUpload.bind("fileQueued", gThis.OnFileQueued);
-		gThis.m_jSwfUpload.bind("uploadComplete", gThis.OnUploadComplete);
-		gThis.m_jSwfUpload.bind("uploadSuccess", gThis.OnUploadSuccess);
-		gThis.m_jSwfUpload.bind("uploadProgress", gThis.OnUploadProgress);
-		gThis.m_jSwfUpload.bind("uploadError", gThis.OnUploadError);
-	};
+    gThis._InitUploader = function() {
+        var uploader = new plupload.Uploader({
+            runtimes : 'html5',
+            browse_button : gThis.GetId() + '__upload',
+            container: document.getElementById(gThis.GetId() + '__queue'),
+            url : gThis.m_oOptions.sUploadUrl,
+            filters : {
+                max_file_size : '10mb',
+                mime_types: [{
+                    title : "Image files",
+                    extensions : "jpg,gif,png"
+                }]
+            },
+            init: {
+                FilesAdded: function(up, files) {
+                    plupload.each(files, function(file) {
+                        gThis.OnFileQueued(file);
+                    });
+                    up.start();
+                },
+                FileUploaded: function(up, files, response) {
+                    gThis.OnUploadSuccess(files, response);
+                },
+                UploadProgress: function(up, file) {
+                    gThis.OnUploadProgress(file);
+                },
 
-	gThis.OnFileQueued = function(eEvent, oFile) {
-		if (gThis.m_iUploadsInProgress++ == 0) {
-			gThis.m_iLockId = gThis.m_gForm.Lock(GForm.Language.file_selector_form_blocked, GForm.Language.file_selector_form_blocked_description);
-		}
-		gThis.m_jSwfUpload.swfupload("startUpload");
-		var jLi = $('<li class="upload__' + oFile.index + '"/>');
-		jLi.append('<h4>' + oFile.name + '</h4>');
-		jLi.append('<p class="' + gThis._GetClass('Progress') + '"/>');
-		jLi.append('<div class="' + gThis._GetClass('ProgressBar') + '"><div class="' + gThis._GetClass('ProgressBarIndicator') + '"></div>');
-		gThis.m_jQueue.append(jLi);
-	};
+                Error: function(up, err) {
+                    gThis.OnUploadProgress(err);
+                },
+                UploadComplete: function(){
+                    gThis.OnUploadComplete();
+                }
+            }
+        });
 
-	gThis.OnDelete = function() {
-		gThis.m_jSwfUpload.swfupload('cancelUpload', sFid);
-	};
+        uploader.init();
+    };
 
-	gThis.OnUploadProgress = function(eEvent, oFile, iCompleted, iTotal) {
-		var jLi = gThis.m_jQueue.find('.upload__' + oFile.index);
-		var iPercentage = Math.round(iCompleted / iTotal * 100);
-		jLi.find('.' + gThis._GetClass('Progress')).text(iPercentage + '%: ' + Math.ceil(iCompleted / 1024) + 'kB / ' + Math.ceil(iTotal / 1024) + 'kB');
-		jLi.find('.' + gThis._GetClass('ProgressBarIndicator')).css('width', (iCompleted / iTotal * 100) + '%');
-	};
+    gThis.OnFileQueued = function(oFile) {
+        if (gThis.m_iUploadsInProgress++ == 0) {
+            gThis.m_iLockId = gThis.m_gForm.Lock(GForm.Language.file_selector_form_blocked, GForm.Language.file_selector_form_blocked_description);
+        }
+        var jLi = $('<li class="upload__' + oFile.id + '"/>');
+        jLi.append('<h4>' + oFile.name + '</h4>');
+        jLi.append('<p class="' + gThis._GetClass('Progress') + '"/>');
+        jLi.append('<div class="' + gThis._GetClass('ProgressBar') + '"><div class="' + gThis._GetClass('ProgressBarIndicator') + '"></div>');
+        gThis.m_jQueue.append(jLi);
+    };
 
-	gThis.OnUploadError = function(eEvent, oFile, iErrorCode, sMessage) {
-		var jLi = gThis.m_jQueue.find('.upload__' + oFile.index);
-		jLi.addClass(gThis._GetClass('UploadError'));
-		jLi.find('.' + gThis._GetClass('Progress')).text(GForm.Language.file_selector_upload_error);
-		jLi.find('.' + gThis._GetClass('ProgressBarIndicator')).css('width', '100%');
-		GAlert(GForm.Language.file_selector_upload_error, sMessage);
-		jLi.delay(2000).fadeOut(250, function() {
-			$(this).remove();
-		});
-	};
+    gThis.OnDelete = function() {
+        gThis.m_jSwfUpload.swfupload('cancelUpload', sFid);
+    };
 
-	gThis.OnUploadSuccess = function(eEvent, oFile, sServerData, sResponse) {
-		if (sServerData.substr(0, 11) != 'response = ') {
-			gThis.OnUploadError(eEvent, oFile, 0, sServerData);
-			return;
-		}
-		var jLi = gThis.m_jQueue.find('.upload__' + oFile.index);
+    gThis.OnUploadProgress = function(oFile) {
+        var jLi = gThis.m_jQueue.find('.upload__' + oFile.id);
+        jLi.find('.' + gThis._GetClass('Progress')).text(oFile.percent + '%');
+        jLi.find('.' + gThis._GetClass('ProgressBarIndicator')).css('width', oFile.percent + '%');
+    };
+
+    gThis.OnUploadError = function(oError) {
+        GAlert(GForm.Language.file_selector_upload_error, oError.message);
+    };
+
+    gThis.OnUploadSuccess = function(oFile, oResponse) {
+        var jLi = gThis.m_jQueue.find('.upload__' + oFile.id);
 		jLi.addClass(gThis._GetClass('UploadSuccess'));
 		jLi.find('.' + gThis._GetClass('Progress')).text(GForm.Language.file_selector_upload_success);
 		jLi.find('.' + gThis._GetClass('ProgressBarIndicator')).css('width', '100%');
-		eval("var oResponse = " + sServerData.substr(11) + ";");
 		if (oResponse.sFilename == undefined) {
 			gThis.OnUploadError(eEvent, oFile, 0, GForm.Language.localfile_processing_error);
 			return;
@@ -556,10 +550,10 @@ var GFormColourSchemePicker = GCore.ExtendClass(GFormTextField, function() {
 	};
 
 	gThis.OnUploadComplete = function(eEvent, oFile) {
-		if (--gThis.m_iUploadsInProgress <= 0) {
-			gThis.m_iUploadsInProgress = 0;
-			gThis.m_gForm.Unlock(gThis.m_iLockId);
-		}
+        if (--gThis.m_iUploadsInProgress <= 0) {
+            gThis.m_iUploadsInProgress = 0;
+            gThis.m_gForm.Unlock(gThis.m_iLockId);
+        }
 	};
 
 	gThis._InitColumns = function() {
@@ -575,7 +569,7 @@ var GFormColourSchemePicker = GCore.ExtendClass(GFormTextField, function() {
 		});
 		
 		var column_thumb = new GF_Datagrid_Column({
-			id: 'thumbpreview',
+			id: 'preview',
 			caption: GForm.Language.file_selector_thumb,
 			appearance: {
 				width: 30,

@@ -12,6 +12,7 @@
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
+            <tag name="layout_page" alias="HomePage"/>
         </service>
     </services>
 </container>
