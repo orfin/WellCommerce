@@ -56,6 +56,13 @@ class PaymentMethod
     private $shops;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="processor", type="string", length=64)
+     */
+    private $processor;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -101,6 +108,26 @@ class PaymentMethod
     public function addShop(Shop $shop)
     {
         $this->shops[] = $shop;
+    }
+
+    /**
+     * Returns payment method processor
+     *
+     * @return string
+     */
+    public function getProcessor()
+    {
+        return $this->processor;
+    }
+
+    /**
+     * Sets payment method processor
+     *
+     * @param $processor
+     */
+    public function setProcessor($processor)
+    {
+        $this->processor = $processor;
     }
 
 }

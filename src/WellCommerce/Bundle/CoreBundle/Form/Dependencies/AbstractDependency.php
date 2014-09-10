@@ -94,6 +94,11 @@ abstract class AbstractDependency extends AbstractContainer
         return $this->options['condition'];
     }
 
+    /**
+     * Returns javascript part for dependency
+     *
+     * @return string
+     */
     public function renderJs()
     {
         $javascriptType      = $this->getJavascriptType();
