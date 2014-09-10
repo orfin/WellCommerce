@@ -53,6 +53,7 @@ abstract class OptionedField extends AbstractField
         ]);
 
         $resolver->setDefaults([
+            'default'       => null,
             'options'       => [],
             'dependencies'  => [],
             'filters'       => [],
@@ -74,7 +75,7 @@ abstract class OptionedField extends AbstractField
             'addable'         => 'bool',
             'onAdd'           => 'string',
             'add_item_prompt' => 'string',
-            'default'         => ['string', 'integer'],
+            'default'         => ['string', 'integer', 'null'],
             'rules'           => 'array',
             'dependencies'    => 'array',
             'property_path'   => ['null', 'object'],

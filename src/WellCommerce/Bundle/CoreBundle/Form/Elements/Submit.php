@@ -91,12 +91,4 @@ class Submit extends AbstractNode implements ElementInterface
     {
         return null;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setDefaults($data)
-    {
-        // submit element does not needs to be populated
-    }
 }

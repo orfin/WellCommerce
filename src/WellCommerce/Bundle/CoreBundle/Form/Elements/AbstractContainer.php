@@ -40,10 +40,10 @@ abstract class AbstractContainer extends AbstractNode
         }
     }
 
-    public function setDefaults($values)
+    public function setDefaults($values, $isNewResource)
     {
         foreach ($this->children as $child) {
-            $child->setDefaults($values);
+            $child->setDefaults($values, $isNewResource);
         }
     }
 

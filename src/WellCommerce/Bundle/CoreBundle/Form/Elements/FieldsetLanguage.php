@@ -138,7 +138,7 @@ class FieldsetLanguage extends Fieldset implements ElementInterface
      *
      * @param $data
      */
-    public function setDefaults($data)
+    public function setDefaults($data, $isNewResource)
     {
         $values       = [];
         $accessor     = $this->getPropertyAccessor();

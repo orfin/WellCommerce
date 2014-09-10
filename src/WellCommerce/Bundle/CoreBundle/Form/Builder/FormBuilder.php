@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\CoreBundle\Form\Builder;
 
 use Symfony\Component\DependencyInjection\ContainerAware;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
 use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
 use WellCommerce\Bundle\CoreBundle\Event\FormEvent;
 
@@ -22,7 +23,7 @@ use WellCommerce\Bundle\CoreBundle\Event\FormEvent;
  * @package WellCommerce\Bundle\CoreBundle\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class FormBuilder extends ContainerAware implements FormBuilderInterface
+class FormBuilder extends AbstractContainer implements FormBuilderInterface
 {
     /**
      * @var FormInterface Form instance

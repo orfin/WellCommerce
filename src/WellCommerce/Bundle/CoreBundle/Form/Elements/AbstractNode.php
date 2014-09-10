@@ -17,6 +17,7 @@ use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer as BaseAbstractContainer;
 
 /**
  * Class AbstractNode
@@ -24,7 +25,7 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
  * @package WellCommerce\Bundle\CoreBundle\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractNode extends ContainerAware
+abstract class AbstractNode extends BaseAbstractContainer
 {
     protected $form = null;
     protected $parent = null;
@@ -168,11 +169,6 @@ abstract class AbstractNode extends ContainerAware
     protected function getName()
     {
         return $this->attributes['name'];
-    }
-
-    protected function getPropertyAccessor()
-    {
-        return PropertyAccess::createPropertyAccessor();
     }
 
     protected function getPropertyPath()
@@ -459,5 +455,33 @@ abstract class AbstractNode extends ContainerAware
 
     public function populate($value)
     {
+    }
+
+    /**
+     * Checks whether passed resource is new entity
+     *
+     * @param $resource
+     *
+     * @return bool
+     */
+    protected function isNewResource($resource)
+    {
+        if (null !== $resource) {
+            $state = $this->getEntityManager()->getUnitOfWork()->getEntityState($resource);
+
+            return \Doctrine\ORM\UnitOfWork::STATE_NEW === $state;
+        }
+
+        return false;
+    }
+
+    /**
+     * Sets default data for all translatable fields bound to fieldset
+     *
+     * @param $data
+     */
+    public function setDefaults($data, $isNewResource)
+    {
+        return false;
     }
 }

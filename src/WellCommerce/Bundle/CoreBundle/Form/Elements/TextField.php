@@ -57,6 +57,7 @@ class TextField extends AbstractField implements ElementInterface
         ]);
 
         $resolver->setDefaults([
+            'default'       => null,
             'dependencies'  => [],
             'filters'       => [],
             'rules'         => [],
@@ -80,7 +81,7 @@ class TextField extends AbstractField implements ElementInterface
             'filters'       => 'array',
             'rules'         => 'array',
             'dependencies'  => 'array',
-            'default'       => ['string', 'integer']
+            'default'       => ['string', 'integer', 'null']
         ]);
     }
 
