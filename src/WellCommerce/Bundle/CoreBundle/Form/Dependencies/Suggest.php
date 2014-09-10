@@ -20,4 +20,8 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Dependencies;
  */
 class Suggest extends AbstractDependency implements DependencyInterface
 {
+    public function getJavascriptType()
+    {
+        return 'SUGGEST';
+    }
 }

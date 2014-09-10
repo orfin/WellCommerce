@@ -20,4 +20,8 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Dependencies;
  */
 class ExchangeOptions extends AbstractDependency implements DependencyInterface
 {
+    public function getJavascriptType()
+    {
+        return 'EXCHANGE_OPTIONS';
+    }
 }
