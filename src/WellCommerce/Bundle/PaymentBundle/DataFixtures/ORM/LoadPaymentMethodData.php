@@ -30,14 +30,6 @@ class LoadPaymentData implements FixtureInterface
      */
     public function load(ObjectManager $manager)
     {
-        $payment = new Payment();
-        $payment->translate('pl')->setName('szt');
-        $payment->translate('en')->setName('pcs');
-        $payment->translate('de')->setName('pcs');
-        $payment->translate('fr')->setName('pcs');
-        $payment->mergeNewTranslations();
-
-        $manager->persist($payment);
-        $manager->flush();
+        
     }
 }
