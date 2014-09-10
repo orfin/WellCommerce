@@ -19,6 +19,7 @@ use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\MetaDataTrait;
 use WellCommerce\Bundle\LayoutBundle\Entity\LayoutTheme;
 use WellCommerce\Bundle\LocaleBundle\Entity\Locale;
+use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod;
 use WellCommerce\Bundle\ProducerBundle\Entity\Producer;
 use WellCommerce\Bundle\ProductBundle\Entity\Product;
 
@@ -63,6 +64,11 @@ class Shop
     private $products;
 
     /**
+     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod", mappedBy="shops")
+     */
+    private $paymentMethods;
+
+    /**
      * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\ProducerBundle\Entity\Producer", mappedBy="shops")
      */
     private $producers;
@@ -91,6 +97,7 @@ class Shop
         $this->products         = new ArrayCollection();
         $this->producers        = new ArrayCollection();
         $this->availableLocales = new ArrayCollection();
+        $this->paymentMethods   = new ArrayCollection();
     }
 
     /**
@@ -223,9 +230,44 @@ class Shop
         $this->availableLocales = $locale;
     }
 
+    /**
+     * Sets available locales
+     *
+     * @param ArrayCollection $collection
+     */
     public function setAvailableLocales(ArrayCollection $collection)
     {
         $this->availableLocales = $collection;
+    }
+
+    /**
+     * Returns all available payment methods
+     *
+     * @return ArrayCollection
+     */
+    public function getPaymentMethods()
+    {
+        return $this->paymentMethods;
+    }
+
+    /**
+     * Adds new payment method to shop
+     *
+     * @param PaymentMethod $paymentMethod
+     */
+    public function addPaymentMethod(PaymentMethod $paymentMethod)
+    {
+        $this->paymentMethods = $paymentMethod;
+    }
+
+    /**
+     * Sets available payment methods
+     *
+     * @param ArrayCollection $paymentMethods
+     */
+    public function setPaymentMethods(ArrayCollection $paymentMethods)
+    {
+        $this->paymentMethods = $paymentMethods;
     }
 }
 

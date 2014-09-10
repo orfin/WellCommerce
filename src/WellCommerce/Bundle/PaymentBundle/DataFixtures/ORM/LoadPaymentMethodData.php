@@ -30,6 +30,6 @@ class LoadPaymentData implements FixtureInterface
      */
     public function load(ObjectManager $manager)
     {
-        
+
     }
 }

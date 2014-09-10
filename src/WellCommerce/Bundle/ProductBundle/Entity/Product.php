@@ -340,17 +340,17 @@ class Product
     }
 
     /**
-     * Sets shops for category
+     * Sets shops for product
      *
-     * @param $shops
+     * @param ArrayCollection $shops
      */
-    public function setShops($shops)
+    public function setShops(ArrayCollection $shops)
     {
         $this->shops = $shops;
     }
 
     /**
-     * Get shops for category
+     * Get shops for product
      *
      * @return mixed
      */

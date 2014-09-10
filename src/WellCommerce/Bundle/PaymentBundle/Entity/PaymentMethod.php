@@ -12,10 +12,12 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\EnableableTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\HierarchyTrait;
+use WellCommerce\Bundle\ShopBundle\Entity\Shop;
 
 /**
  * Class PaymentMethod
@@ -45,6 +47,23 @@ class PaymentMethod
     private $id;
 
     /**
+     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\ShopBundle\Entity\Shop", inversedBy="paymentMethods")
+     * @ORM\JoinTable(name="shop_payment_method",
+     *      joinColumns={@ORM\JoinColumn(name="payment_method_id", referencedColumnName="id", onDelete="CASCADE")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="shop_id", referencedColumnName="id", onDelete="CASCADE")}
+     * )
+     */
+    private $shops;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->shops = new ArrayCollection();
+    }
+
+    /**
      * Get id.
      *
      * @return integer
@@ -53,5 +72,36 @@ class PaymentMethod
     {
         return $this->id;
     }
+
+    /**
+     * Sets shops for payment method
+     *
+     * @param $shops
+     */
+    public function setShops($shops)
+    {
+        $this->shops = $shops;
+    }
+
+    /**
+     * Get shops for payment method
+     *
+     * @return mixed
+     */
+    public function getShops()
+    {
+        return $this->shops;
+    }
+
+    /**
+     * Adds payment method to shop
+     *
+     * @param Shop $shop
+     */
+    public function addShop(Shop $shop)
+    {
+        $this->shops[] = $shop;
+    }
+
 }
 

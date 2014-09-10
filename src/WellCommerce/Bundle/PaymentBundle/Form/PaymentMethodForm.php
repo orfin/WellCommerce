@@ -13,6 +13,7 @@ namespace WellCommerce\Bundle\PaymentBundle\Form;
 
 use WellCommerce\Bundle\CoreBundle\Form\AbstractForm;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
 use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
 
 /**
@@ -36,8 +37,8 @@ class PaymentMethodForm extends AbstractForm implements FormInterface
         ]));
 
         $languageData = $requiredData->addChild($builder->getElement('fieldset_language', [
-            'name'      => 'translations',
-            'label'     => $this->trans('form.required_data.language_data.label')
+            'name'  => 'translations',
+            'label' => $this->trans('form.required_data.language_data.label')
         ]));
 
         $languageData->addChild($builder->getElement('text_field', [
@@ -57,14 +58,26 @@ class PaymentMethodForm extends AbstractForm implements FormInterface
         ]));
 
         $requiredData->addChild($builder->getElement('text_field', [
-            'name'  => 'hierarchy',
-            'label' => $this->trans('Hierarchy'),
-            'rules' => [
+            'name'    => 'hierarchy',
+            'label'   => $this->trans('Hierarchy'),
+            'rules'   => [
                 $builder->getRule('required', [
                     'message' => $this->trans('Hierarchy is required')
                 ])
             ],
             'default' => 0
+        ]));
+
+        $shopData = $form->addChild($builder->getElement('fieldset', [
+            'name'  => 'shop_data',
+            'label' => $this->trans('Shops')
+        ]));
+
+        $shopData->addChild($builder->getElement('multi_select', [
+            'name'        => 'shops',
+            'label'       => $this->trans('shops'),
+            'options'     => $this->get('shop.repository')->getCollectionToSelect(),
+            'transformer' => new CollectionToArrayTransformer($this->get('shop.repository'))
         ]));
 
         $form->addFilter('no_code');
