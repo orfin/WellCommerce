@@ -33,17 +33,17 @@ class PaymentMethodForm extends AbstractForm implements FormInterface
 
         $requiredData = $form->addChild($builder->getElement('fieldset', [
             'name'  => 'required_data',
-            'label' => $this->trans('form.required_data.label')
+            'label' => $this->trans('Required data')
         ]));
 
         $languageData = $requiredData->addChild($builder->getElement('fieldset_language', [
             'name'  => 'translations',
-            'label' => $this->trans('form.required_data.language_data.label')
+            'label' => $this->trans('Translations')
         ]));
 
         $languageData->addChild($builder->getElement('text_field', [
             'name'  => 'name',
-            'label' => $this->trans('payment.language_data.name.label'),
+            'label' => $this->trans('Name'),
             'rules' => [
                 $builder->getRule('required', [
                     'message' => $this->trans('Name is required')
