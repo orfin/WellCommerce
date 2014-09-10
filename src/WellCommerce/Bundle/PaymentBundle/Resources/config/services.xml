@@ -10,7 +10,7 @@
         <parameter key="payment_method.datagrid.configurator.class">WellCommerce\Bundle\PaymentBundle\DataGrid\PaymentMethodDataGridConfigurator</parameter>
         <parameter key="payment_method.form.class">WellCommerce\Bundle\PaymentBundle\Form\PaymentMethodForm</parameter>
         <parameter key="payment_method.subscriber.class">WellCommerce\Bundle\PaymentBundle\EventListener\PaymentMethodSubscriber</parameter>
-        <parameter key="payment_method.manager.class">WellCommerce\Bundle\PaymentBundle\Manager\PaymentMethodManager</parameter>
+        <parameter key="payment_method.processor.collection.class">WellCommerce\Bundle\PaymentBundle\Processor\PaymentMethodProcessorCollection</parameter>
     </parameters>
 
     <services>
@@ -57,5 +57,7 @@
             </call>
             <tag name="kernel.event_subscriber" />
         </service>
+
+        <service id="payment_method.processor.collection" class="%payment_method.processor.collection.class%" />
     </services>
 </container>

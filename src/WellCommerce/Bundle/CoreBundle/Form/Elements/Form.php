@@ -192,7 +192,7 @@ class Form extends AbstractContainer
      */
     public function setDefaultData($data)
     {
-        $isNewResource     = $this->isNewResource($data);
+        $isNewResource = $this->isNewResource($data);
         $this->defaultData = $data;
         parent::setDefaults($this->defaultData, $isNewResource);
 

@@ -20,7 +20,6 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Conditions;
  */
 interface ConditionInterface
 {
-
     /**
      * Evaluates condition value
      *
@@ -29,4 +28,11 @@ interface ConditionInterface
      * @return mixed
      */
     public function evaluate($value);
+
+    /**
+     * Returns javascript part for condition
+     *
+     * @return string
+     */
+    public function renderJs();
 } 

@@ -166,22 +166,22 @@ abstract class AbstractNode extends BaseAbstractContainer
         return $values;
     }
 
-    protected function getName()
+    public function getName()
     {
         return $this->attributes['name'];
     }
 
-    protected function getPropertyPath()
+    public function getPropertyPath()
     {
         return $this->attributes['property_path'];
     }
 
-    protected function hasTransformer()
+    public function hasTransformer()
     {
         return (null !== $this->attributes['transformer']);
     }
 
-    protected function getTransformer()
+    public function getTransformer()
     {
         return $this->attributes['transformer'];
     }

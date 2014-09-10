@@ -118,13 +118,25 @@ abstract class AbstractContainer extends AbstractNode
     {
         $values = [];
         foreach ($this->children as $child) {
-            if ($child instanceof Container) {
+            if ($child instanceof AbstractContainer) {
                 $values[$child->getName()] = $child->getValues();
-            } elseif ($child instanceof Field) {
+            } elseif ($child instanceof AbstractField) {
                 $values[$child->getName()] = $child->getValue();
             }
         }
 
         return $values;
+    }
+
+    public function getChild($name)
+    {
+        /**
+         * @var $child ElementInterface
+         */
+        foreach ($this->form->fields as $child) {
+            if ($child instanceof ElementInterface && $name === $child->getName()) {
+                return $child;
+            }
+        }
     }
 }

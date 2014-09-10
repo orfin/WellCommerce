@@ -86,11 +86,12 @@ abstract class OptionedField extends AbstractField
     /**
      * Adds new option to select
      *
-     * @param Option $option
+     * @param $value
+     * @param $label
      */
-    public function addOption(Option $option)
+    public function addOption($value, $label)
     {
-        $this->attributes['options'][] = $option;
+        $this->attributes['options'][$value] = $label;
     }
 
     /**

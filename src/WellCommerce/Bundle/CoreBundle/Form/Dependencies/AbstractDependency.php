@@ -11,174 +11,87 @@
  */
 namespace WellCommerce\Bundle\CoreBundle\Form\Dependencies;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
 
 /**
- * Class Dependency
+ * Class AbstractDependency
  *
  * @package WellCommerce\Bundle\CoreBundle\Form\Dependencies
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class Dependency
+abstract class AbstractDependency extends AbstractContainer
 {
+    /**
+     * @var \Symfony\Component\OptionsResolver\OptionsResolver
+     */
+    protected $optionsResolver;
 
-    const HIDE                   = 'HIDE';
-    const SHOW                   = 'SHOW';
-    const IGNORE                 = 'IGNORE';
-    const SUGGEST                = 'SUGGEST';
-    const INVOKE_CUSTOM_FUNCTION = 'INVOKE_CUSTOM_FUNCTION';
-    const EXCHANGE_OPTIONS       = 'EXCHANGE_OPTIONS';
+    /**
+     * @var array
+     */
+    protected $options;
 
-    public $type;
-    public $registry;
-    protected $id;
-    protected $condition;
-    protected $srcFunction;
-    protected $_field;
-    protected $_argument;
-
-    protected static $_nextId = 0;
-
-    public function __construct($type, $field, $condition, $argument = null, ContainerInterface $container)
+    /**
+     * Constructor
+     */
+    public function __construct()
     {
-        $this->container = $container;
-        $this->argument  = $argument;
-        $this->type      = $type;
-        if (is_object($condition) && $condition instanceof Condition) {
-            $this->condition = $condition;
-        } else {
-            $this->srcFunction = $condition;
-            $this->id          = self::$_nextId++;
-            switch ($this->type) {
-                case self::EXCHANGE_OPTIONS:
-                    $this->jsFunction = 'GetOptions_' . $this->id;
-                    $this->container->get('xajax_manager')->registerFunction([
-                        $this->jsFunction,
-                        $this,
-                        'doAjaxOptionsRequest_' . $this->id
-                    ]);
-                    break;
-                case self::INVOKE_CUSTOM_FUNCTION:
-                    $this->jsFunction = $condition;
-                    break;
-                case self::SUGGEST:
-                    $this->jsFunction = 'GetSuggestions_' . $this->id;
-                    $this->container->get('xajax_manager')->registerFunction([
-                        $this->jsFunction,
-                        $this,
-                        'doAjaxSuggestionRequest_' . $this->id
-                    ]);
-            }
-        }
-        $this->_field = $field;
+        $this->optionsResolver = new OptionsResolver();
     }
 
-    public function evaluate($value = '', $i = null)
+    public function setOptions(array $options = [])
     {
-        if (!$this->condition instanceof Condition) {
-            return false;
-        }
+        $this->configureOptions($this->optionsResolver);
+        $this->options = $this->optionsResolver->resolve($options);
 
-        if ($i === null) {
-            return $this->condition->evaluate($this->_field->getValue());
-        }
-        $matchingValues = $this->_field->getValue();
-        if (is_array($matchingValues)) {
-            if (isset($matchingValues[$i])) {
-                return $this->condition->evaluate($matchingValues[$i]);
-            } else {
-                return $this->condition->evaluate('');
-            }
-        }
-
-        return $this->condition->evaluate($matchingValues);
+        return $this;
     }
 
-    public function doAjaxSuggestionRequest($request, $responseHandler)
+    public function configureOptions(OptionsResolverInterface $resolver)
     {
-        try {
-            $objResponse = new xajaxResponse();
-            $response    = Array(
-                'suggestion' => call_user_func($this->srcFunction, $request['value'])
-            );
-            $objResponse->script("{$responseHandler}(" . json_encode($response) . ")");
+        $resolver->setRequired([
+            'field',
+            'form',
+            'condition',
+        ]);
 
-            return $objResponse;
-        } catch (Exception $e) {
-            $objResponse = new xajaxResponse();
-            $objResponse->script("GAlert('{Translation::get('ERR_PROBLEM_DURING_AJAX_EXECUTION')}', '{$e->getMessage()}');");
-
-            return $objResponse;
-        }
+        $resolver->setAllowedTypes([
+            'field'     => 'WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface',
+            'form'      => 'WellCommerce\Bundle\CoreBundle\Form\Elements\Form',
+            'condition' => 'WellCommerce\Bundle\CoreBundle\Form\Conditions\ConditionInterface'
+        ]);
     }
 
-    public function doAjaxOptionsRequest($request, $responseHandler)
+    /**
+     * Returns field to which dependency is bound
+     *
+     * @return \WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface
+     */
+    protected function getField()
     {
-        try {
-            $objResponse = new xajaxResponse();
-            if ($this->argument !== null) {
-                $rawOptions = call_user_func($this->srcFunction, $request['value'], $this->argument);
-            } else {
-                $rawOptions = call_user_func($this->srcFunction, $request['value']);
-            }
-            $options = [];
-            foreach ($rawOptions as $option) {
-                $value     = addslashes($option->value);
-                $label     = addslashes($option->label);
-                $options[] = Array(
-                    'sValue' => $value,
-                    'sLabel' => $label
-                );
-            }
-            $response = Array(
-                'options' => $options
-            );
-            $objResponse->script("{$responseHandler}(" . json_encode($response) . ")");
-
-            return $objResponse;
-        } catch (Exception $e) {
-            $objResponse = new xajaxResponse();
-            $objResponse->script("GAlert('{Translation::get('ERR_PROBLEM_DURING_AJAX_EXECUTION')}', '{$e->getMessage()}');");
-
-            return $objResponse;
-        }
+        return $this->options['field'];
     }
 
-    public function renderJs()
+    /**
+     * Returns form instance
+     *
+     * @return \WellCommerce\Bundle\CoreBundle\Form\Elements\Form
+     */
+    protected function getForm()
     {
-        if ($this->condition instanceof Condition) {
-            return "new GFormDependency(GFormDependency.{$this->type}, '{$this->_field->form->getName()}.{$this->_field->getName()}', {$this->condition->renderJs()})";
-        } else {
-            switch ($this->type) {
-                case self::INVOKE_CUSTOM_FUNCTION:
-                    if ($this->argument !== null) {
-                        $argument = json_encode($this->argument);
-
-                        return "new GFormDependency(GFormDependency.{$this->type}, '{$this->_field->form->getName()}.{$this->_field->getName()}', {$this->jsFunction}, {$argument})";
-                    }
-
-                    return "new GFormDependency(GFormDependency.{$this->type}, '{$this->_field->form->getName()}.{$this->_field->getName()}', {$this->jsFunction})";
-                    break;
-                case self::EXCHANGE_OPTIONS:
-                case self::SUGGEST:
-                    return "new GFormDependency(GFormDependency.{$this->type}, '{$this->_field->form->getName()}.{$this->_field->getName()}', xajax_{$this->jsFunction})";
-            }
-        }
+        return $this->options['form'];
     }
 
-    public function __call($name, $args)
+    /**
+     * Returns dependency condition
+     *
+     * @return \WellCommerce\Bundle\CoreBundle\Form\Conditions\ConditionInterface
+     */
+    protected function getCondition()
     {
-        if (substr($name, 0, 20) == 'doAjaxOptionsRequest') {
-            return call_user_func(Array(
-                $this,
-                'doAjaxOptionsRequest'
-            ), $args[0], $args[1]);
-        }
-        if (substr($name, 0, 23) == 'doAjaxSuggestionRequest') {
-            return call_user_func(Array(
-                $this,
-                'doAjaxSuggestionRequest'
-            ), $args[0], $args[1]);
-        }
+        return $this->options['condition'];
     }
+
 }

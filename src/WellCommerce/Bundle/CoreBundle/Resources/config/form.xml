@@ -11,6 +11,7 @@
         <parameter key="form.resolver.condition.class">WellCommerce\Bundle\CoreBundle\Form\Resolver\ConditionResolver</parameter>
         <parameter key="form.resolver.rule.class">WellCommerce\Bundle\CoreBundle\Form\Resolver\RuleResolver</parameter>
         <parameter key="form.resolver.filter.class">WellCommerce\Bundle\CoreBundle\Form\Resolver\FilterResolver</parameter>
+        <parameter key="form.resolver.dependency.class">WellCommerce\Bundle\CoreBundle\Form\Resolver\DependencyResolver</parameter>
         <!-- form elements -->
         <parameter key="form.element.attribute_editor.class">WellCommerce\Bundle\CoreBundle\Form\Elements\AttributeEditor</parameter>
         <parameter key="form.element.border.class">WellCommerce\Bundle\CoreBundle\Form\Elements\Border</parameter>
@@ -85,6 +86,8 @@
         <parameter key="form.rule.required.class">WellCommerce\Bundle\CoreBundle\Form\Rules\Required</parameter>
         <parameter key="form.rule.unique.class">WellCommerce\Bundle\CoreBundle\Form\Rules\Unique</parameter>
         <parameter key="form.rule.vat.class">WellCommerce\Bundle\CoreBundle\Form\Rules\Vat</parameter>
+        <!-- form dependencies -->
+        <parameter key="form.dependency.show.class">WellCommerce\Bundle\CoreBundle\Form\Dependencies\Show</parameter>
     </parameters>
 
     <services>
@@ -107,6 +110,12 @@
         </service>
 
         <service id="form.resolver.rule" class="%form.resolver.rule.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.resolver.dependency" class="%form.resolver.dependency.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -302,6 +311,13 @@
         </service>
 
         <service id="form.rule.vat" class="%form.rule.vat.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <!-- DEPENDENCIES -->
+        <service id="form.dependency.show" class="%form.dependency.show.class%" scope="prototype">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
