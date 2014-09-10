@@ -24,9 +24,4 @@ class Show extends AbstractDependency implements DependencyInterface
     {
         return 'SHOW';
     }
-
-    public function renderJs()
-    {
-        return "new GFormDependency(GFormDependency.{$this->getJavascriptType()}, '{$this->getForm()->getName()}.{$this->getField()->getName()}', {$this->getCondition()->renderJs()})";
-    }
 }

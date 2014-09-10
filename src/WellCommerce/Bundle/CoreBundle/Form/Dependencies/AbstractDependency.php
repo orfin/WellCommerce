@@ -94,4 +94,19 @@ abstract class AbstractDependency extends AbstractContainer
         return $this->options['condition'];
     }
 
+    public function renderJs()
+    {
+        $javascriptType      = $this->getJavascriptType();
+        $conditionJavascript = $this->getCondition()->renderJs();
+        $fieldName           = $this->getField()->getName();
+        $formName            = $this->getForm()->getName();
+
+        return sprintf("new GFormDependency(GFormDependency.%s, '%s.%s', %s)",
+            $javascriptType,
+            $formName,
+            $fieldName,
+            $conditionJavascript
+        );
+    }
+
 }
