@@ -151,6 +151,33 @@ class FieldsetLanguage extends Fieldset implements ElementInterface
         }
     }
 
+    public function validate($resource)
+    {
+        $accessor     = $this->getPropertyAccessor();
+        $translations = $accessor->getValue($resource, $this->getPropertyPath());
+        $result       = true;
+        foreach ($this->children as $child) {
+            $values = $child->getValue();
+            foreach ($translations as $translation) {
+                $value      = $values[$translation->getLocale()];
+                $violations = $this->getValidator()->validatePropertyValue($translation, $child->getName(), $value);
+                $error      = '';
+                if ($violations->count()) {
+                    $errorMessages = [];
+                    foreach ($violations as $violation) {
+                        $errorMessages[] = $violation->getMessage();
+                    }
+                    $error  = implode('.', $errorMessages);
+                    $result = false;
+                }
+                $child->attributes['error'][$translation->getLocale()] = $error;
+            }
+
+        }
+
+        return $result;
+    }
+
     /**
      * Handles submit request and sets translations for entity
      *

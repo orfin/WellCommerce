@@ -45,21 +45,11 @@ class CategoryForm extends AbstractForm implements FormInterface
         $languageData->addChild($builder->getElement('text_field', [
             'name'  => 'name',
             'label' => $this->trans('category.name'),
-            'rules' => [
-                $builder->getRule('required', [
-                    'message' => $this->trans('Name is required')
-                ])
-            ]
         ]));
 
         $requiredData->addChild($builder->getElement('text_field', [
             'name'  => 'hierarchy',
             'label' => $this->trans('Hierarchy'),
-            'rules' => [
-                $builder->getRule('required', [
-                    'message' => $this->trans('Hierarchy is required')
-                ])
-            ]
         ]));
 
         $requiredData->addChild($builder->getElement('tip', [

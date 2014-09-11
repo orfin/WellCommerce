@@ -217,6 +217,16 @@ var GFormContainerLanguage = GCore.ExtendClass(GFormNode, function () {
         for (i in mData) {
             if (gThis.m_oContainerRepetitions[i] != undefined) {
                 gThis.m_oContainerRepetitions[i].PopulateErrors(mData[i]);
+                console.log(mData[i]);
+            }
+        }
+
+        for (var iFieldIndex in gThis.m_oOptions.aoFields) {
+            var sFieldName = gThis.m_oOptions.aoFields[iFieldIndex].sName;
+            for (var sRepetitionId in mData[sFieldName]) {
+                var oValueObject = {};
+                oValueObject[sFieldName] = mData[sFieldName][sRepetitionId];
+                gThis.m_oContainerRepetitions[sRepetitionId].PopulateErrors(oValueObject);
             }
         }
 

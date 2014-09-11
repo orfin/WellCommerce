@@ -25,52 +25,18 @@ class AbstractField extends AbstractNode
 {
     protected $_value = '';
 
-    public function isValid($values = [])
+    public function validate($resource)
     {
-        if (!isset($this->attributes['rules']) || !is_array($this->attributes['rules'])) {
-            return true;
-        }
-        $result = true;
-        foreach ($this->attributes['rules'] as $rule) {
-            if (isset($this->_value) && is_array($this->_value)) {
-                foreach ($this->_value as $i => $value) {
-                    $skip = false;
-                    if (isset($this->attributes['dependencies']) && is_array($this->attributes['dependencies'])) {
-                        foreach ($this->attributes['dependencies'] as $dependency) {
-                            if ((($dependency->type == Dependency::HIDE) && $dependency->evaluate($value, $i)) || (($dependency->type == Dependency::SHOW) && !$dependency->evaluate($value, $i)) || (($dependency->type == Dependency::IGNORE) && $dependency->evaluate($value, $i))) {
-                                $skip = true;
-                                break;
-                            }
-                        }
-                    }
-                    if (!$skip) {
-                        if ($rule instanceof LanguageUnique) {
-                            $rule->setLanguage($i);
-                        }
-                        if (($checkResult = $rule->check($value)) !== true) {
-                            if (!isset($this->attributes['error']) || !is_array($this->attributes['error'])) {
-                                $this->attributes['error'] = ($i > 0) ? array_fill(0, $i, '') : [];
-                            } elseif ($i > 0) {
-                                $this->attributes['error'] = $this->attributes['error'] + array_fill(0, $i, '');
-                            }
-                            $this->attributes['error'][$i] = $checkResult;
-                            $result                        = false;
-                        }
-                    }
-                }
-            } else {
-                if (isset($this->attributes['dependencies']) && is_array($this->attributes['dependencies'])) {
-                    foreach ($this->attributes['dependencies'] as $dependency) {
-                        if ((($dependency->type == Dependency::HIDE) && $dependency->evaluate($this->_value)) || (($dependency->type == Dependency::SHOW) && !$dependency->evaluate($this->_value)) || (($dependency->type == Dependency::IGNORE) && $dependency->evaluate($this->_value))) {
-                            return $result;
-                        }
-                    }
-                }
-                if (($checkResult = $rule->check($this->_value)) !== true) {
-                    $this->attributes['error'] = $checkResult;
-                    $result                    = false;
-                }
+        $violations = $this->getValidator()->validatePropertyValue($resource, $this->getName(), $this->_value);
+        $result     = true;
+
+        if ($violations->count()) {
+            $errorMessages = [];
+            foreach ($violations as $violation) {
+                $errorMessages[] = $violation->getMessage();
             }
+            $this->attributes['error'] = implode('.', $errorMessages);
+            $result                    = false;
         }
 
         return $result;
@@ -134,16 +100,16 @@ class AbstractField extends AbstractNode
     /**
      * {@inheritdoc}
      */
-    public function setDefaults($values, $isNewResource)
+    public function setDefaults($defaultData, $isNewResource)
     {
         $accessor = $this->getPropertyAccessor();
 
-        if (null !== $this->getPropertyPath() && $accessor->isReadable($values, $this->getPropertyPath())) {
+        if (null !== $this->getPropertyPath() && $accessor->isReadable($defaultData, $this->getPropertyPath())) {
 
             if ($isNewResource) {
                 $value = $this->attributes['default'];
             } else {
-                $value = $accessor->getValue($values, $this->getPropertyPath());
+                $value = $accessor->getValue($defaultData, $this->getPropertyPath());
 
                 if ($this->hasTransformer()) {
                     $value = $this->getTransformer()->transform($value);

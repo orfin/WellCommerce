@@ -94,4 +94,4 @@ interface ElementInterface
      * @return mixed
      */
     public function setDefaults($data, $isNewResource);
-} 
+}

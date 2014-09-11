@@ -82,7 +82,7 @@ class CategoryRepository extends AbstractEntityRepository implements CategoryRep
     public function quickAddCategory(ParameterBag $parameters)
     {
         $name     = $parameters->get('name');
-        $parent   = $this->find($parameters->get('parent'));
+        $parent   = ($parameters->get('parent') > 0) ? $this->find($parameters->get('parent')) : null;
         $locales  = $this->_em->getRepository('WellCommerce\Bundle\LocaleBundle\Entity\Locale')->findAll();
         $category = new Category();
         $category->setHierarchy(0);

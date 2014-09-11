@@ -192,7 +192,7 @@ class Form extends AbstractContainer
      */
     public function setDefaultData($data)
     {
-        $isNewResource = $this->isNewResource($data);
+        $isNewResource     = $this->isNewResource($data);
         $this->defaultData = $data;
         parent::setDefaults($this->defaultData, $isNewResource);
 
@@ -257,21 +257,22 @@ class Form extends AbstractContainer
     /**
      * Validates the form
      *
-     * @param array $values
-     *
      * @return bool
      */
-    public function isValid($values = [])
+    public function isValid()
     {
+        // don't validate the form if it wasn't submitted
         if (!$this->isSubmitted()) {
             return false;
         }
 
+        // harvest submit values
         $values = $this->getSubmittedData();
 
+        // populate the form with submitted values
         $this->populate($values);
 
-        return parent::isValid();
+        return parent::validate($this->defaultData);
     }
 
     public function getSubmittedData()

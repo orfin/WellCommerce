@@ -44,8 +44,11 @@ abstract class AbstractNode extends BaseAbstractContainer
     {
         $this->optionsResolver = new OptionsResolver();
         $this->_id             = self::$_nextId++;
-        $class                 = explode('\\', get_class($this));
-        $this->jsNodeName      = 'GForm' . end($class);
+    }
+
+    protected function getValidator()
+    {
+        return $this->container->get('validator');
     }
 
     protected function getJavascriptNodeName()
@@ -426,7 +429,7 @@ abstract class AbstractNode extends BaseAbstractContainer
     {
     }
 
-    public function isValid()
+    public function validate($resource)
     {
         return true;
     }

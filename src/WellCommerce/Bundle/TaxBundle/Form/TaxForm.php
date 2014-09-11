@@ -45,7 +45,7 @@ class TaxForm extends AbstractForm implements FormInterface
             'rules'   => [
                 $builder->getRule('required', [
                     'message' => $this->trans('Value is required')
-                ]),
+                ])
             ],
             'filters' => [
                 $builder->getFilter('comma_to_dot_changer')

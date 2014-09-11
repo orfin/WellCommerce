@@ -4,14 +4,28 @@
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
 
     <class name="WellCommerce\Bundle\CategoryBundle\Entity\Category">
+        <property name="hierarchy">
+            <constraint name="NotBlank">
+                <option name="message">category.hierarchy.not_blank</option>
+            </constraint>
+            <constraint name="NotNull">
+                <option name="message">category.hierarchy.not_null</option>
+            </constraint>
+            <constraint name="Type">
+                <option name="type">integer</option>
+                <option name="message">category.hierarchy.type</option>
+            </constraint>
+        </property>
+    </class>
+
+    <class name="WellCommerce\Bundle\CategoryBundle\Entity\CategoryTranslation">
         <property name="name">
-            <constraint name="NotBlank" />
-        </property>
-        <property name="shortName">
-            <constraint name="NotBlank" />
-        </property>
-        <property name="country">
-            <constraint name="Country" />
+            <constraint name="NotBlank">
+                <option name="message">category_translation.name.not_blank</option>
+            </constraint>
+            <constraint name="NotNull">
+                <option name="message">category_translation.name.not_null</option>
+            </constraint>
         </property>
     </class>
 </constraint-mapping>

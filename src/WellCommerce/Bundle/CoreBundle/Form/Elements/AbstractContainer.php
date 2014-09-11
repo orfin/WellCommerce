@@ -102,15 +102,16 @@ abstract class AbstractContainer extends AbstractNode
         return implode(',', $render);
     }
 
-    public function isValid($values = [])
+    public function validate($resource)
     {
         $result = true;
         foreach ($this->children as $child) {
-            if (!$child->isValid()) {
+            if (!$child->validate($resource)) {
                 $result = false;
             }
         }
 
+        return false;
         return $result;
     }
 
@@ -130,11 +131,9 @@ abstract class AbstractContainer extends AbstractNode
 
     public function getChild($name)
     {
-        /**
-         * @var $child ElementInterface
-         */
         foreach ($this->form->fields as $child) {
-            if ($child instanceof ElementInterface && $name === $child->getName()) {
+            if($child)
+            if (method_exists($child, 'getName') && $name === $child->getName()) {
                 return $child;
             }
         }
