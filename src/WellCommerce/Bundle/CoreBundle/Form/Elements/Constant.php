@@ -20,10 +20,12 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
  */
 class Constant extends TextField implements ElementInterface
 {
-
-    protected function prepareAttributesJs()
+    /**
+     * {@inheritdoc}
+     */
+    public function prepareAttributesJs()
     {
-        $attributes = Array(
+        return [
             $this->formatAttributeJs('name', 'sName'),
             $this->formatAttributeJs('label', 'sLabel'),
             $this->formatAttributeJs('comment', 'sComment'),
@@ -33,9 +35,7 @@ class Constant extends TextField implements ElementInterface
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
             $this->formatDefaultsJs()
-        );
-
-        return $attributes;
+        ];
     }
 
 }

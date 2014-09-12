@@ -16,7 +16,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use WellCommerce\Bundle\CategoryBundle\Entity\Category;
+use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\EnableableTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\MetaDataTrait;
+use WellCommerce\Bundle\CurrencyBundle\Entity\Currency;
 use WellCommerce\Bundle\LayoutBundle\Entity\LayoutTheme;
 use WellCommerce\Bundle\LocaleBundle\Entity\Locale;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod;
@@ -37,6 +39,7 @@ class Shop
     use ORMBehaviors\Timestampable\Timestampable;
     use ORMBehaviors\Blameable\Blameable;
     use ORMBehaviors\Translatable\Translatable;
+    use EnableableTrait;
 
     /**
      * @var integer
@@ -80,7 +83,16 @@ class Shop
      *      inverseJoinColumns={@ORM\JoinColumn(name="locale_id", referencedColumnName="id", onDelete="CASCADE")}
      * )
      */
-    private $availableLocales;
+    private $locales;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\CurrencyBundle\Entity\Currency", inversedBy="shops")
+     * @ORM\JoinTable(name="shop_currency",
+     *      joinColumns={@ORM\JoinColumn(name="shop_id", referencedColumnName="id", onDelete="CASCADE")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="currency_id", referencedColumnName="id", onDelete="CASCADE")}
+     * )
+     */
+    private $currencies;
 
     /**
      * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\LayoutBundle\Entity\LayoutTheme")
@@ -93,11 +105,12 @@ class Shop
      */
     public function __construct()
     {
-        $this->categories       = new ArrayCollection();
-        $this->products         = new ArrayCollection();
-        $this->producers        = new ArrayCollection();
-        $this->availableLocales = new ArrayCollection();
-        $this->paymentMethods   = new ArrayCollection();
+        $this->categories     = new ArrayCollection();
+        $this->products       = new ArrayCollection();
+        $this->producers      = new ArrayCollection();
+        $this->locales        = new ArrayCollection();
+        $this->paymentMethods = new ArrayCollection();
+        $this->currencies     = new ArrayCollection();
     }
 
     /**
@@ -215,9 +228,9 @@ class Shop
      *
      * @return ArrayCollection
      */
-    public function getAvailableLocales()
+    public function getLocales()
     {
-        return $this->availableLocales;
+        return $this->locales;
     }
 
     /**
@@ -225,9 +238,9 @@ class Shop
      *
      * @param Locale $locale
      */
-    public function addAvailableLocale(Locale $locale)
+    public function addLocale(Locale $locale)
     {
-        $this->availableLocales = $locale;
+        $this->locales[] = $locale;
     }
 
     /**
@@ -235,9 +248,39 @@ class Shop
      *
      * @param ArrayCollection $collection
      */
-    public function setAvailableLocales(ArrayCollection $collection)
+    public function setLocales(ArrayCollection $collection)
     {
-        $this->availableLocales = $collection;
+        $this->locales = $collection;
+    }
+
+    /**
+     * Returns all available currencies for shop
+     *
+     * @return ArrayCollection
+     */
+    public function getCurrencies()
+    {
+        return $this->currencies;
+    }
+
+    /**
+     * Adds new locale for shop
+     *
+     * @param Currency $currency
+     */
+    public function addCurrency(Currency $currency)
+    {
+        $this->currencies[] = $currency;
+    }
+
+    /**
+     * Sets available currencies
+     *
+     * @param ArrayCollection $collection
+     */
+    public function setCurrencies(ArrayCollection $collection)
+    {
+        $this->currencies = $collection;
     }
 
     /**

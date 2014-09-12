@@ -52,6 +52,13 @@ class ShopForm extends AbstractForm implements FormInterface
             ]
         ]));
 
+        $requiredData->addChild($builder->getElement('checkbox', [
+            'name'    => 'enabled',
+            'label'   => $this->trans('Enabled'),
+            'comment' => $this->trans('Only logged administrators can access shop'),
+            'default' => 1
+        ]));
+
         $requiredData->addChild($builder->getElement('select', [
             'name'        => 'company',
             'label'       => $this->trans('shop.company'),
@@ -73,10 +80,17 @@ class ShopForm extends AbstractForm implements FormInterface
         ]));
 
         $localizationData->addChild($builder->getElement('multi_select', [
-            'name'        => 'availableLocales',
+            'name'        => 'locales',
             'label'       => $this->trans('Available locales'),
             'options'     => $this->get('locale.repository')->getLocalesToSelect(),
             'transformer' => new CollectionToArrayTransformer($this->get('locale.repository'))
+        ]));
+
+        $localizationData->addChild($builder->getElement('multi_select', [
+            'name'        => 'currencies',
+            'label'       => $this->trans('Available currencies'),
+            'options'     => $this->get('currency.repository')->getCollectionToSelect('code'),
+            'transformer' => new CollectionToArrayTransformer($this->get('currency.repository'))
         ]));
 
         $metaData = $form->addChild($builder->getElement('fieldset', [

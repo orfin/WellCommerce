@@ -33,6 +33,5 @@ class ShopController extends AbstractAdminController
      */
     public function switchAction(Request $request)
     {
-        echo 1;die();
     }
 }

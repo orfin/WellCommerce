@@ -54,7 +54,8 @@ class Image extends File implements ElementInterface
             'filters',
             'rules',
             'transformer',
-            'photos'
+            'photos',
+            'default',
         ]);
 
         $resolver->setDefaults([
@@ -71,6 +72,7 @@ class Image extends File implements ElementInterface
             'filters'                => [],
             'rules'                  => [],
             'photos'                 => [],
+            'default'                => [],
         ]);
 
         $resolver->setAllowedTypes([
@@ -84,7 +86,8 @@ class Image extends File implements ElementInterface
             'session_name'           => 'string',
             'file_types_description' => 'string',
             'file_types'             => 'array',
-            'photos'                 => 'array'
+            'photos'                 => 'array',
+            'default'                => ['null', 'array'],
         ]);
     }
 

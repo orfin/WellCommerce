@@ -22,7 +22,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class ColourSchemePicker extends TextField implements ElementInterface
 {
-
     /**
      * {@inheritdoc}
      */

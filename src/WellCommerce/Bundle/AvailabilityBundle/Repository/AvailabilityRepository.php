@@ -26,12 +26,14 @@ class AvailabilityRepository extends AbstractEntityRepository implements Availab
      */
     public function getDataGridQueryBuilder()
     {
-        return parent::getQueryBuilder()->groupBy('availability.id')
-            ->leftJoin(
-                'WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityTranslation',
-                'availability_translation',
-                'WITH',
-                'availability.id = availability_translation.translatable AND availability_translation.locale = :locale');
+        $qb = parent::getQueryBuilder()->groupBy('availability.id');
+        $qb->leftJoin(
+            'WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityTranslation',
+            'availability_translation',
+            'WITH',
+            'availability.id = availability_translation.translatable AND availability_translation.locale = :locale');
+
+        return $qb;
 
     }
 }
