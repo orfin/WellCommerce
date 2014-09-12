@@ -44,7 +44,8 @@ class Price extends TextField implements ElementInterface
             'filters'        => [],
             'rules'          => [],
             'property_path'  => null,
-            'transformer'    => null
+            'transformer'    => null,
+            'default'        => 0,
 
         ]);
 
@@ -73,7 +74,7 @@ class Price extends TextField implements ElementInterface
             'label'          => 'string',
             'comment'        => 'string',
             'suffix'         => 'string',
-            'prefixes'       => 'string',
+            'prefixes'       => 'array',
             'error'          => 'string',
             'vat_field_name' => 'string',
             'rules'          => 'array',

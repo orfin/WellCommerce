@@ -64,7 +64,8 @@ class Tree extends AbstractField implements ElementInterface
             'set',
             'rules',
             'dependencies',
-            'clickable_root'
+            'clickable_root',
+            'default'
         ]);
 
         $total = function (Options $options) {
@@ -77,7 +78,8 @@ class Tree extends AbstractField implements ElementInterface
             'rules'         => [],
             'total'         => $total,
             'property_path' => null,
-            'transformer'   => null
+            'transformer'   => null,
+            'default'       => 0
         ]);
 
         $resolver->setAllowedTypes([

@@ -12,9 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
-use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\PropertyAccess\PropertyPath;
 
 /**
  * Class Checkbox
@@ -50,7 +48,8 @@ class Checkbox extends AbstractField implements ElementInterface
             'filters'       => [],
             'rules'         => [],
             'property_path' => null,
-            'transformer'   => null
+            'transformer'   => null,
+            'default'       => 0
         ]);
 
         $resolver->setAllowedTypes([
