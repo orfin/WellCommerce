@@ -38,6 +38,7 @@ class AppKernel extends Kernel
             new Liip\ImagineBundle\LiipImagineBundle(),
             // WellCommerce bundles
             new WellCommerce\Bundle\WebBundle\WellCommerceWebBundle(),
+            new WellCommerce\Bundle\NewsBundle\WellCommerceNewsBundle(),
             new WellCommerce\Bundle\MediaBundle\WellCommerceMediaBundle(),
             new WellCommerce\Bundle\CurrencyBundle\WellCommerceCurrencyBundle(),
             new WellCommerce\Bundle\AvailabilityBundle\WellCommerceAvailabilityBundle(),
