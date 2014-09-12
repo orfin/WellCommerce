@@ -12,9 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
-use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\PropertyAccess\PropertyPath;
 
 /**
  * Class TextArea
@@ -84,7 +82,7 @@ class TextArea extends TextField implements ElementInterface
 
     public function prepareAttributesJs()
     {
-        $attributes = [
+        return [
             $this->formatAttributeJs('name', 'sName'),
             $this->formatAttributeJs('label', 'sLabel'),
             $this->formatAttributeJs('rows', 'iRows', ElementInterface::TYPE_NUMBER),
@@ -96,7 +94,5 @@ class TextArea extends TextField implements ElementInterface
             $this->formatDependencyJs(),
             $this->formatDefaultsJs()
         ];
-
-        return $attributes;
     }
 }

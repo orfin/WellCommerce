@@ -111,7 +111,6 @@ abstract class AbstractContainer extends AbstractNode
             }
         }
 
-        return false;
         return $result;
     }
 

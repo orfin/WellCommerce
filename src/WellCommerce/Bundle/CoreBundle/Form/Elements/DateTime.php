@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
 /**
  * Class DateTime
  *
@@ -20,10 +22,60 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
  */
 class DateTime extends TextField implements ElementInterface
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function configureAttributes(OptionsResolverInterface $resolver)
+    {
+        $resolver->setRequired([
+            'name',
+            'label',
+        ]);
 
+        $resolver->setOptional([
+            'comment',
+            'error',
+            'error',
+            'minDate',
+            'maxDate',
+            'default',
+            'property_path',
+            'dependencies',
+            'filters',
+            'rules',
+            'transformer'
+        ]);
+
+        $resolver->setDefaults([
+            'default'       => null,
+            'dependencies'  => [],
+            'filters'       => [],
+            'rules'         => [],
+            'property_path' => null,
+            'transformer'   => null
+        ]);
+
+        $resolver->setAllowedTypes([
+            'name'          => 'string',
+            'label'         => 'string',
+            'comment'       => 'string',
+            'error'         => 'string',
+            'minDate'       => 'string',
+            'maxDate'       => 'string',
+            'default'       => ['string', 'integer', 'null'],
+            'rules'         => 'array',
+            'dependencies'  => 'array',
+            'property_path' => ['null', 'object'],
+            'transformer'   => ['null', 'WellCommerce\Bundle\CoreBundle\Form\DataTransformerInterface'],
+        ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function prepareAttributesJs()
     {
-        $attributes = Array(
+        return [
             $this->formatAttributeJs('name', 'sName'),
             $this->formatAttributeJs('label', 'sLabel'),
             $this->formatAttributeJs('comment', 'sComment'),
@@ -34,8 +86,6 @@ class DateTime extends TextField implements ElementInterface
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
             $this->formatDefaultsJs()
-        );
-
-        return $attributes;
+        ];
     }
 }

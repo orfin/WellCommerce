@@ -22,5 +22,4 @@ use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
 class AbstractForm extends AbstractContainer
 {
 
-
 }

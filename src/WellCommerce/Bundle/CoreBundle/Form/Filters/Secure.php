@@ -21,11 +21,7 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Filters;
 class Secure extends AbstractFilter implements FilterInterface
 {
     /**
-     * Checks whether given value is secure and cleans it if needed
-     *
-     * @param $value
-     *
-     * @return mixed
+     * {@inheritdoc}
      */
     public function filterValue($value)
     {

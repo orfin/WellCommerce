@@ -20,6 +20,9 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Dependencies;
  */
 class Show extends AbstractDependency implements DependencyInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function getJavascriptType()
     {
         return 'SHOW';

@@ -67,13 +67,15 @@ class Tree extends AbstractField implements ElementInterface
             'clickable_root'
         ]);
 
+        $total = function (Options $options) {
+            return count($options['items']);
+        };
+
         $resolver->setDefaults([
             'dependencies'  => [],
             'filters'       => [],
             'rules'         => [],
-            'total'         => function (Options $options) {
-                    return count($options['items']);
-                },
+            'total'         => $total,
             'property_path' => null,
             'transformer'   => null
         ]);
@@ -116,7 +118,7 @@ class Tree extends AbstractField implements ElementInterface
 
     public function prepareAttributesJs()
     {
-        $attributes = [
+        return [
             $this->formatAttributeJs('name', 'sName'),
             $this->formatAttributeJs('label', 'sLabel'),
             $this->formatAttributeJs('addLabel', 'sAddLabel'),
@@ -150,7 +152,5 @@ class Tree extends AbstractField implements ElementInterface
             $this->formatDependencyJs(),
             $this->formatDefaultsJs()
         ];
-
-        return $attributes;
     }
 }

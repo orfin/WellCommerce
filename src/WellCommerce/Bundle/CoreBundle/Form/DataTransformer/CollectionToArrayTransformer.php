@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\CoreBundle\Form\DataTransformer;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use WellCommerce\Bundle\CoreBundle\Form\DataTransformerInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
@@ -21,7 +22,7 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
  * @package WellCommerce\Bundle\CoreBundle\Form\DataTransformer
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CollectionToArrayTransformer
+class CollectionToArrayTransformer implements DataTransformerInterface
 {
     /**
      * @var \WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface

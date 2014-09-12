@@ -51,13 +51,15 @@ class Tip extends AbstractField implements ElementInterface
             'transformer'
         ]);
 
+        $retractable = function (Options $options) {
+            return (isset($options['short_tip']) && strlen($options['short_tip']));
+        };
+
         $resolver->setDefaults([
             'name'          => '',
             'transformer'   => null,
             'property_path' => null,
-            'retractable'   => function (Options $options) {
-                    return (isset($options['short_tip']) && strlen($options['short_tip']));
-                }
+            'retractable'   => $retractable
         ]);
 
         $resolver->setAllowedValues(array(
@@ -79,7 +81,7 @@ class Tip extends AbstractField implements ElementInterface
      */
     public function prepareAttributesJs()
     {
-        $attributes = [
+        return [
             $this->formatAttributeJs('tip', 'sTip'),
             $this->formatAttributeJs('direction', 'sDirection'),
             $this->formatAttributeJs('short_tip', 'sShortTip'),
@@ -87,8 +89,6 @@ class Tip extends AbstractField implements ElementInterface
             $this->formatAttributeJs('default_state', 'sDefaultState'),
             $this->formatDependencyJs()
         ];
-
-        return $attributes;
     }
 
     /**

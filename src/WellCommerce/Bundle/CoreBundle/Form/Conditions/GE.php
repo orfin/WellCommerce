@@ -21,11 +21,7 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Conditions;
 class GE extends AbstractCondition implements ConditionInterface
 {
     /**
-     * Checks whether given value is greater or equal
-     *
-     * @param $value
-     *
-     * @return bool
+     * {@inheritdoc}
      */
     public function evaluate($value)
     {

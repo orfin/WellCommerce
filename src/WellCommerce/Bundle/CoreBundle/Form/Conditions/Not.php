@@ -21,11 +21,7 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Conditions;
 class Not extends AbstractCondition implements ConditionInterface
 {
     /**
-     * Checks whether given value is not equal
-     *
-     * @param $value
-     *
-     * @return bool
+     * {@inheritdoc}
      */
     public function evaluate($value)
     {

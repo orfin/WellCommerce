@@ -21,11 +21,7 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Conditions;
 class Equals extends AbstractCondition implements ConditionInterface
 {
     /**
-     * Checks whether given values are equal
-     *
-     * @param $value
-     *
-     * @return bool|mixed
+     * {@inheritdoc}
      */
     public function evaluate($value)
     {

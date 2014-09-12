@@ -21,11 +21,7 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Filters;
 class Trim extends AbstractFilter implements FilterInterface
 {
     /**
-     * Removes spaces and line endings from value
-     *
-     * @param $value
-     *
-     * @return mixed|string
+     * {@inheritdoc}
      */
     public function filterValue($value)
     {

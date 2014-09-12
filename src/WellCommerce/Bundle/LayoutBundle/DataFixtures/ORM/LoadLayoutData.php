@@ -32,8 +32,8 @@ class LoadLayoutData implements FixtureInterface
     public function load(ObjectManager $manager)
     {
         $layoutTheme = new LayoutTheme();
-        $layoutTheme->setName('Default theme');
-        $layoutTheme->setFolder('default');
+        $layoutTheme->setName('Development');
+        $layoutTheme->setFolder('development');
         $manager->persist($layoutTheme);
 
         $pages = $this->getLayoutPages();

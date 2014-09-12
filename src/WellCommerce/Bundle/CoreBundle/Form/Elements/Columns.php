@@ -21,16 +21,14 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 class Columns extends AbstractContainer implements ElementInterface
 {
 
-    protected function prepareAttributesJs()
+    public function prepareAttributesJs()
     {
-        $attributes = Array(
+        return [
             $this->formatAttributeJs('name', 'sName'),
             $this->formatAttributeJs('label', 'sLabel'),
             $this->formatAttributeJs('class', 'sClass'),
             $this->formatDependencyJs(),
             'aoFields: [' . $this->renderChildren() . ']'
-        );
-
-        return $attributes;
+        ];
     }
 }

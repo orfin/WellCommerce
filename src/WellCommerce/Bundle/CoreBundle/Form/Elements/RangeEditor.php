@@ -67,18 +67,19 @@ class RangeEditor extends OptionedField implements ElementInterface
             'vat_values',
         ]);
 
+        $vatValues = function (Options $options) {
+            if (isset($options['allow_vat']) && !$options['allow_vat']) {
+                return [];
+            }
+
+            return $options['vat_values'];
+        };
+
         $resolver->setDefaults([
             'range_precision' => self::RANGE_PRECISION,
             'price_precision' => self::PRICE_PRECISION,
             'options'         => [],
-            'vat_values'      =>
-                function (Options $options) {
-                    if (isset($options['allow_vat']) && !$options['allow_vat']) {
-                        return [];
-                    }
-
-                    return $options['vat_values'];
-                },
+            'vat_values'      => $vatValues
         ]);
 
         $resolver->setAllowedTypes([

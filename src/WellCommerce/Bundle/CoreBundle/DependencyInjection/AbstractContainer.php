@@ -245,4 +245,15 @@ class AbstractContainer extends ContainerAware
 
         return $request->getLocale();
     }
+
+    /**
+     * Returns validator object
+     *
+     * @return \Symfony\Component\Validator\ValidatorInterface
+     */
+    protected function getValidator()
+    {
+        return $this->container->get('validator');
+    }
+
 }

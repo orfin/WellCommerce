@@ -22,13 +22,22 @@ use Symfony\Component\DependencyInjection\ContainerAware;
  */
 abstract class AbstractFilter extends ContainerAware
 {
+    /**
+     * @var array
+     */
     private $options;
 
+    /**
+     * {@inheritdoc}
+     */
     public function setOptions(array $options = [])
     {
         $this->options = $options;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function filter($values)
     {
         if (is_array($values)) {
@@ -42,6 +51,9 @@ abstract class AbstractFilter extends ContainerAware
         return $values;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function filterValue($value)
     {
         return $value;

@@ -21,11 +21,7 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Filters;
 class NoCode extends AbstractFilter implements FilterInterface
 {
     /**
-     * Strips all html code from value
-     *
-     * @param $value
-     *
-     * @return mixed|string
+     * {@inheritdoc}
      */
     public function filterValue($value)
     {

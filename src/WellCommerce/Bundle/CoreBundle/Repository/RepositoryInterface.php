@@ -86,4 +86,13 @@ interface RepositoryInterface
      */
     public function getPropertyAccessor();
 
+    /**
+     * Returns a resource for given primary key
+     *
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function find($id);
+
 } 

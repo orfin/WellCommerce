@@ -20,6 +20,9 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Dependencies;
  */
 class InvokeCustomFunction extends AbstractDependency implements DependencyInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function getJavascriptType()
     {
         return 'INVOKE_CUSTOM_FUNCTION';

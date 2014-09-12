@@ -47,7 +47,7 @@ class RightsTable extends AbstractField implements ElementInterface
 
     public function prepareAttributesJs()
     {
-        $attributes = Array(
+        return [
             $this->formatAttributeJs('name', 'sName'),
             $this->formatAttributeJs('label', 'sLabel'),
             $this->formatAttributeJs('comment', 'sComment'),
@@ -57,9 +57,7 @@ class RightsTable extends AbstractField implements ElementInterface
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
             $this->formatDefaultsJs()
-        );
-
-        return $attributes;
+        ];
     }
 
     protected function formatDefaultsJs()

@@ -20,7 +20,9 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Filters;
  */
 class CommaToDotChanger extends AbstractFilter implements FilterInterface
 {
-
+    /**
+     * {@inheritdoc}
+     */
     public function filterValue($value)
     {
         return str_replace(',', '.', $value);

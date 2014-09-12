@@ -13,10 +13,8 @@
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
 use Doctrine\Common\Util\ClassUtils;
-use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\PropertyAccess\PropertyAccess;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer as BaseAbstractContainer;
 
 /**
@@ -34,21 +32,18 @@ abstract class AbstractNode extends BaseAbstractContainer
     protected $renderMode = 'JS';
     protected $tabs = '';
     protected $jsNodeName;
-    protected $_xajaxMethods = [];
     protected static $_nextId = 0;
     protected $optionsResolver;
     protected $elementResolver;
     protected $options;
 
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->optionsResolver = new OptionsResolver();
         $this->_id             = self::$_nextId++;
-    }
-
-    protected function getValidator()
-    {
-        return $this->container->get('validator');
     }
 
     protected function getJavascriptNodeName()
@@ -407,10 +402,7 @@ abstract class AbstractNode extends BaseAbstractContainer
         return '';
     }
 
-    protected function formatFactorJs($factor, $name)
-    {
-        return "{$name}: {$this->attributes[$factor]->render()}";
-    }
+
 
     public function renderJs()
     {

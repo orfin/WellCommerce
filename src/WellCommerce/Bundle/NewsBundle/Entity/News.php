@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\NewsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\DateTime;
 
 /**
  * Class Locale
@@ -91,36 +92,44 @@ class News
         return $this->id;
     }
 
-    public function setPublish($publish) {
+    public function setPublish($publish)
+    {
         $this->publish = $publish;
     }
 
 
-    public function getPublish() {
+    public function getPublish()
+    {
         return $this->publish;
     }
 
-    public function setStartDate(DateTime $startDate) {
+    public function setStartDate(DateTime $startDate)
+    {
         $this->startDate = $startDate;
     }
 
-    public function getStartDate() {
+    public function getStartDate()
+    {
         return $this->startDate;
     }
 
-    public function setEndDate(DateTime $endDate) {
+    public function setEndDate(DateTime $endDate)
+    {
         $this->endDate = $endDate;
     }
 
-    public function getEndDate() {
+    public function getEndDate()
+    {
         return $this->endDate;
     }
 
-    public function setFeatured($featured) {
+    public function setFeatured($featured)
+    {
         $this->featured = $featured;
     }
 
-    public function getFeatured() {
+    public function getFeatured()
+    {
         return $this->featured;
     }
 
@@ -130,9 +139,8 @@ class News
     }
 
     /**
-     * Adds product photo
      *
-     * @param ProductPhoto $photo
+     * @param NewsPhoto $photo
      */
     public function addNewsPhoto(NewsPhoto $photo)
     {
@@ -140,14 +148,14 @@ class News
     }
 
     /**
-     * Sets product photos
+     * @param array $data
      *
-     * @param ArrayCollection $photos
+     * @return bool
      */
     public function setNewsPhotos(array $data)
     {
-        $params        = $data['data'];
-        $collection    = $data['collection'];
+        $params     = $data['data'];
+        $collection = $data['collection'];
         $newsPhotos = new ArrayCollection();
 
         // if collection was not modified, do nothing

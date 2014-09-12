@@ -29,7 +29,7 @@ class RichTextEditor extends TextArea implements ElementInterface
 
     public function prepareAttributesJs()
     {
-        $attributes = Array(
+        return [
             $this->formatAttributeJs('name', 'sName'),
             $this->formatAttributeJs('label', 'sLabel'),
             $this->formatAttributeJs('rows', 'iRows', ElementInterface::TYPE_NUMBER),
@@ -42,9 +42,7 @@ class RichTextEditor extends TextArea implements ElementInterface
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
             $this->formatDefaultsJs()
-        );
-
-        return $attributes;
+        ];
     }
 
 }

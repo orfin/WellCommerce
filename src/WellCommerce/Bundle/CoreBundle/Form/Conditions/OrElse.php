@@ -20,7 +20,9 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Conditions;
  */
 class OrElse extends AbstractCondition implements ConditionInterface
 {
-
+    /**
+     * {@inheritdoc}
+     */
     public function evaluate($value)
     {
         if ($this->_argument instanceof ConditionInterface) {

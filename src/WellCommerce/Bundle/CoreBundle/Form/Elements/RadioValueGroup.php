@@ -23,7 +23,7 @@ class RadioValueGroup extends OptionedField implements ElementInterface
 
     public function prepareAttributesJs()
     {
-        $attributes = Array(
+        return [
             $this->formatAttributeJs('name', 'sName'),
             $this->formatAttributeJs('label', 'sLabel'),
             $this->formatAttributeJs('comment', 'sComment'),
@@ -33,8 +33,6 @@ class RadioValueGroup extends OptionedField implements ElementInterface
             $this->formatDependencyJs(),
             $this->formatOptionsJs(),
             $this->formatDefaultsJs()
-        );
-
-        return $attributes;
+        ];
     }
 }

@@ -25,7 +25,7 @@ class Select extends OptionedField implements ElementInterface
      */
     public function prepareAttributesJs()
     {
-        $attributes = [
+        return [
             $this->formatAttributeJs('name', 'sName'),
             $this->formatAttributeJs('label', 'sLabel'),
             $this->formatAttributeJs('comment', 'sComment'),
@@ -43,7 +43,5 @@ class Select extends OptionedField implements ElementInterface
             $this->formatOptionsJs(),
             $this->formatDefaultsJs()
         ];
-
-        return $attributes;
     }
 }
