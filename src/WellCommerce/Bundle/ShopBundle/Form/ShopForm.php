@@ -104,6 +104,18 @@ class ShopForm extends AbstractForm implements FormInterface
             'label' => $this->trans('Description'),
         ]));
 
+        $shopData = $form->addChild($builder->getElement('fieldset', [
+            'name'  => 'payment_method_data',
+            'label' => $this->trans('Payment methods')
+        ]));
+
+        $shopData->addChild($builder->getElement('multi_select', [
+            'name'        => 'paymentMethods',
+            'label'       => $this->trans('Payment methods'),
+            'options'     => $this->get('payment_method.repository')->getCollectionToSelect(),
+            'transformer' => new CollectionToArrayTransformer($this->get('payment_method.repository'))
+        ]));
+
         $form->addFilter('no_code');
         $form->addFilter('trim');
         $form->addFilter('secure');

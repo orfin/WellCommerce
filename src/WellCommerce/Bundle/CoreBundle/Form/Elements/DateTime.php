@@ -65,7 +65,7 @@ class DateTime extends TextField implements ElementInterface
             'default'       => ['string', 'integer', 'null'],
             'rules'         => 'array',
             'dependencies'  => 'array',
-            'property_path' => ['null', 'object'],
+            'property_path' => ['null', 'Symfony\Component\PropertyAccess\PropertyPath'],
             'transformer'   => ['null', 'WellCommerce\Bundle\CoreBundle\Form\DataTransformerInterface'],
         ]);
     }

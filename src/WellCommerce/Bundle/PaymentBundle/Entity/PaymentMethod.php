@@ -110,6 +110,11 @@ class PaymentMethod
         $this->shops[] = $shop;
     }
 
+    public function removeShop(Shop $shop)
+    {
+        $this->shops->removeElement($shop);
+    }
+
     /**
      * Returns payment method processor
      *

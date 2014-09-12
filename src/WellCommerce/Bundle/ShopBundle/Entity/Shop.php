@@ -64,7 +64,7 @@ class Shop
     private $products;
 
     /**
-     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod", mappedBy="shops")
+     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod", mappedBy="shops", cascade={"persist","remove"})
      */
     private $paymentMethods;
 
@@ -267,7 +267,25 @@ class Shop
      */
     public function setPaymentMethods(ArrayCollection $paymentMethods)
     {
-        $this->paymentMethods = $paymentMethods;
+        /**
+         * First delete shop binding for not submitted payment methods
+         *
+         * @var $paymentMethod \WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod
+         */
+        foreach ($this->paymentMethods as $paymentMethod) {
+            if (!$paymentMethods->contains($paymentMethod)) {
+                $paymentMethod->removeShop($this);
+            }
+        }
+
+        /**
+         * Add shop binding to passed methods
+         *
+         * @var $paymentMethod \WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod
+         */
+        foreach ($paymentMethods as $paymentMethod) {
+            $paymentMethod->addShop($this);
+        }
     }
 }
 

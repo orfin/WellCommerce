@@ -10,12 +10,12 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CoreBundle\Form;
+namespace WellCommerce\Bundle\CoreBundle\Form\DataTransformer;
 
 /**
  * Interface DataTransformerInterface
  *
- * @package WellCommerce\Bundle\CoreBundle\Form
+ * @package WellCommerce\Bundle\CoreBundle\Form\DataTransformer
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface DataTransformerInterface {

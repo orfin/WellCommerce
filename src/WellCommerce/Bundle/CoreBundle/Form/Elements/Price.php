@@ -28,16 +28,18 @@ class Price extends TextField implements ElementInterface
             'prefixes',
         ]);
 
+        $vatFieldName = function (Options $options) {
+            if (isset($options['vat_field']) && $options['vat_field'] instanceof ElementInterface) {
+                return $options['vat_field']->getName();
+            }
+
+            return null;
+        };
+
         $resolver->setDefaults([
             'prefixes'       => ['net', 'gross'],
             'vat_field'      => null,
-            'vat_field_name' => function (Options $options) {
-                    if (isset($options['vat_field']) && $options['vat_field'] instanceof AbstractField) {
-                        return $options['vat_field']->getName();
-                    }
-
-                    return null;
-                },
+            'vat_field_name' => $vatFieldName,
             'dependencies'   => [],
             'filters'        => [],
             'rules'          => [],
@@ -67,23 +69,18 @@ class Price extends TextField implements ElementInterface
         ]);
 
         $resolver->setAllowedTypes([
-            'name'          => 'string',
-            'label'         => 'string',
-            'comment'       => 'string',
-            'suffix'        => 'string',
-            'prefix'        => 'string',
-            'selector'      => 'string',
-            'wrap'          => 'string',
-            'class'         => 'string',
-            'css_attribute' => 'string',
-            'max_length'    => 'integer',
-            'error'         => 'string',
-            'filters'       => 'array',
-            'rules'         => 'array',
-            'dependencies'  => 'array',
-            'default'       => ['string', 'integer'],
-            'property_path' => ['null', 'object'],
-            'transformer'   => ['null', 'object'],
+            'name'           => 'string',
+            'label'          => 'string',
+            'comment'        => 'string',
+            'suffix'         => 'string',
+            'prefixes'       => 'string',
+            'error'          => 'string',
+            'vat_field_name' => 'string',
+            'rules'          => 'array',
+            'dependencies'   => 'array',
+            'default'        => ['string', 'integer'],
+            'property_path'  => ['null', 'object'],
+            'transformer'    => ['null', 'object'],
         ]);
     }
 
@@ -92,7 +89,7 @@ class Price extends TextField implements ElementInterface
      */
     public function prepareAttributesJs()
     {
-        $attributes = [
+        return [
             $this->formatAttributeJs('name', 'sName'),
             $this->formatAttributeJs('label', 'sLabel'),
             $this->formatAttributeJs('comment', 'sComment'),
@@ -104,8 +101,6 @@ class Price extends TextField implements ElementInterface
             $this->formatDependencyJs(),
             $this->formatDefaultsJs()
         ];
-
-        return $attributes;
     }
 
 }
