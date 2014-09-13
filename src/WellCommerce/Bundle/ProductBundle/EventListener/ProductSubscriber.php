@@ -43,6 +43,14 @@ class ProductSubscriber extends AbstractEventSubscriber
             'path'       => '[menu][catalog][product]',
             'sort_order' => 30
         ]));
+
+        $builder->add(new AdminMenuItem([
+            'id'         => 'product_status',
+            'name'       => $this->translator->trans('menu.catalog.product_status'),
+            'link'       => $this->router->generate('admin.product_status.index'),
+            'path'       => '[menu][catalog][product_status]',
+            'sort_order' => 40
+        ]));
     }
 
     /**

@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\ProductBundle\DependencyInjection;
 
-use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractConfiguration;
 
 /**
  * Class Configuration
@@ -21,16 +21,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  * @package WellCommerce\Bundle\ProductBundle\DependencyInjection
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Configuration implements ConfigurationInterface
+class Configuration extends AbstractConfiguration implements ConfigurationInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getConfigTreeBuilder()
-    {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('wellcommerce_product');
 
-        return $treeBuilder;
-    }
 }

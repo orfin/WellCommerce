@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DependencyInjection;
 
+use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\DependencyInjection\Extension\ConfigurationExtensionInterface;
 
 /**
@@ -20,6 +21,13 @@ use Symfony\Component\DependencyInjection\Extension\ConfigurationExtensionInterf
  * @package WellCommerce\Bundle\CoreBundle\DependencyInjection
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractConfiguration implements ConfigurationExtensionInterface{
-
+abstract class AbstractConfiguration implements ConfigurationInterface
+{
+    /**
+     * {@inheritdoc}
+     */
+    public function getConfigTreeBuilder()
+    {
+        return new TreeBuilder();
+    }
 } 

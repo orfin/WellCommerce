@@ -79,7 +79,7 @@ class Tree extends AbstractField implements ElementInterface
             'total'         => $total,
             'property_path' => null,
             'transformer'   => null,
-            'default'       => 0
+            'default'       => null
         ]);
 
         $resolver->setAllowedTypes([

@@ -99,6 +99,15 @@ class Product
     private $categories;
 
     /**
+     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\ProductStatus", inversedBy="products")
+     * @ORM\JoinTable(name="product_product_status",
+     *      joinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id", onDelete="CASCADE")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="product_status_id", referencedColumnName="id", onDelete="CASCADE")}
+     * )
+     */
+    private $statuses;
+
+    /**
      * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\ProductPhoto", mappedBy="product", cascade={"persist"}, orphanRemoval=true)
      */
     private $productPhotos;
@@ -187,6 +196,7 @@ class Product
         $this->categories    = new ArrayCollection();
         $this->categories    = new ArrayCollection();
         $this->productPhotos = new ArrayCollection();
+        $this->statuses      = new ArrayCollection();
     }
 
     /**
@@ -370,6 +380,26 @@ class Product
     }
 
     /**
+     * Sets product statuses
+     *
+     * @param ArrayCollection $statuses
+     */
+    public function setStatuses(ArrayCollection $statuses)
+    {
+        $this->statuses = $statuses;
+    }
+
+    /**
+     * Returns product statuses
+     *
+     * @return mixed
+     */
+    public function getStatuses()
+    {
+        return $this->statuses;
+    }
+
+    /**
      * Get product photos
      *
      * @return mixed
@@ -406,7 +436,7 @@ class Product
         }
 
         foreach ($collection as $photo) {
-            $mainPhoto = (int)($photo->getId() == $params['main']);
+            $mainPhoto    = (int)($photo->getId() == $params['main']);
             $productPhoto = new ProductPhoto();
             $productPhoto->setPhoto($photo);
             $productPhoto->setMainPhoto($mainPhoto);
