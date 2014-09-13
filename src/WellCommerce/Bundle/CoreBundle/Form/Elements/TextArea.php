@@ -29,7 +29,7 @@ class TextArea extends TextField implements ElementInterface
     {
         parent::configureAttributes($resolver);
 
-        $resolver->setRequired([
+        $resolver->setOptional([
             'rows',
             'cols',
         ]);
