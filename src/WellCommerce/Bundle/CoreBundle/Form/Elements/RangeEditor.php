@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use WellCommerce\Tax\Repository\TaxRepositoryInterface;
+use WellCommerce\Bundle\TaxBundle\Repository\TaxRepositoryInterface;
 
 /**
  * Class RangeEditor
@@ -22,7 +22,7 @@ use WellCommerce\Tax\Repository\TaxRepositoryInterface;
  * @package WellCommerce\Bundle\CoreBundle\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class RangeEditor extends OptionedField implements ElementInterface
+class RangeEditor extends AbstractOptionedField implements ElementInterface
 {
     const RANGE_PRECISION = 2;
     const PRICE_PRECISION = 2;

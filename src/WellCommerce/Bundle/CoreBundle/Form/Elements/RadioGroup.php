@@ -18,22 +18,7 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
  * @package WellCommerce\Bundle\CoreBundle\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class RadioGroup extends OptionedField implements ElementInterface
+class RadioGroup extends AbstractField implements ElementInterface
 {
 
-    public function prepareAttributesJs()
-    {
-        $attributes = Array(
-            $this->formatAttributeJs('name', 'sName'),
-            $this->formatAttributeJs('label', 'sLabel'),
-            $this->formatAttributeJs('comment', 'sComment'),
-            $this->formatAttributeJs('error', 'sError'),
-            $this->formatRulesJs(),
-            $this->formatDependencyJs(),
-            $this->formatOptionsJs(),
-            $this->formatDefaultsJs()
-        );
-
-        return $attributes;
-    }
 }

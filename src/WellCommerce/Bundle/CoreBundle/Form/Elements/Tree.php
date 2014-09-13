@@ -28,6 +28,8 @@ class Tree extends AbstractField implements ElementInterface
      */
     public function configureAttributes(OptionsResolverInterface $resolver)
     {
+        parent::configureAttributes($resolver);
+
         $resolver->setRequired([
             'name',
             'label',
@@ -35,9 +37,7 @@ class Tree extends AbstractField implements ElementInterface
 
         $resolver->setOptional([
             'addLabel',
-            'error',
             'selectable',
-            'error',
             'selector',
             'choosable',
             'clickable',
@@ -62,10 +62,7 @@ class Tree extends AbstractField implements ElementInterface
             'prevent_duplicates',
             'prevent_duplicates_on_all_levels',
             'set',
-            'rules',
-            'dependencies',
             'clickable_root',
-            'default'
         ]);
 
         $total = function (Options $options) {
@@ -73,20 +70,11 @@ class Tree extends AbstractField implements ElementInterface
         };
 
         $resolver->setDefaults([
-            'dependencies'  => [],
-            'filters'       => [],
-            'rules'         => [],
             'total'         => $total,
-            'property_path' => null,
-            'transformer'   => null,
-            'default'       => null
         ]);
 
         $resolver->setAllowedTypes([
-            'name'                             => ['int', 'string'],
-            'label'                            => 'string',
             'addLabel'                         => 'string',
-            'error'                            => 'string',
             'selectable'                       => 'bool',
             'selector'                         => 'string',
             'choosable'                        => 'bool',
@@ -113,8 +101,6 @@ class Tree extends AbstractField implements ElementInterface
             'prevent_duplicates_on_all_levels' => 'bool',
             'clickable_root'                   => 'bool',
             'set'                              => 'string',
-            'rules'                            => 'array',
-            'dependencies'                     => 'array',
         ]);
     }
 

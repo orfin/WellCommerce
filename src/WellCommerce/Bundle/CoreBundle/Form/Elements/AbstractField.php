@@ -185,7 +185,7 @@ class AbstractField extends AbstractNode
             'filters'       => 'array',
             'rules'         => 'array',
             'property_path' => ['null', 'Symfony\Component\PropertyAccess\PropertyPath'],
-            'transformer'   => ['null', 'WellCommerce\Bundle\CoreBundle\Form\DataTransformerInterface'],
+            'transformer'   => ['null', 'WellCommerce\Bundle\CoreBundle\Form\DataTransformer\DataTransformerInterface'],
         ]);
     }
 }

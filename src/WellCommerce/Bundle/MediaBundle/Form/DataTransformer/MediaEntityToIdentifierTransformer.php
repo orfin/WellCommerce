@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\MediaBundle\Form\DataTransformer;
 
+use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\DataTransformerInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
@@ -20,7 +21,7 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
  * @package WellCommerce\Bundle\MediaBundle\Form\DataTransformer
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class MediaEntityToIdentifierTransformer
+class MediaEntityToIdentifierTransformer implements DataTransformerInterface
 {
     /**
      * @var \WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface

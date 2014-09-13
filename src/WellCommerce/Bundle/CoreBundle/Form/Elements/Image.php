@@ -27,22 +27,16 @@ class Image extends File implements ElementInterface
      */
     public function configureAttributes(OptionsResolverInterface $resolver)
     {
+        parent::configureAttributes($resolver);
+
         $resolver->setRequired([
-            'name',
-            'label',
-            'property_path',
             'load_route',
         ]);
 
         $resolver->setOptional([
-            'comment',
             'repeat_min',
             'repeat_max',
             'limit',
-            'error',
-            'rules',
-            'filters',
-            'dependencies',
             'main_id',
             'visibility_change',
             'upload_url',
@@ -50,12 +44,7 @@ class Image extends File implements ElementInterface
             'session_id',
             'file_types',
             'file_types_description',
-            'dependencies',
-            'filters',
-            'rules',
-            'transformer',
             'photos',
-            'default',
         ]);
 
         $resolver->setDefaults([
@@ -66,28 +55,14 @@ class Image extends File implements ElementInterface
             'session_id'             => $this->container->get('session')->getId(),
             'file_types_description' => 'file_types_description',
             'file_types'             => ['jpg', 'jpeg', 'png', 'gif'],
-            'property_path'          => null,
-            'transformer'            => null,
-            'dependencies'           => [],
-            'filters'                => [],
-            'rules'                  => [],
             'photos'                 => [],
-            'default'                => [],
         ]);
 
         $resolver->setAllowedTypes([
-            'name'                   => 'string',
-            'label'                  => 'string',
-            'dependencies'           => 'array',
-            'filters'                => 'array',
-            'rules'                  => 'array',
-            'property_path'          => ['null', 'object'],
-            'transformer'            => ['null', 'object'],
             'session_name'           => 'string',
             'file_types_description' => 'string',
             'file_types'             => 'array',
             'photos'                 => 'array',
-            'default'                => ['null', 'array'],
         ]);
     }
 

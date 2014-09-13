@@ -33,22 +33,17 @@ class Tip extends AbstractField implements ElementInterface
      */
     public function configureAttributes(OptionsResolverInterface $resolver)
     {
+        parent::configureAttributes($resolver);
+
         $resolver->setRequired([
             'tip',
             'direction'
         ]);
 
-        $resolver->setDefaults([
-            'direction' => self::DOWN
-        ]);
-
         $resolver->setOptional([
-            'name',
             'short_tip',
             'retractable',
             'default_state',
-            'property_path',
-            'transformer'
         ]);
 
         $retractable = function (Options $options) {
@@ -56,9 +51,7 @@ class Tip extends AbstractField implements ElementInterface
         };
 
         $resolver->setDefaults([
-            'name'          => '',
-            'transformer'   => null,
-            'property_path' => null,
+            'direction' => self::DOWN,
             'retractable'   => $retractable
         ]);
 
@@ -104,13 +97,4 @@ class Tip extends AbstractField implements ElementInterface
     public function populate($value)
     {
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setPropertyPath()
-    {
-        $this->attributes['property_path'] = null;
-    }
-
 }

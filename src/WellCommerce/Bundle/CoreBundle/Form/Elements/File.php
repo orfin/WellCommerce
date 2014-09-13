@@ -12,9 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
 
 /**
  * Class File
@@ -29,38 +27,21 @@ class File extends AbstractField implements ElementInterface
      */
     public function configureAttributes(OptionsResolverInterface $resolver)
     {
-        $resolver->setRequired([
-            'name',
-            'label',
-            'property_path',
-            'datagrid'
-        ]);
+        parent::configureAttributes($resolver);
 
-        $resolver->setOptional([
-            'filters',
-            'rules',
-            'transformer'
+        $resolver->setRequired([
+            'session_name',
+            'session_id'
         ]);
 
         $resolver->setDefaults([
-            'session_name'  => session_name(),
-            'session_id'    => session_id(),
-            'filters'       => [],
-            'rules'         => [],
-            'property_path' => null,
-            'transformer'   => null
+            'session_name' => session_name(),
+            'session_id'   => session_id(),
         ]);
 
         $resolver->setAllowedTypes([
-            'name'          => 'string',
-            'label'         => 'string',
-            'dependencies'  => 'array',
-            'filters'       => 'array',
-            'rules'         => 'array',
-            'property_path' => ['null', 'object'],
-            'transformer'   => ['null', 'object'],
-            'datagrid'      => ['object'],
-            'session_name'  => 'string',
+            'session_id'   => 'string',
+            'session_name' => 'string',
         ]);
     }
 
@@ -89,5 +70,4 @@ class File extends AbstractField implements ElementInterface
             $this->formatDefaultsJs()
         ];
     }
-
 }
