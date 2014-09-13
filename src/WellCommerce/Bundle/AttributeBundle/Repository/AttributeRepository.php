@@ -29,14 +29,14 @@ class AttributeRepository extends AbstractEntityRepository implements AttributeR
     public function findAll()
     {
         $qb = parent::getQueryBuilder()
-            ->addSelect('attribute_group.id, attribute_group_translation.name')
+            ->addSelect('attribute.id, attribute_translation.name')
             ->leftJoin(
                 'WellCommerce\Bundle\AttributeBundle\Entity\AttributeTranslation',
-                'attribute_group_translation',
+                'attribute_translation',
                 'WITH',
-                'attribute_group.id = attribute_group_translation.translatable AND attribute_group_translation.locale = :locale')
+                'attribute.id = attribute_translation.translatable AND attribute_translation.locale = :locale')
             ->setParameter('locale', $this->getCurrentLocale())
-            ->addOrderBy('attribute_group_translation.name', 'ASC');
+            ->addOrderBy('attribute_translation.name', 'ASC');
 
         $query  = $qb->getQuery();
         $result = $query->getArrayResult();
@@ -47,19 +47,17 @@ class AttributeRepository extends AbstractEntityRepository implements AttributeR
     /**
      * {@inheritdoc}
      */
-    public function addAttribute(ParameterBag $parameters)
+    public function addAttribute($name)
     {
-        $name    = $parameters->get('name');
-        $locales = $this->getLocales();
-        $group   = new Attribute();
+        $locales   = $this->getLocales();
+        $attribute = new Attribute();
 
         foreach ($locales as $locale) {
-            $group->translate($locale->getCode())->setName($name);
+            $attribute->translate($locale->getCode())->setName($name);
         }
-        $group->mergeNewTranslations();
-        $this->getEntityManager()->persist($group);
-        $this->getEntityManager()->flush();
+        $attribute->mergeNewTranslations();
+        $this->getEntityManager()->persist($attribute);
 
-        return $group;
+        return $attribute;
     }
 }

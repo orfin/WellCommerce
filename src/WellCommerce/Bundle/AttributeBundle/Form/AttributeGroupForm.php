@@ -11,8 +11,10 @@
  */
 namespace WellCommerce\Bundle\AttributeBundle\Form;
 
+use WellCommerce\Bundle\AttributeBundle\Form\DataTransformer\AttributeCollectionToArrayTransformer;
 use WellCommerce\Bundle\CoreBundle\Form\AbstractForm;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
 use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
 
 /**
@@ -59,6 +61,8 @@ class AttributeGroupForm extends AbstractForm implements FormInterface
             'delete_attribute_route'       => 'admin.attribute.delete',
             'rename_attribute_route'       => 'admin.attribute.edit',
             'rename_attribute_value_route' => 'admin.attribute_value.edit',
+            'attributes'                   => $this->get('attribute.repository')->findAll(),
+            'transformer'                  => new AttributeCollectionToArrayTransformer($this->get('attribute.repository'))
         ]));
 
         $form->addFilter('no_code');

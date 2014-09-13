@@ -31,11 +31,11 @@ interface AttributeRepositoryInterface extends RepositoryInterface
     public function findAll();
 
     /**
-     * Adds new attribute group
+     * Adds new attribute
      *
      * @param ParameterBag $parameters
      *
      * @return mixed
      */
-    public function addAttribute(ParameterBag $parameters);
+    public function addAttribute($name);
 } 

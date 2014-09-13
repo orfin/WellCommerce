@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\AttributeBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
@@ -41,14 +42,28 @@ class Attribute
     private $id;
 
     /**
-     * Get id.
-    
-     *
-     * @return integer
+     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroup", mappedBy="attributes")
      */
+    private $groups;
+
+    public function __construct()
+    {
+        $this->groups = new ArrayCollection();
+    }
+
     public function getId()
     {
         return $this->id;
+    }
+
+    public function getGroups()
+    {
+        return $this->groups;
+    }
+
+    public function setGroups(ArrayCollection $collection)
+    {
+        $this->groups = $collection;
     }
 }
 

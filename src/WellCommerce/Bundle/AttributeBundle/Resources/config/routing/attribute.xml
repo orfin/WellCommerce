@@ -6,6 +6,7 @@
 
     <route id="admin.attribute.index" path="/index">
         <default key="_controller">attribute.controller.admin:indexAction</default>
+        <option key="expose">true</option>
     </route>
 
     <route id="admin.attribute.add" path="/add">
