@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\CoreBundle\Repository;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * Interface RepositoryInterface
@@ -71,15 +72,6 @@ interface RepositoryInterface
     public function getMetadata();
 
     /**
-     * Returns collection prepared to use in optioned form fields
-     *
-     * @param string $labelField
-     *
-     * @return array
-     */
-    public function getCollectionToSelect($labelField = 'name');
-
-    /**
      * Returns property accessor
      *
      * @return \Symfony\Component\PropertyAccess\PropertyAccessor
@@ -94,5 +86,48 @@ interface RepositoryInterface
      * @return mixed
      */
     public function find($id);
+
+    /**
+     * Returns all available and configured locales
+     *
+     * @return array
+     */
+    public function getLocales();
+
+    /**
+     * Returns current repository locale
+     *
+     * @return null|string
+     */
+    public function getCurrentLocale();
+
+    /**
+     * Sets translator service
+     *
+     * @param TranslatorInterface $translator
+     */
+    public function setTranslator(TranslatorInterface $translator);
+
+    /**
+     * Builds and executes query to fetch collection of items to use in optioned fields
+     *
+     * @param $identifier
+     * @param $labelField
+     * @param $targetClass
+     * @param $tableName
+     * @param $associationTableName
+     *
+     * @return array
+     */
+    public function getCollection($identifier, $labelField, $targetClass, $tableName, $associationTableName);
+
+    /**
+     * Returns collection prepared to use in optioned form fields
+     *
+     * @param string $labelField
+     *
+     * @return array
+     */
+    public function getCollectionToSelect($labelField = 'name');
 
 } 

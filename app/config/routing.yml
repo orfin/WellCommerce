@@ -87,6 +87,10 @@ wellcommerce_dashboard:
     resource: "@WellCommerceDashboardBundle/Resources/config/routing.xml"
     prefix:   /admin/dashboard
 
+wellcommerce_attribute:
+    resource: "@WellCommerceAttributeBundle/Resources/config/routing.xml"
+    prefix:   /admin/attribute
+
 root:
     path: /admin
     defaults:

@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\CoreBundle\Repository;
 use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Translation\TranslatorInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Helper;
@@ -33,9 +32,7 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
     private $translator;
 
     /**
-     * Sets translator service
-     *
-     * @param TranslatorInterface $translator
+     * {@inheritdoc}
      */
     public function setTranslator(TranslatorInterface $translator)
     {
@@ -43,13 +40,19 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
     }
 
     /**
-     * Returns current repository locale
-     *
-     * @return null|string
+     * {@inheritdoc}
      */
     public function getCurrentLocale()
     {
         return $this->translator->getLocale();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLocales()
+    {
+        return $this->_em->getRepository('WellCommerce\Bundle\LocaleBundle\Entity\Locale')->findAll();
     }
 
     /**
@@ -131,17 +134,9 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
     }
 
     /**
-     * Builds and executes query to fetch collection of items to use in optioned fields
-     *
-     * @param $identifier
-     * @param $labelField
-     * @param $targetClass
-     * @param $tableName
-     * @param $associationTableName
-     *
-     * @return array
+     * {@inheritdoc}
      */
-    private function getCollection($identifier, $labelField, $targetClass, $tableName, $associationTableName)
+    public function getCollection($identifier, $labelField, $targetClass, $tableName, $associationTableName)
     {
         $identifierField  = sprintf('%s.%s', $tableName, $identifier);
         $translationField = sprintf('%s.%s', $associationTableName, $labelField);

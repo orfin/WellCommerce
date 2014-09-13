@@ -34,8 +34,6 @@ class CategoryController extends AbstractAdminController
 
     public function indexAction()
     {
-
-
         $tree = $this->getFormBuilder($this->get('category.tree'), null, [
             'name'  => 'category_tree',
             'class' => 'category-select'

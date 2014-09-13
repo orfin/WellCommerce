@@ -25,123 +25,6 @@ use WellCommerce\Attribute\Repository\AttributeRepositoryInterface;
 class AttributeEditor extends AbstractField implements ElementInterface
 {
     /**
-     * @var AttributeRepositoryInterface
-     */
-    private $repository;
-
-    /**
-     * @var \WellCommerce\Bundle\CoreBundle\Helper\XajaxManager
-     */
-    private $xajaxManager;
-
-    /**
-     * Constructor
-     *
-     * @param          array               $attributes Element options
-     * @param AttributeRepositoryInterface $repository
-     * @param XajaxManager                 $xajaxManager
-     */
-    public function __construct($attributes, AttributeRepositoryInterface $repository, XajaxManager $xajaxManager)
-    {
-        $this->repository         = $repository;
-        $this->xajaxManager       = $xajaxManager;
-        $attributes['attributes'] = $this->repository->getAttributeProductFull();
-
-        $this->attributes['deleteAttributeFunction'] = $this->xajaxManager->registerFunction([
-            'DeleteAttribute',
-            $this,
-            'deleteAttribute'
-        ]);
-
-        $this->attributes['renameAttributeFunction'] = $this->xajaxManager->registerFunction([
-            'RenameAttribute',
-            $this,
-            'renameAttribute'
-        ]);
-
-        $this->attributes['renameValueFunction'] = $this->xajaxManager->registerFunction([
-            'RenameValue',
-            $this,
-            'renameValue'
-        ]);
-
-        parent::__construct($attributes);
-    }
-
-    /**
-     * Renames attribute using xajax request
-     *
-     * @param $request
-     *
-     * @return array
-     */
-    public function renameAttribute($request)
-    {
-        $status  = true;
-        $message = '';
-        try {
-            App::getModel('attributegroup')->RenameAttribute($request['id'], $request['name']);
-        } catch (Exception $e) {
-            $status  = false;
-            $message = $e->getMessage();
-        }
-
-        return Array(
-            'status'  => $status,
-            'message' => $message
-        );
-    }
-
-    /**
-     * Renames value using xajax request
-     *
-     * @param $request
-     *
-     * @return array
-     */
-    public function renameValue($request)
-    {
-        $status  = true;
-        $message = '';
-        try {
-            App::getModel('attributegroup')->RenameValue($request['id'], $request['name']);
-        } catch (Exception $e) {
-            $status  = false;
-            $message = $e->getMessage();
-        }
-
-        return Array(
-            'status'  => $status,
-            'message' => $message
-        );
-    }
-
-    /**
-     * Deletes attribute using xajax request
-     *
-     * @param $request
-     *
-     * @return array
-     */
-    public function deleteAttribute($request)
-    {
-        $status  = true;
-        $message = '';
-        try {
-            App::getModel('attributegroup')->RemoveAttributeFromGroup($request['id'], $request['set_id']);
-            App::getModel('attributegroup')->DeleteAttribute($request['id']);
-        } catch (Exception $e) {
-            $status  = false;
-            $message = $e->getMessage();
-        }
-
-        return Array(
-            'status'  => $status,
-            'message' => $message
-        );
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function configureAttributes(OptionsResolverInterface $resolver)
@@ -150,32 +33,29 @@ class AttributeEditor extends AbstractField implements ElementInterface
             'name',
             'label',
             'set',
+            'delete_attribute_route',
+            'rename_attribute_route',
+            'rename_attribute_value_route',
             'attributes',
         ]);
 
         $resolver->setOptional([
             'error',
             'comment',
-            'onAfterDelete',
-            'deleteAttributeFunction',
-            'renameAttributeFunction',
-            'renameValueFunction',
         ]);
 
         $resolver->setDefaults([
-            'attributes',
-            'comment',
+            'attributes' => []
         ]);
 
         $resolver->setAllowedTypes([
-            'name'                    => ['int', 'string'],
-            'label'                   => 'string',
-            'set'                     => ['int', 'string', 'null'],
-            'attributes'              => 'array',
-            'onAfterDelete'           => 'string',
-            'deleteAttributeFunction' => 'string',
-            'renameAttributeFunction' => 'string',
-            'renameValueFunction'     => 'string'
+            'name'                         => ['int', 'string'],
+            'label'                        => 'string',
+            'set'                          => ['int', 'string', 'null'],
+            'attributes'                   => 'array',
+            'delete_attribute_route'       => 'string',
+            'rename_attribute_route'       => 'string',
+            'rename_attribute_value_route' => 'string',
         ]);
     }
 
@@ -191,10 +71,9 @@ class AttributeEditor extends AbstractField implements ElementInterface
             $this->formatAttributeJs('error', 'sError'),
             $this->formatAttributeJs('set', 'sSetId'),
             $this->formatAttributeJs('attributes', 'aoAttributes', ElementInterface::TYPE_OBJECT),
-            $this->formatAttributeJs('onAfterDelete', 'fOnAfterDelete', ElementInterface::TYPE_FUNCTION),
-            $this->formatAttributeJs('deleteAttributeFunction', 'fDeleteAttribute', ElementInterface::TYPE_FUNCTION),
-            $this->formatAttributeJs('renameAttributeFunction', 'fRenameAttribute', ElementInterface::TYPE_FUNCTION),
-            $this->formatAttributeJs('renameValueFunction', 'fRenameValue', ElementInterface::TYPE_FUNCTION),
+            $this->formatAttributeJs('delete_attribute_route', 'sDeleteAttributeRoute'),
+            $this->formatAttributeJs('rename_attribute_route', 'sRenameAttributeRoute'),
+            $this->formatAttributeJs('rename_attribute_value_route', 'sRenameAttributeValueRoute'),
             $this->formatRepeatableJs(),
             $this->formatRulesJs(),
             $this->formatDependencyJs(),

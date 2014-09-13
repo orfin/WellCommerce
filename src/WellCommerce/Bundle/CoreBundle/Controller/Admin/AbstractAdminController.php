@@ -11,6 +11,7 @@
  */
 namespace WellCommerce\Bundle\CoreBundle\Controller\Admin;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,6 +26,8 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
  *
  * @package WellCommerce\Bundle\CoreBundle\Controller
  * @author  Adam Piotrowski <adam@wellcommerce.org>
+ *
+ * @Template()
  */
 abstract class AbstractAdminController extends AbstractController implements AdminControllerInterface
 {

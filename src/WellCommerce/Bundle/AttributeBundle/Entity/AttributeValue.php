@@ -10,22 +10,22 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ProductBundle\Entity;
+namespace WellCommerce\Bundle\AttributeBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 /**
- * Class ProductStatus
+ * Class AttributeValue
  *
- * @package WellCommerce\Bundle\ProductBundle\Entity
+ * @package WellCommerce\Bundle\AttributeBundle\Entity
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
- * @ORM\Table(name="product_status")
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\ProductBundle\Repository\ProductStatusRepository")
+ * @ORM\Table(name="attribute_value")
+ * @ORM\HasLifecycleCallbacks
+ * @ORM\Entity(repositoryClass="WellCommerce\Bundle\AttributeBundle\Repository\AttributeValueRepository")
  */
-class ProductStatus
+class AttributeValue
 {
     use ORMBehaviors\Translatable\Translatable;
     use ORMBehaviors\Timestampable\Timestampable;
@@ -41,28 +41,14 @@ class ProductStatus
     private $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\Product", mappedBy="statuses")
+     * Get id.
+    
+     *
+     * @return integer
      */
-    private $products;
-
-    public function __construct()
-    {
-        $this->products = new ArrayCollection();
-    }
-
     public function getId()
     {
         return $this->id;
-    }
-
-    public function getProducts()
-    {
-        return $this->products;
-    }
-
-    public function setProducts(ArrayCollection $collection)
-    {
-        $this->products = $collection;
     }
 }
 

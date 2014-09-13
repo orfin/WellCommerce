@@ -12,14 +12,11 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DataGrid\Loader;
 
-use Doctrine\DBAL\Query\Expression\ExpressionBuilder;
 use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
-use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
-use Pagerfanta\Adapter\DoctrineORMAdapter;
 
 /**
  * Class Loader

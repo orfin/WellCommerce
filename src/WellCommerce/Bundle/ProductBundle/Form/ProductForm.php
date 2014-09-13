@@ -133,7 +133,7 @@ class ProductForm extends AbstractForm implements FormInterface
             'addable'         => true,
             'onAdd'           => 'onTaxAdd',
             'add_item_prompt' => $this->trans('Enter tax value'),
-            'transformer' => new EntityToIdentifierTransformer($this->get('tax.repository'))
+            'transformer'     => new EntityToIdentifierTransformer($this->get('tax.repository'))
         ]));
 
         $pricePane->addChild($builder->getElement('select', [
@@ -153,11 +153,6 @@ class ProductForm extends AbstractForm implements FormInterface
         $pricePane->addChild($builder->getElement('price', [
             'name'      => 'buyPrice',
             'label'     => $this->trans('Buy price'),
-            'rules'     => [
-                $builder->getRule('required', [
-                    'message' => $this->trans('Buy price is required')
-                ]),
-            ],
             'filters'   => [
                 $builder->getFilter('comma_to_dot_changer')
             ],
@@ -173,17 +168,12 @@ class ProductForm extends AbstractForm implements FormInterface
         $standardPrice->addChild($builder->getElement('price', [
             'name'      => 'sellPrice',
             'label'     => $this->trans('Sell price'),
-            'rules'     => [
-                $builder->getRule('required', [
-                    'message' => $this->trans('Sell price is required')
-                ])
-            ],
             'filters'   => [
                 $builder->getFilter('comma_to_dot_changer')
             ],
             'vat_field' => $vat,
         ]));
-//
+
         $stockData = $form->addChild($builder->getElement('fieldset', [
             'name'  => 'stock_data',
             'label' => $this->trans('Stock settings')
@@ -192,11 +182,6 @@ class ProductForm extends AbstractForm implements FormInterface
         $stockData->addChild($builder->getElement('text_field', [
             'name'    => 'stock',
             'label'   => $this->trans('Stock'),
-            'rules'   => [
-                $builder->getRule('required', [
-                    'message' => $this->trans('Stock is required')
-                ])
-            ],
             'suffix'  => $this->trans('pcs'),
             'default' => 0
         ]));
@@ -217,11 +202,6 @@ class ProductForm extends AbstractForm implements FormInterface
         $stockData->addChild($builder->getElement('text_field', [
             'name'    => 'weight',
             'label'   => $this->trans('Weight'),
-            'rules'   => [
-                $builder->getRule('required', [
-                    'message' => $this->trans('Weight is required')
-                ])
-            ],
             'filters' => [
                 $builder->getFilter('comma_to_dot_changer')
             ],
@@ -255,11 +235,6 @@ class ProductForm extends AbstractForm implements FormInterface
         $stockData->addChild($builder->getElement('text_field', [
             'name'    => 'package_size',
             'label'   => $this->trans('Package size'),
-            'rules'   => [
-                $builder->getRule('required', [
-                    'message' => $this->trans('Package size is required')
-                ])
-            ],
             'filters' => [
                 $builder->getFilter('comma_to_dot_changer')
             ],

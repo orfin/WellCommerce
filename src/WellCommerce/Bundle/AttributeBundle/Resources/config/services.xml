@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <!-- Common -->
+        <parameter key="attribute.subscriber.class">WellCommerce\Bundle\AttributeBundle\EventListener\AttributeSubscriber</parameter>
+        <!-- Attribute -->
+        <parameter key="attribute.controller.admin.class">WellCommerce\Bundle\AttributeBundle\Controller\Admin\AttributeController</parameter>
+        <parameter key="attribute.repository.class">WellCommerce\Bundle\AttributeBundle\Repository\AttributeRepository</parameter>
+        <!-- AttributeValue -->
+        <parameter key="attribute_value.controller.admin.class">WellCommerce\Bundle\AttributeBundle\Controller\Admin\AttributeValueController</parameter>
+        <parameter key="attribute_value.repository.class">WellCommerce\Bundle\AttributeBundle\Repository\AttributeValueRepository</parameter>
+        <!-- AttributeGroup -->
+        <parameter key="attribute_group.controller.admin.class">WellCommerce\Bundle\AttributeBundle\Controller\Admin\AttributeGroupController</parameter>
+        <parameter key="attribute_group.repository.class">WellCommerce\Bundle\AttributeBundle\Repository\AttributeGroupRepository</parameter>
+        <parameter key="attribute_group.form.class">WellCommerce\Bundle\AttributeBundle\Form\AttributeGroupForm</parameter>
+    </parameters>
+
+    <services>
+        <!-- Common -->
+        <service id="attribute.subscriber" class="%attribute.subscriber.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setTranslator">
+                <argument type="service" id="translator"/>
+            </call>
+            <call method="setRouter">
+                <argument type="service" id="router"/>
+            </call>
+            <tag name="kernel.event_subscriber" />
+        </service>
+
+        <!-- Attribute -->
+        <service id="attribute.controller.admin" class="%attribute.controller.admin.class%">
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="admin_manager"/>
+            <argument type="service" id="attribute.repository"/>
+            <argument>null</argument>
+            <argument>null</argument>
+        </service>
+
+        <service id="attribute.repository" class="%attribute.repository.class%" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceAttributeBundle:Attribute</argument>
+            <call method="setTranslator">
+                <argument type="service" id="translator" />
+            </call>
+        </service>
+
+        <!-- AttributeValue -->
+        <service id="attribute_value.controller.admin" class="%attribute_value.controller.admin.class%">
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="admin_manager"/>
+            <argument type="service" id="attribute_value.repository"/>
+            <argument>null</argument>
+            <argument>null</argument>
+        </service>
+
+        <service id="attribute_value.repository" class="%attribute_value.repository.class%" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceAttributeBundle:AttributeValue</argument>
+            <call method="setTranslator">
+                <argument type="service" id="translator" />
+            </call>
+        </service>
+
+        <!-- AttributeGroup -->
+        <service id="attribute_group.controller.admin" class="%attribute_group.controller.admin.class%">
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="admin_manager"/>
+            <argument type="service" id="attribute_group.repository"/>
+            <argument>null</argument>
+            <argument type="service" id="attribute_group.form"/>
+        </service>
+
+        <service id="attribute_group.repository" class="%attribute_group.repository.class%" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceAttributeBundle:AttributeGroup</argument>
+            <call method="setTranslator">
+                <argument type="service" id="translator" />
+            </call>
+        </service>
+
+        <service id="attribute_group.form" class="%attribute_group.form.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+    </services>
+</container>
