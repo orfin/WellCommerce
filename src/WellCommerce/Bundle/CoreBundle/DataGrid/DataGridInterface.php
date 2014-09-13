@@ -133,11 +133,4 @@ interface DataGridInterface
      * @return mixed
      */
     public function update(array $request);
-
-    /**
-     * Initializes the datagrid instance
-     *
-     * @return void
-     */
-    public function init();
 }

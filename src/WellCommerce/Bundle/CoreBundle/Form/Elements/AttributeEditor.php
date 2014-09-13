@@ -11,10 +11,7 @@
  */
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use WellCommerce\Bundle\CoreBundle\Helper\XajaxManager;
-use WellCommerce\Attribute\Repository\AttributeRepositoryInterface;
 
 /**
  * Class AttributeEditor

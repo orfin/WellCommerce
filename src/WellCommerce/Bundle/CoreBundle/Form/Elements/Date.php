@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
 /**
  * Class Date
  *
@@ -20,7 +22,27 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
  */
 class Date extends TextField implements ElementInterface
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function configureAttributes(OptionsResolverInterface $resolver)
+    {
+        parent::configureAttributes($resolver);
 
+        $resolver->setOptional([
+            'minDate',
+            'maxDate',
+        ]);
+
+        $resolver->setAllowedTypes([
+            'minDate' => 'string',
+            'maxDate' => 'string',
+        ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function prepareAttributesJs()
     {
         return [

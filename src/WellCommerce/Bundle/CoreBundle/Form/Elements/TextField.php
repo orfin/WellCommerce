@@ -31,13 +31,9 @@ class TextField extends AbstractField implements ElementInterface
      */
     public function configureAttributes(OptionsResolverInterface $resolver)
     {
-        $resolver->setRequired([
-            'name',
-            'label'
-        ]);
+        parent::configureAttributes($resolver);
 
         $resolver->setOptional([
-            'comment',
             'suffix',
             'prefix',
             'size',
@@ -46,29 +42,9 @@ class TextField extends AbstractField implements ElementInterface
             'class',
             'css_attribute',
             'max_length',
-            'error',
-            'filters',
-            'dependencies',
-            'rules',
-            'filters',
-            'default',
-            'property_path',
-            'transformer'
-        ]);
-
-        $resolver->setDefaults([
-            'default'       => null,
-            'dependencies'  => [],
-            'filters'       => [],
-            'rules'         => [],
-            'property_path' => null,
-            'transformer'   => null
         ]);
 
         $resolver->setAllowedTypes([
-            'name'          => 'string',
-            'label'         => 'string',
-            'comment'       => 'string',
             'size'          => 'string',
             'suffix'        => 'string',
             'prefix'        => 'string',
@@ -77,11 +53,6 @@ class TextField extends AbstractField implements ElementInterface
             'class'         => 'string',
             'css_attribute' => 'string',
             'max_length'    => 'integer',
-            'error'         => 'string',
-            'filters'       => 'array',
-            'rules'         => 'array',
-            'dependencies'  => 'array',
-            'default'       => ['string', 'integer', 'null']
         ]);
     }
 

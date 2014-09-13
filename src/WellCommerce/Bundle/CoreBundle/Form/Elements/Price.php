@@ -15,17 +15,23 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class Price extends TextField implements ElementInterface
+class Price extends AbstractField implements ElementInterface
 {
     /**
      * {@inheritdoc}
      */
     public function configureAttributes(OptionsResolverInterface $resolver)
     {
+        parent::configureAttributes($resolver);
+
         $resolver->setRequired([
-            'name',
-            'label',
             'prefixes',
+            'vat_field',
+            'vat_field_name',
+        ]);
+
+        $resolver->setOptional([
+            'suffix',
         ]);
 
         $vatFieldName = function (Options $options) {
@@ -40,48 +46,13 @@ class Price extends TextField implements ElementInterface
             'prefixes'       => ['net', 'gross'],
             'vat_field'      => null,
             'vat_field_name' => $vatFieldName,
-            'dependencies'   => [],
-            'filters'        => [],
-            'rules'          => [],
-            'property_path'  => null,
-            'transformer'    => null,
-            'default'        => 0,
-
-        ]);
-
-        $resolver->setOptional([
-            'vat_field',
-            'vat_field_name',
-            'comment',
-            'suffix',
-            'prefix',
-            'selector',
-            'wrap',
-            'class',
-            'css_attribute',
-            'max_length',
-            'error',
-            'rules',
-            'filters',
-            'dependencies',
-            'default',
-            'transformer',
-            'property_path',
         ]);
 
         $resolver->setAllowedTypes([
-            'name'           => 'string',
-            'label'          => 'string',
-            'comment'        => 'string',
             'suffix'         => 'string',
             'prefixes'       => 'array',
-            'error'          => 'string',
+            'vat_field'      => ['null', 'WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface'],
             'vat_field_name' => 'string',
-            'rules'          => 'array',
-            'dependencies'   => 'array',
-            'default'        => ['string', 'integer'],
-            'property_path'  => ['null', 'object'],
-            'transformer'    => ['null', 'object'],
         ]);
     }
 

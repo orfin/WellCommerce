@@ -27,9 +27,9 @@ class ProgressIndicator extends AbstractField implements ElementInterface
      */
     public function configureAttributes(OptionsResolverInterface $resolver)
     {
+        parent::configureAttributes($resolver);
+
         $resolver->setRequired([
-            'name',
-            'label',
             'chunks',
             'load',
             'process',
@@ -37,14 +37,7 @@ class ProgressIndicator extends AbstractField implements ElementInterface
             'preventSubmit',
         ]);
 
-        $resolver->setOptional([
-            'comment',
-            'error',
-        ]);
-
         $resolver->setAllowedTypes([
-            'name'          => 'string',
-            'label'         => 'string',
             'chunks'        => 'int',
             'load'          => 'string',
             'process'       => 'string',
@@ -58,7 +51,7 @@ class ProgressIndicator extends AbstractField implements ElementInterface
      */
     public function prepareAttributesJs()
     {
-        $attributes = [
+        return [
             $this->formatAttributeJs('name', 'sName'),
             $this->formatAttributeJs('label', 'sLabel'),
             $this->formatAttributeJs('comment', 'sComment'),
@@ -68,12 +61,7 @@ class ProgressIndicator extends AbstractField implements ElementInterface
             $this->formatAttributeJs('process', 'fProcessRecords', ElementInterface::TYPE_FUNCTION),
             $this->formatAttributeJs('success', 'fSuccessRecords', ElementInterface::TYPE_FUNCTION),
             $this->formatAttributeJs('preventSubmit', 'bPreventSubmit', ElementInterface::TYPE_BOOLEAN),
-            $this->formatRepeatableJs(),
-            $this->formatRulesJs(),
-            $this->formatDependencyJs(),
-            $this->formatDefaultsJs()
+            parent::prepareAttributesJs()
         ];
-
-        return $attributes;
     }
 }

@@ -18,7 +18,7 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
  * @package WellCommerce\Bundle\CoreBundle\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Select extends OptionedField implements ElementInterface
+class Select extends AbstractOptionedField implements ElementInterface
 {
     /**
      * {@inheritdoc}

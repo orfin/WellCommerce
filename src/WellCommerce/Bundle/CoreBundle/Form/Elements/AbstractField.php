@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\PropertyAccess\PropertyPath;
 use WellCommerce\Bundle\CoreBundle\Form\Rules\LanguageUnique;
 
@@ -142,5 +143,49 @@ class AbstractField extends AbstractNode
             }
             $accessor->setValue($data, $this->getName(), $value);
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureAttributes(OptionsResolverInterface $resolver)
+    {
+        $resolver->setRequired([
+            'name',
+            'label',
+        ]);
+
+        $resolver->setOptional([
+            'comment',
+            'error',
+            'default',
+            'dependencies',
+            'rules',
+            'filters',
+            'property_path',
+            'transformer'
+        ]);
+
+        $resolver->setDefaults([
+            'default'       => null,
+            'dependencies'  => [],
+            'filters'       => [],
+            'rules'         => [],
+            'property_path' => null,
+            'transformer'   => null
+        ]);
+
+        $resolver->setAllowedTypes([
+            'name'          => 'string',
+            'label'         => 'string',
+            'comment'       => 'string',
+            'error'         => 'string',
+            'default'       => ['string', 'integer', 'null'],
+            'dependencies'  => 'array',
+            'filters'       => 'array',
+            'rules'         => 'array',
+            'property_path' => ['null', 'Symfony\Component\PropertyAccess\PropertyPath'],
+            'transformer'   => ['null', 'WellCommerce\Bundle\CoreBundle\Form\DataTransformerInterface'],
+        ]);
     }
 }
