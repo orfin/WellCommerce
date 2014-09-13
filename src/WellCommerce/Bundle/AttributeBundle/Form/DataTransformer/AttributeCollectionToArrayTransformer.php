@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\AttributeBundle\Form\DataTransformer;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\DataTransformerInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
@@ -22,42 +23,12 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
  * @package WellCommerce\Bundle\AttributeBundle\Form\DataTransformer
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AttributeCollectionToArrayTransformer implements DataTransformerInterface
+class AttributeCollectionToArrayTransformer extends CollectionToArrayTransformer
 {
     /**
      * @var \WellCommerce\Bundle\AttributeBundle\Repository\AttributeRepository
      */
     private $repository;
-
-    /**
-     * Constructor
-     *
-     * @param RepositoryInterface $repository
-     */
-    public function __construct(RepositoryInterface $repository)
-    {
-        $this->repository = $repository;
-    }
-
-    /**
-     * Transforms entity collection to array containing only primary keys
-     *
-     * @param $collection
-     *
-     * @return array
-     */
-    public function transform($collection)
-    {
-        $meta       = $this->repository->getMetadata();
-        $identifier = $meta->getSingleIdentifierFieldName();
-        $accessor   = $this->repository->getPropertyAccessor();
-        $items      = [];
-        foreach ($collection as $item) {
-            $items[] = $accessor->getValue($item, $identifier);
-        }
-
-        return $items;
-    }
 
     /**
      * Transforms passed identifiers to collection of entities
@@ -68,8 +39,6 @@ class AttributeCollectionToArrayTransformer implements DataTransformerInterface
      */
     public function reverseTransform($data)
     {
-
-
         $collection = new ArrayCollection();
         if (null == $data || empty($data)) {
             return $collection;
