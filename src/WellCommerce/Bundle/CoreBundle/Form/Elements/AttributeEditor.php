@@ -26,9 +26,9 @@ class AttributeEditor extends AbstractField implements ElementInterface
      */
     public function configureAttributes(OptionsResolverInterface $resolver)
     {
+        parent::configureAttributes($resolver);
+
         $resolver->setRequired([
-            'name',
-            'label',
             'set',
             'delete_attribute_route',
             'rename_attribute_route',
@@ -36,18 +36,11 @@ class AttributeEditor extends AbstractField implements ElementInterface
             'attributes',
         ]);
 
-        $resolver->setOptional([
-            'error',
-            'comment',
-        ]);
-
         $resolver->setDefaults([
             'attributes' => []
         ]);
 
         $resolver->setAllowedTypes([
-            'name'                         => ['int', 'string'],
-            'label'                        => 'string',
             'set'                          => ['int', 'string', 'null'],
             'attributes'                   => 'array',
             'delete_attribute_route'       => 'string',

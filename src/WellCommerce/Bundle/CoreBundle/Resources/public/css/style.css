@@ -260,10 +260,14 @@ object {
 }
 
 .GForm.attributeGroupEditor fieldset {
-    padding: 7px 15px 0;
-    float: left;
-    width: 290px;
-    position: relative;
+    padding: 7px 8px 0;
+	float: left;
+	width: 288px;
+	position: relative;
+}
+
+.GForm.attributeGroupEditor fieldset#translations .GFormRepetition {
+    margin-top: 10px;
 }
 
 .GForm.attributeGroupEditor fieldset.group-data legend span {
