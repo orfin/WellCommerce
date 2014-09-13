@@ -31,6 +31,17 @@ class AttributeCollectionToArrayTransformer extends CollectionToArrayTransformer
     private $repository;
 
     /**
+     * Constructor
+     *
+     * @param RepositoryInterface $repository
+     */
+    public function __construct(RepositoryInterface $repository)
+    {
+        parent::__construct($repository);
+        $this->repository = $repository;
+    }
+
+    /**
      * Transforms passed identifiers to collection of entities
      *
      * @param $ids
