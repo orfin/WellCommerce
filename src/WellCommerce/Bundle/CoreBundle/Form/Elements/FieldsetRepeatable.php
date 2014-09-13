@@ -44,9 +44,12 @@ class FieldsetRepeatable extends Fieldset implements ElementInterface
         $this->attributes['property_path'] = new PropertyPath($this->getName());
     }
 
-    public function setDefaults($data)
+    /**
+     * {@inheritdoc}
+     */
+    public function setDefaults($data, $isNewResource)
     {
-
+        // nothing to do here
     }
 
 }

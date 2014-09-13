@@ -20,10 +20,12 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
  */
 class StaticListing extends AbstractField implements ElementInterface
 {
-
+    /**
+     * {@inheritdoc}
+     */
     public function prepareAttributesJs()
     {
-        $attributes = Array(
+        return [
             $this->formatAttributeJs('label', 'sLabel'),
             $this->formatAttributeJs('name', 'sName'),
             $this->formatAttributeJs('title', 'sTitle'),
@@ -31,9 +33,7 @@ class StaticListing extends AbstractField implements ElementInterface
             $this->formatAttributeJs('collapsible', 'bCollapsible', ElementInterface::TYPE_BOOLEAN),
             $this->formatAttributeJs('expanded', 'bExpanded', ElementInterface::TYPE_BOOLEAN),
             $this->formatDependencyJs()
-        );
-
-        return $attributes;
+        ];
     }
 
     protected function formatListItemsJs($attributeName, $name)
@@ -51,10 +51,16 @@ class StaticListing extends AbstractField implements ElementInterface
         return $name . ': [' . implode(', ', $options) . ']';
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function renderStatic()
     {
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function populate($value)
     {
     }

@@ -27,59 +27,22 @@ class TextArea extends TextField implements ElementInterface
      */
     public function configureAttributes(OptionsResolverInterface $resolver)
     {
+        parent::configureAttributes($resolver);
+
         $resolver->setRequired([
-            'name',
-            'label'
-        ]);
-
-        $resolver->setOptional([
             'rows',
-            'comment',
-            'suffix',
-            'prefix',
-            'selector',
-            'wrap',
-            'class',
-            'css_attribute',
-            'max_length',
-            'error',
-            'rules',
-            'filters',
-            'dependencies',
-            'default',
-            'property_path',
-            'transformer'
+            'cols',
         ]);
-
-        $resolver->setDefaults([
-            'dependencies'  => [],
-            'filters'       => [],
-            'rules'         => [],
-            'transformer'   => null,
-            'property_path' => null,
-        ]);
-
 
         $resolver->setAllowedTypes([
-            'name'          => 'string',
-            'rows'          => 'int',
-            'label'         => 'string',
-            'comment'       => 'string',
-            'suffix'        => 'string',
-            'prefix'        => 'string',
-            'selector'      => 'string',
-            'wrap'          => 'string',
-            'class'         => 'string',
-            'css_attribute' => 'string',
-            'max_length'    => 'integer',
-            'error'         => 'string',
-            'filters'       => 'array',
-            'rules'         => 'array',
-            'dependencies'  => 'array',
-            'default'       => ['string', 'integer']
+            'rows' => 'int',
+            'cols' => 'cols'
         ]);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function prepareAttributesJs()
     {
         return [

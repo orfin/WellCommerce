@@ -27,45 +27,27 @@ class LayoutBoxesList extends AbstractField implements ElementInterface
      */
     public function configureAttributes(OptionsResolverInterface $resolver)
     {
-        $resolver->setRequired([
-            'name',
-            'boxes',
-            'property_path',
-        ]);
+        parent::configureAttributes($resolver);
 
-        $resolver->setOptional([
-            'label',
-            'comment',
-            'dependencies',
-            'filters',
-            'rules',
-            'transformer',
+        $resolver->setRequired([
+            'boxes',
         ]);
 
         $resolver->setDefaults([
-            'property_path' => null,
-            'transformer'   => null,
-            'dependencies'  => [],
-            'filters'       => [],
-            'rules'         => [],
+            'boxes' => []
         ]);
 
         $resolver->setAllowedTypes([
-            'name'          => ['int', 'string'],
-            'label'         => 'string',
-            'comment'       => 'string',
-            'boxes'         => 'array',
-            'dependencies'  => 'array',
-            'filters'       => 'array',
-            'rules'         => 'array',
-            'property_path' => ['null', 'object'],
-            'transformer'   => ['null', 'object'],
+            'boxes' => 'array',
         ]);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function prepareAttributesJs()
     {
-        $attributes = [
+        return [
             $this->formatAttributeJs('name', 'sName'),
             $this->formatAttributeJs('label', 'sLabel'),
             $this->formatAttributeJs('comment', 'sComment'),
@@ -75,8 +57,6 @@ class LayoutBoxesList extends AbstractField implements ElementInterface
             $this->formatDependencyJs(),
             $this->formatDefaultsJs()
         ];
-
-        return $attributes;
     }
 
 }

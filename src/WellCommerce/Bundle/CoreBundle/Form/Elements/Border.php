@@ -20,6 +20,9 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
  */
 class Border extends TextField implements ElementInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function prepareAttributesJs()
     {
         return [

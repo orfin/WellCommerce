@@ -27,43 +27,14 @@ class Checkbox extends AbstractField implements ElementInterface
      */
     public function configureAttributes(OptionsResolverInterface $resolver)
     {
-        $resolver->setRequired([
-            'name',
-            'label',
-            'property_path'
-        ]);
+        parent::configureAttributes($resolver);
 
         $resolver->setOptional([
             'class',
-            'error',
-            'comment',
-            'default',
-            'filters',
-            'rules',
-            'transformer'
-        ]);
-
-        $resolver->setDefaults([
-            'dependencies'  => [],
-            'filters'       => [],
-            'rules'         => [],
-            'property_path' => null,
-            'transformer'   => null,
-            'default'       => 0
         ]);
 
         $resolver->setAllowedTypes([
-            'name'          => 'string',
-            'label'         => 'string',
             'class'         => 'string',
-            'error'         => 'string',
-            'comment'       => 'string',
-            'dependencies'  => 'array',
-            'filters'       => 'array',
-            'rules'         => 'array',
-            'default'       => ['string', 'integer'],
-            'property_path' => ['null', 'object'],
-            'transformer'   => ['null', 'object'],
         ]);
     }
 
@@ -81,7 +52,5 @@ class Checkbox extends AbstractField implements ElementInterface
             $this->formatDependencyJs(),
             $this->formatDefaultsJs()
         ];
-
-        return $attributes;
     }
 }
