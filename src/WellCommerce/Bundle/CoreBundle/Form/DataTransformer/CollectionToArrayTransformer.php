@@ -26,7 +26,7 @@ class CollectionToArrayTransformer implements DataTransformerInterface
     /**
      * @var \WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface
      */
-    private $repository;
+    protected $repository;
 
     /**
      * Constructor

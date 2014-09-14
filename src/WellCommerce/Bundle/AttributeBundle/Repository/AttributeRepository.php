@@ -11,7 +11,6 @@
  */
 namespace WellCommerce\Bundle\AttributeBundle\Repository;
 
-use Symfony\Component\HttpFoundation\ParameterBag;
 use WellCommerce\Bundle\AttributeBundle\Entity\Attribute;
 use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 
@@ -36,10 +35,14 @@ class AttributeRepository extends AbstractEntityRepository implements AttributeR
                 'WITH',
                 'attribute.id = attribute_translation.translatable AND attribute_translation.locale = :locale')
             ->setParameter('locale', $this->getCurrentLocale())
-            ->addOrderBy('attribute_translation.name', 'ASC');
+            ->addOrderBy('attribute_translation.name', 'ASC')
+            ->addGroupBy('attribute.id');
 
         $query  = $qb->getQuery();
         $result = $query->getArrayResult();
+        foreach($result as $key => $attribute){
+            $result[$key]['values'] = $this->getAttributeValueRepository()->findAllByAttributeId($attribute['id']);
+        }
 
         return $result;
     }
@@ -59,5 +62,40 @@ class AttributeRepository extends AbstractEntityRepository implements AttributeR
         $this->getEntityManager()->persist($attribute);
 
         return $attribute;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findOrCreate($data)
+    {
+        $accessor = $this->getPropertyAccessor();
+        $id       = $accessor->getValue($data, '[id]');
+        $name     = $accessor->getValue($data, '[name]');
+        $values   = $accessor->getValue($data, '[values]');
+        $isNew    = substr($id, 0, 3) == 'new';
+
+        if ($isNew) {
+            $item = $this->addAttribute($name);
+        } else {
+            $item = $this->find($id);
+        }
+
+        if (!empty($values)) {
+            $collection = $this->getAttributeValueRepository()->makeCollection($item, $values);
+            $item->setValues($collection);
+        }
+
+        return $item;
+    }
+
+    /**
+     * Returns attribute value repository
+     *
+     * @return \WellCommerce\Bundle\AttributeBundle\Repository\AttributeValueRepository
+     */
+    private function getAttributeValueRepository()
+    {
+        return $this->getRepository('WellCommerce\Bundle\AttributeBundle\Entity\AttributeValue');
     }
 }

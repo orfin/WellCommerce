@@ -26,7 +26,7 @@ interface AttributeRepositoryInterface extends RepositoryInterface
     /**
      * Returns all groups with translations
      *
-     * @return mixed
+     * @return array
      */
     public function findAll();
 
@@ -35,7 +35,16 @@ interface AttributeRepositoryInterface extends RepositoryInterface
      *
      * @param ParameterBag $parameters
      *
-     * @return mixed
+     * @return \WellCommerce\Bundle\AttributeBundle\Entity\Attribute
      */
     public function addAttribute($name);
+
+    /**
+     * Finds attribute entity by its id or creates a new one
+     *
+     * @param $data
+     *
+     * @return \WellCommerce\Bundle\AttributeBundle\Entity\Attribute
+     */
+    public function findOrCreate($data);
 } 

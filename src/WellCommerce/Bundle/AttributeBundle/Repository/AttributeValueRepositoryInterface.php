@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\AttributeBundle\Repository;
 
 use Symfony\Component\HttpFoundation\ParameterBag;
+use WellCommerce\Bundle\AttributeBundle\Entity\Attribute;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
@@ -26,16 +27,33 @@ interface AttributeValueRepositoryInterface extends RepositoryInterface
     /**
      * Returns all groups with translations
      *
-     * @return mixed
+     * @return array
      */
     public function findAll();
 
     /**
-     * Adds new attribute group
+     * Returns all values (with translations) for given attribute
+     *
+     * @return array
+     */
+    public function findAllByAttributeId($id);
+
+    /**
+     * Adds new attribute value
      *
      * @param ParameterBag $parameters
      *
      * @return mixed
      */
-    public function addAttributeValue(ParameterBag $parameters);
+    public function addAttributeValue($name);
+
+    /**
+     * Makes a collection of attribute values
+     *
+     * @param Attribute $attribute
+     * @param           $values
+     *
+     * @return mixed
+     */
+    public function makeCollection(Attribute $attribute, $values);
 } 

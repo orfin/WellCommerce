@@ -14,8 +14,6 @@ namespace WellCommerce\Bundle\AttributeBundle\Form\DataTransformer;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
-use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\DataTransformerInterface;
-use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
  * Class AttributeCollectionToArrayTransformer
@@ -26,20 +24,9 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 class AttributeCollectionToArrayTransformer extends CollectionToArrayTransformer
 {
     /**
-     * @var \WellCommerce\Bundle\AttributeBundle\Repository\AttributeRepository
+     * @var \WellCommerce\Bundle\AttributeBundle\Repository\AttributeRepositoryInterface
      */
-    private $repository;
-
-    /**
-     * Constructor
-     *
-     * @param RepositoryInterface $repository
-     */
-    public function __construct(RepositoryInterface $repository)
-    {
-        parent::__construct($repository);
-        $this->repository = $repository;
-    }
+    protected $repository;
 
     /**
      * Transforms passed identifiers to collection of entities
@@ -55,13 +42,7 @@ class AttributeCollectionToArrayTransformer extends CollectionToArrayTransformer
             return $collection;
         }
         foreach ($data['editor'] as $attribute) {
-            $isNew = substr($attribute['id'], 0, 3) == 'new';
-            if ($isNew) {
-                $item = $this->repository->addAttribute($attribute['name']);
-            } else {
-                $item = $this->repository->find($attribute['id']);
-            }
-
+            $item = $this->repository->findOrCreate($attribute);
             $collection->add($item);
         }
 

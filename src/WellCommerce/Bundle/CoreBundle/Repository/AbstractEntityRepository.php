@@ -29,7 +29,7 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
     /**
      * @var TranslatorInterface
      */
-    private $translator;
+    protected $translator;
 
     /**
      * {@inheritdoc}
@@ -53,6 +53,24 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
     public function getLocales()
     {
         return $this->_em->getRepository('WellCommerce\Bundle\LocaleBundle\Entity\Locale')->findAll();
+    }
+
+    /**
+     * Returns a repository by entity class
+     *
+     * @param $name
+     *
+     * @return RepositoryInterface
+     */
+    protected function getRepository($name)
+    {
+        /**
+         * @var $repository RepositoryInterface
+         */
+        $repository = $this->_em->getRepository($name);
+        $repository->setTranslator($this->translator);
+
+        return $repository;
     }
 
     /**

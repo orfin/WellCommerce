@@ -11,7 +11,8 @@
  */
 namespace WellCommerce\Bundle\AttributeBundle\Repository;
 
-use Symfony\Component\HttpFoundation\ParameterBag;
+use Doctrine\Common\Collections\ArrayCollection;
+use WellCommerce\Bundle\AttributeBundle\Entity\Attribute;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeValue;
 use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 
@@ -29,14 +30,14 @@ class AttributeValueRepository extends AbstractEntityRepository implements Attri
     public function findAll()
     {
         $qb = parent::getQueryBuilder()
-            ->addSelect('attribute_group.id, attribute_group_translation.name')
+            ->addSelect('attribute_group.id, attribute_value_translation.name')
             ->leftJoin(
                 'WellCommerce\Bundle\AttributeBundle\Entity\AttributeValueTranslation',
-                'attribute_group_translation',
+                'attribute_value_translation',
                 'WITH',
-                'attribute_group.id = attribute_group_translation.translatable AND attribute_group_translation.locale = :locale')
+                'attribute_group.id = attribute_value_translation.translatable AND attribute_value_translation.locale = :locale')
             ->setParameter('locale', $this->getCurrentLocale())
-            ->addOrderBy('attribute_group_translation.name', 'ASC');
+            ->addOrderBy('attribute_value_translation.name', 'ASC');
 
         $query  = $qb->getQuery();
         $result = $query->getArrayResult();
@@ -47,19 +48,65 @@ class AttributeValueRepository extends AbstractEntityRepository implements Attri
     /**
      * {@inheritdoc}
      */
-    public function addAttributeValue(ParameterBag $parameters)
+    public function findAllByAttributeId($id)
     {
-        $name    = $parameters->get('name');
+        $qb = parent::getQueryBuilder()
+            ->addSelect('attribute_value.id, attribute_value_translation.name')
+            ->leftJoin(
+                'WellCommerce\Bundle\AttributeBundle\Entity\AttributeValueTranslation',
+                'attribute_value_translation',
+                'WITH',
+                'attribute_value.id = attribute_value_translation.translatable AND attribute_value_translation.locale = :locale')
+            ->setParameter('locale', $this->getCurrentLocale())
+            ->addOrderBy('attribute_value_translation.name', 'ASC');
+
+        // filter by attribute id
+        $where = $qb->expr()->eq('attribute_value.attribute', ':attribute');
+        $qb->setParameter('attribute', $id);
+        $qb->add('where', $where);
+
+        $query  = $qb->getQuery();
+        $result = $query->getArrayResult();
+
+        return $result;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addAttributeValue($name)
+    {
         $locales = $this->getLocales();
-        $group   = new AttributeValue();
+        $value   = new AttributeValue();
 
         foreach ($locales as $locale) {
-            $group->translate($locale->getCode())->setName($name);
+            $value->translate($locale->getCode())->setName($name);
         }
-        $group->mergeNewTranslations();
-        $this->getEntityManager()->persist($group);
-        $this->getEntityManager()->flush();
+        $value->mergeNewTranslations();
+        $this->getEntityManager()->persist($value);
 
-        return $group;
+        return $value;
+    }
+
+    public function makeCollection(Attribute $attribute, $values)
+    {
+        $accessor   = $this->getPropertyAccessor();
+        $collection = new ArrayCollection();
+
+        foreach ($values as $value) {
+            $id    = $accessor->getValue($value, '[id]');
+            $name  = $accessor->getValue($value, '[name]');
+            $isNew = substr($id, 0, 3) == 'new';
+            if ($isNew) {
+                $item = $this->addAttributeValue($name);
+                $item->setAttribute($attribute);
+            } else {
+                $item = $this->find($id);
+            }
+
+            $collection->add($item);
+        }
+
+        return $collection;
     }
 }

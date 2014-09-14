@@ -41,14 +41,24 @@ class AttributeValue
     private $id;
 
     /**
-     * Get id.
-    
-     *
-     * @return integer
+     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\AttributeBundle\Entity\Attribute", inversedBy="values")
+     * @ORM\JoinColumn(name="attribute_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
+    protected $attribute;
+
     public function getId()
     {
         return $this->id;
+    }
+
+    public function setAttribute(Attribute $attribute)
+    {
+        $this->attribute = $attribute;
+    }
+
+    public function getAttribute()
+    {
+        return $this->attribute;
     }
 }
 
