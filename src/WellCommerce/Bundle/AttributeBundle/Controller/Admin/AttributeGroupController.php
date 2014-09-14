@@ -36,8 +36,16 @@ class AttributeGroupController extends AbstractAdminController
      */
     public function indexAction()
     {
+        $groups = $this->repository->findAll();
+
+        if (count($groups) > 0) {
+            $firstGroup = current($groups);
+
+            return $this->manager->getRedirectHelper()->redirectToAction('edit', ['id' => $firstGroup['id']]);
+        }
+
         return [
-            'groups' => $this->repository->findAll()
+            'groups' => $groups
         ];
     }
 

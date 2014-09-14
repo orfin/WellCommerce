@@ -51,34 +51,69 @@ class Attribute
      */
     private $values;
 
+    /**
+     * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute", mappedBy="attribute", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    protected $products;
+
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->groups = new ArrayCollection();
         $this->values = new ArrayCollection();
     }
 
+    /**
+     * Returns attribute id
+     *
+     * @return int
+     */
     public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * Returns all attribute groups bound to attribute
+     *
+     * @return ArrayCollection
+     */
     public function getGroups()
     {
         return $this->groups;
     }
 
+    /**
+     * Sets attribute groups for attribute
+     *
+     * @param ArrayCollection $collection
+     */
     public function setGroups(ArrayCollection $collection)
     {
         $this->groups = $collection;
     }
 
+    /**
+     * Returns all attribute values
+     *
+     * @return ArrayCollection
+     */
     public function getValues()
     {
         return $this->values;
     }
 
+    /**
+     * Sets new attribute values.
+     * Earlier deletes old values as they are not needed.
+     *
+     * @param ArrayCollection $collection
+     */
     public function setValues(ArrayCollection $collection)
     {
+        // remove old and unneeded values
         foreach ($this->values as $value) {
             if (!$collection->contains($value)) {
                 $this->values->removeElement($value);

@@ -46,16 +46,31 @@ class AttributeValue
      */
     protected $attribute;
 
+    /**
+     * Returns attribute value id
+     *
+     * @return int
+     */
     public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * Sets an attribute
+     *
+     * @param Attribute $attribute
+     */
     public function setAttribute(Attribute $attribute)
     {
         $this->attribute = $attribute;
     }
 
+    /**
+     * Returns value attribute
+     *
+     * @return mixed
+     */
     public function getAttribute()
     {
         return $this->attribute;

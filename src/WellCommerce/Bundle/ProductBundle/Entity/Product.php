@@ -113,6 +113,11 @@ class Product
     private $productPhotos;
 
     /**
+     * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute", mappedBy="product", cascade={"persist"}, orphanRemoval=true)
+     */
+    private $attributes;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="stock", type="decimal", precision=15, scale=4)
