@@ -157,6 +157,12 @@
             </call>
         </service>
 
+        <service id="form.element.product_variants_editor" class="%form.element.product_variants_editor.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
         <service id="form.element.password" class="%form.element.password.class%" scope="prototype">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>

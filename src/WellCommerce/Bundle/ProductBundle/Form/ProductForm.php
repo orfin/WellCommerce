@@ -275,6 +275,18 @@ class ProductForm extends AbstractForm implements FormInterface
             'transformer' => new CollectionToArrayTransformer($this->get('product_status.repository'))
         ]));
 
+        $attributesData = $form->addChild($builder->getElement('fieldset', [
+            'name'  => 'attributes_data',
+            'label' => $this->trans('Attributes')
+        ]));
+
+        $attributesData->addChild($builder->getElement('product_variants_editor', [
+            'name'        => 'attributes',
+            'label'       => $this->trans('Statuses'),
+            'options'     => $this->get('product_status.repository')->getCollectionToSelect(),
+            'transformer' => new CollectionToArrayTransformer($this->get('product_status.repository'))
+        ]));
+
         $shopData = $form->addChild($builder->getElement('fieldset', [
             'name'  => 'shop_data',
             'label' => $this->trans('Shops')

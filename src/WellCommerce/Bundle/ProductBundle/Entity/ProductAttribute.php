@@ -18,7 +18,7 @@ use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translation;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\HierarchyTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\MetaDataTrait;
-use WellCommerce\Bundle\MediaBundle\Entity\Media;
+use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\PhotoTrait;
 
 /**
  * ProductPhoto
@@ -30,6 +30,7 @@ class ProductAttribute
 {
     use Timestampable;
     use HierarchyTrait;
+    use PhotoTrait;
 
     /**
      * @var integer
