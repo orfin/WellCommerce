@@ -47,4 +47,13 @@ interface AttributeRepositoryInterface extends RepositoryInterface
      * @return \WellCommerce\Bundle\AttributeBundle\Entity\Attribute
      */
     public function findOrCreate($data);
+
+    /**
+     * Returns all attributes by group id
+     *
+     * @param integer $id Attribute group id
+     *
+     * @return mixed
+     */
+    public function findAllByAttributeGroupId($id);
 } 

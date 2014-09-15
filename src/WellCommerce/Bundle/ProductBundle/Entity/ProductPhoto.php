@@ -24,7 +24,7 @@ use WellCommerce\Bundle\MediaBundle\Entity\Media;
  * ProductPhoto
  *
  * @ORM\Table(name="product_photo")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="WellCommerce\Bundle\ProductBundle\Repository\ProductPhotoRepository")
  */
 class ProductPhoto
 {

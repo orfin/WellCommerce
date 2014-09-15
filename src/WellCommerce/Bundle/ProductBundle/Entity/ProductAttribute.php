@@ -24,7 +24,7 @@ use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\PhotoTrait;
  * ProductPhoto
  *
  * @ORM\Table(name="product_attribute")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="WellCommerce\Bundle\ProductBundle\Repository\ProductAttributeRepository")
  */
 class ProductAttribute
 {
@@ -70,6 +70,13 @@ class ProductAttribute
     /**
      * @var string
      *
+     * @ORM\Column(name="symbol", type="string")
+     */
+    private $symbol;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="stock", type="decimal", precision=15, scale=4)
      */
     private $stock;
@@ -80,5 +87,18 @@ class ProductAttribute
      * @ORM\Column(name="modifier_type", type="string")
      */
     private $modifierType;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="modifier_value", type="decimal", precision=15, scale=4)
+     */
+    private $modifierValue;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\AvailabilityBundle\Entity\Availability")
+     * @ORM\JoinColumn(name="availability_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    private $availability;
 }
 

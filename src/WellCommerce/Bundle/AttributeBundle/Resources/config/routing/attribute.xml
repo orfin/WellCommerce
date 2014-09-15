@@ -23,4 +23,9 @@
         <default key="_controller">attribute.controller.admin:deleteAction</default>
         <option key="expose">true</option>
     </route>
+
+    <route id="admin.attribute.ajax_get_attributes" path="/ajax/get">
+        <default key="_controller">attribute.controller.admin:ajaxGetAttributesAction</default>
+        <option key="expose">true</option>
+    </route>
 </routes>

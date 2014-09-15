@@ -40,7 +40,37 @@ class AttributeRepository extends AbstractEntityRepository implements AttributeR
 
         $query  = $qb->getQuery();
         $result = $query->getArrayResult();
-        foreach($result as $key => $attribute){
+        foreach ($result as $key => $attribute) {
+            $result[$key]['values'] = $this->getAttributeValueRepository()->findAllByAttributeId($attribute['id']);
+        }
+
+        return $result;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findAllByAttributeGroupId($id)
+    {
+        $qb = parent::getQueryBuilder()
+            ->addSelect('attribute.id, attribute_translation.name')
+            ->join('attribute.groups', 'ag')
+            ->leftJoin(
+                'WellCommerce\Bundle\AttributeBundle\Entity\AttributeTranslation',
+                'attribute_translation',
+                'WITH',
+                'attribute.id = attribute_translation.translatable AND attribute_translation.locale = :locale')
+            ->setParameter('locale', $this->getCurrentLocale())
+            ->addOrderBy('attribute_translation.name', 'ASC')
+            ->addGroupBy('attribute.id');
+
+        // filter by attribute id
+        $qb->add('where', $qb->expr()->eq('ag.id', ':groups'));
+        $qb->setParameter('groups', [$id]);
+
+        $query  = $qb->getQuery();
+        $result = $query->getArrayResult();
+        foreach ($result as $key => $attribute) {
             $result[$key]['values'] = $this->getAttributeValueRepository()->findAllByAttributeId($attribute['id']);
         }
 

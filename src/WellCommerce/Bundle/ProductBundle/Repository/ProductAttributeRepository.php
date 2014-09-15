@@ -14,18 +14,12 @@ namespace WellCommerce\Bundle\ProductBundle\Repository;
 use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 
 /**
- * Class ProductPhotoRepository
+ * Class ProductAttributeRepository
  *
  * @package WellCommerce\Bundle\ProductBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductPhotoRepository extends AbstractEntityRepository implements ProductPhotoRepositoryInterface
+class ProductAttributeRepository extends AbstractEntityRepository implements ProductAttributeRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getDataGridQueryBuilder()
-    {
-        return parent::getQueryBuilder()->groupBy('product.id');
-    }
+
 }

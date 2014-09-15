@@ -32,7 +32,9 @@ class ProductForm extends AbstractForm implements FormInterface
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $form = $builder->init($options);
+        $form       = $builder->init($options);
+        $currencies = $this->get('currency.repository')->getCollectionToSelect('code');
+        $vatValues  = $this->get('tax.repository')->getCollectionToSelect();
 
         $requiredData = $form->addChild($builder->getElement('fieldset', [
             'name'  => 'required_data',
@@ -108,7 +110,7 @@ class ProductForm extends AbstractForm implements FormInterface
             'label' => $this->trans('Categories')
         ]));
 
-        $categoryPane->addChild($builder->getElement('tree', [
+        $categoriesField = $categoryPane->addChild($builder->getElement('tree', [
             'name'        => 'categories',
             'label'       => $this->trans('Categories'),
             'choosable'   => false,
@@ -124,12 +126,11 @@ class ProductForm extends AbstractForm implements FormInterface
             'label' => $this->trans('Price settings')
         ]));
 
-        $currencies = $this->get('currency.repository')->getCollectionToSelect('code');
 
-        $vat = $pricePane->addChild($builder->getElement('select', [
+        $vatField = $pricePane->addChild($builder->getElement('select', [
             'name'            => 'tax',
             'label'           => $this->trans('Tax'),
-            'options'         => $this->get('tax.repository')->getCollectionToSelect(),
+            'options'         => $vatValues,
             'addable'         => true,
             'onAdd'           => 'onTaxAdd',
             'add_item_prompt' => $this->trans('Enter tax value'),
@@ -156,7 +157,7 @@ class ProductForm extends AbstractForm implements FormInterface
             'filters'   => [
                 $builder->getFilter('comma_to_dot_changer')
             ],
-            'vat_field' => $vat,
+            'vat_field' => $vatField,
         ]));
 
         $standardPrice = $pricePane->addChild($builder->getElement('fieldset', [
@@ -165,13 +166,13 @@ class ProductForm extends AbstractForm implements FormInterface
             'class' => 'priceGroup'
         ]));
 
-        $standardPrice->addChild($builder->getElement('price', [
+        $priceField = $standardPrice->addChild($builder->getElement('price', [
             'name'      => 'sellPrice',
             'label'     => $this->trans('Sell price'),
             'filters'   => [
                 $builder->getFilter('comma_to_dot_changer')
             ],
-            'vat_field' => $vat,
+            'vat_field' => $vatField,
         ]));
 
         $stockData = $form->addChild($builder->getElement('fieldset', [
@@ -241,7 +242,7 @@ class ProductForm extends AbstractForm implements FormInterface
             'default' => 1
         ]));
 
-        $stockData->addChild($builder->getElement('select', [
+        $availabilityField = $stockData->addChild($builder->getElement('select', [
             'name'        => 'availability',
             'label'       => $this->trans('Availability'),
             'options'     => $this->get('availability.repository')->getCollectionToSelect(),
@@ -281,10 +282,15 @@ class ProductForm extends AbstractForm implements FormInterface
         ]));
 
         $attributesData->addChild($builder->getElement('product_variants_editor', [
-            'name'        => 'attributes',
-            'label'       => $this->trans('Statuses'),
-            'options'     => $this->get('product_status.repository')->getCollectionToSelect(),
-            'transformer' => new CollectionToArrayTransformer($this->get('product_status.repository'))
+            'name'               => 'attributes',
+            'label'              => $this->trans('Statuses'),
+            'price_field'        => $priceField,
+            'vat_field'          => $vatField,
+            'vat_values'         => $vatValues,
+            'suffixes'           => $vatValues,
+            'category_field'     => $categoriesField,
+            'availability_field' => $availabilityField,
+            'transformer'        => new CollectionToArrayTransformer($this->get('product_attribute.repository'))
         ]));
 
         $shopData = $form->addChild($builder->getElement('fieldset', [

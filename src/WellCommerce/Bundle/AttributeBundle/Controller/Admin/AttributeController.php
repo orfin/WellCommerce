@@ -78,6 +78,39 @@ class AttributeController extends AbstractAdminController
     }
 
     /**
+     * Returns all attributes for group
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function ajaxGetAttributesAction(Request $request)
+    {
+        // prevent direct access and redirect administrator to index
+        if (!$request->isXmlHttpRequest()) {
+            return $this->manager->getRedirectHelper()->redirectToAction('index');
+        }
+
+        $attributes = $this->repository->findAllByAttributeGroupId($request->request->get('id'));
+
+        $sets = [];
+
+        foreach ($attributes as $attribute) {
+            $sets[] = [
+                'id'     => $attribute['id'],
+                'name'   => $attribute['name'],
+                'values' => $attribute['values'],
+            ];
+        }
+
+        $response = [
+            'attributes' => $sets
+        ];
+
+        return $this->jsonResponse($response);
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function getForm($resource)

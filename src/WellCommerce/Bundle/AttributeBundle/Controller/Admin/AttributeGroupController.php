@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\AttributeBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Exception\MethodNotAllowedException;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
@@ -83,6 +84,38 @@ class AttributeGroupController extends AbstractAdminController
             'groups'       => $this->repository->findAll(),
             'form'         => $form
         ];
+    }
+
+    /**
+     * Returns all attribute groups as json
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function ajaxGetGroupsAction(Request $request)
+    {
+        // prevent direct access and redirect administrator to index
+        if (!$request->isXmlHttpRequest()) {
+            return $this->manager->getRedirectHelper()->redirectToAction('index');
+        }
+
+        $groups = $this->repository->findAll();
+        $sets   = [];
+
+        foreach ($groups as $group) {
+            $sets[] = [
+                'id'               => $group['id'],
+                'name'             => $group['name'],
+                'current_category' => false
+            ];
+        }
+
+        $response = [
+            'sets' => $sets
+        ];
+
+        return $this->jsonResponse($response);
     }
 
     /**

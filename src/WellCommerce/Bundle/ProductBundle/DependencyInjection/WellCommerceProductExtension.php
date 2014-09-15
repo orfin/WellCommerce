@@ -30,8 +30,9 @@ class WellCommerceProductExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('product.xml');
         $loader->load('product_status.xml');
+        $loader->load('product_attribute.xml');
     }
 }
