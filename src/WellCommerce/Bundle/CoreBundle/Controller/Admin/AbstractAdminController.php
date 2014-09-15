@@ -89,11 +89,13 @@ abstract class AbstractAdminController extends AbstractController implements Adm
     }
 
     /**
-     * Default index action
+     * Controller index action
+     *
+     * @param Request $request
      *
      * @return array
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         return [
             'datagrid' => $this->datagrid->get()

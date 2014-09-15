@@ -32,7 +32,7 @@ class CategoryController extends AbstractAdminController
      */
     protected $repository;
 
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $tree = $this->getFormBuilder($this->get('category.tree'), null, [
             'name'  => 'category_tree',

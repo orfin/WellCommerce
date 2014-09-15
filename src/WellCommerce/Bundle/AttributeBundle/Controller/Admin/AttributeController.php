@@ -34,11 +34,30 @@ class AttributeController extends AbstractAdminController
     /**
      * {@inheritdoc}
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        return [
-            'groups' => $this->repository->findAll()
+        // prevent direct access and redirect administrator to index
+        if (!$request->isXmlHttpRequest()) {
+            return $this->manager->getRedirectHelper()->redirectToAction('index');
+        }
+
+        $attributes = $this->repository->findAllByAttributeGroupId($request->request->get('id'));
+
+        $sets = [];
+
+        foreach ($attributes as $attribute) {
+            $sets[] = [
+                'id'     => $attribute['id'],
+                'name'   => $attribute['name'],
+                'values' => $attribute['values'],
+            ];
+        }
+
+        $response = [
+            'attributes' => $sets
         ];
+
+        return $this->jsonResponse($response);
     }
 
     /**

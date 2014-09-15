@@ -35,7 +35,7 @@ class AttributeGroupController extends AbstractAdminController
     /**
      * {@inheritdoc}
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $groups = $this->repository->findAll();
 

@@ -25,7 +25,7 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
  */
 class DashboardController extends AbstractAdminController
 {
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         return [];
     }

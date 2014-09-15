@@ -28,7 +28,7 @@ use WellCommerce\Bundle\LayoutBundle\Entity\LayoutPageColumnBox;
  */
 class LayoutPageController extends AbstractAdminController
 {
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $tree = $this->getFormBuilder($this->get('layout_page.tree'), null, [
             'name'  => 'layout_page_tree',

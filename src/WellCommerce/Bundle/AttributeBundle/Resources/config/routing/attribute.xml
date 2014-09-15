@@ -4,28 +4,23 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <route id="admin.attribute.index" path="/index">
+    <route id="admin.attribute.index" path="/index" methods="POST">
         <default key="_controller">attribute.controller.admin:indexAction</default>
         <option key="expose">true</option>
     </route>
 
-    <route id="admin.attribute.add" path="/add">
+    <route id="admin.attribute.add" path="/add" methods="POST">
         <default key="_controller">attribute.controller.admin:addAction</default>
         <option key="expose">true</option>
     </route>
 
-    <route id="admin.attribute.edit" path="/edit/{id}">
+    <route id="admin.attribute.edit" path="/edit/{id}" methods="POST">
         <default key="_controller">attribute.controller.admin:editAction</default>
         <option key="expose">true</option>
     </route>
 
-    <route id="admin.attribute.delete" path="/delete/{id}">
+    <route id="admin.attribute.delete" path="/delete/{id}" methods="POST">
         <default key="_controller">attribute.controller.admin:deleteAction</default>
-        <option key="expose">true</option>
-    </route>
-
-    <route id="admin.attribute.ajax_get_attributes" path="/ajax/get">
-        <default key="_controller">attribute.controller.admin:ajaxGetAttributesAction</default>
         <option key="expose">true</option>
     </route>
 </routes>

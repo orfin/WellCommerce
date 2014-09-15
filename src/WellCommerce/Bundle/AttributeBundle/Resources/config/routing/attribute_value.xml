@@ -4,22 +4,22 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <route id="admin.attribute_value.index" path="/value/index">
+    <route id="admin.attribute_value.index" path="/value/index" methods="POST">
         <default key="_controller">attribute_value.controller.admin:indexAction</default>
         <option key="expose">true</option>
     </route>
 
-    <route id="admin.attribute_value.add" path="/value/add">
+    <route id="admin.attribute_value.add" path="/value/add" methods="POST">
         <default key="_controller">attribute_value.controller.admin:addAction</default>
         <option key="expose">true</option>
     </route>
 
-    <route id="admin.attribute_value.edit" path="/value/edit/{id}">
+    <route id="admin.attribute_value.edit" path="/value/edit/{id}" methods="POST">
         <default key="_controller">attribute_value.controller.admin:editAction</default>
         <option key="expose">true</option>
     </route>
 
-    <route id="admin.attribute_value.delete" path="/value/delete/{id}">
+    <route id="admin.attribute_value.delete" path="/value/delete/{id}" methods="POST">
         <default key="_controller">attribute_value.controller.admin:deleteAction</default>
         <option key="expose">true</option>
     </route>

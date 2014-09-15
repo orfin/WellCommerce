@@ -43,10 +43,11 @@ class ProductVariantsEditor extends AbstractField implements ElementInterface
         ]);
 
         $resolver->setDefaults([
-            'allow_generate'       => true,
-            'suffixes'             => ['+', '-', '%', '='],
-            'get_groups_route'     => 'admin.attribute_group.ajax_get_groups',
-            'get_attributes_route' => 'admin.attribute.ajax_get_attributes',
+            'allow_generate'            => true,
+            'suffixes'                  => ['+', '-', '%', '='],
+            'get_groups_route'          => 'admin.attribute_group.ajax_get_groups',
+            'get_attributes_route'      => 'admin.attribute.ajax_get_attributes',
+            'add_attribute_value_route' => 'admin.attribute_value.ajax_add_value',
         ]);
 
         $resolver->setAllowedTypes([
@@ -86,6 +87,7 @@ class ProductVariantsEditor extends AbstractField implements ElementInterface
             $this->formatAttributeJs('error', 'sError'),
             $this->formatAttributeJs('get_groups_route', 'sGetGroupsRoute'),
             $this->formatAttributeJs('get_attributes_route', 'sGetAttributesRoute'),
+            $this->formatAttributeJs('add_attribute_value_route', 'sAddAttributeValueRoute'),
             $this->formatAttributeJs('rename_attribute_value_route', 'sRenameAttributeValueRoute'),
             $this->formatAttributeJs('category_field', 'sCategoryField'),
             $this->formatAttributeJs('price_field', 'sPriceField'),

@@ -283,7 +283,7 @@ var GFormProductVariantsEditor = GCore.ExtendClass(GFormField, function () {
                 gThis._UpdateModificatorValue(fNetPrice);
             }, 5);
         });
-        
+
         jGrossPrice.keypress(fHandler).blur(fHandler).blur(gThis.Validation);
 
         var jStock = $('<input type="text" id="' + gThis.GetId() + '__stock"/>').focus(function () {
@@ -307,7 +307,7 @@ var GFormProductVariantsEditor = GCore.ExtendClass(GFormField, function () {
         }).blur(function () {
             $(this).closest('.field').removeClass('focus');
         });
-        
+
         jSpecification.append($('<div class="field-text"/>').append('<label for="' + gThis.GetId() + '__symbol">Symbol</label>').append($('<span class="field"/>').append(jSymbol)));
         jSymbol.val(oVariant.symbol);
 
@@ -505,9 +505,9 @@ var GFormProductVariantsEditor = GCore.ExtendClass(GFormField, function () {
         if (gThis.m_sEditedVariant == GCore.NULL) {
             return;
         }
-        
+
         var modifierField = $('#' + gThis.GetId() + '__modifier_type option:selected');
-        
+
         var oRow = {
             idvariant: gThis.m_sEditedVariant,
             modifier_type: modifierField.text(),
@@ -520,7 +520,7 @@ var GFormProductVariantsEditor = GCore.ExtendClass(GFormField, function () {
             status: $('#' + gThis.GetId() + '__status').val(),
             weight: $('#' + gThis.GetId() + '__weight').val().replace(/,/, '.'),
         };
-        
+
         var jSelects = gThis.m_jVariantEditor.find('.attributes li select[name^="attribute_"]');
         for (var i = 0; i < jSelects.length; i++) {
             var sAttributeId = jSelects.eq(i).attr('name').substr(10);
@@ -566,7 +566,7 @@ var GFormProductVariantsEditor = GCore.ExtendClass(GFormField, function () {
         gThis.m_jVariantEditorOptions.append($('<li/>').append(jAdd));
         gThis.m_jVariantEditorOptions.append($('<li/>').append(jSave));
         gThis.m_jNode.append(gThis.m_jVariantEditorWrapper);
-        
+
         jAdd.click(GEventHandler(function (eEvent) {
             var sId = gThis.AddVariant();
             gThis.m_gDatagrid.m_asSelected = [sId];
@@ -574,7 +574,7 @@ var GFormProductVariantsEditor = GCore.ExtendClass(GFormField, function () {
             gThis._InitVariantEditor(sId);
             return false;
         }));
-        
+
         jSave.click(GEventHandler(function (eEvent) {
             gThis.SaveVariant();
             return false;
@@ -815,11 +815,11 @@ var GFormProductVariantsEditor = GCore.ExtendClass(GFormField, function () {
         gThis.m_jDatagrid.animate({opacity: .5}, 250);
         gThis.m_jVariantEditorWrapper.animate({opacity: .5}, 250);
         (!gThis.m_jSetEditorLabel.find('.' + gThis._GetClass('Waiting')).length) && gThis.m_jSetEditorLabel.append($('<span class="' + gThis._GetClass('Waiting') + '"/>').css('display', 'none').fadeIn(150));
-        gThis.m_oOptions.fAddValue({
+        GF_Ajax_Request(Routing.generate(gThis.m_oOptions.sAddAttributeValueRoute), {
             value: sValue,
             attribute: sAttribute,
             set: sSet
-        }, GCallback(gThis.OnValueAdded));
+        }, gThis.OnValueAdded);
     };
 
     gThis.OnValueAdded = GEventHandler(function (eEvent) {
@@ -832,12 +832,9 @@ var GFormProductVariantsEditor = GCore.ExtendClass(GFormField, function () {
         gThis.m_jVariantEditorWrapper.animate({opacity: .5}, 250);
         (!gThis.m_jSetEditorLabel.find('.' + gThis._GetClass('Waiting')).length) && gThis.m_jSetEditorLabel.append($('<span class="' + gThis._GetClass('Waiting') + '"/>').css('display', 'none').fadeIn(150));
         var sSetId = gThis.m_jSetSelect.find('option:selected').attr('value');
-
-        var oRequest = {
+        GF_Ajax_Request(Routing.generate(gThis.m_oOptions.sGetAttributesRoute), {
             id: sSetId
-        };
-
-        GF_Ajax_Request(Routing.generate(gThis.m_oOptions.sGetAttributesRoute), oRequest, gThis.OnAttributesLoaded);
+        }, gThis.OnAttributesLoaded);
     };
 
     gThis.OnAttributesLoaded = new GEventHandler(function (eEvent) {
