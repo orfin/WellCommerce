@@ -113,7 +113,7 @@ class Attribute
      */
     public function setValues(ArrayCollection $collection)
     {
-        // remove old and unneeded values
+        // remove old values
         foreach ($this->values as $value) {
             if (!$collection->contains($value)) {
                 $this->values->removeElement($value);

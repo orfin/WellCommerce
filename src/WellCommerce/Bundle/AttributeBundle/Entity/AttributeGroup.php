@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\AttributeBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use WellCommerce\Bundle\CoreBundle\Entity\TranslatableEntityInterface;
 
 /**
  * Class AttributeGroup
@@ -26,7 +27,7 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
  * @ORM\HasLifecycleCallbacks
  * @ORM\Entity(repositoryClass="WellCommerce\Bundle\AttributeBundle\Repository\AttributeGroupRepository")
  */
-class AttributeGroup
+class AttributeGroup implements TranslatableEntityInterface
 {
     use ORMBehaviors\Translatable\Translatable;
     use ORMBehaviors\Timestampable\Timestampable;
@@ -58,16 +59,31 @@ class AttributeGroup
         $this->attributes = new ArrayCollection();
     }
 
+    /**
+     * Returns group id
+     *
+     * @return int
+     */
     public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * Returns group attributes
+     *
+     * @return ArrayCollection
+     */
     public function getAttributes()
     {
         return $this->attributes;
     }
 
+    /**
+     * Sets collection of attributes
+     *
+     * @param ArrayCollection $collection
+     */
     public function setAttributes(ArrayCollection $collection)
     {
         $this->attributes = $collection;

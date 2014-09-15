@@ -21,7 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  * @package WellCommerce\Bundle\CoreBundle\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Tip extends AbstractField implements ElementInterface
+class Tip extends TextField implements ElementInterface
 {
     const UP        = 'up';
     const DOWN      = 'down';
@@ -40,6 +40,11 @@ class Tip extends AbstractField implements ElementInterface
             'direction'
         ]);
 
+        $resolver->setDefaults([
+            'name'  => '',
+            'label' => ''
+        ]);
+
         $resolver->setOptional([
             'short_tip',
             'retractable',
@@ -51,8 +56,8 @@ class Tip extends AbstractField implements ElementInterface
         };
 
         $resolver->setDefaults([
-            'direction' => self::DOWN,
-            'retractable'   => $retractable
+            'direction'   => self::DOWN,
+            'retractable' => $retractable
         ]);
 
         $resolver->setAllowedValues(array(
@@ -96,5 +101,13 @@ class Tip extends AbstractField implements ElementInterface
      */
     public function populate($value)
     {
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPropertyPath()
+    {
+        $this->attributes['property_path'] = null;
     }
 }

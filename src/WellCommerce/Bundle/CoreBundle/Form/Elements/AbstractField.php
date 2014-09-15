@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\PropertyAccess\PropertyPath;
-use WellCommerce\Bundle\CoreBundle\Form\Rules\LanguageUnique;
 
 /**
  * Class AbstractField

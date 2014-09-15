@@ -32,6 +32,13 @@ class AttributeGroupTranslation
      */
     private $name;
 
+    /**
+     * Sets group name
+     *
+     * @param $name
+     *
+     * @return $this
+     */
     public function setName($name)
     {
         $this->name = $name;
@@ -39,6 +46,11 @@ class AttributeGroupTranslation
         return $this;
     }
 
+    /**
+     * Returns group name
+     *
+     * @return string
+     */
     public function getName()
     {
         return $this->name;

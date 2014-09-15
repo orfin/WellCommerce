@@ -83,7 +83,7 @@ class AttributeRepository extends AbstractEntityRepository implements AttributeR
     public function addAttribute($name)
     {
         $locales   = $this->getLocales();
-        $attribute = new Attribute();
+        $attribute = $this->createNew();
 
         foreach ($locales as $locale) {
             $attribute->translate($locale->getCode())->setName($name);
