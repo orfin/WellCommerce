@@ -46,7 +46,6 @@ class PriceModifier extends Price implements ElementInterface
             $this->formatAttributeJs('suffixes', 'oSuffixes', ElementInterface::TYPE_OBJECT),
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
-            $this->formatDefaultsJs()
         );
 
         return $attributes;

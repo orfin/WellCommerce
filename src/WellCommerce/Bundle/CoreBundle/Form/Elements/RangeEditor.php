@@ -117,7 +117,6 @@ class RangeEditor extends AbstractOptionedField implements ElementInterface
             $this->formatOptionsJs(),
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
-            $this->formatDefaultsJs()
         ];
     }
 }

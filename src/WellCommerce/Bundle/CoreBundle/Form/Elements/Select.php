@@ -41,7 +41,6 @@ class Select extends AbstractOptionedField implements ElementInterface
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
             $this->formatOptionsJs(),
-            $this->formatDefaultsJs()
         ];
     }
 }

@@ -67,7 +67,6 @@ class File extends AbstractField implements ElementInterface
             $this->formatRepeatableJs(),
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
-            $this->formatDefaultsJs()
         ];
     }
 }

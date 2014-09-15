@@ -56,17 +56,6 @@ class RightsTable extends AbstractField implements ElementInterface
             $this->formatAttributeJs('actions', 'asActions', ElementInterface::TYPE_OBJECT),
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
-            $this->formatDefaultsJs()
         ];
-    }
-
-    protected function formatDefaultsJs()
-    {
-        $values = $this->getValue();
-        if (empty($values)) {
-            return '';
-        }
-
-        return 'aabDefaults: ' . json_encode($values);
     }
 }

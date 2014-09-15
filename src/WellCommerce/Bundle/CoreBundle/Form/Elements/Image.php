@@ -87,7 +87,6 @@ class Image extends File implements ElementInterface
             $this->formatRepeatableJs(),
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
-            $this->formatDefaultsJs()
         ];
     }
 

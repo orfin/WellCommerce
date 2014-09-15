@@ -57,19 +57,6 @@ class AbstractField extends AbstractNode
         return $this->_value;
     }
 
-    protected function formatDefaultsJs()
-    {
-        $values = $this->getValue();
-        if (empty($values)) {
-            return '';
-        }
-        if (is_array($values)) {
-            return 'asDefaults: ' . json_encode($values);
-        } else {
-            return 'sDefault: ' . json_encode($values);
-        }
-    }
-
     /**
      * Returns formatted rules string
      *

@@ -73,7 +73,6 @@ class FontStyle extends TextField implements ElementInterface
             $this->formatRulesJs(),
             $this->formatStylesJs(),
             $this->formatDependencyJs(),
-            $this->formatDefaultsJs()
         ];
     }
 

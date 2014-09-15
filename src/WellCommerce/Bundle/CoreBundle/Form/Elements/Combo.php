@@ -18,12 +18,14 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
  * @package WellCommerce\Bundle\CoreBundle\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Combo extends OptionedField implements ElementInterface
+class Combo extends AbstractOptionedField implements ElementInterface
 {
-
-    protected function prepareAttributesJs()
+    /**
+     * {@inheritdoc}
+     */
+    public function prepareAttributesJs()
     {
-        $attributes = Array(
+        return [
             $this->formatAttributeJs('name', 'sName'),
             $this->formatAttributeJs('label', 'sLabel'),
             $this->formatAttributeJs('comment', 'sComment'),
@@ -36,10 +38,7 @@ class Combo extends OptionedField implements ElementInterface
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
             $this->formatOptionsJs(),
-            $this->formatDefaultsJs()
-        );
-
-        return $attributes;
+        ];
     }
 
 }

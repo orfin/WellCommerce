@@ -131,7 +131,6 @@ class ColourSchemePicker extends TextField implements ElementInterface
             $this->formatAttributeJs('load_handler', 'fLoadFiles', ElementInterface::TYPE_FUNCTION),
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
-            $this->formatDefaultsJs()
         ];
     }
 

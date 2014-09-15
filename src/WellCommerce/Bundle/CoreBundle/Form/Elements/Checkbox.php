@@ -50,7 +50,6 @@ class Checkbox extends AbstractField implements ElementInterface
             $this->formatAttributeJs('error', 'sError'),
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
-            $this->formatDefaultsJs()
         ];
     }
 }

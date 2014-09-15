@@ -55,7 +55,6 @@ class TextArea extends TextField implements ElementInterface
             $this->formatRepeatableJs(),
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
-            $this->formatDefaultsJs()
         ];
     }
 }

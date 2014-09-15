@@ -71,7 +71,6 @@ class Price extends AbstractField implements ElementInterface
             $this->formatAttributeJs('vat_field_name', 'sVatField'),
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
-            $this->formatDefaultsJs()
         ];
     }
 

@@ -55,7 +55,6 @@ class LayoutBoxesList extends AbstractField implements ElementInterface
             $this->formatAttributeJs('boxes', 'aoBoxes', ElementInterface::TYPE_OBJECT),
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
-            $this->formatDefaultsJs()
         ];
     }
 

@@ -28,7 +28,6 @@ class Hidden extends AbstractField implements ElementInterface
         return [
             $this->formatAttributeJs('name', 'sName'),
             $this->formatDependencyJs(),
-            $this->formatDefaultsJs()
         ];
     }
 }

@@ -33,7 +33,6 @@ class Border extends TextField implements ElementInterface
             $this->formatAttributeJs('selector', 'sSelector'),
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
-            $this->formatDefaultsJs()
         ];
     }
 

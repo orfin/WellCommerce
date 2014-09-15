@@ -55,7 +55,6 @@ class Date extends TextField implements ElementInterface
             $this->formatRepeatableJs(),
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
-            $this->formatDefaultsJs()
         ];
     }
 
