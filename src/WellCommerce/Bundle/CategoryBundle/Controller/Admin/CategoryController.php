@@ -57,13 +57,6 @@ class CategoryController extends AbstractAdminController
     {
         $resource = $this->repository->findResource($request);
 
-//        $validator             = $this->get("validator");
-//        $metadata              = $validator->getMetadataFor($resource);
-//        $constrainedProperties = $metadata->getConstrainedProperties();
-//        print_r($constrainedProperties);
-//        print_r($metadata->getPropertyMetadata('hierarchy'));
-//        die();
-
         $tree = $this->getFormBuilder($this->get('category.tree'), null, [
             'name'  => 'tree',
             'class' => 'category-select'

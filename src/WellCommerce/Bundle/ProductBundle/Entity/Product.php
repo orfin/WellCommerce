@@ -202,6 +202,7 @@ class Product
         $this->categories    = new ArrayCollection();
         $this->productPhotos = new ArrayCollection();
         $this->statuses      = new ArrayCollection();
+        $this->attributes    = new ArrayCollection();
     }
 
     /**
@@ -428,6 +429,8 @@ class Product
      * Sets product photos
      *
      * @param ArrayCollection $photos
+     *
+     * @return void
      */
     public function setProductPhotos(array $data)
     {
@@ -586,6 +589,19 @@ class Product
     public function setPackageSize($packageSize)
     {
         $this->packageSize = $packageSize;
+    }
+
+    public function getAttributes()
+    {
+        return $this->attributes;
+    }
+
+    public function setAttributes(ArrayCollection $attributes)
+    {
+        $this->attributes = $attributes;
+        foreach ($attributes as $attribute) {
+            $attribute->setProduct($this);
+        }
     }
 }
 

@@ -18,6 +18,7 @@ use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\EntityToIdentifierTransf
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
 use WellCommerce\Bundle\MediaBundle\Form\DataTransformer\MediaCollectionToArrayTransformer;
+use WellCommerce\Bundle\ProductBundle\Form\DataTransformer\ProductAttributeCollectionToArrayTransformer;
 
 /**
  * Class ProductForm
@@ -287,10 +288,9 @@ class ProductForm extends AbstractForm implements FormInterface
             'price_field'        => $priceField,
             'vat_field'          => $vatField,
             'vat_values'         => $vatValues,
-            'suffixes'           => $vatValues,
             'category_field'     => $categoriesField,
             'availability_field' => $availabilityField,
-            'transformer'        => new CollectionToArrayTransformer($this->get('product_attribute.repository'))
+            'transformer'        => new ProductAttributeCollectionToArrayTransformer($this->get('product_attribute.repository'))
         ]));
 
         $shopData = $form->addChild($builder->getElement('fieldset', [

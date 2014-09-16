@@ -31,7 +31,6 @@ twig:
 assetic:
     debug:          false
     use_controller: false
-    bundles:        ['WellCommerceCoreBundle','WellCommerceUserBundle', 'WellCommerceWebBundle']
     filters:
         cssrewrite: ~
 # Doctrine Configuration

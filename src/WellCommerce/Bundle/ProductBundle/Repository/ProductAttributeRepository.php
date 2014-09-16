@@ -22,4 +22,5 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 class ProductAttributeRepository extends AbstractEntityRepository implements ProductAttributeRepositoryInterface
 {
 
+
 }

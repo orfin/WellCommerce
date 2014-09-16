@@ -127,7 +127,7 @@ var GFormProductVariantsEditor = GCore.ExtendClass(GFormField, function () {
         $('#' + gThis.GetId() + '__gross_price').val(fGrossPrice.toFixed(4)).attr("disabled", "disabled");
     };
 
-    gThis._UpdateModificatorValue = function (fPrice) {
+    gThis._UpdateModifierValue = function (fPrice) {
         var sModifier = $('#' + gThis.GetId() + '__modifier_type option:selected').text();
         if (fPrice == undefined) {
             fPrice = parseFloat($('#' + gThis.GetId() + '__net_price').val().replace(/,/, '.'));
@@ -199,7 +199,7 @@ var GFormProductVariantsEditor = GCore.ExtendClass(GFormField, function () {
             $(this).closest('.field').removeClass('focus');
         });
         for (var i = 0; i < gThis.m_oOptions.aoSuffixes.length; i++) {
-            jModifierType.append('<option' + ((gThis.m_oOptions.aoSuffixes[i]['symbol'] == oVariant.modifier_type) ? ' selected="selected"' : '') + ' value="' + gThis.m_oOptions.aoSuffixes[i].id + '">' + gThis.m_oOptions.aoSuffixes[i].symbol + '</option>');
+            jModifierType.append('<option' + ((gThis.m_oOptions.aoSuffixes[i] == oVariant.modifier_type) ? ' selected="selected"' : '') + ' value="' + gThis.m_oOptions.aoSuffixes[i] + '">' + gThis.m_oOptions.aoSuffixes[i] + '</option>');
         }
         jSpecification.append($('<div class="field-select"/>').append('<label for="' + gThis.GetId() + '__modifier_type">' + GForm.Language.product_variants_editor_variant_editor_modifier_type + '</label>').append($('<span class="field"/>').append(jModifierType)));
         jModifierType.GSelect();
@@ -258,7 +258,7 @@ var GFormProductVariantsEditor = GCore.ExtendClass(GFormField, function () {
                 fVatValue = isNaN(fVatValue) ? 0 : fVatValue;
                 var fGrossPrice = fNetPrice * (1 + fVatValue / 100);
                 jGrossPrice.val(fGrossPrice.toFixed(4));
-                gThis._UpdateModificatorValue(fNetPrice);
+                gThis._UpdateModifierValue(fNetPrice);
             }, 5);
         });
         jPrice.keypress(fHandler).blur(fHandler).blur(gThis.Validation);
@@ -280,7 +280,7 @@ var GFormProductVariantsEditor = GCore.ExtendClass(GFormField, function () {
                 fVatValue = isNaN(fVatValue) ? 0 : fVatValue;
                 var fNetPrice = fGrossPrice / (1 + fVatValue / 100);
                 jPrice.val(fNetPrice.toFixed(4));
-                gThis._UpdateModificatorValue(fNetPrice);
+                gThis._UpdateModifierValue(fNetPrice);
             }, 5);
         });
 

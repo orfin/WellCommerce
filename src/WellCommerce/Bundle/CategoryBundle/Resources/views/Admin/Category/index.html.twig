@@ -1,9 +1,14 @@
 {% extends 'WellCommerceCoreBundle:Admin:layout.html.twig' %}
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts '@WellCommerceCategoryBundle/Resources/public/js/*' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
 {% block content %}
     <h2>{% trans %}category.list{% endtrans %}</h2>
 
     <div class="block">
         {{ form(tree) }}
     </div>
-    {% include 'WellCommerceCategoryBundle:Admin:Category/category_javascript.html.twig' %}
 {% endblock %}

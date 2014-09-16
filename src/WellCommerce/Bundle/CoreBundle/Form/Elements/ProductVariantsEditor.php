@@ -45,6 +45,7 @@ class ProductVariantsEditor extends AbstractField implements ElementInterface
         $resolver->setDefaults([
             'allow_generate'              => true,
             'suffixes'                    => ['+', '-', '%', '='],
+            'photos'                      => [],
             'get_groups_route'            => 'admin.attribute_group.ajax.index',
             'get_attributes_route'        => 'admin.attribute.ajax.index',
             'get_attributes_values_route' => 'admin.attribute_value.ajax.index',
@@ -95,7 +96,7 @@ class ProductVariantsEditor extends AbstractField implements ElementInterface
             $this->formatAttributeJs('category_field', 'sCategoryField'),
             $this->formatAttributeJs('price_field', 'sPriceField'),
             $this->formatAttributeJs('allow_generate', 'bAllowGenerate'),
-            $this->formatAttributeJs('vat_field_name', 'sVatField'),
+            $this->formatAttributeJs('vat_field', 'sVatField'),
             $this->formatAttributeJs('vat_values', 'aoVatValues', ElementInterface::TYPE_OBJECT),
             $this->formatAttributeJs('currency', 'sCurrency'),
             $this->formatAttributeJs('photos', 'aoPhotos', ElementInterface::TYPE_OBJECT),
@@ -106,5 +107,20 @@ class ProductVariantsEditor extends AbstractField implements ElementInterface
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
         ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function handleRequest($data)
+    {
+        $accessor = $this->getPropertyAccessor();
+        if (null !== $this->getPropertyPath() && $accessor->isReadable($data, $this->getPropertyPath())) {
+            $value = $this->getValue();
+            if ($this->hasTransformer()) {
+                $value = $this->getTransformer()->reverseTransform($value);
+            }
+            $accessor->setValue($data, $this->getName(), $value);
+        }
     }
 }
