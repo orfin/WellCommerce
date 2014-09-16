@@ -12,6 +12,7 @@
 namespace WellCommerce\Bundle\AttributeBundle\Repository;
 
 use WellCommerce\Bundle\AttributeBundle\Entity\Attribute;
+use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroup;
 use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 
 /**
@@ -90,6 +91,23 @@ class AttributeRepository extends AbstractEntityRepository implements AttributeR
         }
         $attribute->mergeNewTranslations();
         $this->getEntityManager()->persist($attribute);
+
+        return $attribute;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createNewAttribute(AttributeGroup $group, $name)
+    {
+        $locales   = $this->getLocales();
+        $attribute = $this->createNew();
+        $attribute->addGroup($group);
+
+        foreach ($locales as $locale) {
+            $attribute->translate($locale->getCode())->setName($name);
+        }
+        $attribute->mergeNewTranslations();
 
         return $attribute;
     }

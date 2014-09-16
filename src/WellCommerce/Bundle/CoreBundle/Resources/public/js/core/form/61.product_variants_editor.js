@@ -798,10 +798,10 @@ var GFormProductVariantsEditor = GCore.ExtendClass(GFormField, function () {
         gThis.m_jDatagrid.animate({opacity: .5}, 250);
         gThis.m_jVariantEditorWrapper.animate({opacity: .5}, 250);
         (!gThis.m_jSetEditorLabel.find('.' + gThis._GetClass('Waiting')).length) && gThis.m_jSetEditorLabel.append($('<span class="' + gThis._GetClass('Waiting') + '"/>').css('display', 'none').fadeIn(150));
-        gThis.m_oOptions.fAddAttribute({
-            attribute: sAttribute,
+        GF_Ajax_Request(Routing.generate(gThis.m_oOptions.sAddAttributeRoute), {
+            name: sAttribute,
             set: sSet
-        }, GCallback(gThis.OnAttributeAdded));
+        }, gThis.OnAttributeAdded);
     };
 
     gThis.OnAttributeAdded = GEventHandler(function (eEvent) {
@@ -814,13 +814,13 @@ var GFormProductVariantsEditor = GCore.ExtendClass(GFormField, function () {
         gThis.m_jVariantEditorWrapper.animate({opacity: .5}, 250);
         (!gThis.m_jSetEditorLabel.find('.' + gThis._GetClass('Waiting')).length) && gThis.m_jSetEditorLabel.append($('<span class="' + gThis._GetClass('Waiting') + '"/>').css('display', 'none').fadeIn(150));
         GF_Ajax_Request(Routing.generate(gThis.m_oOptions.sAddAttributeValueRoute), {
-            value: sValue,
+            name: sValue,
             attribute: sAttribute,
             set: sSet
         }, gThis.OnValueAdded);
     };
 
-    gThis.OnValueAdded = GEventHandler(function (eEvent) {
+    gThis.OnValueAdded = GEventHandler(function () {
         gThis.LoadAttributes();
     });
 

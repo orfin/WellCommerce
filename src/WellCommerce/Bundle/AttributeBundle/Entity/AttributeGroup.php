@@ -87,5 +87,15 @@ class AttributeGroup
     {
         $this->attributes = $collection;
     }
+
+    /**
+     * Adds new attribute to group
+     *
+     * @param Attribute $attribute
+     */
+    public function addAttribute(Attribute $attribute)
+    {
+        $this->attributes[] = $attribute;
+    }
 }
 

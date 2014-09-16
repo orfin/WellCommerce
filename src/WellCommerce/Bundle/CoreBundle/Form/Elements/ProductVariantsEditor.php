@@ -48,6 +48,7 @@ class ProductVariantsEditor extends AbstractField implements ElementInterface
             'get_groups_route'            => 'admin.attribute_group.ajax.index',
             'get_attributes_route'        => 'admin.attribute.ajax.index',
             'get_attributes_values_route' => 'admin.attribute_value.ajax.index',
+            'add_attribute_route'         => 'admin.attribute.ajax.add',
             'add_attribute_value_route'   => 'admin.attribute_value.ajax.add',
         ]);
 
@@ -89,6 +90,7 @@ class ProductVariantsEditor extends AbstractField implements ElementInterface
             $this->formatAttributeJs('get_groups_route', 'sGetGroupsRoute'),
             $this->formatAttributeJs('get_attributes_route', 'sGetAttributesRoute'),
             $this->formatAttributeJs('get_attributes_values_route', 'sGetAttributesValuesRoute'),
+            $this->formatAttributeJs('add_attribute_route', 'sAddAttributeRoute'),
             $this->formatAttributeJs('add_attribute_value_route', 'sAddAttributeValueRoute'),
             $this->formatAttributeJs('category_field', 'sCategoryField'),
             $this->formatAttributeJs('price_field', 'sPriceField'),

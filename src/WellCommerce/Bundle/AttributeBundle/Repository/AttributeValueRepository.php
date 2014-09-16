@@ -74,7 +74,7 @@ class AttributeValueRepository extends AbstractEntityRepository implements Attri
     /**
      * {@inheritdoc}
      */
-    public function addAttributeValue($name)
+    public function addAttributeValue(Attribute $attribute, $name)
     {
         $locales = $this->getLocales();
         $value   = new AttributeValue();
@@ -83,6 +83,8 @@ class AttributeValueRepository extends AbstractEntityRepository implements Attri
             $value->translate($locale->getCode())->setName($name);
         }
         $value->mergeNewTranslations();
+        $value->setAttribute($attribute);
+
         $this->getEntityManager()->persist($value);
 
         return $value;
@@ -98,8 +100,7 @@ class AttributeValueRepository extends AbstractEntityRepository implements Attri
             $name  = $accessor->getValue($value, '[name]');
             $isNew = substr($id, 0, 3) == 'new';
             if ($isNew) {
-                $item = $this->addAttributeValue($name);
-                $item->setAttribute($attribute);
+                $item = $this->addAttributeValue($attribute, $name);
             } else {
                 $item = $this->find($id);
             }

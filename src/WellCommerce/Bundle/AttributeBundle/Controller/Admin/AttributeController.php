@@ -59,4 +59,29 @@ class AttributeController extends AbstractAdminController
 
         return $this->jsonResponse($response);
     }
+
+    /**
+     * Adds new attribute value using ajax request
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
+    public function ajaxAddAction(Request $request)
+    {
+        // prevent direct access and redirect administrator to index
+        if (!$request->isXmlHttpRequest()) {
+            return false;
+        }
+
+        $group     = $this->get('attribute_group.repository')->find($request->request->get('set'));
+        $attribute = $this->repository->createNewAttribute($group, $request->request->get('name'));
+
+        $this->getEntityManager()->persist($attribute);
+        $this->getEntityManager()->flush();
+
+        return $this->jsonResponse([
+            'id' => $attribute->getId()
+        ]);
+    }
 }

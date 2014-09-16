@@ -39,13 +39,14 @@ interface AttributeValueRepositoryInterface extends RepositoryInterface
     public function findAllByAttributeId($id);
 
     /**
-     * Adds new attribute value
+     * Adds new attribute value and binds it to attribute
      *
-     * @param ParameterBag $parameters
+     * @param Attribute $attribute
+     * @param           $name
      *
      * @return mixed
      */
-    public function addAttributeValue($name);
+    public function addAttributeValue(Attribute $attribute, $name);
 
     /**
      * Makes a collection of attribute values

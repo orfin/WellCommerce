@@ -18,14 +18,14 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 /**
- * Class AttributeController
+ * Class AttributeValueController
  *
  * @package WellCommerce\Bundle\AttributeBundle\Controller\Admin
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * @Template()
  */
-class AttributeController extends AbstractAdminController
+class AttributeValueController extends AbstractAdminController
 {
     /**
      * @var \WellCommerce\Bundle\AttributeBundle\Repository\AttributeValueRepositoryInterface
@@ -33,43 +33,26 @@ class AttributeController extends AbstractAdminController
     protected $repository;
 
     /**
-     * {@inheritdoc}
+     * Adds new attribute value using ajax request
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function indexAction(Request $request)
+    public function ajaxAddAction(Request $request)
     {
+        // prevent direct access and redirect administrator to index
         if (!$request->isXmlHttpRequest()) {
-            throw new MethodNotAllowedException('Cannot call AttributeController::indexAction directly.');
+            return false;
         }
-    }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function addAction(Request $request)
-    {
-        if (!$request->isXmlHttpRequest()) {
-            throw new MethodNotAllowedException('Cannot call AttributeController::addAction directly.');
-        }
-    }
+        $attribute = $this->get('attribute.repository')->find($request->request->get('attribute'));
+        $value     = $this->repository->addAttributeValue($attribute, $request->request->get('name'));
+        $this->getEntityManager()->flush();
 
-    /**
-     * {@inheritdoc}
-     */
-    public function editAction(Request $request)
-    {
-        if (!$request->isXmlHttpRequest()) {
-            throw new MethodNotAllowedException('Cannot call AttributeController::editAction directly.');
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function deleteAction(Request $request)
-    {
-        if (!$request->isXmlHttpRequest()) {
-            throw new MethodNotAllowedException('Cannot call AttributeController::editAction directly.');
-        }
+        return $this->jsonResponse([
+            'id' => $value->getId()
+        ]);
     }
 
 

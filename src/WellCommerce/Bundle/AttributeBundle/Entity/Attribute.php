@@ -96,6 +96,17 @@ class Attribute
     }
 
     /**
+     * Adds new attribute group to attribute
+     *
+     * @param AttributeGroup $group
+     */
+    public function addGroup(AttributeGroup $group)
+    {
+        $group->addAttribute($this);
+        $this->groups[] = $group;
+    }
+
+    /**
      * Returns all attribute values
      *
      * @return ArrayCollection
