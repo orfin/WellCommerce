@@ -93,7 +93,7 @@ class AttributeGroupController extends AbstractAdminController
      *
      * @return \Symfony\Component\HttpFoundation\JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function ajaxGetGroupsAction(Request $request)
+    public function ajaxIndexAction(Request $request)
     {
         // prevent direct access and redirect administrator to index
         if (!$request->isXmlHttpRequest()) {

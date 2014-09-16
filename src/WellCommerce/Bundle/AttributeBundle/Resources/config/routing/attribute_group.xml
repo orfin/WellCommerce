@@ -23,8 +23,8 @@
         <option key="expose">true</option>
     </route>
 
-    <route id="admin.attribute_group.ajax_get_groups" path="/group/ajax/get">
-        <default key="_controller">attribute_group.controller.admin:ajaxGetGroupsAction</default>
+    <route id="admin.attribute_group.ajax.index" path="/group/ajax/index">
+        <default key="_controller">attribute_group.controller.admin:ajaxIndexAction</default>
         <option key="expose">true</option>
     </route>
 </routes>

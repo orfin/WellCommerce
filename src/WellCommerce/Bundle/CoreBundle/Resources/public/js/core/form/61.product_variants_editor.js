@@ -674,11 +674,9 @@ var GFormProductVariantsEditor = GCore.ExtendClass(GFormField, function () {
             asCategories.push(jCategories.eq(i).val());
         }
 
-        var oRequest = {
+        GF_Ajax_Request(Routing.generate(gThis.m_oOptions.sGetGroupsRoute), {
             'categories': asCategories
-        };
-
-        GF_Ajax_Request(Routing.generate(gThis.m_oOptions.sGetGroupsRoute), oRequest, gThis.OnSetsLoaded);
+        }, gThis.OnSetsLoaded);
     };
 
     gThis.OnSetsLoaded = GEventHandler(function (eEvent) {
@@ -1232,7 +1230,7 @@ var GFormProductVariantsEditor = GCore.ExtendClass(GFormField, function () {
                 GF_Datagrid.ACTION_DELETE
             ],
             group_actions: [
-                GF_Datagrid.ACTION_DELETE
+                GF_Datagrid.ACTION_DELETE_GROUP
             ]
         };
         gThis.m_gDatagrid = new GF_Datagrid(gThis.m_jDatagrid, oOptions);

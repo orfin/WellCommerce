@@ -2012,7 +2012,8 @@ GF_Datagrid_Data_Provider = function(oOptions, aoData) {
 			rows: aoDataChunked,
 			additional_rows: this._CalculateAdditionalRows(aoDataFiltered)
 		};
-		eval(this.m_sResponseHandler + '(oResponse);');
+
+        GF_Datagrid.ProcessIncomingData(oResponse);
 	};
 	
 	this._CheckIfFilterHasChanged = function(aoFilter) {

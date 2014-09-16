@@ -4,23 +4,23 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <route id="admin.attribute.index" path="/index" methods="POST">
-        <default key="_controller">attribute.controller.admin:indexAction</default>
+    <route id="admin.attribute.ajax.index" path="/ajax/index" methods="POST">
+        <default key="_controller">attribute.controller.admin:ajaxIndexAction</default>
         <option key="expose">true</option>
     </route>
 
-    <route id="admin.attribute.add" path="/add" methods="POST">
-        <default key="_controller">attribute.controller.admin:addAction</default>
+    <route id="admin.attribute.ajax.add" path="/ajax/add" methods="POST">
+        <default key="_controller">attribute.controller.admin:ajaxAddAction</default>
         <option key="expose">true</option>
     </route>
 
-    <route id="admin.attribute.edit" path="/edit/{id}" methods="POST">
-        <default key="_controller">attribute.controller.admin:editAction</default>
+    <route id="admin.attribute.ajax.edit" path="/ajax/edit/{id}" methods="POST">
+        <default key="_controller">attribute.controller.admin:ajaxEditAction</default>
         <option key="expose">true</option>
     </route>
 
-    <route id="admin.attribute.delete" path="/delete/{id}" methods="POST">
-        <default key="_controller">attribute.controller.admin:deleteAction</default>
+    <route id="admin.attribute.ajax.delete" path="/ajax/delete/{id}" methods="POST">
+        <default key="_controller">attribute.controller.admin:ajaxDeleteAction</default>
         <option key="expose">true</option>
     </route>
 </routes>

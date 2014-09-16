@@ -43,11 +43,12 @@ class ProductVariantsEditor extends AbstractField implements ElementInterface
         ]);
 
         $resolver->setDefaults([
-            'allow_generate'            => true,
-            'suffixes'                  => ['+', '-', '%', '='],
-            'get_groups_route'          => 'admin.attribute_group.ajax_get_groups',
-            'get_attributes_route'      => 'admin.attribute.ajax_get_attributes',
-            'add_attribute_value_route' => 'admin.attribute_value.ajax_add_value',
+            'allow_generate'              => true,
+            'suffixes'                    => ['+', '-', '%', '='],
+            'get_groups_route'            => 'admin.attribute_group.ajax.index',
+            'get_attributes_route'        => 'admin.attribute.ajax.index',
+            'get_attributes_values_route' => 'admin.attribute_value.ajax.index',
+            'add_attribute_value_route'   => 'admin.attribute_value.ajax.add',
         ]);
 
         $resolver->setAllowedTypes([
@@ -87,8 +88,8 @@ class ProductVariantsEditor extends AbstractField implements ElementInterface
             $this->formatAttributeJs('error', 'sError'),
             $this->formatAttributeJs('get_groups_route', 'sGetGroupsRoute'),
             $this->formatAttributeJs('get_attributes_route', 'sGetAttributesRoute'),
+            $this->formatAttributeJs('get_attributes_values_route', 'sGetAttributesValuesRoute'),
             $this->formatAttributeJs('add_attribute_value_route', 'sAddAttributeValueRoute'),
-            $this->formatAttributeJs('rename_attribute_value_route', 'sRenameAttributeValueRoute'),
             $this->formatAttributeJs('category_field', 'sCategoryField'),
             $this->formatAttributeJs('price_field', 'sPriceField'),
             $this->formatAttributeJs('allow_generate', 'bAllowGenerate'),
@@ -96,7 +97,7 @@ class ProductVariantsEditor extends AbstractField implements ElementInterface
             $this->formatAttributeJs('vat_values', 'aoVatValues', ElementInterface::TYPE_OBJECT),
             $this->formatAttributeJs('currency', 'sCurrency'),
             $this->formatAttributeJs('photos', 'aoPhotos', ElementInterface::TYPE_OBJECT),
-            $this->formatAttributeJs('availablity', 'aoAvailablity', ElementInterface::TYPE_OBJECT),
+            $this->formatAttributeJs('availability', 'aoAvailability', ElementInterface::TYPE_OBJECT),
             $this->formatAttributeJs('suffixes', 'aoSuffixes', ElementInterface::TYPE_OBJECT),
             $this->formatAttributeJs('set', 'sSet'),
             $this->formatRepeatableJs(),
