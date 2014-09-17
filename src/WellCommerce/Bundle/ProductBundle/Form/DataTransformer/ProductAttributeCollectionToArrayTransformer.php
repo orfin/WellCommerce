@@ -49,6 +49,7 @@ class ProductAttributeCollectionToArrayTransformer extends CollectionToArrayTran
                 'stock'        => $item->getStock(),
                 'symbol'       => $item->getSymbol(),
                 'weight'       => $item->getWeight(),
+                'deletable'    => true,
                 'availability' => $this->transformAvailability($item->getAvailability()),
                 'attributes'   => $this->transformValues($item->getAttributeValues()),
             ];

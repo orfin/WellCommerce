@@ -598,10 +598,17 @@ class Product
 
     public function setAttributes(ArrayCollection $attributes)
     {
-        $this->attributes = $attributes;
+        foreach ($this->attributes as $attribute) {
+            if (!$attributes->contains($attribute)) {
+                $this->attributes->removeElement($attribute);
+            }
+        }
+
         foreach ($attributes as $attribute) {
             $attribute->setProduct($this);
         }
+
+        $this->attributes = $attributes;
     }
 }
 
