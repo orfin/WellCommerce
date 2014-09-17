@@ -47,6 +47,11 @@ class AttributeValue
     protected $attribute;
 
     /**
+     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute", mappedBy="attributeValues")
+     */
+    private $productAttributeValues;
+
+    /**
      * Returns attribute value id
      *
      * @return int

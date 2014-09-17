@@ -99,8 +99,9 @@ var GFormTree = GCore.ExtendClass(GFormField, function() {
 		gThis._PrepareOptions();
 		window.setTimeout(gThis.ResetExpansion, 500);
 	};
-	
-	gThis.OnRetractAll = function(eEvent) {
+
+
+	gThis.OnRetractAll = function() {
 		gThis.m_jTree.find('li:has(li)').removeClass(gThis._GetClass('Expanded'));
 		return false;
 	};
@@ -225,12 +226,12 @@ var GFormTree = GCore.ExtendClass(GFormField, function() {
 							GCore.StartWaiting();
 							gThis.m_oOptions.fOnDelete({
 								id: sId
-							}, GCallback(function(eEvent) {
+							}, function() {
 								GCore.StopWaiting();
 								if (gThis.m_oOptions.fOnAfterDelete instanceof Function) {
 									gThis.m_oOptions.fOnAfterDelete(gThis.m_oOptions.sOnAfterDeleteId);
 								}
-							}));
+							});
 						}, sCaption: GForm.Language.tree_ok},
 						{mLink: GAlert.DestroyThis, sCaption: GForm.Language.tree_cancel}
 					]

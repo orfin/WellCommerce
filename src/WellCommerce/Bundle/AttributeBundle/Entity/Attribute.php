@@ -52,11 +52,6 @@ class Attribute
     private $values;
 
     /**
-     * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute", mappedBy="attribute", cascade={"persist", "remove"}, orphanRemoval=true)
-     */
-    protected $products;
-
-    /**
      * Constructor
      */
     public function __construct()

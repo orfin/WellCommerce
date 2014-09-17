@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\ProductBundle\Form\DataTransformer;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\PersistentCollection;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
 
 /**
@@ -24,16 +25,73 @@ use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransfo
 class ProductAttributeCollectionToArrayTransformer extends CollectionToArrayTransformer
 {
     /**
-     * @var \WellCommerce\Bundle\AttributeBundle\Repository\AttributeRepositoryInterface
+     * @var \WellCommerce\Bundle\ProductBundle\Repository\ProductAttributeRepositoryInterface
      */
     protected $repository;
 
     /**
-     * Transforms passed identifiers to collection of entities
+     * {@inheritdoc}
+     */
+    public function transform($collection)
+    {
+        //{"idvariant":"41096","suffix":"2","modifier":"0.0000","stock":"491","symbol":"blikiiq_tshovsdms_blck_xs","weight":"1.000","availablity":null,"photo":"37462","composite":"6479","attributes":{"27":"134","28":"142","29":"136"},"deletable":1,"status":"1"}
+
+        $items = [];
+
+        /**
+         * @var $item \WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute
+         */
+        foreach ($collection as $item) {
+            $items[] = [
+                'id'           => $item->getId(),
+                'suffix'       => $item->getModifierType(),
+                'modifier'     => $item->getModifierValue(),
+                'stock'        => $item->getStock(),
+                'symbol'       => $item->getSymbol(),
+                'weight'       => $item->getWeight(),
+                'availability' => $this->transformAvailability($item->getAvailability()),
+                'attributes'   => $this->transformValues($item->getAttributeValues()),
+            ];
+        }
+
+        return $items;
+    }
+
+    public function transformAvailability($entity)
+    {
+        if (null == $entity) {
+            return 0;
+        }
+        $meta       = $this->repository->getMetadata();
+        $identifier = $meta->getSingleIdentifierFieldName();
+        $accessor   = $this->repository->getPropertyAccessor();
+
+        return $accessor->getValue($entity, $identifier);
+    }
+
+    /**
+     * Transforms values collection to identifiers
      *
-     * @param $ids
+     * @param PersistentCollection $collection
      *
-     * @return ArrayCollection
+     * @return array
+     */
+    public function transformValues(PersistentCollection $collection)
+    {
+        if (null == $collection) {
+            return [];
+        }
+
+        $values = [];
+        foreach ($collection as $item) {
+            $values[$item->getAttribute()->getId()] = $item->getId();
+        }
+
+        return $values;
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function reverseTransform($data)
     {
@@ -41,9 +99,11 @@ class ProductAttributeCollectionToArrayTransformer extends CollectionToArrayTran
         if (null == $data || empty($data)) {
             return $collection;
         }
-        foreach ($data['editor'] as $attribute) {
-            $item = $this->repository->findOrCreate($attribute);
-            $collection->add($item);
+        foreach ($data as $id => $values) {
+            if (is_array($values)) {
+                $item = $this->repository->findOrCreate($id, $values);
+                $collection->add($item);
+            }
         }
 
         return $collection;

@@ -509,7 +509,7 @@ var GFormProductVariantsEditor = GCore.ExtendClass(GFormField, function () {
         var modifierField = $('#' + gThis.GetId() + '__modifier_type option:selected');
 
         var oRow = {
-            idvariant: gThis.m_sEditedVariant,
+            id: gThis.m_sEditedVariant,
             modifier_type: modifierField.text(),
             modifier_type_id: modifierField.attr('value'),
             modifier_value: $('#' + gThis.GetId() + '__modifier_value').val(),
@@ -619,7 +619,7 @@ var GFormProductVariantsEditor = GCore.ExtendClass(GFormField, function () {
         $.each(eEvent.variants, function (k, key) {
             var sId = 'new-' + gThis.m_sRepetitionCounter++;
             var oRow = {
-                idvariant: sId,
+                id: sId,
                 modifier_type: '%',
                 modifier_type_id: 1,
                 modifier_value: 100,
@@ -871,7 +871,7 @@ var GFormProductVariantsEditor = GCore.ExtendClass(GFormField, function () {
                     }
                 }
                 var oVariant = {
-                    idvariant: mValue[i].idvariant,
+                    id: mValue[i].id,
                     modifier_type_id: mValue[i].suffix,
                     modifier_type: sSuffixSymbol,
                     modifier_value: mValue[i].modifier,
@@ -931,7 +931,7 @@ var GFormProductVariantsEditor = GCore.ExtendClass(GFormField, function () {
         }
 
         var column_id = new GF_Datagrid_Column({
-            id: 'idvariant',
+            id: 'id',
             caption: GForm.Language.product_variants_editor_id,
             appearance: {
                 width: 40,
@@ -1066,7 +1066,7 @@ var GFormProductVariantsEditor = GCore.ExtendClass(GFormField, function () {
             }
         }
         return {
-            idvariant: sId,
+            id: sId,
             modifier_type: '%',
             modifier_type_id: sSuffixId,
             modifier_value: '100.00',
@@ -1084,7 +1084,7 @@ var GFormProductVariantsEditor = GCore.ExtendClass(GFormField, function () {
             gThis.m_gDataProvider.AddRow(gThis._GetDefaultVariant(sId));
         }
         else {
-            var sId = oVariant.idvariant;
+            var sId = oVariant.id;
             gThis.m_gDataProvider.AddRow(oVariant);
         }
         gThis.m_gDatagrid.LoadData();
@@ -1098,20 +1098,20 @@ var GFormProductVariantsEditor = GCore.ExtendClass(GFormField, function () {
         }
         for (var i = 0; i < gThis.m_aoVariants.length; i++) {
             var oVariant = gThis.m_aoVariants[i];
-            gThis.m_jField.append('<input value="' + oVariant['modifier_type_id'] + '" name="' + gThis.GetName() + '[' + oVariant.idvariant + '][suffix]" type="hidden"/>');
-            gThis.m_jField.append('<input value="' + oVariant['modifier_value'] + '" name="' + gThis.GetName() + '[' + oVariant.idvariant + '][modifier]" type="hidden"/>');
-            gThis.m_jField.append('<input value="' + oVariant['stock'] + '" name="' + gThis.GetName() + '[' + oVariant.idvariant + '][stock]" type="hidden"/>');
-            gThis.m_jField.append('<input value="' + oVariant['symbol'] + '" name="' + gThis.GetName() + '[' + oVariant.idvariant + '][symbol]" type="hidden"/>');
-            gThis.m_jField.append('<input value="' + oVariant['status'] + '" name="' + gThis.GetName() + '[' + oVariant.idvariant + '][status]" type="hidden"/>');
-            gThis.m_jField.append('<input value="' + oVariant['deletable'] + '" name="' + gThis.GetName() + '[' + oVariant.idvariant + '][deletable]" type="hidden"/>');
-            gThis.m_jField.append('<input value="' + oVariant['weight'] + '" name="' + gThis.GetName() + '[' + oVariant.idvariant + '][weight]" type="hidden"/>');
-            gThis.m_jField.append('<input value="' + oVariant['availability'] + '" name="' + gThis.GetName() + '[' + oVariant.idvariant + '][availability]" type="hidden"/>');
-            gThis.m_jField.append('<input value="' + oVariant['photo'] + '" name="' + gThis.GetName() + '[' + oVariant.idvariant + '][photo]" type="hidden"/>');
+            gThis.m_jField.append('<input value="' + oVariant['modifier_type_id'] + '" name="' + gThis.GetName() + '[' + oVariant.id + '][suffix]" type="hidden"/>');
+            gThis.m_jField.append('<input value="' + oVariant['modifier_value'] + '" name="' + gThis.GetName() + '[' + oVariant.id + '][modifier]" type="hidden"/>');
+            gThis.m_jField.append('<input value="' + oVariant['stock'] + '" name="' + gThis.GetName() + '[' + oVariant.id + '][stock]" type="hidden"/>');
+            gThis.m_jField.append('<input value="' + oVariant['symbol'] + '" name="' + gThis.GetName() + '[' + oVariant.id + '][symbol]" type="hidden"/>');
+            gThis.m_jField.append('<input value="' + oVariant['status'] + '" name="' + gThis.GetName() + '[' + oVariant.id + '][status]" type="hidden"/>');
+            gThis.m_jField.append('<input value="' + oVariant['deletable'] + '" name="' + gThis.GetName() + '[' + oVariant.id + '][deletable]" type="hidden"/>');
+            gThis.m_jField.append('<input value="' + oVariant['weight'] + '" name="' + gThis.GetName() + '[' + oVariant.id + '][weight]" type="hidden"/>');
+            gThis.m_jField.append('<input value="' + oVariant['availability'] + '" name="' + gThis.GetName() + '[' + oVariant.id + '][availability]" type="hidden"/>');
+            gThis.m_jField.append('<input value="' + oVariant['photo'] + '" name="' + gThis.GetName() + '[' + oVariant.id + '][photo]" type="hidden"/>');
             for (var j in oVariant) {
                 if (j.substr(0, 12) != 'attributeid_') {
                     continue;
                 }
-                gThis.m_jField.append('<input value="' + oVariant[j] + '" name="' + gThis.GetName() + '[' + oVariant.idvariant + '][attributes][' + j.substr(12) + ']" type="hidden"/>');
+                gThis.m_jField.append('<input value="' + oVariant[j] + '" name="' + gThis.GetName() + '[' + oVariant.id + '][attributes][' + j.substr(12) + ']" type="hidden"/>');
             }
         }
     };
@@ -1194,7 +1194,7 @@ var GFormProductVariantsEditor = GCore.ExtendClass(GFormField, function () {
         gThis.m_jDatagrid.empty().attr('class', '');
 
         gThis.m_gDataProvider = new GF_Datagrid_Data_Provider({
-            key: 'idvariant',
+            key: 'id',
             preProcess: gThis.PreProcessVariants,
             event_handlers: {
                 change: GEventHandler(function (rows) {
@@ -1211,7 +1211,7 @@ var GFormProductVariantsEditor = GCore.ExtendClass(GFormField, function () {
             id: gThis.GetId() + '_variants',
             mechanics: {
                 rows_per_page: 150,
-                key: 'idvariant',
+                key: 'id',
                 only_one_selected: true,
                 persistent: false
             },

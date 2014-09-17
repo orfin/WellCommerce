@@ -22,5 +22,13 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
  */
 interface ProductAttributeRepositoryInterface extends RepositoryInterface
 {
-
+    /**
+     * Finds product attribute entity by its id or creates a new one
+     *
+     * @param $id
+     * @param $data
+     *
+     * @return mixed
+     */
+    public function findOrCreate($id, $data);
 } 

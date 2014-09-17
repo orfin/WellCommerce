@@ -42,16 +42,19 @@ class ProductAttribute
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\AttributeBundle\Entity\Attribute", inversedBy="products")
-     * @ORM\JoinColumn(name="attribute_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
-     */
-    protected $attribute;
-
-    /**
      * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\Product", inversedBy="attributes")
      * @ORM\JoinColumn(name="product_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
     protected $product;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\AttributeBundle\Entity\AttributeValue", inversedBy="productAttributeValues")
+     * @ORM\JoinTable(name="product_attribute_value",
+     *      joinColumns={@ORM\JoinColumn(name="product_attribute_id", referencedColumnName="id", onDelete="CASCADE")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="attribute_value_id", referencedColumnName="id", onDelete="CASCADE")}
+     * )
+     */
+    private $attributeValues;
 
     /**
      * @var string
@@ -100,5 +103,173 @@ class ProductAttribute
      * @ORM\JoinColumn(name="availability_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $availability;
+
+    /**
+     * @param mixed $attribute
+     */
+    public function setAttribute($attribute)
+    {
+        $this->attribute = $attribute;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAttribute()
+    {
+        return $this->attribute;
+    }
+
+    /**
+     * @param mixed $attributeValues
+     */
+    public function setAttributeValues($attributeValues)
+    {
+        $this->attributeValues = $attributeValues;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAttributeValues()
+    {
+        return $this->attributeValues;
+    }
+
+    /**
+     * @param mixed $availability
+     */
+    public function setAvailability($availability)
+    {
+        $this->availability = $availability;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAvailability()
+    {
+        return $this->availability;
+    }
+
+    /**
+     * @param string $weight
+     */
+    public function setWeight($weight)
+    {
+        $this->weight = $weight;
+    }
+
+    /**
+     * @return string
+     */
+    public function getWeight()
+    {
+        return $this->weight;
+    }
+
+    /**
+     * @param string $symbol
+     */
+    public function setSymbol($symbol)
+    {
+        $this->symbol = $symbol;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSymbol()
+    {
+        return $this->symbol;
+    }
+
+    /**
+     * @param string $stock
+     */
+    public function setStock($stock)
+    {
+        $this->stock = $stock;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStock()
+    {
+        return $this->stock;
+    }
+
+    /**
+     * @param string $sellPrice
+     */
+    public function setSellPrice($sellPrice)
+    {
+        $this->sellPrice = $sellPrice;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSellPrice()
+    {
+        return $this->sellPrice;
+    }
+
+    /**
+     * @param mixed $product
+     */
+    public function setProduct($product)
+    {
+        $this->product = $product;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProduct()
+    {
+        return $this->product;
+    }
+
+    /**
+     * @param string $modifierValue
+     */
+    public function setModifierValue($modifierValue)
+    {
+        $this->modifierValue = $modifierValue;
+    }
+
+    /**
+     * @return string
+     */
+    public function getModifierValue()
+    {
+        return $this->modifierValue;
+    }
+
+    /**
+     * @param string $modifierType
+     */
+    public function setModifierType($modifierType)
+    {
+        $this->modifierType = $modifierType;
+    }
+
+    /**
+     * @return string
+     */
+    public function getModifierType()
+    {
+        return $this->modifierType;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 }
 
