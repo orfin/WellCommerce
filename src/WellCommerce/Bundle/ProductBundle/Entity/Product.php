@@ -118,7 +118,7 @@ class Product
     private $productPhotos;
 
     /**
-     * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute", mappedBy="product", cascade={"persist"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute", mappedBy="product", cascade={"all"}, orphanRemoval=true)
      */
     private $attributes;
 
@@ -341,7 +341,7 @@ class Product
      *
      * @param Unit $unit
      */
-    public function setUnit(Unit $unit)
+    public function setUnit(Unit $unit = null)
     {
         $this->unit = $unit;
     }
@@ -361,7 +361,7 @@ class Product
      *
      * @param Availability $availability
      */
-    public function setAvailability(Availability $availability)
+    public function setAvailability(Availability $availability = null)
     {
         $this->availability = $availability;
     }
@@ -736,9 +736,7 @@ class Product
         }
 
         foreach ($attributes as $attribute) {
-            if ($attribute instanceof ProductAttribute) {
-                $attribute->setProduct($this);
-            }
+            $attribute->setProduct($this);
         }
 
         $this->attributes = $attributes;
