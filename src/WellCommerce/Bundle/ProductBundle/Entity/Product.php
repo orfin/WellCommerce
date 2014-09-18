@@ -15,16 +15,21 @@ namespace WellCommerce\Bundle\ProductBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroup;
+use WellCommerce\Bundle\AvailabilityBundle\Entity\Availability;
 use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\EnableableTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\HierarchyTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\MetaDataTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\PhotoTrait;
+use WellCommerce\Bundle\CurrencyBundle\Entity\Currency;
 use WellCommerce\Bundle\DelivererBundle\Entity\Deliverer;
 use WellCommerce\Bundle\ShopBundle\Entity\Shop;
+use WellCommerce\Bundle\TaxBundle\Entity\Tax;
+use WellCommerce\Bundle\UnitBundle\Entity\Unit;
 
 /**
- * Class Locale
+ * Class Product
  *
  * @package WellCommerce\Bundle\ProductBundle\Entity
  * @author  Adam Piotrowski <adam@wellcommerce.org>
@@ -145,6 +150,12 @@ class Product
     private $buyCurrency;
 
     /**
+     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroup")
+     * @ORM\JoinColumn(name="attribute_group_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    private $attributeGroup;
+
+    /**
      * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\CurrencyBundle\Entity\Currency")
      * @ORM\JoinColumn(name="sell_currency_id", referencedColumnName="id", onDelete="SET NULL")
      */
@@ -206,7 +217,7 @@ class Product
     }
 
     /**
-     * Get id.
+     * Get id
      *
      * @return integer
      */
@@ -256,7 +267,7 @@ class Product
     }
 
     /**
-     * Returns product producer
+     * Returns product tax
      *
      * @return mixed
      */
@@ -268,9 +279,9 @@ class Product
     /**
      * Sets product tax
      *
-     * @param $tax
+     * @param Tax $tax
      */
-    public function setTax($tax)
+    public function setTax(Tax $tax)
     {
         $this->tax = $tax;
     }
@@ -288,7 +299,7 @@ class Product
     /**
      * Sets product stock
      *
-     * @param $stock
+     * @param string $stock
      */
     public function setStock($stock)
     {
@@ -298,7 +309,7 @@ class Product
     /**
      * Returns product stock
      *
-     * @return mixed
+     * @return boolean
      */
     public function getTrackStock()
     {
@@ -308,7 +319,7 @@ class Product
     /**
      * Sets product stock tracking status
      *
-     * @param $trackStock
+     * @param boolean $trackStock
      */
     public function setTrackStock($trackStock)
     {
@@ -318,7 +329,7 @@ class Product
     /**
      * Returns product producer
      *
-     * @return mixed
+     * @return Unit
      */
     public function getUnit()
     {
@@ -328,9 +339,9 @@ class Product
     /**
      * Sets product unit
      *
-     * @param $unit
+     * @param Unit $unit
      */
-    public function setUnit($unit)
+    public function setUnit(Unit $unit)
     {
         $this->unit = $unit;
     }
@@ -338,7 +349,7 @@ class Product
     /**
      * Returns product availability
      *
-     * @return mixed
+     * @return Availability
      */
     public function getAvailability()
     {
@@ -346,11 +357,11 @@ class Product
     }
 
     /**
-     * Sets product availability status
+     * Sets product availability
      *
-     * @param $availability
+     * @param Availability $availability
      */
-    public function setAvailability($availability)
+    public function setAvailability(Availability $availability)
     {
         $this->availability = $availability;
     }
@@ -368,7 +379,7 @@ class Product
     /**
      * Get shops for product
      *
-     * @return mixed
+     * @return ArrayCollection
      */
     public function getShops()
     {
@@ -398,7 +409,7 @@ class Product
     /**
      * Returns product statuses
      *
-     * @return mixed
+     * @return ArrayCollection
      */
     public function getStatuses()
     {
@@ -408,7 +419,7 @@ class Product
     /**
      * Get product photos
      *
-     * @return mixed
+     * @return ArrayCollection
      */
     public function getProductPhotos()
     {
@@ -428,9 +439,9 @@ class Product
     /**
      * Sets product photos
      *
-     * @param ArrayCollection $photos
+     * @param array $data Data passed from transformer
      *
-     * @return void
+     * @return bool
      */
     public function setProductPhotos(array $data)
     {
@@ -484,7 +495,7 @@ class Product
     /**
      * Adds new category to product
      *
-     * @param Deliverer $deliverer
+     * @param Category $category
      */
     public function addCategory(Category $category)
     {
@@ -501,101 +512,221 @@ class Product
         $this->categories = $collection;
     }
 
+    /**
+     * Returns buy currency
+     *
+     * @return Currency
+     */
     public function getBuyCurrency()
     {
         return $this->buyCurrency;
     }
 
-    public function setBuyCurrency($buyCurrency)
+    /**
+     * Sets buy currency for product
+     *
+     * @param Currency $buyCurrency
+     */
+    public function setBuyCurrency(Currency $buyCurrency)
     {
         $this->buyCurrency = $buyCurrency;
     }
 
+    /**
+     * Returns sell currency
+     *
+     * @return Currency
+     */
     public function getSellCurrency()
     {
         return $this->sellCurrency;
     }
 
+    /**
+     * Sets sell currency for product
+     *
+     * @param Currency $sellCurrency
+     */
     public function setSellCurrency($sellCurrency)
     {
         $this->sellCurrency = $sellCurrency;
     }
 
+    /**
+     * Returns product sell price
+     *
+     * @return float
+     */
     public function getSellPrice()
     {
         return $this->sellPrice;
     }
 
+    /**
+     * Sets product sell price
+     *
+     * @param float $sellPrice
+     */
     public function setSellPrice($sellPrice)
     {
         $this->sellPrice = $sellPrice;
     }
 
+    /**
+     * Returns product buy price
+     *
+     * @return float
+     */
     public function getBuyPrice()
     {
         return $this->buyPrice;
     }
 
+    /**
+     * Sets product buy price
+     *
+     * @param float $buyPrice
+     */
     public function setBuyPrice($buyPrice)
     {
         $this->buyPrice = $buyPrice;
     }
 
+    /**
+     * Returns product weight
+     *
+     * @return float
+     */
     public function getWeight()
     {
         return $this->weight;
     }
 
+    /**
+     * Sets product weight
+     *
+     * @param float $weight
+     */
     public function setWeight($weight)
     {
         $this->weight = $weight;
     }
 
+    /**
+     * Returns product width
+     *
+     * @return float
+     */
     public function getWidth()
     {
         return $this->width;
     }
 
+    /**
+     * Sets product width
+     *
+     * @param float $width
+     */
     public function setWidth($width)
     {
         $this->width = $width;
     }
 
+    /**
+     * Returns product height
+     *
+     * @return float
+     */
     public function getHeight()
     {
         return $this->height;
     }
 
+    /**
+     * Sets product height
+     *
+     * @param float $height
+     */
     public function setHeight($height)
     {
         $this->height = $height;
     }
 
+    /**
+     * Returns product depth
+     *
+     * @return float
+     */
     public function getDepth()
     {
         return $this->depth;
     }
 
+    /**
+     * Sets product depth
+     *
+     * @param float $depth
+     */
     public function setDepth($depth)
     {
         $this->depth = $depth;
     }
 
+    /**
+     * Returns product package size
+     *
+     * @return float
+     */
     public function getPackageSize()
     {
         return $this->packageSize;
     }
 
+    /**
+     * Sets product package size
+     *
+     * @param float $packageSize
+     */
     public function setPackageSize($packageSize)
     {
         $this->packageSize = $packageSize;
     }
 
+    /**
+     * Returns attribute group to which product is bound
+     *
+     * @return AttributeGroup
+     */
+    public function getAttributeGroup()
+    {
+        return $this->attributeGroup;
+    }
+
+    /**
+     * Sets attribute group for product
+     *
+     * @param AttributeGroup $attributeGroup
+     */
+    public function setAttributeGroup(AttributeGroup $attributeGroup)
+    {
+        $this->attributeGroup = $attributeGroup;
+    }
+
+    /**
+     * Returns product attributes
+     *
+     * @return ArrayCollection
+     */
     public function getAttributes()
     {
         return $this->attributes;
     }
 
+    /**
+     * Sets product attributes and removes unneeded ones
+     *
+     * @param ArrayCollection $attributes
+     */
     public function setAttributes(ArrayCollection $attributes)
     {
         foreach ($this->attributes as $attribute) {
@@ -605,7 +736,9 @@ class Product
         }
 
         foreach ($attributes as $attribute) {
-            $attribute->setProduct($this);
+            if ($attribute instanceof ProductAttribute) {
+                $attribute->setProduct($this);
+            }
         }
 
         $this->attributes = $attributes;

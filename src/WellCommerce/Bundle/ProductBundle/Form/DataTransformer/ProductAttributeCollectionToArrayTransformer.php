@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\ProductBundle\Form\DataTransformer;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\PersistentCollection;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
+use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\EntityToIdentifierTransformer;
 
 /**
  * Class ProductAttributeCollectionToArrayTransformer
@@ -34,13 +35,12 @@ class ProductAttributeCollectionToArrayTransformer extends CollectionToArrayTran
      */
     public function transform($collection)
     {
-        //{"idvariant":"41096","suffix":"2","modifier":"0.0000","stock":"491","symbol":"blikiiq_tshovsdms_blck_xs","weight":"1.000","availablity":null,"photo":"37462","composite":"6479","attributes":{"27":"134","28":"142","29":"136"},"deletable":1,"status":"1"}
-
         $items = [];
 
         /**
          * @var $item \WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute
          */
+
         foreach ($collection as $item) {
             $items[] = [
                 'id'           => $item->getId(),
@@ -58,7 +58,14 @@ class ProductAttributeCollectionToArrayTransformer extends CollectionToArrayTran
         return $items;
     }
 
-    public function transformAvailability($entity)
+    /**
+     * Transforms availability identifier into entity
+     *
+     * @param $entity
+     *
+     * @return int
+     */
+    private function transformAvailability($entity)
     {
         if (null == $entity) {
             return 0;
