@@ -20,7 +20,9 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
  */
 class Columns extends AbstractContainer implements ElementInterface
 {
-
+    /**
+     * {@inheritdoc}
+     */
     public function prepareAttributesJs()
     {
         return [
@@ -30,5 +32,29 @@ class Columns extends AbstractContainer implements ElementInterface
             $this->formatDependencyJs(),
             'aoFields: [' . $this->renderChildren() . ']'
         ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPropertyPath()
+    {
+        $this->attributes['property_path'] = null;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getValue()
+    {
+        return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function handleRequest($data)
+    {
+        return false;
     }
 }
