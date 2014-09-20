@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\CoreBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
-use Symfony\Component\DependencyInjection\Extension\ConfigurationExtensionInterface;
+use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
  * Class AbstractConfiguration
