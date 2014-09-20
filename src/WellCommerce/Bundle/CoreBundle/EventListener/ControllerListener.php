@@ -27,6 +27,11 @@ use Symfony\Component\HttpKernel\KernelInterface;
 class ControllerListener implements EventSubscriberInterface
 {
     /**
+     * @var \Symfony\Component\HttpKernel\KernelInterface
+     */
+    private $kernel;
+
+    /**
      * Constructor.
      *
      * @param KernelInterface $kernel A KernelInterface instance
