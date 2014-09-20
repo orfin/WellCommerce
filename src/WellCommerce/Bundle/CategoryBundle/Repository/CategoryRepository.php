@@ -71,9 +71,11 @@ class CategoryRepository extends AbstractEntityRepository implements CategoryRep
         foreach ($items as $item) {
             $parent = $this->find($item['parent']);
             $child  = $this->find($item['id']);
-            $child->setParent($parent);
-            $child->setHierarchy($item['weight']);
-            $this->_em->persist($child);
+            if (null !== $child) {
+                $child->setParent($parent);
+                $child->setHierarchy($item['weight']);
+                $this->_em->persist($child);
+            }
         }
 
         $this->_em->flush();
@@ -82,7 +84,7 @@ class CategoryRepository extends AbstractEntityRepository implements CategoryRep
     public function quickAddCategory(ParameterBag $parameters)
     {
         $name     = $parameters->get('name');
-        $parent   = ($parameters->get('parent') > 0) ? $this->find($parameters->get('parent')) : null;
+        $parent   = $this->find($parameters->get('parent'));
         $locales  = $this->getLocales();
         $category = new Category();
         $category->setHierarchy(0);
