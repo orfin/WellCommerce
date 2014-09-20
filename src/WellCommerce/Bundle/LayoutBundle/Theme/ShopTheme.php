@@ -23,7 +23,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
  */
 class ShopTheme
 {
-    protected $activeTheme = 'development';
+    protected $activeTheme = 'demo';
     protected $kernel;
     protected $path;
 
@@ -40,17 +40,15 @@ class ShopTheme
     public function getPathPatterns()
     {
         return [
-            'app_resource' => array(
-                '%app_path%/themes/%current_theme%/%template%',
-                '%app_path%/views/%template%',
-            ),
-            'bundle_resource' => array(
+            'bundle_resource'     => [
                 '%bundle_path%/Resources/themes/%current_theme%/templates/%template%',
-            ),
-            'bundle_resource_dir' => array(
+                '%web_path%/themes/%current_theme%/templates/%template%',
+            ],
+            'bundle_resource_dir' => [
                 '%dir%/themes/%current_theme%/templates/%bundle_name%/%template%',
+                '%web_path%/themes/%current_theme%/templates/%bundle_name%/%template%',
                 '%dir%/%bundle_name%/%override_path%',
-            ),
+            ],
         ];
 
     }

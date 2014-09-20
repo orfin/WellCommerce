@@ -29,7 +29,7 @@ use Symfony\Component\DependencyInjection\Exception\LogicException;
  */
 class TemplateResourcesPass implements CompilerPassInterface
 {
-    private $themes = ['development'];
+    private $themes = ['demo'];
 
     /**
      * @param ContainerBuilder $container
@@ -50,10 +50,6 @@ class TemplateResourcesPass implements CompilerPassInterface
                 $this->setBundleDirectoryResources($container, $engine, dirname($rc->getFileName()), $bundleName);
             }
         }
-
-        foreach ($engines as $engine) {
-            $this->setAppDirectoryResources($container, $engine);
-        }
     }
 
     protected function setBundleDirectoryResources(ContainerBuilder $container, $engine, $bundleDirName, $bundleName)
@@ -73,27 +69,8 @@ class TemplateResourcesPass implements CompilerPassInterface
                     $bundleDirName . '/Resources/themes/' . $theme,
                 ]
             );
-            echo $bundleDirName.PHP_EOL;
         }
 
         $container->getDefinition('assetic.' . $engine . '_directory_resource.' . $bundleName)->replaceArgument(0, $resources);
     }
-
-    protected function setAppDirectoryResources(ContainerBuilder $container, $engine)
-    {
-        if (!$container->hasDefinition('assetic.' . $engine . '_directory_resource.kernel')) {
-            throw new LogicException('The LayoutBundle must be registered after the AsseticBundle in the application Kernel.');
-        }
-
-        $themes = $this->themes;
-        foreach ($themes as $key => $theme) {
-            $themes[$key] = $container->getParameter('kernel.root_dir') . '/Resources/themes/' . $theme;
-        }
-        $themes[] = $container->getParameter('kernel.root_dir') . '/Resources/views';
-
-        $container->setDefinition(
-            'assetic.' . $engine . '_directory_resource.kernel',
-            new DirectoryResourceDefinition('', $engine, $themes)
-        );
-    }
-} 
+}

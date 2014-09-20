@@ -33,6 +33,7 @@ assetic:
     use_controller: false
     filters:
         cssrewrite: ~
+        less: ~
 # Doctrine Configuration
 doctrine:
     dbal:

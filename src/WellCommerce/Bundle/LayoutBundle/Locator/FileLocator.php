@@ -36,6 +36,7 @@ class FileLocator extends BaseFileLocator
     protected $activeTheme;
     protected $lastTheme = '';
     protected $shopTheme;
+    protected $webPath;
 
     /**
      * Constructor
@@ -48,6 +49,7 @@ class FileLocator extends BaseFileLocator
     public function __construct(KernelInterface $kernel, $path = null, ShopTheme $shopTheme)
     {
         $this->kernel       = $kernel;
+        $this->webPath      = $kernel->getRootDir() . '/../web';
         $this->path         = $path;
         $this->shopTheme    = $shopTheme;
         $this->activeTheme  = $this->shopTheme->getCurrentTheme();
@@ -64,13 +66,6 @@ class FileLocator extends BaseFileLocator
     public function setCurrentTheme($theme)
     {
         $this->lastTheme = $theme;
-
-        $paths = $this->basePaths;
-
-        $paths[] = $this->path . '/themes/' . $theme;
-        $paths[] = $this->path;
-
-        $this->paths = $paths;
     }
 
     public function locate($name, $dir = null, $first = true)
@@ -83,12 +78,6 @@ class FileLocator extends BaseFileLocator
 
         if ('@' === $name[0]) {
             return $this->locateBundleResource($name, $this->path, $first);
-        }
-
-        if (0 === strpos($name, 'views/')) {
-            if ($res = $this->locateAppResource($name, $this->path, $first)) {
-                return $res;
-            }
         }
 
         return parent::locate($name, $dir, $first);
@@ -112,7 +101,7 @@ class FileLocator extends BaseFileLocator
         }
 
         $bundleName = substr($name, 1);
-        $path = '';
+        $path       = '';
         if (false !== strpos($bundleName, '/')) {
             list($bundleName, $path) = explode('/', $bundleName, 2);
         }
@@ -122,11 +111,12 @@ class FileLocator extends BaseFileLocator
         }
 
         $resourceBundle = null;
-        $bundles = $this->kernel->getBundle($bundleName, false);
-        $files = array();
+        $bundles        = $this->kernel->getBundle($bundleName, false);
+        $files          = array();
 
         $parameters = array(
             '%app_path%'      => $this->path,
+            '%web_path%'      => $this->webPath,
             '%dir%'           => $dir,
             '%override_path%' => substr($path, strlen('Resources/')),
             '%current_theme%' => $this->lastTheme,
@@ -134,10 +124,10 @@ class FileLocator extends BaseFileLocator
         );
 
         foreach ($bundles as $bundle) {
-            $parameters = array_merge($parameters, array(
+            $parameters = array_merge($parameters, [
                 '%bundle_path%' => $bundle->getPath(),
                 '%bundle_name%' => $bundle->getName(),
-            ));
+            ]);
 
             $checkPaths = $this->getPathsForBundleResource($parameters);
 
@@ -158,12 +148,12 @@ class FileLocator extends BaseFileLocator
                 }
             }
 
-            $file = $bundle->getPath().'/'.$path;
+            $file = $bundle->getPath() . '/' . $path;
             if (file_exists($file)) {
                 if ($first) {
                     return $file;
                 }
-                $files[] = $file;
+                $files[]        = $file;
                 $resourceBundle = $bundle->getName();
             }
         }
@@ -175,44 +165,10 @@ class FileLocator extends BaseFileLocator
         throw new \InvalidArgumentException(sprintf('Unable to find file "%s".', $name));
     }
 
-    /**
-     * Locate Resource Theme aware. Only working for app/Resources
-     *
-     * @param string $name
-     * @param string $dir
-     * @param bool   $first
-     *
-     * @return string|array
-     */
-    protected function locateAppResource($name, $dir = null, $first = true)
-    {
-        if (false !== strpos($name, '..')) {
-            throw new \RuntimeException(sprintf('File name "%s" contains invalid characters (..).', $name));
-        }
-
-        $files = array();
-        $parameters = array(
-            '%app_path%'      => $this->path,
-            '%current_theme%' => $this->lastTheme,
-            '%template%'      => substr($name, strlen('views/')),
-        );
-
-        foreach ($this->getPathsForAppResource($parameters) as $checkPaths) {
-            if (file_exists($checkPaths)) {
-                if ($first) {
-                    return $checkPaths;
-                }
-                $files[] = $checkPaths;
-            }
-        }
-
-        return $files;
-    }
-
     protected function getPathsForBundleResource($parameters)
     {
-        $pathPatterns = array();
-        $paths = array();
+        $pathPatterns = [];
+        $paths        = [];
 
         if (!empty($parameters['%dir%'])) {
             $pathPatterns = array_merge($pathPatterns, $this->pathPatterns['bundle_resource_dir']);
@@ -221,17 +177,6 @@ class FileLocator extends BaseFileLocator
         $pathPatterns = array_merge($pathPatterns, $this->pathPatterns['bundle_resource']);
 
         foreach ($pathPatterns as $pattern) {
-            $paths[] = strtr($pattern, $parameters);
-        }
-
-        return $paths;
-    }
-
-    protected function getPathsForAppResource($parameters)
-    {
-        $paths = array();
-
-        foreach ($this->pathPatterns['app_resource'] as $pattern) {
             $paths[] = strtr($pattern, $parameters);
         }
 
