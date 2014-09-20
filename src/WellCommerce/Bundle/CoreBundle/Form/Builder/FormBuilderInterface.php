@@ -80,11 +80,13 @@ interface FormBuilderInterface
     public function getOptions();
 
     /**
-     * Sets new form data
+     * Sets new default data
      *
-     * @return mixed
+     * @param $data
+     *
+     * @return void
      */
-    public function setData(array $data);
+    public function setData($data);
 
     /**
      * Returns an element object by its type

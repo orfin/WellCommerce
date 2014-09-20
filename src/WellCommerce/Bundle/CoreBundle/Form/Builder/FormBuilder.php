@@ -113,7 +113,7 @@ class FormBuilder extends AbstractContainer implements FormBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function setData(array $data)
+    public function setData($data)
     {
         $this->data = $data;
     }
