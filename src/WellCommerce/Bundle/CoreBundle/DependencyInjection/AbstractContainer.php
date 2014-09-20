@@ -173,13 +173,13 @@ class AbstractContainer extends ContainerAware
     }
 
     /**
-     * Shortcut to get Cache Manager service
+     * Shortcut to get Cache service
      *
-     * @return object
+     * @return \Doctrine\Common\Cache\Cache
      */
     final protected function getCache()
     {
-        return $this->container->get('cache_manager');
+        return $this->container->get('cache');
     }
 
     /**

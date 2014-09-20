@@ -110,24 +110,12 @@ class Form extends AbstractContainer
         return $this->getValues(self::FORMAT_GROUPED);
     }
 
-    /**
-     * Returns value for given form element
-     *
-     * @param $element
-     *
-     * @return mixed
-     */
-    public function getElementValue($element)
-    {
-        return $this->getValue($element);
-    }
-
     public function getValues($flags = 0)
     {
         $values = [];
         if ($flags & self::FORMAT_FLAT) {
             foreach ($this->fields as $field) {
-                if ($field instanceof Field) {
+                if ($field instanceof AbstractField) {
                     $values = array_merge_recursive($values, [
                         $field->getName() => $field->getValue()
                     ]);

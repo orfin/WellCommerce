@@ -89,3 +89,8 @@ liip_imagine:
         largest:
             filters:
                 thumbnail: { size: [1200, 1200], mode: outbound }
+
+services:
+    cache:
+        class: Doctrine\Common\Cache\FilesystemCache
+        arguments:  [%kernel.root_dir%/cache/%kernel.environment%/cache]
