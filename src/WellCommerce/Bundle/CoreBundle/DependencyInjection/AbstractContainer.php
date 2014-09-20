@@ -145,7 +145,7 @@ class AbstractContainer extends ContainerAware
     /**
      * Shortcut to get PropertyAccessor
      *
-     * @return \Symfony\Component\PropertyAccess\PropertyAccessor
+     * @return \Symfony\Component\PropertyAccess\PropertyAccessorInterface
      */
     final protected function getPropertyAccessor()
     {
