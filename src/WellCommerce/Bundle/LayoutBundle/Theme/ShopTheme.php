@@ -40,6 +40,9 @@ class ShopTheme
     public function getPathPatterns()
     {
         return [
+            'app_resource'        => [
+                '%app_path%/views/%template%',
+            ],
             'bundle_resource'     => [
                 '%bundle_path%/Resources/themes/%current_theme%/templates/%template%',
                 '%web_path%/themes/%current_theme%/templates/%template%',

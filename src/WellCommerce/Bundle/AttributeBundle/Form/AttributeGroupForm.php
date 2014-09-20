@@ -32,7 +32,7 @@ class AttributeGroupForm extends AbstractForm implements FormInterface
     {
         $form = $builder->init($options);
 
-        $groupData = $requiredData = $form->addChild($builder->getElement('fieldset', [
+        $groupData = $form->addChild($builder->getElement('fieldset', [
             'name'  => 'group_data',
             'class' => 'group-data',
             'label' => $this->trans('Attribute group')
