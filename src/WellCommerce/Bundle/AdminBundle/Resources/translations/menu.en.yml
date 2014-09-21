@@ -1,0 +1,22 @@
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
+
+admin: 
+  menu: 
+    catalog: Catalog
+    cms: CMS
+    configuration: Configuration
+    crm: CRM
+    integration: Integration
+    layout: Layout settings
+    localization: Localization
+    promotions: Promotions
+    reports: Reports
+    sales: Sales
+    store_management: "Store management"
+    user_management: "User management"
