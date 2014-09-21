@@ -11,12 +11,11 @@
  */
 namespace WellCommerce\Bundle\ClientBundle\EventListener;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Routing\RouterInterface;
-use WellCommerce\Bundle\AdminMenuBundle\Builder\AdminMenuItem;
-use WellCommerce\Bundle\AdminMenuBundle\Event\AdminMenuInitEvent;
-use WellCommerce\Bundle\CoreBundle\Event\AdminMenuEvent;
+use WellCommerce\Bundle\AdminBundle\Event\AdminMenuEvent;
+use WellCommerce\Bundle\AdminBundle\MenuBuilder\XmlLoader;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 
 /**
@@ -34,15 +33,8 @@ class ClientSubscriber extends AbstractEventSubscriber
      */
     public function onAdminMenuInitEvent(AdminMenuEvent $event)
     {
-        $builder = $event->getBuilder();
-
-        $builder->add(new AdminMenuItem([
-            'id'         => 'client',
-            'name'       => $this->translator->trans('menu.crm.clients'),
-            'link'       => $this->router->generate('admin.client.index'),
-            'path'       => '[menu][crm][client]',
-            'sort_order' => 10
-        ]));
+        $loader = new XmlLoader($event->getBuilder(), new FileLocator(__DIR__ . '/../Resources/config/menu'));
+        $loader->load('client.xml');
     }
 
     /**
@@ -51,7 +43,7 @@ class ClientSubscriber extends AbstractEventSubscriber
     public static function getSubscribedEvents()
     {
         return [
-            AdminMenuInitEvent::ADMIN_MENU_INIT_EVENT => 'onAdminMenuInitEvent'
+            AdminMenuEvent::INIT_EVENT => 'onAdminMenuInitEvent'
         ];
     }
 }

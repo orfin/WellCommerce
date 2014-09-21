@@ -38,6 +38,7 @@ class AppKernel extends Kernel
             new Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
             // WellCommerce bundles
+            new WellCommerce\Bundle\AdminBundle\WellCommerceAdminBundle(),
             new WellCommerce\Bundle\WebBundle\WellCommerceWebBundle(),
             new WellCommerce\Bundle\NewsBundle\WellCommerceNewsBundle(),
             new WellCommerce\Bundle\MediaBundle\WellCommerceMediaBundle(),
@@ -48,7 +49,6 @@ class AppKernel extends Kernel
             new WellCommerce\Bundle\CategoryBundle\WellCommerceCategoryBundle(),
             new WellCommerce\Bundle\CoreBundle\WellCommerceCoreBundle(),
             new WellCommerce\Bundle\CountryBundle\WellCommerceCountryBundle(),
-            new WellCommerce\Bundle\AdminMenuBundle\WellCommerceAdminMenuBundle(),
             new WellCommerce\Bundle\TaxBundle\WellCommerceTaxBundle(),
             new WellCommerce\Bundle\UnitBundle\WellCommerceUnitBundle(),
             new WellCommerce\Bundle\CompanyBundle\WellCommerceCompanyBundle(),

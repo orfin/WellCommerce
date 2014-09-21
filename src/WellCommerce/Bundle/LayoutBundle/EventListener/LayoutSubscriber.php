@@ -12,17 +12,14 @@
 namespace WellCommerce\Bundle\LayoutBundle\EventListener;
 
 use Doctrine\Common\Annotations\Reader;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Translation\TranslatorInterface;
-use WellCommerce\Bundle\AdminMenuBundle\Builder\AdminMenuItem;
-use WellCommerce\Bundle\AdminMenuBundle\Event\AdminMenuInitEvent;
-use WellCommerce\Bundle\CoreBundle\Event\AdminMenuEvent;
+use WellCommerce\Bundle\AdminBundle\Event\AdminMenuEvent;
+use WellCommerce\Bundle\AdminBundle\MenuBuilder\XmlLoader;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 use WellCommerce\Bundle\LayoutBundle\Repository\LayoutThemeRepositoryInterface;
 use WellCommerce\Bundle\LayoutBundle\Theme\ShopTheme;
@@ -74,31 +71,8 @@ class LayoutSubscriber extends AbstractEventSubscriber
      */
     public function onAdminMenuInitEvent(AdminMenuEvent $event)
     {
-        $builder = $event->getBuilder();
-
-        $builder->add(new AdminMenuItem([
-            'id'         => 'layout_theme',
-            'name'       => $this->translator->trans('menu.layout.layout_theme'),
-            'link'       => $this->router->generate('admin.layout_theme.index'),
-            'path'       => '[menu][layout][layout_theme]',
-            'sort_order' => 10
-        ]));
-
-        $builder->add(new AdminMenuItem([
-            'id'         => 'layout_page',
-            'name'       => $this->translator->trans('menu.layout.layout_page'),
-            'link'       => $this->router->generate('admin.layout_page.index'),
-            'path'       => '[menu][layout][layout_page]',
-            'sort_order' => 20
-        ]));
-
-        $builder->add(new AdminMenuItem([
-            'id'         => 'layout_box',
-            'name'       => $this->translator->trans('menu.layout.layout_box'),
-            'link'       => $this->router->generate('admin.layout_box.index'),
-            'path'       => '[menu][layout][layout_box]',
-            'sort_order' => 30
-        ]));
+        $loader = new XmlLoader($event->getBuilder(), new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader->load('admin_menu.xml');
     }
 
     public function onKernelController(FilterControllerEvent $event)
@@ -126,8 +100,8 @@ class LayoutSubscriber extends AbstractEventSubscriber
     public static function getSubscribedEvents()
     {
         return [
-            AdminMenuInitEvent::ADMIN_MENU_INIT_EVENT => 'onAdminMenuInitEvent',
-            KernelEvents::CONTROLLER                  => ['onKernelController', -256],
+            AdminMenuEvent::INIT_EVENT => 'onAdminMenuInitEvent',
+            KernelEvents::CONTROLLER   => ['onKernelController', -256],
         ];
     }
 }

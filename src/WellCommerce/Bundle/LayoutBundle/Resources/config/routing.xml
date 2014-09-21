@@ -4,64 +4,7 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <!-- layout themes section -->
-
-    <route id="admin.layout_theme.index" path="/theme/index">
-        <default key="_controller">layout_theme.controller.admin:indexAction</default>
-    </route>
-
-    <route id="admin.layout_theme.grid" path="/theme/grid">
-        <default key="_controller">layout_theme.controller.admin:gridAction</default>
-        <option key="expose">true</option>
-    </route>
-
-    <route id="admin.layout_theme.add" path="/theme/add">
-        <default key="_controller">layout_theme.controller.admin:addAction</default>
-    </route>
-
-    <route id="admin.layout_theme.edit" path="/theme/edit/{id}">
-        <default key="_controller">layout_theme.controller.admin:editAction</default>
-        <option key="expose">true</option>
-    </route>
-
-    <route id="admin.layout_theme.delete" path="/theme/delete/{id}">
-        <default key="_controller">layout_theme.controller.admin:deleteAction</default>
-        <option key="expose">true</option>
-    </route>
-
-    <!-- layout pages section -->
-
-    <route id="admin.layout_page.index" path="/page/index">
-        <default key="_controller">layout_page.controller.admin:indexAction</default>
-    </route>
-
-    <route id="admin.layout_page.edit" path="/page/edit/{id}">
-        <default key="_controller">layout_page.controller.admin:editAction</default>
-        <option key="expose">true</option>
-    </route>
-
-    <!-- layout boxes section -->
-
-    <route id="admin.layout_box.index" path="/box/index">
-        <default key="_controller">layout_box.controller.admin:indexAction</default>
-    </route>
-
-    <route id="admin.layout_box.grid" path="/box/grid">
-        <default key="_controller">layout_box.controller.admin:gridAction</default>
-        <option key="expose">true</option>
-    </route>
-
-    <route id="admin.layout_box.add" path="/box/add">
-        <default key="_controller">layout_box.controller.admin:addAction</default>
-    </route>
-
-    <route id="admin.layout_box.edit" path="/box/edit/{id}">
-        <default key="_controller">layout_box.controller.admin:editAction</default>
-        <option key="expose">true</option>
-    </route>
-
-    <route id="admin.layout_box.delete" path="/box/delete/{id}">
-        <default key="_controller">layout_box.controller.admin:deleteAction</default>
-        <option key="expose">true</option>
-    </route>
+    <import resource="routing/layout_box.xml"/>
+    <import resource="routing/layout_page.xml"/>
+    <import resource="routing/layout_theme.xml"/>
 </routes>

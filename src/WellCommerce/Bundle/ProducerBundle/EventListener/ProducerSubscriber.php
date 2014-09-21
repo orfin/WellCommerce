@@ -11,13 +11,9 @@
  */
 namespace WellCommerce\Bundle\ProducerBundle\EventListener;
 
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
-use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\Routing\RouterInterface;
-use WellCommerce\Bundle\AdminMenuBundle\Builder\AdminMenuItem;
-use WellCommerce\Bundle\AdminMenuBundle\Event\AdminMenuInitEvent;
-use WellCommerce\Bundle\CoreBundle\Event\AdminMenuEvent;
+use Symfony\Component\Config\FileLocator;
+use WellCommerce\Bundle\AdminBundle\Event\AdminMenuEvent;
+use WellCommerce\Bundle\AdminBundle\MenuBuilder\XmlLoader;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 
 /**
@@ -35,15 +31,8 @@ class ProducerSubscriber extends AbstractEventSubscriber
      */
     public function onAdminMenuInitEvent(AdminMenuEvent $event)
     {
-        $builder = $event->getBuilder();
-
-        $builder->add(new AdminMenuItem([
-            'id'         => 'producer',
-            'name'       => $this->translator->trans('menu.catalog.producer'),
-            'link'       => $this->router->generate('admin.producer.index'),
-            'path'       => '[menu][catalog][producer]',
-            'sort_order' => 30
-        ]));
+        $loader = new XmlLoader($event->getBuilder(), new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader->load('admin_menu.xml');
     }
 
     /**
@@ -52,7 +41,7 @@ class ProducerSubscriber extends AbstractEventSubscriber
     public static function getSubscribedEvents()
     {
         return [
-            AdminMenuInitEvent::ADMIN_MENU_INIT_EVENT => 'onAdminMenuInitEvent'
+            AdminMenuEvent::INIT_EVENT => 'onAdminMenuInitEvent'
         ];
     }
 }

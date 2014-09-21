@@ -4,7 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <imports>
-        <import resource="client.xml"/>
-        <import resource="client_group.xml"/>
+        <import resource="services/client.xml"/>
+        <import resource="services/client_group.xml"/>
     </imports>
 </container>

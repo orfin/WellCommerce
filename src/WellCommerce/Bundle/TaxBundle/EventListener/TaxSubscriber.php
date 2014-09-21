@@ -11,13 +11,9 @@
  */
 namespace WellCommerce\Bundle\TaxBundle\EventListener;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
-use Symfony\Component\HttpKernel\KernelEvents;
-use WellCommerce\Bundle\AdminMenuBundle\Builder\AdminMenuItem;
-use WellCommerce\Bundle\AdminMenuBundle\Event\AdminMenuInitEvent;
-use WellCommerce\Bundle\CoreBundle\Event\AdminMenuEvent;
+use Symfony\Component\Config\FileLocator;
+use WellCommerce\Bundle\AdminBundle\Event\AdminMenuEvent;
+use WellCommerce\Bundle\AdminBundle\MenuBuilder\XmlLoader;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 
 /**
@@ -35,15 +31,8 @@ class TaxSubscriber extends AbstractEventSubscriber
      */
     public function onAdminMenuInitEvent(AdminMenuEvent $event)
     {
-        $builder = $event->getBuilder();
-
-        $builder->add(new AdminMenuItem([
-            'id'         => 'tax',
-            'name'       => $this->translator->trans('menu.configuration.tax', [], 'admin'),
-            'link'       => $this->router->generate('admin.tax.index'),
-            'path'       => '[menu][configuration][tax]',
-            'sort_order' => 20
-        ]));
+        $loader = new XmlLoader($event->getBuilder(), new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader->load('admin_menu.xml');
     }
 
     /**
@@ -52,7 +41,7 @@ class TaxSubscriber extends AbstractEventSubscriber
     public static function getSubscribedEvents()
     {
         return [
-            AdminMenuInitEvent::ADMIN_MENU_INIT_EVENT => 'onAdminMenuInitEvent'
+            AdminMenuEvent::INIT_EVENT => 'onAdminMenuInitEvent'
         ];
     }
 }

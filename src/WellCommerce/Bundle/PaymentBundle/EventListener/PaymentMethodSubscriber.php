@@ -11,16 +11,15 @@
  */
 namespace WellCommerce\Bundle\PaymentBundle\EventListener;
 
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\KernelEvents;
-use WellCommerce\Bundle\AdminMenuBundle\Builder\AdminMenuItem;
-use WellCommerce\Bundle\AdminMenuBundle\Event\AdminMenuInitEvent;
-use WellCommerce\Bundle\CoreBundle\Event\AdminMenuEvent;
+use WellCommerce\Bundle\AdminBundle\MenuBuilder\AdminMenuItem;
+use WellCommerce\Bundle\AdminBundle\Event\AdminMenuInitEvent;
+use WellCommerce\Bundle\AdminBundle\Event\AdminMenuEvent;
+use WellCommerce\Bundle\AdminBundle\MenuBuilder\XmlLoader;
 use WellCommerce\Bundle\CoreBundle\Event\FormEvent;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 use WellCommerce\Bundle\CoreBundle\Form\Conditions\Equals;
-use WellCommerce\Bundle\CoreBundle\Form\Dependencies\Dependency;
-use WellCommerce\Bundle\CoreBundle\Form\Dependencies\DependencyInterface;
-use WellCommerce\Bundle\CoreBundle\Form\Option;
 
 /**
  * Class PaymentMethodSubscriber
@@ -37,15 +36,8 @@ class PaymentMethodSubscriber extends AbstractEventSubscriber
      */
     public function onAdminMenuInitEvent(AdminMenuEvent $event)
     {
-        $builder = $event->getBuilder();
-
-        $builder->add(new AdminMenuItem([
-            'id'         => 'payment_method',
-            'name'       => $this->translator->trans('menu.configuration.payment_method'),
-            'link'       => $this->router->generate('admin.payment_method.index'),
-            'path'       => '[menu][configuration][payment_method]',
-            'sort_order' => 20
-        ]));
+        $loader = new XmlLoader($event->getBuilder(), new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader->load('admin_menu.xml');
     }
 
     /**
@@ -81,8 +73,8 @@ class PaymentMethodSubscriber extends AbstractEventSubscriber
     public static function getSubscribedEvents()
     {
         return [
-            AdminMenuInitEvent::ADMIN_MENU_INIT_EVENT => 'onAdminMenuInitEvent',
-            'payment_method.form.init'                => 'onPaymentMethodFormInit',
+            AdminMenuEvent::INIT_EVENT => 'onAdminMenuInitEvent',
+            'payment_method.form.init' => 'onPaymentMethodFormInit',
         ];
     }
 }

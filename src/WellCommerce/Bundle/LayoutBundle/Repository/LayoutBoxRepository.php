@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\LayoutBundle\Repository;
 use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 
 /**
- * Class LayoutPageRepository
+ * Class LayoutBoxRepository
  *
  * @package WellCommerce\Bundle\LayoutBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>

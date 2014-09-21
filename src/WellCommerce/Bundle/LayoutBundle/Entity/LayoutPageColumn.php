@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\LayoutBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\EnableableTrait;
@@ -71,39 +72,67 @@ class LayoutPageColumn
         return $this->id;
     }
 
+    /**
+     * @return string
+     */
     public function getWidth()
     {
         return $this->width;
     }
 
+    /**
+     * @param $width
+     */
     public function setWidth($width)
     {
         $this->width = $width;
     }
 
+    /**
+     * @return mixed
+     */
     public function getPage()
     {
         return $this->page;
     }
 
+    /**
+     * @param LayoutPage $page
+     */
     public function setPage(LayoutPage $page)
     {
         $this->page = $page;
     }
 
+    /**
+     * @return mixed
+     */
     public function getTheme()
     {
         return $this->theme;
     }
 
+    /**
+     * @param LayoutTheme $theme
+     */
     public function setTheme(LayoutTheme $theme)
     {
         $this->theme = $theme;
     }
 
+    /**
+     * Returns layout boxes
+     *
+     * @return ArrayCollection
+     */
     public function getBoxes()
     {
         return $this->boxes;
+    }
+
+    public function setBoxes(ArrayCollection $boxes)
+    {
+        $this->boxes = $boxes;
     }
 
 }

@@ -21,6 +21,7 @@
         <default key="_controller">availability.controller.admin:editAction</default>
         <option key="expose">true</option>
     </route>
+
     <route id="admin.availability.delete" path="/delete/{id}">
         <default key="_controller">availability.controller.admin:deleteAction</default>
         <option key="expose">true</option>

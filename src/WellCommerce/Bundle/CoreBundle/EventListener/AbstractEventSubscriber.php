@@ -12,11 +12,15 @@
 
 namespace WellCommerce\Bundle\CoreBundle\EventListener;
 
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Translation\TranslatorInterface;
+use WellCommerce\Bundle\AdminBundle\Event\AdminMenuEvent;
+use WellCommerce\Bundle\AdminBundle\MenuBuilder\AdminMenuBuilderInterface;
+use WellCommerce\Bundle\AdminBundle\MenuBuilder\XmlLoader;
 
 /**
  * Class AbstractEventSubscriber
@@ -65,5 +69,4 @@ class AbstractEventSubscriber extends ContainerAware implements ContainerAwareIn
     {
         return [];
     }
-
-} 
+}

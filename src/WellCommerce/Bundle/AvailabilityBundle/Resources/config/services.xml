@@ -10,7 +10,6 @@
         <parameter key="availability.datagrid.configurator.class">WellCommerce\Bundle\AvailabilityBundle\DataGrid\AvailabilityDataGridConfigurator</parameter>
         <parameter key="availability.form.class">WellCommerce\Bundle\AvailabilityBundle\Form\AvailabilityForm</parameter>
         <parameter key="availability.subscriber.class">WellCommerce\Bundle\AvailabilityBundle\EventListener\AvailabilitySubscriber</parameter>
-        <parameter key="availability.manager.class">WellCommerce\Bundle\AvailabilityBundle\Manager\AvailabilityManager</parameter>
     </parameters>
 
     <services>

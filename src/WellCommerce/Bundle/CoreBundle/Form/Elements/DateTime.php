@@ -12,8 +12,6 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-
 /**
  * Class DateTime
  *

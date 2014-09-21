@@ -11,19 +11,15 @@
  */
 namespace WellCommerce\Bundle\NewsBundle\EventListener;
 
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
-use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\Routing\RouterInterface;
-use WellCommerce\Bundle\AdminMenuBundle\Builder\AdminMenuItem;
-use WellCommerce\Bundle\AdminMenuBundle\Event\AdminMenuInitEvent;
-use WellCommerce\Bundle\CoreBundle\Event\AdminMenuEvent;
+use Symfony\Component\Config\FileLocator;
+use WellCommerce\Bundle\AdminBundle\Event\AdminMenuEvent;
+use WellCommerce\Bundle\AdminBundle\MenuBuilder\XmlLoader;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 
 /**
- * Class MediaSubscriber
+ * Class NewsSubscriber
  *
- * @package WellCommerce\Bundle\MediaBundle\EventListener
+ * @package WellCommerce\Bundle\NewsBundle\EventListener
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class NewsSubscriber extends AbstractEventSubscriber
@@ -33,26 +29,19 @@ class NewsSubscriber extends AbstractEventSubscriber
      *
      * @param AdminMenuEvent $event
      */
-    /*public function onAdminMenuInitEvent(AdminMenuEvent $event)
+    public function onAdminMenuInitEvent(AdminMenuEvent $event)
     {
-        $builder = $event->getBuilder();
-
-        $builder->add(new AdminMenuItem([
-            'id'         => 'media',
-            'name'       => $this->translator->trans('menu.cms.media'),
-            'link'       => $this->router->generate('admin.media.index'),
-            'path'       => '[menu][cms][media]',
-            'sort_order' => 10
-        ]));
+        $loader = new XmlLoader($event->getBuilder(), new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader->load('admin_menu.xml');
     }
 
     /**
      * {@inheritdoc}
      */
-   /* public static function getSubscribedEvents()
+    public static function getSubscribedEvents()
     {
         return [
-            AdminMenuInitEvent::ADMIN_MENU_INIT_EVENT => 'onAdminMenuInitEvent'
+            AdminMenuEvent::INIT_EVENT => 'onAdminMenuInitEvent'
         ];
-    }*/
+    }
 }

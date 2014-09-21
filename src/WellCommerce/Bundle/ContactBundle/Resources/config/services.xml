@@ -10,7 +10,6 @@
         <parameter key="contact.datagrid.configurator.class">WellCommerce\Bundle\ContactBundle\DataGrid\ContactDataGridConfigurator</parameter>
         <parameter key="contact.form.class">WellCommerce\Bundle\ContactBundle\Form\ContactForm</parameter>
         <parameter key="contact.subscriber.class">WellCommerce\Bundle\ContactBundle\EventListener\ContactSubscriber</parameter>
-        <parameter key="contact.manager.class">WellCommerce\Bundle\ContactBundle\Manager\ContactManager</parameter>
     </parameters>
 
     <services>
