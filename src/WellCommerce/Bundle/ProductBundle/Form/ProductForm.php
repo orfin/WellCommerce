@@ -127,7 +127,6 @@ class ProductForm extends AbstractForm implements FormInterface
             'label' => $this->trans('Price settings')
         ]));
 
-
         $vatField = $pricePane->addChild($builder->getElement('select', [
             'name'            => 'tax',
             'label'           => $this->trans('Tax'),
@@ -284,7 +283,7 @@ class ProductForm extends AbstractForm implements FormInterface
 
         $attributesData->addChild($builder->getElement('product_variants_editor', [
             'name'               => 'attributes',
-            'label'              => $this->trans('Statuses'),
+            'label'              => $this->trans('Attributes'),
             'price_field'        => $priceField,
             'vat_field'          => $vatField,
             'vat_values'         => $vatValues,
@@ -305,7 +304,6 @@ class ProductForm extends AbstractForm implements FormInterface
             'transformer' => new CollectionToArrayTransformer($this->get('shop.repository'))
         ]));
 
-        $form->addFilter('no_code');
         $form->addFilter('trim');
         $form->addFilter('secure');
 
