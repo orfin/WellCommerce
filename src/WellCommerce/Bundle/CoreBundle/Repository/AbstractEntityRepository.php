@@ -52,7 +52,7 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
      */
     public function getLocales()
     {
-        return $this->_em->getRepository('WellCommerce\Bundle\LocaleBundle\Entity\Locale')->findAll();
+        return $this->getRepository('WellCommerce\Bundle\LocaleBundle\Entity\Locale')->findAll();
     }
 
     /**
@@ -211,7 +211,7 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
                 }
             }
         } else {
-            $collection = $this->findAll();
+            $collection = $this->findBy([], [$labelField => 'asc']);
 
             foreach ($collection as $item) {
                 $id          = $accessor->getValue($item, $identifier);
