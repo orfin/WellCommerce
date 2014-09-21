@@ -43,11 +43,6 @@ class ProductStatusForm extends AbstractForm implements FormInterface
         $languageData->addChild($builder->getElement('text_field', [
             'name'  => 'name',
             'label' => $this->trans('unit.language_data.name.label'),
-            'rules' => [
-                $builder->getRule('required', [
-                    'message' => $this->trans('Name is required')
-                ]),
-            ]
         ]));
 
         $form->addFilter('no_code');

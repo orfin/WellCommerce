@@ -19,7 +19,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use WellCommerce\Bundle\AdminBundle\Event\AdminMenuEvent;
-use WellCommerce\Bundle\AdminBundle\MenuBuilder\AdminMenuBuilderInterface;
 use WellCommerce\Bundle\AdminBundle\MenuBuilder\XmlLoader;
 
 /**
