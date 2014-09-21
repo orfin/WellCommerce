@@ -124,13 +124,4 @@ interface DataGridInterface
      * @return OptionsInterface
      */
     public function getOptions();
-
-    /**
-     * Updates DataGrid row. Transfers request to repository
-     *
-     * @param array $request
-     *
-     * @return mixed
-     */
-    public function update(array $request);
 }

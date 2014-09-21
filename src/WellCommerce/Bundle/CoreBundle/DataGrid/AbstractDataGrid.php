@@ -13,7 +13,6 @@ namespace WellCommerce\Bundle\CoreBundle\DataGrid;
 
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Validator\Exception\ValidatorException;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnCollection;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Manager\DataGridManagerInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Options\OptionsInterface;
@@ -175,40 +174,6 @@ abstract class AbstractDataGrid implements DataGridInterface
     public function getCurrentRequest()
     {
         return $this->request;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function refresh($datagridId)
-    {
-//        $objResponse = new xajaxResponse();
-//        $objResponse->script('' . 'try {' . 'GF_Datagrid.ReturnInstance(' . (int)$datagridId . ').LoadData();' . '}' . 'catch (xException) {' . 'GF_Debug.HandleException(xException);' . '}' . '');
-//
-//        return $objResponse;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function update(array $request)
-    {
-        try {
-            $this->repository->updateRow($request);
-
-        } catch (ValidatorException $exception) {
-            return [
-                'error' => $exception->getMessage()
-            ];
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function delete($request)
-    {
-        return $this->repository->deleteRow($request['id']);
     }
 
     /**
