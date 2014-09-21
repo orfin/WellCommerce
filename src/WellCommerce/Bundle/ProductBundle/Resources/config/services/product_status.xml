@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="product_status.controller.admin.class">WellCommerce\Bundle\ProductBundle\Controller\Admin\ProductStatusController</parameter>
+        <parameter key="product_status.repository.class">WellCommerce\Bundle\ProductBundle\Repository\ProductStatusRepository</parameter>
+        <parameter key="product_status.datagrid.class">WellCommerce\Bundle\ProductBundle\DataGrid\ProductStatusDataGrid</parameter>
+        <parameter key="product_status.datagrid.configurator.class">WellCommerce\Bundle\ProductBundle\DataGrid\ProductStatusDataGridConfigurator</parameter>
+        <parameter key="product_status.form.class">WellCommerce\Bundle\ProductBundle\Form\ProductStatusForm</parameter>
+    </parameters>
+
+    <services>
+        <service id="product_status.controller.admin" class="%product_status.controller.admin.class%">
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="admin_manager"/>
+            <argument type="service" id="product_status.repository"/>
+            <argument type="service" id="product_status.datagrid"/>
+            <argument type="service" id="product_status.form"/>
+        </service>
+
+        <service id="product_status.repository" class="%product_status.repository.class%" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceProductBundle:ProductStatus</argument>
+            <call method="setTranslator">
+                <argument type="service" id="translator" />
+            </call>
+        </service>
+
+        <service id="product_status.datagrid" class="%product_status.datagrid.class%">
+            <configurator service="product_status.datagrid.configurator" method="configure" />
+        </service>
+
+        <service id="product_status.datagrid.configurator" class="%product_status.datagrid.configurator.class%">
+            <argument key="identifier">product</argument>
+            <argument type="service" id="datagrid_manager"/>
+            <argument type="service" id="product_status.repository"/>
+        </service>
+
+        <service id="product_status.form" class="%product_status.form.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+    </services>
+</container>

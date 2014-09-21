@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<routes xmlns="http://symfony.com/schema/routing"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+    <route id="admin.client.index" path="/client/index">
+        <default key="_controller">client.controller.admin:indexAction</default>
+    </route>
+
+    <route id="admin.client.grid" path="/client/grid">
+        <default key="_controller">client.controller.admin:gridAction</default>
+        <option key="expose">true</option>
+    </route>
+
+    <route id="admin.client.add" path="/client/add">
+        <default key="_controller">client.controller.admin:addAction</default>
+    </route>
+
+    <route id="admin.client.edit" path="/client/edit/{id}">
+        <default key="_controller">client.controller.admin:editAction</default>
+        <option key="expose">true</option>
+    </route>
+
+    <route id="admin.client.delete" path="/client/delete/{id}">
+        <default key="_controller">client.controller.admin:deleteAction</default>
+        <option key="expose">true</option>
+    </route>
+</routes>

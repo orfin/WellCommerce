@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<items>
+    <item>
+        <id>payment_method</id>
+        <name>admin.menu.payment_method</name>
+        <route>admin.payment_method.index</route>
+        <path>menu.configuration.payment_method</path>
+        <sort_order>10</sort_order>
+    </item>
+</items>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<items>
+    <item>
+        <id>layout_theme</id>
+        <name>admin.menu.layout_theme</name>
+        <route>admin.layout_theme.index</route>
+        <path>menu.layout.layout_theme</path>
+        <sort_order>10</sort_order>
+    </item><item>
+        <id>layout_page</id>
+        <name>admin.menu.layout_page</name>
+        <route>admin.layout_page.index</route>
+        <path>menu.layout.layout_page</path>
+        <sort_order>20</sort_order>
+    </item>
+    <item>
+        <id>layout_box</id>
+        <name>admin.menu.layout_box</name>
+        <route>admin.layout_box.index</route>
+        <path>menu.layout.layout_box</path>
+        <sort_order>30</sort_order>
+    </item>
+</items>

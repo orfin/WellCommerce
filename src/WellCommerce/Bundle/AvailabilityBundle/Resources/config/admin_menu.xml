@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<items>
+    <item>
+        <id>availability</id>
+        <name>admin.menu.availability</name>
+        <route>admin.availability.index</route>
+        <path>menu.catalog.availability</path>
+        <sort_order>20</sort_order>
+    </item>
+</items>

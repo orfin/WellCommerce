@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<items>
+    <item>
+        <id>catalog</id>
+        <class>catalog</class>
+        <name>admin.menu.catalog</name>
+        <path>menu.catalog</path>
+        <sort_order>20</sort_order>
+    </item>
+
+    <item>
+        <id>promotions</id>
+        <class>promotions</class>
+        <name>admin.menu.promotions</name>
+        <path>menu.promotions</path>
+        <sort_order>30</sort_order>
+    </item>
+
+    <item>
+        <id>sales</id>
+        <class>sales</class>
+        <name>admin.menu.sales</name>
+        <path>menu.sales</path>
+        <sort_order>40</sort_order>
+    </item>
+
+    <item>
+        <id>reports</id>
+        <class>reports</class>
+        <name>admin.menu.reports</name>
+        <path>menu.reports</path>
+        <sort_order>50</sort_order>
+    </item>
+
+    <item>
+        <id>crm</id>
+        <class>crm</class>
+        <name>admin.menu.crm</name>
+        <path>menu.crm</path>
+        <sort_order>60</sort_order>
+    </item>
+
+    <item>
+        <id>cms</id>
+        <class>cms</class>
+        <name>admin.menu.cms</name>
+        <path>menu.cms</path>
+        <sort_order>70</sort_order>
+    </item>
+
+    <item>
+        <id>layout</id>
+        <class>layout</class>
+        <name>admin.menu.layout</name>
+        <path>menu.layout</path>
+        <sort_order>80</sort_order>
+    </item>
+
+    <item>
+        <id>integration</id>
+        <class>integration</class>
+        <name>admin.menu.integration</name>
+        <path>menu.integration</path>
+        <sort_order>90</sort_order>
+    </item>
+
+    <item>
+        <id>configuration</id>
+        <class>configuration</class>
+        <name>admin.menu.configuration</name>
+        <path>menu.configuration</path>
+        <sort_order>100</sort_order>
+    </item>
+
+    <item>
+        <id>localization</id>
+        <class>localization</class>
+        <name>admin.menu.localization</name>
+        <path>menu.configuration.localization</path>
+        <sort_order>10</sort_order>
+    </item>
+
+    <item>
+        <id>store_management</id>
+        <class>store_management</class>
+        <name>admin.menu.store_management</name>
+        <path>menu.configuration.store_management</path>
+        <sort_order>20</sort_order>
+    </item>
+
+    <item>
+        <id>user_management</id>
+        <name>admin.menu.user_management</name>
+        <path>menu.configuration.user_management</path>
+        <sort_order>30</sort_order>
+    </item>
+</items>

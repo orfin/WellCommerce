@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<items>
+    <item>
+        <id>deliverer</id>
+        <name>admin.menu.deliverer</name>
+        <route>admin.deliverer.index</route>
+        <path>menu.catalog.deliverer</path>
+        <sort_order>80</sort_order>
+    </item>
+</items>

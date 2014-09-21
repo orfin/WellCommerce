@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<items>
+    <item>
+        <id>contact</id>
+        <name>menu.contact.category</name>
+        <route>admin.contact.index</route>
+        <path>menu.configuration.contact</path>
+        <sort_order>30</sort_order>
+    </item>
+</items>

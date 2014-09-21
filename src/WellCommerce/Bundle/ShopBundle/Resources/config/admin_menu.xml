@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<items>
+    <item>
+        <id>shop</id>
+        <name>menu.admin.shop</name>
+        <route>admin.shop.index</route>
+        <path>menu.configuration.store_management.shop</path>
+        <sort_order>20</sort_order>
+    </item>
+</items>

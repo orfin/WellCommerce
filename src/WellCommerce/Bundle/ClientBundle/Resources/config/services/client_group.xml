@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="client_group.controller.admin.class">WellCommerce\Bundle\ClientBundle\Controller\Admin\ClientGroupController</parameter>
+        <parameter key="client_group.repository.class">WellCommerce\Bundle\ClientBundle\Repository\ClientGroupRepository</parameter>
+        <parameter key="client_group.datagrid.class">WellCommerce\Bundle\ClientBundle\DataGrid\ClientGroupDataGrid</parameter>
+        <parameter key="client_group.datagrid.configurator.class">WellCommerce\Bundle\ClientBundle\DataGrid\ClientGroupDataGridConfigurator</parameter>
+        <parameter key="client_group.form.class">WellCommerce\Bundle\ClientBundle\Form\ClientGroupForm</parameter>
+        <parameter key="client_group.subscriber.class">WellCommerce\Bundle\ClientBundle\EventListener\ClientGroupSubscriber</parameter>
+        <parameter key="client_group.manager.class">WellCommerce\Bundle\ClientBundle\Manager\ClientGroupManager</parameter>
+    </parameters>
+
+    <services>
+        <service id="client_group.controller.admin" class="%client_group.controller.admin.class%">
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="admin_manager"/>
+            <argument type="service" id="client_group.repository"/>
+            <argument type="service" id="client_group.datagrid"/>
+            <argument type="service" id="client_group.form"/>
+        </service>
+
+        <service id="client_group.repository" class="%client_group.repository.class%" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceClientBundle:ClientGroup</argument>
+            <call method="setTranslator">
+                <argument type="service" id="translator" />
+            </call>
+        </service>
+
+        <service id="client_group.datagrid" class="%client_group.datagrid.class%">
+            <configurator service="client_group.datagrid.configurator" method="configure" />
+        </service>
+
+        <service id="client_group.datagrid.configurator" class="%client_group.datagrid.configurator.class%">
+            <argument key="identifier">client_group</argument>
+            <argument type="service" id="datagrid_manager"/>
+            <argument type="service" id="client_group.repository"/>
+        </service>
+
+        <service id="client_group.form" class="%client_group.form.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="client_group.subscriber" class="%client_group.subscriber.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setTranslator">
+                <argument type="service" id="translator"/>
+            </call>
+            <call method="setRouter">
+                <argument type="service" id="router"/>
+            </call>
+            <tag name="kernel.event_subscriber" />
+        </service>
+    </services>
+</container>
