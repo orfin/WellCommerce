@@ -1,0 +1,11 @@
+<script type="text/javascript">
+    $(document).ready(function(){
+        {% for flashMessage in app.session.getFlashBag().get('error') %}
+        GError('{% trans %}An error has occured!{% endtrans %}', '{{ flashMessage }}');
+        {% endfor %}
+
+        {% for flashMessage in app.session.getFlashBag().get('success') %}
+        GMessage('{% trans %}Success!{% endtrans %}', '{{ flashMessage }}');
+        {% endfor %}
+    });
+</script>
