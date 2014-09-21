@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="twig.extension.datagrid.class">WellCommerce\Bundle\CoreBundle\Twig\Extension\DataGridExtension</parameter>
+        <parameter key="twig.extension.string_loader.class">Twig_Extension_StringLoader</parameter>
+        <parameter key="twig.extension.form.class">WellCommerce\Bundle\CoreBundle\Twig\Extension\FormExtension</parameter>
+        <parameter key="twig.extension.admin.class">WellCommerce\Bundle\CoreBundle\Twig\Extension\AdminExtension</parameter>
+        <parameter key="twig.extension.datagrid.class">WellCommerce\Bundle\CoreBundle\Twig\Extension\DataGridExtension</parameter>
+    </parameters>
+
+    <services>
+        <service id="twig.extension.string_loader" class="%twig.extension.string_loader.class%">
+            <tag name="twig.extension"/>
+        </service>
+
+        <service id="twig.extension.form" class="%twig.extension.form.class%">
+            <argument type="service" id="service_container"/>
+            <tag name="twig.extension"/>
+        </service>
+
+        <service id="twig.extension.admin" class="%twig.extension.admin.class%">
+            <argument type="service" id="session"/>
+            <tag name="twig.extension"/>
+        </service>
+
+        <service id="twig.extension.datagrid" class="%twig.extension.datagrid.class%">
+            <argument type="service" id="service_container"/>
+            <tag name="twig.extension"/>
+        </service>
+    </services>
+</container>
+
+

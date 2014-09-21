@@ -24,6 +24,11 @@ use WellCommerce\Bundle\PaymentBundle\DependencyInjection\Compiler\RegisterPayme
  */
 class WellCommercePaymentBundle extends Bundle
 {
+    /**
+     * Builds the container for bundle
+     *
+     * @param ContainerBuilder $container
+     */
     public function build(ContainerBuilder $container)
     {
         parent::build($container);

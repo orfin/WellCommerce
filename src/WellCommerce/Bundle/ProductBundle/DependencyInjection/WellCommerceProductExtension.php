@@ -12,10 +12,7 @@
 
 namespace WellCommerce\Bundle\ProductBundle\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\Config\FileLocator;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Symfony\Component\DependencyInjection\Loader;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
 
 /**
  * Class WellCommerceProductExtension
@@ -23,14 +20,7 @@ use Symfony\Component\DependencyInjection\Loader;
  * @package WellCommerce\Bundle\ProductBundle\DependencyInjection
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class WellCommerceProductExtension extends Extension
+class WellCommerceProductExtension extends AbstractExtension
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function load(array $configs, ContainerBuilder $container)
-    {
-        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
-        $loader->load('services.xml');
-    }
+
 }

@@ -1,0 +1,333 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="form.builder.class">WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilder</parameter>
+        <!-- form resolvers -->
+        <parameter key="form.resolver.element.class">WellCommerce\Bundle\CoreBundle\Form\Resolver\ElementResolver</parameter>
+        <parameter key="form.resolver.condition.class">WellCommerce\Bundle\CoreBundle\Form\Resolver\ConditionResolver</parameter>
+        <parameter key="form.resolver.rule.class">WellCommerce\Bundle\CoreBundle\Form\Resolver\RuleResolver</parameter>
+        <parameter key="form.resolver.filter.class">WellCommerce\Bundle\CoreBundle\Form\Resolver\FilterResolver</parameter>
+        <parameter key="form.resolver.dependency.class">WellCommerce\Bundle\CoreBundle\Form\Resolver\DependencyResolver</parameter>
+        <!-- form elements -->
+        <parameter key="form.element.attribute_editor.class">WellCommerce\Bundle\CoreBundle\Form\Elements\AttributeEditor</parameter>
+        <parameter key="form.element.border.class">WellCommerce\Bundle\CoreBundle\Form\Elements\Border</parameter>
+        <parameter key="form.element.checkbox.class">WellCommerce\Bundle\CoreBundle\Form\Elements\Checkbox</parameter>
+        <parameter key="form.element.client_select.class">WellCommerce\Bundle\CoreBundle\Form\Elements\ClientSelect</parameter>
+        <parameter key="form.element.code_editor.class">WellCommerce\Bundle\CoreBundle\Form\Elements\CodeEditor</parameter>
+        <parameter key="form.element.colour_scheme_picker.class">WellCommerce\Bundle\CoreBundle\Form\Elements\ColourSchemePicker</parameter>
+        <parameter key="form.element.columns.class">WellCommerce\Bundle\CoreBundle\Form\Elements\Columns</parameter>
+        <parameter key="form.element.combo.class">WellCommerce\Bundle\CoreBundle\Form\Elements\Combo</parameter>
+        <parameter key="form.element.constant.class">WellCommerce\Bundle\CoreBundle\Form\Elements\Constant</parameter>
+        <parameter key="form.element.container.class">WellCommerce\Bundle\CoreBundle\Form\Elements\container</parameter>
+        <parameter key="form.element.datagrid_select.class">WellCommerce\Bundle\CoreBundle\Form\Elements\DataGridSelect</parameter>
+        <parameter key="form.element.date.class">WellCommerce\Bundle\CoreBundle\Form\Elements\Date</parameter>
+        <parameter key="form.element.date_time.class">WellCommerce\Bundle\CoreBundle\Form\Elements\DateTime</parameter>
+        <parameter key="form.element.downloader.class">WellCommerce\Bundle\CoreBundle\Form\Elements\Downloader</parameter>
+        <parameter key="form.element.favourite_categories.class">WellCommerce\Bundle\CoreBundle\Form\Elements\FavouriteCategories</parameter>
+        <parameter key="form.element.field.class">WellCommerce\Bundle\CoreBundle\Form\Elements\Field</parameter>
+        <parameter key="form.element.fieldset.class">WellCommerce\Bundle\CoreBundle\Form\Elements\Fieldset</parameter>
+        <parameter key="form.element.fieldset_language.class">WellCommerce\Bundle\CoreBundle\Form\Elements\FieldsetLanguage</parameter>
+        <parameter key="form.element.fieldset_repeatable.class">WellCommerce\Bundle\CoreBundle\Form\Elements\FieldsetRepeatable</parameter>
+        <parameter key="form.element.file.class">WellCommerce\Bundle\CoreBundle\Form\Elements\File</parameter>
+        <parameter key="form.element.font_style.class">WellCommerce\Bundle\CoreBundle\Form\Elements\FontStyle</parameter>
+        <parameter key="form.element.form.class">WellCommerce\Bundle\CoreBundle\Form\Elements\Form</parameter>
+        <parameter key="form.element.hidden.class">WellCommerce\Bundle\CoreBundle\Form\Elements\Hidden</parameter>
+        <parameter key="form.element.image.class">WellCommerce\Bundle\CoreBundle\Form\Elements\Image</parameter>
+        <parameter key="form.element.layout_boxes_list.class">WellCommerce\Bundle\CoreBundle\Form\Elements\LayoutBoxesList</parameter>
+        <parameter key="form.element.layout_box_scheme_preview.class">WellCommerce\Bundle\CoreBundle\Form\Elements\LayoutBoxSchemePreview</parameter>
+        <parameter key="form.element.list_of_selects.class">WellCommerce\Bundle\CoreBundle\Form\Elements\ListOfSelects</parameter>
+        <parameter key="form.element.local_file.class">WellCommerce\Bundle\CoreBundle\Form\Elements\LocalFile</parameter>
+        <parameter key="form.element.multi_select.class">WellCommerce\Bundle\CoreBundle\Form\Elements\MultiSelect</parameter>
+        <parameter key="form.element.optioned_field.class">WellCommerce\Bundle\CoreBundle\Form\Elements\OptionedField</parameter>
+        <parameter key="form.element.order_editor.class">WellCommerce\Bundle\CoreBundle\Form\Elements\OrderEditor</parameter>
+        <parameter key="form.element.password.class">WellCommerce\Bundle\CoreBundle\Form\Elements\Password</parameter>
+        <parameter key="form.element.price.class">WellCommerce\Bundle\CoreBundle\Form\Elements\Price</parameter>
+        <parameter key="form.element.price_modifier.class">WellCommerce\Bundle\CoreBundle\Form\Elements\PriceModifier</parameter>
+        <parameter key="form.element.product_aggregator.class">WellCommerce\Bundle\CoreBundle\Form\Elements\ProductAggregator</parameter>
+        <parameter key="form.element.product_select.class">WellCommerce\Bundle\CoreBundle\Form\Elements\ProductSelect</parameter>
+        <parameter key="form.element.product_select_related.class">WellCommerce\Bundle\CoreBundle\Form\Elements\ProductSelectRelated</parameter>
+        <parameter key="form.element.product_variants_editor.class">WellCommerce\Bundle\CoreBundle\Form\Elements\ProductVariantsEditor</parameter>
+        <parameter key="form.element.progress_bar.class">WellCommerce\Bundle\CoreBundle\Form\Elements\ProgressBar</parameter>
+        <parameter key="form.element.progress_indicator.class">WellCommerce\Bundle\CoreBundle\Form\Elements\ProgressIndicator</parameter>
+        <parameter key="form.element.radio_group.class">WellCommerce\Bundle\CoreBundle\Form\Elements\RadioGroup</parameter>
+        <parameter key="form.element.radio_value_group.class">WellCommerce\Bundle\CoreBundle\Form\Elements\RadioValueGroup</parameter>
+        <parameter key="form.element.range_editor.class">WellCommerce\Bundle\CoreBundle\Form\Elements\RangeEditor</parameter>
+        <parameter key="form.element.related_categories.class">WellCommerce\Bundle\CoreBundle\Form\Elements\RelatedCategories</parameter>
+        <parameter key="form.element.rich_text_editor.class">WellCommerce\Bundle\CoreBundle\Form\Elements\RichTextEditor</parameter>
+        <parameter key="form.element.rights_table.class">WellCommerce\Bundle\CoreBundle\Form\Elements\RightsTable</parameter>
+        <parameter key="form.element.select.class">WellCommerce\Bundle\CoreBundle\Form\Elements\Select</parameter>
+        <parameter key="form.element.sortable_list.class">WellCommerce\Bundle\CoreBundle\Form\Elements\SortableList</parameter>
+        <parameter key="form.element.static_listing.class">WellCommerce\Bundle\CoreBundle\Form\Elements\StaticListing</parameter>
+        <parameter key="form.element.static_text.class">WellCommerce\Bundle\CoreBundle\Form\Elements\StaticText</parameter>
+        <parameter key="form.element.submit.class">WellCommerce\Bundle\CoreBundle\Form\Elements\Submit</parameter>
+        <parameter key="form.element.technical_attribute_editor.class">WellCommerce\Bundle\CoreBundle\Form\Elements\TechnicalAttributeEditor</parameter>
+        <parameter key="form.element.technical_data_editor.class">WellCommerce\Bundle\CoreBundle\Form\Elements\TechnicalDataEditor</parameter>
+        <parameter key="form.element.text_area.class">WellCommerce\Bundle\CoreBundle\Form\Elements\TextArea</parameter>
+        <parameter key="form.element.text_field.class">WellCommerce\Bundle\CoreBundle\Form\Elements\TextField</parameter>
+        <parameter key="form.element.tip.class">WellCommerce\Bundle\CoreBundle\Form\Elements\Tip</parameter>
+        <parameter key="form.element.tree.class">WellCommerce\Bundle\CoreBundle\Form\Elements\Tree</parameter>
+        <!-- form filters -->
+        <parameter key="form.filter.no_code.class">WellCommerce\Bundle\CoreBundle\Form\Filters\NoCode</parameter>
+        <parameter key="form.filter.no_code.class">WellCommerce\Bundle\CoreBundle\Form\Filters\NoCode</parameter>
+        <parameter key="form.filter.secure.class">WellCommerce\Bundle\CoreBundle\Form\Filters\Secure</parameter>
+        <parameter key="form.filter.trim.class">WellCommerce\Bundle\CoreBundle\Form\Filters\Trim</parameter>
+        <parameter key="form.filter.comma_to_dot_changer.class">WellCommerce\Bundle\CoreBundle\Form\Filters\CommaToDotChanger</parameter>
+        <!-- form rules -->
+        <parameter key="form.rule.compare.class">WellCommerce\Bundle\CoreBundle\Form\Rules\Compare</parameter>
+        <parameter key="form.rule.custom.class">WellCommerce\Bundle\CoreBundle\Form\Rules\Custom</parameter>
+        <parameter key="form.rule.date_to.class">WellCommerce\Bundle\CoreBundle\Form\Rules\DateTo</parameter>
+        <parameter key="form.rule.email.class">WellCommerce\Bundle\CoreBundle\Form\Rules\Email</parameter>
+        <parameter key="form.rule.format.class">WellCommerce\Bundle\CoreBundle\Form\Rules\Format</parameter>
+        <parameter key="form.rule.language_unique.class">WellCommerce\Bundle\CoreBundle\Form\Rules\LanguageUnique</parameter>
+        <parameter key="form.rule.required.class">WellCommerce\Bundle\CoreBundle\Form\Rules\Required</parameter>
+        <parameter key="form.rule.unique.class">WellCommerce\Bundle\CoreBundle\Form\Rules\Unique</parameter>
+        <parameter key="form.rule.vat.class">WellCommerce\Bundle\CoreBundle\Form\Rules\Vat</parameter>
+        <!-- form dependencies -->
+        <parameter key="form.dependency.show.class">WellCommerce\Bundle\CoreBundle\Form\Dependencies\Show</parameter>
+    </parameters>
+
+    <services>
+        <service id="form.builder" class="%form.builder.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.resolver.element" class="%form.resolver.element.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.resolver.filter" class="%form.resolver.filter.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.resolver.rule" class="%form.resolver.rule.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.resolver.dependency" class="%form.resolver.dependency.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.element.attribute_editor" class="%form.element.attribute_editor.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.element.text_field" class="%form.element.text_field.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.element.colour_scheme_picker" class="%form.element.colour_scheme_picker.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.element.font_style" class="%form.element.font_style.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.element.submit" class="%form.element.submit.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.element.price" class="%form.element.price.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.element.product_variants_editor" class="%form.element.product_variants_editor.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.element.password" class="%form.element.password.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.element.tip" class="%form.element.tip.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.element.text_area" class="%form.element.text_area.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.element.tree" class="%form.element.tree.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.element.checkbox" class="%form.element.checkbox.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.element.select" class="%form.element.select.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.element.multi_select" class="%form.element.multi_select.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.element.fieldset" class="%form.element.fieldset.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.element.fieldset_language" class="%form.element.fieldset_language.class%" scope="prototype">
+            <argument type="service" id="locale.repository" />
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.element.fieldset_repeatable" class="%form.element.fieldset_repeatable.class%" scope="prototype">
+            <argument type="service" id="locale.repository" />
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.element.layout_boxes_list" class="%form.element.layout_boxes_list.class%" scope="prototype">
+            <argument type="service" id="locale.repository" />
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.element.image" class="%form.element.image.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.element.form" class="%form.element.form.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.filter.no_code" class="%form.filter.no_code.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.filter.secure" class="%form.filter.secure.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.filter.trim" class="%form.filter.trim.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.filter.comma_to_dot_changer" class="%form.filter.comma_to_dot_changer.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.rule.compare" class="%form.rule.compare.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.rule.custom" class="%form.rule.custom.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.rule.date_to" class="%form.rule.date_to.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.rule.email" class="%form.rule.email.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.rule.format" class="%form.rule.format.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.rule.language_unique" class="%form.rule.language_unique.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.rule.required" class="%form.rule.required.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.rule.unique" class="%form.rule.unique.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.rule.vat" class="%form.rule.vat.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <!-- DEPENDENCIES -->
+        <service id="form.dependency.show" class="%form.dependency.show.class%" scope="prototype">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+    </services>
+</container>
