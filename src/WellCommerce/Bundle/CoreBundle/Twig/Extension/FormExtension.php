@@ -27,18 +27,25 @@ use WellCommerce\Bundle\CoreBundle\Form\Elements\Form;
 class FormExtension extends \Twig_Extension
 {
     /**
-     * @var \Symfony\Component\DependencyInjection\ContainerInterface
+     * @var ContainerInterface
      */
     private $container;
+
+    /**
+     * @var string
+     */
+    private $template;
 
     /**
      * Constructor
      *
      * @param ContainerInterface $container
+     * @param string             $template Twig template used to render form
      */
-    public function __construct(ContainerInterface $container)
+    public function __construct(ContainerInterface $container, $template)
     {
         $this->container = $container;
+        $this->template  = $template;
     }
 
     /**
@@ -48,16 +55,9 @@ class FormExtension extends \Twig_Extension
      */
     public function getFunctions()
     {
-        return array(
-            new \Twig_SimpleFunction('form', array(
-                $this,
-                'render'
-            ), array(
-                'is_safe' => Array(
-                    'html'
-                )
-            ))
-        );
+        return [
+            new \Twig_SimpleFunction('form', [$this, 'render'], ['is_safe' => ['html']])
+        ];
     }
 
     /**
@@ -69,7 +69,7 @@ class FormExtension extends \Twig_Extension
      */
     public function render(Form $form)
     {
-        return $this->container->get('templating')->render('WellCommerceAdminBundle:Form:form.html.twig', [
+        return $this->container->get('templating')->render($this->template, [
             'attributes' => $form->getAttributes(),
             'children'   => $form->renderChildren(),
             'values'     => $form->getValues(),

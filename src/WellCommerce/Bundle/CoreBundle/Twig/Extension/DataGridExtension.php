@@ -24,22 +24,32 @@ use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
  */
 class DataGridExtension extends \Twig_Extension
 {
-    protected $container;
+    /**
+     * @var ContainerInterface
+     */
+    private $container;
+
+    /**
+     * @var string
+     */
+    private $template;
 
     /**
      * Constructor
      *
      * @param ContainerInterface $container
+     * @param string             $template Twig template used to render datagrid
      */
-    public function __construct(ContainerInterface $container)
+    public function __construct(ContainerInterface $container, $template)
     {
         $this->container = $container;
+        $this->template  = $template;
     }
 
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('datagrid_renderer', [$this, 'render'], ['is_safe' => ['html','javascript']])
+            new \Twig_SimpleFunction('datagrid_renderer', [$this, 'render'], ['is_safe' => ['html', 'javascript']])
         ];
     }
 
@@ -48,11 +58,11 @@ class DataGridExtension extends \Twig_Extension
      *
      * @param DataGridInterface $datagrid DataGrid instance
      *
-     * @return mixed
+     * @return string
      */
     public function render(DataGridInterface $datagrid)
     {
-        return $this->container->get('twig')->render('WellCommerceAdminBundle:DataGrid:datagrid.html.twig', [
+        return $this->container->get('twig')->render($this->template, [
             'datagrid' => $datagrid
         ]);
     }
