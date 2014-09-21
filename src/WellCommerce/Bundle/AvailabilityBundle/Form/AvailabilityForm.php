@@ -35,20 +35,14 @@ class AvailabilityForm extends AbstractForm implements FormInterface
             'label' => $this->trans('form.required_data.label')
         ]));
 
-        $languageData = $requiredData->addChild($builder->getElement('fieldset_language', [
-            'name'      => 'translations',
-            'label'     => $this->trans('form.required_data.language_data.label')
-        ]));
-
-        $languageData->addChild($builder->getElement('text_field', [
-            'name'  => 'name',
-            'label' => $this->trans('availability.name'),
-            'rules' => [
-                $builder->getRule('required', [
-                    'message' => $this->trans('Name is required')
-                ]),
-            ]
-        ]));
+        $requiredData->addChild($builder->getElement('fieldset_language', [
+            'name'  => 'translations',
+            'label' => $this->trans('form.required_data.language_data.label')
+        ]))
+            ->addChild($builder->getElement('text_field', [
+                'name'  => 'name',
+                'label' => $this->trans('availability.name'),
+            ]));
 
         $form->addFilter('no_code');
         $form->addFilter('trim');

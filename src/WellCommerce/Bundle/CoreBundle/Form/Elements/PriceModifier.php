@@ -33,7 +33,7 @@ class PriceModifier extends Price implements ElementInterface
 
     public function prepareAttributesJs()
     {
-        $attributes = Array(
+        return [
             $this->formatAttributeJs('name', 'sName'),
             $this->formatAttributeJs('label', 'sLabel'),
             $this->formatAttributeJs('comment', 'sComment'),
@@ -46,8 +46,6 @@ class PriceModifier extends Price implements ElementInterface
             $this->formatAttributeJs('suffixes', 'oSuffixes', ElementInterface::TYPE_OBJECT),
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
-        );
-
-        return $attributes;
+        ];
     }
 }

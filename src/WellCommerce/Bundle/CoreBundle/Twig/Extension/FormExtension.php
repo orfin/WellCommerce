@@ -69,7 +69,7 @@ class FormExtension extends \Twig_Extension
      */
     public function render(Form $form)
     {
-        return $this->container->get('templating')->render('WellCommerceCoreBundle:Form:form.html.twig', [
+        return $this->container->get('templating')->render('WellCommerceAdminBundle:Form:form.html.twig', [
             'attributes' => $form->getAttributes(),
             'children'   => $form->renderChildren(),
             'values'     => $form->getValues(),

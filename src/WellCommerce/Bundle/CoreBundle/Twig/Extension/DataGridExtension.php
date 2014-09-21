@@ -52,7 +52,7 @@ class DataGridExtension extends \Twig_Extension
      */
     public function render(DataGridInterface $datagrid)
     {
-        return $this->container->get('twig')->render('WellCommerceCoreBundle:DataGrid:datagrid.html.twig', [
+        return $this->container->get('twig')->render('WellCommerceAdminBundle:DataGrid:datagrid.html.twig', [
             'datagrid' => $datagrid
         ]);
     }
