@@ -75,23 +75,18 @@ class LayoutSubscriber extends AbstractEventSubscriber
         $loader->load('admin_menu.xml');
     }
 
+    public function onKernelRequest(GetResponseEvent $event)
+    {
+        $host  = $event->getRequest()->server->get('SERVER_NAME');
+        $theme = $this->layoutThemeRepository->find(6);
+        $this->shopTheme->setCurrentTheme($theme);
+    }
+
     public function onKernelController(FilterControllerEvent $event)
     {
-        list($controller,) = $event->getController();
-
-        $host     = $event->getRequest()->server->get('SERVER_NAME');
-        $refClass = new \ReflectionClass($controller);
-        $layout   = $this->reader->getClassAnnotation($refClass, 'WellCommerce\\Bundle\\LayoutBundle\\Manager\\Layout');
-        if (null !== $layout) {
-            $theme = $this->layoutThemeRepository->find(1);
-            if (null != $theme) {
-                $columns = $this->layoutThemeRepository->getLayoutColumns($theme, $layout);
-                $layout->setColumns($columns);
-                $this->shopTheme->setCurrentTheme($theme->getFolder());
-                $controller->setLayout($layout);
-            }
-
-        }
+        $host  = $event->getRequest()->server->get('SERVER_NAME');
+        $theme = $this->layoutThemeRepository->find(6);
+        $this->shopTheme->setCurrentTheme($theme);
     }
 
     /**
@@ -101,7 +96,8 @@ class LayoutSubscriber extends AbstractEventSubscriber
     {
         return [
             AdminMenuEvent::INIT_EVENT => 'onAdminMenuInitEvent',
-            KernelEvents::CONTROLLER   => ['onKernelController', -256],
+            KernelEvents::CONTROLLER   => ['onKernelController', -250],
+            KernelEvents::REQUEST      => ['onKernelRequest', -250],
         ];
     }
 }

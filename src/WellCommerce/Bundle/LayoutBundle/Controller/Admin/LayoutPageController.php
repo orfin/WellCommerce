@@ -47,89 +47,24 @@ class LayoutPageController extends AbstractAdminController
             'class' => 'category-select',
         ]);
 
-        $form = $this->getFormBuilder($this->get('layout_page.form'), null, [
+        $resource = $this->repository->findResource($request);
+
+        $form = $this->getFormBuilder($this->get('layout_page.form'), $resource, [
             'name' => 'layout_page_form',
         ]);
 
-        $pageColumns = $this->get('layout_page_column.repository')->findBy(['theme' => $this->getParam('id')]);
-        $form->populate($this->prepareData($pageColumns));
-
         if ($form->handleRequest($request)->isValid()) {
-            $formData = $form->getSubmitValuesGrouped();
-            $theme    = $this->get('layout_theme.repository')->find($this->getParam('id'));
-
-            // first delete all columns
-            foreach ($pageColumns as $page) {
-                $this->getEntityManager()->remove($page);
+            $this->manager->update($resource, $request);
+            if ($form->isAction('continue')) {
+                return $this->manager->getRedirectHelper()->redirectToAction('edit', $resource);
             }
 
-            // iterate through submitted data
-            foreach ($formData as $pageId => $columnsData) {
-                $pageId     = substr($pageId, 12);
-                $layoutPage = $this->get('layout_page.repository')->find($pageId);
-
-                // iterate through all columns and add them to page
-                foreach ($columnsData['columns_data'] as $column) {
-                    $layoutPageColumn = new LayoutPageColumn();
-                    $layoutPageColumn->setTheme($theme);
-                    $layoutPageColumn->setPage($layoutPage);
-                    $layoutPageColumn->setWidth($column['width']);
-                    $this->getEntityManager()->persist($layoutPageColumn);
-
-                    // add boxes to each column
-                    $this->saveColumnBoxes($column['layout_boxes'], $layoutPageColumn);
-                }
-            }
-
-            $this->getEntityManager()->flush();
-
-            return $this->manager->getRedirectHelper()->redirectTo('admin.layout_page.edit', [
-                'id' => $this->getParam('id')
-            ]);
+            return $this->manager->getRedirectHelper()->redirectToAction('index');
         }
 
         return [
             'tree' => $tree,
             'form' => $form
         ];
-    }
-
-    protected function saveColumnBoxes($boxes, LayoutPageColumn $column)
-    {
-        if (!empty($boxes)) {
-            foreach ($boxes as $box) {
-                $boxId               = $box['layoutbox'];
-                $layoutBox           = $this->get('layout_box.repository')->find($boxId);
-                $layoutPageColumnBox = new LayoutPageColumnBox();
-                $layoutPageColumnBox->setBox($layoutBox);
-                $layoutPageColumnBox->setColumn($column);
-                $layoutPageColumnBox->setSpan($box['span']);
-                $this->getEntityManager()->persist($layoutPageColumnBox);
-            }
-        }
-    }
-
-    protected  function prepareData($pageColumns)
-    {
-        $formData = [];
-
-        foreach ($pageColumns as $column) {
-
-            $boxes = [];
-            foreach ($column->getBoxes() as $box) {
-                $boxes[] = [
-                    'box'       => $box->getBox()->getId(),
-                    'span'      => $box->getSpan(),
-                    'collapsed' => 0
-                ];
-            }
-
-            $formData['layout_page_' . $column->getPage()->getId()]['columns_data'][$column->getId()] = [
-                'width'        => $column->getWidth(),
-                'layout_boxes' => $boxes
-            ];
-        }
-
-        return $formData;
     }
 }

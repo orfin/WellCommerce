@@ -40,7 +40,7 @@
         </service>
 
         <service id="layout_box.datagrid.configurator" class="%layout_box.datagrid.configurator.class%">
-            <argument key="identifier">Contact</argument>
+            <argument key="identifier">layout_box</argument>
             <argument type="service" id="datagrid_manager"/>
             <argument type="service" id="layout_box.repository"/>
         </service>

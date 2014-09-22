@@ -232,7 +232,6 @@ abstract class AbstractNode extends BaseAbstractContainer
                 }
 
                 if ($this instanceof FieldsetRepeatable) {
-
                     $repetitions = $child->harvestRepetitions($levelsCount);
                     foreach ($repetitions as $repetition) {
                         $levelsCopy                = $levels + [$repetition];
@@ -401,8 +400,6 @@ abstract class AbstractNode extends BaseAbstractContainer
 
         return '';
     }
-
-
 
     public function renderJs()
     {

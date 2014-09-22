@@ -60,6 +60,19 @@ class LayoutBoxDataGrid extends AbstractDataGrid implements DataGridInterface
         ]));
 
         $collection->add(new Column([
+            'id'         => 'identifier',
+            'source'     => 'layout_box.identifier',
+            'caption'    => $this->trans('Identifier'),
+            'appearance' => [
+                'width' => 70,
+                'align' => ColumnInterface::ALIGN_LEFT
+            ],
+            'filter'     => [
+                'type' => ColumnInterface::FILTER_INPUT
+            ]
+        ]));
+
+        $collection->add(new Column([
             'id'         => 'type',
             'source'     => 'layout_box_type.type',
             'caption'    => $this->trans('Type'),

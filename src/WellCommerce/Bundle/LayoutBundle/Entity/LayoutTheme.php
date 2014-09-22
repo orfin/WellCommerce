@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\LayoutBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\EnableableTrait;
@@ -51,9 +52,17 @@ class LayoutTheme
     private $folder;
 
     /**
-     * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\LayoutBundle\Entity\LayoutPageColumn", mappedBy="theme", cascade={"persist"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\LayoutBundle\Entity\LayoutBox", mappedBy="theme", cascade={"persist"}, orphanRemoval=true)
      */
-    private $columns;
+    private $boxes;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->boxes = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -84,4 +93,10 @@ class LayoutTheme
     {
         $this->folder = $folder;
     }
+
+    public function getBoxes()
+    {
+        return $this->boxes;
+    }
+
 }

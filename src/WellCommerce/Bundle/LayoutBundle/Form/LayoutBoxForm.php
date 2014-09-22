@@ -52,6 +52,19 @@ class LayoutBoxForm extends AbstractForm implements FormInterface
             ]
         ]));
 
+        $requiredData->addChild($builder->getElement('text_field', [
+            'name'    => 'identifier',
+            'label'   => $this->trans('Box identifier'),
+            'comment' => $this->trans('Unique box identifier which will be used in templates'),
+        ]));
+
+        $requiredData->addChild($builder->getElement('select', [
+            'name'        => 'theme',
+            'label'       => $this->trans('Theme'),
+            'options'     => $this->get('layout_theme.repository')->getCollectionToSelect(),
+            'transformer' => new EntityToIdentifierTransformer($this->get('layout_theme.repository'))
+        ]));
+
         $requiredData->addChild($builder->getElement('select', [
             'name'        => 'boxType',
             'label'       => $this->trans('Box type'),

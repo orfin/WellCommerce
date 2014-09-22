@@ -52,7 +52,7 @@ class FileLocator extends BaseFileLocator
         $this->webPath      = $kernel->getRootDir() . '/../web';
         $this->path         = $path;
         $this->shopTheme    = $shopTheme;
-        $this->activeTheme  = $this->shopTheme->getCurrentTheme();
+        $this->activeTheme  = $this->shopTheme->getFolder();
         $this->pathPatterns = $this->shopTheme->getPathPatterns();
 
         $this->setCurrentTheme($this->activeTheme);

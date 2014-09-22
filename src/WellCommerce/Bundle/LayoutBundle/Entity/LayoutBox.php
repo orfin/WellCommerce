@@ -45,6 +45,12 @@ class LayoutBox
     private $boxType;
 
     /**
+     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\LayoutBundle\Entity\LayoutTheme", inversedBy="boxes")
+     * @ORM\JoinColumn(name="layout_theme_id", referencedColumnName="id", nullable=false)
+     */
+    protected $theme;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="settings", type="json_array", nullable=true)
@@ -62,6 +68,11 @@ class LayoutBox
      * @ORM\Column(name="show_header", type="boolean", nullable=true, options={"default":1})
      */
     private $showHeader;
+
+    /**
+     * @ORM\Column(name="identifier", type="string")
+     */
+    private $identifier;
 
     /**
      * Get id
@@ -114,5 +125,37 @@ class LayoutBox
     public function setSettings($settings)
     {
         $this->settings = $settings;
+    }
+
+    /**
+     * @param mixed $identifier
+     */
+    public function setIdentifier($identifier)
+    {
+        $this->identifier = $identifier;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIdentifier()
+    {
+        return $this->identifier;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTheme()
+    {
+        return $this->theme;
+    }
+
+    /**
+     * @param LayoutTheme $theme
+     */
+    public function setTheme(LayoutTheme $theme)
+    {
+        $this->theme = $theme;
     }
 }

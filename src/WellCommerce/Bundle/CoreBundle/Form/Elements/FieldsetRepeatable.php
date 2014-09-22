@@ -47,9 +47,21 @@ class FieldsetRepeatable extends Fieldset implements ElementInterface
     /**
      * {@inheritdoc}
      */
-    public function setDefaults($data, $isNewResource)
+    public function setDefaults($defaultData, $isNewResource)
     {
-        // nothing to do here
-    }
+        $accessor = $this->getPropertyAccessor();
+        if (null !== $this->getPropertyPath() && $accessor->isReadable($defaultData, $this->getPropertyPath())) {
+            $values = $accessor->getValue($defaultData, $this->getPropertyPath());
+            if ($this->hasTransformer()) {
+                $values = $this->getTransformer()->transform($values);
+            }
+            $this->_value = 1;
+            foreach($this->children as $child){
+                echo $child->getPropertyPath().PHP_EOL;
+                $this->populate(1111);
+            }
+        }
 
+        $this->_value = 1;
+    }
 }

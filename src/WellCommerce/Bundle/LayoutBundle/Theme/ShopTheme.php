@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\LayoutBundle\Theme;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
+use WellCommerce\Bundle\LayoutBundle\Entity\LayoutTheme;
 
 /**
  * Class ShopTheme
@@ -23,26 +24,29 @@ use Symfony\Component\HttpKernel\KernelInterface;
  */
 class ShopTheme
 {
-    protected $activeTheme = 'demo';
-    protected $kernel;
-    protected $path;
+    protected $folder = 'demo';
 
-    public function getCurrentTheme()
+    public function getFolder()
     {
-        return $this->activeTheme;
+        return $this->folder;
     }
 
-    public function setCurrentTheme($activeTheme)
+    /**
+     * @return LayoutTheme
+     */
+    public function getCurrentTheme()
     {
-        $this->activeTheme = $activeTheme;
+        return $this->activeTheme->getFolder();
+    }
+
+    public function setCurrentTheme(LayoutTheme $theme)
+    {
+        $this->activeTheme = $theme;
     }
 
     public function getPathPatterns()
     {
         return [
-            'app_resource'        => [
-                '%app_path%/views/%template%',
-            ],
             'bundle_resource'     => [
                 '%bundle_path%/Resources/themes/%current_theme%/templates/%template%',
                 '%web_path%/themes/%current_theme%/templates/%template%',
@@ -53,6 +57,5 @@ class ShopTheme
                 '%dir%/%bundle_name%/%override_path%',
             ],
         ];
-
     }
 } 

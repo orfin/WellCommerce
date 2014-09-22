@@ -40,6 +40,7 @@ class Fieldset extends AbstractContainer implements ElementInterface
             'dependencies',
             'filters',
             'rules',
+            'transformer'
         ]);
 
         $resolver->setDefaults([
@@ -47,15 +48,18 @@ class Fieldset extends AbstractContainer implements ElementInterface
             'dependencies'  => [],
             'filters'       => [],
             'rules'         => [],
+            'transformer'   => null
         ]);
 
         $resolver->setAllowedTypes([
-            'name'         => ['int', 'string'],
-            'label'        => 'string',
-            'class'        => 'string',
-            'repeat_min'   => ['int', 'string'],
-            'repeat_max'   => ['int', 'string'],
-            'dependencies' => 'array',
+            'name'          => ['int', 'string'],
+            'label'         => 'string',
+            'class'         => 'string',
+            'repeat_min'    => ['int', 'string'],
+            'repeat_max'    => ['int', 'string'],
+            'dependencies'  => 'array',
+            'property_path' => ['null', 'Symfony\Component\PropertyAccess\PropertyPath'],
+            'transformer'   => ['null', 'WellCommerce\Bundle\CoreBundle\Form\DataTransformer\DataTransformerInterface'],
         ]);
     }
 
