@@ -45,13 +45,18 @@ class NewsForm extends AbstractForm implements FormInterface
         ]));
 
         $languageData->addChild($builder->getElement('text_field', [
-            'name'  => 'name',
-            'label' => $this->trans('unit.language_data.name.label'),
-            'rules' => [
-                $builder->getRule('required', [
-                    'message' => $this->trans('Name is required')
-                ]),
-            ]
+            'name'  => 'topic',
+            'label' => $this->trans('news.language_data.name.label'),
+        ]));
+
+        $languageData->addChild($builder->getElement('text_area', [
+            'name'  => 'summary',
+            'label' => $this->trans('news.language_data.summary.label'),
+        ]));
+
+        $languageData->addChild($builder->getElement('text_area', [
+            'name'  => 'content',
+            'label' => $this->trans('news.language_data.content.label'),
         ]));
 
         $form->addFilter('no_code');

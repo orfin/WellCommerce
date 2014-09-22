@@ -13,7 +13,12 @@
 namespace WellCommerce\Bundle\NewsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Knp\DoctrineBehaviors\Model\Sluggable\Sluggable;
+use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
+use Knp\DoctrineBehaviors\Model\Translatable\Translation;
+use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\HierarchyTrait;
+use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\MetaDataTrait;
+
 
 /**
  * NewsTranslation
@@ -23,7 +28,9 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
  */
 class NewsTranslation
 {
-    use ORMBehaviors\Translatable\Translation;
+    use Translation;
+    use MetaDataTrait;
+    use Sluggable;
 
     /**
      * @var string
@@ -47,34 +54,6 @@ class NewsTranslation
     private $content;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="seo", type="string", length=255)
-     */
-    private $seo;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="keywordTitle", type="string", length=255)
-     */
-    private $keywordTitle;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="keyword", type="string", length=255)
-     */
-    private $keyword;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="keywordDescription", type="string", length=255)
-     */
-    private $keywordDescription;
-
-    /**
      * @param string $content
      */
     public function setContent($content)
@@ -90,69 +69,6 @@ class NewsTranslation
         return $this->content;
     }
 
-    /**
-     * @param string $keyword
-     */
-    public function setKeyword($keyword)
-    {
-        $this->keyword = $keyword;
-    }
-
-    /**
-     * @return string
-     */
-    public function getKeyword()
-    {
-        return $this->keyword;
-    }
-
-    /**
-     * @param string $keywordDescription
-     */
-    public function setKeywordDescription($keywordDescription)
-    {
-        $this->keywordDescription = $keywordDescription;
-    }
-
-    /**
-     * @return string
-     */
-    public function getKeywordDescription()
-    {
-        return $this->keywordDescription;
-    }
-
-    /**
-     * @param string $keywordTitle
-     */
-    public function setKeywordTitle($keywordTitle)
-    {
-        $this->keywordTitle = $keywordTitle;
-    }
-
-    /**
-     * @return string
-     */
-    public function getKeywordTitle()
-    {
-        return $this->keywordTitle;
-    }
-
-    /**
-     * @param string $seo
-     */
-    public function setSeo($seo)
-    {
-        $this->seo = $seo;
-    }
-
-    /**
-     * @return string
-     */
-    public function getSeo()
-    {
-        return $this->seo;
-    }
 
     /**
      * @param string $summary
@@ -186,6 +102,9 @@ class NewsTranslation
         return $this->topic;
     }
 
+    public function getSluggableFields() {
+        return ['topic'];
+    }
 
 }
 
