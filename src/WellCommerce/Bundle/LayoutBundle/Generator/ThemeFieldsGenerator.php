@@ -17,6 +17,7 @@ use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\Filesystem\Exception\FileNotFoundException;
 use Symfony\Component\Finder\Finder;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\Form;
@@ -29,7 +30,7 @@ use WellCommerce\Bundle\LayoutBundle\Entity\LayoutTheme;
  * @package WellCommerce\Bundle\LayoutBundle\Generator
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ThemeFieldsGenerator extends ContainerAware implements ContainerAwareInterface
+class ThemeFieldsGenerator extends AbstractContainer implements ContainerAwareInterface
 {
     protected $fieldsSpecifier;
     protected $nextFieldId = 0;
@@ -67,7 +68,7 @@ class ThemeFieldsGenerator extends ContainerAware implements ContainerAwareInter
     public function loadThemeFieldsConfiguration(LayoutTheme $theme, $layoutBoxSelector = '.layout-box')
     {
         $this->theme             = $theme;
-        $this->themeDir          = $this->getThemeDir();
+        $this->themeDir          = $this->getDirectory();
         $this->configuration     = $this->loadConfiguration();
         $this->layoutBoxSelector = $layoutBoxSelector;
     }
@@ -77,12 +78,9 @@ class ThemeFieldsGenerator extends ContainerAware implements ContainerAwareInter
      *
      * @return string
      */
-    private function getThemeDir()
+    private function getDirectory()
     {
-        $kernelDir = $this->container->get('kernel')->getRootDir();
-        $themeDir  = sprintf('%s/%s/%s/%s', $kernelDir, 'Resources', 'themes', $this->theme->getFolder());
-
-        return $themeDir;
+        return $this->getThemeDir($this->theme->getFolder());
     }
 
     /**
@@ -135,18 +133,6 @@ class ThemeFieldsGenerator extends ContainerAware implements ContainerAwareInter
         foreach ($this->configuration->documentElement->getElementsByTagName('fieldset') as $fieldset) {
             $this->addFieldset($fieldset);
         }
-    }
-
-    /**
-     * Shortcut to translator service trans method
-     *
-     * @param $id
-     *
-     * @return mixed
-     */
-    protected function trans($id)
-    {
-        return $this->container->get('translator')->trans($id);
     }
 
     /**

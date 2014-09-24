@@ -6,12 +6,6 @@
         <route>admin.layout_theme.index</route>
         <path>menu.layout.layout_theme</path>
         <sort_order>10</sort_order>
-    </item><item>
-        <id>layout_page</id>
-        <name>admin.menu.layout_page</name>
-        <route>admin.layout_page.index</route>
-        <path>menu.layout.layout_page</path>
-        <sort_order>20</sort_order>
     </item>
     <item>
         <id>layout_box</id>

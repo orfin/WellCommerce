@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\LayoutBundle;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
-use WellCommerce\Bundle\LayoutBundle\DependencyInjection\Compiler\LayoutPagesPass;
 use WellCommerce\Bundle\LayoutBundle\DependencyInjection\Compiler\TemplateResourcesPass;
 use WellCommerce\Bundle\LayoutBundle\DependencyInjection\Compiler\ThemeCompilerPass;
 
@@ -35,6 +34,5 @@ class WellCommerceLayoutBundle extends Bundle
         parent::build($container);
         $container->addCompilerPass(new ThemeCompilerPass());
         $container->addCompilerPass(new TemplateResourcesPass());
-        $container->addCompilerPass(new LayoutPagesPass());
     }
 }

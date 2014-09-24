@@ -68,9 +68,7 @@ class LayoutThemeForm extends AbstractForm implements FormInterface
     private function getFolderDirectories()
     {
         $finder       = new Finder();
-        $kernelDir    = $this->get('kernel')->getRootDir();
-        $searchDir    = $kernelDir . DIRECTORY_SEPARATOR . 'Resources' . DIRECTORY_SEPARATOR . 'themes';
-        $directories  = $finder->directories()->in($searchDir)->sortByName()->depth('== 1');
+        $directories  = $finder->directories()->in($this->getThemeDir())->sortByName()->depth('== 1');
         $themeFolders = [];
 
         foreach ($directories as $directory) {

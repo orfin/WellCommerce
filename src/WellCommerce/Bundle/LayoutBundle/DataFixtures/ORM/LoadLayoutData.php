@@ -32,16 +32,9 @@ class LoadLayoutData implements FixtureInterface
     public function load(ObjectManager $manager)
     {
         $layoutTheme = new LayoutTheme();
-        $layoutTheme->setName('Development');
-        $layoutTheme->setFolder('development');
+        $layoutTheme->setName('Demo');
+        $layoutTheme->setFolder('demo');
         $manager->persist($layoutTheme);
-
-        $pages = $this->getLayoutPages();
-        foreach ($pages as $page) {
-            $layoutPage = new LayoutPage();
-            $layoutPage->setName($page);
-            $manager->persist($layoutPage);
-        }
 
         $types = $this->getLayoutBoxTypes();
         foreach ($types as $type) {
@@ -52,35 +45,6 @@ class LoadLayoutData implements FixtureInterface
         }
 
         $manager->flush();
-    }
-
-    private function getLayoutPages()
-    {
-        return [
-            'HomePage',
-            'Contact',
-            'Product',
-            'Category',
-            'Promotions',
-            'News',
-            'Producer',
-            'Search',
-            'Cart',
-            'Checkout',
-            'Finalization',
-            'Payment',
-            'ClientWishList',
-            'ClientOrder',
-            'ClientAddress',
-            'ClientSettings',
-            'Login',
-            'Registration',
-            'ForgotPassword',
-            'Page',
-            'SiteMap',
-            'Blog',
-            'Newsletter',
-        ];
     }
 
     private function getLayoutBoxTypes()

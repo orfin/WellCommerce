@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\CoreBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -254,6 +255,33 @@ class AbstractContainer extends ContainerAware
     protected function getValidator()
     {
         return $this->container->get('validator');
+    }
+
+    /**
+     * Returns themes directory path
+     * If theme folder name is passed, full directory path pointing to it will be returned
+     *
+     * @param string $themeFolder
+     *
+     * @return string
+     * @throws \Symfony\Component\HttpFoundation\File\Exception\FileException
+     */
+    final protected function getThemeDir($themeFolder = '')
+    {
+        $kernelDir = $this->get('kernel')->getRootDir();
+        $webDir    = $kernelDir . '/../web';
+
+        if (strlen($themeFolder)) {
+            $dir = $webDir . DIRECTORY_SEPARATOR . 'themes' . DIRECTORY_SEPARATOR . $themeFolder;
+        } else {
+            $dir = $webDir . DIRECTORY_SEPARATOR . 'themes';
+        }
+
+        if (!is_dir($dir)) {
+            throw new FileException(sprintf('Directory "%s" not found.', $dir));
+        }
+
+        return $dir;
     }
 
 }

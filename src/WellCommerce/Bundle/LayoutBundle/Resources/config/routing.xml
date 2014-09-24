@@ -5,6 +5,5 @@
         xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
     <import resource="routing/layout_box.xml"/>
-    <import resource="routing/layout_page.xml"/>
     <import resource="routing/layout_theme.xml"/>
 </routes>

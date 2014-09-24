@@ -5,7 +5,6 @@
 
     <imports>
         <import resource="services/layout_box.xml"/>
-        <import resource="services/layout_page.xml"/>
         <import resource="services/layout_theme.xml"/>
     </imports>
 
