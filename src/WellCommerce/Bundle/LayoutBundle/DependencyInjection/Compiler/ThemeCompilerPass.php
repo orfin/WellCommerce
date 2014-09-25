@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\LayoutBundle\DependencyInjection\Compiler;
 
-use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
@@ -28,6 +27,11 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
  */
 class ThemeCompilerPass implements CompilerPassInterface
 {
+    /**
+     * Processes the container
+     *
+     * @param ContainerBuilder $container
+     */
     public function process(ContainerBuilder $container)
     {
         $container->setAlias('templating.locator', 'layout.templating_locator');

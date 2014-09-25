@@ -33,7 +33,7 @@ class LoadLayoutData implements FixtureInterface
     {
         $layoutTheme = new LayoutTheme();
         $layoutTheme->setName('Demo');
-        $layoutTheme->setFolder('demo');
+        $layoutTheme->setFolder('development');
         $manager->persist($layoutTheme);
 
         $types = $this->getLayoutBoxTypes();

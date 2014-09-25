@@ -25,6 +25,7 @@ use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\EnableableTrait;
 class LayoutBoxType
 {
     use ORMBehaviors\Timestampable\Timestampable;
+    use ORMBehaviors\Blameable\Blameable;
 
     /**
      * @var integer
@@ -57,7 +58,7 @@ class LayoutBoxType
     private $configuratorService;
 
     /**
-     * Get id
+     * Returns box type identifier
      *
      * @return integer
      */
@@ -66,38 +67,63 @@ class LayoutBoxType
         return $this->id;
     }
 
+    /**
+     * Returns box type
+     *
+     * @return string
+     */
     public function getType()
     {
         return $this->type;
     }
 
+    /**
+     * Sets box type
+     *
+     * @param $type
+     */
     public function setType($type)
     {
         $this->type = $type;
     }
 
+    /**
+     * Sets box type vendor
+     *
+     * @param $vendor
+     */
     public function setVendor($vendor)
     {
         $this->vendor = $vendor;
     }
 
+    /**
+     * Returns box type vendor
+     *
+     * @return string
+     */
     public function getVendor()
     {
         return $this->vendor;
     }
 
+    /**
+     * Sets configurator service name
+     *
+     * @param $configuratorService
+     */
     public function setConfiguratorService($configuratorService)
     {
         $this->configuratorService = $configuratorService;
     }
 
+    /**
+     * Returns configurator service name
+     *
+     * @return string
+     */
     public function getConfiguratorService()
     {
         return $this->configuratorService;
-    }
-
-    public function hasConfiguratorService()
-    {
-        return !is_null($this->configuratorService);
     }
 }

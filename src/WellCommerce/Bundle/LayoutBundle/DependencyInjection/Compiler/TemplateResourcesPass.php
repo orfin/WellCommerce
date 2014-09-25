@@ -32,6 +32,8 @@ class TemplateResourcesPass implements CompilerPassInterface
     private $themes = ['demo', 'dev'];
 
     /**
+     * Processes the container
+     *
      * @param ContainerBuilder $container
      */
     public function process(ContainerBuilder $container)

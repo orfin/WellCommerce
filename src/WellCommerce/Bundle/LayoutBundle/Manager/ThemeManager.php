@@ -52,6 +52,6 @@ class ThemeManager
 
     public function getBox($identifier)
     {
-        $this->theme->getBoxes()->
+        $this->theme->getBoxes();
     }
 } 
