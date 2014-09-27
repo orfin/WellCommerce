@@ -11,9 +11,8 @@
  */
 namespace WellCommerce\Bundle\CoreBundle\Controller\Front;
 
+use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
-use WellCommerce\Bundle\LayoutBundle\Manager\Layout;
-use WellCommerce\Bundle\LayoutBundle\Manager\LayoutInterface;
 
 /**
  * Class AbstractFrontController
@@ -23,28 +22,5 @@ use WellCommerce\Bundle\LayoutBundle\Manager\LayoutInterface;
  */
 abstract class AbstractFrontController extends AbstractController implements FrontControllerInterface
 {
-    /**
-     * @var null|Layout
-     */
-    private $layout = null;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setLayout(Layout $layout)
-    {
-        $this->layout = $layout;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function renderLayout()
-    {
-        if (null !== $this->layout) {
-            $this->getLayoutRenderer()->load($this->layout);
-        }
-
-        return '';
-    }
 }

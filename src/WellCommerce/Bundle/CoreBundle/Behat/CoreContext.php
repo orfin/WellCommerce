@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\CoreBundle\Behat;
 
 use Behat\Behat\Context\SnippetAcceptingContext;
-use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Behat\MinkExtension\Context\RawMinkContext;

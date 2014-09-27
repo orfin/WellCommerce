@@ -221,7 +221,10 @@ class Form extends AbstractContainer
                  * @var $element ElementInterface
                  */
                 foreach ($field as $element) {
-                    $element->handleRequest($this->defaultData);
+                    if($element instanceof ElementInterface){
+                        $element->handleRequest($this->defaultData);
+                    }
+
                 }
             } else {
                 $field->handleRequest($this->defaultData);

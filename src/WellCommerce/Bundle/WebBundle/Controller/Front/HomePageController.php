@@ -13,19 +13,17 @@
 namespace WellCommerce\Bundle\WebBundle\Controller\Front;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use WellCommerce\Bundle\LayoutBundle\Manager\Layout;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
 
 /**
- * Class UnitController
+ * Class HomePageController
  *
- * @package WellCommerce\Bundle\UnitBundle\Controller
+ * @package WellCommerce\Bundle\WebBundle\Controller\Front
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * @Template()
- * @Layout(name="HomePage")
  */
 class HomePageController extends AbstractFrontController implements FrontControllerInterface
 {
@@ -33,7 +31,7 @@ class HomePageController extends AbstractFrontController implements FrontControl
     public function indexAction(Request $request)
     {
         return [
-            'layout' => $this->renderLayout()
+            'layout' => ''
         ];
     }
 

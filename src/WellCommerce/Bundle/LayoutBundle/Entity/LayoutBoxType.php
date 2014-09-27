@@ -58,6 +58,13 @@ class LayoutBoxType
     private $configuratorService;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="controller_service", type="string", nullable=true, length=255)
+     */
+    private $controllerService;
+
+    /**
      * Returns box type identifier
      *
      * @return integer
@@ -125,5 +132,25 @@ class LayoutBoxType
     public function getConfiguratorService()
     {
         return $this->configuratorService;
+    }
+
+    /**
+     * Returns name of controller service
+     *
+     * @return string
+     */
+    public function getControllerService()
+    {
+        return $this->controllerService;
+    }
+
+    /**
+     * Sets name of controller service
+     *
+     * @param string $controllerService
+     */
+    public function setControllerService($controllerService)
+    {
+        $this->controllerService = $controllerService;
     }
 }
