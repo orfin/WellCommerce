@@ -11,10 +11,12 @@
  */
 namespace WellCommerce\Bundle\ThemeBundle\EventListener;
 
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use WellCommerce\Bundle\AdminBundle\Event\AdminMenuEvent;
+use WellCommerce\Bundle\AdminBundle\MenuBuilder\XmlLoader;
 use WellCommerce\Bundle\CoreBundle\Event\FormEvent;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 use WellCommerce\Bundle\ThemeBundle\Manager\ThemeManagerInterface;
@@ -60,16 +62,27 @@ class ThemeSubscriber extends AbstractEventSubscriber
 
     public function onKernelRequest(GetResponseEvent $event)
     {
-        $host  = $event->getRequest()->server->get('SERVER_NAME');
-        $theme = $this->layoutThemeRepository->find(6);
-        $this->shopTheme->setCurrentTheme($theme);
+//        $host  = $event->getRequest()->server->get('SERVER_NAME');
+//        $theme = $this->layoutThemeRepository->find(6);
+//        $this->shopTheme->setCurrentTheme($theme);
     }
 
     public function onKernelController(FilterControllerEvent $event)
     {
-        $host  = $event->getRequest()->server->get('SERVER_NAME');
-        $theme = $this->layoutThemeRepository->find(6);
-        $this->shopTheme->setCurrentTheme($theme);
+//        $host  = $event->getRequest()->server->get('SERVER_NAME');
+//        $theme = $this->layoutThemeRepository->find(6);
+//        $this->shopTheme->setCurrentTheme($theme);
+    }
+
+    /**
+     * Adds new admin menu items to collection
+     *
+     * @param AdminMenuEvent $event
+     */
+    public function onAdminMenuInitEvent(AdminMenuEvent $event)
+    {
+        $loader = new XmlLoader($event->getBuilder(), new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader->load('admin_menu.xml');
     }
 
     /**

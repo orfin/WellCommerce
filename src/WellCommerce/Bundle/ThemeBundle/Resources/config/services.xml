@@ -19,7 +19,7 @@
 
     <services>
         <service id="theme.manager" class="%theme.manager.class%">
-            <argument type="service" id="theme.repository"/>
+            <argument type="service" id="kernel"/>
         </service>
 
         <service id="theme.subscriber" class="%theme.subscriber.class%">
@@ -37,9 +37,8 @@
         </service>
 
         <service id="theme.file_locator" class="%theme.file_locator.class%">
-            <argument type="service" id="kernel" />
+            <argument type="service" id="theme.manager" />
             <argument>%kernel.root_dir%/Resources</argument>
-            <argument type="service" id="theme.manager"/>
         </service>
 
         <service id="theme.templating_locator" class="%theme.templating_locator.class%">

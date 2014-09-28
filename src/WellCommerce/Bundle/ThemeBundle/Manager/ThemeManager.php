@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\ThemeBundle\Manager;
 
+use Symfony\Component\HttpKernel\KernelInterface;
 use WellCommerce\Bundle\ThemeBundle\Entity\Theme;
 use WellCommerce\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 
@@ -29,18 +30,35 @@ class ThemeManager implements ThemeManagerInterface
     protected $theme;
 
     /**
-     * @var ThemeRepositoryInterface
+     * @var KernelInterface
      */
-    protected $repository;
+    protected $kernel;
 
     /**
      * Constructor
      *
      * @param ThemeRepositoryInterface $repository
      */
-    public function __construct(ThemeRepositoryInterface $repository)
+    public function __construct(KernelInterface $kernel)
     {
-        $this->repository = $repository;
+        $this->kernel = $kernel;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getThemesDirectory()
+    {
+        $kernelDir = $this->kernel->getRootDir();
+        return $kernelDir . '/../web/themes';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getThemeDirectory(Theme $theme)
+    {
+        return $this->getThemesDirectory() . DIRECTORY_SEPARATOR . $theme->getFolder();
     }
 
     /**
@@ -66,21 +84,78 @@ class ThemeManager implements ThemeManagerInterface
     /**
      * {@inheritdoc}
      */
+    public function locateTemplate($name)
+    {
+        if (false !== strpos($name, '..')) {
+            throw new \RuntimeException(sprintf('File name "%s" contains invalid characters (..).', $name));
+        }
+
+        $bundleName = substr($name, 1);
+        $path       = '';
+        if (false !== strpos($bundleName, '/')) {
+            list($bundleName, $path) = explode('/', $bundleName, 2);
+        }
+
+        if (0 !== strpos($path, 'Resources')) {
+            throw new \RuntimeException('Template files have to be in Resources.');
+        }
+
+        $resourceBundle = null;
+        $bundles        = $this->kernel->getBundle($bundleName, false);
+        $files          = array();
+
+        $parameters = array(
+            '%themes_path%'   => $this->getThemesDirectory(),
+            '%current_theme%' => 'demo',
+            '%template%'      => substr($path, strlen('Resources/views/')),
+        );
+
+        foreach ($bundles as $bundle) {
+            $parameters = array_merge($parameters, [
+                '%bundle_path%' => $bundle->getPath(),
+                '%bundle_name%' => $bundle->getName(),
+            ]);
+
+            $checkPaths = $this->getPathsForBundleResource($parameters);
+
+            foreach ($checkPaths as $checkPath) {
+                if (file_exists($checkPath)) {
+                    return $checkPath;
+                }
+            }
+
+            $file = $bundle->getPath() . '/' . $path;
+            if (file_exists($file)) {
+                return $file;
+            }
+        }
+
+        if (count($files) > 0) {
+            return current($files);
+        }
+
+        throw new \InvalidArgumentException(sprintf('Unable to find file "%s".', $name));
+    }
+
+    protected function getPathsForBundleResource($parameters)
+    {
+        $paths        = [];
+        $pathPatterns = $this->getThemePathPatterns();
+
+        foreach ($pathPatterns as $pattern) {
+            $paths[] = strtr($pattern, $parameters);
+        }
+
+        return $paths;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getThemePathPatterns()
     {
-        /*
-         * 'bundle_resource'     => [
-                '%bundle_path%/Resources/themes/%current_theme%/templates/%template%',
-                '%web_path%/themes/%current_theme%/templates/%template%',
-            ],
-            'bundle_resource_dir' => [
-                '%dir%/themes/%current_theme%/templates/%bundle_name%/%template%',
-                '%web_path%/themes/%current_theme%/templates/%bundle_name%/%template%',
-                '%dir%/%bundle_name%/%override_path%',
-            ],
-         */
         return [
-            '%web_path%/themes/%current_theme%/templates/%bundle_name%/%template%'
+            '%themes_path%/%current_theme%/templates/%bundle_name%/%template%'
         ];
     }
 } 

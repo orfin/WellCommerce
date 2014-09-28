@@ -29,7 +29,7 @@ use Symfony\Component\DependencyInjection\Exception\LogicException;
  */
 class TemplateResourcesPass implements CompilerPassInterface
 {
-    private $themes = ['demo', 'dev'];
+    private $themes = ['demo'];
 
     /**
      * Processes the container
