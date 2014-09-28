@@ -38,6 +38,7 @@ class AppKernel extends Kernel
             new Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
             // WellCommerce bundles
+            new WellCommerce\Bundle\CoreBundle\WellCommerceCoreBundle(),
             new WellCommerce\Bundle\AdminBundle\WellCommerceAdminBundle(),
             new WellCommerce\Bundle\WebBundle\WellCommerceWebBundle(),
             new WellCommerce\Bundle\NewsBundle\WellCommerceNewsBundle(),
@@ -47,7 +48,6 @@ class AppKernel extends Kernel
             new WellCommerce\Bundle\DelivererBundle\WellCommerceDelivererBundle(),
             new WellCommerce\Bundle\ProducerBundle\WellCommerceProducerBundle(),
             new WellCommerce\Bundle\CategoryBundle\WellCommerceCategoryBundle(),
-            new WellCommerce\Bundle\CoreBundle\WellCommerceCoreBundle(),
             new WellCommerce\Bundle\CountryBundle\WellCommerceCountryBundle(),
             new WellCommerce\Bundle\TaxBundle\WellCommerceTaxBundle(),
             new WellCommerce\Bundle\UnitBundle\WellCommerceUnitBundle(),
@@ -57,14 +57,15 @@ class AppKernel extends Kernel
             new WellCommerce\Bundle\LocaleBundle\WellCommerceLocaleBundle(),
             new WellCommerce\Bundle\ShopBundle\WellCommerceShopBundle(),
             new WellCommerce\Bundle\UserBundle\WellCommerceUserBundle(),
-            new WellCommerce\Bundle\LayoutBundle\WellCommerceLayoutBundle(),
             new WellCommerce\Bundle\ProductBundle\WellCommerceProductBundle(),
             new WellCommerce\Bundle\DashboardBundle\WellCommerceDashboardBundle(),
             new WellCommerce\Bundle\PaymentBundle\WellCommercePaymentBundle(),
-            new WellCommerce\Bundle\AttributeBundle\WellCommerceAttributeBundle()
+            new WellCommerce\Bundle\AttributeBundle\WellCommerceAttributeBundle(),
+            new WellCommerce\Bundle\ThemeBundle\WellCommerceThemeBundle(),
+            new WellCommerce\Bundle\LayoutBundle\WellCommerceLayoutBundle()
         ];
 
-        if (in_array($this->getEnvironment(), array('dev', 'test'))) {
+        if (in_array($this->getEnvironment(), ['dev', 'test'])) {
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();

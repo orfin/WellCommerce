@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\LayoutBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
-use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\EnableableTrait;
 
 /**
  * LayoutBox
@@ -38,17 +37,9 @@ class LayoutBox
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\LayoutBundle\Entity\LayoutBoxType")
-     * @ORM\JoinColumn(name="layout_box_type_id", referencedColumnName="id", onDelete="SET NULL")
-     * @ORM\OrderBy({"type" = "ASC"})
+     * @ORM\Column(name="box_type", type="string")
      */
     private $boxType;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\LayoutBundle\Entity\LayoutTheme", inversedBy="boxes")
-     * @ORM\JoinColumn(name="layout_theme_id", referencedColumnName="id", nullable=false)
-     */
-    protected $theme;
 
     /**
      * @var string
@@ -74,25 +65,17 @@ class LayoutBox
      */
     private $identifier;
 
-    /**
-     * Get id
-     *
-     * @return integer
-     */
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * @return \WellCommerce\Bundle\LayoutBundle\Entity\LayoutBoxType
-     */
     public function getBoxType()
     {
         return $this->boxType;
     }
 
-    public function setBoxType(LayoutBoxType $boxType)
+    public function setBoxType($boxType)
     {
         $this->boxType = $boxType;
     }
@@ -127,35 +110,13 @@ class LayoutBox
         $this->settings = $settings;
     }
 
-    /**
-     * @param mixed $identifier
-     */
     public function setIdentifier($identifier)
     {
         $this->identifier = $identifier;
     }
 
-    /**
-     * @return mixed
-     */
     public function getIdentifier()
     {
         return $this->identifier;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTheme()
-    {
-        return $this->theme;
-    }
-
-    /**
-     * @param LayoutTheme $theme
-     */
-    public function setTheme(LayoutTheme $theme)
-    {
-        $this->theme = $theme;
     }
 }

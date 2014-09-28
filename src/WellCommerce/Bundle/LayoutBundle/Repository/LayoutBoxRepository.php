@@ -26,17 +26,15 @@ class LayoutBoxRepository extends AbstractEntityRepository implements LayoutBoxR
      */
     public function getDataGridQueryBuilder()
     {
-        return parent::getQueryBuilder()->groupBy('layout_box.id')
-            ->leftJoin(
-                'WellCommerce\Bundle\LayoutBundle\Entity\LayoutBoxTranslation',
-                'layout_box_translation',
-                'WITH',
-                'layout_box.id = layout_box_translation.translatable AND layout_box_translation.locale = :locale')
-            ->leftJoin(
-                'WellCommerce\Bundle\LayoutBundle\Entity\LayoutBoxType',
-                'layout_box_type',
-                'WITH',
-                'layout_box.boxType = layout_box_type.id');
+        $queryBuilder = parent::getQueryBuilder();
+        $queryBuilder->groupBy('layout_box.id');
+        $queryBuilder->leftJoin(
+            'WellCommerce\Bundle\LayoutBundle\Entity\LayoutBoxTranslation',
+            'layout_box_translation',
+            'WITH',
+            'layout_box.id = layout_box_translation.translatable AND layout_box_translation.locale = :locale');
+
+        return $queryBuilder;
 
     }
 }

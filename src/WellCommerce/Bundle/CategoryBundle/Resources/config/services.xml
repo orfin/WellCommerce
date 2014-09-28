@@ -10,7 +10,8 @@
         <parameter key="category.form.class">WellCommerce\Bundle\CategoryBundle\Form\CategoryForm</parameter>
         <parameter key="category.tree.class">WellCommerce\Bundle\CategoryBundle\Form\CategoryTree</parameter>
         <parameter key="category.subscriber.class">WellCommerce\Bundle\CategoryBundle\EventListener\CategorySubscriber</parameter>
-        <parameter key="category.manager.class">WellCommerce\Bundle\CategoryBundle\Manager\CategoryManager</parameter>
+        <parameter key="category.layout_box.controller.class">WellCommerce\Bundle\CategoryBundle\Controller\Box\CategoryBoxController</parameter>
+        <parameter key="category.layout_box.configurator.class">WellCommerce\Bundle\CategoryBundle\Layout\CategoryBoxConfigurator</parameter>
     </parameters>
 
     <services>
@@ -22,8 +23,11 @@
             <argument type="service" id="category.form"/>
         </service>
 
-        <service id="category.controller.box" class="%category.controller.box.class%">
-            <tag name="layout_box" />
+        <service id="category.layout_box.controller" class="%category.layout_box.controller.class%" />
+
+        <service id="category.layout_box.configurator" class="%category.layout_box.configurator.class%">
+            <argument type="service" id="category.layout_box.controller" />
+            <tag name="layout_box.configurator" type="CategoriesBox" />
         </service>
 
         <service id="category.repository" class="%category.repository.class%" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">

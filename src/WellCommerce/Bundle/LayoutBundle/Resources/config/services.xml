@@ -5,66 +5,13 @@
 
     <imports>
         <import resource="services/layout_box.xml"/>
-        <import resource="services/layout_theme.xml"/>
     </imports>
 
     <parameters>
-        <parameter key="layout.templating_locator.class">WellCommerce\Bundle\LayoutBundle\Locator\TemplateLocator</parameter>
-        <parameter key="layout.file_locator.class">WellCommerce\Bundle\LayoutBundle\Locator\FileLocator</parameter>
-        <parameter key="layout.cache_warmer.class">WellCommerce\Bundle\LayoutBundle\CacheWarmer\TemplatePathsCacheWarmer</parameter>
-        <parameter key="layout.subscriber.class">WellCommerce\Bundle\LayoutBundle\EventListener\LayoutSubscriber</parameter>
-        <parameter key="layout.shop_theme.class">WellCommerce\Bundle\LayoutBundle\Theme\ShopTheme</parameter>
-        <parameter key="layout_manager.class">WellCommerce\Bundle\LayoutBundle\Manager\LayoutManager</parameter>
-        <parameter key="layout_renderer.class">WellCommerce\Bundle\LayoutBundle\Manager\LayoutRenderer</parameter>
+        <parameter key="layout_box.configurator.collection.class">WellCommerce\Bundle\LayoutBundle\Layout\LayoutBoxConfiguratorCollection</parameter>
     </parameters>
 
     <services>
-        <service id="layout.shop_theme" class="%layout.shop_theme.class%">
-            <argument type="service" id="kernel" />
-        </service>
-
-        <service id="layout.templating.cache_warmer.template_paths" class="%layout.cache_warmer.class%" public="false">
-            <argument type="service" id="templating.finder" />
-            <argument type="service" id="layout.templating_locator" />
-        </service>
-
-        <service id="layout.subscriber" class="%layout.subscriber.class%">
-            <argument type="service" id="layout.shop_theme"/>
-            <argument type="service" id="annotation_reader"/>
-            <argument type="service" id="layout_theme.repository"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <call method="setTranslator">
-                <argument type="service" id="translator"/>
-            </call>
-            <call method="setRouter">
-                <argument type="service" id="router"/>
-            </call>
-            <tag name="kernel.event_subscriber" />
-        </service>
-
-        <service id="layout.file_locator" class="%layout.file_locator.class%" public="false">
-            <argument type="service" id="kernel" />
-            <argument>%kernel.root_dir%/Resources</argument>
-            <argument type="service" id="layout.shop_theme"/>
-        </service>
-
-        <service id="layout.templating_locator" class="%layout.templating_locator.class%" public="false">
-            <argument type="service" id="layout.file_locator" />
-            <argument>%kernel.cache_dir%</argument>
-        </service>
-
-        <service id="layout_manager" class="%layout_manager.class%">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
-
-        <service id="layout_renderer" class="%layout_renderer.class%">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
+        <service id="layout_box.configurator.collection" class="%layout_box.configurator.collection.class%" />
     </services>
 </container>

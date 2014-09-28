@@ -17,13 +17,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\EnableableTrait;
-use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\MetaDataTrait;
 use WellCommerce\Bundle\CurrencyBundle\Entity\Currency;
-use WellCommerce\Bundle\LayoutBundle\Entity\LayoutTheme;
 use WellCommerce\Bundle\LocaleBundle\Entity\Locale;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod;
 use WellCommerce\Bundle\ProducerBundle\Entity\Producer;
 use WellCommerce\Bundle\ProductBundle\Entity\Product;
+use WellCommerce\Bundle\ThemeBundle\Entity\Theme;
 
 /**
  * Class Shop
@@ -95,10 +94,10 @@ class Shop
     private $currencies;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\LayoutBundle\Entity\LayoutTheme")
-     * @ORM\JoinColumn(name="layout_theme_id", referencedColumnName="id", onDelete="SET NULL")
+     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\ThemeBundle\Entity\Theme")
+     * @ORM\JoinColumn(name="theme_id", referencedColumnName="id", onDelete="SET NULL")
      */
-    private $layoutTheme;
+    private $theme;
 
     /**
      * Constructor
@@ -128,19 +127,19 @@ class Shop
      *
      * @return mixed
      */
-    public function getLayoutTheme()
+    public function getTheme()
     {
-        return $this->layoutTheme;
+        return $this->theme;
     }
 
     /**
      * Sets default shop theme
      *
-     * @param LayoutTheme $layoutTheme
+     * @param Theme $theme
      */
-    public function setLayoutTheme(LayoutTheme $layoutTheme = null)
+    public function setTheme(Theme $theme = null)
     {
-        $this->layoutTheme = $layoutTheme;
+        $this->theme = $theme;
     }
 
     /**

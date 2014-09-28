@@ -65,11 +65,12 @@ class LayoutBoxForm extends AbstractForm implements FormInterface
             'transformer' => new EntityToIdentifierTransformer($this->get('layout_theme.repository'))
         ]));
 
+//        $configurators = $this->get('layout_box.configurator.collection');
+
         $requiredData->addChild($builder->getElement('select', [
             'name'        => 'boxType',
             'label'       => $this->trans('Box type'),
-            'options'     => $this->get('layout_box_type.repository')->getCollectionToSelect('type'),
-            'transformer' => new EntityToIdentifierTransformer($this->get('layout_box_type.repository'))
+            'options'     => []
         ]));
 
         $form->addFilter('no_code');
