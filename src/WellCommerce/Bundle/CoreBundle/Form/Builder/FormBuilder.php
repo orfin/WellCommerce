@@ -48,7 +48,7 @@ class FormBuilder extends AbstractContainer implements FormBuilderInterface
         $this->options = $options;
         $this->data    = $data;
         $this->form    = $form->buildForm($this, $this->options)->setDefaultData($this->data);
-        $this->dispatchEvent($this->getInitEventName($options['name']));
+        $this->dispatchEvent($this->getInitEventName($form));
 
         return $this;
     }
@@ -73,9 +73,22 @@ class FormBuilder extends AbstractContainer implements FormBuilderInterface
      *
      * @return string
      */
-    private function getInitEventName($formName)
+    /**
+     * Returns form init event name
+     * If form has defined constant, it will be used instead of auto-generating event name
+     *
+     * @param $form
+     *
+     * @return mixed|string
+     */
+    private function getInitEventName($form)
     {
-        return sprintf('%s.%s', $formName, FormBuilderInterface::FORM_INIT_EVENT);
+        $refClass = new \ReflectionClass($form);
+        if ($refClass->hasConstant('FORM_INIT_EVENT')) {
+            return $refClass->getConstant('FORM_INIT_EVENT');
+        }
+
+        return sprintf('%s.%s', $this->options['name'], FormBuilderInterface::FORM_INIT_EVENT);
     }
 
     /**

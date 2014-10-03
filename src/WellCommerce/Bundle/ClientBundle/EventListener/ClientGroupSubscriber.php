@@ -34,7 +34,7 @@ class ClientGroupSubscriber extends AbstractEventSubscriber
     public function onAdminMenuInitEvent(AdminMenuEvent $event)
     {
         $loader = new XmlLoader($event->getBuilder(), new FileLocator(__DIR__ . '/../Resources/config/menu'));
-        $loader->load('client_group.xml');
+        $loader->load('client.xml');
     }
 
     /**

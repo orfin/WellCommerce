@@ -39,6 +39,11 @@ class AbstractEventSubscriber extends ContainerAware implements ContainerAwareIn
      */
     protected $router;
 
+    protected static $events
+        = [
+            AdminMenuEvent::INIT_EVENT => 'onAdminMenuInitEvent'
+        ];
+
     /**
      * Sets translator instance
      *
@@ -66,6 +71,17 @@ class AbstractEventSubscriber extends ContainerAware implements ContainerAwareIn
      */
     public static function getSubscribedEvents()
     {
-        return [];
+        return self::$events;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function onAdminMenuInitEvent(AdminMenuEvent $event)
+    {
+        $reflection = new \ReflectionClass($this);
+        $directory  = dirname($reflection->getFileName());
+        $loader     = new XmlLoader($event->getBuilder(), new FileLocator($directory . '/../Resources/config'));
+        $loader->load('admin_menu.xml');
     }
 }

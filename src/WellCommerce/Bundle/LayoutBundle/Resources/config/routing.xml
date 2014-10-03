@@ -4,5 +4,26 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <import resource="routing/layout_box.xml"/>
+    <route id="admin.layout_box.index" path="/box/index">
+        <default key="_controller">layout_box.controller.admin:indexAction</default>
+    </route>
+
+    <route id="admin.layout_box.grid" path="/box/grid">
+        <default key="_controller">layout_box.controller.admin:gridAction</default>
+        <option key="expose">true</option>
+    </route>
+
+    <route id="admin.layout_box.add" path="/box/add">
+        <default key="_controller">layout_box.controller.admin:addAction</default>
+    </route>
+
+    <route id="admin.layout_box.edit" path="/box/edit/{id}">
+        <default key="_controller">layout_box.controller.admin:editAction</default>
+        <option key="expose">true</option>
+    </route>
+
+    <route id="admin.layout_box.delete" path="/box/delete/{id}">
+        <default key="_controller">layout_box.controller.admin:deleteAction</default>
+        <option key="expose">true</option>
+    </route>
 </routes>

@@ -25,6 +25,8 @@ use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
  */
 class LayoutBoxForm extends AbstractForm implements FormInterface
 {
+    const FORM_INIT_EVENT = 'layout_box.form.init';
+
     /**
      * {@inheritdoc}
      */
@@ -61,16 +63,14 @@ class LayoutBoxForm extends AbstractForm implements FormInterface
         $requiredData->addChild($builder->getElement('select', [
             'name'        => 'theme',
             'label'       => $this->trans('Theme'),
-            'options'     => $this->get('layout_theme.repository')->getCollectionToSelect(),
-            'transformer' => new EntityToIdentifierTransformer($this->get('layout_theme.repository'))
+            'options'     => $this->get('theme.repository')->getCollectionToSelect(),
+            'transformer' => new EntityToIdentifierTransformer($this->get('theme.repository'))
         ]));
 
-//        $configurators = $this->get('layout_box.configurator.collection');
-
         $requiredData->addChild($builder->getElement('select', [
-            'name'        => 'boxType',
-            'label'       => $this->trans('Box type'),
-            'options'     => []
+            'name'    => 'boxType',
+            'label'   => $this->trans('Box type'),
+            'options' => []
         ]));
 
         $form->addFilter('no_code');

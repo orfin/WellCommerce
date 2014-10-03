@@ -11,9 +11,6 @@
  */
 namespace WellCommerce\Bundle\ProducerBundle\EventListener;
 
-use Symfony\Component\Config\FileLocator;
-use WellCommerce\Bundle\AdminBundle\Event\AdminMenuEvent;
-use WellCommerce\Bundle\AdminBundle\MenuBuilder\XmlLoader;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 
 /**
@@ -24,24 +21,5 @@ use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
  */
 class ProducerSubscriber extends AbstractEventSubscriber
 {
-    /**
-     * Adds new admin menu items to collection
-     *
-     * @param AdminMenuEvent $event
-     */
-    public function onAdminMenuInitEvent(AdminMenuEvent $event)
-    {
-        $loader = new XmlLoader($event->getBuilder(), new FileLocator(__DIR__ . '/../Resources/config'));
-        $loader->load('admin_menu.xml');
-    }
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function getSubscribedEvents()
-    {
-        return [
-            AdminMenuEvent::INIT_EVENT => 'onAdminMenuInitEvent'
-        ];
-    }
 }

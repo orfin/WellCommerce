@@ -24,6 +24,8 @@ use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
  */
 class ThemeForm extends AbstractForm implements FormInterface
 {
+    const FORM_INIT_EVENT = 'theme.form.init';
+
     /**
      * {@inheritdoc}
      */

@@ -55,7 +55,7 @@
             <call method="setRouter">
                 <argument type="service" id="router"/>
             </call>
-            <tag name="kernel.event_subscriber" />
+            <tag name="kernel.event_subscriber"  />
         </service>
     </services>
 </container>

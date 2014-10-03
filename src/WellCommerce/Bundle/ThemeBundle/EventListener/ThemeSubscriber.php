@@ -19,6 +19,7 @@ use WellCommerce\Bundle\AdminBundle\Event\AdminMenuEvent;
 use WellCommerce\Bundle\AdminBundle\MenuBuilder\XmlLoader;
 use WellCommerce\Bundle\CoreBundle\Event\FormEvent;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
+use WellCommerce\Bundle\ThemeBundle\Form\ThemeForm;
 use WellCommerce\Bundle\ThemeBundle\Manager\ThemeManagerInterface;
 
 /**
@@ -75,17 +76,6 @@ class ThemeSubscriber extends AbstractEventSubscriber
     }
 
     /**
-     * Adds new admin menu items to collection
-     *
-     * @param AdminMenuEvent $event
-     */
-    public function onAdminMenuInitEvent(AdminMenuEvent $event)
-    {
-        $loader = new XmlLoader($event->getBuilder(), new FileLocator(__DIR__ . '/../Resources/config'));
-        $loader->load('admin_menu.xml');
-    }
-
-    /**
      * {@inheritdoc}
      */
     public static function getSubscribedEvents()
@@ -94,7 +84,7 @@ class ThemeSubscriber extends AbstractEventSubscriber
             AdminMenuEvent::INIT_EVENT => 'onAdminMenuInitEvent',
             KernelEvents::CONTROLLER   => ['onKernelController', -250],
             KernelEvents::REQUEST      => ['onKernelRequest', -250],
-            'theme.form.init'          => 'onThemeFormInit',
+            ThemeForm::FORM_INIT_EVENT => 'onThemeFormInit',
         ];
     }
 }

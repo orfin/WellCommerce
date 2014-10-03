@@ -11,13 +11,10 @@
  */
 namespace WellCommerce\Bundle\LocaleBundle\EventListener;
 
-use Symfony\Component\Config\FileLocator;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use WellCommerce\Bundle\AdminBundle\Event\AdminMenuEvent;
-use WellCommerce\Bundle\AdminBundle\MenuBuilder\XmlLoader;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 
 /**
@@ -28,6 +25,11 @@ use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
  */
 class LocaleSubscriber extends AbstractEventSubscriber
 {
+    protected static $events = [
+        KernelEvents::CONTROLLER   => ['onKernelController', -256],
+        AdminMenuEvent::INIT_EVENT => 'onAdminMenuInitEvent'
+    ];
+
     public function onKernelController(FilterControllerEvent $event)
     {
         // fetch locales only when HttpKernelInterface::MASTER_REQUEST
@@ -41,27 +43,5 @@ class LocaleSubscriber extends AbstractEventSubscriber
 
             $this->container->get('session')->set('admin/locales', $locales);
         }
-    }
-
-    /**
-     * Adds new admin menu items to collection
-     *
-     * @param AdminMenuEvent $event
-     */
-    public function onAdminMenuInitEvent(AdminMenuEvent $event)
-    {
-        $loader = new XmlLoader($event->getBuilder(), new FileLocator(__DIR__ . '/../Resources/config'));
-        $loader->load('admin_menu.xml');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function getSubscribedEvents()
-    {
-        return [
-            KernelEvents::CONTROLLER   => ['onKernelController', -256],
-            AdminMenuEvent::INIT_EVENT => 'onAdminMenuInitEvent'
-        ];
     }
 }
