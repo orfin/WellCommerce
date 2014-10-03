@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\LayoutBundle\Layout\Manager\Configurator;
+namespace WellCommerce\Bundle\LayoutBundle\Layout\Configurator;
 
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
 use WellCommerce\Bundle\LayoutBundle\LayoutBoxConfiguratorInterface;
@@ -18,7 +18,7 @@ use WellCommerce\Bundle\LayoutBundle\LayoutBoxConfiguratorInterface;
 /**
  * Class AbstractLayoutBoxConfigurator
  *
- * @package WellCommerce\Bundle\LayoutBundle\Layout\Manager\Configurator
+ * @package WellCommerce\Bundle\LayoutBundle\Layout\Configurator
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 abstract class AbstractLayoutBoxConfigurator extends AbstractContainer implements LayoutBoxConfiguratorInterface

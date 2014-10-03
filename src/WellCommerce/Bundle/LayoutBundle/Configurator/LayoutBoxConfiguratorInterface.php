@@ -10,14 +10,14 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\LayoutBundle;
+namespace WellCommerce\Bundle\LayoutBundle\Configurator;
 
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 
 /**
  * Interface LayoutBoxConfiguratorInterface
  *
- * @package WellCommerce\Bundle\LayoutBundle
+ * @package WellCommerce\Bundle\LayoutBundle\Configurator
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface LayoutBoxConfiguratorInterface

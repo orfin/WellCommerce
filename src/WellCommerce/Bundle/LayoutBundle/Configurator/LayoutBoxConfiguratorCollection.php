@@ -10,52 +10,27 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\LayoutBundle\Layout;
+namespace WellCommerce\Bundle\LayoutBundle\Layout\Configurator;
 
+use WellCommerce\Bundle\CoreBundle\Collection\AbstractCollection;
 use WellCommerce\Bundle\LayoutBundle\LayoutBoxConfiguratorInterface;
 
 /**
  * Class LayoutBoxConfiguratorCollection
  *
- * @package WellCommerce\Bundle\LayoutBundle\Layout
+ * @package WellCommerce\Bundle\LayoutBundle\Layout\Configurator
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LayoutBoxConfiguratorCollection
+class LayoutBoxConfiguratorCollection extends AbstractCollection
 {
     /**
-     * @var array An array containing all configurators in collection
-     */
-    protected $configurators = [];
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getIterator()
-    {
-        return new \ArrayIterator($this->configurators);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function count()
-    {
-        return count($this->configurators);
-    }
-
-    /**
-     * {@inheritdoc}
+     * Adds new configurator to collection
+     *
+     * @param                                $type
+     * @param LayoutBoxConfiguratorInterface $configurator
      */
     public function add($type, LayoutBoxConfiguratorInterface $configurator)
     {
-        $this->configurators[$type] = $configurator;
+        $this->items[$type] = $configurator;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function all()
-    {
-        return $this->configurators;
-    }
-} 
+}

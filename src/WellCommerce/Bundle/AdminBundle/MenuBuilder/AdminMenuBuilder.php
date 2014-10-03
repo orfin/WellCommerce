@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\AdminBundle\MenuBuilder;
 
 use Symfony\Component\PropertyAccess\PropertyAccess;
+use WellCommerce\Bundle\CoreBundle\Collection\AbstractCollection;
 
 /**
  * Class AdminMenuBuilder
@@ -20,37 +21,8 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
  * @package WellCommerce\Bundle\AdminBundle\MenuBuilder
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AdminMenuBuilder implements \IteratorAggregate, \Countable, AdminMenuBuilderInterface
+class AdminMenuBuilder extends AbstractCollection implements  AdminMenuBuilderInterface
 {
-    /**
-     * @var array Items collection
-     */
-    private $items = [];
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getIterator()
-    {
-        return new \ArrayIterator($this->items);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function count()
-    {
-        return count($this->items);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function all()
-    {
-        return $this->items;
-    }
-
     /**
      * {@inheritdoc}
      */
