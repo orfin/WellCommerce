@@ -80,8 +80,7 @@ class ThemeSubscriber extends AbstractEventSubscriber
      */
     public static function getSubscribedEvents()
     {
-        return [
-            AdminMenuEvent::INIT_EVENT => 'onAdminMenuInitEvent',
+        return parent::getSubscribedEvents() + [
             KernelEvents::CONTROLLER   => ['onKernelController', -250],
             KernelEvents::REQUEST      => ['onKernelRequest', -250],
             ThemeForm::FORM_INIT_EVENT => 'onThemeFormInit',

@@ -13,8 +13,8 @@
 namespace WellCommerce\Bundle\CategoryBundle\Layout;
 
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
-use WellCommerce\Bundle\LayoutBundle\Layout\AbstractLayoutBoxConfigurator;
-use WellCommerce\Bundle\LayoutBundle\LayoutBoxConfiguratorInterface;
+use WellCommerce\Bundle\LayoutBundle\Configurator\LayoutBoxConfiguratorInterface;
+use WellCommerce\Bundle\LayoutBundle\Layout\Configurator\AbstractLayoutBoxConfigurator;
 
 /**
  * Class CategoryBoxConfigurator

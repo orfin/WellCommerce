@@ -24,11 +24,6 @@ use WellCommerce\Bundle\CoreBundle\Form\Conditions\Equals;
  */
 class PaymentMethodSubscriber extends AbstractEventSubscriber
 {
-    protected static $events = [
-        AdminMenuEvent::INIT_EVENT => 'onAdminMenuInitEvent',
-        'payment_method.form.init' => 'onPaymentMethodFormInit',
-    ];
-
     /**
      * Adds processor settings to payment method form
      *
@@ -54,5 +49,12 @@ class PaymentMethodSubscriber extends AbstractEventSubscriber
                 'condition' => new Equals($processor->getAlias())
             ]);
         }
+    }
+
+    public static function getSubscribedEvents()
+    {
+        return parent::getSubscribedEvents() + [
+            'payment_method.form.init' => 'onPaymentMethodFormInit',
+        ];
     }
 }

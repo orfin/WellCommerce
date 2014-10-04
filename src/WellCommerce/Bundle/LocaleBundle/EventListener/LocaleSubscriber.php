@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\LocaleBundle\EventListener;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
-use WellCommerce\Bundle\AdminBundle\Event\AdminMenuEvent;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 
 /**
@@ -25,11 +24,6 @@ use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
  */
 class LocaleSubscriber extends AbstractEventSubscriber
 {
-    protected static $events = [
-        KernelEvents::CONTROLLER   => ['onKernelController', -256],
-        AdminMenuEvent::INIT_EVENT => 'onAdminMenuInitEvent'
-    ];
-
     public function onKernelController(FilterControllerEvent $event)
     {
         // fetch locales only when HttpKernelInterface::MASTER_REQUEST
@@ -43,5 +37,12 @@ class LocaleSubscriber extends AbstractEventSubscriber
 
             $this->container->get('session')->set('admin/locales', $locales);
         }
+    }
+
+    public static function getSubscribedEvents()
+    {
+        return parent::getSubscribedEvents() + [
+            KernelEvents::CONTROLLER => ['onKernelController', -256],
+        ];
     }
 }

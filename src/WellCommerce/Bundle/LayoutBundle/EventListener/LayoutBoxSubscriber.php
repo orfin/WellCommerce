@@ -25,12 +25,6 @@ use WellCommerce\Bundle\LayoutBundle\Form\LayoutBoxForm;
  */
 class LayoutBoxSubscriber extends AbstractEventSubscriber
 {
-    protected static $events
-        = [
-            AdminMenuEvent::INIT_EVENT     => 'onAdminMenuInitEvent',
-            LayoutBoxForm::FORM_INIT_EVENT => 'onLayoutBoxFormInit',
-        ];
-
     /**
      * Adds configurator fields to main layout box edit form
      *
@@ -38,9 +32,17 @@ class LayoutBoxSubscriber extends AbstractEventSubscriber
      */
     public function onLayoutBoxFormInit(FormEvent $event)
     {
-        $builder    = $event->getFormBuilder();
-        $form       = $builder->getForm();
-        $resource   = $builder->getData();
-        $collection = $this->container->get('layout_box.configurator.collection');
+        $builder       = $event->getFormBuilder();
+        $form          = $builder->getForm();
+        $resource      = $builder->getData();
+        $collection    = $this->container->get('layout_box.configurator.collection');
+        $configurators = $collection->all();
+    }
+
+    public static function getSubscribedEvents()
+    {
+        return parent::getSubscribedEvents() + [
+            LayoutBoxForm::FORM_INIT_EVENT => 'onLayoutBoxFormInit',
+        ];
     }
 }

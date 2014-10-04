@@ -7,4 +7,11 @@
         <path>menu.crm.client</path>
         <sort_order>10</sort_order>
     </item>
+    <item>
+        <id>client_group</id>
+        <name>admin.menu.client_group</name>
+        <route>admin.client_group.index</route>
+        <path>menu.crm.client_group</path>
+        <sort_order>20</sort_order>
+    </item>
 </items>

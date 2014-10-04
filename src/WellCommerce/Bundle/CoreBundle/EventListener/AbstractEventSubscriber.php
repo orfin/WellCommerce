@@ -39,11 +39,6 @@ class AbstractEventSubscriber extends ContainerAware implements ContainerAwareIn
      */
     protected $router;
 
-    protected static $events
-        = [
-            AdminMenuEvent::INIT_EVENT => 'onAdminMenuInitEvent'
-        ];
-
     /**
      * Sets translator instance
      *
@@ -64,14 +59,11 @@ class AbstractEventSubscriber extends ContainerAware implements ContainerAwareIn
         $this->router = $router;
     }
 
-    /**
-     * Returns subscribed events
-     *
-     * @return array
-     */
     public static function getSubscribedEvents()
     {
-        return self::$events;
+        return [
+            AdminMenuEvent::INIT_EVENT => 'onAdminMenuInitEvent',
+        ];
     }
 
     /**

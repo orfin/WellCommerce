@@ -11,6 +11,7 @@
  */
 namespace WellCommerce\Bundle\AvailabilityBundle\EventListener;
 
+use WellCommerce\Bundle\AdminBundle\Event\AdminMenuEvent;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 
 /**
@@ -21,5 +22,4 @@ use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
  */
 class AvailabilitySubscriber extends AbstractEventSubscriber
 {
-
 }
