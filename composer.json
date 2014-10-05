@@ -50,7 +50,8 @@
         "jms/serializer-bundle": "0.13.0",
         "nelmio/api-doc-bundle": "2.7.0",
         "ircmaxell/password-compat": "1.0.3",
-        "liip/imagine-bundle": "1.0.4"
+        "liip/imagine-bundle": "1.0.4",
+        "besimple/i18n-routing-bundle": "2.2.x-dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",

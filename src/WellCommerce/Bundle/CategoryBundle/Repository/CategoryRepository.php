@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\CategoryBundle\Repository;
 
 use Symfony\Component\HttpFoundation\ParameterBag;
 use WellCommerce\Bundle\CategoryBundle\Entity\Category;
+use WellCommerce\Bundle\CategoryBundle\Tree\CategoryTreeBuilder;
 use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 
 /**
@@ -35,7 +36,8 @@ class CategoryRepository extends AbstractEntityRepository implements CategoryRep
             category.hierarchy,
             IDENTITY(category.parent) parent,
             COUNT(category_children.id) children,
-            category_translation.name
+            category_translation.name,
+            category_translation.slug
         ');
         $queryBuilder->leftJoin(
             'WellCommerceCategoryBundle:Category',
@@ -57,6 +59,7 @@ class CategoryRepository extends AbstractEntityRepository implements CategoryRep
             $categoriesTree[$item['id']] = [
                 'id'          => $item['id'],
                 'name'        => $item['name'],
+                'slug'        => $item['slug'],
                 'hasChildren' => (bool)($item['children'] > 0),
                 'parent'      => $item['parent'],
                 'weight'      => $item['hierarchy']
@@ -64,6 +67,14 @@ class CategoryRepository extends AbstractEntityRepository implements CategoryRep
         }
 
         return $categoriesTree;
+    }
+
+    public function getCategoriesTree()
+    {
+        $items   = $this->getTreeItems();
+        $builder = new CategoryTreeBuilder($items);
+
+        return $builder->getTree();
     }
 
     public function changeOrder(array $items = [])

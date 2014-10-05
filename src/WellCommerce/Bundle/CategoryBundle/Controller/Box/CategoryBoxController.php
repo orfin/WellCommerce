@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\CategoryBundle\Controller\Box;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
 
@@ -25,9 +24,13 @@ use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
  *
  * @Template()
  */
-class CategoryBoxController extends AbstractBoxController implements BoxControllerInterface {
+class CategoryBoxController extends AbstractBoxController implements BoxControllerInterface
+{
 
-    public function indexAction(Request $request){
-
+    public function indexAction()
+    {
+        return [
+            'categories' => $this->get('category.repository')->getCategoriesTree()
+        ];
     }
 } 

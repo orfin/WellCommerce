@@ -5,6 +5,7 @@
 
     <parameters>
         <parameter key="category.controller.admin.class">WellCommerce\Bundle\CategoryBundle\Controller\Admin\CategoryController</parameter>
+        <parameter key="category.controller.front.class">WellCommerce\Bundle\CategoryBundle\Controller\Front\CategoryController</parameter>
         <parameter key="category.controller.box.class">WellCommerce\Bundle\CategoryBundle\Controller\Box\CategoryController</parameter>
         <parameter key="category.repository.class">WellCommerce\Bundle\CategoryBundle\Repository\CategoryRepository</parameter>
         <parameter key="category.form.class">WellCommerce\Bundle\CategoryBundle\Form\CategoryForm</parameter>
@@ -23,7 +24,17 @@
             <argument type="service" id="category.form"/>
         </service>
 
-        <service id="category.layout_box.controller" class="%category.layout_box.controller.class%" />
+        <service id="category.controller.front" class="%category.controller.front.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="category.layout_box.controller" class="%category.layout_box.controller.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
 
         <service id="category.layout_box.configurator" class="%category.layout_box.configurator.class%">
             <argument>CategoriesBox</argument>

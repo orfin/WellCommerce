@@ -82,7 +82,7 @@ class LayoutBoxRenderer extends AbstractContainer implements LayoutBoxRendererIn
         $currentRequest                   = $this->getRequest();
         $request                          = $currentRequest->attributes->all();
         $request['_controller']           = $this->getLayoutBoxController($box);
-        $request['_template_vars']['box'] = $this->getBoxTemplateVars($box);
+        $request['_template_vars']['box'] = $this->getBoxTemplateVars($box, $params);
         $subRequest                       = $currentRequest->duplicate($currentRequest->query->all(), null, $request);
 
         $content = $this->container->get('http_kernel')->handle($subRequest, HttpKernelInterface::SUB_REQUEST);
@@ -160,11 +160,11 @@ class LayoutBoxRenderer extends AbstractContainer implements LayoutBoxRendererIn
      *
      * @return array
      */
-    private function getBoxTemplateVars(LayoutBox $box)
+    private function getBoxTemplateVars(LayoutBox $box, $params)
     {
         return [
             'id'       => $box->getIdentifier(),
-            'settings' => $box->getSettings()
+            'settings' => array_merge_recursive($box->getSettings(), $params)
         ];
     }
 } 
