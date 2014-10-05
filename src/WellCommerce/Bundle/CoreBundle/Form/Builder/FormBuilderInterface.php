@@ -59,7 +59,7 @@ interface FormBuilderInterface
     /**
      * Returns form element
      *
-     * @return mixed
+     * @return Elements\Form
      */
     public function getForm();
 

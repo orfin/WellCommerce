@@ -124,19 +124,16 @@ class AdminManager implements AdminManagerInterface
     }
 
     /**
-     * Returns event name for bundle
+     * Returns event name for resource
      *
-     * @param string  $name
-     * @param Request $request
+     * @param $class
+     * @param $name
      *
      * @return string
      */
-    private function getEventName($name, Request $request)
+    private function getEventName($class, $name)
     {
-        $bundle = $request->request->get('_bundle');
-        $snake  = Helper::snake($bundle);
-
-        return sprintf('%s.%s', $snake, $name);
+        return sprintf('%s.%s', Helper::snake($class), $name);
     }
 
     /**
@@ -148,8 +145,9 @@ class AdminManager implements AdminManagerInterface
      */
     private function dispatchEvent($resource, $request, $name)
     {
-        $eventName = $this->getEventName($name, $request);
-        $event     = new ResourceEvent($resource, $request);
+        $reflection = new \ReflectionClass($resource);
+        $eventName  = $this->getEventName($reflection->getShortName(), $name);
+        $event      = new ResourceEvent($resource, $request);
         $this->eventDispatcher->dispatch($eventName, $event);
     }
 }

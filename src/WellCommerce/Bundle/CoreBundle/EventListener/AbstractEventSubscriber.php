@@ -20,6 +20,7 @@ use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use WellCommerce\Bundle\AdminBundle\Event\AdminMenuEvent;
 use WellCommerce\Bundle\AdminBundle\MenuBuilder\XmlLoader;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
 
 /**
  * Class AbstractEventSubscriber
@@ -27,7 +28,7 @@ use WellCommerce\Bundle\AdminBundle\MenuBuilder\XmlLoader;
  * @package WellCommerce\Bundle\CoreBundle\EventListener
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AbstractEventSubscriber extends ContainerAware implements ContainerAwareInterface, EventSubscriberInterface
+class AbstractEventSubscriber extends AbstractContainer implements EventSubscriberInterface
 {
     /**
      * @var TranslatorInterface

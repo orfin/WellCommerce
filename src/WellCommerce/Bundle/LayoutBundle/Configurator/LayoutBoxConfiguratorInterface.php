@@ -23,11 +23,26 @@ use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 interface LayoutBoxConfiguratorInterface
 {
     /**
+     * Returns configurator type
+     *
+     * @return mixed
+     */
+    public function getType();
+
+    /**
      * Adds form fields required to configure the layout box
      *
      * @param FormBuilderInterface $builder
+     * @param                      $resource
      *
-     * @return void
+     * @return mixed
      */
-    public function addFormFields(FormBuilderInterface $builder);
+    public function addFormFields(FormBuilderInterface $builder, $resource);
+
+    /**
+     * Returns injected box controller object
+     *
+     * @return mixed
+     */
+    public function getBoxController();
 } 

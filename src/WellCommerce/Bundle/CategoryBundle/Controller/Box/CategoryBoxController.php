@@ -12,12 +12,14 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\Controller\Box;
 
+use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
+
 /**
  * Class CategoryBoxController
  *
  * @package WellCommerce\Bundle\CategoryBundle\Controller\Box
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CategoryBoxController {
+class CategoryBoxController implements BoxControllerInterface {
 
 } 

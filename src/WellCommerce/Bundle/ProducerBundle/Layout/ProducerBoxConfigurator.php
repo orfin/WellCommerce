@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CategoryBundle\Layout;
+namespace WellCommerce\Bundle\ProducerBundle\Layout;
 
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\EntityToIdentifierTransformer;
@@ -18,12 +18,12 @@ use WellCommerce\Bundle\LayoutBundle\Configurator\LayoutBoxConfiguratorInterface
 use WellCommerce\Bundle\LayoutBundle\Configurator\AbstractLayoutBoxConfigurator;
 
 /**
- * Class CategoryBoxConfigurator
+ * Class ProducerBoxConfigurator
  *
- * @package WellCommerce\Bundle\CategoryBundle\Configurator
+ * @package WellCommerce\Bundle\ProducerBundle\Configurator
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CategoryBoxConfigurator extends AbstractLayoutBoxConfigurator implements LayoutBoxConfiguratorInterface
+class ProducerBoxConfigurator extends AbstractLayoutBoxConfigurator implements LayoutBoxConfiguratorInterface
 {
     /**
      * {@inheritdoc}

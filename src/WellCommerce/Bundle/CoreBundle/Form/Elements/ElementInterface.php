@@ -89,11 +89,10 @@ interface ElementInterface
      * Sets default data for form element
      *
      * @param $data
-     * @param $isNewResource
      *
      * @return mixed
      */
-    public function setDefaults($data, $isNewResource);
+    public function setDefaults($data);
 
     /**
      * Returns field name

@@ -47,7 +47,7 @@ class FieldsetRepeatable extends Fieldset implements ElementInterface
     /**
      * {@inheritdoc}
      */
-    public function setDefaults($defaultData, $isNewResource)
+    public function setDefaults($defaultData)
     {
         $accessor = $this->getPropertyAccessor();
         if (null !== $this->getPropertyPath() && $accessor->isReadable($defaultData, $this->getPropertyPath())) {

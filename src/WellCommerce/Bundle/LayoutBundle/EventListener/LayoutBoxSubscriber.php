@@ -14,7 +14,9 @@ namespace WellCommerce\Bundle\LayoutBundle\EventListener;
 use Symfony\Component\HttpKernel\KernelEvents;
 use WellCommerce\Bundle\AdminBundle\Event\AdminMenuEvent;
 use WellCommerce\Bundle\CoreBundle\Event\FormEvent;
+use WellCommerce\Bundle\CoreBundle\Event\ResourceEvent;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
+use WellCommerce\Bundle\LayoutBundle\Configurator\LayoutBoxConfiguratorInterface;
 use WellCommerce\Bundle\LayoutBundle\Form\LayoutBoxForm;
 
 /**
@@ -33,16 +35,44 @@ class LayoutBoxSubscriber extends AbstractEventSubscriber
     public function onLayoutBoxFormInit(FormEvent $event)
     {
         $builder       = $event->getFormBuilder();
-        $form          = $builder->getForm();
         $resource      = $builder->getData();
-        $collection    = $this->container->get('layout_box.configurator.collection');
-        $configurators = $collection->all();
+        $configurators = $this->container->get('layout_box.configurator.collection')->all();
+        $boxSettings   = $resource->getSettings();
+
+        // Loop through all configurators, render fieldset and set default data
+        foreach ($configurators as $configurator) {
+            if ($configurator instanceof LayoutBoxConfiguratorInterface) {
+                $defaults = [];
+                if ($resource->getBoxType() == $configurator->getType()) {
+                    $defaults = $boxSettings;
+                }
+
+                $configurator->addFormFields($builder, $defaults);
+            }
+        }
+
+    }
+
+    /**
+     * Sets resource settings fetched from fieldset corresponding to selected box type
+     *
+     * @param ResourceEvent $event
+     */
+    public function onLayoutBoxResourceSave(ResourceEvent $event)
+    {
+        $request      = $event->getRequest()->request->all();
+        $resource     = $event->getResource();
+        $accessor     = $this->getPropertyAccessor();
+        $propertyPath = sprintf('[%s]', $request['required_data']['boxType']);
+        $settings     = $accessor->getValue($request, $propertyPath);
+        $resource->setSettings($settings);
     }
 
     public static function getSubscribedEvents()
     {
         return parent::getSubscribedEvents() + [
             LayoutBoxForm::FORM_INIT_EVENT => 'onLayoutBoxFormInit',
+            'layout_box.pre_update'        => 'onLayoutBoxResourceSave',
         ];
     }
 }

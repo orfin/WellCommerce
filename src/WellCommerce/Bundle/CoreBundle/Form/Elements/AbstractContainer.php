@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
+use Symfony\Component\PropertyAccess\PropertyPath;
+
 /**
  * Class AbstractContainer
  *
@@ -20,7 +22,7 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
  */
 abstract class AbstractContainer extends AbstractNode
 {
-    protected $children = [];
+    protected $children   = [];
     protected $tabsOffset = '';
 
     public function addRule($type, $options = [])
@@ -40,10 +42,10 @@ abstract class AbstractContainer extends AbstractNode
         }
     }
 
-    public function setDefaults($values, $isNewResource)
+    public function setDefaults($values)
     {
         foreach ($this->children as $child) {
-            $child->setDefaults($values, $isNewResource);
+            $child->setDefaults($values);
         }
     }
 
@@ -131,10 +133,17 @@ abstract class AbstractContainer extends AbstractNode
     public function getChild($name)
     {
         foreach ($this->form->fields as $child) {
-            if($child)
-            if (method_exists($child, 'getName') && $name === $child->getName()) {
-                return $child;
+            if ($child) {
+                if (method_exists($child, 'getName') && $name === $child->getName()) {
+                    return $child;
+                }
             }
         }
+    }
+
+    public function getElement($path)
+    {
+        $accessor = $this->getPropertyAccessor();
+        return $accessor->getValue($this->form->fields, sprintf('[%s]', $path));
     }
 }

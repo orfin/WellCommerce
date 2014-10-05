@@ -450,29 +450,11 @@ abstract class AbstractNode extends BaseAbstractContainer
     }
 
     /**
-     * Checks whether passed resource is new entity
-     *
-     * @param $resource
-     *
-     * @return bool
-     */
-    protected function isNewResource($resource)
-    {
-        if (null !== $resource) {
-            $state = $this->getEntityManager()->getUnitOfWork()->getEntityState($resource);
-
-            return \Doctrine\ORM\UnitOfWork::STATE_NEW === $state;
-        }
-
-        return false;
-    }
-
-    /**
      * Sets default data for all translatable fields bound to fieldset
      *
      * @param $data
      */
-    public function setDefaults($data, $isNewResource)
+    public function setDefaults($data)
     {
         return false;
     }

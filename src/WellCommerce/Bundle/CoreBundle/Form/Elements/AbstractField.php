@@ -87,20 +87,23 @@ class AbstractField extends AbstractNode
     /**
      * {@inheritdoc}
      */
-    public function setDefaults($defaultData, $isNewResource)
+    public function setDefaults($defaultData)
     {
         $accessor = $this->getPropertyAccessor();
 
-        if (null !== $this->getPropertyPath() && $accessor->isReadable($defaultData, $this->getPropertyPath())) {
+        if (null !== $this->getPropertyPath()) {
 
-            if ($isNewResource) {
-                $value = $this->attributes['default'];
-            } else {
+            $value = null;
+
+            if($accessor->isReadable($defaultData, $this->getPropertyPath())){
                 $value = $accessor->getValue($defaultData, $this->getPropertyPath());
-
                 if ($this->hasTransformer()) {
                     $value = $this->getTransformer()->transform($value);
                 }
+            }
+
+            if(null === $value && isset($this->attributes['default'])){
+                $value = $this->attributes['default'];
             }
 
             $this->populate($value);
@@ -166,7 +169,6 @@ class AbstractField extends AbstractNode
             'label'         => 'string',
             'comment'       => 'string',
             'error'         => 'string',
-            'default'       => ['string', 'integer', 'null'],
             'dependencies'  => 'array',
             'filters'       => 'array',
             'rules'         => 'array',

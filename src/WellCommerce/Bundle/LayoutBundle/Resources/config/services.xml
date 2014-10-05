@@ -10,7 +10,7 @@
         <parameter key="layout_box.datagrid.configurator.class">WellCommerce\Bundle\LayoutBundle\DataGrid\LayoutBoxDataGridConfigurator</parameter>
         <parameter key="layout_box.form.class">WellCommerce\Bundle\LayoutBundle\Form\LayoutBoxForm</parameter>
         <parameter key="layout_box.subscriber.class">WellCommerce\Bundle\LayoutBundle\EventListener\LayoutBoxSubscriber</parameter>
-        <parameter key="layout_box.configurator.collection.class">WellCommerce\Bundle\LayoutBundle\Layout\LayoutBoxConfiguratorCollection</parameter>
+        <parameter key="layout_box.configurator.collection.class">WellCommerce\Bundle\LayoutBundle\Configurator\LayoutBoxConfiguratorCollection</parameter>
     </parameters>
 
     <services>

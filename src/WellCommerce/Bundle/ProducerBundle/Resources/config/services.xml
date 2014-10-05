@@ -10,7 +10,8 @@
         <parameter key="producer.datagrid.configurator.class">WellCommerce\Bundle\ProducerBundle\DataGrid\ProducerDataGridConfigurator</parameter>
         <parameter key="producer.form.class">WellCommerce\Bundle\ProducerBundle\Form\ProducerForm</parameter>
         <parameter key="producer.subscriber.class">WellCommerce\Bundle\ProducerBundle\EventListener\ProducerSubscriber</parameter>
-        <parameter key="producer.manager.class">WellCommerce\Bundle\ProducerBundle\Manager\ProducerManager</parameter>
+        <parameter key="producer.layout_box.controller.class">WellCommerce\Bundle\ProducerBundle\Controller\Box\ProducerBoxController</parameter>
+        <parameter key="producer.layout_box.configurator.class">WellCommerce\Bundle\ProducerBundle\Layout\ProducerBoxConfigurator</parameter>
     </parameters>
 
     <services>
@@ -57,5 +58,17 @@
             </call>
             <tag name="kernel.event_subscriber" />
         </service>
+
+        <service id="producer.layout_box.controller" class="%category.layout_box.controller.class%" />
+
+        <service id="producer.layout_box.configurator" class="%producer.layout_box.configurator.class%">
+            <argument>ProducerBox</argument>
+            <argument type="service" id="producer.layout_box.controller" />
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="layout_box.configurator" />
+        </service>
+
     </services>
 </container>

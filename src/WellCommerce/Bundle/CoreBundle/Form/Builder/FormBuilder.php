@@ -47,9 +47,9 @@ class FormBuilder extends AbstractContainer implements FormBuilderInterface
     {
         $this->options = $options;
         $this->data    = $data;
-        $this->form    = $form->buildForm($this, $this->options)->setDefaultData($this->data);
+        $this->form    = $form->buildForm($this, $this->options);
         $this->dispatchEvent($this->getInitEventName($form));
-
+        $this->form->setDefaultData($this->data);
         return $this;
     }
 

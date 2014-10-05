@@ -10,15 +10,14 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\LayoutBundle\Layout\Configurator;
+namespace WellCommerce\Bundle\LayoutBundle\Configurator;
 
 use WellCommerce\Bundle\CoreBundle\Collection\AbstractCollection;
-use WellCommerce\Bundle\LayoutBundle\LayoutBoxConfiguratorInterface;
 
 /**
  * Class LayoutBoxConfiguratorCollection
  *
- * @package WellCommerce\Bundle\LayoutBundle\Layout\Configurator
+ * @package WellCommerce\Bundle\LayoutBundle\Configurator
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class LayoutBoxConfiguratorCollection extends AbstractCollection
@@ -26,11 +25,12 @@ class LayoutBoxConfiguratorCollection extends AbstractCollection
     /**
      * Adds new configurator to collection
      *
-     * @param                                $type
      * @param LayoutBoxConfiguratorInterface $configurator
+     *
+     * @return void
      */
-    public function add($type, LayoutBoxConfiguratorInterface $configurator)
+    public function add(LayoutBoxConfiguratorInterface $configurator)
     {
-        $this->items[$type] = $configurator;
+        $this->items[] = $configurator;
     }
 }

@@ -70,8 +70,8 @@ class ShopForm extends AbstractForm implements FormInterface
             'name'        => 'layoutTheme',
             'label'       => $this->trans('Theme'),
             'comment'     => $this->trans('Choose default shop theme'),
-            'options'     => $this->get('layout_theme.repository')->getCollectionToSelect(),
-            'transformer' => new EntityToIdentifierTransformer($this->get('layout_theme.repository'))
+            'options'     => $this->get('theme.repository')->getCollectionToSelect(),
+            'transformer' => new EntityToIdentifierTransformer($this->get('theme.repository'))
         ]));
 
         $localizationData = $form->addChild($builder->getElement('fieldset', [

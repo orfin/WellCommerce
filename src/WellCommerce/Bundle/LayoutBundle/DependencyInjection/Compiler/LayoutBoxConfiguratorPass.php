@@ -41,7 +41,6 @@ class LayoutBoxConfiguratorPass implements CompilerPassInterface
 
         foreach ($container->findTaggedServiceIds('layout_box.configurator') as $id => $attributes) {
             $collection->addMethodCall('add', [
-                $attributes[0]['type'],
                 new Reference($id)
             ]);
         }
