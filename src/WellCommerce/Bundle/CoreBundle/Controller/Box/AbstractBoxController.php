@@ -21,6 +21,8 @@ use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
  */
 abstract class AbstractBoxController extends AbstractController implements BoxControllerInterface
 {
+    protected $settings;
+
     /**
      * {@inheritdoc}
      */
@@ -37,6 +39,11 @@ abstract class AbstractBoxController extends AbstractController implements BoxCo
         $accessor = $this->getPropertyAccessor();
 
         return $accessor->getValue($this->getParam('_box_settings'), '[' . $id . ']');
+    }
+
+    public function setBoxSettings($settings)
+    {
+        $this->settings = $settings;
     }
 
 

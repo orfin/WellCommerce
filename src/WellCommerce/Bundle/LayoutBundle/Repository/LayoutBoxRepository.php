@@ -12,6 +12,7 @@
 namespace WellCommerce\Bundle\LayoutBundle\Repository;
 
 use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxCollection;
 
 /**
  * Class LayoutBoxRepository
@@ -35,6 +36,14 @@ class LayoutBoxRepository extends AbstractEntityRepository implements LayoutBoxR
             'layout_box.id = layout_box_translation.translatable AND layout_box_translation.locale = :locale');
 
         return $queryBuilder;
+    }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getLayoutBoxesCollection()
+    {
+        $boxes = $this->findAll();
+        return new LayoutBoxCollection($boxes);
     }
 }

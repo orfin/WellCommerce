@@ -94,7 +94,7 @@ class AbstractContainer extends ContainerAware
     /**
      * Shortcut to return the router service
      *
-     * @return object Router service
+     * @return \Symfony\Component\Routing\RouterInterface
      */
     final protected function getRouter()
     {

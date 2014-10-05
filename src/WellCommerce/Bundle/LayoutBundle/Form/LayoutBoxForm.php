@@ -34,6 +34,12 @@ class LayoutBoxForm extends AbstractForm implements FormInterface
     {
         $form = $builder->init($options);
 
+        $collection = $this->get('layout_box.repository')->getLayoutBoxesCollection();
+
+        $item = $collection->get('producer.box');
+        print_r($item->getSettings());
+        die();
+
         $requiredData = $form->addChild($builder->getElement('fieldset', [
             'name'  => 'required_data',
             'label' => $this->trans('Required data')

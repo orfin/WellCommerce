@@ -23,5 +23,10 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
  */
 interface LayoutBoxRepositoryInterface extends RepositoryInterface, DataGridAwareRepositoryInterface
 {
-
+    /**
+     * Returns a collection of boxes
+     *
+     * @return \WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxCollection
+     */
+    public function getLayoutBoxesCollection();
 } 

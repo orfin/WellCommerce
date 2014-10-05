@@ -26,18 +26,18 @@ use WellCommerce\Bundle\CoreBundle\Form\Conditions\Equals;
 abstract class AbstractLayoutBoxConfigurator extends AbstractContainer
 {
     protected $type;
-    protected $boxController;
+    protected $controllerService;
 
     /**
      * Constructor
      *
-     * @param                        $type
-     * @param BoxControllerInterface $boxController
+     * @param $type
+     * @param $controllerService
      */
-    public function __construct($type, BoxControllerInterface $boxController)
+    public function __construct($type, $controllerService)
     {
-        $this->type          = $type;
-        $this->boxController = $boxController;
+        $this->type              = $type;
+        $this->controllerService = $controllerService;
     }
 
     /**
@@ -51,11 +51,14 @@ abstract class AbstractLayoutBoxConfigurator extends AbstractContainer
     /**
      * {@inheritdoc}
      */
-    public function getBoxController()
+    public function getControllerService()
     {
-        return $this->boxController;
+        return $this->controllerService;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function getFieldset(FormBuilderInterface $builder)
     {
         $form          = $builder->getForm();

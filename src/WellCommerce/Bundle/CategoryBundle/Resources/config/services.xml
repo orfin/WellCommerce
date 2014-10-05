@@ -27,7 +27,7 @@
 
         <service id="category.layout_box.configurator" class="%category.layout_box.configurator.class%">
             <argument>CategoriesBox</argument>
-            <argument type="service" id="category.layout_box.controller" />
+            <argument>category.layout_box.controller</argument>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

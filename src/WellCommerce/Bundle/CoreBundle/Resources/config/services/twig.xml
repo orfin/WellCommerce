@@ -9,7 +9,6 @@
         <parameter key="twig.extension.string_loader.class">Twig_Extension_StringLoader</parameter>
         <parameter key="twig.extension.form.class">WellCommerce\Bundle\CoreBundle\Twig\Extension\FormExtension</parameter>
         <parameter key="twig.extension.admin.class">WellCommerce\Bundle\CoreBundle\Twig\Extension\AdminExtension</parameter>
-        <parameter key="twig.extension.datagrid.class">WellCommerce\Bundle\CoreBundle\Twig\Extension\DataGridExtension</parameter>
     </parameters>
 
     <services>

@@ -40,9 +40,9 @@ interface LayoutBoxConfiguratorInterface
     public function addFormFields(FormBuilderInterface $builder, $resource);
 
     /**
-     * Returns injected box controller object
+     * Returns box controller service name
      *
-     * @return mixed
+     * @return string
      */
-    public function getBoxController();
+    public function getControllerService();
 } 

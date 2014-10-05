@@ -12,6 +12,9 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\Controller\Box;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Request;
+use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
 
 /**
@@ -19,7 +22,12 @@ use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
  *
  * @package WellCommerce\Bundle\CategoryBundle\Controller\Box
  * @author  Adam Piotrowski <adam@wellcommerce.org>
+ *
+ * @Template()
  */
-class CategoryBoxController implements BoxControllerInterface {
+class CategoryBoxController extends AbstractBoxController implements BoxControllerInterface {
 
+    public function indexAction(Request $request){
+
+    }
 } 

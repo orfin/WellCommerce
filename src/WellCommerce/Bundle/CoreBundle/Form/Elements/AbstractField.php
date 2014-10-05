@@ -102,8 +102,8 @@ class AbstractField extends AbstractNode
                 }
             }
 
-            if(null === $value && isset($this->attributes['default'])){
-                $value = $this->attributes['default'];
+            if(null === $value){
+                $value = $this->getDefaultValue();
             }
 
             $this->populate($value);

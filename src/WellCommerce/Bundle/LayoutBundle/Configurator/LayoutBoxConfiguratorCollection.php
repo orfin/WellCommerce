@@ -27,10 +27,16 @@ class LayoutBoxConfiguratorCollection extends AbstractCollection
      *
      * @param LayoutBoxConfiguratorInterface $configurator
      *
+     * @throws \InvalidArgumentException If such configurator already exists in collection
+     *
      * @return void
      */
     public function add(LayoutBoxConfiguratorInterface $configurator)
     {
-        $this->items[] = $configurator;
+        $type = $configurator->getType();
+        if ($this->has($type)) {
+            throw new \InvalidArgumentException(sprintf('Layout box configurator "%s" already exists.', $type));
+        }
+        $this->items[$configurator->getType()] = $configurator;
     }
 }

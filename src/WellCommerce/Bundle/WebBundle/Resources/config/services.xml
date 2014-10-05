@@ -5,7 +5,6 @@
 
     <parameters>
         <parameter key="web.home_page.controller.front.class">WellCommerce\Bundle\WebBundle\Controller\Front\HomePageController</parameter>
-        <parameter key="twig.extension.layout_box.class">WellCommerce\Bundle\WebBundle\Twig\Extension\LayoutBoxExtension</parameter>
     </parameters>
 
     <services>

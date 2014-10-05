@@ -12,10 +12,8 @@
 
 namespace WellCommerce\Bundle\LayoutBundle\DependencyInjection\Compiler;
 
-use Symfony\Bundle\AsseticBundle\DependencyInjection\DirectoryResourceDefinition;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Exception\LogicException;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**

@@ -11,6 +11,8 @@
         <parameter key="layout_box.form.class">WellCommerce\Bundle\LayoutBundle\Form\LayoutBoxForm</parameter>
         <parameter key="layout_box.subscriber.class">WellCommerce\Bundle\LayoutBundle\EventListener\LayoutBoxSubscriber</parameter>
         <parameter key="layout_box.configurator.collection.class">WellCommerce\Bundle\LayoutBundle\Configurator\LayoutBoxConfiguratorCollection</parameter>
+        <parameter key="layout_box.renderer.class">WellCommerce\Bundle\LayoutBundle\Renderer\LayoutBoxRenderer</parameter>
+        <parameter key="twig.extension.layout_box.class">WellCommerce\Bundle\LayoutBundle\Twig\Extension\LayoutBoxExtension</parameter>
     </parameters>
 
     <services>
@@ -45,6 +47,14 @@
             </call>
         </service>
 
+        <service id="layout_box.renderer" class="%layout_box.renderer.class%">
+            <argument type="service" id="layout_box.repository" />
+            <argument type="service" id="layout_box.configurator.collection" />
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
         <service id="layout_box.subscriber" class="%layout_box.subscriber.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
@@ -56,5 +66,10 @@
         </service>
 
         <service id="layout_box.configurator.collection" class="%layout_box.configurator.collection.class%" />
+
+        <service id="twig.extension.layout_box" class="%twig.extension.layout_box.class%">
+            <argument type="service" id="layout_box.renderer"/>
+            <tag name="twig.extension"/>
+        </service>
     </services>
 </container>

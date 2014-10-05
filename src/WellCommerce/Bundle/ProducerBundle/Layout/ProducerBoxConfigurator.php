@@ -34,18 +34,17 @@ class ProducerBoxConfigurator extends AbstractLayoutBoxConfigurator implements L
         $accessor = $this->getPropertyAccessor();
 
         $fieldset->addChild($builder->getElement('tip', [
-            'tip' => '<p>' . $this->trans('Choose categories which should be not visible in box.') . '</p>'
+            'tip' => '<p>' . $this->trans('Select view type used in template.') . '</p>'
         ]));
 
-        $fieldset->addChild($builder->getElement('tree', [
-            'name'       => 'exclude',
-            'label'      => $this->trans('category.parent'),
-            'choosable'  => false,
-            'selectable' => true,
-            'sortable'   => false,
-            'clickable'  => false,
-            'items'      => $this->get('category.repository')->getTreeItems(),
-            'default'    => $accessor->getValue($defaults, '[exclude]')
+        $fieldset->addChild($builder->getElement('select', [
+            'name'    => 'view_type',
+            'label'   => $this->trans('View type'),
+            'options' => [
+                0 => $this->trans('List'),
+                1 => $this->trans('Select'),
+            ],
+            'default' => $accessor->getValue($defaults, '[view_type]')
         ]));
     }
 } 

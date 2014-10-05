@@ -48,4 +48,28 @@ abstract class AbstractCollection implements \Countable, \IteratorAggregate
     {
         return $this->items;
     }
+
+    /**
+     * Checks whether such key exists in collection
+     *
+     * @param $key
+     *
+     * @return bool
+     */
+    public function has($key)
+    {
+        return isset($this->items[$key]);
+    }
+
+    /**
+     * Returns a collection element by its key
+     *
+     * @param $key
+     *
+     * @return mixed
+     */
+    public function get($key)
+    {
+        return $this->items[$key];
+    }
 } 
