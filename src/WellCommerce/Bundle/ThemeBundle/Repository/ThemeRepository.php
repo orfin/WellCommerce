@@ -12,7 +12,6 @@
 namespace WellCommerce\Bundle\ThemeBundle\Repository;
 
 use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
-use WellCommerce\Bundle\ThemeBundle\Entity\Theme;
 
 /**
  * Class ThemeRepository

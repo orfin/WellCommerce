@@ -37,6 +37,7 @@ class AppKernel extends Kernel
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
+            new BeSimple\I18nRoutingBundle\BeSimpleI18nRoutingBundle(),
             // WellCommerce bundles
             new WellCommerce\Bundle\CoreBundle\WellCommerceCoreBundle(),
             new WellCommerce\Bundle\AdminBundle\WellCommerceAdminBundle(),
@@ -67,7 +68,6 @@ class AppKernel extends Kernel
 
         if (in_array($this->getEnvironment(), ['dev', 'test'])) {
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
-            $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
         }
 

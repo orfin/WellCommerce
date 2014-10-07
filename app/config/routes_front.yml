@@ -1,0 +1,7 @@
+front.home_page.index:
+    locales:  { en: "/", fr: "/", de: "/" }
+    defaults: { _controller: web.home_page.controller.front:indexAction }
+
+front.category.index:
+    locales:  { en: "/category/{slug}", fr: "/category/{name}", de: "/category/{name}" }
+    defaults: { _controller: category.controller.front:indexAction }

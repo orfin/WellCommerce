@@ -7,6 +7,10 @@ _bazinga_jstranslation:
 _liip_imagine:
     resource: "@LiipImagineBundle/Resources/config/routing.xml"
 
+wellcommerce_web:
+    resource: routes_front.yml
+    type:     be_simple_i18n
+
 wellcommerce_user:
     resource: "@WellCommerceUserBundle/Resources/config/routing.xml"
     prefix:   /admin/user
@@ -62,10 +66,6 @@ wellcommerce_tax:
 wellcommerce_contact:
     resource: "@WellCommerceContactBundle/Resources/config/routing.xml"
     prefix:   /admin/configuration/contact
-
-wellcommerce_web:
-    resource: "@WellCommerceWebBundle/Resources/config/routing.xml"
-    prefix:   /
 
 wellcommerce_media:
     resource: "@WellCommerceMediaBundle/Resources/config/routing.xml"
