@@ -20,10 +20,8 @@ use WellCommerce\Bundle\AvailabilityBundle\Entity\Availability;
 use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\EnableableTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\HierarchyTrait;
-use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\MetaDataTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\PhotoTrait;
 use WellCommerce\Bundle\CurrencyBundle\Entity\Currency;
-use WellCommerce\Bundle\DelivererBundle\Entity\Deliverer;
 use WellCommerce\Bundle\ShopBundle\Entity\Shop;
 use WellCommerce\Bundle\TaxBundle\Entity\Tax;
 use WellCommerce\Bundle\UnitBundle\Entity\Unit;
@@ -118,7 +116,7 @@ class Product
     private $productPhotos;
 
     /**
-     * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute", mappedBy="product", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\Product\Attribute", mappedBy="product", cascade={"all"}, orphanRemoval=true)
      */
     private $attributes;
 

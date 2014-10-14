@@ -65,10 +65,13 @@ doctrine_migrations:
     table_name: migration
     name: WellCommerce Migrations
 
-be_simple_i18n_routing: ~
-
 parameters:
     knp.doctrine_behaviors.blameable_listener.user_entity: WellCommerce\Bundle\UserBundle\Entity\User
+
+jms_i18n_routing:
+    default_locale: en
+    locales: [en, de, pl]
+    strategy: prefix
 
 liip_imagine:
     loaders:

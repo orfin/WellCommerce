@@ -10,14 +10,11 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ProductBundle\Entity;
+namespace WellCommerce\Bundle\ProductBundle\Entity\Product;
 
 use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model\Sluggable\Sluggable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
-use Knp\DoctrineBehaviors\Model\Translatable\Translation;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\HierarchyTrait;
-use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\MetaDataTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\PhotoTrait;
 
 /**
@@ -26,7 +23,7 @@ use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\PhotoTrait;
  * @ORM\Table(name="product_attribute")
  * @ORM\Entity(repositoryClass="WellCommerce\Bundle\ProductBundle\Repository\ProductAttributeRepository")
  */
-class ProductAttribute
+class Attribute
 {
     use Timestampable;
     use HierarchyTrait;

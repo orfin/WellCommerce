@@ -39,8 +39,6 @@
         "sensio/distribution-bundle": "~3.0",
         "sensio/framework-extra-bundle": "~3.0",
         "incenteev/composer-parameter-handler": "~2.0",
-        "zendframework/zend-cache": "2.3.0",
-        "zendframework/zend-serializer": "2.3.0",
         "knplabs/doctrine-behaviors": "1.0.x-dev",
         "fzaninotto/faker": "1.5.x-dev",
         "white-october/pagerfanta-bundle": "2.1.x-dev",
@@ -48,10 +46,11 @@
         "willdurand/js-translation-bundle": "2.1.*@dev",
         "friendsofsymfony/rest-bundle": "1.4.1",
         "jms/serializer-bundle": "0.13.0",
-        "nelmio/api-doc-bundle": "2.7.0",
+        "jms/i18n-routing-bundle": "dev-master",
         "ircmaxell/password-compat": "1.0.3",
         "liip/imagine-bundle": "1.0.4",
-        "besimple/i18n-routing-bundle": "2.2.x-dev"
+        "wellcommerce/form-bundle": "dev-development"
+
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",

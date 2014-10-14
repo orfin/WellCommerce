@@ -37,7 +37,8 @@ class AppKernel extends Kernel
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
-            new BeSimple\I18nRoutingBundle\BeSimpleI18nRoutingBundle(),
+            new JMS\I18nRoutingBundle\JMSI18nRoutingBundle(),
+            new WellCommerce\Bundle\FormBundle\WellCommerceFormBundle(),
             // WellCommerce bundles
             new WellCommerce\Bundle\CoreBundle\WellCommerceCoreBundle(),
             new WellCommerce\Bundle\AdminBundle\WellCommerceAdminBundle(),
