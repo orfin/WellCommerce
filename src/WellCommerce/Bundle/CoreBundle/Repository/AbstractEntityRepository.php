@@ -67,7 +67,7 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
         /**
          * @var $repository RepositoryInterface
          */
-        $repository = $this->_em->getRepository($name);
+        $repository = $this->getEntityManager()->getRepository($name);
         $repository->setTranslator($this->translator);
 
         return $repository;
@@ -83,6 +83,14 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
         return new $entity;
     }
 
+    public function save($resource)
+    {
+        $this->getEntityManager()->persist($resource);
+        $this->getEntityManager()->flush();
+
+        return $resource;
+    }
+
     protected function getQueryBuilder()
     {
         return $this->createQueryBuilder($this->getAlias());
@@ -94,8 +102,8 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
     public function deleteRow($id)
     {
         $entity = $this->find($id);
-        $this->_em->remove($entity);
-        $this->_em->flush();
+        $this->getEntityManager()->remove($entity);
+        $this->getEntityManager()->flush();
     }
 
     /**
@@ -222,7 +230,7 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
             return $select;
         }
 
-        throw new \InvalidArgumentException('Cannot find field named %s or association named "%s".', $labelField, $associationName);
+        throw new \InvalidArgumentException('Field "%s" or association "%s" not found.', $labelField, $associationName);
     }
 
     /**

@@ -12,17 +12,17 @@
 
 namespace WellCommerce\Bundle\ProductBundle\DataGrid;
 
-use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\EventHandler\ClickRowEventHandler;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\EventHandler\DeleteRowEventHandler;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\EventHandler\EditRowEventHandler;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\EventHandler\LoadedEventHandler;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\EventHandler\LoadEventHandler;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\EventHandler\ProcessEventHandler;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\EventHandler\UpdateRowEventHandler;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\OptionInterface;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Configurator\AbstractConfigurator;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Configurator\ConfiguratorInterface;
-use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
+use WellCommerce\Bundle\DataGridBundle\DataGrid\Configuration\EventHandler\ClickRowEventHandler;
+use WellCommerce\Bundle\DataGridBundle\DataGrid\Configuration\EventHandler\DeleteRowEventHandler;
+use WellCommerce\Bundle\DataGridBundle\DataGrid\Configuration\EventHandler\EditRowEventHandler;
+use WellCommerce\Bundle\DataGridBundle\DataGrid\Configuration\EventHandler\LoadedEventHandler;
+use WellCommerce\Bundle\DataGridBundle\DataGrid\Configuration\EventHandler\LoadEventHandler;
+use WellCommerce\Bundle\DataGridBundle\DataGrid\Configuration\EventHandler\ProcessEventHandler;
+use WellCommerce\Bundle\DataGridBundle\DataGrid\Configuration\EventHandler\UpdateRowEventHandler;
+use WellCommerce\Bundle\DataGridBundle\DataGrid\Configuration\OptionInterface;
+use WellCommerce\Bundle\DataGridBundle\DataGrid\Configurator\AbstractConfigurator;
+use WellCommerce\Bundle\DataGridBundle\DataGrid\Configurator\ConfiguratorInterface;
+use WellCommerce\Bundle\DataGridBundle\DataGrid\DataGridInterface;
 
 /**
  * Class ProductDataGridConfigurator

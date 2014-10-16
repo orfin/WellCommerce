@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\AttributeBundle\Form\DataTransformer;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
+use WellCommerce\Bundle\FormBundle\Form\DataTransformer\CollectionToArrayTransformer;
 
 /**
  * Class AttributeCollectionToArrayTransformer

@@ -13,13 +13,13 @@
 namespace WellCommerce\Bundle\MediaBundle\Form\DataTransformer;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\DataTransformerInterface;
+use WellCommerce\Bundle\FormBundle\Form\DataTransformer\DataTransformerInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
  * Class CollectionToArrayTransformer
  *
- * @package WellCommerce\Bundle\CoreBundle\Form\DataTransformer
+ * @package WellCommerce\Bundle\FormBundle\Form\DataTransformer
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class MediaCollectionToArrayTransformer implements DataTransformerInterface

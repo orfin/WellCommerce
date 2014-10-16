@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1ff35da8be904a12e9ff72e1a5ae3c9e",
+    "hash": "b1a36aaac38c8d4839cf78c6daaa8c9d",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1588,12 +1588,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/DoctrineBehaviors.git",
-                "reference": "b3d6121c8b297950f31fc393fda52f7cbc5abadd"
+                "reference": "5e2065338fc43bde19a7fcacc3d19ac0378f2178"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/DoctrineBehaviors/zipball/b3d6121c8b297950f31fc393fda52f7cbc5abadd",
-                "reference": "b3d6121c8b297950f31fc393fda52f7cbc5abadd",
+                "url": "https://api.github.com/repos/KnpLabs/DoctrineBehaviors/zipball/5e2065338fc43bde19a7fcacc3d19ac0378f2178",
+                "reference": "5e2065338fc43bde19a7fcacc3d19ac0378f2178",
                 "shasum": ""
             },
             "require": {
@@ -1639,7 +1639,7 @@
                 "translatable",
                 "tree"
             ],
-            "time": "2014-10-14 16:36:58"
+            "time": "2014-10-15 08:05:09"
         },
         {
             "name": "kriswallsmith/assetic",
@@ -2311,39 +2311,41 @@
         },
         {
             "name": "symfony/assetic-bundle",
-            "version": "v2.4.0",
+            "version": "v2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/AsseticBundle.git",
-                "reference": "c07c0e500fe255ac0211eea9d0446c139f12da9c"
+                "reference": "90ea7fb66d6d5245fd4afc16e4c8070214254fec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/AsseticBundle/zipball/c07c0e500fe255ac0211eea9d0446c139f12da9c",
-                "reference": "c07c0e500fe255ac0211eea9d0446c139f12da9c",
+                "url": "https://api.github.com/repos/symfony/AsseticBundle/zipball/90ea7fb66d6d5245fd4afc16e4c8070214254fec",
+                "reference": "90ea7fb66d6d5245fd4afc16e4c8070214254fec",
                 "shasum": ""
             },
             "require": {
                 "kriswallsmith/assetic": "~1.2",
                 "php": ">=5.3.0",
-                "symfony/framework-bundle": "~2.1"
-            },
-            "require-dev": {
-                "symfony/class-loader": "~2.1",
                 "symfony/console": "~2.1",
-                "symfony/css-selector": "~2.1",
-                "symfony/dom-crawler": "~2.1",
-                "symfony/twig-bundle": "~2.1",
+                "symfony/framework-bundle": "~2.1",
                 "symfony/yaml": "~2.1"
             },
-            "suggest": {
-                "kriswallsmith/spork": "v0.2",
+            "require-dev": {
+                "kriswallsmith/spork": "~0.2",
+                "patchwork/jsqueeze": "~1.0",
+                "symfony/class-loader": "~2.1",
+                "symfony/css-selector": "~2.1",
+                "symfony/dom-crawler": "~2.1",
                 "symfony/twig-bundle": "~2.1"
+            },
+            "suggest": {
+                "kriswallsmith/spork": "to be able to dump assets in parallel",
+                "symfony/twig-bundle": "to use the Twig integration"
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4-dev"
+                    "dev-master": "2.5-dev"
                 }
             },
             "autoload": {
@@ -2351,7 +2353,7 @@
                     "Symfony\\Bundle\\AsseticBundle\\": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "notification-url": "http://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -2369,7 +2371,7 @@
                 "compression",
                 "minification"
             ],
-            "time": "2014-09-03 23:37:07"
+            "time": "2014-10-15 12:03:38"
         },
         {
             "name": "symfony/icu",
@@ -2754,18 +2756,71 @@
             "time": "2014-10-10 14:09:53"
         },
         {
+            "name": "wellcommerce/datagrid-bundle",
+            "version": "dev-master",
+            "target-dir": "WellCommerce/Bundle/DataGridBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/WellCommerce/DataGridBundle.git",
+                "reference": "f754fd5679ec49ae4e3ff7827acb0946cb861016"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/WellCommerce/DataGridBundle/zipball/f754fd5679ec49ae4e3ff7827acb0946cb861016",
+                "reference": "f754fd5679ec49ae4e3ff7827acb0946cb861016",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4",
+                "symfony/symfony": "2.5.*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "WellCommerce\\Bundle\\DataGridBundle": ""
+                }
+            },
+            "notification-url": "http://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Adam Piotrowski",
+                    "email": "adam@wellcommerce.org"
+                },
+                {
+                    "name": "WellCommerce Developers",
+                    "email": "developers@wellcommerce.org"
+                }
+            ],
+            "description": "WellCommerce DataGrid Bundle",
+            "keywords": [
+                "e-commerce",
+                "open-source",
+                "symfony",
+                "wellcommerce"
+            ],
+            "time": "2014-10-15 22:16:04"
+        },
+        {
             "name": "wellcommerce/form-bundle",
             "version": "dev-development",
             "target-dir": "WellCommerce/Bundle/FormBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/WellCommerce/FormBundle.git",
-                "reference": "4691baf58325982952e29f840e529ec67dde977d"
+                "reference": "f14e813ee304f7a76316903930bea155154bcaa5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WellCommerce/FormBundle/zipball/4691baf58325982952e29f840e529ec67dde977d",
-                "reference": "4691baf58325982952e29f840e529ec67dde977d",
+                "url": "https://api.github.com/repos/WellCommerce/FormBundle/zipball/f14e813ee304f7a76316903930bea155154bcaa5",
+                "reference": "f14e813ee304f7a76316903930bea155154bcaa5",
                 "shasum": ""
             },
             "require": {
@@ -2804,7 +2859,7 @@
                 "symfony",
                 "wellcommerce"
             ],
-            "time": "2014-10-14 21:18:29"
+            "time": "2014-10-14 23:09:30"
         },
         {
             "name": "white-october/pagerfanta-bundle",
@@ -3703,6 +3758,7 @@
         "willdurand/js-translation-bundle": 20,
         "jms/i18n-routing-bundle": 20,
         "wellcommerce/form-bundle": 20,
+        "wellcommerce/datagrid-bundle": 20,
         "doctrine/doctrine-fixtures-bundle": 20,
         "behat/behat": 20,
         "behat/symfony2-extension": 20,

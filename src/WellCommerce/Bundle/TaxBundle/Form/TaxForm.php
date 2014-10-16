@@ -14,9 +14,9 @@ namespace WellCommerce\Bundle\TaxBundle\Form;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\BaseSubjectInterface;
 use WellCommerce\Bundle\TaxBundle\Entity\Tax;
-use WellCommerce\Bundle\CoreBundle\Form\AbstractForm;
-use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
-use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
+use WellCommerce\Bundle\FormBundle\Form\AbstractForm;
+use WellCommerce\Bundle\FormBundle\Form\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\FormBundle\Form\FormInterface;
 use WellCommerce\Bundle\TaxBundle\Repository\TaxRepositoryInterface;
 
 /**

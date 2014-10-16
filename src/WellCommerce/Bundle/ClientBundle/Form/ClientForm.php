@@ -11,10 +11,10 @@
  */
 namespace WellCommerce\Bundle\ClientBundle\Form;
 
-use WellCommerce\Bundle\CoreBundle\Form\AbstractForm;
-use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
-use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\EntityToIdentifierTransformer;
-use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
+use WellCommerce\Bundle\FormBundle\Form\AbstractForm;
+use WellCommerce\Bundle\FormBundle\Form\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\FormBundle\Form\DataTransformer\EntityToIdentifierTransformer;
+use WellCommerce\Bundle\FormBundle\Form\FormInterface;
 
 /**
  * Class ClientForm

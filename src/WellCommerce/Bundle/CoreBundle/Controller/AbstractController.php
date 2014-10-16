@@ -13,9 +13,9 @@ namespace WellCommerce\Bundle\CoreBundle\Controller;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
+use WellCommerce\Bundle\DataGridBundle\DataGrid\DataGridInterface;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
-use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
+use WellCommerce\Bundle\FormBundle\Form\FormInterface;
 
 /**
  * Class Controller
@@ -32,7 +32,7 @@ abstract class AbstractController extends AbstractContainer
      * @param null|object   $data    Initial form data
      * @param array         $options Form options
      *
-     * @return \WellCommerce\Bundle\CoreBundle\Form\Elements\Form
+     * @return \WellCommerce\Bundle\FormBundle\Form\Elements\Form
      */
     protected function getFormBuilder(FormInterface $form, $data = null, array $options)
     {
@@ -44,7 +44,7 @@ abstract class AbstractController extends AbstractContainer
      *
      * @param DataGridInterface $dataGrid DataGrid instance
      *
-     * @return \WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface
+     * @return \WellCommerce\Bundle\DataGridBundle\DataGrid\DataGridInterface
      */
     protected function getDataGrid(DataGridInterface $dataGrid)
     {

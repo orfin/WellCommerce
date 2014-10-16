@@ -17,8 +17,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\Manager\AdminManagerInterface;
-use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
-use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
+use WellCommerce\Bundle\DataGridBundle\DataGrid\DataGridInterface;
+use WellCommerce\Bundle\FormBundle\Form\FormInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
@@ -79,7 +79,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
      *
      * @param $resource
      *
-     * @return \WellCommerce\Bundle\CoreBundle\Form\Elements\Form
+     * @return \WellCommerce\Bundle\FormBundle\Form\Elements\Form
      */
     protected function getForm($resource)
     {

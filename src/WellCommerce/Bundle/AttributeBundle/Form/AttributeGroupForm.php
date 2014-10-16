@@ -12,10 +12,9 @@
 namespace WellCommerce\Bundle\AttributeBundle\Form;
 
 use WellCommerce\Bundle\AttributeBundle\Form\DataTransformer\AttributeCollectionToArrayTransformer;
-use WellCommerce\Bundle\CoreBundle\Form\AbstractForm;
-use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
-use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
-use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
+use WellCommerce\Bundle\FormBundle\Form\AbstractForm;
+use WellCommerce\Bundle\FormBundle\Form\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\FormBundle\Form\FormInterface;
 
 /**
  * Class AttributeGroupForm

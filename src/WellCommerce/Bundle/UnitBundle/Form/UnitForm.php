@@ -14,9 +14,9 @@ namespace WellCommerce\Bundle\UnitBundle\Form;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\BaseSubjectInterface;
 use WellCommerce\Bundle\UnitBundle\Entity\Unit;
-use WellCommerce\Bundle\CoreBundle\Form\AbstractForm;
-use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
-use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
+use WellCommerce\Bundle\FormBundle\Form\AbstractForm;
+use WellCommerce\Bundle\FormBundle\Form\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\FormBundle\Form\FormInterface;
 use WellCommerce\Bundle\UnitBundle\Repository\UnitRepositoryInterface;
 
 /**

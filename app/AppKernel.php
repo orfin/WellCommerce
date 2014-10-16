@@ -39,6 +39,7 @@ class AppKernel extends Kernel
             new Liip\ImagineBundle\LiipImagineBundle(),
             new JMS\I18nRoutingBundle\JMSI18nRoutingBundle(),
             new WellCommerce\Bundle\FormBundle\WellCommerceFormBundle(),
+            new WellCommerce\Bundle\DataGridBundle\WellCommerceDataGridBundle(),
             // WellCommerce bundles
             new WellCommerce\Bundle\CoreBundle\WellCommerceCoreBundle(),
             new WellCommerce\Bundle\AdminBundle\WellCommerceAdminBundle(),

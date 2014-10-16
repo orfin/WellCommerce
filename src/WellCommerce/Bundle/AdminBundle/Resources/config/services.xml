@@ -6,6 +6,7 @@
     <parameters>
         <parameter key="admin.subscriber.class">WellCommerce\Bundle\AdminBundle\EventListener\AdminSubscriber</parameter>
         <parameter key="admin_menu.builder.class">WellCommerce\Bundle\AdminBundle\MenuBuilder\AdminMenuBuilder</parameter>
+        <parameter key="twig.extension.admin.class">WellCommerce\Bundle\AdminBundle\Twig\Extension\AdminExtension</parameter>
     </parameters>
 
     <services>
@@ -23,6 +24,11 @@
         </service>
 
         <service id="admin_menu.builder" class="%admin_menu.builder.class%" />
+
+        <service id="twig.extension.admin" class="%twig.extension.admin.class%">
+            <argument type="service" id="session"/>
+            <tag name="twig.extension"/>
+        </service>
     </services>
     
 </container>

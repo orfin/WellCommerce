@@ -11,7 +11,6 @@
  */
 namespace WellCommerce\Bundle\CoreBundle\Controller\Front;
 
-use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
 
 /**

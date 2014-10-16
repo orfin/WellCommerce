@@ -12,9 +12,9 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Processor;
 
-use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
-use WellCommerce\Bundle\CoreBundle\Form\Elements\Fieldset;
-use WellCommerce\Bundle\CoreBundle\Form\Elements\Form;
+use WellCommerce\Bundle\FormBundle\Form\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\FormBundle\Form\Elements\Fieldset;
+use WellCommerce\Bundle\FormBundle\Form\Elements\Form;
 
 /**
  * Interface PaymentMethodProcessorInterface

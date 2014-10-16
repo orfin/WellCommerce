@@ -12,7 +12,7 @@
 namespace WellCommerce\Bundle\CoreBundle\Event;
 
 use Symfony\Component\EventDispatcher\Event;
-use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\FormBundle\Form\Builder\FormBuilderInterface;
 
 /**
  * Class FormEvent

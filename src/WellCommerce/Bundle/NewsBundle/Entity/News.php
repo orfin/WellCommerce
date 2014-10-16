@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\NewsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
-use WellCommerce\Bundle\CoreBundle\Form\Elements\DateTime;
+use WellCommerce\Bundle\FormBundle\Form\Elements\DateTime;
 
 /**
  * Class Locale
