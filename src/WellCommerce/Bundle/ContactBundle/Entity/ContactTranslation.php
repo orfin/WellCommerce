@@ -28,6 +28,23 @@ class ContactTranslation
     use AddressTrait;
 
     /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * Returns translation ID.
+     *
+     * @return integer The ID.
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)

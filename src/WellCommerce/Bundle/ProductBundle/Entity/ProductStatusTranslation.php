@@ -48,7 +48,7 @@ class ProductStatusTranslation
     {
         return $this->id;
     }
-    
+
     public function setName($name)
     {
         $this->name = $name;

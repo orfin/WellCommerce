@@ -26,11 +26,28 @@ class DelivererTranslation
     use ORMBehaviors\Translatable\Translation;
 
     /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
+
+    /**
+     * Returns translation ID.
+     *
+     * @return integer The ID.
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * Set name.
