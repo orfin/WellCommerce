@@ -21,7 +21,7 @@ use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\EnableableTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\HierarchyTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\PhotoTrait;
-use WellCommerce\Bundle\CurrencyBundle\Entity\Currency;
+use WellCommerce\Bundle\IntlBundle\Entity\Currency;
 use WellCommerce\Bundle\ShopBundle\Entity\Shop;
 use WellCommerce\Bundle\TaxBundle\Entity\Tax;
 use WellCommerce\Bundle\UnitBundle\Entity\Unit;
@@ -116,7 +116,7 @@ class Product
     private $productPhotos;
 
     /**
-     * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\Product\Attribute", mappedBy="product", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute", mappedBy="product", cascade={"all"}, orphanRemoval=true)
      */
     private $attributes;
 
@@ -142,7 +142,7 @@ class Product
     private $sellPrice;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\CurrencyBundle\Entity\Currency")
+     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\IntlBundle\Entity\Currency")
      * @ORM\JoinColumn(name="buy_currency_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $buyCurrency;
@@ -154,7 +154,7 @@ class Product
     private $attributeGroup;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\CurrencyBundle\Entity\Currency")
+     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\IntlBundle\Entity\Currency")
      * @ORM\JoinColumn(name="sell_currency_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $sellCurrency;

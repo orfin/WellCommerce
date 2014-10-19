@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b1a36aaac38c8d4839cf78c6daaa8c9d",
+    "hash": "2b1fc34447d608f426db99e76276316e",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1588,12 +1588,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/DoctrineBehaviors.git",
-                "reference": "5e2065338fc43bde19a7fcacc3d19ac0378f2178"
+                "reference": "a10737debab296aadbf3ea9251b6de2ff1a2397f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/DoctrineBehaviors/zipball/5e2065338fc43bde19a7fcacc3d19ac0378f2178",
-                "reference": "5e2065338fc43bde19a7fcacc3d19ac0378f2178",
+                "url": "https://api.github.com/repos/KnpLabs/DoctrineBehaviors/zipball/a10737debab296aadbf3ea9251b6de2ff1a2397f",
+                "reference": "a10737debab296aadbf3ea9251b6de2ff1a2397f",
                 "shasum": ""
             },
             "require": {
@@ -1609,7 +1609,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev"
+                    "dev-master": "1.1.x-dev"
                 }
             },
             "autoload": {
@@ -1639,7 +1639,7 @@
                 "translatable",
                 "tree"
             ],
-            "time": "2014-10-15 08:05:09"
+            "time": "2014-10-17 19:51:18"
         },
         {
             "name": "kriswallsmith/assetic",
@@ -2700,16 +2700,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.16.1",
+            "version": "v1.16.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fabpot/Twig.git",
-                "reference": "7c4c01dcf578523cfcddf383641a4f12790270ec"
+                "reference": "42f758d9fe2146d1f0470604fc05ee43580873fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Twig/zipball/7c4c01dcf578523cfcddf383641a4f12790270ec",
-                "reference": "7c4c01dcf578523cfcddf383641a4f12790270ec",
+                "url": "https://api.github.com/repos/fabpot/Twig/zipball/42f758d9fe2146d1f0470604fc05ee43580873fc",
+                "reference": "42f758d9fe2146d1f0470604fc05ee43580873fc",
                 "shasum": ""
             },
             "require": {
@@ -2726,7 +2726,7 @@
                     "Twig_": "lib/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "notification-url": "http://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -2753,7 +2753,61 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2014-10-10 14:09:53"
+            "time": "2014-10-17 12:53:44"
+        },
+        {
+            "name": "wellcommerce/composer-manager-bundle",
+            "version": "dev-master",
+            "target-dir": "WellCommerce/Bundle/ComposerManagerBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/WellCommerce/ComposerManagerBundle.git",
+                "reference": "a20726e15032dfacc5f7bfb7bcb076a77560642a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/WellCommerce/ComposerManagerBundle/zipball/a20726e15032dfacc5f7bfb7bcb076a77560642a",
+                "reference": "a20726e15032dfacc5f7bfb7bcb076a77560642a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4",
+                "symfony/symfony": "2.5.*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "WellCommerce\\Bundle\\DataGridBundle": ""
+                }
+            },
+            "notification-url": "http://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Adam Piotrowski",
+                    "email": "adam@wellcommerce.org"
+                },
+                {
+                    "name": "WellCommerce Developers",
+                    "email": "developers@wellcommerce.org"
+                }
+            ],
+            "description": "WellCommerce Composer Manager Bundle",
+            "keywords": [
+                "composer",
+                "e-commerce",
+                "open-source",
+                "symfony",
+                "wellcommerce"
+            ],
+            "time": "2014-10-17 23:12:07"
         },
         {
             "name": "wellcommerce/datagrid-bundle",
@@ -2762,12 +2816,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/WellCommerce/DataGridBundle.git",
-                "reference": "f754fd5679ec49ae4e3ff7827acb0946cb861016"
+                "reference": "839262c719776446c920ef87cfd49d649b75060d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WellCommerce/DataGridBundle/zipball/f754fd5679ec49ae4e3ff7827acb0946cb861016",
-                "reference": "f754fd5679ec49ae4e3ff7827acb0946cb861016",
+                "url": "https://api.github.com/repos/WellCommerce/DataGridBundle/zipball/839262c719776446c920ef87cfd49d649b75060d",
+                "reference": "839262c719776446c920ef87cfd49d649b75060d",
                 "shasum": ""
             },
             "require": {
@@ -2806,7 +2860,7 @@
                 "symfony",
                 "wellcommerce"
             ],
-            "time": "2014-10-15 22:16:04"
+            "time": "2014-10-15 23:08:08"
         },
         {
             "name": "wellcommerce/form-bundle",
@@ -2815,12 +2869,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/WellCommerce/FormBundle.git",
-                "reference": "f14e813ee304f7a76316903930bea155154bcaa5"
+                "reference": "ccf67da08d92dc0d758eb22fd2f298529545831d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WellCommerce/FormBundle/zipball/f14e813ee304f7a76316903930bea155154bcaa5",
-                "reference": "f14e813ee304f7a76316903930bea155154bcaa5",
+                "url": "https://api.github.com/repos/WellCommerce/FormBundle/zipball/ccf67da08d92dc0d758eb22fd2f298529545831d",
+                "reference": "ccf67da08d92dc0d758eb22fd2f298529545831d",
                 "shasum": ""
             },
             "require": {
@@ -2859,7 +2913,7 @@
                 "symfony",
                 "wellcommerce"
             ],
-            "time": "2014-10-14 23:09:30"
+            "time": "2014-10-15 23:04:01"
         },
         {
             "name": "white-october/pagerfanta-bundle",
@@ -3430,12 +3484,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Behat/Symfony2Extension.git",
-                "reference": "f9030db6d34a46b104c76efff5db761b688b0400"
+                "reference": "3a7b26908a7a21665d0918edbaa99c5e8e125ed5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/Symfony2Extension/zipball/f9030db6d34a46b104c76efff5db761b688b0400",
-                "reference": "f9030db6d34a46b104c76efff5db761b688b0400",
+                "url": "https://api.github.com/repos/Behat/Symfony2Extension/zipball/3a7b26908a7a21665d0918edbaa99c5e8e125ed5",
+                "reference": "3a7b26908a7a21665d0918edbaa99c5e8e125ed5",
                 "shasum": ""
             },
             "require": {
@@ -3461,7 +3515,7 @@
                     "Behat\\Symfony2Extension": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "notification-url": "http://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -3482,7 +3536,7 @@
                 "framework",
                 "symfony"
             ],
-            "time": "2014-10-07 15:41:44"
+            "time": "2014-10-17 15:23:13"
         },
         {
             "name": "behat/transliterator",
@@ -3759,6 +3813,7 @@
         "jms/i18n-routing-bundle": 20,
         "wellcommerce/form-bundle": 20,
         "wellcommerce/datagrid-bundle": 20,
+        "wellcommerce/composer-manager-bundle": 20,
         "doctrine/doctrine-fixtures-bundle": 20,
         "behat/behat": 20,
         "behat/symfony2-extension": 20,

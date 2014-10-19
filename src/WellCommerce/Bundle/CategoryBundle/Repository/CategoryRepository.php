@@ -101,7 +101,7 @@ class CategoryRepository extends AbstractEntityRepository implements CategoryRep
         $category->setHierarchy(0);
         $category->setParent($parent);
 
-        /** @var $locale \WellCommerce\Bundle\LocaleBundle\Entity\Locale */
+        /** @var $locale \WellCommerce\Bundle\IntlBundle\Entity\Locale */
         foreach ($locales as $locale) {
             $category->translate($locale->getCode())->setName($name);
         }

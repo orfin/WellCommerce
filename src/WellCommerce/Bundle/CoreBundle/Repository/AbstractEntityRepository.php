@@ -52,7 +52,7 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
      */
     public function getLocales()
     {
-        return $this->getRepository('WellCommerce\Bundle\LocaleBundle\Entity\Locale')->findAll();
+        return $this->getRepository('WellCommerce\Bundle\IntlBundle\Entity\Locale')->findAll();
     }
 
     /**
@@ -81,14 +81,6 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
         $entity = $this->getClassName();
 
         return new $entity;
-    }
-
-    public function save($resource)
-    {
-        $this->getEntityManager()->persist($resource);
-        $this->getEntityManager()->flush();
-
-        return $resource;
     }
 
     protected function getQueryBuilder()

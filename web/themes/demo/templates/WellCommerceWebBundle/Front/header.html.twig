@@ -32,10 +32,9 @@
                         </button>
 
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">EN</a></li>
-                            <li><a href="#">PL</a></li>
-                            <li><a href="#">FR</a></li>
-                            <li><a href="#">DE</a></li>
+                            {% for locale in locales %}
+                            <li><a href="{{ locale.code }}">{{ locale.code }}</a></li>
+                            {% endfor %}
                         </ul>
                     </div>
 

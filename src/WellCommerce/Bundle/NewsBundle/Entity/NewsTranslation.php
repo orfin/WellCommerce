@@ -14,9 +14,7 @@ namespace WellCommerce\Bundle\NewsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Sluggable\Sluggable;
-use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translation;
-use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\HierarchyTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\MetaDataTrait;
 
 
@@ -31,6 +29,13 @@ class NewsTranslation
     use Translation;
     use MetaDataTrait;
     use Sluggable;
+
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
 
     /**
      * @var string
@@ -52,6 +57,16 @@ class NewsTranslation
      * @ORM\Column(name="content", type="text")
      */
     private $content;
+
+    /**
+     * Returns translation ID.
+     *
+     * @return integer The ID.
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * @param string $content
@@ -102,7 +117,8 @@ class NewsTranslation
         return $this->topic;
     }
 
-    public function getSluggableFields() {
+    public function getSluggableFields()
+    {
         return ['topic'];
     }
 

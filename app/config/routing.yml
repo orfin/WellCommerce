@@ -19,14 +19,9 @@ wellcommerce_user:
     prefix:   /admin/user
     options: { i18n: false }
 
-wellcommerce_locale:
-    resource: "@WellCommerceLocaleBundle/Resources/config/routing.xml"
-    prefix:   /admin/configuration/locale
-    options: { i18n: false }
-
-wellcommerce_currency:
-    resource: "@WellCommerceCurrencyBundle/Resources/config/routing.xml"
-    prefix:   /admin/configuration/currency
+wellcommerce_intl:
+    resource: "@WellCommerceIntlBundle/Resources/config/routing.xml"
+    prefix:   /admin/configuration/
     options: { i18n: false }
 
 wellcommerce_availability:

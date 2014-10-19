@@ -26,6 +26,13 @@ class AvailabilityTranslation
     use ORMBehaviors\Translatable\Translation;
 
     /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
@@ -33,23 +40,29 @@ class AvailabilityTranslation
     private $name;
 
     /**
-     * Set name.
+     * Returns translation ID.
+     *
+     * @return integer The ID.
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
+    /**
+     * Sets name
      *
-     * @param string $name
+     * @param $name
      *
-     * @return AvailabilityTranslation
+     * @return $this
      */
     public function setName($name)
     {
         $this->name = $name;
-
-        return $this;
     }
 
     /**
      * Get name.
-
      *
      * @return string
      */

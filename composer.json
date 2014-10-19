@@ -39,7 +39,7 @@
         "sensio/distribution-bundle": "~3.0",
         "sensio/framework-extra-bundle": "~3.0",
         "incenteev/composer-parameter-handler": "~2.0",
-        "knplabs/doctrine-behaviors": "1.0.x-dev",
+        "knplabs/doctrine-behaviors": "1.1.*@dev",
         "fzaninotto/faker": "1.5.x-dev",
         "white-october/pagerfanta-bundle": "2.1.x-dev",
         "friendsofsymfony/jsrouting-bundle": "1.5.3",
@@ -50,7 +50,8 @@
         "ircmaxell/password-compat": "1.0.3",
         "liip/imagine-bundle": "1.0.4",
         "wellcommerce/form-bundle": "dev-development",
-        "wellcommerce/datagrid-bundle": "0.1.*@dev"
+        "wellcommerce/datagrid-bundle": "0.1.*@dev",
+        "wellcommerce/composer-manager-bundle": "0.1.*@dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
