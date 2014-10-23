@@ -11,15 +11,14 @@
  */
 namespace WellCommerce\Bundle\CoreBundle\Controller\Admin;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\Manager\AdminManagerInterface;
+use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 use WellCommerce\Bundle\DataGridBundle\DataGrid\DataGridInterface;
 use WellCommerce\Bundle\FormBundle\Form\FormInterface;
-use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
  * Class AbstractAdminController
@@ -75,20 +74,6 @@ abstract class AbstractAdminController extends AbstractController implements Adm
     }
 
     /**
-     * Returns a form for particular resource
-     *
-     * @param $resource
-     *
-     * @return \WellCommerce\Bundle\FormBundle\Form\Elements\Form
-     */
-    protected function getForm($resource)
-    {
-        return $this->getFormBuilder($this->form, $resource, [
-            'name' => $this->repository->getAlias()
-        ]);
-    }
-
-    /**
      * Controller index action
      *
      * @param Request $request
@@ -98,7 +83,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
     public function indexAction(Request $request)
     {
         return [
-            'datagrid' => $this->datagrid->get()
+            'datagrid' => $this->datagrid->getDataGrid()
         ];
     }
 
@@ -111,7 +96,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
      */
     public function gridAction(Request $request)
     {
-        return new JsonResponse($this->datagrid->get()->load($request));
+        return new JsonResponse($this->datagrid->getDataGrid()->load($request));
     }
 
     /**
@@ -135,6 +120,20 @@ abstract class AbstractAdminController extends AbstractController implements Adm
         return [
             'form' => $form
         ];
+    }
+
+    /**
+     * Returns a form for particular resource
+     *
+     * @param $resource
+     *
+     * @return \WellCommerce\Bundle\FormBundle\Form\Elements\Form
+     */
+    protected function getForm($resource)
+    {
+        return $this->getFormBuilder($this->form, $resource, [
+            'name' => $this->repository->getAlias()
+        ]);
     }
 
     /**

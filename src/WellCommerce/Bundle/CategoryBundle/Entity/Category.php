@@ -36,6 +36,10 @@ class Category
     use Blameable;
 
     /**
+     * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\CategoryBundle\Entity\Category", mappedBy="parent")
+     */
+    protected $children;
+    /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer")
@@ -43,19 +47,12 @@ class Category
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
     /**
      * @var integer
      *
      * @ORM\Column(name="hierarchy", type="integer", options={"default" = 0})
      */
     private $hierarchy;
-
-    /**
-     * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\CategoryBundle\Entity\Category", mappedBy="parent")
-     */
-    protected $children;
-
     /**
      * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\CategoryBundle\Entity\Category", inversedBy="children")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE")
@@ -127,6 +124,16 @@ class Category
     }
 
     /**
+     * Sets category parent
+     *
+     * @param null|Category $parent
+     */
+    public function setParent(Category $parent = null)
+    {
+        $this->parent = $parent;
+    }
+
+    /**
      * Returns category children
      *
      * @return mixed
@@ -148,13 +155,13 @@ class Category
     }
 
     /**
-     * Sets category parent
+     * Get shops for category
      *
-     * @param null|Category $parent
+     * @return mixed
      */
-    public function setParent(Category $parent = null)
+    public function getShops()
     {
-        $this->parent = $parent;
+        return $this->shops;
     }
 
     /**
@@ -167,29 +174,9 @@ class Category
         $this->shops = $shops;
     }
 
-    /**
-     * Get shops for category
-     *
-     * @return mixed
-     */
-    public function getShops()
-    {
-        return $this->shops;
-    }
-
     public function addShop(Shop $shop)
     {
         $this->shops[] = $shop;
-    }
-
-    /**
-     * Sets products in category
-     *
-     * @param $shops
-     */
-    public function setProducts($products)
-    {
-        $this->products = $products;
     }
 
     /**
@@ -200,6 +187,16 @@ class Category
     public function getProducts()
     {
         return $this->products;
+    }
+
+    /**
+     * Sets products in category
+     *
+     * @param $shops
+     */
+    public function setProducts($products)
+    {
+        $this->products = $products;
     }
 
     public function addProduct(Product $product)

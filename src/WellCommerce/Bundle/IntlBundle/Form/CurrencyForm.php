@@ -19,7 +19,7 @@ use WellCommerce\Bundle\IntlBundle\Repository\CurrencyRepositoryInterface;
 /**
  * Class CurrencyForm
  *
- * @package WellCommerce\Currency\Form
+ * @package WellCommerce\Bundle\IntlBundle\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class CurrencyForm extends AbstractForm implements FormInterface

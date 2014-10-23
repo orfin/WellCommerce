@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\LayoutBundle\Configurator;
 
-use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
 use WellCommerce\Bundle\FormBundle\Form\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\FormBundle\Form\Conditions\Equals;
@@ -38,14 +37,6 @@ abstract class AbstractLayoutBoxConfigurator extends AbstractContainer
     {
         $this->type              = $type;
         $this->controllerService = $controllerService;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getType()
-    {
-        return $this->type;
     }
 
     /**
@@ -78,5 +69,13 @@ abstract class AbstractLayoutBoxConfigurator extends AbstractContainer
         ]));
 
         return $fieldset;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 }

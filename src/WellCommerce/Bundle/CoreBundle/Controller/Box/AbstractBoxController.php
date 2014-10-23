@@ -41,7 +41,7 @@ abstract class AbstractBoxController extends AbstractController implements BoxCo
         return $accessor->getValue($this->getParam('_box_settings'), '[' . $id . ']');
     }
 
-    public function setBoxSettings($settings)
+    protected function setBoxSettings($settings)
     {
         $this->settings = $settings;
     }

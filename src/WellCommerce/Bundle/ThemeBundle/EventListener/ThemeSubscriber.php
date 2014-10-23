@@ -15,8 +15,6 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
-use WellCommerce\Bundle\AdminBundle\Event\AdminMenuEvent;
-use WellCommerce\Bundle\AdminBundle\MenuBuilder\XmlLoader;
 use WellCommerce\Bundle\CoreBundle\Event\FormEvent;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 use WellCommerce\Bundle\ThemeBundle\Form\ThemeForm;
@@ -43,6 +41,18 @@ class ThemeSubscriber extends AbstractEventSubscriber
     public function __construct(ThemeManagerInterface $themeManager)
     {
         $this->themeManager = $themeManager;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getSubscribedEvents()
+    {
+        return parent::getSubscribedEvents() + [
+            KernelEvents::CONTROLLER   => ['onKernelController', -250],
+            KernelEvents::REQUEST      => ['onKernelRequest', -250],
+            ThemeForm::FORM_INIT_EVENT => 'onThemeFormInit',
+        ];
     }
 
     /**
@@ -73,17 +83,5 @@ class ThemeSubscriber extends AbstractEventSubscriber
 //        $host  = $event->getRequest()->server->get('SERVER_NAME');
 //        $theme = $this->layoutThemeRepository->find(6);
 //        $this->shopTheme->setCurrentTheme($theme);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function getSubscribedEvents()
-    {
-        return parent::getSubscribedEvents() + [
-            KernelEvents::CONTROLLER   => ['onKernelController', -250],
-            KernelEvents::REQUEST      => ['onKernelRequest', -250],
-            ThemeForm::FORM_INIT_EVENT => 'onThemeFormInit',
-        ];
     }
 }

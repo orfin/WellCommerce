@@ -50,8 +50,17 @@ class UnitTranslation
     }
 
     /**
-     * Set name.
+     * Get name.
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
 
+    /**
+     * Set name.
      *
      * @param string $name
      *
@@ -62,17 +71,6 @@ class UnitTranslation
         $this->name = $name;
 
         return $this;
-    }
-
-    /**
-     * Get name.
-
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
     }
 }
 

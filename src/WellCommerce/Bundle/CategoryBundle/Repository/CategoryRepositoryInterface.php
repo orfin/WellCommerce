@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\CategoryBundle\Repository;
 
 use Symfony\Component\HttpFoundation\ParameterBag;
-use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**

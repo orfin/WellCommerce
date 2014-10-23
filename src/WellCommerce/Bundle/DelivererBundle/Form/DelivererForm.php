@@ -36,8 +36,8 @@ class DelivererForm extends AbstractForm implements FormInterface
         ]));
 
         $languageData = $requiredData->addChild($builder->getElement('fieldset_language', [
-            'name'      => 'translations',
-            'label'     => $this->trans('form.required_data.language_data.label')
+            'name'  => 'translations',
+            'label' => $this->trans('form.required_data.language_data.label')
         ]));
 
         $languageData->addChild($builder->getElement('text_field', [

@@ -61,24 +61,16 @@ class FileUploader implements FileUploaderInterface
      * @param Filesystem               $filesystem
      * @param EventDispatcherInterface $eventDispatcher
      */
-    public function __construct($kernelDir, Filesystem $filesystem, EventDispatcherInterface $eventDispatcher, MediaRepositoryInterface $repository)
-    {
+    public function __construct(
+        $kernelDir,
+        Filesystem $filesystem,
+        EventDispatcherInterface $eventDispatcher,
+        MediaRepositoryInterface $repository
+    ) {
         $this->kernelDir       = $kernelDir;
         $this->filesystem      = $filesystem;
         $this->eventDispatcher = $eventDispatcher;
         $this->repository      = $repository;
-    }
-
-    /**
-     * Dispatches file event
-     *
-     * @param      $name
-     * @param File $file
-     */
-    private function dispatchEvent($name, File $file)
-    {
-        $event = new GenericEvent($file);
-        $this->eventDispatcher->dispatch($name, $event);
     }
 
     /**
@@ -105,6 +97,25 @@ class FileUploader implements FileUploaderInterface
     }
 
     /**
+     * Dispatches file event
+     *
+     * @param      $name
+     * @param File $file
+     */
+    private function dispatchEvent($name, File $file)
+    {
+        $event = new GenericEvent($file);
+        $this->eventDispatcher->dispatch($name, $event);
+    }
+
+    private function getUploadRootDir($dir)
+    {
+        $dir = rtrim($dir, '/\\');
+
+        return sprintf('%s/../web/media/%s', $this->kernelDir, $dir);
+    }
+
+    /**
      * Returns relative path to file
      *
      * @param Media $media
@@ -118,13 +129,6 @@ class FileUploader implements FileUploaderInterface
             $media->getId(),
             $media->getExtension()
         );
-    }
-
-    private function getUploadRootDir($dir)
-    {
-        $dir = rtrim($dir, '/\\');
-
-        return sprintf('%s/../web/media/%s', $this->kernelDir, $dir);
     }
 
     /**

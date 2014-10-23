@@ -91,30 +91,6 @@ class LayoutBoxRenderer extends AbstractContainer implements LayoutBoxRendererIn
     }
 
     /**
-     * Returns current router context
-     *
-     * @return \Symfony\Component\Routing\RequestContext
-     */
-    private function getRouterContext()
-    {
-        return $this->getRouter()->getContext();
-    }
-
-    /**
-     * Returns master request controller action
-     *
-     * @return mixed
-     */
-    private function getCurrentAction()
-    {
-        $currentPath  = $this->getRouterContext()->getPathInfo();
-        $currentRoute = $this->getRouter()->match($currentPath);
-        list(, $action) = explode(':', $currentRoute['_controller']);
-
-        return $action;
-    }
-
-    /**
      * Returns controller name needed to forward the request
      *
      * @param LayoutBox $box
@@ -151,6 +127,30 @@ class LayoutBoxRenderer extends AbstractContainer implements LayoutBoxRendererIn
         }
 
         return 'indexAction';
+    }
+
+    /**
+     * Returns master request controller action
+     *
+     * @return mixed
+     */
+    private function getCurrentAction()
+    {
+        $currentPath  = $this->getRouterContext()->getPathInfo();
+        $currentRoute = $this->getRouter()->match($currentPath);
+        list(, $action) = explode(':', $currentRoute['_controller']);
+
+        return $action;
+    }
+
+    /**
+     * Returns current router context
+     *
+     * @return \Symfony\Component\Routing\RequestContext
+     */
+    private function getRouterContext()
+    {
+        return $this->getRouter()->getContext();
     }
 
     /**

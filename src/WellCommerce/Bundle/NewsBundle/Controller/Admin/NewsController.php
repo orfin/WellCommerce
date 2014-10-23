@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\NewsBundle\Controller\Admin;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**

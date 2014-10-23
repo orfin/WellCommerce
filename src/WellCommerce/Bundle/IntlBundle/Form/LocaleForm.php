@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\IntlBundle\Form;
 use WellCommerce\Bundle\FormBundle\Form\AbstractForm;
 use WellCommerce\Bundle\FormBundle\Form\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\FormBundle\Form\FormInterface;
-use WellCommerce\Bundle\IntlBundle\Repository\LocaleRepositoryInterface;
 
 /**
  * Class LocaleForm

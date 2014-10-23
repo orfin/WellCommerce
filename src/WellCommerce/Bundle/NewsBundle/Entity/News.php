@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\NewsBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use WellCommerce\Bundle\FormBundle\Form\Elements\DateTime;
@@ -92,20 +93,14 @@ class News
         return $this->id;
     }
 
-    public function setPublish($publish)
-    {
-        $this->publish = $publish;
-    }
-
-
     public function getPublish()
     {
         return $this->publish;
     }
 
-    public function setStartDate(DateTime $startDate)
+    public function setPublish($publish)
     {
-        $this->startDate = $startDate;
+        $this->publish = $publish;
     }
 
     public function getStartDate()
@@ -113,9 +108,9 @@ class News
         return $this->startDate;
     }
 
-    public function setEndDate(DateTime $endDate)
+    public function setStartDate(DateTime $startDate)
     {
-        $this->endDate = $endDate;
+        $this->startDate = $startDate;
     }
 
     public function getEndDate()
@@ -123,9 +118,9 @@ class News
         return $this->endDate;
     }
 
-    public function setFeatured($featured)
+    public function setEndDate(DateTime $endDate)
     {
-        $this->featured = $featured;
+        $this->endDate = $endDate;
     }
 
     public function getFeatured()
@@ -133,18 +128,14 @@ class News
         return $this->featured;
     }
 
+    public function setFeatured($featured)
+    {
+        $this->featured = $featured;
+    }
+
     public function getNewsPhotos()
     {
         return $this->newsPhotos;
-    }
-
-    /**
-     *
-     * @param NewsPhoto $photo
-     */
-    public function addNewsPhoto(NewsPhoto $photo)
-    {
-        $this->newsPhotos[] = $photo;
     }
 
     /**
@@ -189,6 +180,15 @@ class News
             $this->setPhoto(null);
         }
         $this->newsPhotos = $newsPhotos;
+    }
+
+    /**
+     *
+     * @param NewsPhoto $photo
+     */
+    public function addNewsPhoto(NewsPhoto $photo)
+    {
+        $this->newsPhotos[] = $photo;
     }
 }
 

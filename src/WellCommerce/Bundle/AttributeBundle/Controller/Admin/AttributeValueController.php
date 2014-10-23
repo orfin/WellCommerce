@@ -13,9 +13,7 @@
 namespace WellCommerce\Bundle\AttributeBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Exception\MethodNotAllowedException;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 /**
  * Class AttributeValueController

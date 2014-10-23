@@ -124,14 +124,6 @@ class AdminMenuItem implements AdminMenuItemInterface, \ArrayAccess
     /**
      * {@inheritdoc}
      */
-    public function getSortOrder()
-    {
-        return $this->options['sort_order'];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getPath()
     {
         return $this->options['path'];
@@ -149,6 +141,14 @@ class AdminMenuItem implements AdminMenuItemInterface, \ArrayAccess
 
             return $a->getSortOrder() > $b->getSortOrder() ? 1 : -1;
         });
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSortOrder()
+    {
+        return $this->options['sort_order'];
     }
 
     /**

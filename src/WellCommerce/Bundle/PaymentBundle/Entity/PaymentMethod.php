@@ -81,16 +81,6 @@ class PaymentMethod
     }
 
     /**
-     * Sets shops for payment method
-     *
-     * @param $shops
-     */
-    public function setShops($shops)
-    {
-        $this->shops = $shops;
-    }
-
-    /**
      * Get shops for payment method
      *
      * @return mixed
@@ -98,6 +88,16 @@ class PaymentMethod
     public function getShops()
     {
         return $this->shops;
+    }
+
+    /**
+     * Sets shops for payment method
+     *
+     * @param $shops
+     */
+    public function setShops($shops)
+    {
+        $this->shops = $shops;
     }
 
     /**

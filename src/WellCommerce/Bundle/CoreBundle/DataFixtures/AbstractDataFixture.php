@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\CoreBundle\DataFixtures;
 
 use Faker\Factory as FakerFactory;
-use Faker\Generator;
 
 /**
  * Class AbstractDataFixture

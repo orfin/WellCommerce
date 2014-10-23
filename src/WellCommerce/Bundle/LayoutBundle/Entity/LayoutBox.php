@@ -110,13 +110,13 @@ class LayoutBox
         $this->settings = $settings;
     }
 
-    public function setIdentifier($identifier)
-    {
-        $this->identifier = $identifier;
-    }
-
     public function getIdentifier()
     {
         return $this->identifier;
+    }
+
+    public function setIdentifier($identifier)
+    {
+        $this->identifier = $identifier;
     }
 }

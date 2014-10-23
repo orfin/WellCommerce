@@ -25,6 +25,14 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
  */
 class CategoryRepository extends AbstractEntityRepository implements CategoryRepositoryInterface
 {
+    public function getCategoriesTree()
+    {
+        $items   = $this->getTreeItems();
+        $builder = new CategoryTreeBuilder($items);
+
+        return $builder->getTree();
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -67,14 +75,6 @@ class CategoryRepository extends AbstractEntityRepository implements CategoryRep
         }
 
         return $categoriesTree;
-    }
-
-    public function getCategoriesTree()
-    {
-        $items   = $this->getTreeItems();
-        $builder = new CategoryTreeBuilder($items);
-
-        return $builder->getTree();
     }
 
     public function changeOrder(array $items = [])

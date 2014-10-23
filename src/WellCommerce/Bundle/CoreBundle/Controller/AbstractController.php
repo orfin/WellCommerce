@@ -13,8 +13,8 @@ namespace WellCommerce\Bundle\CoreBundle\Controller;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use WellCommerce\Bundle\DataGridBundle\DataGrid\DataGridInterface;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
+use WellCommerce\Bundle\DataGridBundle\DataGrid\DataGridInterface;
 use WellCommerce\Bundle\FormBundle\Form\FormInterface;
 
 /**
@@ -61,7 +61,7 @@ abstract class AbstractController extends AbstractContainer
         return $this->get('security.context')->getToken()->getUser();
     }
 
-    public function jsonResponse($content)
+    protected function jsonResponse($content)
     {
         return new JsonResponse($content);
     }

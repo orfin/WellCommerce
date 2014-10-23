@@ -58,6 +58,16 @@ class Tax
     }
 
     /**
+     * Get value.
+     *
+     * @return string
+     */
+    public function getValue()
+    {
+        return $this->value;
+    }
+
+    /**
      * Set value.
      *
      * @param string $discount
@@ -69,16 +79,6 @@ class Tax
         $this->value = $value;
 
         return $this;
-    }
-
-    /**
-     * Get value.
-     *
-     * @return string
-     */
-    public function getValue()
-    {
-        return $this->value;
     }
 }
 

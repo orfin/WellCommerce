@@ -6,4 +6,5 @@
 
     <import resource="routing/currency.xml" prefix="currency" />
     <import resource="routing/locale.xml" prefix="locale" />
+    <import resource="routing/dictionary.xml" prefix="dictionary" />
 </routes>

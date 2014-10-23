@@ -35,7 +35,7 @@ class AdminExtension extends \Twig_Extension
      */
     public function __construct(SessionInterface $session)
     {
-        $this->session       = $session;
+        $this->session = $session;
     }
 
     /**

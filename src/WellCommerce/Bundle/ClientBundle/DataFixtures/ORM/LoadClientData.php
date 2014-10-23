@@ -32,7 +32,8 @@ class LoadClientData extends AbstractDataFixture implements FixtureInterface, Or
     public function load(ObjectManager $manager)
     {
         $clientGroup
-            = $manager->getRepository('WellCommerce\Bundle\ClientBundle\Entity\ClientGroup')->findOneBy(['discount' => 10]);
+            = $manager->getRepository('WellCommerce\Bundle\ClientBundle\Entity\ClientGroup')
+            ->findOneBy(['discount' => 10]);
 
         for ($i = 1; $i <= 100; $i++) {
             $client = new Client();

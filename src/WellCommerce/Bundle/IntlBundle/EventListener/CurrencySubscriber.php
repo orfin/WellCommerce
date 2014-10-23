@@ -14,9 +14,9 @@ namespace WellCommerce\Bundle\IntlBundle\EventListener;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 
 /**
- * Class CurrencyListener
+ * Class CurrencySubscriber
  *
- * @package WellCommerce\Currency\EventListener
+ * @package WellCommerce\Bundle\IntlBundle\EventListener
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class CurrencySubscriber extends AbstractEventSubscriber

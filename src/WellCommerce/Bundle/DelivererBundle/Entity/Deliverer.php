@@ -49,23 +49,12 @@ class Deliverer
 
     /**
      * Get id.
-    
      *
      * @return integer
      */
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Sets producers for deliverer
-     *
-     * @param $shops
-     */
-    public function setProducers(ArrayCollection $collection)
-    {
-        $this->producers = $collection;
     }
 
     /**
@@ -76,6 +65,16 @@ class Deliverer
     public function getProducers()
     {
         return $this->producers;
+    }
+
+    /**
+     * Sets producers for deliverer
+     *
+     * @param $shops
+     */
+    public function setProducers(ArrayCollection $collection)
+    {
+        $this->producers = $collection;
     }
 
     public function addProducer(Producer $producer)

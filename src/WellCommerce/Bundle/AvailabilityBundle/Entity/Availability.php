@@ -42,7 +42,6 @@ class Availability
 
     /**
      * Get id.
-    
      *
      * @return integer
      */

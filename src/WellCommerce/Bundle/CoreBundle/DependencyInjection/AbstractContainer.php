@@ -26,6 +26,70 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 class AbstractContainer extends ContainerAware
 {
     /**
+     * Shortcut to get LayoutManager service
+     *
+     * @return object LayoutManager
+     */
+    final public function getLayoutManager()
+    {
+        return $this->container->get('layout_manager');
+    }
+
+    /**
+     * Shortcut to get LayoutRenderer service
+     *
+     * @return object LayoutRenderer
+     */
+    final public function getLayoutRenderer()
+    {
+        return $this->container->get('layout_renderer');
+    }
+
+    /**
+     * Generates relative or absolute url based on given route and parameters
+     *
+     * @param string $route
+     * @param array  $parameters
+     * @param string $referenceType
+     *
+     * @return string Generated url
+     */
+    public function generateUrl($route, $parameters = [], $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH)
+    {
+        return $this->container->get('router')->generate($route, $parameters, $referenceType);
+    }
+
+    /**
+     * Shortcut to return the Doctrine Registry service.
+     */
+    public function getDoctrine()
+    {
+        return $this->get('doctrine');
+    }
+
+    /**
+     * Shortcut for getting default entity manager
+     *
+     * @return \Doctrine\ORM\EntityManager
+     */
+    public function getEntityManager()
+    {
+        return $this->get('doctrine.orm.default_entity_manager');
+    }
+
+    /**
+     * Returns current locale
+     *
+     * @return mixed
+     */
+    public function getCurrentLocale()
+    {
+        $request = $this->get('request');
+
+        return $request->getLocale();
+    }
+
+    /**
      * Returns true if the service id is defined.
      *
      * @param string $id The service id
@@ -38,15 +102,15 @@ class AbstractContainer extends ContainerAware
     }
 
     /**
-     * Gets a service by id.
+     * Translates a string using the translation service
      *
-     * @param string $id The service id
+     * @param string $id Message to translate
      *
-     * @return object Service
+     * @return string The message
      */
-    final protected function get($id)
+    protected function trans($id, $params = [], $domain = 'admin')
     {
-        return $this->container->get($id);
+        return $this->getTranslator()->trans($id, $params, $domain);
     }
 
     /**
@@ -57,18 +121,6 @@ class AbstractContainer extends ContainerAware
     public function getTranslator()
     {
         return $this->container->get('translator.default');
-    }
-
-    /**
-     * Translates a string using the translation service
-     *
-     * @param string $id Message to translate
-     *
-     * @return string The message
-     */
-    protected function trans($id, $params = [], $domain = 'admin')
-    {
-        return $this->getTranslator()->trans($id, $params, $domain);
     }
 
     /**
@@ -109,6 +161,18 @@ class AbstractContainer extends ContainerAware
     final protected function getRequest()
     {
         return $this->get('request_stack')->getCurrentRequest();
+    }
+
+    /**
+     * Gets a service by id.
+     *
+     * @param string $id The service id
+     *
+     * @return object Service
+     */
+    final protected function get($id)
+    {
+        return $this->container->get($id);
     }
 
     /**
@@ -154,26 +218,6 @@ class AbstractContainer extends ContainerAware
     }
 
     /**
-     * Shortcut to get LayoutManager service
-     *
-     * @return object LayoutManager
-     */
-    final public function getLayoutManager()
-    {
-        return $this->container->get('layout_manager');
-    }
-
-    /**
-     * Shortcut to get LayoutRenderer service
-     *
-     * @return object LayoutRenderer
-     */
-    final public function getLayoutRenderer()
-    {
-        return $this->container->get('layout_renderer');
-    }
-
-    /**
      * Shortcut to get Cache service
      *
      * @return \Doctrine\Common\Cache\Cache
@@ -201,50 +245,6 @@ class AbstractContainer extends ContainerAware
     final protected function getImageGallery()
     {
         return $this->container->get('file_manager.gallery.image');
-    }
-
-    /**
-     * Generates relative or absolute url based on given route and parameters
-     *
-     * @param string $route
-     * @param array  $parameters
-     * @param string $referenceType
-     *
-     * @return string Generated url
-     */
-    public function generateUrl($route, $parameters = [], $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH)
-    {
-        return $this->container->get('router')->generate($route, $parameters, $referenceType);
-    }
-
-    /**
-     * Shortcut to return the Doctrine Registry service.
-     */
-    public function getDoctrine()
-    {
-        return $this->get('doctrine');
-    }
-
-    /**
-     * Shortcut for getting default entity manager
-     *
-     * @return \Doctrine\ORM\EntityManager
-     */
-    public function getEntityManager()
-    {
-        return $this->get('doctrine.orm.default_entity_manager');
-    }
-
-    /**
-     * Returns current locale
-     *
-     * @return mixed
-     */
-    public function getCurrentLocale()
-    {
-        $request = $this->get('request');
-
-        return $request->getLocale();
     }
 
     /**

@@ -14,9 +14,9 @@ namespace WellCommerce\Bundle\CompanyBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Symfony\Component\Validator\Constraints as Assert;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\AddressTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\PhotoTrait;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Company
@@ -69,6 +69,16 @@ class Company
     }
 
     /**
+     * Get name.
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
      * Set name.
      *
      * @param string $name
@@ -83,13 +93,13 @@ class Company
     }
 
     /**
-     * Get name.
+     * Get shortName.
      *
      * @return string
      */
-    public function getName()
+    public function getShortName()
     {
-        return $this->name;
+        return $this->shortName;
     }
 
     /**
@@ -104,16 +114,6 @@ class Company
         $this->shortName = $shortName;
 
         return $this;
-    }
-
-    /**
-     * Get shortName.
-     *
-     * @return string
-     */
-    public function getShortName()
-    {
-        return $this->shortName;
     }
 
 }

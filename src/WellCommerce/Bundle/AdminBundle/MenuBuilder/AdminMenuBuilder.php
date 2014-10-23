@@ -21,7 +21,7 @@ use WellCommerce\Bundle\CoreBundle\Collection\AbstractCollection;
  * @package WellCommerce\Bundle\AdminBundle\MenuBuilder
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AdminMenuBuilder extends AbstractCollection implements  AdminMenuBuilderInterface
+class AdminMenuBuilder extends AbstractCollection implements AdminMenuBuilderInterface
 {
     /**
      * {@inheritdoc}

@@ -14,7 +14,9 @@ namespace WellCommerce\Bundle\AttributeBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
+use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
+use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 
 /**
  * Class Attribute
@@ -28,9 +30,9 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
  */
 class Attribute
 {
-    use ORMBehaviors\Translatable\Translatable;
-    use ORMBehaviors\Timestampable\Timestampable;
-    use ORMBehaviors\Blameable\Blameable;
+    use Translatable;
+    use Timestampable;
+    use Blameable;
 
     /**
      * @var integer

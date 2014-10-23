@@ -18,7 +18,8 @@ namespace WellCommerce\Bundle\CoreBundle\Entity\Behaviours;
  * @package WellCommerce\Bundle\CoreBundle\Entity\Behaviours
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-trait MetaDataTrait {
+trait MetaDataTrait
+{
 
     /**
      * @var string
@@ -42,18 +43,6 @@ trait MetaDataTrait {
     private $metaDescription;
 
     /**
-     * Set metaTitle
-     *
-     * @param string $metaTitle
-     */
-    public function setMetaTitle($metaTitle)
-    {
-        $this->metaTitle = $metaTitle;
-
-        return $this;
-    }
-
-    /**
      * Get metaTitle
      *
      * @return string
@@ -64,13 +53,13 @@ trait MetaDataTrait {
     }
 
     /**
-     * Set metaKeywords
+     * Set metaTitle
      *
-     * @param string $metaKeywords
+     * @param string $metaTitle
      */
-    public function setMetaKeywords($metaKeywords)
+    public function setMetaTitle($metaTitle)
     {
-        $this->metaKeywords = $metaKeywords;
+        $this->metaTitle = $metaTitle;
 
         return $this;
     }
@@ -86,13 +75,13 @@ trait MetaDataTrait {
     }
 
     /**
-     * Set metaDescription
+     * Set metaKeywords
      *
-     * @param string $metaDescription
+     * @param string $metaKeywords
      */
-    public function setMetaDescription($metaDescription)
+    public function setMetaKeywords($metaKeywords)
     {
-        $this->metaDescription = $metaDescription;
+        $this->metaKeywords = $metaKeywords;
 
         return $this;
     }
@@ -105,5 +94,17 @@ trait MetaDataTrait {
     public function getMetaDescription()
     {
         return $this->metaDescription;
+    }
+
+    /**
+     * Set metaDescription
+     *
+     * @param string $metaDescription
+     */
+    public function setMetaDescription($metaDescription)
+    {
+        $this->metaDescription = $metaDescription;
+
+        return $this;
     }
 } 

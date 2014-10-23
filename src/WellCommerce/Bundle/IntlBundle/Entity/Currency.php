@@ -49,7 +49,6 @@ class Currency
 
     /**
      * Get id.
-    
      *
      * @return integer
      */
@@ -59,8 +58,17 @@ class Currency
     }
 
     /**
+     * Get code.
+     *
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
      * Set code.
-    
      *
      * @param string $code
      *
@@ -69,19 +77,8 @@ class Currency
     public function setCode($code)
     {
         $this->code = $code;
-    
-        return $this;
-    }
 
-    /**
-     * Get code.
-    
-     *
-     * @return string
-     */
-    public function getCode()
-    {
-        return $this->code;
+        return $this;
     }
 }
 

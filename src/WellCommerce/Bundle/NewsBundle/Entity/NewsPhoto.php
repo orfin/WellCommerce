@@ -13,11 +13,8 @@
 namespace WellCommerce\Bundle\NewsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model\Sluggable\Sluggable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
-use Knp\DoctrineBehaviors\Model\Translatable\Translation;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\HierarchyTrait;
-use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\MetaDataTrait;
 use WellCommerce\Bundle\MediaBundle\Entity\Media;
 
 /**
@@ -32,6 +29,16 @@ class NewsPhoto
     use HierarchyTrait;
 
     /**
+     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\MediaBundle\Entity\Media", inversedBy="newsPhotos")
+     * @ORM\JoinColumn(name="photo_id", referencedColumnName="id", nullable=false)
+     */
+    protected $photo;
+    /**
+     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\NewsBundle\Entity\News", inversedBy="newsPhotos")
+     * @ORM\JoinColumn(name="news_id", referencedColumnName="id", nullable=false)
+     */
+    protected $news;
+    /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer")
@@ -39,19 +46,6 @@ class NewsPhoto
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\MediaBundle\Entity\Media", inversedBy="newsPhotos")
-     * @ORM\JoinColumn(name="photo_id", referencedColumnName="id", nullable=false)
-     */
-    protected $photo;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\NewsBundle\Entity\News", inversedBy="newsPhotos")
-     * @ORM\JoinColumn(name="news_id", referencedColumnName="id", nullable=false)
-     */
-    protected $news;
-
     /**
      * @ORM\Column(name="main_photo", type="boolean", options={"default":0})
      */
@@ -62,14 +56,14 @@ class NewsPhoto
         $this->news = $news;
     }
 
-    public function setPhoto(Media $photo)
-    {
-        $this->photo = $photo;
-    }
-
     public function getPhoto()
     {
         return $this->photo;
+    }
+
+    public function setPhoto(Media $photo)
+    {
+        $this->photo = $photo;
     }
 
     public function getMainPhoto()

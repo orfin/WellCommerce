@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Entity;
 
-use Symfony\Component\Routing\Route as BaseRoute;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Routing\Route as BaseRoute;
 
 /**
  * Class Route
@@ -24,7 +24,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table("routes")
  * @ORM\Entity(repositoryClass="WellCommerce\Bundle\CoreBundle\Repository\RouteRepository")
  */
-class Route extends BaseRoute {
+class Route extends BaseRoute
+{
 
     /**
      * @var integer

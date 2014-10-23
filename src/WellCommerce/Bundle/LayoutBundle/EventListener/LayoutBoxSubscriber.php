@@ -12,7 +12,6 @@
 namespace WellCommerce\Bundle\LayoutBundle\EventListener;
 
 use Symfony\Component\HttpKernel\KernelEvents;
-use WellCommerce\Bundle\AdminBundle\Event\AdminMenuEvent;
 use WellCommerce\Bundle\CoreBundle\Event\FormEvent;
 use WellCommerce\Bundle\CoreBundle\Event\ResourceEvent;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
@@ -27,6 +26,14 @@ use WellCommerce\Bundle\LayoutBundle\Form\LayoutBoxForm;
  */
 class LayoutBoxSubscriber extends AbstractEventSubscriber
 {
+    public static function getSubscribedEvents()
+    {
+        return parent::getSubscribedEvents() + [
+            LayoutBoxForm::FORM_INIT_EVENT => 'onLayoutBoxFormInit',
+            'layout_box.pre_update'        => 'onLayoutBoxResourceSave',
+        ];
+    }
+
     /**
      * Adds configurator fields to main layout box edit form
      *
@@ -66,13 +73,5 @@ class LayoutBoxSubscriber extends AbstractEventSubscriber
         $propertyPath = sprintf('[%s]', $request['required_data']['boxType']);
         $settings     = $accessor->getValue($request, $propertyPath);
         $resource->setSettings($settings);
-    }
-
-    public static function getSubscribedEvents()
-    {
-        return parent::getSubscribedEvents() + [
-            LayoutBoxForm::FORM_INIT_EVENT => 'onLayoutBoxFormInit',
-            'layout_box.pre_update'        => 'onLayoutBoxResourceSave',
-        ];
     }
 }

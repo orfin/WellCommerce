@@ -39,11 +39,11 @@ class CompanyForm extends AbstractForm implements FormInterface
         $requiredData->addChild($builder->getElement('text_field', [
             'name'  => 'name',
             'label' => $this->trans('company.name'),
-//            'rules' => [
-//                $builder->getRule('required', [
-//                    'message' => $this->trans('Name is required')
-//                ])
-//            ]
+            //            'rules' => [
+            //                $builder->getRule('required', [
+            //                    'message' => $this->trans('Name is required')
+            //                ])
+            //            ]
         ]));
 
         $requiredData->addChild($builder->getElement('text_field', [

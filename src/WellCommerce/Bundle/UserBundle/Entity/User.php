@@ -79,8 +79,8 @@ class User implements \Serializable, UserInterface, EquatableInterface
     public function __construct()
     {
         $this->enabled = true;
-        $this->roles    = new ArrayCollection();
-        $this->salt     = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
+        $this->roles   = new ArrayCollection();
+        $this->salt    = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
     }
 
     public function getId()
@@ -138,19 +138,14 @@ class User implements \Serializable, UserInterface, EquatableInterface
         $this->username = $username;
     }
 
-    public function setEmail($email)
-    {
-        $this->email = $email;
-    }
-
     public function getEmail()
     {
         return $this->email;
     }
 
-    public function setPassword($password)
+    public function setEmail($email)
     {
-        $this->password = $password;
+        $this->email = $email;
     }
 
     /**
@@ -167,6 +162,11 @@ class User implements \Serializable, UserInterface, EquatableInterface
     public function getPassword()
     {
         return $this->password;
+    }
+
+    public function setPassword($password)
+    {
+        $this->password = $password;
     }
 
     /**

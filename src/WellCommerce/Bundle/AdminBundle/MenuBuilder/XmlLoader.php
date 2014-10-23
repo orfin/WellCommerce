@@ -51,6 +51,18 @@ class XmlLoader
     }
 
     /**
+     * Parses a XML file
+     *
+     * @param $file
+     *
+     * @return \DOMDocument
+     */
+    private function parseFile($file)
+    {
+        return XmlUtils::loadFile($file);
+    }
+
+    /**
      * Parses DOM element and adds it as an admin menu item
      *
      * @param \DOMDocument $xml
@@ -99,17 +111,5 @@ class XmlLoader
         );
 
         return implode('', $path);
-    }
-
-    /**
-     * Parses a XML file
-     *
-     * @param $file
-     *
-     * @return \DOMDocument
-     */
-    private function parseFile($file)
-    {
-        return XmlUtils::loadFile($file);
     }
 } 

@@ -55,6 +55,14 @@ class LocaleExtension extends \Twig_Extension
         ];
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'locale';
+    }
+
     private function getLocales()
     {
         $collection = $this->repository->getAvailableLocales();
@@ -66,13 +74,5 @@ class LocaleExtension extends \Twig_Extension
         }
 
         return $locales;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'locale';
     }
 }

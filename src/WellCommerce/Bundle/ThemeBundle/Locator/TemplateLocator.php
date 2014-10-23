@@ -47,27 +47,9 @@ class TemplateLocator extends BaseTemplateLocator
     /**
      * Returns a full path for a given file.
      *
-     * @param TemplateReferenceInterface $template     A template
-     *
-     * @return string The full path for the file
-     */
-    protected function getCacheKey($template)
-    {
-        $name = $template->getLogicalName();
-
-        if ($this->activeTheme) {
-            $name.= '|'.$this->activeTheme;
-        }
-
-        return $name;
-    }
-
-    /**
-     * Returns a full path for a given file.
-     *
-     * @param TemplateReferenceInterface $template     A template
-     * @param string                     $currentPath  Unused
-     * @param Boolean                    $first        Unused
+     * @param TemplateReferenceInterface $template    A template
+     * @param string                     $currentPath Unused
+     * @param Boolean                    $first       Unused
      *
      * @return string The full path for the file
      *
@@ -86,10 +68,29 @@ class TemplateLocator extends BaseTemplateLocator
             try {
                 $this->cache[$key] = $this->locator->locate($template->getPath(), $currentPath);
             } catch (\InvalidArgumentException $e) {
-                throw new \InvalidArgumentException(sprintf('Unable to find template "%s" in "%s".', $template, $e->getMessage()), 0, $e);
+                throw new \InvalidArgumentException(sprintf('Unable to find template "%s" in "%s".', $template,
+                        $e->getMessage()), 0, $e);
             }
         }
 
         return $this->cache[$key];
+    }
+
+    /**
+     * Returns a full path for a given file.
+     *
+     * @param TemplateReferenceInterface $template A template
+     *
+     * @return string The full path for the file
+     */
+    protected function getCacheKey($template)
+    {
+        $name = $template->getLogicalName();
+
+        if ($this->activeTheme) {
+            $name .= '|' . $this->activeTheme;
+        }
+
+        return $name;
     }
 } 

@@ -52,7 +52,6 @@ class Locale
 
     /**
      * Get id.
-    
      *
      * @return integer
      */
@@ -62,8 +61,17 @@ class Locale
     }
 
     /**
+     * Get code.
+     *
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
      * Set code.
-    
      *
      * @param string $code
      *
@@ -72,19 +80,8 @@ class Locale
     public function setCode($code)
     {
         $this->code = $code;
-    
-        return $this;
-    }
 
-    /**
-     * Get code.
-    
-     *
-     * @return string
-     */
-    public function getCode()
-    {
-        return $this->code;
+        return $this;
     }
 }
 

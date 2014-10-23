@@ -24,6 +24,13 @@ use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
  */
 class LocaleSubscriber extends AbstractEventSubscriber
 {
+    public static function getSubscribedEvents()
+    {
+        return parent::getSubscribedEvents() + [
+            KernelEvents::CONTROLLER => ['onKernelController', -256],
+        ];
+    }
+
     public function onKernelController(FilterControllerEvent $event)
     {
         // skip fetching locales when handling sub-request
@@ -35,12 +42,5 @@ class LocaleSubscriber extends AbstractEventSubscriber
             $locales = $this->container->get('locale.repository')->getAvailableLocales();
             $this->container->get('session')->set('admin/locales', $locales);
         }
-    }
-
-    public static function getSubscribedEvents()
-    {
-        return parent::getSubscribedEvents() + [
-            KernelEvents::CONTROLLER => ['onKernelController', -256],
-        ];
     }
 }

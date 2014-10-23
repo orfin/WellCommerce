@@ -13,9 +13,9 @@
 namespace WellCommerce\Bundle\CoreBundle\Behat;
 
 use Behat\Behat\Context\SnippetAcceptingContext;
+use Behat\MinkExtension\Context\RawMinkContext;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Symfony\Component\HttpKernel\KernelInterface;
-use Behat\MinkExtension\Context\RawMinkContext;
 
 /**
  * Class CoreContext
@@ -41,25 +41,18 @@ class CoreContext extends RawMinkContext implements SnippetAcceptingContext, Ker
     }
 
     /**
-     * Returns Symfony container
-     *
-     * @return \Symfony\Component\DependencyInjection\ContainerInterface
+     * @Given I am logged as an admin user
      */
-    private function getContainer()
+    public function iAmLoggedAsAnAdminUser()
     {
-        return $this->kernel->getContainer();
-    }
+        $username = 'admin';
+        $password = 'admin';
 
-    /**
-     * Returns a service by its id
-     *
-     * @param $id
-     *
-     * @return object
-     */
-    protected function getService($id)
-    {
-        return $this->getContainer()->get($id);
+        $this->getSession()->visit($this->generateUrl('admin.user.login'));
+
+        $this->fillFormField('_username', $username);
+        $this->fillFormField('_password', $password);
+        $this->clickButton('log_in');
     }
 
     /**
@@ -75,21 +68,6 @@ class CoreContext extends RawMinkContext implements SnippetAcceptingContext, Ker
         $route = $this->getContainer()->get('router')->generate($url, $parameters);
 
         return $this->locatePath($route);
-    }
-
-    /**
-     * @Given I am logged as an admin user
-     */
-    public function iAmLoggedAsAnAdminUser()
-    {
-        $username = 'admin';
-        $password = 'admin';
-
-        $this->getSession()->visit($this->generateUrl('admin.user.login'));
-
-        $this->fillFormField('_username', $username);
-        $this->fillFormField('_password', $password);
-        $this->clickButton('log_in');
     }
 
     /**
@@ -111,5 +89,27 @@ class CoreContext extends RawMinkContext implements SnippetAcceptingContext, Ker
     protected function clickButton($button)
     {
         $this->getSession()->getPage()->pressButton($button);
+    }
+
+    /**
+     * Returns a service by its id
+     *
+     * @param $id
+     *
+     * @return object
+     */
+    protected function getService($id)
+    {
+        return $this->getContainer()->get($id);
+    }
+
+    /**
+     * Returns Symfony container
+     *
+     * @return \Symfony\Component\DependencyInjection\ContainerInterface
+     */
+    private function getContainer()
+    {
+        return $this->kernel->getContainer();
     }
 }

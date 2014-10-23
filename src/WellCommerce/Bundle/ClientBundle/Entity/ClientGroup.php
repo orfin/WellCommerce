@@ -54,6 +54,16 @@ class ClientGroup
     }
 
     /**
+     * Get discount.
+     *
+     * @return string
+     */
+    public function getDiscount()
+    {
+        return $this->discount;
+    }
+
+    /**
      * Set discount.
      *
      * @param string $discount
@@ -65,16 +75,6 @@ class ClientGroup
         $this->discount = $discount;
 
         return $this;
-    }
-
-    /**
-     * Get discount.
-     *
-     * @return string
-     */
-    public function getDiscount()
-    {
-        return $this->discount;
     }
 }
 

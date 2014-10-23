@@ -12,6 +12,13 @@
         <name>admin.menu.currency</name>
         <route>admin.currency.index</route>
         <path>menu.configuration.localization.currency</path>
+        <sort_order>20</sort_order>
+    </item>
+    <item>
+        <id>dictionary</id>
+        <name>admin.menu.dictionary</name>
+        <route>admin.dictionary.index</route>
+        <path>menu.configuration.localization.dictionary</path>
         <sort_order>30</sort_order>
     </item>
 </items>

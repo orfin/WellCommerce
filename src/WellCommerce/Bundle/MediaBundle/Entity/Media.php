@@ -15,7 +15,6 @@ namespace WellCommerce\Bundle\MediaBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -34,6 +33,10 @@ class Media
     use ORMBehaviors\Blameable\Blameable;
 
     /**
+     * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\ProductPhoto", mappedBy="photo", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    protected $productPhotos;
+    /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer")
@@ -41,37 +44,27 @@ class Media
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
      */
     private $name;
-
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $path;
-
     /**
      * @ORM\Column(type="string", length=12, nullable=true)
      */
     private $extension;
-
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
      */
     private $mime;
-
     /**
      * @ORM\Column(type="string", length=12, nullable=true)
      */
     private $size;
-
-    /**
-     * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\ProductPhoto", mappedBy="photo", cascade={"persist", "remove"}, orphanRemoval=true)
-     */
-    protected $productPhotos;
 
     public function __construct()
     {
@@ -149,26 +142,6 @@ class Media
     }
 
     /**
-     * Returns extension
-     *
-     * @return string
-     */
-    public function getExtension()
-    {
-        return $this->extension;
-    }
-
-    /**
-     * Sets extension
-     *
-     * @param $extension
-     */
-    public function setExtension($extension)
-    {
-        $this->extension = $extension;
-    }
-
-    /**
      * Returns file size in bytes
      *
      * @return integer
@@ -203,6 +176,26 @@ class Media
             $filename   = sha1(uniqid(mt_rand(), true));
             $this->path = sprintf('%s.%s', $filename, $this->getExtension());
         }
+    }
+
+    /**
+     * Returns extension
+     *
+     * @return string
+     */
+    public function getExtension()
+    {
+        return $this->extension;
+    }
+
+    /**
+     * Sets extension
+     *
+     * @param $extension
+     */
+    public function setExtension($extension)
+    {
+        $this->extension = $extension;
     }
 }
 

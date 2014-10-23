@@ -50,6 +50,16 @@ class AttributeGroupTranslation
     }
 
     /**
+     * Returns group name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
      * Sets group name
      *
      * @param $name
@@ -61,16 +71,6 @@ class AttributeGroupTranslation
         $this->name = $name;
 
         return $this;
-    }
-
-    /**
-     * Returns group name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
     }
 }
 

@@ -16,7 +16,6 @@ use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
-use WellCommerce\Bundle\ContactBundle\Entity\Contact;
 
 /**
  * Class LoadContactData

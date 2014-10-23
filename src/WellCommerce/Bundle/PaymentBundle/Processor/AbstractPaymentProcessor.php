@@ -26,29 +26,6 @@ use WellCommerce\Bundle\FormBundle\Form\Elements\Form;
  */
 abstract class AbstractPaymentProcessor extends AbstractContainer implements PaymentMethodProcessorInterface
 {
-    private function getClass()
-    {
-        $class = ClassUtils::getRealClass(ltrim(get_class($this), '\\'));
-        $parts = explode('\\', $class);
-
-        return end($parts);
-    }
-
-    public function getAlias()
-    {
-        return strtolower($this->getClass());
-    }
-
-    public function getName()
-    {
-        return $this->getClass();
-    }
-
-    public function addFields(FormBuilderInterface $builderInterface, Fieldset $fieldset)
-    {
-        return false;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -62,5 +39,28 @@ abstract class AbstractPaymentProcessor extends AbstractContainer implements Pay
         $this->addFields($builder, $fieldset);
 
         return $fieldset;
+    }
+
+    public function getAlias()
+    {
+        return strtolower($this->getClass());
+    }
+
+    private function getClass()
+    {
+        $class = ClassUtils::getRealClass(ltrim(get_class($this), '\\'));
+        $parts = explode('\\', $class);
+
+        return end($parts);
+    }
+
+    public function getName()
+    {
+        return $this->getClass();
+    }
+
+    public function addFields(FormBuilderInterface $builderInterface, Fieldset $fieldset)
+    {
+        return false;
     }
 } 

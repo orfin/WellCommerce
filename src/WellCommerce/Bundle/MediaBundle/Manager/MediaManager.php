@@ -18,6 +18,7 @@ namespace WellCommerce\Bundle\MediaBundle\Manager;
  * @package WellCommerce\Bundle\MediaBundle\Manager
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class MediaManager {
+class MediaManager
+{
 
 }

@@ -112,6 +112,16 @@ class Client
     }
 
     /**
+     * Get discount.
+     *
+     * @return string
+     */
+    public function getDiscount()
+    {
+        return $this->discount;
+    }
+
+    /**
      * Set discount.
      *
      * @param string $discount
@@ -125,29 +135,19 @@ class Client
         return $this;
     }
 
-    /**
-     * Get discount.
-     *
-     * @return string
-     */
-    public function getDiscount()
-    {
-        return $this->discount;
-    }
-
     public function getAddresses()
     {
         return $this->addresses;
     }
 
-    public function addAddress(ClientAddress $address)
-    {
-        $this->addresses[] = $address;
-    }
-
     public function setAddresses(ArrayCollection $addresses)
     {
         $this->addresses = $addresses;
+    }
+
+    public function addAddress(ClientAddress $address)
+    {
+        $this->addresses[] = $address;
     }
 
     public function getGroup()
@@ -190,14 +190,14 @@ class Client
         $this->username = $username;
     }
 
-    public function setEmail($email)
-    {
-        $this->email = $email;
-    }
-
     public function getEmail()
     {
         return $this->email;
+    }
+
+    public function setEmail($email)
+    {
+        $this->email = $email;
     }
 
     public function getPassword()

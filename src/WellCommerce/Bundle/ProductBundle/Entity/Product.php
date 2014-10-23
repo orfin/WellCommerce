@@ -365,16 +365,6 @@ class Product
     }
 
     /**
-     * Sets shops for product
-     *
-     * @param ArrayCollection $shops
-     */
-    public function setShops(ArrayCollection $shops)
-    {
-        $this->shops = $shops;
-    }
-
-    /**
      * Get shops for product
      *
      * @return ArrayCollection
@@ -382,6 +372,16 @@ class Product
     public function getShops()
     {
         return $this->shops;
+    }
+
+    /**
+     * Sets shops for product
+     *
+     * @param ArrayCollection $shops
+     */
+    public function setShops(ArrayCollection $shops)
+    {
+        $this->shops = $shops;
     }
 
     /**
@@ -395,16 +395,6 @@ class Product
     }
 
     /**
-     * Sets product statuses
-     *
-     * @param ArrayCollection $statuses
-     */
-    public function setStatuses(ArrayCollection $statuses)
-    {
-        $this->statuses = $statuses;
-    }
-
-    /**
      * Returns product statuses
      *
      * @return ArrayCollection
@@ -415,6 +405,16 @@ class Product
     }
 
     /**
+     * Sets product statuses
+     *
+     * @param ArrayCollection $statuses
+     */
+    public function setStatuses(ArrayCollection $statuses)
+    {
+        $this->statuses = $statuses;
+    }
+
+    /**
      * Get product photos
      *
      * @return ArrayCollection
@@ -422,16 +422,6 @@ class Product
     public function getProductPhotos()
     {
         return $this->productPhotos;
-    }
-
-    /**
-     * Adds product photo
-     *
-     * @param ProductPhoto $photo
-     */
-    public function addProductPhoto(ProductPhoto $photo)
-    {
-        $this->productPhotos[] = $photo;
     }
 
     /**
@@ -481,6 +471,16 @@ class Product
     }
 
     /**
+     * Adds product photo
+     *
+     * @param ProductPhoto $photo
+     */
+    public function addProductPhoto(ProductPhoto $photo)
+    {
+        $this->productPhotos[] = $photo;
+    }
+
+    /**
      * Returns all available categories for product
      *
      * @return ArrayCollection
@@ -491,16 +491,6 @@ class Product
     }
 
     /**
-     * Adds new category to product
-     *
-     * @param Category $category
-     */
-    public function addCategory(Category $category)
-    {
-        $this->categories[] = $category;
-    }
-
-    /**
      * Sets product category collection
      *
      * @param ArrayCollection $collection
@@ -508,6 +498,16 @@ class Product
     public function setCategories(ArrayCollection $collection)
     {
         $this->categories = $collection;
+    }
+
+    /**
+     * Adds new category to product
+     *
+     * @param Category $category
+     */
+    public function addCategory(Category $category)
+    {
+        $this->categories[] = $category;
     }
 
     /**

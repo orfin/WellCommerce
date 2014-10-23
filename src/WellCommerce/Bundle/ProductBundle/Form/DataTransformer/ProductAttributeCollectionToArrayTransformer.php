@@ -15,7 +15,6 @@ namespace WellCommerce\Bundle\ProductBundle\Form\DataTransformer;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\PersistentCollection;
 use WellCommerce\Bundle\FormBundle\Form\DataTransformer\CollectionToArrayTransformer;
-use WellCommerce\Bundle\FormBundle\Form\DataTransformer\EntityToIdentifierTransformer;
 
 /**
  * Class ProductAttributeCollectionToArrayTransformer

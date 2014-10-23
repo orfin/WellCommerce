@@ -7,5 +7,6 @@
         <import resource="services/country.xml"/>
         <import resource="services/currency.xml"/>
         <import resource="services/locale.xml"/>
+        <import resource="services/dictionary.xml"/>
     </imports>
 </container>

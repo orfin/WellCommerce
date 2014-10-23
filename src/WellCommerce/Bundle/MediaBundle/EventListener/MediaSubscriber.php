@@ -12,8 +12,6 @@
 namespace WellCommerce\Bundle\MediaBundle\EventListener;
 
 use Symfony\Component\Config\FileLocator;
-use WellCommerce\Bundle\AdminBundle\Event\AdminMenuEvent;
-use WellCommerce\Bundle\AdminBundle\MenuBuilder\XmlLoader;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 
 /**

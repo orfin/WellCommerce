@@ -39,24 +39,6 @@ class RedirectHelper implements RedirectHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function redirectTo($route, array $routeParams = [])
-    {
-        return new RedirectResponse($this->router->generate($route, $routeParams, true));
-    }
-
-    /**
-     * Returns current router context
-     *
-     * @return \Symfony\Component\Routing\RequestContext
-     */
-    private function getRouterContext()
-    {
-        return $this->router->getContext();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function redirectToAction($action, array $params = [])
     {
         $route = $this->getActionForCurrentController($action);
@@ -76,5 +58,23 @@ class RedirectHelper implements RedirectHelperInterface
         $route = sprintf('%s.%s.%s', $mode, $controller, $action);
 
         return $route;
+    }
+
+    /**
+     * Returns current router context
+     *
+     * @return \Symfony\Component\Routing\RequestContext
+     */
+    private function getRouterContext()
+    {
+        return $this->router->getContext();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function redirectTo($route, array $routeParams = [])
+    {
+        return new RedirectResponse($this->router->generate($route, $routeParams, true));
     }
 } 

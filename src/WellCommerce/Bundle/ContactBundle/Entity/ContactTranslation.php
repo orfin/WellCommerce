@@ -33,6 +33,30 @@ class ContactTranslation
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255)
+     */
+    private $name;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=255)
+     */
+    private $email;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="phone", type="string", length=255)
+     */
+    private $phone;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="business_hours", type="text")
+     */
+    private $businessHours;
 
     /**
      * Returns translation ID.
@@ -45,32 +69,14 @@ class ContactTranslation
     }
 
     /**
-     * @var string
+     * Get name
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @return string
      */
-    private $name;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="email", type="string", length=255)
-     */
-    private $email;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="phone", type="string", length=255)
-     */
-    private $phone;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="business_hours", type="text")
-     */
-    private $businessHours;
+    public function getName()
+    {
+        return $this->name;
+    }
 
     /**
      * Set name
@@ -87,13 +93,13 @@ class ContactTranslation
     }
 
     /**
-     * Get name
+     * Get email
      *
      * @return string
      */
-    public function getName()
+    public function getEmail()
     {
-        return $this->name;
+        return $this->email;
     }
 
     /**
@@ -111,13 +117,13 @@ class ContactTranslation
     }
 
     /**
-     * Get email
+     * Get phone
      *
      * @return string
      */
-    public function getEmail()
+    public function getPhone()
     {
-        return $this->email;
+        return $this->phone;
     }
 
     /**
@@ -135,13 +141,13 @@ class ContactTranslation
     }
 
     /**
-     * Get phone
+     * Get businessHours
      *
      * @return string
      */
-    public function getPhone()
+    public function getBusinessHours()
     {
-        return $this->phone;
+        return $this->businessHours;
     }
 
     /**
@@ -156,15 +162,5 @@ class ContactTranslation
         $this->businessHours = $businessHours;
 
         return $this;
-    }
-
-    /**
-     * Get businessHours
-     *
-     * @return string
-     */
-    public function getBusinessHours()
-    {
-        return $this->businessHours;
     }
 }

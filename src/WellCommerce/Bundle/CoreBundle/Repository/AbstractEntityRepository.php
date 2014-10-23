@@ -42,14 +42,6 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
     /**
      * {@inheritdoc}
      */
-    public function getCurrentLocale()
-    {
-        return $this->translator->getLocale();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getLocales()
     {
         return $this->getRepository('WellCommerce\Bundle\IntlBundle\Entity\Locale')->findAll();
@@ -83,11 +75,6 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
         return new $entity;
     }
 
-    protected function getQueryBuilder()
-    {
-        return $this->createQueryBuilder($this->getAlias());
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -96,25 +83,6 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
         $entity = $this->find($id);
         $this->getEntityManager()->remove($entity);
         $this->getEntityManager()->flush();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAlias()
-    {
-        $parts      = explode('\\', $this->getEntityName());
-        $entityName = end($parts);
-
-        return Helper::snake($entityName);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->getEntityName();
     }
 
     /**
@@ -141,39 +109,6 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
         }
 
         return $resource;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getMetadata()
-    {
-        return $this->_class;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCollection($identifier, $labelField, $targetClass, $tableName, $associationTableName)
-    {
-        $identifierField  = sprintf('%s.%s', $tableName, $identifier);
-        $translationField = sprintf('%s.%s', $associationTableName, $labelField);
-        $queryBuilder     = $this->getQueryBuilder($this->getName());
-        $queryBuilder->select("
-            {$identifierField},
-            {$translationField}
-        ");
-        $queryBuilder->leftJoin(
-            $targetClass,
-            $associationTableName,
-            "WITH",
-            "{$identifierField} = {$associationTableName}.translatable AND {$associationTableName}.locale = :locale");
-        $queryBuilder->groupBy($identifierField);
-        $queryBuilder->setParameter('locale', $this->getCurrentLocale());
-        $query      = $queryBuilder->getQuery();
-        $collection = $query->getResult();
-
-        return $collection;
     }
 
     /**
@@ -228,8 +163,73 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
     /**
      * {@inheritdoc}
      */
+    public function getMetadata()
+    {
+        return $this->_class;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getPropertyAccessor()
     {
         return PropertyAccess::createPropertyAccessor();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCollection($identifier, $labelField, $targetClass, $tableName, $associationTableName)
+    {
+        $identifierField  = sprintf('%s.%s', $tableName, $identifier);
+        $translationField = sprintf('%s.%s', $associationTableName, $labelField);
+        $queryBuilder     = $this->getQueryBuilder($this->getName());
+        $queryBuilder->select("
+            {$identifierField},
+            {$translationField}
+        ");
+        $queryBuilder->leftJoin(
+            $targetClass,
+            $associationTableName,
+            "WITH",
+            "{$identifierField} = {$associationTableName}.translatable AND {$associationTableName}.locale = :locale");
+        $queryBuilder->groupBy($identifierField);
+        $queryBuilder->setParameter('locale', $this->getCurrentLocale());
+        $query      = $queryBuilder->getQuery();
+        $collection = $query->getResult();
+
+        return $collection;
+    }
+
+    protected function getQueryBuilder()
+    {
+        return $this->createQueryBuilder($this->getAlias());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAlias()
+    {
+        $parts      = explode('\\', $this->getEntityName());
+        $entityName = end($parts);
+
+        return Helper::snake($entityName);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return $this->getEntityName();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCurrentLocale()
+    {
+        return $this->translator->getLocale();
     }
 }

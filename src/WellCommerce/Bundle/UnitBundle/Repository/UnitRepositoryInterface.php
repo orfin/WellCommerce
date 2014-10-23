@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\UnitBundle\Repository;
 
-use WellCommerce\Bundle\DataGridBundle\DataGrid\Repository\DataGridAwareRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
+use WellCommerce\Bundle\DataGridBundle\DataGrid\Repository\DataGridAwareRepositoryInterface;
 
 /**
  * Interface LocaleRepositoryInterface

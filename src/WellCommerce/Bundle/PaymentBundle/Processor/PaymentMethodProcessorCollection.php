@@ -58,18 +58,6 @@ class PaymentMethodProcessorCollection implements \IteratorAggregate, \Countable
     }
 
     /**
-     * Checks whether collection contains such processor
-     *
-     * @param $alias
-     *
-     * @return bool
-     */
-    public function has($alias)
-    {
-        return isset($this->processors[$alias]);
-    }
-
-    /**
      * Returns processor by its alias
      *
      * @param $alias
@@ -84,5 +72,17 @@ class PaymentMethodProcessorCollection implements \IteratorAggregate, \Countable
         }
 
         return $this->processors;
+    }
+
+    /**
+     * Checks whether collection contains such processor
+     *
+     * @param $alias
+     *
+     * @return bool
+     */
+    public function has($alias)
+    {
+        return isset($this->processors[$alias]);
     }
 } 

@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\Controller\Box;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
 

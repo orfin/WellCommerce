@@ -13,8 +13,8 @@
 namespace WellCommerce\Bundle\ProducerBundle\Layout;
 
 use WellCommerce\Bundle\FormBundle\Form\Builder\FormBuilderInterface;
-use WellCommerce\Bundle\LayoutBundle\Configurator\LayoutBoxConfiguratorInterface;
 use WellCommerce\Bundle\LayoutBundle\Configurator\AbstractLayoutBoxConfigurator;
+use WellCommerce\Bundle\LayoutBundle\Configurator\LayoutBoxConfiguratorInterface;
 
 /**
  * Class ProducerBoxConfigurator

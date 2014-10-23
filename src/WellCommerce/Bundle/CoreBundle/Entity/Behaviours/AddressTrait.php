@@ -18,7 +18,8 @@ namespace WellCommerce\Bundle\CoreBundle\Entity\Behaviours;
  * @package WellCommerce\Bundle\CoreBundle\Entity\Behaviours
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-trait AddressTrait {
+trait AddressTrait
+{
 
     /**
      * @var string
@@ -70,18 +71,6 @@ trait AddressTrait {
     private $country;
 
     /**
-     * Set street.
-     *
-     * @param string $street
-     */
-    public function setStreet($street)
-    {
-        $this->street = $street;
-
-        return $this;
-    }
-
-    /**
      * Get street.
      *
      * @return string
@@ -92,13 +81,13 @@ trait AddressTrait {
     }
 
     /**
-     * Set streetNo.
+     * Set street.
      *
-     * @param string $streetNo
+     * @param string $street
      */
-    public function setStreetNo($streetNo)
+    public function setStreet($street)
     {
-        $this->streetNo = $streetNo;
+        $this->street = $street;
 
         return $this;
     }
@@ -114,13 +103,13 @@ trait AddressTrait {
     }
 
     /**
-     * Set flatNo.
+     * Set streetNo.
      *
-     * @param string $flatNo
+     * @param string $streetNo
      */
-    public function setFlatNo($flatNo)
+    public function setStreetNo($streetNo)
     {
-        $this->flatNo = $flatNo;
+        $this->streetNo = $streetNo;
 
         return $this;
     }
@@ -136,13 +125,13 @@ trait AddressTrait {
     }
 
     /**
-     * Set postCode.
+     * Set flatNo.
      *
-     * @param string $postCode
+     * @param string $flatNo
      */
-    public function setPostCode($postCode)
+    public function setFlatNo($flatNo)
     {
-        $this->postCode = $postCode;
+        $this->flatNo = $flatNo;
 
         return $this;
     }
@@ -158,13 +147,13 @@ trait AddressTrait {
     }
 
     /**
-     * Set city.
+     * Set postCode.
      *
-     * @param string $city
+     * @param string $postCode
      */
-    public function setCity($city)
+    public function setPostCode($postCode)
     {
-        $this->city = $city;
+        $this->postCode = $postCode;
 
         return $this;
     }
@@ -180,13 +169,13 @@ trait AddressTrait {
     }
 
     /**
-     * Set province.
+     * Set city.
      *
-     * @param string $province
+     * @param string $city
      */
-    public function setProvince($province)
+    public function setCity($city)
     {
-        $this->province = $province;
+        $this->city = $city;
 
         return $this;
     }
@@ -202,13 +191,13 @@ trait AddressTrait {
     }
 
     /**
-     * Set country.
+     * Set province.
      *
-     * @param string $country
+     * @param string $province
      */
-    public function setCountry($country)
+    public function setProvince($province)
     {
-        $this->country = $country;
+        $this->province = $province;
 
         return $this;
     }
@@ -221,5 +210,17 @@ trait AddressTrait {
     public function getCountry()
     {
         return $this->country;
+    }
+
+    /**
+     * Set country.
+     *
+     * @param string $country
+     */
+    public function setCountry($country)
+    {
+        $this->country = $country;
+
+        return $this;
     }
 } 

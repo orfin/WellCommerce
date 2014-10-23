@@ -69,21 +69,6 @@ class AdminManager implements AdminManagerInterface
     }
 
     /**
-     * Persists given resource
-     *
-     * @param object $resource
-     *
-     * @return mixed
-     */
-    private function saveResource($resource)
-    {
-        $this->objectManager->persist($resource);
-        $this->objectManager->flush();
-
-        return $resource;
-    }
-
-    /**
      * Manager method used to create new resource
      *
      * @param object  $resource
@@ -97,6 +82,49 @@ class AdminManager implements AdminManagerInterface
         $this->saveResource($resource);
         $this->flashHelper->addSuccess('success');
         $this->dispatchEvent($resource, $request, AdminManagerInterface::POST_CREATE_EVENT);
+    }
+
+    /**
+     * Triggers event
+     *
+     * @param $resource
+     * @param $request
+     * @param $name
+     */
+    private function dispatchEvent($resource, $request, $name)
+    {
+        $reflection = new \ReflectionClass($resource);
+        $eventName  = $this->getEventName($reflection->getShortName(), $name);
+        $event      = new ResourceEvent($resource, $request);
+        $this->eventDispatcher->dispatch($eventName, $event);
+    }
+
+    /**
+     * Returns event name for resource
+     *
+     * @param $class
+     * @param $name
+     *
+     * @return string
+     */
+    private function getEventName($class, $name)
+    {
+        return sprintf('%s.%s', Helper::snake($class), $name);
+    }
+
+    /**
+     * Persists given resource
+     *
+     * @param object $resource
+     *
+     * @return mixed
+     */
+    private function saveResource($resource)
+    {
+        $this->objectManager->persist($resource);
+        $this->objectManager->flush();
+
+        return $resource;
     }
 
     /**
@@ -121,33 +149,5 @@ class AdminManager implements AdminManagerInterface
     public function getRedirectHelper()
     {
         return $this->redirectHelper;
-    }
-
-    /**
-     * Returns event name for resource
-     *
-     * @param $class
-     * @param $name
-     *
-     * @return string
-     */
-    private function getEventName($class, $name)
-    {
-        return sprintf('%s.%s', Helper::snake($class), $name);
-    }
-
-    /**
-     * Triggers event
-     *
-     * @param $resource
-     * @param $request
-     * @param $name
-     */
-    private function dispatchEvent($resource, $request, $name)
-    {
-        $reflection = new \ReflectionClass($resource);
-        $eventName  = $this->getEventName($reflection->getShortName(), $name);
-        $event      = new ResourceEvent($resource, $request);
-        $this->eventDispatcher->dispatch($eventName, $event);
     }
 }

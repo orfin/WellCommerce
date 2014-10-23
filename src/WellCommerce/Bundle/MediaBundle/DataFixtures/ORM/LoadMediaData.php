@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\MediaBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use WellCommerce\Bundle\MediaBundle\Entity\Media;
 
 /**
  * Class LoadMediaData

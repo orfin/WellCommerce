@@ -12,8 +12,6 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\Controller\Admin;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 

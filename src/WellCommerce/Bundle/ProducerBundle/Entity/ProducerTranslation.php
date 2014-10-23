@@ -68,20 +68,6 @@ class ProducerTranslation
     }
 
     /**
-     * Set name.
-     *
-     * @param string $name
-     *
-     * @return ProducerTranslation
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
      * Get name.
      *
      * @return string
@@ -92,13 +78,15 @@ class ProducerTranslation
     }
 
     /**
-     * Set shortDescription
+     * Set name.
      *
-     * @param string $shortDescription
+     * @param string $name
+     *
+     * @return ProducerTranslation
      */
-    public function setShortDescription($shortDescription)
+    public function setName($name)
     {
-        $this->shortDescription = $shortDescription;
+        $this->name = $name;
 
         return $this;
     }
@@ -114,13 +102,13 @@ class ProducerTranslation
     }
 
     /**
-     * Set description
+     * Set shortDescription
      *
-     * @param string $description
+     * @param string $shortDescription
      */
-    public function setDescription($description)
+    public function setShortDescription($shortDescription)
     {
-        $this->description = $description;
+        $this->shortDescription = $shortDescription;
 
         return $this;
     }
@@ -133,6 +121,18 @@ class ProducerTranslation
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
     }
 
     /**

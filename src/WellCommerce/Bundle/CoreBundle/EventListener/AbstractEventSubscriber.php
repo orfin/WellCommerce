@@ -13,8 +13,6 @@
 namespace WellCommerce\Bundle\CoreBundle\EventListener;
 
 use Symfony\Component\Config\FileLocator;
-use Symfony\Component\DependencyInjection\ContainerAware;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -40,6 +38,13 @@ class AbstractEventSubscriber extends AbstractContainer implements EventSubscrib
      */
     protected $router;
 
+    public static function getSubscribedEvents()
+    {
+        return [
+            AdminMenuEvent::INIT_EVENT => 'onAdminMenuInitEvent',
+        ];
+    }
+
     /**
      * Sets translator instance
      *
@@ -58,13 +63,6 @@ class AbstractEventSubscriber extends AbstractContainer implements EventSubscrib
     public function setRouter(RouterInterface $router)
     {
         $this->router = $router;
-    }
-
-    public static function getSubscribedEvents()
-    {
-        return [
-            AdminMenuEvent::INIT_EVENT => 'onAdminMenuInitEvent',
-        ];
     }
 
     /**

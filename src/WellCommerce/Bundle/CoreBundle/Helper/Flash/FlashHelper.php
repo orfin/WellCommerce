@@ -51,37 +51,11 @@ class FlashHelper implements FlashHelperInterface
     }
 
     /**
-     * Returns flash bag
-     *
-     * @return \Symfony\Component\HttpFoundation\Session\SessionBagInterface
-     */
-    private function getFlashBag()
-    {
-        return $this->session->getBag($this->flashesName);
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function addSuccess($message, array $params = [])
     {
         return $this->addMessage(FlashHelperInterface::FLASH_TYPE_SUCCESS, $message, $params);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addNotice($message, array $params = [])
-    {
-        return $this->addMessage(FlashHelperInterface::FLASH_TYPE_NOTICE, $message, $params);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addError($message, array $params = [])
-    {
-        return $this->addMessage(FlashHelperInterface::FLASH_TYPE_ERROR, $message, $params);
     }
 
     /**
@@ -111,5 +85,31 @@ class FlashHelper implements FlashHelperInterface
     private function translate($message, $params)
     {
         return $this->translator->trans($message, $params, $this->flashesName);
+    }
+
+    /**
+     * Returns flash bag
+     *
+     * @return \Symfony\Component\HttpFoundation\Session\SessionBagInterface
+     */
+    private function getFlashBag()
+    {
+        return $this->session->getBag($this->flashesName);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addNotice($message, array $params = [])
+    {
+        return $this->addMessage(FlashHelperInterface::FLASH_TYPE_NOTICE, $message, $params);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addError($message, array $params = [])
+    {
+        return $this->addMessage(FlashHelperInterface::FLASH_TYPE_ERROR, $message, $params);
     }
 } 

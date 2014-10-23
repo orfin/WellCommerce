@@ -11,7 +11,6 @@
  */
 namespace WellCommerce\Bundle\AttributeBundle\EventListener;
 
-use WellCommerce\Bundle\AdminBundle\Event\AdminMenuEvent;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 
 /**

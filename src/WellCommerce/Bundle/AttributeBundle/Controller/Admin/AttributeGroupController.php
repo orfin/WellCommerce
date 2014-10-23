@@ -85,6 +85,17 @@ class AttributeGroupController extends AbstractAdminController
     }
 
     /**
+     * {@inheritdoc}
+     */
+    protected function getForm($resource)
+    {
+        return $this->getFormBuilder($this->form, $resource, [
+            'name'  => $this->repository->getAlias(),
+            'class' => 'attributeGroupEditor'
+        ]);
+    }
+
+    /**
      * Returns all attribute groups as json
      *
      * @param Request $request
@@ -114,16 +125,5 @@ class AttributeGroupController extends AbstractAdminController
         ];
 
         return $this->jsonResponse($response);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getForm($resource)
-    {
-        return $this->getFormBuilder($this->form, $resource, [
-            'name'  => $this->repository->getAlias(),
-            'class' => 'attributeGroupEditor'
-        ]);
     }
 }

@@ -41,6 +41,13 @@ class ControllerListener implements EventSubscriberInterface
         $this->kernel = $kernel;
     }
 
+    public static function getSubscribedEvents()
+    {
+        return [
+            KernelEvents::CONTROLLER => ['onKernelController', -256],
+        ];
+    }
+
     public function onKernelController(FilterControllerEvent $event)
     {
         $controller = $event->getController();
@@ -78,12 +85,5 @@ class ControllerListener implements EventSubscriberInterface
             }
             $reflectionClass = $reflectionClass->getParentClass();
         } while ($reflectionClass);
-    }
-
-    public static function getSubscribedEvents()
-    {
-        return [
-            KernelEvents::CONTROLLER => ['onKernelController', -256],
-        ];
     }
 } 

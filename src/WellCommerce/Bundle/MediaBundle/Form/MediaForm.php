@@ -11,13 +11,10 @@
  */
 namespace WellCommerce\Bundle\MediaBundle\Form;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\BaseSubjectInterface;
-use WellCommerce\Bundle\MediaBundle\Entity\Media;
 use WellCommerce\Bundle\FormBundle\Form\AbstractForm;
 use WellCommerce\Bundle\FormBundle\Form\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\FormBundle\Form\FormInterface;
-use WellCommerce\Bundle\MediaBundle\Repository\MediaRepositoryInterface;
 
 /**
  * Class MediaForm

@@ -12,13 +12,9 @@
 
 namespace WellCommerce\Bundle\MediaBundle\Controller\Admin;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Validator\Constraints\File;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
-use WellCommerce\Bundle\MediaBundle\Entity\Media;
 
 /**
  * Class MediaController

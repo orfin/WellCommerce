@@ -56,23 +56,23 @@ class LayoutBoxTranslation
         return $this->id;
     }
 
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-
     public function getName()
     {
         return $this->name;
     }
 
-    public function setContent($content)
+    public function setName($name)
     {
-        $this->content = $content;
+        $this->name = $name;
     }
 
     public function getContent()
     {
         return $this->content;
+    }
+
+    public function setContent($content)
+    {
+        $this->content = $content;
     }
 }

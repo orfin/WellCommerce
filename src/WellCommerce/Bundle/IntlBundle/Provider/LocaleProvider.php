@@ -40,6 +40,14 @@ class LocaleProvider implements LocaleProviderInterface
     /**
      * {@inheritdoc}
      */
+    public function isAvailableLocale($locale)
+    {
+        return in_array($locale, $this->getAvailableLocales());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getAvailableLocales()
     {
         if (null === $this->locales) {
@@ -47,13 +55,5 @@ class LocaleProvider implements LocaleProviderInterface
         }
 
         return $this->locales;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isAvailableLocale($locale)
-    {
-        return in_array($locale, $this->getAvailableLocales());
     }
 } 

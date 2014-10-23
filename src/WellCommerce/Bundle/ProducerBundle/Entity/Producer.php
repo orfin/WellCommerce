@@ -17,7 +17,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\PhotoTrait;
 use WellCommerce\Bundle\DelivererBundle\Entity\Deliverer;
-use WellCommerce\Bundle\MediaBundle\Entity\Media;
 use WellCommerce\Bundle\ShopBundle\Entity\Shop;
 
 /**
@@ -65,6 +64,15 @@ class Producer
     private $deliverers;
 
     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->shops      = new ArrayCollection();
+        $this->deliverers = new ArrayCollection();
+    }
+
+    /**
      * Get id.
      *
      * @return integer
@@ -75,12 +83,13 @@ class Producer
     }
 
     /**
-     * Constructor
+     * Get shops for category
+     *
+     * @return mixed
      */
-    public function __construct()
+    public function getShops()
     {
-        $this->shops      = new ArrayCollection();
-        $this->deliverers = new ArrayCollection();
+        return $this->shops;
     }
 
     /**
@@ -91,16 +100,6 @@ class Producer
     public function setShops($shops)
     {
         $this->shops = $shops;
-    }
-
-    /**
-     * Get shops for category
-     *
-     * @return mixed
-     */
-    public function getShops()
-    {
-        return $this->shops;
     }
 
     public function addShop(Shop $shop)
@@ -118,6 +117,11 @@ class Producer
         return $this->deliverers;
     }
 
+    public function setDeliverers(ArrayCollection $collection)
+    {
+        $this->deliverers = $collection;
+    }
+
     /**
      * Adds new deliverer to producer
      *
@@ -126,11 +130,6 @@ class Producer
     public function addDeliverer(Deliverer $deliverer)
     {
         $this->deliverers = $deliverer;
-    }
-
-    public function setDeliverers(ArrayCollection $collection)
-    {
-        $this->deliverers = $collection;
     }
 }
 

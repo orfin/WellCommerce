@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\ProducerBundle\Form;
 use WellCommerce\Bundle\FormBundle\Form\AbstractForm;
 use WellCommerce\Bundle\FormBundle\Form\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\FormBundle\Form\DataTransformer\CollectionToArrayTransformer;
-use WellCommerce\Bundle\FormBundle\Form\DataTransformer\EntityToIdentifierTransformer;
 use WellCommerce\Bundle\FormBundle\Form\FormInterface;
 use WellCommerce\Bundle\MediaBundle\Form\DataTransformer\MediaEntityToIdentifierTransformer;
 

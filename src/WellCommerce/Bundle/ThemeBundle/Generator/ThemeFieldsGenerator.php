@@ -30,7 +30,7 @@ use WellCommerce\Bundle\ThemeBundle\Entity\Theme;
  */
 class ThemeFieldsGenerator extends AbstractContainer implements ContainerAwareInterface
 {
-    protected $nextFieldId = 0;
+    protected $nextFieldId       = 0;
     protected $layoutBoxSelector;
     protected $themeDir;
     protected $configurationFile = 'fields.xml';
@@ -181,6 +181,43 @@ class ThemeFieldsGenerator extends AbstractContainer implements ContainerAwareIn
     }
 
     /**
+     * Returns default values for field
+     *
+     * @param $field
+     *
+     * @return array
+     */
+    public function getDefaultValues($field)
+    {
+        $xml = (array)simplexml_import_dom($field);
+        if ($xml['default'] instanceof \SimpleXMLElement) {
+            $defaultValues = (array)$xml['default'];
+        } else {
+            $defaultValues = $xml['default'];
+        }
+
+        return $defaultValues;
+    }
+
+    /**
+     * Adds width input
+     *
+     * @param \DOMElement $field
+     *
+     * @return mixed
+     */
+    protected function addFieldWidth(\DOMElement $field)
+    {
+        $attributes = $this->getFieldAttributes($field);
+
+        return $this->builder->getElement('text_field', $attributes + [
+                'suffix'        => 'px',
+                'size'          => TextField::SIZE_SHORT,
+                'css_attribute' => 'width'
+            ]);
+    }
+
+    /**
      * Returns an array containing all required field attributes
      *
      * @param $item
@@ -252,24 +289,6 @@ class ThemeFieldsGenerator extends AbstractContainer implements ContainerAwareIn
     }
 
     /**
-     * Adds width input
-     *
-     * @param \DOMElement $field
-     *
-     * @return mixed
-     */
-    protected function addFieldWidth(\DOMElement $field)
-    {
-        $attributes = $this->getFieldAttributes($field);
-
-        return $this->builder->getElement('text_field', $attributes + [
-                'suffix'        => 'px',
-                'size'          => TextField::SIZE_SHORT,
-                'css_attribute' => 'width'
-            ]);
-    }
-
-    /**
      * Adds height input
      *
      * @param \DOMElement $field
@@ -321,24 +340,5 @@ class ThemeFieldsGenerator extends AbstractContainer implements ContainerAwareIn
                 'type_gradient'   => (boolean)$xml->type['gradient'],
                 'type_image'      => (boolean)$xml->type['image']
             ]);
-    }
-
-    /**
-     * Returns default values for field
-     *
-     * @param $field
-     *
-     * @return array
-     */
-    public function getDefaultValues($field)
-    {
-        $xml = (array)simplexml_import_dom($field);
-        if ($xml['default'] instanceof \SimpleXMLElement) {
-            $defaultValues = (array)$xml['default'];
-        } else {
-            $defaultValues = $xml['default'];
-        }
-
-        return $defaultValues;
     }
 }

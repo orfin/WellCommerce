@@ -32,6 +32,11 @@ class AttributeValue
     use ORMBehaviors\Blameable\Blameable;
 
     /**
+     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\AttributeBundle\Entity\Attribute", inversedBy="values")
+     * @ORM\JoinColumn(name="attribute_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
+     */
+    protected $attribute;
+    /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer")
@@ -39,13 +44,6 @@ class AttributeValue
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\AttributeBundle\Entity\Attribute", inversedBy="values")
-     * @ORM\JoinColumn(name="attribute_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
-     */
-    protected $attribute;
-
     /**
      * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute", mappedBy="attributeValues")
      */
@@ -62,16 +60,6 @@ class AttributeValue
     }
 
     /**
-     * Sets an attribute
-     *
-     * @param Attribute $attribute
-     */
-    public function setAttribute(Attribute $attribute)
-    {
-        $this->attribute = $attribute;
-    }
-
-    /**
      * Returns value attribute
      *
      * @return mixed
@@ -79,6 +67,16 @@ class AttributeValue
     public function getAttribute()
     {
         return $this->attribute;
+    }
+
+    /**
+     * Sets an attribute
+     *
+     * @param Attribute $attribute
+     */
+    public function setAttribute(Attribute $attribute)
+    {
+        $this->attribute = $attribute;
     }
 }
 

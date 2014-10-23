@@ -28,6 +28,11 @@ class ClientAddress
     use AddressTrait;
 
     /**
+     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\ClientBundle\Entity\Client", inversedBy="addresses")
+     * @ORM\JoinColumn(name="client_id", referencedColumnName="id", nullable=false)
+     */
+    protected $client;
+    /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer")
@@ -35,11 +40,5 @@ class ClientAddress
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\ClientBundle\Entity\Client", inversedBy="addresses")
-     * @ORM\JoinColumn(name="client_id", referencedColumnName="id", nullable=false)
-     */
-    protected $client;
 }
 

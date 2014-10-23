@@ -69,6 +69,14 @@ class NewsTranslation
     }
 
     /**
+     * @return string
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
      * @param string $content
      */
     public function setContent($content)
@@ -79,11 +87,10 @@ class NewsTranslation
     /**
      * @return string
      */
-    public function getContent()
+    public function getSummary()
     {
-        return $this->content;
+        return $this->summary;
     }
-
 
     /**
      * @param string $summary
@@ -96,9 +103,9 @@ class NewsTranslation
     /**
      * @return string
      */
-    public function getSummary()
+    public function getTopic()
     {
-        return $this->summary;
+        return $this->topic;
     }
 
     /**
@@ -107,14 +114,6 @@ class NewsTranslation
     public function setTopic($topic)
     {
         $this->topic = $topic;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTopic()
-    {
-        return $this->topic;
     }
 
     public function getSluggableFields()

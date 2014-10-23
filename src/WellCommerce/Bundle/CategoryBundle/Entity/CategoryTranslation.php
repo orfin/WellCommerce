@@ -58,6 +58,16 @@ class CategoryTranslation
     }
 
     /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
      * Set name
      *
      * @param string $name
@@ -72,13 +82,13 @@ class CategoryTranslation
     }
 
     /**
-     * Get name
+     * Get shortDescription
      *
      * @return string
      */
-    public function getName()
+    public function getShortDescription()
     {
-        return $this->name;
+        return $this->shortDescription;
     }
 
     /**
@@ -96,13 +106,13 @@ class CategoryTranslation
     }
 
     /**
-     * Get shortDescription
+     * Get description
      *
      * @return string
      */
-    public function getShortDescription()
+    public function getDescription()
     {
-        return $this->shortDescription;
+        return $this->description;
     }
 
     /**
@@ -117,16 +127,6 @@ class CategoryTranslation
         $this->description = $description;
 
         return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
     }
 
     /**

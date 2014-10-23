@@ -52,9 +52,9 @@ class PaymentMethodForm extends AbstractForm implements FormInterface
         ]));
 
         $requiredData->addChild($builder->getElement('select', [
-            'name'        => 'processor',
-            'label'       => $this->trans('Processor'),
-            'options'     => [],
+            'name'    => 'processor',
+            'label'   => $this->trans('Processor'),
+            'options' => [],
         ]));
 
         $requiredData->addChild($builder->getElement('checkbox', [

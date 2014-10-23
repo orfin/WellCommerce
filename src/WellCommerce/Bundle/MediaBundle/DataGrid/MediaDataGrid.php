@@ -110,8 +110,8 @@ class MediaDataGrid extends AbstractDataGrid implements DataGridInterface
                 'type' => ColumnInterface::FILTER_INPUT
             ],
             'process_function' => function ($path) {
-                    return $this->getManager()->getImage($path, 'medium');
-                }
+                return $this->getManager()->getImage($path, 'medium');
+            }
         ]));
     }
 }

@@ -50,6 +50,16 @@ class AvailabilityTranslation
     }
 
     /**
+     * Get name.
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
      * Sets name
      *
      * @param $name
@@ -59,16 +69,6 @@ class AvailabilityTranslation
     public function setName($name)
     {
         $this->name = $name;
-    }
-
-    /**
-     * Get name.
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
     }
 }
 

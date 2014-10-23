@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\ShopBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model\Sluggable\Sluggable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translation;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\MetaDataTrait;
 
@@ -56,6 +55,16 @@ class ShopTranslation
     }
 
     /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
      * Set name
      *
      * @param string $name
@@ -67,15 +76,5 @@ class ShopTranslation
         $this->name = $name;
 
         return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
     }
 }

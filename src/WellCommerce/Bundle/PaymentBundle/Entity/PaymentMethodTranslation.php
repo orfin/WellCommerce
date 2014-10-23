@@ -50,6 +50,16 @@ class PaymentMethodTranslation
     }
 
     /**
+     * Returns payment method name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
      * Sets payment method name
      *
      * @param $name
@@ -59,16 +69,6 @@ class PaymentMethodTranslation
     public function setName($name)
     {
         $this->name = $name;
-    }
-
-    /**
-     * Returns payment method name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
     }
 }
 

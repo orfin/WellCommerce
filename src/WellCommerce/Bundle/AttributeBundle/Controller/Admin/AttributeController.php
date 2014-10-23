@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\AttributeBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 /**
  * Class AttributeController

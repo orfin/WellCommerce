@@ -11,7 +11,6 @@
  */
 namespace WellCommerce\Bundle\AttributeBundle\Repository;
 
-use WellCommerce\Bundle\AttributeBundle\Entity\Attribute;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroup;
 use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 
@@ -49,6 +48,16 @@ class AttributeRepository extends AbstractEntityRepository implements AttributeR
     }
 
     /**
+     * Returns attribute value repository
+     *
+     * @return \WellCommerce\Bundle\AttributeBundle\Repository\AttributeValueRepository
+     */
+    private function getAttributeValueRepository()
+    {
+        return $this->getRepository('WellCommerce\Bundle\AttributeBundle\Entity\AttributeValue');
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function findAllByAttributeGroupId($id)
@@ -76,23 +85,6 @@ class AttributeRepository extends AbstractEntityRepository implements AttributeR
         }
 
         return $result;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addAttribute($name)
-    {
-        $locales   = $this->getLocales();
-        $attribute = $this->createNew();
-
-        foreach ($locales as $locale) {
-            $attribute->translate($locale->getCode())->setName($name);
-        }
-        $attribute->mergeNewTranslations();
-        $this->getEntityManager()->persist($attribute);
-
-        return $attribute;
     }
 
     /**
@@ -138,12 +130,19 @@ class AttributeRepository extends AbstractEntityRepository implements AttributeR
     }
 
     /**
-     * Returns attribute value repository
-     *
-     * @return \WellCommerce\Bundle\AttributeBundle\Repository\AttributeValueRepository
+     * {@inheritdoc}
      */
-    private function getAttributeValueRepository()
+    public function addAttribute($name)
     {
-        return $this->getRepository('WellCommerce\Bundle\AttributeBundle\Entity\AttributeValue');
+        $locales   = $this->getLocales();
+        $attribute = $this->createNew();
+
+        foreach ($locales as $locale) {
+            $attribute->translate($locale->getCode())->setName($name);
+        }
+        $attribute->mergeNewTranslations();
+        $this->getEntityManager()->persist($attribute);
+
+        return $attribute;
     }
 }

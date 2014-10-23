@@ -30,6 +30,11 @@ class ProductAttribute
     use PhotoTrait;
 
     /**
+     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\Product", inversedBy="attributes")
+     * @ORM\JoinColumn(name="product_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
+     */
+    protected $product;
+    /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer")
@@ -37,13 +42,6 @@ class ProductAttribute
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\Product", inversedBy="attributes")
-     * @ORM\JoinColumn(name="product_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
-     */
-    protected $product;
-
     /**
      * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\AttributeBundle\Entity\AttributeValue", inversedBy="productAttributeValues")
      * @ORM\JoinTable(name="product_attribute_value",
@@ -118,6 +116,14 @@ class ProductAttribute
     }
 
     /**
+     * @return mixed
+     */
+    public function getAttributeValues()
+    {
+        return $this->attributeValues;
+    }
+
+    /**
      * @param mixed $attributeValues
      */
     public function setAttributeValues($attributeValues)
@@ -128,9 +134,9 @@ class ProductAttribute
     /**
      * @return mixed
      */
-    public function getAttributeValues()
+    public function getAvailability()
     {
-        return $this->attributeValues;
+        return $this->availability;
     }
 
     /**
@@ -142,11 +148,11 @@ class ProductAttribute
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getAvailability()
+    public function getWeight()
     {
-        return $this->availability;
+        return $this->weight;
     }
 
     /**
@@ -160,9 +166,9 @@ class ProductAttribute
     /**
      * @return string
      */
-    public function getWeight()
+    public function getSymbol()
     {
-        return $this->weight;
+        return $this->symbol;
     }
 
     /**
@@ -176,9 +182,9 @@ class ProductAttribute
     /**
      * @return string
      */
-    public function getSymbol()
+    public function getStock()
     {
-        return $this->symbol;
+        return $this->stock;
     }
 
     /**
@@ -192,9 +198,9 @@ class ProductAttribute
     /**
      * @return string
      */
-    public function getStock()
+    public function getSellPrice()
     {
-        return $this->stock;
+        return $this->sellPrice;
     }
 
     /**
@@ -206,11 +212,11 @@ class ProductAttribute
     }
 
     /**
-     * @return string
+     * @return mixed
      */
-    public function getSellPrice()
+    public function getProduct()
     {
-        return $this->sellPrice;
+        return $this->product;
     }
 
     /**
@@ -222,11 +228,11 @@ class ProductAttribute
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getProduct()
+    public function getModifierValue()
     {
-        return $this->product;
+        return $this->modifierValue;
     }
 
     /**
@@ -240,9 +246,9 @@ class ProductAttribute
     /**
      * @return string
      */
-    public function getModifierValue()
+    public function getModifierType()
     {
-        return $this->modifierValue;
+        return $this->modifierType;
     }
 
     /**
@@ -251,14 +257,6 @@ class ProductAttribute
     public function setModifierType($modifierType)
     {
         $this->modifierType = $modifierType;
-    }
-
-    /**
-     * @return string
-     */
-    public function getModifierType()
-    {
-        return $this->modifierType;
     }
 
     /**

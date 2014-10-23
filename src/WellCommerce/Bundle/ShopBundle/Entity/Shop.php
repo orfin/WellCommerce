@@ -233,16 +233,6 @@ class Shop
     }
 
     /**
-     * Adds new locale for shop
-     *
-     * @param Locale $locale
-     */
-    public function addLocale(Locale $locale)
-    {
-        $this->locales[] = $locale;
-    }
-
-    /**
      * Sets available locales
      *
      * @param ArrayCollection $collection
@@ -250,6 +240,16 @@ class Shop
     public function setLocales(ArrayCollection $collection)
     {
         $this->locales = $collection;
+    }
+
+    /**
+     * Adds new locale for shop
+     *
+     * @param Locale $locale
+     */
+    public function addLocale(Locale $locale)
+    {
+        $this->locales[] = $locale;
     }
 
     /**
@@ -263,16 +263,6 @@ class Shop
     }
 
     /**
-     * Adds new locale for shop
-     *
-     * @param Currency $currency
-     */
-    public function addCurrency(Currency $currency)
-    {
-        $this->currencies[] = $currency;
-    }
-
-    /**
      * Sets available currencies
      *
      * @param ArrayCollection $collection
@@ -283,6 +273,16 @@ class Shop
     }
 
     /**
+     * Adds new locale for shop
+     *
+     * @param Currency $currency
+     */
+    public function addCurrency(Currency $currency)
+    {
+        $this->currencies[] = $currency;
+    }
+
+    /**
      * Returns all available payment methods
      *
      * @return ArrayCollection
@@ -290,16 +290,6 @@ class Shop
     public function getPaymentMethods()
     {
         return $this->paymentMethods;
-    }
-
-    /**
-     * Adds new payment method to shop
-     *
-     * @param PaymentMethod $paymentMethod
-     */
-    public function addPaymentMethod(PaymentMethod $paymentMethod)
-    {
-        $this->paymentMethods = $paymentMethod;
     }
 
     /**
@@ -328,6 +318,16 @@ class Shop
         foreach ($paymentMethods as $paymentMethod) {
             $paymentMethod->addShop($this);
         }
+    }
+
+    /**
+     * Adds new payment method to shop
+     *
+     * @param PaymentMethod $paymentMethod
+     */
+    public function addPaymentMethod(PaymentMethod $paymentMethod)
+    {
+        $this->paymentMethods = $paymentMethod;
     }
 }
 

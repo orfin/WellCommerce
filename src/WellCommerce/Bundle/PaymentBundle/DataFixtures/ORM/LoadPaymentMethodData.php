@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\PaymentBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use WellCommerce\Bundle\CompanyBundle\Entity\Company;
 use WellCommerce\Bundle\PaymentBundle\Entity\Payment;
 
 /**
