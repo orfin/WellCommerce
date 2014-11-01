@@ -19,8 +19,6 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
  *
  * @package WellCommerce\Bundle\ProductBundle\Controller
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Template()
  */
 class ProductStatusController extends AbstractAdminController
 {

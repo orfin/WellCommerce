@@ -23,8 +23,6 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
  *
  * @package WellCommerce\Bundle\UserBundle\Controller
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Template()
  */
 class UserController extends AbstractAdminController
 {

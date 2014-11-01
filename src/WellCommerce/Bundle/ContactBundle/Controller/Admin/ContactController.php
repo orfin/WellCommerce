@@ -19,8 +19,6 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
  *
  * @package WellCommerce\Bundle\ContactBundle\Controller
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Template()
  */
 class ContactController extends AbstractAdminController
 {

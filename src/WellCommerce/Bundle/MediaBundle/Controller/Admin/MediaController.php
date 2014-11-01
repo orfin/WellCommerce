@@ -21,8 +21,6 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
  *
  * @package WellCommerce\Bundle\MediaBundle\Controller
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Template()
  */
 class MediaController extends AbstractAdminController
 {

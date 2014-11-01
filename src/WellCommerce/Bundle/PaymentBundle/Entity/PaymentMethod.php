@@ -17,7 +17,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\EnableableTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\HierarchyTrait;
-use WellCommerce\Bundle\ShopBundle\Entity\Shop;
 
 /**
  * Class PaymentMethod
@@ -47,28 +46,11 @@ class PaymentMethod
     private $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\ShopBundle\Entity\Shop", inversedBy="paymentMethods")
-     * @ORM\JoinTable(name="shop_payment_method",
-     *      joinColumns={@ORM\JoinColumn(name="payment_method_id", referencedColumnName="id", onDelete="CASCADE")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="shop_id", referencedColumnName="id", onDelete="CASCADE")}
-     * )
-     */
-    private $shops;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="processor", type="string", length=64)
      */
     private $processor;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->shops = new ArrayCollection();
-    }
 
     /**
      * Get id.
@@ -78,41 +60,6 @@ class PaymentMethod
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Get shops for payment method
-     *
-     * @return mixed
-     */
-    public function getShops()
-    {
-        return $this->shops;
-    }
-
-    /**
-     * Sets shops for payment method
-     *
-     * @param $shops
-     */
-    public function setShops($shops)
-    {
-        $this->shops = $shops;
-    }
-
-    /**
-     * Adds payment method to shop
-     *
-     * @param Shop $shop
-     */
-    public function addShop(Shop $shop)
-    {
-        $this->shops[] = $shop;
-    }
-
-    public function removeShop(Shop $shop)
-    {
-        $this->shops->removeElement($shop);
     }
 
     /**

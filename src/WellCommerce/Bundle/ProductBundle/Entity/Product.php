@@ -22,7 +22,6 @@ use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\EnableableTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\HierarchyTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\PhotoTrait;
 use WellCommerce\Bundle\IntlBundle\Entity\Currency;
-use WellCommerce\Bundle\ShopBundle\Entity\Shop;
 use WellCommerce\Bundle\TaxBundle\Entity\Tax;
 use WellCommerce\Bundle\UnitBundle\Entity\Unit;
 
@@ -82,15 +81,6 @@ class Product
      * @ORM\JoinColumn(name="availability_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $availability;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\ShopBundle\Entity\Shop", inversedBy="products")
-     * @ORM\JoinTable(name="shop_product",
-     *      joinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id", onDelete="CASCADE")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="shop_id", referencedColumnName="id", onDelete="CASCADE")}
-     * )
-     */
-    private $shops;
 
     /**
      * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\CategoryBundle\Entity\Category", inversedBy="products")
@@ -206,7 +196,6 @@ class Product
      */
     public function __construct()
     {
-        $this->shops         = new ArrayCollection();
         $this->categories    = new ArrayCollection();
         $this->categories    = new ArrayCollection();
         $this->productPhotos = new ArrayCollection();
@@ -362,36 +351,6 @@ class Product
     public function setAvailability(Availability $availability = null)
     {
         $this->availability = $availability;
-    }
-
-    /**
-     * Get shops for product
-     *
-     * @return ArrayCollection
-     */
-    public function getShops()
-    {
-        return $this->shops;
-    }
-
-    /**
-     * Sets shops for product
-     *
-     * @param ArrayCollection $shops
-     */
-    public function setShops(ArrayCollection $shops)
-    {
-        $this->shops = $shops;
-    }
-
-    /**
-     * Adds product to shop
-     *
-     * @param Shop $shop
-     */
-    public function addShop(Shop $shop)
-    {
-        $this->shops[] = $shop;
     }
 
     /**

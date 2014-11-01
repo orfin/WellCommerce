@@ -70,7 +70,7 @@ class Deliverer
     /**
      * Sets producers for deliverer
      *
-     * @param $shops
+     * @param $collection
      */
     public function setProducers(ArrayCollection $collection)
     {

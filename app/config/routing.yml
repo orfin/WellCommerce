@@ -59,11 +59,6 @@ wellcommerce_company:
     prefix:   /admin/configuration/company
     options: { i18n: false }
 
-wellcommerce_shop:
-    resource: "@WellCommerceShopBundle/Resources/config/routing.xml"
-    prefix:   /admin/configuration/shop
-    options: { i18n: false }
-
 wellcommerce_unit:
     resource: "@WellCommerceUnitBundle/Resources/config/routing.xml"
     prefix:   /admin/configuration/unit
@@ -116,6 +111,7 @@ wellcommerce_attribute:
 
 root:
     path: /admin
+    options: { i18n: false }
     defaults:
         _controller: FrameworkBundle:Redirect:redirect
         route: admin.user.index

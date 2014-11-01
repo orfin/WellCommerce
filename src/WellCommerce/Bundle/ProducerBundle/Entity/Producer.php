@@ -17,7 +17,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\PhotoTrait;
 use WellCommerce\Bundle\DelivererBundle\Entity\Deliverer;
-use WellCommerce\Bundle\ShopBundle\Entity\Shop;
 
 /**
  * Class Locale
@@ -46,15 +45,6 @@ class Producer
     private $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\ShopBundle\Entity\Shop", inversedBy="producers")
-     * @ORM\JoinTable(name="shop_producer",
-     *      joinColumns={@ORM\JoinColumn(name="producer_id", referencedColumnName="id", onDelete="CASCADE")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="shop_id", referencedColumnName="id", onDelete="CASCADE")}
-     * )
-     */
-    private $shops;
-
-    /**
      * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\DelivererBundle\Entity\Deliverer", inversedBy="producers")
      * @ORM\JoinTable(name="producer_deliverer",
      *      joinColumns={@ORM\JoinColumn(name="producer_id", referencedColumnName="id", onDelete="CASCADE")},
@@ -68,7 +58,6 @@ class Producer
      */
     public function __construct()
     {
-        $this->shops      = new ArrayCollection();
         $this->deliverers = new ArrayCollection();
     }
 
@@ -80,31 +69,6 @@ class Producer
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Get shops for category
-     *
-     * @return mixed
-     */
-    public function getShops()
-    {
-        return $this->shops;
-    }
-
-    /**
-     * Sets shops for category
-     *
-     * @param $shops
-     */
-    public function setShops($shops)
-    {
-        $this->shops = $shops;
-    }
-
-    public function addShop(Shop $shop)
-    {
-        $this->shops[] = $shop;
     }
 
     /**

@@ -41,6 +41,9 @@
         </service>
 
         <service id="user.datagrid" class="%user.datagrid.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
             <configurator service="user.datagrid.configurator" method="configure" />
         </service>
 

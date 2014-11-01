@@ -80,21 +80,7 @@
 </div>
 <div id="navigation-bar">
     <div class="layout-container">
-        <div id="selectors" style="float: right; margin-top: 8px;"></div>
         {% include 'WellCommerceAdminBundle:Admin:navigation.html.twig' %}
-
-        <div id="boxShop">
-            <span class="icon"></span>
-
-            <div class="field-select">
-                <select name="view-switcher" onchange="window.location.href = Routing.generate('admin.shop.switch');">
-                    {% for id, name in shops %}
-                        <option value="{{ id }}">{{ name }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-        </div>
-
     </div>
 </div>
 <div id="message-bar"></div>

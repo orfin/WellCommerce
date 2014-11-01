@@ -70,7 +70,7 @@ class ProductForm extends AbstractForm implements FormInterface
         $requiredData->addChild($builder->getElement('checkbox', [
             'name'    => 'enabled',
             'label'   => $this->trans('Enabled'),
-            'comment' => $this->trans('Only enabled products are visible in shops'),
+            'comment' => $this->trans('Only enabled products are visible in shop'),
             'default' => 1
         ]));
 
@@ -290,18 +290,6 @@ class ProductForm extends AbstractForm implements FormInterface
             'category_field'     => $categoriesField,
             'availability_field' => $availabilityField,
             'transformer'        => new ProductAttributeCollectionToArrayTransformer($this->get('product_attribute.repository'))
-        ]));
-
-        $shopData = $form->addChild($builder->getElement('fieldset', [
-            'name'  => 'shop_data',
-            'label' => $this->trans('Shops')
-        ]));
-
-        $shopData->addChild($builder->getElement('multi_select', [
-            'name'        => 'shops',
-            'label'       => $this->trans('shops'),
-            'options'     => $this->get('shop.repository')->getCollectionToSelect(),
-            'transformer' => new CollectionToArrayTransformer($this->get('shop.repository'))
         ]));
 
         $form->addFilter('trim');

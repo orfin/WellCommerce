@@ -21,8 +21,6 @@ use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
  *
  * @package WellCommerce\Bundle\WebBundle\Controller\Front
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Template()
  */
 class CategoryController extends AbstractFrontController implements FrontControllerInterface
 {

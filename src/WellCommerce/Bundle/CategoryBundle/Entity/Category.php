@@ -18,7 +18,6 @@ use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 use WellCommerce\Bundle\ProductBundle\Entity\Product;
-use WellCommerce\Bundle\ShopBundle\Entity\Shop;
 
 /**
  * Class Category
@@ -60,15 +59,6 @@ class Category
     private $parent;
 
     /**
-     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\ShopBundle\Entity\Shop", inversedBy="categories")
-     * @ORM\JoinTable(name="shop_category",
-     *      joinColumns={@ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="CASCADE")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="shop_id", referencedColumnName="id", onDelete="CASCADE")}
-     * )
-     */
-    private $shops;
-
-    /**
      * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\Product", mappedBy="categories")
      */
     private $products;
@@ -79,7 +69,6 @@ class Category
     public function __construct()
     {
         $this->children = new ArrayCollection();
-        $this->shops    = new ArrayCollection();
         $this->products = new ArrayCollection();
     }
 
@@ -155,31 +144,6 @@ class Category
     }
 
     /**
-     * Get shops for category
-     *
-     * @return mixed
-     */
-    public function getShops()
-    {
-        return $this->shops;
-    }
-
-    /**
-     * Sets shops for category
-     *
-     * @param $shops
-     */
-    public function setShops($shops)
-    {
-        $this->shops = $shops;
-    }
-
-    public function addShop(Shop $shop)
-    {
-        $this->shops[] = $shop;
-    }
-
-    /**
      * Get products in category
      *
      * @return mixed
@@ -192,7 +156,7 @@ class Category
     /**
      * Sets products in category
      *
-     * @param $shops
+     * @param $products
      */
     public function setProducts($products)
     {

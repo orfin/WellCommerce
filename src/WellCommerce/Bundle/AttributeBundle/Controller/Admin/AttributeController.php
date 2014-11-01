@@ -20,8 +20,6 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
  *
  * @package WellCommerce\Bundle\AttributeBundle\Controller\Admin
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Template()
  */
 class AttributeController extends AbstractAdminController
 {

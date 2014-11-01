@@ -43,11 +43,6 @@ class Currency
     private $code;
 
     /**
-     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\ShopBundle\Entity\Shop", mappedBy="currencies")
-     */
-    private $shops;
-
-    /**
      * Get id.
      *
      * @return integer

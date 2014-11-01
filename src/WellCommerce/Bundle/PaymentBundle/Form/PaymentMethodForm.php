@@ -74,18 +74,6 @@ class PaymentMethodForm extends AbstractForm implements FormInterface
             'default' => 0
         ]));
 
-        $shopData = $form->addChild($builder->getElement('fieldset', [
-            'name'  => 'shop_data',
-            'label' => $this->trans('Shops')
-        ]));
-
-        $shopData->addChild($builder->getElement('multi_select', [
-            'name'        => 'shops',
-            'label'       => $this->trans('shops'),
-            'options'     => $this->get('shop.repository')->getCollectionToSelect(),
-            'transformer' => new CollectionToArrayTransformer($this->get('shop.repository'))
-        ]));
-
         $form->addFilter('no_code');
         $form->addFilter('trim');
         $form->addFilter('secure');
