@@ -3,18 +3,8 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <parameters>
-        <parameter key="news.controller.admin.class">WellCommerce\Bundle\NewsBundle\Controller\Admin\NewsController</parameter>
-        <parameter key="news.repository.class">WellCommerce\Bundle\NewsBundle\Repository\NewsRepository</parameter>
-        <parameter key="news.datagrid.class">WellCommerce\Bundle\NewsBundle\DataGrid\NewsDataGrid</parameter>
-        <parameter key="news.datagrid.configurator.class">WellCommerce\Bundle\NewsBundle\DataGrid\NewsDataGridConfigurator</parameter>
-        <parameter key="news.form.class">WellCommerce\Bundle\NewsBundle\Form\NewsForm</parameter>
-        <parameter key="news.subscriber.class">WellCommerce\Bundle\NewsBundle\EventListener\NewsSubscriber</parameter>
-        <parameter key="news.uploader.class">WellCommerce\Bundle\NewsBundle\Uploader\NewsUploader</parameter>
-    </parameters>
-
     <services>
-        <service id="news.controller.admin" class="%news.controller.admin.class%">
+        <service id="news.controller.admin" class="WellCommerce\Bundle\NewsBundle\Controller\Admin\NewsController">
             <argument type="service" id="service_container"/>
             <argument type="service" id="admin_manager"/>
             <argument type="service" id="news.repository"/>
@@ -22,34 +12,33 @@
             <argument type="service" id="news.form"/>
         </service>
 
-        <service id="news.repository" class="%news.repository.class%" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+        <service id="news.repository" class="WellCommerce\Bundle\NewsBundle\Repository\NewsRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument>WellCommerceNewsBundle:News</argument>
             <call method="setTranslator">
                 <argument type="service" id="translator" />
             </call>
         </service>
 
-        <service id="news.uploader" class="%news.uploader.class%">
-            <argument type="service" id="news.repository" />
-        </service>
-
-        <service id="news.datagrid" class="%news.datagrid.class%">
+        <service id="news.datagrid" class="WellCommerce\Bundle\NewsBundle\DataGrid\NewsDataGrid">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
             <configurator service="news.datagrid.configurator" method="configure" />
         </service>
 
-        <service id="news.datagrid.configurator" class="%news.datagrid.configurator.class%">
+        <service id="news.datagrid.configurator" class="WellCommerce\Bundle\NewsBundle\DataGrid\NewsDataGridConfigurator">
             <argument key="identifier">news</argument>
             <argument type="service" id="datagrid_manager"/>
             <argument type="service" id="news.repository"/>
         </service>
 
-        <service id="news.form" class="%news.form.class%">
+        <service id="news.form" class="WellCommerce\Bundle\NewsBundle\Form\NewsForm">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="news.subscriber" class="%news.subscriber.class%">
+        <service id="news.subscriber" class="WellCommerce\Bundle\NewsBundle\EventListener\NewsSubscriber">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

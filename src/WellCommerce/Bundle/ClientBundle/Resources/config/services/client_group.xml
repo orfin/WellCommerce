@@ -3,16 +3,8 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <parameters>
-        <parameter key="client_group.controller.admin.class">WellCommerce\Bundle\ClientBundle\Controller\Admin\ClientGroupController</parameter>
-        <parameter key="client_group.repository.class">WellCommerce\Bundle\ClientBundle\Repository\ClientGroupRepository</parameter>
-        <parameter key="client_group.datagrid.class">WellCommerce\Bundle\ClientBundle\DataGrid\ClientGroupDataGrid</parameter>
-        <parameter key="client_group.datagrid.configurator.class">WellCommerce\Bundle\ClientBundle\DataGrid\ClientGroupDataGridConfigurator</parameter>
-        <parameter key="client_group.form.class">WellCommerce\Bundle\ClientBundle\Form\ClientGroupForm</parameter>
-    </parameters>
-
     <services>
-        <service id="client_group.controller.admin" class="%client_group.controller.admin.class%">
+        <service id="client_group.controller.admin" class="WellCommerce\Bundle\ClientBundle\Controller\Admin\ClientGroupController">
             <argument type="service" id="service_container"/>
             <argument type="service" id="admin_manager"/>
             <argument type="service" id="client_group.repository"/>
@@ -20,24 +12,27 @@
             <argument type="service" id="client_group.form"/>
         </service>
 
-        <service id="client_group.repository" class="%client_group.repository.class%" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+        <service id="client_group.repository" class="WellCommerce\Bundle\ClientBundle\Repository\ClientGroupRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument>WellCommerceClientBundle:ClientGroup</argument>
             <call method="setTranslator">
                 <argument type="service" id="translator" />
             </call>
         </service>
 
-        <service id="client_group.datagrid" class="%client_group.datagrid.class%">
+        <service id="client_group.datagrid" class="WellCommerce\Bundle\ClientBundle\DataGrid\ClientGroupDataGrid">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
             <configurator service="client_group.datagrid.configurator" method="configure" />
         </service>
 
-        <service id="client_group.datagrid.configurator" class="%client_group.datagrid.configurator.class%">
+        <service id="client_group.datagrid.configurator" class="WellCommerce\Bundle\ClientBundle\DataGrid\ClientGroupDataGridConfigurator">
             <argument key="identifier">client_group</argument>
             <argument type="service" id="datagrid_manager"/>
             <argument type="service" id="client_group.repository"/>
         </service>
 
-        <service id="client_group.form" class="%client_group.form.class%">
+        <service id="client_group.form" class="WellCommerce\Bundle\ClientBundle\Form\ClientGroupForm">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

@@ -3,17 +3,8 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <parameters>
-        <parameter key="contact.controller.admin.class">WellCommerce\Bundle\ContactBundle\Controller\Admin\ContactController</parameter>
-        <parameter key="contact.repository.class">WellCommerce\Bundle\ContactBundle\Repository\ContactRepository</parameter>
-        <parameter key="contact.datagrid.class">WellCommerce\Bundle\ContactBundle\DataGrid\ContactDataGrid</parameter>
-        <parameter key="contact.datagrid.configurator.class">WellCommerce\Bundle\ContactBundle\DataGrid\ContactDataGridConfigurator</parameter>
-        <parameter key="contact.form.class">WellCommerce\Bundle\ContactBundle\Form\ContactForm</parameter>
-        <parameter key="contact.subscriber.class">WellCommerce\Bundle\ContactBundle\EventListener\ContactSubscriber</parameter>
-    </parameters>
-
     <services>
-        <service id="contact.controller.admin" class="%contact.controller.admin.class%">
+        <service id="contact.controller.admin" class="WellCommerce\Bundle\ContactBundle\Controller\Admin\ContactController">
             <argument type="service" id="service_container"/>
             <argument type="service" id="admin_manager"/>
             <argument type="service" id="contact.repository"/>
@@ -21,30 +12,33 @@
             <argument type="service" id="contact.form"/>
         </service>
 
-        <service id="contact.repository" class="%contact.repository.class%" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+        <service id="contact.repository" class="WellCommerce\Bundle\ContactBundle\Repository\ContactRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument>WellCommerceContactBundle:Contact</argument>
             <call method="setTranslator">
                 <argument type="service" id="translator" />
             </call>
         </service>
 
-        <service id="contact.datagrid" class="%contact.datagrid.class%">
+        <service id="contact.datagrid" class="WellCommerce\Bundle\ContactBundle\DataGrid\ContactDataGrid">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
             <configurator service="contact.datagrid.configurator" method="configure" />
         </service>
 
-        <service id="contact.datagrid.configurator" class="%contact.datagrid.configurator.class%">
+        <service id="contact.datagrid.configurator" class="WellCommerce\Bundle\ContactBundle\DataGrid\ContactDataGridConfigurator">
             <argument key="identifier">Contact</argument>
             <argument type="service" id="datagrid_manager"/>
             <argument type="service" id="contact.repository"/>
         </service>
 
-        <service id="contact.form" class="%contact.form.class%">
+        <service id="contact.form" class="WellCommerce\Bundle\ContactBundle\Form\ContactForm">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="contact.subscriber" class="%contact.subscriber.class%">
+        <service id="contact.subscriber" class="WellCommerce\Bundle\ContactBundle\EventListener\ContactSubscriber">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

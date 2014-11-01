@@ -69,7 +69,7 @@ class ProductDataGrid extends AbstractDataGrid implements DataGridInterface
                 'align' => ColumnInterface::ALIGN_LEFT
             ],
             'filter'     => [
-                'type' => ColumnInterface::FILTER_INPUT
+                'type' => ColumnInterface::FILTER_BETWEEN
             ]
         ]));
 
@@ -83,7 +83,7 @@ class ProductDataGrid extends AbstractDataGrid implements DataGridInterface
                 'align' => ColumnInterface::ALIGN_LEFT
             ],
             'filter'     => [
-                'type' => ColumnInterface::FILTER_INPUT
+                'type' => ColumnInterface::FILTER_BETWEEN
             ]
         ]));
     }

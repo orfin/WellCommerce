@@ -30,6 +30,9 @@
         </service>
 
         <service id="locale.datagrid" class="WellCommerce\Bundle\IntlBundle\DataGrid\LocaleDataGrid">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
             <configurator service="locale.datagrid.configurator" method="configure" />
         </service>
 
