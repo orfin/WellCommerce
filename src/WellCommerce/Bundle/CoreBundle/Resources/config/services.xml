@@ -9,20 +9,15 @@
         <import resource="services/twig.xml"/>
     </imports>
 
-    <parameters>
-        <parameter key="admin_manager.class">WellCommerce\Bundle\CoreBundle\Controller\Admin\Manager\AdminManager</parameter>
-        <parameter key="file_uploader.class">WellCommerce\Bundle\CoreBundle\Uploader\FileUploader</parameter>
-    </parameters>
-
     <services>
-        <service id="file_uploader" class="%file_uploader.class%">
+        <service id="file_uploader" class="WellCommerce\Bundle\CoreBundle\Uploader\FileUploader">
             <argument>%kernel.root_dir%</argument>
             <argument type="service" id="filesystem" />
             <argument type="service" id="event_dispatcher" />
             <argument type="service" id="media.repository" />
         </service>
 
-        <service id="admin_manager" class="%admin_manager.class%">
+        <service id="admin_manager" class="WellCommerce\Bundle\CoreBundle\Controller\Admin\Manager\AdminManager">
             <argument type="service" id="flash_helper"/>
             <argument type="service" id="redirect_helper"/>
             <argument type="service" id="event_dispatcher"/>
