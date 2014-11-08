@@ -42,7 +42,7 @@ class DictionaryController extends AbstractAdminController
         }
 
         $kernelDir = $this->get('kernel')->getRootDir();
-        $path      = $kernelDir . '/Resources/translations';
+        $path      = $kernelDir . 'Resources' . DIRECTORY_SEPARATOR . 'translations';
         $fs        = new Filesystem();
 
         foreach ($translations as $locale => $nodes) {
