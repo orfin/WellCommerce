@@ -54,5 +54,12 @@ interface AdminManagerInterface
      */
     public function getRedirectHelper();
 
+    /**
+     * Returns redirect helper
+     *
+     * @return \WellCommerce\Bundle\CoreBundle\Helper\Flash\FlashHelperInterface
+     */
+    public function getFlashHelper();
+
 
 } 

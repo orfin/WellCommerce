@@ -38,22 +38,6 @@ class DictionaryForm extends AbstractForm implements FormInterface
         $requiredData->addChild($builder->getElement('text_field', [
             'name'  => 'identifier',
             'label' => $this->trans('dictionary.identifier'),
-            'rules' => [
-                $builder->getRule('required', [
-                    'message' => $this->trans('dictionary.identifier.required')
-                ]),
-            ]
-        ]));
-
-        $requiredData->addChild($builder->getElement('select', [
-            'name'    => 'domain',
-            'label'   => $this->trans('dictionary.domain'),
-            'options' => $this->get('dictionary.repository')->getTranslationDomains(),
-            'rules'   => [
-                $builder->getRule('required', [
-                    'message' => $this->trans('dictionary.domain.required')
-                ]),
-            ]
         ]));
 
         $languageData = $requiredData->addChild($builder->getElement('fieldset_language', [
@@ -64,11 +48,6 @@ class DictionaryForm extends AbstractForm implements FormInterface
         $languageData->addChild($builder->getElement('text_field', [
             'name'  => 'translation',
             'label' => $this->trans('dictionary.translation'),
-            'rules' => [
-                $builder->getRule('required', [
-                    'message' => $this->trans('dictionary.translation.required')
-                ]),
-            ]
         ]));
 
         $form->addFilter('no_code');

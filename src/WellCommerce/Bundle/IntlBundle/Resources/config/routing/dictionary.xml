@@ -17,6 +17,10 @@
         <default key="_controller">dictionary.controller.admin:addAction</default>
     </route>
 
+    <route id="admin.dictionary.synchronize" path="/synchronize">
+        <default key="_controller">dictionary.controller.admin:synchronizeAction</default>
+    </route>
+
     <route id="admin.dictionary.edit" path="/edit/{id}">
         <default key="_controller">dictionary.controller.admin:editAction</default>
         <option key="expose">true</option>

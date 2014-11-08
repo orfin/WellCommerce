@@ -19,7 +19,7 @@ use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 /**
  * Dictionary
  *
- * @ORM\Table(name="dictionary", uniqueConstraints={@ORM\UniqueConstraint(name="dictionary_unique_idx", columns={"identifier", "domain"})})
+ * @ORM\Table(name="dictionary", uniqueConstraints={@ORM\UniqueConstraint(name="dictionary_unique_idx", columns={"identifier"})})
  * @ORM\Entity(repositoryClass="WellCommerce\Bundle\IntlBundle\Repository\DictionaryRepository")
  */
 class Dictionary
@@ -44,34 +44,11 @@ class Dictionary
     private $identifier;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="domain", type="string", length=64)
-     */
-    private $domain;
-
-    /**
      * @return int
      */
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDomain()
-    {
-        return $this->domain;
-    }
-
-    /**
-     * @param string $domain
-     */
-    public function setDomain($domain)
-    {
-        $this->domain = $domain;
     }
 
     /**

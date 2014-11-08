@@ -53,4 +53,22 @@ class DictionaryRepository extends AbstractEntityRepository implements Dictionar
                 'WITH',
                 'dictionary.id = dictionary_translation.translatable AND dictionary_translation.locale = :locale');
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDictionaryTranslations()
+    {
+        $qb = parent::getQueryBuilder()
+            ->leftJoin('WellCommerce\Bundle\IntlBundle\Entity\DictionaryTranslation',
+                'dictionary_translation',
+                'WITH',
+                'dictionary.id = dictionary_translation.translatable')
+            ->groupBy('dictionary.identifier, dictionary_translation.locale')
+            ->select('dictionary.identifier,dictionary_translation.locale,dictionary_translation.translation');
+
+        $query = $qb->getQuery();
+
+        return $query->getArrayResult();
+    }
 }

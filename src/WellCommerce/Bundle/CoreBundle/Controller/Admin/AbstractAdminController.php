@@ -114,6 +114,13 @@ abstract class AbstractAdminController extends AbstractController implements Adm
         if ($form->handleRequest($request)->isValid()) {
             $this->manager->create($resource, $request);
 
+            if ($form->isAction('continue')) {
+                return $this->manager->getRedirectHelper()->redirectToAction('edit', $resource);
+            }
+            // redirect to /add action
+            if ($form->isAction('next')) {
+                return $this->manager->getRedirectHelper()->redirectToAction('add');
+            }
             return $this->manager->getRedirectHelper()->redirectToAction('index');
         }
 
@@ -150,8 +157,14 @@ abstract class AbstractAdminController extends AbstractController implements Adm
 
         if ($form->handleRequest($request)->isValid()) {
             $this->manager->update($resource, $request);
+            // stay on /edit screen
             if ($form->isAction('continue')) {
                 return $this->manager->getRedirectHelper()->redirectToAction('edit', $resource);
+            }
+
+            // redirect to /add action
+            if ($form->isAction('next')) {
+                return $this->manager->getRedirectHelper()->redirectToAction('add');
             }
 
             return $this->manager->getRedirectHelper()->redirectToAction('index');

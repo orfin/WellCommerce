@@ -1,0 +1,14 @@
+admin:
+    menu:
+        catalog: Katalog
+        category: Kategorie
+        cms: CMS
+        configuration: Konfiguracja
+        crm: CRM
+        dashboard: Pulpit
+        integration: Integracje
+        product: Produkty
+        promotion: Promocje
+        promotions: Promocje
+        reports: Raporty
+        sales: Sprzedaż

@@ -84,19 +84,5 @@ class DictionaryDataGrid extends AbstractDataGrid implements DataGridInterface
                 'type' => ColumnInterface::FILTER_INPUT
             ]
         ]));
-
-        $collection->add(new Column([
-            'id'         => 'domain',
-            'source'     => 'dictionary.domain',
-            'caption'    => $this->trans('dictionary.domain'),
-            'appearance' => [
-                'width' => 70,
-                'align' => ColumnInterface::ALIGN_LEFT
-            ],
-            'filter'     => [
-                'type'    => ColumnInterface::FILTER_SELECT,
-                'options' => $this->get('dictionary.repository')->getTranslationDomains()
-            ]
-        ]));
     }
 }

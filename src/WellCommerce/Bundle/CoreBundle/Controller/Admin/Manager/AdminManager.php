@@ -150,4 +150,12 @@ class AdminManager implements AdminManagerInterface
     {
         return $this->redirectHelper;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFlashHelper()
+    {
+        return $this->flashHelper;
+    }
 }
