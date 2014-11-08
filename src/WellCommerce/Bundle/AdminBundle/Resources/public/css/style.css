@@ -4766,7 +4766,7 @@ form {
     font-size: 13px;
     font-family: 'UbuntuRegular', sans-serif;
     height: 51px;
-    padding: 14px 22px 17px;
+    padding: 14px 24px 17px;
     white-space: nowrap;
 }
 
@@ -4870,11 +4870,11 @@ form {
 /*	boxShop																	  */
 /* -------------------------------------------------------------------------- */
 #boxShop {
-    background: #2c2c2c;
+    background: #2c2c2c;code
     border-left: 1px solid #4c4c4c;
     width: 110px;
     height: 82px;
-    float: left;
+    float: right;
 }
 
 #boxShop .icon {
@@ -4882,7 +4882,7 @@ form {
     width: 25px;
     height: 26px;
     margin: 14px auto 7px;
-    background: url('../images/icons/menu/icons-nav.png') -1259px 0 no-repeat;
+    background: transparent;
 }
 
 #boxShop .field-select {

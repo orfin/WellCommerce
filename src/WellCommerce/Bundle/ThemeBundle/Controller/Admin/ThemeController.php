@@ -19,6 +19,8 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
  *
  * @package WellCommerce\Bundle\ThemeBundle\Controller\Admin
  * @author  Adam Piotrowski <adam@wellcommerce.org>
+ *
+ * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class ThemeController extends AbstractAdminController
 {

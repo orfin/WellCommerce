@@ -20,6 +20,8 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
  *
  * @package WellCommerce\Bundle\AttributeBundle\Controller\Admin
  * @author  Adam Piotrowski <adam@wellcommerce.org>
+ *
+ * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class AttributeGroupController extends AbstractAdminController
 {

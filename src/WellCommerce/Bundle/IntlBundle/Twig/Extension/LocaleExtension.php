@@ -62,17 +62,4 @@ class LocaleExtension extends \Twig_Extension
     {
         return 'locale';
     }
-
-    private function getLocales()
-    {
-        $collection = $this->repository->getAvailableLocales();
-        $locales    = [];
-        foreach ($collection as $item) {
-            $locales[$item['id']] = [
-                'code' => $item['code'],
-            ];
-        }
-
-        return $locales;
-    }
 }

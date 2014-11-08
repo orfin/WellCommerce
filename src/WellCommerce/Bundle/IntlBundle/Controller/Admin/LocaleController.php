@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\IntlBundle\Controller\Admin;
 
+use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
@@ -19,8 +20,13 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
  *
  * @package WellCommerce\Bundle\IntlBundle\Controller
  * @author  Adam Piotrowski <adam@wellcommerce.org>
+ *
+ * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class LocaleController extends AbstractAdminController
 {
 
+    public function switchAction(Request $request){
+
+    }
 }

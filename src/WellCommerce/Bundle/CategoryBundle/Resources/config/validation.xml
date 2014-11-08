@@ -11,10 +11,6 @@
             <constraint name="NotNull">
                 <option name="message">category.hierarchy.not_null</option>
             </constraint>
-            <constraint name="Type">
-                <option name="type">integer</option>
-                <option name="message">category.hierarchy.type</option>
-            </constraint>
         </property>
     </class>
 

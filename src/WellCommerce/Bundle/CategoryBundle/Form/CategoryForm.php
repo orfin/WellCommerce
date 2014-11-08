@@ -13,7 +13,6 @@ namespace WellCommerce\Bundle\CategoryBundle\Form;
 
 use WellCommerce\Bundle\FormBundle\Form\AbstractForm;
 use WellCommerce\Bundle\FormBundle\Form\Builder\FormBuilderInterface;
-use WellCommerce\Bundle\FormBundle\Form\DataTransformer\CollectionToArrayTransformer;
 use WellCommerce\Bundle\FormBundle\Form\DataTransformer\EntityToIdentifierTransformer;
 use WellCommerce\Bundle\FormBundle\Form\FormInterface;
 
@@ -34,31 +33,31 @@ class CategoryForm extends AbstractForm implements FormInterface
 
         $requiredData = $form->addChild($builder->getElement('fieldset', [
             'name'  => 'required_data',
-            'label' => $this->trans('form.required_data')
+            'label' => $this->trans('fieldset.required')
         ]));
 
         $languageData = $requiredData->addChild($builder->getElement('fieldset_language', [
             'name'  => 'translations',
-            'label' => $this->trans('form.required_data.language_data.label'),
+            'label' => $this->trans('fieldset.translations'),
         ]));
 
         $languageData->addChild($builder->getElement('text_field', [
             'name'  => 'name',
-            'label' => $this->trans('category.name'),
+            'label' => $this->trans('category.name.label'),
         ]));
 
         $requiredData->addChild($builder->getElement('text_field', [
             'name'  => 'hierarchy',
-            'label' => $this->trans('Hierarchy'),
+            'label' => $this->trans('category.hierarchy.label'),
         ]));
 
         $requiredData->addChild($builder->getElement('tip', [
-            'tip' => '<p>' . $this->trans('Choose parent category') . '</p>'
+            'tip' => '<p>' . $this->trans('category.parent.help') . '</p>'
         ]));
 
         $requiredData->addChild($builder->getElement('tree', [
             'name'        => 'parent',
-            'label'       => $this->trans('category.parent'),
+            'label'       => $this->trans('category.parent.label'),
             'choosable'   => true,
             'selectable'  => false,
             'sortable'    => false,
@@ -68,7 +67,51 @@ class CategoryForm extends AbstractForm implements FormInterface
             'transformer' => new EntityToIdentifierTransformer($this->get('category.repository'))
         ]));
 
-        $form->addFilter('no_code');
+        $descriptionData = $form->addChild($builder->getElement('fieldset', [
+            'name'  => 'description_data',
+            'label' => $this->trans('fieldset.description')
+        ]));
+
+        $languageData = $descriptionData->addChild($builder->getElement('fieldset_language', [
+            'name'  => 'translations',
+            'label' => $this->trans('fieldset.translations'),
+        ]));
+
+        $languageData->addChild($builder->getElement('rich_text_editor', [
+            'name'  => 'shortDescription',
+            'label' => $this->trans('category.short_description.label')
+        ]));
+
+        $languageData->addChild($builder->getElement('rich_text_editor', [
+            'name'  => 'description',
+            'label' => $this->trans('category.description.label'),
+        ]));
+
+        $seoData = $form->addChild($builder->getElement('fieldset', [
+            'name'  => 'seo_data',
+            'label' => $this->trans('fieldset.seo')
+        ]));
+
+        $languageData = $seoData->addChild($builder->getElement('fieldset_language', [
+            'name'  => 'translations',
+            'label' => $this->trans('fieldset.translations'),
+        ]));
+
+        $languageData->addChild($builder->getElement('text_field', [
+            'name'  => 'metaTitle',
+            'label' => $this->trans('category.meta_title.label')
+        ]));
+
+        $languageData->addChild($builder->getElement('text_field', [
+            'name'  => 'metaKeywords',
+            'label' => $this->trans('category.meta_keywords.label'),
+        ]));
+
+        $languageData->addChild($builder->getElement('text_area', [
+            'name'  => 'metaDescription',
+            'label' => $this->trans('category.meta_description.label'),
+        ]));
+
         $form->addFilter('trim');
         $form->addFilter('secure');
 
