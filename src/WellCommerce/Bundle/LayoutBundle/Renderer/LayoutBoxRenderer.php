@@ -101,7 +101,7 @@ class LayoutBoxRenderer extends AbstractContainer implements LayoutBoxRendererIn
     {
         $service    = $this->configurators->get($box->getBoxType())->getControllerService();
         $controller = $this->container->get($service);
-        $controller->setBoxSettings($box->getSettings());
+//        $controller->setBoxSettings($box->getSettings());
 
         return sprintf('%s:%s', $service, $this->getControllerAction($controller));
     }

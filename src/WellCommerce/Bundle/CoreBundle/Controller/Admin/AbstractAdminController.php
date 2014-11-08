@@ -25,6 +25,8 @@ use WellCommerce\Bundle\FormBundle\Form\FormInterface;
  *
  * @package WellCommerce\Bundle\CoreBundle\Controller
  * @author  Adam Piotrowski <adam@wellcommerce.org>
+ *
+ * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 abstract class AbstractAdminController extends AbstractController implements AdminControllerInterface
 {

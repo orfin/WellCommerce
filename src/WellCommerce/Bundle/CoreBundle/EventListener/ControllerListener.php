@@ -54,7 +54,7 @@ class ControllerListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            KernelEvents::CONTROLLER => ['onKernelController', -256],
+            KernelEvents::CONTROLLER => ['onKernelController', -512],
             KernelEvents::VIEW       => 'onKernelView',
         ];
     }

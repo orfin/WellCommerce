@@ -20,6 +20,8 @@ use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
  *
  * @package WellCommerce\Bundle\CategoryBundle\Controller\Box
  * @author  Adam Piotrowski <adam@wellcommerce.org>
+ *
+ * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class CategoryBoxController extends AbstractBoxController implements BoxControllerInterface
 {
