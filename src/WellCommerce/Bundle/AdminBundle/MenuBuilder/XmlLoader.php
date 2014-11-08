@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\AdminBundle\MenuBuilder;
 
 use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\Config\Util\XmlUtils;
+use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 
 /**
  * Class XmlLoader
@@ -87,29 +88,8 @@ class XmlLoader
             'name'       => (string)$item->name,
             'class'      => isset($item->class) ? (string)$item->class : '',
             'link'       => (string)$item->route,
-            'path'       => $this->convertDotNotation((string)$item->path),
+            'path'       => Helper::convertDotNotation((string)$item->path),
             'sort_order' => (int)$item->sort_order,
         ]));
     }
-
-    /**
-     * Converts dot notation to proper path notation
-     * Example: menu.catalog.item > [menu][catalog][item]
-     *
-     * @param $path
-     *
-     * @return string
-     */
-    private function convertDotNotation($path)
-    {
-        $elements = explode('.', $path);
-        $path     = array_map(
-            function ($element) {
-                return '[' . $element . ']';
-            },
-            $elements
-        );
-
-        return implode('', $path);
-    }
-} 
+}

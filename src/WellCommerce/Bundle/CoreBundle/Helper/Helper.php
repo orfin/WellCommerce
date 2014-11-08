@@ -61,4 +61,25 @@ class Helper extends AbstractContainer
 
         return str_replace(' ', '', $value);
     }
+
+    /**
+     * Converts dot-notation to proper property path notation
+     * Example: menu.catalog.item > [menu][catalog][item]
+     *
+     * @param $path
+     *
+     * @return string
+     */
+    public static function convertDotNotation($path)
+    {
+        $elements = explode('.', $path);
+        $path     = array_map(
+            function ($element) {
+                return '[' . $element . ']';
+            },
+            $elements
+        );
+
+        return implode('', $path);
+    }
 }

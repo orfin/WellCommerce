@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\IntlBundle\Controller\Admin;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Yaml\Yaml;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
+use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 
 /**
  * Class DictionaryController
@@ -36,7 +37,7 @@ class DictionaryController extends AbstractAdminController
         $accessor     = $this->getPropertyAccessor();
 
         foreach ($result as $translation) {
-            $propertyPath = '[' . $translation['locale'] . ']' . $this->convertDotNotation($translation['identifier']);
+            $propertyPath = '[' . $translation['locale'] . ']' . Helper::convertDotNotation($translation['identifier']);
             $accessor->setValue($translations, $propertyPath, $translation['translation']);
         }
 
@@ -53,18 +54,5 @@ class DictionaryController extends AbstractAdminController
         $this->manager->getFlashHelper()->addSuccess('admin.translation.synchronize.success');
 
         return $this->manager->getRedirectHelper()->redirectToAction('index');
-    }
-
-    private function convertDotNotation($path)
-    {
-        $elements = explode('.', $path);
-        $path     = array_map(
-            function ($element) {
-                return '[' . $element . ']';
-            },
-            $elements
-        );
-
-        return implode('', $path);
     }
 }
