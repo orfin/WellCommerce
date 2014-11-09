@@ -60,5 +60,9 @@
             <argument type="service" id="locale.repository"/>
             <tag name="twig.extension"/>
         </service>
+
+        <service id="locale.orm.listener" class="WellCommerce\Bundle\IntlBundle\EventListener\LocaleORMListener">
+            <tag name="doctrine.event_listener" event="loadClassMetadata" />
+        </service>
     </services>
 </container>

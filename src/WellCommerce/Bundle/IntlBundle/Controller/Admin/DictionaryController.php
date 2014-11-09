@@ -27,11 +27,18 @@ use WellCommerce\Bundle\CoreBundle\Helper\Helper;
  */
 class DictionaryController extends AbstractAdminController
 {
+    private $fsTranslations = [];
+    private $dbTranslations = [];
+
     /**
-     * Synchronizes translations from database to filesystem
+     * Synchronizes translations bi-directional. First fetches translations from filesystem than from database.
+     * Merges translations into one array and synchronizes database and filesystem.
      */
     public function synchronizeAction()
     {
+        $this->getFilesystemTranslations();
+        $this->getDbTranslations();
+
         $result       = $this->get('dictionary.repository')->getDictionaryTranslations();
         $translations = [];
         $accessor     = $this->getPropertyAccessor();
@@ -55,5 +62,33 @@ class DictionaryController extends AbstractAdminController
         $this->manager->getFlashHelper()->addSuccess('admin.translation.synchronize.success');
 
         return $this->manager->getRedirectHelper()->redirectToAction('index');
+    }
+
+    private function getFilesystemTranslations()
+    {
+        $locales   = $this->get('locale.repository')->getAvailableLocales();
+        $fs        = new Filesystem();
+        $kernelDir = $this->get('kernel')->getRootDir();
+        $path      = $kernelDir . DIRECTORY_SEPARATOR . 'Resources' . DIRECTORY_SEPARATOR . 'translations';
+
+        foreach ($locales as $locale) {
+            $filename = sprintf('wellcommerce.%s.yml', $locale['code']);
+            if ($fs->exists($path . DIRECTORY_SEPARATOR . $filename)) {
+                $contents                              = file_get_contents($path . DIRECTORY_SEPARATOR . $filename);
+                $result                                = Yaml::parse($contents);
+                $this->fsTranslations[$locale['code']] = $result;
+            }
+        }
+    }
+
+    private function getDbTranslations()
+    {
+        $result   = $this->get('dictionary.repository')->getDictionaryTranslations();
+        $accessor = $this->getPropertyAccessor();
+
+        foreach ($result as $translation) {
+            $propertyPath = '[' . $translation['locale'] . ']' . Helper::convertDotNotation($translation['identifier']);
+            $accessor->setValue($this->dbTranslations, $propertyPath, $translation['translation']);
+        }
     }
 }

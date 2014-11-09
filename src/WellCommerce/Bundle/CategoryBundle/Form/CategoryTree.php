@@ -41,7 +41,7 @@ class CategoryTree extends AbstractForm implements FormInterface
             'label'              => $this->trans('Categories'),
             'add_item_prompt'    => $this->trans('Category name'),
             'addLabel'           => $this->trans('Add category'),
-            'sortable'           => true,
+            'sortable'           => false,
             'selectable'         => false,
             'clickable'          => true,
             'deletable'          => true,

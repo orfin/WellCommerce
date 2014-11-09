@@ -1,15 +1,34 @@
 #This file was auto-generated. Please do not change it directly.
 admin:
     menu:
+        attribute_group: 'Grupy wariantów'
+        availability: Dostępność
         catalog: Katalog
         category: Kategorie
+        client: Klienci
+        client_group: 'Grupy klientów'
         cms: CMS
         configuration: Konfiguracja
+        contact: Kontakty
         crm: CRM
+        currency: Waluty
         dashboard: Pulpit
+        deliverer: Dostawcy
+        dictionary: Tłumaczenia
         integration: Integracje
+        layout_box: Boksy
+        locale: Języki
+        localization: Internacjonalizacja
+        media: 'Zarządzanie plikami'
+        news: Aktualności
+        payment_method: 'Metody płatności'
+        producer: Producenci
         product: Produkty
+        product_status: 'Statusy produktów'
         promotion: Promocje
         promotions: Promocje
         reports: Raporty
         sales: Sprzedaż
+        tax: Podatki
+        theme: 'Szablony sklepu'
+        user_management: Administratorzy

@@ -89,9 +89,9 @@ wellcommerce_theme:
     prefix:   /admin/theme
     options: { i18n: false }
 
-wellcommerce_news:
-    resource: "@WellCommerceNewsBundle/Resources/config/routing.xml"
-    prefix:   /admin/news
+wellcommerce_cms:
+    resource: "@WellCommerceCmsBundle/Resources/config/routing.xml"
+    prefix:   /admin/cms
     options: { i18n: false }
 
 wellcommerce_payment:

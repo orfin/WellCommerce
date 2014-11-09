@@ -22,6 +22,7 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * @ORM\Table()
+ * @ORM\HasLifecycleCallbacks
  * @ORM\Entity(repositoryClass="WellCommerce\Bundle\IntlBundle\Repository\LocaleRepository")
  */
 class Locale
@@ -41,7 +42,7 @@ class Locale
     /**
      * @var string
      *
-     * @ORM\Column(name="code", type="string", length=12)
+     * @ORM\Column(name="code", type="string")
      */
     private $code;
 
