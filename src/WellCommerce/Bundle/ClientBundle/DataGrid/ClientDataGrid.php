@@ -33,7 +33,7 @@ class ClientDataGrid extends AbstractDataGrid implements DataGridInterface
         $collection->add(new Column([
             'id'         => 'id',
             'source'     => 'client.id',
-            'caption'    => $this->trans('Id'),
+            'caption'    => $this->trans('client.id'),
             'sorting'    => [
                 'default_order' => ColumnInterface::SORT_DIR_DESC
             ],
@@ -49,7 +49,7 @@ class ClientDataGrid extends AbstractDataGrid implements DataGridInterface
         $collection->add(new Column([
             'id'         => 'firstName',
             'source'     => 'client.firstName',
-            'caption'    => $this->trans('First name'),
+            'caption'    => $this->trans('client.first_name'),
             'appearance' => [
                 'width' => 70,
                 'align' => ColumnInterface::ALIGN_LEFT
@@ -62,7 +62,7 @@ class ClientDataGrid extends AbstractDataGrid implements DataGridInterface
         $collection->add(new Column([
             'id'         => 'lastName',
             'source'     => 'client.lastName',
-            'caption'    => $this->trans('Last name'),
+            'caption'    => $this->trans('client.last_name'),
             'appearance' => [
                 'width' => 70,
                 'align' => ColumnInterface::ALIGN_LEFT
@@ -70,6 +70,48 @@ class ClientDataGrid extends AbstractDataGrid implements DataGridInterface
             'filter'     => [
                 'type' => ColumnInterface::FILTER_INPUT
             ]
+        ]));
+
+        $collection->add(new Column([
+            'id'         => 'email',
+            'source'     => 'client.email',
+            'caption'    => $this->trans('client.email'),
+            'appearance' => [
+                'width' => 70,
+                'align' => ColumnInterface::ALIGN_LEFT
+            ],
+            'filter'     => [
+                'type' => ColumnInterface::FILTER_INPUT
+            ]
+        ]));
+
+        $collection->add(new Column([
+            'id'         => 'phone',
+            'source'     => 'client.phone',
+            'caption'    => $this->trans('client.phone'),
+            'appearance' => [
+                'width' => 70,
+                'align' => ColumnInterface::ALIGN_LEFT
+            ],
+            'filter'     => [
+                'type' => ColumnInterface::FILTER_INPUT
+            ]
+        ]));
+
+        $collection->add(new Column([
+            'id'              => 'createdAt',
+            'source'          => 'client.createdAt',
+            'caption'         => $this->trans('client.created_at'),
+            'appearance'      => [
+                'width' => 70,
+                'align' => ColumnInterface::ALIGN_LEFT
+            ],
+            'filter'          => [
+                'type' => ColumnInterface::FILTER_BETWEEN
+            ],
+            'process_function' => function (\DateTime $createdAt) {
+                return $createdAt->format('Y-m-d H:i:s');
+            }
         ]));
     }
 }

@@ -32,20 +32,16 @@ class LoadCurrencyData extends AbstractDataFixture implements FixtureInterface, 
     public function load(ObjectManager $manager)
     {
         $pl = new Currency();
-        $pl->setCode('pl');
+        $pl->setCode('PLN');
         $manager->persist($pl);
 
         $en = new Currency();
-        $en->setCode('en');
+        $en->setCode('EUR');
         $manager->persist($en);
 
         $de = new Currency();
-        $de->setCode('de');
+        $de->setCode('USD');
         $manager->persist($de);
-
-        $fr = new Currency();
-        $fr->setCode('fr');
-        $manager->persist($fr);
 
         $manager->flush();
     }

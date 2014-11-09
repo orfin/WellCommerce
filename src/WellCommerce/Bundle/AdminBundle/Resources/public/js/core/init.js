@@ -22,4 +22,7 @@ $(document).ready(function() {
             $('> ul', this).removeClass('down').slideUp();
         }
     });
+
+    $('.GF_Datagrid_Col_createdAt .from').datepicker({dateFormat: 'yy-mm-dd 00:00:00'});
+    $('.GF_Datagrid_Col_createdAt .to').datepicker({dateFormat: 'yy-mm-dd 23:59:59'});
 });

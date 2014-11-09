@@ -42,12 +42,13 @@ class DictionaryController extends AbstractAdminController
         }
 
         $kernelDir = $this->get('kernel')->getRootDir();
-        $path      = $kernelDir . 'Resources' . DIRECTORY_SEPARATOR . 'translations';
+        $path      = $kernelDir . DIRECTORY_SEPARATOR . 'Resources' . DIRECTORY_SEPARATOR . 'translations';
         $fs        = new Filesystem();
 
         foreach ($translations as $locale => $nodes) {
             $filename = sprintf('wellcommerce.%s.yml', $locale);
-            $content  = Yaml::dump($nodes, 6);
+            $content  = '#This file was auto-generated. Please do not change it directly.' . PHP_EOL;
+            $content .= Yaml::dump($nodes, 6);
             $fs->dumpFile($path . DIRECTORY_SEPARATOR . $filename, $content);
         }
 

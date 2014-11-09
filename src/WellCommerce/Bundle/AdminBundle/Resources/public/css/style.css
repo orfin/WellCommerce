@@ -4784,11 +4784,6 @@ form {
 
 #navigation li.active #menu-dashboard:after { display: none; }
 
-/*#navigation > li:hover > ul,
-#navigation > li > ul > li:hover > ul {
-	display: block;
-}*/
-
 #navigation > li > ul.down {
     border-top: 2px solid #2dc0c9;
 }
@@ -4854,17 +4849,6 @@ form {
 #navigation ul li:hover li:first-child {
     border-left: 1px solid #4a4a4a;
 }
-
-#menu-dashboard { width: 70px; }
-#menu-catalog { width: 56px; }
-#menu-promotion { width: 80px; }
-#menu-sales { width: 37px; }
-#menu-reports { width: 58px; }
-#menu-crm { width: 35px; }
-#menu-cms { width: 32px; }
-#menu-layout { width: 103px; }
-#menu-external { width: 72px; }
-#menu-configuration { width: 91px; }
 
 /* -------------------------------------------------------------------------- */
 /*	boxShop																	  */

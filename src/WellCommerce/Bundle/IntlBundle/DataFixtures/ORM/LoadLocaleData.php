@@ -39,14 +39,6 @@ class LoadLocaleData extends AbstractDataFixture implements FixtureInterface, Or
         $en->setCode('en');
         $manager->persist($en);
 
-        $de = new Locale();
-        $de->setCode('de');
-        $manager->persist($de);
-
-        $fr = new Locale();
-        $fr->setCode('fr');
-        $manager->persist($fr);
-
         $manager->flush();
     }
 
