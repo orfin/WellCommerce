@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<items>
+    <item>
+        <id>news</id>
+        <name>admin.menu.news</name>
+        <route>admin.news.index</route>
+        <path>menu.cms.news</path>
+        <sort_order>20</sort_order>
+    </item>
+</items>
