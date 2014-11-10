@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="route.repository" class="WellCommerce\Bundle\RoutingBundle\Repository\RouteRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceRoutingBundle:Route</argument>
+        </service>
+
+        <service id="routable.subscriber" class="WellCommerce\Bundle\RoutingBundle\EventListener\RoutableSubscriber">
+            <tag name="doctrine.event_subscriber" />
+        </service>
+
+        <service id="router.provider.endpoint" class="WellCommerce\Bundle\RoutingBundle\Routing\RouteProvider">
+            <argument type="service" id="route.repository" />
+            <argument type="service" id="route.generator.collection" />
+        </service>
+
+        <service id="route.generator.collection" class="WellCommerce\Bundle\RoutingBundle\Generator\RouteGeneratorCollection" />
+    </services>
+</container>
