@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2b1fc34447d608f426db99e76276316e",
+    "hash": "20272ce3c2090c9c5dc8459956f9c8bd",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -704,12 +704,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/migrations.git",
-                "reference": "1a9dffa64e33fdc10f4b4c3f5d7230b74d4a1021"
+                "reference": "f4fe9d9cc21a711d89d91d29c4a4e7945289cdd0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/migrations/zipball/1a9dffa64e33fdc10f4b4c3f5d7230b74d4a1021",
-                "reference": "1a9dffa64e33fdc10f4b4c3f5d7230b74d4a1021",
+                "url": "https://api.github.com/repos/doctrine/migrations/zipball/f4fe9d9cc21a711d89d91d29c4a4e7945289cdd0",
+                "reference": "f4fe9d9cc21a711d89d91d29c4a4e7945289cdd0",
                 "shasum": ""
             },
             "require": {
@@ -754,7 +754,7 @@
                 "database",
                 "migrations"
             ],
-            "time": "2014-08-18 18:03:07"
+            "time": "2014-10-30 14:49:25"
         },
         {
             "name": "doctrine/orm",
@@ -971,12 +971,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "b6d383161d84092a7a9f5b14db6e2637edbd3a6e"
+                "reference": "8f673c9e31c1aa5ce1e4d289be55c2384ee0ffd2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/b6d383161d84092a7a9f5b14db6e2637edbd3a6e",
-                "reference": "b6d383161d84092a7a9f5b14db6e2637edbd3a6e",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/8f673c9e31c1aa5ce1e4d289be55c2384ee0ffd2",
+                "reference": "8f673c9e31c1aa5ce1e4d289be55c2384ee0ffd2",
                 "shasum": ""
             },
             "require": {
@@ -998,7 +998,7 @@
                     "Faker\\PHPUnit": "test/"
                 }
             },
-            "notification-url": "http://packagist.org/downloads/",
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1013,7 +1013,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2014-10-14 14:30:56"
+            "time": "2014-11-07 08:38:46"
         },
         {
             "name": "imagine/imagine",
@@ -1212,74 +1212,6 @@
                 "sql"
             ],
             "time": "2014-01-12 16:20:24"
-        },
-        {
-            "name": "jms/i18n-routing-bundle",
-            "version": "dev-master",
-            "target-dir": "JMS/I18nRoutingBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/schmittjoh/JMSI18nRoutingBundle.git",
-                "reference": "6f69173307fdb45f2d2878d0ca8baca67c8e09dd"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/JMSI18nRoutingBundle/zipball/6f69173307fdb45f2d2878d0ca8baca67c8e09dd",
-                "reference": "6f69173307fdb45f2d2878d0ca8baca67c8e09dd",
-                "shasum": ""
-            },
-            "require": {
-                "jms/translation-bundle": "~1.0",
-                "symfony/framework-bundle": "~2.1"
-            },
-            "require-dev": {
-                "jms/di-extra-bundle": "*",
-                "sensio/framework-extra-bundle": "<2.1.5",
-                "symfony/browser-kit": "<2.1.5",
-                "symfony/class-loader": "<2.1.5",
-                "symfony/css-selector": "<2.1.5",
-                "symfony/finder": "<2.1.5",
-                "symfony/form": "<2.1.5",
-                "symfony/framework-bundle": "<2.1.5",
-                "symfony/http-foundation": "<2.1.5",
-                "symfony/http-kernel": "<2.1.5",
-                "symfony/process": "<2.1.5",
-                "symfony/routing": "<2.1.5",
-                "symfony/twig-bundle": "<2.1.5",
-                "symfony/validator": "<2.1.5",
-                "symfony/yaml": "<2.1.5"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "JMS\\I18nRoutingBundle": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache2"
-            ],
-            "authors": [
-                {
-                    "name": "Johannes Schmitt",
-                    "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
-                    "role": "Developer of wrapped JMSSerializerBundle"
-                }
-            ],
-            "description": "This bundle allows you to create i18n routes.",
-            "homepage": "http://jmsyst.com/bundles/JMSI18nRoutingBundle",
-            "keywords": [
-                "multilanguage",
-                "routing",
-                "translation"
-            ],
-            "time": "2014-03-22 05:31:08"
         },
         {
             "name": "jms/metadata",
@@ -1509,91 +1441,17 @@
             "time": "2013-12-05 14:36:11"
         },
         {
-            "name": "jms/translation-bundle",
-            "version": "1.1.0",
-            "target-dir": "JMS/TranslationBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/schmittjoh/JMSTranslationBundle.git",
-                "reference": "6f03035a38badaf8c48767c7664c3196df1eebdf"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/JMSTranslationBundle/zipball/6f03035a38badaf8c48767c7664c3196df1eebdf",
-                "reference": "6f03035a38badaf8c48767c7664c3196df1eebdf",
-                "shasum": ""
-            },
-            "require": {
-                "nikic/php-parser": "0.9.1",
-                "symfony/console": "*",
-                "symfony/framework-bundle": "~2.1"
-            },
-            "conflict": {
-                "twig/twig": "1.10.2"
-            },
-            "require-dev": {
-                "jms/di-extra-bundle": ">=1.1",
-                "sensio/framework-extra-bundle": "*",
-                "symfony/browser-kit": "*",
-                "symfony/class-loader": "*",
-                "symfony/css-selector": "*",
-                "symfony/finder": "*",
-                "symfony/form": "*",
-                "symfony/process": "*",
-                "symfony/security": "*",
-                "symfony/twig-bundle": "*",
-                "symfony/validator": "*",
-                "symfony/yaml": "*"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "JMS\\TranslationBundle": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache2"
-            ],
-            "authors": [
-                {
-                    "name": "Johannes Schmitt",
-                    "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
-                    "role": "Developer of wrapped JMSSerializerBundle"
-                }
-            ],
-            "description": "Puts the Symfony2 Translation Component on steroids",
-            "homepage": "http://jmsyst.com/bundles/JMSTranslationBundle",
-            "keywords": [
-                "extract",
-                "extraction",
-                "i18n",
-                "interface",
-                "multilanguage",
-                "translation",
-                "ui",
-                "webinterface"
-            ],
-            "time": "2013-06-08 14:08:19"
-        },
-        {
             "name": "knplabs/doctrine-behaviors",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/DoctrineBehaviors.git",
-                "reference": "a10737debab296aadbf3ea9251b6de2ff1a2397f"
+                "reference": "2d476ccddeacac320da7d119c693f8b54f6232ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/DoctrineBehaviors/zipball/a10737debab296aadbf3ea9251b6de2ff1a2397f",
-                "reference": "a10737debab296aadbf3ea9251b6de2ff1a2397f",
+                "url": "https://api.github.com/repos/KnpLabs/DoctrineBehaviors/zipball/2d476ccddeacac320da7d119c693f8b54f6232ce",
+                "reference": "2d476ccddeacac320da7d119c693f8b54f6232ce",
                 "shasum": ""
             },
             "require": {
@@ -1617,13 +1475,13 @@
                     "Knp\\DoctrineBehaviors\\": "src/"
                 }
             },
-            "notification-url": "http://packagist.org/downloads/",
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "authors": [
                 {
-                    "name": "Knplabs",
+                    "name": "KnpLabs",
                     "homepage": "http://knplabs.com"
                 }
             ],
@@ -1639,7 +1497,7 @@
                 "translatable",
                 "tree"
             ],
-            "time": "2014-10-17 19:51:18"
+            "time": "2014-10-22 08:28:19"
         },
         {
             "name": "kriswallsmith/assetic",
@@ -1862,71 +1720,33 @@
             "time": "2014-09-30 13:30:58"
         },
         {
-            "name": "nikic/php-parser",
-            "version": "v0.9.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "b1cc9ce676b4350b23d0fafc8244d08eee2fe287"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/b1cc9ce676b4350b23d0fafc8244d08eee2fe287",
-                "reference": "b1cc9ce676b4350b23d0fafc8244d08eee2fe287",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.2"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "PHPParser": "lib/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD"
-            ],
-            "authors": [
-                {
-                    "name": "Nikita Popov"
-                }
-            ],
-            "description": "A PHP parser written in PHP",
-            "keywords": [
-                "parser",
-                "php"
-            ],
-            "time": "2012-04-23 22:52:11"
-        },
-        {
             "name": "pagerfanta/pagerfanta",
-            "version": "v1.0.2",
+            "version": "v1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/whiteoctober/Pagerfanta.git",
-                "reference": "ac1edfdf81c91a0f1471769071011ebf9b055421"
+                "reference": "a874d3612d954dcbbb49e5ffe178890918fb76fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/whiteoctober/Pagerfanta/zipball/ac1edfdf81c91a0f1471769071011ebf9b055421",
-                "reference": "ac1edfdf81c91a0f1471769071011ebf9b055421",
+                "url": "https://api.github.com/repos/whiteoctober/Pagerfanta/zipball/a874d3612d954dcbbb49e5ffe178890918fb76fb",
+                "reference": "a874d3612d954dcbbb49e5ffe178890918fb76fb",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
             },
             "require-dev": {
-                "doctrine/mongodb-odm": "1.0.*@dev",
-                "doctrine/orm": "2.3.*",
+                "doctrine/orm": "~2.3",
                 "doctrine/phpcr-odm": "1.*",
                 "jackalope/jackalope-doctrine-dbal": "1.*",
-                "jmikola/geojson": "1.0.*",
-                "mandango/mandango": "1.0.*@dev",
-                "phpunit/phpunit": "3.7.*",
+                "jmikola/geojson": "~1.0",
+                "mandango/mandango": "~1.0@dev",
+                "mandango/mondator": "~1.0@dev",
+                "phpunit/phpunit": "~4",
                 "propel/propel1": "~1.6",
-                "solarium/solarium": "3.1.*"
+                "ruflin/elastica": "~1.3",
+                "solarium/solarium": "~3.1"
             },
             "suggest": {
                 "doctrine/mongodb-odm": "To use the DoctrineODMMongoDBAdapter.",
@@ -1954,8 +1774,7 @@
             "authors": [
                 {
                     "name": "Pablo Díez",
-                    "email": "pablodip@gmail.com",
-                    "homepage": "http://github.com/pablodip"
+                    "email": "pablodip@gmail.com"
                 }
             ],
             "description": "Pagination for PHP 5.3",
@@ -1965,7 +1784,7 @@
                 "paginator",
                 "paging"
             ],
-            "time": "2014-06-02 09:21:14"
+            "time": "2014-10-06 10:57:25"
         },
         {
             "name": "phpcollection/phpcollection",
@@ -2106,17 +1925,17 @@
         },
         {
             "name": "sensio/distribution-bundle",
-            "version": "v3.0.6",
+            "version": "v3.0.8",
             "target-dir": "Sensio/Bundle/DistributionBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioDistributionBundle.git",
-                "reference": "e20461e4f8e1afd68f36cf90bdccc06f7aa6a6c2"
+                "reference": "bc5e96bb4faf6bee7121085951d11b89488952f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/e20461e4f8e1afd68f36cf90bdccc06f7aa6a6c2",
-                "reference": "e20461e4f8e1afd68f36cf90bdccc06f7aa6a6c2",
+                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/bc5e96bb4faf6bee7121085951d11b89488952f5",
+                "reference": "bc5e96bb4faf6bee7121085951d11b89488952f5",
                 "shasum": ""
             },
             "require": {
@@ -2124,7 +1943,7 @@
                 "sensiolabs/security-checker": "~2.0",
                 "symfony/class-loader": "~2.2",
                 "symfony/form": "~2.2",
-                "symfony/framework-bundle": "~2.4",
+                "symfony/framework-bundle": "~2.3",
                 "symfony/process": "~2.2",
                 "symfony/validator": "~2.2",
                 "symfony/yaml": "~2.2"
@@ -2155,7 +1974,7 @@
                 "configuration",
                 "distribution"
             ],
-            "time": "2014-09-24 14:47:46"
+            "time": "2014-11-03 21:16:34"
         },
         {
             "name": "sensio/framework-extra-bundle",
@@ -2310,6 +2129,128 @@
             "time": "2014-10-04 05:53:18"
         },
         {
+            "name": "symfony-cmf/routing",
+            "version": "1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony-cmf/Routing.git",
+                "reference": "8e87981d72c6930a27585dcd3119f3199f6cb2a6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony-cmf/Routing/zipball/8e87981d72c6930a27585dcd3119f3199f6cb2a6",
+                "reference": "8e87981d72c6930a27585dcd3119f3199f6cb2a6",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "psr/log": "~1.0",
+                "symfony/http-kernel": "~2.2",
+                "symfony/routing": "~2.2"
+            },
+            "require-dev": {
+                "symfony/config": "~2.2",
+                "symfony/dependency-injection": "~2.0@stable",
+                "symfony/event-dispatcher": "~2.1"
+            },
+            "suggest": {
+                "symfony/event-dispatcher": "DynamicRouter can optionally trigger an event at the start of matching. Minimal version ~2.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Cmf\\Component\\Routing\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Symfony CMF Community",
+                    "homepage": "https://github.com/symfony-cmf/Routing/contributors"
+                }
+            ],
+            "description": "Extends the Symfony2 routing component for dynamic routes and chaining several routers",
+            "homepage": "http://cmf.symfony.com",
+            "keywords": [
+                "database",
+                "routing"
+            ],
+            "time": "2014-10-20 20:55:17"
+        },
+        {
+            "name": "symfony-cmf/routing-bundle",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony-cmf/RoutingBundle.git",
+                "reference": "e557c056ecd61d5b2dbf81fb7919e42e1b93ce9f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony-cmf/RoutingBundle/zipball/e557c056ecd61d5b2dbf81fb7919e42e1b93ce9f",
+                "reference": "e557c056ecd61d5b2dbf81fb7919e42e1b93ce9f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "symfony-cmf/routing": "~1.2",
+                "symfony/framework-bundle": "~2.3"
+            },
+            "require-dev": {
+                "doctrine/orm": "~2.3",
+                "matthiasnoback/symfony-config-test": "0.*",
+                "matthiasnoback/symfony-dependency-injection-test": "0.*",
+                "sonata-project/doctrine-phpcr-admin-bundle": "~1.1",
+                "symfony-cmf/core-bundle": "~1.1",
+                "symfony-cmf/testing": "~1.1",
+                "symfony/monolog-bundle": "~2.3"
+            },
+            "suggest": {
+                "doctrine/orm": "To enable support for the ORM entities",
+                "doctrine/phpcr-bundle": "To enable support for the PHPCR ODM documents",
+                "doctrine/phpcr-odm": "To enable support for the PHPCR ODM documents",
+                "sonata-project/doctrine-phpcr-admin-bundle": "To provide an admin interface for the PHPCR ODM documents",
+                "symfony-cmf/content-bundle": "To optionally use the configured value for 'content_basepath' from the CoreBundle",
+                "symfony-cmf/core-bundle": "To use the provided Doctrine\\Phpcr documents and for easier configuration"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Cmf\\Bundle\\RoutingBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Symfony CMF Community",
+                    "homepage": "https://github.com/symfony-cmf/RoutingBundle/contributors"
+                }
+            ],
+            "description": "Symfony RoutingBundle",
+            "homepage": "http://cmf.symfony.com",
+            "keywords": [
+                "database",
+                "routing"
+            ],
+            "time": "2014-11-07 15:10:26"
+        },
+        {
             "name": "symfony/assetic-bundle",
             "version": "v2.5.0",
             "source": {
@@ -2372,53 +2313,6 @@
                 "minification"
             ],
             "time": "2014-10-15 12:03:38"
-        },
-        {
-            "name": "symfony/icu",
-            "version": "v1.0.1",
-            "target-dir": "Symfony/Component/Icu",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/Icu.git",
-                "reference": "fdba214b1e087c149843bde976263c53ac10c975"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Icu/zipball/fdba214b1e087c149843bde976263c53ac10c975",
-                "reference": "fdba214b1e087c149843bde976263c53ac10c975",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3",
-                "symfony/intl": "~2.3"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Symfony\\Component\\Icu\\": ""
-                }
-            },
-            "notification-url": "http://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Symfony Community",
-                    "homepage": "http://symfony.com/contributors"
-                },
-                {
-                    "name": "Bernhard Schussek",
-                    "email": "bschussek@gmail.com"
-                }
-            ],
-            "description": "Contains an excerpt of the ICU data and classes to load it.",
-            "homepage": "http://symfony.com",
-            "keywords": [
-                "icu",
-                "intl"
-            ],
-            "time": "2013-10-04 09:12:07"
         },
         {
             "name": "symfony/monolog-bundle",
@@ -2538,23 +2432,22 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v2.5.5",
+            "version": "v2.5.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "2aef97bbc95d0c4ae63537cca81bd6d984427d81"
+                "reference": "1a1b1e528935f15dd76169f8b1dc3ef97f0d6210"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/2aef97bbc95d0c4ae63537cca81bd6d984427d81",
-                "reference": "2aef97bbc95d0c4ae63537cca81bd6d984427d81",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/1a1b1e528935f15dd76169f8b1dc3ef97f0d6210",
+                "reference": "1a1b1e528935f15dd76169f8b1dc3ef97f0d6210",
                 "shasum": ""
             },
             "require": {
                 "doctrine/common": "~2.2",
                 "php": ">=5.3.3",
                 "psr/log": "~1.0",
-                "symfony/icu": "~1.0",
                 "twig/twig": "~1.12"
             },
             "replace": {
@@ -2648,29 +2541,35 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2014-09-28 17:33:53"
+            "time": "2014-10-24 06:55:39"
         },
         {
             "name": "twig/extensions",
-            "version": "v1.1.0",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/fabpot/Twig-extensions.git",
-                "reference": "c0ab818595338dd5569369bfce2552d02cec5d50"
+                "url": "https://github.com/twigphp/Twig-extensions.git",
+                "reference": "8cf4b9fe04077bd54fc73f4fde83347040c3b8cd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Twig-extensions/zipball/c0ab818595338dd5569369bfce2552d02cec5d50",
-                "reference": "c0ab818595338dd5569369bfce2552d02cec5d50",
+                "url": "https://api.github.com/repos/twigphp/Twig-extensions/zipball/8cf4b9fe04077bd54fc73f4fde83347040c3b8cd",
+                "reference": "8cf4b9fe04077bd54fc73f4fde83347040c3b8cd",
                 "shasum": ""
             },
             "require": {
                 "twig/twig": "~1.12"
             },
+            "require-dev": {
+                "symfony/translation": "~2.3"
+            },
+            "suggest": {
+                "symfony/translation": "Allow the time_diff output to be translated"
+            },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1.x-dev"
+                    "dev-master": "1.2.x-dev"
                 }
             },
             "autoload": {
@@ -2685,18 +2584,16 @@
             "authors": [
                 {
                     "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com",
-                    "homepage": "http://fabien.potencier.org",
-                    "role": "Lead Developer"
+                    "email": "fabien@symfony.com"
                 }
             ],
             "description": "Common additional features for Twig that do not directly belong in core",
-            "homepage": "https://github.com/fabpot/Twig-extensions",
+            "homepage": "http://twig.sensiolabs.org/doc/extensions/index.html",
             "keywords": [
                 "i18n",
                 "text"
             ],
-            "time": "2014-07-05 10:01:35"
+            "time": "2014-10-30 14:30:03"
         },
         {
             "name": "twig/twig",
@@ -2816,12 +2713,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/WellCommerce/DataGridBundle.git",
-                "reference": "839262c719776446c920ef87cfd49d649b75060d"
+                "reference": "3a9ccbce434cbb4444a7bc0261e15d60d02190e3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WellCommerce/DataGridBundle/zipball/839262c719776446c920ef87cfd49d649b75060d",
-                "reference": "839262c719776446c920ef87cfd49d649b75060d",
+                "url": "https://api.github.com/repos/WellCommerce/DataGridBundle/zipball/3a9ccbce434cbb4444a7bc0261e15d60d02190e3",
+                "reference": "3a9ccbce434cbb4444a7bc0261e15d60d02190e3",
                 "shasum": ""
             },
             "require": {
@@ -2839,7 +2736,7 @@
                     "WellCommerce\\Bundle\\DataGridBundle": ""
                 }
             },
-            "notification-url": "http://packagist.org/downloads/",
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -2860,7 +2757,7 @@
                 "symfony",
                 "wellcommerce"
             ],
-            "time": "2014-10-15 23:08:08"
+            "time": "2014-10-26 12:50:39"
         },
         {
             "name": "wellcommerce/form-bundle",
@@ -2869,12 +2766,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/WellCommerce/FormBundle.git",
-                "reference": "ccf67da08d92dc0d758eb22fd2f298529545831d"
+                "reference": "a29bdb68298ad2fe421aff8b963483695b6dcd2f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WellCommerce/FormBundle/zipball/ccf67da08d92dc0d758eb22fd2f298529545831d",
-                "reference": "ccf67da08d92dc0d758eb22fd2f298529545831d",
+                "url": "https://api.github.com/repos/WellCommerce/FormBundle/zipball/a29bdb68298ad2fe421aff8b963483695b6dcd2f",
+                "reference": "a29bdb68298ad2fe421aff8b963483695b6dcd2f",
                 "shasum": ""
             },
             "require": {
@@ -2892,7 +2789,7 @@
                     "WellCommerce\\Bundle\\FormBundle": ""
                 }
             },
-            "notification-url": "http://packagist.org/downloads/",
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -2913,7 +2810,7 @@
                 "symfony",
                 "wellcommerce"
             ],
-            "time": "2014-10-15 23:04:01"
+            "time": "2014-11-01 12:05:01"
         },
         {
             "name": "white-october/pagerfanta-bundle",
@@ -2970,12 +2867,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/willdurand/BazingaJsTranslationBundle.git",
-                "reference": "b99f15c7659b324ad336546e0ab5870768a262cf"
+                "reference": "61b8c50ed78f20fc592525b2ad1ecee99060fd92"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/willdurand/BazingaJsTranslationBundle/zipball/b99f15c7659b324ad336546e0ab5870768a262cf",
-                "reference": "b99f15c7659b324ad336546e0ab5870768a262cf",
+                "url": "https://api.github.com/repos/willdurand/BazingaJsTranslationBundle/zipball/61b8c50ed78f20fc592525b2ad1ecee99060fd92",
+                "reference": "61b8c50ed78f20fc592525b2ad1ecee99060fd92",
                 "shasum": ""
             },
             "require": {
@@ -3019,7 +2916,7 @@
                 "symfony",
                 "translation"
             ],
-            "time": "2014-09-29 15:10:10"
+            "time": "2014-11-07 14:22:45"
         },
         {
             "name": "willdurand/jsonp-callback-validator",
@@ -3799,9 +3696,7 @@
             "time": "2014-09-22 14:56:14"
         }
     ],
-    "aliases": [
-
-    ],
+    "aliases": [],
     "minimum-stability": "alpha",
     "stability-flags": {
         "doctrine/migrations": 20,
@@ -3810,10 +3705,10 @@
         "fzaninotto/faker": 20,
         "white-october/pagerfanta-bundle": 20,
         "willdurand/js-translation-bundle": 20,
-        "jms/i18n-routing-bundle": 20,
         "wellcommerce/form-bundle": 20,
         "wellcommerce/datagrid-bundle": 20,
         "wellcommerce/composer-manager-bundle": 20,
+        "symfony-cmf/routing-bundle": 20,
         "doctrine/doctrine-fixtures-bundle": 20,
         "behat/behat": 20,
         "behat/symfony2-extension": 20,
@@ -3823,7 +3718,5 @@
     "platform": {
         "php": ">=5.4"
     },
-    "platform-dev": [
-
-    ]
+    "platform-dev": []
 }

@@ -53,7 +53,6 @@ class LocaleORMListener
 //                'targetEntity' => 'WellCommerce\\Bundle\\IntlBundle\\Entity\\Locale'
 //            ]);
         }
-
     }
 
 } 

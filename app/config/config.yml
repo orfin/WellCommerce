@@ -68,10 +68,14 @@ doctrine_migrations:
 parameters:
     knp.doctrine_behaviors.blameable_listener.user_entity: WellCommerce\Bundle\UserBundle\Entity\User
 
-jms_i18n_routing:
-    default_locale: en
-    locales: [en, de, pl]
-    strategy: prefix
+cmf_routing:
+    chain:
+        routers_by_id:
+            cmf_routing.dynamic_router: 50
+            router.default:             100
+    dynamic:
+        enabled: true
+        route_provider_service_id: router.provider.endpoint
 
 liip_imagine:
     loaders:

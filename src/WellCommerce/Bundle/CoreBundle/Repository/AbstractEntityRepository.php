@@ -88,27 +88,13 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
     /**
      * {@inheritdoc}
      */
-    public function findResource(Request $request, array $criteria = [])
+    public function findResource(Request $request)
     {
-        $params = [];
         if ($request->attributes->has('id')) {
-            $params = [
-                'id' => $request->attributes->get('id')
-            ];
-        }
-        if ($request->attributes->has('slug')) {
-            $params = [
-                'slug' => $request->attributes->get('slug')
-            ];
+            return $this->find($request->attributes->get('id'));
         }
 
-        $criteria = array_merge($params, $criteria);
-
-        if (!$resource = $this->findOneBy($criteria)) {
-            throw new EntityNotFoundException($this->getEntityName());
-        }
-
-        return $resource;
+        throw new EntityNotFoundException($this->getClassName());
     }
 
     /**

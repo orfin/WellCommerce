@@ -7,8 +7,4 @@
     <route id="front.home_page.index" path="/">
         <default key="_controller">web.home_page.controller.front:indexAction</default>
     </route>
-
-    <route id="front.category.index" path="/category/{slug}">
-        <default key="_controller">category.controller.front:indexAction</default>
-    </route>
 </routes>

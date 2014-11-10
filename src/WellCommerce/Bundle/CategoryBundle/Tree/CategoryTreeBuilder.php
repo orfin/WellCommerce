@@ -58,7 +58,8 @@ class CategoryTreeBuilder
                 'name'     => $category['name'],
                 'slug'     => $category['slug'],
                 'link'     => $category['slug'],
-                'children' => $this->buildTree($category['id'])
+                'children' => $this->buildTree($category['id']),
+                'route'    => $category['route'],
             ];
         }
 

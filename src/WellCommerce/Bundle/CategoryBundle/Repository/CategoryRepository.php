@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\CategoryBundle\Repository;
 
 use Symfony\Component\HttpFoundation\ParameterBag;
+use Symfony\Component\Routing\Route;
 use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CategoryBundle\Tree\CategoryTreeBuilder;
 use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
@@ -27,7 +28,36 @@ class CategoryRepository extends AbstractEntityRepository implements CategoryRep
 {
     public function getCategoriesTree()
     {
-        $items   = $this->getTreeItems();
+        $queryBuilder = $this->getQueryBuilder('category');
+
+        // select columns
+        $queryBuilder->select('
+            category.id,
+            IDENTITY(category.parent) parent,
+            COUNT(category_children.id) children,
+            category_translation.name,
+            category_translation.slug,
+            category_translation.locale,
+            IDENTITY(category_translation.route) route
+        ');
+
+        // category table
+        $queryBuilder->leftJoin(
+            'WellCommerceCategoryBundle:Category',
+            'category_children',
+            'WITH',
+            'category_children.parent = category.id');
+
+        // category_translation table
+        $queryBuilder->leftJoin(
+            'WellCommerceCategoryBundle:CategoryTranslation',
+            'category_translation',
+            'WITH',
+            'category.id = category_translation.translatable AND category_translation.locale = :locale');
+        $queryBuilder->groupBy('category.id');
+        $queryBuilder->setParameter('locale', $this->getCurrentLocale());
+        $query   = $queryBuilder->getQuery();
+        $items   = $query->getArrayResult();
         $builder = new CategoryTreeBuilder($items);
 
         return $builder->getTree();
@@ -45,7 +75,8 @@ class CategoryRepository extends AbstractEntityRepository implements CategoryRep
             IDENTITY(category.parent) parent,
             COUNT(category_children.id) children,
             category_translation.name,
-            category_translation.slug
+            category_translation.slug,
+            category_translation.locale
         ');
         $queryBuilder->leftJoin(
             'WellCommerceCategoryBundle:Category',
@@ -70,7 +101,12 @@ class CategoryRepository extends AbstractEntityRepository implements CategoryRep
                 'slug'        => $item['slug'],
                 'hasChildren' => (bool)($item['children'] > 0),
                 'parent'      => $item['parent'],
-                'weight'      => $item['hierarchy']
+                'weight'      => $item['hierarchy'],
+                'route'       => new Route('/' . $item['slug'], [
+                    '_controller' => 'category.controller.front:indexAction',
+                    '_locale'     => $item['locale'],
+                    'id'          => $item['id']
+                ])
             ];
         }
 

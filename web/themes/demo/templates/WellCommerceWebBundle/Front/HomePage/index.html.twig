@@ -2,7 +2,9 @@
 {% block content %}
     <div class="col-lg-12 main-col">
         <div class="row">
-            {{ layout_box('categories.box', {"exclude": [1,2,3]}) }}
+            <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
+                {{ layout_box('category.menu') }}
+            </div>
             {{ layout_box('slideshow.box') }}
             <div class="col-lg-9 col-md-9">
                 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">

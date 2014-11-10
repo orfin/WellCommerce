@@ -13,21 +13,22 @@
 namespace WellCommerce\Bundle\ProductBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model\Sluggable\Sluggable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translation;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\MetaDataTrait;
+use WellCommerce\Bundle\RoutingBundle\Entity\Behaviours\RoutableTrait;
 
 /**
  * ProductTranslation
  *
  * @ORM\Table(name="product_translation")
+ * @ORM\HasLifecycleCallbacks
  * @ORM\Entity
  */
 class ProductTranslation
 {
     use Translation;
-    use Sluggable;
     use MetaDataTrait;
+    use RoutableTrait;
 
     /**
      * @ORM\Id
@@ -141,6 +142,11 @@ class ProductTranslation
     public function getSluggableFields()
     {
         return ['name'];
+    }
+
+    public function getRouteType()
+    {
+        return 'product';
     }
 }
 

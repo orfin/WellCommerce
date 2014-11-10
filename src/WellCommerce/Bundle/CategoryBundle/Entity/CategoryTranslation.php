@@ -3,21 +3,24 @@
 namespace WellCommerce\Bundle\CategoryBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model\Sluggable\Sluggable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translation;
+use WellCommerce\Bundle\CategoryBundle\Routing\CategoryRouteGenerator;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\MetaDataTrait;
+use WellCommerce\Bundle\RoutingBundle\Entity\Behaviours\RoutableTrait;
+use WellCommerce\Bundle\RoutingBundle\Entity\RoutableSubjectInterface;
 
 /**
  * CategoryTranslation
  *
  * @ORM\Table("category_translation")
+ * @ORM\HasLifecycleCallbacks
  * @ORM\Entity
  */
-class CategoryTranslation
+class CategoryTranslation implements RoutableSubjectInterface
 {
     use Translation;
-    use Sluggable;
     use MetaDataTrait;
+    use RoutableTrait;
 
     /**
      * @ORM\Id
@@ -68,11 +71,9 @@ class CategoryTranslation
     }
 
     /**
-     * Set name
+     * @param $name
      *
-     * @param string $name
-     *
-     * @return CategoryTranslation
+     * @return $this
      */
     public function setName($name)
     {
@@ -82,8 +83,6 @@ class CategoryTranslation
     }
 
     /**
-     * Get shortDescription
-     *
      * @return string
      */
     public function getShortDescription()
@@ -92,11 +91,9 @@ class CategoryTranslation
     }
 
     /**
-     * Set shortDescription
+     * @param $shortDescription
      *
-     * @param string $shortDescription
-     *
-     * @return CategoryTranslation
+     * @return $this
      */
     public function setShortDescription($shortDescription)
     {
@@ -106,8 +103,6 @@ class CategoryTranslation
     }
 
     /**
-     * Get description
-     *
      * @return string
      */
     public function getDescription()
@@ -116,17 +111,11 @@ class CategoryTranslation
     }
 
     /**
-     * Set description
-     *
-     * @param string $description
-     *
-     * @return CategoryTranslation
+     * @param $description
      */
     public function setDescription($description)
     {
         $this->description = $description;
-
-        return $this;
     }
 
     /**
@@ -135,5 +124,10 @@ class CategoryTranslation
     public function getSluggableFields()
     {
         return ['name'];
+    }
+
+    public function getRouteGeneratorStrategy()
+    {
+        return CategoryRouteGenerator::GENERATOR_STRATEGY;
     }
 }

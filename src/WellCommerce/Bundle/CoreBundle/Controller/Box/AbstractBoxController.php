@@ -11,7 +11,9 @@
  */
 namespace WellCommerce\Bundle\CoreBundle\Controller\Box;
 
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
+use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
  * Class AbstractFrontController
@@ -22,6 +24,30 @@ use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
 abstract class AbstractBoxController extends AbstractController implements BoxControllerInterface
 {
     protected $settings;
+
+    /**
+     * @var ContainerInterface
+     */
+    protected $container;
+
+    /**
+     * @var RepositoryInterface
+     */
+    protected $repository;
+
+    /**
+     * Constructor
+     *
+     * @param ContainerInterface  $container
+     * @param RepositoryInterface $repository
+     */
+    public function __construct(
+        ContainerInterface $container,
+        RepositoryInterface $repository
+    ) {
+        $this->container  = $container;
+        $this->repository = $repository;
+    }
 
     /**
      * {@inheritdoc}

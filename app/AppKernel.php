@@ -17,7 +17,8 @@ use Symfony\Component\HttpKernel\Kernel;
 /**
  * Class AppKernel
  *
- * @author Adam Piotrowski <adam@wellcommerce.org>
+ * @package WellCommerce
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class AppKernel extends Kernel
 {
@@ -38,11 +39,12 @@ class AppKernel extends Kernel
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
-            new JMS\I18nRoutingBundle\JMSI18nRoutingBundle(),
+            new Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
             new WellCommerce\Bundle\FormBundle\WellCommerceFormBundle(),
             new WellCommerce\Bundle\DataGridBundle\WellCommerceDataGridBundle(),
             // WellCommerce bundles
             new WellCommerce\Bundle\CoreBundle\WellCommerceCoreBundle(),
+            new WellCommerce\Bundle\RoutingBundle\WellCommerceRoutingBundle(),
             new WellCommerce\Bundle\AdminBundle\WellCommerceAdminBundle(),
             new WellCommerce\Bundle\IntlBundle\WellCommerceIntlBundle(),
             new WellCommerce\Bundle\WebBundle\WellCommerceWebBundle(),

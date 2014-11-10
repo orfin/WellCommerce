@@ -3,20 +3,8 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <parameters>
-        <parameter key="category.controller.admin.class">WellCommerce\Bundle\CategoryBundle\Controller\Admin\CategoryController</parameter>
-        <parameter key="category.controller.front.class">WellCommerce\Bundle\CategoryBundle\Controller\Front\CategoryController</parameter>
-        <parameter key="category.controller.box.class">WellCommerce\Bundle\CategoryBundle\Controller\Box\CategoryController</parameter>
-        <parameter key="category.repository.class">WellCommerce\Bundle\CategoryBundle\Repository\CategoryRepository</parameter>
-        <parameter key="category.form.class">WellCommerce\Bundle\CategoryBundle\Form\CategoryForm</parameter>
-        <parameter key="category.tree.class">WellCommerce\Bundle\CategoryBundle\Form\CategoryTree</parameter>
-        <parameter key="category.subscriber.class">WellCommerce\Bundle\CategoryBundle\EventListener\CategorySubscriber</parameter>
-        <parameter key="category.layout_box.controller.class">WellCommerce\Bundle\CategoryBundle\Controller\Box\CategoryBoxController</parameter>
-        <parameter key="category.layout_box.configurator.class">WellCommerce\Bundle\CategoryBundle\Layout\CategoryBoxConfigurator</parameter>
-    </parameters>
-
     <services>
-        <service id="category.controller.admin" class="%category.controller.admin.class%">
+        <service id="category.controller.admin" class="WellCommerce\Bundle\CategoryBundle\Controller\Admin\CategoryController">
             <argument type="service" id="service_container"/>
             <argument type="service" id="admin_manager"/>
             <argument type="service" id="category.repository"/>
@@ -24,41 +12,54 @@
             <argument type="service" id="category.form"/>
         </service>
 
-        <service id="category.controller.front" class="%category.controller.front.class%">
+        <service id="category.controller.front" class="WellCommerce\Bundle\CategoryBundle\Controller\Front\CategoryController">
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
         </service>
 
-        <service id="category.layout_box.controller" class="%category.layout_box.controller.class%">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
+        <service id="category_menu.layout_box.controller" class="WellCommerce\Bundle\CategoryBundle\Controller\Box\CategoryMenuBoxController">
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="category.repository"/>
         </service>
 
-        <service id="category.layout_box.configurator" class="%category.layout_box.configurator.class%">
-            <argument>CategoriesBox</argument>
-            <argument>category.layout_box.controller</argument>
+        <service id="category_menu.layout_box.configurator" class="WellCommerce\Bundle\CategoryBundle\Layout\CategoryMenuBoxConfigurator">
+            <argument>CategoryMenuBox</argument>
+            <argument>category_menu.layout_box.controller</argument>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
             <tag name="layout_box.configurator" />
         </service>
 
-        <service id="category.repository" class="%category.repository.class%" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+        <service id="category_info.layout_box.controller" class="WellCommerce\Bundle\CategoryBundle\Controller\Box\CategoryInfoBoxController">
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="category.repository"/>
+        </service>
+
+        <service id="category_info.layout_box.configurator" class="WellCommerce\Bundle\CategoryBundle\Layout\CategoryInfoBoxConfigurator">
+            <argument>CategoryInfoBox</argument>
+            <argument>category_info.layout_box.controller</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="layout_box.configurator" />
+        </service>
+
+        <service id="category.repository" class="WellCommerce\Bundle\CategoryBundle\Repository\CategoryRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument>WellCommerceCategoryBundle:Category</argument>
             <call method="setTranslator">
                 <argument type="service" id="translator" />
             </call>
         </service>
 
-        <service id="category.form" class="%category.form.class%">
+        <service id="category.form" class="WellCommerce\Bundle\CategoryBundle\Form\CategoryForm">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="category.tree" class="%category.tree.class%">
+        <service id="category.tree" class="WellCommerce\Bundle\CategoryBundle\Form\CategoryTree">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -67,7 +68,7 @@
             </call>
         </service>
 
-        <service id="category.subscriber" class="%category.subscriber.class%">
+        <service id="category.subscriber" class="WellCommerce\Bundle\CategoryBundle\EventListener\CategorySubscriber">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -78,6 +79,19 @@
                 <argument type="service" id="router"/>
             </call>
             <tag name="kernel.event_subscriber" />
+        </service>
+
+        <service id="category.route.generator" class="WellCommerce\Bundle\CategoryBundle\Routing\CategoryRouteGenerator">
+            <argument>category.controller.front:indexAction</argument>
+            <argument type="collection" key="defaults">
+                <argument key="page">1</argument>
+                <argument key="sort">1</argument>
+            </argument>
+            <argument type="collection" key="requirements">
+                <argument key="page">\d{1,10}</argument>
+                <argument key="sort">asc|desc</argument>
+            </argument>
+            <tag name="route.generator" />
         </service>
     </services>
 </container>

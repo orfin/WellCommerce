@@ -57,12 +57,11 @@ interface RepositoryInterface
      * Resolves request parameters and tries to find corresponding entity
      *
      * @param Request $request
-     * @param array   $criteria
      *
      * @return mixed|null|object
      * @throws \Doctrine\ORM\EntityNotFoundException
      */
-    public function findResource(Request $request, array $criteria = []);
+    public function findResource(Request $request);
 
     /**
      * Returns class metadata
