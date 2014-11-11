@@ -3,18 +3,8 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <parameters>
-        <parameter key="tax.controller.admin.class">WellCommerce\Bundle\TaxBundle\Controller\Admin\TaxController</parameter>
-        <parameter key="tax.repository.class">WellCommerce\Bundle\TaxBundle\Repository\TaxRepository</parameter>
-        <parameter key="tax.datagrid.class">WellCommerce\Bundle\TaxBundle\DataGrid\TaxDataGrid</parameter>
-        <parameter key="tax.datagrid.configurator.class">WellCommerce\Bundle\TaxBundle\DataGrid\TaxDataGridConfigurator</parameter>
-        <parameter key="tax.form.class">WellCommerce\Bundle\TaxBundle\Form\TaxForm</parameter>
-        <parameter key="tax.subscriber.class">WellCommerce\Bundle\TaxBundle\EventListener\TaxSubscriber</parameter>
-        <parameter key="twig.extension.tax.class">WellCommerce\Bundle\TaxBundle\Twig\Extension\TaxExtension</parameter>
-    </parameters>
-
     <services>
-        <service id="tax.controller.admin" class="%tax.controller.admin.class%">
+        <service id="tax.controller.admin" class="WellCommerce\Bundle\TaxBundle\Controller\Admin\TaxController">
             <argument type="service" id="service_container"/>
             <argument type="service" id="admin_manager"/>
             <argument type="service" id="tax.repository"/>
@@ -22,30 +12,33 @@
             <argument type="service" id="tax.form"/>
         </service>
 
-        <service id="tax.repository" class="%tax.repository.class%" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+        <service id="tax.repository" class="WellCommerce\Bundle\TaxBundle\Repository\TaxRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument>WellCommerceTaxBundle:Tax</argument>
             <call method="setTranslator">
                 <argument type="service" id="translator" />
             </call>
         </service>
 
-        <service id="tax.datagrid" class="%tax.datagrid.class%">
+        <service id="tax.datagrid" class="WellCommerce\Bundle\TaxBundle\DataGrid\TaxDataGrid">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
             <configurator service="tax.datagrid.configurator" method="configure" />
         </service>
 
-        <service id="tax.datagrid.configurator" class="%tax.datagrid.configurator.class%">
+        <service id="tax.datagrid.configurator" class="WellCommerce\Bundle\TaxBundle\DataGrid\TaxDataGridConfigurator">
             <argument key="identifier">tax</argument>
             <argument type="service" id="datagrid_manager"/>
             <argument type="service" id="tax.repository"/>
         </service>
 
-        <service id="tax.form" class="%tax.form.class%">
+        <service id="tax.form" class="WellCommerce\Bundle\TaxBundle\Form\TaxForm">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="tax.subscriber" class="%tax.subscriber.class%">
+        <service id="tax.subscriber" class="WellCommerce\Bundle\TaxBundle\EventListener\TaxSubscriber">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -58,7 +51,7 @@
             <tag name="kernel.event_subscriber" />
         </service>
 
-        <service id="twig.extension.tax" class="%twig.extension.tax.class%">
+        <service id="twig.extension.tax" class="WellCommerce\Bundle\TaxBundle\Twig\Extension\TaxExtension">
             <argument type="service" id="tax.repository"/>
             <tag name="twig.extension"/>
         </service>

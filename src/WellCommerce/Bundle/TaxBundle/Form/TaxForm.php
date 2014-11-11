@@ -39,11 +39,6 @@ class TaxForm extends AbstractForm implements FormInterface
         $requiredData->addChild($builder->getElement('text_field', [
             'name'    => 'value',
             'label'   => $this->trans('tax.required_data.value.label'),
-            'rules'   => [
-                $builder->getRule('required', [
-                    'message' => $this->trans('Value is required')
-                ])
-            ],
             'filters' => [
                 $builder->getFilter('comma_to_dot_changer')
             ]
@@ -57,11 +52,6 @@ class TaxForm extends AbstractForm implements FormInterface
         $languageData->addChild($builder->getElement('text_field', [
             'name'  => 'name',
             'label' => $this->trans('tax.language_data.name.label'),
-            'rules' => [
-                $builder->getRule('required', [
-                    'message' => $this->trans('Name is required')
-                ]),
-            ]
         ]));
 
         $form->addFilter('no_code');
