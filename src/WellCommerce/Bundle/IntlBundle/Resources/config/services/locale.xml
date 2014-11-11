@@ -64,5 +64,11 @@
         <service id="locale.orm.listener" class="WellCommerce\Bundle\IntlBundle\EventListener\LocaleORMListener">
             <tag name="doctrine.event_listener" event="loadClassMetadata" />
         </service>
+
+        <service id="locale.controller.front" class="WellCommerce\Bundle\IntlBundle\Controller\Front\LocaleController">
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
     </services>
 </container>

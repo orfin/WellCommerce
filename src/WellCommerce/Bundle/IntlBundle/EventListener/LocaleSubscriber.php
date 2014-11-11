@@ -43,6 +43,7 @@ class LocaleSubscriber extends AbstractEventSubscriber
     public function onKernelRequest(GetResponseEvent $event)
     {
         $request = $event->getRequest();
+
         if (!$request->hasPreviousSession()) {
             return;
         }
@@ -56,8 +57,6 @@ class LocaleSubscriber extends AbstractEventSubscriber
 
     public function onKernelController(FilterControllerEvent $event)
     {
-        $locale = $event->getRequest()->getLocale();
-
         // skip fetching locales when handling sub-request
         if ($event->getRequestType() == HttpKernelInterface::SUB_REQUEST) {
             return;

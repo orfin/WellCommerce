@@ -27,13 +27,13 @@
                 <div class="btn-group btn-group-sm">
                     <div class="btn-group btn-group-sm">
                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                            Language: EN
+                            {% trans %}front.locale.label{% endtrans %}: {{ app.request.locale|upper }}
                             <span class="caret"></span>
                         </button>
 
                         <ul class="dropdown-menu" role="menu">
                             {% for locale in locales %}
-                            <li><a href="{{ locale.code }}">{{ locale.code }}</a></li>
+                            <li><a href="{{ path('front.locale.switch',{"_locale": locale.code}) }}">{{ locale.code }}</a></li>
                             {% endfor %}
                         </ul>
                     </div>

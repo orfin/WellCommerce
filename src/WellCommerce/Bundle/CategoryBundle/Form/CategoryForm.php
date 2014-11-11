@@ -46,6 +46,11 @@ class CategoryForm extends AbstractForm implements FormInterface
             'label' => $this->trans('category.name.label'),
         ]));
 
+        $languageData->addChild($builder->getElement('text_field', [
+            'name'  => 'slug',
+            'label' => $this->trans('category.slug.label'),
+        ]));
+
         $requiredData->addChild($builder->getElement('text_field', [
             'name'  => 'hierarchy',
             'label' => $this->trans('category.hierarchy.label'),

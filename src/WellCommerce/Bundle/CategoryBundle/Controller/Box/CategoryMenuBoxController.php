@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\Controller\Box;
 
+use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
 
@@ -26,7 +27,7 @@ use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
 class CategoryMenuBoxController extends AbstractBoxController implements BoxControllerInterface
 {
 
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         return [
             'categories' => $this->get('category.repository')->getCategoriesTree()
