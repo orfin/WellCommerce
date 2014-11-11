@@ -68,6 +68,9 @@ doctrine_migrations:
 parameters:
     knp.doctrine_behaviors.blameable_listener.user_entity: WellCommerce\Bundle\UserBundle\Entity\User
 
+fos_js_routing:
+    router: router.default
+
 cmf_routing:
     chain:
         routers_by_id:

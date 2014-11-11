@@ -42,7 +42,7 @@
         "knplabs/doctrine-behaviors": "1.1.*@dev",
         "fzaninotto/faker": "1.5.x-dev",
         "white-october/pagerfanta-bundle": "2.1.x-dev",
-        "friendsofsymfony/jsrouting-bundle": "1.5.3",
+        "friendsofsymfony/jsrouting-bundle": "2.0.*@dev",
         "willdurand/js-translation-bundle": "2.1.*@dev",
         "friendsofsymfony/rest-bundle": "1.4.1",
         "jms/serializer-bundle": "0.13.0",

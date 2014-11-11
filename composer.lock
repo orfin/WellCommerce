@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "20272ce3c2090c9c5dc8459956f9c8bd",
+    "hash": "53890962b360fbb9dea6d49e54136973",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -831,30 +831,30 @@
         },
         {
             "name": "friendsofsymfony/jsrouting-bundle",
-            "version": "1.5.3",
+            "version": "dev-master",
             "target-dir": "FOS/JsRoutingBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSJsRoutingBundle.git",
-                "reference": "dade3bb0b21007e5c0fb40f203ed197841eb913c"
+                "reference": "ffe9d6b180e8f3b887040b4625d625fb6c79271a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSJsRoutingBundle/zipball/dade3bb0b21007e5c0fb40f203ed197841eb913c",
-                "reference": "dade3bb0b21007e5c0fb40f203ed197841eb913c",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSJsRoutingBundle/zipball/ffe9d6b180e8f3b887040b4625d625fb6c79271a",
+                "reference": "ffe9d6b180e8f3b887040b4625d625fb6c79271a",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2",
-                "symfony/console": "~2.0",
-                "symfony/framework-bundle": "~2.0",
+                "symfony/console": "~2.3",
+                "symfony/framework-bundle": "~2.3",
                 "symfony/serializer": "~2.0",
                 "willdurand/jsonp-callback-validator": "~1.0"
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.5-dev"
+                    "dev-master": "2.0-dev"
                 }
             },
             "autoload": {
@@ -868,13 +868,12 @@
             ],
             "authors": [
                 {
-                    "name": "William Durand",
-                    "email": "william.durand1@gmail.com",
-                    "homepage": "http://www.willdurand.fr"
-                },
-                {
                     "name": "FriendsOfSymfony Community",
                     "homepage": "https://github.com/friendsofsymfony/FOSJsRoutingBundle/contributors"
+                },
+                {
+                    "name": "William Durand",
+                    "email": "william.durand1@gmail.com"
                 }
             ],
             "description": "A pretty nice way to expose your Symfony2 routing to client applications.",
@@ -884,7 +883,7 @@
                 "javascript",
                 "routing"
             ],
-            "time": "2014-01-23 21:25:39"
+            "time": "2014-10-31 16:21:24"
         },
         {
             "name": "friendsofsymfony/rest-bundle",
@@ -971,12 +970,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "8f673c9e31c1aa5ce1e4d289be55c2384ee0ffd2"
+                "reference": "bd8e63631145016cfdf26e658b4a8a2a393698c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/8f673c9e31c1aa5ce1e4d289be55c2384ee0ffd2",
-                "reference": "8f673c9e31c1aa5ce1e4d289be55c2384ee0ffd2",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/bd8e63631145016cfdf26e658b4a8a2a393698c2",
+                "reference": "bd8e63631145016cfdf26e658b4a8a2a393698c2",
                 "shasum": ""
             },
             "require": {
@@ -993,9 +992,8 @@
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Faker": "src/",
-                    "Faker\\PHPUnit": "test/"
+                "psr-4": {
+                    "Faker\\": "src/Faker/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1013,7 +1011,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2014-11-07 08:38:46"
+            "time": "2014-11-10 16:46:22"
         },
         {
             "name": "imagine/imagine",
@@ -1978,17 +1976,17 @@
         },
         {
             "name": "sensio/framework-extra-bundle",
-            "version": "v3.0.2",
+            "version": "v3.0.3",
             "target-dir": "Sensio/Bundle/FrameworkExtraBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioFrameworkExtraBundle.git",
-                "reference": "9b22aaee517e80aad3238ea0328458b6f964066f"
+                "reference": "b829a8097a41ccbd7d35683b1750043b23d682f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/9b22aaee517e80aad3238ea0328458b6f964066f",
-                "reference": "9b22aaee517e80aad3238ea0328458b6f964066f",
+                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/b829a8097a41ccbd7d35683b1750043b23d682f5",
+                "reference": "b829a8097a41ccbd7d35683b1750043b23d682f5",
                 "shasum": ""
             },
             "require": {
@@ -2029,7 +2027,7 @@
                 "annotations",
                 "controllers"
             ],
-            "time": "2014-09-02 07:11:30"
+            "time": "2014-11-10 14:50:31"
         },
         {
             "name": "sensiolabs/security-checker",
@@ -2766,12 +2764,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/WellCommerce/FormBundle.git",
-                "reference": "a29bdb68298ad2fe421aff8b963483695b6dcd2f"
+                "reference": "73a5b2b5ec63365444f283a8d17e291fd77ef60d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WellCommerce/FormBundle/zipball/a29bdb68298ad2fe421aff8b963483695b6dcd2f",
-                "reference": "a29bdb68298ad2fe421aff8b963483695b6dcd2f",
+                "url": "https://api.github.com/repos/WellCommerce/FormBundle/zipball/73a5b2b5ec63365444f283a8d17e291fd77ef60d",
+                "reference": "73a5b2b5ec63365444f283a8d17e291fd77ef60d",
                 "shasum": ""
             },
             "require": {
@@ -2810,7 +2808,7 @@
                 "symfony",
                 "wellcommerce"
             ],
-            "time": "2014-11-01 12:05:01"
+            "time": "2014-11-09 17:04:37"
         },
         {
             "name": "white-october/pagerfanta-bundle",
@@ -3704,6 +3702,7 @@
         "knplabs/doctrine-behaviors": 20,
         "fzaninotto/faker": 20,
         "white-october/pagerfanta-bundle": 20,
+        "friendsofsymfony/jsrouting-bundle": 20,
         "willdurand/js-translation-bundle": 20,
         "wellcommerce/form-bundle": 20,
         "wellcommerce/datagrid-bundle": 20,
