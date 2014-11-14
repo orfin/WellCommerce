@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\RoutingBundle\Generator;
 
+use WellCommerce\Bundle\RoutingBundle\Entity\RoutableSubjectInterface;
 use WellCommerce\Bundle\RoutingBundle\Entity\Route;
 
 /**
@@ -32,11 +33,11 @@ interface RouteGeneratorInterface
     public function supports($strategy);
 
     /**
-     * Generates real Symfony route using passed resource
+     * Generates real Symfony route using passed entity
      *
-     * @param Route $route
+     * @param RoutableSubjectInterface $entity
      *
-     * @return \Symfony\Component\Routing\Route
+     * @return \WellCommerce\Bundle\RoutingBundle\Entity\Route
      */
-    public function generate(Route $route);
+    public function generate(Route $entity);
 }

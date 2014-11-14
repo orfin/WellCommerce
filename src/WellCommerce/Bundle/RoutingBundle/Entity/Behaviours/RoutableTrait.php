@@ -22,9 +22,11 @@ use WellCommerce\Bundle\RoutingBundle\Entity\Route;
  */
 trait RoutableTrait
 {
+    protected $needsFlush = false;
+
     /**
-     * @ORM\OneToOne(targetEntity="WellCommerce\Bundle\RoutingBundle\Entity\Route", mappedBy="id", cascade={"persist", "remove"}, orphanRemoval=true)
-     * @ORM\JoinColumn(name="route_id", referencedColumnName="id")
+     * @ORM\OneToOne(targetEntity="WellCommerce\Bundle\RoutingBundle\Entity\Route", mappedBy="id", orphanRemoval=true)
+     * @ORM\JoinColumn(name="route_id", referencedColumnName="id", onDelete="SET NULL")
      **/
     protected $route;
 
@@ -37,14 +39,10 @@ trait RoutableTrait
      * Sets the entity's slug.
      *
      * @param $slug
-     *
-     * @return $this
      */
     public function setSlug($slug)
     {
         $this->slug = $slug;
-
-        return $this;
     }
 
     /**
@@ -56,7 +54,6 @@ trait RoutableTrait
     {
         return $this->slug;
     }
-
 
     /**
      * Sets the entity's route.
@@ -76,56 +73,5 @@ trait RoutableTrait
     public function getRoute()
     {
         return $this->route;
-    }
-
-    /**
-     * @ORM\PreFlush
-     */
-    public function generateSlug()
-    {
-        $fields       = $this->getSluggableFields();
-        $usableValues = [];
-
-        foreach ($fields as $field) {
-            $val = $this->{$field};
-            if (!empty($val)) {
-                $usableValues[] = $val;
-            }
-        }
-
-        $sluggableText = implode($usableValues, ' ');
-        $ascii         = iconv('UTF-8', 'ASCII//TRANSLIT', $sluggableText);
-        $slug          = strtolower(trim(preg_replace("/[^a-zA-Z0-9\/_|+ -]/", '', $ascii), $this->getSlugDelimiter()));
-        $slug          = preg_replace("/[\/_|+ -]+/", $this->getSlugDelimiter(), $slug);
-        $this->slug    = $slug;
-    }
-
-    /**
-     * @ORM\PreFlush
-     */
-    public function generateRoute()
-    {
-        $defaults = [
-            'id'      => $this->getTranslatable()->getId(),
-            '_locale' => $this->locale
-        ];
-
-        $route = new Route();
-        $route->setDefaults($defaults);
-        $route->setOptions([]);
-        $route->setRequirements([]);
-        $route->setStaticPattern($this->slug);
-        $route->setStrategy($this->getRouteGeneratorStrategy());
-        $this->route = $route;
-    }
-
-    /**
-     * Returns delimiter used in slug generation
-     *
-     * @return string
-     */
-    private function getSlugDelimiter()
-    {
-        return '-';
     }
 }

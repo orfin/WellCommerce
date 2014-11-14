@@ -24,6 +24,11 @@ use WellCommerce\Bundle\RoutingBundle\DependencyInjection\Compiler\RouteGenerato
  */
 class WellCommerceRoutingBundle extends Bundle
 {
+    /**
+     * Build the container
+     *
+     * @param ContainerBuilder $container
+     */
     public function build(ContainerBuilder $container)
     {
         parent::build($container);

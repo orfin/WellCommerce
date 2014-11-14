@@ -24,37 +24,48 @@ use WellCommerce\Bundle\RoutingBundle\Entity\Route;
 abstract class AbstractRouteGenerator
 {
     /**
-     * @var
+     * @var array
      */
-    protected $controller;
     protected $defaults;
+
+    /**
+     * @var array
+     */
+    protected $options;
+
+    /**
+     * @var array
+     */
     protected $requirements;
 
     /**
      * Constructor
      *
-     * @param       $controller
-     * @param array $optionalDefaults
-     * @param array $requirements
+     * @param array $defaults     Route defaults
+     * @param array $options      Route options
+     * @param array $requirements Route requirements
      */
-    public function __construct($controller, array $defaults = [], array $requirements = [])
-    {
-        $this->controller   = $controller;
+    public function __construct(
+        array $defaults = [],
+        array $options = [],
+        array $requirements = []
+    ) {
         $this->defaults     = $defaults;
+        $this->options      = $options;
         $this->requirements = $requirements;
     }
 
-    public function generate(Route $route)
+    public function generate(Route $resource)
     {
-        $path                         = $route->getStaticPattern();
-        $routeDefaults                = $route->getDefaults();
-        $routeDefaults['_controller'] = $this->controller;
-        foreach ($this->defaults as $key => $value) {
-            $routeDefaults[$key] = $value;
-            $path .= '/{' . $key . '}';
-        }
+        $this->defaults['id']      = $resource->getIdentifier();
+        $this->defaults['_locale'] = $resource->getLocale();
 
-        return new SymfonyRoute($path, $routeDefaults, $this->requirements);
+        return new SymfonyRoute(
+            $resource->getPath(),
+            $this->defaults,
+            $this->requirements,
+            $this->options
+        );
     }
 
 } 

@@ -20,8 +20,8 @@ use WellCommerce\Bundle\DataGridBundle\DataGrid\Repository\DataGridAwareReposito
  *
  * @package WellCommerce\Bundle\RoutingBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
+ * @method \WellCommerce\Bundle\RoutingBundle\Entity\Route findOneByPath() findOneByPath($path) Find route by path
  */
 interface RouteRepositoryInterface extends RepositoryInterface, DataGridAwareRepositoryInterface
 {
-
-} 
+}

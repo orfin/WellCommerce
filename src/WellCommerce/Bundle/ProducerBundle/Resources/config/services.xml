@@ -12,6 +12,12 @@
             <argument type="service" id="producer.form"/>
         </service>
 
+        <service id="producer.controller.front" class="WellCommerce\Bundle\ProducerBundle\Controller\Front\ProducerController">
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
         <service id="producer.repository" class="WellCommerce\Bundle\ProducerBundle\Repository\ProducerRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument>WellCommerceProducerBundle:Producer</argument>
             <call method="setTranslator">
@@ -49,6 +55,19 @@
                 <argument type="service" id="router"/>
             </call>
             <tag name="kernel.event_subscriber" />
+        </service>
+
+        <service id="producer.route.generator" class="WellCommerce\Bundle\ProducerBundle\Routing\ProducerRouteGenerator">
+            <argument type="collection" key="defaults">
+                <argument key="_controller">producer.controller.front:indexAction</argument>
+                <argument key="page">1</argument>
+                <argument key="sort">1</argument>
+            </argument>
+            <argument type="collection" key="requirements">
+                <argument key="page">\d{1,10}</argument>
+                <argument key="sort">asc|desc</argument>
+            </argument>
+            <tag name="route.generator" />
         </service>
     </services>
 </container>

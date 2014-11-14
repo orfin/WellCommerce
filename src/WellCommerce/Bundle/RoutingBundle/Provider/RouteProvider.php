@@ -15,7 +15,9 @@ namespace WellCommerce\Bundle\RoutingBundle\Routing;
 use Symfony\Cmf\Component\Routing\RouteProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
+use Symfony\Component\Routing\Route as SymfonyRoute;
 use Symfony\Component\Routing\RouteCollection;
+use WellCommerce\Bundle\RoutingBundle\Entity\Route;
 use WellCommerce\Bundle\RoutingBundle\Generator\RouteGeneratorCollection;
 use WellCommerce\Bundle\RoutingBundle\Repository\RouteRepositoryInterface;
 
@@ -28,71 +30,114 @@ use WellCommerce\Bundle\RoutingBundle\Repository\RouteRepositoryInterface;
 class RouteProvider implements RouteProviderInterface
 {
     /**
+     * Collection of route generators available in collection
+     *
+     * @var RouteGeneratorCollection
+     */
+    protected $generators;
+
+    /**
      * @var RouteRepositoryInterface
      */
-    private $routeRepository;
-
-    private $generatorCollection;
+    protected $repository;
 
     /**
      * Constructor
      *
-     * @param RouteRepositoryInterface $routeRepository
+     * @param RouteGeneratorCollection $generators
      */
-    public function __construct(
-        RouteRepositoryInterface $routeRepository,
-        RouteGeneratorCollection $generatorCollection
-    ) {
-        $this->routeRepository     = $routeRepository;
-        $this->generatorCollection = $generatorCollection;
+    public function __construct(RouteGeneratorCollection $generators, RouteRepositoryInterface $repository)
+    {
+        $this->generators = $generators;
+        $this->repository = $repository;
     }
 
+    /**
+     * Returns route collection for current request
+     *
+     * @param Request $request
+     *
+     * @return RouteCollection
+     */
     public function getRouteCollectionForRequest(Request $request)
     {
-        $path            = ltrim($request->getPathInfo(), '/');
-        $paths           = explode('/', $path);
-        $resource        = $this->routeRepository->findOneByStaticPattern(current($paths));
-        $route           = $this->generateRouteFromResource($resource);
-        $routeCollection = new RouteCollection();
+        $path       = $this->getNormalizedPath($request);
+        $resource   = $this->repository->findOneByPath($path);
+        $route      = $this->createRoute($resource);
+        $collection = new RouteCollection();
 
-        $routeCollection->add(
-            $resource->getId(),
+        $collection->add(
+            sprintf('%s_%s', $resource->getStrategy(), $resource->getId()),
             $route
         );
 
-        return $routeCollection;
+        return $collection;
     }
 
-    public function getRouteByName($name)
+    /**
+     * Returns normalized path used in resource query
+     *
+     * @param Request $request
+     *
+     * @return mixed
+     */
+    private function getNormalizedPath(Request $request)
     {
-        $resource = $this->routeRepository->find($name);
+        $path  = ltrim($request->getPathInfo(), '/');
+        $paths = explode('/', $path);
+
+        return current($paths);
+    }
+
+
+    /**
+     * Returns route by its identifier
+     *
+     * @param string $id
+     *
+     * @return SymfonyRoute
+     */
+    public function getRouteByName($id)
+    {
+        $resource = $this->repository->find($id);
+
         if (!$resource) {
-            throw new RouteNotFoundException(sprintf('No route found for id "%s"', $name));
+            throw new RouteNotFoundException(sprintf('No route found for id "%s"', $id));
         }
 
-        $route = $this->generateRouteFromResource($resource);
+        return $this->createRoute($resource);
+    }
+
+    /**
+     * Creates a route using related generator
+     *
+     * @param Route $resource
+     *
+     * @return null|Route
+     */
+    private function createRoute(Route $resource)
+    {
+        $route = null;
+
+        /**
+         * @var \WellCommerce\Bundle\RoutingBundle\Generator\RouteGeneratorInterface $generator
+         */
+        foreach ($this->generators as $generator) {
+            if ($generator->supports($resource->getStrategy())) {
+                $route = $generator->generate($resource);
+            }
+        }
 
         if (null === $route) {
-            throw new RouteNotFoundException(sprintf('No matching route found'));
+            throw new RouteNotFoundException(sprintf('No possible generator found for route "%s"', $resource->getId()));
         }
 
         return $route;
+
     }
 
     public function getRoutesByNames($names, $parameters = [])
     {
 
-    }
-
-    public function generateRouteFromResource($resource)
-    {
-        /**
-         * @var \WellCommerce\Bundle\RoutingBundle\Generator\RouteGeneratorInterface $generator
-         */
-        foreach ($this->generatorCollection as $generator) {
-            if ($generator->supports($resource->getStrategy())) {
-                return $generator->generate($resource);
-            }
-        }
     }
 }

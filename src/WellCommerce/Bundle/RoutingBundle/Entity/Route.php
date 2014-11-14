@@ -21,7 +21,6 @@ use Doctrine\ORM\Mapping as ORM;
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * @ORM\Table(name="route")
- * @ORM\HasLifecycleCallbacks
  * @ORM\Entity(repositoryClass="WellCommerce\Bundle\RoutingBundle\Repository\RouteRepository")
  */
 class Route
@@ -36,24 +35,19 @@ class Route
     private $id;
 
     /**
-     * @ORM\Column(name="static_pattern", type="string")
+     * @ORM\Column(name="path", type="string")
      */
-    private $staticPattern;
+    private $path;
 
     /**
-     * @ORM\Column(name="defaults", type="json_array")
+     * @ORM\Column(name="identifier", type="integer")
      */
-    private $defaults;
+    private $identifier;
 
     /**
-     * @ORM\Column(name="options", type="json_array")
+     * @ORM\Column(name="locale", type="string")
      */
-    private $options;
-
-    /**
-     * @ORM\Column(name="requirements", type="json_array")
-     */
-    private $requirements;
+    private $locale;
 
     /**
      * @ORM\Column(name="strategy", type="string")
@@ -71,70 +65,6 @@ class Route
     /**
      * @return mixed
      */
-    public function getDefaults()
-    {
-        return $this->defaults;
-    }
-
-    /**
-     * @param mixed $defaults
-     */
-    public function setDefaults($defaults)
-    {
-        $this->defaults = $defaults;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getOptions()
-    {
-        return $this->options;
-    }
-
-    /**
-     * @param mixed $options
-     */
-    public function setOptions($options)
-    {
-        $this->options = $options;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getRequirements()
-    {
-        return $this->requirements;
-    }
-
-    /**
-     * @param mixed $requirements
-     */
-    public function setRequirements($requirements)
-    {
-        $this->requirements = $requirements;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getStaticPattern()
-    {
-        return $this->staticPattern;
-    }
-
-    /**
-     * @param mixed $staticPattern
-     */
-    public function setStaticPattern($staticPattern)
-    {
-        $this->staticPattern = $staticPattern;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getStrategy()
     {
         return $this->strategy;
@@ -146,6 +76,54 @@ class Route
     public function setStrategy($strategy)
     {
         $this->strategy = $strategy;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+    /**
+     * @param mixed $path
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIdentifier()
+    {
+        return $this->identifier;
+    }
+
+    /**
+     * @param mixed $identifier
+     */
+    public function setIdentifier($identifier)
+    {
+        $this->identifier = $identifier;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLocale()
+    {
+        return $this->locale;
+    }
+
+    /**
+     * @param mixed $locale
+     */
+    public function setLocale($locale)
+    {
+        $this->locale = $locale;
     }
 }
 

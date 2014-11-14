@@ -13,20 +13,23 @@
 namespace WellCommerce\Bundle\ProducerBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model\Sluggable\Sluggable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translation;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\MetaDataTrait;
+use WellCommerce\Bundle\ProducerBundle\Routing\ProducerRouteGenerator;
+use WellCommerce\Bundle\RoutingBundle\Entity\Behaviours\RoutableTrait;
+use WellCommerce\Bundle\RoutingBundle\Entity\RoutableSubjectInterface;
 
 /**
  * ProducerTranslation
  *
  * @ORM\Table(name="producer_translation")
+ * @ORM\HasLifecycleCallbacks
  * @ORM\Entity
  */
-class ProducerTranslation
+class ProducerTranslation implements RoutableSubjectInterface
 {
     use Translation;
-    use Sluggable;
+    use RoutableTrait;
     use MetaDataTrait;
 
     /**
@@ -141,6 +144,11 @@ class ProducerTranslation
     public function getSluggableFields()
     {
         return ['name'];
+    }
+
+    public function getRouteGeneratorStrategy()
+    {
+        return ProducerRouteGenerator::GENERATOR_STRATEGY;
     }
 }
 

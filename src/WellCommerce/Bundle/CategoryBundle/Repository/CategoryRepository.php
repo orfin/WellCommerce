@@ -102,11 +102,6 @@ class CategoryRepository extends AbstractEntityRepository implements CategoryRep
                 'hasChildren' => (bool)($item['children'] > 0),
                 'parent'      => $item['parent'],
                 'weight'      => $item['hierarchy'],
-                'route'       => new Route('/' . $item['slug'], [
-                    '_controller' => 'category.controller.front:indexAction',
-                    '_locale'     => $item['locale'],
-                    'id'          => $item['id']
-                ])
             ];
         }
 

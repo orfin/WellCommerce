@@ -44,12 +44,12 @@ class ProducerForm extends AbstractForm implements FormInterface
 
         $languageData->addChild($builder->getElement('text_field', [
             'name'  => 'name',
-            'label' => $this->trans('producer.name'),
-            'rules' => [
-                $builder->getRule('required', [
-                    'message' => $this->trans('Name is required')
-                ]),
-            ]
+            'label' => $this->trans('producer.name.label'),
+        ]));
+
+        $languageData->addChild($builder->getElement('text_field', [
+            'name'  => 'slug',
+            'label' => $this->trans('producer.slug.label'),
         ]));
 
         $mediaData = $form->addChild($builder->getElement('fieldset', [
@@ -69,7 +69,7 @@ class ProducerForm extends AbstractForm implements FormInterface
 
         $delivererData = $form->addChild($builder->getElement('fieldset', [
             'name'  => 'deliverers_data',
-            'label' => $this->trans('producer.deliverers')
+            'label' => $this->trans('producer.deliverers.label')
         ]));
 
         $delivererData->addChild($builder->getElement('multi_select', [

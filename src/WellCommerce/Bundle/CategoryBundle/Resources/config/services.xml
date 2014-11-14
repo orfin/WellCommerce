@@ -82,8 +82,8 @@
         </service>
 
         <service id="category.route.generator" class="WellCommerce\Bundle\CategoryBundle\Routing\CategoryRouteGenerator">
-            <argument>category.controller.front:indexAction</argument>
             <argument type="collection" key="defaults">
+                <argument key="_controller">category.controller.front:indexAction</argument>
                 <argument key="page">1</argument>
                 <argument key="sort">1</argument>
             </argument>

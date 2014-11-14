@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\ProducerBundle\DataGrid;
 
 use WellCommerce\Bundle\DataGridBundle\DataGrid\Configurator\AbstractConfigurator;
 use WellCommerce\Bundle\DataGridBundle\DataGrid\Configurator\ConfiguratorInterface;
+use WellCommerce\Bundle\DataGridBundle\DataGrid\DataGridInterface;
 
 /**
  * Class ProducerDataGridConfigurator

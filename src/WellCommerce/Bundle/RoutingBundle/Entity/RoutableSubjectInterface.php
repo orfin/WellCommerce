@@ -20,9 +20,23 @@ namespace WellCommerce\Bundle\RoutingBundle\Entity;
  */
 interface RoutableSubjectInterface
 {
-    public function generateSlug();
+    public function getLocale();
 
-    public function generateRoute();
+    public function getTranslatable();
+
+    public function getSlug();
+
+    /**
+     * @return \WellCommerce\Bundle\RoutingBundle\Entity\Route
+     */
+    public function getRoute();
+
+    /**
+     * @param Route $route
+     *
+     * @return void
+     */
+    public function setRoute(Route $route);
 
     public function getSluggableFields();
 

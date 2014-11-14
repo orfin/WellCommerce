@@ -13,8 +13,8 @@
         </service>
 
         <service id="router.provider.endpoint" class="WellCommerce\Bundle\RoutingBundle\Routing\RouteProvider">
-            <argument type="service" id="route.repository" />
             <argument type="service" id="route.generator.collection" />
+            <argument type="service" id="route.repository" />
         </service>
 
         <service id="route.generator.collection" class="WellCommerce\Bundle\RoutingBundle\Generator\RouteGeneratorCollection" />
