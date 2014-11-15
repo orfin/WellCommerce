@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Bundle\RoutingBundle\Controller\Admin;
 
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
@@ -25,4 +27,33 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 class RoutingController extends AbstractAdminController
 {
 
+    /**
+     * @var \WellCommerce\Bundle\RoutingBundle\Repository\RouteRepository
+     */
+    protected $repository;
+
+    /**
+     * Action used to generate slug
+     *
+     * @param Request $request
+     */
+    public function generateAction(Request $request)
+    {
+        if (!$request->isXmlHttpRequest()) {
+            return $this->manager->getRedirectHelper()->redirectToAction('index');
+        }
+
+        $slug = $this->repository->generateSlug(
+            $request->get('name'),
+            $request->get('id'),
+            $request->get('locale'),
+            $request->get('fields')
+        );
+
+        $response = [
+            'slug' => $slug
+        ];
+
+        return new JsonResponse($response);
+    }
 }

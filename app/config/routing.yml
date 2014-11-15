@@ -15,6 +15,10 @@ wellcommerce_user:
     resource: "@WellCommerceUserBundle/Resources/config/routing.xml"
     prefix:   /admin/user
 
+wellcommerce_routing:
+    resource: "@WellCommerceRoutingBundle/Resources/config/routing.xml"
+    prefix:   /admin/routing
+
 wellcommerce_intl:
     resource: "@WellCommerceIntlBundle/Resources/config/routing.xml"
 

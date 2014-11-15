@@ -13,6 +13,11 @@
         <option key="expose">true</option>
     </route>
 
+    <route id="admin.routing.generate" path="/generate">
+        <default key="_controller">routing.controller.admin:generateAction</default>
+        <option key="expose">true</option>
+    </route>
+
     <route id="admin.routing.add" path="/add">
         <default key="_controller">routing.controller.admin:addAction</default>
     </route>

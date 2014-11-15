@@ -30,4 +30,4 @@ class Sluggable
 
         return $slug;
     }
-} 
+}

@@ -42,14 +42,17 @@ class ProducerForm extends AbstractForm implements FormInterface
             'label' => $this->trans('form.required_data.language_data.label')
         ]));
 
-        $languageData->addChild($builder->getElement('text_field', [
+        $name = $languageData->addChild($builder->getElement('text_field', [
             'name'  => 'name',
             'label' => $this->trans('producer.name.label'),
         ]));
 
-        $languageData->addChild($builder->getElement('text_field', [
-            'name'  => 'slug',
-            'label' => $this->trans('producer.slug.label'),
+        $languageData->addChild($builder->getElement('slug_field', [
+            'name'            => 'slug',
+            'label'           => $this->trans('producer.slug.label'),
+            'name_field'      => $name,
+            'generate_route'  => 'admin.routing.generate',
+            'translatable_id' => $this->getParam('id')
         ]));
 
         $mediaData = $form->addChild($builder->getElement('fieldset', [

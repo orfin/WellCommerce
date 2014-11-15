@@ -60,7 +60,9 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
          * @var $repository RepositoryInterface
          */
         $repository = $this->getEntityManager()->getRepository($name);
-        $repository->setTranslator($this->translator);
+        if (null !== $this->translator) {
+            $repository->setTranslator($this->translator);
+        }
 
         return $repository;
     }

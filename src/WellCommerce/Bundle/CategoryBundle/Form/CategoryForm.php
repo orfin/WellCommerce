@@ -41,14 +41,17 @@ class CategoryForm extends AbstractForm implements FormInterface
             'label' => $this->trans('fieldset.translations'),
         ]));
 
-        $languageData->addChild($builder->getElement('text_field', [
+        $name = $languageData->addChild($builder->getElement('text_field', [
             'name'  => 'name',
             'label' => $this->trans('category.name.label'),
         ]));
 
-        $languageData->addChild($builder->getElement('text_field', [
-            'name'  => 'slug',
-            'label' => $this->trans('category.slug.label'),
+        $languageData->addChild($builder->getElement('slug_field', [
+            'name'            => 'slug',
+            'label'           => $this->trans('category.slug.label'),
+            'name_field'      => $name,
+            'generate_route'  => 'admin.routing.generate',
+            'translatable_id' => $this->getParam('id')
         ]));
 
         $requiredData->addChild($builder->getElement('text_field', [
