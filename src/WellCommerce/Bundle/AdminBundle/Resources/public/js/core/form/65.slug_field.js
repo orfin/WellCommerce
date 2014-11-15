@@ -110,6 +110,9 @@ var GFormSlugField = GCore.ExtendClass(GFormTextField, function () {
     };
 
     gThis.OnNameFieldChange = function (eEvent) {
+    	
+    	var lock = gThis.m_gForm.Lock(Translator.trans('admin.form.locked.title', {}, 'admin'), Translator.trans('admin.form.locked.message', {}, 'admin'));
+    	
         var locale = $(eEvent.currentTarget).closest('.GFormRepetition').find('.locale').attr('data-locale');
 
         var fields = [];
@@ -128,6 +131,7 @@ var GFormSlugField = GCore.ExtendClass(GFormTextField, function () {
 
         GF_Ajax_Request(Routing.generate(gThis.m_oOptions.sGenerateRoute), oRequest, function (oData) {
             gThis.m_jField.val(oData.slug);
+            gThis.m_gForm.Unlock(lock);
         });
     };
 

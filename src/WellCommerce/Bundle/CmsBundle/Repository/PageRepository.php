@@ -1,0 +1,37 @@
+<?php
+/*
+ * WellCommerce Open-Source E-Commerce Platform
+ *
+ * This file is part of the WellCommerce package.
+ *
+ * (c) Adam Piotrowski <adam@wellcommerce.org>
+ *
+ * For the full copyright and license information,
+ * please view the LICENSE file that was distributed with this source code.
+ */
+namespace WellCommerce\Bundle\CmsBundle\Repository;
+
+use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
+
+/**
+ * Class PageRepository
+ *
+ * @package WellCommerce\Bundle\CmsBundle\Repository
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
+ */
+class PageRepository extends AbstractEntityRepository implements PageRepositoryInterface
+{
+    /**
+     * {@inheritdoc}
+     */
+    public function getDataGridQueryBuilder()
+    {
+        return parent::getQueryBuilder()->groupBy('page.id')
+            ->leftJoin(
+                'WellCommerce\Bundle\CmsBundle\Entity\PageTranslation',
+                'page_translation',
+                'WITH',
+                'page.id = page_translation.translatable AND page_translation.locale = :locale');
+
+    }
+}

@@ -7,4 +7,11 @@
         <path>menu.cms.news</path>
         <sort_order>20</sort_order>
     </item>
+    <item>
+        <id>page</id>
+        <name>admin.menu.page</name>
+        <route>admin.page.index</route>
+        <path>menu.cms.page</path>
+        <sort_order>30</sort_order>
+    </item>
 </items>
