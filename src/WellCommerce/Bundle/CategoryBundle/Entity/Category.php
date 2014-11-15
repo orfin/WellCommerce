@@ -35,10 +35,6 @@ class Category
     use Blameable;
 
     /**
-     * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\CategoryBundle\Entity\Category", mappedBy="parent")
-     */
-    protected $children;
-    /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer")
@@ -46,17 +42,24 @@ class Category
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
     /**
      * @var integer
      *
      * @ORM\Column(name="hierarchy", type="integer", options={"default" = 0})
      */
     private $hierarchy;
+
     /**
      * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\CategoryBundle\Entity\Category", inversedBy="children")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $parent;
+
+    /**
+     * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\CategoryBundle\Entity\Category", mappedBy="parent")
+     */
+    private $children;
 
     /**
      * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\Product", mappedBy="categories")

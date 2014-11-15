@@ -38,7 +38,5 @@ interface RoutableSubjectInterface
      */
     public function setRoute(Route $route);
 
-    public function getSluggableFields();
-
     public function getRouteGeneratorStrategy();
 } 

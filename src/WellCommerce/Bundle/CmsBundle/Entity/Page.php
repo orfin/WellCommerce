@@ -12,8 +12,10 @@
 
 namespace WellCommerce\Bundle\CmsBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\HierarchyTrait;
 
 /**
  * Class Page
@@ -29,6 +31,7 @@ class Page
     use ORMBehaviors\Translatable\Translatable;
     use ORMBehaviors\Timestampable\Timestampable;
     use ORMBehaviors\Blameable\Blameable;
+    use HierarchyTrait;
 
     /**
      * @var integer
@@ -44,6 +47,25 @@ class Page
      *
      */
     private $publish;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\CmsBundle\Entity\Page", inversedBy="children")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    private $parent;
+
+    /**
+     * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\CmsBundle\Entity\Page", mappedBy="parent")
+     */
+    private $children;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->children = new ArrayCollection();
+    }
 
     /**
      * @return int
@@ -75,6 +97,47 @@ class Page
     public function setPublish($publish)
     {
         $this->publish = $publish;
+    }
+
+    /**
+     * Returns page parent
+     *
+     * @return mixed
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * Sets page parent
+     *
+     * @param null|Page $parent
+     */
+    public function setParent(Page $parent = null)
+    {
+        $this->parent = $parent;
+    }
+
+    /**
+     * Returns page children
+     *
+     * @return mixed
+     */
+    public function getChildren()
+    {
+        return $this->children;
+    }
+
+    /**
+     * Adds new child to page
+     *
+     * @param Page $child
+     */
+    public function addChild(Page $child)
+    {
+        $this->children[] = $child;
+        $child->setParent($this);
     }
 }
 

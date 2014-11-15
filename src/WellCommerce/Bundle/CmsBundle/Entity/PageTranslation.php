@@ -14,8 +14,10 @@ namespace WellCommerce\Bundle\CmsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Translatable\Translation;
+use WellCommerce\Bundle\CmsBundle\Routing\PageRouteGenerator;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\MetaDataTrait;
 use WellCommerce\Bundle\RoutingBundle\Entity\Behaviours\RoutableTrait;
+use WellCommerce\Bundle\RoutingBundle\Entity\RoutableSubjectInterface;
 
 
 /**
@@ -24,7 +26,7 @@ use WellCommerce\Bundle\RoutingBundle\Entity\Behaviours\RoutableTrait;
  * @ORM\Table(name="page_translation")
  * @ORM\Entity
  */
-class PageTranslation
+class PageTranslation implements RoutableSubjectInterface
 {
     use Translation;
     use MetaDataTrait;
@@ -81,6 +83,11 @@ class PageTranslation
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    public function getRouteGeneratorStrategy()
+    {
+        return PageRouteGenerator::GENERATOR_STRATEGY;
     }
 }
 

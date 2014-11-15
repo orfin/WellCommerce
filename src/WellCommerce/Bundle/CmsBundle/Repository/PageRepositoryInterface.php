@@ -23,5 +23,17 @@ use WellCommerce\Bundle\DataGridBundle\DataGrid\Repository\DataGridAwareReposito
  */
 interface PageRepositoryInterface extends RepositoryInterface, DataGridAwareRepositoryInterface
 {
+    /**
+     * Returns pages tree as a collection
+     *
+     * @return mixed
+     */
+    public function getTreeItems();
 
+    /**
+     * Returns parsed pages tree
+     *
+     * @return array
+     */
+    public function getPagesTree();
 } 

@@ -138,14 +138,6 @@ class ProducerTranslation implements RoutableSubjectInterface
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getSluggableFields()
-    {
-        return ['name'];
-    }
-
     public function getRouteGeneratorStrategy()
     {
         return ProducerRouteGenerator::GENERATOR_STRATEGY;

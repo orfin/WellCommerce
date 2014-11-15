@@ -13,6 +13,7 @@ namespace WellCommerce\Bundle\CmsBundle\Form;
 
 use WellCommerce\Bundle\FormBundle\Form\AbstractForm;
 use WellCommerce\Bundle\FormBundle\Form\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\FormBundle\Form\DataTransformer\EntityToIdentifierTransformer;
 use WellCommerce\Bundle\FormBundle\Form\FormInterface;
 
 /**
@@ -37,7 +38,7 @@ class PageForm extends AbstractForm implements FormInterface
 
         $languageData = $mainData->addChild($builder->getElement('fieldset_language', [
             'name'  => 'translations',
-            'label' => $this->trans('form.translations.label')
+            'label' => $this->trans('fieldset.translations.label')
         ]));
 
         $name = $languageData->addChild($builder->getElement('text_field', [
@@ -55,9 +56,27 @@ class PageForm extends AbstractForm implements FormInterface
 
         $mainData->addChild($builder->getElement('checkbox', [
             'name'    => 'publish',
-            'label'   => $this->trans('admin.publish.label'),
-            'comment' => $this->trans('admin.publish.help'),
+            'label'   => $this->trans('page.publish.label'),
+            'comment' => $this->trans('page.publish.help'),
             'default' => 1
+        ]));
+
+        $mainData->addChild($builder->getElement('text_field', [
+            'name'    => 'hierarchy',
+            'label'   => $this->trans('page.hierarchy.label'),
+            'default' => 0
+        ]));
+
+        $mainData->addChild($builder->getElement('tree', [
+            'name'        => 'parent',
+            'label'       => $this->trans('page.parent.label'),
+            'choosable'   => true,
+            'selectable'  => false,
+            'sortable'    => false,
+            'clickable'   => false,
+            'items'       => $this->get('page.repository')->getTreeItems(),
+            'restrict'    => $this->getParam('id'),
+            'transformer' => new EntityToIdentifierTransformer($this->get('page.repository'))
         ]));
 
         $contentData = $form->addChild($builder->getElement('fieldset', [
@@ -67,12 +86,12 @@ class PageForm extends AbstractForm implements FormInterface
 
         $languageData = $contentData->addChild($builder->getElement('fieldset_language', [
             'name'  => 'translations',
-            'label' => $this->trans('form.translations.label')
+            'label' => $this->trans('fieldset.translations.label')
         ]));
 
         $languageData->addChild($builder->getElement('rich_text_editor', [
             'name'  => 'content',
-            'label' => $this->trans('news.content.label'),
+            'label' => $this->trans('page.content.label'),
         ]));
 
         $form->addFilter('trim');

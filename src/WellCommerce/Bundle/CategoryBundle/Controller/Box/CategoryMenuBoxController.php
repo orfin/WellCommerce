@@ -29,8 +29,6 @@ class CategoryMenuBoxController extends AbstractBoxController implements BoxCont
 
     public function indexAction(Request $request)
     {
-        return [
-            'categories' => $this->get('category.repository')->getCategoriesTree()
-        ];
+        return [];
     }
 } 

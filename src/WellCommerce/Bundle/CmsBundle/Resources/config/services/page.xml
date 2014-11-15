@@ -54,14 +54,15 @@
         <service id="page.route.generator" class="WellCommerce\Bundle\CmsBundle\Routing\PageRouteGenerator">
             <argument type="collection" key="defaults">
                 <argument key="_controller">page.controller.front:indexAction</argument>
-                <argument key="page">1</argument>
-                <argument key="sort">1</argument>
             </argument>
-            <argument type="collection" key="requirements">
-                <argument key="page">\d{1,10}</argument>
-                <argument key="sort">asc|desc</argument>
-            </argument>
+            <argument type="collection" key="requirements" />
             <tag name="route.generator" />
         </service>
+
+        <service id="twig.extension.page" class="WellCommerce\Bundle\CmsBundle\Twig\Extension\PageExtension">
+            <argument type="service" id="page.repository"/>
+            <tag name="twig.extension"/>
+        </service>
+
     </services>
 </container>

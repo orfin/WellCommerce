@@ -23,6 +23,12 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
  */
 interface CategoryRepositoryInterface extends RepositoryInterface
 {
+    /**
+     * Returns parsed categories tree
+     *
+     * @return mixed
+     */
+    public function getCategoriesTree();
 
     /**
      * Returns categories tree as a collection
