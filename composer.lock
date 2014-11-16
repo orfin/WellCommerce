@@ -2711,12 +2711,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/WellCommerce/DataGridBundle.git",
-                "reference": "3a9ccbce434cbb4444a7bc0261e15d60d02190e3"
+                "reference": "50eb85523abaec9cf486bed164a88b0e3fe89bed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WellCommerce/DataGridBundle/zipball/3a9ccbce434cbb4444a7bc0261e15d60d02190e3",
-                "reference": "3a9ccbce434cbb4444a7bc0261e15d60d02190e3",
+                "url": "https://api.github.com/repos/WellCommerce/DataGridBundle/zipball/50eb85523abaec9cf486bed164a88b0e3fe89bed",
+                "reference": "50eb85523abaec9cf486bed164a88b0e3fe89bed",
                 "shasum": ""
             },
             "require": {
@@ -2755,7 +2755,7 @@
                 "symfony",
                 "wellcommerce"
             ],
-            "time": "2014-10-26 12:50:39"
+            "time": "2014-11-16 17:35:19"
         },
         {
             "name": "wellcommerce/form-bundle",
