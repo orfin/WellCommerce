@@ -26,13 +26,6 @@ class DictionaryTranslation
     use Translation;
 
     /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="translation", type="string", length=255)
@@ -64,7 +57,5 @@ class DictionaryTranslation
     {
         $this->translation = $translation;
     }
-
-
 }
 

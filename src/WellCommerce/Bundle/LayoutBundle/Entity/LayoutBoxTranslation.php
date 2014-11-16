@@ -26,13 +26,6 @@ class LayoutBoxTranslation
     use Translation;
 
     /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)

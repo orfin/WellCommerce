@@ -43,7 +43,7 @@
             <tag name="doctrine.event_subscriber" />
         </service>
 
-        <service id="router.provider.endpoint" class="WellCommerce\Bundle\RoutingBundle\Routing\RouteProvider">
+        <service id="router.provider.endpoint" class="WellCommerce\Bundle\RoutingBundle\Provider\RouteProvider">
             <argument type="service" id="route.generator.collection" />
             <argument type="service" id="route.repository" />
         </service>

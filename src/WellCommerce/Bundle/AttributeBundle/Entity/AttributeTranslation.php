@@ -26,13 +26,6 @@ class AttributeTranslation
     use ORMBehaviors\Translatable\Translation;
 
     /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)

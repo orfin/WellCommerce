@@ -31,13 +31,6 @@ class NewsTranslation
     use Sluggable;
 
     /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="topic", type="string", length=255)

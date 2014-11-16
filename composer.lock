@@ -970,12 +970,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "bd8e63631145016cfdf26e658b4a8a2a393698c2"
+                "reference": "44eae4deeb065454e68b3c9911181285f01003c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/bd8e63631145016cfdf26e658b4a8a2a393698c2",
-                "reference": "bd8e63631145016cfdf26e658b4a8a2a393698c2",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/44eae4deeb065454e68b3c9911181285f01003c6",
+                "reference": "44eae4deeb065454e68b3c9911181285f01003c6",
                 "shasum": ""
             },
             "require": {
@@ -1011,20 +1011,20 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2014-11-10 16:46:22"
+            "time": "2014-11-12 17:27:49"
         },
         {
             "name": "imagine/imagine",
-            "version": "v0.6.1",
+            "version": "0.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/avalanche123/Imagine.git",
-                "reference": "725279fd560faa1c7012a80b427b31d7f08f36ff"
+                "reference": "83ca8babede0e54f935ec09d55a726bf4b0a3f7c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/avalanche123/Imagine/zipball/725279fd560faa1c7012a80b427b31d7f08f36ff",
-                "reference": "725279fd560faa1c7012a80b427b31d7f08f36ff",
+                "url": "https://api.github.com/repos/avalanche123/Imagine/zipball/83ca8babede0e54f935ec09d55a726bf4b0a3f7c",
+                "reference": "83ca8babede0e54f935ec09d55a726bf4b0a3f7c",
                 "shasum": ""
             },
             "require": {
@@ -1041,7 +1041,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-develop": "0.6-dev"
+                    "dev-develop": "0.7-dev"
                 }
             },
             "autoload": {
@@ -1068,7 +1068,7 @@
                 "image manipulation",
                 "image processing"
             ],
-            "time": "2014-06-16 20:53:48"
+            "time": "2014-11-11 11:36:02"
         },
         {
             "name": "incenteev/composer-parameter-handler",
@@ -1444,12 +1444,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/DoctrineBehaviors.git",
-                "reference": "2d476ccddeacac320da7d119c693f8b54f6232ce"
+                "reference": "6dbb91cee7ea560180ea9688ad0d2dc9abc46d55"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/DoctrineBehaviors/zipball/2d476ccddeacac320da7d119c693f8b54f6232ce",
-                "reference": "2d476ccddeacac320da7d119c693f8b54f6232ce",
+                "url": "https://api.github.com/repos/KnpLabs/DoctrineBehaviors/zipball/6dbb91cee7ea560180ea9688ad0d2dc9abc46d55",
+                "reference": "6dbb91cee7ea560180ea9688ad0d2dc9abc46d55",
                 "shasum": ""
             },
             "require": {
@@ -1479,7 +1479,7 @@
             ],
             "authors": [
                 {
-                    "name": "KnpLabs",
+                    "name": "Knplabs",
                     "homepage": "http://knplabs.com"
                 }
             ],
@@ -1495,7 +1495,7 @@
                 "translatable",
                 "tree"
             ],
-            "time": "2014-10-22 08:28:19"
+            "time": "2014-11-15 20:26:05"
         },
         {
             "name": "kriswallsmith/assetic",
@@ -2189,12 +2189,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony-cmf/RoutingBundle.git",
-                "reference": "e557c056ecd61d5b2dbf81fb7919e42e1b93ce9f"
+                "reference": "f64a355e0e5d22cdf9ddf85ed022be51b6456c70"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony-cmf/RoutingBundle/zipball/e557c056ecd61d5b2dbf81fb7919e42e1b93ce9f",
-                "reference": "e557c056ecd61d5b2dbf81fb7919e42e1b93ce9f",
+                "url": "https://api.github.com/repos/symfony-cmf/RoutingBundle/zipball/f64a355e0e5d22cdf9ddf85ed022be51b6456c70",
+                "reference": "f64a355e0e5d22cdf9ddf85ed022be51b6456c70",
                 "shasum": ""
             },
             "require": {
@@ -2246,7 +2246,7 @@
                 "database",
                 "routing"
             ],
-            "time": "2014-11-07 15:10:26"
+            "time": "2014-11-15 12:48:25"
         },
         {
             "name": "symfony/assetic-bundle",
@@ -2865,12 +2865,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/willdurand/BazingaJsTranslationBundle.git",
-                "reference": "61b8c50ed78f20fc592525b2ad1ecee99060fd92"
+                "reference": "086498402ca096717931a065b88e7fb29b989548"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/willdurand/BazingaJsTranslationBundle/zipball/61b8c50ed78f20fc592525b2ad1ecee99060fd92",
-                "reference": "61b8c50ed78f20fc592525b2ad1ecee99060fd92",
+                "url": "https://api.github.com/repos/willdurand/BazingaJsTranslationBundle/zipball/086498402ca096717931a065b88e7fb29b989548",
+                "reference": "086498402ca096717931a065b88e7fb29b989548",
                 "shasum": ""
             },
             "require": {
@@ -2914,7 +2914,7 @@
                 "symfony",
                 "translation"
             ],
-            "time": "2014-11-07 14:22:45"
+            "time": "2014-11-12 10:06:13"
         },
         {
             "name": "willdurand/jsonp-callback-validator",
