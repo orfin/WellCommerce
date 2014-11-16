@@ -16,11 +16,13 @@ admin:
         deliverer: Deliverers
         dictionary: Translations
         integration: Integrations
+        layout: Layout
         layout_box: Boxes
         locale: Languages
         localization: Internationalization
         media: 'Media management'
         news: News
+        page: 'CMS Pages'
         payment_method: 'Payment methods'
         producer: Producers
         product: Products

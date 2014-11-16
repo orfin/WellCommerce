@@ -16,11 +16,13 @@ admin:
         deliverer: Dostawcy
         dictionary: Tłumaczenia
         integration: Integracje
+        layout: Layout
         layout_box: Boksy
         locale: Języki
         localization: Internacjonalizacja
         media: 'Zarządzanie plikami'
         news: Aktualności
+        page: 'Strony CMS'
         payment_method: 'Metody płatności'
         producer: Producenci
         product: Produkty
