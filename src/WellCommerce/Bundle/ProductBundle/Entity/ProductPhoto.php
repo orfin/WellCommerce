@@ -33,11 +33,13 @@ class ProductPhoto
      * @ORM\JoinColumn(name="photo_id", referencedColumnName="id", nullable=false)
      */
     protected $photo;
+
     /**
      * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\Product", inversedBy="productPhotos")
      * @ORM\JoinColumn(name="product_id", referencedColumnName="id", nullable=false)
      */
     protected $product;
+
     /**
      * @var integer
      *
@@ -46,6 +48,7 @@ class ProductPhoto
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
     /**
      * @ORM\Column(name="main_photo", type="boolean", options={"default":0})
      */

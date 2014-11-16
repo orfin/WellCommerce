@@ -28,6 +28,9 @@
         </service>
 
         <service id="product_status.datagrid" class="%product_status.datagrid.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
             <configurator service="product_status.datagrid.configurator" method="configure" />
         </service>
 

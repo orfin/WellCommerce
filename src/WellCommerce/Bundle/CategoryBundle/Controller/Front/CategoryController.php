@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\CategoryBundle\Controller\Front;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
 
@@ -26,12 +27,16 @@ use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
  */
 class CategoryController extends AbstractFrontController implements FrontControllerInterface
 {
-
     public function indexAction(Request $request)
     {
+        $category = $this->get('category.repository')->findResource($request);
+
+        if (null === $category) {
+            throw new NotFoundHttpException($this->trans('category.resource.not_found'));
+        }
+
         return [
-            'layout' => ''
+            'currentCategory' => $category
         ];
     }
-
 }

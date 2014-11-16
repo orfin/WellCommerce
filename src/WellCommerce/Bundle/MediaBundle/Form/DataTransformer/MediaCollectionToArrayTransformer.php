@@ -53,7 +53,10 @@ class MediaCollectionToArrayTransformer implements DataTransformerInterface
         }
         $items = [];
         foreach ($collection as $item) {
-            $items[] = $item->getPhoto()->getId();
+            if($item->getMainPhoto() == 1){
+                $items['main_photo'] = $item->getPhoto()->getId();
+            }
+            $items['photos'][] = $item->getPhoto()->getId();
         }
 
         return $items;

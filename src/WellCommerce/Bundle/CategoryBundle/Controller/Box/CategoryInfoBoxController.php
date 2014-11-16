@@ -28,16 +28,14 @@ class CategoryInfoBoxController extends AbstractBoxController implements BoxCont
 {
     public function indexAction(Request $request)
     {
-        $resource = $this->repository->findResource($request);
-        $category = [
-            'id'                => $resource->getId(),
-            'name'              => $resource->translate()->getName(),
-            'short_description' => $resource->translate()->getShortDescription(),
-            'description'       => $resource->translate()->getDescription(),
-        ];
+//        $resource = $this->repository->findResource($request);
+//        $category = [
+//            'id'                => $resource->getId(),
+//            'name'              => $resource->translate()->getName(),
+//            'short_description' => $resource->translate()->getShortDescription(),
+//            'description'       => $resource->translate()->getDescription(),
+//        ];
 
-        return [
-            'category' => $category
-        ];
+        return [];
     }
 } 

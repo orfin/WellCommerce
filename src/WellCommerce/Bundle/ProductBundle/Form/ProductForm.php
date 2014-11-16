@@ -37,83 +37,82 @@ class ProductForm extends AbstractForm implements FormInterface
         $currencies = $this->get('currency.repository')->getCollectionToSelect('code');
         $vatValues  = $this->get('tax.repository')->getCollectionToSelect();
 
-        $requiredData = $form->addChild($builder->getElement('fieldset', [
-            'name'  => 'required_data',
-            'label' => $this->trans('Required data')
+        $mainData = $form->addChild($builder->getElement('fieldset', [
+            'name'  => 'main_data',
+            'label' => $this->trans('fieldset.main.label')
         ]));
 
-        $requiredData->addChild($builder->getElement('text_field', [
-            'name'  => 'sku',
-            'label' => $this->trans('product.sku'),
-            'rules' => [
-                $builder->getRule('required', [
-                    'message' => $this->trans('SKU is required')
-                ]),
-            ]
-        ]));
-
-        $languageData = $requiredData->addChild($builder->getElement('fieldset_language', [
+        $languageData = $mainData->addChild($builder->getElement('fieldset_language', [
             'name'  => 'translations',
-            'label' => $this->trans('Language data')
+            'label' => $this->trans('fieldset.language.label')
         ]));
 
-        $languageData->addChild($builder->getElement('text_field', [
+        $name = $languageData->addChild($builder->getElement('text_field', [
             'name'  => 'name',
-            'label' => $this->trans('product.name'),
-            'rules' => [
-                $builder->getRule('required', [
-                    'message' => $this->trans('Name is required')
-                ]),
-            ]
+            'label' => $this->trans('product.name.label'),
         ]));
 
-        $requiredData->addChild($builder->getElement('checkbox', [
+        $languageData->addChild($builder->getElement('slug_field', [
+            'name'            => 'slug',
+            'label'           => $this->trans('product.slug.label'),
+            'name_field'      => $name,
+            'generate_route'  => 'admin.routing.generate',
+            'translatable_id' => $this->getParam('id')
+        ]));
+
+        $mainData->addChild($builder->getElement('checkbox', [
             'name'    => 'enabled',
-            'label'   => $this->trans('Enabled'),
-            'comment' => $this->trans('Only enabled products are visible in shop'),
+            'label'   => $this->trans('product.enabled.label'),
+            'comment' => $this->trans('product.enabled.comment'),
             'default' => 1
         ]));
 
-        $requiredData->addChild($builder->getElement('select', [
+        $mainData->addChild($builder->getElement('text_field', [
+            'name'  => 'sku',
+            'label' => $this->trans('product.sku.label'),
+        ]));
+
+
+        $mainData->addChild($builder->getElement('select', [
             'name'        => 'producer',
-            'label'       => $this->trans('Producer'),
+            'label'       => $this->trans('product.producer.label'),
             'options'     => $this->get('producer.repository')->getCollectionToSelect(),
             'transformer' => new EntityToIdentifierTransformer($this->get('producer.repository'))
         ]));
 
         $metaData = $form->addChild($builder->getElement('fieldset', [
             'name'  => 'meta_data',
-            'label' => $this->trans('Meta settings')
+            'label' => $this->trans('fieldset.meta.label')
         ]));
 
         $languageData = $metaData->addChild($builder->getElement('fieldset_language', [
             'name'  => 'translations',
-            'label' => $this->trans('Translations'),
+            'label' => $this->trans('fieldset.translations.label'),
         ]));
 
         $languageData->addChild($builder->getElement('text_field', [
             'name'  => 'metaTitle',
-            'label' => $this->trans('Title')
+            'label' => $this->trans('meta.title.label')
         ]));
 
         $languageData->addChild($builder->getElement('text_field', [
             'name'  => 'metaKeywords',
-            'label' => $this->trans('Keywords'),
+            'label' => $this->trans('meta.keywords.label'),
         ]));
 
         $languageData->addChild($builder->getElement('text_area', [
             'name'  => 'metaDescription',
-            'label' => $this->trans('Description'),
+            'label' => $this->trans('meta.description.label'),
         ]));
 
         $categoryPane = $form->addChild($builder->getElement('fieldset', [
             'name'  => 'category_pane',
-            'label' => $this->trans('Categories')
+            'label' => $this->trans('fieldset.categories.label')
         ]));
 
         $categoriesField = $categoryPane->addChild($builder->getElement('tree', [
             'name'        => 'categories',
-            'label'       => $this->trans('Categories'),
+            'label'       => $this->trans('product.categories.label'),
             'choosable'   => false,
             'selectable'  => true,
             'sortable'    => false,
@@ -124,16 +123,16 @@ class ProductForm extends AbstractForm implements FormInterface
 
         $pricePane = $form->addChild($builder->getElement('fieldset', [
             'name'  => 'price_pane',
-            'label' => $this->trans('Price settings')
+            'label' => $this->trans('fieldset.prices.label')
         ]));
 
         $vatField = $pricePane->addChild($builder->getElement('select', [
             'name'            => 'tax',
-            'label'           => $this->trans('Tax'),
+            'label'           => $this->trans('product.tax.label'),
             'options'         => $vatValues,
             'addable'         => true,
             'onAdd'           => 'onTaxAdd',
-            'add_item_prompt' => $this->trans('Enter tax value'),
+            'add_item_prompt' => $this->trans('product.tax.add_item_prompt'),
             'transformer'     => new EntityToIdentifierTransformer($this->get('tax.repository'))
         ]));
 

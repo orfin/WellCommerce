@@ -30,19 +30,25 @@ class ProductStatusForm extends AbstractForm implements FormInterface
     {
         $form = $builder->init($options);
 
-        $requiredData = $form->addChild($builder->getElement('fieldset', [
+        $mainData = $form->addChild($builder->getElement('fieldset', [
             'name'  => 'required_data',
-            'label' => $this->trans('form.required_data.label')
+            'label' => $this->trans('fieldset.main.label')
         ]));
 
-        $languageData = $requiredData->addChild($builder->getElement('fieldset_language', [
+        $languageData = $mainData->addChild($builder->getElement('fieldset_language', [
             'name'  => 'translations',
-            'label' => $this->trans('form.required_data.language_data.label')
+            'label' => $this->trans('fieldset.translations.label')
         ]));
 
         $languageData->addChild($builder->getElement('text_field', [
             'name'  => 'name',
-            'label' => $this->trans('unit.language_data.name.label'),
+            'label' => $this->trans('product_status.name.label'),
+        ]));
+
+        $languageData->addChild($builder->getElement('text_field', [
+            'name'    => 'cssClass',
+            'label'   => $this->trans('product_status.css_class.label'),
+            'comment' => $this->trans('product_status.css_class.comment'),
         ]));
 
         $form->addFilter('no_code');

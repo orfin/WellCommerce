@@ -388,7 +388,7 @@ class Product
      *
      * @param array $data Data passed from transformer
      *
-     * @return bool
+     * @return void
      */
     public function setProductPhotos(array $data)
     {
@@ -426,6 +426,7 @@ class Product
         if ($productPhotos->count() == 0) {
             $this->setPhoto(null);
         }
+
         $this->productPhotos = $productPhotos;
     }
 

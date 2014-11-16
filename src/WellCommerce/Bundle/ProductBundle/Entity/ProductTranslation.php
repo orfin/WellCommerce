@@ -15,7 +15,9 @@ namespace WellCommerce\Bundle\ProductBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Translatable\Translation;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\MetaDataTrait;
+use WellCommerce\Bundle\ProductBundle\Routing\ProductRouteGenerator;
 use WellCommerce\Bundle\RoutingBundle\Entity\Behaviours\RoutableTrait;
+use WellCommerce\Bundle\RoutingBundle\Entity\RoutableSubjectInterface;
 
 /**
  * ProductTranslation
@@ -24,7 +26,7 @@ use WellCommerce\Bundle\RoutingBundle\Entity\Behaviours\RoutableTrait;
  * @ORM\HasLifecycleCallbacks
  * @ORM\Entity
  */
-class ProductTranslation
+class ProductTranslation implements RoutableSubjectInterface
 {
     use Translation;
     use MetaDataTrait;
@@ -136,17 +138,9 @@ class ProductTranslation
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getSluggableFields()
+    public function getRouteGeneratorStrategy()
     {
-        return ['name'];
-    }
-
-    public function getRouteType()
-    {
-        return 'product';
+        return ProductRouteGenerator::GENERATOR_STRATEGY;
     }
 }
 

@@ -4,6 +4,12 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+        <service id="page.controller.front" class="WellCommerce\Bundle\CmsBundle\Controller\Front\PageController">
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
         <service id="page.controller.admin" class="WellCommerce\Bundle\CmsBundle\Controller\Admin\PageController">
             <argument type="service" id="service_container"/>
             <argument type="service" id="admin_manager"/>

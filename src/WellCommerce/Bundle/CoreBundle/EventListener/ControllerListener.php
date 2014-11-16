@@ -16,12 +16,10 @@ use Doctrine\Common\Util\ClassUtils;
 use Symfony\Bundle\FrameworkBundle\Templating\TemplateReference;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
  * Class ControllerListener
@@ -34,47 +32,43 @@ class ControllerListener implements EventSubscriberInterface
     /**
      * @var ContainerInterface
      */
-    private $container;
-
-    /**
-     * @var \Symfony\Component\HttpKernel\KernelInterface
-     */
-    private $kernel;
+    protected $container;
 
     /**
      * Constructor.
      *
-     * @param KernelInterface $kernel A KernelInterface instance
+     * @param ContainerInterface $container The service container instance
      */
-    public function __construct(ContainerInterface $container, KernelInterface $kernel)
+    public function __construct(ContainerInterface $container)
     {
-        $this->kernel = $kernel;
+        $this->container = $container;
     }
 
     public static function getSubscribedEvents()
     {
         return [
-            KernelEvents::CONTROLLER => ['onKernelController', -512],
-            KernelEvents::VIEW       => 'onKernelView',
+            KernelEvents::VIEW => ['onKernelView', 128],
         ];
     }
 
-    public function onKernelController(FilterControllerEvent $event)
-    {
-        if (!is_array($controller = $event->getController())) {
-            return;
-        }
-
-        $request  = $event->getRequest();
-        $template = $this->guessTemplateName($controller, $event->getRequest());
-        $request->attributes->set('_template', $template);
-    }
-
+    /**
+     * Inherited from TemplateListener
+     *
+     * @param GetResponseForControllerResultEvent $event
+     */
     public function onKernelView(GetResponseForControllerResultEvent $event)
     {
+        $event->stopPropagation();
         $request    = $event->getRequest();
         $parameters = $event->getControllerResult();
         $templating = $this->container->get('templating');
+
+        if ($event->getRequestType() == HttpKernelInterface::MASTER_REQUEST) {
+            $request->attributes->set('_template_master_vars', $parameters);
+        } else {
+            $masterParameters = $request->attributes->get('_template_master_vars');
+            $parameters = array_merge($masterParameters, $parameters);
+        }
 
         if (null === $parameters) {
             if (!$vars = $request->attributes->get('_template_vars')) {
@@ -83,7 +77,7 @@ class ControllerListener implements EventSubscriberInterface
                 }
             }
 
-            $parameters = array();
+            $parameters = [];
             foreach ($vars as $var) {
                 $parameters[$var] = $request->attributes->get($var);
             }
@@ -107,55 +101,4 @@ class ControllerListener implements EventSubscriberInterface
             $event->setResponse(new StreamedResponse($callback));
         }
     }
-
-    public function guessTemplateName($controller, Request $request, $engine = 'twig')
-    {
-        $className = class_exists('Doctrine\Common\Util\ClassUtils') ? ClassUtils::getClass($controller[0])
-            : get_class($controller[0]);
-
-        if (!preg_match('/Controller\\\(.+)Controller$/', $className, $matchController)) {
-            throw new \InvalidArgumentException(sprintf('The "%s" class does not look like a controller class (it must be in a "Controller" sub-namespace and the class name must end with "Controller")',
-                get_class($controller[0])));
-        }
-        if (!preg_match('/^(.+)Action$/', $controller[1], $matchAction)) {
-            throw new \InvalidArgumentException(sprintf('The "%s" method does not look like an action method (it does not end with Action)',
-                $controller[1]));
-        }
-
-        $bundle = $this->getBundleForClass($className);
-
-        if ($bundle) {
-            while ($bundleName = $bundle->getName()) {
-                if (null === $parentBundleName = $bundle->getParent()) {
-                    $bundleName = $bundle->getName();
-
-                    break;
-                }
-
-                $bundles = $this->kernel->getBundle($parentBundleName, false);
-                $bundle  = array_pop($bundles);
-            }
-        } else {
-            $bundleName = null;
-        }
-
-        return new TemplateReference($bundleName, $matchController[1], $matchAction[1], $request->getRequestFormat(),
-            $engine);
-    }
-
-    protected function getBundleForClass($class)
-    {
-        $reflectionClass = new \ReflectionClass($class);
-        $bundles         = $this->kernel->getBundles();
-
-        do {
-            $namespace = $reflectionClass->getNamespaceName();
-            foreach ($bundles as $bundle) {
-                if (0 === strpos($namespace, $bundle->getNamespace())) {
-                    return $bundle;
-                }
-            }
-            $reflectionClass = $reflectionClass->getParentClass();
-        } while ($reflectionClass);
-    }
-} 
+}

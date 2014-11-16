@@ -40,6 +40,14 @@ class ProductStatusTranslation
     private $name;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="css_class", type="string", length=255)
+     */
+    private $cssClass;
+
+
+    /**
      * Returns translation ID.
      *
      * @return integer The ID.
@@ -57,8 +65,22 @@ class ProductStatusTranslation
     public function setName($name)
     {
         $this->name = $name;
+    }
 
-        return $this;
+    /**
+     * @return string
+     */
+    public function getCssClass()
+    {
+        return $this->cssClass;
+    }
+
+    /**
+     * @param string $cssClass
+     */
+    public function setCssClass($cssClass)
+    {
+        $this->cssClass = $cssClass;
     }
 }
 
