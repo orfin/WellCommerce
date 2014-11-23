@@ -11,9 +11,7 @@
  */
 namespace WellCommerce\Bundle\CoreBundle\Repository;
 
-use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\EntityRepository;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Translation\TranslatorInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Helper;
@@ -67,6 +65,11 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
         return $repository;
     }
 
+    public function getMetadata()
+    {
+        return $this->_class;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -90,21 +93,9 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
     /**
      * {@inheritdoc}
      */
-    public function findResource(Request $request)
-    {
-        if ($request->attributes->has('id')) {
-            return $this->find($request->attributes->get('id'));
-        }
-
-        throw new EntityNotFoundException($this->getClassName());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getCollectionToSelect($labelField = 'name', $associationName = 'translations')
     {
-        $metadata   = $this->getMetadata();
+        $metadata   = $this->getClassMetadata();
         $identifier = $metadata->getSingleIdentifierFieldName();
         $tableName  = $metadata->getTableName();
         $accessor   = $this->getPropertyAccessor();
@@ -146,14 +137,6 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
         }
 
         throw new \InvalidArgumentException('Field "%s" or association "%s" not found.', $labelField, $associationName);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getMetadata()
-    {
-        return $this->_class;
     }
 
     /**

@@ -4,12 +4,29 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+        <service id="dictionary.manager.admin" class="WellCommerce\Bundle\IntlBundle\Manager\Admin\DictionaryManager">
+            <argument type="service" id="flash_helper"/>
+            <argument type="service" id="redirect_helper"/>
+            <argument type="service" id="image_helper"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="translator"/>
+            <call method="setRepository">
+                <argument type="service" id="dictionary.repository"/>
+            </call>
+            <call method="setForm">
+                <argument type="service" id="dictionary.form"/>
+            </call>
+            <call method="setDataGrid">
+                <argument type="service" id="dictionary.datagrid"/>
+            </call>
+        </service>
+
         <service id="dictionary.controller.admin" class="WellCommerce\Bundle\IntlBundle\Controller\Admin\DictionaryController">
-            <argument type="service" id="service_container"/>
-            <argument type="service" id="admin_manager"/>
-            <argument type="service" id="dictionary.repository"/>
-            <argument type="service" id="dictionary.datagrid"/>
-            <argument type="service" id="dictionary.form"/>
+            <argument type="service" id="dictionary.manager.admin"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
         </service>
 
         <service id="dictionary.repository" class="WellCommerce\Bundle\IntlBundle\Repository\DictionaryRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">

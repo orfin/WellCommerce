@@ -4,12 +4,29 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+        <service id="media.manager.admin" class="WellCommerce\Bundle\MediaBundle\Manager\Admin\MediaManager">
+            <argument type="service" id="flash_helper"/>
+            <argument type="service" id="redirect_helper"/>
+            <argument type="service" id="image_helper"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="translator"/>
+            <call method="setRepository">
+                <argument type="service" id="media.repository"/>
+            </call>
+            <call method="setForm">
+                <argument type="service" id="media.form"/>
+            </call>
+            <call method="setDataGrid">
+                <argument type="service" id="media.datagrid"/>
+            </call>
+        </service>
+        
         <service id="media.controller.admin" class="WellCommerce\Bundle\MediaBundle\Controller\Admin\MediaController">
-            <argument type="service" id="service_container"/>
-            <argument type="service" id="admin_manager"/>
-            <argument type="service" id="media.repository"/>
-            <argument type="service" id="media.datagrid"/>
-            <argument type="service" id="media.form"/>
+            <argument type="service" id="media.manager.admin"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
         </service>
 
         <service id="media.repository" class="WellCommerce\Bundle\MediaBundle\Repository\MediaRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
@@ -49,6 +66,11 @@
                 <argument type="service" id="router"/>
             </call>
             <tag name="kernel.event_subscriber" />
+        </service>
+
+        <service id="twig.extension.image" class="WellCommerce\Bundle\MediaBundle\Twig\Extension\ImageExtension">
+            <argument type="service" id="image_helper"/>
+            <tag name="twig.extension"/>
         </service>
     </services>
 </container>

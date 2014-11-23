@@ -34,7 +34,7 @@ class ResourceEvent extends Event
      * @param         $resource
      * @param Request $request
      */
-    public function __construct($resource, Request $request)
+    public function __construct($resource, Request $request = null)
     {
         $this->request  = $request;
         $this->resource = $resource;

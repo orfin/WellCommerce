@@ -12,6 +12,7 @@
 namespace WellCommerce\Bundle\CoreBundle\Controller\Front;
 
 use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
+use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
  * Class AbstractFrontController

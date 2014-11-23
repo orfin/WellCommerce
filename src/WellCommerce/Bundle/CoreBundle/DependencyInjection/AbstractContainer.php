@@ -26,26 +26,6 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 class AbstractContainer extends ContainerAware
 {
     /**
-     * Shortcut to get LayoutManager service
-     *
-     * @return object LayoutManager
-     */
-    final public function getLayoutManager()
-    {
-        return $this->container->get('layout_manager');
-    }
-
-    /**
-     * Shortcut to get LayoutRenderer service
-     *
-     * @return object LayoutRenderer
-     */
-    final public function getLayoutRenderer()
-    {
-        return $this->container->get('layout_renderer');
-    }
-
-    /**
      * Generates relative or absolute url based on given route and parameters
      *
      * @param string $route
@@ -198,16 +178,6 @@ class AbstractContainer extends ContainerAware
     }
 
     /**
-     * Shortcut to get Helper service
-     *
-     * @return object Helper
-     */
-    final protected function getHelper()
-    {
-        return $this->container->get('helper');
-    }
-
-    /**
      * Shortcut to get PropertyAccessor
      *
      * @return \Symfony\Component\PropertyAccess\PropertyAccessorInterface
@@ -225,26 +195,6 @@ class AbstractContainer extends ContainerAware
     final protected function getCache()
     {
         return $this->container->get('cache');
-    }
-
-    /**
-     * Shortcut to get Uploader service
-     *
-     * @return object
-     */
-    final protected function getUploader()
-    {
-        return $this->container->get('media.uploader');
-    }
-
-    /**
-     * Shortcut to get ImageGallery service
-     *
-     * @return \WellCommerce\FileManager\Uploader\ImageGallery
-     */
-    final protected function getImageGallery()
-    {
-        return $this->container->get('file_manager.gallery.image');
     }
 
     /**
@@ -282,6 +232,16 @@ class AbstractContainer extends ContainerAware
         }
 
         return $dir;
+    }
+
+    /**
+     * Returns image helper
+     *
+     * @return \WellCommerce\Bundle\CoreBundle\Helper\Image\ImageHelperInterface
+     */
+    final protected function getImageHelper()
+    {
+        return $this->get('image_helper');
     }
 
 }

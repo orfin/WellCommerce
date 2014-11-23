@@ -4,12 +4,29 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+        <service id="news.manager.admin" class="WellCommerce\Bundle\CmsBundle\Manager\Admin\NewsManager">
+            <argument type="service" id="flash_helper"/>
+            <argument type="service" id="redirect_helper"/>
+            <argument type="service" id="image_helper"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="translator"/>
+            <call method="setRepository">
+                <argument type="service" id="news.repository"/>
+            </call>
+            <call method="setForm">
+                <argument type="service" id="news.form"/>
+            </call>
+            <call method="setDataGrid">
+                <argument type="service" id="news.datagrid"/>
+            </call>
+        </service>
+        
         <service id="news.controller.admin" class="WellCommerce\Bundle\CmsBundle\Controller\Admin\NewsController">
-            <argument type="service" id="service_container"/>
-            <argument type="service" id="admin_manager"/>
-            <argument type="service" id="news.repository"/>
-            <argument type="service" id="news.datagrid"/>
-            <argument type="service" id="news.form"/>
+            <argument type="service" id="news.manager.admin"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
         </service>
 
         <service id="news.repository" class="WellCommerce\Bundle\CmsBundle\Repository\NewsRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">

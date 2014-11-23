@@ -4,12 +4,29 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+        <service id="locale.manager.admin" class="WellCommerce\Bundle\IntlBundle\Manager\Admin\LocaleManager">
+            <argument type="service" id="flash_helper"/>
+            <argument type="service" id="redirect_helper"/>
+            <argument type="service" id="image_helper"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="translator"/>
+            <call method="setRepository">
+                <argument type="service" id="locale.repository"/>
+            </call>
+            <call method="setForm">
+                <argument type="service" id="locale.form"/>
+            </call>
+            <call method="setDataGrid">
+                <argument type="service" id="locale.datagrid"/>
+            </call>
+        </service>
+
         <service id="locale.controller.admin" class="WellCommerce\Bundle\IntlBundle\Controller\Admin\LocaleController">
-            <argument type="service" id="service_container"/>
-            <argument type="service" id="admin_manager"/>
-            <argument type="service" id="locale.repository"/>
-            <argument type="service" id="locale.datagrid"/>
-            <argument type="service" id="locale.form"/>
+            <argument type="service" id="locale.manager.admin"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
         </service>
 
         <service id="locale.repository" class="WellCommerce\Bundle\IntlBundle\Repository\LocaleRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">

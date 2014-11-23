@@ -11,14 +11,11 @@
  */
 namespace WellCommerce\Bundle\CoreBundle\Controller\Admin;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
-use WellCommerce\Bundle\CoreBundle\Controller\Admin\Manager\AdminManagerInterface;
-use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
-use WellCommerce\Bundle\DataGridBundle\DataGrid\DataGridInterface;
-use WellCommerce\Bundle\FormBundle\Form\FormInterface;
+use WellCommerce\Bundle\CoreBundle\Manager\Admin\AdminManagerInterface;
 
 /**
  * Class AbstractAdminController
@@ -31,21 +28,6 @@ use WellCommerce\Bundle\FormBundle\Form\FormInterface;
 abstract class AbstractAdminController extends AbstractController implements AdminControllerInterface
 {
     /**
-     * @var DataGridInterface
-     */
-    protected $datagrid;
-
-    /**
-     * @var RepositoryInterface
-     */
-    protected $repository;
-
-    /**
-     * @var FormInterface
-     */
-    protected $form;
-
-    /**
      * @var AdminManagerInterface
      */
     protected $manager;
@@ -53,24 +35,11 @@ abstract class AbstractAdminController extends AbstractController implements Adm
     /**
      * Constructor
      *
-     * @param ContainerInterface       $container
-     * @param null|RepositoryInterface $repository
-     * @param null|DataGridInterface   $datagrid
-     * @param null|FormInterface       $form
-     * @param AdminManagerInterface    $manager
+     * @param AdminManagerInterface $manager
      */
-    public function __construct(
-        ContainerInterface $container,
-        AdminManagerInterface $manager,
-        RepositoryInterface $repository = null,
-        DataGridInterface $datagrid = null,
-        FormInterface $form = null
-    ) {
-        $this->setContainer($container);
-        $this->repository = $repository;
-        $this->datagrid   = $datagrid;
-        $this->form       = $form;
-        $this->manager    = $manager;
+    public function __construct(AdminManagerInterface $manager)
+    {
+        $this->manager = $manager;
     }
 
     /**
@@ -83,7 +52,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
     public function indexAction(Request $request)
     {
         return [
-            'datagrid' => $this->datagrid->getDataGrid()
+            'datagrid' => $this->manager->getDataGrid()->getInstance()
         ];
     }
 
@@ -96,7 +65,9 @@ abstract class AbstractAdminController extends AbstractController implements Adm
      */
     public function gridAction(Request $request)
     {
-        return new JsonResponse($this->datagrid->getDataGrid()->load($request));
+        $datagrid = $this->manager->getDataGrid()->getInstance();
+
+        return new JsonResponse($datagrid->load($request));
     }
 
     /**
@@ -108,19 +79,16 @@ abstract class AbstractAdminController extends AbstractController implements Adm
      */
     public function addAction(Request $request)
     {
-        $resource = $this->repository->createNew();
+        $resource = $this->manager->getRepository()->createNew();
         $form     = $this->getForm($resource);
 
         if ($form->handleRequest($request)->isValid()) {
-            $this->manager->create($resource, $request);
+            $this->manager->createResource($resource, $request);
 
-            if ($form->isAction('continue')) {
-                return $this->manager->getRedirectHelper()->redirectToAction('edit', $resource);
-            }
-            // redirect to /add action
             if ($form->isAction('next')) {
                 return $this->manager->getRedirectHelper()->redirectToAction('add');
             }
+
             return $this->manager->getRedirectHelper()->redirectToAction('index');
         }
 
@@ -138,8 +106,8 @@ abstract class AbstractAdminController extends AbstractController implements Adm
      */
     protected function getForm($resource)
     {
-        return $this->getFormBuilder($this->form, $resource, [
-            'name' => $this->repository->getAlias()
+        return $this->getFormBuilder($this->manager->getForm(), $resource, [
+            'name' => $this->manager->getRepository()->getAlias()
         ]);
     }
 
@@ -152,17 +120,18 @@ abstract class AbstractAdminController extends AbstractController implements Adm
      */
     public function editAction(Request $request)
     {
-        $resource = $this->repository->findResource($request);
+        $resource = $this->findOr404($request);
         $form     = $this->getForm($resource);
 
         if ($form->handleRequest($request)->isValid()) {
-            $this->manager->update($resource, $request);
-            // stay on /edit screen
+            $this->manager->updateResource($resource, $request);
+
             if ($form->isAction('continue')) {
-                return $this->manager->getRedirectHelper()->redirectToAction('edit', $resource);
+                return $this->manager->getRedirectHelper()->redirectToAction('edit', [
+                    'id' => $resource->getId()
+                ]);
             }
 
-            // redirect to /add action
             if ($form->isAction('next')) {
                 return $this->manager->getRedirectHelper()->redirectToAction('add');
             }
@@ -184,17 +153,35 @@ abstract class AbstractAdminController extends AbstractController implements Adm
      */
     public function deleteAction($id)
     {
-        $em = $this->getEntityManager();
-
         try {
-            $resource = $this->repository->find($id);
-            $em->remove($resource);
+            $resource = $this->manager->getRepository()->find($id);
+            $this->manager->removeResource($resource);
         } catch (\Exception $e) {
             return new JsonResponse(['error' => $e->getMessage()]);
         }
 
-        $em->flush();
-
         return new JsonResponse(['success' => true]);
+    }
+
+    /**
+     * Returns current resource or throws an exception
+     *
+     * @param Request $request
+     *
+     * @return mixed
+     */
+    protected function findOr404(Request $request)
+    {
+        if (!$request->attributes->has('id')) {
+            throw new \LogicException('Request does not have "id" attribute set.');
+        }
+
+        $id = $request->attributes->get('id');
+
+        if (null === $resource = $this->manager->getRepository()->find($id)) {
+            throw new NotFoundHttpException(sprintf('Resource not found'));
+        }
+
+        return $resource;
     }
 }

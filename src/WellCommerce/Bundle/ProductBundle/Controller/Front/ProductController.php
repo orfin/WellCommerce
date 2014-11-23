@@ -13,8 +13,10 @@
 namespace WellCommerce\Bundle\ProductBundle\Controller\Front;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
+use WellCommerce\Bundle\ProductBundle\Repository\ProductRepositoryInterface;
 
 /**
  * Class ProductController
@@ -26,26 +28,34 @@ use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
  */
 class ProductController extends AbstractFrontController implements FrontControllerInterface
 {
+    /**
+     * @var ProductRepositoryInterface
+     */
+    protected $repository;
 
     public function indexAction(Request $request)
     {
+        $this->repository->findResource($request);
+
         $resource = $this->get('product.repository')->findResource($request);
 
         if (null === $resource) {
             throw new NotFoundHttpException($this->trans('product.resource.not_found'));
         }
 
-        $product = [
-            'id'                => $resource->getId(),
-            'name'              => $resource->translate()->getName(),
-            'short_description' => $resource->translate()->getShortDescription(),
-            'description'       => $resource->translate()->getDescription(),
-            'statuses'          => $resource->getStatuses()
-        ];
-
         return [
-            'currentProduct' => $resource
+            'product' => $resource
         ];
+    }
+
+    /**
+     * Sets product repository
+     *
+     * @param ProductRepositoryInterface $repository
+     */
+    public function setRepository(ProductRepositoryInterface $repository)
+    {
+        $this->repository = $repository;
     }
 
 }

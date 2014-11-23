@@ -54,6 +54,13 @@ class CategoryForm extends AbstractForm implements FormInterface
             'translatable_id' => $this->getParam('id')
         ]));
 
+        $requiredData->addChild($builder->getElement('checkbox', [
+            'name'    => 'enabled',
+            'label'   => $this->trans('category.enabled.label'),
+            'comment' => $this->trans('category.enabled.comment'),
+            'default' => 1
+        ]));
+
         $requiredData->addChild($builder->getElement('text_field', [
             'name'  => 'hierarchy',
             'label' => $this->trans('category.hierarchy.label'),

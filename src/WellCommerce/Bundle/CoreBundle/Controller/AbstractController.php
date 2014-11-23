@@ -11,10 +11,9 @@
  */
 namespace WellCommerce\Bundle\CoreBundle\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
-use WellCommerce\Bundle\DataGridBundle\DataGrid\DataGridInterface;
 use WellCommerce\Bundle\FormBundle\Form\FormInterface;
 
 /**
@@ -23,8 +22,20 @@ use WellCommerce\Bundle\FormBundle\Form\FormInterface;
  * @package WellCommerce\Bundle\CoreBundle\Controller
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractController extends AbstractContainer
+abstract class AbstractController extends Controller
 {
+    /**
+     * Returns content as json response
+     *
+     * @param $content
+     *
+     * @return JsonResponse
+     */
+    protected function jsonResponse($content)
+    {
+        return new JsonResponse($content);
+    }
+
     /**
      * Creates and returns the form element
      *
@@ -37,32 +48,5 @@ abstract class AbstractController extends AbstractContainer
     protected function getFormBuilder(FormInterface $form, $data = null, array $options)
     {
         return $this->get('form.builder')->create($form, $data, $options)->getForm();
-    }
-
-    /**
-     * Creates and returns the datagrid
-     *
-     * @param DataGridInterface $dataGrid DataGrid instance
-     *
-     * @return \WellCommerce\Bundle\DataGridBundle\DataGrid\DataGridInterface
-     */
-    protected function getDataGrid(DataGridInterface $dataGrid)
-    {
-        return $this->get('datagrid_builder')->create($dataGrid);
-    }
-
-    /**
-     * Returns current user
-     *
-     * @return \WellCommerce\Bundle\UserBundle\Entity\User
-     */
-    protected function getUser()
-    {
-        return $this->get('security.context')->getToken()->getUser();
-    }
-
-    protected function jsonResponse($content)
-    {
-        return new JsonResponse($content);
     }
 }

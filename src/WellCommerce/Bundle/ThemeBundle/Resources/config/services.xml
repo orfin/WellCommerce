@@ -3,26 +3,37 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <parameters>
-        <parameter key="theme.templating_locator.class">WellCommerce\Bundle\ThemeBundle\Locator\TemplateLocator</parameter>
-        <parameter key="theme.file_locator.class">WellCommerce\Bundle\ThemeBundle\Locator\FileLocator</parameter>
-        <parameter key="theme.shop_theme.class">WellCommerce\Bundle\ThemeBundle\Theme\ShopTheme</parameter>
-        <parameter key="theme.controller.admin.class">WellCommerce\Bundle\ThemeBundle\Controller\Admin\ThemeController</parameter>
-        <parameter key="theme.repository.class">WellCommerce\Bundle\ThemeBundle\Repository\ThemeRepository</parameter>
-        <parameter key="theme.datagrid.class">WellCommerce\Bundle\ThemeBundle\DataGrid\ThemeDataGrid</parameter>
-        <parameter key="theme.datagrid.configurator.class">WellCommerce\Bundle\ThemeBundle\DataGrid\ThemeDataGridConfigurator</parameter>
-        <parameter key="theme.form.class">WellCommerce\Bundle\ThemeBundle\Form\ThemeForm</parameter>
-        <parameter key="theme.fields_generator.class">WellCommerce\Bundle\ThemeBundle\Generator\ThemeFieldsGenerator</parameter>
-        <parameter key="theme.manager.class">WellCommerce\Bundle\ThemeBundle\Manager\ThemeManager</parameter>
-        <parameter key="theme.subscriber.class">WellCommerce\Bundle\ThemeBundle\EventListener\ThemeSubscriber</parameter>
-    </parameters>
-
     <services>
-        <service id="theme.manager" class="%theme.manager.class%">
+        <service id="theme.manager.admin" class="WellCommerce\Bundle\ThemeBundle\Manager\Admin\ThemeManager">
+            <argument type="service" id="flash_helper"/>
+            <argument type="service" id="redirect_helper"/>
+            <argument type="service" id="image_helper"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="translator"/>
+            <call method="setRepository">
+                <argument type="service" id="theme.repository"/>
+            </call>
+            <call method="setForm">
+                <argument type="service" id="theme.form"/>
+            </call>
+            <call method="setDataGrid">
+                <argument type="service" id="theme.datagrid"/>
+            </call>
+        </service>
+
+        <service id="theme.controller.admin" class="WellCommerce\Bundle\ThemeBundle\Controller\Admin\ThemeController">
+            <argument type="service" id="theme.manager.admin"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="theme.manager" class="WellCommerce\Bundle\ThemeBundle\Manager\ThemeManager">
             <argument type="service" id="kernel"/>
         </service>
 
-        <service id="theme.subscriber" class="%theme.subscriber.class%">
+        <service id="theme.subscriber" class="WellCommerce\Bundle\ThemeBundle\EventListener\ThemeSubscriber">
             <argument type="service" id="theme.manager"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
@@ -36,51 +47,43 @@
             <tag name="kernel.event_subscriber" />
         </service>
 
-        <service id="theme.file_locator" class="%theme.file_locator.class%">
+        <service id="theme.file_locator" class="WellCommerce\Bundle\ThemeBundle\Locator\FileLocator">
             <argument type="service" id="theme.manager" />
             <argument>%kernel.root_dir%/Resources</argument>
         </service>
 
-        <service id="theme.templating_locator" class="%theme.templating_locator.class%">
+        <service id="theme.templating_locator" class="WellCommerce\Bundle\ThemeBundle\Locator\TemplateLocator">
             <argument type="service" id="theme.file_locator" />
             <argument>%kernel.cache_dir%</argument>
         </service>
 
-        <service id="theme.controller.admin" class="%theme.controller.admin.class%">
-            <argument type="service" id="service_container"/>
-            <argument type="service" id="admin_manager"/>
-            <argument type="service" id="theme.repository"/>
-            <argument type="service" id="theme.datagrid"/>
-            <argument type="service" id="theme.form"/>
-        </service>
-
-        <service id="theme.repository" class="%theme.repository.class%" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+        <service id="theme.repository" class="WellCommerce\Bundle\ThemeBundle\Repository\ThemeRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument>WellCommerceThemeBundle:Theme</argument>
             <call method="setTranslator">
                 <argument type="service" id="translator" />
             </call>
         </service>
 
-        <service id="theme.datagrid" class="%theme.datagrid.class%">
+        <service id="theme.datagrid" class="WellCommerce\Bundle\ThemeBundle\DataGrid\ThemeDataGrid">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
             <configurator service="theme.datagrid.configurator" method="configure" />
         </service>
 
-        <service id="theme.datagrid.configurator" class="%theme.datagrid.configurator.class%">
+        <service id="theme.datagrid.configurator" class="WellCommerce\Bundle\ThemeBundle\DataGrid\ThemeDataGridConfigurator">
             <argument key="identifier">Contact</argument>
             <argument type="service" id="datagrid_manager"/>
             <argument type="service" id="theme.repository"/>
         </service>
 
-        <service id="theme.form" class="%theme.form.class%">
+        <service id="theme.form" class="WellCommerce\Bundle\ThemeBundle\Form\ThemeForm">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="theme.fields_generator" class="%theme.fields_generator.class%">
+        <service id="theme.fields_generator" class="WellCommerce\Bundle\ThemeBundle\Generator\ThemeFieldsGenerator">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

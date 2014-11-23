@@ -4,12 +4,29 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+        <service id="tax.manager.admin" class="WellCommerce\Bundle\TaxBundle\Manager\Admin\TaxManager">
+            <argument type="service" id="flash_helper"/>
+            <argument type="service" id="redirect_helper"/>
+            <argument type="service" id="image_helper"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="translator"/>
+            <call method="setRepository">
+                <argument type="service" id="tax.repository"/>
+            </call>
+            <call method="setForm">
+                <argument type="service" id="tax.form"/>
+            </call>
+            <call method="setDataGrid">
+                <argument type="service" id="tax.datagrid"/>
+            </call>
+        </service>
+        
         <service id="tax.controller.admin" class="WellCommerce\Bundle\TaxBundle\Controller\Admin\TaxController">
-            <argument type="service" id="service_container"/>
-            <argument type="service" id="admin_manager"/>
-            <argument type="service" id="tax.repository"/>
-            <argument type="service" id="tax.datagrid"/>
-            <argument type="service" id="tax.form"/>
+            <argument type="service" id="tax.manager.admin"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
         </service>
 
         <service id="tax.repository" class="WellCommerce\Bundle\TaxBundle\Repository\TaxRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">

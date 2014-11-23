@@ -65,7 +65,8 @@ class AttributeGroupController extends AbstractAdminController
      */
     public function editAction(Request $request)
     {
-        $resource = $this->repository->findResource($request);
+        $id =
+        $resource = $this->findOr404($request);
         $form     = $this->getForm($resource);
 
         if ($form->handleRequest($request)->isValid()) {

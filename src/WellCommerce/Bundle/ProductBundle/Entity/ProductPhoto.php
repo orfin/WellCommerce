@@ -54,6 +54,11 @@ class ProductPhoto
      */
     private $mainPhoto;
 
+    public function getId()
+    {
+        return $this->id;
+    }
+
     public function setProduct(Product $product)
     {
         $this->product = $product;

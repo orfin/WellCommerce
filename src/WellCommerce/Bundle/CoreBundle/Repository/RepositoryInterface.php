@@ -54,23 +54,6 @@ interface RepositoryInterface
     public function getName();
 
     /**
-     * Resolves request parameters and tries to find corresponding entity
-     *
-     * @param Request $request
-     *
-     * @return mixed|null|object
-     * @throws \Doctrine\ORM\EntityNotFoundException
-     */
-    public function findResource(Request $request);
-
-    /**
-     * Returns class metadata
-     *
-     * @return \Doctrine\ORM\Mapping\ClassMetadata
-     */
-    public function getMetadata();
-
-    /**
      * Returns property accessor
      *
      * @return \Symfony\Component\PropertyAccess\PropertyAccessor

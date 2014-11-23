@@ -3,58 +3,68 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <parameters>
-        <parameter key="product.controller.admin.class">WellCommerce\Bundle\ProductBundle\Controller\Admin\ProductController</parameter>
-        <parameter key="product.repository.class">WellCommerce\Bundle\ProductBundle\Repository\ProductRepository</parameter>
-        <parameter key="product.datagrid.class">WellCommerce\Bundle\ProductBundle\DataGrid\ProductDataGrid</parameter>
-        <parameter key="product.datagrid.configurator.class">WellCommerce\Bundle\ProductBundle\DataGrid\ProductDataGridConfigurator</parameter>
-        <parameter key="product.form.class">WellCommerce\Bundle\ProductBundle\Form\ProductForm</parameter>
-        <parameter key="product.subscriber.class">WellCommerce\Bundle\ProductBundle\EventListener\ProductSubscriber</parameter>
-        <parameter key="product.manager.class">WellCommerce\Bundle\ProductBundle\Manager\ProductManager</parameter>
-    </parameters>
-
     <services>
-        <service id="product.controller.admin" class="%product.controller.admin.class%">
-            <argument type="service" id="service_container"/>
-            <argument type="service" id="admin_manager"/>
-            <argument type="service" id="product.repository"/>
-            <argument type="service" id="product.datagrid"/>
-            <argument type="service" id="product.form"/>
+        <service id="product.manager.admin" class="WellCommerce\Bundle\ProductBundle\Manager\Admin\ProductManager">
+            <argument type="service" id="flash_helper"/>
+            <argument type="service" id="redirect_helper"/>
+            <argument type="service" id="image_helper"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="translator"/>
+            <call method="setRepository">
+                <argument type="service" id="product.repository"/>
+            </call>
+            <call method="setForm">
+                <argument type="service" id="product.form"/>
+            </call>
+            <call method="setDataGrid">
+                <argument type="service" id="product.datagrid"/>
+            </call>
+        </service>
+        
+        <service id="product.controller.admin" class="WellCommerce\Bundle\ProductBundle\Controller\Admin\ProductController">
+            <argument type="service" id="product.manager.admin"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
         </service>
 
         <service id="product.controller.front" class="WellCommerce\Bundle\ProductBundle\Controller\Front\ProductController">
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
+            <call method="setRepository">
+                <argument type="service" id="product.repository" />
+            </call>
         </service>
 
-        <service id="product.repository" class="%product.repository.class%" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+        <service id="product.repository" class="WellCommerce\Bundle\ProductBundle\Repository\ProductRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument>WellCommerceProductBundle:Product</argument>
             <call method="setTranslator">
                 <argument type="service" id="translator" />
             </call>
         </service>
 
-        <service id="product.datagrid" class="%product.datagrid.class%">
+        <service id="product.datagrid" class="WellCommerce\Bundle\ProductBundle\DataGrid\ProductDataGrid">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
             <configurator service="product.datagrid.configurator" method="configure" />
         </service>
 
-        <service id="product.datagrid.configurator" class="%product.datagrid.configurator.class%">
+        <service id="product.datagrid.configurator" class="WellCommerce\Bundle\ProductBundle\DataGrid\ProductDataGridConfigurator">
             <argument key="identifier">product</argument>
             <argument type="service" id="datagrid_manager"/>
             <argument type="service" id="product.repository"/>
         </service>
 
-        <service id="product.form" class="%product.form.class%">
+        <service id="product.form" class="WellCommerce\Bundle\ProductBundle\Form\ProductForm">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="product.subscriber" class="%product.subscriber.class%">
+        <service id="product.subscriber" class="WellCommerce\Bundle\ProductBundle\EventListener\ProductSubscriber">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

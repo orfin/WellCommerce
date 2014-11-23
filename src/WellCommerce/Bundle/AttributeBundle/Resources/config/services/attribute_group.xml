@@ -3,29 +3,37 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <parameters>
-        <parameter key="attribute_group.controller.admin.class">WellCommerce\Bundle\AttributeBundle\Controller\Admin\AttributeGroupController</parameter>
-        <parameter key="attribute_group.repository.class">WellCommerce\Bundle\AttributeBundle\Repository\AttributeGroupRepository</parameter>
-        <parameter key="attribute_group.form.class">WellCommerce\Bundle\AttributeBundle\Form\AttributeGroupForm</parameter>
-    </parameters>
-
     <services>
-        <service id="attribute_group.controller.admin" class="%attribute_group.controller.admin.class%">
-            <argument type="service" id="service_container"/>
-            <argument type="service" id="admin_manager"/>
-            <argument type="service" id="attribute_group.repository"/>
-            <argument>null</argument>
-            <argument type="service" id="attribute_group.form"/>
+        <service id="attribute_group.manager.admin" class="WellCommerce\Bundle\AttributeBundle\Manager\Admin\AttributeGroupManager">
+            <argument type="service" id="flash_helper"/>
+            <argument type="service" id="redirect_helper"/>
+            <argument type="service" id="image_helper"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="translator"/>
+            <call method="setRepository">
+                <argument type="service" id="attribute_group.repository"/>
+            </call>
+            <call method="setForm">
+                <argument type="service" id="attribute_group.form"/>
+            </call>
         </service>
 
-        <service id="attribute_group.repository" class="%attribute_group.repository.class%" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+        <service id="attribute_group.controller.admin" class="WellCommerce\Bundle\AttributeBundle\Controller\Admin\AttributeController">
+            <argument type="service" id="attribute_group.manager.admin"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="attribute_group.repository" class="WellCommerce\Bundle\AttributeBundle\Repository\AttributeRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument>WellCommerceAttributeBundle:AttributeGroup</argument>
             <call method="setTranslator">
                 <argument type="service" id="translator" />
             </call>
         </service>
 
-        <service id="attribute_group.form" class="%attribute_group.form.class%">
+        <service id="attribute_group.form" class="WellCommerce\Bundle\AttributeBundle\Form\AttributeGroupForm">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

@@ -4,12 +4,29 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+        <service id="producer.manager.admin" class="WellCommerce\Bundle\ProducerBundle\Manager\Admin\ProducerManager">
+            <argument type="service" id="flash_helper"/>
+            <argument type="service" id="redirect_helper"/>
+            <argument type="service" id="image_helper"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="translator"/>
+            <call method="setRepository">
+                <argument type="service" id="producer.repository"/>
+            </call>
+            <call method="setForm">
+                <argument type="service" id="producer.form"/>
+            </call>
+            <call method="setDataGrid">
+                <argument type="service" id="producer.datagrid"/>
+            </call>
+        </service>
+
         <service id="producer.controller.admin" class="WellCommerce\Bundle\ProducerBundle\Controller\Admin\ProducerController">
-            <argument type="service" id="service_container"/>
-            <argument type="service" id="admin_manager"/>
-            <argument type="service" id="producer.repository"/>
-            <argument type="service" id="producer.datagrid"/>
-            <argument type="service" id="producer.form"/>
+            <argument type="service" id="producer.manager.admin"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
         </service>
 
         <service id="producer.controller.front" class="WellCommerce\Bundle\ProducerBundle\Controller\Front\ProducerController">

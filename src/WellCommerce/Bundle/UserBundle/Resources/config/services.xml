@@ -3,63 +3,65 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <parameters>
-        <parameter key="user.controller.admin.class">WellCommerce\Bundle\UserBundle\Controller\Admin\UserController</parameter>
-        <parameter key="user.repository.class">WellCommerce\Bundle\UserBundle\Repository\UserRepository</parameter>
-        <parameter key="user.datagrid.class">WellCommerce\Bundle\UserBundle\DataGrid\UserDataGrid</parameter>
-        <parameter key="user.datagrid.configurator.class">WellCommerce\Bundle\UserBundle\DataGrid\UserDataGridConfigurator</parameter>
-        <parameter key="user.form.class">WellCommerce\Bundle\UserBundle\Form\UserForm</parameter>
-        <parameter key="user.form.login.class">WellCommerce\Bundle\UserBundle\Form\UserLoginForm</parameter>
-        <parameter key="user.subscriber.class">WellCommerce\Bundle\UserBundle\EventListener\UserSubscriber</parameter>
-        <parameter key="user.provider.class">WellCommerce\Bundle\UserBundle\Provider\UserProvider</parameter>
-    </parameters>
-
     <services>
-        <service id="user.controller.admin" class="%user.controller.admin.class%">
-            <argument type="service" id="service_container"/>
-            <argument type="service" id="admin_manager"/>
-            <argument type="service" id="user.repository"/>
-            <argument type="service" id="user.datagrid"/>
-            <argument type="service" id="user.form"/>
+        <service id="user.manager.admin" class="WellCommerce\Bundle\UserBundle\Manager\Admin\UserManager">
+            <argument type="service" id="flash_helper"/>
+            <argument type="service" id="redirect_helper"/>
+            <argument type="service" id="image_helper"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="translator"/>
+            <call method="setRepository">
+                <argument type="service" id="user.repository"/>
+            </call>
+            <call method="setForm">
+                <argument type="service" id="user.form"/>
+            </call>
+            <call method="setDataGrid">
+                <argument type="service" id="user.datagrid"/>
+            </call>
+        </service>
+        
+        <service id="user.controller.admin" class="WellCommerce\Bundle\UserBundle\Controller\Admin\UserController">
+            <argument type="service" id="user.manager.admin"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
         </service>
 
-        <service id="user.repository" class="%user.repository.class%" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+        <service id="user.repository" class="WellCommerce\Bundle\UserBundle\Repository\UserRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument>WellCommerceUserBundle:User</argument>
             <call method="setTranslator">
                 <argument type="service" id="translator" />
             </call>
         </service>
 
-        <service id="user.datagrid.configurator" class="%user.datagrid.configurator.class%">
+        <service id="user.datagrid.configurator" class="WellCommerce\Bundle\UserBundle\DataGrid\UserDataGridConfigurator">
             <argument key="identifier">user</argument>
             <argument type="service" id="datagrid_manager"/>
             <argument type="service" id="user.repository"/>
         </service>
 
-        <service id="user.provider" class="%user.provider.class%">
-            <argument type="service" id="user.repository"/>
-        </service>
-
-        <service id="user.datagrid" class="%user.datagrid.class%">
+        <service id="user.datagrid" class="WellCommerce\Bundle\UserBundle\DataGrid\UserDataGrid">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
             <configurator service="user.datagrid.configurator" method="configure" />
         </service>
 
-        <service id="user.form" class="%user.form.class%">
+        <service id="user.form" class="WellCommerce\Bundle\UserBundle\Form\UserForm">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="user.form.login" class="%user.form.login.class%">
+        <service id="user.form.login" class="WellCommerce\Bundle\UserBundle\Form\UserLoginForm">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="user.subscriber" class="%user.subscriber.class%">
+        <service id="user.subscriber" class="WellCommerce\Bundle\UserBundle\EventListener\UserSubscriber">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

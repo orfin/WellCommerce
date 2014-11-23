@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\CategoryBundle\Repository;
 
 use Symfony\Component\HttpFoundation\ParameterBag;
-use Symfony\Component\Routing\Route;
 use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CategoryBundle\Tree\CategoryTreeBuilder;
 use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;

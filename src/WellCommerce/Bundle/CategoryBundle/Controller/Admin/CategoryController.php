@@ -53,7 +53,7 @@ class CategoryController extends AbstractAdminController
 
     public function editAction(Request $request)
     {
-        $resource = $this->repository->findResource($request);
+        $resource = $this->findOr404($request);
 
         $tree = $this->getFormBuilder($this->get('category.tree'), null, [
             'name'  => 'tree',

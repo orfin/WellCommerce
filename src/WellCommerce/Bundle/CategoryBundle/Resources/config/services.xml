@@ -4,12 +4,26 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+        <service id="category.manager.admin" class="WellCommerce\Bundle\CategoryBundle\Manager\Admin\CategoryManager">
+            <argument type="service" id="flash_helper"/>
+            <argument type="service" id="redirect_helper"/>
+            <argument type="service" id="image_helper"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="translator"/>
+            <call method="setRepository">
+                <argument type="service" id="category.repository"/>
+            </call>
+            <call method="setForm">
+                <argument type="service" id="category.form"/>
+            </call>
+        </service>
+
         <service id="category.controller.admin" class="WellCommerce\Bundle\CategoryBundle\Controller\Admin\CategoryController">
-            <argument type="service" id="service_container"/>
-            <argument type="service" id="admin_manager"/>
-            <argument type="service" id="category.repository"/>
-            <argument>null</argument>
-            <argument type="service" id="category.form"/>
+            <argument type="service" id="category.manager.admin"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
         </service>
 
         <service id="category.controller.front" class="WellCommerce\Bundle\CategoryBundle\Controller\Front\CategoryController">
@@ -51,6 +65,10 @@
             <call method="setTranslator">
                 <argument type="service" id="translator" />
             </call>
+        </service>
+
+        <service id="category.provider" class="WellCommerce\Bundle\CategoryBundle\Provider\CategoryProvider">
+            <argument type="service" id="category.repository" />
         </service>
 
         <service id="category.form" class="WellCommerce\Bundle\CategoryBundle\Form\CategoryForm">

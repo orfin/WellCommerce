@@ -10,49 +10,39 @@
                 <div class="row">
                     <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 gallery">
                         <div class="row">
+                            <!-- main photo -->
                             <div class="col-lg-12 col-md-12 col-sm-12 main-photo">
-                                <a data-toggle="modal" href="#product-gallery"><img src="assets/img/iphone.jpg"
-                                                                                    class="img-thumbnail img-responsive"
-                                                                                    alt="Apple iPhone 6"></a>
+                                <a data-toggle="modal" href="#product-gallery">
+                                    <img src="{{ image(product.getMainPhoto().getPath(), 'medium') }}" class="img-thumbnail img-responsive" alt="Apple iPhone 6">
+                                </a>
                             </div>
+                            <!-- main photo -->
 
+                            <!-- additional photos -->
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="row">
+                                    {% for photo in product.getAdditionalPhotos() %}
                                     <div class="col-lg-3 col-md-3 col-sm-2 col-xs-3 prod-thumbnail">
-                                        <img src="assets/img/iphone.jpg" class="img-thumbnail img-responsive"
-                                             alt="Apple iPhone 6">
+                                        <img src="{{ image(photo.getPath(), 'small') }}" class="img-thumbnail img-responsive" alt="Apple iPhone 6">
                                     </div>
-
-                                    <div class="col-lg-3 col-md-3 col-sm-2 col-xs-3 prod-thumbnail">
-                                        <img src="assets/img/iphone.jpg" class="img-thumbnail img-responsive"
-                                             alt="Apple iPhone 6">
-                                    </div>
-
-                                    <div class="col-lg-3 col-md-3 col-sm-2 col-xs-3 prod-thumbnail">
-                                        <img src="assets/img/iphone.jpg" class="img-thumbnail img-responsive"
-                                             alt="Apple iPhone 6">
-                                    </div>
-
-                                    <div class="col-lg-3 col-md-3 col-sm-2 col-xs-3 prod-thumbnail">
-                                        <img src="assets/img/iphone.jpg" class="img-thumbnail img-responsive"
-                                             alt="Apple iPhone 6">
-                                    </div>
+                                    {% endfor %}
                                 </div>
                             </div>
+                            <!-- additional photos -->
                         </div>
                     </div>
 
                     <div class="col-lg-4 col-md-4 col-sm-8 col-xs-12">
                         <div class="product-description">
-                            <h1>{{ currentProduct.translate().name }}</h1>
+                            <h1>{{ product.translate().name }}</h1>
                             <hr>
                             <div class="labels">
-                                {% for status in currentProduct.statuses %}
+                                {% for status in product.statuses %}
                                 <span class="label {{ status.translate().cssClass }}">{{ status.translate().name }}</span>
                                 {% endfor %}
                             </div>
                             <div class="description">
-                                {{ currentProduct.translate().shortDescription }}
+                                {{ product.translate().shortDescription }}
                             </div>
 
                             <hr>
@@ -378,4 +368,5 @@
         </div>
     </div>
     </div>
+
 {% endblock %}

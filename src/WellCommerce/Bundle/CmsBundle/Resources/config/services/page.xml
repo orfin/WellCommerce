@@ -10,12 +10,29 @@
             </call>
         </service>
 
+        <service id="page.manager.admin" class="WellCommerce\Bundle\CmsBundle\Manager\Admin\PageManager">
+            <argument type="service" id="flash_helper"/>
+            <argument type="service" id="redirect_helper"/>
+            <argument type="service" id="image_helper"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="translator"/>
+            <call method="setRepository">
+                <argument type="service" id="page.repository"/>
+            </call>
+            <call method="setForm">
+                <argument type="service" id="page.form"/>
+            </call>
+            <call method="setDataGrid">
+                <argument type="service" id="page.datagrid"/>
+            </call>
+        </service>
+
         <service id="page.controller.admin" class="WellCommerce\Bundle\CmsBundle\Controller\Admin\PageController">
-            <argument type="service" id="service_container"/>
-            <argument type="service" id="admin_manager"/>
-            <argument type="service" id="page.repository"/>
-            <argument type="service" id="page.datagrid"/>
-            <argument type="service" id="page.form"/>
+            <argument type="service" id="page.manager.admin"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
         </service>
 
         <service id="page.repository" class="WellCommerce\Bundle\CmsBundle\Repository\PageRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
