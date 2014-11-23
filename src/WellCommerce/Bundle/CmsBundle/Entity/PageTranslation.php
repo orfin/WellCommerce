@@ -16,6 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Translatable\Translation;
 use WellCommerce\Bundle\CmsBundle\Routing\PageRouteGenerator;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\MetaDataTrait;
+use WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface;
 use WellCommerce\Bundle\RoutingBundle\Entity\Behaviours\RoutableTrait;
 use WellCommerce\Bundle\RoutingBundle\Entity\RoutableSubjectInterface;
 
@@ -26,7 +27,7 @@ use WellCommerce\Bundle\RoutingBundle\Entity\RoutableSubjectInterface;
  * @ORM\Table(name="page_translation")
  * @ORM\Entity
  */
-class PageTranslation implements RoutableSubjectInterface
+class PageTranslation implements RoutableSubjectInterface, LocaleAwareInterface
 {
     use Translation;
     use MetaDataTrait;

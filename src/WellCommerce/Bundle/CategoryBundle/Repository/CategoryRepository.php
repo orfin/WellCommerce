@@ -52,9 +52,8 @@ class CategoryRepository extends AbstractEntityRepository implements CategoryRep
             'WellCommerceCategoryBundle:CategoryTranslation',
             'category_translation',
             'WITH',
-            'category.id = category_translation.translatable AND category_translation.locale = :locale');
+            'category.id = category_translation.translatable');
         $queryBuilder->groupBy('category.id');
-        $queryBuilder->setParameter('locale', $this->getCurrentLocale());
         $query   = $queryBuilder->getQuery();
         $items   = $query->getArrayResult();
         $builder = new CategoryTreeBuilder($items);
@@ -86,9 +85,8 @@ class CategoryRepository extends AbstractEntityRepository implements CategoryRep
             'WellCommerceCategoryBundle:CategoryTranslation',
             'category_translation',
             'WITH',
-            'category.id = category_translation.translatable AND category_translation.locale = :locale');
+            'category.id = category_translation.translatable');
         $queryBuilder->groupBy('category.id');
-        $queryBuilder->setParameter('locale', $this->getCurrentLocale());
         $query = $queryBuilder->getQuery();
         $items = $query->getArrayResult();
 

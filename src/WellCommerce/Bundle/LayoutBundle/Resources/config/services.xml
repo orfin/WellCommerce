@@ -31,9 +31,6 @@
 
         <service id="layout_box.repository" class="WellCommerce\Bundle\LayoutBundle\Repository\LayoutBoxRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument>WellCommerceLayoutBundle:LayoutBox</argument>
-            <call method="setTranslator">
-                <argument type="service" id="translator" />
-            </call>
         </service>
 
         <service id="layout_box.datagrid" class="WellCommerce\Bundle\LayoutBundle\DataGrid\LayoutBoxDataGrid">

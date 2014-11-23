@@ -25,14 +25,6 @@ class CurrencyRepository extends AbstractEntityRepository implements CurrencyRep
     /**
      * {@inheritdoc}
      */
-    public function getDataGridQueryBuilder()
-    {
-        return parent::getQueryBuilder()->groupBy('currency.id');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getCurrenciesToSelect()
     {
         $currencies = Intl::getCurrencyBundle()->getCurrencyNames();

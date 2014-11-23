@@ -21,17 +21,5 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
  */
 class PaymentMethodRepository extends AbstractEntityRepository implements PaymentMethodRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getDataGridQueryBuilder()
-    {
-        return parent::getQueryBuilder()->groupBy('payment_method.id')
-            ->leftJoin(
-                'WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodTranslation',
-                'payment_method_translation',
-                'WITH',
-                'payment_method.id = payment_method_translation.translatable AND payment_method_translation.locale = :locale');
 
-    }
 }

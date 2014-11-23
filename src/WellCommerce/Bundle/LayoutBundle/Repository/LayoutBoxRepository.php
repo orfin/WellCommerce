@@ -25,22 +25,6 @@ class LayoutBoxRepository extends AbstractEntityRepository implements LayoutBoxR
     /**
      * {@inheritdoc}
      */
-    public function getDataGridQueryBuilder()
-    {
-        $queryBuilder = parent::getQueryBuilder();
-        $queryBuilder->groupBy('layout_box.id');
-        $queryBuilder->leftJoin(
-            'WellCommerce\Bundle\LayoutBundle\Entity\LayoutBoxTranslation',
-            'layout_box_translation',
-            'WITH',
-            'layout_box.id = layout_box_translation.translatable AND layout_box_translation.locale = :locale');
-
-        return $queryBuilder;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getLayoutBoxesCollection()
     {
         $boxes = $this->findAll();

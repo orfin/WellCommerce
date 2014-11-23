@@ -27,14 +27,6 @@ class LocaleRepository extends AbstractEntityRepository implements LocaleReposit
     /**
      * {@inheritdoc}
      */
-    public function getDataGridQueryBuilder()
-    {
-        return parent::getQueryBuilder()->groupBy('locale.id');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getAvailableLocaleCodes()
     {
         if (empty($this->currentLocales)) {

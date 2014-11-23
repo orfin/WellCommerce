@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\LayoutBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Translatable\Translation;
+use WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface;
 
 /**
  * LayoutBoxTranslation
@@ -21,7 +22,7 @@ use Knp\DoctrineBehaviors\Model\Translatable\Translation;
  * @ORM\Table("layout_box_translation")
  * @ORM\Entity
  */
-class LayoutBoxTranslation
+class LayoutBoxTranslation implements LocaleAwareInterface
 {
     use Translation;
 

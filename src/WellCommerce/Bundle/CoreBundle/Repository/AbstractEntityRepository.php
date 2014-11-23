@@ -13,7 +13,6 @@ namespace WellCommerce\Bundle\CoreBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use Symfony\Component\Translation\TranslatorInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 
 /**
@@ -24,19 +23,6 @@ use WellCommerce\Bundle\CoreBundle\Helper\Helper;
  */
 abstract class AbstractEntityRepository extends EntityRepository implements RepositoryInterface
 {
-    /**
-     * @var TranslatorInterface
-     */
-    protected $translator;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setTranslator(TranslatorInterface $translator)
-    {
-        $this->translator = $translator;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -54,15 +40,7 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
      */
     protected function getRepository($name)
     {
-        /**
-         * @var $repository RepositoryInterface
-         */
-        $repository = $this->getEntityManager()->getRepository($name);
-        if (null !== $this->translator) {
-            $repository->setTranslator($this->translator);
-        }
-
-        return $repository;
+        return $this->getEntityManager()->getRepository($name);
     }
 
     public function getMetadata()
@@ -153,9 +131,8 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
             $targetClass,
             $associationTableName,
             "WITH",
-            "{$identifierField} = {$associationTableName}.translatable AND {$associationTableName}.locale = :locale");
+            "{$identifierField} = {$associationTableName}.translatable");
         $queryBuilder->groupBy($identifierField);
-        $queryBuilder->setParameter('locale', $this->getCurrentLocale());
         $query      = $queryBuilder->getQuery();
         $collection = $query->getResult();
 
@@ -165,6 +142,32 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
     protected function getQueryBuilder()
     {
         return $this->createQueryBuilder($this->getAlias());
+    }
+
+    public function getDataGridQueryBuilder()
+    {
+        $queryBuilder    = $this->getQueryBuilder();
+        $metadata        = $this->getMetadata();
+        $associationName = 'translations';
+        $identifierField = sprintf('%s.%s', $metadata->getTableName(), $metadata->getSingleIdentifierFieldName());
+
+        if ($metadata->hasAssociation($associationName)) {
+            $association          = $metadata->getAssociationTargetClass($associationName);
+            $associationMetaData  = $this->getEntityManager()->getClassMetadata($association);
+            $associationTableName = $associationMetaData->getTableName();
+            $translationField     = sprintf('%s.%s', $associationTableName, 'translatable');
+
+            $queryBuilder->leftJoin(
+                $association,
+                $associationMetaData->getTableName(),
+                'WITH',
+                "{$identifierField} = {$translationField}"
+            );
+
+        }
+
+        return $queryBuilder;
+
     }
 
     /**
@@ -184,13 +187,5 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
     public function getName()
     {
         return $this->getEntityName();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCurrentLocale()
-    {
-        return $this->translator->getLocale();
     }
 }

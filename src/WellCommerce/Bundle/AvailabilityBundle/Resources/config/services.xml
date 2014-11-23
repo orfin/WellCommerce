@@ -31,9 +31,6 @@
 
         <service id="availability.repository" class="WellCommerce\Bundle\AvailabilityBundle\Repository\AvailabilityRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument>WellCommerceAvailabilityBundle:Availability</argument>
-            <call method="setTranslator">
-                <argument type="service" id="translator" />
-            </call>
         </service>
 
         <service id="availability.datagrid" class="WellCommerce\Bundle\AvailabilityBundle\DataGrid\AvailabilityDataGrid">

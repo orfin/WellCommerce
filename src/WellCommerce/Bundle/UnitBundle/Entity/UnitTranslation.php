@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\UnitBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface;
 
 /**
  * UnitTranslation
@@ -21,7 +22,7 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
  * @ORM\Table(name="unit_translation")
  * @ORM\Entity
  */
-class UnitTranslation
+class UnitTranslation implements LocaleAwareInterface
 {
     use ORMBehaviors\Translatable\Translation;
 

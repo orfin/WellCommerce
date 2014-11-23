@@ -59,9 +59,6 @@
 
         <service id="theme.repository" class="WellCommerce\Bundle\ThemeBundle\Repository\ThemeRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument>WellCommerceThemeBundle:Theme</argument>
-            <call method="setTranslator">
-                <argument type="service" id="translator" />
-            </call>
         </service>
 
         <service id="theme.datagrid" class="WellCommerce\Bundle\ThemeBundle\DataGrid\ThemeDataGrid">

@@ -21,16 +21,5 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
  */
 class DelivererRepository extends AbstractEntityRepository implements DelivererRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getDataGridQueryBuilder()
-    {
-        return parent::getQueryBuilder()->groupBy('deliverer.id')
-            ->leftJoin(
-                'WellCommerce\Bundle\DelivererBundle\Entity\DelivererTranslation',
-                'deliverer_translation',
-                'WITH',
-                'deliverer.id = deliverer_translation.translatable AND deliverer_translation.locale = :locale');
-    }
+
 }

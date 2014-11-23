@@ -31,9 +31,6 @@
 
         <service id="contact.repository" class="WellCommerce\Bundle\ContactBundle\Repository\ContactRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument>WellCommerceContactBundle:Contact</argument>
-            <call method="setTranslator">
-                <argument type="service" id="translator" />
-            </call>
         </service>
 
         <service id="contact.datagrid" class="WellCommerce\Bundle\ContactBundle\DataGrid\ContactDataGrid">

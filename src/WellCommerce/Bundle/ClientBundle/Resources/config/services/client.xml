@@ -31,9 +31,6 @@
 
         <service id="client.repository" class="WellCommerce\Bundle\ClientBundle\Repository\ClientRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument>WellCommerceClientBundle:Client</argument>
-            <call method="setTranslator">
-                <argument type="service" id="translator" />
-            </call>
         </service>
 
         <service id="client.datagrid" class="WellCommerce\Bundle\ClientBundle\DataGrid\ClientDataGrid">

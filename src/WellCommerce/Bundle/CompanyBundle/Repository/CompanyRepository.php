@@ -22,13 +22,5 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
  */
 class CompanyRepository extends AbstractEntityRepository implements CompanyRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getDataGridQueryBuilder()
-    {
-        return parent::getQueryBuilder()->groupBy('company.id');
-    }
-
 
 }

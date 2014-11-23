@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\IntlBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Translatable\Translation;
+use WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface;
 
 /**
  * DictionaryTranslation
@@ -21,7 +22,7 @@ use Knp\DoctrineBehaviors\Model\Translatable\Translation;
  * @ORM\Table(name="dictionary_translation")
  * @ORM\Entity
  */
-class DictionaryTranslation
+class DictionaryTranslation implements LocaleAwareInterface
 {
     use Translation;
 

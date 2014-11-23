@@ -26,14 +26,6 @@ class MediaRepository extends AbstractEntityRepository implements MediaRepositor
     /**
      * {@inheritdoc}
      */
-    public function getDataGridQueryBuilder()
-    {
-        return parent::getQueryBuilder()->groupBy('media.id');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function save(UploadedFile $file, $dir)
     {
         $media = new Media();

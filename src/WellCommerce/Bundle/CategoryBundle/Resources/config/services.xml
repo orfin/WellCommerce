@@ -62,9 +62,6 @@
 
         <service id="category.repository" class="WellCommerce\Bundle\CategoryBundle\Repository\CategoryRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument>WellCommerceCategoryBundle:Category</argument>
-            <call method="setTranslator">
-                <argument type="service" id="translator" />
-            </call>
         </service>
 
         <service id="category.provider" class="WellCommerce\Bundle\CategoryBundle\Provider\CategoryProvider">

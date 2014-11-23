@@ -21,17 +21,5 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
  */
 class NewsRepository extends AbstractEntityRepository implements NewsRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getDataGridQueryBuilder()
-    {
-        return parent::getQueryBuilder()->groupBy('news.id')
-            ->leftJoin(
-                'WellCommerce\Bundle\CmsBundle\Entity\NewsTranslation',
-                'news_translation',
-                'WITH',
-                'news.id = news_translation.translatable AND news_translation.locale = :locale');
 
-    }
 }

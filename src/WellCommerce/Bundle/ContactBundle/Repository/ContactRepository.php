@@ -21,18 +21,5 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
  */
 class ContactRepository extends AbstractEntityRepository implements ContactRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getDataGridQueryBuilder()
-    {
-        return parent::getQueryBuilder()
-            ->leftJoin(
-                'WellCommerce\Bundle\ContactBundle\Entity\ContactTranslation',
-                'contact_translation',
-                'WITH',
-                'contact.id = contact_translation.translatable AND contact_translation.locale = :locale')
-            ->setParameter('locale', $this->getCurrentLocale());
 
-    }
 }

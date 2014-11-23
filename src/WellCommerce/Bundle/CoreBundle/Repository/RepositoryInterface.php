@@ -76,20 +76,6 @@ interface RepositoryInterface
     public function getLocales();
 
     /**
-     * Returns current repository locale
-     *
-     * @return null|string
-     */
-    public function getCurrentLocale();
-
-    /**
-     * Sets translator service
-     *
-     * @param TranslatorInterface $translator
-     */
-    public function setTranslator(TranslatorInterface $translator);
-
-    /**
      * Builds and executes query to fetch collection of items to use in optioned fields
      *
      * @param $identifier

@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\AvailabilityBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface;
 
 /**
  * AvailabilityTranslation
@@ -21,7 +22,7 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
  * @ORM\Table(name="availability_translation")
  * @ORM\Entity
  */
-class AvailabilityTranslation
+class AvailabilityTranslation implements LocaleAwareInterface
 {
     use ORMBehaviors\Translatable\Translation;
 

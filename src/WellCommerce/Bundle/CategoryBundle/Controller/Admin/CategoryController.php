@@ -58,13 +58,12 @@ class CategoryController extends AbstractAdminController
 
     public function editAction(Request $request)
     {
+        $tree = $this->getFormBuilder($this->get('category.tree'), null, [
+            'name'  => 'tree','class' => 'category-select'
+        ]);
+
         $resource = $this->findOr404($request);
         $form     = $this->getForm($resource);
-
-        $tree = $this->getFormBuilder($this->get('category.tree'), null, [
-            'name'  => 'tree',
-            'class' => 'category-select'
-        ]);
 
         if ($form->handleRequest($request)->isValid()) {
             $this->manager->updateResource($resource, $request);

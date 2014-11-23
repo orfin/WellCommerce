@@ -21,18 +21,5 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
  */
 class ProductRepository extends AbstractEntityRepository implements ProductRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getDataGridQueryBuilder()
-    {
-        return parent::getQueryBuilder()
-            ->groupBy('product.id')
-            ->leftJoin(
-                'WellCommerce\Bundle\ProductBundle\Entity\ProductTranslation',
-                'product_translation',
-                'WITH',
-                'product.id = product_translation.translatable');
 
-    }
 }

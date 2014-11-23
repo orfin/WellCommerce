@@ -21,18 +21,5 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
  */
 class ProductStatusRepository extends AbstractEntityRepository implements ProductStatusRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getDataGridQueryBuilder()
-    {
-        return parent::getQueryBuilder()
-            ->groupBy('product_status.id')
-            ->leftJoin(
-                'WellCommerce\Bundle\ProductBundle\Entity\ProductStatusTranslation',
-                'product_status_translation',
-                'WITH',
-                'product_status.id = product_status_translation.translatable AND product_status_translation.locale = :locale');
 
-    }
 }

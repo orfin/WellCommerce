@@ -25,20 +25,6 @@ class PageRepository extends AbstractEntityRepository implements PageRepositoryI
     /**
      * {@inheritdoc}
      */
-    public function getDataGridQueryBuilder()
-    {
-        return parent::getQueryBuilder()->groupBy('page.id')
-            ->leftJoin(
-                'WellCommerce\Bundle\CmsBundle\Entity\PageTranslation',
-                'page_translation',
-                'WITH',
-                'page.id = page_translation.translatable AND page_translation.locale = :locale');
-
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getPagesTree()
     {
         $queryBuilder = $this->getQueryBuilder('page');
@@ -66,9 +52,8 @@ class PageRepository extends AbstractEntityRepository implements PageRepositoryI
             'WellCommerceCmsBundle:PageTranslation',
             'page_translation',
             'WITH',
-            'page.id = page_translation.translatable AND page_translation.locale = :locale');
+            'page.id = page_translation.translatable');
         $queryBuilder->groupBy('page.id');
-        $queryBuilder->setParameter('locale', $this->getCurrentLocale());
         $query   = $queryBuilder->getQuery();
         $items   = $query->getArrayResult();
         $builder = new CategoryTreeBuilder($items);
@@ -100,9 +85,8 @@ class PageRepository extends AbstractEntityRepository implements PageRepositoryI
             'WellCommerceCmsBundle:PageTranslation',
             'page_translation',
             'WITH',
-            'page.id = page_translation.translatable AND page_translation.locale = :locale');
+            'page.id = page_translation.translatable');
         $queryBuilder->groupBy('page.id');
-        $queryBuilder->setParameter('locale', $this->getCurrentLocale());
         $query = $queryBuilder->getQuery();
         $items = $query->getArrayResult();
 

@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\ContactBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\AddressTrait;
+use WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface;
 
 /**
  * ContactTranslation
@@ -22,7 +23,7 @@ use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\AddressTrait;
  * @ORM\Table("contact_translation")
  * @ORM\Entity
  */
-class ContactTranslation
+class ContactTranslation implements LocaleAwareInterface
 {
     use ORMBehaviors\Translatable\Translation;
     use AddressTrait;

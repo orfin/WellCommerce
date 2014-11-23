@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\TaxBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface;
 
 /**
  * TaxTranslation
@@ -21,7 +22,7 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
  * @ORM\Table(name="tax_translation")
  * @ORM\Entity
  */
-class TaxTranslation
+class TaxTranslation implements LocaleAwareInterface
 {
     use ORMBehaviors\Translatable\Translation;
 

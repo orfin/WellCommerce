@@ -44,19 +44,6 @@ class DictionaryRepository extends AbstractEntityRepository implements Dictionar
     /**
      * {@inheritdoc}
      */
-    public function getDataGridQueryBuilder()
-    {
-        return parent::getQueryBuilder()->groupBy('dictionary.id')
-            ->leftJoin(
-                'WellCommerce\Bundle\IntlBundle\Entity\DictionaryTranslation',
-                'dictionary_translation',
-                'WITH',
-                'dictionary.id = dictionary_translation.translatable AND dictionary_translation.locale = :locale');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getDictionaryTranslations()
     {
         $qb = parent::getQueryBuilder()

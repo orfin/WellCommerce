@@ -21,18 +21,5 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
  */
 class TaxRepository extends AbstractEntityRepository implements TaxRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getDataGridQueryBuilder()
-    {
-        return parent::getQueryBuilder()->groupBy('tax.id')
-            ->leftJoin(
-                'WellCommerce\Bundle\TaxBundle\Entity\TaxTranslation',
-                'tax_translation',
-                'WITH',
-                'tax.id = tax_translation.translatable AND tax_translation.locale = :locale')
-            ->setParameter('locale', $this->getCurrentLocale());
 
-    }
 }

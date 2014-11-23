@@ -21,18 +21,5 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
  */
 class ProducerRepository extends AbstractEntityRepository implements ProducerRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getDataGridQueryBuilder()
-    {
-        return parent::getQueryBuilder()
-            ->groupBy('producer.id')
-            ->leftJoin(
-                'WellCommerce\Bundle\ProducerBundle\Entity\ProducerTranslation',
-                'producer_translation',
-                'WITH',
-                'producer.id = producer_translation.translatable');
 
-    }
 }

@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\PaymentBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface;
 
 /**
  * PaymentTranslation
@@ -21,7 +22,7 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
  * @ORM\Table(name="payment_method_translation")
  * @ORM\Entity
  */
-class PaymentMethodTranslation
+class PaymentMethodTranslation implements LocaleAwareInterface
 {
     use ORMBehaviors\Translatable\Translation;
 
