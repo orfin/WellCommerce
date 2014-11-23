@@ -25,9 +25,6 @@
 
         <service id="attribute_value.repository" class="WellCommerce\Bundle\AttributeBundle\Repository\AttributeValueRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument>WellCommerceAttributeBundle:AttributeValue</argument>
-            <call method="setTranslator">
-                <argument type="service" id="translator" />
-            </call>
         </service>
     </services>
 </container>

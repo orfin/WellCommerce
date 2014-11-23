@@ -29,13 +29,4 @@ interface AttributeGroupRepositoryInterface extends RepositoryInterface
      * @return mixed
      */
     public function findAll();
-
-    /**
-     * Adds new attribute group
-     *
-     * @param ParameterBag $parameters
-     *
-     * @return mixed
-     */
-    public function addAttributeGroup(ParameterBag $parameters);
-} 
+}

@@ -28,9 +28,6 @@
 
         <service id="attribute_group.repository" class="WellCommerce\Bundle\AttributeBundle\Repository\AttributeGroupRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument>WellCommerceAttributeBundle:AttributeGroup</argument>
-            <call method="setTranslator">
-                <argument type="service" id="translator" />
-            </call>
         </service>
 
         <service id="attribute_group.form" class="WellCommerce\Bundle\AttributeBundle\Form\AttributeGroupForm">

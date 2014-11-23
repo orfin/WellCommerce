@@ -33,8 +33,7 @@ class AttributeRepository extends AbstractEntityRepository implements AttributeR
                 'WellCommerce\Bundle\AttributeBundle\Entity\AttributeTranslation',
                 'attribute_translation',
                 'WITH',
-                'attribute.id = attribute_translation.translatable AND attribute_translation.locale = :locale')
-            ->setParameter('locale', $this->getCurrentLocale())
+                'attribute.id = attribute_translation.translatable')
             ->addOrderBy('attribute_translation.name', 'ASC')
             ->addGroupBy('attribute.id');
 
@@ -69,8 +68,7 @@ class AttributeRepository extends AbstractEntityRepository implements AttributeR
                 'WellCommerce\Bundle\AttributeBundle\Entity\AttributeTranslation',
                 'attribute_translation',
                 'WITH',
-                'attribute.id = attribute_translation.translatable AND attribute_translation.locale = :locale')
-            ->setParameter('locale', $this->getCurrentLocale())
+                'attribute.id = attribute_translation.translatable')
             ->addOrderBy('attribute_translation.name', 'ASC')
             ->addGroupBy('attribute.id');
 

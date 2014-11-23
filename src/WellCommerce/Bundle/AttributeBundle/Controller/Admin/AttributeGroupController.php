@@ -50,10 +50,20 @@ class AttributeGroupController extends AbstractAdminController
      */
     public function addAction(Request $request)
     {
-        $group = $this->manager->getRepository()->addAttributeGroup($request->request);
+        $name     = $request->request->get('name');
+        $locales  = $this->get('locale.repository')->findAll();
+        $resource = $this->manager->getRepository()->createNew();
+
+        foreach ($locales as $locale) {
+            $resource->translate($locale->getCode())->setName($name);
+        }
+
+        $resource->mergeNewTranslations();
+
+        $this->manager->createResource($resource, $request);
 
         return $this->jsonResponse([
-            'id' => $group->getId()
+            'id' => $resource->getId()
         ]);
     }
 

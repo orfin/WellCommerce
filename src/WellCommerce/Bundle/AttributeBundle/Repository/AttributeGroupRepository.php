@@ -41,23 +41,4 @@ class AttributeGroupRepository extends AbstractEntityRepository implements Attri
 
         return $result;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addAttributeGroup(ParameterBag $parameters)
-    {
-        $name    = $parameters->get('name');
-        $locales = $this->getLocales();
-        $group   = new AttributeGroup();
-
-        foreach ($locales as $locale) {
-            $group->translate($locale->getCode())->setName($name);
-        }
-        $group->mergeNewTranslations();
-        $this->getEntityManager()->persist($group);
-        $this->getEntityManager()->flush();
-
-        return $group;
-    }
 }
