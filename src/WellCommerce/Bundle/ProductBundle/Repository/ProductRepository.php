@@ -32,7 +32,7 @@ class ProductRepository extends AbstractEntityRepository implements ProductRepos
                 'WellCommerce\Bundle\ProductBundle\Entity\ProductTranslation',
                 'product_translation',
                 'WITH',
-                'product.id = product_translation.translatable AND product_translation.locale = :locale');
+                'product.id = product_translation.translatable');
 
     }
 }

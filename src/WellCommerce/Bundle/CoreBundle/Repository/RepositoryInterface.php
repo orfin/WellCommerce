@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Repository;
 
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
@@ -111,5 +110,12 @@ interface RepositoryInterface
      * @return array
      */
     public function getCollectionToSelect($labelField = 'name');
+
+    /**
+     * Returns all entities
+     *
+     * @return mixed
+     */
+    public function findAll();
 
 } 

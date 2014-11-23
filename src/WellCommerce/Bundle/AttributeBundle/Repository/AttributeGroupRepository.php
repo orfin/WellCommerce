@@ -34,10 +34,8 @@ class AttributeGroupRepository extends AbstractEntityRepository implements Attri
                 'WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupTranslation',
                 'attribute_group_translation',
                 'WITH',
-                'attribute_group.id = attribute_group_translation.translatable AND attribute_group_translation.locale = :locale')
-            ->setParameter('locale', $this->getCurrentLocale())
+                'attribute_group.id = attribute_group_translation.translatable')
             ->addOrderBy('attribute_group_translation.name', 'ASC');
-
         $query  = $qb->getQuery();
         $result = $query->getArrayResult();
 

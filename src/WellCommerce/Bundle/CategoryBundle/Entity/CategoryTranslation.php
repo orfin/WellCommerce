@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Translatable\Translation;
 use WellCommerce\Bundle\CategoryBundle\Routing\CategoryRouteGenerator;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\MetaDataTrait;
+use WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface;
 use WellCommerce\Bundle\RoutingBundle\Entity\Behaviours\RoutableTrait;
 use WellCommerce\Bundle\RoutingBundle\Entity\RoutableSubjectInterface;
 
@@ -16,7 +17,7 @@ use WellCommerce\Bundle\RoutingBundle\Entity\RoutableSubjectInterface;
  * @ORM\HasLifecycleCallbacks
  * @ORM\Entity
  */
-class CategoryTranslation implements RoutableSubjectInterface
+class CategoryTranslation implements RoutableSubjectInterface, LocaleAwareInterface
 {
     use Translation;
     use MetaDataTrait;

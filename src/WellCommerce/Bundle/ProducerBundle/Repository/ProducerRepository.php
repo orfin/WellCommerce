@@ -32,7 +32,7 @@ class ProducerRepository extends AbstractEntityRepository implements ProducerRep
                 'WellCommerce\Bundle\ProducerBundle\Entity\ProducerTranslation',
                 'producer_translation',
                 'WITH',
-                'producer.id = producer_translation.translatable AND producer_translation.locale = :locale');
+                'producer.id = producer_translation.translatable');
 
     }
 }

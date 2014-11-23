@@ -26,12 +26,6 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
  */
 class RoutingController extends AbstractAdminController
 {
-
-    /**
-     * @var \WellCommerce\Bundle\RoutingBundle\Repository\RouteRepository
-     */
-    protected $repository;
-
     /**
      * Action used to generate slug
      *
@@ -43,7 +37,7 @@ class RoutingController extends AbstractAdminController
             return $this->manager->getRedirectHelper()->redirectToAction('index');
         }
 
-        $slug = $this->repository->generateSlug(
+        $slug = $this->manager->getRepository()->generateSlug(
             $request->get('name'),
             $request->get('id'),
             $request->get('locale'),

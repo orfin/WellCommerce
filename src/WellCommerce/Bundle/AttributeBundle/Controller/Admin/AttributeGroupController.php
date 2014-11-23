@@ -26,21 +26,18 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 class AttributeGroupController extends AbstractAdminController
 {
     /**
-     * @var \WellCommerce\Bundle\AttributeBundle\Repository\AttributeGroupRepositoryInterface
-     */
-    protected $repository;
-
-    /**
      * {@inheritdoc}
      */
     public function indexAction(Request $request)
     {
-        $groups = $this->repository->findAll();
+        $groups = $this->manager->getRepository()->findAll();
 
         if (count($groups) > 0) {
             $firstGroup = current($groups);
 
-            return $this->manager->getRedirectHelper()->redirectToAction('edit', ['id' => $firstGroup['id']]);
+            return $this->manager->getRedirectHelper()->redirectToAction('edit', [
+                'id' => $firstGroup['id']
+            ]);
         }
 
         return [
@@ -53,7 +50,7 @@ class AttributeGroupController extends AbstractAdminController
      */
     public function addAction(Request $request)
     {
-        $group = $this->repository->addAttributeGroup($request->request);
+        $group = $this->manager->getRepository()->addAttributeGroup($request->request);
 
         return $this->jsonResponse([
             'id' => $group->getId()
@@ -65,14 +62,16 @@ class AttributeGroupController extends AbstractAdminController
      */
     public function editAction(Request $request)
     {
-        $id =
+        $groups   = $this->manager->getRepository()->findAll();
         $resource = $this->findOr404($request);
-        $form     = $this->getForm($resource);
+        $form     = $this->getForm($resource, ['class' => 'attributeGroupEditor']);
 
         if ($form->handleRequest($request)->isValid()) {
-            $this->manager->update($resource, $request);
+            $this->manager->updateResource($resource, $request);
             if ($form->isAction('continue')) {
-                return $this->manager->getRedirectHelper()->redirectToAction('edit', $resource);
+                return $this->manager->getRedirectHelper()->redirectToAction('edit', [
+                    'id' => $resource->getId()
+                ]);
             }
 
             return $this->manager->getRedirectHelper()->redirectToAction('index');
@@ -80,20 +79,9 @@ class AttributeGroupController extends AbstractAdminController
 
         return [
             'currentGroup' => $resource,
-            'groups'       => $this->repository->findAll(),
+            'groups'       => $groups,
             'form'         => $form
         ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getForm($resource)
-    {
-        return $this->getFormBuilder($this->form, $resource, [
-            'name'  => $this->repository->getAlias(),
-            'class' => 'attributeGroupEditor'
-        ]);
     }
 
     /**
@@ -110,7 +98,7 @@ class AttributeGroupController extends AbstractAdminController
             return $this->manager->getRedirectHelper()->redirectToAction('index');
         }
 
-        $groups = $this->repository->findAll();
+        $groups = $this->manager->getRepository()->findAll();
         $sets   = [];
 
         foreach ($groups as $group) {

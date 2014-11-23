@@ -25,13 +25,18 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
  */
 class CategoryController extends AbstractAdminController
 {
-    /**
-     * @var \WellCommerce\Bundle\CategoryBundle\Repository\CategoryRepositoryInterface
-     */
-    protected $repository;
-
     public function indexAction(Request $request)
     {
+        $categories = $this->manager->getRepository()->findAll();
+
+        if (count($categories)) {
+            $category = current($categories);
+
+            return $this->manager->getRedirectHelper()->redirectToAction('edit', [
+                'id' => $category->getId()
+            ]);
+        }
+
         $tree = $this->getFormBuilder($this->get('category.tree'), null, [
             'name'  => 'category_tree',
             'class' => 'category-select'
@@ -44,7 +49,7 @@ class CategoryController extends AbstractAdminController
 
     public function addAction(Request $request)
     {
-        $category = $this->repository->quickAddCategory($request->request);
+        $category = $this->manager->getRepository()->quickAddCategory($request->request);
 
         return $this->jsonResponse([
             'id' => $category->getId()
@@ -54,20 +59,19 @@ class CategoryController extends AbstractAdminController
     public function editAction(Request $request)
     {
         $resource = $this->findOr404($request);
+        $form     = $this->getForm($resource);
 
         $tree = $this->getFormBuilder($this->get('category.tree'), null, [
             'name'  => 'tree',
             'class' => 'category-select'
         ]);
 
-        $form = $this->getFormBuilder($this->get('category.form'), $resource, [
-            'name' => 'category',
-        ]);
-
         if ($form->handleRequest($request)->isValid()) {
-            $this->manager->update($resource, $request);
+            $this->manager->updateResource($resource, $request);
             if ($form->isAction('continue')) {
-                return $this->manager->getRedirectHelper()->redirectToAction('edit', $resource);
+                return $this->manager->getRedirectHelper()->redirectToAction('edit', [
+                    'id' => $resource->getId()
+                ]);
             }
 
             return $this->manager->getRedirectHelper()->redirectToAction('index');

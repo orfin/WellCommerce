@@ -83,16 +83,6 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
     /**
      * {@inheritdoc}
      */
-    public function deleteRow($id)
-    {
-        $entity = $this->find($id);
-        $this->getEntityManager()->remove($entity);
-        $this->getEntityManager()->flush();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getCollectionToSelect($labelField = 'name', $associationName = 'translations')
     {
         $metadata   = $this->getClassMetadata();

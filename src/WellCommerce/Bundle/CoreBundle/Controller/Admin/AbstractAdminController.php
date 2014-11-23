@@ -100,15 +100,20 @@ abstract class AbstractAdminController extends AbstractController implements Adm
     /**
      * Returns a form for particular resource
      *
-     * @param $resource
+     * @param       $resource
+     * @param array $config
      *
      * @return \WellCommerce\Bundle\FormBundle\Form\Elements\Form
      */
-    protected function getForm($resource)
+    protected function getForm($resource, array $config = [])
     {
-        return $this->getFormBuilder($this->manager->getForm(), $resource, [
+        $defaultConfig = [
             'name' => $this->manager->getRepository()->getAlias()
-        ]);
+        ];
+
+        $config = array_merge($defaultConfig, $config);
+
+        return $this->getFormBuilder($this->manager->getForm(), $resource, $config);
     }
 
     /**
@@ -172,6 +177,8 @@ abstract class AbstractAdminController extends AbstractController implements Adm
      */
     protected function findOr404(Request $request)
     {
+        $this->disableLocaleFilter();
+
         if (!$request->attributes->has('id')) {
             throw new \LogicException('Request does not have "id" attribute set.');
         }
@@ -181,6 +188,8 @@ abstract class AbstractAdminController extends AbstractController implements Adm
         if (null === $resource = $this->manager->getRepository()->find($id)) {
             throw new NotFoundHttpException(sprintf('Resource not found'));
         }
+
+//        $this->enableLocaleFilter($request->getLocale());
 
         return $resource;
     }

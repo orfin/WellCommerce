@@ -50,6 +50,10 @@ doctrine:
         entity_managers:
             default:
                 auto_mapping: true
+                filters:
+                    locale:
+                        class:   WellCommerce\Bundle\IntlBundle\ORM\Filter\LocaleFilter
+                        enabled: true
 
 # Swiftmailer Configuration
 swiftmailer:

@@ -48,10 +48,15 @@ class LocaleSubscriber extends AbstractEventSubscriber
             return;
         }
 
+        $filter = $this->getEntityManager()->getFilters()->getFilter('locale');
+
         if ($locale = $request->attributes->get('_locale')) {
             $request->getSession()->set('_locale', $locale);
+            $filter->setParameter('locale', $locale);
         } else {
-            $request->setLocale($request->getSession()->get('_locale', $this->defaultLocale));
+            $currentLocale = $request->getSession()->get('_locale', $this->defaultLocale);
+            $request->setLocale($currentLocale);
+            $filter->setParameter('locale', $currentLocale);
         }
     }
 

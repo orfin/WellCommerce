@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\AttributeBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface;
 
 /**
  * AttributeTranslation
@@ -21,7 +22,7 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
  * @ORM\Table(name="attribute_translation")
  * @ORM\Entity
  */
-class AttributeTranslation
+class AttributeTranslation implements LocaleAwareInterface
 {
     use ORMBehaviors\Translatable\Translation;
 

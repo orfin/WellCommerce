@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\ProducerBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Translatable\Translation;
 use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\MetaDataTrait;
+use WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface;
 use WellCommerce\Bundle\ProducerBundle\Routing\ProducerRouteGenerator;
 use WellCommerce\Bundle\RoutingBundle\Entity\Behaviours\RoutableTrait;
 use WellCommerce\Bundle\RoutingBundle\Entity\RoutableSubjectInterface;
@@ -26,7 +27,7 @@ use WellCommerce\Bundle\RoutingBundle\Entity\RoutableSubjectInterface;
  * @ORM\HasLifecycleCallbacks
  * @ORM\Entity
  */
-class ProducerTranslation implements RoutableSubjectInterface
+class ProducerTranslation implements RoutableSubjectInterface, LocaleAwareInterface
 {
     use Translation;
     use RoutableTrait;
