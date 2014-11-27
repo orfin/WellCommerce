@@ -25,6 +25,21 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
  */
 class CategoryRepository extends AbstractEntityRepository implements CategoryRepositoryInterface
 {
+//    public function test(){
+//        $qb = $this->createQueryBuilder('category');
+//        $res = $qb
+//            ->select('category, category_translation, products, products_translation')
+//            ->leftJoin('category.products', 'products')
+//            ->leftJoin('category.translations', 'category_translation')
+//            ->leftJoin('products.translations', 'products_translation')
+//            ->add('where',$qb->expr()->eq('category_translation.locale', ':locale'))
+//            ->setParameter('locale', 'en')
+//            ->getQuery()
+//            ->getArrayResult();
+//        print_r($res);
+//        die();
+//    }
+
     public function getCategoriesTree()
     {
         $queryBuilder = $this->getQueryBuilder('category');

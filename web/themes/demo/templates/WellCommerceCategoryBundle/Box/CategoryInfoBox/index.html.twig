@@ -1,7 +1,7 @@
-<h2 class="box-heading text-left">{{ category.translation.name }}</h2>
+<h2 class="box-heading text-left">{{ category.translate().name }}</h2>
 <hr>
-{% if category.translation.short_description|length %}
+{% if category.translate().shortDescription %}
 <div class="well">
-    {{ category.translation.short_description|raw }}
+    {{ category.translate().shortDescription|raw }}
 </div>
 {% endif %}

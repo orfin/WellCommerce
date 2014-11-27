@@ -11,6 +11,10 @@ wellcommerce_web:
     resource: "@WellCommerceWebBundle/Resources/config/routing.xml"
     prefix:   /
 
+wellcommerce_admin:
+    resource: "@WellCommerceAdminBundle/Resources/config/routing.xml"
+    prefix:   /admin
+
 wellcommerce_user:
     resource: "@WellCommerceUserBundle/Resources/config/routing.xml"
     prefix:   /admin/user
@@ -58,10 +62,6 @@ wellcommerce_tax:
     resource: "@WellCommerceTaxBundle/Resources/config/routing.xml"
     prefix:   /admin/configuration/tax
 
-wellcommerce_contact:
-    resource: "@WellCommerceContactBundle/Resources/config/routing.xml"
-    prefix:   /admin/configuration/contact
-
 wellcommerce_media:
     resource: "@WellCommerceMediaBundle/Resources/config/routing.xml"
     prefix:   /admin/media
@@ -81,10 +81,6 @@ wellcommerce_cms:
 wellcommerce_payment:
     resource: "@WellCommercePaymentBundle/Resources/config/routing.xml"
     prefix:   /admin/payment
-
-wellcommerce_dashboard:
-    resource: "@WellCommerceDashboardBundle/Resources/config/routing.xml"
-    prefix:   /admin/dashboard
 
 wellcommerce_attribute:
     resource: "@WellCommerceAttributeBundle/Resources/config/routing.xml"

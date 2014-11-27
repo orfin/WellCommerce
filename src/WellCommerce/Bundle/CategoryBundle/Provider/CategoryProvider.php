@@ -26,6 +26,8 @@ use WellCommerce\Bundle\CategoryBundle\Repository\CategoryRepositoryInterface;
  */
 class CategoryProvider implements CategoryProviderInterface
 {
+    protected $resource;
+
     /**
      * @var CategoryRepositoryInterface
      */
@@ -51,19 +53,6 @@ class CategoryProvider implements CategoryProviderInterface
 
     }
 
-    public function findCurrentCategory(Request $request)
-    {
-        $category = $this->repository->findResource($request, [
-            'enabled' => 1
-        ]);
-
-        if (null === $category) {
-            throw new CategoryNotFoundException('Category not found');
-        }
-
-        $this->currentCategory = $this->prepareCategoryData($category);
-    }
-
     public function getCurrentCategory()
     {
         return $this->currentCategory;
@@ -83,4 +72,14 @@ class CategoryProvider implements CategoryProviderInterface
         return $data;
     }
 
-} 
+    public function setCurrentResource($resource)
+    {
+        $this->resource = $resource;
+    }
+
+    public function getCurrentResource()
+    {
+        return $this->resource;
+    }
+
+}

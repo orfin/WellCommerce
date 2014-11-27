@@ -76,10 +76,23 @@
         </service>
 
         <service id="locale.orm.listener" class="WellCommerce\Bundle\IntlBundle\EventListener\LocaleORMListener">
-            <tag name="doctrine.event_listener" event="loadClassMetadata" />
+            <tag name="doctrine.event_subscriber" />
+        </service>
+
+        <service id="locale.manager.front" class="WellCommerce\Bundle\IntlBundle\Manager\Front\LocaleManager">
+            <argument type="service" id="flash_helper"/>
+            <argument type="service" id="redirect_helper"/>
+            <argument type="service" id="image_helper"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="translator"/>
+            <call method="setRepository">
+                <argument type="service" id="category.repository"/>
+            </call>
         </service>
 
         <service id="locale.controller.front" class="WellCommerce\Bundle\IntlBundle\Controller\Front\LocaleController">
+            <argument type="service" id="locale.manager.front"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>

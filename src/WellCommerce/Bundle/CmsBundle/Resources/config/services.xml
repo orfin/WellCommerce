@@ -6,5 +6,6 @@
     <imports>
         <import resource="services/news.xml"/>
         <import resource="services/page.xml"/>
+        <import resource="services/contact.xml"/>
     </imports>
 </container>

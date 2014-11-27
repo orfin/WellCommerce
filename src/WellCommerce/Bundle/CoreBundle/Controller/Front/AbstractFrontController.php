@@ -11,8 +11,10 @@
  */
 namespace WellCommerce\Bundle\CoreBundle\Controller\Front;
 
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
-use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
+use WellCommerce\Bundle\CoreBundle\Manager\Front\FrontManagerInterface;
 
 /**
  * Class AbstractFrontController
@@ -22,5 +24,41 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
  */
 abstract class AbstractFrontController extends AbstractController implements FrontControllerInterface
 {
+    /**
+     * @var FrontManagerInterface
+     */
+    protected $manager;
 
+    /**
+     * Constructor
+     *
+     * @param FrontManagerInterface $manager
+     */
+    public function __construct(FrontManagerInterface $manager)
+    {
+        $this->manager = $manager;
+    }
+
+    /**
+     * Returns resource by ID parameter
+     *
+     * @param Request $request
+     * @param array   $criteria
+     *
+     * @return mixed
+     */
+    protected function findOr404(Request $request, array $criteria = [])
+    {
+        if (!$request->attributes->has('id')) {
+            throw new \LogicException('Request does not have "id" attribute set.');
+        }
+
+        $criteria['id'] = $request->attributes->get('id');
+
+        if (null === $resource = $this->manager->getRepository()->findOneBy($criteria)) {
+            throw new NotFoundHttpException(sprintf('Resource not found'));
+        }
+
+        return $resource;
+    }
 }

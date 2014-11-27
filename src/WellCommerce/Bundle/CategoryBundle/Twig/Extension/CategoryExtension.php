@@ -36,6 +36,9 @@ class CategoryExtension extends \Twig_Extension
         $this->repository = $repository;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getGlobals()
     {
         return [

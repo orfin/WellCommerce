@@ -189,8 +189,6 @@ abstract class AbstractAdminController extends AbstractController implements Adm
             throw new NotFoundHttpException(sprintf('Resource not found'));
         }
 
-//        $this->enableLocaleFilter($request->getLocale());
-
         return $resource;
     }
 }

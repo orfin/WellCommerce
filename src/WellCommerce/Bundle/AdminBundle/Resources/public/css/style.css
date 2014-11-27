@@ -4740,6 +4740,7 @@ form {
     border-left: 1px solid #484848;
     border-top: 1px solid #4c4c4c;
     position: relative;
+	width: 108px;
 }
 
 #navigation > li:hover {
@@ -4761,13 +4762,14 @@ form {
 }
 
 #navigation > li > a {
-    position: relative;
-    display: block;
-    font-size: 13px;
-    font-family: 'UbuntuRegular', sans-serif;
-    height: 51px;
-    padding: 14px 24px 17px;
-    white-space: nowrap;
+    text-align: center;
+	position: relative;
+	display: block;
+	font-size: 13px;
+	font-family: 'UbuntuRegular', sans-serif;
+	height: 51px;
+	padding: 14px 0px 17px;
+	white-space: nowrap;
 }
 
 #navigation > li:hover > a,

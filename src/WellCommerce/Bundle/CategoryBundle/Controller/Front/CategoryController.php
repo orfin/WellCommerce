@@ -31,22 +31,14 @@ class CategoryController extends AbstractFrontController implements FrontControl
      */
     public function indexAction(Request $request)
     {
-        $provider = $this->getCategoryProvider();
+        $category = $this->findOr404($request, [
+            'enabled' => 1
+        ]);
 
-        $provider->findCurrentCategory($request);
+        $this->manager->getProvider()->setCurrentResource($category);
 
         return [
-            'category' => $provider->getCurrentCategory()
+            'category' => $this->manager->getProvider()->getCurrentResource()
         ];
-    }
-
-    /**
-     * Returns category provider object
-     *
-     * @return \WellCommerce\Bundle\CategoryBundle\Provider\CategoryProviderInterface
-     */
-    protected function getCategoryProvider()
-    {
-        return $this->get('category.provider');
     }
 }

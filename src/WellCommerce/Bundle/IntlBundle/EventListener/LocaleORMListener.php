@@ -12,8 +12,11 @@
 
 namespace WellCommerce\Bundle\IntlBundle\EventListener;
 
-use Doctrine\ORM\Event\LifecycleEventArgs;
+use Doctrine\Common\EventSubscriber;
+use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
+use Symfony\Component\PropertyAccess\PropertyAccess;
+use WellCommerce\Bundle\IntlBundle\Entity\Locale;
 
 /**
  * Class LocaleORMListener
@@ -21,7 +24,7 @@ use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
  * @package WellCommerce\Bundle\IntlBundle\EventListener
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LocaleORMListener
+class LocaleORMListener implements EventSubscriber
 {
     /**
      * @param LifecycleEventArgs $args
@@ -53,6 +56,18 @@ class LocaleORMListener
 //                'targetEntity' => 'WellCommerce\\Bundle\\IntlBundle\\Entity\\Locale'
 //            ]);
         }
+    }
+
+    public function postRemove(LifecycleEventArgs $args)
+    {
+
+    }
+
+    public function getSubscribedEvents()
+    {
+        return [
+            'postRemove',
+        ];
     }
 
 } 

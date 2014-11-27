@@ -35,8 +35,7 @@ class AttributeValueRepository extends AbstractEntityRepository implements Attri
                 'WellCommerce\Bundle\AttributeBundle\Entity\AttributeValueTranslation',
                 'attribute_value_translation',
                 'WITH',
-                'attribute_group.id = attribute_value_translation.translatable AND attribute_value_translation.locale = :locale')
-            ->setParameter('locale', $this->getCurrentLocale())
+                'attribute_group.id = attribute_value_translation.translatable')
             ->addOrderBy('attribute_value_translation.name', 'ASC');
 
         $query  = $qb->getQuery();
@@ -56,8 +55,7 @@ class AttributeValueRepository extends AbstractEntityRepository implements Attri
                 'WellCommerce\Bundle\AttributeBundle\Entity\AttributeValueTranslation',
                 'attribute_value_translation',
                 'WITH',
-                'attribute_value.id = attribute_value_translation.translatable AND attribute_value_translation.locale = :locale')
-            ->setParameter('locale', $this->getCurrentLocale())
+                'attribute_value.id = attribute_value_translation.translatable')
             ->addOrderBy('attribute_value_translation.name', 'ASC');
 
         // filter by attribute id

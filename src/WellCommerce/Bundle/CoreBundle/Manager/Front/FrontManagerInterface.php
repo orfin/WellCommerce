@@ -10,17 +10,37 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CoreBundle\Controller\Front\Manager;
+namespace WellCommerce\Bundle\CoreBundle\Manager\Front;
 
 use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
+use WellCommerce\Bundle\CoreBundle\Provider\ProviderInterface;
 
 /**
  * Interface FrontManagerInterface
  *
- * @package WellCommerce\Bundle\CoreBundle\Controller\Front\Manager
+ * @package WellCommerce\Bundle\CoreBundle\Manager\Front
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface FrontManagerInterface extends ManagerInterface
 {
+    /**
+     * Returns repository object
+     *
+     * @return \WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface
+     */
+    public function getRepository();
 
-} 
+    /**
+     * Sets category provider
+     *
+     * @param ProviderInterface $provider
+     */
+    public function setProvider(ProviderInterface $provider);
+
+    /**
+     * Returns category provider
+     *
+     * @return ProviderInterface
+     */
+    public function getProvider();
+}

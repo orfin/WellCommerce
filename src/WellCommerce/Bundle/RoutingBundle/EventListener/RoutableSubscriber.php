@@ -62,6 +62,10 @@ class RoutableSubscriber implements EventSubscriber
 
     protected function generateRoute(RoutableSubjectInterface $entity, EntityManager $em)
     {
+        if($em->getFilters()->isEnabled('locale')){
+            $em->getFilters()->disable('locale');
+        }
+
         if (null !== $route = $entity->getRoute()) {
             $em->remove($route);
         }

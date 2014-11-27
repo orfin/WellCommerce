@@ -6,4 +6,5 @@
 
     <import resource="routing/news.xml" prefix="news"/>
     <import resource="routing/page.xml" prefix="page"/>
+    <import resource="routing/contact.xml" prefix="contact"/>
 </routes>

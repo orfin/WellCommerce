@@ -39,61 +39,31 @@ class ClientForm extends AbstractForm implements FormInterface
         $requiredData->addChild($builder->getElement('text_field', [
             'name'  => 'firstName',
             'label' => $this->trans('First name'),
-            'rules' => [
-                $builder->getRule('required', [
-                    'message' => $this->trans('First name is required')
-                ]),
-            ]
         ]));
 
         $requiredData->addChild($builder->getElement('text_field', [
             'name'  => 'lastName',
             'label' => $this->trans('Last name'),
-            'rules' => [
-                $builder->getRule('required', [
-                    'message' => $this->trans('Last name is required')
-                ]),
-            ]
         ]));
 
         $requiredData->addChild($builder->getElement('text_field', [
             'name'  => 'username',
             'label' => $this->trans('Username'),
-            'rules' => [
-                $builder->getRule('required', [
-                    'message' => $this->trans('E-mail is required')
-                ]),
-            ]
         ]));
 
         $requiredData->addChild($builder->getElement('text_field', [
             'name'  => 'email',
             'label' => $this->trans('E-mail'),
-            'rules' => [
-                $builder->getRule('required', [
-                    'message' => $this->trans('E-mail is required')
-                ]),
-            ]
         ]));
 
         $requiredData->addChild($builder->getElement('password', [
             'name'  => 'password',
             'label' => $this->trans('Password'),
-            'rules' => [
-                $builder->getRule('required', [
-                    'message' => $this->trans('Password is required')
-                ]),
-            ]
         ]));
 
         $requiredData->addChild($builder->getElement('text_field', [
             'name'  => 'phone',
             'label' => $this->trans('Phone'),
-            'rules' => [
-                $builder->getRule('required', [
-                    'message' => $this->trans('Phone is required')
-                ]),
-            ]
         ]));
 
 

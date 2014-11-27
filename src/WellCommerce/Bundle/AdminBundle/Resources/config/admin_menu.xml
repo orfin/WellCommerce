@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <items>
     <item>
+        <id>dashboard</id>
+        <name>admin.menu.dashboard</name>
+        <route>admin.dashboard.index</route>
+        <path>menu.dashboard</path>
+        <sort_order>10</sort_order>
+    </item>
+    <item>
         <id>catalog</id>
         <class>catalog</class>
         <name>admin.menu.catalog</name>

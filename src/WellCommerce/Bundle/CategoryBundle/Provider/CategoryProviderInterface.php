@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\CategoryBundle\Provider;
 
 use Symfony\Component\HttpFoundation\Request;
+use WellCommerce\Bundle\CoreBundle\Provider\ProviderInterface;
 
 /**
  * Interface CategoryProviderInterface
@@ -20,7 +21,7 @@ use Symfony\Component\HttpFoundation\Request;
  * @package WellCommerce\Bundle\CategoryBundle\Provider
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface CategoryProviderInterface
+interface CategoryProviderInterface extends ProviderInterface
 {
     /**
      * Returns categories tree
@@ -28,15 +29,6 @@ interface CategoryProviderInterface
      * @return mixed
      */
     public function getTree();
-
-    /**
-     * Searches for category using current request parameters
-     *
-     * @param Request $request
-     *
-     * @return mixed
-     */
-    public function findCurrentCategory(Request $request);
 
     /**
      * Returns current category

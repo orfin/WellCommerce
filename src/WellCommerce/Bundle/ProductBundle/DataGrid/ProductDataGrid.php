@@ -49,7 +49,7 @@ class ProductDataGrid extends AbstractDataGrid implements DataGridInterface
         $collection->add(new Column([
             'id'         => 'name',
             'source'     => 'product_translation.name',
-            'caption'    => $this->trans('product.name'),
+            'caption'    => $this->trans('product.name.label'),
             'appearance' => [
                 'width' => 70,
                 'align' => ColumnInterface::ALIGN_LEFT
@@ -62,7 +62,7 @@ class ProductDataGrid extends AbstractDataGrid implements DataGridInterface
         $collection->add(new Column([
             'id'         => 'sellPrice',
             'source'     => 'product.sellPrice',
-            'caption'    => $this->trans('Price net'),
+            'caption'    => $this->trans('product.sell_price.label'),
             'editable'   => true,
             'appearance' => [
                 'width' => 70,
@@ -76,7 +76,7 @@ class ProductDataGrid extends AbstractDataGrid implements DataGridInterface
         $collection->add(new Column([
             'id'         => 'stock',
             'source'     => 'product.stock',
-            'caption'    => $this->trans('Stock'),
+            'caption'    => $this->trans('product.stock.label'),
             'editable'   => true,
             'appearance' => [
                 'width' => 70,

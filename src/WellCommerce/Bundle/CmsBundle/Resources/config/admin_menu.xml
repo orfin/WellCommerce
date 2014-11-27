@@ -14,4 +14,11 @@
         <path>menu.cms.page</path>
         <sort_order>30</sort_order>
     </item>
+    <item>
+        <id>contact</id>
+        <name>admin.menu.contact</name>
+        <route>admin.contact.index</route>
+        <path>menu.cms.contact</path>
+        <sort_order>30</sort_order>
+    </item>
 </items>

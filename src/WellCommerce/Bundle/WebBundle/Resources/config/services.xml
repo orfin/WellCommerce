@@ -3,12 +3,21 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <parameters>
-        <parameter key="web.home_page.controller.front.class">WellCommerce\Bundle\WebBundle\Controller\Front\HomePageController</parameter>
-    </parameters>
-
     <services>
-        <service id="web.home_page.controller.front" class="%web.home_page.controller.front.class%">
+        <service id="home_page.manager.front" class="WellCommerce\Bundle\CategoryBundle\Manager\Front\CategoryManager">
+            <argument type="service" id="flash_helper"/>
+            <argument type="service" id="redirect_helper"/>
+            <argument type="service" id="image_helper"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="translator"/>
+            <call method="setRepository">
+                <argument type="service" id="category.repository"/>
+            </call>
+        </service>
+
+        <service id="web.home_page.controller.front" class="WellCommerce\Bundle\WebBundle\Controller\Front\HomePageController">
+            <argument type="service" id="home_page.manager.front" />
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>

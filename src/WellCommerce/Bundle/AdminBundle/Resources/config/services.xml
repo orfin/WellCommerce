@@ -3,14 +3,12 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <parameters>
-        <parameter key="admin.subscriber.class">WellCommerce\Bundle\AdminBundle\EventListener\AdminSubscriber</parameter>
-        <parameter key="admin_menu.builder.class">WellCommerce\Bundle\AdminBundle\MenuBuilder\AdminMenuBuilder</parameter>
-        <parameter key="twig.extension.admin.class">WellCommerce\Bundle\AdminBundle\Twig\Extension\AdminExtension</parameter>
-    </parameters>
+    <imports>
+        <import resource="services/dashboard.xml"/>
+    </imports>
 
     <services>
-        <service id="admin.subscriber" class="%admin.subscriber.class%">
+        <service id="admin.subscriber" class="WellCommerce\Bundle\AdminBundle\EventListener\AdminSubscriber">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -23,9 +21,9 @@
             <tag name="kernel.event_subscriber" />
         </service>
 
-        <service id="admin_menu.builder" class="%admin_menu.builder.class%" />
+        <service id="admin_menu.builder" class="WellCommerce\Bundle\AdminBundle\MenuBuilder\AdminMenuBuilder" />
 
-        <service id="twig.extension.admin" class="%twig.extension.admin.class%">
+        <service id="twig.extension.admin" class="WellCommerce\Bundle\AdminBundle\Twig\Extension\AdminExtension">
             <argument type="service" id="session"/>
             <tag name="twig.extension"/>
         </service>
