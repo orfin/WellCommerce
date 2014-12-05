@@ -53,7 +53,7 @@ doctrine:
                 filters:
                     locale:
                         class:   WellCommerce\Bundle\IntlBundle\ORM\Filter\LocaleFilter
-                        enabled: true
+                        enabled: false
 
 # Swiftmailer Configuration
 swiftmailer:
