@@ -15,7 +15,7 @@ namespace WellCommerce\Bundle\AdminBundle\Controller\Admin;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
- * Class DashboardController
+ * Class SettingsController
  *
  * @package WellCommerce\Bundle\AdminBundle\Controller
  * @author  Adam Piotrowski <adam@wellcommerce.org>
