@@ -1,11 +1,11 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- * 
+ *
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- * 
+ *
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
@@ -25,17 +25,10 @@ use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
  */
 class LocaleSubscriber extends AbstractEventSubscriber
 {
-    private $defaultLocale;
-
-    public function __construct($defaultLocale = 'en')
-    {
-        $this->defaultLocale = $defaultLocale;
-    }
-
     public static function getSubscribedEvents()
     {
         return parent::getSubscribedEvents() + [
-            KernelEvents::REQUEST    => ['onKernelRequest', 17],
+            KernelEvents::REQUEST    => ['onKernelRequest', 15],
             KernelEvents::CONTROLLER => ['onKernelController', -256],
         ];
     }
@@ -44,17 +37,13 @@ class LocaleSubscriber extends AbstractEventSubscriber
     {
         $request = $event->getRequest();
 
-        if (!$request->hasPreviousSession()) {
-            return;
-        }
-
-        $filter = $this->getEntityManager()->getFilters()->getFilter('locale');
+        $filter = $this->getEntityManager()->getFilters()->enable('locale');
 
         if ($locale = $request->attributes->get('_locale')) {
             $request->getSession()->set('_locale', $locale);
             $filter->setParameter('locale', $locale);
         } else {
-            $currentLocale = $request->getSession()->get('_locale', $this->defaultLocale);
+            $currentLocale = $request->getSession()->get('_locale', $request->getDefaultLocale());
             $request->setLocale($currentLocale);
             $filter->setParameter('locale', $currentLocale);
         }

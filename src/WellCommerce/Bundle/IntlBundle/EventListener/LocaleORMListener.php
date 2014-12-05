@@ -15,8 +15,6 @@ namespace WellCommerce\Bundle\IntlBundle\EventListener;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
-use Symfony\Component\PropertyAccess\PropertyAccess;
-use WellCommerce\Bundle\IntlBundle\Entity\Locale;
 
 /**
  * Class LocaleORMListener

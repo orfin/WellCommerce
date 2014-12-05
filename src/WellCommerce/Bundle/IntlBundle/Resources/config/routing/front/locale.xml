@@ -6,6 +6,5 @@
 
     <route id="front.locale.switch" path="/switch/{_locale}">
         <default key="_controller">locale.controller.front:switchAction</default>
-        <default key="_locale">en</default>
     </route>
 </routes>
