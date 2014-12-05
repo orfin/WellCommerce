@@ -9,7 +9,7 @@ default:
         dashboard:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
-                - WellCommerce\Bundle\DashboardBundle\Behat\DashboardContext
+                - WellCommerce\Bundle\AdminBundle\Behat\DashboardContext
             filters:
                 tags: "@dashboard"
 
