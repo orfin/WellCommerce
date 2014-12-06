@@ -49,6 +49,7 @@ abstract class AbstractFrontController extends AbstractController implements Fro
      */
     protected function findOr404(Request $request, array $criteria = [])
     {
+        // check whether request contains ID attribute
         if (!$request->attributes->has('id')) {
             throw new \LogicException('Request does not have "id" attribute set.');
         }

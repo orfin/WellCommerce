@@ -10,17 +10,17 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CategoryBundle\Manager\Front;
+namespace WellCommerce\Bundle\CmsBundle\Manager\Front;
 
 use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
 
 /**
- * Class CategoryManager
+ * Class PageManager
  *
- * @package WellCommerce\Bundle\CategoryBundle\Manager\Front
+ * @package WellCommerce\Bundle\CmdBundle\Manager\Front
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CategoryManager extends AbstractFrontManager
+class PageManager extends AbstractFrontManager
 {
 
 } 

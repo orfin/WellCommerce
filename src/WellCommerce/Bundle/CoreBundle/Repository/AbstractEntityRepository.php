@@ -122,7 +122,7 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
     {
         $identifierField  = sprintf('%s.%s', $tableName, $identifier);
         $translationField = sprintf('%s.%s', $associationTableName, $labelField);
-        $queryBuilder     = $this->getQueryBuilder($this->getName());
+        $queryBuilder     = $this->getQueryBuilder($this->getEntityName());
         $queryBuilder->select("
             {$identifierField},
             {$translationField}
@@ -167,7 +167,6 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
         }
 
         return $queryBuilder;
-
     }
 
     /**
@@ -179,13 +178,5 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
         $entityName = end($parts);
 
         return Helper::snake($entityName);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->getEntityName();
     }
 }

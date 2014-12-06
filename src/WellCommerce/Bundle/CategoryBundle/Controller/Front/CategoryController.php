@@ -38,7 +38,7 @@ class CategoryController extends AbstractFrontController implements FrontControl
         $this->manager->getProvider()->setCurrentResource($category);
 
         return [
-            'category' => $this->manager->getProvider()->getCurrentResource()
+            'category' => $category
         ];
     }
 }

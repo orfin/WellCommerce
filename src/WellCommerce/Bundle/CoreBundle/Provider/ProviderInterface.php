@@ -18,7 +18,21 @@ namespace WellCommerce\Bundle\CoreBundle\Provider;
  * @package WellCommerce\Bundle\CoreBundle\Provider
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ProviderInterface {
-
+interface ProviderInterface
+{
+    /**
+     * Sets current providers resource
+     *
+     * @param $resource
+     *
+     * @return mixed
+     */
     public function setCurrentResource($resource);
+
+    /**
+     * Returns current resource
+     *
+     * @return mixed
+     */
+    public function getCurrentResource();
 } 

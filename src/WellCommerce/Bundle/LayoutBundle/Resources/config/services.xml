@@ -12,13 +12,13 @@
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
             <argument type="service" id="translator"/>
             <call method="setRepository">
-                <argument type="service" id="currency.repository"/>
+                <argument type="service" id="layout_box.repository"/>
             </call>
             <call method="setForm">
-                <argument type="service" id="currency.form"/>
+                <argument type="service" id="layout_box.form"/>
             </call>
             <call method="setDataGrid">
-                <argument type="service" id="currency.datagrid"/>
+                <argument type="service" id="layout_box.datagrid"/>
             </call>
         </service>
 

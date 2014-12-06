@@ -57,7 +57,6 @@ class LayoutBoxSubscriber extends AbstractEventSubscriber
                 $configurator->addFormFields($builder, $defaults);
             }
         }
-
     }
 
     /**

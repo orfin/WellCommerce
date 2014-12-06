@@ -12,8 +12,6 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Repository;
 
-use Symfony\Component\Translation\TranslatorInterface;
-
 /**
  * Interface RepositoryInterface
  *
@@ -44,13 +42,6 @@ interface RepositoryInterface
      * @return string
      */
     public function getAlias();
-
-    /**
-     * Returns entities name
-     *
-     * @return string
-     */
-    public function getName();
 
     /**
      * Returns property accessor
@@ -103,5 +94,15 @@ interface RepositoryInterface
      * @return mixed
      */
     public function findAll();
+
+    /**
+     * Returns single entity using additional criteria
+     *
+     * @param array $criteria
+     * @param array $orderBy
+     *
+     * @return mixed
+     */
+    public function findOneBy(array $criteria, array $orderBy = null);
 
 } 

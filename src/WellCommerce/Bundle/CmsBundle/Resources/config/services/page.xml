@@ -4,7 +4,20 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+        <service id="page.manager.front" class="WellCommerce\Bundle\CmsBundle\Manager\Front\PageManager">
+            <argument type="service" id="flash_helper"/>
+            <argument type="service" id="redirect_helper"/>
+            <argument type="service" id="image_helper"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="translator"/>
+            <call method="setRepository">
+                <argument type="service" id="page.repository"/>
+            </call>
+        </service>
+
         <service id="page.controller.front" class="WellCommerce\Bundle\CmsBundle\Controller\Front\PageController">
+            <argument type="service" id="page.manager.front"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
@@ -33,6 +46,20 @@
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
+        </service>
+
+        <service id="page.layout_box.controller" class="WellCommerce\Bundle\CmsBundle\Controller\Box\PageBoxController">
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="page.repository"/>
+        </service>
+
+        <service id="page.layout_box.configurator" class="WellCommerce\Bundle\CmsBundle\Layout\PageBoxConfigurator">
+            <argument>PageBox</argument>
+            <argument>page.layout_box.controller</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="layout_box.configurator" />
         </service>
 
         <service id="page.repository" class="WellCommerce\Bundle\CmsBundle\Repository\PageRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">

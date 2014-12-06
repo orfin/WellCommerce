@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CmsBundle\Controller\Front;
 
+use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
 
@@ -25,8 +26,22 @@ use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
  */
 class PageController extends AbstractFrontController implements FrontControllerInterface
 {
-    public function indexAction()
+    /**
+     * {@inheritdoc}
+     */
+    public function indexAction(Request $request)
     {
-        return [];
+        $page = $this->findOr404($request, [
+            'publish' => 1
+        ]);
+
+        $translations = $page->translate();
+
+        return [
+            'page' => [
+                'name'    => $translations->getName(),
+                'content' => $translations->getContent()
+            ]
+        ];
     }
 }
