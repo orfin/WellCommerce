@@ -57,7 +57,7 @@ class AttributeValueRepository extends AbstractEntityRepository implements Attri
                 'WITH',
                 'attribute_value.id = attribute_value_translation.translatable')
             ->addOrderBy('attribute_value_translation.name', 'ASC');
-
+        $qb->addGroupBy('attribute_value.attribute');
         // filter by attribute id
         $where = $qb->expr()->eq('attribute_value.attribute', ':attribute');
         $qb->setParameter('attribute', $id);

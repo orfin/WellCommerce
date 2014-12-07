@@ -24,11 +24,6 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 class AttributeController extends AbstractAdminController
 {
     /**
-     * @var \WellCommerce\Bundle\AttributeBundle\Repository\AttributeRepositoryInterface
-     */
-    protected $repository;
-
-    /**
      * {@inheritdoc}
      */
     public function ajaxIndexAction(Request $request)
@@ -38,7 +33,7 @@ class AttributeController extends AbstractAdminController
             return $this->manager->getRedirectHelper()->redirectToAction('index');
         }
 
-        $attributes = $this->repository->findAllByAttributeGroupId($request->request->get('id'));
+        $attributes = $this->manager->getRepository()->findAllByAttributeGroupId($request->request->get('id'));
 
         $sets = [];
 
