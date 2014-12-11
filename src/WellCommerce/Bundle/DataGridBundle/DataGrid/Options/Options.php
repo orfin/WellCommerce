@@ -70,12 +70,12 @@ class Options implements OptionsInterface
         ]);
 
         $resolver->setAllowedTypes([
-            'appearance'     => 'object',
-            'mechanics'      => 'object',
-            'event_handlers' => 'object',
-            'row_actions'    => 'object',
-            'filters'        => 'object',
-            'routes'         => 'object'
+            'appearance'     => 'WellCommerce\Bundle\DataGridBundle\DataGrid\Configuration\Appearance',
+            'mechanics'      => 'WellCommerce\Bundle\DataGridBundle\DataGrid\Configuration\Mechanics',
+            'event_handlers' => 'WellCommerce\Bundle\DataGridBundle\DataGrid\Configuration\EventHandlers',
+            'row_actions'    => 'WellCommerce\Bundle\DataGridBundle\DataGrid\Configuration\RowActions',
+            'filters'        => 'WellCommerce\Bundle\DataGridBundle\DataGrid\Configuration\Filters',
+            'routes'         => 'WellCommerce\Bundle\DataGridBundle\DataGrid\Configuration\Routes',
         ]);
     }
 
