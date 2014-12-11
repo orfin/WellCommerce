@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "53890962b360fbb9dea6d49e54136973",
+    "hash": "5d1480b5063a21df9167dfc8da4d06e8",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -970,12 +970,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "420851d62126509a5444fdd06f15f57ac05ab29a"
+                "reference": "eebe556a7c5ec7df04b65584d78adf8252c8e10f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/420851d62126509a5444fdd06f15f57ac05ab29a",
-                "reference": "420851d62126509a5444fdd06f15f57ac05ab29a",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/eebe556a7c5ec7df04b65584d78adf8252c8e10f",
+                "reference": "eebe556a7c5ec7df04b65584d78adf8252c8e10f",
                 "shasum": ""
             },
             "require": {
@@ -1011,7 +1011,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2014-11-30 16:08:55"
+            "time": "2014-12-05 13:11:34"
         },
         {
             "name": "imagine/imagine",
@@ -1647,6 +1647,61 @@
             "time": "2014-07-30 14:40:52"
         },
         {
+            "name": "mathiasverraes/money",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mathiasverraes/money.git",
+                "reference": "6114020afb528dd42e6b9fd689e38fee75890b4e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mathiasverraes/money/zipball/6114020afb528dd42e6b9fd689e38fee75890b4e",
+                "reference": "6114020afb528dd42e6b9fd689e38fee75890b4e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "suggest": {
+                "Sylius/SyliusMoneyBundle": "Sylius' Symfony2 integration with Money library",
+                "TheBigBrainsCompany/TbbcMoneyBundle": "Very complete Symfony2 bundle with support for Twig, Doctrine, Forms, ...",
+                "pink-tie/money-bundle": "Pink-Tie's Symfony2 integration with Money library"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Money": "lib"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mathias Verraes",
+                    "email": "mathias@verraes.net"
+                }
+            ],
+            "description": "PHP implementation of Fowler's Money pattern",
+            "homepage": "http://verraes.net/2011/04/fowler-money-pattern-in-php/",
+            "keywords": [
+                "Generic Sub-domain",
+                "Value Object",
+                "money"
+            ],
+            "time": "2014-11-25 16:38:26"
+        },
+        {
             "name": "monolog/monolog",
             "version": "1.11.0",
             "source": {
@@ -2077,16 +2132,16 @@
         },
         {
             "name": "swiftmailer/swiftmailer",
-            "version": "v5.3.0",
+            "version": "v5.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "b86b927dfefdb56ab0b22d1350033d9a38e9f205"
+                "reference": "c5f963e7f9d6f6438fda4f22d5cc2db296ec621a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/b86b927dfefdb56ab0b22d1350033d9a38e9f205",
-                "reference": "b86b927dfefdb56ab0b22d1350033d9a38e9f205",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/c5f963e7f9d6f6438fda4f22d5cc2db296ec621a",
+                "reference": "c5f963e7f9d6f6438fda4f22d5cc2db296ec621a",
                 "shasum": ""
             },
             "require": {
@@ -2125,7 +2180,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2014-10-04 05:53:18"
+            "time": "2014-12-05 14:17:14"
         },
         {
             "name": "symfony-cmf/routing",
@@ -2652,125 +2707,18 @@
             "time": "2014-10-17 12:53:44"
         },
         {
-            "name": "wellcommerce/composer-manager-bundle",
-            "version": "dev-master",
-            "target-dir": "WellCommerce/Bundle/ComposerManagerBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/WellCommerce/ComposerManagerBundle.git",
-                "reference": "a20726e15032dfacc5f7bfb7bcb076a77560642a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/WellCommerce/ComposerManagerBundle/zipball/a20726e15032dfacc5f7bfb7bcb076a77560642a",
-                "reference": "a20726e15032dfacc5f7bfb7bcb076a77560642a",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4",
-                "symfony/symfony": "2.5.*"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "WellCommerce\\Bundle\\DataGridBundle": ""
-                }
-            },
-            "notification-url": "http://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Adam Piotrowski",
-                    "email": "adam@wellcommerce.org"
-                },
-                {
-                    "name": "WellCommerce Developers",
-                    "email": "developers@wellcommerce.org"
-                }
-            ],
-            "description": "WellCommerce Composer Manager Bundle",
-            "keywords": [
-                "composer",
-                "e-commerce",
-                "open-source",
-                "symfony",
-                "wellcommerce"
-            ],
-            "time": "2014-10-17 23:12:07"
-        },
-        {
-            "name": "wellcommerce/datagrid-bundle",
-            "version": "dev-master",
-            "target-dir": "WellCommerce/Bundle/DataGridBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/WellCommerce/DataGridBundle.git",
-                "reference": "50eb85523abaec9cf486bed164a88b0e3fe89bed"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/WellCommerce/DataGridBundle/zipball/50eb85523abaec9cf486bed164a88b0e3fe89bed",
-                "reference": "50eb85523abaec9cf486bed164a88b0e3fe89bed",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4",
-                "symfony/symfony": "2.5.*"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "WellCommerce\\Bundle\\DataGridBundle": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Adam Piotrowski",
-                    "email": "adam@wellcommerce.org"
-                },
-                {
-                    "name": "WellCommerce Developers",
-                    "email": "developers@wellcommerce.org"
-                }
-            ],
-            "description": "WellCommerce DataGrid Bundle",
-            "keywords": [
-                "e-commerce",
-                "open-source",
-                "symfony",
-                "wellcommerce"
-            ],
-            "time": "2014-11-16 17:35:19"
-        },
-        {
             "name": "wellcommerce/form-bundle",
             "version": "dev-development",
             "target-dir": "WellCommerce/Bundle/FormBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/WellCommerce/FormBundle.git",
-                "reference": "eb69aa613de5dc37bf096eac818ed00e66fea64b"
+                "reference": "71d81be2aa3cbaf26976fef44739239fe4d09d7c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WellCommerce/FormBundle/zipball/eb69aa613de5dc37bf096eac818ed00e66fea64b",
-                "reference": "eb69aa613de5dc37bf096eac818ed00e66fea64b",
+                "url": "https://api.github.com/repos/WellCommerce/FormBundle/zipball/71d81be2aa3cbaf26976fef44739239fe4d09d7c",
+                "reference": "71d81be2aa3cbaf26976fef44739239fe4d09d7c",
                 "shasum": ""
             },
             "require": {
@@ -2809,7 +2757,7 @@
                 "symfony",
                 "wellcommerce"
             ],
-            "time": "2014-11-16 17:34:49"
+            "time": "2014-12-04 22:19:10"
         },
         {
             "name": "white-october/pagerfanta-bundle",
@@ -3005,6 +2953,108 @@
                 "negotiation"
             ],
             "time": "2014-10-02 07:26:00"
+        },
+        {
+            "name": "zendframework/zend-json",
+            "version": "2.3.3",
+            "target-dir": "Zend/Json",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/Component_ZendJson.git",
+                "reference": "4093e5a0a166a5d02532bac6e5671a7b21d203b5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/Component_ZendJson/zipball/4093e5a0a166a5d02532bac6e5671a7b21d203b5",
+                "reference": "4093e5a0a166a5d02532bac6e5671a7b21d203b5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.23",
+                "zendframework/zend-stdlib": "self.version"
+            },
+            "require-dev": {
+                "zendframework/zend-http": "self.version",
+                "zendframework/zend-server": "self.version"
+            },
+            "suggest": {
+                "zendframework/zend-http": "Zend\\Http component",
+                "zendframework/zend-server": "Zend\\Server component"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.3-dev",
+                    "dev-develop": "2.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Zend\\Json\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "provides convenience methods for serializing native PHP to JSON and decoding JSON to native PHP",
+            "homepage": "https://github.com/zendframework/zf2",
+            "keywords": [
+                "json",
+                "zf2"
+            ],
+            "time": "2014-09-16 22:58:11"
+        },
+        {
+            "name": "zendframework/zend-stdlib",
+            "version": "2.3.3",
+            "target-dir": "Zend/Stdlib",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/Component_ZendStdlib.git",
+                "reference": "fa33e6647f830d0d2a1cb451efcdfe1bb9a66c33"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/Component_ZendStdlib/zipball/fa33e6647f830d0d2a1cb451efcdfe1bb9a66c33",
+                "reference": "fa33e6647f830d0d2a1cb451efcdfe1bb9a66c33",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.23"
+            },
+            "require-dev": {
+                "zendframework/zend-eventmanager": "self.version",
+                "zendframework/zend-serializer": "self.version",
+                "zendframework/zend-servicemanager": "self.version"
+            },
+            "suggest": {
+                "zendframework/zend-eventmanager": "To support aggregate hydrator usage",
+                "zendframework/zend-serializer": "Zend\\Serializer component",
+                "zendframework/zend-servicemanager": "To support hydrator plugin manager usage"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.3-dev",
+                    "dev-develop": "2.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Zend\\Stdlib\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "homepage": "https://github.com/zendframework/zf2",
+            "keywords": [
+                "stdlib",
+                "zf2"
+            ],
+            "time": "2014-09-16 22:58:11"
         }
     ],
     "packages-dev": [
@@ -3648,21 +3698,21 @@
         },
         {
             "name": "sensio/generator-bundle",
-            "version": "v2.4.3",
+            "version": "v2.5.0",
             "target-dir": "Sensio/Bundle/GeneratorBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioGeneratorBundle.git",
-                "reference": "2e2d8096a65cfec2658bd3f21e506fa1058b962e"
+                "reference": "0225fcd08e94de2165ffa85de50c3c9d9592e96b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioGeneratorBundle/zipball/2e2d8096a65cfec2658bd3f21e506fa1058b962e",
-                "reference": "2e2d8096a65cfec2658bd3f21e506fa1058b962e",
+                "url": "https://api.github.com/repos/sensiolabs/SensioGeneratorBundle/zipball/0225fcd08e94de2165ffa85de50c3c9d9592e96b",
+                "reference": "0225fcd08e94de2165ffa85de50c3c9d9592e96b",
                 "shasum": ""
             },
             "require": {
-                "symfony/console": "~2.0",
+                "symfony/console": "~2.5",
                 "symfony/framework-bundle": "~2.2"
             },
             "require-dev": {
@@ -3673,7 +3723,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4.x-dev"
+                    "dev-master": "2.5.x-dev"
                 }
             },
             "autoload": {
@@ -3692,7 +3742,7 @@
                 }
             ],
             "description": "This bundle generates code for you",
-            "time": "2014-12-04 05:46:34"
+            "time": "2014-12-07 18:30:52"
         }
     ],
     "aliases": [],
@@ -3706,9 +3756,9 @@
         "friendsofsymfony/jsrouting-bundle": 20,
         "willdurand/js-translation-bundle": 20,
         "wellcommerce/form-bundle": 20,
-        "wellcommerce/datagrid-bundle": 20,
-        "wellcommerce/composer-manager-bundle": 20,
         "symfony-cmf/routing-bundle": 20,
+        "mathiasverraes/money": 20,
+        "zendframework/zend-json": 20,
         "doctrine/doctrine-fixtures-bundle": 20,
         "behat/behat": 20,
         "behat/symfony2-extension": 20,

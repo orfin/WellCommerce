@@ -15,6 +15,8 @@ use WellCommerce\Bundle\DataGridBundle\DataGrid\AbstractDataGrid;
 use WellCommerce\Bundle\DataGridBundle\DataGrid\Column\Column;
 use WellCommerce\Bundle\DataGridBundle\DataGrid\Column\ColumnCollection;
 use WellCommerce\Bundle\DataGridBundle\DataGrid\Column\ColumnInterface;
+use WellCommerce\Bundle\DataGridBundle\DataGrid\Column\Options\Appearance;
+use WellCommerce\Bundle\DataGridBundle\DataGrid\Column\Options\Filter;
 use WellCommerce\Bundle\DataGridBundle\DataGrid\DataGridInterface;
 
 /**
@@ -34,29 +36,25 @@ class ProductDataGrid extends AbstractDataGrid implements DataGridInterface
             'id'         => 'id',
             'source'     => 'product.id',
             'caption'    => $this->trans('product.id'),
-            'sorting'    => [
-                'default_order' => ColumnInterface::SORT_DIR_DESC
-            ],
-            'appearance' => [
+            'appearance' => new Appearance([
                 'width'   => 90,
                 'visible' => false
-            ],
-            'filter'     => [
-                'type' => ColumnInterface::FILTER_BETWEEN
-            ]
+            ]),
+            'filter'     => new Filter([
+                'type' => Filter::FILTER_BETWEEN
+            ])
         ]));
 
         $collection->add(new Column([
             'id'         => 'name',
             'source'     => 'product_translation.name',
             'caption'    => $this->trans('product.name.label'),
-            'appearance' => [
+            'appearance' => new Appearance([
                 'width' => 70,
-                'align' => ColumnInterface::ALIGN_LEFT
-            ],
-            'filter'     => [
-                'type' => ColumnInterface::FILTER_INPUT
-            ]
+            ]),
+            'filter'     => new Filter([
+                'type' => Filter::FILTER_INPUT
+            ])
         ]));
 
         $collection->add(new Column([
@@ -64,13 +62,12 @@ class ProductDataGrid extends AbstractDataGrid implements DataGridInterface
             'source'     => 'product.sellPrice',
             'caption'    => $this->trans('product.sell_price.label'),
             'editable'   => true,
-            'appearance' => [
+            'appearance' => new Appearance([
                 'width' => 70,
-                'align' => ColumnInterface::ALIGN_LEFT
-            ],
-            'filter'     => [
-                'type' => ColumnInterface::FILTER_BETWEEN
-            ]
+            ]),
+            'filter'     => new Filter([
+                'type' => Filter::FILTER_BETWEEN
+            ])
         ]));
 
         $collection->add(new Column([
@@ -78,13 +75,12 @@ class ProductDataGrid extends AbstractDataGrid implements DataGridInterface
             'source'     => 'product.stock',
             'caption'    => $this->trans('product.stock.label'),
             'editable'   => true,
-            'appearance' => [
+            'appearance' => new Appearance([
                 'width' => 70,
-                'align' => ColumnInterface::ALIGN_LEFT
-            ],
-            'filter'     => [
-                'type' => ColumnInterface::FILTER_BETWEEN
-            ]
+            ]),
+            'filter'     => new Filter([
+                'type' => Filter::FILTER_BETWEEN
+            ])
         ]));
     }
 }

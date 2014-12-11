@@ -81,5 +81,8 @@
             <argument type="collection" key="requirements" />
             <tag name="route.generator" />
         </service>
+
+        <service id="product.collection.processor" class="WellCommerce\Bundle\ProductBundle\Collection\Processor\ProductCollectionProcessor" />
+
     </services>
 </container>
