@@ -11,6 +11,7 @@
  */
 namespace WellCommerce\Bundle\ProductBundle\Repository;
 
+use Doctrine\ORM\Query\Expr;
 use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 
 /**
@@ -21,5 +22,28 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
  */
 class ProductRepository extends AbstractEntityRepository implements ProductRepositoryInterface
 {
+    public function getProductCollectionQueryBuilder()
+    {
+        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder->select([
+            'product',
+            'currency',
+            'gallery',
+            'photos',
+            'translations',
+            'routes',
 
+        ]);
+        $queryBuilder->groupBy('product.id');
+        $queryBuilder->leftJoin('product.translations', 'translations');
+        $queryBuilder->leftJoin('product.sellCurrency', 'currency');
+        $queryBuilder->leftJoin('translations.route', 'routes');
+        $queryBuilder->leftJoin('product.productPhotos', 'gallery', Expr\Join::WITH, 'gallery.mainPhoto = :mainPhoto');
+        $queryBuilder->leftJoin('gallery.photo', 'photos');
+        $queryBuilder->leftJoin('product.statuses', 'statuses');
+        $queryBuilder->leftJoin('statuses.translations', 'statuses_translation');
+        $queryBuilder->setParameter('mainPhoto', 1);
+
+        return $queryBuilder;
+    }
 }

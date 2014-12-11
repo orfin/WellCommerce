@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\DataGridBundle\DataGrid\Column;
+namespace WellCommerce\Bundle\ProductBundle\Collection\Column;
 
 use WellCommerce\Bundle\CoreBundle\Collection\AbstractCollection;
 
@@ -23,28 +23,12 @@ use WellCommerce\Bundle\CoreBundle\Collection\AbstractCollection;
 class ColumnCollection extends AbstractCollection
 {
     /**
-     * Adds new column to collection
+     * Adds new product column to collection
      *
      * @param ColumnInterface $column
      */
     public function add(ColumnInterface $column)
     {
-        $this->items[$column->getId()] = $column;
-    }
-
-    /**
-     * Returns column by its identifier
-     *
-     * @param string $id Column identifier
-     *
-     * @return array
-     */
-    public function get($id)
-    {
-        if (!isset($this->items[$id])) {
-            throw new \InvalidArgumentException(sprintf('DataGrid column "%s" not found', $id));
-        }
-
-        return $this->items[$id];
+        $this->items[] = $column;
     }
 }

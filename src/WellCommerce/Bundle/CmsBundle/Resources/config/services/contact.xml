@@ -29,6 +29,20 @@
             </call>
         </service>
 
+        <service id="contact.layout_box.controller" class="WellCommerce\Bundle\CmsBundle\Controller\Box\ContactBoxController">
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="contact.repository"/>
+        </service>
+
+        <service id="contact.layout_box.configurator" class="WellCommerce\Bundle\CmsBundle\Layout\ContactBoxConfigurator">
+            <argument>ContactBox</argument>
+            <argument>contact.layout_box.controller</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="layout_box.configurator" />
+        </service>
+
         <service id="contact.repository" class="WellCommerce\Bundle\CmsBundle\Repository\ContactRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument>WellCommerceCmsBundle:Contact</argument>
         </service>
@@ -47,6 +61,12 @@
         </service>
 
         <service id="contact.form" class="WellCommerce\Bundle\CmsBundle\Form\ContactForm">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="contact.form.front" class="WellCommerce\Bundle\CmsBundle\Form\Front\ContactForm">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

@@ -125,6 +125,26 @@
             <tag name="route.generator" />
         </service>
 
+        <service id="category.products.collection" class="WellCommerce\Bundle\CategoryBundle\Collection\CategoryProductsCollection">
+            <argument type="service" id="category.repository"/>
+            <argument type="service" id="product.collection.processor"/>
+            <argument type="service" id="event_dispatcher"/>
+        </service>
+
+        <service id="category_products.layout_box.controller" class="WellCommerce\Bundle\CategoryBundle\Controller\Box\CategoryProductsBoxController">
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="category.repository"/>
+        </service>
+
+        <service id="category_products.layout_box.configurator" class="WellCommerce\Bundle\CategoryBundle\Layout\CategoryProductsBoxConfigurator">
+            <argument>CategoryProductsBox</argument>
+            <argument>category_products.layout_box.controller</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="layout_box.configurator" />
+        </service>
+
         <service id="twig.extension.category" class="WellCommerce\Bundle\CategoryBundle\Twig\Extension\CategoryExtension">
             <argument type="service" id="category.repository"/>
             <tag name="twig.extension"/>

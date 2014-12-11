@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\CategoryBundle\Repository;
 
 use Symfony\Component\HttpFoundation\ParameterBag;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
+use WellCommerce\Bundle\ProductBundle\Repository\ProductCollectionAwareRepositoryInterface;
 
 /**
  * Interface CategoryRepositoryInterface
@@ -21,7 +22,7 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
  * @package WellCommerce\Bundle\CategoryBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface CategoryRepositoryInterface extends RepositoryInterface
+interface CategoryRepositoryInterface extends RepositoryInterface, ProductCollectionAwareRepositoryInterface
 {
     /**
      * Returns parsed categories tree

@@ -12,16 +12,18 @@
 
 namespace WellCommerce\Bundle\ProductBundle\Repository;
 
-use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
-use WellCommerce\Bundle\DataGridBundle\DataGrid\Repository\DataGridAwareRepositoryInterface;
-
 /**
- * Interface ProductRepositoryInterface
+ * Interface ProductCollectionAwareRepositoryInterface
  *
  * @package WellCommerce\Bundle\ProductBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ProductRepositoryInterface extends RepositoryInterface, DataGridAwareRepositoryInterface, ProductCollectionAwareRepositoryInterface
+interface ProductCollectionAwareRepositoryInterface
 {
-
+    /**
+     * Return product collection query builder
+     *
+     * @return mixed
+     */
+    public function getProductCollectionQueryBuilder();
 } 

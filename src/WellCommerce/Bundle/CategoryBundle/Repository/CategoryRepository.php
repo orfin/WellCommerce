@@ -25,6 +25,14 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
  */
 class CategoryRepository extends AbstractEntityRepository implements CategoryRepositoryInterface
 {
+    public function getProductCollectionQueryBuilder()
+    {
+        $repository   = $this->getRepository('WellCommerceProductBundle:Product');
+        $queryBuilder = $repository->getProductCollectionQueryBuilder();
+
+        return $queryBuilder;
+    }
+
 //    public function test(){
 //        $qb = $this->createQueryBuilder('category');
 //        $res = $qb
