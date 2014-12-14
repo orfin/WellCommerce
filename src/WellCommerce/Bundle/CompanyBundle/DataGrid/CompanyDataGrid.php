@@ -18,7 +18,6 @@ use WellCommerce\Bundle\DataGridBundle\DataGrid\Column\Options\Appearance;
 use WellCommerce\Bundle\DataGridBundle\DataGrid\Column\Options\Filter;
 use WellCommerce\Bundle\DataGridBundle\DataGrid\Column\Options\Sorting;
 use WellCommerce\Bundle\DataGridBundle\DataGrid\DataGridInterface;
-use WellCommerce\Bundle\DataGridBundle\DataGrid\Options\OptionsInterface;
 
 /**
  * Class CompanyDataGrid
@@ -35,7 +34,7 @@ class CompanyDataGrid extends AbstractDataGrid implements DataGridInterface
     {
         $collection->add(new Column([
             'id'         => 'id',
-            'caption'    => 'company.id',
+            'caption'    => $this->trans('company.id'),
             'sorting'    => new Sorting([
                 'default_order' => Sorting::SORT_DIR_ASC
             ]),
@@ -50,7 +49,7 @@ class CompanyDataGrid extends AbstractDataGrid implements DataGridInterface
 
         $collection->add(new Column([
             'id'         => 'name',
-            'caption'    => 'company.name',
+            'caption'    => $this->trans('company.name'),
             'appearance' => new Appearance([
                 'width' => 70,
             ]),
@@ -61,7 +60,7 @@ class CompanyDataGrid extends AbstractDataGrid implements DataGridInterface
 
         $collection->add(new Column([
             'id'         => 'shortName',
-            'caption'    => 'company.short_name',
+            'caption'    => $this->trans('company.short_name'),
             'appearance' => new Appearance([
                 'width' => 70,
             ]),

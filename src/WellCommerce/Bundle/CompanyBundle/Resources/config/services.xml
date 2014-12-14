@@ -48,6 +48,8 @@
             <argument key="identifier">company</argument>
             <argument type="service" id="datagrid.column_collection"/>
             <argument type="service" id="datagrid.options"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="translator"/>
             <argument type="service" id="company.dataset"/>
         </service>
 
