@@ -13,6 +13,7 @@ namespace WellCommerce\Bundle\DataGridBundle\DataGrid;
 
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Translation\TranslatorInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 use WellCommerce\Bundle\DataGridBundle\DataGrid\Column\ColumnCollection;
 use WellCommerce\Bundle\DataGridBundle\DataGrid\Configuration\EventHandler\ClickRowEventHandler;
@@ -52,6 +53,16 @@ abstract class AbstractDataGrid
     protected $dataset;
 
     /**
+     * @var TranslatorInterface
+     */
+    protected $translator;
+
+    /**
+     * @var EventDispatcherInterface
+     */
+    protected $eventDispatcher;
+
+    /**
      * @var bool
      */
     protected $booted = false;
@@ -59,20 +70,27 @@ abstract class AbstractDataGrid
     /**
      * Constructor
      *
-     * @param                  $identifier
-     * @param ColumnCollection $columns
-     * @param DataSetInterface $dataset
+     * @param                          $identifier
+     * @param ColumnCollection         $columns
+     * @param OptionsInterface         $options
+     * @param EventDispatcherInterface $eventDispatcher
+     * @param TranslatorInterface      $translator
+     * @param DataSetInterface         $dataset
      */
     public function __construct(
         $identifier,
         ColumnCollection $columns,
         OptionsInterface $options,
+        EventDispatcherInterface $eventDispatcher,
+        TranslatorInterface $translator,
         DataSetInterface $dataset
     ) {
-        $this->identifier = $identifier;
-        $this->columns    = $columns;
-        $this->options    = $options;
-        $this->dataset    = $dataset;
+        $this->identifier      = $identifier;
+        $this->columns         = $columns;
+        $this->options         = $options;
+        $this->dataset         = $dataset;
+        $this->eventDispatcher = $eventDispatcher;
+        $this->translator      = $translator;
     }
 
     /**
@@ -89,6 +107,9 @@ abstract class AbstractDataGrid
         return $this;
     }
 
+    /**
+     * Boots current datagrid
+     */
     protected function configure()
     {
         $this->configureColumns($this->columns);
@@ -139,6 +160,25 @@ abstract class AbstractDataGrid
         ]));
     }
 
+    /**
+     * Translates the message using translator service
+     *
+     * @param $message
+     *
+     * @return string
+     */
+    protected function trans($message)
+    {
+        return $this->translator->trans($message);
+    }
+
+    /**
+     * Returns javascript function name
+     *
+     * @param $name
+     *
+     * @return string
+     */
     protected function getJavascriptFunctionName($name)
     {
         $functionName = sprintf('%s%s', $name, ucfirst($this->identifier));
