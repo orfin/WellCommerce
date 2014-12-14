@@ -31,12 +31,12 @@ class AvailabilityDataSet extends AbstractDataSet implements DataSetInterface
     protected function configureColumns(ColumnCollection $collection)
     {
         $collection->add(new Column([
-            'id'     => 'id',
+            'alias'  => 'id',
             'source' => 'availability.id',
         ]));
 
         $collection->add(new Column([
-            'id'     => 'name',
+            'alias'  => 'name',
             'source' => 'availability_translation.name',
         ]));
     }

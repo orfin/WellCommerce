@@ -29,11 +29,10 @@ class AvailabilityDataGrid extends AbstractDataGrid implements DataGridInterface
     /**
      * {@inheritdoc}
      */
-    public function addColumns(ColumnCollection $collection)
+    public function configureColumns(ColumnCollection $collection)
     {
         $collection->add(new Column([
             'id'         => 'id',
-            'source'     => 'availability.id',
             'caption'    => $this->trans('availability.id'),
             'appearance' => new Appearance([
                 'width'   => 90,
@@ -46,7 +45,6 @@ class AvailabilityDataGrid extends AbstractDataGrid implements DataGridInterface
 
         $collection->add(new Column([
             'id'         => 'name',
-            'source'     => 'availability_translation.name',
             'caption'    => $this->trans('availability.name'),
             'appearance' => new Appearance([
                 'width' => 70,

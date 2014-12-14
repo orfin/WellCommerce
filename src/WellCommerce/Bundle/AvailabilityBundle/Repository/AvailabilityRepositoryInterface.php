@@ -13,15 +13,15 @@
 namespace WellCommerce\Bundle\AvailabilityBundle\Repository;
 
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
-use WellCommerce\Bundle\DataGridBundle\DataGrid\Repository\DataGridAwareRepositoryInterface;
+use WellCommerce\Bundle\DataSetBundle\Doctrine\ORM\DataSetAwareRepositoryInterface;
 
 /**
- * Interface LocaleRepositoryInterface
+ * Interface AvailabilityRepositoryInterface
  *
  * @package WellCommerce\Bundle\AvailabilityBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface AvailabilityRepositoryInterface extends RepositoryInterface, DataGridAwareRepositoryInterface
+interface AvailabilityRepositoryInterface extends RepositoryInterface, DataSetAwareRepositoryInterface
 {
 
 } 

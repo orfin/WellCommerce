@@ -33,17 +33,24 @@
             <argument>WellCommerceAvailabilityBundle:Availability</argument>
         </service>
 
-        <service id="availability.datagrid" class="WellCommerce\Bundle\AvailabilityBundle\DataGrid\AvailabilityDataGrid">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <configurator service="availability.datagrid.configurator" method="configure" />
+        <service id="availability.dataset.query_builder" class="WellCommerce\Bundle\AvailabilityBundle\DataSet\AvailabilityDataSetQueryBuilder" public="false">
+            <argument type="service" id="availability.repository"/>
         </service>
 
-        <service id="availability.datagrid.configurator" class="WellCommerce\Bundle\AvailabilityBundle\DataGrid\AvailabilityDataGridConfigurator">
+        <service id="availability.dataset" class="WellCommerce\Bundle\AvailabilityBundle\DataSet\AvailabilityDataSet">
             <argument key="identifier">availability</argument>
-            <argument type="service" id="datagrid_manager"/>
-            <argument type="service" id="availability.repository"/>
+            <argument type="service" id="dataset.column.collection"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="availability.dataset.query_builder"/>
+        </service>
+
+        <service id="availability.datagrid" class="WellCommerce\Bundle\AvailabilityBundle\DataGrid\AvailabilityDataGrid">
+            <argument key="identifier">availability</argument>
+            <argument type="service" id="datagrid.column_collection"/>
+            <argument type="service" id="datagrid.options"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="translator"/>
+            <argument type="service" id="availability.dataset"/>
         </service>
 
         <service id="availability.form" class="WellCommerce\Bundle\AvailabilityBundle\Form\AvailabilityForm">
