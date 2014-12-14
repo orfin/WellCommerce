@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\DataGridBundle\DataGrid\Configuration;
 
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use WellCommerce\Bundle\DataGridBundle\DataGrid\DataGridInterface;
 
 /**
  * Class RowActions
@@ -33,8 +34,8 @@ class RowActions extends AbstractOption implements OptionInterface
 
         $resolver->setDefaults([
             'actions' => [
-                OptionInterface::ACTION_EDIT,
-                OptionInterface::ACTION_DELETE,
+                DataGridInterface::ACTION_EDIT,
+                DataGridInterface::ACTION_DELETE,
             ]
         ]);
 

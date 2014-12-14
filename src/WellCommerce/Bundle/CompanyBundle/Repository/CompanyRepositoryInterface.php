@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\CompanyBundle\Repository;
 
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 use WellCommerce\Bundle\DataGridBundle\DataGrid\Repository\DataGridAwareRepositoryInterface;
+use WellCommerce\Bundle\DataSetBundle\Doctrine\ORM\DataSetAwareRepositoryInterface;
 
 /**
  * Interface CompanyRepositoryInterface
@@ -21,7 +22,7 @@ use WellCommerce\Bundle\DataGridBundle\DataGrid\Repository\DataGridAwareReposito
  * @package WellCommerce\Bundle\CompanyBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface CompanyRepositoryInterface extends RepositoryInterface, DataGridAwareRepositoryInterface
+interface CompanyRepositoryInterface extends RepositoryInterface, DataSetAwareRepositoryInterface, DataGridAwareRepositoryInterface
 {
 
 } 

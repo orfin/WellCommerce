@@ -169,6 +169,31 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
         return $queryBuilder;
     }
 
+    public function getDataSetQueryBuilder()
+    {
+        $queryBuilder    = $this->getQueryBuilder();
+        $metadata        = $this->getMetadata();
+        $associationName = 'translations';
+        $identifierField = sprintf('%s.%s', $metadata->getTableName(), $metadata->getSingleIdentifierFieldName());
+
+        if ($metadata->hasAssociation($associationName)) {
+            $association          = $metadata->getAssociationTargetClass($associationName);
+            $associationMetaData  = $this->getEntityManager()->getClassMetadata($association);
+            $associationTableName = $associationMetaData->getTableName();
+            $translationField     = sprintf('%s.%s', $associationTableName, 'translatable');
+
+            $queryBuilder->leftJoin(
+                $association,
+                $associationMetaData->getTableName(),
+                'WITH',
+                "{$identifierField} = {$translationField}"
+            );
+
+        }
+
+        return $queryBuilder;
+    }
+
     /**
      * {@inheritdoc}
      */

@@ -40,29 +40,23 @@ class Column implements ColumnInterface
     {
         $resolver->setRequired([
             'id',
-            'source',
             'caption',
             'sorting',
             'appearance',
             'filter',
-            'aggregated',
         ]);
 
         $resolver->setOptional([
             'editable',
             'selectable',
-            'process_function',
-            'aggregated',
         ]);
 
         $resolver->setDefaults([
             'appearance'       => new Appearance(),
             'sorting'          => new Sorting(),
             'filter'           => new Filter(),
-            'process_function' => null,
             'editable'         => false,
             'selectable'       => false,
-            'aggregated'       => false
         ]);
 
         $resolver->setAllowedTypes([
@@ -99,30 +93,6 @@ class Column implements ColumnInterface
     /**
      * {@inheritdoc}
      */
-    public function getSource()
-    {
-        return $this->options['source'];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getRawSelect()
-    {
-        return sprintf('%s AS %s', $this->getSource(), $this->getId());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isAggregated()
-    {
-        return $this->options['aggregated'];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getCaption()
     {
         return $this->options['caption'];
@@ -151,20 +121,4 @@ class Column implements ColumnInterface
     {
         return $this->options['filter'];
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getOptions()
-    {
-        return $this->options;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getProcessFunction()
-    {
-        return $this->options['process_function'];
-    }
-} 
+}

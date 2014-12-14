@@ -47,7 +47,6 @@ class Company
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255, nullable=false)
-     * @Assert\NotBlank()
      */
     private $name;
 

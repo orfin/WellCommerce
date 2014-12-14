@@ -14,8 +14,11 @@ namespace WellCommerce\Bundle\CompanyBundle\DataGrid;
 use WellCommerce\Bundle\DataGridBundle\DataGrid\AbstractDataGrid;
 use WellCommerce\Bundle\DataGridBundle\DataGrid\Column\Column;
 use WellCommerce\Bundle\DataGridBundle\DataGrid\Column\ColumnCollection;
-use WellCommerce\Bundle\DataGridBundle\DataGrid\Column\ColumnInterface;
+use WellCommerce\Bundle\DataGridBundle\DataGrid\Column\Options\Appearance;
+use WellCommerce\Bundle\DataGridBundle\DataGrid\Column\Options\Filter;
+use WellCommerce\Bundle\DataGridBundle\DataGrid\Column\Options\Sorting;
 use WellCommerce\Bundle\DataGridBundle\DataGrid\DataGridInterface;
+use WellCommerce\Bundle\DataGridBundle\DataGrid\Options\OptionsInterface;
 
 /**
  * Class CompanyDataGrid
@@ -28,48 +31,43 @@ class CompanyDataGrid extends AbstractDataGrid implements DataGridInterface
     /**
      * {@inheritdoc}
      */
-    public function addColumns(ColumnCollection $collection)
+    public function configureColumns(ColumnCollection $collection)
     {
         $collection->add(new Column([
             'id'         => 'id',
-            'source'     => 'company.id',
-            'caption'    => $this->trans('Id'),
-            'sorting'    => [
-                'default_order' => ColumnInterface::SORT_DIR_DESC
-            ],
-            'appearance' => [
+            'caption'    => 'company.id',
+            'sorting'    => new Sorting([
+                'default_order' => Sorting::SORT_DIR_ASC
+            ]),
+            'appearance' => new Appearance([
                 'width'   => 90,
                 'visible' => false
-            ],
-            'filter'     => [
-                'type' => ColumnInterface::FILTER_BETWEEN
-            ]
+            ]),
+            'filter'     => new Filter([
+                'type' => Filter::FILTER_BETWEEN
+            ])
         ]));
 
         $collection->add(new Column([
             'id'         => 'name',
-            'source'     => 'company.name',
-            'caption'    => $this->trans('Name'),
-            'appearance' => [
+            'caption'    => 'company.name',
+            'appearance' => new Appearance([
                 'width' => 70,
-                'align' => ColumnInterface::ALIGN_LEFT
-            ],
-            'filter'     => [
-                'type' => ColumnInterface::FILTER_INPUT
-            ]
+            ]),
+            'filter'     => new Filter([
+                'type' => Filter::FILTER_INPUT
+            ])
         ]));
 
         $collection->add(new Column([
             'id'         => 'shortName',
-            'source'     => 'company.shortName',
-            'caption'    => $this->trans('Short name'),
-            'appearance' => [
+            'caption'    => 'company.short_name',
+            'appearance' => new Appearance([
                 'width' => 70,
-                'align' => ColumnInterface::ALIGN_LEFT
-            ],
-            'filter'     => [
-                'type' => ColumnInterface::FILTER_INPUT
-            ]
+            ]),
+            'filter'     => new Filter([
+                'type' => Filter::FILTER_INPUT
+            ])
         ]));
     }
 }

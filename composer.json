@@ -28,7 +28,7 @@
     "require": {
         "php": ">=5.4",
         "symfony/symfony": "2.5.*",
-        "doctrine/orm": ">=2.4.0-RC1",
+        "doctrine/orm": "2.5.*@dev",
         "doctrine/doctrine-bundle": "~1.2",
         "doctrine/migrations": "dev-master",
         "doctrine/doctrine-migrations-bundle": "dev-master",

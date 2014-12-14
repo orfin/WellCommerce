@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\DataGridBundle\DataGrid\Options;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use WellCommerce\Bundle\CoreBundle\Helper\Redirect\RedirectHelperInterface;
 use WellCommerce\Bundle\DataGridBundle\DataGrid\Configuration\Appearance;
 use WellCommerce\Bundle\DataGridBundle\DataGrid\Configuration\EventHandlers;
 use WellCommerce\Bundle\DataGridBundle\DataGrid\Configuration\Filters;
@@ -35,15 +36,21 @@ class Options implements OptionsInterface
     private $options;
 
     /**
+     * @var RedirectHelperInterface
+     */
+    protected $redirectHelper;
+
+    /**
      * Constructor
      *
      * @param array $options
      */
-    public function __construct(array $options = [])
+    public function __construct(array $options = [], RedirectHelperInterface $redirectHelper)
     {
         $resolver = new OptionsResolver();
         $this->configureOptions($resolver);
-        $this->options = $resolver->resolve($options);
+        $this->options        = $resolver->resolve($options);
+        $this->redirectHelper = $redirectHelper;
     }
 
     /**
@@ -190,4 +197,12 @@ class Options implements OptionsInterface
     {
         return $this->options['routes'];
     }
-} 
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRouteForAction($action)
+    {
+        return $this->redirectHelper->getActionForCurrentController($action);
+    }
+}

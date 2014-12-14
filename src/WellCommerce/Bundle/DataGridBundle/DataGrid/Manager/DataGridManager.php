@@ -16,7 +16,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use WellCommerce\Bundle\DataGridBundle\DataGrid\Column\ColumnCollection;
-use WellCommerce\Bundle\DataGridBundle\DataGrid\Loader\LoaderInterface;
+use WellCommerce\Bundle\DataGridBundle\Loader\LoaderInterface;
 use WellCommerce\Bundle\DataGridBundle\DataGrid\Options\OptionsInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Image\ImageHelperInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Redirect\RedirectHelperInterface;

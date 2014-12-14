@@ -67,7 +67,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
     {
         $datagrid = $this->manager->getDataGrid()->getInstance();
 
-        return new JsonResponse($datagrid->load($request));
+        return new JsonResponse($datagrid->loadResults($request));
     }
 
     /**

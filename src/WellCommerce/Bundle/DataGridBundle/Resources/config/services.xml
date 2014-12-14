@@ -8,11 +8,18 @@
     </parameters>
 
     <services>
-        <service id="datagrid_loader" class="WellCommerce\Bundle\DataGridBundle\DataGrid\Loader\Loader" />
+        <service id="datagrid_loader" class="WellCommerce\Bundle\DataGridBundle\Loader\Loader" />
 
         <service id="datagrid_options" class="WellCommerce\Bundle\DataGridBundle\DataGrid\Options\Options" />
 
+        <service id="datagrid.options" class="WellCommerce\Bundle\DataGridBundle\DataGrid\Options\Options">
+            <argument type="collection"></argument>
+            <argument type="service" id="redirect_helper"/>
+        </service>
+
         <service id="datagrid_columns" class="WellCommerce\Bundle\DataGridBundle\DataGrid\Column\ColumnCollection" />
+
+        <service id="datagrid.column_collection" class="WellCommerce\Bundle\DataGridBundle\DataGrid\Column\ColumnCollection" />
 
         <service id="datagrid_manager" class="WellCommerce\Bundle\DataGridBundle\DataGrid\Manager\DataGridManager">
             <argument type="service" id="datagrid_columns" />

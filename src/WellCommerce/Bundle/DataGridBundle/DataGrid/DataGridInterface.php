@@ -12,10 +12,10 @@
 
 namespace WellCommerce\Bundle\DataGridBundle\DataGrid;
 
+use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\DataGridBundle\DataGrid\Column\ColumnCollection;
-use WellCommerce\Bundle\DataGridBundle\DataGrid\Manager\DataGridManagerInterface;
 use WellCommerce\Bundle\DataGridBundle\DataGrid\Options\OptionsInterface;
-use WellCommerce\Bundle\DataGridBundle\DataGrid\Repository\DataGridAwareRepositoryInterface;
+use WellCommerce\Bundle\DataSetBundle\DataSet\Request\DataSetRequestInterface;
 
 /**
  * Interface DataGridInterface
@@ -25,6 +25,8 @@ use WellCommerce\Bundle\DataGridBundle\DataGrid\Repository\DataGridAwareReposito
  */
 interface DataGridInterface
 {
+    const ACTION_DELETE_GROUP = 'GF_Datagrid.ACTION_DELETE_GROUP';
+    const ACTION_VIEW         = 'GF_Datagrid.ACTION_VIEW';
     const ACTION_EDIT         = 'GF_Datagrid.ACTION_EDIT';
     const ACTION_DELETE       = 'GF_Datagrid.ACTION_DELETE';
     const REDIRECT            = 'GF_Datagrid.Redirect';
@@ -34,16 +36,7 @@ interface DataGridInterface
     const OPERATOR_LIKE       = 'LIKE';
     const OPERATOR_IN         = '=';
     const DATAGRID_INIT_EVENT = 'datagrid.init';
-    const GF_NULL             = 'GF.NULL';// GF.NULL - Null equivalent
-
-    /**
-     * Sets DataGrid identifier
-     *
-     * @param string $identifier
-     *
-     * @return void
-     */
-    public function setIdentifier($identifier);
+    const GF_NULL             = 'GF.NULL';
 
     /**
      * Returns an identifier
@@ -53,40 +46,20 @@ interface DataGridInterface
     public function getIdentifier();
 
     /**
-     * Add columns to collection
+     * Returns current DataGrid instance
      *
-     * @param ColumnCollection $columnCollection
-     *
-     * @return mixed
+     * @return DataGridInterface
      */
-    public function addColumns(ColumnCollection $columnCollection);
+    public function getInstance();
 
     /**
-     * Sets columns collection
+     * Sets DataGrid columns
      *
      * @param ColumnCollection $columns
      *
-     * @return mixed
+     * @return void
      */
     public function setColumns(ColumnCollection $columns);
-
-    /**
-     * Sets datagrid repository
-     *
-     * @param DataGridAwareRepositoryInterface $repository
-     *
-     * @return mixed
-     */
-    public function setRepository(DataGridAwareRepositoryInterface $repository);
-
-    /**
-     * Sets manager instance
-     *
-     * @param DataGridManagerInterface $manager
-     *
-     * @return mixed
-     */
-    public function setManager(DataGridManagerInterface $manager);
 
     /**
      * Returns columns collection
@@ -94,20 +67,6 @@ interface DataGridInterface
      * @return ColumnCollection
      */
     public function getColumns();
-
-    /**
-     * Returns query builder object
-     *
-     * @return \Doctrine\ORM\QueryBuilder
-     */
-    public function getDataGridQueryBuilder();
-
-    /**
-     * Returns current instance
-     *
-     * @return mixed
-     */
-    public function getInstance();
 
     /**
      * Sets DataGrid options
@@ -124,4 +83,13 @@ interface DataGridInterface
      * @return OptionsInterface
      */
     public function getOptions();
+
+    /**
+     * Forwards request to dataset and returns results
+     *
+     * @param DataSetRequestInterface $request
+     *
+     * @return mixed
+     */
+    public function loadResults(Request $request);
 }

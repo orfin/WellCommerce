@@ -33,17 +33,22 @@
             <argument>WellCommerceCompanyBundle:Company</argument>
         </service>
 
-        <service id="company.datagrid" class="WellCommerce\Bundle\CompanyBundle\DataGrid\CompanyDataGrid">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <configurator service="company.datagrid.configurator" method="configure" />
+        <service id="company.dataset.query_builder" class="WellCommerce\Bundle\CompanyBundle\DataSet\CompanyDataSetQueryBuilder" public="false">
+            <argument type="service" id="company.repository"/>
         </service>
 
-        <service id="company.datagrid.configurator" class="WellCommerce\Bundle\CompanyBundle\DataGrid\CompanyDataGridConfigurator">
+        <service id="company.dataset" class="WellCommerce\Bundle\CompanyBundle\DataSet\CompanyDataSet">
             <argument key="identifier">company</argument>
-            <argument type="service" id="datagrid_manager"/>
-            <argument type="service" id="company.repository"/>
+            <argument type="service" id="dataset.column.collection"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="company.dataset.query_builder"/>
+        </service>
+
+        <service id="company.datagrid" class="WellCommerce\Bundle\CompanyBundle\DataGrid\CompanyDataGrid">
+            <argument key="identifier">company</argument>
+            <argument type="service" id="datagrid.column_collection"/>
+            <argument type="service" id="datagrid.options"/>
+            <argument type="service" id="company.dataset"/>
         </service>
 
         <service id="company.form" class="WellCommerce\Bundle\CompanyBundle\Form\CompanyForm">

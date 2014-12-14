@@ -13,11 +13,15 @@ namespace WellCommerce\Bundle\DataGridBundle\DataGrid;
 
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
-use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
+use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 use WellCommerce\Bundle\DataGridBundle\DataGrid\Column\ColumnCollection;
-use WellCommerce\Bundle\DataGridBundle\DataGrid\Manager\DataGridManagerInterface;
+use WellCommerce\Bundle\DataGridBundle\DataGrid\Configuration\EventHandler\ClickRowEventHandler;
+use WellCommerce\Bundle\DataGridBundle\DataGrid\Configuration\EventHandler\DeleteRowEventHandler;
+use WellCommerce\Bundle\DataGridBundle\DataGrid\Configuration\EventHandler\EditRowEventHandler;
+use WellCommerce\Bundle\DataGridBundle\DataGrid\Configuration\EventHandler\LoadEventHandler;
 use WellCommerce\Bundle\DataGridBundle\DataGrid\Options\OptionsInterface;
-use WellCommerce\Bundle\DataGridBundle\DataGrid\Repository\DataGridAwareRepositoryInterface;
+use WellCommerce\Bundle\DataSetBundle\DataSet\DataSetInterface;
+use WellCommerce\Bundle\DataSetBundle\DataSet\Request\DataSetRequest;
 
 /**
  * Class AbstractDataGrid
@@ -25,40 +29,121 @@ use WellCommerce\Bundle\DataGridBundle\DataGrid\Repository\DataGridAwareReposito
  * @package WellCommerce\Bundle\DataGridBundle\DataGrid
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractDataGrid extends AbstractContainer implements DataGridInterface
+abstract class AbstractDataGrid
 {
-    protected $booted = false;
-    protected $columns;
+    /**
+     * @var string
+     */
     protected $identifier;
 
     /**
-     * @var DataGridAwareRepositoryInterface
+     * @var ColumnCollection
      */
-    protected $repository;
-    protected $loader;
-    protected $options;
-    protected $queryBuilder;
-    protected $request;
+    protected $columns;
 
     /**
-     * {@inheritdoc}
+     * @var OptionsInterface
      */
-    public function setManager(DataGridManagerInterface $manager)
-    {
-        $this->manager = $manager;
+    protected $options;
+
+    /**
+     * @var DataSetInterface
+     */
+    protected $dataset;
+
+    /**
+     * @var bool
+     */
+    protected $booted = false;
+
+    /**
+     * Constructor
+     *
+     * @param                  $identifier
+     * @param ColumnCollection $columns
+     * @param DataSetInterface $dataset
+     */
+    public function __construct(
+        $identifier,
+        ColumnCollection $columns,
+        OptionsInterface $options,
+        DataSetInterface $dataset
+    ) {
+        $this->identifier = $identifier;
+        $this->columns    = $columns;
+        $this->options    = $options;
+        $this->dataset    = $dataset;
     }
 
     /**
-     * @var DataGridManagerInterface
+     * Returns current DataGrid
+     *
+     * @return DataGridInterface
      */
-    protected $manager;
+    public function getInstance()
+    {
+        if (!$this->booted) {
+            $this->configure();
+        }
+
+        return $this;
+    }
+
+    protected function configure()
+    {
+        $this->configureColumns($this->columns);
+        $this->configureOptions($this->options);
+        $this->booted = true;
+    }
 
     /**
-     * {@inheritdoc}
+     * Configures DataGrid columns
+     *
+     * @param ColumnCollection $columns
+     *
+     * @return void
      */
-    public function setIdentifier($identifier)
+    abstract protected function configureColumns(ColumnCollection $columns);
+
+    /**
+     * Configures DataGrid options
+     *
+     * @param OptionsInterface $options
+     *
+     * @return void
+     */
+    protected function configureOptions(OptionsInterface $options)
     {
-        $this->identifier = $identifier;
+        $eventHandlers = $options->getEventHandlers();
+
+        $eventHandlers->add(new LoadEventHandler([
+            'function' => $this->getJavascriptFunctionName('load'),
+            'route'    => $options->getRouteForAction('grid')
+        ]));
+
+        $eventHandlers->add(new EditRowEventHandler([
+            'function'   => $this->getJavascriptFunctionName('edit'),
+            'row_action' => DataGridInterface::ACTION_EDIT,
+            'route'      => $options->getRouteForAction('edit')
+        ]));
+
+        $eventHandlers->add(new ClickRowEventHandler([
+            'function' => $this->getJavascriptFunctionName('click'),
+            'route'    => $options->getRouteForAction('edit')
+        ]));
+
+        $eventHandlers->add(new DeleteRowEventHandler([
+            'function'   => $this->getJavascriptFunctionName('delete'),
+            'row_action' => DataGridInterface::ACTION_DELETE,
+            'route'      => $options->getRouteForAction('delete')
+        ]));
+    }
+
+    protected function getJavascriptFunctionName($name)
+    {
+        $functionName = sprintf('%s%s', $name, ucfirst($this->identifier));
+
+        return lcfirst(Helper::studly($functionName));
     }
 
     /**
@@ -72,84 +157,30 @@ abstract class AbstractDataGrid extends AbstractContainer implements DataGridInt
     /**
      * {@inheritdoc}
      */
-    public function getManager()
-    {
-        return $this->manager;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setRepository(DataGridAwareRepositoryInterface $repository)
-    {
-        $this->repository = $repository;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getRepository()
-    {
-        return $this->repository;
-    }
-
     public function setColumns(ColumnCollection $columns)
     {
         $this->columns = $columns;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getColumns()
     {
-        return $this->manager->getColumnCollection();
+        return $this->columns;
     }
 
     /**
-     * Boots DataGrid if it was not booted
-     *
-     * @return void
+     * {@inheritdoc}
      */
-    public function boot()
-    {
-        $columnCollection = $this->manager->getColumnCollection();
-
-        // adds new columns do collection
-        $this->addColumns($columnCollection);
-
-        // sets columns for current datagrid
-        $this->setColumns($columnCollection);
-
-        $this->setOptions($this->manager->getOptions());
-
-        $this->booted = true;
-    }
-
-    /**
-     * Reboots current DataGrid
-     */
-    public function reboot()
-    {
-        $this->booted = false;
-    }
-
-    /**
-     * Returns current DataGrid
-     *
-     * @return DataGridInterface
-     */
-    public function getInstance()
-    {
-        if (!$this->booted) {
-            $this->boot();
-        }
-
-        return $this;
-    }
-
     public function setOptions(OptionsInterface $options)
     {
         $this->options = $options;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getOptions()
     {
         return $this->options;
@@ -158,24 +189,17 @@ abstract class AbstractDataGrid extends AbstractContainer implements DataGridInt
     /**
      * {@inheritdoc}
      */
-    public function getDataGridQueryBuilder()
+    public function loadResults(Request $request)
     {
-        return $this->repository->getDataGridQueryBuilder();
-    }
+        $datasetRequest = new DataSetRequest([
+            'id'         => $request->request->get('id'),
+            'offset'     => $request->request->get('starting_from'),
+            'limit'      => $request->request->get('limit'),
+            'orderBy'    => $request->request->get('order_by'),
+            'orderDir'   => $request->request->get('order_dir'),
+            'conditions' => null
+        ]);
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getCurrentRequest()
-    {
-        return $this->request;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function load(Request $request)
-    {
-        return $this->manager->getLoader()->getResults($this, $request);
+        return $this->dataset->getResults($datasetRequest);
     }
 }

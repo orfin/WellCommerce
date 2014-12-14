@@ -20,7 +20,6 @@ namespace WellCommerce\Bundle\DataGridBundle\DataGrid\Manager;
  */
 interface DataGridManagerInterface
 {
-
     /**
      * Returns column collection
      *

@@ -42,6 +42,7 @@ class AppKernel extends Kernel
             new Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
             new WellCommerce\Bundle\FormBundle\WellCommerceFormBundle(),
             new WellCommerce\Bundle\DataGridBundle\WellCommerceDataGridBundle(),
+            new WellCommerce\Bundle\DataSetBundle\WellCommerceDataSetBundle(),
             // WellCommerce bundles
             new WellCommerce\Bundle\CoreBundle\WellCommerceCoreBundle(),
             new WellCommerce\Bundle\RoutingBundle\WellCommerceRoutingBundle(),

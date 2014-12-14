@@ -40,27 +40,6 @@ interface ColumnInterface
     public function getId();
 
     /**
-     * Returns column source option
-     *
-     * @return string
-     */
-    public function getSource();
-
-    /**
-     * Returns prepared select column string
-     *
-     * @return string
-     */
-    public function getRawSelect();
-
-    /**
-     * Returns true if column uses aggregation
-     *
-     * @return string
-     */
-    public function isAggregated();
-
-    /**
      * Returns column editable status
      *
      * @return boolean
@@ -101,18 +80,4 @@ interface ColumnInterface
      * @return string
      */
     public function getFilter();
-
-    /**
-     * Returns all column options
-     *
-     * @return array
-     */
-    public function getOptions();
-
-    /**
-     * Returns columns processing function
-     *
-     * @return array
-     */
-    public function getProcessFunction();
 }
