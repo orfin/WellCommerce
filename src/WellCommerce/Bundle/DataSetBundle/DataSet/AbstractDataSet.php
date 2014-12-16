@@ -75,6 +75,18 @@ abstract class AbstractDataSet
     abstract protected function configureColumns(ColumnCollection $collection);
 
     /**
+     * {@inheritdoc}
+     */
+    public function getColumns()
+    {
+        if (!$this->booted) {
+            $this->configure();
+        }
+
+        return $this->columns;
+    }
+
+    /**
      * Configures dataset
      */
     protected function configure()
@@ -95,7 +107,7 @@ abstract class AbstractDataSet
     /**
      * {@inheritdoc}
      */
-    protected function processResults($rows)
+    public function processResults($rows)
     {
         $rowData = [];
         foreach ($rows as $row) {

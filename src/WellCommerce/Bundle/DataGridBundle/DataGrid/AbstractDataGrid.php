@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Translation\TranslatorInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 use WellCommerce\Bundle\DataGridBundle\DataGrid\Column\ColumnCollection;
+use WellCommerce\Bundle\DataGridBundle\DataGrid\Conditions\ConditionsResolver;
 use WellCommerce\Bundle\DataGridBundle\DataGrid\Configuration\EventHandler\ClickRowEventHandler;
 use WellCommerce\Bundle\DataGridBundle\DataGrid\Configuration\EventHandler\DeleteRowEventHandler;
 use WellCommerce\Bundle\DataGridBundle\DataGrid\Configuration\EventHandler\EditRowEventHandler;
@@ -231,13 +232,15 @@ abstract class AbstractDataGrid
      */
     public function loadResults(Request $request)
     {
+        $conditionsResolver = new ConditionsResolver($this->dataset->getColumns());
+
         $datasetRequest = new DataSetRequest([
             'id'         => $request->request->get('id'),
             'offset'     => $request->request->get('starting_from'),
             'limit'      => $request->request->get('limit'),
             'orderBy'    => $request->request->get('order_by'),
             'orderDir'   => $request->request->get('order_dir'),
-            'conditions' => null
+            'conditions' => $conditionsResolver->resolve($request->request->get('where'))
         ]);
 
         return $this->dataset->getResults($datasetRequest);

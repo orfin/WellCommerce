@@ -21,9 +21,23 @@ namespace WellCommerce\Bundle\DataSetBundle\DataSet\Conditions;
 interface ConditionInterface
 {
     /**
-     * Returns Doctrine expression for field
+     * Returns operator for expression
      *
      * @return mixed
      */
-    public function getExpression();
+    public function getOperator();
+
+    /**
+     * Returns field identifier
+     *
+     * @return mixed
+     */
+    public function getIdentifier();
+
+    /**
+     * Returns field value
+     *
+     * @return mixed
+     */
+    public function getValue();
 }

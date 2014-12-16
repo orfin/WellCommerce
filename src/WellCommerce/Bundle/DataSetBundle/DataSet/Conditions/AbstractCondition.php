@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\DataSetBundle\DataSet\Conditions;
 
-use Doctrine\Common\Collections\Criteria;
+use Doctrine\ORM\Query\Expr;
 
 /**
  * Class AbstractCondition
@@ -33,14 +33,9 @@ abstract class AbstractCondition
     protected $value;
 
     /**
-     * @var \Doctrine\Common\Collections\ExpressionBuilder
-     */
-    protected $expression;
-
-    /**
      * @var string
      */
-    protected $operator = 'eq';
+    protected $operator;
 
     /**
      * Constructor
@@ -50,13 +45,22 @@ abstract class AbstractCondition
      */
     public function __construct($field, $value)
     {
-        $this->field      = $field;
-        $this->value      = $value;
-        $this->expression = Criteria::expr();
+        $this->field = $field;
+        $this->value = $value;
     }
 
-    public function getExpression()
+    public function getOperator()
     {
-        return $this->expression->{$this->operator}($this->field, $this->value);
+        return $this->operator;
+    }
+
+    public function getIdentifier()
+    {
+        return $this->field;
+    }
+
+    public function getValue()
+    {
+        return $this->value;
     }
 }

@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\DataSetBundle\DataSet\QueryBuilder;
 
-use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use WellCommerce\Bundle\DataSetBundle\DataSet\Column\ColumnCollection;
@@ -126,16 +125,22 @@ abstract class AbstractDataSetQueryBuilder
      */
     public function setConditions(ConditionsCollection $conditions = null)
     {
-        $expr     = Criteria::expr();
-        $criteria = Criteria::create();
-
         if (null !== $conditions) {
-            $criteria->where(
-                call_user_func_array([$expr, 'andX'], $conditions->all())
-            );
-        }
 
-        $this->criteria = $criteria;
+            /**
+             * @var $condition \WellCommerce\Bundle\DataSetBundle\DataSet\Conditions\ConditionInterface
+             */
+            foreach ($conditions->all() as $condition) {
+                $column     = $this->columns->get($condition->getIdentifier());
+                $source     = $column->getSource();
+                $identifier = $condition->getIdentifier();
+                $operator   = $condition->getOperator();
+                $expression = $this->queryBuilder->expr()->{$operator}($source, ':' . $identifier);
+
+                $this->queryBuilder->andWhere($expression);
+                $this->queryBuilder->setParameter($condition->getIdentifier(), $condition->getValue());
+            }
+        }
     }
 
     /**
@@ -173,7 +178,6 @@ abstract class AbstractDataSetQueryBuilder
         $this->queryBuilder->setFirstResult($this->offset);
         $this->queryBuilder->setMaxResults($this->limit);
         $this->queryBuilder->addOrderBy(new Expr\OrderBy($this->orderBy, $this->orderDir));
-        $this->queryBuilder->addCriteria($this->criteria);
 
         $query = $this->queryBuilder->getQuery();
         $query->useResultCache(true, 3600, $this->identifier);

@@ -32,4 +32,21 @@ interface DataSetInterface
      * @return mixed
      */
     public function getResults(DataSetRequest $request);
+
+    /**
+     * Processes the results
+     *
+     * @param $rows
+     *
+     * @return mixed
+     */
+    public function processResults($rows);
+
+    /**
+     * Returns column collection
+     *
+     * @return \WellCommerce\Bundle\DataSetBundle\DataSet\Column\ColumnCollection
+     */
+    public function getColumns();
+
 }

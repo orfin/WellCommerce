@@ -36,12 +36,12 @@ class CompanyController extends AbstractAdminController
         return [
             'datagrid' => $datagrid->getInstance()
         ];
-
-        die();
+//
+//        die();
 
         $conditions = new ConditionsCollection();
         $conditions->add(new Condition\Lt('id', 2));
-        $conditions->add(new Condition\Contains('name', 'Gibson'));
+        $conditions->add(new Condition\Like('name', 'G%'));
 
         $results = $this->get('company.dataset')->getResults(new DataSetRequest([
             'limit'      => 10,

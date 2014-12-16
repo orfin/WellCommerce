@@ -29,18 +29,4 @@ class ConditionsCollection extends AbstractCollection
     {
         $this->items[] = $condition;
     }
-
-    public function all()
-    {
-        $conditions = [];
-
-        /**
-         * @var $item ConditionInterface
-         */
-        foreach ($this->items as $item) {
-            $conditions[] = $item->getExpression();
-        }
-
-        return $conditions;
-    }
 }

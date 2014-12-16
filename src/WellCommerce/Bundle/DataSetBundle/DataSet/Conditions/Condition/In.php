@@ -25,10 +25,8 @@ class In extends AbstractCondition implements ConditionInterface
 {
     protected $operator = 'in';
 
-    public function getExpression()
+    public function getValue()
     {
-        $value = !is_array($this->value) ? (array)$this->value : $this->value;
-
-        return $this->expression->in($this->field, $value);
+        return !is_array($this->value) ? (array)$this->value : $this->value;
     }
 } 
