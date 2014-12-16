@@ -148,13 +148,4 @@ interface OptionsInterface
      * @return mixed
      */
     public function getRoutes();
-
-    /**
-     * Returns route for current action
-     *
-     * @param $action
-     *
-     * @return mixed
-     */
-    public function getRouteForAction($action);
-} 
+}

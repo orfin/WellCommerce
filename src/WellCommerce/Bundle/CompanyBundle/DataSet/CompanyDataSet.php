@@ -16,6 +16,8 @@ use WellCommerce\Bundle\DataSetBundle\DataSet\AbstractDataSet;
 use WellCommerce\Bundle\DataSetBundle\DataSet\Column\Column;
 use WellCommerce\Bundle\DataSetBundle\DataSet\Column\ColumnCollection;
 use WellCommerce\Bundle\DataSetBundle\DataSet\DataSetInterface;
+use WellCommerce\Bundle\DataSetBundle\DataSet\Transformer\DateTransformer;
+use WellCommerce\Bundle\DataSetBundle\DataSet\Transformer\TransformerCollection;
 
 
 /**
@@ -50,5 +52,13 @@ class CompanyDataSet extends AbstractDataSet implements DataSetInterface
             'alias'  => 'createdAt',
             'source' => 'company.createdAt',
         ]));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function configureTransformers(TransformerCollection $transformers)
+    {
+        $transformers->add('createdAt', new DateTransformer());
     }
 }

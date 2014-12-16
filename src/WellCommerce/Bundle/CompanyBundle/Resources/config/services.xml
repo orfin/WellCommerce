@@ -39,18 +39,18 @@
 
         <service id="company.dataset" class="WellCommerce\Bundle\CompanyBundle\DataSet\CompanyDataSet">
             <argument key="identifier">company</argument>
-            <argument type="service" id="dataset.column.collection"/>
-            <argument type="service" id="event_dispatcher"/>
             <argument type="service" id="company.dataset.query_builder"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
         </service>
 
         <service id="company.datagrid" class="WellCommerce\Bundle\CompanyBundle\DataGrid\CompanyDataGrid">
             <argument key="identifier">company</argument>
-            <argument type="service" id="datagrid.column_collection"/>
-            <argument type="service" id="datagrid.options"/>
-            <argument type="service" id="event_dispatcher"/>
-            <argument type="service" id="translator"/>
             <argument type="service" id="company.dataset"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
         </service>
 
         <service id="company.form" class="WellCommerce\Bundle\CompanyBundle\Form\CompanyForm">

@@ -12,11 +12,13 @@
 
 namespace WellCommerce\Bundle\DataSetBundle\DataSet;
 
+use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use WellCommerce\Bundle\DataSetBundle\DataSet\Column\ColumnCollection;
 use WellCommerce\Bundle\DataSetBundle\DataSet\Event\DataSetEvent;
 use WellCommerce\Bundle\DataSetBundle\DataSet\QueryBuilder\QueryBuilderInterface;
 use WellCommerce\Bundle\DataSetBundle\DataSet\Request\DataSetRequest;
+use WellCommerce\Bundle\DataSetBundle\DataSet\Transformer\TransformerCollection;
 
 /**
  * Class AbstractDataSet
@@ -24,7 +26,7 @@ use WellCommerce\Bundle\DataSetBundle\DataSet\Request\DataSetRequest;
  * @package WellCommerce\Bundle\DataSetBundle\DataSet
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractDataSet
+abstract class AbstractDataSet extends ContainerAware
 {
     /**
      * @var QueryBuilderInterface
@@ -32,14 +34,14 @@ abstract class AbstractDataSet
     protected $queryBuilder;
 
     /**
-     * @var EventDispatcherInterface
-     */
-    protected $eventDispatcher;
-
-    /**
      * @var ColumnCollection
      */
     protected $columns;
+
+    /**
+     * @var TransformerCollection
+     */
+    protected $transformers;
 
     /**
      * @var bool
@@ -49,20 +51,17 @@ abstract class AbstractDataSet
     /**
      * Constructor
      *
-     * @param ColumnCollection         $columns
-     * @param EventDispatcherInterface $eventDispatcher
-     * @param QueryBuilderInterface    $queryBuilder
+     * @param                       $identifier
+     * @param QueryBuilderInterface $queryBuilder
      */
     public function __construct(
         $identifier,
-        ColumnCollection $columns,
-        EventDispatcherInterface $eventDispatcher,
         QueryBuilderInterface $queryBuilder
     ) {
-        $this->identifier      = $identifier;
-        $this->queryBuilder    = $queryBuilder;
-        $this->eventDispatcher = $eventDispatcher;
-        $this->columns         = $columns;
+        $this->identifier   = $identifier;
+        $this->queryBuilder = $queryBuilder;
+        $this->columns      = new ColumnCollection();
+        $this->transformers = new TransformerCollection();
     }
 
     /**
@@ -73,6 +72,18 @@ abstract class AbstractDataSet
      * @return void
      */
     abstract protected function configureColumns(ColumnCollection $collection);
+
+    /**
+     * Configures column transformers
+     *
+     * @param TransformerCollection $transformers
+     *
+     * @return bool
+     */
+    protected function configureTransformers(TransformerCollection $transformers)
+    {
+        return false;
+    }
 
     /**
      * {@inheritdoc}
@@ -92,16 +103,27 @@ abstract class AbstractDataSet
     protected function configure()
     {
         $this->configureColumns($this->columns);
+        $this->configureTransformers($this->transformers);
         $this->queryBuilder->setColumns($this->columns);
         $this->booted = true;
         $this->dispatchEvent(DataSetInterface::EVENT_POST_CONFIGURE);
     }
 
+    /**
+     * Dispatches the event using event dispatcher service
+     *
+     * @param $event
+     */
     protected function dispatchEvent($event)
     {
         $eventName = sprintf('%s.%s', $this->identifier, $event);
         $eventData = new DataSetEvent($this);
-        $this->eventDispatcher->dispatch($eventName, $eventData);
+        $this->getEventDispatcher()->dispatch($eventName, $eventData);
+    }
+
+    private function getEventDispatcher()
+    {
+        return $this->container->get('event_dispatcher');
     }
 
     /**
@@ -109,19 +131,24 @@ abstract class AbstractDataSet
      */
     public function processResults($rows)
     {
-        $rowData = [];
+        $results = [];
+
         foreach ($rows as $row) {
-            $columns = [];
-            foreach ($row as $param => $value) {
-                if ($this->columns->get($param)->hasTransformer()) {
-                    $value = $this->columns->get($param)->getTransformer()->transform($value);
-                }
-                $columns[$param] = $value;
-            }
-            $rowData[] = $columns;
+            $results[] = $this->processRow($row);
         }
 
-        return $rowData;
+        return $results;
+    }
+
+    protected function processRow($row)
+    {
+        foreach ($row as $field => $value) {
+            if ($this->transformers->has($field)) {
+                $row[$field] = $this->transformers->get($field)->transform($value);
+            }
+        }
+
+        return $row;
     }
 
     /**

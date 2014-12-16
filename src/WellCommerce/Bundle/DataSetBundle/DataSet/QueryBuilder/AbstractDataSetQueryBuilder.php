@@ -67,11 +67,6 @@ abstract class AbstractDataSetQueryBuilder
     protected $orderDir;
 
     /**
-     * @var array
-     */
-    protected $criteria;
-
-    /**
      * Constructor
      *
      * @param DataSetAwareRepositoryInterface $repository

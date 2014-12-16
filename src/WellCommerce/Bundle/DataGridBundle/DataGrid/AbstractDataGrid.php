@@ -11,9 +11,9 @@
  */
 namespace WellCommerce\Bundle\DataGridBundle\DataGrid;
 
+use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Translation\TranslatorInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 use WellCommerce\Bundle\DataGridBundle\DataGrid\Column\ColumnCollection;
 use WellCommerce\Bundle\DataGridBundle\DataGrid\Conditions\ConditionsResolver;
@@ -21,6 +21,7 @@ use WellCommerce\Bundle\DataGridBundle\DataGrid\Configuration\EventHandler\Click
 use WellCommerce\Bundle\DataGridBundle\DataGrid\Configuration\EventHandler\DeleteRowEventHandler;
 use WellCommerce\Bundle\DataGridBundle\DataGrid\Configuration\EventHandler\EditRowEventHandler;
 use WellCommerce\Bundle\DataGridBundle\DataGrid\Configuration\EventHandler\LoadEventHandler;
+use WellCommerce\Bundle\DataGridBundle\DataGrid\Options\Options;
 use WellCommerce\Bundle\DataGridBundle\DataGrid\Options\OptionsInterface;
 use WellCommerce\Bundle\DataSetBundle\DataSet\DataSetInterface;
 use WellCommerce\Bundle\DataSetBundle\DataSet\Request\DataSetRequest;
@@ -31,7 +32,7 @@ use WellCommerce\Bundle\DataSetBundle\DataSet\Request\DataSetRequest;
  * @package WellCommerce\Bundle\DataGridBundle\DataGrid
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractDataGrid
+abstract class AbstractDataGrid extends ContainerAware
 {
     /**
      * @var string
@@ -54,16 +55,6 @@ abstract class AbstractDataGrid
     protected $dataset;
 
     /**
-     * @var TranslatorInterface
-     */
-    protected $translator;
-
-    /**
-     * @var EventDispatcherInterface
-     */
-    protected $eventDispatcher;
-
-    /**
      * @var bool
      */
     protected $booted = false;
@@ -72,26 +63,16 @@ abstract class AbstractDataGrid
      * Constructor
      *
      * @param                          $identifier
-     * @param ColumnCollection         $columns
-     * @param OptionsInterface         $options
-     * @param EventDispatcherInterface $eventDispatcher
-     * @param TranslatorInterface      $translator
      * @param DataSetInterface         $dataset
      */
     public function __construct(
         $identifier,
-        ColumnCollection $columns,
-        OptionsInterface $options,
-        EventDispatcherInterface $eventDispatcher,
-        TranslatorInterface $translator,
         DataSetInterface $dataset
     ) {
-        $this->identifier      = $identifier;
-        $this->columns         = $columns;
-        $this->options         = $options;
-        $this->dataset         = $dataset;
-        $this->eventDispatcher = $eventDispatcher;
-        $this->translator      = $translator;
+        $this->identifier = $identifier;
+        $this->dataset    = $dataset;
+        $this->columns    = new ColumnCollection();
+        $this->options    = new Options();
     }
 
     /**
@@ -140,25 +121,33 @@ abstract class AbstractDataGrid
 
         $eventHandlers->add(new LoadEventHandler([
             'function' => $this->getJavascriptFunctionName('load'),
-            'route'    => $options->getRouteForAction('grid')
+            'route'    => $this->getRouteForAction('grid')
         ]));
 
         $eventHandlers->add(new EditRowEventHandler([
             'function'   => $this->getJavascriptFunctionName('edit'),
             'row_action' => DataGridInterface::ACTION_EDIT,
-            'route'      => $options->getRouteForAction('edit')
+            'route'      => $this->getRouteForAction('edit')
         ]));
 
         $eventHandlers->add(new ClickRowEventHandler([
             'function' => $this->getJavascriptFunctionName('click'),
-            'route'    => $options->getRouteForAction('edit')
+            'route'    => $this->getRouteForAction('edit')
         ]));
 
         $eventHandlers->add(new DeleteRowEventHandler([
             'function'   => $this->getJavascriptFunctionName('delete'),
             'row_action' => DataGridInterface::ACTION_DELETE,
-            'route'      => $options->getRouteForAction('delete')
+            'route'      => $this->getRouteForAction('delete')
         ]));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getRouteForAction($action)
+    {
+        return $this->container->get('redirect_helper')->getActionForCurrentController($action);
     }
 
     /**
@@ -170,7 +159,7 @@ abstract class AbstractDataGrid
      */
     protected function trans($message)
     {
-        return $this->translator->trans($message);
+        return $this->container->get('translator')->trans($message);
     }
 
     /**

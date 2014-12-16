@@ -16,6 +16,8 @@ use WellCommerce\Bundle\DataSetBundle\DataSet\AbstractDataSet;
 use WellCommerce\Bundle\DataSetBundle\DataSet\Column\Column;
 use WellCommerce\Bundle\DataSetBundle\DataSet\Column\ColumnCollection;
 use WellCommerce\Bundle\DataSetBundle\DataSet\DataSetInterface;
+use WellCommerce\Bundle\DataSetBundle\DataSet\Transformer\DateTransformer;
+use WellCommerce\Bundle\DataSetBundle\DataSet\Transformer\TransformerCollection;
 
 /**
  * Class AvailabilityDataSet
@@ -39,5 +41,10 @@ class AvailabilityDataSet extends AbstractDataSet implements DataSetInterface
             'alias'  => 'name',
             'source' => 'availability_translation.name',
         ]));
+    }
+
+    protected function configureTransformers(TransformerCollection $transformers)
+    {
+        $transformers->add('id', new DateTransformer());
     }
 }
