@@ -45,16 +45,18 @@
 
         <service id="user.dataset" class="WellCommerce\Bundle\UserBundle\DataSet\UserDataSet">
             <argument key="identifier">user</argument>
-            <argument type="service" id="dataset.column.collection"/>
-            <argument type="service" id="event_dispatcher"/>
             <argument type="service" id="user.dataset.query_builder"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
         </service>
 
         <service id="user.datagrid" class="WellCommerce\Bundle\UserBundle\DataGrid\UserDataGrid">
             <argument key="identifier">user</argument>
-            <argument type="service" id="datagrid.column_collection"/>
-            <argument type="service" id="datagrid.options"/>
             <argument type="service" id="user.dataset"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
         </service>
 
         <service id="user.form" class="WellCommerce\Bundle\UserBundle\Form\UserForm">
