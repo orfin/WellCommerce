@@ -31,11 +31,5 @@
             <argument type="service" id="redirect_helper"/>
             <argument type="service" id="image_helper"/>
         </service>
-
-        <service id="twig.extension.datagrid" class="WellCommerce\Bundle\CoreBundle\Twig\Extension\DataGridExtension">
-            <argument type="service" id="service_container"/>
-            <argument>WellCommerceCoreBundle:DataGrid:datagrid.html.twig</argument>
-            <tag name="twig.extension"/>
-        </service>
     </services>
 </container>
