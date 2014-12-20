@@ -1,0 +1,57 @@
+{% macro datagrid_header(id) %}
+    {% autoescape true %}
+    <div class="block">
+        <div id="datagrid-{{ id }}"></div>
+    </div>
+    {% endautoescape %}
+{% endmacro %}
+
+{% macro datagrid_column(id, options, filters) %}
+
+    var column_{{ id }} = new GF_Datagrid_Column({
+        id: '{{ id }}',
+        caption: '{{ options.caption }}',
+        editable: {{ options.editable ? 'true' : 'false' }},
+        selectable: {{ options.selectable ? 'true' : 'false' }},
+        sorting: {{ options.sorting|raw }},
+        appearance: {{ options.appearance|raw }},
+        filter: {{ options.filter|raw }}
+    });
+{% endmacro %}
+
+{% macro datagrid_options (datagrid) %}
+    var options = {
+        id: '{{ datagrid.getIdentifier() }}',
+        appearance: {
+            {{ datagrid.getOptions().getAppearance()|raw }}
+        },
+        mechanics: {
+            {{ datagrid.getOptions().getMechanics()|raw }}
+        },
+        event_handlers: {
+            {% for name, options in datagrid.getOptions().getEventHandlers() %}
+            {{ name }}: {{ options.get('function') }},
+            {% endfor %}
+        },
+        columns: [
+            {% for key, column in datagrid.getColumns() %}
+                column_{{ key }},
+            {%  endfor %}
+        ],
+        row_actions: [
+            {% for event in datagrid.getOptions().getEventHandlers() if event.has('row_action') and event.get('row_action') != false %}
+                {{ event.get('row_action') }},
+            {% endfor %}
+        ],
+        group_actions: [
+            {% for event in datagrid.getOptions().getEventHandlers() if event.has('group_action') and event.get('group_action') != false %}
+                {{ event.get('group_action') }},
+            {% endfor %}
+        ],
+        context_actions: [
+            {% for event in datagrid.getOptions().getEventHandlers() if event.has('context_action') and event.get('context_action') != false %}
+                {{ event.get('context_action') }},
+            {% endfor %}
+        ]
+    };
+{% endmacro %}

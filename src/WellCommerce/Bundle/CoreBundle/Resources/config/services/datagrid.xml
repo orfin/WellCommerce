@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="twig.extension.datagrid.class">WellCommerce\Bundle\DataGridBundle\Twig\Extension\DataGridExtension</parameter>
+    </parameters>
+
+    <services>
+        <service id="datagrid_loader" class="WellCommerce\Bundle\DataGridBundle\Loader\Loader" />
+
+        <service id="datagrid_options" class="WellCommerce\Bundle\CoreBundle\DataGrid\Options\Options" />
+
+        <service id="datagrid.options" class="WellCommerce\Bundle\CoreBundle\DataGrid\Options\Options">
+            <argument type="collection"></argument>
+            <argument type="service" id="redirect_helper"/>
+        </service>
+
+        <service id="datagrid_columns" class="WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnCollection" />
+
+        <service id="datagrid.column_collection" class="WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnCollection" />
+
+        <service id="datagrid_manager" class="WellCommerce\Bundle\CoreBundle\DataGrid\Manager\DataGridManager">
+            <argument type="service" id="datagrid_columns" />
+            <argument type="service" id="datagrid_options" />
+            <argument type="service" id="datagrid_loader" />
+            <argument type="service" id="event_dispatcher" />
+            <argument type="service" id="router" />
+            <argument type="service" id="translator"/>
+            <argument type="service" id="redirect_helper"/>
+            <argument type="service" id="image_helper"/>
+        </service>
+
+        <service id="twig.extension.datagrid" class="WellCommerce\Bundle\CoreBundle\Twig\Extension\DataGridExtension">
+            <argument type="service" id="service_container"/>
+            <argument>WellCommerceCoreBundle:DataGrid:datagrid.html.twig</argument>
+            <tag name="twig.extension"/>
+        </service>
+    </services>
+</container>
