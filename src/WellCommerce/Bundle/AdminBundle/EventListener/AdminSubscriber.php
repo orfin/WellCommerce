@@ -13,6 +13,7 @@ namespace WellCommerce\Bundle\AdminBundle\EventListener;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\EventDispatcher\Event;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RequestMatcher;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
@@ -32,8 +33,6 @@ use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
  */
 class AdminSubscriber extends AbstractEventSubscriber
 {
-    const LOGIN_ROUTE = 'admin.user.login';
-
     public static function getSubscribedEvents()
     {
         return [
@@ -41,7 +40,7 @@ class AdminSubscriber extends AbstractEventSubscriber
         ];
     }
 
-    public function onKernelController(FilterControllerEvent $event)
+    public function onKernelController(FilterControllerEvent $event, $eventName, EventDispatcherInterface $dispatcher)
     {
         // admin menu will be rendered only when HttpKernelInterface::MASTER_REQUEST
         if ($event->getRequestType() == HttpKernelInterface::SUB_REQUEST) {
@@ -58,7 +57,7 @@ class AdminSubscriber extends AbstractEventSubscriber
             // propagates main event to other event subscribers to build the menu
             $menuEvent = new AdminMenuEvent($builder);
 
-            $event->getDispatcher()->dispatch(AdminMenuEvent::INIT_EVENT, $menuEvent);
+            $dispatcher->dispatch(AdminMenuEvent::INIT_EVENT, $menuEvent);
 
             // saves menu data in session
             $this->container->get('session')->set('admin/menu', $menuEvent->getBuilder()->getMenu());
