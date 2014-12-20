@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\LayoutBundle\Configurator;
 
-use WellCommerce\Bundle\FormBundle\Form\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 
 /**
  * Interface LayoutBoxConfiguratorInterface

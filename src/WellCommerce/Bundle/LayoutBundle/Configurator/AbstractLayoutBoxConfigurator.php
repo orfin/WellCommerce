@@ -13,8 +13,8 @@
 namespace WellCommerce\Bundle\LayoutBundle\Configurator;
 
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
-use WellCommerce\Bundle\FormBundle\Form\Builder\FormBuilderInterface;
-use WellCommerce\Bundle\FormBundle\Form\Conditions\Equals;
+use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\CoreBundle\Form\Conditions\Equals;
 
 /**
  * Class AbstractLayoutBoxConfigurator

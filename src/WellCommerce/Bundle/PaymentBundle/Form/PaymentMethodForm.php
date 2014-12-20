@@ -11,10 +11,10 @@
  */
 namespace WellCommerce\Bundle\PaymentBundle\Form;
 
-use WellCommerce\Bundle\FormBundle\Form\AbstractForm;
-use WellCommerce\Bundle\FormBundle\Form\Builder\FormBuilderInterface;
-use WellCommerce\Bundle\FormBundle\Form\DataTransformer\CollectionToArrayTransformer;
-use WellCommerce\Bundle\FormBundle\Form\FormInterface;
+use WellCommerce\Bundle\CoreBundle\Form\AbstractForm;
+use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
+use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
 
 /**
  * Class PaymentMethodForm

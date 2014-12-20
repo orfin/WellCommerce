@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Processor\PayPal;
 
-use WellCommerce\Bundle\FormBundle\Form\Builder\FormBuilderInterface;
-use WellCommerce\Bundle\FormBundle\Form\Elements\Fieldset;
+use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\Fieldset;
 use WellCommerce\Bundle\PaymentBundle\Processor\AbstractPaymentProcessor;
 
 /**

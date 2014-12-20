@@ -103,7 +103,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
      * @param       $resource
      * @param array $config
      *
-     * @return \WellCommerce\Bundle\FormBundle\Form\Elements\Form
+     * @return \WellCommerce\Bundle\CoreBundle\Form\Elements\Form
      */
     protected function getForm($resource, array $config = [])
     {

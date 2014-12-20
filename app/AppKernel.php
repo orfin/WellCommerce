@@ -40,7 +40,6 @@ class AppKernel extends Kernel
             new Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
             new Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
-            new WellCommerce\Bundle\FormBundle\WellCommerceFormBundle(),
             // WellCommerce bundles
             new WellCommerce\Bundle\CoreBundle\WellCommerceCoreBundle(),
             new WellCommerce\Bundle\RoutingBundle\WellCommerceRoutingBundle(),

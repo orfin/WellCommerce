@@ -14,9 +14,9 @@ namespace WellCommerce\Bundle\PaymentBundle\Processor;
 
 use Doctrine\Common\Util\ClassUtils;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
-use WellCommerce\Bundle\FormBundle\Form\Builder\FormBuilderInterface;
-use WellCommerce\Bundle\FormBundle\Form\Elements\Fieldset;
-use WellCommerce\Bundle\FormBundle\Form\Elements\Form;
+use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\Fieldset;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\Form;
 
 /**
  * Class AbstractPaymentProcessor

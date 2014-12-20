@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use WellCommerce\Bundle\FormBundle\Form\FormInterface;
+use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
 
 /**
  * Class Controller
@@ -45,7 +45,7 @@ abstract class AbstractController extends Controller
      * @param null|object   $data    Initial form data
      * @param array         $options Form options
      *
-     * @return \WellCommerce\Bundle\FormBundle\Form\Elements\Form
+     * @return \WellCommerce\Bundle\CoreBundle\Form\Elements\Form
      */
     protected function getFormBuilder(FormInterface $form, $data = null, array $options)
     {

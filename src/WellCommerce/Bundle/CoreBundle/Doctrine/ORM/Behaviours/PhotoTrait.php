@@ -22,7 +22,6 @@ use WellCommerce\Bundle\MediaBundle\Entity\Media;
  */
 trait PhotoTrait
 {
-
     /**
      * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\MediaBundle\Entity\Media")
      * @ORM\JoinColumn(name="photo_id", referencedColumnName="id", onDelete="SET NULL")

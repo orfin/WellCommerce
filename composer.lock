@@ -4,20 +4,20 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ef4575dae3d4a9a7d3f60e35df36a6cf",
+    "hash": "3df81a02ab3e3421aa336d4c9003b1c3",
     "packages": [
         {
             "name": "doctrine/annotations",
-            "version": "v1.2.1",
+            "version": "v1.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/annotations.git",
-                "reference": "6a6bec0670bb6e71a263b08bc1b98ea242928633"
+                "reference": "d63108433190110c0ceb8be6460dda6f78348950"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/annotations/zipball/6a6bec0670bb6e71a263b08bc1b98ea242928633",
-                "reference": "6a6bec0670bb6e71a263b08bc1b98ea242928633",
+                "url": "https://api.github.com/repos/doctrine/annotations/zipball/d63108433190110c0ceb8be6460dda6f78348950",
+                "reference": "d63108433190110c0ceb8be6460dda6f78348950",
                 "shasum": ""
             },
             "require": {
@@ -72,7 +72,7 @@
                 "docblock",
                 "parser"
             ],
-            "time": "2014-09-25 16:45:30"
+            "time": "2014-12-18 18:30:08"
         },
         {
             "name": "doctrine/cache",
@@ -758,12 +758,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/migrations.git",
-                "reference": "f4fe9d9cc21a711d89d91d29c4a4e7945289cdd0"
+                "reference": "96f838b4fa93693d19196c8e24ed5f1c3972ba87"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/migrations/zipball/f4fe9d9cc21a711d89d91d29c4a4e7945289cdd0",
-                "reference": "f4fe9d9cc21a711d89d91d29c4a4e7945289cdd0",
+                "url": "https://api.github.com/repos/doctrine/migrations/zipball/96f838b4fa93693d19196c8e24ed5f1c3972ba87",
+                "reference": "96f838b4fa93693d19196c8e24ed5f1c3972ba87",
                 "shasum": ""
             },
             "require": {
@@ -808,7 +808,7 @@
                 "database",
                 "migrations"
             ],
-            "time": "2014-10-30 14:49:25"
+            "time": "2014-12-19 17:14:47"
         },
         {
             "name": "doctrine/orm",
@@ -816,12 +816,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/doctrine2.git",
-                "reference": "5a6bbbd6241d803b686a13a0c373e0febe656987"
+                "reference": "193e31f22a1155d9028d7bb8d4a27c9869e303f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/5a6bbbd6241d803b686a13a0c373e0febe656987",
-                "reference": "5a6bbbd6241d803b686a13a0c373e0febe656987",
+                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/193e31f22a1155d9028d7bb8d4a27c9869e303f4",
+                "reference": "193e31f22a1155d9028d7bb8d4a27c9869e303f4",
                 "shasum": ""
             },
             "require": {
@@ -883,7 +883,7 @@
                 "database",
                 "orm"
             ],
-            "time": "2014-12-10 00:33:23"
+            "time": "2014-12-19 18:19:48"
         },
         {
             "name": "friendsofsymfony/jsrouting-bundle",
@@ -892,12 +892,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSJsRoutingBundle.git",
-                "reference": "253bcf348562ea73962265536c12ba0188075c28"
+                "reference": "7c2cfafbbb733ef85d350603ce58479b08791474"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSJsRoutingBundle/zipball/253bcf348562ea73962265536c12ba0188075c28",
-                "reference": "253bcf348562ea73962265536c12ba0188075c28",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSJsRoutingBundle/zipball/7c2cfafbbb733ef85d350603ce58479b08791474",
+                "reference": "7c2cfafbbb733ef85d350603ce58479b08791474",
                 "shasum": ""
             },
             "require": {
@@ -939,7 +939,7 @@
                 "javascript",
                 "routing"
             ],
-            "time": "2014-11-30 11:01:30"
+            "time": "2014-12-17 21:22:20"
         },
         {
             "name": "friendsofsymfony/rest-bundle",
@@ -1026,12 +1026,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "eebe556a7c5ec7df04b65584d78adf8252c8e10f"
+                "reference": "d82603adc7aa0f7d47c2e767fd33636803f4117a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/eebe556a7c5ec7df04b65584d78adf8252c8e10f",
-                "reference": "eebe556a7c5ec7df04b65584d78adf8252c8e10f",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/d82603adc7aa0f7d47c2e767fd33636803f4117a",
+                "reference": "d82603adc7aa0f7d47c2e767fd33636803f4117a",
                 "shasum": ""
             },
             "require": {
@@ -1067,7 +1067,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2014-12-05 13:11:34"
+            "time": "2014-12-18 07:45:28"
         },
         {
             "name": "imagine/imagine",
@@ -2035,17 +2035,17 @@
         },
         {
             "name": "sensio/distribution-bundle",
-            "version": "v3.0.12",
+            "version": "v3.0.13",
             "target-dir": "Sensio/Bundle/DistributionBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioDistributionBundle.git",
-                "reference": "fcb1b0d52c5b5396228e52e65bc6924e9797ee84"
+                "reference": "a46e422c1135f2efa27b72a94e58852849134420"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/fcb1b0d52c5b5396228e52e65bc6924e9797ee84",
-                "reference": "fcb1b0d52c5b5396228e52e65bc6924e9797ee84",
+                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/a46e422c1135f2efa27b72a94e58852849134420",
+                "reference": "a46e422c1135f2efa27b72a94e58852849134420",
                 "shasum": ""
             },
             "require": {
@@ -2084,7 +2084,7 @@
                 "configuration",
                 "distribution"
             ],
-            "time": "2014-12-03 13:51:42"
+            "time": "2014-12-17 06:40:12"
         },
         {
             "name": "sensio/framework-extra-bundle",
@@ -2763,59 +2763,6 @@
             "time": "2014-10-17 12:53:44"
         },
         {
-            "name": "wellcommerce/form-bundle",
-            "version": "dev-development",
-            "target-dir": "WellCommerce/Bundle/FormBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/WellCommerce/FormBundle.git",
-                "reference": "71d81be2aa3cbaf26976fef44739239fe4d09d7c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/WellCommerce/FormBundle/zipball/71d81be2aa3cbaf26976fef44739239fe4d09d7c",
-                "reference": "71d81be2aa3cbaf26976fef44739239fe4d09d7c",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4",
-                "symfony/symfony": "2.5.*"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "WellCommerce\\Bundle\\FormBundle": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Adam Piotrowski",
-                    "email": "adam@wellcommerce.org"
-                },
-                {
-                    "name": "WellCommerce Developers",
-                    "email": "developers@wellcommerce.org"
-                }
-            ],
-            "description": "WellCommerce Form Bundle",
-            "keywords": [
-                "e-commerce",
-                "open-source",
-                "symfony",
-                "wellcommerce"
-            ],
-            "time": "2014-12-04 22:19:10"
-        },
-        {
             "name": "white-october/pagerfanta-bundle",
             "version": "2.1.x-dev",
             "target-dir": "WhiteOctober/PagerfantaBundle",
@@ -3120,12 +3067,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Behat/Behat.git",
-                "reference": "33f400055af66ef1e24c0ca9404f7d14cf9a7c95"
+                "reference": "7192c4eb862b0a82a6dd19501d9b3b4dc1aa86ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/Behat/zipball/33f400055af66ef1e24c0ca9404f7d14cf9a7c95",
-                "reference": "33f400055af66ef1e24c0ca9404f7d14cf9a7c95",
+                "url": "https://api.github.com/repos/Behat/Behat/zipball/7192c4eb862b0a82a6dd19501d9b3b4dc1aa86ef",
+                "reference": "7192c4eb862b0a82a6dd19501d9b3b4dc1aa86ef",
                 "shasum": ""
             },
             "require": {
@@ -3193,7 +3140,7 @@
                 "symfony",
                 "testing"
             ],
-            "time": "2014-09-23 10:46:27"
+            "time": "2014-12-16 13:41:40"
         },
         {
             "name": "behat/gherkin",
@@ -3812,7 +3759,6 @@
         "white-october/pagerfanta-bundle": 20,
         "friendsofsymfony/jsrouting-bundle": 20,
         "willdurand/js-translation-bundle": 20,
-        "wellcommerce/form-bundle": 20,
         "symfony-cmf/routing-bundle": 20,
         "mathiasverraes/money": 20,
         "zendframework/zend-json": 20,

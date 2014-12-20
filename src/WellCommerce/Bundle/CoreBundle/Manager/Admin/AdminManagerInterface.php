@@ -62,7 +62,7 @@ interface AdminManagerInterface extends ManagerInterface
     /**
      * Returns form object
      *
-     * @return \WellCommerce\Bundle\FormBundle\Form\FormInterface
+     * @return \WellCommerce\Bundle\CoreBundle\Form\FormInterface
      */
     public function getForm();
 
