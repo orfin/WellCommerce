@@ -12,10 +12,10 @@
 
 namespace WellCommerce\Bundle\UserBundle\DataSet;
 
-use WellCommerce\Bundle\DataSetBundle\DataSet\AbstractDataSet;
-use WellCommerce\Bundle\DataSetBundle\DataSet\Column\Column;
-use WellCommerce\Bundle\DataSetBundle\DataSet\Column\ColumnCollection;
-use WellCommerce\Bundle\DataSetBundle\DataSet\DataSetInterface;
+use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
+use WellCommerce\Bundle\CoreBundle\DataSet\Column\Column;
+use WellCommerce\Bundle\CoreBundle\DataSet\Column\ColumnCollection;
+use WellCommerce\Bundle\CoreBundle\DataSet\DataSetInterface;
 
 /**
  * Class UserDataSet

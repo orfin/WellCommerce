@@ -12,11 +12,11 @@
 
 namespace WellCommerce\Bundle\ClientBundle\DataSet;
 
-use WellCommerce\Bundle\DataSetBundle\DataSet\AbstractDataSet;
-use WellCommerce\Bundle\DataSetBundle\DataSet\Column\Column;
-use WellCommerce\Bundle\DataSetBundle\DataSet\Column\ColumnCollection;
-use WellCommerce\Bundle\DataSetBundle\DataSet\DataSetInterface;
-use WellCommerce\Bundle\DataSetBundle\DataSet\Transformer\DateTransformer;
+use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
+use WellCommerce\Bundle\CoreBundle\DataSet\Column\Column;
+use WellCommerce\Bundle\CoreBundle\DataSet\Column\ColumnCollection;
+use WellCommerce\Bundle\CoreBundle\DataSet\DataSetInterface;
+use WellCommerce\Bundle\CoreBundle\DataSet\Transformer\DateTransformer;
 
 /**
  * Class ClientDataSet

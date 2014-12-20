@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\CmsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
-use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\HierarchyTrait;
+use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\HierarchyTrait;
 use WellCommerce\Bundle\MediaBundle\Entity\Media;
 
 /**

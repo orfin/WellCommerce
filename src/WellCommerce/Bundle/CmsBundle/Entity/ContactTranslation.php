@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\CmsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
-use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\AddressTrait;
+use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\AddressTrait;
 use WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface;
 
 /**

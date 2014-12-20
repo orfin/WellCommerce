@@ -20,6 +20,12 @@ namespace WellCommerce\Bundle\CoreBundle\Provider;
  */
 interface ProviderAwareInterface
 {
+    /**
+     * 
+     * @param ProviderInterface $provider
+     *
+     * @return mixed
+     */
     public function setProvider(ProviderInterface $provider);
 
     public function getProvider();

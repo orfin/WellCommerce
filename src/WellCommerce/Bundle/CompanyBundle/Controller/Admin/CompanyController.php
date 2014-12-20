@@ -15,9 +15,9 @@ namespace WellCommerce\Bundle\CompanyBundle\Controller\Admin;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
-use WellCommerce\Bundle\DataSetBundle\DataSet\Conditions\Condition;
-use WellCommerce\Bundle\DataSetBundle\DataSet\Conditions\ConditionsCollection;
-use WellCommerce\Bundle\DataSetBundle\DataSet\Request\DataSetRequest;
+use WellCommerce\Bundle\CoreBundle\DataSet\Conditions\Condition;
+use WellCommerce\Bundle\CoreBundle\DataSet\Conditions\ConditionsCollection;
+use WellCommerce\Bundle\CoreBundle\DataSet\Request\DataSetRequest;
 
 /**
  * Class CompanyController

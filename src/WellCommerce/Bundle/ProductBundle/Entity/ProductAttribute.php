@@ -14,8 +14,8 @@ namespace WellCommerce\Bundle\ProductBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
-use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\HierarchyTrait;
-use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\PhotoTrait;
+use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\HierarchyTrait;
+use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\PhotoTrait;
 
 /**
  * ProductAttribute

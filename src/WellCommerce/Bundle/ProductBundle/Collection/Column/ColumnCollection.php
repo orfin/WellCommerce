@@ -17,7 +17,7 @@ use WellCommerce\Bundle\CoreBundle\Collection\AbstractCollection;
 /**
  * Class ColumnCollection
  *
- * @package WellCommerce\Bundle\DataGridBundle\DataGrid\Column
+ * @package WellCommerce\Bundle\CoreBundle\DataGrid\Column
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class ColumnCollection extends AbstractCollection

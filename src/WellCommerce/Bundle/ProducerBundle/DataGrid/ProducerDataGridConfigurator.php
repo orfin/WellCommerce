@@ -12,9 +12,9 @@
 
 namespace WellCommerce\Bundle\ProducerBundle\DataGrid;
 
-use WellCommerce\Bundle\DataGridBundle\DataGrid\Configurator\AbstractConfigurator;
-use WellCommerce\Bundle\DataGridBundle\DataGrid\Configurator\ConfiguratorInterface;
-use WellCommerce\Bundle\DataGridBundle\DataGrid\DataGridInterface;
+use WellCommerce\Bundle\CoreBundle\DataGrid\Configurator\AbstractConfigurator;
+use WellCommerce\Bundle\CoreBundle\DataGrid\Configurator\ConfiguratorInterface;
+use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
 
 /**
  * Class ProducerDataGridConfigurator

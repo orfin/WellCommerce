@@ -15,7 +15,7 @@ namespace WellCommerce\Bundle\ProducerBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
-use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\PhotoTrait;
+use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\PhotoTrait;
 use WellCommerce\Bundle\DelivererBundle\Entity\Deliverer;
 
 /**

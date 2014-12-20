@@ -18,8 +18,8 @@ use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\EnableableTrait;
-use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\PhotoTrait;
+use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\EnableableTrait;
+use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\PhotoTrait;
 
 /**
  * User

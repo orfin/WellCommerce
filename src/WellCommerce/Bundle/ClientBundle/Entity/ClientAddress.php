@@ -13,7 +13,7 @@ namespace WellCommerce\Bundle\ClientBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
-use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\AddressTrait;
+use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\AddressTrait;
 
 /**
  * Client

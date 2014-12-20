@@ -7,6 +7,7 @@
     <imports>
         <import resource="services/helpers.xml"/>
         <import resource="services/twig.xml"/>
+        <import resource="services/datagrid.xml"/>
     </imports>
 
     <services>
@@ -21,5 +22,7 @@
             <argument type="service" id="service_container"/>
             <tag name="kernel.event_subscriber" />
         </service>
+
+        <service id="dataset.column.collection" class="WellCommerce\Bundle\CoreBundle\DataSet\Column\ColumnCollection"/>
     </services>
 </container>

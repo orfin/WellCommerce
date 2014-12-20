@@ -12,7 +12,7 @@
 namespace WellCommerce\Bundle\CoreBundle\Event;
 
 use Symfony\Component\EventDispatcher\Event;
-use WellCommerce\Bundle\DataGridBundle\DataGrid\DataGridInterface;
+use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
 
 /**
  * Class DataGridEvent
@@ -23,7 +23,7 @@ use WellCommerce\Bundle\DataGridBundle\DataGrid\DataGridInterface;
 class DataGridEvent extends Event
 {
     /**
-     * @var \WellCommerce\Bundle\DataGridBundle\DataGrid\DataGridInterface
+     * @var \WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface
      */
     protected $datagrid;
 

@@ -11,12 +11,12 @@
  */
 namespace WellCommerce\Bundle\AvailabilityBundle\DataGrid;
 
-use WellCommerce\Bundle\DataGridBundle\DataGrid\AbstractDataGrid;
-use WellCommerce\Bundle\DataGridBundle\DataGrid\Column\Column;
-use WellCommerce\Bundle\DataGridBundle\DataGrid\Column\ColumnCollection;
-use WellCommerce\Bundle\DataGridBundle\DataGrid\Column\Options\Appearance;
-use WellCommerce\Bundle\DataGridBundle\DataGrid\Column\Options\Filter;
-use WellCommerce\Bundle\DataGridBundle\DataGrid\DataGridInterface;
+use WellCommerce\Bundle\CoreBundle\DataGrid\AbstractDataGrid;
+use WellCommerce\Bundle\CoreBundle\DataGrid\Column\Column;
+use WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnCollection;
+use WellCommerce\Bundle\CoreBundle\DataGrid\Column\Options\Appearance;
+use WellCommerce\Bundle\CoreBundle\DataGrid\Column\Options\Filter;
+use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
 
 /**
  * Class AvailabilityDataGrid

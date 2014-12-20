@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\ClientBundle\Repository;
 
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
-use WellCommerce\Bundle\DataGridBundle\DataGrid\Repository\DataGridAwareRepositoryInterface;
+use WellCommerce\Bundle\CoreBundle\DataGrid\Repository\DataGridAwareRepositoryInterface;
 
 /**
  * Interface ClientRepositoryInterface

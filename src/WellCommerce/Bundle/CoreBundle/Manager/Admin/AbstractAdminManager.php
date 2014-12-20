@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Event\ResourceEvent;
 use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
-use WellCommerce\Bundle\DataGridBundle\DataGrid\DataGridInterface;
+use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
 use WellCommerce\Bundle\FormBundle\Form\FormInterface;
 
 /**

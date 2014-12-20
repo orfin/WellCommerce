@@ -13,8 +13,8 @@
 namespace WellCommerce\Bundle\UserBundle\Repository;
 
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
-use WellCommerce\Bundle\DataGridBundle\DataGrid\Repository\DataGridAwareRepositoryInterface;
-use WellCommerce\Bundle\DataSetBundle\Doctrine\ORM\DataSetAwareRepositoryInterface;
+use WellCommerce\Bundle\CoreBundle\DataGrid\Repository\DataGridAwareRepositoryInterface;
+use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\DataSetAwareRepositoryInterface;
 
 /**
  * Interface UserRepositoryInterface

@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\UserBundle\DataSet;
 
-use WellCommerce\Bundle\DataSetBundle\DataSet\QueryBuilder\AbstractDataSetQueryBuilder;
-use WellCommerce\Bundle\DataSetBundle\DataSet\QueryBuilder\QueryBuilderInterface;
+use WellCommerce\Bundle\CoreBundle\DataSet\QueryBuilder\AbstractDataSetQueryBuilder;
+use WellCommerce\Bundle\CoreBundle\DataSet\QueryBuilder\QueryBuilderInterface;
 
 /**
  * Class UserDataSetQueryBuilder

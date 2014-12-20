@@ -5,7 +5,7 @@ namespace WellCommerce\Bundle\CategoryBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Translatable\Translation;
 use WellCommerce\Bundle\CategoryBundle\Routing\CategoryRouteGenerator;
-use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\MetaDataTrait;
+use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\MetaDataTrait;
 use WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface;
 use WellCommerce\Bundle\RoutingBundle\Entity\Behaviours\RoutableTrait;
 use WellCommerce\Bundle\RoutingBundle\Entity\RoutableSubjectInterface;

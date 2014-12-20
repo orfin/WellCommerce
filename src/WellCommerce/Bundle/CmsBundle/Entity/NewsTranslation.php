@@ -15,7 +15,7 @@ namespace WellCommerce\Bundle\CmsBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Sluggable\Sluggable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translation;
-use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\MetaDataTrait;
+use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\MetaDataTrait;
 use WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface;
 
 
