@@ -42,9 +42,4 @@ class AvailabilityDataSet extends AbstractDataSet implements DataSetInterface
             'source' => 'availability_translation.name',
         ]));
     }
-
-    protected function configureTransformers(TransformerCollection $transformers)
-    {
-        $transformers->add('id', new DateTransformer());
-    }
 }

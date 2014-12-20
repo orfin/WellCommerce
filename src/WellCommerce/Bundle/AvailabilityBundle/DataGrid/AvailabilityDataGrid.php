@@ -50,7 +50,7 @@ class AvailabilityDataGrid extends AbstractDataGrid implements DataGridInterface
                 'width' => 70,
             ]),
             'filter'     => new Filter([
-                'type' => Filter::FILTER_BETWEEN
+                'type' => Filter::FILTER_INPUT
             ])
         ]));
     }
