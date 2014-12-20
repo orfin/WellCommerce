@@ -33,17 +33,24 @@
             <argument>WellCommerceLayoutBundle:LayoutBox</argument>
         </service>
 
-        <service id="layout_box.datagrid" class="WellCommerce\Bundle\LayoutBundle\DataGrid\LayoutBoxDataGrid">
+        <service id="layout_box.dataset.query_builder" class="WellCommerce\Bundle\LayoutBundle\DataSet\LayoutBoxDataSetQueryBuilder" public="false">
+            <argument type="service" id="layout_box.repository"/>
+        </service>
+
+        <service id="layout_box.dataset" class="WellCommerce\Bundle\LayoutBundle\DataSet\LayoutBoxDataSet">
+            <argument key="identifier">layout_box</argument>
+            <argument type="service" id="layout_box.dataset.query_builder"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
-            <configurator service="layout_box.datagrid.configurator" method="configure" />
         </service>
 
-        <service id="layout_box.datagrid.configurator" class="WellCommerce\Bundle\LayoutBundle\DataGrid\LayoutBoxDataGridConfigurator">
+        <service id="layout_box.datagrid" class="WellCommerce\Bundle\LayoutBundle\DataGrid\LayoutBoxDataGrid">
             <argument key="identifier">layout_box</argument>
-            <argument type="service" id="datagrid_manager"/>
-            <argument type="service" id="layout_box.repository"/>
+            <argument type="service" id="layout_box.dataset"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
         </service>
 
         <service id="layout_box.form" class="WellCommerce\Bundle\LayoutBundle\Form\LayoutBoxForm">

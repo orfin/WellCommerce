@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity repository-class="WellCommerce\Bundle\LayoutBundle\Repository\LayoutBoxRepository" name="WellCommerce\Bundle\LayoutBundle\Entity\LayoutBox" table="layout_box">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="boxType" type="string" column="box_type" nullable="false"/>
+    <field name="settings" type="json_array" column="settings" nullable="false"/>
+    <field name="visibility" type="integer" column="visibility" nullable="false">
+      <options>
+        <option name="default">1</option>
+      </options>
+    </field>
+    <field name="showHeader" type="boolean" column="show_header" nullable="false">
+      <options>
+        <option name="default">1</option>
+      </options>
+    </field>
+    <field name="identifier" type="string" column="identifier" nullable="false"/>
+  </entity>
+</doctrine-mapping>

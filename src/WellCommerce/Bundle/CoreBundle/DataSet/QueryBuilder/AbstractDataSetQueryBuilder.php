@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\CoreBundle\DataSet\QueryBuilder;
 use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use WellCommerce\Bundle\CoreBundle\DataSet\Column\ColumnCollection;
+use WellCommerce\Bundle\CoreBundle\DataSet\Conditions\ConditionInterface;
 use WellCommerce\Bundle\CoreBundle\DataSet\Conditions\ConditionsCollection;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\DataSetAwareRepositoryInterface;
 
@@ -121,29 +122,26 @@ abstract class AbstractDataSetQueryBuilder
     public function setConditions(ConditionsCollection $conditions = null)
     {
         if (null !== $conditions) {
-
-            /**
-             * @var $condition \WellCommerce\Bundle\CoreBundle\DataSet\Conditions\ConditionInterface
-             */
             foreach ($conditions->all() as $condition) {
-                $column     = $this->columns->get($condition->getIdentifier());
-                $source     = $column->getSource();
-                $identifier = $condition->getIdentifier();
-                $operator   = $condition->getOperator();
-                $expression = $this->queryBuilder->expr()->{$operator}($source, ':' . $identifier);
-
-                $this->queryBuilder->andWhere($expression);
-                $this->queryBuilder->setParameter($condition->getIdentifier(), $condition->getValue());
+                $this->addConditionToQuery($condition);
             }
         }
     }
 
     /**
-     * {@inheritdoc}
+     * Adds conditions as where clauses to query
+     *
+     * @param ConditionInterface $condition
      */
-    public function getQuery()
+    private function addConditionToQuery(ConditionInterface $condition)
     {
-        return $this->queryBuilder->getQuery();
+        $column     = $this->columns->get($condition->getIdentifier());
+        $source     = $column->getSource();
+        $operator   = $condition->getOperator();
+        $expression = $this->queryBuilder->expr()->{$operator}($source, ':' . $condition->getIdentifier());
+
+        $this->queryBuilder->andWhere($expression);
+        $this->queryBuilder->setParameter($condition->getIdentifier(), $condition->getValue());
     }
 
     /**
@@ -152,6 +150,14 @@ abstract class AbstractDataSetQueryBuilder
     public function getQueryBuilder()
     {
         return $this->queryBuilder;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getQuery()
+    {
+        return $this->queryBuilder->getQuery();
     }
 
     /**

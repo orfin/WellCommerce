@@ -16,10 +16,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 /**
- * LayoutBox
+ * Class LayoutBox
  *
- * @ORM\Table("layout_box")
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\LayoutBundle\Repository\LayoutBoxRepository")
+ * @author Adam Piotrowski <adam@wellcommerce.org>
  */
 class LayoutBox
 {
@@ -28,93 +27,118 @@ class LayoutBox
     use ORMBehaviors\Blameable\Blameable;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @var int
      */
     private $id;
 
     /**
-     * @ORM\Column(name="box_type", type="string")
+     * @var string
      */
     private $boxType;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="settings", type="json_array", nullable=true)
+     * @var array
      */
     private $settings;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="visibility", type="integer", nullable=true, options={"default":1})
+     * @var bool
      */
     private $visibility;
 
     /**
-     * @ORM\Column(name="show_header", type="boolean", nullable=true, options={"default":1})
+     * @var bool
      */
     private $showHeader;
 
     /**
-     * @ORM\Column(name="identifier", type="string")
+     * @var string
      */
     private $identifier;
 
+    /**
+     * @return int
+     */
     public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * @return string
+     */
     public function getBoxType()
     {
         return $this->boxType;
     }
 
+    /**
+     * @param $boxType
+     */
     public function setBoxType($boxType)
     {
         $this->boxType = $boxType;
     }
 
+    /**
+     * @return bool
+     */
     public function getVisibility()
     {
         return $this->visibility;
     }
 
+    /**
+     * @param $visibility
+     */
     public function setVisibility($visibility)
     {
         $this->visibility = $visibility;
     }
 
+    /**
+     * @return bool
+     */
     public function getShowHeader()
     {
         return $this->showHeader;
     }
 
+    /**
+     * @param $showHeader
+     */
     public function setShowHeader($showHeader)
     {
         $this->showHeader = $showHeader;
     }
 
+    /**
+     * @return array
+     */
     public function getSettings()
     {
         return $this->settings;
     }
 
+    /**
+     * @param $settings
+     */
     public function setSettings($settings)
     {
         $this->settings = $settings;
     }
 
+    /**
+     * @return string
+     */
     public function getIdentifier()
     {
         return $this->identifier;
     }
 
+    /**
+     * @param $identifier
+     */
     public function setIdentifier($identifier)
     {
         $this->identifier = $identifier;

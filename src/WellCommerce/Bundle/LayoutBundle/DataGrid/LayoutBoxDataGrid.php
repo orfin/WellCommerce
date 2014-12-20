@@ -14,75 +14,69 @@ namespace WellCommerce\Bundle\LayoutBundle\DataGrid;
 use WellCommerce\Bundle\CoreBundle\DataGrid\AbstractDataGrid;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Column\Column;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnCollection;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnInterface;
+use WellCommerce\Bundle\CoreBundle\DataGrid\Column\Options\Appearance;
+use WellCommerce\Bundle\CoreBundle\DataGrid\Column\Options\Filter;
+use WellCommerce\Bundle\CoreBundle\DataGrid\Column\Options\Sorting;
 use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
 
 /**
  * Class LayoutBoxDataGrid
  *
- * @package WellCommerce\Bundle\LayoutBundle\DataGrid
- * @author  Adam Piotrowski <adam@wellcommerce.org>
+ * @author Adam Piotrowski <adam@wellcommerce.org>
  */
 class LayoutBoxDataGrid extends AbstractDataGrid implements DataGridInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function addColumns(ColumnCollection $collection)
+    public function configureColumns(ColumnCollection $collection)
     {
         $collection->add(new Column([
             'id'         => 'id',
-            'source'     => 'layout_box.id',
             'caption'    => $this->trans('Id'),
-            'sorting'    => [
-                'default_order' => ColumnInterface::SORT_DIR_DESC
-            ],
-            'appearance' => [
+            'sorting'    => new Sorting([
+                'default_order' => Sorting::SORT_DIR_DESC
+            ]),
+            'appearance' => new Appearance([
                 'width'   => 90,
                 'visible' => false
-            ],
-            'filter'     => [
-                'type' => ColumnInterface::FILTER_BETWEEN
-            ]
+            ]),
+            'filter'     => new Filter([
+                'type' => Filter::FILTER_BETWEEN
+            ])
         ]));
 
         $collection->add(new Column([
             'id'         => 'name',
-            'source'     => 'layout_box_translation.name',
             'caption'    => $this->trans('Name'),
-            'appearance' => [
+            'appearance' => new Appearance([
                 'width' => 70,
-                'align' => ColumnInterface::ALIGN_LEFT
-            ],
-            'filter'     => [
-                'type' => ColumnInterface::FILTER_INPUT
-            ]
+            ]),
+            'filter'     => new Filter([
+                'type' => Filter::FILTER_INPUT
+            ])
         ]));
 
         $collection->add(new Column([
             'id'         => 'identifier',
-            'source'     => 'layout_box.identifier',
             'caption'    => $this->trans('Identifier'),
-            'appearance' => [
+            'appearance' => new Appearance([
                 'width' => 70,
-                'align' => ColumnInterface::ALIGN_LEFT
-            ],
-            'filter'     => [
-                'type' => ColumnInterface::FILTER_INPUT
-            ]
+            ]),
+            'filter'     => new Filter([
+                'type' => Filter::FILTER_INPUT
+            ])
         ]));
 
         $collection->add(new Column([
             'id'         => 'boxType',
-            'source'     => 'layout_box.boxType',
             'caption'    => $this->trans('Type'),
-            'appearance' => [
+            'appearance' => new Appearance([
                 'width' => 70,
-                'align' => ColumnInterface::ALIGN_LEFT
-            ],
-            'filter'     => [
-                'type' => ColumnInterface::FILTER_INPUT
-            ]
+            ]),
+            'filter'     => new Filter([
+                'type' => Filter::FILTER_INPUT
+            ])
         ]));
     }
 }

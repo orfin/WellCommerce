@@ -19,8 +19,7 @@ use WellCommerce\Bundle\LayoutBundle\Entity\LayoutBox;
 /**
  * Class LayoutBoxCollection
  *
- * @package WellCommerce\Bundle\LayoutBundle\Collection
- * @author  Adam Piotrowski <adam@wellcommerce.org>
+ * @author Adam Piotrowski <adam@wellcommerce.org>
  */
 class LayoutBoxCollection extends AbstractCollection
 {

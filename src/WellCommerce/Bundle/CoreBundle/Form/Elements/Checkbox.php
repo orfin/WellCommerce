@@ -34,7 +34,7 @@ class Checkbox extends AbstractField implements ElementInterface
         ]);
 
         $resolver->setAllowedTypes([
-            'class'         => 'string',
+            'class' => 'string',
         ]);
     }
 

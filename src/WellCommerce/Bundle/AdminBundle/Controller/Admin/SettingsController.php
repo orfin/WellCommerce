@@ -17,8 +17,7 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 /**
  * Class SettingsController
  *
- * @package WellCommerce\Bundle\AdminBundle\Controller
- * @author  Adam Piotrowski <adam@wellcommerce.org>
+ * @author Adam Piotrowski <adam@wellcommerce.org>
  *
  * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */

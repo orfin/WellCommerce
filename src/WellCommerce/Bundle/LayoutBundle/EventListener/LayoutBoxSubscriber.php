@@ -12,9 +12,9 @@
 namespace WellCommerce\Bundle\LayoutBundle\EventListener;
 
 use Symfony\Component\HttpKernel\KernelEvents;
-use WellCommerce\Bundle\CoreBundle\Event\FormEvent;
 use WellCommerce\Bundle\CoreBundle\Event\ResourceEvent;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
+use WellCommerce\Bundle\CoreBundle\Form\Event\FormEvent;
 use WellCommerce\Bundle\LayoutBundle\Configurator\LayoutBoxConfiguratorInterface;
 use WellCommerce\Bundle\LayoutBundle\Form\LayoutBoxForm;
 
@@ -35,7 +35,8 @@ class LayoutBoxSubscriber extends AbstractEventSubscriber
     }
 
     /**
-     * Adds configurator fields to main layout box edit form
+     * Adds configurator fields to main layout box edit form.
+     * Loops through all configurators, renders the fieldset and sets default data
      *
      * @param FormEvent $event
      */
@@ -46,7 +47,6 @@ class LayoutBoxSubscriber extends AbstractEventSubscriber
         $configurators = $this->container->get('layout_box.configurator.collection')->all();
         $boxSettings   = $resource->getSettings();
 
-        // Loop through all configurators, render fieldset and set default data
         foreach ($configurators as $configurator) {
             if ($configurator instanceof LayoutBoxConfiguratorInterface) {
                 $defaults = [];
