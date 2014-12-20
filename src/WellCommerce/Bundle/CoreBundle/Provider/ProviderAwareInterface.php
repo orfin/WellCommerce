@@ -21,12 +21,18 @@ namespace WellCommerce\Bundle\CoreBundle\Provider;
 interface ProviderAwareInterface
 {
     /**
-     * 
+     * Sets provider instance
+     *
      * @param ProviderInterface $provider
      *
-     * @return mixed
+     * @return void
      */
     public function setProvider(ProviderInterface $provider);
 
+    /**
+     * Returns current provider instance
+     *
+     * @return ProviderInterface
+     */
     public function getProvider();
 } 

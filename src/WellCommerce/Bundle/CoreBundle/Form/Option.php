@@ -20,10 +20,9 @@ namespace WellCommerce\Bundle\CoreBundle\Form;
  */
 class Option
 {
+    protected $value;
 
-    public $value;
-
-    public $label;
+    protected $label;
 
     public function __construct($value, $label)
     {

@@ -12,10 +12,9 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Builder;
 
-use Symfony\Component\DependencyInjection\ContainerAware;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
+use WellCommerce\Bundle\CoreBundle\Form\Event\FormEvent;
 use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
-use WellCommerce\Bundle\CoreBundle\Event\FormEvent;
 
 /**
  * Class FormBuilder
@@ -45,30 +44,32 @@ class FormBuilder extends AbstractContainer implements FormBuilderInterface
      */
     public function create(FormInterface $form, $data, array $options)
     {
-        $className = get_class($data);
+        $className     = get_class($data);
         $this->options = $options;
         $this->data    = $data;
         $this->form    = $form->buildForm($this, $this->options);
         $this->dispatchEvent($this->getInitEventName($form));
         $this->form->setValidationMetadata($this->getValidationMetadata($data));
         $this->form->setDefaultData($this->data);
+
         return $this;
     }
 
-    private function getValidationMetadata($data){
+    private function getValidationMetadata($data)
+    {
 
-        $className = get_class($data);
+        $className   = get_class($data);
         $constraints = [];
 
-        if($this->getEntityManager()->getMetadataFactory()->hasMetadataFor($className)){
-            $metadata = $this->getEntityManager()->getClassMetadata($className);
+        if ($this->getEntityManager()->getMetadataFactory()->hasMetadataFor($className)) {
+            $metadata        = $this->getEntityManager()->getClassMetadata($className);
             $metadataFactory = $this->getValidator()->getMetadataFactory();
 
-            foreach($metadata->getAssociationMappings() as $association){
+            foreach ($metadata->getAssociationMappings() as $association) {
                 $targetEntity = $association['targetEntity'];
-                if($metadataFactory->hasMetadataFor($targetEntity)){
+                if ($metadataFactory->hasMetadataFor($targetEntity)) {
                     $targetEntityMetadata = $metadataFactory->getMetadataFor($targetEntity);
-                    if(!empty($targetEntityMetadata->members)){
+                    if (!empty($targetEntityMetadata->members)) {
                         $constraints[$association['fieldName']] = $targetEntityMetadata;
                     }
                 }
@@ -77,6 +78,7 @@ class FormBuilder extends AbstractContainer implements FormBuilderInterface
 
         return $constraints;
     }
+
     /**
      * Triggers the event for form action
      *
