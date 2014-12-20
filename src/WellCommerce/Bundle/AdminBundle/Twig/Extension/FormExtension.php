@@ -12,19 +12,15 @@
 namespace WellCommerce\Bundle\AdminBundle\Twig\Extension;
 
 use WellCommerce\Bundle\CoreBundle\Form\Elements\Form;
+use WellCommerce\Bundle\CoreBundle\Twig\AbstractTwigExtension;
 
 /**
  * Class FormExtension
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class FormExtension extends \Twig_Extension
+class FormExtension extends AbstractTwigExtension
 {
-    /**
-     * @var \Twig_Environment
-     */
-    protected $environment;
-
     /**
      * @var string Template name
      */
@@ -38,16 +34,6 @@ class FormExtension extends \Twig_Extension
     public function __construct($templateName)
     {
         $this->templateName = $templateName;
-    }
-
-    /**
-     * Initializes Twig
-     *
-     * @param \Twig_Environment $environment
-     */
-    public function initRuntime(\Twig_Environment $environment)
-    {
-        $this->environment = $environment;
     }
 
     /**

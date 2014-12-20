@@ -11,21 +11,16 @@
  */
 namespace WellCommerce\Bundle\AdminBundle\Twig\Extension;
 
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
+use WellCommerce\Bundle\CoreBundle\Twig\AbstractTwigExtension;
 
 /**
  * Class DataGridExtension
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class DataGridExtension extends \Twig_Extension
+class DataGridExtension extends AbstractTwigExtension
 {
-    /**
-     * @var \Twig_Environment
-     */
-    protected $environment;
-
     /**
      * @var string Template name
      */
@@ -39,16 +34,6 @@ class DataGridExtension extends \Twig_Extension
     public function __construct($templateName)
     {
         $this->templateName = $templateName;
-    }
-
-    /**
-     * Initializes Twig
-     *
-     * @param \Twig_Environment $environment
-     */
-    public function initRuntime(\Twig_Environment $environment)
-    {
-        $this->environment = $environment;
     }
 
     public function getFunctions()
