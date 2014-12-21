@@ -36,8 +36,8 @@
             <call method="setRepository">
                 <argument type="service" id="category.repository"/>
             </call>
-            <call method="setProvider">
-                <argument type="service" id="category.provider" />
+            <call method="setProviders">
+                <argument type="service" id="resource.provider.collection" />
             </call>
         </service>
 
@@ -82,6 +82,11 @@
 
         <service id="category.provider" class="WellCommerce\Bundle\CategoryBundle\Provider\CategoryProvider">
             <argument type="service" id="category.repository" />
+            <tag name="resource.provider" alias="category"/>
+        </service>
+
+        <service id="category_products.provider" class="WellCommerce\Bundle\CategoryBundle\Provider\CategoryProductsProvider">
+            <tag name="resource.provider" alias="category_products"/>
         </service>
 
         <service id="category.form" class="WellCommerce\Bundle\CategoryBundle\Form\CategoryForm">

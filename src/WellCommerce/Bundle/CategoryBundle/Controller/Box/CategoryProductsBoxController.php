@@ -18,8 +18,6 @@ use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
 use WellCommerce\Bundle\CoreBundle\DataSet\Conditions\Condition;
 use WellCommerce\Bundle\CoreBundle\DataSet\Conditions\ConditionsCollection;
 use WellCommerce\Bundle\CoreBundle\DataSet\Request\DataSetRequest;
-use WellCommerce\Bundle\ProductBundle\Collection\Item;
-use WellCommerce\Bundle\ProductBundle\Collection\ProductCollection;
 
 /**
  * Class CategoryProductsBoxController
@@ -33,15 +31,20 @@ class CategoryProductsBoxController extends AbstractBoxController implements Box
 {
     public function indexAction(Request $request)
     {
-        $conditions = new ConditionsCollection();
-        $conditions->add(new Condition\Eq('category', 4));
+        $currentCategory = $this->get('category.provider')->getCurrentResource();
+        $conditions      = new ConditionsCollection();
+        $conditions->add(new Condition\Eq('category', $currentCategory->getId()));
 
-        $results = $this->get('product.dataset.front')->getResults(new DataSetRequest([
+        $dataset = $this->get('product.dataset.front');
+
+        $results = $dataset->getResults(new DataSetRequest([
             'limit'      => 10,
             'orderBy'    => 'name',
             'orderDir'   => 'asc',
             'conditions' => $conditions
         ]));
+
+        $this->get('category_products.provider')->setCurrentResource($results);
 
         return [
             'dataset' => $results

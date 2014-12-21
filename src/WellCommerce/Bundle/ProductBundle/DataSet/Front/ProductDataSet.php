@@ -35,8 +35,9 @@ class ProductDataSet extends AbstractDataSet implements DataSetInterface
         ]));
 
         $collection->add(new Column([
-            'alias'  => 'name',
-            'source' => 'product_translation.name'
+            'alias'    => 'name',
+            'source'   => 'product_translation.name',
+            'sortable' => true
         ]));
 
         $collection->add(new Column([
@@ -55,8 +56,8 @@ class ProductDataSet extends AbstractDataSet implements DataSetInterface
         ]));
 
         $collection->add(new Column([
-            'alias'  => 'price',
-            'source' => 'product.sellPrice'
+            'alias'    => 'price',
+            'source'   => 'product.sellPrice',
         ]));
 
         $collection->add(new Column([
@@ -65,8 +66,8 @@ class ProductDataSet extends AbstractDataSet implements DataSetInterface
         ]));
 
         $collection->add(new Column([
-            'alias'  => 'stock',
-            'source' => 'product.stock',
+            'alias'    => 'stock',
+            'source'   => 'product.stock',
         ]));
 
         $collection->add(new Column([

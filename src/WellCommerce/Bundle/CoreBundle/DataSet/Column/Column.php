@@ -28,6 +28,7 @@ class Column extends AbstractColumn implements ColumnInterface
             'alias',
             'source',
             'aggregated',
+            'sortable',
         ]);
 
         $resolver->setOptional([
@@ -35,7 +36,8 @@ class Column extends AbstractColumn implements ColumnInterface
         ]);
 
         $resolver->setDefaults([
-            'aggregated' => false
+            'aggregated' => false,
+            'sortable'   => false
         ]);
 
         $resolver->setAllowedTypes([
@@ -73,6 +75,14 @@ class Column extends AbstractColumn implements ColumnInterface
     public function isAggregated()
     {
         return $this->options['aggregated'];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isSortable()
+    {
+        return $this->options['sortable'];
     }
 
     /**

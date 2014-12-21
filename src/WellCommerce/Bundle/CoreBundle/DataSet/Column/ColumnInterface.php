@@ -37,14 +37,21 @@ interface ColumnInterface
     /**
      * Returns true if column uses aggregation
      *
-     * @return string
+     * @return bool
      */
     public function isAggregated();
 
     /**
+     * Returns true if column is sortable, false otherwise
+     *
+     * @return bool
+     */
+    public function isSortable();
+
+    /**
      * Returns select clause with column alias
      *
-     * @return mixed
+     * @return string
      */
     public function getRawSelect();
 

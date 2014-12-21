@@ -48,6 +48,11 @@ class CategoryProvider implements CategoryProviderInterface
         $this->repository = $repository;
     }
 
+    public function getType()
+    {
+        return 'category';
+    }
+
     public function getTree()
     {
 
@@ -77,6 +82,9 @@ class CategoryProvider implements CategoryProviderInterface
         $this->resource = $resource;
     }
 
+    /**
+     * @return Category
+     */
     public function getCurrentResource()
     {
         return $this->resource;

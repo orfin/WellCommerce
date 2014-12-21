@@ -16,8 +16,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use WellCommerce\Bundle\CoreBundle\Event\ResourceEvent;
 use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
-use WellCommerce\Bundle\CoreBundle\Provider\ProviderAwareInterface;
-use WellCommerce\Bundle\CoreBundle\Provider\ProviderInterface;
+use WellCommerce\Bundle\CoreBundle\Provider\ProviderCollection;
 
 /**
  * Class AbstractFrontManager
@@ -25,27 +24,35 @@ use WellCommerce\Bundle\CoreBundle\Provider\ProviderInterface;
  * @package WellCommerce\Bundle\CoreBundle\Manager\Front
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AbstractFrontManager extends AbstractManager implements FrontManagerInterface, ProviderAwareInterface
+class AbstractFrontManager extends AbstractManager implements FrontManagerInterface
 {
     /**
-     * @var ProviderInterface
+     * @var ProviderCollection
      */
-    protected $provider;
+    protected $providers;
 
     /**
      * {@inheritdoc}
      */
-    public function setProvider(ProviderInterface $provider)
+    public function setProviders(ProviderCollection $collection)
     {
-        $this->provider = $provider;
+        $this->providers = $collection;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getProvider()
+    public function getProviders()
     {
-        return $this->provider;
+        return $this->providers;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getProvider($type)
+    {
+        return $this->providers->get($type);
     }
 
     /**

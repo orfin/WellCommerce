@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\CoreBundle\Manager\Front;
 
 use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
-use WellCommerce\Bundle\CoreBundle\Provider\ProviderInterface;
+use WellCommerce\Bundle\CoreBundle\Provider\ProviderCollection;
 
 /**
  * Interface FrontManagerInterface
@@ -31,16 +31,25 @@ interface FrontManagerInterface extends ManagerInterface
     public function getRepository();
 
     /**
-     * Sets category provider
+     * Sets providers collection
      *
-     * @param ProviderInterface $provider
+     * @param ProviderCollection $providers
      */
-    public function setProvider(ProviderInterface $provider);
+    public function setProviders(ProviderCollection $providers);
 
     /**
-     * Returns category provider
+     * Returns providers collection
      *
-     * @return ProviderInterface
+     * @return ProviderCollection
      */
-    public function getProvider();
+    public function getProviders();
+
+    /**
+     * Returns single provider by type
+     *
+     * @param $type
+     *
+     * @return \WellCommerce\Bundle\CoreBundle\Provider\ProviderInterface
+     */
+    public function getProvider($type);
 }
