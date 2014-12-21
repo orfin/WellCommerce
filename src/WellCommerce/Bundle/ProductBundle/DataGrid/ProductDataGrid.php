@@ -14,10 +14,12 @@ namespace WellCommerce\Bundle\ProductBundle\DataGrid;
 use WellCommerce\Bundle\CoreBundle\DataGrid\AbstractDataGrid;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Column\Column;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnCollection;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Column\Options\Appearance;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Column\Options\Filter;
+use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\EventHandler\ClickRowEventHandler;
+use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\EventHandler\UpdateRowEventHandler;
 use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
+use WellCommerce\Bundle\CoreBundle\DataGrid\Options\OptionsInterface;
 
 /**
  * Class ProductDataGrid
@@ -30,11 +32,10 @@ class ProductDataGrid extends AbstractDataGrid implements DataGridInterface
     /**
      * {@inheritdoc}
      */
-    public function addColumns(ColumnCollection $collection)
+    public function configureColumns(ColumnCollection $collection)
     {
         $collection->add(new Column([
             'id'         => 'id',
-            'source'     => 'product.id',
             'caption'    => $this->trans('product.id'),
             'appearance' => new Appearance([
                 'width'   => 90,
@@ -47,7 +48,6 @@ class ProductDataGrid extends AbstractDataGrid implements DataGridInterface
 
         $collection->add(new Column([
             'id'         => 'name',
-            'source'     => 'product_translation.name',
             'caption'    => $this->trans('product.name.label'),
             'appearance' => new Appearance([
                 'width' => 70,
@@ -59,7 +59,6 @@ class ProductDataGrid extends AbstractDataGrid implements DataGridInterface
 
         $collection->add(new Column([
             'id'         => 'sellPrice',
-            'source'     => 'product.sellPrice',
             'caption'    => $this->trans('product.sell_price.label'),
             'editable'   => true,
             'appearance' => new Appearance([
@@ -72,7 +71,6 @@ class ProductDataGrid extends AbstractDataGrid implements DataGridInterface
 
         $collection->add(new Column([
             'id'         => 'stock',
-            'source'     => 'product.stock',
             'caption'    => $this->trans('product.stock.label'),
             'editable'   => true,
             'appearance' => new Appearance([
@@ -81,6 +79,21 @@ class ProductDataGrid extends AbstractDataGrid implements DataGridInterface
             'filter'     => new Filter([
                 'type' => Filter::FILTER_BETWEEN
             ])
+        ]));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function configureOptions(OptionsInterface $options)
+    {
+        parent::configureOptions($options);
+
+        $eventHandlers = $options->getEventHandlers();
+
+        $eventHandlers->add(new UpdateRowEventHandler([
+            'function' => $this->getJavascriptFunctionName('update'),
+            'route'    => $this->getRouteForAction('update')
         ]));
     }
 }
