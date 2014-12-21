@@ -29,6 +29,8 @@ use WellCommerce\Bundle\RoutingBundle\Repository\RouteRepositoryInterface;
  */
 class RouteProvider implements RouteProviderInterface
 {
+    const DYNAMIC_PREFIX = 'dynamic_';
+
     /**
      * Collection of route generators available in collection
      *
@@ -71,7 +73,7 @@ class RouteProvider implements RouteProviderInterface
             $route = $this->createRoute($resource);
 
             $collection->add(
-                sprintf('%s_%s', $resource->getStrategy(), $resource->getId()),
+                self::DYNAMIC_PREFIX . $resource->getId(),
                 $route
             );
         }
@@ -102,8 +104,10 @@ class RouteProvider implements RouteProviderInterface
      *
      * @return SymfonyRoute
      */
-    public function getRouteByName($id)
+    public function getRouteByName($identifier)
     {
+        $id = str_replace(self::DYNAMIC_PREFIX, '', $identifier);
+
         $resource = $this->repository->find($id);
 
         if (!$resource) {
