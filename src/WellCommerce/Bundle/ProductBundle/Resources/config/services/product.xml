@@ -42,13 +42,17 @@
             <argument>WellCommerceProductBundle:Product</argument>
         </service>
 
-        <service id="product.dataset.query_builder" class="WellCommerce\Bundle\ProductBundle\DataSet\ProductDataSetQueryBuilder" public="false">
+        <service id="product.dataset.query_builder.admin" class="WellCommerce\Bundle\ProductBundle\DataSet\ProductDataSetQueryBuilder" public="false">
+            <argument type="service" id="product.repository"/>
+        </service>
+
+        <service id="product.dataset.query_builder.front" class="WellCommerce\Bundle\ProductBundle\DataSet\Front\ProductDataSetQueryBuilder" public="false">
             <argument type="service" id="product.repository"/>
         </service>
 
         <service id="product.dataset.admin" class="WellCommerce\Bundle\ProductBundle\DataSet\Admin\ProductDataSet">
             <argument key="identifier">product</argument>
-            <argument type="service" id="product.dataset.query_builder"/>
+            <argument type="service" id="product.dataset.query_builder.admin"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -56,7 +60,7 @@
 
         <service id="product.dataset.front" class="WellCommerce\Bundle\ProductBundle\DataSet\Front\ProductDataSet">
             <argument key="identifier">product</argument>
-            <argument type="service" id="product.dataset.query_builder"/>
+            <argument type="service" id="product.dataset.query_builder.front"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -96,8 +100,5 @@
             <argument type="collection" key="requirements" />
             <tag name="route.generator" />
         </service>
-
-        <service id="product.collection.processor" class="WellCommerce\Bundle\ProductBundle\Collection\Processor\ProductCollectionProcessor" />
-
     </services>
 </container>

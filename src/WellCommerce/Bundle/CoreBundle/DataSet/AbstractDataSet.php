@@ -51,7 +51,7 @@ abstract class AbstractDataSet extends ContainerAware
     /**
      * Constructor
      *
-     * @param                       $identifier
+     * @param string                $identifier
      * @param QueryBuilderInterface $queryBuilder
      */
     public function __construct(

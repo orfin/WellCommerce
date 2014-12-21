@@ -22,26 +22,22 @@ use WellCommerce\Bundle\CoreBundle\DataSet\Request\DataSetRequest;
 /**
  * Class CategoryProductsBoxController
  *
- * @package WellCommerce\Bundle\CategoryBundle\Controller\Box
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class CategoryProductsBoxController extends AbstractBoxController implements BoxControllerInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function indexAction(Request $request)
     {
-        $currentCategory = $this->get('category.provider')->getCurrentResource();
-        $conditions      = new ConditionsCollection();
-        $conditions->add(new Condition\Eq('category', $currentCategory->getId()));
-
-        $dataset = $this->get('product.dataset.front');
-
-        $results = $dataset->getResults(new DataSetRequest([
+        $results = $this->get('product.dataset.front')->getResults(new DataSetRequest([
             'limit'      => 10,
             'orderBy'    => 'name',
             'orderDir'   => 'asc',
-            'conditions' => $conditions
+            'conditions' => $this->getConditions()
         ]));
 
         $this->get('category_products.provider')->setCurrentResource($results);
@@ -49,5 +45,28 @@ class CategoryProductsBoxController extends AbstractBoxController implements Box
         return [
             'dataset' => $results
         ];
+    }
+
+    /**
+     * Returns a collection of dynamic conditions
+     *
+     * @return ConditionsCollection
+     */
+    private function getConditions()
+    {
+        $conditions = new ConditionsCollection();
+        $conditions->add(new Condition\Eq('category', $this->getCurrentCategoryId()));
+
+        return $conditions;
+    }
+
+    /**
+     * Returns current category id from provider service
+     *
+     * @return int
+     */
+    private function getCurrentCategoryId()
+    {
+        return $this->get('category.provider')->getCurrentResource()->getId();
     }
 }

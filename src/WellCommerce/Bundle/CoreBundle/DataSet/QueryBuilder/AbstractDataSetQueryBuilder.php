@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\CoreBundle\DataSet\QueryBuilder;
 
 use Doctrine\ORM\Query\Expr;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use WellCommerce\Bundle\CoreBundle\DataSet\Column\ColumnCollection;
 use WellCommerce\Bundle\CoreBundle\DataSet\Conditions\ConditionInterface;
@@ -27,11 +28,6 @@ use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\DataSetAwareRepositoryInterface;
  */
 abstract class AbstractDataSetQueryBuilder
 {
-    /**
-     * @var string
-     */
-    protected $identifier;
-
     /**
      * @var DataSetAwareRepositoryInterface
      */
@@ -74,8 +70,34 @@ abstract class AbstractDataSetQueryBuilder
      */
     public function __construct(DataSetAwareRepositoryInterface $repository)
     {
-        $this->identifier   = $repository->getAlias();
-        $this->queryBuilder = $repository->getDataSetQueryBuilder();
+        $this->repository   = $repository;
+        $this->queryBuilder = $this->getQueryBuilder();
+    }
+
+    /**
+     * Returns dataset identifier from repository
+     *
+     * @return string
+     */
+    protected function getIdentifier()
+    {
+        return $this->repository->getAlias();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getQueryBuilder()
+    {
+        return $this->repository->getDataSetQueryBuilder();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getQuery()
+    {
+        return $this->queryBuilder->getQuery();
     }
 
     /**
@@ -147,22 +169,6 @@ abstract class AbstractDataSetQueryBuilder
     /**
      * {@inheritdoc}
      */
-    public function getQueryBuilder()
-    {
-        return $this->queryBuilder;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getQuery()
-    {
-        return $this->queryBuilder->getQuery();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getTotalRows()
     {
         $paginator = new Paginator($this->getQuery());
@@ -175,13 +181,14 @@ abstract class AbstractDataSetQueryBuilder
      */
     public function getResult()
     {
+        $this->addQueryBuilderRestrictions($this->queryBuilder);
         $this->queryBuilder->select($this->columns->getColumnsSelectClause());
         $this->queryBuilder->setFirstResult($this->offset);
         $this->queryBuilder->setMaxResults($this->limit);
         $this->queryBuilder->addOrderBy(new Expr\OrderBy($this->orderBy, $this->orderDir));
 
         $query = $this->queryBuilder->getQuery();
-        $query->useResultCache(true, 3600, $this->identifier);
+        $query->useResultCache(true, 3600, $this->getIdentifier());
 
         return $query->getArrayResult();
     }
