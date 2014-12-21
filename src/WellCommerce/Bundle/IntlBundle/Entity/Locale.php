@@ -14,42 +14,32 @@ namespace WellCommerce\Bundle\IntlBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\Timestampable\TimestampableTrait;
 
 /**
  * Class Locale
  *
- * @package WellCommerce\Bundle\IntlBundle\Entity
- * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @ORM\Table()
- * @ORM\HasLifecycleCallbacks
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\IntlBundle\Repository\LocaleRepository")
+ * @author Adam Piotrowski <adam@wellcommerce.org>
  */
 class Locale
 {
-    use ORMBehaviors\Timestampable\Timestampable;
+    use TimestampableTrait;
     use ORMBehaviors\Blameable\Blameable;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="code", type="string")
      */
     private $code;
 
     /**
-     * Get id.
+     * Returns primary key
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -57,7 +47,7 @@ class Locale
     }
 
     /**
-     * Get code.
+     * Returns locale code
      *
      * @return string
      */
@@ -67,17 +57,13 @@ class Locale
     }
 
     /**
-     * Set code.
+     * Sets locale code
      *
-     * @param string $code
-     *
-     * @return Locale
+     * @param $code
      */
     public function setCode($code)
     {
         $this->code = $code;
-
-        return $this;
     }
 }
 

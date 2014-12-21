@@ -20,7 +20,6 @@ namespace WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours;
  */
 trait AddressTrait
 {
-
     /**
      * @var string
      *

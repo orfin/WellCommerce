@@ -43,9 +43,11 @@ class LocaleSubscriber extends AbstractEventSubscriber
             $request->getSession()->set('_locale', $locale);
             $filter->setParameter('locale', $locale);
         } else {
-            $currentLocale = $request->getSession()->get('_locale', $request->getDefaultLocale());
-            $request->setLocale($currentLocale);
-            $filter->setParameter('locale', $currentLocale);
+            if ($request->hasSession()) {
+                $currentLocale = $request->getSession()->get('_locale', $request->getDefaultLocale());
+                $request->setLocale($currentLocale);
+                $filter->setParameter('locale', $currentLocale);
+            }
         }
     }
 

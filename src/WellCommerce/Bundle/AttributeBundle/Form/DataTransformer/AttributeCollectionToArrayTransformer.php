@@ -18,8 +18,7 @@ use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransfo
 /**
  * Class AttributeCollectionToArrayTransformer
  *
- * @package WellCommerce\Bundle\AttributeBundle\Form\DataTransformer
- * @author  Adam Piotrowski <adam@wellcommerce.org>
+ * @author Adam Piotrowski <adam@wellcommerce.org>
  */
 class AttributeCollectionToArrayTransformer extends CollectionToArrayTransformer
 {

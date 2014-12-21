@@ -19,8 +19,7 @@ use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
 /**
  * Class AttributeGroupForm
  *
- * @package WellCommerce\Bundle\AttributeBundle\Form
- * @author  Adam Piotrowski <adam@wellcommerce.org>
+ * @author Adam Piotrowski <adam@wellcommerce.org>
  */
 class AttributeGroupForm extends AbstractForm implements FormInterface
 {

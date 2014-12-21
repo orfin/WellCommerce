@@ -11,8 +11,6 @@
  */
 namespace WellCommerce\Bundle\AttributeBundle\Repository;
 
-use Symfony\Component\HttpFoundation\ParameterBag;
-use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroup;
 use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 
 /**
@@ -28,7 +26,7 @@ class AttributeGroupRepository extends AbstractEntityRepository implements Attri
      */
     public function findAll()
     {
-        $qb = parent::getQueryBuilder()
+        $qb     = parent::getQueryBuilder()
             ->addSelect('attribute_group.id, attribute_group_translation.name')
             ->leftJoin(
                 'WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupTranslation',

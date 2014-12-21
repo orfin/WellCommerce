@@ -24,6 +24,10 @@
             <tag name="kernel.event_subscriber" />
         </service>
 
+        <service id="doctrine.orm.timestampable.subscriber" class="WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\Timestampable\TimestampableSubscriber">
+            <tag name="doctrine.event_subscriber" />
+        </service>
+
         <!--<service id="doctrine.metadata.subscriber" class="WellCommerce\Bundle\CoreBundle\Doctrine\ORM\LoadMetadataSubscriber">-->
             <!--<argument>%sylius.config.classes%</argument>-->
             <!--<tag name="doctrine.event_subscriber" />-->

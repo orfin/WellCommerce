@@ -14,38 +14,32 @@ namespace WellCommerce\Bundle\IntlBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\Timestampable\TimestampableTrait;
 
 /**
- * Currency
+ * Class Currency
  *
- * @ORM\Table("currency")
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\IntlBundle\Repository\CurrencyRepository")
+ * @author Adam Piotrowski <adam@wellcommerce.org>
  */
 class Currency
 {
-    use ORMBehaviors\Timestampable\Timestampable;
+    use TimestampableTrait;
     use ORMBehaviors\Blameable\Blameable;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @var int
      */
     private $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="code", type="string", length=12)
      */
     private $code;
 
     /**
-     * Get id.
+     * Returns primary key
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -53,7 +47,7 @@ class Currency
     }
 
     /**
-     * Get code.
+     * Returns currency code
      *
      * @return string
      */
@@ -63,17 +57,15 @@ class Currency
     }
 
     /**
-     * Set code.
+     * Sets currency code
      *
-     * @param string $code
+     * @param $code
      *
-     * @return Currency
+     * @return $this
      */
     public function setCode($code)
     {
         $this->code = $code;
-
-        return $this;
     }
 }
 

@@ -15,8 +15,7 @@ namespace WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours;
 /**
  * Class EnableableTrait
  *
- * @package WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours
- * @author  Adam Piotrowski <adam@wellcommerce.org>
+ * @author Adam Piotrowski <adam@wellcommerce.org>
  */
 trait EnableableTrait
 {
