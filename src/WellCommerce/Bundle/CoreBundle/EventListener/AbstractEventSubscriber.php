@@ -26,7 +26,7 @@ use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
  * @package WellCommerce\Bundle\CoreBundle\EventListener
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AbstractEventSubscriber extends AbstractContainer implements EventSubscriberInterface
+abstract class AbstractEventSubscriber extends AbstractContainer implements EventSubscriberInterface
 {
     /**
      * @var TranslatorInterface

@@ -33,11 +33,6 @@ class AttributeTranslation implements LocaleAwareInterface
      */
     private $name;
 
-    /**
-     * Returns translation ID.
-     *
-     * @return integer The ID.
-     */
     public function getId()
     {
         return $this->id;
@@ -51,8 +46,6 @@ class AttributeTranslation implements LocaleAwareInterface
     public function setName($name)
     {
         $this->name = $name;
-
-        return $this;
     }
 }
 
