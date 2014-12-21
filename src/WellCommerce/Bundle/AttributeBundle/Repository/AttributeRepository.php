@@ -11,6 +11,7 @@
  */
 namespace WellCommerce\Bundle\AttributeBundle\Repository;
 
+use WellCommerce\Bundle\AttributeBundle\Entity\Attribute;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroup;
 use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 
@@ -91,7 +92,7 @@ class AttributeRepository extends AbstractEntityRepository implements AttributeR
     public function createNewAttribute(AttributeGroup $group, $name)
     {
         $locales   = $this->getLocales();
-        $attribute = $this->createNew();
+        $attribute = new Attribute();
         $attribute->addGroup($group);
 
         foreach ($locales as $locale) {
