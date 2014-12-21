@@ -39,17 +39,24 @@
             <argument>WellCommerceProducerBundle:Producer</argument>
         </service>
 
-        <service id="producer.datagrid" class="WellCommerce\Bundle\ProducerBundle\DataGrid\ProducerDataGrid">
+        <service id="producer.dataset.query_builder" class="WellCommerce\Bundle\ProducerBundle\DataSet\ProducerDataSetQueryBuilder" public="false">
+            <argument type="service" id="producer.repository"/>
+        </service>
+
+        <service id="producer.dataset" class="WellCommerce\Bundle\ProducerBundle\DataSet\ProducerDataSet">
+            <argument key="identifier">producer</argument>
+            <argument type="service" id="producer.dataset.query_builder"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
-            <configurator service="producer.datagrid.configurator" method="configure" />
         </service>
 
-        <service id="producer.datagrid.configurator" class="WellCommerce\Bundle\ProducerBundle\DataGrid\ProducerDataGridConfigurator">
+        <service id="producer.datagrid" class="WellCommerce\Bundle\ProducerBundle\DataGrid\ProducerDataGrid">
             <argument key="identifier">producer</argument>
-            <argument type="service" id="datagrid_manager"/>
-            <argument type="service" id="producer.repository"/>
+            <argument type="service" id="producer.dataset"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
         </service>
 
         <service id="producer.form" class="WellCommerce\Bundle\ProducerBundle\Form\ProducerForm">
