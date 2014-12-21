@@ -66,17 +66,24 @@
             <argument>WellCommerceCmsBundle:Page</argument>
         </service>
 
-        <service id="page.datagrid" class="WellCommerce\Bundle\CmsBundle\DataGrid\PageDataGrid">
+        <service id="page.dataset.query_builder" class="WellCommerce\Bundle\CmsBundle\DataSet\PageDataSetQueryBuilder" public="false">
+            <argument type="service" id="page.repository"/>
+        </service>
+ 
+        <service id="page.dataset" class="WellCommerce\Bundle\CmsBundle\DataSet\PageDataSet">
+            <argument key="identifier">page</argument>
+            <argument type="service" id="page.dataset.query_builder"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
-            <configurator service="page.datagrid.configurator" method="configure" />
         </service>
 
-        <service id="page.datagrid.configurator" class="WellCommerce\Bundle\CmsBundle\DataGrid\PageDataGridConfigurator">
+        <service id="page.datagrid" class="WellCommerce\Bundle\CmsBundle\DataGrid\PageDataGrid">
             <argument key="identifier">page</argument>
-            <argument type="service" id="datagrid_manager"/>
-            <argument type="service" id="page.repository"/>
+            <argument type="service" id="page.dataset"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
         </service>
 
         <service id="page.form" class="WellCommerce\Bundle\CmsBundle\Form\PageForm">
