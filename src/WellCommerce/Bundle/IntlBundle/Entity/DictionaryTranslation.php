@@ -17,9 +17,10 @@ use Knp\DoctrineBehaviors\Model\Translatable\Translation;
 use WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface;
 
 /**
- * Class DictionaryTranslation
+ * DictionaryTranslation
  *
- * @author Adam Piotrowski <adam@wellcommerce.org>
+ * @ORM\Table(name="dictionary_translation")
+ * @ORM\Entity
  */
 class DictionaryTranslation implements LocaleAwareInterface
 {
@@ -27,6 +28,8 @@ class DictionaryTranslation implements LocaleAwareInterface
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="translation", type="string", length=255)
      */
     private $translation;
 
@@ -56,4 +59,3 @@ class DictionaryTranslation implements LocaleAwareInterface
         $this->translation = $translation;
     }
 }
-

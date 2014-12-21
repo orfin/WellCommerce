@@ -13,26 +13,33 @@
 namespace WellCommerce\Bundle\IntlBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
-use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\Timestampable\TimestampableTrait;
 
 /**
- * Class Dictionary
+ * Dictionary
  *
- * @author Adam Piotrowski <adam@wellcommerce.org>
+ * @ORM\Table(name="dictionary", uniqueConstraints={@ORM\UniqueConstraint(name="dictionary_unique_idx", columns={"identifier"})})
+ * @ORM\Entity(repositoryClass="WellCommerce\Bundle\IntlBundle\Repository\DictionaryRepository")
  */
 class Dictionary
 {
-    use TimestampableTrait;
+    use Timestampable;
     use Translatable;
 
     /**
      * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="identifier", type="string", length=255)
      */
     private $identifier;
 
@@ -60,4 +67,3 @@ class Dictionary
         $this->identifier = $identifier;
     }
 }
-
