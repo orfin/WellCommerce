@@ -25,6 +25,7 @@ class MoneyExtension extends \Twig_Extension
     {
         return [
             new \Twig_SimpleFunction('money', [$this, 'getMoney'], ['is_safe' => ['html']]),
+            new \Twig_SimpleFunction('price', [$this, 'formatPrice'], ['is_safe' => ['html']]),
         ];
     }
 
@@ -38,6 +39,18 @@ class MoneyExtension extends \Twig_Extension
     public function getMoney(Money $money)
     {
         return $money->getAmount();
+    }
+
+    public function formatPrice($price, $currency)
+    {
+        $formatter = new \NumberFormatter(\Locale::getDefault(), \NumberFormatter::CURRENCY);
+
+        if (false === $result = $formatter->formatCurrency($price, $currency)) {
+            $e = sprintf('Cannot format price with amount "%s" and currency "%s"', $price, $currency);
+            throw new \InvalidArgumentException($e);
+        }
+
+        return $formatter->formatCurrency($price, $currency);
     }
 
     /**

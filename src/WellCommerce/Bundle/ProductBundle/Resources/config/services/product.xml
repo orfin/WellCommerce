@@ -46,7 +46,15 @@
             <argument type="service" id="product.repository"/>
         </service>
 
-        <service id="product.dataset" class="WellCommerce\Bundle\ProductBundle\DataSet\ProductDataSet">
+        <service id="product.dataset.admin" class="WellCommerce\Bundle\ProductBundle\DataSet\Admin\ProductDataSet">
+            <argument key="identifier">product</argument>
+            <argument type="service" id="product.dataset.query_builder"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="product.dataset.front" class="WellCommerce\Bundle\ProductBundle\DataSet\Front\ProductDataSet">
             <argument key="identifier">product</argument>
             <argument type="service" id="product.dataset.query_builder"/>
             <call method="setContainer">
@@ -56,7 +64,7 @@
 
         <service id="product.datagrid" class="WellCommerce\Bundle\ProductBundle\DataGrid\ProductDataGrid">
             <argument key="identifier">product</argument>
-            <argument type="service" id="product.dataset"/>
+            <argument type="service" id="product.dataset.admin"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

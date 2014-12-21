@@ -12,12 +12,8 @@
 
 namespace WellCommerce\Bundle\CompanyBundle\Controller\Admin;
 
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
-use WellCommerce\Bundle\CoreBundle\DataSet\Conditions\Condition;
-use WellCommerce\Bundle\CoreBundle\DataSet\Conditions\ConditionsCollection;
-use WellCommerce\Bundle\CoreBundle\DataSet\Request\DataSetRequest;
 
 /**
  * Class CompanyController
@@ -36,22 +32,5 @@ class CompanyController extends AbstractAdminController
         return [
             'datagrid' => $datagrid->getInstance()
         ];
-//
-//        die();
-
-        $conditions = new ConditionsCollection();
-        $conditions->add(new Condition\Lt('id', 2));
-        $conditions->add(new Condition\Like('name', 'G%'));
-
-        $results = $this->get('company.dataset')->getResults(new DataSetRequest([
-            'limit'      => 10,
-            'orderBy'    => 'shortName',
-            'orderDir'   => 'asc',
-            'conditions' => $conditions
-        ]));
-
-        print_r($results);
-
-        die();
     }
 }

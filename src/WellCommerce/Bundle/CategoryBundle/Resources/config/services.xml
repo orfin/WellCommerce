@@ -116,19 +116,14 @@
             <argument type="collection" key="defaults">
                 <argument key="_controller">category.controller.front:indexAction</argument>
                 <argument key="page">1</argument>
-                <argument key="sort">1</argument>
+                <argument key="orderBy">null</argument>
+                <argument key="orderDir">null</argument>
             </argument>
             <argument type="collection" key="requirements">
                 <argument key="page">\d{1,10}</argument>
-                <argument key="sort">asc|desc</argument>
+                <argument key="orderDir">asc|desc</argument>
             </argument>
             <tag name="route.generator" />
-        </service>
-
-        <service id="category.products.collection" class="WellCommerce\Bundle\CategoryBundle\Collection\CategoryProductsCollection">
-            <argument type="service" id="category.repository"/>
-            <argument type="service" id="product.collection.processor"/>
-            <argument type="service" id="event_dispatcher"/>
         </service>
 
         <service id="category_products.layout_box.controller" class="WellCommerce\Bundle\CategoryBundle\Controller\Box\CategoryProductsBoxController">

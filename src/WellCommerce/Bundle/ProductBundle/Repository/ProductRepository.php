@@ -22,22 +22,13 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
  */
 class ProductRepository extends AbstractEntityRepository implements ProductRepositoryInterface
 {
-    public function getProductCollectionQueryBuilder()
+    public function getDataSetQueryBuilder()
     {
         $queryBuilder = $this->getQueryBuilder();
-        $queryBuilder->select([
-            'product',
-            'currency',
-            'gallery',
-            'photos',
-            'translations',
-            'routes',
-
-        ]);
         $queryBuilder->groupBy('product.id');
-        $queryBuilder->leftJoin('product.translations', 'translations');
-        $queryBuilder->leftJoin('product.sellCurrency', 'currency');
-        $queryBuilder->leftJoin('translations.route', 'routes');
+        $queryBuilder->leftJoin('product.translations', 'product_translation');
+        $queryBuilder->leftJoin('product.categories', 'categories');
+        $queryBuilder->leftJoin('product.sellCurrency', 'sell_currency');
         $queryBuilder->leftJoin('product.productPhotos', 'gallery', Expr\Join::WITH, 'gallery.mainPhoto = :mainPhoto');
         $queryBuilder->leftJoin('gallery.photo', 'photos');
         $queryBuilder->leftJoin('product.statuses', 'statuses');

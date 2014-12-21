@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ProductBundle\DataSet;
+namespace WellCommerce\Bundle\ProductBundle\DataSet\Admin;
 
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Bundle\CoreBundle\DataSet\Column\Column;
@@ -18,11 +18,11 @@ use WellCommerce\Bundle\CoreBundle\DataSet\Column\ColumnCollection;
 use WellCommerce\Bundle\CoreBundle\DataSet\DataSetInterface;
 
 /**
- * Class ProductStatusDataSet
+ * Class ProductDataSet
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductStatusDataSet extends AbstractDataSet implements DataSetInterface
+class ProductDataSet extends AbstractDataSet implements DataSetInterface
 {
     /**
      * {@inheritdoc}
@@ -31,12 +31,22 @@ class ProductStatusDataSet extends AbstractDataSet implements DataSetInterface
     {
         $collection->add(new Column([
             'alias'  => 'id',
-            'source' => 'product_status.id'
+            'source' => 'product.id'
         ]));
 
         $collection->add(new Column([
             'alias'  => 'name',
-            'source' => 'product_status_translation.name'
+            'source' => 'product_translation.name'
+        ]));
+
+        $collection->add(new Column([
+            'alias'  => 'sellPrice',
+            'source' => 'product.sellPrice'
+        ]));
+
+        $collection->add(new Column([
+            'alias'  => 'stock',
+            'source' => 'product.stock',
         ]));
     }
 }

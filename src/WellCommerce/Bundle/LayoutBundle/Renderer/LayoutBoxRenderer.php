@@ -164,7 +164,7 @@ class LayoutBoxRenderer extends AbstractContainer implements LayoutBoxRendererIn
     {
         return [
             'id'       => $box->getIdentifier(),
-            'settings' => array_merge_recursive($box->getSettings(), $params)
+//            'settings' => array_merge_recursive($box->getSettings(), $params)
         ];
     }
 } 

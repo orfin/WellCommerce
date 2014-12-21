@@ -15,6 +15,11 @@ namespace WellCommerce\Bundle\CategoryBundle\Controller\Box;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
+use WellCommerce\Bundle\CoreBundle\DataSet\Conditions\Condition;
+use WellCommerce\Bundle\CoreBundle\DataSet\Conditions\ConditionsCollection;
+use WellCommerce\Bundle\CoreBundle\DataSet\Request\DataSetRequest;
+use WellCommerce\Bundle\ProductBundle\Collection\Item;
+use WellCommerce\Bundle\ProductBundle\Collection\ProductCollection;
 
 /**
  * Class CategoryProductsBoxController
@@ -28,15 +33,18 @@ class CategoryProductsBoxController extends AbstractBoxController implements Box
 {
     public function indexAction(Request $request)
     {
-        $collection = $this->get('category.products.collection');
-        $collection->setCurrentPage(1);
-        $collection->setOrderBy('translations.name');
-        $collection->setOrderDir('asc');
+        $conditions = new ConditionsCollection();
+        $conditions->add(new Condition\Eq('category', 4));
 
-        print_r($collection->getResults($request));
+        $results = $this->get('product.dataset.front')->getResults(new DataSetRequest([
+            'limit'      => 10,
+            'orderBy'    => 'name',
+            'orderDir'   => 'asc',
+            'conditions' => $conditions
+        ]));
 
         return [
-            'products' => $collection->getResults($request)
+            'dataset' => $results
         ];
     }
-} 
+}
