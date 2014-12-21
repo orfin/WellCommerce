@@ -61,22 +61,20 @@ class RouteProvider implements RouteProviderInterface
      */
     public function getRouteCollectionForRequest(Request $request)
     {
+        $collection = new RouteCollection();
         $path       = $this->getNormalizedPath($request);
         $resource   = $this->repository->findOneBy([
-            'path'   => $path
+            'path' => $path
         ]);
 
-        if (!$resource) {
-            throw new RouteNotFoundException(sprintf('No route found for path "/%s"', $path));
+        if ($resource) {
+            $route = $this->createRoute($resource);
+
+            $collection->add(
+                sprintf('%s_%s', $resource->getStrategy(), $resource->getId()),
+                $route
+            );
         }
-
-        $route      = $this->createRoute($resource);
-        $collection = new RouteCollection();
-
-        $collection->add(
-            sprintf('%s_%s', $resource->getStrategy(), $resource->getId()),
-            $route
-        );
 
         return $collection;
     }

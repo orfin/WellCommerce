@@ -20,14 +20,31 @@ namespace WellCommerce\Bundle\RoutingBundle\Entity;
  */
 interface RoutableSubjectInterface
 {
+    /**
+     * Returns locale for translation
+     *
+     * @return mixed
+     */
     public function getLocale();
 
+    /**
+     * Returns constraint identifier for translation
+     *
+     * @return mixed
+     */
     public function getTranslatable();
 
+    /**
+     * Returns slug
+     *
+     * @return string
+     */
     public function getSlug();
 
     /**
-     * @return \WellCommerce\Bundle\RoutingBundle\Entity\Route
+     * Returns a route bound to entity
+     *
+     * @return Route
      */
     public function getRoute();
 
@@ -38,5 +55,10 @@ interface RoutableSubjectInterface
      */
     public function setRoute(Route $route);
 
+    /**
+     * Returns strategy name used in route generation
+     *
+     * @return string
+     */
     public function getRouteGeneratorStrategy();
 } 

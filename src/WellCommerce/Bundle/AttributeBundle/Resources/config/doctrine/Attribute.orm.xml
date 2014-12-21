@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity repository-class="WellCommerce\Bundle\AttributeBundle\Repository\AttributeRepository" name="WellCommerce\Bundle\AttributeBundle\Entity\Attribute" table="attribute">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <one-to-many field="values" target-entity="WellCommerce\Bundle\AttributeBundle\Entity\AttributeValue" mapped-by="attribute" orphan-removal="true" fetch="LAZY">
+      <cascade>
+        <cascade-remove/>
+        <cascade-refresh/>
+      </cascade>
+    </one-to-many>
+    <many-to-many field="groups" target-entity="WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroup" mapped-by="attributes" fetch="LAZY"/>
+  </entity>
+</doctrine-mapping>
