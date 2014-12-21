@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\DelivererBundle\Repository;
 
+use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\DataSetAwareRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Repository\DataGridAwareRepositoryInterface;
 
 /**
  * Interface LocaleRepositoryInterface
@@ -21,7 +21,7 @@ use WellCommerce\Bundle\CoreBundle\DataGrid\Repository\DataGridAwareRepositoryIn
  * @package WellCommerce\Bundle\DelivererBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface DelivererRepositoryInterface extends RepositoryInterface, DataGridAwareRepositoryInterface
+interface DelivererRepositoryInterface extends RepositoryInterface, DataSetAwareRepositoryInterface
 {
 
 } 
