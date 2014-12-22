@@ -19,6 +19,7 @@ use Symfony\Component\Routing\Route as SymfonyRoute;
 use Symfony\Component\Routing\RouteCollection;
 use WellCommerce\Bundle\RoutingBundle\Entity\Route;
 use WellCommerce\Bundle\RoutingBundle\Generator\RouteGeneratorCollection;
+use WellCommerce\Bundle\RoutingBundle\Generator\RouteGeneratorInterface;
 use WellCommerce\Bundle\RoutingBundle\Repository\RouteRepositoryInterface;
 
 /**
@@ -131,6 +132,7 @@ class RouteProvider implements RouteProviderInterface
         /**
          * @var \WellCommerce\Bundle\RoutingBundle\Generator\RouteGeneratorInterface $generator
          */
+
         foreach ($this->generators as $generator) {
             if ($generator->supports($resource->getStrategy())) {
                 $route = $generator->generate($resource);

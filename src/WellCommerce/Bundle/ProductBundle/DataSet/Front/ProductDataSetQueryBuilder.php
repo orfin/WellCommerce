@@ -41,12 +41,19 @@ class ProductDataSetQueryBuilder extends AbstractDataSetQueryBuilder implements 
      */
     protected function addQueryBuilderRestrictions(QueryBuilder $queryBuilder)
     {
+        // show only enabled products
         $expression = $queryBuilder->expr()->eq('product.enabled', ':enabled1');
         $queryBuilder->andWhere($expression);
         $queryBuilder->setParameter('enabled1', true);
 
+        // show products only
         $expression = $queryBuilder->expr()->eq('categories.enabled', ':enabled2');
         $queryBuilder->andWhere($expression);
         $queryBuilder->setParameter('enabled2', true);
+
+        // show only products with prices greater than 0
+        $expression = $queryBuilder->expr()->gt('product.sellPrice', ':price');
+        $queryBuilder->andWhere($expression);
+        $queryBuilder->setParameter('price', 0);
     }
 }
