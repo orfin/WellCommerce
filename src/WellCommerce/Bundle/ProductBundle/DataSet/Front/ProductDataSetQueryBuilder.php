@@ -46,7 +46,7 @@ class ProductDataSetQueryBuilder extends AbstractDataSetQueryBuilder implements 
         $queryBuilder->andWhere($expression);
         $queryBuilder->setParameter('enabled1', true);
 
-        // show products only
+        // show products from enabled categories
         $expression = $queryBuilder->expr()->eq('categories.enabled', ':enabled2');
         $queryBuilder->andWhere($expression);
         $queryBuilder->setParameter('enabled2', true);

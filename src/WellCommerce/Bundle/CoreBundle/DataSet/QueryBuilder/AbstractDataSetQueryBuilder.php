@@ -181,7 +181,6 @@ abstract class AbstractDataSetQueryBuilder
      */
     public function getResult()
     {
-        $this->addQueryBuilderRestrictions($this->queryBuilder);
         $this->queryBuilder->select($this->columns->getColumnsSelectClause());
         $this->queryBuilder->setFirstResult($this->offset);
         $this->queryBuilder->setMaxResults($this->limit);

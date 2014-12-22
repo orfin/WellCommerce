@@ -171,7 +171,7 @@ abstract class AbstractDataSet extends ContainerAware
             'rows_num'      => $total,
             'starting_from' => $request->getOffset(),
             'total'         => $total,
-            'filtered'      => $total,
+            'filtered'      => count($rows),
             'rows'          => $rows
         ];
 

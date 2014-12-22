@@ -26,9 +26,13 @@ use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
  */
 class CategoryMenuBoxController extends AbstractBoxController implements BoxControllerInterface
 {
-
+    /**
+     * {@inheritdoc}
+     */
     public function indexAction(Request $request)
     {
-        return [];
+        return [
+            'active' => $this->get('category.provider')->getCurrentResource()->getId()
+        ];
     }
 } 
