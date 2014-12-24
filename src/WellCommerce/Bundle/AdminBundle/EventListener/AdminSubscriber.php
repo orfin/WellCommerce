@@ -33,6 +33,8 @@ use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
  */
 class AdminSubscriber extends AbstractEventSubscriber
 {
+    const ADMIN_MENU_SESSION_NAMESPACE = 'admin/menu';
+
     public static function getSubscribedEvents()
     {
         return [
@@ -48,19 +50,25 @@ class AdminSubscriber extends AbstractEventSubscriber
         }
 
         if (!$this->container->get('session')->has('admin/menu')) {
-
-            // parses xml file and adds items to menu
-            $builder = $this->container->get('admin_menu.builder');
-            $loader  = new XmlLoader($builder, new FileLocator(__DIR__ . '/../Resources/config'));
-            $loader->load('admin_menu.xml');
-
-            // propagates main event to other event subscribers to build the menu
+            $builder   = $this->initAdminMenuBuilder();
             $menuEvent = new AdminMenuEvent($builder);
-
             $dispatcher->dispatch(AdminMenuEvent::INIT_EVENT, $menuEvent);
-
-            // saves menu data in session
-            $this->container->get('session')->set('admin/menu', $menuEvent->getBuilder()->getMenu());
+            $menu = $menuEvent->getBuilder()->getMenu();
+            $this->container->get('session')->set(self::ADMIN_MENU_SESSION_NAMESPACE, $menu);
         }
+    }
+
+    /**
+     * Initializes admin menu builder and parses menu XML files
+     *
+     * @return \WellCommerce\Bundle\AdminBundle\MenuBuilder\AdminMenuBuilder
+     */
+    private function initAdminMenuBuilder()
+    {
+        $builder = $this->container->get('admin_menu.builder');
+        $loader  = new XmlLoader($builder, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader->load('admin_menu.xml');
+
+        return $builder;
     }
 }

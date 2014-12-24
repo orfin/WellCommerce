@@ -72,15 +72,4 @@ abstract class AbstractCollection implements \Countable, \IteratorAggregate
     {
         return $this->items[$key];
     }
-
-    public function forAll(\Closure $p)
-    {
-        foreach ($this->items as $key => $element) {
-            if ( ! $p($key, $element)) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-} 
+}
