@@ -54,12 +54,11 @@ class CategoryTreeBuilder
                 continue;
             }
             $categories[] = [
-                'id'       => $category['id'],
-                'name'     => $category['name'],
-                'slug'     => $category['slug'],
-                'link'     => $category['slug'],
-                'children' => $this->buildTree($category['id']),
-                'route'    => $category['route'],
+                'id'          => $category['id'],
+                'name'        => $category['name'],
+                'hasChildren' => $category['children'] > 0,
+                'children'    => $this->buildTree($category['id']),
+                'route'       => $category['route'],
             ];
         }
 

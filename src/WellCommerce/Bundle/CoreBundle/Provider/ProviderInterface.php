@@ -21,13 +21,6 @@ namespace WellCommerce\Bundle\CoreBundle\Provider;
 interface ProviderInterface
 {
     /**
-     * Returns provider type
-     *
-     * @return mixed
-     */
-    public function getType();
-
-    /**
      * Sets current providers resource
      *
      * @param $resource

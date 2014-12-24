@@ -12,16 +12,15 @@
 
 namespace WellCommerce\Bundle\TaxBundle\Repository;
 
+use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\DataSetAwareRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Repository\DataGridAwareRepositoryInterface;
 
 /**
- * Interface LocaleRepositoryInterface
+ * Interface TaxRepositoryInterface
  *
- * @package WellCommerce\Bundle\TaxBundle\Repository
- * @author  Adam Piotrowski <adam@wellcommerce.org>
+ * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-interface TaxRepositoryInterface extends RepositoryInterface, DataGridAwareRepositoryInterface
+interface TaxRepositoryInterface extends RepositoryInterface, DataSetAwareRepositoryInterface
 {
 
 } 

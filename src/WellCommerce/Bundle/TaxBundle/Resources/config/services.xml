@@ -33,17 +33,24 @@
             <argument>WellCommerceTaxBundle:Tax</argument>
         </service>
 
-        <service id="tax.datagrid" class="WellCommerce\Bundle\TaxBundle\DataGrid\TaxDataGrid">
+        <service id="tax.dataset.query_builder" class="WellCommerce\Bundle\TaxBundle\DataSet\TaxDataSetQueryBuilder" public="false">
+            <argument type="service" id="tax.repository"/>
+        </service>
+
+        <service id="tax.dataset" class="WellCommerce\Bundle\TaxBundle\DataSet\TaxDataSet">
+            <argument key="identifier">tax</argument>
+            <argument type="service" id="tax.dataset.query_builder"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
-            <configurator service="tax.datagrid.configurator" method="configure" />
         </service>
 
-        <service id="tax.datagrid.configurator" class="WellCommerce\Bundle\TaxBundle\DataGrid\TaxDataGridConfigurator">
+        <service id="tax.datagrid" class="WellCommerce\Bundle\TaxBundle\DataGrid\TaxDataGrid">
             <argument key="identifier">tax</argument>
-            <argument type="service" id="datagrid_manager"/>
-            <argument type="service" id="tax.repository"/>
+            <argument type="service" id="tax.dataset"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
         </service>
 
         <service id="tax.form" class="WellCommerce\Bundle\TaxBundle\Form\TaxForm">

@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Bundle\CategoryBundle\Twig\Extension;
 
-use WellCommerce\Bundle\CategoryBundle\Repository\CategoryRepositoryInterface;
+use WellCommerce\Bundle\CategoryBundle\Provider\CategoryProviderInterface;
 
 /**
  * Class CategoryExtension
@@ -22,25 +22,43 @@ use WellCommerce\Bundle\CategoryBundle\Repository\CategoryRepositoryInterface;
 class CategoryExtension extends \Twig_Extension
 {
     /**
-     * @var CategoryRepositoryInterface
+     * @var CategoryProviderInterface
      */
-    protected $repository;
+    protected $provider;
 
     /**
      * Constructor
      *
-     * @param CategoryRepositoryInterface $repository
+     * @param CategoryProviderInterface $provider
      */
-    public function __construct(CategoryRepositoryInterface $repository)
+    public function __construct(CategoryProviderInterface $provider)
     {
-        $this->repository = $repository;
+        $this->provider = $provider;
     }
 
-    public function getGlobals()
+    public function getFunctions()
     {
         return [
-            'categoriesTree' => $this->repository->getCategoriesTree()
+            new \Twig_SimpleFunction('categoriesTree', [$this, 'getCategoriesTree'], ['is_safe' => ['html']]),
         ];
+    }
+
+    /**
+     * Returns categories tree
+     *
+     * @param int    $limit
+     * @param string $orderBy
+     * @param string $orderDir
+     *
+     * @return mixed
+     */
+    public function getCategoriesTree(
+        $limit = CategoryProviderInterface::CATEGORY_TREE_LIMIT,
+        $orderBy = CategoryProviderInterface::CATEGORY_ORDER_BY,
+        $orderDir = CategoryProviderInterface::CATEGORY_ORDER_DIR
+    ) {
+
+        return $this->provider->getCategoriesTree($limit, $orderBy, $orderDir);
     }
 
     /**

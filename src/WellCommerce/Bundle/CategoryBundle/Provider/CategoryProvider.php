@@ -1,22 +1,21 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- * 
+ *
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- * 
+ *
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
 
 namespace WellCommerce\Bundle\CategoryBundle\Provider;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\PropertyAccess\PropertyAccess;
+use WellCommerce\Bundle\CategoryBundle\DataSet\Front\CategoryDataSet;
 use WellCommerce\Bundle\CategoryBundle\Entity\Category;
-use WellCommerce\Bundle\CategoryBundle\Exception\CategoryNotFoundException;
-use WellCommerce\Bundle\CategoryBundle\Repository\CategoryRepositoryInterface;
+use WellCommerce\Bundle\CategoryBundle\Tree\CategoryTreeBuilder;
+use WellCommerce\Bundle\CoreBundle\DataSet\Request\DataSetRequest;
 
 /**
  * Class CategoryProvider
@@ -29,52 +28,42 @@ class CategoryProvider implements CategoryProviderInterface
     protected $resource;
 
     /**
-     * @var CategoryRepositoryInterface
+     * @var CategoryDataSet
      */
-    protected $repository;
+    protected $dataset;
 
     /**
-     * @var array Current category info
+     * @var null
      */
-    protected $currentCategory;
+    protected $tree = null;
 
     /**
      * Constructor
      *
-     * @param CategoryRepositoryInterface $repository
+     * @param CategoryDataSet $dataset
      */
-    public function __construct(CategoryRepositoryInterface $repository)
+    public function __construct(CategoryDataSet $dataset)
     {
-        $this->repository = $repository;
+        $this->dataset = $dataset;
     }
 
-    public function getType()
-    {
-        return 'category';
-    }
+    public function getCategoriesTree(
+        $limit = CategoryProviderInterface::CATEGORY_TREE_LIMIT,
+        $orderBy = CategoryProviderInterface::CATEGORY_ORDER_BY,
+        $orderDir = CategoryProviderInterface::CATEGORY_ORDER_DIR
+    ) {
+        if (null === $this->tree) {
+            $results = $this->dataset->getResults(new DataSetRequest([
+                'limit'    => $limit,
+                'orderBy'  => $orderBy,
+                'orderDir' => $orderDir,
+            ]));
 
-    public function getTree()
-    {
+            $treeBuilder = new CategoryTreeBuilder($results['rows']);
+            $this->tree  = $treeBuilder->getTree();
+        }
 
-    }
-
-    public function getCurrentCategory()
-    {
-        return $this->currentCategory;
-    }
-
-    private function prepareCategoryData(Category $category)
-    {
-        $data         = [];
-        $accessor     = PropertyAccess::createPropertyAccessor();
-        $translations = $category->translate();
-
-        $accessor->setValue($data, '[translation]', [
-            'name'              => $translations->getName(),
-            'short_description' => $translations->getDescription(),
-        ]);
-
-        return $data;
+        return $this->tree;
     }
 
     public function setCurrentResource($resource)

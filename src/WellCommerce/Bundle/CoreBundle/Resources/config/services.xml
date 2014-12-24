@@ -28,12 +28,8 @@
             <tag name="doctrine.event_subscriber" />
         </service>
 
-        <!--<service id="doctrine.metadata.subscriber" class="WellCommerce\Bundle\CoreBundle\Doctrine\ORM\LoadMetadataSubscriber">-->
-            <!--<argument>%sylius.config.classes%</argument>-->
-            <!--<tag name="doctrine.event_subscriber" />-->
-        <!--</service>-->
-
         <service id="dataset.column.collection" class="WellCommerce\Bundle\CoreBundle\DataSet\Column\ColumnCollection"/>
+
         <service id="resource.provider.collection" class="WellCommerce\Bundle\CoreBundle\Provider\ProviderCollection"/>
     </services>
 </container>

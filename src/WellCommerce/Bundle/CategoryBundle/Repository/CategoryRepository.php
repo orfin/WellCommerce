@@ -25,28 +25,16 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
  */
 class CategoryRepository extends AbstractEntityRepository implements CategoryRepositoryInterface
 {
-    public function getProductCollectionQueryBuilder()
+    public function getDataSetQueryBuilder()
     {
-        $repository   = $this->getRepository('WellCommerceProductBundle:Product');
-        $queryBuilder = $repository->getProductCollectionQueryBuilder();
+        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder->groupBy('category.id');
+        $queryBuilder->leftJoin('category.translations', 'category_translation');
+        $queryBuilder->leftJoin('category.children', 'category_children');
+        $queryBuilder->leftJoin('category.products', 'category_products');
 
         return $queryBuilder;
     }
-
-//    public function test(){
-//        $qb = $this->createQueryBuilder('category');
-//        $res = $qb
-//            ->select('category, category_translation, products, products_translation')
-//            ->leftJoin('category.products', 'products')
-//            ->leftJoin('category.translations', 'category_translation')
-//            ->leftJoin('products.translations', 'products_translation')
-//            ->add('where',$qb->expr()->eq('category_translation.locale', ':locale'))
-//            ->setParameter('locale', 'en')
-//            ->getQuery()
-//            ->getArrayResult();
-//        print_r($res);
-//        die();
-//    }
 
     public function getCategoriesTree()
     {

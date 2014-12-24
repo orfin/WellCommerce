@@ -171,7 +171,7 @@ abstract class AbstractDataSetQueryBuilder
      */
     public function getTotalRows()
     {
-        $paginator = new Paginator($this->getQuery());
+        $paginator = new Paginator($this->getQuery(), false);
 
         return $paginator->count();
     }

@@ -1,5 +1,5 @@
 <div class="list-group">
-    {% for category in categoriesTree %}
+    {% for category in categoriesTree() %}
         <a href="{{ path(category.route) }}" class="list-group-item {% if category.id == active %}active{% endif %}">{{ category.name }}</a>
     {% endfor %}
 </div>
