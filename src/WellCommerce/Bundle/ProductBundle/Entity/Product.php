@@ -732,4 +732,3 @@ class Product
         $this->attributes = $attributes;
     }
 }
-

@@ -48,33 +48,39 @@ class ProductDataGrid extends AbstractDataGrid implements DataGridInterface
             'id'         => 'name',
             'caption'    => $this->trans('product.name.label'),
             'appearance' => new Appearance([
-                'width' => 70,
-            ]),
-            'filter'     => new Filter([
-                'type' => Filter::FILTER_INPUT
+                'width' => 200
             ])
         ]));
 
         $collection->add(new Column([
-            'id'         => 'sellPrice',
-            'caption'    => $this->trans('product.sell_price.label'),
-            'editable'   => true,
-            'appearance' => new Appearance([
-                'width' => 70,
-            ]),
-            'filter'     => new Filter([
+            'id'       => 'sku',
+            'editable' => true,
+            'caption'  => $this->trans('product.sku.label'),
+        ]));
+
+        $collection->add(new Column([
+            'id'       => 'sellPrice',
+            'caption'  => $this->trans('product.sell_price.label'),
+            'editable' => true,
+            'filter'   => new Filter([
                 'type' => Filter::FILTER_BETWEEN
             ])
         ]));
 
         $collection->add(new Column([
-            'id'         => 'stock',
-            'caption'    => $this->trans('product.stock.label'),
-            'editable'   => true,
-            'appearance' => new Appearance([
-                'width' => 70,
-            ]),
-            'filter'     => new Filter([
+            'id'       => 'stock',
+            'caption'  => $this->trans('product.stock.label'),
+            'editable' => true,
+            'filter'   => new Filter([
+                'type' => Filter::FILTER_BETWEEN
+            ])
+        ]));
+
+        $collection->add(new Column([
+            'id'       => 'weight',
+            'caption'  => $this->trans('product.weight.label'),
+            'editable' => true,
+            'filter'   => new Filter([
                 'type' => Filter::FILTER_BETWEEN
             ])
         ]));

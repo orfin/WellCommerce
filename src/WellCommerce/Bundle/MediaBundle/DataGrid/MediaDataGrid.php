@@ -41,7 +41,6 @@ class MediaDataGrid extends AbstractDataGrid implements DataGridInterface
                 'default_order' => Sorting::SORT_DIR_DESC
             ]),
             'appearance' => new Appearance([
-                'width'   => 90,
                 'visible' => false
             ]),
             'filter'     => new Filter([
@@ -61,45 +60,21 @@ class MediaDataGrid extends AbstractDataGrid implements DataGridInterface
         $collection->add(new Column([
             'id'         => 'name',
             'caption'    => $this->trans('media.name'),
-            'appearance' => new Appearance([
-                'width' => 70
-            ]),
-            'filter'     => new Filter([
-                'type' => Filter::FILTER_INPUT
-            ])
         ]));
 
         $collection->add(new Column([
             'id'         => 'mime',
             'caption'    => $this->trans('media.mime'),
-            'appearance' => new Appearance([
-                'width' => 70
-            ]),
-            'filter'     => new Filter([
-                'type' => Filter::FILTER_INPUT
-            ])
         ]));
 
         $collection->add(new Column([
             'id'         => 'extension',
             'caption'    => $this->trans('media.extension'),
-            'appearance' => new Appearance([
-                'width' => 70
-            ]),
-            'filter'     => new Filter([
-                'type' => Filter::FILTER_INPUT
-            ])
         ]));
 
         $collection->add(new Column([
             'id'         => 'size',
             'caption'    => $this->trans('media.size'),
-            'appearance' => new Appearance([
-                'width' => 70
-            ]),
-            'filter'     => new Filter([
-                'type' => Filter::FILTER_INPUT
-            ])
         ]));
 
     }

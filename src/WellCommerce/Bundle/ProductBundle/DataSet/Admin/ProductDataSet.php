@@ -40,6 +40,16 @@ class ProductDataSet extends AbstractDataSet implements DataSetInterface
         ]));
 
         $collection->add(new Column([
+            'alias'  => 'sku',
+            'source' => 'product.sku'
+        ]));
+
+        $collection->add(new Column([
+            'alias'  => 'weight',
+            'source' => 'product.weight'
+        ]));
+
+        $collection->add(new Column([
             'alias'  => 'sellPrice',
             'source' => 'product.sellPrice'
         ]));

@@ -43,7 +43,7 @@ class Filter extends AbstractOptions
         ]);
 
         $resolver->setDefaults([
-            'type'            => self::FILTER_NONE,
+            'type'            => self::FILTER_INPUT,
             'options'         => [],
             'filtered_column' => DataGridInterface::GF_NULL,
             'source'          => DataGridInterface::GF_NULL,
