@@ -22,8 +22,16 @@ use DateTime;
  */
 class DateTransformer implements DataTransformerInterface
 {
+    /**
+     * @var string Date format
+     */
     private $format;
 
+    /**
+     * Constructor
+     *
+     * @param $format
+     */
     public function __construct($format)
     {
         $this->format = $format;
@@ -32,9 +40,9 @@ class DateTransformer implements DataTransformerInterface
     /**
      * Transforms date object to string using given format
      *
-     * @param $dateTime
+     * @param DateTime|string $dateTime
      *
-     * @return mixed
+     * @return string
      */
     public function transform($dateTime)
     {
