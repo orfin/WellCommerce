@@ -91,10 +91,10 @@ abstract class AbstractAdminController extends AbstractController implements Adm
             $this->manager->createResource($resource, $request);
 
             if ($form->isAction('next')) {
-                return $this->manager->getRedirectHelper()->redirectToAction('add');
+                return $this->redirectToAction('add');
             }
 
-            return $this->manager->getRedirectHelper()->redirectToAction('index');
+            return $this->redirectToAction('index');
         }
 
         return [
@@ -137,16 +137,16 @@ abstract class AbstractAdminController extends AbstractController implements Adm
             $this->manager->updateResource($resource, $request);
 
             if ($form->isAction('continue')) {
-                return $this->manager->getRedirectHelper()->redirectToAction('edit', [
+                return $this->redirectToAction('edit', [
                     'id' => $resource->getId()
                 ]);
             }
 
             if ($form->isAction('next')) {
-                return $this->manager->getRedirectHelper()->redirectToAction('add');
+                return $this->redirectToAction('add');
             }
 
-            return $this->manager->getRedirectHelper()->redirectToAction('index');
+            return $this->redirectToAction('index');
         }
 
         return [
@@ -167,10 +167,10 @@ abstract class AbstractAdminController extends AbstractController implements Adm
             $resource = $this->manager->getRepository()->find($id);
             $this->manager->removeResource($resource);
         } catch (\Exception $e) {
-            return new JsonResponse(['error' => $e->getMessage()]);
+            return $this->jsonResponse(['error' => $e->getMessage()]);
         }
 
-        return new JsonResponse(['success' => true]);
+        return $this->jsonResponse(['success' => true]);
     }
 
     /**

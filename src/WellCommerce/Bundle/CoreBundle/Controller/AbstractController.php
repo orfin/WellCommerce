@@ -25,6 +25,11 @@ use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
 abstract class AbstractController extends Controller
 {
     /**
+     * @var \WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface
+     */
+    protected $manager;
+
+    /**
      * Returns content as json response
      *
      * @param $content
@@ -48,5 +53,53 @@ abstract class AbstractController extends Controller
     protected function getFormBuilder(FormInterface $form, $data = null, array $options)
     {
         return $this->get('form.builder')->create($form, $data, $options)->getForm();
+    }
+
+    /**
+     * Translates message using Translator service
+     *
+     * @param $id
+     *
+     * @return string
+     */
+    protected function trans($id)
+    {
+        return $this->manager->getTranslator()->trans($id);
+    }
+
+    /**
+     * Returns image path
+     *
+     * @param $path
+     * @param $filter
+     *
+     * @return mixed
+     */
+    protected function getImage($path, $filter)
+    {
+        return $this->manager->getImageHelper()->getImage($path, $filter);
+    }
+
+    /**
+     * Returns default entity manager
+     *
+     * @return \Doctrine\Common\Persistence\ObjectManager|object
+     */
+    protected function getEntityManager()
+    {
+        return $this->manager->getDoctrineHelper()->getEntityManager();
+    }
+
+    /**
+     * Redirects user to another action in scope of current controller
+     *
+     * @param string $actionName
+     * @param array  $params
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    protected function redirectToAction($actionName = 'index', array $params = [])
+    {
+        return $this->manager->getRedirectHelper()->redirectToAction($actionName, $params);
     }
 }

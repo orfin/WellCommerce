@@ -72,7 +72,7 @@ class AttributeController extends AbstractAdminController
         $group     = $this->get('attribute_group.repository')->find($request->request->get('set'));
         $attribute = $this->getRepository()->createNewAttribute($group, $request->request->get('name'));
 
-        $em = $this->manager->getDoctrineHelper()->getEntityManager();
+        $em = $this->getEntityManager();
         $em->persist($attribute);
         $em->flush();
 

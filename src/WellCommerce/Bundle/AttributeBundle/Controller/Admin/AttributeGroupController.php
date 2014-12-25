@@ -35,7 +35,7 @@ class AttributeGroupController extends AbstractAdminController
         if (count($groups) > 0) {
             $firstGroup = current($groups);
 
-            return $this->manager->getRedirectHelper()->redirectToAction('edit', [
+            return $this->redirectToAction('edit', [
                 'id' => $firstGroup['id']
             ]);
         }
@@ -84,7 +84,7 @@ class AttributeGroupController extends AbstractAdminController
                 ]);
             }
 
-            return $this->manager->getRedirectHelper()->redirectToAction('index');
+            return $this->redirectToAction('index');
         }
 
         return [
@@ -105,7 +105,7 @@ class AttributeGroupController extends AbstractAdminController
     {
         // prevent direct access and redirect administrator to index
         if (!$request->isXmlHttpRequest()) {
-            return $this->manager->getRedirectHelper()->redirectToAction('index');
+            return $this->redirectToAction('index');
         }
 
         $groups = $this->manager->getRepository()->findAll();

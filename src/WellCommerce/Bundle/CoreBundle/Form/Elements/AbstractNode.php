@@ -25,17 +25,17 @@ use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer as Base
  */
 abstract class AbstractNode extends BaseAbstractContainer
 {
-    protected $form = null;
-    protected $parent = null;
-    protected $_id;
-    protected $attributes;
-    protected $renderMode = 'JS';
-    protected $tabs = '';
-    protected $jsNodeName;
-    protected static $_nextId = 0;
-    protected $optionsResolver;
-    protected $elementResolver;
-    protected $options;
+    protected        $form       = null;
+    protected        $parent     = null;
+    protected        $_id;
+    protected        $attributes;
+    protected        $renderMode = 'JS';
+    protected        $tabs       = '';
+    protected        $jsNodeName;
+    protected static $_nextId    = 0;
+    protected        $optionsResolver;
+    protected        $elementResolver;
+    protected        $options;
 
     /**
      * Constructor
@@ -328,10 +328,10 @@ abstract class AbstractNode extends BaseAbstractContainer
                 return $this->attributes[$attributeName] ? 'true' : 'false';
             }
 
-            return str_replace(Array(
+            return str_replace([
                 "\r\n",
                 "\n"
-            ), '\n', '\'' . addslashes($this->attributes[$attributeName]) . '\'');
+            ], '\n', '\'' . addslashes($this->attributes[$attributeName]) . '\'');
         }
         if (!isset($this->attributes[$attributeName])) {
             return '';
@@ -361,22 +361,28 @@ abstract class AbstractNode extends BaseAbstractContainer
             } elseif ($type == ElementInterface::TYPE_BOOLEAN) {
                 return $name . ': ' . ($value ? 'true' : 'false') . '';
             } else {
-                return str_replace(Array(
+                return str_replace([
                     "\r\n",
                     "\n"
-                ), '\n', $name . ': \'' . addslashes($value) . '\'');
+                ], '\n', $name . ': \'' . addslashes($value) . '\'');
             }
         }
     }
 
     protected function formatRepeatableJs()
     {
-        if ((isset($this->attributes['repeat_min']) && ($this->attributes['repeat_min'] != 1)) || (isset($this->attributes['repeat_max']) && ($this->attributes['repeat_max'] != 1))) {
+        if ((isset($this->attributes['repeat_min']) && ($this->attributes['repeat_min'] != 1))
+            || (isset($this->attributes['repeat_max']) && ($this->attributes['repeat_max'] != 1))
+        ) {
             $min
-                = (isset($this->attributes['repeat_min']) && is_numeric($this->attributes['repeat_min'])) ? $this->attributes['repeat_min'] : 1;
+                = (isset($this->attributes['repeat_min']) && is_numeric($this->attributes['repeat_min']))
+                ? $this->attributes['repeat_min'] : 1;
             $max
-                = (isset($this->attributes['repeat_max']) && is_numeric($this->attributes['repeat_max'])) ? $this->attributes['repeat_max'] : 1;
-            if (isset($this->attributes['repeat_max']) && ($this->attributes['repeat_max'] == ElementInterface::INFINITE)) {
+                = (isset($this->attributes['repeat_max']) && is_numeric($this->attributes['repeat_max']))
+                ? $this->attributes['repeat_max'] : 1;
+            if (isset($this->attributes['repeat_max'])
+                && ($this->attributes['repeat_max'] == ElementInterface::INFINITE)
+            ) {
                 $max = 'GForm.INFINITE';
             }
 

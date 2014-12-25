@@ -12,16 +12,15 @@
 
 namespace WellCommerce\Bundle\RoutingBundle\Repository;
 
+use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\DataSetAwareRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Repository\DataGridAwareRepositoryInterface;
 
 /**
  * Interface RouteRepositoryInterface
  *
- * @package WellCommerce\Bundle\RoutingBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface RouteRepositoryInterface extends RepositoryInterface, DataGridAwareRepositoryInterface
+interface RouteRepositoryInterface extends RepositoryInterface, DataSetAwareRepositoryInterface
 {
     /**
      * Generates and validates uniqueness of slug
