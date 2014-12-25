@@ -35,20 +35,33 @@ class AttributeValueController extends AbstractAdminController
      *
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
+    /**
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function ajaxAddAction(Request $request)
     {
         // prevent direct access and redirect administrator to index
         if (!$request->isXmlHttpRequest()) {
-            return false;
+            return $this->redirectToAction('index');
         }
 
         $attribute = $this->get('attribute.repository')->find($request->request->get('attribute'));
-        $value     = $this->repository->addAttributeValue($attribute, $request->request->get('name'));
-        $this->manager->getDoctrineHelper()->getEntityManager()->flush();
+        $value     = $this->getRepository()->addAttributeValue($attribute, $request->request->get('name'));
+        $this->getEntityManager()->flush();
 
         return $this->jsonResponse([
             'id' => $value->getId()
         ]);
+    }
+
+    /**
+     * @return \WellCommerce\Bundle\AttributeBundle\Repository\AttributeValueRepository
+     */
+    protected function getRepository()
+    {
+        return $this->manager->getRepository();
     }
 
 
