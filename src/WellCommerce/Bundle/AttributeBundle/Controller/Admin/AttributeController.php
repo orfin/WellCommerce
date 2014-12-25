@@ -28,10 +28,15 @@ class AttributeController extends AbstractAdminController
      *
      * @param Request $request
      *
-     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     * @return \Symfony\Component\HttpFoundation\JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function ajaxIndexAction(Request $request)
     {
+        // prevent direct access and redirect administrator to index
+        if (!$request->isXmlHttpRequest()) {
+            return $this->manager->getRedirectHelper()->redirectToAction('index');
+        }
+
         $id         = $request->request->get('id');
         $attributes = $this->getRepository()->findAllByAttributeGroupId($id);
 
@@ -55,10 +60,15 @@ class AttributeController extends AbstractAdminController
      *
      * @param Request $request
      *
-     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     * @return \Symfony\Component\HttpFoundation\JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function ajaxAddAction(Request $request)
     {
+        // prevent direct access and redirect administrator to index
+        if (!$request->isXmlHttpRequest()) {
+            return $this->manager->getRedirectHelper()->redirectToAction('index');
+        }
+
         $group     = $this->get('attribute_group.repository')->find($request->request->get('set'));
         $attribute = $this->getRepository()->createNewAttribute($group, $request->request->get('name'));
 
