@@ -12,15 +12,14 @@
 
 namespace WellCommerce\Bundle\CmsBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\PhotoTrait;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\DateTime;
 
 /**
  * Class News
  *
- * @package WellCommerce\Bundle\CmsBundle\Entity
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * @ORM\Table(name="news")
@@ -31,6 +30,7 @@ class News
     use ORMBehaviors\Translatable\Translatable;
     use ORMBehaviors\Timestampable\Timestampable;
     use ORMBehaviors\Blameable\Blameable;
+    use PhotoTrait;
 
     /**
      * @var integer
@@ -39,18 +39,17 @@ class News
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-
     private $id;
 
     /**
-     * @ORM\Column(name="publish", type="boolean", options={"default" = 0})
+     * @var bool
      *
+     * @ORM\Column(name="publish", type="boolean", options={"default" = 0})
      */
-
     private $publish;
 
     /**
-     * @var datetime $startDate
+     * @var DateTime $startDate
      *
      * @ORM\Column(type="datetime", nullable=true)
      *
@@ -58,7 +57,7 @@ class News
     private $startDate;
 
     /**
-     * @var datetime $endDate
+     * @var DateTime $endDate
      *
      * @ORM\Column(type="datetime", nullable=true)
      *
@@ -66,113 +65,82 @@ class News
     private $endDate;
 
     /**
-     * @ORM\Column(name="featured", type="boolean")
+     * @var bool
      *
+     * @ORM\Column(name="featured", type="boolean")
      */
     private $featured;
 
     /**
-     * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\CmsBundle\Entity\NewsPhoto", mappedBy="news", cascade={"persist"}, orphanRemoval=true)
+     * @return int
      */
-    private $newsPhotos;
-
-
     public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * @return bool
+     */
     public function getPublish()
     {
         return $this->publish;
     }
 
+    /**
+     * @param bool $publish
+     */
     public function setPublish($publish)
     {
         $this->publish = $publish;
     }
 
+    /**
+     * @return DateTime
+     */
     public function getStartDate()
     {
         return $this->startDate;
     }
 
+    /**
+     * @param DateTime $startDate
+     */
     public function setStartDate(DateTime $startDate)
     {
         $this->startDate = $startDate;
     }
 
+    /**
+     * @return DateTime
+     */
     public function getEndDate()
     {
         return $this->endDate;
     }
 
+    /**
+     * @param DateTime $endDate
+     */
     public function setEndDate(DateTime $endDate)
     {
         $this->endDate = $endDate;
     }
 
+    /**
+     * @return bool
+     */
     public function getFeatured()
     {
         return $this->featured;
     }
 
+    /**
+     * @param bool $featured
+     */
     public function setFeatured($featured)
     {
         $this->featured = $featured;
-    }
-
-    public function getNewsPhotos()
-    {
-        return $this->newsPhotos;
-    }
-
-    public function setNewsPhotos(array $data)
-    {
-        $params     = $data['data'];
-        $collection = $data['collection'];
-        $newsPhotos = new ArrayCollection();
-
-        // if collection was not modified, do nothing
-        if ($params['unmodified'] == 1) {
-            return false;
-        }
-
-        foreach ($collection as $photo) {
-            $mainPhoto = (int)($photo->getId() == $params['main']);
-            $newsPhoto = new NewsPhoto();
-            $newsPhoto->setPhoto($photo);
-            $newsPhoto->setMainPhoto($mainPhoto);
-            $newsPhoto->setProduct($this);
-            $newsPhotos->add($newsPhoto);
-
-            // ad main photo as product default photo
-            if ($mainPhoto == 1) {
-                $this->setPhoto($photo);
-            }
-        }
-
-        // loop through old photos and remove those which haven't been submitted
-        foreach ($this->newsPhotos as $oldPhoto) {
-            if (!$newsPhotos->contains($oldPhoto)) {
-                $this->newsPhotos->removeElement($oldPhoto);
-            }
-        }
-
-        // if we don't have any photos, reset main product photo
-        if ($newsPhotos->count() == 0) {
-            $this->setPhoto(null);
-        }
-        $this->newsPhotos = $newsPhotos;
-    }
-
-    /**
-     *
-     * @param NewsPhoto $photo
-     */
-    public function addNewsPhoto(NewsPhoto $photo)
-    {
-        $this->newsPhotos[] = $photo;
     }
 }
 
