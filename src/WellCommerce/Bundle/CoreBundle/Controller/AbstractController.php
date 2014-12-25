@@ -57,17 +57,27 @@ abstract class AbstractController extends Controller
      */
     protected function disableLocaleFilter()
     {
-        $this->getDoctrine()->getEntityManager()->getFilters()->disable('locale');
+        $this->getDoctrineFilters()->disable('locale');
     }
 
     /**
-     * Enables Doctrine filter
+     * Enables Doctrine locale filter
      *
-     * @param $filter
+     * @param $locale
      */
     protected function enableLocaleFilter($locale)
     {
-        $filter = $this->getDoctrine()->getEntityManager()->getFilters()->enable('locale');
+        $filter = $this->getDoctrineFilters()->enable('locale');
         $filter->setParameter('locale', $locale);
+    }
+
+    /**
+     * Gets the enabled filters.
+     *
+     * @return \Doctrine\ORM\Query\FilterCollection The active filter collection.
+     */
+    private function getDoctrineFilters()
+    {
+        return $this->getDoctrine()->getEntityManager()->getFilters();
     }
 }
