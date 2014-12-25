@@ -43,6 +43,7 @@ var oDefaults = {
 	fDeleteHandler: GCore.NULL,
 	fLoadFiles: GCore.NULL,
 	sSwfUploadUrl: '_js_libs/swfupload.swf',
+	iLimit: 100,
 	iWidth: 131,
 	iHeight: 34,
 	iMaxFileSize: 100 * 1024,	// kB
@@ -457,6 +458,7 @@ var GFormImage = GCore.ExtendClass(GFormFile, function() {
 		}
 		oRequest.id = 0;
 		oRequest.starting_from = 0;
+		oRequest.limit = gThis.m_oOptions.iLimit;
 		oRequest.order_by = 'id';
 		oRequest.order_dir = 'desc';
 		gThis.LoadFiles(oRequest);

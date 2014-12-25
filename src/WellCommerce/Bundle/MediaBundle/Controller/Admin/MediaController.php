@@ -36,7 +36,7 @@ class MediaController extends AbstractAdminController
     public function addAction(Request $request)
     {
         $file     = $request->files->get('file');
-        $uploader = $this->get('file_uploader');
+        $uploader = $this->get('media.uploader');
 
         try {
             $media     = $uploader->upload($file, 'images');

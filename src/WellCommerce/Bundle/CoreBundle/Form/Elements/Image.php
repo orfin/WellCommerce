@@ -81,6 +81,7 @@ class Image extends File implements ElementInterface
             $this->formatAttributeJs('upload_url', 'sUploadUrl'),
             $this->formatAttributeJs('session_name', 'sSessionName'),
             $this->formatAttributeJs('session_id', 'sSessionId'),
+            $this->formatAttributeJs('limit', 'iLimit'),
             $this->formatAttributeJs('file_types', 'asFileTypes'),
             $this->formatAttributeJs('file_types_description', 'sFileTypesDescription'),
             $this->formatAttributeJs('load_route', 'sLoadRoute'),

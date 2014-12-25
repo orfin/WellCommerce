@@ -12,13 +12,6 @@
     </imports>
 
     <services>
-        <service id="file_uploader" class="WellCommerce\Bundle\CoreBundle\Uploader\FileUploader">
-            <argument>%kernel.root_dir%</argument>
-            <argument type="service" id="filesystem" />
-            <argument type="service" id="event_dispatcher" />
-            <argument type="service" id="media.repository" />
-        </service>
-
         <service id="controller.listener" class="WellCommerce\Bundle\CoreBundle\EventListener\ControllerListener">
             <argument type="service" id="service_container"/>
             <tag name="kernel.event_subscriber" />
