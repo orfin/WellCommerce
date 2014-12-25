@@ -41,12 +41,11 @@ interface DoctrineHelperInterface
     public function disableFilter($filter);
 
     /**
-     * Enables Doctrine filter and sets additional parameters
+     * Enables Doctrine filter
      *
      * @param string $filter
-     * @param array  $parameters
      *
      * @return \Doctrine\ORM\Query\Filter\SQLFilter
      */
-    public function enableFilter($filter, array $parameters = []);
+    public function enableFilter($filter);
 } 

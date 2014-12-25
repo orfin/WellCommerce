@@ -48,14 +48,9 @@ class DoctrineHelper implements DoctrineHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function enableFilter($filter, array $parameters = [])
+    public function enableFilter($filter)
     {
-        $filter = $this->getDoctrineFilters()->enable($filter);
-        foreach ($parameters as $key => $value) {
-            $filter->setParameter($key, $value);
-        }
-
-        return $filter;
+        return $this->getDoctrineFilters()->enable($filter);
     }
 
     /**
