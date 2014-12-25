@@ -66,7 +66,7 @@ class DateTransformer implements DataTransformerInterface
      *
      * @param $date
      *
-     * @return DateTime
+     * @return DateTime|false
      */
     private function createDateFromString($date)
     {
