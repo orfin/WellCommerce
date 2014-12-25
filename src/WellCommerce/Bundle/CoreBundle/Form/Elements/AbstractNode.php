@@ -369,29 +369,6 @@ abstract class AbstractNode extends BaseAbstractContainer
         }
     }
 
-//    protected function formatRepeatableJs()
-//    {
-//        if ((isset($this->attributes['repeat_min']) && ($this->attributes['repeat_min'] != 1))
-//            || (isset($this->attributes['repeat_max']) && ($this->attributes['repeat_max'] != 1))
-//        ) {
-//            $min
-//                = (isset($this->attributes['repeat_min']) && is_numeric($this->attributes['repeat_min']))
-//                ? $this->attributes['repeat_min'] : 1;
-//            $max
-//                = (isset($this->attributes['repeat_max']) && is_numeric($this->attributes['repeat_max']))
-//                ? $this->attributes['repeat_max'] : 1;
-//            if (isset($this->attributes['repeat_max'])
-//                && ($this->attributes['repeat_max'] == ElementInterface::INFINITE)
-//            ) {
-//                $max = 'GForm.INFINITE';
-//            }
-//
-//            return "oRepeat: {iMin: {$min}, iMax: {$max}}";
-//        }
-//
-//        return '';
-//    }
-
     protected function formatDependencyJs()
     {
         $dependencies = [];
