@@ -21,19 +21,50 @@ namespace WellCommerce\Bundle\CoreBundle\DataSet\Transformer;
 class DateTransformer implements TransformerInterface
 {
     /**
+     * @var null
+     */
+    protected $format;
+
+    /**
+     * Constructor
+     *
+     * @param $format
+     */
+    public function __construct($format = null)
+    {
+        $this->format = $format;
+    }
+
+    /**
      * Formats passed DateTime object to format
+     *
      * @param $value
      *
      * @return bool|string
      */
+
     public function transform($value)
     {
         if (!$value instanceof \DateTime) {
             throw new \InvalidArgumentException('DateTransformer expects valid DateTime object');
         }
-        $locale = \Locale::getDefault();
-        $ftm    = new \IntlDateFormatter($locale, \IntlDateFormatter::SHORT, \IntlDateFormatter::SHORT);
 
-        return $ftm->format($value);
+        if (false === $date = $this->formatDate($value)) {
+            return $value;
+        }
+
+        return $date;
+    }
+
+    private function formatDate(\DateTime $date)
+    {
+        if (null === $this->format) {
+            $locale = \Locale::getDefault();
+            $ftm    = new \IntlDateFormatter($locale, \IntlDateFormatter::SHORT, \IntlDateFormatter::SHORT);
+
+            return $ftm->format($date);
+        }
+
+        return $date->format($this->format);
     }
 } 

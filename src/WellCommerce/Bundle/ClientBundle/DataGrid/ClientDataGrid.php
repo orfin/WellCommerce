@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\ClientBundle\DataGrid;
 use WellCommerce\Bundle\CoreBundle\DataGrid\AbstractDataGrid;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Column\Column;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnCollection;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Column\Options\Appearance;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Column\Options\Filter;
 use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
@@ -22,7 +21,6 @@ use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
 /**
  * Class ClientDataGrid
  *
- * @package WellCommerce\Bundle\ClientBundle
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class ClientDataGrid extends AbstractDataGrid implements DataGridInterface
@@ -30,12 +28,11 @@ class ClientDataGrid extends AbstractDataGrid implements DataGridInterface
     /**
      * {@inheritdoc}
      */
-    public function addColumns(ColumnCollection $collection)
+    public function configureColumns(ColumnCollection $collection)
     {
         $collection->add(new Column([
             'id'         => 'id',
-            'source'     => 'client.id',
-            'caption'    => $this->trans('client.id'),
+            'caption'    => $this->trans('client.id.label'),
             'appearance' => new Appearance([
                 'width'   => 90,
                 'visible' => false
@@ -46,66 +43,31 @@ class ClientDataGrid extends AbstractDataGrid implements DataGridInterface
         ]));
 
         $collection->add(new Column([
-            'id'         => 'firstName',
-            'source'     => 'client.firstName',
-            'caption'    => $this->trans('client.first_name'),
-            'appearance' => new Appearance([
-                'width' => 70,
-            ]),
-            'filter'     => new Filter([
-                'type' => Filter::FILTER_INPUT
-            ])
+            'id'      => 'firstName',
+            'caption' => $this->trans('client.first_name.label'),
         ]));
 
         $collection->add(new Column([
-            'id'         => 'lastName',
-            'source'     => 'client.lastName',
-            'caption'    => $this->trans('client.last_name'),
-            'appearance' => new Appearance([
-                'width' => 70,
-            ]),
-            'filter'     => new Filter([
-                'type' => Filter::FILTER_INPUT
-            ])
+            'id'      => 'lastName',
+            'caption' => $this->trans('client.last_name.label'),
         ]));
 
         $collection->add(new Column([
-            'id'         => 'email',
-            'source'     => 'client.email',
-            'caption'    => $this->trans('client.email'),
-            'appearance' => new Appearance([
-                'width' => 70,
-            ]),
-            'filter'     => new Filter([
-                'type' => Filter::FILTER_INPUT
-            ])
+            'id'      => 'email',
+            'caption' => $this->trans('client.email.label'),
         ]));
 
         $collection->add(new Column([
-            'id'         => 'phone',
-            'source'     => 'client.phone',
-            'caption'    => $this->trans('client.phone'),
-            'appearance' => new Appearance([
-                'width' => 70,
-            ]),
-            'filter'     => new Filter([
-                'type' => Filter::FILTER_INPUT
-            ]),
+            'id'      => 'phone',
+            'caption' => $this->trans('client.phone.label'),
         ]));
 
         $collection->add(new Column([
-            'id'               => 'createdAt',
-            'source'           => 'client.createdAt',
-            'caption'          => $this->trans('client.created_at'),
-            'appearance'       => new Appearance([
-                'width' => 70,
-            ]),
-            'filter'           => new Filter([
+            'id'      => 'createdAt',
+            'caption' => $this->trans('client.created_at.label'),
+            'filter'  => new Filter([
                 'type' => Filter::FILTER_BETWEEN
-            ]),
-            'process_function' => function (\DateTime $createdAt) {
-                return $createdAt->format('Y-m-d H:i:s');
-            }
+            ])
         ]));
     }
 }

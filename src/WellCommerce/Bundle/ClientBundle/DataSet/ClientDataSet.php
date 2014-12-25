@@ -17,6 +17,7 @@ use WellCommerce\Bundle\CoreBundle\DataSet\Column\Column;
 use WellCommerce\Bundle\CoreBundle\DataSet\Column\ColumnCollection;
 use WellCommerce\Bundle\CoreBundle\DataSet\DataSetInterface;
 use WellCommerce\Bundle\CoreBundle\DataSet\Transformer\DateTransformer;
+use WellCommerce\Bundle\CoreBundle\DataSet\Transformer\TransformerCollection;
 
 /**
  * Class ClientDataSet
@@ -32,43 +33,38 @@ class ClientDataSet extends AbstractDataSet implements DataSetInterface
     protected function configureColumns(ColumnCollection $collection)
     {
         $collection->add(new Column([
-            'id'     => 'id',
+            'alias'  => 'id',
             'source' => 'client.id',
         ]));
 
         $collection->add(new Column([
-            'id'     => 'firstName',
+            'alias'  => 'firstName',
             'source' => 'client.firstName',
         ]));
 
         $collection->add(new Column([
-            'id'     => 'lastName',
+            'alias'  => 'lastName',
             'source' => 'client.lastName',
         ]));
 
         $collection->add(new Column([
-            'id'     => 'email',
+            'alias'  => 'email',
             'source' => 'client.email',
         ]));
 
         $collection->add(new Column([
-            'id'     => 'phone',
+            'alias'  => 'phone',
             'source' => 'client.phone',
         ]));
 
         $collection->add(new Column([
-            'id'               => 'createdAt',
+            'alias'            => 'createdAt',
             'source'           => 'client.createdAt',
-            'process_function' => function (\DateTime $createdAt) {
-                return $createdAt->format('Y-m-d H:i:s');
-            }
         ]));
     }
 
-    protected function configureProcessors()
+    protected function configureTransformers(TransformerCollection $collection)
     {
-        return [
-            'createdAt' => new DateTransformer()
-        ];
+        $collection->add('createdAt', new DateTransformer('Y-m-d H:i:s'));
     }
 }

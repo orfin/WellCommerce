@@ -33,17 +33,24 @@
             <argument>WellCommerceClientBundle:ClientGroup</argument>
         </service>
 
-        <service id="client_group.datagrid" class="WellCommerce\Bundle\ClientBundle\DataGrid\ClientGroupDataGrid">
+        <service id="client_group.dataset.query_builder" class="WellCommerce\Bundle\ClientBundle\DataSet\ClientGroupDataSetQueryBuilder" public="false">
+            <argument type="service" id="client_group.repository"/>
+        </service>
+
+        <service id="client_group.dataset" class="WellCommerce\Bundle\ClientBundle\DataSet\ClientGroupDataSet">
+            <argument key="identifier">client_group</argument>
+            <argument type="service" id="client_group.dataset.query_builder"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
-            <configurator service="client_group.datagrid.configurator" method="configure" />
         </service>
 
-        <service id="client_group.datagrid.configurator" class="WellCommerce\Bundle\ClientBundle\DataGrid\ClientGroupDataGridConfigurator">
+        <service id="client_group.datagrid" class="WellCommerce\Bundle\ClientBundle\DataGrid\ClientGroupDataGrid">
             <argument key="identifier">client_group</argument>
-            <argument type="service" id="datagrid_manager"/>
-            <argument type="service" id="client_group.repository"/>
+            <argument type="service" id="client_group.dataset"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
         </service>
 
         <service id="client_group.form" class="WellCommerce\Bundle\ClientBundle\Form\ClientGroupForm">

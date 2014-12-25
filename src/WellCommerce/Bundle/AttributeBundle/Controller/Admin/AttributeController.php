@@ -34,7 +34,7 @@ class AttributeController extends AbstractAdminController
     {
         // prevent direct access and redirect administrator to index
         if (!$request->isXmlHttpRequest()) {
-            return $this->manager->getRedirectHelper()->redirectToAction('index');
+            return $this->redirectToAction('index');
         }
 
         $id         = $request->request->get('id');
@@ -66,7 +66,7 @@ class AttributeController extends AbstractAdminController
     {
         // prevent direct access and redirect administrator to index
         if (!$request->isXmlHttpRequest()) {
-            return $this->manager->getRedirectHelper()->redirectToAction('index');
+            return $this->redirectToAction('index');
         }
 
         $group     = $this->get('attribute_group.repository')->find($request->request->get('set'));

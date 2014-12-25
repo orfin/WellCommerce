@@ -18,7 +18,6 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 /**
  * Class AbstractConfiguration
  *
- * @package WellCommerce\Bundle\CoreBundle\DependencyInjection
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 abstract class AbstractConfiguration implements ConfigurationInterface

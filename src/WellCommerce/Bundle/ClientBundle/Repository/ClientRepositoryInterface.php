@@ -12,16 +12,15 @@
 
 namespace WellCommerce\Bundle\ClientBundle\Repository;
 
+use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\DataSetAwareRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Repository\DataGridAwareRepositoryInterface;
 
 /**
  * Interface ClientRepositoryInterface
  *
- * @package WellCommerce\Bundle\ClientBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ClientRepositoryInterface extends RepositoryInterface, DataGridAwareRepositoryInterface
+interface ClientRepositoryInterface extends RepositoryInterface, DataSetAwareRepositoryInterface
 {
 
 } 
