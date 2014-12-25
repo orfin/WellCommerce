@@ -78,6 +78,16 @@ abstract class AbstractController extends Controller
      */
     private function getDoctrineFilters()
     {
-        return $this->getDoctrine()->getEntityManager()->getFilters();
+        return $this->getEntityManager()->getFilters();
+    }
+
+    /**
+     * Returns entity manager
+     *
+     * @return \Doctrine\Common\Persistence\ObjectManager|object
+     */
+    protected function getEntityManager()
+    {
+        return $this->getDoctrine()->getManager();
     }
 }

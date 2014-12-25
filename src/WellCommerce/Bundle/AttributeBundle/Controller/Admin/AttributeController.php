@@ -24,16 +24,16 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 class AttributeController extends AbstractAdminController
 {
     /**
-     * {@inheritdoc}
+     * Ajax action for listing attributes
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
     public function ajaxIndexAction(Request $request)
     {
-        // prevent direct access and redirect administrator to index
-        if (!$request->isXmlHttpRequest()) {
-            return $this->manager->getRedirectHelper()->redirectToAction('index');
-        }
-
-        $attributes = $this->manager->getRepository()->findAllByAttributeGroupId($request->request->get('id'));
+        $id         = $request->request->get('id');
+        $attributes = $this->getRepository()->findAllByAttributeGroupId($id);
 
         $sets = [];
 
@@ -45,11 +45,9 @@ class AttributeController extends AbstractAdminController
             ];
         }
 
-        $response = [
+        return $this->jsonResponse([
             'attributes' => $sets
-        ];
-
-        return $this->jsonResponse($response);
+        ]);
     }
 
     /**
@@ -61,13 +59,8 @@ class AttributeController extends AbstractAdminController
      */
     public function ajaxAddAction(Request $request)
     {
-        // prevent direct access and redirect administrator to index
-        if (!$request->isXmlHttpRequest()) {
-            return false;
-        }
-
         $group     = $this->get('attribute_group.repository')->find($request->request->get('set'));
-        $attribute = $this->repository->createNewAttribute($group, $request->request->get('name'));
+        $attribute = $this->getRepository()->createNewAttribute($group, $request->request->get('name'));
 
         $this->getEntityManager()->persist($attribute);
         $this->getEntityManager()->flush();
@@ -75,5 +68,15 @@ class AttributeController extends AbstractAdminController
         return $this->jsonResponse([
             'id' => $attribute->getId()
         ]);
+    }
+
+    /**
+     * Returns attribute repository
+     *
+     * @return \WellCommerce\Bundle\AttributeBundle\Repository\AttributeRepositoryInterface
+     */
+    protected function getRepository()
+    {
+        return $this->manager->getRepository();
     }
 }
