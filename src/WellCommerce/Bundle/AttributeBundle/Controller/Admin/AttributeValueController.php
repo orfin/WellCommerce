@@ -44,7 +44,7 @@ class AttributeValueController extends AbstractAdminController
 
         $attribute = $this->get('attribute.repository')->find($request->request->get('attribute'));
         $value     = $this->repository->addAttributeValue($attribute, $request->request->get('name'));
-        $this->getEntityManager()->flush();
+        $this->manager->getDoctrineHelper()->getEntityManager()->flush();
 
         return $this->jsonResponse([
             'id' => $value->getId()
