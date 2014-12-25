@@ -49,8 +49,6 @@ script:
     - bin/behat --suite=product   --stop-on-failure
     - bin/behat --suite=user      --stop-on-failure
 
-    - bin/phpspec run
-
 after_failure:
     - cat error.log
 
