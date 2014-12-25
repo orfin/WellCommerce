@@ -42,7 +42,6 @@ class SortableList extends AbstractField implements ElementInterface
             $this->formatAttributeJs('add_item_prompt', 'sAddItemPrompt'),
             $this->formatAttributeJs('delete_item_prompt', 'sDeleteItemPrompt'),
             $this->formatAttributeJs('set', 'sSet'),
-            $this->formatRepeatableJs(),
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
         ];

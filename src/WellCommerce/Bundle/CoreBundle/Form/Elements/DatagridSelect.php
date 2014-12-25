@@ -72,7 +72,6 @@ class DatagridSelect extends Select implements ElementInterface
             $this->formatAttributeJs('key', 'sKey'),
             $this->formatAttributeJs('columns', 'aoColumns', ElementInterface::TYPE_OBJECT),
             $this->formatAttributeJs('selected_columns', 'aoSelectedColumns', ElementInterface::TYPE_OBJECT),
-            $this->formatRepeatableJs(),
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
         );

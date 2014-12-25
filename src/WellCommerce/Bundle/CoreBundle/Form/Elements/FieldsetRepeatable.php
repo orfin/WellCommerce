@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\PropertyAccess\PropertyPath;
 
 /**
@@ -22,6 +23,24 @@ use Symfony\Component\PropertyAccess\PropertyPath;
  */
 class FieldsetRepeatable extends Fieldset implements ElementInterface
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function configureAttributes(OptionsResolverInterface $resolver)
+    {
+        parent::configureAttributes($resolver);
+
+        $resolver->setRequired([
+            'repeat_min',
+            'repeat_max',
+        ]);
+
+        $resolver->setAllowedTypes([
+            'repeat_min' => ['numeric'],
+            'repeat_max' => ['numeric'],
+        ]);
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -56,8 +75,8 @@ class FieldsetRepeatable extends Fieldset implements ElementInterface
                 $values = $this->getTransformer()->transform($values);
             }
             $this->_value = 1;
-            foreach($this->children as $child){
-                echo $child->getPropertyPath().PHP_EOL;
+            foreach ($this->children as $child) {
+                echo $child->getPropertyPath() . PHP_EOL;
                 $this->populate(1111);
             }
         }

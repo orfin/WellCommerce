@@ -64,7 +64,6 @@ class File extends AbstractField implements ElementInterface
             $this->formatAttributeJs('file_types_description', 'sFileTypesDescription'),
             $this->formatAttributeJs('delete_handler', 'fDeleteHandler', ElementInterface::TYPE_FUNCTION),
             $this->formatAttributeJs('load_handler', 'fLoadFiles', ElementInterface::TYPE_FUNCTION),
-            $this->formatRepeatableJs(),
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
         ];

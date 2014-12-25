@@ -134,7 +134,6 @@ class Tree extends AbstractField implements ElementInterface
             $this->formatAttributeJs('prevent_duplicates', 'bPreventDuplicates', ElementInterface::TYPE_BOOLEAN),
             $this->formatAttributeJs('prevent_duplicates_on_all_levels', 'bPreventDuplicatesOnAllLevels', ElementInterface::TYPE_BOOLEAN),
             $this->formatAttributeJs('set', 'sSet'),
-            $this->formatRepeatableJs(),
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
         ];

@@ -73,7 +73,6 @@ class TextField extends AbstractField implements ElementInterface
             $this->formatAttributeJs('css_attribute', 'sCssAttribute'),
             $this->formatAttributeJs('max_length', 'iMaxLength'),
             $this->formatAttributeJs('error', 'sError'),
-            $this->formatRepeatableJs(),
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
         ];

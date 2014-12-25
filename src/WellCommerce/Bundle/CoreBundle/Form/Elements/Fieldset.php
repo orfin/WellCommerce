@@ -34,8 +34,6 @@ class Fieldset extends AbstractContainer implements ElementInterface
         $resolver->setOptional([
             'label',
             'class',
-            'repeat_min',
-            'repeat_max',
             'property_path',
             'dependencies',
             'filters',
@@ -55,8 +53,6 @@ class Fieldset extends AbstractContainer implements ElementInterface
             'name'          => ['int', 'string'],
             'label'         => 'string',
             'class'         => 'string',
-            'repeat_min'    => ['int', 'string'],
-            'repeat_max'    => ['int', 'string'],
             'dependencies'  => 'array',
             'property_path' => ['null', 'Symfony\Component\PropertyAccess\PropertyPath'],
             'transformer'   => ['null', 'WellCommerce\Bundle\CoreBundle\Form\DataTransformer\DataTransformerInterface'],
@@ -75,6 +71,16 @@ class Fieldset extends AbstractContainer implements ElementInterface
             $this->formatDependencyJs(),
             'aoFields: [' . $this->renderChildren() . ']'
         ];
+    }
+
+
+    protected function formatRepeatableJs()
+    {
+        $min = $this->attributes['repeat_min'];
+        $max = $this->attributes['repeat_max'];
+
+        return "oRepeat: {iMin: {$min}, iMax: {$max}}";
+
     }
 
     /**

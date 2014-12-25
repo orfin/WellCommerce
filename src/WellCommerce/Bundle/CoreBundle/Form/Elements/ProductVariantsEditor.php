@@ -103,7 +103,6 @@ class ProductVariantsEditor extends AbstractField implements ElementInterface
             $this->formatAttributeJs('availability', 'aoAvailability', ElementInterface::TYPE_OBJECT),
             $this->formatAttributeJs('suffixes', 'aoSuffixes', ElementInterface::TYPE_OBJECT),
             $this->formatAttributeJs('set', 'sSet'),
-            $this->formatRepeatableJs(),
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
         ];

@@ -57,7 +57,6 @@ class Date extends TextField implements ElementInterface
             $this->formatAttributeJs('error', 'sError'),
             $this->formatAttributeJs('minDate', 'sMinDate'),
             $this->formatAttributeJs('maxDate', 'sMaxDate'),
-            $this->formatRepeatableJs(),
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
         ];

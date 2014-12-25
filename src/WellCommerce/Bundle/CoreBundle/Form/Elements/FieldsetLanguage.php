@@ -20,7 +20,6 @@ use WellCommerce\Bundle\IntlBundle\Repository\LocaleRepositoryInterface;
 /**
  * Class FieldsetLanguage
  *
- * @package WellCommerce\Bundle\CoreBundle\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class FieldsetLanguage extends Fieldset implements ElementInterface
@@ -47,21 +46,12 @@ class FieldsetLanguage extends Fieldset implements ElementInterface
      */
     public function configureAttributes(OptionsResolverInterface $resolver)
     {
-        $resolver->setRequired([
-            'name',
-            'languages'
-        ]);
+        parent::configureAttributes($resolver);
 
-        $resolver->setOptional([
-            'class',
-            'label',
+        $resolver->setRequired([
+            'languages',
             'repeat_min',
             'repeat_max',
-            'property_path',
-            'dependencies',
-            'filters',
-            'rules',
-            'transformer'
         ]);
 
         $languagesCount = function (Options $options) {
@@ -69,11 +59,6 @@ class FieldsetLanguage extends Fieldset implements ElementInterface
         };
 
         $resolver->setDefaults([
-            'property_path' => null,
-            'transformer'   => null,
-            'dependencies'  => [],
-            'filters'       => [],
-            'rules'         => [],
             'languages'     => [],
             'repeat_min'    => $languagesCount,
             'repeat_max'    => $languagesCount
@@ -81,12 +66,9 @@ class FieldsetLanguage extends Fieldset implements ElementInterface
 
 
         $resolver->setAllowedTypes([
-            'name'       => 'string',
-            'label'      => 'string',
-            'class'      => 'string',
             'languages'  => 'array',
-            'repeat_min' => 'integer',
-            'repeat_max' => 'integer',
+            'repeat_min' => 'numeric',
+            'repeat_max' => 'numeric',
         ]);
     }
 

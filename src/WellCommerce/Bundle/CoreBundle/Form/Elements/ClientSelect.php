@@ -47,7 +47,6 @@ class ClientSelect extends Select implements ElementInterface
             $this->formatAttributeJs('error', 'sError'),
             $this->formatAttributeJs('jsfunction', 'fLoadClients', ElementInterface::TYPE_FUNCTION),
             $this->formatAttributeJs('jsfunctiondetails', 'fLoadClientData', ElementInterface::TYPE_FUNCTION),
-            $this->formatRepeatableJs(),
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
         );

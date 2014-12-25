@@ -64,7 +64,6 @@ class AttributeEditor extends AbstractField implements ElementInterface
             $this->formatAttributeJs('delete_attribute_route', 'sDeleteAttributeRoute'),
             $this->formatAttributeJs('rename_attribute_route', 'sRenameAttributeRoute'),
             $this->formatAttributeJs('rename_attribute_value_route', 'sRenameAttributeValueRoute'),
-            $this->formatRepeatableJs(),
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
         ];

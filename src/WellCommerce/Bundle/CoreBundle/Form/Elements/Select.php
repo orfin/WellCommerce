@@ -37,7 +37,6 @@ class Select extends AbstractOptionedField implements ElementInterface
             $this->formatAttributeJs('addable', 'bAddable'),
             $this->formatAttributeJs('onAdd', 'fOnAdd', ElementInterface::TYPE_FUNCTION),
             $this->formatAttributeJs('add_item_prompt', 'sAddItemPrompt'),
-            $this->formatRepeatableJs(),
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
             $this->formatOptionsJs(),

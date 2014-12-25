@@ -52,7 +52,6 @@ class TextArea extends TextField implements ElementInterface
             $this->formatAttributeJs('cols', 'iCols', ElementInterface::TYPE_NUMBER),
             $this->formatAttributeJs('comment', 'sComment'),
             $this->formatAttributeJs('error', 'sError'),
-            $this->formatRepeatableJs(),
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
         ];

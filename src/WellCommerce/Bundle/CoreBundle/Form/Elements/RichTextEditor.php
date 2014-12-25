@@ -51,7 +51,6 @@ class RichTextEditor extends TextArea implements ElementInterface
             $this->formatAttributeJs('comment', 'sComment'),
             $this->formatAttributeJs('error', 'sError'),
             $this->formatAttributeJs('advanced', 'bAdvanced'),
-            $this->formatRepeatableJs(),
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
         ];

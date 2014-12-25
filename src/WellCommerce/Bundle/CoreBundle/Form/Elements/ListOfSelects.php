@@ -33,7 +33,6 @@ class ListOfSelects extends AbstractOptionedField implements ElementInterface
             $this->formatAttributeJs('prefix', 'sPrefix'),
             $this->formatAttributeJs('error', 'sError'),
             $this->formatAttributeJs('selects', 'aoSelects', ElementInterface::TYPE_OBJECT),
-            $this->formatRepeatableJs(),
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
         ];

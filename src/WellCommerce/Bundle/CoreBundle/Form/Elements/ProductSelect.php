@@ -71,7 +71,6 @@ class ProductSelect extends Select implements ElementInterface
             $this->formatAttributeJs('advanced_editor', 'bAdvancedEditor', ElementInterface::TYPE_BOOLEAN),
             $this->formatAttributeJs('datagrid_filter', 'ofilterData', ElementInterface::TYPE_OBJECT),
             $this->formatAttributeJs('load_categorychildren', 'fLoadCategoryChildren', ElementInterface::TYPE_FUNCTION),
-            $this->formatRepeatableJs(),
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
         );

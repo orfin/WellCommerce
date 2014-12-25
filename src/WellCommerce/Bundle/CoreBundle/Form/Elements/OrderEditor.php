@@ -53,7 +53,6 @@ class OrderEditor extends Select implements ElementInterface
             $this->formatAttributeJs('jsfunction', 'fLoadProducts', ElementInterface::TYPE_FUNCTION),
             $this->formatAttributeJs('datagrid_filter', 'ofilterData', ElementInterface::TYPE_OBJECT),
             $this->formatAttributeJs('load_categorychildren', 'fLoadCategoryChildren', ElementInterface::TYPE_FUNCTION),
-            $this->formatRepeatableJs(),
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
         );

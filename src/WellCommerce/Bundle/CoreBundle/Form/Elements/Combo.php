@@ -34,7 +34,6 @@ class Combo extends AbstractOptionedField implements ElementInterface
             $this->formatAttributeJs('error', 'sError'),
             $this->formatAttributeJs('selector', 'sSelector'),
             $this->formatAttributeJs('css_attribute', 'sCssAttribute'),
-            $this->formatRepeatableJs(),
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
             $this->formatOptionsJs(),

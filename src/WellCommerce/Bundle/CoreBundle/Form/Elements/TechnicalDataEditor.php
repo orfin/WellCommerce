@@ -74,7 +74,6 @@ class TechnicalDataEditor extends AbstractField implements ElementInterface
             $this->formatAttributeJs('product_id', 'sProductId'),
             $this->formatAttributeJs('attribute_groups', 'aAttributeGroups', ElementInterface::TYPE_OBJECT),
             $this->formatAttributeJs('technicalattributes', 'aTechnicalAttributes', ElementInterface::TYPE_OBJECT),
-            $this->formatRepeatableJs(),
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
         ];
