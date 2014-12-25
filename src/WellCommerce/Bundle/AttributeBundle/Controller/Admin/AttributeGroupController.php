@@ -26,7 +26,11 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 class AttributeGroupController extends AbstractAdminController
 {
     /**
-     * {@inheritdoc}
+     * Attribute group index page. Will redirect to first group if found
+     *
+     * @param Request $request
+     *
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function indexAction(Request $request)
     {
