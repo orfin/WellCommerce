@@ -42,7 +42,7 @@ before_script:
     - "export DISPLAY=:99.0"
     - "wget http://selenium-release.storage.googleapis.com/2.42/selenium-server-standalone-2.42.2.jar"
     - "java -jar selenium-server-standalone-2.42.2.jar > /dev/null &"
-    - sleep 10
+    - sleep 20
 
 script:
     - bin/behat --suite=dashboard --stop-on-failure
