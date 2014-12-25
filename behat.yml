@@ -13,6 +13,13 @@ default:
             filters:
                 tags: "@dashboard"
 
+        availability:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - WellCommerce\Bundle\AvailabilityBundle\Behat\AvailabilityContext
+            filters:
+                tags: "@availability"
+
         product:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext

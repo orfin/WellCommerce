@@ -56,7 +56,7 @@
         "sensio/generator-bundle": "~2.3",
         "doctrine/doctrine-fixtures-bundle": "2.2.x-dev",
         "behat/behat": "3.0.x-dev",
-        "behat/symfony2-extension": "2.0.x-dev",
+        "behat/symfony2-extension": "*",
         "behat/mink-extension": "2.0.x-dev",
         "behat/mink-browserkit-driver": "v1.1.0",
         "behat/mink-selenium2-driver": "v1.1.1"
