@@ -11,7 +11,6 @@
  */
 namespace WellCommerce\Bundle\UnitBundle\Form;
 
-use WellCommerce\Bundle\CoreBundle\Entity\BaseSubjectInterface;
 use WellCommerce\Bundle\CoreBundle\Form\AbstractForm;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
@@ -44,11 +43,6 @@ class UnitForm extends AbstractForm implements FormInterface
         $languageData->addChild($builder->getElement('text_field', [
             'name'  => 'name',
             'label' => $this->trans('unit.language_data.name.label'),
-            'rules' => [
-                $builder->getRule('required', [
-                    'message' => $this->trans('Name is required')
-                ]),
-            ]
         ]));
 
         $form->addFilter('no_code');
