@@ -13,16 +13,15 @@
 namespace WellCommerce\Bundle\MediaBundle\Repository;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\DataSetAwareRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Repository\DataGridAwareRepositoryInterface;
 
 /**
- * Interface LocaleRepositoryInterface
+ * Interface MediaRepositoryInterface
  *
- * @package WellCommerce\Bundle\MediaBundle\Repository
- * @author  Adam Piotrowski <adam@wellcommerce.org>
+ * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-interface MediaRepositoryInterface extends RepositoryInterface, DataGridAwareRepositoryInterface
+interface MediaRepositoryInterface extends RepositoryInterface, DataSetAwareRepositoryInterface
 {
     /**
      * Saves uploaded file info

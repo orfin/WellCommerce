@@ -33,17 +33,24 @@
             <argument>WellCommerceMediaBundle:Media</argument>
         </service>
 
-        <service id="media.datagrid" class="WellCommerce\Bundle\MediaBundle\DataGrid\MediaDataGrid">
+        <service id="media.dataset.query_builder" class="WellCommerce\Bundle\MediaBundle\DataSet\MediaDataSetQueryBuilder" public="false">
+            <argument type="service" id="media.repository"/>
+        </service>
+
+        <service id="media.dataset" class="WellCommerce\Bundle\MediaBundle\DataSet\MediaDataSet">
+            <argument key="identifier">media</argument>
+            <argument type="service" id="media.dataset.query_builder"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
-            <configurator service="media.datagrid.configurator" method="configure" />
         </service>
 
-        <service id="media.datagrid.configurator" class="WellCommerce\Bundle\MediaBundle\DataGrid\MediaDataGridConfigurator">
+        <service id="media.datagrid" class="WellCommerce\Bundle\MediaBundle\DataGrid\MediaDataGrid">
             <argument key="identifier">media</argument>
-            <argument type="service" id="datagrid_manager"/>
-            <argument type="service" id="media.repository"/>
+            <argument type="service" id="media.dataset"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
         </service>
 
         <service id="media.form" class="WellCommerce\Bundle\MediaBundle\Form\MediaForm">

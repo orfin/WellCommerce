@@ -16,7 +16,6 @@ use WellCommerce\Bundle\CoreBundle\DataGrid\Column\Column;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnCollection;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Column\Options\Appearance;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Column\Options\Filter;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\EventHandler\ClickRowEventHandler;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\EventHandler\UpdateRowEventHandler;
 use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Options\OptionsInterface;
@@ -24,7 +23,6 @@ use WellCommerce\Bundle\CoreBundle\DataGrid\Options\OptionsInterface;
 /**
  * Class ProductDataGrid
  *
- * @package WellCommerce\Bundle\ProductBundle
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class ProductDataGrid extends AbstractDataGrid implements DataGridInterface

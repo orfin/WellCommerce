@@ -14,13 +14,17 @@ namespace WellCommerce\Bundle\MediaBundle\DataGrid;
 use WellCommerce\Bundle\CoreBundle\DataGrid\AbstractDataGrid;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Column\Column;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnCollection;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnInterface;
+use WellCommerce\Bundle\CoreBundle\DataGrid\Column\Options\Appearance;
+use WellCommerce\Bundle\CoreBundle\DataGrid\Column\Options\Filter;
+use WellCommerce\Bundle\CoreBundle\DataGrid\Column\Options\Sorting;
+use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\EventHandler\LoadedEventHandler;
+use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\EventHandler\ProcessEventHandler;
 use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
+use WellCommerce\Bundle\CoreBundle\DataGrid\Options\OptionsInterface;
 
 /**
  * Class MediaDataGrid
  *
- * @package WellCommerce\Bundle\MediaBundle
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class MediaDataGrid extends AbstractDataGrid implements DataGridInterface
@@ -28,90 +32,93 @@ class MediaDataGrid extends AbstractDataGrid implements DataGridInterface
     /**
      * {@inheritdoc}
      */
-    public function addColumns(ColumnCollection $collection)
+    public function configureColumns(ColumnCollection $collection)
     {
         $collection->add(new Column([
             'id'         => 'id',
-            'source'     => 'media.id',
             'caption'    => $this->trans('media.id'),
-            'sorting'    => [
-                'default_order' => ColumnInterface::SORT_DIR_DESC
-            ],
-            'appearance' => [
+            'sorting'    => new Sorting([
+                'default_order' => Sorting::SORT_DIR_DESC
+            ]),
+            'appearance' => new Appearance([
                 'width'   => 90,
                 'visible' => false
-            ],
-            'filter'     => [
-                'type' => ColumnInterface::FILTER_BETWEEN
-            ]
+            ]),
+            'filter'     => new Filter([
+                'type' => Filter ::FILTER_BETWEEN
+            ])
+        ]));
+
+        $collection->add(new Column([
+            'id'         => 'preview',
+            'caption'    => $this->trans('media.preview'),
+            'appearance' => new Appearance([
+                'width' => 30,
+                'align' => Appearance::ALIGN_CENTER
+            ]),
         ]));
 
         $collection->add(new Column([
             'id'         => 'name',
-            'source'     => 'media.name',
             'caption'    => $this->trans('media.name'),
-            'appearance' => [
-                'width' => 70,
-                'align' => ColumnInterface::ALIGN_LEFT
-            ],
-            'filter'     => [
-                'type' => ColumnInterface::FILTER_INPUT
-            ]
+            'appearance' => new Appearance([
+                'width' => 70
+            ]),
+            'filter'     => new Filter([
+                'type' => Filter::FILTER_INPUT
+            ])
         ]));
 
         $collection->add(new Column([
             'id'         => 'mime',
-            'source'     => 'media.mime',
             'caption'    => $this->trans('media.mime'),
-            'appearance' => [
-                'width' => 70,
-                'align' => ColumnInterface::ALIGN_LEFT
-            ],
-            'filter'     => [
-                'type' => ColumnInterface::FILTER_INPUT
-            ]
+            'appearance' => new Appearance([
+                'width' => 70
+            ]),
+            'filter'     => new Filter([
+                'type' => Filter::FILTER_INPUT
+            ])
         ]));
 
         $collection->add(new Column([
             'id'         => 'extension',
-            'source'     => 'media.extension',
             'caption'    => $this->trans('media.extension'),
-            'appearance' => [
-                'width' => 70,
-                'align' => ColumnInterface::ALIGN_LEFT
-            ],
-            'filter'     => [
-                'type' => ColumnInterface::FILTER_INPUT
-            ]
+            'appearance' => new Appearance([
+                'width' => 70
+            ]),
+            'filter'     => new Filter([
+                'type' => Filter::FILTER_INPUT
+            ])
         ]));
 
         $collection->add(new Column([
             'id'         => 'size',
-            'source'     => 'media.size',
             'caption'    => $this->trans('media.size'),
-            'appearance' => [
-                'width' => 70,
-                'align' => ColumnInterface::ALIGN_LEFT
-            ],
-            'filter'     => [
-                'type' => ColumnInterface::FILTER_INPUT
-            ]
+            'appearance' => new Appearance([
+                'width' => 70
+            ]),
+            'filter'     => new Filter([
+                'type' => Filter::FILTER_INPUT
+            ])
         ]));
 
-        $collection->add(new Column([
-            'id'               => 'preview',
-            'source'           => 'media.path',
-            'caption'          => $this->trans('media.preview'),
-            'appearance'       => [
-                'width' => 70,
-                'align' => ColumnInterface::ALIGN_LEFT
-            ],
-            'filter'           => [
-                'type' => ColumnInterface::FILTER_INPUT
-            ],
-            'process_function' => function ($path) {
-                return $this->getManager()->getImage($path, 'medium');
-            }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function configureOptions(OptionsInterface $options)
+    {
+        parent::configureOptions($options);
+
+        $eventHandlers = $options->getEventHandlers();
+
+        $eventHandlers->add(new ProcessEventHandler([
+            'function' => $this->getJavascriptFunctionName('process')
+        ]));
+
+        $eventHandlers->add(new LoadedEventHandler([
+            'function' => $this->getJavascriptFunctionName('data_loaded')
         ]));
     }
 }
