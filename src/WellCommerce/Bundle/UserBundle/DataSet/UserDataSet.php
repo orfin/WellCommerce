@@ -20,7 +20,6 @@ use WellCommerce\Bundle\CoreBundle\DataSet\DataSetInterface;
 /**
  * Class UserDataSet
  *
- * @package WellCommerce\Bundle\UserBundle\DataSet
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class UserDataSet extends AbstractDataSet implements DataSetInterface
@@ -31,22 +30,22 @@ class UserDataSet extends AbstractDataSet implements DataSetInterface
     public function configureColumns(ColumnCollection $collection)
     {
         $collection->add(new Column([
-            'id'     => 'id',
+            'alias'  => 'id',
             'source' => 'user.id',
         ]));
 
         $collection->add(new Column([
-            'id'     => 'username',
+            'alias'  => 'username',
             'source' => 'user.username',
         ]));
 
         $collection->add(new Column([
-            'id'     => 'email',
+            'alias'  => 'email',
             'source' => 'user.email',
         ]));
 
         $collection->add(new Column([
-            'id'     => 'enabled',
+            'alias'  => 'enabled',
             'source' => 'user.enabled',
         ]));
     }
