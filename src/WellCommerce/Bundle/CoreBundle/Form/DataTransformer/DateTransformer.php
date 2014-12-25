@@ -48,14 +48,28 @@ class DateTransformer implements DataTransformerInterface
     /**
      * Transforms date string to DateTime object
      *
-     * @param $date
+     * @param $value
      *
      * @return DateTime|object
      */
-    public function reverseTransform($date)
+    public function reverseTransform($value)
     {
-        $date = DateTime::createFromFormat($this->format, $date);
+        if (false === $date = $this->createDateFromString($value)) {
+            throw new \InvalidArgumentException(sprintf('Passed date "%s" is not a string.', $value));
+        }
 
         return $date;
+    }
+
+    /**
+     * Creates DateTime from string
+     *
+     * @param $date
+     *
+     * @return DateTime
+     */
+    private function createDateFromString($date)
+    {
+        return DateTime::createFromFormat($this->format, $date);
     }
 } 
