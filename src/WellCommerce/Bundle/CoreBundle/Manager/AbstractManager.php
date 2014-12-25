@@ -12,9 +12,9 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Manager;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Translation\TranslatorInterface;
+use WellCommerce\Bundle\CoreBundle\Helper\Doctrine\DoctrineHelperInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Flash\FlashHelperInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Image\ImageHelperInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Redirect\RedirectHelperInterface;
@@ -49,9 +49,9 @@ abstract class AbstractManager implements ManagerInterface
     protected $eventDispatcher;
 
     /**
-     * @var ObjectManager
+     * @var DoctrineHelperInterface
      */
-    protected $objectManager;
+    protected $doctrineHelper;
 
     /**
      * @var TranslatorInterface
@@ -70,7 +70,7 @@ abstract class AbstractManager implements ManagerInterface
      * @param RedirectHelperInterface  $redirectHelper
      * @param ImageHelperInterface     $imageHelper
      * @param EventDispatcherInterface $eventDispatcher
-     * @param ObjectManager            $objectManager
+     * @param DoctrineHelperInterface  $doctrineHelper
      * @param TranslatorInterface      $translator
      */
     public function __construct(
@@ -78,19 +78,19 @@ abstract class AbstractManager implements ManagerInterface
         RedirectHelperInterface $redirectHelper,
         ImageHelperInterface $imageHelper,
         EventDispatcherInterface $eventDispatcher,
-        ObjectManager $objectManager,
+        DoctrineHelperInterface $doctrineHelper,
         TranslatorInterface $translator
     ) {
         $this->flashHelper     = $flashHelper;
         $this->redirectHelper  = $redirectHelper;
         $this->imageHelper     = $imageHelper;
         $this->eventDispatcher = $eventDispatcher;
-        $this->objectManager   = $objectManager;
+        $this->doctrineHelper  = $doctrineHelper;
         $this->translator      = $translator;
     }
 
     /**
-     * @return RedirectHelperInterface
+     * {@inheritdoc}
      */
     public function getRedirectHelper()
     {
@@ -98,7 +98,7 @@ abstract class AbstractManager implements ManagerInterface
     }
 
     /**
-     * @return FlashHelperInterface
+     * {@inheritdoc}
      */
     public function getFlashHelper()
     {
@@ -106,7 +106,7 @@ abstract class AbstractManager implements ManagerInterface
     }
 
     /**
-     * @return ImageHelperInterface
+     * {@inheritdoc}
      */
     public function getImageHelper()
     {
@@ -114,7 +114,7 @@ abstract class AbstractManager implements ManagerInterface
     }
 
     /**
-     * @return EventDispatcherInterface
+     * {@inheritdoc}
      */
     public function getEventDispatcher()
     {
@@ -122,15 +122,15 @@ abstract class AbstractManager implements ManagerInterface
     }
 
     /**
-     * @return ObjectManager
+     * {@inheritdoc}
      */
-    public function getObjectManager()
+    public function getDoctrineHelper()
     {
-        return $this->objectManager;
+        return $this->doctrineHelper;
     }
 
     /**
-     * @return TranslatorInterface
+     * {@inheritdoc}
      */
     public function getTranslator()
     {
@@ -138,7 +138,7 @@ abstract class AbstractManager implements ManagerInterface
     }
 
     /**
-     * @param RepositoryInterface $repository
+     * {@inheritdoc}
      */
     public function setRepository(RepositoryInterface $repository)
     {
@@ -146,7 +146,7 @@ abstract class AbstractManager implements ManagerInterface
     }
 
     /**
-     * @return RepositoryInterface
+     * {@inheritdoc}
      */
     public function getRepository()
     {

@@ -59,11 +59,11 @@ interface ManagerInterface
     public function getEventDispatcher();
 
     /**
-     * Returns doctrine object manager
+     * Returns Doctrine helper
      *
-     * @return \Doctrine\Common\Persistence\ObjectManager
+     * @return \WellCommerce\Bundle\CoreBundle\Helper\Doctrine\DoctrineHelperInterface
      */
-    public function getObjectManager();
+    public function getDoctrineHelper();
 
     /**
      * Returns translator service

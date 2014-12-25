@@ -21,7 +21,6 @@ use WellCommerce\Bundle\LayoutBundle\Form\LayoutBoxForm;
 /**
  * Class LayoutBoxSubscriber
  *
- * @package WellCommerce\Bundle\LayoutBundle\EventListener
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class LayoutBoxSubscriber extends AbstractEventSubscriber

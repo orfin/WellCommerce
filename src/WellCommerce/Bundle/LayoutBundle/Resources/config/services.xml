@@ -9,7 +9,7 @@
             <argument type="service" id="redirect_helper"/>
             <argument type="service" id="image_helper"/>
             <argument type="service" id="event_dispatcher"/>
-            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="doctrine_helper"/>
             <argument type="service" id="translator"/>
             <call method="setRepository">
                 <argument type="service" id="layout_box.repository"/>
@@ -70,9 +70,6 @@
         <service id="layout_box.subscriber" class="WellCommerce\Bundle\LayoutBundle\EventListener\LayoutBoxSubscriber">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
-            </call>
-            <call method="setTranslator">
-                <argument type="service" id="translator"/>
             </call>
             <tag name="kernel.event_subscriber" />
         </service>

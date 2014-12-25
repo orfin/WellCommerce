@@ -9,7 +9,7 @@
             <argument type="service" id="redirect_helper"/>
             <argument type="service" id="image_helper"/>
             <argument type="service" id="event_dispatcher"/>
-            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="doctrine_helper"/>
             <argument type="service" id="translator"/>
             <call method="setRepository">
                 <argument type="service" id="tax.repository"/>
@@ -62,12 +62,6 @@
         <service id="tax.subscriber" class="WellCommerce\Bundle\TaxBundle\EventListener\TaxSubscriber">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
-            </call>
-            <call method="setTranslator">
-                <argument type="service" id="translator"/>
-            </call>
-            <call method="setRouter">
-                <argument type="service" id="router"/>
             </call>
             <tag name="kernel.event_subscriber" />
         </service>

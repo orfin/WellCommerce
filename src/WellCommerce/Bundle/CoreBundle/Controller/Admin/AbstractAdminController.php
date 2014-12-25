@@ -20,7 +20,6 @@ use WellCommerce\Bundle\CoreBundle\Manager\Admin\AdminManagerInterface;
 /**
  * Class AbstractAdminController
  *
- * @package WellCommerce\Bundle\CoreBundle\Controller
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
@@ -183,7 +182,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
      */
     protected function findOr404(Request $request)
     {
-        $this->disableLocaleFilter();
+        $this->manager->getDoctrineHelper()->disableFilter('locale');
 
         if (!$request->attributes->has('id')) {
             throw new \LogicException('Request does not have "id" attribute set.');

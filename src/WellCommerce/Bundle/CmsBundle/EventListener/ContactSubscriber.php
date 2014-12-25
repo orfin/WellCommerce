@@ -16,7 +16,6 @@ use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 /**
  * Class ContactSubscriber
  *
- * @package WellCommerce\Bundle\CmsBundle\EventListener
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class ContactSubscriber extends AbstractEventSubscriber

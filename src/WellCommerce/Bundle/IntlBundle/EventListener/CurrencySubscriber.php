@@ -16,7 +16,6 @@ use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 /**
  * Class CurrencySubscriber
  *
- * @package WellCommerce\Bundle\IntlBundle\EventListener
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class CurrencySubscriber extends AbstractEventSubscriber

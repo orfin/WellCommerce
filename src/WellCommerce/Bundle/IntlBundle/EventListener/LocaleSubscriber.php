@@ -37,7 +37,7 @@ class LocaleSubscriber extends AbstractEventSubscriber
     {
         $request = $event->getRequest();
 
-        $filter = $this->getEntityManager()->getFilters()->enable('locale');
+        $filter = $this->getDoctrineHelper()->enableFilter('locale');
 
         if ($locale = $request->attributes->get('_locale')) {
             $request->getSession()->set('_locale', $locale);

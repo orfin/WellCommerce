@@ -16,7 +16,6 @@ use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 /**
  * Class AvailabilitySubscriber
  *
- * @package WellCommerce\Bundle\AvailabilityBundle\EventListener
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class AvailabilitySubscriber extends AbstractEventSubscriber

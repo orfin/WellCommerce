@@ -13,31 +13,23 @@
 namespace WellCommerce\Bundle\CoreBundle\EventListener;
 
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Translation\TranslatorInterface;
 use WellCommerce\Bundle\AdminBundle\Event\AdminMenuEvent;
 use WellCommerce\Bundle\AdminBundle\MenuBuilder\XmlLoader;
-use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
 
 /**
  * Class AbstractEventSubscriber
  *
- * @package WellCommerce\Bundle\CoreBundle\EventListener
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractEventSubscriber extends AbstractContainer implements EventSubscriberInterface
+abstract class AbstractEventSubscriber extends ContainerAware implements EventSubscriberInterface
 {
     /**
-     * @var TranslatorInterface
+     * {@inheritdoc}
      */
-    protected $translator;
-
-    /**
-     * @var RouterInterface
-     */
-    protected $router;
-
     public static function getSubscribedEvents()
     {
         return [
@@ -46,27 +38,49 @@ abstract class AbstractEventSubscriber extends AbstractContainer implements Even
     }
 
     /**
-     * Sets translator instance
+     * Returns translator service
      *
-     * @param TranslatorInterface $translator
+     * @return \Symfony\Bundle\FrameworkBundle\Translation\Translator
      */
-    public function setTranslator(TranslatorInterface $translator)
+    protected function getTranslator()
     {
-        $this->translator = $translator;
+        return $this->container->get('translator');
     }
 
     /**
-     * Sets router instance
+     * Returns router service
      *
-     * @param RouterInterface $router
+     * @return \Symfony\Component\Routing\RouterInterface
      */
-    public function setRouter(RouterInterface $router)
+    protected function getRouter()
     {
-        $this->router = $router;
+        return $this->container->get('router');
     }
 
     /**
-     * {@inheritdoc}
+     * Returns Doctrine helper
+     *
+     * @return \WellCommerce\Bundle\CoreBundle\Helper\Doctrine\DoctrineHelper
+     */
+    protected function getDoctrineHelper()
+    {
+        return $this->container->get('doctrine_helper');
+    }
+
+    /**
+     * Returns property accessor instance
+     *
+     * @return \Symfony\Component\PropertyAccess\PropertyAccessor
+     */
+    protected function getPropertyAccessor()
+    {
+        return PropertyAccess::createPropertyAccessor();
+    }
+
+    /**
+     * Loads admin menu structure for in all subscribers
+     *
+     * @param AdminMenuEvent $event
      */
     public function onAdminMenuInitEvent(AdminMenuEvent $event)
     {

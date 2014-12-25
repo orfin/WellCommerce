@@ -9,7 +9,7 @@
             <argument type="service" id="redirect_helper"/>
             <argument type="service" id="image_helper"/>
             <argument type="service" id="event_dispatcher"/>
-            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="doctrine_helper"/>
             <argument type="service" id="translator"/>
             <call method="setRepository">
                 <argument type="service" id="attribute_value.repository"/>

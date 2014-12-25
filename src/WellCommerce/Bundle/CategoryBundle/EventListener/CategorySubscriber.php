@@ -16,7 +16,6 @@ use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 /**
  * Class CategorySubscriber
  *
- * @package WellCommerce\Bundle\CategoryBundle\EventListener
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class CategorySubscriber extends AbstractEventSubscriber

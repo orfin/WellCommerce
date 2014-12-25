@@ -49,45 +49,4 @@ abstract class AbstractController extends Controller
     {
         return $this->get('form.builder')->create($form, $data, $options)->getForm();
     }
-
-    /**
-     * Disables Doctrine locale filter
-     *
-     * @param $filter
-     */
-    protected function disableLocaleFilter()
-    {
-        $this->getDoctrineFilters()->disable('locale');
-    }
-
-    /**
-     * Enables Doctrine locale filter
-     *
-     * @param $locale
-     */
-    protected function enableLocaleFilter($locale)
-    {
-        $filter = $this->getDoctrineFilters()->enable('locale');
-        $filter->setParameter('locale', $locale);
-    }
-
-    /**
-     * Gets the enabled filters.
-     *
-     * @return \Doctrine\ORM\Query\FilterCollection The active filter collection.
-     */
-    private function getDoctrineFilters()
-    {
-        return $this->getEntityManager()->getFilters();
-    }
-
-    /**
-     * Returns entity manager
-     *
-     * @return \Doctrine\Common\Persistence\ObjectManager|object
-     */
-    protected function getEntityManager()
-    {
-        return $this->getDoctrine()->getManager();
-    }
 }

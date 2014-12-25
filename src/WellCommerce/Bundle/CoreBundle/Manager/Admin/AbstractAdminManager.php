@@ -14,11 +14,11 @@ namespace WellCommerce\Bundle\CoreBundle\Manager\Admin;
 
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
+use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
 use WellCommerce\Bundle\CoreBundle\Event\ResourceEvent;
+use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
-use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
-use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
 
 /**
  * Class AbstractAdminManager
@@ -120,8 +120,9 @@ class AbstractAdminManager extends AbstractManager implements AdminManagerInterf
      */
     protected function saveResource($resource)
     {
-        $this->objectManager->persist($resource);
-        $this->objectManager->flush();
+        $em = $this->doctrineHelper->getEntityManager();
+        $em->persist($resource);
+        $em->flush();
 
         return $resource;
     }
@@ -129,8 +130,9 @@ class AbstractAdminManager extends AbstractManager implements AdminManagerInterf
     public function removeResource($resource)
     {
         $this->dispatchEvent($resource, null, AdminManagerInterface::PRE_REMOVE_EVENT);
-        $this->objectManager->remove($resource);
-        $this->objectManager->flush();
+        $em = $this->doctrineHelper->getEntityManager();
+        $em->remove($resource);
+        $em->flush();
         $this->dispatchEvent($resource, null, AdminManagerInterface::POST_REMOVE_EVENT);
     }
 

@@ -19,7 +19,6 @@ use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 /**
  * Class LocaleORMListener
  *
- * @package WellCommerce\Bundle\IntlBundle\EventListener
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class LocaleORMListener implements EventSubscriber

@@ -16,7 +16,6 @@ use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 /**
  * Class PageSubscriber
  *
- * @package WellCommerce\Bundle\CmsBundle\EventListener
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class PageSubscriber extends AbstractEventSubscriber

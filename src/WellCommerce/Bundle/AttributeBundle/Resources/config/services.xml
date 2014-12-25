@@ -18,12 +18,6 @@
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
-            <call method="setTranslator">
-                <argument type="service" id="translator"/>
-            </call>
-            <call method="setRouter">
-                <argument type="service" id="router"/>
-            </call>
             <tag name="kernel.event_subscriber" />
         </service>
     </services>

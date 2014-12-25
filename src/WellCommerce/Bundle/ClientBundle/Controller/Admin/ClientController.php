@@ -17,7 +17,6 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 /**
  * Class ClientController
  *
- * @package WellCommerce\Bundle\ClientBundle\Controller
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()

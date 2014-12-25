@@ -17,7 +17,6 @@ use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 /**
  * Class MediaSubscriber
  *
- * @package WellCommerce\Bundle\MediaBundle\EventListener
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class MediaSubscriber extends AbstractEventSubscriber

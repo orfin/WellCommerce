@@ -16,7 +16,6 @@ use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 /**
  * Class AttributeSubscriber
  *
- * @package WellCommerce\Bundle\AttributeBundle\EventListener
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class AttributeSubscriber extends AbstractEventSubscriber

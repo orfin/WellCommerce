@@ -16,7 +16,6 @@ use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 /**
  * Class TaxSubscriber
  *
- * @package WellCommerce\Bundle\TaxBundle\EventListener
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class TaxSubscriber extends AbstractEventSubscriber

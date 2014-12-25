@@ -17,7 +17,6 @@ use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
 /**
  * Class AvailabilityManager
  *
- * @package WellCommerce\Bundle\AvailabilityBundle\Manager\Admin
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class AvailabilityManager extends AbstractAdminManager
