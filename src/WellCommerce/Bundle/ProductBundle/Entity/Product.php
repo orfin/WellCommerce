@@ -111,21 +111,21 @@ class Product
     private $attributes;
 
     /**
-     * @var string
+     * @var float
      *
      * @ORM\Column(name="stock", type="decimal", precision=15, scale=4)
      */
     private $stock;
 
     /**
-     * @var string
+     * @var float
      *
      * @ORM\Column(name="buy_price", type="decimal", precision=15, scale=4)
      */
     private $buyPrice;
 
     /**
-     * @var string
+     * @var float
      *
      * @ORM\Column(name="sell_price", type="decimal", precision=15, scale=4)
      */
@@ -157,35 +157,35 @@ class Product
     private $trackStock;
 
     /**
-     * @var string
+     * @var float
      *
      * @ORM\Column(name="weight", type="decimal", precision=15, scale=4)
      */
     private $weight;
 
     /**
-     * @var string
+     * @var float
      *
      * @ORM\Column(name="width", type="decimal", precision=15, scale=4)
      */
     private $width;
 
     /**
-     * @var string
+     * @var float
      *
      * @ORM\Column(name="height", type="decimal", precision=15, scale=4)
      */
     private $height;
 
     /**
-     * @var string
+     * @var float
      *
      * @ORM\Column(name="depth", type="decimal", precision=15, scale=4)
      */
     private $depth;
 
     /**
-     * @var string
+     * @var float
      *
      * @ORM\Column(name="package_size", type="decimal", precision=15, scale=4)
      */
@@ -290,7 +290,7 @@ class Product
      */
     public function setStock($stock)
     {
-        $this->stock = $stock;
+        $this->stock = (float)$stock;
     }
 
     /**
