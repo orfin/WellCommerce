@@ -17,7 +17,6 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 /**
  * Class ProductRepository
  *
- * @package WellCommerce\Bundle\ProductBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class ProductRepository extends AbstractEntityRepository implements ProductRepositoryInterface

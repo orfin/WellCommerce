@@ -22,7 +22,6 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * @ORM\Table(name="availability")
- * @ORM\HasLifecycleCallbacks
  * @ORM\Entity(repositoryClass="WellCommerce\Bundle\AvailabilityBundle\Repository\AvailabilityRepository")
  */
 class Availability
