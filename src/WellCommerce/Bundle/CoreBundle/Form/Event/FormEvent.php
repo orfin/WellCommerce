@@ -17,7 +17,6 @@ use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 /**
  * Class FormEvent
  *
- * @package WellCommerce\Bundle\CoreBundle\Form\Event
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class FormEvent extends Event

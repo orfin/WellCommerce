@@ -15,7 +15,6 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Dependencies;
 /**
  * Class Ignore
  *
- * @package WellCommerce\Bundle\CoreBundle\Form\Dependencies
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class Ignore extends AbstractDependency implements DependencyInterface

@@ -118,11 +118,6 @@ abstract class AbstractNode extends BaseAbstractContainer
         return implode(PHP_EOL, $lines);
     }
 
-    public function clearRules()
-    {
-        $this->attributes['rules'] = [];
-    }
-
     public function addRule($type, $options = [])
     {
         $rule = $this->container->get('form.resolver.rule')->get($type, $options);

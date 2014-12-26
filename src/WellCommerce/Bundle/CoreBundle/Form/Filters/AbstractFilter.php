@@ -18,7 +18,6 @@ use Symfony\Component\DependencyInjection\ContainerAware;
  * Class AbstractFilter
  *
  * @package WellCommerce\Bundle\CoreBundle\Form
- * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 abstract class AbstractFilter extends ContainerAware
 {

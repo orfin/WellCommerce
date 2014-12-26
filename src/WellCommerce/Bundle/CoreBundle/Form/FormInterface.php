@@ -17,7 +17,6 @@ use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 /**
  * Interface FormInterface
  *
- * @package WellCommerce\Bundle\CoreBundle\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface FormInterface

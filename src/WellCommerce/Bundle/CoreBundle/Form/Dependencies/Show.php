@@ -15,7 +15,6 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Dependencies;
 /**
  * Class Show
  *
- * @package WellCommerce\Bundle\CoreBundle\Form\Dependencies
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class Show extends AbstractDependency implements DependencyInterface

@@ -18,7 +18,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 /**
  * Class Tip
  *
- * @package WellCommerce\Bundle\CoreBundle\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class Tip extends TextField implements ElementInterface
@@ -37,33 +36,32 @@ class Tip extends TextField implements ElementInterface
 
         $resolver->setRequired([
             'tip',
-            'direction'
+            'direction',
+            'short_tip',
         ]);
 
         $resolver->setDefaults([
             'name'  => '',
-            'label' => ''
+            'label' => '',
+            'short_tip',
         ]);
 
         $resolver->setOptional([
-            'short_tip',
             'retractable',
             'default_state',
         ]);
 
-        $retractable = function (Options $options) {
-            return (isset($options['short_tip']) && strlen($options['short_tip']));
-        };
-
         $resolver->setDefaults([
             'direction'   => self::DOWN,
-            'retractable' => $retractable
+            'retractable' => function (Options $options) {
+                return strlen($options['short_tip']);
+            }
         ]);
 
-        $resolver->setAllowedValues(array(
+        $resolver->setAllowedValues([
             'direction'     => [self::UP, self::DOWN],
             'default_state' => [self::EXPANDED, self::RETRACTED]
-        ));
+        ]);
 
         $resolver->setAllowedTypes([
             'tip'           => 'string',

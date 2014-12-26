@@ -15,7 +15,6 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Dependencies;
 /**
  * Class InvokeCustomFunction
  *
- * @package WellCommerce\Bundle\CoreBundle\Form\Dependencies
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class InvokeCustomFunction extends AbstractDependency implements DependencyInterface

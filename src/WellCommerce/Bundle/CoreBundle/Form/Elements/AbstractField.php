@@ -19,7 +19,6 @@ use WellCommerce\Bundle\CoreBundle\Form\Rules\Required;
 /**
  * Class AbstractField
  *
- * @package WellCommerce\Bundle\CoreBundle\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class AbstractField extends AbstractNode

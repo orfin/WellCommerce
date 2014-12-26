@@ -15,7 +15,6 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Dependencies;
 /**
  * Class Suggest
  *
- * @package WellCommerce\Bundle\CoreBundle\Form\Dependencies
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class Suggest extends AbstractDependency implements DependencyInterface

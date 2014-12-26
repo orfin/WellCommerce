@@ -16,6 +16,7 @@ use Doctrine\Common\Util\ClassUtils;
 use Symfony\Bundle\FrameworkBundle\Templating\TemplateReference;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
@@ -67,7 +68,7 @@ class ControllerListener implements EventSubscriberInterface
             $request->attributes->set('_template_master_vars', $parameters);
         } else {
             $masterParameters = $request->attributes->get('_template_master_vars');
-            $parameters = array_merge($masterParameters, $parameters);
+            $parameters       = array_merge($masterParameters, $parameters);
         }
 
         if (null === $parameters) {
@@ -95,7 +96,7 @@ class ControllerListener implements EventSubscriberInterface
             $event->setResponse($templating->renderResponse($template, $parameters));
         } else {
             $callback = function () use ($templating, $template, $parameters) {
-                return $templating->stream($template, $parameters);
+                $templating->stream($template, $parameters);
             };
 
             $event->setResponse(new StreamedResponse($callback));

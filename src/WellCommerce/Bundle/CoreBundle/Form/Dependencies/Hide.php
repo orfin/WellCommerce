@@ -15,7 +15,6 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Dependencies;
 /**
  * Class Hide
  *
- * @package WellCommerce\Bundle\CoreBundle\Form\Dependencies
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class Hide extends AbstractDependency implements DependencyInterface
