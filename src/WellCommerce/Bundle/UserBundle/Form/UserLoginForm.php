@@ -18,7 +18,6 @@ use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
 /**
  * Class UserLoginForm
  *
- * @package WellCommerce\Bundle\UserBundle\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class UserLoginForm extends AbstractForm implements FormInterface
@@ -32,17 +31,27 @@ class UserLoginForm extends AbstractForm implements FormInterface
 
         $form->addChild($builder->getElement('text_field', [
             'name'  => '_username',
-            'label' => $this->trans('admin.username'),
+            'label' => $this->trans('user_login.username.label'),
+            'rules' => [
+                $builder->getRule('required',[
+                    'message' => $this->trans('user_login.username.error.required')
+                ])
+            ]
         ]));
 
         $form->addChild($builder->getElement('password', [
             'name'  => '_password',
-            'label' => $this->trans('admin.password'),
+            'label' => $this->trans('user_login.password.label'),
+            'rules' => [
+                $builder->getRule('required',[
+                    'message' => $this->trans('user_login.password.error.required')
+                ])
+            ]
         ]));
 
         $form->addChild($builder->getElement('submit', [
             'name'  => 'log_in',
-            'label' => $this->trans('admin.log_id')
+            'label' => $this->trans('user_login.log_in.label'),
         ]));
 
         $form->addFilter('no_code');
