@@ -48,7 +48,7 @@ class PageTranslation implements RoutableSubjectInterface, LocaleAwareInterface
     private $content;
 
     /**
-     * @ORM\OneToOne(targetEntity="WellCommerce\Bundle\CmsBundle\Entity\PageRoute", mappedBy="id", cascade={"persist","remove"})
+     * @ORM\OneToOne(targetEntity="WellCommerce\Bundle\CmsBundle\Entity\PageRoute", cascade={"persist","remove"})
      * @ORM\JoinColumn(name="route_id", referencedColumnName="id", onDelete="CASCADE")
      **/
     protected $route;

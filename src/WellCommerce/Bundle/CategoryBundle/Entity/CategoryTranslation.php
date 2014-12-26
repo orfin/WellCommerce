@@ -45,7 +45,7 @@ class CategoryTranslation implements RoutableSubjectInterface, LocaleAwareInterf
     private $description;
 
     /**
-     * @ORM\OneToOne(targetEntity="WellCommerce\Bundle\CategoryBundle\Entity\CategoryRoute", mappedBy="id", cascade={"persist","remove"})
+     * @ORM\OneToOne(targetEntity="WellCommerce\Bundle\CategoryBundle\Entity\CategoryRoute", cascade={"persist","remove"})
      * @ORM\JoinColumn(name="route_id", referencedColumnName="id", onDelete="CASCADE")
      **/
     protected $route;

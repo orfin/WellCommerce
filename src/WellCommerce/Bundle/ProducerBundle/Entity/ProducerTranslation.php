@@ -55,7 +55,7 @@ class ProducerTranslation implements RoutableSubjectInterface, LocaleAwareInterf
     private $description;
 
     /**
-     * @ORM\OneToOne(targetEntity="WellCommerce\Bundle\ProducerBundle\Entity\ProducerRoute", mappedBy="id", cascade={"persist","remove"})
+     * @ORM\OneToOne(targetEntity="WellCommerce\Bundle\ProducerBundle\Entity\ProducerRoute", cascade={"persist","remove"})
      * @ORM\JoinColumn(name="route_id", referencedColumnName="id", onDelete="CASCADE")
      **/
     protected $route;

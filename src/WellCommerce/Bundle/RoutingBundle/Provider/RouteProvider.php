@@ -114,6 +114,9 @@ class RouteProvider implements RouteProviderInterface
             throw new RouteNotFoundException(sprintf('No route found for id "%s"', $id));
         }
 
+        echo get_class($resource);
+        die();
+
         return $this->createRoute($resource);
     }
 

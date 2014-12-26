@@ -54,7 +54,7 @@ class ProductTranslation implements LocaleAwareInterface, RoutableSubjectInterfa
     private $description;
 
     /**
-     * @ORM\OneToOne(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\ProductRoute", mappedBy="id", cascade={"persist","remove"})
+     * @ORM\OneToOne(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\ProductRoute", cascade={"persist","remove"})
      * @ORM\JoinColumn(name="route_id", referencedColumnName="id", onDelete="CASCADE")
      **/
     protected $route;
