@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\ParameterBag;
 use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CategoryBundle\Tree\CategoryTreeBuilder;
 use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\RoutingBundle\Helper\Sluggable;
 
 /**
  * Class CategoryRepository
@@ -138,11 +139,13 @@ class CategoryRepository extends AbstractEntityRepository implements CategoryRep
         $locales  = $this->getLocales();
         $category = new Category();
         $category->setHierarchy(0);
+        $category->setEnabled(1);
         $category->setParent($parent);
 
         /** @var $locale \WellCommerce\Bundle\IntlBundle\Entity\Locale */
         foreach ($locales as $locale) {
             $category->translate($locale->getCode())->setName($name);
+            $category->translate($locale->getCode())->setSlug(Sluggable::makeSlug($name));
         }
         $category->mergeNewTranslations();
         $this->getEntityManager()->persist($category);

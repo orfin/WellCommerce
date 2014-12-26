@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\CategoryBundle\Controller\Box;
 
 use Symfony\Component\HttpFoundation\Request;
+use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
 
@@ -32,7 +33,17 @@ class CategoryMenuBoxController extends AbstractBoxController implements BoxCont
     public function indexAction(Request $request)
     {
         return [
-            'active' => $this->get('category.provider')->getCurrentResource()->getId()
+            'active' => $this->getCurrentCategoryId()
         ];
+    }
+
+    private function getCurrentCategoryId()
+    {
+        $resource = $this->get('category.provider')->getCurrentResource();
+        if ($resource instanceof Category) {
+            return $resource->getId();
+        }
+
+        return null;
     }
 } 

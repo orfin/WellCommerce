@@ -27,4 +27,9 @@ class ProducerRoute extends Route implements RouteInterface
      * @ORM\JoinColumn(name="foreign_id", referencedColumnName="id", onDelete="CASCADE")
      **/
     protected $identifier;
+
+    public function getType()
+    {
+        return 'producer';
+    }
 } 

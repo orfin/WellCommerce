@@ -17,7 +17,8 @@ namespace WellCommerce\Bundle\RoutingBundle\Entity;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-interface RouteInterface {
+interface RouteInterface
+{
 
     /**
      * @return mixed
@@ -47,4 +48,6 @@ interface RouteInterface {
     public function setIdentifier($identifier);
 
     public function getIdentifier();
+
+    public function getType();
 } 

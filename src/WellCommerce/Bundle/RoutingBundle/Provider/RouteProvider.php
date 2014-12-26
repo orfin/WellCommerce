@@ -18,6 +18,7 @@ use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Route as SymfonyRoute;
 use Symfony\Component\Routing\RouteCollection;
 use WellCommerce\Bundle\RoutingBundle\Entity\Route;
+use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;
 use WellCommerce\Bundle\RoutingBundle\Generator\RouteGeneratorCollection;
 use WellCommerce\Bundle\RoutingBundle\Repository\RouteRepositoryInterface;
 
@@ -114,20 +115,17 @@ class RouteProvider implements RouteProviderInterface
             throw new RouteNotFoundException(sprintf('No route found for id "%s"', $id));
         }
 
-        echo get_class($resource);
-        die();
-
         return $this->createRoute($resource);
     }
 
     /**
-     * Creates a route using related generator
+     * Creates a route
      *
-     * @param Route $resource
+     * @param RouteInterface $resource
      *
      * @return null|Route
      */
-    private function createRoute(Route $resource)
+    private function createRoute(RouteInterface $resource)
     {
         $route = null;
 
@@ -136,7 +134,7 @@ class RouteProvider implements RouteProviderInterface
          */
 
         foreach ($this->generators as $generator) {
-            if ($generator->supports($resource->getStrategy())) {
+            if ($generator->supports($resource->getType())) {
                 $route = $generator->generate($resource);
             }
         }
