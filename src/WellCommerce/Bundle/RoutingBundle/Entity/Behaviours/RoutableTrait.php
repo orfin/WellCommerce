@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\RoutingBundle\Entity\Behaviours;
 
-use WellCommerce\Bundle\RoutingBundle\Entity\Route;
+use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;
 
 /**
  * Class RoutableTrait
@@ -25,30 +25,24 @@ trait RoutableTrait
     protected $needsFlush = false;
 
     /**
-     * @ORM\OneToOne(targetEntity="WellCommerce\Bundle\RoutingBundle\Entity\Route", mappedBy="id", orphanRemoval=true)
-     * @ORM\JoinColumn(name="route_id", referencedColumnName="id", onDelete="SET NULL")
-     **/
-    protected $route;
-
-    /**
      * @ORM\Column(name="slug", type="string", length=255, nullable=false)
      */
     protected $slug;
 
     /**
-     * Sets the entity's slug.
-     *
-     * @param $slug
+     * {@inheritdoc}
      */
     public function setSlug($slug)
     {
         $this->slug = $slug;
+        $route      = $this->getRoute();
+        if ($route instanceof RouteInterface) {
+            $route->setPath($slug);
+        }
     }
 
     /**
-     * Returns the entity's slug.
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getSlug()
     {
@@ -56,19 +50,15 @@ trait RoutableTrait
     }
 
     /**
-     * Sets the entity's route.
-     *
-     * @param $route
+     * {@inheritdoc}
      */
-    public function setRoute(Route $route)
+    public function setRoute(RouteInterface $route)
     {
         $this->route = $route;
     }
 
     /**
-     * Returns the entity's route.
-     *
-     * @return Route
+     * {@inheritdoc}
      */
     public function getRoute()
     {

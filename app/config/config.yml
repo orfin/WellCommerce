@@ -78,8 +78,8 @@ fos_js_routing:
 cmf_routing:
     chain:
         routers_by_id:
+            router.default:             10
             cmf_routing.dynamic_router: 50
-            router.default:             100
     dynamic:
         enabled: true
         route_provider_service_id: router.provider.endpoint

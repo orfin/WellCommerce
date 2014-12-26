@@ -44,21 +44,21 @@ interface RoutableSubjectInterface
     /**
      * Returns a route bound to entity
      *
-     * @return Route
+     * @return RouteInterface
      */
     public function getRoute();
 
     /**
-     * @param Route $route
+     * Sets route
      *
-     * @return void
+     * @param RouteInterface $route
+     *
+     * @return mixed
      */
-    public function setRoute(Route $route);
+    public function setRoute(RouteInterface $route);
 
     /**
-     * Returns strategy name used in route generation
-     *
-     * @return string
+     * @return RouteInterface
      */
-    public function getRouteGeneratorStrategy();
-} 
+    public function getRouteEntity();
+}

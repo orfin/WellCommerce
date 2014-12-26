@@ -19,7 +19,6 @@ use Symfony\Component\Routing\Route as SymfonyRoute;
 use Symfony\Component\Routing\RouteCollection;
 use WellCommerce\Bundle\RoutingBundle\Entity\Route;
 use WellCommerce\Bundle\RoutingBundle\Generator\RouteGeneratorCollection;
-use WellCommerce\Bundle\RoutingBundle\Generator\RouteGeneratorInterface;
 use WellCommerce\Bundle\RoutingBundle\Repository\RouteRepositoryInterface;
 
 /**

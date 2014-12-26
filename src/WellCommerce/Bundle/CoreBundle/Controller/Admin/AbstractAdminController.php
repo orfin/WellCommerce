@@ -163,6 +163,8 @@ abstract class AbstractAdminController extends AbstractController implements Adm
      */
     public function deleteAction($id)
     {
+        $this->manager->getDoctrineHelper()->disableFilter('locale');
+
         try {
             $resource = $this->manager->getRepository()->find($id);
             $this->manager->removeResource($resource);

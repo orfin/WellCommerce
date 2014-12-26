@@ -48,6 +48,12 @@ class PageTranslation implements RoutableSubjectInterface, LocaleAwareInterface
     private $content;
 
     /**
+     * @ORM\OneToOne(targetEntity="WellCommerce\Bundle\CmsBundle\Entity\PageRoute", mappedBy="id", cascade={"persist","remove"})
+     * @ORM\JoinColumn(name="route_id", referencedColumnName="id", onDelete="CASCADE")
+     **/
+    protected $route;
+
+    /**
      * @return string
      */
     public function getContent()
@@ -79,9 +85,12 @@ class PageTranslation implements RoutableSubjectInterface, LocaleAwareInterface
         $this->name = $name;
     }
 
-    public function getRouteGeneratorStrategy()
+    /**
+     * @return PageRoute|\WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface
+     */
+    public function getRouteEntity()
     {
-        return PageRouteGenerator::GENERATOR_STRATEGY;
+        return new PageRoute();
     }
 }
 

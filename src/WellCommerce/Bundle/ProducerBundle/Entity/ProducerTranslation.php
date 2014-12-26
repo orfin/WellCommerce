@@ -55,6 +55,12 @@ class ProducerTranslation implements RoutableSubjectInterface, LocaleAwareInterf
     private $description;
 
     /**
+     * @ORM\OneToOne(targetEntity="WellCommerce\Bundle\ProducerBundle\Entity\ProducerRoute", mappedBy="id", cascade={"persist","remove"})
+     * @ORM\JoinColumn(name="route_id", referencedColumnName="id", onDelete="CASCADE")
+     **/
+    protected $route;
+
+    /**
      * Get name.
      *
      * @return string
@@ -122,9 +128,12 @@ class ProducerTranslation implements RoutableSubjectInterface, LocaleAwareInterf
         return $this;
     }
 
-    public function getRouteGeneratorStrategy()
+    /**
+     * @return ProducerRoute|\WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface
+     */
+    public function getRouteEntity()
     {
-        return ProducerRouteGenerator::GENERATOR_STRATEGY;
+        return new ProducerRoute();
     }
 }
 

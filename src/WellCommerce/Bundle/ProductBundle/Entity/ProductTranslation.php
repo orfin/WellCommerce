@@ -16,7 +16,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Translatable\Translation;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\MetaDataTrait;
 use WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface;
-use WellCommerce\Bundle\ProductBundle\Routing\ProductRouteGenerator;
 use WellCommerce\Bundle\RoutingBundle\Entity\Behaviours\RoutableTrait;
 use WellCommerce\Bundle\RoutingBundle\Entity\RoutableSubjectInterface;
 
@@ -27,7 +26,7 @@ use WellCommerce\Bundle\RoutingBundle\Entity\RoutableSubjectInterface;
  * @ORM\HasLifecycleCallbacks
  * @ORM\Entity
  */
-class ProductTranslation implements RoutableSubjectInterface, LocaleAwareInterface
+class ProductTranslation implements LocaleAwareInterface, RoutableSubjectInterface
 {
     use Translation;
     use MetaDataTrait;
@@ -55,6 +54,12 @@ class ProductTranslation implements RoutableSubjectInterface, LocaleAwareInterfa
     private $description;
 
     /**
+     * @ORM\OneToOne(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\ProductRoute", mappedBy="id", cascade={"persist","remove"})
+     * @ORM\JoinColumn(name="route_id", referencedColumnName="id", onDelete="CASCADE")
+     **/
+    protected $route;
+
+    /**
      * Get name.
      *
      * @return string
@@ -74,8 +79,6 @@ class ProductTranslation implements RoutableSubjectInterface, LocaleAwareInterfa
     public function setName($name)
     {
         $this->name = $name;
-
-        return $this;
     }
 
     /**
@@ -96,8 +99,6 @@ class ProductTranslation implements RoutableSubjectInterface, LocaleAwareInterfa
     public function setShortDescription($shortDescription)
     {
         $this->shortDescription = $shortDescription;
-
-        return $this;
     }
 
     /**
@@ -118,13 +119,14 @@ class ProductTranslation implements RoutableSubjectInterface, LocaleAwareInterfa
     public function setDescription($description)
     {
         $this->description = $description;
-
-        return $this;
     }
 
-    public function getRouteGeneratorStrategy()
+    /**
+     * @return ProductRoute|\WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface
+     */
+    public function getRouteEntity()
     {
-        return ProductRouteGenerator::GENERATOR_STRATEGY;
+        return new ProductRoute();
     }
 }
 

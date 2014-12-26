@@ -1,11 +1,11 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- *
+ * 
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- *
+ * 
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
@@ -15,24 +15,25 @@ namespace WellCommerce\Bundle\RoutingBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class Route
- *
- * @package WellCommerce\Bundle\ProductBundle\Entity
- * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @ORM\Table(name="route")
  * @ORM\Entity(repositoryClass="WellCommerce\Bundle\RoutingBundle\Repository\RouteRepository")
+ * @ORM\Table(name="route")
+ * @ORM\InheritanceType("JOINED")
+ * @ORM\DiscriminatorColumn(name="type", type="string")
+ * @ORM\DiscriminatorMap({
+ *      "product"    = "WellCommerce\Bundle\ProductBundle\Entity\ProductRoute",
+ *      "producer"   = "WellCommerce\Bundle\ProducerBundle\Entity\ProducerRoute",
+ *      "category"   = "WellCommerce\Bundle\CategoryBundle\Entity\CategoryRoute",
+ *      "page"       = "WellCommerce\Bundle\CmsBundle\Entity\PageRoute",
+ * })
  */
 class Route
 {
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
+     * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(name="path", type="string")
@@ -40,42 +41,18 @@ class Route
     private $path;
 
     /**
-     * @ORM\Column(name="identifier", type="integer")
+     * @ORM\Column(name="locale", type="string", length=255, nullable=false)
      */
-    private $identifier;
+    protected $locale;
 
-    /**
-     * @ORM\Column(name="locale", type="string")
-     */
-    private $locale;
-
-    /**
-     * @ORM\Column(name="strategy", type="string")
-     */
-    private $strategy;
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+    protected $identifier;
 
     /**
      * @return mixed
      */
-    public function getStrategy()
+    public function getId()
     {
-        return $this->strategy;
-    }
-
-    /**
-     * @param mixed $strategy
-     */
-    public function setStrategy($strategy)
-    {
-        $this->strategy = $strategy;
+        return $this->id;
     }
 
     /**
@@ -97,22 +74,6 @@ class Route
     /**
      * @return mixed
      */
-    public function getIdentifier()
-    {
-        return $this->identifier;
-    }
-
-    /**
-     * @param mixed $identifier
-     */
-    public function setIdentifier($identifier)
-    {
-        $this->identifier = $identifier;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getLocale()
     {
         return $this->locale;
@@ -125,5 +86,20 @@ class Route
     {
         $this->locale = $locale;
     }
-}
 
+    /**
+     * @return mixed
+     */
+    public function getIdentifier()
+    {
+        return $this->identifier;
+    }
+
+    /**
+     * @param mixed $identifier
+     */
+    public function setIdentifier($identifier)
+    {
+        $this->identifier = $identifier;
+    }
+}

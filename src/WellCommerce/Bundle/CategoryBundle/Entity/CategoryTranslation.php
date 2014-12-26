@@ -45,6 +45,12 @@ class CategoryTranslation implements RoutableSubjectInterface, LocaleAwareInterf
     private $description;
 
     /**
+     * @ORM\OneToOne(targetEntity="WellCommerce\Bundle\CategoryBundle\Entity\CategoryRoute", mappedBy="id", cascade={"persist","remove"})
+     * @ORM\JoinColumn(name="route_id", referencedColumnName="id", onDelete="CASCADE")
+     **/
+    protected $route;
+
+    /**
      * Returns translation ID.
      *
      * @return integer The ID.
@@ -120,8 +126,11 @@ class CategoryTranslation implements RoutableSubjectInterface, LocaleAwareInterf
         return ['name'];
     }
 
-    public function getRouteGeneratorStrategy()
+    /**
+     * @return CategoryRoute|\WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface
+     */
+    public function getRouteEntity()
     {
-        return CategoryRouteGenerator::GENERATOR_STRATEGY;
+        return new CategoryRoute();
     }
 }
