@@ -12,16 +12,15 @@
 
 namespace WellCommerce\Bundle\IntlBundle\Repository;
 
+use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\DataSetAwareRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Repository\DataGridAwareRepositoryInterface;
 
 /**
  * Interface CurrencyRepositoryInterface
  *
- * @package WellCommerce\Bundle\IntlBundle\Repository
- * @author  Adam Piotrowski <adam@wellcommerce.org>
+ * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-interface CurrencyRepositoryInterface extends DataGridAwareRepositoryInterface, RepositoryInterface
+interface CurrencyRepositoryInterface extends DataSetAwareRepositoryInterface, RepositoryInterface
 {
     /**
      * Returns an array of currencies fetched from intl component

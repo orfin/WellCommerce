@@ -15,6 +15,9 @@ use WellCommerce\Bundle\CoreBundle\DataGrid\AbstractDataGrid;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Column\Column;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnCollection;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnInterface;
+use WellCommerce\Bundle\CoreBundle\DataGrid\Column\Options\Appearance;
+use WellCommerce\Bundle\CoreBundle\DataGrid\Column\Options\Filter;
+use WellCommerce\Bundle\CoreBundle\DataGrid\Column\Options\Sorting;
 use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
 
 /**
@@ -28,61 +31,36 @@ class DictionaryDataGrid extends AbstractDataGrid implements DataGridInterface
     /**
      * {@inheritdoc}
      */
-    public function addColumns(ColumnCollection $collection)
+    public function configureColumns(ColumnCollection $collection)
     {
         $collection->add(new Column([
             'id'         => 'id',
-            'source'     => 'dictionary.id',
             'caption'    => $this->trans('dictionary.id'),
-            'sorting'    => [
+            'sorting'    => new Sorting([
                 'default_order' => ColumnInterface::SORT_DIR_DESC
-            ],
-            'appearance' => [
+            ]),
+            'appearance' => new Appearance([
                 'width'   => 90,
                 'visible' => false
-            ],
-            'filter'     => [
-                'type' => ColumnInterface::FILTER_BETWEEN
-            ]
+            ]),
+            'filter'     => new Filter([
+                'type' => Filter::FILTER_BETWEEN
+            ])
         ]));
 
         $collection->add(new Column([
-            'id'         => 'identifier',
-            'source'     => 'dictionary.identifier',
-            'caption'    => $this->trans('dictionary.identifier'),
-            'appearance' => [
-                'width' => 70,
-                'align' => ColumnInterface::ALIGN_LEFT
-            ],
-            'filter'     => [
-                'type' => ColumnInterface::FILTER_INPUT
-            ]
+            'id'      => 'identifier',
+            'caption' => $this->trans('dictionary.identifier'),
         ]));
 
         $collection->add(new Column([
-            'id'         => 'translation',
-            'source'     => 'dictionary_translation.translation',
-            'caption'    => $this->trans('dictionary.translation'),
-            'appearance' => [
-                'width' => 70,
-                'align' => ColumnInterface::ALIGN_LEFT
-            ],
-            'filter'     => [
-                'type' => ColumnInterface::FILTER_INPUT
-            ]
+            'id'      => 'translation',
+            'caption' => $this->trans('dictionary.translation'),
         ]));
 
         $collection->add(new Column([
-            'id'         => 'locale',
-            'source'     => 'dictionary_translation.locale',
-            'caption'    => $this->trans('dictionary.locale'),
-            'appearance' => [
-                'width' => 70,
-                'align' => ColumnInterface::ALIGN_LEFT
-            ],
-            'filter'     => [
-                'type' => ColumnInterface::FILTER_INPUT
-            ]
+            'id'      => 'locale',
+            'caption' => $this->trans('dictionary.locale'),
         ]));
     }
 }

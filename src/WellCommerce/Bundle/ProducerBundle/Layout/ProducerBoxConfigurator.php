@@ -19,7 +19,6 @@ use WellCommerce\Bundle\LayoutBundle\Configurator\LayoutBoxConfiguratorInterface
 /**
  * Class ProducerBoxConfigurator
  *
- * @package WellCommerce\Bundle\ProducerBundle\Configurator
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class ProducerBoxConfigurator extends AbstractLayoutBoxConfigurator implements LayoutBoxConfiguratorInterface

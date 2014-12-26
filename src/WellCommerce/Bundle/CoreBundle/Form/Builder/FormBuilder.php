@@ -44,7 +44,6 @@ class FormBuilder extends AbstractContainer implements FormBuilderInterface
      */
     public function create(FormInterface $form, $data, array $options)
     {
-        $className     = get_class($data);
         $this->options = $options;
         $this->data    = $data;
         $this->form    = $form->buildForm($this, $this->options);

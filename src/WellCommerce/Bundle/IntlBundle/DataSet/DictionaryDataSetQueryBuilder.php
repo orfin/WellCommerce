@@ -10,17 +10,17 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\IntlBundle\Repository;
+namespace WellCommerce\Bundle\IntlBundle\DataSet;
 
-use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\DataSetAwareRepositoryInterface;
-use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
+use WellCommerce\Bundle\CoreBundle\DataSet\QueryBuilder\AbstractDataSetQueryBuilder;
+use WellCommerce\Bundle\CoreBundle\DataSet\QueryBuilder\QueryBuilderInterface;
 
 /**
- * Interface DictionaryRepositoryInterface
+ * Class DictionaryDataSetQueryBuilder
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-interface DictionaryRepositoryInterface extends DataSetAwareRepositoryInterface, RepositoryInterface
+class DictionaryDataSetQueryBuilder extends AbstractDataSetQueryBuilder implements QueryBuilderInterface
 {
 
 } 

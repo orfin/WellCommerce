@@ -33,9 +33,7 @@ class UserController extends AbstractAdminController
         $session = $request->getSession();
 
         if ($request->attributes->has(SecurityContextInterface::AUTHENTICATION_ERROR)) {
-            $error = $request->attributes->get(
-                SecurityContextInterface::AUTHENTICATION_ERROR
-            );
+            $error = $request->attributes->get(SecurityContextInterface::AUTHENTICATION_ERROR);
         } elseif (null !== $session && $session->has(SecurityContextInterface::AUTHENTICATION_ERROR)) {
             $error = $session->get(SecurityContextInterface::AUTHENTICATION_ERROR);
             $session->remove(SecurityContextInterface::AUTHENTICATION_ERROR);
@@ -67,7 +65,7 @@ class UserController extends AbstractAdminController
             return new JsonResponse(['error' => 'You cannot delete your own admin account.']);
         }
 
-        $em = $this->manager->getDoctrineHelper()->getEntityManager();
+        $em = $this->getEntityManager();
 
         try {
             $resource = $this->manager->getRepository()->find($id);

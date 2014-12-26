@@ -12,7 +12,7 @@
 namespace WellCommerce\Bundle\IntlBundle\Repository;
 
 use Symfony\Component\Intl\Intl;
-use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
+use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 
 /**
  * Class CountryRepository
@@ -20,7 +20,7 @@ use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
  * @package WellCommerce\Bundle\IntlBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CountryRepository extends AbstractContainer
+class CountryRepository extends AbstractEntityRepository
 {
     /**
      * Returns all country names for given locale
