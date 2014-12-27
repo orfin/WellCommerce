@@ -171,10 +171,6 @@
             <tag name="form.rule" alias="unique"/>
         </service>
 
-        <service id="form.rule.vat" class="WellCommerce\Bundle\CoreBundle\Form\Rules\Vat" scope="prototype">
-            <tag name="form.rule" alias="vat"/>
-        </service>
-
         <!-- DEPENDENCIES -->
         <service id="form.dependency.show" class="WellCommerce\Bundle\CoreBundle\Form\Dependencies\Show" scope="prototype">
             <tag name="form.dependency" alias="show"/>
