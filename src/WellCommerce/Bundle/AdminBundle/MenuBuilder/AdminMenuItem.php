@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\AdminBundle\MenuBuilder;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Class AdminMenuItem
@@ -49,9 +48,9 @@ class AdminMenuItem implements AdminMenuItemInterface, \ArrayAccess
     /**
      * Configures admin menu item options
      *
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function configureOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired([
             'id',
@@ -60,24 +59,24 @@ class AdminMenuItem implements AdminMenuItemInterface, \ArrayAccess
             'path'
         ]);
 
-        $resolver->setOptional([
+        $resolver->setDefined([
             'class',
             'sort_order',
         ]);
 
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'sort_order' => 0,
             'class'      => '',
             'link'       => ''
-        ));
+        ]);
 
-        $resolver->setAllowedTypes(array(
+        $resolver->setAllowedTypes([
             'id'         => 'string',
             'name'       => 'string',
             'link'       => 'string',
             'class'      => 'string',
             'sort_order' => 'integer',
-        ));
+        ]);
 
     }
 

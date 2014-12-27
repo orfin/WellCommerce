@@ -12,7 +12,8 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DataGrid\Configuration;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
 
 /**
  * Class Mechanics
@@ -22,34 +23,17 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class Mechanics extends AbstractOption implements OptionInterface
 {
-    protected $types
-        = [
-            'rows_per_page'            => OptionInterface::TYPE_NUMBER,
-            'key'                      => OptionInterface::TYPE_STRING,
-            'default_sorting'          => OptionInterface::TYPE_STRING,
-            'right_click_menu'         => OptionInterface::TYPE_BOOLEAN,
-            'auto_suggest_delay'       => OptionInterface::TYPE_NUMBER,
-            'auto_suggest_min_length'  => OptionInterface::TYPE_NUMBER,
-            'auto_suggest_suggestions' => OptionInterface::TYPE_NUMBER,
-            'only_one_selected'        => OptionInterface::TYPE_BOOLEAN,
-            'no_column_modification'   => OptionInterface::TYPE_BOOLEAN,
-            'no_column_resizing'       => OptionInterface::TYPE_BOOLEAN,
-            'create_input'             => OptionInterface::TYPE_BOOLEAN,
-            'save_column_modification' => OptionInterface::TYPE_BOOLEAN,
-            'persistent'               => OptionInterface::TYPE_BOOLEAN,
-        ];
-
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired([
             'rows_per_page',
             'key',
         ]);
 
-        $resolver->setOptional([
+        $resolver->setDefined([
             'default_sorting',
             'right_click_menu',
             'auto_suggest_delay',

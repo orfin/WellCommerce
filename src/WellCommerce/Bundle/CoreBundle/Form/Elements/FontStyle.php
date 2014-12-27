@@ -15,7 +15,6 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 /**
  * Class FontStyle
  *
- * @package WellCommerce\Bundle\CoreBundle\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class FontStyle extends TextField implements ElementInterface

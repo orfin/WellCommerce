@@ -12,12 +12,11 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DataGrid\Configuration;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class Appearance
  *
- * @package WellCommerce\Bundle\CoreBundle\DataGrid\Configuration
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class Appearance extends AbstractOption implements OptionInterface
@@ -25,7 +24,7 @@ class Appearance extends AbstractOption implements OptionInterface
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired([
             'column_select',

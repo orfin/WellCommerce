@@ -12,12 +12,11 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\EventHandler;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class ViewRow
  *
- * @package WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\EventHandler
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class ViewRowEventHandler
@@ -27,7 +26,7 @@ class ViewRowEventHandler
         return 'view_row';
     }
 
-    public function configure(OptionsResolverInterface $resolver)
+    public function configure(OptionsResolver $resolver)
     {
         $resolver->setRequired([
             'callback',

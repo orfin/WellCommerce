@@ -12,12 +12,11 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class AbstractOptionedField
  *
- * @package WellCommerce\Bundle\CoreBundle\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 abstract class AbstractOptionedField extends AbstractField
@@ -25,7 +24,7 @@ abstract class AbstractOptionedField extends AbstractField
     /**
      * {@inheritdoc}
      */
-    public function configureAttributes(OptionsResolverInterface $resolver)
+    public function configureAttributes(OptionsResolver $resolver)
     {
         parent::configureAttributes($resolver);
 
@@ -33,7 +32,7 @@ abstract class AbstractOptionedField extends AbstractField
             'options'
         ]);
 
-        $resolver->setOptional([
+        $resolver->setDefined([
             'suffix',
             'prefix',
             'error',

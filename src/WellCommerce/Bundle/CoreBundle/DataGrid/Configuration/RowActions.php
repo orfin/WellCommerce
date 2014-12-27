@@ -12,13 +12,12 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DataGrid\Configuration;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
 
 /**
  * Class RowActions
  *
- * @package WellCommerce\Bundle\CoreBundle\DataGrid\Configuration
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class RowActions extends AbstractOption implements OptionInterface
@@ -26,7 +25,7 @@ class RowActions extends AbstractOption implements OptionInterface
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired([
             'actions',

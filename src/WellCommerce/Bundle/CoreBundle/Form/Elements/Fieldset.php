@@ -12,12 +12,11 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class Fieldset
  *
- * @package WellCommerce\Bundle\CoreBundle\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class Fieldset extends AbstractContainer implements ElementInterface
@@ -25,13 +24,13 @@ class Fieldset extends AbstractContainer implements ElementInterface
     /**
      * {@inheritdoc}
      */
-    public function configureAttributes(OptionsResolverInterface $resolver)
+    public function configureAttributes(OptionsResolver $resolver)
     {
         $resolver->setRequired([
             'name',
         ]);
 
-        $resolver->setOptional([
+        $resolver->setDefined([
             'label',
             'class',
             'property_path',

@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
 use Symfony\Component\OptionsResolver\Options;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PropertyAccess\PropertyPath;
 use WellCommerce\Bundle\IntlBundle\Repository\LocaleRepositoryInterface;
 
@@ -44,7 +44,7 @@ class FieldsetLanguage extends Fieldset implements ElementInterface
     /**
      * {@inheritdoc}
      */
-    public function configureAttributes(OptionsResolverInterface $resolver)
+    public function configureAttributes(OptionsResolver $resolver)
     {
         parent::configureAttributes($resolver);
 
@@ -59,9 +59,9 @@ class FieldsetLanguage extends Fieldset implements ElementInterface
         };
 
         $resolver->setDefaults([
-            'languages'     => [],
-            'repeat_min'    => $languagesCount,
-            'repeat_max'    => $languagesCount
+            'languages'  => [],
+            'repeat_min' => $languagesCount,
+            'repeat_max' => $languagesCount
         ]);
 
 
@@ -117,26 +117,26 @@ class FieldsetLanguage extends Fieldset implements ElementInterface
 
     public function addRules($constraints)
     {
-        $propertyPath = '[' . $this->getPropertyPath() . ']';
-        $accessor     = $this->getPropertyAccessor();
-        if ($accessor->isReadable($constraints, $propertyPath)) {
-            $fieldsetMetadata = $accessor->getValue($constraints, $propertyPath);
-            if(isset($fieldsetMetadata->members)){
-                foreach ($this->children as $child) {
-                    $childPropertyPath = '[' . $child->getPropertyPath() . ']';
-                    if ($accessor->isReadable($fieldsetMetadata->members, $childPropertyPath)) {
-                        $fieldConstraints = $accessor->getValue($fieldsetMetadata->members, $childPropertyPath);
-                        if(is_array($fieldConstraints)){
-                            foreach ($fieldConstraints as $constraint) {
-                                foreach ($constraint->constraints as $rule) {
-                                    $child->addRule('required', ['message' => $rule->message]);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+//        $propertyPath = '[' . $this->getPropertyPath() . ']';
+//        $accessor     = $this->getPropertyAccessor();
+//        if ($accessor->isReadable($constraints, $propertyPath)) {
+//            $fieldsetMetadata = $accessor->getValue($constraints, $propertyPath);
+//            if(isset($fieldsetMetadata->members)){
+//                foreach ($this->children as $child) {
+//                    $childPropertyPath = '[' . $child->getPropertyPath() . ']';
+//                    if ($accessor->isReadable($fieldsetMetadata->members, $childPropertyPath)) {
+//                        $fieldConstraints = $accessor->getValue($fieldsetMetadata->members, $childPropertyPath);
+//                        if(is_array($fieldConstraints)){
+//                            foreach ($fieldConstraints as $constraint) {
+//                                foreach ($constraint->constraints as $rule) {
+//                                    $child->addRule('required', ['message' => $rule->message]);
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
     }
 
     /**

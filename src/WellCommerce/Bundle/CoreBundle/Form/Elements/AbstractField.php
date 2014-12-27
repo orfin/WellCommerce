@@ -12,9 +12,8 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PropertyAccess\PropertyPath;
-use WellCommerce\Bundle\CoreBundle\Form\Rules\Required;
 
 /**
  * Class AbstractField
@@ -100,14 +99,14 @@ class AbstractField extends AbstractNode
 
             $value = null;
 
-            if($accessor->isReadable($defaultData, $this->getPropertyPath())){
+            if ($accessor->isReadable($defaultData, $this->getPropertyPath())) {
                 $value = $accessor->getValue($defaultData, $this->getPropertyPath());
                 if ($this->hasTransformer()) {
                     $value = $this->getTransformer()->transform($value);
                 }
             }
 
-            if(null === $value){
+            if (null === $value) {
                 $value = $this->getDefaultValue();
             }
 
@@ -142,14 +141,14 @@ class AbstractField extends AbstractNode
     /**
      * {@inheritdoc}
      */
-    public function configureAttributes(OptionsResolverInterface $resolver)
+    public function configureAttributes(OptionsResolver $resolver)
     {
         $resolver->setRequired([
             'name',
             'label',
         ]);
 
-        $resolver->setOptional([
+        $resolver->setDefined([
             'comment',
             'error',
             'default',

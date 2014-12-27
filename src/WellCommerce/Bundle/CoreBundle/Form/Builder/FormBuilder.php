@@ -12,18 +12,18 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Builder;
 
-use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
+use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Event\FormEvent;
 use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
-use WellCommerce\Bundle\CoreBundle\Form\FormResolverFactoryInterface;
+use WellCommerce\Bundle\CoreBundle\Form\Resolver\FormResolverFactoryInterface;
 
 /**
  * Class FormBuilder
  *
- * @package WellCommerce\Bundle\CoreBundle\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class FormBuilder extends AbstractContainer implements FormBuilderInterface
+class FormBuilder extends ContainerAware implements FormBuilderInterface
 {
     /**
      * @var FormInterface Form instance
@@ -46,13 +46,22 @@ class FormBuilder extends AbstractContainer implements FormBuilderInterface
     private $formResolverFactory;
 
     /**
+     * @var EventDispatcherInterface
+     */
+    private $eventDispatcher;
+
+    /**
      * Constructor
      *
      * @param FormResolverFactoryInterface $formResolverFactory
+     * @param EventDispatcherInterface     $eventDispatcher
      */
-    public function __construct(FormResolverFactoryInterface $formResolverFactory)
-    {
+    public function __construct(
+        FormResolverFactoryInterface $formResolverFactory,
+        EventDispatcherInterface $eventDispatcher
+    ) {
         $this->formResolverFactory = $formResolverFactory;
+        $this->eventDispatcher     = $eventDispatcher;
     }
 
     /**
@@ -72,24 +81,23 @@ class FormBuilder extends AbstractContainer implements FormBuilderInterface
 
     private function getValidationMetadata($data)
     {
-
         $className   = get_class($data);
         $constraints = [];
 
-        if ($this->getEntityManager()->getMetadataFactory()->hasMetadataFor($className)) {
-            $metadata        = $this->getEntityManager()->getClassMetadata($className);
-            $metadataFactory = $this->getValidator()->getMetadataFactory();
-
-            foreach ($metadata->getAssociationMappings() as $association) {
-                $targetEntity = $association['targetEntity'];
-                if ($metadataFactory->hasMetadataFor($targetEntity)) {
-                    $targetEntityMetadata = $metadataFactory->getMetadataFor($targetEntity);
-                    if (!empty($targetEntityMetadata->members)) {
-                        $constraints[$association['fieldName']] = $targetEntityMetadata;
-                    }
-                }
-            }
-        }
+//        if ($this->getEntityManager()->getMetadataFactory()->hasMetadataFor($className)) {
+//            $metadata        = $this->getEntityManager()->getClassMetadata($className);
+//            $metadataFactory = $this->getValidator()->getMetadataFactory();
+//
+//            foreach ($metadata->getAssociationMappings() as $association) {
+//                $targetEntity = $association['targetEntity'];
+//                if ($metadataFactory->hasMetadataFor($targetEntity)) {
+//                    $targetEntityMetadata = $metadataFactory->getMetadataFor($targetEntity);
+//                    if (!empty($targetEntityMetadata->members)) {
+//                        $constraints[$association['fieldName']] = $targetEntityMetadata;
+//                    }
+//                }
+//            }
+//        }
 
         return $constraints;
     }
@@ -104,7 +112,7 @@ class FormBuilder extends AbstractContainer implements FormBuilderInterface
     private function dispatchEvent($eventName)
     {
         $event = new FormEvent($this);
-        $this->container->get('event_dispatcher')->dispatch($eventName, $event);
+        $this->eventDispatcher->dispatch($eventName, $event);
     }
 
     /**
@@ -209,7 +217,7 @@ class FormBuilder extends AbstractContainer implements FormBuilderInterface
      */
     public function getDependency($alias, array $options = [])
     {
-        return $this->initService('filter', $alias, $options);
+        return $this->initService('dependency', $alias, $options);
     }
 
     protected function initService($type, $alias, $options)

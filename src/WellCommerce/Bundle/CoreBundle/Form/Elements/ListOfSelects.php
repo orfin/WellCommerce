@@ -15,7 +15,6 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 /**
  * Class ListOfSelects
  *
- * @package WellCommerce\Bundle\CoreBundle\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class ListOfSelects extends AbstractOptionedField implements ElementInterface

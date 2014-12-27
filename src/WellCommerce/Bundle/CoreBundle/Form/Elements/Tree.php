@@ -13,12 +13,11 @@
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
 use Symfony\Component\OptionsResolver\Options;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class Tree
  *
- * @package WellCommerce\Bundle\CoreBundle\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class Tree extends AbstractField implements ElementInterface
@@ -26,7 +25,7 @@ class Tree extends AbstractField implements ElementInterface
     /**
      * {@inheritdoc}
      */
-    public function configureAttributes(OptionsResolverInterface $resolver)
+    public function configureAttributes(OptionsResolver $resolver)
     {
         parent::configureAttributes($resolver);
 
@@ -35,7 +34,7 @@ class Tree extends AbstractField implements ElementInterface
             'label',
         ]);
 
-        $resolver->setOptional([
+        $resolver->setDefined([
             'addLabel',
             'selectable',
             'selector',
@@ -70,7 +69,7 @@ class Tree extends AbstractField implements ElementInterface
         };
 
         $resolver->setDefaults([
-            'total'         => $total,
+            'total' => $total,
         ]);
 
         $resolver->setAllowedTypes([
@@ -132,7 +131,8 @@ class Tree extends AbstractField implements ElementInterface
             $this->formatAttributeJs('add_item_prompt', 'sAddItemPrompt'),
             $this->formatAttributeJs('getchildren', 'fGetChildren', ElementInterface::TYPE_FUNCTION),
             $this->formatAttributeJs('prevent_duplicates', 'bPreventDuplicates', ElementInterface::TYPE_BOOLEAN),
-            $this->formatAttributeJs('prevent_duplicates_on_all_levels', 'bPreventDuplicatesOnAllLevels', ElementInterface::TYPE_BOOLEAN),
+            $this->formatAttributeJs('prevent_duplicates_on_all_levels', 'bPreventDuplicatesOnAllLevels',
+                ElementInterface::TYPE_BOOLEAN),
             $this->formatAttributeJs('set', 'sSet'),
             $this->formatRulesJs(),
             $this->formatDependencyJs(),

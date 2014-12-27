@@ -12,12 +12,11 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class Image
  *
- * @package WellCommerce\Bundle\CoreBundle\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class Image extends File implements ElementInterface
@@ -25,7 +24,7 @@ class Image extends File implements ElementInterface
     /**
      * {@inheritdoc}
      */
-    public function configureAttributes(OptionsResolverInterface $resolver)
+    public function configureAttributes(OptionsResolver $resolver)
     {
         parent::configureAttributes($resolver);
 
@@ -33,7 +32,7 @@ class Image extends File implements ElementInterface
             'load_route',
         ]);
 
-        $resolver->setOptional([
+        $resolver->setDefined([
             'repeat_min',
             'repeat_max',
             'limit',
@@ -51,14 +50,13 @@ class Image extends File implements ElementInterface
             'repeat_min'             => 0,
             'repeat_max'             => ElementInterface::INFINITE,
             'limit'                  => 1000,
-            'session_name'           => $this->container->get('session')->getName(),
-            'session_id'             => $this->container->get('session')->getId(),
             'file_types_description' => 'file_types_description',
             'file_types'             => ['jpg', 'jpeg', 'png', 'gif'],
             'photos'                 => [],
         ]);
 
         $resolver->setAllowedTypes([
+            'session_id'             => 'string',
             'session_name'           => 'string',
             'file_types_description' => 'string',
             'file_types'             => 'array',

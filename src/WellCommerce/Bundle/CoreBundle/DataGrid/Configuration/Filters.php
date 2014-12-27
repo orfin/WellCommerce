@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DataGrid\Configuration;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\Filter\FilterInterface;
 
 /**

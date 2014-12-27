@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
 use Symfony\Component\OptionsResolver\Options;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class Tip
@@ -30,7 +30,7 @@ class Tip extends TextField implements ElementInterface
     /**
      * {@inheritdoc}
      */
-    public function configureAttributes(OptionsResolverInterface $resolver)
+    public function configureAttributes(OptionsResolver $resolver)
     {
         parent::configureAttributes($resolver);
 
@@ -41,12 +41,12 @@ class Tip extends TextField implements ElementInterface
         ]);
 
         $resolver->setDefaults([
-            'name'  => '',
-            'label' => '',
-            'short_tip',
+            'name'      => '',
+            'label'     => '',
+            'short_tip' => ''
         ]);
 
-        $resolver->setOptional([
+        $resolver->setDefined([
             'retractable',
             'default_state',
         ]);
@@ -54,7 +54,7 @@ class Tip extends TextField implements ElementInterface
         $resolver->setDefaults([
             'direction'   => self::DOWN,
             'retractable' => function (Options $options) {
-                return strlen($options['short_tip']);
+                return (strlen($options['short_tip']) > 0);
             }
         ]);
 

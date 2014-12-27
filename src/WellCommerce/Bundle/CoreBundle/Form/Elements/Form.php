@@ -13,12 +13,11 @@
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class Form
  *
- * @package WellCommerce\Bundle\CoreBundle\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class Form extends AbstractContainer
@@ -47,17 +46,15 @@ class Form extends AbstractContainer
     }
 
     /**
-     * Configures Form attributes
-     *
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function configureAttributes(OptionsResolverInterface $resolver)
+    public function configureAttributes(OptionsResolver $resolver)
     {
         $resolver->setRequired([
             'name'
         ]);
 
-        $resolver->setOptional([
+        $resolver->setDefined([
             'class',
             'action',
             'method',
@@ -284,5 +281,20 @@ class Form extends AbstractContainer
         $actionName = '_Action_' . $actionName;
 
         return $this->request->request->has($actionName);
+    }
+
+    public function setPropertyPath()
+    {
+
+    }
+
+    /**
+     * Returns field value
+     *
+     * @return mixed
+     */
+    public function getValue()
+    {
+
     }
 }

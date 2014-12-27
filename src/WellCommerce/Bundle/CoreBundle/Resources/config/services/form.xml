@@ -7,18 +7,15 @@
     <services>
         <service id="form.builder" class="WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilder">
             <argument type="service" id="form.resolver.factory"/>
+            <argument type="service" id="event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="form.element.form" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Form" scope="prototype">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
+        <service id="form.element.form" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Form" scope="prototype" />
 
-        <service id="form.resolver.factory" class="WellCommerce\Bundle\CoreBundle\Form\FormResolverFactory" />
+        <service id="form.resolver.factory" class="WellCommerce\Bundle\CoreBundle\Form\Resolver\FormResolverFactory" />
 
         <service id="form.resolver.element" class="WellCommerce\Bundle\CoreBundle\Form\Resolver\ElementResolver">
             <tag name="form.resolver" type="element"/>
@@ -37,258 +34,149 @@
         </service>
 
         <service id="form.element.attribute_editor" class="WellCommerce\Bundle\CoreBundle\Form\Elements\AttributeEditor" scope="prototype">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
             <tag name="form.element" alias="attribute_editor"/>
         </service>
 
         <service id="form.element.text_field" class="WellCommerce\Bundle\CoreBundle\Form\Elements\TextField" scope="prototype">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
             <tag name="form.element" alias="text_field"/>
         </service>
 
         <service id="form.element.slug_field" class="WellCommerce\Bundle\CoreBundle\Form\Elements\SlugField" scope="prototype">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
             <tag name="form.element" alias="slug_field"/>
         </service>
 
         <service id="form.element.date" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Date" scope="prototype">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
             <tag name="form.element" alias="date"/>
         </service>
 
         <service id="form.element.colour_scheme_picker" class="WellCommerce\Bundle\CoreBundle\Form\Elements\ColourSchemePicker" scope="prototype">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
             <tag name="form.element" alias="colour_scheme_picker"/>
         </service>
 
         <service id="form.element.font_style" class="WellCommerce\Bundle\CoreBundle\Form\Elements\FontStyle" scope="prototype">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
             <tag name="form.element" alias="font_style"/>
         </service>
 
         <service id="form.element.submit" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Submit" scope="prototype">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
             <tag name="form.element" alias="submit"/>
         </service>
 
         <service id="form.element.price" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Price" scope="prototype">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
             <tag name="form.element" alias="price"/>
         </service>
 
         <service id="form.element.product_variants_editor" class="WellCommerce\Bundle\CoreBundle\Form\Elements\ProductVariantsEditor" scope="prototype">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
             <tag name="form.element" alias="product_variants_editor"/>
         </service>
 
         <service id="form.element.password" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Password" scope="prototype">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
             <tag name="form.element" alias="password"/>
         </service>
 
         <service id="form.element.tip" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Tip" scope="prototype">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
             <tag name="form.element" alias="tip"/>
         </service>
 
         <service id="form.element.rich_text_editor" class="WellCommerce\Bundle\CoreBundle\Form\Elements\RichTextEditor" scope="prototype">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
             <tag name="form.element" alias="rich_text_editor"/>
         </service>
 
         <service id="form.element.text_area" class="WellCommerce\Bundle\CoreBundle\Form\Elements\TextArea" scope="prototype">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
             <tag name="form.element" alias="text_area"/>
         </service>
 
         <service id="form.element.tree" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Tree" scope="prototype">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
             <tag name="form.element" alias="tree"/>
         </service>
 
         <service id="form.element.checkbox" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Checkbox" scope="prototype">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
             <tag name="form.element" alias="checkbox"/>
         </service>
 
         <service id="form.element.select" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Select" scope="prototype">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
             <tag name="form.element" alias="select"/>
         </service>
 
         <service id="form.element.multi_select" class="WellCommerce\Bundle\CoreBundle\Form\Elements\MultiSelect" scope="prototype">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
             <tag name="form.element" alias="multi_select"/>
         </service>
 
         <service id="form.element.fieldset" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Fieldset" scope="prototype">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
             <tag name="form.element" alias="fieldset"/>
         </service>
 
         <service id="form.element.fieldset_language" class="WellCommerce\Bundle\CoreBundle\Form\Elements\FieldsetLanguage" scope="prototype">
             <argument type="service" id="locale.repository" />
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
             <tag name="form.element" alias="fieldset_language"/>
         </service>
 
         <service id="form.element.fieldset_repeatable" class="WellCommerce\Bundle\CoreBundle\Form\Elements\FieldsetRepeatable" scope="prototype">
             <argument type="service" id="locale.repository" />
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
             <tag name="form.element" alias="fieldset_repeatable"/>
         </service>
 
         <service id="form.element.layout_boxes_list" class="WellCommerce\Bundle\CoreBundle\Form\Elements\LayoutBoxesList" scope="prototype">
-            <argument type="service" id="locale.repository" />
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
             <tag name="form.element" alias="layout_boxes_list"/>
         </service>
 
         <service id="form.element.image" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Image" scope="prototype">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
             <tag name="form.element" alias="image"/>
         </service>
 
         <service id="form.filter.no_code" class="WellCommerce\Bundle\CoreBundle\Form\Filters\NoCode" scope="prototype">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
             <tag name="form.filter" alias="no_code"/>
         </service>
 
         <service id="form.filter.secure" class="WellCommerce\Bundle\CoreBundle\Form\Filters\Secure" scope="prototype">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
             <tag name="form.filter" alias="secure"/>
         </service>
 
         <service id="form.filter.trim" class="WellCommerce\Bundle\CoreBundle\Form\Filters\Trim" scope="prototype">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
             <tag name="form.filter" alias="trim"/>
         </service>
 
         <service id="form.filter.comma_to_dot_changer" class="WellCommerce\Bundle\CoreBundle\Form\Filters\CommaToDotChanger" scope="prototype">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
             <tag name="form.filter" alias="comma_to_dot_changer"/>
         </service>
 
         <service id="form.rule.compare" class="WellCommerce\Bundle\CoreBundle\Form\Rules\Compare" scope="prototype">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
             <tag name="form.rule" alias="compare"/>
         </service>
 
         <service id="form.rule.custom" class="WellCommerce\Bundle\CoreBundle\Form\Rules\Custom" scope="prototype">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
             <tag name="form.rule" alias="custom"/>
         </service>
 
         <service id="form.rule.date_to" class="WellCommerce\Bundle\CoreBundle\Form\Rules\DateTo" scope="prototype">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
             <tag name="form.rule" alias="date_to"/>
         </service>
 
         <service id="form.rule.email" class="WellCommerce\Bundle\CoreBundle\Form\Rules\Email" scope="prototype">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
             <tag name="form.rule" alias="email"/>
         </service>
 
         <service id="form.rule.format" class="WellCommerce\Bundle\CoreBundle\Form\Rules\Format" scope="prototype">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
             <tag name="form.rule" alias="format"/>
         </service>
 
         <service id="form.rule.language_unique" class="WellCommerce\Bundle\CoreBundle\Form\Rules\LanguageUnique" scope="prototype">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
             <tag name="form.rule" alias="language_unique"/>
         </service>
 
         <service id="form.rule.required" class="WellCommerce\Bundle\CoreBundle\Form\Rules\Required" scope="prototype">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
             <tag name="form.rule" alias="required"/>
         </service>
 
         <service id="form.rule.unique" class="WellCommerce\Bundle\CoreBundle\Form\Rules\Unique" scope="prototype">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
             <tag name="form.rule" alias="unique"/>
         </service>
 
         <service id="form.rule.vat" class="WellCommerce\Bundle\CoreBundle\Form\Rules\Vat" scope="prototype">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
             <tag name="form.rule" alias="vat"/>
         </service>
 
         <!-- DEPENDENCIES -->
         <service id="form.dependency.show" class="WellCommerce\Bundle\CoreBundle\Form\Dependencies\Show" scope="prototype">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
             <tag name="form.dependency" alias="show"/>
         </service>
     </services>

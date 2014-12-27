@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Interface ElementInterface
@@ -33,11 +33,11 @@ interface ElementInterface
     /**
      * Configures element attributes
      *
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      *
-     * @return void
+     * @return mixed
      */
-    public function configureAttributes(OptionsResolverInterface $resolver);
+    public function configureAttributes(OptionsResolver $resolver);
 
     /**
      * Prepares form element attributes for Javascript rendering

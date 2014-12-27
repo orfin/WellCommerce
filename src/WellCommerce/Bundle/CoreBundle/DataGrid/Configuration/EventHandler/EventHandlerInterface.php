@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\EventHandler;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Interface EventHandlerInterface
@@ -32,11 +32,11 @@ interface EventHandlerInterface
     /**
      * Configures event options
      *
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      *
      * @return mixed
      */
-    public function configureOptions(OptionsResolverInterface $resolver);
+    public function configureOptions(OptionsResolver $resolver);
 
     /**
      * Returns template javascript used in DataGrid renderer

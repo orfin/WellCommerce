@@ -15,7 +15,6 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 /**
  * Class StaticListing
  *
- * @package WellCommerce\Bundle\CoreBundle\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class StaticListing extends AbstractField implements ElementInterface

@@ -12,12 +12,11 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DataGrid\Column\Options;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class Sorting
  *
- * @package WellCommerce\Bundle\CoreBundle\DataGrid\Column\Options
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class Sorting extends AbstractOptions
@@ -25,7 +24,10 @@ class Sorting extends AbstractOptions
     const SORT_DIR_ASC  = 'GF_Datagrid.SORT_DIR_ASC';
     const SORT_DIR_DESC = 'GF_Datagrid.SORT_DIR_DESC';
 
-    protected function configureOptions(OptionsResolverInterface $resolver)
+    /**
+     * @param OptionsResolver $resolver
+     */
+    protected function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired([
             'allowed',

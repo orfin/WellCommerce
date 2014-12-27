@@ -15,7 +15,6 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 /**
  * Class Combo
  *
- * @package WellCommerce\Bundle\CoreBundle\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class Combo extends AbstractOptionedField implements ElementInterface

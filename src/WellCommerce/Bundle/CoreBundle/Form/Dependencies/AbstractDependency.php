@@ -12,8 +12,6 @@
 namespace WellCommerce\Bundle\CoreBundle\Form\Dependencies;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
 
 /**
  * Class AbstractDependency
@@ -21,7 +19,7 @@ use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
  * @package WellCommerce\Bundle\CoreBundle\Form\Dependencies
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractDependency extends AbstractContainer
+abstract class AbstractDependency
 {
     /**
      * @var \Symfony\Component\OptionsResolver\OptionsResolver
@@ -33,23 +31,16 @@ abstract class AbstractDependency extends AbstractContainer
      */
     protected $options;
 
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->optionsResolver = new OptionsResolver();
-    }
-
     public function setOptions(array $options = [])
     {
-        $this->configureOptions($this->optionsResolver);
-        $this->options = $this->optionsResolver->resolve($options);
+        $optionsResolver = new OptionsResolver();
+        $this->configureOptions($optionsResolver);
+        $this->options = $optionsResolver->resolve($options);
 
         return $this;
     }
 
-    public function configureOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired([
             'field',

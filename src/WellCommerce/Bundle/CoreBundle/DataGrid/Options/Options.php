@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\CoreBundle\DataGrid\Options;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\Appearance;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\EventHandlers;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\Filters;
@@ -24,7 +23,6 @@ use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\RowActions;
 /**
  * Class Options
  *
- * @package WellCommerce\Bundle\CoreBundle\DataGrid\Options
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class Options implements OptionsInterface
@@ -49,7 +47,7 @@ class Options implements OptionsInterface
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired([
             'appearance',

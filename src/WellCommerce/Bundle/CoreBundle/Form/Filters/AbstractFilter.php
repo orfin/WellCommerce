@@ -19,7 +19,7 @@ use Symfony\Component\DependencyInjection\ContainerAware;
  *
  * @package WellCommerce\Bundle\CoreBundle\Form
  */
-abstract class AbstractFilter extends ContainerAware
+abstract class AbstractFilter
 {
     /**
      * @var array

@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DataGrid\Options;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\Appearance;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\EventHandlers;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\Filters;
@@ -23,7 +23,6 @@ use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\RowActions;
 /**
  * Class OptionsInterface
  *
- * @package WellCommerce\Bundle\CoreBundle\DataGrid\Options
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface OptionsInterface
@@ -31,11 +30,11 @@ interface OptionsInterface
     /**
      * Configures all options using OptionsResolver
      *
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      *
      * @return mixed
      */
-    public function configureOptions(OptionsResolverInterface $resolver);
+    public function configureOptions(OptionsResolver $resolver);
 
     /**
      * Sets DataGrid identifier

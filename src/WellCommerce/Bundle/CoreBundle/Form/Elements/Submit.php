@@ -12,12 +12,11 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class Submit
  *
- * @package WellCommerce\Bundle\CoreBundle\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class Submit extends AbstractNode implements ElementInterface
@@ -25,14 +24,14 @@ class Submit extends AbstractNode implements ElementInterface
     /**
      * {@inheritdoc}
      */
-    public function configureAttributes(OptionsResolverInterface $resolver)
+    public function configureAttributes(OptionsResolver $resolver)
     {
         $resolver->setRequired([
             'name',
             'label'
         ]);
 
-        $resolver->setOptional([
+        $resolver->setDefined([
             'class',
             'icon'
         ]);

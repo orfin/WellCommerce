@@ -13,12 +13,11 @@
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
 use Symfony\Component\OptionsResolver\Options;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class TextField
  *
- * @package WellCommerce\Bundle\CoreBundle\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class SlugField extends TextField implements ElementInterface
@@ -26,7 +25,7 @@ class SlugField extends TextField implements ElementInterface
     /**
      * {@inheritdoc}
      */
-    public function configureAttributes(OptionsResolverInterface $resolver)
+    public function configureAttributes(OptionsResolver $resolver)
     {
         parent::configureAttributes($resolver);
 
@@ -42,7 +41,7 @@ class SlugField extends TextField implements ElementInterface
         ]);
 
         $resolver->setAllowedTypes([
-            'name_field'     => 'string',
+            'name_field'     => 'WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface',
             'generate_route' => 'string'
         ]);
 

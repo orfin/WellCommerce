@@ -13,9 +13,9 @@
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
 use Doctrine\Common\Util\ClassUtils;
+use Symfony\Component\Intl\Intl;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer as BaseAbstractContainer;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 use WellCommerce\Bundle\CoreBundle\Form\Dependencies\DependencyInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Filters\FilterInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Rules\RuleInterface;
@@ -26,7 +26,7 @@ use WellCommerce\Bundle\CoreBundle\Form\Rules\RuleInterface;
  * @package WellCommerce\Bundle\CoreBundle\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractNode extends BaseAbstractContainer
+abstract class AbstractNode
 {
     protected        $form       = null;
     protected        $parent     = null;
@@ -36,8 +36,6 @@ abstract class AbstractNode extends BaseAbstractContainer
     protected        $tabs       = '';
     protected        $jsNodeName;
     protected static $_nextId    = 0;
-    protected        $optionsResolver;
-    protected        $elementResolver;
     protected        $options;
 
     /**
@@ -45,8 +43,27 @@ abstract class AbstractNode extends BaseAbstractContainer
      */
     public function __construct()
     {
-        $this->optionsResolver = new OptionsResolver();
-        $this->_id             = self::$_nextId++;
+        $this->_id = self::$_nextId++;
+    }
+
+    /**
+     * Returns resolver instance
+     *
+     * @return OptionsResolver
+     */
+    protected function getOptionsResolver()
+    {
+        return new OptionsResolver();
+    }
+
+    /**
+     * Returns property accessor instance
+     *
+     * @return \Symfony\Component\PropertyAccess\PropertyAccessor
+     */
+    protected function getPropertyAccessor()
+    {
+        return PropertyAccess::createPropertyAccessor();
     }
 
     protected function getJavascriptNodeName()
@@ -59,13 +76,14 @@ abstract class AbstractNode extends BaseAbstractContainer
 
     public function setOptions(array $options = [])
     {
-        $this->configureAttributes($this->optionsResolver);
-        $this->attributes = $this->optionsResolver->resolve($options);
+        $optionsResolver = $this->getOptionsResolver();
+        $this->configureAttributes($optionsResolver);
+        $this->attributes = $optionsResolver->resolve($options);
 
         return $this;
     }
 
-    public function configureAttributes(OptionsResolverInterface $resolver)
+    public function configureAttributes(OptionsResolver $resolver)
     {
         $resolver->setRequired([
             'name'
@@ -400,7 +418,9 @@ abstract class AbstractNode extends BaseAbstractContainer
 
     public function isLocale($key)
     {
-        return in_array($key, $this->container->get('locale.repository')->getAvailableLocaleCodes());
+        $locales = Intl::getLocaleBundle()->getLocaleNames();
+
+        return in_array($key, array_keys($locales));
     }
 
     private function isNew($key)

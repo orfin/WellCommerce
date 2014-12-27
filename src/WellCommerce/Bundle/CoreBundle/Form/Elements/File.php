@@ -12,12 +12,11 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class File
  *
- * @package WellCommerce\Bundle\CoreBundle\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class File extends AbstractField implements ElementInterface
@@ -25,18 +24,13 @@ class File extends AbstractField implements ElementInterface
     /**
      * {@inheritdoc}
      */
-    public function configureAttributes(OptionsResolverInterface $resolver)
+    public function configureAttributes(OptionsResolver $resolver)
     {
         parent::configureAttributes($resolver);
 
         $resolver->setRequired([
             'session_name',
             'session_id'
-        ]);
-
-        $resolver->setDefaults([
-            'session_name' => session_name(),
-            'session_id'   => session_id(),
         ]);
 
         $resolver->setAllowedTypes([

@@ -13,11 +13,9 @@
 namespace WellCommerce\Bundle\CoreBundle\DataGrid\Column;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Column\Options\Appearance;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Column\Options\Filter;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Column\Options\Sorting;
-use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
 
 /**
  * Class Column
@@ -31,12 +29,12 @@ class Column implements ColumnInterface
 
     public function __construct(array $options)
     {
-        $this->optionsResolver = new OptionsResolver();
-        $this->configureOptions($this->optionsResolver);
-        $this->options = $this->optionsResolver->resolve($options);
+        $optionsResolver = new OptionsResolver();
+        $this->configureOptions($optionsResolver);
+        $this->options = $optionsResolver->resolve($options);
     }
 
-    private function configureOptions(OptionsResolverInterface $resolver)
+    private function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired([
             'id',
@@ -46,17 +44,17 @@ class Column implements ColumnInterface
             'filter',
         ]);
 
-        $resolver->setOptional([
+        $resolver->setDefined([
             'editable',
             'selectable',
         ]);
 
         $resolver->setDefaults([
-            'appearance'       => new Appearance(),
-            'sorting'          => new Sorting(),
-            'filter'           => new Filter(),
-            'editable'         => false,
-            'selectable'       => false,
+            'appearance' => new Appearance(),
+            'sorting'    => new Sorting(),
+            'filter'     => new Filter(),
+            'editable'   => false,
+            'selectable' => false,
         ]);
 
         $resolver->setAllowedTypes([

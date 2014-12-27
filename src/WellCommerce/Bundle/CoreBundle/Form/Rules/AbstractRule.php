@@ -17,10 +17,9 @@ use Symfony\Component\DependencyInjection\ContainerAware;
 /**
  * Class AbstractRule
  *
- * @package WellCommerce\Bundle\CoreBundle\Form\Rules
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractRule extends ContainerAware
+abstract class AbstractRule
 {
     protected $options = [];
 

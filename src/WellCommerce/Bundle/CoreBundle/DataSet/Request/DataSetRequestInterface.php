@@ -12,12 +12,11 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DataSet\Request;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Interface DataSetRequestInterface
  *
- * @package WellCommerce\Bundle\CoreBundle\DataSet\Request
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface DataSetRequestInterface
@@ -25,11 +24,11 @@ interface DataSetRequestInterface
     /**
      * Configures request options
      *
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      *
      * @return void
      */
-    public function configureOptions(OptionsResolverInterface $resolver);
+    public function configureOptions(OptionsResolver $resolver);
 
     /**
      * Returns request id

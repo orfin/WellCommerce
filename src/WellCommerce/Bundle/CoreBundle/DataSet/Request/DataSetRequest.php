@@ -13,12 +13,10 @@
 namespace WellCommerce\Bundle\CoreBundle\DataSet\Request;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Class DataSetRequest
  *
- * @package WellCommerce\Bundle\CoreBundle\DataSet\Request
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class DataSetRequest implements DataSetRequestInterface
@@ -43,7 +41,7 @@ class DataSetRequest implements DataSetRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired([
             'id',

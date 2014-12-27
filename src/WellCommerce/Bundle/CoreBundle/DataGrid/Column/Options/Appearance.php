@@ -12,13 +12,11 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DataGrid\Column\Options;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Zend\Json\Expr;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class Appearance
  *
- * @package WellCommerce\Bundle\CoreBundle\DataGrid\Column\Options
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class Appearance extends AbstractOptions
@@ -28,7 +26,10 @@ class Appearance extends AbstractOptions
     const ALIGN_RIGHT  = 'GF_Datagrid.ALIGN_RIGHT';
     const WIDTH_AUTO   = 'GF_Datagrid.WIDTH_AUTO';
 
-    protected function configureOptions(OptionsResolverInterface $resolver)
+    /**
+     * @param OptionsResolver $resolver
+     */
+    protected function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired([
             'visible',

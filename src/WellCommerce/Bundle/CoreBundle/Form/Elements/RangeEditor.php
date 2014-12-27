@@ -13,13 +13,12 @@
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
 use Symfony\Component\OptionsResolver\Options;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use WellCommerce\Bundle\TaxBundle\Repository\TaxRepositoryInterface;
 
 /**
  * Class RangeEditor
  *
- * @package WellCommerce\Bundle\CoreBundle\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class RangeEditor extends AbstractOptionedField implements ElementInterface
@@ -48,14 +47,14 @@ class RangeEditor extends AbstractOptionedField implements ElementInterface
     /**
      * {@inheritdoc}
      */
-    public function configureAttributes(OptionsResolverInterface $resolver)
+    public function configureAttributes(OptionsResolver $resolver)
     {
         $resolver->setRequired([
             'name',
             'label',
         ]);
 
-        $resolver->setOptional([
+        $resolver->setDefined([
             'comment',
             'suffix',
             'price_precision',

@@ -12,12 +12,12 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class ColourSchemePicker
  *
- * @package WellCommerce\Bundle\CoreBundle\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class ColourSchemePicker extends TextField implements ElementInterface
@@ -25,7 +25,7 @@ class ColourSchemePicker extends TextField implements ElementInterface
     /**
      * {@inheritdoc}
      */
-    public function configureAttributes(OptionsResolverInterface $resolver)
+    public function configureAttributes(OptionsResolver $resolver)
     {
         $resolver->setRequired([
             'name',
@@ -36,13 +36,13 @@ class ColourSchemePicker extends TextField implements ElementInterface
             'type_colour',
             'type_gradient',
             'type_image',
-        ]);
-
-        $resolver->setOptional([
-            'comment',
-            'selector',
             'session_name',
             'session_id',
+        ]);
+
+        $resolver->setDefined([
+            'comment',
+            'selector',
             'error',
             'dependencies',
             'rules',
@@ -56,8 +56,6 @@ class ColourSchemePicker extends TextField implements ElementInterface
         $resolver->setDefaults([
             'file_types'    => $this->getTypes(),
             'type_icons'    => $this->getIcons(),
-            'session_name'  => $this->container->get('session')->getName(),
-            'session_id'    => $this->container->get('session')->getId(),
             'dependencies'  => [],
             'filters'       => [],
             'rules'         => [],
@@ -66,15 +64,15 @@ class ColourSchemePicker extends TextField implements ElementInterface
         ]);
 
         $resolver->setAllowedTypes([
-            'name'          => 'string',
-            'label'         => 'string',
-            'comment'       => 'string',
-            'selector'      => 'string',
-            'error'         => 'string',
-            'filters'       => 'array',
-            'rules'         => 'array',
-            'dependencies'  => 'array',
-            'default'       => ['string', 'integer']
+            'name'         => 'string',
+            'label'        => 'string',
+            'comment'      => 'string',
+            'selector'     => 'string',
+            'error'        => 'string',
+            'filters'      => 'array',
+            'rules'        => 'array',
+            'dependencies' => 'array',
+            'default'      => ['string', 'integer']
         ]);
     }
 

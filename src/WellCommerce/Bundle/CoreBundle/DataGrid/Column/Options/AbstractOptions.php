@@ -13,14 +13,12 @@
 namespace WellCommerce\Bundle\CoreBundle\DataGrid\Column\Options;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Zend\Json\Expr;
 use Zend\Json\Json;
 
 /**
  * Class AbstractOptions
  *
- * @package WellCommerce\Bundle\CoreBundle\DataGrid\Column\Options
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 abstract class AbstractOptions
@@ -29,12 +27,12 @@ abstract class AbstractOptions
 
     public function __construct(array $options = [])
     {
-        $this->optionsResolver = new OptionsResolver();
-        $this->configureOptions($this->optionsResolver);
-        $this->options = $this->optionsResolver->resolve($options);
+        $optionsResolver = new OptionsResolver();
+        $this->configureOptions($optionsResolver);
+        $this->options = $optionsResolver->resolve($options);
     }
 
-    abstract protected function configureOptions(OptionsResolverInterface $resolver);
+    abstract protected function configureOptions(OptionsResolver $resolver);
 
     public function __toString()
     {

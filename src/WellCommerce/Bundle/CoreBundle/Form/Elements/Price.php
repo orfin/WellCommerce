@@ -13,14 +13,19 @@
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
 use Symfony\Component\OptionsResolver\Options;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * Class Price
+ *
+ * @author Adam Piotrowski <adam@wellcommerce.org>
+ */
 class Price extends AbstractField implements ElementInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function configureAttributes(OptionsResolverInterface $resolver)
+    public function configureAttributes(OptionsResolver $resolver)
     {
         parent::configureAttributes($resolver);
 
@@ -30,7 +35,7 @@ class Price extends AbstractField implements ElementInterface
             'vat_field_name',
         ]);
 
-        $resolver->setOptional([
+        $resolver->setDefined([
             'suffix',
         ]);
 

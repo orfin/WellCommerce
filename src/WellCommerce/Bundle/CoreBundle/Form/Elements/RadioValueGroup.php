@@ -12,12 +12,11 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class RadioValueGroup
  *
- * @package WellCommerce\Bundle\CoreBundle\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class RadioValueGroup extends AbstractOptionedField implements ElementInterface
@@ -25,16 +24,16 @@ class RadioValueGroup extends AbstractOptionedField implements ElementInterface
     /**
      * {@inheritdoc}
      */
-    public function configureAttributes(OptionsResolverInterface $resolver)
+    public function configureAttributes(OptionsResolver $resolver)
     {
         parent::configureAttributes($resolver);
 
         $resolver->setRequired([
-            'suboptions'
+            'sub_options'
         ]);
 
         $resolver->setAllowedTypes([
-            'suboptions' => 'array'
+            'sub_options' => 'array'
         ]);
     }
 
@@ -48,7 +47,7 @@ class RadioValueGroup extends AbstractOptionedField implements ElementInterface
             $this->formatAttributeJs('label', 'sLabel'),
             $this->formatAttributeJs('comment', 'sComment'),
             $this->formatAttributeJs('error', 'sError'),
-            $this->formatAttributeJs('suboptions', 'oSuboptions', ElementInterface::TYPE_OBJECT),
+            $this->formatAttributeJs('sub_options', 'oSuboptions', ElementInterface::TYPE_OBJECT),
             $this->formatRulesJs(),
             $this->formatDependencyJs(),
             $this->formatOptionsJs(),

@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\CoreBundle\DataSet\Column;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Class AbstractColumn
@@ -23,16 +22,27 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 abstract class AbstractColumn
 {
+    /**
+     * @var array
+     */
     protected $options = [];
 
-    protected $optionsResolver;
-
+    /**
+     * Constructor
+     *
+     * @param array $options
+     */
     public function __construct(array $options)
     {
-        $this->optionsResolver = new OptionsResolver();
-        $this->configureOptions($this->optionsResolver);
-        $this->options = $this->optionsResolver->resolve($options);
+        $optionsResolver = new OptionsResolver();
+        $this->configureOptions($optionsResolver);
+        $this->options = $optionsResolver->resolve($options);
     }
 
-    abstract protected function configureOptions(OptionsResolverInterface $resolver);
+    /**
+     * Configures column options
+     *
+     * @param OptionsResolver $resolver
+     */
+    abstract protected function configureOptions(OptionsResolver $resolver);
 } 

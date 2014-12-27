@@ -12,13 +12,12 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\DateTransformer;
 
 /**
  * Class Date
  *
- * @package WellCommerce\Bundle\CoreBundle\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class Date extends TextField implements ElementInterface
@@ -26,11 +25,11 @@ class Date extends TextField implements ElementInterface
     /**
      * {@inheritdoc}
      */
-    public function configureAttributes(OptionsResolverInterface $resolver)
+    public function configureAttributes(OptionsResolver $resolver)
     {
         parent::configureAttributes($resolver);
 
-        $resolver->setOptional([
+        $resolver->setDefined([
             'minDate',
             'maxDate',
         ]);

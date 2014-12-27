@@ -152,7 +152,7 @@ class ProductForm extends AbstractForm implements FormInterface
 
         $pricePane->addChild($builder->getElement('price', [
             'name'      => 'buyPrice',
-            'label'     => $this->trans('Buy price'),
+            'label'     => $this->trans('product.buy_price.label'),
             'filters'   => [
                 $builder->getFilter('comma_to_dot_changer')
             ],
@@ -167,7 +167,7 @@ class ProductForm extends AbstractForm implements FormInterface
 
         $priceField = $standardPrice->addChild($builder->getElement('price', [
             'name'      => 'sellPrice',
-            'label'     => $this->trans('Sell price'),
+            'label'     => $this->trans('product.sell_price.label'),
             'filters'   => [
                 $builder->getFilter('comma_to_dot_changer')
             ],
@@ -181,27 +181,27 @@ class ProductForm extends AbstractForm implements FormInterface
 
         $stockData->addChild($builder->getElement('text_field', [
             'name'    => 'stock',
-            'label'   => $this->trans('Stock'),
+            'label'   => $this->trans('product.stock.label'),
             'suffix'  => $this->trans('pcs'),
             'default' => 0
         ]));
 
         $stockData->addChild($builder->getElement('checkbox', [
             'name'    => 'trackStock',
-            'label'   => $this->trans('Track stock'),
+            'label'   => $this->trans('product.track_stock.label'),
             'comment' => $this->trans('Enable stock tracking for product'),
         ]));
 
         $stockData->addChild($builder->getElement('select', [
             'name'        => 'unit',
-            'label'       => $this->trans('Unit'),
+            'label'       => $this->trans('product.unit.label'),
             'options'     => $this->get('unit.repository')->getCollectionToSelect(),
             'transformer' => new EntityToIdentifierTransformer($this->get('unit.repository'))
         ]));
 
         $stockData->addChild($builder->getElement('text_field', [
             'name'    => 'weight',
-            'label'   => $this->trans('Weight'),
+            'label'   => $this->trans('product.weight.label'),
             'filters' => [
                 $builder->getFilter('comma_to_dot_changer')
             ],
@@ -210,7 +210,7 @@ class ProductForm extends AbstractForm implements FormInterface
 
         $stockData->addChild($builder->getElement('text_field', [
             'name'    => 'width',
-            'label'   => $this->trans('Width'),
+            'label'   => $this->trans('product.width.label'),
             'filters' => [
                 $builder->getFilter('comma_to_dot_changer')
             ],
@@ -218,7 +218,7 @@ class ProductForm extends AbstractForm implements FormInterface
 
         $stockData->addChild($builder->getElement('text_field', [
             'name'    => 'height',
-            'label'   => $this->trans('Height'),
+            'label'   => $this->trans('product.height.label'),
             'filters' => [
                 $builder->getFilter('comma_to_dot_changer')
             ],
@@ -226,7 +226,7 @@ class ProductForm extends AbstractForm implements FormInterface
 
         $stockData->addChild($builder->getElement('text_field', [
             'name'    => 'depth',
-            'label'   => $this->trans('Depth'),
+            'label'   => $this->trans('product.depth.label'),
             'filters' => [
                 $builder->getFilter('comma_to_dot_changer')
             ],
@@ -234,7 +234,7 @@ class ProductForm extends AbstractForm implements FormInterface
 
         $stockData->addChild($builder->getElement('text_field', [
             'name'    => 'package_size',
-            'label'   => $this->trans('Package size'),
+            'label'   => $this->trans('product.package_size.label'),
             'filters' => [
                 $builder->getFilter('comma_to_dot_changer')
             ],
@@ -243,7 +243,7 @@ class ProductForm extends AbstractForm implements FormInterface
 
         $availabilityField = $stockData->addChild($builder->getElement('select', [
             'name'        => 'availability',
-            'label'       => $this->trans('Availability'),
+            'label'       => $this->trans('product.availability.label'),
             'options'     => $this->get('availability.repository')->getCollectionToSelect(),
             'transformer' => new EntityToIdentifierTransformer($this->get('availability.repository'))
         ]));
@@ -254,13 +254,15 @@ class ProductForm extends AbstractForm implements FormInterface
         ]));
 
         $mediaData->addChild($builder->getElement('image', [
-            'name'        => 'productPhotos',
-            'label'       => $this->trans('Photos'),
-            'load_route'  => $this->generateUrl('admin.media.grid'),
-            'upload_url'  => $this->generateUrl('admin.media.add'),
-            'repeat_min'  => 0,
-            'repeat_max'  => ElementInterface::INFINITE,
-            'transformer' => new MediaCollectionToArrayTransformer($this->get('media.repository'))
+            'name'         => 'productPhotos',
+            'label'        => $this->trans('product.product_photos.label'),
+            'load_route'   => $this->generateUrl('admin.media.grid'),
+            'upload_url'   => $this->generateUrl('admin.media.add'),
+            'repeat_min'   => 0,
+            'repeat_max'   => ElementInterface::INFINITE,
+            'transformer'  => new MediaCollectionToArrayTransformer($this->get('media.repository')),
+            'session_name' => $this->getRequest()->getSession()->getName(),
+            'session_id'   => $this->getRequest()->getSession()->getId(),
         ]));
 
         $statusesData = $form->addChild($builder->getElement('fieldset', [

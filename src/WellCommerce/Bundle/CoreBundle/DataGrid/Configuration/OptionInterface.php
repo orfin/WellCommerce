@@ -12,27 +12,26 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DataGrid\Configuration;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Interface OptionInterface
  *
- * @package WellCommerce\Bundle\CoreBundle\DataGrid\Configuration
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface OptionInterface
 {
-    const GF_NULL             = -9999;
-    const TYPE_NUMBER         = 'integer';
-    const TYPE_STRING         = 'string';
-    const TYPE_BOOLEAN        = 'boolean';
+    const GF_NULL      = -9999;
+    const TYPE_NUMBER  = 'integer';
+    const TYPE_STRING  = 'string';
+    const TYPE_BOOLEAN = 'boolean';
 
     /**
-     * Every component must contain configuration for its options
+     * Configures datagrid options
      *
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      *
      * @return mixed
      */
-    public function configureOptions(OptionsResolverInterface $resolver);
+    public function configureOptions(OptionsResolver $resolver);
 } 

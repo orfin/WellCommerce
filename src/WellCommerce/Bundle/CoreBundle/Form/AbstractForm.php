@@ -16,10 +16,9 @@ use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
 /**
  * Class AbstractForm
  *
- * @package WellCommerce\Bundle\CoreBundle\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AbstractForm extends AbstractContainer
+abstract class AbstractForm extends AbstractContainer
 {
 
 }

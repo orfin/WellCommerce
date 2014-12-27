@@ -12,12 +12,11 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DataGrid\Configuration;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class Routes
  *
- * @package WellCommerce\Bundle\CoreBundle\DataGrid\Configuration
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class Routes extends AbstractOption implements OptionInterface
@@ -25,9 +24,9 @@ class Routes extends AbstractOption implements OptionInterface
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setOptional([
+        $resolver->setDefined([
             'grid',
             'add',
             'edit',

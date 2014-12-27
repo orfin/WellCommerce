@@ -13,12 +13,11 @@
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
 use Symfony\Component\OptionsResolver\Options;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class ProductVariantsEditor
  *
- * @package WellCommerce\Bundle\CoreBundle\Form\Elements
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class ProductVariantsEditor extends AbstractField implements ElementInterface
@@ -26,7 +25,7 @@ class ProductVariantsEditor extends AbstractField implements ElementInterface
     /**
      * {@inheritdoc}
      */
-    public function configureAttributes(OptionsResolverInterface $resolver)
+    public function configureAttributes(OptionsResolver $resolver)
     {
         parent::configureAttributes($resolver);
 
@@ -55,11 +54,11 @@ class ProductVariantsEditor extends AbstractField implements ElementInterface
 
         $resolver->setAllowedTypes([
             'allow_generate'     => ['bool'],
-            'availability_field' => ['string'],
-            'vat_field'          => ['string'],
+            'availability_field' => 'WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface',
+            'vat_field'          => 'WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface',
             'vat_values'         => ['array'],
-            'price_field'        => ['string'],
-            'category_field'     => ['string'],
+            'price_field'        => 'WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface',
+            'category_field'     => 'WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface',
         ]);
 
         $fieldNormalizer = function (Options $options, $value) {
@@ -70,12 +69,12 @@ class ProductVariantsEditor extends AbstractField implements ElementInterface
             return $value->getName();
         };
 
-        $resolver->setNormalizers(array(
+        $resolver->setNormalizers([
             'vat_field'          => $fieldNormalizer,
             'price_field'        => $fieldNormalizer,
             'category_field'     => $fieldNormalizer,
             'availability_field' => $fieldNormalizer,
-        ));
+        ]);
     }
 
     /**

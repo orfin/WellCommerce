@@ -13,13 +13,11 @@
 namespace WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\EventHandler;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\OptionInterface;
 
 /**
  * Class AbstractEventHandler
  *
- * @package WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\EventHandler
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class AbstractEventHandler
@@ -44,18 +42,18 @@ class AbstractEventHandler
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired([
             'function'
         ]);
 
         $resolver->setDefaults([
-            'function'       => OptionInterface::GF_NULL
+            'function' => OptionInterface::GF_NULL
         ]);
 
         $resolver->setAllowedTypes([
-            'function'       => ['string', 'int']
+            'function' => ['string', 'int']
         ]);
     }
 

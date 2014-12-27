@@ -12,17 +12,16 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DataSet\Column;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class Column
  *
- * @package WellCommerce\Bundle\CoreBundle\DataSet\Column
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class Column extends AbstractColumn implements ColumnInterface
 {
-    protected function configureOptions(OptionsResolverInterface $resolver)
+    protected function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired([
             'alias',
@@ -31,7 +30,7 @@ class Column extends AbstractColumn implements ColumnInterface
             'sortable',
         ]);
 
-        $resolver->setOptional([
+        $resolver->setDefined([
             'transformer'
         ]);
 

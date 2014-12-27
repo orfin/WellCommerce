@@ -12,13 +12,12 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DataGrid\Column\Options;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
 
 /**
  * Class Filter
  *
- * @package WellCommerce\Bundle\CoreBundle\DataGrid\Column\Options
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class Filter extends AbstractOptions
@@ -29,14 +28,17 @@ class Filter extends AbstractOptions
     const FILTER_TREE    = 'GF_Datagrid.FILTER_TREE';
     const FILTER_SELECT  = 'GF_Datagrid.FILTER_SELECT';
 
-    protected function configureOptions(OptionsResolverInterface $resolver)
+    /**
+     * @param OptionsResolver $resolver
+     */
+    protected function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired([
             'type',
             'options'
         ]);
 
-        $resolver->setOptional([
+        $resolver->setDefined([
             'filtered_column',
             'source',
             'load_children'
