@@ -15,22 +15,9 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Rules;
 /**
  * Class Vat
  *
- * @package WellCommerce\Bundle\CoreBundle\Form\Rules
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class Vat extends Format implements RuleInterface
 {
-
-    public function __construct($errorMsg)
-    {
-        parent::__construct($errorMsg, '/^\.*/');
-    }
-
-    public function render()
-    {
-        $errorMsg = addslashes($this->_errorMsg);
-
-        return "{sType: '{$this->getType()}', sErrorMessage: '{$errorMsg}'}";
-    }
 
 }
