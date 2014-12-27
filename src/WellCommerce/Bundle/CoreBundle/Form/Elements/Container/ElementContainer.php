@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements\Container;
 
+use WellCommerce\Bundle\CoreBundle\Form\Elements\AbstractContainer;
+
 /**
  * Class ElementContainer
  *

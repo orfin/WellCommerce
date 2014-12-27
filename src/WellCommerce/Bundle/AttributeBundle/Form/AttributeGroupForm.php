@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\AttributeBundle\Form;
 use WellCommerce\Bundle\AttributeBundle\Form\DataTransformer\AttributeCollectionToArrayTransformer;
 use WellCommerce\Bundle\CoreBundle\Form\AbstractForm;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
-use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
 
 /**
  * Class AttributeGroupForm

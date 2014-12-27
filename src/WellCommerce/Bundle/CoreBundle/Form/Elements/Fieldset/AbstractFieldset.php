@@ -12,7 +12,9 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements\Fieldset;
 
-use WellCommerce\Bundle\CoreBundle\Form\Elements\Container\AbstractContainer;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\AbstractContainer;
+
 
 /**
  * Class AbstractFieldset
@@ -21,5 +23,27 @@ use WellCommerce\Bundle\CoreBundle\Form\Elements\Container\AbstractContainer;
  */
 abstract class AbstractFieldset extends AbstractContainer
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function configureAttributes(OptionsResolver $resolver)
+    {
+        $resolver->setDefined([
+            'property_path',
+            'dependencies',
+            'filters',
+            'rules',
+            'transformer'
+        ]);
 
+        $resolver->setDefaults([
+            'property_path' => null
+        ]);
+
+        $resolver->setAllowedTypes([
+            'dependencies'  => 'array',
+            'property_path' => ['null', 'Symfony\Component\PropertyAccess\PropertyPath'],
+            'transformer'   => ['null', 'WellCommerce\Bundle\CoreBundle\Form\DataTransformer\DataTransformerInterface'],
+        ]);
+    }
 } 

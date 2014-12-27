@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\LayoutBundle\Form;
 use Symfony\Component\Finder\Finder;
 use WellCommerce\Bundle\CoreBundle\Form\AbstractForm;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
-use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
 
 /**
  * Class LayoutBoxForm

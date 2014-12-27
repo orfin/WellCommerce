@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\TaxBundle\Form;
 use WellCommerce\Bundle\CoreBundle\Entity\BaseSubjectInterface;
 use WellCommerce\Bundle\CoreBundle\Form\AbstractForm;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
-use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
 
 /**
  * Class TaxForm

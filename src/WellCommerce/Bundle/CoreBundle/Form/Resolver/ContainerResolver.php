@@ -20,5 +20,5 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Resolver;
 class ContainerResolver extends AbstractResolver implements ResolverInterface
 {
     const SERVICE_TAG_NAME = 'form.container';
-    const INTERFACE_CLASS  = 'WellCommerce\\Bundle\\CoreBundle\\Form\\Container\\ContainerInterface';
+    const INTERFACE_CLASS  = 'WellCommerce\\Bundle\\CoreBundle\\Form\\Elements\\Container\\ContainerInterface';
 }

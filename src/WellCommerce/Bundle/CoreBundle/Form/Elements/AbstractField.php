@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PropertyAccess\PropertyPath;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Options\Options;
 
 /**
  * Class AbstractField
@@ -42,14 +41,15 @@ abstract class AbstractField extends AbstractNode
         ]);
 
         $resolver->setDefaults([
-            'default'      => null,
-            'dependencies' => [],
-            'rules'        => [],
-            'filters'      => [],
-            'transformer'  => null
+            'property_path' => null,
+            'default'       => null,
+            'dependencies'  => [],
+            'rules'         => [],
+            'filters'       => [],
+            'transformer'   => null
         ]);
 
-        $resolver->setDefault('property_path', function (Options $options) {
+        $resolver->setNormalizer('property_path', function ($options) {
             return new PropertyPath($options['name']);
         });
 

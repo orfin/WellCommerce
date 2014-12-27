@@ -15,7 +15,7 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Builder;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Event\FormEvent;
-use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Resolver\FormResolverFactoryInterface;
 
 /**

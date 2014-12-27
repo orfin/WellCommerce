@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Builder;
 
-use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Elements;
 use WellCommerce\Bundle\CoreBundle\Form\Rules;
 use WellCommerce\Bundle\CoreBundle\Form\Filters;

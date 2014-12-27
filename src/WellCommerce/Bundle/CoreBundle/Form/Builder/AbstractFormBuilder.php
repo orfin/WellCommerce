@@ -14,8 +14,8 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Builder;
 
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
 use WellCommerce\Bundle\CoreBundle\Form\DataCollector\DataCollectorInterface;
-use WellCommerce\Bundle\CoreBundle\Form\Form;
-use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\Form;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Renderer\FormRendererInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Request\RequestHandlerInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Resolver\FormResolverFactoryInterface;

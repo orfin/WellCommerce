@@ -13,7 +13,7 @@ namespace WellCommerce\Bundle\CmsBundle\Form;
 
 use WellCommerce\Bundle\CoreBundle\Form\Builder\AbstractFormBuilder;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
-use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
 
 /**
  * Class ContactFormBuilder
@@ -37,7 +37,7 @@ class ContactFormBuilder extends AbstractFormBuilder implements FormBuilderInter
             'label' => $this->trans('contact.required_data.enabled.label'),
         ]));
 
-        $languageData = $requiredData->addElement($this->getElement('fieldset_language', [
+        $languageData = $requiredData->addElement($this->getElement('language_fieldset', [
             'name'      => 'translations',
             'label'     => $this->trans('form.required_data.language_data.label'),
             'languages' => $this->get('locale.repository')->getAvailableLocales()

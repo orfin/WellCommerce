@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements\Fieldset;
 
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 
@@ -33,8 +34,14 @@ class LanguageFieldset extends RepeatableFieldset implements ElementInterface
             'languages',
         ]);
 
+        $count = function (Options $options) {
+            return count($options['name']);
+        };
+
         $resolver->setDefaults([
-            'languages' => [],
+            'languages'  => [],
+            'repeat_min' => $count,
+            'repeat_max' => $count,
         ]);
 
         $resolver->setAllowedTypes([

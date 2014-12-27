@@ -13,7 +13,7 @@ namespace WellCommerce\Bundle\IntlBundle\Form;
 
 use WellCommerce\Bundle\CoreBundle\Form\AbstractForm;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
-use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
 use WellCommerce\Bundle\IntlBundle\Repository\CurrencyRepositoryInterface;
 
 /**
