@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Builder;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
 use WellCommerce\Bundle\CoreBundle\Form\Event\FormEvent;
 use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
+use WellCommerce\Bundle\CoreBundle\Form\FormResolverFactoryInterface;
 
 /**
  * Class FormBuilder
@@ -38,6 +39,21 @@ class FormBuilder extends AbstractContainer implements FormBuilderInterface
      * @var array Form options
      */
     private $options;
+
+    /**
+     * @var FormResolverFactoryInterface
+     */
+    private $formResolverFactory;
+
+    /**
+     * Constructor
+     *
+     * @param FormResolverFactoryInterface $formResolverFactory
+     */
+    public function __construct(FormResolverFactoryInterface $formResolverFactory)
+    {
+        $this->formResolverFactory = $formResolverFactory;
+    }
 
     /**
      * {@inheritdoc}
@@ -167,33 +183,42 @@ class FormBuilder extends AbstractContainer implements FormBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function getElement($type, array $options = [])
+    public function getElement($alias, array $options = [])
     {
-        return $this->container->get('form.resolver.element')->get($type, $options);
+        return $this->initService('element', $alias, $options);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getRule($type, array $options = [])
+    public function getRule($alias, array $options = [])
     {
-        return $this->container->get('form.resolver.rule')->get($type, $options);
+        return $this->initService('rule', $alias, $options);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getFilter($type, array $options = [])
+    public function getFilter($alias, array $options = [])
     {
-        return $this->container->get('form.resolver.filter')->get($type, $options);
+        return $this->initService('filter', $alias, $options);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getDependency($type, $options)
+    public function getDependency($alias, array $options = [])
     {
-        return $this->container->get('form.resolver.dependency')->get($type, $options);
+        return $this->initService('filter', $alias, $options);
+    }
 
+    protected function initService($type, $alias, $options)
+    {
+        $id      = $this->formResolverFactory->resolve($type, $alias);
+        $service = $this->container->get($id);
+
+        $service->setOptions($options);
+
+        return $service;
     }
 }

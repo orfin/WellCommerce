@@ -15,7 +15,6 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Filters;
 /**
  * Class NoCode
  *
- * @package WellCommerce\Bundle\CoreBundle\Form\Filters
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class NoCode extends AbstractFilter implements FilterInterface

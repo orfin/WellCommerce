@@ -15,7 +15,6 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Filters;
 /**
  * Interface FilterInterface
  *
- * @package WellCommerce\Bundle\CoreBundle\Form\Filters
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface FilterInterface

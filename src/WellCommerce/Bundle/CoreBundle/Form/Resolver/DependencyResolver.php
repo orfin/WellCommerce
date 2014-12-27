@@ -12,37 +12,13 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Resolver;
 
-use WellCommerce\Bundle\CoreBundle\Form\Dependencies\DependencyInterface;
-
 /**
  * Class DependencyResolver
  *
- * @package WellCommerce\Bundle\CoreBundle\Form\Resolver
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class DependencyResolver extends AbstractResolver implements ResolverInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function get($type, array $options = [])
-    {
-        $service = $this->container->get($this->guess($type));
-
-        if (!$service instanceof DependencyInterface) {
-            throw new \LogicException('Dependency must implement DependencyInterface');
-        }
-
-        $service->setOptions($options);
-
-        return $service;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getServiceNamePattern()
-    {
-        return 'form.dependency.%s';
-    }
-} 
+    const SERVICE_TAG_NAME = 'form.dependency';
+    const INTERFACE_CLASS  = 'WellCommerce\\Bundle\\CoreBundle\\Form\\Dependencies\\DependencyInterface';
+}

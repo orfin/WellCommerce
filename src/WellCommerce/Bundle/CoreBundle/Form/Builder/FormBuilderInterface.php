@@ -126,5 +126,5 @@ interface FormBuilderInterface
      *
      * @return \WellCommerce\Bundle\CoreBundle\Form\Dependencies\DependencyInterface
      */
-    public function getDependency($type, $options);
+    public function getDependency($type, array $options = []);
 }

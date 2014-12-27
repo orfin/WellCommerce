@@ -12,37 +12,13 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Resolver;
 
-use WellCommerce\Bundle\CoreBundle\Form\Rules\RuleInterface;
-
 /**
  * Class RuleResolver
  *
- * @package WellCommerce\Bundle\CoreBundle\Form\Resolver
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class RuleResolver extends AbstractResolver implements ResolverInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function get($type, array $options = [])
-    {
-        $service = $this->container->get($this->guess($type));
-
-        if (!$service instanceof RuleInterface) {
-            throw new \LogicException('Rule must implement RuleInterface');
-        }
-
-        $service->setOptions($options);
-
-        return $service;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getServiceNamePattern()
-    {
-        return 'form.rule.%s';
-    }
-} 
+    const SERVICE_TAG_NAME = 'form.rule';
+    const INTERFACE_CLASS  = 'WellCommerce\\Bundle\\CoreBundle\\Form\\Rules\\RuleInterface';
+}

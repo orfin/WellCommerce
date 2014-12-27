@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\CoreBundle;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\Compiler\FormResolverPass;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\Compiler\ResourceProviderPass;
 
 /**
@@ -28,5 +29,6 @@ class WellCommerceCoreBundle extends Bundle
     {
         parent::build($container);
         $container->addCompilerPass(new ResourceProviderPass());
+        $container->addCompilerPass(new FormResolverPass());
     }
 }

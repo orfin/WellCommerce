@@ -12,6 +12,9 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
+use WellCommerce\Bundle\CoreBundle\Form\Filters\FilterInterface;
+use WellCommerce\Bundle\CoreBundle\Form\Rules\RuleInterface;
+
 /**
  * Class AbstractContainer
  *
@@ -23,20 +26,20 @@ abstract class AbstractContainer extends AbstractNode
     protected $children   = [];
     protected $tabsOffset = '';
 
-    public function addRule($type, $options = [])
+    public function addRule(RuleInterface $rule)
     {
         foreach ($this->children as $child) {
-            $child->addRule($type, $options);
+            $child->addRule($rule);
         }
     }
 
     /**
      * {@inheritdoc}
      */
-    public function addFilter($type, $options = [])
+    public function addFilter(FilterInterface $filter)
     {
         foreach ($this->children as $child) {
-            $child->addFilter($type, $options);
+            $child->addFilter($filter);
         }
     }
 

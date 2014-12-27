@@ -12,28 +12,17 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Resolver;
 
-use Symfony\Component\DependencyInjection\ContainerAware;
-use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
+use WellCommerce\Bundle\CoreBundle\Collection\AbstractCollection;
 
 /**
  * Class AbstractResolver
  *
- * @package WellCommerce\Bundle\CoreBundle\Form\Resolver
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractResolver extends ContainerAware implements ResolverInterface
+abstract class AbstractResolver extends AbstractCollection
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function guess($type)
+    public function add($alias, $serviceId)
     {
-        $id = sprintf($this->getServiceNamePattern(), $type);
-
-        if (!$this->container->has($id)) {
-            throw new ServiceNotFoundException($id);
-        }
-
-        return $id;
+        $this->items[$alias] = $serviceId;
     }
 }

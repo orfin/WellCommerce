@@ -16,6 +16,9 @@ use Doctrine\Common\Util\ClassUtils;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer as BaseAbstractContainer;
+use WellCommerce\Bundle\CoreBundle\Form\Dependencies\DependencyInterface;
+use WellCommerce\Bundle\CoreBundle\Form\Filters\FilterInterface;
+use WellCommerce\Bundle\CoreBundle\Form\Rules\RuleInterface;
 
 /**
  * Class AbstractNode
@@ -118,24 +121,18 @@ abstract class AbstractNode extends BaseAbstractContainer
         return implode(PHP_EOL, $lines);
     }
 
-    public function addRule($type, $options = [])
+    public function addRule(RuleInterface $rule)
     {
-        $rule = $this->container->get('form.resolver.rule')->get($type, $options);
-
         $this->attributes['rules'][] = $rule;
     }
 
-    public function addFilter($type, $options = [])
+    public function addFilter(FilterInterface $filter)
     {
-        $filter = $this->container->get('form.resolver.filter')->get($type, $options);
-
         $this->attributes['filters'][] = $filter;
     }
 
-    public function addDependency($type, $options = [])
+    public function addDependency(DependencyInterface $dependency)
     {
-        $dependency = $this->container->get('form.resolver.dependency')->get($type, $options);
-
         $this->attributes['dependencies'][] = $dependency;
     }
 
