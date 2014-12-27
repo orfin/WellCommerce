@@ -94,8 +94,8 @@ class PageForm extends AbstractForm implements FormInterface
             'label' => $this->trans('page.content.label'),
         ]));
 
-        $form->addFilter('trim');
-        $form->addFilter('secure');
+        $form->addFilter($builder->getFilter('trim'));
+        $form->addFilter($builder->getFilter('secure'));
 
         return $form;
     }

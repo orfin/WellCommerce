@@ -55,9 +55,9 @@ class ThemeForm extends AbstractForm implements FormInterface
             'options' => $this->getFolderDirectories()
         ]));
 
-        $form->addFilter('no_code');
-        $form->addFilter('trim');
-        $form->addFilter('secure');
+        $form->addFilter($builder->getFilter('no_code'));
+        $form->addFilter($builder->getFilter('trim'));
+        $form->addFilter($builder->getFilter('secure'));
 
         return $form;
     }

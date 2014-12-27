@@ -292,8 +292,8 @@ class RoutingForm extends AbstractForm implements FormInterface
             'transformer'        => new RoutingAttributeCollectionToArrayTransformer($this->get('product_attribute.repository'))
         ]));
 
-        $form->addFilter('trim');
-        $form->addFilter('secure');
+        $form->addFilter($builder->getFilter('trim'));
+        $form->addFilter($builder->getFilter('secure'));
 
         return $form;
     }

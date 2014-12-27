@@ -112,9 +112,9 @@ class CompanyForm extends AbstractForm implements FormInterface
             'transformer' => new MediaEntityToIdentifierTransformer($this->get('media.repository'))
         ]));
 
-        $form->addFilter('no_code');
-        $form->addFilter('trim');
-        $form->addFilter('secure');
+        $form->addFilter($builder->getFilter('no_code'));
+        $form->addFilter($builder->getFilter('trim'));
+        $form->addFilter($builder->getFilter('secure'));
 
         return $form;
     }

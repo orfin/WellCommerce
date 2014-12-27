@@ -55,8 +55,8 @@ class NewsForm extends AbstractForm implements FormInterface
             'label' => $this->trans('news.content.label'),
         ]));
 
-        $form->addFilter('trim');
-        $form->addFilter('secure');
+        $form->addFilter($builder->getFilter('trim'));
+        $form->addFilter($builder->getFilter('secure'));
 
         return $form;
     }

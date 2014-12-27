@@ -63,9 +63,9 @@ class AttributeGroupForm extends AbstractForm implements FormInterface
             'transformer'                  => new AttributeCollectionToArrayTransformer($this->get('attribute.repository'))
         ]));
 
-        $form->addFilter('no_code');
-        $form->addFilter('trim');
-        $form->addFilter('secure');
+        $form->addFilter($builder->getFilter('no_code'));
+        $form->addFilter($builder->getFilter('trim'));
+        $form->addFilter($builder->getFilter('secure'));
 
         return $form;
     }

@@ -127,8 +127,8 @@ class CategoryForm extends AbstractForm implements FormInterface
             'label' => $this->trans('category.meta_description.label'),
         ]));
 
-        $form->addFilter('trim');
-        $form->addFilter('secure');
+        $form->addFilter($builder->getFilter('trim'));
+        $form->addFilter($builder->getFilter('secure'));
 
         return $form;
     }

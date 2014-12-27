@@ -45,9 +45,9 @@ class UnitForm extends AbstractForm implements FormInterface
             'label' => $this->trans('unit.language_data.name.label'),
         ]));
 
-        $form->addFilter('no_code');
-        $form->addFilter('trim');
-        $form->addFilter('secure');
+        $form->addFilter($builder->getFilter('no_code'));
+        $form->addFilter($builder->getFilter('trim'));
+        $form->addFilter($builder->getFilter('secure'));
 
         return $form;
     }
