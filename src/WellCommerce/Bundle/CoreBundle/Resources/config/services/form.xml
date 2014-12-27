@@ -13,9 +13,21 @@
             </call>
         </service>
 
+        <service id="form.renderer.javascript" class="WellCommerce\Bundle\CoreBundle\Form\Renderer\JavascriptRenderer" />
+
+        <service id="form.data_collector" class="WellCommerce\Bundle\CoreBundle\Form\DataCollector\DataCollector" />
+
+        <service id="form.request_handler" class="WellCommerce\Bundle\CoreBundle\Form\Request\RequestHandler" />
+
+        <service id="form.validator" class="WellCommerce\Bundle\CoreBundle\Form\Validator\Validator" />
+
         <service id="form.element.form" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Form" scope="prototype" />
 
         <service id="form.resolver.factory" class="WellCommerce\Bundle\CoreBundle\Form\Resolver\FormResolverFactory" />
+
+        <service id="form.resolver.container" class="WellCommerce\Bundle\CoreBundle\Form\Resolver\ContainerResolver">
+            <tag name="form.resolver" type="container"/>
+        </service>
 
         <service id="form.resolver.element" class="WellCommerce\Bundle\CoreBundle\Form\Resolver\ElementResolver">
             <tag name="form.resolver" type="element"/>
@@ -31,6 +43,10 @@
 
         <service id="form.resolver.dependency" class="WellCommerce\Bundle\CoreBundle\Form\Resolver\DependencyResolver">
             <tag name="form.resolver" type="dependency"/>
+        </service>
+
+        <service id="form.container.element" class="WellCommerce\Bundle\CoreBundle\Form\Container\ElementContainer" scope="prototype">
+            <tag name="form.container" alias="element_container"/>
         </service>
 
         <service id="form.element.attribute_editor" class="WellCommerce\Bundle\CoreBundle\Form\Elements\AttributeEditor" scope="prototype">
@@ -106,12 +122,10 @@
         </service>
 
         <service id="form.element.fieldset_language" class="WellCommerce\Bundle\CoreBundle\Form\Elements\FieldsetLanguage" scope="prototype">
-            <argument type="service" id="locale.repository" />
             <tag name="form.element" alias="fieldset_language"/>
         </service>
 
         <service id="form.element.fieldset_repeatable" class="WellCommerce\Bundle\CoreBundle\Form\Elements\FieldsetRepeatable" scope="prototype">
-            <argument type="service" id="locale.repository" />
             <tag name="form.element" alias="fieldset_repeatable"/>
         </service>
 
@@ -171,7 +185,6 @@
             <tag name="form.rule" alias="unique"/>
         </service>
 
-        <!-- DEPENDENCIES -->
         <service id="form.dependency.show" class="WellCommerce\Bundle\CoreBundle\Form\Dependencies\Show" scope="prototype">
             <tag name="form.dependency" alias="show"/>
         </service>

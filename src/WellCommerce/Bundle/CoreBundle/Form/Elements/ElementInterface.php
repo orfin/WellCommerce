@@ -12,8 +12,6 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
-use Symfony\Component\OptionsResolver\OptionsResolver;
-
 /**
  * Interface ElementInterface
  *
@@ -30,72 +28,72 @@ interface ElementInterface
     const TYPE_OBJECT   = 'object';
     const TYPE_BOOLEAN  = 'boolean';
 
+//    /**
+//     * Configures element attributes
+//     *
+//     * @param OptionsResolver $resolver
+//     *
+//     * @return mixed
+//     */
+//    public function configureAttributes(OptionsResolver $resolver);
+//
+//    /**
+//     * Prepares form element attributes for Javascript rendering
+//     *
+//     * @return mixed
+//     */
+//    public function prepareAttributesJs();
+//
+//    /**
+//     * Sets element options
+//     *
+//     * @param array $options
+//     *
+//     * @return void
+//     */
+//    public function setOptions(array $options = []);
+//
+//    /**
+//     * Sets property path for form field
+//     *
+//     * @return void
+//     */
+//    public function setPropertyPath();
+//
+//    /**
+//     * Returns field value
+//     *
+//     * @return mixed
+//     */
+//    public function getValue();
+//
+//    /**
+//     * Handles submit request
+//     *
+//     * @return void
+//     */
+//    public function handleRequest($data);
+//
+//    /**
+//     * Populates the form element with values
+//     *
+//     * @param mixed $value
+//     *
+//     * @return void
+//     */
+//    public function populate($value);
+//
+//    /**
+//     * Sets default data for form element
+//     *
+//     * @param $data
+//     *
+//     * @return mixed
+//     */
+//    public function setDefaults($data);
+//
     /**
-     * Configures element attributes
-     *
-     * @param OptionsResolver $resolver
-     *
-     * @return mixed
-     */
-    public function configureAttributes(OptionsResolver $resolver);
-
-    /**
-     * Prepares form element attributes for Javascript rendering
-     *
-     * @return mixed
-     */
-    public function prepareAttributesJs();
-
-    /**
-     * Sets element options
-     *
-     * @param array $options
-     *
-     * @return void
-     */
-    public function setOptions(array $options = []);
-
-    /**
-     * Sets property path for form field
-     *
-     * @return void
-     */
-    public function setPropertyPath();
-
-    /**
-     * Returns field value
-     *
-     * @return mixed
-     */
-    public function getValue();
-
-    /**
-     * Handles submit request
-     *
-     * @return void
-     */
-    public function handleRequest($data);
-
-    /**
-     * Populates the form element with values
-     *
-     * @param mixed $value
-     *
-     * @return void
-     */
-    public function populate($value);
-
-    /**
-     * Sets default data for form element
-     *
-     * @param $data
-     *
-     * @return mixed
-     */
-    public function setDefaults($data);
-
-    /**
-     * Returns field name
+     * Returns element name
      *
      * @return string
      */

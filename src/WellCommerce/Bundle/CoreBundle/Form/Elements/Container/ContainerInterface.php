@@ -10,14 +10,19 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CoreBundle\Form\Renderer;
+namespace WellCommerce\Bundle\CoreBundle\Form\Elements\Container;
 
 /**
- * Class HtmlRenderer
+ * Class ContainerInterface
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class HtmlRenderer implements FormRendererInterface
+interface ContainerInterface
 {
-
+    /**
+     * Returns container name
+     *
+     * @return string
+     */
+    public function getName();
 } 

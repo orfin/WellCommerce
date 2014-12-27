@@ -10,14 +10,16 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CoreBundle\Form\Renderer;
+namespace WellCommerce\Bundle\CoreBundle\Form\DataCollector;
 
 /**
- * Class HtmlRenderer
+ * Class DataCollector
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class HtmlRenderer implements FormRendererInterface
+class DataCollector implements DataCollectorInterface
 {
-
+    public function collect()
+    {
+    }
 } 

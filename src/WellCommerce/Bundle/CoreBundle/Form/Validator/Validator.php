@@ -10,14 +10,13 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CoreBundle\Form\Renderer;
+namespace WellCommerce\Bundle\CoreBundle\Form\Validator;
 
 /**
- * Class HtmlRenderer
+ * Class Validator
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class HtmlRenderer implements FormRendererInterface
-{
+class Validator implements ValidatorInterface{
 
 } 

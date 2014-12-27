@@ -4,10 +4,6 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="country.repository" class="WellCommerce\Bundle\IntlBundle\Repository\CountryRepository">
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
+        <service id="country.repository" class="WellCommerce\Bundle\IntlBundle\Repository\CountryRepository" />
     </services>
 </container>

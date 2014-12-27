@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\CoreBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
@@ -59,9 +60,12 @@ class FormResolverPass implements CompilerPassInterface
         }
     }
 
-    protected function processResolverItems($definition, \ReflectionClass $refClass, ContainerBuilder $container)
-    {
-        $tag       = $refClass->getConstant('SERVICE_TAG_NAME');
+    protected function processResolverItems(
+        Definition $definition,
+        \ReflectionClass $refClass,
+        ContainerBuilder $container
+    ) {
+        $tag = $refClass->getConstant('SERVICE_TAG_NAME');
         $interface = $refClass->getConstant('INTERFACE_CLASS');
 
         foreach ($container->findTaggedServiceIds($tag) as $id => $attributes) {

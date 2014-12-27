@@ -17,6 +17,35 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Renderer;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class JavascriptRenderer implements FormRendererInterface{
+class JavascriptRenderer implements FormRendererInterface
+{
 
+    public function render()
+    {
+
+    }
+
+    protected function formatAttributes(array $attributes = [])
+    {
+
+    }
+
+    protected function formatAttribute($attributeName, $javascriptName)
+    {
+
+    }
+
+    protected function formatRules(array $rules = [])
+    {
+
+    }
+
+    protected function formatRule($rule)
+    {
+
+    }
+
+    protected function formatDependencies(){
+
+    }
 } 

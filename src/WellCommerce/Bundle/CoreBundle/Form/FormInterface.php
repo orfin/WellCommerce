@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form;
 
-use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\CoreBundle\Form\Container\ContainerInterface;
 
 /**
  * Interface FormInterface
@@ -21,14 +21,14 @@ use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
  */
 interface FormInterface
 {
-    /**
-     * Builds the form
-     *
-     * @param FormBuilderInterface $builder FormBuilder instance
-     * @param array                $options Form options
-     *
-     * @return object
-     */
-    public function buildForm(FormBuilderInterface $builder, array $options);
-
+//    public function addContainer(ContainerInterface $container);
+//    public function setRenderer(FormRendererInterface $renderer);
+//
+//    public function setValidator(ValidatorInterface $validator);
+//
+//    public function setRequestHandler(RequestHandlerInterface $requestHandler);
+//
+//    public function setDataCollector(DataCollectorInterface $dataCollector);
+//
+//    public function addChild(ElementInterface $element);
 }

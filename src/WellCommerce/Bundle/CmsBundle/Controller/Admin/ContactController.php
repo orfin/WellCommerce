@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Bundle\CmsBundle\Controller\Admin;
 
+use Symfony\Component\HttpFoundation\Request;
+use WellCommerce\Bundle\CmsBundle\Entity\Contact;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
@@ -23,5 +25,15 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
  */
 class ContactController extends AbstractAdminController
 {
+    public function addAction(Request $request)
+    {
+        $builder = $this->get('contact.form.builder');
+        $builder->createForm([
+            'name' => 'contact',
+        ], new Contact());
 
+        print_r($builder->getForm());
+
+        die();
+    }
 }
