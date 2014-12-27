@@ -16,11 +16,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 
 /**
- * Class FieldsetLanguage
+ * Class LanguageFieldset
  *
- * @author  Adam Piotrowski <adam@wellcommerce.org>
+ * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class FieldsetLanguage extends RepeatableFieldset implements ElementInterface
+class LanguageFieldset extends RepeatableFieldset implements ElementInterface
 {
     /**
      * {@inheritdoc}

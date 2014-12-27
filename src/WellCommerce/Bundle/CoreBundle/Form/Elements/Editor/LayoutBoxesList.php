@@ -10,9 +10,11 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
+namespace WellCommerce\Bundle\CoreBundle\Form\Elements\Editor;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\AbstractField;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 
 /**
  * Class LayoutBoxesList
@@ -24,9 +26,9 @@ class LayoutBoxesList extends AbstractField implements ElementInterface
     /**
      * {@inheritdoc}
      */
-    public function configureAttributes(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        parent::configureAttributes($resolver);
+        parent::configureOptions($resolver);
 
         $resolver->setRequired([
             'boxes',

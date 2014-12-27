@@ -10,10 +10,12 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
+namespace WellCommerce\Bundle\CoreBundle\Form\Elements\Editor;
 
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\AbstractField;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 use WellCommerce\Bundle\TaxBundle\Repository\TaxRepositoryInterface;
 
 /**
@@ -21,7 +23,7 @@ use WellCommerce\Bundle\TaxBundle\Repository\TaxRepositoryInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class RangeEditor extends AbstractOptionedField implements ElementInterface
+class RangeEditor extends AbstractField implements ElementInterface
 {
     const RANGE_PRECISION = 2;
     const PRICE_PRECISION = 2;

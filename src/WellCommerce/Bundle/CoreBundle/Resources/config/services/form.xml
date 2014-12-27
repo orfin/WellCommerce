@@ -45,95 +45,91 @@
             <tag name="form.resolver" type="dependency"/>
         </service>
 
-        <service id="form.container.element" class="WellCommerce\Bundle\CoreBundle\Form\Container\ElementContainer" scope="prototype">
+        <service id="form.container.element" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Container\ElementContainer" scope="prototype">
             <tag name="form.container" alias="element_container"/>
         </service>
 
-        <service id="form.element.attribute_editor" class="WellCommerce\Bundle\CoreBundle\Form\Elements\AttributeEditor" scope="prototype">
+        <service id="form.element.attribute_editor" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Editor\AttributeEditor" scope="prototype">
             <tag name="form.element" alias="attribute_editor"/>
         </service>
 
-        <service id="form.element.text_field" class="WellCommerce\Bundle\CoreBundle\Form\Elements\TextField" scope="prototype">
+        <service id="form.element.text_field" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Input\TextField" scope="prototype">
             <tag name="form.element" alias="text_field"/>
         </service>
 
-        <service id="form.element.slug_field" class="WellCommerce\Bundle\CoreBundle\Form\Elements\SlugField" scope="prototype">
+        <service id="form.element.slug_field" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Input\SlugField" scope="prototype">
             <tag name="form.element" alias="slug_field"/>
         </service>
 
-        <service id="form.element.date" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Date" scope="prototype">
+        <service id="form.element.date" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Input\Date" scope="prototype">
             <tag name="form.element" alias="date"/>
         </service>
 
-        <service id="form.element.colour_scheme_picker" class="WellCommerce\Bundle\CoreBundle\Form\Elements\ColourSchemePicker" scope="prototype">
-            <tag name="form.element" alias="colour_scheme_picker"/>
-        </service>
-
-        <service id="form.element.font_style" class="WellCommerce\Bundle\CoreBundle\Form\Elements\FontStyle" scope="prototype">
+        <service id="form.element.font_style" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Input\FontStyle" scope="prototype">
             <tag name="form.element" alias="font_style"/>
         </service>
 
-        <service id="form.element.submit" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Submit" scope="prototype">
+        <service id="form.element.submit" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Button\Submit" scope="prototype">
             <tag name="form.element" alias="submit"/>
         </service>
 
-        <service id="form.element.price" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Price" scope="prototype">
-            <tag name="form.element" alias="price"/>
+        <service id="form.element.price" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Editor\PriceEditor" scope="prototype">
+            <tag name="form.element" alias="price_editor"/>
         </service>
 
-        <service id="form.element.product_variants_editor" class="WellCommerce\Bundle\CoreBundle\Form\Elements\ProductVariantsEditor" scope="prototype">
+        <service id="form.element.product_variants_editor" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Editor\ProductVariantsEditor" scope="prototype">
             <tag name="form.element" alias="product_variants_editor"/>
         </service>
 
-        <service id="form.element.password" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Password" scope="prototype">
+        <service id="form.element.password" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Input\Password" scope="prototype">
             <tag name="form.element" alias="password"/>
         </service>
 
-        <service id="form.element.tip" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Tip" scope="prototype">
+        <service id="form.element.tip" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Fixed\Tip" scope="prototype">
             <tag name="form.element" alias="tip"/>
         </service>
 
-        <service id="form.element.rich_text_editor" class="WellCommerce\Bundle\CoreBundle\Form\Elements\RichTextEditor" scope="prototype">
+        <service id="form.element.rich_text_editor" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Input\RichTextEditor" scope="prototype">
             <tag name="form.element" alias="rich_text_editor"/>
         </service>
 
-        <service id="form.element.text_area" class="WellCommerce\Bundle\CoreBundle\Form\Elements\TextArea" scope="prototype">
+        <service id="form.element.text_area" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Input\TextArea" scope="prototype">
             <tag name="form.element" alias="text_area"/>
         </service>
 
-        <service id="form.element.tree" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Tree" scope="prototype">
+        <service id="form.element.tree" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Tree\Tree" scope="prototype">
             <tag name="form.element" alias="tree"/>
         </service>
 
-        <service id="form.element.checkbox" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Checkbox" scope="prototype">
+        <service id="form.element.checkbox" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Input\Checkbox" scope="prototype">
             <tag name="form.element" alias="checkbox"/>
         </service>
 
-        <service id="form.element.select" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Select" scope="prototype">
+        <service id="form.element.select" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Optioned\Select" scope="prototype">
             <tag name="form.element" alias="select"/>
         </service>
 
-        <service id="form.element.multi_select" class="WellCommerce\Bundle\CoreBundle\Form\Elements\MultiSelect" scope="prototype">
+        <service id="form.element.multi_select" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Optioned\MultiSelect" scope="prototype">
             <tag name="form.element" alias="multi_select"/>
         </service>
 
-        <service id="form.element.fieldset" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Fieldset" scope="prototype">
-            <tag name="form.element" alias="fieldset"/>
+        <service id="form.element.fieldset" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Fieldset\NestedFieldset" scope="prototype">
+            <tag name="form.element" alias="nested_fieldset"/>
         </service>
 
-        <service id="form.element.fieldset_language" class="WellCommerce\Bundle\CoreBundle\Form\Elements\FieldsetLanguage" scope="prototype">
-            <tag name="form.element" alias="fieldset_language"/>
+        <service id="form.element.fieldset_language" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Fieldset\LanguageFieldset" scope="prototype">
+            <tag name="form.element" alias="language_fieldset"/>
         </service>
 
-        <service id="form.element.fieldset_repeatable" class="WellCommerce\Bundle\CoreBundle\Form\Elements\FieldsetRepeatable" scope="prototype">
-            <tag name="form.element" alias="fieldset_repeatable"/>
+        <service id="form.element.fieldset_repeatable" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Fieldset\RepeatableFieldset" scope="prototype">
+            <tag name="form.element" alias="repeatable_fieldset"/>
         </service>
 
-        <service id="form.element.layout_boxes_list" class="WellCommerce\Bundle\CoreBundle\Form\Elements\LayoutBoxesList" scope="prototype">
+        <service id="form.element.layout_boxes_list" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Editor\LayoutBoxesList" scope="prototype">
             <tag name="form.element" alias="layout_boxes_list"/>
         </service>
 
-        <service id="form.element.image" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Image" scope="prototype">
+        <service id="form.element.image" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Upload\Image" scope="prototype">
             <tag name="form.element" alias="image"/>
         </service>
 
