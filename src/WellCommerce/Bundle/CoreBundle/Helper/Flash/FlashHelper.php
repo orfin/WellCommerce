@@ -90,7 +90,7 @@ class FlashHelper implements FlashHelperInterface
     /**
      * Returns flash bag
      *
-     * @return \Symfony\Component\HttpFoundation\Session\SessionBagInterface
+     * @return \Symfony\Component\HttpFoundation\Session\Flash\FlashBag
      */
     private function getFlashBag()
     {
