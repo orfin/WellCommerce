@@ -12,6 +12,9 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements\Container;
 
+use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
+use WellCommerce\Bundle\CoreBundle\Form\Filters\FilterInterface;
+
 /**
  * Class ContainerInterface
  *
@@ -25,4 +28,20 @@ interface ContainerInterface
      * @return string
      */
     public function getName();
+
+    /**
+     * Adds element to collection and returns it
+     *
+     * @param ElementInterface $element
+     *
+     * @return ElementInterface
+     */
+    public function addElement(ElementInterface $element);
+
+    /**
+     * Adds filter to all container elements
+     *
+     * @param FilterInterface $filter
+     */
+    public function addFilter(FilterInterface $filter);
 } 

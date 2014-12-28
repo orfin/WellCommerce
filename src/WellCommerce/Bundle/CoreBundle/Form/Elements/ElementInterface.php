@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
+use WellCommerce\Bundle\CoreBundle\Form\Filters\FilterInterface;
+
 /**
  * Interface ElementInterface
  *
@@ -98,4 +100,20 @@ interface ElementInterface
      * @return string
      */
     public function getName();
+
+    /**
+     * Adds element to field
+     *
+     * @param ElementInterface $element
+     *
+     * @return ElementInterface
+     */
+    public function addElement(ElementInterface $element);
+
+    /**
+     * Adds filter to element
+     *
+     * @param FilterInterface $filter
+     */
+    public function addFilter(FilterInterface $filter);
 }

@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PropertyAccess\PropertyPath;
+use WellCommerce\Bundle\CoreBundle\Form\Filters\FilterInterface;
 
 /**
  * Class AbstractField
@@ -72,5 +73,20 @@ abstract class AbstractField extends AbstractNode
     public function getPropertyPath()
     {
         return $this->options['property_path'];
+    }
+
+    protected function getFilters()
+    {
+        return $this->options['filters'];
+    }
+
+    public function addElement(ElementInterface $element)
+    {
+        throw new \BadMethodCallException('Fields cannot have children. It is allowed only for containers and fieldsets');
+    }
+
+    public function addFilter(FilterInterface $filter)
+    {
+        $this->options['filters'][] = $filter;
     }
 }

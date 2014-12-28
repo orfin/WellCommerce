@@ -36,7 +36,7 @@ class PageForm extends AbstractForm implements FormInterface
             'label' => $this->trans('fieldset.main.label')
         ]));
 
-        $languageData = $mainData->addChild($builder->getElement('fieldset_language', [
+        $languageData = $mainData->addChild($builder->getElement('language_fieldset', [
             'name'  => 'translations',
             'label' => $this->trans('fieldset.translations.label')
         ]));
@@ -84,7 +84,7 @@ class PageForm extends AbstractForm implements FormInterface
             'label' => $this->trans('fieldset.content.label')
         ]));
 
-        $languageData = $contentData->addChild($builder->getElement('fieldset_language', [
+        $languageData = $contentData->addChild($builder->getElement('language_fieldset', [
             'name'  => 'translations',
             'label' => $this->trans('fieldset.translations.label')
         ]));

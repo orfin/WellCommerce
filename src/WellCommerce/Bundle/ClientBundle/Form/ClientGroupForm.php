@@ -45,7 +45,7 @@ class ClientGroupForm extends AbstractForm implements FormInterface
             ],
         ]));
 
-        $languageData = $requiredData->addChild($builder->getElement('fieldset_language', [
+        $languageData = $requiredData->addChild($builder->getElement('language_fieldset', [
             'name'  => 'translations',
             'label' => $this->trans('form.required_data.language_data.label')
         ]));

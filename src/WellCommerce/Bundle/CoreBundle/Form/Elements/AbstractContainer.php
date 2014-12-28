@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
+use WellCommerce\Bundle\CoreBundle\Form\Filters\FilterInterface;
+
 /**
  * Class AbstractContainer
  *
@@ -33,17 +35,23 @@ abstract class AbstractContainer extends AbstractNode
     }
 
     /**
-     * Adds new element to collection
-     *
-     * @param ElementInterface $element
-     *
-     * @return ElementInterface
+     * {@inheritdoc}
      */
     public function addElement(ElementInterface $element)
     {
         $this->elements->add($element);
 
         return $element;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addFilter(FilterInterface $filter)
+    {
+        $this->elements->forAll(function (ElementInterface $element) use ($filter) {
+            $element->addFilter($filter);
+        });
     }
 
 }

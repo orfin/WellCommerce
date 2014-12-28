@@ -35,7 +35,7 @@ class ProductStatusForm extends AbstractForm implements FormInterface
             'label' => $this->trans('fieldset.main.label')
         ]));
 
-        $languageData = $mainData->addChild($builder->getElement('fieldset_language', [
+        $languageData = $mainData->addChild($builder->getElement('language_fieldset', [
             'name'  => 'translations',
             'label' => $this->trans('fieldset.translations.label')
         ]));

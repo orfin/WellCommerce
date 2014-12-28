@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Form\DataCollector\DataCollectorInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\Container\ContainerCollection;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\Container\ContainerInterface;
+use WellCommerce\Bundle\CoreBundle\Form\Filters\FilterInterface;
 use WellCommerce\Bundle\CoreBundle\Form\FormConfiguration;
 use WellCommerce\Bundle\CoreBundle\Form\Renderer\FormRendererInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Request\RequestHandlerInterface;
@@ -73,6 +74,13 @@ class Form implements FormInterface
         $this->containers->add($container);
 
         return $container;
+    }
+
+    public function addFilter(FilterInterface $filter)
+    {
+        $this->containers->forAll(function (ContainerInterface $container) use ($filter) {
+            $container->addFilter($filter);
+        });
     }
 
     public function handleRequest(Request $request)

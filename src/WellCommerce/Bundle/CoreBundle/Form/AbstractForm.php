@@ -12,6 +12,7 @@
 namespace WellCommerce\Bundle\CoreBundle\Form;
 
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\Container\ContainerInterface;
 
 /**
  * Class AbstractForm
@@ -20,5 +21,8 @@ use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
  */
 abstract class AbstractForm extends AbstractContainer
 {
+    public function addContainer(ContainerInterface $container){
+
+    }
 
 }

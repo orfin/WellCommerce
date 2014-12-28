@@ -72,4 +72,11 @@ abstract class AbstractCollection implements \Countable, \IteratorAggregate
     {
         return $this->items[$key];
     }
+
+    public function forAll(\Closure $callable)
+    {
+        foreach ($this->items as $key => $item) {
+            $callable($item);
+        }
+    }
 }

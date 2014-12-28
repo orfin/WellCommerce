@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
+use WellCommerce\Bundle\CoreBundle\Form\Elements\Container\ContainerInterface;
+
 /**
  * Interface FormInterface
  *
@@ -19,7 +21,15 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
  */
 interface FormInterface
 {
-//    public function addContainer(ContainerInterface $container);
+    /**
+     * Adds container to form
+     *
+     * @param ContainerInterface $container
+     *
+     * @return ContainerInterface
+     */
+    public function addContainer(ContainerInterface $container);
+
 //    public function setRenderer(FormRendererInterface $renderer);
 //
 //    public function setValidator(ValidatorInterface $validator);

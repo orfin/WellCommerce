@@ -184,7 +184,12 @@ abstract class AbstractFormBuilder extends AbstractContainer
     }
 
     /**
-     * {@inheritdoc}
+     * Returns a form element prototype
+     *
+     * @param       $alias
+     * @param array $options
+     *
+     * @return \WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
      */
     public function getElement($alias, array $options = [])
     {

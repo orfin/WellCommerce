@@ -37,7 +37,7 @@ class ProducerForm extends AbstractForm implements FormInterface
             'label' => $this->trans('form.required_data.label')
         ]));
 
-        $languageData = $requiredData->addChild($builder->getElement('fieldset_language', [
+        $languageData = $requiredData->addChild($builder->getElement('language_fieldset', [
             'name'  => 'translations',
             'label' => $this->trans('form.required_data.language_data.label')
         ]));

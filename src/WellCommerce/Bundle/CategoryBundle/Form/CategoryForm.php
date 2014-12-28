@@ -36,7 +36,7 @@ class CategoryForm extends AbstractForm implements FormInterface
             'label' => $this->trans('fieldset.required')
         ]));
 
-        $languageData = $requiredData->addChild($builder->getElement('fieldset_language', [
+        $languageData = $requiredData->addChild($builder->getElement('language_fieldset', [
             'name'  => 'translations',
             'label' => $this->trans('fieldset.translations'),
         ]));
@@ -87,7 +87,7 @@ class CategoryForm extends AbstractForm implements FormInterface
             'label' => $this->trans('fieldset.description')
         ]));
 
-        $languageData = $descriptionData->addChild($builder->getElement('fieldset_language', [
+        $languageData = $descriptionData->addChild($builder->getElement('language_fieldset', [
             'name'  => 'translations',
             'label' => $this->trans('fieldset.translations'),
         ]));
@@ -107,7 +107,7 @@ class CategoryForm extends AbstractForm implements FormInterface
             'label' => $this->trans('fieldset.seo')
         ]));
 
-        $languageData = $seoData->addChild($builder->getElement('fieldset_language', [
+        $languageData = $seoData->addChild($builder->getElement('language_fieldset', [
             'name'  => 'translations',
             'label' => $this->trans('fieldset.translations'),
         ]));

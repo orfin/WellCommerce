@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements\Fieldset;
 
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\PropertyAccess\PropertyPath;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 
 /**
@@ -32,6 +33,7 @@ class LanguageFieldset extends RepeatableFieldset implements ElementInterface
 
         $resolver->setRequired([
             'languages',
+            'property_path',
         ]);
 
         $count = function (Options $options) {
@@ -39,10 +41,15 @@ class LanguageFieldset extends RepeatableFieldset implements ElementInterface
         };
 
         $resolver->setDefaults([
-            'languages'  => [],
-            'repeat_min' => $count,
-            'repeat_max' => $count,
+            'property_path' => null,
+            'languages'     => [],
+            'repeat_min'    => $count,
+            'repeat_max'    => $count,
         ]);
+
+        $resolver->setNormalizer('property_path', function ($options) {
+            return new PropertyPath($options['name']);
+        });
 
         $resolver->setAllowedTypes([
             'languages' => 'array',

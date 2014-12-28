@@ -40,7 +40,7 @@ class ContactForm extends AbstractForm implements FormInterface
             'label' => $this->trans('contact.required_data.enabled.label'),
         ]));
 
-        $languageData = $requiredData->addChild($builder->getElement('fieldset_language', [
+        $languageData = $requiredData->addChild($builder->getElement('language_fieldset', [
             'name'  => 'translations',
             'label' => $this->trans('form.required_data.language_data.label')
         ]));
@@ -75,7 +75,7 @@ class ContactForm extends AbstractForm implements FormInterface
             'label' => $this->trans('fieldset.address_data')
         ]));
 
-        $languageData = $addressData->addChild($builder->getElement('fieldset_language', [
+        $languageData = $addressData->addChild($builder->getElement('language_fieldset', [
             'name'  => 'translations',
             'label' => $this->trans('fieldset.address_data.translation')
         ]));
