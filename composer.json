@@ -44,10 +44,9 @@
         "white-october/pagerfanta-bundle": "2.1.x-dev",
         "friendsofsymfony/jsrouting-bundle": "2.0.*@dev",
         "willdurand/js-translation-bundle": "2.1.*@dev",
-        "friendsofsymfony/rest-bundle": "1.4.1",
         "jms/serializer-bundle": "0.13.0",
-        "ircmaxell/password-compat": "1.0.3",
-        "liip/imagine-bundle": "1.0.4",
+        "ircmaxell/password-compat": "v1.0.4",
+        "liip/imagine-bundle": "1.2.1",
         "symfony-cmf/routing-bundle": "1.3.*@dev",
         "mathiasverraes/money": "dev-master",
         "zendframework/zend-json": "2.3.*@dev"
