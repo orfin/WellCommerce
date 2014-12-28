@@ -80,11 +80,19 @@ abstract class AbstractField extends AbstractNode
         return $this->options['filters'];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function addElement(ElementInterface $element)
     {
-        throw new \BadMethodCallException('Fields cannot have children. It is allowed only for containers and fieldsets');
+        throw new \BadMethodCallException(
+            sprintf('Cannot add child "%s" as it is allowed only for containers and fieldsets', get_class($element))
+        );
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function addFilter(FilterInterface $filter)
     {
         $this->options['filters'][] = $filter;

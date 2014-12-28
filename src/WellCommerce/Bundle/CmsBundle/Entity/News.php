@@ -12,10 +12,10 @@
 
 namespace WellCommerce\Bundle\CmsBundle\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\PhotoTrait;
-use WellCommerce\Bundle\CoreBundle\Form\Elements\DateTime;
 
 /**
  * Class News

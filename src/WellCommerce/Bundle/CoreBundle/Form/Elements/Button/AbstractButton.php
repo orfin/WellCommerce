@@ -13,14 +13,14 @@
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements\Button;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use WellCommerce\Bundle\CoreBundle\Form\Elements\AbstractNode;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\Fixed\AbstractFixedField;
 
 /**
  * Class AbstractButton
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractButton extends AbstractNode
+abstract class AbstractButton extends AbstractFixedField
 {
     /**
      * {@inheritdoc}
@@ -42,4 +42,4 @@ abstract class AbstractButton extends AbstractNode
     {
         return '';
     }
-} 
+}
