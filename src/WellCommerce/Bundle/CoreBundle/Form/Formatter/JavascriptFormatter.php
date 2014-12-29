@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Formatter;
 
 use Doctrine\Common\Util\ClassUtils;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
-use WellCommerce\Bundle\CoreBundle\Form\Formatter\Javascript as Javascript;
 use Zend\Json\Expr;
 use Zend\Json\Json;
 

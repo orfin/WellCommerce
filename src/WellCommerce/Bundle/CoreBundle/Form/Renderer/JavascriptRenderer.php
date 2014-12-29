@@ -15,37 +15,14 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Renderer;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementCollection;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
-use WellCommerce\Bundle\CoreBundle\Form\Formatter\FormatterInterface;
 
 /**
  * Class JavascriptRenderer
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class JavascriptRenderer implements FormRendererInterface
+class JavascriptRenderer extends AbstractFormRenderer implements FormRendererInterface
 {
-    /**
-     * @var FormatterInterface
-     */
-    protected $formatter;
-
-    /**
-     * @var string
-     */
-    protected $template;
-
-    /**
-     * Constructor
-     *
-     * @param FormatterInterface $formatter
-     * @param                    $template
-     */
-    public function __construct(FormatterInterface $formatter, $template)
-    {
-        $this->formatter = $formatter;
-        $this->template  = $template;
-    }
-
     /**
      * {@inheritdoc}
      */
