@@ -41,12 +41,11 @@ class UserController extends AbstractAdminController
             $error = '';
         }
 
-
-        $form = $this->getFormBuilder($this->get('user.form.login'), null, [
+        $form = $this->get('user_login.form_builder')->createForm([
             'name'   => 'login',
             'action' => $this->generateUrl('admin.user.login_check'),
             'class'  => 'login-form'
-        ]);
+        ], null);
 
         return [
             'error' => $error,

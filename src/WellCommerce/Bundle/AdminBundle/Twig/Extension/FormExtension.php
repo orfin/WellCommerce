@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Bundle\AdminBundle\Twig\Extension;
 
-use WellCommerce\Bundle\CoreBundle\Form\Elements\Form;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Renderer\FormRendererChainInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Renderer\FormRendererFactory;
 use WellCommerce\Bundle\CoreBundle\Twig\AbstractTwigExtension;
@@ -53,11 +53,12 @@ class FormExtension extends AbstractTwigExtension
     /**
      * Renders the form
      *
-     * @param Form $form
+     * @param FormInterface $form
+     * @param string        $type
      *
-     * @return mixed
+     * @return string
      */
-    public function render(Form $form, $type)
+    public function render(FormInterface $form, $type = 'js')
     {
         $renderer = $this->formRendererChain->guessRenderer($type);
         $renderer->render($form);
@@ -65,8 +66,8 @@ class FormExtension extends AbstractTwigExtension
         $templateVars = [
             'form'     => $form,
             'children' => $renderer->render($form),
-//            'values'   => $form->getValues(),
-//            'errors'   => $form->getErrors(),
+            //            'values'   => $form->getValues(),
+            //            'errors'   => $form->getErrors(),
             'values'   => [],
             'errors'   => [],
         ];

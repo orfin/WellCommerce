@@ -16,6 +16,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
 use WellCommerce\Bundle\CoreBundle\Event\ResourceEvent;
+use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
@@ -36,7 +37,7 @@ class AbstractAdminManager extends AbstractManager implements AdminManagerInterf
     /**
      * @var FormInterface
      */
-    protected $form;
+    protected $formBuilder;
 
     /**
      * @param DataGridInterface $datagrid
@@ -52,19 +53,23 @@ class AbstractAdminManager extends AbstractManager implements AdminManagerInterf
     }
 
     /**
-     * @param FormInterface $form
+     * Sets form builder
+     *
+     * @param FormBuilderInterface $formBuilder
      */
-    public function setForm(FormInterface $form)
+    public function setFormBuilder(FormBuilderInterface $formBuilder)
     {
-        $this->form = $form;
+        $this->formBuilder = $formBuilder;
     }
 
     /**
-     * @return FormInterface
+     * Returns form builder
+     *
+     * @return FormBuilderInterface
      */
-    public function getForm()
+    public function getFormBuilder()
     {
-        return $this->form;
+        return $this->formBuilder;
     }
 
     /**

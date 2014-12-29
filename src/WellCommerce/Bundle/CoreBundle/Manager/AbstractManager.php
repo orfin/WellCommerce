@@ -23,7 +23,6 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 /**
  * Class AbstractManager
  *
- * @package WellCommerce\Bundle\CoreBundle\Manager
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 abstract class AbstractManager implements ManagerInterface
