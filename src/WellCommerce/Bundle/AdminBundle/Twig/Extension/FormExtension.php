@@ -12,6 +12,8 @@
 namespace WellCommerce\Bundle\AdminBundle\Twig\Extension;
 
 use WellCommerce\Bundle\CoreBundle\Form\Elements\Form;
+use WellCommerce\Bundle\CoreBundle\Form\Renderer\FormRendererChainInterface;
+use WellCommerce\Bundle\CoreBundle\Form\Renderer\FormRendererFactory;
 use WellCommerce\Bundle\CoreBundle\Twig\AbstractTwigExtension;
 
 /**
@@ -22,18 +24,18 @@ use WellCommerce\Bundle\CoreBundle\Twig\AbstractTwigExtension;
 class FormExtension extends AbstractTwigExtension
 {
     /**
-     * @var string Template name
+     * @var FormRendererChainInterface
      */
-    protected $templateName;
+    protected $formRendererChain;
 
     /**
      * Constructor
      *
-     * @param $templateName
+     * @param FormRendererChainInterface $formRendererChain
      */
-    public function __construct($templateName)
+    public function __construct(FormRendererChainInterface $formRendererChain)
     {
-        $this->templateName = $templateName;
+        $this->formRendererChain = $formRendererChain;
     }
 
     /**
@@ -55,28 +57,21 @@ class FormExtension extends AbstractTwigExtension
      *
      * @return mixed
      */
-    public function render(Form $form)
+    public function render(Form $form, $type)
     {
-        $templateVars = $this->extractFormVariables($form);
+        $renderer = $this->formRendererChain->guessRenderer($type);
+        $renderer->render($form);
 
-        return $this->environment->render($this->templateName, $templateVars);
-    }
-
-    /**
-     * Extracts form configuration
-     *
-     * @param Form $form
-     *
-     * @return array
-     */
-    protected function extractFormVariables(Form $form)
-    {
-        return [
-            'attributes' => $form->getAttributes(),
-            'children'   => $form->renderChildren(),
-            'values'     => $form->getValues(),
-            'errors'     => $form->getErrors(),
+        $templateVars = [
+            'form'     => $form,
+            'children' => $renderer->render($form),
+//            'values'   => $form->getValues(),
+//            'errors'   => $form->getErrors(),
+            'values'   => [],
+            'errors'   => [],
         ];
+
+        return $this->environment->render($renderer->getTemplateName(), $templateVars);
     }
 
     /**

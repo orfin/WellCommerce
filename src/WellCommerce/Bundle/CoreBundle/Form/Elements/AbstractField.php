@@ -21,7 +21,7 @@ use WellCommerce\Bundle\CoreBundle\Form\Filters\FilterInterface;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractField extends AbstractNode
+abstract class AbstractField extends AbstractContainer
 {
     /**
      * {@inheritdoc}
@@ -83,10 +83,10 @@ abstract class AbstractField extends AbstractNode
     /**
      * {@inheritdoc}
      */
-    public function addElement(ElementInterface $element)
+    public function addChild(ElementInterface $element)
     {
         throw new \BadMethodCallException(
-            sprintf('Cannot add child "%s" as it is allowed only for containers and fieldsets', get_class($element))
+            sprintf('Cannot add child "%s" as it is allowed only for element of type fieldset', get_class($element))
         );
     }
 

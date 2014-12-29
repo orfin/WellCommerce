@@ -60,20 +60,17 @@ abstract class AbstractFormBuilder extends AbstractContainer
     /**
      * Constructor
      *
-     * @param FormRendererInterface        $renderer
      * @param FormResolverFactoryInterface $resolverFactory
      * @param DataCollectorInterface       $dataCollector
      * @param ValidatorInterface           $validator
      * @param RequestHandlerInterface      $requestHandler
      */
     public function __construct(
-        FormRendererInterface $renderer,
         FormResolverFactoryInterface $resolverFactory,
         DataCollectorInterface $dataCollector,
         ValidatorInterface $validator,
         RequestHandlerInterface $requestHandler
     ) {
-        $this->renderer        = $renderer;
         $this->resolverFactory = $resolverFactory;
         $this->dataCollector   = $dataCollector;
         $this->validator       = $validator;
@@ -84,18 +81,25 @@ abstract class AbstractFormBuilder extends AbstractContainer
      *
      * @param array  $options
      * @param object $data
+     *
+     * @return FormInterface
      */
     public function createForm($options, $formData)
     {
+//        $metadata = $this->validator->getValidationMetadata($formData);
+
         $form = $this->initForm($options);
         $this->buildForm($form);
+
+        return $form;
+
+        $this->validator->getValidationMetadata($formData);
 
         die();
 
         $this->formData = $formData;
         $this->form     = $this->buildForm($options);
         $this->form->setDefaultData($this->formData);
-        $this->form->setRenderer($this->renderer);
         $this->form->setDataCollector($this->dataCollector);
         $this->form->setValidator($this->validator);
     }
@@ -103,12 +107,11 @@ abstract class AbstractFormBuilder extends AbstractContainer
     /**
      * @param $options
      *
-     * @return Form
+     * @return FormInterface
      */
     protected function initForm($options)
     {
-        $form = new Form($options);
-        $form->setRenderer($this->renderer);
+        $form = $this->getElement('form', $options);
         $form->setDataCollector($this->dataCollector);
         $form->setValidator($this->validator);
         $form->setRequestHandler($this->requestHandler);
@@ -125,6 +128,9 @@ abstract class AbstractFormBuilder extends AbstractContainer
      */
     abstract protected function buildForm(FormInterface $form);
 
+    /**
+     * @return mixed
+     */
     public function getForm()
     {
         return $this->form;
@@ -173,14 +179,6 @@ abstract class AbstractFormBuilder extends AbstractContainer
     public function init($options)
     {
         return $this->container->get('form.element.form')->setOptions($options);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getContainer($alias, array $options = [])
-    {
-        return $this->initService('container', $alias, $options);
     }
 
     /**

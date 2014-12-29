@@ -12,6 +12,11 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Renderer;
 
+use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementCollection;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
+use WellCommerce\Bundle\CoreBundle\Form\Formatter\FormatterInterface;
+
 /**
  * Class JavascriptRenderer
  *
@@ -19,33 +24,81 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Renderer;
  */
 class JavascriptRenderer implements FormRendererInterface
 {
+    /**
+     * @var FormatterInterface
+     */
+    protected $formatter;
 
-    public function render()
+    /**
+     * @var string
+     */
+    protected $template;
+
+    /**
+     * Constructor
+     *
+     * @param FormatterInterface $formatter
+     * @param                    $template
+     */
+    public function __construct(FormatterInterface $formatter, $template)
     {
-
+        $this->formatter = $formatter;
+        $this->template  = $template;
     }
 
-    protected function formatAttributes(array $attributes = [])
+    /**
+     * {@inheritdoc}
+     */
+    public function render(FormInterface $form)
     {
+        $attributes = $this->walkChildren($form->getChildren());
 
+        return $this->formatter->formatAttributes($attributes);
     }
 
-    protected function formatAttribute($attributeName, $javascriptName)
+    public function getTemplateName()
     {
-
+        return $this->template;
     }
 
-    protected function formatRules(array $rules = [])
+    /**
+     * @param ElementInterface $element
+     *
+     * @return array
+     */
+    protected function walkElement(ElementInterface $element)
     {
+        $attributes = $this->formatter->formatElement($element);
+        $children   = $element->getChildren();
 
+        if ($children->count()) {
+            $this->formatter->formatChildren($this->walkChildren($children), $attributes);
+        }
+
+        return $attributes;
     }
 
-    protected function formatRule($rule)
+    /**
+     * @param ElementCollection $children
+     *
+     * @return array
+     */
+    protected function walkChildren(ElementCollection $children)
     {
+        $attributes = [];
 
+        foreach ($children->all() as $child) {
+            $attributes[] = $this->walkElement($child);
+        }
+
+        return $attributes;
     }
 
-    protected function formatDependencies(){
-
+    /**
+     * {@inheritdoc}
+     */
+    public function supports($type)
+    {
+        return 'js' === strtolower($type);
     }
 } 

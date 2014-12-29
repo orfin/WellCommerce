@@ -68,7 +68,6 @@
         </service>
 
         <service id="contact.form.builder" class="WellCommerce\Bundle\CmsBundle\Form\ContactFormBuilder">
-            <argument type="service" id="form.renderer.javascript"/>
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.data_collector"/>
             <argument type="service" id="form.validator"/>

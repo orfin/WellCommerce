@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
 use WellCommerce\Bundle\CoreBundle\Form\Filters\FilterInterface;
+use WellCommerce\Bundle\CoreBundle\Form\Formatter\FormatterInterface;
 
 /**
  * Class AbstractContainer
@@ -24,24 +25,29 @@ abstract class AbstractContainer extends AbstractNode
     /**
      * @var ElementCollection
      */
-    protected $elements;
+    protected $children;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->elements = new ElementCollection();
+        $this->children = new ElementCollection();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function addElement(ElementInterface $element)
+    public function addChild(ElementInterface $element)
     {
-        $this->elements->add($element);
+        $this->children->add($element);
 
         return $element;
+    }
+
+    public function getChildren()
+    {
+        return $this->children;
     }
 
     /**
@@ -49,9 +55,19 @@ abstract class AbstractContainer extends AbstractNode
      */
     public function addFilter(FilterInterface $filter)
     {
-        $this->elements->forAll(function (ElementInterface $element) use ($filter) {
+        $this->children->forAll(function (ElementInterface $element) use ($filter) {
             $element->addFilter($filter);
         });
     }
 
+    public function prepareChildrenAttributes(FormatterInterface $formatter)
+    {
+        $attributes = [];
+
+        $this->children->forAll(function (ElementInterface $element) use ($formatter, &$attributes) {
+            $attributes[] = $element->prepareAttributes($formatter);
+        });
+
+        return $attributes;
+    }
 }

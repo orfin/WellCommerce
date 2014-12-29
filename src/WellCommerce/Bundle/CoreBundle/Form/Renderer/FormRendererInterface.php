@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Renderer;
 
+use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
+
 /**
  * Interface FormRendererInterface
  *
@@ -19,5 +21,14 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Renderer;
  */
 interface FormRendererInterface
 {
-    public function render();
+    public function render(FormInterface $form);
+
+    /**
+     * Returns format supported by renderer
+     *
+     * @param $type
+     *
+     * @return bool
+     */
+    public function supports($type);
 } 

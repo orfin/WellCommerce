@@ -13,7 +13,18 @@
             </call>
         </service>
 
-        <service id="form.renderer.javascript" class="WellCommerce\Bundle\CoreBundle\Form\Renderer\JavascriptRenderer" />
+        <service id="form.formatter.javascript" class="WellCommerce\Bundle\CoreBundle\Form\Formatter\JavascriptFormatter" />
+
+        <service id="form.renderer.chain" class="WellCommerce\Bundle\CoreBundle\Form\Renderer\FormRendererChain">
+            <argument type="collection">
+                <argument type="service" id="form.renderer.javascript"/>
+            </argument>
+        </service>
+
+        <service id="form.renderer.javascript" class="WellCommerce\Bundle\CoreBundle\Form\Renderer\JavascriptRenderer">
+            <argument type="service" id="form.formatter.javascript"/>
+            <argument>WellCommerceAdminBundle:Form:form.html.twig</argument>
+        </service>
 
         <service id="form.data_collector" class="WellCommerce\Bundle\CoreBundle\Form\DataCollector\DataCollector" />
 
@@ -21,13 +32,7 @@
 
         <service id="form.validator" class="WellCommerce\Bundle\CoreBundle\Form\Validator\Validator" />
 
-        <service id="form.element.form" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Form" scope="prototype" />
-
         <service id="form.resolver.factory" class="WellCommerce\Bundle\CoreBundle\Form\Resolver\FormResolverFactory" />
-
-        <service id="form.resolver.container" class="WellCommerce\Bundle\CoreBundle\Form\Resolver\ContainerResolver">
-            <tag name="form.resolver" type="container"/>
-        </service>
 
         <service id="form.resolver.element" class="WellCommerce\Bundle\CoreBundle\Form\Resolver\ElementResolver">
             <tag name="form.resolver" type="element"/>
@@ -45,8 +50,8 @@
             <tag name="form.resolver" type="dependency"/>
         </service>
 
-        <service id="form.container.element" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Container\ElementContainer" scope="prototype">
-            <tag name="form.container" alias="element_container"/>
+        <service id="form.element.form" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Form" scope="prototype">
+            <tag name="form.element" alias="form"/>
         </service>
 
         <service id="form.element.attribute_editor" class="WellCommerce\Bundle\CoreBundle\Form\Elements\Editor\AttributeEditor" scope="prototype">

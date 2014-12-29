@@ -12,10 +12,8 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
-use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use Symfony\Component\PropertyAccess\PropertyPath;
 
 /**
  * Class AbstractNode
@@ -46,7 +44,7 @@ abstract class AbstractNode
      *
      * @param OptionsResolver $resolver
      */
-    protected function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired([
             'name',
@@ -58,45 +56,43 @@ abstract class AbstractNode
         ]);
 
         $resolver->setDefaults([
-            'class'        => '',
+            'class' => '',
         ]);
 
         $resolver->setAllowedTypes([
-            'name'          => 'string',
-            'class'         => 'string',
-            'label'         => 'string',
+            'name'  => 'string',
+            'class' => 'string',
+            'label' => 'string',
         ]);
 
     }
 
-    /**
-     * Returns name
-     *
-     * @return string
-     */
     public function getName()
     {
-        return $this->options['name'];
+        return $this->getOption('name');
     }
 
-    /**
-     * Returns label
-     *
-     * @return string
-     */
-    public function getLabel()
+    public function hasOption($option)
     {
-        return $this->options['label'];
+        return isset($this->options[$option]);
     }
 
-    /**
-     * Returns CSS class
-     *
-     * @return string
-     */
-    public function getClass()
+    public function getOption($option)
     {
-        return $this->options['class'];
+        if (!$this->hasOption($option)) {
+            throw new \InvalidArgumentException(sprintf('Option "%s" does not exists', $option));
+        }
+
+        return $this->options[$option];
+    }
+
+    public function prepareAttributes()
+    {
+        return [
+            'sName'  => $this->getOption('name'),
+            'sLabel' => $this->getOption('label'),
+            'sClass' => $this->getOption('class'),
+        ];
     }
 
     /**
@@ -107,16 +103,5 @@ abstract class AbstractNode
     protected function getPropertyAccessor()
     {
         return PropertyAccess::createPropertyAccessor();
-    }
-
-    public function prepareAttributesJs()
-    {
-        return [
-            $this->formatAttributeJs('name', 'sName'),
-            $this->formatAttributeJs('class', 'sClass'),
-            $this->formatAttributeJs('label', 'sLabel'),
-        ];
-
-        return $attributes;
     }
 }

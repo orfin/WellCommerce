@@ -15,7 +15,6 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements\Fieldset;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\AbstractContainer;
 
-
 /**
  * Class AbstractFieldset
  *
@@ -46,4 +45,4 @@ abstract class AbstractFieldset extends AbstractContainer
             'transformer'   => ['null', 'WellCommerce\Bundle\CoreBundle\Form\DataTransformer\DataTransformerInterface'],
         ]);
     }
-} 
+}

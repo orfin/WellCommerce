@@ -18,7 +18,6 @@ use WellCommerce\Bundle\CoreBundle\Collection\AbstractCollection;
 /**
  * Class AdminMenuBuilder
  *
- * @package WellCommerce\Bundle\AdminBundle\MenuBuilder
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class AdminMenuBuilder extends AbstractCollection implements AdminMenuBuilderInterface

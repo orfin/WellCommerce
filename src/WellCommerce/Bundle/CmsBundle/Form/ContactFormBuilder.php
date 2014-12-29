@@ -11,7 +11,6 @@
  */
 namespace WellCommerce\Bundle\CmsBundle\Form;
 
-use Symfony\Component\VarDumper\VarDumper;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\AbstractFormBuilder;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
@@ -28,23 +27,23 @@ class ContactFormBuilder extends AbstractFormBuilder implements FormBuilderInter
      */
     public function buildForm(FormInterface $form)
     {
-        $requiredData = $form->addContainer($this->getContainer('element_container', [
+        $requiredData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'required_data',
             'label' => $this->trans('form.required_data.label')
         ]));
 
-        $requiredData->addElement($this->getElement('checkbox', [
+        $requiredData->addChild($this->getElement('checkbox', [
             'name'  => 'enabled',
             'label' => $this->trans('contact.required_data.enabled.label'),
         ]));
 
-        $languageData = $requiredData->addElement($this->getElement('language_fieldset', [
+        $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
             'name'      => 'translations',
             'label'     => $this->trans('form.required_data.language_data.label'),
             'languages' => $this->get('locale.repository')->getAvailableLocales()
         ]));
 
-        $languageData->addElement($this->getElement('text_field', [
+        $languageData->addChild($this->getElement('text_field', [
             'name'  => 'name',
             'label' => $this->trans('address.name'),
             'rules' => [
@@ -54,75 +53,69 @@ class ContactFormBuilder extends AbstractFormBuilder implements FormBuilderInter
             ]
         ]));
 
-        $languageData->addElement($this->getElement('text_field', [
+        $languageData->addChild($this->getElement('text_field', [
             'name'  => 'email',
             'label' => $this->trans('address.email'),
         ]));
 
-        $languageData->addElement($this->getElement('text_field', [
+        $languageData->addChild($this->getElement('text_field', [
             'name'  => 'phone',
             'label' => $this->trans('address.phone'),
         ]));
 
-        $languageData->addElement($this->getElement('text_area', [
+        $languageData->addChild($this->getElement('text_area', [
             'name'  => 'business_hours',
             'label' => $this->trans('contact.business_hours'),
         ]));
 
-        $addressData = $form->addContainer($this->getContainer('element_container', [
+        $addressData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'address_data',
             'label' => $this->trans('fieldset.address_data')
         ]));
 
-        $languageData = $addressData->addElement($this->getElement('language_fieldset', [
+        $languageData = $addressData->addChild($this->getElement('language_fieldset', [
             'name'  => 'translations',
             'label' => $this->trans('fieldset.address_data.translation')
         ]));
 
-        $languageData->addElement($this->getElement('text_field', [
+        $languageData->addChild($this->getElement('text_field', [
             'name'  => 'street',
             'label' => $this->trans('address.street'),
         ]));
 
-        $languageData->addElement($this->getElement('text_field', [
+        $languageData->addChild($this->getElement('text_field', [
             'name'  => 'streetNo',
             'label' => $this->trans('address.street_no'),
         ]));
 
-        $languageData->addElement($this->getElement('text_field', [
+        $languageData->addChild($this->getElement('text_field', [
             'name'  => 'flatNo',
             'label' => $this->trans('address.flat_no'),
         ]));
 
-        $languageData->addElement($this->getElement('text_field', [
+        $languageData->addChild($this->getElement('text_field', [
             'name'  => 'province',
             'label' => $this->trans('address.province'),
         ]));
 
-        $languageData->addElement($this->getElement('text_field', [
+        $languageData->addChild($this->getElement('text_field', [
             'name'  => 'postCode',
             'label' => $this->trans('address.post_code'),
         ]));
 
-        $languageData->addElement($this->getElement('text_field', [
+        $languageData->addChild($this->getElement('text_field', [
             'name'  => 'city',
             'label' => $this->trans('address.city'),
         ]));
 
-        $languageData->addElement($this->getElement('select', [
+        $languageData->addChild($this->getElement('select', [
             'name'    => 'country',
             'label'   => $this->trans('address.country'),
             'options' => $this->get('country.repository')->all()
         ]));
-        
+
         $form->addFilter($this->getFilter('no_code'));
         $form->addFilter($this->getFilter('trim'));
         $form->addFilter($this->getFilter('secure'));
-
-        echo "<pre>";
-        print_r($form);
-        die();
-
-        return $form;
     }
 }

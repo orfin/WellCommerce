@@ -12,39 +12,40 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
-use WellCommerce\Bundle\CoreBundle\Form\Elements\Container\ContainerInterface;
-use WellCommerce\Bundle\CoreBundle\Form\Filters\FilterInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use WellCommerce\Bundle\CoreBundle\Form\DataCollector\DataCollectorInterface;
+use WellCommerce\Bundle\CoreBundle\Form\Request\RequestHandlerInterface;
+use WellCommerce\Bundle\CoreBundle\Form\Validator\ValidatorInterface;
 
 /**
  * Interface FormInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface FormInterface
+interface FormInterface extends ElementInterface
 {
-    /**
-     * Adds container to form
-     *
-     * @param ContainerInterface $container
-     *
-     * @return ContainerInterface
-     */
-    public function addContainer(ContainerInterface $container);
+    const TABS_VERTICAL   = 0;
+    const TABS_HORIZONTAL = 1;
+    const FORM_METHOD     = 'POST';
 
     /**
-     * Adds filter to all form containers
+     * Sets form data collector
      *
-     * @param FilterInterface $filter
+     * @param DataCollectorInterface $dataCollector
      */
-    public function addFilter(FilterInterface $filter);
+    public function setDataCollector(DataCollectorInterface $dataCollector);
 
-//    public function setRenderer(FormRendererInterface $renderer);
-//
-//    public function setValidator(ValidatorInterface $validator);
-//
-//    public function setRequestHandler(RequestHandlerInterface $requestHandler);
-//
-//    public function setDataCollector(DataCollectorInterface $dataCollector);
-//
-//    public function addChild(ElementInterface $element);
+    /**
+     * Sets form validator
+     *
+     * @param ValidatorInterface $validator
+     */
+    public function setValidator(ValidatorInterface $validator);
+
+    /**
+     * Sets form request handler
+     *
+     * @param RequestHandlerInterface $requestHandler
+     */
+    public function setRequestHandler(RequestHandlerInterface $requestHandler);
 }

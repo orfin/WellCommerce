@@ -19,5 +19,19 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Renderer;
  */
 class HtmlRenderer implements FormRendererInterface
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function render()
+    {
 
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function supports($type)
+    {
+        return 'html' === $type;
+    }
 } 

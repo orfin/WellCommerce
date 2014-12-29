@@ -12,11 +12,14 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Request;
 
+use Symfony\Component\HttpFoundation\Request;
+
 /**
  * Interface RequestHandlerInterface
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-interface RequestHandlerInterface {
-
+interface RequestHandlerInterface
+{
+    public function handleRequest(Request $request);
 } 

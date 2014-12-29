@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements\Fixed;
 
-use WellCommerce\Bundle\CoreBundle\Form\Elements\AbstractNode;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\AbstractField;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Filters\FilterInterface;
 
@@ -21,18 +21,8 @@ use WellCommerce\Bundle\CoreBundle\Form\Filters\FilterInterface;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class AbstractFixedField extends AbstractNode implements ElementInterface
+abstract class AbstractFixedField extends AbstractField implements ElementInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function addElement(ElementInterface $element)
-    {
-        throw new \BadMethodCallException(
-            sprintf('Cannot add element "%s" as it is allowed for containers and fieldsets', get_class($element))
-        );
-    }
-
     /**
      * {@inheritdoc}
      */

@@ -12,11 +12,19 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Request;
 
+use Symfony\Component\HttpFoundation\Request;
+
 /**
  * Class RequestHandler
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class RequestHandler implements RequestHandlerInterface{
+class RequestHandler implements RequestHandlerInterface
+{
 
+    public function handleRequest(Request $request)
+    {
+        print_r($request);
+        die();
+    }
 } 

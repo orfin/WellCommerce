@@ -13,11 +13,9 @@
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use WellCommerce\Bundle\CoreBundle\Form\DataCollector\DataCollectorInterface;
-use WellCommerce\Bundle\CoreBundle\Form\Elements\Container\ContainerCollection;
-use WellCommerce\Bundle\CoreBundle\Form\Elements\Container\ContainerInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Filters\FilterInterface;
-use WellCommerce\Bundle\CoreBundle\Form\FormConfiguration;
 use WellCommerce\Bundle\CoreBundle\Form\Renderer\FormRendererInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Request\RequestHandlerInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Validator\ValidatorInterface;
@@ -27,59 +25,107 @@ use WellCommerce\Bundle\CoreBundle\Form\Validator\ValidatorInterface;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class Form implements FormInterface
+class Form extends AbstractContainer implements FormInterface
 {
-    protected $configuration;
-    protected $containers;
-    protected $renderer;
+    /**
+     * @var FormRendererInterface
+     */
     protected $dataCollector;
+
+    /**
+     * @var ValidatorInterface
+     */
     protected $validator;
+
+    /**
+     * @var RequestHandlerInterface
+     */
     protected $requestHandler;
 
-    public function __construct($options)
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
     {
-        $this->configuration = new FormConfiguration($options);
-        $this->containers    = new ContainerCollection();
+        parent::configureOptions($resolver);
+
+        $resolver->setDefined([
+            'action',
+            'method',
+            'tabs',
+        ]);
+
+        $resolver->setDefaults([
+            'label'  => '',
+            'action' => '',
+            'method' => FormInterface::FORM_METHOD,
+            'tabs'   => FormInterface::TABS_VERTICAL,
+        ]);
+
+        $resolver->setAllowedTypes([
+            'action' => 'string',
+            'method' => 'string',
+            'tabs'   => 'integer'
+        ]);
     }
 
-    public function setRenderer(FormRendererInterface $renderer)
+    public function getName()
     {
-        $this->renderer = $renderer;
+        return $this->getOption('name');
     }
 
+    public function getClass()
+    {
+        return $this->getOption('class');
+    }
+
+
+    public function getAction()
+    {
+        return $this->getOption('action');
+    }
+
+    public function getMethod()
+    {
+        return $this->getOption('method');
+    }
+
+    public function getTabs()
+    {
+        return $this->getOption('tabs');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function setDataCollector(DataCollectorInterface $dataCollector)
     {
         $this->dataCollector = $dataCollector;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setValidator(ValidatorInterface $validator)
     {
         $this->validator = $validator;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setRequestHandler(RequestHandlerInterface $requestHandler)
     {
         $this->requestHandler = $requestHandler;
     }
 
     /**
-     * Appends new container to form
-     *
-     * @param ContainerInterface $container
-     *
-     * @return ContainerInterface
+     * {@inheritdoc}
      */
-    public function addContainer(ContainerInterface $container)
-    {
-        $this->containers->add($container);
-
-        return $container;
-    }
-
     public function addFilter(FilterInterface $filter)
     {
-        $this->containers->forAll(function (ContainerInterface $container) use ($filter) {
-            $container->addFilter($filter);
+        $this->children->forAll(function (ElementInterface $element) use ($filter) {
+            $element->addFilter($filter);
         });
     }
 
@@ -98,4 +144,13 @@ class Form implements FormInterface
         return $this->validator->isValid($this);
     }
 
-} 
+    public function prepareAttributes()
+    {
+        return [
+            'sFormName' => $this->getName(),
+            'sAction'   => $this->options['action'],
+        ];
+    }
+
+
+}
