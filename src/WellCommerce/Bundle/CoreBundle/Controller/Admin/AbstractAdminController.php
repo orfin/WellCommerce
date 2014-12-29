@@ -103,25 +103,6 @@ abstract class AbstractAdminController extends AbstractController implements Adm
     }
 
     /**
-     * Returns a form for particular resource
-     *
-     * @param       $resource
-     * @param array $config
-     *
-     * @return \WellCommerce\Bundle\CoreBundle\Form\Elements\Form
-     */
-    protected function getForm($resource, array $config = [])
-    {
-        $defaultConfig = [
-            'name' => $this->manager->getRepository()->getAlias()
-        ];
-
-        $config = array_merge($defaultConfig, $config);
-
-        return $this->getFormBuilder($this->manager->getForm(), $resource, $config);
-    }
-
-    /**
      * Default edit action
      *
      * @param Request $request
@@ -133,7 +114,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
         $resource = $this->findOr404($request);
         $form     = $this->getForm($resource);
 
-        if ($form->handleRequest($request)->isValid()) {
+        if ($form->handleRequest()->isValid()) {
             $this->manager->updateResource($resource, $request);
 
             if ($form->isAction('continue')) {
@@ -152,6 +133,25 @@ abstract class AbstractAdminController extends AbstractController implements Adm
         return [
             'form' => $form
         ];
+    }
+
+    /**
+     * Returns form instance from builder
+     *
+     * @param       $resource
+     * @param array $config
+     *
+     * @return \WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface
+     */
+    protected function getForm($resource, array $config = [])
+    {
+        $defaultConfig = [
+            'name' => $this->manager->getRepository()->getAlias()
+        ];
+
+        $config = array_merge($defaultConfig, $config);
+
+        return $this->manager->getFormBuilder()->createForm($config, $resource);
     }
 
     /**

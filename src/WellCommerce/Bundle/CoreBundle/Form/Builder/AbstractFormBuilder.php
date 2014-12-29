@@ -78,30 +78,19 @@ abstract class AbstractFormBuilder extends AbstractContainer
     }
 
     /**
+     * Creates the form
      *
-     * @param array  $options
-     * @param object $data
+     * @param $options
+     * @param $formData
      *
      * @return FormInterface
      */
-    public function createForm($options, $formData)
+    public function createForm($options, $formData = null)
     {
-//        $metadata = $this->validator->getValidationMetadata($formData);
-
         $form = $this->initForm($options);
         $this->buildForm($form);
 
         return $form;
-
-        $this->validator->getValidationMetadata($formData);
-
-        die();
-
-        $this->formData = $formData;
-        $this->form     = $this->buildForm($options);
-        $this->form->setDefaultData($this->formData);
-        $this->form->setDataCollector($this->dataCollector);
-        $this->form->setValidator($this->validator);
     }
 
     /**

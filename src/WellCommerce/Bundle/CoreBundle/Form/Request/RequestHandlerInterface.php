@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Request;
 
-use Symfony\Component\HttpFoundation\Request;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
 
 /**
  * Interface RequestHandlerInterface
@@ -21,5 +21,5 @@ use Symfony\Component\HttpFoundation\Request;
  */
 interface RequestHandlerInterface
 {
-    public function handleRequest(Request $request);
+    public function handleRequest(FormInterface $form);
 } 

@@ -74,27 +74,6 @@ class Form extends AbstractContainer implements FormInterface
         return $this->getOption('name');
     }
 
-    public function getClass()
-    {
-        return $this->getOption('class');
-    }
-
-
-    public function getAction()
-    {
-        return $this->getOption('action');
-    }
-
-    public function getMethod()
-    {
-        return $this->getOption('method');
-    }
-
-    public function getTabs()
-    {
-        return $this->getOption('tabs');
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -129,9 +108,9 @@ class Form extends AbstractContainer implements FormInterface
         });
     }
 
-    public function handleRequest(Request $request)
+    public function handleRequest()
     {
-        $this->requestHandler->handleRequest($this, $request);
+        $this->requestHandler->handleRequest($this);
     }
 
     public function isSubmitted()

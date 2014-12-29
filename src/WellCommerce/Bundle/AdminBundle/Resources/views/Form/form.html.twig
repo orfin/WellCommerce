@@ -1,12 +1,12 @@
-<form id="{{ form.getName() }}" method="{{ form.getMethod() }}" action="{{ form.getAction() }}">
+<form id="{{ form.getName() }}" method="{{ form.getOption('method') }}" action="{{ form.getOption('action') }}">
     <input type="hidden" name="{{ form.getName() }}_submitted" value="1"/>
 </form>
 <script type="text/javascript">
     GCore.OnLoad(function () {
         $('#{{ form.getName() }}').GForm({
             sFormName: '{{ form.getName() }}',
-            sClass: '{{ form.getClass() }}',
-            iTabs: {% if form.getTabs() == 0 %}GForm.TABS_VERTICAL{% else %}GForm.TABS_HORIZONTAL{% endif %},
+            sClass: '{{ form.getOption('class') }}',
+            iTabs: {% if form.getOption('tabs') == 0 %}GForm.TABS_VERTICAL{% else %}GForm.TABS_HORIZONTAL{% endif %},
             aoFields: {{ children|raw }},
             oValues: {{ values|json_encode|raw }},
             oErrors: {{ errors|json_encode|raw }}

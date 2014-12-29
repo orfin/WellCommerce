@@ -28,7 +28,9 @@
 
         <service id="form.data_collector" class="WellCommerce\Bundle\CoreBundle\Form\DataCollector\DataCollector" />
 
-        <service id="form.request_handler" class="WellCommerce\Bundle\CoreBundle\Form\Request\RequestHandler" />
+        <service id="form.request_handler" class="WellCommerce\Bundle\CoreBundle\Form\Request\RequestHandler">
+            <argument type="service" id="request_stack"/>
+        </service>
 
         <service id="form.validator" class="WellCommerce\Bundle\CoreBundle\Form\Validator\Validator" />
 

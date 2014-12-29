@@ -12,7 +12,8 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Request;
 
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
 
 /**
  * Class RequestHandler
@@ -21,10 +22,21 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class RequestHandler implements RequestHandlerInterface
 {
+    protected $request;
 
-    public function handleRequest(Request $request)
+    public function __construct(RequestStack $requestStack)
     {
-        print_r($request);
+        $this->request = $requestStack->getCurrentRequest();
+    }
+
+    public function handleRequest(FormInterface $form)
+    {
+        print_r($form);
+        print_r($this->request);
         die();
+    }
+
+    protected function isSubmitted(){
+
     }
 } 

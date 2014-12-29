@@ -42,20 +42,6 @@ abstract class AbstractController extends Controller
     }
 
     /**
-     * Creates and returns the form element
-     *
-     * @param FormInterface $form    Form instance
-     * @param null|object   $data    Initial form data
-     * @param array         $options Form options
-     *
-     * @return \WellCommerce\Bundle\CoreBundle\Form\Elements\Form
-     */
-    protected function getFormBuilder(FormInterface $form, $data = null, array $options)
-    {
-        return $this->get('form.builder')->create($form, $data, $options)->getForm();
-    }
-
-    /**
      * Translates message using Translator service
      *
      * @param $id

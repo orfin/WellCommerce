@@ -36,23 +36,4 @@ class ContactController extends AbstractAdminController
 
         die();
     }
-
-    public function editAction(Request $request)
-    {
-        $resource = $this->findOr404($request);
-
-
-        $builder = $this->get('contact.form.builder');
-
-        $form = $builder->createForm([
-            'name' => 'contact',
-        ], $resource);
-
-//        $renderer = $this->get('form.renderer.chain')->guessRenderer('js');
-//        $form = $renderer->render($form);
-
-        return [
-            'form' => $form
-        ];
-    }
 }

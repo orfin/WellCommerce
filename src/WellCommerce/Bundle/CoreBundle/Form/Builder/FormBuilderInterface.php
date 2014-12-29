@@ -12,11 +12,10 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Builder;
 
-use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
-use WellCommerce\Bundle\CoreBundle\Form\Elements;
-use WellCommerce\Bundle\CoreBundle\Form\Rules;
-use WellCommerce\Bundle\CoreBundle\Form\Filters;
 use WellCommerce\Bundle\CoreBundle\Form\Conditions;
+use WellCommerce\Bundle\CoreBundle\Form\Elements;
+use WellCommerce\Bundle\CoreBundle\Form\Filters;
+use WellCommerce\Bundle\CoreBundle\Form\Rules;
 
 /**
  * Interface FormBuilderInterface
@@ -34,13 +33,12 @@ interface FormBuilderInterface
     /**
      * Creates the form, triggers init event and then populates form with values
      *
-     * @param FormInterface $form
-     * @param object        $data
-     * @param array         $options
+     * @param array $options
+     * @param null  $formData
      *
-     * @return mixed
+     * @return \WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface
      */
-//    public function create(FormInterface $form, $data, array $options);
+    public function createForm($options, $formData = null);
 
     /**
      * Returns Form object
