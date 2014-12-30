@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use WellCommerce\Bundle\CoreBundle\Form\DataCollector\DataCollectorInterface;
+use WellCommerce\Bundle\CoreBundle\Form\DataMapper\DataMapperInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Request\RequestHandlerInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Validator\ValidatorInterface;
 
@@ -29,11 +29,20 @@ interface FormInterface extends ElementInterface
     const FORM_METHOD     = 'POST';
 
     /**
-     * Sets form data collector
+     * Returns form name
      *
-     * @param DataCollectorInterface $dataCollector
+     * @return string
      */
-    public function setDataCollector(DataCollectorInterface $dataCollector);
+    public function getName();
+
+    /**
+     * Sets form data mapper
+     *
+     * @param DataMapperInterface $dataCollector
+     *
+     * @return mixed
+     */
+    public function setDataMapper(DataMapperInterface $dataCollector);
 
     /**
      * Sets form validator

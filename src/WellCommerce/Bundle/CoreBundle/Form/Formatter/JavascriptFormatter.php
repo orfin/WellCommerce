@@ -48,10 +48,7 @@ class JavascriptFormatter implements FormatterInterface
     }
 
     /**
-     * Formats elements children
-     *
-     * @param array $children
-     * @param array $attributes
+     * {@inheritdoc}
      */
     public function formatChildren(array $children = [], array &$attributes)
     {

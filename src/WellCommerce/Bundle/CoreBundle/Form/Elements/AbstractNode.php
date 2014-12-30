@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PropertyAccess\PropertyAccess;
+use Symfony\Component\PropertyAccess\PropertyPath;
 
 /**
  * Class AbstractNode
@@ -56,13 +57,19 @@ abstract class AbstractNode
         ]);
 
         $resolver->setDefaults([
-            'class' => '',
+            'property_path' => null,
+            'class'         => '',
         ]);
 
+        $resolver->setNormalizer('property_path', function ($options) {
+            return new PropertyPath($options['name']);
+        });
+
         $resolver->setAllowedTypes([
-            'name'  => 'string',
-            'class' => 'string',
-            'label' => 'string',
+            'name'          => 'string',
+            'class'         => 'string',
+            'label'         => 'string',
+            'property_path' => ['null', 'Symfony\Component\PropertyAccess\PropertyPath'],
         ]);
 
     }
@@ -70,6 +77,11 @@ abstract class AbstractNode
     public function getName()
     {
         return $this->getOption('name');
+    }
+
+    public function getPropertyPath()
+    {
+        return $this->getOption('property_path');
     }
 
     public function hasOption($option)

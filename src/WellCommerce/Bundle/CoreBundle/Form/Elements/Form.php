@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use WellCommerce\Bundle\CoreBundle\Form\DataCollector\DataCollectorInterface;
+use WellCommerce\Bundle\CoreBundle\Form\DataMapper\DataMapperInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Filters\FilterInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Renderer\FormRendererInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Request\RequestHandlerInterface;
@@ -69,15 +70,10 @@ class Form extends AbstractContainer implements FormInterface
         ]);
     }
 
-    public function getName()
-    {
-        return $this->getOption('name');
-    }
-
     /**
      * {@inheritdoc}
      */
-    public function setDataCollector(DataCollectorInterface $dataCollector)
+    public function setDataMapper(DataMapperInterface $dataCollector)
     {
         $this->dataCollector = $dataCollector;
     }
@@ -110,16 +106,13 @@ class Form extends AbstractContainer implements FormInterface
 
     public function handleRequest()
     {
-        $this->requestHandler->handleRequest($this);
-    }
-
-    public function isSubmitted()
-    {
-        return $this->requestHandler->isSubmitted($this);
+        return $this->requestHandler->handleRequest($this);
     }
 
     public function isValid()
     {
+        return false;
+
         return $this->validator->isValid($this);
     }
 

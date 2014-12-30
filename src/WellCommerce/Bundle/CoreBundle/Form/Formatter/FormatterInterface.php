@@ -45,4 +45,12 @@ interface FormatterInterface
      * @return string
      */
     public function formatAttributes(array $attributes = []);
+
+    /**
+     * Formats elements children
+     *
+     * @param array $children
+     * @param array $attributes
+     */
+    public function formatChildren(array $children = [], array &$attributes);
 }

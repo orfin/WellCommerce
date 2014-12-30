@@ -38,21 +38,15 @@ abstract class AbstractField extends AbstractContainer
             'rules',
             'filters',
             'transformer',
-            'property_path'
         ]);
 
         $resolver->setDefaults([
-            'property_path' => null,
             'default'       => null,
             'dependencies'  => [],
             'rules'         => [],
             'filters'       => [],
             'transformer'   => null
         ]);
-
-        $resolver->setNormalizer('property_path', function ($options) {
-            return new PropertyPath($options['name']);
-        });
 
         $resolver->setAllowedTypes([
             'comment'       => 'string',
@@ -61,7 +55,6 @@ abstract class AbstractField extends AbstractContainer
             'rules'         => 'array',
             'filters'       => 'array',
             'transformer'   => ['null', 'WellCommerce\Bundle\CoreBundle\Form\DataTransformer\DataTransformerInterface'],
-            'property_path' => ['null', 'Symfony\Component\PropertyAccess\PropertyPath'],
         ]);
     }
 

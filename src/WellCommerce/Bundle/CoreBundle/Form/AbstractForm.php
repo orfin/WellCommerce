@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\CoreBundle\Form;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
 use WellCommerce\Bundle\CoreBundle\Form\DataCollector\DataCollectorInterface;
+use WellCommerce\Bundle\CoreBundle\Form\DataMapper\DataMapperInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\Container\ContainerInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Filters\FilterInterface;
@@ -60,7 +61,7 @@ abstract class AbstractForm extends AbstractContainer
     /**
      * {@inheritdoc}
      */
-    public function setDataCollector(DataCollectorInterface $dataCollector)
+    public function setDataMapper(DataMapperInterface $dataCollector)
     {
         $this->dataCollector = $dataCollector;
     }
@@ -92,5 +93,10 @@ abstract class AbstractForm extends AbstractContainer
         }
 
         return $this->options[$option];
+    }
+
+    public function getPropertyPath()
+    {
+        return $this->getOption('property_path');
     }
 }

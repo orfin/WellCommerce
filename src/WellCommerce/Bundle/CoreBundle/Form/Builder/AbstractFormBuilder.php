@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\CoreBundle\Form\Builder;
 
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
-use WellCommerce\Bundle\CoreBundle\Form\DataCollector\DataCollectorInterface;
+use WellCommerce\Bundle\CoreBundle\Form\DataMapper\DataMapperInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\Form;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Renderer\FormRendererInterface;
@@ -39,9 +39,9 @@ abstract class AbstractFormBuilder extends AbstractContainer
     protected $resolverFactory;
 
     /**
-     * @var DataCollectorInterface
+     * @var DataMapperInterface
      */
-    protected $dataCollector;
+    protected $dataMapper;
 
     /**
      * @var ValidatorInterface
@@ -53,26 +53,22 @@ abstract class AbstractFormBuilder extends AbstractContainer
      */
     protected $requestHandler;
 
-    protected $form;
-
-    protected $formData;
-
     /**
      * Constructor
      *
      * @param FormResolverFactoryInterface $resolverFactory
-     * @param DataCollectorInterface       $dataCollector
+     * @param DataMapperInterface          $dataMapper
      * @param ValidatorInterface           $validator
      * @param RequestHandlerInterface      $requestHandler
      */
     public function __construct(
         FormResolverFactoryInterface $resolverFactory,
-        DataCollectorInterface $dataCollector,
+        DataMapperInterface $dataMapper,
         ValidatorInterface $validator,
         RequestHandlerInterface $requestHandler
     ) {
         $this->resolverFactory = $resolverFactory;
-        $this->dataCollector   = $dataCollector;
+        $this->dataMapper      = $dataMapper;
         $this->validator       = $validator;
         $this->requestHandler  = $requestHandler;
     }
@@ -89,6 +85,7 @@ abstract class AbstractFormBuilder extends AbstractContainer
     {
         $form = $this->initForm($options);
         $this->buildForm($form);
+        $this->dataMapper->mapDataToForm($formData, $form);
 
         return $form;
     }
@@ -101,7 +98,7 @@ abstract class AbstractFormBuilder extends AbstractContainer
     protected function initForm($options)
     {
         $form = $this->getElement('form', $options);
-        $form->setDataCollector($this->dataCollector);
+        $form->setDataMapper($this->dataMapper);
         $form->setValidator($this->validator);
         $form->setRequestHandler($this->requestHandler);
 

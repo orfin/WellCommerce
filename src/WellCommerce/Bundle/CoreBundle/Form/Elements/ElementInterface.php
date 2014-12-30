@@ -79,4 +79,11 @@ interface ElementInterface
      * @return array
      */
     public function prepareAttributes();
+
+    /**
+     * Returns elements property path
+     *
+     * @return null|\Symfony\Component\PropertyAccess\PropertyPath
+     */
+    public function getPropertyPath();
 }

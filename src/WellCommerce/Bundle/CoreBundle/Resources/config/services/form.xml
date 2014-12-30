@@ -26,7 +26,7 @@
             <argument>WellCommerceAdminBundle:Form:form.html.twig</argument>
         </service>
 
-        <service id="form.data_collector" class="WellCommerce\Bundle\CoreBundle\Form\DataCollector\DataCollector" />
+        <service id="form.data_mapper" class="WellCommerce\Bundle\CoreBundle\Form\DataMapper\DataMapper" />
 
         <service id="form.request_handler" class="WellCommerce\Bundle\CoreBundle\Form\Request\RequestHandler">
             <argument type="service" id="request_stack"/>

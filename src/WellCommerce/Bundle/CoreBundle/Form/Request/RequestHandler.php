@@ -22,21 +22,53 @@ use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
  */
 class RequestHandler implements RequestHandlerInterface
 {
+    /**
+     * @var null|\Symfony\Component\HttpFoundation\Request
+     */
     protected $request;
 
+    /**
+     * @var
+     */
+    protected $form;
+
+    /**
+     * Constructor
+     *
+     * @param RequestStack $requestStack
+     */
     public function __construct(RequestStack $requestStack)
     {
         $this->request = $requestStack->getCurrentRequest();
     }
 
+    /**
+     * Handles form submission
+     *
+     * @param FormInterface $form
+     */
     public function handleRequest(FormInterface $form)
     {
+        if (!$this->isSubmitted($form)) {
+            return $form;
+        }
+        print_r($this->request->request);
         print_r($form);
         print_r($this->request);
         die();
     }
 
-    protected function isSubmitted(){
+    /**
+     * Checks whether form was submitted
+     *
+     * @param FormInterface $form
+     *
+     * @return bool
+     */
+    protected function isSubmitted(FormInterface $form)
+    {
+        $attribute = sprintf('%s_submitted', $form->getName());
 
+        return $this->request->request->has($attribute);
     }
 } 
