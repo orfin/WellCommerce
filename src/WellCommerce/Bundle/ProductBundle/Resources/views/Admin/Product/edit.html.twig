@@ -6,7 +6,7 @@
         <li><a href="#{{ form.attributes.name }}" rel="submit" class="button"><span>{% trans %}Save and finish{% endtrans %}</span></a></li>
         <li><a href="#{{ form.attributes.name }}" rel="submit[continue]" class="button"><span>{% trans %}Save and continue{% endtrans %}</span></a></li>
     </ul>
-    {{ form(form) }}
+    {{ form_js(form) }}
     <script type="text/javascript">
         onTaxAdd = function(oRequest){
             console.log(oRequest);

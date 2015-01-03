@@ -13,8 +13,8 @@
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyPath;
+use WellCommerce\Bundle\CoreBundle\Form\Exception\MissingOptionException;
 
 /**
  * Class AbstractNode
@@ -50,28 +50,23 @@ abstract class AbstractNode
         $resolver->setRequired([
             'name',
             'label',
+            'property_path'
         ]);
 
         $resolver->setDefined([
-            'class'
+            'class',
         ]);
 
         $resolver->setDefaults([
-            'property_path' => null,
             'class'         => '',
+            'property_path' => null,
         ]);
-
-        $resolver->setNormalizer('property_path', function ($options) {
-            return new PropertyPath($options['name']);
-        });
 
         $resolver->setAllowedTypes([
             'name'          => 'string',
-            'class'         => 'string',
             'label'         => 'string',
             'property_path' => ['null', 'Symfony\Component\PropertyAccess\PropertyPath'],
         ]);
-
     }
 
     public function getName()
@@ -79,20 +74,35 @@ abstract class AbstractNode
         return $this->getOption('name');
     }
 
+    /**
+     * Returns elements property path
+     *
+     * @return null|\Symfony\Component\PropertyAccess\PropertyPath
+     */
     public function getPropertyPath()
     {
         return $this->getOption('property_path');
     }
 
+    /**
+     * Sets new property path option
+     *
+     * @param PropertyPath $path
+     */
+    public function setPropertyPath(PropertyPath $path)
+    {
+        $this->options['property_path'] = $path;
+    }
+
     public function hasOption($option)
     {
-        return isset($this->options[$option]);
+        return array_key_exists($option, $this->options);
     }
 
     public function getOption($option)
     {
-        if (!$this->hasOption($option)) {
-            throw new \InvalidArgumentException(sprintf('Option "%s" does not exists', $option));
+        if (false === $this->hasOption($option)) {
+            throw new MissingOptionException($option, get_class($this));
         }
 
         return $this->options[$option];
@@ -103,17 +113,7 @@ abstract class AbstractNode
         return [
             'sName'  => $this->getOption('name'),
             'sLabel' => $this->getOption('label'),
-            'sClass' => $this->getOption('class'),
+//            'sClass' => $this->getOption('class'),
         ];
-    }
-
-    /**
-     * Returns property accessor
-     *
-     * @return \Symfony\Component\PropertyAccess\PropertyAccessor
-     */
-    protected function getPropertyAccessor()
-    {
-        return PropertyAccess::createPropertyAccessor();
     }
 }

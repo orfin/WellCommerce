@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements\Fieldset;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\PropertyAccess\PropertyPath;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 
 /**
@@ -25,24 +26,20 @@ class NestedFieldset extends AbstractFieldset implements ElementInterface
     /**
      * {@inheritdoc}
      */
-    public function configureAttributes(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
+        parent::configureOptions($resolver);
+
         $resolver->setDefined([
-            'property_path',
             'dependencies',
             'filters',
             'rules',
-            'transformer'
-        ]);
-
-        $resolver->setDefaults([
-            'property_path' => null
+            'transformer',
         ]);
 
         $resolver->setAllowedTypes([
-            'dependencies'  => 'array',
-            'property_path' => ['null', 'Symfony\Component\PropertyAccess\PropertyPath'],
-            'transformer'   => ['null', 'WellCommerce\Bundle\CoreBundle\Form\DataTransformer\DataTransformerInterface'],
+            'dependencies' => 'array',
+            'transformer'  => ['null', 'WellCommerce\Bundle\CoreBundle\Form\DataTransformer\DataTransformerInterface'],
         ]);
     }
 }

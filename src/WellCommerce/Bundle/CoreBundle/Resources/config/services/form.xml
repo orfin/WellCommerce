@@ -15,12 +15,6 @@
 
         <service id="form.formatter.javascript" class="WellCommerce\Bundle\CoreBundle\Form\Formatter\JavascriptFormatter" />
 
-        <service id="form.renderer.chain" class="WellCommerce\Bundle\CoreBundle\Form\Renderer\FormRendererChain">
-            <argument type="collection">
-                <argument type="service" id="form.renderer.javascript"/>
-            </argument>
-        </service>
-
         <service id="form.renderer.javascript" class="WellCommerce\Bundle\CoreBundle\Form\Renderer\JavascriptRenderer">
             <argument type="service" id="form.formatter.javascript"/>
             <argument>WellCommerceAdminBundle:Form:form.html.twig</argument>

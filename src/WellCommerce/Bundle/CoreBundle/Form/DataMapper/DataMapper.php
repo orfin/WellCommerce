@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\DataMapper;
 
+use Doctrine\Common\Util\Debug;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementCollection;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
@@ -55,10 +56,14 @@ class DataMapper implements DataMapperInterface
      */
     protected function mapDataToElement(ElementInterface $parent, ElementInterface $child)
     {
-        echo "Parent: " . $parent->getOption('name') . ', Child: ' . $child->getOption('name') . PHP_EOL;
-        echo "Data: ".PHP_EOL;
-        print_r($child->getPropertyPath()->getElements());
-        echo "=====================================".PHP_EOL;
+//        echo "Parent: " . $parent->getOption('name') . ', Child: ' . $child->getOption('name') . PHP_EOL;
+//        echo "Data: " . PHP_EOL;
+//        $propertyPath = $child->getPropertyPath();
+//        if (null !== $propertyPath && $this->propertyAccessor->isReadable($this->data, $propertyPath)) {
+//            Debug::dump($this->propertyAccessor->getValue($this->data, $propertyPath));
+//        }
+//        print_r($child->getPropertyPath());
+//        echo "=====================================" . PHP_EOL;
 
         if ($child->getChildren()->count()) {
             $this->mapDataToElementCollection($child, $child->getChildren());

@@ -21,14 +21,19 @@ use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
  */
 interface FormRendererInterface
 {
-    public function render(FormInterface $form);
+    /**
+     * Renders the form
+     *
+     * @param FormInterface $form
+     *
+     * @return string
+     */
+    public function renderForm(FormInterface $form);
 
     /**
-     * Returns format supported by renderer
+     * Returns template name which will be used as a base template
      *
-     * @param $type
-     *
-     * @return bool
+     * @return string
      */
-    public function supports($type);
-} 
+    public function getTemplateName();
+}

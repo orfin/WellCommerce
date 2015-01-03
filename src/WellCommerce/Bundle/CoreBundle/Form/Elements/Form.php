@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use WellCommerce\Bundle\CoreBundle\Form\DataCollector\DataCollectorInterface;
 use WellCommerce\Bundle\CoreBundle\Form\DataMapper\DataMapperInterface;
@@ -121,8 +120,25 @@ class Form extends AbstractContainer implements FormInterface
         return [
             'sFormName' => $this->getName(),
             'sAction'   => $this->options['action'],
+            'sClass'    => $this->options['class'],
+            'iTabs'     => $this->options['tabs'],
+            'oValues'   => $this->getValues(),
+            'oErrors'   => [],
         ];
     }
 
+    public function getValues()
+    {
+        $translations = [];
+        $translations['pl'] = [
+            'name' => 'aaaa'
+        ];
 
+        return [
+            'required_data' => [
+                'enabled' => 1,
+                'translations' => $translations
+            ]
+        ];
+    }
 }

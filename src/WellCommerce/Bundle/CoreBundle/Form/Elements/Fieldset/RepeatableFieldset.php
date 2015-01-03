@@ -46,20 +46,15 @@ class RepeatableFieldset extends AbstractFieldset implements ElementInterface
         $max = $this->options['repeat_max'];
 
         return "oRepeat: {iMin: {$min}, iMax: {$max}}";
-
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function prepareAttributesJs()
+    public function prepareAttributes()
     {
-        return [
-            $this->formatAttributeJs('name', 'sName'),
-            $this->formatAttributeJs('label', 'sLabel'),
-            $this->formatRepeatableJs(),
-            $this->formatDependencyJs(),
-            'aoFields: [' . $this->renderChildren() . ']'
+        return parent::prepareAttributes() + [
+            'oRepeat' => [
+                'iMin' => $this->options['repeat_min'],
+                'iMax' => $this->options['repeat_max'],
+            ]
         ];
     }
 }

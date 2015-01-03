@@ -25,24 +25,22 @@ abstract class AbstractFieldset extends AbstractContainer
     /**
      * {@inheritdoc}
      */
-    public function configureAttributes(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
+        parent::configureOptions($resolver);
+
         $resolver->setDefined([
-            'property_path',
             'dependencies',
             'filters',
             'rules',
             'transformer'
         ]);
 
-        $resolver->setDefaults([
-            'property_path' => null
-        ]);
-
         $resolver->setAllowedTypes([
-            'dependencies'  => 'array',
-            'property_path' => ['null', 'Symfony\Component\PropertyAccess\PropertyPath'],
-            'transformer'   => ['null', 'WellCommerce\Bundle\CoreBundle\Form\DataTransformer\DataTransformerInterface'],
+            'dependencies' => 'array',
+            'filters'      => 'array',
+            'rules'        => 'array',
+            'transformer'  => ['null', 'WellCommerce\Bundle\CoreBundle\Form\DataTransformer\DataTransformerInterface'],
         ]);
     }
 }

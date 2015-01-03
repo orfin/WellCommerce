@@ -55,7 +55,7 @@ abstract class AbstractOptionedField extends AbstractField
      * @param $value
      * @param $label
      */
-    public function addOption($value, $label)
+    public function addOptionToSelect($value, $label)
     {
         $this->options['options'][$value] = $label;
     }
@@ -65,7 +65,7 @@ abstract class AbstractOptionedField extends AbstractField
      *
      * @return array
      */
-    protected function getOptions()
+    protected function getSelectOptions()
     {
         return $this->options['options'];
     }
@@ -78,7 +78,7 @@ abstract class AbstractOptionedField extends AbstractField
     protected function formatOptionsJs()
     {
         $options = [];
-        foreach ($this->getOptions() as $value => $label) {
+        foreach ($this->getSelectOptions() as $value => $label) {
             $value     = addslashes($value);
             $label     = addslashes($label);
             $options[] = "{sValue: '{$value}', sLabel: '{$label}'}";

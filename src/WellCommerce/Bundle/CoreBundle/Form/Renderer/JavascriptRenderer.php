@@ -26,46 +26,45 @@ class JavascriptRenderer extends AbstractFormRenderer implements FormRendererInt
     /**
      * {@inheritdoc}
      */
-    public function render(FormInterface $form)
+    public function renderForm(FormInterface $form)
     {
-        $attributes = $this->walkChildren($form->getChildren());
+        $attributes = $this->renderElement($form);
 
         return $this->formatter->formatAttributes($attributes);
     }
 
-    public function getTemplateName()
-    {
-        return $this->template;
-    }
-
     /**
+     * Renders single form element and seeks for its children
+     *
      * @param ElementInterface $element
      *
      * @return array
      */
-    protected function walkElement(ElementInterface $element)
+    protected function renderElement(ElementInterface $element)
     {
         $attributes = $this->formatter->formatElement($element);
         $children   = $element->getChildren();
 
         if ($children->count()) {
-            $this->formatter->formatChildren($this->walkChildren($children), $attributes);
+            $this->formatter->formatChildren($this->renderChildren($children), $attributes);
         }
 
         return $attributes;
     }
 
     /**
+     * Renders all children elements
+     *
      * @param ElementCollection $children
      *
      * @return array
      */
-    protected function walkChildren(ElementCollection $children)
+    protected function renderChildren(ElementCollection $children)
     {
         $attributes = [];
 
         foreach ($children->all() as $child) {
-            $attributes[] = $this->walkElement($child);
+            $attributes[] = $this->renderElement($child);
         }
 
         return $attributes;
@@ -74,8 +73,8 @@ class JavascriptRenderer extends AbstractFormRenderer implements FormRendererInt
     /**
      * {@inheritdoc}
      */
-    public function supports($type)
+    public function getTemplateName()
     {
-        return 'js' === strtolower($type);
+        return $this->template;
     }
-} 
+}

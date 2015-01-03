@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Formatter;
 
 use Doctrine\Common\Util\ClassUtils;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
 use Zend\Json\Expr;
 use Zend\Json\Json;
 
@@ -42,7 +43,9 @@ class JavascriptFormatter implements FormatterInterface
     {
         $attributes = $element->prepareAttributes();
 
-        $this->formatFunctionType($element, $attributes);
+        if (!$element instanceof FormInterface) {
+            $this->formatFunctionType($element, $attributes);
+        }
 
         return $attributes;
     }

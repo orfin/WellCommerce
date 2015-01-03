@@ -2943,6 +2943,7 @@ var GFormLanguageContainer = GCore.ExtendClass(GFormNode, function () {
     };
 
     gThis.RenderChildren = function () {
+    	alert(1);
         var jChildrenCollection = $('<div/>');
         for (var i = 0; i < gThis.m_oOptions.agFields.length; i++) {
             gThis._PrepareChild(gThis.m_oOptions.agFields[i]);
@@ -3075,7 +3076,6 @@ var GFormLanguageContainer = GCore.ExtendClass(GFormNode, function () {
 
     gThis.Populate = function (mData) {
 
-
         $.each(gThis.m_oOptions.aoLanguages, function (l, language) {
             gThis.RemoveRepetition(language.sValue);
         });
@@ -3180,6 +3180,7 @@ var GFormContainer = GCore.ExtendClass(GFormNode, function () {
     };
 
     gThis._ConstructChildren = function () {
+    	
         for (var i = 0; i < gThis.m_oOptions.aoFields.length; i++) {
             var oField = gThis.m_oOptions.aoFields[i];
             var gChild = new oField.fType(oField);
@@ -3343,6 +3344,7 @@ var GFormContainer = GCore.ExtendClass(GFormNode, function () {
     };
 
     gThis.Populate = function (mData) {
+    	
         if (gThis.m_bRepeatable) {
             gThis.AddRepetition();
         }

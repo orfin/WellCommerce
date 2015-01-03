@@ -102,11 +102,4 @@ class Tip extends AbstractFixedField implements ElementInterface
     {
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setPropertyPath()
-    {
-        $this->attributes['property_path'] = null;
-    }
 }

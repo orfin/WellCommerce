@@ -57,14 +57,6 @@ class Submit extends AbstractButton implements ElementInterface
     /**
      * {@inheritdoc}
      */
-    public function setPropertyPath()
-    {
-        $this->attributes['property_path'] = null;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function handleRequest($data)
     {
         return null;

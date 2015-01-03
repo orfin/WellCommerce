@@ -33,18 +33,16 @@ class LanguageFieldset extends RepeatableFieldset implements ElementInterface
 
         $resolver->setRequired([
             'languages',
-            'property_path',
         ]);
 
         $count = function (Options $options) {
-            return count($options['name']);
+            return count($options['languages']);
         };
 
         $resolver->setDefaults([
-            'property_path' => null,
-            'languages'     => [],
-            'repeat_min'    => $count,
-            'repeat_max'    => $count,
+            'languages'  => [],
+            'repeat_min' => $count,
+            'repeat_max' => $count,
         ]);
 
         $resolver->setNormalizer('property_path', function ($options) {
@@ -61,17 +59,21 @@ class LanguageFieldset extends RepeatableFieldset implements ElementInterface
      *
      * @return string
      */
-    protected function formatLanguagesJs()
+    protected function prepareLanguages()
     {
         $options = [];
         foreach ($this->getLanguages() as $language) {
             $value     = addslashes($language['code']);
             $label     = addslashes($language['code']);
             $flag      = addslashes(sprintf('%s.png', substr($label, 0, 2)));
-            $options[] = "{sValue: '{$value}', sLabel: '{$label}',sFlag: '{$flag}' }";
+            $options[] = [
+                'sValue' => $value,
+                'sLabel' => $label,
+                'sFlag'  => $flag,
+            ];
         }
 
-        return 'aoLanguages: [' . implode(', ', $options) . ']';
+        return $options;
     }
 
     /**
@@ -82,5 +84,12 @@ class LanguageFieldset extends RepeatableFieldset implements ElementInterface
     protected function getLanguages()
     {
         return $this->options['languages'];
+    }
+
+    public function prepareAttributes()
+    {
+        return parent::prepareAttributes() + [
+            'aoLanguages' => $this->prepareLanguages()
+        ];
     }
 }

@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\PropertyAccess\PropertyPath;
 use WellCommerce\Bundle\CoreBundle\Form\Filters\FilterInterface;
 
 /**
@@ -41,31 +40,21 @@ abstract class AbstractField extends AbstractContainer
         ]);
 
         $resolver->setDefaults([
-            'default'       => null,
-            'dependencies'  => [],
-            'rules'         => [],
-            'filters'       => [],
-            'transformer'   => null
+            'default'      => null,
+            'dependencies' => [],
+            'rules'        => [],
+            'filters'      => [],
+            'transformer'  => null
         ]);
 
         $resolver->setAllowedTypes([
-            'comment'       => 'string',
-            'error'         => 'string',
-            'dependencies'  => 'array',
-            'rules'         => 'array',
-            'filters'       => 'array',
-            'transformer'   => ['null', 'WellCommerce\Bundle\CoreBundle\Form\DataTransformer\DataTransformerInterface'],
+            'comment'      => 'string',
+            'error'        => 'string',
+            'dependencies' => 'array',
+            'rules'        => 'array',
+            'filters'      => 'array',
+            'transformer'  => ['null', 'WellCommerce\Bundle\CoreBundle\Form\DataTransformer\DataTransformerInterface'],
         ]);
-    }
-
-    /**
-     * Returns elements property path
-     *
-     * @return null|\Symfony\Component\PropertyAccess\PropertyPath
-     */
-    public function getPropertyPath()
-    {
-        return $this->options['property_path'];
     }
 
     protected function getFilters()

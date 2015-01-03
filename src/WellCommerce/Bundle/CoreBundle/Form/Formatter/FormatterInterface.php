@@ -21,13 +21,6 @@ use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
  */
 interface FormatterInterface
 {
-    const TYPE_NUMBER   = 'number';
-    const TYPE_STRING   = 'string';
-    const TYPE_FUNCTION = 'function';
-    const TYPE_ARRAY    = 'array';
-    const TYPE_OBJECT   = 'object';
-    const TYPE_BOOLEAN  = 'boolean';
-
     /**
      * Formats the element
      *

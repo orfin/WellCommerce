@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
+use Symfony\Component\PropertyAccess\PropertyPath;
 use WellCommerce\Bundle\CoreBundle\Form\Filters\FilterInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Formatter\FormatterInterface;
 
@@ -41,6 +42,10 @@ abstract class AbstractContainer extends AbstractNode
     public function addChild(ElementInterface $element)
     {
         $this->children->add($element);
+
+        if (null !== $path = $this->getPropertyPath()) {
+            $element->setPropertyPath(new PropertyPath(sprintf('%s.%s', $path, $element->getName())));
+        }
 
         return $element;
     }
