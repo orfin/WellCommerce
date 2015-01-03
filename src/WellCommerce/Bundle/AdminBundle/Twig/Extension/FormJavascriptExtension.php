@@ -12,8 +12,6 @@
 namespace WellCommerce\Bundle\AdminBundle\Twig\Extension;
 
 use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
-use WellCommerce\Bundle\CoreBundle\Form\Renderer\FormRendererChainInterface;
-use WellCommerce\Bundle\CoreBundle\Form\Renderer\FormRendererFactory;
 use WellCommerce\Bundle\CoreBundle\Form\Renderer\FormRendererInterface;
 use WellCommerce\Bundle\CoreBundle\Twig\AbstractTwigExtension;
 
@@ -42,7 +40,7 @@ class FormJavascriptExtension extends AbstractTwigExtension
     /**
      * Returns extension functions
      *
-     * @return array
+     * @return \Twig_SimpleFunction[]
      */
     public function getFunctions()
     {
