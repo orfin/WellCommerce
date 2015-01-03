@@ -13,167 +13,63 @@
 namespace WellCommerce\Bundle\CoreBundle\Form\Builder;
 
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
-use WellCommerce\Bundle\CoreBundle\Form\DataMapper\DataMapperInterface;
-use WellCommerce\Bundle\CoreBundle\Form\Elements\Form;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
-use WellCommerce\Bundle\CoreBundle\Form\Renderer\FormRendererInterface;
-use WellCommerce\Bundle\CoreBundle\Form\Request\RequestHandlerInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Resolver\FormResolverFactoryInterface;
-use WellCommerce\Bundle\CoreBundle\Form\Validator\ValidatorInterface;
 
 /**
  * Class AbstractFormBuilder
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractFormBuilder extends AbstractContainer
+abstract class AbstractFormBuilder extends AbstractContainer implements FormBuilderInterface
 {
-    /**
-     * @var FormRendererInterface
-     */
-    protected $renderer;
-
     /**
      * @var FormResolverFactoryInterface
      */
     protected $resolverFactory;
 
     /**
-     * @var DataMapperInterface
-     */
-    protected $dataMapper;
-
-    /**
-     * @var ValidatorInterface
-     */
-    protected $validator;
-
-    /**
-     * @var RequestHandlerInterface
-     */
-    protected $requestHandler;
-
-    /**
      * Constructor
      *
      * @param FormResolverFactoryInterface $resolverFactory
-     * @param DataMapperInterface          $dataMapper
-     * @param ValidatorInterface           $validator
-     * @param RequestHandlerInterface      $requestHandler
      */
-    public function __construct(
-        FormResolverFactoryInterface $resolverFactory,
-        DataMapperInterface $dataMapper,
-        ValidatorInterface $validator,
-        RequestHandlerInterface $requestHandler
-    ) {
+    public function __construct(FormResolverFactoryInterface $resolverFactory)
+    {
         $this->resolverFactory = $resolverFactory;
-        $this->dataMapper      = $dataMapper;
-        $this->validator       = $validator;
-        $this->requestHandler  = $requestHandler;
     }
 
     /**
-     * Creates the form
-     *
-     * @param $options
-     * @param $formData
-     *
-     * @return FormInterface
+     * {@inheritdoc}
      */
     public function createForm($options, $formData = null)
     {
-        $form = $this->initForm($options);
+        $form = $this->getForm($options);
         $this->buildForm($form);
-        $this->dataMapper->mapDataToForm($formData, $form);
 
         return $form;
     }
 
     /**
+     * Initializes form service
+     *
      * @param $options
      *
-     * @return FormInterface
+     * @return \WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface
      */
-    protected function initForm($options)
+    protected function getForm($options)
     {
-        $form = $this->getElement('form', $options);
-        $form->setDataMapper($this->dataMapper);
-        $form->setValidator($this->validator);
-        $form->setRequestHandler($this->requestHandler);
-
-        return $form;
+        return $this->getElement('form', $options);
     }
 
     /**
      * Builds the form
      *
      * @param FormInterface $form
-     *
-     * @return mixed
      */
     abstract protected function buildForm(FormInterface $form);
 
     /**
-     * @return mixed
-     */
-    public function getForm()
-    {
-        return $this->form;
-    }
-
-    public function getFormData()
-    {
-        return $this->formData;
-    }
-
-    /**
      * {@inheritdoc}
-     */
-    public function getData()
-    {
-        return $this->data;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getOptions()
-    {
-        return $this->options;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setOptions(array $options)
-    {
-        $this->options = $options;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setData($data)
-    {
-        $this->data = $data;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function init($options)
-    {
-        return $this->container->get('form.element.form')->setOptions($options);
-    }
-
-    /**
-     * Returns a form element prototype
-     *
-     * @param       $alias
-     * @param array $options
-     *
-     * @return \WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
      */
     public function getElement($alias, array $options = [])
     {
@@ -204,6 +100,15 @@ abstract class AbstractFormBuilder extends AbstractContainer
         return $this->initService('dependency', $alias, $options);
     }
 
+    /**
+     * Initializes a service by its type
+     *
+     * @param string $type
+     * @param string $alias
+     * @param array  $options
+     *
+     * @return object
+     */
     protected function initService($type, $alias, $options)
     {
         $id      = $this->resolverFactory->resolve($type, $alias);

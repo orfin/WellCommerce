@@ -21,6 +21,12 @@ use WellCommerce\Bundle\CoreBundle\Collection\AbstractCollection;
  */
 abstract class AbstractResolver extends AbstractCollection
 {
+    /**
+     * Adds new service to collection
+     *
+     * @param string $alias
+     * @param string $serviceId
+     */
     public function add($alias, $serviceId)
     {
         $this->items[$alias] = $serviceId;

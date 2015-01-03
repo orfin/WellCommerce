@@ -12,7 +12,6 @@
 namespace WellCommerce\Bundle\CmsBundle\Form\Admin;
 
 use WellCommerce\Bundle\CoreBundle\Form\Builder\AbstractFormBuilder;
-use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
 
 /**
@@ -20,7 +19,7 @@ use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ContactFormBuilder extends AbstractFormBuilder implements FormBuilderInterface
+class ContactFormBuilder extends AbstractFormBuilder
 {
     /**
      * {@inheritdoc}

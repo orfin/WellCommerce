@@ -41,66 +41,20 @@ interface FormBuilderInterface
     public function createForm($options, $formData = null);
 
     /**
-     * Returns Form object
-     *
-     * @return Elements\Form
-     */
-    public function init($options);
-
-    /**
-     * Returns form data
-     *
-     * @return object|null
-     */
-    public function getData();
-
-    /**
-     * Returns form element
-     *
-     * @return Elements\Form
-     */
-    public function getForm();
-
-    /**
-     * Sets form options
-     *
-     * @param array $options
-     *
-     * @return void
-     */
-    public function setOptions(array $options);
-
-    /**
-     * Returns form options
-     *
-     * @return array
-     */
-    public function getOptions();
-
-    /**
-     * Sets new default data
-     *
-     * @param $data
-     *
-     * @return void
-     */
-    public function setData($data);
-
-    /**
      * Returns an element object by its type
      *
-     * @param       $type
-     * @param array $options
+     * @param string $type
+     * @param array  $options
      *
-     * @return mixed
+     * @return \WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface
      */
     public function getElement($type, array $options = []);
 
     /**
      * Returns a rule object by its type
      *
-     * @param       $type
-     * @param array $options
+     * @param string $type
+     * @param array  $options
      *
      * @return \WellCommerce\Bundle\CoreBundle\Form\Rules\RuleInterface
      */
@@ -109,8 +63,8 @@ interface FormBuilderInterface
     /**
      * Returns a filter object by its type
      *
-     * @param       $type
-     * @param array $options
+     * @param string $type
+     * @param array  $options
      *
      * @return \WellCommerce\Bundle\CoreBundle\Form\Filters\FilterInterface
      */
@@ -119,8 +73,8 @@ interface FormBuilderInterface
     /**
      * Returns a dependency object by its type
      *
-     * @param $type
-     * @param $options
+     * @param string $type
+     * @param array  $options
      *
      * @return \WellCommerce\Bundle\CoreBundle\Form\Dependencies\DependencyInterface
      */

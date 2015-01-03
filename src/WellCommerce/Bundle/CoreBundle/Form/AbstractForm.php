@@ -19,6 +19,7 @@ use WellCommerce\Bundle\CoreBundle\Form\Elements\Container\ContainerInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Filters\FilterInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Formatter\FormatterInterface;
+use WellCommerce\Bundle\CoreBundle\Form\Handler\FormHandlerInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Request\RequestHandlerInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Validator\ValidatorInterface;
 
@@ -98,5 +99,10 @@ abstract class AbstractForm extends AbstractContainer
     public function getPropertyPath()
     {
         return $this->getOption('property_path');
+    }
+
+    public function setFormHandler(FormHandlerInterface $formHandler)
+    {
+        $this->formHandler = $formHandler;
     }
 }

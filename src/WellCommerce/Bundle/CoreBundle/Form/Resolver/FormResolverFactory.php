@@ -20,7 +20,7 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Resolver;
 class FormResolverFactory implements FormResolverFactoryInterface
 {
     /**
-     * @var array
+     * @var ResolverInterface[]
      */
     protected $resolvers;
 

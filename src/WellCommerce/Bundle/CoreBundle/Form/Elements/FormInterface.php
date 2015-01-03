@@ -12,10 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
-use WellCommerce\Bundle\CoreBundle\Form\DataCollector\DataCollectorInterface;
-use WellCommerce\Bundle\CoreBundle\Form\DataMapper\DataMapperInterface;
-use WellCommerce\Bundle\CoreBundle\Form\Request\RequestHandlerInterface;
-use WellCommerce\Bundle\CoreBundle\Form\Validator\ValidatorInterface;
+use WellCommerce\Bundle\CoreBundle\Form\Handler\FormHandlerInterface;
 
 /**
  * Interface FormInterface
@@ -29,32 +26,9 @@ interface FormInterface extends ElementInterface
     const FORM_METHOD     = 'POST';
 
     /**
-     * Returns form name
+     * Sets form handler
      *
-     * @return string
+     * @param FormHandlerInterface $formHandler
      */
-    public function getName();
-
-    /**
-     * Sets form data mapper
-     *
-     * @param DataMapperInterface $dataCollector
-     *
-     * @return mixed
-     */
-    public function setDataMapper(DataMapperInterface $dataCollector);
-
-    /**
-     * Sets form validator
-     *
-     * @param ValidatorInterface $validator
-     */
-    public function setValidator(ValidatorInterface $validator);
-
-    /**
-     * Sets form request handler
-     *
-     * @param RequestHandlerInterface $requestHandler
-     */
-    public function setRequestHandler(RequestHandlerInterface $requestHandler);
+    public function setFormHandler(FormHandlerInterface $formHandler);
 }

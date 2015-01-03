@@ -13,12 +13,7 @@
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use WellCommerce\Bundle\CoreBundle\Form\DataCollector\DataCollectorInterface;
-use WellCommerce\Bundle\CoreBundle\Form\DataMapper\DataMapperInterface;
-use WellCommerce\Bundle\CoreBundle\Form\Filters\FilterInterface;
-use WellCommerce\Bundle\CoreBundle\Form\Renderer\FormRendererInterface;
-use WellCommerce\Bundle\CoreBundle\Form\Request\RequestHandlerInterface;
-use WellCommerce\Bundle\CoreBundle\Form\Validator\ValidatorInterface;
+use WellCommerce\Bundle\CoreBundle\Form\Handler\FormHandlerInterface;
 
 /**
  * Class Form
@@ -28,19 +23,9 @@ use WellCommerce\Bundle\CoreBundle\Form\Validator\ValidatorInterface;
 class Form extends AbstractContainer implements FormInterface
 {
     /**
-     * @var FormRendererInterface
+     * @var FormHandlerInterface
      */
-    protected $dataCollector;
-
-    /**
-     * @var ValidatorInterface
-     */
-    protected $validator;
-
-    /**
-     * @var RequestHandlerInterface
-     */
-    protected $requestHandler;
+    protected $formHandler;
 
     /**
      * {@inheritdoc}
@@ -72,46 +57,33 @@ class Form extends AbstractContainer implements FormInterface
     /**
      * {@inheritdoc}
      */
-    public function setDataMapper(DataMapperInterface $dataCollector)
+    public function setFormHandler(FormHandlerInterface $formHandler)
     {
-        $this->dataCollector = $dataCollector;
+        $this->formHandler = $formHandler;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setValidator(ValidatorInterface $validator)
+    public function setDefaultData($data)
     {
-        $this->validator = $validator;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setRequestHandler(RequestHandlerInterface $requestHandler)
-    {
-        $this->requestHandler = $requestHandler;
+        return $this->formHandler->setDefaultData($this, $data);
     }
 
     public function handleRequest()
     {
-        return $this->requestHandler->handleRequest($this);
+        return $this->formHandler->handleRequest($this);
     }
 
-    public function isValid()
+    public function isValidRequest()
     {
-        return false;
-
-        return $this->validator->isValid($this);
+        return $this->formHandler->isValidRequest($this);
     }
 
     public function prepareAttributes()
     {
         return [
             'sFormName' => $this->getName(),
-            'sAction'   => $this->options['action'],
-            'sClass'    => $this->options['class'],
-            'iTabs'     => $this->options['tabs'],
+            'sAction'   => $this->getOption('action'),
+            'sClass'    => $this->getOption('class'),
+            'iTabs'     => $this->getOption('tabs'),
             'oValues'   => $this->getValues(),
             'oErrors'   => [],
         ];
@@ -119,14 +91,14 @@ class Form extends AbstractContainer implements FormInterface
 
     public function getValues()
     {
-        $translations = [];
+        $translations       = [];
         $translations['pl'] = [
             'name' => 'aaaa'
         ];
 
         return [
             'required_data' => [
-                'enabled' => 1,
+                'enabled'      => 1,
                 'translations' => $translations
             ]
         ];

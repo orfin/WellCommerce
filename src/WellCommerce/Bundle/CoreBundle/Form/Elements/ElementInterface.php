@@ -33,6 +33,13 @@ interface ElementInterface
     public function configureOptions(OptionsResolver $resolver);
 
     /**
+     * Returns element name
+     *
+     * @return string
+     */
+    public function getName();
+
+    /**
      * Returns element option
      *
      * @return mixed
