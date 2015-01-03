@@ -93,16 +93,6 @@ class Form extends AbstractContainer implements FormInterface
         $this->requestHandler = $requestHandler;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function addFilter(FilterInterface $filter)
-    {
-        $this->children->forAll(function (ElementInterface $element) use ($filter) {
-            $element->addFilter($filter);
-        });
-    }
-
     public function handleRequest()
     {
         return $this->requestHandler->handleRequest($this);

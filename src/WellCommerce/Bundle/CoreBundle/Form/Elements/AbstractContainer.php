@@ -64,15 +64,4 @@ abstract class AbstractContainer extends AbstractNode
             $element->addFilter($filter);
         });
     }
-
-    public function prepareChildrenAttributes(FormatterInterface $formatter)
-    {
-        $attributes = [];
-
-        $this->children->forAll(function (ElementInterface $element) use ($formatter, &$attributes) {
-            $attributes[] = $element->prepareAttributes($formatter);
-        });
-
-        return $attributes;
-    }
 }

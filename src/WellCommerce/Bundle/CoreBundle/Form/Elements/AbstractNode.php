@@ -113,7 +113,7 @@ abstract class AbstractNode
         return [
             'sName'  => $this->getOption('name'),
             'sLabel' => $this->getOption('label'),
-//            'sClass' => $this->getOption('class'),
+            'sClass' => $this->getOption('class'),
         ];
     }
 }

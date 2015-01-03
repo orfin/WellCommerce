@@ -22,43 +22,4 @@ use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 class Submit extends AbstractButton implements ElementInterface
 {
 
-
-    /**
-     * {@inheritdoc}
-     */
-    public function prepareAttributesJs()
-    {
-        $attributes = [
-            $this->formatAttributeJs('name', 'sName'),
-            $this->formatAttributeJs('class', 'sClass'),
-            $this->formatAttributeJs('label', 'sLabel'),
-            $this->formatAttributeJs('icon', 'sIcon'),
-            $this->formatDependencyJs()
-        ];
-
-        return $attributes;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getValue()
-    {
-        return '';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function populate($value)
-    {
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function handleRequest($data)
-    {
-        return null;
-    }
 }
