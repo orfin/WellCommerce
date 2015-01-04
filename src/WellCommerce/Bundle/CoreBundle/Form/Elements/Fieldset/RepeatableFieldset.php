@@ -40,14 +40,6 @@ class RepeatableFieldset extends AbstractFieldset implements ElementInterface
         ]);
     }
 
-    protected function formatRepeatableJs()
-    {
-        $min = $this->options['repeat_min'];
-        $max = $this->options['repeat_max'];
-
-        return "oRepeat: {iMin: {$min}, iMax: {$max}}";
-    }
-
     public function prepareAttributes()
     {
         return parent::prepareAttributes() + [

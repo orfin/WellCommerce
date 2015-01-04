@@ -92,4 +92,15 @@ class LanguageFieldset extends RepeatableFieldset implements ElementInterface
             'aoLanguages' => $this->prepareLanguages()
         ];
     }
+
+    public function setValue($data)
+    {
+        $accessor = $this->getPropertyAccessor();
+
+        $this->getChildren()->forAll(function (ElementInterface $child) use ($data, $accessor) {
+            $path  = '[' . $child->getPropertyPath() . ']';
+            $value = $accessor->getValue($data, $path);
+            $child->setValue($value);
+        });
+    }
 }

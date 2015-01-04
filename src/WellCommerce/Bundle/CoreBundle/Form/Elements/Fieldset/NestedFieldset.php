@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements\Fieldset;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\PropertyAccess\PropertyPath;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 
 /**

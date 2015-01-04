@@ -58,4 +58,20 @@ abstract class AbstractContainer extends AbstractNode
             $element->addFilter($filter);
         });
     }
+
+    public function setValue($data)
+    {
+
+    }
+
+    public function getValue()
+    {
+        $values = [];
+
+        $this->getChildren()->forAll(function (ElementInterface $child) use (&$values) {
+            $values[$child->getName()] = $child->getValue();
+        });
+
+        return $values;
+    }
 }

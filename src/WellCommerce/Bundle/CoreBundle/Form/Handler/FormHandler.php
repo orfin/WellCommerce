@@ -63,13 +63,14 @@ class FormHandler implements FormHandlerInterface
 
     public function isValidRequest(FormInterface $form)
     {
-        print_r($this->requestHandler);
-        die();
     }
 
-    public function populateForm(FormInterface $form)
+    /**
+     * {@inheritdoc}
+     */
+    public function setDefaultFormData(FormInterface $form, $defaultData)
     {
-
+        $this->dataMapper->mapDataToForm($defaultData, $form);
     }
 
     public function handleRequest(FormInterface $form)

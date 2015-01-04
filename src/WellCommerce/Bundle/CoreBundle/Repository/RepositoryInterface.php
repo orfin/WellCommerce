@@ -105,4 +105,8 @@ interface RepositoryInterface
      */
     public function findOneBy(array $criteria, array $orderBy = null);
 
+    /**
+     * @return \Doctrine\ORM\Mapping\ClassMetadata
+     */
+    public function getMetaData();
 } 

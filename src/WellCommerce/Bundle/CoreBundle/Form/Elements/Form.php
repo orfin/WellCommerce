@@ -62,9 +62,12 @@ class Form extends AbstractContainer implements FormInterface
         $this->formHandler = $formHandler;
     }
 
-    public function setDefaultData($data)
+    /**
+     * {@inheritdoc}
+     */
+    public function setDefaultFormData($data)
     {
-        return $this->formHandler->setDefaultData($this, $data);
+        return $this->formHandler->setDefaultFormData($this, $data);
     }
 
     public function handleRequest()
@@ -84,23 +87,8 @@ class Form extends AbstractContainer implements FormInterface
             'sAction'   => $this->getOption('action'),
             'sClass'    => $this->getOption('class'),
             'iTabs'     => $this->getOption('tabs'),
-            'oValues'   => $this->getValues(),
+            'oValues'   => $this->getValue(),
             'oErrors'   => [],
-        ];
-    }
-
-    public function getValues()
-    {
-        $translations       = [];
-        $translations['pl'] = [
-            'name' => 'aaaa'
-        ];
-
-        return [
-            'required_data' => [
-                'enabled'      => 1,
-                'translations' => $translations
-            ]
         ];
     }
 }

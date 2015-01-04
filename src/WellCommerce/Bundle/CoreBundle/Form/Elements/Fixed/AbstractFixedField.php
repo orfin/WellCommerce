@@ -28,8 +28,6 @@ abstract class AbstractFixedField extends AbstractField implements ElementInterf
      */
     public function addFilter(FilterInterface $filter)
     {
-        throw new \BadMethodCallException(
-            sprintf('Cannot add filter "%s" as it is allowed for containers and fieldsets', get_class($filter))
-        );
+        return false;
     }
 }

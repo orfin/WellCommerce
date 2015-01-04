@@ -75,15 +75,25 @@ abstract class AbstractOptionedField extends AbstractField
      *
      * @return string
      */
-    protected function formatOptionsJs()
+    protected function prepareOptions()
     {
         $options = [];
         foreach ($this->getSelectOptions() as $value => $label) {
             $value     = addslashes($value);
             $label     = addslashes($label);
-            $options[] = "{sValue: '{$value}', sLabel: '{$label}'}";
+            $options[] = [
+                'sValue' => $value,
+                'sLabel' => $label
+            ];
         }
 
-        return 'aoOptions: [' . implode(', ', $options) . ']';
+        return $options;
+    }
+
+    public function prepareAttributes()
+    {
+        return parent::prepareAttributes() + [
+            'aoOptions' => $this->prepareOptions()
+        ];
     }
 }

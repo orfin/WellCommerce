@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\DataMapper;
 
-use Doctrine\Common\Util\Debug;
 use Symfony\Component\PropertyAccess\PropertyAccess;
+use Symfony\Component\PropertyAccess\PropertyPathInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementCollection;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
@@ -25,8 +25,9 @@ use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
  */
 class DataMapper implements DataMapperInterface
 {
-    protected $data;
-
+    /**
+     * @var \Symfony\Component\PropertyAccess\PropertyAccessor
+     */
     protected $propertyAccessor;
 
     /**
@@ -39,9 +40,7 @@ class DataMapper implements DataMapperInterface
 
     public function mapDataToForm($data, FormInterface $form)
     {
-        $this->data = $data;
-
-        $this->mapDataToElementCollection($form);
+        $this->mapDataToElementCollection($data, $form->getChildren());
     }
 
     public function mapFormToData(FormInterface $form, $data)
@@ -51,35 +50,80 @@ class DataMapper implements DataMapperInterface
     /**
      * Maps data to single element
      *
-     * @param ElementInterface $parent
      * @param ElementInterface $child
      */
-    protected function mapDataToElement(ElementInterface $parent, ElementInterface $child)
+    protected function mapDataToElement($data, ElementInterface $child)
     {
-//        echo "Parent: " . $parent->getOption('name') . ', Child: ' . $child->getOption('name') . PHP_EOL;
-//        echo "Data: " . PHP_EOL;
-//        $propertyPath = $child->getPropertyPath();
-//        if (null !== $propertyPath && $this->propertyAccessor->isReadable($this->data, $propertyPath)) {
-//            Debug::dump($this->propertyAccessor->getValue($this->data, $propertyPath));
-//        }
-//        print_r($child->getPropertyPath());
-//        echo "=====================================" . PHP_EOL;
+        $this->setDefaultElementValue($data, $child);
 
-        if ($child->getChildren()->count()) {
-            $this->mapDataToElementCollection($child, $child->getChildren());
+        $children = $child->getChildren();
+
+        if ($children->count()) {
+            $this->mapDataToElementCollection($data, $children);
         }
     }
 
     /**
-     * Maps data to children collection
+     * Maps data using recursion to all children
      *
-     * @param ElementInterface  $parent
      * @param ElementCollection $children
      */
-    protected function mapDataToElementCollection(ElementInterface $parent)
+    protected function mapDataToElementCollection($data, ElementCollection $children)
     {
-        foreach ($parent->getChildren()->all() as $child) {
-            $this->mapDataToElement($parent, $child);
+        foreach ($children->all() as $child) {
+            $this->mapDataToElement($data, $child);
         }
     }
-} 
+
+    /**
+     * Sets value for element
+     *
+     * @param ElementInterface $element
+     */
+    protected function setDefaultElementValue($data, ElementInterface $element)
+    {
+        if ($element->hasPropertyPath()) {
+            $propertyPath = $element->getPropertyPath();
+            if ($this->propertyAccessor->isReadable($data, $propertyPath)) {
+                $value = $this->getValueFromData($propertyPath, $data);
+                if (null === $value) {
+                    $value = $this->getDefaultValue($element);
+                }
+
+                if ($element->hasTransformer()) {
+                    $transformer = $element->getTransformer();
+                    $value       = $transformer->transform($value);
+                }
+
+                $element->setValue($value);
+            }
+        }
+    }
+
+    /**
+     * Returns default value for element
+     *
+     * @param ElementInterface $element
+     *
+     * @return mixed|null
+     */
+    protected function getDefaultValue(ElementInterface $element)
+    {
+        if ($element->hasOption('default')) {
+            return $element->getOption('default');
+        }
+
+        return null;
+    }
+
+    /**
+     * @param PropertyPathInterface $propertyPath
+     * @param                       $data
+     *
+     * @return mixed|null
+     */
+    protected function getValueFromData(PropertyPathInterface $propertyPath, $data)
+    {
+        return $this->propertyAccessor->getValue($data, $propertyPath);
+    }
+}

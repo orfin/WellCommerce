@@ -12,6 +12,7 @@
 namespace WellCommerce\Bundle\CmsBundle\Form\Admin;
 
 use WellCommerce\Bundle\CoreBundle\Form\Builder\AbstractFormBuilder;
+use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\TranslationTransformer;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
 
 /**
@@ -37,9 +38,10 @@ class ContactFormBuilder extends AbstractFormBuilder
         ]));
 
         $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
-            'name'      => 'translations',
-            'label'     => $this->trans('form.required_data.language_data.label'),
-            'languages' => $this->get('locale.repository')->getAvailableLocales()
+            'name'        => 'translations',
+            'label'       => $this->trans('form.required_data.language_data.label'),
+            'languages'   => $this->get('locale.repository')->getAvailableLocales(),
+            'transformer' => new TranslationTransformer($this->get('doctrine_helper'))
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
@@ -73,8 +75,10 @@ class ContactFormBuilder extends AbstractFormBuilder
         ]));
 
         $languageData = $addressData->addChild($this->getElement('language_fieldset', [
-            'name'  => 'translations',
-            'label' => $this->trans('contact.translations.label')
+            'name'        => 'translations',
+            'label'       => $this->trans('contact.translations.label'),
+            'languages'   => $this->get('locale.repository')->getAvailableLocales(),
+            'transformer' => new TranslationTransformer($this->get('doctrine_helper'))
         ]));
 
         $languageData->addChild($this->getElement('text_field', [

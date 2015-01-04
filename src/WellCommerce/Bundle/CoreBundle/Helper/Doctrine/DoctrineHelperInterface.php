@@ -48,4 +48,13 @@ interface DoctrineHelperInterface
      * @return \Doctrine\ORM\Query\Filter\SQLFilter
      */
     public function enableFilter($filter);
+
+    /**
+     * Returns class metadata if exists
+     *
+     * @param $className
+     *
+     * @return \Doctrine\Common\Persistence\Mapping\ClassMetadata
+     */
+    public function getClassMetadata($className);
 } 

@@ -58,6 +58,20 @@ interface ElementInterface
     public function hasOption($option);
 
     /**
+     * Checks whether given element has data transformer
+     *
+     * @return bool
+     */
+    public function hasTransformer();
+
+    /**
+     * Returns data transformer for element
+     *
+     * @return \WellCommerce\Bundle\CoreBundle\Form\DataTransformer\DataTransformerInterface
+     */
+    public function getTransformer();
+
+    /**
      * Adds new child to container
      *
      * @param ElementInterface $element
@@ -88,9 +102,30 @@ interface ElementInterface
     public function prepareAttributes();
 
     /**
+     * Checks whether element has property_path option
+     *
+     * @return bool
+     */
+    public function hasPropertyPath();
+
+    /**
      * Returns elements property path
      *
      * @return null|\Symfony\Component\PropertyAccess\PropertyPath
      */
     public function getPropertyPath();
+
+    /**
+     * Sets value for field
+     *
+     * @param mixed $value
+     */
+    public function setValue($value);
+
+    /**
+     * Returns elements value
+     *
+     * @return mixed
+     */
+    public function getValue();
 }

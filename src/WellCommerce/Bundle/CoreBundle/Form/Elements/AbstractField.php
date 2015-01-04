@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\PropertyAccess\PropertyPath;
 use WellCommerce\Bundle\CoreBundle\Form\Filters\FilterInterface;
 
 /**
@@ -23,6 +24,11 @@ use WellCommerce\Bundle\CoreBundle\Form\Filters\FilterInterface;
 abstract class AbstractField extends AbstractContainer
 {
     /**
+     * @var mixed
+     */
+    protected $value;
+
+    /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
@@ -30,9 +36,9 @@ abstract class AbstractField extends AbstractContainer
         parent::configureOptions($resolver);
 
         $resolver->setDefined([
+            'default',
             'comment',
             'error',
-            'default',
             'dependencies',
             'rules',
             'filters',
@@ -46,6 +52,10 @@ abstract class AbstractField extends AbstractContainer
             'filters'      => [],
             'transformer'  => null
         ]);
+
+        $resolver->setNormalizer('property_path', function ($options) {
+            return new PropertyPath($options['name']);
+        });
 
         $resolver->setAllowedTypes([
             'comment'      => 'string',
@@ -78,5 +88,22 @@ abstract class AbstractField extends AbstractContainer
     public function addFilter(FilterInterface $filter)
     {
         $this->options['filters'][] = $filter;
+    }
+
+    public function setValue($value)
+    {
+        $this->value = $value;
+    }
+
+    public function getValue()
+    {
+        return $this->value;
+    }
+
+    public function prepareAttributes()
+    {
+        return parent::prepareAttributes() + [
+            'sValue' => $this->value
+        ];
     }
 }

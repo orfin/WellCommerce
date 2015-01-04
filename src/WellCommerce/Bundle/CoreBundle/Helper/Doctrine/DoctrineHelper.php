@@ -68,4 +68,14 @@ class DoctrineHelper implements DoctrineHelperInterface
     {
         return $this->registry->getManager();
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getClassMetadata($className)
+    {
+        if ($this->getEntityManager()->getMetadataFactory()->hasMetadataFor($className)) {
+            return $this->getEntityManager()->getClassMetadata($className);
+        }
+    }
 } 

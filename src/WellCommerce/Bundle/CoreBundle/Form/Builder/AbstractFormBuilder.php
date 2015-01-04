@@ -41,10 +41,11 @@ abstract class AbstractFormBuilder extends AbstractContainer implements FormBuil
     /**
      * {@inheritdoc}
      */
-    public function createForm($options, $formData = null)
+    public function createForm($options, $defaultData = null)
     {
         $form = $this->getForm($options);
         $this->buildForm($form);
+        $form->setDefaultFormData($defaultData);
 
         return $form;
     }
@@ -52,9 +53,9 @@ abstract class AbstractFormBuilder extends AbstractContainer implements FormBuil
     /**
      * Initializes form service
      *
-     * @param $options
+     * @param array $options
      *
-     * @return \WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface
+     * @return FormInterface
      */
     protected function getForm($options)
     {

@@ -13,8 +13,8 @@
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\PropertyAccess\PropertyPath;
-use WellCommerce\Bundle\CoreBundle\Form\Exception\MissingOptionException;
+use Symfony\Component\PropertyAccess\PropertyAccess;
+use WellCommerce\Bundle\CoreBundle\Form\Exception\TransformerNotFoundException;
 
 /**
  * Class AbstractNode
@@ -29,9 +29,7 @@ abstract class AbstractNode
     protected $options;
 
     /**
-     * Constructor
-     *
-     * @param array $options
+     * {@inheritdoc}
      */
     public function setOptions(array $options = [])
     {
@@ -41,9 +39,7 @@ abstract class AbstractNode
     }
 
     /**
-     * Configures options
-     *
-     * @param OptionsResolver $resolver
+     * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
@@ -69,15 +65,26 @@ abstract class AbstractNode
         ]);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return $this->getOption('name');
     }
 
     /**
-     * Returns elements property path
+     * Checks whether element has property_path option
      *
-     * @return null|\Symfony\Component\PropertyAccess\PropertyPath
+     * @return bool
+     */
+    public function hasPropertyPath()
+    {
+        return isset($this->options['property_path']);
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function getPropertyPath()
     {
@@ -85,29 +92,44 @@ abstract class AbstractNode
     }
 
     /**
-     * Sets new property path option
-     *
-     * @param PropertyPath $path
+     * {@inheritdoc}
      */
-    public function setPropertyPath(PropertyPath $path)
+    public function hasTransformer()
     {
-        $this->options['property_path'] = $path;
+        return isset($this->options['transformer']);
     }
 
-    public function hasOption($option)
+    /**
+     * {@inheritdoc}
+     */
+    public function getTransformer()
     {
-        return array_key_exists($option, $this->options);
-    }
-
-    public function getOption($option)
-    {
-        if (false === $this->hasOption($option)) {
-            throw new MissingOptionException($option, get_class($this));
+        if (!$this->hasTransformer()) {
+            throw new TransformerNotFoundException($this->getName(), get_class($this));
         }
 
+        return $this->getOption('transformer');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasOption($option)
+    {
+        return isset($this->options[$option]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOption($option)
+    {
         return $this->options[$option];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function prepareAttributes()
     {
         return [
@@ -115,5 +137,13 @@ abstract class AbstractNode
             'sLabel' => $this->getOption('label'),
             'sClass' => $this->getOption('class'),
         ];
+    }
+
+    /**
+     * @return \Symfony\Component\PropertyAccess\PropertyAccessor
+     */
+    protected function getPropertyAccessor()
+    {
+        return PropertyAccess::createPropertyAccessor();
     }
 }
