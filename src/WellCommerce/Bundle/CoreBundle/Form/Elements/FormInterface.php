@@ -31,4 +31,11 @@ interface FormInterface extends ElementInterface
      * @param FormHandlerInterface $formHandler
      */
     public function setFormHandler(FormHandlerInterface $formHandler);
+
+    /**
+     * Sets default form data using DataMapper
+     *
+     * @param $data
+     */
+    public function setDefaultFormData($data);
 }
