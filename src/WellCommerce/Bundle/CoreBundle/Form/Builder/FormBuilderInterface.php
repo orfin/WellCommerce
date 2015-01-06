@@ -20,7 +20,6 @@ use WellCommerce\Bundle\CoreBundle\Form\Rules;
 /**
  * Interface FormBuilderInterface
  *
- * @package WellCommerce\Bundle\CoreBundle\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface FormBuilderInterface
