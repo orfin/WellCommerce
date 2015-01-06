@@ -24,7 +24,6 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class ResourceEvent extends Event
 {
-
     private $resource;
     private $request;
 

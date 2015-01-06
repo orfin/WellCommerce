@@ -58,6 +58,13 @@ interface ElementInterface
     public function hasOption($option);
 
     /**
+     * Returns element options
+     *
+     * @return array
+     */
+    public function getOptions();
+
+    /**
      * Checks whether given element has data transformer
      *
      * @return bool
@@ -109,11 +116,13 @@ interface ElementInterface
     public function hasPropertyPath();
 
     /**
-     * Returns elements property path
+     * Returns property path
      *
-     * @return null|\Symfony\Component\PropertyAccess\PropertyPath
+     * @param bool $indexNotation
+     *
+     * @return null|string|\Symfony\Component\PropertyAccess\PropertyPath
      */
-    public function getPropertyPath();
+    public function getPropertyPath($indexNotation = false);
 
     /**
      * Sets value for field
@@ -128,4 +137,11 @@ interface ElementInterface
      * @return mixed
      */
     public function getValue();
+
+    /**
+     * Returns default value for element if set
+     *
+     * @return mixed
+     */
+    public function getDefaultValue();
 }

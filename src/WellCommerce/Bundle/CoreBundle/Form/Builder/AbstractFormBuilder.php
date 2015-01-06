@@ -13,7 +13,9 @@
 namespace WellCommerce\Bundle\CoreBundle\Form\Builder;
 
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
+use WellCommerce\Bundle\CoreBundle\Form\DataMapper\FormDataMapperInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
+use WellCommerce\Bundle\CoreBundle\Form\Handler\FormHandlerInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Resolver\FormResolverFactoryInterface;
 
 /**
@@ -29,13 +31,22 @@ abstract class AbstractFormBuilder extends AbstractContainer implements FormBuil
     protected $resolverFactory;
 
     /**
+     * @var FormDataMapperInterface
+     */
+    protected $formHandler;
+
+    /**
      * Constructor
      *
      * @param FormResolverFactoryInterface $resolverFactory
+     * @param FormHandlerInterface         $formHandler
      */
-    public function __construct(FormResolverFactoryInterface $resolverFactory)
-    {
+    public function __construct(
+        FormResolverFactoryInterface $resolverFactory,
+        FormHandlerInterface $formHandler
+    ) {
         $this->resolverFactory = $resolverFactory;
+        $this->formHandler     = $formHandler;
     }
 
     /**
@@ -43,9 +54,9 @@ abstract class AbstractFormBuilder extends AbstractContainer implements FormBuil
      */
     public function createForm($options, $defaultData = null)
     {
-        $form = $this->getForm($options);
+        $form = $this->getFormService($options);
         $this->buildForm($form);
-        $form->setDefaultFormData($defaultData);
+        $this->formHandler->initForm($form, $defaultData);
 
         return $form;
     }
@@ -57,7 +68,7 @@ abstract class AbstractFormBuilder extends AbstractContainer implements FormBuil
      *
      * @return FormInterface
      */
-    protected function getForm($options)
+    protected function getFormService($options)
     {
         return $this->getElement('form', $options);
     }

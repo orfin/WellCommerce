@@ -25,29 +25,5 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
  */
 class ContactController extends AbstractAdminController
 {
-    public function editAction(Request $request)
-    {
-        $resource = $this->findOr404($request);
-        $form     = $this->getForm($resource);
-
-        if ($form->isValidRequest()) {
-            $this->manager->updateResource($resource, $request);
-
-            if ($form->isAction('continue')) {
-                return $this->redirectToAction('edit', [
-                    'id' => $resource->getId()
-                ]);
-            }
-
-            if ($form->isAction('next')) {
-                return $this->redirectToAction('add');
-            }
-
-            return $this->redirectToAction('index');
-        }
-
-        return [
-            'form' => $form
-        ];
-    }
+   
 }

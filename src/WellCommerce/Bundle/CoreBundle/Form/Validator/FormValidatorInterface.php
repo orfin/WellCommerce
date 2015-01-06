@@ -12,11 +12,22 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Validator;
 
+use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
+
 /**
  * Interface FormValidatorInterface
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-interface FormValidatorInterface {
+interface FormValidatorInterface
+{
 
+    /**
+     * Returns boolean indicating whether the form is valid
+     *
+     * @param FormInterface $form
+     *
+     * @return bool
+     */
+    public function isValid(FormInterface $form);
 } 

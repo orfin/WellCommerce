@@ -17,7 +17,6 @@ use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
 /**
  * Class ContactManager
  *
- * @package WellCommerce\Bundle\CmsBundle\Manager\Admin
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class ContactManager extends AbstractAdminManager

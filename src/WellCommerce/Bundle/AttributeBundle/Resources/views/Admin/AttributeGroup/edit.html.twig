@@ -4,7 +4,7 @@
     <ul class="possibilities">
         <li><a href="{{ path('admin.attribute_group.index') }}" class="button return"><span></span></a></li>
         <li><a href="{{ path('admin.attribute_group.add') }}" id="add_group" class="button" title="{% trans %}Add{% endtrans %}"><span>{% trans %}Add{% endtrans %}</span></a></li>
-        <li><a href="#{{ form.attributes.name }}" rel="submit" class="button"><span>{% trans %}Save and finish{% endtrans %}</span></a></li>
+        <li><a href="#{{ form.getName() }}" rel="submit" class="button"><span>{% trans %}Save and finish{% endtrans %}</span></a></li>
     </ul>
     <div class="block">
         <div class="scrollable-tabs">

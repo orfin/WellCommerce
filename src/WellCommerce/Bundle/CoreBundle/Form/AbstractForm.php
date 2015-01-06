@@ -11,13 +11,15 @@
  */
 namespace WellCommerce\Bundle\CoreBundle\Form;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
-use WellCommerce\Bundle\CoreBundle\Form\DataMapper\DataMapperInterface;
+use WellCommerce\Bundle\CoreBundle\Form\DataMapper\FormDataMapperInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Filters\FilterInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Handler\FormHandlerInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Request\RequestHandlerInterface;
+use WellCommerce\Bundle\CoreBundle\Form\Validator\FormValidatorInterface;
 
 /**
  * Class AbstractForm
@@ -61,10 +63,15 @@ abstract class AbstractForm extends AbstractContainer
 
     }
 
+    public function setFormHandler(FormHandlerInterface $formHandlerInterface)
+    {
+
+    }
+
     /**
      * {@inheritdoc}
      */
-    public function setDataMapper(DataMapperInterface $dataCollector)
+    public function setFormDataMapper(FormDataMapperInterface $dataCollector)
     {
         $this->dataCollector = $dataCollector;
     }
@@ -72,7 +79,7 @@ abstract class AbstractForm extends AbstractContainer
     /**
      * {@inheritdoc}
      */
-    public function setValidator(ValidatorInterface $validator)
+    public function setFormValidator(FormValidatorInterface $validator)
     {
         $this->validator = $validator;
     }
@@ -106,7 +113,7 @@ abstract class AbstractForm extends AbstractContainer
         return $this->options[$option];
     }
 
-    public function getPropertyPath()
+    public function getPropertyPath($index = false)
     {
         return $this->getOption('property_path');
     }
@@ -114,11 +121,6 @@ abstract class AbstractForm extends AbstractContainer
     public function hasPropertyPath()
     {
         return $this->getOption('property_path');
-    }
-
-    public function setFormHandler(FormHandlerInterface $formHandler)
-    {
-        $this->formHandler = $formHandler;
     }
 
     public function getDefault()
@@ -135,4 +137,45 @@ abstract class AbstractForm extends AbstractContainer
     {
 
     }
+
+    public function setDefaultFormData($data)
+    {
+
+    }
+
+    public function getModelData()
+    {
+
+    }
+
+    public function setModelData($modelData)
+    {
+
+    }
+
+    public function handleRequest()
+    {
+
+    }
+
+    public function getDefaultValue()
+    {
+
+    }
+
+    public function getOptions()
+    {
+
+    }
+
+    public function isValid()
+    {
+        return $this->formHandler->isFormValid($this);
+    }
+
+    public function isAction($actionName)
+    {
+        return $this->formHandler->isFormValid($this);
+    }
+
 }

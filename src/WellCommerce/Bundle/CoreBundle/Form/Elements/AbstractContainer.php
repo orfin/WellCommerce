@@ -59,11 +59,17 @@ abstract class AbstractContainer extends AbstractNode
         });
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setValue($data)
     {
 
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getValue()
     {
         $values = [];

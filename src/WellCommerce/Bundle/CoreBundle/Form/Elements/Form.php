@@ -28,6 +28,11 @@ class Form extends AbstractContainer implements FormInterface
     protected $formHandler;
 
     /**
+     * @var object
+     */
+    protected $modelData;
+
+    /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
@@ -65,26 +70,52 @@ class Form extends AbstractContainer implements FormInterface
     /**
      * {@inheritdoc}
      */
-    public function setDefaultFormData($data)
+    public function setModelData($modelData)
     {
-        return $this->formHandler->setDefaultFormData($this, $data);
+        $this->modelData = $modelData;
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getModelData()
+    {
+        return $this->formHandler->getFormModelData();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function handleRequest()
     {
         return $this->formHandler->handleRequest($this);
     }
 
-    public function isValidRequest()
+    /**
+     * {@inheritdoc}
+     */
+    public function isValid()
     {
-        return $this->formHandler->isValidRequest($this);
+        return $this->formHandler->isFormValid($this);
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function isAction($actionName)
+    {
+        return $this->formHandler->isFormAction($actionName);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function prepareAttributes()
     {
         return [
             'sFormName' => $this->getName(),
             'sAction'   => $this->getOption('action'),
+            'sMethod'   => $this->getOption('method'),
             'sClass'    => $this->getOption('class'),
             'iTabs'     => $this->getOption('tabs'),
             'oValues'   => $this->getValue(),

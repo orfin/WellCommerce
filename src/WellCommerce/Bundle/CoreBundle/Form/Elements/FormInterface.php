@@ -26,16 +26,44 @@ interface FormInterface extends ElementInterface
     const FORM_METHOD     = 'POST';
 
     /**
-     * Sets form handler
-     *
      * @param FormHandlerInterface $formHandler
      */
     public function setFormHandler(FormHandlerInterface $formHandler);
 
     /**
-     * Sets default form data using DataMapper
+     * Sets model data
      *
-     * @param $data
+     * @param object $modelData
      */
-    public function setDefaultFormData($data);
+    public function setModelData($modelData);
+
+    /**
+     * Returns model object bound to form
+     *
+     * @return object
+     */
+    public function getModelData();
+
+    /**
+     * Handles form submission
+     *
+     * @return FormInterface
+     */
+    public function handleRequest();
+
+    /**
+     * Checks whether form data is valid
+     *
+     * @return bool
+     */
+    public function isValid();
+
+    /**
+     * Checks whether particular form action has been used
+     *
+     * @param $actionName
+     *
+     * @return bool
+     */
+    public function isAction($actionName);
 }

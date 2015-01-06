@@ -12,9 +12,10 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Handler;
 
-use WellCommerce\Bundle\CoreBundle\Form\DataMapper\DataMapperInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use WellCommerce\Bundle\CoreBundle\Form\DataMapper\FormDataMapperInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
-use WellCommerce\Bundle\CoreBundle\Form\Request\RequestHandlerInterface;
+use WellCommerce\Bundle\CoreBundle\Form\Request\FormRequestHandlerInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Validator\FormValidatorInterface;
 
 /**
@@ -25,14 +26,14 @@ use WellCommerce\Bundle\CoreBundle\Form\Validator\FormValidatorInterface;
 class FormHandler implements FormHandlerInterface
 {
     /**
-     * @var DataMapperInterface
+     * @var EventDispatcherInterface
      */
-    protected $dataMapper;
+    protected $eventDispatcher;
 
     /**
-     * @var RequestHandlerInterface
+     * @var FormDataMapperInterface
      */
-    protected $requestHandler;
+    protected $formDataMapper;
 
     /**
      * @var FormValidatorInterface
@@ -40,41 +41,84 @@ class FormHandler implements FormHandlerInterface
     protected $formValidator;
 
     /**
+     * @var FormRequestHandlerInterface
+     */
+    protected $formRequestHandler;
+
+    /**
+     * @var null|object
+     */
+    protected $formModelData;
+
+    /**
      * Constructor
      *
-     * @param DataMapperInterface     $dataMapper
-     * @param RequestHandlerInterface $requestHandler
-     * @param FormValidatorInterface  $formValidator
+     * @param EventDispatcherInterface    $eventDispatcher
+     * @param FormDataMapperInterface     $formDataMapper
+     * @param FormValidatorInterface      $formValidator
+     * @param FormRequestHandlerInterface $formRequestHandler
      */
     public function __construct(
-        DataMapperInterface $dataMapper,
-        RequestHandlerInterface $requestHandler,
-        FormValidatorInterface $formValidator
+        EventDispatcherInterface $eventDispatcher,
+        FormDataMapperInterface $formDataMapper,
+        FormValidatorInterface $formValidator,
+        FormRequestHandlerInterface $formRequestHandler
     ) {
-        $this->dataMapper     = $dataMapper;
-        $this->requestHandler = $requestHandler;
-        $this->formValidator  = $formValidator;
-    }
-
-    public function initForm(FormInterface $form, $defaultData)
-    {
-        $this->dataMapper->mapDataToForm($defaultData, $form);
-    }
-
-    public function isValidRequest(FormInterface $form)
-    {
+        $this->eventDispatcher    = $eventDispatcher;
+        $this->formDataMapper     = $formDataMapper;
+        $this->formValidator      = $formValidator;
+        $this->formRequestHandler = $formRequestHandler;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setDefaultFormData(FormInterface $form, $defaultData)
+    public function initForm(FormInterface $form, $formModelData)
     {
-        $this->dataMapper->mapDataToForm($defaultData, $form);
+        $this->formModelData = $formModelData;
+        $this->formDataMapper->mapModelDataToForm($formModelData, $form);
+        $form->setFormHandler($this);
+
+        return $form;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function handleRequest(FormInterface $form)
     {
+        if ($this->formRequestHandler->isSubmitted($form)) {
+            $formSubmitValues = $this->formRequestHandler->getFormSubmitValues();
+            $this->formDataMapper->mapRequestDataToForm($formSubmitValues, $form);
+        }
+
         return $form;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isFormValid(FormInterface $form)
+    {
+        if ($this->formRequestHandler->isSubmitted($form)) {
+            $this->formDataMapper->mapFormToData($form, $this->formModelData);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isFormAction($actionName)
+    {
+        return $this->formRequestHandler->isFormAction($actionName);
+    }
+
+    public function getFormModelData()
+    {
+        return $this->formModelData;
     }
 } 

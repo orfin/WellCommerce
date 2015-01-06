@@ -3083,24 +3083,18 @@ var GFormLanguageContainer = GCore.ExtendClass(GFormNode, function () {
         if (mData == undefined) {
             return;
         }
-        var i;
 
         if (!GCore.ObjectLength(mData)) {
             return;
         }
 
-        $.each(gThis.m_oOptions.aoLanguages, function (l, language) {
-            gThis.AddRepetition(language.sValue);
-        });
-
-        for (var iFieldIndex in gThis.m_oOptions.aoFields) {
-            var sFieldName = gThis.m_oOptions.aoFields[iFieldIndex].sName;
-
-            for (var sRepetitionId in mData[sFieldName]) {
-                var oValueObject = {};
-                oValueObject[sFieldName] = mData[sFieldName][sRepetitionId];
+        for (var sRepetitionId in mData) {
+        	gThis.AddRepetition(sRepetitionId);
+        	for (var sFieldName in mData[sRepetitionId]) {
+        		var oValueObject = {};
+                oValueObject[sFieldName] = mData[sRepetitionId][sFieldName];
                 gThis.m_oContainerRepetitions[sRepetitionId].Populate(oValueObject);
-            }
+        	}
         }
     };
 
@@ -3778,9 +3772,10 @@ var GFormCheckbox = GCore.ExtendClass(GFormField, function() {
 		var jLabel = $('<label for="' + gThis.GetId() + '"/>');
 		jLabel.text(gThis.m_oOptions.sLabel);
 		gThis.m_jNode.append(jLabel);
+		gThis.m_jHiddenField = $('<input type="hidden" name="' + gThis.GetName() + '" value="0"/>');
 		gThis.m_jField = $('<input type="' + gThis.m_oOptions.sFieldType + '" name="' + gThis.GetName() + '" id="' + gThis.GetId() + '" value="1"/>');
 		var jRepetitionNode = $('<span class="' + gThis._GetClass('FieldRepetition') + '"/>');
-		jRepetitionNode.append($('<span class="' + gThis._GetClass('FieldSpan') + '"/>').append(gThis.m_jField));
+		jRepetitionNode.append($('<span class="' + gThis._GetClass('FieldSpan') + '"/>').append(gThis.m_jHiddenField).append(gThis.m_jField));
 		if ((gThis.m_oOptions.sComment != undefined) && (gThis.m_oOptions.sComment.length)) {
 			jRepetitionNode.append(' <small>' + gThis.m_oOptions.sComment + '</small>');
 		}

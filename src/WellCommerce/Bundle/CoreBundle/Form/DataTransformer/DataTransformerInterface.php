@@ -18,10 +18,10 @@ namespace WellCommerce\Bundle\CoreBundle\Form\DataTransformer;
  * @package WellCommerce\Bundle\CoreBundle\Form\DataTransformer
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface DataTransformerInterface {
-
+interface DataTransformerInterface
+{
     /**
-     * Transforms a value from the original representation to a transformed representation.
+     * Transforms a value from model
      *
      * @param $value
      *
@@ -30,13 +30,11 @@ interface DataTransformerInterface {
     public function transform($value);
 
     /**
-     * Transforms a value from the transformed representation to its original
-     * representation.
+     * Transforms submitted values to model representation
      *
      * @param $value
-     *
-     * @return object
+     * @param $data
      */
-    public function reverseTransform($value);
+    public function reverseTransform($value, $data);
 
 } 

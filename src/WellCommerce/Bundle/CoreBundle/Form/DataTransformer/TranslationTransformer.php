@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\DataTransformer;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\PersistentCollection;
 use Symfony\Component\PropertyAccess\PropertyAccess;
@@ -48,9 +47,9 @@ class TranslationTransformer implements DataTransformerInterface
     }
 
     /**
-     * Transforms entity collection to array containing only primary keys
+     * Transforms translations collection
      *
-     * @param $collection
+     * @param $translations
      *
      * @return array
      */
@@ -81,29 +80,26 @@ class TranslationTransformer implements DataTransformerInterface
     protected function transformTranslation(LocaleAwareInterface $translation, $fields, &$values)
     {
         foreach ($fields as $field) {
-            $values[$field][$translation->getLocale()] = $this->propertyAccessor->getValue($translation, $field);
+            $values[$translation->getLocale()][$field] = $this->propertyAccessor->getValue($translation, $field);
         }
     }
 
     /**
-     * Transforms passed identifiers to collection of entities
+     * Transforms translations to model representation
      *
-     * @param $ids
-     *
-     * @return ArrayCollection
+     * @param array  $values
+     * @param object $modelData
      */
-    public function reverseTransform($data)
+    public function reverseTransform($values, $modelData)
     {
-        $collection = new ArrayCollection();
-        if (null == $ids) {
-            return $collection;
-        }
-        foreach ($ids as $id) {
-            $item = $this->repository->find($id);
-            $collection->add($item);
+        foreach ($values as $locale => $fields) {
+            $translation = $modelData->translate($locale);
+            foreach ($fields as $fieldName => $fieldValue) {
+                $this->propertyAccessor->setValue($translation, $fieldName, $fieldValue);
+            }
         }
 
-        return $collection;
+        $modelData->mergeNewTranslations();
     }
 
 } 

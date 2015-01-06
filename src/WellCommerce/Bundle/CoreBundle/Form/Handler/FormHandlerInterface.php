@@ -22,17 +22,46 @@ use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
 interface FormHandlerInterface
 {
     /**
-     * Populates the form with default values
+     * Initializes the form and populates it with defaults
      *
      * @param FormInterface $form
-     * @param null|object   $defaultData
+     * @param null|object   $formModelData
+     *
+     * @return FormInterface
      */
-    public function setDefaultFormData(FormInterface $form, $defaultData);
+    public function initForm(FormInterface $form, $formModelData);
 
-//    public function handleRequest();
-//
-//    public function validateForm(FormInterface $form);
-//
-//    public function populateFormWithData(FormInterface $form, $data = null);
+    /**
+     * Handles form request
+     *
+     * @param FormInterface $form
+     *
+     * @return FormInterface
+     */
+    public function handleRequest(FormInterface $form);
 
-}
+    /**
+     * Checks whether form is valid
+     *
+     * @param FormInterface $form
+     *
+     * @return bool
+     */
+    public function isFormValid(FormInterface $form);
+
+    /**
+     * Checks whether particular form action has been used
+     *
+     * @param $actionName
+     *
+     * @return bool
+     */
+    public function isFormAction($actionName);
+
+    /**
+     * Returns form model data
+     *
+     * @return null|object
+     */
+    public function getFormModelData();
+} 

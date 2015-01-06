@@ -86,9 +86,15 @@ abstract class AbstractNode
     /**
      * {@inheritdoc}
      */
-    public function getPropertyPath()
+    public function getPropertyPath($indexNotation = false)
     {
-        return $this->getOption('property_path');
+        $path = $this->getOption('property_path');
+
+        if ($indexNotation) {
+            return sprintf('[%s]', $path);
+        }
+
+        return $path;
     }
 
     /**
@@ -114,6 +120,18 @@ abstract class AbstractNode
     /**
      * {@inheritdoc}
      */
+    public function getDefaultValue()
+    {
+        if ($this->hasOption('default')) {
+            return $this->getOption('default');
+        }
+
+        return null;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function hasOption($option)
     {
         return isset($this->options[$option]);
@@ -125,6 +143,14 @@ abstract class AbstractNode
     public function getOption($option)
     {
         return $this->options[$option];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOptions()
+    {
+        return $this->options;
     }
 
     /**

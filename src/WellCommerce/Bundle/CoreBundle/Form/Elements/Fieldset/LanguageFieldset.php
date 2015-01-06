@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements\Fieldset;
 
-use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PropertyAccess\PropertyPath;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
@@ -22,8 +21,16 @@ use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class LanguageFieldset extends RepeatableFieldset implements ElementInterface
+class LanguageFieldset extends NestedFieldset implements ElementInterface
 {
+    protected $locales;
+
+    public function __construct(array $locales)
+    {
+        parent::__construct();
+        $this->locales = $locales;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -35,15 +42,7 @@ class LanguageFieldset extends RepeatableFieldset implements ElementInterface
             'languages',
         ]);
 
-        $count = function (Options $options) {
-            return count($options['languages']);
-        };
-
-        $resolver->setDefaults([
-            'languages'  => [],
-            'repeat_min' => $count,
-            'repeat_max' => $count,
-        ]);
+        $resolver->setDefault('languages', $this->locales);
 
         $resolver->setNormalizer('property_path', function ($options) {
             return new PropertyPath($options['name']);
@@ -55,35 +54,38 @@ class LanguageFieldset extends RepeatableFieldset implements ElementInterface
     }
 
     /**
-     * Formats field javascript
+     * Prepares the languages
      *
-     * @return string
+     * @return array
      */
     protected function prepareLanguages()
     {
         $options = [];
-        foreach ($this->getLanguages() as $language) {
-            $value     = addslashes($language['code']);
-            $label     = addslashes($language['code']);
-            $flag      = addslashes(sprintf('%s.png', substr($label, 0, 2)));
-            $options[] = [
-                'sValue' => $value,
-                'sLabel' => $label,
-                'sFlag'  => $flag,
-            ];
+        foreach ($this->options['languages'] as $language) {
+            $options[] = $this->prepareLanguage($language);
         }
 
         return $options;
     }
 
     /**
-     * Returns languages set as fieldset option
+     * Prepares language to use it as element attribute
+     *
+     * @param $language
      *
      * @return array
      */
-    protected function getLanguages()
+    protected function prepareLanguage($language)
     {
-        return $this->options['languages'];
+        $value = addslashes($language['code']);
+        $label = addslashes($language['code']);
+        $flag  = addslashes(sprintf('%s.png', substr($label, 0, 2)));
+
+        return [
+            'sValue' => $value,
+            'sLabel' => $label,
+            'sFlag'  => $flag,
+        ];
     }
 
     public function prepareAttributes()
@@ -96,11 +98,48 @@ class LanguageFieldset extends RepeatableFieldset implements ElementInterface
     public function setValue($data)
     {
         $accessor = $this->getPropertyAccessor();
+        $data     = $this->convertRepetitionsData($data);
 
         $this->getChildren()->forAll(function (ElementInterface $child) use ($data, $accessor) {
-            $path  = '[' . $child->getPropertyPath() . ']';
-            $value = $accessor->getValue($data, $path);
+            $value = $accessor->getValue($data, $child->getPropertyPath(true));
             $child->setValue($value);
         });
+    }
+
+    protected function convertRepetitionsData($data)
+    {
+        $values = [];
+        foreach ($data as $locale => $translation) {
+            foreach ($translation as $fieldName => $fieldValue) {
+                $values[$fieldName][$locale] = $fieldValue;
+            }
+        }
+
+        return $values;
+    }
+
+    public function getValue()
+    {
+        $values = [];
+
+        $this->getChildren()->forAll(function (ElementInterface $child) use (&$values) {
+            foreach ($this->locales as $locale) {
+                $values[$locale['code']][$child->getName()] = $this->getChildValue($child, $locale['code']);
+            }
+        });
+
+        return $values;
+    }
+
+    protected function getChildValue(ElementInterface $child, $locale)
+    {
+        $accessor = $this->getPropertyAccessor();
+        $value    = $child->getValue();
+
+        if (is_array($value)) {
+            return $accessor->getValue($value, "[{$locale}]");
+        }
+
+        return null;
     }
 }

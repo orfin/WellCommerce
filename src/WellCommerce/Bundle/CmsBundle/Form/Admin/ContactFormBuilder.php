@@ -28,7 +28,7 @@ class ContactFormBuilder extends AbstractFormBuilder
     public function buildForm(FormInterface $form)
     {
         $requiredData = $form->addChild($this->getElement('nested_fieldset', [
-            'name'  => 'required_data',
+            'name'  => 'requiredData',
             'label' => $this->trans('form.required_data.label')
         ]));
 
@@ -40,7 +40,6 @@ class ContactFormBuilder extends AbstractFormBuilder
         $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
             'label'       => $this->trans('form.required_data.language_data.label'),
-            'languages'   => $this->get('locale.repository')->getAvailableLocales(),
             'transformer' => new TranslationTransformer($this->get('doctrine_helper'))
         ]));
 
@@ -65,19 +64,18 @@ class ContactFormBuilder extends AbstractFormBuilder
         ]));
 
         $languageData->addChild($this->getElement('text_area', [
-            'name'  => 'business_hours',
+            'name'  => 'businessHours',
             'label' => $this->trans('contact.business_hours.label'),
         ]));
 
         $addressData = $form->addChild($this->getElement('nested_fieldset', [
-            'name'  => 'address_data',
+            'name'  => 'addressData',
             'label' => $this->trans('contact.address.label')
         ]));
 
         $languageData = $addressData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
             'label'       => $this->trans('contact.translations.label'),
-            'languages'   => $this->get('locale.repository')->getAvailableLocales(),
             'transformer' => new TranslationTransformer($this->get('doctrine_helper'))
         ]));
 

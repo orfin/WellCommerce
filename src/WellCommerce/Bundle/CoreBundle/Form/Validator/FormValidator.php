@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Validator;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\Common\Util\ClassUtils;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Doctrine\DoctrineHelperInterface;
 
 /**
@@ -35,6 +36,10 @@ class FormValidator implements FormValidatorInterface
 
     protected $validator;
 
+    public function isValid(FormInterface $form)
+    {
+        return false;
+    }
 //    /**
 //     * Constructor
 //     *
