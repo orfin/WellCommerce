@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\DataTransformer;
 
+use Symfony\Component\PropertyAccess\PropertyAccess;
+use Symfony\Component\PropertyAccess\PropertyPathInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
@@ -25,7 +27,12 @@ class EntityToIdentifierTransformer implements DataTransformerInterface
     /**
      * @var \WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface
      */
-    private $repository;
+    protected $repository;
+
+    /**
+     * @var \Symfony\Component\PropertyAccess\PropertyAccessor
+     */
+    protected $propertyAccessor;
 
     /**
      * Constructor
@@ -34,37 +41,43 @@ class EntityToIdentifierTransformer implements DataTransformerInterface
      */
     public function __construct(RepositoryInterface $repository)
     {
-        $this->repository = $repository;
+        $this->repository       = $repository;
+        $this->propertyAccessor = PropertyAccess::createPropertyAccessor();
     }
 
     /**
-     * Transforms entity to primary key identifier
+     * Returns identifier field for entity
      *
-     * @param $entity
-     *
-     * @return int|mixed
+     * @return string
+     * @throws \Doctrine\ORM\Mapping\MappingException
      */
-    public function transform($entity)
+    protected function getEntityIdentifierField()
     {
-        if (null == $entity) {
-            return 0;
-        }
         $meta       = $this->repository->getMetadata();
         $identifier = $meta->getSingleIdentifierFieldName();
-        $accessor   = $this->repository->getPropertyAccessor();
 
-        return $accessor->getValue($entity, $identifier);
+        return $identifier;
     }
 
     /**
-     * Transforms identifier to entity
-     *
-     * @param $id
-     *
-     * @return mixed
+     * {@inheritdoc}
      */
-    public function reverseTransform($id)
+    public function transform($modelData, PropertyPathInterface $propertyPath)
     {
-        return $this->repository->find($id);
+        if (null === $modelData) {
+            return 0;
+        }
+
+        return $this->propertyAccessor->getValue($modelData, $propertyPath);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function reverseTransform($modelData, PropertyPathInterface $propertyPath, $value)
+    {
+        $entity = $this->repository->find($value);
+
+        $this->propertyAccessor->setValue($modelData, $propertyPath, $entity);
     }
 } 

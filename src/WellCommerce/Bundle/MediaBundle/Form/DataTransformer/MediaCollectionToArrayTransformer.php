@@ -13,8 +13,9 @@
 namespace WellCommerce\Bundle\MediaBundle\Form\DataTransformer;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\DataTransformerInterface;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
+use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
  * Class CollectionToArrayTransformer
@@ -40,20 +41,17 @@ class MediaCollectionToArrayTransformer implements DataTransformerInterface
     }
 
     /**
-     * Transforms entity collection to array containing only primary keys
-     *
-     * @param $collection
-     *
-     * @return array
+     * {@inheritdoc}
      */
-    public function transform($collection)
+    public function transform($collection, ElementInterface $element)
     {
-        if (null == $collection) {
-            return null;
+        if (null === $collection) {
+            return $collection;
         }
+
         $items = [];
         foreach ($collection as $item) {
-            if($item->getMainPhoto() == 1){
+            if ($item->getMainPhoto() == 1) {
                 $items['main_photo'] = $item->getPhoto()->getId();
             }
             $items['photos'][] = $item->getPhoto()->getId();
@@ -63,17 +61,14 @@ class MediaCollectionToArrayTransformer implements DataTransformerInterface
     }
 
     /**
-     * Transforms passed identifiers to collection of entities
-     *
-     * @param $ids
-     *
-     * @return ArrayCollection
+     * {@inheritdoc}
      */
-    public function reverseTransform($data)
+    public function reverseTransform(ElementInterface $element, $entity)
     {
         $collection = new ArrayCollection();
+        $values     = $element->getValue();
 
-        foreach ($data as $key => $id) {
+        foreach ($values as $key => $id) {
             if (is_int($key)) {
                 $photo = $this->repository->find($id);
                 $collection->add($photo);

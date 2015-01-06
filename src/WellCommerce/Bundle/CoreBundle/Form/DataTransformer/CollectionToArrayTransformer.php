@@ -13,6 +13,8 @@
 namespace WellCommerce\Bundle\CoreBundle\Form\DataTransformer;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\PropertyAccess\PropertyAccess;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
@@ -29,54 +31,54 @@ class CollectionToArrayTransformer implements DataTransformerInterface
     protected $repository;
 
     /**
+     * @var \Symfony\Component\PropertyAccess\PropertyAccessor
+     */
+    protected $propertyAccessor;
+
+    /**
      * Constructor
      *
      * @param RepositoryInterface $repository
      */
     public function __construct(RepositoryInterface $repository)
     {
-        $this->repository = $repository;
+        $this->repository       = $repository;
+        $this->propertyAccessor = PropertyAccess::createPropertyAccessor();
     }
 
     /**
-     * Transforms entity collection to array containing only primary keys
-     *
-     * @param $collection
-     *
-     * @return array
+     * {@inheritdoc}
      */
-    public function transform($collection)
+    public function transform($collection, ElementInterface $element)
     {
-        $meta       = $this->repository->getMetadata();
-        $identifier = $meta->getSingleIdentifierFieldName();
-        $accessor   = $this->repository->getPropertyAccessor();
+        $identifier = $element->getPropertyPath();
         $items      = [];
+
         foreach ($collection as $item) {
-            $items[] = $accessor->getValue($item, $identifier);
+            $items[] = $this->propertyAccessor->getValue($item, $identifier);
         }
 
         return $items;
     }
 
     /**
-     * Transforms passed identifiers to collection of entities
-     *
-     * @param $ids
-     *
-     * @return ArrayCollection
+     * {@inheritdoc}
      */
-    public function reverseTransform($ids)
+    public function reverseTransform(ElementInterface $element, $entity)
     {
-        $collection = new ArrayCollection();
-        if (null == $ids) {
+        $propertyPath = $element->getPropertyPath();
+        $collection   = new ArrayCollection();
+        $values       = $element->getValue();
+
+        if (empty($values)) {
             return $collection;
         }
-        foreach ($ids as $id) {
-            $item = $this->repository->find($id);
+
+        foreach ($values as $value) {
+            $item = $this->repository->find($value);
             $collection->add($item);
         }
 
-        return $collection;
+        $this->propertyAccessor->setValue($entity, $propertyPath, $collection);
     }
-
-} 
+}

@@ -12,29 +12,34 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\DataTransformer;
 
+use Symfony\Component\PropertyAccess\PropertyPathInterface;
+
 /**
  * Interface DataTransformerInterface
  *
- * @package WellCommerce\Bundle\CoreBundle\Form\DataTransformer
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface DataTransformerInterface
 {
     /**
-     * Transforms a value from model
+     * Transforms model data into its element representation
      *
-     * @param $value
+     * @param                       $modelData
+     * @param PropertyPathInterface $propertyPath
      *
      * @return mixed
      */
-    public function transform($value);
+    public function transform($modelData, PropertyPathInterface $propertyPath);
 
     /**
-     * Transforms submitted values to model representation
+     * Transforms element value into its model representation
      *
-     * @param $value
-     * @param $data
+     * @param object                $modelData
+     * @param PropertyPathInterface $propertyPath
+     * @param mixed                 $value
+     *
+     * @return mixed
      */
-    public function reverseTransform($value, $data);
+    public function reverseTransform($modelData, PropertyPathInterface $propertyPath, $value);
 
 } 

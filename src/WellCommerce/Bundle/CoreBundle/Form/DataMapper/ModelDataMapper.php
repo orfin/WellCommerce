@@ -109,7 +109,7 @@ class ModelDataMapper extends AbstractDataMapper
 
                 if ($element->hasTransformer()) {
                     $transformer = $element->getTransformer();
-                    $value       = $transformer->transform($value);
+                    $value       = $transformer->transform($value, $propertyPath);
                 }
 
                 $element->setValue($value);
@@ -129,7 +129,7 @@ class ModelDataMapper extends AbstractDataMapper
             if ($this->propertyAccessor->isWritable($this->data, $propertyPath)) {
                 if ($child->hasTransformer()) {
                     $transformer = $child->getTransformer();
-                    $transformer->reverseTransform($child->getValue(), $this->data);
+                    $transformer->reverseTransform($this->data, $propertyPath, $child->getValue());
                 } else {
                     $this->propertyAccessor->setValue($this->data, $propertyPath, $child->getValue());
                 }

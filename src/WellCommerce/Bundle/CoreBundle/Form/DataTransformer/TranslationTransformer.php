@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\CoreBundle\Form\DataTransformer;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\PersistentCollection;
 use Symfony\Component\PropertyAccess\PropertyAccess;
+use Symfony\Component\PropertyAccess\PropertyPathInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Doctrine\DoctrineHelperInterface;
 use WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface;
 
@@ -47,22 +48,18 @@ class TranslationTransformer implements DataTransformerInterface
     }
 
     /**
-     * Transforms translations collection
-     *
-     * @param $translations
-     *
-     * @return array
+     * {@inheritdoc}
      */
-    public function transform($translations)
+    public function transform($modelData, PropertyPathInterface $propertyPath)
     {
         $values = [];
 
-        if ($translations instanceof PersistentCollection) {
-            $mapping  = $translations->getMapping();
+        if ($modelData instanceof PersistentCollection) {
+            $mapping  = $modelData->getMapping();
             $metaData = $this->doctrineHelper->getClassMetadata($mapping['targetEntity']);
             $fields   = $metaData->getFieldNames();
 
-            foreach ($translations as $translation) {
+            foreach ($modelData as $translation) {
                 $this->transformTranslation($translation, $fields, $values);
             }
         }
@@ -85,14 +82,11 @@ class TranslationTransformer implements DataTransformerInterface
     }
 
     /**
-     * Transforms translations to model representation
-     *
-     * @param array  $values
-     * @param object $modelData
+     * {@inheritdoc}
      */
-    public function reverseTransform($values, $modelData)
+    public function reverseTransform($modelData, PropertyPathInterface $propertyPath, $value)
     {
-        foreach ($values as $locale => $fields) {
+        foreach ($value as $locale => $fields) {
             $translation = $modelData->translate($locale);
             foreach ($fields as $fieldName => $fieldValue) {
                 $this->propertyAccessor->setValue($translation, $fieldName, $fieldValue);

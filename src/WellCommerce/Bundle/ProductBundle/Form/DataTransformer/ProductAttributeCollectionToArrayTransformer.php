@@ -15,11 +15,12 @@ namespace WellCommerce\Bundle\ProductBundle\Form\DataTransformer;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\PersistentCollection;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute;
 
 /**
  * Class ProductAttributeCollectionToArrayTransformer
  *
- * @package WellCommerce\Bundle\ProductBundle\Form\DataTransformer
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class ProductAttributeCollectionToArrayTransformer extends CollectionToArrayTransformer
@@ -32,29 +33,37 @@ class ProductAttributeCollectionToArrayTransformer extends CollectionToArrayTran
     /**
      * {@inheritdoc}
      */
-    public function transform($collection)
+    public function transform($collection, ElementInterface $element)
     {
         $items = [];
 
-        /**
-         * @var $item \WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute
-         */
-
         foreach ($collection as $item) {
-            $items[] = [
-                'id'           => $item->getId(),
-                'suffix'       => $item->getModifierType(),
-                'modifier'     => $item->getModifierValue(),
-                'stock'        => $item->getStock(),
-                'symbol'       => $item->getSymbol(),
-                'weight'       => $item->getWeight(),
-                'deletable'    => true,
-                'availability' => $this->transformAvailability($item->getAvailability()),
-                'attributes'   => $this->transformValues($item->getAttributeValues()),
-            ];
+            $items[] = $this->convertItemToArray($item);
         }
 
         return $items;
+    }
+
+    /**
+     * Converts collection item to array representation
+     *
+     * @param ProductAttribute $item
+     *
+     * @return array
+     */
+    protected function convertItemToArray(ProductAttribute $item)
+    {
+        return [
+            'id'           => $item->getId(),
+            'suffix'       => $item->getModifierType(),
+            'modifier'     => $item->getModifierValue(),
+            'stock'        => $item->getStock(),
+            'symbol'       => $item->getSymbol(),
+            'weight'       => $item->getWeight(),
+            'deletable'    => true,
+            'availability' => $this->transformAvailability($item->getAvailability()),
+            'attributes'   => $this->transformValues($item->getAttributeValues()),
+        ];
     }
 
     /**
@@ -100,8 +109,9 @@ class ProductAttributeCollectionToArrayTransformer extends CollectionToArrayTran
     /**
      * {@inheritdoc}
      */
-    public function reverseTransform($data)
+    public function reverseTransform(ElementInterface $element, $data)
     {
+        $values     = $element->getValue();
         $collection = new ArrayCollection();
         if (null == $data || empty($data)) {
             return $collection;
