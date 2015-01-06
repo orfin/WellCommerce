@@ -46,20 +46,6 @@ class EntityToIdentifierTransformer implements DataTransformerInterface
     }
 
     /**
-     * Returns identifier field for entity
-     *
-     * @return string
-     * @throws \Doctrine\ORM\Mapping\MappingException
-     */
-    protected function getEntityIdentifierField()
-    {
-        $meta       = $this->repository->getMetadata();
-        $identifier = $meta->getSingleIdentifierFieldName();
-
-        return $identifier;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function transform($modelData, PropertyPathInterface $propertyPath)
@@ -68,7 +54,10 @@ class EntityToIdentifierTransformer implements DataTransformerInterface
             return 0;
         }
 
-        return $this->propertyAccessor->getValue($modelData, $propertyPath);
+        $meta       = $this->repository->getMetadata();
+        $identifier = $meta->getSingleIdentifierFieldName();
+
+        return $this->propertyAccessor->getValue($modelData, $identifier);
     }
 
     /**

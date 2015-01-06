@@ -14,8 +14,8 @@ namespace WellCommerce\Bundle\ProductBundle\Form\DataTransformer;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\PersistentCollection;
+use Symfony\Component\PropertyAccess\PropertyPathInterface;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
-use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute;
 
 /**
@@ -33,12 +33,14 @@ class ProductAttributeCollectionToArrayTransformer extends CollectionToArrayTran
     /**
      * {@inheritdoc}
      */
-    public function transform($collection, ElementInterface $element)
+    public function transform($modelData, PropertyPathInterface $propertyPath)
     {
         $items = [];
 
-        foreach ($collection as $item) {
-            $items[] = $this->convertItemToArray($item);
+        if ($modelData instanceof PersistentCollection) {
+            foreach ($modelData as $item) {
+                $items[] = $this->convertItemToArray($item);
+            }
         }
 
         return $items;
@@ -109,20 +111,19 @@ class ProductAttributeCollectionToArrayTransformer extends CollectionToArrayTran
     /**
      * {@inheritdoc}
      */
-    public function reverseTransform(ElementInterface $element, $data)
+    public function reverseTransform($modelData, PropertyPathInterface $propertyPath, $values)
     {
-        $values     = $element->getValue();
         $collection = new ArrayCollection();
-        if (null == $data || empty($data)) {
+        if (null == $modelData || empty($values)) {
             return $collection;
         }
-        foreach ($data as $id => $values) {
-            if (is_array($values)) {
-                $item = $this->repository->findOrCreate($id, $values);
+        foreach ($values as $id => $value) {
+            if (is_array($value)) {
+                $item = $this->repository->findOrCreate($id, $value);
                 $collection->add($item);
             }
         }
 
-        return $collection;
+        $this->propertyAccessor->setValue($entity, $propertyPath, $collection);
     }
 }

@@ -13,8 +13,10 @@
 namespace WellCommerce\Bundle\MediaBundle\Form\DataTransformer;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\PersistentCollection;
+use Symfony\Component\PropertyAccess\PropertyAccess;
+use Symfony\Component\PropertyAccess\PropertyPathInterface;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\DataTransformerInterface;
-use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
@@ -28,7 +30,12 @@ class MediaCollectionToArrayTransformer implements DataTransformerInterface
     /**
      * @var \WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface
      */
-    private $repository;
+    protected $repository;
+
+    /**
+     * @var \Symfony\Component\PropertyAccess\PropertyAccessor
+     */
+    protected $propertyAccessor;
 
     /**
      * Constructor
@@ -37,20 +44,21 @@ class MediaCollectionToArrayTransformer implements DataTransformerInterface
      */
     public function __construct(RepositoryInterface $repository)
     {
-        $this->repository = $repository;
+        $this->repository       = $repository;
+        $this->propertyAccessor = PropertyAccess::createPropertyAccessor();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function transform($collection, ElementInterface $element)
+    public function transform($modelData, PropertyPathInterface $propertyPath)
     {
-        if (null === $collection) {
-            return $collection;
+        if (null === $modelData || !$modelData instanceof PersistentCollection) {
+            return null;
         }
 
         $items = [];
-        foreach ($collection as $item) {
+        foreach ($modelData as $item) {
             if ($item->getMainPhoto() == 1) {
                 $items['main_photo'] = $item->getPhoto()->getId();
             }
@@ -63,10 +71,9 @@ class MediaCollectionToArrayTransformer implements DataTransformerInterface
     /**
      * {@inheritdoc}
      */
-    public function reverseTransform(ElementInterface $element, $entity)
+    public function reverseTransform($modelData, PropertyPathInterface $propertyPath, $values)
     {
         $collection = new ArrayCollection();
-        $values     = $element->getValue();
 
         foreach ($values as $key => $id) {
             if (is_int($key)) {
@@ -75,9 +82,6 @@ class MediaCollectionToArrayTransformer implements DataTransformerInterface
             }
         }
 
-        return [
-            'data'       => $data,
-            'collection' => $collection
-        ];
+        $this->propertyAccessor->setValue($modelData, $propertyPath, $collection);
     }
 }
