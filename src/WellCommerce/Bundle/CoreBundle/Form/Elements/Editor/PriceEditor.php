@@ -52,6 +52,7 @@ class PriceEditor extends AbstractField implements ElementInterface
         $resolver->setDefaults([
             'prefixes'       => ['net', 'gross'],
             'vat_field'      => null,
+            'suffix'         => '',
             'vat_field_name' => $vatFieldName,
         ]);
 
@@ -66,19 +67,12 @@ class PriceEditor extends AbstractField implements ElementInterface
     /**
      * {@inheritdoc}
      */
-    public function prepareAttributesJs()
+    public function prepareAttributes()
     {
-        return [
-            $this->formatAttributeJs('name', 'sName'),
-            $this->formatAttributeJs('label', 'sLabel'),
-            $this->formatAttributeJs('comment', 'sComment'),
-            $this->formatAttributeJs('suffix', 'sSuffix'),
-            $this->formatAttributeJs('prefixes', 'asPrefixes'),
-            $this->formatAttributeJs('error', 'sError'),
-            $this->formatAttributeJs('vat_field_name', 'sVatField'),
-            $this->formatRulesJs(),
-            $this->formatDependencyJs(),
+        return parent::prepareAttributes() + [
+            'sSuffix'    => $this->getOption('suffix'),
+            'asPrefixes' => $this->getOption('prefixes'),
+            'sVatField'  => $this->getOption('vat_field_name')
         ];
     }
-
 }
