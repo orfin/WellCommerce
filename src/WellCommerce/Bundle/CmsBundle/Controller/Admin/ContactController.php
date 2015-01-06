@@ -12,8 +12,6 @@
 
 namespace WellCommerce\Bundle\CmsBundle\Controller\Admin;
 
-use Symfony\Component\HttpFoundation\Request;
-use WellCommerce\Bundle\CmsBundle\Entity\Contact;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
@@ -25,5 +23,5 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
  */
 class ContactController extends AbstractAdminController
 {
-   
+
 }
