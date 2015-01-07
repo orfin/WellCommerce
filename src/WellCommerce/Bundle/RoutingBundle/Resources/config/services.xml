@@ -14,8 +14,8 @@
             <call method="setRepository">
                 <argument type="service" id="routing.repository"/>
             </call>
-            <call method="setForm">
-                <argument type="service" id="routing.form"/>
+            <call method="setFormBuilder">
+                <argument type="service" id="routing.form_builder"/>
             </call>
             <call method="setDataGrid">
                 <argument type="service" id="routing.datagrid"/>
@@ -53,12 +53,14 @@
             </call>
         </service>
 
-        <service id="routing.form" class="WellCommerce\Bundle\RoutingBundle\Form\RoutingForm">
+        <service id="routing.form_builder" class="WellCommerce\Bundle\ProductBundle\Form\ProductFormBuilder">
+            <argument type="service" id="form.resolver.factory"/>
+            <argument type="service" id="form.handler"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
-        
+
         <service id="route.repository" class="WellCommerce\Bundle\RoutingBundle\Repository\RouteRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument>WellCommerceRoutingBundle:Route</argument>
         </service>

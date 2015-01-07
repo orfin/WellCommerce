@@ -14,8 +14,8 @@
             <call method="setRepository">
                 <argument type="service" id="category.repository"/>
             </call>
-            <call method="setForm">
-                <argument type="service" id="category.form"/>
+            <call method="setFormBuilder">
+                <argument type="service" id="category.form_builder"/>
             </call>
         </service>
 
@@ -101,13 +101,17 @@
             <tag name="resource.provider" alias="category_products"/>
         </service>
 
-        <service id="category.form" class="WellCommerce\Bundle\CategoryBundle\Form\CategoryForm">
+        <service id="category.form_builder" class="WellCommerce\Bundle\CategoryBundle\Form\CategoryFormBuilder">
+            <argument type="service" id="form.resolver.factory"/>
+            <argument type="service" id="form.handler"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="category.tree" class="WellCommerce\Bundle\CategoryBundle\Form\CategoryTree">
+        <service id="category_tree.form_builder" class="WellCommerce\Bundle\CategoryBundle\Form\CategoryTreeFormBuilder">
+            <argument type="service" id="form.resolver.factory"/>
+            <argument type="service" id="form.handler"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

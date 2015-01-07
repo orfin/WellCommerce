@@ -44,7 +44,7 @@ class Tip extends AbstractFixedField implements ElementInterface
         $resolver->setDefaults([
             'name'      => '',
             'label'     => '',
-            'short_tip' => ''
+            'short_tip' => '',
         ]);
 
         $resolver->setDefined([
@@ -53,8 +53,9 @@ class Tip extends AbstractFixedField implements ElementInterface
         ]);
 
         $resolver->setDefaults([
-            'direction'   => self::DOWN,
-            'retractable' => function (Options $options) {
+            'direction'     => self::DOWN,
+            'default_state' => self::RETRACTED,
+            'retractable'   => function (Options $options) {
                 return (strlen($options['short_tip']) > 0);
             }
         ]);

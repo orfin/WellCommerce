@@ -12,13 +12,13 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\Controller\Admin;
 
+use Doctrine\Common\Util\Debug;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
  * Class CategoryController
  *
- * @package WellCommerce\Bundle\CategoryBundle\Controller
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
@@ -37,10 +37,7 @@ class CategoryController extends AbstractAdminController
             ]);
         }
 
-        $tree = $this->getFormBuilder($this->get('category.tree'), null, [
-            'name'  => 'category_tree',
-            'class' => 'category-select'
-        ]);
+        $tree = $this->buildTreeForm();
 
         return [
             'tree' => $tree
@@ -58,14 +55,11 @@ class CategoryController extends AbstractAdminController
 
     public function editAction(Request $request)
     {
-        $tree = $this->getFormBuilder($this->get('category.tree'), null, [
-            'name'  => 'tree','class' => 'category-select'
-        ]);
-
+        $tree     = $this->buildTreeForm();
         $resource = $this->findOr404($request);
         $form     = $this->getForm($resource);
 
-        if ($form->handleRequest($request)->isValid()) {
+        if ($form->handleRequest()->isValid()) {
             $this->manager->updateResource($resource, $request);
             if ($form->isAction('continue')) {
                 return $this->manager->getRedirectHelper()->redirectToAction('edit', [
@@ -85,8 +79,21 @@ class CategoryController extends AbstractAdminController
     public function sortAction(Request $request)
     {
         $items = $request->request->get('items');
-        $this->repository->changeOrder($items);
+        $this->manager->getRepository()->changeOrder($items);
 
         return $this->jsonResponse(['success' => true]);
+    }
+
+    /**
+     * Builds nested tree form
+     *
+     * @return \WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface
+     */
+    private function buildTreeForm()
+    {
+        return $this->get('category_tree.form_builder')->createForm([
+            'name'  => 'category_tree',
+            'class' => 'category-select'
+        ]);
     }
 }

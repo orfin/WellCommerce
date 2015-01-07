@@ -53,4 +53,16 @@ class SlugField extends TextField implements ElementInterface
             'name_field' => $fieldNormalizer
         ]);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function prepareAttributes()
+    {
+        return parent::prepareAttributes() + [
+            'sTranslatableId'          => $this->getOption('translatable_id'),
+            'sNameField'    => $this->getOption('name_field'),
+            'sGenerateRoute'     => $this->getOption('generate_route'),
+        ];
+    }
 }
