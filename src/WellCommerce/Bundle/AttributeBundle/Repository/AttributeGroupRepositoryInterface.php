@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\AttributeBundle\Repository;
 
-use Symfony\Component\HttpFoundation\ParameterBag;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**

@@ -43,7 +43,7 @@ interface AttributeValueRepositoryInterface extends RepositoryInterface
      * @param Attribute $attribute
      * @param           $name
      *
-     * @return mixed
+     * @return \WellCommerce\Bundle\AttributeBundle\Entity\AttributeValue
      */
     public function addAttributeValue(Attribute $attribute, $name);
 
@@ -53,7 +53,7 @@ interface AttributeValueRepositoryInterface extends RepositoryInterface
      * @param Attribute $attribute
      * @param           $values
      *
-     * @return mixed
+     * @return \Doctrine\Common\Collections\ArrayCollection
      */
     public function makeCollection(Attribute $attribute, $values);
 } 

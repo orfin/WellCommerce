@@ -33,7 +33,7 @@ interface AdminMenuBuilderInterface
      * @param AdminMenuItemInterface $a
      * @param AdminMenuItemInterface $b
      *
-     * @return mixed
+     * @return integer
      */
     public function sortMenu(AdminMenuItemInterface $a, AdminMenuItemInterface $b);
 
