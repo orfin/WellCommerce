@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\AttributeBundle\Manager\Admin;
 
-use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
 
 /**

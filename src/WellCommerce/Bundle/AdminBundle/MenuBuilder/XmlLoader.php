@@ -42,7 +42,7 @@ class XmlLoader
     /**
      * Loads XML file and appends items to menu
      *
-     * @param $file
+     * @param string $file
      */
     public function load($file)
     {
@@ -79,7 +79,7 @@ class XmlLoader
     /**
      * Creates new admin menu item
      *
-     * @param $item
+     * @param \SimpleXMLElement $item
      */
     private function addMenuItem($item)
     {

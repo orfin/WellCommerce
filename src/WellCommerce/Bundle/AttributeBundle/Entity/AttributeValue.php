@@ -62,7 +62,7 @@ class AttributeValue
     /**
      * Returns value attribute
      *
-     * @return mixed
+     * @return Attribute
      */
     public function getAttribute()
     {
