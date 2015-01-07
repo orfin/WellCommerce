@@ -46,43 +46,13 @@ class StaticText extends AbstractFixedField implements ElementInterface
         ]);
     }
 
-    public function prepareAttributesJs()
+    /**
+     * {@inheritdoc}
+     */
+    public function prepareAttributes()
     {
-        return [
-            $this->formatAttributeJs('text', 'sText'),
-            $this->formatAttributeJs('class', 'sClass'),
-            $this->formatDependencyJs()
+        return parent::prepareAttributes() + [
+            'sText'          => $this->getOption('text')
         ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getValue()
-    {
-        return '';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function populate($value)
-    {
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setPropertyPath()
-    {
-        $this->attributes['property_path'] = null;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function handleRequest($data)
-    {
-        return null;
     }
 }

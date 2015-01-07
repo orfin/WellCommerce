@@ -86,5 +86,4 @@ class Tip extends AbstractFixedField implements ElementInterface
             'sDefaultState' => $this->getOption('default_state'),
         ];
     }
-
 }
