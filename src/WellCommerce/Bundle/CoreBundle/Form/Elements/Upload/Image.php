@@ -29,53 +29,8 @@ class Image extends File implements ElementInterface
     {
         parent::configureOptions($resolver);
 
-        $resolver->setRequired([
-            'load_route',
-            'upload_url',
-            'session_name',
-            'session_id',
-        ]);
-
-        $resolver->setDefined([
-            'repeat_min',
-            'repeat_max',
-            'limit',
-            'file_types',
-            'file_types_description',
-            'photos',
-        ]);
-
         $resolver->setDefaults([
-            'repeat_min'             => 0,
-            'repeat_max'             => ElementInterface::INFINITE,
-            'limit'                  => 1000,
-            'file_types_description' => 'file_types_description',
-            'file_types'             => ['jpg', 'jpeg', 'png', 'gif'],
-            'photos'                 => [],
+            'file_types' => ['jpg', 'jpeg', 'png', 'gif']
         ]);
-
-        $resolver->setAllowedTypes([
-            'session_id'             => 'string',
-            'session_name'           => 'string',
-            'file_types_description' => 'string',
-            'file_types'             => 'array',
-            'photos'                 => 'array',
-        ]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function prepareAttributes()
-    {
-        return parent::prepareAttributes() + [
-            'sUploadUrl'            => $this->getOption('upload_url'),
-            'sSessionName'          => $this->getOption('session_name'),
-            'sSessionId'            => $this->getOption('session_id'),
-            'iLimit'                => $this->getOption('limit'),
-            'asFileTypes'           => $this->getOption('file_types'),
-            'sFileTypesDescription' => $this->getOption('file_types_description'),
-            'sLoadRoute'            => $this->getOption('load_route'),
-        ];
     }
 }
