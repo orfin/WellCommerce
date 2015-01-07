@@ -53,20 +53,14 @@ class AttributeEditor extends AbstractField implements ElementInterface
     /**
      * {@inheritdoc}
      */
-    public function prepareAttributesJs()
+    public function prepareAttributes()
     {
-        return [
-            $this->formatAttributeJs('name', 'sName'),
-            $this->formatAttributeJs('label', 'sLabel'),
-            $this->formatAttributeJs('comment', 'sComment'),
-            $this->formatAttributeJs('error', 'sError'),
-            $this->formatAttributeJs('set', 'sSetId'),
-            $this->formatAttributeJs('attributes', 'aoAttributes', ElementInterface::TYPE_OBJECT),
-            $this->formatAttributeJs('delete_attribute_route', 'sDeleteAttributeRoute'),
-            $this->formatAttributeJs('rename_attribute_route', 'sRenameAttributeRoute'),
-            $this->formatAttributeJs('rename_attribute_value_route', 'sRenameAttributeValueRoute'),
-            $this->formatRulesJs(),
-            $this->formatDependencyJs(),
+        return parent::prepareAttributes() + [
+            'sSetId'                     => $this->getOption('set'),
+            'aoAttributes'               => $this->getOption('attributes'),
+            'sDeleteAttributeRoute'      => $this->getOption('delete_attribute_route'),
+            'sRenameAttributeRoute'      => $this->getOption('rename_attribute_route'),
+            'sRenameAttributeValueRoute' => $this->getOption('rename_attribute_value_route'),
         ];
     }
 }

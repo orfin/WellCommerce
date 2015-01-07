@@ -16,7 +16,6 @@ use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\AbstractField;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
-use WellCommerce\Bundle\TaxBundle\Repository\TaxRepositoryInterface;
 
 /**
  * Class RangeEditor
@@ -27,24 +26,6 @@ class RangeEditor extends AbstractField implements ElementInterface
 {
     const RANGE_PRECISION = 2;
     const PRICE_PRECISION = 2;
-
-    /**
-     * @var TaxRepositoryInterface
-     */
-    private $repository;
-
-    /**
-     * Constructor
-     *
-     * @param                        $attributes Element options
-     * @param TaxRepositoryInterface $repository Tax repository
-     */
-    public function __construct($attributes, TaxRepositoryInterface $repository)
-    {
-        $this->repository         = $repository;
-        $attributes['vat_values'] = $this->repository->getAllTaxToSelect();
-        parent::__construct($attributes);
-    }
 
     /**
      * {@inheritdoc}
@@ -101,23 +82,16 @@ class RangeEditor extends AbstractField implements ElementInterface
     /**
      * {@inheritdoc}
      */
-    public function prepareAttributesJs()
+    public function prepareAttributes()
     {
-        return [
-            $this->formatAttributeJs('name', 'sName'),
-            $this->formatAttributeJs('label', 'sLabel'),
-            $this->formatAttributeJs('comment', 'sComment'),
-            $this->formatAttributeJs('suffix', 'sSuffix'),
-            $this->formatAttributeJs('price_precision', 'iPricePrecision'),
-            $this->formatAttributeJs('range_precision', 'iRangePrecision'),
-            $this->formatAttributeJs('range_suffix', 'sRangeSuffix'),
-            $this->formatAttributeJs('prefixes', 'asPrefixes'),
-            $this->formatAttributeJs('allow_vat', 'bAllowVat', ElementInterface::TYPE_BOOLEAN),
-            $this->formatAttributeJs('error', 'sError'),
-            $this->formatAttributeJs('vat_values', 'aoVatValues', ElementInterface::TYPE_OBJECT),
-            $this->formatOptionsJs(),
-            $this->formatRulesJs(),
-            $this->formatDependencyJs(),
+        return parent::prepareAttributes() + [
+            'sSuffix'         => $this->getOption('suffix'),
+            'iPricePrecision' => $this->getOption('price_precision'),
+            'iRangePrecision' => $this->getOption('range_precision'),
+            'sRangeSuffix'    => $this->getOption('range_suffix'),
+            'asPrefixes'      => $this->getOption('prefixes'),
+            'bAllowVat'       => $this->getOption('allow_vat'),
+            'aoVatValues'     => $this->getOption('vat_values'),
         ];
     }
 }

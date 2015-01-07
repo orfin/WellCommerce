@@ -46,17 +46,10 @@ class LayoutBoxesList extends AbstractField implements ElementInterface
     /**
      * {@inheritdoc}
      */
-    public function prepareAttributesJs()
+    public function prepareAttributes()
     {
-        return [
-            $this->formatAttributeJs('name', 'sName'),
-            $this->formatAttributeJs('label', 'sLabel'),
-            $this->formatAttributeJs('comment', 'sComment'),
-            $this->formatAttributeJs('error', 'sError'),
-            $this->formatAttributeJs('boxes', 'aoBoxes', ElementInterface::TYPE_OBJECT),
-            $this->formatRulesJs(),
-            $this->formatDependencyJs(),
+        return parent::prepareAttributes() + [
+            'aoBoxes'                     => $this->getOption('boxes')
         ];
     }
-
 }
