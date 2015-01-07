@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\AttributeBundle\Form\DataTransformer;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\PropertyAccess\PropertyPathInterface;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
 
 /**
@@ -28,23 +29,19 @@ class AttributeCollectionToArrayTransformer extends CollectionToArrayTransformer
     protected $repository;
 
     /**
-     * Transforms passed identifiers to collection of entities
-     *
-     * @param $ids
-     *
-     * @return ArrayCollection
+     * {@inheritdoc}
      */
-    public function reverseTransform($data)
+    public function reverseTransform($modelData, PropertyPathInterface $propertyPath, $value)
     {
         $collection = new ArrayCollection();
-        if (null == $data || empty($data)) {
+        if (null == $value || empty($value)) {
             return $collection;
         }
-        foreach ($data['editor'] as $attribute) {
+        foreach ($value['editor'] as $attribute) {
             $item = $this->repository->findOrCreate($attribute);
             $collection->add($item);
         }
 
-        return $collection;
+        $this->propertyAccessor->setValue($modelData, $propertyPath, $collection);
     }
 }

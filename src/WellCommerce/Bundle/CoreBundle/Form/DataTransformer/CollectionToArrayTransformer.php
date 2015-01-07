@@ -14,10 +14,7 @@ namespace WellCommerce\Bundle\CoreBundle\Form\DataTransformer;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\PersistentCollection;
-use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
-use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
-use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
  * Class CollectionToArrayTransformer
@@ -25,39 +22,20 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
  * @package WellCommerce\Bundle\CoreBundle\Form\DataTransformer
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CollectionToArrayTransformer implements DataTransformerInterface
+class CollectionToArrayTransformer extends AbstractDataTransformer implements DataTransformerInterface
 {
-    /**
-     * @var \WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface
-     */
-    protected $repository;
-
-    /**
-     * @var \Symfony\Component\PropertyAccess\PropertyAccessor
-     */
-    protected $propertyAccessor;
-
-    /**
-     * Constructor
-     *
-     * @param RepositoryInterface $repository
-     */
-    public function __construct(RepositoryInterface $repository)
-    {
-        $this->repository       = $repository;
-        $this->propertyAccessor = PropertyAccess::createPropertyAccessor();
-    }
-
     /**
      * {@inheritdoc}
      */
-    public function transform($modelData, PropertyPathInterface $propertyPath)
+    public function transform($modelData)
     {
-        $items = [];
+        $items      = [];
+        $meta       = $this->getRepository()->getMetadata();
+        $identifier = $meta->getSingleIdentifierFieldName();
 
         if ($modelData instanceof PersistentCollection) {
             foreach ($modelData as $item) {
-                $items[] = $this->propertyAccessor->getValue($item, $propertyPath);
+                $items[] = $this->propertyAccessor->getValue($item, $identifier);
             }
         }
 
@@ -69,14 +47,14 @@ class CollectionToArrayTransformer implements DataTransformerInterface
      */
     public function reverseTransform($modelData, PropertyPathInterface $propertyPath, $value)
     {
-        $collection   = new ArrayCollection();
+        $collection = new ArrayCollection();
 
         if (empty($value)) {
             return $collection;
         }
 
         foreach ($value as $id) {
-            $item = $this->repository->find($id);
+            $item = $this->getRepository()->find($id);
             $collection->add($item);
         }
 

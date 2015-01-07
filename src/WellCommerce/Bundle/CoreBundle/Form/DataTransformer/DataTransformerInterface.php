@@ -24,12 +24,11 @@ interface DataTransformerInterface
     /**
      * Transforms model data into its element representation
      *
-     * @param                       $modelData
-     * @param PropertyPathInterface $propertyPath
+     * @param object $modelData
      *
      * @return mixed
      */
-    public function transform($modelData, PropertyPathInterface $propertyPath);
+    public function transform($modelData);
 
     /**
      * Transforms element value into its model representation

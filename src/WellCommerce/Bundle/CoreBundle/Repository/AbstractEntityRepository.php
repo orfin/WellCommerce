@@ -204,4 +204,12 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
 
         return Helper::snake($entityName);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getMetadataFactory()
+    {
+        return $this->getEntityManager()->getMetadataFactory();
+    }
 }

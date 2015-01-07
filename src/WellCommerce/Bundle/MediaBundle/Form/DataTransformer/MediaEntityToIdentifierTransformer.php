@@ -12,32 +12,17 @@
 
 namespace WellCommerce\Bundle\MediaBundle\Form\DataTransformer;
 
-use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
+use Symfony\Component\PropertyAccess\PropertyPathInterface;
+use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\AbstractDataTransformer;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\DataTransformerInterface;
 
 /**
  * Class MediaEntityToIdentifierTransformer
  *
- * @package WellCommerce\Bundle\MediaBundle\Form\DataTransformer
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class MediaEntityToIdentifierTransformer implements DataTransformerInterface
+class MediaEntityToIdentifierTransformer extends AbstractDataTransformer implements DataTransformerInterface
 {
-    /**
-     * @var \WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface
-     */
-    private $repository;
-
-    /**
-     * Constructor
-     *
-     * @param RepositoryInterface $repository
-     */
-    public function __construct(RepositoryInterface $repository)
-    {
-        $this->repository = $repository;
-    }
-
     /**
      * Transforms entity to primary key identifier
      *
@@ -50,11 +35,11 @@ class MediaEntityToIdentifierTransformer implements DataTransformerInterface
         if (null == $entity) {
             return 0;
         }
-        $meta       = $this->repository->getMetadata();
-        $identifier = $meta->getSingleIdentifierFieldName();
-        $accessor   = $this->repository->getPropertyAccessor();
 
-        return $accessor->getValue($entity, $identifier);
+        $meta       = $this->getRepository()->getMetadata();
+        $identifier = $meta->getSingleIdentifierFieldName();
+
+        return $this->propertyAccessor->getValue($entity, $identifier);
     }
 
     /**
@@ -64,14 +49,14 @@ class MediaEntityToIdentifierTransformer implements DataTransformerInterface
      *
      * @return mixed
      */
-    public function reverseTransform($data)
+    public function reverseTransform($modelData, PropertyPathInterface $propertyPath, $value)
     {
         $item = null;
         if (isset($data[0])) {
             $id   = $data[0];
-            $item = $this->repository->find($id);
+            $item = $this->getRepository()->find($id);
         }
 
-        return $item;
+        $this->propertyAccessor->setValue($modelData, $propertyPath, $item);
     }
 } 

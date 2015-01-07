@@ -26,14 +26,9 @@ use WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute;
 class ProductAttributeCollectionToArrayTransformer extends CollectionToArrayTransformer
 {
     /**
-     * @var \WellCommerce\Bundle\ProductBundle\Repository\ProductAttributeRepositoryInterface
-     */
-    protected $repository;
-
-    /**
      * {@inheritdoc}
      */
-    public function transform($modelData, PropertyPathInterface $propertyPath)
+    public function transform($modelData)
     {
         $items = [];
 
@@ -80,11 +75,10 @@ class ProductAttributeCollectionToArrayTransformer extends CollectionToArrayTran
         if (null == $entity) {
             return 0;
         }
-        $meta       = $this->repository->getMetadata();
+        $meta       = $this->getRepository()->getMetadata();
         $identifier = $meta->getSingleIdentifierFieldName();
-        $accessor   = $this->repository->getPropertyAccessor();
 
-        return $accessor->getValue($entity, $identifier);
+        return $this->propertyAccessor->getValue($entity, $identifier);
     }
 
     /**
@@ -119,7 +113,7 @@ class ProductAttributeCollectionToArrayTransformer extends CollectionToArrayTran
         }
         foreach ($values as $id => $value) {
             if (is_array($value)) {
-                $item = $this->repository->findOrCreate($id, $value);
+                $item = $this->getRepository()->findOrCreate($id, $value);
                 $collection->add($item);
             }
         }

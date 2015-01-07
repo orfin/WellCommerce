@@ -109,4 +109,9 @@ interface RepositoryInterface
      * @return \Doctrine\ORM\Mapping\ClassMetadata
      */
     public function getMetaData();
+
+    /**
+     * @return \Doctrine\ORM\Mapping\ClassMetadataFactory
+     */
+    public function getMetadataFactory();
 } 

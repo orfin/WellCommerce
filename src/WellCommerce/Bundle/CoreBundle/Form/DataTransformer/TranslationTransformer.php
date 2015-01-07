@@ -14,9 +14,7 @@ namespace WellCommerce\Bundle\CoreBundle\Form\DataTransformer;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\PersistentCollection;
-use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
-use WellCommerce\Bundle\CoreBundle\Helper\Doctrine\DoctrineHelperInterface;
 use WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface;
 
 /**
@@ -24,39 +22,18 @@ use WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class TranslationTransformer implements DataTransformerInterface
+class TranslationTransformer extends AbstractDataTransformer implements DataTransformerInterface
 {
-    /**
-     * @var DoctrineHelperInterface
-     */
-    protected $doctrineHelper;
-
-    /**
-     * @var \Symfony\Component\PropertyAccess\PropertyAccessor
-     */
-    protected $propertyAccessor;
-
-    /**
-     * Constructor
-     *
-     * @param DoctrineHelperInterface $doctrineHelper
-     */
-    public function __construct(DoctrineHelperInterface $doctrineHelper)
-    {
-        $this->doctrineHelper   = $doctrineHelper;
-        $this->propertyAccessor = PropertyAccess::createPropertyAccessor();
-    }
-
     /**
      * {@inheritdoc}
      */
-    public function transform($modelData, PropertyPathInterface $propertyPath)
+    public function transform($modelData)
     {
         $values = [];
 
         if ($modelData instanceof PersistentCollection) {
             $mapping  = $modelData->getMapping();
-            $metaData = $this->doctrineHelper->getClassMetadata($mapping['targetEntity']);
+            $metaData = $this->getClassMetadata($mapping['targetEntity']);
             $fields   = $metaData->getFieldNames();
 
             foreach ($modelData as $translation) {
@@ -95,5 +72,4 @@ class TranslationTransformer implements DataTransformerInterface
 
         $modelData->mergeNewTranslations();
     }
-
-} 
+}

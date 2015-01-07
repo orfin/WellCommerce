@@ -19,42 +19,20 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 /**
  * Class EntityToIdentifierTransformer
  *
- * @package WellCommerce\Bundle\CoreBundle\Form\DataTransformer
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class EntityToIdentifierTransformer implements DataTransformerInterface
+class EntityToIdentifierTransformer extends AbstractDataTransformer implements DataTransformerInterface
 {
-    /**
-     * @var \WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface
-     */
-    protected $repository;
-
-    /**
-     * @var \Symfony\Component\PropertyAccess\PropertyAccessor
-     */
-    protected $propertyAccessor;
-
-    /**
-     * Constructor
-     *
-     * @param RepositoryInterface $repository
-     */
-    public function __construct(RepositoryInterface $repository)
-    {
-        $this->repository       = $repository;
-        $this->propertyAccessor = PropertyAccess::createPropertyAccessor();
-    }
-
     /**
      * {@inheritdoc}
      */
-    public function transform($modelData, PropertyPathInterface $propertyPath)
+    public function transform($modelData)
     {
         if (null === $modelData) {
             return 0;
         }
 
-        $meta       = $this->repository->getMetadata();
+        $meta       = $this->getRepository()->getMetadata();
         $identifier = $meta->getSingleIdentifierFieldName();
 
         return $this->propertyAccessor->getValue($modelData, $identifier);
@@ -65,7 +43,7 @@ class EntityToIdentifierTransformer implements DataTransformerInterface
      */
     public function reverseTransform($modelData, PropertyPathInterface $propertyPath, $value)
     {
-        $entity = $this->repository->find($value);
+        $entity = $this->getRepository()->find($value);
 
         $this->propertyAccessor->setValue($modelData, $propertyPath, $entity);
     }

@@ -109,7 +109,7 @@ class ModelDataMapper extends AbstractDataMapper
 
                 if ($element->hasTransformer()) {
                     $transformer = $element->getTransformer();
-                    $value       = $transformer->transform($value, $propertyPath);
+                    $value       = $transformer->transform($value);
                 }
 
                 $element->setValue($value);

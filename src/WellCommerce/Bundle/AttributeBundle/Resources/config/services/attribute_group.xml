@@ -14,8 +14,8 @@
             <call method="setRepository">
                 <argument type="service" id="attribute_group.repository"/>
             </call>
-            <call method="setForm">
-                <argument type="service" id="attribute_group.form"/>
+            <call method="setFormBuilder">
+                <argument type="service" id="attribute_group.form_builder"/>
             </call>
         </service>
 
@@ -30,10 +30,13 @@
             <argument>WellCommerceAttributeBundle:AttributeGroup</argument>
         </service>
 
-        <service id="attribute_group.form" class="WellCommerce\Bundle\AttributeBundle\Form\AttributeGroupForm">
+        <service id="attribute_group.form_builder" class="WellCommerce\Bundle\AttributeBundle\Form\AttributeGroupFormBuilder">
+            <argument type="service" id="form.resolver.factory"/>
+            <argument type="service" id="form.handler"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
+
     </services>
 </container>

@@ -76,30 +76,15 @@ class Tip extends AbstractFixedField implements ElementInterface
     /**
      * {@inheritdoc}
      */
-    public function prepareAttributesJs()
+    public function prepareAttributes()
     {
-        return [
-            $this->formatAttributeJs('tip', 'sTip'),
-            $this->formatAttributeJs('direction', 'sDirection'),
-            $this->formatAttributeJs('short_tip', 'sShortTip'),
-            $this->formatAttributeJs('retractable', 'bRetractable', ElementInterface::TYPE_BOOLEAN),
-            $this->formatAttributeJs('default_state', 'sDefaultState'),
-            $this->formatDependencyJs()
+        return parent::prepareAttributes() + [
+            'sTip'          => $this->getOption('tip'),
+            'sDirection'    => $this->getOption('direction'),
+            'sShortTip'     => $this->getOption('short_tip'),
+            'bRetractable'  => $this->getOption('retractable'),
+            'sDefaultState' => $this->getOption('default_state'),
         ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function renderStatic()
-    {
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function populate($value)
-    {
     }
 
 }

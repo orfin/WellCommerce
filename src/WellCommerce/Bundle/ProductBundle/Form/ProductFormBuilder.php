@@ -44,7 +44,7 @@ class ProductFormBuilder extends AbstractFormBuilder
         $languageData = $mainData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
             'label'       => $this->trans('fieldset.language.label'),
-            'transformer' => new TranslationTransformer($this->get('doctrine_helper'))
+            'transformer' => new TranslationTransformer($this->get('product.repository'))
         ]));
 
         $name = $languageData->addChild($this->getElement('text_field', [
@@ -88,7 +88,7 @@ class ProductFormBuilder extends AbstractFormBuilder
         $languageData = $metaData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
             'label'       => $this->trans('fieldset.translations.label'),
-            'transformer' => new TranslationTransformer($this->get('doctrine_helper'))
+            'transformer' => new TranslationTransformer($this->get('product.repository'))
         ]));
 
         $languageData->addChild($this->getElement('text_field', [

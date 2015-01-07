@@ -16,42 +16,21 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\PersistentCollection;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
+use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\AbstractDataTransformer;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\DataTransformerInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
  * Class CollectionToArrayTransformer
  *
- * @package WellCommerce\Bundle\CoreBundle\Form\DataTransformer
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class MediaCollectionToArrayTransformer implements DataTransformerInterface
+class MediaCollectionToArrayTransformer extends AbstractDataTransformer implements DataTransformerInterface
 {
-    /**
-     * @var \WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface
-     */
-    protected $repository;
-
-    /**
-     * @var \Symfony\Component\PropertyAccess\PropertyAccessor
-     */
-    protected $propertyAccessor;
-
-    /**
-     * Constructor
-     *
-     * @param RepositoryInterface $repository
-     */
-    public function __construct(RepositoryInterface $repository)
-    {
-        $this->repository       = $repository;
-        $this->propertyAccessor = PropertyAccess::createPropertyAccessor();
-    }
-
     /**
      * {@inheritdoc}
      */
-    public function transform($modelData, PropertyPathInterface $propertyPath)
+    public function transform($modelData)
     {
         if (null === $modelData || !$modelData instanceof PersistentCollection) {
             return null;
@@ -77,7 +56,7 @@ class MediaCollectionToArrayTransformer implements DataTransformerInterface
 
         foreach ($values as $key => $id) {
             if (is_int($key)) {
-                $photo = $this->repository->find($id);
+                $photo = $this->getRepository()->find($id);
                 $collection->add($photo);
             }
         }

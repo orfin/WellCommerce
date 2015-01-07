@@ -32,6 +32,7 @@ class ProductVariantsEditor extends AbstractField implements ElementInterface
         parent::configureOptions($resolver);
 
         $resolver->setRequired([
+            'set',
             'category_field',
             'price_field',
             'availability_field',
@@ -43,10 +44,17 @@ class ProductVariantsEditor extends AbstractField implements ElementInterface
             'get_attributes_route',
         ]);
 
+        $resolver->setDefined([
+            'photos',
+            'availability',
+        ]);
+
         $resolver->setDefaults([
+            'set'                         => null,
             'allow_generate'              => true,
             'suffixes'                    => ['+', '-', '%', '='],
             'photos'                      => [],
+            'availability'                => [],
             'get_groups_route'            => 'admin.attribute_group.ajax.index',
             'get_attributes_route'        => 'admin.attribute.ajax.index',
             'get_attributes_values_route' => 'admin.attribute_value.ajax.index',
@@ -55,10 +63,12 @@ class ProductVariantsEditor extends AbstractField implements ElementInterface
         ]);
 
         $resolver->setAllowedTypes([
-            'allow_generate'     => ['bool'],
+            'allow_generate'     => 'bool',
             'availability_field' => 'WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface',
             'vat_field'          => 'WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface',
-            'vat_values'         => ['array'],
+            'vat_values'         => 'array',
+            'photos'             => 'array',
+            'availability'       => 'array',
             'price_field'        => 'WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface',
             'category_field'     => 'WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface',
         ]);
@@ -82,45 +92,27 @@ class ProductVariantsEditor extends AbstractField implements ElementInterface
     /**
      * {@inheritdoc}
      */
-    public function prepareAttributesJs()
+    public function prepareAttributes()
     {
-        return [
-            $this->formatAttributeJs('name', 'sName'),
-            $this->formatAttributeJs('label', 'sLabel'),
-            $this->formatAttributeJs('comment', 'sComment'),
-            $this->formatAttributeJs('error', 'sError'),
-            $this->formatAttributeJs('get_groups_route', 'sGetGroupsRoute'),
-            $this->formatAttributeJs('get_attributes_route', 'sGetAttributesRoute'),
-            $this->formatAttributeJs('get_attributes_values_route', 'sGetAttributesValuesRoute'),
-            $this->formatAttributeJs('add_attribute_route', 'sAddAttributeRoute'),
-            $this->formatAttributeJs('add_attribute_value_route', 'sAddAttributeValueRoute'),
-            $this->formatAttributeJs('category_field', 'sCategoryField'),
-            $this->formatAttributeJs('price_field', 'sPriceField'),
-            $this->formatAttributeJs('allow_generate', 'bAllowGenerate'),
-            $this->formatAttributeJs('vat_field', 'sVatField'),
-            $this->formatAttributeJs('vat_values', 'aoVatValues', ElementInterface::TYPE_OBJECT),
-            $this->formatAttributeJs('currency', 'sCurrency'),
-            $this->formatAttributeJs('photos', 'aoPhotos', ElementInterface::TYPE_OBJECT),
-            $this->formatAttributeJs('availability', 'aoAvailability', ElementInterface::TYPE_OBJECT),
-            $this->formatAttributeJs('suffixes', 'aoSuffixes', ElementInterface::TYPE_OBJECT),
-            $this->formatAttributeJs('set', 'sSet'),
-            $this->formatRulesJs(),
-            $this->formatDependencyJs(),
+        return parent::prepareAttributes() + [
+            'sGetGroupsRoute'           => $this->getOption('get_groups_route'),
+            'sGetAttributesRoute'       => $this->getOption('get_attributes_route'),
+            'sGetAttributesValuesRoute' => $this->getOption('get_attributes_values_route'),
+            'sAddAttributeRoute'        => $this->getOption('add_attribute_route'),
+            'sAddAttributeValueRoute'   => $this->getOption('add_attribute_value_route'),
+            'sCategoryField'            => $this->getOption('category_field'),
+            'sPriceField'               => $this->getOption('price_field'),
+            'bAllowGenerate'            => $this->getOption('allow_generate'),
+            'sVatField'                 => $this->getOption('vat_field'),
+            'aoVatValues'               => $this->getOption('vat_values'),
+            'aoPhotos'                  => $this->getOption('photos'),
+            'aoAvailability'            => $this->getOption('availability'),
+            'aoSuffixes'                => $this->getOption('suffixes'),
+            'sSet'                      => $this->getOption('set'),
         ];
-    }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function handleRequest($data)
-    {
-        $accessor = $this->getPropertyAccessor();
-        if (null !== $this->getPropertyPath() && $accessor->isReadable($data, $this->getPropertyPath())) {
-            $value = $this->getValue();
-            if ($this->hasTransformer()) {
-                $value = $this->getTransformer()->reverseTransform($value);
-            }
-            $accessor->setValue($data, $this->getName(), $value);
-        }
+        print_r($attributes);
+        die();
+
     }
 }

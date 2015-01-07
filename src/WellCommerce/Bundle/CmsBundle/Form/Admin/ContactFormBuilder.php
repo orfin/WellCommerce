@@ -40,7 +40,7 @@ class ContactFormBuilder extends AbstractFormBuilder
         $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
             'label'       => $this->trans('form.required_data.language_data.label'),
-            'transformer' => new TranslationTransformer($this->get('doctrine_helper'))
+            'transformer' => new TranslationTransformer($this->get('contact.repository'))
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
@@ -76,7 +76,7 @@ class ContactFormBuilder extends AbstractFormBuilder
         $languageData = $addressData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
             'label'       => $this->trans('contact.translations.label'),
-            'transformer' => new TranslationTransformer($this->get('doctrine_helper'))
+            'transformer' => new TranslationTransformer($this->get('contact.repository'))
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
