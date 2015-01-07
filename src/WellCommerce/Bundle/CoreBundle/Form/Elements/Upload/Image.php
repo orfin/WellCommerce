@@ -31,17 +31,15 @@ class Image extends File implements ElementInterface
 
         $resolver->setRequired([
             'load_route',
+            'upload_url',
+            'session_name',
+            'session_id',
         ]);
 
         $resolver->setDefined([
             'repeat_min',
             'repeat_max',
             'limit',
-            'main_id',
-            'visibility_change',
-            'upload_url',
-            'session_name',
-            'session_id',
             'file_types',
             'file_types_description',
             'photos',
@@ -68,40 +66,16 @@ class Image extends File implements ElementInterface
     /**
      * {@inheritdoc}
      */
-    public function prepareAttributesJs()
+    public function prepareAttributes()
     {
-        return [
-            $this->formatAttributeJs('name', 'sName'),
-            $this->formatAttributeJs('label', 'sLabel'),
-            $this->formatAttributeJs('comment', 'sComment'),
-            $this->formatAttributeJs('error', 'sError'),
-            $this->formatAttributeJs('main_id', 'sMainId'),
-            $this->formatAttributeJs('visibility_change', 'bVisibilityChangeable'),
-            $this->formatAttributeJs('upload_url', 'sUploadUrl'),
-            $this->formatAttributeJs('session_name', 'sSessionName'),
-            $this->formatAttributeJs('session_id', 'sSessionId'),
-            $this->formatAttributeJs('limit', 'iLimit'),
-            $this->formatAttributeJs('file_types', 'asFileTypes'),
-            $this->formatAttributeJs('file_types_description', 'sFileTypesDescription'),
-            $this->formatAttributeJs('load_route', 'sLoadRoute'),
-            $this->formatRulesJs(),
-            $this->formatDependencyJs(),
+        return parent::prepareAttributes() + [
+            'sUploadUrl'            => $this->getOption('upload_url'),
+            'sSessionName'          => $this->getOption('session_name'),
+            'sSessionId'            => $this->getOption('session_id'),
+            'iLimit'                => $this->getOption('limit'),
+            'asFileTypes'           => $this->getOption('file_types'),
+            'sFileTypesDescription' => $this->getOption('file_types_description'),
+            'sLoadRoute'            => $this->getOption('load_route'),
         ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function handleRequest($data)
-    {
-        $accessor = $this->getPropertyAccessor();
-
-        if (null !== $this->getPropertyPath() && $accessor->isReadable($data, $this->getPropertyPath())) {
-            $value = $this->getValue();
-            if ($this->hasTransformer()) {
-                $value = $this->getTransformer()->reverseTransform($value);
-            }
-            $accessor->setValue($data, $this->getName(), $value);
-        }
     }
 }
