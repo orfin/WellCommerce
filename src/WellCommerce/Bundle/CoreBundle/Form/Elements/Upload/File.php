@@ -74,6 +74,10 @@ class File extends AbstractField implements ElementInterface
             'asFileTypes'           => $this->getOption('file_types'),
             'sFileTypesDescription' => $this->getOption('file_types_description'),
             'sLoadRoute'            => $this->getOption('load_route'),
+            'oRepeat'               => [
+                'iMin' => $this->options['repeat_min'],
+                'iMax' => $this->options['repeat_max'],
+            ]
         ];
     }
 }

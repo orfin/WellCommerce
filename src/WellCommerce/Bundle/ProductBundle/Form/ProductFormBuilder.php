@@ -17,8 +17,8 @@ use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\EntityToIdentifierTransf
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\TranslationTransformer;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
-use WellCommerce\Bundle\MediaBundle\Form\DataTransformer\MediaCollectionToArrayTransformer;
 use WellCommerce\Bundle\ProductBundle\Form\DataTransformer\ProductAttributeCollectionToArrayTransformer;
+use WellCommerce\Bundle\ProductBundle\Form\DataTransformer\ProductPhotoCollectionToArrayTransformer;
 
 /**
  * Class ProductForm
@@ -261,7 +261,7 @@ class ProductFormBuilder extends AbstractFormBuilder
             'upload_url'   => $this->generateUrl('admin.media.add'),
             'repeat_min'   => 0,
             'repeat_max'   => ElementInterface::INFINITE,
-            'transformer'  => new MediaCollectionToArrayTransformer($this->get('media.repository')),
+            'transformer'  => new ProductPhotoCollectionToArrayTransformer($this->get('media.repository')),
             'session_name' => $this->getRequest()->getSession()->getName(),
             'session_id'   => $this->getRequest()->getSession()->getId(),
         ]));

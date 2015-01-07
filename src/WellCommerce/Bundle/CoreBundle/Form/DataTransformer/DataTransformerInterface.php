@@ -36,8 +36,6 @@ interface DataTransformerInterface
      * @param object                $modelData
      * @param PropertyPathInterface $propertyPath
      * @param mixed                 $value
-     *
-     * @return mixed
      */
     public function reverseTransform($modelData, PropertyPathInterface $propertyPath, $value);
 

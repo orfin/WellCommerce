@@ -418,48 +418,28 @@ class Product
     /**
      * Sets product photos
      *
-     * @param array $data Data passed from transformer
-     *
-     * @return void
+     * @param ArrayCollection $photos
      */
-    public function setProductPhotos(array $data)
+    public function setProductPhotos(ArrayCollection $photos)
     {
-        $params        = $data['data'];
-        $collection    = $data['collection'];
-        $productPhotos = new ArrayCollection();
-
-        // if collection was not modified, do nothing
-        if ($params['unmodified'] == 1) {
-            return false;
-        }
-
-        foreach ($collection as $photo) {
-            $mainPhoto    = (int)($photo->getId() == $params['main']);
-            $productPhoto = new ProductPhoto();
-            $productPhoto->setPhoto($photo);
-            $productPhoto->setMainPhoto($mainPhoto);
-            $productPhoto->setProduct($this);
-            $productPhotos->add($productPhoto);
-
-            // ad main photo as product default photo
-            if ($mainPhoto == 1) {
-                $this->setPhoto($photo);
+        foreach ($photos as $photo) {
+            $photo->setProduct($this);
+            if ($photo->getMainPhoto() == 1) {
+                $this->setPhoto($photo->getPhoto());
             }
         }
 
-        // loop through old photos and remove those which haven't been submitted
         foreach ($this->productPhotos as $oldPhoto) {
-            if (!$productPhotos->contains($oldPhoto)) {
+            if (!$photos->contains($oldPhoto)) {
                 $this->productPhotos->removeElement($oldPhoto);
             }
         }
 
-        // if we don't have any photos, reset main product photo
-        if ($productPhotos->count() == 0) {
+        if ($photos->count() == 0) {
             $this->setPhoto(null);
         }
 
-        $this->productPhotos = $productPhotos;
+        $this->productPhotos = $photos;
     }
 
     /**

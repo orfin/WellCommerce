@@ -13138,6 +13138,7 @@ var GFormDownloader = GCore.ExtendClass(GFormFile, function() {
 	};
 
 }, oDefaults);
+
 /*
 * IMAGE
 */
@@ -13183,10 +13184,10 @@ var oDefaults = {
 	fDeleteHandler: GCore.NULL,
 	fLoadFiles: GCore.NULL,
 	sSwfUploadUrl: '_js_libs/swfupload.swf',
+	iLimit: 100,
 	iWidth: 131,
 	iHeight: 34,
-	iMaxFileSize: 100 * 1024,	// kB
-	sMainId: 0
+	iMaxFileSize: 100 * 1024
 };
 
 var GFormImage = GCore.ExtendClass(GFormFile, function() {
@@ -13242,6 +13243,7 @@ var GFormImage = GCore.ExtendClass(GFormFile, function() {
 	};
 
 	gThis.GetValue = function(sRepetition) {
+		
 		if (gThis.m_jField == undefined) {
 			return '';
 		}
@@ -13291,17 +13293,19 @@ var GFormImage = GCore.ExtendClass(GFormFile, function() {
 	};
 	
 	gThis.Populate = function(mValue) {
-		if (!gThis.m_gFilesDatagrid) {
-			return;
-		}
 		if (gThis.m_bRepeatable) {
 			gThis.m_jField.empty();
-			gThis.m_oOptions.asDefaultstos = GCore.Duplicate(mValue);
+			gThis.m_oOptions.asDefaults = GCore.Duplicate(mValue);
 		}
 		else {
 			gThis.m_oOptions.sDefault = mValue;
 		}
-		gThis._UpdateDatagridSelection(mValue);
+		
+		if (!gThis.m_gFilesDatagrid) {
+			return;
+		}
+		
+		gThis._UpdateDatagridSelection(mValue.photos);
 		gThis.SetValue(mValue);
 	};
 	
@@ -13330,19 +13334,20 @@ var GFormImage = GCore.ExtendClass(GFormFile, function() {
 	};
 	
 	gThis._AddImage = function(sId, oFile) {
+        
 		if (gThis.m_bRepeatable) {
 			var jFileTr = $('<tr class="file__' + sId + '"/>');
 			jFileTr.append('<th scope="row"><span class="' + gThis._GetClass('Thumb') + '"><img src="' + oFile.preview + '" alt=""/></span><span class="' + gThis._GetClass('Name') + '">' + oFile.name + '</span></th>');
 			var jRadio = $('<input type="radio" name="' + gThis.GetName() + '[main]" value="' + sId + '"/>');
-			if (gThis.m_oOptions.asDefaults.main_photo_id) {
+			if (gThis.m_oOptions.asDefaults.main_photo) {
 				
 				if (!gThis.m_bLoadedDefaults) {
-					if (sId == gThis.m_oOptions.asDefaults.main_photo_id) {
+					if (sId == gThis.m_oOptions.asDefaults.main_photo) {
 						jRadio.attr('checked', 'checked');
 					}
 				}
 				else {
-					if (sId == gThis.m_oOptions.asDefaults.main_photo_id) {
+					if (sId == gThis.m_oOptions.asDefaults.main_photo) {
 						jRadio.attr('checked', 'checked');
 					}
 					if (!gThis.m_jSelectedFiles.children('tr').length) {
@@ -13576,10 +13581,11 @@ var GFormImage = GCore.ExtendClass(GFormFile, function() {
 	
 	gThis._LoadDefaults = function(oRequest) {
 		gThis.m_jSelectedFiles.empty();
+		
 		if (gThis.m_bRepeatable) {
 			oRequest.where = [{
 				column: 'id',
-				value: gThis.m_oOptions.asDefaults,
+				value: gThis.m_oOptions.asDefaults.photos,
 				operator: 'IN'
 			}];
 		}
@@ -13592,6 +13598,7 @@ var GFormImage = GCore.ExtendClass(GFormFile, function() {
 		}
 		oRequest.id = 0;
 		oRequest.starting_from = 0;
+		oRequest.limit = gThis.m_oOptions.iLimit;
 		oRequest.order_by = 'id';
 		oRequest.order_dir = 'desc';
 		gThis.LoadFiles(oRequest);
@@ -13614,7 +13621,7 @@ var GFormImage = GCore.ExtendClass(GFormFile, function() {
 
 	gThis._InitFilesDatagrid = function() {
 
-		var aoColumns = gThis._InitColumns();
+	var aoColumns = gThis._InitColumns();
 
     var oOptions = {
 			id: gThis.GetId(),
@@ -13646,6 +13653,7 @@ var GFormImage = GCore.ExtendClass(GFormFile, function() {
 	};
 
 }, oDefaults);
+
 /*
 * LOCAL FILE
 */

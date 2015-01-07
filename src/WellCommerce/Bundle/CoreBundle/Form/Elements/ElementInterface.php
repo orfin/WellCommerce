@@ -23,7 +23,7 @@ use WellCommerce\Bundle\CoreBundle\Form\Filters\FilterInterface;
  */
 interface ElementInterface
 {
-    const INFINITE      = 'inf';
+    const INFINITE = 99999;
 
     /**
      * Configures element attributes

@@ -17,7 +17,6 @@ use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
 /**
  * Class AttributeGroupManager
  *
- * @package WellCommerce\Bundle\AttributeBundle\Manager\Admin
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class AttributeGroupManager extends AbstractAdminManager
