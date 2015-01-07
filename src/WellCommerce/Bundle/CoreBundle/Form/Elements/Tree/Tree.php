@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements\Tree;
 
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use WellCommerce\Bundle\CoreBundle\Form\Elements\AbstractField;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 
 /**
@@ -31,48 +30,39 @@ class Tree extends AbstractTree implements ElementInterface
     {
         parent::configureOptions($resolver);
 
-        $resolver->setDefined([
-            'addLabel',
-            'selectable',
-            'selector',
-            'choosable',
-            'clickable',
-            'deletable',
-            'sortable',
-            'retractable',
-            'addable',
-            'total',
-            'restrict',
-            'items',
-            'onClick',
-            'onDuplicate',
-            'onAdd',
-            'onAfterAdd',
-            'onDelete',
-            'onAfterDelete',
-            'onSaveOrder',
-            'active',
-            'onAfterDeleteId',
-            'add_item_prompt',
-            'getchildren',
-            'prevent_duplicates',
-            'prevent_duplicates_on_all_levels',
-            'set',
-            'clickable_root',
-        ]);
-
         $total = function (Options $options) {
             return count($options['items']);
         };
 
         $resolver->setDefaults([
-            'total' => $total,
+            'items'                            => [],
+            'addLabel'                         => '',
+            'add_item_prompt'                  => '',
+            'total'                            => $total,
+            'addable'                          => false,
+            'choosable'                        => false,
+            'clickable'                        => false,
+            'deletable'                        => false,
+            'sortable'                         => false,
+            'selectable'                       => false,
+            'retractable'                      => false,
+            'restrict'                         => 0,
+            'onClick'                          => '',
+            'onDuplicate'                      => '',
+            'onAdd'                            => '',
+            'onAfterAdd'                       => '',
+            'onDelete'                         => '',
+            'onAfterDelete'                    => '',
+            'onSaveOrder'                      => '',
+            'onAfterDeleteId'                  => 0,
+            'prevent_duplicates'               => false,
+            'prevent_duplicates_on_all_levels' => false,
+            'active'                           => 0,
         ]);
 
         $resolver->setAllowedTypes([
             'addLabel'                         => 'string',
             'selectable'                       => 'bool',
-            'selector'                         => 'string',
             'choosable'                        => 'bool',
             'clickable'                        => 'bool',
             'deletable'                        => 'bool',
@@ -80,7 +70,7 @@ class Tree extends AbstractTree implements ElementInterface
             'retractable'                      => 'bool',
             'addable'                          => 'bool',
             'total'                            => 'int',
-            'items'                            => ['array', 'null'],
+            'items'                            => 'array',
             'onClick'                          => 'string',
             'onDuplicate'                      => 'string',
             'onAdd'                            => 'string',
@@ -91,11 +81,38 @@ class Tree extends AbstractTree implements ElementInterface
             'active'                           => ['string', 'array', 'int'],
             'onAfterDeleteId'                  => 'int',
             'add_item_prompt'                  => 'string',
-            'getchildren'                      => 'object',
             'prevent_duplicates'               => 'bool',
             'prevent_duplicates_on_all_levels' => 'bool',
-            'clickable_root'                   => 'bool',
-            'set'                              => 'string',
         ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function prepareAttributes()
+    {
+        return parent::prepareAttributes() + [
+            'sAddLabel'                     => $this->getOption('addLabel'),
+            'bSelectable'                   => $this->getOption('selectable'),
+            'bChoosable'                    => $this->getOption('choosable'),
+            'bClickable'                    => $this->getOption('clickable'),
+            'bDeletable'                    => $this->getOption('deletable'),
+            'bAddable'                      => $this->getOption('addable'),
+            'iTotal'                        => $this->getOption('total'),
+            'iRestrict'                     => $this->getOption('restrict'),
+            'oItems'                        => $this->getOption('items'),
+            'fOnClick'                      => $this->getOption('onClick'),
+            'fOnDuplicate'                  => $this->getOption('onDuplicate'),
+            'fOnAdd'                        => $this->getOption('onAdd'),
+            'fOnAfterAdd'                   => $this->getOption('onAfterAdd'),
+            'fOnDelete'                     => $this->getOption('onDelete'),
+            'fOnAfterDelete'                => $this->getOption('onAfterDelete'),
+            'fOnSaveOrder'                  => $this->getOption('onSaveOrder'),
+            'sActive'                       => $this->getOption('active'),
+            'sOnAfterDeleteId'              => $this->getOption('onAfterDeleteId'),
+            'sAddItemPrompt'                => $this->getOption('add_item_prompt'),
+            'bPreventDuplicates'            => $this->getOption('prevent_duplicates'),
+            'bPreventDuplicatesOnAllLevels' => $this->getOption('prevent_duplicates_on_all_levels'),
+        ];
     }
 }

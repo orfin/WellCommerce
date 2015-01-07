@@ -7337,6 +7337,7 @@ var GFormTip = GCore.ExtendClass(GFormField, function() {
 	gThis.Focus = function() { return false; };
 	
 }, oDefaults);
+
 /*
 * SORTABLE TREE
 */
@@ -7420,15 +7421,8 @@ var GFormTree = GCore.ExtendClass(GFormField, function() {
 		gThis.m_jNode.append('<label>' + gThis.m_oOptions.sLabel + '</label>');
 		gThis.m_jExpandAll = $('<a href="#"/>').text(GForm.Language.tree_expand_all);
 		gThis.m_jRetractAll = $('<a href="#"/>').text(GForm.Language.tree_retract_all).css('visibility','hidden');
-		if (gThis.m_oOptions.fGetChildren instanceof Function) {
-			if(gThis.m_oOptions.iTotal > 0){
-				gThis.m_jNode.append($('<p class="' + gThis._GetClass('ExpandAll') + '"/>').append(gThis.m_jRetractAll));
-			}
-		}
-		else {
-			if(gThis.m_oOptions.bRetractable){
-				gThis.m_jNode.append($('<p class="' + gThis._GetClass('RetractAll') + '"/>').append(gThis.m_jRetractAll));
-			}
+		if(gThis.m_oOptions.bRetractable){
+			gThis.m_jNode.append($('<p class="' + gThis._GetClass('RetractAll') + '"/>').append(gThis.m_jRetractAll));
 		}
 		gThis.m_jTree = $('<ul/>');
 		if(gThis.m_oOptions.iTotal > 0){
@@ -7438,8 +7432,9 @@ var GFormTree = GCore.ExtendClass(GFormField, function() {
 		gThis._PrepareOptions();
 		window.setTimeout(gThis.ResetExpansion, 500);
 	};
-	
-	gThis.OnRetractAll = function(eEvent) {
+
+
+	gThis.OnRetractAll = function() {
 		gThis.m_jTree.find('li:has(li)').removeClass(gThis._GetClass('Expanded'));
 		return false;
 	};
@@ -7564,12 +7559,12 @@ var GFormTree = GCore.ExtendClass(GFormField, function() {
 							GCore.StartWaiting();
 							gThis.m_oOptions.fOnDelete({
 								id: sId
-							}, GCallback(function(eEvent) {
+							}, function() {
 								GCore.StopWaiting();
 								if (gThis.m_oOptions.fOnAfterDelete instanceof Function) {
 									gThis.m_oOptions.fOnAfterDelete(gThis.m_oOptions.sOnAfterDeleteId);
 								}
-							}));
+							});
 						}, sCaption: GForm.Language.tree_ok},
 						{mLink: GAlert.DestroyThis, sCaption: GForm.Language.tree_cancel}
 					]
@@ -7875,15 +7870,6 @@ var GFormTree = GCore.ExtendClass(GFormField, function() {
 		if (gThis.m_oItems[sId] != undefined) {
 			return;
 		}
-		if (gThis.m_oOptions.fGetChildren instanceof Function) {
-			jParentLi.find('ul').remove();
-			jParentLi.append('<ul><li><img src="' + gThis._GetImage('Waiting') + '" alt=""/></li></ul>');
-			gThis.m_oOptions.fGetChildren({
-				parent: sId
-			}, GCallback(gThis._OnChildrenLoaded, {
-				parentNode: jParentLi
-			}));
-		}
 	};
 	
 	gThis._OnChildrenLoaded = GEventHandler(function(eEvent) {
@@ -7901,6 +7887,7 @@ var GFormTree = GCore.ExtendClass(GFormField, function() {
 	});
 	
 }, oDefaults);
+
 /*
 * BORDER
 */
