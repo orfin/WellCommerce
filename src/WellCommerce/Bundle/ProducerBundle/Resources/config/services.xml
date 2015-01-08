@@ -14,8 +14,8 @@
             <call method="setRepository">
                 <argument type="service" id="producer.repository"/>
             </call>
-            <call method="setForm">
-                <argument type="service" id="producer.form"/>
+            <call method="setFormBuilder">
+                <argument type="service" id="producer.form_builder"/>
             </call>
             <call method="setDataGrid">
                 <argument type="service" id="producer.datagrid"/>
@@ -59,7 +59,9 @@
             </call>
         </service>
 
-        <service id="producer.form" class="WellCommerce\Bundle\ProducerBundle\Form\ProducerForm">
+        <service id="producer.form_builder" class="WellCommerce\Bundle\ProducerBundle\Form\ProducerFormBuilder">
+            <argument type="service" id="form.resolver.factory"/>
+            <argument type="service" id="form.handler"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

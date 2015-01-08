@@ -33,7 +33,7 @@ class ProducerDataGrid extends AbstractDataGrid implements DataGridInterface
     {
         $collection->add(new Column([
             'id'         => 'id',
-            'caption'    => $this->trans('producer.id'),
+            'caption'    => $this->trans('producer.id.label'),
             'sorting'    => new Sorting([
                 'default_order' => Sorting::SORT_DIR_DESC
             ]),
@@ -48,13 +48,7 @@ class ProducerDataGrid extends AbstractDataGrid implements DataGridInterface
 
         $collection->add(new Column([
             'id'         => 'name',
-            'caption'    => $this->trans('producer.name'),
-            'appearance' => new Appearance([
-                'width' => 70,
-            ]),
-            'filter'     => new Filter([
-                'type' => Filter::FILTER_INPUT
-            ])
+            'caption'    => $this->trans('producer.name.label'),
         ]));
     }
 }
