@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\DataMapper;
 
+use Symfony\Component\PropertyAccess\PropertyPathInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementCollection;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
@@ -99,8 +100,9 @@ class ModelDataMapper extends AbstractDataMapper
      */
     protected function setDefaultElementValue(ElementInterface $element)
     {
-        if ($element->hasPropertyPath()) {
-            $propertyPath = $element->getPropertyPath();
+        $propertyPath = $element->getPropertyPath();
+
+        if ($propertyPath instanceof PropertyPathInterface) {
             if ($this->propertyAccessor->isReadable($this->data, $propertyPath)) {
                 $value = $this->propertyAccessor->getValue($this->data, $propertyPath);
                 if (null === $value) {
@@ -124,8 +126,9 @@ class ModelDataMapper extends AbstractDataMapper
      */
     protected function setModelValueFromElement(ElementInterface $child)
     {
-        if ($child->hasPropertyPath()) {
-            $propertyPath = $child->getPropertyPath();
+        $propertyPath = $child->getPropertyPath();
+
+        if ($propertyPath instanceof PropertyPathInterface) {
             if ($this->propertyAccessor->isWritable($this->data, $propertyPath)) {
                 if ($child->hasTransformer()) {
                     $transformer = $child->getTransformer();
