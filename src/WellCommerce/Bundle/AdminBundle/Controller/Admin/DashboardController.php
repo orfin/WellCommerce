@@ -12,21 +12,23 @@
 
 namespace WellCommerce\Bundle\AdminBundle\Controller\Admin;
 
-use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
  * Class DashboardController
  *
- * @package WellCommerce\Bundle\AdminBundle\Controller
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class DashboardController extends AbstractAdminController
 {
-    public function indexAction(Request $request)
+    public function indexAction()
     {
-        return [];
+        return [
+            'salesReport' => [
+
+            ]
+        ];
     }
 }
