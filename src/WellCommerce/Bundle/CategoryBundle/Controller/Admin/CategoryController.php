@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\Controller\Admin;
 
-use Doctrine\Common\Util\Debug;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
@@ -46,7 +45,7 @@ class CategoryController extends AbstractAdminController
 
     public function addAction(Request $request)
     {
-        $category = $this->manager->getRepository()->quickAddCategory($request->request);
+        $category = $this->getRepository()->quickAddCategory($request->request);
 
         return $this->jsonResponse([
             'id' => $category->getId()
@@ -58,9 +57,6 @@ class CategoryController extends AbstractAdminController
         $tree     = $this->buildTreeForm();
         $resource = $this->findOr404($request);
         $form     = $this->getForm($resource);
-
-        $this->get('form.renderer.javascript')->renderForm($form);
-        die();
 
         if ($form->handleRequest()->isValid()) {
             $this->manager->updateResource($resource, $request);
@@ -82,7 +78,7 @@ class CategoryController extends AbstractAdminController
     public function sortAction(Request $request)
     {
         $items = $request->request->get('items');
-        $this->manager->getRepository()->changeOrder($items);
+        $this->getRepository()->changeOrder($items);
 
         return $this->jsonResponse(['success' => true]);
     }
@@ -98,5 +94,13 @@ class CategoryController extends AbstractAdminController
             'name'  => 'category_tree',
             'class' => 'category-select'
         ]);
+    }
+
+    /**
+     * @return \WellCommerce\Bundle\CategoryBundle\Repository\CategoryRepositoryInterface
+     */
+    protected function getRepository()
+    {
+        return $this->manager->getRepository();
     }
 }
