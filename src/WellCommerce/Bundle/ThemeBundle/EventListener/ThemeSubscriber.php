@@ -18,6 +18,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 use WellCommerce\Bundle\CoreBundle\Form\Event\FormEvent;
 use WellCommerce\Bundle\ThemeBundle\Form\ThemeForm;
+use WellCommerce\Bundle\ThemeBundle\Form\ThemeFormBuilder;
 use WellCommerce\Bundle\ThemeBundle\Manager\ThemeManagerInterface;
 
 /**
@@ -49,7 +50,7 @@ class ThemeSubscriber extends AbstractEventSubscriber
     public static function getSubscribedEvents()
     {
         return parent::getSubscribedEvents() + [
-            ThemeForm::FORM_INIT_EVENT => 'onThemeFormInit',
+            ThemeFormBuilder::FORM_INIT_EVENT => 'onThemeFormInit',
         ];
     }
 

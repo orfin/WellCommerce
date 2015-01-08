@@ -19,7 +19,6 @@ use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
 /**
  * Class AvailabilityForm
  *
- * @package WellCommerce\Availability\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class AvailabilityFormBuilder extends AbstractFormBuilder implements FormBuilderInterface

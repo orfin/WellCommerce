@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Bundle\CmsBundle\Form;
 
-use WellCommerce\Bundle\CoreBundle\Form\AbstractForm;
+use WellCommerce\Bundle\CoreBundle\Form\Builder\AbstractFormBuilder;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\EntityToIdentifierTransformer;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
@@ -22,31 +22,31 @@ use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
  * @package WellCommerce\Bundle\CmsBundle\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PageForm extends AbstractForm implements FormInterface
+class PageForm extends AbstractFormBuilder implements FormBuilderInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormInterface $form)
     {
         $form = $builder->init($options);
 
-        $mainData = $form->addChild($builder->getElement('fieldset', [
+        $mainData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'main_data',
             'label' => $this->trans('fieldset.main.label')
         ]));
 
-        $languageData = $mainData->addChild($builder->getElement('language_fieldset', [
+        $languageData = $mainData->addChild($this->getElement('language_fieldset', [
             'name'  => 'translations',
             'label' => $this->trans('fieldset.translations.label')
         ]));
 
-        $name = $languageData->addChild($builder->getElement('text_field', [
+        $name = $languageData->addChild($this->getElement('text_field', [
             'name'  => 'name',
             'label' => $this->trans('page.name.label'),
         ]));
 
-        $languageData->addChild($builder->getElement('slug_field', [
+        $languageData->addChild($this->getElement('slug_field', [
             'name'            => 'slug',
             'label'           => $this->trans('page.slug.label'),
             'name_field'      => $name,
@@ -54,20 +54,20 @@ class PageForm extends AbstractForm implements FormInterface
             'translatable_id' => $this->getParam('id')
         ]));
 
-        $mainData->addChild($builder->getElement('checkbox', [
+        $mainData->addChild($this->getElement('checkbox', [
             'name'    => 'publish',
             'label'   => $this->trans('page.publish.label'),
             'comment' => $this->trans('page.publish.help'),
             'default' => 1
         ]));
 
-        $mainData->addChild($builder->getElement('text_field', [
+        $mainData->addChild($this->getElement('text_field', [
             'name'    => 'hierarchy',
             'label'   => $this->trans('page.hierarchy.label'),
             'default' => 0
         ]));
 
-        $mainData->addChild($builder->getElement('tree', [
+        $mainData->addChild($this->getElement('tree', [
             'name'        => 'parent',
             'label'       => $this->trans('page.parent.label'),
             'choosable'   => true,
@@ -79,23 +79,23 @@ class PageForm extends AbstractForm implements FormInterface
             'transformer' => new EntityToIdentifierTransformer($this->get('page.repository'))
         ]));
 
-        $contentData = $form->addChild($builder->getElement('fieldset', [
+        $contentData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'content_data',
             'label' => $this->trans('fieldset.content.label')
         ]));
 
-        $languageData = $contentData->addChild($builder->getElement('language_fieldset', [
+        $languageData = $contentData->addChild($this->getElement('language_fieldset', [
             'name'  => 'translations',
             'label' => $this->trans('fieldset.translations.label')
         ]));
 
-        $languageData->addChild($builder->getElement('rich_text_editor', [
+        $languageData->addChild($this->getElement('rich_text_editor', [
             'name'  => 'content',
             'label' => $this->trans('page.content.label'),
         ]));
 
-        $form->addFilter($builder->getFilter('trim'));
-        $form->addFilter($builder->getFilter('secure'));
+        $form->addFilter($this->getFilter('trim'));
+        $form->addFilter($this->getFilter('secure'));
 
         return $form;
     }

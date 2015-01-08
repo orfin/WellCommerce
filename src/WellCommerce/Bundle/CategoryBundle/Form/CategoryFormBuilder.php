@@ -20,7 +20,6 @@ use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
 /**
  * Class CategoryForm
  *
- * @package WellCommerce\Category\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class CategoryFormBuilder extends AbstractFormBuilder implements FormBuilderInterface

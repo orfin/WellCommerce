@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Bundle\IntlBundle\Form;
 
-use WellCommerce\Bundle\CoreBundle\Form\AbstractForm;
+use WellCommerce\Bundle\CoreBundle\Form\Builder\AbstractFormBuilder;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
 
@@ -21,29 +21,29 @@ use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
  * @package WellCommerce\Bundle\IntlBundle\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LocaleForm extends AbstractForm implements FormInterface
+class LocaleForm extends AbstractFormBuilder implements FormBuilderInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormInterface $form)
     {
         $form = $builder->init($options);
 
-        $requiredData = $form->addChild($builder->getElement('fieldset', [
+        $requiredData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'required_data',
             'label' => $this->trans('form.required_data')
         ]));
 
-        $requiredData->addChild($builder->getElement('select', [
+        $requiredData->addChild($this->getElement('select', [
             'name'    => 'code',
             'label'   => $this->trans('locale.code'),
             'options' => $this->get('locale.repository')->getLocaleNames()
         ]));
 
-        $form->addFilter($builder->getFilter('no_code'));
-        $form->addFilter($builder->getFilter('trim'));
-        $form->addFilter($builder->getFilter('secure'));
+        $form->addFilter($this->getFilter('no_code'));
+        $form->addFilter($this->getFilter('trim'));
+        $form->addFilter($this->getFilter('secure'));
 
         return $form;
     }

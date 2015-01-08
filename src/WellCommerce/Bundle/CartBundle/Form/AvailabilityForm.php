@@ -11,43 +11,39 @@
  */
 namespace WellCommerce\Bundle\CartBundle\Form;
 
-use WellCommerce\Bundle\CoreBundle\Form\AbstractForm;
+use WellCommerce\Bundle\CoreBundle\Form\Builder\AbstractFormBuilder;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
 
 /**
  * Class CartForm
  *
- * @package WellCommerce\Cart\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CartForm extends AbstractForm implements FormInterface
+class CartForm extends AbstractFormBuilder implements FormBuilderInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormInterface $form)
     {
-        $form = $builder->init($options);
-
-        $requiredData = $form->addChild($builder->getElement('fieldset', [
+        $requiredData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'required_data',
             'label' => $this->trans('form.required_data.label')
         ]));
 
-        $requiredData->addChild($builder->getElement('language_fieldset', [
+        $translations = $requiredData->addChild($this->getElement('language_fieldset', [
             'name'  => 'translations',
             'label' => $this->trans('form.required_data.language_data.label')
-        ]))
-            ->addChild($builder->getElement('text_field', [
-                'name'  => 'name',
-                'label' => $this->trans('availability.name'),
-            ]));
+        ]));
 
-        $form->addFilter($builder->getFilter('no_code'));
-        $form->addFilter($builder->getFilter('trim'));
-        $form->addFilter($builder->getFilter('secure'));
+        $translations->addChild($this->getElement('text_field', [
+            'name'  => 'name',
+            'label' => $this->trans('availability.name'),
+        ]));
 
-        return $form;
+        $form->addFilter($this->getFilter('no_code'));
+        $form->addFilter($this->getFilter('trim'));
+        $form->addFilter($this->getFilter('secure'));
     }
 }

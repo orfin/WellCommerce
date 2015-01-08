@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Bundle\IntlBundle\Form;
 
-use WellCommerce\Bundle\CoreBundle\Form\AbstractForm;
+use WellCommerce\Bundle\CoreBundle\Form\Builder\AbstractFormBuilder;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
 
@@ -21,38 +21,38 @@ use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
  * @package WellCommerce\Bundle\IntlBundle\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class DictionaryForm extends AbstractForm implements FormInterface
+class DictionaryForm extends AbstractFormBuilder implements FormBuilderInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormInterface $form)
     {
         $form = $builder->init($options);
 
-        $requiredData = $form->addChild($builder->getElement('fieldset', [
+        $requiredData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'required_data',
             'label' => $this->trans('form.required_data.label')
         ]));
 
-        $requiredData->addChild($builder->getElement('text_field', [
+        $requiredData->addChild($this->getElement('text_field', [
             'name'  => 'identifier',
             'label' => $this->trans('dictionary.identifier'),
         ]));
 
-        $languageData = $requiredData->addChild($builder->getElement('language_fieldset', [
+        $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
             'name'  => 'translations',
             'label' => $this->trans('form.required_data.language_data.label')
         ]));
 
-        $languageData->addChild($builder->getElement('text_field', [
+        $languageData->addChild($this->getElement('text_field', [
             'name'  => 'translation',
             'label' => $this->trans('dictionary.translation'),
         ]));
 
-        $form->addFilter($builder->getFilter('no_code'));
-        $form->addFilter($builder->getFilter('trim'));
-        $form->addFilter($builder->getFilter('secure'));
+        $form->addFilter($this->getFilter('no_code'));
+        $form->addFilter($this->getFilter('trim'));
+        $form->addFilter($this->getFilter('secure'));
 
         return $form;
     }

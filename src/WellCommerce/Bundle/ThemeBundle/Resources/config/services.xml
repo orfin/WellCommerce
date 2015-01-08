@@ -14,8 +14,8 @@
             <call method="setRepository">
                 <argument type="service" id="theme.repository"/>
             </call>
-            <call method="setForm">
-                <argument type="service" id="theme.form"/>
+            <call method="setFormBuilder">
+                <argument type="service" id="theme.form_builder"/>
             </call>
             <call method="setDataGrid">
                 <argument type="service" id="theme.datagrid"/>
@@ -55,20 +55,29 @@
             <argument>WellCommerceThemeBundle:Theme</argument>
         </service>
 
-        <service id="theme.datagrid" class="WellCommerce\Bundle\ThemeBundle\DataGrid\ThemeDataGrid">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <configurator service="theme.datagrid.configurator" method="configure" />
-        </service>
-
-        <service id="theme.datagrid.configurator" class="WellCommerce\Bundle\ThemeBundle\DataGrid\ThemeDataGridConfigurator">
-            <argument key="identifier">Contact</argument>
-            <argument type="service" id="datagrid_manager"/>
+        <service id="theme.dataset.query_builder" class="WellCommerce\Bundle\ThemeBundle\DataSet\ThemeDataSetQueryBuilder" public="false">
             <argument type="service" id="theme.repository"/>
         </service>
 
-        <service id="theme.form" class="WellCommerce\Bundle\ThemeBundle\Form\ThemeForm">
+        <service id="theme.dataset" class="WellCommerce\Bundle\ThemeBundle\DataSet\ThemeDataSet">
+            <argument key="identifier">theme</argument>
+            <argument type="service" id="theme.dataset.query_builder"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="theme.datagrid" class="WellCommerce\Bundle\ThemeBundle\DataGrid\ThemeDataGrid">
+            <argument key="identifier">theme</argument>
+            <argument type="service" id="theme.dataset"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="theme.form_builder" class="WellCommerce\Bundle\ThemeBundle\Form\ThemeFormBuilder">
+            <argument type="service" id="form.resolver.factory"/>
+            <argument type="service" id="form.handler"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

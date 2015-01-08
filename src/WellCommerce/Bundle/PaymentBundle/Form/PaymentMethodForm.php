@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Bundle\PaymentBundle\Form;
 
-use WellCommerce\Bundle\CoreBundle\Form\AbstractForm;
+use WellCommerce\Bundle\CoreBundle\Form\Builder\AbstractFormBuilder;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
@@ -22,26 +22,26 @@ use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
  * @package WellCommerce\Bundle\PaymentBundle\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PaymentMethodForm extends AbstractForm implements FormInterface
+class PaymentMethodForm extends AbstractFormBuilder implements FormBuilderInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormInterface $form)
     {
         $form = $builder->init($options);
 
-        $requiredData = $form->addChild($builder->getElement('fieldset', [
+        $requiredData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'required_data',
             'label' => $this->trans('Required data')
         ]));
 
-        $languageData = $requiredData->addChild($builder->getElement('language_fieldset', [
+        $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
             'name'  => 'translations',
             'label' => $this->trans('Translations')
         ]));
 
-        $languageData->addChild($builder->getElement('text_field', [
+        $languageData->addChild($this->getElement('text_field', [
             'name'  => 'name',
             'label' => $this->trans('Name'),
             'rules' => [
@@ -51,19 +51,19 @@ class PaymentMethodForm extends AbstractForm implements FormInterface
             ]
         ]));
 
-        $requiredData->addChild($builder->getElement('select', [
+        $requiredData->addChild($this->getElement('select', [
             'name'    => 'processor',
             'label'   => $this->trans('Processor'),
             'options' => [],
         ]));
 
-        $requiredData->addChild($builder->getElement('checkbox', [
+        $requiredData->addChild($this->getElement('checkbox', [
             'name'    => 'enabled',
             'label'   => $this->trans('Enabled'),
             'default' => 1
         ]));
 
-        $requiredData->addChild($builder->getElement('text_field', [
+        $requiredData->addChild($this->getElement('text_field', [
             'name'    => 'hierarchy',
             'label'   => $this->trans('Hierarchy'),
             'rules'   => [
@@ -74,9 +74,9 @@ class PaymentMethodForm extends AbstractForm implements FormInterface
             'default' => 0
         ]));
 
-        $form->addFilter($builder->getFilter('no_code'));
-        $form->addFilter($builder->getFilter('trim'));
-        $form->addFilter($builder->getFilter('secure'));
+        $form->addFilter($this->getFilter('no_code'));
+        $form->addFilter($this->getFilter('trim'));
+        $form->addFilter($this->getFilter('secure'));
 
         return $form;
     }

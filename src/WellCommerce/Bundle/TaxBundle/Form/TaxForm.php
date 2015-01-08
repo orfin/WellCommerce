@@ -12,7 +12,7 @@
 namespace WellCommerce\Bundle\TaxBundle\Form;
 
 use WellCommerce\Bundle\CoreBundle\Entity\BaseSubjectInterface;
-use WellCommerce\Bundle\CoreBundle\Form\AbstractForm;
+use WellCommerce\Bundle\CoreBundle\Form\Builder\AbstractFormBuilder;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
 
@@ -22,21 +22,21 @@ use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
  * @package WellCommerce\Tax\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class TaxForm extends AbstractForm implements FormInterface
+class TaxForm extends AbstractFormBuilder implements FormBuilderInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormInterface $form)
     {
         $form = $builder->init($options);
 
-        $requiredData = $form->addChild($builder->getElement('fieldset', [
+        $requiredData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'required_data',
             'label' => $this->trans('form.required_data.label')
         ]));
 
-        $requiredData->addChild($builder->getElement('text_field', [
+        $requiredData->addChild($this->getElement('text_field', [
             'name'    => 'value',
             'label'   => $this->trans('tax.required_data.value.label'),
             'filters' => [
@@ -44,19 +44,19 @@ class TaxForm extends AbstractForm implements FormInterface
             ]
         ]));
 
-        $languageData = $requiredData->addChild($builder->getElement('language_fieldset', [
+        $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
             'name'  => 'translations',
             'label' => $this->trans('form.required_data.language_data.label')
         ]));
 
-        $languageData->addChild($builder->getElement('text_field', [
+        $languageData->addChild($this->getElement('text_field', [
             'name'  => 'name',
             'label' => $this->trans('tax.language_data.name.label'),
         ]));
 
-        $form->addFilter($builder->getFilter('no_code'));
-        $form->addFilter($builder->getFilter('trim'));
-        $form->addFilter($builder->getFilter('secure'));
+        $form->addFilter($this->getFilter('no_code'));
+        $form->addFilter($this->getFilter('trim'));
+        $form->addFilter($this->getFilter('secure'));
 
         return $form;
     }

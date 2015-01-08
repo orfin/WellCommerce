@@ -25,11 +25,6 @@ use WellCommerce\Bundle\CoreBundle\Form\Rules;
 interface FormBuilderInterface
 {
     /**
-     * form.init event name
-     */
-    const FORM_INIT_EVENT = 'form.init';
-
-    /**
      * Creates the form, triggers init event and then populates form with values
      *
      * @param array $options
