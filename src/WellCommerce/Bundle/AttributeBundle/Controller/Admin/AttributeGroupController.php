@@ -26,13 +26,9 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 class AttributeGroupController extends AbstractAdminController
 {
     /**
-     * Attribute group index page. Will redirect to first group if found
-     *
-     * @param Request $request
-     *
-     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     * {@inheritdoc}
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
         $groups = $this->manager->getRepository()->findAll();
 
@@ -78,9 +74,11 @@ class AttributeGroupController extends AbstractAdminController
     {
         $groups   = $this->manager->getRepository()->findAll();
         $resource = $this->findOr404($request);
-        $form     = $this->getForm($resource, ['class' => 'attributeGroupEditor']);
+        $form     = $this->getForm($resource, [
+            'class' => 'attributeGroupEditor'
+        ]);
 
-        if ($form->handleRequest($request)->isValid()) {
+        if ($form->handleRequest()->isValid()) {
             $this->manager->updateResource($resource, $request);
             if ($form->isAction('continue')) {
                 return $this->manager->getRedirectHelper()->redirectToAction('edit', [

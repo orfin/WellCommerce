@@ -44,11 +44,9 @@ abstract class AbstractAdminController extends AbstractController implements Adm
     /**
      * Controller index action
      *
-     * @param Request $request
-     *
-     * @return array
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
         return [
             'datagrid' => $this->manager->getDataGrid()->getInstance()
