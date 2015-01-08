@@ -18,7 +18,6 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 /**
  * Interface LayoutBoxRepositoryInterface
  *
- * @package WellCommerce\Bundle\LayoutBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface LayoutBoxRepositoryInterface extends RepositoryInterface, DataSetAwareRepositoryInterface

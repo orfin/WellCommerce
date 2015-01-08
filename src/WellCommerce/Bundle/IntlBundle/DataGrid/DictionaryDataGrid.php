@@ -23,7 +23,6 @@ use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
 /**
  * Class DictionaryDataGrid
  *
- * @package WellCommerce\Bundle\IntlBundle\DataGrid
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class DictionaryDataGrid extends AbstractDataGrid implements DataGridInterface
@@ -35,7 +34,7 @@ class DictionaryDataGrid extends AbstractDataGrid implements DataGridInterface
     {
         $collection->add(new Column([
             'id'         => 'id',
-            'caption'    => $this->trans('dictionary.id'),
+            'caption'    => $this->trans('dictionary.id.label'),
             'sorting'    => new Sorting([
                 'default_order' => ColumnInterface::SORT_DIR_DESC
             ]),
@@ -50,17 +49,17 @@ class DictionaryDataGrid extends AbstractDataGrid implements DataGridInterface
 
         $collection->add(new Column([
             'id'      => 'identifier',
-            'caption' => $this->trans('dictionary.identifier'),
+            'caption' => $this->trans('dictionary.identifier.label'),
         ]));
 
         $collection->add(new Column([
             'id'      => 'translation',
-            'caption' => $this->trans('dictionary.translation'),
+            'caption' => $this->trans('dictionary.translation.label'),
         ]));
 
         $collection->add(new Column([
             'id'      => 'locale',
-            'caption' => $this->trans('dictionary.locale'),
+            'caption' => $this->trans('dictionary.locale.label'),
         ]));
     }
 }

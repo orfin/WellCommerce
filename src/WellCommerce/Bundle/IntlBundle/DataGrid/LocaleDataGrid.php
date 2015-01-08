@@ -23,7 +23,6 @@ use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
 /**
  * Class LocaleDataGrid
  *
- * @package WellCommerce\Bundle\IntlBundle\DataGrid
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class LocaleDataGrid extends AbstractDataGrid implements DataGridInterface

@@ -33,7 +33,7 @@ class LayoutBoxDataGrid extends AbstractDataGrid implements DataGridInterface
     {
         $collection->add(new Column([
             'id'         => 'id',
-            'caption'    => $this->trans('Id'),
+            'caption'    => $this->trans('layout_box.id.label'),
             'sorting'    => new Sorting([
                 'default_order' => Sorting::SORT_DIR_DESC
             ]),
@@ -48,35 +48,17 @@ class LayoutBoxDataGrid extends AbstractDataGrid implements DataGridInterface
 
         $collection->add(new Column([
             'id'         => 'name',
-            'caption'    => $this->trans('Name'),
-            'appearance' => new Appearance([
-                'width' => 70,
-            ]),
-            'filter'     => new Filter([
-                'type' => Filter::FILTER_INPUT
-            ])
+            'caption'    => $this->trans('layout_box.name.label'),
         ]));
 
         $collection->add(new Column([
             'id'         => 'identifier',
-            'caption'    => $this->trans('Identifier'),
-            'appearance' => new Appearance([
-                'width' => 70,
-            ]),
-            'filter'     => new Filter([
-                'type' => Filter::FILTER_INPUT
-            ])
+            'caption'    => $this->trans('layout_box.identifier.label'),
         ]));
 
         $collection->add(new Column([
             'id'         => 'boxType',
-            'caption'    => $this->trans('Type'),
-            'appearance' => new Appearance([
-                'width' => 70,
-            ]),
-            'filter'     => new Filter([
-                'type' => Filter::FILTER_INPUT
-            ])
+            'caption'    => $this->trans('layout_box.type.label'),
         ]));
     }
 }

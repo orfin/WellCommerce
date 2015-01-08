@@ -17,7 +17,6 @@ use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxCollection;
 /**
  * Class LayoutBoxRepository
  *
- * @package WellCommerce\Bundle\LayoutBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class LayoutBoxRepository extends AbstractEntityRepository implements LayoutBoxRepositoryInterface

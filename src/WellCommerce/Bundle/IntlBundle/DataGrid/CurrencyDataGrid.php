@@ -35,7 +35,7 @@ class CurrencyDataGrid extends AbstractDataGrid implements DataGridInterface
     {
         $collection->add(new Column([
             'id'         => 'id',
-            'caption'    => $this->trans('currency.id'),
+            'caption'    => $this->trans('currency.id.label'),
             'sorting'    => new Sorting([
                 'default_order' => ColumnInterface::SORT_DIR_DESC
             ]),
@@ -50,7 +50,7 @@ class CurrencyDataGrid extends AbstractDataGrid implements DataGridInterface
 
         $collection->add(new Column([
             'id'      => 'code',
-            'caption' => $this->trans('currency.code'),
+            'caption' => $this->trans('currency.code.label'),
         ]));
     }
 }

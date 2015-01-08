@@ -13,23 +13,20 @@
 namespace WellCommerce\Bundle\IntlBundle\Controller\Front;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
 
 /**
  * Class LocaleController
  *
- * @package WellCommerce\Bundle\IntlBundle\Controller\Front
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class LocaleController extends AbstractFrontController implements FrontControllerInterface
 {
     /**
-     * Switch current language
+     * Redirects to home page
      *
-     * @param Request $request
-     * @param         $locale
+     * @return RedirectResponse
      */
     public function switchAction()
     {

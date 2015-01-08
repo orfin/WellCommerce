@@ -17,7 +17,6 @@ use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
 /**
  * Class LayoutBoxManager
  *
- * @package WellCommerce\Bundle\LayoutBundle\Manager\Admin
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class LayoutBoxManager extends AbstractAdminManager

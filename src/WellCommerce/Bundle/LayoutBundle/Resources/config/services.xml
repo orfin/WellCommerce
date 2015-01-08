@@ -14,8 +14,8 @@
             <call method="setRepository">
                 <argument type="service" id="layout_box.repository"/>
             </call>
-            <call method="setForm">
-                <argument type="service" id="layout_box.form"/>
+            <call method="setFormBuilder">
+                <argument type="service" id="layout_box.form_builder"/>
             </call>
             <call method="setDataGrid">
                 <argument type="service" id="layout_box.datagrid"/>
@@ -53,7 +53,9 @@
             </call>
         </service>
 
-        <service id="layout_box.form" class="WellCommerce\Bundle\LayoutBundle\Form\LayoutBoxForm">
+        <service id="layout_box.form_builder" class="WellCommerce\Bundle\LayoutBundle\Form\LayoutBoxFormBuilder">
+            <argument type="service" id="form.resolver.factory"/>
+            <argument type="service" id="form.handler"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

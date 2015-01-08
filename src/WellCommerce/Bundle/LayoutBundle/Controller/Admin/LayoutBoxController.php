@@ -17,7 +17,6 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 /**
  * Class LayoutBoxController
  *
- * @package WellCommerce\Bundle\LayoutBundle\Controller\Admin
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()

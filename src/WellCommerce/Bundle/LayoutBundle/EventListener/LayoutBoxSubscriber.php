@@ -16,7 +16,7 @@ use WellCommerce\Bundle\CoreBundle\Event\ResourceEvent;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 use WellCommerce\Bundle\CoreBundle\Form\Event\FormEvent;
 use WellCommerce\Bundle\LayoutBundle\Configurator\LayoutBoxConfiguratorInterface;
-use WellCommerce\Bundle\LayoutBundle\Form\LayoutBoxForm;
+use WellCommerce\Bundle\LayoutBundle\Form\LayoutBoxFormBuilder;
 
 /**
  * Class LayoutBoxSubscriber
@@ -28,8 +28,8 @@ class LayoutBoxSubscriber extends AbstractEventSubscriber
     public static function getSubscribedEvents()
     {
         return parent::getSubscribedEvents() + [
-            LayoutBoxForm::FORM_INIT_EVENT => 'onLayoutBoxFormInit',
-            'layout_box.pre_update'        => 'onLayoutBoxResourceSave',
+            LayoutBoxFormBuilder::FORM_INIT_EVENT => 'onLayoutBoxFormInit',
+            'layout_box.pre_update'               => 'onLayoutBoxResourceSave',
         ];
     }
 
