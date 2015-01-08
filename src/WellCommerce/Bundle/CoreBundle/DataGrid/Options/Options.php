@@ -55,7 +55,6 @@ class Options implements OptionsInterface
             'event_handlers',
             'row_actions',
             'filters',
-            'routes',
         ]);
 
         $resolver->setDefaults([
@@ -64,7 +63,6 @@ class Options implements OptionsInterface
             'event_handlers' => new EventHandlers(),
             'row_actions'    => new RowActions(),
             'filters'        => new Filters(),
-            'routes'         => new Routes(),
         ]);
 
         $resolver->setAllowedTypes([
@@ -73,7 +71,6 @@ class Options implements OptionsInterface
             'event_handlers' => 'WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\EventHandlers',
             'row_actions'    => 'WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\RowActions',
             'filters'        => 'WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\Filters',
-            'routes'         => 'WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\Routes',
         ]);
     }
 
@@ -171,21 +168,5 @@ class Options implements OptionsInterface
     public function getFilters()
     {
         return $this->options['filters'];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setRoutes(Routes $routes)
-    {
-        $this->options['routes'] = $routes;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getRoutes()
-    {
-        return $this->options['routes'];
     }
 }

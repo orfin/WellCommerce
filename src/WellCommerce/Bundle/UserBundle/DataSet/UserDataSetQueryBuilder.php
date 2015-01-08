@@ -18,7 +18,6 @@ use WellCommerce\Bundle\CoreBundle\DataSet\QueryBuilder\QueryBuilderInterface;
 /**
  * Class UserDataSetQueryBuilder
  *
- * @package WellCommerce\Bundle\UserBundle\DataSet
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class UserDataSetQueryBuilder extends AbstractDataSetQueryBuilder implements QueryBuilderInterface

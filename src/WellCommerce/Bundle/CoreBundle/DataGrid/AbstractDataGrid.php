@@ -29,7 +29,6 @@ use WellCommerce\Bundle\CoreBundle\DataSet\Request\DataSetRequest;
 /**
  * Class AbstractDataGrid
  *
- * @package WellCommerce\Bundle\CoreBundle\DataGrid
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 abstract class AbstractDataGrid extends ContainerAware

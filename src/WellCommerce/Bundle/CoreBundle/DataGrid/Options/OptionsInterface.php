@@ -17,7 +17,6 @@ use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\Appearance;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\EventHandlers;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\Filters;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\Mechanics;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\Routes;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\RowActions;
 
 /**
@@ -131,20 +130,4 @@ interface OptionsInterface
      * @return Filters
      */
     public function getFilters();
-
-    /**
-     * Sets routes for current DataGrid
-     *
-     * @param Routes $routes
-     *
-     * @return mixed
-     */
-    public function setRoutes(Routes $routes);
-
-    /**
-     * Returns routes for current DataGrid
-     *
-     * @return mixed
-     */
-    public function getRoutes();
 }

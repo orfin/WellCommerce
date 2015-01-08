@@ -82,7 +82,6 @@
             </call>
         </service>
 
-
         <service id="product.subscriber" class="WellCommerce\Bundle\ProductBundle\EventListener\ProductSubscriber">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
