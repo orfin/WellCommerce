@@ -33,11 +33,6 @@ class CategoryProvider implements CategoryProviderInterface
     protected $dataset;
 
     /**
-     * @var null
-     */
-    protected $tree = null;
-
-    /**
      * Constructor
      *
      * @param CategoryDataSet $dataset
@@ -47,23 +42,55 @@ class CategoryProvider implements CategoryProviderInterface
         $this->dataset = $dataset;
     }
 
+    /**
+     * Returns categories tree
+     *
+     * @param int    $limit
+     * @param string $orderBy
+     * @param string $orderDir
+     *
+     * @return array
+     */
     public function getCategoriesTree(
         $limit = CategoryProviderInterface::CATEGORY_TREE_LIMIT,
         $orderBy = CategoryProviderInterface::CATEGORY_ORDER_BY,
         $orderDir = CategoryProviderInterface::CATEGORY_ORDER_DIR
     ) {
-        if (null === $this->tree) {
-            $results = $this->dataset->getResults(new DataSetRequest([
-                'limit'    => $limit,
-                'orderBy'  => $orderBy,
-                'orderDir' => $orderDir,
-            ]));
+        return $this->getTree([
+            'limit'    => $limit,
+            'orderBy'  => $orderBy,
+            'orderDir' => $orderDir,
+        ]);
+    }
 
-            $treeBuilder = new CategoryTreeBuilder($results['rows']);
-            $this->tree  = $treeBuilder->getTree();
-        }
+    /**
+     * Returns built tree structure
+     *
+     * @param array $parameters
+     *
+     * @return array
+     */
+    private function getTree($parameters)
+    {
+        $rows        = $this->getDataSetRows($parameters);
+        $treeBuilder = new CategoryTreeBuilder($rows);
 
-        return $this->tree;
+        return $treeBuilder->getTree();
+    }
+
+    /**
+     * Makes dataset request and return its rows
+     *
+     * @param array $parameters
+     *
+     * @return array
+     */
+    private function getDataSetRows($parameters)
+    {
+        $request = new DataSetRequest($parameters);
+        $results = $this->dataset->getResults(new DataSetRequest($request));
+
+        return $results['rows'];
     }
 
     public function setCurrentResource($resource)
