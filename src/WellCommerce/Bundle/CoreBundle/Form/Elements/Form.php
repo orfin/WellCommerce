@@ -39,12 +39,6 @@ class Form extends AbstractContainer implements FormInterface
     {
         parent::configureOptions($resolver);
 
-        $resolver->setDefined([
-            'action',
-            'method',
-            'tabs',
-        ]);
-
         $resolver->setDefaults([
             'label'  => '',
             'action' => '',
@@ -110,16 +104,19 @@ class Form extends AbstractContainer implements FormInterface
     /**
      * {@inheritdoc}
      */
-    public function prepareAttributes()
+    public function prepareAttributesCollection(AttributeCollection $collection)
     {
-        return [
-            'sFormName' => $this->getName(),
-            'sAction'   => $this->getOption('action'),
-            'sMethod'   => $this->getOption('method'),
-            'sClass'    => $this->getOption('class'),
-            'iTabs'     => $this->getOption('tabs'),
-            'oValues'   => $this->getValue(),
-            'oErrors'   => [],
-        ];
+        parent::prepareAttributesCollection($collection);
+
+        $collection->add(new Attribute('sFormName', $this->getName()));
+        $collection->add(new Attribute('sAction', $this->getOption('action')));
+        $collection->add(new Attribute('sMethod', $this->getOption('method')));
+        $collection->add(new Attribute('sClass', $this->getOption('class')));
+        $collection->add(new Attribute('iTabs', $this->getOption('tabs'), Attribute::TYPE_INTEGER));
+        $collection->add(new Attribute('oValues', $this->getValue(), Attribute::TYPE_ARRAY));
+        $collection->add(new Attribute('oErrors', [], Attribute::TYPE_ARRAY));
+
+        $collection->remove('sName');
+        $collection->remove('fType');
     }
 }

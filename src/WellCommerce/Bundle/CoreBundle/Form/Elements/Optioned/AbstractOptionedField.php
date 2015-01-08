@@ -14,6 +14,8 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements\Optioned;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\AbstractField;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\Attribute;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\AttributeCollection;
 
 /**
  * Class AbstractOptionedField
@@ -90,10 +92,12 @@ abstract class AbstractOptionedField extends AbstractField
         return $options;
     }
 
-    public function prepareAttributes()
+    /**
+     * {@inheritdoc}
+     */
+    public function prepareAttributesCollection(AttributeCollection $collection)
     {
-        return parent::prepareAttributes() + [
-            'aoOptions' => $this->prepareOptions()
-        ];
+        parent::prepareAttributesCollection($collection);
+        $collection->add(new Attribute('aoOptions', $this->prepareOptions(), Attribute::TYPE_ARRAY));
     }
 }

@@ -15,6 +15,8 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements\Editor;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\AbstractField;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\Attribute;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\AttributeCollection;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 
 /**
@@ -82,16 +84,15 @@ class RangeEditor extends AbstractField implements ElementInterface
     /**
      * {@inheritdoc}
      */
-    public function prepareAttributes()
+    public function prepareAttributesCollection(AttributeCollection $collection)
     {
-        return parent::prepareAttributes() + [
-            'sSuffix'         => $this->getOption('suffix'),
-            'iPricePrecision' => $this->getOption('price_precision'),
-            'iRangePrecision' => $this->getOption('range_precision'),
-            'sRangeSuffix'    => $this->getOption('range_suffix'),
-            'asPrefixes'      => $this->getOption('prefixes'),
-            'bAllowVat'       => $this->getOption('allow_vat'),
-            'aoVatValues'     => $this->getOption('vat_values'),
-        ];
+        parent::prepareAttributesCollection($collection);
+        $collection->add(new Attribute('sSuffix', $this->getOption('suffix')));
+        $collection->add(new Attribute('iPricePrecision', $this->getOption('price_precision'), Attribute::TYPE_INTEGER));
+        $collection->add(new Attribute('iRangePrecision', $this->getOption('range_precision'), Attribute::TYPE_INTEGER));
+        $collection->add(new Attribute('sRangeSuffix', $this->getOption('range_suffix')));
+        $collection->add(new Attribute('asPrefixes', $this->getOption('prefixes'), Attribute::TYPE_ARRAY));
+        $collection->add(new Attribute('bAllowVat', $this->getOption('allow_vat'), Attribute::TYPE_BOOLEAN));
+        $collection->add(new Attribute('aoVatValues', $this->getOption('vat_values'), Attribute::TYPE_ARRAY));
     }
 }

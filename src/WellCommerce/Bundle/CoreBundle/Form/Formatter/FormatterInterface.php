@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Formatter;
 
+use WellCommerce\Bundle\CoreBundle\Form\Elements\AttributeCollection;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 
 /**
@@ -40,10 +41,11 @@ interface FormatterInterface
     public function formatAttributes(array $attributes = []);
 
     /**
-     * Formats elements children
+     * Formats attributes collection
      *
-     * @param array $children
-     * @param array $attributes
+     * @param AttributeCollection $collection
+     *
+     * @return array
      */
-    public function formatChildren(array $children = [], array &$attributes);
+    public function formatAttributesCollection(AttributeCollection $collection);
 }

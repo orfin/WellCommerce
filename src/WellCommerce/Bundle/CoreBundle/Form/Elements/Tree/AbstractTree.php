@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements\Tree;
 
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\AbstractField;
 
 /**
@@ -22,11 +21,5 @@ use WellCommerce\Bundle\CoreBundle\Form\Elements\AbstractField;
  */
 abstract class AbstractTree extends AbstractField
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        parent::configureOptions($resolver);
-    }
+
 }

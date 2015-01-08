@@ -11,10 +11,11 @@
  */
 namespace WellCommerce\Bundle\CoreBundle\Form;
 
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
 use WellCommerce\Bundle\CoreBundle\Form\DataMapper\FormDataMapperInterface;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\AttributeCollection;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementAttributeCollection;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Filters\FilterInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Handler\FormHandlerInterface;
@@ -28,6 +29,15 @@ use WellCommerce\Bundle\CoreBundle\Form\Validator\FormValidatorInterface;
  */
 abstract class AbstractForm extends AbstractContainer
 {
+    public function prepareAttributesCollection(AttributeCollection $collection){
+
+    }
+
+    public function getOptionAsFunction($option)
+    {
+
+    }
+
     public function getContainers()
     {
 

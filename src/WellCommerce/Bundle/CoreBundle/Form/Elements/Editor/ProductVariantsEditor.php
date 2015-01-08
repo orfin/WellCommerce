@@ -15,6 +15,8 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements\Editor;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\AbstractField;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\Attribute;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\AttributeCollection;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 
 /**
@@ -92,27 +94,22 @@ class ProductVariantsEditor extends AbstractField implements ElementInterface
     /**
      * {@inheritdoc}
      */
-    public function prepareAttributes()
+    public function prepareAttributesCollection(AttributeCollection $collection)
     {
-        return parent::prepareAttributes() + [
-            'sGetGroupsRoute'           => $this->getOption('get_groups_route'),
-            'sGetAttributesRoute'       => $this->getOption('get_attributes_route'),
-            'sGetAttributesValuesRoute' => $this->getOption('get_attributes_values_route'),
-            'sAddAttributeRoute'        => $this->getOption('add_attribute_route'),
-            'sAddAttributeValueRoute'   => $this->getOption('add_attribute_value_route'),
-            'sCategoryField'            => $this->getOption('category_field'),
-            'sPriceField'               => $this->getOption('price_field'),
-            'bAllowGenerate'            => $this->getOption('allow_generate'),
-            'sVatField'                 => $this->getOption('vat_field'),
-            'aoVatValues'               => $this->getOption('vat_values'),
-            'aoPhotos'                  => $this->getOption('photos'),
-            'aoAvailability'            => $this->getOption('availability'),
-            'aoSuffixes'                => $this->getOption('suffixes'),
-            'sSet'                      => $this->getOption('set'),
-        ];
-
-        print_r($attributes);
-        die();
-
+        parent::prepareAttributesCollection($collection);
+        $collection->add(new Attribute('sGetGroupsRoute', $this->getOption('get_groups_route')));
+        $collection->add(new Attribute('sGetAttributesRoute', $this->getOption('get_attributes_route')));
+        $collection->add(new Attribute('sGetAttributesValuesRoute', $this->getOption('get_attributes_values_route')));
+        $collection->add(new Attribute('sAddAttributeRoute', $this->getOption('add_attribute_route')));
+        $collection->add(new Attribute('sAddAttributeValueRoute', $this->getOption('add_attribute_value_route')));
+        $collection->add(new Attribute('sCategoryField', $this->getOption('category_field')));
+        $collection->add(new Attribute('sPriceField', $this->getOption('price_field')));
+        $collection->add(new Attribute('bAllowGenerate', $this->getOption('allow_generate'), Attribute::TYPE_BOOLEAN));
+        $collection->add(new Attribute('sVatField', $this->getOption('vat_field')));
+        $collection->add(new Attribute('aoVatValues', $this->getOption('vat_values'), Attribute::TYPE_ARRAY));
+        $collection->add(new Attribute('aoPhotos', $this->getOption('photos'), Attribute::TYPE_ARRAY));
+        $collection->add(new Attribute('aoAvailability', $this->getOption('availability'), Attribute::TYPE_ARRAY));
+        $collection->add(new Attribute('aoSuffixes', $this->getOption('suffixes'), Attribute::TYPE_ARRAY));
+        $collection->add(new Attribute('sSet', $this->getOption('set')));
     }
 }

@@ -13,6 +13,8 @@
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements\Fixed;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\Attribute;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\AttributeCollection;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 
 /**
@@ -49,10 +51,9 @@ class StaticText extends AbstractFixedField implements ElementInterface
     /**
      * {@inheritdoc}
      */
-    public function prepareAttributes()
+    public function prepareAttributesCollection(AttributeCollection $collection)
     {
-        return parent::prepareAttributes() + [
-            'sText'          => $this->getOption('text')
-        ];
+        parent::prepareAttributesCollection($collection);
+        $collection->add(new Attribute('sText', $this->getOption('text')));
     }
 }

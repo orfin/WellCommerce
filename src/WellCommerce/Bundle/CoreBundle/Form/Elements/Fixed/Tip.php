@@ -14,6 +14,8 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements\Fixed;
 
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\Attribute;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\AttributeCollection;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 
 /**
@@ -77,14 +79,13 @@ class Tip extends AbstractFixedField implements ElementInterface
     /**
      * {@inheritdoc}
      */
-    public function prepareAttributes()
+    public function prepareAttributesCollection(AttributeCollection $collection)
     {
-        return parent::prepareAttributes() + [
-            'sTip'          => $this->getOption('tip'),
-            'sDirection'    => $this->getOption('direction'),
-            'sShortTip'     => $this->getOption('short_tip'),
-            'bRetractable'  => $this->getOption('retractable'),
-            'sDefaultState' => $this->getOption('default_state'),
-        ];
+        parent::prepareAttributesCollection($collection);
+        $collection->add(new Attribute('sTip', $this->getOption('tip')));
+        $collection->add(new Attribute('sDirection', $this->getOption('direction')));
+        $collection->add(new Attribute('sShortTip', $this->getOption('short_tip')));
+        $collection->add(new Attribute('sDefaultState', $this->getOption('default_state')));
+        $collection->add(new Attribute('bRetractable', $this->getOption('retractable'), Attribute::TYPE_BOOLEAN));
     }
 }

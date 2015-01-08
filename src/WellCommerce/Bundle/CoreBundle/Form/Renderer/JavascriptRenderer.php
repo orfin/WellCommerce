@@ -12,6 +12,9 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Renderer;
 
+use Doctrine\Common\Util\ClassUtils;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\Attribute;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\AttributeCollection;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementCollection;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
@@ -42,14 +45,30 @@ class JavascriptRenderer extends AbstractFormRenderer implements FormRendererInt
      */
     protected function renderElement(ElementInterface $element)
     {
-        $attributes = $this->formatter->formatElement($element);
         $children   = $element->getChildren();
+        $collection = $this->getAttributesCollection($element);
 
         if ($children->count()) {
-            $this->formatter->formatChildren($this->renderChildren($children), $attributes);
+            $attribute = new Attribute('aoFields', $this->renderChildren($children), Attribute::TYPE_ARRAY);
+            $collection->add($attribute);
         }
 
-        return $attributes;
+        return $this->formatter->formatAttributesCollection($collection);
+    }
+
+    /**
+     * Returns attributes collection for element
+     *
+     * @param ElementInterface $element
+     *
+     * @return AttributeCollection
+     */
+    protected function getAttributesCollection(ElementInterface $element)
+    {
+        $collection = new AttributeCollection();
+        $element->prepareAttributesCollection($collection);
+
+        return $collection;
     }
 
     /**
@@ -63,9 +82,9 @@ class JavascriptRenderer extends AbstractFormRenderer implements FormRendererInt
     {
         $attributes = [];
 
-        foreach ($children->all() as $child) {
+        $children->forAll(function (ElementInterface $child) use (&$attributes) {
             $attributes[] = $this->renderElement($child);
-        }
+        });
 
         return $attributes;
     }

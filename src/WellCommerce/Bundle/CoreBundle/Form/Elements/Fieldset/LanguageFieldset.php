@@ -14,6 +14,8 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements\Fieldset;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PropertyAccess\PropertyPath;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\Attribute;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\AttributeCollection;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 
 /**
@@ -88,13 +90,18 @@ class LanguageFieldset extends NestedFieldset implements ElementInterface
         ];
     }
 
-    public function prepareAttributes()
+    /**
+     * {@inheritdoc}
+     */
+    public function prepareAttributesCollection(AttributeCollection $collection)
     {
-        return parent::prepareAttributes() + [
-            'aoLanguages' => $this->prepareLanguages()
-        ];
+        parent::prepareAttributesCollection($collection);
+        $collection->add(new Attribute('aoLanguages', $this->prepareLanguages(), Attribute::TYPE_ARRAY));
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setValue($data)
     {
         $accessor = $this->getPropertyAccessor();
@@ -106,6 +113,13 @@ class LanguageFieldset extends NestedFieldset implements ElementInterface
         });
     }
 
+    /**
+     * Flips language repetitions
+     *
+     * @param array $data
+     *
+     * @return array
+     */
     protected function convertRepetitionsData($data)
     {
         $values = [];
@@ -131,6 +145,14 @@ class LanguageFieldset extends NestedFieldset implements ElementInterface
         return $values;
     }
 
+    /**
+     * Returns child values
+     *
+     * @param ElementInterface $child
+     * @param string           $locale
+     *
+     * @return mixed|null
+     */
     protected function getChildValue(ElementInterface $child, $locale)
     {
         $accessor = $this->getPropertyAccessor();

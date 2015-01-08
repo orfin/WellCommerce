@@ -14,6 +14,8 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements\Editor;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\AbstractField;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\Attribute;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\AttributeCollection;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 
 /**
@@ -46,10 +48,9 @@ class LayoutBoxesList extends AbstractField implements ElementInterface
     /**
      * {@inheritdoc}
      */
-    public function prepareAttributes()
+    public function prepareAttributesCollection(AttributeCollection $collection)
     {
-        return parent::prepareAttributes() + [
-            'aoBoxes'                     => $this->getOption('boxes')
-        ];
+        parent::prepareAttributesCollection($collection);
+        $collection->add(new Attribute('aoBoxes', $this->getOption('boxes'), Attribute::TYPE_ARRAY));
     }
 }

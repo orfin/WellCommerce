@@ -14,6 +14,8 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements\Upload;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\AbstractField;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\Attribute;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\AttributeCollection;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 
 /**
@@ -64,20 +66,16 @@ class File extends AbstractField implements ElementInterface
     /**
      * {@inheritdoc}
      */
-    public function prepareAttributes()
+    public function prepareAttributesCollection(AttributeCollection $collection)
     {
-        return parent::prepareAttributes() + [
-            'sUploadUrl'            => $this->getOption('upload_url'),
-            'sSessionName'          => $this->getOption('session_name'),
-            'sSessionId'            => $this->getOption('session_id'),
-            'iLimit'                => $this->getOption('limit'),
-            'asFileTypes'           => $this->getOption('file_types'),
-            'sFileTypesDescription' => $this->getOption('file_types_description'),
-            'sLoadRoute'            => $this->getOption('load_route'),
-            'oRepeat'               => [
-                'iMin' => $this->options['repeat_min'],
-                'iMax' => $this->options['repeat_max'],
-            ]
-        ];
+        parent::prepareAttributesCollection($collection);
+        $collection->add(new Attribute('sUploadUrl', $this->getOption('upload_url')));
+        $collection->add(new Attribute('sSessionName', $this->getOption('session_name')));
+        $collection->add(new Attribute('sSessionId', $this->getOption('session_id')));
+        $collection->add(new Attribute('iLimit', $this->getOption('limit'), Attribute::TYPE_INTEGER));
+        $collection->add(new Attribute('asFileTypes', $this->getOption('file_types'), Attribute::TYPE_ARRAY));
+        $collection->add(new Attribute('sFileTypesDescription', $this->getOption('file_types_description')));
+        $collection->add(new Attribute('sLoadRoute', $this->getOption('load_route')));
+        $collection->add(new Attribute('oRepeat', $this->prepareRepetitions(), Attribute::TYPE_ARRAY));
     }
 }

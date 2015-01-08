@@ -24,7 +24,6 @@ use WellCommerce\Bundle\CoreBundle\Form\Filters\FilterInterface;
  */
 abstract class AbstractFixedField extends AbstractField implements ElementInterface
 {
-
     /**
      * {@inheritdoc}
      */

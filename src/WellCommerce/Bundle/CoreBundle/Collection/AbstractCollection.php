@@ -73,6 +73,18 @@ abstract class AbstractCollection implements \Countable, \IteratorAggregate
         return $this->items[$key];
     }
 
+    /**
+     * Removes an item from collection
+     *
+     * @param string $key
+     */
+    public function remove($key)
+    {
+        if (array_key_exists($key, $this->items)) {
+            unset($this->items[$key]);
+        }
+    }
+
     public function forAll(\Closure $callable)
     {
         foreach ($this->items as $key => $item) {

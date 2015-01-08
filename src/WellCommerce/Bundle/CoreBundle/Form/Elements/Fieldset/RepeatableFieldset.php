@@ -13,6 +13,8 @@
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements\Fieldset;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\Attribute;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\AttributeCollection;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 
 /**
@@ -40,13 +42,12 @@ class RepeatableFieldset extends AbstractFieldset implements ElementInterface
         ]);
     }
 
-    public function prepareAttributes()
+    /**
+     * {@inheritdoc}
+     */
+    public function prepareAttributesCollection(AttributeCollection $collection)
     {
-        return parent::prepareAttributes() + [
-            'oRepeat' => [
-                'iMin' => $this->options['repeat_min'],
-                'iMax' => $this->options['repeat_max'],
-            ]
-        ];
+        parent::prepareAttributesCollection($collection);
+        $collection->add(new Attribute('oRepeat', $this->prepareRepetitions(), Attribute::TYPE_ARRAY));
     }
 }

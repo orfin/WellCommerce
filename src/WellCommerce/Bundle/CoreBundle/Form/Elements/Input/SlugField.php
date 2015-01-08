@@ -14,6 +14,8 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements\Input;
 
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\Attribute;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\AttributeCollection;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 
 /**
@@ -57,12 +59,11 @@ class SlugField extends TextField implements ElementInterface
     /**
      * {@inheritdoc}
      */
-    public function prepareAttributes()
+    public function prepareAttributesCollection(AttributeCollection $collection)
     {
-        return parent::prepareAttributes() + [
-            'sTranslatableId'          => $this->getOption('translatable_id'),
-            'sNameField'    => $this->getOption('name_field'),
-            'sGenerateRoute'     => $this->getOption('generate_route'),
-        ];
+        parent::prepareAttributesCollection($collection);
+        $collection->add(new Attribute('sTranslatableId', $this->getOption('translatable_id')));
+        $collection->add(new Attribute('sNameField', $this->getOption('name_field')));
+        $collection->add(new Attribute('sGenerateRoute', $this->getOption('generate_route')));
     }
 }

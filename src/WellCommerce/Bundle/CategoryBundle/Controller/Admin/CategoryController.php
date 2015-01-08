@@ -59,6 +59,9 @@ class CategoryController extends AbstractAdminController
         $resource = $this->findOr404($request);
         $form     = $this->getForm($resource);
 
+        $this->get('form.renderer.javascript')->renderForm($form);
+        die();
+
         if ($form->handleRequest()->isValid()) {
             $this->manager->updateResource($resource, $request);
             if ($form->isAction('continue')) {

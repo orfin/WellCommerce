@@ -13,8 +13,9 @@
 namespace WellCommerce\Bundle\CoreBundle\Form\Formatter;
 
 use Doctrine\Common\Util\ClassUtils;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\Attribute;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\AttributeCollection;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
-use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
 use Zend\Json\Expr;
 use Zend\Json\Json;
 
@@ -41,80 +42,40 @@ class JavascriptFormatter implements FormatterInterface
      */
     public function formatElement(ElementInterface $element)
     {
-        $attributes = $element->prepareAttributes();
+        $collection = new AttributeCollection();
+        $element->prepareAttributesCollection($collection);
 
-        if (!$element instanceof FormInterface) {
-            $this->formatFunctionType($element, $attributes);
-        }
-
-        return $attributes;
+        return $this->formatAttributesCollection($collection);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function formatChildren(array $children = [], array &$attributes)
+    public function formatAttributesCollection(AttributeCollection $collection)
     {
-        $attributes['aoFields'] = $children;
+        $attributes = [];
+        $collection->forAll(function (Attribute $attribute) use (&$attributes) {
+            $attributes[$attribute->getName()] = $this->formatAttributeValue($attribute);
+        });
+
+        return $attributes;
     }
 
     /**
-     * Formats javascript function type
+     * Formats attributes value
      *
-     * @param ElementInterface $element
-     * @param array            $attributes
+     * @param Attribute $attribute
+     *
+     * @return mixed|Expr
      */
-    protected function formatFunctionType(ElementInterface $element, array &$attributes)
+    protected function formatAttributeValue(Attribute $attribute)
     {
-        $attributes['fType'] = new Expr($this->getJavascriptNodeName($element));
+        $value = $attribute->getValue();
+
+        if ($attribute->getType() === Attribute::TYPE_FUNCTION && strlen($value)) {
+            return new Expr($value);
+        }
+
+        return $value;
     }
-
-    /**
-     * Formats elements rules
-     *
-     * @param array $rules
-     * @param array $attributes
-     */
-    protected function formatRules(array $rules = [], array &$attributes)
-    {
-
-    }
-
-    /**
-     * Formats elements dependencies
-     *
-     * @param array $dependencies
-     * @param array $attributes
-     */
-    public function formatDependencies(array $dependencies = [], array &$attributes)
-    {
-
-    }
-
-    /**
-     * Returns element javascript-friendly name
-     *
-     * @param ElementInterface $element
-     *
-     * @return string
-     */
-    protected function getJavascriptNodeName(ElementInterface $element)
-    {
-        $class = $this->getElementClass($element);
-        $parts = explode('\\', $class);
-
-        return 'GForm' . end($parts);
-    }
-
-    /**
-     * Returns FQCN for element
-     *
-     * @param ElementInterface $element
-     *
-     * @return string
-     */
-    protected function getElementClass(ElementInterface $element)
-    {
-        return ltrim(ClassUtils::getClass($element), '\\');
-    }
-} 
+}

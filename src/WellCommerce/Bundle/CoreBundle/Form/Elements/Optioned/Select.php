@@ -13,6 +13,8 @@
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements\Optioned;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\Attribute;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\AttributeCollection;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 
 /**
@@ -29,12 +31,15 @@ class Select extends AbstractOptionedField implements ElementInterface
     {
         parent::configureOptions($resolver);
 
+        $resolver->setDefaults([
+            'addable'         => false,
+            'onAdd'           => '',
+            'add_item_prompt' => '',
+        ]);
+
         $resolver->setDefined([
             'selector',
             'css_attribute',
-            'addable',
-            'onAdd',
-            'add_item_prompt',
         ]);
 
         $resolver->setAllowedTypes([
@@ -46,4 +51,14 @@ class Select extends AbstractOptionedField implements ElementInterface
         ]);
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function prepareAttributesCollection(AttributeCollection $collection)
+    {
+        parent::prepareAttributesCollection($collection);
+        $collection->add(new Attribute('bAddable', $this->getOption('addable'), Attribute::TYPE_BOOLEAN));
+        $collection->add(new Attribute('fOnAdd', $this->getOption('onAdd'), Attribute::TYPE_FUNCTION));
+        $collection->add(new Attribute('sAddItemPrompt', $this->getOption('add_item_prompt')));
+    }
 }

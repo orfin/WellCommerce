@@ -100,10 +100,12 @@ abstract class AbstractField extends AbstractContainer
         return $this->value;
     }
 
-    public function prepareAttributes()
+    /**
+     * {@inheritdoc}
+     */
+    public function prepareAttributesCollection(AttributeCollection $collection)
     {
-        return parent::prepareAttributes() + [
-            'sValue' => $this->value
-        ];
+        parent::prepareAttributesCollection($collection);
+        $collection->add(new Attribute('sValue', $this->value));
     }
 }

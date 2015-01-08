@@ -45,8 +45,6 @@ interface ElementInterface
      * Returns element option
      *
      * @return mixed
-     *
-     * @throws \InvalidArgumentException If the option was not found
      */
     public function getOption($option);
 
@@ -104,11 +102,11 @@ interface ElementInterface
     public function addFilter(FilterInterface $filter);
 
     /**
-     * Prepares attributes for formatter
+     * Prepares attributes collection
      *
-     * @return array
+     * @param AttributeCollection $collection
      */
-    public function prepareAttributes();
+    public function prepareAttributesCollection(AttributeCollection $collection);
 
     /**
      * Checks whether element has property_path option

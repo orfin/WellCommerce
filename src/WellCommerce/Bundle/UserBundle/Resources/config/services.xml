@@ -61,9 +61,7 @@
 
         <service id="user.form_builder" class="WellCommerce\Bundle\UserBundle\Form\UserFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
-            <argument type="service" id="form.data_mapper"/>
-            <argument type="service" id="form.validator"/>
-            <argument type="service" id="form.request_handler"/>
+            <argument type="service" id="form.handler"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -71,9 +69,7 @@
 
         <service id="user_login.form_builder" class="WellCommerce\Bundle\UserBundle\Form\UserLoginFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
-            <argument type="service" id="form.data_mapper"/>
-            <argument type="service" id="form.validator"/>
-            <argument type="service" id="form.request_handler"/>
+            <argument type="service" id="form.handler"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

@@ -10,8 +10,11 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
+namespace WellCommerce\Bundle\CoreBundle\Form\Elements\Input;
 
+use WellCommerce\Bundle\CoreBundle\Form\Elements\Attribute;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\AttributeCollection;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\Input\AbstractInputField;
 
 /**
@@ -21,14 +24,5 @@ use WellCommerce\Bundle\CoreBundle\Form\Elements\Input\AbstractInputField;
  */
 class Hidden extends AbstractInputField implements ElementInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function prepareAttributesJs()
-    {
-        return [
-            $this->formatAttributeJs('name', 'sName'),
-            $this->formatDependencyJs(),
-        ];
-    }
+
 }

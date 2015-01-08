@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements;
 
+use Doctrine\Common\Util\ClassUtils;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use WellCommerce\Bundle\CoreBundle\Form\Exception\TransformerNotFoundException;
@@ -47,10 +48,6 @@ abstract class AbstractNode
             'name',
             'label',
             'property_path'
-        ]);
-
-        $resolver->setDefined([
-            'class',
         ]);
 
         $resolver->setDefaults([
@@ -154,15 +151,54 @@ abstract class AbstractNode
     }
 
     /**
-     * {@inheritdoc}
+     * Prepares repetition options for element
+     *
+     * @return array
      */
-    public function prepareAttributes()
+    protected function prepareRepetitions()
     {
         return [
-            'sName'  => $this->getOption('name'),
-            'sLabel' => $this->getOption('label'),
-            'sClass' => $this->getOption('class'),
+            'iMin' => $this->options['repeat_min'],
+            'iMax' => $this->options['repeat_max'],
         ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function prepareAttributesCollection(AttributeCollection $collection)
+    {
+        $collection->add(new Attribute('sName', $this->getName()));
+        $collection->add(new Attribute('sLabel', $this->getOption('label')));
+        $collection->add(new Attribute('sClass', $this->getOption('class')));
+        $collection->add(new Attribute('fType', $this->getJavascriptNodeName($this), Attribute::TYPE_FUNCTION));
+    }
+
+    /**
+     * Returns element javascript-friendly name
+     *
+     * @param ElementInterface $element
+     *
+     * @return string
+     */
+    protected function getJavascriptNodeName(ElementInterface $element)
+    {
+        $class = $this->getElementClass($element);
+        $parts = explode('\\', $class);
+
+        return 'GForm' . end($parts);
+    }
+
+    /**
+     * Returns FQCN for element
+     *
+     * @param ElementInterface $element
+     *
+     * @return string
+     */
+    protected function getElementClass(ElementInterface $element)
+    {
+        return ltrim(ClassUtils::getClass($element), '\\');
     }
 
     /**

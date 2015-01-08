@@ -13,6 +13,8 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements\Editor;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\AbstractField;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\Attribute;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\AttributeCollection;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 
 /**
@@ -53,14 +55,13 @@ class AttributeEditor extends AbstractField implements ElementInterface
     /**
      * {@inheritdoc}
      */
-    public function prepareAttributes()
+    public function prepareAttributesCollection(AttributeCollection $collection)
     {
-        return parent::prepareAttributes() + [
-            'sSetId'                     => $this->getOption('set'),
-            'aoAttributes'               => $this->getOption('attributes'),
-            'sDeleteAttributeRoute'      => $this->getOption('delete_attribute_route'),
-            'sRenameAttributeRoute'      => $this->getOption('rename_attribute_route'),
-            'sRenameAttributeValueRoute' => $this->getOption('rename_attribute_value_route'),
-        ];
+        parent::prepareAttributesCollection($collection);
+        $collection->add(new Attribute('sSetId', $this->getOption('set')));
+        $collection->add(new Attribute('aoAttributes', $this->getOption('attributes'), Attribute::TYPE_ARRAY));
+        $collection->add(new Attribute('sDeleteAttributeRoute', $this->getOption('delete_attribute_route')));
+        $collection->add(new Attribute('sRenameAttributeRoute', $this->getOption('rename_attribute_route')));
+        $collection->add(new Attribute('sRenameAttributeValueRoute', $this->getOption('rename_attribute_value_route')));
     }
 }
