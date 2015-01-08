@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\Provider;
 
+use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CoreBundle\Provider\ProviderInterface;
 
 /**
@@ -25,9 +26,33 @@ interface CategoryProviderInterface extends ProviderInterface
     const CATEGORY_ORDER_BY   = 'name';
     const CATEGORY_ORDER_DIR  = 'asc';
 
-    public function getCategoriesTree(
-        $limit = self::CATEGORY_TREE_LIMIT,
-        $orderBy = self::CATEGORY_ORDER_BY,
-        $orderDir = self::CATEGORY_ORDER_DIR
-    );
+    /**
+     * Returns categories tree
+     *
+     * @param array $params
+     *
+     * @return array
+     */
+    public function getCategoriesTree(array $params = []);
+
+    /**
+     * Sets current category as resource
+     *
+     * @param Category $category
+     */
+    public function setCurrentCategory(Category $category);
+
+    /**
+     * Returns identifier for currently selected category
+     *
+     * @return int|null
+     */
+    public function getCurrentCategoryId();
+
+    /**
+     * Returns current category
+     *
+     * @return Category
+     */
+    public function getCurrentResource();
 }

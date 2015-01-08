@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\Controller\Box;
 
-use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
 use WellCommerce\Bundle\CoreBundle\DataSet\Conditions\Condition;
@@ -31,7 +30,7 @@ class CategoryProductsBoxController extends AbstractBoxController implements Box
     /**
      * {@inheritdoc}
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
         $results = $this->get('product.dataset.front')->getResults(new DataSetRequest([
             'limit'      => 10,

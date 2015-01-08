@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\Controller\Box;
 
-use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
@@ -20,7 +19,6 @@ use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
 /**
  * Class CategoryMenuBoxController
  *
- * @package WellCommerce\Bundle\CategoryBundle\Controller\Box
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
@@ -30,13 +28,18 @@ class CategoryMenuBoxController extends AbstractBoxController implements BoxCont
     /**
      * {@inheritdoc}
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
         return [
             'active' => $this->getCurrentCategoryId()
         ];
     }
 
+    /**
+     * Returns identifier for currently selected category
+     *
+     * @return int|null
+     */
     private function getCurrentCategoryId()
     {
         $resource = $this->get('category.provider')->getCurrentResource();

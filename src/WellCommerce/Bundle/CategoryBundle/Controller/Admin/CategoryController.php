@@ -24,7 +24,7 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
  */
 class CategoryController extends AbstractAdminController
 {
-    public function indexAction(Request $request)
+    public function indexAction()
     {
         $categories = $this->manager->getRepository()->findAll();
 

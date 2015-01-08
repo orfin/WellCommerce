@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\CoreBundle\DataSet\QueryBuilder;
 
 use Doctrine\ORM\Query\Expr;
-use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use WellCommerce\Bundle\CoreBundle\DataSet\Column\ColumnCollection;
 use WellCommerce\Bundle\CoreBundle\DataSet\Conditions\ConditionInterface;
@@ -172,6 +171,7 @@ abstract class AbstractDataSetQueryBuilder
     public function getTotalRows()
     {
         $paginator = new Paginator($this->getQuery(), false);
+        $paginator->setUseOutputWalkers(false);
 
         return $paginator->count();
     }

@@ -12,21 +12,19 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\Controller\Box;
 
-use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
 
 /**
  * Class CategoryInfoBoxController
  *
- * @package WellCommerce\Bundle\CategoryBundle\Controller\Box
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class CategoryInfoBoxController extends AbstractBoxController implements BoxControllerInterface
 {
-    public function indexAction(Request $request)
+    public function indexAction()
     {
         return [
             'category' => $this->get('category.provider')->getCurrentResource()

@@ -25,6 +25,9 @@ use WellCommerce\Bundle\CoreBundle\DataSet\Request\DataSetRequest;
  */
 class CategoryProvider implements CategoryProviderInterface
 {
+    /**
+     * @var Category
+     */
     protected $resource;
 
     /**
@@ -43,39 +46,46 @@ class CategoryProvider implements CategoryProviderInterface
     }
 
     /**
-     * Returns categories tree
-     *
-     * @param int    $limit
-     * @param string $orderBy
-     * @param string $orderDir
-     *
-     * @return array
+     * {@inheritdoc}
      */
-    public function getCategoriesTree(
-        $limit = CategoryProviderInterface::CATEGORY_TREE_LIMIT,
-        $orderBy = CategoryProviderInterface::CATEGORY_ORDER_BY,
-        $orderDir = CategoryProviderInterface::CATEGORY_ORDER_DIR
-    ) {
-        return $this->getTree([
-            'limit'    => $limit,
-            'orderBy'  => $orderBy,
-            'orderDir' => $orderDir,
-        ]);
-    }
-
-    /**
-     * Returns built tree structure
-     *
-     * @param array $parameters
-     *
-     * @return array
-     */
-    private function getTree($parameters)
+    public function getCategoriesTree(array $parameters = [])
     {
         $rows        = $this->getDataSetRows($parameters);
         $treeBuilder = new CategoryTreeBuilder($rows);
 
         return $treeBuilder->getTree();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCurrentResource($resource)
+    {
+        $this->setCurrentCategory($resource);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCurrentCategory(Category $category)
+    {
+        $this->resource = $category;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCurrentResource()
+    {
+        return $this->resource;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCurrentCategoryId()
+    {
+        return $this->resource->getId();
     }
 
     /**
@@ -88,22 +98,9 @@ class CategoryProvider implements CategoryProviderInterface
     private function getDataSetRows($parameters)
     {
         $request = new DataSetRequest($parameters);
-        $results = $this->dataset->getResults(new DataSetRequest($request));
+        $results = $this->dataset->getResults($request);
 
         return $results['rows'];
-    }
-
-    public function setCurrentResource($resource)
-    {
-        $this->resource = $resource;
-    }
-
-    /**
-     * @return Category
-     */
-    public function getCurrentResource()
-    {
-        return $this->resource;
     }
 
 }
