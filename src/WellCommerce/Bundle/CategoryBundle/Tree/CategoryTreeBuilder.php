@@ -35,11 +35,14 @@ class CategoryTreeBuilder
         $this->items = $items;
     }
 
+    /**
+     * Returns categories tree
+     *
+     * @return array
+     */
     public function getTree()
     {
-        $categories = $this->buildTree();
-
-        return $categories;
+        return $this->buildTree();
     }
 
     private function buildTree($parent = null)
@@ -63,5 +66,11 @@ class CategoryTreeBuilder
         }
 
         return $categories;
+    }
+
+    private function checkParent($parent, $child){
+        if(null == $parent || $child['parent'] != $parent){
+
+        }
     }
 } 

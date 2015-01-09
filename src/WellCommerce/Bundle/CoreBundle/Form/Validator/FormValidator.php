@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Validator;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\Common\Util\ClassUtils;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Doctrine\DoctrineHelperInterface;
 
@@ -34,48 +35,64 @@ class FormValidator implements FormValidatorInterface
      */
     protected $doctrineHelper;
 
+    /**
+     * @var ValidatorInterface
+     */
     protected $validator;
+
+    /**
+     * Constructor
+     *
+     * @param DoctrineHelperInterface $doctrineHelper
+     */
+    public function __construct(DoctrineHelperInterface $doctrineHelper, ValidatorInterface $validator)
+    {
+        $this->doctrineHelper = $doctrineHelper;
+        $this->validator      = $validator;
+    }
 
     public function isValid(FormInterface $form)
     {
         return false;
     }
-//    /**
-//     * Constructor
-//     *
-//     * @param DoctrineHelperInterface $doctrineHelper
-//     * @param ValidatorInterface      $validator
-//     */
-//    public function __construct(DoctrineHelperInterface $doctrineHelper)
-//    {
-//        $this->doctrineHelper = $doctrineHelper;
-//    }
+
 
     public function getClass($data)
     {
         return ClassUtils::getClass($data);
     }
 
+    public function resolveConstraints($modelData, FormInterface $form)
+    {
+        $this->getValidationMetadata($modelData);
+    }
+
     public function getValidationMetadata($data)
     {
         $className = $this->getClass($data);
+        if ($this->getMetadataFactory()->hasMetadataFor($className)) {
+            $metadata = $this->getClassMetadata($className);
 
-//        if ($this->getMetadataFactory()->hasMetadataFor($className)) {
-//            $metadata        = $this->getClassMetadata($className);
-//            $metadataFactory = $this->getValidator()->getMetadataFactory();
-//
-//            foreach ($metadata->getAssociationMappings() as $association) {
-//                $targetEntity = $association['targetEntity'];
-//                if ($metadataFactory->hasMetadataFor($targetEntity)) {
-//                    $targetEntityMetadata = $metadataFactory->getMetadataFor($targetEntity);
-//                    if (!empty($targetEntityMetadata->members)) {
-//                        $constraints[$association['fieldName']] = $targetEntityMetadata;
-//                    }
-//                }
-//            }
-//        }
+            foreach ($metadata->getAssociationNames() as $association) {
+                $associationTargetClass = $metadata->getAssociationTargetClass($association);
+                $associationMetadata    = $this->getEntityMetadata($associationTargetClass);
+                if (!empty($targetEntityMetadata->members)) {
+                    $constraints[$association['fieldName']] = $targetEntityMetadata;
+                }
+            }
+        }
 //
 //        return $constraints;
+    }
+
+    /**
+     * @param $targetEntity
+     *
+     * @return \Symfony\Component\Validator\Mapping\ClassMetadata
+     */
+    private function getEntityMetadata($targetEntity)
+    {
+        return $this->validator->getMetadataFor($targetEntity);
     }
 
     /**

@@ -11,6 +11,7 @@
  */
 namespace WellCommerce\Bundle\ProducerBundle\Form;
 
+use WellCommerce\Bundle\CoreBundle\DataSet\CollectionBuilder\SelectBuilder;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\AbstractFormBuilder;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
@@ -76,10 +77,12 @@ class ProducerFormBuilder extends AbstractFormBuilder implements FormBuilderInte
             'label' => $this->trans('producer.deliverers.label')
         ]));
 
+        $delivererSelectBuilder = new SelectBuilder($this->get('deliverer.dataset'));
+
         $delivererData->addChild($this->getElement('multi_select', [
             'name'        => 'deliverers',
             'label'       => $this->trans('deliverers'),
-            'options'     => $this->get('deliverer.repository')->getCollectionToSelect(),
+            'options'     => $delivererSelectBuilder->getItems(),
             'transformer' => new CollectionToArrayTransformer($this->get('deliverer.repository'))
         ]));
 

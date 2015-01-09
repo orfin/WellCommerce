@@ -11,6 +11,7 @@
  */
 namespace WellCommerce\Bundle\ClientBundle\Form;
 
+use WellCommerce\Bundle\CoreBundle\DataSet\CollectionBuilder\SelectBuilder;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\AbstractFormBuilder;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\EntityToIdentifierTransformer;
@@ -63,11 +64,12 @@ class ClientFormBuilder extends AbstractFormBuilder implements FormBuilderInterf
             'label' => $this->trans('Phone'),
         ]));
 
+        $clientGroupSelectBuilder = new SelectBuilder($this->get('client_group.dataset'));
 
         $requiredData->addChild($this->getElement('select', [
             'name'        => 'group',
             'label'       => $this->trans('Group'),
-            'options'     => $this->get('client_group.repository')->getCollectionToSelect(),
+            'options'     => $clientGroupSelectBuilder->getItems(),
             'transformer' => new EntityToIdentifierTransformer($this->get('client_group.repository'))
         ]));
 

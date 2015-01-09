@@ -25,7 +25,6 @@ use Symfony\Component\HttpKernel\KernelEvents;
 /**
  * Class ControllerListener
  *
- * @package WellCommerce\Bundle\CoreBundle\EventListener
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class ControllerListener implements EventSubscriberInterface

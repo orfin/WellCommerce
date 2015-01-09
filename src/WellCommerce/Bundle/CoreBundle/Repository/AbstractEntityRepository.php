@@ -18,7 +18,6 @@ use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 /**
  * Class AbstractEntityRepository
  *
- * @package WellCommerce\Bundle\CoreBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 abstract class AbstractEntityRepository extends EntityRepository implements RepositoryInterface
@@ -61,82 +60,9 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
     /**
      * {@inheritdoc}
      */
-    public function getCollectionToSelect($labelField = 'name', $associationName = 'translations')
-    {
-        $metadata   = $this->getClassMetadata();
-        $identifier = $metadata->getSingleIdentifierFieldName();
-        $tableName  = $metadata->getTableName();
-        $accessor   = $this->getPropertyAccessor();
-        $select     = [];
-
-        if (!$metadata->hasField($labelField)) {
-            if ($metadata->hasAssociation($associationName)) {
-                $association         = $metadata->getAssociationTargetClass($associationName);
-                $associationMetaData = $this->_em->getClassMetadata($association);
-                if ($associationMetaData->hasField($labelField)) {
-                    $associationTableName = $associationMetaData->getTableName();
-
-                    $collection = $this->getCollection(
-                        $identifier,
-                        $labelField,
-                        $association,
-                        $tableName,
-                        $associationTableName
-                    );
-
-                    foreach ($collection as $item) {
-                        $id          = $accessor->getValue($item, '[' . $identifier . ']');
-                        $select[$id] = $accessor->getValue($item, '[' . $labelField . ']');
-                    }
-
-                    return $select;
-                }
-            }
-        } else {
-            $collection = $this->findBy([], [$labelField => 'asc']);
-
-            foreach ($collection as $item) {
-                $id          = $accessor->getValue($item, $identifier);
-                $label       = $accessor->getValue($item, $labelField);
-                $select[$id] = $label;
-            }
-
-            return $select;
-        }
-
-        throw new \InvalidArgumentException('Field "%s" or association "%s" not found.', $labelField, $associationName);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getPropertyAccessor()
     {
         return PropertyAccess::createPropertyAccessor();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCollection($identifier, $labelField, $targetClass, $tableName, $associationTableName)
-    {
-        $identifierField  = sprintf('%s.%s', $tableName, $identifier);
-        $translationField = sprintf('%s.%s', $associationTableName, $labelField);
-        $queryBuilder     = $this->getQueryBuilder($this->getEntityName());
-        $queryBuilder->select("
-            {$identifierField},
-            {$translationField}
-        ");
-        $queryBuilder->leftJoin(
-            $targetClass,
-            $associationTableName,
-            "WITH",
-            "{$identifierField} = {$associationTableName}.translatable");
-        $queryBuilder->groupBy($identifierField);
-        $query      = $queryBuilder->getQuery();
-        $collection = $query->getResult();
-
-        return $collection;
     }
 
     /**

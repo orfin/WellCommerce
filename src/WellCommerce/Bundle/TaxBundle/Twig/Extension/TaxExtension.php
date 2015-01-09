@@ -14,7 +14,8 @@ namespace WellCommerce\Bundle\TaxBundle\Twig\Extension;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Session\Storage\SessionStorageInterface;
-use WellCommerce\Bundle\TaxBundle\Repository\TaxRepositoryInterface;
+use WellCommerce\Bundle\CoreBundle\DataSet\CollectionBuilder\SelectBuilder;
+use WellCommerce\Bundle\TaxBundle\DataSet\TaxDataSet;
 
 /**
  * Class TaxExtension
@@ -25,18 +26,18 @@ use WellCommerce\Bundle\TaxBundle\Repository\TaxRepositoryInterface;
 class TaxExtension extends \Twig_Extension
 {
     /**
-     * @var \WellCommerce\Bundle\TaxBundle\Repository\TaxRepositoryInterface
+     * @var TaxDataSet
      */
-    protected $taxRepository;
+    protected $dataSet;
 
     /**
      * Constructor
      *
-     * @param SessionInterface $session
+     * @param TaxDataSet $dataSet
      */
-    public function __construct(TaxRepositoryInterface $taxRepository)
+    public function __construct(TaxDataSet $dataSet)
     {
-        $this->taxRepository = $taxRepository;
+        $this->dataSet = $dataSet;
     }
 
     /**
@@ -44,8 +45,13 @@ class TaxExtension extends \Twig_Extension
      */
     public function getGlobals()
     {
+        $taxSelectBuilder = new SelectBuilder($this->dataSet, [
+            'label_key' => 'value',
+            'order_by'  => 'value',
+        ]);
+
         return [
-            'taxes' => $this->taxRepository->getCollectionToSelect('value')
+            'taxes' => $taxSelectBuilder->getItems()
         ];
     }
 

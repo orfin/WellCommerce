@@ -67,28 +67,6 @@ interface RepositoryInterface
     public function getLocales();
 
     /**
-     * Builds and executes query to fetch collection of items to use in optioned fields
-     *
-     * @param $identifier
-     * @param $labelField
-     * @param $targetClass
-     * @param $tableName
-     * @param $associationTableName
-     *
-     * @return array
-     */
-    public function getCollection($identifier, $labelField, $targetClass, $tableName, $associationTableName);
-
-    /**
-     * Returns collection prepared to use in optioned form fields
-     *
-     * @param string $labelField
-     *
-     * @return array
-     */
-    public function getCollectionToSelect($labelField = 'name');
-
-    /**
      * Returns all entities
      *
      * @return mixed

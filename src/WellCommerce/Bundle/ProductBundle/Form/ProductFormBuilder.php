@@ -11,6 +11,7 @@
  */
 namespace WellCommerce\Bundle\ProductBundle\Form;
 
+use WellCommerce\Bundle\CoreBundle\DataSet\CollectionBuilder\SelectBuilder;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\AbstractFormBuilder;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\EntityToIdentifierTransformer;
@@ -33,8 +34,13 @@ class ProductFormBuilder extends AbstractFormBuilder
      */
     public function buildForm(FormInterface $form)
     {
-        $currencies = $this->get('currency.repository')->getCollectionToSelect('code');
-        $vatValues  = $this->get('tax.repository')->getCollectionToSelect();
+        $currenciesSelectBuilder = new SelectBuilder($this->get('currency.dataset'), [
+            'value_key' => 'code',
+            'order_by'  => 'code',
+        ]);
+        $currencies              = $currenciesSelectBuilder->getItems();
+        $vatSelectBuilder        = new SelectBuilder($this->get('tax.dataset'));
+        $vatValues               = $vatSelectBuilder->getItems();
 
         $mainData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'main_data',
@@ -72,11 +78,12 @@ class ProductFormBuilder extends AbstractFormBuilder
             'label' => $this->trans('product.sku.label'),
         ]));
 
+        $producerSelectBuilder = new SelectBuilder($this->get('producer.dataset'));
 
         $mainData->addChild($this->getElement('select', [
             'name'        => 'producer',
             'label'       => $this->trans('product.producer.label'),
-            'options'     => $this->get('producer.repository')->getCollectionToSelect(),
+            'options'     => $producerSelectBuilder->getItems(),
             'transformer' => new EntityToIdentifierTransformer($this->get('producer.repository'))
         ]));
 
@@ -193,10 +200,12 @@ class ProductFormBuilder extends AbstractFormBuilder
             'comment' => $this->trans('Enable stock tracking for product'),
         ]));
 
+        $unitSelectBuilder = new SelectBuilder($this->get('unit.dataset'));
+
         $stockData->addChild($this->getElement('select', [
             'name'        => 'unit',
             'label'       => $this->trans('product.unit.label'),
-            'options'     => $this->get('unit.repository')->getCollectionToSelect(),
+            'options'     => $unitSelectBuilder->getItems(),
             'transformer' => new EntityToIdentifierTransformer($this->get('unit.repository'))
         ]));
 
@@ -242,10 +251,12 @@ class ProductFormBuilder extends AbstractFormBuilder
             'default' => 1
         ]));
 
+        $availabilitySelectBuilder = new SelectBuilder($this->get('availability.dataset'));
+
         $availabilityField = $stockData->addChild($this->getElement('select', [
             'name'        => 'availability',
             'label'       => $this->trans('product.availability.label'),
-            'options'     => $this->get('availability.repository')->getCollectionToSelect(),
+            'options'     => $availabilitySelectBuilder->getItems(),
             'transformer' => new EntityToIdentifierTransformer($this->get('availability.repository'))
         ]));
 
@@ -271,10 +282,12 @@ class ProductFormBuilder extends AbstractFormBuilder
             'label' => $this->trans('Statuses')
         ]));
 
+        $statusesSelectBuilder = new SelectBuilder($this->get('product_status.dataset'));
+
         $statusesData->addChild($this->getElement('multi_select', [
             'name'        => 'statuses',
             'label'       => $this->trans('Statuses'),
-            'options'     => $this->get('product_status.repository')->getCollectionToSelect(),
+            'options'     => $statusesSelectBuilder->getItems(),
             'transformer' => new CollectionToArrayTransformer($this->get('product_status.repository'))
         ]));
 

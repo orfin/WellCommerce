@@ -12,13 +12,14 @@
 
 namespace WellCommerce\Bundle\AttributeBundle\Controller\Admin;
 
+use Doctrine\Common\Util\Debug;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
+use WellCommerce\Bundle\CoreBundle\DataSet\CollectionBuilder\SelectBuilder;
 
 /**
  * Class AttributeGroupController
  *
- * @package WellCommerce\Bundle\AttributeBundle\Controller\Admin
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()

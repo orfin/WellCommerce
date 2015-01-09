@@ -15,12 +15,10 @@ namespace WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\Filter;
 /**
  * Class Filter
  *
- * @package WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\Filter
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class Filter implements FilterInterface
 {
-
     /**
      * @var string
      */
