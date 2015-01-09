@@ -12,16 +12,12 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\EventHandler;
 
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\OptionInterface;
-
 /**
  * Class DeleteRow
  *
- * @package WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\EventHandler
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class DeleteRowEventHandler extends AbstractEventHandler implements EventHandlerInterface
+class DeleteRowEventHandler extends AbstractRowEventHandler implements EventHandlerInterface
 {
     /**
      * {@inheritdoc}
@@ -34,30 +30,6 @@ class DeleteRowEventHandler extends AbstractEventHandler implements EventHandler
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setRequired([
-            'function',
-            'row_action',
-            'context_action',
-            'route'
-        ]);
-
-        $resolver->setDefaults([
-            'function'       => OptionInterface::GF_NULL,
-            'row_action'     => false,
-            'context_action' => false,
-            'route'          => false
-        ]);
-
-        $resolver->setAllowedTypes([
-            'function'       => ['string', 'int'],
-            'row_action'     => ['bool', 'string'],
-            'context_action' => ['bool', 'string'],
-            'route'          => ['bool', 'string'],
-        ]);
-    }
-
     public function getJavascriptFunction()
     {
         return "

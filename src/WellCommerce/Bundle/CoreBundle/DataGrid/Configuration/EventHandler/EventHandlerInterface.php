@@ -30,15 +30,6 @@ interface EventHandlerInterface
     public function getFunctionName();
 
     /**
-     * Configures event options
-     *
-     * @param OptionsResolver $resolver
-     *
-     * @return mixed
-     */
-    public function configureOptions(OptionsResolver $resolver);
-
-    /**
      * Returns template javascript used in DataGrid renderer
      *
      * @return string

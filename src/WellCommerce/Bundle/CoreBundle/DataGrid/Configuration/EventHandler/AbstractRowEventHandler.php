@@ -12,24 +12,16 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\EventHandler;
 
+
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\OptionInterface;
 
 /**
- * Class Load
+ * Class AbstractRowEventHandler
  *
- * @author  Adam Piotrowski <adam@wellcommerce.org>
+ * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class LoadEventHandler extends AbstractEventHandler implements EventHandlerInterface
+abstract class AbstractRowEventHandler extends AbstractEventHandler
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getFunctionName()
-    {
-        return 'load';
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -38,26 +30,21 @@ class LoadEventHandler extends AbstractEventHandler implements EventHandlerInter
         parent::configureOptions($resolver);
 
         $resolver->setRequired([
-            'route',
+            'row_action',
+            'context_action',
+            'route'
         ]);
 
         $resolver->setDefaults([
-            'route' => OptionInterface::GF_NULL,
+            'row_action'     => false,
+            'context_action' => false,
+            'route'          => false
         ]);
 
         $resolver->setAllowedTypes([
-            'route' => ['string'],
+            'row_action'     => ['bool', 'string'],
+            'context_action' => ['bool', 'string'],
+            'route'          => ['bool', 'string'],
         ]);
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getJavascriptFunction()
-    {
-        return "
-        function {$this->options['function']}(oRequest) {
-            DataGrid.MakeRequest(Routing.generate('{$this->options['route']}'), oRequest, GF_Datagrid.ProcessIncomingData);
-        }";
-    }
-}
+} 

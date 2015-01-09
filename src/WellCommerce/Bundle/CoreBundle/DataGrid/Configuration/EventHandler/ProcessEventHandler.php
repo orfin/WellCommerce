@@ -12,9 +12,6 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\EventHandler;
 
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\OptionInterface;
-
 /**
  * Class ProcessEventHandler
  *
@@ -29,22 +26,4 @@ class ProcessEventHandler extends AbstractEventHandler implements EventHandlerIn
     {
         return 'process';
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setRequired([
-            'function',
-        ]);
-
-        $resolver->setDefaults([
-            'function' => OptionInterface::GF_NULL,
-        ]);
-
-        $resolver->setAllowedTypes([
-            'function' => ['string'],
-        ]);
-    }
-} 
+}

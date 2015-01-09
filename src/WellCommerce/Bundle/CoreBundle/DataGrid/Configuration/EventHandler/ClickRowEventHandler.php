@@ -18,10 +18,9 @@ use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\OptionInterface;
 /**
  * Class ClickRowEventHandler
  *
- * @package WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\EventHandler
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClickRowEventHandler extends AbstractEventHandler implements EventHandlerInterface
+class ClickRowEventHandler extends AbstractRowEventHandler implements EventHandlerInterface
 {
     /**
      * {@inheritdoc}
@@ -29,36 +28,6 @@ class ClickRowEventHandler extends AbstractEventHandler implements EventHandlerI
     public function getFunctionName()
     {
         return 'click_row';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setRequired([
-            'function',
-            'callback',
-            'row_action',
-            'context_action',
-            'route'
-        ]);
-
-        $resolver->setDefaults([
-            'function'       => OptionInterface::GF_NULL,
-            'callback'       => OptionInterface::GF_NULL,
-            'row_action'     => false,
-            'context_action' => false,
-            'route'          => false,
-        ]);
-
-        $resolver->setAllowedTypes([
-            'function'       => ['string', 'int'],
-            'callback'       => ['string', 'int'],
-            'row_action'     => ['bool', 'string'],
-            'context_action' => ['bool'],
-            'route'          => ['bool', 'string'],
-        ]);
     }
 
     /**

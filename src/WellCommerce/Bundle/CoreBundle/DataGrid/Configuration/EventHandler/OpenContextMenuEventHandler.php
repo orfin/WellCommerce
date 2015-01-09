@@ -15,9 +15,15 @@ namespace WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\EventHandler;
 /**
  * Class OpenContextMenu
  *
- * @package WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\EventHandler
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class OpenContextMenuEventHandler {
-
+class OpenContextMenuEventHandler extends AbstractEventHandler implements EventHandlerInterface
+{
+    /**
+     * {@inheritdoc}
+     */
+    public function getFunctionName()
+    {
+        return 'open_context_menu';
+    }
 } 

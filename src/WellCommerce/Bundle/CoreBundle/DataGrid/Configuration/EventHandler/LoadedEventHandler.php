@@ -29,22 +29,4 @@ class LoadedEventHandler extends AbstractEventHandler implements EventHandlerInt
     {
         return 'loaded';
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setRequired([
-            'function',
-        ]);
-
-        $resolver->setDefaults([
-            'function' => OptionInterface::GF_NULL,
-        ]);
-
-        $resolver->setAllowedTypes([
-            'function' => ['string'],
-        ]);
-    }
-} 
+}

@@ -12,26 +12,18 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\EventHandler;
 
-use Symfony\Component\OptionsResolver\OptionsResolver;
-
 /**
  * Class ViewRow
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ViewRowEventHandler
+class ViewRowEventHandler extends AbstractRowEventHandler implements EventHandlerInterface
 {
-    public function getEventName()
+    /**
+     * {@inheritdoc}
+     */
+    public function getFunctionName()
     {
         return 'view_row';
     }
-
-    public function configure(OptionsResolver $resolver)
-    {
-        $resolver->setRequired([
-            'callback',
-            'success_message',
-            'error_message',
-        ]);
-    }
-} 
+}

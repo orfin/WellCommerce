@@ -12,7 +12,18 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\EventHandler;
 
-
-class DeselectEventHandler {
-
+/**
+ * Class DeselectEventHandler
+ *
+ * @author Adam Piotrowski <adam@wellcommerce.org>
+ */
+class DeselectEventHandler extends AbstractEventHandler implements EventHandlerInterface
+{
+    /**
+     * {@inheritdoc}
+     */
+    public function getFunctionName()
+    {
+        return 'deselect';
+    }
 } 

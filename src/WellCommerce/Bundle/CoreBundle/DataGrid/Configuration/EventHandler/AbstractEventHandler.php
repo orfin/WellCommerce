@@ -42,7 +42,7 @@ class AbstractEventHandler
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    protected function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired([
             'function'

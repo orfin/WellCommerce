@@ -12,15 +12,12 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\EventHandler;
 
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\OptionInterface;
-
 /**
  * Class EditRowEventHandler
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class EditRowEventHandler extends AbstractEventHandler implements EventHandlerInterface
+class EditRowEventHandler extends ClickRowEventHandler implements EventHandlerInterface
 {
     /**
      * {@inheritdoc}
@@ -28,42 +25,5 @@ class EditRowEventHandler extends AbstractEventHandler implements EventHandlerIn
     public function getFunctionName()
     {
         return 'edit_row';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setRequired([
-            'function',
-            'row_action',
-            'context_action',
-            'route'
-        ]);
-
-        $resolver->setDefaults([
-            'function'       => OptionInterface::GF_NULL,
-            'row_action'     => false,
-            'context_action' => false,
-        ]);
-
-        $resolver->setAllowedTypes([
-            'function'       => ['string', 'int'],
-            'row_action'     => ['bool', 'string'],
-            'context_action' => ['bool'],
-            'route'          => ['string'],
-        ]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getJavascriptFunction()
-    {
-        return "
-        function {$this->options['function']}(dg, id) {
-            return window.location.href = Routing.generate('{$this->options['route']}', {id: id});
-        }";
     }
 }

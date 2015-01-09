@@ -33,24 +33,26 @@ class UpdateRowEventHandler extends AbstractEventHandler implements EventHandler
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    protected function configureOptions(OptionsResolver $resolver)
     {
+        parent::configureOptions($resolver);
+
         $resolver->setRequired([
-            'function',
             'route',
         ]);
 
         $resolver->setDefaults([
-            'function' => OptionInterface::GF_NULL,
             'route'    => OptionInterface::GF_NULL,
         ]);
 
         $resolver->setAllowedTypes([
-            'function' => ['string'],
             'route'    => ['string'],
         ]);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getJavascriptFunction()
     {
         return "

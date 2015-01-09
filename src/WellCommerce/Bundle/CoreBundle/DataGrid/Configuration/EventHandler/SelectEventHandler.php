@@ -12,7 +12,18 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\EventHandler;
 
-
-class SelectEventHandler {
-
+/**
+ * Class SelectEventHandler
+ *
+ * @author Adam Piotrowski <adam@wellcommerce.org>
+ */
+class SelectEventHandler extends AbstractEventHandler implements EventHandlerInterface
+{
+    /**
+     * {@inheritdoc}
+     */
+    public function getFunctionName()
+    {
+        return 'select';
+    }
 } 

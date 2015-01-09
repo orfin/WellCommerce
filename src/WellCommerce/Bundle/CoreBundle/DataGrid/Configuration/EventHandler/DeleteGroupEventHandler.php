@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\EventHandler;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\OptionInterface;
 
 /**
  * Class DeleteGroupEventHandler
@@ -36,19 +35,16 @@ class DeleteGroupEventHandler extends AbstractEventHandler implements EventHandl
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired([
-            'function',
             'route',
             'group_action',
         ]);
 
         $resolver->setDefaults([
-            'function'     => OptionInterface::GF_NULL,
             'route'        => false,
             'group_action' => false,
         ]);
 
         $resolver->setAllowedTypes([
-            'function'     => ['string', 'int'],
             'route'        => ['bool', 'string'],
             'group_action' => ['bool', 'string'],
         ]);
