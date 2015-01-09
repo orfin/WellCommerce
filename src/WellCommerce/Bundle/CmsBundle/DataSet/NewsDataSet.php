@@ -13,9 +13,8 @@
 namespace WellCommerce\Bundle\CmsBundle\DataSet;
 
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
-use WellCommerce\Bundle\CoreBundle\DataSet\Column\Column;
-use WellCommerce\Bundle\CoreBundle\DataSet\Column\ColumnCollection;
 use WellCommerce\Bundle\CoreBundle\DataSet\DataSetInterface;
+use WellCommerce\Bundle\CoreBundle\DataSet\DataSetOptionsResolver;
 
 /**
  * Class NewsDataSet
@@ -27,16 +26,11 @@ class NewsDataSet extends AbstractDataSet implements DataSetInterface
     /**
      * {@inheritdoc}
      */
-    protected function configureColumns(ColumnCollection $collection)
+    protected function configureOptions(DataSetOptionsResolver $resolver)
     {
-        $collection->add(new Column([
-            'alias'  => 'id',
-            'source' => 'news.id'
-        ]));
-
-        $collection->add(new Column([
-            'alias'  => 'name',
-            'source' => 'news_translation.topic'
-        ]));
+        $resolver->setColumns([
+            'id'   => 'news.id',
+            'name' => 'news_translation.topic'
+        ]);
     }
 }
