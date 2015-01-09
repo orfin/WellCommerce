@@ -44,11 +44,15 @@ class LanguageFieldset extends NestedFieldset implements ElementInterface
             'languages',
         ]);
 
-        $resolver->setDefault('languages', $this->locales);
+        $resolver->setDefaults([
+            'languages' => $this->locales
+        ]);
 
-        $resolver->setNormalizer('property_path', function ($options) {
-            return new PropertyPath($options['name']);
-        });
+        $resolver->setNormalizers([
+            'property_path' => function ($options) {
+                return new PropertyPath($options['name']);
+            }
+        ]);
 
         $resolver->setAllowedTypes([
             'languages' => 'array',
@@ -108,8 +112,10 @@ class LanguageFieldset extends NestedFieldset implements ElementInterface
         $data     = $this->convertRepetitionsData($data);
 
         $this->getChildren()->forAll(function (ElementInterface $child) use ($data, $accessor) {
-            $value = $accessor->getValue($data, $child->getPropertyPath(true));
-            $child->setValue($value);
+            if (null !== $propertyPath = $child->getPropertyPath(true)) {
+                $value = $accessor->getValue($data, $child->getPropertyPath(true));
+                $child->setValue($value);
+            }
         });
     }
 

@@ -87,7 +87,7 @@ abstract class AbstractNode
     {
         $path = $this->getOption('property_path');
 
-        if ($indexNotation) {
+        if (null !== $path && $indexNotation) {
             return sprintf('[%s]', $path);
         }
 
