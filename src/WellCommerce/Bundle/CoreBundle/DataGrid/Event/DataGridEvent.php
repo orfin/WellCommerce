@@ -17,7 +17,6 @@ use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
 /**
  * Class DataGridEvent
  *
- * @package WellCommerce\Bundle\CoreBundle\DataGrid\Event
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class DataGridEvent extends Event
