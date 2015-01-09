@@ -38,9 +38,9 @@ class DateTransformer implements TransformerInterface
     /**
      * Formats passed DateTime object to format
      *
-     * @param $value
+     * @param string $value
      *
-     * @return bool|string
+     * @return string
      */
 
     public function transform($value)
