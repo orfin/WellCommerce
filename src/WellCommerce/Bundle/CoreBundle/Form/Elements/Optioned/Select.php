@@ -35,11 +35,8 @@ class Select extends AbstractOptionedField implements ElementInterface
             'addable'         => false,
             'onAdd'           => '',
             'add_item_prompt' => '',
-        ]);
-
-        $resolver->setDefined([
-            'selector',
-            'css_attribute',
+            'selector'        => '',
+            'css_attribute'   => '',
         ]);
 
         $resolver->setAllowedTypes([
@@ -60,5 +57,7 @@ class Select extends AbstractOptionedField implements ElementInterface
         $collection->add(new Attribute('bAddable', $this->getOption('addable'), Attribute::TYPE_BOOLEAN));
         $collection->add(new Attribute('fOnAdd', $this->getOption('onAdd'), Attribute::TYPE_FUNCTION));
         $collection->add(new Attribute('sAddItemPrompt', $this->getOption('add_item_prompt')));
+        $collection->add(new Attribute('sSelector', $this->getOption('selector')));
+        $collection->add(new Attribute('sCssAttribute', $this->getOption('css_attribute')));
     }
 }
