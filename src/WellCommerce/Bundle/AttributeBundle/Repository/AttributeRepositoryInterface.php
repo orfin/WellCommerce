@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\AttributeBundle\Repository;
 
-use Symfony\Component\HttpFoundation\ParameterBag;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroup;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
@@ -34,7 +33,7 @@ interface AttributeRepositoryInterface extends RepositoryInterface
     /**
      * Adds new attribute
      *
-     * @param ParameterBag $parameters
+     * @param string $name
      *
      * @return \WellCommerce\Bundle\AttributeBundle\Entity\Attribute
      */
@@ -62,9 +61,9 @@ interface AttributeRepositoryInterface extends RepositoryInterface
      * Creates new attribute and binds it to group
      *
      * @param AttributeGroup $group
-     * @param                $name
+     * @param string         $name
      *
-     * @return mixed
+     * @return \WellCommerce\Bundle\AttributeBundle\Entity\Attribute
      */
     public function createNewAttribute(AttributeGroup $group, $name);
 } 
