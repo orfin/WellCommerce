@@ -28,19 +28,17 @@ class Column extends AbstractColumn implements ColumnInterface
             'source',
             'aggregated',
             'sortable',
-        ]);
-
-        $resolver->setDefined([
             'transformer'
         ]);
 
         $resolver->setDefaults([
-            'aggregated' => false,
-            'sortable'   => false
+            'transformer' => null,
+            'aggregated'  => false,
+            'sortable'    => false
         ]);
 
         $resolver->setAllowedTypes([
-            'transformer' => 'WellCommerce\Bundle\CoreBundle\DataSet\Transformer\TransformerInterface'
+            'transformer' => ['null', 'WellCommerce\Bundle\CoreBundle\DataSet\Transformer\TransformerInterface']
         ]);
     }
 
@@ -97,6 +95,6 @@ class Column extends AbstractColumn implements ColumnInterface
      */
     public function hasTransformer()
     {
-        return (isset($this->options['transformer']) && null !== $this->options['transformer']);
+        return isset($this->options['transformer']);
     }
 }
