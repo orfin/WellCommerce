@@ -35,17 +35,9 @@ abstract class AbstractField extends AbstractContainer
     {
         parent::configureOptions($resolver);
 
-        $resolver->setDefined([
-            'default',
-            'comment',
-            'error',
-            'dependencies',
-            'rules',
-            'filters',
-            'transformer',
-        ]);
-
         $resolver->setDefaults([
+            'comment'      => '',
+            'error'        => '',
             'default'      => null,
             'dependencies' => [],
             'rules'        => [],
