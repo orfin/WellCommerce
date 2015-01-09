@@ -220,7 +220,7 @@ abstract class AbstractDataGrid extends ContainerAware
      */
     public function loadResults(Request $request)
     {
-        $conditionsResolver = new ConditionsResolver($this->dataset->getColumns());
+        $conditionsResolver = new ConditionsResolver();
 
         $datasetRequest = new DataSetRequest([
             'id'         => $request->request->get('id'),

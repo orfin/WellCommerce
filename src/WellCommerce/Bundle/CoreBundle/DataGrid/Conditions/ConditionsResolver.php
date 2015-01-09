@@ -13,12 +13,6 @@
 namespace WellCommerce\Bundle\CoreBundle\DataGrid\Conditions;
 
 use WellCommerce\Bundle\CoreBundle\DataSet\Column\ColumnCollection;
-use WellCommerce\Bundle\CoreBundle\DataSet\Conditions\Condition\Eq;
-use WellCommerce\Bundle\CoreBundle\DataSet\Conditions\Condition\Gte;
-use WellCommerce\Bundle\CoreBundle\DataSet\Conditions\Condition\In;
-use WellCommerce\Bundle\CoreBundle\DataSet\Conditions\Condition\Like;
-use WellCommerce\Bundle\CoreBundle\DataSet\Conditions\Condition\Lte;
-use WellCommerce\Bundle\CoreBundle\DataSet\Conditions\Condition\Neq;
 use WellCommerce\Bundle\CoreBundle\DataSet\Conditions\ConditionsCollection;
 
 /**
@@ -30,21 +24,6 @@ use WellCommerce\Bundle\CoreBundle\DataSet\Conditions\ConditionsCollection;
 class ConditionsResolver
 {
     /**
-     * @var ColumnCollection
-     */
-    protected $columns;
-
-    /**
-     * Constructor
-     *
-     * @param ColumnCollection $collection
-     */
-    public function __construct(ColumnCollection $collection)
-    {
-        $this->columns = $collection;
-    }
-
-    /**
      * Resolves "where" params and creates conditions collection
      *
      * @param array $params
@@ -54,39 +33,51 @@ class ConditionsResolver
     public function resolve($params)
     {
         if (is_array($params)) {
-            $conditions = new ConditionsCollection();
-
-            foreach ($params as $where) {
-                $column     = $where['column'];
-                $operator   = $where['operator'];
-                $value      = isset($where['value']) ? $where['value'] : null;
-                $expression = null;
-
-                switch ($operator) {
-                    case 'IN':
-                        $conditions->add(new In($column, $value));
-                        break;
-                    case 'NE':
-                        $conditions->add(new Neq($column, $value));
-                        break;
-                    case 'LE':
-                        $conditions->add(new Lte($column, $value));
-                        break;
-                    case 'GE':
-                        $conditions->add(new Gte($column, $value));
-                        break;
-                    case 'LIKE':
-                        $conditions->add(new Like($column, $value));
-                        break;
-                    default:
-                        $conditions->add(new Eq($column, $value));
-                        break;
-                }
-            }
-
-            return $conditions;
+            return $this->createConditionsCollection($params);
         }
 
         return null;
+    }
+
+    /**
+     * Creates conditions collection
+     *
+     * @param array $params
+     *
+     * @return ConditionsCollection
+     */
+    private function createConditionsCollection(array $params)
+    {
+        $conditions = new ConditionsCollection();
+
+        foreach ($params as $where) {
+            list($column, $operator, $value) = $this->parseParam($where);
+
+            $factory = new ConditionFactory($column, $value);
+            $condition = $factory->createCondition($operator);
+            $conditions->add($condition);
+        }
+
+        return $conditions;
+    }
+
+    /**
+     * Parses "where" parameters
+     *
+     * @param array $param
+     *
+     * @return array
+     */
+    private function parseParam(array $param)
+    {
+        $column   = $param['column'];
+        $operator = $param['operator'];
+        $value    = isset($param['value']) ? $param['value'] : null;
+
+        return [
+            $column,
+            $operator,
+            $value,
+        ];
     }
 }
