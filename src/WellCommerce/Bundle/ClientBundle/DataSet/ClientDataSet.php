@@ -32,37 +32,33 @@ class ClientDataSet extends AbstractDataSet implements DataSetInterface
      */
     protected function configureColumns(ColumnCollection $collection)
     {
-        $collection->add(new Column([
-            'alias'  => 'id',
-            'source' => 'client.id',
-        ]));
-
-        $collection->add(new Column([
-            'alias'  => 'firstName',
-            'source' => 'client.firstName',
-        ]));
-
-        $collection->add(new Column([
-            'alias'  => 'lastName',
-            'source' => 'client.lastName',
-        ]));
-
-        $collection->add(new Column([
-            'alias'  => 'email',
-            'source' => 'client.email',
-        ]));
-
-        $collection->add(new Column([
-            'alias'  => 'phone',
-            'source' => 'client.phone',
-        ]));
-
-        $collection->add(new Column([
-            'alias'            => 'createdAt',
-            'source'           => 'client.createdAt',
-        ]));
+        foreach ($this->getColumnMappings() as $alias => $source) {
+            $collection->add(new Column([
+                'alias'  => $alias,
+                'source' => $source,
+            ]));
+        }
     }
 
+    /**
+     * Returns column mappings
+     *
+     * @return array
+     */
+    protected function getColumnMappings()
+    {
+        return [
+            'id'        => 'client.id',
+            'firstName' => 'client.firstName',
+            'email'     => 'client.email',
+            'phone'     => 'client.phone',
+            'createdAt' => 'client.createdAt',
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function configureTransformers(TransformerCollection $collection)
     {
         $collection->add('createdAt', new DateTransformer('Y-m-d H:i:s'));
