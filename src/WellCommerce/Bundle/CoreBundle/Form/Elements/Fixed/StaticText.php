@@ -33,13 +33,9 @@ class StaticText extends AbstractFixedField implements ElementInterface
             'text',
         ]);
 
-        $resolver->setDefined([
-            'class',
-            'name',
-        ]);
-
         $resolver->setDefaults([
-            'name' => ''
+            'name' => '',
+            'class' => '',
         ]);
 
         $resolver->setAllowedTypes([
