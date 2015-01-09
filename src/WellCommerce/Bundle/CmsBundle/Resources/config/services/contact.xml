@@ -75,12 +75,6 @@
             </call>
         </service>
 
-        <service id="contact.form.front" class="WellCommerce\Bundle\CmsBundle\Form\Front\ContactForm">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
-
         <service id="contact.subscriber" class="WellCommerce\Bundle\CmsBundle\EventListener\ContactSubscriber">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>

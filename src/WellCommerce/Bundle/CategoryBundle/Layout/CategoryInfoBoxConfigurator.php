@@ -30,7 +30,6 @@ class CategoryInfoBoxConfigurator extends AbstractLayoutBoxConfigurator implemen
     public function addFormFields(FormBuilderInterface $builder, $defaults)
     {
         $fieldset = $this->getFieldset($builder);
-        $accessor = $this->getPropertyAccessor();
 
         $fieldset->addChild($builder->getElement('tip', [
             'tip' => '<p>' . $this->trans('Choose categories which should be not visible in box.') . '</p>'

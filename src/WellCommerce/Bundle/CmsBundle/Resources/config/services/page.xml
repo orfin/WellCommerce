@@ -33,8 +33,8 @@
             <call method="setRepository">
                 <argument type="service" id="page.repository"/>
             </call>
-            <call method="setForm">
-                <argument type="service" id="page.form"/>
+            <call method="setFormBuilder">
+                <argument type="service" id="page.form_builder"/>
             </call>
             <call method="setDataGrid">
                 <argument type="service" id="page.datagrid"/>
@@ -86,7 +86,9 @@
             </call>
         </service>
 
-        <service id="page.form" class="WellCommerce\Bundle\CmsBundle\Form\PageForm">
+        <service id="page.form_builder" class="WellCommerce\Bundle\CmsBundle\Form\Admin\PageFormBuilder">
+            <argument type="service" id="form.resolver.factory"/>
+            <argument type="service" id="form.handler"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
