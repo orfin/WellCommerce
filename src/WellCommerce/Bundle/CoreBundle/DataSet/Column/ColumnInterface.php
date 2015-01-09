@@ -33,39 +33,4 @@ interface ColumnInterface
      * @return string
      */
     public function getSource();
-
-    /**
-     * Returns true if column uses aggregation
-     *
-     * @return bool
-     */
-    public function isAggregated();
-
-    /**
-     * Returns true if column is sortable, false otherwise
-     *
-     * @return bool
-     */
-    public function isSortable();
-
-    /**
-     * Returns select clause with column alias
-     *
-     * @return string
-     */
-    public function getRawSelect();
-
-    /**
-     * Returns column transformer
-     *
-     * @return \WellCommerce\Bundle\CoreBundle\DataSet\Transformer\TransformerInterface
-     */
-    public function getTransformer();
-
-    /**
-     * Checks whether column has transformer
-     *
-     * @return bool
-     */
-    public function hasTransformer();
 }

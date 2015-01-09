@@ -16,13 +16,10 @@ use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Bundle\CoreBundle\DataSet\Column\Column;
 use WellCommerce\Bundle\CoreBundle\DataSet\Column\ColumnCollection;
 use WellCommerce\Bundle\CoreBundle\DataSet\DataSetInterface;
-use WellCommerce\Bundle\CoreBundle\DataSet\Transformer\DateTransformer;
-use WellCommerce\Bundle\CoreBundle\DataSet\Transformer\TransformerCollection;
 
 /**
  * Class AvailabilityDataSet
  *
- * @package WellCommerce\Bundle\AvailabilityBundle\DataSet
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class AvailabilityDataSet extends AbstractDataSet implements DataSetInterface

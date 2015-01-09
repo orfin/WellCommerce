@@ -14,8 +14,8 @@
             <call method="setRepository">
                 <argument type="service" id="locale.repository"/>
             </call>
-            <call method="setForm">
-                <argument type="service" id="locale.form"/>
+            <call method="setFormBuilder">
+                <argument type="service" id="locale.form_builder"/>
             </call>
             <call method="setDataGrid">
                 <argument type="service" id="locale.datagrid"/>
@@ -33,24 +33,29 @@
             <argument>WellCommerceIntlBundle:Locale</argument>
         </service>
 
-        <service id="locale.datagrid.configurator" class="WellCommerce\Bundle\IntlBundle\DataGrid\LocaleDataGridConfigurator">
+        <service id="locale.dataset.query_builder" class="WellCommerce\Bundle\IntlBundle\DataSet\LocaleDataSetQueryBuilder" public="false">
+            <argument type="service" id="locale.repository"/>
+        </service>
+
+        <service id="locale.dataset" class="WellCommerce\Bundle\IntlBundle\DataSet\LocaleDataSet">
             <argument key="identifier">locale</argument>
-            <argument type="service" id="datagrid_manager"/>
-            <argument type="service" id="locale.repository"/>
-        </service>
-
-        <service id="locale.provider" class="WellCommerce\Bundle\IntlBundle\Provider\LocaleProvider">
-            <argument type="service" id="locale.repository"/>
-        </service>
-
-        <service id="locale.datagrid" class="WellCommerce\Bundle\IntlBundle\DataGrid\LocaleDataGrid">
+            <argument type="service" id="locale.dataset.query_builder"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
-            <configurator service="locale.datagrid.configurator" method="configure" />
         </service>
 
-        <service id="locale.form" class="WellCommerce\Bundle\IntlBundle\Form\LocaleForm">
+        <service id="locale.datagrid" class="WellCommerce\Bundle\IntlBundle\DataGrid\LocaleDataGrid">
+            <argument key="identifier">locale</argument>
+            <argument type="service" id="locale.dataset"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="locale.form_builder" class="WellCommerce\Bundle\IntlBundle\Form\LocaleFormBuilder">
+            <argument type="service" id="form.resolver.factory"/>
+            <argument type="service" id="form.handler"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

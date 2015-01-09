@@ -13,9 +13,8 @@
 namespace WellCommerce\Bundle\LayoutBundle\DataSet;
 
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
-use WellCommerce\Bundle\CoreBundle\DataSet\Column\Column;
-use WellCommerce\Bundle\CoreBundle\DataSet\Column\ColumnCollection;
 use WellCommerce\Bundle\CoreBundle\DataSet\DataSetInterface;
+use WellCommerce\Bundle\CoreBundle\DataSet\DataSetOptionsResolver;
 
 /**
  * Class LayoutBoxDataSet
@@ -27,26 +26,13 @@ class LayoutBoxDataSet extends AbstractDataSet implements DataSetInterface
     /**
      * {@inheritdoc}
      */
-    protected function configureColumns(ColumnCollection $collection)
+    protected function configureOptions(DataSetOptionsResolver $resolver)
     {
-        $collection->add(new Column([
-            'alias'  => 'id',
-            'source' => 'layout_box.id',
-        ]));
-
-        $collection->add(new Column([
-            'alias'  => 'name',
-            'source' => 'layout_box_translation.name',
-        ]));
-
-        $collection->add(new Column([
-            'alias'  => 'identifier',
-            'source' => 'layout_box.identifier',
-        ]));
-
-        $collection->add(new Column([
-            'alias'  => 'boxType',
-            'source' => 'layout_box.boxType',
-        ]));
+        $resolver->setColumns([
+            'id'         => 'layout_box.id',
+            'name'       => 'layout_box_translation.name',
+            'identifier' => 'layout_box.identifier',
+            'boxType'    => 'layout_box.boxType',
+        ]);
     }
 }

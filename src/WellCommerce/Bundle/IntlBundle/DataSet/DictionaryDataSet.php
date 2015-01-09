@@ -13,9 +13,8 @@
 namespace WellCommerce\Bundle\IntlBundle\DataSet;
 
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
-use WellCommerce\Bundle\CoreBundle\DataSet\Column\Column;
-use WellCommerce\Bundle\CoreBundle\DataSet\Column\ColumnCollection;
 use WellCommerce\Bundle\CoreBundle\DataSet\DataSetInterface;
+use WellCommerce\Bundle\CoreBundle\DataSet\DataSetOptionsResolver;
 
 /**
  * Class DictionaryDataSet
@@ -27,26 +26,13 @@ class DictionaryDataSet extends AbstractDataSet implements DataSetInterface
     /**
      * {@inheritdoc}
      */
-    protected function configureColumns(ColumnCollection $collection)
+    protected function configureOptions(DataSetOptionsResolver $resolver)
     {
-        $collection->add(new Column([
-            'alias'  => 'id',
-            'source' => 'dictionary.id'
-        ]));
-
-        $collection->add(new Column([
-            'alias'  => 'identifier',
-            'source' => 'dictionary.identifier'
-        ]));
-
-        $collection->add(new Column([
-            'alias'  => 'translation',
-            'source' => 'dictionary_translation.translation'
-        ]));
-
-        $collection->add(new Column([
-            'alias'  => 'locale',
-            'source' => 'dictionary_translation.locale'
-        ]));
+        $resolver->setColumns([
+            'id'          => 'dictionary.id',
+            'identifier'  => 'dictionary.identifier',
+            'translation' => 'dictionary.identifier',
+            'locale'      => 'dictionary_translation.locale'
+        ]);
     }
 }

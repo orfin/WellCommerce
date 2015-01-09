@@ -13,9 +13,8 @@
 namespace WellCommerce\Bundle\ProductBundle\DataSet\Admin;
 
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
-use WellCommerce\Bundle\CoreBundle\DataSet\Column\Column;
-use WellCommerce\Bundle\CoreBundle\DataSet\Column\ColumnCollection;
 use WellCommerce\Bundle\CoreBundle\DataSet\DataSetInterface;
+use WellCommerce\Bundle\CoreBundle\DataSet\DataSetOptionsResolver;
 
 /**
  * Class ProductDataSet
@@ -27,36 +26,15 @@ class ProductDataSet extends AbstractDataSet implements DataSetInterface
     /**
      * {@inheritdoc}
      */
-    protected function configureColumns(ColumnCollection $collection)
+    protected function configureOptions(DataSetOptionsResolver $resolver)
     {
-        $collection->add(new Column([
-            'alias'  => 'id',
-            'source' => 'product.id'
-        ]));
-
-        $collection->add(new Column([
-            'alias'  => 'name',
-            'source' => 'product_translation.name'
-        ]));
-
-        $collection->add(new Column([
-            'alias'  => 'sku',
-            'source' => 'product.sku'
-        ]));
-
-        $collection->add(new Column([
-            'alias'  => 'weight',
-            'source' => 'product.weight'
-        ]));
-
-        $collection->add(new Column([
-            'alias'  => 'sellPrice',
-            'source' => 'product.sellPrice'
-        ]));
-
-        $collection->add(new Column([
-            'alias'  => 'stock',
-            'source' => 'product.stock',
-        ]));
+        $resolver->setColumns([
+            'id'        => 'product.id',
+            'name'      => 'product_translation.name',
+            'sku'       => 'product.sku',
+            'weight'    => 'product.weight',
+            'sellPrice' => 'product.sellPrice',
+            'stock'     => 'product.stock',
+        ]);
     }
 }

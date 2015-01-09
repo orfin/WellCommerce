@@ -16,13 +16,13 @@ use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Bundle\CoreBundle\DataSet\Column\Column;
 use WellCommerce\Bundle\CoreBundle\DataSet\Column\ColumnCollection;
 use WellCommerce\Bundle\CoreBundle\DataSet\DataSetInterface;
+use WellCommerce\Bundle\CoreBundle\DataSet\DataSetOptionsResolver;
 use WellCommerce\Bundle\CoreBundle\DataSet\Transformer\DateTransformer;
 use WellCommerce\Bundle\CoreBundle\DataSet\Transformer\TransformerCollection;
 
 /**
  * Class ClientDataSet
  *
- * @package WellCommerce\Bundle\ClientBundle\DataSet
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class ClientDataSet extends AbstractDataSet implements DataSetInterface
@@ -30,37 +30,19 @@ class ClientDataSet extends AbstractDataSet implements DataSetInterface
     /**
      * {@inheritdoc}
      */
-    protected function configureColumns(ColumnCollection $collection)
+    protected function configureOptions(DataSetOptionsResolver $resolver)
     {
-        foreach ($this->getColumnMappings() as $alias => $source) {
-            $collection->add(new Column([
-                'alias'  => $alias,
-                'source' => $source,
-            ]));
-        }
-    }
-
-    /**
-     * Returns column mappings
-     *
-     * @return array
-     */
-    protected function getColumnMappings()
-    {
-        return [
+        $resolver->setColumns([
             'id'        => 'client.id',
             'firstName' => 'client.firstName',
+            'lastName'  => 'client.lastName',
             'email'     => 'client.email',
             'phone'     => 'client.phone',
             'createdAt' => 'client.createdAt',
-        ];
-    }
+        ]);
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function configureTransformers(TransformerCollection $collection)
-    {
-        $collection->add('createdAt', new DateTransformer('Y-m-d H:i:s'));
+        $resolver->setTransformers([
+            'createdAt' => new DateTransformer('Y-m-d H:i:s')
+        ]);
     }
 }

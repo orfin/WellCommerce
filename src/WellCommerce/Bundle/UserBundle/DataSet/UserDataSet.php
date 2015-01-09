@@ -13,9 +13,8 @@
 namespace WellCommerce\Bundle\UserBundle\DataSet;
 
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
-use WellCommerce\Bundle\CoreBundle\DataSet\Column\Column;
-use WellCommerce\Bundle\CoreBundle\DataSet\Column\ColumnCollection;
 use WellCommerce\Bundle\CoreBundle\DataSet\DataSetInterface;
+use WellCommerce\Bundle\CoreBundle\DataSet\DataSetOptionsResolver;
 
 /**
  * Class UserDataSet
@@ -27,26 +26,13 @@ class UserDataSet extends AbstractDataSet implements DataSetInterface
     /**
      * {@inheritdoc}
      */
-    public function configureColumns(ColumnCollection $collection)
+    protected function configureOptions(DataSetOptionsResolver $resolver)
     {
-        $collection->add(new Column([
-            'alias'  => 'id',
-            'source' => 'user.id',
-        ]));
-
-        $collection->add(new Column([
-            'alias'  => 'username',
-            'source' => 'user.username',
-        ]));
-
-        $collection->add(new Column([
-            'alias'  => 'email',
-            'source' => 'user.email',
-        ]));
-
-        $collection->add(new Column([
-            'alias'  => 'enabled',
-            'source' => 'user.enabled',
-        ]));
+        $resolver->setColumns([
+            'id'       => 'user.id',
+            'username' => 'user.username',
+            'email'    => 'user.email',
+            'enabled'  => 'user.enabled',
+        ]);
     }
-} 
+}

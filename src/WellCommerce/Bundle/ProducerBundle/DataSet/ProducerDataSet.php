@@ -13,9 +13,8 @@
 namespace WellCommerce\Bundle\ProducerBundle\DataSet;
 
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
-use WellCommerce\Bundle\CoreBundle\DataSet\Column\Column;
-use WellCommerce\Bundle\CoreBundle\DataSet\Column\ColumnCollection;
 use WellCommerce\Bundle\CoreBundle\DataSet\DataSetInterface;
+use WellCommerce\Bundle\CoreBundle\DataSet\DataSetOptionsResolver;
 
 /**
  * Class ProducerDataSet
@@ -27,16 +26,11 @@ class ProducerDataSet extends AbstractDataSet implements DataSetInterface
     /**
      * {@inheritdoc}
      */
-    protected function configureColumns(ColumnCollection $collection)
+    protected function configureOptions(DataSetOptionsResolver $resolver)
     {
-        $collection->add(new Column([
-            'alias'  => 'id',
-            'source' => 'producer.id'
-        ]));
-
-        $collection->add(new Column([
-            'alias'  => 'name',
-            'source' => 'producer_translation.name'
-        ]));
+        $resolver->setColumns([
+            'id'   => 'producer.id',
+            'name' => 'producer_translation.name'
+        ]);
     }
 }

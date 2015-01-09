@@ -14,8 +14,8 @@
             <call method="setRepository">
                 <argument type="service" id="dictionary.repository"/>
             </call>
-            <call method="setForm">
-                <argument type="service" id="dictionary.form"/>
+            <call method="setFormBuilder">
+                <argument type="service" id="dictionary.form_builder"/>
             </call>
             <call method="setDataGrid">
                 <argument type="service" id="dictionary.datagrid"/>
@@ -33,20 +33,29 @@
             <argument>WellCommerceIntlBundle:Dictionary</argument>
         </service>
 
-        <service id="dictionary.datagrid.configurator" class="WellCommerce\Bundle\IntlBundle\DataGrid\DictionaryDataGridConfigurator">
-            <argument key="identifier">dictionary</argument>
-            <argument type="service" id="datagrid_manager"/>
+        <service id="dictionary.dataset.query_builder" class="WellCommerce\Bundle\IntlBundle\DataSet\DictionaryDataSetQueryBuilder" public="false">
             <argument type="service" id="dictionary.repository"/>
         </service>
 
-        <service id="dictionary.datagrid" class="WellCommerce\Bundle\IntlBundle\DataGrid\DictionaryDataGrid">
+        <service id="dictionary.dataset" class="WellCommerce\Bundle\IntlBundle\DataSet\DictionaryDataSet">
+            <argument key="identifier">dictionary</argument>
+            <argument type="service" id="dictionary.dataset.query_builder"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
-            <configurator service="dictionary.datagrid.configurator" method="configure" />
         </service>
 
-        <service id="dictionary.form" class="WellCommerce\Bundle\IntlBundle\Form\DictionaryForm">
+        <service id="dictionary.datagrid" class="WellCommerce\Bundle\IntlBundle\DataGrid\DictionaryDataGrid">
+            <argument key="identifier">dictionary</argument>
+            <argument type="service" id="dictionary.dataset"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="dictionary.form_builder" class="WellCommerce\Bundle\IntlBundle\Form\DictionaryFormBuilder">
+            <argument type="service" id="form.resolver.factory"/>
+            <argument type="service" id="form.handler"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

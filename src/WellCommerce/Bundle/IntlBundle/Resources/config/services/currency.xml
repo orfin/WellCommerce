@@ -33,11 +33,11 @@
             <argument>WellCommerceIntlBundle:Currency</argument>
         </service>
 
-        <service id="currency.dataset.query_builder" class="WellCommerce\Bundle\MediaBundle\DataSet\MediaDataSetQueryBuilder" public="false">
+        <service id="currency.dataset.query_builder" class="WellCommerce\Bundle\IntlBundle\DataSet\CurrencyDataSetQueryBuilder" public="false">
             <argument type="service" id="currency.repository"/>
         </service>
 
-        <service id="currency.dataset" class="WellCommerce\Bundle\MediaBundle\DataSet\MediaDataSet">
+        <service id="currency.dataset" class="WellCommerce\Bundle\IntlBundle\DataSet\CurrencyDataSet">
             <argument key="identifier">currency</argument>
             <argument type="service" id="currency.dataset.query_builder"/>
             <call method="setContainer">
@@ -45,7 +45,7 @@
             </call>
         </service>
 
-        <service id="currency.datagrid" class="WellCommerce\Bundle\MediaBundle\DataGrid\MediaDataGrid">
+        <service id="currency.datagrid" class="WellCommerce\Bundle\IntlBundle\DataGrid\CurrencyDataGrid">
             <argument key="identifier">currency</argument>
             <argument type="service" id="currency.dataset"/>
             <call method="setContainer">

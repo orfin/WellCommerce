@@ -49,6 +49,11 @@ abstract class AbstractDataSet extends ContainerAware
     protected $transformers;
 
     /**
+     * @var DataSetOptionsResolver
+     */
+    protected $datasetOptionsResolver;
+
+    /**
      * @var bool
      */
     protected $booted = false;
@@ -61,32 +66,19 @@ abstract class AbstractDataSet extends ContainerAware
      */
     public function __construct($identifier, QueryBuilderInterface $queryBuilder)
     {
-        $this->identifier   = $identifier;
-        $this->queryBuilder = $queryBuilder;
-        $this->columns      = new ColumnCollection();
-        $this->transformers = new TransformerCollection();
+        $this->identifier             = $identifier;
+        $this->queryBuilder           = $queryBuilder;
+        $this->columns                = new ColumnCollection();
+        $this->transformers           = new TransformerCollection();
+        $this->datasetOptionsResolver = new DataSetOptionsResolver();
     }
 
     /**
-     * Configures dataset columns
+     * Configures dataset using options resolver
      *
-     * @param ColumnCollection $collection
-     *
-     * @return void
+     * @param DataSetOptionsResolver $resolver
      */
-    abstract protected function configureColumns(ColumnCollection $collection);
-
-    /**
-     * Configures column transformers
-     *
-     * @param TransformerCollection $transformers
-     *
-     * @return bool
-     */
-    protected function configureTransformers(TransformerCollection $transformers)
-    {
-        return false;
-    }
+    abstract protected function configureOptions(DataSetOptionsResolver $resolver);
 
     /**
      * {@inheritdoc}
@@ -105,8 +97,9 @@ abstract class AbstractDataSet extends ContainerAware
      */
     protected function configure()
     {
-        $this->configureColumns($this->columns);
-        $this->configureTransformers($this->transformers);
+        $this->configureOptions($this->datasetOptionsResolver);
+        $this->datasetOptionsResolver->resolveColumns($this->columns);
+        $this->datasetOptionsResolver->resolveTransformers($this->transformers);
         $this->queryBuilder->setColumns($this->columns);
         $this->booted = true;
         $this->dispatchEvent(DataSetInterface::EVENT_POST_CONFIGURE);

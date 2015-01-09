@@ -26,19 +26,6 @@ class Column extends AbstractColumn implements ColumnInterface
         $resolver->setRequired([
             'alias',
             'source',
-            'aggregated',
-            'sortable',
-            'transformer'
-        ]);
-
-        $resolver->setDefaults([
-            'transformer' => null,
-            'aggregated'  => false,
-            'sortable'    => false
-        ]);
-
-        $resolver->setAllowedTypes([
-            'transformer' => ['null', 'WellCommerce\Bundle\CoreBundle\DataSet\Transformer\TransformerInterface']
         ]);
     }
 
@@ -64,37 +51,5 @@ class Column extends AbstractColumn implements ColumnInterface
     public function getRawSelect()
     {
         return sprintf('%s AS %s', $this->options['source'], $this->options['alias']);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isAggregated()
-    {
-        return $this->options['aggregated'];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isSortable()
-    {
-        return $this->options['sortable'];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getTransformer()
-    {
-        return $this->options['transformer'];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasTransformer()
-    {
-        return isset($this->options['transformer']);
     }
 }

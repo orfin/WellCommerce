@@ -13,9 +13,8 @@
 namespace WellCommerce\Bundle\ThemeBundle\DataSet;
 
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
-use WellCommerce\Bundle\CoreBundle\DataSet\Column\Column;
-use WellCommerce\Bundle\CoreBundle\DataSet\Column\ColumnCollection;
 use WellCommerce\Bundle\CoreBundle\DataSet\DataSetInterface;
+use WellCommerce\Bundle\CoreBundle\DataSet\DataSetOptionsResolver;
 
 /**
  * Class ThemeDataSet
@@ -27,21 +26,12 @@ class ThemeDataSet extends AbstractDataSet implements DataSetInterface
     /**
      * {@inheritdoc}
      */
-    protected function configureColumns(ColumnCollection $collection)
+    protected function configureOptions(DataSetOptionsResolver $resolver)
     {
-        $collection->add(new Column([
-            'alias'  => 'id',
-            'source' => 'theme.id'
-        ]));
-
-        $collection->add(new Column([
-            'alias'  => 'name',
-            'source' => 'theme.name'
-        ]));
-
-        $collection->add(new Column([
-            'alias'  => 'folder',
-            'source' => 'theme.folder'
-        ]));
+        $resolver->setColumns([
+            'id'     => 'theme.id',
+            'name'   => 'theme.name',
+            'folder' => 'theme.folder'
+        ]);
     }
 }

@@ -13,10 +13,8 @@
 namespace WellCommerce\Bundle\MediaBundle\DataSet;
 
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
-use WellCommerce\Bundle\CoreBundle\DataSet\Column\Column;
-use WellCommerce\Bundle\CoreBundle\DataSet\Column\ColumnCollection;
 use WellCommerce\Bundle\CoreBundle\DataSet\DataSetInterface;
-use WellCommerce\Bundle\CoreBundle\DataSet\Transformer\TransformerCollection;
+use WellCommerce\Bundle\CoreBundle\DataSet\DataSetOptionsResolver;
 use WellCommerce\Bundle\MediaBundle\DataSet\Transformer\ImagePathTransformer;
 
 /**
@@ -29,41 +27,19 @@ class MediaDataSet extends AbstractDataSet implements DataSetInterface
     /**
      * {@inheritdoc}
      */
-    protected function configureColumns(ColumnCollection $collection)
+    protected function configureOptions(DataSetOptionsResolver $resolver)
     {
-        $collection->add(new Column([
-            'alias'  => 'id',
-            'source' => 'media.id'
-        ]));
+        $resolver->setColumns([
+            'id'        => 'media.id',
+            'name'      => 'media.name',
+            'mime'      => 'media.mime',
+            'extension' => 'media.extension',
+            'size'      => 'media.size',
+            'preview'   => 'media.path',
+        ]);
 
-        $collection->add(new Column([
-            'alias'  => 'name',
-            'source' => 'media.name'
-        ]));
-
-        $collection->add(new Column([
-            'alias'  => 'mime',
-            'source' => 'media.mime'
-        ]));
-
-        $collection->add(new Column([
-            'alias'  => 'extension',
-            'source' => 'media.extension'
-        ]));
-
-        $collection->add(new Column([
-            'alias'  => 'size',
-            'source' => 'media.size'
-        ]));
-
-        $collection->add(new Column([
-            'alias'  => 'preview',
-            'source' => 'media.path'
-        ]));
-    }
-
-    protected function configureTransformers(TransformerCollection $collection)
-    {
-        $collection->add('preview', new ImagePathTransformer($this->container->get('image_helper'), 'medium'));
+        $resolver->setTransformers([
+            'preview' => new ImagePathTransformer($this->container->get('image_helper'), 'medium')
+        ]);
     }
 }

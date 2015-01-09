@@ -13,9 +13,8 @@
 namespace WellCommerce\Bundle\ClientBundle\DataSet;
 
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
-use WellCommerce\Bundle\CoreBundle\DataSet\Column\Column;
-use WellCommerce\Bundle\CoreBundle\DataSet\Column\ColumnCollection;
 use WellCommerce\Bundle\CoreBundle\DataSet\DataSetInterface;
+use WellCommerce\Bundle\CoreBundle\DataSet\DataSetOptionsResolver;
 
 /**
  * Class ClientGroupDataSet
@@ -27,16 +26,11 @@ class ClientGroupDataSet extends AbstractDataSet implements DataSetInterface
     /**
      * {@inheritdoc}
      */
-    protected function configureColumns(ColumnCollection $collection)
+    protected function configureOptions(DataSetOptionsResolver $resolver)
     {
-        $collection->add(new Column([
-            'alias'  => 'id',
-            'source' => 'client_group.id'
-        ]));
-
-        $collection->add(new Column([
-            'alias'  => 'name',
-            'source' => 'client_group_translation.name'
-        ]));
+        $resolver->setColumns([
+            'id'   => 'client_group.id',
+            'name' => 'client_group_translation.name'
+        ]);
     }
 }
