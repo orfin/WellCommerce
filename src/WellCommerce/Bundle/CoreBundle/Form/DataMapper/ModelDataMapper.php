@@ -54,6 +54,11 @@ class ModelDataMapper extends AbstractDataMapper
         });
     }
 
+    /**
+     * Maps element value to model data
+     *
+     * @param ElementInterface $child
+     */
     protected function mapElementToModelData(ElementInterface $child)
     {
         $this->setModelValueFromElement($child);
