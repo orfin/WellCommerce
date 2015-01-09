@@ -51,34 +51,16 @@ class UserDataGrid extends AbstractDataGrid implements DataGridInterface
         $collection->add(new Column([
             'id'         => 'username',
             'caption'    => $this->trans('user.username'),
-            'appearance' => new Appearance([
-                'width' => 70,
-            ]),
-            'filter'     => new Filter([
-                'type' => Filter::FILTER_INPUT
-            ])
         ]));
 
         $collection->add(new Column([
             'id'         => 'email',
             'caption'    => $this->trans('user.email'),
-            'appearance' => new Appearance([
-                'width' => 70,
-            ]),
-            'filter'     => new Filter([
-                'type' => Filter::FILTER_INPUT
-            ])
         ]));
 
         $collection->add(new Column([
             'id'         => 'enabled',
             'caption'    => $this->trans('user.enabled'),
-            'appearance' => new Appearance([
-                'width' => 70,
-            ]),
-            'filter'     => new Filter([
-                'type' => Filter::FILTER_INPUT
-            ])
         ]));
     }
 }
