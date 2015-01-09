@@ -35,9 +35,9 @@ class CategoryTreeFormBuilder extends AbstractFormBuilder implements FormBuilder
     {
         $form->addChild($this->getElement('tree', [
             'name'               => 'categories',
-            'label'              => $this->trans('Categories'),
-            'add_item_prompt'    => $this->trans('Category name'),
-            'addLabel'           => $this->trans('Add category'),
+            'label'              => $this->trans('category.tree.label'),
+            'add_item_prompt'    => $this->trans('category.name.label'),
+            'addLabel'           => $this->trans('category.add.label'),
             'sortable'           => false,
             'selectable'         => false,
             'clickable'          => true,

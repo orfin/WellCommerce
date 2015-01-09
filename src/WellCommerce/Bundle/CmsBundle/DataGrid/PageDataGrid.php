@@ -34,7 +34,7 @@ class PageDataGrid extends AbstractDataGrid implements DataGridInterface
     {
         $collection->add(new Column([
             'id'         => 'id',
-            'caption'    => $this->trans('page.id'),
+            'caption'    => $this->trans('page.id.label'),
             'sorting'    => new Sorting([
                 'default_order' => Sorting::SORT_DIR_DESC
             ]),
@@ -50,12 +50,6 @@ class PageDataGrid extends AbstractDataGrid implements DataGridInterface
         $collection->add(new Column([
             'id'         => 'name',
             'caption'    => $this->trans('page.name.label'),
-            'appearance' => new Appearance([
-                'width' => 70
-            ]),
-            'filter'     => new Filter([
-                'type' => Filter::FILTER_INPUT
-            ])
         ]));
     }
 }

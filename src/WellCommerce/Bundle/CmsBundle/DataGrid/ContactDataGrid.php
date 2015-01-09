@@ -22,7 +22,6 @@ use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
 /**
  * Class ContactDataGrid
  *
- * @package WellCommerce\Bundle\CmsBundle
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class ContactDataGrid extends AbstractDataGrid implements DataGridInterface
@@ -34,7 +33,7 @@ class ContactDataGrid extends AbstractDataGrid implements DataGridInterface
     {
         $collection->add(new Column([
             'id'         => 'id',
-            'caption'    => $this->trans('contact.id'),
+            'caption'    => $this->trans('contact.id.label'),
             'sorting'    => new Sorting([
                 'default_order' => Sorting::SORT_DIR_DESC
             ]),
@@ -49,13 +48,7 @@ class ContactDataGrid extends AbstractDataGrid implements DataGridInterface
 
         $collection->add(new Column([
             'id'         => 'name',
-            'caption'    => $this->trans('contact.name'),
-            'appearance' => new Appearance([
-                'width'   => 70,
-            ]),
-            'filter'     => new Filter([
-                'type' => Filter::FILTER_INPUT
-            ])
+            'caption'    => $this->trans('contact.name.label'),
         ]));
     }
 }
