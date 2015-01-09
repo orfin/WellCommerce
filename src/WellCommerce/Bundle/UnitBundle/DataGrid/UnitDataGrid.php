@@ -22,7 +22,6 @@ use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
 /**
  * Class UnitDataGrid
  *
- * @package WellCommerce\Bundle\UnitBundle
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class UnitDataGrid extends AbstractDataGrid implements DataGridInterface
@@ -34,7 +33,7 @@ class UnitDataGrid extends AbstractDataGrid implements DataGridInterface
     {
         $collection->add(new Column([
             'id'         => 'id',
-            'caption'    => $this->trans('unit.id'),
+            'caption'    => $this->trans('unit.id.label'),
             'sorting'    => new Sorting([
                 'default_order' => Sorting::SORT_DIR_DESC
             ]),
@@ -49,13 +48,7 @@ class UnitDataGrid extends AbstractDataGrid implements DataGridInterface
 
         $collection->add(new Column([
             'id'         => 'name',
-            'caption'    => $this->trans('unit.name'),
-            'appearance' => new Appearance([
-                'width'   => 70,
-            ]),
-            'filter'     => new Filter([
-                'type' => Filter::FILTER_INPUT
-            ])
+            'caption'    => $this->trans('unit.name.label'),
         ]));
     }
 }
