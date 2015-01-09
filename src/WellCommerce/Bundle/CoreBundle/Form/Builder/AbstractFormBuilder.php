@@ -31,7 +31,7 @@ abstract class AbstractFormBuilder extends AbstractContainer implements FormBuil
     protected $resolverFactory;
 
     /**
-     * @var FormDataMapperInterface
+     * @var FormHandlerInterface
      */
     protected $formHandler;
 
