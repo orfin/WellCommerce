@@ -29,6 +29,11 @@ use WellCommerce\Bundle\CoreBundle\DataSet\Transformer\TransformerCollection;
 abstract class AbstractDataSet extends ContainerAware
 {
     /**
+     * @var string
+     */
+    protected $identifier;
+
+    /**
      * @var QueryBuilderInterface
      */
     protected $queryBuilder;
@@ -54,10 +59,8 @@ abstract class AbstractDataSet extends ContainerAware
      * @param string                $identifier
      * @param QueryBuilderInterface $queryBuilder
      */
-    public function __construct(
-        $identifier,
-        QueryBuilderInterface $queryBuilder
-    ) {
+    public function __construct($identifier, QueryBuilderInterface $queryBuilder)
+    {
         $this->identifier   = $identifier;
         $this->queryBuilder = $queryBuilder;
         $this->columns      = new ColumnCollection();
