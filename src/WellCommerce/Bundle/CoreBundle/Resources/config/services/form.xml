@@ -5,14 +5,6 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="form.builder" class="WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilder">
-            <argument type="service" id="form.resolver.factory"/>
-            <argument type="service" id="event_dispatcher"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
-
         <service id="form.formatter.javascript" class="WellCommerce\Bundle\CoreBundle\Form\Formatter\JavascriptFormatter" />
 
         <service id="form.renderer.javascript" class="WellCommerce\Bundle\CoreBundle\Form\Renderer\JavascriptRenderer">
@@ -30,7 +22,10 @@
             <argument type="service" id="request_stack"/>
         </service>
 
-        <service id="form.validator" class="WellCommerce\Bundle\CoreBundle\Form\Validator\FormValidator" />
+        <service id="form.validator" class="WellCommerce\Bundle\CoreBundle\Form\Validator\FormValidator">
+            <argument type="service" id="doctrine_helper"/>
+            <argument type="service" id="validator"/>
+        </service>
 
         <service id="form.handler" class="WellCommerce\Bundle\CoreBundle\Form\Handler\FormHandler">
             <argument type="service" id="event_dispatcher"/>
@@ -160,38 +155,6 @@
 
         <service id="form.filter.comma_to_dot_changer" class="WellCommerce\Bundle\CoreBundle\Form\Filters\CommaToDotChanger" scope="prototype">
             <tag name="form.filter" alias="comma_to_dot_changer"/>
-        </service>
-
-        <service id="form.rule.compare" class="WellCommerce\Bundle\CoreBundle\Form\Rules\Compare" scope="prototype">
-            <tag name="form.rule" alias="compare"/>
-        </service>
-
-        <service id="form.rule.custom" class="WellCommerce\Bundle\CoreBundle\Form\Rules\Custom" scope="prototype">
-            <tag name="form.rule" alias="custom"/>
-        </service>
-
-        <service id="form.rule.date_to" class="WellCommerce\Bundle\CoreBundle\Form\Rules\DateTo" scope="prototype">
-            <tag name="form.rule" alias="date_to"/>
-        </service>
-
-        <service id="form.rule.email" class="WellCommerce\Bundle\CoreBundle\Form\Rules\Email" scope="prototype">
-            <tag name="form.rule" alias="email"/>
-        </service>
-
-        <service id="form.rule.format" class="WellCommerce\Bundle\CoreBundle\Form\Rules\Format" scope="prototype">
-            <tag name="form.rule" alias="format"/>
-        </service>
-
-        <service id="form.rule.language_unique" class="WellCommerce\Bundle\CoreBundle\Form\Rules\LanguageUnique" scope="prototype">
-            <tag name="form.rule" alias="language_unique"/>
-        </service>
-
-        <service id="form.rule.required" class="WellCommerce\Bundle\CoreBundle\Form\Rules\Required" scope="prototype">
-            <tag name="form.rule" alias="required"/>
-        </service>
-
-        <service id="form.rule.unique" class="WellCommerce\Bundle\CoreBundle\Form\Rules\Unique" scope="prototype">
-            <tag name="form.rule" alias="unique"/>
         </service>
 
         <service id="form.dependency.show" class="WellCommerce\Bundle\CoreBundle\Form\Dependencies\Show" scope="prototype">
