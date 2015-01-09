@@ -52,11 +52,6 @@ class ClientGroupFormBuilder extends AbstractFormBuilder implements FormBuilderI
         $languageData->addChild($this->getElement('text_field', [
             'name'  => 'name',
             'label' => $this->trans('client_group.name.label'),
-            'rules' => [
-                $this->getRule('required', [
-                    'message' => $this->trans('client_group.name.error.required')
-                ]),
-            ]
         ]));
 
         $form->addFilter($this->getFilter('no_code'));

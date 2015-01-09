@@ -11,7 +11,6 @@
  */
 namespace WellCommerce\Bundle\UserBundle\Form;
 
-use WellCommerce\Bundle\CoreBundle\Form\AbstractForm;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\AbstractFormBuilder;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
@@ -31,21 +30,11 @@ class UserLoginFormBuilder extends AbstractFormBuilder implements FormBuilderInt
         $form->addChild($this->getElement('text_field', [
             'name'  => '_username',
             'label' => $this->trans('user_login.username.label'),
-            'rules' => [
-                $this->getRule('required',[
-                    'message' => $this->trans('user_login.username.error.required')
-                ])
-            ]
         ]));
 
         $form->addChild($this->getElement('password', [
             'name'  => '_password',
             'label' => $this->trans('user_login.password.label'),
-            'rules' => [
-                $this->getRule('required',[
-                    'message' => $this->trans('user_login.password.error.required')
-                ])
-            ]
         ]));
 
         $form->addChild($this->getElement('submit', [
@@ -56,7 +45,5 @@ class UserLoginFormBuilder extends AbstractFormBuilder implements FormBuilderInt
         $form->addFilter($this->getFilter('no_code'));
         $form->addFilter($this->getFilter('trim'));
         $form->addFilter($this->getFilter('secure'));
-
-        return $form;
     }
 }

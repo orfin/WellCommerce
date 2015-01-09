@@ -38,11 +38,6 @@ class ThemeFormBuilder extends AbstractFormBuilder implements FormBuilderInterfa
         $requiredData->addChild($this->getElement('text_field', [
             'name'  => 'name',
             'label' => $this->trans('Theme name'),
-            'rules' => [
-                $this->getRule('required', [
-                    'message' => $this->trans('Theme name is required')
-                ]),
-            ]
         ]));
 
         $requiredData->addChild($this->getElement('select', [

@@ -41,11 +41,6 @@ class CompanyFormBuilder extends AbstractFormBuilder implements FormBuilderInter
         $requiredData->addChild($this->getElement('text_field', [
             'name'  => 'shortName',
             'label' => $this->trans('company.short_name'),
-            'rules' => [
-                $this->getRule('required', [
-                    'message' => $this->trans('Short name is required')
-                ])
-            ]
         ]));
 
         $addressData = $form->addChild($this->getElement('nested_fieldset', [
