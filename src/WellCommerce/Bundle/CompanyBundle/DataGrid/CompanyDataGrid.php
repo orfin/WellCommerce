@@ -48,34 +48,19 @@ class CompanyDataGrid extends AbstractDataGrid implements DataGridInterface
         ]));
 
         $collection->add(new Column([
-            'id'         => 'name',
-            'caption'    => $this->trans('company.name'),
-            'appearance' => new Appearance([
-                'width' => 70,
-            ]),
-            'filter'     => new Filter([
-                'type' => Filter::FILTER_INPUT
-            ])
+            'id'      => 'name',
+            'caption' => $this->trans('company.name'),
         ]));
 
         $collection->add(new Column([
-            'id'         => 'shortName',
-            'caption'    => $this->trans('company.short_name'),
-            'appearance' => new Appearance([
-                'width' => 70,
-            ]),
-            'filter'     => new Filter([
-                'type' => Filter::FILTER_INPUT
-            ])
+            'id'      => 'shortName',
+            'caption' => $this->trans('company.short_name'),
         ]));
 
         $collection->add(new Column([
-            'id'         => 'createdAt',
-            'caption'    => $this->trans('company.created_at'),
-            'appearance' => new Appearance([
-                'width' => 70,
-            ]),
-            'filter'     => new Filter([
+            'id'      => 'createdAt',
+            'caption' => $this->trans('company.created_at'),
+            'filter'  => new Filter([
                 'type' => Filter::FILTER_BETWEEN
             ])
         ]));
