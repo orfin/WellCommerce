@@ -48,8 +48,33 @@ class PageDataGrid extends AbstractDataGrid implements DataGridInterface
         ]));
 
         $collection->add(new Column([
-            'id'         => 'name',
-            'caption'    => $this->trans('page.name.label'),
+            'id'      => 'name',
+            'caption' => $this->trans('page.name.label'),
+        ]));
+
+        $collection->add(new Column([
+            'id'         => 'hierarchy',
+            'caption'    => $this->trans('page.hierarchy.label'),
+            'appearance' => new Appearance([
+                'width' => 90,
+            ]),
+            'editable'   => true
+        ]));
+
+        $collection->add(new Column([
+            'id'         => 'publish',
+            'caption'    => $this->trans('page.publish.label'),
+            'appearance' => new Appearance([
+                'width' => 90,
+            ]),
+            'selectable' => true,
+            'filter'     => new Filter([
+                'type'    => Filter::FILTER_SELECT,
+                'options' => [
+                    0 => 'No',
+                    1 => 'Yes'
+                ]
+            ])
         ]));
     }
 }

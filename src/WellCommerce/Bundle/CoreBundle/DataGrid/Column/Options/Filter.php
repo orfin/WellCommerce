@@ -80,8 +80,8 @@ class Filter extends AbstractOptions
         $filterOptions = [];
         foreach ($values as $key => $value) {
             $filterOptions[] = [
-                'id'    => $key,
-                'value' => $value
+                'id'      => $key,
+                'caption' => $value
             ];
         }
 

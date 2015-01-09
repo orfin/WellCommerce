@@ -29,8 +29,10 @@ class PageDataSet extends AbstractDataSet implements DataSetInterface
     protected function configureOptions(DataSetOptionsResolver $resolver)
     {
         $resolver->setColumns([
-            'id'   => 'page.id',
-            'name' => 'page_translation.name'
+            'id'        => 'page.id',
+            'name'      => 'page_translation.name',
+            'publish'   => 'page.publish',
+            'hierarchy' => 'page.hierarchy',
         ]);
     }
 }
