@@ -383,39 +383,6 @@ class Product
     }
 
     /**
-     * Returns product main photo
-     *
-     * @return null
-     */
-    public function getMainPhoto()
-    {
-        foreach ($this->productPhotos as $photo) {
-            if ($photo->getMainPhoto() == 1) {
-                return $photo->getPhoto();
-            }
-        }
-
-        return null;
-    }
-
-    /**
-     * Returns a collection of additional product photos
-     *
-     * @return ArrayCollection
-     */
-    public function getAdditionalPhotos()
-    {
-        $photos = new ArrayCollection();
-        foreach ($this->productPhotos as $photo) {
-            if ($photo->getMainPhoto() == 0) {
-                $photos->add($photo->getPhoto());
-            }
-        }
-
-        return $photos;
-    }
-
-    /**
      * Sets product photos
      *
      * @param ArrayCollection $photos

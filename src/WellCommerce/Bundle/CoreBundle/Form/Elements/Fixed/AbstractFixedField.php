@@ -31,7 +31,7 @@ abstract class AbstractFixedField extends AbstractField implements ElementInterf
     {
         parent::configureOptions($resolver);
 
-        $resolver->setNormalizer('property_path', function ($options) {
+        $resolver->setNormalizer('property_path', function () {
             return null;
         });
     }
