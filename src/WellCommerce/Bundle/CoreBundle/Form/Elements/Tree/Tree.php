@@ -97,25 +97,26 @@ class Tree extends AbstractTree implements ElementInterface
     {
         parent::prepareAttributesCollection($collection);
         $collection->add(new Attribute('sAddLabel', $this->getOption('addLabel')));
-        $collection->add(new Attribute('bSelectable', $this->getOption('selectable')));
-        $collection->add(new Attribute('bChoosable', $this->getOption('choosable')));
-        $collection->add(new Attribute('bClickable', $this->getOption('clickable')));
-        $collection->add(new Attribute('bDeletable', $this->getOption('deletable')));
-        $collection->add(new Attribute('bAddable', $this->getOption('addable')));
-        $collection->add(new Attribute('iTotal', $this->getOption('total')));
-        $collection->add(new Attribute('iRestrict', $this->getOption('restrict')));
-        $collection->add(new Attribute('oItems', $this->getOption('items')));
-        $collection->add(new Attribute('fOnClick', $this->getOption('onClick')));
-        $collection->add(new Attribute('fOnDuplicate', $this->getOption('onDuplicate')));
-        $collection->add(new Attribute('fOnAdd', $this->getOption('onAdd')));
-        $collection->add(new Attribute('fOnAfterAdd', $this->getOption('onAfterAdd')));
-        $collection->add(new Attribute('fOnDelete', $this->getOption('onDelete')));
-        $collection->add(new Attribute('fOnAfterDelete', $this->getOption('onAfterDelete')));
-        $collection->add(new Attribute('fOnSaveOrder', $this->getOption('onSaveOrder')));
+        $collection->add(new Attribute('bSelectable', $this->getOption('selectable'), Attribute::TYPE_BOOLEAN));
+        $collection->add(new Attribute('bChoosable', $this->getOption('choosable'), Attribute::TYPE_BOOLEAN));
+        $collection->add(new Attribute('bClickable', $this->getOption('clickable'), Attribute::TYPE_BOOLEAN));
+        $collection->add(new Attribute('bDeletable', $this->getOption('deletable'), Attribute::TYPE_BOOLEAN));
+        $collection->add(new Attribute('bAddable', $this->getOption('addable'), Attribute::TYPE_BOOLEAN));
+        $collection->add(new Attribute('iTotal', $this->getOption('total'), Attribute::TYPE_INTEGER));
+        $collection->add(new Attribute('iRestrict', $this->getOption('restrict'), Attribute::TYPE_INTEGER));
+        $collection->add(new Attribute('oItems', $this->getOption('items'), Attribute::TYPE_ARRAY));
+        $collection->add(new Attribute('fOnClick', $this->getOption('onClick'), Attribute::TYPE_FUNCTION));
+        $collection->add(new Attribute('fOnDuplicate', $this->getOption('onDuplicate'), Attribute::TYPE_FUNCTION));
+        $collection->add(new Attribute('fOnAdd', $this->getOption('onAdd'), Attribute::TYPE_FUNCTION));
+        $collection->add(new Attribute('fOnAfterAdd', $this->getOption('onAfterAdd'), Attribute::TYPE_FUNCTION));
+        $collection->add(new Attribute('fOnDelete', $this->getOption('onDelete'), Attribute::TYPE_FUNCTION));
+        $collection->add(new Attribute('fOnAfterDelete', $this->getOption('onAfterDelete'), Attribute::TYPE_FUNCTION));
+        $collection->add(new Attribute('fOnSaveOrder', $this->getOption('onSaveOrder'), Attribute::TYPE_FUNCTION));
         $collection->add(new Attribute('sActive', $this->getOption('active')));
         $collection->add(new Attribute('sOnAfterDeleteId', $this->getOption('onAfterDeleteId')));
         $collection->add(new Attribute('sAddItemPrompt', $this->getOption('add_item_prompt')));
-        $collection->add(new Attribute('bPreventDuplicates', $this->getOption('prevent_duplicates')));
-        $collection->add(new Attribute('bPreventDuplicatesOnAllLevels', $this->getOption('prevent_duplicates_on_all_levels')));
+        $collection->add(new Attribute('bPreventDuplicates', $this->getOption('prevent_duplicates'), Attribute::TYPE_BOOLEAN));
+        $collection->add(new Attribute('bPreventDuplicatesOnAllLevels',
+                $this->getOption('prevent_duplicates_on_all_levels')));
     }
 }
