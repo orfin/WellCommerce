@@ -5,7 +5,7 @@
 <script type="text/javascript">
 var DataGrid;
 {% for event in datagrid.getOptions().getEventHandlers() %}
-{{ include(template_from_string(event.getJavascriptFunction())) }}
+    {{ attribute(macros, event.getFunctionName(), [event.getOptions()]) }}
 {% endfor %}
 
 $(document).ready(function() {

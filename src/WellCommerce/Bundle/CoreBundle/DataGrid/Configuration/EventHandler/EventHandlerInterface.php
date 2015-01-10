@@ -12,8 +12,6 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\EventHandler;
 
-use Symfony\Component\OptionsResolver\OptionsResolver;
-
 /**
  * Interface EventHandlerInterface
  *
@@ -30,9 +28,9 @@ interface EventHandlerInterface
     public function getFunctionName();
 
     /**
-     * Returns template javascript used in DataGrid renderer
+     * Returns event options
      *
-     * @return string
+     * @return array
      */
-    public function getJavascriptFunction();
+    public function getOptions();
 }

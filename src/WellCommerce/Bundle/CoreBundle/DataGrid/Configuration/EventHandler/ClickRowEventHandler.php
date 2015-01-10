@@ -29,15 +29,4 @@ class ClickRowEventHandler extends AbstractRowEventHandler implements EventHandl
     {
         return 'click_row';
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getJavascriptFunction()
-    {
-        return "
-        function {$this->options['function']}(dg, id) {
-            return window.location.href = Routing.generate('{$this->options['route']}', {id: id});
-        }";
-    }
 }

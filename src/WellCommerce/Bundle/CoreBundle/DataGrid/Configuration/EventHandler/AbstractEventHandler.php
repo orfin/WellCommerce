@@ -89,8 +89,8 @@ class AbstractEventHandler
     /**
      * {@inheritdoc}
      */
-    public function getJavascriptFunction()
+    public function getOptions()
     {
-        return "";
+        return $this->options;
     }
-} 
+}

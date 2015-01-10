@@ -49,37 +49,4 @@ class DeleteGroupEventHandler extends AbstractEventHandler implements EventHandl
             'group_action' => ['bool', 'string'],
         ]);
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getJavascriptFunction()
-    {
-        return "
-        function {$this->options['function']}(dg, ids) {
-            var title = '{% trans %}Delete{% endtrans %}';
-            var msg = '{% trans %}Are you sure to delete {% endtrans %} ' + ids.join(', ') + '?';
-            var params = {
-                dg: dg,
-                ids: ids
-            };
-            var func = function(p) {
-                oRequest = {
-                    ids: p.ids
-                }
-                DataGrid.MakeRequest(Routing.generate('{$this->options['route']}', {ids: p.ids}), {}, function(oData){
-                    if(oData.success){
-                        GMessage(p.ids + ' successfully deleted');
-                        DataGrid.LoadData();
-                        DataGrid.ClearSelection();
-                    }
-                    if(oData.error){
-                        GError(oData.error);
-                        DataGrid.ClearSelection();
-                    }
-                });
-            };
-            new GF_Alert(title, msg, func, true, params);
-        };";
-    }
-} 
+}

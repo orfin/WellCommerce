@@ -49,15 +49,4 @@ class LoadEventHandler extends AbstractEventHandler implements EventHandlerInter
             'route' => ['string'],
         ]);
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getJavascriptFunction()
-    {
-        return "
-        function {$this->options['function']}(oRequest) {
-            DataGrid.MakeRequest(Routing.generate('{$this->options['route']}'), oRequest, GF_Datagrid.ProcessIncomingData);
-        }";
-    }
 }

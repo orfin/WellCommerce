@@ -55,3 +55,140 @@
         ]
     };
 {% endmacro %}
+
+{% macro load(options) %}
+    {% autoescape true %}
+    function {{ options.function }}(oRequest) {
+        DataGrid.MakeRequest(Routing.generate('{{ options.route }}'), oRequest, GF_Datagrid.ProcessIncomingData);
+    }
+    {% endautoescape %}
+{% endmacro %}
+
+{% macro click_row(options) %}
+    {% autoescape true %}
+    function {{ options.function }}(dg, id) {
+        return window.location.href = Routing.generate('{{ options.route }}', {id: id});
+    }
+    {% endautoescape %}
+{% endmacro %}
+
+
+{% macro edit_row(options) %}
+    {% autoescape true %}
+    function {{ options.function }}(dg, id) {
+        return window.location.href = Routing.generate('{{ options.route }}', {id: id});
+    }
+    {% endautoescape %}
+{% endmacro %}
+
+{% macro delete_row(options) %}
+    {% autoescape true %}
+    function {{ options.function }}(dg, id) {
+        var oRow = DataGrid.GetRow(id);
+        var title = '{% trans %}Delete{% endtrans %}';
+        var msg = '{% trans %}Are you sure to delete {% endtrans %} ' + oRow.name + '?';
+        var params = {
+            id: id
+        };
+
+        var func = function(p) {
+            oRequest = {
+                id: p.id
+            }
+
+            DataGrid.MakeRequest(Routing.generate('{{ options.route }}', {id: p.id}), {}, function(oData){
+                if(oData.success){
+                    GMessage(oRow.name + ' successfully deleted');
+                    DataGrid.LoadData();
+                    DataGrid.ClearSelection();
+                }
+                if(oData.error){
+                    GError(oData.error);
+                    DataGrid.ClearSelection();
+                }
+            });
+        };
+
+        new GF_Alert(title, msg, func, true, params);
+    }
+    {% endautoescape %}
+{% endmacro %}
+
+{% macro delete_group(options) %}
+    {% autoescape true %}
+    function {{ options.function }}(dg, ids) {
+        var title = '{% trans %}Delete{% endtrans %}';
+        var msg = '{% trans %}Are you sure to delete {% endtrans %} ' + ids.join(', ') + '?';
+        var params = {
+            dg: dg,
+            ids: ids
+        };
+
+        var func = function(p) {
+            oRequest = {
+                ids: p.ids
+            }
+
+            DataGrid.MakeRequest(Routing.generate('{{ options.route }}', {ids: p.ids}), {}, function(oData){
+                if(oData.success){
+                    GMessage('Rows successfully deleted');
+                    DataGrid.LoadData();
+                    DataGrid.ClearSelection();
+                }
+                if(oData.error){
+                    GError(oData.error);
+                    DataGrid.ClearSelection();
+                }
+            });
+        };
+
+        new GF_Alert(title, msg, func, true, params);
+    }
+    {% endautoescape %}
+{% endmacro %}
+
+{% macro loaded(options) %}
+    {% autoescape true %}
+
+    {% endautoescape %}
+{% endmacro %}
+
+{% macro process(options) %}
+    {% autoescape true %}
+
+    {% endautoescape %}
+{% endmacro %}
+
+{% macro update_row(options) %}
+    {% autoescape true %}
+    function {{ options.function }}(sId, oRow, sColumn, sPreviousValue) {
+        var oRequest = {
+            id:        sId,
+            product:   oRow,
+            column:    sColumn,
+            previous:  sPreviousValue
+        };
+
+        DataGrid.MakeRequest(Routing.generate('{{ options.route }}'), oRequest, function(oData){
+            if(oData.success){
+                GMessage(oRow.name + ' successfully saved');
+                DataGrid.LoadData();
+                DataGrid.ClearSelection();
+            }
+
+            if(oData.error){
+                GError(oData.error);
+                DataGrid.ClearSelection();
+            }
+        });
+    }
+    {% endautoescape %}
+{% endmacro %}
+
+{% macro view_row(options) %}
+    {% autoescape true %}
+    function {{ options.function }}(dg, id) {
+        return window.location.href = Routing.generate('{{ options.route }}', {id: id});
+    }
+    {% endautoescape %}
+{% endmacro %}
