@@ -41,14 +41,14 @@ class RouteRepository extends AbstractEntityRepository implements RouteRepositor
         $existsInValues = in_array($slug, (array)$values);
 
         // if slug is the same as other values, try to add locale part
-        if($existsInValues){
-            $slug = sprintf('%s-%s',$slug, $locale);
+        if ($existsInValues) {
+            $slug = sprintf('%s-%s', $slug, $locale);
         }
 
         // check if slug has a resource
-        $route = $this->findOneByPath($slug);
+        $route = $this->findRouteByPath($slug);
 
-        if (!empty($route)) {
+        if (null !== $route) {
 
             // if passed identifier and locale are same as in route, assume we can change slug directly
             if ($route->getIdentifier() == $id && $route->getLocale() == $locale) {
@@ -62,5 +62,15 @@ class RouteRepository extends AbstractEntityRepository implements RouteRepositor
         }
 
         return $slug;
+    }
+
+    /**
+     * @param $slug
+     *
+     * @return null|\WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface
+     */
+    protected function findRouteByPath($slug)
+    {
+        return $this->findOneBy(['path' => $slug]);
     }
 }
