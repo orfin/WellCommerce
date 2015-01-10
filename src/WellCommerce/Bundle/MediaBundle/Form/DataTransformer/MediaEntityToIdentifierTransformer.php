@@ -15,39 +15,21 @@ namespace WellCommerce\Bundle\MediaBundle\Form\DataTransformer;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\AbstractDataTransformer;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\DataTransformerInterface;
+use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\EntityToIdentifierTransformer;
 
 /**
  * Class MediaEntityToIdentifierTransformer
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class MediaEntityToIdentifierTransformer extends AbstractDataTransformer implements DataTransformerInterface
+class MediaEntityToIdentifierTransformer extends EntityToIdentifierTransformer implements DataTransformerInterface
 {
-    /**
-     * Transforms entity to primary key identifier
-     *
-     * @param $entity
-     *
-     * @return int|mixed
-     */
-    public function transform($entity)
-    {
-        if (null == $entity) {
-            return 0;
-        }
-
-        $meta       = $this->getRepository()->getMetadata();
-        $identifier = $meta->getSingleIdentifierFieldName();
-
-        return $this->propertyAccessor->getValue($entity, $identifier);
-    }
-
     /**
      * Transforms identifier to entity
      *
-     * @param $id
-     *
-     * @return mixed
+     * @param object                $modelData
+     * @param PropertyPathInterface $propertyPath
+     * @param mixed                 $value
      */
     public function reverseTransform($modelData, PropertyPathInterface $propertyPath, $value)
     {
