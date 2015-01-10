@@ -50,7 +50,6 @@ class RouteRepository extends AbstractEntityRepository implements RouteRepositor
         $route = $this->findRouteByPath($slug);
 
         if (null !== $route) {
-
             // if passed identifier and locale are same as in route, assume we can change slug directly
             if ($this->hasRouteSameLocaleAndId($route, $locale, $id)) {
                 return $slug;
@@ -84,17 +83,26 @@ class RouteRepository extends AbstractEntityRepository implements RouteRepositor
      *
      * @return bool
      */
-
     protected function hasRouteSameLocaleAndId(RouteInterface $route, $locale, $id)
     {
-        return ($route->getIdentifier() == $id && $route->getLocale() == $locale);
+        return ($this->getRouteIdentifier($route)->getId() == $id && $route->getLocale() == $locale);
+    }
+
+    /**
+     * @param RouteInterface $route
+     *
+     * @return object
+     */
+    protected function getRouteIdentifier(RouteInterface $route)
+    {
+        return $route->getIdentifier();
     }
 
     /**
      * Makes original slug iterated
      *
      * @param string $slug
-     * @param int $iteration
+     * @param int    $iteration
      *
      * @return string
      */
