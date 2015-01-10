@@ -23,13 +23,6 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 interface PageRepositoryInterface extends RepositoryInterface, DataSetAwareRepositoryInterface
 {
     /**
-     * Returns pages tree as a collection
-     *
-     * @return mixed
-     */
-    public function getTreeItems();
-
-    /**
      * Returns parsed pages tree
      *
      * @return array

@@ -11,6 +11,7 @@
  */
 namespace WellCommerce\Bundle\CmsBundle\Form\Admin;
 
+use WellCommerce\Bundle\CoreBundle\DataSet\CollectionBuilder\FlatTreeBuilder;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\AbstractFormBuilder;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\EntityToIdentifierTransformer;
@@ -66,6 +67,8 @@ class PageFormBuilder extends AbstractFormBuilder implements FormBuilderInterfac
             'default' => 0
         ]));
 
+        $pagesTreeBuilder = new FlatTreeBuilder($this->get('page.dataset'));
+
         $mainData->addChild($this->getElement('tree', [
             'name'        => 'parent',
             'label'       => $this->trans('page.parent.label'),
@@ -73,7 +76,7 @@ class PageFormBuilder extends AbstractFormBuilder implements FormBuilderInterfac
             'selectable'  => false,
             'sortable'    => false,
             'clickable'   => false,
-            'items'       => $this->get('page.repository')->getTreeItems(),
+            'items'       => $pagesTreeBuilder->getItems(),
             'restrict'    => $this->getParam('id'),
             'transformer' => new EntityToIdentifierTransformer($this->get('page.repository'))
         ]));

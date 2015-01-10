@@ -30,7 +30,12 @@ class PageDataSet extends AbstractDataSet implements DataSetInterface
     {
         $resolver->setColumns([
             'id'        => 'page.id',
+            'parent'    => 'IDENTITY(page.parent)',
+            'children'  => 'COUNT(page_children.id)',
             'name'      => 'page_translation.name',
+            'slug'      => 'page_translation.slug',
+            'locale'    => 'page_translation.locale',
+            'route'     => 'IDENTITY(page_translation.route)',
             'publish'   => 'page.publish',
             'hierarchy' => 'page.hierarchy',
         ]);

@@ -25,6 +25,19 @@ class PageRepository extends AbstractEntityRepository implements PageRepositoryI
     /**
      * {@inheritdoc}
      */
+    public function getDataSetQueryBuilder()
+    {
+        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder->leftJoin('page.translations', 'page_translation');
+        $queryBuilder->leftJoin('page.children', 'page_children');
+        $queryBuilder->groupBy('page.id');
+
+        return $queryBuilder;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getPagesTree()
     {
         $queryBuilder = $this->getQueryBuilder('page');
@@ -59,49 +72,5 @@ class PageRepository extends AbstractEntityRepository implements PageRepositoryI
         $builder = new CategoryTreeBuilder($items);
 
         return $builder->getTree();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getTreeItems()
-    {
-        $queryBuilder = $this->getQueryBuilder('page');
-        $queryBuilder->select('
-            page.id,
-            page.hierarchy,
-            IDENTITY(page.parent) parent,
-            COUNT(page_children.id) children,
-            page_translation.name,
-            page_translation.slug,
-            page_translation.locale
-        ');
-        $queryBuilder->leftJoin(
-            'WellCommerceCmsBundle:Page',
-            'page_children',
-            'WITH',
-            'page_children.parent = page.id');
-        $queryBuilder->leftJoin(
-            'WellCommerceCmsBundle:PageTranslation',
-            'page_translation',
-            'WITH',
-            'page.id = page_translation.translatable');
-        $queryBuilder->groupBy('page.id');
-        $query = $queryBuilder->getQuery();
-        $items = $query->getArrayResult();
-
-        $categoriesTree = [];
-        foreach ($items as $item) {
-            $categoriesTree[$item['id']] = [
-                'id'          => $item['id'],
-                'name'        => $item['name'],
-                'slug'        => $item['slug'],
-                'hasChildren' => (bool)($item['children'] > 0),
-                'parent'      => $item['parent'],
-                'weight'      => $item['hierarchy'],
-            ];
-        }
-
-        return $categoriesTree;
     }
 }
