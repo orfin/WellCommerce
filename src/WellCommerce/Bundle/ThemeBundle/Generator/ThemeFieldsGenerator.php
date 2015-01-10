@@ -19,7 +19,7 @@ use Symfony\Component\Finder\Finder;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\Form;
-use WellCommerce\Bundle\CoreBundle\Form\Elements\TextField;
+use WellCommerce\Bundle\CoreBundle\Form\Elements\Input\TextField;
 use WellCommerce\Bundle\ThemeBundle\Entity\Theme;
 
 /**
@@ -208,12 +208,27 @@ class ThemeFieldsGenerator extends AbstractContainer implements ContainerAwareIn
      */
     protected function addFieldWidth(\DOMElement $field)
     {
-        $attributes = $this->getFieldAttributes($field);
+        return $this->addSizeInput('width',  $this->getFieldAttributes($field));
+    }
 
+    /**
+     * Adds height input
+     *
+     * @param \DOMElement $field
+     *
+     * @return mixed
+     */
+    protected function addFieldHeight(\DOMElement $field)
+    {
+        return $this->addSizeInput('height',  $this->getFieldAttributes($field));
+    }
+
+    protected function addSizeInput($type, $attributes)
+    {
         return $this->builder->getElement('text_field', $attributes + [
                 'suffix'        => 'px',
                 'size'          => TextField::SIZE_SHORT,
-                'css_attribute' => 'width'
+                'css_attribute' => $type
             ]);
     }
 
@@ -286,24 +301,6 @@ class ThemeFieldsGenerator extends AbstractContainer implements ContainerAwareIn
     protected function getFieldSelector(\DOMElement $item)
     {
         return str_replace('<layout-box/>', $this->layoutBoxSelector, $item->nodeValue);
-    }
-
-    /**
-     * Adds height input
-     *
-     * @param \DOMElement $field
-     *
-     * @return mixed
-     */
-    protected function addFieldHeight(\DOMElement $field)
-    {
-        $attributes = $this->getFieldAttributes($field);
-
-        return $this->builder->getElement('text_field', $attributes + [
-                'suffix'        => 'px',
-                'size'          => TextField::SIZE_SHORT,
-                'css_attribute' => 'height'
-            ]);
     }
 
     /**
