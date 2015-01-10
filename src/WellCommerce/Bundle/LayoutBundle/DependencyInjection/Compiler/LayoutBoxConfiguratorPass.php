@@ -13,34 +13,22 @@
 namespace WellCommerce\Bundle\LayoutBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Reference;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\Compiler\AbstractCollectionPass;
 
 /**
  * Class LayoutBoxConfiguratorPass
  *
- * @package WellCommerce\Bundle\LayoutBundle\DependencyInjection\Compiler
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LayoutBoxConfiguratorPass implements CompilerPassInterface
+class LayoutBoxConfiguratorPass extends AbstractCollectionPass implements CompilerPassInterface
 {
     /**
-     * Processes the container
-     *
-     * @param ContainerBuilder $container
+     * @var string
      */
-    public function process(ContainerBuilder $container)
-    {
-        if (!$container->hasDefinition('layout_box.configurator.collection')) {
-            return;
-        }
+    protected $collectionServiceId = 'layout_box.configurator.collection';
 
-        $collection = $container->getDefinition('layout_box.configurator.collection');
-
-        foreach ($container->findTaggedServiceIds('layout_box.configurator') as $id => $attributes) {
-            $collection->addMethodCall('add', [
-                new Reference($id)
-            ]);
-        }
-    }
+    /**
+     * @var string
+     */
+    protected $serviceTag = 'layout_box.configurator';
 }

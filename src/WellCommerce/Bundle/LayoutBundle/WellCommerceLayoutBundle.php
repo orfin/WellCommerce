@@ -19,7 +19,6 @@ use WellCommerce\Bundle\LayoutBundle\DependencyInjection\Compiler\LayoutBoxConfi
 /**
  * Class WellCommerceLayoutBundle
  *
- * @package WellCommerce\Bundle\LayoutBundle
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class WellCommerceLayoutBundle extends Bundle

@@ -13,34 +13,22 @@
 namespace WellCommerce\Bundle\RoutingBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Reference;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\Compiler\AbstractCollectionPass;
 
 /**
  * Class RouteGeneratorPass
  *
- * @package WellCommerce\Bundle\RoutingBundle\DependencyInjection\Compiler
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class RouteGeneratorPass implements CompilerPassInterface
+class RouteGeneratorPass extends AbstractCollectionPass implements CompilerPassInterface
 {
     /**
-     * Processes the container
-     *
-     * @param ContainerBuilder $container
+     * @var string
      */
-    public function process(ContainerBuilder $container)
-    {
-        if (!$container->hasDefinition('route.generator.collection')) {
-            return;
-        }
+    protected $collectionServiceId = 'route.generator.collection';
 
-        $collection = $container->getDefinition('route.generator.collection');
-
-        foreach ($container->findTaggedServiceIds('route.generator') as $id => $attributes) {
-            $collection->addMethodCall('add', [
-                new Reference($id)
-            ]);
-        }
-    }
+    /**
+     * @var string
+     */
+    protected $serviceTag = 'route.generator';
 }
