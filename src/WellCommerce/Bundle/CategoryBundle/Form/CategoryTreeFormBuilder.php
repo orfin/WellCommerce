@@ -12,6 +12,7 @@
 namespace WellCommerce\Bundle\CategoryBundle\Form;
 
 use WellCommerce\Bundle\CategoryBundle\Repository\CategoryRepositoryInterface;
+use WellCommerce\Bundle\CoreBundle\DataSet\CollectionBuilder\FlatTreeBuilder;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\AbstractFormBuilder;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
@@ -24,15 +25,12 @@ use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
 class CategoryTreeFormBuilder extends AbstractFormBuilder implements FormBuilderInterface
 {
     /**
-     * @var CategoryRepositoryInterface
-     */
-    private $repository;
-
-    /**
      * {@inheritdoc}
      */
     public function buildForm(FormInterface $form)
     {
+        $categoryTreeBuilder = new FlatTreeBuilder($this->get('category.dataset.admin'));
+
         $form->addChild($this->getElement('tree', [
             'name'               => 'categories',
             'label'              => $this->trans('category.tree.label'),
@@ -44,7 +42,7 @@ class CategoryTreeFormBuilder extends AbstractFormBuilder implements FormBuilder
             'deletable'          => true,
             'addable'            => true,
             'prevent_duplicates' => true,
-            'items'              => $this->repository->getTreeItems(),
+            'items'              => $categoryTreeBuilder->getItems(),
             'onClick'            => 'openCategoryEditor',
             'onDuplicate'        => 'duplicateCategory',
             'onSaveOrder'        => 'changeOrder',
@@ -54,15 +52,5 @@ class CategoryTreeFormBuilder extends AbstractFormBuilder implements FormBuilder
             'onAfterDelete'      => 'openCategoryEditor',
             'active'             => (int)$this->getRequest()->attributes->get('id')
         ]));
-    }
-
-    /**
-     * Sets repository object
-     *
-     * @param CategoryRepositoryInterface $repository
-     */
-    public function setRepository(CategoryRepositoryInterface $repository)
-    {
-        $this->repository = $repository;
     }
 }

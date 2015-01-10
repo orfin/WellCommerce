@@ -11,6 +11,7 @@
  */
 namespace WellCommerce\Bundle\ProductBundle\Form;
 
+use WellCommerce\Bundle\CoreBundle\DataSet\CollectionBuilder\FlatTreeBuilder;
 use WellCommerce\Bundle\CoreBundle\DataSet\CollectionBuilder\SelectBuilder;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\AbstractFormBuilder;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
@@ -118,6 +119,8 @@ class ProductFormBuilder extends AbstractFormBuilder
             'label' => $this->trans('fieldset.categories.label')
         ]));
 
+        $categoryTreeBuilder = new FlatTreeBuilder($this->get('category.dataset.admin'));
+
         $categoriesField = $categoryPane->addChild($this->getElement('tree', [
             'name'        => 'categories',
             'label'       => $this->trans('product.categories.label'),
@@ -125,7 +128,7 @@ class ProductFormBuilder extends AbstractFormBuilder
             'selectable'  => true,
             'sortable'    => false,
             'clickable'   => false,
-            'items'       => $this->get('category.repository')->getTreeItems(),
+            'items'       => $categoryTreeBuilder->getItems(),
             'transformer' => new CollectionToArrayTransformer($this->get('category.repository'))
         ]));
 

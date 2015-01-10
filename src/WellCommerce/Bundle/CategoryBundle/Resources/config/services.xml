@@ -84,9 +84,21 @@
             <argument type="service" id="category.repository"/>
         </service>
 
+        <service id="category.dataset.query_builder.admin" class="WellCommerce\Bundle\CategoryBundle\DataSet\Admin\CategoryDataSetQueryBuilder" public="false">
+            <argument type="service" id="category.repository"/>
+        </service>
+
         <service id="category.dataset.front" class="WellCommerce\Bundle\CategoryBundle\DataSet\Front\CategoryDataSet">
-            <argument key="identifier">product</argument>
+            <argument key="identifier">category</argument>
             <argument type="service" id="category.dataset.query_builder.front"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="category.dataset.admin" class="WellCommerce\Bundle\CategoryBundle\DataSet\Admin\CategoryDataSet">
+            <argument key="identifier">category</argument>
+            <argument type="service" id="category.dataset.query_builder.admin"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -114,9 +126,6 @@
             <argument type="service" id="form.handler"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
-            </call>
-            <call method="setRepository">
-                <argument type="service" id="category.repository"/>
             </call>
         </service>
 

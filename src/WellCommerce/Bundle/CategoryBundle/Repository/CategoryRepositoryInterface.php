@@ -33,13 +33,6 @@ interface CategoryRepositoryInterface extends RepositoryInterface, DataSetAwareR
     public function getCategoriesTree();
 
     /**
-     * Returns categories tree as a collection
-     *
-     * @return mixed
-     */
-    public function getTreeItems();
-
-    /**
      * Adds category using only its name
      * Mostly used in alert prompt on category index/edit screen
      *

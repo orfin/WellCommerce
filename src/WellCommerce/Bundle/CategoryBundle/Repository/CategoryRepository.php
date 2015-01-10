@@ -73,50 +73,6 @@ class CategoryRepository extends AbstractEntityRepository implements CategoryRep
         return $builder->getTree();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getTreeItems()
-    {
-        $queryBuilder = $this->getQueryBuilder('category');
-        $queryBuilder->select('
-            category.id,
-            category.hierarchy,
-            IDENTITY(category.parent) parent,
-            COUNT(category_children.id) children,
-            category_translation.name,
-            category_translation.slug,
-            category_translation.locale
-        ');
-        $queryBuilder->leftJoin(
-            'WellCommerceCategoryBundle:Category',
-            'category_children',
-            'WITH',
-            'category_children.parent = category.id');
-        $queryBuilder->leftJoin(
-            'WellCommerceCategoryBundle:CategoryTranslation',
-            'category_translation',
-            'WITH',
-            'category.id = category_translation.translatable');
-        $queryBuilder->groupBy('category.id');
-        $query = $queryBuilder->getQuery();
-        $items = $query->getArrayResult();
-
-        $categoriesTree = [];
-        foreach ($items as $item) {
-            $categoriesTree[$item['id']] = [
-                'id'          => $item['id'],
-                'name'        => $item['name'],
-                'slug'        => $item['slug'],
-                'hasChildren' => (bool)($item['children'] > 0),
-                'parent'      => $item['parent'],
-                'weight'      => $item['hierarchy'],
-            ];
-        }
-
-        return $categoriesTree;
-    }
-
     public function changeOrder(array $items = [])
     {
         foreach ($items as $item) {

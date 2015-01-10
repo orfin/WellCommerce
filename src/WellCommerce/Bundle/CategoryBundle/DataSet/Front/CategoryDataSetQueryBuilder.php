@@ -13,15 +13,14 @@
 namespace WellCommerce\Bundle\CategoryBundle\DataSet\Front;
 
 use Doctrine\ORM\QueryBuilder;
-use WellCommerce\Bundle\CoreBundle\DataSet\QueryBuilder\AbstractDataSetQueryBuilder;
-use WellCommerce\Bundle\CoreBundle\DataSet\QueryBuilder\QueryBuilderInterface;
+use WellCommerce\Bundle\CategoryBundle\DataSet\Admin\CategoryDataSetQueryBuilder as BaseQueryBuilder;
 
 /**
  * Class CategoryDataSetQueryBuilder
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class CategoryDataSetQueryBuilder extends AbstractDataSetQueryBuilder implements QueryBuilderInterface
+class CategoryDataSetQueryBuilder extends BaseQueryBuilder
 {
     /**
      * {@inheritdoc}

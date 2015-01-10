@@ -10,16 +10,17 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CategoryBundle\DataSet\Front;
+namespace WellCommerce\Bundle\CategoryBundle\DataSet\Admin;
 
-use WellCommerce\Bundle\CategoryBundle\DataSet\Admin\CategoryDataSet as BaseDataSet;
+use WellCommerce\Bundle\CoreBundle\DataSet\QueryBuilder\AbstractDataSetQueryBuilder;
+use WellCommerce\Bundle\CoreBundle\DataSet\QueryBuilder\QueryBuilderInterface;
 
 /**
- * Class CategoryDataSet
+ * Class CategoryDataSetQueryBuilder
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class CategoryDataSet extends BaseDataSet
+class CategoryDataSetQueryBuilder extends AbstractDataSetQueryBuilder implements QueryBuilderInterface
 {
 
 }

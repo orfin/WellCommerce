@@ -11,6 +11,7 @@
  */
 namespace WellCommerce\Bundle\CategoryBundle\Form;
 
+use WellCommerce\Bundle\CoreBundle\DataSet\CollectionBuilder\FlatTreeBuilder;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\AbstractFormBuilder;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\EntityToIdentifierTransformer;
@@ -69,6 +70,8 @@ class CategoryFormBuilder extends AbstractFormBuilder implements FormBuilderInte
             'tip' => '<p>' . $this->trans('category.parent.help') . '</p>'
         ]));
 
+        $categoryTreeBuilder = new FlatTreeBuilder($this->get('category.dataset.admin'));
+
         $requiredData->addChild($this->getElement('tree', [
             'name'        => 'parent',
             'label'       => $this->trans('category.parent.label'),
@@ -76,7 +79,7 @@ class CategoryFormBuilder extends AbstractFormBuilder implements FormBuilderInte
             'selectable'  => false,
             'sortable'    => false,
             'clickable'   => false,
-            'items'       => $this->get('category.repository')->getTreeItems(),
+            'items'       => $categoryTreeBuilder->getItems(),
             'restrict'    => $this->getParam('id'),
             'transformer' => new EntityToIdentifierTransformer($this->get('category.repository'))
         ]));
