@@ -57,7 +57,7 @@ class FlatTreeBuilder extends AbstractDataSetCollectionBuilder implements DataSe
         $tree = [];
 
         foreach ($rows as $row) {
-            $tree[$row['id']] = $this->makeNode($row);
+            $this->makeNode($row, $tree);
         }
 
         return $tree;
@@ -67,12 +67,10 @@ class FlatTreeBuilder extends AbstractDataSetCollectionBuilder implements DataSe
      * Converts single row to flat-tree node
      *
      * @param array $row
-     *
-     * @return array
      */
-    private function makeNode($row)
+    private function makeNode($row, &$tree)
     {
-        return [
+        $tree[$row['id']] = [
             'id'          => $row['id'],
             'name'        => $row['name'],
             'slug'        => $row['slug'],
