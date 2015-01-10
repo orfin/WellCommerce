@@ -12,6 +12,7 @@
 namespace WellCommerce\Bundle\RoutingBundle\Repository;
 
 use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;
 use WellCommerce\Bundle\RoutingBundle\Helper\Sluggable;
 
 /**
@@ -51,11 +52,11 @@ class RouteRepository extends AbstractEntityRepository implements RouteRepositor
         if (null !== $route) {
 
             // if passed identifier and locale are same as in route, assume we can change slug directly
-            if ($route->getIdentifier() == $id && $route->getLocale() == $locale) {
+            if ($this->hasRouteSameLocaleAndId($route, $locale, $id)) {
                 return $slug;
             } else {
                 $iteration++;
-                $slug = sprintf('%s%s%s', $slug, Sluggable::SLUG_DELIMITER, $iteration);
+                $slug = $this->makeSlugIterated($slug, $iteration);
 
                 return $this->generateSlug($slug, $id, $locale, $values, $iteration);
             }
@@ -72,5 +73,33 @@ class RouteRepository extends AbstractEntityRepository implements RouteRepositor
     protected function findRouteByPath($slug)
     {
         return $this->findOneBy(['path' => $slug]);
+    }
+
+    /**
+     * Checks passed identifier and locale against those in route
+     *
+     * @param RouteInterface $route
+     * @param                $locale
+     * @param                $id
+     *
+     * @return bool
+     */
+
+    protected function hasRouteSameLocaleAndId(RouteInterface $route, $locale, $id)
+    {
+        return ($route->getIdentifier() == $id && $route->getLocale() == $locale);
+    }
+
+    /**
+     * Makes original slug iterated
+     *
+     * @param string $slug
+     * @param int $iteration
+     *
+     * @return string
+     */
+    protected function makeSlugIterated($slug, $iteration)
+    {
+        return sprintf('%s%s%s', $slug, Sluggable::SLUG_DELIMITER, $iteration);
     }
 }
