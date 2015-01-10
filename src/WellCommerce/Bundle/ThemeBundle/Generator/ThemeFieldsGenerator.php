@@ -208,7 +208,7 @@ class ThemeFieldsGenerator extends AbstractContainer implements ContainerAwareIn
      */
     protected function addFieldWidth(\DOMElement $field)
     {
-        return $this->addSizeInput('width',  $this->getFieldAttributes($field));
+        return $this->addSizeInput('width', $this->getFieldAttributes($field));
     }
 
     /**
@@ -220,9 +220,17 @@ class ThemeFieldsGenerator extends AbstractContainer implements ContainerAwareIn
      */
     protected function addFieldHeight(\DOMElement $field)
     {
-        return $this->addSizeInput('height',  $this->getFieldAttributes($field));
+        return $this->addSizeInput('height', $this->getFieldAttributes($field));
     }
 
+    /**
+     * Returns text field
+     *
+     * @param string $type
+     * @param array  $attributes
+     *
+     * @return \WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface
+     */
     protected function addSizeInput($type, $attributes)
     {
         return $this->builder->getElement('text_field', $attributes + [
