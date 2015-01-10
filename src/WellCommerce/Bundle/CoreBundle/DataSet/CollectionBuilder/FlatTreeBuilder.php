@@ -28,10 +28,6 @@ class FlatTreeBuilder extends AbstractDataSetCollectionBuilder implements DataSe
     {
         parent::configureOptions($resolver);
 
-        $resolver->setRequired([
-            'order_by'
-        ]);
-
         $resolver->setDefaults([
             'limit'     => 100,
             'order_by'  => 'hierarchy',
