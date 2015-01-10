@@ -37,42 +37,6 @@ class CategoryRepository extends AbstractEntityRepository implements CategoryRep
         return $queryBuilder;
     }
 
-    public function getCategoriesTree()
-    {
-        $queryBuilder = $this->getQueryBuilder('category');
-
-        // select columns
-        $queryBuilder->select('
-            category.id,
-            IDENTITY(category.parent) parent,
-            COUNT(category_children.id) children,
-            category_translation.name,
-            category_translation.slug,
-            category_translation.locale,
-            IDENTITY(category_translation.route) route
-        ');
-
-        // category table
-        $queryBuilder->leftJoin(
-            'WellCommerceCategoryBundle:Category',
-            'category_children',
-            'WITH',
-            'category_children.parent = category.id');
-
-        // category_translation table
-        $queryBuilder->leftJoin(
-            'WellCommerceCategoryBundle:CategoryTranslation',
-            'category_translation',
-            'WITH',
-            'category.id = category_translation.translatable');
-        $queryBuilder->groupBy('category.id');
-        $query   = $queryBuilder->getQuery();
-        $items   = $query->getArrayResult();
-        $builder = new CategoryTreeBuilder($items);
-
-        return $builder->getTree();
-    }
-
     public function changeOrder(array $items = [])
     {
         foreach ($items as $item) {

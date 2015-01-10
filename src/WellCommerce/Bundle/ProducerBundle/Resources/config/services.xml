@@ -51,6 +51,10 @@
             </call>
         </service>
 
+        <service id="producer.collection" parent="dataset.collection_builder.factory">
+            <argument type="service" id="producer.dataset"/>
+        </service>
+
         <service id="producer.datagrid" class="WellCommerce\Bundle\ProducerBundle\DataGrid\ProducerDataGrid">
             <argument key="identifier">producer</argument>
             <argument type="service" id="producer.dataset"/>

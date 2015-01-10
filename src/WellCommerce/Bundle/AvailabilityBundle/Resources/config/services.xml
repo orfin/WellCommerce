@@ -45,6 +45,10 @@
             </call>
         </service>
 
+        <service id="availability.collection" parent="dataset.collection_builder.factory">
+            <argument type="service" id="availability.dataset"/>
+        </service>
+
         <service id="availability.datagrid" class="WellCommerce\Bundle\AvailabilityBundle\DataGrid\AvailabilityDataGrid">
             <argument key="identifier">availability</argument>
             <argument type="service" id="availability.dataset"/>

@@ -35,6 +35,11 @@ abstract class AbstractDataSetCollectionBuilder
     protected $options;
 
     /**
+     * @var array
+     */
+    protected $rows;
+
+    /**
      * @var \Symfony\Component\PropertyAccess\PropertyAccessor
      */
     protected $propertyAccessor;
@@ -100,6 +105,20 @@ abstract class AbstractDataSetCollectionBuilder
      * @return array
      */
     protected function getDataSetRows()
+    {
+        if (empty($this->rows)) {
+            $this->rows = $this->getResults();
+        }
+
+        return $this->rows;
+    }
+
+    /**
+     * Returns dataset result rows
+     *
+     * @return array
+     */
+    protected function getResults()
     {
         $request = $this->getDataSetRequest();
         $results = $this->dataset->getResults($request);

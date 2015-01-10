@@ -11,7 +11,6 @@
  */
 namespace WellCommerce\Bundle\ProductBundle\Form;
 
-use WellCommerce\Bundle\CoreBundle\DataSet\CollectionBuilder\FlatTreeBuilder;
 use WellCommerce\Bundle\CoreBundle\DataSet\CollectionBuilder\SelectBuilder;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\AbstractFormBuilder;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
@@ -35,13 +34,12 @@ class ProductFormBuilder extends AbstractFormBuilder
      */
     public function buildForm(FormInterface $form)
     {
-        $currenciesSelectBuilder = new SelectBuilder($this->get('currency.dataset'), [
-            'value_key' => 'code',
+        $currencies = $this->get('currency.collection')->getSelect([
+            'label_key' => 'code',
             'order_by'  => 'code',
         ]);
-        $currencies              = $currenciesSelectBuilder->getItems();
-        $vatSelectBuilder        = new SelectBuilder($this->get('tax.dataset'));
-        $vatValues               = $vatSelectBuilder->getItems();
+
+        $vatValues = $this->get('tax.collection')->getSelect();
 
         $mainData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'main_data',
@@ -79,12 +77,10 @@ class ProductFormBuilder extends AbstractFormBuilder
             'label' => $this->trans('product.sku.label'),
         ]));
 
-        $producerSelectBuilder = new SelectBuilder($this->get('producer.dataset'));
-
         $mainData->addChild($this->getElement('select', [
             'name'        => 'producer',
             'label'       => $this->trans('product.producer.label'),
-            'options'     => $producerSelectBuilder->getItems(),
+            'options'     => $this->get('producer.collection')->getSelect(),
             'transformer' => new EntityToIdentifierTransformer($this->get('producer.repository'))
         ]));
 
@@ -119,8 +115,6 @@ class ProductFormBuilder extends AbstractFormBuilder
             'label' => $this->trans('fieldset.categories.label')
         ]));
 
-        $categoryTreeBuilder = new FlatTreeBuilder($this->get('category.dataset.admin'));
-
         $categoriesField = $categoryPane->addChild($this->getElement('tree', [
             'name'        => 'categories',
             'label'       => $this->trans('product.categories.label'),
@@ -128,7 +122,7 @@ class ProductFormBuilder extends AbstractFormBuilder
             'selectable'  => true,
             'sortable'    => false,
             'clickable'   => false,
-            'items'       => $categoryTreeBuilder->getItems(),
+            'items'       => $this->get('category.collection.admin')->getFlatTree(),
             'transformer' => new CollectionToArrayTransformer($this->get('category.repository'))
         ]));
 
@@ -203,12 +197,10 @@ class ProductFormBuilder extends AbstractFormBuilder
             'comment' => $this->trans('Enable stock tracking for product'),
         ]));
 
-        $unitSelectBuilder = new SelectBuilder($this->get('unit.dataset'));
-
         $stockData->addChild($this->getElement('select', [
             'name'        => 'unit',
             'label'       => $this->trans('product.unit.label'),
-            'options'     => $unitSelectBuilder->getItems(),
+            'options'     => $this->get('unit.collection')->getSelect(),
             'transformer' => new EntityToIdentifierTransformer($this->get('unit.repository'))
         ]));
 
@@ -254,12 +246,10 @@ class ProductFormBuilder extends AbstractFormBuilder
             'default' => 1
         ]));
 
-        $availabilitySelectBuilder = new SelectBuilder($this->get('availability.dataset'));
-
         $availabilityField = $stockData->addChild($this->getElement('select', [
             'name'        => 'availability',
             'label'       => $this->trans('product.availability.label'),
-            'options'     => $availabilitySelectBuilder->getItems(),
+            'options'     => $this->get('availability.collection')->getSelect(),
             'transformer' => new EntityToIdentifierTransformer($this->get('availability.repository'))
         ]));
 
@@ -285,12 +275,10 @@ class ProductFormBuilder extends AbstractFormBuilder
             'label' => $this->trans('Statuses')
         ]));
 
-        $statusesSelectBuilder = new SelectBuilder($this->get('product_status.dataset'));
-
         $statusesData->addChild($this->getElement('multi_select', [
             'name'        => 'statuses',
             'label'       => $this->trans('Statuses'),
-            'options'     => $statusesSelectBuilder->getItems(),
+            'options'     => $this->get('product_status.collection')->getSelect(),
             'transformer' => new CollectionToArrayTransformer($this->get('product_status.repository'))
         ]));
 

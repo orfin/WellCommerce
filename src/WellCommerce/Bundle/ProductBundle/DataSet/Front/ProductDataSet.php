@@ -13,9 +13,8 @@
 namespace WellCommerce\Bundle\ProductBundle\DataSet\Front;
 
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
-use WellCommerce\Bundle\CoreBundle\DataSet\Column\Column;
-use WellCommerce\Bundle\CoreBundle\DataSet\Column\ColumnCollection;
 use WellCommerce\Bundle\CoreBundle\DataSet\DataSetInterface;
+use WellCommerce\Bundle\CoreBundle\DataSet\DataSetOptionsResolver;
 
 /**
  * Class ProductDataSet
@@ -27,57 +26,23 @@ class ProductDataSet extends AbstractDataSet implements DataSetInterface
     /**
      * {@inheritdoc}
      */
-    protected function configureColumns(ColumnCollection $collection)
+    /**
+     * {@inheritdoc}
+     */
+    protected function configureOptions(DataSetOptionsResolver $resolver)
     {
-        $collection->add(new Column([
-            'alias'  => 'id',
-            'source' => 'product.id'
-        ]));
-
-        $collection->add(new Column([
-            'alias'    => 'name',
-            'source'   => 'product_translation.name',
-            'sortable' => true
-        ]));
-
-        $collection->add(new Column([
-            'alias'  => 'shortDescription',
-            'source' => 'product_translation.shortDescription'
-        ]));
-
-        $collection->add(new Column([
-            'alias'  => 'description',
-            'source' => 'product_translation.description'
-        ]));
-
-        $collection->add(new Column([
-            'alias'  => 'route',
-            'source' => 'IDENTITY(product_translation.route)'
-        ]));
-
-        $collection->add(new Column([
-            'alias'    => 'price',
-            'source'   => 'product.sellPrice',
-        ]));
-
-        $collection->add(new Column([
-            'alias'  => 'currency',
-            'source' => 'sell_currency.code'
-        ]));
-
-        $collection->add(new Column([
-            'alias'    => 'stock',
-            'source'   => 'product.stock',
-        ]));
-
-        $collection->add(new Column([
-            'alias'  => 'category',
-            'source' => 'categories.id',
-        ]));
-
-        $collection->add(new Column([
-            'alias'  => 'photo',
-            'source' => 'photos.path',
-        ]));
+        $resolver->setColumns([
+            'id'               => 'product.id',
+            'name'             => 'product_translation.name',
+            'shortDescription' => 'product_translation.shortDescription',
+            'description'      => 'product_translation.description',
+            'route'            => 'IDENTITY(product_translation.route)',
+            'weight'           => 'product.weight',
+            'price'            => 'product.sellPrice',
+            'currency'         => 'sell_currency.code',
+            'stock'            => 'product.stock',
+            'category'         => 'categories.id',
+            'photo'            => 'photos.path',
+        ]);
     }
 }

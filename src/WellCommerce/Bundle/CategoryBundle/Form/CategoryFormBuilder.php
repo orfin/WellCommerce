@@ -70,8 +70,6 @@ class CategoryFormBuilder extends AbstractFormBuilder implements FormBuilderInte
             'tip' => '<p>' . $this->trans('category.parent.help') . '</p>'
         ]));
 
-        $categoryTreeBuilder = new FlatTreeBuilder($this->get('category.dataset.admin'));
-
         $requiredData->addChild($this->getElement('tree', [
             'name'        => 'parent',
             'label'       => $this->trans('category.parent.label'),
@@ -79,7 +77,7 @@ class CategoryFormBuilder extends AbstractFormBuilder implements FormBuilderInte
             'selectable'  => false,
             'sortable'    => false,
             'clickable'   => false,
-            'items'       => $categoryTreeBuilder->getItems(),
+            'items'       => $this->get('category.collection.admin')->getFlatTree(),
             'restrict'    => $this->getParam('id'),
             'transformer' => new EntityToIdentifierTransformer($this->get('category.repository'))
         ]));

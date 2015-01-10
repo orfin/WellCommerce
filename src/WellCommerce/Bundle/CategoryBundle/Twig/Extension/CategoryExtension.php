@@ -58,9 +58,9 @@ class CategoryExtension extends \Twig_Extension
         $orderDir = CategoryProviderInterface::CATEGORY_ORDER_DIR
     ) {
         $params = [
-            'limit'    => $limit,
-            'orderBy'  => $orderBy,
-            'orderDir' => $orderDir,
+            'limit'     => $limit,
+            'order_by'  => $orderBy,
+            'order_dir' => $orderDir,
         ];
 
         return $this->provider->getCategoriesTree($params);

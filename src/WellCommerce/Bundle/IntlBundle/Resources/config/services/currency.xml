@@ -45,6 +45,10 @@
             </call>
         </service>
 
+        <service id="currency.collection" parent="dataset.collection_builder.factory">
+            <argument type="service" id="currency.dataset"/>
+        </service>
+
         <service id="currency.datagrid" class="WellCommerce\Bundle\IntlBundle\DataGrid\CurrencyDataGrid">
             <argument key="identifier">currency</argument>
             <argument type="service" id="currency.dataset"/>

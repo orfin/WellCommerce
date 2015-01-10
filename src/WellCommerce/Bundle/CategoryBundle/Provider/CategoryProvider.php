@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\CategoryBundle\Provider;
 
 use WellCommerce\Bundle\CategoryBundle\DataSet\Front\CategoryDataSet;
 use WellCommerce\Bundle\CategoryBundle\Entity\Category;
-use WellCommerce\Bundle\CategoryBundle\Tree\CategoryTreeBuilder;
+use WellCommerce\Bundle\CoreBundle\DataSet\CollectionBuilder\CollectionBuilderFactoryInterface;
 use WellCommerce\Bundle\CoreBundle\DataSet\Request\DataSetRequest;
 
 /**
@@ -31,18 +31,18 @@ class CategoryProvider implements CategoryProviderInterface
     protected $resource;
 
     /**
-     * @var CategoryDataSet
+     * @var CollectionBuilderFactoryInterface
      */
-    protected $dataset;
+    protected $collectionBuilderFactory;
 
     /**
      * Constructor
      *
-     * @param CategoryDataSet $dataset
+     * @param CollectionBuilderFactoryInterface $collectionBuilderFactory
      */
-    public function __construct(CategoryDataSet $dataset)
+    public function __construct(CollectionBuilderFactoryInterface $collectionBuilderFactory)
     {
-        $this->dataset = $dataset;
+        $this->collectionBuilderFactory = $collectionBuilderFactory;
     }
 
     /**
@@ -50,10 +50,7 @@ class CategoryProvider implements CategoryProviderInterface
      */
     public function getCategoriesTree(array $parameters = [])
     {
-        $rows        = $this->getDataSetRows($parameters);
-        $treeBuilder = new CategoryTreeBuilder($rows);
-
-        return $treeBuilder->getTree();
+        return $this->collectionBuilderFactory->getTree($parameters);
     }
 
     /**
@@ -87,20 +84,4 @@ class CategoryProvider implements CategoryProviderInterface
     {
         return $this->resource->getId();
     }
-
-    /**
-     * Makes dataset request and return its rows
-     *
-     * @param array $parameters
-     *
-     * @return array
-     */
-    private function getDataSetRows($parameters)
-    {
-        $request = new DataSetRequest($parameters);
-        $results = $this->dataset->getResults($request);
-
-        return $results['rows'];
-    }
-
 }

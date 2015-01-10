@@ -45,6 +45,10 @@
             </call>
         </service>
 
+        <service id="tax.collection" parent="dataset.collection_builder.factory">
+            <argument type="service" id="tax.dataset"/>
+        </service>
+
         <service id="tax.datagrid" class="WellCommerce\Bundle\TaxBundle\DataGrid\TaxDataGrid">
             <argument key="identifier">tax</argument>
             <argument type="service" id="tax.dataset"/>

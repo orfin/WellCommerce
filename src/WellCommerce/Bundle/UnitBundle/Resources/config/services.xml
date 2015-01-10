@@ -14,8 +14,8 @@
             <call method="setRepository">
                 <argument type="service" id="unit.repository"/>
             </call>
-            <call method="setForm">
-                <argument type="service" id="unit.form"/>
+            <call method="setFormBuilder">
+                <argument type="service" id="unit.form_builder"/>
             </call>
             <call method="setDataGrid">
                 <argument type="service" id="unit.datagrid"/>
@@ -45,6 +45,10 @@
             </call>
         </service>
 
+        <service id="unit.collection" parent="dataset.collection_builder.factory">
+            <argument type="service" id="unit.dataset"/>
+        </service>
+
         <service id="unit.datagrid" class="WellCommerce\Bundle\UnitBundle\DataGrid\UnitDataGrid">
             <argument key="identifier">unit</argument>
             <argument type="service" id="unit.dataset"/>
@@ -53,7 +57,9 @@
             </call>
         </service>
 
-        <service id="unit.form" class="WellCommerce\Bundle\UnitBundle\Form\UnitForm">
+        <service id="unit.form_builder" class="WellCommerce\Bundle\UnitBundle\Form\UnitFormBuilder">
+            <argument type="service" id="form.resolver.factory"/>
+            <argument type="service" id="form.handler"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

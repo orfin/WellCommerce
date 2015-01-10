@@ -38,7 +38,7 @@ class PageFormBuilder extends AbstractFormBuilder implements FormBuilderInterfac
         $languageData = $mainData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
             'label'       => $this->trans('fieldset.translations.label'),
-            'transformer' => new TranslationTransformer($this->get('news.repository'))
+            'transformer' => new TranslationTransformer($this->get('page.repository'))
         ]));
 
         $name = $languageData->addChild($this->getElement('text_field', [
@@ -67,8 +67,6 @@ class PageFormBuilder extends AbstractFormBuilder implements FormBuilderInterfac
             'default' => 0
         ]));
 
-        $pagesTreeBuilder = new FlatTreeBuilder($this->get('page.dataset'));
-
         $mainData->addChild($this->getElement('tree', [
             'name'        => 'parent',
             'label'       => $this->trans('page.parent.label'),
@@ -76,7 +74,7 @@ class PageFormBuilder extends AbstractFormBuilder implements FormBuilderInterfac
             'selectable'  => false,
             'sortable'    => false,
             'clickable'   => false,
-            'items'       => $pagesTreeBuilder->getItems(),
+            'items'       => $this->get('page.collection')->getFlatTree(),
             'restrict'    => $this->getParam('id'),
             'transformer' => new EntityToIdentifierTransformer($this->get('page.repository'))
         ]));
@@ -89,7 +87,7 @@ class PageFormBuilder extends AbstractFormBuilder implements FormBuilderInterfac
         $languageData = $contentData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
             'label'       => $this->trans('fieldset.translations.label'),
-            'transformer' => new TranslationTransformer($this->get('news.repository'))
+            'transformer' => new TranslationTransformer($this->get('page.repository'))
         ]));
 
         $languageData->addChild($this->getElement('rich_text_editor', [

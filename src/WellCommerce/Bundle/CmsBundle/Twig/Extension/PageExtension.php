@@ -11,8 +11,7 @@
  */
 namespace WellCommerce\Bundle\CmsBundle\Twig\Extension;
 
-use WellCommerce\Bundle\CmsBundle\Repository\PageRepositoryInterface;
-use WellCommerce\Bundle\LayoutBundle\Renderer\LayoutBoxRendererInterface;
+use WellCommerce\Bundle\CoreBundle\DataSet\CollectionBuilder\CollectionBuilderFactoryInterface;
 
 /**
  * Class PageExtension
@@ -23,24 +22,24 @@ use WellCommerce\Bundle\LayoutBundle\Renderer\LayoutBoxRendererInterface;
 class PageExtension extends \Twig_Extension
 {
     /**
-     * @var PageRepositoryInterface
+     * @var CollectionBuilderFactoryInterface
      */
-    protected $repository;
+    protected $collectionBuilder;
 
     /**
      * Constructor
      *
-     * @param PageRepositoryInterface $repository
+     * @param CollectionBuilderFactoryInterface $collectionBuilder
      */
-    public function __construct(PageRepositoryInterface $repository)
+    public function __construct(CollectionBuilderFactoryInterface $collectionBuilder)
     {
-        $this->repository = $repository;
+        $this->collectionBuilder = $collectionBuilder;
     }
 
     public function getGlobals()
     {
         return [
-            'cmsPageTree' => $this->repository->getPagesTree()
+            'cmsPageTree' => $this->collectionBuilder->getTree()
         ];
     }
 

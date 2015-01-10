@@ -26,13 +26,6 @@ use WellCommerce\Bundle\ProductBundle\Repository\ProductCollectionAwareRepositor
 interface CategoryRepositoryInterface extends RepositoryInterface, DataSetAwareRepositoryInterface
 {
     /**
-     * Returns parsed categories tree
-     *
-     * @return mixed
-     */
-    public function getCategoriesTree();
-
-    /**
      * Adds category using only its name
      * Mostly used in alert prompt on category index/edit screen
      *

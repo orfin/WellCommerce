@@ -80,6 +80,14 @@
             <argument>WellCommerceCategoryBundle:Category</argument>
         </service>
 
+        <service id="category.collection.admin" parent="dataset.collection_builder.factory">
+            <argument type="service" id="category.dataset.admin"/>
+        </service>
+
+        <service id="category.collection.front" parent="dataset.collection_builder.factory">
+            <argument type="service" id="category.dataset.front"/>
+        </service>
+
         <service id="category.dataset.query_builder.front" class="WellCommerce\Bundle\CategoryBundle\DataSet\Front\CategoryDataSetQueryBuilder" public="false">
             <argument type="service" id="category.repository"/>
         </service>
@@ -105,7 +113,7 @@
         </service>
 
         <service id="category.provider" class="WellCommerce\Bundle\CategoryBundle\Provider\CategoryProvider">
-            <argument type="service" id="category.dataset.front" />
+            <argument type="service" id="category.collection.front" />
             <tag name="resource.provider" alias="category"/>
         </service>
 

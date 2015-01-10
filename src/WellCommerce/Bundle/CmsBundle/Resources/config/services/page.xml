@@ -78,6 +78,10 @@
             </call>
         </service>
 
+        <service id="page.collection" parent="dataset.collection_builder.factory">
+            <argument type="service" id="page.dataset"/>
+        </service>
+
         <service id="page.datagrid" class="WellCommerce\Bundle\CmsBundle\DataGrid\PageDataGrid">
             <argument key="identifier">page</argument>
             <argument type="service" id="page.dataset"/>
@@ -110,7 +114,7 @@
         </service>
 
         <service id="twig.extension.page" class="WellCommerce\Bundle\CmsBundle\Twig\Extension\PageExtension">
-            <argument type="service" id="page.repository"/>
+            <argument type="service" id="page.collection"/>
             <tag name="twig.extension"/>
         </service>
 

@@ -28,6 +28,10 @@ class FlatTreeBuilder extends AbstractDataSetCollectionBuilder implements DataSe
     {
         parent::configureOptions($resolver);
 
+        $resolver->setRequired([
+            'order_by'
+        ]);
+
         $resolver->setDefaults([
             'limit'     => 100,
             'order_by'  => 'hierarchy',
@@ -57,7 +61,7 @@ class FlatTreeBuilder extends AbstractDataSetCollectionBuilder implements DataSe
         $tree = [];
 
         foreach ($rows as $row) {
-            $this->makeNode($row, $tree);
+            $tree[] = $this->makeNode($row);
         }
 
         return $tree;
@@ -67,10 +71,14 @@ class FlatTreeBuilder extends AbstractDataSetCollectionBuilder implements DataSe
      * Converts single row to flat-tree node
      *
      * @param array $row
+     *
+     * @return array
      */
-    private function makeNode($row, &$tree)
+    private function makeNode($row)
     {
-        $tree[$row['id']] = [
+        $node = [];
+
+        $node[$row['id']] = [
             'id'          => $row['id'],
             'name'        => $row['name'],
             'slug'        => $row['slug'],
@@ -78,5 +86,7 @@ class FlatTreeBuilder extends AbstractDataSetCollectionBuilder implements DataSe
             'parent'      => $row['parent'],
             'weight'      => $row['hierarchy'],
         ];
+
+        return $node;
     }
-} 
+}

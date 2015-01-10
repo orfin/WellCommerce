@@ -23,6 +23,8 @@
 
         <service id="dataset.column.collection" class="WellCommerce\Bundle\CoreBundle\DataSet\Column\ColumnCollection"/>
 
+        <service id="dataset.collection_builder.factory" class="WellCommerce\Bundle\CoreBundle\DataSet\CollectionBuilder\CollectionBuilderFactory"/>
+
         <service id="resource.provider.collection" class="WellCommerce\Bundle\CoreBundle\Provider\ProviderCollection"/>
     </services>
 </container>

@@ -29,8 +29,6 @@ class CategoryTreeFormBuilder extends AbstractFormBuilder implements FormBuilder
      */
     public function buildForm(FormInterface $form)
     {
-        $categoryTreeBuilder = new FlatTreeBuilder($this->get('category.dataset.admin'));
-
         $form->addChild($this->getElement('tree', [
             'name'               => 'categories',
             'label'              => $this->trans('category.tree.label'),
@@ -42,7 +40,7 @@ class CategoryTreeFormBuilder extends AbstractFormBuilder implements FormBuilder
             'deletable'          => true,
             'addable'            => true,
             'prevent_duplicates' => true,
-            'items'              => $categoryTreeBuilder->getItems(),
+            'items'              => $this->get('category.collection.admin')->getFlatTree(),
             'onClick'            => 'openCategoryEditor',
             'onDuplicate'        => 'duplicateCategory',
             'onSaveOrder'        => 'changeOrder',
