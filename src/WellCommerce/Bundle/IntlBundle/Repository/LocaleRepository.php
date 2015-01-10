@@ -53,20 +53,6 @@ class LocaleRepository extends AbstractEntityRepository implements LocaleReposit
         return $query->getArrayResult();
     }
 
-    public function getLocalesToSelect()
-    {
-        if (empty($this->currentLocales)) {
-            $this->currentLocales = $this->getAvailableLocales();
-        }
-        $ids = [];
-
-        foreach ($this->currentLocales as $locale) {
-            $ids[$locale['id']] = $locale['code'];
-        }
-
-        return $ids;
-    }
-
     /**
      * {@inheritdoc}
      */
