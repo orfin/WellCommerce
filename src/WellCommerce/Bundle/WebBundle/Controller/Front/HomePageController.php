@@ -26,12 +26,10 @@ use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
  */
 class HomePageController extends AbstractFrontController implements FrontControllerInterface
 {
-
     public function indexAction(Request $request)
     {
         return [
             'layout' => ''
         ];
     }
-
 }
