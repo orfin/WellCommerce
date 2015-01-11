@@ -26,30 +26,30 @@ class TaxFormBuilder extends AbstractFormBuilder implements FormBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormInterface $form)
+    public function buildForm(FormInterface $taxForm)
     {
-        $requiredData = $form->addChild($this->getElement('nested_fieldset', [
+        $taxRequiredData = $taxForm->addChild($this->getElement('nested_fieldset', [
             'name'  => 'required_data',
             'label' => $this->trans('form.required_data.label')
         ]));
 
-        $requiredData->addChild($this->getElement('text_field', [
+        $taxRequiredData->addChild($this->getElement('text_field', [
             'name'    => 'value',
-            'label'   => $this->trans('tax.required_data.value.label'),
+            'label'   => $this->trans('tax.value.label'),
         ]));
 
-        $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
+        $taxTranslationData = $taxRequiredData->addChild($this->getElement('language_fieldset', [
             'name'  => 'translations',
-            'label' => $this->trans('form.required_data.language_data.label')
+            'label' => $this->trans('form.translations.label')
         ]));
 
-        $languageData->addChild($this->getElement('text_field', [
+        $taxTranslationData->addChild($this->getElement('text_field', [
             'name'  => 'name',
-            'label' => $this->trans('tax.language_data.name.label'),
+            'label' => $this->trans('tax.name.label'),
         ]));
 
-        $form->addFilter($this->getFilter('no_code'));
-        $form->addFilter($this->getFilter('trim'));
-        $form->addFilter($this->getFilter('secure'));
+        $taxForm->addFilter($this->getFilter('no_code'));
+        $taxForm->addFilter($this->getFilter('trim'));
+        $taxForm->addFilter($this->getFilter('secure'));
     }
 }
