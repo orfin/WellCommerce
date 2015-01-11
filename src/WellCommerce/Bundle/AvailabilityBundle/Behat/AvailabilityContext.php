@@ -23,6 +23,7 @@ class AvailabilityContext extends CoreContext
 {
     /**
      * @Given I am on the index page
+     * @Given I should return to index page
      */
     public function iAmOnTheIndexPage()
     {

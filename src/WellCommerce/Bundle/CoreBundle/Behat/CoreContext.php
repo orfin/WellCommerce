@@ -20,7 +20,6 @@ use Symfony\Component\HttpKernel\KernelInterface;
 /**
  * Class CoreContext
  *
- * @package WellCommerce\Bundle\CoreBundle\Behat
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class CoreContext extends RawMinkContext implements SnippetAcceptingContext, KernelAwareContext
@@ -41,9 +40,9 @@ class CoreContext extends RawMinkContext implements SnippetAcceptingContext, Ker
     }
 
     /**
-     * @Given I am logged as an admin user
+     * @Given I am logged as an administrator
      */
-    public function iAmLoggedAsAnAdminUser()
+    public function iAmLoggedAsAnAdministrator()
     {
         $username = 'admin';
         $password = 'admin';
@@ -89,6 +88,28 @@ class CoreContext extends RawMinkContext implements SnippetAcceptingContext, Ker
     protected function clickButton($button)
     {
         $this->getSession()->getPage()->pressButton($button);
+    }
+
+    /**
+     * @When /^I click "([^"]*)" near "([^"]*)"$/
+     */
+    public function iClickNear($button, $value)
+    {
+        $tr      = $this->assertSession()->elementExists('css', sprintf('table tbody tr:contains("%s")', $value));
+        $locator = sprintf('a:contains("%s")', $button);
+        if ($tr->has('css', $locator)) {
+            $tr->find('css', $locator)->press();
+        } else {
+            $tr->clickLink($button);
+        }
+    }
+
+    /**
+     * @Then /^I wait for the message bar to appear$/
+     */
+    public function iWaitForTheMessageBarToAppear()
+    {
+        $this->getSession()->wait(2000);
     }
 
     /**
