@@ -108,7 +108,7 @@ class CoreContext extends RawMinkContext implements SnippetAcceptingContext, Ker
      */
     public function iWaitForTheMessageBarToAppear()
     {
-        $this->getSession()->wait(2000);
+        $this->getSession()->wait(5000, "$('.GMessageBar ul.options').length > 0");
     }
 
     /**
@@ -116,7 +116,7 @@ class CoreContext extends RawMinkContext implements SnippetAcceptingContext, Ker
      */
     public function iWaitForTheDataGridToFinishLoading()
     {
-        $this->getSession()->wait(3000);
+        $this->getSession()->wait(5000, "$('.GF_Datagrid_Col__options').children().length > 0");
     }
 
     /**
