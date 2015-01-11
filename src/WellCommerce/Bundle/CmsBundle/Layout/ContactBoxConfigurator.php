@@ -19,7 +19,6 @@ use WellCommerce\Bundle\LayoutBundle\Configurator\LayoutBoxConfiguratorInterface
 /**
  * Class ContactBoxConfigurator
  *
- * @package WellCommerce\Bundle\CmsBundle\Layout
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class ContactBoxConfigurator extends AbstractLayoutBoxConfigurator implements LayoutBoxConfiguratorInterface

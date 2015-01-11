@@ -19,7 +19,6 @@ use WellCommerce\Bundle\LayoutBundle\Configurator\LayoutBoxConfiguratorInterface
 /**
  * Class PageBoxConfigurator
  *
- * @package WellCommerce\Bundle\CmsBundle\Layout
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class PageBoxConfigurator extends AbstractLayoutBoxConfigurator implements LayoutBoxConfiguratorInterface
