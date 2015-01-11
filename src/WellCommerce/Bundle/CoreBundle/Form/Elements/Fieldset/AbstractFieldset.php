@@ -29,11 +29,11 @@ abstract class AbstractFieldset extends AbstractContainer
     {
         parent::configureOptions($resolver);
 
-        $resolver->setDefined([
-            'dependencies',
-            'filters',
-            'rules',
-            'transformer'
+        $resolver->setDefaults([
+            'dependencies' => [],
+            'filters'      => [],
+            'rules'        => [],
+            'transformer'  => null
         ]);
 
         $resolver->setAllowedTypes([
