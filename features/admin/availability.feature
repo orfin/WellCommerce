@@ -14,16 +14,16 @@ Feature: Manage availability statuses
   Scenario: Creating new availability entry
     Given I am on the index page
     And I follow "Add"
-    When I fill in "required_data[translations][pl][name]" with "72 godziny"
-    And I fill in "required_data[translations][en][name]" with "72 hours"
+    When I fill in "required_data[translations][pl][name]" with "72h"
+    And I fill in "required_data[translations][en][name]" with "72h"
     And I press "Save"
     Then I should return to index page
-    And I should see "72 godziny"
+    And I should see "72h"
 
   Scenario: Deleting availability entry
     Given I am on the index page
-    When I click "Delete" near "72 godziny"
+    When I click "Delete" near "72h"
     And I wait for the message bar to appear
     And I follow "OK"
     And I wait for the message bar to appear
-    Then I should see "72 godziny successfully deleted"
+    Then I should see "72h successfully deleted"

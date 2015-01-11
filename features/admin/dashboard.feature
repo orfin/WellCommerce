@@ -5,7 +5,7 @@ Feature: Access dashboard
   I should be able to see graphs and basic reporting on dashboard page
 
   Background:
-	Given I am logged as an admin user
+	Given I am logged as an administrator
 
   Scenario: View dashboard page
 	Given I am on the dashboard page
