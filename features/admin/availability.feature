@@ -17,9 +17,8 @@ Feature: Manage availability statuses
     When I fill in "required_data[translations][pl][name]" with "72h"
     And I fill in "required_data[translations][en][name]" with "72h"
     And I press "Save"
-    Then I should return to index page
     And I wait for the message bar to appear
-    And I should see "Success!"
+    Then I should see "Success!"
 
   Scenario: Deleting availability entry
     Given I am on the index page
