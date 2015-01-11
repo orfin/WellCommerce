@@ -22,7 +22,7 @@ Feature: Manage availability statuses
 
   Scenario: Deleting availability entry
     Given I am on the index page
-    When I press "Delete"
+    When I follow "Delete"
     And I wait for the message bar to appear
     And I follow "OK"
     And I wait for the message bar to appear
