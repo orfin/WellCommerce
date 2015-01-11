@@ -14,21 +14,14 @@ namespace WellCommerce\Bundle\CoreBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
 
 /**
  * Class Controller
  *
- * @package WellCommerce\Bundle\CoreBundle\Controller
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 abstract class AbstractController extends Controller
 {
-    /**
-     * @var \WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface
-     */
-    protected $manager;
-
     /**
      * Returns content as json response
      *

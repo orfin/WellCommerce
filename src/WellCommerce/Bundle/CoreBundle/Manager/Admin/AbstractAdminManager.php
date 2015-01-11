@@ -24,7 +24,6 @@ use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
 /**
  * Class AbstractAdminManager
  *
- * @package WellCommerce\Bundle\CoreBundle\Manager\Admin
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class AbstractAdminManager extends AbstractManager implements AdminManagerInterface
@@ -32,12 +31,12 @@ class AbstractAdminManager extends AbstractManager implements AdminManagerInterf
     /**
      * @var DataGridInterface
      */
-    protected $datagrid;
+    private $datagrid;
 
     /**
      * @var FormInterface
      */
-    protected $formBuilder;
+    private $formBuilder;
 
     /**
      * @param DataGridInterface $datagrid
@@ -84,7 +83,7 @@ class AbstractAdminManager extends AbstractManager implements AdminManagerInterf
     {
         $this->dispatchEvent($resource, $request, AdminManagerInterface::PRE_CREATE_EVENT);
         $this->saveResource($resource);
-        $this->flashHelper->addSuccess('success');
+        $this->getFlashHelper()->addSuccess('success');
         $this->dispatchEvent($resource, $request, AdminManagerInterface::POST_CREATE_EVENT);
     }
 
@@ -100,7 +99,7 @@ class AbstractAdminManager extends AbstractManager implements AdminManagerInterf
         $reflection = new \ReflectionClass($resource);
         $eventName  = $this->getEventName($reflection->getShortName(), $name);
         $event      = new ResourceEvent($resource, $request);
-        $this->eventDispatcher->dispatch($eventName, $event);
+        $this->getEventDispatcher()->dispatch($eventName, $event);
     }
 
     /**
@@ -125,7 +124,7 @@ class AbstractAdminManager extends AbstractManager implements AdminManagerInterf
      */
     protected function saveResource($resource)
     {
-        $em = $this->doctrineHelper->getEntityManager();
+        $em = $this->getDoctrineHelper()->getEntityManager();
         $em->persist($resource);
         $em->flush();
 
@@ -135,25 +134,25 @@ class AbstractAdminManager extends AbstractManager implements AdminManagerInterf
     public function removeResource($resource)
     {
         $this->dispatchEvent($resource, null, AdminManagerInterface::PRE_REMOVE_EVENT);
-        $em = $this->doctrineHelper->getEntityManager();
+        $em = $this->getDoctrineHelper()->getEntityManager();
         $em->remove($resource);
         $em->flush();
         $this->dispatchEvent($resource, null, AdminManagerInterface::POST_REMOVE_EVENT);
     }
 
     /**
-     * Manager method used to update existing resource
+     * Updates resource
      *
      * @param object  $resource
      * @param Request $request
      *
-     * @return mixed|void
+     * @return void
      */
     public function updateResource($resource, Request $request)
     {
         $this->dispatchEvent($resource, $request, AdminManagerInterface::PRE_UPDATE_EVENT);
         $this->saveResource($resource);
-        $this->flashHelper->addSuccess('success');
+        $this->getFlashHelper()->addSuccess('success');
         $this->dispatchEvent($resource, $request, AdminManagerInterface::POST_UPDATE_EVENT);
     }
 }

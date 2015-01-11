@@ -30,37 +30,37 @@ abstract class AbstractManager implements ManagerInterface
     /**
      * @var FlashHelperInterface
      */
-    protected $flashHelper;
+    private $flashHelper;
 
     /**
      * @var RedirectHelperInterface
      */
-    protected $redirectHelper;
+    private $redirectHelper;
 
     /**
      * @var ImageHelperInterface
      */
-    protected $imageHelper;
+    private $imageHelper;
 
     /**
      * @var EventDispatcherInterface
      */
-    protected $eventDispatcher;
+    private $eventDispatcher;
 
     /**
      * @var DoctrineHelperInterface
      */
-    protected $doctrineHelper;
+    private $doctrineHelper;
 
     /**
      * @var TranslatorInterface
      */
-    protected $translator;
+    private $translator;
 
     /**
      * @var RepositoryInterface
      */
-    protected $repository;
+    private $repository;
 
     /**
      * Constructor

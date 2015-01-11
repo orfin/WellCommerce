@@ -29,7 +29,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
     /**
      * @var AdminManagerInterface
      */
-    protected $manager;
+    private $manager;
 
     /**
      * Constructor
@@ -195,5 +195,15 @@ abstract class AbstractAdminController extends AbstractController implements Adm
         }
 
         return $resource;
+    }
+
+    /**
+     * Returns manager object
+     *
+     * @return AdminManagerInterface
+     */
+    protected function getManager()
+    {
+        return $this->manager;
     }
 }

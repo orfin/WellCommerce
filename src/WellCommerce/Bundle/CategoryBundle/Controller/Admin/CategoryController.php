@@ -26,12 +26,12 @@ class CategoryController extends AbstractAdminController
 {
     public function indexAction()
     {
-        $categories = $this->manager->getRepository()->findAll();
+        $categories = $this->getManager()->getRepository()->findAll();
 
         if (count($categories)) {
             $category = current($categories);
 
-            return $this->manager->getRedirectHelper()->redirectToAction('edit', [
+            return $this->getManager()->getRedirectHelper()->redirectToAction('edit', [
                 'id' => $category->getId()
             ]);
         }
@@ -59,14 +59,14 @@ class CategoryController extends AbstractAdminController
         $form     = $this->getForm($resource);
 
         if ($form->handleRequest()->isValid()) {
-            $this->manager->updateResource($resource, $request);
+            $this->getManager()->updateResource($resource, $request);
             if ($form->isAction('continue')) {
-                return $this->manager->getRedirectHelper()->redirectToAction('edit', [
+                return $this->getManager()->getRedirectHelper()->redirectToAction('edit', [
                     'id' => $resource->getId()
                 ]);
             }
 
-            return $this->manager->getRedirectHelper()->redirectToAction('index');
+            return $this->getManager()->getRedirectHelper()->redirectToAction('index');
         }
 
         return [
@@ -101,6 +101,6 @@ class CategoryController extends AbstractAdminController
      */
     protected function getRepository()
     {
-        return $this->manager->getRepository();
+        return $this->getManager()->getRepository();
     }
 }

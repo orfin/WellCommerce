@@ -11,7 +11,6 @@
  */
 namespace WellCommerce\Bundle\ProductBundle\Form;
 
-use WellCommerce\Bundle\CoreBundle\DataSet\CollectionBuilder\SelectBuilder;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\AbstractFormBuilder;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\EntityToIdentifierTransformer;
@@ -24,7 +23,6 @@ use WellCommerce\Bundle\ProductBundle\Form\DataTransformer\ProductPhotoCollectio
 /**
  * Class ProductForm
  *
- * @package WellCommerce\Product\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class ProductFormBuilder extends AbstractFormBuilder

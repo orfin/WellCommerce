@@ -12,10 +12,8 @@
 
 namespace WellCommerce\Bundle\AttributeBundle\Controller\Admin;
 
-use Doctrine\Common\Util\Debug;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
-use WellCommerce\Bundle\CoreBundle\DataSet\CollectionBuilder\SelectBuilder;
 
 /**
  * Class AttributeGroupController
@@ -31,7 +29,7 @@ class AttributeGroupController extends AbstractAdminController
      */
     public function indexAction()
     {
-        $groups = $this->manager->getRepository()->findAll();
+        $groups = $this->getManager()->getRepository()->findAll();
 
         if (count($groups) > 0) {
             $firstGroup = current($groups);
@@ -53,7 +51,7 @@ class AttributeGroupController extends AbstractAdminController
     {
         $name     = $request->request->get('name');
         $locales  = $this->get('locale.repository')->findAll();
-        $resource = $this->manager->getRepository()->createNew();
+        $resource = $this->getManager()->getRepository()->createNew();
 
         foreach ($locales as $locale) {
             $resource->translate($locale->getCode())->setName($name);
@@ -61,7 +59,7 @@ class AttributeGroupController extends AbstractAdminController
 
         $resource->mergeNewTranslations();
 
-        $this->manager->createResource($resource, $request);
+        $this->getManager()->createResource($resource, $request);
 
         return $this->jsonResponse([
             'id' => $resource->getId()
@@ -73,16 +71,16 @@ class AttributeGroupController extends AbstractAdminController
      */
     public function editAction(Request $request)
     {
-        $groups   = $this->manager->getRepository()->findAll();
+        $groups   = $this->getManager()->getRepository()->findAll();
         $resource = $this->findOr404($request);
         $form     = $this->getForm($resource, [
             'class' => 'attributeGroupEditor'
         ]);
 
         if ($form->handleRequest()->isValid()) {
-            $this->manager->updateResource($resource, $request);
+            $this->getManager()->updateResource($resource, $request);
             if ($form->isAction('continue')) {
-                return $this->manager->getRedirectHelper()->redirectToAction('edit', [
+                return $this->getManager()->getRedirectHelper()->redirectToAction('edit', [
                     'id' => $resource->getId()
                 ]);
             }
@@ -111,7 +109,7 @@ class AttributeGroupController extends AbstractAdminController
             return $this->redirectToAction('index');
         }
 
-        $groups = $this->manager->getRepository()->findAll();
+        $groups = $this->getManager()->getRepository()->findAll();
         $sets   = [];
 
         foreach ($groups as $group) {

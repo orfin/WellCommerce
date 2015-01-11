@@ -61,7 +61,7 @@ class AttributeValueController extends AbstractAdminController
      */
     protected function getRepository()
     {
-        return $this->manager->getRepository();
+        return $this->getManager()->getRepository();
     }
 
 
