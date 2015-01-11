@@ -1,11 +1,11 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- * 
+ *
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- * 
+ *
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
@@ -32,8 +32,7 @@ class ContactBoxConfigurator extends AbstractLayoutBoxConfigurator implements La
         $fieldset = $this->getFieldset($builder);
 
         $fieldset->addChild($builder->getElement('tip', [
-            'tip' => '<p>' . $this->trans('contact.box.help') . '</p>'
+            'tip' => '<p>'.$this->trans('contact.box.help').'</p>'
         ]));
-
     }
-} 
+}

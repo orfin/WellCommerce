@@ -31,5 +31,4 @@ class Not extends AbstractCondition implements ConditionInterface
 
         return false;
     }
-
 }

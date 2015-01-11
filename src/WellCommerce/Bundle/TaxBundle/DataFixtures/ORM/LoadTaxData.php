@@ -1,11 +1,11 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- * 
+ *
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- * 
+ *
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
@@ -37,10 +37,10 @@ class LoadTaxData extends AbstractDataFixture implements FixtureInterface, Order
             $name = sprintf('%s%s', $val, '%');
             $tax  = new Tax();
             $tax->setValue($val);
-            $tax->translate('pl')->setName($name . ' VAT');
-            $tax->translate('en')->setName($name . ' VAT');
-            $tax->translate('de')->setName($name . ' MwSt.');
-            $tax->translate('fr')->setName($name . ' TVA');
+            $tax->translate('pl')->setName($name.' VAT');
+            $tax->translate('en')->setName($name.' VAT');
+            $tax->translate('de')->setName($name.' MwSt.');
+            $tax->translate('fr')->setName($name.' TVA');
             $tax->mergeNewTranslations();
             $manager->persist($tax);
         }

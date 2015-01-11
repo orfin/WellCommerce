@@ -19,7 +19,6 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Conditions;
  */
 abstract class AbstractCondition
 {
-
     protected $_jsConditionName;
 
     protected $_argument;
@@ -27,7 +26,7 @@ abstract class AbstractCondition
     public function __construct($argument)
     {
         $class                  = explode('\\', get_class($this));
-        $this->_jsConditionName = 'GFormCondition.' . strtoupper(end($class));
+        $this->_jsConditionName = 'GFormCondition.'.strtoupper(end($class));
         $this->_argument        = $argument;
     }
 
@@ -41,7 +40,7 @@ abstract class AbstractCondition
             foreach ($this->_argument as $part) {
                 $parts[] = $part->renderJs();
             }
-            $argument = '[' . implode(', ', $parts) . ']';
+            $argument = '['.implode(', ', $parts).']';
         } else {
             $argument = json_encode($this->_argument);
         }

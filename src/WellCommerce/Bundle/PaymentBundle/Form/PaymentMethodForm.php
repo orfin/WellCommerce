@@ -13,7 +13,6 @@ namespace WellCommerce\Bundle\PaymentBundle\Form;
 
 use WellCommerce\Bundle\CoreBundle\Form\Builder\AbstractFormBuilder;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
-use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
 
 /**
@@ -69,7 +68,7 @@ class PaymentMethodForm extends AbstractFormBuilder implements FormBuilderInterf
             'rules'   => [
                 $builder->getRule('required', [
                     'message' => $this->trans('Hierarchy is required')
-                ])
+                ]),
             ],
             'default' => 0
         ]));

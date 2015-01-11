@@ -18,7 +18,6 @@ use Knp\DoctrineBehaviors\Model\Translatable\Translation;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\MetaDataTrait;
 use WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface;
 
-
 /**
  * NewsTranslation
  *
@@ -114,6 +113,4 @@ class NewsTranslation implements LocaleAwareInterface
     {
         return ['topic'];
     }
-
 }
-

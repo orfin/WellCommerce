@@ -79,4 +79,3 @@ class AttributeValue
         $this->attribute = $attribute;
     }
 }
-

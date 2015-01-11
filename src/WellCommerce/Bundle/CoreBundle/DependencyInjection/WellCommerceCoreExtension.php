@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\Loader;
 
 /**
  * Class WellCommerceCoreExtension
@@ -22,5 +21,4 @@ use Symfony\Component\DependencyInjection\Loader;
  */
 class WellCommerceCoreExtension extends AbstractExtension
 {
-
 }

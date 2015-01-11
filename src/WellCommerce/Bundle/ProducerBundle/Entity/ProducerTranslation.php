@@ -16,7 +16,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Translatable\Translation;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\MetaDataTrait;
 use WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface;
-use WellCommerce\Bundle\ProducerBundle\Routing\ProducerRouteGenerator;
 use WellCommerce\Bundle\RoutingBundle\Entity\Behaviours\RoutableTrait;
 use WellCommerce\Bundle\RoutingBundle\Entity\RoutableSubjectInterface;
 
@@ -136,4 +135,3 @@ class ProducerTranslation implements RoutableSubjectInterface, LocaleAwareInterf
         return new ProducerRoute();
     }
 }
-

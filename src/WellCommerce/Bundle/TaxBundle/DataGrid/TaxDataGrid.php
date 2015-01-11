@@ -36,15 +36,15 @@ class TaxDataGrid extends AbstractDataGrid implements DataGridInterface
             'id'         => 'id',
             'caption'    => $this->trans('tax.id'),
             'sorting'    => new Sorting([
-                'default_order' => Sorting::SORT_DIR_DESC
+                'default_order' => Sorting::SORT_DIR_DESC,
             ]),
             'appearance' => new Appearance([
                 'width'   => 90,
-                'visible' => false
+                'visible' => false,
             ]),
             'filter'     => new Filter([
-                'type' => Filter::FILTER_BETWEEN
-            ])
+                'type' => Filter::FILTER_BETWEEN,
+            ]),
         ]));
 
         $collection->add(new Column([
@@ -54,8 +54,8 @@ class TaxDataGrid extends AbstractDataGrid implements DataGridInterface
                 'width' => 70,
             ]),
             'filter'     => new Filter([
-                'type' => Filter::FILTER_INPUT
-            ])
+                'type' => Filter::FILTER_INPUT,
+            ]),
         ]));
 
         $collection->add(new Column([
@@ -63,11 +63,11 @@ class TaxDataGrid extends AbstractDataGrid implements DataGridInterface
             'caption'    => $this->trans('tax.value'),
             'appearance' => new Appearance([
                 'width'   => 70,
-                'visible' => false
+                'visible' => false,
             ]),
             'filter'     => new Filter([
-                'type' => Filter::FILTER_INPUT
-            ])
+                'type' => Filter::FILTER_INPUT,
+            ]),
         ]));
     }
 }

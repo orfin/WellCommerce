@@ -82,7 +82,5 @@ class ProductPhoto
     public function setMainPhoto($mainPhoto)
     {
         $this->mainPhoto = $mainPhoto;
-
     }
 }
-

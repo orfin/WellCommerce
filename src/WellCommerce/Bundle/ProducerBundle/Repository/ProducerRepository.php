@@ -20,5 +20,4 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
  */
 class ProducerRepository extends AbstractEntityRepository implements ProducerRepositoryInterface
 {
-
 }

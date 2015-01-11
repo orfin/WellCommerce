@@ -144,7 +144,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
     protected function getForm($resource, array $config = [])
     {
         $defaultConfig = [
-            'name' => $this->manager->getRepository()->getAlias()
+            'name' => $this->manager->getRepository()->getAlias(),
         ];
 
         $config = array_merge($defaultConfig, $config);

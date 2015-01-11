@@ -173,4 +173,3 @@ class Category
         $this->products[] = $product;
     }
 }
-

@@ -49,4 +49,3 @@ class Availability
         return $this->id;
     }
 }
-

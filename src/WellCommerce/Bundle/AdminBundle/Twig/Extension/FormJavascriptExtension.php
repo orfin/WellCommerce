@@ -45,7 +45,7 @@ class FormJavascriptExtension extends AbstractTwigExtension
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('form_js', [$this, 'render'], ['is_safe' => ['html','javascript']])
+            new \Twig_SimpleFunction('form_js', [$this, 'render'], ['is_safe' => ['html', 'javascript']])
         ];
     }
 

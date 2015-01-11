@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Filters;
 
-use Symfony\Component\DependencyInjection\ContainerAware;
 
 /**
  * Class AbstractFilter
@@ -57,5 +56,4 @@ abstract class AbstractFilter
     {
         return $value;
     }
-
 }

@@ -16,8 +16,6 @@ use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\Attribute;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\AttributeCollection;
-use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementAttribute;
-use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementAttributeCollection;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 
 /**

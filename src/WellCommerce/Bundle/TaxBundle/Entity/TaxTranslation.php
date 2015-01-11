@@ -67,4 +67,3 @@ class TaxTranslation implements LocaleAwareInterface
         return $this;
     }
 }
-

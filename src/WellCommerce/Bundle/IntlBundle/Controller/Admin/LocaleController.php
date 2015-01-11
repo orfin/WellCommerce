@@ -24,8 +24,7 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
  */
 class LocaleController extends AbstractAdminController
 {
-
-    public function switchAction(Request $request){
-
+    public function switchAction(Request $request)
+    {
     }
 }

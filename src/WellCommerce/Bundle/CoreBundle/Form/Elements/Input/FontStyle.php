@@ -44,7 +44,7 @@ class FontStyle extends TextField implements ElementInterface
         $options[] = $this->formatStyle('Trebuchet MS,Helvetica,sans-serif', 'Trebuchet');
         $options[] = $this->formatStyle('Verdana,Geneva,sans-serif', 'Verdana');
 
-        return 'aoTypes: [' . implode(', ', $options) . ']';
+        return 'aoTypes: ['.implode(', ', $options).']';
     }
 
     /**

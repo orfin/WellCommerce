@@ -1,11 +1,11 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- * 
+ *
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- * 
+ *
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
@@ -32,8 +32,7 @@ class CategoryInfoBoxConfigurator extends AbstractLayoutBoxConfigurator implemen
         $fieldset = $this->getFieldset($builder);
 
         $fieldset->addChild($builder->getElement('tip', [
-            'tip' => '<p>' . $this->trans('Choose categories which should be not visible in box.') . '</p>'
+            'tip' => '<p>'.$this->trans('Choose categories which should be not visible in box.').'</p>'
         ]));
-
     }
-} 
+}

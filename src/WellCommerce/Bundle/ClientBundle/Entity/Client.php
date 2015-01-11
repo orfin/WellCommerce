@@ -222,7 +222,6 @@ class Client
 
     public function getSalt()
     {
-        return null;
+        return;
     }
 }
-

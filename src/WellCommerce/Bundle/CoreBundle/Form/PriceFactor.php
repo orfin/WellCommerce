@@ -20,7 +20,6 @@ namespace WellCommerce\Bundle\CoreBundle\Form;
  */
 class PriceFactor
 {
-
     protected $_type;
 
     protected $_value;

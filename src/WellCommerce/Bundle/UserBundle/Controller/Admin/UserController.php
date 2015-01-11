@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\UserBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
@@ -32,7 +31,7 @@ class UserController extends AbstractAdminController
         $form = $this->get('user_login.form_builder')->createForm([
             'name'   => 'login',
             'action' => $this->generateUrl('admin.user.login_check'),
-            'class'  => 'login-form'
+            'class'  => 'login-form',
         ], null);
 
         return [

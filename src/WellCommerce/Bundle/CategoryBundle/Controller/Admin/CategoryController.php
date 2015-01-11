@@ -48,7 +48,7 @@ class CategoryController extends AbstractAdminController
         $category = $this->getRepository()->quickAddCategory($request->request);
 
         return $this->jsonResponse([
-            'id' => $category->getId()
+            'id' => $category->getId(),
         ]);
     }
 
@@ -92,7 +92,7 @@ class CategoryController extends AbstractAdminController
     {
         return $this->get('category_tree.form_builder')->createForm([
             'name'  => 'category_tree',
-            'class' => 'category-select'
+            'class' => 'category-select',
         ]);
     }
 

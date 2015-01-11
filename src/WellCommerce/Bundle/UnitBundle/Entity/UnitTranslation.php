@@ -57,4 +57,3 @@ class UnitTranslation implements LocaleAwareInterface
         return $this;
     }
 }
-

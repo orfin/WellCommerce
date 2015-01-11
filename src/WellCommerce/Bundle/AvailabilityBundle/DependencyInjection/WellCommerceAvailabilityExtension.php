@@ -22,5 +22,4 @@ use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
  */
 class WellCommerceAvailabilityExtension extends AbstractExtension
 {
-
 }

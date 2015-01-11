@@ -12,8 +12,6 @@
 namespace WellCommerce\Bundle\MediaBundle\Twig\Extension;
 
 use WellCommerce\Bundle\CoreBundle\Helper\Image\ImageHelperInterface;
-use WellCommerce\Bundle\MediaBundle\Entity\Media;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductPhoto;
 
 /**
  * Class ImageExtension

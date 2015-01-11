@@ -1,11 +1,11 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- * 
+ *
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- * 
+ *
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
@@ -49,13 +49,13 @@ class DataSetRequest implements DataSetRequestInterface
             'limit',
             'orderBy',
             'orderDir',
-            'conditions'
+            'conditions',
         ]);
 
         $resolver->setDefaults([
             'id'         => 0,
             'offset'     => 0,
-            'conditions' => null
+            'conditions' => null,
         ]);
 
         $resolver->setAllowedTypes([
@@ -64,7 +64,7 @@ class DataSetRequest implements DataSetRequestInterface
             'limit'      => ['numeric'],
             'orderBy'    => ['string'],
             'orderDir'   => ['string'],
-            'conditions' => ['null', 'WellCommerce\Bundle\CoreBundle\DataSet\Conditions\ConditionsCollection']
+            'conditions' => ['null', 'WellCommerce\Bundle\CoreBundle\DataSet\Conditions\ConditionsCollection'],
         ]);
     }
 

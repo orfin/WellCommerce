@@ -81,5 +81,4 @@ class ProductAttributeRepository extends AbstractEntityRepository implements Pro
 
         return $collection;
     }
-
 }

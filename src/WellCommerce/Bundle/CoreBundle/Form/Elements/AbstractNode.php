@@ -1,11 +1,11 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- * 
+ *
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- * 
+ *
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
@@ -47,7 +47,7 @@ abstract class AbstractNode
         $resolver->setRequired([
             'name',
             'label',
-            'property_path'
+            'property_path',
         ]);
 
         $resolver->setDefaults([
@@ -123,7 +123,7 @@ abstract class AbstractNode
             return $this->getOption('default');
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -186,7 +186,7 @@ abstract class AbstractNode
         $class = $this->getElementClass($element);
         $parts = explode('\\', $class);
 
-        return 'GForm' . end($parts);
+        return 'GForm'.end($parts);
     }
 
     /**

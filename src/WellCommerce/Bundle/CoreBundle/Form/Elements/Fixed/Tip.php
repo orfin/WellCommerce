@@ -53,12 +53,12 @@ class Tip extends AbstractFixedField implements ElementInterface
             'default_state' => self::RETRACTED,
             'retractable'   => function (Options $options) {
                 return (strlen($options['short_tip']) > 0);
-            }
+            },
         ]);
 
         $resolver->setAllowedValues([
             'direction'     => [self::UP, self::DOWN],
-            'default_state' => [self::EXPANDED, self::RETRACTED]
+            'default_state' => [self::EXPANDED, self::RETRACTED],
         ]);
 
         $resolver->setAllowedTypes([

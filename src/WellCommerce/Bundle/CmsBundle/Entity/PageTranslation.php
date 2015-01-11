@@ -14,12 +14,10 @@ namespace WellCommerce\Bundle\CmsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Translatable\Translation;
-use WellCommerce\Bundle\CmsBundle\Routing\PageRouteGenerator;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\MetaDataTrait;
 use WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface;
 use WellCommerce\Bundle\RoutingBundle\Entity\Behaviours\RoutableTrait;
 use WellCommerce\Bundle\RoutingBundle\Entity\RoutableSubjectInterface;
-
 
 /**
  * PageTranslation
@@ -93,4 +91,3 @@ class PageTranslation implements RoutableSubjectInterface, LocaleAwareInterface
         return new PageRoute();
     }
 }
-

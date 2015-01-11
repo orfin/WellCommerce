@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements\Fieldset;
 
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
 
 /**
@@ -22,5 +21,4 @@ use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
  */
 class NestedFieldset extends AbstractFieldset implements ElementInterface
 {
-    
 }

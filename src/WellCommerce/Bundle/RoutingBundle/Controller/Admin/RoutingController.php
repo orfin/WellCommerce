@@ -41,7 +41,7 @@ class RoutingController extends AbstractAdminController
         $slug = $this->generateSlugFromRequest($request);
 
         $response = [
-            'slug' => $slug
+            'slug' => $slug,
         ];
 
         return new JsonResponse($response);

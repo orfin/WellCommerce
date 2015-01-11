@@ -55,7 +55,7 @@ class RangeEditor extends AbstractField implements ElementInterface
             'range_precision' => self::RANGE_PRECISION,
             'price_precision' => self::PRICE_PRECISION,
             'options'         => [],
-            'vat_values'      => $vatValues
+            'vat_values'      => $vatValues,
         ]);
 
         $resolver->setAllowedTypes([

@@ -1,11 +1,11 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- * 
+ *
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- * 
+ *
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
@@ -29,7 +29,7 @@ class FlatTreeBuilder extends AbstractDataSetCollectionBuilder implements DataSe
         parent::configureOptions($resolver);
 
         $resolver->setRequired([
-            'order_by'
+            'order_by',
         ]);
 
         $resolver->setDefaults([
@@ -79,7 +79,7 @@ class FlatTreeBuilder extends AbstractDataSetCollectionBuilder implements DataSe
             'id'          => $row['id'],
             'name'        => $row['name'],
             'slug'        => $row['slug'],
-            'hasChildren' => (bool)($row['children'] > 0),
+            'hasChildren' => (bool) ($row['children'] > 0),
             'parent'      => $row['parent'],
             'weight'      => $row['hierarchy'],
         ];

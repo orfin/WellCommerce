@@ -1,11 +1,11 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- * 
+ *
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- * 
+ *
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
@@ -33,7 +33,7 @@ class LoadCompanyData extends AbstractDataFixture implements FixtureInterface, O
     {
         for ($i = 0; $i < 10; $i++) {
             $company = new Company();
-            $company->setName($this->fakerGenerator->company . ' ' . $this->fakerGenerator->companySuffix);
+            $company->setName($this->fakerGenerator->company.' '.$this->fakerGenerator->companySuffix);
             $company->setShortName($this->fakerGenerator->company);
             $company->setCountry($this->fakerGenerator->countryCode);
             $company->setStreet($this->fakerGenerator->streetName);

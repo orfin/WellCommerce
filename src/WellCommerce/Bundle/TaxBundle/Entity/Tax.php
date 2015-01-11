@@ -80,4 +80,3 @@ class Tax
         return $this;
     }
 }
-

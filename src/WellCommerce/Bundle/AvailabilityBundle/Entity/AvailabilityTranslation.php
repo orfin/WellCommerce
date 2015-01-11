@@ -65,4 +65,3 @@ class AvailabilityTranslation implements LocaleAwareInterface
         $this->name = $name;
     }
 }
-

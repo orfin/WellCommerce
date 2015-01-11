@@ -38,14 +38,14 @@ class MediaDataGrid extends AbstractDataGrid implements DataGridInterface
             'id'         => 'id',
             'caption'    => $this->trans('media.id'),
             'sorting'    => new Sorting([
-                'default_order' => Sorting::SORT_DIR_DESC
+                'default_order' => Sorting::SORT_DIR_DESC,
             ]),
             'appearance' => new Appearance([
-                'visible' => false
+                'visible' => false,
             ]),
             'filter'     => new Filter([
-                'type' => Filter ::FILTER_BETWEEN
-            ])
+                'type' => Filter ::FILTER_BETWEEN,
+            ]),
         ]));
 
         $collection->add(new Column([
@@ -53,7 +53,7 @@ class MediaDataGrid extends AbstractDataGrid implements DataGridInterface
             'caption'    => $this->trans('media.preview'),
             'appearance' => new Appearance([
                 'width' => 30,
-                'align' => Appearance::ALIGN_CENTER
+                'align' => Appearance::ALIGN_CENTER,
             ]),
         ]));
 
@@ -76,7 +76,6 @@ class MediaDataGrid extends AbstractDataGrid implements DataGridInterface
             'id'         => 'size',
             'caption'    => $this->trans('media.size'),
         ]));
-
     }
 
     /**
@@ -89,11 +88,11 @@ class MediaDataGrid extends AbstractDataGrid implements DataGridInterface
         $eventHandlers = $options->getEventHandlers();
 
         $eventHandlers->add(new ProcessEventHandler([
-            'function' => $this->getJavascriptFunctionName('process')
+            'function' => $this->getJavascriptFunctionName('process'),
         ]));
 
         $eventHandlers->add(new LoadedEventHandler([
-            'function' => $this->getJavascriptFunctionName('data_loaded')
+            'function' => $this->getJavascriptFunctionName('data_loaded'),
         ]));
     }
 }

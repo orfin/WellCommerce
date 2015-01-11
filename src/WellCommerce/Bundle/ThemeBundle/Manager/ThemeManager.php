@@ -1,11 +1,11 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- * 
+ *
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- * 
+ *
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
@@ -49,7 +49,7 @@ class ThemeManager implements ThemeManagerInterface
      */
     public function getThemeDirectory(Theme $theme)
     {
-        return $this->getThemesDirectory() . DIRECTORY_SEPARATOR . $theme->getFolder();
+        return $this->getThemesDirectory().DIRECTORY_SEPARATOR.$theme->getFolder();
     }
 
     /**
@@ -58,7 +58,8 @@ class ThemeManager implements ThemeManagerInterface
     public function getThemesDirectory()
     {
         $kernelDir = $this->kernel->getRootDir();
-        return $kernelDir . '/../web/themes';
+
+        return $kernelDir.'/../web/themes';
     }
 
     /**
@@ -124,7 +125,7 @@ class ThemeManager implements ThemeManagerInterface
                 }
             }
 
-            $file = $bundle->getPath() . '/' . $path;
+            $file = $bundle->getPath().'/'.$path;
             if (file_exists($file)) {
                 return $file;
             }
@@ -158,4 +159,4 @@ class ThemeManager implements ThemeManagerInterface
             '%themes_path%/%current_theme%/templates/%bundle_name%/%template%'
         ];
     }
-} 
+}

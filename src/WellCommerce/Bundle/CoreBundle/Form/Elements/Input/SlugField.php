@@ -39,12 +39,12 @@ class SlugField extends TextField implements ElementInterface
         ]);
 
         $resolver->setDefaults([
-            'class' => 'sluggable'
+            'class' => 'sluggable',
         ]);
 
         $resolver->setAllowedTypes([
             'name_field'     => 'WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface',
-            'generate_route' => 'string'
+            'generate_route' => 'string',
         ]);
 
         $fieldNormalizer = function (Options $options, ElementInterface $value) {
@@ -52,7 +52,7 @@ class SlugField extends TextField implements ElementInterface
         };
 
         $resolver->setNormalizers([
-            'name_field' => $fieldNormalizer
+            'name_field' => $fieldNormalizer,
         ]);
     }
 

@@ -82,4 +82,3 @@ class Deliverer
         $this->producers[] = $producer;
     }
 }
-

@@ -48,4 +48,3 @@ class AttributeTranslation implements LocaleAwareInterface
         $this->name = $name;
     }
 }
-

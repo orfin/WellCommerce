@@ -40,7 +40,7 @@ class AttributeEditor extends AbstractField implements ElementInterface
         ]);
 
         $resolver->setDefaults([
-            'attributes' => []
+            'attributes' => [],
         ]);
 
         $resolver->setAllowedTypes([

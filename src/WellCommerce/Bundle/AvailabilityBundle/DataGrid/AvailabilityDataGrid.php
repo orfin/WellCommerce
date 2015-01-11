@@ -36,11 +36,11 @@ class AvailabilityDataGrid extends AbstractDataGrid implements DataGridInterface
             'caption'    => $this->trans('availability.id'),
             'appearance' => new Appearance([
                 'width'   => 90,
-                'visible' => false
+                'visible' => false,
             ]),
             'filter'     => new Filter([
-                'type' => Filter::FILTER_BETWEEN
-            ])
+                'type' => Filter::FILTER_BETWEEN,
+            ]),
         ]));
 
         $collection->add(new Column([

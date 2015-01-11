@@ -44,7 +44,7 @@ class File extends AbstractField implements ElementInterface
             'repeat_max',
             'limit',
             'file_types',
-            'file_types_description'
+            'file_types_description',
         ]);
 
         $resolver->setDefaults([
@@ -52,14 +52,14 @@ class File extends AbstractField implements ElementInterface
             'repeat_max'             => ElementInterface::INFINITE,
             'limit'                  => 1000,
             'file_types_description' => 'file_types_description',
-            'file_types'             => ['jpg', 'jpeg', 'png', 'gif']
+            'file_types'             => ['jpg', 'jpeg', 'png', 'gif'],
         ]);
 
         $resolver->setAllowedTypes([
             'session_id'             => 'string',
             'session_name'           => 'string',
             'file_types_description' => 'string',
-            'file_types'             => 'array'
+            'file_types'             => 'array',
         ]);
     }
 

@@ -11,9 +11,6 @@
  */
 namespace WellCommerce\Bundle\TaxBundle\Twig\Extension;
 
-use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\HttpFoundation\Session\Storage\SessionStorageInterface;
 use WellCommerce\Bundle\CoreBundle\DataSet\CollectionBuilder\SelectBuilder;
 use WellCommerce\Bundle\TaxBundle\DataSet\TaxDataSet;
 

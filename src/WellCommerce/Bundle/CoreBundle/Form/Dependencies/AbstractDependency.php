@@ -51,7 +51,7 @@ abstract class AbstractDependency
         $resolver->setAllowedTypes([
             'field'     => 'WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface',
             'form'      => 'WellCommerce\Bundle\CoreBundle\Form\Elements\Form',
-            'condition' => 'WellCommerce\Bundle\CoreBundle\Form\Conditions\ConditionInterface'
+            'condition' => 'WellCommerce\Bundle\CoreBundle\Form\Conditions\ConditionInterface',
         ]);
     }
 
@@ -104,5 +104,4 @@ abstract class AbstractDependency
             $conditionJavascript
         );
     }
-
 }

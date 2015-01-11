@@ -64,13 +64,11 @@ abstract class AbstractBoxController extends AbstractController implements BoxCo
     {
         $accessor = $this->getPropertyAccessor();
 
-        return $accessor->getValue($this->getParam('_box_settings'), '[' . $id . ']');
+        return $accessor->getValue($this->getParam('_box_settings'), '['.$id.']');
     }
 
     protected function setBoxSettings($settings)
     {
         $this->settings = $settings;
     }
-
-
 }

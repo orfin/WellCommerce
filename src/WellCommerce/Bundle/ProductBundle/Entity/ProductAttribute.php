@@ -267,4 +267,3 @@ class ProductAttribute
         return $this->id;
     }
 }
-

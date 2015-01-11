@@ -219,12 +219,12 @@ class AbstractContainer extends ContainerAware
     final protected function getThemeDir($themeFolder = '')
     {
         $kernelDir = $this->get('kernel')->getRootDir();
-        $webDir    = $kernelDir . '/../web';
+        $webDir    = $kernelDir.'/../web';
 
         if (strlen($themeFolder)) {
-            $dir = $webDir . DIRECTORY_SEPARATOR . 'themes' . DIRECTORY_SEPARATOR . $themeFolder;
+            $dir = $webDir.DIRECTORY_SEPARATOR.'themes'.DIRECTORY_SEPARATOR.$themeFolder;
         } else {
-            $dir = $webDir . DIRECTORY_SEPARATOR . 'themes';
+            $dir = $webDir.DIRECTORY_SEPARATOR.'themes';
         }
 
         if (!is_dir($dir)) {
@@ -243,5 +243,4 @@ class AbstractContainer extends ContainerAware
     {
         return $this->get('image_helper');
     }
-
 }

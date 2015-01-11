@@ -11,8 +11,6 @@
  */
 namespace WellCommerce\Bundle\CategoryBundle\Form;
 
-use WellCommerce\Bundle\CategoryBundle\Repository\CategoryRepositoryInterface;
-use WellCommerce\Bundle\CoreBundle\DataSet\CollectionBuilder\FlatTreeBuilder;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\AbstractFormBuilder;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
@@ -48,7 +46,7 @@ class CategoryTreeFormBuilder extends AbstractFormBuilder implements FormBuilder
             'onAfterAdd'         => 'openCategoryEditor',
             'onDelete'           => 'deleteCategory',
             'onAfterDelete'      => 'openCategoryEditor',
-            'active'             => (int)$this->getRequest()->attributes->get('id')
+            'active'             => (int) $this->getRequest()->attributes->get('id')
         ]));
     }
 }

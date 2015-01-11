@@ -26,5 +26,4 @@ class NoCode extends AbstractFilter implements FilterInterface
     {
         return strip_tags($value);
     }
-
 }

@@ -57,5 +57,4 @@ class ProductController extends AbstractFrontController implements FrontControll
     {
         $this->repository = $repository;
     }
-
 }

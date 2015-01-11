@@ -30,7 +30,7 @@ class Image extends File implements ElementInterface
         parent::configureOptions($resolver);
 
         $resolver->setDefaults([
-            'file_types' => ['jpg', 'jpeg', 'png', 'gif']
+            'file_types' => ['jpg', 'jpeg', 'png', 'gif'],
         ]);
     }
 }

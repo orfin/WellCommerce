@@ -27,5 +27,4 @@ class CommaToDotChanger extends AbstractFilter implements FilterInterface
     {
         return str_replace(',', '.', $value);
     }
-
 }

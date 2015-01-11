@@ -42,7 +42,7 @@ abstract class AbstractField extends AbstractContainer
             'dependencies' => [],
             'rules'        => [],
             'filters'      => [],
-            'transformer'  => null
+            'transformer'  => null,
         ]);
 
         $resolver->setNormalizer('property_path', function ($options) {

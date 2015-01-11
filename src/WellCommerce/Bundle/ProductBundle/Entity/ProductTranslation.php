@@ -129,4 +129,3 @@ class ProductTranslation implements LocaleAwareInterface, RoutableSubjectInterfa
         return new ProductRoute();
     }
 }
-

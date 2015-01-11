@@ -21,5 +21,4 @@ use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
  */
 class WellCommerceAdminExtension extends AbstractExtension
 {
-
 }

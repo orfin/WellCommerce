@@ -24,5 +24,4 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
  */
 class PageController extends AbstractAdminController
 {
-
 }

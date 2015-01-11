@@ -35,15 +35,15 @@ class ThemeDataGrid extends AbstractDataGrid implements DataGridInterface
             'id'         => 'id',
             'caption'    => $this->trans('theme.id.label'),
             'sorting'    => new Sorting([
-                'default_order' => Sorting::SORT_DIR_DESC
+                'default_order' => Sorting::SORT_DIR_DESC,
             ]),
             'appearance' => new Appearance([
                 'width'   => 90,
-                'visible' => false
+                'visible' => false,
             ]),
             'filter'     => new Filter([
-                'type' => Filter::FILTER_BETWEEN
-            ])
+                'type' => Filter::FILTER_BETWEEN,
+            ]),
         ]));
 
         $collection->add(new Column([

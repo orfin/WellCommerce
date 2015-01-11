@@ -198,4 +198,3 @@ class Media
         $this->extension = $extension;
     }
 }
-

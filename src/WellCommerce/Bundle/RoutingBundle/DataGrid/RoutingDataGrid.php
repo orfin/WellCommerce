@@ -12,9 +12,7 @@
 namespace WellCommerce\Bundle\RoutingBundle\DataGrid;
 
 use WellCommerce\Bundle\CoreBundle\DataGrid\AbstractDataGrid;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Column\Column;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnCollection;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnInterface;
 use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
 
 /**
@@ -30,6 +28,5 @@ class RoutingDataGrid extends AbstractDataGrid implements DataGridInterface
      */
     public function configureColumns(ColumnCollection $collection)
     {
-
     }
 }

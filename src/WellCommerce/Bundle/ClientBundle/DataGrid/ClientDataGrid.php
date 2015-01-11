@@ -35,11 +35,11 @@ class ClientDataGrid extends AbstractDataGrid implements DataGridInterface
             'caption'    => $this->trans('client.id.label'),
             'appearance' => new Appearance([
                 'width'   => 90,
-                'visible' => false
+                'visible' => false,
             ]),
             'filter'     => new Filter([
-                'type' => Filter::FILTER_BETWEEN
-            ])
+                'type' => Filter::FILTER_BETWEEN,
+            ]),
         ]));
 
         $collection->add(new Column([
@@ -66,8 +66,8 @@ class ClientDataGrid extends AbstractDataGrid implements DataGridInterface
             'id'      => 'createdAt',
             'caption' => $this->trans('client.created_at.label'),
             'filter'  => new Filter([
-                'type' => Filter::FILTER_BETWEEN
-            ])
+                'type' => Filter::FILTER_BETWEEN,
+            ]),
         ]));
     }
 }

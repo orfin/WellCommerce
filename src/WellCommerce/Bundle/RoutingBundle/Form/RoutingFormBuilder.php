@@ -27,6 +27,5 @@ class RoutingFormBuilder extends AbstractFormBuilder implements FormBuilderInter
      */
     public function buildForm(FormInterface $form)
     {
-
     }
 }

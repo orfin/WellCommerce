@@ -78,7 +78,7 @@ class ClientFormBuilder extends AbstractFormBuilder implements FormBuilderInterf
             'label'   => $this->trans('Discount'),
             'suffix'  => '%',
             'filters' => [
-                $this->getFilter('comma_to_dot_changer')
+                $this->getFilter('comma_to_dot_changer'),
             ],
         ]));
 

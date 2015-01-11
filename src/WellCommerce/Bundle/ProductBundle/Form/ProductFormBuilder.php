@@ -157,7 +157,7 @@ class ProductFormBuilder extends AbstractFormBuilder
             'name'      => 'buyPrice',
             'label'     => $this->trans('product.buy_price.label'),
             'filters'   => [
-                $this->getFilter('comma_to_dot_changer')
+                $this->getFilter('comma_to_dot_changer'),
             ],
             'vat_field' => $vatField,
         ]));
@@ -172,7 +172,7 @@ class ProductFormBuilder extends AbstractFormBuilder
             'name'      => 'sellPrice',
             'label'     => $this->trans('product.sell_price.label'),
             'filters'   => [
-                $this->getFilter('comma_to_dot_changer')
+                $this->getFilter('comma_to_dot_changer'),
             ],
             'vat_field' => $vatField,
         ]));
@@ -206,7 +206,7 @@ class ProductFormBuilder extends AbstractFormBuilder
             'name'    => 'weight',
             'label'   => $this->trans('product.weight.label'),
             'filters' => [
-                $this->getFilter('comma_to_dot_changer')
+                $this->getFilter('comma_to_dot_changer'),
             ],
             'default' => 0
         ]));
@@ -215,7 +215,7 @@ class ProductFormBuilder extends AbstractFormBuilder
             'name'    => 'width',
             'label'   => $this->trans('product.width.label'),
             'filters' => [
-                $this->getFilter('comma_to_dot_changer')
+                $this->getFilter('comma_to_dot_changer'),
             ],
         ]));
 
@@ -223,7 +223,7 @@ class ProductFormBuilder extends AbstractFormBuilder
             'name'    => 'height',
             'label'   => $this->trans('product.height.label'),
             'filters' => [
-                $this->getFilter('comma_to_dot_changer')
+                $this->getFilter('comma_to_dot_changer'),
             ],
         ]));
 
@@ -231,7 +231,7 @@ class ProductFormBuilder extends AbstractFormBuilder
             'name'    => 'depth',
             'label'   => $this->trans('product.depth.label'),
             'filters' => [
-                $this->getFilter('comma_to_dot_changer')
+                $this->getFilter('comma_to_dot_changer'),
             ],
         ]));
 
@@ -239,7 +239,7 @@ class ProductFormBuilder extends AbstractFormBuilder
             'name'    => 'package_size',
             'label'   => $this->trans('product.package_size.label'),
             'filters' => [
-                $this->getFilter('comma_to_dot_changer')
+                $this->getFilter('comma_to_dot_changer'),
             ],
             'default' => 1
         ]));

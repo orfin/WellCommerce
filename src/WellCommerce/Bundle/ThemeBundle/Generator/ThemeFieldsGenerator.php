@@ -1,11 +1,11 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- * 
+ *
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- * 
+ *
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
@@ -101,7 +101,7 @@ class ThemeFieldsGenerator extends AbstractContainer implements ContainerAwareIn
             return $this->loadFile($file->getRealpath());
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -159,7 +159,7 @@ class ThemeFieldsGenerator extends AbstractContainer implements ContainerAwareIn
     protected function addField(\DOMElement $field)
     {
         $type         = $field->getAttribute('type');
-        $functionName = 'addField' . $this->getFieldTypeSuffix($type);
+        $functionName = 'addField'.$this->getFieldTypeSuffix($type);
 
         if (!is_callable([$this, $functionName])) {
             return false;
@@ -189,9 +189,9 @@ class ThemeFieldsGenerator extends AbstractContainer implements ContainerAwareIn
      */
     public function getDefaultValues($field)
     {
-        $xml = (array)simplexml_import_dom($field);
+        $xml = (array) simplexml_import_dom($field);
         if ($xml['default'] instanceof \SimpleXMLElement) {
-            $defaultValues = (array)$xml['default'];
+            $defaultValues = (array) $xml['default'];
         } else {
             $defaultValues = $xml['default'];
         }
@@ -236,7 +236,7 @@ class ThemeFieldsGenerator extends AbstractContainer implements ContainerAwareIn
         return $this->builder->getElement('text_field', $attributes + [
                 'suffix'        => 'px',
                 'size'          => TextField::SIZE_SHORT,
-                'css_attribute' => $type
+                'css_attribute' => $type,
             ]);
     }
 
@@ -292,7 +292,7 @@ class ThemeFieldsGenerator extends AbstractContainer implements ContainerAwareIn
         $type = $item->getAttribute('type');
 
         if (empty($name)) {
-            $name = 'auto_field_' . ($this->nextFieldId++);
+            $name = 'auto_field_'.($this->nextFieldId++);
             $item->setAttribute('name', $name);
         }
 
@@ -339,11 +339,11 @@ class ThemeFieldsGenerator extends AbstractContainer implements ContainerAwareIn
         $xml        = simplexml_import_dom($field);
 
         return $this->builder->getElement('colour_scheme_picker', $attributes + [
-                'gradient_height' => (string)$xml->height,
-                'file_source'     => $this->themeDir . '/assets/images',
-                'type_colour'     => (boolean)$xml->type['colour'],
-                'type_gradient'   => (boolean)$xml->type['gradient'],
-                'type_image'      => (boolean)$xml->type['image']
+                'gradient_height' => (string) $xml->height,
+                'file_source'     => $this->themeDir.'/assets/images',
+                'type_colour'     => (boolean) $xml->type['colour'],
+                'type_gradient'   => (boolean) $xml->type['gradient'],
+                'type_image'      => (boolean) $xml->type['image'],
             ]);
     }
 }

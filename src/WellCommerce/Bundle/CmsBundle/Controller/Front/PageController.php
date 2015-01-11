@@ -40,7 +40,7 @@ class PageController extends AbstractFrontController implements FrontControllerI
         return [
             'page' => [
                 'name'    => $translations->getName(),
-                'content' => $translations->getContent()
+                'content' => $translations->getContent(),
             ]
         ];
     }

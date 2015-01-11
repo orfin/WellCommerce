@@ -1,11 +1,11 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- * 
+ *
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- * 
+ *
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
@@ -31,17 +31,17 @@ class Sorting extends AbstractOptions
     {
         $resolver->setRequired([
             'allowed',
-            'default_order'
+            'default_order',
         ]);
 
         $resolver->setDefaults([
             'allowed'       => true,
-            'default_order' => self::SORT_DIR_DESC
+            'default_order' => self::SORT_DIR_DESC,
         ]);
 
         $resolver->setAllowedValues([
             'allowed'       => [true, false],
-            'default_order' => [self::SORT_DIR_DESC, self::SORT_DIR_ASC]
+            'default_order' => [self::SORT_DIR_DESC, self::SORT_DIR_ASC],
         ]);
     }
 }

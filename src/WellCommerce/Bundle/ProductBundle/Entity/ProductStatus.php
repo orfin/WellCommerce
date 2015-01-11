@@ -65,4 +65,3 @@ class ProductStatus
         $this->products = $collection;
     }
 }
-

@@ -1,11 +1,11 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- * 
+ *
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- * 
+ *
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
@@ -35,13 +35,13 @@ class Filter extends AbstractOptions
     {
         $resolver->setRequired([
             'type',
-            'options'
+            'options',
         ]);
 
         $resolver->setDefined([
             'filtered_column',
             'source',
-            'load_children'
+            'load_children',
         ]);
 
         $resolver->setDefaults([
@@ -61,7 +61,7 @@ class Filter extends AbstractOptions
         };
 
         $resolver->setNormalizers([
-            'options' => $optionsNormalizer
+            'options' => $optionsNormalizer,
         ]);
 
         $resolver->setAllowedValues([
@@ -70,7 +70,7 @@ class Filter extends AbstractOptions
                 self::FILTER_BETWEEN,
                 self::FILTER_INPUT,
                 self::FILTER_NONE,
-                self::FILTER_TREE
+                self::FILTER_TREE,
             ],
         ]);
     }
@@ -81,10 +81,10 @@ class Filter extends AbstractOptions
         foreach ($values as $key => $value) {
             $filterOptions[] = [
                 'id'      => $key,
-                'caption' => $value
+                'caption' => $value,
             ];
         }
 
         return $filterOptions;
     }
-} 
+}

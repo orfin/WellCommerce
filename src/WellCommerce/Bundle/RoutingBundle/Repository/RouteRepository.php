@@ -39,7 +39,7 @@ class RouteRepository extends AbstractEntityRepository implements RouteRepositor
         $slug = Sluggable::makeSlug($name);
 
         // check generated slug against other values
-        $existsInValues = in_array($slug, (array)$values);
+        $existsInValues = in_array($slug, (array) $values);
 
         // if slug is the same as other values, try to add locale part
         if ($existsInValues) {

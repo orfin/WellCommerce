@@ -30,11 +30,11 @@ class RichTextEditor extends TextArea implements ElementInterface
         parent::configureOptions($resolver);
 
         $resolver->setRequired([
-            'advanced'
+            'advanced',
         ]);
 
         $resolver->setDefaults([
-            'advanced' => true
+            'advanced' => true,
         ]);
 
         $resolver->setAllowedTypes([

@@ -1,11 +1,11 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- * 
+ *
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- * 
+ *
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
@@ -33,7 +33,7 @@ class CategoryMenuBoxConfigurator extends AbstractLayoutBoxConfigurator implemen
         $accessor = $this->getPropertyAccessor();
 
         $fieldset->addChild($builder->getElement('tip', [
-            'tip' => '<p>' . $this->trans('Choose categories which should be not visible in box.') . '</p>'
+            'tip' => '<p>'.$this->trans('Choose categories which should be not visible in box.').'</p>'
         ]));
 
         $fieldset->addChild($builder->getElement('tree', [
@@ -47,4 +47,4 @@ class CategoryMenuBoxConfigurator extends AbstractLayoutBoxConfigurator implemen
             'default'    => $accessor->getValue($defaults, '[exclude]')
         ]));
     }
-} 
+}

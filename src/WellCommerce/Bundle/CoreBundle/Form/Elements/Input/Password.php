@@ -19,5 +19,4 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements\Input;
  */
 class Password extends TextField
 {
-
 }

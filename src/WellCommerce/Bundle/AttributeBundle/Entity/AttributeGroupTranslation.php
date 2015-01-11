@@ -67,4 +67,3 @@ class AttributeGroupTranslation implements LocaleAwareInterface
         return $this;
     }
 }
-

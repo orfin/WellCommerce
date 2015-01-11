@@ -27,5 +27,4 @@ class Trim extends AbstractFilter implements FilterInterface
     {
         return trim($value);
     }
-
 }

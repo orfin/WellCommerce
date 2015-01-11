@@ -131,4 +131,3 @@ class Attribute
         $this->values = $collection;
     }
 }
-

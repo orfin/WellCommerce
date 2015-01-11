@@ -12,10 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Elements\Input;
 
-use WellCommerce\Bundle\CoreBundle\Form\Elements\Attribute;
-use WellCommerce\Bundle\CoreBundle\Form\Elements\AttributeCollection;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
-use WellCommerce\Bundle\CoreBundle\Form\Elements\Input\AbstractInputField;
 
 /**
  * Class Hidden
@@ -24,5 +21,4 @@ use WellCommerce\Bundle\CoreBundle\Form\Elements\Input\AbstractInputField;
  */
 class Hidden extends AbstractInputField implements ElementInterface
 {
-
 }

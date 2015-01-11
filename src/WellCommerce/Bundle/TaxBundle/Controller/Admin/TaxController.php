@@ -24,5 +24,4 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
  */
 class TaxController extends AbstractAdminController
 {
-
 }

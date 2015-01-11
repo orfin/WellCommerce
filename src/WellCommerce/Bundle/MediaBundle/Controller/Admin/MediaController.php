@@ -46,11 +46,9 @@ class MediaController extends AbstractAdminController
                 'sThumb'     => $thumbnail,
                 'sFilename'  => $media->getName(),
                 'sExtension' => $media->getExtension(),
-                'sFileType'  => $media->getMime()
+                'sFileType'  => $media->getMime(),
             ];
-
         } catch (\Exception $e) {
-
             $response = [
                 'sError'   => $this->trans('uploader.error'),
                 'sMessage' => $this->trans($e->getMessage()),

@@ -21,5 +21,4 @@ use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
  */
 class Submit extends AbstractButton implements ElementInterface
 {
-
 }

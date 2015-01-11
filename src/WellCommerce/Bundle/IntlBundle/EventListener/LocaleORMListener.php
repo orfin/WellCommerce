@@ -1,11 +1,11 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- * 
+ *
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- * 
+ *
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
@@ -34,8 +34,7 @@ class LocaleORMListener implements EventSubscriber
         }
 
         if ($classMetadata->hasField('locale')) {
-
-//            // remove old field mapping
+            //            // remove old field mapping
 //            unset($classMetadata->fieldMappings['locale']);
 //            unset($classMetadata->fieldNames['locale']);
 //            unset($classMetadata->columnNames['locale']);
@@ -57,7 +56,6 @@ class LocaleORMListener implements EventSubscriber
 
     public function postRemove(LifecycleEventArgs $args)
     {
-
     }
 
     public function getSubscribedEvents()
@@ -66,5 +64,4 @@ class LocaleORMListener implements EventSubscriber
             'postRemove',
         ];
     }
-
-} 
+}

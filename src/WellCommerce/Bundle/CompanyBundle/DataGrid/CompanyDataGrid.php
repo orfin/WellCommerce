@@ -36,15 +36,15 @@ class CompanyDataGrid extends AbstractDataGrid implements DataGridInterface
             'id'         => 'id',
             'caption'    => $this->trans('company.id'),
             'sorting'    => new Sorting([
-                'default_order' => Sorting::SORT_DIR_ASC
+                'default_order' => Sorting::SORT_DIR_ASC,
             ]),
             'appearance' => new Appearance([
                 'width'   => 90,
-                'visible' => false
+                'visible' => false,
             ]),
             'filter'     => new Filter([
-                'type' => Filter::FILTER_BETWEEN
-            ])
+                'type' => Filter::FILTER_BETWEEN,
+            ]),
         ]));
 
         $collection->add(new Column([
@@ -61,8 +61,8 @@ class CompanyDataGrid extends AbstractDataGrid implements DataGridInterface
             'id'      => 'createdAt',
             'caption' => $this->trans('company.created_at'),
             'filter'  => new Filter([
-                'type' => Filter::FILTER_BETWEEN
-            ])
+                'type' => Filter::FILTER_BETWEEN,
+            ]),
         ]));
     }
 }

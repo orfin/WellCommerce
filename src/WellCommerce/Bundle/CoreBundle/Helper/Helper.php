@@ -43,7 +43,7 @@ class Helper extends AbstractContainer
      */
     public static function snake($value, $delimiter = '_')
     {
-        $replace = '$1' . $delimiter . '$2';
+        $replace = '$1'.$delimiter.'$2';
 
         return ctype_lower($value) ? $value : strtolower(preg_replace('/(.)([A-Z])/', $replace, $value));
     }
@@ -75,7 +75,7 @@ class Helper extends AbstractContainer
         $elements = explode('.', $path);
         $path     = array_map(
             function ($element) {
-                return '[' . $element . ']';
+                return '['.$element.']';
             },
             $elements
         );

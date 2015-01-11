@@ -1,11 +1,11 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- * 
+ *
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- * 
+ *
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
@@ -39,7 +39,7 @@ class LoadClientData extends AbstractDataFixture implements FixtureInterface, Or
             $client = new Client();
             $client->setFirstName($this->fakerGenerator->firstName);
             $client->setLastName($this->fakerGenerator->lastName);
-            $client->setUsername($this->fakerGenerator->userName . $i);
+            $client->setUsername($this->fakerGenerator->userName.$i);
             $client->setEmail($this->fakerGenerator->email);
             $client->setPhone($this->fakerGenerator->phoneNumber);
             $client->setDiscount(rand(0, 100));

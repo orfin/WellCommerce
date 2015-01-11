@@ -289,7 +289,7 @@ class Product
      */
     public function setStock($stock)
     {
-        $this->stock = (float)$stock;
+        $this->stock = (float) $stock;
     }
 
     /**

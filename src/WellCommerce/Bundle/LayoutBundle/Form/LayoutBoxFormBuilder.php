@@ -11,7 +11,6 @@
  */
 namespace WellCommerce\Bundle\LayoutBundle\Form;
 
-use Symfony\Component\Finder\Finder;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\AbstractFormBuilder;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\TranslationTransformer;

@@ -38,5 +38,4 @@ class MediaRepository extends AbstractEntityRepository implements MediaRepositor
 
         return $media;
     }
-
 }

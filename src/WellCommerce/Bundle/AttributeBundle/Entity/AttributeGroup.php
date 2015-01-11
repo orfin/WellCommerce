@@ -98,4 +98,3 @@ class AttributeGroup
         $this->attributes[] = $attribute;
     }
 }
-

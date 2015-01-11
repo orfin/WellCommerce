@@ -52,7 +52,7 @@ class AttributeValueController extends AbstractAdminController
         $this->getEntityManager()->flush();
 
         return $this->jsonResponse([
-            'id' => $value->getId()
+            'id' => $value->getId(),
         ]);
     }
 
@@ -63,6 +63,4 @@ class AttributeValueController extends AbstractAdminController
     {
         return $this->getManager()->getRepository();
     }
-
-
 }

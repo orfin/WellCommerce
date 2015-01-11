@@ -51,7 +51,7 @@ class AttributeController extends AbstractAdminController
         }
 
         return $this->jsonResponse([
-            'attributes' => $sets
+            'attributes' => $sets,
         ]);
     }
 
@@ -77,7 +77,7 @@ class AttributeController extends AbstractAdminController
         $em->flush();
 
         return $this->jsonResponse([
-            'id' => $attribute->getId()
+            'id' => $attribute->getId(),
         ]);
     }
 

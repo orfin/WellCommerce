@@ -1,11 +1,11 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- * 
+ *
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- * 
+ *
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
@@ -56,10 +56,10 @@ class TemplateResourcesPass implements CompilerPassInterface
 
     protected function setBundleDirectoryResources(ContainerBuilder $container, $engine, $bundleDirName, $bundleName)
     {
-        if (!$container->hasDefinition('assetic.' . $engine . '_directory_resource.' . $bundleName)) {
+        if (!$container->hasDefinition('assetic.'.$engine.'_directory_resource.'.$bundleName)) {
             throw new LogicException('The ThemeBundle must be registered after the AsseticBundle in the application Kernel.');
         }
-        $definition = 'assetic.' . $engine . '_directory_resource.' . $bundleName;
+        $definition = 'assetic.'.$engine.'_directory_resource.'.$bundleName;
         $resources  = $container->getDefinition($definition)->getArgument(0);
 
         foreach ($this->themes as $theme) {
@@ -67,13 +67,13 @@ class TemplateResourcesPass implements CompilerPassInterface
                 $bundleName,
                 $engine,
                 [
-                    $container->getParameter('kernel.root_dir') . '/Resources/' . $bundleName . '/themes/' . $theme,
-                    $bundleDirName . '/Resources/themes/' . $theme,
+                    $container->getParameter('kernel.root_dir').'/Resources/'.$bundleName.'/themes/'.$theme,
+                    $bundleDirName.'/Resources/themes/'.$theme,
                 ]
             );
         }
 
-        $container->getDefinition('assetic.' . $engine . '_directory_resource.' . $bundleName)
+        $container->getDefinition('assetic.'.$engine.'_directory_resource.'.$bundleName)
             ->replaceArgument(0, $resources);
     }
 }

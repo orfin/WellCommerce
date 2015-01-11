@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\EnableableTrait;
@@ -81,6 +80,4 @@ class PaymentMethod
     {
         $this->processor = $processor;
     }
-
 }
-

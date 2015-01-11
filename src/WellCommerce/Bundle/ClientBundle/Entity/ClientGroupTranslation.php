@@ -67,4 +67,3 @@ class ClientGroupTranslation implements LocaleAwareInterface
         return $this;
     }
 }
-

@@ -1,11 +1,11 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- * 
+ *
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- * 
+ *
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
@@ -32,7 +32,7 @@ class ProducerBoxConfigurator extends AbstractLayoutBoxConfigurator implements L
         $accessor = $this->getPropertyAccessor();
 
         $fieldset->addChild($builder->getElement('tip', [
-            'tip' => '<p>' . $this->trans('Select view type used in template.') . '</p>'
+            'tip' => '<p>'.$this->trans('Select view type used in template.').'</p>'
         ]));
 
         $fieldset->addChild($builder->getElement('select', [
@@ -45,4 +45,4 @@ class ProducerBoxConfigurator extends AbstractLayoutBoxConfigurator implements L
             'default' => $accessor->getValue($defaults, '[view_type]')
         ]));
     }
-} 
+}

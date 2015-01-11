@@ -21,5 +21,4 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
  */
 class UnitRepository extends AbstractEntityRepository implements UnitRepositoryInterface
 {
-
 }

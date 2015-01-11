@@ -1,11 +1,11 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- * 
+ *
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- * 
+ *
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
@@ -42,7 +42,7 @@ class Appearance extends AbstractOptions
             'visible'  => true,
             'width'    => self::WIDTH_AUTO,
             'align'    => self::ALIGN_LEFT,
-            'no_title' => false
+            'no_title' => false,
         ]);
 
         $resolver->setAllowedValues([
@@ -55,7 +55,7 @@ class Appearance extends AbstractOptions
             'visible'  => 'bool',
             'width'    => ['int', 'string'],
             'align'    => 'string',
-            'no_title' => 'bool'
+            'no_title' => 'bool',
         ]);
     }
 }

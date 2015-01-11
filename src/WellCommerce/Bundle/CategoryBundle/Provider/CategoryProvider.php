@@ -12,10 +12,8 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\Provider;
 
-use WellCommerce\Bundle\CategoryBundle\DataSet\Front\CategoryDataSet;
 use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CoreBundle\DataSet\CollectionBuilder\CollectionBuilderFactoryInterface;
-use WellCommerce\Bundle\CoreBundle\DataSet\Request\DataSetRequest;
 
 /**
  * Class CategoryProvider

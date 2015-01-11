@@ -22,5 +22,4 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
  */
 class CompanyRepository extends AbstractEntityRepository implements CompanyRepositoryInterface
 {
-
 }

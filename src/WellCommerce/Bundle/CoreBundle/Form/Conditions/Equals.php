@@ -34,5 +34,4 @@ class Equals extends AbstractCondition implements ConditionInterface
 
         return ($value == $this->_argument);
     }
-
 }

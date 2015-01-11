@@ -143,4 +143,3 @@ class News
         $this->featured = $featured;
     }
 }
-

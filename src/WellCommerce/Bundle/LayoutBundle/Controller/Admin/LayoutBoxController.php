@@ -23,5 +23,4 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
  */
 class LayoutBoxController extends AbstractAdminController
 {
-
 }

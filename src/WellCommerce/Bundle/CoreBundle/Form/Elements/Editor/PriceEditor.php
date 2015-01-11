@@ -45,7 +45,7 @@ class PriceEditor extends AbstractField implements ElementInterface
                 return $options['vat_field']->getName();
             }
 
-            return null;
+            return;
         };
 
         $resolver->setDefaults([

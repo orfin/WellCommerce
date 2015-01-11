@@ -55,4 +55,3 @@ class PaymentMethodTranslation implements LocaleAwareInterface
         $this->name = $name;
     }
 }
-

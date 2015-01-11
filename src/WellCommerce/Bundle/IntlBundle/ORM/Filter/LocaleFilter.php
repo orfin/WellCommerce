@@ -1,11 +1,11 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- * 
+ *
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- * 
+ *
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
@@ -28,6 +28,7 @@ class LocaleFilter extends SQLFilter
         if (!$targetEntity->reflClass->implementsInterface('WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface')) {
             return "";
         }
-        return $targetTableAlias . '.locale = ' . $this->getParameter('locale');
+
+        return $targetTableAlias.'.locale = '.$this->getParameter('locale');
     }
-} 
+}

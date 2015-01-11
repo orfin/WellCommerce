@@ -140,4 +140,3 @@ class Page
         $child->setParent($this);
     }
 }
-

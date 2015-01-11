@@ -41,7 +41,7 @@ class Date extends TextField implements ElementInterface
         ]);
 
         $resolver->setDefaults([
-            'transformer' => new DateTransformer('Y-m-d')
+            'transformer' => new DateTransformer('Y-m-d'),
         ]);
     }
 }

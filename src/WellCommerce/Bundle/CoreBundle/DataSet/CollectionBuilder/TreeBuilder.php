@@ -1,11 +1,11 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- * 
+ *
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- * 
+ *
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
@@ -29,7 +29,7 @@ class TreeBuilder extends FlatTreeBuilder
         parent::configureOptions($resolver);
 
         $resolver->setRequired([
-            'parent_identifier'
+            'parent_identifier',
         ]);
 
         $resolver->setDefaults([
@@ -37,7 +37,7 @@ class TreeBuilder extends FlatTreeBuilder
         ]);
 
         $resolver->setAllowedTypes([
-            'parent_identifier' => 'string'
+            'parent_identifier' => 'string',
         ]);
     }
 
@@ -78,4 +78,4 @@ class TreeBuilder extends FlatTreeBuilder
 
         return $tree;
     }
-} 
+}

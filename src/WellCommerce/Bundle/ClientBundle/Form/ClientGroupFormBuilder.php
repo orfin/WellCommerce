@@ -39,7 +39,7 @@ class ClientGroupFormBuilder extends AbstractFormBuilder implements FormBuilderI
             'comment' => $this->trans('client_group.discount.comment'),
             'suffix'  => '%',
             'filters' => [
-                $this->getFilter('comma_to_dot_changer')
+                $this->getFilter('comma_to_dot_changer'),
             ],
         ]));
 

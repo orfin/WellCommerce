@@ -57,4 +57,3 @@ class DelivererTranslation implements LocaleAwareInterface
         return $this;
     }
 }
-

@@ -1,17 +1,16 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- * 
+ *
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- * 
+ *
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
 
 namespace WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\EventHandler;
-
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -32,13 +31,13 @@ abstract class AbstractRowEventHandler extends AbstractEventHandler
         $resolver->setRequired([
             'row_action',
             'context_action',
-            'route'
+            'route',
         ]);
 
         $resolver->setDefaults([
             'row_action'     => false,
             'context_action' => false,
-            'route'          => false
+            'route'          => false,
         ]);
 
         $resolver->setAllowedTypes([
@@ -47,4 +46,4 @@ abstract class AbstractRowEventHandler extends AbstractEventHandler
             'route'          => ['bool', 'string'],
         ]);
     }
-} 
+}

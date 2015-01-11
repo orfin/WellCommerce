@@ -35,15 +35,15 @@ class ProductStatusDataGrid extends AbstractDataGrid implements DataGridInterfac
             'id'         => 'id',
             'caption'    => $this->trans('Id'),
             'sorting'    => new Sorting([
-                'default_order' => Sorting::SORT_DIR_DESC
+                'default_order' => Sorting::SORT_DIR_DESC,
             ]),
             'appearance' => new Appearance([
                 'width'   => 90,
-                'visible' => false
+                'visible' => false,
             ]),
             'filter'     => new Filter([
-                'type' => Filter::FILTER_BETWEEN
-            ])
+                'type' => Filter::FILTER_BETWEEN,
+            ]),
         ]));
 
         $collection->add(new Column([
@@ -53,8 +53,8 @@ class ProductStatusDataGrid extends AbstractDataGrid implements DataGridInterfac
                 'width' => 70,
             ]),
             'filter'     => new Filter([
-                'type' => Filter::FILTER_INPUT
-            ])
+                'type' => Filter::FILTER_INPUT,
+            ]),
         ]));
     }
 }

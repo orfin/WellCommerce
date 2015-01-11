@@ -19,5 +19,4 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Elements\Optioned;
  */
 class MultiSelect extends Select
 {
-
 }

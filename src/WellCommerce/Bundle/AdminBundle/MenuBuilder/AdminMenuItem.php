@@ -1,11 +1,11 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- * 
+ *
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- * 
+ *
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
@@ -54,13 +54,13 @@ class AdminMenuItem implements AdminMenuItemInterface, \ArrayAccess
             'id',
             'name',
             'link',
-            'path'
+            'path',
         ]);
 
         $resolver->setDefaults([
             'sort_order' => 0,
             'class'      => '',
-            'link'       => ''
+            'link'       => '',
         ]);
 
         $resolver->setAllowedTypes([
@@ -70,7 +70,6 @@ class AdminMenuItem implements AdminMenuItemInterface, \ArrayAccess
             'class'      => 'string',
             'sort_order' => 'integer',
         ]);
-
     }
 
     /**
@@ -174,4 +173,4 @@ class AdminMenuItem implements AdminMenuItemInterface, \ArrayAccess
     {
         unset($this->children[$offset]);
     }
-} 
+}

@@ -1,11 +1,11 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- * 
+ *
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- * 
+ *
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
@@ -91,12 +91,12 @@ class XmlLoader
     private function addMenuItem($item)
     {
         $this->builder->add(new AdminMenuItem([
-            'id'         => (string)$item->id,
-            'name'       => (string)$item->name,
-            'class'      => isset($item->class) ? (string)$item->class : '',
-            'link'       => (string)$item->route,
-            'path'       => Helper::convertDotNotation((string)$item->path),
-            'sort_order' => (int)$item->sort_order,
+            'id'         => (string) $item->id,
+            'name'       => (string) $item->name,
+            'class'      => isset($item->class) ? (string) $item->class : '',
+            'link'       => (string) $item->route,
+            'path'       => Helper::convertDotNotation((string) $item->path),
+            'sort_order' => (int) $item->sort_order,
         ]));
     }
 }

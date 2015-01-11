@@ -36,12 +36,12 @@ class TextArea extends TextField implements ElementInterface
 
         $resolver->setDefaults([
             'rows' => 20,
-            'cols' => 50
+            'cols' => 50,
         ]);
 
         $resolver->setAllowedTypes([
             'rows' => 'int',
-            'cols' => 'int'
+            'cols' => 'int',
         ]);
     }
 }

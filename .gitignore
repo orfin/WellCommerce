@@ -13,6 +13,7 @@ app/logs/*
 /vendor/
 /bin/
 /composer.phar
+/php-cs-fixer.phar
 /application/.idea
 *.idea
 /tests/_output

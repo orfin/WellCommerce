@@ -49,7 +49,6 @@ class Theme
      */
     private $folder;
 
-
     /**
      * Returns theme identifier
      *

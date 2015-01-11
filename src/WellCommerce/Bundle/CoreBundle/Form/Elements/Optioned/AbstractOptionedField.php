@@ -32,7 +32,7 @@ abstract class AbstractOptionedField extends AbstractField
         parent::configureOptions($resolver);
 
         $resolver->setRequired([
-            'options'
+            'options',
         ]);
 
         $resolver->setDefined([
@@ -85,7 +85,7 @@ abstract class AbstractOptionedField extends AbstractField
             $label     = addslashes($label);
             $options[] = [
                 'sValue' => $value,
-                'sLabel' => $label
+                'sLabel' => $label,
             ];
         }
 

@@ -153,7 +153,7 @@ class User implements \Serializable, UserInterface, EquatableInterface
      */
     public function getSalt()
     {
-        return null;
+        return;
     }
 
     /**
@@ -202,7 +202,7 @@ class User implements \Serializable, UserInterface, EquatableInterface
      */
     public function unserialize($serialized)
     {
-        list ($this->id, $this->username, $this->password) = unserialize($serialized);
+        list($this->id, $this->username, $this->password) = unserialize($serialized);
     }
 
     public function isEqualTo(UserInterface $user)

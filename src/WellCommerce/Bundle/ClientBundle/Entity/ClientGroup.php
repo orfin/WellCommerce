@@ -72,4 +72,3 @@ class ClientGroup
         $this->discount = $discount;
     }
 }
-

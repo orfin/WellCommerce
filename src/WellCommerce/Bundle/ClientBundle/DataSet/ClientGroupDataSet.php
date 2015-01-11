@@ -1,11 +1,11 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- * 
+ *
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- * 
+ *
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
@@ -30,7 +30,7 @@ class ClientGroupDataSet extends AbstractDataSet implements DataSetInterface
     {
         $resolver->setColumns([
             'id'   => 'client_group.id',
-            'name' => 'client_group_translation.name'
+            'name' => 'client_group_translation.name',
         ]);
     }
 }

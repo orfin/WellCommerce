@@ -15,9 +15,6 @@ namespace WellCommerce\Bundle\CategoryBundle\Controller\Front;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
-use WellCommerce\Bundle\CoreBundle\DataSet\Conditions\Condition\Eq;
-use WellCommerce\Bundle\CoreBundle\DataSet\Conditions\ConditionsCollection;
-use WellCommerce\Bundle\CoreBundle\DataSet\Request\DataSetRequest;
 
 /**
  * Class CategoryController

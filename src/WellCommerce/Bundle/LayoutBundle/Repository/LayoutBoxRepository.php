@@ -27,6 +27,7 @@ class LayoutBoxRepository extends AbstractEntityRepository implements LayoutBoxR
     public function getLayoutBoxesCollection()
     {
         $boxes = $this->findAll();
+
         return new LayoutBoxCollection($boxes);
     }
 }

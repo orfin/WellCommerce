@@ -54,4 +54,3 @@ class AttributeValueTranslation
         return $this;
     }
 }
-

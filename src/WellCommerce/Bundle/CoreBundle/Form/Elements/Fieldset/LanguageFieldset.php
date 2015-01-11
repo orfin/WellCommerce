@@ -45,13 +45,13 @@ class LanguageFieldset extends NestedFieldset implements ElementInterface
         ]);
 
         $resolver->setDefaults([
-            'languages' => $this->locales
+            'languages' => $this->locales,
         ]);
 
         $resolver->setNormalizers([
             'property_path' => function ($options) {
                 return new PropertyPath($options['name']);
-            }
+            },
         ]);
 
         $resolver->setAllowedTypes([
@@ -169,6 +169,6 @@ class LanguageFieldset extends NestedFieldset implements ElementInterface
             return $accessor->getValue($value, "[{$locale}]");
         }
 
-        return null;
+        return;
     }
 }

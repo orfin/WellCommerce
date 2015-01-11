@@ -62,7 +62,7 @@ class AttributeGroupController extends AbstractAdminController
         $this->getManager()->createResource($resource, $request);
 
         return $this->jsonResponse([
-            'id' => $resource->getId()
+            'id' => $resource->getId(),
         ]);
     }
 
@@ -116,12 +116,12 @@ class AttributeGroupController extends AbstractAdminController
             $sets[] = [
                 'id'               => $group['id'],
                 'name'             => $group['name'],
-                'current_category' => false
+                'current_category' => false,
             ];
         }
 
         $response = [
-            'sets' => $sets
+            'sets' => $sets,
         ];
 
         return $this->jsonResponse($response);

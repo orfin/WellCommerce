@@ -66,4 +66,3 @@ class ProductStatusTranslation implements LocaleAwareInterface
         $this->cssClass = $cssClass;
     }
 }
-

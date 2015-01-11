@@ -37,19 +37,19 @@ class ProductDataGrid extends AbstractDataGrid implements DataGridInterface
             'caption'    => $this->trans('product.id'),
             'appearance' => new Appearance([
                 'width'   => 90,
-                'visible' => false
+                'visible' => false,
             ]),
             'filter'     => new Filter([
-                'type' => Filter::FILTER_BETWEEN
-            ])
+                'type' => Filter::FILTER_BETWEEN,
+            ]),
         ]));
 
         $collection->add(new Column([
             'id'         => 'name',
             'caption'    => $this->trans('product.name.label'),
             'appearance' => new Appearance([
-                'width' => 200
-            ])
+                'width' => 200,
+            ]),
         ]));
 
         $collection->add(new Column([
@@ -63,8 +63,8 @@ class ProductDataGrid extends AbstractDataGrid implements DataGridInterface
             'caption'  => $this->trans('product.sell_price.label'),
             'editable' => true,
             'filter'   => new Filter([
-                'type' => Filter::FILTER_BETWEEN
-            ])
+                'type' => Filter::FILTER_BETWEEN,
+            ]),
         ]));
 
         $collection->add(new Column([
@@ -72,8 +72,8 @@ class ProductDataGrid extends AbstractDataGrid implements DataGridInterface
             'caption'  => $this->trans('product.stock.label'),
             'editable' => true,
             'filter'   => new Filter([
-                'type' => Filter::FILTER_BETWEEN
-            ])
+                'type' => Filter::FILTER_BETWEEN,
+            ]),
         ]));
 
         $collection->add(new Column([
@@ -81,8 +81,8 @@ class ProductDataGrid extends AbstractDataGrid implements DataGridInterface
             'caption'  => $this->trans('product.weight.label'),
             'editable' => true,
             'filter'   => new Filter([
-                'type' => Filter::FILTER_BETWEEN
-            ])
+                'type' => Filter::FILTER_BETWEEN,
+            ]),
         ]));
     }
 
@@ -97,7 +97,7 @@ class ProductDataGrid extends AbstractDataGrid implements DataGridInterface
 
         $eventHandlers->add(new UpdateRowEventHandler([
             'function' => $this->getJavascriptFunctionName('update'),
-            'route'    => $this->getRouteForAction('update')
+            'route'    => $this->getRouteForAction('update'),
         ]));
     }
 }

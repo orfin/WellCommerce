@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\CategoryBundle\Repository;
 
 use Symfony\Component\HttpFoundation\ParameterBag;
 use WellCommerce\Bundle\CategoryBundle\Entity\Category;
-use WellCommerce\Bundle\CategoryBundle\Tree\CategoryTreeBuilder;
 use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 use WellCommerce\Bundle\RoutingBundle\Helper\Sluggable;
 
@@ -55,7 +54,7 @@ class CategoryRepository extends AbstractEntityRepository implements CategoryRep
     public function quickAddCategory(ParameterBag $parameters)
     {
         $name     = $parameters->get('name');
-        $parent   = $this->find((int)$parameters->get('parent'));
+        $parent   = $this->find((int) $parameters->get('parent'));
         $locales  = $this->getLocales();
         $category = new Category();
         $category->setHierarchy(0);
@@ -73,5 +72,4 @@ class CategoryRepository extends AbstractEntityRepository implements CategoryRep
 
         return $category;
     }
-
 }

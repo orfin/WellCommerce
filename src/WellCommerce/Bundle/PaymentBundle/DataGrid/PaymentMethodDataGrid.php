@@ -35,15 +35,15 @@ class PaymentMethodDataGrid extends AbstractDataGrid implements DataGridInterfac
             'source'     => 'payment_method.id',
             'caption'    => $this->trans('payment.id'),
             'sorting'    => [
-                'default_order' => ColumnInterface::SORT_DIR_DESC
+                'default_order' => ColumnInterface::SORT_DIR_DESC,
             ],
             'appearance' => [
                 'width'   => 90,
-                'visible' => false
+                'visible' => false,
             ],
             'filter'     => [
-                'type' => ColumnInterface::FILTER_BETWEEN
-            ]
+                'type' => ColumnInterface::FILTER_BETWEEN,
+            ],
         ]));
 
         $collection->add(new Column([
@@ -52,11 +52,11 @@ class PaymentMethodDataGrid extends AbstractDataGrid implements DataGridInterfac
             'caption'    => $this->trans('payment.name'),
             'appearance' => [
                 'width' => 70,
-                'align' => ColumnInterface::ALIGN_LEFT
+                'align' => ColumnInterface::ALIGN_LEFT,
             ],
             'filter'     => [
-                'type' => ColumnInterface::FILTER_INPUT
-            ]
+                'type' => ColumnInterface::FILTER_INPUT,
+            ],
         ]));
     }
 }

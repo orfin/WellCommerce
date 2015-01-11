@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\CompanyBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
-use Symfony\Component\Validator\Constraints as Assert;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\AddressTrait;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\PhotoTrait;
 
@@ -114,6 +113,4 @@ class Company
 
         return $this;
     }
-
 }
-

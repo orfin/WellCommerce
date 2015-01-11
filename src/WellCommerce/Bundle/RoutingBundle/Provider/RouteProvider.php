@@ -1,11 +1,11 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- * 
+ *
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- * 
+ *
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
@@ -67,14 +67,14 @@ class RouteProvider implements RouteProviderInterface
         $collection = new RouteCollection();
         $path       = $this->getNormalizedPath($request);
         $resource   = $this->repository->findOneBy([
-            'path' => $path
+            'path' => $path,
         ]);
 
         if ($resource) {
             $route = $this->createRoute($resource);
 
             $collection->add(
-                self::DYNAMIC_PREFIX . $resource->getId(),
+                self::DYNAMIC_PREFIX.$resource->getId(),
                 $route
             );
         }
@@ -96,7 +96,6 @@ class RouteProvider implements RouteProviderInterface
 
         return current($paths);
     }
-
 
     /**
      * Returns route by its identifier
@@ -144,11 +143,9 @@ class RouteProvider implements RouteProviderInterface
         }
 
         return $route;
-
     }
 
     public function getRoutesByNames($names, $parameters = [])
     {
-
     }
 }

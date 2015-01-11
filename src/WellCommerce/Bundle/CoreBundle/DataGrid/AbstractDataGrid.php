@@ -12,7 +12,6 @@
 namespace WellCommerce\Bundle\CoreBundle\DataGrid;
 
 use Symfony\Component\DependencyInjection\ContainerAware;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnCollection;
@@ -61,8 +60,8 @@ abstract class AbstractDataGrid extends ContainerAware
     /**
      * Constructor
      *
-     * @param                          $identifier
-     * @param DataSetInterface         $dataset
+     * @param                  $identifier
+     * @param DataSetInterface $dataset
      */
     public function __construct(
         $identifier,
@@ -120,24 +119,24 @@ abstract class AbstractDataGrid extends ContainerAware
 
         $eventHandlers->add(new LoadEventHandler([
             'function' => $this->getJavascriptFunctionName('load'),
-            'route'    => $this->getRouteForAction('grid')
+            'route'    => $this->getRouteForAction('grid'),
         ]));
 
         $eventHandlers->add(new EditRowEventHandler([
             'function'   => $this->getJavascriptFunctionName('edit'),
             'row_action' => DataGridInterface::ACTION_EDIT,
-            'route'      => $this->getRouteForAction('edit')
+            'route'      => $this->getRouteForAction('edit'),
         ]));
 
         $eventHandlers->add(new ClickRowEventHandler([
             'function' => $this->getJavascriptFunctionName('click'),
-            'route'    => $this->getRouteForAction('edit')
+            'route'    => $this->getRouteForAction('edit'),
         ]));
 
         $eventHandlers->add(new DeleteRowEventHandler([
             'function'   => $this->getJavascriptFunctionName('delete'),
             'row_action' => DataGridInterface::ACTION_DELETE,
-            'route'      => $this->getRouteForAction('delete')
+            'route'      => $this->getRouteForAction('delete'),
         ]));
     }
 
@@ -228,7 +227,7 @@ abstract class AbstractDataGrid extends ContainerAware
             'limit'      => $request->request->get('limit'),
             'orderBy'    => $request->request->get('order_by'),
             'orderDir'   => $request->request->get('order_dir'),
-            'conditions' => $conditionsResolver->resolve($request->request->get('where'))
+            'conditions' => $conditionsResolver->resolve($request->request->get('where')),
         ]);
 
         return $this->dataset->getResults($datasetRequest);

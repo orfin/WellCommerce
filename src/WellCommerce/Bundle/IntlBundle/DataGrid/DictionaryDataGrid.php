@@ -36,15 +36,15 @@ class DictionaryDataGrid extends AbstractDataGrid implements DataGridInterface
             'id'         => 'id',
             'caption'    => $this->trans('dictionary.id.label'),
             'sorting'    => new Sorting([
-                'default_order' => ColumnInterface::SORT_DIR_DESC
+                'default_order' => ColumnInterface::SORT_DIR_DESC,
             ]),
             'appearance' => new Appearance([
                 'width'   => 90,
-                'visible' => false
+                'visible' => false,
             ]),
             'filter'     => new Filter([
-                'type' => Filter::FILTER_BETWEEN
-            ])
+                'type' => Filter::FILTER_BETWEEN,
+            ]),
         ]));
 
         $collection->add(new Column([

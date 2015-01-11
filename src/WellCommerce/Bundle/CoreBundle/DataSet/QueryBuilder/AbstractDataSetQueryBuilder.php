@@ -1,11 +1,11 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- * 
+ *
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- * 
+ *
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
@@ -158,7 +158,7 @@ abstract class AbstractDataSetQueryBuilder
         $column     = $this->columns->get($condition->getIdentifier());
         $source     = $column->getSource();
         $operator   = $condition->getOperator();
-        $expression = $this->queryBuilder->expr()->{$operator}($source, ':' . $condition->getIdentifier());
+        $expression = $this->queryBuilder->expr()->{$operator}($source, ':'.$condition->getIdentifier());
 
         $this->queryBuilder->andWhere($expression);
         $this->queryBuilder->setParameter($condition->getIdentifier(), $condition->getValue());
