@@ -13,12 +13,9 @@
 namespace WellCommerce\Bundle\ClientBundle\DataSet;
 
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
-use WellCommerce\Bundle\CoreBundle\DataSet\Column\Column;
-use WellCommerce\Bundle\CoreBundle\DataSet\Column\ColumnCollection;
 use WellCommerce\Bundle\CoreBundle\DataSet\DataSetInterface;
 use WellCommerce\Bundle\CoreBundle\DataSet\DataSetOptionsResolver;
 use WellCommerce\Bundle\CoreBundle\DataSet\Transformer\DateTransformer;
-use WellCommerce\Bundle\CoreBundle\DataSet\Transformer\TransformerCollection;
 
 /**
  * Class ClientDataSet

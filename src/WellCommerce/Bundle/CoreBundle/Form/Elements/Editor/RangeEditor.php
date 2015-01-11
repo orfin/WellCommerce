@@ -35,19 +35,11 @@ class RangeEditor extends AbstractField implements ElementInterface
     public function configureAttributes(OptionsResolver $resolver)
     {
         $resolver->setRequired([
-            'name',
-            'label',
-        ]);
-
-        $resolver->setDefined([
-            'comment',
-            'suffix',
             'price_precision',
             'range_precision',
             'range_suffix',
             'prefixes',
             'allow_vat',
-            'error',
             'vat_values',
         ]);
 

@@ -19,7 +19,6 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
  *
  * @ORM\Table(name="client_group")
  * @ORM\Entity(repositoryClass="WellCommerce\Bundle\ClientBundle\Repository\ClientGroupRepository")
- * @ORM\HasLifecycleCallbacks
  */
 class ClientGroup
 {
@@ -67,14 +66,10 @@ class ClientGroup
      * Set discount.
      *
      * @param string $discount
-     *
-     * @return ClientGroup
      */
     public function setDiscount($discount)
     {
         $this->discount = $discount;
-
-        return $this;
     }
 }
 
