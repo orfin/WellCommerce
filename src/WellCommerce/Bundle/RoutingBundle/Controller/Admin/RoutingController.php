@@ -19,7 +19,6 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 /**
  * Class RoutingController
  *
- * @package WellCommerce\Bundle\RoutingBundle\Controller
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
@@ -27,27 +26,51 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 class RoutingController extends AbstractAdminController
 {
     /**
-     * Action used to generate slug
+     * Generates slug using ajax request
      *
      * @param Request $request
+     *
+     * @return JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function generateAction(Request $request)
     {
         if (!$request->isXmlHttpRequest()) {
-            return $this->manager->getRedirectHelper()->redirectToAction('index');
+            return $this->getManager()->getRedirectHelper()->redirectToAction('index');
         }
 
-        $slug = $this->manager->getRepository()->generateSlug(
-            $request->get('name'),
-            $request->get('id'),
-            $request->get('locale'),
-            $request->get('fields')
-        );
+        $slug = $this->generateSlugFromRequest($request);
 
         $response = [
             'slug' => $slug
         ];
 
         return new JsonResponse($response);
+    }
+
+    /**
+     * Returns route repository
+     *
+     * @return \WellCommerce\Bundle\RoutingBundle\Repository\RouteRepositoryInterface
+     */
+    protected function getRepository()
+    {
+        return $this->getManager()->getRepository();
+    }
+
+    /**
+     * Generates route slug
+     *
+     * @param Request $request
+     *
+     * @return string
+     */
+    protected function generateSlugFromRequest(Request $request)
+    {
+        return $this->getRepository()->generateSlug(
+            $request->get('name'),
+            $request->get('id'),
+            $request->get('locale'),
+            $request->get('fields')
+        );
     }
 }
