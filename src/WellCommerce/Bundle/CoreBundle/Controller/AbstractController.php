@@ -24,7 +24,7 @@ abstract class AbstractController extends Controller
     /**
      * Returns content as json response
      *
-     * @param $content
+     * @param mixed $content
      *
      * @return JsonResponse
      */
@@ -36,7 +36,7 @@ abstract class AbstractController extends Controller
     /**
      * Translates message using Translator service
      *
-     * @param $id
+     * @param string $id
      *
      * @return string
      */
@@ -48,10 +48,10 @@ abstract class AbstractController extends Controller
     /**
      * Returns image path
      *
-     * @param $path
-     * @param $filter
+     * @param string $path
+     * @param string $filter
      *
-     * @return mixed
+     * @return string
      */
     protected function getImage($path, $filter)
     {
@@ -81,5 +81,10 @@ abstract class AbstractController extends Controller
         return $this->getManager()->getRedirectHelper()->redirectToAction($actionName, $params);
     }
 
+    /**
+     * Returns manager object
+     *
+     * @return \WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface
+     */
     abstract protected function getManager();
 }

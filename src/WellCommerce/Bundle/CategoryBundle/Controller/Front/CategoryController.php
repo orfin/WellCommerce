@@ -19,7 +19,6 @@ use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
 /**
  * Class CategoryController
  *
- * @package WellCommerce\Bundle\WebBundle\Controller\Front
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
@@ -35,7 +34,7 @@ class CategoryController extends AbstractFrontController implements FrontControl
             'enabled' => 1
         ]);
 
-        $this->manager->getProvider('category')->setCurrentResource($category);
+        $this->getManager()->getProvider('category')->setCurrentResource($category);
 
         return [
             'category' => $category

@@ -49,8 +49,10 @@
         </service>
 
         <service id="category_menu.layout_box.controller" class="WellCommerce\Bundle\CategoryBundle\Controller\Box\CategoryMenuBoxController">
-            <argument type="service" id="service_container"/>
-            <argument type="service" id="category.repository"/>
+            <argument type="service" id="category.manager.front"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
         </service>
 
         <service id="category_menu.layout_box.configurator" class="WellCommerce\Bundle\CategoryBundle\Layout\CategoryMenuBoxConfigurator">
@@ -63,8 +65,10 @@
         </service>
 
         <service id="category_info.layout_box.controller" class="WellCommerce\Bundle\CategoryBundle\Controller\Box\CategoryInfoBoxController">
-            <argument type="service" id="service_container"/>
-            <argument type="service" id="category.repository"/>
+            <argument type="service" id="category.manager.front"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
         </service>
 
         <service id="category_info.layout_box.configurator" class="WellCommerce\Bundle\CategoryBundle\Layout\CategoryInfoBoxConfigurator">
@@ -159,8 +163,10 @@
         </service>
 
         <service id="category_products.layout_box.controller" class="WellCommerce\Bundle\CategoryBundle\Controller\Box\CategoryProductsBoxController">
-            <argument type="service" id="service_container"/>
-            <argument type="service" id="category.repository"/>
+            <argument type="service" id="category.manager.front"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
         </service>
 
         <service id="category_products.layout_box.configurator" class="WellCommerce\Bundle\CategoryBundle\Layout\CategoryProductsBoxConfigurator">

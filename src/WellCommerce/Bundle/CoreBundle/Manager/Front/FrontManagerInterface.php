@@ -18,18 +18,10 @@ use WellCommerce\Bundle\CoreBundle\Provider\ProviderCollection;
 /**
  * Interface FrontManagerInterface
  *
- * @package WellCommerce\Bundle\CoreBundle\Manager\Front
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface FrontManagerInterface extends ManagerInterface
 {
-    /**
-     * Returns repository object
-     *
-     * @return \WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface
-     */
-    public function getRepository();
-
     /**
      * Sets providers collection
      *

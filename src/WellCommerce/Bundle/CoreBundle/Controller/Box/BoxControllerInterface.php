@@ -15,7 +15,6 @@ namespace WellCommerce\Bundle\CoreBundle\Controller\Box;
 /**
  * Interface BoxControllerInterface
  *
- * @package WellCommerce\Bundle\CoreBundle\Controller\Box
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface BoxControllerInterface

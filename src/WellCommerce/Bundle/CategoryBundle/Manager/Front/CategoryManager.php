@@ -17,7 +17,6 @@ use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
 /**
  * Class CategoryManager
  *
- * @package WellCommerce\Bundle\CategoryBundle\Manager\Front
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class CategoryManager extends AbstractFrontManager

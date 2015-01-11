@@ -65,11 +65,4 @@ interface AdminManagerInterface extends ManagerInterface
      * @return \WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface
      */
     public function getFormBuilder();
-
-    /**
-     * Returns repository object
-     *
-     * @return \WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface
-     */
-    public function getRepository();
 }

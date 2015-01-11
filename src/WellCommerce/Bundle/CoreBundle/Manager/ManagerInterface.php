@@ -18,7 +18,6 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 /**
  * Interface ManagerInterface
  *
- * @package WellCommerce\Bundle\CoreBundle\Manager
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface ManagerInterface

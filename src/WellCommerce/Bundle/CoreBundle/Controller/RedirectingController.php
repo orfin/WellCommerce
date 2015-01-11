@@ -18,7 +18,6 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Class RedirectingController
  *
- * @package WellCommerce\Bundle\CoreBundle\Controller
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class RedirectingController extends Controller

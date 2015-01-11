@@ -19,7 +19,6 @@ use WellCommerce\Bundle\CoreBundle\Manager\Front\FrontManagerInterface;
 /**
  * Class AbstractFrontController
  *
- * @package WellCommerce\Bundle\CoreBundle\Controller\Front
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 abstract class AbstractFrontController extends AbstractController implements FrontControllerInterface
@@ -27,7 +26,7 @@ abstract class AbstractFrontController extends AbstractController implements Fro
     /**
      * @var FrontManagerInterface
      */
-    protected $manager;
+    private $manager;
 
     /**
      * Constructor
@@ -61,5 +60,15 @@ abstract class AbstractFrontController extends AbstractController implements Fro
         }
 
         return $resource;
+    }
+
+    /**
+     * Returns manager object
+     *
+     * @return FrontManagerInterface
+     */
+    protected function getManager()
+    {
+        return $this->manager;
     }
 }

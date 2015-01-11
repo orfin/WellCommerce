@@ -15,7 +15,6 @@ namespace WellCommerce\Bundle\CoreBundle\Controller\Admin;
 /**
  * Interface AdminControllerInterface
  *
- * @package WellCommerce\Bundle\CoreBundle\Controller\Admin
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface AdminControllerInterface
