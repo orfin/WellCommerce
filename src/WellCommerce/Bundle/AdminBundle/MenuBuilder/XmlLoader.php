@@ -24,7 +24,14 @@ use WellCommerce\Bundle\CoreBundle\Helper\Helper;
  */
 class XmlLoader
 {
+    /**
+     * @var AdminMenuBuilderInterface
+     */
     protected $builder;
+
+    /**
+     * @var FileLocatorInterface
+     */
     protected $locator;
 
     /**

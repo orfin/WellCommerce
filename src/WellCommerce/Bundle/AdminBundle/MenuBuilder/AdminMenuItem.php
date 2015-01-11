@@ -17,7 +17,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * Class AdminMenuItem
  *
- * @package WellCommerce\Bundle\AdminBundle\MenuBuilder
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class AdminMenuItem implements AdminMenuItemInterface, \ArrayAccess
@@ -41,7 +40,6 @@ class AdminMenuItem implements AdminMenuItemInterface, \ArrayAccess
     {
         $resolver = new OptionsResolver();
         $this->configureOptions($resolver);
-
         $this->options = $resolver->resolve($options);
     }
 
@@ -57,11 +55,6 @@ class AdminMenuItem implements AdminMenuItemInterface, \ArrayAccess
             'name',
             'link',
             'path'
-        ]);
-
-        $resolver->setDefined([
-            'class',
-            'sort_order',
         ]);
 
         $resolver->setDefaults([
