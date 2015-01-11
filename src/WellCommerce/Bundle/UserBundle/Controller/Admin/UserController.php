@@ -21,7 +21,6 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 /**
  * Class UserController
  *
- * @package WellCommerce\Bundle\UserBundle\Controller
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
@@ -30,17 +29,6 @@ class UserController extends AbstractAdminController
 {
     public function loginAction(Request $request)
     {
-        $session = $request->getSession();
-
-        if ($request->attributes->has(SecurityContextInterface::AUTHENTICATION_ERROR)) {
-            $error = $request->attributes->get(SecurityContextInterface::AUTHENTICATION_ERROR);
-        } elseif (null !== $session && $session->has(SecurityContextInterface::AUTHENTICATION_ERROR)) {
-            $error = $session->get(SecurityContextInterface::AUTHENTICATION_ERROR);
-            $session->remove(SecurityContextInterface::AUTHENTICATION_ERROR);
-        } else {
-            $error = '';
-        }
-
         $form = $this->get('user_login.form_builder')->createForm([
             'name'   => 'login',
             'action' => $this->generateUrl('admin.user.login_check'),
@@ -48,9 +36,31 @@ class UserController extends AbstractAdminController
         ], null);
 
         return [
-            'error' => $error,
+            'error' => $this->getSecurityErrors($request),
             'form'  => $form
         ];
+    }
+
+    /**
+     * Returns security errors
+     *
+     * @param Request $request
+     *
+     * @return mixed|string
+     */
+    private function getSecurityErrors(Request $request)
+    {
+        $session = $request->getSession();
+        $error   = '';
+
+        if ($request->attributes->has(SecurityContextInterface::AUTHENTICATION_ERROR)) {
+            $error = $request->attributes->get(SecurityContextInterface::AUTHENTICATION_ERROR);
+        } elseif (null !== $session && $session->has(SecurityContextInterface::AUTHENTICATION_ERROR)) {
+            $error = $session->get(SecurityContextInterface::AUTHENTICATION_ERROR);
+            $session->remove(SecurityContextInterface::AUTHENTICATION_ERROR);
+        }
+
+        return $error;
     }
 
     public function loginCheckAction(Request $request)
@@ -67,7 +77,7 @@ class UserController extends AbstractAdminController
         $em = $this->getEntityManager();
 
         try {
-            $resource = $this->manager->getRepository()->find($id);
+            $resource = $this->getManager()->getRepository()->find($id);
             $em->remove($resource);
         } catch (\Exception $e) {
             return new JsonResponse(['error' => $e->getMessage()]);
