@@ -23,6 +23,13 @@
             </call>
         </service>
 
+        <service id="page.layout_box.controller" class="WellCommerce\Bundle\CmsBundle\Controller\Box\PageBoxController">
+            <argument type="service" id="page.manager.front"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
         <service id="page.manager.admin" class="WellCommerce\Bundle\CmsBundle\Manager\Admin\PageManager">
             <argument type="service" id="flash_helper"/>
             <argument type="service" id="redirect_helper"/>
@@ -46,11 +53,6 @@
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
-        </service>
-
-        <service id="page.layout_box.controller" class="WellCommerce\Bundle\CmsBundle\Controller\Box\PageBoxController">
-            <argument type="service" id="service_container"/>
-            <argument type="service" id="page.repository"/>
         </service>
 
         <service id="page.layout_box.configurator" class="WellCommerce\Bundle\CmsBundle\Layout\PageBoxConfigurator">
