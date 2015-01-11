@@ -60,8 +60,6 @@ trait MetaDataTrait
     public function setMetaTitle($metaTitle)
     {
         $this->metaTitle = $metaTitle;
-
-        return $this;
     }
 
     /**
@@ -82,8 +80,6 @@ trait MetaDataTrait
     public function setMetaKeywords($metaKeywords)
     {
         $this->metaKeywords = $metaKeywords;
-
-        return $this;
     }
 
     /**
@@ -104,7 +100,5 @@ trait MetaDataTrait
     public function setMetaDescription($metaDescription)
     {
         $this->metaDescription = $metaDescription;
-
-        return $this;
     }
 } 

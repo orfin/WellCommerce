@@ -87,8 +87,6 @@ trait AddressTrait
     public function setStreet($street)
     {
         $this->street = $street;
-
-        return $this;
     }
 
     /**
@@ -109,8 +107,6 @@ trait AddressTrait
     public function setStreetNo($streetNo)
     {
         $this->streetNo = $streetNo;
-
-        return $this;
     }
 
     /**
@@ -131,8 +127,6 @@ trait AddressTrait
     public function setFlatNo($flatNo)
     {
         $this->flatNo = $flatNo;
-
-        return $this;
     }
 
     /**
@@ -153,8 +147,6 @@ trait AddressTrait
     public function setPostCode($postCode)
     {
         $this->postCode = $postCode;
-
-        return $this;
     }
 
     /**
@@ -175,8 +167,6 @@ trait AddressTrait
     public function setCity($city)
     {
         $this->city = $city;
-
-        return $this;
     }
 
     /**
@@ -197,8 +187,6 @@ trait AddressTrait
     public function setProvince($province)
     {
         $this->province = $province;
-
-        return $this;
     }
 
     /**
@@ -219,7 +207,5 @@ trait AddressTrait
     public function setCountry($country)
     {
         $this->country = $country;
-
-        return $this;
     }
 } 
