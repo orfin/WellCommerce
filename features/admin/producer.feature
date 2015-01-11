@@ -1,4 +1,4 @@
-@product
+@producer
 Feature: Manage producers
   In order to manage producers
   As a shop owner
