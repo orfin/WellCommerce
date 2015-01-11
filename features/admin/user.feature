@@ -5,7 +5,7 @@ Feature: Manage admin users
   I should be able to see user list and manage users
 
   Background:
-    Given I am logged as an admin user
+    Given I am logged as an administrator
 
   Scenario: View user list
     Given I am on the index page

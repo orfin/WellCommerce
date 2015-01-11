@@ -5,7 +5,7 @@ Feature: Manage products
   I should be able to manage products
 
   Background:
-	Given I am logged as an admin user
+	Given I am logged as an administrator
 
   Scenario: View product list
 	Given I am on the index page
