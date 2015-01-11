@@ -112,6 +112,14 @@ class CoreContext extends RawMinkContext implements SnippetAcceptingContext, Ker
     }
 
     /**
+     * @Then /^I wait for the datagrid to finish loading$/
+     */
+    public function iWaitForTheDataGridToFinishLoading()
+    {
+        $this->getSession()->wait(3000);
+    }
+
+    /**
      * Returns a service by its id
      *
      * @param $id

@@ -22,8 +22,9 @@ Feature: Manage availability statuses
 
   Scenario: Deleting availability entry
     Given I am on the index page
-    When I follow "Delete"
+    When I wait for the datagrid to finish loading
+    And I click "Delete" near "72h"
     And I wait for the message bar to appear
     And I follow "OK"
     And I wait for the message bar to appear
-    Then I should see "successfully deleted"
+    Then I should see "72h successfully deleted"
