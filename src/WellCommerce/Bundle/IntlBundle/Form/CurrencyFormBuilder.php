@@ -35,12 +35,12 @@ class CurrencyFormBuilder extends AbstractFormBuilder implements FormBuilderInte
     {
         $requiredData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'required_data',
-            'label' => $this->trans('form.required_data')
+            'label' => $this->trans('form.required_data.label')
         ]));
 
         $requiredData->addChild($this->getElement('select', [
             'name'    => 'code',
-            'label'   => $this->trans('currency.code'),
+            'label'   => $this->trans('currency.code.label'),
             'options' => $this->repository->getCurrenciesToSelect()
         ]));
 

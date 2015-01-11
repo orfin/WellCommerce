@@ -17,7 +17,6 @@ use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
 /**
  * Class DictionaryManager
  *
- * @package WellCommerce\Bundle\IntlBundle\Manager\Admin
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class DictionaryManager extends AbstractAdminManager

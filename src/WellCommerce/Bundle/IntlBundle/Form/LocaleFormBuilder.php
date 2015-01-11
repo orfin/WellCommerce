@@ -29,12 +29,12 @@ class LocaleFormBuilder extends AbstractFormBuilder implements FormBuilderInterf
     {
         $requiredData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'required_data',
-            'label' => $this->trans('form.required_data')
+            'label' => $this->trans('form.required_data.label')
         ]));
 
         $requiredData->addChild($this->getElement('select', [
             'name'    => 'code',
-            'label'   => $this->trans('locale.code'),
+            'label'   => $this->trans('locale.code.label'),
             'options' => $this->get('locale.repository')->getLocaleNames()
         ]));
 

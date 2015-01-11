@@ -17,7 +17,6 @@ use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
 /**
  * Class LocaleManager
  *
- * @package WellCommerce\Bundle\IntlBundle\Manager\Admin
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class LocaleManager extends AbstractAdminManager
