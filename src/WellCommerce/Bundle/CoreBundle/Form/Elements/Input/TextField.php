@@ -33,15 +33,14 @@ class TextField extends AbstractInputField implements ElementInterface
     {
         parent::configureOptions($resolver);
 
-        $resolver->setDefined([
-            'suffix',
-            'prefix',
-            'size',
-            'selector',
-            'wrap',
-            'class',
-            'css_attribute',
-            'max_length',
+        $resolver->setDefaults([
+            'suffix'        => '',
+            'prefix'        => '',
+            'size'          => '',
+            'selector'      => '',
+            'wrap'          => '',
+            'css_attribute' => '',
+            'max_length'    => 255,
         ]);
 
         $resolver->setAllowedTypes([
@@ -50,7 +49,6 @@ class TextField extends AbstractInputField implements ElementInterface
             'prefix'        => 'string',
             'selector'      => 'string',
             'wrap'          => 'string',
-            'class'         => 'string',
             'css_attribute' => 'string',
             'max_length'    => 'integer',
         ]);

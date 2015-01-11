@@ -41,20 +41,14 @@ class Tip extends AbstractFixedField implements ElementInterface
             'tip',
             'direction',
             'short_tip',
-        ]);
-
-        $resolver->setDefaults([
-            'name'      => '',
-            'label'     => '',
-            'short_tip' => '',
-        ]);
-
-        $resolver->setDefined([
             'retractable',
             'default_state',
         ]);
 
         $resolver->setDefaults([
+            'name'          => '',
+            'label'         => '',
+            'short_tip'     => '',
             'direction'     => self::DOWN,
             'default_state' => self::RETRACTED,
             'retractable'   => function (Options $options) {

@@ -29,14 +29,19 @@ class TextArea extends TextField implements ElementInterface
     {
         parent::configureOptions($resolver);
 
-        $resolver->setDefined([
+        $resolver->setRequired([
             'rows',
             'cols',
         ]);
 
+        $resolver->setDefaults([
+            'rows' => 20,
+            'cols' => 50
+        ]);
+
         $resolver->setAllowedTypes([
             'rows' => 'int',
-            'cols' => 'cols'
+            'cols' => 'int'
         ]);
     }
 }

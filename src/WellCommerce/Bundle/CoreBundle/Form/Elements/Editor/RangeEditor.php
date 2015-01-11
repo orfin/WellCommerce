@@ -59,16 +59,12 @@ class RangeEditor extends AbstractField implements ElementInterface
         ]);
 
         $resolver->setAllowedTypes([
-            'name'            => 'string',
-            'label'           => 'string',
-            'comment'         => 'string',
             'suffix'          => 'string',
             'price_precision' => 'int',
             'range_precision' => 'int',
             'range_suffix'    => 'string',
             'prefixes'        => 'array',
             'allow_vat'       => 'bool',
-            'error'           => 'string',
             'vat_values'      => 'array',
         ]);
     }

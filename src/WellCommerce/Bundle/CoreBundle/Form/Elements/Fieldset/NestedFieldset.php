@@ -22,23 +22,5 @@ use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
  */
 class NestedFieldset extends AbstractFieldset implements ElementInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        parent::configureOptions($resolver);
-
-        $resolver->setDefined([
-            'dependencies',
-            'filters',
-            'rules',
-            'transformer',
-        ]);
-
-        $resolver->setAllowedTypes([
-            'dependencies' => 'array',
-            'transformer'  => ['null', 'WellCommerce\Bundle\CoreBundle\Form\DataTransformer\DataTransformerInterface'],
-        ]);
-    }
+    
 }

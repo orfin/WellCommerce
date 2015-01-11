@@ -29,12 +29,12 @@ abstract class AbstractButton extends AbstractFixedField
     {
         parent::configureOptions($resolver);
 
-        $resolver->setDefined([
-            'icon'
+        $resolver->setDefaults([
+            'icon' => ''
         ]);
 
         $resolver->setAllowedTypes([
-            'icon' => 'icon'
+            'icon' => 'string'
         ]);
     }
 

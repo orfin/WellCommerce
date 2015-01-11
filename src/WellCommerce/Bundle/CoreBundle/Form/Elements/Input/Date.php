@@ -30,7 +30,7 @@ class Date extends TextField implements ElementInterface
     {
         parent::configureOptions($resolver);
 
-        $resolver->setDefined([
+        $resolver->setRequired([
             'minDate',
             'maxDate',
         ]);

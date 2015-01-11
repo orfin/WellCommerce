@@ -37,9 +37,6 @@ class PriceEditor extends AbstractField implements ElementInterface
             'prefixes',
             'vat_field',
             'vat_field_name',
-        ]);
-
-        $resolver->setDefined([
             'suffix',
         ]);
 
