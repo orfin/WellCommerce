@@ -26,26 +26,26 @@ class UnitFormBuilder extends AbstractFormBuilder implements FormBuilderInterfac
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormInterface $form)
+    public function buildForm(FormInterface $unitForm)
     {
-        $requiredData = $form->addChild($this->getElement('nested_fieldset', [
+        $unitRequiredData = $unitForm->addChild($this->getElement('nested_fieldset', [
             'name'  => 'required_data',
             'label' => $this->trans('form.required_data.label')
         ]));
 
-        $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
+        $unitTranslationData = $unitRequiredData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
-            'label'       => $this->trans('form.required_data.language_data.label'),
+            'label'       => $this->trans('form.translations.label'),
             'transformer' => new TranslationTransformer($this->get('product.repository'))
         ]));
 
-        $languageData->addChild($this->getElement('text_field', [
+        $unitTranslationData->addChild($this->getElement('text_field', [
             'name'  => 'name',
             'label' => $this->trans('unit.name.label'),
         ]));
 
-        $form->addFilter($this->getFilter('no_code'));
-        $form->addFilter($this->getFilter('trim'));
-        $form->addFilter($this->getFilter('secure'));
+        $unitForm->addFilter($this->getFilter('no_code'));
+        $unitForm->addFilter($this->getFilter('trim'));
+        $unitForm->addFilter($this->getFilter('secure'));
     }
 }
