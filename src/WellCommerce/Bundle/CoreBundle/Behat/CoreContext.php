@@ -89,6 +89,7 @@ class CoreContext extends RawMinkContext implements SnippetAcceptingContext, Ker
     {
         $this->getSession()->getPage()->pressButton($button);
     }
+
     /**
      * @When /^I click "([^"]*)" near "([^"]*)"$/
      */
@@ -104,11 +105,23 @@ class CoreContext extends RawMinkContext implements SnippetAcceptingContext, Ker
     }
 
     /**
+     * @When /^I click "([^"]*)" in message bar$/
+     */
+    public function iClickButtonInMessageBar($button)
+    {
+        $messageBar = $this->assertSession()->elementExists('css', '.GMessageBar .options');
+        $locator    = sprintf('a:contains("%s")', $button);
+        if ($messageBar->has('css', $locator)) {
+            $messageBar->find('css', $locator)->press();
+        }
+    }
+
+    /**
      * @Then /^I wait for the message bar to appear$/
      */
     public function iWaitForTheMessageBarToAppear()
     {
-        $this->getSession()->wait(5000, "$('.GMessageBar ul.options').length > 0");
+        $this->getSession()->wait(5000);
     }
 
     /**

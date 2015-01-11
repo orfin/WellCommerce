@@ -1166,6 +1166,7 @@ var GMessageBar = function() {
 		for (var i = 0; i < oParams.aoPossibilities.length; i++) {
 			var jA = $('<a/>');
 			jA.append(oParams.aoPossibilities[i].sCaption);
+			jA.attr('title', oParams.aoPossibilities[i].sCaption);
 			GLink(jA, oParams.aoPossibilities[i].mLink);
 			if (oParams.aoPossibilities[i].bHidden) {
 				jA.css('display', 'none');

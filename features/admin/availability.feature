@@ -25,6 +25,6 @@ Feature: Manage availability statuses
     When I wait for the datagrid to finish loading
     And I click "Delete" near "72h"
     And I wait for the message bar to appear
-    And I follow "OK"
+    And I click "OK" in message bar
     And I wait for the message bar to appear
     Then I should see "72h successfully deleted"
