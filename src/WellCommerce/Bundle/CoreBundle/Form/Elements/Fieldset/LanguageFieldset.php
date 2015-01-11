@@ -56,6 +56,7 @@ class LanguageFieldset extends NestedFieldset implements ElementInterface
 
         $resolver->setAllowedTypes([
             'languages' => 'array',
+            'transformer'  => ['WellCommerce\Bundle\CoreBundle\Form\DataTransformer\DataTransformerInterface'],
         ]);
     }
 

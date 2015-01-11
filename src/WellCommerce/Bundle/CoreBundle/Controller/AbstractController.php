@@ -43,7 +43,7 @@ abstract class AbstractController extends Controller
      */
     protected function trans($id)
     {
-        return $this->manager->getTranslator()->trans($id);
+        return $this->getManager()->getTranslator()->trans($id);
     }
 
     /**
@@ -56,7 +56,7 @@ abstract class AbstractController extends Controller
      */
     protected function getImage($path, $filter)
     {
-        return $this->manager->getImageHelper()->getImage($path, $filter);
+        return $this->getManager()->getImageHelper()->getImage($path, $filter);
     }
 
     /**
@@ -66,7 +66,7 @@ abstract class AbstractController extends Controller
      */
     protected function getEntityManager()
     {
-        return $this->manager->getDoctrineHelper()->getEntityManager();
+        return $this->getManager()->getDoctrineHelper()->getEntityManager();
     }
 
     /**
@@ -79,6 +79,8 @@ abstract class AbstractController extends Controller
      */
     protected function redirectToAction($actionName = 'index', array $params = [])
     {
-        return $this->manager->getRedirectHelper()->redirectToAction($actionName, $params);
+        return $this->getManager()->getRedirectHelper()->redirectToAction($actionName, $params);
     }
+
+    abstract protected function getManager();
 }
