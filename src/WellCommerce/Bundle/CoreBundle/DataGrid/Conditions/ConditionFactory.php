@@ -39,8 +39,8 @@ class ConditionFactory
     /**
      * Constructor
      *
-     * @param $column
-     * @param $value
+     * @param string $column
+     * @param mixed  $value
      */
     public function __construct($column, $value)
     {

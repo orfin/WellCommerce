@@ -13,8 +13,6 @@
 namespace WellCommerce\Bundle\AvailabilityBundle\DataSet;
 
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
-use WellCommerce\Bundle\CoreBundle\DataSet\Column\Column;
-use WellCommerce\Bundle\CoreBundle\DataSet\Column\ColumnCollection;
 use WellCommerce\Bundle\CoreBundle\DataSet\DataSetInterface;
 use WellCommerce\Bundle\CoreBundle\DataSet\DataSetOptionsResolver;
 
@@ -31,8 +29,8 @@ class AvailabilityDataSet extends AbstractDataSet implements DataSetInterface
     protected function configureOptions(DataSetOptionsResolver $resolver)
     {
         $resolver->setColumns([
-            'id'       => 'availability.id',
-            'name'     => 'availability_translation.name',
+            'id'   => 'availability.id',
+            'name' => 'availability_translation.name',
         ]);
     }
 }

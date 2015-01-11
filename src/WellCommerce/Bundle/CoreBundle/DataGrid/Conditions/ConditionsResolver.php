@@ -12,13 +12,11 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DataGrid\Conditions;
 
-use WellCommerce\Bundle\CoreBundle\DataSet\Column\ColumnCollection;
 use WellCommerce\Bundle\CoreBundle\DataSet\Conditions\ConditionsCollection;
 
 /**
  * Class ConditionsResolver
  *
- * @package WellCommerce\Bundle\CoreBundle\DataGrid\Conditions
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class ConditionsResolver
@@ -53,7 +51,7 @@ class ConditionsResolver
         foreach ($params as $where) {
             list($column, $operator, $value) = $this->parseParam($where);
 
-            $factory = new ConditionFactory($column, $value);
+            $factory   = new ConditionFactory($column, $value);
             $condition = $factory->createCondition($operator);
             $conditions->add($condition);
         }

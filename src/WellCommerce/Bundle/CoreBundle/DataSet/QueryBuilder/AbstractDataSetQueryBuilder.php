@@ -22,7 +22,6 @@ use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\DataSetAwareRepositoryInterface;
 /**
  * Class DataSetQueryBuilder
  *
- * @package WellCommerce\Bundle\CoreBundle\DataSet\QueryBuilder
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 abstract class AbstractDataSetQueryBuilder

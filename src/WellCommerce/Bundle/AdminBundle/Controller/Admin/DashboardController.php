@@ -25,10 +25,6 @@ class DashboardController extends AbstractAdminController
 {
     public function indexAction()
     {
-        return [
-            'salesReport' => [
-
-            ]
-        ];
+        return [];
     }
 }

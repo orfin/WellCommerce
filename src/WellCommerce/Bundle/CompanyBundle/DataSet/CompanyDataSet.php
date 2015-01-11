@@ -13,12 +13,9 @@
 namespace WellCommerce\Bundle\CompanyBundle\DataSet;
 
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
-use WellCommerce\Bundle\CoreBundle\DataSet\Column\Column;
-use WellCommerce\Bundle\CoreBundle\DataSet\Column\ColumnCollection;
 use WellCommerce\Bundle\CoreBundle\DataSet\DataSetInterface;
+use WellCommerce\Bundle\CoreBundle\DataSet\DataSetOptionsResolver;
 use WellCommerce\Bundle\CoreBundle\DataSet\Transformer\DateTransformer;
-use WellCommerce\Bundle\CoreBundle\DataSet\Transformer\TransformerCollection;
-
 
 /**
  * Class CompanyDataSet
@@ -31,34 +28,17 @@ class CompanyDataSet extends AbstractDataSet implements DataSetInterface
     /**
      * {@inheritdoc}
      */
-    protected function configureColumns(ColumnCollection $collection)
+    protected function configureOptions(DataSetOptionsResolver $resolver)
     {
-        $collection->add(new Column([
-            'alias'  => 'id',
-            'source' => 'company.id'
-        ]));
+        $resolver->setColumns([
+            'id'        => 'company.id',
+            'name'      => 'company.name',
+            'shortName' => 'company.shortName',
+            'createdAt' => 'company.createdAt'
+        ]);
 
-        $collection->add(new Column([
-            'alias'  => 'name',
-            'source' => 'company.name'
-        ]));
-
-        $collection->add(new Column([
-            'alias'  => 'shortName',
-            'source' => 'company.shortName'
-        ]));
-
-        $collection->add(new Column([
-            'alias'  => 'createdAt',
-            'source' => 'company.createdAt',
-        ]));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function configureTransformers(TransformerCollection $transformers)
-    {
-        $transformers->add('createdAt', new DateTransformer());
+        $resolver->setTransformers([
+            'createdAt' => new DateTransformer('Y-m-d H:i:s')
+        ]);
     }
 }
