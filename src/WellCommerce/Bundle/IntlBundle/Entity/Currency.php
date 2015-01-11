@@ -56,14 +56,10 @@ class Currency
      * Set code.
      *
      * @param string $code
-     *
-     * @return Currency
      */
     public function setCode($code)
     {
         $this->code = $code;
-
-        return $this;
     }
 
     /**
