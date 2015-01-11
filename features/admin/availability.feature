@@ -22,8 +22,8 @@ Feature: Manage availability statuses
 
   Scenario: Deleting availability entry
     Given I am on the index page
-    When I click "Delete" near "72h"
+    When I press "Delete"
     And I wait for the message bar to appear
     And I follow "OK"
     And I wait for the message bar to appear
-    Then I should see "72h successfully deleted"
+    Then I should see "successfully deleted"

@@ -89,7 +89,6 @@ class CoreContext extends RawMinkContext implements SnippetAcceptingContext, Ker
     {
         $this->getSession()->getPage()->pressButton($button);
     }
-
     /**
      * @When /^I click "([^"]*)" near "([^"]*)"$/
      */
