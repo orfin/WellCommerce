@@ -19,7 +19,6 @@ use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
 /**
  * Class PageBoxController
  *
- * @package WellCommerce\Bundle\CmsBundle\Controller\Box
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
@@ -28,6 +27,17 @@ class PageBoxController extends AbstractBoxController implements BoxControllerIn
 {
     public function indexAction(Request $request)
     {
-        return [];
+        $page = $this->findOr404($request, [
+            'publish' => 1
+        ]);
+
+        $translations = $page->translate();
+
+        return [
+            'page' => [
+                'name'    => $translations->getName(),
+                'content' => $translations->getContent(),
+            ]
+        ];
     }
 }

@@ -18,7 +18,6 @@ use WellCommerce\Bundle\CoreBundle\DataSet\CollectionBuilder\CollectionBuilderFa
 /**
  * Class CategoryProvider
  *
- * @package WellCommerce\Bundle\CategoryBundle\Provider
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class CategoryProvider implements CategoryProviderInterface

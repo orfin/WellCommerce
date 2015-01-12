@@ -19,7 +19,6 @@ use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
 /**
  * Class PageController
  *
- * @package WellCommerce\Bundle\CmsBundle\Controller\Front
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
@@ -31,17 +30,6 @@ class PageController extends AbstractFrontController implements FrontControllerI
      */
     public function indexAction(Request $request)
     {
-        $page = $this->findOr404($request, [
-            'publish' => 1
-        ]);
-
-        $translations = $page->translate();
-
-        return [
-            'page' => [
-                'name'    => $translations->getName(),
-                'content' => $translations->getContent(),
-            ]
-        ];
+        return [];
     }
 }

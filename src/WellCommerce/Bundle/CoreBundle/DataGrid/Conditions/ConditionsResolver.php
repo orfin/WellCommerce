@@ -34,7 +34,7 @@ class ConditionsResolver
             return $this->createConditionsCollection($params);
         }
 
-        return;
+        return null;
     }
 
     /**

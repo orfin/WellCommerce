@@ -49,8 +49,27 @@ class FormValidator implements FormValidatorInterface
         $this->validator      = $validator;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function isValid(FormInterface $form)
     {
         return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setFormConstraintsFromModelData(FormInterface $form, $modelData)
+    {
+        $entityMetadata = $this->validator->getMetadataFor($modelData);
+        print_r($entityMetadata->getPropertyMetadata('enabled'));
+        foreach ($entityMetadata->findConstraints('Default') as $constraint) {
+            print_r($constraint);
+        }
+        print_r($entityMetadata);
+
+        echo get_class($modelData);
+        die();
     }
 }

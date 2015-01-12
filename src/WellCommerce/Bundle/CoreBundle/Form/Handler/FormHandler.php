@@ -77,6 +77,7 @@ class FormHandler implements FormHandlerInterface
     {
         $this->formModelData = $formModelData;
         $this->formDataMapper->mapModelDataToForm($formModelData, $form);
+        $this->formValidator->setFormConstraintsFromModelData($form, $formModelData);
         $form->setFormHandler($this);
 
         return $form;

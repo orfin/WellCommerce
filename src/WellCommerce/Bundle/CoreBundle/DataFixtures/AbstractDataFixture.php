@@ -17,7 +17,6 @@ use Faker\Factory as FakerFactory;
 /**
  * Class AbstractDataFixture
  *
- * @package WellCommerce\Bundle\CoreBundle\DataFixtures
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 abstract class AbstractDataFixture

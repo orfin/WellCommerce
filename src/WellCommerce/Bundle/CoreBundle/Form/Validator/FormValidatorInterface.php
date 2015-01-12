@@ -29,4 +29,12 @@ interface FormValidatorInterface
      * @return bool
      */
     public function isValid(FormInterface $form);
+
+    /**
+     * Sets constraints for all form fields on base of model metadata
+     *
+     * @param FormInterface $form
+     * @param object        $modelData
+     */
+    public function setFormConstraintsFromModelData(FormInterface $form, $modelData);
 }
