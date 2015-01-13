@@ -1,2 +1,2 @@
 suites:
-    AvailabilityBundle : { namespace: WellCommerce}
+    AvailabilityBundle: {namespace: WellCommerce\Bundle\AvailabilityBundle, psr4_prefix: WellCommerce\Bundle\AvailabilityBundle, spec_path: src/WellCommerce/Bundle/AvailabilityBundle}

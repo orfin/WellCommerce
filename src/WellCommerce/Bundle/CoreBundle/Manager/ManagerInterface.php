@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Manager;
 
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**

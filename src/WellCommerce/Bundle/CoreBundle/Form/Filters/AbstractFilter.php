@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Filters;
 
-
 /**
  * Class AbstractFilter
  *

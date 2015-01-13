@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\AttributeBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
@@ -44,10 +45,19 @@ class AttributeValue
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
     /**
      * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute", mappedBy="attributeValues")
      */
     private $productAttributeValues;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->productAttributeValues = new ArrayCollection();
+    }
 
     /**
      * Returns attribute value id
@@ -78,4 +88,21 @@ class AttributeValue
     {
         $this->attribute = $attribute;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getProductAttributeValues()
+    {
+        return $this->productAttributeValues;
+    }
+
+    /**
+     * @param mixed $productAttributeValues
+     */
+    public function setProductAttributeValues($productAttributeValues)
+    {
+        $this->productAttributeValues = $productAttributeValues;
+    }
+
 }

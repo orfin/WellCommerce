@@ -55,8 +55,8 @@ class LanguageFieldset extends NestedFieldset implements ElementInterface
         ]);
 
         $resolver->setAllowedTypes([
-            'languages' => 'array',
-            'transformer'  => ['WellCommerce\Bundle\CoreBundle\Form\DataTransformer\DataTransformerInterface'],
+            'languages'   => 'array',
+            'transformer' => ['WellCommerce\Bundle\CoreBundle\Form\DataTransformer\DataTransformerInterface'],
         ]);
     }
 
@@ -114,7 +114,7 @@ class LanguageFieldset extends NestedFieldset implements ElementInterface
 
         $this->getChildren()->forAll(function (ElementInterface $child) use ($data, $accessor) {
             if (null !== $propertyPath = $child->getPropertyPath(true)) {
-                $value = $accessor->getValue($data, $child->getPropertyPath(true));
+                $value = $accessor->getValue($data, $propertyPath);
                 $child->setValue($value);
             }
         });
@@ -139,6 +139,11 @@ class LanguageFieldset extends NestedFieldset implements ElementInterface
         return $values;
     }
 
+    /**
+     * Returns fieldset values
+     *
+     * @return array|mixed
+     */
     public function getValue()
     {
         $values = [];
@@ -169,6 +174,6 @@ class LanguageFieldset extends NestedFieldset implements ElementInterface
             return $accessor->getValue($value, "[{$locale}]");
         }
 
-        return;
+        return null;
     }
 }

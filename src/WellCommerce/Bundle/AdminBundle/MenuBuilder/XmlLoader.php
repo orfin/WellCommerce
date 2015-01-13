@@ -61,7 +61,7 @@ class XmlLoader
     /**
      * Parses a XML file
      *
-     * @param $file
+     * @param string $file
      *
      * @return \DOMDocument
      */
@@ -88,15 +88,15 @@ class XmlLoader
      *
      * @param \SimpleXMLElement $item
      */
-    private function addMenuItem($item)
+    private function addMenuItem(\SimpleXMLElement $item)
     {
         $this->builder->add(new AdminMenuItem([
-            'id'         => (string) $item->id,
-            'name'       => (string) $item->name,
-            'class'      => isset($item->class) ? (string) $item->class : '',
-            'link'       => (string) $item->route,
-            'path'       => Helper::convertDotNotation((string) $item->path),
-            'sort_order' => (int) $item->sort_order,
+            'id'         => (string)$item->id,
+            'name'       => (string)$item->name,
+            'class'      => isset($item->class) ? (string)$item->class : '',
+            'link'       => (string)$item->route,
+            'path'       => Helper::convertDotNotation((string)$item->path),
+            'sort_order' => (int)$item->sort_order,
         ]));
     }
 }

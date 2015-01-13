@@ -11,13 +11,11 @@
  */
 
 use Symfony\Component\Config\Loader\LoaderInterface;
-use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpKernel\Kernel;
 
 /**
  * Class AppKernel
  *
- * @package WellCommerce
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class AppKernel extends Kernel

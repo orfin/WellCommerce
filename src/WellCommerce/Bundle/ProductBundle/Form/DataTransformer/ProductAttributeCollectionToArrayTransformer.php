@@ -72,7 +72,7 @@ class ProductAttributeCollectionToArrayTransformer extends CollectionToArrayTran
      */
     private function transformAvailability($entity)
     {
-        if (null == $entity) {
+        if (null === $entity) {
             return 0;
         }
         $meta       = $this->getRepository()->getMetadata();
@@ -90,7 +90,7 @@ class ProductAttributeCollectionToArrayTransformer extends CollectionToArrayTran
      */
     public function transformValues(PersistentCollection $collection)
     {
-        if (null == $collection) {
+        if (null === $collection) {
             return [];
         }
 
@@ -108,7 +108,7 @@ class ProductAttributeCollectionToArrayTransformer extends CollectionToArrayTran
     public function reverseTransform($modelData, PropertyPathInterface $propertyPath, $values)
     {
         $collection = new ArrayCollection();
-        if (null == $modelData || empty($values)) {
+        if (null === $modelData || empty($values)) {
             return $collection;
         }
         foreach ($values as $id => $value) {

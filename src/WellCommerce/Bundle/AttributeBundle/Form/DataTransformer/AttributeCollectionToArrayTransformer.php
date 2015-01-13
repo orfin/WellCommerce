@@ -34,7 +34,7 @@ class AttributeCollectionToArrayTransformer extends CollectionToArrayTransformer
     public function reverseTransform($modelData, PropertyPathInterface $propertyPath, $value)
     {
         $collection = new ArrayCollection();
-        if (null == $value || empty($value)) {
+        if (null === $value || empty($value)) {
             return $collection;
         }
         foreach ($value['editor'] as $attribute) {

@@ -32,6 +32,7 @@ class ClientAddress
      * @ORM\JoinColumn(name="client_id", referencedColumnName="id", nullable=false)
      */
     protected $client;
+
     /**
      * @var integer
      *
@@ -40,4 +41,30 @@ class ClientAddress
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return Client
+     */
+    public function getClient()
+    {
+        return $this->client;
+    }
+
+    /**
+     * @param Client $client
+     */
+    public function setClient(Client $client)
+    {
+        $this->client = $client;
+    }
+
+
 }

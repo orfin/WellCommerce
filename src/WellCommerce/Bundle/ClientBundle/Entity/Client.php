@@ -222,6 +222,11 @@ class Client
 
     public function getSalt()
     {
-        return;
+        return null;
+    }
+
+    public function setSalt($salt)
+    {
+        $this->salt = $salt;
     }
 }

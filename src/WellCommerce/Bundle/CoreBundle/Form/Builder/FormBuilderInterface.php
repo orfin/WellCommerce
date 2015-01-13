@@ -12,10 +12,6 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Form\Builder;
 
-use WellCommerce\Bundle\CoreBundle\Form\Elements;
-use WellCommerce\Bundle\CoreBundle\Form\Filters;
-use WellCommerce\Bundle\CoreBundle\Form\Rules;
-
 /**
  * Interface FormBuilderInterface
  *

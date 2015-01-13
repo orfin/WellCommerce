@@ -19,7 +19,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class FlatTreeBuilder extends AbstractDataSetCollectionBuilder implements DataSetCollectionBuilder
+class FlatTreeBuilder extends AbstractDataSetCollectionBuilder implements DataSetCollectionBuilderInterface
 {
     /**
      * {@inheritdoc}

@@ -16,7 +16,6 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use Symfony\Component\Routing\RouterInterface;
 use WellCommerce\Bundle\AdminBundle\Event\AdminMenuEvent;
 use WellCommerce\Bundle\AdminBundle\MenuBuilder\XmlLoader;
 

@@ -19,7 +19,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class SelectBuilder extends AbstractDataSetCollectionBuilder implements DataSetCollectionBuilder
+class SelectBuilder extends AbstractDataSetCollectionBuilder implements DataSetCollectionBuilderInterface
 {
     /**
      * {@inheritdoc}
