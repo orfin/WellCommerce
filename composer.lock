@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ece69b910371eed558305d9ba94185e4",
+    "hash": "dad20635b54dc9c15b7770bb7fbf0d78",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -291,16 +291,16 @@
         },
         {
             "name": "doctrine/dbal",
-            "version": "v2.5.0",
+            "version": "v2.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "71140662c0a954602e81271667b6e03d9f53ea34"
+                "reference": "628c2256b646ae2417d44e063bce8aec5199d48d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/71140662c0a954602e81271667b6e03d9f53ea34",
-                "reference": "71140662c0a954602e81271667b6e03d9f53ea34",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/628c2256b646ae2417d44e063bce8aec5199d48d",
+                "reference": "628c2256b646ae2417d44e063bce8aec5199d48d",
                 "shasum": ""
             },
             "require": {
@@ -358,7 +358,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2014-12-04 21:57:15"
+            "time": "2015-01-12 21:52:47"
         },
         {
             "name": "doctrine/doctrine-bundle",
@@ -821,12 +821,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/doctrine2.git",
-                "reference": "573153669c11a6f69201513831d3b8ce5e111d25"
+                "reference": "9c3cb579313ae01cdd3467b9f89fc15e9677b46c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/573153669c11a6f69201513831d3b8ce5e111d25",
-                "reference": "573153669c11a6f69201513831d3b8ce5e111d25",
+                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/9c3cb579313ae01cdd3467b9f89fc15e9677b46c",
+                "reference": "9c3cb579313ae01cdd3467b9f89fc15e9677b46c",
                 "shasum": ""
             },
             "require": {
@@ -888,7 +888,7 @@
                 "database",
                 "orm"
             ],
-            "time": "2015-01-11 17:02:45"
+            "time": "2015-01-13 14:05:45"
         },
         {
             "name": "friendsofsymfony/jsrouting-bundle",
@@ -952,12 +952,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "9d9bd78a9c875e6cd8ab9555823017ef3182ece5"
+                "reference": "1dc843aaf1b6032a78082145cc2abe41f0ce0ec2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/9d9bd78a9c875e6cd8ab9555823017ef3182ece5",
-                "reference": "9d9bd78a9c875e6cd8ab9555823017ef3182ece5",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/1dc843aaf1b6032a78082145cc2abe41f0ce0ec2",
+                "reference": "1dc843aaf1b6032a78082145cc2abe41f0ce0ec2",
                 "shasum": ""
             },
             "require": {
@@ -996,7 +996,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2015-01-04 23:56:37"
+            "time": "2015-01-12 09:54:32"
         },
         {
             "name": "imagine/imagine",
@@ -2954,12 +2954,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Behat/Behat.git",
-                "reference": "58bae29cbaf2ec7f605dc395d1c5736644eecbc3"
+                "reference": "dafe86b2f94f7ce0a54cff2469ca502ecabbf32d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/Behat/zipball/58bae29cbaf2ec7f605dc395d1c5736644eecbc3",
-                "reference": "58bae29cbaf2ec7f605dc395d1c5736644eecbc3",
+                "url": "https://api.github.com/repos/Behat/Behat/zipball/dafe86b2f94f7ce0a54cff2469ca502ecabbf32d",
+                "reference": "dafe86b2f94f7ce0a54cff2469ca502ecabbf32d",
                 "shasum": ""
             },
             "require": {
@@ -3027,7 +3027,7 @@
                 "symfony",
                 "testing"
             ],
-            "time": "2015-01-02 12:07:05"
+            "time": "2015-01-12 18:37:35"
         },
         {
             "name": "behat/gherkin",
@@ -3871,17 +3871,17 @@
         },
         {
             "name": "sensio/generator-bundle",
-            "version": "v2.5.0",
+            "version": "v2.5.1",
             "target-dir": "Sensio/Bundle/GeneratorBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioGeneratorBundle.git",
-                "reference": "0225fcd08e94de2165ffa85de50c3c9d9592e96b"
+                "reference": "9e23fc3de265ae013690d84aab98e7a84f46edcd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioGeneratorBundle/zipball/0225fcd08e94de2165ffa85de50c3c9d9592e96b",
-                "reference": "0225fcd08e94de2165ffa85de50c3c9d9592e96b",
+                "url": "https://api.github.com/repos/sensiolabs/SensioGeneratorBundle/zipball/9e23fc3de265ae013690d84aab98e7a84f46edcd",
+                "reference": "9e23fc3de265ae013690d84aab98e7a84f46edcd",
                 "shasum": ""
             },
             "require": {
@@ -3915,7 +3915,7 @@
                 }
             ],
             "description": "This bundle generates code for you",
-            "time": "2014-12-07 18:30:52"
+            "time": "2015-01-13 07:33:46"
         }
     ],
     "aliases": [],
