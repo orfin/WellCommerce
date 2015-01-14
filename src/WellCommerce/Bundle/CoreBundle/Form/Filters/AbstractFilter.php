@@ -22,7 +22,7 @@ abstract class AbstractFilter
     /**
      * @var array
      */
-    private $options;
+    protected $options;
 
     /**
      * {@inheritdoc}

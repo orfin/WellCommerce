@@ -33,64 +33,64 @@ class Client
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="discount", type="decimal", precision=15, scale=4)
      */
-    private $discount;
+    protected $discount;
 
     /**
      * @var string
      *
      * @ORM\Column(name="first_name", type="string", length=255)
      */
-    private $firstName;
+    protected $firstName;
 
     /**
      * @var string
      *
      * @ORM\Column(name="last_name", type="string", length=255)
      */
-    private $lastName;
+    protected $lastName;
 
     /**
      * @ORM\Column(type="string", length=25, unique=true)
      */
-    private $username;
+    protected $username;
 
     /**
      * @ORM\Column(type="string", length=64)
      */
-    private $password;
+    protected $password;
 
     /**
      * @ORM\Column(type="string", length=60, unique=true)
      */
-    private $email;
+    protected $email;
 
     /**
      * @ORM\Column(type="string", length=60, unique=true)
      */
-    private $phone;
+    protected $phone;
 
     /**
      * @ORM\Column(name="salt", type="string", length=40)
      */
-    private $salt;
+    protected $salt;
 
     /**
      * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\ClientBundle\Entity\ClientAddress", mappedBy="client", cascade={"persist"}, orphanRemoval=true)
      */
-    private $addresses;
+    protected $addresses;
 
     /**
      * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\ClientBundle\Entity\ClientGroup")
      * @ORM\JoinColumn(name="client_group_id", referencedColumnName="id", onDelete="SET NULL")
      */
-    private $group;
+    protected $group;
 
     /**
      * Constructor

@@ -27,7 +27,7 @@ class ThemeSubscriber extends AbstractEventSubscriber
     /**
      * @var ThemeManagerInterface
      */
-    private $themeManager;
+    protected $themeManager;
 
     /**
      * Constructor

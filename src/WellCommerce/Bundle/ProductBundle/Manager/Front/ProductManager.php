@@ -12,14 +12,14 @@
 
 namespace WellCommerce\Bundle\ProductBundle\Manager\Front;
 
-use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
+use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
+use WellCommerce\Bundle\CoreBundle\Manager\Front\FrontManagerInterface;
 
 /**
  * Class ProductManager
  *
- * @package WellCommerce\Bundle\ProductBundle\Manager\Admin
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductManager extends AbstractAdminManager
+class ProductManager extends AbstractFrontManager implements FrontManagerInterface
 {
 }

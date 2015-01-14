@@ -21,7 +21,6 @@ use WellCommerce\Bundle\LayoutBundle\Repository\LayoutBoxRepositoryInterface;
 /**
  * Class LayoutBoxRenderer
  *
- * @package WellCommerce\Bundle\LayoutBundle\Renderer
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class LayoutBoxRenderer extends AbstractContainer implements LayoutBoxRendererInterface
@@ -102,7 +101,6 @@ class LayoutBoxRenderer extends AbstractContainer implements LayoutBoxRendererIn
     {
         $service    = $this->configurators->get($box->getBoxType())->getControllerService();
         $controller = $this->container->get($service);
-//        $controller->setBoxSettings($box->getSettings());
 
         return sprintf('%s:%s', $service, $this->getControllerAction($controller));
     }
@@ -165,7 +163,6 @@ class LayoutBoxRenderer extends AbstractContainer implements LayoutBoxRendererIn
     {
         return [
             'id'       => $box->getIdentifier(),
-//            'settings' => array_merge_recursive($box->getSettings(), $params)
         ];
     }
 }

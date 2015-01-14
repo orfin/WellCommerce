@@ -50,7 +50,7 @@ class MoneyExtension extends \Twig_Extension
             throw new \InvalidArgumentException($e);
         }
 
-        return $formatter->formatCurrency($price, $currency);
+        return $result;
     }
 
     /**

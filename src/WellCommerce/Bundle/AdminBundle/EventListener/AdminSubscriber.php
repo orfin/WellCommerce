@@ -60,8 +60,10 @@ class AdminSubscriber extends AbstractEventSubscriber
      */
     private function initAdminMenuBuilder()
     {
-        $builder = $this->container->get('admin_menu.builder');
-        $loader  = new XmlLoader($builder, new FileLocator(__DIR__.'/../Resources/config'));
+        $reflection = new \ReflectionClass($this);
+        $directory  = dirname($reflection->getFileName());
+        $builder    = $this->container->get('admin_menu.builder');
+        $loader     = new XmlLoader($builder, new FileLocator($directory . '/../Resources/config'));
         $loader->load('admin_menu.xml');
 
         return $builder;

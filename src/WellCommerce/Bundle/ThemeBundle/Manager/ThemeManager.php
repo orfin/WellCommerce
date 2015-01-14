@@ -101,7 +101,6 @@ class ThemeManager implements ThemeManagerInterface
             throw new \RuntimeException('Template files have to be in Resources.');
         }
 
-        $resourceBundle = null;
         $bundles        = $this->kernel->getBundle($bundleName, false);
         $files          = array();
 

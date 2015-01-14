@@ -13,8 +13,6 @@
 namespace WellCommerce\Bundle\IntlBundle\EventListener;
 
 use Doctrine\Common\EventSubscriber;
-use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
-use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 
 /**
  * Class LocaleORMListener
@@ -23,45 +21,8 @@ use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
  */
 class LocaleORMListener implements EventSubscriber
 {
-    /**
-     * @param LifecycleEventArgs $args
-     */
-    public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
-    {
-        $classMetadata = $eventArgs->getClassMetadata();
-        if (null === $classMetadata->reflClass) {
-            return;
-        }
-
-        if ($classMetadata->hasField('locale')) {
-            //            // remove old field mapping
-//            unset($classMetadata->fieldMappings['locale']);
-//            unset($classMetadata->fieldNames['locale']);
-//            unset($classMetadata->columnNames['locale']);
-//
-//            $classMetadata->mapManyToOne([
-//                'fieldName'    => 'locale',
-//                'nullable'     => false,
-//                'joinColumns'  => [
-//                    [
-//                        'name'                 => 'locale',
-//                        'referencedColumnName' => 'code',
-//                        'onDelete'             => 'CASCADE'
-//                    ]
-//                ],
-//                'targetEntity' => 'WellCommerce\\Bundle\\IntlBundle\\Entity\\Locale'
-//            ]);
-        }
-    }
-
-    public function postRemove(LifecycleEventArgs $args)
-    {
-    }
-
     public function getSubscribedEvents()
     {
-        return [
-            'postRemove',
-        ];
+
     }
 }
