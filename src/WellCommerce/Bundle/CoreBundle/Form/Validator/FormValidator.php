@@ -62,6 +62,5 @@ class FormValidator implements FormValidatorInterface
      */
     public function setFormConstraintsFromModelData(FormInterface $form, $modelData)
     {
-
     }
 }

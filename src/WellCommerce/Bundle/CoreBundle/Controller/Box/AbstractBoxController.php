@@ -20,5 +20,4 @@ use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
  */
 abstract class AbstractBoxController extends AbstractFrontController implements BoxControllerInterface
 {
-
 }

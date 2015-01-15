@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\EventHandler;
 
-
 /**
  * Class LoadedEventHandler
  *

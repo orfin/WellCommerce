@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Controller\Front;
 
-
 /**
  * Interface FrontControllerInterface
  *

@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DataSet\Conditions;
 
-
 /**
  * Class AbstractCondition
  *

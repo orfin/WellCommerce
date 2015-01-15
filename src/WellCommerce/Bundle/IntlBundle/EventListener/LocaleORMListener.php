@@ -23,6 +23,5 @@ class LocaleORMListener implements EventSubscriber
 {
     public function getSubscribedEvents()
     {
-
     }
 }
