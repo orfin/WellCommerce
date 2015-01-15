@@ -33,12 +33,6 @@
             <argument>WellCommerceUserBundle:User</argument>
         </service>
 
-        <service id="user.datagrid.configurator" class="WellCommerce\Bundle\UserBundle\DataGrid\UserDataGridConfigurator">
-            <argument key="identifier">user</argument>
-            <argument type="service" id="datagrid_manager"/>
-            <argument type="service" id="user.repository"/>
-        </service>
-
         <service id="user.dataset.query_builder" class="WellCommerce\Bundle\UserBundle\DataSet\UserDataSetQueryBuilder" public="false">
             <argument type="service" id="user.repository"/>
         </service>

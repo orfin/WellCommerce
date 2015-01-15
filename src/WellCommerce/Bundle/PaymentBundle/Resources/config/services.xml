@@ -18,8 +18,8 @@
             <call method="setRepository">
                 <argument type="service" id="payment_method.repository"/>
             </call>
-            <call method="setForm">
-                <argument type="service" id="payment_method.form"/>
+            <call method="setFormBuilder">
+                <argument type="service" id="payment_method.form_builder"/>
             </call>
             <call method="setDataGrid">
                 <argument type="service" id="payment_method.datagrid"/>
@@ -44,13 +44,9 @@
             <configurator service="payment_method.datagrid.configurator" method="configure" />
         </service>
 
-        <service id="payment_method.datagrid.configurator" class="WellCommerce\Bundle\PaymentBundle\DataGrid\PaymentMethodDataGridConfigurator">
-            <argument key="identifier">payment</argument>
-            <argument type="service" id="datagrid_manager"/>
-            <argument type="service" id="payment_method.repository"/>
-        </service>
-
-        <service id="payment_method.form" class="WellCommerce\Bundle\PaymentBundle\Form\PaymentMethodForm">
+        <service id="payment_method.form_builder" class="WellCommerce\Bundle\PaymentBundle\Form\PaymentMethodFormBuilder">
+            <argument type="service" id="form.resolver.factory"/>
+            <argument type="service" id="form.handler"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
