@@ -21,9 +21,8 @@ use Symfony\Component\Validator\Mapping\ClassMetadata;
  */
 class ConstraintsResolver
 {
-
     public function resolveClassMetadata(ClassMetadata $metadata)
     {
 
     }
-} 
+}

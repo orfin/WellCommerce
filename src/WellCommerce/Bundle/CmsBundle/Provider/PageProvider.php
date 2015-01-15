@@ -13,9 +13,37 @@
 namespace WellCommerce\Bundle\CmsBundle\Provider;
 
 
+use WellCommerce\Bundle\CmsBundle\Entity\Page;
 use WellCommerce\Bundle\CoreBundle\Provider\ProviderInterface;
 
 class PageProvider implements ProviderInterface
 {
+    /**
+     * @var Page
+     */
+    protected $resource;
 
-} 
+    /**
+     * @return mixed
+     */
+    public function getCurrentResource()
+    {
+        return $this->resource;
+    }
+
+    /**
+     * @param mixed $resource
+     */
+    public function setCurrentResource($resource)
+    {
+        $this->setCurrentPage($resource);
+    }
+
+    /**
+     * @param Page $page
+     */
+    protected function setCurrentPage(Page $page)
+    {
+        $this->resource = $page;
+    }
+}
