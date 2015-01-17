@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\ClientBundle\DataSet;
 
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Bundle\CoreBundle\DataSet\DataSetInterface;
-use WellCommerce\Bundle\CoreBundle\DataSet\DataSetOptionsResolver;
+use WellCommerce\Bundle\CoreBundle\DataSet\DataSetConfiguratorInterface;
 use WellCommerce\Bundle\CoreBundle\DataSet\Transformer\DateTransformer;
 
 /**
@@ -27,9 +27,9 @@ class ClientDataSet extends AbstractDataSet implements DataSetInterface
     /**
      * {@inheritdoc}
      */
-    protected function configureOptions(DataSetOptionsResolver $resolver)
+    public function configureOptions(DataSetConfiguratorInterface $configurator)
     {
-        $resolver->setColumns([
+        $configurator->setColumns([
             'id'        => 'client.id',
             'firstName' => 'client.firstName',
             'lastName'  => 'client.lastName',
@@ -38,7 +38,7 @@ class ClientDataSet extends AbstractDataSet implements DataSetInterface
             'createdAt' => 'client.createdAt',
         ]);
 
-        $resolver->setTransformers([
+        $configurator->setTransformers([
             'createdAt' => new DateTransformer('Y-m-d H:i:s'),
         ]);
     }

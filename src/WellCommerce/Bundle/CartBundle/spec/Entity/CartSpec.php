@@ -5,6 +5,9 @@ namespace spec\WellCommerce\Bundle\CartBundle\Entity;
 use PhpSpec\ObjectBehavior;
 
 /**
+ * Class CartSpec
+ *
+ * @author Adam Piotrowski <adam@wellcommerce.org>
  * @mixin \WellCommerce\Bundle\CartBundle\Entity\Cart
  */
 class CartSpec extends ObjectBehavior

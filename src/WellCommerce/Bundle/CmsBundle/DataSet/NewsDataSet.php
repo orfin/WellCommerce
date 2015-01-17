@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\CmsBundle\DataSet;
 
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Bundle\CoreBundle\DataSet\DataSetInterface;
-use WellCommerce\Bundle\CoreBundle\DataSet\DataSetOptionsResolver;
+use WellCommerce\Bundle\CoreBundle\DataSet\DataSetConfiguratorInterface;
 
 /**
  * Class NewsDataSet
@@ -26,9 +26,9 @@ class NewsDataSet extends AbstractDataSet implements DataSetInterface
     /**
      * {@inheritdoc}
      */
-    protected function configureOptions(DataSetOptionsResolver $resolver)
+    public function configureOptions(DataSetConfiguratorInterface $configurator)
     {
-        $resolver->setColumns([
+        $configurator->setColumns([
             'id'   => 'news.id',
             'name' => 'news_translation.topic',
         ]);

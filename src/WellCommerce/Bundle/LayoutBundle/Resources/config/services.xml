@@ -37,12 +37,15 @@
             <argument type="service" id="layout_box.repository"/>
         </service>
 
+        <service id="layout_box.dataset.loader" class="%dataset.loader.class%">
+            <argument type="service" id="layout_box.dataset.query_builder"/>
+            <argument type="service" id="dataset.processor"/>
+        </service>
+
         <service id="layout_box.dataset" class="WellCommerce\Bundle\LayoutBundle\DataSet\LayoutBoxDataSet">
             <argument key="identifier">layout_box</argument>
-            <argument type="service" id="layout_box.dataset.query_builder"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
+            <argument type="service" id="layout_box.dataset.loader"/>
+            <configurator service="dataset.configurator" method="configure"/>
         </service>
 
         <service id="layout_box.datagrid" class="WellCommerce\Bundle\LayoutBundle\DataGrid\LayoutBoxDataGrid">

@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\CmsBundle\DataSet;
 
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Bundle\CoreBundle\DataSet\DataSetInterface;
-use WellCommerce\Bundle\CoreBundle\DataSet\DataSetOptionsResolver;
+use WellCommerce\Bundle\CoreBundle\DataSet\DataSetConfiguratorInterface;
 
 /**
  * Class PageDataSet
@@ -26,9 +26,9 @@ class PageDataSet extends AbstractDataSet implements DataSetInterface
     /**
      * {@inheritdoc}
      */
-    protected function configureOptions(DataSetOptionsResolver $resolver)
+    public function configureOptions(DataSetConfiguratorInterface $configurator)
     {
-        $resolver->setColumns([
+        $configurator->setColumns([
             'id'        => 'page.id',
             'parent'    => 'IDENTITY(page.parent)',
             'children'  => 'COUNT(page_children.id)',

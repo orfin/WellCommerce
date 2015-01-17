@@ -37,12 +37,15 @@
             <argument type="service" id="product_status.repository"/>
         </service>
 
+        <service id="product_status.dataset.loader" class="%dataset.loader.class%">
+            <argument type="service" id="product_status.dataset.query_builder"/>
+            <argument type="service" id="dataset.processor"/>
+        </service>
+
         <service id="product_status.dataset" class="WellCommerce\Bundle\ProductBundle\DataSet\Admin\ProductStatusDataSet">
             <argument key="identifier">product_status</argument>
-            <argument type="service" id="product_status.dataset.query_builder"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
+            <argument type="service" id="product_status.dataset.loader"/>
+            <configurator service="dataset.configurator" method="configure"/>
         </service>
 
         <service id="product_status.collection" parent="dataset.collection_builder.factory">

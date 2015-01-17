@@ -43,12 +43,15 @@
             <argument type="service" id="producer.repository"/>
         </service>
 
+        <service id="producer.dataset.loader" class="%dataset.loader.class%">
+            <argument type="service" id="producer.dataset.query_builder"/>
+            <argument type="service" id="dataset.processor"/>
+        </service>
+
         <service id="producer.dataset" class="WellCommerce\Bundle\ProducerBundle\DataSet\ProducerDataSet">
             <argument key="identifier">producer</argument>
-            <argument type="service" id="producer.dataset.query_builder"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
+            <argument type="service" id="producer.dataset.loader"/>
+            <configurator service="dataset.configurator" method="configure"/>
         </service>
 
         <service id="producer.collection" parent="dataset.collection_builder.factory">

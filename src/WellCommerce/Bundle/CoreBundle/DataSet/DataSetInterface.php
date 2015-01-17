@@ -12,17 +12,51 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DataSet;
 
+use WellCommerce\Bundle\CoreBundle\DataSet\Column\ColumnCollection;
 use WellCommerce\Bundle\CoreBundle\DataSet\Request\DataSetRequest;
+use WellCommerce\Bundle\CoreBundle\DataSet\Transformer\TransformerCollection;
 
 /**
  * Interface DataSetInterface
  *
- * @package WellCommerce\Bundle\CoreBundle\DataSet
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface DataSetInterface
 {
-    const EVENT_POST_CONFIGURE = 'dataset.post_configure';
+    /**
+     * Returns dataset identifier
+     *
+     * @return string
+     */
+    public function getIdentifier();
+
+    /**
+     * Returns dataset columns
+     *
+     * @return ColumnCollection
+     */
+    public function getColumns();
+
+    /**
+     * Sets dataset columns
+     *
+     * @param ColumnCollection $columns
+     */
+    public function setColumns(ColumnCollection $columns);
+
+    /**
+     * Returns transformers collection
+     *
+     * @return TransformerCollection
+     */
+    public function getTransformers();
+
+    /**
+     * Sets transformers collection
+     *
+     * @param TransformerCollection $transformers
+     */
+    public function setTransformers(TransformerCollection $transformers);
 
     /**
      * Initializes dataset and returns results
@@ -34,18 +68,9 @@ interface DataSetInterface
     public function getResults(DataSetRequest $request);
 
     /**
-     * Processes the results
+     * Configures dataset options
      *
-     * @param $rows
-     *
-     * @return mixed
+     * @param DataSetConfiguratorInterface $resolver
      */
-    public function processResults($rows);
-
-    /**
-     * Returns column collection
-     *
-     * @return \WellCommerce\Bundle\CoreBundle\DataSet\Column\ColumnCollection
-     */
-    public function getColumns();
+    public function configureOptions(DataSetConfiguratorInterface $configurator);
 }

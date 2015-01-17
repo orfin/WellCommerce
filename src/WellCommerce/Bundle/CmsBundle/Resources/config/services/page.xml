@@ -71,13 +71,16 @@
         <service id="page.dataset.query_builder" class="WellCommerce\Bundle\CmsBundle\DataSet\PageDataSetQueryBuilder" public="false">
             <argument type="service" id="page.repository"/>
         </service>
- 
+
+        <service id="page.dataset.loader" class="%dataset.loader.class%">
+            <argument type="service" id="page.dataset.query_builder"/>
+            <argument type="service" id="dataset.processor"/>
+        </service>
+
         <service id="page.dataset" class="WellCommerce\Bundle\CmsBundle\DataSet\PageDataSet">
             <argument key="identifier">page</argument>
-            <argument type="service" id="page.dataset.query_builder"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
+            <argument type="service" id="page.dataset.loader"/>
+            <configurator service="dataset.configurator" method="configure"/>
         </service>
 
         <service id="page.collection" parent="dataset.collection_builder.factory">

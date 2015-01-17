@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\TaxBundle\DataSet;
 
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Bundle\CoreBundle\DataSet\DataSetInterface;
-use WellCommerce\Bundle\CoreBundle\DataSet\DataSetOptionsResolver;
+use WellCommerce\Bundle\CoreBundle\DataSet\DataSetConfiguratorInterface;
 
 /**
  * Class TaxDataSet
@@ -26,9 +26,9 @@ class TaxDataSet extends AbstractDataSet implements DataSetInterface
     /**
      * {@inheritdoc}
      */
-    protected function configureOptions(DataSetOptionsResolver $resolver)
+    public function configureOptions(DataSetConfiguratorInterface $configurator)
     {
-        $resolver->setColumns([
+        $configurator->setColumns([
             'id'    => 'tax.id',
             'name'  => 'tax_translation.name',
             'value' => 'tax.value',

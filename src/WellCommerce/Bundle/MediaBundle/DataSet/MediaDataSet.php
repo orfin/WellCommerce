@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\MediaBundle\DataSet;
 
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Bundle\CoreBundle\DataSet\DataSetInterface;
-use WellCommerce\Bundle\CoreBundle\DataSet\DataSetOptionsResolver;
+use WellCommerce\Bundle\CoreBundle\DataSet\DataSetConfiguratorInterface;
 use WellCommerce\Bundle\MediaBundle\DataSet\Transformer\ImagePathTransformer;
 
 /**
@@ -27,9 +27,9 @@ class MediaDataSet extends AbstractDataSet implements DataSetInterface
     /**
      * {@inheritdoc}
      */
-    protected function configureOptions(DataSetOptionsResolver $resolver)
+    public function configureOptions(DataSetConfiguratorInterface $configurator)
     {
-        $resolver->setColumns([
+        $configurator->setColumns([
             'id'        => 'media.id',
             'name'      => 'media.name',
             'mime'      => 'media.mime',
@@ -38,7 +38,7 @@ class MediaDataSet extends AbstractDataSet implements DataSetInterface
             'preview'   => 'media.path',
         ]);
 
-        $resolver->setTransformers([
+        $configurator->setTransformers([
             'preview' => new ImagePathTransformer($this->container->get('image_helper'), 'medium'),
         ]);
     }

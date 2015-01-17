@@ -15,15 +15,14 @@ namespace WellCommerce\Bundle\IntlBundle\ORM;
 /**
  * Interface LocaleAwareInterface
  *
- * @package WellCommerce\Bundle\IntlBundle\ORM
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface LocaleAwareInterface
 {
     /**
-     * Sets locale name for this translation.
+     * Sets locale name for translation.
      *
-     * @param string $locale The locale
+     * @param string $locale
      */
     public function setLocale($locale);
 

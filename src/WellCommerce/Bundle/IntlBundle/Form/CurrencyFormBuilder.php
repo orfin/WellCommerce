@@ -47,8 +47,6 @@ class CurrencyFormBuilder extends AbstractFormBuilder implements FormBuilderInte
         $form->addFilter($this->getFilter('no_code'));
         $form->addFilter($this->getFilter('trim'));
         $form->addFilter($this->getFilter('secure'));
-
-        return $form;
     }
 
     /**

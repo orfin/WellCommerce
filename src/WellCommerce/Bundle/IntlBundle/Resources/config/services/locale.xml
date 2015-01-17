@@ -37,12 +37,15 @@
             <argument type="service" id="locale.repository"/>
         </service>
 
+        <service id="locale.dataset.loader" class="%dataset.loader.class%">
+            <argument type="service" id="locale.dataset.query_builder"/>
+            <argument type="service" id="dataset.processor"/>
+        </service>
+
         <service id="locale.dataset" class="WellCommerce\Bundle\IntlBundle\DataSet\LocaleDataSet">
             <argument key="identifier">locale</argument>
-            <argument type="service" id="locale.dataset.query_builder"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
+            <argument type="service" id="locale.dataset.loader"/>
+            <configurator service="dataset.configurator" method="configure"/>
         </service>
 
         <service id="locale.datagrid" class="WellCommerce\Bundle\IntlBundle\DataGrid\LocaleDataGrid">

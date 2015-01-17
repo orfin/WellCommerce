@@ -18,17 +18,24 @@ use Doctrine\ORM\Query\Filter\SQLFilter;
 /**
  * Class LocaleFilter
  *
- * @package WellCommerce\Bundle\IntlBundle\ORM\Filter
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class LocaleFilter extends SQLFilter
 {
+    /**
+     * Adds locale filter to query
+     *
+     * @param ClassMetadata $targetEntity
+     * @param string        $targetTableAlias
+     *
+     * @return string
+     */
     public function addFilterConstraint(ClassMetadata $targetEntity, $targetTableAlias)
     {
         if (!$targetEntity->reflClass->implementsInterface('WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface')) {
             return "";
         }
 
-        return $targetTableAlias.'.locale = '.$this->getParameter('locale');
+        return $targetTableAlias . '.locale = ' . $this->getParameter('locale');
     }
 }

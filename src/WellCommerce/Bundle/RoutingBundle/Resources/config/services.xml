@@ -37,12 +37,15 @@
             <argument type="service" id="routing.repository"/>
         </service>
 
+        <service id="routing.dataset.loader" class="%dataset.loader.class%">
+            <argument type="service" id="routing.dataset.query_builder"/>
+            <argument type="service" id="dataset.processor"/>
+        </service>
+
         <service id="routing.dataset" class="WellCommerce\Bundle\RoutingBundle\DataSet\RoutingDataSet">
             <argument key="identifier">routing</argument>
-            <argument type="service" id="routing.dataset.query_builder"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
+            <argument type="service" id="routing.dataset.loader"/>
+            <configurator service="dataset.configurator" method="configure"/>
         </service>
 
         <service id="routing.datagrid" class="WellCommerce\Bundle\RoutingBundle\DataGrid\RoutingDataGrid">

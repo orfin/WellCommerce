@@ -37,12 +37,15 @@
             <argument type="service" id="availability.repository"/>
         </service>
 
+        <service id="availability.dataset.loader" class="%dataset.loader.class%">
+            <argument type="service" id="availability.dataset.query_builder"/>
+            <argument type="service" id="dataset.processor"/>
+        </service>
+
         <service id="availability.dataset" class="WellCommerce\Bundle\AvailabilityBundle\DataSet\AvailabilityDataSet">
             <argument key="identifier">availability</argument>
-            <argument type="service" id="availability.dataset.query_builder"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
+            <argument type="service" id="availability.dataset.loader"/>
+            <configurator service="dataset.configurator" method="configure"/>
         </service>
 
         <service id="availability.collection" parent="dataset.collection_builder.factory">

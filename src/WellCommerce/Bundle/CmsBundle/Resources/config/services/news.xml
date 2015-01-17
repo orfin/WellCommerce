@@ -37,12 +37,15 @@
             <argument type="service" id="news.repository"/>
         </service>
 
+        <service id="news.dataset.loader" class="%dataset.loader.class%">
+            <argument type="service" id="news.dataset.query_builder"/>
+            <argument type="service" id="dataset.processor"/>
+        </service>
+
         <service id="news.dataset" class="WellCommerce\Bundle\CmsBundle\DataSet\NewsDataSet">
             <argument key="identifier">news</argument>
-            <argument type="service" id="news.dataset.query_builder"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
+            <argument type="service" id="news.dataset.loader"/>
+            <configurator service="dataset.configurator" method="configure"/>
         </service>
 
         <service id="news.datagrid" class="WellCommerce\Bundle\CmsBundle\DataGrid\NewsDataGrid">

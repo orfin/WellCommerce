@@ -100,20 +100,26 @@
             <argument type="service" id="category.repository"/>
         </service>
 
+        <service id="category.dataset.loader.admin" class="%dataset.loader.class%">
+            <argument type="service" id="category.dataset.query_builder.admin"/>
+            <argument type="service" id="dataset.processor"/>
+        </service>
+
+        <service id="category.dataset.loader.front" class="%dataset.loader.class%">
+            <argument type="service" id="category.dataset.query_builder.front"/>
+            <argument type="service" id="dataset.processor"/>
+        </service>
+
         <service id="category.dataset.front" class="WellCommerce\Bundle\CategoryBundle\DataSet\Front\CategoryDataSet">
             <argument key="identifier">category</argument>
-            <argument type="service" id="category.dataset.query_builder.front"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
+            <argument type="service" id="category.dataset.loader.front"/>
+            <configurator service="dataset.configurator" method="configure"/>
         </service>
 
         <service id="category.dataset.admin" class="WellCommerce\Bundle\CategoryBundle\DataSet\Admin\CategoryDataSet">
             <argument key="identifier">category</argument>
-            <argument type="service" id="category.dataset.query_builder.admin"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
+            <argument type="service" id="category.dataset.loader.admin"/>
+            <configurator service="dataset.configurator" method="configure"/>
         </service>
 
         <service id="category.provider" class="WellCommerce\Bundle\CategoryBundle\Provider\CategoryProvider">

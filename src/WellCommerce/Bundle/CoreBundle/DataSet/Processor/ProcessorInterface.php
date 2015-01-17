@@ -1,29 +1,36 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- *
+ * 
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- *
+ * 
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
 
 namespace WellCommerce\Bundle\CoreBundle\DataSet\Processor;
 
+use WellCommerce\Bundle\CoreBundle\DataSet\DataSetInterface;
+use WellCommerce\Bundle\CoreBundle\DataSet\Request\DataSetRequestInterface;
+
 /**
  * Interface ProcessorInterface
  *
- * @package WellCommerce\Bundle\CoreBundle\DataSet\Processor
- * @author  Adam Piotrowski <adam@wellcommerce.org>
+ * @author Adam Piotrowski <adam@wellcommerce.org>
  */
 interface ProcessorInterface
 {
     /**
-     * Processes and returns new set of data
+     * Processes dataset results returned from query builder
      *
-     * @return mixed
+     * @param DataSetInterface        $dataset
+     * @param array                   $result
+     * @param int                     $total
+     * @param DataSetRequestInterface $request
+     *
+     * @return array
      */
-    public function process();
+    public function processResult(DataSetInterface $dataset, $result, $total, DataSetRequestInterface $request);
 }

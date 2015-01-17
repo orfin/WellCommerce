@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\CompanyBundle\DataSet;
 
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Bundle\CoreBundle\DataSet\DataSetInterface;
-use WellCommerce\Bundle\CoreBundle\DataSet\DataSetOptionsResolver;
+use WellCommerce\Bundle\CoreBundle\DataSet\DataSetConfiguratorInterface;
 use WellCommerce\Bundle\CoreBundle\DataSet\Transformer\DateTransformer;
 
 /**
@@ -28,16 +28,16 @@ class CompanyDataSet extends AbstractDataSet implements DataSetInterface
     /**
      * {@inheritdoc}
      */
-    protected function configureOptions(DataSetOptionsResolver $resolver)
+    public function configureOptions(DataSetConfiguratorInterface $configurator)
     {
-        $resolver->setColumns([
+        $configurator->setColumns([
             'id'        => 'company.id',
             'name'      => 'company.name',
             'shortName' => 'company.shortName',
             'createdAt' => 'company.createdAt',
         ]);
 
-        $resolver->setTransformers([
+        $configurator->setTransformers([
             'createdAt' => new DateTransformer('Y-m-d H:i:s'),
         ]);
     }

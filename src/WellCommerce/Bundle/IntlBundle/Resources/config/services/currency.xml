@@ -37,12 +37,15 @@
             <argument type="service" id="currency.repository"/>
         </service>
 
+        <service id="currency.dataset.loader" class="%dataset.loader.class%">
+            <argument type="service" id="currency.dataset.query_builder"/>
+            <argument type="service" id="dataset.processor"/>
+        </service>
+
         <service id="currency.dataset" class="WellCommerce\Bundle\IntlBundle\DataSet\CurrencyDataSet">
             <argument key="identifier">currency</argument>
-            <argument type="service" id="currency.dataset.query_builder"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
+            <argument type="service" id="currency.dataset.loader"/>
+            <configurator service="dataset.configurator" method="configure"/>
         </service>
 
         <service id="currency.collection" parent="dataset.collection_builder.factory">

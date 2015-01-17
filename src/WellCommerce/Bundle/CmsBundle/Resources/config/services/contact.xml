@@ -51,12 +51,15 @@
             <argument type="service" id="contact.repository"/>
         </service>
 
+        <service id="contact.dataset.loader" class="%dataset.loader.class%">
+            <argument type="service" id="contact.dataset.query_builder"/>
+            <argument type="service" id="dataset.processor"/>
+        </service>
+
         <service id="contact.dataset" class="WellCommerce\Bundle\CmsBundle\DataSet\ContactDataSet">
             <argument key="identifier">contact</argument>
-            <argument type="service" id="contact.dataset.query_builder"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
+            <argument type="service" id="contact.dataset.loader"/>
+            <configurator service="dataset.configurator" method="configure"/>
         </service>
 
         <service id="contact.datagrid" class="WellCommerce\Bundle\CmsBundle\DataGrid\ContactDataGrid">

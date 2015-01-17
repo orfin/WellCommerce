@@ -10,7 +10,7 @@ class Cart
 
     private $products;
 
-    private $internalid;
+    private $internalId;
 
     public function __construct()
     {
@@ -32,11 +32,16 @@ class Cart
 
     public function getInternalId()
     {
-        return $this->internalid;
+        return $this->internalId;
     }
 
     public function setProducts(ArrayCollection $products)
     {
         $this->products = $products;
+    }
+
+    public function addItem($argument1)
+    {
+        // TODO: write logic here
     }
 }

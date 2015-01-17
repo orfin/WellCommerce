@@ -37,12 +37,15 @@
             <argument type="service" id="deliverer.repository"/>
         </service>
 
+        <service id="deliverer.dataset.loader" class="%dataset.loader.class%">
+            <argument type="service" id="deliverer.dataset.query_builder"/>
+            <argument type="service" id="dataset.processor"/>
+        </service>
+
         <service id="deliverer.dataset" class="WellCommerce\Bundle\DelivererBundle\DataSet\DelivererDataSet">
             <argument key="identifier">deliverer</argument>
-            <argument type="service" id="deliverer.dataset.query_builder"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
+            <argument type="service" id="deliverer.dataset.loader"/>
+            <configurator service="dataset.configurator" method="configure"/>
         </service>
 
         <service id="deliverer.datagrid" class="WellCommerce\Bundle\DelivererBundle\DataGrid\DelivererDataGrid">

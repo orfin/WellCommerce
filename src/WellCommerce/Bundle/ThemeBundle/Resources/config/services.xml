@@ -59,12 +59,15 @@
             <argument type="service" id="theme.repository"/>
         </service>
 
+        <service id="theme.dataset.loader" class="%dataset.loader.class%">
+            <argument type="service" id="theme.dataset.query_builder"/>
+            <argument type="service" id="dataset.processor"/>
+        </service>
+
         <service id="theme.dataset" class="WellCommerce\Bundle\ThemeBundle\DataSet\ThemeDataSet">
             <argument key="identifier">theme</argument>
-            <argument type="service" id="theme.dataset.query_builder"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
+            <argument type="service" id="theme.dataset.loader"/>
+            <configurator service="dataset.configurator" method="configure"/>
         </service>
 
         <service id="theme.datagrid" class="WellCommerce\Bundle\ThemeBundle\DataGrid\ThemeDataGrid">

@@ -37,12 +37,15 @@
             <argument type="service" id="tax.repository"/>
         </service>
 
+        <service id="tax.dataset.loader" class="%dataset.loader.class%">
+            <argument type="service" id="tax.dataset.query_builder"/>
+            <argument type="service" id="dataset.processor"/>
+        </service>
+
         <service id="tax.dataset" class="WellCommerce\Bundle\TaxBundle\DataSet\TaxDataSet">
             <argument key="identifier">tax</argument>
-            <argument type="service" id="tax.dataset.query_builder"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
+            <argument type="service" id="tax.dataset.loader"/>
+            <configurator service="dataset.configurator" method="configure"/>
         </service>
 
         <service id="tax.collection" parent="dataset.collection_builder.factory">

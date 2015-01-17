@@ -14,15 +14,13 @@ namespace WellCommerce\Bundle\CoreBundle\DataSet;
 
 use Symfony\Component\DependencyInjection\ContainerAware;
 use WellCommerce\Bundle\CoreBundle\DataSet\Column\ColumnCollection;
-use WellCommerce\Bundle\CoreBundle\DataSet\Event\DataSetEvent;
-use WellCommerce\Bundle\CoreBundle\DataSet\QueryBuilder\QueryBuilderInterface;
+use WellCommerce\Bundle\CoreBundle\DataSet\Loader\DataSetLoaderInterface;
 use WellCommerce\Bundle\CoreBundle\DataSet\Request\DataSetRequest;
 use WellCommerce\Bundle\CoreBundle\DataSet\Transformer\TransformerCollection;
 
 /**
  * Class AbstractDataSet
  *
- * @package WellCommerce\Bundle\CoreBundle\DataSet
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 abstract class AbstractDataSet extends ContainerAware
@@ -33,141 +31,82 @@ abstract class AbstractDataSet extends ContainerAware
     protected $identifier;
 
     /**
-     * @var QueryBuilderInterface
+     * @var DataSetLoaderInterface
      */
-    protected $queryBuilder;
+    private $loader;
 
     /**
      * @var ColumnCollection
      */
-    protected $columns;
+    private $columns;
 
     /**
      * @var TransformerCollection
      */
-    protected $transformers;
-
-    /**
-     * @var DataSetOptionsResolver
-     */
-    protected $datasetOptionsResolver;
-
-    /**
-     * @var bool
-     */
-    protected $booted = false;
+    private $transformers;
 
     /**
      * Constructor
      *
-     * @param string                $identifier
-     * @param QueryBuilderInterface $queryBuilder
+     * @param string                 $identifier
+     * @param DataSetLoaderInterface $loader
      */
-    public function __construct($identifier, QueryBuilderInterface $queryBuilder)
+    public function __construct($identifier, DataSetLoaderInterface $loader)
     {
-        $this->identifier             = $identifier;
-        $this->queryBuilder           = $queryBuilder;
-        $this->columns                = new ColumnCollection();
-        $this->transformers           = new TransformerCollection();
-        $this->datasetOptionsResolver = new DataSetOptionsResolver();
+        $this->identifier = $identifier;
+        $this->loader     = $loader;
     }
 
     /**
-     * Configures dataset using options resolver
-     *
-     * @param DataSetOptionsResolver $resolver
+     * {@inheritdoc}
      */
-    abstract protected function configureOptions(DataSetOptionsResolver $resolver);
+    public function getIdentifier()
+    {
+        return $this->identifier;
+    }
 
     /**
      * {@inheritdoc}
      */
     public function getColumns()
     {
-        if (!$this->booted) {
-            $this->configure();
-        }
-
         return $this->columns;
-    }
-
-    /**
-     * Configures dataset
-     */
-    protected function configure()
-    {
-        $this->configureOptions($this->datasetOptionsResolver);
-        $this->datasetOptionsResolver->resolveColumns($this->columns);
-        $this->datasetOptionsResolver->resolveTransformers($this->transformers);
-        $this->queryBuilder->setColumns($this->columns);
-        $this->booted = true;
-        $this->dispatchEvent(DataSetInterface::EVENT_POST_CONFIGURE);
-    }
-
-    /**
-     * Dispatches the event using event dispatcher service
-     *
-     * @param $event
-     */
-    protected function dispatchEvent($event)
-    {
-        $eventName = sprintf('%s.%s', $this->identifier, $event);
-        $eventData = new DataSetEvent($this);
-        $this->getEventDispatcher()->dispatch($eventName, $eventData);
-    }
-
-    private function getEventDispatcher()
-    {
-        return $this->container->get('event_dispatcher');
     }
 
     /**
      * {@inheritdoc}
      */
-    public function processResults($rows)
+    public function setColumns(ColumnCollection $columns)
     {
-        $results = [];
-
-        foreach ($rows as $row) {
-            $results[] = $this->processRow($row);
-        }
-
-        return $results;
+        $this->columns = $columns;
     }
 
-    protected function processRow($row)
+    /**
+     * {@inheritdoc}
+     */
+    public function getTransformers()
     {
-        foreach ($row as $field => $value) {
-            if ($this->transformers->has($field)) {
-                $row[$field] = $this->transformers->get($field)->transform($value);
-            }
-        }
-
-        return $row;
+        return $this->transformers;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setTransformers(TransformerCollection $transformers)
+    {
+        $this->transformers = $transformers;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    abstract public function configureOptions(DataSetConfiguratorInterface $configurator);
 
     /**
      * {@inheritdoc}
      */
     public function getResults(DataSetRequest $request)
     {
-        if (!$this->booted) {
-            $this->configure();
-        }
-
-        $total = $this->queryBuilder->getTotalRows();
-        $this->queryBuilder->setOrderBy($request->getOrderBy(), $request->getOrderDir());
-        $this->queryBuilder->setPagination($request->getOffset(), $request->getLimit());
-        $this->queryBuilder->setConditions($request->getConditions());
-        $rows = $this->processResults($this->queryBuilder->getResult());
-
-        return [
-            'data_id'       => $request->getId(),
-            'rows_num'      => $total,
-            'starting_from' => $request->getOffset(),
-            'total'         => $total,
-            'filtered'      => count($rows),
-            'rows'          => $rows
-        ];
+        return $this->loader->getResults($this, $request);
     }
 }
