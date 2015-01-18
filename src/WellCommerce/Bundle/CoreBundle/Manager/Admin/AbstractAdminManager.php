@@ -16,7 +16,6 @@ use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
 use WellCommerce\Bundle\CoreBundle\Event\ResourceEvent;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
-use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
 
@@ -33,27 +32,28 @@ class AbstractAdminManager extends AbstractManager implements AdminManagerInterf
     private $datagrid;
 
     /**
-     * @var FormInterface
+     * @var FormBuilderInterface
      */
     private $formBuilder;
 
     /**
-     * @param DataGridInterface $datagrid
+     * {@inheritdoc}
      */
     public function setDataGrid(DataGridInterface $datagrid)
     {
         $this->datagrid = $datagrid;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getDataGrid()
     {
-        return $this->datagrid;
+        return $this->datagrid->getInstance();
     }
 
     /**
-     * Sets form builder
-     *
-     * @param FormBuilderInterface $formBuilder
+     * {@inheritdoc}
      */
     public function setFormBuilder(FormBuilderInterface $formBuilder)
     {
@@ -61,9 +61,7 @@ class AbstractAdminManager extends AbstractManager implements AdminManagerInterf
     }
 
     /**
-     * Returns form builder
-     *
-     * @return FormBuilderInterface
+     * {@inheritdoc}
      */
     public function getFormBuilder()
     {
@@ -71,12 +69,29 @@ class AbstractAdminManager extends AbstractManager implements AdminManagerInterf
     }
 
     /**
-     * Manager method used to create new resource
-     *
-     * @param object  $resource
-     * @param Request $request
-     *
-     * @return mixed|void
+     * {@inheritdoc}
+     */
+    public function getForm($resource, array $config = [])
+    {
+        $defaultConfig = [
+            'name' => $this->getRepository()->getAlias(),
+        ];
+
+        $config = array_merge($defaultConfig, $config);
+
+        return $this->formBuilder->createForm($config, $resource);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function initResource()
+    {
+        return $this->getRepository()->createNew();
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function createResource($resource, Request $request)
     {
@@ -87,39 +102,18 @@ class AbstractAdminManager extends AbstractManager implements AdminManagerInterf
     }
 
     /**
-     * Triggers event
-     *
-     * @param $resource
-     * @param $request
-     * @param $name
+     * {@inheritdoc}
      */
-    protected function dispatchEvent($resource, $request, $name)
+    public function updateResource($resource, Request $request)
     {
-        $reflection = new \ReflectionClass($resource);
-        $eventName  = $this->getEventName($reflection->getShortName(), $name);
-        $event      = new ResourceEvent($resource, $request);
-        $this->getEventDispatcher()->dispatch($eventName, $event);
+        $this->dispatchEvent($resource, $request, AdminManagerInterface::PRE_UPDATE_EVENT);
+        $this->saveResource($resource);
+        $this->getFlashHelper()->addSuccess('success');
+        $this->dispatchEvent($resource, $request, AdminManagerInterface::POST_UPDATE_EVENT);
     }
 
     /**
-     * Returns event name for resource
-     *
-     * @param $class
-     * @param $name
-     *
-     * @return string
-     */
-    protected function getEventName($class, $name)
-    {
-        return sprintf('%s.%s', Helper::snake($class), $name);
-    }
-
-    /**
-     * Persists given resource
-     *
-     * @param object $resource
-     *
-     * @return mixed
+     * {@inheritdoc}
      */
     protected function saveResource($resource)
     {
@@ -130,6 +124,9 @@ class AbstractAdminManager extends AbstractManager implements AdminManagerInterf
         return $resource;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function removeResource($resource)
     {
         $this->dispatchEvent($resource, null, AdminManagerInterface::PRE_REMOVE_EVENT);
@@ -140,18 +137,47 @@ class AbstractAdminManager extends AbstractManager implements AdminManagerInterf
     }
 
     /**
-     * Updates resource
+     * {@inheritdoc}
+     */
+    public function findResource(Request $request)
+    {
+        $this->getDoctrineHelper()->disableFilter('locale');
+
+        if (!$request->attributes->has('id')) {
+            throw new \LogicException('Request does not have "id" attribute set.');
+        }
+
+        $id       = $request->attributes->get('id');
+        $resource = $this->getRepository()->find($id);
+
+        return $resource;
+    }
+
+    /**
+     * Dispatches resource event
      *
      * @param object  $resource
      * @param Request $request
-     *
-     * @return void
+     * @param string  $name
      */
-    public function updateResource($resource, Request $request)
+    protected function dispatchEvent($resource, Request $request, $name)
     {
-        $this->dispatchEvent($resource, $request, AdminManagerInterface::PRE_UPDATE_EVENT);
-        $this->saveResource($resource);
-        $this->getFlashHelper()->addSuccess('success');
-        $this->dispatchEvent($resource, $request, AdminManagerInterface::POST_UPDATE_EVENT);
+        $reflection = new \ReflectionClass($resource);
+        $eventName  = $this->getEventName($reflection->getShortName(), $name);
+        $event      = new ResourceEvent($resource, $request);
+        $this->getEventDispatcher()->dispatch($eventName, $event);
+    }
+
+    /**
+     * Returns event name for particular resource
+     *
+     * @param string $class
+     * @param string $name
+     *
+     * @return string
+     */
+    protected function getEventName($class, $name)
+    {
+        return sprintf('%s.%s', Helper::snake($class), $name);
     }
 }

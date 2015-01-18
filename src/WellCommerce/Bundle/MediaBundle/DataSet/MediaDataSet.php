@@ -13,8 +13,9 @@
 namespace WellCommerce\Bundle\MediaBundle\DataSet;
 
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
-use WellCommerce\Bundle\CoreBundle\DataSet\DataSetInterface;
 use WellCommerce\Bundle\CoreBundle\DataSet\DataSetConfiguratorInterface;
+use WellCommerce\Bundle\CoreBundle\DataSet\DataSetInterface;
+use WellCommerce\Bundle\CoreBundle\Helper\Image\ImageHelperInterface;
 use WellCommerce\Bundle\MediaBundle\DataSet\Transformer\ImagePathTransformer;
 
 /**
@@ -24,6 +25,11 @@ use WellCommerce\Bundle\MediaBundle\DataSet\Transformer\ImagePathTransformer;
  */
 class MediaDataSet extends AbstractDataSet implements DataSetInterface
 {
+    /**
+     * @var ImageHelperInterface
+     */
+    protected $imageHelper;
+
     /**
      * {@inheritdoc}
      */
@@ -39,7 +45,17 @@ class MediaDataSet extends AbstractDataSet implements DataSetInterface
         ]);
 
         $configurator->setTransformers([
-            'preview' => new ImagePathTransformer($this->container->get('image_helper'), 'medium'),
+            'preview' => new ImagePathTransformer($this->imageHelper, 'medium'),
         ]);
+    }
+
+    /**
+     * Sets image helper
+     *
+     * @param ImageHelperInterface $imageHelper
+     */
+    public function setImageHelper(ImageHelperInterface $imageHelper)
+    {
+        $this->imageHelper = $imageHelper;
     }
 }

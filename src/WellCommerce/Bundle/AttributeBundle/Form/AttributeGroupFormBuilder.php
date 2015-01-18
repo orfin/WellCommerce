@@ -13,6 +13,7 @@ namespace WellCommerce\Bundle\AttributeBundle\Form;
 
 use WellCommerce\Bundle\AttributeBundle\Form\DataTransformer\AttributeCollectionToArrayTransformer;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\AbstractFormBuilder;
+use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\TranslationTransformer;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
 
 /**
@@ -34,8 +35,9 @@ class AttributeGroupFormBuilder extends AbstractFormBuilder
         ]));
 
         $languageData = $groupData->addChild($this->getElement('language_fieldset', [
-            'name'  => 'translations',
-            'label' => $this->trans('form.required_data.language_data.label')
+            'name'        => 'translations',
+            'label'       => $this->trans('form.required_data.language_data.label'),
+            'transformer' => new TranslationTransformer($this->get('category.repository'))
         ]));
 
         $languageData->addChild($this->getElement('text_field', [

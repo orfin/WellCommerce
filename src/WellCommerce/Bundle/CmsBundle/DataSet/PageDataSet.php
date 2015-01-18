@@ -31,7 +31,8 @@ class PageDataSet extends AbstractDataSet implements DataSetInterface
         $configurator->setColumns([
             'id'        => 'page.id',
             'parent'    => 'IDENTITY(page.parent)',
-            'children'  => 'COUNT(page_children.id)',
+//            'children'  => 'COUNT(page_children.id)',
+            'children'      => 'page_translation.name',
             'name'      => 'page_translation.name',
             'slug'      => 'page_translation.slug',
             'locale'    => 'page_translation.locale',

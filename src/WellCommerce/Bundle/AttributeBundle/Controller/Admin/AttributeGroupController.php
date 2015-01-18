@@ -51,7 +51,7 @@ class AttributeGroupController extends AbstractAdminController
     {
         $name     = $request->request->get('name');
         $locales  = $this->get('locale.repository')->findAll();
-        $resource = $this->getManager()->getRepository()->createNew();
+        $resource = $this->getManager()->initResource();
 
         foreach ($locales as $locale) {
             $resource->translate($locale->getCode())->setName($name);
@@ -72,8 +72,8 @@ class AttributeGroupController extends AbstractAdminController
     public function editAction(Request $request)
     {
         $groups   = $this->getManager()->getRepository()->findAll();
-        $resource = $this->findOr404($request);
-        $form     = $this->getForm($resource, [
+        $resource = $this->getManager()->findResource($request);
+        $form     = $this->getManager()->getForm($resource, [
             'class' => 'attributeGroupEditor'
         ]);
 

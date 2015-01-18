@@ -158,7 +158,7 @@ abstract class AbstractDataSetQueryBuilder
         $column     = $this->columns->get($condition->getIdentifier());
         $source     = $column->getSource();
         $operator   = $condition->getOperator();
-        $expression = $this->queryBuilder->expr()->{$operator}($source, ':'.$condition->getIdentifier());
+        $expression = $this->queryBuilder->expr()->{$operator}($source, ':' . $condition->getIdentifier());
 
         $this->queryBuilder->andWhere($expression);
         $this->queryBuilder->setParameter($condition->getIdentifier(), $condition->getValue());
@@ -169,7 +169,7 @@ abstract class AbstractDataSetQueryBuilder
      */
     public function getTotalRows()
     {
-        $paginator = new Paginator($this->getQuery(), false);
+        $paginator = new Paginator($this->getQuery(), true);
         $paginator->setUseOutputWalkers(false);
 
         return $paginator->count();
@@ -186,7 +186,8 @@ abstract class AbstractDataSetQueryBuilder
         $this->queryBuilder->addOrderBy(new Expr\OrderBy($this->orderBy, $this->orderDir));
 
         $query = $this->queryBuilder->getQuery();
-        $query->useResultCache(true, 3600, $this->getIdentifier());
+
+//        $query->useResultCache(true, 3600, $this->getIdentifier());
 
         return $query->getArrayResult();
     }

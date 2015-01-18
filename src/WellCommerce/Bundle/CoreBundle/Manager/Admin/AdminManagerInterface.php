@@ -13,6 +13,8 @@
 namespace WellCommerce\Bundle\CoreBundle\Manager\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
+use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
+use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
 
 /**
@@ -24,45 +26,79 @@ use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
 interface AdminManagerInterface extends ManagerInterface
 {
     /**
+     * Initializes new resource object
+     *
+     * @return object
+     */
+    public function initResource();
+
+    /**
      * Persists new resource
      *
-     * @param         $resource
+     * @param object  $resource
      * @param Request $request
-     *
-     * @return mixed
      */
     public function createResource($resource, Request $request);
 
     /**
      * Updates existing resource
      *
-     * @param         $resource
+     * @param object  $resource
      * @param Request $request
-     *
-     * @return mixed
      */
     public function updateResource($resource, Request $request);
 
     /**
      * Removes a resource
      *
-     * @param $resource
-     *
-     * @return mixed
+     * @param object $resource
      */
     public function removeResource($resource);
 
     /**
+     * Returns current resource or throws an exception
+     *
+     * @param Request $request
+     *
+     * @return mixed
+     */
+    public function findResource(Request $request);
+
+    /**
      * Returns datagrid object
      *
-     * @return \WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface
+     * @return DataGridInterface
      */
     public function getDataGrid();
 
     /**
+     * Sets datagrid object
+     *
+     * @param DataGridInterface $datagrid
+     */
+    public function setDataGrid(DataGridInterface $datagrid);
+
+    /**
      * Returns form object
      *
-     * @return \WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface
+     * @return FormBuilderInterface
      */
     public function getFormBuilder();
+
+    /**
+     * Sets form builder object
+     *
+     * @param FormBuilderInterface $formBuilder
+     */
+    public function setFormBuilder(FormBuilderInterface $formBuilder);
+
+    /**
+     * Returns form instance from builder
+     *
+     * @param object $resource
+     * @param array  $config
+     *
+     * @return \WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface
+     */
+    public function getForm($resource, array $config = []);
 }

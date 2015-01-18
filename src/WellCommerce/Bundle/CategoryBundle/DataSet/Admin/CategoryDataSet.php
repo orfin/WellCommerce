@@ -32,7 +32,7 @@ class CategoryDataSet extends AbstractDataSet implements DataSetInterface
             'id'        => 'category.id',
             'hierarchy' => 'category.hierarchy',
             'parent'    => 'IDENTITY(category.parent)',
-            'children'  => 'COUNT(category_products.id)',
+            'children'  => 'COUNT(category_children.id)',
             'products'  => 'COUNT(category_products.id)',
             'name'      => 'category_translation.name',
             'slug'      => 'category_translation.slug',

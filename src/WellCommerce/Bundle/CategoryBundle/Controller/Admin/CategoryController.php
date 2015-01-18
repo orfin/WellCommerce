@@ -31,7 +31,7 @@ class CategoryController extends AbstractAdminController
         if (count($categories)) {
             $category = current($categories);
 
-            return $this->getManager()->getRedirectHelper()->redirectToAction('edit', [
+            return $this->redirectToAction('edit', [
                 'id' => $category->getId()
             ]);
         }
@@ -54,19 +54,20 @@ class CategoryController extends AbstractAdminController
 
     public function editAction(Request $request)
     {
+        $manager  = $this->getManager();
         $tree     = $this->buildTreeForm();
-        $resource = $this->findOr404($request);
-        $form     = $this->getForm($resource);
+        $resource = $manager->findResource($request);
+        $form     = $manager->getForm($resource);
 
         if ($form->handleRequest()->isValid()) {
-            $this->getManager()->updateResource($resource, $request);
+            $manager->updateResource($resource, $request);
             if ($form->isAction('continue')) {
-                return $this->getManager()->getRedirectHelper()->redirectToAction('edit', [
+                return $this->redirectToAction('edit', [
                     'id' => $resource->getId()
                 ]);
             }
 
-            return $this->getManager()->getRedirectHelper()->redirectToAction('index');
+            return $this->redirectToAction('index');
         }
 
         return [

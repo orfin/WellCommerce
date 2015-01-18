@@ -45,6 +45,9 @@
         <service id="media.dataset" class="WellCommerce\Bundle\MediaBundle\DataSet\MediaDataSet">
             <argument key="identifier">media</argument>
             <argument type="service" id="media.dataset.loader"/>
+            <call method="setImageHelper">
+                <argument type="service" id="image_helper"/>
+            </call>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 

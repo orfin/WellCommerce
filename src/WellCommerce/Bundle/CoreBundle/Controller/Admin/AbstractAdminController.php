@@ -13,7 +13,6 @@ namespace WellCommerce\Bundle\CoreBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
 use WellCommerce\Bundle\CoreBundle\Manager\Admin\AdminManagerInterface;
 
@@ -49,7 +48,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
     public function indexAction()
     {
         return [
-            'datagrid' => $this->manager->getDataGrid()->getInstance()
+            'datagrid' => $this->manager->getDataGrid()
         ];
     }
 
@@ -62,7 +61,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
      */
     public function gridAction(Request $request)
     {
-        $datagrid = $this->manager->getDataGrid()->getInstance();
+        $datagrid = $this->manager->getDataGrid();
 
         try {
             $results = $datagrid->loadResults($request);
@@ -82,8 +81,8 @@ abstract class AbstractAdminController extends AbstractController implements Adm
      */
     public function addAction(Request $request)
     {
-        $resource = $this->manager->getRepository()->createNew();
-        $form     = $this->getForm($resource);
+        $resource = $this->manager->initResource();
+        $form     = $this->manager->getForm($resource);
 
         if ($form->handleRequest()->isValid()) {
             $this->manager->createResource($resource, $request);
@@ -109,8 +108,12 @@ abstract class AbstractAdminController extends AbstractController implements Adm
      */
     public function editAction(Request $request)
     {
-        $resource = $this->findOr404($request);
-        $form     = $this->getForm($resource);
+        $resource = $this->manager->findResource($request);
+        if (null === $resource) {
+            return $this->redirectToAction('index');
+        }
+
+        $form = $this->manager->getForm($resource);
 
         if ($form->handleRequest()->isValid()) {
             $this->manager->updateResource($resource, $request);
@@ -134,25 +137,6 @@ abstract class AbstractAdminController extends AbstractController implements Adm
     }
 
     /**
-     * Returns form instance from builder
-     *
-     * @param       $resource
-     * @param array $config
-     *
-     * @return \WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface
-     */
-    protected function getForm($resource, array $config = [])
-    {
-        $defaultConfig = [
-            'name' => $this->manager->getRepository()->getAlias(),
-        ];
-
-        $config = array_merge($defaultConfig, $config);
-
-        return $this->manager->getFormBuilder()->createForm($config, $resource);
-    }
-
-    /**
      * Default delete action
      *
      * @param $id
@@ -171,30 +155,6 @@ abstract class AbstractAdminController extends AbstractController implements Adm
         }
 
         return $this->jsonResponse(['success' => true]);
-    }
-
-    /**
-     * Returns current resource or throws an exception
-     *
-     * @param Request $request
-     *
-     * @return mixed
-     */
-    protected function findOr404(Request $request)
-    {
-        $this->manager->getDoctrineHelper()->disableFilter('locale');
-
-        if (!$request->attributes->has('id')) {
-            throw new \LogicException('Request does not have "id" attribute set.');
-        }
-
-        $id = $request->attributes->get('id');
-
-        if (null === $resource = $this->manager->getRepository()->find($id)) {
-            throw new NotFoundHttpException(sprintf('Resource not found'));
-        }
-
-        return $resource;
     }
 
     /**
