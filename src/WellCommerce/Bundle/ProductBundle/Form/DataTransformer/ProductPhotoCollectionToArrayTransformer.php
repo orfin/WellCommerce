@@ -49,6 +49,10 @@ class ProductPhotoCollectionToArrayTransformer extends BaseTransformer implement
             $photos->add($photo);
         }
 
+        if ($photos->count() == 0) {
+            $modelData->setPhoto(null);
+        }
+
         $modelData->setProductPhotos($photos);
     }
 
@@ -67,6 +71,11 @@ class ProductPhotoCollectionToArrayTransformer extends BaseTransformer implement
         $productPhoto = new ProductPhoto();
         $productPhoto->setPhoto($media);
         $productPhoto->setMainPhoto($mainPhoto);
+        $productPhoto->setProduct($modelData);
+
+        if ($mainPhoto) {
+            $modelData->setPhoto($media);
+        }
 
         return $productPhoto;
     }

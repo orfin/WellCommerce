@@ -28,7 +28,6 @@ use WellCommerce\Bundle\UnitBundle\Entity\Unit;
 /**
  * Class Product
  *
- * @package WellCommerce\Bundle\ProductBundle\Entity
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * @ORM\Table(name="product")
@@ -389,21 +388,10 @@ class Product
      */
     public function setProductPhotos(ArrayCollection $photos)
     {
-        foreach ($photos as $photo) {
-            $photo->setProduct($this);
-            if ($photo->getMainPhoto() == 1) {
-                $this->setPhoto($photo->getPhoto());
-            }
-        }
-
         foreach ($this->productPhotos as $oldPhoto) {
             if (!$photos->contains($oldPhoto)) {
                 $this->productPhotos->removeElement($oldPhoto);
             }
-        }
-
-        if ($photos->count() == 0) {
-            $this->setPhoto(null);
         }
 
         $this->productPhotos = $photos;
