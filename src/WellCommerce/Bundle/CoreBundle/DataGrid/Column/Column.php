@@ -20,7 +20,6 @@ use WellCommerce\Bundle\CoreBundle\DataGrid\Column\Options\Sorting;
 /**
  * Class Column
  *
- * @package WellCommerce\Bundle\CoreBundle\DataGrid\Column
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class Column implements ColumnInterface
@@ -42,11 +41,6 @@ class Column implements ColumnInterface
             'sorting',
             'appearance',
             'filter',
-        ]);
-
-        $resolver->setDefined([
-            'editable',
-            'selectable',
         ]);
 
         $resolver->setDefaults([
