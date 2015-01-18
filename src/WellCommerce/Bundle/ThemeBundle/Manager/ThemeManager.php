@@ -19,7 +19,6 @@ use WellCommerce\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 /**
  * Class ThemeManager
  *
- * @package WellCommerce\Bundle\ThemeBundle\Manager
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class ThemeManager implements ThemeManagerInterface
@@ -49,7 +48,7 @@ class ThemeManager implements ThemeManagerInterface
      */
     public function getThemeDirectory(Theme $theme)
     {
-        return $this->getThemesDirectory().DIRECTORY_SEPARATOR.$theme->getFolder();
+        return $this->getThemesDirectory() . DIRECTORY_SEPARATOR . $theme->getFolder();
     }
 
     /**
@@ -59,7 +58,7 @@ class ThemeManager implements ThemeManagerInterface
     {
         $kernelDir = $this->kernel->getRootDir();
 
-        return $kernelDir.'/../web/themes';
+        return $kernelDir . '/../web/themes';
     }
 
     /**
@@ -101,14 +100,13 @@ class ThemeManager implements ThemeManagerInterface
             throw new \RuntimeException('Template files have to be in Resources.');
         }
 
-        $bundles        = $this->kernel->getBundle($bundleName, false);
-        $files          = array();
+        $bundles = $this->kernel->getBundle($bundleName, false);
 
-        $parameters = array(
+        $parameters = [
             '%themes_path%'   => $this->getThemesDirectory(),
             '%current_theme%' => 'demo',
             '%template%'      => substr($path, strlen('Resources/views/')),
-        );
+        ];
 
         foreach ($bundles as $bundle) {
             $parameters = array_merge($parameters, [
@@ -124,14 +122,10 @@ class ThemeManager implements ThemeManagerInterface
                 }
             }
 
-            $file = $bundle->getPath().'/'.$path;
+            $file = $bundle->getPath() . '/' . $path;
             if (file_exists($file)) {
                 return $file;
             }
-        }
-
-        if (count($files) > 0) {
-            return current($files);
         }
 
         throw new \InvalidArgumentException(sprintf('Unable to find file "%s".', $name));
