@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\ProductBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroup;
 use WellCommerce\Bundle\AvailabilityBundle\Entity\Availability;
@@ -288,7 +289,7 @@ class Product
      */
     public function setStock($stock)
     {
-        $this->stock = (float) $stock;
+        $this->stock = (float)$stock;
     }
 
     /**
@@ -388,12 +389,7 @@ class Product
      */
     public function setProductPhotos(ArrayCollection $photos)
     {
-        foreach ($this->productPhotos as $oldPhoto) {
-            if (!$photos->contains($oldPhoto)) {
-                $this->productPhotos->removeElement($oldPhoto);
-            }
-        }
-
+        $this->synchronizeCollection($this->productPhotos, $photos);
         $this->productPhotos = $photos;
     }
 
@@ -654,16 +650,22 @@ class Product
      */
     public function setAttributes(ArrayCollection $attributes)
     {
-        foreach ($this->attributes as $attribute) {
-            if (!$attributes->contains($attribute)) {
-                $this->attributes->removeElement($attribute);
+        $this->synchronizeCollection($this->attributes, $attributes);
+        $this->attributes = $attributes;
+    }
+
+    /**
+     * Removes all elements from old collection which have not been passed in new collection
+     *
+     * @param PersistentCollection $oldEntities
+     * @param ArrayCollection      $newEntities
+     */
+    private function synchronizeCollection(PersistentCollection $oldEntities, ArrayCollection $newEntities)
+    {
+        foreach ($oldEntities as $oldEntity) {
+            if (!$newEntities->contains($oldEntity)) {
+                $oldEntities->removeElement($oldEntity);
             }
         }
-
-        foreach ($attributes as $attribute) {
-            $attribute->setProduct($this);
-        }
-
-        $this->attributes = $attributes;
     }
 }

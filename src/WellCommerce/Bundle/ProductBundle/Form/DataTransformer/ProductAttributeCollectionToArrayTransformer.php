@@ -16,6 +16,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\PersistentCollection;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
+use WellCommerce\Bundle\ProductBundle\Entity\Product;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute;
 
 /**
@@ -107,17 +108,58 @@ class ProductAttributeCollectionToArrayTransformer extends CollectionToArrayTran
      */
     public function reverseTransform($modelData, PropertyPathInterface $propertyPath, $values)
     {
+        $collection = $this->createAttributesCollection($modelData, $values);
+
+        $modelData->setAttributes($collection);
+    }
+
+    /**
+     * Creates attributes collection
+     *
+     * @param Product $product
+     * @param array   $values
+     *
+     * @return ArrayCollection
+     */
+    protected function createAttributesCollection(Product $product, $values)
+    {
         $collection = new ArrayCollection();
-        if (null === $modelData || empty($values)) {
-            return $collection;
-        }
+        $values     = $this->filterValues($values);
+
         foreach ($values as $id => $value) {
-            if (is_array($value)) {
-                $item = $this->getRepository()->findOrCreate($id, $value);
-                $collection->add($item);
-            }
+            $item = $this->createAttribute($id, $value);
+            $item->setProduct($product);
+            $collection->add($item);
         }
 
-        $this->propertyAccessor->setValue($entity, $propertyPath, $collection);
+        return $collection;
     }
+
+    /**
+     * Filters passed data and strips non-array values
+     *
+     * @param array $values
+     *
+     * @return array
+     */
+    private function filterValues($values)
+    {
+        return array_filter($values, function ($value) {
+            return is_array($value);
+        });
+    }
+
+    /**
+     * Creates an attribute
+     *
+     * @param int    $id
+     * @param string $value
+     *
+     * @return \WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute
+     */
+    protected function createAttribute($id, $value)
+    {
+        return $this->getRepository()->findOrCreate($id, $value);
+    }
+
 }
