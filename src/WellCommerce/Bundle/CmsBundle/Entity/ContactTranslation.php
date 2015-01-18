@@ -77,14 +77,10 @@ class ContactTranslation implements LocaleAwareInterface
      * Set name
      *
      * @param string $name
-     *
-     * @return ContactTranslation
      */
     public function setName($name)
     {
         $this->name = $name;
-
-        return $this;
     }
 
     /**
@@ -101,14 +97,10 @@ class ContactTranslation implements LocaleAwareInterface
      * Set email
      *
      * @param string $email
-     *
-     * @return ContactTranslation
      */
     public function setEmail($email)
     {
         $this->email = $email;
-
-        return $this;
     }
 
     /**
@@ -125,14 +117,10 @@ class ContactTranslation implements LocaleAwareInterface
      * Set phone
      *
      * @param string $phone
-     *
-     * @return ContactTranslation
      */
     public function setPhone($phone)
     {
         $this->phone = $phone;
-
-        return $this;
     }
 
     /**
@@ -149,13 +137,9 @@ class ContactTranslation implements LocaleAwareInterface
      * Set businessHours
      *
      * @param string $businessHours
-     *
-     * @return ContactTranslation
      */
     public function setBusinessHours($businessHours)
     {
         $this->businessHours = $businessHours;
-
-        return $this;
     }
 }

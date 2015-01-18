@@ -60,8 +60,6 @@ class ProducerTranslation implements RoutableSubjectInterface, LocaleAwareInterf
     protected $route;
 
     /**
-     * Get name.
-     *
      * @return string
      */
     public function getName()
@@ -70,22 +68,14 @@ class ProducerTranslation implements RoutableSubjectInterface, LocaleAwareInterf
     }
 
     /**
-     * Set name.
-     *
      * @param string $name
-     *
-     * @return ProducerTranslation
      */
     public function setName($name)
     {
         $this->name = $name;
-
-        return $this;
     }
 
     /**
-     * Get shortDescription
-     *
      * @return string
      */
     public function getShortDescription()
@@ -94,20 +84,14 @@ class ProducerTranslation implements RoutableSubjectInterface, LocaleAwareInterf
     }
 
     /**
-     * Set shortDescription
-     *
      * @param string $shortDescription
      */
     public function setShortDescription($shortDescription)
     {
         $this->shortDescription = $shortDescription;
-
-        return $this;
     }
 
     /**
-     * Get description
-     *
      * @return string
      */
     public function getDescription()
@@ -116,15 +100,11 @@ class ProducerTranslation implements RoutableSubjectInterface, LocaleAwareInterf
     }
 
     /**
-     * Set description
-     *
      * @param string $description
      */
     public function setDescription($description)
     {
         $this->description = $description;
-
-        return $this;
     }
 
     /**

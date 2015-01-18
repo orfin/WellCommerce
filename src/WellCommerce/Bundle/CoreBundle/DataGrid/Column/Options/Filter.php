@@ -38,12 +38,6 @@ class Filter extends AbstractOptions
             'options',
         ]);
 
-        $resolver->setDefined([
-            'filtered_column',
-            'source',
-            'load_children',
-        ]);
-
         $resolver->setDefaults([
             'type'            => self::FILTER_INPUT,
             'options'         => [],

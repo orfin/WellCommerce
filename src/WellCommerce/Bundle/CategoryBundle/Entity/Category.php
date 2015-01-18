@@ -159,8 +159,6 @@ class Category
     }
 
     /**
-     * Sets products in category
-     *
      * @param $products
      */
     public function setProducts($products)
@@ -168,6 +166,9 @@ class Category
         $this->products = $products;
     }
 
+    /**
+     * @param Product $product
+     */
     public function addProduct(Product $product)
     {
         $this->products[] = $product;
