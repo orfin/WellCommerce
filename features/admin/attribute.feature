@@ -9,4 +9,4 @@ Feature: Manage attributes
 
   Scenario: List availability groups
     Given I am on the index page
-    Then I should see "Edit attribute group"
+    Then I should see "Attribute groups"
