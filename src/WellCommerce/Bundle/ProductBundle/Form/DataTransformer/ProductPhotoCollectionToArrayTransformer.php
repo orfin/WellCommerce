@@ -40,20 +40,35 @@ class ProductPhotoCollectionToArrayTransformer extends BaseTransformer implement
             return false;
         }
 
-        $photos      = new ArrayCollection();
-        $identifiers = $this->getMediaIdentifiers($values);
-
-        foreach ($identifiers as $id) {
-            $media = $this->getMediaById($id);
-            $photo = $this->getProductPhoto($media, $modelData, $values);
-            $photos->add($photo);
-        }
+        $photos = $this->createPhotosCollection($modelData, $values);
 
         if ($photos->count() == 0) {
             $modelData->setPhoto(null);
         }
 
         $modelData->setProductPhotos($photos);
+    }
+
+    /**
+     * Returns new photos collection
+     *
+     * @param Product $product
+     * @param array   $values
+     *
+     * @return ArrayCollection
+     */
+    protected function createPhotosCollection(Product $product, $values)
+    {
+        $photos      = new ArrayCollection();
+        $identifiers = $this->getMediaIdentifiers($values);
+
+        foreach ($identifiers as $id) {
+            $media = $this->getMediaById($id);
+            $photo = $this->getProductPhoto($media, $product, $values);
+            $photos->add($photo);
+        }
+
+        return $photos;
     }
 
     /**
