@@ -27,12 +27,12 @@ class DataSetConfigurator implements DataSetConfiguratorInterface
     /**
      * @var DataSetInterface
      */
-    private $dataset;
+    protected $dataset;
 
     /**
      * @var EventDispatcherInterface
      */
-    private $eventDispatcher;
+    protected $eventDispatcher;
 
     /**
      * Constructor

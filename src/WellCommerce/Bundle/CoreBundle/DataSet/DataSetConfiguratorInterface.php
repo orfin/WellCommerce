@@ -12,9 +12,6 @@
 
 namespace WellCommerce\Bundle\CoreBundle\DataSet;
 
-use WellCommerce\Bundle\CoreBundle\DataSet\Column\ColumnCollection;
-use WellCommerce\Bundle\CoreBundle\DataSet\Transformer\TransformerCollection;
-
 /**
  * Class DataSetConfiguratorInterface
  *

@@ -187,7 +187,7 @@ abstract class AbstractDataSetQueryBuilder
 
         $query = $this->queryBuilder->getQuery();
 
-//        $query->useResultCache(true, 3600, $this->getIdentifier());
+        $query->useResultCache(true, 3600, $this->getIdentifier());
 
         return $query->getArrayResult();
     }

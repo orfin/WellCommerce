@@ -40,8 +40,8 @@ class Cart
         $this->products = $products;
     }
 
-    public function addItem($argument1)
+    public function addItem(CartItem $cartItem)
     {
-        // TODO: write logic here
+        $this->products->add($cartItem);
     }
 }
