@@ -141,9 +141,10 @@ class ThemeManager implements ThemeManagerInterface
      */
     protected function locateBundlesResource(array $bundles, array $parameters, $name)
     {
+        $themePaths    = [];
+        $resourcePaths = [];
+
         foreach ($bundles as $bundle) {
-            $themePaths    = [];
-            $resourcePaths = [];
             $this->locateThemePathForBundleResource($bundle, $parameters, $themePaths);
             $this->getDefaultBundleResourcePath($bundle, $name, $resourcePaths);
         }
@@ -156,6 +157,13 @@ class ThemeManager implements ThemeManagerInterface
         throw new \InvalidArgumentException(sprintf('Unable to find file "%s".', $name));
     }
 
+    /**
+     * Locates default bundle template in Resources/views folder
+     *
+     * @param BundleInterface $bundle
+     * @param string          $path
+     * @param array           $resourcePaths
+     */
     protected function getDefaultBundleResourcePath(BundleInterface $bundle, $path, &$resourcePaths)
     {
         $file = $bundle->getPath() . '/' . $path;
