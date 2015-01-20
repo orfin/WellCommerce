@@ -19,7 +19,6 @@ use Symfony\Component\Templating\TemplateReferenceInterface;
 /**
  * Class TemplateLocator
  *
- * @package WellCommerce\Bundle\ThemeBundle\Locator
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * Created on base of the LiipThemeBundle <https://github.com/liip/LiipThemeBundle>

@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\ThemeBundle\Manager;
 
+use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use WellCommerce\Bundle\ThemeBundle\Entity\Theme;
 use WellCommerce\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
@@ -82,19 +83,37 @@ class ThemeManager implements ThemeManagerInterface
     }
 
     /**
+     * Returns bundle name and path from bundle name
+     *
+     * @param string $name
+     *
+     * @return array
+     */
+    protected function getBundleNameAndPath($name)
+    {
+        $bundleName = substr($name, 1);
+        $path       = '';
+
+        if (false !== strpos($bundleName, '/')) {
+            list($bundleName, $path) = explode('/', $bundleName, 2);
+        }
+
+        return [
+            $bundleName,
+            $path
+        ];
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function locateTemplate($name)
     {
-        if (false !== strpos($name, '..')) {
+        if (!$this->isValidFilename($name)) {
             throw new \RuntimeException(sprintf('File name "%s" contains invalid characters (..).', $name));
         }
 
-        $bundleName = substr($name, 1);
-        $path       = '';
-        if (false !== strpos($bundleName, '/')) {
-            list($bundleName, $path) = explode('/', $bundleName, 2);
-        }
+        list($bundleName, $path) = $this->getBundleNameAndPath($name);
 
         if (0 !== strpos($path, 'Resources')) {
             throw new \RuntimeException('Template files have to be in Resources.');
@@ -108,48 +127,94 @@ class ThemeManager implements ThemeManagerInterface
             '%template%'      => substr($path, strlen('Resources/views/')),
         ];
 
+        return $this->locateBundlesResource($bundles, $parameters, $path);
+    }
+
+    /**
+     * Processes bundle structure and searches for valid file
+     *
+     * @param array  $bundles
+     * @param array  $parameters
+     * @param string $name
+     *
+     * @return string
+     */
+    protected function locateBundlesResource(array $bundles, array $parameters, $name)
+    {
         foreach ($bundles as $bundle) {
-            $parameters = array_merge($parameters, [
-                '%bundle_path%' => $bundle->getPath(),
-                '%bundle_name%' => $bundle->getName(),
-            ]);
+            $themePaths    = [];
+            $resourcePaths = [];
+            $this->locateThemePathForBundleResource($bundle, $parameters, $themePaths);
+            $this->getDefaultBundleResourcePath($bundle, $name, $resourcePaths);
+        }
 
-            $checkPaths = $this->getPathsForBundleResource($parameters);
-
-            foreach ($checkPaths as $checkPath) {
-                if (file_exists($checkPath)) {
-                    return $checkPath;
-                }
-            }
-
-            $file = $bundle->getPath() . '/' . $path;
-            if (file_exists($file)) {
-                return $file;
-            }
+        $paths = array_merge($themePaths, $resourcePaths);
+        if (count($paths)) {
+            return current($paths);
         }
 
         throw new \InvalidArgumentException(sprintf('Unable to find file "%s".', $name));
     }
 
-    protected function getPathsForBundleResource($parameters)
+    protected function getDefaultBundleResourcePath(BundleInterface $bundle, $path, &$resourcePaths)
     {
-        $paths        = [];
-        $pathPatterns = $this->getThemePathPatterns();
-
-        foreach ($pathPatterns as $pattern) {
-            $paths[] = strtr($pattern, $parameters);
+        $file = $bundle->getPath() . '/' . $path;
+        if ($this->isValidPath($file)) {
+            $resourcePaths[] = $file;
         }
+    }
 
-        return $paths;
+    /**
+     * Finds path for bundle theme if exists
+     *
+     * @param BundleInterface $bundle
+     * @param array           $parameters
+     */
+    protected function locateThemePathForBundleResource(BundleInterface $bundle, array $parameters, &$checkPaths)
+    {
+        $pathPattern = $this->getThemePathPattern();
+        $parameters  = array_merge($parameters, [
+            '%bundle_path%' => $bundle->getPath(),
+            '%bundle_name%' => $bundle->getName(),
+        ]);
+
+        $path = strtr($pathPattern, $parameters);
+
+        if ($this->isValidPath($path)) {
+            $checkPaths[] = $path;
+        }
+    }
+
+    /**
+     * Checks whether filename is valid
+     *
+     * @param string $path
+     *
+     * @return bool
+     */
+    protected function isValidPath($path)
+    {
+        return file_exists($path);
+    }
+
+    /**
+     * Validates filename
+     *
+     * @param string $name
+     *
+     * @return bool
+     */
+    protected function isValidFilename($name)
+    {
+        return (false === strpos($name, '..'));
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getThemePathPatterns()
+    public function getThemePathPattern()
     {
-        return [
-            '%themes_path%/%current_theme%/templates/%bundle_name%/%template%'
-        ];
+        return '%themes_path%/%current_theme%/templates/%bundle_name%/%template%';
+
     }
 }

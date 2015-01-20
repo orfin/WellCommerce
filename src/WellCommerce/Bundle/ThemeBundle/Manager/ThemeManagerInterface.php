@@ -43,7 +43,7 @@ interface ThemeManagerInterface
      *
      * @return array
      */
-    public function getThemePathPatterns();
+    public function getThemePathPattern();
 
     /**
      * Returns full path to theme directory
