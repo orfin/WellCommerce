@@ -17,7 +17,6 @@ use WellCommerce\Bundle\IntlBundle\Repository\LocaleRepositoryInterface;
 /**
  * Class LocaleProvider
  *
- * @package WellCommerce\Bundle\IntlBundle\LocaleProvider
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class LocaleProvider implements LocaleProviderInterface
@@ -30,8 +29,18 @@ class LocaleProvider implements LocaleProviderInterface
     /**
      * @var array
      */
-    protected $locales;
+    protected $locales = [];
 
+    /**
+     * @var bool
+     */
+    protected $loaded = false;
+
+    /**
+     * Constructor
+     *
+     * @param LocaleRepositoryInterface $repository
+     */
     public function __construct(LocaleRepositoryInterface $repository)
     {
         $this->repository = $repository;
@@ -50,8 +59,9 @@ class LocaleProvider implements LocaleProviderInterface
      */
     public function getAvailableLocales()
     {
-        if (null === $this->locales) {
+        if (!$this->loaded) {
             $this->locales = $this->repository->getAvailableLocales();
+            $this->loaded  = true;
         }
 
         return $this->locales;
