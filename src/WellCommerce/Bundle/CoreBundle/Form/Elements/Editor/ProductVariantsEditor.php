@@ -46,11 +46,6 @@ class ProductVariantsEditor extends AbstractField implements ElementInterface
             'get_attributes_route',
         ]);
 
-        $resolver->setDefined([
-            'photos',
-            'availability',
-        ]);
-
         $resolver->setDefaults([
             'set'                         => null,
             'allow_generate'              => true,
