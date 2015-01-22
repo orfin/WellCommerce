@@ -35,13 +35,10 @@ abstract class AbstractOptionedField extends AbstractField
             'options',
         ]);
 
-        $resolver->setDefined([
-            'suffix',
-            'prefix',
-        ]);
-
         $resolver->setDefaults([
             'options' => [],
+            'suffix'  => '',
+            'prefix'  => ''
         ]);
 
         $resolver->setAllowedTypes([
