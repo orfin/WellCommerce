@@ -25,7 +25,6 @@ use WellCommerce\Bundle\RoutingBundle\Repository\RouteRepositoryInterface;
 /**
  * Class RouteProvider
  *
- * @package WellCommerce\Bundle\RoutingBundle\Routing
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class RouteProvider implements RouteProviderInterface
@@ -100,7 +99,7 @@ class RouteProvider implements RouteProviderInterface
     /**
      * Returns route by its identifier
      *
-     * @param string $id
+     * @param string $identifier
      *
      * @return SymfonyRoute
      */
