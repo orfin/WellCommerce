@@ -18,7 +18,6 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 /**
  * Class Tax
  *
- * @package WellCommerce\Bundle\TaxBundle\Entity
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * @ORM\Table(name="tax")
@@ -31,7 +30,7 @@ class Tax
     use ORMBehaviors\Blameable\Blameable;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -40,16 +39,14 @@ class Tax
     private $id;
 
     /**
-     * @var string
+     * @var float
      *
      * @ORM\Column(name="value", type="decimal", precision=15, scale=4)
      */
     private $value;
 
     /**
-     * Get id.
-     *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -57,9 +54,7 @@ class Tax
     }
 
     /**
-     * Get value.
-     *
-     * @return string
+     * @return float
      */
     public function getValue()
     {
@@ -67,16 +62,10 @@ class Tax
     }
 
     /**
-     * Set value.
-     *
-     * @param string $discount
-     *
-     * @return Tax
+     * @param float $value
      */
     public function setValue($value)
     {
         $this->value = $value;
-
-        return $this;
     }
 }
