@@ -39,14 +39,6 @@ class File extends AbstractField implements ElementInterface
             'session_id',
         ]);
 
-        $resolver->setDefined([
-            'repeat_min',
-            'repeat_max',
-            'limit',
-            'file_types',
-            'file_types_description',
-        ]);
-
         $resolver->setDefaults([
             'repeat_min'             => 0,
             'repeat_max'             => ElementInterface::INFINITE,
