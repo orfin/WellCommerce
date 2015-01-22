@@ -17,7 +17,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * Class Mechanics
  *
- * @package WellCommerce\Bundle\CoreBundle\DataGrid\Configuration
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class Mechanics extends AbstractOption implements OptionInterface
@@ -32,23 +31,20 @@ class Mechanics extends AbstractOption implements OptionInterface
             'key',
         ]);
 
-        $resolver->setDefined([
-            'default_sorting',
-            'right_click_menu',
-            'auto_suggest_delay',
-            'auto_suggest_min_length',
-            'auto_suggest_suggestions',
-            'only_one_selected',
-            'no_column_modification',
-            'no_column_resizing',
-            'create_input',
-            'save_column_modification',
-            'persistent',
-        ]);
-
         $resolver->setDefaults([
-            'rows_per_page' => 50,
-            'key'           => 'id',
+            'rows_per_page'            => 50,
+            'key'                      => 'id',
+            'default_sorting'          => -9999,
+            'right_click_menu'         => false,
+            'auto_suggest_delay'       => 500,
+            'auto_suggest_min_length'  => 3,
+            'auto_suggest_suggestions' => 10,
+            'only_one_selected'        => false,
+            'no_column_modification'   => false,
+            'no_column_resizing'       => false,
+            'create_input'             => false,
+            'save_column_modification' => true,
+            'persistent'               => true,
         ]);
 
         $resolver->setAllowedTypes([
