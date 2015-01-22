@@ -17,7 +17,6 @@ use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
 /**
  * Class HomePageManager
  *
- * @package WellCommerce\Bundle\WebBundle\Manager\Front
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class HomePageManager extends AbstractFrontManager
