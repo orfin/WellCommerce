@@ -19,7 +19,6 @@ use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 /**
  * Class XmlLoader
  *
- * @package WellCommerce\Bundle\AdminBundle\MenuBuilder
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class XmlLoader
@@ -53,9 +52,21 @@ class XmlLoader
      */
     public function load($file)
     {
-        $path = $this->locator->locate($file);
+        $path = $this->locateFile($file);
         $xml  = $this->parseFile($path);
         $this->parseItems($xml);
+    }
+
+    /**
+     * Locates file and returns its path
+     *
+     * @param string $file
+     *
+     * @return string
+     */
+    private function locateFile($file)
+    {
+        return $this->locator->locate($file, null, true);
     }
 
     /**
