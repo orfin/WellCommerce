@@ -45,9 +45,11 @@ abstract class AbstractField extends AbstractContainer
             'transformer'  => null,
         ]);
 
-        $resolver->setNormalizer('property_path', function ($options) {
-            return new PropertyPath($options['name']);
-        });
+        $resolver->setNormalizers([
+            'property_path' => function ($options) {
+                return new PropertyPath($options['name']);
+            }
+        ]);
 
         $resolver->setAllowedTypes([
             'comment'      => 'string',
