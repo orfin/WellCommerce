@@ -17,7 +17,6 @@ use WellCommerce\Bundle\ThemeBundle\Entity\Theme;
 /**
  * Interface ThemeManagerInterface
  *
- * @package WellCommerce\Bundle\ThemeBundle\Manager
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface ThemeManagerInterface
@@ -41,7 +40,7 @@ interface ThemeManagerInterface
     /**
      * Returns path patterns to theme folder
      *
-     * @return array
+     * @return string
      */
     public function getThemePathPattern();
 
@@ -64,11 +63,9 @@ interface ThemeManagerInterface
     /**
      * Returns a full path for a given template
      *
-     * @param mixed  $name  The file name to locate
-     * @param string $path  The current path
-     * @param bool   $first Whether to return the first occurrence or an array of filenames
+     * @param string $name
      *
-     * @return string|array The full path to the file|An array of file paths
+     * @return string
      */
     public function locateTemplate($name);
 }
