@@ -12,8 +12,10 @@
 
 namespace WellCommerce\Bundle\ProductBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
+use WellCommerce\Bundle\AvailabilityBundle\Entity\Availability;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\HierarchyTrait;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\PhotoTrait;
 
@@ -30,19 +32,25 @@ class ProductAttribute
     use PhotoTrait;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\Product", inversedBy="attributes")
-     * @ORM\JoinColumn(name="product_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
-     */
-    protected $product;
-    /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
     /**
+     * @var Product
+     *
+     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\Product", inversedBy="attributes")
+     * @ORM\JoinColumn(name="product_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
+     */
+    protected $product;
+
+    /**
+     * @var ArrayCollection
+     *
      * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\AttributeBundle\Entity\AttributeValue", inversedBy="productAttributeValues")
      * @ORM\JoinTable(name="product_attribute_value",
      *      joinColumns={@ORM\JoinColumn(name="product_attribute_id", referencedColumnName="id", onDelete="CASCADE")},
@@ -52,14 +60,14 @@ class ProductAttribute
     private $attributeValues;
 
     /**
-     * @var string
+     * @var float
      *
      * @ORM\Column(name="sell_price", type="decimal", precision=15, scale=4)
      */
     private $sellPrice;
 
     /**
-     * @var string
+     * @var float
      *
      * @ORM\Column(name="weight", type="decimal", precision=15, scale=4)
      */
@@ -73,7 +81,7 @@ class ProductAttribute
     private $symbol;
 
     /**
-     * @var string
+     * @var float
      *
      * @ORM\Column(name="stock", type="decimal", precision=15, scale=4)
      */
@@ -87,7 +95,7 @@ class ProductAttribute
     private $modifierType;
 
     /**
-     * @var string
+     * @var float
      *
      * @ORM\Column(name="modifier_value", type="decimal", precision=15, scale=4)
      */
@@ -100,23 +108,7 @@ class ProductAttribute
     private $availability;
 
     /**
-     * @param mixed $attribute
-     */
-    public function setAttribute($attribute)
-    {
-        $this->attribute = $attribute;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAttribute()
-    {
-        return $this->attribute;
-    }
-
-    /**
-     * @return mixed
+     * @return ArrayCollection
      */
     public function getAttributeValues()
     {
@@ -124,15 +116,15 @@ class ProductAttribute
     }
 
     /**
-     * @param mixed $attributeValues
+     * @param ArrayCollection $attributeValues
      */
-    public function setAttributeValues($attributeValues)
+    public function setAttributeValues(ArrayCollection $attributeValues)
     {
         $this->attributeValues = $attributeValues;
     }
 
     /**
-     * @return mixed
+     * @return Availability|null
      */
     public function getAvailability()
     {
@@ -140,15 +132,15 @@ class ProductAttribute
     }
 
     /**
-     * @param mixed $availability
+     * @param Availability|null $availability
      */
-    public function setAvailability($availability)
+    public function setAvailability(Availability $availability = null)
     {
         $this->availability = $availability;
     }
 
     /**
-     * @return string
+     * @return float
      */
     public function getWeight()
     {
@@ -156,7 +148,7 @@ class ProductAttribute
     }
 
     /**
-     * @param string $weight
+     * @param float $weight
      */
     public function setWeight($weight)
     {
@@ -180,7 +172,7 @@ class ProductAttribute
     }
 
     /**
-     * @return string
+     * @return float
      */
     public function getStock()
     {
@@ -188,7 +180,7 @@ class ProductAttribute
     }
 
     /**
-     * @param string $stock
+     * @param float $stock
      */
     public function setStock($stock)
     {
@@ -196,7 +188,7 @@ class ProductAttribute
     }
 
     /**
-     * @return string
+     * @return float
      */
     public function getSellPrice()
     {
@@ -204,7 +196,7 @@ class ProductAttribute
     }
 
     /**
-     * @param string $sellPrice
+     * @param float $sellPrice
      */
     public function setSellPrice($sellPrice)
     {
@@ -212,7 +204,7 @@ class ProductAttribute
     }
 
     /**
-     * @return mixed
+     * @return Product
      */
     public function getProduct()
     {
@@ -220,9 +212,9 @@ class ProductAttribute
     }
 
     /**
-     * @param mixed $product
+     * @param Product $product
      */
-    public function setProduct($product)
+    public function setProduct(Product $product)
     {
         $this->product = $product;
     }
