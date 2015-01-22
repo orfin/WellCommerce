@@ -15,7 +15,6 @@ namespace WellCommerce\Bundle\CoreBundle\Collection;
 /**
  * Class AbstractCollection
  *
- * @package WellCommerce\Bundle\CoreBundle\Collection
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 abstract class AbstractCollection implements \Countable, \IteratorAggregate
@@ -58,7 +57,7 @@ abstract class AbstractCollection implements \Countable, \IteratorAggregate
      */
     public function has($key)
     {
-        return isset($this->items[$key]);
+        return array_key_exists($key, $this->items);
     }
 
     /**
@@ -80,7 +79,7 @@ abstract class AbstractCollection implements \Countable, \IteratorAggregate
      */
     public function remove($key)
     {
-        if (array_key_exists($key, $this->items)) {
+        if ($this->has($key)) {
             unset($this->items[$key]);
         }
     }
