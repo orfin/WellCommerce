@@ -30,14 +30,8 @@ class TemplateLocator extends BaseTemplateLocator
     protected $activeTheme;
 
     /**
-     * @param FileLocatorInterface $locator
-     * @param null                 $cacheDir
+     * @return FileLocatorInterface
      */
-    public function __construct(FileLocatorInterface $locator, $cacheDir = null)
-    {
-        parent::__construct($locator, $cacheDir);
-    }
-
     public function getLocator()
     {
         return $this->locator;
