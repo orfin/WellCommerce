@@ -17,9 +17,20 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 /**
  * Class ClientGroupRepository
  *
- * @package WellCommerce\Bundle\ClientBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class ClientRepository extends AbstractEntityRepository implements ClientGroupRepositoryInterface
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function getDataSetQueryBuilder()
+    {
+        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder->groupBy('client.id');
+        $queryBuilder->leftJoin('client.group', 'client_group');
+        $queryBuilder->leftJoin('client_group.translations', 'client_group_translation');
+
+        return $queryBuilder;
+    }
 }
