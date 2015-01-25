@@ -87,7 +87,7 @@ class Client
     protected $addresses;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\ClientBundle\Entity\ClientGroup")
+     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\ClientBundle\Entity\ClientGroup", inversedBy="clients")
      * @ORM\JoinColumn(name="client_group_id", referencedColumnName="id", onDelete="SET NULL")
      */
     protected $group;

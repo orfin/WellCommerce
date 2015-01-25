@@ -43,6 +43,11 @@ class ClientGroup
     private $discount;
 
     /**
+     * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\ClientBundle\Entity\Client", mappedBy="group")
+     */
+    private $clients;
+
+    /**
      * Get id.
      *
      * @return integer
@@ -70,5 +75,13 @@ class ClientGroup
     public function setDiscount($discount)
     {
         $this->discount = $discount;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getClients()
+    {
+        return $this->clients;
     }
 }

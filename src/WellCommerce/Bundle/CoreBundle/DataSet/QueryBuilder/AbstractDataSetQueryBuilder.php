@@ -103,7 +103,8 @@ abstract class AbstractDataSetQueryBuilder
      */
     public function setOrderBy($sort, $order)
     {
-        $this->orderBy  = $this->columns->get($sort)->getSource();
+        $column         = $this->columns->get($sort);
+        $this->orderBy  = ($column->isAggregated()) ? $column->getAlias() : $column->getSource();
         $this->orderDir = $this->normalizeOrderDir($order);
     }
 
@@ -144,8 +145,9 @@ abstract class AbstractDataSetQueryBuilder
     public function setConditions(ConditionsCollection $conditions = null)
     {
         if (null !== $conditions) {
+            $paramIteration = 0;
             foreach ($conditions->all() as $condition) {
-                $this->addConditionToQuery($condition);
+                $this->addConditionToQuery($condition, $paramIteration++);
             }
         }
     }
@@ -154,23 +156,25 @@ abstract class AbstractDataSetQueryBuilder
      * Adds conditions as where clauses to query
      *
      * @param ConditionInterface $condition
+     * @param int                $paramIteration
      */
-    private function addConditionToQuery(ConditionInterface $condition)
+    private function addConditionToQuery(ConditionInterface $condition, $paramIteration)
     {
-        $column   = $this->columns->get($condition->getIdentifier());
-        $source   = $column->getSource();
-        $alias    = $column->getAlias();
-        $operator = $condition->getOperator();
+        $column     = $this->columns->get($condition->getIdentifier());
+        $source     = $column->getSource();
+        $alias      = $column->getAlias();
+        $operator   = $condition->getOperator();
+        $identifier = sprintf('%s_%s', $condition->getIdentifier(), $paramIteration);
 
         if ($column->isAggregated()) {
-            $expression = $this->queryBuilder->expr()->{$operator}($alias, ':' . $condition->getIdentifier());
+            $expression = $this->queryBuilder->expr()->{$operator}($alias, ':' . $identifier);
             $this->queryBuilder->andHaving($expression);
         } else {
-            $expression = $this->queryBuilder->expr()->{$operator}($source, ':' . $condition->getIdentifier());
+            $expression = $this->queryBuilder->expr()->{$operator}($source, ':' . $identifier);
             $this->queryBuilder->andWhere($expression);
         }
 
-        $this->queryBuilder->setParameter($condition->getIdentifier(), $condition->getValue());
+        $this->queryBuilder->setParameter($identifier, $condition->getValue());
     }
 
     /**

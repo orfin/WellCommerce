@@ -13,8 +13,8 @@
 namespace WellCommerce\Bundle\ClientBundle\DataSet;
 
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
-use WellCommerce\Bundle\CoreBundle\DataSet\DataSetInterface;
 use WellCommerce\Bundle\CoreBundle\DataSet\DataSetConfiguratorInterface;
+use WellCommerce\Bundle\CoreBundle\DataSet\DataSetInterface;
 
 /**
  * Class ClientGroupDataSet
@@ -29,8 +29,9 @@ class ClientGroupDataSet extends AbstractDataSet implements DataSetInterface
     public function configureOptions(DataSetConfiguratorInterface $configurator)
     {
         $configurator->setColumns([
-            'id'   => 'client_group.id',
-            'name' => 'client_group_translation.name',
+            'id'           => 'client_group.id',
+            'name'         => 'client_group_translation.name',
+            'totalClients' => 'COUNT(client)',
         ]);
     }
 }
