@@ -293,6 +293,7 @@ class ProductFormBuilder extends AbstractFormBuilder
             'vat_values'         => $vatValues,
             'category_field'     => $categoriesField,
             'availability_field' => $availabilityField,
+            'availability'       => $availabilityField->getOption('options'),
             'transformer'        => new ProductAttributeCollectionToArrayTransformer($this->get('product_attribute.repository'))
         ]));
 
