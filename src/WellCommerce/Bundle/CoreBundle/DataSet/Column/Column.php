@@ -21,12 +21,41 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class Column extends AbstractColumn implements ColumnInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     protected function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired([
             'alias',
             'source',
+            'aggregated'
         ]);
+
+        $resolver->setDefaults([
+            'aggregated' => false
+        ]);
+
+        $resolver->setNormalizers([
+            'aggregated' => function ($options) {
+                return $this->isAggregateColumn($options['source']);
+            },
+        ]);
+    }
+
+    /**
+     * Checks whether column source is MySQL aggregate function
+     *
+     * @param string $source
+     *
+     * @return bool
+     */
+    protected function isAggregateColumn($source)
+    {
+        $aggregates = ['SUM', 'GROUP_CONCAT', 'MIN', 'MAX', 'AVG', 'COUNT'];
+        $regex      = '/(' . implode('|', $aggregates) . ')/i';
+
+        return (bool)(preg_match($regex, $source));
     }
 
     /**
@@ -51,5 +80,13 @@ class Column extends AbstractColumn implements ColumnInterface
     public function getRawSelect()
     {
         return sprintf('%s AS %s', $this->options['source'], $this->options['alias']);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isAggregated()
+    {
+        return $this->options['aggregated'];
     }
 }

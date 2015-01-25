@@ -33,4 +33,11 @@ interface ColumnInterface
      * @return string
      */
     public function getSource();
+
+    /**
+     * Returns true if column uses MySQL aggregate function. False otherwise.
+     *
+     * @return bool
+     */
+    public function isAggregated();
 }

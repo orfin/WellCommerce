@@ -22,6 +22,11 @@
         <option key="expose">true</option>
     </route>
 
+    <route id="admin.product.update" path="/update">
+        <default key="_controller">product.controller.admin:updateAction</default>
+        <option key="expose">true</option>
+    </route>
+
     <route id="admin.product.delete" path="/delete/{id}">
         <default key="_controller">product.controller.admin:deleteAction</default>
         <option key="expose">true</option>

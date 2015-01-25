@@ -160,7 +160,11 @@ abstract class AbstractDataSetQueryBuilder
         $operator   = $condition->getOperator();
         $expression = $this->queryBuilder->expr()->{$operator}($source, ':' . $condition->getIdentifier());
 
-        $this->queryBuilder->andWhere($expression);
+        if ($column->isAggregated()) {
+            $this->queryBuilder->andHaving($expression);
+        } else {
+            $this->queryBuilder->andWhere($expression);
+        }
         $this->queryBuilder->setParameter($condition->getIdentifier(), $condition->getValue());
     }
 

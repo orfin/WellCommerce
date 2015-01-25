@@ -12,16 +12,19 @@
 
 namespace WellCommerce\Bundle\ProductBundle\Controller\Admin;
 
+use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
  * Class ProductController
  *
- * @package WellCommerce\Bundle\ProductBundle\Controller
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class ProductController extends AbstractAdminController
 {
+    public function updateAction(Request $request)
+    {
+    }
 }

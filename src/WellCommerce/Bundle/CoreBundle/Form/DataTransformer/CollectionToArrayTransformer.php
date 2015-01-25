@@ -19,7 +19,6 @@ use Symfony\Component\PropertyAccess\PropertyPathInterface;
 /**
  * Class CollectionToArrayTransformer
  *
- * @package WellCommerce\Bundle\CoreBundle\Form\DataTransformer
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class CollectionToArrayTransformer extends AbstractDataTransformer implements DataTransformerInterface
@@ -58,6 +57,6 @@ class CollectionToArrayTransformer extends AbstractDataTransformer implements Da
             $collection->add($item);
         }
 
-        $this->propertyAccessor->setValue($entity, $propertyPath, $collection);
+        $this->propertyAccessor->setValue($modelData, $propertyPath, $collection);
     }
 }

@@ -13,8 +13,8 @@
 namespace WellCommerce\Bundle\ProductBundle\DataSet\Admin;
 
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
-use WellCommerce\Bundle\CoreBundle\DataSet\DataSetInterface;
 use WellCommerce\Bundle\CoreBundle\DataSet\DataSetConfiguratorInterface;
+use WellCommerce\Bundle\CoreBundle\DataSet\DataSetInterface;
 
 /**
  * Class ProductDataSet
@@ -35,6 +35,7 @@ class ProductDataSet extends AbstractDataSet implements DataSetInterface
             'weight'    => 'product.weight',
             'sellPrice' => 'product.sellPrice',
             'stock'     => 'product.stock',
+            'category'  => 'GROUP_CONCAT(categories_translation.name)',
         ]);
     }
 }

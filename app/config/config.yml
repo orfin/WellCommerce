@@ -50,6 +50,9 @@ doctrine:
         entity_managers:
             default:
                 auto_mapping: true
+                dql:
+                    string_functions:
+                        GROUP_CONCAT: WellCommerce\Bundle\CoreBundle\Doctrine\MySQL\GroupConcat
                 filters:
                     locale:
                         class:   WellCommerce\Bundle\IntlBundle\ORM\Filter\LocaleFilter
