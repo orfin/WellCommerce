@@ -13,8 +13,8 @@ namespace WellCommerce\Bundle\AdminBundle\Controller;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use WellCommerce\Bundle\AdminBundle\Manager\AdminManagerInterface;
 use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
-use WellCommerce\Bundle\CoreBundle\Manager\Admin\AdminManagerInterface;
 
 /**
  * Class AbstractAdminController

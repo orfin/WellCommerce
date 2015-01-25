@@ -17,7 +17,6 @@ use WellCommerce\Bundle\AdminBundle\Manager\AbstractAdminManager;
 /**
  * Class ProductManager
  *
- * @package WellCommerce\Bundle\ProductBundle\Manager\Admin
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class ProductManager extends AbstractAdminManager
