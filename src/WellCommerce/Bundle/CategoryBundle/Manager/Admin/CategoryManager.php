@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\Manager\Admin;
 
-use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
+use WellCommerce\Bundle\AdminBundle\Manager\AbstractAdminManager;
 
 /**
  * Class CategoryManager

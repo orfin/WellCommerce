@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\AvailabilityBundle\Manager\Admin;
 
-use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
+use WellCommerce\Bundle\AdminBundle\Manager\AbstractAdminManager;
 
 /**
  * Class AvailabilityManager

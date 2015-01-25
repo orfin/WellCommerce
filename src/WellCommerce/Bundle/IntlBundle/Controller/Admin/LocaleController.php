@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\IntlBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
-use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
+use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
 
 /**
  * Class LocaleController

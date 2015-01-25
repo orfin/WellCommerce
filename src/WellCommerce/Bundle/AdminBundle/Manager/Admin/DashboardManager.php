@@ -12,12 +12,11 @@
 
 namespace WellCommerce\Bundle\AdminBundle\Manager\Admin;
 
-use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
+use WellCommerce\Bundle\AdminBundle\Manager\AbstractAdminManager;
 
 /**
  * Class DashboardManager
  *
- * @package WellCommerce\Bundle\AdminBundle\Manager\Admin
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class DashboardManager extends AbstractAdminManager
