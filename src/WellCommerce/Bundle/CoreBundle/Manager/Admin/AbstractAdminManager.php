@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\CoreBundle\Manager\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
-use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
+use WellCommerce\Bundle\DataGridBundle\DataGridInterface;
 use WellCommerce\Bundle\CoreBundle\Event\ResourceEvent;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Helper;

@@ -11,14 +11,14 @@
  */
 namespace WellCommerce\Bundle\ProductBundle\DataGrid;
 
-use WellCommerce\Bundle\CoreBundle\DataGrid\AbstractDataGrid;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Column\Column;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnCollection;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Column\Options\Appearance;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Column\Options\Filter;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\EventHandler\UpdateRowEventHandler;
-use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Options\OptionsInterface;
+use WellCommerce\Bundle\DataGridBundle\AbstractDataGrid;
+use WellCommerce\Bundle\DataGridBundle\Column\Column;
+use WellCommerce\Bundle\DataGridBundle\Column\ColumnCollection;
+use WellCommerce\Bundle\DataGridBundle\Column\Options\Appearance;
+use WellCommerce\Bundle\DataGridBundle\Column\Options\Filter;
+use WellCommerce\Bundle\DataGridBundle\Configuration\EventHandler\UpdateRowEventHandler;
+use WellCommerce\Bundle\DataGridBundle\DataGridInterface;
+use WellCommerce\Bundle\DataGridBundle\Options\OptionsInterface;
 
 /**
  * Class ProductDataGrid

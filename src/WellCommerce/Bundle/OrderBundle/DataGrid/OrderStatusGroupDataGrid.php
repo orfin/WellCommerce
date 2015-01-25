@@ -11,14 +11,14 @@
  */
 namespace WellCommerce\Bundle\OrderBundle\DataGrid;
 
-use WellCommerce\Bundle\CoreBundle\DataGrid\AbstractDataGrid;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Column\Column;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnCollection;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnInterface;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Column\Options\Appearance;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Column\Options\Filter;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Column\Options\Sorting;
-use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
+use WellCommerce\Bundle\DataGridBundle\AbstractDataGrid;
+use WellCommerce\Bundle\DataGridBundle\Column\Column;
+use WellCommerce\Bundle\DataGridBundle\Column\ColumnCollection;
+use WellCommerce\Bundle\DataGridBundle\Column\ColumnInterface;
+use WellCommerce\Bundle\DataGridBundle\Column\Options\Appearance;
+use WellCommerce\Bundle\DataGridBundle\Column\Options\Filter;
+use WellCommerce\Bundle\DataGridBundle\Column\Options\Sorting;
+use WellCommerce\Bundle\DataGridBundle\DataGridInterface;
 
 /**
  * Class OrderStatusGroupDataGrid
