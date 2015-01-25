@@ -50,6 +50,11 @@ class Theme
     private $folder;
 
     /**
+     * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\ThemeBundle\Entity\ThemeCss", mappedBy="theme")
+     */
+    private $css;
+
+    /**
      * Returns theme identifier
      *
      * @return int
@@ -97,5 +102,21 @@ class Theme
     public function setFolder($folder)
     {
         $this->folder = $folder;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCss()
+    {
+        return $this->css;
+    }
+
+    /**
+     * @param mixed $css
+     */
+    public function setCss($css)
+    {
+        $this->css = $css;
     }
 }
