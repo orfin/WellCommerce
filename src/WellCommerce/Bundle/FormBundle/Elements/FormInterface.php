@@ -1,0 +1,70 @@
+<?php
+/*
+ * WellCommerce Open-Source E-Commerce Platform
+ *
+ * This file is part of the WellCommerce package.
+ *
+ * (c) Adam Piotrowski <adam@wellcommerce.org>
+ *
+ * For the full copyright and license information,
+ * please view the LICENSE file that was distributed with this source code.
+ */
+
+namespace WellCommerce\Bundle\FormBundle\Elements;
+
+use WellCommerce\Bundle\FormBundle\Handler\FormHandlerInterface;
+
+/**
+ * Interface FormInterface
+ *
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
+ */
+interface FormInterface extends ElementInterface
+{
+    const TABS_VERTICAL   = 0;
+    const TABS_HORIZONTAL = 1;
+    const FORM_METHOD     = 'POST';
+    const FORM_INIT_EVENT = 'form.init';
+
+    /**
+     * @param FormHandlerInterface $formHandler
+     */
+    public function setFormHandler(FormHandlerInterface $formHandler);
+
+    /**
+     * Sets model data
+     *
+     * @param object $modelData
+     */
+    public function setModelData($modelData);
+
+    /**
+     * Returns model object bound to form
+     *
+     * @return object
+     */
+    public function getModelData();
+
+    /**
+     * Handles form submission
+     *
+     * @return FormInterface
+     */
+    public function handleRequest();
+
+    /**
+     * Checks whether form data is valid
+     *
+     * @return bool
+     */
+    public function isValid();
+
+    /**
+     * Checks whether particular form action has been used
+     *
+     * @param $actionName
+     *
+     * @return bool
+     */
+    public function isAction($actionName);
+}
