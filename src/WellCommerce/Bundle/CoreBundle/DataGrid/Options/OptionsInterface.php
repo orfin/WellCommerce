@@ -98,36 +98,4 @@ interface OptionsInterface
      * @return EventHandlers
      */
     public function getEventHandlers();
-
-    /**
-     * Sets row actions for DataGrid
-     *
-     * @param RowActions $rowActions
-     *
-     * @return void
-     */
-    public function setRowActions(RowActions $rowActions);
-
-    /**
-     * Returns row actions for DataGrid
-     *
-     * @return RowActions
-     */
-    public function getRowActions();
-
-    /**
-     * Sets filters as DataGrid options
-     *
-     * @param Filters $filters
-     *
-     * @return void
-     */
-    public function setFilters(Filters $filters);
-
-    /**
-     * Returns DataGrid filters
-     *
-     * @return Filters
-     */
-    public function getFilters();
 }

@@ -52,24 +52,18 @@ class Options implements OptionsInterface
             'appearance',
             'mechanics',
             'event_handlers',
-            'row_actions',
-            'filters',
         ]);
 
         $resolver->setDefaults([
             'appearance'     => new Appearance(),
             'mechanics'      => new Mechanics(),
             'event_handlers' => new EventHandlers(),
-            'row_actions'    => new RowActions(),
-            'filters'        => new Filters(),
         ]);
 
         $resolver->setAllowedTypes([
             'appearance'     => 'WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\Appearance',
             'mechanics'      => 'WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\Mechanics',
             'event_handlers' => 'WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\EventHandlers',
-            'row_actions'    => 'WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\RowActions',
-            'filters'        => 'WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\Filters',
         ]);
     }
 
@@ -135,37 +129,5 @@ class Options implements OptionsInterface
     public function getEventHandlers()
     {
         return $this->options['event_handlers'];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setRowActions(RowActions $rowActions)
-    {
-        $this->options['row_actions'] = $rowActions;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getRowActions()
-    {
-        return $this->options['row_actions'];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setFilters(Filters $filters)
-    {
-        $this->options['filters'] = $filters;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getFilters()
-    {
-        return $this->options['filters'];
     }
 }

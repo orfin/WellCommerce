@@ -6,7 +6,7 @@
     {% endautoescape %}
 {% endmacro %}
 
-{% macro datagrid_column(id, options, filters) %}
+{% macro datagrid_column(id, options) %}
 
     var column_{{ id }} = new GF_Datagrid_Column({
         id: '{{ id }}',

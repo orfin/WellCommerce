@@ -31,16 +31,13 @@ class Appearance extends AbstractOption implements OptionInterface
             'column_options',
         ]);
 
-        $resolver->setOptional([
-            'header',
-            'filter',
-            'footer',
-            'max_height',
-        ]);
-
         $resolver->setDefaults([
             'column_select'  => false,
             'column_options' => true,
+            'header'         => true,
+            'filter'         => true,
+            'footer'         => true,
+            'max_height'     => 0,
         ]);
 
         $resolver->setAllowedTypes([

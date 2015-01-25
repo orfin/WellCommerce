@@ -17,11 +17,13 @@ use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\EventHandler\EventHand
 /**
  * Class EventHandlers
  *
- * @package WellCommerce\Bundle\CoreBundle\DataGrid\Configuration
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class EventHandlers implements \IteratorAggregate, \Countable
 {
+    /**
+     * @var array
+     */
     private $eventHandlers;
 
     /**
