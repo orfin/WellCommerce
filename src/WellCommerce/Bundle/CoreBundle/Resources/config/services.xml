@@ -7,26 +7,12 @@
     <imports>
         <import resource="services/helpers.xml"/>
         <import resource="services/twig.xml"/>
-        <import resource="services/datagrid.xml"/>
         <import resource="services/form.xml"/>
     </imports>
-
-    <parameters>
-        <parameter key="dataset.loader.class">WellCommerce\Bundle\CoreBundle\DataSet\Loader\DataSetLoader</parameter>
-    </parameters>
-
     <services>
         <service id="doctrine.orm.timestampable.subscriber" class="WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\Timestampable\TimestampableSubscriber">
             <tag name="doctrine.event_subscriber" />
         </service>
-
-        <service id="dataset.collection_builder.factory" class="WellCommerce\Bundle\CoreBundle\DataSet\CollectionBuilder\CollectionBuilderFactory"/>
-
-        <service id="dataset.configurator" class="WellCommerce\Bundle\CoreBundle\DataSet\DataSetConfigurator">
-            <argument type="service" id="event_dispatcher"/>
-        </service>
-
-        <service id="dataset.processor" class="WellCommerce\Bundle\CoreBundle\DataSet\Processor\DataSetProcessor" />
 
         <service id="resource.provider.collection" class="WellCommerce\Bundle\CoreBundle\Provider\ProviderCollection"/>
     </services>

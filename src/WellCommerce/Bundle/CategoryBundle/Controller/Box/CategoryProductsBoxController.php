@@ -14,9 +14,9 @@ namespace WellCommerce\Bundle\CategoryBundle\Controller\Box;
 
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
-use WellCommerce\Bundle\CoreBundle\DataSet\Conditions\Condition;
-use WellCommerce\Bundle\CoreBundle\DataSet\Conditions\ConditionsCollection;
-use WellCommerce\Bundle\CoreBundle\DataSet\Request\DataSetRequest;
+use WellCommerce\Bundle\DataSetBundle\Conditions\Condition;
+use WellCommerce\Bundle\DataSetBundle\Conditions\ConditionsCollection;
+use WellCommerce\Bundle\DataSetBundle\Request\DataSetRequest;
 
 /**
  * Class CategoryProductsBoxController

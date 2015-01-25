@@ -15,7 +15,7 @@ namespace WellCommerce\Bundle\DataGridBundle;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\DataGridBundle\Column\ColumnCollection;
 use WellCommerce\Bundle\DataGridBundle\Options\OptionsInterface;
-use WellCommerce\Bundle\CoreBundle\DataSet\Request\DataSetRequestInterface;
+use WellCommerce\Bundle\DataSetBundle\Request\DataSetRequestInterface;
 
 /**
  * Interface DataGridInterface

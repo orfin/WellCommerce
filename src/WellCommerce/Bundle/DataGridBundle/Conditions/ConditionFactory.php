@@ -12,12 +12,12 @@
 
 namespace WellCommerce\Bundle\DataGridBundle\Conditions;
 
-use WellCommerce\Bundle\CoreBundle\DataSet\Conditions\Condition\Eq;
-use WellCommerce\Bundle\CoreBundle\DataSet\Conditions\Condition\Gte;
-use WellCommerce\Bundle\CoreBundle\DataSet\Conditions\Condition\In;
-use WellCommerce\Bundle\CoreBundle\DataSet\Conditions\Condition\Like;
-use WellCommerce\Bundle\CoreBundle\DataSet\Conditions\Condition\Lte;
-use WellCommerce\Bundle\CoreBundle\DataSet\Conditions\Condition\Neq;
+use WellCommerce\Bundle\DataSetBundle\Conditions\Condition\Eq;
+use WellCommerce\Bundle\DataSetBundle\Conditions\Condition\Gte;
+use WellCommerce\Bundle\DataSetBundle\Conditions\Condition\In;
+use WellCommerce\Bundle\DataSetBundle\Conditions\Condition\Like;
+use WellCommerce\Bundle\DataSetBundle\Conditions\Condition\Lte;
+use WellCommerce\Bundle\DataSetBundle\Conditions\Condition\Neq;
 
 /**
  * Class ConditionFactory
@@ -53,7 +53,7 @@ class ConditionFactory
      *
      * @param $operator
      *
-     * @return \WellCommerce\Bundle\CoreBundle\DataSet\Conditions\ConditionInterface
+     * @return \WellCommerce\Bundle\DataSetBundle\Conditions\ConditionInterface
      */
     public function createCondition($operator)
     {

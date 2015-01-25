@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\RoutingBundle\DataSet;
 
-use WellCommerce\Bundle\CoreBundle\DataSet\QueryBuilder\AbstractDataSetQueryBuilder;
-use WellCommerce\Bundle\CoreBundle\DataSet\QueryBuilder\QueryBuilderInterface;
+use WellCommerce\Bundle\DataSetBundle\QueryBuilder\AbstractDataSetQueryBuilder;
+use WellCommerce\Bundle\DataSetBundle\QueryBuilder\QueryBuilderInterface;
 
 /**
  * Class RoutingDataSetQueryBuilder

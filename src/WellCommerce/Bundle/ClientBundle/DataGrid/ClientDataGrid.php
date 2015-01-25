@@ -17,7 +17,7 @@ use WellCommerce\Bundle\DataGridBundle\Column\ColumnCollection;
 use WellCommerce\Bundle\DataGridBundle\Column\Options\Appearance;
 use WellCommerce\Bundle\DataGridBundle\Column\Options\Filter;
 use WellCommerce\Bundle\DataGridBundle\DataGridInterface;
-use WellCommerce\Bundle\CoreBundle\DataSet\CollectionBuilder\SelectBuilder;
+use WellCommerce\Bundle\DataSetBundle\CollectionBuilder\SelectBuilder;
 
 /**
  * Class ClientDataGrid

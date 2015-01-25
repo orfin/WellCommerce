@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\MediaBundle\DataSet\Transformer;
 
-use WellCommerce\Bundle\CoreBundle\DataSet\Transformer\TransformerInterface;
+use WellCommerce\Bundle\DataSetBundle\Transformer\TransformerInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Image\ImageHelperInterface;
 
 class ImagePathTransformer implements TransformerInterface

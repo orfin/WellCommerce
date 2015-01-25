@@ -7,8 +7,8 @@ use Prophecy\Argument;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use WellCommerce\Bundle\CoreBundle\DataSet\DataSetConfigurator;
-use WellCommerce\Bundle\CoreBundle\DataSet\Loader\DataSetLoader;
+use WellCommerce\Bundle\DataSetBundle\DataSetConfigurator;
+use WellCommerce\Bundle\DataSetBundle\Loader\DataSetLoader;
 
 /**
  * Class AvailabilityDataSetSpec

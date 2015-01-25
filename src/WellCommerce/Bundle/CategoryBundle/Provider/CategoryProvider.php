@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\CategoryBundle\Provider;
 
 use WellCommerce\Bundle\CategoryBundle\Entity\Category;
-use WellCommerce\Bundle\CoreBundle\DataSet\CollectionBuilder\CollectionBuilderFactoryInterface;
+use WellCommerce\Bundle\DataSetBundle\CollectionBuilder\CollectionBuilderFactoryInterface;
 
 /**
  * Class CategoryProvider

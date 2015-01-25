@@ -13,8 +13,8 @@
 namespace WellCommerce\Bundle\ProductBundle\DataSet\Front;
 
 use Doctrine\ORM\QueryBuilder;
-use WellCommerce\Bundle\CoreBundle\DataSet\QueryBuilder\AbstractDataSetQueryBuilder;
-use WellCommerce\Bundle\CoreBundle\DataSet\QueryBuilder\QueryBuilderInterface;
+use WellCommerce\Bundle\DataSetBundle\QueryBuilder\AbstractDataSetQueryBuilder;
+use WellCommerce\Bundle\DataSetBundle\QueryBuilder\QueryBuilderInterface;
 
 /**
  * Class ProductDataSetQueryBuilder

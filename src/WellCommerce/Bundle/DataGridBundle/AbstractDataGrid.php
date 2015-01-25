@@ -21,8 +21,8 @@ use WellCommerce\Bundle\DataGridBundle\Configuration\EventHandler\EditRowEventHa
 use WellCommerce\Bundle\DataGridBundle\Configuration\EventHandler\LoadEventHandler;
 use WellCommerce\Bundle\DataGridBundle\Options\Options;
 use WellCommerce\Bundle\DataGridBundle\Options\OptionsInterface;
-use WellCommerce\Bundle\CoreBundle\DataSet\DataSetInterface;
-use WellCommerce\Bundle\CoreBundle\DataSet\Request\DataSetRequest;
+use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
+use WellCommerce\Bundle\DataSetBundle\Request\DataSetRequest;
 use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 
 /**

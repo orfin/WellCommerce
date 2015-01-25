@@ -12,9 +12,9 @@
 
 namespace WellCommerce\Bundle\UserBundle\DataSet;
 
-use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
-use WellCommerce\Bundle\CoreBundle\DataSet\DataSetInterface;
-use WellCommerce\Bundle\CoreBundle\DataSet\DataSetConfiguratorInterface;
+use WellCommerce\Bundle\DataSetBundle\AbstractDataSet;
+use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
+use WellCommerce\Bundle\DataSetBundle\DataSetConfiguratorInterface;
 
 /**
  * Class UserDataSet

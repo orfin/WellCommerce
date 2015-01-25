@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Bundle\CmsBundle\Twig\Extension;
 
-use WellCommerce\Bundle\CoreBundle\DataSet\CollectionBuilder\CollectionBuilderFactoryInterface;
+use WellCommerce\Bundle\DataSetBundle\CollectionBuilder\CollectionBuilderFactoryInterface;
 
 /**
  * Class PageExtension

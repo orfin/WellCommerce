@@ -41,6 +41,7 @@ class AppKernel extends Kernel
             // WellCommerce bundles
             new WellCommerce\Bundle\CoreBundle\WellCommerceCoreBundle(),
             new WellCommerce\Bundle\DataGridBundle\WellCommerceDataGridBundle(),
+            new WellCommerce\Bundle\DataSetBundle\WellCommerceDataSetBundle(),
             new WellCommerce\Bundle\RoutingBundle\WellCommerceRoutingBundle(),
             new WellCommerce\Bundle\AdminBundle\WellCommerceAdminBundle(),
             new WellCommerce\Bundle\IntlBundle\WellCommerceIntlBundle(),

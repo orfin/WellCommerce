@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Bundle\OrderBundle\Form;
 
-use WellCommerce\Bundle\CoreBundle\DataSet\CollectionBuilder\SelectBuilder;
+use WellCommerce\Bundle\DataSetBundle\CollectionBuilder\SelectBuilder;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\AbstractFormBuilder;
 use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\EntityToIdentifierTransformer;
