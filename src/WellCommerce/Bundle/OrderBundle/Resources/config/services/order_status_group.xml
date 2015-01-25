@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="order_status_group.manager.admin" class="WellCommerce\Bundle\OrderBundle\Manager\Admin\OrderStatusGroupManager">
+            <argument type="service" id="flash_helper"/>
+            <argument type="service" id="redirect_helper"/>
+            <argument type="service" id="image_helper"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="doctrine_helper"/>
+            <argument type="service" id="translator"/>
+            <call method="setRepository">
+                <argument type="service" id="order_status_group.repository"/>
+            </call>
+            <call method="setFormBuilder">
+                <argument type="service" id="order_status_group.form_builder"/>
+            </call>
+            <call method="setDataGrid">
+                <argument type="service" id="order_status_group.datagrid"/>
+            </call>
+        </service>
+
+        <service id="order_status_group.controller.admin" class="WellCommerce\Bundle\OrderBundle\Controller\Admin\OrderStatusGroupController">
+            <argument type="service" id="order_status_group.manager.admin"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="order_status_group.repository" class="WellCommerce\Bundle\OrderBundle\Repository\OrderStatusGroupRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceOrderBundle:OrderStatusGroup</argument>
+        </service>
+
+        <service id="order_status_group.dataset.query_builder" class="WellCommerce\Bundle\OrderBundle\DataSet\OrderStatusGroupDataSetQueryBuilder" public="false">
+            <argument type="service" id="order_status_group.repository"/>
+        </service>
+
+        <service id="order_status_group.dataset.loader" class="%dataset.loader.class%">
+            <argument type="service" id="order_status_group.dataset.query_builder"/>
+            <argument type="service" id="dataset.processor"/>
+        </service>
+
+        <service id="order_status_group.dataset" class="WellCommerce\Bundle\OrderBundle\DataSet\OrderStatusGroupDataSet">
+            <argument key="identifier">order_status_group</argument>
+            <argument type="service" id="order_status_group.dataset.loader"/>
+            <configurator service="dataset.configurator" method="configure"/>
+        </service>
+
+        <service id="order_status_group.datagrid" class="WellCommerce\Bundle\OrderBundle\DataGrid\OrderStatusGroupDataGrid">
+            <argument key="identifier">order_status_group</argument>
+            <argument type="service" id="order_status_group.dataset"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="order_status_group.form_builder" class="WellCommerce\Bundle\OrderBundle\Form\OrderStatusGroupFormBuilder">
+            <argument type="service" id="form.resolver.factory"/>
+            <argument type="service" id="form.handler"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+    </services>
+</container>

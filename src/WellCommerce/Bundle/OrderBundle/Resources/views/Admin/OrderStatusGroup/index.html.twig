@@ -1,0 +1,11 @@
+{% extends 'WellCommerceAdminBundle:Admin:layout.html.twig' %}
+{% block content %}
+    <h2>{% trans %}order_status_group.index.heading{% endtrans %}</h2>
+
+    <ul class="possibilities">
+        <li><a href="{{ path('admin.order_status_group.add') }}" class="button"><span>{% trans %}form.button.add{% endtrans %}</span></a></li>
+    </ul>
+
+    {{ datagrid_renderer(datagrid) }}
+
+{% endblock %}

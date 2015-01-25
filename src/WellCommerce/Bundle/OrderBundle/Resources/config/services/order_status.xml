@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="order_status.manager.admin" class="WellCommerce\Bundle\OrderBundle\Manager\Admin\OrderStatusManager">
+            <argument type="service" id="flash_helper"/>
+            <argument type="service" id="redirect_helper"/>
+            <argument type="service" id="image_helper"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="doctrine_helper"/>
+            <argument type="service" id="translator"/>
+            <call method="setRepository">
+                <argument type="service" id="order_status.repository"/>
+            </call>
+            <call method="setFormBuilder">
+                <argument type="service" id="order_status.form_builder"/>
+            </call>
+            <call method="setDataGrid">
+                <argument type="service" id="order_status.datagrid"/>
+            </call>
+        </service>
+
+        <service id="order_status.controller.admin" class="WellCommerce\Bundle\OrderBundle\Controller\Admin\OrderStatusController">
+            <argument type="service" id="order_status.manager.admin"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="order_status.repository" class="WellCommerce\Bundle\OrderBundle\Repository\OrderStatusRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceOrderBundle:OrderStatus</argument>
+        </service>
+
+        <service id="order_status.dataset.query_builder" class="WellCommerce\Bundle\OrderBundle\DataSet\OrderStatusDataSetQueryBuilder" public="false">
+            <argument type="service" id="order_status.repository"/>
+        </service>
+
+        <service id="order_status.dataset.loader" class="%dataset.loader.class%">
+            <argument type="service" id="order_status.dataset.query_builder"/>
+            <argument type="service" id="dataset.processor"/>
+        </service>
+
+        <service id="order_status.dataset" class="WellCommerce\Bundle\OrderBundle\DataSet\OrderStatusDataSet">
+            <argument key="identifier">order_status</argument>
+            <argument type="service" id="order_status.dataset.loader"/>
+            <configurator service="dataset.configurator" method="configure"/>
+        </service>
+
+        <service id="order_status.datagrid" class="WellCommerce\Bundle\OrderBundle\DataGrid\OrderStatusDataGrid">
+            <argument key="identifier">order_status</argument>
+            <argument type="service" id="order_status.dataset"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="order_status.form_builder" class="WellCommerce\Bundle\OrderBundle\Form\OrderStatusFormBuilder">
+            <argument type="service" id="form.resolver.factory"/>
+            <argument type="service" id="form.handler"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="order_status.subscriber" class="WellCommerce\Bundle\OrderBundle\EventListener\OrderStatusSubscriber">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="kernel.event_subscriber"  />
+        </service>
+    </services>
+</container>
