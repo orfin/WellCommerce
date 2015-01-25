@@ -116,7 +116,9 @@ abstract class AbstractDataSetQueryBuilder
      */
     private function normalizeOrderDir($order)
     {
-        return in_array(strtolower($order), ['asc', 'desc']) ? strtolower($order) : 'asc';
+        $order = strtolower($order);
+
+        return in_array($order, ['asc', 'desc']) ? $order : 'asc';
     }
 
     /**
