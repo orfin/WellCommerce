@@ -26,7 +26,7 @@ use Doctrine\ORM\Mapping as ORM;
  *      "page"       = "WellCommerce\Bundle\CmsBundle\Entity\PageRoute",
  * })
  */
-class Route
+abstract class Route
 {
     /**
      * @ORM\Id

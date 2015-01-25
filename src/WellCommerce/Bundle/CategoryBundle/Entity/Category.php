@@ -17,6 +17,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
+use WellCommerce\Bundle\CategoryBundle\Entity\Extra\CategoryExtraTrait;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\EnableableTrait;
 use WellCommerce\Bundle\ProductBundle\Entity\Product;
 
@@ -35,6 +36,7 @@ class Category
     use Timestampable;
     use Blameable;
     use EnableableTrait;
+    use CategoryExtraTrait;
 
     /**
      * @var integer

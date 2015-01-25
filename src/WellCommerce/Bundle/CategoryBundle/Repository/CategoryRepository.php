@@ -20,7 +20,6 @@ use WellCommerce\Bundle\RoutingBundle\Helper\Sluggable;
 /**
  * Class CategoryRepository
  *
- * @package WellCommerce\Bundle\CategoryBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class CategoryRepository extends AbstractEntityRepository implements CategoryRepositoryInterface

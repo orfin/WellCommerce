@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "30e862ad438f28111eaf24f6899b8240",
+    "hash": "538c7c8e7802e81497da6a49fa625b26",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -218,12 +218,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/common.git",
-                "reference": "b44549dcc98a18f0728df05df523bdf179edb90b"
+                "reference": "56360cc13bfd13893731c6c4d1d82005a61d7694"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/common/zipball/b44549dcc98a18f0728df05df523bdf179edb90b",
-                "reference": "b44549dcc98a18f0728df05df523bdf179edb90b",
+                "url": "https://api.github.com/repos/doctrine/common/zipball/56360cc13bfd13893731c6c4d1d82005a61d7694",
+                "reference": "56360cc13bfd13893731c6c4d1d82005a61d7694",
                 "shasum": ""
             },
             "require": {
@@ -283,7 +283,7 @@
                 "persistence",
                 "spl"
             ],
-            "time": "2015-01-13 17:44:22"
+            "time": "2015-01-23 18:43:22"
         },
         {
             "name": "doctrine/dbal",
@@ -759,12 +759,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/migrations.git",
-                "reference": "96f838b4fa93693d19196c8e24ed5f1c3972ba87"
+                "reference": "1ac14fac3ced533047d8feae8edc7c283d5b8a67"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/migrations/zipball/96f838b4fa93693d19196c8e24ed5f1c3972ba87",
-                "reference": "96f838b4fa93693d19196c8e24ed5f1c3972ba87",
+                "url": "https://api.github.com/repos/doctrine/migrations/zipball/1ac14fac3ced533047d8feae8edc7c283d5b8a67",
+                "reference": "1ac14fac3ced533047d8feae8edc7c283d5b8a67",
                 "shasum": ""
             },
             "require": {
@@ -791,7 +791,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "LGPL"
+                "LGPL-2.1"
             ],
             "authors": [
                 {
@@ -809,7 +809,7 @@
                 "database",
                 "migrations"
             ],
-            "time": "2014-12-19 17:14:47"
+            "time": "2015-01-19 02:26:02"
         },
         {
             "name": "doctrine/orm",
@@ -817,12 +817,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/doctrine2.git",
-                "reference": "61e07e590792dcff6db3f47edb76d97777ae7d50"
+                "reference": "4a05e19f378ff08f85caa9ded4c082f55b0575e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/61e07e590792dcff6db3f47edb76d97777ae7d50",
-                "reference": "61e07e590792dcff6db3f47edb76d97777ae7d50",
+                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/4a05e19f378ff08f85caa9ded4c082f55b0575e4",
+                "reference": "4a05e19f378ff08f85caa9ded4c082f55b0575e4",
                 "shasum": ""
             },
             "require": {
@@ -886,21 +886,20 @@
                 "database",
                 "orm"
             ],
-            "time": "2015-01-18 01:54:18"
+            "time": "2015-01-24 18:20:00"
         },
         {
             "name": "friendsofsymfony/jsrouting-bundle",
             "version": "dev-master",
-            "target-dir": "FOS/JsRoutingBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSJsRoutingBundle.git",
-                "reference": "8f549586e8dfe16393f1c5ed2705bbc765c3ac20"
+                "reference": "1053dd4c8864486cb78c1ef23ce4f021c659c261"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSJsRoutingBundle/zipball/8f549586e8dfe16393f1c5ed2705bbc765c3ac20",
-                "reference": "8f549586e8dfe16393f1c5ed2705bbc765c3ac20",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSJsRoutingBundle/zipball/1053dd4c8864486cb78c1ef23ce4f021c659c261",
+                "reference": "1053dd4c8864486cb78c1ef23ce4f021c659c261",
                 "shasum": ""
             },
             "require": {
@@ -910,6 +909,9 @@
                 "symfony/serializer": "~2.0",
                 "willdurand/jsonp-callback-validator": "~1.0"
             },
+            "require-dev": {
+                "symfony/expression-language": "~2.4"
+            },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -917,8 +919,8 @@
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "FOS\\JsRoutingBundle": ""
+                "psr-4": {
+                    "FOS\\JsRoutingBundle\\": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -942,7 +944,7 @@
                 "javascript",
                 "routing"
             ],
-            "time": "2015-01-04 12:51:34"
+            "time": "2015-01-23 02:51:30"
         },
         {
             "name": "fzaninotto/faker",
@@ -950,12 +952,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "1dc843aaf1b6032a78082145cc2abe41f0ce0ec2"
+                "reference": "b1167d9c67a3325a3f4099eb7d848c6c30cc87c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/1dc843aaf1b6032a78082145cc2abe41f0ce0ec2",
-                "reference": "1dc843aaf1b6032a78082145cc2abe41f0ce0ec2",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/b1167d9c67a3325a3f4099eb7d848c6c30cc87c2",
+                "reference": "b1167d9c67a3325a3f4099eb7d848c6c30cc87c2",
                 "shasum": ""
             },
             "require": {
@@ -994,7 +996,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2015-01-12 09:54:32"
+            "time": "2015-01-22 11:03:34"
         },
         {
             "name": "imagine/imagine",
@@ -1196,6 +1198,52 @@
                 "sql"
             ],
             "time": "2014-01-12 16:20:24"
+        },
+        {
+            "name": "jms/cg",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/schmittjoh/cg-library.git",
+                "reference": "3d2881f2faec15a632b2c7ad9646f836dd71ba21"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/schmittjoh/cg-library/zipball/3d2881f2faec15a632b2c7ad9646f836dd71ba21",
+                "reference": "3d2881f2faec15a632b2c7ad9646f836dd71ba21",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "CG\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache2"
+            ],
+            "authors": [
+                {
+                    "name": "Johannes Schmitt",
+                    "email": "schmittjoh@gmail.com",
+                    "homepage": "https://github.com/schmittjoh",
+                    "role": "Developer of wrapped JMSSerializerBundle"
+                }
+            ],
+            "description": "Toolset for generating PHP code",
+            "keywords": [
+                "code generation"
+            ],
+            "time": "2013-12-26 12:09:20"
         },
         {
             "name": "jms/metadata",
@@ -1430,12 +1478,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/DoctrineBehaviors.git",
-                "reference": "977677d6645185b990607c136effefe08ce9b198"
+                "reference": "494627971281d12ce3080e0af40cc3e8a8dfba77"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/DoctrineBehaviors/zipball/977677d6645185b990607c136effefe08ce9b198",
-                "reference": "977677d6645185b990607c136effefe08ce9b198",
+                "url": "https://api.github.com/repos/KnpLabs/DoctrineBehaviors/zipball/494627971281d12ce3080e0af40cc3e8a8dfba77",
+                "reference": "494627971281d12ce3080e0af40cc3e8a8dfba77",
                 "shasum": ""
             },
             "require": {
@@ -1444,6 +1492,7 @@
             },
             "require-dev": {
                 "doctrine/orm": ">=2.2",
+                "ext-pdo_mysql": "*",
                 "ext-pdo_pgsql": "*",
                 "ext-pdo_sqlite": "*",
                 "jakub-onderka/php-parallel-lint": "~0.8",
@@ -1466,7 +1515,7 @@
             ],
             "authors": [
                 {
-                    "name": "KnpLabs",
+                    "name": "Knplabs",
                     "homepage": "http://knplabs.com"
                 }
             ],
@@ -1482,7 +1531,7 @@
                 "translatable",
                 "tree"
             ],
-            "time": "2014-11-18 08:30:35"
+            "time": "2015-01-20 08:21:00"
         },
         {
             "name": "kriswallsmith/assetic",
@@ -2843,6 +2892,108 @@
             "time": "2014-01-20 22:35:06"
         },
         {
+            "name": "wingu/code-generator",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Speicher210/CodeGenerator.git",
+                "reference": "3850e788946276208fb7175ee6d29e531320ae13"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Speicher210/CodeGenerator/zipball/3850e788946276208fb7175ee6d29e531320ae13",
+                "reference": "3850e788946276208fb7175ee6d29e531320ae13",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4",
+                "wingu/reflection": "1.*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.1.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Wingu\\OctopusCore\\CodeGenerator\\": "src/",
+                    "Wingu\\OctopusCore\\CodeGenerator\\Tests": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dragos Protung",
+                    "email": "dragos.protung@speicher210.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Antoine Verger",
+                    "email": "antoine.verger@speicher210.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Wingu OctopusCore CoreGenerator",
+            "keywords": [
+                "code generator",
+                "generation",
+                "generator",
+                "php code generator"
+            ],
+            "time": "2014-06-18 09:14:42"
+        },
+        {
+            "name": "wingu/reflection",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Speicher210/Reflection.git",
+                "reference": "bb6b985d27760f6699ee17885c95f41d629bb88e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Speicher210/Reflection/zipball/bb6b985d27760f6699ee17885c95f41d629bb88e",
+                "reference": "bb6b985d27760f6699ee17885c95f41d629bb88e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Wingu\\OctopusCore\\Reflection\\": "src/",
+                    "Wingu\\OctopusCore\\Reflection\\Tests": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dragos Protung",
+                    "email": "dragos.protung@speicher210.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Antoine Verger",
+                    "email": "antoine.verger@speicher210.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Wingu OctopusCore Reflection",
+            "keywords": [
+                "reflection"
+            ],
+            "time": "2014-11-27 16:07:16"
+        },
+        {
             "name": "zendframework/zend-json",
             "version": "2.3.4",
             "target-dir": "Zend/Json",
@@ -3204,12 +3355,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Behat/MinkExtension.git",
-                "reference": "2ab8c00c59995824c6ebcd50617f8c3a4d78d2d9"
+                "reference": "ba5329be65a816adfc2d9ba9b639a92f548371da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/MinkExtension/zipball/2ab8c00c59995824c6ebcd50617f8c3a4d78d2d9",
-                "reference": "2ab8c00c59995824c6ebcd50617f8c3a4d78d2d9",
+                "url": "https://api.github.com/repos/Behat/MinkExtension/zipball/ba5329be65a816adfc2d9ba9b639a92f548371da",
+                "reference": "ba5329be65a816adfc2d9ba9b639a92f548371da",
                 "shasum": ""
             },
             "require": {
@@ -3255,7 +3406,7 @@
                 "test",
                 "web"
             ],
-            "time": "2014-10-08 08:13:38"
+            "time": "2015-01-23 00:01:18"
         },
         {
             "name": "behat/mink-selenium2-driver",
@@ -3464,12 +3615,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineFixturesBundle.git",
-                "reference": "9a5b5289eb22079ec139ba1eb06043d4b89c6677"
+                "reference": "c5ff0542772102ddd4e2fbe173e9ad40ad67c22f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineFixturesBundle/zipball/9a5b5289eb22079ec139ba1eb06043d4b89c6677",
-                "reference": "9a5b5289eb22079ec139ba1eb06043d4b89c6677",
+                "url": "https://api.github.com/repos/doctrine/DoctrineFixturesBundle/zipball/c5ff0542772102ddd4e2fbe173e9ad40ad67c22f",
+                "reference": "c5ff0542772102ddd4e2fbe173e9ad40ad67c22f",
                 "shasum": ""
             },
             "require": {
@@ -3513,7 +3664,7 @@
                 "Fixture",
                 "persistence"
             ],
-            "time": "2014-09-16 05:03:04"
+            "time": "2015-01-19 02:21:37"
         },
         {
             "name": "instaclick/php-webdriver",
@@ -3793,28 +3944,29 @@
         },
         {
             "name": "sebastian/exporter",
-            "version": "1.0.2",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/exporter.git",
-                "reference": "c7d59948d6e82818e1bdff7cadb6c34710eb7dc0"
+                "reference": "35ab8d385eef068186c83e23ae83c96b0288b3ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/exporter/zipball/c7d59948d6e82818e1bdff7cadb6c34710eb7dc0",
-                "reference": "c7d59948d6e82818e1bdff7cadb6c34710eb7dc0",
+                "url": "https://api.github.com/repos/sebastianbergmann/exporter/zipball/35ab8d385eef068186c83e23ae83c96b0288b3ee",
+                "reference": "35ab8d385eef068186c83e23ae83c96b0288b3ee",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3"
+                "php": ">=5.3.3",
+                "sebastian/recursion-context": "~1.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.0"
+                "phpunit/phpunit": "~4.4"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev"
+                    "dev-master": "1.1.x-dev"
                 }
             },
             "autoload": {
@@ -3854,7 +4006,60 @@
                 "export",
                 "exporter"
             ],
-            "time": "2014-09-10 00:51:36"
+            "time": "2015-01-24 09:57:24"
+        },
+        {
+            "name": "sebastian/recursion-context",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/recursion-context.git",
+                "reference": "3989662bbb30a29d20d9faa04a846af79b276252"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/recursion-context/zipball/3989662bbb30a29d20d9faa04a846af79b276252",
+                "reference": "3989662bbb30a29d20d9faa04a846af79b276252",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.4"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Jeff Welch",
+                    "email": "whatthejeff@gmail.com"
+                },
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sebastian@phpunit.de"
+                },
+                {
+                    "name": "Adam Harvey",
+                    "email": "aharvey@php.net"
+                }
+            ],
+            "description": "Provides functionality to recursively process PHP variables",
+            "homepage": "http://www.github.com/sebastianbergmann/recursion-context",
+            "time": "2015-01-24 09:48:32"
         },
         {
             "name": "sensio/generator-bundle",
@@ -3920,11 +4125,14 @@
         "symfony-cmf/routing-bundle": 20,
         "mathiasverraes/money": 20,
         "zendframework/zend-json": 20,
+        "jms/cg": 20,
+        "wingu/code-generator": 20,
         "doctrine/doctrine-fixtures-bundle": 20,
         "behat/behat": 20,
         "behat/mink-extension": 20
     },
     "prefer-stable": false,
+    "prefer-lowest": false,
     "platform": {
         "php": ">=5.4"
     },

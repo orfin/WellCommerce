@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\CoreBundle\Form\Builder;
 
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
 use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
+use WellCommerce\Bundle\CoreBundle\Form\Event\FormEvent;
 use WellCommerce\Bundle\CoreBundle\Form\Handler\FormHandlerInterface;
 use WellCommerce\Bundle\CoreBundle\Form\Resolver\FormResolverFactoryInterface;
 
@@ -128,5 +129,36 @@ abstract class AbstractFormBuilder extends AbstractContainer implements FormBuil
         $service->setOptions($options);
 
         return $service;
+    }
+
+    /**
+     * Returns form.init event name
+     *
+     * @param FormInterface $form
+     *
+     * @return string
+     */
+    protected function getInitEventName(FormInterface $form)
+    {
+        $refClass = new \ReflectionClass($form);
+        if ($refClass->hasConstant('FORM_INIT_EVENT')) {
+            return $refClass->getConstant('FORM_INIT_EVENT');
+        }
+
+        return sprintf('%s.%s', $form->getName(), FormBuilderInterface::FORM_INIT_EVENT);
+    }
+
+    protected function dispatchEvent()
+    {
+        $event = new FormEvent($this);
+        $this->getEventDispatcher()->dispatch($eventName, $event);
+    }
+
+    /**
+     * @return \Symfony\Component\EventDispatcher\EventDispatcherInterface
+     */
+    protected function getEventDispatcher()
+    {
+        return $this->get('event_dispatcher');
     }
 }

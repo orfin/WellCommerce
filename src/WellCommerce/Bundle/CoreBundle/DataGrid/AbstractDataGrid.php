@@ -13,7 +13,6 @@ namespace WellCommerce\Bundle\CoreBundle\DataGrid;
 
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\HttpFoundation\Request;
-use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnCollection;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Conditions\ConditionsResolver;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Configuration\EventHandler\ClickRowEventHandler;
@@ -24,6 +23,7 @@ use WellCommerce\Bundle\CoreBundle\DataGrid\Options\Options;
 use WellCommerce\Bundle\CoreBundle\DataGrid\Options\OptionsInterface;
 use WellCommerce\Bundle\CoreBundle\DataSet\DataSetInterface;
 use WellCommerce\Bundle\CoreBundle\DataSet\Request\DataSetRequest;
+use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 
 /**
  * Class AbstractDataGrid
@@ -157,7 +157,19 @@ abstract class AbstractDataGrid extends ContainerAware
      */
     protected function trans($message)
     {
-        return $this->container->get('translator')->trans($message);
+        return $this->get('translator')->trans($message);
+    }
+
+    /**
+     * Returns service by its id
+     *
+     * @param string $id
+     *
+     * @return object
+     */
+    protected function get($id)
+    {
+        return $this->container->get($id);
     }
 
     /**
