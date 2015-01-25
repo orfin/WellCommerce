@@ -51,7 +51,7 @@
         "symfony-cmf/routing-bundle": "1.3.*@dev",
         "mathiasverraes/money": "1.3.*@dev",
         "zendframework/zend-json": "2.3.*@dev",
-        "jms/cg": "1.1.*@dev",
+        "beberlei/DoctrineExtensions": "dev-master",
         "wingu/code-generator": "dev-master"
     },
     "require-dev": {
