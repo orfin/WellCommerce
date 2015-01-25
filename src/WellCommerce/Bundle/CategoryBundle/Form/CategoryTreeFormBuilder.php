@@ -11,9 +11,9 @@
  */
 namespace WellCommerce\Bundle\CategoryBundle\Form;
 
-use WellCommerce\Bundle\CoreBundle\Form\Builder\AbstractFormBuilder;
-use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
-use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
+use WellCommerce\Bundle\FormBundle\Builder\AbstractFormBuilder;
+use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
  * Class CategoryTreeFormBuilder

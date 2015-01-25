@@ -13,7 +13,7 @@ namespace WellCommerce\Bundle\LayoutBundle\EventListener;
 
 use WellCommerce\Bundle\CoreBundle\Event\ResourceEvent;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
-use WellCommerce\Bundle\CoreBundle\Form\Event\FormEvent;
+use WellCommerce\Bundle\FormBundle\Event\FormEvent;
 use WellCommerce\Bundle\LayoutBundle\Configurator\LayoutBoxConfiguratorInterface;
 use WellCommerce\Bundle\LayoutBundle\Form\LayoutBoxFormBuilder;
 

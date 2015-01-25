@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\CoreBundle\Manager\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\DataGridBundle\DataGridInterface;
-use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
 
 /**
@@ -98,7 +98,7 @@ interface AdminManagerInterface extends ManagerInterface
      * @param object $resource
      * @param array  $config
      *
-     * @return \WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface
+     * @return \WellCommerce\Bundle\FormBundle\Elements\FormInterface
      */
     public function getForm($resource, array $config = []);
 }

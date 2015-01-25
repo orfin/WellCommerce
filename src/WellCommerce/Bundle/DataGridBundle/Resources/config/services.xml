@@ -20,7 +20,7 @@
         <service id="datagrid.column_collection" class="WellCommerce\Bundle\DataGridBundle\Column\ColumnCollection" />
 
         <service id="twig.extension.datagrid" class="WellCommerce\Bundle\DataGridBundle\Twig\Extension\DataGridExtension">
-            <argument>WellCommerceAdminBundle:DataGrid:datagrid.html.twig</argument>
+            <argument>WellCommerceDataGridBundle:DataGrid:datagrid.html.twig</argument>
             <tag name="twig.extension"/>
         </service>
     </services>

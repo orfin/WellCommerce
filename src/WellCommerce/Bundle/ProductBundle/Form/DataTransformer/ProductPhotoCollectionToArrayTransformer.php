@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\ProductBundle\Form\DataTransformer;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
-use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\DataTransformerInterface;
+use WellCommerce\Bundle\FormBundle\DataTransformer\DataTransformerInterface;
 use WellCommerce\Bundle\MediaBundle\Entity\Media;
 use WellCommerce\Bundle\MediaBundle\Form\DataTransformer\MediaCollectionToArrayTransformer as BaseTransformer;
 use WellCommerce\Bundle\ProductBundle\Entity\Product;

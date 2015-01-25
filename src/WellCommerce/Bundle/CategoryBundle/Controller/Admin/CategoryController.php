@@ -87,7 +87,7 @@ class CategoryController extends AbstractAdminController
     /**
      * Builds nested tree form
      *
-     * @return \WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface
+     * @return \WellCommerce\Bundle\FormBundle\Elements\FormInterface
      */
     private function buildTreeForm()
     {

@@ -12,7 +12,7 @@
 namespace WellCommerce\Bundle\ThemeBundle\EventListener;
 
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
-use WellCommerce\Bundle\CoreBundle\Form\Event\FormEvent;
+use WellCommerce\Bundle\FormBundle\Event\FormEvent;
 use WellCommerce\Bundle\ThemeBundle\Form\ThemeFormBuilder;
 use WellCommerce\Bundle\ThemeBundle\Manager\ThemeManagerInterface;
 

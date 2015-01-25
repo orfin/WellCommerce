@@ -15,8 +15,8 @@ namespace WellCommerce\Bundle\MediaBundle\Form\DataTransformer;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\PersistentCollection;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
-use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\AbstractDataTransformer;
-use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\DataTransformerInterface;
+use WellCommerce\Bundle\FormBundle\DataTransformer\AbstractDataTransformer;
+use WellCommerce\Bundle\FormBundle\DataTransformer\DataTransformerInterface;
 
 /**
  * Class CollectionToArrayTransformer

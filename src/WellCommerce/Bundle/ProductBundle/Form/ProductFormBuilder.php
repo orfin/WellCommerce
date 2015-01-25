@@ -11,12 +11,12 @@
  */
 namespace WellCommerce\Bundle\ProductBundle\Form;
 
-use WellCommerce\Bundle\CoreBundle\Form\Builder\AbstractFormBuilder;
-use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
-use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\EntityToIdentifierTransformer;
-use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\TranslationTransformer;
-use WellCommerce\Bundle\CoreBundle\Form\Elements\ElementInterface;
-use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
+use WellCommerce\Bundle\FormBundle\Builder\AbstractFormBuilder;
+use WellCommerce\Bundle\FormBundle\DataTransformer\CollectionToArrayTransformer;
+use WellCommerce\Bundle\FormBundle\DataTransformer\EntityToIdentifierTransformer;
+use WellCommerce\Bundle\FormBundle\DataTransformer\TranslationTransformer;
+use WellCommerce\Bundle\FormBundle\Elements\ElementInterface;
+use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 use WellCommerce\Bundle\ProductBundle\Form\DataTransformer\ProductAttributeCollectionToArrayTransformer;
 use WellCommerce\Bundle\ProductBundle\Form\DataTransformer\ProductPhotoCollectionToArrayTransformer;
 

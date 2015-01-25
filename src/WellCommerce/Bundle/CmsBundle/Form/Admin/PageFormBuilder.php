@@ -11,11 +11,11 @@
  */
 namespace WellCommerce\Bundle\CmsBundle\Form\Admin;
 
-use WellCommerce\Bundle\CoreBundle\Form\Builder\AbstractFormBuilder;
-use WellCommerce\Bundle\CoreBundle\Form\Builder\FormBuilderInterface;
-use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\EntityToIdentifierTransformer;
-use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\TranslationTransformer;
-use WellCommerce\Bundle\CoreBundle\Form\Elements\FormInterface;
+use WellCommerce\Bundle\FormBundle\Builder\AbstractFormBuilder;
+use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\FormBundle\DataTransformer\EntityToIdentifierTransformer;
+use WellCommerce\Bundle\FormBundle\DataTransformer\TranslationTransformer;
+use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
  * Class PageFormBuilder

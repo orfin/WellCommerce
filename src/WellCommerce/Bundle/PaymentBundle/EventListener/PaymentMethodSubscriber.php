@@ -12,8 +12,8 @@
 namespace WellCommerce\Bundle\PaymentBundle\EventListener;
 
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
-use WellCommerce\Bundle\CoreBundle\Form\Conditions\Equals;
-use WellCommerce\Bundle\CoreBundle\Form\Event\FormEvent;
+use WellCommerce\Bundle\FormBundle\Conditions\Equals;
+use WellCommerce\Bundle\FormBundle\Event\FormEvent;
 
 /**
  * Class PaymentMethodSubscriber
