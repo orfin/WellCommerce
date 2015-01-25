@@ -155,16 +155,19 @@ abstract class AbstractDataSetQueryBuilder
      */
     private function addConditionToQuery(ConditionInterface $condition)
     {
-        $column     = $this->columns->get($condition->getIdentifier());
-        $source     = $column->getSource();
-        $operator   = $condition->getOperator();
-        $expression = $this->queryBuilder->expr()->{$operator}($source, ':' . $condition->getIdentifier());
+        $column   = $this->columns->get($condition->getIdentifier());
+        $source   = $column->getSource();
+        $alias    = $column->getAlias();
+        $operator = $condition->getOperator();
 
         if ($column->isAggregated()) {
+            $expression = $this->queryBuilder->expr()->{$operator}($alias, ':' . $condition->getIdentifier());
             $this->queryBuilder->andHaving($expression);
         } else {
+            $expression = $this->queryBuilder->expr()->{$operator}($source, ':' . $condition->getIdentifier());
             $this->queryBuilder->andWhere($expression);
         }
+
         $this->queryBuilder->setParameter($condition->getIdentifier(), $condition->getValue());
     }
 

@@ -44,7 +44,7 @@ class Column extends AbstractColumn implements ColumnInterface
     }
 
     /**
-     * Checks whether column source is MySQL aggregate function
+     * Checks whether column source uses MySQL aggregate function
      *
      * @param string $source
      *

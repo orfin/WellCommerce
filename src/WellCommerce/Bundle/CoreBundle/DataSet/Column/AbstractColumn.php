@@ -17,7 +17,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * Class AbstractColumn
  *
- * @package WellCommerce\Bundle\CoreBundle\DataSet\Column
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 abstract class AbstractColumn
