@@ -90,6 +90,9 @@ wellcommerce_attribute:
     resource: "@WellCommerceAttributeBundle/Resources/config/routing.xml"
     prefix:   /admin/attribute
 
+wellcommerce_cart:
+    resource: "@WellCommerceCartBundle/Resources/config/routing.xml"
+
 root:
     path: /admin
     defaults:
@@ -99,7 +102,7 @@ root:
 
 remove_trailing_slash:
     path: /{url}
-    defaults: { _controller: WellCommerceCoreBundle:Redirecting:removeTrailingSlash }
+    defaults: { _controller: WellCommerceRoutingBundle:Redirecting:removeTrailingSlash }
     requirements:
         url: .*/$
     methods: [GET]

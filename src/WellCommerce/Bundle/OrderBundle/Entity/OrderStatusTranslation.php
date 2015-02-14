@@ -27,10 +27,10 @@ class OrderStatusTranslation implements LocaleAwareInterface
     use Translation;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255)
-     */
+ * @var string
+ *
+ * @ORM\Column(name="name", type="string", length=255)
+ */
     private $name;
 
     /**

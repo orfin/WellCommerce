@@ -20,13 +20,14 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="type", type="string")
  * @ORM\DiscriminatorMap({
+ *      "route"      = "WellCommerce\Bundle\RoutingBundle\Entity\Route",
  *      "product"    = "WellCommerce\Bundle\ProductBundle\Entity\ProductRoute",
  *      "producer"   = "WellCommerce\Bundle\ProducerBundle\Entity\ProducerRoute",
  *      "category"   = "WellCommerce\Bundle\CategoryBundle\Entity\CategoryRoute",
  *      "page"       = "WellCommerce\Bundle\CmsBundle\Entity\PageRoute",
  * })
  */
-abstract class Route
+class Route implements RouteInterface
 {
     /**
      * @ORM\Id
@@ -101,5 +102,10 @@ abstract class Route
     public function setIdentifier($identifier)
     {
         $this->identifier = $identifier;
+    }
+
+    public function getType()
+    {
+        return 'route';
     }
 }

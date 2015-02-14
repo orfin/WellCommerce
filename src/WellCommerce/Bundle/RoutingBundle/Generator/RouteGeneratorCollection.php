@@ -17,7 +17,6 @@ use WellCommerce\Bundle\CoreBundle\Collection\AbstractCollection;
 /**
  * Class RouteGeneratorCollection
  *
- * @package WellCommerce\Bundle\RoutingBundle\Generator
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class RouteGeneratorCollection extends AbstractCollection

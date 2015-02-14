@@ -18,7 +18,6 @@ use WellCommerce\Bundle\DataGridBundle\DataGridInterface;
 /**
  * Class RoutingDataGrid
  *
- * @package WellCommerce\Bundle\RoutingBundle
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class RoutingDataGrid extends AbstractDataGrid implements DataGridInterface

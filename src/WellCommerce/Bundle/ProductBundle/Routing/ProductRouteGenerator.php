@@ -18,7 +18,6 @@ use WellCommerce\Bundle\RoutingBundle\Generator\RouteGeneratorInterface;
 /**
  * Class ProductRouteGenerator
  *
- * @package WellCommerce\Bundle\ProductBundle\Routing
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class ProductRouteGenerator extends AbstractRouteGenerator implements RouteGeneratorInterface

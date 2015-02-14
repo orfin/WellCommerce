@@ -17,7 +17,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Route as SymfonyRoute;
 use Symfony\Component\Routing\RouteCollection;
-use WellCommerce\Bundle\RoutingBundle\Entity\Route;
 use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;
 use WellCommerce\Bundle\RoutingBundle\Generator\RouteGeneratorCollection;
 use WellCommerce\Bundle\RoutingBundle\Repository\RouteRepositoryInterface;
@@ -121,7 +120,7 @@ class RouteProvider implements RouteProviderInterface
      *
      * @param RouteInterface $resource
      *
-     * @return null|Route
+     * @return null|SymfonyRoute
      */
     private function createRoute(RouteInterface $resource)
     {

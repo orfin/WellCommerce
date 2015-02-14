@@ -160,7 +160,7 @@ class AbstractAdminManager extends AbstractManager implements AdminManagerInterf
      * @param Request $request
      * @param string  $name
      */
-    protected function dispatchEvent($resource, Request $request, $name)
+    protected function dispatchEvent($resource, Request $request = null, $name)
     {
         $reflection = new \ReflectionClass($resource);
         $eventName  = $this->getEventName($reflection->getShortName(), $name);

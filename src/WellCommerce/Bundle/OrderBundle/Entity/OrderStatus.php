@@ -15,6 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
+use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\EnableableTrait;
 
 /**
  * OrderStatus
@@ -27,6 +28,7 @@ class OrderStatus
     use Timestampable;
     use Blameable;
     use Translatable;
+    use EnableableTrait;
 
     /**
      * @var integer

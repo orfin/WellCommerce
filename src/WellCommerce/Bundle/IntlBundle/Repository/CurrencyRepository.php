@@ -27,8 +27,6 @@ class CurrencyRepository extends AbstractEntityRepository implements CurrencyRep
      */
     public function getCurrenciesToSelect()
     {
-        $currencies = Intl::getCurrencyBundle()->getCurrencyNames();
-
-        return $currencies;
+        return Intl::getCurrencyBundle()->getCurrencyNames();
     }
 }

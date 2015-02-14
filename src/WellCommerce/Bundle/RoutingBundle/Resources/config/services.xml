@@ -64,17 +64,13 @@
             </call>
         </service>
 
-        <service id="route.repository" class="WellCommerce\Bundle\RoutingBundle\Repository\RouteRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
-            <argument>WellCommerceRoutingBundle:Route</argument>
-        </service>
-
         <service id="routable.subscriber" class="WellCommerce\Bundle\RoutingBundle\EventListener\RoutableSubscriber">
             <tag name="doctrine.event_subscriber" />
         </service>
 
         <service id="router.provider.endpoint" class="WellCommerce\Bundle\RoutingBundle\Provider\RouteProvider">
             <argument type="service" id="route.generator.collection" />
-            <argument type="service" id="route.repository" />
+            <argument type="service" id="routing.repository" />
         </service>
 
         <service id="route.generator.collection" class="WellCommerce\Bundle\RoutingBundle\Generator\RouteGeneratorCollection" />

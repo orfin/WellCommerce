@@ -13,12 +13,11 @@
 namespace WellCommerce\Bundle\RoutingBundle\Generator;
 
 use Symfony\Component\Routing\Route as SymfonyRoute;
-use WellCommerce\Bundle\RoutingBundle\Entity\Route;
+use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;
 
 /**
  * Class AbstractRouteGenerator
  *
- * @package WellCommerce\Bundle\RoutingBundle\Generator
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 abstract class AbstractRouteGenerator
@@ -45,17 +44,15 @@ abstract class AbstractRouteGenerator
      * @param array $options      Route options
      * @param array $requirements Route requirements
      */
-    public function __construct(
-        array $defaults = [],
-        array $options = [],
-        array $requirements = []
-    ) {
+    public function __construct(array $defaults = [], array $options = [], array $requirements = [])
+    {
         $this->defaults     = $defaults;
         $this->options      = $options;
         $this->requirements = $requirements;
     }
 
-    public function generate(Route $resource)
+
+    public function generate(RouteInterface $resource)
     {
         $this->defaults['id']      = $resource->getIdentifier();
         $this->defaults['_locale'] = $resource->getLocale();

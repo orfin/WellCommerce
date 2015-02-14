@@ -18,7 +18,6 @@ use WellCommerce\Bundle\RoutingBundle\Generator\RouteGeneratorInterface;
 /**
  * Class CategoryRouteGenerator
  *
- * @package WellCommerce\Bundle\CategoryBundle\Routing
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class CategoryRouteGenerator extends AbstractRouteGenerator implements RouteGeneratorInterface

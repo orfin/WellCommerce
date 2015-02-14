@@ -35,15 +35,11 @@ class OrderStatusFormBuilder extends AbstractFormBuilder implements FormBuilderI
             'label' => $this->trans('form.required_data.label')
         ]));
 
-        $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
-            'name'  => 'translations',
-            'label' => $this->trans('fieldset.translations.label'),
-            'transformer' => new TranslationTransformer($this->get('order_status.repository'))
-        ]));
-
-        $languageData->addChild($this->getElement('text_field', [
-            'name'  => 'name',
-            'label' => $this->trans('order_status.name.label'),
+        $requiredData->addChild($this->getElement('checkbox', [
+            'name'    => 'enabled',
+            'label'   => $this->trans('order_status.enabled.label'),
+            'comment' => $this->trans('order_status.enabled.comment'),
+            'default' => 1
         ]));
 
         $orderStatusGroupSelectBuilder = new SelectBuilder($this->get('order_status_group.dataset'));
@@ -55,15 +51,15 @@ class OrderStatusFormBuilder extends AbstractFormBuilder implements FormBuilderI
             'transformer' => new EntityToIdentifierTransformer($this->get('order_status_group.repository'))
         ]));
 
-        $commentData = $form->addChild($this->getElement('nested_fieldset', [
-            'name'  => 'comment_data',
-            'label' => $this->trans('fieldset.meta.label')
+        $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
+            'name'  => 'translations',
+            'label' => $this->trans('fieldset.translations.label'),
+            'transformer' => new TranslationTransformer($this->get('order_status.repository'))
         ]));
 
-        $languageData = $commentData->addChild($this->getElement('language_fieldset', [
-            'name'        => 'translations',
-            'label'       => $this->trans('fieldset.translations.label'),
-            'transformer' => new TranslationTransformer($this->get('order_status.repository'))
+        $languageData->addChild($this->getElement('text_field', [
+            'name'  => 'name',
+            'label' => $this->trans('order_status.name.label'),
         ]));
 
         $languageData->addChild($this->getElement('rich_text_editor', [
