@@ -15,7 +15,7 @@
                 <argument type="service" id="client_group.repository"/>
             </call>
             <call method="setFormBuilder">
-                <argument type="service" id="client_group.form_builder"/>
+                <argument type="service" id="client_group.form_builder.admin"/>
             </call>
             <call method="setDataGrid">
                 <argument type="service" id="client_group.datagrid"/>
@@ -56,7 +56,7 @@
             </call>
         </service>
 
-        <service id="client_group.form_builder" class="WellCommerce\Bundle\ClientBundle\Form\ClientGroupFormBuilder">
+        <service id="client_group.form_builder.admin" class="WellCommerce\Bundle\ClientBundle\Form\Admin\ClientGroupFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
             <call method="setContainer">

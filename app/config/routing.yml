@@ -48,7 +48,6 @@ wellcommerce_category:
 
 wellcommerce_client:
     resource: "@WellCommerceClientBundle/Resources/config/routing.xml"
-    prefix:   /admin/crm/client
 
 wellcommerce_order:
     resource: "@WellCommerceOrderBundle/Resources/config/routing.xml"
