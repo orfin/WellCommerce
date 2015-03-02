@@ -53,7 +53,8 @@
         "zendframework/zend-json": "2.3.*@dev",
         "beberlei/DoctrineExtensions": "dev-master",
         "wingu/code-generator": "dev-master",
-        "wellcommerce/dataset-bundle": "dev-development"
+        "wellcommerce/dataset-bundle": "dev-development",
+        "wellcommerce/datagrid-bundle": "dev-development"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",

@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e6263c35a27034c1456a5210bd63f506",
+    "hash": "7fba18bafae0b5e26e98a5e5a6be580b",
     "packages": [
         {
             "name": "beberlei/DoctrineExtensions",
@@ -2774,6 +2774,58 @@
             "time": "2015-01-25 17:32:08"
         },
         {
+            "name": "wellcommerce/datagrid-bundle",
+            "version": "dev-development",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/WellCommerce/DataGridBundle.git",
+                "reference": "59d28b69a1b379b84107d27709aa550894d12639"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/WellCommerce/DataGridBundle/zipball/59d28b69a1b379b84107d27709aa550894d12639",
+                "reference": "59d28b69a1b379b84107d27709aa550894d12639",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4",
+                "wellcommerce/dataset-bundle": "dev-development",
+                "wellcommerce/wellcommerce": "dev-master"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.10-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "WellCommerce\\Bundle\\DataGridBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "OSL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Adam Piotrowski",
+                    "email": "adam@wellcommerce.org"
+                },
+                {
+                    "name": "WellCommerce Developers",
+                    "email": "developers@wellcommerce.org"
+                }
+            ],
+            "description": "WellCommerce Open-Source edition",
+            "keywords": [
+                "e-commerce",
+                "open-source",
+                "symfony"
+            ],
+            "time": "2015-03-02 23:04:27"
+        },
+        {
             "name": "wellcommerce/dataset-bundle",
             "version": "dev-development",
             "source": {
@@ -4167,6 +4219,7 @@
         "beberlei/doctrineextensions": 20,
         "wingu/code-generator": 20,
         "wellcommerce/dataset-bundle": 20,
+        "wellcommerce/datagrid-bundle": 20,
         "doctrine/doctrine-fixtures-bundle": 20,
         "behat/behat": 20,
         "behat/mink-extension": 20
