@@ -27,7 +27,7 @@ before_script:
     - mysql -e 'create database travis;'
     - cp app/config/parameters.yml.travis app/config/parameters.yml
     - composer self-update
-    - composer install --prefer-source --no-interaction
+    - composer update --no-interaction
     - php app/console doctrine:schema:create --env=test -vvv
     - php app/console doctrine:fixtures:load --no-interaction -vvv
     - chmod -R 777 app/cache app/logs
