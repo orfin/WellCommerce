@@ -47,6 +47,5 @@ class CartController extends AbstractFrontController implements FrontControllerI
         $cart->addProduct($cartProduct);
         $this->getEntityManager()->persist($cart);
         $this->getEntityManager()->flush();
-        die();
     }
 }
