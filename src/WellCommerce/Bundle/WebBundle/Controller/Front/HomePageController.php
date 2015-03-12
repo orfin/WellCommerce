@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\WebBundle\Controller\Front;
 
-use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
 
