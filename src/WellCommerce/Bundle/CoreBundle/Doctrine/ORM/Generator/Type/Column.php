@@ -19,4 +19,4 @@ namespace WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Generator\Type;
  */
 class Column {
 
-} 
+}

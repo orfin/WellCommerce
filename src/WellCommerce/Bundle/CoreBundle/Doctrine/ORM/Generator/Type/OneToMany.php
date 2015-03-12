@@ -12,7 +12,11 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Generator\Type;
 
-
+/**
+ * Class OneToMany
+ *
+ * @author Adam Piotrowski <adam@wellcommerce.org>
+ */
 class OneToMany {
 
-} 
+}

@@ -12,7 +12,12 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Generator\Type;
 
+/**
+ * Class ManyToMany
+ *
+ * @author Adam Piotrowski <adam@wellcommerce.org>
+ */
+class ManyToMany
+{
 
-class ManyToMany {
-
-} 
+}
