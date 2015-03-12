@@ -43,7 +43,6 @@ class EntityTraitGenerator {
 
         $generator->setProperties($properties);
 
-        echo $generator->generate();
-        die();
+        $generator->generate();
     }
 } 
