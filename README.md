@@ -2,6 +2,7 @@ README
 ======
 
 [![Build Status](https://travis-ci.org/WellCommerce/WellCommerce.svg?branch=development)](https://travis-ci.org/WellCommerce/WellCommerce)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/98fa65a3-a9a0-4ae8-b7c9-27d3cc1cebb2/mini.png)](https://insight.sensiolabs.com/projects/98fa65a3-a9a0-4ae8-b7c9-27d3cc1cebb2)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/WellCommerce/WellCommerce/badges/quality-score.png?b=development)](https://scrutinizer-ci.com/g/WellCommerce/WellCommerce/?branch=development)
 [![Total Downloads](https://poser.pugx.org/wellcommerce/wellcommerce/downloads.svg)](https://packagist.org/packages/wellcommerce/wellcommerce)
 [![License](https://poser.pugx.org/wellcommerce/wellcommerce/license.svg)](https://packagist.org/packages/wellcommerce/wellcommerce)
