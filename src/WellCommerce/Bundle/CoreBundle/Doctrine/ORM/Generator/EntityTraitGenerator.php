@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Generator;
 
-use Doctrine\Common\Annotations\AnnotationReader;
 use Wingu\OctopusCore\CodeGenerator\PHP\Annotation\Tags\BaseTag;
 use Wingu\OctopusCore\CodeGenerator\PHP\DocCommentGenerator;
 use Wingu\OctopusCore\CodeGenerator\PHP\OOP\Modifiers;
@@ -24,19 +23,23 @@ use Wingu\OctopusCore\CodeGenerator\PHP\OOP\TraitGenerator;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class EntityTraitGenerator {
+class EntityTraitGenerator
+{
 
-    public function generate(){
+    public function generate()
+    {
 
-        $generator = new TraitGenerator('CategoryExtraTrait', 'WellCommerce\Bundle\CategoryBundle\Entity\Extra');
+        $generator          = new TraitGenerator('CategoryExtraTrait',
+            'WellCommerce\Bundle\CategoryBundle\Entity\Extra');
         $traitDocAnnotation = new BaseTag('baseAnnotation', 'testing');
-        $traitDoc = new DocCommentGenerator('Short trait description.', "Long description.\nOn multiple lines.", [$traitDocAnnotation]);
+        $traitDoc           = new DocCommentGenerator('Short trait description.',
+            "Long description.\nOn multiple lines.", [$traitDocAnnotation]);
         $generator->setDocumentation($traitDoc);
 
-        $properties = [];
-        $discount = new PropertyGenerator('discount', 'private', Modifiers::MODIFIER_PRIVATE);
+        $properties         = [];
+        $discount           = new PropertyGenerator('discount', 'private', Modifiers::MODIFIER_PRIVATE);
         $discountAnnotation = new BaseTag('ORM\Column(name="discount", type="integer")');
-        $discountDoc = new DocCommentGenerator('Discount', "", [$discountAnnotation]);
+        $discountDoc        = new DocCommentGenerator('Discount', "", [$discountAnnotation]);
         $discount->setDocumentation($discountDoc);
 
         $properties[] = $discount;
