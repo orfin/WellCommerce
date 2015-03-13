@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "33e31999c5ac1ac33b0470cb074ee14c",
+    "hash": "9eeebdc4955271293309cd307738ec96",
     "packages": [
         {
             "name": "beberlei/DoctrineExtensions",
@@ -3081,7 +3081,7 @@
         },
         {
             "name": "wingu/code-generator",
-            "version": "dev-master",
+            "version": "1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Speicher210/CodeGenerator.git",
@@ -4274,7 +4274,6 @@
         "mathiasverraes/money": 20,
         "zendframework/zend-json": 20,
         "beberlei/doctrineextensions": 20,
-        "wingu/code-generator": 20,
         "wellcommerce/dataset-bundle": 20,
         "wellcommerce/datagrid-bundle": 20,
         "wellcommerce/form-bundle": 20,
