@@ -4,24 +4,33 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b9f60025aed2b9b23d85fad2f04eb626",
+    "hash": "33e31999c5ac1ac33b0470cb074ee14c",
     "packages": [
         {
             "name": "beberlei/DoctrineExtensions",
-            "version": "dev-master",
+            "version": "1.0.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/beberlei/DoctrineExtensions.git",
-                "reference": "5e4ec9c3ec3434151e1c73144b4ab87ae30aefbc"
+                "reference": "3425df62884fe29264e372a05de7bebfd3281f93"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/beberlei/DoctrineExtensions/zipball/5e4ec9c3ec3434151e1c73144b4ab87ae30aefbc",
-                "reference": "5e4ec9c3ec3434151e1c73144b4ab87ae30aefbc",
+                "url": "https://api.github.com/repos/beberlei/DoctrineExtensions/zipball/3425df62884fe29264e372a05de7bebfd3281f93",
+                "reference": "3425df62884fe29264e372a05de7bebfd3281f93",
                 "shasum": ""
             },
             "require": {
-                "doctrine/orm": "*"
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "doctrine/orm": "<2.2",
+                "phpunit/phpunit": "~4.5",
+                "zf1/zend-date": "~1.12",
+                "zf1/zend-registry": "~1.12"
+            },
+            "suggest": {
+                "zf1/zend-date": "Alternative to DateTime"
             },
             "type": "library",
             "autoload": {
@@ -30,7 +39,7 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
-            "time": "2013-12-20 22:02:19"
+            "time": "2015-03-08 16:59:18"
         },
         {
             "name": "behat/transliterator",
@@ -823,12 +832,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/migrations.git",
-                "reference": "b962049fefa47da897bcc75569eec02965332aee"
+                "reference": "7fc9125b7b2e329c55040feb53c443fbf974dd54"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/migrations/zipball/b962049fefa47da897bcc75569eec02965332aee",
-                "reference": "b962049fefa47da897bcc75569eec02965332aee",
+                "url": "https://api.github.com/repos/doctrine/migrations/zipball/7fc9125b7b2e329c55040feb53c443fbf974dd54",
+                "reference": "7fc9125b7b2e329c55040feb53c443fbf974dd54",
                 "shasum": ""
             },
             "require": {
@@ -873,7 +882,7 @@
                 "database",
                 "migrations"
             ],
-            "time": "2015-03-05 21:12:06"
+            "time": "2015-03-12 22:57:04"
         },
         {
             "name": "doctrine/orm",
@@ -881,12 +890,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/doctrine2.git",
-                "reference": "34b7f07344f3e284f5013691a12d94bc9e0dbc59"
+                "reference": "d87118437e8840510de09054fa769d023ffd229b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/34b7f07344f3e284f5013691a12d94bc9e0dbc59",
-                "reference": "34b7f07344f3e284f5013691a12d94bc9e0dbc59",
+                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/d87118437e8840510de09054fa769d023ffd229b",
+                "reference": "d87118437e8840510de09054fa769d023ffd229b",
                 "shasum": ""
             },
             "require": {
@@ -950,7 +959,7 @@
                 "database",
                 "orm"
             ],
-            "time": "2015-03-04 03:07:37"
+            "time": "2015-03-12 21:16:28"
         },
         {
             "name": "friendsofsymfony/jsrouting-bundle",
@@ -1016,12 +1025,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "40426f77f030b6fb45951be920ff1036b2f423d2"
+                "reference": "5f91d63d78036ee445601ce0c606cdceb0be55d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/40426f77f030b6fb45951be920ff1036b2f423d2",
-                "reference": "40426f77f030b6fb45951be920ff1036b2f423d2",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/5f91d63d78036ee445601ce0c606cdceb0be55d2",
+                "reference": "5f91d63d78036ee445601ce0c606cdceb0be55d2",
                 "shasum": ""
             },
             "require": {
@@ -1060,7 +1069,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2015-02-27 08:30:07"
+            "time": "2015-03-11 13:17:18"
         },
         {
             "name": "imagine/imagine",
@@ -1496,12 +1505,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/DoctrineBehaviors.git",
-                "reference": "33188092824d0f1ede13a96e8916d44d109a4e89"
+                "reference": "2c09b47f12ae0d64ab99af40c9f05e6baf0b591d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/DoctrineBehaviors/zipball/33188092824d0f1ede13a96e8916d44d109a4e89",
-                "reference": "33188092824d0f1ede13a96e8916d44d109a4e89",
+                "url": "https://api.github.com/repos/KnpLabs/DoctrineBehaviors/zipball/2c09b47f12ae0d64ab99af40c9f05e6baf0b591d",
+                "reference": "2c09b47f12ae0d64ab99af40c9f05e6baf0b591d",
                 "shasum": ""
             },
             "require": {
@@ -1551,7 +1560,7 @@
                 "translatable",
                 "tree"
             ],
-            "time": "2015-03-05 11:32:10"
+            "time": "2015-03-12 13:55:38"
         },
         {
             "name": "kriswallsmith/assetic",
@@ -1758,16 +1767,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "1.13.0",
+            "version": "1.13.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "c41c218e239b50446fd883acb1ecfd4b770caeae"
+                "reference": "c31a2c4e8db5da8b46c74cf275d7f109c0f249ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/c41c218e239b50446fd883acb1ecfd4b770caeae",
-                "reference": "c41c218e239b50446fd883acb1ecfd4b770caeae",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/c31a2c4e8db5da8b46c74cf275d7f109c0f249ac",
+                "reference": "c31a2c4e8db5da8b46c74cf275d7f109c0f249ac",
                 "shasum": ""
             },
             "require": {
@@ -1827,7 +1836,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2015-03-05 01:12:12"
+            "time": "2015-03-09 09:58:04"
         },
         {
             "name": "pagerfanta/pagerfanta",
@@ -2776,22 +2785,20 @@
         },
         {
             "name": "wellcommerce/datagrid-bundle",
-            "version": "dev-development",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/WellCommerce/DataGridBundle.git",
-                "reference": "59d28b69a1b379b84107d27709aa550894d12639"
+                "reference": "8710bf37dc2bdff454b2e41590abd6fb646feefb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WellCommerce/DataGridBundle/zipball/59d28b69a1b379b84107d27709aa550894d12639",
-                "reference": "59d28b69a1b379b84107d27709aa550894d12639",
+                "url": "https://api.github.com/repos/WellCommerce/DataGridBundle/zipball/8710bf37dc2bdff454b2e41590abd6fb646feefb",
+                "reference": "8710bf37dc2bdff454b2e41590abd6fb646feefb",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.4",
-                "wellcommerce/dataset-bundle": "dev-development",
-                "wellcommerce/wellcommerce": "dev-master"
+                "php": ">=5.4"
             },
             "type": "library",
             "extra": {
@@ -2824,25 +2831,24 @@
                 "open-source",
                 "symfony"
             ],
-            "time": "2015-03-02 23:04:27"
+            "time": "2015-03-07 17:08:58"
         },
         {
             "name": "wellcommerce/dataset-bundle",
-            "version": "dev-development",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/WellCommerce/DataSetBundle.git",
-                "reference": "87beaec6ebfe4b9d712f94a77faee3ea2485718a"
+                "reference": "f25bb6e87fef67ffb783f713809c814579e357d6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WellCommerce/DataSetBundle/zipball/87beaec6ebfe4b9d712f94a77faee3ea2485718a",
-                "reference": "87beaec6ebfe4b9d712f94a77faee3ea2485718a",
+                "url": "https://api.github.com/repos/WellCommerce/DataSetBundle/zipball/f25bb6e87fef67ffb783f713809c814579e357d6",
+                "reference": "f25bb6e87fef67ffb783f713809c814579e357d6",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.4",
-                "wellcommerce/wellcommerce": "dev-master"
+                "php": ">=5.4"
             },
             "type": "library",
             "extra": {
@@ -2875,25 +2881,24 @@
                 "open-source",
                 "symfony"
             ],
-            "time": "2015-03-02 22:42:48"
+            "time": "2015-03-07 17:09:01"
         },
         {
             "name": "wellcommerce/form-bundle",
-            "version": "dev-development",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/WellCommerce/FormBundle.git",
-                "reference": "1abcfa02467bdf86f81602a25f4edf28eec25831"
+                "reference": "845dd82be48ffea9b344176d18a967759de86733"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WellCommerce/FormBundle/zipball/1abcfa02467bdf86f81602a25f4edf28eec25831",
-                "reference": "1abcfa02467bdf86f81602a25f4edf28eec25831",
+                "url": "https://api.github.com/repos/WellCommerce/FormBundle/zipball/845dd82be48ffea9b344176d18a967759de86733",
+                "reference": "845dd82be48ffea9b344176d18a967759de86733",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.4",
-                "wellcommerce/wellcommerce": "dev-master"
+                "php": ">=5.4"
             },
             "type": "library",
             "extra": {
@@ -2926,7 +2931,7 @@
                 "open-source",
                 "symfony"
             ],
-            "time": "2015-03-06 21:30:58"
+            "time": "2015-03-07 17:09:05"
         },
         {
             "name": "white-october/pagerfanta-bundle",
@@ -3538,12 +3543,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Behat/MinkExtension.git",
-                "reference": "11e85194518293000dde36cb28cd1fd01ed44a37"
+                "reference": "a448b617c6cc69260eaba248705a4cf2eb0208db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/MinkExtension/zipball/11e85194518293000dde36cb28cd1fd01ed44a37",
-                "reference": "11e85194518293000dde36cb28cd1fd01ed44a37",
+                "url": "https://api.github.com/repos/Behat/MinkExtension/zipball/a448b617c6cc69260eaba248705a4cf2eb0208db",
+                "reference": "a448b617c6cc69260eaba248705a4cf2eb0208db",
                 "shasum": ""
             },
             "require": {
@@ -3589,7 +3594,7 @@
                 "test",
                 "web"
             ],
-            "time": "2015-03-02 10:49:23"
+            "time": "2015-03-10 09:04:42"
         },
         {
             "name": "behat/mink-selenium2-driver",

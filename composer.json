@@ -51,11 +51,11 @@
         "symfony-cmf/routing-bundle": "1.3.*@dev",
         "mathiasverraes/money": "1.3.*@dev",
         "zendframework/zend-json": "2.3.*@dev",
-        "beberlei/DoctrineExtensions": "dev-master",
+        "beberlei/DoctrineExtensions": "1.0.*@dev",
         "wingu/code-generator": "dev-master",
-        "wellcommerce/dataset-bundle": "dev-development",
-        "wellcommerce/datagrid-bundle": "dev-development",
-        "wellcommerce/form-bundle": "dev-development"
+        "wellcommerce/dataset-bundle": "0.10.*@dev",
+        "wellcommerce/datagrid-bundle": "0.10.*@dev",
+        "wellcommerce/form-bundle": "0.10.*@dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
