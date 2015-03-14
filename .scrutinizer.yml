@@ -11,4 +11,3 @@ filter:
         - vendor/*
         - web/*
         - bin/*
-        
