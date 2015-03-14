@@ -15,9 +15,9 @@ namespace WellCommerce\Bundle\MultiStoreBundle\Manager\Admin;
 use WellCommerce\Bundle\AdminBundle\Manager\AbstractAdminManager;
 
 /**
- * Class CompanyManager
+ * Class ShopManager
  *
- * @author  Adam Piotrowski <adam@wellcommerce.org>
+ * @author Adam Piotrowski <adam@wellcommerce.org>
  */
 class ShopManager extends AbstractAdminManager
 {
