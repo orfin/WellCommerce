@@ -7412,6 +7412,7 @@ var GFormTree = GCore.ExtendClass(GFormField, function() {
 	gThis.m_jItemPlaceholder;
 	gThis.m_jItemDragged;
 	gThis.m_oItems = {};
+	gThis.m_jUnmodified;
 	
 	gThis._PrepareNode = function() {
 		gThis.m_jNode = $('<div/>').addClass(gThis._GetClass('Field'));
@@ -7432,6 +7433,8 @@ var GFormTree = GCore.ExtendClass(GFormField, function() {
 		gThis.Update();
 		gThis._PrepareOptions();
 		window.setTimeout(gThis.ResetExpansion, 500);
+		gThis.m_jUnmodified = $('<input type="hidden" name="' + gThis.GetName() + '[unmodified]" value="1"/>');
+		gThis.m_jNode.append(gThis.m_jUnmodified);
 	};
 
 
@@ -7797,6 +7800,7 @@ var GFormTree = GCore.ExtendClass(GFormField, function() {
 	gThis.OnShow = function() {
 		if (!gThis.m_bShown) {
 			gThis.m_bShown = true;
+			gThis.m_jUnmodified.val('0');
 		}
 	};
 	
@@ -10213,6 +10217,7 @@ var GFormMultiSelect = GCore.ExtendClass(GFormField, function() {
 	var gThis = this;
 	
 	gThis.m_bShown = false;
+	gThis.m_jUnmodified;
 	
 	gThis._Constructor = function() {
 		gThis.m_bResized = false;
@@ -10257,6 +10262,8 @@ var GFormMultiSelect = GCore.ExtendClass(GFormField, function() {
 		}
 		gThis.m_jNode.append(jLabel);
 		gThis.m_jNode.append(gThis._AddField());
+		gThis.m_jUnmodified = $('<input type="hidden" name="' + gThis.GetName() + '[unmodified]" value="1"/>');
+		gThis.m_jNode.append(gThis.m_jUnmodified);
 	};
 	
 	gThis._AddField = function(sId) {
@@ -10306,6 +10313,7 @@ var GFormMultiSelect = GCore.ExtendClass(GFormField, function() {
 				return false;
 			});
 		}
+		gThis.m_jUnmodified.val('0');
 	};
 	
 	gThis.Populate = function(mValue) {

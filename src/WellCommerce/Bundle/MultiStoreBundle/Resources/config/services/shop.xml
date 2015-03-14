@@ -64,6 +64,10 @@
             </call>
         </service>
 
+        <service id="shop.collection" parent="dataset.collection_builder.factory">
+            <argument type="service" id="shop.dataset"/>
+        </service>
+
         <service id="shop.subscriber" class="WellCommerce\Bundle\MultiStoreBundle\EventListener\ShopSubscriber">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>

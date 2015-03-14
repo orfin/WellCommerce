@@ -47,6 +47,11 @@ class Shop
     private $name;
 
     /**
+     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\Product", mappedBy="shops")
+     */
+    private $products;
+
+    /**
      * @return int
      */
     public function getId()
@@ -68,5 +73,21 @@ class Shop
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProducts()
+    {
+        return $this->products;
+    }
+
+    /**
+     * @param mixed $products
+     */
+    public function setProducts($products)
+    {
+        $this->products = $products;
     }
 }
