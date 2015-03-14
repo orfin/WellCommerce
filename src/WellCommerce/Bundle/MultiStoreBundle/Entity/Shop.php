@@ -63,6 +63,11 @@ class Shop
     private $categories;
 
     /**
+     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\ProducerBundle\Entity\Producer", mappedBy="shops")
+     */
+    private $producers;
+
+    /**
      * @return int
      */
     public function getId()

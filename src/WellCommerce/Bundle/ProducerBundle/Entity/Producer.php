@@ -54,11 +54,21 @@ class Producer
     private $deliverers;
 
     /**
+     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\MultiStoreBundle\Entity\Shop", inversedBy="producers")
+     * @ORM\JoinTable(name="shop_producer",
+     *      joinColumns={@ORM\JoinColumn(name="producer_id", referencedColumnName="id", onDelete="CASCADE")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="shop_id", referencedColumnName="id", onDelete="CASCADE")}
+     * )
+     */
+    private $shops;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->deliverers = new ArrayCollection();
+        $this->shops      = new ArrayCollection();
     }
 
     /**
@@ -94,5 +104,21 @@ class Producer
     public function addDeliverer(Deliverer $deliverer)
     {
         $this->deliverers = $deliverer;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getShops()
+    {
+        return $this->shops;
+    }
+
+    /**
+     * @param mixed $shops
+     */
+    public function setShops($shops)
+    {
+        $this->shops = $shops;
     }
 }
