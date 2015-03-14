@@ -90,8 +90,8 @@
             <span class="icon"></span>
             <div class="field-select">
                 <select name="view-switcher" onchange="">
-                    {% for locale in locales %}
-                        <option value="{{ locale.code }}">{{ locale.code }}</option>
+                    {% for id, name in shops %}
+                        <option value="{{ id }}">{{ name }}</option>
                     {% endfor %}
                 </select>
             </div>
