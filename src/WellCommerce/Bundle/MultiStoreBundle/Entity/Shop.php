@@ -47,6 +47,12 @@ class Shop
     private $name;
 
     /**
+     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\MultiStoreBundle\Entity\Company")
+     * @ORM\JoinColumn(name="company_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    private $company;
+
+    /**
      * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\Product", mappedBy="shops")
      */
     private $products;
@@ -89,5 +95,21 @@ class Shop
     public function setProducts($products)
     {
         $this->products = $products;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCompany()
+    {
+        return $this->company;
+    }
+
+    /**
+     * @param mixed $company
+     */
+    public function setCompany($company)
+    {
+        $this->company = $company;
     }
 }

@@ -13,6 +13,7 @@ namespace WellCommerce\Bundle\MultiStoreBundle\Form;
 
 use WellCommerce\Bundle\FormBundle\Builder\AbstractFormBuilder;
 use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\FormBundle\DataTransformer\EntityToIdentifierTransformer;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 use WellCommerce\Bundle\MediaBundle\Form\DataTransformer\MediaEntityToIdentifierTransformer;
 
@@ -36,6 +37,13 @@ class ShopFormBuilder extends AbstractFormBuilder implements FormBuilderInterfac
         $requiredData->addChild($this->getElement('text_field', [
             'name'  => 'name',
             'label' => $this->trans('shop.name'),
+        ]));
+
+        $requiredData->addChild($this->getElement('select', [
+            'name'        => 'company',
+            'label'       => $this->trans('shop.company.label'),
+            'options'     => $this->get('company.collection')->getSelect(),
+            'transformer' => new EntityToIdentifierTransformer($this->get('company.repository'))
         ]));
 
         $mediaData = $form->addChild($this->getElement('nested_fieldset', [

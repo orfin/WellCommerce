@@ -48,6 +48,10 @@
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
+        <service id="company.collection" parent="dataset.collection_builder.factory">
+            <argument type="service" id="company.dataset"/>
+        </service>
+
         <service id="company.datagrid" class="WellCommerce\Bundle\MultiStoreBundle\DataGrid\CompanyDataGrid">
             <argument key="identifier">company</argument>
             <argument type="service" id="company.dataset"/>
