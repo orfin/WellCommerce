@@ -46,6 +46,13 @@ class Shop
     private $name;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="url", type="string", length=255, nullable=false)
+     */
+    private $url;
+
+    /**
      * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\MultiStoreBundle\Entity\Company")
      * @ORM\JoinColumn(name="company_id", referencedColumnName="id", onDelete="SET NULL")
      */
@@ -65,6 +72,12 @@ class Shop
      * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\ProducerBundle\Entity\Producer", mappedBy="shops")
      */
     private $producers;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\ThemeBundle\Entity\Theme")
+     * @ORM\JoinColumn(name="theme_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    private $theme;
 
     /**
      * @return int
@@ -152,5 +165,37 @@ class Shop
     public function setProducers($producers)
     {
         $this->producers = $producers;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * @param string $url
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTheme()
+    {
+        return $this->theme;
+    }
+
+    /**
+     * @param mixed $theme
+     */
+    public function setTheme($theme)
+    {
+        $this->theme = $theme;
     }
 }

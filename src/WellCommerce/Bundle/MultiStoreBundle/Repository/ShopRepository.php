@@ -21,4 +21,16 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
  */
 class ShopRepository extends AbstractEntityRepository implements CompanyRepositoryInterface
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function getDataSetQueryBuilder()
+    {
+        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder->groupBy('shop.id');
+        $queryBuilder->leftJoin('shop.theme', 'shop_theme');
+        $queryBuilder->leftJoin('shop.company', 'shop_company');
+
+        return $queryBuilder;
+    }
 }

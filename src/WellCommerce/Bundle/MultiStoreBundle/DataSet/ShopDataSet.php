@@ -13,8 +13,8 @@
 namespace WellCommerce\Bundle\MultiStoreBundle\DataSet;
 
 use WellCommerce\Bundle\DataSetBundle\AbstractDataSet;
-use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
 use WellCommerce\Bundle\DataSetBundle\DataSetConfiguratorInterface;
+use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
 use WellCommerce\Bundle\DataSetBundle\Transformer\DateTransformer;
 
 /**
@@ -33,6 +33,8 @@ class ShopDataSet extends AbstractDataSet implements DataSetInterface
             'id'        => 'shop.id',
             'name'      => 'shop.name',
             'createdAt' => 'shop.createdAt',
+            'theme'     => 'shop_theme.name',
+            'company'   => 'shop_company.name',
         ]);
 
         $configurator->setTransformers([

@@ -33,7 +33,7 @@ class ShopDataGrid extends AbstractDataGrid implements DataGridInterface
     {
         $collection->add(new Column([
             'id'         => 'id',
-            'caption'    => $this->trans('shop.id'),
+            'caption'    => $this->trans('shop.id.label'),
             'sorting'    => new Sorting([
                 'default_order' => Sorting::SORT_DIR_ASC,
             ]),
@@ -48,12 +48,34 @@ class ShopDataGrid extends AbstractDataGrid implements DataGridInterface
 
         $collection->add(new Column([
             'id'      => 'name',
-            'caption' => $this->trans('shop.name'),
+            'caption' => $this->trans('shop.name.label'),
+        ]));
+
+        $collection->add(new Column([
+            'id'      => 'company',
+            'caption' => $this->trans('shop.company.label'),
+            'appearance' => new Appearance([
+                'width'   => 140,
+                'align' => Appearance::ALIGN_CENTER
+            ]),
+        ]));
+
+        $collection->add(new Column([
+            'id'      => 'theme',
+            'caption' => $this->trans('shop.theme.label'),
+            'appearance' => new Appearance([
+                'width'   => 140,
+                'align' => Appearance::ALIGN_CENTER
+            ]),
         ]));
 
         $collection->add(new Column([
             'id'      => 'createdAt',
-            'caption' => $this->trans('shop.created_at'),
+            'caption' => $this->trans('shop.created_at.label'),
+            'appearance' => new Appearance([
+                'width'   => 140,
+                'align' => Appearance::ALIGN_CENTER
+            ]),
             'filter'  => new Filter([
                 'type' => Filter::FILTER_BETWEEN,
             ]),

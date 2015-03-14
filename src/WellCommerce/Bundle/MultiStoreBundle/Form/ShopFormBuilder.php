@@ -35,7 +35,7 @@ class ShopFormBuilder extends AbstractFormBuilder implements FormBuilderInterfac
 
         $requiredData->addChild($this->getElement('text_field', [
             'name'  => 'name',
-            'label' => $this->trans('shop.name'),
+            'label' => $this->trans('shop.name.label'),
         ]));
 
         $requiredData->addChild($this->getElement('select', [
@@ -43,6 +43,23 @@ class ShopFormBuilder extends AbstractFormBuilder implements FormBuilderInterfac
             'label'       => $this->trans('shop.company.label'),
             'options'     => $this->get('company.collection')->getSelect(),
             'transformer' => new EntityToIdentifierTransformer($this->get('company.repository'))
+        ]));
+
+        $requiredData->addChild($this->getElement('select', [
+            'name'        => 'theme',
+            'label'       => $this->trans('shop.theme.label'),
+            'options'     => $this->get('theme.collection')->getSelect(),
+            'transformer' => new EntityToIdentifierTransformer($this->get('theme.repository'))
+        ]));
+
+        $urlData = $form->addChild($this->getElement('nested_fieldset', [
+            'name'  => 'url_data',
+            'label' => $this->trans('shop.fieldset.url_data')
+        ]));
+
+        $urlData->addChild($this->getElement('text_field', [
+            'name'  => 'url',
+            'label' => $this->trans('shop.url.label'),
         ]));
 
         $form->addFilter($this->getFilter('no_code'));

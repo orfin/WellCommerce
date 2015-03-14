@@ -70,6 +70,10 @@
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
+        <service id="theme.collection" parent="dataset.collection_builder.factory">
+            <argument type="service" id="theme.dataset"/>
+        </service>
+
         <service id="theme.datagrid" class="WellCommerce\Bundle\ThemeBundle\DataGrid\ThemeDataGrid">
             <argument key="identifier">theme</argument>
             <argument type="service" id="theme.dataset"/>
