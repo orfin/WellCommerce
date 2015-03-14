@@ -44,6 +44,7 @@ class AdminExtension extends \Twig_Extension
         return [
             'user'     => $this->session->get('admin/user'),
             'menu'     => $this->session->get('admin/menu'),
+            'shops'    => $this->session->get('admin/shops'),
             'flashbag' => $this->session->getFlashBag(),
         ];
     }
