@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="shop.manager.admin" class="WellCommerce\Bundle\MultiStoreBundle\Manager\Admin\ShopManager">
+            <argument type="service" id="flash_helper"/>
+            <argument type="service" id="redirect_helper"/>
+            <argument type="service" id="image_helper"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="doctrine_helper"/>
+            <argument type="service" id="translator"/>
+            <call method="setRepository">
+                <argument type="service" id="shop.repository"/>
+            </call>
+            <call method="setFormBuilder">
+                <argument type="service" id="shop.form_builder"/>
+            </call>
+            <call method="setDataGrid">
+                <argument type="service" id="shop.datagrid"/>
+            </call>
+        </service>
+        
+        <service id="shop.controller.admin" class="WellCommerce\Bundle\MultiStoreBundle\Controller\Admin\ShopController">
+            <argument type="service" id="shop.manager.admin"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="shop.repository" class="WellCommerce\Bundle\MultiStoreBundle\Repository\ShopRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceMultiStoreBundle:Shop</argument>
+        </service>
+
+        <service id="shop.dataset.query_builder" class="WellCommerce\Bundle\MultiStoreBundle\DataSet\ShopDataSetQueryBuilder" public="false">
+            <argument type="service" id="shop.repository"/>
+        </service>
+
+        <service id="shop.dataset.loader" class="%dataset.loader.class%">
+            <argument type="service" id="shop.dataset.query_builder"/>
+            <argument type="service" id="dataset.processor"/>
+        </service>
+
+        <service id="shop.dataset" class="WellCommerce\Bundle\MultiStoreBundle\DataSet\ShopDataSet">
+            <argument key="identifier">shop</argument>
+            <argument type="service" id="shop.dataset.loader"/>
+            <configurator service="dataset.configurator" method="configure"/>
+        </service>
+
+        <service id="shop.datagrid" class="WellCommerce\Bundle\MultiStoreBundle\DataGrid\ShopDataGrid">
+            <argument key="identifier">shop</argument>
+            <argument type="service" id="shop.dataset"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="shop.form_builder" class="WellCommerce\Bundle\MultiStoreBundle\Form\ShopFormBuilder">
+            <argument type="service" id="form.resolver.factory"/>
+            <argument type="service" id="form.handler"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="shop.subscriber" class="WellCommerce\Bundle\MultiStoreBundle\EventListener\ShopSubscriber">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="kernel.event_subscriber" />
+        </service>
+    </services>
+</container>

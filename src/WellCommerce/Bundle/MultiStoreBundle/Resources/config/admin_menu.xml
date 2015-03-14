@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<items>
+    <item>
+        <id>company</id>
+        <name>admin.menu.company</name>
+        <route>admin.company.index</route>
+        <path>menu.configuration.multi_store.company</path>
+        <sort_order>10</sort_order>
+    </item>
+    <item>
+        <id>shop</id>
+        <name>admin.menu.shop</name>
+        <route>admin.shop.index</route>
+        <path>menu.configuration.multi_store.shop</path>
+        <sort_order>20</sort_order>
+    </item>
+</items>
