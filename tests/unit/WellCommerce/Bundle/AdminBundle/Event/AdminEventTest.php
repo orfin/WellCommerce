@@ -1,9 +1,23 @@
 <?php
-namespace Event;
+/*
+ * WellCommerce Open-Source E-Commerce Platform
+ *
+ * This file is part of the WellCommerce package.
+ *
+ * (c) Adam Piotrowski <adam@wellcommerce.org>
+ *
+ * For the full copyright and license information,
+ * please view the LICENSE file that was distributed with this source code.
+ */
 
-use WellCommerce\Bundle\AdminBundle\Event\AdminMenuEvent;
+namespace WellCommerce\Bundle\AdminBundle\Event;
 
-class AdminMenuEventTest extends \Codeception\TestCase\Test
+/**
+ * Class AdminEventTest
+ *
+ * @author Adam Piotrowski <adam@wellcommerce.org>
+ */
+class AdminEventTest extends \Codeception\TestCase\Test
 {
     /**
      * @var \WellCommerce\Bundle\AdminBundle\MenuBuilder\AdminMenuBuilderInterface
@@ -36,5 +50,4 @@ class AdminMenuEventTest extends \Codeception\TestCase\Test
             $this->event->getBuilder()
         );
     }
-
 }
