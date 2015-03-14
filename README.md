@@ -16,7 +16,7 @@ The code is still hot but it only gets cooler :). Here are most important things
 
 - [Symfony2 Full-stack framework][1]
 - [Doctrine2 ORM][2]
-- [Behat BDD framework][3]
+- [Codeception testing framework][3]
 - [Twig template engine][4]
 - [Twitter Bootstrap 3 as a base HTML framework][5]
 
@@ -49,7 +49,7 @@ Every contributor is WellComme :). If you'd like to join us, please send a messa
 
 [1]:  http://symfony.com
 [2]:  http://doctrine-project.org
-[3]:  http://behat.org
+[3]:  http://codeception.com
 [4]:  http://twig.sensiolabs.org
 [5]:  http://getbootstrap.com
 [6]:  http://getcomposer.org/
