@@ -88,10 +88,10 @@
     </item>
 
     <item>
-        <id>store_management</id>
+        <id>multi_store</id>
         <class>store_management</class>
-        <name>admin.menu.store_management</name>
-        <path>menu.configuration.store_management</path>
+        <name>admin.menu.multi_store</name>
+        <path>menu.configuration.multi_store</path>
         <sort_order>20</sort_order>
     </item>
 

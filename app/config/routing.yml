@@ -54,8 +54,8 @@ wellcommerce_order:
     prefix:   /admin/sales/order
 
 wellcommerce_company:
-    resource: "@WellCommerceCompanyBundle/Resources/config/routing.xml"
-    prefix:   /admin/configuration/company
+    resource: "@WellCommerceMultiStoreBundle/Resources/config/routing.xml"
+    prefix:   /admin/configuration/multi
 
 wellcommerce_unit:
     resource: "@WellCommerceUnitBundle/Resources/config/routing.xml"
