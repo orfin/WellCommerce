@@ -15,7 +15,6 @@ namespace WellCommerce\Bundle\CoreBundle\Doctrine\ORM;
 /**
  * Interface DataSetAwareRepositoryInterface
  *
- * @package WellCommerce\Bundle\CoreBundle\Doctrine\ORM
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface DataSetAwareRepositoryInterface

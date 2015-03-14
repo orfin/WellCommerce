@@ -45,7 +45,7 @@ before_script:
     - sleep 20
 
 script:
-    - bin/behat --stop-on-failure
+    - bin/codecept run -c src/WellCommerce/Bundle/AdminBundle
 
 after_failure:
     - cat error.log

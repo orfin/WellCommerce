@@ -1,3 +1,0 @@
-suites:
-    AvailabilityBundle  : {namespace: WellCommerce\Bundle\AvailabilityBundle, psr4_prefix: WellCommerce\Bundle\AvailabilityBundle, spec_path: src/WellCommerce/Bundle/AvailabilityBundle}
-    CartBundle          : {namespace: WellCommerce\Bundle\CartBundle, psr4_prefix: WellCommerce\Bundle\CartBundle, spec_path: src/WellCommerce/Bundle/CartBundle, src_path: src/WellCommerce/Bundle/CartBundle}
