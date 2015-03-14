@@ -3,3 +3,7 @@ tools:
     php_sim: false
     php_pdepend: true
     php_analyzer: true
+
+filter:
+    excluded_paths:
+        - tests/*
