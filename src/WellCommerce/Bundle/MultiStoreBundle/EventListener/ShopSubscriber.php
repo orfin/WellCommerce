@@ -11,6 +11,10 @@
  */
 namespace WellCommerce\Bundle\MultiStoreBundle\EventListener;
 
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
+use Symfony\Component\HttpKernel\KernelEvents;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 
 /**
@@ -20,4 +24,30 @@ use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
  */
 class ShopSubscriber extends AbstractEventSubscriber
 {
+    /**
+     * {@inheritdoc}
+     */
+    public static function getSubscribedEvents()
+    {
+        return [
+            KernelEvents::CONTROLLER => ['onKernelController', -256]
+        ];
+    }
+
+    /**
+     * Registers all available shops in admin session
+     *
+     * @param FilterControllerEvent $event
+     */
+    public function onKernelController(FilterControllerEvent $event)
+    {
+        if ($event->getRequestType() == HttpKernelInterface::SUB_REQUEST) {
+            return;
+        }
+
+        if (!$this->container->get('session')->has('admin/shops')) {
+            $shops = $this->container->get('shop.collection')->getSelect();
+            $this->container->get('session')->set('admin/shops', $shops);
+        }
+    }
 }
