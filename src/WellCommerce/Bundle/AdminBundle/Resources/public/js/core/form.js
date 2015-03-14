@@ -7434,7 +7434,9 @@ var GFormTree = GCore.ExtendClass(GFormField, function() {
 		gThis._PrepareOptions();
 		window.setTimeout(gThis.ResetExpansion, 500);
 		gThis.m_jUnmodified = $('<input type="hidden" name="' + gThis.GetName() + '[unmodified]" value="1"/>');
-		gThis.m_jNode.append(gThis.m_jUnmodified);
+		if (!gThis.m_oOptions.bChoosable){
+			gThis.m_jNode.append(gThis.m_jUnmodified);
+		}
 	};
 
 
@@ -7668,7 +7670,7 @@ var GFormTree = GCore.ExtendClass(GFormField, function() {
 			jLi.append($('<label class="' + gThis._GetClass('ItemName') + '"/>').append(jField).append(oItem.name));
 		}
 		else if (gThis.m_oOptions.bChoosable) {
-			var jField = $('<input type="radio" name="__' + gThis.GetName() + '" value="' + sId + '"/>');
+			var jField = $('<input type="radio" name="' + gThis.GetName() + '" value="' + sId + '"/>');
 			if (gThis.m_jFieldWrapper.find('input[value="' + sId + '"]').length) {
 				jField.click();
 				jField.attr('checked', 'checked');

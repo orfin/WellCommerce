@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\MultiStoreBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\PhotoTrait;
@@ -28,7 +29,6 @@ class Shop
 {
     use ORMBehaviors\Timestampable\Timestampable;
     use ORMBehaviors\Blameable\Blameable;
-    use PhotoTrait;
 
     /**
      * @var integer
@@ -56,6 +56,11 @@ class Shop
      * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\Product", mappedBy="shops")
      */
     private $products;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\CategoryBundle\Entity\Category", mappedBy="shops")
+     */
+    private $categories;
 
     /**
      * @return int
@@ -111,5 +116,21 @@ class Shop
     public function setCompany($company)
     {
         $this->company = $company;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+
+    /**
+     * @param ArrayCollection $categories
+     */
+    public function setCategories(ArrayCollection $categories)
+    {
+        $this->categories = $categories;
     }
 }

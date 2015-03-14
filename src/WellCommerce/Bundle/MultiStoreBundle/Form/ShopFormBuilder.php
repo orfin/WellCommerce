@@ -46,23 +46,6 @@ class ShopFormBuilder extends AbstractFormBuilder implements FormBuilderInterfac
             'transformer' => new EntityToIdentifierTransformer($this->get('company.repository'))
         ]));
 
-        $mediaData = $form->addChild($this->getElement('nested_fieldset', [
-            'name'  => 'media_data',
-            'label' => $this->trans('fieldset.media')
-        ]));
-
-        $mediaData->addChild($this->getElement('image', [
-            'name'         => 'photo',
-            'label'        => $this->trans('shop.logo.label'),
-            'load_route'   => $this->generateUrl('admin.media.grid'),
-            'upload_url'   => $this->generateUrl('admin.media.add'),
-            'repeat_min'   => 0,
-            'repeat_max'   => 1,
-            'transformer'  => new MediaEntityToIdentifierTransformer($this->get('media.repository')),
-            'session_id'   => $this->getRequest()->getSession()->getId(),
-            'session_name' => $this->getRequest()->getSession()->getName(),
-        ]));
-
         $form->addFilter($this->getFilter('no_code'));
         $form->addFilter($this->getFilter('trim'));
         $form->addFilter($this->getFilter('secure'));

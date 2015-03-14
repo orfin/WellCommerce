@@ -71,6 +71,15 @@ class Category
     private $products;
 
     /**
+     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\MultiStoreBundle\Entity\Shop", inversedBy="products")
+     * @ORM\JoinTable(name="shop_category",
+     *      joinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id", onDelete="CASCADE")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="shop_id", referencedColumnName="id", onDelete="CASCADE")}
+     * )
+     */
+    private $shops;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -174,5 +183,21 @@ class Category
     public function addProduct(Product $product)
     {
         $this->products[] = $product;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getShops()
+    {
+        return $this->shops;
+    }
+
+    /**
+     * @param mixed $shops
+     */
+    public function setShops($shops)
+    {
+        $this->shops = $shops;
     }
 }
