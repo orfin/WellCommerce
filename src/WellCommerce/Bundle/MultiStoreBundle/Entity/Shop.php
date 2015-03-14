@@ -15,7 +15,6 @@ namespace WellCommerce\Bundle\MultiStoreBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
-use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\PhotoTrait;
 
 /**
  * Class Company
@@ -137,5 +136,21 @@ class Shop
     public function setCategories(ArrayCollection $categories)
     {
         $this->categories = $categories;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProducers()
+    {
+        return $this->producers;
+    }
+
+    /**
+     * @param mixed $producers
+     */
+    public function setProducers($producers)
+    {
+        $this->producers = $producers;
     }
 }
