@@ -34,24 +34,6 @@ class Helper extends AbstractContainer
     }
 
     /**
-     * Makes a sluggable from passed string
-     *
-     * @param        $string
-     * @param string $delimiter
-     *
-     * @return string
-     */
-    public static function makeSlug($string, $delimiter = '-')
-    {
-        $clean = iconv('UTF-8', 'ASCII//TRANSLIT', $string);
-        $clean = preg_replace("/[^a-zA-Z0-9\/_|+ -]/", '', $clean);
-        $clean = strtolower(trim($clean, '-'));
-        $clean = preg_replace("/[\/_|+ -]+/", $delimiter, $clean);
-
-        return $clean;
-    }
-
-    /**
      * Converts string to snake-case
      *
      * @param string $value
@@ -61,7 +43,7 @@ class Helper extends AbstractContainer
      */
     public static function snake($value, $delimiter = '_')
     {
-        $replace = '$1' . $delimiter . '$2';
+        $replace = '$1'.$delimiter.'$2';
 
         return ctype_lower($value) ? $value : strtolower(preg_replace('/(.)([A-Z])/', $replace, $value));
     }
@@ -78,5 +60,26 @@ class Helper extends AbstractContainer
         $value = ucwords(str_replace(['-', '_'], ' ', $value));
 
         return str_replace(' ', '', $value);
+    }
+
+    /**
+     * Converts dot-notation to proper property path notation
+     * Example: menu.catalog.item > [menu][catalog][item]
+     *
+     * @param $path
+     *
+     * @return string
+     */
+    public static function convertDotNotation($path)
+    {
+        $elements = explode('.', $path);
+        $path     = array_map(
+            function ($element) {
+                return '['.$element.']';
+            },
+            $elements
+        );
+
+        return implode('', $path);
     }
 }

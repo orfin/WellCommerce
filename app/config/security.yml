@@ -13,15 +13,30 @@ security:
             logout:
                 path:   admin.user.logout
                 target: admin.user.login
+        client:
+            pattern:   ^/client
+            anonymous: ~
+            form_login:
+                login_path: front.client.login
+                check_path: front.client.login_check
+                default_target_path: front.client.index
+            logout:
+                path:   front.client.logout
+                target: front.client.login
 
     access_control:
         - { path: ^/admin/user/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/admin$, roles: ROLE_ADMIN }
+        - { path: ^/client/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/client, roles: ROLE_CLIENT }
+        - { path: ^/client$, roles: ROLE_CLIENT }
 
     providers:
         administrators:
             entity: { class: WellCommerceUserBundle:User }
+        clients:
+            entity: { class: WellCommerceClientBundle:Client }
 
     encoders:
         WellCommerce\Bundle\UserBundle\Entity\User:

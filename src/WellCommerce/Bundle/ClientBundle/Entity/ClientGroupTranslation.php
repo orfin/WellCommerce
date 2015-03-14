@@ -1,9 +1,20 @@
 <?php
+/*
+ * WellCommerce Open-Source E-Commerce Platform
+ *
+ * This file is part of the WellCommerce package.
+ *
+ * (c) Adam Piotrowski <adam@wellcommerce.org>
+ *
+ * For the full copyright and license information,
+ * please view the LICENSE file that was distributed with this source code.
+ */
 
 namespace WellCommerce\Bundle\ClientBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface;
 
 /**
  * ClientGroupTranslation
@@ -11,7 +22,7 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
  * @ORM\Table(name="client_group_translation")
  * @ORM\Entity
  */
-class ClientGroupTranslation
+class ClientGroupTranslation implements LocaleAwareInterface
 {
     use ORMBehaviors\Translatable\Translation;
 
@@ -23,8 +34,27 @@ class ClientGroupTranslation
     private $name;
 
     /**
-     * Set name.
+     * Returns translation ID.
+     *
+     * @return integer The ID.
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
+    /**
+     * Get name.
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set name.
      *
      * @param string $name
      *
@@ -36,16 +66,4 @@ class ClientGroupTranslation
 
         return $this;
     }
-
-    /**
-     * Get name.
-
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
 }
-

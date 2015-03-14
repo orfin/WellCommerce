@@ -3,52 +3,75 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <parameters>
-        <parameter key="availability.controller.admin.class">WellCommerce\Bundle\AvailabilityBundle\Controller\Admin\AvailabilityController</parameter>
-        <parameter key="availability.repository.class">WellCommerce\Bundle\AvailabilityBundle\Repository\AvailabilityRepository</parameter>
-        <parameter key="availability.datagrid.class">WellCommerce\Bundle\AvailabilityBundle\DataGrid\AvailabilityDataGrid</parameter>
-        <parameter key="availability.datagrid.configurator.class">WellCommerce\Bundle\AvailabilityBundle\DataGrid\AvailabilityDataGridConfigurator</parameter>
-        <parameter key="availability.form.class">WellCommerce\Bundle\AvailabilityBundle\Form\AvailabilityForm</parameter>
-        <parameter key="availability.listener.class">WellCommerce\Bundle\AvailabilityBundle\EventListener\AvailabilityListener</parameter>
-        <parameter key="availability.manager.class">WellCommerce\Bundle\AvailabilityBundle\Manager\AvailabilityManager</parameter>
-    </parameters>
-
     <services>
-        <service id="availability.controller.admin" class="%availability.controller.admin.class%">
-            <argument type="service" id="service_container"/>
-            <argument type="service" id="admin_manager"/>
-            <argument type="service" id="availability.repository"/>
-            <argument type="service" id="availability.datagrid"/>
-            <argument type="service" id="availability.form"/>
-        </service>
-
-        <service id="availability.repository" class="%availability.repository.class%" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
-            <argument>WellCommerceAvailabilityBundle:Availability</argument>
-            <call method="setCurrentLocale">
-                <argument type="expression">service('request').getLocale()</argument>
+        <service id="availability.manager.admin" class="WellCommerce\Bundle\AvailabilityBundle\Manager\Admin\AvailabilityManager">
+            <argument type="service" id="flash_helper"/>
+            <argument type="service" id="redirect_helper"/>
+            <argument type="service" id="image_helper"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="doctrine_helper"/>
+            <argument type="service" id="translator"/>
+            <call method="setRepository">
+                <argument type="service" id="availability.repository"/>
+            </call>
+            <call method="setFormBuilder">
+                <argument type="service" id="availability.form_builder"/>
+            </call>
+            <call method="setDataGrid">
+                <argument type="service" id="availability.datagrid"/>
             </call>
         </service>
 
-        <service id="availability.datagrid" class="%availability.datagrid.class%">
-            <configurator service="availability.datagrid.configurator" method="configure" />
-        </service>
-
-        <service id="availability.datagrid.configurator" class="%availability.datagrid.configurator.class%">
-            <argument key="identifier">availability</argument>
-            <argument type="service" id="datagrid_manager"/>
-            <argument type="service" id="availability.repository"/>
-        </service>
-
-        <service id="availability.form" class="%availability.form.class%">
+        <service id="availability.controller.admin" class="WellCommerce\Bundle\AvailabilityBundle\Controller\Admin\AvailabilityController">
+            <argument type="service" id="availability.manager.admin"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="availability.listener" class="%availability.listener.class%">
-            <argument type="service" id="service_container"/>
-            <argument type="service" id="translator"/>
-            <argument type="service" id="router"/>
+        <service id="availability.repository" class="WellCommerce\Bundle\AvailabilityBundle\Repository\AvailabilityRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceAvailabilityBundle:Availability</argument>
+        </service>
+
+        <service id="availability.dataset.query_builder" class="WellCommerce\Bundle\AvailabilityBundle\DataSet\AvailabilityDataSetQueryBuilder" public="false">
+            <argument type="service" id="availability.repository"/>
+        </service>
+
+        <service id="availability.dataset.loader" class="%dataset.loader.class%">
+            <argument type="service" id="availability.dataset.query_builder"/>
+            <argument type="service" id="dataset.processor"/>
+        </service>
+
+        <service id="availability.dataset" class="WellCommerce\Bundle\AvailabilityBundle\DataSet\AvailabilityDataSet">
+            <argument key="identifier">availability</argument>
+            <argument type="service" id="availability.dataset.loader"/>
+            <configurator service="dataset.configurator" method="configure"/>
+        </service>
+
+        <service id="availability.collection" parent="dataset.collection_builder.factory">
+            <argument type="service" id="availability.dataset"/>
+        </service>
+
+        <service id="availability.datagrid" class="WellCommerce\Bundle\AvailabilityBundle\DataGrid\AvailabilityDataGrid">
+            <argument key="identifier">availability</argument>
+            <argument type="service" id="availability.dataset"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="availability.form_builder" class="WellCommerce\Bundle\AvailabilityBundle\Form\AvailabilityFormBuilder">
+            <argument type="service" id="form.resolver.factory"/>
+            <argument type="service" id="form.handler"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="availability.subscriber" class="WellCommerce\Bundle\AvailabilityBundle\EventListener\AvailabilitySubscriber">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
             <tag name="kernel.event_subscriber" />
         </service>
     </services>

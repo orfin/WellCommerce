@@ -18,20 +18,19 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 /**
  * Class Tax
  *
- * @package WellCommerce\Bundle\TaxBundle\Entity
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * @ORM\Table(name="tax")
- * @ORM\HasLifecycleCallbacks
  * @ORM\Entity(repositoryClass="WellCommerce\Bundle\TaxBundle\Repository\TaxRepository")
  */
 class Tax
 {
     use ORMBehaviors\Translatable\Translatable;
     use ORMBehaviors\Timestampable\Timestampable;
+    use ORMBehaviors\Blameable\Blameable;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -40,16 +39,14 @@ class Tax
     private $id;
 
     /**
-     * @var string
+     * @var float
      *
      * @ORM\Column(name="value", type="decimal", precision=15, scale=4)
      */
     private $value;
 
     /**
-     * Get id.
-     *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -57,27 +54,18 @@ class Tax
     }
 
     /**
-     * Set value.
-     *
-     * @param string $discount
-     *
-     * @return Tax
-     */
-    public function setValue($value)
-    {
-        $this->value = $value;
-
-        return $this;
-    }
-
-    /**
-     * Get value.
-     *
-     * @return string
+     * @return float
      */
     public function getValue()
     {
         return $this->value;
     }
-}
 
+    /**
+     * @param float $value
+     */
+    public function setValue($value)
+    {
+        $this->value = $value;
+    }
+}

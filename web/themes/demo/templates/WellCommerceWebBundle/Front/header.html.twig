@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="WellCommerce.org">
+    <title>Home Page || WellCommerce.org</title>
+    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
+    {% stylesheets 'themes/demo/assets/css/*.css' output="themes/demo/assets/compiled/theme.css" filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+    {% javascripts 'themes/demo/assets/js/*.js' output="themes/demo/assets/compiled/theme.js" %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+</head>
+
+<body>
+<header>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12"><a href="{{ path('front.home_page.index') }}" class="logo"><b>Well</b>Commerce</a></div>
+
+            <div class="col-lg-6 col-md-6 hidden-sm hidden-xs text-right">
+                <div class="btn-group btn-group-sm">
+                    <div class="btn-group btn-group-sm">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            {% trans %}front.locale.label{% endtrans %}: {{ app.request.locale|upper }}
+                            <span class="caret"></span>
+                        </button>
+
+                        <ul class="dropdown-menu" role="menu">
+                            {% for locale in locales %}
+                            <li><a href="{{ path('front.locale.switch',{"_locale": locale.code}) }}">{{ locale.code }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="btn-group btn-group-sm">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            Currency: USD
+                            <span class="caret"></span>
+                        </button>
+
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">EUR</a></li>
+                            <li><a href="#">PLN</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="btn-group btn-group-sm">
+                    <a href="#" class="btn btn-primary">Sign in</a>
+                    <a href="#" class="btn btn-default">Sign up</a>
+                    <a href="#" class="btn btn-default">Cart ($2900,99)</a>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar navbar-inverse" role="navigation">
+            <div class="navbar-header">
+                <a href="cart.php" class="navbar-brand hidden-lg hidden-md hidden-sm">Cart: 3 items ($2900,99)</a>
+
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories <span
+                                    class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            {% for category in categoriesTree() %}
+                            <li><a href="{{ path(category.route) }}">{{ category.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+
+                    {% for category in cmsPageTree %}
+                        {% if category.children|length %}
+                        <li class="dropdown">
+                            <a href="{{ path(category.route) }}" class="dropdown-toggle" data-toggle="dropdown">{{ category.name }} <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                            {% for page in category.children %}
+                                <li><a href="{{ path(page.route) }}">{{ page.name }}</a></li>
+                            {% endfor %}
+                            </ul>
+                        </li>
+                        {% else %}
+                        <li><a href="{{ path(category.route) }}">{{ category.name }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+
+                <form class="navbar-form navbar-right" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search items">
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="button">GO!</button>
+							</span>
+                    </div>
+                </form>
+
+                <ul class="nav navbar-nav hidden-lg hidden-md hidden-sm">
+                    <li><a href="#">Sign in</a></li>
+                    <li><a href="#">Sign up</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Language: EN <span
+                                    class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">PL</a></li>
+                            <li><a href="#">FR</a></li>
+                            <li><a href="#">DE</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Currency: USD <span
+                                    class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">EUR</a></li>
+                            <li><a href="#">PLN</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </div>
+        </nav>
+
+        <ol class="breadcrumb">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Category</a></li>
+            <li class="active">Product</li>
+        </ol>
+    </div>
+</header>

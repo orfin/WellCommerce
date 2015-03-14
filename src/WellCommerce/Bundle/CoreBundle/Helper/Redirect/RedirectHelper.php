@@ -1,11 +1,11 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- * 
+ *
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- * 
+ *
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
@@ -39,24 +39,6 @@ class RedirectHelper implements RedirectHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function redirectTo($route, array $routeParams = [])
-    {
-        return new RedirectResponse($this->router->generate($route, $routeParams, true));
-    }
-
-    /**
-     * Returns current router context
-     *
-     * @return \Symfony\Component\Routing\RequestContext
-     */
-    private function getRouterContext()
-    {
-        return $this->router->getContext();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function redirectToAction($action, array $params = [])
     {
         $route = $this->getActionForCurrentController($action);
@@ -77,4 +59,22 @@ class RedirectHelper implements RedirectHelperInterface
 
         return $route;
     }
-} 
+
+    /**
+     * Returns current router context
+     *
+     * @return \Symfony\Component\Routing\RequestContext
+     */
+    private function getRouterContext()
+    {
+        return $this->router->getContext();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function redirectTo($route, array $routeParams = [])
+    {
+        return new RedirectResponse($this->router->generate($route, $routeParams, true));
+    }
+}

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<routes xmlns="http://symfony.com/schema/routing"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+    <route id="admin.order_status_group.index" path="/status/group/index">
+        <default key="_controller">order_status_group.controller.admin:indexAction</default>
+    </route>
+
+    <route id="admin.order_status_group.grid" path="/status/group/grid">
+        <default key="_controller">order_status_group.controller.admin:gridAction</default>
+        <option key="expose">true</option>
+    </route>
+
+    <route id="admin.order_status_group.add" path="/status/group/add">
+        <default key="_controller">order_status_group.controller.admin:addAction</default>
+    </route>
+
+    <route id="admin.order_status_group.edit" path="/status/group/edit/{id}">
+        <default key="_controller">order_status_group.controller.admin:editAction</default>
+        <option key="expose">true</option>
+    </route>
+
+    <route id="admin.order_status_group.delete" path="/status/group/delete/{id}">
+        <default key="_controller">order_status_group.controller.admin:deleteAction</default>
+        <option key="expose">true</option>
+    </route>
+</routes>

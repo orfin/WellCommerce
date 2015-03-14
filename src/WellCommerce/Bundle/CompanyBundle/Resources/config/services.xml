@@ -3,52 +3,71 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <parameters>
-        <parameter key="company.controller.admin.class">WellCommerce\Bundle\CompanyBundle\Controller\Admin\CompanyController</parameter>
-        <parameter key="company.repository.class">WellCommerce\Bundle\CompanyBundle\Repository\CompanyRepository</parameter>
-        <parameter key="company.datagrid.class">WellCommerce\Bundle\CompanyBundle\DataGrid\CompanyDataGrid</parameter>
-        <parameter key="company.datagrid.configurator.class">WellCommerce\Bundle\CompanyBundle\DataGrid\CompanyDataGridConfigurator</parameter>
-        <parameter key="company.form.class">WellCommerce\Bundle\CompanyBundle\Form\CompanyForm</parameter>
-        <parameter key="company.listener.class">WellCommerce\Bundle\CompanyBundle\EventListener\CompanyListener</parameter>
-        <parameter key="company.manager.class">WellCommerce\Bundle\CompanyBundle\Manager\CompanyManager</parameter>
-    </parameters>
-
     <services>
-        <service id="company.controller.admin" class="%company.controller.admin.class%">
-            <argument type="service" id="service_container"/>
-            <argument type="service" id="admin_manager"/>
-            <argument type="service" id="company.repository"/>
-            <argument type="service" id="company.datagrid"/>
-            <argument type="service" id="company.form"/>
-        </service>
-
-        <service id="company.repository" class="%company.repository.class%" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
-            <argument>WellCommerceCompanyBundle:Company</argument>
-            <call method="setCurrentLocale">
-                <argument type="expression">service('request').getLocale()</argument>
+        <service id="company.manager.admin" class="WellCommerce\Bundle\CompanyBundle\Manager\Admin\CompanyManager">
+            <argument type="service" id="flash_helper"/>
+            <argument type="service" id="redirect_helper"/>
+            <argument type="service" id="image_helper"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="doctrine_helper"/>
+            <argument type="service" id="translator"/>
+            <call method="setRepository">
+                <argument type="service" id="company.repository"/>
+            </call>
+            <call method="setFormBuilder">
+                <argument type="service" id="company.form_builder"/>
+            </call>
+            <call method="setDataGrid">
+                <argument type="service" id="company.datagrid"/>
             </call>
         </service>
-
-        <service id="company.datagrid" class="%company.datagrid.class%">
-            <configurator service="company.datagrid.configurator" method="configure" />
-        </service>
-
-        <service id="company.datagrid.configurator" class="%company.datagrid.configurator.class%">
-            <argument key="identifier">company</argument>
-            <argument type="service" id="datagrid_manager"/>
-            <argument type="service" id="company.repository"/>
-        </service>
-
-        <service id="company.form" class="%company.form.class%">
+        
+        <service id="company.controller.admin" class="WellCommerce\Bundle\CompanyBundle\Controller\Admin\CompanyController">
+            <argument type="service" id="company.manager.admin"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="company.listener" class="%company.listener.class%">
-            <argument type="service" id="service_container"/>
-            <argument type="service" id="translator"/>
-            <argument type="service" id="router"/>
+        <service id="company.repository" class="WellCommerce\Bundle\CompanyBundle\Repository\CompanyRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceCompanyBundle:Company</argument>
+        </service>
+
+        <service id="company.dataset.query_builder" class="WellCommerce\Bundle\CompanyBundle\DataSet\CompanyDataSetQueryBuilder" public="false">
+            <argument type="service" id="company.repository"/>
+        </service>
+
+        <service id="company.dataset.loader" class="%dataset.loader.class%">
+            <argument type="service" id="company.dataset.query_builder"/>
+            <argument type="service" id="dataset.processor"/>
+        </service>
+
+        <service id="company.dataset" class="WellCommerce\Bundle\CompanyBundle\DataSet\CompanyDataSet">
+            <argument key="identifier">company</argument>
+            <argument type="service" id="company.dataset.loader"/>
+            <configurator service="dataset.configurator" method="configure"/>
+        </service>
+
+        <service id="company.datagrid" class="WellCommerce\Bundle\CompanyBundle\DataGrid\CompanyDataGrid">
+            <argument key="identifier">company</argument>
+            <argument type="service" id="company.dataset"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="company.form_builder" class="WellCommerce\Bundle\CompanyBundle\Form\CompanyFormBuilder">
+            <argument type="service" id="form.resolver.factory"/>
+            <argument type="service" id="form.handler"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="company.subscriber" class="WellCommerce\Bundle\CompanyBundle\EventListener\CompanySubscriber">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
             <tag name="kernel.event_subscriber" />
         </service>
     </services>

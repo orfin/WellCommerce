@@ -11,33 +11,13 @@
  */
 namespace WellCommerce\Bundle\CoreBundle\Controller\Box;
 
-use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
+use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 
 /**
  * Class AbstractFrontController
  *
- * @package WellCommerce\Bundle\CoreBundle\Controller
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractBoxController extends AbstractController implements BoxControllerInterface
+abstract class AbstractBoxController extends AbstractFrontController implements BoxControllerInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    protected function getBoxId()
-    {
-        return $this->getParam('_box_id');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getBoxSetting($id)
-    {
-        $accessor = $this->getPropertyAccessor();
-
-        return $accessor->getValue($this->getParam('_box_settings'), '[' . $id . ']');
-    }
-
-
 }

@@ -1,18 +1,16 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- * 
+ *
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- * 
+ *
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
 
 namespace WellCommerce\Bundle\CoreBundle\Repository;
-
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Interface RepositoryInterface
@@ -46,44 +44,52 @@ interface RepositoryInterface
     public function getAlias();
 
     /**
-     * Returns entities name
-     *
-     * @return string
-     */
-    public function getName();
-
-    /**
-     * Resolves request parameters and tries to find corresponding entity
-     *
-     * @param Request $request
-     * @param array   $criteria
-     *
-     * @return mixed|null|object
-     * @throws \Doctrine\ORM\EntityNotFoundException
-     */
-    public function findResource(Request $request, array $criteria = []);
-
-    /**
-     * Returns class metadata
-     *
-     * @return \Doctrine\ORM\Mapping\ClassMetadata
-     */
-    public function getMetadata();
-
-    /**
-     * Returns collection prepared to use in optioned form fields
-     *
-     * @param string $labelField
-     *
-     * @return array
-     */
-    public function getCollectionToSelect($labelField = 'name');
-
-    /**
      * Returns property accessor
      *
      * @return \Symfony\Component\PropertyAccess\PropertyAccessor
      */
     public function getPropertyAccessor();
 
-} 
+    /**
+     * Returns a resource for given primary key
+     *
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function find($id);
+
+    /**
+     * Returns all available and configured locales
+     *
+     * @return array
+     */
+    public function getLocales();
+
+    /**
+     * Returns all entities
+     *
+     * @return mixed
+     */
+    public function findAll();
+
+    /**
+     * Returns single entity using additional criteria
+     *
+     * @param array $criteria
+     * @param array $orderBy
+     *
+     * @return mixed
+     */
+    public function findOneBy(array $criteria, array $orderBy = null);
+
+    /**
+     * @return \Doctrine\ORM\Mapping\ClassMetadata
+     */
+    public function getMetaData();
+
+    /**
+     * @return \Doctrine\ORM\Mapping\ClassMetadataFactory
+     */
+    public function getMetadataFactory();
+}

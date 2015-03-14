@@ -1,11 +1,11 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- * 
+ *
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- * 
+ *
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
@@ -51,37 +51,11 @@ class FlashHelper implements FlashHelperInterface
     }
 
     /**
-     * Returns flash bag
-     *
-     * @return \Symfony\Component\HttpFoundation\Session\SessionBagInterface
-     */
-    private function getFlashBag()
-    {
-        return $this->session->getBag($this->flashesName);
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function addSuccess($message, array $params = [])
     {
         return $this->addMessage(FlashHelperInterface::FLASH_TYPE_SUCCESS, $message, $params);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addNotice($message, array $params = [])
-    {
-        return $this->addMessage(FlashHelperInterface::FLASH_TYPE_NOTICE, $message, $params);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addError($message, array $params = [])
-    {
-        return $this->addMessage(FlashHelperInterface::FLASH_TYPE_ERROR, $message, $params);
     }
 
     /**
@@ -112,4 +86,30 @@ class FlashHelper implements FlashHelperInterface
     {
         return $this->translator->trans($message, $params, $this->flashesName);
     }
-} 
+
+    /**
+     * Returns flash bag
+     *
+     * @return \Symfony\Component\HttpFoundation\Session\Flash\FlashBag
+     */
+    private function getFlashBag()
+    {
+        return $this->session->getBag($this->flashesName);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addNotice($message, array $params = [])
+    {
+        return $this->addMessage(FlashHelperInterface::FLASH_TYPE_NOTICE, $message, $params);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addError($message, array $params = [])
+    {
+        return $this->addMessage(FlashHelperInterface::FLASH_TYPE_ERROR, $message, $params);
+    }
+}

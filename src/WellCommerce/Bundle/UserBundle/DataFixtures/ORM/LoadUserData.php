@@ -1,11 +1,11 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- * 
+ *
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- * 
+ *
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
@@ -42,7 +42,7 @@ class LoadUserData extends AbstractDataFixture implements FixtureInterface, Orde
         $user->setLastName('Doe');
         $user->setUsername('admin');
         $user->setEmail('admin@domain.org');
-        $user->setIsActive(1);
+        $user->setEnabled(1);
         $password = password_hash('admin', PASSWORD_BCRYPT, ['cost' => 12]);
         $user->setPassword($password);
         $user->addRole($role);

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<items>
+    <item>
+        <id>attribute_group</id>
+        <name>admin.menu.attribute_group</name>
+        <route>admin.attribute_group.index</route>
+        <path>menu.catalog.attribute_group</path>
+        <sort_order>40</sort_order>
+    </item>
+</items>

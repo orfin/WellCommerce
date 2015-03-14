@@ -19,12 +19,12 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
  *
  * @ORM\Table(name="client_group")
  * @ORM\Entity(repositoryClass="WellCommerce\Bundle\ClientBundle\Repository\ClientGroupRepository")
- * @ORM\HasLifecycleCallbacks
  */
 class ClientGroup
 {
     use ORMBehaviors\Translatable\Translatable;
     use ORMBehaviors\Timestampable\Timestampable;
+    use ORMBehaviors\Blameable\Blameable;
 
     /**
      * @var integer
@@ -43,6 +43,11 @@ class ClientGroup
     private $discount;
 
     /**
+     * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\ClientBundle\Entity\Client", mappedBy="group")
+     */
+    private $clients;
+
+    /**
      * Get id.
      *
      * @return integer
@@ -50,20 +55,6 @@ class ClientGroup
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set discount.
-     *
-     * @param string $discount
-     *
-     * @return ClientGroup
-     */
-    public function setDiscount($discount)
-    {
-        $this->discount = $discount;
-
-        return $this;
     }
 
     /**
@@ -75,5 +66,22 @@ class ClientGroup
     {
         return $this->discount;
     }
-}
 
+    /**
+     * Set discount.
+     *
+     * @param string $discount
+     */
+    public function setDiscount($discount)
+    {
+        $this->discount = $discount;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getClients()
+    {
+        return $this->clients;
+    }
+}

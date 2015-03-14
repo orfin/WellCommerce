@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\TaxBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface;
 
 /**
  * TaxTranslation
@@ -21,7 +22,7 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
  * @ORM\Table(name="tax_translation")
  * @ORM\Entity
  */
-class TaxTranslation
+class TaxTranslation implements LocaleAwareInterface
 {
     use ORMBehaviors\Translatable\Translation;
 
@@ -33,8 +34,27 @@ class TaxTranslation
     private $name;
 
     /**
-     * Set name.
+     * Returns translation ID.
+     *
+     * @return integer The ID.
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
+    /**
+     * Get name.
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set name.
      *
      * @param string $name
      *
@@ -46,16 +66,4 @@ class TaxTranslation
 
         return $this;
     }
-
-    /**
-     * Get name.
-
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
 }
-

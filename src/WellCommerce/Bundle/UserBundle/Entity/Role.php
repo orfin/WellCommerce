@@ -1,20 +1,20 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- * 
+ *
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- * 
+ *
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
 
 namespace WellCommerce\Bundle\UserBundle\Entity;
 
-use Symfony\Component\Security\Core\Role\RoleInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\Role\RoleInterface;
 
 /**
  * @ORM\Table(name="roles")
@@ -27,22 +27,22 @@ class Role implements RoleInterface
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(name="name", type="string", length=30)
      */
-    private $name;
+    protected $name;
 
     /**
      * @ORM\Column(name="role", type="string", length=20, unique=true)
      */
-    private $role;
+    protected $role;
 
     /**
      * @ORM\ManyToMany(targetEntity="User", mappedBy="roles")
      */
-    private $users;
+    protected $users;
 
     public function __construct()
     {
@@ -67,14 +67,13 @@ class Role implements RoleInterface
         return $this->id;
     }
 
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-
     public function getName()
     {
         return $this->name;
     }
 
-} 
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+}

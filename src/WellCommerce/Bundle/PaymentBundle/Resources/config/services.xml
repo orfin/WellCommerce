@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <imports>
+        <import resource="processors.xml"/>
+    </imports>
+
+    <services>
+        <service id="payment_method.manager.admin" class="WellCommerce\Bundle\PaymentBundle\Manager\Admin\PaymentMethodManager">
+            <argument type="service" id="flash_helper"/>
+            <argument type="service" id="redirect_helper"/>
+            <argument type="service" id="image_helper"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="doctrine_helper"/>
+            <argument type="service" id="translator"/>
+            <call method="setRepository">
+                <argument type="service" id="payment_method.repository"/>
+            </call>
+            <call method="setFormBuilder">
+                <argument type="service" id="payment_method.form_builder"/>
+            </call>
+            <call method="setDataGrid">
+                <argument type="service" id="payment_method.datagrid"/>
+            </call>
+        </service>
+        
+        <service id="payment_method.controller.admin" class="WellCommerce\Bundle\PaymentBundle\Controller\Admin\PaymentMethodController">
+            <argument type="service" id="payment_method.manager.admin"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="payment_method.repository" class="WellCommerce\Bundle\PaymentBundle\Repository\PaymentMethodRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommercePaymentBundle:PaymentMethod</argument>
+        </service>
+
+        <service id="payment_method.datagrid" class="WellCommerce\Bundle\PaymentBundle\DataGrid\PaymentMethodDataGrid">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <configurator service="payment_method.datagrid.configurator" method="configure" />
+        </service>
+
+        <service id="payment_method.form_builder" class="WellCommerce\Bundle\PaymentBundle\Form\PaymentMethodFormBuilder">
+            <argument type="service" id="form.resolver.factory"/>
+            <argument type="service" id="form.handler"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="payment_method.subscriber" class="WellCommerce\Bundle\PaymentBundle\EventListener\PaymentMethodSubscriber">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="kernel.event_subscriber" />
+        </service>
+
+        <service id="payment_method.processor.collection" class="WellCommerce\Bundle\PaymentBundle\Processor\PaymentMethodProcessorCollection" />
+    </services>
+</container>

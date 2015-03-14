@@ -22,13 +22,13 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * @ORM\Table(name="availability")
- * @ORM\HasLifecycleCallbacks
  * @ORM\Entity(repositoryClass="WellCommerce\Bundle\AvailabilityBundle\Repository\AvailabilityRepository")
  */
 class Availability
 {
     use ORMBehaviors\Translatable\Translatable;
     use ORMBehaviors\Timestampable\Timestampable;
+    use ORMBehaviors\Blameable\Blameable;
 
     /**
      * @var integer
@@ -41,7 +41,6 @@ class Availability
 
     /**
      * Get id.
-    
      *
      * @return integer
      */
@@ -50,4 +49,3 @@ class Availability
         return $this->id;
     }
 }
-

@@ -1,8 +1,0 @@
-company:
-   edit:        Edit company
-   name:        Name
-   short_name:  Short name
-   street:      Street
-   street_no:   Street no
-   flat_no:     Flat no
-   success:     Company saved successfully

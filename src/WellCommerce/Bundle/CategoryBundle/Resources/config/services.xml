@@ -3,51 +3,190 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <parameters>
-        <parameter key="category.controller.admin.class">WellCommerce\Bundle\CategoryBundle\Controller\Admin\CategoryController</parameter>
-        <parameter key="category.repository.class">WellCommerce\Bundle\CategoryBundle\Repository\CategoryRepository</parameter>
-        <parameter key="category.form.class">WellCommerce\Bundle\CategoryBundle\Form\CategoryForm</parameter>
-        <parameter key="category.tree.class">WellCommerce\Bundle\CategoryBundle\Form\CategoryTree</parameter>
-        <parameter key="category.listener.class">WellCommerce\Bundle\CategoryBundle\EventListener\CategoryListener</parameter>
-        <parameter key="category.manager.class">WellCommerce\Bundle\CategoryBundle\Manager\CategoryManager</parameter>
-    </parameters>
-
     <services>
-        <service id="category.controller.admin" class="%category.controller.admin.class%">
-            <argument type="service" id="service_container"/>
-            <argument type="service" id="admin_manager"/>
-            <argument type="service" id="category.repository"/>
-            <argument>null</argument>
-            <argument type="service" id="category.form"/>
-        </service>
-
-        <service id="category.repository" class="%category.repository.class%" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
-            <argument>WellCommerceCategoryBundle:Category</argument>
-            <call method="setCurrentLocale">
-                <argument type="expression">service('request').getLocale()</argument>
-            </call>
-        </service>
-
-        <service id="category.form" class="%category.form.class%">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
-
-        <service id="category.tree" class="%category.tree.class%">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
+        <service id="category.manager.admin" class="WellCommerce\Bundle\CategoryBundle\Manager\Admin\CategoryManager">
+            <argument type="service" id="flash_helper"/>
+            <argument type="service" id="redirect_helper"/>
+            <argument type="service" id="image_helper"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="doctrine_helper"/>
+            <argument type="service" id="translator"/>
             <call method="setRepository">
                 <argument type="service" id="category.repository"/>
             </call>
+            <call method="setFormBuilder">
+                <argument type="service" id="category.form_builder"/>
+            </call>
         </service>
 
-        <service id="category.listener" class="%category.listener.class%">
-            <argument type="service" id="service_container"/>
+        <service id="category.controller.admin" class="WellCommerce\Bundle\CategoryBundle\Controller\Admin\CategoryController">
+            <argument type="service" id="category.manager.admin"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="category.manager.front" class="WellCommerce\Bundle\CategoryBundle\Manager\Front\CategoryManager">
+            <argument type="service" id="flash_helper"/>
+            <argument type="service" id="redirect_helper"/>
+            <argument type="service" id="image_helper"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="doctrine_helper"/>
             <argument type="service" id="translator"/>
-            <argument type="service" id="router"/>
+            <call method="setRepository">
+                <argument type="service" id="category.repository"/>
+            </call>
+            <call method="setProviders">
+                <argument type="service" id="resource.provider.collection" />
+            </call>
+        </service>
+
+        <service id="category.controller.front" class="WellCommerce\Bundle\CategoryBundle\Controller\Front\CategoryController">
+            <argument type="service" id="category.manager.front"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="category_menu.layout_box.controller" class="WellCommerce\Bundle\CategoryBundle\Controller\Box\CategoryMenuBoxController">
+            <argument type="service" id="category.manager.front"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="category_menu.layout_box.configurator" class="WellCommerce\Bundle\CategoryBundle\Layout\CategoryMenuBoxConfigurator">
+            <argument>CategoryMenuBox</argument>
+            <argument>category_menu.layout_box.controller</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="layout_box.configurator" />
+        </service>
+
+        <service id="category_info.layout_box.controller" class="WellCommerce\Bundle\CategoryBundle\Controller\Box\CategoryInfoBoxController">
+            <argument type="service" id="category.manager.front"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="category_info.layout_box.configurator" class="WellCommerce\Bundle\CategoryBundle\Layout\CategoryInfoBoxConfigurator">
+            <argument>CategoryInfoBox</argument>
+            <argument>category_info.layout_box.controller</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="layout_box.configurator" />
+        </service>
+
+        <service id="category.repository" class="WellCommerce\Bundle\CategoryBundle\Repository\CategoryRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceCategoryBundle:Category</argument>
+        </service>
+
+        <service id="category.collection.admin" parent="dataset.collection_builder.factory">
+            <argument type="service" id="category.dataset.admin"/>
+        </service>
+
+        <service id="category.collection.front" parent="dataset.collection_builder.factory">
+            <argument type="service" id="category.dataset.front"/>
+        </service>
+
+        <service id="category.dataset.query_builder.front" class="WellCommerce\Bundle\CategoryBundle\DataSet\Front\CategoryDataSetQueryBuilder" public="false">
+            <argument type="service" id="category.repository"/>
+        </service>
+
+        <service id="category.dataset.query_builder.admin" class="WellCommerce\Bundle\CategoryBundle\DataSet\Admin\CategoryDataSetQueryBuilder" public="false">
+            <argument type="service" id="category.repository"/>
+        </service>
+
+        <service id="category.dataset.loader.admin" class="%dataset.loader.class%">
+            <argument type="service" id="category.dataset.query_builder.admin"/>
+            <argument type="service" id="dataset.processor"/>
+        </service>
+
+        <service id="category.dataset.loader.front" class="%dataset.loader.class%">
+            <argument type="service" id="category.dataset.query_builder.front"/>
+            <argument type="service" id="dataset.processor"/>
+        </service>
+
+        <service id="category.dataset.front" class="WellCommerce\Bundle\CategoryBundle\DataSet\Front\CategoryDataSet">
+            <argument key="identifier">category</argument>
+            <argument type="service" id="category.dataset.loader.front"/>
+            <configurator service="dataset.configurator" method="configure"/>
+        </service>
+
+        <service id="category.dataset.admin" class="WellCommerce\Bundle\CategoryBundle\DataSet\Admin\CategoryDataSet">
+            <argument key="identifier">category</argument>
+            <argument type="service" id="category.dataset.loader.admin"/>
+            <configurator service="dataset.configurator" method="configure"/>
+        </service>
+
+        <service id="category.provider" class="WellCommerce\Bundle\CategoryBundle\Provider\CategoryProvider">
+            <argument type="service" id="category.collection.front" />
+            <tag name="resource.provider" alias="category"/>
+        </service>
+
+        <service id="category_products.provider" class="WellCommerce\Bundle\CategoryBundle\Provider\CategoryProductsProvider">
+            <tag name="resource.provider" alias="category_products"/>
+        </service>
+
+        <service id="category.form_builder" class="WellCommerce\Bundle\CategoryBundle\Form\CategoryFormBuilder">
+            <argument type="service" id="form.resolver.factory"/>
+            <argument type="service" id="form.handler"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="category_tree.form_builder" class="WellCommerce\Bundle\CategoryBundle\Form\CategoryTreeFormBuilder">
+            <argument type="service" id="form.resolver.factory"/>
+            <argument type="service" id="form.handler"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="category.subscriber" class="WellCommerce\Bundle\CategoryBundle\EventListener\CategorySubscriber">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
             <tag name="kernel.event_subscriber" />
+        </service>
+
+        <service id="category.route.generator" class="WellCommerce\Bundle\CategoryBundle\Routing\CategoryRouteGenerator">
+            <argument type="collection" key="defaults">
+                <argument key="_controller">category.controller.front:indexAction</argument>
+                <argument key="page">1</argument>
+                <argument key="orderBy">null</argument>
+                <argument key="orderDir">null</argument>
+            </argument>
+            <argument type="collection" key="requirements">
+                <argument key="page">\d{1,10}</argument>
+                <argument key="orderDir">asc|desc</argument>
+            </argument>
+            <tag name="route.generator" />
+        </service>
+
+        <service id="category_products.layout_box.controller" class="WellCommerce\Bundle\CategoryBundle\Controller\Box\CategoryProductsBoxController">
+            <argument type="service" id="category.manager.front"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="category_products.layout_box.configurator" class="WellCommerce\Bundle\CategoryBundle\Layout\CategoryProductsBoxConfigurator">
+            <argument>CategoryProductsBox</argument>
+            <argument>category_products.layout_box.controller</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="layout_box.configurator" />
+        </service>
+
+        <service id="twig.extension.category" class="WellCommerce\Bundle\CategoryBundle\Twig\Extension\CategoryExtension">
+            <argument type="service" id="category.provider"/>
+            <tag name="twig.extension"/>
         </service>
     </services>
 </container>

@@ -4,24 +4,27 @@ fos_js_routing:
 _bazinga_jstranslation:
     resource: "@BazingaJsTranslationBundle/Resources/config/routing/routing.yml"
 
-remove_trailing_slash:
-    path: /{url}
-    defaults: { _controller: WellCommerceCoreBundle:Redirecting:removeTrailingSlash }
-    requirements:
-        url: .*/$
-    methods: [GET]
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.xml"
+
+wellcommerce_web:
+    resource: "@WellCommerceWebBundle/Resources/config/routing.xml"
+    prefix:   /
+
+wellcommerce_admin:
+    resource: "@WellCommerceAdminBundle/Resources/config/routing.xml"
+    prefix:   /admin
 
 wellcommerce_user:
     resource: "@WellCommerceUserBundle/Resources/config/routing.xml"
     prefix:   /admin/user
 
-wellcommerce_locale:
-    resource: "@WellCommerceLocaleBundle/Resources/config/routing.xml"
-    prefix:   /admin/configuration/locale
+wellcommerce_routing:
+    resource: "@WellCommerceRoutingBundle/Resources/config/routing.xml"
+    prefix:   /admin/routing
 
-wellcommerce_currency:
-    resource: "@WellCommerceCurrencyBundle/Resources/config/routing.xml"
-    prefix:   /admin/configuration/currency
+wellcommerce_intl:
+    resource: "@WellCommerceIntlBundle/Resources/config/routing.xml"
 
 wellcommerce_availability:
     resource: "@WellCommerceAvailabilityBundle/Resources/config/routing.xml"
@@ -35,21 +38,24 @@ wellcommerce_producer:
     resource: "@WellCommerceProducerBundle/Resources/config/routing.xml"
     prefix:   /admin/catalog/producer
 
+wellcommerce_product:
+    resource: "@WellCommerceProductBundle/Resources/config/routing.xml"
+    prefix:   /admin/catalog/product
+
 wellcommerce_category:
     resource: "@WellCommerceCategoryBundle/Resources/config/routing.xml"
     prefix:   /admin/catalog/category
 
 wellcommerce_client:
     resource: "@WellCommerceClientBundle/Resources/config/routing.xml"
-    prefix:   /admin/crm/client
+
+wellcommerce_order:
+    resource: "@WellCommerceOrderBundle/Resources/config/routing.xml"
+    prefix:   /admin/sales/order
 
 wellcommerce_company:
     resource: "@WellCommerceCompanyBundle/Resources/config/routing.xml"
     prefix:   /admin/configuration/company
-
-wellcommerce_shop:
-    resource: "@WellCommerceShopBundle/Resources/config/routing.xml"
-    prefix:   /admin/configuration/shop
 
 wellcommerce_unit:
     resource: "@WellCommerceUnitBundle/Resources/config/routing.xml"
@@ -59,18 +65,43 @@ wellcommerce_tax:
     resource: "@WellCommerceTaxBundle/Resources/config/routing.xml"
     prefix:   /admin/configuration/tax
 
-wellcommerce_contact:
-    resource: "@WellCommerceContactBundle/Resources/config/routing.xml"
-    prefix:   /admin/configuration/contact
+wellcommerce_media:
+    resource: "@WellCommerceMediaBundle/Resources/config/routing.xml"
+    prefix:   /admin/media
 
-wellcommerce_web:
-    resource: "@WellCommerceWebBundle/Resources/config/routing.xml"
-    prefix:   /
+wellcommerce_layout:
+    resource: "@WellCommerceLayoutBundle/Resources/config/routing.xml"
+    prefix:   /admin/layout
+
+wellcommerce_theme:
+    resource: "@WellCommerceThemeBundle/Resources/config/routing.xml"
+    prefix:   /admin/theme
+
+wellcommerce_cms:
+    resource: "@WellCommerceCmsBundle/Resources/config/routing.xml"
+    prefix:   /admin/cms
+
+wellcommerce_payment:
+    resource: "@WellCommercePaymentBundle/Resources/config/routing.xml"
+    prefix:   /admin/payment
+
+wellcommerce_attribute:
+    resource: "@WellCommerceAttributeBundle/Resources/config/routing.xml"
+    prefix:   /admin/attribute
+
+wellcommerce_cart:
+    resource: "@WellCommerceCartBundle/Resources/config/routing.xml"
 
 root:
     path: /admin
     defaults:
         _controller: FrameworkBundle:Redirect:redirect
         route: admin.user.index
-        permanent: true
+        permanent: false
 
+remove_trailing_slash:
+    path: /{url}
+    defaults: { _controller: WellCommerceRoutingBundle:Redirecting:removeTrailingSlash }
+    requirements:
+        url: .*/$
+    methods: [GET]

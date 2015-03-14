@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="currency.manager.admin" class="WellCommerce\Bundle\IntlBundle\Manager\Admin\CurrencyManager">
+            <argument type="service" id="flash_helper"/>
+            <argument type="service" id="redirect_helper"/>
+            <argument type="service" id="image_helper"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="doctrine_helper"/>
+            <argument type="service" id="translator"/>
+            <call method="setRepository">
+                <argument type="service" id="currency.repository"/>
+            </call>
+            <call method="setFormBuilder">
+                <argument type="service" id="currency.form_builder"/>
+            </call>
+            <call method="setDataGrid">
+                <argument type="service" id="currency.datagrid"/>
+            </call>
+        </service>
+
+        <service id="currency.controller.admin" class="WellCommerce\Bundle\IntlBundle\Controller\Admin\CurrencyController">
+            <argument type="service" id="currency.manager.admin"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="currency.repository" class="WellCommerce\Bundle\IntlBundle\Repository\CurrencyRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceIntlBundle:Currency</argument>
+        </service>
+
+        <service id="currency.dataset.query_builder" class="WellCommerce\Bundle\IntlBundle\DataSet\CurrencyDataSetQueryBuilder" public="false">
+            <argument type="service" id="currency.repository"/>
+        </service>
+
+        <service id="currency.dataset.loader" class="%dataset.loader.class%">
+            <argument type="service" id="currency.dataset.query_builder"/>
+            <argument type="service" id="dataset.processor"/>
+        </service>
+
+        <service id="currency.dataset" class="WellCommerce\Bundle\IntlBundle\DataSet\CurrencyDataSet">
+            <argument key="identifier">currency</argument>
+            <argument type="service" id="currency.dataset.loader"/>
+            <configurator service="dataset.configurator" method="configure"/>
+        </service>
+
+        <service id="currency.collection" parent="dataset.collection_builder.factory">
+            <argument type="service" id="currency.dataset"/>
+        </service>
+
+        <service id="currency.datagrid" class="WellCommerce\Bundle\IntlBundle\DataGrid\CurrencyDataGrid">
+            <argument key="identifier">currency</argument>
+            <argument type="service" id="currency.dataset"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="currency.form_builder" class="WellCommerce\Bundle\IntlBundle\Form\CurrencyFormBuilder">
+            <argument type="service" id="form.resolver.factory"/>
+            <argument type="service" id="form.handler"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setRepository">
+                <argument type="service" id="currency.repository"/>
+            </call>
+        </service>
+
+        <service id="currency.subscriber" class="WellCommerce\Bundle\IntlBundle\EventListener\CurrencySubscriber">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="kernel.event_subscriber" />
+        </service>
+
+        <service id="twig.extension.money" class="WellCommerce\Bundle\IntlBundle\Twig\Extension\MoneyExtension">
+            <tag name="twig.extension"/>
+        </service>
+    </services>
+</container>

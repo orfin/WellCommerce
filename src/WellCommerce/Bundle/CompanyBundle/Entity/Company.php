@@ -14,7 +14,8 @@ namespace WellCommerce\Bundle\CompanyBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
-use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\AddressTrait;
+use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\AddressTrait;
+use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\PhotoTrait;
 
 /**
  * Class Company
@@ -28,7 +29,9 @@ use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\AddressTrait;
 class Company
 {
     use ORMBehaviors\Timestampable\Timestampable;
+    use ORMBehaviors\Blameable\Blameable;
     use AddressTrait;
+    use PhotoTrait;
 
     /**
      * @var integer
@@ -64,6 +67,16 @@ class Company
     }
 
     /**
+     * Get name.
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
      * Set name.
      *
      * @param string $name
@@ -78,13 +91,13 @@ class Company
     }
 
     /**
-     * Get name.
+     * Get shortName.
      *
      * @return string
      */
-    public function getName()
+    public function getShortName()
     {
-        return $this->name;
+        return $this->shortName;
     }
 
     /**
@@ -100,16 +113,4 @@ class Company
 
         return $this;
     }
-
-    /**
-     * Get shortName.
-     *
-     * @return string
-     */
-    public function getShortName()
-    {
-        return $this->shortName;
-    }
-
 }
-

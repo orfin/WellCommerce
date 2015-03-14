@@ -13,6 +13,7 @@ app/logs/*
 /vendor/
 /bin/
 /composer.phar
+/php-cs-fixer.phar
 /application/.idea
 *.idea
 /tests/_output
@@ -20,3 +21,4 @@ app/config/parameters.yml
 app/cache/dev/appDevDebugProjectContainer.php
 app/cache/dev/appDevDebugProjectContainer.xml
 *.project
+web/media/*

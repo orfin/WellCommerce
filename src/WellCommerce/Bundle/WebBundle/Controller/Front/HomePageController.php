@@ -12,26 +12,30 @@
 
 namespace WellCommerce\Bundle\WebBundle\Controller\Front;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
+use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
 
 /**
- * Class UnitController
+ * Class HomePageController
  *
- * @package WellCommerce\Bundle\UnitBundle\Controller
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
+<<<<<<< HEAD
  * @Template()
+=======
+ * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
+>>>>>>> origin/development
  */
-class HomePageController extends Controller
+class HomePageController extends AbstractFrontController implements FrontControllerInterface
 {
-
-    public function indexAction(Request $request)
+    public function indexAction()
     {
+<<<<<<< HEAD
         return [];
+=======
+        return [
+            'layout' => ''
+        ];
+>>>>>>> origin/development
     }
-
 }

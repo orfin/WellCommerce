@@ -12,8 +12,7 @@
 
 namespace WellCommerce\Bundle\ClientBundle\Controller\Admin;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
+use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
 
 /**
  * Class ClientGroupController
@@ -21,9 +20,8 @@ use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
  * @package WellCommerce\Bundle\ClientBundle\Controller
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
- * @Template()
+ * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class ClientGroupController extends AbstractAdminController
 {
-
 }

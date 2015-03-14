@@ -12,34 +12,31 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\Controller\Admin;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use WellCommerce\Bundle\CategoryBundle\Entity\Category;
-use WellCommerce\Bundle\CategoryBundle\Repository\CategoryRepository;
-use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
+use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
 
 /**
  * Class CategoryController
  *
- * @package WellCommerce\Bundle\CategoryBundle\Controller
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
- * @Template()
+ * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class CategoryController extends AbstractAdminController
 {
-    /**
-     * @var \WellCommerce\Bundle\CategoryBundle\Repository\CategoryRepositoryInterface
-     */
-    protected $repository;
-
     public function indexAction()
     {
-        $tree = $this->getFormBuilder($this->get('category.tree'), null, [
-            'name'  => 'category_tree',
-            'class' => 'category-select'
-        ]);
+        $categories = $this->getManager()->getRepository()->findAll();
+
+        if (count($categories)) {
+            $category = current($categories);
+
+            return $this->redirectToAction('edit', [
+                'id' => $category->getId()
+            ]);
+        }
+
+        $tree = $this->buildTreeForm();
 
         return [
             'tree' => $tree
@@ -48,39 +45,29 @@ class CategoryController extends AbstractAdminController
 
     public function addAction(Request $request)
     {
-        $name     = $request->request->get('name');
-        $em       = $this->getEntityManager();
-        $category = new Category();
+        $category = $this->getRepository()->quickAddCategory($request->request);
 
-        $category->setHierarchy(0);
-        $category->translate()->setName($name);
-        $category->mergeNewTranslations();
-        $em->persist($category);
-        $em->flush();
-
-        return new JsonResponse(['id' => $category->getId()]);
+        return $this->jsonResponse([
+            'id' => $category->getId(),
+        ]);
     }
 
     public function editAction(Request $request)
     {
-        $resource = $this->repository->findResource($request);
+        $manager  = $this->getManager();
+        $tree     = $this->buildTreeForm();
+        $resource = $manager->findResource($request);
+        $form     = $manager->getForm($resource);
 
-        $tree = $this->getFormBuilder($this->get('category.tree'), null, [
-            'name'  => 'tree',
-            'class' => 'category-select'
-        ]);
-
-        $form = $this->getFormBuilder($this->get('category.form'), $resource, [
-            'name' => 'category',
-        ]);
-
-        if ($form->handleRequest($request)->isValid()) {
-            $this->manager->update($resource, $request);
+        if ($form->handleRequest()->isValid()) {
+            $manager->updateResource($resource, $request);
             if ($form->isAction('continue')) {
-                return $this->manager->getRedirectHelper()->redirectToAction('edit', $resource);
+                return $this->redirectToAction('edit', [
+                    'id' => $resource->getId()
+                ]);
             }
 
-            return $this->manager->getRedirectHelper()->redirectToAction('index');
+            return $this->redirectToAction('index');
         }
 
         return [
@@ -92,8 +79,29 @@ class CategoryController extends AbstractAdminController
     public function sortAction(Request $request)
     {
         $items = $request->request->get('items');
-        $this->repository->changeOrder($items);
+        $this->getRepository()->changeOrder($items);
 
-        return new JsonResponse(['success' => true]);
+        return $this->jsonResponse(['success' => true]);
+    }
+
+    /**
+     * Builds nested tree form
+     *
+     * @return \WellCommerce\Bundle\FormBundle\Elements\FormInterface
+     */
+    private function buildTreeForm()
+    {
+        return $this->get('category_tree.form_builder')->createForm([
+            'name'  => 'category_tree',
+            'class' => 'category-select',
+        ]);
+    }
+
+    /**
+     * @return \WellCommerce\Bundle\CategoryBundle\Repository\CategoryRepositoryInterface
+     */
+    protected function getRepository()
+    {
+        return $this->getManager()->getRepository();
     }
 }

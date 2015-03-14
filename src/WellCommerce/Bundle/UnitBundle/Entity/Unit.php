@@ -22,13 +22,13 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * @ORM\Table(name="unit")
- * @ORM\HasLifecycleCallbacks
  * @ORM\Entity(repositoryClass="WellCommerce\Bundle\UnitBundle\Repository\UnitRepository")
  */
 class Unit
 {
     use ORMBehaviors\Translatable\Translatable;
     use ORMBehaviors\Timestampable\Timestampable;
+    use ORMBehaviors\Blameable\Blameable;
 
     /**
      * @var integer
@@ -41,7 +41,6 @@ class Unit
 
     /**
      * Get id.
-    
      *
      * @return integer
      */
@@ -50,4 +49,3 @@ class Unit
         return $this->id;
     }
 }
-

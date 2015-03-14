@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="product.manager.admin" class="WellCommerce\Bundle\ProductBundle\Manager\Admin\ProductManager">
+            <argument type="service" id="flash_helper"/>
+            <argument type="service" id="redirect_helper"/>
+            <argument type="service" id="image_helper"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="doctrine_helper"/>
+            <argument type="service" id="translator"/>
+            <call method="setRepository">
+                <argument type="service" id="product.repository"/>
+            </call>
+            <call method="setFormBuilder">
+                <argument type="service" id="product.form_builder"/>
+            </call>
+            <call method="setDataGrid">
+                <argument type="service" id="product.datagrid"/>
+            </call>
+        </service>
+
+        <service id="product.manager.front" class="WellCommerce\Bundle\ProductBundle\Manager\Front\ProductManager">
+            <argument type="service" id="flash_helper"/>
+            <argument type="service" id="redirect_helper"/>
+            <argument type="service" id="image_helper"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="doctrine_helper"/>
+            <argument type="service" id="translator"/>
+            <call method="setRepository">
+                <argument type="service" id="product.repository"/>
+            </call>
+        </service>
+        
+        <service id="product.controller.admin" class="WellCommerce\Bundle\ProductBundle\Controller\Admin\ProductController">
+            <argument type="service" id="product.manager.admin"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="product.controller.front" class="WellCommerce\Bundle\ProductBundle\Controller\Front\ProductController">
+            <argument type="service" id="product.manager.front"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="product.repository" class="WellCommerce\Bundle\ProductBundle\Repository\ProductRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceProductBundle:Product</argument>
+        </service>
+
+        <service id="product.dataset.query_builder.admin" class="WellCommerce\Bundle\ProductBundle\DataSet\ProductDataSetQueryBuilder" public="false">
+            <argument type="service" id="product.repository"/>
+        </service>
+
+        <service id="product.dataset.loader.admin" class="%dataset.loader.class%">
+            <argument type="service" id="product.dataset.query_builder.admin"/>
+            <argument type="service" id="dataset.processor"/>
+        </service>
+
+        <service id="product.dataset.admin" class="WellCommerce\Bundle\ProductBundle\DataSet\Admin\ProductDataSet">
+            <argument key="identifier">product</argument>
+            <argument type="service" id="product.dataset.loader.admin"/>
+            <configurator service="dataset.configurator" method="configure"/>
+        </service>
+
+        <service id="product.dataset.query_builder.front" class="WellCommerce\Bundle\ProductBundle\DataSet\Front\ProductDataSetQueryBuilder" public="false">
+            <argument type="service" id="product.repository"/>
+        </service>
+
+        <service id="product.dataset.loader.front" class="%dataset.loader.class%">
+            <argument type="service" id="product.dataset.query_builder.front"/>
+            <argument type="service" id="dataset.processor"/>
+        </service>
+
+        <service id="product.dataset.front" class="WellCommerce\Bundle\ProductBundle\DataSet\Front\ProductDataSet">
+            <argument key="identifier">product</argument>
+            <argument type="service" id="product.dataset.loader.front"/>
+            <configurator service="dataset.configurator" method="configure"/>
+        </service>
+
+        <service id="product.datagrid" class="WellCommerce\Bundle\ProductBundle\DataGrid\ProductDataGrid">
+            <argument key="identifier">product</argument>
+            <argument type="service" id="product.dataset.admin"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="product.form_builder" class="WellCommerce\Bundle\ProductBundle\Form\ProductFormBuilder">
+            <argument type="service" id="form.resolver.factory"/>
+            <argument type="service" id="form.handler"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="product.subscriber" class="WellCommerce\Bundle\ProductBundle\EventListener\ProductSubscriber">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="kernel.event_subscriber" />
+        </service>
+
+        <service id="product.route.generator" class="WellCommerce\Bundle\ProductBundle\Routing\ProductRouteGenerator">
+            <argument type="collection" key="defaults">
+                <argument key="_controller">product.controller.front:indexAction</argument>
+            </argument>
+            <argument type="collection" key="requirements" />
+            <tag name="route.generator" />
+        </service>
+    </services>
+</container>

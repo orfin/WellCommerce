@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\DelivererBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface;
 
 /**
  * DelivererTranslation
@@ -21,7 +22,7 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
  * @ORM\Table(name="deliverer_translation")
  * @ORM\Entity
  */
-class DelivererTranslation
+class DelivererTranslation implements LocaleAwareInterface
 {
     use ORMBehaviors\Translatable\Translation;
 
@@ -33,8 +34,17 @@ class DelivererTranslation
     private $name;
 
     /**
-     * Set name.
+     * Get name.
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
 
+    /**
+     * Set name.
      *
      * @param string $name
      *
@@ -46,16 +56,4 @@ class DelivererTranslation
 
         return $this;
     }
-
-    /**
-     * Get name.
-
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
 }
-

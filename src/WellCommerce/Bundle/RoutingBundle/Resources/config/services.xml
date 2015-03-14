@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="routing.manager.admin" class="WellCommerce\Bundle\RoutingBundle\Manager\Admin\RoutingManager">
+            <argument type="service" id="flash_helper"/>
+            <argument type="service" id="redirect_helper"/>
+            <argument type="service" id="image_helper"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="doctrine_helper"/>
+            <argument type="service" id="translator"/>
+            <call method="setRepository">
+                <argument type="service" id="routing.repository"/>
+            </call>
+            <call method="setFormBuilder">
+                <argument type="service" id="routing.form_builder"/>
+            </call>
+            <call method="setDataGrid">
+                <argument type="service" id="routing.datagrid"/>
+            </call>
+        </service>
+
+        <service id="routing.controller.admin" class="WellCommerce\Bundle\RoutingBundle\Controller\Admin\RoutingController">
+            <argument type="service" id="routing.manager.admin"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="routing.repository" class="WellCommerce\Bundle\RoutingBundle\Repository\RouteRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceRoutingBundle:Route</argument>
+        </service>
+
+        <service id="routing.dataset.query_builder" class="WellCommerce\Bundle\RoutingBundle\DataSet\RoutingDataSetQueryBuilder" public="false">
+            <argument type="service" id="routing.repository"/>
+        </service>
+
+        <service id="routing.dataset.loader" class="%dataset.loader.class%">
+            <argument type="service" id="routing.dataset.query_builder"/>
+            <argument type="service" id="dataset.processor"/>
+        </service>
+
+        <service id="routing.dataset" class="WellCommerce\Bundle\RoutingBundle\DataSet\RoutingDataSet">
+            <argument key="identifier">routing</argument>
+            <argument type="service" id="routing.dataset.loader"/>
+            <configurator service="dataset.configurator" method="configure"/>
+        </service>
+
+        <service id="routing.datagrid" class="WellCommerce\Bundle\RoutingBundle\DataGrid\RoutingDataGrid">
+            <argument key="identifier">routing</argument>
+            <argument type="service" id="routing.dataset"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="routing.form_builder" class="WellCommerce\Bundle\ProductBundle\Form\ProductFormBuilder">
+            <argument type="service" id="form.resolver.factory"/>
+            <argument type="service" id="form.handler"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="routable.subscriber" class="WellCommerce\Bundle\RoutingBundle\EventListener\RoutableSubscriber">
+            <tag name="doctrine.event_subscriber" />
+        </service>
+
+        <service id="router.provider.endpoint" class="WellCommerce\Bundle\RoutingBundle\Provider\RouteProvider">
+            <argument type="service" id="route.generator.collection" />
+            <argument type="service" id="routing.repository" />
+        </service>
+
+        <service id="route.generator.collection" class="WellCommerce\Bundle\RoutingBundle\Generator\RouteGeneratorCollection" />
+    </services>
+</container>

@@ -15,8 +15,8 @@ namespace WellCommerce\Bundle\ProducerBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\PhotoTrait;
 use WellCommerce\Bundle\DelivererBundle\Entity\Deliverer;
-use WellCommerce\Bundle\ShopBundle\Entity\Shop;
 
 /**
  * Class Locale
@@ -32,6 +32,8 @@ class Producer
 {
     use ORMBehaviors\Translatable\Translatable;
     use ORMBehaviors\Timestampable\Timestampable;
+    use ORMBehaviors\Blameable\Blameable;
+    use PhotoTrait;
 
     /**
      * @var integer
@@ -43,15 +45,6 @@ class Producer
     private $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\ShopBundle\Entity\Shop", inversedBy="producers")
-     * @ORM\JoinTable(name="shop_producer",
-     *      joinColumns={@ORM\JoinColumn(name="producer_id", referencedColumnName="id", onDelete="CASCADE")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="shop_id", referencedColumnName="id", onDelete="CASCADE")}
-     * )
-     */
-    private $shops;
-
-    /**
      * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\DelivererBundle\Entity\Deliverer", inversedBy="producers")
      * @ORM\JoinTable(name="producer_deliverer",
      *      joinColumns={@ORM\JoinColumn(name="producer_id", referencedColumnName="id", onDelete="CASCADE")},
@@ -59,6 +52,14 @@ class Producer
      * )
      */
     private $deliverers;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->deliverers = new ArrayCollection();
+    }
 
     /**
      * Get id.
@@ -71,40 +72,6 @@ class Producer
     }
 
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->shops      = new ArrayCollection();
-        $this->deliverers = new ArrayCollection();
-    }
-
-    /**
-     * Sets shops for category
-     *
-     * @param $shops
-     */
-    public function setShops($shops)
-    {
-        $this->shops = $shops;
-    }
-
-    /**
-     * Get shops for category
-     *
-     * @return mixed
-     */
-    public function getShops()
-    {
-        return $this->shops;
-    }
-
-    public function addShop(Shop $shop)
-    {
-        $this->shops[] = $shop;
-    }
-
-    /**
      * Returns all available deliverers for producer
      *
      * @return ArrayCollection
@@ -112,6 +79,11 @@ class Producer
     public function getDeliverers()
     {
         return $this->deliverers;
+    }
+
+    public function setDeliverers(ArrayCollection $collection)
+    {
+        $this->deliverers = $collection;
     }
 
     /**
@@ -123,11 +95,4 @@ class Producer
     {
         $this->deliverers = $deliverer;
     }
-
-    public function setDeliverers(ArrayCollection $collection)
-    {
-        echo $collection->count().PHP_EOL;
-        $this->deliverers = $collection;
-    }
 }
-

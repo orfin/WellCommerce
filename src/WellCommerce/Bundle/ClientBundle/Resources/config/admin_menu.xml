@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<items>
+    <item>
+        <id>client</id>
+        <name>admin.menu.client</name>
+        <route>admin.client.index</route>
+        <path>menu.crm.client</path>
+        <sort_order>10</sort_order>
+    </item>
+    <item>
+        <id>client_group</id>
+        <name>admin.menu.client_group</name>
+        <route>admin.client_group.index</route>
+        <path>menu.crm.client_group</path>
+        <sort_order>20</sort_order>
+    </item>
+</items>

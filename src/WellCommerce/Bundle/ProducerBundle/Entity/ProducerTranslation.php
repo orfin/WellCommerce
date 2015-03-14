@@ -13,20 +13,23 @@
 namespace WellCommerce\Bundle\ProducerBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model\Sluggable\Sluggable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translation;
-use WellCommerce\Bundle\CoreBundle\Entity\Behaviours\MetaDataTrait;
+use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\MetaDataTrait;
+use WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface;
+use WellCommerce\Bundle\RoutingBundle\Entity\Behaviours\RoutableTrait;
+use WellCommerce\Bundle\RoutingBundle\Entity\RoutableSubjectInterface;
 
 /**
  * ProducerTranslation
  *
  * @ORM\Table(name="producer_translation")
+ * @ORM\HasLifecycleCallbacks
  * @ORM\Entity
  */
-class ProducerTranslation
+class ProducerTranslation implements RoutableSubjectInterface, LocaleAwareInterface
 {
     use Translation;
-    use Sluggable;
+    use RoutableTrait;
     use MetaDataTrait;
 
     /**
@@ -51,22 +54,12 @@ class ProducerTranslation
     private $description;
 
     /**
-     * Set name.
-     *
-     * @param string $name
-     *
-     * @return ProducerTranslation
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
+     * @ORM\OneToOne(targetEntity="WellCommerce\Bundle\ProducerBundle\Entity\ProducerRoute", cascade={"persist","remove"})
+     * @ORM\JoinColumn(name="route_id", referencedColumnName="id", onDelete="CASCADE")
+     **/
+    protected $route;
 
     /**
-     * Get name.
-     *
      * @return string
      */
     public function getName()
@@ -75,20 +68,14 @@ class ProducerTranslation
     }
 
     /**
-     * Set shortDescription
-     *
-     * @param string $shortDescription
+     * @param string $name
      */
-    public function setShortDescription($shortDescription)
+    public function setName($name)
     {
-        $this->shortDescription = $shortDescription;
-
-        return $this;
+        $this->name = $name;
     }
 
     /**
-     * Get shortDescription
-     *
      * @return string
      */
     public function getShortDescription()
@@ -97,20 +84,14 @@ class ProducerTranslation
     }
 
     /**
-     * Set description
-     *
-     * @param string $description
+     * @param string $shortDescription
      */
-    public function setDescription($description)
+    public function setShortDescription($shortDescription)
     {
-        $this->description = $description;
-
-        return $this;
+        $this->shortDescription = $shortDescription;
     }
 
     /**
-     * Get description
-     *
      * @return string
      */
     public function getDescription()
@@ -119,11 +100,18 @@ class ProducerTranslation
     }
 
     /**
-     * {@inheritdoc}
+     * @param string $description
      */
-    public function getSluggableFields()
+    public function setDescription($description)
     {
-        return ['name'];
+        $this->description = $description;
+    }
+
+    /**
+     * @return ProducerRoute|\WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface
+     */
+    public function getRouteEntity()
+    {
+        return new ProducerRoute();
     }
 }
-

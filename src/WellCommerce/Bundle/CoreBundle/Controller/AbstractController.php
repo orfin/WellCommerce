@@ -1,63 +1,90 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- * 
+ *
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- * 
+ *
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
 namespace WellCommerce\Bundle\CoreBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
-use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
-use WellCommerce\Bundle\CoreBundle\Form\FormInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * Class Controller
  *
- * @package WellCommerce\Bundle\CoreBundle\Controller
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractController extends AbstractContainer
+abstract class AbstractController extends Controller
 {
     /**
-     * Creates and returns the form element
+     * Returns content as json response
      *
-     * @param FormInterface $form    Form instance
-     * @param null|object   $data    Initial form data
-     * @param array         $options Form options
+     * @param mixed $content
      *
-     * @return \WellCommerce\Bundle\CoreBundle\Form\Elements\Form
+     * @return JsonResponse
      */
-    protected function getFormBuilder(FormInterface $form, $data = null, array $options)
+    protected function jsonResponse($content)
     {
-        return $this->get('form.builder')->create($form, $data, $options)->getForm();
+        return new JsonResponse($content);
     }
 
     /**
-     * Creates and returns the datagrid
+     * Translates message using Translator service
      *
-     * @param DataGridInterface $dataGrid DataGrid instance
+     * @param string $id
      *
-     * @return \WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface
+     * @return string
      */
-    protected function getDataGrid(DataGridInterface $dataGrid)
+    protected function trans($id)
     {
-        return $this->get('datagrid_builder')->create($dataGrid);
+        return $this->getManager()->getTranslator()->trans($id);
     }
 
     /**
-     * Returns current user
+     * Returns image path
      *
-     * @return \WellCommerce\Bundle\UserBundle\Entity\User
+     * @param string $path
+     * @param string $filter
+     *
+     * @return string
      */
-    public function getUser()
+    protected function getImage($path, $filter)
     {
-        return $this->get('security.context')->getToken()->getUser();
+        return $this->getManager()->getImageHelper()->getImage($path, $filter);
     }
+
+    /**
+     * Returns default entity manager
+     *
+     * @return \Doctrine\Common\Persistence\ObjectManager|object
+     */
+    protected function getEntityManager()
+    {
+        return $this->getManager()->getDoctrineHelper()->getEntityManager();
+    }
+
+    /**
+     * Redirects user to another action in scope of current controller
+     *
+     * @param string $actionName
+     * @param array  $params
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    protected function redirectToAction($actionName = 'index', array $params = [])
+    {
+        return $this->getManager()->getRedirectHelper()->redirectToAction($actionName, $params);
+    }
+
+    /**
+     * Returns manager object
+     *
+     * @return \WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface
+     */
+    abstract protected function getManager();
 }

@@ -12,74 +12,63 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\Repository;
 
-use WellCommerce\Bundle\CoreBundle\DataGrid\Request\Request;
+use Symfony\Component\HttpFoundation\ParameterBag;
+use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\RoutingBundle\Helper\Sluggable;
 
 /**
  * Class CategoryRepository
  *
- * @package WellCommerce\Bundle\CategoryBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class CategoryRepository extends AbstractEntityRepository implements CategoryRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getTreeItems()
+    public function getDataSetQueryBuilder()
     {
-        $queryBuilder = $this->getQueryBuilder('category');
-        $queryBuilder->select('
-            category.id,
-            category.hierarchy,
-            IDENTITY(category.parent) parent,
-            COUNT(category_children.id) children,
-            category_translation.name
-        ');
-        $queryBuilder->leftJoin(
-            'WellCommerceCategoryBundle:Category',
-            'category_children',
-            'WITH',
-            'category.parent = category_children.id');
-        $queryBuilder->leftJoin(
-            'WellCommerceCategoryBundle:CategoryTranslation',
-            'category_translation',
-            'WITH',
-            'category.id = category_translation.translatable AND category_translation.locale = :locale');
+        $queryBuilder = $this->getQueryBuilder();
         $queryBuilder->groupBy('category.id');
-        $queryBuilder->setParameter('locale', $this->getCurrentLocale());
-        $query = $queryBuilder->getQuery();
-        $items = $query->getArrayResult();
+        $queryBuilder->leftJoin('category.translations', 'category_translation');
+        $queryBuilder->leftJoin('category.children', 'category_children');
+        $queryBuilder->leftJoin('category.products', 'category_products');
 
-        $categoriesTree = [];
-        foreach ($items as $item) {
-            $categoriesTree[$item['id']] = [
-                'id'          => $item['id'],
-                'name'        => $item['name'],
-                'hasChildren' => (bool)$item['children'],
-                'parent'      => $item['parent'],
-                'weight'      => $item['hierarchy']
-            ];
-        }
-
-        return $categoriesTree;
+        return $queryBuilder;
     }
 
     public function changeOrder(array $items = [])
     {
         foreach ($items as $item) {
-            if ($item['parent'] > 0) {
-                $parent = $this->find($item['parent']);
-                $child  = $this->find($item['id']);
-                $child->setId($item['id']);
-                $child->setChildNodeOf($parent);
+            $parent = $this->find($item['parent']);
+            $child  = $this->find($item['id']);
+            if (null !== $child) {
+                $child->setParent($parent);
+                $child->setHierarchy($item['weight']);
                 $this->_em->persist($child);
             }
         }
 
         $this->_em->flush();
-
-        die();
     }
 
+    public function quickAddCategory(ParameterBag $parameters)
+    {
+        $name     = $parameters->get('name');
+        $parent   = $this->find((int) $parameters->get('parent'));
+        $locales  = $this->getLocales();
+        $category = new Category();
+        $category->setHierarchy(0);
+        $category->setEnabled(1);
+        $category->setParent($parent);
+
+        /** @var $locale \WellCommerce\Bundle\IntlBundle\Entity\Locale */
+        foreach ($locales as $locale) {
+            $category->translate($locale->getCode())->setName($name);
+            $category->translate($locale->getCode())->setSlug(Sluggable::makeSlug($name));
+        }
+        $category->mergeNewTranslations();
+        $this->getEntityManager()->persist($category);
+        $this->getEntityManager()->flush();
+
+        return $category;
+    }
 }

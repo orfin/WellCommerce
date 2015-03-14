@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="media.manager.admin" class="WellCommerce\Bundle\MediaBundle\Manager\Admin\MediaManager">
+            <argument type="service" id="flash_helper"/>
+            <argument type="service" id="redirect_helper"/>
+            <argument type="service" id="image_helper"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="doctrine_helper"/>
+            <argument type="service" id="translator"/>
+            <call method="setRepository">
+                <argument type="service" id="media.repository"/>
+            </call>
+            <call method="setFormBuilder">
+                <argument type="service" id="media.form_builder"/>
+            </call>
+            <call method="setDataGrid">
+                <argument type="service" id="media.datagrid"/>
+            </call>
+        </service>
+        
+        <service id="media.controller.admin" class="WellCommerce\Bundle\MediaBundle\Controller\Admin\MediaController">
+            <argument type="service" id="media.manager.admin"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="media.repository" class="WellCommerce\Bundle\MediaBundle\Repository\MediaRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceMediaBundle:Media</argument>
+        </service>
+
+        <service id="media.dataset.query_builder" class="WellCommerce\Bundle\MediaBundle\DataSet\MediaDataSetQueryBuilder" public="false">
+            <argument type="service" id="media.repository"/>
+        </service>
+
+        <service id="media.dataset.loader" class="%dataset.loader.class%">
+            <argument type="service" id="media.dataset.query_builder"/>
+            <argument type="service" id="dataset.processor"/>
+        </service>
+
+        <service id="media.dataset" class="WellCommerce\Bundle\MediaBundle\DataSet\MediaDataSet">
+            <argument key="identifier">media</argument>
+            <argument type="service" id="media.dataset.loader"/>
+            <call method="setImageHelper">
+                <argument type="service" id="image_helper"/>
+            </call>
+            <configurator service="dataset.configurator" method="configure"/>
+        </service>
+
+        <service id="media.datagrid" class="WellCommerce\Bundle\MediaBundle\DataGrid\MediaDataGrid">
+            <argument key="identifier">media</argument>
+            <argument type="service" id="media.dataset"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="media.form_builder" class="WellCommerce\Bundle\MediaBundle\Form\MediaFormBuilder">
+            <argument type="service" id="form.resolver.factory"/>
+            <argument type="service" id="form.handler"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+
+        <service id="media.subscriber" class="WellCommerce\Bundle\MediaBundle\EventListener\MediaSubscriber">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="kernel.event_subscriber" />
+        </service>
+
+        <service id="media.uploader" class="WellCommerce\Bundle\MediaBundle\Uploader\MediaUploader">
+            <argument>%kernel.root_dir%</argument>
+            <argument type="service" id="filesystem" />
+            <argument type="service" id="event_dispatcher" />
+            <argument type="service" id="media.repository" />
+        </service>
+
+        <service id="twig.extension.image" class="WellCommerce\Bundle\MediaBundle\Twig\Extension\ImageExtension">
+            <argument type="service" id="image_helper"/>
+            <tag name="twig.extension"/>
+        </service>
+    </services>
+</container>

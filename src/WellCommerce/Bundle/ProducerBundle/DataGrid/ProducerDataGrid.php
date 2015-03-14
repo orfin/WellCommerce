@@ -11,16 +11,17 @@
  */
 namespace WellCommerce\Bundle\ProducerBundle\DataGrid;
 
-use WellCommerce\Bundle\CoreBundle\DataGrid\AbstractDataGrid;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Column\Column;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnCollection;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnInterface;
-use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
+use WellCommerce\Bundle\DataGridBundle\AbstractDataGrid;
+use WellCommerce\Bundle\DataGridBundle\Column\Column;
+use WellCommerce\Bundle\DataGridBundle\Column\ColumnCollection;
+use WellCommerce\Bundle\DataGridBundle\Column\Options\Appearance;
+use WellCommerce\Bundle\DataGridBundle\Column\Options\Filter;
+use WellCommerce\Bundle\DataGridBundle\Column\Options\Sorting;
+use WellCommerce\Bundle\DataGridBundle\DataGridInterface;
 
 /**
  * Class ProducerDataGrid
  *
- * @package WellCommerce\Bundle\ProducerBundle
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class ProducerDataGrid extends AbstractDataGrid implements DataGridInterface
@@ -28,35 +29,26 @@ class ProducerDataGrid extends AbstractDataGrid implements DataGridInterface
     /**
      * {@inheritdoc}
      */
-    public function addColumns(ColumnCollection $collection)
+    public function configureColumns(ColumnCollection $collection)
     {
         $collection->add(new Column([
             'id'         => 'id',
-            'source'     => 'producer.id',
-            'caption'    => $this->trans('producer.id'),
-            'sorting'    => [
-                'default_order' => ColumnInterface::SORT_DIR_DESC
-            ],
-            'appearance' => [
+            'caption'    => $this->trans('producer.id.label'),
+            'sorting'    => new Sorting([
+                'default_order' => Sorting::SORT_DIR_DESC,
+            ]),
+            'appearance' => new Appearance([
                 'width'   => 90,
-                'visible' => false
-            ],
-            'filter'     => [
-                'type' => ColumnInterface::FILTER_BETWEEN
-            ]
+                'visible' => false,
+            ]),
+            'filter'     => new Filter([
+                'type' => Filter::FILTER_BETWEEN,
+            ]),
         ]));
 
         $collection->add(new Column([
             'id'         => 'name',
-            'source'     => 'producer_translation.name',
-            'caption'    => $this->trans('producer.name'),
-            'appearance' => [
-                'width' => 70,
-                'align' => ColumnInterface::ALIGN_LEFT
-            ],
-            'filter'     => [
-                'type' => ColumnInterface::FILTER_INPUT
-            ]
+            'caption'    => $this->trans('producer.name.label'),
         ]));
     }
 }

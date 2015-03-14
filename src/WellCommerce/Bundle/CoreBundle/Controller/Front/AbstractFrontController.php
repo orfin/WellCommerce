@@ -11,41 +11,64 @@
  */
 namespace WellCommerce\Bundle\CoreBundle\Controller\Front;
 
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
-use WellCommerce\Bundle\CoreBundle\Layout\Layout;
-use WellCommerce\Bundle\CoreBundle\Layout\LayoutInterface;
+use WellCommerce\Bundle\CoreBundle\Manager\Front\FrontManagerInterface;
 
 /**
  * Class AbstractFrontController
  *
- * @package WellCommerce\Bundle\CoreBundle\Controller\Front
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 abstract class AbstractFrontController extends AbstractController implements FrontControllerInterface
 {
-    /**s
-     *
-     * @var \WellCommerce\Bundle\CoreBundle\Layout\LayoutInterface
+    /**
+     * @var FrontManagerInterface
      */
-    private $layout = null;
+    private $manager;
 
     /**
-     * {@inheritdoc}
+     * Constructor
+     *
+     * @param FrontManagerInterface $manager
      */
-    protected function setLayout($name, $cache = true, $ttl = LayoutInterface::CACHE_TTL)
+    public function __construct(FrontManagerInterface $manager)
     {
-        $this->layout = new Layout($name, $cache, $ttl);
+        $this->manager = $manager;
     }
 
     /**
-     * {@inheritdoc}
+     * Returns resource by ID parameter
+     *
+     * @param Request $request
+     * @param array   $criteria
+     *
+     * @return mixed
      */
-    protected function renderLayout()
+    protected function findOr404(Request $request, array $criteria = [])
     {
-        if (null === $this->layout) {
-            throw new \LogicException(sprintf('Layout for controller is not set. You must use setLayout method in controller service definition.'));
+        // check whether request contains ID attribute
+        if (!$request->attributes->has('id')) {
+            throw new \LogicException('Request does not have "id" attribute set.');
         }
 
-        return $this->getLayoutRenderer()->load($this->layout);
+        $criteria['id'] = $request->attributes->get('id');
+
+        if (null === $resource = $this->manager->getRepository()->findOneBy($criteria)) {
+            throw new NotFoundHttpException(sprintf('Resource not found'));
+        }
+
+        return $resource;
+    }
+
+    /**
+     * Returns manager object
+     *
+     * @return FrontManagerInterface
+     */
+    protected function getManager()
+    {
+        return $this->manager;
     }
 }

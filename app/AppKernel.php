@@ -10,9 +10,14 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
+use Symfony\Component\HttpKernel\Kernel;
 
+/**
+ * Class AppKernel
+ *
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
+ */
 class AppKernel extends Kernel
 {
     public function registerBundles()
@@ -25,34 +30,45 @@ class AppKernel extends Kernel
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
+            new Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle(),
+            new Liip\ImagineBundle\LiipImagineBundle(),
+            new Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
             // WellCommerce bundles
+            new WellCommerce\Bundle\CoreBundle\WellCommerceCoreBundle(),
+            new WellCommerce\Bundle\DataGridBundle\WellCommerceDataGridBundle(),
+            new WellCommerce\Bundle\DataSetBundle\WellCommerceDataSetBundle(),
+            new WellCommerce\Bundle\FormBundle\WellCommerceFormBundle(),
+            new WellCommerce\Bundle\RoutingBundle\WellCommerceRoutingBundle(),
+            new WellCommerce\Bundle\AdminBundle\WellCommerceAdminBundle(),
+            new WellCommerce\Bundle\IntlBundle\WellCommerceIntlBundle(),
             new WellCommerce\Bundle\WebBundle\WellCommerceWebBundle(),
-            new WellCommerce\Bundle\CurrencyBundle\WellCommerceCurrencyBundle(),
+            new WellCommerce\Bundle\CmsBundle\WellCommerceCmsBundle(),
+            new WellCommerce\Bundle\MediaBundle\WellCommerceMediaBundle(),
             new WellCommerce\Bundle\AvailabilityBundle\WellCommerceAvailabilityBundle(),
             new WellCommerce\Bundle\DelivererBundle\WellCommerceDelivererBundle(),
             new WellCommerce\Bundle\ProducerBundle\WellCommerceProducerBundle(),
             new WellCommerce\Bundle\CategoryBundle\WellCommerceCategoryBundle(),
-            new WellCommerce\Bundle\CoreBundle\WellCommerceCoreBundle(),
-            new WellCommerce\Bundle\CountryBundle\WellCommerceCountryBundle(),
-            new WellCommerce\Bundle\AdminMenuBundle\WellCommerceAdminMenuBundle(),
             new WellCommerce\Bundle\TaxBundle\WellCommerceTaxBundle(),
             new WellCommerce\Bundle\UnitBundle\WellCommerceUnitBundle(),
             new WellCommerce\Bundle\CompanyBundle\WellCommerceCompanyBundle(),
-            new WellCommerce\Bundle\ContactBundle\WellCommerceContactBundle(),
             new WellCommerce\Bundle\ClientBundle\WellCommerceClientBundle(),
-            new WellCommerce\Bundle\LocaleBundle\WellCommerceLocaleBundle(),
-            new WellCommerce\Bundle\ShopBundle\WellCommerceShopBundle(),
-            new WellCommerce\Bundle\UserBundle\WellCommerceUserBundle()
+            new WellCommerce\Bundle\UserBundle\WellCommerceUserBundle(),
+            new WellCommerce\Bundle\ProductBundle\WellCommerceProductBundle(),
+            new WellCommerce\Bundle\PaymentBundle\WellCommercePaymentBundle(),
+            new WellCommerce\Bundle\AttributeBundle\WellCommerceAttributeBundle(),
+            new WellCommerce\Bundle\ThemeBundle\WellCommerceThemeBundle(),
+            new WellCommerce\Bundle\LayoutBundle\WellCommerceLayoutBundle(),
+            new WellCommerce\Bundle\OrderBundle\WellCommerceOrderBundle(),
+            new WellCommerce\Bundle\CartBundle\WellCommerceCartBundle(),
         ];
 
-        if (in_array($this->getEnvironment(), array('dev', 'test'))) {
+        if (in_array($this->getEnvironment(), ['dev', 'test'])) {
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
-            $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
         }
 

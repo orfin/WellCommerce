@@ -24,10 +24,10 @@ install:
    - sudo service apache2 restart
 
 before_script:
+    - mysql -e 'create database travis;'
     - cp app/config/parameters.yml.travis app/config/parameters.yml
     - composer self-update
-    - composer install --prefer-source --no-interaction
-    - php app/console doctrine:database:create --env=test -vvv
+    - composer update --no-interaction
     - php app/console doctrine:schema:create --env=test -vvv
     - php app/console doctrine:fixtures:load --no-interaction -vvv
     - chmod -R 777 app/cache app/logs
@@ -40,12 +40,12 @@ before_script:
 
     - "sh -e /etc/init.d/xvfb start"
     - "export DISPLAY=:99.0"
-    - "wget http://selenium-release.storage.googleapis.com/2.42/selenium-server-standalone-2.42.2.jar"
-    - "java -jar selenium-server-standalone-2.42.2.jar > /dev/null &"
-    - sleep 10
+    - "wget http://selenium-release.storage.googleapis.com/2.43/selenium-server-standalone-2.43.1.jar"
+    - "java -jar selenium-server-standalone-2.43.1.jar > /dev/null &"
+    - sleep 20
 
 script:
-    - bin/codecept run
+    - bin/codecept run -c src/WellCommerce/Bundle/AdminBundle
 
 after_failure:
     - cat error.log

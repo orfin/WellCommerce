@@ -14,9 +14,12 @@ namespace WellCommerce\Bundle\UserBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\EnableableTrait;
+use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\PhotoTrait;
 
 /**
  * User
@@ -27,6 +30,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class User implements \Serializable, UserInterface, EquatableInterface
 {
     use Timestampable;
+    use Blameable;
+    use PhotoTrait;
+    use EnableableTrait;
 
     /**
      * @ORM\Column(type="integer")
@@ -36,12 +42,12 @@ class User implements \Serializable, UserInterface, EquatableInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=64, unique=false)
+     * @ORM\Column(name="first_name", type="string", length=64, unique=false)
      */
     private $firstName;
 
     /**
-     * @ORM\Column(type="string", length=64, unique=false)
+     * @ORM\Column(name="last_name", type="string", length=64, unique=false)
      */
     private $lastName;
 
@@ -66,20 +72,15 @@ class User implements \Serializable, UserInterface, EquatableInterface
     private $salt;
 
     /**
-     * @ORM\Column(name="is_active", type="boolean")
-     */
-    private $isActive;
-
-    /**
      * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\UserBundle\Entity\Role", inversedBy="users")
      */
     private $roles;
 
     public function __construct()
     {
-        $this->isActive = true;
-        $this->roles    = new ArrayCollection();
-        $this->salt     = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
+        $this->enabled = true;
+        $this->roles   = new ArrayCollection();
+        $this->salt    = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
     }
 
     public function getId()
@@ -127,9 +128,6 @@ class User implements \Serializable, UserInterface, EquatableInterface
         $this->lastName = $lastName;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getUsername()
     {
         return $this->username;
@@ -140,29 +138,14 @@ class User implements \Serializable, UserInterface, EquatableInterface
         $this->username = $username;
     }
 
-    public function setEmail($email)
-    {
-        $this->email = $email;
-    }
-
     public function getEmail()
     {
         return $this->email;
     }
 
-    public function getIsActive()
+    public function setEmail($email)
     {
-        return $this->isActive;
-    }
-
-    public function setIsActive($isActive)
-    {
-        $this->isActive = $isActive;
-    }
-
-    public function setPassword($password)
-    {
-        $this->password = $password;
+        $this->email = $email;
     }
 
     /**
@@ -170,7 +153,7 @@ class User implements \Serializable, UserInterface, EquatableInterface
      */
     public function getSalt()
     {
-        return null;
+        return;
     }
 
     /**
@@ -179,6 +162,11 @@ class User implements \Serializable, UserInterface, EquatableInterface
     public function getPassword()
     {
         return $this->password;
+    }
+
+    public function setPassword($password)
+    {
+        $this->password = $password;
     }
 
     /**
@@ -214,7 +202,7 @@ class User implements \Serializable, UserInterface, EquatableInterface
      */
     public function unserialize($serialized)
     {
-        list ($this->id, $this->username, $this->password) = unserialize($serialized);
+        list($this->id, $this->username, $this->password) = unserialize($serialized);
     }
 
     public function isEqualTo(UserInterface $user)

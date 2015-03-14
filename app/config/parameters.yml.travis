@@ -3,7 +3,7 @@ parameters:
     database_host:     127.0.0.1
     database_port:     3306
     database_name:     travis
-    database_user:     travis
+    database_user:     root
     database_password: ~
 
     mailer_transport:  smtp

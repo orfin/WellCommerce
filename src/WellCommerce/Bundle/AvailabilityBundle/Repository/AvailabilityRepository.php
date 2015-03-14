@@ -21,17 +21,4 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
  */
 class AvailabilityRepository extends AbstractEntityRepository implements AvailabilityRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getDataGridQueryBuilder()
-    {
-        return parent::getQueryBuilder()->groupBy('availability.id')
-            ->leftJoin(
-                'WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityTranslation',
-                'availability_translation',
-                'WITH',
-                'availability.id = availability_translation.translatable AND availability_translation.locale = :locale');
-
-    }
 }

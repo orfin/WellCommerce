@@ -1,0 +1,36 @@
+#This file was auto-generated. Please do not change it directly.
+admin:
+    menu:
+        attribute_group: 'Variant groups'
+        availability: Availability
+        catalog: Catalog
+        category: Categories
+        client: Clients
+        client_group: 'Client groups'
+        cms: CMS
+        configuration: Configuration
+        contact: Contacts
+        crm: CRM
+        currency: Currencies
+        dashboard: Dashboard
+        deliverer: Deliverers
+        dictionary: Translations
+        integration: Integrations
+        layout: Layout
+        layout_box: Boxes
+        locale: Languages
+        localization: Internationalization
+        media: 'Media management'
+        news: News
+        page: 'CMS Pages'
+        payment_method: 'Payment methods'
+        producer: Producers
+        product: Products
+        product_status: 'Product statuses'
+        promotion: Promotions
+        promotions: Promotions
+        reports: Reports
+        sales: Sales
+        tax: Taxes
+        theme: Themes
+        user_management: Administrators

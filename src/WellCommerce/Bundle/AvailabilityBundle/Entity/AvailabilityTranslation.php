@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\AvailabilityBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface;
 
 /**
  * AvailabilityTranslation
@@ -21,7 +22,7 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
  * @ORM\Table(name="availability_translation")
  * @ORM\Entity
  */
-class AvailabilityTranslation
+class AvailabilityTranslation implements LocaleAwareInterface
 {
     use ORMBehaviors\Translatable\Translation;
 
@@ -33,23 +34,17 @@ class AvailabilityTranslation
     private $name;
 
     /**
-     * Set name.
-
+     * Returns translation ID.
      *
-     * @param string $name
-     *
-     * @return AvailabilityTranslation
+     * @return integer The ID.
      */
-    public function setName($name)
+    public function getId()
     {
-        $this->name = $name;
-
-        return $this;
+        return $this->id;
     }
 
     /**
      * Get name.
-
      *
      * @return string
      */
@@ -57,5 +52,16 @@ class AvailabilityTranslation
     {
         return $this->name;
     }
-}
 
+    /**
+     * Sets name
+     *
+     * @param $name
+     *
+     * @return $this
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+}

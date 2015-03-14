@@ -31,6 +31,7 @@ class Deliverer
 {
     use ORMBehaviors\Translatable\Translatable;
     use ORMBehaviors\Timestampable\Timestampable;
+    use ORMBehaviors\Blameable\Blameable;
 
     /**
      * @var integer
@@ -48,23 +49,12 @@ class Deliverer
 
     /**
      * Get id.
-    
      *
      * @return integer
      */
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Sets producers for deliverer
-     *
-     * @param $shops
-     */
-    public function setProducers(ArrayCollection $collection)
-    {
-        $this->producers = $collection;
     }
 
     /**
@@ -77,9 +67,18 @@ class Deliverer
         return $this->producers;
     }
 
+    /**
+     * Sets producers for deliverer
+     *
+     * @param $collection
+     */
+    public function setProducers(ArrayCollection $collection)
+    {
+        $this->producers = $collection;
+    }
+
     public function addProducer(Producer $producer)
     {
         $this->producers[] = $producer;
     }
 }
-

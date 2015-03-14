@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<items>
+    <item>
+        <id>locale</id>
+        <name>admin.menu.locale</name>
+        <route>admin.locale.index</route>
+        <path>menu.configuration.localization.locale</path>
+        <sort_order>10</sort_order>
+    </item>
+    <item>
+        <id>currency</id>
+        <name>admin.menu.currency</name>
+        <route>admin.currency.index</route>
+        <path>menu.configuration.localization.currency</path>
+        <sort_order>20</sort_order>
+    </item>
+    <item>
+        <id>dictionary</id>
+        <name>admin.menu.dictionary</name>
+        <route>admin.dictionary.index</route>
+        <path>menu.configuration.localization.dictionary</path>
+        <sort_order>30</sort_order>
+    </item>
+</items>

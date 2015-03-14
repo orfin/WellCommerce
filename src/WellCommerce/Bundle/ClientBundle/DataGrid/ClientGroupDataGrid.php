@@ -11,52 +11,59 @@
  */
 namespace WellCommerce\Bundle\ClientBundle\DataGrid;
 
-use WellCommerce\Bundle\CoreBundle\DataGrid\AbstractDataGrid;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Column\Column;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnCollection;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnInterface;
-use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
+use WellCommerce\Bundle\DataGridBundle\AbstractDataGrid;
+use WellCommerce\Bundle\DataGridBundle\Column\Column;
+use WellCommerce\Bundle\DataGridBundle\Column\ColumnCollection;
+use WellCommerce\Bundle\DataGridBundle\Column\ColumnInterface;
+use WellCommerce\Bundle\DataGridBundle\Column\Options\Appearance;
+use WellCommerce\Bundle\DataGridBundle\Column\Options\Filter;
+use WellCommerce\Bundle\DataGridBundle\Column\Options\Sorting;
+use WellCommerce\Bundle\DataGridBundle\DataGridInterface;
 
 /**
- * Class CompanyDataGrid
+ * Class ClientGroupDataGrid
  *
- * @package WellCommerce\Bundle\ClientBundle
- * @author  Adam Piotrowski <adam@wellcommerce.org>
+ * @author Adam Piotrowski <adam@wellcommerce.org>
  */
 class ClientGroupDataGrid extends AbstractDataGrid implements DataGridInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function addColumns(ColumnCollection $collection)
+    public function configureColumns(ColumnCollection $collection)
     {
         $collection->add(new Column([
             'id'         => 'id',
-            'source'     => 'client_group.id',
-            'caption'    => $this->trans('Id'),
-            'sorting'    => [
-                'default_order' => ColumnInterface::SORT_DIR_DESC
-            ],
-            'appearance' => [
+            'caption'    => $this->trans('client_group.id.label'),
+            'sorting'    => new Sorting([
+                'default_order' => ColumnInterface::SORT_DIR_DESC,
+            ]),
+            'appearance' => new Appearance([
                 'width'   => 90,
-                'visible' => false
-            ],
-            'filter'     => [
-                'type' => ColumnInterface::FILTER_BETWEEN
-            ]
+                'visible' => false,
+            ]),
+            'filter'     => new Filter([
+                'type' => Filter::FILTER_BETWEEN,
+            ]),
         ]));
 
         $collection->add(new Column([
-            'id'         => 'name',
-            'source'     => 'client_group_translation.name',
-            'caption'    => $this->trans('Name'),
-            'appearance' => [
-                'width' => 70,
-                'align' => ColumnInterface::ALIGN_LEFT
-            ],
-            'filter'     => [
-                'type' => ColumnInterface::FILTER_INPUT
-            ]
+            'id'      => 'name',
+            'caption' => $this->trans('client_group.name.label'),
+            'appearance' => new Appearance([
+                'width'   => 290,
+            ]),
+        ]));
+
+        $collection->add(new Column([
+            'id'       => 'totalClients',
+            'caption'  => $this->trans('client_group.total_clients.label'),
+            'filter'   => new Filter([
+                'type' => Filter::FILTER_BETWEEN,
+            ]),
+            'appearance' => new Appearance([
+                'width'   => 90,
+            ]),
         ]));
     }
 }

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<items>
+    <item>
+        <id>locale</id>
+        <name>admin.menu.media</name>
+        <route>admin.media.index</route>
+        <path>menu.cms.media</path>
+        <sort_order>10</sort_order>
+    </item>
+</items>

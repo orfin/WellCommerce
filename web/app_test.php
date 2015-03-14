@@ -1,11 +1,11 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- * 
+ *
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- * 
+ *
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
@@ -16,17 +16,17 @@ if (!in_array(@$_SERVER['REMOTE_ADDR'], array(
     '127.0.0.1',
     '172.33.33.1',
     '::1',
-    '10.0.0.1'
+    '10.0.0.1',
 ))
 ) {
     header('HTTP/1.0 403 Forbidden');
-    exit('You are not allowed to access this file. Check ' . basename(__FILE__) . ' for more information.');
+    exit('You are not allowed to access this file. Check '.basename(__FILE__).' for more information.');
 }
 
-$loader = require_once __DIR__ . '/../app/bootstrap.php.cache';
+$loader = require_once __DIR__.'/../app/bootstrap.php.cache';
 \Symfony\Component\Debug\Debug::enable();
 
-require_once __DIR__ . '/../app/AppKernel.php';
+require_once __DIR__.'/../app/AppKernel.php';
 
 $kernel  = new AppKernel('test', true);
 $request = Request::createFromGlobals();

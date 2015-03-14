@@ -1,0 +1,372 @@
+{% extends 'WellCommerceWebBundle:Front:layout.html.twig' %}
+{% block content %}
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 main-col">
+        <div class="row">
+            <div class="col-lg-12 box product">
+                <div class="alert alert-info text-center" role="alert">This product is temporarily unavailable, but you
+                    can make order. Delivery time is 4-6 days.
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 gallery">
+                        <div class="row">
+                            <!-- main photo -->
+                            <div class="col-lg-12 col-md-12 col-sm-12 main-photo">
+                                <a data-toggle="modal" href="#product-gallery">
+                                    <img src="{{ image(product.getMainPhoto().getPath(), 'medium') }}" class="img-thumbnail img-responsive" alt="Apple iPhone 6">
+                                </a>
+                            </div>
+                            <!-- main photo -->
+
+                            <!-- additional photos -->
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="row">
+                                    {% for photo in product.getAdditionalPhotos() %}
+                                    <div class="col-lg-3 col-md-3 col-sm-2 col-xs-3 prod-thumbnail">
+                                        <img src="{{ image(photo.getPath(), 'small') }}" class="img-thumbnail img-responsive" alt="Apple iPhone 6">
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <!-- additional photos -->
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-8 col-xs-12">
+                        <div class="product-description">
+                            <h1>{{ product.translate().name }}</h1>
+                            <hr>
+                            <div class="labels">
+                                {% for status in product.statuses %}
+                                <span class="label {{ status.translate().cssClass }}">{{ status.translate().name }}</span>
+                                {% endfor %}
+                            </div>
+                            <div class="description">
+                                {{ product.translate().shortDescription }}
+                            </div>
+
+                            <hr>
+
+                            <ul class="list-unstyled">
+                                <li>Availability: <b>on stock</b></li>
+                                <li>Delivery time: <b>1-2 days</b></li>
+                                <div>Delivery cost: <b>from $5</b></div>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 add-to-cart">
+                        <div class="well">
+                            <div class="row">
+                                <div class="col-lg-12 price">
+                                    <h2 class="text-center">$299,00
+                                        <small>
+                                            <del>$349,00</del>
+                                        </small>
+                                    </h2>
+                                    <hr>
+                                </div>
+
+                                <div class="col-lg-12">
+                                    <form class="form-horizontal" role="form">
+                                        <div class="row">
+                                            <div class="col-lg-12 variant">
+                                                <div class="row">
+                                                    <label for="variant1"
+                                                           class="col-lg-4 col-md-5 col-xs-5 col-lg-offset-1 control-label">Color:</label>
+
+                                                    <div class="col-lg-6 col-md-7 col-xs-7">
+                                                        <select class="form-control input-sm">
+                                                            <option>Blue</option>
+                                                            <option>Red</option>
+                                                            <option>Green</option>
+                                                            <option>Black</option>
+                                                            <option>Machoniowy</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-12 variant">
+                                                <div class="row">
+                                                    <label for="variant2"
+                                                           class="col-lg-4 col-md-5 col-xs-5 col-lg-offset-1 control-label">Size:</label>
+
+                                                    <div class="col-lg-6 col-md-7 col-xs-7">
+                                                        <select class="form-control input-sm">
+                                                            <option>S</option>
+                                                            <option>M</option>
+                                                            <option>L</option>
+                                                            <option>XL</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-12 amount">
+                                                <form class="form-horizontal" role="form">
+                                                    <div class="row">
+                                                        <label class="col-lg-4 col-md-5 col-xs-5 col-lg-offset-1 control-label">Quantity:</label>
+
+                                                        <div class="col-lg-6 col-md-7 col-xs-7">
+                                                            <input type="number" class="form-control input-sm"
+                                                                   id="amount" placeholder="1">
+                                                        </div>
+                                                    </div>
+                                                </form>
+
+                                                <div class="col-lg-12">
+                                                    <hr>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div class="col-lg-12 buttons">
+                                    <button type="button" class="btn btn-primary btn-lg btn-block"><span
+                                                class="glyphicon glyphicon-shopping-cart"></span> Add to cart
+                                    </button>
+                                </div>
+
+                                <div class="col-lg-12 buttons-more">
+                                    <div class="btn-group btn-block">
+                                        <button type="button" class="btn btn-default btn-block btn-sm dropdown-toggle"
+                                                data-toggle="dropdown">
+                                            More options <span class="caret"></span>
+                                        </button>
+
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="#"><span class="glyphicon glyphicon-plus"></span> Add to
+                                                    clipboard</a></li>
+                                            <li><a href="#"><span class="glyphicon glyphicon-plus"></span> Add to whish
+                                                    list</a></li>
+                                            <li><a href="#"><span class="glyphicon glyphicon-plus"></span> Add to
+                                                    compare</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 main-col">
+        <div class="row">
+            <div class="col-lg-12 box description">
+                <ul id="myTab" class="nav nav-tabs" role="tablist">
+                    <li class="active"><a href="#technical" role="tab" data-toggle="tab"></a></li>
+                    <li class=""><a href="#description" role="tab" data-toggle="tab">Description</a></li>
+                    <li class=""><a href="#delivery-cost" role="tab" data-toggle="tab">Delivery cost</a></li>
+                </ul>
+
+                <div id="myTabContent" class="tab-content">
+                    <div class="tab-pane fade active in" id="technical">
+                        <table class="table table-responsive table-hover technical-table">
+                            <thead>
+                            <tr>
+                                <th colspan="2" class="text-center"><h4>Technical specyfication</h4></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Capacity</td>
+                                <td>8 GB</td>
+                            </tr>
+
+                            <tr>
+                                <td>Height</td>
+                                <td>115.2 mm</td>
+                            </tr>
+
+                            <tr>
+                                <td>Width</td>
+                                <td>58.6 mm</td>
+                            </tr>
+
+                            <tr>
+                                <td>Depth</td>
+                                <td>9.6 mm</td>
+                            </tr>
+
+                            <tr>
+                                <td>Display</td>
+                                <td>3.5-inch</td>
+                            </tr>
+
+                            <tr>
+                                <td>Operating System</td>
+                                <td>iOS 8</td>
+                            </tr>
+
+                            <tr>
+                                <td>SIM Card</td>
+                                <td>Micro-SIM</td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="tab-pane fade" id="description">
+                        <h4>Apyl ajFo 6</h4>
+
+                        <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown
+                            aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan
+                            helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh
+                            mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan
+                            aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
+
+                        <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.
+                            Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan
+                            four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft
+                            beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda
+                            labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit
+                            sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean
+                            shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown,
+                            tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+
+                    </div>
+
+                    <div class="tab-pane fade" id="delivery-cost">
+                        <table class="table table-responsive table-hover technical-table">
+                            <thead>
+                            <tr>
+                                <th colspan="2" class="text-center"><h4>Delivery cost</h4></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>FedEX</td>
+                                <td>$9.00</td>
+                            </tr>
+
+                            <tr>
+                                <td>DHL</td>
+                                <td>$9.50</td>
+                            </tr>
+
+                            <tr class="success">
+                                <td>Żukowice Mail Inc.</td>
+                                <td>Free</td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 main-col">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 box promotions">
+                <h2 class="box-heading text-center">Simmilar products</h2>
+                <hr>
+                <div class="row products-grid">
+                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
+                        <div class="thumbnail">
+                            <div class="labels">
+                                <span class="label label-success">News</span>
+                                <span class="label label-info">Promotion</span>
+                            </div>
+
+                            <img src="assets/img/ipad.jpg" alt="Apple iPhone 6">
+
+                            <div class="caption">
+                                <h3>Apple iPad Mini</h3>
+
+                                <p class="clearfix">
+                                    <span class="pull-left"><b>$299,00</b></span>
+                                    <span class="pull-right"><small>
+                                            <del>$349,00</del>
+                                        </small></span>
+                                </p>
+                                <a href="#" class="btn btn-primary btn-group-justified" role="button"><span
+                                            class="glyphicon glyphicon-shopping-cart"></span> Add to cart</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
+                        <div class="thumbnail">
+                            <div class="labels">
+                                <span class="label label-success">News</span>
+                                <span class="label label-info">Promotion</span>
+                            </div>
+
+                            <img src="assets/img/ipad.jpg" alt="Apple iPhone 6">
+
+                            <div class="caption">
+                                <h3>Apple iPad Mini</h3>
+
+                                <p class="clearfix">
+                                    <span class="pull-left"><b>$299,00</b></span>
+                                    <span class="pull-right"><small>
+                                            <del>$349,00</del>
+                                        </small></span>
+                                </p>
+                                <a href="#" class="btn btn-primary btn-group-justified" role="button"><span
+                                            class="glyphicon glyphicon-shopping-cart"></span> Add to cart</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
+                        <div class="thumbnail">
+                            <div class="labels">
+                                <span class="label label-success">News</span>
+                                <span class="label label-info">Promotion</span>
+                            </div>
+
+                            <img src="assets/img/ipad.jpg" alt="Apple iPhone 6">
+
+                            <div class="caption">
+                                <h3>Apple iPad Mini</h3>
+
+                                <p class="clearfix">
+                                    <span class="pull-left"><b>$299,00</b></span>
+                                    <span class="pull-right"><small>
+                                            <del>$349,00</del>
+                                        </small></span>
+                                </p>
+                                <a href="#" class="btn btn-primary btn-group-justified" role="button"><span
+                                            class="glyphicon glyphicon-shopping-cart"></span> Add to cart</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
+                        <div class="thumbnail">
+                            <div class="labels">
+                                <span class="label label-success">News</span>
+                                <span class="label label-info">Promotion</span>
+                            </div>
+
+                            <img src="assets/img/ipad.jpg" alt="Apple iPhone 6">
+
+                            <div class="caption">
+                                <h3>Apple iPad Mini</h3>
+
+                                <p class="clearfix">
+                                    <span class="pull-left"><b>$299,00</b></span>
+                                    <span class="pull-right"><small>
+                                            <del>$349,00</del>
+                                        </small></span>
+                                </p>
+                                <a href="#" class="btn btn-primary btn-group-justified" role="button"><span
+                                            class="glyphicon glyphicon-shopping-cart"></span> Add to cart</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+{% endblock %}

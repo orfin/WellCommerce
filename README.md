@@ -2,8 +2,10 @@ README
 ======
 
 [![Build Status](https://travis-ci.org/WellCommerce/WellCommerce.svg?branch=development)](https://travis-ci.org/WellCommerce/WellCommerce)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/98fa65a3-a9a0-4ae8-b7c9-27d3cc1cebb2/mini.png?1)](https://insight.sensiolabs.com/projects/98fa65a3-a9a0-4ae8-b7c9-27d3cc1cebb2)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/WellCommerce/WellCommerce/badges/quality-score.png?b=development)](https://scrutinizer-ci.com/g/WellCommerce/WellCommerce/?branch=development)
-[![Latest Stable Version](https://poser.pugx.org/wellcommerce/wellcommerce/v/stable.svg)](https://packagist.org/packages/wellcommerce/wellcommerce) [![Total Downloads](https://poser.pugx.org/wellcommerce/wellcommerce/downloads.svg)](https://packagist.org/packages/wellcommerce/wellcommerce) [![Latest Unstable Version](https://poser.pugx.org/wellcommerce/wellcommerce/v/unstable.svg)](https://packagist.org/packages/wellcommerce/wellcommerce) [![License](https://poser.pugx.org/wellcommerce/wellcommerce/license.svg)](https://packagist.org/packages/wellcommerce/wellcommerce)
+[![Total Downloads](https://poser.pugx.org/wellcommerce/wellcommerce/downloads.svg)](https://packagist.org/packages/wellcommerce/wellcommerce)
+[![License](https://poser.pugx.org/wellcommerce/wellcommerce/license.svg)](https://packagist.org/packages/wellcommerce/wellcommerce)
 
 What is WellCommerce?
 ---------------------
@@ -14,7 +16,7 @@ The code is still hot but it only gets cooler :). Here are most important things
 
 - [Symfony2 Full-stack framework][1]
 - [Doctrine2 ORM][2]
-- [Codeception PHP testing framework][3]
+- [Codeception testing framework][3]
 - [Twig template engine][4]
 - [Twitter Bootstrap 3 as a base HTML framework][5]
 
@@ -36,14 +38,18 @@ http://getcomposer.org/ or just run the following command:
 
 Then, use the `create-project` command to generate a new WellCommerce application:
 
-    php composer.phar create-project wellcommerce/wellcommerce -s dev path/
+    php composer.phar create-project wellcommerce/wellcommerce -s dev path/to/wellcommerce
 
-Composer will install WellCommerce and all its dependencies under the `path/` directory.
+Composer will install WellCommerce and all its dependencies under the `path/to/wellcommerce` directory.
 
 Contributors
 ------------
 
 Every contributor is WellComme :). If you'd like to join us, please send a message at contributors@wellcommerce.org
+
+You can also discuss and share your opinions on WellCommerce in our gitter chat
+
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/WellCommerce/WellCommerce?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 [1]:  http://symfony.com
 [2]:  http://doctrine-project.org

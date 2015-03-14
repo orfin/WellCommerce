@@ -14,9 +14,12 @@ namespace WellCommerce\Bundle\CategoryBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
-use WellCommerce\Bundle\ShopBundle\Entity\Shop;
+use WellCommerce\Bundle\CategoryBundle\Entity\Extra\CategoryExtraTrait;
+use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\EnableableTrait;
+use WellCommerce\Bundle\ProductBundle\Entity\Product;
 
 /**
  * Class Category
@@ -29,8 +32,11 @@ use WellCommerce\Bundle\ShopBundle\Entity\Shop;
  */
 class Category
 {
-    use Translatable,
-        Timestampable;
+    use Translatable;
+    use Timestampable;
+    use Blameable;
+    use EnableableTrait;
+    use CategoryExtraTrait;
 
     /**
      * @var integer
@@ -49,24 +55,20 @@ class Category
     private $hierarchy;
 
     /**
-     * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\CategoryBundle\Entity\Category", mappedBy="parent")
-     */
-    protected $children;
-
-    /**
      * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\CategoryBundle\Entity\Category", inversedBy="children")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $parent;
 
     /**
-     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\ShopBundle\Entity\Shop", inversedBy="categories")
-     * @ORM\JoinTable(name="shop_category",
-     *      joinColumns={@ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="CASCADE")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="shop_id", referencedColumnName="id", onDelete="CASCADE")}
-     * )
+     * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\CategoryBundle\Entity\Category", mappedBy="parent")
      */
-    private $shops;
+    private $children;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\Product", mappedBy="categories")
+     */
+    private $products;
 
     /**
      * Constructor
@@ -74,7 +76,7 @@ class Category
     public function __construct()
     {
         $this->children = new ArrayCollection();
-        $this->shops    = new ArrayCollection();
+        $this->products = new ArrayCollection();
     }
 
     /**
@@ -118,6 +120,16 @@ class Category
     }
 
     /**
+     * Sets category parent
+     *
+     * @param null|Category $parent
+     */
+    public function setParent(Category $parent = null)
+    {
+        $this->parent = $parent;
+    }
+
+    /**
      * Returns category children
      *
      * @return mixed
@@ -139,38 +151,28 @@ class Category
     }
 
     /**
-     * Sets category parent
-     *
-     * @param null|Category $parent
-     */
-    public function setParent(Category $parent = null)
-    {
-        $this->parent = $parent;
-    }
-
-    /**
-     * Sets shops for category
-     *
-     * @param $shops
-     */
-    public function setShops($shops)
-    {
-        $this->shops = $shops;
-    }
-
-    /**
-     * Get shops for category
+     * Get products in category
      *
      * @return mixed
      */
-    public function getShops()
+    public function getProducts()
     {
-        return $this->shops;
+        return $this->products;
     }
 
-    public function addShop(Shop $shop)
+    /**
+     * @param $products
+     */
+    public function setProducts($products)
     {
-        $this->shops[] = $shop;
+        $this->products = $products;
+    }
+
+    /**
+     * @param Product $product
+     */
+    public function addProduct(Product $product)
+    {
+        $this->products[] = $product;
     }
 }
-

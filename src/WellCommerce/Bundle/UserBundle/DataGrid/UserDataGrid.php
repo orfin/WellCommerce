@@ -11,11 +11,14 @@
  */
 namespace WellCommerce\Bundle\UserBundle\DataGrid;
 
-use WellCommerce\Bundle\CoreBundle\DataGrid\AbstractDataGrid;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Column\Column;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnCollection;
-use WellCommerce\Bundle\CoreBundle\DataGrid\Column\ColumnInterface;
-use WellCommerce\Bundle\CoreBundle\DataGrid\DataGridInterface;
+use WellCommerce\Bundle\DataGridBundle\AbstractDataGrid;
+use WellCommerce\Bundle\DataGridBundle\Column\Column;
+use WellCommerce\Bundle\DataGridBundle\Column\ColumnCollection;
+use WellCommerce\Bundle\DataGridBundle\Column\ColumnInterface;
+use WellCommerce\Bundle\DataGridBundle\Column\Options\Appearance;
+use WellCommerce\Bundle\DataGridBundle\Column\Options\Filter;
+use WellCommerce\Bundle\DataGridBundle\Column\Options\Sorting;
+use WellCommerce\Bundle\DataGridBundle\DataGridInterface;
 
 /**
  * Class UserDataGrid
@@ -28,61 +31,36 @@ class UserDataGrid extends AbstractDataGrid implements DataGridInterface
     /**
      * {@inheritdoc}
      */
-    public function addColumns(ColumnCollection $collection)
+    public function configureColumns(ColumnCollection $collection)
     {
         $collection->add(new Column([
             'id'         => 'id',
-            'source'     => 'user.id',
             'caption'    => $this->trans('user.id'),
-            'sorting'    => [
-                'default_order' => ColumnInterface::SORT_DIR_DESC
-            ],
-            'appearance' => [
+            'sorting'    => new Sorting([
+                'default_order' => ColumnInterface::SORT_DIR_DESC,
+            ]),
+            'appearance' => new Appearance([
                 'width'   => 90,
-                'visible' => false
-            ],
-            'filter'     => [
-                'type' => ColumnInterface::FILTER_BETWEEN
-            ]
+                'visible' => false,
+            ]),
+            'filter'     => new Filter([
+                'type' => Filter::FILTER_BETWEEN,
+            ]),
         ]));
 
         $collection->add(new Column([
             'id'         => 'username',
-            'source'     => 'user.username',
             'caption'    => $this->trans('user.username'),
-            'appearance' => [
-                'width' => 70,
-                'align' => ColumnInterface::ALIGN_LEFT
-            ],
-            'filter'     => [
-                'type' => ColumnInterface::FILTER_INPUT
-            ]
         ]));
 
         $collection->add(new Column([
             'id'         => 'email',
-            'source'     => 'user.email',
             'caption'    => $this->trans('user.email'),
-            'appearance' => [
-                'width' => 70,
-                'align' => ColumnInterface::ALIGN_LEFT
-            ],
-            'filter'     => [
-                'type' => ColumnInterface::FILTER_INPUT
-            ]
         ]));
 
         $collection->add(new Column([
-            'id'         => 'isActive',
-            'source'     => 'user.isActive',
-            'caption'    => $this->trans('user.is_active'),
-            'appearance' => [
-                'width' => 70,
-                'align' => ColumnInterface::ALIGN_LEFT
-            ],
-            'filter'     => [
-                'type' => ColumnInterface::FILTER_INPUT
-            ]
+            'id'         => 'enabled',
+            'caption'    => $this->trans('user.enabled'),
         ]));
     }
 }

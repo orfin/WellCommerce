@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="locale.manager.admin" class="WellCommerce\Bundle\IntlBundle\Manager\Admin\LocaleManager">
+            <argument type="service" id="flash_helper"/>
+            <argument type="service" id="redirect_helper"/>
+            <argument type="service" id="image_helper"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="doctrine_helper"/>
+            <argument type="service" id="translator"/>
+            <call method="setRepository">
+                <argument type="service" id="locale.repository"/>
+            </call>
+            <call method="setFormBuilder">
+                <argument type="service" id="locale.form_builder"/>
+            </call>
+            <call method="setDataGrid">
+                <argument type="service" id="locale.datagrid"/>
+            </call>
+        </service>
+
+        <service id="locale.controller.admin" class="WellCommerce\Bundle\IntlBundle\Controller\Admin\LocaleController">
+            <argument type="service" id="locale.manager.admin"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="locale.repository" class="WellCommerce\Bundle\IntlBundle\Repository\LocaleRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceIntlBundle:Locale</argument>
+        </service>
+
+        <service id="locale.dataset.query_builder" class="WellCommerce\Bundle\IntlBundle\DataSet\LocaleDataSetQueryBuilder" public="false">
+            <argument type="service" id="locale.repository"/>
+        </service>
+
+        <service id="locale.dataset.loader" class="%dataset.loader.class%">
+            <argument type="service" id="locale.dataset.query_builder"/>
+            <argument type="service" id="dataset.processor"/>
+        </service>
+
+        <service id="locale.dataset" class="WellCommerce\Bundle\IntlBundle\DataSet\LocaleDataSet">
+            <argument key="identifier">locale</argument>
+            <argument type="service" id="locale.dataset.loader"/>
+            <configurator service="dataset.configurator" method="configure"/>
+        </service>
+
+        <service id="locale.datagrid" class="WellCommerce\Bundle\IntlBundle\DataGrid\LocaleDataGrid">
+            <argument key="identifier">locale</argument>
+            <argument type="service" id="locale.dataset"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="locale.form_builder" class="WellCommerce\Bundle\IntlBundle\Form\LocaleFormBuilder">
+            <argument type="service" id="form.resolver.factory"/>
+            <argument type="service" id="form.handler"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="locale.subscriber" class="WellCommerce\Bundle\IntlBundle\EventListener\LocaleSubscriber">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="kernel.event_subscriber" />
+        </service>
+
+        <service id="twig.extension.locale" class="WellCommerce\Bundle\IntlBundle\Twig\Extension\LocaleExtension">
+            <argument type="service" id="session"/>
+            <argument type="service" id="locale.repository"/>
+            <tag name="twig.extension"/>
+        </service>
+
+        <service id="locale.orm.listener" class="WellCommerce\Bundle\IntlBundle\EventListener\LocaleORMListener">
+            <tag name="doctrine.event_subscriber" />
+        </service>
+
+        <service id="locale.manager.front" class="WellCommerce\Bundle\IntlBundle\Manager\Front\LocaleManager">
+            <argument type="service" id="flash_helper"/>
+            <argument type="service" id="redirect_helper"/>
+            <argument type="service" id="image_helper"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="doctrine_helper"/>
+            <argument type="service" id="translator"/>
+            <call method="setRepository">
+                <argument type="service" id="category.repository"/>
+            </call>
+        </service>
+
+        <service id="locale.controller.front" class="WellCommerce\Bundle\IntlBundle\Controller\Front\LocaleController">
+            <argument type="service" id="locale.manager.front"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+    </services>
+</container>

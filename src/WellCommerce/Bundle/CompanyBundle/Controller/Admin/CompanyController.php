@@ -12,18 +12,15 @@
 
 namespace WellCommerce\Bundle\CompanyBundle\Controller\Admin;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
+use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
 
 /**
  * Class CompanyController
  *
- * @package WellCommerce\Bundle\CompanyBundle\Controller
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
- * @Template()
+ * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class CompanyController extends AbstractAdminController
 {
-
 }
