@@ -31,6 +31,7 @@
 
         <service id="theme.manager" class="WellCommerce\Bundle\ThemeBundle\Manager\ThemeManager">
             <argument type="service" id="kernel"/>
+            <argument type="service" id="theme.repository"/>
         </service>
 
         <service id="theme.subscriber" class="WellCommerce\Bundle\ThemeBundle\EventListener\ThemeSubscriber">

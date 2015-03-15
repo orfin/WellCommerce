@@ -35,13 +35,20 @@ class ThemeManager implements ThemeManagerInterface
     protected $kernel;
 
     /**
+     * @var ThemeRepositoryInterface
+     */
+    protected $repository;
+
+    /**
      * Constructor
      *
+     * @param KernelInterface          $kernel
      * @param ThemeRepositoryInterface $repository
      */
-    public function __construct(KernelInterface $kernel)
+    public function __construct(KernelInterface $kernel, ThemeRepositoryInterface $repository)
     {
-        $this->kernel = $kernel;
+        $this->kernel     = $kernel;
+        $this->repository = $repository;
     }
 
     /**
@@ -76,7 +83,7 @@ class ThemeManager implements ThemeManagerInterface
     public function getCurrentTheme()
     {
         if (null === $this->theme) {
-            throw new \LogicException('Cannot return current Theme object. You forgot to set it before using "setCurrentTheme" method.');
+            $this->theme = $this->repository->findOneBy([]);
         }
 
         return $this->theme;
