@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\MultiStoreBundle\Context;
 
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\Shop;
 use WellCommerce\Bundle\MultiStoreBundle\Repository\ShopRepositoryInterface;
 
@@ -23,6 +24,8 @@ use WellCommerce\Bundle\MultiStoreBundle\Repository\ShopRepositoryInterface;
  */
 class ShopContext
 {
+    const SESSION_BAG_NAMESPACE = 'scope/shop';
+
     /**
      * @var RequestStack
      */
@@ -39,11 +42,6 @@ class ShopContext
     protected $currentScope;
 
     /**
-     * @var null|\Symfony\Component\HttpFoundation\Session\SessionInterface
-     */
-    protected $sessionBag;
-
-    /**
      * Constructor
      *
      * @param RequestStack            $requestStack
@@ -53,7 +51,6 @@ class ShopContext
     {
         $this->requestStack = $requestStack;
         $this->repository   = $repository;
-        $this->sessionBag   = $this->requestStack->getMasterRequest()->getSession();
     }
 
     /**
@@ -92,7 +89,9 @@ class ShopContext
 
     protected function setSessionVariables()
     {
-        if (!$this->hasSessionPreviousData()) {
+        $sessionBag = $this->requestStack->getMasterRequest()->getSession();
+
+        if (!$this->hasSessionPreviousData($sessionBag)) {
             $sessionData = [
                 'id'    => $this->currentScope->getId(),
                 'name'  => $this->currentScope->getName(),
@@ -104,17 +103,19 @@ class ShopContext
                 ]
             ];
 
-            $this->sessionBag->set('scope/shop', $sessionData);
+            $sessionBag->set(self::SESSION_BAG_NAMESPACE, $sessionData);
         }
     }
 
     /**
      * Checks whether session contains previous shop data
      *
+     * @param SessionInterface $sessionBag
+     *
      * @return bool
      */
-    protected function hasSessionPreviousData()
+    protected function hasSessionPreviousData(SessionInterface $sessionBag)
     {
-        return (bool)$this->sessionBag->has('scope/shop');
+        return (bool)$sessionBag->has(self::SESSION_BAG_NAMESPACE);
     }
 }

@@ -38,15 +38,23 @@ class ShopSubscriber extends AbstractEventSubscriber
         ];
     }
 
+    /**
+     * Event triggered during kernel request.
+     * Sets current shop scope if session is available.
+     *
+     * @param GetResponseEvent $event
+     */
     public function onKernelRequest(GetResponseEvent $event)
     {
-        $request      = $event->getRequest();
-        $url          = $request->server->get('HTTP_HOST');
-        $context      = $this->container->get('shop.context');
-        $themeManager = $this->container->get('theme.manager');
+        $request = $event->getRequest();
+        if ($request->hasSession()) {
+            $url          = $request->server->get('HTTP_HOST');
+            $context      = $this->container->get('shop.context');
+            $themeManager = $this->container->get('theme.manager');
 
-        $context->setCurrentScopeByUrl($url);
-        $themeManager->setCurrentTheme($context->getCurrentScope()->getTheme());
+            $context->setCurrentScopeByUrl($url);
+            $themeManager->setCurrentTheme($context->getCurrentScope()->getTheme());
+        }
     }
 
     /**
