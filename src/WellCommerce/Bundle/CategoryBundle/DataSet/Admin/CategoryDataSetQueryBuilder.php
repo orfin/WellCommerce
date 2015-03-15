@@ -43,10 +43,13 @@ class CategoryDataSetQueryBuilder extends AbstractDataSetQueryBuilder implements
      */
     public function getQueryBuilder()
     {
-        $qb         = parent::getQueryBuilder();
-        $expression = $qb->expr()->eq('category_shops.id', ':shop');
-        $qb->andWhere($expression);
-        $qb->setParameter('shop', $this->context->getCurrentScope()->getId());
+        $qb = parent::getQueryBuilder();
+
+        if (null !== $this->context) {
+            $expression = $qb->expr()->eq('category_shops.id', ':shop');
+            $qb->andWhere($expression);
+            $qb->setParameter('shop', $this->context->getCurrentScope()->getId());
+        }
 
         return $qb;
     }
