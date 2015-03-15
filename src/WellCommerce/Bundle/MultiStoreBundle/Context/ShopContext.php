@@ -117,4 +117,4 @@ class ShopContext
     {
         return (bool)$this->sessionBag->has('scope/shop');
     }
-} 
+}
