@@ -31,6 +31,7 @@ class CategoryRepository extends AbstractEntityRepository implements CategoryRep
         $queryBuilder->leftJoin('category.translations', 'category_translation');
         $queryBuilder->leftJoin('category.children', 'category_children');
         $queryBuilder->leftJoin('category.products', 'category_products');
+        $queryBuilder->leftJoin('category.shops', 'category_shops');
 
         return $queryBuilder;
     }

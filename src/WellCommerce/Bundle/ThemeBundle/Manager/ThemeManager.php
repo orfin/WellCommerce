@@ -36,7 +36,7 @@ class ThemeManager implements ThemeManagerInterface
     /**
      * @var string
      */
-    protected $fallBackThemeFolder;
+    protected $fallBackTheme;
 
     /**
      * Constructor
@@ -45,18 +45,16 @@ class ThemeManager implements ThemeManagerInterface
      */
     public function __construct(KernelInterface $kernel)
     {
-        $this->kernel              = $kernel;
-        $this->fallBackThemeFolder = $kernel->getContainer()->getParameter('fallback_theme');
+        $this->kernel        = $kernel;
+        $this->fallBackTheme = $kernel->getContainer()->getParameter('fallback_theme');
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getCurrentThemeDirectory()
+    public function getCurrentThemeFolder()
     {
-        $folder = (null === $this->theme) ? $this->fallBackThemeFolder : $this->theme->getFolder();
-
-        return $this->getThemesDirectory() . DIRECTORY_SEPARATOR . $folder;
+        return (null === $this->theme) ? $this->fallBackTheme : $this->theme->getFolder();
     }
 
     /**
@@ -126,7 +124,7 @@ class ThemeManager implements ThemeManagerInterface
 
         $parameters = [
             '%themes_path%'   => $this->getThemesDirectory(),
-            '%current_theme%' => $this->getCurrentThemeDirectory(),
+            '%current_theme%' => $this->getCurrentThemeFolder(),
             '%template%'      => substr($path, strlen('Resources/views/')),
         ];
 

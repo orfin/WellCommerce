@@ -11,7 +11,10 @@
  */
 namespace WellCommerce\Bundle\CategoryBundle\Twig\Extension;
 
+use Symfony\Component\HttpFoundation\RequestStack;
 use WellCommerce\Bundle\CategoryBundle\Provider\CategoryProviderInterface;
+use WellCommerce\Bundle\DataSetBundle\Conditions\Condition\Eq;
+use WellCommerce\Bundle\DataSetBundle\Conditions\ConditionsCollection;
 
 /**
  * Class CategoryExtension
@@ -27,13 +30,20 @@ class CategoryExtension extends \Twig_Extension
     protected $provider;
 
     /**
+     * @var RequestStack
+     */
+    protected $requestStack;
+
+    /**
      * Constructor
      *
      * @param CategoryProviderInterface $provider
+     * @param RequestStack              $requestStack
      */
-    public function __construct(CategoryProviderInterface $provider)
+    public function __construct(CategoryProviderInterface $provider, RequestStack $requestStack)
     {
-        $this->provider = $provider;
+        $this->provider     = $provider;
+        $this->requestStack = $requestStack;
     }
 
     public function getFunctions()
@@ -57,13 +67,25 @@ class CategoryExtension extends \Twig_Extension
         $orderBy = CategoryProviderInterface::CATEGORY_ORDER_BY,
         $orderDir = CategoryProviderInterface::CATEGORY_ORDER_DIR
     ) {
+
         $params = [
-            'limit'     => $limit,
-            'order_by'  => $orderBy,
-            'order_dir' => $orderDir,
+            'limit'      => $limit,
+            'order_by'   => $orderBy,
+            'order_dir'  => $orderDir,
+            'conditions' => $this->getTreeConditions()
         ];
 
         return $this->provider->getCategoriesTree($params);
+    }
+
+    private function getTreeConditions()
+    {
+        $session    = $this->requestStack->getCurrentRequest()->getSession();
+        $activeShop = $session->get('global/shop');
+        $conditions = new ConditionsCollection();
+        $conditions->add(new Eq('shop', $activeShop['id']));
+
+        return $conditions;
     }
 
     /**

@@ -19,7 +19,7 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class ShopRepository extends AbstractEntityRepository implements CompanyRepositoryInterface
+class ShopRepository extends AbstractEntityRepository implements ShopRepositoryInterface
 {
     /**
      * {@inheritdoc}

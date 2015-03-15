@@ -40,22 +40,13 @@ class ShopSubscriber extends AbstractEventSubscriber
 
     public function onKernelRequest(GetResponseEvent $event)
     {
-        $request         = $event->getRequest();
-        $url             = $request->server->get('HTTP_HOST');
-        $shop            = $this->container->get('shop.repository')->findOneBy(['url' => $url]);
-        $shopSessionData = [
-            'name'  => $shop->getName(),
-            'url'   => $shop->getUrl(),
-            'theme' => [
-                'id'     => $shop->getTheme()->getId(),
-                'name'   => $shop->getTheme()->getName(),
-                'folder' => $shop->getTheme()->getFolder(),
-            ]
-        ];
+        $request      = $event->getRequest();
+        $url          = $request->server->get('HTTP_HOST');
+        $context      = $this->container->get('shop.context');
+        $themeManager = $this->container->get('theme.manager');
 
-        $this->container->get('theme.manager')->setCurrentTheme($shop->getTheme());
-
-        $this->container->set('shop', $shopSessionData);
+        $context->setCurrentScopeByUrl($url);
+        $themeManager->setCurrentTheme($context->getCurrentScope()->getTheme());
     }
 
     /**

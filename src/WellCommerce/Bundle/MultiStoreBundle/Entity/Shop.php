@@ -17,7 +17,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 /**
- * Class Company
+ * Class Shop
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *

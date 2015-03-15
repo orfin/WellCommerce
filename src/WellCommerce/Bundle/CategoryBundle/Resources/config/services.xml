@@ -186,6 +186,7 @@
 
         <service id="twig.extension.category" class="WellCommerce\Bundle\CategoryBundle\Twig\Extension\CategoryExtension">
             <argument type="service" id="category.provider"/>
+            <argument type="service" id="request_stack"/>
             <tag name="twig.extension"/>
         </service>
     </services>

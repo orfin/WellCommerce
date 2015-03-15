@@ -37,6 +37,11 @@
             <argument type="service" id="shop.repository"/>
         </service>
 
+        <service id="shop.context" class="WellCommerce\Bundle\MultiStoreBundle\Context\ShopContext">
+            <argument type="service" id="request_stack"/>
+            <argument type="service" id="shop.repository"/>
+        </service>
+
         <service id="shop.dataset.loader" class="%dataset.loader.class%">
             <argument type="service" id="shop.dataset.query_builder"/>
             <argument type="service" id="dataset.processor"/>
