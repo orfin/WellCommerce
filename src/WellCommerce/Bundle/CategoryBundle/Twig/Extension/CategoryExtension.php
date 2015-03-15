@@ -11,10 +11,7 @@
  */
 namespace WellCommerce\Bundle\CategoryBundle\Twig\Extension;
 
-use Symfony\Component\HttpFoundation\RequestStack;
 use WellCommerce\Bundle\CategoryBundle\Provider\CategoryProviderInterface;
-use WellCommerce\Bundle\DataSetBundle\Conditions\Condition\Eq;
-use WellCommerce\Bundle\DataSetBundle\Conditions\ConditionsCollection;
 
 /**
  * Class CategoryExtension
@@ -36,7 +33,7 @@ class CategoryExtension extends \Twig_Extension
      */
     public function __construct(CategoryProviderInterface $provider)
     {
-        $this->provider     = $provider;
+        $this->provider = $provider;
     }
 
     public function getFunctions()
@@ -62,9 +59,9 @@ class CategoryExtension extends \Twig_Extension
     ) {
 
         $params = [
-            'limit'      => $limit,
-            'order_by'   => $orderBy,
-            'order_dir'  => $orderDir,
+            'limit'     => $limit,
+            'order_by'  => $orderBy,
+            'order_dir' => $orderDir,
         ];
 
         return $this->provider->getCategoriesTree($params);
