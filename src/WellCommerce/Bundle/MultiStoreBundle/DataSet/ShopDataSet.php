@@ -32,13 +32,9 @@ class ShopDataSet extends AbstractDataSet implements DataSetInterface
         $configurator->setColumns([
             'id'        => 'shop.id',
             'name'      => 'shop.name',
-            'createdAt' => 'shop.createdAt',
+            'url'       => 'shop.url',
             'theme'     => 'shop_theme.name',
             'company'   => 'shop_company.name',
-        ]);
-
-        $configurator->setTransformers([
-            'createdAt' => new DateTransformer('Y-m-d H:i:s'),
         ]);
     }
 }

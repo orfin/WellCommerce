@@ -12,6 +12,7 @@
 namespace WellCommerce\Bundle\MultiStoreBundle\EventListener;
 
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
+use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
@@ -30,10 +31,31 @@ class ShopSubscriber extends AbstractEventSubscriber
     {
         return [
             KernelEvents::CONTROLLER => ['onKernelController', -256],
+            KernelEvents::REQUEST    => ['onKernelRequest', -256],
             'shop.post_update'       => 'onShopListModified',
             'shop.post_create'       => 'onShopListModified',
             'shop.post_remove'       => 'onShopListModified',
         ];
+    }
+
+    public function onKernelRequest(GetResponseEvent $event)
+    {
+        $request         = $event->getRequest();
+        $url             = $request->server->get('HTTP_HOST');
+        $shop            = $this->container->get('shop.repository')->findOneBy(['url' => $url]);
+        $shopSessionData = [
+            'name'  => $shop->getName(),
+            'url'   => $shop->getUrl(),
+            'theme' => [
+                'id'     => $shop->getTheme()->getId(),
+                'name'   => $shop->getTheme()->getName(),
+                'folder' => $shop->getTheme()->getFolder(),
+            ]
+        ];
+
+        $this->container->get('theme.manager')->setCurrentTheme($shop->getTheme());
+
+        $this->container->set('shop', $shopSessionData);
     }
 
     /**

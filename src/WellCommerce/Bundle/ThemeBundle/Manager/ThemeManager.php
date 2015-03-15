@@ -123,7 +123,7 @@ class ThemeManager implements ThemeManagerInterface
 
         $parameters = [
             '%themes_path%'   => $this->getThemesDirectory(),
-            '%current_theme%' => 'demo',
+            '%current_theme%' => $this->getCurrentTheme()->getFolder(),
             '%template%'      => substr($path, strlen('Resources/views/')),
         ];
 
