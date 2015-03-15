@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\DataSet\Front;
 
-use Doctrine\ORM\QueryBuilder;
 use WellCommerce\Bundle\CategoryBundle\DataSet\Admin\CategoryDataSetQueryBuilder as BaseQueryBuilder;
 
 /**
@@ -27,22 +26,11 @@ class CategoryDataSetQueryBuilder extends BaseQueryBuilder
      */
     public function getQueryBuilder()
     {
-        $queryBuilder = $this->repository->getDataSetQueryBuilder();
-        $this->addQueryBuilderRestrictions($queryBuilder);
+        $qb         = parent::getQueryBuilder();
+        $expression = $qb->expr()->eq('category.enabled', ':enabled');
+        $qb->andWhere($expression);
+        $qb->setParameter('enabled', true);
 
-        return $queryBuilder;
-    }
-
-    /**
-     * Adds base restrictions to query
-     *
-     * @param QueryBuilder $queryBuilder
-     */
-    protected function addQueryBuilderRestrictions(QueryBuilder $queryBuilder)
-    {
-        // show only enabled categories
-        $expression = $queryBuilder->expr()->eq('category.enabled', ':enabled');
-        $queryBuilder->andWhere($expression);
-        $queryBuilder->setParameter('enabled', true);
+        return $qb;
     }
 }

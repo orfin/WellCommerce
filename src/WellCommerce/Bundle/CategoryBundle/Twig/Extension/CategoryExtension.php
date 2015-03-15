@@ -30,20 +30,13 @@ class CategoryExtension extends \Twig_Extension
     protected $provider;
 
     /**
-     * @var RequestStack
-     */
-    protected $requestStack;
-
-    /**
      * Constructor
      *
      * @param CategoryProviderInterface $provider
-     * @param RequestStack              $requestStack
      */
-    public function __construct(CategoryProviderInterface $provider, RequestStack $requestStack)
+    public function __construct(CategoryProviderInterface $provider)
     {
         $this->provider     = $provider;
-        $this->requestStack = $requestStack;
     }
 
     public function getFunctions()
@@ -72,20 +65,9 @@ class CategoryExtension extends \Twig_Extension
             'limit'      => $limit,
             'order_by'   => $orderBy,
             'order_dir'  => $orderDir,
-            'conditions' => $this->getTreeConditions()
         ];
 
         return $this->provider->getCategoriesTree($params);
-    }
-
-    private function getTreeConditions()
-    {
-        $session    = $this->requestStack->getCurrentRequest()->getSession();
-        $activeShop = $session->get('global/shop');
-        $conditions = new ConditionsCollection();
-        $conditions->add(new Eq('shop', $activeShop['id']));
-
-        return $conditions;
     }
 
     /**

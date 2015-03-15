@@ -94,6 +94,9 @@
 
         <service id="category.dataset.query_builder.front" class="WellCommerce\Bundle\CategoryBundle\DataSet\Front\CategoryDataSetQueryBuilder" public="false">
             <argument type="service" id="category.repository"/>
+            <call method="setShopContext">
+                <argument type="service" id="shop.context"/>
+            </call>
         </service>
 
         <service id="category.dataset.query_builder.admin" class="WellCommerce\Bundle\CategoryBundle\DataSet\Admin\CategoryDataSetQueryBuilder" public="false">
@@ -189,7 +192,6 @@
 
         <service id="twig.extension.category" class="WellCommerce\Bundle\CategoryBundle\Twig\Extension\CategoryExtension">
             <argument type="service" id="category.provider"/>
-            <argument type="service" id="request_stack"/>
             <tag name="twig.extension"/>
         </service>
     </services>
