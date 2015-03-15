@@ -47,11 +47,9 @@ interface ThemeManagerInterface
     /**
      * Returns full path to theme directory
      *
-     * @param Theme $theme
-     *
      * @return string
      */
-    public function getThemeDirectory(Theme $theme);
+    public function getCurrentThemeDirectory();
 
     /**
      * Returns path to themes directory

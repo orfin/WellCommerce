@@ -15,7 +15,6 @@ namespace WellCommerce\Bundle\ThemeBundle\Manager;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use WellCommerce\Bundle\ThemeBundle\Entity\Theme;
-use WellCommerce\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 
 /**
  * Class ThemeManager
@@ -35,28 +34,29 @@ class ThemeManager implements ThemeManagerInterface
     protected $kernel;
 
     /**
-     * @var ThemeRepositoryInterface
+     * @var string
      */
-    protected $repository;
+    protected $fallBackThemeFolder;
 
     /**
      * Constructor
      *
-     * @param KernelInterface          $kernel
-     * @param ThemeRepositoryInterface $repository
+     * @param KernelInterface $kernel
      */
-    public function __construct(KernelInterface $kernel, ThemeRepositoryInterface $repository)
+    public function __construct(KernelInterface $kernel)
     {
-        $this->kernel     = $kernel;
-        $this->repository = $repository;
+        $this->kernel              = $kernel;
+        $this->fallBackThemeFolder = $kernel->getContainer()->getParameter('fallback_theme');
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getThemeDirectory(Theme $theme)
+    public function getCurrentThemeDirectory()
     {
-        return $this->getThemesDirectory() . DIRECTORY_SEPARATOR . $theme->getFolder();
+        $folder = (null === $this->theme) ? $this->fallBackThemeFolder : $this->theme->getFolder();
+
+        return $this->getThemesDirectory() . DIRECTORY_SEPARATOR . $folder;
     }
 
     /**
@@ -82,10 +82,6 @@ class ThemeManager implements ThemeManagerInterface
      */
     public function getCurrentTheme()
     {
-        if (null === $this->theme) {
-            $this->theme = $this->repository->findOneBy([]);
-        }
-
         return $this->theme;
     }
 
@@ -130,7 +126,7 @@ class ThemeManager implements ThemeManagerInterface
 
         $parameters = [
             '%themes_path%'   => $this->getThemesDirectory(),
-            '%current_theme%' => $this->getCurrentTheme()->getFolder(),
+            '%current_theme%' => $this->getCurrentThemeDirectory(),
             '%template%'      => substr($path, strlen('Resources/views/')),
         ];
 
