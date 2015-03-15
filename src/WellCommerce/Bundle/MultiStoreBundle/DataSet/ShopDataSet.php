@@ -15,7 +15,6 @@ namespace WellCommerce\Bundle\MultiStoreBundle\DataSet;
 use WellCommerce\Bundle\DataSetBundle\AbstractDataSet;
 use WellCommerce\Bundle\DataSetBundle\DataSetConfiguratorInterface;
 use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
-use WellCommerce\Bundle\DataSetBundle\Transformer\DateTransformer;
 
 /**
  * Class CompanyDataSet
@@ -30,11 +29,11 @@ class ShopDataSet extends AbstractDataSet implements DataSetInterface
     public function configureOptions(DataSetConfiguratorInterface $configurator)
     {
         $configurator->setColumns([
-            'id'        => 'shop.id',
-            'name'      => 'shop.name',
-            'url'       => 'shop.url',
-            'theme'     => 'shop_theme.name',
-            'company'   => 'shop_company.name',
+            'id'      => 'shop.id',
+            'name'    => 'shop.name',
+            'url'     => 'shop.url',
+            'theme'   => 'shop_theme.name',
+            'company' => 'shop_company.name',
         ]);
     }
 }
