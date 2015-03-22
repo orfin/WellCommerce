@@ -1,0 +1,41 @@
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <a class="navbar-brand" href="{{ path('front.home_page.index') }}">
+                <img alt="Brand" src="{{ asset( 'themes/wellcommerce/assets/img/logo.png') }}">
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="main-nav">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Category
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        {% for category in categoriesTree() %}
+                            <li><a href="{{ path(category.route) }}">{{ category.name }}</a></li>
+                            {% if loop.last == false %}
+                                <li class="divider"></li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </li>
+                <li><a href="#">Bestsellers</a></li>
+                <li><a href="#">Promotions</a></li>
+                <li><a href="#">New products <span class="sr-only">(current)</span></a></li>
+                <li><a href="#">Help</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right" id="topCart">
+                {% include 'WellCommerceWebBundle:Front:cart_preview.html.twig' %}
+            </ul>
+        </div>
+    </div>
+</nav>

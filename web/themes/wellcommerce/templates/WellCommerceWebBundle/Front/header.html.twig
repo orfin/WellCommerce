@@ -1,0 +1,27 @@
+<header>
+    <div class="tools">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 left">
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle btn-sm" type="button" id="CurrencyMenu" data-toggle="dropdown" aria-expanded="true">
+                            {% trans %}front.locale.label{% endtrans %}: {{ app.request.locale|upper }}
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="CurrencyMenu">
+                            {% for locale in locales %}
+                                <li><a href="{{ path('front.locale.switch',{"_locale": locale.code}) }}">{{ locale.code }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 text-right right">
+                    <a href="{{ path('front.client.login') }}" class="btn btn-default btn-sm">Sign in</a>
+                    <a href="{{ path('front.client.register') }}" class="btn btn-default btn-sm">Sign up</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include 'WellCommerceWebBundle:Front:nav.html.twig' %}
+</header>
