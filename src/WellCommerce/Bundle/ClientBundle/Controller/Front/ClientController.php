@@ -36,4 +36,8 @@ class ClientController extends AbstractFrontController implements FrontControlle
     public function loginAction(){
 
     }
+
+    public function registerAction(){
+
+    }
 }

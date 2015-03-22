@@ -28,7 +28,8 @@ use WellCommerce\Bundle\RoutingBundle\Repository\RouteRepositoryInterface;
  */
 class RouteProvider implements RouteProviderInterface
 {
-    const DYNAMIC_PREFIX = 'dynamic_';
+    const DYNAMIC_PREFIX   = 'dynamic_';
+    const CANDIDATES_LIMIT = 1000;
 
     /**
      * Collection of route generators available in collection
@@ -72,7 +73,7 @@ class RouteProvider implements RouteProviderInterface
             $route = $this->createRoute($resource);
 
             $collection->add(
-                self::DYNAMIC_PREFIX.$resource->getId(),
+                self::DYNAMIC_PREFIX . $resource->getId(),
                 $route
             );
         }
@@ -145,5 +146,12 @@ class RouteProvider implements RouteProviderInterface
 
     public function getRoutesByNames($names, $parameters = [])
     {
+        $collection = $this->repository->findBy([], null, self::CANDIDATES_LIMIT);
+        $routes     = [];
+        foreach ($collection as $item) {
+            $routes[] = $this->getRouteByName($item->getId());
+        }
+
+        return $routes;
     }
 }

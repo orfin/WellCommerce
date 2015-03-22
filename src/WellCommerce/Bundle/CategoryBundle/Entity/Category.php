@@ -19,6 +19,7 @@ use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 use WellCommerce\Bundle\CategoryBundle\Entity\Extra\CategoryExtraTrait;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\EnableableTrait;
+use WellCommerce\Bundle\MultiStoreBundle\Entity\Shop;
 use WellCommerce\Bundle\ProductBundle\Entity\Product;
 
 /**
@@ -86,6 +87,7 @@ class Category
     {
         $this->children = new ArrayCollection();
         $this->products = new ArrayCollection();
+        $this->shops    = new ArrayCollection();
     }
 
     /**
@@ -191,6 +193,14 @@ class Category
     public function getShops()
     {
         return $this->shops;
+    }
+
+    /**
+     * @param Shop $shop
+     */
+    public function addShop(Shop $shop)
+    {
+        $this->shops[] = $shop;
     }
 
     /**

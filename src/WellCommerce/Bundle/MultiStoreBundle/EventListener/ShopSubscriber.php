@@ -31,30 +31,10 @@ class ShopSubscriber extends AbstractEventSubscriber
     {
         return [
             KernelEvents::CONTROLLER => ['onKernelController', -256],
-            KernelEvents::REQUEST    => ['onKernelRequest', -256],
             'shop.post_update'       => 'onShopListModified',
             'shop.post_create'       => 'onShopListModified',
             'shop.post_remove'       => 'onShopListModified',
         ];
-    }
-
-    /**
-     * Event triggered during kernel request.
-     * Sets current shop scope if session is available.
-     *
-     * @param GetResponseEvent $event
-     */
-    public function onKernelRequest(GetResponseEvent $event)
-    {
-        $request = $event->getRequest();
-        if ($request->hasSession()) {
-            $url          = $request->server->get('HTTP_HOST');
-            $context      = $this->container->get('shop.context');
-            $themeManager = $this->container->get('theme.manager');
-
-            $context->setCurrentScopeByUrl($url);
-            $themeManager->setCurrentTheme($context->getCurrentScope()->getTheme());
-        }
     }
 
     /**
@@ -66,13 +46,15 @@ class ShopSubscriber extends AbstractEventSubscriber
     }
 
     /**
-     * Registers all available shops in admin session
+     * Sets shop context related session variables
      *
      * @param FilterControllerEvent $event
      */
     public function onKernelController(FilterControllerEvent $event)
     {
-        if ($event->getRequestType() == HttpKernelInterface::SUB_REQUEST) {
+        $request = $event->getRequest();
+
+        if ($event->getRequestType() == HttpKernelInterface::SUB_REQUEST || !$request->hasSession()) {
             return;
         }
 
@@ -80,5 +62,15 @@ class ShopSubscriber extends AbstractEventSubscriber
             $shops = $this->container->get('shop.collection')->getSelect();
             $this->container->get('session')->set('admin/shops', $shops);
         }
+
+        $currentHost  = $request->server->get('HTTP_HOST');
+        $adminContext = $this->container->get('shop.context.admin');
+        $frontcontext = $this->container->get('shop.context.front');
+        $themeManager = $this->container->get('theme.manager');
+
+        $adminContext->determineCurrentScope($currentHost);
+        $frontcontext->setCurrentScopeByHost($currentHost);
+        $themeManager->setCurrentTheme($frontcontext->getCurrentScope()->getTheme());
+
     }
 }

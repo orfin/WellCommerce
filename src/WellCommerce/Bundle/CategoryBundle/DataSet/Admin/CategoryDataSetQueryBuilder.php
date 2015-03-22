@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\CategoryBundle\DataSet\Admin;
 use WellCommerce\Bundle\DataSetBundle\QueryBuilder\AbstractDataSetQueryBuilder;
 use WellCommerce\Bundle\DataSetBundle\QueryBuilder\QueryBuilderInterface;
 use WellCommerce\Bundle\MultiStoreBundle\Context\ShopContext;
+use WellCommerce\Bundle\MultiStoreBundle\Context\ShopContextInterface;
 
 /**
  * Class CategoryDataSetQueryBuilder
@@ -24,14 +25,14 @@ use WellCommerce\Bundle\MultiStoreBundle\Context\ShopContext;
 class CategoryDataSetQueryBuilder extends AbstractDataSetQueryBuilder implements QueryBuilderInterface
 {
     /**
-     * @var ShopContext
+     * @var ShopContextInterface
      */
     protected $context;
 
     /**
-     * @param ShopContext $context
+     * @param ShopContextInterface $context
      */
-    public function setShopContext(ShopContext $context)
+    public function setShopContext(ShopContextInterface $context)
     {
         $this->context = $context;
     }
@@ -45,10 +46,10 @@ class CategoryDataSetQueryBuilder extends AbstractDataSetQueryBuilder implements
     {
         $qb = parent::getQueryBuilder();
 
-        if (null !== $this->context) {
+        if (null !== $this->context->getCurrentScopeId()) {
             $expression = $qb->expr()->eq('category_shops.id', ':shop');
             $qb->andWhere($expression);
-            $qb->setParameter('shop', $this->context->getCurrentScope()->getId());
+            $qb->setParameter('shop', $this->context->getCurrentScopeId());
         }
 
         return $qb;

@@ -62,9 +62,7 @@ class ThemeManager implements ThemeManagerInterface
      */
     public function getThemesDirectory()
     {
-        $kernelDir = $this->kernel->getRootDir();
-
-        return $kernelDir . '/../web/themes';
+        return $this->kernel->getRootDir() . '/../web/themes';
     }
 
     /**

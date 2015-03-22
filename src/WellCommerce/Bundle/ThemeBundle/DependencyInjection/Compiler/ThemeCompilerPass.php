@@ -18,7 +18,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * Class ThemeCompilerPass
  *
- * @package WellCommerce\Bundle\ThemeBundle\DependencyInjection\Compiler
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * Created on base of the LiipThemeBundle <https://github.com/liip/LiipThemeBundle>

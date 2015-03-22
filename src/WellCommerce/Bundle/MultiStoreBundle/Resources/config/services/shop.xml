@@ -37,7 +37,12 @@
             <argument type="service" id="shop.repository"/>
         </service>
 
-        <service id="shop.context" class="WellCommerce\Bundle\MultiStoreBundle\Context\ShopContext">
+        <service id="shop.context.admin" class="WellCommerce\Bundle\MultiStoreBundle\Context\Admin\ShopContext">
+            <argument type="service" id="request_stack"/>
+            <argument type="service" id="shop.repository"/>
+        </service>
+
+        <service id="shop.context.front" class="WellCommerce\Bundle\MultiStoreBundle\Context\Front\ShopContext">
             <argument type="service" id="request_stack"/>
             <argument type="service" id="shop.repository"/>
         </service>

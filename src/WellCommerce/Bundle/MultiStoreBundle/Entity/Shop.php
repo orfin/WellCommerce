@@ -74,6 +74,11 @@ class Shop
     private $producers;
 
     /**
+     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\CmsBundle\Entity\Page", mappedBy="shops")
+     */
+    private $pages;
+
+    /**
      * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\ThemeBundle\Entity\Theme")
      * @ORM\JoinColumn(name="theme_id", referencedColumnName="id", onDelete="SET NULL")
      */
@@ -197,5 +202,21 @@ class Shop
     public function setTheme($theme)
     {
         $this->theme = $theme;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPages()
+    {
+        return $this->pages;
+    }
+
+    /**
+     * @param mixed $pages
+     */
+    public function setPages($pages)
+    {
+        $this->pages = $pages;
     }
 }

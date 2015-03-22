@@ -23,4 +23,18 @@ use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
  */
 class ShopController extends AbstractAdminController
 {
+    /**
+     * Action used to switch admin shop context
+     *
+     * @param $id
+     *
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
+    public function changeContextAction($id)
+    {
+        $shop = $this->getManager()->getRepository()->find($id);
+        $this->get('shop.context.admin')->setCurrentScope($shop);
+
+        return $this->jsonResponse(['success' => true]);
+    }
 }

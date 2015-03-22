@@ -13,8 +13,8 @@
 namespace WellCommerce\Bundle\ProductBundle\DataSet\Front;
 
 use WellCommerce\Bundle\DataSetBundle\AbstractDataSet;
-use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
 use WellCommerce\Bundle\DataSetBundle\DataSetConfiguratorInterface;
+use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
 
 /**
  * Class ProductDataSet
@@ -42,6 +42,7 @@ class ProductDataSet extends AbstractDataSet implements DataSetInterface
             'currency'         => 'sell_currency.code',
             'stock'            => 'product.stock',
             'category'         => 'categories.id',
+            'shop'             => 'product_shops.id',
             'photo'            => 'photos.path',
         ]);
     }

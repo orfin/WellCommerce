@@ -18,7 +18,9 @@ var addCategory = function (oRequest) {
 };
 
 var deleteCategory = function (oRequest) {
-    GF_Ajax_Request(Routing.generate('admin.category.delete', {id: oRequest.id}));
+    GF_Ajax_Request(Routing.generate('admin.category.delete', {id: oRequest.id}), oRequest, function (oData) {
+        window.location = Routing.generate('admin.category.index');
+    });
 };
 
 var changeOrder = function (oRequest) {

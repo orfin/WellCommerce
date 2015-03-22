@@ -25,4 +25,14 @@ $(document).ready(function() {
 
     $('.GF_Datagrid_Col_createdAt .from').datepicker({dateFormat: 'yy-mm-dd 00:00:00'});
     $('.GF_Datagrid_Col_createdAt .to').datepicker({dateFormat: 'yy-mm-dd 23:59:59'});
+
+    $('#change-context').change(function(){
+        GF_Ajax_Request(Routing.generate('admin.shop.change_context', {id: $(this).val()}), {}, function (oData) {
+            if(DataGrid instanceof GF_Datagrid){
+                DataGrid.LoadData();
+            }else{
+                window.location.reload(false);
+            }
+        });
+    });
 });

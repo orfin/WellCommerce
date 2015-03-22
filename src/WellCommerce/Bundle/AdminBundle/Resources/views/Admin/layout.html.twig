@@ -42,6 +42,8 @@
             sCurrentController: '',
             sCurrentAction: ''
         });
+
+        var DataGrid;
     </script>
     {% javascripts
         '@WellCommerceAdminBundle/Resources/public/js/core/gf.js'
@@ -89,9 +91,10 @@
         <div id="boxShop">
             <span class="icon"></span>
             <div class="field-select">
-                <select name="view-switcher" onchange="">
+                <select id="change-context">
+                    <option value="0" {% if activeContextId == 0 %}selected{% endif %}>{% trans %}label.global_context{% endtrans %}</option>
                     {% for id, name in shops %}
-                        <option value="{{ id }}">{{ name }}</option>
+                        <option value="{{ id }}" {% if activeContextId == id %}selected{% endif %}>{{ name }}</option>
                     {% endfor %}
                 </select>
             </div>

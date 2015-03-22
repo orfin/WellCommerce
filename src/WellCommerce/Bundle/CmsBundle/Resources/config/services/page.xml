@@ -68,28 +68,53 @@
             <argument>WellCommerceCmsBundle:Page</argument>
         </service>
 
-        <service id="page.dataset.query_builder" class="WellCommerce\Bundle\CmsBundle\DataSet\PageDataSetQueryBuilder" public="false">
+        <service id="page.dataset.query_builder.admin" class="WellCommerce\Bundle\CmsBundle\DataSet\Admin\PageDataSetQueryBuilder" public="false">
             <argument type="service" id="page.repository"/>
+            <call method="setShopContext">
+                <argument type="service" id="shop.context.admin"/>
+            </call>
         </service>
 
-        <service id="page.dataset.loader" class="%dataset.loader.class%">
-            <argument type="service" id="page.dataset.query_builder"/>
+        <service id="page.dataset.query_builder.front" class="WellCommerce\Bundle\CmsBundle\DataSet\Front\PageDataSetQueryBuilder" public="false">
+            <argument type="service" id="page.repository"/>
+            <call method="setShopContext">
+                <argument type="service" id="shop.context.front"/>
+            </call>
+        </service>
+
+        <service id="page.dataset.loader.admin" class="%dataset.loader.class%">
+            <argument type="service" id="page.dataset.query_builder.admin"/>
             <argument type="service" id="dataset.processor"/>
         </service>
 
-        <service id="page.dataset" class="WellCommerce\Bundle\CmsBundle\DataSet\PageDataSet">
+        <service id="page.dataset.loader.front" class="%dataset.loader.class%">
+            <argument type="service" id="page.dataset.query_builder.front"/>
+            <argument type="service" id="dataset.processor"/>
+        </service>
+
+        <service id="page.dataset.admin" class="WellCommerce\Bundle\CmsBundle\DataSet\Admin\PageDataSet">
             <argument key="identifier">page</argument>
-            <argument type="service" id="page.dataset.loader"/>
+            <argument type="service" id="page.dataset.loader.admin"/>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
-        <service id="page.collection" parent="dataset.collection_builder.factory">
-            <argument type="service" id="page.dataset"/>
+        <service id="page.dataset.front" class="WellCommerce\Bundle\CmsBundle\DataSet\Front\PageDataSet">
+            <argument key="identifier">page</argument>
+            <argument type="service" id="page.dataset.loader.front"/>
+            <configurator service="dataset.configurator" method="configure"/>
+        </service>
+
+        <service id="page.collection.admin" parent="dataset.collection_builder.factory">
+            <argument type="service" id="page.dataset.admin"/>
+        </service>
+
+        <service id="page.collection.front" parent="dataset.collection_builder.factory">
+            <argument type="service" id="page.dataset.front"/>
         </service>
 
         <service id="page.datagrid" class="WellCommerce\Bundle\CmsBundle\DataGrid\PageDataGrid">
             <argument key="identifier">page</argument>
-            <argument type="service" id="page.dataset"/>
+            <argument type="service" id="page.dataset.admin"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -119,7 +144,7 @@
         </service>
 
         <service id="twig.extension.page" class="WellCommerce\Bundle\CmsBundle\Twig\Extension\PageExtension">
-            <argument type="service" id="page.collection"/>
+            <argument type="service" id="page.collection.front"/>
             <tag name="twig.extension"/>
         </service>
 
