@@ -72,4 +72,4 @@ abstract class AbstractShopContext
 
         return isset($scope['id']) ? $scope['id'] : null;
     }
-} 
+}

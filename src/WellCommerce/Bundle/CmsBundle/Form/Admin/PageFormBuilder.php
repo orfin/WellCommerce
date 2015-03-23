@@ -11,7 +11,6 @@
  */
 namespace WellCommerce\Bundle\CmsBundle\Form\Admin;
 
-use Symfony\Component\Console\Output\ConsoleOutput;
 use WellCommerce\Bundle\FormBundle\Builder\AbstractFormBuilder;
 use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\FormBundle\Conditions\Equals;
