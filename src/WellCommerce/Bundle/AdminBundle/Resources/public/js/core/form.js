@@ -40,6 +40,19 @@ var GMessage = function(sTitle, sMessage, oParams) {
     return GAlert(sTitle, sMessage, oParams);
 };
 
+var GNotification = function(sMessage, oParams){
+	if (oParams == undefined) {
+        oParams = {};
+    }
+	
+	oParams.life 		= 2500;
+	oParams.corners 	= 0;
+	oParams.sticky	 	= false;
+	oParams.position 	= 'bottom-right';
+	
+	return $.jGrowl(sMessage, oParams);
+};
+
 var GPrompt = function(sTitle, fOnConfirm, oParams) {
     if (oParams == undefined) {
         oParams = {};
@@ -123,7 +136,6 @@ GCore = function(oParams) {
 	GCore.sCurrentAction = GCore.p_oParams.sCurrentAction;
 	GCore.StartWaiting();
 };
-
 
 GCore.NULL = 'null';
 
@@ -1978,23 +1990,19 @@ var GTabs = function() {
 			opacity: 0,
 			height: 0,
 			overflow: 'hidden'
-		}).tabs('add', '#a', '', 1).tabs('select', 1);
+		}).tabs('add', '#a', '', 0).tabs('select', 0);
 		
-				setTimeout(function() {
-					$(gThis).tabs('select', 0).tabs('remove', 1).wrap('<div style="clear: both;"/>').css('height', 'auto');
-					$(gThis).parent().css('display', 'none').slideDown(350);
-					$(gThis).css({
-						opacity: 1,
-						overflow: 'visible'
-					});
-				}, 10);
-		
-//		if(window.location.hash.length){
-//			setTimeout(function() {
-//				alert(window.location.hash);
-//				$('.ui-tabs-nav a[href="'+ window.location.hash +'"]').click();
-//			}, 100);
-//		}
+		setTimeout(function() {
+			$(gThis).tabs('select', 1);
+			$(gThis).tabs('remove', 0);
+			$(gThis).find('.ui-tabs-panel').eq(0).children('fieldset').triggerHandler('GFormShow');
+			$(gThis).wrap('<div style="clear: both;"/>').css('height', 'auto');
+			$(gThis).parent().css('display', 'none').slideDown(350);
+			$(gThis).css({
+				opacity: 1,
+				overflow: 'visible'
+			});
+		}, 10);
 	};
 	
 	gThis._Constructor();
@@ -2944,7 +2952,6 @@ var GFormLanguageContainer = GCore.ExtendClass(GFormNode, function () {
     };
 
     gThis.RenderChildren = function () {
-    	alert(1);
         var jChildrenCollection = $('<div/>');
         for (var i = 0; i < gThis.m_oOptions.agFields.length; i++) {
             gThis._PrepareChild(gThis.m_oOptions.agFields[i]);
@@ -3091,11 +3098,11 @@ var GFormLanguageContainer = GCore.ExtendClass(GFormNode, function () {
 
         for (var sRepetitionId in mData) {
         	gThis.AddRepetition(sRepetitionId);
+        	var oValueObject = {};
         	for (var sFieldName in mData[sRepetitionId]) {
-        		var oValueObject = {};
                 oValueObject[sFieldName] = mData[sRepetitionId][sFieldName];
-                gThis.m_oContainerRepetitions[sRepetitionId].Populate(oValueObject);
         	}
+        	gThis.m_oContainerRepetitions[sRepetitionId].Populate(oValueObject);
         }
     };
 
@@ -7098,6 +7105,7 @@ var GFormSlugField = GCore.ExtendClass(GFormTextField, function () {
 
         GF_Ajax_Request(Routing.generate(gThis.m_oOptions.sGenerateRoute), oRequest, function (oData) {
             sSlugField.val(oData.slug);
+            GNotification('Link SEO został odświeżony');
         });
 
         return false;
