@@ -53,23 +53,24 @@ class ShopSubscriber extends AbstractEventSubscriber
     {
         $request = $event->getRequest();
 
-        if ($event->getRequestType() == HttpKernelInterface::SUB_REQUEST || !$request->hasSession()) {
+        if ($event->getRequestType() == HttpKernelInterface::SUB_REQUEST) {
             return;
         }
 
-        if (!$this->container->get('session')->has('admin/shops')) {
-            $shops = $this->container->get('shop.collection')->getSelect();
-            $this->container->get('session')->set('admin/shops', $shops);
+        if ($request->hasSession()) {
+            if (!$this->container->get('session')->has('admin/shops')) {
+                $shops = $this->container->get('shop.collection')->getSelect();
+                $this->container->get('session')->set('admin/shops', $shops);
+            }
+
+            $currentHost  = $request->server->get('HTTP_HOST');
+            $adminContext = $this->container->get('shop.context.admin');
+            $frontcontext = $this->container->get('shop.context.front');
+            $themeManager = $this->container->get('theme.manager');
+
+            $adminContext->determineCurrentScope($currentHost);
+            $frontcontext->setCurrentScopeByHost($currentHost);
+            $themeManager->setCurrentTheme($frontcontext->getCurrentScope()->getTheme());
         }
-
-        $currentHost  = $request->server->get('HTTP_HOST');
-        $adminContext = $this->container->get('shop.context.admin');
-        $frontcontext = $this->container->get('shop.context.front');
-        $themeManager = $this->container->get('theme.manager');
-
-        $adminContext->determineCurrentScope($currentHost);
-        $frontcontext->setCurrentScopeByHost($currentHost);
-        $themeManager->setCurrentTheme($frontcontext->getCurrentScope()->getTheme());
-
     }
 }

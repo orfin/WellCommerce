@@ -2859,30 +2859,6 @@ table.list td.align-right {
 }
 
 /*
-* AD PANEL
-*/
-.ad-panel {
-	display: inline;
-	width: 500px;
-	min-height: 60px;
-	float: right;
-}
-
-.ad-panel .logo {
-	display: inline;
-	float: right;
-}
-
-.ad-panel p {
-	line-height: 1.3em;
-	padding: 10px 0;
-	margin: 0;
-	color: #969695;
-	text-align: right;
-	font-size: .9em;
-}
-
-/*
 * DESKTOP
 */
 
@@ -2958,7 +2934,7 @@ form {
 	width: 223px;
 	margin: 0 -222px 10px 0;
 	position: relative;
-	top: -1px;
+	top: 0px;
 	left: -221px;
 	z-index: 2;
 	list-style: none;
@@ -2991,7 +2967,11 @@ form {
 	background: #c3c3c3;
 }
 
-.GForm .form-navigation li.ui-tabs-selected a,.GForm .form-navigation li.ui-tabs-selected a:hover,.GForm .form-navigation li.ui-tabs-selected a:focus,.GForm .form-navigation li.ui-tabs-selected a:active
+.GForm .form-navigation li.ui-tabs-selected a,
+.GForm .form-navigation li.ui-tabs-selected a:hover,
+.GForm .form-navigation li.ui-tabs-selected a:focus,
+.GForm .form-navigation li.ui-tabs-selected a:active,
+.GForm .form-navigation li.ui-state-active a
 	{
 	background: #fff;
 	font-weight: bold;

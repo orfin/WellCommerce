@@ -67,6 +67,10 @@ abstract class AbstractShopContext
      */
     public function getCurrentScopeId()
     {
+        if (null === $this->requestStack->getMasterRequest()) {
+            return null;
+        }
+
         $sessionBag = $this->requestStack->getMasterRequest()->getSession();
         $scope      = $sessionBag->get($this->getSessionBagNamespace());
 
