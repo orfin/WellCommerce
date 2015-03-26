@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
+
+    <class name="WellCommerce\Bundle\ProductBundle\Entity\Product">
+        <property name="translations">
+            <constraint name="Valid">
+                <option name="deep">true</option>
+            </constraint>
+        </property>
+        <property name="sku">
+            <constraint name="NotBlank">
+                <option name="message">validation.sku.not_blank</option>
+            </constraint>
+            <constraint name="NotNull">
+                <option name="message">validation.sku.not_null</option>
+            </constraint>
+        </property>
+        <property name="stock">
+            <constraint name="GreaterThanOrEqual">
+                <option name="value">0</option>
+            </constraint>
+            <constraint name="NotBlank" />
+        </property>
+        <property name="weight">
+            <constraint name="GreaterThanOrEqual">
+                <option name="value">0</option>
+            </constraint>
+            <constraint name="NotBlank" />
+        </property>
+        <property name="width">
+            <constraint name="GreaterThanOrEqual">
+                <option name="value">0</option>
+            </constraint>
+            <constraint name="NotBlank" />
+        </property>
+        <property name="height">
+            <constraint name="GreaterThanOrEqual">
+                <option name="value">0</option>
+            </constraint>
+            <constraint name="NotBlank" />
+        </property>
+        <property name="depth">
+            <constraint name="GreaterThanOrEqual">
+                <option name="value">0</option>
+            </constraint>
+            <constraint name="NotBlank" />
+        </property>
+        <property name="packageSize">
+            <constraint name="GreaterThanOrEqual">
+                <option name="value">0</option>
+            </constraint>
+            <constraint name="NotBlank" />
+        </property>
+    </class>
+
+    <class name="WellCommerce\Bundle\ProductBundle\Entity\ProductTranslation">
+        <property name="name">
+            <constraint name="NotBlank" />
+            <constraint name="NotNull" />
+        </property>
+        <property name="slug">
+            <constraint name="NotBlank" />
+            <constraint name="NotNull" />
+        </property>
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">slug</option>
+        </constraint>
+    </class>
+</constraint-mapping>

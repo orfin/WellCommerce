@@ -17,6 +17,7 @@ use WellCommerce\Bundle\FormBundle\DataTransformer\EntityToIdentifierTransformer
 use WellCommerce\Bundle\FormBundle\DataTransformer\TranslationTransformer;
 use WellCommerce\Bundle\FormBundle\Elements\ElementInterface;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
+use WellCommerce\Bundle\FormBundle\Elements\Input\TextField;
 use WellCommerce\Bundle\ProductBundle\Form\DataTransformer\ProductAttributeCollectionToArrayTransformer;
 use WellCommerce\Bundle\ProductBundle\Form\DataTransformer\ProductPhotoCollectionToArrayTransformer;
 
@@ -236,7 +237,7 @@ class ProductFormBuilder extends AbstractFormBuilder
         ]));
 
         $stockData->addChild($this->getElement('text_field', [
-            'name'    => 'package_size',
+            'name'    => 'packageSize',
             'label'   => $this->trans('product.package_size.label'),
             'filters' => [
                 $this->getFilter('comma_to_dot_changer'),
