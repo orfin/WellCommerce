@@ -17,7 +17,6 @@ use WellCommerce\Bundle\FormBundle\DataTransformer\EntityToIdentifierTransformer
 use WellCommerce\Bundle\FormBundle\DataTransformer\TranslationTransformer;
 use WellCommerce\Bundle\FormBundle\Elements\ElementInterface;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
-use WellCommerce\Bundle\FormBundle\Elements\Input\TextField;
 use WellCommerce\Bundle\ProductBundle\Form\DataTransformer\ProductAttributeCollectionToArrayTransformer;
 use WellCommerce\Bundle\ProductBundle\Form\DataTransformer\ProductPhotoCollectionToArrayTransformer;
 
