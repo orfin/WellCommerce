@@ -8751,8 +8751,10 @@ td.weight,td.date,td.id,td.cod,td.price {
 span.field+span.required,span.field+*+span.required {
 	font-weight: bold;
 	color: #eb1b01;
-	margin-left: 12px;
+	margin-left: 0px;
 	line-height: 34px;
+	float: left;
+	clear: both;
 }
 
 #login span.field+span.required,#login span.field+*+span.required,#forgotlogin span.field+span.required,#forgotlogin span.field+*+span.required
