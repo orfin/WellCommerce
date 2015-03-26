@@ -7780,9 +7780,7 @@ var GFormTree = GCore.ExtendClass(GFormField, function() {
 		if ((mValue == undefined) || (mValue == '')) {
 			mValue = [];
 		}
-		else if (!(mValue instanceof Array)) {
-			mValue = [mValue];
-		}
+		
 		if (gThis.m_oOptions.bChoosable) {
 			gThis.m_jFieldWrapper.empty();
 			for (var i in mValue) {
@@ -7797,7 +7795,7 @@ var GFormTree = GCore.ExtendClass(GFormField, function() {
 			gThis.m_jNode.unCheckCheckboxes();
 			gThis.m_jFieldWrapper.empty();
 			for (var i in mValue) {
-				if (i == 'toJSON') {
+				if (i == 'unmodified') {
 					continue;
 				}
 				gThis.m_jFieldWrapper.append('<input type="hidden" name="' + gThis.GetName() + '[]" value="' + mValue[i] + '"/>');
@@ -10471,6 +10469,10 @@ var GFormPriceEditor = GCore.ExtendClass(GFormTextField, function() {
 			jSuffix.html(gThis.m_oOptions.sSuffix);
 			jGrossNode.append(jSuffix);
 		}
+		
+		var jError = $('<span class="' + gThis._GetClass('Required') + '"/>');
+		jNetNode.append(jError);
+		
 		jRepetitionNode.append(jNetNode).append(jGrossNode);
 		gThis.m_jField = jRepetitionNode.find('input');
 		gThis.jRepetitionNode = jRepetitionNode;
