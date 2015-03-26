@@ -10,12 +10,8 @@
             </constraint>
         </property>
         <property name="sku">
-            <constraint name="NotBlank">
-                <option name="message">validation.sku.not_blank</option>
-            </constraint>
-            <constraint name="NotNull">
-                <option name="message">validation.sku.not_null</option>
-            </constraint>
+            <constraint name="NotBlank" />
+            <constraint name="NotNull" />
         </property>
         <property name="stock">
             <constraint name="GreaterThanOrEqual">
