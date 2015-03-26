@@ -13,6 +13,18 @@
             <constraint name="NotBlank" />
             <constraint name="NotNull" />
         </property>
+        <property name="buyPrice">
+            <constraint name="GreaterThanOrEqual">
+                <option name="value">0</option>
+            </constraint>
+            <constraint name="NotBlank" />
+        </property>
+        <property name="sellPrice">
+            <constraint name="GreaterThan">
+                <option name="value">0</option>
+            </constraint>
+            <constraint name="NotBlank" />
+        </property>
         <property name="stock">
             <constraint name="GreaterThanOrEqual">
                 <option name="value">0</option>
