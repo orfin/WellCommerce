@@ -36,7 +36,7 @@ class ProductDataSet extends AbstractDataSet implements DataSetInterface
             'sellPrice' => 'product.sellPrice',
             'stock'     => 'product.stock',
             'shop'      => 'product_shops.id',
-            'category'  => 'GROUP_CONCAT(categories_translation.name SEPARATOR \', \')',
+            'category'  => 'GROUP_CONCAT(DISTINCT categories_translation.name SEPARATOR \', \')',
         ]);
     }
 }
