@@ -86,7 +86,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
         $form     = $this->manager->getForm($resource);
 
         if ($form->handleRequest()->isSubmitted()) {
-            if ($valid = $form->isValid()) {
+            if ($form->isValid()) {
                 $this->manager->createResource($resource, $request);
             }
 
