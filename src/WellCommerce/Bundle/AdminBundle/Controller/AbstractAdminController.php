@@ -115,24 +115,21 @@ abstract class AbstractAdminController extends AbstractController implements Adm
 
         $form = $this->manager->getForm($resource);
 
-        if ($form->handleRequest()->isValid()) {
-            $this->manager->updateResource($resource, $request);
-
-            if ($form->isAction('continue')) {
-                return $this->redirectToAction('edit', [
-                    'id' => $resource->getId()
-                ]);
+        if ($form->handleRequest()->isSubmitted()) {
+            if ($valid = $form->isValid()) {
+                $this->manager->updateResource($resource, $request);
             }
 
-            if ($form->isAction('next')) {
-                return $this->redirectToAction('add');
-            }
+            return $this->jsonResponse([
+                'valid'      => $valid,
+                'redirectTo' => '',
+                'error'      => $form->getError()
+            ]);
 
-            return $this->redirectToAction('index');
         }
 
         return [
-            'form' => $form
+            'form' => $form,
         ];
     }
 

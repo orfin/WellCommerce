@@ -85,17 +85,21 @@ class CategoryController extends AbstractAdminController
         $resource = $manager->findResource($request);
         $form     = $manager->getForm($resource);
 
-        if ($form->handleRequest()->isValid()) {
-            $manager->updateResource($resource, $request);
+        if ($form->handleRequest()->isSubmitted()) {
+            if ($valid = $form->isValid()) {
+                $manager->updateResource($resource, $request);
+            }
 
-            return $this->redirectToAction('edit', [
-                'id' => $resource->getId()
+            return $this->jsonResponse([
+                'valid'      => $valid,
+                'redirectTo' => '',
+                'error'      => $form->getError()
             ]);
         }
 
         return [
             'tree' => $tree,
-            'form' => $form
+            'form' => $form,
         ];
     }
 

@@ -3390,6 +3390,7 @@ var GFormContainer = GCore.ExtendClass(GFormNode, function () {
         if (mData == undefined) {
             return;
         }
+        
         var i;
         if (gThis.m_bRepeatable) {
             for (i in mData) {
@@ -3401,6 +3402,7 @@ var GFormContainer = GCore.ExtendClass(GFormNode, function () {
         else {
             for (i = 0; i < gThis.m_oOptions.agFields.length; i++) {
                 if ((gThis.m_oOptions.agFields[i].m_oOptions.sName != undefined)) {
+                	
                     gThis.m_oOptions.agFields[i].PopulateErrors(mData[gThis.m_oOptions.agFields[i].m_oOptions.sName]);
                 }
             }
@@ -4012,6 +4014,7 @@ var GForm = GCore.ExtendClass(GFormContainer, function() {
 	
 	gThis.m_bDontFocus = false;
 	gThis.m_bPopulatedWithDefaults = false;
+	gThis.m_bLocked = false;
 	gThis.m_bFocused = false;
 	gThis.m_ogFields = {};
 	gThis.m_oLocks = {};
@@ -4034,7 +4037,7 @@ var GForm = GCore.ExtendClass(GFormContainer, function() {
 	};
 	
 	gThis._InitializeEvents = function() {
-		$(gThis).submit(gThis.OnSubmit);
+		$(gThis).submit(gThis.AjaxSubmit);
 	};
 	
 	gThis.Lock = function(sTitle, sMessage) {
@@ -4079,7 +4082,38 @@ var GForm = GCore.ExtendClass(GFormContainer, function() {
 		if ((sAction != undefined) && (sAction != '')) {
 			$(gThis).find('.' + gThis._GetClass('Actions')).append('<input type="hidden" name="_Action_' + sAction + '" value="1"/>');
 		}
-		$(gThis).submit();
+		
+		gThis.AjaxSubmit();
+	};
+	
+	gThis.AjaxSubmit = function() {
+		if(gThis.m_bLocked == true){
+			return false;
+		}
+		
+		gThis.m_bLocked = true;
+		GCore.StartWaiting();
+		var values = {};
+		$.each($(gThis).serializeArray(), function(i, field) {
+			values[field.name] = field.value;
+		});
+		
+		GF_Ajax_Request($(gThis).attr('action'), values, function (oResponse) {
+			if(oResponse.error != undefined && GCore.ObjectLength(oResponse.error)){
+	    		gThis.m_oOptions.agFields = gThis.m_agFields;
+	    		gThis.PopulateErrors(oResponse.error);
+	    	}
+			
+			if(oResponse.valid == true){
+				GNotification('Valid');
+    		}else{
+    			GNotification('Not valid');
+    		}
+	    	GCore.StopWaiting();
+	    	gThis.m_bLocked = false;
+	    });
+		
+		return false;
 	};
 	
 	gThis._InitButtons = function() {
@@ -7798,7 +7832,7 @@ var GFormTree = GCore.ExtendClass(GFormField, function() {
 				if (i == 'unmodified') {
 					continue;
 				}
-				gThis.m_jFieldWrapper.append('<input type="hidden" name="' + gThis.GetName() + '[]" value="' + mValue[i] + '"/>');
+				gThis.m_jFieldWrapper.append('<input type="hidden" name="' + gThis.GetName() + '[' + mValue[i] + ']" value="' + mValue[i] + '"/>');
 				gThis.m_jNode.find('input:checkbox[value="' + mValue[i] + '"]').parent().checkCheckboxes();
 			}
 		}
@@ -7830,7 +7864,7 @@ var GFormTree = GCore.ExtendClass(GFormField, function() {
 			gThis.m_jFieldWrapper.find('input[value="' + $(this).attr('value') + '"]').remove();
 		}
 		if ($(this).is(':checked')) {
-			var jInput = $('<input type="hidden" name="' + gThis.GetName() + ($(this).is(':radio') ? '' : '[]') + '" value="' + $(this).attr('value') + '"/>');
+			var jInput = $('<input type="hidden" name="' + gThis.GetName() + ($(this).is(':radio') ? '' : '[' + $(this).attr('value') + ']') + '" value="' + $(this).attr('value') + '"/>');
 			gThis.m_jFieldWrapper.append(jInput);
 			for (var i in gThis.m_afDependencyTriggers) {
 				gThis.m_afDependencyTriggers[i].apply(jInput.get(0), [{
@@ -10278,7 +10312,7 @@ var GFormMultiSelect = GCore.ExtendClass(GFormField, function() {
 		var jField = $('<ul/>');
 		for (var i = 0; i < gThis.m_oOptions.aoOptions.length; i++) {
 			var oOption = gThis.m_oOptions.aoOptions[i];
-			jField.append('<li><label><input type="checkbox" name="' + gThis.GetName(sId) + '[]" value="' + oOption.sValue + '"/>' + oOption.sLabel + '</label></li>');
+			jField.append('<li><label><input type="checkbox" name="' + gThis.GetName(sId) + '['+ oOption.sValue +']" value="' + oOption.sValue + '"/>' + oOption.sLabel + '</label></li>');
 		}
 		if (gThis.m_oOptions.bAddable && (gThis.m_oOptions.fOnAdd instanceof Function)) {
 			gThis.m_jTrigger = $('<li><a style="padding-left: 8px;line-height: 19px;"href="#" class="' + gThis._GetClass('AddRepetition') + '"><img src="' + gThis._GetImage('AddRepetition') + '" alt="' + GForm.Language.add_field_repetition + '" title="' + GForm.Language.add_field_repetition + '"/> Dodaj nowy</a></li>');
