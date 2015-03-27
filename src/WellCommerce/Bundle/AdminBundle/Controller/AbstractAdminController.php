@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\AdminBundle\Manager\AdminManagerInterface;
 use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
+use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
  * Class AbstractAdminController
@@ -77,21 +78,19 @@ abstract class AbstractAdminController extends AbstractController implements Adm
      *
      * @param Request $request
      *
-     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     * @return array|JsonResponse
      */
     public function addAction(Request $request)
     {
         $resource = $this->manager->initResource();
         $form     = $this->manager->getForm($resource);
 
-        if ($form->handleRequest()->isValid()) {
-            $this->manager->createResource($resource, $request);
-
-            if ($form->isAction('next')) {
-                return $this->redirectToAction('add');
+        if ($form->handleRequest()->isSubmitted()) {
+            if ($valid = $form->isValid()) {
+                $this->manager->createResource($resource, $request);
             }
 
-            return $this->redirectToAction('index');
+            return $this->createJsonDefaultResponse($form);
         }
 
         return [
@@ -104,7 +103,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
      *
      * @param Request $request
      *
-     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     * @return array|JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function editAction(Request $request)
     {
@@ -116,16 +115,11 @@ abstract class AbstractAdminController extends AbstractController implements Adm
         $form = $this->manager->getForm($resource);
 
         if ($form->handleRequest()->isSubmitted()) {
-            if ($valid = $form->isValid()) {
+            if ($form->isValid()) {
                 $this->manager->updateResource($resource, $request);
             }
 
-            return $this->jsonResponse([
-                'valid'      => $valid,
-                'redirectTo' => '',
-                'error'      => $form->getError()
-            ]);
-
+            return $this->createJsonDefaultResponse($form);
         }
 
         return [
@@ -134,9 +128,27 @@ abstract class AbstractAdminController extends AbstractController implements Adm
     }
 
     /**
+     * Creates default response for form instance
+     *
+     * @param FormInterface $form
+     *
+     * @return JsonResponse
+     */
+    protected function createJsonDefaultResponse(FormInterface $form)
+    {
+        return $this->jsonResponse([
+            'valid'      => $form->isValid(),
+            'continue'   => $form->isAction('continue'),
+            'next'       => $form->isAction('next'),
+            'redirectTo' => $this->getRedirectToActionUrl('index'),
+            'error'      => $form->getError()
+        ]);
+    }
+
+    /**
      * Default delete action
      *
-     * @param $id
+     * @param int $id
      *
      * @return JsonResponse
      */

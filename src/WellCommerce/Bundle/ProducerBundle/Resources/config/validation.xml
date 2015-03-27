@@ -11,20 +11,15 @@
 
     <class name="WellCommerce\Bundle\ProducerBundle\Entity\ProducerTranslation">
         <property name="name">
-            <constraint name="NotBlank">
-                <option name="message">validation.producer_translation.name.not_blank</option>
-            </constraint>
-            <constraint name="NotNull">
-                <option name="message">validation.producer_translation.name.not_null</option>
-            </constraint>
+            <constraint name="NotBlank" />
+            <constraint name="NotNull" />
         </property>
         <property name="slug">
-            <constraint name="NotBlank">
-                <option name="message">validation.producer_translation.slug.not_blank</option>
-            </constraint>
-            <constraint name="NotNull">
-                <option name="message">validation.producer_translation.slug.not_null</option>
-            </constraint>
+            <constraint name="NotBlank" />
+            <constraint name="NotNull" />
         </property>
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">slug</option>
+        </constraint>
     </class>
 </constraint-mapping>

@@ -48,4 +48,14 @@ interface RedirectHelperInterface
      * @return mixed
      */
     public function getActionForCurrentController($action);
+
+    /**
+     * Creates absolute url pointing to particular controller action
+     *
+     * @param string $action
+     * @param array  $params
+     *
+     * @return string
+     */
+    public function getRedirectToActionUrl($action, array $params = []);
 }

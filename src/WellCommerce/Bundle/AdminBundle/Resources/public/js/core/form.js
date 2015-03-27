@@ -4086,7 +4086,31 @@ var GForm = GCore.ExtendClass(GFormContainer, function() {
 		gThis.AjaxSubmit();
 	};
 	
+	gThis.OnAjaxSubmitResponse = function(oResponse){
+		GCore.StopWaiting();
+		gThis.m_bLocked = false;
+		gThis.m_oOptions.agFields = gThis.m_agFields;
+		
+		if(oResponse.valid == false){
+			gThis.PopulateErrors(oResponse.error);
+		}else{
+			if(oResponse.next == false && oResponse.continue == false){
+				window.location.href = oResponse.redirectTo;
+			}
+			
+			if(oResponse.next == true && oResponse.continue == false){
+				gThis.Reset();
+				GNotification('Changes added!');
+			}
+			
+			if(oResponse.next == false && oResponse.continue == true){
+				GNotification('Changes saved!');
+			}
+		}
+	};
+	
 	gThis.AjaxSubmit = function() {
+		
 		if(gThis.m_bLocked == true){
 			return false;
 		}
@@ -4098,20 +4122,7 @@ var GForm = GCore.ExtendClass(GFormContainer, function() {
 			values[field.name] = field.value;
 		});
 		
-		GF_Ajax_Request($(gThis).attr('action'), values, function (oResponse) {
-			if(oResponse.error != undefined && GCore.ObjectLength(oResponse.error)){
-	    		gThis.m_oOptions.agFields = gThis.m_agFields;
-	    		gThis.PopulateErrors(oResponse.error);
-	    	}
-			
-			if(oResponse.valid == true){
-				GNotification('Valid');
-    		}else{
-    			GNotification('Not valid');
-    		}
-	    	GCore.StopWaiting();
-	    	gThis.m_bLocked = false;
-	    });
+		GF_Ajax_Request($(gThis).attr('action'), values, gThis.OnAjaxSubmitResponse);
 		
 		return false;
 	};
@@ -10361,10 +10372,10 @@ var GFormMultiSelect = GCore.ExtendClass(GFormField, function() {
 	gThis.Populate = function(mValue) {
 		gThis.m_jNode.unCheckCheckboxes();
 		for (var i in mValue) {
-			if (i == 'toJSON') {
+			if (i == 'unmodified') {
 				continue;
 			}
-			gThis.m_jNode.find('input[value="' + mValue[i] + '"]').parent().checkCheckboxes();
+			gThis.m_jNode.find('input[value="' + mValue[i] + '"]').click();
 		}
 	};
 	

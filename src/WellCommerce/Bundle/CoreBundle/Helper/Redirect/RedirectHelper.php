@@ -49,6 +49,16 @@ class RedirectHelper implements RedirectHelperInterface
     /**
      * {@inheritdoc}
      */
+    public function getRedirectToActionUrl($action, array $params = [])
+    {
+        $route = $this->getActionForCurrentController($action);
+
+        return $this->router->generate($route, $params, true);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getActionForCurrentController($action)
     {
         $currentPath  = $this->getRouterContext()->getPathInfo();
