@@ -55,7 +55,9 @@
         "wingu/code-generator": "1.0.5",
         "wellcommerce/dataset-bundle": "0.10.*@dev",
         "wellcommerce/datagrid-bundle": "0.10.*@dev",
-        "wellcommerce/form-bundle": "0.10.*@dev"
+        "wellcommerce/form-bundle": "0.10.*@dev",
+        "wellcommerce/composer-plugin": "dev-master",
+        "wellcommerce/wellcommerce-default-theme": "0.1.*@dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
