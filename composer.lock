@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "22c3227d53f4769a4ff7e2a456f2c9e5",
+    "hash": "806f9331f3846d4a2269036666e19c75",
     "packages": [
         {
             "name": "beberlei/DoctrineExtensions",
@@ -2817,12 +2817,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/WellCommerce/ComposerPlugin.git",
-                "reference": "672cb4f89ef3d96d74e529929bb04d76253a53d0"
+                "reference": "c900927f0c6feda1e605dbb500d3818eb9df97e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WellCommerce/ComposerPlugin/zipball/672cb4f89ef3d96d74e529929bb04d76253a53d0",
-                "reference": "672cb4f89ef3d96d74e529929bb04d76253a53d0",
+                "url": "https://api.github.com/repos/WellCommerce/ComposerPlugin/zipball/c900927f0c6feda1e605dbb500d3818eb9df97e5",
+                "reference": "c900927f0c6feda1e605dbb500d3818eb9df97e5",
                 "shasum": ""
             },
             "require": {
@@ -2830,7 +2830,10 @@
             },
             "type": "composer-plugin",
             "extra": {
-                "class": "WellCommerce\\Composer\\WellCommercePlugin"
+                "class": "WellCommerce\\Composer\\WellCommercePlugin",
+                "branch-alias": {
+                    "dev-master": "0.1-dev"
+                }
             },
             "autoload": {
                 "psr-0": {
@@ -2855,7 +2858,7 @@
                 "plugin",
                 "wellcommerce"
             ],
-            "time": "2015-03-30 13:14:56"
+            "time": "2015-03-30 15:28:48"
         },
         {
             "name": "wellcommerce/datagrid-bundle",
@@ -3006,58 +3009,6 @@
                 "symfony"
             ],
             "time": "2015-03-07 17:09:05"
-        },
-        {
-            "name": "wellcommerce/wellcommerce-default-theme",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/WellCommerce/wellcommerce-theme-default.git",
-                "reference": "e581a22f1cc7aed063af73043ed1149765220e2b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/WellCommerce/wellcommerce-theme-default/zipball/e581a22f1cc7aed063af73043ed1149765220e2b",
-                "reference": "e581a22f1cc7aed063af73043ed1149765220e2b",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4"
-            },
-            "type": "wellcommerce-theme",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "OSL-3.0"
-            ],
-            "authors": [
-                {
-                    "name": "Adam Piotrowski",
-                    "email": "adam@wellcommerce.org"
-                },
-                {
-                    "name": "WellCommerce Developers",
-                    "email": "developers@wellcommerce.org"
-                }
-            ],
-            "description": "Default theme for WellCommerce Open-Source edition",
-            "keywords": [
-                "e-commerce",
-                "open-source",
-                "symfony",
-                "theme",
-                "wellcommerce"
-            ],
-            "time": "2015-03-30 11:16:27"
         },
         {
             "name": "white-october/pagerfanta-bundle",
@@ -4771,7 +4722,6 @@
         "wellcommerce/datagrid-bundle": 20,
         "wellcommerce/form-bundle": 20,
         "wellcommerce/composer-plugin": 20,
-        "wellcommerce/wellcommerce-default-theme": 20,
         "doctrine/doctrine-fixtures-bundle": 20
     },
     "prefer-stable": false,
