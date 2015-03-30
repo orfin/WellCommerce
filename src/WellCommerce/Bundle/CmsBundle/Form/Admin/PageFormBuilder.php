@@ -31,6 +31,22 @@ class PageFormBuilder extends AbstractFormBuilder implements FormBuilderInterfac
      */
     public function buildForm(FormInterface $form)
     {
+        $this->addMainFieldset($form);
+        $this->addContentFieldset($form);
+        $this->addRedirectFieldset($form);
+        $this->addShopFieldset($form);
+
+        $form->addFilter($this->getFilter('trim'));
+        $form->addFilter($this->getFilter('secure'));
+    }
+
+    /**
+     * Adds main settings fieldset to form
+     *
+     * @param FormInterface $form
+     */
+    private function addMainFieldset(FormInterface $form)
+    {
         $mainData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'main_data',
             'label' => $this->trans('fieldset.main.label')
@@ -79,7 +95,15 @@ class PageFormBuilder extends AbstractFormBuilder implements FormBuilderInterfac
             'restrict'    => $this->getParam('id'),
             'transformer' => new EntityToIdentifierTransformer($this->get('page.repository'))
         ]));
+    }
 
+    /**
+     * Adds content editing fieldset to form
+     *
+     * @param FormInterface $form
+     */
+    private function addContentFieldset(FormInterface $form)
+    {
         $contentData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'content_data',
             'label' => $this->trans('fieldset.content.label')
@@ -95,7 +119,10 @@ class PageFormBuilder extends AbstractFormBuilder implements FormBuilderInterfac
             'name'  => 'content',
             'label' => $this->trans('page.content.label'),
         ]));
+    }
 
+    private function addRedirectFieldset(FormInterface $form)
+    {
         $redirectSettings = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'redirect_settings',
             'label' => $this->trans('label.redirect_settings')
@@ -135,7 +162,15 @@ class PageFormBuilder extends AbstractFormBuilder implements FormBuilderInterfac
                 ])
             ]
         ]));
+    }
 
+    /**
+     * Adds shop selector fieldset to form
+     *
+     * @param FormInterface $form
+     */
+    private function addShopFieldset(FormInterface $form)
+    {
         $shopsData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'shops_data',
             'label' => $this->trans('fieldset.shops.label')
@@ -147,9 +182,6 @@ class PageFormBuilder extends AbstractFormBuilder implements FormBuilderInterfac
             'options'     => $this->get('shop.collection')->getSelect(),
             'transformer' => new CollectionToArrayTransformer($this->get('shop.repository'))
         ]));
-
-        $form->addFilter($this->getFilter('trim'));
-        $form->addFilter($this->getFilter('secure'));
     }
 
     /**
