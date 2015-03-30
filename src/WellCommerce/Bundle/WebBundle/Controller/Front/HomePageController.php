@@ -20,22 +20,12 @@ use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
-<<<<<<< HEAD
- * @Template()
-=======
  * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
->>>>>>> origin/development
  */
 class HomePageController extends AbstractFrontController implements FrontControllerInterface
 {
     public function indexAction()
     {
-<<<<<<< HEAD
         return [];
-=======
-        return [
-            'layout' => ''
-        ];
->>>>>>> origin/development
     }
 }
