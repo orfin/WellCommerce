@@ -82,6 +82,19 @@ abstract class AbstractController extends Controller
     }
 
     /**
+     * Creates absolute url pointing to particular controller action
+     *
+     * @param string $actionName
+     * @param array  $params
+     *
+     * @return string
+     */
+    protected function getRedirectToActionUrl($actionName = 'index', array $params = [])
+    {
+        return $this->getManager()->getRedirectHelper()->getRedirectToActionUrl($actionName, $params);
+    }
+
+    /**
      * Returns manager object
      *
      * @return \WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface

@@ -14,6 +14,8 @@ namespace WellCommerce\Bundle\CategoryBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
+use WellCommerce\Bundle\CategoryBundle\Entity\Category;
+use WellCommerce\Bundle\RoutingBundle\Helper\Sluggable;
 
 /**
  * Class CategoryController
@@ -45,7 +47,31 @@ class CategoryController extends AbstractAdminController
 
     public function addAction(Request $request)
     {
-        $category = $this->getRepository()->quickAddCategory($request->request);
+        $shop          = $this->get('shop.context')->getCurrentScope();
+        $currentLocale = $request->getLocale();
+        $parameters    = $request->request;
+        $name          = $parameters->get('name');
+        $parent        = $this->getRepository()->find((int)$parameters->get('parent'));
+        $locales       = $this->getRepository()->getLocales();
+
+        $category = new Category();
+        $category->setHierarchy(0);
+        $category->setEnabled(1);
+        $category->setParent($parent);
+        $category->addShop($shop);
+
+        /** @var $locale \WellCommerce\Bundle\IntlBundle\Entity\Locale */
+        foreach ($locales as $locale) {
+            $slug = Sluggable::makeSlug($name);
+            if ($locale->getCode() != $currentLocale) {
+                $slug = Sluggable::makeSlug(sprintf('%s-%s', $name, $locale->getCode()));
+            }
+            $category->translate($locale->getCode())->setName($name);
+            $category->translate($locale->getCode())->setSlug($slug);
+        }
+        $category->mergeNewTranslations();
+        $this->getEntityManager()->persist($category);
+        $this->getEntityManager()->flush();
 
         return $this->jsonResponse([
             'id' => $category->getId(),
@@ -59,27 +85,41 @@ class CategoryController extends AbstractAdminController
         $resource = $manager->findResource($request);
         $form     = $manager->getForm($resource);
 
-        if ($form->handleRequest()->isValid()) {
-            $manager->updateResource($resource, $request);
-            if ($form->isAction('continue')) {
-                return $this->redirectToAction('edit', [
-                    'id' => $resource->getId()
-                ]);
+        if ($form->handleRequest()->isSubmitted()) {
+            if ($valid = $form->isValid()) {
+                $manager->updateResource($resource, $request);
             }
 
-            return $this->redirectToAction('index');
+            return $this->jsonResponse([
+                'valid'      => $valid,
+                'redirectTo' => '',
+                'error'      => $form->getError()
+            ]);
         }
 
         return [
             'tree' => $tree,
-            'form' => $form
+            'form' => $form,
         ];
     }
 
     public function sortAction(Request $request)
     {
-        $items = $request->request->get('items');
-        $this->getRepository()->changeOrder($items);
+        $items      = $request->request->get('items');
+        $repository = $this->getRepository();
+        $em         = $this->getEntityManager();
+
+        foreach ($items as $item) {
+            $parent = $repository->find($item['parent']);
+            $child  = $repository->find($item['id']);
+            if (null !== $child) {
+                $child->setParent($parent);
+                $child->setHierarchy($item['weight']);
+                $em->persist($child);
+            }
+        }
+
+        $em->flush();
 
         return $this->jsonResponse(['success' => true]);
     }

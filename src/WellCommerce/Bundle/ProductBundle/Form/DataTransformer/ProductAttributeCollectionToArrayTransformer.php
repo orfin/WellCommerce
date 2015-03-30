@@ -108,8 +108,9 @@ class ProductAttributeCollectionToArrayTransformer extends CollectionToArrayTran
      */
     public function reverseTransform($modelData, PropertyPathInterface $propertyPath, $values)
     {
+        $attributes = $this->propertyAccessor->getValue($modelData, 'attributes');
         $collection = $this->createAttributesCollection($modelData, $values);
-
+        $this->synchronizeCollection($attributes, $collection);
         $modelData->setAttributes($collection);
     }
 

@@ -18,7 +18,6 @@ use WellCommerce\Bundle\ThemeBundle\Manager\ThemeManagerInterface;
 /**
  * Class FileLocator
  *
- * @package WellCommerce\Bundle\ThemeBundle\Locator
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class FileLocator extends BaseFileLocator

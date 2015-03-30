@@ -40,6 +40,19 @@ var GMessage = function(sTitle, sMessage, oParams) {
     return GAlert(sTitle, sMessage, oParams);
 };
 
+var GNotification = function(sMessage, oParams){
+	if (oParams == undefined) {
+        oParams = {};
+    }
+	
+	oParams.life 		= 2500;
+	oParams.corners 	= 0;
+	oParams.sticky	 	= false;
+	oParams.position 	= 'bottom-right';
+	
+	return $.jGrowl(sMessage, oParams);
+};
+
 var GPrompt = function(sTitle, fOnConfirm, oParams) {
     if (oParams == undefined) {
         oParams = {};
@@ -123,7 +136,6 @@ GCore = function(oParams) {
 	GCore.sCurrentAction = GCore.p_oParams.sCurrentAction;
 	GCore.StartWaiting();
 };
-
 
 GCore.NULL = 'null';
 
@@ -446,7 +458,6 @@ var GPlugin = function(sPluginName, oDefaults, fPlugin) {
         fPlugin.GetInstance = GPlugin.GetInstance;
 
     })(jQuery);
-
 };
 
 GPlugin.s_iCounter = 0;
@@ -1823,6 +1834,7 @@ var GSelect = function() {
 };
 
 new GPlugin('GSelect', oDefaults, GSelect);
+
 /*
 * SHADOW
 * Adds a nice shadow to the given element.
@@ -1978,23 +1990,19 @@ var GTabs = function() {
 			opacity: 0,
 			height: 0,
 			overflow: 'hidden'
-		}).tabs('add', '#a', '', 1).tabs('select', 1);
+		}).tabs('add', '#a', '', 0).tabs('select', 0);
 		
-				setTimeout(function() {
-					$(gThis).tabs('select', 0).tabs('remove', 1).wrap('<div style="clear: both;"/>').css('height', 'auto');
-					$(gThis).parent().css('display', 'none').slideDown(350);
-					$(gThis).css({
-						opacity: 1,
-						overflow: 'visible'
-					});
-				}, 10);
-		
-//		if(window.location.hash.length){
-//			setTimeout(function() {
-//				alert(window.location.hash);
-//				$('.ui-tabs-nav a[href="'+ window.location.hash +'"]').click();
-//			}, 100);
-//		}
+		setTimeout(function() {
+			$(gThis).tabs('select', 1);
+			$(gThis).tabs('remove', 0);
+			$(gThis).find('.ui-tabs-panel').eq(0).children('fieldset').triggerHandler('GFormShow');
+			$(gThis).wrap('<div style="clear: both;"/>').css('height', 'auto');
+			$(gThis).parent().css('display', 'none').slideDown(350);
+			$(gThis).css({
+				opacity: 1,
+				overflow: 'visible'
+			});
+		}, 10);
 	};
 	
 	gThis._Constructor();
@@ -2407,6 +2415,7 @@ var GSearch = function() {
 };
 
 new GPlugin('GSearch', oDefaults, GSearch);
+
 /**
  * GFormDependency
  *
@@ -2605,8 +2614,8 @@ GFormDependency.IGNORE = 'ignore';
 GFormDependency.SUGGEST = 'suggest';
 GFormDependency.INVOKE_CUSTOM_FUNCTION = 'invoke';
 GFormDependency.EXCHANGE_OPTIONS = 'exchangeOptions';
-
 GFormDependency.s_iNextId = 0;
+
 /*
 * NODE
 * Abstract class with base functionality used by all form nodes.
@@ -2944,7 +2953,6 @@ var GFormLanguageContainer = GCore.ExtendClass(GFormNode, function () {
     };
 
     gThis.RenderChildren = function () {
-    	alert(1);
         var jChildrenCollection = $('<div/>');
         for (var i = 0; i < gThis.m_oOptions.agFields.length; i++) {
             gThis._PrepareChild(gThis.m_oOptions.agFields[i]);
@@ -3091,11 +3099,11 @@ var GFormLanguageContainer = GCore.ExtendClass(GFormNode, function () {
 
         for (var sRepetitionId in mData) {
         	gThis.AddRepetition(sRepetitionId);
+        	var oValueObject = {};
         	for (var sFieldName in mData[sRepetitionId]) {
-        		var oValueObject = {};
                 oValueObject[sFieldName] = mData[sRepetitionId][sFieldName];
-                gThis.m_oContainerRepetitions[sRepetitionId].Populate(oValueObject);
         	}
+        	gThis.m_oContainerRepetitions[sRepetitionId].Populate(oValueObject);
         }
     };
 
@@ -3383,6 +3391,7 @@ var GFormContainer = GCore.ExtendClass(GFormNode, function () {
         if (mData == undefined) {
             return;
         }
+        
         var i;
         if (gThis.m_bRepeatable) {
             for (i in mData) {
@@ -3394,6 +3403,7 @@ var GFormContainer = GCore.ExtendClass(GFormNode, function () {
         else {
             for (i = 0; i < gThis.m_oOptions.agFields.length; i++) {
                 if ((gThis.m_oOptions.agFields[i].m_oOptions.sName != undefined)) {
+                	
                     gThis.m_oOptions.agFields[i].PopulateErrors(mData[gThis.m_oOptions.agFields[i].m_oOptions.sName]);
                 }
             }
@@ -4005,7 +4015,9 @@ var GForm = GCore.ExtendClass(GFormContainer, function() {
 	
 	gThis.m_bDontFocus = false;
 	gThis.m_bPopulatedWithDefaults = false;
+	gThis.m_bLocked = false;
 	gThis.m_bFocused = false;
+	gThis.m_bEnableAjax = true;
 	gThis.m_ogFields = {};
 	gThis.m_oLocks = {};
 	gThis.m_iLockId = 0;
@@ -4013,6 +4025,7 @@ var GForm = GCore.ExtendClass(GFormContainer, function() {
 	gThis._Constructor = function() {
 		GForm.s_agForms[gThis.m_oOptions.sFormName] = gThis;
 		gThis.m_gForm = gThis;
+		gThis.m_bEnableAjax = gThis.m_oOptions.bEnableAjax;
 		gThis.m_gParent = GCore.NULL;
 		$(gThis).addClass(gThis.m_oOptions.sClass);
 		gThis._ConstructChildren();
@@ -4027,8 +4040,12 @@ var GForm = GCore.ExtendClass(GFormContainer, function() {
 	};
 	
 	gThis._InitializeEvents = function() {
-		$(gThis).submit(gThis.OnSubmit);
-	};
+		if(gThis.m_bEnableAjax){
+			$(gThis).submit(gThis.AjaxSubmit);
+		}else{
+			$(gThis).submit(gThis.OnSubmit);
+		}
+	}; 
 	
 	gThis.Lock = function(sTitle, sMessage) {
 		gThis.m_oLocks[gThis.m_iLockId++] = {
@@ -4072,7 +4089,52 @@ var GForm = GCore.ExtendClass(GFormContainer, function() {
 		if ((sAction != undefined) && (sAction != '')) {
 			$(gThis).find('.' + gThis._GetClass('Actions')).append('<input type="hidden" name="_Action_' + sAction + '" value="1"/>');
 		}
-		$(gThis).submit();
+		
+		if(gThis.m_bEnableAjax){
+			gThis.AjaxSubmit();
+		}else{
+			$(gThis).submit();
+		}
+		
+	};
+	
+	gThis.OnAjaxSubmitResponse = function(oResponse){
+		GCore.StopWaiting();
+		gThis.m_bLocked = false;
+		gThis.m_oOptions.agFields = gThis.m_agFields;
+		
+		if(oResponse.valid == false){
+			gThis.PopulateErrors(oResponse.error);
+		}else{
+			if(oResponse.next == false && oResponse.continue == false){
+				window.location.href = oResponse.redirectTo;
+			}
+			
+			if(oResponse.next == true && oResponse.continue == false){
+				gThis.Reset();
+				GNotification('Changes added!');
+			}
+			
+			if(oResponse.next == false && oResponse.continue == true){
+				GNotification('Changes saved!');
+			}
+		}
+	};
+	
+	gThis.AjaxSubmit = function() {
+		if(gThis.m_bLocked == true){
+			return false;
+		}
+		gThis.m_bLocked = true;
+		GCore.StartWaiting();
+		var values = {};
+		$.each($(gThis).serializeArray(), function(i, field) {
+			values[field.name] = field.value;
+		});
+		
+		GF_Ajax_Request($(gThis).attr('action'), values, gThis.OnAjaxSubmitResponse);
+		
+		return false;
 	};
 	
 	gThis._InitButtons = function() {
@@ -7098,6 +7160,7 @@ var GFormSlugField = GCore.ExtendClass(GFormTextField, function () {
 
         GF_Ajax_Request(Routing.generate(gThis.m_oOptions.sGenerateRoute), oRequest, function (oData) {
             sSlugField.val(oData.slug);
+            GNotification('Link SEO został odświeżony');
         });
 
         return false;
@@ -7412,6 +7475,7 @@ var GFormTree = GCore.ExtendClass(GFormField, function() {
 	gThis.m_jItemPlaceholder;
 	gThis.m_jItemDragged;
 	gThis.m_oItems = {};
+	gThis.m_jUnmodified;
 	
 	gThis._PrepareNode = function() {
 		gThis.m_jNode = $('<div/>').addClass(gThis._GetClass('Field'));
@@ -7432,6 +7496,10 @@ var GFormTree = GCore.ExtendClass(GFormField, function() {
 		gThis.Update();
 		gThis._PrepareOptions();
 		window.setTimeout(gThis.ResetExpansion, 500);
+		gThis.m_jUnmodified = $('<input type="hidden" name="' + gThis.GetName() + '[unmodified]" value="1"/>');
+		if (!gThis.m_oOptions.bChoosable){
+			gThis.m_jNode.append(gThis.m_jUnmodified);
+		}
 	};
 
 
@@ -7665,7 +7733,7 @@ var GFormTree = GCore.ExtendClass(GFormField, function() {
 			jLi.append($('<label class="' + gThis._GetClass('ItemName') + '"/>').append(jField).append(oItem.name));
 		}
 		else if (gThis.m_oOptions.bChoosable) {
-			var jField = $('<input type="radio" name="__' + gThis.GetName() + '" value="' + sId + '"/>');
+			var jField = $('<input type="radio" name="' + gThis.GetName() + '" value="' + sId + '"/>');
 			if (gThis.m_jFieldWrapper.find('input[value="' + sId + '"]').length) {
 				jField.click();
 				jField.attr('checked', 'checked');
@@ -7767,9 +7835,7 @@ var GFormTree = GCore.ExtendClass(GFormField, function() {
 		if ((mValue == undefined) || (mValue == '')) {
 			mValue = [];
 		}
-		else if (!(mValue instanceof Array)) {
-			mValue = [mValue];
-		}
+		
 		if (gThis.m_oOptions.bChoosable) {
 			gThis.m_jFieldWrapper.empty();
 			for (var i in mValue) {
@@ -7784,10 +7850,10 @@ var GFormTree = GCore.ExtendClass(GFormField, function() {
 			gThis.m_jNode.unCheckCheckboxes();
 			gThis.m_jFieldWrapper.empty();
 			for (var i in mValue) {
-				if (i == 'toJSON') {
+				if (i == 'unmodified') {
 					continue;
 				}
-				gThis.m_jFieldWrapper.append('<input type="hidden" name="' + gThis.GetName() + '[]" value="' + mValue[i] + '"/>');
+				gThis.m_jFieldWrapper.append('<input type="hidden" name="' + gThis.GetName() + '[' + mValue[i] + ']" value="' + mValue[i] + '"/>');
 				gThis.m_jNode.find('input:checkbox[value="' + mValue[i] + '"]').parent().checkCheckboxes();
 			}
 		}
@@ -7797,6 +7863,7 @@ var GFormTree = GCore.ExtendClass(GFormField, function() {
 	gThis.OnShow = function() {
 		if (!gThis.m_bShown) {
 			gThis.m_bShown = true;
+			gThis.m_jUnmodified.val('0');
 		}
 	};
 	
@@ -7818,7 +7885,7 @@ var GFormTree = GCore.ExtendClass(GFormField, function() {
 			gThis.m_jFieldWrapper.find('input[value="' + $(this).attr('value') + '"]').remove();
 		}
 		if ($(this).is(':checked')) {
-			var jInput = $('<input type="hidden" name="' + gThis.GetName() + ($(this).is(':radio') ? '' : '[]') + '" value="' + $(this).attr('value') + '"/>');
+			var jInput = $('<input type="hidden" name="' + gThis.GetName() + ($(this).is(':radio') ? '' : '[' + $(this).attr('value') + ']') + '" value="' + $(this).attr('value') + '"/>');
 			gThis.m_jFieldWrapper.append(jInput);
 			for (var i in gThis.m_afDependencyTriggers) {
 				gThis.m_afDependencyTriggers[i].apply(jInput.get(0), [{
@@ -10213,6 +10280,7 @@ var GFormMultiSelect = GCore.ExtendClass(GFormField, function() {
 	var gThis = this;
 	
 	gThis.m_bShown = false;
+	gThis.m_jUnmodified;
 	
 	gThis._Constructor = function() {
 		gThis.m_bResized = false;
@@ -10257,13 +10325,15 @@ var GFormMultiSelect = GCore.ExtendClass(GFormField, function() {
 		}
 		gThis.m_jNode.append(jLabel);
 		gThis.m_jNode.append(gThis._AddField());
+		gThis.m_jUnmodified = $('<input type="hidden" name="' + gThis.GetName() + '[unmodified]" value="1"/>');
+		gThis.m_jNode.append(gThis.m_jUnmodified);
 	};
 	
 	gThis._AddField = function(sId) {
 		var jField = $('<ul/>');
 		for (var i = 0; i < gThis.m_oOptions.aoOptions.length; i++) {
 			var oOption = gThis.m_oOptions.aoOptions[i];
-			jField.append('<li><label><input type="checkbox" name="' + gThis.GetName(sId) + '[]" value="' + oOption.sValue + '"/>' + oOption.sLabel + '</label></li>');
+			jField.append('<li><label><input type="checkbox" name="' + gThis.GetName(sId) + '['+ oOption.sValue +']" value="' + oOption.sValue + '"/>' + oOption.sLabel + '</label></li>');
 		}
 		if (gThis.m_oOptions.bAddable && (gThis.m_oOptions.fOnAdd instanceof Function)) {
 			gThis.m_jTrigger = $('<li><a style="padding-left: 8px;line-height: 19px;"href="#" class="' + gThis._GetClass('AddRepetition') + '"><img src="' + gThis._GetImage('AddRepetition') + '" alt="' + GForm.Language.add_field_repetition + '" title="' + GForm.Language.add_field_repetition + '"/> Dodaj nowy</a></li>');
@@ -10306,15 +10376,16 @@ var GFormMultiSelect = GCore.ExtendClass(GFormField, function() {
 				return false;
 			});
 		}
+		gThis.m_jUnmodified.val('0');
 	};
 	
 	gThis.Populate = function(mValue) {
 		gThis.m_jNode.unCheckCheckboxes();
 		for (var i in mValue) {
-			if (i == 'toJSON') {
+			if (i == 'unmodified') {
 				continue;
 			}
-			gThis.m_jNode.find('input[value="' + mValue[i] + '"]').parent().checkCheckboxes();
+			gThis.m_jNode.find('input[value="' + mValue[i] + '"]').click();
 		}
 	};
 	
@@ -10453,6 +10524,10 @@ var GFormPriceEditor = GCore.ExtendClass(GFormTextField, function() {
 			jSuffix.html(gThis.m_oOptions.sSuffix);
 			jGrossNode.append(jSuffix);
 		}
+		
+		var jError = $('<span class="' + gThis._GetClass('Required') + '"/>');
+		jNetNode.append(jError);
+		
 		jRepetitionNode.append(jNetNode).append(jGrossNode);
 		gThis.m_jField = jRepetitionNode.find('input');
 		gThis.jRepetitionNode = jRepetitionNode;

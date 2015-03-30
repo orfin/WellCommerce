@@ -13,6 +13,7 @@ namespace WellCommerce\Bundle\CategoryBundle\Form;
 
 use WellCommerce\Bundle\FormBundle\Builder\AbstractFormBuilder;
 use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\FormBundle\DataTransformer\CollectionToArrayTransformer;
 use WellCommerce\Bundle\FormBundle\DataTransformer\EntityToIdentifierTransformer;
 use WellCommerce\Bundle\FormBundle\DataTransformer\TranslationTransformer;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
@@ -126,6 +127,18 @@ class CategoryFormBuilder extends AbstractFormBuilder implements FormBuilderInte
         $languageData->addChild($this->getElement('text_area', [
             'name'  => 'metaDescription',
             'label' => $this->trans('category.meta_description.label'),
+        ]));
+
+        $shopsData = $form->addChild($this->getElement('nested_fieldset', [
+            'name'  => 'shops_data',
+            'label' => $this->trans('fieldset.shops.label')
+        ]));
+
+        $shopsData->addChild($this->getElement('multi_select', [
+            'name'        => 'shops',
+            'label'       => $this->trans('shops.label'),
+            'options'     => $this->get('shop.collection')->getSelect(),
+            'transformer' => new CollectionToArrayTransformer($this->get('shop.repository'))
         ]));
 
         $form->addFilter($this->getFilter('trim'));

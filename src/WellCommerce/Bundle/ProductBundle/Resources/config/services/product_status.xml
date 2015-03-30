@@ -33,7 +33,7 @@
             <argument>WellCommerceProductBundle:ProductStatus</argument>
         </service>
 
-        <service id="product_status.dataset.query_builder" class="WellCommerce\Bundle\ProductBundle\DataSet\ProductStatusDataSetQueryBuilder" public="false">
+        <service id="product_status.dataset.query_builder" class="WellCommerce\Bundle\ProductBundle\DataSet\Admin\ProductStatusDataSetQueryBuilder" public="false">
             <argument type="service" id="product_status.repository"/>
         </service>
 

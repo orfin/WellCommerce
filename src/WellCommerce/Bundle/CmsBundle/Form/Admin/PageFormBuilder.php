@@ -13,6 +13,8 @@ namespace WellCommerce\Bundle\CmsBundle\Form\Admin;
 
 use WellCommerce\Bundle\FormBundle\Builder\AbstractFormBuilder;
 use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\FormBundle\Conditions\Equals;
+use WellCommerce\Bundle\FormBundle\DataTransformer\CollectionToArrayTransformer;
 use WellCommerce\Bundle\FormBundle\DataTransformer\EntityToIdentifierTransformer;
 use WellCommerce\Bundle\FormBundle\DataTransformer\TranslationTransformer;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
@@ -73,7 +75,7 @@ class PageFormBuilder extends AbstractFormBuilder implements FormBuilderInterfac
             'selectable'  => false,
             'sortable'    => false,
             'clickable'   => false,
-            'items'       => $this->get('page.collection')->getFlatTree(),
+            'items'       => $this->get('page.collection.admin')->getFlatTree(),
             'restrict'    => $this->getParam('id'),
             'transformer' => new EntityToIdentifierTransformer($this->get('page.repository'))
         ]));
@@ -94,7 +96,80 @@ class PageFormBuilder extends AbstractFormBuilder implements FormBuilderInterfac
             'label' => $this->trans('page.content.label'),
         ]));
 
+        $redirectSettings = $form->addChild($this->getElement('nested_fieldset', [
+            'name'  => 'redirect_settings',
+            'label' => $this->trans('label.redirect_settings')
+        ]));
+
+        $redirectType = $redirectSettings->addChild($this->getElement('select', [
+            'name'    => 'redirectType',
+            'label'   => $this->trans('label.redirect_type'),
+            'options' => [
+                0 => $this->trans('label.redirect_type.none'),
+                1 => $this->trans('label.redirect_type.url'),
+                2 => $this->trans('label.redirect_type.route'),
+            ]
+        ]));
+
+        $redirectSettings->addChild($this->getElement('text_field', [
+            'name'         => 'redirectUrl',
+            'label'        => $this->trans('label.redirect_url'),
+            'dependencies' => [
+                $this->getDependency('show', [
+                    'form'      => $form,
+                    'field'     => $redirectType,
+                    'condition' => new Equals(1)
+                ])
+            ]
+        ]));
+
+        $redirectSettings->addChild($this->getElement('select', [
+            'name'         => 'redirectRoute',
+            'label'        => $this->trans('label.redirect_route'),
+            'options'      => $this->getRedirectRoutes(),
+            'dependencies' => [
+                $this->getDependency('show', [
+                    'form'      => $form,
+                    'field'     => $redirectType,
+                    'condition' => new Equals(2)
+                ])
+            ]
+        ]));
+
+        $shopsData = $form->addChild($this->getElement('nested_fieldset', [
+            'name'  => 'shops_data',
+            'label' => $this->trans('fieldset.shops.label')
+        ]));
+
+        $shopsData->addChild($this->getElement('multi_select', [
+            'name'        => 'shops',
+            'label'       => $this->trans('shops.label'),
+            'options'     => $this->get('shop.collection')->getSelect(),
+            'transformer' => new CollectionToArrayTransformer($this->get('shop.repository'))
+        ]));
+
         $form->addFilter($this->getFilter('trim'));
         $form->addFilter($this->getFilter('secure'));
+    }
+
+    /**
+     * Returns all available routes which have allow_page_redirect option
+     *
+     * @return array
+     */
+    private function getRedirectRoutes()
+    {
+        $availableRoutes = [];
+
+        /**
+         * @var $route \Symfony\Component\Routing\Route
+         */
+        foreach ($this->get('router')->getRouteCollection()->all() as $name => $route) {
+            if ($route->hasOption('allow_page_redirect')) {
+                $availableRoutes[$name] = $route->getPath();
+            }
+        }
+
+        return $availableRoutes;
     }
 }

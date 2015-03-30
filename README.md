@@ -2,7 +2,7 @@ README
 ======
 
 [![Build Status](https://travis-ci.org/WellCommerce/WellCommerce.svg?branch=development)](https://travis-ci.org/WellCommerce/WellCommerce)
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/98fa65a3-a9a0-4ae8-b7c9-27d3cc1cebb2/mini.png?1)](https://insight.sensiolabs.com/projects/98fa65a3-a9a0-4ae8-b7c9-27d3cc1cebb2)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/98fa65a3-a9a0-4ae8-b7c9-27d3cc1cebb2/mini.png)](https://insight.sensiolabs.com/projects/98fa65a3-a9a0-4ae8-b7c9-27d3cc1cebb2)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/WellCommerce/WellCommerce/badges/quality-score.png?b=development)](https://scrutinizer-ci.com/g/WellCommerce/WellCommerce/?branch=development)
 [![Total Downloads](https://poser.pugx.org/wellcommerce/wellcommerce/downloads.svg)](https://packagist.org/packages/wellcommerce/wellcommerce)
 [![License](https://poser.pugx.org/wellcommerce/wellcommerce/license.svg)](https://packagist.org/packages/wellcommerce/wellcommerce)
@@ -47,7 +47,7 @@ Contributors
 
 Every contributor is WellComme :). If you'd like to join us, please send a message at contributors@wellcommerce.org
 
-You can also discuss and share your opinions on WellCommerce in our gitter chat
+You can also discuss and share your opinions on WellCommerce in our gitter chat:
 
 [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/WellCommerce/WellCommerce?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 

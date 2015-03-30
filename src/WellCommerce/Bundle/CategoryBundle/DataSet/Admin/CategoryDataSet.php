@@ -13,8 +13,8 @@
 namespace WellCommerce\Bundle\CategoryBundle\DataSet\Admin;
 
 use WellCommerce\Bundle\DataSetBundle\AbstractDataSet;
-use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
 use WellCommerce\Bundle\DataSetBundle\DataSetConfiguratorInterface;
+use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
 
 /**
  * Class CategoryDataSet
@@ -36,6 +36,7 @@ class CategoryDataSet extends AbstractDataSet implements DataSetInterface
             'products'  => 'COUNT(category_products.id)',
             'name'      => 'category_translation.name',
             'slug'      => 'category_translation.slug',
+            'shop'      => 'category_shops.id',
             'route'     => 'IDENTITY(category_translation.route)',
         ]);
     }

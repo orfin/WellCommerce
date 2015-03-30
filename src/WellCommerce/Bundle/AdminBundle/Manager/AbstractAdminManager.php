@@ -97,7 +97,6 @@ class AbstractAdminManager extends AbstractManager implements AdminManagerInterf
     {
         $this->dispatchEvent($resource, $request, AdminManagerInterface::PRE_CREATE_EVENT);
         $this->saveResource($resource);
-        $this->getFlashHelper()->addSuccess('success');
         $this->dispatchEvent($resource, $request, AdminManagerInterface::POST_CREATE_EVENT);
     }
 
@@ -108,7 +107,6 @@ class AbstractAdminManager extends AbstractManager implements AdminManagerInterf
     {
         $this->dispatchEvent($resource, $request, AdminManagerInterface::PRE_UPDATE_EVENT);
         $this->saveResource($resource);
-        $this->getFlashHelper()->addSuccess('success');
         $this->dispatchEvent($resource, $request, AdminManagerInterface::POST_UPDATE_EVENT);
     }
 

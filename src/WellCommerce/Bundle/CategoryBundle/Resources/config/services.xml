@@ -94,10 +94,16 @@
 
         <service id="category.dataset.query_builder.front" class="WellCommerce\Bundle\CategoryBundle\DataSet\Front\CategoryDataSetQueryBuilder" public="false">
             <argument type="service" id="category.repository"/>
+            <call method="setShopContext">
+                <argument type="service" id="shop.context.front"/>
+            </call>
         </service>
 
         <service id="category.dataset.query_builder.admin" class="WellCommerce\Bundle\CategoryBundle\DataSet\Admin\CategoryDataSetQueryBuilder" public="false">
             <argument type="service" id="category.repository"/>
+            <call method="setShopContext">
+                <argument type="service" id="shop.context.admin"/>
+            </call>
         </service>
 
         <service id="category.dataset.loader.admin" class="%dataset.loader.class%">

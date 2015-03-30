@@ -236,7 +236,7 @@ class ProductFormBuilder extends AbstractFormBuilder
         ]));
 
         $stockData->addChild($this->getElement('text_field', [
-            'name'    => 'package_size',
+            'name'    => 'packageSize',
             'label'   => $this->trans('product.package_size.label'),
             'filters' => [
                 $this->getFilter('comma_to_dot_changer'),
@@ -295,6 +295,18 @@ class ProductFormBuilder extends AbstractFormBuilder
             'availability_field' => $availabilityField,
             'availability'       => $availabilityField->getOption('options'),
             'transformer'        => new ProductAttributeCollectionToArrayTransformer($this->get('product_attribute.repository'))
+        ]));
+
+        $shopsData = $form->addChild($this->getElement('nested_fieldset', [
+            'name'  => 'shops_data',
+            'label' => $this->trans('fieldset.shops.label')
+        ]));
+
+        $shopsData->addChild($this->getElement('multi_select', [
+            'name'        => 'shops',
+            'label'       => $this->trans('shops.label'),
+            'options'     => $this->get('shop.collection')->getSelect(),
+            'transformer' => new CollectionToArrayTransformer($this->get('shop.repository'))
         ]));
 
         $form->addFilter($this->getFilter('trim'));

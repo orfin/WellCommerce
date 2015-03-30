@@ -5,8 +5,10 @@
     xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
     <route id="front.cart.index" path="/cart/index">
-    <default key="_controller">cart.controller.front:indexAction</default>
-</route>
+        <default key="_controller">cart.controller.front:indexAction</default>
+        <option key="expose">true</option>
+        <option key="allow_page_redirect">true</option>
+    </route>
 
     <route id="front.cart.add" path="/cart/add">
         <default key="_controller">cart.controller.front:addAction</default>

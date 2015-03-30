@@ -13,47 +13,56 @@
 namespace WellCommerce\Bundle\ProductBundle\DataSet\Front;
 
 use Doctrine\ORM\QueryBuilder;
-use WellCommerce\Bundle\DataSetBundle\QueryBuilder\AbstractDataSetQueryBuilder;
-use WellCommerce\Bundle\DataSetBundle\QueryBuilder\QueryBuilderInterface;
+use WellCommerce\Bundle\ProductBundle\DataSet\Admin\ProductDataSetQueryBuilder as BaseProductDataSetQueryBuilder;
 
 /**
  * Class ProductDataSetQueryBuilder
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductDataSetQueryBuilder extends AbstractDataSetQueryBuilder implements QueryBuilderInterface
+class ProductDataSetQueryBuilder extends BaseProductDataSetQueryBuilder
 {
     /**
      * {@inheritdoc}
      */
     public function getQueryBuilder()
     {
-        $queryBuilder = $this->repository->getDataSetQueryBuilder();
-        $this->addQueryBuilderRestrictions($queryBuilder);
+        $qb = parent::getQueryBuilder();
 
-        return $queryBuilder;
+        $this->addProductConditions($qb);
+        $this->addCategoryConditions($qb);
+
+        return $qb;
     }
 
     /**
-     * Adds base restrictions to query
+     * Adds additional product-related conditions to query
      *
      * @param QueryBuilder $queryBuilder
      */
-    protected function addQueryBuilderRestrictions(QueryBuilder $queryBuilder)
+    private function addProductConditions(QueryBuilder $queryBuilder)
     {
         // show only enabled products
         $expression = $queryBuilder->expr()->eq('product.enabled', ':enabled1');
         $queryBuilder->andWhere($expression);
         $queryBuilder->setParameter('enabled1', true);
 
-        // show products from enabled categories
-        $expression = $queryBuilder->expr()->eq('categories.enabled', ':enabled2');
-        $queryBuilder->andWhere($expression);
-        $queryBuilder->setParameter('enabled2', true);
-
         // show only products with prices greater than 0
         $expression = $queryBuilder->expr()->gt('product.sellPrice', ':price');
         $queryBuilder->andWhere($expression);
         $queryBuilder->setParameter('price', 0);
+    }
+
+    /**
+     * Adds additional category-related conditions to query
+     *
+     * @param QueryBuilder $queryBuilder
+     */
+    private function addCategoryConditions(QueryBuilder $queryBuilder)
+    {
+        // show products from enabled categories
+        $expression = $queryBuilder->expr()->eq('categories.enabled', ':enabled2');
+        $queryBuilder->andWhere($expression);
+        $queryBuilder->setParameter('enabled2', true);
     }
 }

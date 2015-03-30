@@ -19,6 +19,7 @@ use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 use WellCommerce\Bundle\CategoryBundle\Entity\Extra\CategoryExtraTrait;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\EnableableTrait;
+use WellCommerce\Bundle\MultiStoreBundle\Entity\Shop;
 use WellCommerce\Bundle\ProductBundle\Entity\Product;
 
 /**
@@ -71,12 +72,22 @@ class Category
     private $products;
 
     /**
+     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\MultiStoreBundle\Entity\Shop", inversedBy="categories")
+     * @ORM\JoinTable(name="shop_category",
+     *      joinColumns={@ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="CASCADE")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="shop_id", referencedColumnName="id", onDelete="CASCADE")}
+     * )
+     */
+    private $shops;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->children = new ArrayCollection();
         $this->products = new ArrayCollection();
+        $this->shops    = new ArrayCollection();
     }
 
     /**
@@ -174,5 +185,29 @@ class Category
     public function addProduct(Product $product)
     {
         $this->products[] = $product;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getShops()
+    {
+        return $this->shops;
+    }
+
+    /**
+     * @param Shop $shop
+     */
+    public function addShop(Shop $shop)
+    {
+        $this->shops[] = $shop;
+    }
+
+    /**
+     * @param mixed $shops
+     */
+    public function setShops($shops)
+    {
+        $this->shops = $shops;
     }
 }

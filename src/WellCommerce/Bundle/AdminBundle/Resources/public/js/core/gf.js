@@ -4082,10 +4082,11 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 	
 	this._InitializeEvents = function() {
 		this.m_jTarget.keypress(GF.StopPropagation).keydown(GF.StopPropagation);
-		this.m_jTarget.find('.header thead .GF_Datagrid_Col__modify_columns a').live('click', this._HandleToggleColumns);
-		this.m_jTarget.find('.header thead .GF_Datagrid_Col__select input:checkbox').live('click', this._HandleToggleSelectVisible);
-		this.m_jTarget.find('.header thead th.sortable').live('click', this._ChangeOrder);
-		this.m_jTarget.find('.header tbody .GF_Datagrid_Col__retract_filters a').live('click', this.ToggleFilters);
+		$(document).on('click', '.header thead .GF_Datagrid_Col__modify_columns a', this._HandleToggleColumns);
+		$(document).on('click', '.header thead .GF_Datagrid_Col__select input:checkbox', this._HandleToggleSelectVisible);
+		$(document).on('click', '.header thead th.sortable', this._ChangeOrder);
+		$(document).on('click', '.header tbody .GF_Datagrid_Col__retract_filters a', this.ToggleFilters);
+		
 		this.m_jTarget.mousemove(this._SpacerDrag).mouseup(this._SpacerDragStop);
 		if (this.m_jFooter && this.m_jFooter.length) {
 			this.m_jFooter.find('.GF_Datagrid_clear_selection').click(this.ClearSelection);
@@ -4095,9 +4096,9 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 			this.m_jFooter.find('.GF_Datagrid_go_to_last').click(this._HandleGoToLast);
 			this.m_jFooter.find('.GF_Datagrid_page').change(this._HandleGoToPage).keypress(this._HandleGoToPage);
 		}
-		$('.GF_Datagrid_Modify_columns .save a').live('click', this._HandleSaveColumns);
-		$('.GF_Datagrid_Modify_columns .restore a').live('click', this._HandleRestoreColumns);
-		$('.GF_Datagrid_Col__select input').live('mousedown', GF.PreventDefault);
+		$(document).on('click', '.GF_Datagrid_Modify_columns .save a', this._HandleSaveColumns);
+		$(document).on('click', '.GF_Datagrid_Modify_columns .restore a', this._HandleRestoreColumns);
+		$(document).on('mousedown', '.GF_Datagrid_Col__select input', GF.PreventDefault);
 	};
 	
 	this._InitializeRowEvents = function(jTr) {
@@ -4195,10 +4196,6 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		var jDialog = $(this).parents('.GF_Datagrid_Modify_columns');
 		var sId = jDialog.attr('id');
 		dDg = GF_Datagrid.ReturnInstance(parseInt(sId.substr(sId.lastIndexOf('_') + 1)));
-		/*jDialog.slideUp('fast', function() {
-			dDg.m_jModifyColumnsDialog = GF.NULL;
-			$(this).remove();
-		});*/
 		dDg.m_aiColumnsOrder = [];
 		if (dDg.m_oOptions.appearance.column_select) {
 			dDg.m_aiColumnsOrder.push(dDg.m_oColumnsLookup['_select']);
@@ -4227,11 +4224,6 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		var jDialog = $(this).parents('.GF_Datagrid_Modify_columns');
 		var sId = jDialog.attr('id');
 		dDg = GF_Datagrid.ReturnInstance(parseInt(sId.substr(sId.lastIndexOf('_') + 1)));
-		
-		/*jDialog.slideUp('fast', function() {
-			dDg.m_jModifyColumnsDialog = GF.NULL;
-			$(this).remove();
-		});*/
 		
 		var aiWidths = [];
 		for (var i in dDg.m_aiColumnsOrder) {
@@ -4262,7 +4254,6 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		GCookie('GF_Datagrid_Columns_' + dDg.m_oOptions.id,null);
 		GCookie('GF_Datagrid_Widths_' + dDg.m_oOptions.id,null);
 		
-		//dDg.m_oOptions.columns = dDg.m_oOptionsOriginal.columns;
 		dDg._ParseColumnOptions();
 		dDg.m_oOptions.appearance.header && dDg._WriteHeader();
 		dDg.m_oOptions.appearance.filter && dDg._WriteFilters();

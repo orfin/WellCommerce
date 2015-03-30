@@ -4,6 +4,7 @@
     <ul class="possibilities">
         <li><a href="{{ path('admin.producer.index') }}" class="button return"><span></span></a></li>
         <li><a href="#{{ form.getName() }}" rel="submit" class="button"><span>{% trans %}Save and finish{% endtrans %}</span></a></li>
+        <li><a href="#{{ form.getName() }}" rel="submit[next]" class="button"><span>{% trans %}Save and add another{% endtrans %}</span></a></li>
     </ul>
     {{ form_js(form) }}
 {% endblock %}

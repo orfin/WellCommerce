@@ -19,7 +19,6 @@ use WellCommerce\Bundle\ThemeBundle\Manager\ThemeManagerInterface;
 /**
  * Class ThemeSubscriber
  *
- * @package WellCommerce\Bundle\ThemeBundle\EventListener
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class ThemeSubscriber extends AbstractEventSubscriber

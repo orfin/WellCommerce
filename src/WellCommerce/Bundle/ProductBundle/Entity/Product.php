@@ -101,6 +101,15 @@ class Product
     private $statuses;
 
     /**
+     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\MultiStoreBundle\Entity\Shop", inversedBy="products")
+     * @ORM\JoinTable(name="shop_product",
+     *      joinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id", onDelete="CASCADE")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="shop_id", referencedColumnName="id", onDelete="CASCADE")}
+     * )
+     */
+    private $shops;
+
+    /**
      * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\ProductPhoto", mappedBy="product", cascade={"persist"}, orphanRemoval=true)
      */
     private $productPhotos;
@@ -650,22 +659,22 @@ class Product
      */
     public function setAttributes(ArrayCollection $attributes)
     {
-        $this->synchronizeCollection($this->attributes, $attributes);
         $this->attributes = $attributes;
     }
 
     /**
-     * Removes all elements from old collection which have not been passed in new collection
-     *
-     * @param PersistentCollection $oldEntities
-     * @param ArrayCollection      $newEntities
+     * @return mixed
      */
-    private function synchronizeCollection(PersistentCollection $oldEntities, ArrayCollection $newEntities)
+    public function getShops()
     {
-        foreach ($oldEntities as $oldEntity) {
-            if (!$newEntities->contains($oldEntity)) {
-                $oldEntities->removeElement($oldEntity);
-            }
-        }
+        return $this->shops;
+    }
+
+    /**
+     * @param mixed $shops
+     */
+    public function setShops($shops)
+    {
+        $this->shops = $shops;
     }
 }

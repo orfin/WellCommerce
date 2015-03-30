@@ -52,8 +52,11 @@
             <argument>WellCommerceProductBundle:Product</argument>
         </service>
 
-        <service id="product.dataset.query_builder.admin" class="WellCommerce\Bundle\ProductBundle\DataSet\ProductDataSetQueryBuilder" public="false">
+        <service id="product.dataset.query_builder.admin" class="WellCommerce\Bundle\ProductBundle\DataSet\Admin\ProductDataSetQueryBuilder" public="false">
             <argument type="service" id="product.repository"/>
+            <call method="setShopContext">
+                <argument type="service" id="shop.context.admin"/>
+            </call>
         </service>
 
         <service id="product.dataset.loader.admin" class="%dataset.loader.class%">
