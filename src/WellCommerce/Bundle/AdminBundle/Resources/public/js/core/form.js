@@ -458,7 +458,6 @@ var GPlugin = function(sPluginName, oDefaults, fPlugin) {
         fPlugin.GetInstance = GPlugin.GetInstance;
 
     })(jQuery);
-
 };
 
 GPlugin.s_iCounter = 0;
@@ -1835,6 +1834,7 @@ var GSelect = function() {
 };
 
 new GPlugin('GSelect', oDefaults, GSelect);
+
 /*
 * SHADOW
 * Adds a nice shadow to the given element.
@@ -2415,6 +2415,7 @@ var GSearch = function() {
 };
 
 new GPlugin('GSearch', oDefaults, GSearch);
+
 /**
  * GFormDependency
  *
@@ -2613,8 +2614,8 @@ GFormDependency.IGNORE = 'ignore';
 GFormDependency.SUGGEST = 'suggest';
 GFormDependency.INVOKE_CUSTOM_FUNCTION = 'invoke';
 GFormDependency.EXCHANGE_OPTIONS = 'exchangeOptions';
-
 GFormDependency.s_iNextId = 0;
+
 /*
 * NODE
 * Abstract class with base functionality used by all form nodes.
@@ -4016,6 +4017,7 @@ var GForm = GCore.ExtendClass(GFormContainer, function() {
 	gThis.m_bPopulatedWithDefaults = false;
 	gThis.m_bLocked = false;
 	gThis.m_bFocused = false;
+	gThis.m_bEnableAjax = true;
 	gThis.m_ogFields = {};
 	gThis.m_oLocks = {};
 	gThis.m_iLockId = 0;
@@ -4023,6 +4025,7 @@ var GForm = GCore.ExtendClass(GFormContainer, function() {
 	gThis._Constructor = function() {
 		GForm.s_agForms[gThis.m_oOptions.sFormName] = gThis;
 		gThis.m_gForm = gThis;
+		gThis.m_bEnableAjax = gThis.m_oOptions.bEnableAjax;
 		gThis.m_gParent = GCore.NULL;
 		$(gThis).addClass(gThis.m_oOptions.sClass);
 		gThis._ConstructChildren();
@@ -4037,8 +4040,12 @@ var GForm = GCore.ExtendClass(GFormContainer, function() {
 	};
 	
 	gThis._InitializeEvents = function() {
-		$(gThis).submit(gThis.AjaxSubmit);
-	};
+		if(gThis.m_bEnableAjax){
+			$(gThis).submit(gThis.AjaxSubmit);
+		}else{
+			$(gThis).submit(gThis.OnSubmit);
+		}
+	}; 
 	
 	gThis.Lock = function(sTitle, sMessage) {
 		gThis.m_oLocks[gThis.m_iLockId++] = {
@@ -4083,7 +4090,12 @@ var GForm = GCore.ExtendClass(GFormContainer, function() {
 			$(gThis).find('.' + gThis._GetClass('Actions')).append('<input type="hidden" name="_Action_' + sAction + '" value="1"/>');
 		}
 		
-		gThis.AjaxSubmit();
+		if(gThis.m_bEnableAjax){
+			gThis.AjaxSubmit();
+		}else{
+			$(gThis).submit();
+		}
+		
 	};
 	
 	gThis.OnAjaxSubmitResponse = function(oResponse){
@@ -4110,11 +4122,9 @@ var GForm = GCore.ExtendClass(GFormContainer, function() {
 	};
 	
 	gThis.AjaxSubmit = function() {
-		
 		if(gThis.m_bLocked == true){
 			return false;
 		}
-		
 		gThis.m_bLocked = true;
 		GCore.StartWaiting();
 		var values = {};
