@@ -23,7 +23,7 @@ The code is still hot but it only gets cooler :). Here are most important things
 Requirements
 ------------
 
-WellCommerce is only supported on PHP 5.4 and up. 
+WellCommerce is only supported on PHP 5.4.x and up. PHP 5.6.x is recommended.
 
 Installation
 ------------
