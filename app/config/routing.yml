@@ -89,6 +89,10 @@ wellcommerce_attribute:
     resource: "@WellCommerceAttributeBundle/Resources/config/routing.xml"
     prefix:   /admin/attribute
 
+wellcommerce_smuggler:
+    resource: "@WellCommerceSmugglerBundle/Resources/config/routing.xml"
+    prefix:   /admin/smuggler
+
 wellcommerce_cart:
     resource: "@WellCommerceCartBundle/Resources/config/routing.xml"
 

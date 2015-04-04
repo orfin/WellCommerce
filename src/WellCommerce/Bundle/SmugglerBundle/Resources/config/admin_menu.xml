@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<items>
+    <item>
+        <id>smuggler</id>
+        <name>admin.menu.smuggler</name>
+        <route>admin.package.index</route>
+        <path>menu.configuration.smuggler</path>
+        <sort_order>90</sort_order>
+    </item>
+    <item>
+        <id>package</id>
+        <name>admin.menu.package</name>
+        <route>admin.package.index</route>
+        <path>menu.configuration.smuggler.package</path>
+        <sort_order>10</sort_order>
+    </item>
+</items>

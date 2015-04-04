@@ -56,7 +56,8 @@
         "wellcommerce/dataset-bundle": "0.10.*@dev",
         "wellcommerce/datagrid-bundle": "0.10.*@dev",
         "wellcommerce/form-bundle": "0.10.*@dev",
-        "wellcommerce/composer-plugin": "0.1.*@dev"
+        "wellcommerce/composer-plugin": "0.1.*@dev",
+        "react/socket-client": "0.4.*"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",

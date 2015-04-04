@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="package.manager.admin" class="WellCommerce\Bundle\SmugglerBundle\Manager\Admin\PackageManager">
+            <argument type="service" id="flash_helper"/>
+            <argument type="service" id="redirect_helper"/>
+            <argument type="service" id="image_helper"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="doctrine_helper"/>
+            <argument type="service" id="translator"/>
+            <call method="setRepository">
+                <argument type="service" id="package.repository"/>
+            </call>
+            <call method="setFormBuilder">
+                <argument type="service" id="package.form_builder"/>
+            </call>
+            <call method="setDataGrid">
+                <argument type="service" id="package.datagrid"/>
+            </call>
+        </service>
+        
+        <service id="package.controller.admin" class="WellCommerce\Bundle\SmugglerBundle\Controller\Admin\PackageController">
+            <argument type="service" id="package.manager.admin"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="package.repository" class="WellCommerce\Bundle\SmugglerBundle\Repository\PackageRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceSmugglerBundle:Package</argument>
+        </service>
+
+        <service id="package.dataset.query_builder" class="WellCommerce\Bundle\SmugglerBundle\DataSet\PackageDataSetQueryBuilder" public="false">
+            <argument type="service" id="package.repository"/>
+        </service>
+
+        <service id="package.dataset.loader" class="%dataset.loader.class%">
+            <argument type="service" id="package.dataset.query_builder"/>
+            <argument type="service" id="dataset.processor"/>
+        </service>
+
+        <service id="package.dataset" class="WellCommerce\Bundle\SmugglerBundle\DataSet\PackageDataSet">
+            <argument key="identifier">package</argument>
+            <argument type="service" id="package.dataset.loader"/>
+            <configurator service="dataset.configurator" method="configure"/>
+        </service>
+
+        <service id="package.collection" parent="dataset.collection_builder.factory">
+            <argument type="service" id="package.dataset"/>
+        </service>
+
+        <service id="package.datagrid" class="WellCommerce\Bundle\SmugglerBundle\DataGrid\PackageDataGrid">
+            <argument key="identifier">package</argument>
+            <argument type="service" id="package.dataset"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="package.form_builder" class="WellCommerce\Bundle\SmugglerBundle\Form\PackageFormBuilder">
+            <argument type="service" id="form.resolver.factory"/>
+            <argument type="service" id="form.handler"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="package.subscriber" class="WellCommerce\Bundle\SmugglerBundle\EventListener\PackageSubscriber">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="kernel.event_subscriber" />
+        </service>
+    </services>
+</container>
