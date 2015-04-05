@@ -11,10 +11,19 @@
             <constraint name="Range">
                 <option name="min">0</option>
                 <option name="max">100</option>
-                <option name="invalidMessage">validation.tax.range.invalid</option>
-                <option name="minMessage">validation.tax.range.min</option>
-                <option name="maxMessage">validation.tax.range.max</option>
             </constraint>
+        </property>
+        <property name="translations">
+            <constraint name="Valid">
+                <option name="deep">true</option>
+            </constraint>
+        </property>
+    </class>
+
+    <class name="WellCommerce\Bundle\TaxBundle\Entity\TaxTranslation">
+        <property name="name">
+            <constraint name="NotBlank" />
+            <constraint name="NotNull" />
         </property>
     </class>
 </constraint-mapping>
