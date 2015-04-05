@@ -18,7 +18,6 @@ use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
 /**
  * Class AttributeController
  *
- * @package WellCommerce\Bundle\AttributeBundle\Controller\Admin
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class AttributeController extends AbstractAdminController
@@ -56,6 +55,16 @@ class AttributeController extends AbstractAdminController
     }
 
     /**
+     * Returns attribute repository
+     *
+     * @return \WellCommerce\Bundle\AttributeBundle\Repository\AttributeRepositoryInterface
+     */
+    protected function getRepository()
+    {
+        return $this->getManager()->getRepository();
+    }
+
+    /**
      * Adds new attribute value using ajax request
      *
      * @param Request $request
@@ -64,7 +73,6 @@ class AttributeController extends AbstractAdminController
      */
     public function ajaxAddAction(Request $request)
     {
-        // prevent direct access and redirect administrator to index
         if (!$request->isXmlHttpRequest()) {
             return $this->redirectToAction('index');
         }
@@ -79,15 +87,5 @@ class AttributeController extends AbstractAdminController
         return $this->jsonResponse([
             'id' => $attribute->getId(),
         ]);
-    }
-
-    /**
-     * Returns attribute repository
-     *
-     * @return \WellCommerce\Bundle\AttributeBundle\Repository\AttributeRepositoryInterface
-     */
-    protected function getRepository()
-    {
-        return $this->getManager()->getRepository();
     }
 }

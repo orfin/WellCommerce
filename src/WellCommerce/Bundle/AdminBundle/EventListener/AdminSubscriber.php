@@ -23,7 +23,6 @@ use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 /**
  * Class AdminSubscriber
  *
- * @package WellCommerce\Bundle\AdminBundle\EventListener
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class AdminSubscriber extends AbstractEventSubscriber
@@ -39,7 +38,6 @@ class AdminSubscriber extends AbstractEventSubscriber
 
     public function onKernelController(FilterControllerEvent $event, $eventName, EventDispatcherInterface $dispatcher)
     {
-        // admin menu will be rendered only when HttpKernelInterface::MASTER_REQUEST
         if ($event->getRequestType() == HttpKernelInterface::SUB_REQUEST) {
             return;
         }

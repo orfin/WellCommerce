@@ -34,3 +34,7 @@ admin:
         tax: Podatki
         theme: 'Szablony sklepu'
         user_management: Administratorzy
+
+package:
+    index:
+        heading: Packages

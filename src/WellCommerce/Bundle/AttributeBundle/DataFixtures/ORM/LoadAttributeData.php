@@ -18,7 +18,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 /**
  * Class LoadAttributeData
  *
- * @package WellCommerce\Bundle\AttributeBundle\DataFixtures\ORM
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class LoadAttributeData implements FixtureInterface

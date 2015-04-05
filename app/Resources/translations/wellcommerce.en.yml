@@ -34,3 +34,7 @@ admin:
         tax: Taxes
         theme: Themes
         user_management: Administrators
+
+package:
+    index:
+        heading: Packages

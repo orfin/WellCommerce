@@ -18,7 +18,6 @@ use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
 /**
  * Class AttributeValueController
  *
- * @package WellCommerce\Bundle\AttributeBundle\Controller\Admin
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class AttributeValueController extends AbstractAdminController
@@ -42,7 +41,6 @@ class AttributeValueController extends AbstractAdminController
      */
     public function ajaxAddAction(Request $request)
     {
-        // prevent direct access and redirect administrator to index
         if (!$request->isXmlHttpRequest()) {
             return $this->redirectToAction('index');
         }

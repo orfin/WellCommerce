@@ -15,7 +15,6 @@ namespace WellCommerce\Bundle\AdminBundle\MenuBuilder;
 /**
  * Interface AdminMenuBuilderInterface
  *
- * @package WellCommerce\Bundle\AdminBundle\MenuBuilder
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface AdminMenuBuilderInterface
@@ -41,8 +40,6 @@ interface AdminMenuBuilderInterface
      * Adds new element to menu
      *
      * @param AdminMenuItemInterface $item
-     *
-     * @return mixed
      */
     public function add(AdminMenuItemInterface $item);
 }

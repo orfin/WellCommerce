@@ -10,15 +10,16 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AdminBundle;
+namespace WellCommerce\Bundle\SmugglerBundle\DataSet;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
+use WellCommerce\Bundle\DataSetBundle\QueryBuilder\AbstractDataSetQueryBuilder;
+use WellCommerce\Bundle\DataSetBundle\QueryBuilder\QueryBuilderInterface;
 
 /**
- * Class WellCommerceAdminBundle
+ * Class ChannelDataSetQueryBuilder
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class WellCommerceAdminBundle extends Bundle
+class ChannelDataSetQueryBuilder extends AbstractDataSetQueryBuilder implements QueryBuilderInterface
 {
 }

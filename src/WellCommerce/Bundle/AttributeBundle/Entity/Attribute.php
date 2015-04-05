@@ -21,7 +21,6 @@ use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 /**
  * Class Attribute
  *
- * @package WellCommerce\Bundle\AttributeBundle\Entity
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * @ORM\Table(name="attribute")

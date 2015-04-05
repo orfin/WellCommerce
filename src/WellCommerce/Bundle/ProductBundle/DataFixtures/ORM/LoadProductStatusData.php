@@ -10,29 +10,24 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ThemeBundle\DataFixtures\ORM;
+namespace WellCommerce\Bundle\ProductBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use WellCommerce\Bundle\ThemeBundle\Entity\Theme;
 
 /**
- * Class LoadLayoutData
+ * Class LoadProductStatusData
  *
- * @package WellCommerce\Bundle\ThemeBundle\DataFixtures\ORM
+ * @package WellCommerce\Bundle\ProductBundle\DataFixtures\ORM
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LoadLayoutData implements FixtureInterface
+class LoadProductStatusData implements FixtureInterface
 {
     /**
      * {@inheritDoc}
      */
     public function load(ObjectManager $manager)
     {
-        $theme = new Theme();
-        $theme->setName('Demonstration theme');
-        $theme->setFolder('demo');
-        $manager->persist($theme);
-        $manager->flush();
+
     }
 }

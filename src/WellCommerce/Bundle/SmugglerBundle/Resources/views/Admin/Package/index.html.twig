@@ -1,10 +1,10 @@
 {% extends 'WellCommerceAdminBundle:Admin:layout.html.twig' %}
 {% block content %}
-    <h2>{% trans %}heading.unit.list{% endtrans %}</h2>
+    <h2>{% trans %}package.index.heading{% endtrans %}</h2>
 
     <ul class="possibilities">
-        <li><a href="{{ path('admin.unit.add') }}" class="button"
-               title="{% trans %}Add{% endtrans %}"><span>{% trans %}Add{% endtrans %}</span></a></li>
+        <li><a href="{{ path('admin.package.sync') }}" class="button"
+               title="{% trans %}package.sync.button{% endtrans %}"><span>{% trans %}package.sync.button{% endtrans %}</span></a></li>
     </ul>
 
     {{ datagrid_renderer(datagrid) }}

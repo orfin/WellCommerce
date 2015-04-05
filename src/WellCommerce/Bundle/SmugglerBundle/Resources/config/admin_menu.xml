@@ -14,4 +14,11 @@
         <path>menu.configuration.smuggler.package</path>
         <sort_order>10</sort_order>
     </item>
+    <item>
+        <id>channel</id>
+        <name>admin.menu.channel</name>
+        <route>admin.channel.index</route>
+        <path>menu.configuration.smuggler.channel</path>
+        <sort_order>20</sort_order>
+    </item>
 </items>

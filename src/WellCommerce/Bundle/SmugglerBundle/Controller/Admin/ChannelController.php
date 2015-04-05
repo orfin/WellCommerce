@@ -1,4 +1,5 @@
 <?php
+
 /*
  * WellCommerce Open-Source E-Commerce Platform
  *
@@ -10,15 +11,20 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AdminBundle;
+namespace WellCommerce\Bundle\SmugglerBundle\Controller\Admin;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
+use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
+use WellCommerce\Bundle\SmugglerBundle\Manager\Admin\PackageManager;
 
 /**
- * Class WellCommerceAdminBundle
+ * Class ChannelController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
+ *
+ * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
-class WellCommerceAdminBundle extends Bundle
+class ChannelController extends AbstractAdminController
 {
+
 }
+

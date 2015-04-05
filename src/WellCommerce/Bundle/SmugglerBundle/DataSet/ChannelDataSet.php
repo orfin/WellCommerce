@@ -18,11 +18,11 @@ use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
 use WellCommerce\Bundle\DataSetBundle\Transformer\DateTransformer;
 
 /**
- * Class PackageDataSet
+ * Class ChannelDataSet
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class PackageDataSet extends AbstractDataSet implements DataSetInterface
+class ChannelDataSet extends AbstractDataSet implements DataSetInterface
 {
     /**
      * {@inheritdoc}
@@ -30,14 +30,11 @@ class PackageDataSet extends AbstractDataSet implements DataSetInterface
     public function configureOptions(DataSetConfiguratorInterface $configurator)
     {
         $configurator->setColumns([
-            'id'            => 'package.id',
-            'name'          => 'package.name',
-            'fullName'      => 'package.fullName',
-            'vendor'        => 'package.vendor',
-            'localVersion'  => 'package.localVersion',
-            'remoteVersion' => 'package.remoteVersion',
-            'createdAt'     => 'package.createdAt',
-            'updatedAt'     => 'package.updatedAt',
+            'id'        => 'channel.id',
+            'name'      => 'channel.name',
+            'url'       => 'channel.url',
+            'createdAt' => 'channel.createdAt',
+            'updatedAt' => 'channel.updatedAt',
         ]);
 
         $configurator->setTransformers([

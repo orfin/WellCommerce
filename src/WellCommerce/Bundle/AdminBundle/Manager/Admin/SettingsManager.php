@@ -17,7 +17,6 @@ use WellCommerce\Bundle\AdminBundle\Manager\AbstractAdminManager;
 /**
  * Class SettingsManager
  *
- * @package WellCommerce\Bundle\AdminBundle\Manager\Admin
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class SettingsManager extends AbstractAdminManager

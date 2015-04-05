@@ -17,7 +17,6 @@ use WellCommerce\Bundle\AdminBundle\MenuBuilder\AdminMenuBuilderInterface;
 /**
  * Class AdminMenuEvent
  *
- * @package WellCommerce\Bundle\AdminBundle\Event
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class AdminMenuEvent extends Event
@@ -49,3 +48,4 @@ class AdminMenuEvent extends Event
         return $this->builder;
     }
 }
+

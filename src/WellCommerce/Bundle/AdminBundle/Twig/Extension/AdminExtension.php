@@ -16,7 +16,6 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 /**
  * Class AdminExtension
  *
- * @package WellCommerce\Bundle\AdminBundle\Twig\Extension
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class AdminExtension extends \Twig_Extension
@@ -44,11 +43,11 @@ class AdminExtension extends \Twig_Extension
         $scope = $this->session->get('admin/shop');
 
         return [
-            'user'          => $this->session->get('admin/user'),
-            'menu'          => $this->session->get('admin/menu'),
-            'shops'         => $this->session->get('admin/shops'),
+            'user'            => $this->session->get('admin/user'),
+            'menu'            => $this->session->get('admin/menu'),
+            'shops'           => $this->session->get('admin/shops'),
             'activeContextId' => isset($scope['id']) ? $scope['id'] : 0,
-            'flashbag'      => $this->session->getFlashBag(),
+            'flashbag'        => $this->session->getFlashBag(),
         ];
     }
 

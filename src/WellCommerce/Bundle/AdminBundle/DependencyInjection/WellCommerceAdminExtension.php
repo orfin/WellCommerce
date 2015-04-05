@@ -16,9 +16,9 @@ use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
 /**
  * Class WellCommerceAdminExtension
  *
- * @package WellCommerce\Bundle\AdminBundle\DependencyInjection
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class WellCommerceAdminExtension extends AbstractExtension
 {
 }
+

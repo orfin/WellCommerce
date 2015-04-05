@@ -5,4 +5,5 @@
         xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
     <import resource="routing/package.xml" prefix="package"/>
+    <import resource="routing/channel.xml" prefix="channel"/>
 </routes>

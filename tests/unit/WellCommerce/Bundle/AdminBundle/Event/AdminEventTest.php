@@ -35,7 +35,7 @@ class AdminEventTest extends \Codeception\TestCase\Test
         $this->event   = new AdminMenuEvent($this->builder);
     }
 
-    public function testType()
+    public function testTypeIsCorrect()
     {
         $this->assertInstanceOf(
             'WellCommerce\Bundle\AdminBundle\Event\AdminMenuEvent',

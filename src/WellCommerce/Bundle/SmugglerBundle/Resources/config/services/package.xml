@@ -4,6 +4,9 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+
+        <service id="knp.packagist_api.client" class="Packagist\Api\Client"/>
+
         <service id="package.manager.admin" class="WellCommerce\Bundle\SmugglerBundle\Manager\Admin\PackageManager">
             <argument type="service" id="flash_helper"/>
             <argument type="service" id="redirect_helper"/>
@@ -19,6 +22,9 @@
             </call>
             <call method="setDataGrid">
                 <argument type="service" id="package.datagrid"/>
+            </call>
+            <call method="setClient">
+                <argument type="service" id="knp.packagist_api.client"/>
             </call>
         </service>
         

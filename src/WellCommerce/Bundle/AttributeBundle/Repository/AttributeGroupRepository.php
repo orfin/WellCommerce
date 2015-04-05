@@ -16,7 +16,6 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 /**
  * Class AttributeGroupRepository
  *
- * @package WellCommerce\Bundle\AttributeBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class AttributeGroupRepository extends AbstractEntityRepository implements AttributeGroupRepositoryInterface
@@ -26,7 +25,8 @@ class AttributeGroupRepository extends AbstractEntityRepository implements Attri
      */
     public function findAll()
     {
-        $qb     = parent::getQueryBuilder()
+        $qb = parent::getQueryBuilder();
+        $qb
             ->addSelect('attribute_group.id, attribute_group_translation.name')
             ->leftJoin(
                 'WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupTranslation',

@@ -15,7 +15,6 @@ namespace WellCommerce\Bundle\AdminBundle\MenuBuilder;
 /**
  * Interface AdminMenuItemInterface
  *
- * @package WellCommerce\Bundle\AdminBundle\MenuBuilder
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface AdminMenuItemInterface
