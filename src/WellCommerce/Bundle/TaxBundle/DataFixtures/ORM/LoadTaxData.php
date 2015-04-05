@@ -39,8 +39,6 @@ class LoadTaxData extends AbstractDataFixture implements FixtureInterface, Order
             $tax->setValue($val);
             $tax->translate('pl')->setName($name.' VAT');
             $tax->translate('en')->setName($name.' VAT');
-            $tax->translate('de')->setName($name.' MwSt.');
-            $tax->translate('fr')->setName($name.' TVA');
             $tax->mergeNewTranslations();
             $manager->persist($tax);
         }
