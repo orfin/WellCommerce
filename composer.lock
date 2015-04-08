@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "62a0bb20122453be9a0c7aa48ed49c39",
+    "hash": "97bc68e361f2d2b746b80be027236577",
     "packages": [
         {
             "name": "beberlei/DoctrineExtensions",
@@ -3584,59 +3584,6 @@
             "time": "2015-04-01 19:21:20"
         },
         {
-            "name": "wellcommerce/search-bundle",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/WellCommerce/SearchBundle.git",
-                "reference": "73b22c54f95c9b8217d668c25be8a3bd9d069b66"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/WellCommerce/SearchBundle/zipball/73b22c54f95c9b8217d668c25be8a3bd9d069b66",
-                "reference": "73b22c54f95c9b8217d668c25be8a3bd9d069b66",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4"
-            },
-            "type": "wellcommerce-plugin",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.1-dev"
-                },
-                "install-dir": "src/WellCommerce/Bundle/SearchBundle"
-            },
-            "autoload": {
-                "psr-0": {
-                    "": "src/"
-                }
-            },
-            "notification-url": "http://packagist.org/downloads/",
-            "license": [
-                "OSL-3.0"
-            ],
-            "authors": [
-                {
-                    "name": "Adam Piotrowski",
-                    "email": "adam@wellcommerce.org"
-                },
-                {
-                    "name": "WellCommerce Developers",
-                    "email": "developers@wellcommerce.org"
-                }
-            ],
-            "description": "WellCommerce Open-Source edition",
-            "keywords": [
-                "e-commerce",
-                "open-source",
-                "plugin",
-                "symfony",
-                "wellcommerce"
-            ],
-            "time": "2015-03-30 13:24:46"
-        },
-        {
             "name": "white-october/pagerfanta-bundle",
             "version": "2.1.x-dev",
             "target-dir": "WhiteOctober/PagerfantaBundle",
@@ -5649,7 +5596,6 @@
         "devristo/phpws": 20,
         "react/child-process": 20,
         "knplabs/packagist-api": 20,
-        "wellcommerce/search-bundle": 20,
         "doctrine/doctrine-fixtures-bundle": 20
     },
     "prefer-stable": false,
