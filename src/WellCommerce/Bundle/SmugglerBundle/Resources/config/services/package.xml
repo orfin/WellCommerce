@@ -23,11 +23,15 @@
             <call method="setDataGrid">
                 <argument type="service" id="package.datagrid"/>
             </call>
-            <call method="setClient">
-                <argument type="service" id="knp.packagist_api.client"/>
+            <call method="setHelper">
+                <argument type="service" id="package.helper"/>
             </call>
         </service>
-        
+
+        <service id="package.helper" class="WellCommerce\Bundle\SmugglerBundle\Helper\PackageHelper">
+            <argument type="service" id="knp.packagist_api.client"/>
+        </service>
+
         <service id="package.controller.admin" class="WellCommerce\Bundle\SmugglerBundle\Controller\Admin\PackageController">
             <argument type="service" id="package.manager.admin"/>
             <call method="setContainer">
@@ -80,5 +84,18 @@
             </call>
             <tag name="kernel.event_subscriber" />
         </service>
+
+        <service id="package.command.plugin.install" class="WellCommerce\Bundle\SmugglerBundle\Command\Package\InstallCommand">
+            <tag name="console.command" />
+        </service>
+
+        <service id="package.command.plugin.update" class="WellCommerce\Bundle\SmugglerBundle\Command\Package\UpdateCommand">
+            <tag name="console.command" />
+        </service>
+
+        <service id="package.command.plugin.remove" class="WellCommerce\Bundle\SmugglerBundle\Command\Package\RemoveCommand">
+            <tag name="console.command" />
+        </service>
+
     </services>
 </container>

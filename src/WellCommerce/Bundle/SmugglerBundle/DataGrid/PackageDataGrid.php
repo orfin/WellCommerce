@@ -17,7 +17,12 @@ use WellCommerce\Bundle\DataGridBundle\Column\ColumnCollection;
 use WellCommerce\Bundle\DataGridBundle\Column\Options\Appearance;
 use WellCommerce\Bundle\DataGridBundle\Column\Options\Filter;
 use WellCommerce\Bundle\DataGridBundle\Column\Options\Sorting;
+use WellCommerce\Bundle\DataGridBundle\Configuration\EventHandler\ClickRowEventHandler;
+use WellCommerce\Bundle\DataGridBundle\Configuration\EventHandler\CustomRowEventHandler;
+use WellCommerce\Bundle\DataGridBundle\Configuration\EventHandler\DeleteRowEventHandler;
+use WellCommerce\Bundle\DataGridBundle\Configuration\EventHandler\LoadEventHandler;
 use WellCommerce\Bundle\DataGridBundle\DataGridInterface;
+use WellCommerce\Bundle\DataGridBundle\Options\OptionsInterface;
 
 /**
  * Class PackageDataGrid
@@ -48,37 +53,91 @@ class PackageDataGrid extends AbstractDataGrid implements DataGridInterface
 
         $collection->add(new Column([
             'id'         => 'name',
-            'caption'    => $this->trans('package.name.label'),
+            'caption'    => $this->trans('package.label.name'),
+            'appearance' => new Appearance([
+                'width' => 190,
+            ]),
         ]));
 
         $collection->add(new Column([
             'id'         => 'fullName',
-            'caption'    => $this->trans('package.full_name.label'),
+            'caption'    => $this->trans('package.label.full_name'),
+            'appearance' => new Appearance([
+                'width' => 190,
+            ]),
         ]));
 
         $collection->add(new Column([
             'id'         => 'vendor',
-            'caption'    => $this->trans('package.vendor.label'),
+            'caption'    => $this->trans('package.label.vendor'),
+            'appearance' => new Appearance([
+                'width' => 90,
+                'align' => Appearance::ALIGN_CENTER
+            ]),
         ]));
 
         $collection->add(new Column([
             'id'         => 'localVersion',
-            'caption'    => $this->trans('package.local_version.label'),
+            'caption'    => $this->trans('package.label.local_version'),
+            'appearance' => new Appearance([
+                'width' => 90,
+            ]),
         ]));
 
         $collection->add(new Column([
-            'id'      => 'remoteVersion',
-            'caption' => $this->trans('package.remoteVersion.label'),
+            'id'         => 'remoteVersion',
+            'caption'    => $this->trans('package.label.remote_version'),
+            'appearance' => new Appearance([
+                'width' => 90,
+                'align' => Appearance::ALIGN_CENTER
+            ]),
         ]));
 
         $collection->add(new Column([
-            'id'      => 'createdAt',
-            'caption' => $this->trans('package.created_at.label'),
+            'id'         => 'createdAt',
+            'caption'    => $this->trans('package.label.created_at'),
+            'appearance' => new Appearance([
+                'width' => 90,
+                'align' => Appearance::ALIGN_CENTER
+            ]),
         ]));
 
         $collection->add(new Column([
-            'id'      => 'updatedAt',
-            'caption' => $this->trans('package.updated_at.label'),
+            'id'         => 'updatedAt',
+            'caption'    => $this->trans('package.label.updated_at'),
+            'appearance' => new Appearance([
+                'width' => 90,
+                'align' => Appearance::ALIGN_CENTER
+            ]),
+        ]));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function configureOptions(OptionsInterface $options)
+    {
+        $eventHandlers = $options->getEventHandlers();
+
+        $eventHandlers->add(new LoadEventHandler([
+            'function' => $this->getJavascriptFunctionName('load'),
+            'route'    => $this->getRouteForAction('grid'),
+        ]));
+
+        $eventHandlers->add(new ClickRowEventHandler([
+            'function' => $this->getJavascriptFunctionName('click'),
+            'route'    => $this->getRouteForAction('edit'),
+        ]));
+
+        $eventHandlers->add(new CustomRowEventHandler([
+            'function'   => $this->getJavascriptFunctionName('install'),
+            'row_action' => 'action_installPackage'
+        ]));
+
+        $eventHandlers->add(new DeleteRowEventHandler([
+            'function'   => $this->getJavascriptFunctionName('delete'),
+            'row_action' => DataGridInterface::ACTION_DELETE,
+            'route'      => $this->getRouteForAction('delete'),
         ]));
     }
 }

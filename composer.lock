@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a8769427f11361a4e919ce7fb119df95",
+    "hash": "62a0bb20122453be9a0c7aa48ed49c39",
     "packages": [
         {
             "name": "beberlei/DoctrineExtensions",
@@ -107,6 +107,42 @@
                 "transliterator"
             ],
             "time": "2014-05-15 22:08:22"
+        },
+        {
+            "name": "devristo/phpws",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Devristo/phpws.git",
+                "reference": "36bf228c329c4c7c576394f13330696d0ad521b3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Devristo/phpws/zipball/36bf228c329c4c7c576394f13330696d0ad521b3",
+                "reference": "36bf228c329c4c7c576394f13330696d0ad521b3",
+                "shasum": ""
+            },
+            "require": {
+                "react/socket": "0.4.*",
+                "react/socket-client": "0.4.*",
+                "zendframework/zend-http": "2.*",
+                "zendframework/zend-log": "2.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Devristo\\Phpws\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Devristo",
+                    "email": "chris@devristo.com"
+                }
+            ],
+            "description": "WebSocket Server and Client library for PHP",
+            "time": "2015-03-13 16:23:37"
         },
         {
             "name": "doctrine/annotations",
@@ -859,12 +895,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/migrations.git",
-                "reference": "65978aa4e9ffca3bb632225ad8c6320077d80d85"
+                "reference": "efb77c10dfb75485998a843154bbc44d8124c4d1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/migrations/zipball/65978aa4e9ffca3bb632225ad8c6320077d80d85",
-                "reference": "65978aa4e9ffca3bb632225ad8c6320077d80d85",
+                "url": "https://api.github.com/repos/doctrine/migrations/zipball/efb77c10dfb75485998a843154bbc44d8124c4d1",
+                "reference": "efb77c10dfb75485998a843154bbc44d8124c4d1",
                 "shasum": ""
             },
             "require": {
@@ -889,7 +925,7 @@
                     "Doctrine\\DBAL\\Migrations": "lib"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "notification-url": "http://packagist.org/downloads/",
             "license": [
                 "LGPL-2.1"
             ],
@@ -909,7 +945,7 @@
                 "database",
                 "migrations"
             ],
-            "time": "2015-03-23 09:47:20"
+            "time": "2015-04-07 10:34:31"
         },
         {
             "name": "doctrine/orm",
@@ -917,12 +953,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/doctrine2.git",
-                "reference": "2cd86deeb4c5994fbc1ed5fd042bcf2e3f934564"
+                "reference": "584345397b0fd7a309b90006265dc806f2f9d096"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/2cd86deeb4c5994fbc1ed5fd042bcf2e3f934564",
-                "reference": "2cd86deeb4c5994fbc1ed5fd042bcf2e3f934564",
+                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/584345397b0fd7a309b90006265dc806f2f9d096",
+                "reference": "584345397b0fd7a309b90006265dc806f2f9d096",
                 "shasum": ""
             },
             "require": {
@@ -986,7 +1022,7 @@
                 "database",
                 "orm"
             ],
-            "time": "2015-04-02 22:25:11"
+            "time": "2015-04-06 03:23:17"
         },
         {
             "name": "evenement/evenement",
@@ -2303,6 +2339,50 @@
             "time": "2014-02-02 01:11:26"
         },
         {
+            "name": "react/child-process",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/reactphp/child-process.git",
+                "reference": "a75cb3e7d444abfea339bc40ad9ced7ba78d4afa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/reactphp/child-process/zipball/a75cb3e7d444abfea339bc40ad9ced7ba78d4afa",
+                "reference": "a75cb3e7d444abfea339bc40ad9ced7ba78d4afa",
+                "shasum": ""
+            },
+            "require": {
+                "evenement/evenement": "~2.0",
+                "php": ">=5.4.0",
+                "react/event-loop": "0.4.*",
+                "react/stream": "0.4.*"
+            },
+            "require-dev": {
+                "sebastian/environment": "~1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.5-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "React\\ChildProcess\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Library for executing child processes.",
+            "keywords": [
+                "process"
+            ],
+            "time": "2014-08-08 23:27:29"
+        },
+        {
             "name": "react/dns",
             "version": "v0.4.1",
             "source": {
@@ -3359,12 +3439,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/WellCommerce/DataGridBundle.git",
-                "reference": "8710bf37dc2bdff454b2e41590abd6fb646feefb"
+                "reference": "9dc4418110975fff09688a551e08504ca71953ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WellCommerce/DataGridBundle/zipball/8710bf37dc2bdff454b2e41590abd6fb646feefb",
-                "reference": "8710bf37dc2bdff454b2e41590abd6fb646feefb",
+                "url": "https://api.github.com/repos/WellCommerce/DataGridBundle/zipball/9dc4418110975fff09688a551e08504ca71953ed",
+                "reference": "9dc4418110975fff09688a551e08504ca71953ed",
                 "shasum": ""
             },
             "require": {
@@ -3401,7 +3481,7 @@
                 "open-source",
                 "symfony"
             ],
-            "time": "2015-03-07 17:08:58"
+            "time": "2015-04-05 20:56:47"
         },
         {
             "name": "wellcommerce/dataset-bundle",
@@ -3502,6 +3582,59 @@
                 "symfony"
             ],
             "time": "2015-04-01 19:21:20"
+        },
+        {
+            "name": "wellcommerce/search-bundle",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/WellCommerce/SearchBundle.git",
+                "reference": "73b22c54f95c9b8217d668c25be8a3bd9d069b66"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/WellCommerce/SearchBundle/zipball/73b22c54f95c9b8217d668c25be8a3bd9d069b66",
+                "reference": "73b22c54f95c9b8217d668c25be8a3bd9d069b66",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "type": "wellcommerce-plugin",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.1-dev"
+                },
+                "install-dir": "src/WellCommerce/Bundle/SearchBundle"
+            },
+            "autoload": {
+                "psr-0": {
+                    "": "src/"
+                }
+            },
+            "notification-url": "http://packagist.org/downloads/",
+            "license": [
+                "OSL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Adam Piotrowski",
+                    "email": "adam@wellcommerce.org"
+                },
+                {
+                    "name": "WellCommerce Developers",
+                    "email": "developers@wellcommerce.org"
+                }
+            ],
+            "description": "WellCommerce Open-Source edition",
+            "keywords": [
+                "e-commerce",
+                "open-source",
+                "plugin",
+                "symfony",
+                "wellcommerce"
+            ],
+            "time": "2015-03-30 13:24:46"
         },
         {
             "name": "white-october/pagerfanta-bundle",
@@ -3750,6 +3883,93 @@
             "time": "2015-03-19 16:20:21"
         },
         {
+            "name": "zendframework/zend-escaper",
+            "version": "2.3.7",
+            "target-dir": "Zend/Escaper",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/Component_ZendEscaper.git",
+                "reference": "b3ca10e16ef875f836d46f08045349e39589766c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/Component_ZendEscaper/zipball/b3ca10e16ef875f836d46f08045349e39589766c",
+                "reference": "b3ca10e16ef875f836d46f08045349e39589766c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.23"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.3-dev",
+                    "dev-develop": "2.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Zend\\Escaper\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "homepage": "https://github.com/zendframework/zf2",
+            "keywords": [
+                "escaper",
+                "zf2"
+            ],
+            "time": "2015-03-12 16:55:53"
+        },
+        {
+            "name": "zendframework/zend-http",
+            "version": "2.3.7",
+            "target-dir": "Zend/Http",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/Component_ZendHttp.git",
+                "reference": "35f52485d4170ebcdac1f00cb24a1b0856214c2f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/Component_ZendHttp/zipball/35f52485d4170ebcdac1f00cb24a1b0856214c2f",
+                "reference": "35f52485d4170ebcdac1f00cb24a1b0856214c2f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.23",
+                "zendframework/zend-loader": "self.version",
+                "zendframework/zend-stdlib": "self.version",
+                "zendframework/zend-uri": "self.version",
+                "zendframework/zend-validator": "self.version"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.3-dev",
+                    "dev-develop": "2.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Zend\\Http\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "provides an easy interface for performing Hyper-Text Transfer Protocol (HTTP) requests",
+            "homepage": "https://github.com/zendframework/zf2",
+            "keywords": [
+                "http",
+                "zf2"
+            ],
+            "time": "2015-03-12 16:55:53"
+        },
+        {
             "name": "zendframework/zend-json",
             "version": "2.3.7",
             "target-dir": "Zend/Json",
@@ -3797,6 +4017,155 @@
             "homepage": "https://github.com/zendframework/zf2",
             "keywords": [
                 "json",
+                "zf2"
+            ],
+            "time": "2015-03-12 16:55:53"
+        },
+        {
+            "name": "zendframework/zend-loader",
+            "version": "2.3.7",
+            "target-dir": "Zend/Loader",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/Component_ZendLoader.git",
+                "reference": "fcca80907c35f0827f992b7a58adbbff4baf728e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/Component_ZendLoader/zipball/fcca80907c35f0827f992b7a58adbbff4baf728e",
+                "reference": "fcca80907c35f0827f992b7a58adbbff4baf728e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.23"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.3-dev",
+                    "dev-develop": "2.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Zend\\Loader\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "homepage": "https://github.com/zendframework/zf2",
+            "keywords": [
+                "loader",
+                "zf2"
+            ],
+            "time": "2015-03-12 16:55:53"
+        },
+        {
+            "name": "zendframework/zend-log",
+            "version": "2.3.7",
+            "target-dir": "Zend/Log",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/Component_ZendLog.git",
+                "reference": "1cca36bb4a5732d8438cfc96deeafff4e1fdccdb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/Component_ZendLog/zipball/1cca36bb4a5732d8438cfc96deeafff4e1fdccdb",
+                "reference": "1cca36bb4a5732d8438cfc96deeafff4e1fdccdb",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.23",
+                "zendframework/zend-servicemanager": "self.version",
+                "zendframework/zend-stdlib": "self.version"
+            },
+            "require-dev": {
+                "zendframework/zend-console": "self.version",
+                "zendframework/zend-db": "self.version",
+                "zendframework/zend-escaper": "self.version",
+                "zendframework/zend-mail": "self.version",
+                "zendframework/zend-validator": "self.version"
+            },
+            "suggest": {
+                "ext-mongo": "*",
+                "zendframework/zend-console": "Zend\\Console component",
+                "zendframework/zend-db": "Zend\\Db component",
+                "zendframework/zend-escaper": "Zend\\Escaper component, for use in the XML formatter",
+                "zendframework/zend-mail": "Zend\\Mail component",
+                "zendframework/zend-validator": "Zend\\Validator component"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.3-dev",
+                    "dev-develop": "2.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Zend\\Log\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "component for general purpose logging",
+            "homepage": "https://github.com/zendframework/zf2",
+            "keywords": [
+                "log",
+                "logging",
+                "zf2"
+            ],
+            "time": "2015-03-12 16:55:53"
+        },
+        {
+            "name": "zendframework/zend-servicemanager",
+            "version": "2.3.7",
+            "target-dir": "Zend/ServiceManager",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/Component_ZendServiceManager.git",
+                "reference": "10c7dfcd3b0e5856a53663c0971159573ec37ffa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/Component_ZendServiceManager/zipball/10c7dfcd3b0e5856a53663c0971159573ec37ffa",
+                "reference": "10c7dfcd3b0e5856a53663c0971159573ec37ffa",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.23"
+            },
+            "require-dev": {
+                "zendframework/zend-di": "self.version"
+            },
+            "suggest": {
+                "ocramius/proxy-manager": "ProxyManager 0.5.* to handle lazy initialization of services",
+                "zendframework/zend-di": "Zend\\Di component"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.3-dev",
+                    "dev-develop": "2.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Zend\\ServiceManager\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "homepage": "https://github.com/zendframework/zf2",
+            "keywords": [
+                "servicemanager",
                 "zf2"
             ],
             "time": "2015-03-12 16:55:53"
@@ -3850,6 +4219,112 @@
             "homepage": "https://github.com/zendframework/zf2",
             "keywords": [
                 "stdlib",
+                "zf2"
+            ],
+            "time": "2015-03-12 16:55:53"
+        },
+        {
+            "name": "zendframework/zend-uri",
+            "version": "2.3.7",
+            "target-dir": "Zend/Uri",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/Component_ZendUri.git",
+                "reference": "6dd5ee4b2543c785aa4e06643aaddf9c46f69039"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/Component_ZendUri/zipball/6dd5ee4b2543c785aa4e06643aaddf9c46f69039",
+                "reference": "6dd5ee4b2543c785aa4e06643aaddf9c46f69039",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.23",
+                "zendframework/zend-escaper": "self.version",
+                "zendframework/zend-validator": "self.version"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.3-dev",
+                    "dev-develop": "2.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Zend\\Uri\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "a component that aids in manipulating and validating » Uniform Resource Identifiers (URIs)",
+            "homepage": "https://github.com/zendframework/zf2",
+            "keywords": [
+                "uri",
+                "zf2"
+            ],
+            "time": "2015-03-12 16:55:53"
+        },
+        {
+            "name": "zendframework/zend-validator",
+            "version": "2.3.7",
+            "target-dir": "Zend/Validator",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/Component_ZendValidator.git",
+                "reference": "53ceee562ce689a6a610c7bb0bc8157c7ec63a45"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/Component_ZendValidator/zipball/53ceee562ce689a6a610c7bb0bc8157c7ec63a45",
+                "reference": "53ceee562ce689a6a610c7bb0bc8157c7ec63a45",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.23",
+                "zendframework/zend-stdlib": "self.version"
+            },
+            "require-dev": {
+                "zendframework/zend-db": "self.version",
+                "zendframework/zend-filter": "self.version",
+                "zendframework/zend-i18n": "self.version",
+                "zendframework/zend-math": "self.version",
+                "zendframework/zend-servicemanager": "self.version",
+                "zendframework/zend-session": "self.version",
+                "zendframework/zend-uri": "self.version"
+            },
+            "suggest": {
+                "zendframework/zend-db": "Zend\\Db component",
+                "zendframework/zend-filter": "Zend\\Filter component, required by the Digits validator",
+                "zendframework/zend-i18n": "Zend\\I18n component to allow translation of validation error messages as well as to use the various Date validators",
+                "zendframework/zend-math": "Zend\\Math component",
+                "zendframework/zend-resources": "Translations of validator messages",
+                "zendframework/zend-servicemanager": "Zend\\ServiceManager component to allow using the ValidatorPluginManager and validator chains",
+                "zendframework/zend-session": "Zend\\Session component",
+                "zendframework/zend-uri": "Zend\\Uri component, required by the Uri and Sitemap\\Loc validators"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.3-dev",
+                    "dev-develop": "2.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Zend\\Validator\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "provides a set of commonly needed validators",
+            "homepage": "https://github.com/zendframework/zf2",
+            "keywords": [
+                "validator",
                 "zf2"
             ],
             "time": "2015-03-12 16:55:53"
@@ -4557,16 +5032,16 @@
         },
         {
             "name": "phpunit/php-token-stream",
-            "version": "1.4.0",
+            "version": "1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-token-stream.git",
-                "reference": "db32c18eba00b121c145575fcbcd4d4d24e6db74"
+                "reference": "eab81d02569310739373308137284e0158424330"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/db32c18eba00b121c145575fcbcd4d4d24e6db74",
-                "reference": "db32c18eba00b121c145575fcbcd4d4d24e6db74",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/eab81d02569310739373308137284e0158424330",
+                "reference": "eab81d02569310739373308137284e0158424330",
                 "shasum": ""
             },
             "require": {
@@ -4587,7 +5062,7 @@
                     "src/"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "notification-url": "http://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -4602,7 +5077,7 @@
             "keywords": [
                 "tokenizer"
             ],
-            "time": "2015-01-17 09:51:32"
+            "time": "2015-04-08 04:46:07"
         },
         {
             "name": "phpunit/phpunit",
@@ -5171,7 +5646,10 @@
         "wellcommerce/datagrid-bundle": 20,
         "wellcommerce/form-bundle": 20,
         "wellcommerce/composer-plugin": 20,
+        "devristo/phpws": 20,
+        "react/child-process": 20,
         "knplabs/packagist-api": 20,
+        "wellcommerce/search-bundle": 20,
         "doctrine/doctrine-fixtures-bundle": 20
     },
     "prefer-stable": false,

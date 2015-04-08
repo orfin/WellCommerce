@@ -54,9 +54,9 @@ GF.ExtendClass = function(sType, fChild, oChildStatic, bNoBaseConstructor) {
 
 /**
 * GF.ImplementMembers(oProto)
-* 
+*
 * Implements all the proto members as the current class' member functions.
-* 
+*
 * @param oProto object - An object consisting of the class' methods.
 */
 GF.ImplementMembers = function(oProto) {
@@ -67,13 +67,13 @@ GF.ImplementMembers = function(oProto) {
 
 /**
 * GF.ImplementStaticMembers(oProto, sType)
-* 
+*
 * Implements all the proto members as the current class' static members.
-* 
+*
 * The function is prepared to cope with the GetInstance-like methods of GF_Instance
 * class. It overrides the standard argument list so that the second argument
 * is always the calling class' name.
-* 
+*
 * @param oProto object - An object consisting of the class' static members.
 * @param sType string - Name of the derived class.
 */
@@ -209,12 +209,12 @@ GF.GetChunkFromClass = function(jNode, sNeedle) {
 
 /**
 * GF.GetIdFromFieldName(sFieldName)
-* 
+*
 * Extracts the field's id from its name. It's used to process and identify fields
 * that names are in an array-form, e.g. "fieldName[123]". The function returns "123"
 * in such case. It's safe to use it with multi dimensional arrays - only the last
 * id will be returned.
-* 
+*
 * @return string - Element's id.
 * @param sFieldName string - The field's name from which the id needs to be extracted.
 */
@@ -226,9 +226,9 @@ GF.GetIdFromFieldName = function(sFieldName) {
 
 /**
 * GF.CheckboxesCheck(jContext)
-* 
+*
 * Checks all the descendant checkboxes of the jContext node.
-* 
+*
 * @param jContext jQuery - Predecessor of the checkboxes to check.
 */
 GF.CheckboxesCheck = function(jContext) {
@@ -237,9 +237,9 @@ GF.CheckboxesCheck = function(jContext) {
 
 /**
 * GF.CheckboxesUncheck(jContext)
-* 
+*
 * Unchecks all the descendant checkboxes of the jContext node.
-* 
+*
 * @param jContext jQuery - Predecessor of the checkboxes to uncheck.
 */
 GF.CheckboxesUncheck = function(jContext) {
@@ -248,9 +248,9 @@ GF.CheckboxesUncheck = function(jContext) {
 
 /**
 * GF.StopPropagation(eEvent)
-* 
+*
 * A generic event handler that stops the event propagation.
-* 
+*
 * @param eEvent EventObject - jQuery's event object.
 */
 GF.StopPropagation = function(eEvent) {
@@ -261,9 +261,9 @@ GF.StopPropagation = function(eEvent) {
 
 /**
 * GF.PreventDefault(eEvent)
-* 
+*
 * A generic event handler that prevents the browser from invoking default action.
-* 
+*
 * @param eEvent EventObject - jQuery's event object.
 */
 GF.PreventDefault = function(eEvent) {
@@ -273,9 +273,9 @@ GF.PreventDefault = function(eEvent) {
 
 /**
 * GF.InArray(aArray, mValue)
-* 
+*
 * Checks whether the mValue element exists in the aArray.
-* 
+*
 * @return bool - True if the value exists in array or false if not.
 * @param aArray array - Array of values.
 * @param mValue mixed - Value that we want to find.
@@ -291,9 +291,9 @@ GF.InArray = function(aArray, mValue) {
 
 /**
 * GF.DeleteFromArray(aArray, mValue)
-* 
+*
 * Deletes safely the mValue from aArray.
-* 
+*
 * @return array - The modified array.
 * @param aArray array - Array of values.
 * @param mValue mixed - Value that we want to delete.
@@ -317,9 +317,9 @@ GF.DeleteFromArray = function(aArray, mValue) {
 
 /**
 * GF.DeleteFromArrayAt(aArray, mIndex)
-* 
+*
 * Deletes safely the mIndex element from aArray.
-* 
+*
 * @return array - The modified array.
 * @param aArray array - Array of values.
 * @param mIndex mixed - Index of element that we want to delete.
@@ -354,9 +354,9 @@ GF.Clone = function(mSource) {
 
 /**
 * GF.CountMembers(oObject)
-* 
+*
 * Counts the enumerable members of oObject.
-* 
+*
 * @return int - Number of members.
 * @param oObject Object - Object which members we want to count.
 */
@@ -370,9 +370,9 @@ GF.CountMembers = function(oObject) {
 
 /**
 * GF.MoneyFormat(nValue)
-* 
+*
 * Returns a string formatted according to the currently selected currency.
-* 
+*
 * @return string - Formatted value.
 * @param nValue Number - Amount to format.
 */
@@ -382,9 +382,9 @@ GF.MoneyFormat = function(nValue) {
 
 /**
 * GF.ParseMoney(sValue)
-* 
+*
 * Returns a floating point number according to the currency value passed as a parameter.
-* 
+*
 * @return Number - Parsed value.
 * @param sValue string - Unparsed value.
 */
@@ -404,38 +404,38 @@ Function.prototype.GF_ImplementStaticMembers = GF.ImplementStaticMembers;
  *
  * Copyright (c) 2009 Gekosale
  *
- * This library is free software; you can redistribute it and/or 
+ * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version. 
- * 
+ * version 2.1 of the License, or (at your option) any later version.
+ *
  */
  function GF_Base() {
-	
+
 	/* Declarations */
-	
+
 	this.GF_Base;       // GF_Base([...])
-	
+
 	/* Definitions */
-	
+
 	/**
 	* GF_Base([...])
-	* 
+	*
 	* @return bool - False on error.
 	*/
 	this.GF_Base = function() {
 		try {
-			
+
 		}
 		catch (exception) {
 			return false;
 		}
 	};
-	
+
 	/* Constructor call */
-	
+
 	return this.GF_Base();
-	
+
 };
 
 /**
@@ -444,15 +444,15 @@ Function.prototype.GF_ImplementStaticMembers = GF.ImplementStaticMembers;
  *
  * Copyright (c) 2009 Gekosale
  *
- * This library is free software; you can redistribute it and/or 
+ * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version. 
- * 
+ * version 2.1 of the License, or (at your option) any later version.
+ *
  */
  /**
 * GF_Debug()
-* 
+*
 * Groups the methods needed by the debug section of Framework.
 */
 function GF_Debug() {};
@@ -480,11 +480,11 @@ GF_Debug.s_asMessages = [];
 
 /**
 * GF_Debug.Error(sMessage)
-* 
+*
 * Signals that an error has occured. It processes the message and
 * reports it to the user if the reporting level is adequate.
 * It also raises an exception with the message specified.
-* 
+*
 * @param sMessage string - The error description.
 */
 GF_Debug.Error = function(sMessage) {
@@ -500,10 +500,10 @@ GF_Debug.Error = function(sMessage) {
 
 /**
 * GF_Debug.Warning(sMessage)
-* 
+*
 * Signals that a warning has occured. It processes the message and
 * reports it to the user if the reporting level is adequate.
-* 
+*
 * @param sMessage string - The warning description.
 */
 GF_Debug.Warning = function(sMessage) {
@@ -518,12 +518,12 @@ GF_Debug.Warning = function(sMessage) {
 
 /**
 * GF_Debug.ShowMessage(sMessage)
-* 
+*
 * Reprots a message to the user. In it's simple form just shows
 * an alert box on the screen.
-* 
+*
 * It can be freely overriden with a custom function.
-* 
+*
 * @param sMessage string - The message to display.
 */
 GF_Debug.ShowMessage = function(sMessage) {
@@ -534,15 +534,15 @@ GF_Debug.ShowMessage = function(sMessage) {
 
 /**
 * GF_Debug.HandleException(xException)
-* 
+*
 * Handles an exception in an appropriate way.
-* 
+*
 * @return void
 * @param xException mixed - An exception.
 */
 GF_Debug.HandleException = function(xException) {
 	if (xException instanceof GF_Exception) {
-		
+
 	}
 	else {
 		if (GF_Debug.level <= GF_Debug.LEVEL_ERRORS_ONLY) {
@@ -554,9 +554,9 @@ GF_Debug.HandleException = function(xException) {
 
 /**
 * GF_Exception(sMessage)
-* 
+*
 * General GexoFramework exception.
-* 
+*
 * @param sMessage string - The exception's description.
 */
 function GF_Exception(sMessage) {};
@@ -567,11 +567,11 @@ function GF_Exception(sMessage) {};
  *
  * Copyright (c) 2009 Gekosale
  *
- * This library is free software; you can redistribute it and/or 
+ * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version. 
- * 
+ * version 2.1 of the License, or (at your option) any later version.
+ *
  */
  GF_Debug.Language = {
 	error_occured: 'Wystąpił błąd!'
@@ -583,22 +583,22 @@ function GF_Exception(sMessage) {};
  *
  * Copyright (c) 2009 Gekosale
  *
- * This library is free software; you can redistribute it and/or 
+ * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version. 
- * 
+ * version 2.1 of the License, or (at your option) any later version.
+ *
  */
  function GF_Config(options) {
-	
+
 	this.GF_Config = function(options) {
 	};
-	
+
 	this._Process = function(options) {
 		this._ProcessNode(options, this);
 		this._PostProcess();
 	};
-	
+
 	this._ProcessNode = function(options, context) {
 		for (var i in options) {
 			if ((options[i] instanceof Object) && !(options[i] instanceof Function) && !(options[i] instanceof Array) && !(options[i] instanceof $)) {
@@ -624,14 +624,14 @@ function GF_Exception(sMessage) {};
 			}
 		}
 	};
-	
+
 	this._PostProcess = function() {
 	};
-	
+
 	/* Constructor call */
-	
+
 	return this.GF_Config(options);
-	
+
 }
 
 /**
@@ -640,11 +640,11 @@ function GF_Exception(sMessage) {};
  *
  * Copyright (c) 2009 Gekosale
  *
- * This library is free software; you can redistribute it and/or 
+ * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version. 
- * 
+ * version 2.1 of the License, or (at your option) any later version.
+ *
  */
  /**
 * GF_Instance(sType, jTarget[, oOptions])
@@ -652,10 +652,10 @@ function GF_Exception(sMessage) {};
 * Base class for all GF instances. Every object should extend this class
 * (using the GF.ExtendClass method which is availble as a Function extension
 * named Extend).
-* 
+*
 * Implements basic object creation procedures, aggregation and common methods
 * for object selection.
-* 
+*
 * @return bool - False on error.
 * @param type string - Name of the child class.
 * @param target jQuery - Target which is being used to initialize the newly
@@ -663,31 +663,31 @@ function GF_Exception(sMessage) {};
 * @param options object - Configuration options object.
 */
 function GF_Instance(sType, jTarget, oOptions) {
-	
+
 	/* Declarations */
-	
+
 	this.m_iId;             // Instance's id
 	this.m_jTarget;         // Instance's DOM element
 	this.m_sType;           // Final type of the object
-	
+
 	this.GF_Instance;       // GF_Instance(sType, jTarget[, oOptions])
 	this.InitInstance;      // InitInstance(target)
 	this.RemoveInstance;    // RemoveInstance()
 	this.RefreshTarget;     // RefreshTarget()
 	this.IsInstanceOf;      // IsInstanceOf(sType)
-	
+
 	/* Definitions */
-	
+
 	/**
 	* GF_Instance(sType, jTarget[, oOptions])
 	*
 	* The GF_Instance constructor. Checks if all the necessary parameters are set
 	* and invokes the object creation. If any exception raises, it skips the object
 	* creation and returns false.
-	* 
+	*
 	* When target points to more than one DOM element, this constructor invokes
 	* multiple object creation and returns an array of newly created objects.
-	* 
+	*
 	* @return bool - False on error.
 	* @param type string - Name of the child class.
 	* @param target jQuery - Target which is being used to initialize the newly
@@ -696,13 +696,13 @@ function GF_Instance(sType, jTarget, oOptions) {
 	*/
 	this.GF_Instance = function(sType, jTarget, options) {
 		try {
-			
+
 			if ((sType == undefined) || !sType) {
 				GF_Debug.Error('No instance type specified. GF object creation failed.');
 			}
-			
+
 			this.m_sType = sType;
-			
+
 			if (!(jTarget instanceof $)) {
 				GF_Debug.Error('Unknown type of target (' + typeof jTarget + '). Expected a jQuery object. GF object creation failed.');
 			}
@@ -719,7 +719,7 @@ function GF_Instance(sType, jTarget, oOptions) {
 				return a;
 			}
 			this.InitInstance(jTarget);
-			
+
 		}
 		catch (xException) {
 			GF_Debug.HandleException(xException);
@@ -727,15 +727,15 @@ function GF_Instance(sType, jTarget, oOptions) {
 			return false;
 		}
 	};
-		
+
 	/**
 	* InitInstance(jTarget)
 	*
 	* Initializes the DOM element passed as the argument. Prepares the name, id and
 	* adds necessary CSS classes.
-	* 
+	*
 	* Also adds the newly created object to the instances vector.
-	* 
+	*
 	* @return void
 	* @param jTarget jQuery - Target DOM element.
 	*/
@@ -744,12 +744,12 @@ function GF_Instance(sType, jTarget, oOptions) {
 		this.m_jTarget = jTarget;
 		this.m_jTarget.addClass('GF-instance-' + this.m_iId).addClass('GF-instance').addClass(sType);
 	};
-	
+
 	/**
 	* RemoveInstance()
-	* 
+	*
 	* Removes this instance from the instances vector.
-	* 
+	*
 	* @return void
 	*/
 	this.RemoveInstance = function() {
@@ -760,32 +760,32 @@ function GF_Instance(sType, jTarget, oOptions) {
 			GF.DeleteFromArray(GF_Instance.s_aoInstances, this.m_iId);
 		}
 	};
-	
+
 	/**
 	* RefreshTarget()
-	* 
+	*
 	* Refreshes the m_jTarget property using the actual instance id.
 	*/
 	this.RefreshTarget = function() {
 		this.m_jTarget = $('.GF-instance-' + this.m_iId);
 	};
-	
+
 	/**
 	* IsInstanceOf(sType)
-	* 
+	*
 	* Checks whether current object is an istance of the given class.
-	* 
+	*
 	* @return bool
 	* @param sType string - Type that we want to match
 	*/
 	this.IsInstanceOf = function(sType) {
 		return this.m_sType == sType;
 	};
-	
+
 	/* Constructor call */
-	
+
 	return this.GF_Instance(sType, jTarget, oOptions);
-	
+
 };
 
 /**
@@ -795,15 +795,15 @@ GF_Instance.s_aoInstances = [];
 
 /**
 * GF_Instance.GetInstance(jNode[, sType])
-* 
+*
 * Returns an object of a GF_Instance derived class associated with the DOM
 * node passed as an argument. If type is specified, it looks for an object
 * of that type. Otherwise it returns the first GF_Instance encountered.
-* 
+*
 * It is recommended to use GetInstace() straight from derived classes.
 * It's not necessary then to pass the second argument - it's being passed
 * automatically.
-* 
+*
 * @return GF_Instance|bool - Associated object or false if not found.
 * @param jNode jQuery - A DOM node being the search subject.
 * @param sType string - Optional name of the object type desired.
@@ -832,9 +832,9 @@ GF_Instance.GetInstance = function(jNode, sType) {
 
 /**
 * GF_Instance.GetId(aClasses)
-* 
+*
 * Returns the GF_Instance id from an array of CSS classes.
-* 
+*
 * @return int - Id.
 * @param aClasses array - CSS classname array.
 */
@@ -849,11 +849,11 @@ GF_Instance.GetId = function(aClasses) {
 
 /**
 * GF_Instance.ReturnInstance(iId)
-* 
+*
 * Returns an instance with the specified id. It checks first if such an instance
 * does exist. It's recommended to use GetInstace rather than call this function
 * directly.
-* 
+*
 * @return GF_Instance|bool - Desired instance or false on failiure.
 * @param id int - Id of the desired object.
 */
@@ -867,17 +867,17 @@ GF_Instance.ReturnInstance = function(iId) {
 
 /**
 * GF_Instance.GetCurrentInstance(mContext, type)
-* 
+*
 * Returns the derived class of GF_Instance instance corresponding to the context.
 * It may be the context itself if called from an appropriate object or a GetInstace
 * result if context is a DOM node.
-* 
+*
 * It is recommended to use GetInstace() straight from derived classes.
 * It's not necessary then to pass the second argument - it's being passed
 * automatically.
-* 
+*
 * It is commonly used in event handlers across the framework.
-* 
+*
 * @return GF_Instance|bool - Desired object or false on error.
 * @param mContext mixed - Pointer to object that is used to begin search.
 * @param type string - Optional name of the object type desired.
@@ -903,20 +903,20 @@ GF_Instance.GetCurrentInstance = function(mContext, sType) {
  *
  * Copyright (c) 2009 Gekosale
  *
- * This library is free software; you can redistribute it and/or 
+ * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version. 
- * 
+ * version 2.1 of the License, or (at your option) any later version.
+ *
  */
  /**
 * GF_Autosuggest(target, options)
-* 
+*
 * Manages the Autosuggest form field. It's a text field with a convinient,
 * dynamically updatet suggestions list.
-* 
+*
 * Possible options (* indicates a required property):
-* - source * - function - pointer to a JavaScript function which returns a 
+* - source * - function - pointer to a JavaScript function which returns a
 *   suggestions set for the specified request. It should acquire two
 *   parameters: one being a request object and the second which is a name of
 *   the function that should be invoked when the results are ready.
@@ -926,27 +926,27 @@ GF_Instance.GetCurrentInstance = function(mContext, sType) {
 *   suggestions will be sent (default = 500).
 * - maxSuggestions - int - maximal number of suggestions to appear
 *   (default = 5).
-* 
+*
 * @return bool - False on error.
 * @param target jQuery - Target which is being used to initialize the newly
 *  created object.
 * @param options object - Configuration options object.
 */
 GF_Autosuggest = GF_Instance.GF_Extend('GF_Autosuggest', function(target, options) {
-	
+
 	/* Declarations */
-	
+
 	this.m_sName;                 // Name of the suggestions field
 	this.m_fSource;               // Pointer to the suggestion source function
 	this.m_iMinLength = 3;        // Minimal number of characters to request suggestions
 	this.m_iDelay = 500;          // Delay in ms of suggestion show
 	this.m_iMaxSuggestions = 5;   // Maximal number of suggestions shown
-	
+
 	this.m_jInput;                // jQuery object pointing to the input field
 	this.m_aSuggestions = [];     // Array of suggestions
 	this.m_iCurrentSuggestion = 0;// Currently focused suggestion
 	this.m_bPending = false;      // Request is being processed
-	
+
 	this.GF_Autosuggest;          // GF_Autosuggest(target, options)
 	this.InitializeEvents;        // InitializeEvents()
 	this.FocusInput;              // FocusInput(event)
@@ -962,15 +962,15 @@ GF_Autosuggest = GF_Instance.GF_Extend('GF_Autosuggest', function(target, option
 	this.DeleteSuggestions;       // DeleteSuggestions()
 	this.ExpandSuggestions;       // ExpandSuggestions()
 	this.RetractSuggestions;      // RetractSuggestions()
-	
+
 	/* Definitions */
-	
+
 	/**
 	* GF_Autosuggest(target, options)
-	* 
+	*
 	* The GF_Autosuggest constructor. Overrides all the default configuration values
 	* with the passed options and inovkes necessary initializers.
-	* 
+	*
 	* @return bool - False on error.
 	* @param target jQuery - Target which is being used to initialize the newly
 	*  created object.
@@ -985,27 +985,27 @@ GF_Autosuggest = GF_Instance.GF_Extend('GF_Autosuggest', function(target, option
 		this.m_iMaxSuggestions = (options.maxSuggestions != undefined) ? options.maxSuggestions : this.m_iMaxSuggestions;
 		this.InitializeEvents();
 	});
-	
+
 	/**
 	* InitializeEvents()
-	* 
+	*
 	* Binds all the necessary event handlers.
-	* 
+	*
 	* @return void
 	*/
 	this.InitializeEvents = function() {
 		this.m_jInput.blur(this.BlurInput).focus(this.FocusInput).click(this.ClickedInput).keypress(this.KeyPressed).keydown(this.KeyDown);
 		$('#auto_suggest-suggestions li').live('click', this.SuggestionChosen).live('mouseover', this.ChangeActiveSuggestion);
 	};
-	
+
 	/**
 	* FocusInput(event)
-	* 
+	*
 	* Handles the Focus event for input field.
-	* 
+	*
 	* Changes the field's name to disable the browser's built-in auto_suggest,
 	* changes the active field indicator and passes command to the GetSuggestions() method.
-	* 
+	*
 	* @return bool - Always true.
 	*/
 	this.FocusInput = GF.NewEventHandler(function(event) {
@@ -1019,15 +1019,15 @@ GF_Autosuggest = GF_Instance.GF_Extend('GF_Autosuggest', function(target, option
 		GF_Autosuggest.GetSuggestions();
 		return true;
 	});
-	
+
 	/**
 	* BlurInput(event)
-	* 
+	*
 	* Handles the Blur event for input field.
-	* 
+	*
 	* Restores the proper field name, unsets the active field indicator and
 	* initiates suggestion box hiding.
-	* 
+	*
 	* @return bool - Always true.
 	*/
 	this.BlurInput = GF.NewEventHandler(function(event) {
@@ -1038,14 +1038,14 @@ GF_Autosuggest = GF_Instance.GF_Extend('GF_Autosuggest', function(target, option
 		auto_suggest.RetractSuggestions();
 		return true;
 	});
-	
+
 	/**
 	* ClickedInput(event)
-	* 
+	*
 	* Handles the Click event for input field.
-	* 
+	*
 	* Invokes suggestions loading.
-	* 
+	*
 	* @return bool - Always true.
 	*/
 	this.ClickedInput = GF.NewEventHandler(function(event) {
@@ -1054,12 +1054,12 @@ GF_Autosuggest = GF_Instance.GF_Extend('GF_Autosuggest', function(target, option
 		}
 		return true;
 	});
-	
+
 	/**
 	* ChangeActiveSuggestion([newSuggestion])
-	* 
+	*
 	* Handles the MouseOver event for suggestion box items.
-	* 
+	*
 	* @return bool - Always true.
 	* @param newSuggestion int - New suggestion's id.
 	*/
@@ -1076,12 +1076,12 @@ GF_Autosuggest = GF_Instance.GF_Extend('GF_Autosuggest', function(target, option
 		$('#auto_suggest-suggestions li:eq(' + auto_suggest.m_iCurrentSuggestion + ')').addClass('active');
 		return true;
 	});
-	
+
 	/**
 	* SuggestionChosen([event])
-	* 
+	*
 	* Chooses the currently active suggestion. May be invoked as an event handler.
-	* 
+	*
 	* @return bool - Always true.
 	*/
 	this.SuggestionChosen = GF.NewEventHandler(function(event) {
@@ -1096,17 +1096,17 @@ GF_Autosuggest = GF_Instance.GF_Extend('GF_Autosuggest', function(target, option
 		auto_suggest.m_jInput.focus();
 		return true;
 	});
-	
+
 	/**
 	* KeyDown(e)
-	* 
+	*
 	* Handles the KeyDown event for input field.
-	* 
+	*
 	* Handles arrows, enter and escape as well as backspace and delete keys.
 	* Takes action appropriate to the key pressed.
-	* 
+	*
 	* For Opera it handles all the character keys.
-	* 
+	*
 	* @return bool - Appropriate state according to the key pressed.
 	*/
 	this.KeyDown = GF.NewEventHandler(function(e) {
@@ -1148,14 +1148,14 @@ GF_Autosuggest = GF_Instance.GF_Extend('GF_Autosuggest', function(target, option
 			return true;
 		}
 	});
-	
+
 	/**
 	* KeyPressed(e)
-	* 
+	*
 	* Handles the KeyPress event for input field.
-	* 
+	*
 	* Handles enter key as well as normal character keys.
-	* 
+	*
 	* @return bool - Appropriate state according to the key pressed.
 	*/
 	this.KeyPressed = GF.NewEventHandler(function(e) {
@@ -1174,15 +1174,15 @@ GF_Autosuggest = GF_Instance.GF_Extend('GF_Autosuggest', function(target, option
 			return true;
 		}
 	});
-	
+
 	/**
 	* LoadSuggestions(suggestions)
-	* 
+	*
 	* Initiates the newly acquired suggestion list display.
-	* 
+	*
 	* Checks whether user still expects the list to appear and if so, invokes
 	* the ShowSuggestions function with the array of suggestions.
-	* 
+	*
 	* @return void
 	* @param suggestions object - response returned by server, including the whole
 	*  new suggestion list.
@@ -1197,14 +1197,14 @@ GF_Autosuggest = GF_Instance.GF_Extend('GF_Autosuggest', function(target, option
 			this.RetractSuggestions();
 		}
 	};
-	
+
 	/**
 	* ShowSuggestions()
-	* 
+	*
 	* Displays the suggestions list. This method bases on the object's m_aSuggestions
 	* vector and doesn't need any parameters. It expects that the suggestions list
 	* (even if empty) already exists and exchanges the list items.
-	* 
+	*
 	* @return void
 	*/
 	this.ShowSuggestions = function() {
@@ -1215,12 +1215,12 @@ GF_Autosuggest = GF_Instance.GF_Extend('GF_Autosuggest', function(target, option
 			ul.append('<li' + ((i == this.m_iCurrentSuggestion) ? ' class="active"' : '') + '>' + this.m_aSuggestions[i].name + '</li>');
 		}
 	};
-	
+
 	/**
 	* CreateSuggestions()
-	* 
+	*
 	* Creates the suggestions list DOM structure and appends it to the document.
-	* 
+	*
 	* @return void
 	*/
 	this.CreateSuggestions = function() {
@@ -1233,12 +1233,12 @@ GF_Autosuggest = GF_Instance.GF_Extend('GF_Autosuggest', function(target, option
 		GF_Autosuggest.suggestions.css('display', 'none');
 		$('body').append(GF_Autosuggest.suggestions);
 	};
-	
+
 	/**
 	* DeleteSuggestions()
-	* 
+	*
 	* Deletes the suggestion list from the document's DOM.
-	* 
+	*
 	* @return void
 	*/
 	this.DeleteSuggestions = function() {
@@ -1246,13 +1246,13 @@ GF_Autosuggest = GF_Instance.GF_Extend('GF_Autosuggest', function(target, option
 			GF_Autosuggest.suggestions.remove();
 		GF_Autosuggest.suggestions = GF.NULL;
 	};
-	
+
 	/**
 	* ExpandSuggestions()
-	* 
+	*
 	* Expands the suggestion list at the correct position below the input field.
 	* If the list doesn't exist it invokes its creation.
-	* 
+	*
 	* @return void
 	*/
 	this.ExpandSuggestions = function() {
@@ -1265,12 +1265,12 @@ GF_Autosuggest = GF_Instance.GF_Extend('GF_Autosuggest', function(target, option
 			GF_Autosuggest.suggestions.fadeIn(200);
 		}
 	};
-	
+
 	/**
 	* RetractSuggestions()
-	* 
+	*
 	* Retracts the suggestion list.
-	* 
+	*
 	* @return void
 	*/
 	this.RetractSuggestions = function() {
@@ -1279,31 +1279,31 @@ GF_Autosuggest = GF_Instance.GF_Extend('GF_Autosuggest', function(target, option
 		var auto_suggest = GF_Autosuggest.GetCurrentInstance(this);
 		GF_Autosuggest.suggestions.fadeOut(200, auto_suggest.DeleteSuggestions);
 	};
-	
+
 	/* Constructor call */
-	
+
 	return this.GF_Autosuggest(target, options);
-	
+
 }, {
-	
+
 	enabled: true,           // Is the auto_suggest enabled? It's temporarily disabled when user presses ESC.
 	active: -1,              // The active auto_suggest.
 	last: -1,                // The last auto_suggest that was selected - useful when handling the Blur event.
 	suggestions: GF.NULL,    // jQuery pointer to the suggestion list.
-	
+
 	/**
 	* GF_Autosuggest.GetSuggestions()
-	* 
+	*
 	* Requests suggestions for the currently active auto_suggest using
 	* its source function.
-	* 
+	*
 	* It sends a two-parameter request to the source function:
 	* - request object:
 	*   > id - auto_suggest Id,
 	*   > q - query typed by the user,
 	*   > n - max. number of suggestions expected.
 	* - name of the JS function to invoke when the answer is ready.
-	* 
+	*
 	* @return void
 	*/
 	GetSuggestions: function() {
@@ -1325,21 +1325,21 @@ GF_Autosuggest = GF_Instance.GF_Extend('GF_Autosuggest', function(target, option
 			n: auto_suggest.m_iMaxSuggestions
 		}, 'GF_Autosuggest.ProcessSuggestions');
 	},
-	
+
 	/**
 	* GF_Autosuggest.ProcessSuggestions(data)
-	* 
+	*
 	* Method that passes the response to the proper auto_suggest object.
-	* 
+	*
 	* It should be called by the server/source function when the response
 	* is ready. The response should be passed as its argument.
-	* 
+	*
 	* Response should consist of following attributed:
 	* - id - id of the auto_suggest (same as acquired in the request)
 	* - q - the query for which the suggestions are
 	* - s - array of objects for each of the suggestions:
 	*   > name - the name that will be displayed in the list
-	* 
+	*
 	* @param data object - Response object.
 	*/
 	ProcessSuggestions: function(data) {
@@ -1352,7 +1352,7 @@ GF_Autosuggest = GF_Instance.GF_Extend('GF_Autosuggest', function(target, option
 			}
 		}
 	}
-	
+
 });
 
 /**
@@ -1361,11 +1361,11 @@ GF_Autosuggest = GF_Instance.GF_Extend('GF_Autosuggest', function(target, option
  *
  * Copyright (c) 2009 Gekosale
  *
- * This library is free software; you can redistribute it and/or 
+ * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version. 
- * 
+ * version 2.1 of the License, or (at your option) any later version.
+ *
  */
  GF_Autosuggest.Language = {
 }
@@ -1376,31 +1376,31 @@ GF_Autosuggest = GF_Instance.GF_Extend('GF_Autosuggest', function(target, option
  *
  * Copyright (c) 2009 Gekosale
  *
- * This library is free software; you can redistribute it and/or 
+ * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version. 
- * 
+ * version 2.1 of the License, or (at your option) any later version.
+ *
  */
  GF_ConflictResolver = GF_Instance.GF_Extend('GF_ConflictResolver', function(jTarget, oOptions) {
-	
+
 	/* Declarations */
-	
+
 	this.m_fUpdateFunction;
 	this.m_fRetryFunction;
 	this.m_fCancelFunction;
 	this.m_aConflictGroups;
-	
+
 	this.GF_ConflictResolver;
 	this.Update;
 	this.Cancel;
 	this.Retry;
 	this.Rewrite;
-	
+
 	this._ProcessData;
-	
+
 	/* Definitions */
-	
+
 	this.GF_ConflictResolver = GF.NewConstructor(function(jTarget, oOptions) {
 		GF_ConflictResolver.s_dInstance = this;
 		this.m_fUpdateFunction = oOptions.update_function;
@@ -1409,18 +1409,18 @@ GF_Autosuggest = GF_Instance.GF_Extend('GF_Autosuggest', function(target, option
 		this.m_aConflictGroups = [];
 		this.Update();
 	});
-	
+
 	this.Update = GF.NewEventHandler(function() {
 		this.m_fUpdateFunction({
 			id: this.m_iId
 		}, 'GF_ConflictResolver.ProcessIncomingData');
 	});
-	
+
 	this._ProcessData = function(oData) {
 		this.m_aConflictGroups = oData.conflict_groups;
 		this.Rewrite();
 	};
-	
+
 	this.Retry = GF.NewEventHandler(function(eEvent) {
 		var dCr = GF_ConflictResolver.GetMain();
 		if (dCr.m_aConflictGroups[eEvent.data.iGroup] != undefined) {
@@ -1435,7 +1435,7 @@ GF_Autosuggest = GF_Instance.GF_Extend('GF_Autosuggest', function(target, option
 		}
 		return false;
 	});
-	
+
 	this.Cancel = GF.NewEventHandler(function(eEvent) {
 		var dCr = GF_ConflictResolver.GetMain();
 		if (dCr.m_aConflictGroups[eEvent.data.iGroup] != undefined) {
@@ -1450,7 +1450,7 @@ GF_Autosuggest = GF_Instance.GF_Extend('GF_Autosuggest', function(target, option
 		}
 		return false;
 	});
-	
+
 	this.Rewrite = GF.NewSafeMethod(function() {
 		if (this.m_aConflictGroups.length) {
 			this.m_jTarget.empty();
@@ -1490,19 +1490,19 @@ GF_Autosuggest = GF_Instance.GF_Extend('GF_Autosuggest', function(target, option
 			});
 		}
 	});
-	
+
 	/* Constructor call */
-	
+
 	return this.GF_ConflictResolver(jTarget, oOptions);
-	
+
 }, {
-	
+
 	s_dInstance: GF.NULL,
-	
+
 	GetMain: GF.NewSafeMethod(function() {
 		return GF_ConflictResolver.s_dInstance;
 	}),
-	
+
 	ProcessIncomingData: GF.NewEventHandler(function(oData) {
 		if ((oData.id == undefined) || !(GF_Instance.s_aoInstances[oData.id] instanceof GF_ConflictResolver)) {
 			GF_Debug.Error('The server has responded with an invalid conflict resolver id (' + oData.id + ').');
@@ -1510,7 +1510,7 @@ GF_Autosuggest = GF_Instance.GF_Extend('GF_Autosuggest', function(target, option
 		var dCr = GF_Instance.ReturnInstance(oData.id);
 		dCr._ProcessData(oData);
 	})
-	
+
 });
 
 /**
@@ -1519,11 +1519,11 @@ GF_Autosuggest = GF_Instance.GF_Extend('GF_Autosuggest', function(target, option
  *
  * Copyright (c) 2009 Gekosale
  *
- * This library is free software; you can redistribute it and/or 
+ * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version. 
- * 
+ * version 2.1 of the License, or (at your option) any later version.
+ *
  */
  GF_ConflictResolver.Language = {
 	conflict_resolving: 'Rozwiązywanie konfliktów',
@@ -1539,11 +1539,11 @@ GF_Autosuggest = GF_Instance.GF_Extend('GF_Autosuggest', function(target, option
  *
  * Copyright (c) 2009 Gekosale
  *
- * This library is free software; you can redistribute it and/or 
+ * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version. 
- * 
+ * version 2.1 of the License, or (at your option) any later version.
+ *
  */
  /*
 * WYSKAKUJACY ALERT
@@ -1571,7 +1571,7 @@ function GF_Alert(title, message, ok, cancel, paramOk, paramCancel) {
 	this.create = function() {
 		// Portowanie starych wywolan alertow do nowego systemu.
 		// W nowych przypadkach nalezy bezwzglednie uzywac pochodnych GAlert.
-		
+
 		if (this.m_cOk instanceof Function) {
 			var mOkParams = this.m_mParamOk;
 			var fCallbackOk = this.m_cOk;
@@ -1594,7 +1594,7 @@ function GF_Alert(title, message, ok, cancel, paramOk, paramCancel) {
 		else {
 			var fCancel = GAlert.DestroyThis;
 		}
-		
+
 		if (this.m_cOk && this.m_cCancel) {
 			GWarning(this.m_sTitle, this.m_sMessage, {
 				bAutoExpand: true,
@@ -1605,7 +1605,7 @@ function GF_Alert(title, message, ok, cancel, paramOk, paramCancel) {
 			});
 			return;
 		}
-		
+
 		if (this.m_cOk) {
 			GWarning(this.m_sTitle, this.m_sMessage, {
 				bAutoExpand: true,
@@ -1615,7 +1615,7 @@ function GF_Alert(title, message, ok, cancel, paramOk, paramCancel) {
 			});
 			return;
 		}
-		
+
 		GWarning(this.m_sTitle, this.m_sMessage);
 		return;
 
@@ -1707,11 +1707,11 @@ GF_Alert.instances = new Array();
  *
  * Copyright (c) 2009 Gekosale
  *
- * This library is free software; you can redistribute it and/or 
+ * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version. 
- * 
+ * version 2.1 of the License, or (at your option) any later version.
+ *
  */
  GF_Alert.Language = {
 	ok: 'OK',
@@ -1724,46 +1724,46 @@ GF_Alert.instances = new Array();
  *
  * Copyright (c) 2009 Gekosale
  *
- * This library is free software; you can redistribute it and/or 
+ * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version. 
- * 
+ * version 2.1 of the License, or (at your option) any later version.
+ *
  */
  GF_ContextMenu = GF_Instance.GF_Extend('GF_ContextMenu', function(jTarget, oOptions) {
-	
+
 	/* Declarations */
-	
+
 	this.m_oOptions;
 	this.m_bActive;
 	this.m_cSup;
 	this.m_cSub;
-	
+
 	this.GF_ContextMenu;
 	this.Show;
 	this.Hide;
 	this.Close;
-	
+
 	this._CloseOther;
 	this._CreateContextMenu;
 	this._WriteAction;
-	
+
 	/* Definitions */
-	
+
 	this.GF_ContextMenu = GF.NewConstructor(function(jTarget, oOptions) {
 		this.m_bActive = false;
 		this.m_oOptions = new GF_ContextMenu_Config(oOptions);
 		this._CreateContextMenu();
 		this.Show();
 	});
-	
+
 	this._CloseOther = function() {
 		var jOther = $('.GF_ContextMenu');
 		for (var i = 0; i < jOther.length; i++) {
 			GF_ContextMenu.GetInstance(jOther.eq(i)).Close();
 		}
 	};
-	
+
 	this._CreateContextMenu = function() {
 		var jMenu = this.m_jTarget;
 		jMenu.append('<div class="w"></div>');
@@ -1782,7 +1782,7 @@ GF_Alert.instances = new Array();
 		jMenu.append(jUl);
 		jMenu.css('left', this.m_oOptions.position.left).css('top', this.m_oOptions.position.top);
 	};
-	
+
 	this._WriteAction = function(oA, sId) {
 		var jLi = $('<li></li>');
 		var jAnchor = $('<a href="#"><img src="' + oA.img + '" alt=""/>' + oA.caption + '</a>');
@@ -1826,7 +1826,7 @@ GF_Alert.instances = new Array();
 		jLi.append(jAnchor);
 		return jLi;
 	};
-	
+
 	this.Show = GF.NewEventHandler(function(eEvent) {
 		var cCm = GF_ContextMenu.GetCurrentInstance(this);
 		//cCm._CloseOther();
@@ -1835,7 +1835,7 @@ GF_Alert.instances = new Array();
 		$('body').append(cCm.m_jTarget);
 		cCm.m_jTarget.fadeIn(200);
 	});
-	
+
 	this.Hide = GF.NewEventHandler(function(eEvent) {
 		var cCm = GF_ContextMenu.GetCurrent();
 		try {
@@ -1861,32 +1861,32 @@ GF_Alert.instances = new Array();
 		}));
 		return true;
 	});
-	
+
 	this.Close = GF.NewEventHandler(function(eEvent) {
 		var cCm = GF_ContextMenu.GetCurrentInstance(this);
 		cCm.m_jTarget.remove();
 		cCm.m_bActive = false;
 	});
-	
+
 	/* Constructor call */
-	
+
 	return this.GF_ContextMenu(jTarget, oOptions);
-	
+
 }, {
-	
+
 	s_iActive: -1,
-	
+
 	Create: function(oOptions) {
 		return new GF_ContextMenu($('<div></div>'), oOptions);
 	},
-	
+
 	HandleHide: GF.NewEventHandler(function(eEvent) {
 		if (GF_ContextMenu.s_iActive == -1) {
 			return true;
 		}
 		return GF_ContextMenu.ReturnInstance(GF_ContextMenu.s_iActive).Hide(eEvent);
 	}),
-	
+
 	GetCurrent: function() {
 		try {
 			if (GF_ContextMenu.s_iActive != -1) {
@@ -1899,7 +1899,7 @@ GF_Alert.instances = new Array();
 			return false;
 		}
 	},
-	
+
 	HideAll: function() {
 		try {
 			if (GF_ContextMenu.s_iActive != -1) {
@@ -1913,7 +1913,7 @@ GF_Alert.instances = new Array();
 			return false;
 		}
 	}
-	
+
 });
 
 /**
@@ -1922,16 +1922,16 @@ GF_Alert.instances = new Array();
  *
  * Copyright (c) 2009 Gekosale
  *
- * This library is free software; you can redistribute it and/or 
+ * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version. 
- * 
+ * version 2.1 of the License, or (at your option) any later version.
+ *
  */
  GF_ContextMenu_Config = GF_Config.GF_Extend('GF_ContextMenu_Config', function(options) {
-	
+
 	this.GF_ContextMenu_Config = GF.NewConstructor(function(options) {
-		
+
 		this.id = GF.NULL;
 		this.parent = GF.NULL;
 		this.actions = [];
@@ -1939,43 +1939,43 @@ GF_Alert.instances = new Array();
 			left: 0,
 			top: 0
 		};
-		
+
 		this._Process(options);
-		
+
 	});
-	
+
 	this._PostProcess = function() {
 	};
-	
+
 	/* Constructor call */
-	
+
 	return this.GF_ContextMenu_Config(options);
-	
+
 });
 
 GF_Datagrid_Data_Provider = function(oOptions, aoData) {
-	
+
 	this.m_iId;
 	this.m_oOptions;
 	this.m_aoData;
 	this.m_oRequest;
 	this.m_aoLastFilter;
 	this.m_sResponseHandler;
-	
+
 	this.GF_Datagrid_Data_Provider;
 	this.Load;
-	
+
 	this.GF_Datagrid_Data_Provider = GF.NewConstructor(function(oOptions, aoData) {
 		this.m_iId = GF_Datagrid_Data_Provider.s_adProviders.push(this) - 1;
 		this.m_oOptions = oOptions;
 		this.m_aoData = aoData;
 		this._ProcessAllRows();
 	});
-	
+
 	this.GetData = function() {
 		return this.m_aoData;
 	};
-	
+
 	this.Load = function(oRequest, sResponseHandler) {
 		this.m_sResponseHandler = sResponseHandler;
 		if (isNaN(oRequest.starting_from)) {
@@ -1996,7 +1996,7 @@ GF_Datagrid_Data_Provider = function(oOptions, aoData) {
 			this.ReturnData();
 		}
 	};
-	
+
 	this.ReturnData = function() {
 		var oRequest = this.m_oRequest;
 		var aoData = this.m_aoData.slice(0);
@@ -2015,7 +2015,7 @@ GF_Datagrid_Data_Provider = function(oOptions, aoData) {
 
         GF_Datagrid.ProcessIncomingData(oResponse);
 	};
-	
+
 	this._CheckIfFilterHasChanged = function(aoFilter) {
 		if (this.m_aoLastFilter.length != aoFilter.length) {
 			return true;
@@ -2027,7 +2027,7 @@ GF_Datagrid_Data_Provider = function(oOptions, aoData) {
 		}
 		return false;
 	};
-	
+
 	this.ChangeData = function(aoData) {
 		if (aoData instanceof Array) {
 			this.m_aoData = aoData;
@@ -2037,7 +2037,7 @@ GF_Datagrid_Data_Provider = function(oOptions, aoData) {
 		}
 		this._ProcessAllRows();
 	};
-	
+
 	this.UpdateRow = function(sId, oNewRow) {
 		for (var i in this.m_aoData) {
 			if (this.m_aoData[i][this.m_oOptions.key] == sId) {
@@ -2062,7 +2062,7 @@ GF_Datagrid_Data_Provider = function(oOptions, aoData) {
 		}
 		GF_Debug.Error('Requested row (' + sId + ') was not found in the DG Data Provider when update was requested.');
 	};
-	
+
 	this.DeleteRow = function(sId) {
 		for (var i in this.m_aoData) {
 			if (this.m_aoData[i][this.m_oOptions.key] == sId) {
@@ -2082,7 +2082,7 @@ GF_Datagrid_Data_Provider = function(oOptions, aoData) {
 		}
 		GF_Debug.Error('Requested row (' + sId + ') was not found in the DG Data Provider when deletion was requested.');
 	};
-	
+
 	this.AddRow = function(oRow) {
 		oRow = this._ProcessRow(oRow);
 		var sId = oRow[this.m_oOptions.key];
@@ -2107,7 +2107,7 @@ GF_Datagrid_Data_Provider = function(oOptions, aoData) {
 			rows: this.m_aoData
 		});
 	};
-	
+
 	this.GetRow = function(sId) {
 		for (var i in this.m_aoData) {
 			if (this.m_aoData[i][this.m_oOptions.key] == sId) {
@@ -2116,20 +2116,20 @@ GF_Datagrid_Data_Provider = function(oOptions, aoData) {
 		}
 		GF_Debug.Warning('Requested row (' + sId + ') was not found in the DG Data Provider.');
 	};
-	
+
 	this._ProcessAllRows = function() {
 		for (var i in this.m_aoData) {
 			this.m_aoData[i] = this._ProcessRow(this.m_aoData[i]);
 		}
 	};
-	
+
 	this._ProcessRow = function(oRow) {
 		if (this.m_oOptions.preProcess instanceof Function) {
 			oRow = this.m_oOptions.preProcess(oRow);
 		}
 		return oRow;
 	};
-	
+
 	this._CalculateAdditionalRows = function(aoRows) {
 		if (!this.m_oOptions.additional_rows) {
 			return [];
@@ -2145,7 +2145,7 @@ GF_Datagrid_Data_Provider = function(oOptions, aoData) {
 		}
 		return aoAdditionalRows;
 	};
-	
+
 	this._FilterData = function(aoRows, oRequest) {
 		var aoFilteredRows = [];
 		for (var i in aoRows) {
@@ -2158,7 +2158,7 @@ GF_Datagrid_Data_Provider = function(oOptions, aoData) {
 					continue;
 				}
 				switch (oRequest.where[j].operator) {
-					
+
 					case 'GE':
 						if (!isNaN(parseFloat(sValue)) && !isNaN(parseFloat(oRequest.where[j].value))) {
 							if (parseFloat(sValue) < parseFloat(oRequest.where[j].value)) {
@@ -2171,7 +2171,7 @@ GF_Datagrid_Data_Provider = function(oOptions, aoData) {
 							}
 						}
 						break;
-						
+
 					case 'LE':
 						if (!isNaN(parseFloat(sValue)) && !isNaN(parseFloat(oRequest.where[j].value))) {
 							if (parseFloat(sValue) > parseFloat(oRequest.where[j].value)) {
@@ -2184,13 +2184,13 @@ GF_Datagrid_Data_Provider = function(oOptions, aoData) {
 							}
 						}
 						break;
-						
+
 					case 'LIKE':
 						if (sValue.toUpperCase().indexOf(oRequest.where[j].value.substr(1, oRequest.where[j].value.length - 2).toUpperCase()) == -1) {
 							bSkipRow = true;
 						}
 						break;
-						
+
 				}
 				if (bSkipRow) {
 					break;
@@ -2202,7 +2202,7 @@ GF_Datagrid_Data_Provider = function(oOptions, aoData) {
 		}
 		return aoFilteredRows;
 	};
-	
+
 	this._SortData = function(aoRows, oRequest) {
 		aoRows.sort(function(a, b) {
 			if ((a[oRequest.order_by] == undefined) || (b[oRequest.order_by] == undefined)) {
@@ -2235,21 +2235,21 @@ GF_Datagrid_Data_Provider = function(oOptions, aoData) {
 		});
 		return aoRows;
 	};
-	
+
 	this._ChunkData = function(aoRows, oRequest) {
 		return aoRows.slice(oRequest.starting_from, oRequest.starting_from + oRequest.limit);
 	};
-	
+
 	this._InvokeEvent = function(sEvent, oParams) {
 		if ((this.m_oOptions.event_handlers != undefined) && (this.m_oOptions.event_handlers[sEvent] != undefined) && (this.m_oOptions.event_handlers[sEvent] instanceof Function)) {
 			this.m_oOptions.event_handlers[sEvent](oParams);
 		}
 	};
-	
+
 	/* Constructor call */
-	
+
 	return this.GF_Datagrid_Data_Provider(oOptions, aoData);
-	
+
 };
 
 GF_Datagrid_Data_Provider.s_adProviders = [];
@@ -2271,18 +2271,18 @@ GF_Datagrid_Data_Provider.ChangeData = function(oData) {
 
 /**
 * GF_Datagrid(jTarget, oOptions)
-* 
-* 
-* 
+*
+*
+*
 * @return bool - False on error.
 * @param jTarget jQuery - Target which is being used to initialize the newly
 *  created object.
 * @param oOptions object - Configuration options object.
 */
 GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
-	
+
 	/* Declarations */
-	
+
 	this.m_oOptions;            // Configuration options
 	this.m_aoColumns;
 	this.m_aiColumnsOrder;
@@ -2298,14 +2298,14 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 	this.m_jModifyColumnsDialog;
 	this.m_s_cContextMenu;
 	this.m_aoAdditionalFilters;
-	
+
 	this.m_iPadding;
 	this.m_iWidth;
 	this.m_iTotalWidth;
 	this.m_iScrollbarWidth;
-	
+
 	this.m_i_SpacerDrag;
-	
+
 	this.m_iFirstRecordId;
 	this.m_iRows;
 	this.m_iTotalRows;
@@ -2314,7 +2314,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 	this.m_iOrderDirection;
 	this.m_iPage;
 	this.m_iTotalPages;
-	
+
 	this.GF_Datagrid;               // GF_Datagrid(jTarget, oOptions)
 	this.GetSelected;               // GetSelected()
 	this.IsSelected;                // IsSelected(mRow)
@@ -2337,20 +2337,20 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 	this.GetCurrentRow;             // GetCurrentRow(jTr)
 	this.ChangeAdditionalFilters;   // ChangeAdditionalFilters(aoFilters)
 	this.GetRowIdByAttribute;       // GetRowIdByAttribute(sAttribute, mValue)
-	
+
 	this._ParseOptions;             // _ParseOptions(oOptions)
 	this._ParseColumnOptions;       // _ParseColumnOptions()
-	
+
 	this._InitializeSpacers;        // _InitializeSpacers()
 	this._SpacerDragInit;           // _SpacerDragInit(eEvent)
 	this._SpacerDrag;               // _SpacerDrag(eEvent)
 	this._SpacerDragStop;           // _SpacerDragStop(eEvent)
-	
+
 	this.WaitingScreenShow;        // WaitingScreenShow()
 	this.WaitingScreenHide;        // WaitingScreenHide()
-	
+
 	this._ProcessData;              // _ProcessData(data)
-	
+
 	this._WriteRow;                 // _WriteRow(oR)
 	this._WriteRowsActions;         // _WriteRowsActions(oR)
 	this._WriteRowsAction;          // _WriteRowsAction(oA)
@@ -2359,15 +2359,15 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 	this._WriteGroupAction;         // _WriteGroupAction(oA)
 	this._ProcessGroupActions;      // _ProcessGroupActions(aoActions)
 	this._ShowSelection;            // _ShowSelection(jTr)
-	
+
 	this._ChangeOrder;              // _ChangeOrder(eEvent)
-	
+
 	this._GetNameForTd;             // _GetNameForTd(jTd)
 	this._GetIdFromTr;              // _GetIdFromTr(jTr)
 	this._GetTrForId;               // _GetTrForId(sId)
 	this._GetColumnByName;          // _GetColumnByName(sId)
 	this._GetConditionForField;     // _GetConditionForField(sId)
-	
+
 	this._CreateDatagrid;           // _CreateDatagrid()
 	this._CreateHeader;             // _CreateHeader()
 	this._WriteHeader               // _WriteHeader()
@@ -2377,14 +2377,14 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 	this._CreateBody;               // _CreateBody()
 	this._CreateFooter;             // _CreateFooter()
 	this._CreateModifyColumnsDialog;// _CreateModifyColumnsDialog()
-	
+
 	this._InitializeWidths;         // _InitializeWidths()
 	this._UpdateWidths;             // _UpdateWidths()
 	this._UpdateHeights;            // _UpdateHeights()
-	
+
 	this._InitializeEvents;         // _InitializeEvents()
 	this._InitializeRowEvents;      // _InitializeRowEvents(jTr)
-	
+
 	this._HandleGoToPage;           // _HandleGoToPage(eEvent)
 	this._HandleGoToNext;           // _HandleGoToNext(eEvent)
 	this._HandleGoToPrevious;       // _HandleGoToPrevious(eEvent)
@@ -2397,26 +2397,26 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 	this._HandleRestoreColumns;     // _HandleRestoreColumns(eEvent)
 	this._HandleShowContextMenu;    // _HandleShowContextMenu(eEvent)
 	this._HandleHideContextMenu;    // _HandleHideContextMenu(eEvent)
-	
+
 	this._NewRowEventHandler;       // _NewRowEventHandler(fHandler)
-	
+
 	/* Definitions */
-	
+
 	/**
 	* GF_Datagrid(target, options)
 	*
 	* The GF_Datagrid constructor. Invokes all the necessary initialization
 	* functions.
-	* 
+	*
 	* @return bool - False on error.
 	* @param target jQuery - Target which is being used to initialize the newly
 	*  created object.
 	* @param options object - Configuration options object.
 	*/
 	this.GF_Datagrid = GF.NewConstructor(function(jTarget, oOptions) {
-		
+
 		this.RefreshTarget();
-		
+
 		this.m_aoColumns = [];
 		this.m_aoRows = [];
 		this.m_aoAdditionalRows = [];
@@ -2424,7 +2424,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		this.m_oColumnsLookup = {};
 		this.m_oOptions = {};
 		this.m_asSelected = [];
-		
+
 		this.m_iFirstRecordId = 0;
 		this.m_iRows = 0;
 		this.m_iTotalRows = 0;
@@ -2433,31 +2433,31 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		this.m_iOrderDirection = '';
 		this.m_iPage = 0;
 		this.m_iTotalPages = 0;
-		
+
 		this.m_bDontLoad = false;
 		this.m_bFirstLoad = true;
-		
+
 		this.m_i_SpacerDrag = GF.NULL;
-		
+
 		this._ParseOptions(oOptions);
-		
+
 		this.m_sOrderBy = this.m_oOptions.mechanics.default_sorting;
 		this.m_iOrderDirection = this._GetColumnByName(this.m_sOrderBy).sorting.default_order;
-		
+
 		this._CreateDatagrid();
 		this._InitializeWidths();
 		this._InitializeSpacers();
 		this._InitializeEvents();
 		this.m_oOptions.appearance.filter;
-		
+
 		this.LoadData();
-		
+
 	});
-	
+
 	this.GetSelected = function() {
 		return this.m_asSelected;
 	};
-	
+
 	this.IsSelected = function(mRow) {
 		var sId;
 		if (mRow instanceof $) {
@@ -2479,7 +2479,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		}
 		return false;
 	};
-	
+
 	this.ClearSelection = GF.NewEventHandler(function(eEvent) {
 		var dDg = GF_Datagrid.GetCurrentInstance(this);
 		var aiSelected = dDg.m_asSelected.concat([]);
@@ -2487,22 +2487,22 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 			dDg.DeselectRow(aiSelected[i]);
 		}
 	});
-	
+
 	this.LoadData = function() {
-		
+
 		var dDg = GF_Datagrid.GetCurrentInstance(this);
-		
+
 		if (dDg.m_bDontLoad) {
 			return;
 		}
-		
+
 		var aoColumns = [];
 		var aConditions = [];
-		
+
 		dDg.WaitingScreenShow(function() {
 
 			var dDg = GF_Datagrid.GetCurrentInstance(this);
-			
+
 			for (var i in dDg.m_aiColumnsOrder) {
 				var oC = dDg.m_aoColumns[dDg.m_aiColumnsOrder[i]];
 				aoColumns.push(oC.id);
@@ -2510,11 +2510,11 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 					aConditions = aConditions.concat(dDg._GetConditionForField(oC.id));
 				}
 			}
-			
+
 			aConditions = aConditions.concat(this.m_aoAdditionalFilters);
-			
+
 			var sCookie = sessionStorage.getItem('GF_Datagrid_State_' + Base64.encode(window.location.pathname + dDg.m_oOptions.id));
-			
+
 			var oRequest = {
 				id: dDg.m_iId,
 				from: aoColumns.join(', '),
@@ -2534,22 +2534,22 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 						oRequest =  $.parseJSON(Base64.decode(window.location.hash));
 					}
 				}
-				
+
 				var state = Base64.encode(JSON.stringify(oRequest));
 				window.location.hash = state;
-				
+
 				sessionStorage.setItem('GF_Datagrid_State_' + Base64.encode(window.location.pathname + dDg.m_oOptions.id), state);
-				
+
 				this._ChangeOrderIndicator(oRequest.order_by,  oRequest.order_dir);
 			}
-			
+
 			dDg.m_oOptions.event_handlers.load(oRequest);
-			
+
 			this.m_bFirstLoad = false;
 		});
 
 	};
-	
+
 	this.MakeRequest = function(sUrl, oRequest, fCallBack) {
 		$.ajax({
 		  type: "POST",
@@ -2559,17 +2559,17 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		  dataType: 'json'
 		});
 	}
-	
+
 	this.Reset = function() {
-		
+
 		var dDg = GF_Datagrid.GetCurrentInstance(this);
-		
+
 		dDg.m_jFilter.find('input, select').val('').parent().find('.faux span').text('');
 		dDg.m_iPage = -1;
 		dDg.GoToFirst();
-		
+
 	};
-	
+
 	this.Rewrite = function() {
 		this.m_jBody.empty();
 		this.m_jAdditionalRows.empty();
@@ -2594,7 +2594,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		}
 		this.UpdateSelection();
 	};
-	
+
 	this.SelectThisRow = GF.NewEventHandler(function(eEvent) {
 		var dDg = GF_Datagrid.GetCurrentInstance(this);
 		var jTr = $(this).is('tr') ? $(this) : $(this).parents('tr:first');
@@ -2616,7 +2616,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		}
 		return false;
 	});
-	
+
 	this.SelectRow = function(sId) {
 		var jTr = this._GetTrForId(sId);
 		if (GF.InArray(this.m_asSelected, sId)) {
@@ -2634,7 +2634,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		}
 		this.UpdateSelection();
 	};
-	
+
 	this.DeselectRow = function(sId) {
 		var jTr = this._GetTrForId(sId);
 		GF.DeleteFromArray(this.m_asSelected, sId);
@@ -2645,19 +2645,19 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		}
 		this.UpdateSelection();
 	};
-	
+
 	this.SelectVisible = function() {
 		for (var i in this.m_aoRows) {
 			this.SelectRow(this.m_aoRows[i][this.m_oOptions.mechanics.key]);
 		}
 	};
-	
+
 	this.DeselectVisible = function() {
 		for (var i in this.m_aoRows) {
 			this.DeselectRow(this.m_aoRows[i][this.m_oOptions.mechanics.key]);
 		}
 	};
-	
+
 	this.GoToPage = function(iPage) {
 		var iNewPage = Math.max(0, Math.min(this.m_iTotalPages - 1, iPage));
 		if (iNewPage == this.m_iPage) {
@@ -2668,23 +2668,23 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		this.UpdateIndicators();
 		this.LoadData();
 	};
-	
+
 	this.GoToNext = function() {
 		this.GoToPage(this.m_iPage + 1);
 	};
-	
+
 	this.GoToPrevious = function() {
 		this.GoToPage(this.m_iPage - 1);
 	};
-	
+
 	this.GoToFirst = function() {
 		this.GoToPage(0);
 	};
-	
+
 	this.GoToLast = function() {
 		this.GoToPage(this.m_iTotalPages - 1);
 	};
-	
+
 	this.UpdateSelection = function() {
 		var iSelected = 0;
 		for (var i in this.m_aoRows) {
@@ -2708,7 +2708,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		this.UpdateIndicators();
 		$('[name="' + this.m_oOptions.id + '"]').val(this.m_asSelected.join(',')).change();
 	};
-	
+
 	this.UpdateIndicators = function() {
 		if (this.m_jFooter) {
 			this.m_jFooter.find('.GF_Datagrid_records_from').text((this.m_iFilteredRows == 0) ? 0 : this.m_iFirstRecordId + 1);
@@ -2744,7 +2744,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 			this.m_oOptions.external_indicators.total_pages.text(this.m_iTotalPages);
 		}
 	};
-	
+
 	this.ToggleFilters = GF.NewEventHandler(function(eEvent) {
 		var dDg = GF_Datagrid.GetCurrentInstance(this);
 		dDg.m_jFilter.find('td:not(.GF_Datagrid_Col__retract_filters) > span').slideToggle(500, GF.NewEventHandler(function(eEvent) {
@@ -2757,7 +2757,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		dDg.m_jFilter.find('.GF_Datagrid_Col__retract_filters img').attr('src', (sImgSrc != GF_Datagrid.Files.expand_filters_icon) ? GF_Datagrid.Files.expand_filters_icon : GF_Datagrid.Files.retract_filters_icon);
 		return false;
 	});
-	
+
 	this.GetRow = function(sId) {
 		for (var i in this.m_aoRows) {
 			if (this.m_aoRows[i][this.m_oOptions.mechanics.key] == sId) {
@@ -2767,16 +2767,16 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		GF_Debug.Warning('Requested row (' + sId + ') was not found.');
 		return false;
 	};
-	
+
 	this.GetCurrentRow = function(jTr) {
 		return this.GetRow(this._GetIdFromTr(jTr));
 	};
-	
+
 	this.ChangeAdditionalFilters = GF.NewSafeMethod(function(aoFilters) {
 		this.m_aoAdditionalFilters = aoFilters;
 		this.LoadData();
 	});
-	
+
 	this.GetRowIdByAttribute = GF.NewSafeMethod(function(sAttribute, mValue) {
 		for (var i in this.m_aoRows) {
 			if ((this.m_aoRows[i][sAttribute] == mValue)) {
@@ -2785,7 +2785,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		}
 		return false;
 	});
-	
+
 	this.WaitingScreenShow = function(fCompletionHandler) {
 		this.m_jTarget.children('.progress').remove();
 		var jProgressBar = $('<div class="progress"><div class="bar"><div class="indicator"></div></div></div>');
@@ -2802,22 +2802,22 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 			$(this).remove();
 		}));
 	};
-	
+
 	this._ParseOptions = function(oOptions) {
 		this.m_oOptions = new GF_Datagrid_Config(oOptions);
-		
+
 		if ((this.m_oOptions.id == GF.NULL) || !(this.m_oOptions.id.length)) GF_Debug.Error('Datagrid\'s id isn\'t set correctly. Datagrid initialization failed.');
-		
+
 		this._ParseColumnOptions();
-		
+
 		this._ProcessRowsActions(this.m_oOptions.row_actions);
 		this._ProcessRowsActions(this.m_oOptions.context_actions);
 		this._ProcessGroupActions(this.m_oOptions.group_actions);
-		
+
 		this.m_aoAdditionalFilters = this.m_oOptions.additional_filters;
-		
+
 	};
-	
+
 	this._ParseColumnOptions = function() {
 		this.m_aoColumns = [];
 		this.m_aiColumnsOrder = [];
@@ -2871,8 +2871,8 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 			}
 		}
 	};
-	
-	
+
+
 	this._InitializeSpacers = function() {
 		this.m_jTarget.children('.spacer').remove();
 		var iOffset = 0;
@@ -2893,7 +2893,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 			jSpacer.css('left', iOffset - Math.ceil(parseInt(jSpacer.css('width')) / 2));
 		}
 	};
-	
+
 	this._SpacerDragInit = GF.NewEventHandler(function(eEvent) {
 		var dDg = GF_Datagrid.GetCurrentInstance(this);
 		if (dDg.m_i_SpacerDrag != GF.NULL) {
@@ -2903,7 +2903,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		dDg.m_i_SpacerDrag = dDg.m_jTarget.find('.spacer').index($(this));
 		return false;
 	});
-	
+
 	this._SpacerDrag = GF.NewEventHandler(function(eEvent) {
 		var dDg = GF_Datagrid.GetCurrentInstance(this);
 		if (dDg.m_i_SpacerDrag == GF.NULL) {
@@ -2945,14 +2945,14 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		dDg._UpdateWidths();
 		return true;
 	});
-	
+
 	this._SpacerDragStop = GF.NewEventHandler(function(eEvent) {
 		var dDg = GF_Datagrid.GetCurrentInstance(this);
 		dDg.m_jTarget.find('.spacer:eq(' + dDg.m_i_SpacerDrag + ')').removeClass('spacer-on');
 		dDg.m_i_SpacerDrag = GF.NULL;
 		return false;
 	});
-	
+
 	this._ProcessData = function(oData) {
 		this.m_iRows = parseInt(oData.rows_num);
 		this.m_iTotalRows = parseInt(oData.total);
@@ -2964,7 +2964,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		this.m_aoAdditionalRows = oData.additional_rows ? oData.additional_rows : [];
 		this.Rewrite();
 	};
-	
+
 	this._WriteRow = function(oR) {
 		var jTr = $('<tr></tr>');
 		if (this.m_oOptions.event_handlers.process instanceof Function) {
@@ -3063,7 +3063,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		this._InitializeRowEvents(jTr);
 		return jTr;
 	};
-	
+
 	this._WriteAdditionalRow = function(oR) {
 		var jTr = $('<tr></tr>');
 		var oD = oR;
@@ -3114,7 +3114,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		}
 		return jTr;
 	};
-	
+
 	this._WriteRowsActions = function(oR) {
 		var sId = oR[this.m_oOptions.mechanics.key];
 		var jUl = $('<ul></ul>');
@@ -3129,7 +3129,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		}
 		return jUl;
 	};
-	
+
 	this._WriteRowsAction = function(oA, sId) {
 		var jLi = $('<li></li>');
 		var jAnchor = $('<a href="#" title="' + oA.caption + '"><img src="' + oA.img + '" alt="' + oA.caption + '"/></a>');
@@ -3165,7 +3165,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		jLi.append(jAnchor);
 		return jLi;
 	};
-	
+
 	this._ProcessRowsActions = function(aoActions) {
 		for (var i in aoActions) {
 			var oA = aoActions[i];
@@ -3200,7 +3200,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		}
 		return aoActions;
 	};
-	
+
 	this._WriteGroupActions = function() {
 		var jUl = $('<ul></ul>');
 		for (var i in this.m_oOptions.group_actions) {
@@ -3209,7 +3209,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		}
 		return jUl;
 	};
-	
+
 	this._WriteGroupAction = function(oA) {
 		var jLi = $('<li></li>');
 		var jAnchor = $('<a href="#" title="' + oA.caption + '"><img src="' + oA.img + '" alt="' + oA.caption + '"/></a>');
@@ -3254,7 +3254,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		jLi.append(jAnchor);
 		return jLi;
 	};
-	
+
 	this._ProcessGroupActions = function(aoActions) {
 		for (var i in aoActions) {
 			var oA = aoActions[i];
@@ -3271,7 +3271,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		}
 		return aoActions;
 	};
-	
+
 	this._ProcessAction = function(oA) {
 		if (oA.processed) {
 			return oA;
@@ -3291,12 +3291,12 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		oA.action = fNewAction;
 		return oA;
 	};
-	
+
 	this._ShowSelection = function(jTr) {
 		jTr.addClass('selected');
 		GF.CheckboxesCheck(jTr);
 	};
-	
+
 	this._ChangeOrder = GF.NewEventHandler(function(eEvent) {
 		var dDg = GF_Datagrid.GetCurrentInstance(this);
 		var sCol = dDg._GetNameForTd($(this));
@@ -3311,14 +3311,14 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		$(this).children('span').prepend('<img src="' + ((dDg.m_iOrderDirection == GF_Datagrid.SORT_DIR_ASC) ? GF_Datagrid.Files.order_asc : GF_Datagrid.Files.order_desc) + '" class="order_indicator"/>');
 		dDg.LoadData();
 	});
-	
+
 	this._ChangeOrderIndicator = function(column, direction) {
 		var dDg = GF_Datagrid.GetCurrentInstance(this);
 		dDg.m_jHeader.find('.order_indicator').remove();
 		$('th.GF_Datagrid_Col_' + column).children('span').prepend('<img src="' + ((direction == 'asc') ? GF_Datagrid.Files.order_asc : GF_Datagrid.Files.order_desc) + '" class="order_indicator"/>');
 	};
-	
-	
+
+
 	this._GetNameForTd = function(jTd) {
 		if (!(jTd instanceof $)) {
 			GF_Debug.Error('The argument passed to the datagrid\'s _GetNameForTd method was not a jQuery object: ' + typeof jTd + '.');
@@ -3336,7 +3336,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		var sId = GF.GetChunkFromClass(jTd, 'GF_Datagrid_Col_');
 		return sId;
 	};
-	
+
 	this._GetIdFromTr = function(jTr) {
 		if (!(jTr instanceof $)) {
 			GF_Debug.Error('Invalid type of argument passed to the datagrid\'s _GetIdFromTr method: ' + typeof jTr + '. Should be a jQuery instance.');
@@ -3347,7 +3347,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		}
 		return jTr.find('.GF_Datagrid_Row_Id').text();
 	};
-	
+
 	this._GetTrForId = function(sId) {
 		var jTr = this.m_jBody.find('tr .GF_Datagrid_Row_Id:contains("' + sId + '")');
 		for (var i = 0; i < jTr.length; i++) {
@@ -3358,19 +3358,19 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		}
 		return jTr;
 	};
-	
+
 	this._GetColumnByName = function(sId) {
 		if (this.m_oColumnsLookup[sId] == undefined) {
 			GF_Debug.Warning('Column with the specified name (' + sId + ') was not found in the datagrid.');
 		}
 		return this.m_aoColumns[this.m_oColumnsLookup[sId]];
 	}
-	
+
 	this._GetConditionForField = function(sId) {
 		var oC = this._GetColumnByName(sId);
 		var aConditions = [];
 		switch (oC.filter.type) {
-			
+
 			case GF_Datagrid.FILTER_BETWEEN:
 				var jField = this.m_jFilter.find('.GF_Datagrid_Col_' + oC.id + ' input.from');
 				if (!jField.length) {
@@ -3401,7 +3401,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 					});
 				};
 				break;
-			
+
 			case GF_Datagrid.FILTER_INPUT:
 			case GF_Datagrid.FILTER_AUTOSUGGEST:
 				var jField = this.m_jFilter.find('.GF_Datagrid_Col_' + oC.id + ' input');
@@ -3419,7 +3419,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 					});
 				}
 				break;
-			
+
 			case GF_Datagrid.FILTER_SELECT:
 				var jField = this.m_jFilter.find('.GF_Datagrid_Col_' + oC.id + ' select');
 				if (!jField.length) {
@@ -3437,7 +3437,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 					});
 				}
 				break;
-			
+
 			case GF_Datagrid.FILTER_TREE:
 				var jPanel = this.m_jFilter.find('.GF_Datagrid_Col_' + oC.id + ' .GF_Datagrid_filter_tree').data('jPanel');
 				if (jPanel == undefined) {
@@ -3452,11 +3452,11 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 					});
 				}
 				break;
-			
+
 		}
 		return aConditions;
 	};
-	
+
 	this._BuildTreeConditions = function(jUl) {
 		var asConditions = [];
 		var jChildren = jUl.children('li');
@@ -3471,8 +3471,8 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		}
 		return asConditions;
 	};
-	
-	
+
+
 	this._InitializeWidths = function() {
 		this.m_iTotalWidth = this.m_jTarget.width();
 		if (!this.m_oOptions.mechanics.no_column_modification || this.m_oOptions.appearance.max_height) {
@@ -3488,7 +3488,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		else {
 			this.m_iPadding = 4;
 		}
-		
+
 		var iWidthLeft = this.m_iWidth;
 		var i;
 		var iNumberOfAutoWidths = 0;
@@ -3509,13 +3509,13 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 			iWidthLeft -= iWidth;
 			oC.appearance.width = iWidth;
 		}
-		
+
 		if (iWidthLeft != 0) {
-			
+
 			iNumberOfColumnsLeft = this.m_aiColumnsOrder.length;
 			if (this.m_oOptions.appearance.column_options) iNumberOfColumnsLeft--;
 			if (this.m_oOptions.appearance.column_select) iNumberOfColumnsLeft--;
-			
+
 			for (var i in this.m_aiColumnsOrder) {
 				var oC = this.m_aoColumns[this.m_aiColumnsOrder[i]];
 				if ((oC.id == '_options') || (oC.id == '_select')) {
@@ -3525,7 +3525,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 				iWidthLeft -= iWidth;
 				oC.appearance.width += iWidth;
 			}
-			
+
 			if (iWidthLeft != 0) {
 				if (this.m_oOptions.appearance.column_options) {
 					var oLastColumn = this.m_aoColumns[this.m_aiColumnsOrder[this.m_aiColumnsOrder.length - 2]];
@@ -3535,9 +3535,9 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 				}
 				oLastColumn.appearance.width += iWidthLeft;
 			}
-			
+
 		}
-		
+
 		var iWidth = 0;
 		var bEqualizeWidths = false;
 		for (var i in this.m_aiColumnsOrder) {
@@ -3550,7 +3550,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 				break;
 			}
 		}
-		
+
 		if (bEqualizeWidths) {
 			iWidthLeft = this.m_iWidth;
 			iNumberOfColumnsLeft = this.m_aiColumnsOrder.length;
@@ -3575,11 +3575,11 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 				oLastColumn.appearance.width += iWidthLeft;
 			}
 		}
-		
+
 		this._UpdateWidths();
 		this._UpdateHeights();
 	};
-	
+
 	this._UpdateWidths = function() {
 		this.m_oOptions.appearance.header && this.m_jHeader.find('.GF_Datagrid_Col__modify_columns').css('width', this.m_iScrollbarWidth);
 		for (i in this.m_aiColumnsOrder) {
@@ -3601,7 +3601,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 			this.m_jBody.find('.GF_Datagrid_Col_' + oC.id + ' .full-width').css('width', oC.appearance.width - 2 * this.m_iPadding - 2);
 		}
 	};
-	
+
 	this._UpdateHeights = function() {
 		var jSpacers = this.m_jTarget.find('.spacer');
 		for (var i = 0; i < jSpacers.length; i++) {
@@ -3622,8 +3622,8 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 			this.m_jHeader.find('.GF_Datagrid_Col__modify_columns span').css('height', this.m_jHeader.get(0).clientHeight).css('line-height', this.m_jHeader.get(0).clientHeight + 'px');
 		}
 	};
-	
-	
+
+
 	this._CreateDatagrid = function() {
 		this.m_oOptions.mechanics.create_input && (this.m_jInput = this.m_jTarget.append('<input type="hidden" name="' + this.m_oOptions.id + '"/>'));
 		this.m_jTarget.append(this._CreateHeader());
@@ -3640,7 +3640,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 			this.m_jHeader.css('display', 'none');
 		}
 	};
-	
+
 	this._CreateHeader = function() {
 		var jHeader = $('<div class="header"></div>');
 		var jTable = $('<table cellspacing="0"></table>');
@@ -3652,7 +3652,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		this.m_oOptions.appearance.filter && jTable.append(this._CreateFilter());
 		return jHeader;
 	};
-	
+
 	this._WriteHeader = function() {
 		this.m_jHeader.empty();
 		for (var i in this.m_aiColumnsOrder) {
@@ -3669,7 +3669,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		}
 		(!this.m_oOptions.mechanics.no_column_modification || this.m_oOptions.appearance.max_height) && this.m_jHeader.append('<th class="GF_Datagrid_Col__modify_columns"><span>' + (!this.m_oOptions.mechanics.no_column_modification ? '<a href="#"><img src="' + GF_Datagrid.Files.modify_columns_icon + '" alt="' + GF_Datagrid.Language.modify_columns + '" title="' + GF_Datagrid.Language.modify_columns + '"/></a>' : '') + '</span></th>');
 	};
-	
+
 	this._CreateFilter = function() {
 		var jTbody = $('<tbody></tbody>');
 		var jTr = $('<tr></tr>');
@@ -3678,13 +3678,13 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		this._WriteFilters();
 		return jTbody;
 	};
-	
+
 	this._WriteFilters = function() {
 		this.m_jFilter.empty();
 		var oRequest = {};
 		var dDg = GF_Datagrid.GetCurrentInstance(this);
 		var sCookie = sessionStorage.getItem('GF_Datagrid_State_' + Base64.encode(window.location.pathname + dDg.m_oOptions.id));
-		
+
 		if(this.m_oOptions.mechanics.persistent && this.m_bFirstLoad){
 			if(sCookie){
 				var oRequest =  $.parseJSON(Base64.decode(sCookie));
@@ -3693,7 +3693,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 				var oRequest =  $.parseJSON(Base64.decode(window.location.hash));
 			}
 		}
-		
+
 		for (var i in this.m_aiColumnsOrder) {
 			var oC = this.m_aoColumns[this.m_aiColumnsOrder[i]];
 			var default_value = '';
@@ -3719,7 +3719,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		}
 		(!this.m_oOptions.mechanics.no_column_modification || this.m_oOptions.appearance.max_height) && this.m_jFilter.append('<td class="GF_Datagrid_Col__retract_filters"><span><a href="#"><img src="' + GF_Datagrid.Files.retract_filters_icon + '" alt="' + GF_Datagrid.Language.retract_filters + '" title="' + GF_Datagrid.Language.retract_filters + '"/></a></span></td>');
 	};
-	
+
 	this._WriteFilter = function(oF, default_value, default_value_min, default_value_max) {
 		var dDg = this;
 		var jFilter = $('<span></span>');
@@ -3732,7 +3732,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 				jField.keydown(this.PreventEnter);
 				jFilter.append(jField);
 				break;
-			
+
 			case GF_Datagrid.FILTER_AUTOSUGGEST:
 				jFilter.addClass('GF_Datagrid_filter_auto_suggest');
 				var jField = $('<input type="text" value="' + default_value.replace(/%/g,"") + '"/>');
@@ -3747,7 +3747,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 					minLength: this.m_oOptions.mechanics.auto_suggest_min_length
 				});
 				break;
-			
+
 			case GF_Datagrid.FILTER_BETWEEN:
 				jFilter.addClass('GF_Datagrid_filter_between');
 				var jFieldFrom = $('<label><span>' + GF_Datagrid.Language.from + '</span><input type="text" class="from" value="' + default_value_min + '"/></label>');
@@ -3761,7 +3761,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 				jFilter.append(jFieldFrom);
 				jFilter.append(jFieldTo);
 				break;
-			
+
 			case GF_Datagrid.FILTER_SELECT:
 				jFilter.addClass('GF_Datagrid_filter_select');
 				var jSelect = $('<select></select>');
@@ -3774,7 +3774,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 				jFilter.append($('<span/>').append(jSelect));
 				jSelect.GSelect();
 				break;
-			
+
 			case GF_Datagrid.FILTER_TREE:
 				jFilter.addClass('GF_Datagrid_filter_tree');
 				var jPanel = $('<div class="GF_Datagrid_filter_tree_panel"/>');
@@ -3842,14 +3842,14 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 				jPanel.append(jTriggerRetract);
 				this._UpdateTreeList(jFilter, true);
 				break;
-			
+
 			default:
 				jFilter.html('&nbsp;');
-			
+
 		}
 		return jFilter;
 	};
-	
+
 	this._UpdateTreeList = function(jTree, bNoPositionUpdate) {
 		var jList = jTree.find('ul:first');
 		jList.empty();
@@ -3877,7 +3877,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 			});
 		}
 	};
-	
+
 	this._BuildTreeList = function(jUl) {
 		var sList = '';
 		var jChildren = jUl.children('li');
@@ -3903,7 +3903,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		}
 		return sList;
 	};
-	
+
 	this._WriteTreeItem = function(jLi, oItem, bChecked, oFilter) {
 		var dDg = GF_Datagrid.GetCurrentInstance(this);
 		var jField = $('<input type="checkbox" value="1"' + (bChecked ? ' checked="checked"' : '') + '/>');
@@ -3944,7 +3944,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 			dDg._UpdateTreeList(jLi.closest('.GF_Datagrid_filter_tree_panel').data('jFilter'));
 		});
 	};
-	
+
 	this._OnTreeExpand = function(eEvent) {
 		var dDg = eEvent.dDg;
 		var sId = $(this).closest('li').data('sId');
@@ -3973,14 +3973,14 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 				}));
 			}
 			else {
-				
+
 			}
 		}
 		else {
 			$(this).closest('li').removeClass('expanded');
 		}
 	};
-	
+
 	this.PreventEnter = function(eEvent) {
 		if (eEvent.keyCode == 13) {
 			eEvent.preventDefault();
@@ -3988,7 +3988,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 			$(this).change();
 		}
 	};
-	
+
 	this._CreateBody = function() {
 		var jBody = $('<div class="body"></div>');
 		var jTable = $('<table cellspacing="0"></table>');
@@ -4000,7 +4000,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		}
 		return jBody;
 	};
-	
+
 	this._CreateAdditionalRows = function() {
 		var jBody = $('<div class="additional_rows"></div>');
 		var jTable = $('<table cellspacing="0"></table>');
@@ -4009,7 +4009,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		jBody.append(jTable.append(jTbody));
 		return jBody;
 	};
-	
+
 	this._CreateFooter = function() {
 		var jFooter = $('<div class="footer"></div>');
 		this.m_jFooter = jFooter;
@@ -4030,7 +4030,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		jFooter.append(jRecordsShown);
 		return jFooter;
 	};
-	
+
 	this._CreateModifyColumnsDialog = function() {
 		var jDialog = $('<div></div>');
 		jDialog.attr('id', 'GF_Modify_Columns_Datagrid_' + this.m_iId);
@@ -4078,15 +4078,15 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		jDialog.append('<div class="shadow-b"></div>');
 		return jDialog;
 	};
-	
-	
+
+
 	this._InitializeEvents = function() {
 		this.m_jTarget.keypress(GF.StopPropagation).keydown(GF.StopPropagation);
 		$(document).on('click', '.header thead .GF_Datagrid_Col__modify_columns a', this._HandleToggleColumns);
 		$(document).on('click', '.header thead .GF_Datagrid_Col__select input:checkbox', this._HandleToggleSelectVisible);
 		$(document).on('click', '.header thead th.sortable', this._ChangeOrder);
 		$(document).on('click', '.header tbody .GF_Datagrid_Col__retract_filters a', this.ToggleFilters);
-		
+
 		this.m_jTarget.mousemove(this._SpacerDrag).mouseup(this._SpacerDragStop);
 		if (this.m_jFooter && this.m_jFooter.length) {
 			this.m_jFooter.find('.GF_Datagrid_clear_selection').click(this.ClearSelection);
@@ -4100,7 +4100,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		$(document).on('click', '.GF_Datagrid_Modify_columns .restore a', this._HandleRestoreColumns);
 		$(document).on('mousedown', '.GF_Datagrid_Col__select input', GF.PreventDefault);
 	};
-	
+
 	this._InitializeRowEvents = function(jTr) {
 		jTr.find('select').GSelect();
 		jTr.click(this.SelectThisRow).mousedown(GF.PreventDefault);
@@ -4111,7 +4111,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		jTr.find('.editable input').change(this.HandleEditableValueChange).keydown(this.PreventEnter);
 		jTr.find('.selectable select').change(this.HandleSelectableValueChange).keydown(this.PreventEnter);
 	};
-	
+
 	this._HandleGoToPage = GF.NewEventHandler(function(eEvent) {
 		if ((eEvent.keyCode != undefined) && (eEvent.keyCode != 13)) {
 			return true;
@@ -4120,27 +4120,27 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		dDg.GoToPage(parseInt($(this).val()) - 1);
 		return true;
 	});
-	
+
 	this._HandleGoToNext = GF.NewEventHandler(function(eEvent) {
 		var dDg = GF_Datagrid.GetCurrentInstance(this);
 		dDg.GoToNext();
 	});
-	
+
 	this._HandleGoToPrevious = GF.NewEventHandler(function(eEvent) {
 		var dDg = GF_Datagrid.GetCurrentInstance(this);
 		dDg.GoToPrevious();
 	});
-	
+
 	this._HandleGoToFirst = GF.NewEventHandler(function(eEvent) {
 		var dDg = GF_Datagrid.GetCurrentInstance(this);
 		dDg.GoToFirst();
 	});
-	
+
 	this._HandleGoToLast = GF.NewEventHandler(function(eEvent) {
 		var dDg = GF_Datagrid.GetCurrentInstance(this);
 		dDg.GoToLast();
 	});
-	
+
 	this._HandleToggleColumns = GF.NewEventHandler(function(eEvent) {
 		var dDg = GF_Datagrid.GetCurrentInstance(this);
 		if (dDg.m_jModifyColumnsDialog && dDg.m_jModifyColumnsDialog.length) {
@@ -4166,7 +4166,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		$(this).closest('span').addClass('active');
 		return false;
 	});
-	
+
 	this._HandleCheckRowsCheckbox = GF.NewEventHandler(function(eEvent) {
 		var dDg = GF_Datagrid.GetCurrentInstance(this);
 		var jTr = $(this).parents('tr:first');
@@ -4180,7 +4180,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		}
 		return true;
 	});
-	
+
 	this._HandleToggleSelectVisible = GF.NewEventHandler(function(eEvent) {
 		var dDg = GF_Datagrid.GetCurrentInstance(this);
 		if (!$(this).is(':checked')) {
@@ -4191,7 +4191,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		}
 		return true;
 	});
-	
+
 	this._HandleChangeColumns = GF.NewEventHandler(function(eEvent) {
 		var jDialog = $(this).parents('.GF_Datagrid_Modify_columns');
 		var sId = jDialog.attr('id');
@@ -4219,51 +4219,51 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		//dDg.LoadData();
 		return true;
 	});
-	
+
 	this._HandleSaveColumns = GF.NewEventHandler(function(eEvent) {
 		var jDialog = $(this).parents('.GF_Datagrid_Modify_columns');
 		var sId = jDialog.attr('id');
 		dDg = GF_Datagrid.ReturnInstance(parseInt(sId.substr(sId.lastIndexOf('_') + 1)));
-		
+
 		var aiWidths = [];
 		for (var i in dDg.m_aiColumnsOrder) {
 			aiWidths.push(dDg.m_aoColumns[dDg.m_aiColumnsOrder[i]].appearance.width);
 		}
-		
+
 		if (dDg.m_oOptions.mechanics.save_column_modification) {
 			GCookie('GF_Datagrid_Columns_' + dDg.m_oOptions.id, JSON.stringify(dDg.m_aiColumnsOrder), 7);
 			GCookie('GF_Datagrid_Widths_' + dDg.m_oOptions.id, JSON.stringify(aiWidths), 7);
 		}
-		
+
 		dDg.m_jTarget.find('.header thead .GF_Datagrid_Col__modify_columns a').click();
-		
+
 		return false;
 	});
-	
+
 	this._HandleRestoreColumns = GF.NewEventHandler(function(eEvent) {
 		var jDialog = $(this).parents('.GF_Datagrid_Modify_columns');
 		var sId = jDialog.attr('id');
 		var dDg = GF_Datagrid.ReturnInstance(parseInt(sId.substr(sId.lastIndexOf('_') + 1)));
-		
+
 		jDialog.slideUp('fast', function() {
 			dDg.m_jModifyColumnsDialog = GF.NULL;
 			$(this).remove();
 		});
 		GOverlay.RemoveAll();
-		
+
 		GCookie('GF_Datagrid_Columns_' + dDg.m_oOptions.id,null);
 		GCookie('GF_Datagrid_Widths_' + dDg.m_oOptions.id,null);
-		
+
 		dDg._ParseColumnOptions();
 		dDg.m_oOptions.appearance.header && dDg._WriteHeader();
 		dDg.m_oOptions.appearance.filter && dDg._WriteFilters();
 		dDg._InitializeWidths();
 		dDg._InitializeSpacers();
 		dDg.Rewrite();
-		
+
 		return false;
 	});
-	
+
 	this._HandleShowContextMenu = GF.NewEventHandler(function(eEvent) {
 		GF_ContextMenu.HideAll();
 		var rClick = false;
@@ -4310,11 +4310,11 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		});
 		return false;
 	});
-	
+
 	this._HandleHideContextMenu = GF.NewEventHandler(function(eEvent) {
 		return GF_ContextMenu.HandleHide(eEvent);
 	});
-	
+
 	this.HandleDoubleClick = GF.NewEventHandler(function(eEvent) {
 		var dDg = GF_Datagrid.GetCurrentInstance(this);
 		var sId = $(this).closest('tr').andSelf().find('.GF_Datagrid_Row_Id').text();
@@ -4323,7 +4323,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		}
 		return false;
 	});
-	
+
 	this.HandleEditableValueChange = GF.NewEventHandler(function(eEvent) {
 		var dDg = GF_Datagrid.GetCurrentInstance(this);
 		var sId = $(this).closest('tr').andSelf().find('.GF_Datagrid_Row_Id').text();
@@ -4348,7 +4348,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 			return true;
 		}
 	});
-	
+
 	this.HandleSelectableValueChange = GF.NewEventHandler(function(eEvent) {
 		var dDg = GF_Datagrid.GetCurrentInstance(this);
 		var sId = $(this).closest('tr').andSelf().find('.GF_Datagrid_Row_Id').text();
@@ -4373,7 +4373,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 			return true;
 		}
 	});
-	
+
 	this._NewRowEventHandler = function(fHandler) {
 		var fSafeHandler = GF.NewEventHandler(function(eEvent) {
 			var dDg = GF_Datagrid.GetCurrentInstance(this);
@@ -4389,33 +4389,33 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		});
 		return fSafeHandler;
 	};
-	
+
 	/* Constructor call */
-	
+
 	return this.GF_Datagrid(jTarget, oOptions);
-	
+
 }, {
-	
+
 	s_dContextMenuFordDg: GF.NULL,
 	s_sContextMenuForId: GF.NULL,
 	s_cContextMenu: GF.NULL,
-	
+
 	SORT_DIR_ASC: 1,
 	SORT_DIR_DESC: 2,
-	
+
 	ALIGN_LEFT: 1,
 	ALIGN_CENTER: 2,
 	ALIGN_RIGHT: 3,
-	
+
 	FILTER_NONE: 0,
 	FILTER_INPUT: 1,
 	FILTER_BETWEEN: 2,
 	FILTER_SELECT: 3,
 	FILTER_AUTOSUGGEST: 4,
 	FILTER_TREE: 5,
-	
+
 	WIDTH_AUTO: 0,
-	
+
 	ACTION_EDIT: 1,
 	ACTION_DELETE: 2,
 	ACTION_VIEW: 3,
@@ -4428,7 +4428,7 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 			}
 		}
 	}),
-	
+
 	ProcessIncomingData: GF.NewEventHandler(function(oData) {
 		if ((oData.data_id == undefined) || !(GF_Instance.s_aoInstances[oData.data_id] instanceof GF_Datagrid)) {
 			GF_Debug.Error('The server has responded with an invalid data.<br />' + oData);
@@ -4455,9 +4455,9 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
  *
  */
  GF_Datagrid_Config = GF_Config.GF_Extend('GF_Datagrid_Config', function(options) {
-	
+
 	this.GF_Datagrid_Config = GF.NewConstructor(function(options) {
-		
+
 		this.id = GF.NULL;
 		this.appearance = {
 			header: true,
@@ -4510,11 +4510,11 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 		this.context_actions = [];
 		this.no_actions_for_rows = [];
 		this.additional_filters = [];
-		
+
 		this._Process(options);
-		
+
 	});
-	
+
 	this._PostProcess = function() {
 		if (this.mechanics.key == GF.NULL) {
 			this.mechanics.key = this.columns[0].id;
@@ -4523,15 +4523,15 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 			this.mechanics.default_sorting = this.mechanics.key;
 		}
 	};
-	
+
 	/* Constructor call */
-	
+
 	return this.GF_Datagrid_Config(options);
-	
+
 });
 
 GF_Ajax_Request = function(sUrl, oRequest, fCallBack){
-	$.ajax({
+	return $.ajax({
 		type: "POST",
 		url: sUrl,
 		data: oRequest,
@@ -4541,9 +4541,9 @@ GF_Ajax_Request = function(sUrl, oRequest, fCallBack){
 };
 
 GF_Datagrid_Column = GF_Config.GF_Extend('GF_Datagrid_Column', function(options) {
-	
+
 	this.GF_Datagrid_Column = GF.NewConstructor(function(options) {
-		
+
 		this.id = GF.NULL;
 		this.caption = GF.NULL;
 		this.editable = false;
@@ -4565,73 +4565,73 @@ GF_Datagrid_Column = GF_Config.GF_Extend('GF_Datagrid_Column', function(options)
 			options: [],
 			load_children: GF.NULL
 		};
-		
+
 		this._Process(options);
-		
+
 	});
-	
+
 	/* Constructor call */
-	
+
 	return this.GF_Datagrid_Column(options);
-	
+
 });
 
 GF_Datagrid_Row = GF_Config.GF_Extend('GF_Datagrid_Row', function(options) {
-	
+
 	this.GF_Datagrid_Row = GF.NewConstructor(function(options) {
-		
+
 		this.id = GF.NULL;
 		this.key = 'id';
 		this.className = '';
 		this.caption = '';
 		this.source = GF.NULL;
-		
+
 		this._Process(options);
-		
+
 	});
-	
+
 	/* Constructor call */
-	
+
 	return this.GF_Datagrid_Row(options);
-	
+
 });
 
 GF_Action = GF_Config.GF_Extend('GF_Action', function(options) {
-	
+
 	this.GF_Action = GF.NewConstructor(function(options) {
-		
+
 		this.img = GF.NULL;
 		this.caption = GF.NULL;
 		this.action = GF.NULL;
 		this.values = {};
 		this.parameter = GF.NULL;
 		this.condition = GF.NULL;
-		
+
 		this._Process(options);
-		
+
 	});
-	
+
 	/* Constructor call */
-	
+
 	return this.GF_Action(options);
-	
+
 });
 
 
 GF_Slider = GF_Instance.GF_Extend('GF_Slider', function(jTarget, oOptions) {
-	
+
 	/* Declarations */
-	
+
 	this.GF_Slider;
-	
+
 	this.m_oOptions;
 	this.m_jSlider;
 	this.p_iValue;
 	this.p_iMin;
 	this.p_iMax;
-	
+
 	/* Definitions */
-	
+
 	this.GF_Slider = GF.NewConstructor(function(jTarget, oOptions) {
 		var oDefaults = {
 			min: 0,
@@ -4652,7 +4652,7 @@ GF_Slider = GF_Instance.GF_Extend('GF_Slider', function(jTarget, oOptions) {
 		this.p_iValue = parseInt(this.m_jSlider.slider('value'));
 		this.UpdateIndicators();
 	});
-	
+
 	this._InitSlider = function() {
 		this.m_jSlider = $('<div/>');
 		this.m_jInput = $('<input type="text"/>');
@@ -4669,7 +4669,7 @@ GF_Slider = GF_Instance.GF_Extend('GF_Slider', function(jTarget, oOptions) {
 			stop: this._OnStop
 		});
 	};
-	
+
 	this._OnSlide = GF.NewSafeMethod(function(e, oUi) {
 		var sSlider = GF_Slider.GetCurrentInstance(this);
 		var iPreviousValue = sSlider.p_iValue;
@@ -4688,7 +4688,7 @@ GF_Slider = GF_Instance.GF_Extend('GF_Slider', function(jTarget, oOptions) {
 		}
 		return true;
 	});
-	
+
 	this._OnStart = GF.NewSafeMethod(function(e, oUi) {
 		var sSlider = GF_Slider.GetCurrentInstance(this);
 		sSlider._InvokeEvent('drag_start', {
@@ -4696,7 +4696,7 @@ GF_Slider = GF_Instance.GF_Extend('GF_Slider', function(jTarget, oOptions) {
 		});
 		return true;
 	});
-	
+
 	this._OnStop = GF.NewSafeMethod(function(e, oUi) {
 		var sSlider = GF_Slider.GetCurrentInstance(this);
 		sSlider._InvokeEvent('drag_end', {
@@ -4704,16 +4704,16 @@ GF_Slider = GF_Instance.GF_Extend('GF_Slider', function(jTarget, oOptions) {
 		});
 		return true;
 	});
-	
+
 	this._OnInputChange = GF.NewEventHandler(function(e) {
 		var sSlider = GF_Slider.GetCurrentInstance(this);
 		sSlider.SetValue($(this).val());
 	});
-	
+
 	this.UpdateIndicators = function() {
 		this.m_jInput.val(this.p_iValue + '%');
 	};
-	
+
 	this.SetValue = GF.NewSafeMethod(function(iValue) {
 		iValue = parseInt(iValue);
 		if (isNaN(iValue)) {
@@ -4730,21 +4730,21 @@ GF_Slider = GF_Instance.GF_Extend('GF_Slider', function(jTarget, oOptions) {
 		});
 		return true;
 	});
-	
+
 	this._Validate = function(iValue) {
 		return Math.max(this.p_iMin, Math.min(this.p_iMax, iValue));
 	};
-	
+
 	this._InvokeEvent = function(sEvent, oParams) {
 		if ((this.m_oOptions.event_handlers != undefined) && (this.m_oOptions.event_handlers[sEvent] != undefined) && (this.m_oOptions.event_handlers[sEvent] instanceof Function)) {
 			this.m_oOptions.event_handlers[sEvent].call(this.m_jTarget.get(0), oParams);
 		}
 	};
-	
+
 	/* Constructor call */
-	
+
 	return this.GF_Slider(jTarget, oOptions);
-	
+
 }, {
 
 });
@@ -4761,7 +4761,7 @@ GF_Datagrid.Language = {
 	delete_group: 'Usuń wybrane rekordy',
 	delete_row: 'Delete',
 	edit_row: 'Edit',
-	view_row: 'Wyświetl rekord', 
+	view_row: 'Wyświetl rekord',
 	records_shown: 'Records:',
 	out_of: 'of',
 	choose_page: 'Page:',
@@ -4804,4 +4804,3 @@ GF_Datagrid.Files = {
 	make_default_icon: GCore.DESIGN_PATH + 'images/icons/datagrid/make-default.png',
 	warning_icon: GCore.DESIGN_PATH + 'images/datagrid/warning.png'
 };
-

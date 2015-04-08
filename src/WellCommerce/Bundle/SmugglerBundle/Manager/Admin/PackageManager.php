@@ -12,10 +12,10 @@
 
 namespace WellCommerce\Bundle\SmugglerBundle\Manager\Admin;
 
-use Packagist\Api\Client;
 use Packagist\Api\Result\Package as RemotePackage;
 use WellCommerce\Bundle\AdminBundle\Manager\AbstractAdminManager;
 use WellCommerce\Bundle\SmugglerBundle\Entity\Package;
+use WellCommerce\Bundle\SmugglerBundle\Helper\PackageHelperInterface;
 
 /**
  * Class PackageManager
@@ -24,21 +24,17 @@ use WellCommerce\Bundle\SmugglerBundle\Entity\Package;
  */
 class PackageManager extends AbstractAdminManager
 {
-    const DEFAULT_PACKAGE_TYPE = 'wellcommerce-plugin';
+    /**
+     * @var PackageHelperInterface
+     */
+    protected $helper;
 
     /**
-     * @var Client
+     * @param PackageHelperInterface $helper
      */
-    protected $client;
-
-    /**
-     * Constructor
-     *
-     * @param Client $client
-     */
-    public function setClient(Client $client)
+    public function setHelper(PackageHelperInterface $helper)
     {
-        $this->client = $client;
+        $this->helper = $helper;
     }
 
     /**
@@ -46,28 +42,15 @@ class PackageManager extends AbstractAdminManager
      */
     public function syncPackages($type)
     {
+        $criteria      = ['type' => $type];
         $em            = $this->getDoctrineHelper()->getEntityManager();
-        $searchResults = $this->getPackages($type);
+        $searchResults = $this->helper->getPackages($criteria);
         foreach ($searchResults as $result) {
-            $package = $this->client->get($result);
+            $package = $this->helper->getPackage($result);
             $this->syncPackage($package);
         }
 
         $em->flush();
-    }
-
-    /**
-     * Returns all packages by type
-     *
-     * @param string $type
-     *
-     * @return array
-     */
-    protected function getPackages($type)
-    {
-        $criteria = ['type' => $type];
-
-        return $this->client->all($criteria);
     }
 
     /**

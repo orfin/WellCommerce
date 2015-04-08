@@ -6,5 +6,6 @@
     <imports>
         <import resource="services/package.xml"/>
         <import resource="services/channel.xml"/>
+        <import resource="services/process.xml"/>
     </imports>
 </container>

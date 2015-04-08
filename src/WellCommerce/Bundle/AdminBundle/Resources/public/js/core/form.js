@@ -44,12 +44,12 @@ var GNotification = function(sMessage, oParams){
 	if (oParams == undefined) {
         oParams = {};
     }
-	
+
 	oParams.life 		= 2500;
 	oParams.corners 	= 0;
 	oParams.sticky	 	= false;
 	oParams.position 	= 'bottom-right';
-	
+
 	return $.jGrowl(sMessage, oParams);
 };
 
@@ -502,18 +502,18 @@ var oDefaults = {
 };
 
 var GBlock = function() {
-	
+
 	var gThis = this;
-	
+
 	this._Constructor = function() {
 		$(gThis).prepend('<div class="' + gThis.m_oOptions.oClasses.sNE + '"/>');
 		$(gThis).prepend('<div class="' + gThis.m_oOptions.oClasses.sNW + '"/>');
 		$(gThis).append('<div class="' + gThis.m_oOptions.oClasses.sSE + '"/>');
 		$(gThis).append('<div class="' + gThis.m_oOptions.oClasses.sSW + '"/>');
 	};
-	
+
 	gThis._Constructor();
-	
+
 };
 
 new GPlugin('GBlock', oDefaults, GBlock);
@@ -530,16 +530,16 @@ var oDefaults = {
 };
 
 var GBox = function() {
-	
+
 	var gThis = this;
-	
+
 	gThis._Constructor = function() {
 		$(gThis).prepend('<div class="' + gThis.m_oOptions.oClasses.sN + '"/>');
 		$(gThis).append('<div class="' + gThis.m_oOptions.oClasses.sS + '"/>');
 	};
-	
+
 	gThis._Constructor();
-	
+
 };
 
 new GPlugin('GBox', oDefaults, GBox);
@@ -564,18 +564,18 @@ var oDefaults = {
         	stroke: '#ececec',
             strokeWidth: 3,
         },
-    	width: 850, 
+    	width: 850,
     	height: 400,
     	lineWidth: 3,
     	pointSize: 10,
     	vAxis: {
         	gridlines:{
-        		color: '#ececec', 
+        		color: '#ececec',
         	}
         },
     	hAxis: {
         	gridlines:{
-        		color: '#ececec', 
+        		color: '#ececec',
         	}
         },
         legend: {
@@ -588,9 +588,9 @@ var oDefaults = {
 };
 
 var GChart = function() {
-	
+
 	var gThis = this;
-	
+
 	gThis._Constructor = function() {
 		gThis.oOptions = $.extend(true, GCore.Duplicate(gThis.m_oOptions.oDefaultData, true), gThis.m_oOptions.oParams);
 		gThis.Update();
@@ -598,9 +598,9 @@ var GChart = function() {
 			gThis.Update();
 		});
 	};
-	
+
 	gThis.Update = function() {
-		
+
 		if(location.hash.length){
 			var url = gThis.m_oOptions.fSource + ',' + location.hash.substr(1);
 		}else{
@@ -611,7 +611,7 @@ var GChart = function() {
           	dataType:"json",
           	async: false
 		}).responseText;
-		
+
 		var data = new google.visualization.DataTable(jsonData);
 		var sId = $(gThis).attr('id');
 		if(gThis.m_oOptions.sType == 'area'){
@@ -622,9 +622,9 @@ var GChart = function() {
 		}
 		gThis.oChart.draw(data, gThis.oOptions);
 	};
-	
+
 	gThis._Constructor();
-	
+
 };
 
 new GPlugin('GChart', oDefaults, GChart);
@@ -642,22 +642,22 @@ var oDefaults = {
 };
 
 var GClientActivity = function() {
-	
+
 	var gThis = this;
-	
+
 	gThis._Constructor = function() {
 		gThis.m_oOptions.jClientId.change(GEventHandler(function(eEvent) {
 			gThis.LoadActivities();
 		}));
 		gThis.LoadActivities();
 	};
-	
+
 	gThis.LoadActivities = function() {
 		gThis.m_oOptions.fSource({
 			client: gThis.m_oOptions.jClientId.val()
 		}, GCallback(gThis.OnActivitiesLoaded));
 	};
-	
+
 	gThis.OnActivitiesLoaded = function(oData) {
 		var aoActivities = oData.clientActivity;
 		$(gThis).children('h3').nextAll().remove();
@@ -686,9 +686,9 @@ var GClientActivity = function() {
 			}));
 		}
 	};
-	
+
 	gThis._Constructor();
-	
+
 };
 
 new GPlugin('GClientActivity', oDefaults, GClientActivity);
@@ -707,18 +707,18 @@ var oDefaults = {
 };
 
 var GComboBox = function() {
-	
+
 	var gThis = this;
-	
+
 	gThis.m_jField;
 	gThis.m_sDefaultValue;
-	
+
 	gThis.Update = function() {
 		$(gThis).parent().find('.faux span').text($(gThis).find('option:selected').text()).attr('class', $(gThis).find('option:selected').attr('class') + ' ');
 		gThis.m_jField.val($(gThis).find('option:selected').text()).attr('class', $(gThis).find('option:selected').attr('class') + ' ');
 		return true;
 	};
-	
+
 	this._Constructor = function() {
 		$(gThis).parent().addClass('GComboBox');
 		gThis.m_sDefaultValue = $(gThis).find('option:eq(0)').text();
@@ -769,7 +769,7 @@ var GComboBox = function() {
 		}).keydown(gThis.PreventEnter);
 		gThis.Update();
 	};
-	
+
 	gThis.PreventEnter = function(eEvent) {
 		if (eEvent.keyCode == 13) {
 			eEvent.preventDefault();
@@ -778,9 +778,9 @@ var GComboBox = function() {
 			$(gThis).change();
 		}
 	};
-	
+
 	gThis._Constructor();
-	
+
 };
 
 new GPlugin('GComboBox', oDefaults, GComboBox);
@@ -798,18 +798,18 @@ var oDefaults = {
 };
 
 var GContentLoader = function() {
-	
+
 	var gThis = this;
-	
+
 	gThis.m_jHolder;
-	
+
 	gThis._Constructor = function() {
 		gThis.m_jHolder = $('<div/>');
 		$(gThis).append($('<div class="' + gThis._GetClass('Loading') + '"/>').css('display', 'none').fadeIn(150));
 		gThis.m_jHolder.load(gThis.m_oOptions.sSource, gThis.m_oOptions.oParams, gThis.Loaded);
 	};
-	
-	gThis.Loaded = GEventHandler(function(eEvent) {	
+
+	gThis.Loaded = GEventHandler(function(eEvent) {
 		$(gThis).find('.' + gThis._GetClass('Loading')).stop(true, false).fadeOut(150, function() {
 			$(gThis).empty().html(gThis.m_jHolder.html()).css('opacity', 0).animate({
 				opacity: 1
@@ -819,9 +819,9 @@ var GContentLoader = function() {
 			$(gThis).find('select').GSelect();
 		});
 	});
-	
+
 	gThis._Constructor();
-	
+
 };
 
 new GPlugin('GContentLoader', oDefaults, GContentLoader);
@@ -855,16 +855,16 @@ var oDefaults = {
 };
 
 var GMenu = function() {
-	
+
 	var gThis = this;
-	
+
 	gThis.m_jCustomizationTrigger;
 	gThis.m_jCustomization;
-	
+
 	gThis.m_iMode;
 	gThis.m_iDelay;
 	gThis.m_bCustomization;
-	
+
 	gThis._Constructor = function() {
 		gThis.m_bCustomization = false;
 		gThis._UpdateParams();
@@ -873,7 +873,7 @@ var GMenu = function() {
 		$(gThis).find('li li:has(ul)').addClass(gThis.m_oOptions.oClasses.sExpandableClass);
 		gThis._PrepareCustomization();
 	};
-	
+
 	gThis._PrepareCustomization = function() {
 		gThis.m_jCustomizationTrigger = $('<span class="' + gThis.m_oOptions.oClasses.sCustomizeClass + '" title="' + GMenu.Language.customize + '"/>');
 		gThis.m_jCustomizationTrigger.click(gThis.OnExpandCustomization);
@@ -891,7 +891,7 @@ var GMenu = function() {
 		$(gThis).after(gThis.m_jCustomization);
 		$(gThis).after(gThis.m_jCustomizationTrigger);
 	};
-	
+
 	gThis.OnMouseClick = new GEventHandler(function(eEvent) {
 		if ((gThis.m_iMode == GMENU_MODE_DELAY) || (gThis.m_iMode == GMENU_MODE_CLICK)) {
 			var jLi = $(this).closest('li');
@@ -900,7 +900,7 @@ var GMenu = function() {
 		}
 		return false;
 	});
-	
+
 	gThis.OnMouseEnter = new GEventHandler(function(eEvent) {
 		if (gThis.m_iMode == GMENU_MODE_HOVER) {
 			gThis._ShowMenu($(this));
@@ -911,12 +911,12 @@ var GMenu = function() {
 			});
 		}
 	});
-	
+
 	gThis.OnMouseLeave = new GEventHandler(function(eEvent) {
 		$(this).stop(true, false);
 		gThis._HideMenu($(this));
 	});
-	
+
 	gThis._ShowMenu = function(jParent) {
 		if (gThis.m_bCustomization) {
 			return;
@@ -930,12 +930,12 @@ var GMenu = function() {
 			jUl.show('slide', {}, 150);
 		}
 	};
-	
+
 	gThis._HideMenu = function(jParent) {
 		var jUl = jParent.find('ul:first');
 		jUl.stop(true, true).fadeOut(50);
 	};
-	
+
 	gThis._UpdateParams = function() {
 		var sCookie;
 		var bSave = false;
@@ -959,7 +959,7 @@ var GMenu = function() {
 			gThis._SaveParams();
 		}
 	};
-	
+
 	gThis._SaveParams = function() {
 		GCookie(gThis.m_oOptions.sDelayCookieName, gThis.m_iDelay, {
 			expires: GCore.p_oParams.iCookieLifetime
@@ -968,7 +968,7 @@ var GMenu = function() {
 			expires: GCore.p_oParams.iCookieLifetime
 		});
 	};
-	
+
 	gThis.OnExpandCustomization = new GEventHandler(function(eEvent) {
 		if (gThis.m_bCustomization) {
 			gThis.OnRetractCustomization({});
@@ -980,7 +980,7 @@ var GMenu = function() {
 		gThis.m_jCustomization.find('input[value="' + gThis.m_iMode + '"]').click();
 		gThis.m_jCustomization.find('input[name="GMenu-' + gThis.m_iId + '-delay"]').val(gThis.m_iDelay);
 	});
-	
+
 	gThis.OnRetractCustomization = new GEventHandler(function(eEvent) {
 		if (!gThis.m_bCustomization) {
 			return false;
@@ -989,7 +989,7 @@ var GMenu = function() {
 		gThis.m_bCustomization = false;
 		gThis.m_jCustomization.slideUp(100);
 	});
-	
+
 	gThis.OnSave = new GEventHandler(function(eEvent) {
 		gThis.m_iMode = gThis.m_jCustomization.find('input[type="radio"]:checked').val();
 		gThis.m_iDelay = parseInt(gThis.m_jCustomization.find('input[name="GMenu-' + gThis.m_iId + '-delay"]').val());
@@ -1000,7 +1000,7 @@ var GMenu = function() {
 		gThis.OnRetractCustomization({});
 		return false;
 	});
-	
+
 	gThis.OnCancel = new GEventHandler(function(eEvent) {
 		GCookie(gThis.m_oOptions.sDelayCookieName, null);
 		GCookie(gThis.m_oOptions.sModeCookieName, null);
@@ -1008,9 +1008,9 @@ var GMenu = function() {
 		gThis._UpdateParams();
 		return false;
 	});
-	
+
 	gThis._Constructor();
-	
+
 };
 
 new GPlugin('GMenu', oDefaults, GMenu);
@@ -1022,9 +1022,9 @@ var oDefaults = {
 };
 
 var GSticky = function() {
-	
+
 	var gThis = this;
-	
+
 	gThis._Constructor = function() {
 		gThis.m_jSticky = $(gThis);
 		gThis.sStickyId = gThis.m_jSticky.attr('id');
@@ -1032,7 +1032,7 @@ var GSticky = function() {
 		if(sCookie != undefined && sCookie){
 			gThis.m_jSticky.hide();
 		}
-		
+
 		if(GCore.sCurrentController == 'mainside'){
 			setTimeout(function() {
 				for(var i = 0; i < 2; i++) {
@@ -1040,7 +1040,7 @@ var GSticky = function() {
 				}
 			}, 1500);
 		}
-		
+
 		gThis.m_jSticky.find('.task-completed a').click(function(){
 			gThis.m_jSticky.fadeOut('slow');
 			GCookie(gThis.sStickyId, true, {
@@ -1048,9 +1048,9 @@ var GSticky = function() {
 			});
 		});
 	};
-	
+
 	gThis._Constructor();
-	
+
 };
 
 new GPlugin('GSticky', oDefaults, GSticky);
@@ -1106,7 +1106,7 @@ var GMessageBar = function() {
 		gThis._UpdateScroll();
 		gThis._InitExistingMessages();
 	};
-	
+
 	gThis._UpdateScroll = function(eEvent) {
 		if (gThis.m_jHoax.css('display') != 'none') {
 			gThis.m_iMargin = gThis.m_jHoax.offset().top;
@@ -1126,7 +1126,7 @@ var GMessageBar = function() {
 			gThis.m_jHoax.css('display', 'block');
 		}
 	};
-	
+
 	gThis._UpdateHeight = function() {
 		gThis.m_jHoax.css('height', gThis.m_jBox.height());
 	};
@@ -1146,7 +1146,7 @@ var GMessageBar = function() {
 		if (oParams.bAutoFocus == false) {
 			gThis.bAutoFocus = false;
 		}
-		
+
 		if (!oParams.bNoAutoFormatting) {
 			sMessage = '<p>' + sMessage + '</p>';
 		}
@@ -1283,7 +1283,7 @@ var GMessageBar = function() {
 						}
 					}));
 				}
-				
+
 			}
 		});
 	};
@@ -1358,7 +1358,7 @@ var GMessageBar = function() {
 			});
 		});
 	};
-	
+
 	gThis.DestroyAll = function() {
 		for (var i in gThis.m_ojMessages) {
 			gThis.Destroy(gThis.m_ojMessages[i]);
@@ -1373,7 +1373,7 @@ var GMessageBar = function() {
 		gThis._InitMessage(jMessage, iAlertId);
 		gThis.ShowMessage(jMessage, (oParams.bAutoExpand == true));
 	};
-	
+
 	gThis.UpdateStack = function() {
 		var jMessages = gThis.m_jBox.find('.' + gThis._GetClass('Message'));
 		for (var i = 0; i < jMessages.length; i++) {
@@ -1404,11 +1404,11 @@ var oDefaults = {
 };
 
 var GOverlay = function() {
-	
+
 	var gThis = this;
-	
+
 	gThis.m_jOverlay;
-	
+
 	this._Constructor = function() {
 		gThis.m_jOverlay = $('<div class="GOverlay"/>').css({
 			display: 'block',
@@ -1436,9 +1436,9 @@ var GOverlay = function() {
 			return false;
 		}));
 	};
-	
+
 	gThis._Constructor();
-	
+
 };
 
 GOverlay.RemoveAll = function() {
@@ -1472,9 +1472,9 @@ var oDefaults = {
 };
 
 var GQuickAccess = function() {
-	
+
 	var gThis = this;
-	
+
 	gThis.m_jMainOption;
 	gThis.m_jListTrigger;
 	gThis.m_jCustomizationTrigger;
@@ -1483,10 +1483,10 @@ var GQuickAccess = function() {
 	gThis.m_jPossibilitiesList;
 	gThis.m_aList;
 	gThis.m_aPossibilitiesList;
-	
+
 	gThis.m_bExpanded;
 	gThis.m_bCustomization;
-	
+
 	gThis._Constructor = function() {
 		gThis.m_bExpanded = false;
 		gThis.m_bCustomization = false;
@@ -1494,7 +1494,7 @@ var GQuickAccess = function() {
 		gThis.m_aPossibilitiesList = gThis.m_oOptions.aoPossibilities;
 		gThis._PrepareDOM();
 	};
-	
+
 	gThis._PrepareDOM = function() {
 		gThis._PrepareList();
 		gThis._PreparePossibilitiesList();
@@ -1502,7 +1502,7 @@ var GQuickAccess = function() {
 		gThis.m_jList.before(gThis.m_jMainOption);
 		gThis._UpdateMainOption();
 		gThis.m_jListTrigger = $('<span class="' + gThis.m_oOptions.oClasses.sExpandClass + '" title="' + GQuickAccess.Language.show_list + '"/>');
-		var fToggleClass = 
+		var fToggleClass =
 		gThis.m_jListTrigger.hover(function() {
 			gThis.m_jMainOption.addClass(gThis.m_oOptions.oClasses.sActiveClass);
 		}, function() {
@@ -1514,13 +1514,13 @@ var GQuickAccess = function() {
 		gThis.m_jMainOption.append(gThis.m_jListTrigger);
 		gThis._RefreshAccessKeys();
 	};
-	
+
 	gThis._SaveList = function() {
 		GCookie(gThis.m_oOptions.sCookieName, gThis.m_aList.join(','), {
 			expires: GCore.p_oParams.iCookieLifetime
 		});
 	};
-	
+
 	gThis._PrepareList = function() {
 		var i;
 		var sCookie = GCookie(gThis.m_oOptions.sCookieName);
@@ -1556,7 +1556,7 @@ var GQuickAccess = function() {
 			}
 		}
 	};
-	
+
 	gThis._PreparePossibilitiesList = function() {
 		gThis.m_jPossibilitiesList = $('<div class="' + gThis.m_oOptions.oClasses.sPossibilitiesListClass + '"/>');
 		var jUl = $('<ul/>');
@@ -1579,7 +1579,7 @@ var GQuickAccess = function() {
 		gThis.m_jPossibilitiesList.GShadow();
 		$(gThis).append(gThis.m_jPossibilitiesList);
 	};
-	
+
 	gThis.OnExpandList = new GEventHandler(function(eEvent) {
 		gThis.m_bExpanded = true;
 		gThis.m_jMainOption.addClass(gThis.m_oOptions.oClasses.sActiveClass);
@@ -1587,7 +1587,7 @@ var GQuickAccess = function() {
 		gThis.m_jList.stop(true, true).slideDown(150);
 		return false;
 	});
-	
+
 	gThis.OnRetractList = new GEventHandler(function(eEvent) {
 		if (gThis.m_bCustomization) {
 			return;
@@ -1598,7 +1598,7 @@ var GQuickAccess = function() {
 			$(this).css('display', 'block').addClass(gThis.m_oOptions.oClasses.sHiddenClass);
 		});
 	});
-	
+
 	gThis.OnExpandCustomization = new GEventHandler(function(eEvent) {
 		if (gThis.m_bCustomization) {
 			gThis.OnRetractCustomization({});
@@ -1623,7 +1623,7 @@ var GQuickAccess = function() {
 		gThis.m_jPossibilitiesList.css('left', gThis.m_jMainOption.offset().left - gThis.m_jMainOption.parent().offset().left + gThis.m_jList.width() + 1);
 		gThis.m_jPossibilitiesList.slideDown(150);
 	});
-	
+
 	gThis.OnRetractCustomization = new GEventHandler(function(eEvent) {
 		if (!gThis.m_bCustomization) {
 			return false;
@@ -1636,7 +1636,7 @@ var GQuickAccess = function() {
 		gThis.m_jList.find('li a').unbind('click', GDoNothing);
 		gThis.m_jPossibilitiesList.find('li a').unbind('click', GDoNothing);
 	});
-	
+
 	gThis.OnChange = new GEventHandler(function(eEvent, oUi) {
 		oUi.item.find('.' + gThis.m_oOptions.oClasses.sAccessKeyClass).remove();
 		gThis._UpdateMainOption();
@@ -1647,13 +1647,13 @@ var GQuickAccess = function() {
 		}
 		gThis._RefreshAccessKeys();
 	});
-	
+
 	gThis.OnSave = new GEventHandler(function(eEvent) {
 		gThis._SaveList();
 		gThis.OnRetractCustomization({});
 		return false;
 	});
-	
+
 	gThis.OnCancel = new GEventHandler(function(eEvent) {
 		GCookie(gThis.m_oOptions.sCookieName, null);
 		gThis.OnRetractCustomization({});
@@ -1663,18 +1663,18 @@ var GQuickAccess = function() {
 		gThis._RefreshAccessKeys();
 		return false;
 	});
-	
+
 	gThis.OnDragStart = new GEventHandler(function(eEvent, oUi) {
 		oUi.helper.find('.' + gThis.m_oOptions.oClasses.sAccessKeyClass).remove();
 	});
-	
+
 	gThis._UpdateMainOption = function() {
 		gThis.m_jMainOption.find('a').remove();
 		var jA = gThis.m_jList.find('li:first a:first').clone().attr('accesskey', '');
 		jA.find('.' + gThis.m_oOptions.oClasses.sAccessKeyClass).remove();
 		gThis.m_jMainOption.prepend(jA);
 	};
-	
+
 	gThis._RefreshAccessKeys = function() {
 		gThis.m_jList.find('a').each(function(i) {
 			$(this).find('.' + gThis.m_oOptions.oClasses.sAccessKeyClass).remove();
@@ -1683,9 +1683,9 @@ var GQuickAccess = function() {
 			}
 		});
 	};
-	
+
 	gThis._Constructor();
-	
+
 };
 
 new GPlugin('GQuickAccess', oDefaults, GQuickAccess);
@@ -1708,18 +1708,18 @@ var oDefaults = {
 };
 
 var GScrollableTabs = function() {
-	
+
 	var gThis = this;
-	
+
 	gThis.m_jUl;
 	gThis.m_jContainier;
 	gThis.m_jControls;
 	gThis.m_jNext;
 	gThis.m_jPrevious;
-	
+
 	gThis.m_iContainerWidth;
 	gThis.m_iUlWidth;
-	
+
 	gThis.Constructor = function() {
 		gThis.m_jUl = $(gThis).find('ul');
 		gThis.m_jUl.wrap('<div class="' + gThis._GetClass('Container') + '"/>');
@@ -1735,7 +1735,7 @@ var GScrollableTabs = function() {
 		}
 		gThis._InitializeEvents();
 	};
-	
+
 	gThis._UpdateWidth = function() {
 		gThis.m_jUl.css('width', 19000);
 		var jLis = gThis.m_jUl.children('li');
@@ -1747,7 +1747,7 @@ var GScrollableTabs = function() {
 		gThis.m_jUl.css('width', iWidth);
 		gThis.m_iUlWidth = iWidth;
 	};
-	
+
 	gThis._InitializeEvents = function() {
 		if (gThis.m_jNext != undefined) {
 			gThis.m_jNext.click(function() {
@@ -1767,23 +1767,23 @@ var GScrollableTabs = function() {
 			return true;
 		});
 	};
-	
+
 	gThis.Right = function() {
-		
+
 		var left = isNaN(parseInt(gThis.m_jUl.css('left'))) ? 0 : parseInt(gThis.m_jUl.css('left'));
 		gThis.m_jUl.stop(true, true).animate({
 			left: Math.max(- (gThis.m_iUlWidth - gThis.m_iContainerWidth), left - 250)
 		}, 150);
 	};
-	
+
 	gThis.Left = function() {
 		gThis.m_jUl.stop(true, true).animate({
 			left: Math.min(0, parseInt(gThis.m_jUl.css('left')) + 250)
 		}, 150);
 	};
-	
+
 	gThis.Constructor();
-	
+
 };
 
 new GPlugin('GScrollableTabs', oDefaults, GScrollableTabs);
@@ -1801,10 +1801,10 @@ var oDefaults = {
 var GSelect = function() {
 
 	var gThis = this;
-	
+
 	this._Constructor = function() {
 		var dThis = this;
-		
+
 		if (this.bBeautifulized) {
 			return;
 		}
@@ -1814,7 +1814,7 @@ var GSelect = function() {
 			$(dThis).parent().find('.faux span').text($(dThis).find('option:selected').text()).attr('class', $(dThis).find('option:selected').attr('class') + ' ');
 			return true;
 		};
-		
+
 		$(this).parent().find('select').css('opacity', 0);
 		$(this).parent().append('<span class="faux"><span>' + $(this).find('option:selected').text() + '</span></span>');
 		$(this).change(this.Update);
@@ -1828,9 +1828,9 @@ var GSelect = function() {
 		});
 		this.Update();
 	};
-	
+
 	gThis._Constructor();
-	
+
 };
 
 new GPlugin('GSelect', oDefaults, GSelect);
@@ -1851,9 +1851,9 @@ var oDefaults = {
 };
 
 var GShadow = function() {
-	
+
 	var gThis = this;
-	
+
 	this._Constructor = function() {
 		$(gThis).append('<span class="' + gThis.m_oOptions.oClasses.sNE + '"/>');
 		$(gThis).append('<span class="' + gThis.m_oOptions.oClasses.sSE + '"/>');
@@ -1861,9 +1861,9 @@ var GShadow = function() {
 		$(gThis).append('<span class="' + gThis.m_oOptions.oClasses.sS + '"/>');
 		$(gThis).append('<span class="' + gThis.m_oOptions.oClasses.sE + '"/>');
 	};
-	
+
 	gThis._Constructor();
-	
+
 };
 
 new GPlugin('GShadow', oDefaults, GShadow);
@@ -1893,13 +1893,13 @@ var oDefaults = {
 };
 
 var GTabs = function() {
-	
+
 	var gThis = this;
-	
+
 	this._Constructor = function() {
 		gThis._PrepareDOM();
 	};
-	
+
 	gThis._PrepareDOM = function() {
 		var jPanels = $(gThis).children('fieldset');
 		if (!jPanels.length) {
@@ -1956,7 +1956,7 @@ var GTabs = function() {
 		gThis._SolveAllProblems();
 		gThis._InitializeTabsEvents();
 	};
-	
+
 	gThis._InitializeTabsEvents = function() {
 		$('a[href="#previous-tab"]').bind('click', GEventHandler(function(eEvent) {
 			var jPanel = $(eEvent.currentTarget).closest('.ui-tabs-panel');
@@ -1970,7 +1970,7 @@ var GTabs = function() {
 			eEvent.stopImmediatePropagation();
 			return false;
 		}));
-		
+
 		$('a[href="#next-tab"]').bind('click', GEventHandler(function(eEvent) {
 			var jPanel = $(eEvent.currentTarget).closest('.ui-tabs-panel');
 			do {
@@ -1984,14 +1984,14 @@ var GTabs = function() {
 			return false;
 		}));
 	};
-	
+
 	gThis._SolveAllProblems = function() {
 		$(gThis).css({
 			opacity: 0,
 			height: 0,
 			overflow: 'hidden'
 		}).tabs('add', '#a', '', 0).tabs('select', 0);
-		
+
 		setTimeout(function() {
 			$(gThis).tabs('select', 1);
 			$(gThis).tabs('remove', 0);
@@ -2004,9 +2004,9 @@ var GTabs = function() {
 			});
 		}, 10);
 	};
-	
+
 	gThis._Constructor();
-	
+
 };
 
 GTabs.TABS_VERTICAL = 0;
@@ -2040,16 +2040,16 @@ var oDefaults = {
 };
 
 var GTooltip = function() {
-	
+
 	var gThis = this;
-	
+
 	gThis.m_iHeight = 0;
-	
+
 	this._Constructor = function() {
 		GTooltip.s_oTooltips[gThis.m_iId] = gThis;
 		gThis._PrepareTooltip();
 	};
-	
+
 	gThis._PrepareTooltip = function() {
 		$(gThis).append(gThis.m_oOptions.jContent).css({
 			position: 'absolute',
@@ -2069,7 +2069,7 @@ var GTooltip = function() {
 			gThis._ShowTooltip(gThis.m_oOptions.iPositionX, gThis.m_oOptions.iPositionY);
 		}
 	};
-	
+
 	gThis._ShowTooltip = function(iX, iY) {
 		$('.GTooltip').not($(gThis)).each(function() {
 			this._HideTooltip();
@@ -2079,15 +2079,15 @@ var GTooltip = function() {
 			bottom: $('body').height() - (iY + gThis.m_oOptions.iOffsetY - gThis.m_iHeight)
 		}).fadeIn(150);
 	};
-	
+
 	gThis._HideTooltip = function() {
 		$(gThis).stop(true, true).fadeOut(50, function() {
 			$(this).remove();
 		});
 	};
-	
+
 	gThis._Constructor();
-	
+
 };
 
 GTooltip.Create = function(oOptions) {
@@ -2155,7 +2155,7 @@ new GPlugin('GTooltip', oDefaults, GTooltip);
 */
 
 var GHelp = function() {
-	
+
 	var gThis = this;
 
 	gThis.OnContentLoaded = GEventHandler(function(eEvent) {
@@ -2163,38 +2163,38 @@ var GHelp = function() {
 		gThis.m_sContent.html(eEvent.sContent);
 		gThis.bLoaded = true;
 	});
-	
+
 	gThis._OnExpandHelp = GEventHandler(function(eEvent) {
 
 		gThis.m_sContent.slideToggle('fast');
-		
+
 		if(gThis.bLoaded == false){
-			
+
 			xajax_getHelpForPage ({
 				sController: GCore.sCurrentController,
 				sAction: GCore.sCurrentAction
 			}, GCallback(gThis.OnContentLoaded));
-			
+
 		}
-		
+
 		return false;
 	});
-	
+
 	gThis.MakeHelpButton = function() {
 		gThis.bLoaded = false;
 		gThis.m_jLi = $('<li>');
 		gThis.m_jA = $('<a class="button" href="#"/>');
 		gThis.m_jA.append('<span><img src="'+GCore.DESIGN_PATH+'images/icons/buttons/help.png" alt=""/>' + GForm.Language.help + '</span>');
-		gThis.m_jA.appendTo(gThis.m_jLi);	
+		gThis.m_jA.appendTo(gThis.m_jLi);
 		gThis.m_jLi.appendTo($('.possibilities'));
 		gThis.m_jA.bind('click', gThis._OnExpandHelp);
 		gThis.m_sContent = $('<div></div>').addClass('block').html('<p>Trwa wczytywanie pomocy...</p>');
 		gThis.m_sContent.insertAfter($('.possibilities'));
 		gThis.m_sContent.hide();
 	};
-	
+
 	gThis.MakeHelpButton();
-	
+
 };
 
 new GPlugin('GHelp', oDefaults, GHelp);
@@ -2212,12 +2212,12 @@ var oDefaults = {
 };
 
 var GLoading = function() {
-	
+
 	var gThis = this;
-	
+
 	gThis.m_jOverlay;
 	gThis.m_jIcon;
-	
+
 	gThis._Constructor = function() {
 		gThis.m_jOverlay = $('<div class="GLoading"/>').css({
 			display: 'block',
@@ -2260,7 +2260,7 @@ var GLoading = function() {
 			});
 		}));
 	};
-	
+
 	gThis.StopLoading = function() {
 		gThis.m_jOverlay.stop(true, true).animate({
 			duration: 500,
@@ -2276,9 +2276,9 @@ var GLoading = function() {
 		});
 		$(gThis).removeClass('GLoading');
 	};
-	
+
 	gThis._Constructor();
-	
+
 };
 
 GLoading.Stop = function(jNode) {
@@ -2292,7 +2292,7 @@ GLoading.RemoveAll = function() {
 new GPlugin('GLoading', oDefaults, GLoading);
 /*
 * SEARCH
-* Live Search 
+* Live Search
 */
 
 var oDefaults = {
@@ -2307,7 +2307,7 @@ var oDefaults = {
 };
 
 var GSearch = function() {
-	
+
 	var gThis = this;
 	gThis._Constructor = function() {
 		gThis.m_oOptions.sViewUrl = GCore.sAdminUrl+'mainside/confirm/';
@@ -2324,12 +2324,12 @@ var GSearch = function() {
 		gThis.OnFocus();
 		gThis.OnBlur();
 		gThis.OnClick();
-		
+
 		gThis.m_jInput.typeWatch({callback: function(){
 			gThis.OnTypingFinished();
 		}});
 	};
-	
+
 	gThis.RepositionLiveSearch = function() {
 		var liveSearchPaddingBorderHoriz = parseInt(gThis.m_jLiveSearch.css('paddingLeft'), 10) + parseInt(gThis.m_jLiveSearch.css('paddingRight'), 10) + parseInt(gThis.m_jLiveSearch.css('borderLeftWidth'), 10) + parseInt(gThis.m_jLiveSearch.css('borderRightWidth'), 10);
 		var tmpOffset = gThis.m_jInput.offset();
@@ -2339,7 +2339,7 @@ var GSearch = function() {
 			width: gThis.m_jInput.outerWidth(),
 			height: gThis.m_jInput.outerHeight()
 		};
-		
+
 		inputDim.topPos = inputDim.top + inputDim.height;
 		inputDim.totalWidth = inputDim.width - liveSearchPaddingBorderHoriz;
 
@@ -2350,17 +2350,17 @@ var GSearch = function() {
 			width:	inputDim.totalWidth+'px'
 		});
 	};
-	
+
 	gThis.ShowLiveSearch = function() {
-		gThis.RepositionLiveSearch();	
+		gThis.RepositionLiveSearch();
 		$(window).unbind('resize', gThis.RepositionLiveSearch).bind('resize', gThis.RepositionLiveSearch);
 		gThis.m_jLiveSearch.slideDown(gThis.m_oOptions.iDuration);
 	};
-	
+
 	gThis.HideLiveSearch = function() {
 		gThis.m_jLiveSearch.slideUp(gThis.m_oOptions.iDuration);
 	};
-	
+
 	gThis.OnFocus = function() {
 		gThis.m_jInput.focus(function() {
 			if(gThis.m_jInput.val() == gThis.m_oOptions.sDefaultText) $(this).val("");
@@ -2374,15 +2374,15 @@ var GSearch = function() {
 			}
 		}
 	};
-	
+
 	gThis.OnClick = function() {
 		gThis.m_jInput.click(function(){
 			if(gThis.m_jLiveSearch.html() != '') {
 				setTimeout(gThis.ShowLiveSearch(),1);
-			}	
+			}
 		});
 	};
-	
+
 	gThis.OnBlur = function() {
 		gThis.m_jInput.blur(function() {
 			if(gThis.m_jInput.val() == '') $(this).val(gThis.m_oOptions.sDefaultText);
@@ -2391,13 +2391,13 @@ var GSearch = function() {
 			gThis.ShowLiveSearch();
 		}
 	};
-	
+
 	gThis.OnTypingFinished = function() {
 		if(gThis.sLastValue != gThis.m_jInput.val() && gThis.m_jInput.val() != '' && gThis.m_jInput.val() != gThis.m_oOptions.sDefaultText && gThis.m_jInput.val().length > 2){
 			gThis.LoadResults();
 		}
 	};
-	
+
 	gThis.LoadResults = function() {
 		gThis.sLastValue = gThis.m_jInput.val();
 		$.get(gThis.m_oOptions.sViewUrl + Base64.encode(gThis.m_jInput.val()), function (data){
@@ -2409,9 +2409,9 @@ var GSearch = function() {
 			}
 		});
 	};
-	
+
 	gThis._Constructor();
-	
+
 };
 
 new GPlugin('GSearch', oDefaults, GSearch);
@@ -2623,14 +2623,14 @@ GFormDependency.s_iNextId = 0;
 
 var oDefaults = {
 	oClasses: {
-		
+
 	}
 };
 
 var GFormNode = function(oOptions) {
-	
+
 	var gThis = this;
-	
+
 	gThis.m_jNode;
 	gThis.m_gParent;
 	gThis.m_gForm;
@@ -2638,9 +2638,9 @@ var GFormNode = function(oOptions) {
 	gThis.m_bRepeatable;
 	gThis.m_bIgnore = false;
 	gThis.m_oInitializedDependencies = {};
-	
+
 	gThis._Constructor = function() {};
-	
+
 	gThis.Render = function() {
 		gThis.m_bRepeatable = false;
 		if ((gThis.m_oOptions.oRepeat != undefined) && (gThis.m_oOptions.oRepeat.iMax != undefined) && (gThis.m_oOptions.oRepeat.iMax > 1)) {
@@ -2651,7 +2651,7 @@ var GFormNode = function(oOptions) {
 		gThis.m_jNode.addClass('GFormNode');
 		return gThis.m_jNode;
 	};
-	
+
 	gThis._GetClass = function(sClassName) {
 		var sClass = gThis.m_oOptions.oClasses['s' + sClassName + 'Class'];
 		if (sClass == undefined) {
@@ -2661,7 +2661,7 @@ var GFormNode = function(oOptions) {
 			return sClass;
 		}
 	};
-	
+
 	gThis._GetImage = function(sImageName) {
 		var sImage = gThis.m_oOptions.oImages['s' + sImageName];
 		if (sImage == undefined) {
@@ -2671,7 +2671,7 @@ var GFormNode = function(oOptions) {
 			return GCore.DESIGN_PATH + sImage;
 		}
 	};
-	
+
 	gThis.GetName = function(sId) {
 		if ((gThis.m_sNamePrefix == undefined) || (gThis.m_sNamePrefix == '')) {
 			return (sId != undefined) ? gThis.m_oOptions.sName + '[' + sId + ']' : gThis.m_oOptions.sName;
@@ -2682,7 +2682,7 @@ var GFormNode = function(oOptions) {
 		}
 		return sName;
 	};
-	
+
 	gThis.GetId = function(sId) {
 		var sName = gThis.GetName().replace(/[\[\]]+/g, '__').replace(/\_\_$/, '');
 		if (sId != undefined) {
@@ -2690,18 +2690,18 @@ var GFormNode = function(oOptions) {
 		}
 		return sName;
 	};
-	
+
 	gThis.Populate = function(mData) {};
 	gThis.PopulateErrors = function(mData) {};
 	gThis.Validate = function(bNoRequests, iRepetition) { return true; };
-	
+
 	gThis.OnInit = function() {
 		gThis._Initialize();
 		gThis._InitializeEvents();
 		gThis._InitializeDependencies();
 		gThis._InitializeRules();
 	};
-	
+
 	gThis._InitializeDependencies = function() {
 		if (gThis.m_oOptions.agDependencies != undefined) {
 			for (var i in gThis.m_oOptions.agDependencies) {
@@ -2709,7 +2709,7 @@ var GFormNode = function(oOptions) {
 			}
 		}
 	};
-	
+
 	gThis._InitializeRules = function() {
 		if (!gThis.m_jNode) {
 			return;
@@ -2722,30 +2722,30 @@ var GFormNode = function(oOptions) {
 			}
 		}
 	};
-	
+
 	gThis.OnReset = function() {};
 	gThis.OnShow = function() {};
 	gThis.OnHide = function() {};
 	gThis.OnRemove = function() {};
 	gThis.Reset = function() {};
 	gThis.Focus = function() { return false; };
-	
+
 	gThis.BindChangeHandler = function(fHandler, oData) {
 		return gThis.m_jNode.bind('change', oData, fHandler);
 	};
-	
+
 	gThis._PrepareNode = function() {};
 	gThis._Initialize = function() {};
 	gThis._InitializeEvents = function() {};
-	
+
 	gThis.Ignore = function() {
 		gThis.m_bIgnore = true;
 	};
-	
+
 	gThis.Unignore = function() {
 		gThis.m_bIgnore = false;
 	};
-	
+
 	gThis.Show = function() {
 		gThis.Unignore();
 		gThis.m_jNode.slideDown(200);
@@ -2753,7 +2753,7 @@ var GFormNode = function(oOptions) {
 			$(gThis.m_gForm).find('.form-navigation li:has(a[href="#' + gThis.m_oOptions.sName + '"])').css('display', 'block');
 		}
 	};
-	
+
 	gThis.Hide = function() {
 		gThis.Ignore();
 		gThis.m_jNode.slideUp(150);
@@ -2761,7 +2761,7 @@ var GFormNode = function(oOptions) {
 			$(gThis.m_gForm).find('.form-navigation li:has(a[href="#' + gThis.m_oOptions.sName + '"])').css('display', 'none');
 		}
 	};
-	
+
 };
 /**
  * GFormRule
@@ -3183,7 +3183,7 @@ var GFormContainer = GCore.ExtendClass(GFormNode, function () {
     };
 
     gThis._ConstructChildren = function () {
-    	
+
         for (var i = 0; i < gThis.m_oOptions.aoFields.length; i++) {
             var oField = gThis.m_oOptions.aoFields[i];
             var gChild = new oField.fType(oField);
@@ -3347,7 +3347,7 @@ var GFormContainer = GCore.ExtendClass(GFormNode, function () {
     };
 
     gThis.Populate = function (mData) {
-    	
+
         if (gThis.m_bRepeatable) {
             gThis.AddRepetition();
         }
@@ -3391,7 +3391,7 @@ var GFormContainer = GCore.ExtendClass(GFormNode, function () {
         if (mData == undefined) {
             return;
         }
-        
+
         var i;
         if (gThis.m_bRepeatable) {
             for (i in mData) {
@@ -3403,7 +3403,7 @@ var GFormContainer = GCore.ExtendClass(GFormNode, function () {
         else {
             for (i = 0; i < gThis.m_oOptions.agFields.length; i++) {
                 if ((gThis.m_oOptions.agFields[i].m_oOptions.sName != undefined)) {
-                	
+
                     gThis.m_oOptions.agFields[i].PopulateErrors(mData[gThis.m_oOptions.agFields[i].m_oOptions.sName]);
                 }
             }
@@ -3466,9 +3466,9 @@ var oDefaults = {
 };
 
 var GFormField = GCore.ExtendClass(GFormNode, function() {
-	
+
 	var gThis = this;
-	
+
 	gThis.m_jField = $('empty');
 	gThis.m_oAlerts = {};
 	gThis.m_oRepetitionLookup = {};
@@ -3477,7 +3477,7 @@ var GFormField = GCore.ExtendClass(GFormNode, function() {
 	gThis.m_bAlreadyPopulated = false;
 	gThis.m_bSkipValidation = false;
 	gThis.m_afDependencyTriggers = [];
-	
+
 	gThis.Populate = function(mData) {
 		var i;
 		if (gThis.m_bRepeatable) {
@@ -3498,7 +3498,7 @@ var GFormField = GCore.ExtendClass(GFormNode, function() {
 			gThis.SetValue(mData);
 		}
 	};
-	
+
 	gThis.AddRepetition = function(sRepetition) {
 		if (sRepetition == undefined) {
 			sRepetition = 'new-' + gThis.m_sRepetitionCounter++;
@@ -3513,9 +3513,9 @@ var GFormField = GCore.ExtendClass(GFormNode, function() {
 		gThis.OnInitRepetition(sRepetition);
 		return sRepetition;
 	};
-	
+
 	gThis.OnInitRepetition = function(sRepetition) {};
-	
+
 	gThis.RemoveRepetition = function(sRepetition) {
 		gThis._RemoveAlerts(sRepetition);
 		gThis.m_oRepetitions[sRepetition].addClass('to-remove');
@@ -3524,7 +3524,7 @@ var GFormField = GCore.ExtendClass(GFormNode, function() {
 		delete gThis.m_oRepetitions[sRepetition];
 		gThis._UpdateRepetitionButtons();
 	};
-	
+
 	gThis.PopulateErrors = function(mData) {
 		if ((mData == undefined) || (mData == '')) {
 			return;
@@ -3541,21 +3541,21 @@ var GFormField = GCore.ExtendClass(GFormNode, function() {
 			gThis.SetError(mData);
 		}
 	};
-	
+
 	gThis.GetValue = function(sRepetition) {
 		if (gThis.m_jField == undefined) {
 			return '';
 		}
 		return gThis._GetField(sRepetition).val();
 	};
-	
+
 	gThis.SetValue = function(mValue, sRepetition) {
 		if (gThis.m_jField == undefined) {
 			return;
 		}
 		gThis._GetField(sRepetition).val(mValue);
 	};
-	
+
 	gThis.Validate = function(bNoRequests, sRepetition) {
 		if (gThis.m_bRepeatable && (sRepetition == undefined)) {
 			for (var j in gThis.m_oRepetitions) {
@@ -3587,11 +3587,11 @@ var GFormField = GCore.ExtendClass(GFormNode, function() {
 		}
 		return true;
 	};
-	
+
 	gThis.OnRemove = function() {
 		gThis._RemoveAlerts();
 	};
-	
+
 	gThis._RemoveAlerts = function(sRepetition) {
 		var i;
 		if (sRepetition == undefined) {
@@ -3617,15 +3617,15 @@ var GFormField = GCore.ExtendClass(GFormNode, function() {
 		}
 		gThis._GetField(sRepetition).closest('.' + gThis._GetClass('FieldSpan')).parent().find('.required').html('');
 		gThis._GetField(sRepetition).closest('.' + gThis._GetClass('FieldSpan')).parent().removeClass(gThis._GetClass('Invalid'));
-		
+
 	};
-	
+
 	gThis.StartWaiting = function(sRepetition) {
 		var jWaiting = $('<span class="' + gThis._GetClass('Waiting') + '"/>');
 		gThis._GetField(sRepetition).closest('.' + gThis._GetClass('FieldSpan')).parent().append(jWaiting);
 		jWaiting.css('display', 'none').fadeIn(250);
 	};
-	
+
 	gThis._GetField = function(sRepetition) {
 		if (!gThis.m_bRepeatable || (sRepetition == undefined)) {
 			return gThis.m_jField;
@@ -3638,18 +3638,18 @@ var GFormField = GCore.ExtendClass(GFormNode, function() {
 		gThis.m_oRepetitions[sRepetition].removeClass('to-retrieve');
 		return jField;
 	};
-	
+
 	gThis.StopWaiting = function(sRepetition) {
 		gThis._GetField(sRepetition).closest('.' + gThis._GetClass('FieldSpan')).parent().find('.' + gThis._GetClass('Waiting')).fadeOut(250, function() {$(this).remove();});
 	};
-	
+
 	gThis.ValidationResult = function(bResult, sMessage, sRepetition) {
 		if (!bResult) {
 			gThis.SetError(sMessage, sRepetition);
 		}
 		return bResult;
 	};
-	
+
 	gThis.SetError = function(sMessage, sRepetition) {
 		gThis._GetField(sRepetition).closest('.' + gThis._GetClass('FieldSpan')).parent().addClass(gThis._GetClass('Invalid'));
 		gThis._GetField(sRepetition).closest('.' + gThis._GetClass('FieldSpan')).parent().find('.required').html(sMessage).fadeOut(150, function() {
@@ -3660,7 +3660,7 @@ var GFormField = GCore.ExtendClass(GFormNode, function() {
 			});
 		});
 	};
-	
+
 	gThis._InitializeEvents = function(sRepetition) {
 		if (gThis.m_jField == undefined) {
 			return;
@@ -3675,31 +3675,31 @@ var GFormField = GCore.ExtendClass(GFormNode, function() {
 			$(this).unbind('change', gThis.OnValidate).change(gThis.OnValidate);
 		});
 	};
-	
+
 	gThis._ActivateFocusedTab = function(eEvent) {
 		if ($(eEvent.currentTarget).closest('.ui-tabs-panel').length && $(eEvent.currentTarget).closest('.ui-tabs-panel').hasClass('ui-tabs-hide')) {
 			gThis.m_gForm.m_bDontFocus = true;
 			$(eEvent.currentTarget).closest('.ui-tabs').tabs('select', $(eEvent.currentTarget).closest('.ui-tabs-panel').attr('id'));
 		}
 	};
-	
+
 	gThis.OnFocus = function(eEvent) {
 		gThis._ActivateFocusedTab(eEvent);
 	};
-	
+
 	gThis.OnBlur = function(eEvent) {};
-	
+
 	gThis.OnValidate = GEventHandler(function(eEvent) {
 		if (!$(this).closest('.GFormNode').get(0).gNode.m_bSkipValidation) {
 			gThis.Validate(false, this.sRepetition);
 		}
 	});
-	
+
 	gThis.Focus = function(sRepetition) {
 		gThis._GetField(sRepetition).eq(0).focus();
 		return true;
 	};
-	
+
 	gThis._UpdateRepetitionButtons = function() {
 		if (!gThis.m_bRepeatable) {
 			return;
@@ -3729,7 +3729,7 @@ var GFormField = GCore.ExtendClass(GFormNode, function() {
 			}
 		}
 	};
-	
+
 }, oDefaults);
 /*
 * CHECKBOX
@@ -3754,18 +3754,18 @@ var oDefaults = {
 };
 
 var GFormCheckbox = GCore.ExtendClass(GFormField, function() {
-	
+
 	var gThis = this;
-	
+
 	gThis.m_bShown = false;
-	
+
 	gThis.GetValue = function(sRepetition) {
 		if (gThis.m_jField == undefined) {
 			return '';
 		}
 		return (gThis._GetField(sRepetition).is(':checked')) ? gThis._GetField(sRepetition).attr('value') : '';
 	};
-	
+
 	gThis.SetValue = function(mValue, sRepetition) {
 		if (gThis.m_jField == undefined) {
 			return;
@@ -3777,7 +3777,7 @@ var GFormCheckbox = GCore.ExtendClass(GFormField, function() {
 			gThis._GetField(sRepetition).parent().unCheckCheckboxes();
 		}
 	};
-	
+
 	gThis._PrepareNode = function() {
 		gThis.m_jNode = $('<div/>').addClass(gThis._GetClass('Field'));
 		var jLabel = $('<label for="' + gThis.GetId() + '"/>');
@@ -3792,22 +3792,22 @@ var GFormCheckbox = GCore.ExtendClass(GFormField, function() {
 		}
 		gThis.m_jNode.append(jRepetitionNode);
 	};
-	
+
 	gThis.OnFocus = function(eEvent) {
 		var jField = $(eEvent.currentTarget);
 		jField.closest('.' + gThis._GetClass('FieldSpan')).addClass(gThis._GetClass('Focused'));
 		gThis._ActivateFocusedTab(eEvent);
 	};
-	
+
 	gThis.OnBlur = function(eEvent) {
 		var jField = $(eEvent.currentTarget);
 		jField.closest('.' + gThis._GetClass('FieldSpan')).removeClass(gThis._GetClass('Focused'));
 	};
-	
+
 	gThis.Reset = function() {
 		gThis.m_jField.val(gThis.m_oOptions.sDefault);
 	};
-	
+
 }, oDefaults);
 /*
 * FIELDSET LANGUAGE
@@ -3836,19 +3836,19 @@ var oDefaults = {
 };
 
 var GFormLanguageFieldset = GCore.ExtendClass(GFormLanguageContainer, function() {
-	
+
 	var gThis = this;
-	
+
 	gThis.m_jAdd;
-	
+
 	gThis._PrepareNode = function() {
 		gThis.m_jNode = $('<fieldset/>');
 		gThis.m_jNode.addClass(gThis.m_oOptions.sClass);
 		gThis.m_jNode.attr('id', gThis.m_oOptions.sName);
 		gThis.m_jNode.addClass('repeatable');
-			
+
 	};
-	
+
 	gThis._InitializeEvents = function() {
 		gThis.m_jNode.bind('GFormShow', function() {
 			gThis.m_gForm.m_bFocused = false;
@@ -3856,9 +3856,9 @@ var GFormLanguageFieldset = GCore.ExtendClass(GFormLanguageContainer, function()
 		});
 		return false;
 	};
-	
+
 	gThis.OnShow = function() {
-		
+
 		var aKeys = [];
 		for (i in gThis.m_oContainerRepetitions) {
 			aKeys.push(i);
@@ -3874,7 +3874,7 @@ var GFormLanguageFieldset = GCore.ExtendClass(GFormLanguageContainer, function()
 
 		return gThis.m_gForm.m_bFocused;
 	};
-	
+
 }, oDefaults);
 /*
 * FIELDSET
@@ -3902,11 +3902,11 @@ var oDefaults = {
 };
 
 var GFormNestedFieldset = GCore.ExtendClass(GFormContainer, function() {
-	
+
 	var gThis = this;
-	
+
 	gThis.m_jAdd;
-	
+
 	gThis._PrepareNode = function() {
 		gThis.m_jNode = $('<fieldset/>');
 		gThis.m_jNode.addClass(gThis.m_oOptions.sClass);
@@ -3925,7 +3925,7 @@ var GFormNestedFieldset = GCore.ExtendClass(GFormContainer, function() {
 			}
 		}
 	};
-	
+
 	gThis._InitializeEvents = function() {
 		gThis.m_jNode.bind('GFormShow', function() {
 			gThis.m_gForm.m_bFocused = false;
@@ -3944,7 +3944,7 @@ var GFormNestedFieldset = GCore.ExtendClass(GFormContainer, function() {
 			});
 		}
 	};
-	
+
 	gThis.OnShow = function() {
 		if (gThis.m_bRepeatable) {
 			var aKeys = [];
@@ -3961,7 +3961,7 @@ var GFormNestedFieldset = GCore.ExtendClass(GFormContainer, function() {
 			}
 		}
 		else {
-			
+
 			for (var i = 0; i < gThis.m_oOptions.agFields.length; i++) {
 				gThis.m_oOptions.agFields[i].OnShow();
 				if (!gThis.m_gForm.m_bFocused) {
@@ -3969,15 +3969,15 @@ var GFormNestedFieldset = GCore.ExtendClass(GFormContainer, function() {
 				}
 			}
 		}
-		
+
 		gThis.m_jNode.find('input,select').bind('change', GEventHandler(function(eEvent) {
 			var jPanel = $(eEvent.currentTarget).closest('.ui-tabs-panel');
 			$('a[href="#' + jPanel.attr('id') + '"]').addClass('changed');
 		}));
-		
+
 		return gThis.m_gForm.m_bFocused;
 	};
-	
+
 }, oDefaults);
 /*
 * FORM
@@ -4010,9 +4010,9 @@ var oDefaults = {
 };
 
 var GForm = GCore.ExtendClass(GFormContainer, function() {
-	
+
 	var gThis = this;
-	
+
 	gThis.m_bDontFocus = false;
 	gThis.m_bPopulatedWithDefaults = false;
 	gThis.m_bLocked = false;
@@ -4021,7 +4021,7 @@ var GForm = GCore.ExtendClass(GFormContainer, function() {
 	gThis.m_ogFields = {};
 	gThis.m_oLocks = {};
 	gThis.m_iLockId = 0;
-	
+
 	gThis._Constructor = function() {
 		GForm.s_agForms[gThis.m_oOptions.sFormName] = gThis;
 		gThis.m_gForm = gThis;
@@ -4038,15 +4038,15 @@ var GForm = GCore.ExtendClass(GFormContainer, function() {
 		gThis.OnInit();
 		gThis._InitButtons();
 	};
-	
+
 	gThis._InitializeEvents = function() {
 		if(gThis.m_bEnableAjax){
 			$(gThis).submit(gThis.AjaxSubmit);
 		}else{
 			$(gThis).submit(gThis.OnSubmit);
 		}
-	}; 
-	
+	};
+
 	gThis.Lock = function(sTitle, sMessage) {
 		gThis.m_oLocks[gThis.m_iLockId++] = {
 			sTitle: sTitle,
@@ -4054,11 +4054,11 @@ var GForm = GCore.ExtendClass(GFormContainer, function() {
 		};
 		return gThis.m_iLockId - 1;
 	};
-	
+
 	gThis.Unlock = function(iLockId) {
 		delete gThis.m_oLocks[iLockId];
 	};
-	
+
 	gThis.OnSubmit = function() {
 		for (var i in gThis.m_oLocks) {
 			GAlert(gThis.m_oLocks[i].sTitle, gThis.m_oLocks[i].sMessage);
@@ -4071,56 +4071,56 @@ var GForm = GCore.ExtendClass(GFormContainer, function() {
 		else
 		{
 			$(gThis).find('.invalid').first().find('input, select').focus();
-			
+
 			GAlert.DestroyAll();
-			
+
 			GAlert(GForm.Language.form_data_invalid,'', {
 				bAutoFocus: false
 			});
-			
+
 			window.setTimeout(GAlert.DestroyAll, 15000);
-			
+
 		}
 		return bResult;
 	};
-	
+
 	gThis.Submit = function(sAction) {
 		$(gThis).find('.' + gThis._GetClass('Actions')).empty();
 		if ((sAction != undefined) && (sAction != '')) {
 			$(gThis).find('.' + gThis._GetClass('Actions')).append('<input type="hidden" name="_Action_' + sAction + '" value="1"/>');
 		}
-		
+
 		if(gThis.m_bEnableAjax){
 			gThis.AjaxSubmit();
 		}else{
 			$(gThis).submit();
 		}
-		
+
 	};
-	
+
 	gThis.OnAjaxSubmitResponse = function(oResponse){
 		GCore.StopWaiting();
 		gThis.m_bLocked = false;
 		gThis.m_oOptions.agFields = gThis.m_agFields;
-		
+
 		if(oResponse.valid == false){
 			gThis.PopulateErrors(oResponse.error);
 		}else{
 			if(oResponse.next == false && oResponse.continue == false){
 				window.location.href = oResponse.redirectTo;
 			}
-			
+
 			if(oResponse.next == true && oResponse.continue == false){
 				gThis.Reset();
 				GNotification('Changes added!');
 			}
-			
+
 			if(oResponse.next == false && oResponse.continue == true){
 				GNotification('Changes saved!');
 			}
 		}
 	};
-	
+
 	gThis.AjaxSubmit = function() {
 		if(gThis.m_bLocked == true){
 			return false;
@@ -4131,12 +4131,12 @@ var GForm = GCore.ExtendClass(GFormContainer, function() {
 		$.each($(gThis).serializeArray(), function(i, field) {
 			values[field.name] = field.value;
 		});
-		
+
 		GF_Ajax_Request($(gThis).attr('action'), values, gThis.OnAjaxSubmitResponse);
-		
+
 		return false;
 	};
-	
+
 	gThis._InitButtons = function() {
 		var jButtons = $('a[href="#' + $(gThis).attr('id') + '"]');
 		jButtons.each(function() {
@@ -4165,11 +4165,11 @@ var GForm = GCore.ExtendClass(GFormContainer, function() {
 			}
 		});
 	};
-	
+
 	gThis.Render = function() {
 		return gThis.RenderChildren();
 	};
-	
+
 	gThis.Reset = function() {
 		gThis.OnReset();
 		gThis.m_bPopulatedWithDefaults = false;
@@ -4177,7 +4177,7 @@ var GForm = GCore.ExtendClass(GFormContainer, function() {
 		gThis.Populate(gThis.m_oOptions.oValues);
 		gThis.m_bPopulatedWithDefaults = true;
 	};
-	
+
 	gThis.MakeTabs = function() {
 		if ($(gThis).is('.attributeGroupEditor, .statusChange, .editOrder')) {
 			gThis.OnShow();
@@ -4189,7 +4189,7 @@ var GForm = GCore.ExtendClass(GFormContainer, function() {
 		});
 		gThis.m_oOptions = oThisOptions;
 	};
-	
+
 	gThis.GetField = function(sName) {
 		var asName = sName.split('.');
 		if (asName.length == 2) {
@@ -4200,9 +4200,9 @@ var GForm = GCore.ExtendClass(GFormContainer, function() {
 		}
 		return gThis.m_ogFields[sName];
 	};
-	
+
 	gThis._Constructor();
-	
+
 }, oDefaults);
 
 GForm.INFINITE = 99999;
@@ -4256,9 +4256,9 @@ var oDefaults = {
 };
 
 var GFormShopSelector = GCore.ExtendClass(GFormField, function() {
-	
+
 	var gThis = this;
-	
+
 	gThis.m_bShown = false;
 	gThis.m_jTree;
 	gThis.m_jOptions;
@@ -4269,7 +4269,7 @@ var GFormShopSelector = GCore.ExtendClass(GFormField, function() {
 	gThis.m_jItemPlaceholder;
 	gThis.m_jItemDragged;
 	gThis.m_oStores = {};
-	
+
 	gThis._PrepareNode = function() {
 		gThis.m_jNode = $('<div/>').addClass(gThis._GetClass('Field'));
 		gThis.m_jField = $('<input type="hidden"/>');
@@ -4289,12 +4289,12 @@ var GFormShopSelector = GCore.ExtendClass(GFormField, function() {
 		gThis.m_jTree.find('li:has(li)').removeClass(gThis._GetClass('Expanded'));
 		return false;
 	};
-	
+
 	gThis.OnExpandAll = function(eEvent) {
 		gThis.m_jTree.find('li:has(li)').addClass(gThis._GetClass('Expanded'));
 		return false;
 	};
-	
+
 	gThis.GetOrder = function() {
 		var jItems = gThis.m_jTree.find('li');
 		var aoItems = [];
@@ -4314,11 +4314,11 @@ var GFormShopSelector = GCore.ExtendClass(GFormField, function() {
 		}
 		return aoItems;
 	};
-	
+
 	gThis.GetValue = function(sRepetition) {
-		
+
 		return gThis.m_jFieldWrapper.find('input:first').attr('value');
-		
+
 		if (gThis.m_jField == undefined) {
 			return '';
 		}
@@ -4329,20 +4329,20 @@ var GFormShopSelector = GCore.ExtendClass(GFormField, function() {
 		}
 		return aValues;
 	};
-	
+
 	gThis.SetValue = function(mValue, sRepetition) {
 		if (gThis.m_jField == undefined) {
 			return;
 		}
 		gThis._GetField(sRepetition).val(mValue).change();
 	};
-	
+
 	gThis.ResetExpansion = function() {
 		gThis.m_jTree.find('li').removeClass(gThis._GetClass('Expanded'));
 		gThis.m_jTree.find('li.' + gThis._GetClass('Active')).parents('li').andSelf().filter(':has(li)').addClass(gThis._GetClass('Expanded'));
 		gThis.m_jTree.find('li > label > input:checked').parents('li').andSelf().filter(':has(li)').addClass(gThis._GetClass('Expanded'));
 	};
-	
+
 	gThis._WriteSubtree = function(jParent, sParent) {
 		if (sParent == undefined) {
 			sParent = null;
@@ -4356,20 +4356,20 @@ var GFormShopSelector = GCore.ExtendClass(GFormField, function() {
 			jParent.append(gThis._WriteItem(sId, oStore));
 		}
 	};
-	
+
 	gThis._WriteItem = function(sId, oStore) {
 		var jLi = $('<li/>');
 		jLi.get(0).sId = sId;
 		if (gThis.m_oOptions.sActive == sId) {
 			jLi.addClass(gThis._GetClass('Active'));
 		}
-		
+
 		if(oStore.type == 'store'){
-			
+
 			jLi.append($('<label class="' + gThis._GetClass('ItemName') + '"/>').css({'font-size':'13px','font-weight':'bold'}).append(oStore.name));
-		
+
 		}else{
-			var jField = $('<input type="checkbox" value="' + sId + '"/>');	
+			var jField = $('<input type="checkbox" value="' + sId + '"/>');
 			if (gThis.m_jFieldWrapper.find('input[value="' + sId + '"]').length) {
 				jField.click();
 				jField.attr('checked', 'checked');
@@ -4379,87 +4379,87 @@ var GFormShopSelector = GCore.ExtendClass(GFormField, function() {
 			}
 			jLi.append($('<label class="' + gThis._GetClass('ItemName') + '"/>').append(jField).append(oStore.name));
 		}
-		
+
 
 		var jUl = $('<ul/>');
 		gThis._WriteSubtree(jUl, sId);
 		jLi.append(jUl);
 		return jLi;
 	};
-	
+
 	gThis.UpdateExpanders = function() {
 		gThis.m_jTree.find('li::not(:has(li))').removeClass(gThis._GetClass('Expanded')).children('.' + gThis._GetClass('Expander')).css('display', 'none');
 		gThis.m_jTree.find('li:has(li) > .' + gThis._GetClass('Expander')).css('display', 'block');
 	};
-	
+
 	gThis.Update = function() {
 		gThis.m_jTree.empty();
 		gThis._WriteSubtree(gThis.m_jTree);
 		gThis._InitializeNodeEvents();
 		gThis.ResetExpansion();
 	};
-	
+
 	gThis.Populate = function(mValue) {
-		
+
 		if ((mValue == undefined) || (mValue == '')) {
 			mValue = [];
 		}
 		else if (!(mValue instanceof Array)) {
 			mValue = [mValue];
 		}
-		
+
 			gThis.m_jNode.unCheckCheckboxes();
 			gThis.m_jFieldWrapper.empty();
 			for (var i in mValue) {
 				if (i == 'toJSON') {
 					continue;
 				}
-				
+
 				gThis.m_jFieldWrapper.append('<input type="hidden" name="' + gThis.GetName() + '[]" value="' + mValue[i] + '"/>');
 				gThis.m_jNode.find('input:checkbox[value="v' + mValue[i] + '"]').parent().checkCheckboxes();
 			}
 
 		gThis.ResetExpansion();
 	};
-	
+
 	gThis.OnShow = function() {
 		if (!gThis.m_bShown) {
 			gThis.m_bShown = true;
 		}
 		gThis.OnExpandAll();
 	};
-	
+
 	gThis._OnClick = GEventHandler(function(eEvent) {
 		GCore.StartWaiting();
 	});
-	
+
 	gThis._InitializeEvents = function(sRepetition) {
 		gThis.m_jExpandAll.click(gThis.OnExpandAll);
 		gThis.m_jRetractAll.click(gThis.OnRetractAll);
 		gThis._InitializeNodeEvents();
 	};
-	
+
 	gThis._OnSelect = GEventHandler(function(eEvent) {
-		
+
 		var sStoreLabel = $(this).attr('value');
-		
+
 		var oStores = GCore.FilterObject(gThis.m_oOptions.oStores, function(oStore) {
 			return (oStore.label == sStoreLabel);
 		});
-		
+
 		var aoStore = oStores[sStoreLabel];
 		var iStoreId = aoStore['id'];
-		
+
 		gThis.m_jFieldWrapper.find('input[value="' + iStoreId + '"]').remove();
 
 		if ($(this).is(':checked')) {
-			
+
 			var jInput = $('<input type="hidden" name="' + gThis.GetName() + '[]" value="' + iStoreId + '"/>');
 			gThis.m_jFieldWrapper.append(jInput);
-			
+
 		}
 	});
-	
+
 	gThis._InitializeNodeEvents = function() {
 		gThis.m_jTree.find('.' + gThis._GetClass('Expander')).unbind('click').click(function() {
 			if ($(this).closest('li').hasClass(gThis._GetClass('Expanded'))) {
@@ -4472,14 +4472,14 @@ var GFormShopSelector = GCore.ExtendClass(GFormField, function() {
 		});
 		gThis.m_jTree.find('input').unbind('click').click(gThis._OnSelect);
 	};
-	
+
 	gThis._Expand = function(jParentLi) {
 		var sId = jParentLi.get(0).sId;
 		if (gThis.m_oStores[sId] != undefined) {
 			return;
 		}
 	};
-	
+
 	gThis._OnChildrenLoaded = GEventHandler(function(eEvent) {
 		var jUl = $('<ul/>');
 		gThis.m_oStores[eEvent.parentNode.get(0).sId] = true;
@@ -4490,7 +4490,7 @@ var GFormShopSelector = GCore.ExtendClass(GFormField, function() {
 		eEvent.parentNode.append(jUl);
 		gThis._InitializeNodeEvents();
 	});
-	
+
 }, oDefaults);
 /*
 * LAYOUT BOX SCHEME LIVE PREVIEW
@@ -4512,14 +4512,14 @@ var oDefaults = {
 };
 
 var GFormLayoutBoxSchemePreview = GCore.ExtendClass(GFormField, function() {
-	
+
 	var gThis = this;
-	
+
 	gThis.m_bShown = false;
 	gThis.m_oValues = {};
 	gThis.m_jWindow;
 	gThis.m_bWindowLoaded = false;
-	
+
 	gThis._PrepareNode = function() {
 		gThis.m_jNode = $('<div/>').addClass(gThis._GetClass('Field'));
 		gThis.m_jWindow = $('<iframe src="' + GCore.DESIGN_PATH + '_data_frontend/blank.htm" id="' + gThis.GetId() + '__window" width="300" height="100"/>');
@@ -4527,7 +4527,7 @@ var GFormLayoutBoxSchemePreview = GCore.ExtendClass(GFormField, function() {
 		gThis.m_jUnmodified = $('<input type="hidden" name="' + gThis.GetName() + '[unmodified]" value="1"/>');
 		gThis.m_jNode.append(gThis.m_jUnmodified);
 	};
-	
+
 	gThis._BuildWindow = function() {
 		gThis.m_bWindowLoaded = true;
 		var sTpl = gThis.m_oOptions.sLayoutBoxTpl;
@@ -4565,7 +4565,7 @@ var GFormLayoutBoxSchemePreview = GCore.ExtendClass(GFormField, function() {
 		}).html(jBox.wrap('<div/>').parent().html());
 		gThis.Refresh();
 	};
-	
+
 	gThis.OnShow = function() {
 		if (gThis.m_bShown) {
 			return;
@@ -4575,7 +4575,7 @@ var GFormLayoutBoxSchemePreview = GCore.ExtendClass(GFormField, function() {
 		gThis.m_jWindow.load(gThis._BuildWindow);
 		gThis.m_jUnmodified.val('0');
 	};
-	
+
 	gThis._InitializeEvents = function() {
 		for (var i in gThis.m_oOptions.asTriggers) {
 			var gField = gThis.m_gForm.GetField(gThis.m_oOptions.asTriggers[i]);
@@ -4600,14 +4600,14 @@ var GFormLayoutBoxSchemePreview = GCore.ExtendClass(GFormField, function() {
 		}
 		gThis.Update({});
 	};
-	
+
 	gThis._ConnectColourSchemePicker = function(gField) {
 		gField.m_jFieldColourType.change(gThis.Update);
 		gField.m_jFieldColourStart.change(gThis.Update);
 		gField.m_jFieldColourEnd.change(gThis.Update);
 		gField.m_jFileField.change(gThis.Update);
 	};
-	
+
 	gThis._ConnectFontStyle = function(gField) {
 		gField.m_jFieldFontFamily.change(gThis.Update);
 		gField.m_jFieldFontStyleBold.change(gThis.Update);
@@ -4617,23 +4617,23 @@ var GFormLayoutBoxSchemePreview = GCore.ExtendClass(GFormField, function() {
 		gField.m_jFieldFontColour.change(gThis.Update);
 		gField.m_jFieldFontSize.change(gThis.Update);
 	};
-	
+
 	gThis._ConnectBorder = function(gField) {
 		gField.m_fOnUpdate = gThis.Update;
 	};
-	
+
 	gThis._ConnectSelect = function(gField) {
 		gField.m_jField.change(gThis.Update);
 	};
-	
+
 	gThis._ConnectTextField = function(gField) {
 		gField.m_jField.change(gThis.Update);
 	};
-	
+
 	gThis._ConnectLocalFile = function(gField) {
 		gField.m_jField.change(gThis.Update);
 	};
-	
+
 	gThis.Update = GEventHandler(function(eEvent) {
 		gThis.m_oValues = {};
 		for (var i in gThis.m_oOptions.asTriggers) {
@@ -4659,7 +4659,7 @@ var GFormLayoutBoxSchemePreview = GCore.ExtendClass(GFormField, function() {
 		}
 		gThis.Refresh();
 	});
-	
+
 	gThis._UpdateColourSchemePicker = function(gField) {
 		var sSelector = gField.m_oOptions.sSelector;
 		if ((sSelector == undefined) || !sSelector.length) {
@@ -4690,7 +4690,7 @@ var GFormLayoutBoxSchemePreview = GCore.ExtendClass(GFormField, function() {
 				gThis.m_oValues[sSelector]['background-image'] = 'none';
 		}
 	};
-	
+
 	gThis._UpdateFontStyle = function(gField) {
 		var sSelector = gField.m_oOptions.sSelector;
 		if ((sSelector == undefined) || !sSelector.length) {
@@ -4707,7 +4707,7 @@ var GFormLayoutBoxSchemePreview = GCore.ExtendClass(GFormField, function() {
 		gThis.m_oValues[sSelector]['text-transform'] = (gField.m_jFieldFontStyleUppercase.val() == '1') ? 'uppercase': 'none';
 		gThis.m_oValues[sSelector]['font-size'] = gField.m_jFieldFontSize.val() + 'px';
 	};
-	
+
 	gThis._UpdateBorder = function(gField) {
 		var sSelector = gField.m_oOptions.sSelector;
 		if ((sSelector == undefined) || !sSelector.length) {
@@ -4727,7 +4727,7 @@ var GFormLayoutBoxSchemePreview = GCore.ExtendClass(GFormField, function() {
 			}
 		}
 	};
-	
+
 	gThis._UpdateSelect = function(gField) {
 		var sSelector = gField.m_oOptions.sSelector;
 		if ((sSelector == undefined) || !sSelector.length) {
@@ -4772,7 +4772,7 @@ var GFormLayoutBoxSchemePreview = GCore.ExtendClass(GFormField, function() {
 				gThis.m_oValues[sSelector][sAttribute] = gField.m_jField.val();
 		}
 	};
-	
+
 	gThis._UpdateTextField = function(gField) {
 		var sSelector = gField.m_oOptions.sSelector;
 		if ((sSelector == undefined) || !sSelector.length) {
@@ -4798,7 +4798,7 @@ var GFormLayoutBoxSchemePreview = GCore.ExtendClass(GFormField, function() {
 				gThis.m_oValues[sSelector][sAttribute] = gField.m_jField.val();
 		}
 	};
-	
+
 	gThis._UpdateLocalFile = function(gField) {
 		var sSelector = gField.m_oOptions.sSelector;
 		if ((sSelector == undefined) || !sSelector.length) {
@@ -4809,7 +4809,7 @@ var GFormLayoutBoxSchemePreview = GCore.ExtendClass(GFormField, function() {
 		}
 		gThis.m_oValues[sSelector]['background'] = 'transparent url(\'' + GCore.DESIGN_PATH.substr(0, GCore.DESIGN_PATH.lastIndexOf('/', GCore.DESIGN_PATH.length - 2)) + '/' + 'design/_images_frontend/upload/' + gField.m_jField.val() + '\') center center no-repeat';
 	};
-	
+
 	gThis.Refresh = function() {
 		if (!gThis.m_bWindowLoaded) {
 			return;
@@ -4834,9 +4834,9 @@ var GFormLayoutBoxSchemePreview = GCore.ExtendClass(GFormField, function() {
 			}
 		}
 	};
-	
+
 	gThis.Focus = function() { return false; };
-	
+
 }, oDefaults);
 /*
 * PREVIEW
@@ -4853,12 +4853,12 @@ var oDefaults = {
 };
 
 var GFormPreview = GCore.ExtendClass(GFormField, function() {
-	
+
 	var gThis = this;
-	
+
 	gThis.m_jTrigger;
 	gThis.m_wWindow;
-	
+
 	gThis._PrepareNode = function() {
 		if (!gThis.m_oOptions.sLabel.length) {
 			gThis.m_oOptions.sLabel = GForm.Language.preview_trigger_label;
@@ -4867,17 +4867,17 @@ var GFormPreview = GCore.ExtendClass(GFormField, function() {
 		gThis.m_jTrigger = $('<a href="#">' + gThis.m_oOptions.sLabel + '</a>');
 		gThis.m_jNode.append(gThis.m_jTrigger);
 	};
-	
+
 	gThis._InitializeEvents = function() {
 		gThis.m_jTrigger.click(gThis.OnClick);
 	};
-	
+
 	gThis.OnClick = GEventHandler(function(eEvent) {
 		gThis.m_wWindow = window.open('', gThis.GetId(), 'width=' + gThis.m_oOptions.iWidth + 'px, height=' + gThis.m_oOptions.iHeight + 'px, location=false, menubar=false, status=false, toolbar=false');
 		gThis.m_wWindow.focus();
 		gThis._WriteFormAndSubmitIt();
 	});
-	
+
 	gThis._WriteFormAndSubmitIt = function() {
 		gThis.m_wWindow.document.open();
 		gThis.m_wWindow.document.write('<html><head><title>...</title></head><body>');
@@ -4888,9 +4888,9 @@ var GFormPreview = GCore.ExtendClass(GFormField, function() {
 		var jFormElements = gThis.m_jNode.closest('.GForm').find('[name]');
 		$(gThis.m_wWindow.document.getElementById('form')).append(jFormElements.clone()).submit();
 	};
-	
+
 	gThis.Focus = function() { return false; };
-	
+
 }, oDefaults);
 /*
 * RADIO GROUP
@@ -4915,19 +4915,19 @@ var oDefaults = {
 };
 
 var GFormRadioGroup = GCore.ExtendClass(GFormField, function() {
-	
+
 	var gThis = this;
-	
+
 	gThis.m_bResized;
-	
+
 	gThis._Constructor = function() {
 		gThis.m_bResized = false;
 	};
-	
+
 	gThis.GetValue = function() {
 		return gThis.m_jField.filter(':checked').attr('value');
 	};
-	
+
 	gThis._PrepareNode = function() {
 		gThis.m_jNode = $('<div/>').addClass(gThis._GetClass('Field'));
 		var jLabel = $('<label class="' + gThis._GetClass('Group') + '" for="' + gThis.GetId() + '"/>');
@@ -4944,16 +4944,16 @@ var GFormRadioGroup = GCore.ExtendClass(GFormField, function() {
 			gThis.m_jNode.append($('<span class="' + gThis._GetClass('FieldSpan') + '"/>').append($('<label>' + oOption.sLabel + '</label>').prepend(jInput)));
 		}
 	};
-	
+
 	gThis.SetValue = function(mValue) {
 		if ((gThis.m_jField != undefined) && (gThis.m_jField instanceof $)) {
 			gThis.m_jField.find(':radio[value="' + mValue + '"]').click();
 		}
 	};
-	
+
 	gThis.Reset = function() {
 	};
-	
+
 }, oDefaults);
 /*
 * RADIO VALUE GROUP
@@ -4981,19 +4981,19 @@ var oDefaults = {
 };
 
 var GFormRadioValueGroup = GCore.ExtendClass(GFormField, function() {
-	
+
 	var gThis = this;
-	
+
 	gThis.m_bResized;
-	
+
 	gThis._Constructor = function() {
 		gThis.m_bResized = false;
 	};
-	
+
 	gThis.GetValue = function() {
 		return gThis.m_jField.filter(':checked').attr('value');
 	};
-	
+
 	gThis._PrepareNode = function() {
 		gThis.m_jNode = $('<div/>').addClass(gThis._GetClass('Field'));
 		var jLabel = $('<label class="' + gThis._GetClass('Group') + '" for="' + gThis.GetId() + '"/>');
@@ -5045,7 +5045,7 @@ var GFormRadioValueGroup = GCore.ExtendClass(GFormField, function() {
 			gThis.m_jNode.append($('<span class="' + gThis._GetClass('FieldSpan') + '"/>').append(jLabel.prepend(jInput)));
 		}
 	};
-	
+
 	gThis._InitializeEvents = function() {
 		var f = function(eEvent) {
 			if ($(this).is(':checked')) {
@@ -5070,7 +5070,7 @@ var GFormRadioValueGroup = GCore.ExtendClass(GFormField, function() {
 		});
 		gThis.m_jNode.find('input.date').datepicker();
 	};
-	
+
 	gThis.SetValue = function(mValue) {
 		for (var i in mValue) {
 			if (i == 'value') {
@@ -5084,10 +5084,10 @@ var GFormRadioValueGroup = GCore.ExtendClass(GFormField, function() {
 			}
 		}
 	};
-	
+
 	gThis.Reset = function() {
 	};
-	
+
 }, oDefaults);
 /*
 * SELECT
@@ -5127,19 +5127,19 @@ var oDefaults = {
 };
 
 var GFormSelect = GCore.ExtendClass(GFormField, function() {
-	
+
 	var gThis = this;
-	
+
 	gThis.m_bShown = false;
 	gThis.m_bResized = false;
-	
+
 	gThis.GetValue = function(sRepetition) {
 		if (gThis.m_jField == undefined) {
 			return '';
 		}
 		return gThis._GetField(sRepetition).find('option:selected').attr('value');
 	};
-	
+
 	gThis.SetValue = function(mValue, sRepetition) {
 		if (gThis.m_jField == undefined) {
 			return;
@@ -5150,7 +5150,7 @@ var GFormSelect = GCore.ExtendClass(GFormField, function() {
 			jField.get(0).Update.apply(jField.get(0));
 		}
 	};
-	
+
 	gThis.ExchangeOptions = function(aoNewOptions) {
 		var sOldValueId = gThis.m_jField.val();
 		gThis.m_oOptions.aoOptions = aoNewOptions;
@@ -5168,7 +5168,7 @@ var GFormSelect = GCore.ExtendClass(GFormField, function() {
 		gThis._InitializeDependencies();
 		gThis.m_jField.change();
 	};
-	
+
 	gThis._PrepareNode = function() {
 		gThis.m_jNode = $('<div/>').addClass(gThis._GetClass('Field'));
 		var jLabel = $('<label for="' + gThis.GetId() + '"/>');
@@ -5192,7 +5192,7 @@ var GFormSelect = GCore.ExtendClass(GFormField, function() {
 			gThis.m_jNode.append('<input type="hidden" name="' + gThis.GetName() + '[css_attribute]" value="' + gThis.m_oOptions.sCssAttribute + '"/>');
 		}
 	};
-	
+
 	gThis._AddField = function(sId) {
 		var jField = $('<select name="' + gThis.GetName(sId) + '" id="' + gThis.GetId(sId) + '"/>');
 		for (var i = 0; i < gThis.m_oOptions.aoOptions.length; i++) {
@@ -5217,7 +5217,7 @@ var GFormSelect = GCore.ExtendClass(GFormField, function() {
 			jSuffix.html(gThis.m_oOptions.sSuffix);
 			jRepetitionNode.append(jSuffix);
 		}
-		
+
 		if (gThis.m_oOptions.bAddable && (gThis.m_oOptions.fOnAdd instanceof Function)) {
 			gThis.m_jTrigger = $('<a href="#" class="' + gThis._GetClass('AddRepetition') + '"/>').append('<img src="' + gThis._GetImage('AddRepetition') + '" alt="' + GForm.Language.add_field_repetition + '" title="' + GForm.Language.add_field_repetition + '"/>');
 			jRepetitionNode.append(gThis.m_jTrigger);
@@ -5227,14 +5227,14 @@ var GFormSelect = GCore.ExtendClass(GFormField, function() {
 		gThis.jRepetitionNode = jRepetitionNode;
 		return gThis.jRepetitionNode;
 	};
-	
+
 	gThis.OnInitRepetition = function(sRepetition) {
 		if (!gThis.m_bShown) {
 			return;
 		}
 		gThis._GetField(sRepetition).GSelect();
 	};
-	
+
 	gThis.OnShow = function() {
 		gThis._UpdateRepetitionButtons();
 		if (!gThis.m_bShown && gThis.m_bRepeatable) {
@@ -5282,20 +5282,20 @@ var GFormSelect = GCore.ExtendClass(GFormField, function() {
 			});
 		}
 	};
-	
+
 	gThis.OnFocus = function(eEvent) {
 		$(eEvent.currentTarget).closest('.' + gThis._GetClass('FieldSpan')).addClass(gThis._GetClass('Focused'));
 		gThis._ActivateFocusedTab(eEvent);
 	};
-	
+
 	gThis.OnBlur = function(eEvent) {
 		$(eEvent.currentTarget).closest('.' + gThis._GetClass('FieldSpan')).removeClass(gThis._GetClass('Focused'));
 	};
-	
+
 	gThis.Reset = function() {
 		gThis.m_jField.val(gThis.m_oOptions.sDefault).change();
 	};
-	
+
 	gThis._InitializeEvents = function(sRepetition) {
 		if (gThis.m_jField == undefined) {
 			return;
@@ -5322,7 +5322,7 @@ var GFormSelect = GCore.ExtendClass(GFormField, function() {
 			gThis.OnShow();
 		}
 	};
-	
+
 }, oDefaults);
 /*
 * SORTABLE LIST
@@ -5648,16 +5648,16 @@ var oDefaults = {
 };
 
 var GFormStaticImage = GCore.ExtendClass(GFormField, function() {
-	
+
 	var gThis = this;
-	
+
 	gThis._PrepareNode = function() {
 		gThis.m_jNode = $('<div/>').addClass(gThis._GetClass('Field'));
 		gThis.m_jNode.append('<img id="' + gThis.GetId() + '" src="' + gThis.m_oOptions.sSrc + '" alt="' + gThis.m_oOptions.sAlt + '"/>');
 	};
-	
+
 	gThis.Focus = function() { return false; };
-	
+
 }, oDefaults);
 /*
 * STATIC LISTING
@@ -5675,14 +5675,14 @@ var oDefaults = {
 };
 
 var GFormStaticListing = GCore.ExtendClass(GFormField, function() {
-	
+
 	var gThis = this;
-	
+
 	gThis.m_jListing;
 	gThis.m_jCollapseTrigger;
 	gThis.m_bExpanded;
 	gThis.m_bShown = false;
-	
+
 	gThis._PrepareNode = function() {
 		gThis.m_bExpanded = gThis.m_oOptions.bExpanded;
 		gThis.m_jNode = $('<div/>').addClass(gThis._GetClass('Field'));
@@ -5692,7 +5692,7 @@ var GFormStaticListing = GCore.ExtendClass(GFormField, function() {
 		gThis.m_jListing = $('<span class="repetition"/>');
 		gThis.m_jNode.append(gThis.m_jListing.empty().append(gThis._MakeListing(gThis.m_oOptions.sTitle, gThis.m_oOptions.aoValues)));
 	};
-	
+
 	gThis._MakeListing = function(sTitle, aoValues) {
 		var jListing = $('<div/>');
 		jListing.append('<h3>' + sTitle + '</h3>');
@@ -5717,7 +5717,7 @@ var GFormStaticListing = GCore.ExtendClass(GFormField, function() {
 		jListing.append(jDl);
 		return jListing;
 	};
-	
+
 	gThis.OnShow = function() {
 		if (gThis.m_bShown) {
 			return;
@@ -5725,7 +5725,7 @@ var GFormStaticListing = GCore.ExtendClass(GFormField, function() {
 		gThis.m_bShown = true;
 		gThis._InitializeExpansion();
 	};
-	
+
 	gThis.ChangeItems = function(aoItems, sTitle) {
 		if (sTitle == undefined) {
 			sTitle = gThis.m_oOptions.sTitle;
@@ -5735,7 +5735,7 @@ var GFormStaticListing = GCore.ExtendClass(GFormField, function() {
 			gThis._InitializeExpansion();
 		}
 	};
-	
+
 	gThis._InitializeExpansion = function() {
 		if (gThis.m_jCollapseTrigger != undefined) {
 			gThis.m_jCollapseTrigger.click(GEventHandler(function(eEvent) {
@@ -5752,9 +5752,9 @@ var GFormStaticListing = GCore.ExtendClass(GFormField, function() {
 			}));
 		}
 	};
-	
+
 	gThis.Focus = function() { return false; };
-	
+
 }, oDefaults);
 /*
 * STATIC TEXT
@@ -5769,16 +5769,16 @@ var oDefaults = {
 };
 
 var GFormStaticText = GCore.ExtendClass(GFormField, function() {
-	
+
 	var gThis = this;
-	
+
 	gThis._PrepareNode = function() {
 		gThis.m_jNode = $('<div/>').addClass(gThis._GetClass('Field'));
 		gThis.m_jNode.append(gThis.m_oOptions.sText);
 	};
-	
+
 	gThis.Focus = function() { return false; };
-	
+
 }, oDefaults);
 /*
 * SUBMIT
@@ -5795,15 +5795,15 @@ var oDefaults = {
 };
 
 var GFormSubmit = GCore.ExtendClass(GFormField, function() {
-	
+
 	var gThis = this;
-	
+
 	gThis._PrepareNode = function() {
 		gThis.m_jNode = $('<div/>').addClass(gThis._GetClass('Field'));
 		gThis.m_jNode.append('<button class="' + gThis._GetClass('Button') + '" type="submit" name="' + gThis.GetName() + '"><span>' + gThis.m_oOptions.sLabel + '</span></button>');
 		//gThis.m_jNode.append('<span class="' + gThis._GetClass('Button') + '"><span>' + ((gThis.m_oOptions.sIcon != '') ? '<img src="' + GCore.DESIGN_PATH + gThis.m_oOptions.sIcon + '" alt=""/>' : '') + '<input type="submit" name="' + gThis.GetName() + '" value="' + gThis.m_oOptions.sLabel + '"/></span></span>');
 	};
-	
+
 }, oDefaults);
 /*
 * TECHNICAL DATA EDITOR
@@ -5855,47 +5855,47 @@ var oDefaults = {
 };
 
 var GFormTechnicalDataEditor = GCore.ExtendClass(GFormField, function() {
-	
+
 	var gThis = this;
-	
+
 	gThis.m_bShown = false;
 	gThis.m_bResized = false;
-	
+
 	gThis.m_bSetAltered = false;
 	gThis.m_bIgnoreSetChange = false;
-	
+
 	gThis.m_aoSets = [];
 	gThis.m_aoAttributes = [];
 	gThis.m_oValues = {};
-	
+
 	gThis.m_sCurrentSet = '';
-	
+
 	gThis.m_jSets;
 	gThis.m_jAttributes;
 	gThis.m_jAdd;
 	gThis.m_jFields;
-	
+
 	gThis.m_sGroupOptions;
 	gThis.m_sAttributeOptions;
-	
+
 	gThis.m_iLoads = ((gThis.m_oOptions.sSetId != undefined) && gThis.m_oOptions.sSetId) ? 0 : 1;
-	
+
 	gThis._PrepareNode = function() {
-		
+
 		gThis.m_sCurrentSet = gThis.m_oOptions.sSetId;
 		gThis.m_jNode = $('<div/>').addClass(gThis._GetClass('Field'));
 		gThis.m_jSets = $('<div/>');
 		gThis.m_jAttributes = $('<fieldset/>');
-		
+
 		gThis.m_jFields = $('<div/>');
-		
+
 		gThis.m_jNode.append(gThis.m_jSets);
 		gThis.m_jNode.append($('<div class="technical-data-info"><div class="groups">Grupa atrybutów</div><div class="attributes">Atrybuty</div><div class="values">Wartości</div></div>'));
 		gThis.m_jNode.append(gThis.m_jAttributes);
 		gThis.m_jNode.append(gThis.m_jFields);
-		
+
 	};
-	
+
 	gThis.UpdateFields = function() {
 		gThis.m_jFields.empty();
 		var sFields = '';
@@ -5939,7 +5939,7 @@ var GFormTechnicalDataEditor = GCore.ExtendClass(GFormField, function() {
 		}
 		gThis.m_jFields.html(sFields);
 	};
-	
+
 	gThis.OnShow = function() {
 		if (gThis.m_bShown) {
 			return;
@@ -5947,20 +5947,20 @@ var GFormTechnicalDataEditor = GCore.ExtendClass(GFormField, function() {
 		gThis.m_bShown = true;
 		gThis.LoadSets();
 	};
-	
+
 	gThis.OnFocus = function(eEvent) {
 		gThis._ActivateFocusedTab(eEvent);
 	};
-	
+
 	gThis.OnBlur = function(eEvent) {
 	};
-	
+
 	gThis.OnReset = function() {
 		gThis.m_sCurrentSet = gThis.m_oOptions.sSetId;
 		gThis.m_iLoads = 0;
 		gThis.LoadSets();
 	};
-	
+
 	gThis.SetValue = function(mValue, sRepetition) {
 		if (mValue == undefined) {
 			return;
@@ -6006,10 +6006,10 @@ var GFormTechnicalDataEditor = GCore.ExtendClass(GFormField, function() {
 		}
 		gThis._WriteTechnicalAttributes();
 	};
-	
+
 	gThis._InitializeEvents = function(sRepetition) {
 	};
-	
+
 	gThis.LoadSets = function(fOnSuccess) {
 		gThis.m_jSets.html('<div class="field-select"><label>' + GForm.Language.technical_data_choose_set + '</label><span class="repetition"><span class="waiting"></span></span></div>');
 		var sProductId = gThis.m_oOptions.sProductId;
@@ -6021,7 +6021,7 @@ var GFormTechnicalDataEditor = GCore.ExtendClass(GFormField, function() {
 			fOnSuccess: fOnSuccess
 		}));
 	};
-	
+
 	gThis._OnSetsLoad = GEventHandler(function(eEvent) {
 		gThis.m_aoSets = eEvent.aoSets;
 		gThis._WriteSets();
@@ -6047,7 +6047,7 @@ var GFormTechnicalDataEditor = GCore.ExtendClass(GFormField, function() {
 			eEvent.fOnSuccess(eEvent);
 		}
 	});
-	
+
 	gThis._WriteSets = function() {
 		gThis.m_jSets.empty();
 		var jSelect = $('<select id="' + gThis.GetName() + '__set"/>');
@@ -6057,16 +6057,16 @@ var GFormTechnicalDataEditor = GCore.ExtendClass(GFormField, function() {
 			jSelect.append('<option' + ((oSet.id == gThis.m_sCurrentSet) ? ' selected="selected"' : '') + ' value="' + oSet.id + '"' + (oSet.recommended ? ' class="strong"' : '') + '>' + oSet.caption + '</option>');
 		}
 		var jField = $('<div class="field-select"><label for="' + gThis.GetName() + '__set">' + GForm.Language.technical_data_choose_set + '</label><span class="repetition"><span class="field"></span></span></div>');
-		
+
 		jField.find('.field').append(jSelect).after($('<span class="suffix"></span>'));
 		gThis.m_jSets.append(jField);
 		jSelect.GSelect();
 		jSelect.change(function(eEvent) {
 			gThis._OnSetchange(eEvent);
 		});
-		
+
 	};
-	
+
 	gThis._OnSetchange = new GEventHandler(function(eEvent) {
 		var sChosenSet = $(eEvent.currentTarget).val();
 		if (gThis.m_bIgnoreSetChange) {
@@ -6103,7 +6103,7 @@ var GFormTechnicalDataEditor = GCore.ExtendClass(GFormField, function() {
 			gThis.LoadTechnicalAttributesForSet(sChosenSet);
 		}
 	});
-	
+
 	gThis.LoadTechnicalAttributesForSet = function(sId) {
 		gThis.m_sCurrentSet = sId;
 		if (gThis.m_iLoads++ < 1) {
@@ -6114,13 +6114,13 @@ var GFormTechnicalDataEditor = GCore.ExtendClass(GFormField, function() {
 			setId: gThis.m_sCurrentSet
 		}, GCallback(gThis._OnTechnicalAttributesLoad));
 	};
-	
+
 	gThis._OnTechnicalAttributesLoad = GEventHandler(function(eEvent) {
 		gThis.m_aoAttributes = eEvent.aoAttributes;
 		gThis.m_bSetAltered = false;
 		gThis._WriteTechnicalAttributes();
 	});
-	
+
 	gThis._WriteTechnicalAttributes = function() {
 		gThis._UpdateGroupOptions();
 		gThis._UpdateAttributeOptions();
@@ -6145,7 +6145,7 @@ var GFormTechnicalDataEditor = GCore.ExtendClass(GFormField, function() {
 		gThis._UpdateIndices();
 		gThis.UpdateValues();
 	};
-	
+
 	gThis._CreateAttributeGroup = function() {
 		var oGroup = {
 			id: 'new-' + GFormTechnicalDataEditor.s_iNewId++,
@@ -6157,7 +6157,7 @@ var GFormTechnicalDataEditor = GCore.ExtendClass(GFormField, function() {
 		}
 		return oGroup;
 	};
-	
+
 	gThis._CreateAttribute = function() {
 		var oAttribute = {
 			id: 'new-' + GFormTechnicalDataEditor.s_iNewId++,
@@ -6170,7 +6170,7 @@ var GFormTechnicalDataEditor = GCore.ExtendClass(GFormField, function() {
 		}
 		return oAttribute;
 	};
-	
+
 	gThis.DeleteAttributeGroup = function(iGroup) {
 		gThis.m_aoAttributes.splice(iGroup, 1);
 		gThis.m_jAttributes.children('.group:eq(' + iGroup + ')').remove();
@@ -6178,7 +6178,7 @@ var GFormTechnicalDataEditor = GCore.ExtendClass(GFormField, function() {
 		gThis._UpdateIndices();
 		gThis.UpdateFields();
 	};
-	
+
 	gThis.DeleteAttribute = function(iGroup, iAttribute) {
 		gThis.m_aoAttributes[iGroup].children.splice(iAttribute, 1);
 		gThis.m_jAttributes.children('.group:eq(' + (iGroup + 1) + ') .attributes .attribute:eq(' + iAttribute + ')').remove();
@@ -6186,7 +6186,7 @@ var GFormTechnicalDataEditor = GCore.ExtendClass(GFormField, function() {
 		gThis._UpdateIndices();
 		gThis.UpdateFields();
 	};
-	
+
 	gThis._UpdateAttributeOptions = function() {
 		gThis.m_sAttributeOptions = '';
 		for (var j = 0; j < gThis.m_oOptions.aTechnicalAttributes.length; j++) {
@@ -6194,10 +6194,10 @@ var GFormTechnicalDataEditor = GCore.ExtendClass(GFormField, function() {
 			gThis.m_sAttributeOptions += '<option value="' + oTechnicalAttribute.id + '">' + oTechnicalAttribute.caption[GCore.iActiveLanguage] + '</option>';
 		}
 	};
-	
+
 	gThis._UpdateGroupOptions = function() {
 		gThis.m_sGroupOptions = '';
-		
+
 		var aSelectedAttributes = [];
 		$.each(gThis.m_aoAttributes, function(a, attribute){
 			aSelectedAttributes.push(attribute.id);
@@ -6216,8 +6216,8 @@ var GFormTechnicalDataEditor = GCore.ExtendClass(GFormField, function() {
 				gThis.m_sGroupOptions += '<option value="' + oAttributeGroup.id + '">' + oAttributeGroup.caption[GCore.iActiveLanguage] +'</option>';
 			}
 		}
-	}; 
-	
+	};
+
 	gThis.AddAttributeGroup = function(oGroup) {
 		if (oGroup == undefined) {
 			oGroup = {};
@@ -6269,9 +6269,9 @@ var GFormTechnicalDataEditor = GCore.ExtendClass(GFormField, function() {
 			jDelete.click(gThis._OnGroupDeleteClick);
 			jGroup.append(jDelete);
 		}
-		
+
 	};
-	
+
 	gThis._OnGroupEditClick = GEventHandler(function(eEvent) {
 		var iGroupIndex = $(this).closest('.group').data('iGroupIndex');
 		var oGroup = gThis.m_aoAttributes[iGroupIndex];
@@ -6340,13 +6340,13 @@ var GFormTechnicalDataEditor = GCore.ExtendClass(GFormField, function() {
 		}));
 		jOverlay.append(jSaveButton).append(jDeleteButton);
 	});
-	
+
 	gThis._OnGroupDeleteClick = GEventHandler(function(eEvent) {
 		gThis.DeleteAttributeGroup($(this).closest('.group').data('iGroupIndex'));
 		gThis.m_bSetAltered = true;
 		return false;
 	});
-	
+
 	gThis._OnGroupChange = GEventHandler(function(eEvent) {
 		gThis.m_bSetAltered = true;
 		var bFound = false;
@@ -6357,7 +6357,7 @@ var GFormTechnicalDataEditor = GCore.ExtendClass(GFormField, function() {
 			}
 		}
 		if (bFound) {
-			gThis.m_aoAttributes[$(this).closest('.group').data('iGroupIndex')].id = gThis.m_oOptions.aAttributeGroups[k].id;					
+			gThis.m_aoAttributes[$(this).closest('.group').data('iGroupIndex')].id = gThis.m_oOptions.aAttributeGroups[k].id;
 			for (var l in GCore.aoLanguages) {
 				gThis.m_aoAttributes[$(this).closest('.group').data('iGroupIndex')].caption[l] = (gThis.m_oOptions.aAttributeGroups[k].caption[l] == undefined) ? '' : gThis.m_oOptions.aAttributeGroups[k].caption[l];
 			}
@@ -6374,7 +6374,7 @@ var GFormTechnicalDataEditor = GCore.ExtendClass(GFormField, function() {
 		}
 		gThis.UpdateFields();
 	});
-	
+
 	gThis._OnAttributeAddClick = GEventHandler(function(eEvent) {
 		var oNewAttribute = gThis._CreateAttribute();
 		gThis.m_aoAttributes[$(this).closest('.group').data('iGroupIndex')].children.push(oNewAttribute);
@@ -6383,14 +6383,14 @@ var GFormTechnicalDataEditor = GCore.ExtendClass(GFormField, function() {
 		gThis.UpdateFields();
 		return false;
 	});
-	
+
 	gThis.AddAttribute = function(jGroup, oAttribute, iGroupIndex) {
 		if (oAttribute == undefined) {
 			oAttribute = {};
 		}
 		var jAttribute = $('<div class="' + gThis._GetClass('Attribute') + '"/>');
 		var jAttributeSelect = $('<select/>');
-		
+
 		var aoActiveGroupAttributes = [];
 		for (var j = 0; j < gThis.m_oOptions.aAttributeGroups.length; j++) {
 			var oGroup = gThis.m_oOptions.aAttributeGroups[j];
@@ -6398,7 +6398,7 @@ var GFormTechnicalDataEditor = GCore.ExtendClass(GFormField, function() {
 				aoActiveGroupAttributes = oGroup.attributes;
 			}
 		}
-		
+
 		var sAttributeOptions = '<option value="">---</option>';
 		for (var j = 0; j < gThis.m_oOptions.aTechnicalAttributes.length; j++) {
 			var oTechnicalAttribute = gThis.m_oOptions.aTechnicalAttributes[j];
@@ -6406,7 +6406,7 @@ var GFormTechnicalDataEditor = GCore.ExtendClass(GFormField, function() {
 				sAttributeOptions += '<option value="' + oTechnicalAttribute.id + '">' + oTechnicalAttribute.caption[GCore.iActiveLanguage] + '</option>';
 			}
 		}
-			
+
 		jAttributeSelect.html(sAttributeOptions);
 		if(oAttribute.set_id > 0){
 			jAttribute.append($('<div class="field-technical-attribute"/>').prepend($('<span class="constant"/>').html(oAttribute.caption[GCore.iActiveLanguage])));
@@ -6436,10 +6436,10 @@ var GFormTechnicalDataEditor = GCore.ExtendClass(GFormField, function() {
 			var jValue = $('<div class="value"/>');
 			jAttribute.append(jValue);
 		}
-		
+
 		gThis._UpdateValueField(oAttribute, jAttribute);
 	};
-	
+
 	gThis._OnAttributeEditClick = GEventHandler(function(eEvent) {
 		var iGroupIndex = $(this).closest('.group').data('iGroupIndex');
 		var iAttributeIndex = $(this).closest('.attribute').data('iAttributeIndex');
@@ -6535,13 +6535,13 @@ var GFormTechnicalDataEditor = GCore.ExtendClass(GFormField, function() {
 		}));
 		jOverlay.append(jSaveButton).append(jDeleteButton);
 	});
-	
+
 	gThis._OnAttributeDeleteClick = GEventHandler(function(eEvent) {
 		gThis.DeleteAttribute($(this).closest('.attribute').data('iGroupIndex'), $(this).closest('.attribute').data('iAttributeIndex'));
 		gThis.m_bSetAltered = true;
 		return false;
 	});
-	
+
 	gThis._OnAttributeChange = GEventHandler(function(eEvent) {
 		gThis.m_bSetAltered = true;
 		var iGroupIndex = $(this).closest('.attribute').data('iGroupIndex');
@@ -6577,9 +6577,9 @@ var GFormTechnicalDataEditor = GCore.ExtendClass(GFormField, function() {
 		gThis._UpdateValueField(gThis.m_aoAttributes[iGroupIndex].children[iAttributeIndex], $(this).closest('.attribute'));
 		gThis.UpdateFields();
 	});
-	
+
 	gThis._UpdateValueField = function(oAttribute, jAttribute) {
-		
+
 		var jValue = jAttribute.find('.value').empty();
 		switch (oAttribute.type) {
 			case GFormTechnicalDataEditor.FIELD_STRING:
@@ -6602,7 +6602,7 @@ var GFormTechnicalDataEditor = GCore.ExtendClass(GFormField, function() {
 				break;
 		}
 	};
-	
+
 	gThis._WriteValueTypeString = function(jTarget) {
 		var jInput = $('<input type="text"/>');
 		jInput.focus(GEventHandler(function(eEvent) {
@@ -6614,7 +6614,7 @@ var GFormTechnicalDataEditor = GCore.ExtendClass(GFormField, function() {
 		jTarget.append(jInputNode.parent());
 		jInput.change(gThis._OnChangeValue);
 	};
-	
+
 	gThis._WriteValueTypeSelect = function(jTarget) {
 		var jInput = $('<input type="text"/>');
 		jInput.focus(GEventHandler(function(eEvent) {
@@ -6626,7 +6626,7 @@ var GFormTechnicalDataEditor = GCore.ExtendClass(GFormField, function() {
 		jTarget.append(jInputNode.parent());
 		jInput.change(gThis._OnChangeValue);
 	};
-	
+
 	gThis._WriteValueTypeImage = function(jTarget) {
 		gThis.m_jFileSelector = $('<div style="clear: both; padding-top: 10px;"/>');
 		gThis.m_jSelectedFileName = $('<span class="filename"/>');
@@ -6645,7 +6645,7 @@ var GFormTechnicalDataEditor = GCore.ExtendClass(GFormField, function() {
 		gThis.m_jFileSelector.append(gThis.m_jFileField);
 		jTarget.append(gThis.m_jFileSelector);
 	};
-	
+
 	gThis._WriteValueTypeTextArea = function(jTarget) {
 		var jInput = $('<textarea rows="5" cols="5" style="width: 485px;" />');
 		jInput.focus(GEventHandler(function(eEvent) {
@@ -6657,7 +6657,7 @@ var GFormTechnicalDataEditor = GCore.ExtendClass(GFormField, function() {
 		jTarget.append(jInputNode.parent());
 		jInput.change(gThis._OnChangeValue);
 	};
-	
+
 	gThis._WriteValueTypeMultilingualString = function(jTarget) {
 		var jInput = $('<input type="text"/>');
 		jInput.focus(GEventHandler(function(eEvent) {
@@ -6704,14 +6704,14 @@ var GFormTechnicalDataEditor = GCore.ExtendClass(GFormField, function() {
 		jTarget.append(jInputNode.parent());
 		jInput.change(gThis._OnChangeValue);
 	};
-	
+
 	gThis._WriteValueTypeBoolean = function(jTarget) {
 		var jInput = $('<input type="checkbox"/>');
 		var jInputNode = $('<div class="field-checkbox"><span class="field"/></div>').find('.field').append(jInput);
 		jTarget.append(jInputNode.parent());
 		jInput.change(gThis._OnChangeValue);
 	};
-	
+
 	gThis._OnChangeValue = GEventHandler(function(eEvent) {
 		var iGroupIndex = $(this).closest('.attribute').data('iGroupIndex');
 		var iAttributeIndex = $(this).closest('.attribute').data('iAttributeIndex');
@@ -6737,7 +6737,7 @@ var GFormTechnicalDataEditor = GCore.ExtendClass(GFormField, function() {
 		}
 		gThis.UpdateFields();
 	});
-	
+
 	gThis.UpdateValues = function() {
 		for (var i in gThis.m_aoAttributes) {
 			for (var j in gThis.m_aoAttributes[i].children) {
@@ -6748,7 +6748,7 @@ var GFormTechnicalDataEditor = GCore.ExtendClass(GFormField, function() {
 		}
 		gThis.UpdateFields();
 	};
-	
+
 	gThis._UpdateValue = function(iGroupIndex, iAttributeIndex, mValue) {
 		switch (gThis.m_aoAttributes[iGroupIndex].children[iAttributeIndex].type) {
 			case GFormTechnicalDataEditor.FIELD_STRING:
@@ -6773,7 +6773,7 @@ var GFormTechnicalDataEditor = GCore.ExtendClass(GFormField, function() {
 				break;
 		}
 	};
-	
+
 	gThis._OnAttributeGroupSave = GEventHandler(function(eEvent) {
 		gThis.m_aoAttributes[eEvent.iGroupIndex].id = eEvent.attributeGroupId;
 		GMessage(GForm.Language.technical_data_save_group_success, GForm.Language.technical_data_save_group_success_description);
@@ -6790,12 +6790,12 @@ var GFormTechnicalDataEditor = GCore.ExtendClass(GFormField, function() {
 		}
 		gThis._WriteTechnicalAttributes();
 	});
-	
+
 	gThis._OnAttributeGroupDeleted = GEventHandler(function(eEvent) {
 		GMessage(GForm.Language.technical_data_delete_group_success, GForm.Language.technical_data_delete_group_success_description);
 		gThis._WriteTechnicalAttributes();
 	});
-	
+
 	gThis._OnAttributeSave = GEventHandler(function(eEvent) {
 		gThis.m_aoAttributes[eEvent.iGroupIndex].children[eEvent.iAttributeIndex].id = eEvent.attributeId;
 		GMessage(GForm.Language.technical_data_save_attribute_success, GForm.Language.technical_data_save_attribute_success_description);
@@ -6812,12 +6812,12 @@ var GFormTechnicalDataEditor = GCore.ExtendClass(GFormField, function() {
 		}
 		gThis._WriteTechnicalAttributes();
 	});
-	
+
 	gThis._OnAttributeDeleted = GEventHandler(function(eEvent) {
 		GMessage(GForm.Language.technical_data_delete_attribute_success, GForm.Language.technical_data_delete_attribute_success_description);
 		gThis._WriteTechnicalAttributes();
 	});
-	
+
 	gThis._UpdateIndices = function() {
 		gThis.m_jAttributes.children('.group').each(function(i) {
 			$(this).data('iGroupIndex', i);
@@ -6827,7 +6827,7 @@ var GFormTechnicalDataEditor = GCore.ExtendClass(GFormField, function() {
 			});
 		});
 	};
-	
+
 }, oDefaults);
 
 GFormTechnicalDataEditor.FIELD_STRING = 1;
@@ -6871,12 +6871,12 @@ var oDefaults = {
 };
 
 var GFormTextField = GCore.ExtendClass(GFormField, function() {
-	
+
 	var gThis = this;
-	
+
 	gThis.m_bShown = false;
 	gThis.m_bResized = false;
-	
+
 	gThis._PrepareNode = function() {
 
 		gThis.m_jNode = $('<div/>').addClass(gThis._GetClass('Field'));
@@ -6900,12 +6900,12 @@ var GFormTextField = GCore.ExtendClass(GFormField, function() {
 			gThis.m_jField.attr('name', gThis.GetName() + '[value]');
 			gThis.m_jNode.append('<input type="hidden" name="' + gThis.GetName() + '[css_attribute]" value="' + gThis.m_oOptions.sCssAttribute + '"/>');
 		}
-		
+
 	};
 
 	gThis._AddField = function(sId) {
 		var jField = $('<input type="' + gThis.m_oOptions.sFieldType + '" name="'+ gThis.GetName(sId) + '" id="' + gThis.GetId(sId) + '"/>');
-		
+
 		if ((gThis.m_jField instanceof $) && gThis.m_jField.length) {
 			gThis.m_jField = gThis.m_jField.add(jField);
 		}
@@ -6929,7 +6929,7 @@ var GFormTextField = GCore.ExtendClass(GFormField, function() {
 		gThis.jRepetitionNode = jRepetitionNode;
 		return gThis.jRepetitionNode;
 	};
-	
+
 	gThis.OnShow = function() {
 		gThis._UpdateRepetitionButtons();
 		if (!gThis.m_bShown && gThis.m_bRepeatable) {
@@ -6965,22 +6965,22 @@ var GFormTextField = GCore.ExtendClass(GFormField, function() {
 			}
 		}
 	};
-	
+
 	gThis.OnFocus = function(eEvent) {
 		var jField = $(eEvent.currentTarget);
 		jField.closest('.' + gThis._GetClass('FieldSpan')).addClass(gThis._GetClass('Focused'));
 		gThis._ActivateFocusedTab(eEvent);
 	};
-	
+
 	gThis.OnBlur = function(eEvent) {
 		var jField = $(eEvent.currentTarget);
 		jField.closest('.' + gThis._GetClass('FieldSpan')).removeClass(gThis._GetClass('Focused'));
 	};
-	
+
 	gThis.Reset = function() {
 		gThis.m_jField.val(gThis.m_oOptions.sDefault);
 	};
-	
+
 	gThis._InitializeEvents = function(sRepetition) {
 		if (gThis.m_jField == undefined) {
 			return;
@@ -6994,10 +6994,10 @@ var GFormTextField = GCore.ExtendClass(GFormField, function() {
 		jField.each(function() {
 			$(this).unbind('change', gThis.OnValidate).change(gThis.OnValidate);
 		});
-		
+
 	};
-	
-	
+
+
 }, oDefaults);
 
 /*
@@ -7050,7 +7050,7 @@ var GFormSlugField = GCore.ExtendClass(GFormTextField, function () {
         if ((gThis.m_oOptions.sComment != undefined) && (gThis.m_oOptions.sComment.length)) {
             jLabel.append(' <small>' + gThis.m_oOptions.sComment + '</small>');
         }
-        
+
         gThis.m_jNode.append(jLabel);
         if (!gThis.m_bRepeatable) {
             gThis.m_jNode.append(gThis._AddField());
@@ -7112,9 +7112,9 @@ var GFormSlugField = GCore.ExtendClass(GFormTextField, function () {
     };
 
     gThis.OnNameFieldChange = function (eEvent) {
-    	
+
     	var lock = gThis.m_gForm.Lock(Translator.trans('admin.form.locked.title', {}, 'admin'), Translator.trans('admin.form.locked.message', {}, 'admin'));
-    	
+
         var locale = $(eEvent.currentTarget).closest('.GFormRepetition').find('.locale').attr('data-locale');
 
         var fields = [];
@@ -7123,7 +7123,7 @@ var GFormSlugField = GCore.ExtendClass(GFormTextField, function () {
         		fields.push($(this).val());
         	}
         });
-        
+
         var oRequest = {
             'id': gThis.m_oOptions.sTranslatableId,
             'name': $(eEvent.currentTarget).val(),
@@ -7143,14 +7143,14 @@ var GFormSlugField = GCore.ExtendClass(GFormTextField, function () {
         var sNameFieldId = sSlugFieldId.replace(gThis.m_oOptions.sName, gThis.m_oOptions.sNameField);
         var sNameField = $('#' + sNameFieldId);
         var locale = $(eEvent.currentTarget).closest('.GFormRepetition').find('.locale').attr('data-locale');
-        
+
         var fields = [];
         $('.' + gThis.m_oOptions.sClass).each(function(){
         	if($(this).attr('id') != gThis.GetId()){
         		fields.push($(this).val());
         	}
         });
-        
+
         var oRequest = {
             'id': gThis.m_oOptions.sTranslatableId,
             'name': sNameField.val(),
@@ -7244,45 +7244,45 @@ var GFormSlugField = GCore.ExtendClass(GFormTextField, function () {
  * CSRF
  */
 var GFormTextFieldCSRF = GCore.ExtendClass(GFormField, function() {
-	
+
 	var gThis = this;
-	
+
 	gThis.m_bShown = false;
 	gThis.m_bResized = false;
-	
+
 	gThis._PrepareNode = function() {
-		
+
 		gThis.m_jNode = $('<div/>');
-		
+
 		if (!gThis.m_bRepeatable) {
 			gThis.m_jNode.append(gThis._AddField());
 		}
 		else {
 			gThis.AddRepetition();
 		}
-		
+
 	};
 
 	gThis._AddField = function(sId) {
 		var jField = $('<input type="hidden" name="'+ gThis.GetName(sId) + '" id="' + gThis.GetId(sId) + '"/>');
-		
+
 		if ((gThis.m_jField instanceof $) && gThis.m_jField.length) {
 			gThis.m_jField = gThis.m_jField.add(jField);
 		}
 		else {
 			gThis.m_jField = jField;
 		}
-		
+
 		var jRepetitionNode = $('<span class="' + gThis._GetClass('FieldRepetition') + '"/>');
 		jRepetitionNode.append($('<span class="' + gThis._GetClass('FieldSpan') + '"/>').append(jField));
-		
+
 		var jError = $('<span class="' + gThis._GetClass('Required') + '"/>');
 		jRepetitionNode.append(jError);
 		gThis.jRepetitionNode = jRepetitionNode;
-		
+
 		return gThis.jRepetitionNode;
 	};
-	
+
 	gThis.OnShow = function() {
 		gThis._UpdateRepetitionButtons();
 		if (!gThis.m_bShown && gThis.m_bRepeatable) {
@@ -7318,22 +7318,22 @@ var GFormTextFieldCSRF = GCore.ExtendClass(GFormField, function() {
 			}
 		}
 	};
-	
+
 	gThis.OnFocus = function(eEvent) {
 		var jField = $(eEvent.currentTarget);
 		jField.closest('.' + gThis._GetClass('FieldSpan')).addClass(gThis._GetClass('Focused'));
 		gThis._ActivateFocusedTab(eEvent);
 	};
-	
+
 	gThis.OnBlur = function(eEvent) {
 		var jField = $(eEvent.currentTarget);
 		jField.closest('.' + gThis._GetClass('FieldSpan')).removeClass(gThis._GetClass('Focused'));
 	};
-	
+
 	gThis.Reset = function() {
 		gThis.m_jField.val(gThis.m_oOptions.sDefault);
 	};
-	
+
 	gThis._InitializeEvents = function(sRepetition) {
 		if (gThis.m_jField == undefined) {
 			return;
@@ -7347,10 +7347,10 @@ var GFormTextFieldCSRF = GCore.ExtendClass(GFormField, function() {
 		jField.each(function() {
 			$(this).unbind('change', gThis.OnValidate).change(gThis.OnValidate);
 		});
-		
+
 	};
-	
-	
+
+
 }, oDefaults);
 /*
 * TIP
@@ -7374,9 +7374,9 @@ var oDefaults = {
 };
 
 var GFormTip = GCore.ExtendClass(GFormField, function() {
-	
+
 	var gThis = this;
-	
+
 	gThis._PrepareNode = function() {
 		gThis.m_jNode = $('<div/>').addClass(gThis._GetClass('Field')).addClass(gThis.m_oOptions.sDirection);
 		gThis.m_jNode.append('<div class="' + gThis._GetClass('Arrow') + '"/>');
@@ -7390,16 +7390,16 @@ var GFormTip = GCore.ExtendClass(GFormField, function() {
 			gThis.m_jNode.append($('<div class="short"/>').append(gThis.m_oOptions.sShortTip));
 		}
 	};
-	
+
 	gThis._InitializeEvents = function() {
 		gThis.m_jNode.find('.' + gThis._GetClass('Switch')).click(function() {
 			gThis.m_jNode.toggleClass('retracted');
 			return false;
 		});
 	};
-	
+
 	gThis.Focus = function() { return false; };
-	
+
 }, oDefaults);
 
 /*
@@ -7462,9 +7462,9 @@ var oDefaults = {
 };
 
 var GFormTree = GCore.ExtendClass(GFormField, function() {
-	
+
 	var gThis = this;
-	
+
 	gThis.m_bShown = false;
 	gThis.m_jTree;
 	gThis.m_jOptions;
@@ -7476,7 +7476,7 @@ var GFormTree = GCore.ExtendClass(GFormField, function() {
 	gThis.m_jItemDragged;
 	gThis.m_oItems = {};
 	gThis.m_jUnmodified;
-	
+
 	gThis._PrepareNode = function() {
 		gThis.m_jNode = $('<div/>').addClass(gThis._GetClass('Field'));
 		gThis.m_jField = $('<input type="hidden"/>');
@@ -7507,13 +7507,13 @@ var GFormTree = GCore.ExtendClass(GFormField, function() {
 		gThis.m_jTree.find('li:has(li)').removeClass(gThis._GetClass('Expanded'));
 		return false;
 	};
-	
+
 	gThis._PrepareOptions = function() {
 		var jA;
 		gThis.m_jOptions = $('<div class="options"/>');
-		
+
 		if (gThis.m_oOptions.bAddable && (gThis.m_oOptions.fOnAdd instanceof Function)) {
-			
+
 			jA = $('<a id="add-category" class="' + gThis._GetClass('Button') + '" href="#"/>');
 			jA.append('<span><img src="' + gThis._GetImage('Add') + '" alt=""/>' + gThis.m_oOptions.sAddLabel + '</span>');
 			jA.click(function(eEvent) {
@@ -7552,7 +7552,7 @@ var GFormTree = GCore.ExtendClass(GFormField, function() {
 				return false;
 			});
 			gThis.m_jOptions.append($('<p/>').append(jA));
-			
+
 			if (gThis.m_oOptions.fOnDuplicate instanceof Function) {
 				jB = $('<a class="' + gThis._GetClass('Button') + ' duplicate" href="#"/>');
 				jB.append('<span><img src="' + gThis._GetImage('Duplicate') + '" alt=""/>' + GForm.Language.tree_duplicate_item + '</span>');
@@ -7565,10 +7565,10 @@ var GFormTree = GCore.ExtendClass(GFormField, function() {
 					gThis.m_jOptions.append($('<p/>').append(jB));
 				}
 			}
-			
-			
+
+
 			if (gThis.m_jTree.find('.' + gThis._GetClass('Active')).length) {
-				
+
 				var sId = gThis.m_jTree.find('.' + gThis._GetClass('Active')).get(0).sId;
 				jA = $('<a class="' + gThis._GetClass('Button') + '" href="#"/>');
 				jA.append('<span><img src="' + gThis._GetImage('Add') + '" alt=""/>' + GForm.Language.tree_add_subitem + '</span>');
@@ -7609,13 +7609,13 @@ var GFormTree = GCore.ExtendClass(GFormField, function() {
 					return false;
 				});
 				gThis.m_jOptions.append($('<p/>').append(jA));
-				
+
 			}
-			
+
 		}
-		
+
 		if (gThis.m_oOptions.bDeletable && (gThis.m_oOptions.fOnDelete instanceof Function) && gThis.m_jTree.find('.' + gThis._GetClass('Active')).length) {
-			
+
 			var sId = gThis.m_jTree.find('.' + gThis._GetClass('Active')).get(0).sId;
 			jA = $('<a id="delete-category" class="' + gThis._GetClass('Button') + ' delete" href="#"/>');
 			jA.append('<span><img src="' + gThis._GetImage('Delete') + '" alt=""/>' + GForm.Language.tree_delete_item + '</span>');
@@ -7641,12 +7641,12 @@ var GFormTree = GCore.ExtendClass(GFormField, function() {
 				return false;
 			});
 			gThis.m_jOptions.append($('<p/>').append(jA));
-			
+
 		}
-		
+
 		gThis.m_jNode.append(gThis.m_jOptions);
 	};
-	
+
 	gThis.GetOrder = function() {
 		var jItems = gThis.m_jTree.find('li');
 		var aoItems = [];
@@ -7666,7 +7666,7 @@ var GFormTree = GCore.ExtendClass(GFormField, function() {
 		}
 		return aoItems;
 	};
-	
+
 	gThis.GetValue = function(sRepetition) {
 		if (gThis.m_oOptions.bChoosable) {
 			return gThis.m_jFieldWrapper.find('input:first').attr('value');
@@ -7681,20 +7681,20 @@ var GFormTree = GCore.ExtendClass(GFormField, function() {
 		}
 		return aValues;
 	};
-	
+
 	gThis.SetValue = function(mValue, sRepetition) {
 		if (gThis.m_jField == undefined) {
 			return;
 		}
 		gThis._GetField(sRepetition).val(mValue).change();
 	};
-	
+
 	gThis.ResetExpansion = function() {
 		gThis.m_jTree.find('li').removeClass(gThis._GetClass('Expanded'));
 		gThis.m_jTree.find('li.' + gThis._GetClass('Active')).parents('li').andSelf().filter(':has(li)').addClass(gThis._GetClass('Expanded'));
 		gThis.m_jTree.find('li > label > input:checked').parents('li').andSelf().filter(':has(li)').addClass(gThis._GetClass('Expanded'));
 	};
-	
+
 	gThis._WriteSubtree = function(jParent, sParent) {
 		if (sParent == undefined) {
 			sParent = null;
@@ -7708,7 +7708,7 @@ var GFormTree = GCore.ExtendClass(GFormField, function() {
 			jParent.append(gThis._WriteItem(sId, oItem));
 		}
 	};
-	
+
 	gThis._WriteItem = function(sId, oItem) {
 		var jLi = $('<li/>');
 		jLi.get(0).sId = sId;
@@ -7761,12 +7761,12 @@ var GFormTree = GCore.ExtendClass(GFormField, function() {
 		}
 		return jLi;
 	};
-	
+
 	gThis.UpdateExpanders = function() {
 		gThis.m_jTree.find('li::not(:has(li))').removeClass(gThis._GetClass('Expanded')).children('.' + gThis._GetClass('Expander')).css('display', 'none');
 		gThis.m_jTree.find('li:has(li) > .' + gThis._GetClass('Expander')).css('display', 'block');
 	};
-	
+
 	gThis.Update = function() {
 		gThis.m_jTree.empty();
 		gThis._WriteSubtree(gThis.m_jTree);
@@ -7820,7 +7820,7 @@ var GFormTree = GCore.ExtendClass(GFormField, function() {
 					}, GCallback(function(eEvent) {
 						GCore.StopWaiting();
 					}));
-					
+
 					setTimeout(function() {
 						gThis.m_bIgnoreClick = false;
 					}, 500);
@@ -7830,12 +7830,12 @@ var GFormTree = GCore.ExtendClass(GFormField, function() {
 		gThis._InitializeNodeEvents();
 		gThis.ResetExpansion();
 	};
-	
+
 	gThis.Populate = function(mValue) {
 		if ((mValue == undefined) || (mValue == '')) {
 			mValue = [];
 		}
-		
+
 		if (gThis.m_oOptions.bChoosable) {
 			gThis.m_jFieldWrapper.empty();
 			for (var i in mValue) {
@@ -7859,24 +7859,24 @@ var GFormTree = GCore.ExtendClass(GFormField, function() {
 		}
 		gThis.ResetExpansion();
 	};
-	
+
 	gThis.OnShow = function() {
 		if (!gThis.m_bShown) {
 			gThis.m_bShown = true;
 			gThis.m_jUnmodified.val('0');
 		}
 	};
-	
+
 	gThis._OnClick = GEventHandler(function(eEvent) {
 		GCore.StartWaiting();
 	});
-	
+
 	gThis._InitializeEvents = function(sRepetition) {
 		gThis.m_jExpandAll.click(gThis.OnExpandAll);
 		gThis.m_jRetractAll.click(gThis.OnRetractAll);
 		gThis._InitializeNodeEvents();
 	};
-	
+
 	gThis._OnSelect = GEventHandler(function(eEvent) {
 		if ($(this).is(':radio')) {
 			gThis.m_jFieldWrapper.find('input').remove();
@@ -7896,7 +7896,7 @@ var GFormTree = GCore.ExtendClass(GFormField, function() {
 			}
 		}
 	});
-	
+
 	gThis._InitializeNodeEvents = function() {
 		gThis.m_jTree.find('.' + gThis._GetClass('Expander')).unbind('click').click(function() {
 			if ($(this).closest('li').hasClass(gThis._GetClass('Expanded'))) {
@@ -7932,16 +7932,16 @@ var GFormTree = GCore.ExtendClass(GFormField, function() {
 		}
 		gThis.m_jTree.find('input').unbind('click').click(gThis._OnSelect);
 	};
-	
+
 	gThis._Expand = function(jParentLi) {
 		var sId = jParentLi.get(0).sId;
 		if (gThis.m_oItems[sId] != undefined) {
 			return;
 		}
 	};
-	
+
 	gThis._OnChildrenLoaded = GEventHandler(function(eEvent) {
-		var jUl = $('<ul/>'); 
+		var jUl = $('<ul/>');
 		gThis.m_oItems[eEvent.parentNode.get(0).sId] = true;
 		var aIterationArray = GCore.GetIterationArray(eEvent.children, function(oA, oB) {return (oA.weight - oB.weight);});
 		var iLength = aIterationArray.length;
@@ -7953,7 +7953,7 @@ var GFormTree = GCore.ExtendClass(GFormField, function() {
 		eEvent.parentNode.append(jUl);
 		gThis._InitializeNodeEvents();
 	});
-	
+
 }, oDefaults);
 
 /*
@@ -8000,23 +8000,23 @@ var oDefaults = {
 };
 
 var GFormBorder = GCore.ExtendClass(GFormTextField, function() {
-	
+
 	var gThis = this;
-	
+
 	gThis.m_oSides = {};
 	gThis.m_oSizeField = {};
 	gThis.m_oColourField = {};
 	gThis.m_oColourPreviewFields = {};
-	
+
 	gThis.m_jGlobalSide;
 	gThis.m_jSeparationTrigger;
-	
+
 	gThis.m_bSeparated = false;
-	
+
 	gThis.m_fOnUpdate = GCore.NULL;
-	
+
 	gThis.m_asSides = ['top', 'right', 'bottom', 'left'];
-	
+
 	gThis._PrepareNode = function() {
 		gThis.m_jNode = $('<div/>').addClass(gThis._GetClass('Field'));
 		var jLabel = $('<label for="' + gThis.GetId() + '"/>');
@@ -8035,14 +8035,14 @@ var GFormBorder = GCore.ExtendClass(GFormTextField, function() {
 		}
 		gThis.SetValue({});
 	};
-	
+
 	gThis.GetValue = function(sRepetition) {
 		if (gThis.m_jField == undefined) {
 			return '';
 		}
 		return gThis.m_jField.eq(0).val();
 	};
-	
+
 	gThis.SetValue = function(mValue, sRepetition) {
 		if (mValue == undefined) {
 			return;
@@ -8075,7 +8075,7 @@ var GFormBorder = GCore.ExtendClass(GFormTextField, function() {
 		}
 		gThis.UpdateSeparation(bSeparate);
 	};
-	
+
 	gThis.UpdateSeparation = function(bSeparate) {
 		gThis.m_bSeparated = bSeparate;
 		if (bSeparate) {
@@ -8109,20 +8109,20 @@ var GFormBorder = GCore.ExtendClass(GFormTextField, function() {
 			gThis.m_fOnUpdate.apply(gThis, [{}]);
 		}
 	};
-	
+
 	gThis._AddSideOptions = function(sSide) {
 		var jSide = $('<div class="side"/>');
-		
+
 		var jColourPreviewNode = $('<span class="' + gThis._GetClass('ColourPreview') + '"/>');
-		
+
 		var jSizeField = $('<select name="' + gThis.GetName() + '[' + sSide + '][size]" />');
 		jSizeField.append('<option value="0">' + GForm.Language.border_none + '</option>');
 		for (var i = 1; i < 5; i++) {
 			jSizeField.append('<option value="' + i + '">' + i + ' px</option>');
 		};
-		
+
 		var jColourField = $('<input type="text" name="' + gThis.GetName() + '[' + sSide + '][colour]" />');
-		
+
 		jSide.append('<label>' + GForm.Language['border_side_' + sSide] + '</label>');
 		var jRepetition = $('<span class="repetition"/>');
 		//jRepetition.append(jColourPreviewNode);
@@ -8131,45 +8131,45 @@ var GFormBorder = GCore.ExtendClass(GFormTextField, function() {
 		jRepetition.append($('<span class="field size"/>').append(jSizeField));
 		jRepetition.append($('<span class="field colour"/>').append(jColourField));
 		jSide.append(jRepetition);
-		
+
 		gThis.m_oSides[sSide] = jSide;
 		gThis.m_oSizeField[sSide] = jSizeField;
 		gThis.m_oColourField[sSide] = jColourField;
 		gThis.m_oColourPreviewFields[sSide] = jColourPreviewNode;
 		return jSide;
 	};
-	
+
 	gThis._AddField = function(sId) {
-		
+
 		var jSide = $('<span class="' + gThis._GetClass('FieldRepetition') + '"/>');
 		gThis.m_jGlobalSide = jSide;
-		
+
 		var jColourPreviewNode = $('<span class="' + gThis._GetClass('ColourPreview') + '"/>');
-		
+
 		var jSizeField = $('<select/>');
 		jSizeField.append('<option value="0">' + GForm.Language.border_none + '</option>');
 		for (var i = 1; i < 5; i++) {
 			jSizeField.append('<option value="' + i + '">' + i + ' px</option>');
 		};
-		
+
 		var jColourField = $('<input type="text"/>');
-		
+
 		//jSide.append(jColourPreviewNode);
 		jSide.append($('<span class="' + gThis._GetClass('ColourPreview') + '-container"/>').append(jColourPreviewNode));
-		
+
 		gThis.m_jSeparationTrigger = $('<span class="field icon"><img src="' + gThis._GetImage('SideAll') + '" alt="' + GForm.Language['border_separate'] + '" title="' + GForm.Language['border_separate'] + '"/></span>');
 		jSide.append(gThis.m_jSeparationTrigger);
 		jSide.append($('<span class="field size"/>').append(jSizeField));
 		jSide.append($('<span class="field colour"/>').append(jColourField));
-		
+
 		gThis.m_oSides['all'] = jSide;
 		gThis.m_oSizeField['all'] = jSizeField;
 		gThis.m_oColourField['all'] = jColourField;
 		gThis.m_oColourPreviewFields['all'] = jColourPreviewNode;
-	
+
 		return jSide;
 	};
-	
+
 	gThis.OnShow = function() {
 		if (gThis.m_bShown) {
 			return;
@@ -8179,17 +8179,17 @@ var GFormBorder = GCore.ExtendClass(GFormTextField, function() {
 			gThis.m_oSizeField[i].GSelect();
 		}
 	};
-	
+
 	gThis._Initialize = function() {
 		gThis.UpdatePreview();
 	};
-	
+
 	gThis._InitializeEvents = function() {
-		
+
 		gThis.m_jSeparationTrigger.css('cursor', 'pointer').click(GEventHandler(function(eEvent) {
 			gThis.UpdateSeparation(!gThis.m_bSeparated);
 		}));
-		
+
 		for (var i in gThis.m_oColourField) {
 			gThis.m_oColourField[i].ColorPicker({
 				color: '#' + gThis.m_oColourField[i].val(),
@@ -8219,7 +8219,7 @@ var GFormBorder = GCore.ExtendClass(GFormTextField, function() {
 				gThis.UpdatePreview();
 			})).triggerHandler('change');
 		}
-		
+
 		gThis.m_oColourField['all'].change(GEventHandler(function() {
 			var sValue = $(this).val();
 			for (var i in gThis.m_oColourField) {
@@ -8228,7 +8228,7 @@ var GFormBorder = GCore.ExtendClass(GFormTextField, function() {
 			}
 			gThis.m_oColourField['top'].change();
 		}));
-		
+
 		gThis.m_oSizeField['all'].change(GEventHandler(function() {
 			var sValue = $(this).val();
 			for (var i in gThis.m_oSizeField) {
@@ -8245,7 +8245,7 @@ var GFormBorder = GCore.ExtendClass(GFormTextField, function() {
 				gThis.m_oColourPreviewFields['all'].parent().removeClass('none');
 			}
 		})).triggerHandler('change');
-		
+
 		for (var i in gThis.m_oSizeField) {
 			if (i == 'all') {
 				continue;
@@ -8260,7 +8260,7 @@ var GFormBorder = GCore.ExtendClass(GFormTextField, function() {
 				}
 			}));
 		}
-		
+
 		gThis.m_oColourField['all'].change(GEventHandler(function() {
 			var sValue = $(this).val();
 			for (var i in gThis.m_oColourField) {
@@ -8276,7 +8276,7 @@ var GFormBorder = GCore.ExtendClass(GFormTextField, function() {
 	gThis.Reset = function() {
 		gThis.m_jField.eq(0).val(gThis.m_oOptions.sDefault).change();
 	};
-	
+
 }, oDefaults);
 /*
 * COLOUR SCHEME PICKER
@@ -8342,9 +8342,9 @@ var oDefaults = {
 };
 
 var GFormColourSchemePicker = GCore.ExtendClass(GFormTextField, function() {
-	
+
 	var gThis = this;
-	
+
 	gThis.m_jRepetitionNode;
 	gThis.m_jColourTypeNode;
 	gThis.m_jColourStartNode;
@@ -8371,9 +8371,9 @@ var GFormColourSchemePicker = GCore.ExtendClass(GFormTextField, function() {
 	gThis.m_jFilePosition;
 	gThis.m_jFileRepeat;
 	gThis.m_jFileRepeatField;
-	
+
 	gThis.m_sCWD;
-	
+
 	gThis._PrepareNode = function() {
 		gThis.m_jNode = $('<div/>').addClass(gThis._GetClass('Field'));
 		var jLabel = $('<label for="' + gThis.GetId() + '"/>');
@@ -8395,7 +8395,7 @@ var GFormColourSchemePicker = GCore.ExtendClass(GFormTextField, function() {
 		}
 		gThis.SetValue(mValue);
 	};
-	
+
 	gThis._UpdateDatagridSelection = function(mValue) {
 		if (!(mValue instanceof Array)) {
 			if ((mValue == undefined) || !mValue.length) {
@@ -8413,7 +8413,7 @@ var GFormColourSchemePicker = GCore.ExtendClass(GFormTextField, function() {
 			gThis.m_gFilesDatagrid.LoadData();
 		}
 	};
-	
+
 	gThis.GetValue = function(sRepetition) {
 		if (gThis.m_jFileField == undefined) {
 			return {};
@@ -8422,7 +8422,7 @@ var GFormColourSchemePicker = GCore.ExtendClass(GFormTextField, function() {
 			file: gThis.m_jFileField.val()
 		};
 	};
-	
+
 	gThis.SetValue = function(mValue, sRepetition) {
 		if (mValue == undefined) {
 			return;
@@ -8456,7 +8456,7 @@ var GFormColourSchemePicker = GCore.ExtendClass(GFormTextField, function() {
 		}
 		gThis.UpdatePreview();
 	};
-	
+
 	gThis.UpdatePreview = function() {
 		gThis.m_jColourPreviewNode.empty();
 		gThis.m_jColourPreviewNode.css({
@@ -8470,7 +8470,7 @@ var GFormColourSchemePicker = GCore.ExtendClass(GFormTextField, function() {
 				gThis.m_jFilePosition.css('display', 'none');
 				gThis.m_jFileRepeat.css('display', 'none');
 				break;
-			
+
 			case '2': //gradient
 				gThis.m_jColourEndNode.css('visibility', 'visible');
 				gThis.m_jFileSelector.css('display', 'none');
@@ -8482,7 +8482,7 @@ var GFormColourSchemePicker = GCore.ExtendClass(GFormTextField, function() {
 					direction: 'horizontal'
 				});
 				break;
-			
+
 			case '3': //plik
 				gThis.m_jColourPreviewNode.css({
 					'background-image': 'url(\'' + GCore.DESIGN_PATH.substr(0, GCore.DESIGN_PATH.lastIndexOf('/', GCore.DESIGN_PATH.length - 2)) + '/' + gThis.m_oOptions.sFilePath + gThis.m_jFileField.val() + '\')',
@@ -8497,16 +8497,16 @@ var GFormColourSchemePicker = GCore.ExtendClass(GFormTextField, function() {
 				break;
 		}
 	};
-	
+
 	gThis._AddField = function(sId) {
-		
+
 		var jColourTypeNode = $('<span class="' + gThis._GetClass('ColourType') + ' ' + gThis._GetClass('FieldSpan') +  '"/>');
 		var jColourStartNode = $('<span class="' + gThis._GetClass('ColourStart') + '"/>');
 		var jColourEndNode = $('<span class="' + gThis._GetClass('ColourEnd') + '"/>');
 
 		var jColourPreviewNode = $('<span class="' + gThis._GetClass('ColourPreview') + '"/>');
 		var jRepetitionNode = $('<span class="' + gThis._GetClass('FieldRepetition') + '"/>');
-		
+
 		var jFieldColourType = $('<select id="'+gThis.GetId()+'" name="' + gThis.GetName() + '[type]" />');
 		for (var i = 0; i < gThis.m_oOptions.aoTypes.length; i++) {
 			var oType = gThis.m_oOptions.aoTypes[i];
@@ -8514,7 +8514,7 @@ var GFormColourSchemePicker = GCore.ExtendClass(GFormTextField, function() {
 				jFieldColourType.append('<option value="' + oType.sValue + '">' + GForm.Language[oType.sLabel] + '</option>');
 			}
 		}
-		
+
 		var jFieldColourStart = $('<input type="text" name="' + gThis.GetName() + '[start]" />');
 		var jFieldColourEnd = $('<input type="text" name="' + gThis.GetName() + '[end]" />');
 
@@ -8522,7 +8522,7 @@ var GFormColourSchemePicker = GCore.ExtendClass(GFormTextField, function() {
 		jColourTypeNode.append(jFieldColourType);
 		jColourStartNode.append($('<span class="' + gThis._GetClass('FieldSpan') + '"/>').append(jFieldColourStart));
 		jColourEndNode.append($('<span class="' + gThis._GetClass('FieldSpan') + '"/>').append(jFieldColourEnd));
-		
+
 		jRepetitionNode.append($('<span class="' + gThis._GetClass('ColourPreview') + '-container"/>').append(jColourPreviewNode)).append(jColourTypeNode).append(jColourStartNode).append(jColourEndNode);
 
 		gThis.m_jRepetitionNode = jRepetitionNode;
@@ -8533,9 +8533,9 @@ var GFormColourSchemePicker = GCore.ExtendClass(GFormTextField, function() {
 		gThis.m_jFieldColourType = jFieldColourType;
 		gThis.m_jFieldColourStart = jFieldColourStart;
 		gThis.m_jFieldColourEnd = jFieldColourEnd;
-		
+
 		gThis.m_jFileSelector = $('<div style="clear: both; padding-top: 10px;"/>');
-		
+
 		gThis.m_jSelectedFileName = $('<span class="filename"/>');
 		gThis.m_jFileSelector.append(gThis.m_jSelectedFileName);
 		gThis.m_jSwfUpload = $('<div class="' + gThis._GetClass('AddFiles') + '"/>').append('<span id="' + gThis.GetId() + '__upload"/>');
@@ -8551,7 +8551,7 @@ var GFormColourSchemePicker = GCore.ExtendClass(GFormTextField, function() {
 		gThis.m_jFileField = $('<input type="hidden" name="' + gThis.GetName() + '[file]"/>');
 		gThis.m_jFileSelector.append(gThis.m_jFileField);
 		jRepetitionNode.append(gThis.m_jFileSelector);
-		
+
 		gThis.m_jFileRepeat = $('<div class="bg-repeat"/>').append('<label for="' + gThis.GetId() + '__position">' + GForm.Language.colour_scheme_picker_background_repeat + '</label>');
 		gThis.m_jFileRepeatField = $('<select name="' + gThis.GetName() + '[repeat]" id="' + gThis.GetId() + '__position"/>');
 		var asRepeatModes = [
@@ -8565,7 +8565,7 @@ var GFormColourSchemePicker = GCore.ExtendClass(GFormTextField, function() {
 		}
 		gThis.m_jFileRepeat.append($('<span class="field"/>').append(gThis.m_jFileRepeatField));
 		jRepetitionNode.append(gThis.m_jFileRepeat);
-		
+
 		gThis.m_jFilePosition = $('<div class="bg-position"/>').append('<label>' + GForm.Language.colour_scheme_picker_background_position + '</label>');
 		jPositionRadios = $('<div/>');
 		var asPositions = [
@@ -8578,12 +8578,12 @@ var GFormColourSchemePicker = GCore.ExtendClass(GFormTextField, function() {
 		}
 		gThis.m_jFilePosition.append(jPositionRadios);
 		jRepetitionNode.append(gThis.m_jFilePosition);
-		
+
 		gThis.m_jField = jRepetitionNode.find('input');
-		
+
 		return jRepetitionNode;
 	};
-	
+
 	gThis._OnChoose = GEventHandler(function(eEvent) {
 		gThis.m_jFilesDatagrid.slideToggle(250);
 		if (!gThis.m_gFilesDatagrid) {
@@ -8591,15 +8591,15 @@ var GFormColourSchemePicker = GCore.ExtendClass(GFormTextField, function() {
 		}
 		return false;
 	});
-	
+
 	gThis._InitializeEvents = function() {
-		
+
 		gThis.m_jChooseButton.click(gThis._OnChoose);
 
 		gThis.m_jFieldColourType.change(function() {
 			gThis.UpdatePreview();
 		});
-		
+
 		gThis.m_jFieldColourStart.ColorPicker({
 			color: '#' + gThis.m_jFieldColourStart.val(),
 			onBeforeShow: function () {
@@ -8646,13 +8646,13 @@ var GFormColourSchemePicker = GCore.ExtendClass(GFormTextField, function() {
 		}).change(GEventHandler(function(eEvent) {
 			gThis.UpdatePreview();
 		}));
-		
+
 		gThis.m_jFieldColourType.GSelect().focus(GEventHandler(function(eEvent) {
 			$(this).closest('.field').addClass('focus');
 		})).blur(GEventHandler(function(eEvent) {
 			$(this).closest('.field').removeClass('focus');
 		}));
-		
+
 		gThis.m_jFileRepeatField.GSelect().focus(GEventHandler(function(eEvent) {
 			$(this).closest('.field').addClass('focus');
 		})).blur(GEventHandler(function(eEvent) {
@@ -8660,22 +8660,22 @@ var GFormColourSchemePicker = GCore.ExtendClass(GFormTextField, function() {
 		})).change(GEventHandler(function(eEvent) {
 			gThis.UpdatePreview();
 		}));
-		
+
 		gThis.m_jFilePosition.find('input').click(GEventHandler(function(eEvent) {
 			gThis.UpdatePreview();
 		}));
-		
+
 	};
 
 	gThis.Reset = function() {
 		gThis.m_jField.eq(0).val(gThis.m_oOptions.sDefault).change();
 		gThis.UpdatePreview();
 	};
-	
+
 	gThis.Focus = function() {
 		return true;
 	};
-	
+
 	gThis._OnClickRow = function(gDg, sId) {
 		var oFile = gThis.m_gFilesDatagrid.GetRow(sId);
 		if (oFile.dir) {
@@ -8691,7 +8691,7 @@ var GFormColourSchemePicker = GCore.ExtendClass(GFormTextField, function() {
 		}
 		return true;
 	};
-	
+
 	gThis._OnSelect = function(gDg, sId) {
 		var oFile = gDg.GetRow(sId);
 		if (!oFile.dir) {
@@ -8705,14 +8705,14 @@ var GFormColourSchemePicker = GCore.ExtendClass(GFormTextField, function() {
 		gThis.SetValue('');
 		gThis.m_jFileField.triggerHandler('change');
 	};
-	
+
 	gThis._Initialize = function() {
 		var oValue = gThis.GetValue();
 		var sPath = gThis.m_oOptions.sFilePath + oValue.file;
 		sPath = sPath.substr(0, sPath.lastIndexOf('/') + 1);
 		gThis.m_sCWD = sPath;
 	};
-	
+
 	gThis.OnShow = function() {
 		if (!gThis.m_bShown) {
 			gThis._InitUploader();
@@ -8847,7 +8847,7 @@ var GFormColourSchemePicker = GCore.ExtendClass(GFormTextField, function() {
 				align: GF_Datagrid.ALIGN_LEFT
 			}
 		});
-		
+
 		var column_thumb = new GF_Datagrid_Column({
 			id: 'preview',
 			caption: GForm.Language.file_selector_thumb,
@@ -8906,13 +8906,13 @@ var GFormColourSchemePicker = GCore.ExtendClass(GFormTextField, function() {
 		];
 
 	};
-	
+
 	gThis._RefreshFiles = function() {
 		gThis.m_oOptions.fLoadFiles({
 			path: gThis.m_sCWD
 		}, GCallback(gThis._OnFilesLoaded));
 	};
-	
+
 	gThis._OnFilesLoaded = GEventHandler(function(eEvent) {
 		if ((eEvent == undefined) || (eEvent.files == undefined) || (eEvent.cwd == undefined)) {
 			return;
@@ -8946,19 +8946,19 @@ var GFormColourSchemePicker = GCore.ExtendClass(GFormTextField, function() {
 			]
 		});
 	};
-	
+
 	gThis._OnDataLoaded = function(dDg) {
 		dDg.m_jBody.find('.show-thumb').mouseenter(GTooltip.ShowThumbForThis).mouseleave(GTooltip.HideThumbForThis);
 	};
-	
+
 	gThis._InitFilesDatagrid = function() {
 
 		var aoColumns = gThis._InitColumns();
-		
+
 		gThis.m_gDataProvider = new GF_Datagrid_Data_Provider({
 			key: 'path'
 		}, []);
-		
+
 		var gActionDelete = new GF_Action({
 			img: gThis._GetImage('DeleteIcon'),
 			caption: GForm.Language.localfile_delete,
@@ -8993,16 +8993,16 @@ var GFormColourSchemePicker = GCore.ExtendClass(GFormTextField, function() {
     };
 
 		gThis.m_gFilesDatagrid = new GF_Datagrid(gThis.m_jFilesDatagrid, oOptions);
-		
+
 		var oValue = gThis.GetValue();
 		var sFile = oValue.file;
 		if (sFile != '') {
 			gThis.m_gFilesDatagrid.m_asSelected = [gThis.m_oOptions.sFilePath + sFile];
 		}
-		
+
 		gThis._RefreshFiles();
 	};
-	
+
 }, oDefaults);
 /*
 * COLUMNS
@@ -9021,9 +9021,9 @@ var oDefaults = {
 };
 
 var GFormColumns = GCore.ExtendClass(GFormContainer, function() {
-	
+
 	var gThis = this;
-	
+
 	gThis._PrepareNode = function() {
 		gThis.m_jNode = $('<div/>');
 		gThis.m_jNode.addClass(gThis._GetClass('Columns'));
@@ -9032,14 +9032,14 @@ var GFormColumns = GCore.ExtendClass(GFormContainer, function() {
 		gThis.m_jNode.append(gThis.RenderChildren());
 		gThis.m_jNode.children().addClass(gThis._GetClass('Column'));
 	};
-	
+
 	gThis._InitializeEvents = function() {
 		gThis.m_jNode.bind('GFormShow', function() {
 			gThis.m_gForm.m_bFocused = false;
 			gThis.OnShow();
 		});
 	};
-	
+
 	gThis.OnShow = function() {
 		if (gThis.m_gForm.m_bDontFocus || (gThis.m_gForm != gThis.m_gParent)) {
 			gThis.m_gForm.m_bFocused = true;
@@ -9053,7 +9053,7 @@ var GFormColumns = GCore.ExtendClass(GFormContainer, function() {
 		}
 		return gThis.m_gForm.m_bFocused;
 	};
-	
+
 }, oDefaults);
 /*
 * CONSTANT
@@ -9086,12 +9086,12 @@ var oDefaults = {
 };
 
 var GFormConstant = GCore.ExtendClass(GFormField, function() {
-	
+
 	var gThis = this;
-	
+
 	gThis.m_bShown = false;
 	gThis.m_bResized = false;
-	
+
 	gThis._PrepareNode = function() {
 		gThis.m_jNode = $('<div/>').addClass(gThis._GetClass('Field')).addClass('field-constant');
 		var jLabel = $('<label for="' + gThis.GetId() + '"/>');
@@ -9107,7 +9107,7 @@ var GFormConstant = GCore.ExtendClass(GFormField, function() {
 			gThis.AddRepetition();
 		}
 	};
-	
+
 	gThis._AddField = function(sId) {
 		var jField = $('<input type="' + gThis.m_oOptions.sFieldType + '" name="' + gThis.GetName(sId) + '" id="' + gThis.GetId(sId) + '" disabled="disabled"/>');
 		if ((gThis.m_jField instanceof $) && gThis.m_jField.length) {
@@ -9130,7 +9130,7 @@ var GFormConstant = GCore.ExtendClass(GFormField, function() {
 		}
 		return jRepetitionNode;
 	};
-	
+
 	gThis.OnShow = function() {
 		gThis._UpdateRepetitionButtons();
 		if (!gThis.m_bShown && gThis.m_bRepeatable) {
@@ -9166,22 +9166,22 @@ var GFormConstant = GCore.ExtendClass(GFormField, function() {
 			}
 		}
 	};
-	
+
 	gThis.OnFocus = function(eEvent) {
 		var jField = $(eEvent.currentTarget);
 		jField.closest('.' + gThis._GetClass('FieldSpan')).addClass(gThis._GetClass('Focused'));
 		gThis._ActivateFocusedTab(eEvent);
 	};
-	
+
 	gThis.OnBlur = function(eEvent) {
 		var jField = $(eEvent.currentTarget);
 		jField.closest('.' + gThis._GetClass('FieldSpan')).removeClass(gThis._GetClass('Focused'));
 	};
-	
+
 	gThis.Reset = function() {
 		gThis.m_jField.val(gThis.m_oOptions.sDefault);
 	};
-	
+
 }, oDefaults);
 /*
 * DATE
@@ -9215,16 +9215,16 @@ var oDefaults = {
 };
 
 var GFormDate = GCore.ExtendClass(GFormTextField, function() {
-	
+
 	var gThis = this;
-	
+
 	gThis.m_jTrigger;
-	
+
 	gThis._Constructor = function() {
 		gThis.m_jTrigger = $('<img style="width: 16px; height: 16px;" src="' + gThis._GetImage('CalendarIcon') + '" alt=""/>');
 		gThis.m_oOptions.sSuffix = gThis.m_jTrigger.css('cursor', 'pointer');
 	};
-	
+
 	gThis.OnShow = function() {
 		gThis.m_bShown = true;
 		if (!gThis.m_bResized) {
@@ -9243,15 +9243,15 @@ var GFormDate = GCore.ExtendClass(GFormTextField, function() {
 			});
 		}
 	};
-	
+
 	gThis._InitializeEvents = function() {
 		gThis.m_jTrigger.click(function() {
 			gThis.m_jField.datepicker('show');
 		});
-		
+
 		gThis.m_jField.unbind('change', gThis.OnValidate).change(gThis.OnValidate);
 	};
-	
+
 }, oDefaults);
 /*
 * FAVOURITE CATEGORIES TREE
@@ -9307,9 +9307,9 @@ var oDefaults = {
 };
 
 var GFormFavouriteCategories = GCore.ExtendClass(GFormTree, function() {
-	
+
 	var gThis = this;
-	
+
 	gThis.m_bShown = false;
 	gThis.m_jTree;
 	gThis.m_jOptions;
@@ -9321,7 +9321,7 @@ var GFormFavouriteCategories = GCore.ExtendClass(GFormTree, function() {
 	gThis.m_jItemDragged;
 	gThis.m_oItems = {};
 	gThis.m_jList;
-	
+
 	gThis._PrepareNode = function() {
 		gThis.m_jNode = $('<div/>').addClass(gThis._GetClass('Field'));
 		gThis.m_jFieldWrapper = $('<div/>');
@@ -9342,7 +9342,7 @@ var GFormFavouriteCategories = GCore.ExtendClass(GFormTree, function() {
 		gThis._PrepareOptions();
 		window.setTimeout(gThis.ResetExpansion, 500);
 	};
-	
+
 	gThis._CreateSelectedList = function() {
 		gThis.m_jList = $('<div/>').addClass(gThis._GetClass('List'));
 		var jTable = $('<table cellspacing="0"/>');
@@ -9361,7 +9361,7 @@ var GFormFavouriteCategories = GCore.ExtendClass(GFormTree, function() {
 		gThis.m_jList.append(jTable);
 		return gThis.m_jList;
 	};
-	
+
 	gThis.OnShow = function() {
 		if (!gThis.m_bShown) {
 			gThis.m_bShown = true;
@@ -9383,7 +9383,7 @@ var GFormFavouriteCategories = GCore.ExtendClass(GFormTree, function() {
 			gThis.m_oOptions.fGetSelectedInfo = fGetInfo;
 		}
 	};
-	
+
 	gThis._OnSelect = GEventHandler(function(eEvent) {
 		gThis.m_jFieldWrapper.find('input[value="' + $(this).attr('value') + '"]').remove();
 		if ($(this).is(':checked')) {
@@ -9394,7 +9394,7 @@ var GFormFavouriteCategories = GCore.ExtendClass(GFormTree, function() {
 			gThis._RemoveFromList($(this).attr('value'));
 		}
 	});
-	
+
 	gThis._AddToList = function(sId) {
 		if (gThis.m_jList.find('tr.id__' + sId).length) {
 			return;
@@ -9428,7 +9428,7 @@ var GFormFavouriteCategories = GCore.ExtendClass(GFormTree, function() {
 		}
 		gThis.m_jList.find('tbody').append(jTr);
 	};
-	
+
 	gThis._OnInfoLoaded = GEventHandler(function(eEvent) {
 		for (var j in eEvent.rows) {
 			var jColumns = gThis.m_jList.find('tr.id__' + eEvent.rows[j].id + ' td');
@@ -9439,12 +9439,12 @@ var GFormFavouriteCategories = GCore.ExtendClass(GFormTree, function() {
 			}
 		}
 	});
-	
+
 	gThis._RemoveFromList = function(sId) {
 		var jTr = gThis.m_jList.find('tr.id__' + sId);
 		jTr.remove();
 	};
-	
+
 }, oDefaults);
 /*
 * FIELDSET REPEATABLE
@@ -9471,7 +9471,7 @@ var oDefaults = {
 };
 
 var GFormRepeatableFieldset = GCore.ExtendClass(GFormNestedFieldset, function() {
-	
+
 }, oDefaults);
 /*
 * FILE
@@ -9504,12 +9504,12 @@ var oDefaults = {
 };
 
 var GFormFile = GCore.ExtendClass(GFormField, function() {
-	
+
 	var gThis = this;
-	
+
 	gThis.m_bShown = false;
 	gThis.m_bResized = false;
-	
+
 	gThis._PrepareNode = function() {
 		gThis.m_jNode = $('<div/>').addClass(gThis._GetClass('Field'));
 		var jLabel = $('<label for="' + gThis.GetId() + '"/>');
@@ -9519,7 +9519,7 @@ var GFormFile = GCore.ExtendClass(GFormField, function() {
 		}
 		gThis.m_jNode.append(jLabel);
 	};
-	
+
 }, oDefaults);
 /*
 * FONT STYLE
@@ -9562,17 +9562,17 @@ var oDefaults = {
 };
 
 var GFormFontStyle = GCore.ExtendClass(GFormTextField, function() {
-		
+
 		var gThis = this;
-		
+
 		gThis.m_jFieldFontFamily;
 		gThis.m_jFieldFontStyleBold;
-		gThis.m_jFieldFontStyleUnderline;	
+		gThis.m_jFieldFontStyleUnderline;
 		gThis.m_jFieldFontStyleItalic;
 		gThis.m_jFieldFontStyleUppercase;
 		gThis.m_jFieldFontColour;
 		gThis.m_jFieldFontSize;
-		
+
 		gThis._PrepareNode = function() {
 			gThis.m_jNode = $('<div/>').addClass(gThis._GetClass('Field'));
 			var jLabel = $('<label for="' + gThis.GetId() + '"/>');
@@ -9587,21 +9587,21 @@ var GFormFontStyle = GCore.ExtendClass(GFormTextField, function() {
 				gThis.m_jNode.append('<input type="hidden" name="' + gThis.GetName() + '[selector]" value="' + gThis.m_oOptions.sSelector + '"/>');
 			}
 		};
-		
+
 		gThis.GetValue = function(sRepetition) {
 			if (gThis.m_jField == undefined) {
 					return '';
 			}
 			return gThis.m_jField.eq(0).val();
 		};
-		
+
 		gThis.SetValue = function(mValue, sRepetition) {
 			if (mValue == undefined) {
 				return;
 			}
 			gThis.m_jFieldFontFamily.val(mValue.family).triggerHandler('change');
 			gThis.m_jFieldFontStyleBold.val(mValue.bold);
-			gThis.m_jFieldFontStyleUnderline.val(mValue.underline);	
+			gThis.m_jFieldFontStyleUnderline.val(mValue.underline);
 			gThis.m_jFieldFontStyleItalic.val(mValue.italic);
 			gThis.m_jFieldFontStyleUppercase.val(mValue.uppercase);
 			gThis.m_jFieldFontColour.val(mValue.colour);
@@ -9610,14 +9610,14 @@ var GFormFontStyle = GCore.ExtendClass(GFormTextField, function() {
 		};
 
 		gThis.UpdatePreview = function(){
-			
+
 			var bold;
 			var underline;
 			var italic;
 			var uppercase;
 			var colour;
 			var bDarkBg;
-			
+
 			if(gThis.m_jFieldFontColour.val().substr(0, 11) == 'transparent'){
 				var r = '00';
 				var g = '00';
@@ -9628,7 +9628,7 @@ var GFormFontStyle = GCore.ExtendClass(GFormTextField, function() {
 				var b = gThis.m_jFieldFontColour.val().substr(4, 2);
 				eval('bDarkBg = (0x' + (r ? r : '00') + ' + 0x' + (g ? g : '00') + ' + 0x' + (b ? b : '00') + ') / 3 > 127;');
 			}
-			
+
 			gThis.m_jColourPreviewNode.css({
 				'background-color': "#" + gThis.m_jFieldFontColour.val()
 			});
@@ -9641,7 +9641,7 @@ var GFormFontStyle = GCore.ExtendClass(GFormTextField, function() {
 				gThis.m_jImgFontStyleBold.css({'background-color':'#ffffff'});
 				bold = 'normal';
 			}
-			
+
 			if(gThis.m_jFieldFontStyleUnderline.val()==1){
 				gThis.m_jImgFontStyleUnderline.css({'background-color':'#efefef'});
 				underline = 'underline';
@@ -9649,7 +9649,7 @@ var GFormFontStyle = GCore.ExtendClass(GFormTextField, function() {
 				gThis.m_jImgFontStyleUnderline.css({'background-color':'#ffffff'});
 				underline = 'none';
 			}
-			
+
 			if(gThis.m_jFieldFontStyleItalic.val()==1){
 				italic = 'italic';
 				gThis.m_jImgFontStyleItalic.css({'background-color':'#efefef'});
@@ -9657,7 +9657,7 @@ var GFormFontStyle = GCore.ExtendClass(GFormTextField, function() {
 				gThis.m_jImgFontStyleItalic.css({'background-color':'#ffffff'});
 				italic = 'normal';
 			}
-			
+
 			if(gThis.m_jFieldFontStyleUppercase.val()==1){
 				uppercase = 'uppercase';
 				gThis.m_jImgFontStyleUppercase.css({'background-color':'#efefef'});
@@ -9665,7 +9665,7 @@ var GFormFontStyle = GCore.ExtendClass(GFormTextField, function() {
 				gThis.m_jImgFontStyleUppercase.css({'background-color':'#ffffff'});
 				uppercase = 'none';
 			}
-			
+
 			gThis.m_jFontPreviewNode.css({
 				'font-weight': bold,
 				'text-decoration': underline,
@@ -9676,32 +9676,32 @@ var GFormFontStyle = GCore.ExtendClass(GFormTextField, function() {
 				'text-transform': uppercase,
 				'background-color': bDarkBg ? '#000000' : '#ffffff'
 			});
-				
+
 		};
-		
+
 		gThis._AddField = function(sId) {
-			
-			
+
+
 			var jFontStyleNode = $('<span class="' + gThis._GetClass('FieldSpan') + ' style"/>');
 			var jFontFamilyNode = $('<span class="' + gThis._GetClass('FieldSpan') + ' family"/>');
 			var jFontSizeNode = $('<span class="' + gThis._GetClass('FieldSpan') + ' size"/>');
 			var jFontPreviewNode = $('<span class="' + gThis._GetClass('FontPreview') + '"/>');
 			var jFontColourNode = $('<span class="' + gThis._GetClass('FieldSpan') + ' colour"/>');
 			var jColourPreviewNode = $('<span class="' + gThis._GetClass('ColourPreview') + '"/>');
-			
+
 			var jRepetitionNode = $('<span class="' + gThis._GetClass('FieldRepetition') + '"/>');
-			
+
 			var opt = {'cursor':'pointer'};
-			
+
 			var jImgFontStyleBold = $('<img src="'+gThis._GetImage('Bold')+'" />').css(opt);
 			var jFieldFontStyleBold = $('<input type="hidden" name="' + gThis.GetName() + '[bold]" value="0"/>');
-			
+
 			var jImgFontStyleUnderline = $('<img src="'+gThis._GetImage('Underline')+'" />').css(opt);
 			var jFieldFontStyleUnderline = $('<input type="hidden" name="' + gThis.GetName() + '[underline]" value="0"/>');
-			
+
 			var jImgFontStyleItalic = $('<img src="'+gThis._GetImage('Italic')+'" />').css(opt);
 			var jFieldFontStyleItalic = $('<input type="hidden" name="' + gThis.GetName() + '[italic]" value="0"/>');
-			
+
 			var jImgFontStyleUppercase = $('<img src="'+gThis._GetImage('Uppercase')+'" />').css(opt);
 			var jFieldFontStyleUppercase = $('<input type="hidden" name="' + gThis.GetName() + '[uppercase]" value="0"/>');
 
@@ -9710,26 +9710,26 @@ var GFormFontStyle = GCore.ExtendClass(GFormTextField, function() {
 					var oType = gThis.m_oOptions.aoTypes[i];
 					jFieldFontFamily.append('<option value="' + oType.sValue + '">' + oType.sLabel + '</option>');
 			}
-			
+
 			var jFieldFontSize = $('<select name="' + gThis.GetName() + '[size]" />');
 			for (var i = 5; i < 25; i++) {
 					var oType = gThis.m_oOptions.aoTypes[i];
 					jFieldFontSize.append('<option value="' + i + '">' + i + ' px</option>');
 			}
 			var jFieldFontColour = $('<input type="text" name="' + gThis.GetName() + '[colour]" />');
-			
+
 			jFontPreviewNode.html('Lorem ipsum');
-			
+
 			jFontStyleNode.append(jImgFontStyleBold).append(jImgFontStyleUnderline).append(jImgFontStyleItalic).append(jImgFontStyleUppercase);
 			jFontStyleNode.append(jFieldFontStyleBold).append(jFieldFontStyleUnderline).append(jFieldFontStyleItalic).append(jFieldFontStyleUppercase);
-			
+
 			jFontFamilyNode.append(jFieldFontFamily);
 			jFontSizeNode.append(jFieldFontSize);
 			jFontColourNode.append(jFieldFontColour);
-			
+
 			jRepetitionNode.append($('<span class="' + gThis._GetClass('ColourPreview') + '-container"/>').append(jColourPreviewNode)).append(jFontFamilyNode).append(jFontColourNode).append(jFontStyleNode).append(jFontSizeNode).append(jFontPreviewNode);
 			gThis.m_jField = jRepetitionNode.find('input,select');
-		
+
 			gThis.m_jRepetitionNode = jRepetitionNode;
 			gThis.m_jFontFamilyNode = jFontFamilyNode;
 			gThis.m_jFontSizeNode = jFontSizeNode;
@@ -9747,79 +9747,79 @@ var GFormFontStyle = GCore.ExtendClass(GFormTextField, function() {
 			gThis.m_jFontColourNode = jFontColourNode;
 			gThis.m_jFieldFontColour = jFieldFontColour;
 			gThis.m_jColourPreviewNode = jColourPreviewNode;
-			
+
 			return jRepetitionNode;
 		};
-		
+
 		gThis.OnShow = function() {
 				gThis.m_bShown = true;
 		};
-		
+
 		gThis._InitializeEvents = function() {
 			gThis.m_jField.bind('change keyup',function(){
 				gThis.UpdatePreview();
 			});
-			
+
 			gThis.m_jImgFontStyleBold.click(function(){
 				if(gThis.m_jFieldFontStyleBold.val()==1){
 					gThis.m_jImgFontStyleBold.css({'background-color':'#ffffff'});
-					gThis.m_jFieldFontStyleBold.val(0).triggerHandler('change');	
+					gThis.m_jFieldFontStyleBold.val(0).triggerHandler('change');
 				}
 				else{
 					gThis.m_jImgFontStyleBold.css({'background-color':'#efefef'});
-					gThis.m_jFieldFontStyleBold.val(1).triggerHandler('change');	
+					gThis.m_jFieldFontStyleBold.val(1).triggerHandler('change');
 				}
 				gThis.UpdatePreview();
 			});
-			
+
 			gThis.m_jImgFontStyleUnderline.click(function(){
 				if(gThis.m_jFieldFontStyleUnderline.val()==1){
 					gThis.m_jImgFontStyleUnderline.css({'background-color':'#ffffff'});
-					gThis.m_jFieldFontStyleUnderline.val(0).triggerHandler('change');	
+					gThis.m_jFieldFontStyleUnderline.val(0).triggerHandler('change');
 				}
 				else{
 					gThis.m_jImgFontStyleUnderline.css({'background-color':'#efefef'});
-					gThis.m_jFieldFontStyleUnderline.val(1).triggerHandler('change');	
+					gThis.m_jFieldFontStyleUnderline.val(1).triggerHandler('change');
 				}
 				gThis.UpdatePreview();
 			});
-			
+
 			gThis.m_jImgFontStyleItalic.click(function(){
 				if(gThis.m_jFieldFontStyleItalic.val()==1){
 					gThis.m_jImgFontStyleItalic.css({'background-color':'#ffffff'});
-					gThis.m_jFieldFontStyleItalic.val(0).triggerHandler('change');	
+					gThis.m_jFieldFontStyleItalic.val(0).triggerHandler('change');
 				}
 				else{
 					gThis.m_jImgFontStyleItalic.css({'background-color':'#efefef'});
-					gThis.m_jFieldFontStyleItalic.val(1).triggerHandler('change');	
+					gThis.m_jFieldFontStyleItalic.val(1).triggerHandler('change');
 				}
 				gThis.UpdatePreview();
 			});
-			
+
 			gThis.m_jImgFontStyleUppercase.click(function(){
 				if(gThis.m_jFieldFontStyleUppercase.val()==1){
 					gThis.m_jImgFontStyleUppercase.css({'background-color':'#ffffff'});
-					gThis.m_jFieldFontStyleUppercase.val(0).triggerHandler('change');	
+					gThis.m_jFieldFontStyleUppercase.val(0).triggerHandler('change');
 				}
 				else{
 					gThis.m_jImgFontStyleUppercase.css({'background-color':'#efefef'});
-					gThis.m_jFieldFontStyleUppercase.val(1).triggerHandler('change');	
+					gThis.m_jFieldFontStyleUppercase.val(1).triggerHandler('change');
 				}
 				gThis.UpdatePreview();
 			});
-						
+
 			gThis.m_jFieldFontFamily.GSelect().focus(GEventHandler(function(eEvent) {
 				$(this).closest('.field').addClass('focus');
 			})).blur(GEventHandler(function(eEvent) {
 				$(this).closest('.field').removeClass('focus');
 			}));
-			
+
 			gThis.m_jFieldFontSize.GSelect().focus(GEventHandler(function(eEvent) {
 				$(this).closest('.field').addClass('focus');
 			})).blur(GEventHandler(function(eEvent) {
 				$(this).closest('.field').removeClass('focus');
 			}));
-			
+
 			gThis.m_jFieldFontColour.ColorPicker({
 				color: '#' + gThis.m_jFieldFontColour.val(),
 				onBeforeShow: function () {
@@ -9843,15 +9843,15 @@ var GFormFontStyle = GCore.ExtendClass(GFormTextField, function() {
 			}).change(GEventHandler(function(eEvent) {
 				gThis.UpdatePreview();
 			}));
-			
+
 			gThis.UpdatePreview();
 		};
 
-		
+
 		gThis.Reset = function() {
 			gThis.m_jField.eq(0).val(gThis.m_oOptions.sDefault).change();
 		};
-		
+
 }, oDefaults);
 /*
 * LAYOUT BOXES LIST
@@ -9896,12 +9896,12 @@ var oDefaults = {
 };
 
 var GFormLayoutBoxesList = GCore.ExtendClass(GFormField, function() {
-	
+
 	var gThis = this;
-	
+
 	gThis.m_oBoxes = {};
 	gThis.m_aBoxes = [];
-	
+
 	gThis.GetValue = function(sRepetition) {
 		if (sRepetition == undefined) {
 			var aoValues = [];
@@ -9923,14 +9923,14 @@ var GFormLayoutBoxesList = GCore.ExtendClass(GFormField, function() {
 			};
 		}
 	};
-	
+
 	gThis.Populate = function(mData) {
 		while (gThis.m_aBoxes.length) {
 			gThis.RemoveBox(gThis.m_aBoxes[0]);
 		}
 		gThis.SetValue(mData);
 	};
-	
+
 	gThis.SetValue = function(mValue, sRepetition) {
 		if (sRepetition == undefined) {
 			if (mValue == '') {
@@ -9956,7 +9956,7 @@ var GFormLayoutBoxesList = GCore.ExtendClass(GFormField, function() {
 			oBox.jBoxSelect.val(mValue.box).change();
 		}
 	};
-	
+
 	gThis._PrepareNode = function() {
 		gThis.m_jNode = $('<div/>').addClass(gThis._GetClass('Field'));
 		var jLabel = $('<label for="' + gThis.GetId() + '"/>');
@@ -9976,7 +9976,7 @@ var GFormLayoutBoxesList = GCore.ExtendClass(GFormField, function() {
 		}
 		var jSpan = $('<input type="text" name="'+ gThis.GetName(sId) + '[span]" id="' + gThis.GetId(sId) + '__span" value="1"/>');
 		var jCollapsed = $('<input type="checkbox" name="'+ gThis.GetName(sId) + '[collapsed]" id="' + gThis.GetId(sId) + '__collapsed" value="1"/>');
-		
+
 		if ((gThis.m_jField instanceof $) && gThis.m_jField.length) {
 			gThis.m_jField = gThis.m_jField.add(jBoxSelect);
 		}
@@ -9987,7 +9987,7 @@ var GFormLayoutBoxesList = GCore.ExtendClass(GFormField, function() {
 		jRepetitionNode.append($('<span class="box-select"/>').append($('<span class="' + gThis._GetClass('FieldSpan') + '"/>').append(jBoxSelect)));
 		jRepetitionNode.append($('<span class="box-span"/>').append('<label for="' + gThis.GetId(sId) + '__span">' + GForm.Language.layout_boxes_list_span + '</label>').append($('<span class="' + gThis._GetClass('FieldSpan') + '"/>').append(jSpan)));
 		jRepetitionNode.append($('<span class="box-collapsed"/>').append($('<span class=""/>').append(jCollapsed)).append('<label for="' + gThis.GetId(sId) + '__collapsed">' + GForm.Language.layout_boxes_list_collapsed + '</label>'));
-		
+
 		gThis.m_oBoxes[sId] = {
 			jBoxSelect: jBoxSelect,
 			jSpan: jSpan,
@@ -9995,20 +9995,20 @@ var GFormLayoutBoxesList = GCore.ExtendClass(GFormField, function() {
 			iPosition: GCore.ObjectLength(gThis.m_oBoxes)
 		};
 		gThis.m_aBoxes.push(sId);
-		
+
 		return jRepetitionNode;
 	};
-	
+
 	gThis._UpdateIcons = function() {
-		
+
 		gThis.m_jNode.find('.icon').remove();
-		
+
 		var iLayoutBoxes = gThis.m_aBoxes.length;
-		
+
 		for (var i = 0; i < iLayoutBoxes; i++) {
-			
+
 			var oBox = gThis.m_oBoxes[gThis.m_aBoxes[i]];
-			
+
 			var jRemove = $('<a class="icon" href="#"/>');
 			jRemove.append('<img src="' + gThis._GetImage('Remove') + '" alt="' + GForm.Language.layout_boxes_list_remove + '" title="' + GForm.Language.layout_boxes_list_remove + '"/>');
 			oBox.jCollapsed.closest('.repetition').append(jRemove);
@@ -10016,9 +10016,9 @@ var GFormLayoutBoxesList = GCore.ExtendClass(GFormField, function() {
 				gThis.RemoveBox(eEvent.data.i);
 				return false;
 			}));
-			
+
 		}
-		
+
 		var jAdd = $('<a class="add-box icon" href="#"/>');
 		jAdd.append('<img src="' + gThis._GetImage('Add') + '" alt="' + GForm.Language.layout_boxes_list_add + '" title="' + GForm.Language.layout_boxes_list_add + '"/>');
 		gThis.m_jNode.append(jAdd);
@@ -10027,7 +10027,7 @@ var GFormLayoutBoxesList = GCore.ExtendClass(GFormField, function() {
 			return false;
 		}));
 	};
-	
+
 	gThis.RemoveBox = function(sId) {
 		var oBox = gThis.m_oBoxes[sId];
 		gThis.RemoveRepetition(sId);
@@ -10040,11 +10040,11 @@ var GFormLayoutBoxesList = GCore.ExtendClass(GFormField, function() {
 		}
 		delete gThis.m_oBoxes[sId];
 	};
-	
+
 	gThis.AddBox = function() {
 		gThis.AddRepetition();
 	};
-	
+
 	gThis._InitializeEvents = function(sRepetition) {
 		if (sRepetition != undefined) {
 			gThis.m_oBoxes[sRepetition].jBoxSelect.GSelect();
@@ -10056,7 +10056,7 @@ var GFormLayoutBoxesList = GCore.ExtendClass(GFormField, function() {
 		}
 		gThis._UpdateIcons();
 	};
-	
+
 }, oDefaults);
 /*
 * LIST OF SELECTS
@@ -10085,21 +10085,21 @@ var oDefaults = {
 };
 
 var GFormListOfSelects = GCore.ExtendClass(GFormField, function() {
-	
+
 	var gThis = this;
-	
+
 	gThis.m_bShown = false;
 	gThis.m_bResized = false;
-	
+
 	gThis.m_aoSelects = [];
-	
+
 	gThis.GetValue = function(sRepetition) {
 		if (gThis.m_jField == undefined) {
 			return '';
 		}
 		return gThis._GetField(sRepetition).find('option:selected').attr('value');
 	};
-	
+
 	gThis.SetValue = function(mValue, sRepetition) {
 		if (gThis.m_jField == undefined) {
 			return;
@@ -10110,13 +10110,13 @@ var GFormListOfSelects = GCore.ExtendClass(GFormField, function() {
 			jField.get(0).Update.apply(jField.get(0));
 		}
 	};
-	
+
 	gThis._PrepareNode = function() {
 		gThis.m_jNode = $('<div/>');
 		gThis.m_aoSelects = gThis.m_oOptions.aoSelects;
 		gThis.UpdateSelects();
 	};
-	
+
 	gThis.UpdateSelects = function() {
 		gThis.m_jNode.empty();
 		gThis.m_jField.empty();
@@ -10125,7 +10125,7 @@ var GFormListOfSelects = GCore.ExtendClass(GFormField, function() {
 			gThis.m_jNode.append(gThis._AddField(gThis.m_aoSelects[i]));
 		}
 	};
-	
+
 	gThis.ReplaceSelects = function(aoSelects) {
 		gThis.m_aoSelects = aoSelects;
 		gThis.UpdateSelects();
@@ -10134,7 +10134,7 @@ var GFormListOfSelects = GCore.ExtendClass(GFormField, function() {
 		gThis.OnShow();
 		gThis._InitializeEvents();
 	};
-	
+
 	gThis._AddField = function(oSelect) {
 		var jNode = $('<div/>').addClass(gThis._GetClass('Field'));
 		var jLabel = $('<label for="' + gThis.GetId() + '"/>');
@@ -10168,7 +10168,7 @@ var GFormListOfSelects = GCore.ExtendClass(GFormField, function() {
 		}
 		return jNode.append(jRepetitionNode);
 	};
-	
+
 	gThis.OnInitRepetition = function(sRepetition) {
 		if (!gThis.m_bShown) {
 			return;
@@ -10181,7 +10181,7 @@ var GFormListOfSelects = GCore.ExtendClass(GFormField, function() {
 			}
 		}
 	};
-	
+
 	gThis.OnShow = function() {
 		gThis._UpdateRepetitionButtons();
 		if (!gThis.m_bShown && gThis.m_bRepeatable) {
@@ -10203,21 +10203,21 @@ var GFormListOfSelects = GCore.ExtendClass(GFormField, function() {
 			}
 		}
 	};
-	
+
 	gThis.OnFocus = function(eEvent) {
 		$(eEvent.currentTarget).closest('.' + gThis._GetClass('FieldSpan')).addClass(gThis._GetClass('Focused'));
 		gThis._ActivateFocusedTab(eEvent);
 	};
-	
+
 	gThis.OnBlur = function(eEvent) {
 		$(eEvent.currentTarget).closest('.' + gThis._GetClass('FieldSpan')).removeClass(gThis._GetClass('Focused'));
 	};
-	
+
 	gThis.Reset = function() {
 		gThis.ReplaceSelects(gThis.m_oOptions.aoSelects);
 		//gThis.m_jField.val(gThis.m_oOptions.sDefault).change();
 	};
-	
+
 	gThis._InitializeEvents = function(sRepetition) {
 		if (gThis.m_jField == undefined) {
 			return;
@@ -10244,7 +10244,7 @@ var GFormListOfSelects = GCore.ExtendClass(GFormField, function() {
 			gThis.OnShow();
 		}
 	};
-	
+
 }, oDefaults);
 /*
 * MULTISELECT
@@ -10276,16 +10276,16 @@ var oDefaults = {
 };
 
 var GFormMultiSelect = GCore.ExtendClass(GFormField, function() {
-	
+
 	var gThis = this;
-	
+
 	gThis.m_bShown = false;
 	gThis.m_jUnmodified;
-	
+
 	gThis._Constructor = function() {
 		gThis.m_bResized = false;
 	};
-	
+
 	gThis.GetValue = function(sRepetition) {
 		if (gThis.m_jField == undefined) {
 			return '';
@@ -10297,14 +10297,14 @@ var GFormMultiSelect = GCore.ExtendClass(GFormField, function() {
 		}
 		return aValues;
 	};
-	
+
 	gThis.SetValue = function(mValue, sRepetition) {
 		if (gThis.m_jField == undefined) {
 			return;
 		}
 		gThis._GetField(sRepetition).val(mValue).change();
 	};
-	
+
 	gThis.ExchangeOptions = function(aoNewOptions) {
 		gThis.m_oOptions.aoOptions = aoNewOptions;
 		var jOldNode = gThis.m_jNode;
@@ -10315,7 +10315,7 @@ var GFormMultiSelect = GCore.ExtendClass(GFormField, function() {
 		gThis.OnShow();
 		gThis.m_jField.change();
 	};
-	
+
 	gThis._PrepareNode = function() {
 		gThis.m_jNode = $('<div/>').addClass(gThis._GetClass('Field'));
 		var jLabel = $('<label for="' + gThis.GetId() + '" class="' + gThis._GetClass('Group') + '"/>');
@@ -10328,7 +10328,7 @@ var GFormMultiSelect = GCore.ExtendClass(GFormField, function() {
 		gThis.m_jUnmodified = $('<input type="hidden" name="' + gThis.GetName() + '[unmodified]" value="1"/>');
 		gThis.m_jNode.append(gThis.m_jUnmodified);
 	};
-	
+
 	gThis._AddField = function(sId) {
 		var jField = $('<ul/>');
 		for (var i = 0; i < gThis.m_oOptions.aoOptions.length; i++) {
@@ -10349,11 +10349,11 @@ var GFormMultiSelect = GCore.ExtendClass(GFormField, function() {
 		jRepetitionNode.append($('<span class="' + gThis._GetClass('FieldSpan') + '"/>').append(jField));
 		return jRepetitionNode;
 	};
-	
+
 	gThis.OnReset = function() {
 		gThis.m_jNode.find('input').parent().unCheckCheckboxes();
 	};
-	
+
 	gThis.OnShow = function() {
 		if (gThis.m_oOptions.bAddable && (gThis.m_oOptions.fOnAdd instanceof Function)) {
 			gThis.m_jTrigger.click(function() {
@@ -10378,7 +10378,7 @@ var GFormMultiSelect = GCore.ExtendClass(GFormField, function() {
 		}
 		gThis.m_jUnmodified.val('0');
 	};
-	
+
 	gThis.Populate = function(mValue) {
 		gThis.m_jNode.unCheckCheckboxes();
 		for (var i in mValue) {
@@ -10388,14 +10388,14 @@ var GFormMultiSelect = GCore.ExtendClass(GFormField, function() {
 			gThis.m_jNode.find('input[value="' + mValue[i] + '"]').click();
 		}
 	};
-	
+
 	gThis.Focus = function() {
 		if (gThis.m_jField == undefined) {
 			return;
 		}
 		gThis.m_jField.eq(0).focus();
 	};
-	
+
 }, oDefaults);
 /*
 * PASSWORD
@@ -10427,9 +10427,9 @@ var oDefaults = {
 };
 
 var GFormPassword = GCore.ExtendClass(GFormTextField, function() {
-	
+
 	var gThis = this;
-	
+
 }, oDefaults);
 /*
 * PRICE
@@ -10465,9 +10465,9 @@ var oDefaults = {
 };
 
 var GFormPriceEditor = GCore.ExtendClass(GFormTextField, function() {
-	
+
 	var gThis = this;
-	
+
 	gThis._PrepareNode = function() {
 		gThis.m_jNode = $('<div/>').addClass(gThis._GetClass('Field'));
 		var jLabel = $('<label for="' + gThis.GetId() + '"/>');
@@ -10481,21 +10481,21 @@ var GFormPriceEditor = GCore.ExtendClass(GFormTextField, function() {
 			gThis._CalculateGrossPrice();
 		});
 	};
-	
+
 	gThis.GetValue = function(sRepetition) {
 		if (gThis.m_jField == undefined) {
 			return '';
 		}
 		return gThis.m_jField.eq(0).val();
 	};
-	
+
 	gThis.SetValue = function(mValue, sRepetition) {
 		if (gThis.m_jField == undefined) {
 			return;
 		}
 		gThis.m_jField.eq(0).val(mValue).change();
 	};
-	
+
 	gThis._AddField = function(sId) {
 		var jFieldNet = $('<input type="text" name="' + gThis.GetName() + '" id="' + gThis.GetId() + '"/>');
 		var jFieldGross = $('<input type="text" id="' + gThis.GetId() + '__gross"/>');
@@ -10524,16 +10524,16 @@ var GFormPriceEditor = GCore.ExtendClass(GFormTextField, function() {
 			jSuffix.html(gThis.m_oOptions.sSuffix);
 			jGrossNode.append(jSuffix);
 		}
-		
+
 		var jError = $('<span class="' + gThis._GetClass('Required') + '"/>');
 		jNetNode.append(jError);
-		
+
 		jRepetitionNode.append(jNetNode).append(jGrossNode);
 		gThis.m_jField = jRepetitionNode.find('input');
 		gThis.jRepetitionNode = jRepetitionNode;
 		return gThis.jRepetitionNode;
 	};
-	
+
 	gThis.OnShow = function() {
 		gThis._CalculateGrossPrice(gThis.m_jField.eq(0).val());
 		gThis.m_bShown = true;
@@ -10552,7 +10552,7 @@ var GFormPriceEditor = GCore.ExtendClass(GFormTextField, function() {
 			});
 		}
 	};
-	
+
 	gThis._CalculateGrossPrice = function(sPrice) {
 		var gVat = gThis.m_gForm.GetField(gThis.m_oOptions.sVatField);
 		var iVatId = parseInt(gVat.GetValue());
@@ -10567,7 +10567,7 @@ var GFormPriceEditor = GCore.ExtendClass(GFormTextField, function() {
 		fPrice = isNaN(fPrice) ? 0 : fPrice;
 		gThis.m_jField.eq(1).val((fPrice * (1 + fVat / 100)).toFixed(2));
 	};
-	
+
 	gThis._CalculateNetPrice = function(sPrice) {
 		var gVat = gThis.m_gForm.GetField(gThis.m_oOptions.sVatField);
 		var iVatId = gVat.GetValue();
@@ -10582,7 +10582,7 @@ var GFormPriceEditor = GCore.ExtendClass(GFormTextField, function() {
 		fPrice = isNaN(fPrice) ? 0 : fPrice;
 		gThis.m_jField.eq(0).val((fPrice / (1 + fVat / 100)).toFixed(4));
 	};
-	
+
 	gThis._Initialize = function() {
 		var fHandler = GEventHandler(function(eEvent) {
 			setTimeout(function() {
@@ -10602,19 +10602,19 @@ var GFormPriceEditor = GCore.ExtendClass(GFormTextField, function() {
 		gThis._CalculateGrossPrice();
 		gThis.m_jField.eq(0).change();
 	};
-	
+
 	gThis.ValidateField = GEventHandler(function(eEvent) {
 		var fPrice = parseFloat($(eEvent.currentTarget).val().replace(/,/, '.'));
 		fPrice = isNaN(fPrice) ? 0 : fPrice;
 		$(eEvent.currentTarget).val(fPrice.toFixed(4));
 	});
-	
+
 	gThis.Reset = function() {
 		gThis.m_jField.eq(0).val(gThis.m_oOptions.sDefault).change();
 		gThis._CalculateGrossPrice();
 	};
-	
-	
+
+
 }, oDefaults);
 /*
 * PRODUCT AGGREGATOR
@@ -10641,16 +10641,16 @@ var oDefaults = {
 };
 
 var GFormProductAggregator = GCore.ExtendClass(GFormField, function() {
-	
+
 	var gThis = this;
-	
+
 	gThis.m_jProducts;
 	gThis.m_aoProducts = [];
 	gThis.m_iLockId = -1;
 	gThis.m_jNetSum;
 	gThis.m_jGrossSum;
 	gThis.m_jCount;
-	
+
 	gThis._PrepareNode = function() {
 		gThis.m_jNode = $('<div/>').addClass(gThis._GetClass('Field'));
 		gThis.m_jProducts = $('<div/>');
@@ -10658,18 +10658,18 @@ var GFormProductAggregator = GCore.ExtendClass(GFormField, function() {
 		gThis.m_jNode.append(gThis.m_jProducts);
 		gThis.m_jNode.append(gThis._AddSummary(0, 0));
 	};
-	
+
 	gThis.GetValue = function(sRepetition) {
 		if (gThis.m_jField == undefined) {
 			return '';
 		}
 		return gThis.m_jField.eq(0).val();
 	};
-	
+
 	gThis.SetValue = function(mValue, sRepetition) {
 		return;
 	};
-	
+
 	gThis._RewriteProducts = function() {
 		gThis.m_jProducts.empty();
 		var iCount = gThis.m_aoProducts.length;
@@ -10686,16 +10686,16 @@ var GFormProductAggregator = GCore.ExtendClass(GFormField, function() {
 		gThis.UpdateCount(iCount);
 		gThis.UpdateSum(fNetSum, fGrossSum);
 	};
-	
+
 	gThis.UpdateSum = function(fNetSum, fGrossSum) {
 		gThis.m_jNetSum.val(fNetSum.toFixed(2)).change();
 		gThis.m_jGrossSum.val(fGrossSum.toFixed(2));
 	};
-	
+
 	gThis.UpdateCount = function(iCount) {
 		gThis.m_jCount.val(iCount).change();
 	};
-	
+
 	gThis._AddProductCount = function(iCount) {
 		var jElement = $('<div/>').addClass(gThis._GetClass('FieldConstant'));
 		var jLabel = $('<label/>').css('font-weight', 'bold');
@@ -10709,7 +10709,7 @@ var GFormProductAggregator = GCore.ExtendClass(GFormField, function() {
 		gThis.m_jCount = jField;
 		return jElement;
 	};
-	
+
 	gThis._AddSummary = function(fNetSum, fGrossSum) {
 		var jElement = $('<div/>').addClass(gThis._GetClass('FieldPrice'));
 		var jLabel = $('<label/>').css('font-weight', 'bold');
@@ -10750,7 +10750,7 @@ var GFormProductAggregator = GCore.ExtendClass(GFormField, function() {
 		gThis.m_jGrossSum = jFieldGross;
 		return jElement;
 	};
-	
+
 	gThis._AddProduct = function(oProduct) {
 		var jElement = $('<div/>').addClass(gThis._GetClass('FieldPrice'));
 		var jLabel = $('<label/>');
@@ -10763,7 +10763,7 @@ var GFormProductAggregator = GCore.ExtendClass(GFormField, function() {
 		jElement.append(gThis._AddPrice(oProduct));
 		return jElement;
 	};
-	
+
 	gThis._AddPrice = function(oProduct) {
 		var jFieldNet = $('<input disabled="disabled" type="text" value="' + oProduct.sellprice + '"/>').css('cursor', 'default');
 		var jFieldGross = $('<input disabled="disabled" type="text" value="' + oProduct.sellprice_gross + '"/>').css('cursor', 'default');
@@ -10796,13 +10796,13 @@ var GFormProductAggregator = GCore.ExtendClass(GFormField, function() {
 		//gThis.m_jField = jRepetitionNode.find('input');
 		return jRepetitionNode;
 	};
-	
+
 	gThis.OnShow = function() {
 		gThis.m_bShown = true;
 		gThis._UpdateWidths();
 		gThis.Update();
 	};
-	
+
 	gThis._UpdateWidths = function() {
 		gThis.m_jNode.find('input:text').each(function(i) {
 			if (i == 0) {
@@ -10819,7 +10819,7 @@ var GFormProductAggregator = GCore.ExtendClass(GFormField, function() {
 			$(this).css('width', iWidth);
 		});
 	};
-	
+
 	gThis._CalculateGrossPrice = function(sPrice) {
 		/*var gVat = gThis.m_gForm.GetField(gThis.m_oOptions.sVatField);
 		var iVatId = gVat.GetValue();
@@ -10838,7 +10838,7 @@ var GFormProductAggregator = GCore.ExtendClass(GFormField, function() {
 		//gThis.m_jField.eq(0).val(fPrice.toFixed(2));
 		gThis.m_jField.eq(1).val((fPrice * (1 + fVat / 100)).toFixed(2));*/
 	};
-	
+
 	gThis._CalculateNetPrice = function(sPrice) {
 		/*var gVat = gThis.m_gForm.GetField(gThis.m_oOptions.sVatField);
 		var iVatId = gVat.GetValue();
@@ -10857,15 +10857,15 @@ var GFormProductAggregator = GCore.ExtendClass(GFormField, function() {
 		//gThis.m_jField.eq(1).val(fPrice.toFixed(2));
 		gThis.m_jField.eq(0).val((fPrice / (1 + fVat / 100)).toFixed(2));*/
 	};
-	
+
 	gThis.StartWaiting = function() {
 		gThis.m_jNode.css('opacity', .5);
 	};
-	
+
 	gThis.EndWaiting = function() {
 		gThis.m_jNode.css('opacity', 1);
 	};
-	
+
 	gThis.Update = function() {
 		var jProducts = gThis.m_gForm.GetField(gThis.m_oOptions.sProductsSourceField).m_jField.find('input');
 		gThis.m_iLockId = gThis.m_gForm.Lock(GForm.Language.product_aggregator_form_blocked, GForm.Language.product_aggregator_form_blocked_description);
@@ -10887,16 +10887,129 @@ var GFormProductAggregator = GCore.ExtendClass(GFormField, function() {
 			gThis.EndWaiting();
 		})));
 	};
-	
+
 	gThis.Reset = function() {
 		gThis.Update();
 	};
-	
+
 	gThis.Focus = function() {
 		return false;
 	};
-	
+
 }, oDefaults);
+
+/*
+ * CONSOLE OUTPUT
+ */
+
+var oDefaults = {
+    sName: '',
+    sLabel: '',
+    oClasses: {
+        sFieldClass: 'field-console-output',
+        sFieldSpanClass: 'field',
+        sButtonClass: 'button',
+        sGroupClass: 'group',
+        sFocusedClass: 'focus',
+        sInvalidClass: 'invalid',
+        sRequiredClass: 'required',
+        sWaitingClass: 'waiting',
+        sFieldRepetitionClass: 'repetition',
+        sThumbClass: 'thumb',
+        sNameClass: 'name',
+        sSelectedTableClass: 'selected',
+        sAddFilesClass: 'add-pictures',
+        sQueueClass: 'upload-queue',
+        sProgressClass: 'progress',
+        sProgressBarClass: 'progress-bar',
+        sProgressBarIndicatorClass: 'indicator',
+        sUploadErrorClass: 'upload-error',
+        sUploadSuccessClass: 'upload-success'
+    },
+    oImages: {
+        sDeleteIcon: 'images/icons/datagrid/delete.png',
+        sUploadButton: 'images/buttons/add-pictures.png'
+    },
+    aoOptions: [],
+    sDefault: '',
+    aoRules: [],
+    sComment: '',
+    iWidth: 121,
+    iPort: 0,
+    iHeight: 27,
+};
+
+var GFormConsoleOutput = GCore.ExtendClass(GFormFile, function() {
+
+    var gThis = this;
+
+    gThis.m_bShown = false;
+    gThis.oSocket;
+    gThis.oAjaxRequest;
+
+    gThis._PrepareNode = function() {
+        gThis.m_jNode = $('<div/>').addClass(gThis._GetClass('Field'));
+        gThis.m_jNode.css({marginBottom:20});
+
+        gThis.m_jButton = $('<a class="' + gThis._GetClass('Button') + '" href="#"/>');
+        gThis.m_jButton.append('<span>' + Translator.trans('package.button.run',{}, 'wellcommerce') + '</span>');
+    	gThis.m_jNode.append($('<p></p>').append('<br />').append(gThis.m_jButton));
+
+        gThis.m_jButton.css({
+            top:-20,
+            position: 'relative',
+            marginBottom: -5
+        });
+
+        gThis.m_jNode.append('<h4>' + Translator.trans('package.label.output',{},'wellcommerce') + '</h4>');
+
+        gThis.m_jConsoleOutput = $('<div/>').addClass(gThis._GetClass('Field'));
+        gThis.m_jNode.append(gThis.m_jConsoleOutput);
+        gThis.m_jConsoleOutput.html('<strong>Starting WebSocketServer on port: </strong>' + gThis.m_oOptions.iPort);
+    };
+
+    gThis.OnProcess = function(){
+        gThis.m_jButton.hide();
+        var url = 'ws://127.0.0.1:' + gThis.m_oOptions.iPort + '/';
+        gThis.oSocket = new WebSocket(url);
+        gThis.oSocket.onmessage = function(msg) {
+            gThis.m_jConsoleOutput.html(msg.data);
+        };
+
+        gThis.oSocket.onerror = function(error) {
+            console.log('<strong>Error connecting WebSocketServer on port: </strong>' + gThis.m_oOptions.iPort);
+        }
+
+        $(window).bind("beforeunload",function(event){
+            gThis.oSocket.onclose = function () {};
+            gThis.oSocket.close();
+        });
+    };
+
+    gThis._InitializeEvents = function(sRepetition) {
+        $('.navigation .button').remove();
+        gThis.m_jButton.click(gThis.OnProcess);
+  	};
+
+    gThis.OnShow = function() {
+        gThis.m_bShown = true;
+
+        gThis.oAjaxRequest = GF_Ajax_Request(gThis.m_oOptions.sConsoleUrl, {}, function(oResponse){
+            GMessage('Installation completed.');
+            gThis.oSocket.onclose = function () {};
+            gThis.oSocket.close();
+            gThis.oAjaxRequest.abort();
+        });
+
+        $(window).bind("beforeunload",function(event){
+            gThis.oAjaxRequest.abort();
+            gThis.m_jConsoleOutput.html('<strong>Ajax request terminated</strong>');
+            return Translator.trans('console.message.confirm');
+        });
+    };
+
+}, oDefaults);
+
 /*
 * PROGRESS INDICATOR
 */
@@ -10934,7 +11047,7 @@ var oDefaults = {
 	aoRules: [],
 	sComment: '',
 	iWidth: 121,
-	iHeight: 27,
+	iHeight: 27
 };
 
 var GFormProgressIndicator = GCore.ExtendClass(GFormFile, function() {
@@ -10950,13 +11063,13 @@ var GFormProgressIndicator = GCore.ExtendClass(GFormFile, function() {
 		if ((gThis.m_oOptions.sComment != undefined) && (gThis.m_oOptions.sComment.length)) {
 			jLabel.append(' <small>' + gThis.m_oOptions.sComment + '</small>');
 		}
-		
+
 		gThis.m_jNode.append('<h4>' + gThis.m_oOptions.sLabel + '</h4>');
 		gThis.m_jNode.append('<p class="' + gThis._GetClass('Progress') + '"/>');
 		gThis.m_jNode.append('<div class="' + gThis._GetClass('ProgressBar') + '"><div class="' + gThis._GetClass('ProgressBarIndicator') + '"></div>');
 		gThis.m_jNode.find('.' + gThis._GetClass('Progress')).text(GForm.Language.progress_indicator_run_comment);
 		gThis.m_jNode.find('.' + gThis._GetClass('ProgressBarIndicator')).css('width', 0 + '%');
-		
+
 		if(gThis.m_oOptions.bPreventSubmit){
 			jA = $('<a class="' + gThis._GetClass('Button') + '" href="#"/>');
 			jA.append('<span>' + GForm.Language.progress_indicator_run + '</span>');
@@ -10965,25 +11078,25 @@ var GFormProgressIndicator = GCore.ExtendClass(GFormFile, function() {
 			window.setTimeout(gThis.OnLoad, 1500);
 		}
 	};
-	
+
 	gThis._InitializeEvents = function(sRepetition) {
 		$('.navigation').remove();
 		if(gThis.m_oOptions.bPreventSubmit){
 			jA.click(gThis.OnLoad);
 		}
-		
+
 	};
-	
+
 	gThis.OnLoad = function(){
 		if(gThis.m_oOptions.bPreventSubmit){
 			jA.hide();
 		}
-		
+
 		gThis.m_oOptions.fLoadRecords({
 			iStartFrom: 0
 		}, GCallback(gThis.OnDataLoaded));
 	};
-	
+
 	gThis.OnStartProcess = function(iFrom){
 		GXajaxInterface.Invoke(gThis.m_oOptions.fProcessRecords, [
 			{
@@ -11010,7 +11123,7 @@ var GFormProgressIndicator = GCore.ExtendClass(GFormFile, function() {
 			});
 		});
 	};
-	
+
 	gThis.UpdateIndicator = function(completed){
 		var iCompleted = completed;
 		if (gThis.iTotal == undefined) {
@@ -11021,7 +11134,7 @@ var GFormProgressIndicator = GCore.ExtendClass(GFormFile, function() {
 		gThis.m_jNode.find('.' + gThis._GetClass('Progress')).text(iPercentage + '%: ' + iCompleted  + ' / ' + iTotal + ' ' + gThis.m_oOptions.sComment);
 		gThis.m_jNode.find('.' + gThis._GetClass('ProgressBarIndicator')).css('width', (iCompleted / iTotal * 100) + '%');
 	};
-	
+
 	gThis.OnDataLoaded = GEventHandler(function(eEvent) {
 		var iCompleted = eEvent.iCompleted;
 		var iTotal = eEvent.iTotal;
@@ -11031,7 +11144,7 @@ var GFormProgressIndicator = GCore.ExtendClass(GFormFile, function() {
 		gThis.m_jNode.find('h4').text('Przetwarzanie danych');
 		gThis.OnStartProcess(iCompleted, 0);
 	});
-	
+
 	gThis.OnProcess = GEventHandler(function(eEvent) {
 		gThis.UpdateIndicator(eEvent.iStartFrom);
 		if ((eEvent.bFinished != undefined) && eEvent.bFinished) {
@@ -11044,7 +11157,7 @@ var GFormProgressIndicator = GCore.ExtendClass(GFormFile, function() {
 			gThis.OnStartProcess(eEvent.iStartFrom);
 		}
 	});
-	
+
 	gThis.OnProcessSucceded = GEventHandler(function(eEvent) {
 		if ((eEvent.bCompleted != undefined) && eEvent.bCompleted) {
 			GAlert(GForm.Language.progress_indicator_success);
@@ -11110,21 +11223,21 @@ var GFormProgressBar = GCore.ExtendClass(GFormFile, function() {
 		var iTotal = gThis.m_oOptions.iTotal;
 		var iCompleted = gThis.m_oOptions.iCompleted;
 		var iPercentage = Math.round(iCompleted / iTotal * 100);
-		
+
 		gThis.m_jNode.append('<h4>' + gThis.m_oOptions.sLabel + '</h4>');
-		
+
 		gThis.m_jNode.append('<p class="' + gThis._GetClass('Progress') + '"/>');
-		
+
 		gThis.m_jNode.append('<div class="' + gThis._GetClass('ProgressBar') + ((parseInt(iCompleted) > parseInt(iTotal) && parseInt(iTotal) > 0) ? ' error' : '') +'"><div class="' + gThis._GetClass('ProgressBarIndicator') + '"></div>');
-		
+
 		if(iTotal == 0){
 			gThis.m_jNode.find('.' + gThis._GetClass('Progress')).text('Brak limitu');
 		}else{
 			gThis.m_jNode.find('.' + gThis._GetClass('Progress')).text(Math.round(gThis.m_oOptions.iCompleted / gThis.m_oOptions.iTotal * 100) + '%: ' + gThis.m_oOptions.iCompleted  + ' / ' + gThis.m_oOptions.iTotal + ' ' + gThis.m_oOptions.sComment);
 		}
-		
+
 	};
-	
+
 	gThis.OnShow = function() {
 		if (!gThis.m_bShown) {
 			var percentage = gThis.m_oOptions.iCompleted / gThis.m_oOptions.iTotal * 100;
@@ -11184,7 +11297,7 @@ var oDefaults = {
 };
 
 var GFormRangeEditor = GCore.ExtendClass(GFormField, function() {
-	
+
 	var gThis = this;
 	gThis.m_jTable;
 	gThis.m_jVat;
@@ -11196,19 +11309,19 @@ var GFormRangeEditor = GCore.ExtendClass(GFormField, function() {
 	gThis.m_jNetPriceFields;
 	gThis.m_jGrossPriceFields;
 	gThis.m_aoRanges = [];
-	
+
 	gThis._PrepareNode = function() {
 		gThis.m_jNode = $('<div/>').addClass(gThis._GetClass('Field'));
 		gThis._AddVatCheckbox();
 		gThis._AddVat();
 		gThis._AddTable();
 	};
-	
+
 	gThis._AddTable = function() {
 		gThis.m_jTable = $('<table cellspacing="0"/>');
 		gThis.m_jNode.append(gThis.m_jTable);
 	};
-	
+
 	gThis._WriteTable = function() {
 		if (!(gThis.m_aoRanges instanceof Array) || !gThis.m_aoRanges.length) {
 			gThis.m_aoRanges = [{
@@ -11239,7 +11352,7 @@ var GFormRangeEditor = GCore.ExtendClass(GFormField, function() {
 			else if (gThis.m_jUseVatField.is(':checked')) {
 				jPrice.append(gThis._AddPriceWithVat(i, gThis.m_aoRanges[i]));
 			}
-			else {    
+			else {
 				jPrice.append(gThis._AddPrice(i, gThis.m_aoRanges[i]));
 			}
 			jOptions = $('<td class="' + gThis._GetClass('OptionsColumn') + '"/>');
@@ -11268,7 +11381,7 @@ var GFormRangeEditor = GCore.ExtendClass(GFormField, function() {
 		gThis.m_jTable.append(jBody);
 		gThis.InitTable();
 	};
-	
+
 	gThis.AddNewRange = function(iAfterWhich) {
 		var fOffset = 1 / Math.pow(10, gThis.m_oOptions.iRangePrecision);
 		var oRange = {
@@ -11285,7 +11398,7 @@ var GFormRangeEditor = GCore.ExtendClass(GFormField, function() {
 		gThis.m_aoRanges = aoRanges;
 		gThis._WriteTable();
 	};
-	
+
 	gThis.RemoveRange = function(iWhich) {
 		gThis.m_aoRanges.splice(iWhich, 1);
 		var fOffset = 1 / Math.pow(10, gThis.m_oOptions.iRangePrecision);
@@ -11295,7 +11408,7 @@ var GFormRangeEditor = GCore.ExtendClass(GFormField, function() {
 		}
 		gThis._WriteTable();
 	};
-	
+
 	gThis._AddMin = function(sId, oRange) {
 		var jPrice = $('<div/>').addClass(gThis._GetClass('FieldText'));
 		var jFieldNet = $('<input type="text" name="' + gThis.GetName() + '[ranges][' + sId + '][min]" id="' + gThis.GetId() + '__' + sId + '__min" value="' + oRange.min + '"/>');
@@ -11312,7 +11425,7 @@ var GFormRangeEditor = GCore.ExtendClass(GFormField, function() {
 		jPrice.append(jRepetitionNode);
 		return jPrice;
 	};
-	
+
 	gThis._AddMax = function(sId, oRange) {
 		var jPrice = $('<div/>').addClass(gThis._GetClass('FieldText'));
 		var jFieldNet = $('<input type="text" name="' + gThis.GetName() + '[ranges][' + sId + '][max]" id="' + gThis.GetId() + '__' + sId + '__max" value="' + oRange.max + '"/>');
@@ -11329,16 +11442,16 @@ var GFormRangeEditor = GCore.ExtendClass(GFormField, function() {
 		jPrice.append(jRepetitionNode);
 		return jPrice;
 	};
-	
+
 	gThis.InitTable = function() {
-		
+
 		gThis.m_jTable.find('tbody input').focus(GEventHandler(function(eEvent) {
 			$(this).closest('.' + gThis._GetClass('FieldSpan')).addClass(gThis._GetClass('Focused'));
 		})).blur(GEventHandler(function(eEvent) {
 			$(this).closest('.' + gThis._GetClass('FieldSpan')).removeClass(gThis._GetClass('Focused'));
 		}));
 		gThis._ResizeFields();
-		
+
 		var fHandler = GEventHandler(function(eEvent) {
 			setTimeout(function() {
 				var jNet = $(eEvent.currentTarget);
@@ -11352,7 +11465,7 @@ var GFormRangeEditor = GCore.ExtendClass(GFormField, function() {
 		gThis.m_jTable.find('.' + gThis._GetClass('NetPrice') + ' input').each(function() {
 			$(this).triggerHandler('blur');
 		});
-		
+
 		fHandler = GEventHandler(function(eEvent) {
 			setTimeout(function() {
 				var jGross = $(eEvent.currentTarget);
@@ -11363,7 +11476,7 @@ var GFormRangeEditor = GCore.ExtendClass(GFormField, function() {
 			var i = gThis.m_jTable.find('tbody tr').index($(this).closest('tr'));
 			gThis.m_aoRanges[i].price = $(this).closest('td').find('.' + gThis._GetClass('NetPrice') + ' input').val();
 		}));
-		
+
 		fHandler = GEventHandler(function(eEvent) {
 			setTimeout(function() {
 				var fValue = Math.abs(parseFloat($(eEvent.currentTarget).val().replace(/,/, '.')));
@@ -11377,7 +11490,7 @@ var GFormRangeEditor = GCore.ExtendClass(GFormField, function() {
 			var i = gThis.m_jTable.find('tbody tr').index($(this).closest('tr'));
 			gThis.m_aoRanges[i].min = $(this).val();
 		}));
-		
+
 		fHandler = GEventHandler(function(eEvent) {
 			setTimeout(function() {
 				var fValue = parseFloat($(eEvent.currentTarget).val().replace(/,/, '.'));
@@ -11391,15 +11504,15 @@ var GFormRangeEditor = GCore.ExtendClass(GFormField, function() {
 			var i = gThis.m_jTable.find('tbody tr').index($(this).closest('tr'));
 			gThis.m_aoRanges[i].max = $(this).val();
 		}));
-		
+
 		gThis.m_jTable.find('select').each(function(i) {
 			$(this).bind('change', {i: i}, GEventHandler(function(eEvent) {
 				gThis.m_aoRanges[i].price = $(this).find('option:selected').attr('value');
 			})).GSelect();
 		});
-		
+
 	};
-	
+
 	gThis._AddVat = function() {
 		gThis.m_jVat = $('<div/>').addClass(gThis._GetClass('FieldSelect'));
 		var jLabel = $('<label for="' + gThis.GetId() + '__vat"/>');
@@ -11418,7 +11531,7 @@ var GFormRangeEditor = GCore.ExtendClass(GFormField, function() {
 		gThis.m_jNode.append(gThis.m_jVat);
 		gThis.m_jVatField = jField;
 	};
-	
+
 	gThis._AddVatCheckbox = function() {
 		if (!gThis.m_oOptions.aoVatValues.length) {
 			gThis.m_jUseVatField = $('<div/>');
@@ -11435,7 +11548,7 @@ var GFormRangeEditor = GCore.ExtendClass(GFormField, function() {
 		gThis.m_jNode.append(gThis.m_jUseVat);
 		gThis.m_jUseVatField = jField;
 	};
-	
+
 	gThis.GetValue = function(sRepetition) {
 		return {
 			use_vat: gThis.m_jUseVatField.is(':checked'),
@@ -11443,7 +11556,7 @@ var GFormRangeEditor = GCore.ExtendClass(GFormField, function() {
 			ranges: gThis.m_aoRanges
 		};
 	};
-	
+
 	gThis.SetValue = function(mValue, sRepetition) {
 		if (mValue != undefined) {
 			if ((mValue['use_vat'] && !gThis.m_jUseVatField.is(':checked')) || (!mValue['use_vat'] && gThis.m_jUseVatField.is(':checked'))) {
@@ -11455,11 +11568,11 @@ var GFormRangeEditor = GCore.ExtendClass(GFormField, function() {
 			}
 			gThis.m_aoRanges = mValue['ranges'];
 		}
-		
+
 		gThis._WriteTable();
 		gThis.m_jUseVatField.triggerHandler('click');
 	};
-	
+
 	gThis._AddPriceWithVat = function(sId, oRange) {
 		var jPrice = $('<div/>').addClass(gThis._GetClass('FieldPrice'));
 		var jFieldNet = $('<input type="text" name="' + gThis.GetName() + '[ranges][' + sId + '][price]" id="' + gThis.GetId() + '__' + sId +'__price" value="' + oRange.price + '"/>');
@@ -11505,7 +11618,7 @@ var GFormRangeEditor = GCore.ExtendClass(GFormField, function() {
 		jPrice.append(jRepetitionNode);
 		return jPrice;
 	};
-	
+
 	gThis._AddPrice = function(sId, oRange) {
 		var jPrice = $('<div/>').addClass(gThis._GetClass('FieldText'));
 		var jFieldNet = $('<input type="text" name="' + gThis.GetName() + '[ranges][' + sId + '][price]" id="' + gThis.GetId() + '__' + sId +'__price" value="' + oRange.price + '"/>');
@@ -11525,7 +11638,7 @@ var GFormRangeEditor = GCore.ExtendClass(GFormField, function() {
 		jPrice.append(jRepetitionNode);
 		return jPrice;
 	};
-	
+
 	gThis._AddSelect = function(sId, oRange) {
 		var jPrice = $('<div/>').addClass(gThis._GetClass('FieldSelect'));
 		var jFieldNet = $('<select name="' + gThis.GetName() + '[ranges][' + sId + '][price]" id="' + gThis.GetId() + '__' + sId +'__price"/>');
@@ -11548,7 +11661,7 @@ var GFormRangeEditor = GCore.ExtendClass(GFormField, function() {
 		jPrice.append(jRepetitionNode);
 		return jPrice;
 	};
-	
+
 	gThis.OnShow = function() {
 		if (!gThis.m_bShown) {
 			gThis.m_jVatField.GSelect();
@@ -11560,7 +11673,7 @@ var GFormRangeEditor = GCore.ExtendClass(GFormField, function() {
 		}
 		gThis.m_jUseVatField.triggerHandler('click');
 	};
-	
+
 	gThis._ResizeFields = function() {
 		gThis.m_jTable.find('.' + gThis._GetClass('NetPrice') + ' input, .' + gThis._GetClass('GrossPrice') + ' input').each(function() {
 			var iWidth = Math.floor(parseInt($(this).css('width')) / 2) - 20;
@@ -11574,7 +11687,7 @@ var GFormRangeEditor = GCore.ExtendClass(GFormField, function() {
 			$(this).css('width', iWidth);
 		});
 	};
-	
+
 	gThis._CalculateGrossPrice = function(sPrice) {
 		var iVatId = gThis.m_jVatField.find('option:selected').attr('value');
 		var fVat = gThis.m_oOptions.aoVatValues[iVatId];
@@ -11582,7 +11695,7 @@ var GFormRangeEditor = GCore.ExtendClass(GFormField, function() {
 		fPrice = isNaN(fPrice) ? 0 : fPrice;
 		return (fPrice * (1 + fVat / 100)).toFixed(gThis.m_oOptions.iPricePrecision);
 	};
-	
+
 	gThis._CalculateNetPrice = function(sPrice) {
 		var iVatId = gThis.m_jVatField.find('option:selected').attr('value');
 		var fVat = gThis.m_oOptions.aoVatValues[iVatId];
@@ -11590,7 +11703,7 @@ var GFormRangeEditor = GCore.ExtendClass(GFormField, function() {
 		fPrice = isNaN(fPrice) ? 0 : fPrice;
 		return (fPrice / (1 + fVat / 100)).toFixed(gThis.m_oOptions.iPricePrecision);
 	};
-	
+
 	gThis._Initialize = function() {
 		if (gThis.m_oOptions.aoVatValues.length) {
 			gThis.m_jUseVatField.click(GEventHandler(function(eEvent) {
@@ -11613,23 +11726,23 @@ var GFormRangeEditor = GCore.ExtendClass(GFormField, function() {
 			gThis.m_jVat.css('display', 'none');
 		}
 	};
-	
+
 	gThis.ValidatePrice = GEventHandler(function(eEvent) {
 		var fPrice = parseFloat($(eEvent.currentTarget).val().replace(/,/, '.'));
 		fPrice = isNaN(fPrice) ? 0 : Math.abs(fPrice);
 		$(eEvent.currentTarget).val(fPrice.toFixed(gThis.m_oOptions.iPricePrecision));
 	});
-	
+
 	gThis.ValidateRange = GEventHandler(function(eEvent) {
 		var fPrice = parseFloat($(eEvent.currentTarget).val().replace(/,/, '.'));
 		fPrice = isNaN(fPrice) ? 0 : Math.abs(fPrice);
 		$(eEvent.currentTarget).val(fPrice.toFixed(gThis.m_oOptions.iRangePrecision));
 	});
-	
+
 	gThis.Reset = function() {
 		gThis.SetValue(gThis.m_oOptions.sDefault);
 	};
-	
+
 }, oDefaults);
 /*
 * TEXTAREA
@@ -11663,15 +11776,15 @@ var oDefaults = {
 };
 
 var GFormTextArea = GCore.ExtendClass(GFormTextField, function() {
-	
+
 	var gThis = this;
-	
+
 	gThis.m_bResized;
-	
+
 	gThis._Constructor = function() {
 		gThis.m_bResized = false;
 	};
-	
+
 	gThis._PrepareNode = function() {
 		gThis.m_jNode = $('<div/>').addClass(gThis._GetClass('Field'));
 		var jLabel = $('<label for="' + gThis.GetId() + '"/>');
@@ -11687,7 +11800,7 @@ var GFormTextArea = GCore.ExtendClass(GFormTextField, function() {
 			gThis.AddRepetition();
 		}
 	};
-	
+
 	gThis._AddField = function(sId) {
 		var jField = $('<textarea name="' + gThis.GetName() + '" id="' + gThis.GetId() + '" rows="' + gThis.m_oOptions.iRows + '" cols="' + gThis.m_oOptions.iCols + '"/>');
 		if ((gThis.m_jField instanceof $) && gThis.m_jField.length) {
@@ -11700,9 +11813,9 @@ var GFormTextArea = GCore.ExtendClass(GFormTextField, function() {
 		jRepetitionNode.append($('<span class="' + gThis._GetClass('FieldSpan') + '"/>').append(jField));
 		return jRepetitionNode;
 	};
-	
+
 	gThis.OnShow = function() {};
-	
+
 }, oDefaults);
 /*
 * CODE EDITOR
@@ -11736,16 +11849,16 @@ var oDefaults = {
 };
 
 var GFormCodeEditor = GCore.ExtendClass(GFormTextField, function() {
-	
+
 	var gThis = this;
-	
+
 	gThis.m_bResized;
-	
+
 	gThis._Constructor = function() {
 		gThis.m_bResized = false;
 		gThis.m_bShown = false;
 	};
-	
+
 	gThis._PrepareNode = function() {
 		gThis.m_jNode = $('<div/>').addClass(gThis._GetClass('Field'));
 		var jLabel = $('<label for="' + gThis.GetId() + '"/>');
@@ -11760,9 +11873,9 @@ var GFormCodeEditor = GCore.ExtendClass(GFormTextField, function() {
 		else {
 			gThis.AddRepetition();
 		}
-		
+
 	};
-	
+
 	gThis._AddField = function(sId) {
 		var jField = $('<textarea name="' + gThis.GetName() + '" id="' + gThis.GetId() + '" rows="' + gThis.m_oOptions.iRows + '" cols="' + gThis.m_oOptions.iCols + '"/>');
 		if ((gThis.m_jField instanceof $) && gThis.m_jField.length) {
@@ -11775,7 +11888,7 @@ var GFormCodeEditor = GCore.ExtendClass(GFormTextField, function() {
 		jRepetitionNode.append($('<span class="' + gThis._GetClass('FieldSpan') + '"/>').append(jField));
 		return jRepetitionNode;
 	};
-	
+
 	gThis.OnShow = function() {
 		if(gThis.m_bShown){
 			return;
@@ -11791,7 +11904,7 @@ var GFormCodeEditor = GCore.ExtendClass(GFormTextField, function() {
 			gThis.m_bShown = true;
 		}
 	};
-	
+
 }, oDefaults);
 /*
 * CLIENT SELECT
@@ -11826,11 +11939,11 @@ var oDefaults = {
 };
 
 var GFormClientSelect = GCore.ExtendClass(GFormField, function() {
-	
+
 	var gThis = this;
-	
+
 	gThis.m_bShown = false;
-	
+
 	gThis.m_fLoadClients;
 	gThis.m_fProcessProduct;
 	gThis.m_jDatagrid;
@@ -11846,9 +11959,9 @@ var GFormClientSelect = GCore.ExtendClass(GFormField, function() {
 	gThis.m_jClientGroup;
 	gThis.m_aoAddresses = [];
 	gThis.m_agListeners = [];
-	
+
 	gThis.m_bFirstLoad = true;
-	
+
 	gThis.GetValue = function(sRepetition) {
 		if (gThis.m_jField == undefined) {
 			return '';
@@ -11868,7 +11981,7 @@ var GFormClientSelect = GCore.ExtendClass(GFormField, function() {
 			return gThis.m_jField.val();
 		}
 	};
-	
+
 	gThis.SetValue = function(mValue, sRepetition) {
 		if (gThis.m_jField == undefined) {
 			return;
@@ -11882,12 +11995,12 @@ var GFormClientSelect = GCore.ExtendClass(GFormField, function() {
 			gThis.m_jField.val(mValue).change();
 		}
 	};
-	
+
 	gThis._OnDataLoaded = function(oData) {
 		gThis.m_jClientName.text(oData.name);
 		gThis.m_jClientEmail.text(oData.email);
 		gThis.m_jClientGroup.text(oData.group);
-		
+
 		$('#address_data__billing_data__firstname').val(oData.billing_address.firstname);
 		$('#address_data__billing_data__surname').val(oData.billing_address.surname);
 		$('#address_data__billing_data__street').val(oData.billing_address.street);
@@ -11899,7 +12012,7 @@ var GFormClientSelect = GCore.ExtendClass(GFormField, function() {
 		$('#address_data__billing_data__nip').val(oData.billing_address.nip);
 		$('#address_data__billing_data__email').val(oData.email);
 		$('#address_data__billing_data__phone').val(oData.phone);
-		
+
 		$('#address_data__shipping_data__firstname').val(oData.delivery_address.firstname);
 		$('#address_data__shipping_data__surname').val(oData.delivery_address.surname);
 		$('#address_data__shipping_data__street').val(oData.delivery_address.street);
@@ -11911,21 +12024,21 @@ var GFormClientSelect = GCore.ExtendClass(GFormField, function() {
 		$('#address_data__shipping_data__nip').val(oData.delivery_address.nip);
 		$('#address_data__shipping_data__email').val(oData.email);
 		$('#address_data__shipping_data__phone').val(oData.phone);
-		
+
 		gThis.m_bFirstLoad = false;
 	};
-	
+
 	gThis._OnSelect = function(gDg, sId) {
 		gThis.SetValue(sId);
 		gThis.m_oOptions.fLoadClientData({
 			client: sId
 		}, GCallback(gThis._OnDataLoaded));
 	};
-	
+
 	gThis._OnDeselect = function(gDg, sId) {
-		
+
 	};
-	
+
 	gThis._OnChange = function(eEvent) {
 		if (gThis.m_bRepeatable) {
 			gThis.m_jField.empty();
@@ -11940,7 +12053,7 @@ var GFormClientSelect = GCore.ExtendClass(GFormField, function() {
 		}
 		gThis.SetValue(aoData);
 	};
-	
+
 	gThis._PrepareNode = function() {
 		gThis.m_jNode = $('<div/>').addClass(gThis._GetClass('Field'));
 		gThis.m_jField = $('<input type="hidden" name="' + gThis.GetName() + '"/>');
@@ -11951,7 +12064,7 @@ var GFormClientSelect = GCore.ExtendClass(GFormField, function() {
 		gThis.m_jNode.append(gThis.m_jDatagridWrapper);
 		gThis.m_jDatagridWrapper.addClass(gThis._GetClass('Hidden'));
 		gThis.m_jTrigger = $('<p class="' + gThis._GetClass('Trigger') + '"/>');
-		
+
 		var jA = $('<a href="#" id="__select" class="' + gThis._GetClass('Button') + '"/>');
 		jA.append('<span><img src="' + gThis._GetImage('AddIcon') + '" alt=""/>' + GForm.Language.client_select_select_client + '</span>');
 		jA.click(GEventHandler(function(eEvent) {
@@ -11971,7 +12084,7 @@ var GFormClientSelect = GCore.ExtendClass(GFormField, function() {
 			gThis.m_jDatagridWrapper.slideToggle(250);
 			return false;
 		}));
-		
+
 		var jAdd = $('<a style="margin-left: 20px;" href="#" class="' + gThis._GetClass('Button') + '"/>');
 		jAdd.append('<span>' + GForm.Language.client_select_add_client + '</span>');
 		jAdd.click(GEventHandler(function(eEvent) {
@@ -11980,7 +12093,7 @@ var GFormClientSelect = GCore.ExtendClass(GFormField, function() {
 			}
 			window.open(GCore.sAdminUrl + 'client/add');
 		}));
-		
+
 		gThis.m_jTrigger.append(jA);
 		gThis.m_jTrigger.append(jAdd);
 		gThis.m_jNode.append(gThis.m_jTrigger);
@@ -11995,11 +12108,11 @@ var GFormClientSelect = GCore.ExtendClass(GFormField, function() {
 		jLeftColumn.append($('<div class="field-text"/>').append('<label>' + GForm.Language.client_select_client_group + '</label>').append($('<span class="repetition"/>').append(gThis.m_jClientGroup)));
 		gThis.m_jNode.append(jColumns);
 	};
-	
+
 	gThis.OnReset = function() {
 		gThis.m_bFirstLoad = true;
 	};
-	
+
 	gThis.Populate = function(mValue) {
 		if (!gThis.m_gDatagrid) {
 			return;
@@ -12017,7 +12130,7 @@ var GFormClientSelect = GCore.ExtendClass(GFormField, function() {
 			gThis.m_gSelectedDatagrid.LoadData();
 		}
 	};
-	
+
 	gThis._UpdateDatagridSelection = function(mValue) {
 		if (!(mValue instanceof Array)) {
 			if ((mValue == undefined) || !mValue.length) {
@@ -12035,7 +12148,7 @@ var GFormClientSelect = GCore.ExtendClass(GFormField, function() {
 			gThis.m_gDatagrid.LoadData();
 		}
 	};
-	
+
 	gThis.OnShow = function() {
 		if (!gThis.m_bShown) {
 			gThis._InitDatagrid();
@@ -12054,18 +12167,18 @@ var GFormClientSelect = GCore.ExtendClass(GFormField, function() {
 			}
 		}
 	};
-	
+
 	gThis._ProcessProduct = function(oProduct) {
 		return oProduct;
 	};
-	
+
 	gThis._ProcessSelectedProduct = function(oProduct) {
 		oProduct = gThis.m_fProcessProduct(oProduct);
 		return oProduct;
 	};
-	
+
 	gThis._InitColumns = function() {
-		
+
 		var column_id = new GF_Datagrid_Column({
 			id: 'idclient',
 			caption: GForm.Language.client_select_id,
@@ -12076,7 +12189,7 @@ var GFormClientSelect = GCore.ExtendClass(GFormField, function() {
 				type: GF_Datagrid.FILTER_BETWEEN
 			}
 		});
-		
+
 		var column_firstname = new GF_Datagrid_Column({
 			id: 'firstname',
 			caption: GForm.Language.client_select_first_name,
@@ -12087,7 +12200,7 @@ var GFormClientSelect = GCore.ExtendClass(GFormField, function() {
 				type: GF_Datagrid.FILTER_INPUT
 			}
 		});
-		
+
 		var column_surname = new GF_Datagrid_Column({
 			id: 'surname',
 			caption: GForm.Language.client_select_surname,
@@ -12098,7 +12211,7 @@ var GFormClientSelect = GCore.ExtendClass(GFormField, function() {
 				type: GF_Datagrid.FILTER_INPUT
 			}
 		});
-		
+
 		var column_email = new GF_Datagrid_Column({
 			id: 'email',
 			caption: GForm.Language.client_select_email,
@@ -12107,7 +12220,7 @@ var GFormClientSelect = GCore.ExtendClass(GFormField, function() {
 				visible: false
 			}
 		});
-		
+
 		var column_phone = new GF_Datagrid_Column({
 			id: 'phone',
 			caption: GForm.Language.client_select_phone,
@@ -12116,12 +12229,12 @@ var GFormClientSelect = GCore.ExtendClass(GFormField, function() {
 				visible: false
 			}
 		});
-		
+
 		var column_group = new GF_Datagrid_Column({
 			id: 'groupname',
 			caption: GForm.Language.client_select_group
 		});
-		
+
 		var column_adddate = new GF_Datagrid_Column({
 			id: 'adddate',
 			caption: GForm.Language.client_select_adddate,
@@ -12133,7 +12246,7 @@ var GFormClientSelect = GCore.ExtendClass(GFormField, function() {
 				type: GF_Datagrid.FILTER_BETWEEN
 			}
 		});
-		
+
 		return [
 			column_id,
 			column_surname,
@@ -12143,16 +12256,16 @@ var GFormClientSelect = GCore.ExtendClass(GFormField, function() {
 			column_phone,
 			column_adddate
 		];
-		
+
 	};
-	
+
 	gThis._InitDatagrid = function() {
-		
+
 		gThis.m_fProcessProduct = gThis._ProcessProduct;
 		gThis.m_fLoadClients = gThis.m_oOptions.fLoadClients;
-		
+
 		var aoColumns = gThis._InitColumns();
-		
+
     var oOptions = {
 			id: gThis.GetId(),
 			mechanics: {
@@ -12170,11 +12283,11 @@ var GFormClientSelect = GCore.ExtendClass(GFormField, function() {
 			},
 			columns: aoColumns
     };
-    
+
     gThis.m_gDatagrid = new GF_Datagrid(gThis.m_jDatagrid, oOptions);
-		
+
 	};
-	
+
 	gThis._Deselect = function(iDg, mId) {
 		if (!(mId instanceof Array)) {
 			mId = [mId];
@@ -12185,24 +12298,24 @@ var GFormClientSelect = GCore.ExtendClass(GFormField, function() {
 		gThis.m_gSelectedDatagrid.ClearSelection();
 		gThis.m_gDatagrid.LoadData();
 	};
-	
+
 	gThis._InitSelectedDatagrid = function() {
-		
+
 		gThis.m_gDataProvider = new GF_Datagrid_Data_Provider({
 			key: 'idclient',
 			event_handlers: {
 				change: gThis._OnChange
 			}
 		}, []);
-		
+
 		var aoColumns = gThis._InitColumns();
-		
+
 		var gActionDeselect = new GF_Action({
 			img: gThis._GetImage('DeselectIcon'),
 			caption: GForm.Language.product_select_deselect,
 			action: gThis._Deselect
 		});
-		
+
     var oOptions = {
 			id: gThis.GetId() + '_selected',
 			mechanics: {
@@ -12236,11 +12349,11 @@ var GFormClientSelect = GCore.ExtendClass(GFormField, function() {
 				gActionDeselect
 			]
     };
-		
+
 		gThis.m_gSelectedDatagrid = new GF_Datagrid(gThis.m_jSelectedDatagrid, oOptions);
-		
+
 	};
-	
+
 	gThis._LoadSelected = function(oRequest, sResponseHandler) {
 		if (gThis.m_oOptions.bAdvancedEditor) {
 			var asDefaults = [];
@@ -12265,7 +12378,7 @@ var GFormClientSelect = GCore.ExtendClass(GFormField, function() {
 			gThis.m_gSelectedDatagrid.LoadData();
 		}));
 	};
-	
+
 	gThis.GetAddress = function(sAddress) {
 		for (var i in gThis.m_aoAddresses) {
 			if (gThis.m_aoAddresses[i]._id == sAddress) {
@@ -12274,11 +12387,11 @@ var GFormClientSelect = GCore.ExtendClass(GFormField, function() {
 		}
 		return {};
 	};
-	
+
 	gThis.AddListener = function(gNode) {
 		gThis.m_agListeners.push(gNode);
 	};
-	
+
 }, oDefaults);
 /*
 * DATAGRID SELECT
@@ -12309,11 +12422,11 @@ var oDefaults = {
 };
 
 var GFormDatagridSelect = GCore.ExtendClass(GFormField, function() {
-	
+
 	var gThis = this;
-	
+
 	gThis.m_bShown = false;
-	
+
 	gThis.m_fLoadRecords;
 	gThis.m_fProcessRecords;
 	gThis.m_jDatagrid;
@@ -12322,7 +12435,7 @@ var GFormDatagridSelect = GCore.ExtendClass(GFormField, function() {
 	gThis.m_gSelectedDatagrid;
 	gThis.m_gDataProvider;
 	gThis.m_bFirstLoad = true;
-	
+
 	gThis.GetValue = function(sRepetition) {
 		if (gThis.m_jField == undefined) {
 			return '';
@@ -12342,7 +12455,7 @@ var GFormDatagridSelect = GCore.ExtendClass(GFormField, function() {
 			return gThis.m_jField.val();
 		}
 	};
-	
+
 	gThis.SetValue = function(mValue, sRepetition) {
 		if (gThis.m_jField == undefined) {
 			return;
@@ -12356,7 +12469,7 @@ var GFormDatagridSelect = GCore.ExtendClass(GFormField, function() {
 			gThis.m_jField.val(mValue).change();
 		}
 	};
-	
+
 	gThis._OnSelect = function(gDg, sId) {
 		if (gThis.m_bRepeatable) {
 			var oSelectedRow = gDg.GetRow(sId);
@@ -12367,7 +12480,7 @@ var GFormDatagridSelect = GCore.ExtendClass(GFormField, function() {
 			gThis.SetValue(sId);
 		}
 	};
-	
+
 	gThis._OnDeselect = function(gDg, sId) {
 		if (gThis.m_bRepeatable) {
 			gThis.m_gDataProvider.DeleteRow(sId);
@@ -12377,7 +12490,7 @@ var GFormDatagridSelect = GCore.ExtendClass(GFormField, function() {
 			gThis.SetValue('');
 		}
 	};
-	
+
 	gThis._OnChange = function(eEvent) {
 		if (gThis.m_bRepeatable) {
 			gThis.m_jField.empty();
@@ -12388,7 +12501,7 @@ var GFormDatagridSelect = GCore.ExtendClass(GFormField, function() {
 		}
 		gThis.SetValue(aoData);
 	};
-	
+
 	gThis._PrepareNode = function() {
 		gThis.m_jNode = $('<div/>').addClass(gThis._GetClass('Field'));
 		var jLabel = $('<label/>');
@@ -12414,11 +12527,11 @@ var GFormDatagridSelect = GCore.ExtendClass(GFormField, function() {
 		}
 		gThis.m_jNode.append(gThis.m_jField);
 	};
-	
+
 	gThis.OnReset = function() {
 		gThis.m_bFirstLoad = true;
 	};
-	
+
 	gThis.Populate = function(mValue) {
 		if (!gThis.m_gDatagrid) {
 			return;
@@ -12436,7 +12549,7 @@ var GFormDatagridSelect = GCore.ExtendClass(GFormField, function() {
 			gThis.m_gSelectedDatagrid.LoadData();
 		}
 	};
-	
+
 	gThis._UpdateDatagridSelection = function(mValue) {
 		if (!(mValue instanceof Array)) {
 			if ((mValue == undefined) || !mValue.length) {
@@ -12454,7 +12567,7 @@ var GFormDatagridSelect = GCore.ExtendClass(GFormField, function() {
 			gThis.m_gDatagrid.LoadData();
 		}
 	};
-	
+
 	gThis.OnShow = function() {
 		if (!gThis.m_bShown) {
 			gThis._InitDatagrid();
@@ -12468,16 +12581,16 @@ var GFormDatagridSelect = GCore.ExtendClass(GFormField, function() {
 			gThis.m_bShown = true;
 		}
 	};
-	
+
 	gThis._ProcessRecord = function(oRecord) {
 		return oRecord;
 	};
-	
+
 	gThis._ProcessSelectedRecord = function(oRecord) {
 		oRecord = gThis.m_fProcessRecords(oRecord);
 		return oRecord;
 	};
-	
+
 	gThis._InitOptions = function(aoOptions) {
 		var agOptions = [];
 		for (var i in aoOptions) {
@@ -12485,14 +12598,14 @@ var GFormDatagridSelect = GCore.ExtendClass(GFormField, function() {
 		}
 		return agOptions;
 	};
-	
+
 	gThis._InitDatagrid = function() {
-		
+
 		gThis.m_fProcessRecords = gThis._ProcessRecord;
 		gThis.m_fLoadRecords = gThis.m_oOptions.fLoadRecords;
-		
+
 		var aoColumns = gThis._InitOptions(gThis.m_oOptions.aoColumns);
-		
+
     var oOptions = {
 			id: gThis.GetId(),
 			mechanics: {
@@ -12510,16 +12623,16 @@ var GFormDatagridSelect = GCore.ExtendClass(GFormField, function() {
 			},
 			columns: aoColumns
     };
-		
+
 		try {
 			gThis.m_gDatagrid = new GF_Datagrid(gThis.m_jDatagrid, oOptions);
 		}
 		catch (xException) {
 			GException.Handle(xException);
 		}
-		
+
 	};
-	
+
 	gThis._Deselect = function(iDg, mId) {
 		if (!(mId instanceof Array)) {
 			mId = [mId];
@@ -12530,29 +12643,29 @@ var GFormDatagridSelect = GCore.ExtendClass(GFormField, function() {
 		gThis.m_gSelectedDatagrid.ClearSelection();
 		gThis.m_gDatagrid.LoadData();
 	};
-	
+
 	gThis._InitSelectedDatagrid = function() {
-		
+
 		gThis.m_gDataProvider = new GF_Datagrid_Data_Provider({
 			key: gThis.m_oOptions.sKey,
 			event_handlers: {
 				change: gThis._OnChange
 			}
 		}, []);
-		
+
 		if (gThis.m_oOptions.aoSelectedColumns == undefined) {
 			var aoColumns = gThis._InitOptions(gThis.m_oOptions.aoColumns);
 		}
 		else {
 			var aoColumns = gThis._InitOptions(gThis.m_oOptions.aoSelectedColumns);
 		}
-		
+
 		var gActionDeselect = new GF_Action({
 			img: gThis._GetImage('DeselectIcon'),
 			caption: GForm.Language.datagrid_select_deselect,
 			action: gThis._Deselect
 		});
-		
+
     var oOptions = {
 			id: gThis.GetId() + '_selected',
 			mechanics: {
@@ -12586,16 +12699,16 @@ var GFormDatagridSelect = GCore.ExtendClass(GFormField, function() {
 				gActionDeselect
 			]
     };
-		
+
 		try {
 			gThis.m_gSelectedDatagrid = new GF_Datagrid(gThis.m_jSelectedDatagrid, oOptions);
 		}
 		catch (xException) {
 			GException.Handle(xException);
 		}
-		
+
 	};
-	
+
 	gThis._LoadSelected = function(oRequest, sResponseHandler) {
 		oRequest.where = [{
 			column: gThis.m_oOptions.sKey,
@@ -12607,7 +12720,7 @@ var GFormDatagridSelect = GCore.ExtendClass(GFormField, function() {
 			gThis.m_gSelectedDatagrid.LoadData();
 		}));
 	};
-	
+
 }, oDefaults);
 /*
 * DATETIME
@@ -12641,16 +12754,16 @@ var oDefaults = {
 };
 
 var GFormDateTime = GCore.ExtendClass(GFormDate, function() {
-	
+
 	var gThis = this;
-	
+
 	gThis.m_jTrigger;
-	
+
 	gThis._Constructor = function() {
 		gThis.m_jTrigger = $('<img style="width: 16px; height: 16px;" src="' + gThis._GetImage('CalendarIcon') + '" alt=""/>');
 		gThis.m_oOptions.sSuffix = gThis.m_jTrigger.css('cursor', 'pointer');
 	};
-	
+
 	gThis._AddField = function(sId) {
 		var jField = $('<input type="' + gThis.m_oOptions.sFieldType + '" name="' + gThis.GetName(sId) + '[d]" id="' + gThis.GetId(sId) + '_d"/>');
 		if ((gThis.m_jField instanceof $) && gThis.m_jField.length) {
@@ -12667,29 +12780,29 @@ var GFormDateTime = GCore.ExtendClass(GFormDate, function() {
 			jSuffix.append(' ' + GForm.Language.datetime_hour);
 			jRepetitionNode.append(jSuffix);
 		}
-		
+
 		jField = $('<select name="' + gThis.GetName(sId) + '[h]" id="' + gThis.GetId(sId) + '_h"/>');
 		for (var i = 0; i < 24; i++) {
 			jField.append('<option value="' + i  + '">' + ((i < 10) ? '0' + i : i) + '</option>');
 		}
 		gThis.m_jField = gThis.m_jField.add(jField);
 		jRepetitionNode.append($('<span class="' + gThis._GetClass('FieldSpan') + '"/>').append(jField));
-		
+
 		jField = $('<select name="' + gThis.GetName(sId) + '[m]" id="' + gThis.GetId(sId) + '_m"/>');
 		for (var i = 0; i < 60; i++) {
 			jField.append('<option value="' + i  + '">' + ((i < 10) ? '0' + i : i) + '</option>');
 		}
 		gThis.m_jField = gThis.m_jField.add(jField);
 		jRepetitionNode.append($('<span class="' + gThis._GetClass('FieldSpan') + '"/>').append(jField));
-		
+
 		return jRepetitionNode;
 	};
-	
+
 	gThis.OnShow = function() {
 		if (gThis.m_bShown) {
 			return;
 		}
-		gThis.m_bShown = true;		
+		gThis.m_bShown = true;
 		gThis.m_jField.filter('input').datepicker({
 			minDate: gThis.m_oOptions.sMinDate,
 			maxDate: gThis.m_oOptions.sMaxDate
@@ -12710,14 +12823,14 @@ var GFormDateTime = GCore.ExtendClass(GFormDate, function() {
 			return true;
 		});
 	};
-	
+
 	gThis._InitializeEvents = function() {
 		gThis.m_jTrigger.click(function() {
 			gThis.m_jField.filter('input').datepicker('show');
 		});
 		gThis.m_jField.filter('select').GSelect();
 	};
-	
+
 	gThis.SetValue = function(mValue) {
 		if (gThis.m_jField == undefined) {
 			return;
@@ -12728,7 +12841,7 @@ var GFormDateTime = GCore.ExtendClass(GFormDate, function() {
 			gThis.m_jField.filter('select[name$="[m]"]').val(mValue.m);
 		}
 	};
-	
+
 }, oDefaults);
 /*
 * DOWNLOADER
@@ -12834,7 +12947,7 @@ var GFormDownloader = GCore.ExtendClass(GFormFile, function() {
 	gThis._InitializeEvents = function() {
 		gThis.m_jChooseButton.click(gThis._OnChoose);
 	};
-	
+
 	gThis._OnChoose = GEventHandler(function(eEvent) {
 		gThis.m_jFilesDatagrid.slideToggle(250);
 		gThis.m_jChooseButton.toggleClass('expand');
@@ -12845,7 +12958,7 @@ var GFormDownloader = GCore.ExtendClass(GFormFile, function() {
 		}
 		return false;
 	});
-	
+
 	gThis.GetValue = function(sRepetition) {
 		if (gThis.m_jField == undefined) {
 			return '';
@@ -12879,7 +12992,7 @@ var GFormDownloader = GCore.ExtendClass(GFormFile, function() {
 			gThis.m_jField.val(mValue);
 		}
 	};
-	
+
 	gThis.Populate = function(mValue) {
 		if (!gThis.m_gFilesDatagrid) {
 			return;
@@ -12894,7 +13007,7 @@ var GFormDownloader = GCore.ExtendClass(GFormFile, function() {
 		gThis._UpdateDatagridSelection(mValue);
 		gThis.SetValue(mValue);
 	};
-	
+
 	gThis._UpdateDatagridSelection = function(mValue) {
 		if (!(mValue instanceof Array)) {
 			if ((mValue == undefined) || !mValue.length) {
@@ -12917,7 +13030,7 @@ var GFormDownloader = GCore.ExtendClass(GFormFile, function() {
 		var oFile = gDg.GetRow(sId);
 		gThis._AddImage(sId, oFile);
 	};
-	
+
 	gThis._AddImage = function(sId, oFile) {
 		if (gThis.m_bRepeatable) {
 			var jFileTr = $('<tr class="file__' + sId + '"/>');
@@ -12940,7 +13053,7 @@ var GFormDownloader = GCore.ExtendClass(GFormFile, function() {
 	gThis._OnDeselect = function(gDg, sId) {
 		gThis._RemoveImage(sId);
 	};
-	
+
 	gThis._RemoveImage = function(sId, oFile) {
 		if (gThis.m_bRepeatable) {
 			var bCheck = false;
@@ -12964,11 +13077,11 @@ var GFormDownloader = GCore.ExtendClass(GFormFile, function() {
 		}
 		gThis.SetValue(asIds);
 	};
-	
+
 	gThis.OnReset = function() {
 		gThis.m_bLoadedDefaults = false;
 	};
-	
+
 	gThis.OnShow = function() {
 		if (!gThis.m_bShown) {
 			gThis._InitFilesDatagrid();
@@ -13135,7 +13248,7 @@ var GFormDownloader = GCore.ExtendClass(GFormFile, function() {
 		];
 
 	};
-	
+
 	gThis._LoadDefaults = function(oRequest) {
 		gThis.m_jSelectedFiles.empty();
 		if (gThis.m_bRepeatable) {
@@ -13155,14 +13268,14 @@ var GFormDownloader = GCore.ExtendClass(GFormFile, function() {
 		oRequest.starting_from = 0;
 		gThis.m_oOptions.fLoadFiles(oRequest, GCallback(gThis._DefaultsLoaded));
 	};
-	
+
 	gThis._DefaultsLoaded = function(oData) {
 		for (var i = 0; i < oData.rows.length; i++) {
 			gThis._AddImage(oData.rows[i].idfile, oData.rows[i]);
 		}
 		gThis.m_bLoadedDefaults = true;
 	};
-	
+
 	gThis._OnDataLoaded = function(dDg) {
 		dDg.m_jBody.find('.show-thumb').mouseenter(GTooltip.ShowThumbForThis).mouseleave(GTooltip.HideThumbForThis);
 	};
@@ -13306,7 +13419,7 @@ var GFormImage = GCore.ExtendClass(GFormFile, function() {
 	};
 
 	gThis.GetValue = function(sRepetition) {
-		
+
 		if (gThis.m_jField == undefined) {
 			return '';
 		}
@@ -13329,7 +13442,7 @@ var GFormImage = GCore.ExtendClass(GFormFile, function() {
 	gThis._InitializeEvents = function() {
 		gThis.m_jChooseButton.click(gThis._OnChoose);
 	};
-	
+
 	gThis._OnChoose = GEventHandler(function(eEvent) {
 		gThis.m_jFilesDatagrid.slideToggle(250);
 		gThis.m_jChooseButton.toggleClass('expand');
@@ -13340,7 +13453,7 @@ var GFormImage = GCore.ExtendClass(GFormFile, function() {
 		}
 		return false;
 	});
-	
+
 	gThis.SetValue = function(mValue, sRepetition) {
 		if (gThis.m_jField == undefined) {
 			return;
@@ -13354,7 +13467,7 @@ var GFormImage = GCore.ExtendClass(GFormFile, function() {
 			gThis.m_jField.val(mValue);
 		}
 	};
-	
+
 	gThis.Populate = function(mValue) {
 		if (gThis.m_bRepeatable) {
 			gThis.m_jField.empty();
@@ -13363,15 +13476,15 @@ var GFormImage = GCore.ExtendClass(GFormFile, function() {
 		else {
 			gThis.m_oOptions.sDefault = mValue;
 		}
-		
+
 		if (!gThis.m_gFilesDatagrid) {
 			return;
 		}
-		
+
 		gThis._UpdateDatagridSelection(mValue.photos);
 		gThis.SetValue(mValue);
 	};
-	
+
 	gThis._UpdateDatagridSelection = function(mValue) {
 		if (!(mValue instanceof Array)) {
 			if ((mValue == undefined) || !mValue.length) {
@@ -13381,7 +13494,7 @@ var GFormImage = GCore.ExtendClass(GFormFile, function() {
 				mValue = [mValue];
 			}
 		}
-		
+
 		gThis.m_gFilesDatagrid.m_asSelected = [];
 		for (var i = 0; i < mValue.length; i++) {
 			gThis.m_gFilesDatagrid.m_asSelected[i] = mValue[i];
@@ -13395,15 +13508,15 @@ var GFormImage = GCore.ExtendClass(GFormFile, function() {
 		var oFile = gDg.GetRow(sId);
 		gThis._AddImage(sId, oFile);
 	};
-	
+
 	gThis._AddImage = function(sId, oFile) {
-        
+
 		if (gThis.m_bRepeatable) {
 			var jFileTr = $('<tr class="file__' + sId + '"/>');
 			jFileTr.append('<th scope="row"><span class="' + gThis._GetClass('Thumb') + '"><img src="' + oFile.preview + '" alt=""/></span><span class="' + gThis._GetClass('Name') + '">' + oFile.name + '</span></th>');
 			var jRadio = $('<input type="radio" name="' + gThis.GetName() + '[main]" value="' + sId + '"/>');
 			if (gThis.m_oOptions.asDefaults.main_photo) {
-				
+
 				if (!gThis.m_bLoadedDefaults) {
 					if (sId == gThis.m_oOptions.asDefaults.main_photo) {
 						jRadio.attr('checked', 'checked');
@@ -13447,7 +13560,7 @@ var GFormImage = GCore.ExtendClass(GFormFile, function() {
 	gThis._OnDeselect = function(gDg, sId) {
 		gThis._RemoveImage(sId);
 	};
-	
+
 	gThis._RemoveImage = function(sId, oFile) {
 		if (gThis.m_bRepeatable) {
 			var bCheck = false;
@@ -13471,11 +13584,11 @@ var GFormImage = GCore.ExtendClass(GFormFile, function() {
 		}
 		gThis.SetValue(asIds);
 	};
-	
+
 	gThis.OnReset = function() {
 		gThis.m_bLoadedDefaults = false;
 	};
-	
+
 	gThis.OnShow = function() {
 		if (gThis.m_bShown === false) {
 			gThis._InitFilesDatagrid();
@@ -13507,7 +13620,7 @@ var GFormImage = GCore.ExtendClass(GFormFile, function() {
 		    filters : {
 		        max_file_size : '10mb',
 		        mime_types: [{
-		        	title : "Image files", 
+		        	title : "Image files",
 		            extensions : "jpg,gif,png"
 		        }]
 		    },
@@ -13524,7 +13637,7 @@ var GFormImage = GCore.ExtendClass(GFormFile, function() {
 		        UploadProgress: function(up, file) {
 		        	gThis.OnUploadProgress(file);
 		        },
-		 
+
 		        Error: function(up, err) {
 		        	gThis.OnUploadProgress(err);
 		        },
@@ -13533,7 +13646,7 @@ var GFormImage = GCore.ExtendClass(GFormFile, function() {
 		        }
 		    }
 		});
-		 
+
 		uploader.init();
 	};
 
@@ -13623,7 +13736,7 @@ var GFormImage = GCore.ExtendClass(GFormFile, function() {
 			id: 'extension',
 			caption: GForm.Language.file_selector_extension
 		});
-		
+
 		var column_thumb = new GF_Datagrid_Column({
 			id: 'preview',
 			caption: GForm.Language.file_selector_thumb,
@@ -13641,10 +13754,10 @@ var GFormImage = GCore.ExtendClass(GFormFile, function() {
 		];
 
 	};
-	
+
 	gThis._LoadDefaults = function(oRequest) {
 		gThis.m_jSelectedFiles.empty();
-		
+
 		if (gThis.m_bRepeatable) {
 			oRequest.where = [{
 				column: 'id',
@@ -13666,18 +13779,18 @@ var GFormImage = GCore.ExtendClass(GFormFile, function() {
 		oRequest.order_dir = 'desc';
 		gThis.LoadFiles(oRequest);
 	};
-	
+
 	gThis.LoadFiles = function(oRequest) {
 		gThis.m_gFilesDatagrid.MakeRequest(gThis.m_oOptions.sLoadRoute, oRequest, gThis._DefaultsLoaded);
     };
-	
+
 	gThis._DefaultsLoaded = function(oData) {
 		for (var i = 0; i < oData.rows.length; i++) {
 			gThis._AddImage(oData.rows[i].id, oData.rows[i]);
 		}
 		gThis.m_bLoadedDefaults = true;
 	};
-	
+
 	gThis._OnDataLoaded = function(dDg) {
 		dDg.m_jBody.find('.show-thumb').mouseenter(GTooltip.ShowThumbForThis).mouseleave(GTooltip.HideThumbForThis);
 	};
@@ -13782,7 +13895,7 @@ var GFormLocalFile = GCore.ExtendClass(GFormFile, function() {
 	gThis.m_bLoadedDefaults = false;
 	gThis.m_jChooseButton;
 	gThis.m_jSelectedFileName;
-	
+
 	gThis.m_sCWD;
 
 	gThis._PrepareNode = function() {
@@ -13798,7 +13911,7 @@ var GFormLocalFile = GCore.ExtendClass(GFormFile, function() {
 			gThis.m_jNode.append('<input type="hidden" name="' + gThis.GetName() + '[selector]" value="' + gThis.m_oOptions.sSelector + '"/>');
 		}
 	};
-	
+
 	gThis._AddField = function() {
 		var jRepetition = $('<span class="repetition"/>');
 		gThis.m_jSelectedFileName = $('<span class="filename"/>');
@@ -13817,7 +13930,7 @@ var GFormLocalFile = GCore.ExtendClass(GFormFile, function() {
 		jRepetition.append(gThis.m_jField);
 		return jRepetition;
 	};
-	
+
 	gThis._OnChoose = GEventHandler(function(eEvent) {
 		if (!gThis.m_gFilesDatagrid) {
 			gThis._InitFilesDatagrid();
@@ -13825,9 +13938,9 @@ var GFormLocalFile = GCore.ExtendClass(GFormFile, function() {
 		}else{
 			gThis.m_jFilesDatagrid.slideDown(250);
 		}
-		
+
 		gThis.m_jChooseButton.toggleClass('expand');
-		
+
 		if(gThis.m_jChooseButton.hasClass('expand')){
 			gThis.m_jChooseButton.find('span').html('<img src="' + gThis._GetImage('ChooseIcon') + '" alt=""/>' + GForm.Language.localfile_select);
 		}else{
@@ -13864,14 +13977,14 @@ var GFormLocalFile = GCore.ExtendClass(GFormFile, function() {
 			}
 		}
 	};
-	
+
 	gThis.Populate = function(mValue) {
 		if (gThis.m_gFilesDatagrid) {
 			gThis._UpdateDatagridSelection(mValue['file']);
 		}
 		gThis.SetValue(mValue);
 	};
-	
+
 	gThis._UpdateDatagridSelection = function(mValue) {
 		if (!(mValue instanceof Array)) {
 			if ((mValue == undefined) || !mValue.length) {
@@ -13905,7 +14018,7 @@ var GFormLocalFile = GCore.ExtendClass(GFormFile, function() {
 		}
 		return true;
 	};
-	
+
 	gThis._OnSelect = function(gDg, sId) {
 		var oFile = gDg.GetRow(sId);
 		if (!oFile.dir) {
@@ -13918,18 +14031,18 @@ var GFormLocalFile = GCore.ExtendClass(GFormFile, function() {
 	gThis._OnDeselect = function(gDg, sId) {
 		gThis.SetValue('');
 	};
-	
+
 	gThis._Initialize = function() {
 		var oValue = gThis.GetValue();
 		var sPath = gThis.m_oOptions.sFilePath + oValue.file;
 		sPath = sPath.substr(0, sPath.lastIndexOf('/') + 1);
 		gThis.m_sCWD = sPath;
 	};
-	
+
 	gThis._InitializeEvents = function() {
 		gThis.m_jChooseButton.click(gThis._OnChoose);
 	};
-	
+
 	gThis.OnShow = function() {
 		if (!gThis.m_bShown) {
 			gThis._InitUploader();
@@ -13970,7 +14083,7 @@ var GFormLocalFile = GCore.ExtendClass(GFormFile, function() {
 		    filters : {
 		        max_file_size : '10mb',
 		        mime_types: [{
-		        	title : "Image files", 
+		        	title : "Image files",
 		            extensions : gThis.m_oOptions.asFileTypes.join(',')
 		        }]
 		    },
@@ -13987,7 +14100,7 @@ var GFormLocalFile = GCore.ExtendClass(GFormFile, function() {
 		        UploadProgress: function(up, file) {
 		        	gThis.OnUploadProgress(file);
 		        },
-		 
+
 		        Error: function(up, err) {
 		        	gThis.OnUploadProgress(err);
 		        },
@@ -13996,7 +14109,7 @@ var GFormLocalFile = GCore.ExtendClass(GFormFile, function() {
 		        }
 		    }
 		});
-		 
+
 		uploader.init();
 	};
 
@@ -14042,7 +14155,7 @@ var GFormLocalFile = GCore.ExtendClass(GFormFile, function() {
 			$(this).remove();
 		});
 	};
-	
+
 	gThis.OnUploadComplete = function() {
 		if (--gThis.m_iUploadsInProgress <= 0) {
 			gThis.m_iUploadsInProgress = 0;
@@ -14061,7 +14174,7 @@ var GFormLocalFile = GCore.ExtendClass(GFormFile, function() {
 				align: GF_Datagrid.ALIGN_LEFT
 			}
 		});
-		
+
 		var column_thumb = new GF_Datagrid_Column({
 			id: 'thumbpreview',
 			caption: GForm.Language.file_selector_thumb,
@@ -14120,13 +14233,13 @@ var GFormLocalFile = GCore.ExtendClass(GFormFile, function() {
 		];
 
 	};
-	
+
 	gThis._RefreshFiles = function() {
 		gThis.m_oOptions.fLoadFiles({
 			path: gThis.m_sCWD
 		}, GCallback(gThis._OnFilesLoaded));
 	};
-	
+
 	gThis._OnFilesLoaded = GEventHandler(function(eEvent) {
 		if ((eEvent == undefined) || (eEvent.files == undefined) || (eEvent.cwd == undefined)) {
 			return;
@@ -14160,19 +14273,19 @@ var GFormLocalFile = GCore.ExtendClass(GFormFile, function() {
 			]
 		});
 	};
-	
+
 	gThis._OnDataLoaded = function(dDg) {
 		dDg.m_jBody.find('.show-thumb').mouseenter(GTooltip.ShowThumbForThis).mouseleave(GTooltip.HideThumbForThis);
 	};
-	
+
 	gThis._InitFilesDatagrid = function() {
 
 		var aoColumns = gThis._InitColumns();
-		
+
 		gThis.m_gDataProvider = new GF_Datagrid_Data_Provider({
 			key: 'path'
 		}, []);
-		
+
 		var gActionDelete = new GF_Action({
 			img: gThis._GetImage('DeleteIcon'),
 			caption: GForm.Language.localfile_delete,
@@ -14208,13 +14321,13 @@ var GFormLocalFile = GCore.ExtendClass(GFormFile, function() {
     };
 
 		gThis.m_gFilesDatagrid = new GF_Datagrid(gThis.m_jFilesDatagrid, oOptions);
-		
+
 		var oValue = gThis.GetValue();
 		var sFile = oValue.file;
 		if (sFile != '') {
 			gThis.m_gFilesDatagrid.m_asSelected = [gThis.m_oOptions.sFilePath + sFile];
 		}
-		
+
 		gThis._RefreshFiles();
 	};
 
@@ -14259,7 +14372,7 @@ var oDefaults = {
 };
 
 var GFormPriceModifier = GCore.ExtendClass(GFormPriceEditor, function() {
-	
+
 	var gThis = this;
 	gThis.m_jPrice;
 	gThis.m_jModifier;
@@ -14267,14 +14380,14 @@ var GFormPriceModifier = GCore.ExtendClass(GFormPriceEditor, function() {
 	gThis.m_jPriceFields;
 	gThis.m_jModifierField;
 	gThis.m_jValueField;
-	
+
 	gThis._PrepareNode = function() {
 		gThis.m_jNode = $('<div/>').addClass(gThis._GetClass('Field'));
 		gThis._AddModifier();
 		gThis._AddValue();
 		gThis._AddPrice();
 	};
-	
+
 	gThis._AddModifier = function() {
 		gThis.m_jValue = $('<div/>').addClass(gThis._GetClass('FieldSelect'));
 		var jLabel = $('<label for="' + gThis.GetId() + '__modifier"/>');
@@ -14290,7 +14403,7 @@ var GFormPriceModifier = GCore.ExtendClass(GFormPriceEditor, function() {
 		gThis.m_jNode.append(gThis.m_jValue);
 		gThis.m_jModifierField = jField;
 	};
-	
+
 	gThis._AddValue = function() {
 		gThis.m_jValue = $('<div/>').addClass(gThis._GetClass('FieldText'));
 		var jLabel = $('<label for="' + gThis.GetId() + '__value"/>');
@@ -14303,7 +14416,7 @@ var GFormPriceModifier = GCore.ExtendClass(GFormPriceEditor, function() {
 		gThis.m_jNode.append(gThis.m_jValue);
 		gThis.m_jValueField = jField;
 	};
-	
+
 	gThis._AddPrice = function() {
 		gThis.m_jPrice = $('<div/>').addClass(gThis._GetClass('FieldPrice'));
 		var jLabel = $('<label for="' + gThis.GetId() + '"__price/>');
@@ -14315,19 +14428,19 @@ var GFormPriceModifier = GCore.ExtendClass(GFormPriceEditor, function() {
 		gThis.m_jPrice.append(gThis._AddField());
 		gThis.m_jNode.append(gThis.m_jPrice);
 	};
-	
+
 	gThis.GetValue = function(sRepetition) {
 		return {
 			modifier: gThis.m_jModifierField.val(),
 			value: gThis.m_jValueField.val()
 		};
 	};
-	
+
 	gThis.SetValue = function(mValue, sRepetition) {
 		gThis.m_jModifierField.val(mValue['modifier']).change();
 		gThis.m_jValueField.val(mValue['value']).change();
 	};
-	
+
 	gThis._AddField = function(sId) {
 		var jFieldNet = $('<input type="text" name="' + gThis.GetName() + '[price]" id="' + gThis.GetId() + '__price"/>');
 		var jFieldGross = $('<input type="text" id="' + gThis.GetId() + '__gross"/>');
@@ -14360,7 +14473,7 @@ var GFormPriceModifier = GCore.ExtendClass(GFormPriceEditor, function() {
 		gThis.m_jPriceFields = jRepetitionNode.find('input');
 		return jRepetitionNode;
 	};
-	
+
 	gThis.OnShow = function() {
 		if (!gThis.m_bShown) {
 			gThis.m_jModifierField.GSelect();
@@ -14381,7 +14494,7 @@ var GFormPriceModifier = GCore.ExtendClass(GFormPriceEditor, function() {
 			});
 		}
 	};
-	
+
 	gThis._CalculateGrossPrice = function(sPrice) {
 		var gVat = gThis.m_gForm.GetField(gThis.m_oOptions.sVatField);
 		var iVatId = gVat.GetValue();
@@ -14399,7 +14512,7 @@ var GFormPriceModifier = GCore.ExtendClass(GFormPriceEditor, function() {
 		fPrice = isNaN(fPrice) ? 0 : fPrice;
 		gThis.m_jPriceFields.eq(1).val((fPrice * (1 + fVat / 100)).toFixed(2));
 	};
-	
+
 	gThis._CalculateNetPrice = function(sPrice) {
 		var gVat = gThis.m_gForm.GetField(gThis.m_oOptions.sVatField);
 		var iVatId = gVat.GetValue();
@@ -14417,7 +14530,7 @@ var GFormPriceModifier = GCore.ExtendClass(GFormPriceEditor, function() {
 		fPrice = isNaN(fPrice) ? 0 : fPrice;
 		gThis.m_jPriceFields.eq(0).val((fPrice / (1 + fVat / 100)).toFixed(2));
 	};
-	
+
 	gThis._UpdatePrice = function(sModifier, fModifierValue) {
 		if (sModifier == undefined) {
 			sModifier = $('#' + gThis.GetId() + '__modifier option:selected').text();
@@ -14452,7 +14565,7 @@ var GFormPriceModifier = GCore.ExtendClass(GFormPriceEditor, function() {
 		var fGrossPrice = fPrice * (1 + fVatvalue / 100);
 		$('#' + gThis.GetId() + '__gross').val(fGrossPrice.toFixed(2));
 	};
-	
+
 	gThis._UpdateModificatorValue = function(fPrice) {
 		var sModifier = $('#' + gThis.GetId() + '__modifier option:selected').text();
 		if (fPrice == undefined) {
@@ -14483,7 +14596,7 @@ var GFormPriceModifier = GCore.ExtendClass(GFormPriceEditor, function() {
 		}
 		$('#' + gThis.GetId() + '__value').val(fModifierValue.toFixed(2));
 	};
-	
+
 	gThis._Initialize = function() {
 		var fHandler = GEventHandler(function(eEvent) {
 			setTimeout(function() {
@@ -14520,24 +14633,24 @@ var GFormPriceModifier = GCore.ExtendClass(GFormPriceEditor, function() {
 		}));
 		gThis.UpdatePrices();
 	};
-	
+
 	gThis.UpdatePrices = function() {
 		setTimeout(function() {
 			gThis._UpdatePrice();
 			gThis.m_jPriceFields.change();
 		}, 5);
 	};
-	
+
 	gThis.ValidateField = GEventHandler(function(eEvent) {
 		var fPrice = parseFloat($(eEvent.currentTarget).val().replace(/,/, '.'));
 		fPrice = isNaN(fPrice) ? 0 : fPrice;
 		$(eEvent.currentTarget).val(fPrice.toFixed(2));
 	});
-	
+
 	gThis.Reset = function() {
 		gThis.m_jField.eq(0).val(gThis.m_oOptions.sDefault).change();
 	};
-	
+
 }, oDefaults);
 /*
 * PRODUCT SELECT
@@ -14569,11 +14682,11 @@ var oDefaults = {
 };
 
 var GFormProductSelect = GCore.ExtendClass(GFormField, function() {
-	
+
 	var gThis = this;
-	
+
 	gThis.m_bShown = false;
-	
+
 	gThis.m_fLoadProducts;
 	gThis.m_fProcessProduct;
 	gThis.m_jDatagrid;
@@ -14584,7 +14697,7 @@ var GFormProductSelect = GCore.ExtendClass(GFormField, function() {
 	gThis.m_bFirstLoad = true;
 	gThis.m_aoExclude = [];
 	gThis.m_sDependentSelector;
-	
+
 	gThis.GetValue = function(sRepetition) {
 		if (gThis.m_jField == undefined) {
 			return '';
@@ -14624,14 +14737,14 @@ var GFormProductSelect = GCore.ExtendClass(GFormField, function() {
 			return gThis.m_jField.val();
 		}
 	};
-	
+
 	gThis.PopulateErrors = function(mData) {
 		if ((mData == undefined) || (mData == '')) {
 			return;
 		}
 		gThis.SetError(mData);
 	};
-	
+
 	gThis.SetValue = function(mValue, sRepetition) {
 		if (gThis.m_jField == undefined) {
 			return;
@@ -14647,11 +14760,11 @@ var GFormProductSelect = GCore.ExtendClass(GFormField, function() {
 					gThis.m_jField.append('<input type="hidden" name="' + gThis.GetName(i) + '[variant]" value="' + mValue[i]['variant'] + '"/>');
 				}
 				else {
-					
+
 					gThis.m_jField.append('<input type="hidden" name="' + gThis.GetName(i) + '" value="' + mValue[i] + '"/>');
 				}
 			}
-			
+
 		}
 		else {
 			gThis.m_bSkipValidation = true;
@@ -14659,7 +14772,7 @@ var GFormProductSelect = GCore.ExtendClass(GFormField, function() {
 			gThis.m_bSkipValidation = false;
 		}
 	};
-	
+
 	gThis._OnSelect = function(gDg, sId) {
 		if (gThis.m_bRepeatable) {
 			var oSelectedRow = gDg.GetRow(sId);
@@ -14672,7 +14785,7 @@ var GFormProductSelect = GCore.ExtendClass(GFormField, function() {
 			gThis.SetValue(sId);
 		}
 	};
-	
+
 	gThis._OnDeselect = function(gDg, sId) {
 		if (gThis.m_bRepeatable) {
 			gThis.m_gDataProvider.DeleteRow(sId);
@@ -14682,7 +14795,7 @@ var GFormProductSelect = GCore.ExtendClass(GFormField, function() {
 			gThis.SetValue('');
 		}
 	};
-	
+
 	gThis._OnChange = function(eEvent) {
 		if (!gThis.m_oOptions.bAdvancedEditor) {
 			if (gThis.m_bRepeatable) {
@@ -14712,7 +14825,7 @@ var GFormProductSelect = GCore.ExtendClass(GFormField, function() {
 			gThis.SetValue(aoData);
 		}
 	};
-	
+
 	gThis._PrepareNode = function() {
 		gThis.m_oOptions.oParsedFilterData = {};
 		for (var i in gThis.m_oOptions.oFilterData) {
@@ -14747,11 +14860,11 @@ var GFormProductSelect = GCore.ExtendClass(GFormField, function() {
 			gField.m_sDependentSelector = gThis.m_oOptions.sName;
 		}
 	};
-	
+
 	gThis.OnReset = function() {
 		gThis.m_bFirstLoad = true;
 	};
-	
+
 	gThis.Populate = function(mValue) {
 		if (gThis.m_bRepeatable) {
 			gThis.m_jField.empty();
@@ -14770,7 +14883,7 @@ var GFormProductSelect = GCore.ExtendClass(GFormField, function() {
 			gThis.m_gSelectedDatagrid.LoadData();
 		}
 	};
-	
+
 	gThis._UpdateDatagridSelection = function(mValue) {
 		if (!(mValue instanceof Array)) {
 			if ((mValue == undefined) || !mValue.length) {
@@ -14792,7 +14905,7 @@ var GFormProductSelect = GCore.ExtendClass(GFormField, function() {
 			}
 		}
 	};
-	
+
 	gThis.OnShow = function() {
 		if (!gThis.m_bShown) {
 			gThis._InitDatagrid();
@@ -14809,21 +14922,21 @@ var GFormProductSelect = GCore.ExtendClass(GFormField, function() {
 			gThis.m_gDatagrid.LoadData();
 		}
 	};
-	
+
 	gThis._ProcessProduct = function(oProduct) {
 		if (oProduct.thumb != '') {
 			oProduct.thumbpreview = '<a href="' + oProduct.thumb + '" ><img src="' + oProduct.thumb + '" style="vertical-align: middle;" alt="' + GForm.Language.file_selector_show_thumb + '"/></a>';
 		}
 		return oProduct;
 	};
-	
+
 	gThis._ProcessSelectedProduct = function(oProduct) {
 		oProduct = gThis.m_fProcessProduct(oProduct);
 		return oProduct;
 	};
-	
+
 	gThis._InitColumns = function() {
-		
+
 		var column_id = new GF_Datagrid_Column({
 			id: 'idproduct',
 			caption: GForm.Language.product_select_id,
@@ -14835,7 +14948,7 @@ var GFormProductSelect = GCore.ExtendClass(GFormField, function() {
 				type: GF_Datagrid.FILTER_BETWEEN
 			}
 		});
-		
+
 		var column_name = new GF_Datagrid_Column({
 			id: 'name',
 			caption: GForm.Language.product_select_name,
@@ -14847,7 +14960,7 @@ var GFormProductSelect = GCore.ExtendClass(GFormField, function() {
 				type: GF_Datagrid.FILTER_INPUT
 			}
 		});
-		
+
 		var column_price = new GF_Datagrid_Column({
 			id: 'sellprice',
 			caption: GForm.Language.product_select_price,
@@ -14860,7 +14973,7 @@ var GFormProductSelect = GCore.ExtendClass(GFormField, function() {
 				type: GF_Datagrid.FILTER_BETWEEN
 			}
 		});
-		
+
 		var column_price_gross = new GF_Datagrid_Column({
 			id: 'sellprice_gross',
 			caption: GForm.Language.product_select_price_gross,
@@ -14871,7 +14984,7 @@ var GFormProductSelect = GCore.ExtendClass(GFormField, function() {
 				type: GF_Datagrid.FILTER_BETWEEN
 			}
 		});
-		
+
 		var column_buyprice = new GF_Datagrid_Column({
 			id: 'buyprice',
 			caption: GForm.Language.product_select_buyprice,
@@ -14884,7 +14997,7 @@ var GFormProductSelect = GCore.ExtendClass(GFormField, function() {
 				type: GF_Datagrid.FILTER_BETWEEN
 			}
 		});
-		
+
 		var column_buyprice_gross = new GF_Datagrid_Column({
 			id: 'buyprice_gross',
 			caption: GForm.Language.product_select_buyprice_gross,
@@ -14897,7 +15010,7 @@ var GFormProductSelect = GCore.ExtendClass(GFormField, function() {
 				type: GF_Datagrid.FILTER_BETWEEN
 			}
 		});
-		
+
 		var column_barcode = new GF_Datagrid_Column({
 			id: 'barcode',
 			caption: GForm.Language.product_select_barcode,
@@ -14909,7 +15022,7 @@ var GFormProductSelect = GCore.ExtendClass(GFormField, function() {
 				type: GF_Datagrid.FILTER_INPUT
 			}
 		});
-		
+
 		var column_producer = new GF_Datagrid_Column({
 			id: 'producer',
 			caption: GForm.Language.product_select_producer,
@@ -14921,7 +15034,7 @@ var GFormProductSelect = GCore.ExtendClass(GFormField, function() {
 				options: gThis.m_oOptions.oParsedFilterData['producer'],
 			}
 		});
-		
+
 		var column_vat = new GF_Datagrid_Column({
 			id: 'vat',
 			caption: GForm.Language.product_select_vat,
@@ -14935,7 +15048,7 @@ var GFormProductSelect = GCore.ExtendClass(GFormField, function() {
 				options: gThis.m_oOptions.oParsedFilterData['vat'],
 			}
 		});
-		
+
 		var column_category = new GF_Datagrid_Column({
 			id: 'categoriesname',
 			caption: GForm.Language.product_select_categories,
@@ -14950,7 +15063,7 @@ var GFormProductSelect = GCore.ExtendClass(GFormField, function() {
 				load_children: gThis.m_oOptions.fLoadCategoryChildren
 			}
 		});
-		
+
 		var column_thumb = new GF_Datagrid_Column({
 			id: 'thumbpreview',
 			caption: GForm.Language.file_selector_thumb,
@@ -14959,7 +15072,7 @@ var GFormProductSelect = GCore.ExtendClass(GFormField, function() {
 				no_title: true
 			}
 		});
-		
+
 		return [
 			column_id,
 			column_thumb,
@@ -14973,11 +15086,11 @@ var GFormProductSelect = GCore.ExtendClass(GFormField, function() {
 			column_barcode,
 			column_vat,
 		];
-		
+
 	};
-	
+
 	gThis._InitAdvancedColumns = function() {
-		
+
 		var column_id = new GF_Datagrid_Column({
 			id: 'idproduct',
 			caption: GForm.Language.product_select_id,
@@ -14988,7 +15101,7 @@ var GFormProductSelect = GCore.ExtendClass(GFormField, function() {
 				type: GF_Datagrid.FILTER_BETWEEN
 			}
 		});
-		
+
 		var column_name = new GF_Datagrid_Column({
 			id: 'name',
 			caption: GForm.Language.product_select_name,
@@ -15000,7 +15113,7 @@ var GFormProductSelect = GCore.ExtendClass(GFormField, function() {
 				type: GF_Datagrid.FILTER_INPUT
 			}
 		});
-		
+
 		var column_price = new GF_Datagrid_Column({
 			id: 'sellprice',
 			caption: GForm.Language.product_select_price,
@@ -15013,7 +15126,7 @@ var GFormProductSelect = GCore.ExtendClass(GFormField, function() {
 				type: GF_Datagrid.FILTER_BETWEEN
 			}
 		});
-		
+
 		var column_price_gross = new GF_Datagrid_Column({
 			id: 'sellprice_gross',
 			caption: GForm.Language.product_select_price_gross,
@@ -15025,7 +15138,7 @@ var GFormProductSelect = GCore.ExtendClass(GFormField, function() {
 				type: GF_Datagrid.FILTER_BETWEEN
 			}
 		});
-		
+
 		var column_barcode = new GF_Datagrid_Column({
 			id: 'barcode',
 			caption: GForm.Language.product_select_barcode,
@@ -15037,7 +15150,7 @@ var GFormProductSelect = GCore.ExtendClass(GFormField, function() {
 				type: GF_Datagrid.FILTER_INPUT
 			}
 		});
-		
+
 		var column_producer = new GF_Datagrid_Column({
 			id: 'producer',
 			caption: GForm.Language.product_select_producer,
@@ -15046,7 +15159,7 @@ var GFormProductSelect = GCore.ExtendClass(GFormField, function() {
 				visible: false
 			}
 		});
-		
+
 		var column_vat = new GF_Datagrid_Column({
 			id: 'vat',
 			caption: GForm.Language.product_select_vat,
@@ -15056,7 +15169,7 @@ var GFormProductSelect = GCore.ExtendClass(GFormField, function() {
 				align: GF_Datagrid.ALIGN_RIGHT
 			}
 		});
-		
+
 		var column_category = new GF_Datagrid_Column({
 			id: 'categoriesname',
 			caption: GForm.Language.product_select_categories,
@@ -15072,7 +15185,7 @@ var GFormProductSelect = GCore.ExtendClass(GFormField, function() {
 				load_children: gThis.m_oOptions.fLoadCategoryChildren
 			}
 		});
-		
+
 		var column_thumb = new GF_Datagrid_Column({
 			id: 'thumbpreview',
 			caption: GForm.Language.file_selector_thumb,
@@ -15081,7 +15194,7 @@ var GFormProductSelect = GCore.ExtendClass(GFormField, function() {
 				no_title: true
 			}
 		});
-		
+
 		var column_quantity = new GF_Datagrid_Column({
 			id: 'quantity',
 			caption: GForm.Language.product_select_quantity,
@@ -15090,7 +15203,7 @@ var GFormProductSelect = GCore.ExtendClass(GFormField, function() {
 				width: 70
 			}
 		});
-		
+
 		var column_variant = new GF_Datagrid_Column({
 			id: 'variant',
 			caption: GForm.Language.product_select_variant,
@@ -15099,7 +15212,7 @@ var GFormProductSelect = GCore.ExtendClass(GFormField, function() {
 				width: 150
 			}
 		});
-		
+
 		return [
 		    column_id,
 			column_thumb,
@@ -15112,9 +15225,9 @@ var GFormProductSelect = GCore.ExtendClass(GFormField, function() {
 			column_vat,
 			column_barcode,
 		];
-		
+
 	};
-	
+
 	gThis._UpdateExcludes = function() {
 		gThis.m_aoExclude = [];
 		if (gThis.m_oOptions.sExcludeFrom != undefined) {
@@ -15131,12 +15244,12 @@ var GFormProductSelect = GCore.ExtendClass(GFormField, function() {
 			}
 		}
 	};
-	
+
 	gThis._InitDatagrid = function() {
-		
+
 		gThis.m_fProcessProduct = gThis._ProcessProduct;
 		gThis.m_fLoadProducts = gThis.m_oOptions.fLoadProducts;
-		
+
 		var aoColumns = gThis._InitColumns();
 		var oOptions = {
 			id: gThis.GetId(),
@@ -15165,11 +15278,11 @@ var GFormProductSelect = GCore.ExtendClass(GFormField, function() {
 			},
 			columns: aoColumns
     };
-    
+
     gThis.m_gDatagrid = new GF_Datagrid(gThis.m_jDatagrid, oOptions);
-		
+
 	};
-	
+
 	gThis._Deselect = function(iDg, mId) {
 		if (!(mId instanceof Array)) {
 			mId = [mId];
@@ -15180,29 +15293,29 @@ var GFormProductSelect = GCore.ExtendClass(GFormField, function() {
 		gThis.m_gSelectedDatagrid.ClearSelection();
 		gThis.m_gDatagrid.LoadData();
 	};
-	
+
 	gThis._InitSelectedDatagrid = function() {
-		
+
 		gThis.m_gDataProvider = new GF_Datagrid_Data_Provider({
 			key: 'idproduct',
 			event_handlers: {
 				change: gThis._OnChange
 			}
 		}, []);
-		
+
 		if (gThis.m_oOptions.bAdvancedEditor) {
 			var aoColumns = gThis._InitAdvancedColumns();
 		}
 		else {
 			var aoColumns = gThis._InitColumns();
 		}
-		
+
 		var gActionDeselect = new GF_Action({
 			img: gThis._GetImage('DeselectIcon'),
 			caption: GForm.Language.product_select_deselect,
 			action: gThis._Deselect
 		});
-		
+
 		var oOptions = {
 			id: gThis.GetId() + '_selected',
 			appearance: {
@@ -15240,11 +15353,11 @@ var GFormProductSelect = GCore.ExtendClass(GFormField, function() {
 				gActionDeselect
 			]
     };
-		
+
 		gThis.m_gSelectedDatagrid = new GF_Datagrid(gThis.m_jSelectedDatagrid, oOptions);
-		
+
 	};
-	
+
 	gThis._LoadSelected = function(oRequest, sResponseHandler) {
 		if (gThis.m_oOptions.bAdvancedEditor) {
 			var asDefaults = [];
@@ -15280,7 +15393,7 @@ var GFormProductSelect = GCore.ExtendClass(GFormField, function() {
 			gThis.m_gSelectedDatagrid.LoadData();
 		}));
 	};
-	
+
 }, oDefaults);
 /*
 * PRODUCT SELECT RELATED
@@ -15310,11 +15423,11 @@ var oDefaults = {
 };
 
 var GFormProductSelectRelated = GCore.ExtendClass(GFormField, function() {
-	
+
 	var gThis = this;
-	
+
 	gThis.m_bShown = false;
-	
+
 	gThis.m_fLoadProducts;
 	gThis.m_fProcessProduct;
 	gThis.m_jDatagrid;
@@ -15325,7 +15438,7 @@ var GFormProductSelectRelated = GCore.ExtendClass(GFormField, function() {
 	gThis.m_bFirstLoad = true;
 	gThis.m_aoExclude = [];
 	gThis.m_sDependentSelector;
-	
+
 	gThis.GetValue = function(sRepetition) {
 		if (gThis.m_jField == undefined) {
 			return '';
@@ -15351,14 +15464,14 @@ var GFormProductSelectRelated = GCore.ExtendClass(GFormField, function() {
 			return gThis.m_jField.val();
 		}
 	};
-	
+
 	gThis.PopulateErrors = function(mData) {
 		if ((mData == undefined) || (mData == '')) {
 			return;
 		}
 		gThis.SetError(mData);
 	};
-	
+
 	gThis.SetValue = function(mValue, sRepetition) {
 		if (gThis.m_jField == undefined) {
 			return;
@@ -15368,7 +15481,7 @@ var GFormProductSelectRelated = GCore.ExtendClass(GFormField, function() {
 				if (i == 'toJSON') {
 					continue;
 				}
-				
+
 				gThis.m_jField.append('<input type="hidden" name="' + gThis.GetName(i) + '[id]" value="' + mValue[i]['id'] + '"/>');
 				gThis.m_jField.append('<input type="hidden" name="' + gThis.GetName(i) + '[hierarchy]" value="' + mValue[i]['hierarchy'] + '"/>');
 			}
@@ -15379,7 +15492,7 @@ var GFormProductSelectRelated = GCore.ExtendClass(GFormField, function() {
 			gThis.m_bSkipValidation = false;
 		}
 	};
-	
+
 	gThis._OnSelect = function(gDg, sId) {
 		if (gThis.m_bRepeatable) {
 			var oSelectedRow = gDg.GetRow(sId);
@@ -15391,7 +15504,7 @@ var GFormProductSelectRelated = GCore.ExtendClass(GFormField, function() {
 			gThis.SetValue(sId);
 		}
 	};
-	
+
 	gThis._OnDeselect = function(gDg, sId) {
 		if (gThis.m_bRepeatable) {
 			gThis.m_gDataProvider.DeleteRow(sId);
@@ -15401,7 +15514,7 @@ var GFormProductSelectRelated = GCore.ExtendClass(GFormField, function() {
 			gThis.SetValue('');
 		}
 	};
-	
+
 	gThis._OnChange = function(eEvent) {
 		if (gThis.m_bRepeatable) {
 			gThis.m_jField.empty();
@@ -15411,16 +15524,16 @@ var GFormProductSelectRelated = GCore.ExtendClass(GFormField, function() {
 			if (i == 'toJSON') {
 				continue;
 			}
-			
+
 			aoData.push({
 				id: eEvent.rows[i].idproduct,
 				hierarchy: eEvent.rows[i].hierarchy,
 			});
 		}
-		
+
 		gThis.SetValue(aoData);
 	};
-	
+
 	gThis._PrepareNode = function() {
 		gThis.m_oOptions.oParsedFilterData = {};
 		for (var i in gThis.m_oOptions.oFilterData) {
@@ -15455,11 +15568,11 @@ var GFormProductSelectRelated = GCore.ExtendClass(GFormField, function() {
 			gField.m_sDependentSelector = gThis.m_oOptions.sName;
 		}
 	};
-	
+
 	gThis.OnReset = function() {
 		gThis.m_bFirstLoad = true;
 	};
-	
+
 	gThis.Populate = function(mValue) {
 		if (gThis.m_bRepeatable) {
 			gThis.m_jField.empty();
@@ -15478,7 +15591,7 @@ var GFormProductSelectRelated = GCore.ExtendClass(GFormField, function() {
 			gThis.m_gSelectedDatagrid.LoadData();
 		}
 	};
-	
+
 	gThis._UpdateDatagridSelection = function(mValue) {
 		if (!(mValue instanceof Array)) {
 			if ((mValue == undefined) || !mValue.length) {
@@ -15495,7 +15608,7 @@ var GFormProductSelectRelated = GCore.ExtendClass(GFormField, function() {
 			}
 		}
 	};
-	
+
 	gThis.OnShow = function() {
 		if (!gThis.m_bShown) {
 			gThis._InitDatagrid();
@@ -15512,21 +15625,21 @@ var GFormProductSelectRelated = GCore.ExtendClass(GFormField, function() {
 			gThis.m_gDatagrid.LoadData();
 		}
 	};
-	
+
 	gThis._ProcessProduct = function(oProduct) {
 		if (oProduct.thumb != '') {
 			oProduct.thumbpreview = '<a href="' + oProduct.thumb + '" ><img src="' + oProduct.thumb + '" style="vertical-align: middle;" alt="' + GForm.Language.file_selector_show_thumb + '"/></a>';
 		}
 		return oProduct;
 	};
-	
+
 	gThis._ProcessSelectedProduct = function(oProduct) {
 		oProduct = gThis.m_fProcessProduct(oProduct);
 		return oProduct;
 	};
-	
+
 	gThis._InitColumns = function() {
-		
+
 		var column_id = new GF_Datagrid_Column({
 			id: 'idproduct',
 			caption: GForm.Language.product_select_id,
@@ -15538,7 +15651,7 @@ var GFormProductSelectRelated = GCore.ExtendClass(GFormField, function() {
 				type: GF_Datagrid.FILTER_BETWEEN
 			}
 		});
-		
+
 		var column_name = new GF_Datagrid_Column({
 			id: 'name',
 			caption: GForm.Language.product_select_name,
@@ -15550,7 +15663,7 @@ var GFormProductSelectRelated = GCore.ExtendClass(GFormField, function() {
 				type: GF_Datagrid.FILTER_INPUT
 			}
 		});
-		
+
 		var column_price = new GF_Datagrid_Column({
 			id: 'sellprice',
 			caption: GForm.Language.product_select_price,
@@ -15563,7 +15676,7 @@ var GFormProductSelectRelated = GCore.ExtendClass(GFormField, function() {
 				type: GF_Datagrid.FILTER_BETWEEN
 			}
 		});
-		
+
 		var column_price_gross = new GF_Datagrid_Column({
 			id: 'sellprice_gross',
 			caption: GForm.Language.product_select_price_gross,
@@ -15574,7 +15687,7 @@ var GFormProductSelectRelated = GCore.ExtendClass(GFormField, function() {
 				type: GF_Datagrid.FILTER_BETWEEN
 			}
 		});
-		
+
 		var column_buyprice = new GF_Datagrid_Column({
 			id: 'buyprice',
 			caption: GForm.Language.product_select_buyprice,
@@ -15587,7 +15700,7 @@ var GFormProductSelectRelated = GCore.ExtendClass(GFormField, function() {
 				type: GF_Datagrid.FILTER_BETWEEN
 			}
 		});
-		
+
 		var column_buyprice_gross = new GF_Datagrid_Column({
 			id: 'buyprice_gross',
 			caption: GForm.Language.product_select_buyprice_gross,
@@ -15600,7 +15713,7 @@ var GFormProductSelectRelated = GCore.ExtendClass(GFormField, function() {
 				type: GF_Datagrid.FILTER_BETWEEN
 			}
 		});
-		
+
 		var column_barcode = new GF_Datagrid_Column({
 			id: 'barcode',
 			caption: GForm.Language.product_select_barcode,
@@ -15612,7 +15725,7 @@ var GFormProductSelectRelated = GCore.ExtendClass(GFormField, function() {
 				type: GF_Datagrid.FILTER_INPUT
 			}
 		});
-		
+
 		var column_producer = new GF_Datagrid_Column({
 			id: 'producer',
 			caption: GForm.Language.product_select_producer,
@@ -15624,7 +15737,7 @@ var GFormProductSelectRelated = GCore.ExtendClass(GFormField, function() {
 				options: gThis.m_oOptions.oParsedFilterData['producer'],
 			}
 		});
-		
+
 		var column_vat = new GF_Datagrid_Column({
 			id: 'vat',
 			caption: GForm.Language.product_select_vat,
@@ -15638,7 +15751,7 @@ var GFormProductSelectRelated = GCore.ExtendClass(GFormField, function() {
 				options: gThis.m_oOptions.oParsedFilterData['vat'],
 			}
 		});
-		
+
 		var column_category = new GF_Datagrid_Column({
 			id: 'categoriesname',
 			caption: GForm.Language.product_select_categories,
@@ -15653,7 +15766,7 @@ var GFormProductSelectRelated = GCore.ExtendClass(GFormField, function() {
 				load_children: gThis.m_oOptions.fLoadCategoryChildren
 			}
 		});
-		
+
 		var column_thumb = new GF_Datagrid_Column({
 			id: 'thumbpreview',
 			caption: GForm.Language.file_selector_thumb,
@@ -15662,7 +15775,7 @@ var GFormProductSelectRelated = GCore.ExtendClass(GFormField, function() {
 				no_title: true
 			}
 		});
-		
+
 		return [
 			column_id,
 			column_thumb,
@@ -15676,11 +15789,11 @@ var GFormProductSelectRelated = GCore.ExtendClass(GFormField, function() {
 			column_barcode,
 			column_vat,
 		];
-		
+
 	};
-	
+
 	gThis._InitAdvancedColumns = function() {
-		
+
 		var column_id = new GF_Datagrid_Column({
 			id: 'idproduct',
 			caption: GForm.Language.product_select_id,
@@ -15691,7 +15804,7 @@ var GFormProductSelectRelated = GCore.ExtendClass(GFormField, function() {
 				type: GF_Datagrid.FILTER_BETWEEN
 			}
 		});
-		
+
 		var column_name = new GF_Datagrid_Column({
 			id: 'name',
 			caption: GForm.Language.product_select_name,
@@ -15703,7 +15816,7 @@ var GFormProductSelectRelated = GCore.ExtendClass(GFormField, function() {
 				type: GF_Datagrid.FILTER_INPUT
 			}
 		});
-		
+
 		var column_price = new GF_Datagrid_Column({
 			id: 'sellprice',
 			caption: GForm.Language.product_select_price,
@@ -15716,7 +15829,7 @@ var GFormProductSelectRelated = GCore.ExtendClass(GFormField, function() {
 				type: GF_Datagrid.FILTER_BETWEEN
 			}
 		});
-		
+
 		var column_price_gross = new GF_Datagrid_Column({
 			id: 'sellprice_gross',
 			caption: GForm.Language.product_select_price_gross,
@@ -15728,7 +15841,7 @@ var GFormProductSelectRelated = GCore.ExtendClass(GFormField, function() {
 				type: GF_Datagrid.FILTER_BETWEEN
 			}
 		});
-		
+
 		var column_barcode = new GF_Datagrid_Column({
 			id: 'barcode',
 			caption: GForm.Language.product_select_barcode,
@@ -15740,7 +15853,7 @@ var GFormProductSelectRelated = GCore.ExtendClass(GFormField, function() {
 				type: GF_Datagrid.FILTER_INPUT
 			}
 		});
-		
+
 		var column_producer = new GF_Datagrid_Column({
 			id: 'producer',
 			caption: GForm.Language.product_select_producer,
@@ -15749,7 +15862,7 @@ var GFormProductSelectRelated = GCore.ExtendClass(GFormField, function() {
 				visible: false
 			}
 		});
-		
+
 		var column_vat = new GF_Datagrid_Column({
 			id: 'vat',
 			caption: GForm.Language.product_select_vat,
@@ -15759,7 +15872,7 @@ var GFormProductSelectRelated = GCore.ExtendClass(GFormField, function() {
 				align: GF_Datagrid.ALIGN_RIGHT
 			}
 		});
-		
+
 		var column_category = new GF_Datagrid_Column({
 			id: 'categoriesname',
 			caption: GForm.Language.product_select_categories,
@@ -15775,7 +15888,7 @@ var GFormProductSelectRelated = GCore.ExtendClass(GFormField, function() {
 				load_children: gThis.m_oOptions.fLoadCategoryChildren
 			}
 		});
-		
+
 		var column_thumb = new GF_Datagrid_Column({
 			id: 'thumbpreview',
 			caption: GForm.Language.file_selector_thumb,
@@ -15784,7 +15897,7 @@ var GFormProductSelectRelated = GCore.ExtendClass(GFormField, function() {
 				no_title: true
 			}
 		});
-		
+
 		var column_hierarchy = new GF_Datagrid_Column({
 			id: 'hierarchy',
 			caption: GForm.Language.product_select_hierarchy,
@@ -15793,9 +15906,9 @@ var GFormProductSelectRelated = GCore.ExtendClass(GFormField, function() {
 				width: 70
 			}
 		});
-		
-		
-		
+
+
+
 		return [
 		    column_id,
 			column_thumb,
@@ -15807,9 +15920,9 @@ var GFormProductSelectRelated = GCore.ExtendClass(GFormField, function() {
 			column_vat,
 			column_barcode,
 		];
-		
+
 	};
-	
+
 	gThis._UpdateExcludes = function() {
 		gThis.m_aoExclude = [];
 		if (gThis.m_oOptions.sExcludeFrom != undefined) {
@@ -15826,12 +15939,12 @@ var GFormProductSelectRelated = GCore.ExtendClass(GFormField, function() {
 			}
 		}
 	};
-	
+
 	gThis._InitDatagrid = function() {
-		
+
 		gThis.m_fProcessProduct = gThis._ProcessProduct;
 		gThis.m_fLoadProducts = gThis.m_oOptions.fLoadProducts;
-		
+
 		var aoColumns = gThis._InitColumns();
 		var oOptions = {
 			id: gThis.GetId(),
@@ -15860,11 +15973,11 @@ var GFormProductSelectRelated = GCore.ExtendClass(GFormField, function() {
 			},
 			columns: aoColumns
     };
-    
+
     gThis.m_gDatagrid = new GF_Datagrid(gThis.m_jDatagrid, oOptions);
-		
+
 	};
-	
+
 	gThis._Deselect = function(iDg, mId) {
 		if (!(mId instanceof Array)) {
 			mId = [mId];
@@ -15875,24 +15988,24 @@ var GFormProductSelectRelated = GCore.ExtendClass(GFormField, function() {
 		gThis.m_gSelectedDatagrid.ClearSelection();
 		gThis.m_gDatagrid.LoadData();
 	};
-	
+
 	gThis._InitSelectedDatagrid = function() {
-		
+
 		gThis.m_gDataProvider = new GF_Datagrid_Data_Provider({
 			key: 'idproduct',
 			event_handlers: {
 				change: gThis._OnChange
 			}
 		}, []);
-		
+
 		var aoColumns = gThis._InitAdvancedColumns();
-		
+
 		var gActionDeselect = new GF_Action({
 			img: gThis._GetImage('DeselectIcon'),
 			caption: GForm.Language.product_select_deselect,
 			action: gThis._Deselect
 		});
-		
+
 		var oOptions = {
 			id: gThis.GetId() + '_selected',
 			appearance: {
@@ -15930,11 +16043,11 @@ var GFormProductSelectRelated = GCore.ExtendClass(GFormField, function() {
 				gActionDeselect
 			]
     };
-		
+
 		gThis.m_gSelectedDatagrid = new GF_Datagrid(gThis.m_jSelectedDatagrid, oOptions);
-		
+
 	};
-	
+
 	gThis._LoadSelected = function(oRequest, sResponseHandler) {
 		var asDefaults = [];
 		for (var i in gThis.m_oOptions.asDefaults) {
@@ -15945,7 +16058,7 @@ var GFormProductSelectRelated = GCore.ExtendClass(GFormField, function() {
 			value: asDefaults,
 			operator: 'IN'
 		}];
-		
+
 		gThis.m_fLoadProducts(oRequest, GCallback(function(eEvent) {
 			for (var i in eEvent.rows) {
 				var sId = eEvent.rows[i].idproduct;
@@ -15959,7 +16072,7 @@ var GFormProductSelectRelated = GCore.ExtendClass(GFormField, function() {
 			gThis.m_gSelectedDatagrid.LoadData();
 		}));
 	};
-	
+
 }, oDefaults);
 /*
 * RICH TEXT EDITOR
@@ -15996,16 +16109,16 @@ var oDefaults = {
 };
 
 var GFormRichTextEditor = GCore.ExtendClass(GFormTextArea, function() {
-	
+
 	var gThis = this;
-	
+
 	gThis.OnShow = function() {
 		if (gThis.m_bShown) {
 			return;
 		}
-		
+
 //		if(!gThis.m_bShown){
-//			$('#' + gThis.GetId()).redactor({ 
+//			$('#' + gThis.GetId()).redactor({
 //				lang: 'en',
 //				imageUpload: GCore.sAdminUrl + 'redactor/add',
 //				imageGetJson: GCore.sAdminUrl + 'redactor/view/',
@@ -16013,7 +16126,7 @@ var GFormRichTextEditor = GCore.ExtendClass(GFormTextArea, function() {
 //			gThis.m_bShown = true;
 //		}
 	};
-	
+
 }, oDefaults);
 /*
 * ATTRIBUTE EDITOR
@@ -16050,25 +16163,25 @@ var oDefaults = {
 };
 
 var GFormAttributeEditor = GCore.ExtendClass(GFormField, function() {
-	
+
 	var gThis = this;
-	
+
 	gThis.m_bShown = false;
 	gThis.m_oAttributes = {};
 	gThis.m_iNewAttributeIndex = 0;
-	
+
 	gThis.m_jAttributes;
 	gThis.m_jValues;
 	gThis.m_aSelectedAttributes = [];
 	gThis.m_sActiveAttribute = 0;
-	
+
 	gThis._Constructor = function() {
 		for (var i in gThis.m_oOptions.aoAttributes) {
 			gThis._AddAttribute(GCore.Duplicate(gThis.m_oOptions.aoAttributes[i], true));
 		}
 		gThis.m_sActiveAttribute = 0;
 	};
-	
+
 	gThis._AddAttribute = function(oAttribute) {
 		if (oAttribute instanceof String) {
 			oAttribute = {
@@ -16089,7 +16202,7 @@ var GFormAttributeEditor = GCore.ExtendClass(GFormField, function() {
 		gThis.m_sActiveAttribute = oAttribute.id;
 		return oAttribute.id;
 	};
-	
+
 	gThis._AddValue = function(sAttribute, oValue) {
 		if ((sAttribute == undefined) || (gThis.m_oAttributes[sAttribute] == undefined)) {
 			return null;
@@ -16107,7 +16220,7 @@ var GFormAttributeEditor = GCore.ExtendClass(GFormField, function() {
 		gThis.m_oAttributes[sAttribute].values.push(oValue);
 		return oValue.id;
 	};
-	
+
 	gThis._WriteValue = function(sAttribute, sValue) {
 		if ((sAttribute == undefined) || (gThis.m_oAttributes[sAttribute] == undefined)) {
 			return null;
@@ -16152,12 +16265,12 @@ var GFormAttributeEditor = GCore.ExtendClass(GFormField, function() {
 		jValue.append('<span class="' + gThis._GetClass('Name') + '">' + oValue.name + '</span>').append(jDelete).append(jRename);
 		return jValue;
 	};
-	
+
 	gThis._RenameAttribute = function(sId, sName) {
 		gThis.m_oAttributes[sId].name = sName;
 		gThis.Update();
 	};
-	
+
 	gThis._RenameValue = function(sId, sAttribute, sName) {
 		for (var i in gThis.m_oAttributes[sAttribute].values) {
 			if (gThis.m_oAttributes[sAttribute].values[i].id == sId) {
@@ -16166,7 +16279,7 @@ var GFormAttributeEditor = GCore.ExtendClass(GFormField, function() {
 		}
 		gThis.Update();
 	};
-	
+
 	gThis._WriteAttribute = function(sAttribute) {
 		if ((sAttribute == undefined) || (gThis.m_oAttributes[sAttribute] == undefined)) {
 			return null;
@@ -16241,7 +16354,7 @@ var GFormAttributeEditor = GCore.ExtendClass(GFormField, function() {
 		jAttribute.append('<span class="' + gThis._GetClass('Name') + '">' + oAttribute.name + '</span>').append(jDelete).append(jDeleteFromBase).append(jRename);//.append(jEdit);
 		return jAttribute;
 	};
-	
+
 	gThis.EditAttribute = function(sAttribute) {
 		if (gThis.m_oAttributes[sAttribute] == undefined) {
 			return false;
@@ -16249,7 +16362,7 @@ var GFormAttributeEditor = GCore.ExtendClass(GFormField, function() {
 		gThis.m_sActiveAttribute = sAttribute;
 		gThis.Update();
 	};
-	
+
 	gThis.RemoveValue = function(sAttribute, sValue) {
 		if (gThis.m_oAttributes[sAttribute] == undefined) {
 			return false;
@@ -16262,7 +16375,7 @@ var GFormAttributeEditor = GCore.ExtendClass(GFormField, function() {
 		}
 		gThis.Update();
 	};
-	
+
 	gThis.RemoveAttribute = function(sAttribute) {
 		if (gThis.m_oAttributes[sAttribute] == undefined) {
 			return false;
@@ -16281,7 +16394,7 @@ var GFormAttributeEditor = GCore.ExtendClass(GFormField, function() {
 		}
 		gThis.Update();
 	};
-	
+
 	gThis._WriteValueAdder = function() {
 		var jValue = $('<li class="' + gThis._GetClass('ValueRepetition') + '"/>');
 		var jInput = $('<input type="text"/>');
@@ -16293,7 +16406,7 @@ var GFormAttributeEditor = GCore.ExtendClass(GFormField, function() {
 		jValue.append($('<div class="field-text"/>').append($('<span class="field"/>').append(jInput)).append(jAdd));
 		return jValue;
 	};
-	
+
 	gThis._WriteAttributeAdder = function() {
 		var jAttribute = $('<li class="' + gThis._GetClass('AttributeRepetition') + '"/>');
 		var jSelect = $('<select/>');
@@ -16313,7 +16426,7 @@ var GFormAttributeEditor = GCore.ExtendClass(GFormField, function() {
 		jAttribute.append($('<div class="field-select"/>').append($('<span class="field"/>').append(jSelect)).append(jAdd));
 		return jAttribute;
 	};
-	
+
 	gThis._WriteValues = function() {
 		gThis.m_jValues.empty();
 		if (gThis.m_oAttributes[gThis.m_sActiveAttribute] == undefined) {
@@ -16327,7 +16440,7 @@ var GFormAttributeEditor = GCore.ExtendClass(GFormField, function() {
 		}
 		gThis.m_jValues.append(jValueAdder);
 	};
-	
+
 	gThis._WriteAttributes = function() {
 		gThis.m_jAttributes.empty();
 		var jAttributeAdder = gThis._WriteAttributeAdder();
@@ -16336,7 +16449,7 @@ var GFormAttributeEditor = GCore.ExtendClass(GFormField, function() {
 		}
 		gThis.m_jAttributes.append(jAttributeAdder);
 	};
-	
+
 	gThis.Update = function() {
 		gThis._WriteAttributes();
 		gThis._WriteValues();
@@ -16353,7 +16466,7 @@ var GFormAttributeEditor = GCore.ExtendClass(GFormField, function() {
 			}
 		}
 	};
-	
+
 	gThis._InitializeEditorEvents = function() {
 		gThis.m_jAttributes.find('select').GComboBox();
 		gThis.m_jAttributes.find('select').bind('GChange', GEventHandler(function(eEvent) {
@@ -16370,7 +16483,7 @@ var GFormAttributeEditor = GCore.ExtendClass(GFormField, function() {
 			}
 		}));
 	};
-	
+
 	gThis._OnValueAdd = function(jInput) {
 		if (jInput.val() == '') {
 			return false;
@@ -16381,7 +16494,7 @@ var GFormAttributeEditor = GCore.ExtendClass(GFormField, function() {
 		gThis.Update();
 		return true;
 	};
-	
+
 	gThis._OnAttributeAdd = function(jSelect) {
 		if (jSelect.val() == '') {
 			return false;
@@ -16400,7 +16513,7 @@ var GFormAttributeEditor = GCore.ExtendClass(GFormField, function() {
 		gThis.Update();
 		return true;
 	};
-	
+
 	gThis._PrepareNode = function() {
 		gThis.m_jNode = $('<div/>').addClass(gThis._GetClass('Field'));
 		gThis.m_jField = $('<div/>');
@@ -16411,12 +16524,12 @@ var GFormAttributeEditor = GCore.ExtendClass(GFormField, function() {
 		gThis.m_jNode.append($('<div class="' + gThis._GetClass('Values') + '"/>').append('<h3>' + GForm.Language.attribute_editor_values + '</h3>').append(gThis.m_jValues));
 		gThis.Update();
 	};
-	
+
 	gThis.Populate = function(mValue) {
 		gThis.m_aSelectedAttributes = mValue;
 		gThis.Update();
 	};
-	
+
 	gThis.Reset = function() {
 		gThis.m_oAttributes = {};
 		for (var i in gThis.m_oOptions.aoAttributes) {
@@ -16425,7 +16538,7 @@ var GFormAttributeEditor = GCore.ExtendClass(GFormField, function() {
 		gThis.m_sActiveAttribute = 0;
 		gThis.Update();
 	};
-	
+
 }, oDefaults);
 /*
 * TECHNICAL ATTRIBUTE EDITOR
@@ -16462,27 +16575,27 @@ var oDefaults = {
 };
 
 var GFormTechnicalAttributeEditor = GCore.ExtendClass(GFormField, function() {
-	
+
 	var gThis = this;
-	
+
 	gThis.m_bShown = false;
 	gThis.m_oAttributes = {};
 	gThis.m_iNewAttributeIndex = 0;
-	
+
 	gThis.m_jAttributes;
 	gThis.m_jValues;
 	gThis.m_aSelectedAttributes = [];
 	gThis.m_sActiveAttribute = 0;
-	
+
 	gThis._Constructor = function() {
 		for (var i in gThis.m_oOptions.aoAttributes) {
 			gThis._AddAttribute(GCore.Duplicate(gThis.m_oOptions.aoAttributes[i], true));
 		}
 		gThis.m_sActiveAttribute = 0;
 	};
-	
+
 	gThis._AddAttribute = function(oAttribute) {
-		
+
 		if (oAttribute instanceof String) {
 			oAttribute = {
 				name: oAttribute
@@ -16504,7 +16617,7 @@ var GFormTechnicalAttributeEditor = GCore.ExtendClass(GFormField, function() {
 		gThis.m_sActiveAttribute = oAttribute.id;
 		return oAttribute.id;
 	};
-	
+
 	gThis._AddValue = function(sAttribute, oValue) {
 		if ((sAttribute == undefined) || (gThis.m_oAttributes[sAttribute] == undefined)) {
 			return null;
@@ -16525,7 +16638,7 @@ var GFormTechnicalAttributeEditor = GCore.ExtendClass(GFormField, function() {
 		gThis.m_oAttributes[sAttribute].values.push(oValue);
 		return oValue.id;
 	};
-	
+
 	gThis._WriteValue = function(sAttribute, sValue) {
 		if ((sAttribute == undefined) || (gThis.m_oAttributes[sAttribute] == undefined)) {
 			return null;
@@ -16556,7 +16669,7 @@ var GFormTechnicalAttributeEditor = GCore.ExtendClass(GFormField, function() {
 				for (var l in GCore.aoLanguages) {
 					var sName = $('.technical-data-detail-editor').find('.language-' + l).val();
 					gThis.m_oOptions.fRenameValue({
-						id: oValue.id, 
+						id: oValue.id,
 						name: sName,
 						languageid: l
 					}, GCallback(function(eEvent) {
@@ -16579,7 +16692,7 @@ var GFormTechnicalAttributeEditor = GCore.ExtendClass(GFormField, function() {
 			gThis.RemoveValue(gThis.m_sActiveAttribute, oValue.id);
 			return false;
 		}));
-		
+
 		var jTypeSelect = $('<select name="" class="type"/>');
 		var aoTypes = [
 			{id: GFormTechnicalDataEditor.FIELD_STRING, caption: GForm.Language.technical_data_value_type_string},
@@ -16590,26 +16703,26 @@ var GFormTechnicalAttributeEditor = GCore.ExtendClass(GFormField, function() {
 		for (var i = 0; i < aoTypes.length; i++) {
 			jTypeSelect.append('<option' + ((aoTypes[i].id == oValue.type) ? ' selected="selected"' : '') + ' value="' + aoTypes[i].id + '">' + aoTypes[i].caption + '</option>');
 		}
-		
+
 		jTypeSelect.change(function(){
 			oValue.type = $(this).val();
 			gThis.Update();
 		});
-		
+
 		if ((oValue.id).substr(0, 4) == 'new-') {
-			jValue.append('<span class="' + gThis._GetClass('Name') + '">' + oValue.name[GCore.iActiveLanguage] + '</span>').append(jDelete).append($('<div class="field-select"/>').append($('<span class="field"/>').append(jTypeSelect)));	
+			jValue.append('<span class="' + gThis._GetClass('Name') + '">' + oValue.name[GCore.iActiveLanguage] + '</span>').append(jDelete).append($('<div class="field-select"/>').append($('<span class="field"/>').append(jTypeSelect)));
 		}else{
 			jValue.append('<span class="' + gThis._GetClass('Name') + '">' + oValue.name[GCore.iActiveLanguage] + '</span>').append(jDelete).append(jRename).append($('<div class="field-select"/>').append($('<span class="field"/>').append(jTypeSelect)));
 		}
 		jTypeSelect.GSelect();
 		return jValue;
 	};
-	
+
 	gThis._RenameAttribute = function(sId, sName, sLanguageId) {
 		gThis.m_oAttributes[sId].name[sLanguageId] = sName;
 		gThis.Update();
 	};
-	
+
 	gThis._RenameValue = function(sId, sAttribute, sName, sLanguageId) {
 		for (var i in gThis.m_oAttributes[sAttribute].values) {
 			if (gThis.m_oAttributes[sAttribute].values[i].id == sId) {
@@ -16618,7 +16731,7 @@ var GFormTechnicalAttributeEditor = GCore.ExtendClass(GFormField, function() {
 		}
 		gThis.Update();
 	};
-	
+
 	gThis._WriteAttribute = function(sAttribute) {
 		if ((sAttribute == undefined) || (gThis.m_oAttributes[sAttribute] == undefined)) {
 			return null;
@@ -16652,7 +16765,7 @@ var GFormTechnicalAttributeEditor = GCore.ExtendClass(GFormField, function() {
 				for (var l in GCore.aoLanguages) {
 					var sName = $('.technical-data-detail-editor').find('.language-' + l).val();
 					gThis.m_oOptions.fRenameAttribute({
-						id: oAttribute.id, 
+						id: oAttribute.id,
 						name: sName,
 						languageid: l
 					}, GCallback(function(eEvent) {
@@ -16669,14 +16782,14 @@ var GFormTechnicalAttributeEditor = GCore.ExtendClass(GFormField, function() {
 			}));
 			jOverlay.append(jSaveButton).append(jCancelButton);
 		}));
-		
+
 		var jDelete = $('<a rel="delete" href="#"/>').append('<img src="' + gThis._GetImage('Delete') + '" alt="' + GForm.Language.attribute_editor_remove_attribute + '" title="' + GForm.Language.attribute_editor_remove_attribute + '"/>');
 		jDelete.click(GEventHandler(function(eEvent) {
 			eEvent.stopImmediatePropagation();
 			gThis.RemoveAttribute(oAttribute.id);
 			return false;
 		}));
-		
+
 		var jDeleteFromBase = $('<a rel="delete" href="#"/>').append('<img src="' + gThis._GetImage('DeleteFromBase') + '" alt="' + GForm.Language.attribute_editor_remove_attribute_from_base + '" title="' + GForm.Language.attribute_editor_remove_attribute_from_base + '"/>');
 		jDeleteFromBase.click(GEventHandler(function(eEvent) {
 			eEvent.stopImmediatePropagation();
@@ -16707,13 +16820,13 @@ var GFormTechnicalAttributeEditor = GCore.ExtendClass(GFormField, function() {
 			return false;
 		}));
 		if ((oAttribute.id).substr(0, 4) == 'new-') {
-			jAttribute.append('<span class="' + gThis._GetClass('Name') + '">' + oAttribute.name[GCore.iActiveLanguage] + '</span>').append(jDelete);	
+			jAttribute.append('<span class="' + gThis._GetClass('Name') + '">' + oAttribute.name[GCore.iActiveLanguage] + '</span>').append(jDelete);
 		}else{
-			jAttribute.append('<span class="' + gThis._GetClass('Name') + '">' + oAttribute.name[GCore.iActiveLanguage] + '</span>').append(jDeleteFromBase).append(jRename);	
+			jAttribute.append('<span class="' + gThis._GetClass('Name') + '">' + oAttribute.name[GCore.iActiveLanguage] + '</span>').append(jDeleteFromBase).append(jRename);
 		}
 		return jAttribute;
 	};
-	
+
 	gThis.EditAttribute = function(sAttribute) {
 		if (gThis.m_oAttributes[sAttribute] == undefined) {
 			return false;
@@ -16724,7 +16837,7 @@ var GFormTechnicalAttributeEditor = GCore.ExtendClass(GFormField, function() {
 		});
 		gThis.Update();
 	};
-	
+
 	gThis.RemoveValue = function(sAttribute, sValue) {
 		if (gThis.m_oAttributes[sAttribute] == undefined) {
 			return false;
@@ -16737,7 +16850,7 @@ var GFormTechnicalAttributeEditor = GCore.ExtendClass(GFormField, function() {
 		}
 		gThis.Update();
 	};
-	
+
 	gThis.RemoveAttribute = function(sAttribute) {
 		if (gThis.m_oAttributes[sAttribute] == undefined) {
 			return false;
@@ -16756,7 +16869,7 @@ var GFormTechnicalAttributeEditor = GCore.ExtendClass(GFormField, function() {
 		}
 		gThis.Update();
 	};
-	
+
 	gThis._WriteValueAdder = function() {
 		var jValue = $('<li class="' + gThis._GetClass('ValueRepetition') + '"/>');
 		var jInput = $('<input type="text"/>');
@@ -16768,7 +16881,7 @@ var GFormTechnicalAttributeEditor = GCore.ExtendClass(GFormField, function() {
 		jValue.append($('<div class="field-text"/>').append($('<span class="field"/>').append(jInput)).append(jAdd));
 		return jValue;
 	};
-	
+
 	gThis._WriteAttributeAdder = function() {
 		var jAttribute = $('<li class="' + gThis._GetClass('AttributeRepetition') + '"/>');
 		var jInput = $('<input type="text"/>');
@@ -16780,7 +16893,7 @@ var GFormTechnicalAttributeEditor = GCore.ExtendClass(GFormField, function() {
 		jAttribute.append($('<div class="field-text"/>').append($('<span class="field"/>').append(jInput)).append(jAdd));
 		return jAttribute;
 	};
-	
+
 	gThis._WriteValues = function() {
 		gThis.m_jValues.empty();
 		if (gThis.m_oAttributes[gThis.m_sActiveAttribute] == undefined) {
@@ -16794,7 +16907,7 @@ var GFormTechnicalAttributeEditor = GCore.ExtendClass(GFormField, function() {
 		}
 		gThis.m_jValues.append(jValueAdder);
 	};
-	
+
 	gThis._WriteAttributes = function() {
 		gThis.m_jAttributes.empty();
 		var jAttributeAdder = gThis._WriteAttributeAdder();
@@ -16803,7 +16916,7 @@ var GFormTechnicalAttributeEditor = GCore.ExtendClass(GFormField, function() {
 		}
 		gThis.m_jAttributes.append(jAttributeAdder);
 	};
-	
+
 	gThis.Update = function() {
 		gThis._WriteAttributes();
 		gThis._WriteValues();
@@ -16823,7 +16936,7 @@ var GFormTechnicalAttributeEditor = GCore.ExtendClass(GFormField, function() {
 			}
 		}
 	};
-	
+
 	gThis._InitializeEditorEvents = function() {
 		gThis.m_jAttributes.find('input').keydown(GEventHandler(function(eEvent) {
 			if (eEvent.keyCode == 13) {
@@ -16833,7 +16946,7 @@ var GFormTechnicalAttributeEditor = GCore.ExtendClass(GFormField, function() {
 				gThis.m_jAttributes.find('input').focus();
 			}
 		}));
-		
+
 		gThis.m_jValues.find('input').keydown(GEventHandler(function(eEvent) {
 			if (eEvent.keyCode == 13) {
 				eEvent.preventDefault();
@@ -16843,7 +16956,7 @@ var GFormTechnicalAttributeEditor = GCore.ExtendClass(GFormField, function() {
 			}
 		}));
 	};
-	
+
 	gThis._OnValueAdd = function(jInput) {
 		if (jInput.val() == '') {
 			return false;
@@ -16862,7 +16975,7 @@ var GFormTechnicalAttributeEditor = GCore.ExtendClass(GFormField, function() {
 		gThis.Update();
 		return true;
 	};
-	
+
 	gThis._OnAttributeAdd = function(jInput) {
 		if (jInput.val() == '') {
 			return false;
@@ -16881,7 +16994,7 @@ var GFormTechnicalAttributeEditor = GCore.ExtendClass(GFormField, function() {
 		gThis.Update();
 		return true;
 	};
-	
+
 	gThis._PrepareNode = function() {
 		gThis.m_jNode = $('<div/>').addClass(gThis._GetClass('Field'));
 		gThis.m_jField = $('<div/>');
@@ -16906,12 +17019,12 @@ var GFormTechnicalAttributeEditor = GCore.ExtendClass(GFormField, function() {
 			}
 		}
 	};
-	
+
 	gThis.Populate = function(mValue) {
 		gThis.m_aSelectedAttributes = mValue;
 		gThis.Update();
 	};
-	
+
 	gThis.Reset = function() {
 		gThis.m_oAttributes = {};
 		for (var i in gThis.m_oOptions.aoAttributes) {
@@ -16920,22 +17033,22 @@ var GFormTechnicalAttributeEditor = GCore.ExtendClass(GFormField, function() {
 		gThis.m_sActiveAttribute = 0;
 		gThis.Update();
 	};
-	
+
 }, oDefaults);
 /*
 * CONDITIONS
 */
 
 var GFormCondition = function(sCondition, mArgument) {
-	
+
 	var gThis = this;
-	
+
 	gThis.m_sType = sCondition;
 	gThis.m_mArgument = mArgument;
-	
+
 	gThis.Evaluate = function(mValue) {
 		switch(gThis.m_sType) {
-			
+
 			// EQUALS
 			case GFormCondition.EQUALS:
 				if (gThis.m_mArgument instanceof GFormCondition) {
@@ -16948,7 +17061,7 @@ var GFormCondition = function(sCondition, mArgument) {
 					return mValue == gThis.m_mArgument;
 				}
 				break;
-			
+
 			// GE
 			case GFormCondition.GE:
 				if (gThis.m_mArgument instanceof GFormCondition) {
@@ -16958,7 +17071,7 @@ var GFormCondition = function(sCondition, mArgument) {
 					return mValue >= gThis.m_mArgument;
 				}
 				break;
-			
+
 			// LE
 			case GFormCondition.LE:
 				if (gThis.m_mArgument instanceof GFormCondition) {
@@ -16968,7 +17081,7 @@ var GFormCondition = function(sCondition, mArgument) {
 					return mValue <= gThis.m_mArgument;
 				}
 				break;
-			
+
 			// NOT
 			case GFormCondition.NOT:
 				if (gThis.m_mArgument instanceof GFormCondition) {
@@ -16978,7 +17091,7 @@ var GFormCondition = function(sCondition, mArgument) {
 					return false;
 				}
 				break;
-			
+
 			// AND
 			case GFormCondition.AND:
 				if (gThis.m_mArgument instanceof GFormCondition) {
@@ -16996,7 +17109,7 @@ var GFormCondition = function(sCondition, mArgument) {
 					return false;
 				}
 				break;
-			
+
 			// OR
 			case GFormCondition.OR:
 				if (gThis.m_mArgument instanceof GFormCondition) {
@@ -17017,11 +17130,11 @@ var GFormCondition = function(sCondition, mArgument) {
 					return false;
 				}
 				break;
-			
+
 		};
 		return true;
 	};
-	
+
 };
 
 GFormCondition.EQUALS = '=';
@@ -17047,24 +17160,24 @@ var oDefaults = {
 };
 
 var GFormHidden = GCore.ExtendClass(GFormField, function() {
-	
+
 	var gThis = this;
-	
+
 	gThis._PrepareNode = function() {
 		gThis.m_jNode = $('<div/>').addClass(gThis._GetClass('Field'));
 		gThis.m_jNode.append(gThis._AddField());
 	};
-	
+
 	gThis.Validate = function(bNoRequests, sRepetition) {
 		return true;
 	};
-	
+
 	gThis._AddField = function(sId) {
 		var jField = $('<input type="' + gThis.m_oOptions.sFieldType + '" name="' + gThis.GetName(sId) + '" id="' + gThis.GetId(sId) + '"/>');
 		gThis.m_jField = jField;
 		return jField;
 	};
-	
+
 }, oDefaults);
 /*
 * ORDER EDITOR
@@ -17099,11 +17212,11 @@ var oDefaults = {
 };
 
 var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
-	
+
 	var gThis = this;
-	
+
 	gThis.m_bShown = false;
-	
+
 	gThis.m_fLoadProducts;
 	gThis.m_fProcessProduct;
 	gThis.m_jDatagrid;
@@ -17113,11 +17226,11 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 	gThis.m_gSelectedDatagrid;
 	gThis.m_gDataProvider;
 	gThis.m_bFirstLoad = true;
-	
+
 	gThis.m_oRequest = {};
-	
+
 	gThis.m_iCounter = 0;
-	
+
 	gThis.GetValue = function(sRepetition) {
 		if (gThis.m_jField == undefined) {
 			return '';
@@ -17137,7 +17250,7 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 		}
 		return aValues;
 	};
-	
+
 	gThis.SetValue = function(mValue, sRepetition) {
 		if (gThis.m_jField == undefined) {
 			return;
@@ -17155,7 +17268,7 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 			gThis.m_jField.append('<input type="hidden" name="' + gThis.GetName() + '[' + mValue[i]['id'] + '][variant]" value="' + mValue[i]['variant'] + '"/>');
 		}
 	};
-	
+
 	gThis._OnSelect = function(gDg, sId) {
 		if (gThis.m_bRepeatable) {
 			var oSelectedRow = GCore.Duplicate(gDg.GetRow(sId));
@@ -17164,7 +17277,7 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 			gThis.m_gSelectedDatagrid.LoadData();
 		}
 	};
-	
+
 	gThis._AddRow = function(oSelectedRow) {
 		GAlert.DestroyAll();
 		GMessage('Dodano wybrany produkt do zamówienia.');
@@ -17177,10 +17290,10 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 		gThis.m_gDataProvider.AddRow(oSelectedRow);
 		return oSelectedRow;
 	};
-	
+
 	gThis._OnDeselect = function(gDg, sId) {
 	};
-	
+
 	gThis._OnChange = function(eEvent) {
 		if (gThis.m_bRepeatable) {
 			gThis.m_jField.empty();
@@ -17193,7 +17306,7 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 		}
 		gThis.SetValue(asIds);
 	};
-	
+
 	gThis._PrepareNode = function() {
 		gThis.m_oOptions.oParsedFilterData = {};
 		for (var i in gThis.m_oOptions.oFilterData) {
@@ -17239,11 +17352,11 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 		gThis.m_jTrigger.append(jA);
 		gThis.m_jNode.append(gThis.m_jTrigger);
 	};
-	
+
 	gThis.OnReset = function() {
 		gThis.m_bFirstLoad = true;
 	};
-	
+
 	gThis.Populate = function(mValue) {
 		if (!gThis.m_gDatagrid) {
 			return;
@@ -17253,7 +17366,7 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 		gThis.SetValue(mValue);
 		gThis.m_gSelectedDatagrid.LoadData();
 	};
-	
+
 	gThis.OnShow = function() {
 		if (!gThis.m_bShown) {
 			gThis._InitDatagrid();
@@ -17267,11 +17380,11 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 			gThis.m_bShown = true;
 		}
 	};
-	
+
 	gThis._ProcessProduct = function(oProduct) {
 		return oProduct;
 	};
-	
+
 	gThis._ProcessSelectedProduct = function(oProduct) {
 		oProduct = gThis.m_fProcessProduct(oProduct);
 		if (oProduct.thumb != '') {
@@ -17281,9 +17394,9 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 		}
 		return oProduct;
 	};
-	
+
 	gThis._InitColumns = function() {
-		
+
 		var column_id = new GF_Datagrid_Column({
 			id: 'idproduct',
 			caption: GForm.Language.product_select_id,
@@ -17295,7 +17408,7 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 				type: GF_Datagrid.FILTER_BETWEEN
 			}
 		});
-		
+
 		var column_name = new GF_Datagrid_Column({
 			id: 'name',
 			caption: GForm.Language.product_select_name,
@@ -17307,7 +17420,7 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 				type: GF_Datagrid.FILTER_INPUT
 			}
 		});
-		
+
 		var column_price = new GF_Datagrid_Column({
 			id: 'sellprice',
 			caption: GForm.Language.product_select_price,
@@ -17318,7 +17431,7 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 				type: GF_Datagrid.FILTER_BETWEEN
 			}
 		});
-		
+
 		var column_weight = new GF_Datagrid_Column({
 			id: 'weight',
 			caption: 'Waga',
@@ -17329,7 +17442,7 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 				type: GF_Datagrid.FILTER_BETWEEN
 			}
 		});
-		
+
 		var column_producer = new GF_Datagrid_Column({
 			id: 'producer',
 			caption: GForm.Language.product_select_producer,
@@ -17341,7 +17454,7 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 				options: gThis.m_oOptions.oParsedFilterData['producer'],
 			}
 		});
-		
+
 		var column_category = new GF_Datagrid_Column({
 			id: 'categoriesname',
 			caption: GForm.Language.product_select_categories,
@@ -17356,7 +17469,7 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 				load_children: gThis.m_oOptions.fLoadCategoryChildren
 			}
 		});
-		
+
 		return [
 			column_id,
 			column_name,
@@ -17365,11 +17478,11 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 			column_price,
 			column_weight,
 		];
-		
+
 	};
-	
+
 	gThis._InitAdvancedColumns = function() {
-		
+
 		var column_id = new GF_Datagrid_Column({
 			id: 'id',
 			caption: GForm.Language.product_select_id,
@@ -17378,7 +17491,7 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 				visible: false
 			}
 		});
-		
+
 		var column_idproduct = new GF_Datagrid_Column({
 			id: 'idproduct',
 			caption: GForm.Language.product_select_product_id,
@@ -17387,7 +17500,7 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 				visible: false
 			}
 		});
-		
+
 		var column_name = new GF_Datagrid_Column({
 			id: 'name',
 			caption: GForm.Language.product_select_name,
@@ -17395,7 +17508,7 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 				align: GF_Datagrid.ALIGN_LEFT
 			}
 		});
-		
+
 		var column_barcode = new GF_Datagrid_Column({
 			id: 'barcode',
 			caption: GForm.Language.product_select_barcode,
@@ -17404,7 +17517,7 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 				visible: false
 			}
 		});
-		
+
 		var column_variant = new GF_Datagrid_Column({
 			id: 'variant',
 			caption: GForm.Language.product_select_variant,
@@ -17413,7 +17526,7 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 				width: 140
 			}
 		});
-		
+
 		var column_price = new GF_Datagrid_Column({
 			id: 'sellprice',
 			caption: GForm.Language.product_select_price,
@@ -17423,7 +17536,7 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 				align: GF_Datagrid.ALIGN_RIGHT
 			}
 		});
-		
+
 		var column_price_gross = new GF_Datagrid_Column({
 			id: 'sellprice_gross',
 			caption: GForm.Language.product_select_price_gross,
@@ -17432,7 +17545,7 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 				align: GF_Datagrid.ALIGN_CENTER
 			}
 		});
-		
+
 		var column_weight = new GF_Datagrid_Column({
 			id: 'weight',
 			caption: 'Waga',
@@ -17441,7 +17554,7 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 				align: GF_Datagrid.ALIGN_CENTER
 			}
 		});
-		
+
 		var column_weight_total = new GF_Datagrid_Column({
 			id: 'weight_total',
 			caption: 'Waga w sumie',
@@ -17451,7 +17564,7 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 				visible: false
 			}
 		});
-		
+
 		var column_quantity = new GF_Datagrid_Column({
 			id: 'quantity',
 			caption: GForm.Language.product_select_quantity,
@@ -17460,7 +17573,7 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 			width: 50
 		}
 		});
-		
+
 		var column_stock = new GF_Datagrid_Column({
 			id: 'stock',
 			caption: GForm.Language.product_variants_editor_stock,
@@ -17468,7 +17581,7 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 				width: 80
 			}
 		});
-		
+
 		var column_net_subsum = new GF_Datagrid_Column({
 			id: 'net_subsum',
 			caption: GForm.Language.product_select_net_subsum,
@@ -17477,7 +17590,7 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 				align: GF_Datagrid.ALIGN_CENTER
 			}
 		});
-		
+
 		var column_vat = new GF_Datagrid_Column({
 			id: 'vat',
 			caption: GForm.Language.product_select_vat,
@@ -17486,7 +17599,7 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 				align: GF_Datagrid.ALIGN_CENTER
 			}
 		});
-		
+
 		var column_vat_value = new GF_Datagrid_Column({
 			id: 'vat_value',
 			caption: GForm.Language.product_select_vat_value,
@@ -17495,7 +17608,7 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 				align: GF_Datagrid.ALIGN_CENTER
 			}
 		});
-		
+
 		var column_subsum = new GF_Datagrid_Column({
 			id: 'subsum',
 			caption: GForm.Language.product_select_subsum,
@@ -17504,7 +17617,7 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 				align: GF_Datagrid.ALIGN_CENTER
 			}
 		});
-		
+
 		var column_variant_options = new GF_Datagrid_Column({
 			id: 'variant_options',
 			caption: 'Warianty',
@@ -17513,7 +17626,7 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 				visible: false
 			}
 		});
-		
+
 		return [
 			column_id,
 			column_idproduct,
@@ -17532,15 +17645,15 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 			column_subsum,
 			column_variant_options
 		];
-		
+
 	};
-	
+
 	gThis._InitDatagrid = function() {
-		
+
 		gThis.m_fProcessProduct = gThis._ProcessProduct;
 		gThis.m_fLoadProducts = gThis.m_oOptions.fLoadProducts;
 		var aoColumns = gThis._InitColumns();
-		
+
     var oOptions = {
 			id: gThis.GetId(),
 			appearance: {
@@ -17561,11 +17674,11 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 			},
 			columns: aoColumns
     };
-    
+
     gThis.m_gDatagrid = new GF_Datagrid(gThis.m_jDatagrid, oOptions);
-		
+
 	};
-	
+
 	gThis._Deselect = function(iDg, mId) {
 		if (!(mId instanceof Array)) {
 			mId = [mId];
@@ -17576,7 +17689,7 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 		gThis.m_gSelectedDatagrid.ClearSelection();
 		gThis.m_gSelectedDatagrid.LoadData();
 	};
-	
+
 	gThis._CalculateRow = function(oRow) {
 		oRow.quantity = isNaN(parseFloat(oRow.quantity)) ? 0 : parseFloat(oRow.quantity);
 		oRow.sellprice = oRow.sellprice.replace(/,/, '.');
@@ -17596,7 +17709,7 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 		oRow.vat_value = oRow.vat_value.toFixed(2);
 		return oRow;
 	};
-	
+
 	gThis._CalculateTotal = function(aoRows) {
 		var net_subsum = 0;
 		var vat_value = 0;
@@ -17616,7 +17729,7 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 			weight: weight.toFixed(2),
 		};
 	};
-	
+
 	gThis._OnRowChange = GEventHandler(function(eEvent) {
 		if ((eEvent.modified_row.variant != eEvent.previous_row.variant) && (eEvent.modified_row.variant != '')) {
 			eval('var aoVariants = ' + eEvent.modified_row.variant__options + ';');
@@ -17631,9 +17744,9 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 			}
 		}
 	});
-	
+
 	gThis._InitSelectedDatagrid = function() {
-		
+
 		gThis.m_gDataProvider = new GF_Datagrid_Data_Provider({
 			key: 'id',
 			preProcess: gThis._CalculateRow,
@@ -17650,15 +17763,15 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 				row_change: gThis._OnRowChange
 			}
 		}, []);
-		
+
 		var aoColumns = gThis._InitAdvancedColumns();
-		
+
 		var gActionDeselect = new GF_Action({
 			img: gThis._GetImage('DeselectIcon'),
 			caption: GForm.Language.product_select_deselect,
 			action: gThis._Deselect
 		});
-		
+
     var oOptions = {
 			id: gThis.GetId() + '_selected',
 			appearance: {
@@ -17700,11 +17813,11 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 				gActionDeselect
 			]
     };
-		
+
 		gThis.m_gSelectedDatagrid = new GF_Datagrid(gThis.m_jSelectedDatagrid, oOptions);
-		
+
 	};
-	
+
 	gThis.AddProducts = function(mIds) {
 		if (!(mIds instanceof Array)) {
 			if (mIds == undefined) {
@@ -17725,7 +17838,7 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 			gThis.m_gSelectedDatagrid.LoadData();
 		}));
 	};
-	
+
 	gThis._LoadSelected = function(oRequest, sResponseHandler) {
 		gThis.m_oRequest = oRequest;
 		var asDefaults = [];
@@ -17752,7 +17865,7 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 			gThis.m_gSelectedDatagrid.LoadData();
 		}));
 	};
-	
+
 }, oDefaults);
 
 /*
@@ -19018,21 +19131,21 @@ var oDefaults = {
 };
 
 var GFormRepetitionLanguage = GCore.ExtendClass(GFormContainer, function(options) {
-	
+
 	var gThis = this;
 	gThis._PrepareNode = function() {
 		gThis.m_jNode = $('<div class="' + gThis._GetClass('Repetition') + '"/>');
 		var jFlag = $('<a href="#" class="flag-repetition" tabindex="-1"/>');
 		$.each(options.aoLanguages,function(l, language){
 			if(language.sValue == options.sName) {
-				jFlag.append('<img class="locale" data-locale="'+ options.sName +'" src="' + GCore.DESIGN_PATH+"images/languages/"+language.sFlag + '" alt="' + language.sLabel + '" title="' + language.sLabel + '"/>');	
+				jFlag.append('<img class="locale" data-locale="'+ options.sName +'" src="' + GCore.DESIGN_PATH+"images/languages/"+language.sFlag + '" alt="' + language.sLabel + '" title="' + language.sLabel + '"/>');
 			}
-		}); 
-		
+		});
+
 		gThis.m_jNode.append(jFlag);
 		gThis.m_jNode.append(gThis.RenderChildren());
 	};
-	
+
 }, oDefaults);
 /*
 * REPETITION
@@ -19053,9 +19166,9 @@ var oDefaults = {
 };
 
 var GFormRepetition = GCore.ExtendClass(GFormContainer, function() {
-	
+
 	var gThis = this;
-	
+
 	gThis._PrepareNode = function() {
 		gThis.m_jNode = $('<div class="' + gThis._GetClass('Repetition') + '"/>');
 		var jDelete = $('<a href="#" class="' + gThis._GetClass('DeleteButton') + '"/>');
@@ -19063,7 +19176,7 @@ var GFormRepetition = GCore.ExtendClass(GFormContainer, function() {
 		gThis.m_jNode.append(jDelete);
 		gThis.m_jNode.append(gThis.RenderChildren());
 	};
-	
+
 }, oDefaults);
 /*
 * RIGHTS TABLE
@@ -19091,11 +19204,11 @@ var oDefaults = {
 };
 
 var GFormRightsTable = GCore.ExtendClass(GFormField, function() {
-	
+
 	var gThis = this;
-	
+
 	gThis.m_bDontCheck = false;
-	
+
 	gThis._PrepareNode = function() {
 		gThis.m_jNode = $('<div/>').addClass(gThis._GetClass('Field'));
 		var jLabel = $('<label for="' + gThis.GetId() + '"/>');
@@ -19106,7 +19219,7 @@ var GFormRightsTable = GCore.ExtendClass(GFormField, function() {
 		gThis.m_jNode.append(jLabel);
 		gThis.m_jNode.append($('<span class="' + gThis._GetClass('FieldRepetition') + '"/>').append(gThis._PrepareTable()));
 	};
-	
+
 	gThis._PrepareTable = function() {
 		var jTr;
 		var i;
@@ -19141,7 +19254,7 @@ var GFormRightsTable = GCore.ExtendClass(GFormField, function() {
 		jTable.append(jBody);
 		return jTable;
 	};
-	
+
 	gThis._Initialize = function() {
 		gThis.m_jNode.find('tbody td, tbody th').hover(function() {
 			$(this).closest('tr').addClass('active');
@@ -19183,12 +19296,12 @@ var GFormRightsTable = GCore.ExtendClass(GFormField, function() {
 		});
 		gThis.m_jNode.find('input').not('.all input').click(gThis.OnInputChange).change(gThis.OnInputChange);
 	};
-	
+
 	gThis.OnInputChange = function() {
 		gThis._CheckHorizontal.apply(this);
 		gThis._CheckVertical.apply(this);
 	};
-	
+
 	gThis._CheckHorizontal = function() {
 		if (gThis.m_bDontCheck) {
 			return;
@@ -19200,7 +19313,7 @@ var GFormRightsTable = GCore.ExtendClass(GFormField, function() {
 			$(this).closest('tr').find('.all').checkCheckboxes();
 		}
 	};
-	
+
 	gThis._CheckVertical = function() {
 		if (gThis.m_bDontCheck) {
 			return;
@@ -19221,7 +19334,7 @@ var GFormRightsTable = GCore.ExtendClass(GFormField, function() {
 			$(this).closest('table').find('tbody tr.all td:eq(' + iIndex + ')').checkCheckboxes();
 		}
 	};
-	
+
 	gThis.Populate = function(mData) {
 		gThis.m_bDontCheck = true;
 		for (var iController in mData) {
@@ -19234,14 +19347,14 @@ var GFormRightsTable = GCore.ExtendClass(GFormField, function() {
 		gThis.m_bDontCheck = false;
 		gThis.OnShow();
 	};
-	
+
 	gThis.OnReset = function() {
 		gThis.m_bDontCheck = true;
 		gThis.m_jNode.unCheckCheckboxes();
 		gThis.m_bDontCheck = false;
 		gThis.OnShow();
 	};
-	
+
 	gThis.OnShow = function() {
 		gThis.m_jNode.find('tbody tr:not(.all)').each(function() {
 			$(this).find('td:eq(0) input:checked').each(gThis._CheckHorizontal);
@@ -19250,7 +19363,7 @@ var GFormRightsTable = GCore.ExtendClass(GFormField, function() {
 			$(this).find('td:not(.all) input:checked').each(gThis._CheckVertical);
 		});
 	};
-	
+
 }, oDefaults);
 
 GFormDate.Language = {

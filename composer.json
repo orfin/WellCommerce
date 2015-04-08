@@ -25,6 +25,20 @@
             "Context": "features/"
         }
     },
+    "repositories": [
+      {
+        "packagist": false
+      },
+      {
+        "type": "composer",
+        "url": "http://packagist.org",
+        "options": {
+          "ssl": {
+            "verify_peer": "false"
+          }
+        }
+      }
+    ],
     "require": {
         "php": ">=5.4",
         "symfony/symfony": "2.6.*",
@@ -57,8 +71,10 @@
         "wellcommerce/datagrid-bundle": "0.10.*@dev",
         "wellcommerce/form-bundle": "0.10.*@dev",
         "wellcommerce/composer-plugin": "0.1.*@dev",
-        "react/socket-client": "0.4.*",
-        "knplabs/packagist-api": "1.*@dev"
+        "devristo/phpws": "dev-master",
+        "react/child-process": "0.5.*@dev",
+        "knplabs/packagist-api": "1.*@dev",
+        "wellcommerce/search-bundle": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",

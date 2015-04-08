@@ -22,6 +22,11 @@
         <option key="expose">true</option>
     </route>
 
+    <route id="admin.package.install" path="/install/{id},{operation}">
+        <default key="_controller">package.controller.admin:installAction</default>
+        <option key="expose">true</option>
+    </route>
+
     <route id="admin.package.sync" path="/sync">
         <default key="_controller">package.controller.admin:syncAction</default>
         <option key="expose">true</option>
@@ -29,6 +34,11 @@
 
     <route id="admin.package.delete" path="/delete/{id}">
         <default key="_controller">package.controller.admin:deleteAction</default>
+        <option key="expose">true</option>
+    </route>
+
+    <route id="admin.package.console" path="/console/{id},{port},{operation}">
+        <default key="_controller">package.controller.admin:consoleAction</default>
         <option key="expose">true</option>
     </route>
 </routes>

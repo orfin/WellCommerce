@@ -1,11 +1,30 @@
 {% extends 'WellCommerceAdminBundle:Admin:layout.html.twig' %}
+{% trans_default_domain "wellcommerce" %}
 {% block content %}
-    <h2>{% trans %}package.index.heading{% endtrans %}</h2>
+    <h2>{% trans %}package.heading.index{% endtrans %}</h2>
 
     <ul class="possibilities">
         <li><a href="{{ path('admin.package.sync') }}" class="button"
-               title="{% trans %}package.sync.button{% endtrans %}"><span>{% trans %}package.sync.button{% endtrans %}</span></a></li>
+               title="{% trans %}package.sync.button{% endtrans %}"><span>{% trans %}package.button.sync{% endtrans %}</span></a></li>
     </ul>
+
+    <script>
+        var installPackage = function (dg, id) {
+            return window.location.href = Routing.generate('admin.package.install', {
+                id: id,
+                operation: 'install'
+            });
+        };
+
+        var action_installPackage = new GF_Action({
+            caption: '{% trans %}package.install.label{% endtrans %}',
+            action: installPackage,
+            img: '{{ asset('bundles/wellcommerceadmin/images/icons/datagrid/add.png') }}',
+            condition: function (oR) {
+                return oR['localVersion'] != '';
+            }
+        });
+    </script>
 
     {{ datagrid_renderer(datagrid) }}
 

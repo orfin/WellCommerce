@@ -9141,3 +9141,25 @@ span.field+span.required,span.field+*+span.required {
 		display: none
 	}
 }
+
+.field-console-output .field-console-output {
+    border: 0px;
+    width: 673px;
+    height: 400px;
+    background: #3d3d3d;
+    margin-top: 20px;
+}
+
+.field-console-output .field-console-output {
+    padding: 5px;
+    color: #D7D7D7;
+    font: 11px Consolas, 'Courier New';
+    line-height: 1.6em;
+    white-space: pre-line;
+    overflow: auto;
+}
+
+.field-console-output .field-console-output strong {
+    font-weight: 400!important;
+    color: #00a0aa;
+}

@@ -21,5 +21,9 @@
         <service id="doctrine_helper" class="WellCommerce\Bundle\CoreBundle\Helper\Doctrine\DoctrineHelper">
             <argument type="service" id="doctrine"/>
         </service>
+
+        <service id="environment_helper" class="WellCommerce\Bundle\CoreBundle\Helper\Environment\EnvironmentHelper">
+            <argument type="service" id="kernel"/>
+        </service>
     </services>
 </container>

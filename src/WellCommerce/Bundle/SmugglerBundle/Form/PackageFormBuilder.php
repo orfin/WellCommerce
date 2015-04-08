@@ -13,7 +13,7 @@ namespace WellCommerce\Bundle\SmugglerBundle\Form;
 
 use WellCommerce\Bundle\FormBundle\Builder\AbstractFormBuilder;
 use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
-use WellCommerce\Bundle\FormBundle\DataTransformer\TranslationTransformer;
+use WellCommerce\Bundle\FormBundle\Conditions\Equals;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
@@ -26,26 +26,108 @@ class PackageFormBuilder extends AbstractFormBuilder implements FormBuilderInter
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormInterface $unitForm)
+    public function buildForm(FormInterface $packageForm)
     {
-        $unitRequiredData = $unitForm->addChild($this->getElement('nested_fieldset', [
-            'name'  => 'required_data',
-            'label' => $this->trans('form.required_data.label')
+        $router    = $this->getRouter();
+        $helper    = $this->get('environment_helper');
+        $package   = $this->getRequest()->get('id');
+        $operation = $this->getRequest()->get('operation');
+        $port      = $helper->getFreePort();
+        $versions  = $this->getPackageVersions($package);
+
+        $packageData = $packageForm->addChild($this->getElement('nested_fieldset', [
+            'name'  => 'package_data',
+            'label' => $this->trans('package.fieldset.information')
         ]));
 
-        $unitTranslationData = $unitRequiredData->addChild($this->getElement('language_fieldset', [
-            'name'        => 'translations',
-            'label'       => $this->trans('form.translations.label'),
-            'transformer' => new TranslationTransformer($this->get('product.repository'))
+        $chooseVersion = $packageData->addChild($this->getElement('select', [
+            'name'    => 'version',
+            'label'   => $this->trans('package.label.remote_version'),
+            'options' => $this->makeVersionsSelect($versions),
         ]));
 
-        $unitTranslationData->addChild($this->getElement('text_field', [
-            'name'  => 'name',
-            'label' => $this->trans('unit.name.label'),
+        $chooseVersion->setValue(0);
+
+        foreach ($versions as $version) {
+
+            $static[$version['version']] = $packageData->addChild($this->getElement('nested_fieldset', [
+                'name'         => $version['version'],
+                'label'        => $version['version'],
+                'dependencies' => [
+                    $this->getDependency('show', [
+                        'form'      => $packageForm,
+                        'field'     => $chooseVersion,
+                        'condition' => new Equals($version['version'])
+                    ])
+                ]
+            ]));
+
+            $license = implode('<br />', $version['license']);
+
+            $static[$version['version']]->addChild($this->getElement('static_text', [
+                'text' => "
+                    <table>
+                        <tr><td><strong>Release date:</strong></td><td>{$version['date']}</td></tr>
+                        <tr><td><strong>Description:</strong></td><td>{$version['description']}</td></tr>
+                        <tr><td><strong>License:</strong></td><td>{$license}</td></tr>
+                    </table>
+                "
+            ]));
+        }
+
+        $packageRequiredData = $packageForm->addChild($this->getElement('nested_fieldset', [
+            'name'  => 'progress_data',
+            'label' => $this->trans('package.fieldset.progress')
         ]));
 
-        $unitForm->addFilter($this->getFilter('no_code'));
-        $unitForm->addFilter($this->getFilter('trim'));
-        $unitForm->addFilter($this->getFilter('secure'));
+        $packageRequiredData->addChild($this->getElement('console_output', [
+            'name'        => 'console_output',
+            'label'       => $this->trans('package.label.console_output'),
+            'port'        => $port,
+            'console_url' => $router->generate(
+                'admin.package.console', [
+                    'id'        => $package,
+                    'operation' => $operation,
+                    'port'      => $port
+                ]
+            )
+        ]));
+    }
+
+    protected function getPackageVersions($id)
+    {
+        $package  = $this->get('package.repository')->findOneById($id);
+        $versions = $this->get('package.helper')->getPackage($package->getFullName())->getVersions();
+        $result   = [];
+
+        /**
+         * @var $version \Packagist\Api\Result\Package\Version
+         */
+        foreach ($versions as $version) {
+            $date                    = new \DateTime($version->getTime());
+            $packageVersion          = $version->getVersion();
+            $result[$packageVersion] = [
+                'version'     => $packageVersion,
+                'date'        => $date->format('Y-m-d H:i:s'),
+                'authors'     => $version->getAuthors(),
+                'description' => $version->getDescription(),
+                'homepage'    => $version->getHomepage(),
+                'license'     => $version->getLicense(),
+            ];
+        }
+
+        return $result;
+    }
+
+    protected function makeVersionsSelect(array $versions)
+    {
+        $options = [];
+        $options[0] = $this->trans('package.label.choose_version');
+        foreach ($versions as $version) {
+            $options[$version['version']] = $version['version'];
+
+        }
+
+        return $options;
     }
 }

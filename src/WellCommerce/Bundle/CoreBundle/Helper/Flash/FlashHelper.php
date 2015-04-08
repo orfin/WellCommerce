@@ -84,7 +84,7 @@ class FlashHelper implements FlashHelperInterface
      */
     private function translate($message, $params)
     {
-        return $this->translator->trans($message, $params, $this->flashesName);
+        return $this->translator->trans($message, $params, 'wellcommerce');
     }
 
     /**
