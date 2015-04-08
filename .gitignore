@@ -2,7 +2,7 @@ web/bundles/
 web/css/
 web/js/
 web/js/compiled/
-app/bootstrap.php.cache
+app/bootstrap.php.cache*
 app/cache/*
 app/cache/dev/*
 app/config/parameters.yml
@@ -17,7 +17,7 @@ app/logs/*
 /application/.idea
 *.idea
 /tests/_output
-app/config/parameters.yml
+app/sessions/*
 app/cache/dev/appDevDebugProjectContainer.php
 app/cache/dev/appDevDebugProjectContainer.xml
 *.project
