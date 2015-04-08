@@ -10976,6 +10976,14 @@ var GFormConsoleOutput = GCore.ExtendClass(GFormFile, function() {
             gThis.m_jConsoleOutput.html(msg.data);
         };
 
+        gThis.oSocket.onopen = function(eEvent) {
+            console.log("Connection open ...");
+        };
+
+        gThis.oSocket.onclose = function(eEvent) {
+            console.log("Connection closed ...");
+        };
+
         gThis.oSocket.onerror = function(error) {
             console.log('<strong>Error connecting WebSocketServer on port: </strong>' + gThis.m_oOptions.iPort);
         }
@@ -10995,7 +11003,14 @@ var GFormConsoleOutput = GCore.ExtendClass(GFormFile, function() {
         gThis.m_bShown = true;
 
         gThis.oAjaxRequest = GF_Ajax_Request(gThis.m_oOptions.sConsoleUrl, {}, function(oResponse){
-            GMessage('Installation completed.');
+            if(oResponse.success != undefined){
+                GMessage('Installation completed.');
+            }
+
+            if(oResponse.error != undefined){
+                GError('Installation failed.', oResponse.error);
+            }
+
             gThis.oSocket.onclose = function () {};
             gThis.oSocket.close();
             gThis.oAjaxRequest.abort();

@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\SmugglerBundle\Command\Package;
 
 use Devristo\Phpws\Server\WebSocketServer;
 use React\ChildProcess\Process;
-use React\EventLoop\Factory;
+use React\EventLoop\LoopInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\HttpKernel\Kernel;
@@ -64,14 +64,13 @@ abstract class AbstractPackageCommand extends ContainerAwareCommand
      *
      * @param $port
      */
-    protected function initializeServer()
+    protected function initializeServer(LoopInterface $loop)
     {
-        $loop   = Factory::create();
         $writer = new Stream("php://output");
         $logger = new Logger();
         $logger->addWriter($writer);
 
-        $this->server = new WebSocketServer("tcp://0.0.0.0:{$this->port}", $loop, $logger);
+        return new WebSocketServer("tcp://0.0.0.0:{$this->port}", $loop, $logger);
     }
 
     /**
@@ -110,7 +109,7 @@ abstract class AbstractPackageCommand extends ContainerAwareCommand
             throw new \InvalidArgumentException(sprintf('Package "%s" not found', $id));
         }
 
-        return $entity->getFullName() . ':dev-master';
+        return $entity->getFullName();
     }
 
     /**
@@ -130,7 +129,7 @@ abstract class AbstractPackageCommand extends ContainerAwareCommand
      */
     protected function broadcastToClients()
     {
-        foreach ($this->getConnectedClients() as $client) {
+        foreach ($this->server->getConnections() as $client) {
             $client->sendString($this->processOutput());
         }
     }

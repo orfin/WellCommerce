@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\SmugglerBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
 
@@ -65,7 +66,11 @@ class PackageController extends AbstractAdminController
         $command   = $helper->getConsoleCommand($arguments);
         $process   = new Process($command, $helper->getCwd());
         $process->setTimeout(720);
-        $process->run();
+        try {
+            $process->mustRun();
+        } catch (ProcessFailedException $e) {
+            return $this->jsonResponse(['error' => nl2br($e->getMessage())]);
+        }
 
         if ($process->getExitCode() === 127) {
             return $this->jsonResponse(['success' => true]);

@@ -47,17 +47,15 @@ class InstallCommand extends AbstractPackageCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->helper = $this->getContainer()->get('environment_helper');
-        $this->port   = $input->getOption('port');
-        $package      = $this->getPackageInformation($input->getOption('package'));
-        $loop         = Factory::create();
-
-        $this->initializeServer();
-
+        $this->helper  = $this->getContainer()->get('environment_helper');
+        $this->port    = $input->getOption('port');
+        $package       = $this->getPackageInformation($input->getOption('package'));
+        $loop          = Factory::create();
         $cwd           = $this->helper->getCwd();
-        $command       = 'php -d display_errors=0 composer.phar require ' . $package . ' -v';
+        $command       = 'php -d display_errors=0 composer.phar require ' . $package . ':dev-master -v';
         $process       = new Process($command, $cwd);
         $this->started = false;
+        $this->server  = $this->initializeServer($loop);
 
         $loop->addPeriodicTimer(1, function (Timer $timer) use ($process, $output) {
 
