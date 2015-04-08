@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\SmugglerBundle\Command\Package;
 
-use Devristo\Phpws\Server\WebSocketServer;
 use React\ChildProcess\Process;
 use React\EventLoop\Factory;
 use React\EventLoop\Timer\Timer;
@@ -20,9 +19,6 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\HttpKernel\Kernel;
-use Zend\Log\Logger;
-use Zend\Log\Writer\Stream;
 
 /**
  * Class InstallCommand
@@ -31,10 +27,14 @@ use Zend\Log\Writer\Stream;
  */
 class InstallCommand extends AbstractPackageCommand
 {
-    protected $started;
+    /**
+     * @var \WellCommerce\Bundle\CoreBundle\Helper\Environment\EnvironmentHelperInterface
+     */
+    protected $helper;
 
-    protected $buffer;
-
+    /**
+     * {@inheritdoc}
+     */
     protected function configure()
     {
         parent::configure();
@@ -42,50 +42,41 @@ class InstallCommand extends AbstractPackageCommand
         $this->setName('wellcommerce:package:install');
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $helper  = $this->getContainer()->get('environment_helper');
-        $port    = $input->getOption('port');
-        $package = $this->getPackageInformation($input->getOption('package'));
-        $loop    = Factory::create();
-        $writer  = new Stream("php://output");
-        $logger  = new Logger();
-        $logger->addWriter($writer);
+        $this->helper = $this->getContainer()->get('environment_helper');
+        $this->port   = $input->getOption('port');
+        $package      = $this->getPackageInformation($input->getOption('package'));
+        $loop         = Factory::create();
 
-        $server        = new WebSocketServer("tcp://0.0.0.0:{$port}", $loop, $logger);
-        $cwd           = $helper->getCwd();
-        $command       = 'php -d display_errors=0 composer.phar require ' . $package . ':dev-master -v';
+        $this->initializeServer();
+
+        $cwd           = $this->helper->getCwd();
+        $command       = 'php -d display_errors=0 composer.phar require ' . $package . ' -v';
         $process       = new Process($command, $cwd);
         $this->started = false;
 
-        $loop->addPeriodicTimer(1, function (Timer $timer) use ($output, $server, $process, $output, $port) {
-            $connections = $server->getConnections();
+        $loop->addPeriodicTimer(1, function (Timer $timer) use ($process, $output) {
 
             if ($this->started && 0 === (int)$process->isRunning()) {
                 exit(127);
             }
 
-            if ($connections->count()) {
+            if ($this->getConnectedClients()->count()) {
 
                 if (!$process->isRunning()) {
                     $process->start($timer->getLoop());
                     $this->started = true;
-                    $version       = Kernel::VERSION;
-                    $this->buffer .= '<strong>Started WebSocketServer on port: </strong>' . $port . PHP_EOL;
-                    $this->buffer .= '<strong>Symfony2 version: </strong>' . $version . PHP_EOL;
-                    $this->buffer .= '<strong>PHP version: </strong>' . phpversion() . PHP_EOL;
-                    $info = $this->processOutput($this->buffer);
-                    foreach ($connections as $client) {
-                        $client->sendString($info);
-                    }
+                    $this->addEnvironmentInfo();
+                    $this->broadcastToClients();
                 }
 
-                $callable = function ($output) use ($connections, $process) {
+                $callable = function ($output) {
                     $this->buffer .= $output;
-                    $info = $this->processOutput($this->buffer);
-                    foreach ($connections as $client) {
-                        $client->sendString($info);
-                    }
+                    $this->broadcastToClients();
                 };
 
                 $process->stdin->on('data', $callable);
@@ -94,8 +85,8 @@ class InstallCommand extends AbstractPackageCommand
             }
         });
 
-        $server->bind();
+        $this->server->bind();
         $loop->run();
-
     }
 }
+

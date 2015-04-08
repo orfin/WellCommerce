@@ -12,8 +12,6 @@
 
 namespace WellCommerce\Bundle\SmugglerBundle\Command\Package;
 
-use Symfony\Component\Console\Input\InputOption;
-
 /**
  * Class RemoveCommand
  *
@@ -29,3 +27,4 @@ class RemoveCommand extends AbstractPackageCommand
         $this->setName('wellcommerce:package:remove');
     }
 }
+

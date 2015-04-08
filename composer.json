@@ -73,8 +73,7 @@
         "wellcommerce/composer-plugin": "0.1.*@dev",
         "devristo/phpws": "dev-master",
         "react/child-process": "0.5.*@dev",
-        "knplabs/packagist-api": "1.*@dev",
-        "wellcommerce/search-bundle": "dev-master"
+        "knplabs/packagist-api": "1.*@dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",

@@ -13,11 +13,11 @@
 namespace WellCommerce\Bundle\SmugglerBundle\Command\Package;
 
 use Devristo\Phpws\Server\WebSocketServer;
-use Packagist\Api\Client;
 use React\ChildProcess\Process;
 use React\EventLoop\Factory;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\HttpKernel\Kernel;
 use Zend\Log\Logger;
 use Zend\Log\Writer\Stream;
 
@@ -29,6 +29,11 @@ use Zend\Log\Writer\Stream;
 abstract class AbstractPackageCommand extends ContainerAwareCommand
 {
     /**
+     * @var bool
+     */
+    protected $started;
+
+    /**
      * @var WebSocketServer
      */
     protected $server;
@@ -37,6 +42,11 @@ abstract class AbstractPackageCommand extends ContainerAwareCommand
      * @var string
      */
     protected $buffer;
+
+    /**
+     * @var int
+     */
+    protected $port;
 
     /**
      * @var Process
@@ -54,38 +64,14 @@ abstract class AbstractPackageCommand extends ContainerAwareCommand
      *
      * @param $port
      */
-    protected function initializeServer($port)
+    protected function initializeServer()
     {
         $loop   = Factory::create();
         $writer = new Stream("php://output");
         $logger = new Logger();
         $logger->addWriter($writer);
 
-        $this->server = new WebSocketServer("tcp://0.0.0.0:{$port}", $loop, $logger);
-    }
-
-    /**
-     * Returns list of connected clients
-     *
-     * @return \Devristo\Phpws\Protocol\WebSocketTransportInterface[]|\SplObjectStorage
-     */
-    protected function getConnectedClients()
-    {
-        return $this->server->getConnections();
-    }
-
-    /**
-     * Processes output
-     *
-     * @param $output
-     *
-     * @return string
-     */
-    protected function processOutput($output)
-    {
-        $lines = explode(PHP_EOL, $output);
-
-        return implode('<br />', array_unique($lines));
+        $this->server = new WebSocketServer("tcp://0.0.0.0:{$this->port}", $loop, $logger);
     }
 
     /**
@@ -124,6 +110,51 @@ abstract class AbstractPackageCommand extends ContainerAwareCommand
             throw new \InvalidArgumentException(sprintf('Package "%s" not found', $id));
         }
 
-        return $entity->getFullName();
+        return $entity->getFullName() . ':dev-master';
     }
+
+    /**
+     * Adds additional environment information to buffer
+     */
+    protected function addEnvironmentInfo()
+    {
+        $version = Kernel::VERSION;
+
+        $this->buffer .= '<strong>Started WebSocketServer on port: </strong>' . $this->port . PHP_EOL;
+        $this->buffer .= '<strong>Symfony2 version: </strong>' . $version . PHP_EOL;
+        $this->buffer .= '<strong>PHP version: </strong>' . phpversion() . PHP_EOL;
+    }
+
+    /**
+     * Sends processed output to all connected clients
+     */
+    protected function broadcastToClients()
+    {
+        foreach ($this->getConnectedClients() as $client) {
+            $client->sendString($this->processOutput());
+        }
+    }
+
+    /**
+     * Returns list of connected clients
+     *
+     * @return \Devristo\Phpws\Protocol\WebSocketTransportInterface[]|\SplObjectStorage
+     */
+    protected function getConnectedClients()
+    {
+        return $this->server->getConnections();
+    }
+
+    /**
+     * Processes output
+     *
+     * @return string
+     */
+    protected function processOutput()
+    {
+        $lines = explode(PHP_EOL, $this->buffer);
+
+        return implode('<br />', array_unique($lines));
+    }
+
 }

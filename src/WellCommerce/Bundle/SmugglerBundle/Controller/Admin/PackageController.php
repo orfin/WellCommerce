@@ -12,16 +12,9 @@
 
 namespace WellCommerce\Bundle\SmugglerBundle\Controller\Admin;
 
-use Symfony\Component\Console\Input\ArgvInput;
-use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Output\BufferedOutput;
-use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
-use Symfony\Component\Process\ProcessBuilder;
 use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
-use WellCommerce\Bundle\SmugglerBundle\Helper\PackageHelperInterface;
 
 /**
  * Class PackageController
@@ -74,7 +67,7 @@ class PackageController extends AbstractAdminController
         $process->setTimeout(720);
         $process->run();
 
-        if($process->getExitCode() === 127){
+        if ($process->getExitCode() === 127) {
             return $this->jsonResponse(['success' => true]);
         }
     }

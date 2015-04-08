@@ -14,7 +14,6 @@
 namespace WellCommerce\Bundle\SmugglerBundle\Controller\Admin;
 
 use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
-use WellCommerce\Bundle\SmugglerBundle\Manager\Admin\PackageManager;
 
 /**
  * Class ChannelController
