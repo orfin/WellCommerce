@@ -52,3 +52,4 @@ after_failure:
 
 notifications:
     email: "travis@wellcommerce.org"
+    slack: wellcommerce:5g1PqYtrlI40NVxaiuFzeG9z
