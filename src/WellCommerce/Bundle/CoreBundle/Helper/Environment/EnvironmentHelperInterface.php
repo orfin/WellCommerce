@@ -34,13 +34,24 @@ interface EnvironmentHelperInterface
     public function getCwd();
 
     /**
-     * Returns fully qualified command
+     * Returns process
      *
      * @param array $arguments
+     * @param int   $timeout
      *
-     * @return string
+     * @return \Symfony\Component\Process\Process
      */
-    public function getConsoleCommand(array $arguments);
+    public function getProcess(array $arguments, $timeout = 360);
+
+    /**
+     * Returns process builder
+     *
+     * @param array $arguments
+     * @param int   $timeout
+     *
+     * @return \Symfony\Component\Process\ProcessBuilder
+     */
+    public function getProcessBuilder(array $arguments, $timeout);
 
     /**
      * Returns free port
@@ -48,4 +59,11 @@ interface EnvironmentHelperInterface
      * @return int
      */
     public function getFreePort();
+
+    /**
+     * Returns composer phar name
+     *
+     * @return string
+     */
+    public function getComposerPhar();
 }

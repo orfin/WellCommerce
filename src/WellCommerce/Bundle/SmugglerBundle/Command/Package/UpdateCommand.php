@@ -12,6 +12,9 @@
 
 namespace WellCommerce\Bundle\SmugglerBundle\Command\Package;
 
+use Symfony\Component\Console\Input\InputInterface;
+use WellCommerce\Bundle\SmugglerBundle\Helper\PackageHelperInterface;
+
 /**
  * Class UpdateCommand
  *
@@ -19,7 +22,14 @@ namespace WellCommerce\Bundle\SmugglerBundle\Command\Package;
  */
 class UpdateCommand extends AbstractPackageCommand
 {
+    /**
+     * @var string
+     */
+    protected $composerOperation = PackageHelperInterface::ACTION_UPDATE;
 
+    /**
+     * {@inheritdoc}
+     */
     protected function configure()
     {
         parent::configure();

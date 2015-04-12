@@ -12,7 +12,10 @@
 
 namespace WellCommerce\Bundle\SmugglerBundle\Manager\Admin;
 
+use ComposerRevisions\Revisions;
+use Doctrine\ORM\EntityNotFoundException;
 use Packagist\Api\Result\Package as RemotePackage;
+use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\AdminBundle\Manager\AbstractAdminManager;
 use WellCommerce\Bundle\SmugglerBundle\Entity\Package;
 use WellCommerce\Bundle\SmugglerBundle\Helper\PackageHelperInterface;
@@ -80,5 +83,76 @@ class PackageManager extends AbstractAdminManager
         $package->setName($name);
         $package->setVendor($vendor);
         $this->getDoctrineHelper()->getEntityManager()->persist($package);
+    }
+
+    /**
+     * Returns console command arguments
+     *
+     * @param Request $request
+     *
+     * @return array
+     */
+    public function getConsoleCommandArguments(Request $request)
+    {
+        $port      = (int)$request->attributes->get('port');
+        $package   = $request->attributes->get('id');
+        $operation = $request->attributes->get('operation');
+
+        return [
+            'app/console',
+            'wellcommerce:package:' . $operation,
+            '--port=' . $port,
+            '--package=' . $package
+        ];
+    }
+
+    /**
+     * Changes package info according to operation and data fetched from PackagistAPI
+     *
+     * @param Request $request
+     *
+     * @throws EntityNotFoundException
+     */
+
+    public function changePackageStatus(Request $request)
+    {
+        /**
+         * @var $package \WellCommerce\Bundle\SmugglerBundle\Entity\Package
+         */
+        $id         = $request->attributes->get('id');
+        $operation  = $request->attributes->get('operation');
+        $em         = $this->getDoctrineHelper()->getEntityManager();
+        $repository = $this->getRepository();
+        $package    = $repository->find($id);
+
+        if (null === $package) {
+            throw new EntityNotFoundException($repository->getMetaData()->getName(), $id);
+        }
+
+        $remotePackage = $this->helper->getPackage($package->getFullName());
+        $remoteVersion = $this->getPackageVersionReference($remotePackage->getVersions()['dev-master']);
+
+        if ($operation === PackageHelperInterface::ACTION_REMOVE) {
+            $localVersion = null;
+        } else {
+            $localVersion = Revisions::$byName[$package->getFullName()];
+        }
+
+        $package->setLocalVersion($localVersion);
+        $package->setRemoteVersion($remoteVersion);
+
+        $em->flush();
+    }
+
+    /**
+     * Returns reference for particular package version
+     *
+     * @param RemotePackage\Version $version
+     *
+     * @return string
+     */
+    protected function getPackageVersionReference(RemotePackage\Version $version)
+    {
+        return $version->getSource()->getReference();
     }
 }

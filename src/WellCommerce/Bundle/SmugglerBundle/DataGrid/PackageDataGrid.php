@@ -19,7 +19,6 @@ use WellCommerce\Bundle\DataGridBundle\Column\Options\Filter;
 use WellCommerce\Bundle\DataGridBundle\Column\Options\Sorting;
 use WellCommerce\Bundle\DataGridBundle\Configuration\EventHandler\ClickRowEventHandler;
 use WellCommerce\Bundle\DataGridBundle\Configuration\EventHandler\CustomRowEventHandler;
-use WellCommerce\Bundle\DataGridBundle\Configuration\EventHandler\DeleteRowEventHandler;
 use WellCommerce\Bundle\DataGridBundle\Configuration\EventHandler\LoadEventHandler;
 use WellCommerce\Bundle\DataGridBundle\DataGridInterface;
 use WellCommerce\Bundle\DataGridBundle\Options\OptionsInterface;
@@ -130,14 +129,21 @@ class PackageDataGrid extends AbstractDataGrid implements DataGridInterface
         ]));
 
         $eventHandlers->add(new CustomRowEventHandler([
-            'function'   => $this->getJavascriptFunctionName('install'),
-            'row_action' => 'action_installPackage'
+            'function'      => $this->getJavascriptFunctionName('install'),
+            'function_name' => 'installPackage',
+            'row_action'    => 'action_installPackage'
         ]));
 
-        $eventHandlers->add(new DeleteRowEventHandler([
-            'function'   => $this->getJavascriptFunctionName('delete'),
-            'row_action' => DataGridInterface::ACTION_DELETE,
-            'route'      => $this->getRouteForAction('delete'),
+        $eventHandlers->add(new CustomRowEventHandler([
+            'function'      => $this->getJavascriptFunctionName('update'),
+            'function_name' => 'updatePackage',
+            'row_action'    => 'action_updatePackage'
+        ]));
+
+        $eventHandlers->add(new CustomRowEventHandler([
+            'function'      => $this->getJavascriptFunctionName('remove'),
+            'function_name' => 'removePackage',
+            'row_action'    => 'action_removePackage'
         ]));
     }
 }

@@ -23,6 +23,8 @@ use Symfony\Component\Process\ProcessBuilder;
  */
 class EnvironmentHelper implements EnvironmentHelperInterface
 {
+    const DEFAULT_PROCESS_TIMEOUT = 360;
+
     /**
      * @var KernelInterface
      */
@@ -41,16 +43,13 @@ class EnvironmentHelper implements EnvironmentHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function getConsoleCommand(array $arguments)
+    public function getProcess(array $arguments, $timeout = self::DEFAULT_PROCESS_TIMEOUT)
     {
-        $builder = new ProcessBuilder();
-        $builder->setPrefix($this->getPhpBinary());
-        $builder->setWorkingDirectory($this->getCwd());
+        $command = $this->getProcessBuilder($arguments, $timeout)->getProcess()->getCommandLine();
+        $process = new Process($command, $this->getCwd());
+        $process->setTimeout($timeout);
 
-        return $builder
-            ->setArguments($arguments)
-            ->getProcess()
-            ->getCommandLine();
+        return $process;
     }
 
     /**
@@ -58,20 +57,15 @@ class EnvironmentHelper implements EnvironmentHelperInterface
      */
     public function getPhpBinary()
     {
-        $possibleBinaryLocations = [
-            PHP_BINDIR . '/php',
-            PHP_BINDIR . '/php-cli.exe',
-            PHP_BINDIR . '/php.exe'
-        ];
-
-        foreach ($possibleBinaryLocations as $binary) {
-            if (is_readable($binary)) {
-                return $binary;
-                break;
-            }
+        $process = new Process('whereis php');
+        $process->run();
+        $output = $process->getOutput();
+        $lines  = explode(PHP_EOL, $output);
+        if (count($lines) > 0) {
+            return current($lines);
         }
 
-        throw new \RuntimeException('Path to PHP binary not found');
+        throw new \RuntimeException('PHP binary was not found');
     }
 
     /**
@@ -89,4 +83,28 @@ class EnvironmentHelper implements EnvironmentHelperInterface
     {
         return rand(4444, 65525);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getProcessBuilder(array $arguments, $timeout = self::DEFAULT_PROCESS_TIMEOUT)
+    {
+        $builder = new ProcessBuilder();
+        $builder->setPrefix($this->getPhpBinary());
+        $builder->setWorkingDirectory($this->getCwd());
+        $builder->setArguments($arguments);
+        $builder->setTimeout($timeout);
+        $builder->inheritEnvironmentVariables(true);
+
+        return $builder;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getComposerPhar()
+    {
+        return 'composer.phar';
+    }
 }
+

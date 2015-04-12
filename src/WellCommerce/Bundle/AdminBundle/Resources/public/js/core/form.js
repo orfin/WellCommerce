@@ -10965,7 +10965,7 @@ var GFormConsoleOutput = GCore.ExtendClass(GFormFile, function() {
 
         gThis.m_jConsoleOutput = $('<div/>').addClass(gThis._GetClass('Field'));
         gThis.m_jNode.append(gThis.m_jConsoleOutput);
-        gThis.m_jConsoleOutput.html('<strong>Starting WebSocketServer on port: </strong>' + gThis.m_oOptions.iPort);
+        gThis.m_jConsoleOutput.append('<strong>' + Translator.trans('server.connection.starting',{},'wellcommerce') + '</strong>' + gThis.m_oOptions.iPort + '<br />');
     };
 
     gThis.OnProcess = function(){
@@ -10977,21 +10977,19 @@ var GFormConsoleOutput = GCore.ExtendClass(GFormFile, function() {
         };
 
         gThis.oSocket.onopen = function(eEvent) {
-            console.log("Connection open ...");
+            console.log(eEvent);
+            gThis.m_jConsoleOutput.append('<strong>' + Translator.trans('server.connection.open',{},'wellcommerce') + '</strong><br />');
         };
 
         gThis.oSocket.onclose = function(eEvent) {
-            console.log("Connection closed ...");
+            console.log(eEvent);
+            gThis.m_jConsoleOutput.append('<strong>' + Translator.trans('server.connection.closed',{},'wellcommerce') + '</strong><br />');
         };
 
-        gThis.oSocket.onerror = function(error) {
-            console.log('<strong>Error connecting WebSocketServer on port: </strong>' + gThis.m_oOptions.iPort);
+        gThis.oSocket.onerror = function(eEvent) {
+            console.log(eEvent);
+            gThis.m_jConsoleOutput.append('<strong>' + Translator.trans('server.connection.error',{},'wellcommerce') + ': ' + error + '</strong><br />');
         }
-
-        $(window).bind("beforeunload",function(event){
-            gThis.oSocket.onclose = function () {};
-            gThis.oSocket.close();
-        });
     };
 
     gThis._InitializeEvents = function(sRepetition) {
@@ -11003,12 +11001,10 @@ var GFormConsoleOutput = GCore.ExtendClass(GFormFile, function() {
         gThis.m_bShown = true;
 
         gThis.oAjaxRequest = GF_Ajax_Request(gThis.m_oOptions.sConsoleUrl, {}, function(oResponse){
-            if(oResponse.success != undefined){
-                GMessage('Installation completed.');
-            }
-
-            if(oResponse.error != undefined){
-                GError('Installation failed.', oResponse.error);
+            if(oResponse.code == 0){
+                GMessage(Translator.trans('package.flash.install_success',{},'wellcommerce'));
+            }else{
+                GError(Translator.trans('package.flash.install_failed',{},'wellcommerce'), Translator.trans('package.flash.exit_code',{},'wellcommerce') + ': '+ oResponse.code);
             }
 
             gThis.oSocket.onclose = function () {};
@@ -11018,8 +11014,10 @@ var GFormConsoleOutput = GCore.ExtendClass(GFormFile, function() {
 
         $(window).bind("beforeunload",function(event){
             gThis.oAjaxRequest.abort();
-            gThis.m_jConsoleOutput.html('<strong>Ajax request terminated</strong>');
-            return Translator.trans('console.message.confirm');
+            gThis.oSocket.onclose = function () {};
+            gThis.oSocket.close();
+            gThis.m_jConsoleOutput.append('<strong>'+ Translator.trans('package.flash.request_terminated',{},'wellcommerce') +'</strong>');
+            return Translator.trans('console.message.confirm',{},'wellcommerce');
         });
     };
 

@@ -60,14 +60,14 @@ class Package
     /**
      * @var string
      *
-     * @ORM\Column(name="local_version", type="string", length=12, nullable=true)
+     * @ORM\Column(name="local_version", type="string", length=255, nullable=true)
      */
     private $localVersion;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="remote_version", type="string", length=12, nullable=true)
+     * @ORM\Column(name="remote_version", type="string", length=255, nullable=true)
      */
     private $remoteVersion;
 

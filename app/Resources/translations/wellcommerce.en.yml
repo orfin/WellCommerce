@@ -38,9 +38,9 @@ admin:
 package:
     heading:
         index:  Packages
-        add:    Add package
-        edit:   Edit package
-        install: Install new package
+        install: Install
+        update: Update
+        remove: Remove
     fieldset:
         progress: Instalation progress
         information: Information about package
@@ -61,6 +61,9 @@ package:
         console_output: Operation progress
         output: Console output
         choose_version: Choose version
+        install: Install package
+        update: Update package
+        remove: Remove package
     flashes:
         sync_success: Package synchronization succeded
 

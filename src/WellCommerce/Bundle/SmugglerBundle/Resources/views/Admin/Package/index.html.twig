@@ -5,23 +5,52 @@
 
     <ul class="possibilities">
         <li><a href="{{ path('admin.package.sync') }}" class="button"
-               title="{% trans %}package.sync.button{% endtrans %}"><span>{% trans %}package.button.sync{% endtrans %}</span></a></li>
+               title="{% trans %}package.button.sync{% endtrans %}"><span>{% trans %}package.button.sync{% endtrans %}</span></a></li>
     </ul>
 
     <script>
         var installPackage = function (dg, id) {
-            return window.location.href = Routing.generate('admin.package.install', {
-                id: id,
-                operation: 'install'
+            return window.location.href = Routing.generate('admin.package.require', {
+                id: id
             });
         };
 
         var action_installPackage = new GF_Action({
-            caption: '{% trans %}package.install.label{% endtrans %}',
+            caption: '{% trans %}package.label.require{% endtrans %}',
             action: installPackage,
-            img: '{{ asset('bundles/wellcommerceadmin/images/icons/datagrid/add.png') }}',
+            img: '{{ asset('bundles/wellcommerceadmin/images/icons/datagrid/_add.png') }}',
             condition: function (oR) {
-                return oR['localVersion'] != '';
+                return oR['localVersion'] === null;
+            }
+        });
+
+        var updatePackage = function (dg, id) {
+            return window.location.href = Routing.generate('admin.package.update', {
+                id: id
+            });
+        };
+
+        var action_updatePackage = new GF_Action({
+            caption: '{% trans %}package.label.update{% endtrans %}',
+            action: updatePackage,
+            img: '{{ asset('bundles/wellcommerceadmin/images/datagrid/update.png') }}',
+            condition: function (oR) {
+                return oR['localVersion'] != null && oR['localVersion'] != oR['remoteVersion'];
+            }
+        });
+
+        var removePackage = function (dg, id) {
+            return window.location.href = Routing.generate('admin.package.remove', {
+                id: id
+            });
+        };
+
+        var action_removePackage = new GF_Action({
+            caption: '{% trans %}package.label.remove{% endtrans %}',
+            action: removePackage,
+            img: '{{ asset('bundles/wellcommerceadmin/images/icons/datagrid/delete.png') }}',
+            condition: function (oR) {
+                return oR['localVersion'] !== null;
             }
         });
     </script>

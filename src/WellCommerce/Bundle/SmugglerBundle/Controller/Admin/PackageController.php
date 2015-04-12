@@ -12,10 +12,14 @@
 
 namespace WellCommerce\Bundle\SmugglerBundle\Controller\Admin;
 
+use ComposerLockParser\ComposerInfo;
+use Ipunkt\ComposerAbout\ComposerLockFileReader;
+use Ipunkt\ComposerAbout\Structure\ComposerStructure;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
+use WellCommerce\Bundle\SmugglerBundle\Helper\PackageHelperInterface;
 
 /**
  * Class PackageController
@@ -33,9 +37,6 @@ class PackageController extends AbstractAdminController
      */
     public function syncAction()
     {
-        /**
-         * @var $manager \WellCommerce\Bundle\SmugglerBundle\Manager\Admin\PackageManager
-         */
         $manager = $this->getManager();
         $manager->syncPackages(PackageHelperInterface::DEFAULT_PACKAGE_PLUGIN_TYPE);
         $manager->syncPackages(PackageHelperInterface::DEFAULT_PACKAGE_THEME_TYPE);
@@ -44,7 +45,7 @@ class PackageController extends AbstractAdminController
         return $manager->getRedirectHelper()->redirectToAction('index');
     }
 
-    public function installAction(Request $request)
+    public function packageAction(Request $request, $operation)
     {
         $resource = $this->getManager()->findResource($request);
         if (null === $resource) {
@@ -54,40 +55,33 @@ class PackageController extends AbstractAdminController
         $form = $this->getManager()->getForm($resource);
 
         return [
-            'form' => $form,
+            'operation'   => $operation,
+            'packageName' => $resource->getFullName(),
+            'form'        => $form,
         ];
+    }
 
+    /**
+     * @return \WellCommerce\Bundle\SmugglerBundle\Manager\Admin\PackageManager
+     */
+    protected function getManager()
+    {
+        return parent::getManager();
     }
 
     public function consoleAction(Request $request)
     {
         $helper    = $this->get('environment_helper');
-        $arguments = $this->getConsoleCommandArguments($request);
-        $command   = $helper->getConsoleCommand($arguments);
-        $process   = new Process($command, $helper->getCwd());
-        $process->setTimeout(720);
-        try {
-            $process->mustRun();
-        } catch (ProcessFailedException $e) {
-            return $this->jsonResponse(['error' => nl2br($e->getMessage())]);
+        $arguments = $this->getManager()->getConsoleCommandArguments($request);
+        $process   = $helper->getProcess($arguments, 720);
+        $process->run();
+
+        if ($process->getExitCode() !== null) {
+            if (0 === (int)$process->getExitCode()) {
+                $this->getManager()->changePackageStatus($request);
+            }
+
+            return $this->jsonResponse(['code' => $process->getExitCode()]);
         }
-
-        if ($process->getExitCode() === 127) {
-            return $this->jsonResponse(['success' => true]);
-        }
-    }
-
-    protected function getConsoleCommandArguments(Request $request)
-    {
-        $port      = (int)$request->attributes->get('port');
-        $package   = $request->attributes->get('id');
-        $operation = $request->attributes->get('operation');
-
-        return [
-            'app/console',
-            'wellcommerce:package:' . $operation,
-            '--port=' . $port,
-            '--package=' . $package
-        ];
     }
 }

@@ -85,7 +85,7 @@
             <tag name="kernel.event_subscriber" />
         </service>
 
-        <service id="package.command.plugin.install" class="WellCommerce\Bundle\SmugglerBundle\Command\Package\InstallCommand">
+        <service id="package.command.plugin.require" class="WellCommerce\Bundle\SmugglerBundle\Command\Package\RequireCommand">
             <tag name="console.command" />
         </service>
 

@@ -13,27 +13,26 @@
         <option key="expose">true</option>
     </route>
 
-    <route id="admin.package.add" path="/add">
-        <default key="_controller">package.controller.admin:addAction</default>
-    </route>
-
-    <route id="admin.package.edit" path="/edit/{id}">
-        <default key="_controller">package.controller.admin:editAction</default>
+    <route id="admin.package.require" path="/{operation},{id}">
+        <default key="_controller">package.controller.admin:packageAction</default>
+        <default key="operation">require</default>
         <option key="expose">true</option>
     </route>
 
-    <route id="admin.package.install" path="/install/{id},{operation}">
-        <default key="_controller">package.controller.admin:installAction</default>
+    <route id="admin.package.update" path="/{operation},{id}">
+        <default key="_controller">package.controller.admin:packageAction</default>
+        <default key="operation">update</default>
+        <option key="expose">true</option>
+    </route>
+
+    <route id="admin.package.remove" path="/{operation},{id}">
+        <default key="_controller">package.controller.admin:packageAction</default>
+        <default key="operation">remove</default>
         <option key="expose">true</option>
     </route>
 
     <route id="admin.package.sync" path="/sync">
         <default key="_controller">package.controller.admin:syncAction</default>
-        <option key="expose">true</option>
-    </route>
-
-    <route id="admin.package.delete" path="/delete/{id}">
-        <default key="_controller">package.controller.admin:deleteAction</default>
         <option key="expose">true</option>
     </route>
 

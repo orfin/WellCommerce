@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "97bc68e361f2d2b746b80be027236577",
+    "hash": "0ac5f31af0a73e5f835734b322bac60c",
     "packages": [
         {
             "name": "beberlei/DoctrineExtensions",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/beberlei/DoctrineExtensions.git",
-                "reference": "f28f7362a40c4327990d9a59d5ae93b752704be2"
+                "reference": "6f4a04e8c96d687085f54b857708255ccf22a3ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/beberlei/DoctrineExtensions/zipball/f28f7362a40c4327990d9a59d5ae93b752704be2",
-                "reference": "f28f7362a40c4327990d9a59d5ae93b752704be2",
+                "url": "https://api.github.com/repos/beberlei/DoctrineExtensions/zipball/6f4a04e8c96d687085f54b857708255ccf22a3ba",
+                "reference": "6f4a04e8c96d687085f54b857708255ccf22a3ba",
                 "shasum": ""
             },
             "require": {
@@ -66,7 +66,7 @@
                 "doctrine",
                 "orm"
             ],
-            "time": "2015-03-16 09:49:07"
+            "time": "2015-04-09 09:13:26"
         },
         {
             "name": "behat/transliterator",
@@ -1276,6 +1276,54 @@
             "time": "2015-03-18 18:23:50"
         },
         {
+            "name": "illuminate/support",
+            "version": "v4.2.17",
+            "target-dir": "Illuminate/Support",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/illuminate/support.git",
+                "reference": "db61f3f6d507ce417ca993e1f93585db7efd8b12"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/db61f3f6d507ce417ca993e1f93585db7efd8b12",
+                "reference": "db61f3f6d507ce417ca993e1f93585db7efd8b12",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "jeremeamia/superclosure": "~1.0.1",
+                "patchwork/utf8": "~1.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Illuminate\\Support": ""
+                },
+                "files": [
+                    "Illuminate/Support/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylorotwell@gmail.com"
+                }
+            ],
+            "time": "2015-01-27 20:51:43"
+        },
+        {
             "name": "imagine/imagine",
             "version": "0.6.2",
             "source": {
@@ -1383,6 +1431,49 @@
                 "parameters management"
             ],
             "time": "2013-12-07 10:10:39"
+        },
+        {
+            "name": "ipunkt/composer-about",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ipunkt/composer-about.git",
+                "reference": "cb745e751a1da6bc774e87c85f611d6239620233"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ipunkt/composer-about/zipball/cb745e751a1da6bc774e87c85f611d6239620233",
+                "reference": "cb745e751a1da6bc774e87c85f611d6239620233",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "4.*",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Ipunkt\\ComposerAbout\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Robert Kummer",
+                    "email": "rok@ipunkt.biz"
+                }
+            ],
+            "description": "Parses composer.lock and returns informations about the used packages",
+            "keywords": [
+                "composer",
+                "laravel",
+                "library",
+                "php"
+            ],
+            "time": "2014-06-15 10:10:17"
         },
         {
             "name": "ircmaxell/password-compat",
@@ -2023,6 +2114,53 @@
             "time": "2015-02-23 16:09:39"
         },
         {
+            "name": "mcuelenaere/composer-revision-plugin",
+            "version": "0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mcuelenaere/composer-revision-plugin.git",
+                "reference": "f68f66dca9d7fba1e12153cb3e7c7b3317519865"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mcuelenaere/composer-revision-plugin/zipball/f68f66dca9d7fba1e12153cb3e7c7b3317519865",
+                "reference": "f68f66dca9d7fba1e12153cb3e7c7b3317519865",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "~1.0",
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "composer/composer": "1.*"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "ComposerRevisionPlugin\\Plugin"
+            },
+            "autoload": {
+                "psr-4": {
+                    "ComposerRevisionPlugin\\": "src/"
+                },
+                "classmap": [
+                    "gen/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Maurus Cuelenaere",
+                    "email": "mcuelenaere@gmail.com"
+                }
+            ],
+            "description": "Simple composer plugin which generates a class containing the VCS references of all packages",
+            "homepage": "https://github.com/mcuelenaere/composer-revision-plugin",
+            "time": "2015-01-03 18:44:38"
+        },
+        {
             "name": "monolog/monolog",
             "version": "1.13.1",
             "source": {
@@ -2644,17 +2782,17 @@
         },
         {
             "name": "sensio/distribution-bundle",
-            "version": "v3.0.20",
+            "version": "v3.0.21",
             "target-dir": "Sensio/Bundle/DistributionBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioDistributionBundle.git",
-                "reference": "48c76189fb0a76a20a4a67a750b513ed06074b55"
+                "reference": "da23c78093676a823a1ff43a214987ea3fbf83c8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/48c76189fb0a76a20a4a67a750b513ed06074b55",
-                "reference": "48c76189fb0a76a20a4a67a750b513ed06074b55",
+                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/da23c78093676a823a1ff43a214987ea3fbf83c8",
+                "reference": "da23c78093676a823a1ff43a214987ea3fbf83c8",
                 "shasum": ""
             },
             "require": {
@@ -2700,7 +2838,7 @@
                 "configuration",
                 "distribution"
             ],
-            "time": "2015-03-26 11:09:50"
+            "time": "2015-04-10 06:20:46"
         },
         {
             "name": "sensio/framework-extra-bundle",
@@ -3539,12 +3677,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/WellCommerce/FormBundle.git",
-                "reference": "b53bacefe4fc705774f979abec34d3a34c25f321"
+                "reference": "d555fa900d5f283dc018e550d47f47d62682bd24"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WellCommerce/FormBundle/zipball/b53bacefe4fc705774f979abec34d3a34c25f321",
-                "reference": "b53bacefe4fc705774f979abec34d3a34c25f321",
+                "url": "https://api.github.com/repos/WellCommerce/FormBundle/zipball/d555fa900d5f283dc018e550d47f47d62682bd24",
+                "reference": "d555fa900d5f283dc018e550d47f47d62682bd24",
                 "shasum": ""
             },
             "require": {
@@ -3581,7 +3719,60 @@
                 "open-source",
                 "symfony"
             ],
-            "time": "2015-04-01 19:21:20"
+            "time": "2015-04-12 08:36:44"
+        },
+        {
+            "name": "wellcommerce/search-bundle",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/WellCommerce/SearchBundle.git",
+                "reference": "73b22c54f95c9b8217d668c25be8a3bd9d069b66"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/WellCommerce/SearchBundle/zipball/73b22c54f95c9b8217d668c25be8a3bd9d069b66",
+                "reference": "73b22c54f95c9b8217d668c25be8a3bd9d069b66",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "type": "wellcommerce-plugin",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.1-dev"
+                },
+                "install-dir": "src/WellCommerce/Bundle/SearchBundle"
+            },
+            "autoload": {
+                "psr-0": {
+                    "": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "OSL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Adam Piotrowski",
+                    "email": "adam@wellcommerce.org"
+                },
+                {
+                    "name": "WellCommerce Developers",
+                    "email": "developers@wellcommerce.org"
+                }
+            ],
+            "description": "WellCommerce Open-Source edition",
+            "keywords": [
+                "e-commerce",
+                "open-source",
+                "plugin",
+                "symfony",
+                "wellcommerce"
+            ],
+            "time": "2015-03-30 13:24:46"
         },
         {
             "name": "white-october/pagerfanta-bundle",
@@ -4784,16 +4975,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "2.0.15",
+            "version": "2.0.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "34cc484af1ca149188d0d9e91412191e398e0b67"
+                "reference": "934fd03eb6840508231a7f73eb8940cf32c3b66c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/34cc484af1ca149188d0d9e91412191e398e0b67",
-                "reference": "34cc484af1ca149188d0d9e91412191e398e0b67",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/934fd03eb6840508231a7f73eb8940cf32c3b66c",
+                "reference": "934fd03eb6840508231a7f73eb8940cf32c3b66c",
                 "shasum": ""
             },
             "require": {
@@ -4842,7 +5033,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-01-24 10:06:35"
+            "time": "2015-04-11 04:35:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -5596,6 +5787,7 @@
         "devristo/phpws": 20,
         "react/child-process": 20,
         "knplabs/packagist-api": 20,
+        "wellcommerce/search-bundle": 20,
         "doctrine/doctrine-fixtures-bundle": 20
     },
     "prefer-stable": false,
