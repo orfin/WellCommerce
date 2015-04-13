@@ -34,6 +34,15 @@ admin:
         tax: Taxes
         theme: Themes
         user_management: Administrators
+        package: Packages
+        channel: Channels
+        smuggler: Package management
+        multi_store: Multistore management
+        company: Companies
+        shop: Shops
+        unit: Units
+        order_status: Order statuses
+        order_status_group: Order status groups
 
 package:
     heading:
