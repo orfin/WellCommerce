@@ -133,10 +133,10 @@ class PackageManager extends AbstractAdminManager
         $remotePackage = $this->helper->getPackage($package->getFullName());
         $remoteVersion = $this->getPackageVersionReference($remotePackage->getVersions()[$branch]);
 
-        if ($operation === PackageHelperInterface::ACTION_REMOVE) {
-            $localVersion = null;
-        } else {
+        if (isset(Revisions::$byName[$package->getFullName()])) {
             $localVersion = Revisions::$byName[$package->getFullName()];
+        } else {
+            $localVersion = null;
         }
 
         $package->setLocalVersion($localVersion);

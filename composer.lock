@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4db528c52d85f95e521091c96f9d2e57",
+    "hash": "e40375ebbac3ad08499cfafb6cb087bf",
     "packages": [
         {
             "name": "beberlei/DoctrineExtensions",
@@ -114,12 +114,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Devristo/phpws.git",
-                "reference": "36bf228c329c4c7c576394f13330696d0ad521b3"
+                "reference": "9073c381323e924f3254af8a514660979c0159f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Devristo/phpws/zipball/36bf228c329c4c7c576394f13330696d0ad521b3",
-                "reference": "36bf228c329c4c7c576394f13330696d0ad521b3",
+                "url": "https://api.github.com/repos/Devristo/phpws/zipball/9073c381323e924f3254af8a514660979c0159f4",
+                "reference": "9073c381323e924f3254af8a514660979c0159f4",
                 "shasum": ""
             },
             "require": {
@@ -142,7 +142,7 @@
                 }
             ],
             "description": "WebSocket Server and Client library for PHP",
-            "time": "2015-03-13 16:23:37"
+            "time": "2015-04-12 23:54:25"
         },
         {
             "name": "doctrine/annotations",
@@ -1076,12 +1076,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSJsRoutingBundle.git",
-                "reference": "1053dd4c8864486cb78c1ef23ce4f021c659c261"
+                "reference": "86af5f2a00fc524b9e941593efa7cb6f76f287da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSJsRoutingBundle/zipball/1053dd4c8864486cb78c1ef23ce4f021c659c261",
-                "reference": "1053dd4c8864486cb78c1ef23ce4f021c659c261",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSJsRoutingBundle/zipball/86af5f2a00fc524b9e941593efa7cb6f76f287da",
+                "reference": "86af5f2a00fc524b9e941593efa7cb6f76f287da",
                 "shasum": ""
             },
             "require": {
@@ -1126,7 +1126,7 @@
                 "javascript",
                 "routing"
             ],
-            "time": "2015-01-23 02:51:30"
+            "time": "2015-04-13 08:03:56"
         },
         {
             "name": "fzaninotto/faker",
@@ -1274,6 +1274,320 @@
                 "web service"
             ],
             "time": "2015-03-18 18:23:50"
+        },
+        {
+            "name": "hoa/core",
+            "version": "2.15.04.13",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hoaproject/Core.git",
+                "reference": "e2e2515a4bf4aa20468aa4418a0430e91093a1e8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hoaproject/Core/zipball/e2e2515a4bf4aa20468aa4418a0430e91093a1e8",
+                "reference": "e2e2515a4bf4aa20468aa4418a0430e91093a1e8",
+                "shasum": ""
+            },
+            "require": {
+                "ext-spl": "*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "hoa/test": "~1.0"
+            },
+            "suggest": {
+                "ext-mbstring": "ext/mbstring must be present (or a third implementation).",
+                "hoa/console": "To use the `hoa` script.",
+                "hoa/dispatcher": "To use the `hoa` script.",
+                "hoa/router": "To use the `hoa` script."
+            },
+            "bin": [
+                "Bin/hoa"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Hoa\\Core\\": "."
+                },
+                "files": [
+                    "Core.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Ivan Enderlin",
+                    "email": "ivan.enderlin@hoa-project.net"
+                },
+                {
+                    "name": "Hoa community",
+                    "homepage": "http://hoa-project.net/"
+                }
+            ],
+            "description": "The Hoa\\Core library.",
+            "homepage": "http://hoa-project.net/",
+            "keywords": [
+                "consistency",
+                "core",
+                "data",
+                "event",
+                "library",
+                "listener",
+                "parameter",
+                "protocol"
+            ],
+            "time": "2015-04-13 06:54:06"
+        },
+        {
+            "name": "hoa/http",
+            "version": "0.15.01.06",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hoaproject/Http.git",
+                "reference": "1722c579237ba7cdc1abc3dfac1a77797bfc9d47"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hoaproject/Http/zipball/1722c579237ba7cdc1abc3dfac1a77797bfc9d47",
+                "reference": "1722c579237ba7cdc1abc3dfac1a77797bfc9d47",
+                "shasum": ""
+            },
+            "require": {
+                "hoa/core": "~2.0",
+                "hoa/stream": "~0.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Hoa\\Http\\": "."
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Ivan Enderlin",
+                    "email": "ivan.enderlin@hoa-project.net"
+                },
+                {
+                    "name": "Hoa community",
+                    "homepage": "http://hoa-project.net/"
+                }
+            ],
+            "description": "The Hoa\\Http library.",
+            "homepage": "http://hoa-project.net/",
+            "keywords": [
+                "http",
+                "library",
+                "request",
+                "response",
+                "rfc2295",
+                "rfc2324",
+                "rfc2518",
+                "rfc2774",
+                "rfc3229",
+                "rfc4918",
+                "rfc5842",
+                "rfc6585",
+                "rfc7231",
+                "rfc7232",
+                "rfc7233",
+                "rfc7235",
+                "rfc7237",
+                "runtime"
+            ],
+            "time": "2015-01-06 10:47:53"
+        },
+        {
+            "name": "hoa/socket",
+            "version": "0.15.02.25",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hoaproject/Socket.git",
+                "reference": "4a1e84de1f8cc1695a9cc56a309f343dd759997e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hoaproject/Socket/zipball/4a1e84de1f8cc1695a9cc56a309f343dd759997e",
+                "reference": "4a1e84de1f8cc1695a9cc56a309f343dd759997e",
+                "shasum": ""
+            },
+            "require": {
+                "hoa/core": "~2.0",
+                "hoa/stream": "~0.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Hoa\\Socket\\": "."
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Ivan Enderlin",
+                    "email": "ivan.enderlin@hoa-project.net"
+                },
+                {
+                    "name": "Hoa community",
+                    "homepage": "http://hoa-project.net/"
+                }
+            ],
+            "description": "The Hoa\\Socket library.",
+            "homepage": "http://hoa-project.net/",
+            "keywords": [
+                "Socket",
+                "client",
+                "library",
+                "node",
+                "server",
+                "tcp",
+                "udp"
+            ],
+            "time": "2015-02-25 08:40:41"
+        },
+        {
+            "name": "hoa/stream",
+            "version": "0.15.04.13",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hoaproject/Stream.git",
+                "reference": "fa8586e669c9540ef95504ccb4a5241a56dec343"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hoaproject/Stream/zipball/fa8586e669c9540ef95504ccb4a5241a56dec343",
+                "reference": "fa8586e669c9540ef95504ccb4a5241a56dec343",
+                "shasum": ""
+            },
+            "require": {
+                "hoa/core": "~2.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Hoa\\Stream\\": "."
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Ivan Enderlin",
+                    "email": "ivan.enderlin@hoa-project.net"
+                },
+                {
+                    "name": "Hoa community",
+                    "homepage": "http://hoa-project.net/"
+                }
+            ],
+            "description": "The Hoa\\Stream library.",
+            "homepage": "http://hoa-project.net/",
+            "keywords": [
+                "Context",
+                "bucket",
+                "composite",
+                "filter",
+                "in",
+                "library",
+                "out",
+                "protocol",
+                "stream",
+                "wrapper"
+            ],
+            "time": "2015-04-13 07:13:55"
+        },
+        {
+            "name": "hoa/websocket",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hoaproject/Websocket.git",
+                "reference": "7b97f1477562fe8847799ac8b193ea9afd57da4e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hoaproject/Websocket/zipball/7b97f1477562fe8847799ac8b193ea9afd57da4e",
+                "reference": "7b97f1477562fe8847799ac8b193ea9afd57da4e",
+                "shasum": ""
+            },
+            "require": {
+                "hoa/core": "~2.0",
+                "hoa/http": "~0.0",
+                "hoa/socket": "~0.0"
+            },
+            "suggest": {
+                "ext-openssl": "To get a better security when exchanging messages."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Hoa\\Websocket\\": "."
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Ivan Enderlin",
+                    "email": "ivan.enderlin@hoa-project.net"
+                },
+                {
+                    "name": "Hoa community",
+                    "homepage": "http://hoa-project.net/"
+                }
+            ],
+            "description": "The Hoa\\Websocket library.",
+            "homepage": "http://hoa-project.net/",
+            "keywords": [
+                "Socket",
+                "client",
+                "hybi",
+                "library",
+                "realtime",
+                "rfc6455",
+                "server",
+                "websocket"
+            ],
+            "time": "2015-04-06 10:34:42"
         },
         {
             "name": "imagine/imagine",
@@ -1892,61 +2206,6 @@
                 "minification"
             ],
             "time": "2014-12-12 05:04:05"
-        },
-        {
-            "name": "kzykhys/ciconia",
-            "version": "v1.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/kzykhys/Ciconia.git",
-                "reference": "add01ebe59365023101a4b9225a0f1b918165f48"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/kzykhys/Ciconia/zipball/add01ebe59365023101a4b9225a0f1b918165f48",
-                "reference": "add01ebe59365023101a4b9225a0f1b918165f48",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">5.4.0",
-                "symfony/console": "~2.3",
-                "symfony/options-resolver": "~2.3"
-            },
-            "require-dev": {
-                "symfony/finder": "~2.3",
-                "symfony/stopwatch": "~2.3"
-            },
-            "bin": [
-                "bin/ciconia"
-            ],
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Kazuyuki Hayashi",
-                    "email": "hayashi@valnur.net"
-                }
-            ],
-            "description": "The Markdown parser for PHP5.4",
-            "keywords": [
-                "cli",
-                "markdown",
-                "parser"
-            ],
-            "time": "2013-12-11 11:14:26"
         },
         {
             "name": "liip/imagine-bundle",
@@ -3541,12 +3800,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/WellCommerce/DataGridBundle.git",
-                "reference": "9dc4418110975fff09688a551e08504ca71953ed"
+                "reference": "15daca6ac1ba266bee3afe73fea7f79b27cd154e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WellCommerce/DataGridBundle/zipball/9dc4418110975fff09688a551e08504ca71953ed",
-                "reference": "9dc4418110975fff09688a551e08504ca71953ed",
+                "url": "https://api.github.com/repos/WellCommerce/DataGridBundle/zipball/15daca6ac1ba266bee3afe73fea7f79b27cd154e",
+                "reference": "15daca6ac1ba266bee3afe73fea7f79b27cd154e",
                 "shasum": ""
             },
             "require": {
@@ -3583,7 +3842,7 @@
                 "open-source",
                 "symfony"
             ],
-            "time": "2015-04-05 20:56:47"
+            "time": "2015-04-12 08:36:27"
         },
         {
             "name": "wellcommerce/dataset-bundle",
@@ -3684,6 +3943,59 @@
                 "symfony"
             ],
             "time": "2015-04-12 08:36:44"
+        },
+        {
+            "name": "wellcommerce/search-bundle",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/WellCommerce/SearchBundle.git",
+                "reference": "73b22c54f95c9b8217d668c25be8a3bd9d069b66"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/WellCommerce/SearchBundle/zipball/73b22c54f95c9b8217d668c25be8a3bd9d069b66",
+                "reference": "73b22c54f95c9b8217d668c25be8a3bd9d069b66",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "type": "wellcommerce-plugin",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.1-dev"
+                },
+                "install-dir": "src/WellCommerce/Bundle/SearchBundle"
+            },
+            "autoload": {
+                "psr-0": {
+                    "": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "OSL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Adam Piotrowski",
+                    "email": "adam@wellcommerce.org"
+                },
+                {
+                    "name": "WellCommerce Developers",
+                    "email": "developers@wellcommerce.org"
+                }
+            ],
+            "description": "WellCommerce Open-Source edition",
+            "keywords": [
+                "e-commerce",
+                "open-source",
+                "plugin",
+                "symfony",
+                "wellcommerce"
+            ],
+            "time": "2015-03-30 13:24:46"
         },
         {
             "name": "white-october/pagerfanta-bundle",
@@ -5698,6 +6010,8 @@
         "devristo/phpws": 20,
         "react/child-process": 20,
         "knplabs/packagist-api": 20,
+        "hoa/websocket": 20,
+        "wellcommerce/search-bundle": 20,
         "doctrine/doctrine-fixtures-bundle": 20
     },
     "prefer-stable": false,

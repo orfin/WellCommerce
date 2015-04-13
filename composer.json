@@ -59,8 +59,9 @@
         "devristo/phpws": "dev-master",
         "react/child-process": "0.5.*@dev",
         "knplabs/packagist-api": "1.*@dev",
-        "kzykhys/ciconia": "~1.0.0",
-        "mcuelenaere/composer-revision-plugin": "0.1.*"
+        "mcuelenaere/composer-revision-plugin": "0.1.*",
+        "hoa/websocket": "2.*@dev",
+        "wellcommerce/search-bundle": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
