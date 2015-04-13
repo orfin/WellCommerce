@@ -13,7 +13,6 @@
 
 namespace WellCommerce\Bundle\SmugglerBundle\Manager\Admin;
 
-use Packagist\Api\Result\Package as RemotePackage;
 use WellCommerce\Bundle\AdminBundle\Manager\AbstractAdminManager;
 
 /**

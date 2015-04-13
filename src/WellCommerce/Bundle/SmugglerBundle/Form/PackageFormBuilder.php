@@ -11,10 +11,11 @@
  */
 namespace WellCommerce\Bundle\SmugglerBundle\Form;
 
+use Packagist\Api\Result\Package\Version;
 use WellCommerce\Bundle\FormBundle\Builder\AbstractFormBuilder;
 use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
-use WellCommerce\Bundle\FormBundle\Conditions\Equals;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
+use WellCommerce\Bundle\SmugglerBundle\Helper\PackageHelperInterface;
 
 /**
  * Class PackageFormBuilder
@@ -40,31 +41,11 @@ class PackageFormBuilder extends AbstractFormBuilder implements FormBuilderInter
             'label' => $this->trans('package.fieldset.information')
         ]));
 
-        $chooseVersion = $packageData->addChild($this->getElement('select', [
-            'name'    => 'version',
-            'label'   => $this->trans('package.label.remote_version'),
-            'options' => $this->makeVersionsSelect($versions),
-        ]));
-
-        $chooseVersion->setValue(0);
-
         foreach ($versions as $version) {
-
-            $static[$version['version']] = $packageData->addChild($this->getElement('nested_fieldset', [
-                'name'         => $version['version'],
-                'label'        => $version['version'],
-                'dependencies' => [
-                    $this->getDependency('show', [
-                        'form'      => $packageForm,
-                        'field'     => $chooseVersion,
-                        'condition' => new Equals($version['version'])
-                    ])
-                ]
-            ]));
 
             $license = implode('<br />', $version['license']);
 
-            $static[$version['version']]->addChild($this->getElement('static_text', [
+            $packageData->addChild($this->getElement('static_text', [
                 'text' => "
                     <table>
                         <tr><td><strong>Release date:</strong></td><td>{$version['date']}</td></tr>
@@ -94,18 +75,38 @@ class PackageFormBuilder extends AbstractFormBuilder implements FormBuilderInter
         ]));
     }
 
+    /**
+     * Returns version information for package
+     *
+     * @param $id
+     *
+     * @return array
+     */
     protected function getPackageVersions($id)
     {
-        $package  = $this->get('package.repository')->findOneById($id);
-        $versions = $this->get('package.helper')->getPackage($package->getFullName())->getVersions();
-        $result   = [];
+        $localPackage  = $this->get('package.repository')->findOneById($id);
+        $remotePackage = $this->get('package.helper')->getPackage($localPackage->getFullName());
+        $versions      = $remotePackage->getVersions();
+        $result        = [];
 
-        /**
-         * @var $version \Packagist\Api\Result\Package\Version
-         */
         foreach ($versions as $version) {
-            $date                    = new \DateTime($version->getTime());
-            $packageVersion          = $version->getVersion();
+            $this->getPackageInfo($version, $result);
+        }
+
+        return $result;
+    }
+
+    /**
+     * Adds information about single version to result array
+     *
+     * @param Version $version
+     * @param array   $result
+     */
+    protected function getPackageInfo(Version $version, &$result)
+    {
+        $date           = new \DateTime($version->getTime());
+        $packageVersion = $version->getVersion();
+        if ($packageVersion === PackageHelperInterface::DEFAULT_BRANCH_VERSION) {
             $result[$packageVersion] = [
                 'version'     => $packageVersion,
                 'date'        => $date->format('Y-m-d H:i:s'),
@@ -115,19 +116,6 @@ class PackageFormBuilder extends AbstractFormBuilder implements FormBuilderInter
                 'license'     => $version->getLicense(),
             ];
         }
-
-        return $result;
-    }
-
-    protected function makeVersionsSelect(array $versions)
-    {
-        $options = [];
-        $options[0] = $this->trans('package.label.choose_version');
-        foreach ($versions as $version) {
-            $options[$version['version']] = $version['version'];
-
-        }
-
-        return $options;
     }
 }
+

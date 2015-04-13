@@ -12,12 +12,7 @@
 
 namespace WellCommerce\Bundle\SmugglerBundle\Controller\Admin;
 
-use ComposerLockParser\ComposerInfo;
-use Ipunkt\ComposerAbout\ComposerLockFileReader;
-use Ipunkt\ComposerAbout\Structure\ComposerStructure;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Process\Exception\ProcessFailedException;
-use Symfony\Component\Process\Process;
 use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
 use WellCommerce\Bundle\SmugglerBundle\Helper\PackageHelperInterface;
 
@@ -45,6 +40,14 @@ class PackageController extends AbstractAdminController
         return $manager->getRedirectHelper()->redirectToAction('index');
     }
 
+    /**
+     * @return \WellCommerce\Bundle\SmugglerBundle\Manager\Admin\PackageManager
+     */
+    protected function getManager()
+    {
+        return parent::getManager();
+    }
+
     public function packageAction(Request $request, $operation)
     {
         $resource = $this->getManager()->findResource($request);
@@ -59,14 +62,6 @@ class PackageController extends AbstractAdminController
             'packageName' => $resource->getFullName(),
             'form'        => $form,
         ];
-    }
-
-    /**
-     * @return \WellCommerce\Bundle\SmugglerBundle\Manager\Admin\PackageManager
-     */
-    protected function getManager()
-    {
-        return parent::getManager();
     }
 
     public function consoleAction(Request $request)

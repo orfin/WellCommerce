@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\SmugglerBundle\Command\Package;
 
-use Symfony\Component\Console\Input\InputInterface;
 use WellCommerce\Bundle\SmugglerBundle\Helper\PackageHelperInterface;
 
 /**

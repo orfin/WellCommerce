@@ -12,10 +12,7 @@
 
 namespace WellCommerce\Bundle\SmugglerBundle\Command\Package;
 
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Output\OutputInterface;
 use WellCommerce\Bundle\SmugglerBundle\Helper\PackageHelperInterface;
 
 /**
@@ -46,7 +43,7 @@ class RequireCommand extends AbstractPackageCommand
     protected function getCommandArguments(InputInterface $input)
     {
         $package = $this->getPackageInformation($input->getOption('package'));
-        $version = 'dev-master';
+        $version = PackageHelperInterface::DEFAULT_BRANCH_VERSION;
 
         return [
             $this->getComposer(),

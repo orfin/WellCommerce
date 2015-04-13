@@ -129,8 +129,9 @@ class PackageManager extends AbstractAdminManager
             throw new EntityNotFoundException($repository->getMetaData()->getName(), $id);
         }
 
+        $branch        = PackageHelperInterface::DEFAULT_BRANCH_VERSION;
         $remotePackage = $this->helper->getPackage($package->getFullName());
-        $remoteVersion = $this->getPackageVersionReference($remotePackage->getVersions()['dev-master']);
+        $remoteVersion = $this->getPackageVersionReference($remotePackage->getVersions()[$branch]);
 
         if ($operation === PackageHelperInterface::ACTION_REMOVE) {
             $localVersion = null;

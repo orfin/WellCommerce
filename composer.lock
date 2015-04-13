@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a20339f398ae97e915751eadf48a8529",
+    "hash": "4db528c52d85f95e521091c96f9d2e57",
     "packages": [
         {
             "name": "beberlei/DoctrineExtensions",
@@ -1276,54 +1276,6 @@
             "time": "2015-03-18 18:23:50"
         },
         {
-            "name": "illuminate/support",
-            "version": "v4.2.17",
-            "target-dir": "Illuminate/Support",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/illuminate/support.git",
-                "reference": "db61f3f6d507ce417ca993e1f93585db7efd8b12"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/db61f3f6d507ce417ca993e1f93585db7efd8b12",
-                "reference": "db61f3f6d507ce417ca993e1f93585db7efd8b12",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "jeremeamia/superclosure": "~1.0.1",
-                "patchwork/utf8": "~1.1"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "4.2-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Illuminate\\Support": ""
-                },
-                "files": [
-                    "Illuminate/Support/helpers.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Taylor Otwell",
-                    "email": "taylorotwell@gmail.com"
-                }
-            ],
-            "time": "2015-01-27 20:51:43"
-        },
-        {
             "name": "imagine/imagine",
             "version": "0.6.2",
             "source": {
@@ -1431,49 +1383,6 @@
                 "parameters management"
             ],
             "time": "2013-12-07 10:10:39"
-        },
-        {
-            "name": "ipunkt/composer-about",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ipunkt/composer-about.git",
-                "reference": "cb745e751a1da6bc774e87c85f611d6239620233"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ipunkt/composer-about/zipball/cb745e751a1da6bc774e87c85f611d6239620233",
-                "reference": "cb745e751a1da6bc774e87c85f611d6239620233",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "4.*",
-                "php": ">=5.4.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Ipunkt\\ComposerAbout\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Robert Kummer",
-                    "email": "rok@ipunkt.biz"
-                }
-            ],
-            "description": "Parses composer.lock and returns informations about the used packages",
-            "keywords": [
-                "composer",
-                "laravel",
-                "library",
-                "php"
-            ],
-            "time": "2014-06-15 10:10:17"
         },
         {
             "name": "ircmaxell/password-compat",
@@ -1983,6 +1892,61 @@
                 "minification"
             ],
             "time": "2014-12-12 05:04:05"
+        },
+        {
+            "name": "kzykhys/ciconia",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kzykhys/Ciconia.git",
+                "reference": "add01ebe59365023101a4b9225a0f1b918165f48"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kzykhys/Ciconia/zipball/add01ebe59365023101a4b9225a0f1b918165f48",
+                "reference": "add01ebe59365023101a4b9225a0f1b918165f48",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">5.4.0",
+                "symfony/console": "~2.3",
+                "symfony/options-resolver": "~2.3"
+            },
+            "require-dev": {
+                "symfony/finder": "~2.3",
+                "symfony/stopwatch": "~2.3"
+            },
+            "bin": [
+                "bin/ciconia"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kazuyuki Hayashi",
+                    "email": "hayashi@valnur.net"
+                }
+            ],
+            "description": "The Markdown parser for PHP5.4",
+            "keywords": [
+                "cli",
+                "markdown",
+                "parser"
+            ],
+            "time": "2013-12-11 11:14:26"
         },
         {
             "name": "liip/imagine-bundle",

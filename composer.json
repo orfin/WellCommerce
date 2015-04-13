@@ -59,7 +59,7 @@
         "devristo/phpws": "dev-master",
         "react/child-process": "0.5.*@dev",
         "knplabs/packagist-api": "1.*@dev",
-        "ipunkt/composer-about": "1.0.0",
+        "kzykhys/ciconia": "~1.0.0",
         "mcuelenaere/composer-revision-plugin": "0.1.*"
     },
     "require-dev": {
