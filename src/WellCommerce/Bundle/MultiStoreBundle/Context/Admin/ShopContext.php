@@ -34,13 +34,9 @@ class ShopContext extends AbstractShopContext implements ShopContextInterface
         return self::SESSION_BAG_NAMESPACE;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setCurrentScope(Shop $shop = null)
+    public function determineCurrentScope($host)
     {
-        $this->currentScope = $shop;
-        $this->setSessionVariables();
+        $this->setCurrentScopeByHost($host);
     }
 
     /**
@@ -54,12 +50,13 @@ class ShopContext extends AbstractShopContext implements ShopContextInterface
         $this->setCurrentScope($result);
     }
 
-    public function determineCurrentScope($host)
+    /**
+     * {@inheritdoc}
+     */
+    public function setCurrentScope(Shop $shop = null)
     {
-        $sessionBag = $this->requestStack->getMasterRequest()->getSession();
-        if (!$this->hasSessionPreviousData($sessionBag)) {
-            $this->setCurrentScopeByHost($host);
-        }
+        $this->currentScope = $shop;
+        $this->setSessionVariables();
     }
 
     protected function setSessionVariables()

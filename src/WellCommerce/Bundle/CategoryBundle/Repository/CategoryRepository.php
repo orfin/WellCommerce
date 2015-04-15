@@ -21,6 +21,9 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
  */
 class CategoryRepository extends AbstractEntityRepository implements CategoryRepositoryInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function getDataSetQueryBuilder()
     {
         $queryBuilder = $this->getQueryBuilder();

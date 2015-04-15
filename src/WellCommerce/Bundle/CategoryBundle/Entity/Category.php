@@ -25,7 +25,6 @@ use WellCommerce\Bundle\ProductBundle\Entity\Product;
 /**
  * Class Category
  *
- * @package WellCommerce\Bundle\CategoryBundle\Entity
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * @ORM\Table("category")
@@ -196,18 +195,18 @@ class Category
     }
 
     /**
-     * @param Shop $shop
-     */
-    public function addShop(Shop $shop)
-    {
-        $this->shops[] = $shop;
-    }
-
-    /**
      * @param mixed $shops
      */
     public function setShops($shops)
     {
         $this->shops = $shops;
+    }
+
+    /**
+     * @param Shop $shop
+     */
+    public function addShop(Shop $shop)
+    {
+        $this->shops[] = $shop;
     }
 }

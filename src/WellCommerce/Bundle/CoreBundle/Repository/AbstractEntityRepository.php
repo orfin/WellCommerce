@@ -22,6 +22,9 @@ use WellCommerce\Bundle\CoreBundle\Helper\Helper;
  */
 abstract class AbstractEntityRepository extends EntityRepository implements RepositoryInterface
 {
+    const TRANSLATIONS_ASSOCIATION_NAME  = 'translations';
+    const TRANSLATIONS_ASSOCIATION_FIELD = 'translatable';
+
     /**
      * {@inheritdoc}
      */
@@ -31,17 +34,10 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
     }
 
     /**
-     * Returns a repository by entity class
+     * Returns class metadata
      *
-     * @param $name
-     *
-     * @return RepositoryInterface
+     * @return \Doctrine\ORM\Mapping\ClassMetadata
      */
-    protected function getRepository($name)
-    {
-        return $this->getEntityManager()->getRepository($name);
-    }
-
     public function getMetadata()
     {
         return $this->_class;
@@ -66,40 +62,6 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
     }
 
     /**
-     * Creates QueryBuilder instance
-     *
-     * @return \Doctrine\ORM\QueryBuilder
-     */
-    protected function getQueryBuilder()
-    {
-        return $this->createQueryBuilder($this->getAlias());
-    }
-
-    public function getDataSetQueryBuilder()
-    {
-        $queryBuilder    = $this->getQueryBuilder();
-        $metadata        = $this->getMetadata();
-        $associationName = 'translations';
-        $identifierField = sprintf('%s.%s', $metadata->getTableName(), $metadata->getSingleIdentifierFieldName());
-
-        if ($metadata->hasAssociation($associationName)) {
-            $association          = $metadata->getAssociationTargetClass($associationName);
-            $associationMetaData  = $this->getEntityManager()->getClassMetadata($association);
-            $associationTableName = $associationMetaData->getTableName();
-            $translationField     = sprintf('%s.%s', $associationTableName, 'translatable');
-
-            $queryBuilder->leftJoin(
-                $association,
-                $associationMetaData->getTableName(),
-                'WITH',
-                "{$identifierField} = {$translationField}"
-            );
-        }
-
-        return $queryBuilder;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function getAlias()
@@ -116,5 +78,50 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
     public function getMetadataFactory()
     {
         return $this->getEntityManager()->getMetadataFactory();
+    }
+
+    /**
+     * Returns a repository by class name
+     *
+     * @param string $class
+     *
+     * @return RepositoryInterface
+     */
+    protected function getRepository($class)
+    {
+        return $this->getEntityManager()->getRepository($class);
+    }
+
+    public function getDataSetQueryBuilder()
+    {
+        $queryBuilder    = $this->getQueryBuilder();
+        $metadata        = $this->getMetadata();
+        $identifierField = sprintf('%s.%s', $metadata->getTableName(), $metadata->getSingleIdentifierFieldName());
+
+        if ($metadata->hasAssociation(self::TRANSLATIONS_ASSOCIATION_NAME)) {
+            $association      = $metadata->getAssociationTargetClass(self::TRANSLATIONS_ASSOCIATION_NAME);
+            $associationMetaData  = $this->getEntityManager()->getClassMetadata($association);
+            $associationTableName = $associationMetaData->getTableName();
+            $translationField = sprintf('%s.%s', $associationTableName, self::TRANSLATIONS_ASSOCIATION_FIELD);
+
+            $queryBuilder->leftJoin(
+                $association,
+                $associationMetaData->getTableName(),
+                'WITH',
+                "{$identifierField} = {$translationField}"
+            );
+        }
+
+        return $queryBuilder;
+    }
+
+    /**
+     * Creates QueryBuilder instance
+     *
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    protected function getQueryBuilder()
+    {
+        return $this->createQueryBuilder($this->getAlias());
     }
 }

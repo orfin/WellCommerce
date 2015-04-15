@@ -36,8 +36,6 @@ class LoadClientGroupData extends AbstractDataFixture implements FixtureInterfac
             $clientGroup->setDiscount(10);
             $clientGroup->translate('pl')->setName('Grupa '.$i);
             $clientGroup->translate('en')->setName('Group '.$i);
-            $clientGroup->translate('de')->setName('Gruppe '.$i);
-            $clientGroup->translate('fr')->setName('Groupe '.$i);
             $clientGroup->mergeNewTranslations();
             $manager->persist($clientGroup);
         }

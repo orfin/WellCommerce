@@ -20,7 +20,6 @@ use WellCommerce\Bundle\RoutingBundle\Entity\RoutableSubjectInterface;
 /**
  * Class RoutableSubscriber
  *
- * @package WellCommerce\Bundle\RoutingBundle\EventListener
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class RoutableSubscriber implements EventSubscriber
@@ -40,6 +39,13 @@ class RoutableSubscriber implements EventSubscriber
         }
     }
 
+    /**
+     * Adds new route
+     *
+     * @param RoutableSubjectInterface $entity
+     *
+     * @return \WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface
+     */
     protected function addRoute(RoutableSubjectInterface $entity)
     {
         $route = $entity->getRouteEntity();
@@ -50,6 +56,9 @@ class RoutableSubscriber implements EventSubscriber
         return $route;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getSubscribedEvents()
     {
         return [

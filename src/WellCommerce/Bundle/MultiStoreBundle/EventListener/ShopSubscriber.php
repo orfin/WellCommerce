@@ -12,7 +12,6 @@
 namespace WellCommerce\Bundle\MultiStoreBundle\EventListener;
 
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
-use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 
@@ -52,10 +51,6 @@ class ShopSubscriber extends AbstractEventSubscriber
     public function onKernelController(FilterControllerEvent $event)
     {
         $request = $event->getRequest();
-
-        if ($event->getRequestType() == HttpKernelInterface::SUB_REQUEST) {
-            return;
-        }
 
         if ($request->hasSession()) {
             if (!$this->container->get('session')->has('admin/shops')) {

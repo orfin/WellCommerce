@@ -47,7 +47,7 @@ class CategoryController extends AbstractAdminController
 
     public function addAction(Request $request)
     {
-        $shop          = $this->get('shop.context')->getCurrentScope();
+        $shop = $this->get('shop.context.admin')->getCurrentScope();
         $currentLocale = $request->getLocale();
         $parameters    = $request->request;
         $name          = $parameters->get('name');
@@ -103,27 +103,6 @@ class CategoryController extends AbstractAdminController
         ];
     }
 
-    public function sortAction(Request $request)
-    {
-        $items      = $request->request->get('items');
-        $repository = $this->getRepository();
-        $em         = $this->getEntityManager();
-
-        foreach ($items as $item) {
-            $parent = $repository->find($item['parent']);
-            $child  = $repository->find($item['id']);
-            if (null !== $child) {
-                $child->setParent($parent);
-                $child->setHierarchy($item['weight']);
-                $em->persist($child);
-            }
-        }
-
-        $em->flush();
-
-        return $this->jsonResponse(['success' => true]);
-    }
-
     /**
      * Builds nested tree form
      *
@@ -143,5 +122,26 @@ class CategoryController extends AbstractAdminController
     protected function getRepository()
     {
         return $this->getManager()->getRepository();
+    }
+
+    public function sortAction(Request $request)
+    {
+        $items      = $request->request->get('items');
+        $repository = $this->getRepository();
+        $em         = $this->getEntityManager();
+
+        foreach ($items as $item) {
+            $parent = $repository->find($item['parent']);
+            $child  = $repository->find($item['id']);
+            if (null !== $child) {
+                $child->setParent($parent);
+                $child->setHierarchy($item['weight']);
+                $em->persist($child);
+            }
+        }
+
+        $em->flush();
+
+        return $this->jsonResponse(['success' => true]);
     }
 }

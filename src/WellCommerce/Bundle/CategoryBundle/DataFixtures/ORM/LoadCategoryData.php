@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\CategoryBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
 
 /**
@@ -30,6 +31,48 @@ class LoadCategoryData extends AbstractDataFixture implements FixtureInterface, 
      */
     public function load(ObjectManager $manager)
     {
+        $shop = $manager->getRepository('WellCommerceMultiStoreBundle:Shop')->findOneBy(['name' => 'WellCommerce']);
+
+        foreach ($this->getSampleCategoriesTree() as $hierarchy => $sample) {
+            $category = new Category();
+            $category->setEnabled(true);
+            $category->setHierarchy($hierarchy);
+            $category->setParent(null);
+            $category->addShop($shop);
+            $category->translate('en')->setName($sample['name']);
+            $category->mergeNewTranslations();
+            $manager->persist($category);
+        }
+
+        $manager->flush();
+
+    }
+
+    protected function getSampleCategoriesTree()
+    {
+        return [
+            0 => [
+                'name' => 'Smart TVs',
+            ],
+            1 => [
+                'name' => 'Streaming devices',
+            ],
+            2 => [
+                'name' => 'Accessories',
+            ],
+            3 => [
+                'name' => 'DVD & Blue-ray players',
+            ],
+            4 => [
+                'name' => 'Audio players',
+            ],
+            5 => [
+                'name' => 'Projectors',
+            ],
+            6 => [
+                'name' => 'Projectors',
+            ],
+        ];
 
     }
 
@@ -38,6 +81,6 @@ class LoadCategoryData extends AbstractDataFixture implements FixtureInterface, 
      */
     public function getOrder()
     {
-        return 10;
+        return 100;
     }
 }

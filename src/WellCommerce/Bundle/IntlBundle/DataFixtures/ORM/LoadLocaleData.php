@@ -31,10 +31,6 @@ class LoadLocaleData extends AbstractDataFixture implements FixtureInterface, Or
      */
     public function load(ObjectManager $manager)
     {
-        $pl = new Locale();
-        $pl->setCode('pl');
-        $manager->persist($pl);
-
         $en = new Locale();
         $en->setCode('en');
         $manager->persist($en);
