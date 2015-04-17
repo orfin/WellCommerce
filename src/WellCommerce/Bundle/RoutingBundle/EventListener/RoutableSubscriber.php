@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\RoutingBundle\EventListener;
 
 use Doctrine\Common\EventSubscriber;
+use Doctrine\Common\Util\Debug;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Events;
 use WellCommerce\Bundle\RoutingBundle\Entity\RoutableSubjectInterface;
@@ -32,7 +33,6 @@ class RoutableSubscriber implements EventSubscriber
     public function prePersist(LifecycleEventArgs $args)
     {
         $entity = $args->getEntity();
-
         if ($entity instanceof RoutableSubjectInterface) {
             $route = $this->addRoute($entity);
             $entity->setRoute($route);
