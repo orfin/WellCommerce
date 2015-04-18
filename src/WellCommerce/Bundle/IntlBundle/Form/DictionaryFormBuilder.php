@@ -35,7 +35,7 @@ class DictionaryFormBuilder extends AbstractFormBuilder implements FormBuilderIn
 
         $requiredData->addChild($this->getElement('text_field', [
             'name'  => 'identifier',
-            'label' => $this->trans('dictionary.identifier.label'),
+            'label' => $this->trans('dictionary.label.identifier'),
         ]));
 
         $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
@@ -45,8 +45,8 @@ class DictionaryFormBuilder extends AbstractFormBuilder implements FormBuilderIn
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
-            'name'  => 'translation',
-            'label' => $this->trans('dictionary.translation.label'),
+            'name'  => 'value',
+            'label' => $this->trans('dictionary.label.value'),
         ]));
 
         $form->addFilter($this->getFilter('no_code'));

@@ -29,9 +29,9 @@ class DictionaryTranslation implements LocaleAwareInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="translation", type="string", length=255)
+     * @ORM\Column(name="value", type="string", length=255)
      */
-    private $translation;
+    private $value;
 
     /**
      * Returns translation ID.
@@ -46,16 +46,16 @@ class DictionaryTranslation implements LocaleAwareInterface
     /**
      * @return string
      */
-    public function getTranslation()
+    public function getValue()
     {
-        return $this->translation;
+        return $this->value;
     }
 
     /**
-     * @param string $translation
+     * @param string $value
      */
-    public function setTranslation($translation)
+    public function setValue($value)
     {
-        $this->translation = $translation;
+        $this->value = $value;
     }
 }

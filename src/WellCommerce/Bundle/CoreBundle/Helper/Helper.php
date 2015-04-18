@@ -43,7 +43,7 @@ class Helper extends AbstractContainer
      */
     public static function snake($value, $delimiter = '_')
     {
-        $replace = '$1'.$delimiter.'$2';
+        $replace = '$1' . $delimiter . '$2';
 
         return ctype_lower($value) ? $value : strtolower(preg_replace('/(.)([A-Z])/', $replace, $value));
     }
@@ -75,11 +75,33 @@ class Helper extends AbstractContainer
         $elements = explode('.', $path);
         $path     = array_map(
             function ($element) {
-                return '['.$element.']';
+                return '[' . $element . ']';
             },
             $elements
         );
 
         return implode('', $path);
+    }
+
+    /**
+     * Returns an array of values flattened to dot notation
+     *
+     * @param array $data
+     *
+     * @return array
+     */
+    public static function flattenArrayToDotNotation(array $data)
+    {
+        $nodes  = new \RecursiveIteratorIterator(new \RecursiveArrayIterator($data));
+        $result = [];
+        foreach ($nodes as $leafValue) {
+            $keys = [];
+            foreach (range(0, $nodes->getDepth()) as $depth) {
+                $keys[] = $nodes->getSubIterator($depth)->key();
+            }
+            $result[join('.', $keys)] = $leafValue;
+        }
+
+        return $result;
     }
 }

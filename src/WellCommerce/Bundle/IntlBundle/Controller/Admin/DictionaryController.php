@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\IntlBundle\Controller\Admin;
 
+use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
 
 /**
@@ -23,4 +24,20 @@ use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
  */
 class DictionaryController extends AbstractAdminController
 {
+    public function syncAction(Request $request)
+    {
+        $manager = $this->getManager();
+        $manager->syncDictionary($request, $this->get('kernel'));
+        $manager->getFlashHelper()->addSuccess('translation.flashes.success.synchronization');
+
+        return $manager->getRedirectHelper()->redirectToAction('index');
+    }
+
+    /**
+     * @return \WellCommerce\Bundle\IntlBundle\Manager\Admin\DictionaryManager
+     */
+    protected function getManager()
+    {
+        return parent::getManager();
+    }
 }
