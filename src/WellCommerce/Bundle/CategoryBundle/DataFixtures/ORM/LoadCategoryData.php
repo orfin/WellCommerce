@@ -50,6 +50,11 @@ class LoadCategoryData extends AbstractDataFixture implements FixtureInterface, 
 
     }
 
+    /**
+     * Sample demo data
+     *
+     * @return array
+     */
     protected function getSampleCategoriesTree()
     {
         return [
@@ -86,3 +91,4 @@ class LoadCategoryData extends AbstractDataFixture implements FixtureInterface, 
         return 100;
     }
 }
+
