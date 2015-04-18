@@ -17,7 +17,6 @@ use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
 /**
  * Class WellCommerceCategoryExtension
  *
- * @package WellCommerce\Bundle\CategoryBundle\DependencyInjection
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class WellCommerceCategoryExtension extends AbstractExtension

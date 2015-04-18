@@ -23,4 +23,8 @@
     <route id="front.client.orders" path="/orders/index">
         <default key="_controller">client.controller.front:ordersAction</default>
     </route>
+
+    <route id="front.client.login_check" path="/login_check" />
+
+    <route id="front.client.logout" path="/logout" />
 </routes>

@@ -18,7 +18,6 @@ use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\DataSetAwareRepositoryInterface;
 /**
  * Interface AvailabilityRepositoryInterface
  *
- * @package WellCommerce\Bundle\AvailabilityBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface AvailabilityRepositoryInterface extends RepositoryInterface, DataSetAwareRepositoryInterface

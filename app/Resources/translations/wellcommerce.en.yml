@@ -42,6 +42,7 @@ admin:
         unit: Units
         order_status: 'Order statuses'
         order_status_group: 'Order status groups'
+        user: Administrators
 package:
     heading:
         index: Packages

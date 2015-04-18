@@ -9,7 +9,6 @@ use WellCommerce\Bundle\ProductBundle\Entity\Product;
 /**
  * Class CartProduct
  *
- * @package WellCommerce\Bundle\CartBundle\Entity
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * @ORM\Table(name="cart_product")

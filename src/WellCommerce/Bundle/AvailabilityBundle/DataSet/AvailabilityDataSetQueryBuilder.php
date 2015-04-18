@@ -18,7 +18,6 @@ use WellCommerce\Bundle\DataSetBundle\QueryBuilder\QueryBuilderInterface;
 /**
  * Class AvailabilityDataSetQueryBuilder
  *
- * @package WellCommerce\Bundle\AvailabilityBundle\DataSet
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class AvailabilityDataSetQueryBuilder extends AbstractDataSetQueryBuilder implements QueryBuilderInterface

@@ -18,7 +18,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 /**
  * Class LoadAvailabilityData
  *
- * @package WellCommerce\Bundle\AvailabilityBundle\DataFixtures\ORM
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class LoadAvailabilityData implements FixtureInterface

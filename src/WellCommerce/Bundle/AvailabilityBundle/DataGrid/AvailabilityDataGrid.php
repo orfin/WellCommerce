@@ -21,7 +21,6 @@ use WellCommerce\Bundle\DataGridBundle\DataGridInterface;
 /**
  * Class AvailabilityDataGrid
  *
- * @package WellCommerce\Bundle\AvailabilityBundle
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class AvailabilityDataGrid extends AbstractDataGrid implements DataGridInterface

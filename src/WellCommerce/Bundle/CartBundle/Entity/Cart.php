@@ -18,7 +18,6 @@ use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\Timestampable\Timesta
 /**
  * Class Cart
  *
- * @package WellCommerce\Bundle\CartBundle\Entity
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * @ORM\Table(name="cart")

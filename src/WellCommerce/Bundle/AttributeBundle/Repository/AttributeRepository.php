@@ -18,7 +18,6 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 /**
  * Class AttributeRepository
  *
- * @package WellCommerce\Bundle\AttributeBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class AttributeRepository extends AbstractEntityRepository implements AttributeRepositoryInterface

@@ -33,11 +33,21 @@ class ClientController extends AbstractFrontController implements FrontControlle
 
     }
 
-    public function loginAction(){
+    public function loginAction()
+    {
+        $form = $this->get('client_login.form_builder.front')->createForm([
+            'name'         => 'login',
+            'ajax_enabled' => false,
+            'action'       => $this->generateUrl('front.client.login_check')
+        ], null);
 
+        return [
+            'form' => $form
+        ];
     }
 
-    public function registerAction(){
+    public function registerAction()
+    {
 
     }
 }

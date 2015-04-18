@@ -22,7 +22,6 @@ use WellCommerce\Bundle\RoutingBundle\Helper\Sluggable;
 /**
  * Class LoadCategoryData
  *
- * @package WellCommerce\Bundle\CategoryBundle\DataFixtures\ORM
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class LoadCategoryData extends AbstractDataFixture implements FixtureInterface, OrderedFixtureInterface
