@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Manager;
 
+use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
@@ -83,4 +84,34 @@ interface ManagerInterface
      * @return RepositoryInterface
      */
     public function getRepository();
+
+    /**
+     * Initializes new resource object
+     *
+     * @return object
+     */
+    public function initResource();
+
+    /**
+     * Persists new resource
+     *
+     * @param object  $resource
+     * @param Request $request
+     */
+    public function createResource($resource, Request $request);
+
+    /**
+     * Updates existing resource
+     *
+     * @param object  $resource
+     * @param Request $request
+     */
+    public function updateResource($resource, Request $request);
+
+    /**
+     * Removes a resource
+     *
+     * @param object $resource
+     */
+    public function removeResource($resource);
 }

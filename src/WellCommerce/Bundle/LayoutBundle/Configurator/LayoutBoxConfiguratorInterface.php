@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\LayoutBundle\Configurator;
 
 use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
  * Interface LayoutBoxConfiguratorInterface
@@ -33,11 +34,12 @@ interface LayoutBoxConfiguratorInterface
      * Adds form fields required to configure the layout box
      *
      * @param FormBuilderInterface $builder
-     * @param                      $resource
+     * @param FormInterface        $form
+     * @param object               $resource
      *
      * @return mixed
      */
-    public function addFormFields(FormBuilderInterface $builder, $resource);
+    public function addFormFields(FormBuilderInterface $builder, FormInterface $form, $resource);
 
     /**
      * Returns box controller service name

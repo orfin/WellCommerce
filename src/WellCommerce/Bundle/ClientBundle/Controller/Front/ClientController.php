@@ -30,7 +30,6 @@ class ClientController extends AbstractFrontController implements FrontControlle
      */
     public function indexAction(Request $request)
     {
-
     }
 
     public function loginAction()
@@ -42,12 +41,36 @@ class ClientController extends AbstractFrontController implements FrontControlle
         ], null);
 
         return [
-            'form' => $form
+            'form'     => $form,
+            'elements' => $form->getChildren(),
         ];
+
     }
 
-    public function registerAction()
+    public function registerAction(Request $request)
     {
+        $resource = $this->getManager()->initResource();
+        $form     = $this->get('client_register.form_builder.front')->createForm([
+            'name' => 'register'
+        ], $resource);
 
+        if ($form->handleRequest()->isSubmitted()) {
+            if ($form->isValid()) {
+                $this->getManager()->createResource($resource, $request);
+
+                $this->getManager()->getFlashHelper()->addSuccess('client.flash.registration.success');
+
+                return $this->getManager()->getRedirectHelper()->redirectToAction('register');
+            }
+
+            if (count($form->getError())) {
+                $this->getManager()->getFlashHelper()->addError('client.flash.registration.error');
+            }
+        }
+
+        return [
+            'form'     => $form,
+            'elements' => $form->getChildren(),
+        ];
     }
 }

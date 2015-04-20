@@ -12,9 +12,6 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Manager\Front;
 
-use Symfony\Component\HttpFoundation\Request;
-use WellCommerce\Bundle\CoreBundle\Event\ResourceEvent;
-use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
 use WellCommerce\Bundle\CoreBundle\Provider\ProviderCollection;
 
@@ -23,7 +20,7 @@ use WellCommerce\Bundle\CoreBundle\Provider\ProviderCollection;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AbstractFrontManager extends AbstractManager implements FrontManagerInterface
+abstract class AbstractFrontManager extends AbstractManager implements FrontManagerInterface
 {
     /**
      * @var ProviderCollection
@@ -52,33 +49,5 @@ class AbstractFrontManager extends AbstractManager implements FrontManagerInterf
     public function getProvider($type)
     {
         return $this->providers->get($type);
-    }
-
-    /**
-     * Triggers event
-     *
-     * @param object  $resource
-     * @param Request $request
-     * @param string  $name
-     */
-    protected function dispatchEvent($resource, Request $request, $name)
-    {
-        $reflection = new \ReflectionClass($resource);
-        $eventName  = $this->getEventName($reflection->getShortName(), $name);
-        $event      = new ResourceEvent($resource, $request);
-        $this->getEventDispatcher()->dispatch($eventName, $event);
-    }
-
-    /**
-     * Returns event name for resource
-     *
-     * @param string $class
-     * @param string $name
-     *
-     * @return string
-     */
-    protected function getEventName($class, $name)
-    {
-        return sprintf('%s.%s', Helper::snake($class), $name);
     }
 }

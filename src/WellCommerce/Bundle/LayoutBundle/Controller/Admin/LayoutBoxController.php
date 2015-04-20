@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Bundle\LayoutBundle\Controller\Admin;
 
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
 
 /**
@@ -23,4 +25,39 @@ use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
  */
 class LayoutBoxController extends AbstractAdminController
 {
+    public function addAction(Request $request)
+    {
+        $resource = $this->getManager()->initResource();
+        $form     = $this->getManager()->getForm($resource);
+
+        if ($form->handleRequest()->isSubmitted()) {
+            if ($form->isValid()) {
+                $settings = $this->getBoxSettingsFromRequest($request);
+                $resource->setSettings($settings);
+                $this->getManager()->createResource($resource, $request);
+            }
+
+            return $this->createJsonDefaultResponse($form);
+        }
+
+        return [
+            'form' => $form
+        ];
+    }
+
+    /**
+     * Returns box settings from request
+     *
+     * @param Request $request
+     *
+     * @return mixed
+     */
+    protected function getBoxSettingsFromRequest(Request $request)
+    {
+        $accessor   = PropertyAccess::createPropertyAccessor();
+        $parameters = $request->request->all();
+        $boxType    = $accessor->getValue($parameters, '[required_data][boxType]');
+
+        return $accessor->getValue($parameters, '[' . $boxType . ']');
+    }
 }

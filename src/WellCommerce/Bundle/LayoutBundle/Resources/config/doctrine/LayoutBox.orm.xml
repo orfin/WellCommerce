@@ -6,16 +6,6 @@
     </id>
     <field name="boxType" type="string" column="box_type" nullable="false"/>
     <field name="settings" type="json_array" column="settings" nullable="false"/>
-    <field name="visibility" type="integer" column="visibility" nullable="false">
-      <options>
-        <option name="default">1</option>
-      </options>
-    </field>
-    <field name="showHeader" type="boolean" column="show_header" nullable="false">
-      <options>
-        <option name="default">1</option>
-      </options>
-    </field>
     <field name="identifier" type="string" column="identifier" nullable="false"/>
   </entity>
 </doctrine-mapping>

@@ -80,38 +80,6 @@ class LayoutBox
     }
 
     /**
-     * @return bool
-     */
-    public function getVisibility()
-    {
-        return $this->visibility;
-    }
-
-    /**
-     * @param $visibility
-     */
-    public function setVisibility($visibility)
-    {
-        $this->visibility = $visibility;
-    }
-
-    /**
-     * @return bool
-     */
-    public function getShowHeader()
-    {
-        return $this->showHeader;
-    }
-
-    /**
-     * @param $showHeader
-     */
-    public function setShowHeader($showHeader)
-    {
-        $this->showHeader = $showHeader;
-    }
-
-    /**
      * @return array
      */
     public function getSettings()

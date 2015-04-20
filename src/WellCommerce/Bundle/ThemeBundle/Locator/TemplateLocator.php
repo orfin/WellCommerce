@@ -27,8 +27,6 @@ use Symfony\Component\Templating\TemplateReferenceInterface;
  */
 class TemplateLocator extends BaseTemplateLocator
 {
-    protected $activeTheme;
-
     /**
      * @return FileLocatorInterface
      */
@@ -40,14 +38,11 @@ class TemplateLocator extends BaseTemplateLocator
     /**
      * Returns a full path for a given file.
      *
-     * @param TemplateReferenceInterface $template    A template
-     * @param string                     $currentPath Unused
-     * @param Boolean                    $first       Unused
+     * @param string|TemplateReferenceInterface $template
+     * @param null                              $currentPath
+     * @param bool                              $first
      *
      * @return string The full path for the file
-     *
-     * @throws \InvalidArgumentException When the template is not an instance of TemplateReferenceInterface
-     * @throws \InvalidArgumentException When the template file can not be found
      */
     public function locate($template, $currentPath = null, $first = true)
     {
@@ -55,35 +50,6 @@ class TemplateLocator extends BaseTemplateLocator
             throw new \InvalidArgumentException("The template must be an instance of TemplateReferenceInterface.");
         }
 
-        $key = $this->getCacheKey($template);
-
-        if (!isset($this->cache[$key])) {
-            try {
-                $this->cache[$key] = $this->locator->locate($template->getPath(), $currentPath);
-            } catch (\InvalidArgumentException $e) {
-                throw new \InvalidArgumentException(sprintf('Unable to find template "%s" in "%s".', $template,
-                        $e->getMessage()), 0, $e);
-            }
-        }
-
-        return $this->cache[$key];
-    }
-
-    /**
-     * Returns a full path for a given file.
-     *
-     * @param TemplateReferenceInterface $template A template
-     *
-     * @return string The full path for the file
-     */
-    protected function getCacheKey($template)
-    {
-        $name = $template->getLogicalName();
-
-        if ($this->activeTheme) {
-            $name .= '|'.$this->activeTheme;
-        }
-
-        return $name;
+        return $this->locator->locate($template->getPath(), $currentPath);
     }
 }

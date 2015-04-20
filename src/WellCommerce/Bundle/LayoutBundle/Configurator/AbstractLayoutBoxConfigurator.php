@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\LayoutBundle\Configurator;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
 use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\FormBundle\Conditions\Equals;
+use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
  * Class AbstractLayoutBoxConfigurator
@@ -50,13 +51,12 @@ abstract class AbstractLayoutBoxConfigurator extends AbstractContainer
     /**
      * {@inheritdoc}
      */
-    protected function getFieldset(FormBuilderInterface $builder)
+    protected function getFieldset(FormBuilderInterface $builder, FormInterface $form)
     {
-        $form          = $builder->getForm();
-        $boxTypeSelect = $form->getElement('boxType');
-        $boxTypeSelect->addOption($this->type, $this->type);
+        $boxTypeSelect = $form->getChildren()->get('required_data')->getChildren()->get('boxType');
+        $boxTypeSelect->addOptionToSelect($this->type, $this->type);
 
-        $fieldset = $form->addChild($builder->getElement('fieldset', [
+        $fieldset = $form->addChild($builder->getElement('nested_fieldset', [
             'name'         => $this->getType(),
             'label'        => $this->trans('Box settings'),
             'dependencies' => [

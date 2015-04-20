@@ -25,36 +25,6 @@ use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
 interface AdminManagerInterface extends ManagerInterface
 {
     /**
-     * Initializes new resource object
-     *
-     * @return object
-     */
-    public function initResource();
-
-    /**
-     * Persists new resource
-     *
-     * @param object  $resource
-     * @param Request $request
-     */
-    public function createResource($resource, Request $request);
-
-    /**
-     * Updates existing resource
-     *
-     * @param object  $resource
-     * @param Request $request
-     */
-    public function updateResource($resource, Request $request);
-
-    /**
-     * Removes a resource
-     *
-     * @param object $resource
-     */
-    public function removeResource($resource);
-
-    /**
      * Returns current resource or throws an exception
      *
      * @param Request $request

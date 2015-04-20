@@ -74,6 +74,7 @@ class ShopSubscriber extends AbstractEventSubscriber
 
                 throw new \LogicException($message);
             }
+
             $themeManager->setCurrentTheme($frontContext->getCurrentScope()->getTheme());
         }
     }

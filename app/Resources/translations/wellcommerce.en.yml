@@ -81,3 +81,16 @@ dictionary:
         edit: 'Edit translation'
     label:
         identifier: Identifier
+client:
+    label:
+        first_name: Firstname
+        last_name: Lastname
+        email: E-mail
+        phone: Phone
+        password: Password
+        client_group: Group
+        discount: Discount
+    button:
+        login: Sign in
+        register: Sign up
+        reset_password: Reset password
