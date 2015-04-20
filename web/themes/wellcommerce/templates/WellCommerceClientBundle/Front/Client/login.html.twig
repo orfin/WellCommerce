@@ -1,22 +1,22 @@
 {% extends 'WellCommerceWebBundle:Front:layout.html.twig' %}
-{% import "WellCommerceWebBundle:Front/Common:form_macros.html.twig" as macros %}
 {% block content %}
     <div class="col-lg-12">
         {% include 'WellCommerceWebBundle:Front:breadcrumbs.html.twig' %}
-        {% include 'WellCommerceCategoryBundle:Front/Common:options.html.twig' %}
     </div>
-    <div class="col-lg-3 col-md-3">
+    <div class="col-lg-12 main-col">
         <div class="row">
-            <div class="col-lg-12">
-                {{ layout_box('category.menu') }}
+            <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
+                <div class="row">
+                    <div class="col-lg-12 box">
+                        {{ layout_box('category.menu.box') }}
+                    </div>
+                </div>
             </div>
 
-            <div class="col-lg-12">
-                {{ macros.form_begin(form, 'login-form') }}
-                    {{ macros.element(elements.get('_username')) }}
-                    {{ macros.element(elements.get('_password')) }}
-                    {{ macros.element(elements.get('log_in'), 'btn btn-lg btn-primary btn-block') }}
-                {{ macros.form_end(form) }}
+            <div class="col-lg-9 col-md-9">
+                <div class="col-lg-12 box">
+                    {{ layout_box('client.login.box') }}
+                </div>
             </div>
         </div>
     </div>

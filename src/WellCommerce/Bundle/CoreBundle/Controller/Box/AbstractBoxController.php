@@ -11,6 +11,7 @@
  */
 namespace WellCommerce\Bundle\CoreBundle\Controller\Box;
 
+use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 
 /**
@@ -20,4 +21,5 @@ use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
  */
 abstract class AbstractBoxController extends AbstractFrontController implements BoxControllerInterface
 {
+
 }

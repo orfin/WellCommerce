@@ -1,5 +1,4 @@
 {% extends 'WellCommerceWebBundle:Front:layout.html.twig' %}
-{% import "WellCommerceWebBundle:Front/Common:form_macros.html.twig" as macros %}
 {% block content %}
     <div class="col-lg-12">
         {% include 'WellCommerceWebBundle:Front:breadcrumbs.html.twig' %}
@@ -9,21 +8,14 @@
             <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
                 <div class="row">
                     <div class="col-lg-12 box">
-                        {{ layout_box('category.menu') }}
+                        {{ layout_box('category.menu.box') }}
                     </div>
                 </div>
             </div>
 
             <div class="col-lg-9 col-md-9">
                 <div class="col-lg-12 box">
-                    {% include 'WellCommerceWebBundle:Front/Common:flashes.html.twig' %}
-                    {{ macros.form_begin(form, 'signup-form') }}
-                    {% for element in elements %}
-                        {{ macros.element(element) }}
-                    {% endfor %}
-                    {{ macros.form_end(form) }}
-
-                    {{ elements.get('email').getValue() }}
+                    {{ layout_box('client.registration.box') }}
                 </div>
             </div>
         </div>

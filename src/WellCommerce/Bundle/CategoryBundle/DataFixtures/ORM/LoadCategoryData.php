@@ -17,6 +17,7 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
+use WellCommerce\Bundle\LayoutBundle\Entity\LayoutBox;
 use WellCommerce\Bundle\RoutingBundle\Helper\Sluggable;
 
 /**
@@ -44,6 +45,22 @@ class LoadCategoryData extends AbstractDataFixture implements FixtureInterface, 
             $category->mergeNewTranslations();
             $manager->persist($category);
         }
+
+        $categoryMenuBox = new LayoutBox();
+        $categoryMenuBox->setBoxType('CategoryMenuBox');
+        $categoryMenuBox->setIdentifier('category.menu.box');
+        $categoryMenuBox->setSettings([]);
+        $categoryMenuBox->translate('en')->setName('Categories');
+        $categoryMenuBox->mergeNewTranslations();
+        $manager->persist($categoryMenuBox);
+
+        $categoryInfoBox = new LayoutBox();
+        $categoryInfoBox->setBoxType('CategoryInfoBox');
+        $categoryInfoBox->setIdentifier('category.info.box');
+        $categoryInfoBox->setSettings([]);
+        $categoryInfoBox->translate('en')->setName('Category info');
+        $categoryInfoBox->mergeNewTranslations();
+        $manager->persist($categoryInfoBox);
 
         $manager->flush();
 

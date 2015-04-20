@@ -17,6 +17,7 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use WellCommerce\Bundle\ClientBundle\Entity\Client;
 use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
+use WellCommerce\Bundle\LayoutBundle\Entity\LayoutBox;
 
 /**
  * Class LoadClientData
@@ -31,15 +32,13 @@ class LoadClientData extends AbstractDataFixture implements FixtureInterface, Or
      */
     public function load(ObjectManager $manager)
     {
-        $clientGroup
-            = $manager->getRepository('WellCommerce\Bundle\ClientBundle\Entity\ClientGroup')
-            ->findOneBy(['discount' => 10]);
+        $clientGroupRepository = $manager->getRepository('WellCommerce\Bundle\ClientBundle\Entity\ClientGroup');
+        $clientGroup           = $clientGroupRepository->findOneBy(['discount' => 10]);
 
         for ($i = 1; $i <= 100; $i++) {
             $client = new Client();
             $client->setFirstName($this->fakerGenerator->firstName);
             $client->setLastName($this->fakerGenerator->lastName);
-            $client->setUsername($this->fakerGenerator->userName.$i);
             $client->setEmail($this->fakerGenerator->email);
             $client->setPhone($this->fakerGenerator->phoneNumber);
             $client->setDiscount(rand(0, 100));
@@ -47,6 +46,44 @@ class LoadClientData extends AbstractDataFixture implements FixtureInterface, Or
             $client->setGroup($clientGroup);
             $manager->persist($client);
         }
+
+        $registrationBox = new LayoutBox();
+        $registrationBox->setBoxType('ClientRegistrationBox');
+        $registrationBox->setIdentifier('client.registration.box');
+        $registrationBox->setSettings([]);
+        $manager->persist($registrationBox);
+
+        $loginBox = new LayoutBox();
+        $loginBox->setBoxType('ClientLoginBox');
+        $loginBox->setIdentifier('client.login.box');
+        $loginBox->setSettings([]);
+        $loginBox->translate('en')->setName('Sign in');
+        $loginBox->mergeNewTranslations();
+        $manager->persist($loginBox);
+
+        $orderBox = new LayoutBox();
+        $orderBox->setBoxType('ClientOrderBox');
+        $orderBox->setIdentifier('client.order.box');
+        $orderBox->setSettings([]);
+        $manager->persist($orderBox);
+
+        $settingsBox = new LayoutBox();
+        $settingsBox->setBoxType('ClientSettingsBox');
+        $settingsBox->setIdentifier('client.settings.box');
+        $settingsBox->setSettings([]);
+        $manager->persist($settingsBox);
+
+        $forgotPassword = new LayoutBox();
+        $forgotPassword->setBoxType('ClientForgotPasswordBox');
+        $forgotPassword->setIdentifier('client.forgot_password.box');
+        $forgotPassword->setSettings([]);
+        $manager->persist($forgotPassword);
+
+        $addressBook = new LayoutBox();
+        $addressBook->setBoxType('ClientAddressBookBox');
+        $addressBook->setIdentifier('client.address_book.box');
+        $addressBook->setSettings([]);
+        $manager->persist($addressBook);
 
         $manager->flush();
     }

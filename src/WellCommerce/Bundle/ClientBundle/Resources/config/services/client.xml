@@ -108,5 +108,37 @@
             </call>
             <tag name="kernel.event_subscriber"  />
         </service>
+
+        <service id="client_login.layout_box.controller" class="WellCommerce\Bundle\ClientBundle\Controller\Box\ClientLoginBoxController">
+            <argument type="service" id="client.manager.front"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="client_login.layout_box.configurator" class="WellCommerce\Bundle\ClientBundle\Layout\ClientLoginBoxConfigurator">
+            <argument>ClientLoginBox</argument>
+            <argument>client_login.layout_box.controller</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="layout_box.configurator" />
+        </service>
+
+        <service id="client_registration.layout_box.controller" class="WellCommerce\Bundle\ClientBundle\Controller\Box\ClientRegistrationBoxController">
+            <argument type="service" id="client.manager.front"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="client_registration.layout_box.configurator" class="WellCommerce\Bundle\ClientBundle\Layout\ClientRegistrationBoxConfigurator">
+            <argument>ClientRegistrationBox</argument>
+            <argument>client_registration.layout_box.controller</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="layout_box.configurator" />
+        </service>
     </services>
 </container>
