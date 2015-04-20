@@ -28,6 +28,8 @@ class Client implements \Serializable, UserInterface, EquatableInterface
     use ORMBehaviors\Timestampable\Timestampable;
     use ORMBehaviors\Blameable\Blameable;
 
+    const ROLE_CLIENT = 'ROLE_CLIENT';
+
     /**
      * @var integer
      *
@@ -243,7 +245,9 @@ class Client implements \Serializable, UserInterface, EquatableInterface
      */
     public function getRoles()
     {
-        return [];
+        return [
+            self::ROLE_CLIENT
+        ];
     }
 
     public function getPhone()
@@ -256,17 +260,11 @@ class Client implements \Serializable, UserInterface, EquatableInterface
         $this->phone = $phone;
     }
 
-    /**
-     * @see \Serializable::serialize()
-     */
     public function serialize()
     {
         return serialize([$this->id, $this->username, $this->password]);
     }
 
-    /**
-     * @see \Serializable::unserialize()
-     */
     public function unserialize($serialized)
     {
         list($this->id, $this->username, $this->password) = unserialize($serialized);

@@ -27,22 +27,23 @@ class ClientRegistrationBoxController extends AbstractBoxController implements B
 {
     public function indexAction(Request $request)
     {
-        $resource = $this->getManager()->initResource();
+        $manager  = $this->getManager();
+        $resource = $manager->initResource();
         $form     = $this->get('client_register.form_builder.front')->createForm([
             'name' => 'register'
         ], $resource);
 
         if ($form->handleRequest()->isSubmitted()) {
             if ($form->isValid()) {
-                $this->getManager()->createResource($resource, $request);
+                $manager->createResource($resource, $request);
 
-                $this->getManager()->getFlashHelper()->addSuccess('client.flash.registration.success');
+                $manager->getFlashHelper()->addSuccess('client.flash.registration.success');
 
-                return $this->getManager()->getRedirectHelper()->redirectToAction('register');
+                return $manager->getRedirectHelper()->redirectTo('front.client.login');
             }
 
             if (count($form->getError())) {
-                $this->getManager()->getFlashHelper()->addError('client.flash.registration.error');
+                $manager->getFlashHelper()->addError('client.flash.registration.error');
             }
         }
 

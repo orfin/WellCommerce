@@ -12,14 +12,20 @@
 
 namespace WellCommerce\Bundle\ClientBundle\Repository;
 
+use Doctrine\Common\Util\Debug;
+use Doctrine\ORM\NoResultException;
+use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
+use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
+use Symfony\Component\Security\Core\User\UserInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\UserBundle\Repository\UserRepositoryInterface;
 
 /**
  * Class ClientGroupRepository
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientRepository extends AbstractEntityRepository implements ClientGroupRepositoryInterface
+class ClientRepository extends AbstractEntityRepository implements ClientRepositoryInterface, UserRepositoryInterface
 {
     /**
      * {@inheritdoc}
@@ -32,5 +38,43 @@ class ClientRepository extends AbstractEntityRepository implements ClientGroupRe
         $queryBuilder->leftJoin('client_group.translations', 'client_group_translation');
 
         return $queryBuilder;
+    }
+
+    public function refreshUser(UserInterface $user)
+    {
+        $class = get_class($user);
+        if (!$this->supportsClass($class)) {
+            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', $class));
+        }
+
+        return $this->loadUserByUsername($user->getUsername());
+    }
+
+    public function supportsClass($class)
+    {
+        return $this->getEntityName() === $class || is_subclass_of($class, $this->getEntityName());
+    }
+
+    public function loadUserByUsername($username)
+    {
+        $queryBuilder = $this
+            ->createQueryBuilder('c')
+            ->select('c')
+            ->where('c.username = :username OR c.email = :email')
+            ->setParameter('username', $username)
+            ->setParameter('email', $username)
+            ->getQuery();
+
+        try {
+            $user = $queryBuilder->getSingleResult();
+        } catch (NoResultException $e) {
+            $msg = sprintf(
+                'Unable to find an active client WellCommerceClientBundle:Client object identified by "%s".',
+                $username
+            );
+            throw new UsernameNotFoundException($msg, null, 0, $e);
+        }
+
+        return $user;
     }
 }

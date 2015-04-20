@@ -6,6 +6,7 @@ security:
         admin:
             pattern:   ^/admin
             anonymous: ~
+            provider: administrators
             form_login:
                 login_path: admin.user.login
                 check_path: admin.user.login_check
@@ -16,6 +17,7 @@ security:
         client:
             pattern:   ^/client
             anonymous: ~
+            provider: clients
             form_login:
                 login_path: front.client.login
                 check_path: front.client.login_check
@@ -37,7 +39,7 @@ security:
         administrators:
             entity: { class: WellCommerceUserBundle:User }
         clients:
-            entity: { class: WellCommerceClientBundle:Client, property: username }
+            entity: { class: WellCommerceClientBundle:Client }
 
     encoders:
         WellCommerce\Bundle\UserBundle\Entity\User:

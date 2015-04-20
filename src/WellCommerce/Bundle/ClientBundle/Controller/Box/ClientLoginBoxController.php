@@ -38,4 +38,9 @@ class ClientLoginBoxController extends AbstractBoxController implements BoxContr
             'elements' => $form->getChildren(),
         ];
     }
+
+    public function loginCheckAction()
+    {
+        die('Failed');
+    }
 }

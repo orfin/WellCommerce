@@ -91,6 +91,6 @@ client:
         client_group: Group
         discount: Discount
     button:
-        login: Sign in
-        register: Sign up
-        reset_password: Reset password
+        login: 'Sign in'
+        register: 'Sign up'
+        reset_password: 'Reset password'
