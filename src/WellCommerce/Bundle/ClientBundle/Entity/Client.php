@@ -69,7 +69,7 @@ class Client implements \Serializable, UserInterface, EquatableInterface
     protected $email;
 
     /**
-     * @ORM\Column(type="string", length=25, unique=true)
+     * @ORM\Column(type="string", length=60, unique=true)
      */
     protected $username;
 
