@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\ProductBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\PersistentCollection;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroup;
 use WellCommerce\Bundle\AvailabilityBundle\Entity\Availability;
@@ -209,6 +208,7 @@ class Product
         $this->productPhotos = new ArrayCollection();
         $this->statuses      = new ArrayCollection();
         $this->attributes    = new ArrayCollection();
+        $this->shops         = new ArrayCollection();
     }
 
     /**
@@ -398,7 +398,6 @@ class Product
      */
     public function setProductPhotos(ArrayCollection $photos)
     {
-        $this->synchronizeCollection($this->productPhotos, $photos);
         $this->productPhotos = $photos;
     }
 

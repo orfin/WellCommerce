@@ -54,10 +54,14 @@ class LayoutBoxController extends AbstractAdminController
      */
     protected function getBoxSettingsFromRequest(Request $request)
     {
+        $settings   = [];
         $accessor   = PropertyAccess::createPropertyAccessor();
         $parameters = $request->request->all();
         $boxType    = $accessor->getValue($parameters, '[required_data][boxType]');
+        if ($accessor->isReadable($parameters, '[' . $boxType . ']')) {
+            $settings = $accessor->getValue($parameters, '[' . $boxType . ']');
+        }
 
-        return $accessor->getValue($parameters, '[' . $boxType . ']');
+        return !is_array($settings) ? [] : $settings;
     }
 }

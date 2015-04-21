@@ -22,6 +22,18 @@
             </call>
         </service>
 
+        <service id="producer.manager.front" class="WellCommerce\Bundle\ProducerBundle\Manager\Front\ProducerManager">
+            <argument type="service" id="flash_helper"/>
+            <argument type="service" id="redirect_helper"/>
+            <argument type="service" id="image_helper"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="doctrine_helper"/>
+            <argument type="service" id="translator"/>
+            <call method="setRepository">
+                <argument type="service" id="producer.repository"/>
+            </call>
+        </service>
+
         <service id="producer.controller.admin" class="WellCommerce\Bundle\ProducerBundle\Controller\Admin\ProducerController">
             <argument type="service" id="producer.manager.admin"/>
             <call method="setContainer">
@@ -92,6 +104,22 @@
                 <argument key="sort">asc|desc</argument>
             </argument>
             <tag name="route.generator" />
+        </service>
+
+        <service id="producer_menu.layout_box.controller" class="WellCommerce\Bundle\CategoryBundle\Controller\Box\ProducerMenuBoxController">
+            <argument type="service" id="producer.manager.front"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="producer_menu.layout_box.configurator" class="WellCommerce\Bundle\ProducerBundle\Layout\ProducerMenuBoxConfigurator">
+            <argument>ProducerMenuBox</argument>
+            <argument>producer_menu.layout_box.controller</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="layout_box.configurator" />
         </service>
     </services>
 </container>
