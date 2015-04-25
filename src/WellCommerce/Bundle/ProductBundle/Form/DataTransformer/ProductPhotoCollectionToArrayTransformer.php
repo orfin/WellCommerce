@@ -42,9 +42,7 @@ class ProductPhotoCollectionToArrayTransformer extends BaseTransformer implement
         }
 
         $previousCollection = $this->propertyAccessor->getValue($modelData, $propertyPath);
-        foreach ($previousCollection as $item) {
-            $previousCollection->removeElement($item);
-        }
+        $this->clearPreviousCollection($previousCollection);
 
         $collection = $this->createPhotosCollection($modelData, $values, $previousCollection);
 
@@ -65,6 +63,20 @@ class ProductPhotoCollectionToArrayTransformer extends BaseTransformer implement
     private function isPhotoCollectionUnModified($values)
     {
         return (isset($values['unmodified']) && (int)$values['unmodified'] === 1);
+    }
+
+    /**
+     * Resets previous photo collection
+     *
+     * @param PersistentCollection $collection
+     */
+    protected function clearPreviousCollection(PersistentCollection $collection)
+    {
+        if ($collection->count()) {
+            foreach ($collection as $item) {
+                $collection->removeElement($item);
+            }
+        }
     }
 
     /**
