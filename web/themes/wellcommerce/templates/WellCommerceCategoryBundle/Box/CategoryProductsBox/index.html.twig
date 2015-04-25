@@ -1,7 +1,5 @@
 {% if dataset.filtered > 0 %}
-    {% include 'WellCommerceWebBundle:Front/Common:pagination.html.twig' %}
     {% include 'WellCommerceWebBundle:Front/Common:products.html.twig' %}
-    {% include 'WellCommerceWebBundle:Front/Common:pagination.html.twig' %}
 {% else %}
     <div class="alert alert-info" role="alert">
         <strong>{% trans %}category.info.no_products{% endtrans %}</strong>

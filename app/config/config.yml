@@ -100,6 +100,9 @@ liip_imagine:
         small:
             filters:
                 thumbnail: { size: [120, 120], mode: outbound }
+        normal:
+            filters:
+                thumbnail: { size: [175, 175], mode: outbound }
         medium:
             filters:
                 thumbnail: { size: [240, 240], mode: outbound }

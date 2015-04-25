@@ -24,7 +24,4 @@ use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
  */
 class ProductController extends AbstractAdminController
 {
-    public function updateAction(Request $request)
-    {
-    }
 }

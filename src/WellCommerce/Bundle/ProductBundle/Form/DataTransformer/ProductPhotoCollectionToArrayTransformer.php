@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\ProductBundle\Form\DataTransformer;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\PersistentCollection;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 use WellCommerce\Bundle\FormBundle\DataTransformer\DataTransformerInterface;
 use WellCommerce\Bundle\MediaBundle\Entity\Media;
@@ -40,13 +41,30 @@ class ProductPhotoCollectionToArrayTransformer extends BaseTransformer implement
             return false;
         }
 
-        $photos = $this->createPhotosCollection($modelData, $values);
+        $previousCollection = $this->propertyAccessor->getValue($modelData, $propertyPath);
+        foreach ($previousCollection as $item) {
+            $previousCollection->removeElement($item);
+        }
 
-        if ($photos->count() == 0) {
+        $collection = $this->createPhotosCollection($modelData, $values, $previousCollection);
+
+        if (0 === $collection->count()) {
             $modelData->setPhoto(null);
         }
 
-        $modelData->setProductPhotos($photos);
+        $this->propertyAccessor->setValue($modelData, $propertyPath, $collection);
+    }
+
+    /**
+     * Checks whether photo collection was modified
+     *
+     * @param array $values
+     *
+     * @return bool
+     */
+    private function isPhotoCollectionUnModified($values)
+    {
+        return (isset($values['unmodified']) && (int)$values['unmodified'] === 1);
     }
 
     /**
@@ -57,7 +75,7 @@ class ProductPhotoCollectionToArrayTransformer extends BaseTransformer implement
      *
      * @return ArrayCollection
      */
-    protected function createPhotosCollection(Product $product, $values)
+    protected function createPhotosCollection(Product $product, $values, PersistentCollection $previousCollection)
     {
         $photos      = new ArrayCollection();
         $identifiers = $this->getMediaIdentifiers($values);
@@ -65,10 +83,44 @@ class ProductPhotoCollectionToArrayTransformer extends BaseTransformer implement
         foreach ($identifiers as $id) {
             $media = $this->getMediaById($id);
             $photo = $this->getProductPhoto($media, $product, $values);
-            $photos->add($photo);
+            if (!$photos->contains($photo)) {
+                $photos->add($photo);
+            }
         }
 
         return $photos;
+    }
+
+    /**
+     * Fetch only media identifiers from an array
+     *
+     * @param array $values
+     *
+     * @return array
+     */
+    private function getMediaIdentifiers($values)
+    {
+        $identifiers = [];
+
+        foreach ($values as $key => $id) {
+            if (is_int($key)) {
+                $identifiers[] = $id;
+            }
+        }
+
+        return $identifiers;
+    }
+
+    /**
+     * Returns media entity by its identifier
+     *
+     * @param int $id
+     *
+     * @return \WellCommerce\Bundle\MediaBundle\Entity\Media
+     */
+    protected function getMediaById($id)
+    {
+        return $this->getRepository()->find($id);
     }
 
     /**
@@ -105,50 +157,6 @@ class ProductPhotoCollectionToArrayTransformer extends BaseTransformer implement
      */
     private function isMainPhoto(Media $photo, $mainId)
     {
-        return $photo->getId() == $mainId;
-    }
-
-    /**
-     * Returns media entity by its identifier
-     *
-     * @param int $id
-     *
-     * @return \WellCommerce\Bundle\MediaBundle\Entity\Media
-     */
-    protected function getMediaById($id)
-    {
-        return $this->getRepository()->find($id);
-    }
-
-    /**
-     * Fetch only media identifiers from an array
-     *
-     * @param array $values
-     *
-     * @return array
-     */
-    private function getMediaIdentifiers($values)
-    {
-        $identifiers = [];
-
-        foreach ($values as $key => $id) {
-            if (is_int($key)) {
-                $identifiers[] = $id;
-            }
-        }
-
-        return $identifiers;
-    }
-
-    /**
-     * Checks whether photo collection was modified
-     *
-     * @param array $values
-     *
-     * @return bool
-     */
-    private function isPhotoCollectionUnModified($values)
-    {
-        return (isset($values['unmodified']) && $values['unmodified'] == 1);
+        return $photo->getId() === (int)$mainId;
     }
 }

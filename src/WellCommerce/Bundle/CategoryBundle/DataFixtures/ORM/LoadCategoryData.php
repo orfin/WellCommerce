@@ -62,6 +62,14 @@ class LoadCategoryData extends AbstractDataFixture implements FixtureInterface, 
         $categoryInfoBox->mergeNewTranslations();
         $manager->persist($categoryInfoBox);
 
+        $categoryProductsBox = new LayoutBox();
+        $categoryProductsBox->setBoxType('CategoryProductsBox');
+        $categoryProductsBox->setIdentifier('category.products.box');
+        $categoryProductsBox->setSettings([]);
+        $categoryProductsBox->translate('en')->setName('Category products');
+        $categoryProductsBox->mergeNewTranslations();
+        $manager->persist($categoryProductsBox);
+
         $manager->flush();
 
     }
