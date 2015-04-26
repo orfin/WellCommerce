@@ -76,4 +76,26 @@
             <option name="fields">slug</option>
         </constraint>
     </class>
+
+    <class name="WellCommerce\Bundle\ProductBundle\Entity\ProductStatus">
+        <property name="translations">
+            <constraint name="Valid">
+                <option name="deep">true</option>
+            </constraint>
+        </property>
+    </class>
+
+    <class name="WellCommerce\Bundle\ProductBundle\Entity\ProductStatusTranslation">
+        <property name="name">
+            <constraint name="NotBlank" />
+            <constraint name="NotNull" />
+        </property>
+        <property name="slug">
+            <constraint name="NotBlank" />
+            <constraint name="NotNull" />
+        </property>
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">slug</option>
+        </constraint>
+    </class>
 </constraint-mapping>
