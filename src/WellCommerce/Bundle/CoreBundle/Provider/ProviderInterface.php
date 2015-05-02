@@ -35,4 +35,11 @@ interface ProviderInterface
      * @return mixed
      */
     public function getCurrentResource();
+
+    /**
+     * Returns related collection builder
+     *
+     * @return \WellCommerce\Bundle\DataSetBundle\CollectionBuilder\CollectionBuilderFactoryInterface
+     */
+    public function getCollectionBuilder();
 }

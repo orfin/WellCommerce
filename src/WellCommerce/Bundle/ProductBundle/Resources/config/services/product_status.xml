@@ -21,9 +21,31 @@
                 <argument type="service" id="product_status.datagrid"/>
             </call>
         </service>
-        
+
+        <service id="product_status.manager.front" class="WellCommerce\Bundle\ProductBundle\Manager\Front\ProductStatusManager">
+            <argument type="service" id="flash_helper"/>
+            <argument type="service" id="redirect_helper"/>
+            <argument type="service" id="image_helper"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="doctrine_helper"/>
+            <argument type="service" id="translator"/>
+            <call method="setRepository">
+                <argument type="service" id="product_status.repository"/>
+            </call>
+            <call method="setProviders">
+                <argument type="service" id="resource.provider.collection" />
+            </call>
+        </service>
+
         <service id="product_status.controller.admin" class="WellCommerce\Bundle\ProductBundle\Controller\Admin\ProductStatusController">
             <argument type="service" id="product_status.manager.admin"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="product_status.controller.front" class="WellCommerce\Bundle\ProductBundle\Controller\Front\ProductStatusController">
+            <argument type="service" id="product_status.manager.front"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -33,28 +55,47 @@
             <argument>WellCommerceProductBundle:ProductStatus</argument>
         </service>
 
-        <service id="product_status.dataset.query_builder" class="WellCommerce\Bundle\ProductBundle\DataSet\Admin\ProductStatusDataSetQueryBuilder" public="false">
+        <service id="product_status.dataset.query_builder.admin" class="WellCommerce\Bundle\ProductBundle\DataSet\Admin\ProductStatusDataSetQueryBuilder" public="false">
             <argument type="service" id="product_status.repository"/>
         </service>
 
-        <service id="product_status.dataset.loader" class="%dataset.loader.class%">
-            <argument type="service" id="product_status.dataset.query_builder"/>
+        <service id="product_status.dataset.query_builder.front" class="WellCommerce\Bundle\ProductBundle\DataSet\Front\ProductStatusDataSetQueryBuilder" public="false">
+            <argument type="service" id="product_status.repository"/>
+        </service>
+
+        <service id="product_status.dataset.loader.admin" class="%dataset.loader.class%">
+            <argument type="service" id="product_status.dataset.query_builder.admin"/>
             <argument type="service" id="dataset.processor"/>
         </service>
 
-        <service id="product_status.dataset" class="WellCommerce\Bundle\ProductBundle\DataSet\Admin\ProductStatusDataSet">
+        <service id="product_status.dataset.loader.front" class="%dataset.loader.class%">
+            <argument type="service" id="product_status.dataset.query_builder.front"/>
+            <argument type="service" id="dataset.processor"/>
+        </service>
+
+        <service id="product_status.dataset.admin" class="WellCommerce\Bundle\ProductBundle\DataSet\Admin\ProductStatusDataSet">
             <argument key="identifier">product_status</argument>
-            <argument type="service" id="product_status.dataset.loader"/>
+            <argument type="service" id="product_status.dataset.loader.admin"/>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
-        <service id="product_status.collection" parent="dataset.collection_builder.factory">
-            <argument type="service" id="product_status.dataset"/>
+        <service id="product_status.dataset.front" class="WellCommerce\Bundle\ProductBundle\DataSet\Front\ProductStatusDataSet">
+            <argument key="identifier">product_status</argument>
+            <argument type="service" id="product_status.dataset.loader.front"/>
+            <configurator service="dataset.configurator" method="configure"/>
+        </service>
+
+        <service id="product_status.collection.admin" parent="dataset.collection_builder.factory">
+            <argument type="service" id="product_status.dataset.admin"/>
+        </service>
+
+        <service id="product_status.collection.front" parent="dataset.collection_builder.factory">
+            <argument type="service" id="product_status.dataset.front"/>
         </service>
 
         <service id="product_status.datagrid" class="WellCommerce\Bundle\ProductBundle\DataGrid\ProductStatusDataGrid">
             <argument key="identifier">product_status</argument>
-            <argument type="service" id="product_status.dataset"/>
+            <argument type="service" id="product_status.dataset.admin"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -68,5 +109,28 @@
             </call>
         </service>
 
+        <service id="product_status.provider" class="WellCommerce\Bundle\ProductBundle\Provider\ProductStatusProvider">
+            <argument type="service" id="product_status.collection.front" />
+            <tag name="resource.provider" alias="product_status"/>
+        </service>
+
+        <service id="product_status.route.generator" class="WellCommerce\Bundle\ProductBundle\Routing\ProductStatusRouteGenerator">
+            <argument type="collection" key="defaults">
+                <argument key="_controller">product_status.controller.front:indexAction</argument>
+                <argument key="page">1</argument>
+                <argument key="orderBy">null</argument>
+                <argument key="orderDir">null</argument>
+            </argument>
+            <argument type="collection" key="requirements">
+                <argument key="page">\d{1,10}</argument>
+                <argument key="orderDir">asc|desc</argument>
+            </argument>
+            <tag name="route.generator" />
+        </service>
+
+        <service id="twig.extension.product_status" class="WellCommerce\Bundle\ProductBundle\Twig\Extension\ProductStatusExtension">
+            <argument type="service" id="product_status.provider"/>
+            <tag name="twig.extension"/>
+        </service>
     </services>
 </container>

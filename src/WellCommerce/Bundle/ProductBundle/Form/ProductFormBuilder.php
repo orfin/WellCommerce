@@ -276,7 +276,7 @@ class ProductFormBuilder extends AbstractFormBuilder
         $statusesData->addChild($this->getElement('multi_select', [
             'name'        => 'statuses',
             'label'       => $this->trans('Statuses'),
-            'options'     => $this->get('product_status.collection')->getSelect(),
+            'options'     => $this->get('product_status.collection.admin')->getSelect(),
             'transformer' => new CollectionToArrayTransformer($this->get('product_status.repository'))
         ]));
 

@@ -1,29 +1,28 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- *
+ * 
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- *
+ * 
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CategoryBundle\Provider;
+namespace WellCommerce\Bundle\CoreBundle\Provider;
 
-use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\DataSetBundle\CollectionBuilder\CollectionBuilderFactoryInterface;
 
 /**
- * Class CategoryProvider
+ * Class AbstractProvider
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CategoryProvider implements CategoryProviderInterface
+abstract class AbstractProvider implements ProviderInterface
 {
     /**
-     * @var Category
+     * @var object
      */
     protected $resource;
 
@@ -45,9 +44,9 @@ class CategoryProvider implements CategoryProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function getCategoriesTree(array $parameters = [])
+    public function getCollectionBuilder()
     {
-        return $this->collectionBuilderFactory->getTree($parameters);
+        return $this->collectionBuilderFactory;
     }
 
     /**
@@ -55,15 +54,7 @@ class CategoryProvider implements CategoryProviderInterface
      */
     public function setCurrentResource($resource)
     {
-        $this->setCurrentCategory($resource);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCurrentCategory(Category $category)
-    {
-        $this->resource = $category;
+        $this->resource = $resource;
     }
 
     /**
@@ -72,13 +63,5 @@ class CategoryProvider implements CategoryProviderInterface
     public function getCurrentResource()
     {
         return $this->resource;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCurrentCategoryId()
-    {
-        return $this->resource->getId();
     }
 }

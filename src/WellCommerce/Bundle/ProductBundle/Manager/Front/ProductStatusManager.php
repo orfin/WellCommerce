@@ -10,16 +10,15 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CategoryBundle\Provider;
+namespace WellCommerce\Bundle\ProductBundle\Manager\Front;
 
-use WellCommerce\Bundle\CoreBundle\Provider\AbstractProvider;
+use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
 
 /**
- * Class CategoryProductsProvider
+ * Class ProductStatusManager
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CategoryProductsProvider extends AbstractProvider
+class ProductStatusManager extends AbstractFrontManager
 {
-
 }

@@ -20,7 +20,7 @@ use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractRouteGenerator
+abstract class AbstractRouteGenerator implements RouteGeneratorInterface
 {
     /**
      * @var array
@@ -51,7 +51,9 @@ abstract class AbstractRouteGenerator
         $this->requirements = $requirements;
     }
 
-
+    /**
+     * {@inheritdoc}
+     */
     public function generate(RouteInterface $resource)
     {
         $this->defaults['id']      = $resource->getIdentifier();
@@ -64,4 +66,9 @@ abstract class AbstractRouteGenerator
             $this->options
         );
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    abstract public function supports($strategy);
 }

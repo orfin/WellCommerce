@@ -10,16 +10,18 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CategoryBundle\Provider;
+namespace WellCommerce\Bundle\ProductBundle\Provider;
 
+use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CoreBundle\Provider\AbstractProvider;
+use WellCommerce\Bundle\DataSetBundle\CollectionBuilder\CollectionBuilderFactoryInterface;
 
 /**
- * Class CategoryProductsProvider
+ * Class ProductStatusProvider
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CategoryProductsProvider extends AbstractProvider
+class ProductStatusProvider extends AbstractProvider
 {
 
 }

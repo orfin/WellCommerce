@@ -9,18 +9,16 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Bundle\CategoryBundle\Twig\Extension;
+namespace WellCommerce\Bundle\ProductBundle\Twig\Extension;
 
-use WellCommerce\Bundle\CategoryBundle\Provider\CategoryProviderInterface;
 use WellCommerce\Bundle\CoreBundle\Provider\ProviderInterface;
 
 /**
- * Class CategoryExtension
+ * Class ProductStatusExtension
  *
- * @package WellCommerce\Bundle\CategoryBundle\Twig\Extension
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CategoryExtension extends \Twig_Extension
+class ProductStatusExtension extends \Twig_Extension
 {
     /**
      * @var ProviderInterface
@@ -40,7 +38,7 @@ class CategoryExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('categoriesTree', [$this, 'getCategoriesTree'], ['is_safe' => ['html']]),
+            new \Twig_SimpleFunction('productStatuses', [$this, 'getProductStatuses'], ['is_safe' => ['html']]),
         ];
     }
 
@@ -49,11 +47,11 @@ class CategoryExtension extends \Twig_Extension
      */
     public function getName()
     {
-        return 'category';
+        return 'product_status';
     }
 
     /**
-     * Returns categories tree
+     * Returns product statuses
      *
      * @param int    $limit
      * @param string $orderBy
@@ -61,15 +59,14 @@ class CategoryExtension extends \Twig_Extension
      *
      * @return array
      */
-    public function getCategoriesTree($limit = 10, $orderBy = 'hierarchy', $orderDir = 'asc')
+    public function getProductStatuses($limit = 5, $orderBy = 'name', $orderDir = 'asc')
     {
-
         $params = [
             'limit'     => $limit,
             'order_by'  => $orderBy,
             'order_dir' => $orderDir,
         ];
 
-        return $this->provider->getCollectionBuilder()->getTree($params);
+        return $this->provider->getCollectionBuilder()->getArray($params);
     }
 }
