@@ -15,7 +15,7 @@ security:
                 path:   admin.user.logout
                 target: admin.user.login
         client:
-            pattern:   ^/client
+            pattern:   ^/
             anonymous: ~
             provider: clients
             form_login:
