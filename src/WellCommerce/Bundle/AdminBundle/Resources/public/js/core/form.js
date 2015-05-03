@@ -4191,13 +4191,6 @@ var GForm = GCore.ExtendClass(GFormContainer, function() {
 	};
 
 	gThis.GetField = function(sName) {
-		var asName = sName.split('.');
-		if (asName.length == 2) {
-			if (asName[0] != gThis.m_oOptions.sFormName) {
-				return GForm.GetForm(asName[0]).GetField(asName[1]);
-			}
-			sName = asName[1];
-		}
 		return gThis.m_ogFields[sName];
 	};
 

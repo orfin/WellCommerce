@@ -64,12 +64,6 @@ class Product
     private $producer;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\TaxBundle\Entity\Tax")
-     * @ORM\JoinColumn(name="tax_id", referencedColumnName="id", onDelete="SET NULL")
-     */
-    private $tax;
-
-    /**
      * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\UnitBundle\Entity\Unit")
      * @ORM\JoinColumn(name="unit_id", referencedColumnName="id", onDelete="SET NULL")
      */
@@ -126,36 +120,20 @@ class Product
     private $stock;
 
     /**
-     * @var float
-     *
-     * @ORM\Column(name="buy_price", type="decimal", precision=15, scale=4)
+     * @ORM\Embedded(class = "WellCommerce\Bundle\CoreBundle\Entity\Price", columnPrefix = "buy_price_")
      */
     private $buyPrice;
 
     /**
-     * @var float
-     *
-     * @ORM\Column(name="sell_price", type="decimal", precision=15, scale=4)
+     * @ORM\Embedded(class = "WellCommerce\Bundle\CoreBundle\Entity\Price", columnPrefix = "sell_price_")
      */
     private $sellPrice;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\IntlBundle\Entity\Currency")
-     * @ORM\JoinColumn(name="buy_currency_id", referencedColumnName="id", onDelete="SET NULL")
-     */
-    private $buyCurrency;
 
     /**
      * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroup")
      * @ORM\JoinColumn(name="attribute_group_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $attributeGroup;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\IntlBundle\Entity\Currency")
-     * @ORM\JoinColumn(name="sell_currency_id", referencedColumnName="id", onDelete="SET NULL")
-     */
-    private $sellCurrency;
 
     /**
      * @var bool
@@ -172,25 +150,9 @@ class Product
     private $weight;
 
     /**
-     * @var float
-     *
-     * @ORM\Column(name="width", type="decimal", precision=15, scale=4)
+     * @ORM\Embedded(class = "WellCommerce\Bundle\CoreBundle\Entity\Dimension", columnPrefix = "dimension_")
      */
-    private $width;
-
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="height", type="decimal", precision=15, scale=4)
-     */
-    private $height;
-
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="depth", type="decimal", precision=15, scale=4)
-     */
-    private $depth;
+    private $dimension;
 
     /**
      * @var float
@@ -259,26 +221,6 @@ class Product
     public function setProducer($producer)
     {
         $this->producer = $producer;
-    }
-
-    /**
-     * Returns product tax
-     *
-     * @return mixed
-     */
-    public function getTax()
-    {
-        return $this->tax;
-    }
-
-    /**
-     * Sets product tax
-     *
-     * @param Tax $tax
-     */
-    public function setTax(Tax $tax)
-    {
-        $this->tax = $tax;
     }
 
     /**
@@ -442,46 +384,6 @@ class Product
     }
 
     /**
-     * Returns buy currency
-     *
-     * @return Currency
-     */
-    public function getBuyCurrency()
-    {
-        return $this->buyCurrency;
-    }
-
-    /**
-     * Sets buy currency for product
-     *
-     * @param Currency $buyCurrency
-     */
-    public function setBuyCurrency(Currency $buyCurrency)
-    {
-        $this->buyCurrency = $buyCurrency;
-    }
-
-    /**
-     * Returns sell currency
-     *
-     * @return Currency
-     */
-    public function getSellCurrency()
-    {
-        return $this->sellCurrency;
-    }
-
-    /**
-     * Sets sell currency for product
-     *
-     * @param Currency $sellCurrency
-     */
-    public function setSellCurrency($sellCurrency)
-    {
-        $this->sellCurrency = $sellCurrency;
-    }
-
-    /**
      * Returns product sell price
      *
      * @return float
@@ -542,63 +444,19 @@ class Product
     }
 
     /**
-     * Returns product width
-     *
-     * @return float
+     * @return mixed
      */
-    public function getWidth()
+    public function getDimension()
     {
-        return $this->width;
+        return $this->dimension;
     }
 
     /**
-     * Sets product width
-     *
-     * @param float $width
+     * @param mixed $dimension
      */
-    public function setWidth($width)
+    public function setDimension($dimension)
     {
-        $this->width = $width;
-    }
-
-    /**
-     * Returns product height
-     *
-     * @return float
-     */
-    public function getHeight()
-    {
-        return $this->height;
-    }
-
-    /**
-     * Sets product height
-     *
-     * @param float $height
-     */
-    public function setHeight($height)
-    {
-        $this->height = $height;
-    }
-
-    /**
-     * Returns product depth
-     *
-     * @return float
-     */
-    public function getDepth()
-    {
-        return $this->depth;
-    }
-
-    /**
-     * Sets product depth
-     *
-     * @param float $depth
-     */
-    public function setDepth($depth)
-    {
-        $this->depth = $depth;
+        $this->dimension = $dimension;
     }
 
     /**

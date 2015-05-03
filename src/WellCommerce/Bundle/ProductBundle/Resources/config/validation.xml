@@ -9,21 +9,29 @@
                 <option name="deep">true</option>
             </constraint>
         </property>
+        <property name="sellPrice">
+            <constraint name="Valid">
+                <option name="deep">true</option>
+            </constraint>
+        </property>
+        <property name="dimension">
+            <constraint name="Valid">
+                <option name="deep">true</option>
+            </constraint>
+        </property>
         <property name="sku">
             <constraint name="NotBlank" />
             <constraint name="NotNull" />
         </property>
         <property name="buyPrice">
-            <constraint name="GreaterThanOrEqual">
-                <option name="value">0</option>
+            <constraint name="Valid">
+                <option name="deep">true</option>
             </constraint>
-            <constraint name="NotBlank" />
         </property>
         <property name="sellPrice">
-            <constraint name="GreaterThan">
-                <option name="value">0</option>
+            <constraint name="Valid">
+                <option name="deep">true</option>
             </constraint>
-            <constraint name="NotBlank" />
         </property>
         <property name="stock">
             <constraint name="GreaterThanOrEqual">
@@ -37,6 +45,36 @@
             </constraint>
             <constraint name="NotBlank" />
         </property>
+        <property name="packageSize">
+            <constraint name="GreaterThanOrEqual">
+                <option name="value">0</option>
+            </constraint>
+            <constraint name="NotBlank" />
+        </property>
+    </class>
+
+    <class name="WellCommerce\Bundle\CoreBundle\Entity\Price">
+        <property name="amount">
+            <constraint name="GreaterThan">
+                <option name="value">0</option>
+            </constraint>
+            <constraint name="NotBlank" />
+        </property>
+    </class>
+
+    <class name="WellCommerce\Bundle\CoreBundle\Entity\Dimension">
+        <property name="width">
+            <constraint name="NotBlank" />
+        </property>
+        <property name="height">
+            <constraint name="NotBlank" />
+        </property>
+        <property name="depth">
+            <constraint name="NotBlank" />
+        </property>
+    </class>
+
+    <class name="WellCommerce\Bundle\CoreBundle\Entity\Dimension">
         <property name="width">
             <constraint name="GreaterThanOrEqual">
                 <option name="value">0</option>
@@ -50,12 +88,6 @@
             <constraint name="NotBlank" />
         </property>
         <property name="depth">
-            <constraint name="GreaterThanOrEqual">
-                <option name="value">0</option>
-            </constraint>
-            <constraint name="NotBlank" />
-        </property>
-        <property name="packageSize">
             <constraint name="GreaterThanOrEqual">
                 <option name="value">0</option>
             </constraint>
