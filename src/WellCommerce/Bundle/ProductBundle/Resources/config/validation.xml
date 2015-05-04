@@ -53,48 +53,6 @@
         </property>
     </class>
 
-    <class name="WellCommerce\Bundle\CoreBundle\Entity\Price">
-        <property name="amount">
-            <constraint name="GreaterThan">
-                <option name="value">0</option>
-            </constraint>
-            <constraint name="NotBlank" />
-        </property>
-    </class>
-
-    <class name="WellCommerce\Bundle\CoreBundle\Entity\Dimension">
-        <property name="width">
-            <constraint name="NotBlank" />
-        </property>
-        <property name="height">
-            <constraint name="NotBlank" />
-        </property>
-        <property name="depth">
-            <constraint name="NotBlank" />
-        </property>
-    </class>
-
-    <class name="WellCommerce\Bundle\CoreBundle\Entity\Dimension">
-        <property name="width">
-            <constraint name="GreaterThanOrEqual">
-                <option name="value">0</option>
-            </constraint>
-            <constraint name="NotBlank" />
-        </property>
-        <property name="height">
-            <constraint name="GreaterThanOrEqual">
-                <option name="value">0</option>
-            </constraint>
-            <constraint name="NotBlank" />
-        </property>
-        <property name="depth">
-            <constraint name="GreaterThanOrEqual">
-                <option name="value">0</option>
-            </constraint>
-            <constraint name="NotBlank" />
-        </property>
-    </class>
-
     <class name="WellCommerce\Bundle\ProductBundle\Entity\ProductTranslation">
         <property name="name">
             <constraint name="NotBlank" />

@@ -21,8 +21,8 @@ use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\EnableableTrait;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\HierarchyTrait;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\PhotoTrait;
-use WellCommerce\Bundle\IntlBundle\Entity\Currency;
-use WellCommerce\Bundle\TaxBundle\Entity\Tax;
+use WellCommerce\Bundle\CoreBundle\Entity\Dimension;
+use WellCommerce\Bundle\CoreBundle\Entity\Price;
 use WellCommerce\Bundle\UnitBundle\Entity\Unit;
 
 /**
@@ -171,6 +171,9 @@ class Product
         $this->statuses      = new ArrayCollection();
         $this->attributes    = new ArrayCollection();
         $this->shops         = new ArrayCollection();
+        $this->dimension     = new Dimension();
+        $this->sellPrice     = new Price();
+        $this->buyPrice      = new Price();
     }
 
     /**

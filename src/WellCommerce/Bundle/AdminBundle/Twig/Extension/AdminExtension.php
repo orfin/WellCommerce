@@ -46,7 +46,7 @@ class AdminExtension extends \Twig_Extension
             'user'            => $this->session->get('admin/user'),
             'menu'            => $this->session->get('admin/menu'),
             'shops'           => $this->session->get('admin/shops'),
-            'activeContextId' => isset($scope['id']) ? $scope['id'] : 0,
+            'activeContextId' => $scope['id'],
             'flashbag'        => $this->session->getFlashBag(),
         ];
     }

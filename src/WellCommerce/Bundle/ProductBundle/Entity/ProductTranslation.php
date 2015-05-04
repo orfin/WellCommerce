@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\ProductBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Translatable\Translation;
-use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\MetaDataTrait;
+use WellCommerce\Bundle\CoreBundle\Entity\Meta;
 use WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface;
 use WellCommerce\Bundle\RoutingBundle\Entity\Behaviours\RoutableTrait;
 use WellCommerce\Bundle\RoutingBundle\Entity\RoutableSubjectInterface;
@@ -29,23 +29,25 @@ use WellCommerce\Bundle\RoutingBundle\Entity\RoutableSubjectInterface;
 class ProductTranslation implements LocaleAwareInterface, RoutableSubjectInterface
 {
     use Translation;
-    use MetaDataTrait;
     use RoutableTrait;
 
+    /**
+     * @ORM\OneToOne(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\ProductRoute", cascade={"persist","remove"})
+     * @ORM\JoinColumn(name="route_id", referencedColumnName="id", onDelete="CASCADE")
+     **/
+    protected $route;
     /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
-
     /**
      * @var string
      *
      * @ORM\Column(name="short_description", type="text", nullable=true)
      */
     private $shortDescription;
-
     /**
      * @var string
      *
@@ -54,10 +56,17 @@ class ProductTranslation implements LocaleAwareInterface, RoutableSubjectInterfa
     private $description;
 
     /**
-     * @ORM\OneToOne(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\ProductRoute", cascade={"persist","remove"})
-     * @ORM\JoinColumn(name="route_id", referencedColumnName="id", onDelete="CASCADE")
-     **/
-    protected $route;
+     * @ORM\Embedded(class = "WellCommerce\Bundle\CoreBundle\Entity\Meta", columnPrefix = "meta_")
+     */
+    private $meta;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->meta = new Meta();
+    }
 
     /**
      * Get name.
@@ -119,6 +128,22 @@ class ProductTranslation implements LocaleAwareInterface, RoutableSubjectInterfa
     public function setDescription($description)
     {
         $this->description = $description;
+    }
+
+    /**
+     * @return Meta
+     */
+    public function getMeta()
+    {
+        return $this->meta;
+    }
+
+    /**
+     * @param Meta $meta
+     */
+    public function setMeta(Meta $meta)
+    {
+        $this->meta = $meta;
     }
 
     /**

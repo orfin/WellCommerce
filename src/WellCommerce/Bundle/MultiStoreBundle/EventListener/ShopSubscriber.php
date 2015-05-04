@@ -64,7 +64,9 @@ class ShopSubscriber extends AbstractEventSubscriber
             $frontContext = $this->container->get('shop.context.front');
             $themeManager = $this->container->get('theme.manager');
 
-            $adminContext->determineCurrentScope($currentHost);
+            if (!$adminContext->hasSessionPreviousData()) {
+                $adminContext->determineCurrentScope($currentHost);
+            }
             $frontContext->setCurrentScopeByHost($currentHost);
             if (null === $frontContext->getCurrentScope()) {
                 $message = sprintf(

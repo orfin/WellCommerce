@@ -45,6 +45,20 @@ class Dimension
     private $height;
 
     /**
+     * Constructor
+     *
+     * @param int $depth
+     * @param int $width
+     * @param int $height
+     */
+    public function __construct($depth = 0, $width = 0, $height = 0)
+    {
+        $this->depth  = $depth;
+        $this->width  = $width;
+        $this->height = $height;
+    }
+
+    /**
      * @return float
      */
     public function getDepth()

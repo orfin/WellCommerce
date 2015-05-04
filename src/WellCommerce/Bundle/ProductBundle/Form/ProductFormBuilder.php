@@ -33,6 +33,7 @@ class ProductFormBuilder extends AbstractFormBuilder
     public function buildForm(FormInterface $form)
     {
         $currencies = $this->get('currency.collection')->getSelect([
+            'value_key' => 'code',
             'label_key' => 'code',
             'order_by'  => 'code',
         ]);
@@ -94,17 +95,17 @@ class ProductFormBuilder extends AbstractFormBuilder
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
-            'name'  => 'metaTitle',
+            'name'  => 'meta.title',
             'label' => $this->trans('meta.title.label')
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
-            'name'  => 'metaKeywords',
+            'name'  => 'meta.keywords',
             'label' => $this->trans('meta.keywords.label'),
         ]));
 
         $languageData->addChild($this->getElement('text_area', [
-            'name'  => 'metaDescription',
+            'name'  => 'meta.description',
             'label' => $this->trans('meta.description.label'),
         ]));
 
@@ -136,9 +137,9 @@ class ProductFormBuilder extends AbstractFormBuilder
         ]));
 
         $buyPriceSettings->addChild($this->getElement('select', [
-            'name'        => 'buyPrice.currency',
-            'label'       => $this->trans('product.buy_price.currency.label'),
-            'options'     => $currencies,
+            'name'    => 'buyPrice.currency',
+            'label'   => $this->trans('product.buy_price.currency.label'),
+            'options' => $currencies,
         ]));
 
         $buyPriceTax = $buyPriceSettings->addChild($this->getElement('select', [
@@ -166,9 +167,9 @@ class ProductFormBuilder extends AbstractFormBuilder
         ]));
 
         $sellPriceSettings->addChild($this->getElement('select', [
-            'name'        => 'sellPrice.currency',
-            'label'       => $this->trans('product.sell_price.currency.label'),
-            'options'     => $currencies,
+            'name'    => 'sellPrice.currency',
+            'label'   => $this->trans('product.sell_price.currency.label'),
+            'options' => $currencies,
         ]));
 
         $sellPriceTax = $sellPriceSettings->addChild($this->getElement('select', [

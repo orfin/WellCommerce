@@ -34,7 +34,7 @@ class Price
     private $tax;
 
     /**
-     * @ORM\Column(type="integer", nullable=false)
+     * @ORM\Column(type="string", nullable=false, length=16)
      */
     private $currency;
 

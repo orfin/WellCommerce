@@ -31,31 +31,7 @@ class ShopContext extends AbstractShopContext implements ShopContextInterface
         return self::SESSION_BAG_NAMESPACE;
     }
 
-    /**
-     * Sets active shop
-     *
-     * @param Shop $shop
-     */
-    public function setCurrentScope(Shop $shop = null)
-    {
-        $this->currentScope = $shop;
-        $this->setSessionVariables();
-    }
-
-    /**
-     * Sets current shop scope by url
-     *
-     * @param string $host
-     */
-    public function setCurrentScopeByHost($host)
-    {
-        $result = $this->repository->findOneBy(['url' => $host]);
-        if (null !== $result) {
-            $this->setCurrentScope($result);
-        }
-    }
-
-    protected function setSessionVariables()
+    public function setSessionVariables()
     {
         $sessionBag = $this->requestStack->getMasterRequest()->getSession();
 
@@ -73,17 +49,5 @@ class ShopContext extends AbstractShopContext implements ShopContextInterface
 
             $sessionBag->set(self::SESSION_BAG_NAMESPACE, $sessionData);
         }
-    }
-
-    /**
-     * Checks whether session contains previous shop data
-     *
-     * @param SessionInterface $sessionBag
-     *
-     * @return bool
-     */
-    protected function hasSessionPreviousData(SessionInterface $sessionBag)
-    {
-        return (bool)$sessionBag->has(self::SESSION_BAG_NAMESPACE);
     }
 }

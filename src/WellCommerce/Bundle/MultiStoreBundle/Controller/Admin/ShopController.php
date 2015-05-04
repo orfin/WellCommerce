@@ -26,7 +26,7 @@ class ShopController extends AbstractAdminController
     /**
      * Action used to switch admin shop context
      *
-     * @param $id
+     * @param int $id
      *
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
@@ -35,6 +35,8 @@ class ShopController extends AbstractAdminController
         $shop = $this->getManager()->getRepository()->find($id);
         $this->get('shop.context.admin')->setCurrentScope($shop);
 
-        return $this->jsonResponse(['success' => true]);
+        return $this->jsonResponse([
+            'success' => true
+        ]);
     }
 }
