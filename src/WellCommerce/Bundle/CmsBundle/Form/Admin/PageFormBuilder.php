@@ -119,6 +119,32 @@ class PageFormBuilder extends AbstractFormBuilder implements FormBuilderInterfac
             'name'  => 'content',
             'label' => $this->trans('page.content.label'),
         ]));
+
+        $metaData = $form->addChild($this->getElement('nested_fieldset', [
+            'name'  => 'meta_data',
+            'label' => $this->trans('fieldset.meta.label')
+        ]));
+
+        $languageData = $metaData->addChild($this->getElement('language_fieldset', [
+            'name'        => 'translations',
+            'label'       => $this->trans('fieldset.translations.label'),
+            'transformer' => new TranslationTransformer($this->get('producer.repository'))
+        ]));
+
+        $languageData->addChild($this->getElement('text_field', [
+            'name'  => 'meta.title',
+            'label' => $this->trans('meta.title.label')
+        ]));
+
+        $languageData->addChild($this->getElement('text_field', [
+            'name'  => 'meta.keywords',
+            'label' => $this->trans('meta.keywords.label'),
+        ]));
+
+        $languageData->addChild($this->getElement('text_area', [
+            'name'  => 'meta.description',
+            'label' => $this->trans('meta.description.label'),
+        ]));
     }
 
     private function addRedirectFieldset(FormInterface $form)

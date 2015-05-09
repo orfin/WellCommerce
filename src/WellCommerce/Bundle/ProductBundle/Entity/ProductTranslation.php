@@ -32,11 +32,6 @@ class ProductTranslation implements LocaleAwareInterface, RoutableSubjectInterfa
     use RoutableTrait;
 
     /**
-     * @ORM\OneToOne(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\ProductRoute", cascade={"persist","remove"})
-     * @ORM\JoinColumn(name="route_id", referencedColumnName="id", onDelete="CASCADE")
-     **/
-    protected $route;
-    /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
@@ -59,6 +54,12 @@ class ProductTranslation implements LocaleAwareInterface, RoutableSubjectInterfa
      * @ORM\Embedded(class = "WellCommerce\Bundle\CoreBundle\Entity\Meta", columnPrefix = "meta_")
      */
     private $meta;
+
+    /**
+     * @ORM\OneToOne(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\ProductRoute", cascade={"persist","remove"})
+     * @ORM\JoinColumn(name="route_id", referencedColumnName="id", onDelete="CASCADE")
+     **/
+    protected $route;
 
     /**
      * Constructor

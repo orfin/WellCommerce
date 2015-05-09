@@ -45,7 +45,7 @@ class PageDataSetQueryBuilder extends AbstractDataSetQueryBuilder implements Que
     {
         $qb = parent::getQueryBuilder();
 
-        if (null !== $this->context && null !== $this->context->getCurrentScopeId()) {
+        if (null !== $this->context && 0 !== $this->context->getCurrentScopeId()) {
             $expression = $qb->expr()->eq('page_shops.id', ':shop');
             $qb->andWhere($expression);
             $qb->setParameter('shop', $this->context->getCurrentScopeId());

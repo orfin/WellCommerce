@@ -12,6 +12,8 @@
 namespace WellCommerce\Bundle\IntlBundle\Twig\Extension;
 
 use Money\Money;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
  * Class MoneyExtension
@@ -21,6 +23,21 @@ use Money\Money;
  */
 class MoneyExtension extends \Twig_Extension
 {
+    /**
+     * @var RequestStack
+     */
+    protected $requestStack;
+
+    /**
+     * Constructor
+     *
+     * @param RequestStack $requestStack
+     */
+    public function __construct(RequestStack $requestStack)
+    {
+        $this->requestStack = $requestStack;
+    }
+
     public function getFunctions()
     {
         return [
@@ -43,7 +60,8 @@ class MoneyExtension extends \Twig_Extension
 
     public function formatPrice($price, $currency)
     {
-        $formatter = new \NumberFormatter(\Locale::getDefault(), \NumberFormatter::CURRENCY);
+        $locale    = $this->requestStack->getMasterRequest()->getLocale();
+        $formatter = new \NumberFormatter($locale, \NumberFormatter::CURRENCY);
 
         if (false === $result = $formatter->formatCurrency($price, $currency)) {
             $e = sprintf('Cannot format price with amount "%s" and currency "%s"', $price, $currency);

@@ -22,6 +22,11 @@
         <option key="expose">true</option>
     </route>
 
+    <route id="admin.currency.sync" path="/sync">
+        <default key="_controller">currency.controller.admin:syncExchangeRatesAction</default>
+        <option key="expose">true</option>
+    </route>
+
     <route id="admin.currency.delete" path="/delete/{id}">
         <default key="_controller">currency.controller.admin:deleteAction</default>
         <option key="expose">true</option>

@@ -2476,7 +2476,7 @@ var GFormDependency = function (sType, sFieldSource, mCondition, mArgument) {
         }
         var bAlreadyInitialised = false;
         if (!gFieldTarget.m_oInitializedDependencies[gThis.m_iId]) {
-            var gField = gThis.m_gForm.GetField(gThis.m_sFieldSource);
+            var gField = gThis.m_gForm.GetFieldForForm(gThis.m_sFieldSource);
             gField.BindChangeHandler(fHandler, {
                 gNode: gField
             });
@@ -2485,7 +2485,7 @@ var GFormDependency = function (sType, sFieldSource, mCondition, mArgument) {
             bAlreadyInitialised = true;
         }
         if (!bAlreadyInitialised || (gThis.m_sType != GFormDependency.EXCHANGE_OPTIONS)) {
-            fHandler.apply(gThis.m_gForm.GetField(gThis.m_sFieldSource).m_jField);
+            fHandler.apply(gThis.m_gForm.GetFieldForForm(gThis.m_sFieldSource).m_jField);
         }
     };
 
@@ -2495,7 +2495,7 @@ var GFormDependency = function (sType, sFieldSource, mCondition, mArgument) {
             eEvent = {data: {gNode: $(this).closest('.GFormNode').get(0).gNode}};
         }
         gCurrentField = eEvent.data.gNode;
-        gDependentField = gThis._FindFieldInCurrentRepetition(gCurrentField, gThis.m_gForm.GetField(gThis.m_sFieldTarget));
+        gDependentField = gThis._FindFieldInCurrentRepetition(gCurrentField, gThis.m_gForm.GetFieldForForm(gThis.m_sFieldTarget));
         if ((gCurrentField.m_gParent instanceof GFormRepeatableFieldset) && (gCurrentField.m_gParent == gDependentField.m_gParent)) {
             gDependentField = gDependentField;
         }
@@ -2513,7 +2513,7 @@ var GFormDependency = function (sType, sFieldSource, mCondition, mArgument) {
             eEvent = {data: {gNode: $(this).closest('.GFormNode').get(0).gNode}};
         }
         gCurrentField = eEvent.data.gNode;
-        gDependentField = gThis._FindFieldInCurrentRepetition(gCurrentField, gThis.m_gForm.GetField(gThis.m_sFieldTarget));
+        gDependentField = gThis._FindFieldInCurrentRepetition(gCurrentField, gThis.m_gForm.GetFieldForForm(gThis.m_sFieldTarget));
         if (gThis.Evaluate(gCurrentField.GetValue())) {
             gDependentField.Hide();
         }
@@ -2540,7 +2540,7 @@ var GFormDependency = function (sType, sFieldSource, mCondition, mArgument) {
             eEvent = {data: {gNode: $(this).closest('.GFormNode').get(0).gNode}};
         }
         gCurrentField = eEvent.data.gNode;
-        gDependentField = gThis._FindFieldInCurrentRepetition(gCurrentField, gThis.m_gForm.GetField(gThis.m_sFieldTarget));
+        gDependentField = gThis._FindFieldInCurrentRepetition(gCurrentField, gThis.m_gForm.GetFieldForForm(gThis.m_sFieldTarget));
         if (gThis.Evaluate(gCurrentField.GetValue())) {
             gDependentField.Ignore();
         }
@@ -2572,7 +2572,7 @@ var GFormDependency = function (sType, sFieldSource, mCondition, mArgument) {
             eEvent = {data: {gNode: $(this).closest('.GFormNode').get(0).gNode}};
         }
         gCurrentField = eEvent.data.gNode;
-        gDependentField = gThis._FindFieldInCurrentRepetition(gCurrentField, gThis.m_gForm.GetField(gThis.m_sFieldTarget));
+        gDependentField = gThis._FindFieldInCurrentRepetition(gCurrentField, gThis.m_gForm.GetFieldForForm(gThis.m_sFieldTarget));
         gThis.m_fSource({
             value: eEvent.data.gNode.GetValue()
         }, GCallback(function (oData) {
@@ -4188,6 +4188,17 @@ var GForm = GCore.ExtendClass(GFormContainer, function() {
 			iType: gThis.m_oOptions.iTabs == GForm.TABS_HORIZONTAL
 		});
 		gThis.m_oOptions = oThisOptions;
+	};
+
+    gThis.GetFieldForForm = function(sName) {
+		var asName = sName.split('.');
+		if (asName.length == 2) {
+			if (asName[0] != gThis.m_oOptions.sFormName) {
+				return GForm.GetForm(asName[0]).GetField(asName[1]);
+			}
+			sName = asName[1];
+		}
+		return gThis.m_ogFields[sName];
 	};
 
 	gThis.GetField = function(sName) {

@@ -115,18 +115,18 @@ class CategoryFormBuilder extends AbstractFormBuilder implements FormBuilderInte
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
-            'name'  => 'metaTitle',
-            'label' => $this->trans('category.meta_title.label')
+            'name'  => 'meta.title',
+            'label' => $this->trans('meta.title.label')
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
-            'name'  => 'metaKeywords',
-            'label' => $this->trans('category.meta_keywords.label'),
+            'name'  => 'meta.keywords',
+            'label' => $this->trans('meta.keywords.label'),
         ]));
 
         $languageData->addChild($this->getElement('text_area', [
-            'name'  => 'metaDescription',
-            'label' => $this->trans('category.meta_description.label'),
+            'name'  => 'meta.description',
+            'label' => $this->trans('meta.description.label'),
         ]));
 
         $shopsData = $form->addChild($this->getElement('nested_fieldset', [
