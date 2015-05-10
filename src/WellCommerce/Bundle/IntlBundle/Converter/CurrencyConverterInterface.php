@@ -29,4 +29,15 @@ interface CurrencyConverterInterface
      * @return float
      */
     public function convert($amount, $baseCurrency, $targetCurrency = null);
+
+    /**
+     * Formats amount for given currency
+     *
+     * @param float  $amount
+     * @param string $baseCurrency
+     * @param string $targetCurrency
+     *
+     * @return string
+     */
+    public function format($amount, $baseCurrency, $targetCurrency = null);
 }

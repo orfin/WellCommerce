@@ -39,6 +39,7 @@ class CurrencySubscriber extends AbstractEventSubscriber
 
         $request = $event->getRequest();
         $session = $request->getSession();
+
         if (!$session->has('_currency')) {
             $currency = $this->getLocaleCurrency($request);
             $session->set('_currency', $currency);

@@ -11,9 +11,8 @@
  */
 namespace WellCommerce\Bundle\IntlBundle\Twig\Extension;
 
-use Money\Money;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use WellCommerce\Bundle\IntlBundle\Converter\CurrencyConverterInterface;
 use WellCommerce\Bundle\IntlBundle\Provider\CurrencyProviderInterface;
 
 /**
@@ -24,9 +23,9 @@ use WellCommerce\Bundle\IntlBundle\Provider\CurrencyProviderInterface;
 class CurrencyExtension extends \Twig_Extension
 {
     /**
-     * @var RequestStack
+     * @var CurrencyConverterInterface
      */
-    protected $requestStack;
+    protected $converter;
 
     /**
      * @var CurrencyProviderInterface
@@ -36,13 +35,13 @@ class CurrencyExtension extends \Twig_Extension
     /**
      * Constructor
      *
-     * @param RequestStack              $requestStack
-     * @param CurrencyProviderInterface $provider
+     * @param CurrencyConverterInterface $converter
+     * @param CurrencyProviderInterface  $provider
      */
-    public function __construct(RequestStack $requestStack, CurrencyProviderInterface $provider)
+    public function __construct(CurrencyConverterInterface $converter, CurrencyProviderInterface $provider)
     {
-        $this->requestStack = $requestStack;
-        $this->provider     = $provider;
+        $this->converter = $converter;
+        $this->provider  = $provider;
     }
 
     public function getGlobals()
@@ -55,8 +54,8 @@ class CurrencyExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('money', [$this, 'getMoney'], ['is_safe' => ['html']]),
-            new \Twig_SimpleFunction('price', [$this, 'formatPrice'], ['is_safe' => ['html']]),
+            new \Twig_SimpleFunction('format_price', [$this, 'formatPrice'], ['is_safe' => ['html']]),
+            new \Twig_SimpleFunction('convert_price', [$this, 'convertPrice'], ['is_safe' => ['html']]),
         ];
     }
 
@@ -68,28 +67,13 @@ class CurrencyExtension extends \Twig_Extension
         return 'currency';
     }
 
-    /**
-     * Returns formatted amount
-     *
-     * @param Money $money
-     *
-     * @return int
-     */
-    public function getMoney(Money $money)
+    public function formatPrice($price, $currencyFrom, $currencyTo = null)
     {
-        return $money->getAmount();
+        return $this->converter->format($price, $currencyFrom, $currencyTo);
     }
 
-    public function formatPrice($price, $currency)
+    public function convertPrice($price, $currencyFrom, $currencyTo = null)
     {
-        $locale    = $this->requestStack->getMasterRequest()->getLocale();
-        $formatter = new \NumberFormatter($locale, \NumberFormatter::CURRENCY);
-
-        if (false === $result = $formatter->formatCurrency($price, $currency)) {
-            $e = sprintf('Cannot format price with amount "%s" and currency "%s"', $price, $currency);
-            throw new \InvalidArgumentException($e);
-        }
-
-        return $result;
+        return $this->converter->convert($price, $currencyFrom, $currencyTo);
     }
 }

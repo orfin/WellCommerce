@@ -12,7 +12,9 @@
 
 namespace WellCommerce\Bundle\IntlBundle\Converter;
 
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use WellCommerce\Bundle\IntlBundle\Entity\CurrencyRate;
 use WellCommerce\Bundle\IntlBundle\Repository\CurrencyRateRepositoryInterface;
 
 /**
@@ -33,20 +35,42 @@ class CurrencyConverter implements CurrencyConverterInterface
     protected $exchangeRates = [];
 
     /**
-     * @var SessionInterface
+     * @var RequestStack
      */
-    protected $session;
+    protected $requestStack;
+
+    /**
+     * @var string
+     */
+    protected $targetCurrency;
 
     /**
      * Constructor
      *
      * @param CurrencyRateRepositoryInterface $currencyRateRepository
-     * @param SessionInterface                $session
+     * @param RequestStack                    $requestStack
      */
-    public function __construct(CurrencyRateRepositoryInterface $currencyRateRepository, SessionInterface $session)
+    public function __construct(CurrencyRateRepositoryInterface $currencyRateRepository, RequestStack $requestStack)
     {
         $this->currencyRateRepository = $currencyRateRepository;
-        $this->session                = $session;
+        $this->requestStack           = $requestStack;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function format($amount, $baseCurrency, $targetCurrency = null)
+    {
+        $targetCurrency = $this->getTargetCurrency($targetCurrency);
+        $amount         = $this->convert($amount, $baseCurrency, $targetCurrency);
+        $locale         = $this->requestStack->getMasterRequest()->getLocale();
+        $formatter      = new \NumberFormatter($locale, \NumberFormatter::CURRENCY);
+        if (false === $result = $formatter->formatCurrency($amount, $targetCurrency)) {
+            $e = sprintf('Cannot format price with amount "%s" and currency "%s"', $amount, $targetCurrency);
+            throw new \InvalidArgumentException($e);
+        }
+
+        return $result;
     }
 
     /**
@@ -54,8 +78,56 @@ class CurrencyConverter implements CurrencyConverterInterface
      */
     public function convert($amount, $baseCurrency, $targetCurrency = null)
     {
-        if (null === $targetCurrency) {
+        $targetCurrency = $this->getTargetCurrency($targetCurrency);
 
+        $this->loadExchangeRates($targetCurrency);
+
+        $exchangeRate = $this->exchangeRates[$targetCurrency][$baseCurrency];
+
+        return $amount * $exchangeRate;
+    }
+
+    /**
+     * Returns target currency from passed argument or from session
+     *
+     * @param null|string $targetCurrency
+     *
+     * @return string
+     */
+    protected function getTargetCurrency($targetCurrency = null)
+    {
+        if (null === $targetCurrency) {
+            $session        = $this->requestStack->getMasterRequest()->getSession();
+            $targetCurrency = $session->get('_currency');
+        }
+
+        return $targetCurrency;
+    }
+
+    /**
+     * Sets exchange rates for target currency
+     *
+     * @param string $targetCurrency
+     */
+    protected function loadExchangeRates($targetCurrency)
+    {
+        if (!isset($this->exchangeRates[$targetCurrency])) {
+            $currencyRates = $this->currencyRateRepository->findBy(['currencyTo' => $targetCurrency]);
+            foreach ($currencyRates as $rate) {
+                $this->setExchangeRate($rate, $targetCurrency);
+            }
         }
     }
+
+    /**
+     * Sets exchange rate for target and base currency pair
+     *
+     * @param CurrencyRate $rate
+     * @param string       $targetCurrency
+     */
+    protected function setExchangeRate(CurrencyRate $rate, $targetCurrency)
+    {
+        $this->exchangeRates[$targetCurrency][$rate->getCurrencyFrom()] = $rate->getExchangeRate();
+    }
+
 }
