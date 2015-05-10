@@ -113,6 +113,9 @@ class CurrencyConverter implements CurrencyConverterInterface
     {
         if (!isset($this->exchangeRates[$targetCurrency])) {
             $currencyRates = $this->currencyRateRepository->findBy(['currencyTo' => $targetCurrency]);
+            if (count($currencyRates) === 0) {
+                throw new \RuntimeException(sprintf('There are no exchange rates for "%s"', $targetCurrency));
+            }
             foreach ($currencyRates as $rate) {
                 $this->setExchangeRate($rate, $targetCurrency);
             }
