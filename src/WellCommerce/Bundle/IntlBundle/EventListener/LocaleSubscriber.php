@@ -36,8 +36,7 @@ class LocaleSubscriber extends AbstractEventSubscriber
     public function onKernelRequest(GetResponseEvent $event)
     {
         $request = $event->getRequest();
-
-        $filter = $this->getDoctrineHelper()->enableFilter('locale');
+        $filter  = $this->getDoctrineHelper()->enableFilter('locale');
 
         if ($locale = $request->attributes->get('_locale')) {
             $request->getSession()->set('_locale', $locale);

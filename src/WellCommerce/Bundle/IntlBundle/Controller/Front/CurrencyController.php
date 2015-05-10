@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\IntlBundle\Controller\Front;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
 
@@ -24,14 +25,20 @@ use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
 class CurrencyController extends AbstractFrontController implements FrontControllerInterface
 {
     /**
-     * Redirects to home page
+     * Sets new session currency
+     *
+     * @param Request $request
+     * @param string  $currency
      *
      * @return RedirectResponse
      */
-    public function switchAction($currency)
+    public function switchAction(Request $request, $currency)
     {
-        echo $currency;
-        die();
-        return new RedirectResponse($this->generateUrl('front.home_page.index'));
+        $result = $this->get('currency.repository')->findOneBy(['code' => $currency]);
+        if (null !== $result) {
+            $request->getSession()->set('_currency', $currency);
+        }
+
+        return new RedirectResponse($request->headers->get('referer'));
     }
 }

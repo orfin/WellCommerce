@@ -58,7 +58,7 @@ class LocaleDataGrid extends AbstractDataGrid implements DataGridInterface
             'appearance' => new Appearance([
                 'width' => 140,
                 'align' => Appearance::ALIGN_CENTER
-            ]),
+            ])
         ]));
     }
 }

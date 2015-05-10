@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\IntlBundle\Controller\Front;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
 
@@ -28,8 +29,8 @@ class LocaleController extends AbstractFrontController implements FrontControlle
      *
      * @return RedirectResponse
      */
-    public function switchAction()
+    public function switchAction(Request $request)
     {
-        return new RedirectResponse($this->generateUrl('front.home_page.index'));
+        return new RedirectResponse($request->headers->get('referer'));
     }
 }
