@@ -24,4 +24,36 @@ use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
  */
 class ProductController extends AbstractAdminController
 {
+    /**
+     * Updates product data from DataGrid request
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
+    public function updateAction(Request $request)
+    {
+        $id        = $request->request->get('id');
+        $data      = $request->request->get('row');
+        $product   = $this->getManager()->getRepository()->find($id);
+        $validator = $this->get('validator');
+
+        if (null === $product) {
+            return $this->jsonResponse(['error' => $this->trans('product.flash.error.not_found')]);
+        }
+
+        $product->setSku($data['sku']);
+        $product->setWeight($data['weight']);
+        $product->setStock($data['stock']);
+        $product->getSellPrice()->setAmount($data['sellPrice']);
+
+        $errors = $validator->validate($product);
+        if ($errors->count()) {
+            return $this->jsonResponse(['error' => (string)$errors]);
+        }
+
+        $this->getManager()->getDoctrineHelper()->getEntityManager()->flush();
+
+        return $this->jsonResponse(['success' => $this->trans('product.flash.success.saved')]);
+    }
 }

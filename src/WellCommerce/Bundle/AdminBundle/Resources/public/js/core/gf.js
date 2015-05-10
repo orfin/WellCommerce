@@ -4332,20 +4332,8 @@ GF_Datagrid = GF_Instance.GF_Extend('GF_Datagrid', function(jTarget, oOptions) {
 			var sColumn = $(this).attr('name').substring($(this).attr('name').lastIndexOf('[') + 1, $(this).attr('name').length - 1);
 			var sPreviousValue = oRow[sColumn];
 			oRow[sColumn] = $(this).val();
-            var oRequest = {
-                id: sId,
-                data: oRow,
-                column: sColumn,
-                previous_value: sPreviousValue
-            };
 
-            dDg.m_oOptions.event_handlers.update_row(oRequest, GCallback(function(eEvent){
-                if(eEvent.error){
-                    GError(GF_Debug.Language.error_occured, eEvent.error);
-                }
-                dDg.LoadData();
-            }));
-			return true;
+            return dDg.m_oOptions.event_handlers.update_row(sId, oRow, sColumn, sPreviousValue);
 		}
 	});
 
