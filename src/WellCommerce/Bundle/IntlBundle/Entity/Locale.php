@@ -18,7 +18,6 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 /**
  * Class Locale
  *
- * @package WellCommerce\Bundle\IntlBundle\Entity
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * @ORM\Table()
@@ -46,6 +45,12 @@ class Locale
     private $code;
 
     /**
+     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\IntlBundle\Entity\Currency")
+     * @ORM\JoinColumn(name="currency_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    private $currency;
+
+    /**
      * Get id.
      *
      * @return integer
@@ -53,6 +58,16 @@ class Locale
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Get code.
+     *
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
     }
 
     /**
@@ -70,12 +85,18 @@ class Locale
     }
 
     /**
-     * Get code.
-     *
-     * @return string
+     * @return mixed
      */
-    public function getCode()
+    public function getCurrency()
     {
-        return $this->code;
+        return $this->currency;
+    }
+
+    /**
+     * @param mixed $currency
+     */
+    public function setCurrency($currency)
+    {
+        $this->currency = $currency;
     }
 }

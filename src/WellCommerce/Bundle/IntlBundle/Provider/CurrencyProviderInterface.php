@@ -9,17 +9,22 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Bundle\IntlBundle\EventListener;
 
-use Symfony\Component\HttpKernel\KernelEvents;
-use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
+namespace WellCommerce\Bundle\IntlBundle\Provider;
+
+use WellCommerce\Bundle\CoreBundle\Provider\ProviderInterface;
 
 /**
- * Class CurrencySubscriber
+ * Interface CurrencyProviderInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CurrencySubscriber extends AbstractEventSubscriber
+interface CurrencyProviderInterface extends ProviderInterface
 {
-
+    /**
+     * Returns all currencies as array
+     *
+     * @return array
+     */
+    public function getSelect();
 }

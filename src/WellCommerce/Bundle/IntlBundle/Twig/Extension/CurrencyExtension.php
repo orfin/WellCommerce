@@ -14,14 +14,14 @@ namespace WellCommerce\Bundle\IntlBundle\Twig\Extension;
 use Money\Money;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use WellCommerce\Bundle\IntlBundle\Provider\CurrencyProviderInterface;
 
 /**
- * Class MoneyExtension
+ * Class CurrencyExtension
  *
- * @package WellCommerce\Bundle\IntlBundle\Twig\Extension
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class MoneyExtension extends \Twig_Extension
+class CurrencyExtension extends \Twig_Extension
 {
     /**
      * @var RequestStack
@@ -29,13 +29,27 @@ class MoneyExtension extends \Twig_Extension
     protected $requestStack;
 
     /**
+     * @var CurrencyProviderInterface
+     */
+    protected $provider;
+
+    /**
      * Constructor
      *
-     * @param RequestStack $requestStack
+     * @param RequestStack              $requestStack
+     * @param CurrencyProviderInterface $provider
      */
-    public function __construct(RequestStack $requestStack)
+    public function __construct(RequestStack $requestStack, CurrencyProviderInterface $provider)
     {
         $this->requestStack = $requestStack;
+        $this->provider     = $provider;
+    }
+
+    public function getGlobals()
+    {
+        return [
+            'currencies' => $this->provider->getSelect()
+        ];
     }
 
     public function getFunctions()
@@ -44,6 +58,14 @@ class MoneyExtension extends \Twig_Extension
             new \Twig_SimpleFunction('money', [$this, 'getMoney'], ['is_safe' => ['html']]),
             new \Twig_SimpleFunction('price', [$this, 'formatPrice'], ['is_safe' => ['html']]),
         ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'currency';
     }
 
     /**
@@ -69,13 +91,5 @@ class MoneyExtension extends \Twig_Extension
         }
 
         return $result;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'money';
     }
 }

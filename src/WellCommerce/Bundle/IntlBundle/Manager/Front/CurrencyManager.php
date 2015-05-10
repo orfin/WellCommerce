@@ -9,17 +9,16 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Bundle\IntlBundle\EventListener;
 
-use Symfony\Component\HttpKernel\KernelEvents;
-use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
+namespace WellCommerce\Bundle\IntlBundle\Manager\Front;
+
+use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
 
 /**
- * Class CurrencySubscriber
+ * Class CurrencyManager
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CurrencySubscriber extends AbstractEventSubscriber
+class CurrencyManager extends AbstractFrontManager
 {
-
 }

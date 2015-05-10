@@ -22,6 +22,28 @@
             </call>
         </service>
 
+        <service id="currency.manager.front" class="WellCommerce\Bundle\IntlBundle\Manager\Front\CurrencyManager">
+            <argument type="service" id="flash_helper"/>
+            <argument type="service" id="redirect_helper"/>
+            <argument type="service" id="image_helper"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="doctrine_helper"/>
+            <argument type="service" id="translator"/>
+            <call method="setRepository">
+                <argument type="service" id="currency.repository"/>
+            </call>
+            <call method="setProviders">
+                <argument type="service" id="resource.provider.collection" />
+            </call>
+        </service>
+
+        <service id="currency.controller.front" class="WellCommerce\Bundle\IntlBundle\Controller\Front\CurrencyController">
+            <argument type="service" id="currency.manager.front"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
         <service id="currency.controller.admin" class="WellCommerce\Bundle\IntlBundle\Controller\Admin\CurrencyController">
             <argument type="service" id="currency.manager.admin"/>
             <call method="setContainer">
@@ -88,8 +110,14 @@
             <argument type="service" id="doctrine_helper"/>
         </service>
 
-        <service id="twig.extension.money" class="WellCommerce\Bundle\IntlBundle\Twig\Extension\MoneyExtension">
+        <service id="currency.provider" class="WellCommerce\Bundle\IntlBundle\Provider\CurrencyProvider">
+            <argument type="service" id="currency.collection" />
+            <tag name="resource.provider" alias="currency"/>
+        </service>
+
+        <service id="twig.extension.currency" class="WellCommerce\Bundle\IntlBundle\Twig\Extension\CurrencyExtension">
             <argument type="service" id="request_stack"/>
+            <argument type="service" id="currency.provider"/>
             <tag name="twig.extension"/>
         </service>
     </services>

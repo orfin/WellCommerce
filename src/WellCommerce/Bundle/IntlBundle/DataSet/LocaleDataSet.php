@@ -13,8 +13,8 @@
 namespace WellCommerce\Bundle\IntlBundle\DataSet;
 
 use WellCommerce\Bundle\DataSetBundle\AbstractDataSet;
-use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
 use WellCommerce\Bundle\DataSetBundle\DataSetConfiguratorInterface;
+use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
 
 /**
  * Class LocaleDataSet
@@ -29,8 +29,9 @@ class LocaleDataSet extends AbstractDataSet implements DataSetInterface
     public function configureOptions(DataSetConfiguratorInterface $configurator)
     {
         $configurator->setColumns([
-            'id'   => 'locale.id',
-            'code' => 'locale.code',
+            'id'       => 'locale.id',
+            'code'     => 'locale.code',
+            'currency' => 'default_currency.code',
         ]);
     }
 }

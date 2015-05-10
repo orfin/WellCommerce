@@ -32,13 +32,8 @@ class ProductFormBuilder extends AbstractFormBuilder
      */
     public function buildForm(FormInterface $form)
     {
-        $currencies = $this->get('currency.collection')->getSelect([
-            'value_key' => 'code',
-            'label_key' => 'code',
-            'order_by'  => 'code',
-        ]);
-
-        $vatValues = $this->get('tax.collection')->getSelect();
+        $currencies = $this->get('currency.provider')->getSelect();
+        $vatValues  = $this->get('tax.collection')->getSelect();
 
         $mainData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'main_data',
