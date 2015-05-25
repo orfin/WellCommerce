@@ -67,6 +67,7 @@ class ShopSubscriber extends AbstractEventSubscriber
             if (!$adminContext->hasSessionPreviousData()) {
                 $adminContext->determineCurrentScope($currentHost);
             }
+
             $frontContext->setCurrentScopeByHost($currentHost);
             if (null === $frontContext->getCurrentScope()) {
                 $message = sprintf(

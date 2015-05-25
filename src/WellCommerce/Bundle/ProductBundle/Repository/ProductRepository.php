@@ -37,4 +37,15 @@ class ProductRepository extends AbstractEntityRepository implements ProductRepos
 
         return $queryBuilder;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findEnabledProductById($id)
+    {
+        return $this->findOneBy([
+            'enabled' => true,
+            'id'      => $id
+        ]);
+    }
 }

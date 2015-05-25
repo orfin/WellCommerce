@@ -11,9 +11,24 @@
             <argument type="service" id="event_dispatcher"/>
             <argument type="service" id="doctrine_helper"/>
             <argument type="service" id="translator"/>
-            <call method="setRepository">
-                <argument type="service" id="cart.repository"/>
+            <argument type="service" id="request_helper"/>
+            <call method="setProductRepository">
+                <argument type="service" id="product.repository"/>
             </call>
+            <call method="setProductAttributeRepository">
+                <argument type="service" id="product_attribute.repository"/>
+            </call>
+            <call method="setCartHelper">
+                <argument type="service" id="cart.helper"/>
+            </call>
+        </service>
+
+        <service id="cart.helper" class="WellCommerce\Bundle\CartBundle\Helper\CartHelper">
+            <argument type="service" id="cart.repository"/>
+            <argument type="service" id="cart_product.repository"/>
+            <argument type="service" id="request_helper"/>
+            <argument type="service" id="shop.context.front"/>
+            <argument type="service" id="doctrine_helper"/>
         </service>
 
         <service id="cart.controller.front" class="WellCommerce\Bundle\CartBundle\Controller\Front\CartController">
@@ -25,6 +40,15 @@
 
         <service id="cart.repository" class="WellCommerce\Bundle\CartBundle\Repository\CartRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument>WellCommerceCartBundle:Cart</argument>
+        </service>
+
+        <service id="cart_product.repository" class="WellCommerce\Bundle\CartBundle\Repository\CartProductRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceCartBundle:CartProduct</argument>
+        </service>
+
+        <service id="twig.extension.cart" class="WellCommerce\Bundle\CartBundle\Twig\Extension\CartExtension">
+            <argument type="service" id="cart.helper"/>
+            <tag name="twig.extension"/>
         </service>
     </services>
 </container>

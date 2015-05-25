@@ -13,15 +13,26 @@ namespace WellCommerce\Bundle\ProductBundle\Repository;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\ProductBundle\Entity\Product;
 
 /**
  * Class ProductAttributeRepository
  *
- * @package WellCommerce\Bundle\ProductBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class ProductAttributeRepository extends AbstractEntityRepository implements ProductAttributeRepositoryInterface
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function findProductAttribute($id, Product $product)
+    {
+        return $this->findOneBy([
+            'product' => $product,
+            'id'      => $id
+        ]);
+    }
+
     /**
      * {@inheritdoc}
      */

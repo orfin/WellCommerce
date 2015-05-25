@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\CoreBundle\Manager\Front;
 
 use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
 use WellCommerce\Bundle\CoreBundle\Provider\ProviderCollection;
+use WellCommerce\Bundle\MultiStoreBundle\Context\ShopContextInterface;
 
 /**
  * Class AbstractFrontManager
@@ -26,6 +27,11 @@ abstract class AbstractFrontManager extends AbstractManager implements FrontMana
      * @var ProviderCollection
      */
     protected $providers;
+
+    /**
+     * @var ShopContextInterface
+     */
+    protected $shopContext;
 
     /**
      * {@inheritdoc}
@@ -49,5 +55,21 @@ abstract class AbstractFrontManager extends AbstractManager implements FrontMana
     public function getProvider($type)
     {
         return $this->providers->get($type);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setShopContext(ShopContextInterface $shopContext)
+    {
+        $this->shopContext = $shopContext;
+    }
+
+    /**
+     * @return ShopContextInterface
+     */
+    public function getShopContext()
+    {
+        return $this->shopContext;
     }
 }

@@ -389,7 +389,7 @@ class Product
     /**
      * Returns product sell price
      *
-     * @return float
+     * @return \WellCommerce\Bundle\CoreBundle\Entity\Price
      */
     public function getSellPrice()
     {
@@ -447,7 +447,7 @@ class Product
     }
 
     /**
-     * @return mixed
+     * @return \WellCommerce\Bundle\CoreBundle\Entity\Dimension
      */
     public function getDimension()
     {

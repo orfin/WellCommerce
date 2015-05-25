@@ -11,9 +11,7 @@
             <argument type="service" id="event_dispatcher"/>
             <argument type="service" id="doctrine_helper"/>
             <argument type="service" id="translator"/>
-            <call method="setRepository">
-                <argument type="service" id="category.repository"/>
-            </call>
+            <argument type="service" id="request_helper"/>
         </service>
 
         <service id="web.home_page.controller.front" class="WellCommerce\Bundle\WebBundle\Controller\Front\HomePageController">

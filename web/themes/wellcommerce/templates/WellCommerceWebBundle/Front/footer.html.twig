@@ -33,11 +33,12 @@
                     {{ "now"|date("Y") }} © Demo store / All rights reserved
                 </div>
                 <div class="col-lg-6 right text-right">
-                    Powered by <a href="http://wellcommerce.org">
+                    Powered by <a href="http://wellcommerce.org" title="WellCommerce - an open-source e-commerce solution">
                         <img src="{{ asset('themes/wellcommerce/assets/img/footer-print.png') }}"/>
                     </a>
                 </div>
             </div>
         </div>
     </div>
+    {% include 'WellCommerceWebBundle:Front:modals.html.twig' %}
 </footer>

@@ -21,6 +21,7 @@ use WellCommerce\Bundle\CoreBundle\Helper\Flash\FlashHelperInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 use WellCommerce\Bundle\CoreBundle\Helper\Image\ImageHelperInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Redirect\RedirectHelperInterface;
+use WellCommerce\Bundle\CoreBundle\Helper\Request\RequestHelperInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
@@ -66,6 +67,11 @@ abstract class AbstractManager implements ManagerInterface
     private $repository;
 
     /**
+     * @var RequestHelperInterface
+     */
+    private $requestHelper;
+
+    /**
      * Constructor
      *
      * @param FlashHelperInterface     $flashHelper
@@ -74,6 +80,7 @@ abstract class AbstractManager implements ManagerInterface
      * @param EventDispatcherInterface $eventDispatcher
      * @param DoctrineHelperInterface  $doctrineHelper
      * @param TranslatorInterface      $translator
+     * @param RequestHelperInterface   $requestHelper
      */
     public function __construct(
         FlashHelperInterface $flashHelper,
@@ -81,7 +88,8 @@ abstract class AbstractManager implements ManagerInterface
         ImageHelperInterface $imageHelper,
         EventDispatcherInterface $eventDispatcher,
         DoctrineHelperInterface $doctrineHelper,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        RequestHelperInterface $requestHelper
     ) {
         $this->flashHelper     = $flashHelper;
         $this->redirectHelper  = $redirectHelper;
@@ -89,6 +97,7 @@ abstract class AbstractManager implements ManagerInterface
         $this->eventDispatcher = $eventDispatcher;
         $this->doctrineHelper  = $doctrineHelper;
         $this->translator      = $translator;
+        $this->requestHelper   = $requestHelper;
     }
 
     /**
@@ -129,6 +138,14 @@ abstract class AbstractManager implements ManagerInterface
     public function getDoctrineHelper()
     {
         return $this->doctrineHelper;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRequestHelper()
+    {
+        return $this->requestHelper;
     }
 
     /**

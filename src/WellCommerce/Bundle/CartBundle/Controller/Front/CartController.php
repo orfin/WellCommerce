@@ -13,8 +13,6 @@
 namespace WellCommerce\Bundle\CartBundle\Controller\Front;
 
 use Symfony\Component\HttpFoundation\Request;
-use WellCommerce\Bundle\CartBundle\Entity\Cart;
-use WellCommerce\Bundle\CartBundle\Entity\CartProduct;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
 
@@ -35,17 +33,20 @@ class CartController extends AbstractFrontController implements FrontControllerI
 
     }
 
-    public function addAction(Request $request)
+    public function addAction()
     {
-        $product     = $this->get('product.repository')->find(51);
-        $cart        = new Cart();
-        $cartProduct = new CartProduct();
-        $cartProduct->setQuantity(1);
-        $cartProduct->setProduct($product);
-        $cartProduct->setCart($cart);
+        /**
+         * @var $manager \WellCommerce\Bundle\CartBundle\Manager\Front\CartManager
+         */
+        $manager   = $this->getManager();
+        $product   = $manager->findProduct();
+        $attribute = $manager->findProductAttribute($product);
+        $quantity  = $manager->getRequestHelper()->getRequestAttribute('id', 1);
 
-        $cart->addProduct($cartProduct);
-        $this->getEntityManager()->persist($cart);
-        $this->getEntityManager()->flush();
+        $manager->addItem($product, $attribute, $quantity);
+
+        return [
+            'product' => $product
+        ];
     }
 }

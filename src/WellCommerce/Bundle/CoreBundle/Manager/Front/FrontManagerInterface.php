@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\CoreBundle\Manager\Front;
 
 use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
 use WellCommerce\Bundle\CoreBundle\Provider\ProviderCollection;
+use WellCommerce\Bundle\MultiStoreBundle\Context\ShopContextInterface;
 
 /**
  * Interface FrontManagerInterface
@@ -44,4 +45,9 @@ interface FrontManagerInterface extends ManagerInterface
      * @return \WellCommerce\Bundle\CoreBundle\Provider\ProviderInterface
      */
     public function getProvider($type);
+
+    /**
+     * @param ShopContextInterface $shopContext
+     */
+    public function setShopContext(ShopContextInterface $shopContext);
 }

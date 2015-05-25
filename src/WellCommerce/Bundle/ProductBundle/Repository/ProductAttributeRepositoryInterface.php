@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\ProductBundle\Repository;
 
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\Product;
 
 /**
  * Interface ProductAttributeRepositoryInterface
@@ -31,4 +32,14 @@ interface ProductAttributeRepositoryInterface extends RepositoryInterface
      * @return mixed
      */
     public function findOrCreate($id, $data);
+
+    /**
+     * Returns attribute by id
+     *
+     * @param string  $id
+     * @param Product $product
+     *
+     * @return null|\WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute
+     */
+    public function findProductAttribute($id, Product $product);
 }

@@ -1,4 +1,5 @@
 security:
+    session_fixation_strategy:  none
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/

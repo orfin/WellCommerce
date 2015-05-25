@@ -30,56 +30,63 @@ interface ManagerInterface
     const POST_REMOVE_EVENT = 'post_remove';
 
     /**
-     * Returns redirect helper
+     * Returns the RedirectHelper
      *
      * @return \WellCommerce\Bundle\CoreBundle\Helper\Redirect\RedirectHelperInterface
      */
     public function getRedirectHelper();
 
     /**
-     * Returns redirect helper
+     * Returns the FlashHelper
      *
      * @return \WellCommerce\Bundle\CoreBundle\Helper\Flash\FlashHelperInterface
      */
     public function getFlashHelper();
 
     /**
-     * Returns image helper
+     * Returns the ImageHelper
      *
      * @return \WellCommerce\Bundle\CoreBundle\Helper\Image\ImageHelperInterface
      */
     public function getImageHelper();
 
     /**
-     * Returns event dispatcher
+     * Returns the EventDispatcher
      *
      * @return \Symfony\Component\EventDispatcher\EventDispatcherInterface
      */
     public function getEventDispatcher();
 
     /**
-     * Returns Doctrine helper
+     * Returns the DoctrineHelper
      *
      * @return \WellCommerce\Bundle\CoreBundle\Helper\Doctrine\DoctrineHelperInterface
      */
     public function getDoctrineHelper();
 
     /**
-     * Returns translator service
+     * Returns the RequestHelper
+     *
+     * @return \WellCommerce\Bundle\CoreBundle\Helper\Request\RequestHelperInterface
+     */
+    public function getRequestHelper();
+
+    /**
+     * Returns the Translator
      *
      * @return \Symfony\Component\Translation\TranslatorInterface
      */
     public function getTranslator();
 
     /**
-     * Sets repository
+     * Sets the repository
      *
      * @param RepositoryInterface $repository
      */
     public function setRepository(RepositoryInterface $repository);
 
     /**
-     * Returns current repository
+     * Returns the current repository
      *
      * @return RepositoryInterface
      */
