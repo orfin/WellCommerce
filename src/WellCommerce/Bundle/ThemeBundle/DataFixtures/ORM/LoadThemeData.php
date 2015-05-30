@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\ThemeBundle\DataFixtures\ORM;
 
-use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
 use WellCommerce\Bundle\ThemeBundle\Entity\Theme;
 
 /**
@@ -21,7 +21,7 @@ use WellCommerce\Bundle\ThemeBundle\Entity\Theme;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LoadThemeData implements FixtureInterface
+class LoadThemeData extends AbstractDataFixture
 {
     /**
      * {@inheritDoc}
@@ -33,5 +33,7 @@ class LoadThemeData implements FixtureInterface
         $theme->setFolder('wellcommerce');
         $manager->persist($theme);
         $manager->flush();
+
+        $this->setReference('theme', $theme);
     }
 }

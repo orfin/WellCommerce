@@ -47,11 +47,6 @@ class ClientRegisterFormBuilder extends AbstractFormBuilder implements FormBuild
             'label' => $this->trans('client.label.password'),
         ]));
 
-        $form->addChild($this->getElement('submit', [
-            'name'  => 'register',
-            'label' => $this->trans('client.button.register'),
-        ]));
-
         $form->addFilter($this->getFilter('no_code'));
         $form->addFilter($this->getFilter('trim'));
         $form->addFilter($this->getFilter('secure'));

@@ -74,7 +74,7 @@ class ProductFormBuilder extends AbstractFormBuilder
         $mainData->addChild($this->getElement('select', [
             'name'        => 'producer',
             'label'       => $this->trans('product.producer.label'),
-            'options'     => $this->get('producer.collection')->getSelect(),
+            'options'     => $this->get('producer.collection.admin')->getSelect(),
             'transformer' => new EntityToIdentifierTransformer($this->get('producer.repository'))
         ]));
 

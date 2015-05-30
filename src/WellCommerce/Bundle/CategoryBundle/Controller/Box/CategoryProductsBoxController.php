@@ -15,8 +15,6 @@ namespace WellCommerce\Bundle\CategoryBundle\Controller\Box;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
 use WellCommerce\Bundle\DataSetBundle\Conditions\Condition;
-use WellCommerce\Bundle\DataSetBundle\Conditions\ConditionsCollection;
-use WellCommerce\Bundle\DataSetBundle\Request\DataSetRequest;
 
 /**
  * Class CategoryProductsBoxController
@@ -32,40 +30,21 @@ class CategoryProductsBoxController extends AbstractBoxController implements Box
      */
     public function indexAction()
     {
-        $results = $this->get('product.dataset.front')->getResults(new DataSetRequest([
-            'limit'      => 10,
-            'orderBy'    => 'name',
-            'orderDir'   => 'asc',
-            'conditions' => $this->getConditions(),
-        ]));
+        $provider          = $this->getManager()->getProvider('category_products');
+        $collectionBuilder = $provider->getCollectionBuilder();
+        $requestHelper     = $this->getManager()->getRequestHelper();
 
-        $this->get('category_products.provider')->setCurrentResource($results);
+        $dataset = $collectionBuilder->getDataSet([
+            'limit'      => $requestHelper->getQueryAttribute('limit', 10),
+            'order_by'   => $requestHelper->getQueryAttribute('order_by', 'name'),
+            'order_dir'  => $requestHelper->getQueryAttribute('order_dir', 'asc'),
+            'conditions' => $this->getManager()->getConditions(),
+        ]);
+
+        $provider->setCurrentResource($dataset);
 
         return [
-            'dataset' => $results
+            'dataset' => $dataset
         ];
-    }
-
-    /**
-     * Returns a collection of dynamic conditions
-     *
-     * @return ConditionsCollection
-     */
-    private function getConditions()
-    {
-        $conditions = new ConditionsCollection();
-        $conditions->add(new Condition\Eq('category', $this->getCurrentCategoryId()));
-
-        return $conditions;
-    }
-
-    /**
-     * Returns current category id from provider service
-     *
-     * @return int
-     */
-    private function getCurrentCategoryId()
-    {
-        return $this->get('category.provider')->getCurrentResource()->getId();
     }
 }

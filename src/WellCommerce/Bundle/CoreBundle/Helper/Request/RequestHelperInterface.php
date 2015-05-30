@@ -65,6 +65,25 @@ interface RequestHelperInterface
     public function hasRequestAttribute($name);
 
     /**
+     * Returns the attribute from query string
+     *
+     * @param string $name
+     * @param null   $default
+     *
+     * @return mixed
+     */
+    public function getQueryAttribute($name, $default = null);
+
+    /**
+     * Checks whether query string contains attribute
+     *
+     * @param string $name
+     *
+     * @return mixed
+     */
+    public function hasQueryAttribute($name);
+
+    /**
      * Returns the attribute from request
      *
      * @param string $name

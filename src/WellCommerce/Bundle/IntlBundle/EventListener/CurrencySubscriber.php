@@ -16,6 +16,7 @@ use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
+use WellCommerce\Bundle\IntlBundle\Entity\Currency;
 
 /**
  * Class CurrencySubscriber
@@ -42,7 +43,9 @@ class CurrencySubscriber extends AbstractEventSubscriber
 
         if (!$session->has('_currency')) {
             $currency = $this->getLocaleCurrency($request);
-            $session->set('_currency', $currency);
+            if (null !== $currency) {
+                $session->set('_currency', $currency);
+            }
         }
     }
 
@@ -58,6 +61,10 @@ class CurrencySubscriber extends AbstractEventSubscriber
         $currentLocale = $request->getLocale();
         $locale        = $this->container->get('locale.repository')->findOneBy(['code' => $currentLocale]);
 
-        return $locale->getCurrency()->getCode();
+        if ($locale->getCurrency() instanceof Currency) {
+            return $locale->getCurrency()->getCode();
+        }
+
+        return null;
     }
 }

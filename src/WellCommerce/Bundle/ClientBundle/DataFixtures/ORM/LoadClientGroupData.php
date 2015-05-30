@@ -12,8 +12,6 @@
 
 namespace WellCommerce\Bundle\ClientBundle\DataFixtures\ORM;
 
-use Doctrine\Common\DataFixtures\FixtureInterface;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientGroup;
 use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
@@ -21,33 +19,22 @@ use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
 /**
  * Class LoadClientGroupData
  *
- * @package WellCommerce\Bundle\ClientBundle\DataFixtures\ORM
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LoadClientGroupData extends AbstractDataFixture implements FixtureInterface, OrderedFixtureInterface
+class LoadClientGroupData extends AbstractDataFixture
 {
     /**
      * {@inheritDoc}
      */
     public function load(ObjectManager $manager)
     {
-        for ($i = 1; $i <= 10; $i++) {
-            $clientGroup = new ClientGroup();
-            $clientGroup->setDiscount(10);
-            $clientGroup->translate('pl')->setName('Grupa '.$i);
-            $clientGroup->translate('en')->setName('Group '.$i);
-            $clientGroup->mergeNewTranslations();
-            $manager->persist($clientGroup);
-        }
-
+        $clientGroup = new ClientGroup();
+        $clientGroup->setDiscount(10);
+        $clientGroup->translate('en')->setName('Default client group');
+        $clientGroup->mergeNewTranslations();
+        $manager->persist($clientGroup);
         $manager->flush();
-    }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function getOrder()
-    {
-        return 3;
+        $this->setReference('client_group', $clientGroup);
     }
 }

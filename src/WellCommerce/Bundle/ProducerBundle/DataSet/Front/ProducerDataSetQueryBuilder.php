@@ -10,16 +10,15 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ProducerBundle\DataSet;
+namespace WellCommerce\Bundle\ProducerBundle\DataSet\Front;
 
-use WellCommerce\Bundle\DataSetBundle\QueryBuilder\AbstractDataSetQueryBuilder;
-use WellCommerce\Bundle\DataSetBundle\QueryBuilder\QueryBuilderInterface;
+use WellCommerce\Bundle\ProducerBundle\DataSet\Admin\ProducerDataSetQueryBuilder as BaseDataSetQueryBuilder;
 
 /**
  * Class ProducerDataSetQueryBuilder
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProducerDataSetQueryBuilder extends AbstractDataSetQueryBuilder implements QueryBuilderInterface
+class ProducerDataSetQueryBuilder extends BaseDataSetQueryBuilder
 {
 }

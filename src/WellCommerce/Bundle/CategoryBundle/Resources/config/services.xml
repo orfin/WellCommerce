@@ -136,7 +136,7 @@
         </service>
 
         <service id="category_products.provider" class="WellCommerce\Bundle\CategoryBundle\Provider\CategoryProductsProvider">
-            <argument type="service" id="category.collection.front" />
+            <argument type="service" id="product.collection.front" />
             <tag name="resource.provider" alias="category_products"/>
         </service>
 

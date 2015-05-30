@@ -40,9 +40,9 @@ abstract class AbstractRouteGenerator implements RouteGeneratorInterface
     /**
      * Constructor
      *
-     * @param array $defaults     Route defaults
-     * @param array $options      Route options
-     * @param array $requirements Route requirements
+     * @param array  $defaults
+     * @param array  $options
+     * @param array  $requirements
      */
     public function __construct(array $defaults = [], array $options = [], array $requirements = [])
     {

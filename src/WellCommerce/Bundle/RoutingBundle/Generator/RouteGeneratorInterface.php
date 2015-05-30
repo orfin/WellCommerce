@@ -22,6 +22,8 @@ use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;
  */
 interface RouteGeneratorInterface
 {
+    const PATH_PARAMS_SEPARATOR = ',';
+
     /**
      * Checks whether generator can handle such a type of generation strategy
      *

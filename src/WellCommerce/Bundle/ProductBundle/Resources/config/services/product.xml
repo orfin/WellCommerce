@@ -87,6 +87,10 @@
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
+        <service id="product.collection.front" parent="dataset.collection_builder.factory">
+            <argument type="service" id="product.dataset.front"/>
+        </service>
+
         <service id="product.datagrid" class="WellCommerce\Bundle\ProductBundle\DataGrid\ProductDataGrid">
             <argument key="identifier">product</argument>
             <argument type="service" id="product.dataset.admin"/>

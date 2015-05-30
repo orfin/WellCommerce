@@ -21,6 +21,7 @@
         <default key="_controller">producer.controller.admin:editAction</default>
         <option key="expose">true</option>
     </route>
+
     <route id="admin.producer.delete" path="/delete/{id}">
         <default key="_controller">producer.controller.admin:deleteAction</default>
         <option key="expose">true</option>

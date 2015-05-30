@@ -53,12 +53,12 @@ abstract class AbstractLayoutBoxConfigurator extends AbstractContainer
      */
     protected function getFieldset(FormBuilderInterface $builder, FormInterface $form)
     {
-        $boxTypeSelect = $form->getChildren()->get('required_data')->getChildren()->get('boxType');
+        $boxTypeSelect = $this->getBoxTypeSelect($form);
         $boxTypeSelect->addOptionToSelect($this->type, $this->type);
 
         $fieldset = $form->addChild($builder->getElement('nested_fieldset', [
             'name'         => $this->getType(),
-            'label'        => $this->trans('Box settings'),
+            'label'        => $this->trans('layout_box.label.settings'),
             'dependencies' => [
                 $builder->getDependency('show', [
                     'field'     => $boxTypeSelect,
@@ -69,6 +69,16 @@ abstract class AbstractLayoutBoxConfigurator extends AbstractContainer
         ]));
 
         return $fieldset;
+    }
+
+    /**
+     * @param FormInterface $form
+     *
+     * @return \WellCommerce\Bundle\FormBundle\Elements\Optioned\Select
+     */
+    protected function getBoxTypeSelect(FormInterface $form)
+    {
+        return $form->getChildren()->get('required_data')->getChildren()->get('boxType');
     }
 
     /**

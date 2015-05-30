@@ -36,11 +36,7 @@ class ClientLoginBoxController extends AbstractBoxController implements BoxContr
         return [
             'form'     => $form,
             'elements' => $form->getChildren(),
+            'error'    => $this->get('security.authentication_utils')->getLastAuthenticationError()
         ];
-    }
-
-    public function loginCheckAction()
-    {
-        die('Failed');
     }
 }

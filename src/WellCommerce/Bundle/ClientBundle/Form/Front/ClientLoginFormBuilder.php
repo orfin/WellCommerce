@@ -29,17 +29,12 @@ class ClientLoginFormBuilder extends AbstractFormBuilder implements FormBuilderI
     {
         $form->addChild($this->getElement('text_field', [
             'name'  => '_username',
-            'label' => $this->trans('client.label.username'),
+            'label' => $this->trans('client.label.email'),
         ]));
 
         $form->addChild($this->getElement('password', [
             'name'  => '_password',
             'label' => $this->trans('client.label.password'),
-        ]));
-
-        $form->addChild($this->getElement('submit', [
-            'name'  => 'log_in',
-            'label' => $this->trans('client.button.login'),
         ]));
 
         $form->addFilter($this->getFilter('no_code'));

@@ -17,7 +17,6 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
-use WellCommerce\Bundle\LayoutBundle\Entity\LayoutBox;
 use WellCommerce\Bundle\RoutingBundle\Helper\Sluggable;
 
 /**
@@ -27,51 +26,38 @@ use WellCommerce\Bundle\RoutingBundle\Helper\Sluggable;
  */
 class LoadCategoryData extends AbstractDataFixture implements FixtureInterface, OrderedFixtureInterface
 {
+    const SAMPLES
+        = [
+            'Smart TVs',
+            'Streaming devices',
+            'Accessories',
+            'DVD & Blue-ray players',
+            'Audio players',
+            'Projectors',
+            'Home theater'
+        ];
+
     /**
      * {@inheritDoc}
      */
     public function load(ObjectManager $manager)
     {
-        $shop = $manager->getRepository('WellCommerceMultiStoreBundle:Shop')->findOneBy(['name' => 'WellCommerce']);
+        $shop = $this->getReference('shop');
 
-        foreach ($this->getSampleCategoriesTree() as $hierarchy => $sample) {
+        foreach (self::SAMPLES as $hierarchy => $name) {
             $category = new Category();
             $category->setEnabled(true);
             $category->setHierarchy($hierarchy);
             $category->setParent(null);
             $category->addShop($shop);
-            $category->translate('en')->setName($sample['name']);
-            $category->translate('en')->setSlug(Sluggable::makeSlug($sample['name']));
+            $category->translate('en')->setName($name);
+            $category->translate('en')->setSlug(Sluggable::makeSlug($name));
             $category->mergeNewTranslations();
             $manager->persist($category);
+            $this->setReference('category_' . $name, $category);
         }
 
-        $categoryMenuBox = new LayoutBox();
-        $categoryMenuBox->setBoxType('CategoryMenuBox');
-        $categoryMenuBox->setIdentifier('category.menu.box');
-        $categoryMenuBox->setSettings([]);
-        $categoryMenuBox->translate('en')->setName('Categories');
-        $categoryMenuBox->mergeNewTranslations();
-        $manager->persist($categoryMenuBox);
-
-        $categoryInfoBox = new LayoutBox();
-        $categoryInfoBox->setBoxType('CategoryInfoBox');
-        $categoryInfoBox->setIdentifier('category.info.box');
-        $categoryInfoBox->setSettings([]);
-        $categoryInfoBox->translate('en')->setName('Category info');
-        $categoryInfoBox->mergeNewTranslations();
-        $manager->persist($categoryInfoBox);
-
-        $categoryProductsBox = new LayoutBox();
-        $categoryProductsBox->setBoxType('CategoryProductsBox');
-        $categoryProductsBox->setIdentifier('category.products.box');
-        $categoryProductsBox->setSettings([]);
-        $categoryProductsBox->translate('en')->setName('Category products');
-        $categoryProductsBox->mergeNewTranslations();
-        $manager->persist($categoryProductsBox);
-
         $manager->flush();
-
     }
 
     /**
@@ -82,37 +68,14 @@ class LoadCategoryData extends AbstractDataFixture implements FixtureInterface, 
     protected function getSampleCategoriesTree()
     {
         return [
-            0 => [
-                'name' => 'Smart TVs',
-            ],
-            1 => [
-                'name' => 'Streaming devices',
-            ],
-            2 => [
-                'name' => 'Accessories',
-            ],
-            3 => [
-                'name' => 'DVD & Blue-ray players',
-            ],
-            4 => [
-                'name' => 'Audio players',
-            ],
-            5 => [
-                'name' => 'Projectors',
-            ],
-            6 => [
-                'name' => 'Projectors',
-            ],
+            0 => ['name' => 'Smart TVs'],
+            1 => ['name' => 'Streaming devices'],
+            2 => ['name' => 'Accessories'],
+            3 => ['name' => 'DVD & Blue-ray players'],
+            4 => ['name' => 'Audio players'],
+            5 => ['name' => 'Projectors'],
+            6 => ['name' => 'Home theater'],
         ];
-
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getOrder()
-    {
-        return 100;
     }
 }
 

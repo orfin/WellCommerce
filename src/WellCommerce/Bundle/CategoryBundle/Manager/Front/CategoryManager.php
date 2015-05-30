@@ -13,6 +13,8 @@
 namespace WellCommerce\Bundle\CategoryBundle\Manager\Front;
 
 use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
+use WellCommerce\Bundle\DataSetBundle\Conditions\Condition\Eq;
+use WellCommerce\Bundle\DataSetBundle\Conditions\ConditionsCollection;
 
 /**
  * Class CategoryManager
@@ -21,4 +23,26 @@ use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
  */
 class CategoryManager extends AbstractFrontManager
 {
+    /**
+     * Returns a collection of dynamic conditions
+     *
+     * @return ConditionsCollection
+     */
+    public function getConditions()
+    {
+        $conditions = new ConditionsCollection();
+        $conditions->add(new Eq('category', $this->getCurrentCategoryId()));
+
+        return $conditions;
+    }
+
+    /**
+     * Returns categories id from provider service
+     *
+     * @return int
+     */
+    public function getCurrentCategoryId()
+    {
+        return $this->getProvider('category')->getCurrentResource()->getId();
+    }
 }

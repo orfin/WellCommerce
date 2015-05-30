@@ -101,6 +101,22 @@ class RequestHelper implements RequestHelperInterface
     /**
      * {@inheritdoc}
      */
+    public function getQueryAttribute($name, $default = null)
+    {
+        return $this->request->query->get($name, $default);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasQueryAttribute($name)
+    {
+        return $this->request->query->has($name);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getAttribute($name, $default = null)
     {
         return $this->request->attributes->get($name, $default);

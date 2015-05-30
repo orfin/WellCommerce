@@ -12,20 +12,32 @@
 
 namespace WellCommerce\Bundle\AvailabilityBundle\DataFixtures\ORM;
 
-use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use WellCommerce\Bundle\AvailabilityBundle\Entity\Availability;
+use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
 
 /**
  * Class LoadAvailabilityData
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LoadAvailabilityData implements FixtureInterface
+class LoadAvailabilityData extends AbstractDataFixture
 {
+    const SAMPLES = ['24h', '72h', '7-14 days'];
+
     /**
      * {@inheritDoc}
      */
     public function load(ObjectManager $manager)
     {
+        foreach (self::SAMPLES as $name) {
+            $availability = new Availability();
+            $availability->translate('en')->setName($name);
+            $availability->mergeNewTranslations();
+            $manager->persist($availability);
+            $this->setReference('availability_' . $name, $availability);
+        }
+
+        $manager->flush();
     }
 }
