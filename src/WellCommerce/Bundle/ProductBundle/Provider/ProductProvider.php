@@ -12,16 +12,42 @@
 
 namespace WellCommerce\Bundle\ProductBundle\Provider;
 
-use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CoreBundle\Provider\AbstractProvider;
-use WellCommerce\Bundle\DataSetBundle\CollectionBuilder\CollectionBuilderFactoryInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\Product;
 
 /**
  * Class ProductsProvider
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductsProvider extends AbstractProvider
+class ProductProvider extends AbstractProvider implements ProductProviderInterface
 {
+    /**
+     * @var Product
+     */
+    protected $product;
 
+    /**
+     * {@inheritdoc}
+     */
+    public function setCurrentProduct(Product $product)
+    {
+        $this->product = $product;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCurrentProduct()
+    {
+        return $this->product;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasCurrentProduct()
+    {
+        return (null !== $this->product);
+    }
 }

@@ -14,13 +14,40 @@ namespace WellCommerce\Bundle\CategoryBundle\Provider;
 
 use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CoreBundle\Provider\AbstractProvider;
-use WellCommerce\Bundle\DataSetBundle\CollectionBuilder\CollectionBuilderFactoryInterface;
 
 /**
  * Class CategoryProvider
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CategoryProvider extends AbstractProvider
+class CategoryProvider extends AbstractProvider implements CategoryProviderInterface
 {
+    /**
+     * @var Category
+     */
+    protected $category;
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function setCurrentCategory(Category $category)
+    {
+        $this->category = $category;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getCurrentCategory()
+    {
+        return $this->category;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function hasCurrentCategory()
+    {
+        return (null !== $this->category);
+    }
 }
