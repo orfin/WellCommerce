@@ -76,6 +76,14 @@ abstract class AbstractFrontManager extends AbstractManager implements FrontMana
     /**
      * {@inheritdoc}
      */
+    public function getProductStatusProvider()
+    {
+        return $this->getProvider('product_status');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getCartProvider()
     {
         return $this->getProvider('cart');

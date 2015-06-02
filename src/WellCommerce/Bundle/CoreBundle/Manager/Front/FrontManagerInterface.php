@@ -66,6 +66,13 @@ interface FrontManagerInterface extends ManagerInterface
     public function getProductProvider();
 
     /**
+     * Shorthand to get product status provider
+     *
+     * @return \WellCommerce\Bundle\ProductBundle\Provider\ProductStatusProviderInterface
+     */
+    public function getProductStatusProvider();
+
+    /**
      * Shorthand to get cart provider
      *
      * @return \WellCommerce\Bundle\CartBundle\Provider\CartProviderInterface

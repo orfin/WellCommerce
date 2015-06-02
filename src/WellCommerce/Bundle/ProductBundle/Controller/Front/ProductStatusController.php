@@ -47,12 +47,11 @@ class ProductStatusController extends AbstractFrontController implements FrontCo
                 'class' => 'divider'
             ]));
 
-            $this->getManager()->getProvider('product_status')->setCurrentResource($status);
+            $this->getManager()->getProductStatusProvider()->setCurrentProductStatus($status);
         }
 
         return [
             'status'     => $status,
-            'breadcrumb' => $this->get('breadcrumb.builder')->all()
         ];
     }
 }

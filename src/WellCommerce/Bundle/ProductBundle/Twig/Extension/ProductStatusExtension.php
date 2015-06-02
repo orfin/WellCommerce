@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Bundle\ProductBundle\Twig\Extension;
 
-use WellCommerce\Bundle\CoreBundle\Provider\ProviderInterface;
+use WellCommerce\Bundle\ProductBundle\Provider\ProductStatusProviderInterface;
 
 /**
  * Class ProductStatusExtension
@@ -21,16 +21,16 @@ use WellCommerce\Bundle\CoreBundle\Provider\ProviderInterface;
 class ProductStatusExtension extends \Twig_Extension
 {
     /**
-     * @var ProviderInterface
+     * @var ProductStatusProviderInterface
      */
     protected $provider;
 
     /**
      * Constructor
      *
-     * @param ProviderInterface $provider
+     * @param ProductStatusProviderInterface $provider
      */
-    public function __construct(ProviderInterface $provider)
+    public function __construct(ProductStatusProviderInterface $provider)
     {
         $this->provider = $provider;
     }
