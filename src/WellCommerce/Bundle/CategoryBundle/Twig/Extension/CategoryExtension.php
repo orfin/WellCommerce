@@ -12,7 +12,6 @@
 namespace WellCommerce\Bundle\CategoryBundle\Twig\Extension;
 
 use WellCommerce\Bundle\CategoryBundle\Provider\CategoryProviderInterface;
-use WellCommerce\Bundle\CoreBundle\Provider\ProviderInterface;
 
 /**
  * Class CategoryExtension
@@ -23,16 +22,16 @@ use WellCommerce\Bundle\CoreBundle\Provider\ProviderInterface;
 class CategoryExtension extends \Twig_Extension
 {
     /**
-     * @var ProviderInterface
+     * @var CategoryProviderInterface
      */
     protected $provider;
 
     /**
      * Constructor
      *
-     * @param ProviderInterface $provider
+     * @param CategoryProviderInterface $provider
      */
-    public function __construct(ProviderInterface $provider)
+    public function __construct(CategoryProviderInterface $provider)
     {
         $this->provider = $provider;
     }
@@ -63,6 +62,7 @@ class CategoryExtension extends \Twig_Extension
      */
     public function getCategoriesTree($limit = 10, $orderBy = 'hierarchy', $orderDir = 'asc')
     {
+        $collectionBuilder = $this->provider->getCollectionBuilder();
 
         $params = [
             'limit'     => $limit,
@@ -70,6 +70,6 @@ class CategoryExtension extends \Twig_Extension
             'order_dir' => $orderDir,
         ];
 
-        return $this->provider->getCollectionBuilder()->getTree($params);
+        return $collectionBuilder->getTree($params);
     }
 }
