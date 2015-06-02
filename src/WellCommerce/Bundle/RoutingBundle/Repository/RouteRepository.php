@@ -39,7 +39,7 @@ class RouteRepository extends AbstractEntityRepository implements RouteRepositor
         $slug = Sluggable::makeSlug($name);
 
         // check generated slug against other values
-        $existsInValues = in_array($slug, (array) $values);
+        $existsInValues = in_array($slug, (array)$values);
 
         // if slug is the same as other values, try to add locale part
         if ($existsInValues) {
@@ -65,11 +65,9 @@ class RouteRepository extends AbstractEntityRepository implements RouteRepositor
     }
 
     /**
-     * @param $slug
-     *
-     * @return null|\WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface
+     * {@inheritdoc}
      */
-    protected function findRouteByPath($slug)
+    public function findRouteByPath($slug)
     {
         return $this->findOneBy(['path' => $slug]);
     }
@@ -89,16 +87,6 @@ class RouteRepository extends AbstractEntityRepository implements RouteRepositor
     }
 
     /**
-     * @param RouteInterface $route
-     *
-     * @return object
-     */
-    protected function getRouteIdentifier(RouteInterface $route)
-    {
-        return $route->getIdentifier();
-    }
-
-    /**
      * Makes original slug iterated
      *
      * @param string $slug
@@ -109,5 +97,15 @@ class RouteRepository extends AbstractEntityRepository implements RouteRepositor
     protected function makeSlugIterated($slug, $iteration)
     {
         return sprintf('%s%s%s', $slug, Sluggable::SLUG_DELIMITER, $iteration);
+    }
+
+    /**
+     * @param RouteInterface $route
+     *
+     * @return object
+     */
+    protected function getRouteIdentifier(RouteInterface $route)
+    {
+        return $route->getIdentifier();
     }
 }
