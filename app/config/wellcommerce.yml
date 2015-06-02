@@ -11,7 +11,6 @@ parameters:
       WellCommerce\Bundle\ClientBundle\DataFixtures\ORM\LoadClientData: 90
       WellCommerce\Bundle\PaymentBundle\DataFixtures\ORM\LoadPaymentMethodData: 100
       WellCommerce\Bundle\UnitBundle\DataFixtures\ORM\LoadUnitData: 110
-      WellCommerce\Bundle\ClientBundle\DataFixtures\ORM\LoadLayoutBoxData: 120
       WellCommerce\Bundle\CmsBundle\DataFixtures\ORM\LoadContactData: 130
       WellCommerce\Bundle\MediaBundle\DataFixtures\ORM\LoadMediaData: 135
       WellCommerce\Bundle\DelivererBundle\DataFixtures\ORM\LoadDelivererData: 140
@@ -21,4 +20,5 @@ parameters:
       WellCommerce\Bundle\CategoryBundle\DataFixtures\ORM\LoadCategoryData: 180
       WellCommerce\Bundle\ProductBundle\DataFixtures\ORM\LoadProductStatusData: 190
       WellCommerce\Bundle\ProductBundle\DataFixtures\ORM\LoadProductData: 200
-
+      WellCommerce\Bundle\ClientBundle\DataFixtures\ORM\LoadLayoutBoxData: 210
+    fixtures_product_limit: 100
