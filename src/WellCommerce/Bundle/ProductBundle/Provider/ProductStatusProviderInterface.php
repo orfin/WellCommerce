@@ -42,4 +42,11 @@ interface ProductStatusProviderInterface extends ProviderInterface
      * @return bool
      */
     public function hasCurrentProductStatus();
+
+    /**
+     * Returns current status id if set. Throws LogicException otherwise.
+     *
+     * @return int
+     */
+    public function getCurrentProductStatusId();
 }

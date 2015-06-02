@@ -31,15 +31,16 @@ class ProductStatusBoxController extends AbstractBoxController implements BoxCon
      */
     public function indexAction()
     {
-        $provider          = $this->getManager()->getProvider('product');
-        $collectionBuilder = $provider->getCollectionBuilder();
-        $requestHelper     = $this->getManager()->getRequestHelper();
+        $productStatusProvider = $this->getManager()->getProductStatusProvider();
+        $productProvider       = $this->getManager()->getProvider('product');
+        $collectionBuilder     = $productProvider->getCollectionBuilder();
+        $requestHelper         = $this->getManager()->getRequestHelper();
 
         $dataset = $collectionBuilder->getDataSet([
             'limit'      => $requestHelper->getQueryAttribute('limit', $this->getBoxParam('per_page', 12)),
             'order_by'   => $requestHelper->getQueryAttribute('order_by', 'price'),
             'order_dir'  => $requestHelper->getQueryAttribute('order_dir', 'asc'),
-            'conditions' => $this->getConditions(),
+            'conditions' => $this->getConditions($productStatusProvider->getCurrentProductStatusId()),
         ]);
 
         return [
@@ -52,27 +53,11 @@ class ProductStatusBoxController extends AbstractBoxController implements BoxCon
      *
      * @return ConditionsCollection
      */
-    protected function getConditions()
+    protected function getConditions($status)
     {
         $conditions = new ConditionsCollection();
-        $conditions->add(new Eq('status', $this->getCurrentStatus()));
+        $conditions->add(new Eq('status', $status));
 
         return $conditions;
-    }
-
-    /**
-     * Returns current product status from parent request.
-     * Data fetched from parent request is stored in product_status provider
-     *
-     * @return int
-     */
-    protected function getCurrentStatus()
-    {
-        $resource = $this->getManager()->getProvider('product_status')->getCurrentResource();
-        if (null === $resource) {
-            throw new \LogicException('Cannot determine current product status');
-        }
-
-        return $resource->getId();
     }
 }

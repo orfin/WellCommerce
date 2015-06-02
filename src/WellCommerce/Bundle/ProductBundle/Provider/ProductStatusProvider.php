@@ -46,6 +46,18 @@ class ProductStatusProvider extends AbstractProvider implements ProductStatusPro
     /**
      * {@inheritdoc}
      */
+    public function getCurrentProductStatusId()
+    {
+        if(null === $this->productStatus){
+            throw new \LogicException('Cannot use this method before current status in provider is set.');
+        }
+
+        return $this->productStatus->getId();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function hasCurrentProductStatus()
     {
         return (null !== $this->productStatus);
