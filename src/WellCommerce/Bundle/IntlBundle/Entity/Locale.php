@@ -22,6 +22,7 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="WellCommerce\Bundle\IntlBundle\Repository\LocaleRepository")
+ * @ORM\Cache(usage="READ_ONLY", region="intl_locale")
  */
 class Locale
 {
