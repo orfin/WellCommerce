@@ -29,8 +29,9 @@ class ProducerDataSet extends AbstractDataSet implements DataSetInterface
     public function configureOptions(DataSetConfiguratorInterface $configurator)
     {
         $configurator->setColumns([
-            'id'   => 'producer.id',
-            'name' => 'producer_translation.name',
+            'id'    => 'producer.id',
+            'name'  => 'producer_translation.name',
+            'route' => 'IDENTITY(producer_translation.route)',
         ]);
     }
 }

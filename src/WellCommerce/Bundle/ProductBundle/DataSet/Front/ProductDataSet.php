@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\ProductBundle\DataSet\Front;
 use WellCommerce\Bundle\DataSetBundle\AbstractDataSet;
 use WellCommerce\Bundle\DataSetBundle\DataSetConfiguratorInterface;
 use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
+use WellCommerce\Bundle\ProductBundle\DataSet\Transformer\ProductStatusTransformer;
 
 /**
  * Class ProductDataSet
@@ -42,9 +43,17 @@ class ProductDataSet extends AbstractDataSet implements DataSetInterface
             'currency'         => 'product.sellPrice.currency',
             'tax'              => 'product.sellPrice.tax',
             'stock'            => 'product.stock',
+            'producer'         => 'IDENTITY(product.producer)',
             'category'         => 'categories.id',
             'shop'             => 'product_shops.id',
             'photo'            => 'photos.path',
+            'status'           => 'statuses.id',
+        ]);
+
+        $statuses = $this->container->get('product_status.collection.front')->getArray();
+
+        $configurator->setTransformers([
+            'status' => new ProductStatusTransformer($statuses)
         ]);
     }
 }

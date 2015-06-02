@@ -34,6 +34,9 @@
             <call method="setRepository">
                 <argument type="service" id="product.repository"/>
             </call>
+            <call method="setProviders">
+                <argument type="service" id="resource.provider.collection" />
+            </call>
         </service>
         
         <service id="product.controller.admin" class="WellCommerce\Bundle\ProductBundle\Controller\Admin\ProductController">
@@ -85,10 +88,18 @@
             <argument key="identifier">product</argument>
             <argument type="service" id="product.dataset.loader.front"/>
             <configurator service="dataset.configurator" method="configure"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
         </service>
 
         <service id="product.collection.front" parent="dataset.collection_builder.factory">
             <argument type="service" id="product.dataset.front"/>
+        </service>
+
+        <service id="product.provider" class="WellCommerce\Bundle\ProductBundle\Provider\ProductProvider">
+            <argument type="service" id="product.collection.front" />
+            <tag name="resource.provider" alias="product"/>
         </service>
 
         <service id="product.datagrid" class="WellCommerce\Bundle\ProductBundle\DataGrid\ProductDataGrid">
@@ -112,6 +123,38 @@
                 <argument type="service" id="service_container"/>
             </call>
             <tag name="kernel.event_subscriber" />
+        </service>
+
+        <service id="product_info.layout_box.controller" class="WellCommerce\Bundle\ProductBundle\Controller\Box\ProductInfoBoxController">
+            <argument type="service" id="product.manager.front"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="product_info.layout_box.configurator" class="WellCommerce\Bundle\ProductBundle\Layout\ProductInfoBoxConfigurator">
+            <argument>ProductInfoBox</argument>
+            <argument>product_info.layout_box.controller</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="layout_box.configurator" />
+        </service>
+
+        <service id="layered_navigation.layout_box.controller" class="WellCommerce\Bundle\ProductBundle\Controller\Box\ProductLayeredNavigationBoxController">
+            <argument type="service" id="product.manager.front"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="layered_navigation.layout_box.configurator" class="WellCommerce\Bundle\ProductBundle\Layout\ProductLayeredNavigationBoxConfigurator">
+            <argument>ProductLayeredNavigationBox</argument>
+            <argument>layered_navigation.layout_box.controller</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="layout_box.configurator" />
         </service>
 
         <service id="product.route.generator" class="WellCommerce\Bundle\ProductBundle\Routing\ProductRouteGenerator">

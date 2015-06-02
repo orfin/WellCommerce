@@ -60,6 +60,30 @@ abstract class AbstractFrontManager extends AbstractManager implements FrontMana
     /**
      * {@inheritdoc}
      */
+    public function getCategoryProvider()
+    {
+        return $this->getProvider('category');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getProductProvider()
+    {
+        return $this->getProvider('product');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCartProvider()
+    {
+        return $this->getProvider('cart');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function setShopContext(ShopContextInterface $shopContext)
     {
         $this->shopContext = $shopContext;

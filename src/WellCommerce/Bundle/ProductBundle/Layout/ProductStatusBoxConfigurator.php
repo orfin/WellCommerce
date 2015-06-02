@@ -17,11 +17,11 @@ use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 use WellCommerce\Bundle\LayoutBundle\Configurator\AbstractLayoutBoxConfigurator;
 
 /**
- * Class ProductShowcaseBoxConfigurator
+ * Class ProductStatusBoxConfigurator
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductShowcaseBoxConfigurator extends AbstractLayoutBoxConfigurator
+class ProductStatusBoxConfigurator extends AbstractLayoutBoxConfigurator
 {
     /**
      * {@inheritdoc}
@@ -31,13 +31,7 @@ class ProductShowcaseBoxConfigurator extends AbstractLayoutBoxConfigurator
         $fieldset = $this->getFieldset($builder, $form);
 
         $fieldset->addChild($builder->getElement('tip', [
-            'tip' => '<p>' . $this->trans('product_showcase.tip') . '</p>'
-        ]));
-
-        $fieldset->addChild($builder->getElement('select', [
-            'name'    => 'status',
-            'label'   => $this->trans('product_showcase.status.label'),
-            'options' => $this->get('product_status.collection.admin')->getSelect(),
+            'tip' => '<p>' . $this->trans('layout_box.product_status.tip') . '</p>'
         ]));
     }
 }

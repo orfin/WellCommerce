@@ -11,6 +11,8 @@
  */
 namespace WellCommerce\Bundle\LayoutBundle\EventListener;
 
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 use WellCommerce\Bundle\CoreBundle\Event\ResourceEvent;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 use WellCommerce\Bundle\FormBundle\Event\FormEvent;
@@ -27,7 +29,7 @@ class LayoutBoxSubscriber extends AbstractEventSubscriber
     {
         return parent::getSubscribedEvents() + [
             'layout_box.form_init'  => 'onLayoutBoxFormInit',
-            'layout_box.pre_update' => 'onLayoutBoxResourceSave',
+            'layout_box.pre_update' => 'onLayoutBoxResourceSave'
         ];
     }
 
@@ -64,11 +66,21 @@ class LayoutBoxSubscriber extends AbstractEventSubscriber
      */
     public function onLayoutBoxResourceSave(ResourceEvent $event)
     {
-        $request      = $event->getRequest()->request->all();
-        $resource     = $event->getResource();
-        $accessor     = $this->getPropertyAccessor();
-        $propertyPath = sprintf('[%s]', $request['required_data']['boxType']);
-        $settings     = $accessor->getValue($request, $propertyPath);
+        $settings = $this->getBoxSettingsFromRequest($event->getRequest());
+        $resource = $event->getResource();
         $resource->setSettings($settings);
+    }
+
+    protected function getBoxSettingsFromRequest(Request $request)
+    {
+        $settings   = [];
+        $accessor   = PropertyAccess::createPropertyAccessor();
+        $parameters = $request->request->all();
+        $boxType    = $accessor->getValue($parameters, '[required_data][boxType]');
+        if ($accessor->isReadable($parameters, '[' . $boxType . ']')) {
+            $settings = $accessor->getValue($parameters, '[' . $boxType . ']');
+        }
+
+        return !is_array($settings) ? [] : $settings;
     }
 }

@@ -1,6 +1,9 @@
 <ul class="breadcrumbs">
-    <li>Smart TVs</li>
-    <li><a href="category.php">Electronics</a></li>
-    <li class="divider">/</li>
-    <li><a href="category.php">RTV</a></li>
+    {% for crumb in breadcrumbs() %}
+        {% if crumb.link != '' %}
+            <li><a href="{{ crumb.getLink() }}" class="{{ crumb.getClass() }}">{{ crumb.getName() }}</a></li>
+        {% else %}
+            <li class="{{ crumb.getClass() }}">{{ crumb.getName() }}</li>
+        {% endif %}
+    {% endfor %}
 </ul>

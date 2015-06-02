@@ -42,7 +42,9 @@ class LoadProductData extends AbstractDataFixture
      */
     public function load(ObjectManager $manager)
     {
-        for ($i = 0; $i < 20; $i++) {
+        $limit = $this->container->getParameter('fixtures_product_limit');
+
+        for ($i = 0; $i <= $limit; $i++) {
             $this->createRandomProduct($manager);
         }
 

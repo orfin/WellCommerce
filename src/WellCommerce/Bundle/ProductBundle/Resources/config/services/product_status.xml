@@ -146,6 +146,22 @@
             <tag name="layout_box.configurator" />
         </service>
 
+        <service id="product_status.layout_box.controller" class="WellCommerce\Bundle\ProductBundle\Controller\Box\ProductStatusBoxController">
+            <argument type="service" id="product_status.manager.front"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="product_status.layout_box.configurator" class="WellCommerce\Bundle\ProductBundle\Layout\ProductStatusBoxConfigurator">
+            <argument>ProductStatusBox</argument>
+            <argument>product_status.layout_box.controller</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="layout_box.configurator" />
+        </service>
+
         <service id="twig.extension.product_status" class="WellCommerce\Bundle\ProductBundle\Twig\Extension\ProductStatusExtension">
             <argument type="service" id="product_status.provider"/>
             <tag name="twig.extension"/>

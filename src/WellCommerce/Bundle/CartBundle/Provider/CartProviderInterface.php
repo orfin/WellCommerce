@@ -10,14 +10,16 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CartBundle\Helper;
+namespace WellCommerce\Bundle\CartBundle\Provider;
+
+use WellCommerce\Bundle\CoreBundle\Provider\ProviderInterface;
 
 /**
  * Interface CartProviderInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface CartProviderInterface
+interface CartProviderInterface extends ProviderInterface
 {
     public function getCart();
 }

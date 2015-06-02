@@ -10,26 +10,29 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CategoryBundle\Controller\Box;
+namespace WellCommerce\Bundle\ProductBundle\Controller\Box;
 
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
+use WellCommerce\Bundle\DataSetBundle\Conditions\Condition\Eq;
+use WellCommerce\Bundle\DataSetBundle\Conditions\ConditionsCollection;
 
 /**
- * Class CategoryInfoBoxController
+ * Class ProductInfoBoxController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
-class CategoryInfoBoxController extends AbstractBoxController implements BoxControllerInterface
+class ProductInfoBoxController extends AbstractBoxController implements BoxControllerInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function indexAction()
     {
-        $provider = $this->getManager()->getCategoryProvider();
-
         return [
-            'category' => $provider->getCurrentCategory()
+            'product' => ''
         ];
     }
 }

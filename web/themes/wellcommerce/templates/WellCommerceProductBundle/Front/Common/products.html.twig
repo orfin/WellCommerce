@@ -5,12 +5,14 @@
             <div class="thumbnail">
                 <div class="body">
                     <a href="{{ path(item.route) }}" class="photo">
-                        <img src="{{ image(item.photo, 'normal') }}" alt="{{ item.name }}">
+                        <img src="{{ image(item.photo, 'normal') }}" alt="{{ item.name }}" />
                     </a>
 
                     <a href="{{ path(item.route) }}" class="caption">
                         <div class="labels">
-                            <span class="label">Bestseller</span>
+                            {% for status in item.status %}
+                                <span class="label {{ status.css_class }}">{{ status.name }}</span>
+                            {% endfor %}
                         </div>
                         <span class="price">{{ format_price(item.price, item.currency) }}</span>
                         <span class="name">{{ item.name }}</span>

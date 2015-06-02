@@ -24,7 +24,7 @@ use WellCommerce\Bundle\DataSetBundle\Conditions\ConditionsCollection;
  *
  * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
-class ProductShowcaseBoxController extends AbstractBoxController implements BoxControllerInterface
+class ProductStatusBoxController extends AbstractBoxController implements BoxControllerInterface
 {
     /**
      * {@inheritdoc}
@@ -36,10 +36,10 @@ class ProductShowcaseBoxController extends AbstractBoxController implements BoxC
         $requestHelper     = $this->getManager()->getRequestHelper();
 
         $dataset = $collectionBuilder->getDataSet([
-            'limit'      => $requestHelper->getQueryAttribute('limit', 1),
-            'order_by'   => $requestHelper->getQueryAttribute('order_by', 'name'),
+            'limit'      => $requestHelper->getQueryAttribute('limit', $this->getBoxParam('per_page', 12)),
+            'order_by'   => $requestHelper->getQueryAttribute('order_by', 'price'),
             'order_dir'  => $requestHelper->getQueryAttribute('order_dir', 'asc'),
-            'conditions' => $this->getConditions($this->getBoxParam('status')),
+            'conditions' => $this->getConditions(),
         ]);
 
         return [
@@ -47,11 +47,32 @@ class ProductShowcaseBoxController extends AbstractBoxController implements BoxC
         ];
     }
 
-    public function getConditions($id)
+    /**
+     * Return additional conditions for QueryBuilder
+     *
+     * @return ConditionsCollection
+     */
+    protected function getConditions()
     {
         $conditions = new ConditionsCollection();
-        $conditions->add(new Eq('status', $id));
+        $conditions->add(new Eq('status', $this->getCurrentStatus()));
 
         return $conditions;
+    }
+
+    /**
+     * Returns current product status from parent request.
+     * Data fetched from parent request is stored in product_status provider
+     *
+     * @return int
+     */
+    protected function getCurrentStatus()
+    {
+        $resource = $this->getManager()->getProvider('product_status')->getCurrentResource();
+        if (null === $resource) {
+            throw new \LogicException('Cannot determine current product status');
+        }
+
+        return $resource->getId();
     }
 }

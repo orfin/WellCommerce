@@ -135,11 +135,6 @@
             <tag name="resource.provider" alias="category"/>
         </service>
 
-        <service id="category_products.provider" class="WellCommerce\Bundle\CategoryBundle\Provider\CategoryProductsProvider">
-            <argument type="service" id="product.collection.front" />
-            <tag name="resource.provider" alias="category_products"/>
-        </service>
-
         <service id="category.form_builder" class="WellCommerce\Bundle\CategoryBundle\Form\CategoryFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>

@@ -21,7 +21,7 @@ use WellCommerce\Bundle\LayoutBundle\Configurator\AbstractLayoutBoxConfigurator;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductShowcaseBoxConfigurator extends AbstractLayoutBoxConfigurator
+class ProductLayeredNavigationBoxConfigurator extends AbstractLayoutBoxConfigurator
 {
     /**
      * {@inheritdoc}
@@ -31,13 +31,7 @@ class ProductShowcaseBoxConfigurator extends AbstractLayoutBoxConfigurator
         $fieldset = $this->getFieldset($builder, $form);
 
         $fieldset->addChild($builder->getElement('tip', [
-            'tip' => '<p>' . $this->trans('product_showcase.tip') . '</p>'
-        ]));
-
-        $fieldset->addChild($builder->getElement('select', [
-            'name'    => 'status',
-            'label'   => $this->trans('product_showcase.status.label'),
-            'options' => $this->get('product_status.collection.admin')->getSelect(),
+            'tip' => '<p>' . $this->trans('product.layered_navigation.tip') . '</p>'
         ]));
     }
 }

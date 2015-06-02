@@ -30,18 +30,16 @@ class CategoryProductsBoxController extends AbstractBoxController implements Box
      */
     public function indexAction()
     {
-        $provider          = $this->getManager()->getProvider('category_products');
+        $provider          = $this->getManager()->getProductProvider();
         $collectionBuilder = $provider->getCollectionBuilder();
         $requestHelper     = $this->getManager()->getRequestHelper();
 
         $dataset = $collectionBuilder->getDataSet([
-            'limit'      => $requestHelper->getQueryAttribute('limit', 10),
+            'limit'      => $requestHelper->getQueryAttribute('limit', $this->getBoxParam('per_page')),
             'order_by'   => $requestHelper->getQueryAttribute('order_by', 'name'),
             'order_dir'  => $requestHelper->getQueryAttribute('order_dir', 'asc'),
             'conditions' => $this->getManager()->getConditions(),
         ]);
-
-        $provider->setCurrentResource($dataset);
 
         return [
             'dataset' => $dataset

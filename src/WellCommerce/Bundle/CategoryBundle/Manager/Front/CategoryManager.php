@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\Manager\Front;
 
+use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
 use WellCommerce\Bundle\DataSetBundle\Conditions\Condition\Eq;
 use WellCommerce\Bundle\DataSetBundle\Conditions\ConditionsCollection;
@@ -43,6 +44,12 @@ class CategoryManager extends AbstractFrontManager
      */
     public function getCurrentCategoryId()
     {
-        return $this->getProvider('category')->getCurrentResource()->getId();
+        $category = $this->getCategoryProvider()->getCurrentCategory();
+
+        if ($category instanceof Category) {
+            return $category->getId();
+        }
+
+        return null;
     }
 }

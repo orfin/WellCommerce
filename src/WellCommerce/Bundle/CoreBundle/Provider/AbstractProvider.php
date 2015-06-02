@@ -19,13 +19,8 @@ use WellCommerce\Bundle\DataSetBundle\CollectionBuilder\CollectionBuilderFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractProvider implements ProviderInterface
+abstract class AbstractProvider
 {
-    /**
-     * @var object
-     */
-    protected $resource;
-
     /**
      * @var CollectionBuilderFactoryInterface
      */
@@ -47,21 +42,5 @@ abstract class AbstractProvider implements ProviderInterface
     public function getCollectionBuilder()
     {
         return $this->collectionBuilderFactory;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCurrentResource($resource)
-    {
-        $this->resource = $resource;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCurrentResource()
-    {
-        return $this->resource;
     }
 }

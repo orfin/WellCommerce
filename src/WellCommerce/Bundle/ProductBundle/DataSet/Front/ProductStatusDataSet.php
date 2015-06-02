@@ -29,9 +29,10 @@ class ProductStatusDataSet extends AbstractDataSet implements DataSetInterface
     public function configureOptions(DataSetConfiguratorInterface $configurator)
     {
         $configurator->setColumns([
-            'id'    => 'product_status.id',
-            'name'  => 'product_status_translation.name',
-            'route' => 'IDENTITY(product_status_translation.route)',
+            'id'        => 'product_status.id',
+            'name'      => 'product_status_translation.name',
+            'route'     => 'IDENTITY(product_status_translation.route)',
+            'css_class' => 'product_status_translation.cssClass',
         ]);
     }
 }

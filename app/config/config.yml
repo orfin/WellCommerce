@@ -60,6 +60,7 @@ doctrine:
                         class:   WellCommerce\Bundle\IntlBundle\ORM\Filter\LocaleFilter
                         enabled: false
 
+
 # Swiftmailer Configuration
 swiftmailer:
     transport: "%mailer_transport%"

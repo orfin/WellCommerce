@@ -20,10 +20,9 @@ use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 /**
  * Class AbstractLayoutBoxConfigurator
  *
- * @package WellCommerce\Bundle\LayoutBundle\Configurator
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractLayoutBoxConfigurator extends AbstractContainer
+abstract class AbstractLayoutBoxConfigurator extends AbstractContainer implements LayoutBoxConfiguratorInterface
 {
     protected $type;
     protected $controllerService;
@@ -46,6 +45,14 @@ abstract class AbstractLayoutBoxConfigurator extends AbstractContainer
     public function getControllerService()
     {
         return $this->controllerService;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 
     /**
@@ -79,13 +86,5 @@ abstract class AbstractLayoutBoxConfigurator extends AbstractContainer
     protected function getBoxTypeSelect(FormInterface $form)
     {
         return $form->getChildren()->get('required_data')->getChildren()->get('boxType');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getType()
-    {
-        return $this->type;
     }
 }

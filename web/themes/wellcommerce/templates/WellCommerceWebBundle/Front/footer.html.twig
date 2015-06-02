@@ -12,11 +12,17 @@
                 </div>
             {% endfor %}
             <div class="col-lg-3 menu">
-                <h3>Your account</h3>
+                <h3>{% trans %}footer.client_links.label{% endtrans %}</h3>
                 <ul>
-                    <li><a href="#">Sing in yout account</a></li>
-                    <li><a href="#">Sing up</a></li>
-                    <li><a href="#">Order status</a></li>
+                    {% if app.user and is_granted('ROLE_CLIENT') %}
+                        <li><a href="{{ path('front.client.index') }}">{% trans %}client.link.my_account{% endtrans %}</a></li>
+                        <li><a href="{{ path('front.client.logout') }}">{% trans %}client.link.logout{% endtrans %}</a></li>
+                        <li><a href="{{ path('front.client.orders') }}">{% trans %}client.link.orders{% endtrans %}</a></li>
+                    {%  else %}
+                        <li><a href="{{ path('front.client.login') }}">{% trans %}client.link.login{% endtrans %}</a></li>
+                        <li><a href="{{ path('front.client.register') }}">{% trans %}client.link.register{% endtrans %}</a></li>
+                        <li><a href="{{ path('front.client.password') }}">{% trans %}client.link.password_forgotten{% endtrans %}</a></li>
+                    {% endif %}
                 </ul>
             </div>
             <div class="col-lg-3">

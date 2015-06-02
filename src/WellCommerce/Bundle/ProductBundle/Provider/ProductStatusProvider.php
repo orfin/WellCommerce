@@ -12,16 +12,42 @@
 
 namespace WellCommerce\Bundle\ProductBundle\Provider;
 
-use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CoreBundle\Provider\AbstractProvider;
-use WellCommerce\Bundle\DataSetBundle\CollectionBuilder\CollectionBuilderFactoryInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductStatus;
 
 /**
  * Class ProductStatusProvider
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductStatusProvider extends AbstractProvider
+class ProductStatusProvider extends AbstractProvider implements ProductStatusProviderInterface
 {
+    /**
+     * @var ProductStatus
+     */
+    protected $productStatus;
 
+    /**
+     * {@inheritdoc}
+     */
+    public function setCurrentProductStatus(ProductStatus $productStatus)
+    {
+        $this->productStatus = $productStatus;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCurrentProductStatus()
+    {
+        return $this->productStatus;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasCurrentProductStatus()
+    {
+        return (null !== $this->productStatus);
+    }
 }

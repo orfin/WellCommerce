@@ -10,7 +10,7 @@
 
                     <a href="{{ path(item.route) }}" class="caption">
                         <div class="labels">
-                            <span class="label">Bestseller</span>
+                            <span class="label">Bestseller {{ item.status|json_encode }}</span>
                         </div>
                         <span class="price">{{ format_price(item.price, item.currency) }}</span>
                         <span class="name">{{ item.name }}</span>

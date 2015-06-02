@@ -27,14 +27,11 @@ use WellCommerce\Bundle\ProductBundle\Repository\ProductRepositoryInterface;
  */
 class ProductController extends AbstractFrontController implements FrontControllerInterface
 {
-    /**
-     * @var ProductRepositoryInterface
-     */
-    protected $repository;
-
     public function indexAction(Request $request)
     {
         $resource = $this->findOr404($request);
+
+        $this->getManager()->getProvider('product')->setCurrentResource($resource);
 
         return [
             'product' => $resource

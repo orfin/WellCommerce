@@ -34,7 +34,7 @@ class CategoryController extends AbstractFrontController implements FrontControl
             'enabled' => 1
         ]);
 
-        $this->getManager()->getProvider('category')->setCurrentResource($category);
+        $this->getManager()->getCategoryProvider()->setCurrentCategory($category);
 
         return [
             'category' => $category

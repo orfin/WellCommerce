@@ -35,7 +35,7 @@ class LoadShopData extends AbstractDataFixture
         $shop->setName('WellCommerce');
         $shop->setCompany($company);
         $shop->setTheme($theme);
-        $shop->setUrl('wellcommerce.dev');
+        $shop->setUrl($this->container->getParameter('fallback_hostname'));
         $manager->persist($shop);
         $manager->flush();
 

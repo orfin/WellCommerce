@@ -50,4 +50,25 @@ interface FrontManagerInterface extends ManagerInterface
      * @param ShopContextInterface $shopContext
      */
     public function setShopContext(ShopContextInterface $shopContext);
+
+    /**
+     * Shorthand to get category provider
+     *
+     * @return \WellCommerce\Bundle\CategoryBundle\Provider\CategoryProviderInterface
+     */
+    public function getCategoryProvider();
+
+    /**
+     * Shorthand to get product provider
+     *
+     * @return \WellCommerce\Bundle\ProductBundle\Provider\ProductProviderInterface
+     */
+    public function getProductProvider();
+
+    /**
+     * Shorthand to get cart provider
+     *
+     * @return \WellCommerce\Bundle\CartBundle\Provider\CartProviderInterface
+     */
+    public function getCartProvider();
 }

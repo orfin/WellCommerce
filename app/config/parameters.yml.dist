@@ -21,6 +21,7 @@ parameters:
     doctrine.server_version: 5.6
 
     fallback_theme: demo
+    fallback_hostname: localhost
 
     pdo.db_options:
       db_table:    session

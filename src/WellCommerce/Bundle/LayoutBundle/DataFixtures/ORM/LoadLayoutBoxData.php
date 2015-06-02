@@ -12,8 +12,6 @@
 
 namespace WellCommerce\Bundle\ClientBundle\DataFixtures\ORM;
 
-use Doctrine\Common\DataFixtures\FixtureInterface;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
 use WellCommerce\Bundle\LayoutBundle\Entity\LayoutBox;
@@ -23,7 +21,7 @@ use WellCommerce\Bundle\LayoutBundle\Entity\LayoutBox;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LoadLayoutBoxData extends AbstractDataFixture implements FixtureInterface, OrderedFixtureInterface
+class LoadLayoutBoxData extends AbstractDataFixture
 {
     /**
      * @var ObjectManager
@@ -42,6 +40,7 @@ class LoadLayoutBoxData extends AbstractDataFixture implements FixtureInterface,
         $this->createProducerBoxes();
         $this->createProductStatusesBoxes();
         $this->createCheckoutBoxes();
+        $this->createProductBoxes();
 
         $manager->flush();
     }
@@ -50,21 +49,26 @@ class LoadLayoutBoxData extends AbstractDataFixture implements FixtureInterface,
     {
         $boxes = [
             'CategoryMenuBox'     => [
-                'identifier' => 'category.menu.box',
-                'name'       => 'Categories'
+                'identifier' => 'category_menu',
+                'name'       => 'Categories',
+                'settings'   => []
             ],
             'CategoryInfoBox'     => [
-                'identifier' => 'category.info.box',
-                'name'       => 'Category'
+                'identifier' => 'category_info',
+                'name'       => 'Category',
+                'settings'   => []
             ],
             'CategoryProductsBox' => [
-                'identifier' => 'category.products.box',
-                'name'       => 'Category products'
+                'identifier' => 'category_products',
+                'name'       => 'Category products',
+                'settings'   => [
+                    'per_page' => 10
+                ]
             ],
         ];
 
         foreach ($boxes as $type => $params) {
-            $this->createLayoutBox($type, $params['identifier'], $params['name']);
+            $this->createLayoutBox($type, $params['identifier'], $params['name'], $params['settings']);
         }
     }
 
@@ -72,27 +76,27 @@ class LoadLayoutBoxData extends AbstractDataFixture implements FixtureInterface,
     {
         $boxes = [
             'ClientRegistrationBox'   => [
-                'identifier' => 'client.registration.box',
+                'identifier' => 'client_registration',
                 'name'       => 'Sign-in'
             ],
             'ClientLoginBox'          => [
-                'identifier' => 'client.login.box',
+                'identifier' => 'client_login',
                 'name'       => 'Sign-up'
             ],
             'ClientOrderBox'          => [
-                'identifier' => 'client.order.box',
+                'identifier' => 'client_order',
                 'name'       => 'Orders'
             ],
             'ClientSettingsBox'       => [
-                'identifier' => 'client.settings.box',
+                'identifier' => 'client_settings',
                 'name'       => 'Account settings'
             ],
             'ClientForgotPasswordBox' => [
-                'identifier' => 'client.forgot_password.box',
+                'identifier' => 'client_forgot_password',
                 'name'       => 'Password reset'
             ],
             'ClientAddressBookBox'    => [
-                'identifier' => 'client.address_book.box',
+                'identifier' => 'client_address_book',
                 'name'       => 'Address book'
             ],
         ];
@@ -106,15 +110,11 @@ class LoadLayoutBoxData extends AbstractDataFixture implements FixtureInterface,
     {
         $boxes = [
             'ProducerMenuBox'     => [
-                'identifier' => 'producer.menu.box',
+                'identifier' => 'producer_menu',
                 'name'       => 'Producers'
             ],
-            'CategoryInfoBox'     => [
-                'identifier' => 'producer.info.box',
-                'name'       => 'Producer'
-            ],
-            'CategoryProductsBox' => [
-                'identifier' => 'producer.products.box',
+            'ProducerProductsBox' => [
+                'identifier' => 'producer_products',
                 'name'       => 'Producer products'
             ],
         ];
@@ -127,21 +127,53 @@ class LoadLayoutBoxData extends AbstractDataFixture implements FixtureInterface,
     protected function createProductStatusesBoxes()
     {
         $boxes = [
-            'ProductBestsellerBox' => [
-                'identifier' => 'product.bestseller.box',
-                'name'       => 'Bestsellers'
+            'ProductStatusBox'    => [
+                'identifier' => 'product_status',
+                'name'       => 'Dynamic product status',
+                'settings'   => []
             ],
-            'ProductPromotionBox'  => [
-                'identifier' => 'product.promotion.box',
-                'name'       => 'Promotions'
+            'ProductPromotionBox' => [
+                'identifier' => 'product_promotion',
+                'name'       => 'Promotions',
+                'settings'   => []
             ],
-            'ProductNewBox'        => [
-                'identifier' => 'product.new.box',
-                'name'       => 'New arrivals'
+            'ProductNewBox'       => [
+                'identifier' => 'product_new_arrivals',
+                'name'       => 'New arrivals',
+                'settings'   => []
             ],
-            'ProductShowcaseBox'   => [
-                'identifier' => 'product.showcase.box',
-                'name'       => 'Showcase'
+            'ProductShowcaseBox'  => [
+                'identifier' => 'product_showcase',
+                'name'       => 'Showcase',
+                'settings'   => [
+                    'status' => $this->getReference('product_status_Featured')->getId()
+                ]
+            ],
+        ];
+
+        foreach ($boxes as $type => $params) {
+            $this->createLayoutBox($type, $params['identifier'], $params['name'], $params['settings']);
+        }
+    }
+
+    protected function createCheckoutBoxes()
+    {
+        $boxes = [
+            'CartBox'         => [
+                'identifier' => 'cart',
+                'name'       => 'Cart'
+            ],
+            'CheckoutBox'     => [
+                'identifier' => 'checkout',
+                'name'       => 'Checkout'
+            ],
+            'FinalizationBox' => [
+                'identifier' => 'finalization',
+                'name'       => 'Summary'
+            ],
+            'PaymentBox'      => [
+                'identifier' => 'payment',
+                'name'       => 'Payment'
             ],
         ];
 
@@ -150,24 +182,16 @@ class LoadLayoutBoxData extends AbstractDataFixture implements FixtureInterface,
         }
     }
 
-    protected function createCheckoutBoxes()
+    protected function createProductBoxes()
     {
         $boxes = [
-            'CartBox'         => [
-                'identifier' => 'cart.box',
-                'name'       => 'Cart'
+            'ProductInfoBox'              => [
+                'identifier' => 'product_info',
+                'name'       => 'Product'
             ],
-            'CheckoutBox'     => [
-                'identifier' => 'checkout.box',
-                'name'       => 'Checkout'
-            ],
-            'FinalizationBox' => [
-                'identifier' => 'finalization.box',
-                'name'       => 'Summary'
-            ],
-            'PaymentBox'      => [
-                'identifier' => 'payment.box',
-                'name'       => 'Payment'
+            'ProductLayeredNavigationBox' => [
+                'identifier' => 'layered_navigation',
+                'name'       => 'Layered navigation'
             ],
         ];
 
@@ -188,11 +212,4 @@ class LoadLayoutBoxData extends AbstractDataFixture implements FixtureInterface,
         $this->manager->persist($layoutBox);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function getOrder()
-    {
-        return 4;
-    }
 }

@@ -15,6 +15,8 @@ namespace WellCommerce\Bundle\ProductBundle\Controller\Front;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductStatus;
+use WellCommerce\Bundle\WebBundle\Breadcrumb\BreadcrumbItem;
 
 /**
  * Class ProductStatusController
@@ -32,10 +34,25 @@ class ProductStatusController extends AbstractFrontController implements FrontCo
     {
         $status = $this->findOr404($request);
 
-        $this->getManager()->getProvider('product_status')->setCurrentResource($status);
+        if ($status instanceof ProductStatus) {
+
+            $this->get('breadcrumb.builder')->add(new BreadcrumbItem([
+                'name' => $status->translate()->getName(),
+                'link' => $this->get('router')->generate((string)$status->translate()->getRoute()->getId())
+            ]));
+
+            $this->get('breadcrumb.builder')->add(new BreadcrumbItem([
+                'name'  => '/',
+                'link'  => '',
+                'class' => 'divider'
+            ]));
+
+            $this->getManager()->getProvider('product_status')->setCurrentResource($status);
+        }
 
         return [
-            'status' => $status
+            'status'     => $status,
+            'breadcrumb' => $this->get('breadcrumb.builder')->all()
         ];
     }
 }

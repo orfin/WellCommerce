@@ -31,13 +31,9 @@ class CategoryProductsBoxConfigurator extends AbstractLayoutBoxConfigurator impl
     {
         $fieldset = $this->getFieldset($builder, $form);
 
-        $fieldset->addChild($builder->getElement('tip', [
-            'tip' => '<p>' . $this->trans('Choose categories which should be not visible in box.') . '</p>'
-        ]));
-
-        $fieldset->addChild($builder->getElement('checkbox', [
-            'name'  => 'pagination',
-            'label' => $this->trans('layout_box.category_products.pagination')
+        $fieldset->addChild($builder->getElement('text_field', [
+            'name'  => 'per_page',
+            'label' => $this->trans('layout_box.category_products.per_page')
         ]));
     }
 }
