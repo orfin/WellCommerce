@@ -12,11 +12,9 @@
 
 namespace WellCommerce\Bundle\ProductBundle\Controller\Front;
 
-use Doctrine\Common\Util\Debug;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
-use WellCommerce\Bundle\ProductBundle\Repository\ProductRepositoryInterface;
 
 /**
  * Class ProductController
@@ -29,12 +27,12 @@ class ProductController extends AbstractFrontController implements FrontControll
 {
     public function indexAction(Request $request)
     {
-        $resource = $this->findOr404($request);
+        $product = $this->findOr404($request);
 
-        $this->getManager()->getProvider('product')->setCurrentResource($resource);
+        $this->getManager()->getProductProvider()->setCurrentProduct($product);
 
         return [
-            'product' => $resource
+            'product' => $product
         ];
     }
 }
