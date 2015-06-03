@@ -13,8 +13,11 @@
 namespace WellCommerce\Bundle\CartBundle\Controller\Front;
 
 use Symfony\Component\HttpFoundation\Request;
+use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
+use WellCommerce\Bundle\DataSetBundle\Conditions\Condition\Eq;
+use WellCommerce\Bundle\DataSetBundle\Conditions\ConditionsCollection;
 
 /**
  * Class CartController
@@ -38,15 +41,35 @@ class CartController extends AbstractFrontController implements FrontControllerI
         /**
          * @var $manager \WellCommerce\Bundle\CartBundle\Manager\Front\CartManager
          */
-        $manager   = $this->getManager();
-        $product   = $manager->findProduct();
-        $attribute = $manager->findProductAttribute($product);
-        $quantity  = $manager->getRequestHelper()->getRequestAttribute('id', 1);
+        $manager         = $this->getManager();
+        $product         = $manager->findProduct();
+        $attribute       = $manager->findProductAttribute($product);
+        $quantity        = $manager->getRequestHelper()->getRequestAttribute('qty', 1);
+        $category        = $product->getCategories()->first();
+        $recommendations = $this->getRecommendations($category);
 
         $manager->addItem($product, $attribute, $quantity);
 
         return [
-            'product' => $product
+            'product'         => $product,
+            'recommendations' => $recommendations
         ];
+    }
+
+    protected function getRecommendations(Category $category)
+    {
+        $provider          = $this->getManager()->getProductProvider();
+        $collectionBuilder = $provider->getCollectionBuilder();
+        $conditions        = new ConditionsCollection();
+        $conditions->add(new Eq('category', $category->getId()));
+
+        $dataset = $collectionBuilder->getDataSet([
+            'limit'      => 3,
+            'order_by'   => 'name',
+            'order_dir'  => 'asc',
+            'conditions' => $conditions
+        ]);
+
+        return $dataset;
     }
 }
