@@ -21,6 +21,9 @@
             <call method="setCartHelper">
                 <argument type="service" id="cart.helper"/>
             </call>
+            <call method="setProviders">
+                <argument type="service" id="resource.provider.collection" />
+            </call>
         </service>
 
         <service id="cart.helper" class="WellCommerce\Bundle\CartBundle\Helper\CartHelper">
