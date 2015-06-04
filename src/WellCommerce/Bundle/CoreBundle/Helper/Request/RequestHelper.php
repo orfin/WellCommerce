@@ -135,10 +135,10 @@ class RequestHelper implements RequestHelperInterface
      */
     public function getAdmin()
     {
-        $admin = $this->securityContext->getToken()->getUser();
+        $admin = $this->getUser();
 
-        if ($user instanceof User) {
-            return $user;
+        if ($admin instanceof User) {
+            return $admin;
         }
 
         return null;
@@ -149,10 +149,25 @@ class RequestHelper implements RequestHelperInterface
      */
     public function getClient()
     {
-        $user = $this->securityContext->getToken()->getUser();
+        $client = $this->getUser();
 
-        if ($user instanceof Client) {
-            return $user;
+        if ($client instanceof Client) {
+            return $client;
+        }
+
+        return null;
+    }
+
+    /**
+     * Returns current user from security context
+     *
+     * @return mixed|null
+     */
+    protected function getUser()
+    {
+        $token = $this->securityContext->getToken();
+        if (null !== $token) {
+            return $token->getUser();
         }
 
         return null;
