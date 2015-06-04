@@ -246,6 +246,6 @@ GAjaxRequest = function (sUrl, oRequest, fCallBack) {
         url:      sUrl,
         data:     oRequest,
         success:  fCallBack,
-        dataType: 'html'
+        dataType: 'json'
     });
 };

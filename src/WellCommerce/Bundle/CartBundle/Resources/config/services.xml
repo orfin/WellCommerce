@@ -34,6 +34,14 @@
             <argument type="service" id="doctrine_helper"/>
         </service>
 
+        <service id="cart.purger" class="WellCommerce\Bundle\CartBundle\Purger\CartPurger">
+            <argument type="service" id="doctrine_helper"/>
+        </service>
+
+        <service id="package.command.purge.carts" class="WellCommerce\Bundle\CartBundle\Command\PurgeCartsCommand">
+            <tag name="console.command" />
+        </service>
+
         <service id="cart.controller.front" class="WellCommerce\Bundle\CartBundle\Controller\Front\CartController">
             <argument type="service" id="cart.manager.front"/>
             <call method="setContainer">

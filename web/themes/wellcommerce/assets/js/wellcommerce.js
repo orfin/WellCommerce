@@ -2,7 +2,8 @@ $(document).ready(function () {
     $('.add-cart').click(function (e) {
         e.stopImmediatePropagation();
         GAjaxRequest($(this).attr('href'), $(this).data(), function(oResponse){
-            $('#basket-modal').html(oResponse).modal('show');
+            $('#basket-modal').html(oResponse.basketModalContent).modal('show');
+            $('#topCart').html(oResponse.cartPreviewContent);
         });
 
         return false;
