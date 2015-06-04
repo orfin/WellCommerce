@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\CoreBundle\Helper\Doctrine;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\Mapping\ClassMetadata;
 
 /**
  * Class DoctrineHelper
@@ -73,9 +74,7 @@ class DoctrineHelper implements DoctrineHelperInterface
      */
     public function getClassMetadata($className)
     {
-        if ($this->getEntityManager()->getMetadataFactory()->hasMetadataFor($className)) {
-            return $this->getEntityManager()->getClassMetadata($className);
-        }
+        return $this->getEntityManager()->getClassMetadata($className);
     }
 
     /**
@@ -84,16 +83,20 @@ class DoctrineHelper implements DoctrineHelperInterface
     public function truncateTable($className)
     {
         $metadata = $this->getClassMetadata($className);
-        $connection = $this->registry->getConnection();
-        $connection->beginTransaction();
+        if ($metadata instanceof ClassMetadata) {
+            $connection = $this->registry->getConnection();
+            $connection->beginTransaction();
 
-        try {
-            $connection->query('SET FOREIGN_KEY_CHECKS=0');
-            $connection->query('DELETE FROM ' . $metadata->getTableName());
-            $connection->query('SET FOREIGN_KEY_CHECKS=1');
-            $connection->commit();
-        } catch (\Exception $e) {
-            $connection->rollback();
+            try {
+                $connection->query('DELETE FROM ' . $metadata->getTableName());
+                $connection->commit();
+
+                return true;
+            } catch (\Exception $e) {
+                $connection->rollback();
+            }
         }
+
+        return false;
     }
 }
