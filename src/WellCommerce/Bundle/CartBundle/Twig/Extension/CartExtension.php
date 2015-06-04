@@ -12,12 +12,10 @@
 namespace WellCommerce\Bundle\CartBundle\Twig\Extension;
 
 use WellCommerce\Bundle\CartBundle\Helper\CartHelperInterface;
-use WellCommerce\Bundle\CategoryBundle\Provider\CategoryProviderInterface;
 
 /**
- * Class CategoryExtension
+ * Class CartExtension
  *
- * @package WellCommerce\Bundle\CategoryBundle\Twig\Extension
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class CartExtension extends \Twig_Extension
@@ -35,11 +33,9 @@ class CartExtension extends \Twig_Extension
         $this->cartHelper = $cartHelper;
     }
 
-    public function getFunctions()
+    public function getGlobals()
     {
-        return [
-            new \Twig_SimpleFunction('cart', [$this, 'getCart'], ['is_safe' => ['html']]),
-        ];
+        return ['cart' => $this->cartHelper->getCart()];
     }
 
     /**
@@ -48,19 +44,5 @@ class CartExtension extends \Twig_Extension
     public function getName()
     {
         return 'cart';
-    }
-
-    /**
-     * Returns categories tree
-     *
-     * @param int    $limit
-     * @param string $orderBy
-     * @param string $orderDir
-     *
-     * @return array
-     */
-    public function getCart()
-    {
-        return $this->cartHelper->getCart();
     }
 }
