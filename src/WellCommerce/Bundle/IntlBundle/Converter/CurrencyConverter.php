@@ -132,5 +132,4 @@ class CurrencyConverter implements CurrencyConverterInterface
     {
         $this->exchangeRates[$targetCurrency][$rate->getCurrencyFrom()] = $rate->getExchangeRate();
     }
-
 }
