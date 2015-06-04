@@ -112,6 +112,9 @@ class CartHelper implements CartHelperInterface
         return $this->cartProductRepository->findProductInCart($this->getCart(), $product, $attribute);
     }
 
+    /**
+     * Clears all cart contents
+     */
     public function abandonCart()
     {
         $cart = $this->getCart();
@@ -121,16 +124,21 @@ class CartHelper implements CartHelperInterface
     }
 
     /**
+     * Removes single item from cart
+     *
      * @param CartProduct $cartProduct
      */
     public function deleteCartProduct(CartProduct $cartProduct)
     {
-        $em = $this->doctrineHelper->getEntityManager();
-        $this->getCart()->getProducts()->removeElement($cartProduct);
+        $em         = $this->doctrineHelper->getEntityManager();
+        $collection = $this->getCart()->getProducts();
+        $collection->removeElement($cartProduct);
         $em->flush();
     }
 
     /**
+     * Changes quantity of single cart item
+     *
      * @param CartProduct $cartProduct
      * @param int         $quantity
      */
@@ -142,6 +150,8 @@ class CartHelper implements CartHelperInterface
     }
 
     /**
+     * Adds new product to cart
+     *
      * @param Product          $product
      * @param ProductAttribute $attribute
      * @param int              $quantity
@@ -166,6 +176,8 @@ class CartHelper implements CartHelperInterface
     }
 
     /**
+     * Initializes the cart
+     *
      * @return Cart
      */
     protected function initCart()
