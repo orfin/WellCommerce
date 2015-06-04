@@ -96,7 +96,6 @@ client:
         reset_password: 'Reset password'
     link:
         my_account: 'My account'
-        login: 'Sign in'
+        login: 'Sign in / Sign up'
         logout: 'Logout'
-        register: 'Sign up'
         reset_password: 'Reset password'

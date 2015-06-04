@@ -7,4 +7,10 @@ $(document).ready(function () {
 
         return false;
     });
+
+    $('.coming-soon').click(function(e){
+        e.stopImmediatePropagation();
+        $('#coming-soon-modal').modal('show');
+        return false;
+    });
 });

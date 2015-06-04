@@ -15,19 +15,6 @@
 
         <div class="collapse navbar-collapse" id="main-nav">
             <ul class="nav navbar-nav">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        Category <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu" role="menu">
-                        {% for category in categoriesTree() %}
-                            <li><a href="{{ path(category.route) }}">{{ category.name }}</a></li>
-                            {% if loop.last == false %}
-                                <li class="divider"></li>
-                            {% endif %}
-                        {% endfor %}
-                    </ul>
-                </li>
                 {% for status in productStatuses() %}
                     <li><a href="{{ path(status.route) }}">{{ status.name }}</a></li>
                 {% endfor %}

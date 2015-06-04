@@ -1,7 +1,70 @@
 {% import "WellCommerceFormBundle:Front/Common:macros.html.twig" as macros %}
 {% include 'WellCommerceWebBundle:Front/Common:flashes.html.twig' %}
-{{ macros.form_begin(form, 'signup-form') }}
-{% for element in elements %}
-    {{ macros.element(element) }}
-{% endfor %}
-{{ macros.form_end(form) }}
+<div class="well-form">
+    <h4>Sign up<small>*Requested fields</small></h4>
+
+    {{ macros.form_begin(form, 'signup-form') }}
+
+        <div class="form-group requested">
+            <label for="login">First name</label>
+            <input type="text" class="form-control" />
+        </div>
+
+        <div class="form-group requested">
+            <label for="login">Last name</label>
+            <input type="text" class="form-control" />
+        </div>
+
+        <div class="form-group requested">
+            <label for="login">Phone number</label>
+            <input type="text" class="form-control" />
+        </div>
+
+        <div class="form-group requested">
+            <label for="login">E-mail</label>
+            <input type="email" class="form-control" />
+        </div>
+
+        <div class="form-group requested">
+            <label for="login">Password</label>
+            <input type="password" class="form-control" />
+        </div>
+
+        <div class="form-group requested">
+            <label for="login">Repeat password</label>
+            <input type="password" class="form-control" />
+        </div>
+
+        <div class="alert alert-sm mtp30">
+            <strong>Benefits of opening an account</strong>
+
+            <ul>
+                <li>Current status of your shipment</li>
+                <li>Discounts for regular customers</li>
+            </ul>
+
+        </div>
+
+
+        <h4 class="mtp30">Terms and conditions</h4>
+
+        <div class="checkbox">
+            <label>
+                <input type="checkbox">
+                I accept Demo Store <a href="#">conditions</a>
+            </label>
+        </div>
+
+        <div class="checkbox">
+            <label>
+                <input type="checkbox">
+                I want to recive newsletter with actual promotions
+            </label>
+        </div>
+
+
+        <div class="clearfix">
+            <button type="submit" class="btn btn-primary pull-right">Sign up</button>
+        </div>
+    {{ macros.form_end(form) }}
+</div>

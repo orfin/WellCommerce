@@ -36,6 +36,7 @@ assetic:
     filters:
         cssrewrite: ~
         less: ~
+
 # Doctrine Configuration
 doctrine:
     dbal:
