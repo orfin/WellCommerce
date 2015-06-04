@@ -16,8 +16,9 @@
         <div class="collapse navbar-collapse" id="main-nav">
             <ul class="nav navbar-nav">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Category
-                        <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        Category <span class="caret"></span>
+                    </a>
                     <ul class="dropdown-menu" role="menu">
                         {% for category in categoriesTree() %}
                             <li><a href="{{ path(category.route) }}">{{ category.name }}</a></li>
@@ -28,9 +29,32 @@
                     </ul>
                 </li>
                 {% for status in productStatuses() %}
-                <li><a href="{{ path(status.route) }}">{{ status.name }}</a></li>
+                    <li><a href="{{ path(status.route) }}">{{ status.name }}</a></li>
                 {% endfor %}
-                <li><a href="#">Help</a></li>
+                {% for category in cmsPageTree %}
+                    {% if category.children|length %}
+                        <li class="dropdown">
+                            <a href="{{ path(category.route) }}" class="dropdown-toggle" data-toggle="dropdown"
+                               role="button" aria-expanded="false">
+                                {{ category.name }} <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                {% for page in category.children %}
+                                    <li><a href="{{ path(page.route) }}">{{ page.name }}</a></li>
+                                    {% if loop.last == false %}
+                                        <li class="divider"></li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href="{{ path(category.route) }}">
+                                {{ category.name }}
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
             </ul>
 
             <ul class="nav navbar-nav navbar-right" id="topCart">
