@@ -12,6 +12,8 @@
 namespace WellCommerce\Bundle\CartBundle\Twig\Extension;
 
 use WellCommerce\Bundle\CartBundle\Provider\CartProductProviderInterface;
+use WellCommerce\Bundle\CartBundle\Provider\CartProviderInterface;
+use WellCommerce\Bundle\CartBundle\Provider\CartSummaryProviderInterface;
 
 /**
  * Class CategoryExtension
@@ -21,18 +23,35 @@ use WellCommerce\Bundle\CartBundle\Provider\CartProductProviderInterface;
 class CartExtension extends \Twig_Extension
 {
     /**
+     * @var CartProviderInterface
+     */
+    protected $cartProvider;
+
+    /**
      * @var CartProductProviderInterface
      */
     protected $cartProductProvider;
 
     /**
+     * @var CartSummaryProviderInterface
+     */
+    protected $cartSummaryProvider;
+
+    /**
      * Constructor
      *
+     * @param CartProviderInterface        $cartProvider
      * @param CartProductProviderInterface $cartProductProvider
+     * @param CartSummaryProviderInterface $cartSummaryProvider
      */
-    public function __construct(CartProductProviderInterface $cartProductProvider)
-    {
+    public function __construct(
+        CartProviderInterface $cartProvider,
+        CartProductProviderInterface $cartProductProvider,
+        CartSummaryProviderInterface $cartSummaryProvider
+    ) {
+        $this->cartProvider        = $cartProvider;
         $this->cartProductProvider = $cartProductProvider;
+        $this->cartSummaryProvider = $cartSummaryProvider;
     }
 
     public function getGlobals()
@@ -40,7 +59,7 @@ class CartExtension extends \Twig_Extension
         return [
             'cart' => [
                 'products' => $this->cartProductProvider->getProducts(),
-                'summary'  => $this->cartProductProvider->getSummary(),
+                'summary'  => $this->cartSummaryProvider->getTotals()
             ]
         ];
     }
