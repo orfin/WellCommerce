@@ -76,7 +76,9 @@ class CartManager extends AbstractFrontManager
      */
     public function addItem(Product $product, ProductAttribute $attribute = null, $quantity)
     {
-        return $this->cartHelper->addProductToCart($product, $attribute, (int)$quantity);
+        $currentCart = $this->getCartProvider()->getCurrentCart();
+
+        return $this->cartHelper->addProductToCart($currentCart, $product, $attribute, (int)$quantity);
     }
 
     /**
