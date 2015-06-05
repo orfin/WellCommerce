@@ -33,14 +33,13 @@ class CartController extends AbstractFrontController implements FrontControllerI
      */
     public function indexAction(Request $request)
     {
+        return [
 
+        ];
     }
 
     public function addAction()
     {
-        /**
-         * @var $manager \WellCommerce\Bundle\CartBundle\Manager\Front\CartManager
-         */
         $manager         = $this->getManager();
         $product         = $manager->findProduct();
         $attribute       = $manager->findProductAttribute($product);
@@ -63,6 +62,14 @@ class CartController extends AbstractFrontController implements FrontControllerI
         ]);
     }
 
+    /**
+     * @return \WellCommerce\Bundle\CartBundle\Manager\Front\CartManager
+     */
+    protected function getManager()
+    {
+        return parent::getManager();
+    }
+
     protected function getRecommendations(Category $category)
     {
         $provider          = $this->getManager()->getProductProvider();
@@ -78,5 +85,13 @@ class CartController extends AbstractFrontController implements FrontControllerI
         ]);
 
         return $dataset;
+    }
+
+    public function deleteAction()
+    {
+        $manager = $this->getManager();
+        $manager->deleteItem();
+
+        return $this->redirectToAction('index');
     }
 }
