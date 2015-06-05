@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CartBundle\Helper;
 
+use WellCommerce\Bundle\CartBundle\Entity\Cart;
 use WellCommerce\Bundle\CartBundle\Entity\CartProduct;
 use WellCommerce\Bundle\ProductBundle\Entity\Product;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute;
@@ -21,30 +22,31 @@ use WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface CartHelperInterface {
-
+interface CartHelperInterface
+{
     /**
-     * @return null|\WellCommerce\Bundle\CartBundle\Entity\Cart
-     */
-    public function getCart();
-
-    /**
+     * @param Cart             $cart
      * @param Product          $product
      * @param ProductAttribute $attribute
      *
      * @return null|CartProduct
      */
-    public function getCartProduct(Product $product, ProductAttribute $attribute = null);
+    public function getCartProduct(Cart $cart, Product $product, ProductAttribute $attribute = null);
 
     /**
-     * @return void
+     * Removes cart from registry
+     *
+     * @param Cart $cart
      */
-    public function abandonCart();
+    public function abandonCart(Cart $cart);
 
     /**
+     * Removes item from cart
+     *
+     * @param Cart        $cart
      * @param CartProduct $cartProduct
      */
-    public function deleteCartProduct(CartProduct $cartProduct);
+    public function deleteCartProduct(Cart $cart, CartProduct $cartProduct);
 
     /**
      * @param CartProduct $cartProduct
@@ -53,9 +55,13 @@ interface CartHelperInterface {
     public function changeCartProductQuantity(CartProduct $cartProduct, $quantity);
 
     /**
+     * Adds new product to cart
+     *
+     * @param Cart             $cart
      * @param Product          $product
      * @param ProductAttribute $attribute
      * @param int              $quantity
      */
-    public function addProductToCart(Product $product, ProductAttribute $attribute = null, $quantity);
+    public function addProductToCart(Cart $cart, Product $product, ProductAttribute $attribute = null, $quantity);
+
 }

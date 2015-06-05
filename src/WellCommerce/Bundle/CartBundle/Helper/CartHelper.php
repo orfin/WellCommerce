@@ -15,10 +15,7 @@ namespace WellCommerce\Bundle\CartBundle\Helper;
 use WellCommerce\Bundle\CartBundle\Entity\Cart;
 use WellCommerce\Bundle\CartBundle\Entity\CartProduct;
 use WellCommerce\Bundle\CartBundle\Repository\CartProductRepositoryInterface;
-use WellCommerce\Bundle\CartBundle\Repository\CartRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Doctrine\DoctrineHelperInterface;
-use WellCommerce\Bundle\CoreBundle\Helper\Request\RequestHelperInterface;
-use WellCommerce\Bundle\MultiStoreBundle\Context\ShopContextInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\Product;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute;
 
@@ -30,24 +27,9 @@ use WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute;
 class CartHelper implements CartHelperInterface
 {
     /**
-     * @var CartRepositoryInterface
-     */
-    protected $cartRepository;
-
-    /**
      * @var CartProductRepositoryInterface
      */
     protected $cartProductRepository;
-
-    /**
-     * @var RequestHelperInterface
-     */
-    protected $requestHelper;
-
-    /**
-     * @var ShopContextInterface
-     */
-    protected $shopContext;
 
     /**
      * @var DoctrineHelperInterface
@@ -57,90 +39,48 @@ class CartHelper implements CartHelperInterface
     /**
      * Constructor
      *
-     * @param CartRepositoryInterface        $cartRepository
      * @param CartProductRepositoryInterface $cartProductRepository
-     * @param RequestHelperInterface         $requestHelper
-     * @param ShopContextInterface           $shopContext
      * @param DoctrineHelperInterface        $doctrineHelper
      */
     public function __construct(
-        CartRepositoryInterface $cartRepository,
         CartProductRepositoryInterface $cartProductRepository,
-        RequestHelperInterface $requestHelper,
-        ShopContextInterface $shopContext,
         DoctrineHelperInterface $doctrineHelper
     ) {
-        $this->cartRepository        = $cartRepository;
         $this->cartProductRepository = $cartProductRepository;
-        $this->requestHelper         = $requestHelper;
-        $this->shopContext           = $shopContext;
         $this->doctrineHelper        = $doctrineHelper;
     }
 
     /**
-     * @return null|Cart
+     * {@inheritdoc}
      */
-    public function getCart()
+    public function getCartProduct(Cart $cart, Product $product, ProductAttribute $attribute = null)
     {
-        $client    = $this->requestHelper->getClient();
-        $sessionId = $this->requestHelper->getSessionId();
-        $shop      = $this->shopContext->getCurrentScope();
-        $cart      = $this->cartRepository->getCart($client, $sessionId, $shop);
-        $em        = $this->doctrineHelper->getEntityManager();
-
-        if (null === $cart) {
-            $cart = $this->initCart();
-            $em->persist($cart);
-        } else {
-            $cart->setClient($client);
-            $cart->setSessionId($sessionId);
-        }
-
-        $em->flush();
-
-        return $cart;
+        return $this->cartProductRepository->findProductInCart($cart, $product, $attribute);
     }
 
     /**
-     * @param Product          $product
-     * @param ProductAttribute $attribute
-     *
-     * @return null|CartProduct
+     * {@inheritdoc}
      */
-    public function getCartProduct(Product $product, ProductAttribute $attribute = null)
+    public function abandonCart(Cart $cart)
     {
-        return $this->cartProductRepository->findProductInCart($this->getCart(), $product, $attribute);
-    }
-
-    /**
-     * Clears all cart contents
-     */
-    public function abandonCart()
-    {
-        $cart = $this->getCart();
-        $em   = $this->doctrineHelper->getEntityManager();
+        $em = $this->doctrineHelper->getEntityManager();
         $em->clear($cart);
         $em->flush();
     }
 
     /**
-     * Removes single item from cart
-     *
-     * @param CartProduct $cartProduct
+     * {@inheritdoc}
      */
-    public function deleteCartProduct(CartProduct $cartProduct)
+    public function deleteCartProduct(Cart $cart, CartProduct $cartProduct)
     {
         $em         = $this->doctrineHelper->getEntityManager();
-        $collection = $this->getCart()->getProducts();
+        $collection = $cart->getProducts();
         $collection->removeElement($cartProduct);
         $em->flush();
     }
 
     /**
-     * Changes quantity of single cart item
-     *
-     * @param CartProduct $cartProduct
-     * @param int         $quantity
+     * {@inheritdoc}
      */
     public function changeCartProductQuantity(CartProduct $cartProduct, $quantity)
     {
@@ -150,20 +90,16 @@ class CartHelper implements CartHelperInterface
     }
 
     /**
-     * Adds new product to cart
-     *
-     * @param Product          $product
-     * @param ProductAttribute $attribute
-     * @param int              $quantity
+     * {@inheritdoc}
      */
-    public function addProductToCart(Product $product, ProductAttribute $attribute = null, $quantity)
+    public function addProductToCart(Cart $cart, Product $product, ProductAttribute $attribute = null, $quantity)
     {
         $em          = $this->doctrineHelper->getEntityManager();
-        $cartProduct = $this->getCartProduct($product, $attribute);
+        $cartProduct = $this->getCartProduct($cart, $product, $attribute);
 
         if (null === $cartProduct) {
             $cartProduct = new CartProduct();
-            $cartProduct->setCart($this->getCart());
+            $cartProduct->setCart($cart);
             $cartProduct->setProduct($product);
             $cartProduct->setAttribute($attribute);
             $cartProduct->setQuantity($quantity);
@@ -175,22 +111,16 @@ class CartHelper implements CartHelperInterface
         $em->flush();
     }
 
-    /**
-     * Initializes the cart
-     *
-     * @return Cart
-     */
-    protected function initCart()
+    protected function getCartSummary($products)
     {
-        $client    = $this->requestHelper->getClient();
-        $sessionId = $this->requestHelper->getSessionId();
-        $shop      = $this->shopContext->getCurrentScope();
+        $quantity = 0;
+        $weight   = 0;
+        $price    = 0;
 
-        $cart = new Cart();
-        $cart->setClient($client);
-        $cart->setSessionId($sessionId);
-        $cart->setShop($shop);
-
-        return $cart;
+        foreach ($products as $product) {
+            $quantity += $product['quantity'];
+            $weight += $product['weight'];
+            $price += $product['weight'];
+        }
     }
 }
