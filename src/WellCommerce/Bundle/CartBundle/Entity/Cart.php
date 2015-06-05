@@ -11,8 +11,8 @@
  */
 namespace WellCommerce\Bundle\CartBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
 use WellCommerce\Bundle\ClientBundle\Entity\Client;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\Timestampable\TimestampableTrait;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\Shop;
@@ -87,6 +87,14 @@ class Cart
     }
 
     /**
+     * @param ArrayCollection $products
+     */
+    public function setProducts(ArrayCollection $products)
+    {
+        $this->products = $products;
+    }
+
+    /**
      * @return float
      */
     public function getSessionId()
@@ -103,19 +111,16 @@ class Cart
     }
 
     /**
-     * @param ArrayCollection $products
-     */
-    public function setProducts(ArrayCollection $products)
-    {
-        $this->products = $products;
-    }
-
-    /**
      * @param CartProduct $cartProduct
      */
     public function addProduct(CartProduct $cartProduct)
     {
         $this->products->add($cartProduct);
+    }
+
+    public function removeProduct(CartProduct $cartProduct)
+    {
+        $this->products->removeElement($cartProduct);
     }
 
     /**
