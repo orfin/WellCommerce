@@ -25,13 +25,12 @@ use WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute;
 interface CartHelperInterface
 {
     /**
-     * @param Cart             $cart
-     * @param Product          $product
-     * @param ProductAttribute $attribute
+     * @param Cart $cart
+     * @param int  $id
      *
      * @return null|CartProduct
      */
-    public function getCartProduct(Cart $cart, Product $product, ProductAttribute $attribute = null);
+    public function getCartProductById(Cart $cart, $id);
 
     /**
      * Removes cart from registry
@@ -41,12 +40,12 @@ interface CartHelperInterface
     public function abandonCart(Cart $cart);
 
     /**
-     * Removes item from cart
+     * Removes item from cart by its ID. Works only if item exists in cart
      *
-     * @param Cart        $cart
-     * @param CartProduct $cartProduct
+     * @param Cart $cart
+     * @param int  $id
      */
-    public function deleteCartProduct(Cart $cart, CartProduct $cartProduct);
+    public function deleteCartProduct(Cart $cart, $id);
 
     /**
      * @param CartProduct $cartProduct

@@ -53,9 +53,12 @@ class CartHelper implements CartHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function getCartProduct(Cart $cart, Product $product, ProductAttribute $attribute = null)
+    public function getCartProductById(Cart $cart, $id)
     {
-        return $this->cartProductRepository->findProductInCart($cart, $product, $attribute);
+        return $this->cartProductRepository->findOneBy([
+            'cart' => $cart,
+            'id'   => $id
+        ]);
     }
 
     /**
@@ -71,11 +74,16 @@ class CartHelper implements CartHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function deleteCartProduct(Cart $cart, CartProduct $cartProduct)
+    public function deleteCartProduct(Cart $cart, $id)
     {
-        $em         = $this->doctrineHelper->getEntityManager();
-        $collection = $cart->getProducts();
-        $collection->removeElement($cartProduct);
+        $em          = $this->doctrineHelper->getEntityManager();
+        $cartProduct = $this->getCartProductById($cart, $id);
+
+        if (null === $cartProduct) {
+            throw new \InvalidArgumentException(sprintf('Cannot delete item "%s" from cart', $id));
+        }
+        $cart->removeProduct($cartProduct);
+        $em->remove($cartProduct);
         $em->flush();
     }
 
@@ -95,7 +103,7 @@ class CartHelper implements CartHelperInterface
     public function addProductToCart(Cart $cart, Product $product, ProductAttribute $attribute = null, $quantity)
     {
         $em          = $this->doctrineHelper->getEntityManager();
-        $cartProduct = $this->getCartProduct($cart, $product, $attribute);
+        $cartProduct = $this->cartProductRepository->findProductInCart($cart, $product, $attribute);
 
         if (null === $cartProduct) {
             $cartProduct = new CartProduct();
@@ -109,18 +117,5 @@ class CartHelper implements CartHelperInterface
         }
 
         $em->flush();
-    }
-
-    protected function getCartSummary($products)
-    {
-        $quantity = 0;
-        $weight   = 0;
-        $price    = 0;
-
-        foreach ($products as $product) {
-            $quantity += $product['quantity'];
-            $weight += $product['weight'];
-            $price += $product['weight'];
-        }
     }
 }
