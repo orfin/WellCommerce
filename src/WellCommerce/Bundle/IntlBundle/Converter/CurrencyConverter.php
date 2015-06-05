@@ -59,12 +59,15 @@ class CurrencyConverter implements CurrencyConverterInterface
     /**
      * {@inheritdoc}
      */
-    public function format($amount, $baseCurrency, $targetCurrency = null)
+    public function format($amount, $baseCurrency = null, $targetCurrency = null)
     {
         $targetCurrency = $this->getTargetCurrency($targetCurrency);
-        $amount         = $this->convert($amount, $baseCurrency, $targetCurrency);
-        $locale         = $this->requestStack->getMasterRequest()->getLocale();
-        $formatter      = new \NumberFormatter($locale, \NumberFormatter::CURRENCY);
+        if (null === $baseCurrency) {
+            $baseCurrency = $targetCurrency;
+        }
+        $amount    = $this->convert($amount, $baseCurrency, $targetCurrency);
+        $locale    = $this->requestStack->getMasterRequest()->getLocale();
+        $formatter = new \NumberFormatter($locale, \NumberFormatter::CURRENCY);
         if (false === $result = $formatter->formatCurrency($amount, $targetCurrency)) {
             $e = sprintf('Cannot format price with amount "%s" and currency "%s"', $amount, $targetCurrency);
             throw new \InvalidArgumentException($e);
@@ -76,9 +79,12 @@ class CurrencyConverter implements CurrencyConverterInterface
     /**
      * {@inheritdoc}
      */
-    public function convert($amount, $baseCurrency, $targetCurrency = null)
+    public function convert($amount, $baseCurrency = null, $targetCurrency = null)
     {
         $targetCurrency = $this->getTargetCurrency($targetCurrency);
+        if (null === $baseCurrency) {
+            $baseCurrency = $targetCurrency;
+        }
 
         $this->loadExchangeRates($targetCurrency);
 
