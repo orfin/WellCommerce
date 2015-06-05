@@ -82,6 +82,19 @@ class CartManager extends AbstractFrontManager
     }
 
     /**
+     * Deletes item from cart
+     *
+     * @return mixed
+     */
+    public function deleteItem()
+    {
+        $currentCart = $this->getCartProvider()->getCurrentCart();
+        $id          = $this->getRequestHelper()->getAttribute('id');
+
+        return $this->cartHelper->deleteCartProduct($currentCart, $id);
+    }
+
+    /**
      * Finds enabled product by id
      *
      * @return null|Product
