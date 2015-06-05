@@ -98,7 +98,9 @@
         </service>
 
         <service id="product.provider" class="WellCommerce\Bundle\ProductBundle\Provider\ProductProvider">
-            <argument type="service" id="product.collection.front" />
+            <call method="setCollectionBuilder">
+                <argument type="service" id="product.collection.front" />
+            </call>
             <tag name="resource.provider" alias="product"/>
         </service>
 

@@ -113,7 +113,9 @@
         </service>
 
         <service id="currency.provider" class="WellCommerce\Bundle\IntlBundle\Provider\CurrencyProvider">
-            <argument type="service" id="currency.collection" />
+            <call method="setCollectionBuilder">
+                <argument type="service" id="currency.collection" />
+            </call>
             <tag name="resource.provider" alias="currency"/>
         </service>
 

@@ -112,7 +112,9 @@
         </service>
 
         <service id="product_status.provider" class="WellCommerce\Bundle\ProductBundle\Provider\ProductStatusProvider">
-            <argument type="service" id="product_status.collection.front" />
+            <call method="setCollectionBuilder">
+                <argument type="service" id="product_status.collection.front" />
+            </call>
             <tag name="resource.provider" alias="product_status"/>
         </service>
 

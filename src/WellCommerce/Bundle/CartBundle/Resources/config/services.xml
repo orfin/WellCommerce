@@ -22,15 +22,12 @@
                 <argument type="service" id="cart.helper"/>
             </call>
             <call method="setProviders">
-                <argument type="service" id="resource.provider.collection" />
+                <argument type="service" id="resource.provider.collection"/>
             </call>
         </service>
 
         <service id="cart.helper" class="WellCommerce\Bundle\CartBundle\Helper\CartHelper">
-            <argument type="service" id="cart.repository"/>
             <argument type="service" id="cart_product.repository"/>
-            <argument type="service" id="request_helper"/>
-            <argument type="service" id="shop.context.front"/>
             <argument type="service" id="doctrine_helper"/>
         </service>
 
@@ -39,27 +36,76 @@
         </service>
 
         <service id="package.command.purge.carts" class="WellCommerce\Bundle\CartBundle\Command\PurgeCartsCommand">
-            <tag name="console.command" />
+            <tag name="console.command"/>
         </service>
 
         <service id="cart.controller.front" class="WellCommerce\Bundle\CartBundle\Controller\Front\CartController">
             <argument type="service" id="cart.manager.front"/>
             <call method="setContainer">
-                <argument type="service" id="service_container" />
+                <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="cart.repository" class="WellCommerce\Bundle\CartBundle\Repository\CartRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+        <service id="cart.repository" class="WellCommerce\Bundle\CartBundle\Repository\CartRepository"
+                 factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument>WellCommerceCartBundle:Cart</argument>
         </service>
 
-        <service id="cart_product.repository" class="WellCommerce\Bundle\CartBundle\Repository\CartProductRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+        <service id="cart_product.repository" class="WellCommerce\Bundle\CartBundle\Repository\CartProductRepository"
+                 factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument>WellCommerceCartBundle:CartProduct</argument>
         </service>
 
+        <service id="cart_product.dataset.query_builder.front"
+                 class="WellCommerce\Bundle\CartBundle\DataSet\Front\CartProductDataSetQueryBuilder" public="false">
+            <argument type="service" id="cart_product.repository"/>
+            <call method="setCartProvider">
+                <argument type="service" id="cart.provider"/>
+            </call>
+        </service>
+
+        <service id="cart_product.dataset.loader.front" class="%dataset.loader.class%">
+            <argument type="service" id="cart_product.dataset.query_builder.front"/>
+            <argument type="service" id="dataset.processor"/>
+        </service>
+
+        <service id="cart_product.dataset.front" class="WellCommerce\Bundle\CartBundle\DataSet\Front\CartProductDataSet">
+            <argument key="identifier">cart_product</argument>
+            <argument type="service" id="cart_product.dataset.loader.front"/>
+            <configurator service="dataset.configurator" method="configure"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="cart_product.collection.front" parent="dataset.collection_builder.factory">
+            <argument type="service" id="cart_product.dataset.front"/>
+        </service>
+
+        <service id="cart_product.provider" class="WellCommerce\Bundle\CartBundle\Provider\CartProductProvider">
+            <call method="setCollectionBuilder">
+                <argument type="service" id="cart_product.collection.front"/>
+            </call>
+            <call method="setCurrencyConverter">
+                <argument type="service" id="currency.converter"/>
+            </call>
+            <tag name="resource.provider" alias="cart_product"/>
+        </service>
+
+        <service id="cart.provider" class="WellCommerce\Bundle\CartBundle\Provider\CartProvider">
+            <tag name="resource.provider" alias="cart"/>
+        </service>
+
         <service id="twig.extension.cart" class="WellCommerce\Bundle\CartBundle\Twig\Extension\CartExtension">
-            <argument type="service" id="cart.helper"/>
+            <argument type="service" id="cart_product.provider"/>
             <tag name="twig.extension"/>
+        </service>
+
+        <service id="cart.subscriber" class="WellCommerce\Bundle\CartBundle\EventListener\CartSubscriber">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="kernel.event_subscriber"/>
         </service>
     </services>
 </container>
