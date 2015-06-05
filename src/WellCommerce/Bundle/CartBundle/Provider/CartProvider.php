@@ -12,9 +12,7 @@
 
 namespace WellCommerce\Bundle\CartBundle\Provider;
 
-use WellCommerce\Bundle\CartBundle\Repository\CartProductRepositoryInterface;
-use WellCommerce\Bundle\CartBundle\Repository\CartRepositoryInterface;
-use WellCommerce\Bundle\CoreBundle\Helper\Request\RequestHelperInterface;
+use WellCommerce\Bundle\CartBundle\Entity\Cart;
 use WellCommerce\Bundle\CoreBundle\Provider\AbstractProvider;
 
 /**
@@ -22,39 +20,26 @@ use WellCommerce\Bundle\CoreBundle\Provider\AbstractProvider;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CartProvider extends AbstractProvider
+class CartProvider extends AbstractProvider implements CartProviderInterface
 {
-
-    protected $requestHelper;
+    /**
+     * @var Cart
+     */
+    protected $cart;
 
     /**
-     * @var CartRepositoryInterface
+     * {@inheritdoc}
      */
-    protected $cartRepository;
-
-    /**
-     * @var CartProductRepositoryInterface
-     */
-    protected $cartProductRepository;
-
-    public function setRequestHelper(RequestHelperInterface $requestHelper)
+    public function getCurrentCart()
     {
-
+        return $this->cart;
     }
 
     /**
-     * @param CartRepositoryInterface $cartRepository
+     * {@inheritdoc}
      */
-    public function setCartRepository(CartRepositoryInterface $cartRepository)
+    public function setCurrentCart(Cart $cart)
     {
-        $this->cartRepository = $cartRepository;
-    }
-
-    /**
-     * @param CartProductRepositoryInterface $cartProductRepository
-     */
-    public function setCartProductRepository(CartProductRepositoryInterface $cartProductRepository)
-    {
-        $this->cartProductRepository = $cartProductRepository;
+        $this->cart = $cart;
     }
 }

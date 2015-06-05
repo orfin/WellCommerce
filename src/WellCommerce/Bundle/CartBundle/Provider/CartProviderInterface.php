@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CartBundle\Provider;
 
+use WellCommerce\Bundle\CartBundle\Entity\Cart;
 use WellCommerce\Bundle\CoreBundle\Provider\ProviderInterface;
 
 /**
@@ -21,5 +22,13 @@ use WellCommerce\Bundle\CoreBundle\Provider\ProviderInterface;
  */
 interface CartProviderInterface extends ProviderInterface
 {
-    public function getCart();
+    /**
+     * @return Cart
+     */
+    public function getCurrentCart();
+
+    /**
+     * @param Cart $cart
+     */
+    public function setCurrentCart(Cart $cart);
 }
