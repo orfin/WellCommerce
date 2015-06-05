@@ -27,11 +27,4 @@ interface CartProductProviderInterface extends ProviderInterface
      * @return array
      */
     public function getProducts();
-
-    /**
-     * Returns cart summary information
-     *
-     * @return array
-     */
-    public function getSummary();
 }
