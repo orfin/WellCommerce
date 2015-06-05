@@ -23,19 +23,28 @@ use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
  */
 class ShippingMethodFormBuilder extends AbstractFormBuilder implements FormBuilderInterface
 {
+    protected $calculators;
+
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormInterface $form)
     {
+        $calculators = $this->getCalculators();
+        $options     = [];
+
+        foreach ($calculators as $calculator) {
+            $options[$calculator->getAlias()] = $calculator->getName();
+        }
+
         $requiredData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'required_data',
             'label' => $this->trans('Required data')
         ]));
 
         $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
-            'name'  => 'translations',
-            'label' => $this->trans('Translations'),
+            'name'        => 'translations',
+            'label'       => $this->trans('Translations'),
             'transformer' => new TranslationTransformer($this->get('shipping_method.repository'))
         ]));
 
@@ -47,7 +56,7 @@ class ShippingMethodFormBuilder extends AbstractFormBuilder implements FormBuild
         $requiredData->addChild($this->getElement('select', [
             'name'    => 'calculator',
             'label'   => $this->trans('Processor'),
-            'options' => [],
+            'options' => $options
         ]));
 
         $requiredData->addChild($this->getElement('checkbox', [
@@ -65,5 +74,15 @@ class ShippingMethodFormBuilder extends AbstractFormBuilder implements FormBuild
         $form->addFilter($this->getFilter('no_code'));
         $form->addFilter($this->getFilter('trim'));
         $form->addFilter($this->getFilter('secure'));
+    }
+
+    /**
+     * Returns shipping method calculators as a select
+     *
+     * @return array|\WellCommerce\Bundle\ShippingBundle\Calculator\ShippingMethodCalculatorInterface[]
+     */
+    protected function getCalculators()
+    {
+        return $this->get('shipping_method.calculator.collection')->all();
     }
 }

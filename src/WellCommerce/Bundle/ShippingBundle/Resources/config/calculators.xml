@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="weight_table.calculator" class="WellCommerce\Bundle\ShippingBundle\Calculator\WeightTableCalculator">
+            <tag name="shipping_method.calculator"/>
+        </service>
+
+        <service id="fixed_price.calculator" class="WellCommerce\Bundle\ShippingBundle\Calculator\FixedPriceCalculator">
+            <tag name="shipping_method.calculator"/>
+        </service>
+
+        <service id="price_table.calculator" class="WellCommerce\Bundle\ShippingBundle\Calculator\PriceTableCalculator">
+            <tag name="shipping_method.calculator"/>
+        </service>
+
+        <service id="quantity_price.calculator" class="WellCommerce\Bundle\ShippingBundle\Calculator\QuantityPriceCalculator">
+            <tag name="shipping_method.calculator"/>
+        </service>
+    </services>
+</container>

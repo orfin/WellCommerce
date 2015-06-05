@@ -53,6 +53,25 @@
             <argument type="service" id="shipping_method.dataset.admin"/>
         </service>
 
+        <service id="shipping_method.dataset.query_builder.front" class="WellCommerce\Bundle\ShippingBundle\DataSet\Front\ShippingMethodDataSetQueryBuilder" public="false">
+            <argument type="service" id="shipping_method.repository"/>
+        </service>
+
+        <service id="shipping_method.dataset.loader.front" class="%dataset.loader.class%">
+            <argument type="service" id="shipping_method.dataset.query_builder.front"/>
+            <argument type="service" id="dataset.processor"/>
+        </service>
+
+        <service id="shipping_method.dataset.front" class="WellCommerce\Bundle\ShippingBundle\DataSet\Front\ShippingMethodDataSet">
+            <argument key="identifier">shipping_method</argument>
+            <argument type="service" id="shipping_method.dataset.loader.front"/>
+            <configurator service="dataset.configurator" method="configure"/>
+        </service>
+
+        <service id="shipping_method.collection.front" parent="dataset.collection_builder.factory">
+            <argument type="service" id="shipping_method.dataset.front"/>
+        </service>
+
         <service id="shipping_method.datagrid" class="WellCommerce\Bundle\ShippingBundle\DataGrid\ShippingMethodDataGrid">
             <argument key="identifier">shipping_method</argument>
             <argument type="service" id="shipping_method.dataset.admin"/>
@@ -75,5 +94,7 @@
             </call>
             <tag name="kernel.event_subscriber" />
         </service>
+
+        <service id="shipping_method.calculator.collection" class="WellCommerce\Bundle\ShippingBundle\Calculator\ShippingMethodCalculatorCollection" />
     </services>
 </container>
