@@ -50,5 +50,14 @@ class ShippingMethodDataGrid extends AbstractDataGrid implements DataGridInterfa
             'id'      => 'name',
             'caption' => $this->trans('shipping.label.name')
         ]));
+
+        $collection->add(new Column([
+            'id'         => 'calculator',
+            'caption'    => $this->trans('shipping.label.calculator'),
+            'appearance' => new Appearance([
+                'width' => 120,
+                'align' => Appearance::ALIGN_CENTER
+            ]),
+        ]));
     }
 }

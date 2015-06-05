@@ -29,8 +29,9 @@ class ShippingMethodDataSet extends AbstractDataSet implements DataSetInterface
     public function configureOptions(DataSetConfiguratorInterface $configurator)
     {
         $configurator->setColumns([
-            'id'   => 'shipping_method.id',
-            'name' => 'shipping_method_translation.name',
+            'id'         => 'shipping_method.id',
+            'name'       => 'shipping_method_translation.name',
+            'calculator' => 'shipping_method.calculator',
         ]);
     }
 }
