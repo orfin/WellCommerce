@@ -11,31 +11,38 @@
  */
 namespace WellCommerce\Bundle\CartBundle\Twig\Extension;
 
-use WellCommerce\Bundle\CartBundle\Helper\CartHelperInterface;
+use WellCommerce\Bundle\CartBundle\Provider\CartProductProviderInterface;
 
 /**
- * Class CartExtension
+ * Class CategoryExtension
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class CartExtension extends \Twig_Extension
 {
     /**
-     * @var CartHelperInterface
+     * @var CartProductProviderInterface
      */
-    protected $cartHelper;
+    protected $cartProductProvider;
 
     /**
-     * @param CartHelperInterface $cartHelper
+     * Constructor
+     *
+     * @param CartProductProviderInterface $cartProductProvider
      */
-    public function __construct(CartHelperInterface $cartHelper)
+    public function __construct(CartProductProviderInterface $cartProductProvider)
     {
-        $this->cartHelper = $cartHelper;
+        $this->cartProductProvider = $cartProductProvider;
     }
 
     public function getGlobals()
     {
-        return ['cart' => $this->cartHelper->getCart()];
+        return [
+            'cart' => [
+                'products' => $this->cartProductProvider->getProducts(),
+                'summary'  => $this->cartProductProvider->getSummary(),
+            ]
+        ];
     }
 
     /**
