@@ -27,11 +27,9 @@ abstract class AbstractProvider
     protected $collectionBuilderFactory;
 
     /**
-     * Constructor
-     *
-     * @param CollectionBuilderFactoryInterface $collectionBuilderFactory
+     * {@inheritdoc}
      */
-    public function __construct(CollectionBuilderFactoryInterface $collectionBuilderFactory)
+    public function setCollectionBuilder(CollectionBuilderFactoryInterface $collectionBuilderFactory)
     {
         $this->collectionBuilderFactory = $collectionBuilderFactory;
     }

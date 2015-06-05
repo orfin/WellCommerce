@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Provider;
 
+use WellCommerce\Bundle\DataSetBundle\CollectionBuilder\CollectionBuilderFactoryInterface;
+
 /**
  * Interface ProviderInterface
  *
@@ -20,9 +22,16 @@ namespace WellCommerce\Bundle\CoreBundle\Provider;
 interface ProviderInterface
 {
     /**
+     * Sets collection builder
+     *
+     * @param CollectionBuilderFactoryInterface $collectionBuilderFactoryInterface
+     */
+    public function setCollectionBuilder(CollectionBuilderFactoryInterface $collectionBuilderFactoryInterface);
+
+    /**
      * Returns related collection builder
      *
-     * @return \WellCommerce\Bundle\DataSetBundle\CollectionBuilder\CollectionBuilderFactoryInterface
+     * @return CollectionBuilderFactoryInterface
      */
     public function getCollectionBuilder();
 }
