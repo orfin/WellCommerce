@@ -61,7 +61,7 @@ class CartProductProvider extends AbstractProvider implements CartProductProvide
 
         foreach ($products as $product) {
             $weight += $product['weight'];
-            $price += $this->processPrice($product);
+            $price += $this->converter->convert($product['quantityPrice'], $product['currency']);
             $quantity += $product['quantity'];
         }
 
@@ -81,15 +81,5 @@ class CartProductProvider extends AbstractProvider implements CartProductProvide
         }
 
         return $this->dataset;
-    }
-
-    /**
-     * @param array $product
-     */
-    protected function processPrice(array $product)
-    {
-        $quantityPrice = $product['price'] * $product['quantity'];
-
-        return $this->converter->convert($quantityPrice, $product['currency']);
     }
 }
