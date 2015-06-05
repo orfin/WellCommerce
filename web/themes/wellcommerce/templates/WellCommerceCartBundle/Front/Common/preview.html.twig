@@ -1,41 +1,43 @@
 {% trans_default_domain "wellcommerce" %}
 
 <li class="dropdown">
-    <a href="{{ path('front.cart.index') }}" class="dropdown-toggle cartQty" data-toggle="dropdown" role="button" aria-expanded="false">
+    <a href="{{ path('front.cart.index') }}" class="dropdown-toggle cartQty" data-toggle="dropdown" role="button" aria-expanded="true">
         Cart<span class="cart-qty">{{ cart.summary.quantity }}</span>
     </a>
     <ul class="dropdown-menu" role="menu">
-        {% for item in cart.products.rows %}
-            <li>
-                <table>
-                    <tbody>
-                    <tr>
-                        <td>
-                            <a href="{{ path('front.cart.delete',{"id": item.id }) }}" class="delete">
-                                <img src="{{ asset('themes/wellcommerce/assets/img/delete-ico.png') }}"/>
-                            </a>
-                        </td>
-                        <td>
-                            <a href="#">{{ item.name }}</a>
-                        </td>
-                        <td>
-                            <input type="text" value="{{ item.quantity|number_format(0) }}" class="text-center"/>
-                        </td>
-                        <td class="text-right">
-                            {{ format_price(item.price, item.currency) }}
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </li>
-            <li class="divider"></li>
-        {% endfor %}
-
-        <li class="clearfix">
-            <a href="{{ path('front.cart.index') }}">
-                {% trans %}cart.link.checkout{% endtrans %} <img src="{{ asset('themes/wellcommerce/assets/img/arrow-right-ico.png') }}"/>
-            </a>
-            <span class="pull-right">{{ format_price(cart.summary.price) }}</span>
+        <li>
+            <table>
+                <tbody>
+                {% for item in cart.products.rows %}
+                <tr>
+                    <td>
+                        <a href="{{ path('front.cart.delete',{"id": item.id }) }}" class="delete">
+                            <img src="{{ asset('themes/wellcommerce/assets/img/delete-ico.png') }}"/>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ path(item.route) }}">{{ item.name }}</a>
+                    </td>
+                    <td>
+                        <input type="text" value="{{ item.quantity|number_format(0) }}" class="text-center">
+                    </td>
+                    <td class="text-right">
+                        {{ format_price(item.price, item.currency) }}
+                    </td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="3">
+                        <a href="{{ path('front.cart.index') }}">
+                            {% trans %}cart.link.checkout{% endtrans %} <img src="{{ asset('themes/wellcommerce/assets/img/arrow-right-ico.png') }}"/>
+                        </a>
+                    </td>
+                    <td>
+                        <span>{{ format_price(cart.summary.price) }}</span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </li>
     </ul>
 </li>
