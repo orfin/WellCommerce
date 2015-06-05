@@ -56,12 +56,8 @@
             <argument>WellCommerceCartBundle:CartProduct</argument>
         </service>
 
-        <service id="cart_product.dataset.query_builder.front"
-                 class="WellCommerce\Bundle\CartBundle\DataSet\Front\CartProductDataSetQueryBuilder" public="false">
+        <service id="cart_product.dataset.query_builder.front" class="WellCommerce\Bundle\CartBundle\DataSet\Front\CartProductDataSetQueryBuilder">
             <argument type="service" id="cart_product.repository"/>
-            <call method="setCartProvider">
-                <argument type="service" id="cart.provider"/>
-            </call>
         </service>
 
         <service id="cart_product.dataset.loader.front" class="%dataset.loader.class%">
@@ -82,12 +78,17 @@
             <argument type="service" id="cart_product.dataset.front"/>
         </service>
 
+        <service id="cart.form_builder" class="WellCommerce\Bundle\CartBundle\Form\Front\CartFormBuilder">
+            <argument type="service" id="form.resolver.factory"/>
+            <argument type="service" id="form.handler"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
         <service id="cart_product.provider" class="WellCommerce\Bundle\CartBundle\Provider\CartProductProvider">
             <call method="setCollectionBuilder">
                 <argument type="service" id="cart_product.collection.front"/>
-            </call>
-            <call method="setCurrencyConverter">
-                <argument type="service" id="currency.converter"/>
             </call>
             <tag name="resource.provider" alias="cart_product"/>
         </service>
@@ -96,8 +97,15 @@
             <tag name="resource.provider" alias="cart"/>
         </service>
 
+        <service id="cart_summary.provider" class="WellCommerce\Bundle\CartBundle\Provider\CartSummaryProvider">
+            <argument type="service" id="currency.converter"/>
+            <tag name="resource.provider" alias="cart_summary"/>
+        </service>
+
         <service id="twig.extension.cart" class="WellCommerce\Bundle\CartBundle\Twig\Extension\CartExtension">
+            <argument type="service" id="cart.provider"/>
             <argument type="service" id="cart_product.provider"/>
+            <argument type="service" id="cart_summary.provider"/>
             <tag name="twig.extension"/>
         </service>
 

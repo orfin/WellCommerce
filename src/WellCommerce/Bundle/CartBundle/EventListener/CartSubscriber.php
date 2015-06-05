@@ -37,14 +37,18 @@ class CartSubscriber extends AbstractEventSubscriber
     public function onKernelController(FilterControllerEvent $event)
     {
         if (HttpKernelInterface::MASTER_REQUEST === $event->getRequestType()) {
-            $requestHelper = $this->container->get('request_helper');
-            $shop          = $this->container->get('shop.context.front')->getCurrentScope();
-            $sessionId     = $requestHelper->getSessionId();
-            $client        = $requestHelper->getClient();
-            $cartProvider  = $this->container->get('cart.provider');
+            $requestHelper       = $this->container->get('request_helper');
+            $shop                = $this->container->get('shop.context.front')->getCurrentScope();
+            $sessionId           = $requestHelper->getSessionId();
+            $client              = $requestHelper->getClient();
+            $cartProvider        = $this->container->get('cart.provider');
+            $cart                = $this->getCart($shop, $client, $sessionId);
+            $cartSummaryProvider = $this->container->get('cart_summary.provider');
+            $cartQueryBuilder    = $this->container->get('cart_product.dataset.query_builder.front');
 
-            $cart = $this->getCart($shop, $client, $sessionId);
+            $cartSummaryProvider->setCart($cart);
             $cartProvider->setCurrentCart($cart);
+            $cartQueryBuilder->setCart($cart);
         }
     }
 

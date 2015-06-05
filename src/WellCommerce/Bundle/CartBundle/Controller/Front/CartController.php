@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CartBundle\Controller\Front;
 
+use Doctrine\Common\Util\Debug;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
@@ -34,18 +35,16 @@ class CartController extends AbstractFrontController implements FrontControllerI
     public function indexAction(Request $request)
     {
         $manager  = $this->getManager();
-        $resource = $manager->initResource();
-        $form     = $this->get('client_register.form_builder.front')->createForm([
-            'name' => 'register'
+        $resource = $this->getManager()->getCartProvider()->getCurrentCart();
+        $form     = $this->get('cart.form_builder')->createForm([
+            'name' => 'cart'
         ], $resource);
 
         if ($form->handleRequest()->isSubmitted()) {
             if ($form->isValid()) {
-                $manager->createResource($resource, $request);
+                $manager->updateResource($resource, $request);
 
-                $manager->getFlashHelper()->addSuccess('client.flash.registration.success');
-
-                return $manager->getRedirectHelper()->redirectTo('front.client.login');
+                return $manager->getRedirectHelper()->redirectToAction('index');
             }
 
             if (count($form->getError())) {
