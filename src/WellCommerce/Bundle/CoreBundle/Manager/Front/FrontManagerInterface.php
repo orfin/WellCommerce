@@ -78,4 +78,11 @@ interface FrontManagerInterface extends ManagerInterface
      * @return \WellCommerce\Bundle\CartBundle\Provider\CartProviderInterface
      */
     public function getCartProvider();
+
+    /**
+     * Shorthand to get cart products provider
+     *
+     * @return \WellCommerce\Bundle\CartBundle\Provider\CartProductProviderInterface
+     */
+    public function getCartProductProvider();
 }
