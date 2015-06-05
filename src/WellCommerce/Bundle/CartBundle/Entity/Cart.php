@@ -57,6 +57,18 @@ class Cart
     protected $client;
 
     /**
+     * @ORM\OneToOne(targetEntity="WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod")
+     * @ORM\JoinColumn(name="payment_method_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     */
+    protected $paymentMethod;
+
+    /**
+     * @ORM\OneToOne(targetEntity="WellCommerce\Bundle\ShipmentBundle\Entity\ShippingMethod")
+     * @ORM\JoinColumn(name="shipping_method_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     */
+    protected $shippingMethod;
+
+    /**
      * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\MultiStoreBundle\Entity\Shop")
      * @ORM\JoinColumn(name="shop_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
@@ -153,5 +165,37 @@ class Cart
     public function setShop(Shop $shop)
     {
         $this->shop = $shop;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPaymentMethod()
+    {
+        return $this->paymentMethod;
+    }
+
+    /**
+     * @param mixed $paymentMethod
+     */
+    public function setPaymentMethod($paymentMethod)
+    {
+        $this->paymentMethod = $paymentMethod;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getShippingMethod()
+    {
+        return $this->shippingMethod;
+    }
+
+    /**
+     * @param mixed $shippingMethod
+     */
+    public function setShippingMethod($shippingMethod)
+    {
+        $this->shippingMethod = $shippingMethod;
     }
 }

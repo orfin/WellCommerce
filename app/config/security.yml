@@ -23,6 +23,7 @@ security:
                 login_path: front.client.login
                 check_path: front.client.login_check
                 default_target_path: front.client.index
+                failure_handler: client.failure.handler
             logout:
                 path:   front.client.logout
                 target: front.client.login
@@ -32,7 +33,6 @@ security:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/admin$, roles: ROLE_ADMIN }
         - { path: ^/client/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/client/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/client, roles: ROLE_CLIENT }
         - { path: ^/client$, roles: ROLE_CLIENT }
 
