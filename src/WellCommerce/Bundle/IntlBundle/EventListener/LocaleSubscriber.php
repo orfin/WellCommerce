@@ -20,7 +20,6 @@ use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 /**
  * Class LocaleSubscriber
  *
- * @package WellCommerce\Bundle\IntlBundle\EventListener
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class LocaleSubscriber extends AbstractEventSubscriber
