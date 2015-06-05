@@ -1,7 +1,9 @@
+{% trans_default_domain "wellcommerce" %}
 {% import "WellCommerceFormBundle:Front/Common:macros.html.twig" as macros %}
 {% include 'WellCommerceWebBundle:Front/Common:flashes.html.twig' %}
+
 <div class="well-form">
-    <h4>Sign in<small>{% trans %}form.label.required_fields{% endtrans %}</small></h4>
+    <h4>{% trans %}client.heading.login{% endtrans %}<small>{% trans %}form.label.required_fields{% endtrans %}</small></h4>
 
     {% if error %}
         <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -15,7 +17,7 @@
 
         <div class="clearfix">
             <a href="{{ path('front.client.password') }}" class="btn btn-link nopadding notransform">{% trans %}client.link.password_forgotten{% endtrans %}</a>
-            <button type="submit" class="btn btn-primary pull-right">{% trans %}client.link.login{% endtrans %}</button>
+            <button type="submit" class="btn btn-primary pull-right">{% trans %}client.form.button.login{% endtrans %}</button>
         </div>
     {{ macros.form_end(form) }}
 
