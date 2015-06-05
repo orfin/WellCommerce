@@ -33,9 +33,38 @@ class CartController extends AbstractFrontController implements FrontControllerI
      */
     public function indexAction(Request $request)
     {
-        return [
+        $manager  = $this->getManager();
+        $resource = $manager->initResource();
+        $form     = $this->get('client_register.form_builder.front')->createForm([
+            'name' => 'register'
+        ], $resource);
 
+        if ($form->handleRequest()->isSubmitted()) {
+            if ($form->isValid()) {
+                $manager->createResource($resource, $request);
+
+                $manager->getFlashHelper()->addSuccess('client.flash.registration.success');
+
+                return $manager->getRedirectHelper()->redirectTo('front.client.login');
+            }
+
+            if (count($form->getError())) {
+                $manager->getFlashHelper()->addError('client.form.error.registration');
+            }
+        }
+
+        return [
+            'form'     => $form,
+            'elements' => $form->getChildren(),
         ];
+    }
+
+    /**
+     * @return \WellCommerce\Bundle\CartBundle\Manager\Front\CartManager
+     */
+    protected function getManager()
+    {
+        return parent::getManager();
     }
 
     public function addAction()
@@ -60,14 +89,6 @@ class CartController extends AbstractFrontController implements FrontControllerI
             'basketModalContent' => $basketModalContent,
             'cartPreviewContent' => $cartPreviewContent
         ]);
-    }
-
-    /**
-     * @return \WellCommerce\Bundle\CartBundle\Manager\Front\CartManager
-     */
-    protected function getManager()
-    {
-        return parent::getManager();
     }
 
     protected function getRecommendations(Category $category)

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<items>
+    <item>
+        <id>shipping_method</id>
+        <name>admin.menu.shipping_method</name>
+        <route>admin.shipping_method.index</route>
+        <path>menu.configuration.shipping_method</path>
+        <sort_order>10</sort_order>
+    </item>
+</items>

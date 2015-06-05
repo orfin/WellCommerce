@@ -85,6 +85,10 @@ wellcommerce_payment:
     resource: "@WellCommercePaymentBundle/Resources/config/routing.xml"
     prefix:   /admin/payment
 
+wellcommerce_shipping:
+    resource: "@WellCommerceShippingBundle/Resources/config/routing.xml"
+    prefix:   /admin/shipping
+
 wellcommerce_attribute:
     resource: "@WellCommerceAttributeBundle/Resources/config/routing.xml"
     prefix:   /admin/attribute

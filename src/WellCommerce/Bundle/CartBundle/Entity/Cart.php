@@ -63,7 +63,7 @@ class Cart
     protected $paymentMethod;
 
     /**
-     * @ORM\OneToOne(targetEntity="WellCommerce\Bundle\ShipmentBundle\Entity\ShippingMethod")
+     * @ORM\OneToOne(targetEntity="WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod")
      * @ORM\JoinColumn(name="shipping_method_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     protected $shippingMethod;
