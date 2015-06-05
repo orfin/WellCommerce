@@ -67,12 +67,12 @@ class CurrencyExtension extends \Twig_Extension
         return 'currency';
     }
 
-    public function formatPrice($price, $currencyFrom, $currencyTo = null)
+    public function formatPrice($price, $currencyFrom = null, $currencyTo = null)
     {
         return $this->converter->format($price, $currencyFrom, $currencyTo);
     }
 
-    public function convertPrice($price, $currencyFrom, $currencyTo = null)
+    public function convertPrice($price, $currencyFrom = null, $currencyTo = null)
     {
         return $this->converter->convert($price, $currencyFrom, $currencyTo);
     }
