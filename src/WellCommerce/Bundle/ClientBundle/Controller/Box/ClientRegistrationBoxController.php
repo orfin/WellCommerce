@@ -43,7 +43,7 @@ class ClientRegistrationBoxController extends AbstractBoxController implements B
             }
 
             if (count($form->getError())) {
-                $manager->getFlashHelper()->addError('client.flash.registration.error');
+                $manager->getFlashHelper()->addError('client.form.error.registration');
             }
         }
 

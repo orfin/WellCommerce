@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\ClientBundle\Controller\Box;
 
-use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
 
@@ -25,7 +24,7 @@ use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
  */
 class ClientLoginBoxController extends AbstractBoxController implements BoxControllerInterface
 {
-    public function indexAction(Request $request)
+    public function indexAction()
     {
         $form = $this->get('client_login.form_builder.front')->createForm([
             'name'         => 'login',
