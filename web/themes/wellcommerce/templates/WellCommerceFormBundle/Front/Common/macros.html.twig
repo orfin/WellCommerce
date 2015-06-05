@@ -36,6 +36,21 @@
     {% endautoescape %}
 {% endmacro %}
 
+{% macro radio_group(element, class) %}
+    {% set options = element.getOptions() %}
+    {% set classes = ['form-control', options.class, class] %}
+    {% autoescape true %}
+        {% for key, label in options.options %}
+            <div class="radio">
+                <label class="block">
+                    <input type="radio" name="{{ options.name }}" value="{{ key }}" id="{{ options.name }}_{{ key }}" {% if element.getValue() == key %}checked{% endif %}>
+                    {{ label }} <strong class="pull-right">$0.00</strong>
+                </label>
+            </div>
+        {% endfor %}
+    {% endautoescape %}
+{% endmacro %}
+
 {% macro password(element, class) %}
     {% set options = element.getOptions() %}
     {% set classes = ['form-control', options.class, class] %}

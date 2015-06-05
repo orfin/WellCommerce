@@ -1,4 +1,5 @@
 {% extends 'WellCommerceWebBundle:Front:layout.html.twig' %}
+{% import "WellCommerceFormBundle:Front/Common:macros.html.twig" as macros %}
 {% block content %}
     {% include 'WellCommerceWebBundle:Front:breadcrumbs.html.twig' %}
     <div class="row">
@@ -85,60 +86,50 @@
                     <div class="row">
                         <div class="col-lg-7">
                             <div class="row mbt30">
-                                <div class="col-lg-6">
-                                    <h4>Choose country</h4>
+                                {{ macros.form_begin(form, 'cart') }}
+                                    <div class="col-lg-6">
+                                        <h4>Choose country</h4>
 
-                                    <div class="row">
-                                        <div class="col-lg-10">
-                                            <select class="form-control">
-                                                <option>USA</option>
-                                                <option>UK</option>
-                                                <option>Australia</option>
-                                            </select>
+                                        <div class="row">
+                                            <div class="col-lg-10">
+                                                <select class="form-control">
+                                                    <option>USA</option>
+                                                    <option>UK</option>
+                                                    <option>Australia</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <h4>Choose delivery</h4>
+                                    <div class="col-lg-6">
+                                        <h4>Choose delivery</h4>
 
-                                    <div class="row">
-                                        <div class="col-lg-10">
-                                            <div class="radio">
-                                                <label class="block">
-                                                    <input type="radio" name="delivery" value="">
-                                                    On delivery <strong class="pull-right">$0.00</strong>
-                                                </label>
-                                            </div>
-
-                                            <div class="radio">
-                                                <label class="block">
-                                                    <input type="radio" name="delivery" value="" checked="checked">
-                                                    FedEx <strong class="pull-right">$9.00</strong>
-                                                </label>
+                                        <div class="row">
+                                            <div class="col-lg-10">
+                                                {{ macros.element(form.getChildren().get('shippingMethod')) }}
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row mbt30">
-                                <div class="col-lg-6">
-                                    <h4>Choose payment</h4>
+                                <div class="row mbt30">
+                                    <div class="col-lg-6">
+                                        <h4>Choose payment</h4>
 
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" name="payment" value="" checked="checked">
-                                            Bank transfer
-                                        </label>
-                                    </div>
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="payment" value="" checked="checked">
+                                                Bank transfer
+                                            </label>
+                                        </div>
 
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" name="payment" value="">
-                                            PayPal
-                                        </label>
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="payment" value="">
+                                                PayPal
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            {{ macros.form_end(form) }}
                         </div>
 
                         <div class="col-lg-5">

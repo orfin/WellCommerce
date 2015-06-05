@@ -22,7 +22,7 @@
                         <input type="text" value="{{ item.quantity|number_format(0) }}" class="text-center">
                     </td>
                     <td class="text-right">
-                        {{ format_price(item.price, item.currency) }}
+                        {{ format_price(item.quantityPrice, item.currency) }}
                     </td>
                 </tr>
                 {% endfor %}
