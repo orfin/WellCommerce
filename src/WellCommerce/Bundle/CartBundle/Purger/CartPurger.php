@@ -15,25 +15,11 @@ namespace WellCommerce\Bundle\CartBundle\Purger;
 
 use WellCommerce\Bundle\CartBundle\Repository\CartRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Doctrine\DoctrineHelperInterface;
+use WellCommerce\Bundle\CoreBundle\Purger\AbstractPurger;
 use WellCommerce\Bundle\CoreBundle\Purger\PurgerInterface;
 
-class CartPurger implements PurgerInterface
+class CartPurger extends AbstractPurger implements PurgerInterface
 {
-    /**
-     * @var DoctrineHelperInterface
-     */
-    protected $helper;
-
-    /**
-     * Constructor
-     *
-     * @param DoctrineHelperInterface $helper
-     */
-    public function __construct(DoctrineHelperInterface $helper)
-    {
-        $this->helper         = $helper;
-    }
-
     /**
      * {@inheritdoc}
      */
