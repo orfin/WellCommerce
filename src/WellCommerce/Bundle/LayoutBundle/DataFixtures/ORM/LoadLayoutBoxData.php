@@ -151,6 +151,12 @@ class LoadLayoutBoxData extends AbstractDataFixture
                     'status' => $this->getReference('product_status_Featured')->getId()
                 ]
             ],
+            3 => [
+                'type'       => 'ProductStatusBox',
+                'identifier' => 'product_dynamic_status',
+                'name'       => 'Dynamic product status box',
+                'settings'   => []
+            ],
         ];
 
         foreach ($boxes as $index => $params) {

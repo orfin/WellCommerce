@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\CategoryBundle\Controller\Front;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
+use WellCommerce\Bundle\WebBundle\Breadcrumb\BreadcrumbItem;
 
 /**
  * Class CategoryController
@@ -33,6 +34,10 @@ class CategoryController extends AbstractFrontController implements FrontControl
         $category = $this->findOr404($request, [
             'enabled' => 1
         ]);
+
+        $this->get('breadcrumb.builder')->add(new BreadcrumbItem([
+            'name' => $category->translate()->getName(),
+        ]));
 
         $this->getManager()->getCategoryProvider()->setCurrentCategory($category);
 

@@ -38,20 +38,13 @@ class ProductStatusController extends AbstractFrontController implements FrontCo
 
             $this->get('breadcrumb.builder')->add(new BreadcrumbItem([
                 'name' => $status->translate()->getName(),
-                'link' => $this->get('router')->generate((string)$status->translate()->getRoute()->getId())
-            ]));
-
-            $this->get('breadcrumb.builder')->add(new BreadcrumbItem([
-                'name'  => '/',
-                'link'  => '',
-                'class' => 'divider'
             ]));
 
             $this->getManager()->getProductStatusProvider()->setCurrentProductStatus($status);
         }
 
         return [
-            'status'     => $status,
+            'status' => $status
         ];
     }
 }

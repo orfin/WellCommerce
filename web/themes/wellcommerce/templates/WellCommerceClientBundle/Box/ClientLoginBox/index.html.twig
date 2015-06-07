@@ -16,17 +16,17 @@
         {% endfor %}
 
         <div class="clearfix">
-            <a href="{{ path('front.client.password') }}" class="btn btn-link nopadding notransform">{% trans %}client.link.password_forgotten{% endtrans %}</a>
+            <a href="{{ path('front.client.password') }}" class="btn btn-link nopadding notransform coming-soon">{% trans %}client.link.password_forgotten{% endtrans %}</a>
             <button type="submit" class="btn btn-primary pull-right">{% trans %}client.form.button.login{% endtrans %}</button>
         </div>
     {{ macros.form_end(form) }}
 
     <div class="alert alert-sm mtp30">
-        <strong>If you are our regular customer</strong>
+        <strong>If you are our registered customer</strong>
         <ul>
-            <li>You buy quickly and easily</li>
-            <li>You can follow any of your orders</li>
-            <li>You receive information about promotions</li>
+            <li>You buy quick & easy</li>
+            <li>You can track progress of your orders</li>
+            <li>You will receive information about promotions</li>
         </ul>
     </div>
 </div>
