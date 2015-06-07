@@ -45,9 +45,6 @@ before_script:
     - "java -jar selenium-server-standalone-2.43.1.jar > /dev/null &"
     - sleep 20
 
-script:
-    - bin/codecept run
-
 after_failure:
     - cat error.log
 
