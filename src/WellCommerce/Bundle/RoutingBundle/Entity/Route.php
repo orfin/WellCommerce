@@ -25,7 +25,7 @@ use Doctrine\ORM\Mapping as ORM;
  *      "product_status"    = "WellCommerce\Bundle\ProductBundle\Entity\ProductStatusRoute",
  *      "producer"          = "WellCommerce\Bundle\ProducerBundle\Entity\ProducerRoute",
  *      "category"          = "WellCommerce\Bundle\CategoryBundle\Entity\CategoryRoute",
- *      "page"              = "WellCommerce\Bundle\CmsBundle\Entity\PageRoute",
+ *      "page"              = "WellCommerce\Bundle\CmsBundle\Entity\PageRoute"
  * })
  */
 class Route implements RouteInterface

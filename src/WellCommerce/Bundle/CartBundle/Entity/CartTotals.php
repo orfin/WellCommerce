@@ -40,31 +40,40 @@ class CartTotals
     /**
      * @var float
      *
-     * @ORM\Column(name="price_net", type="decimal", precision=15, scale=4)
+     * @ORM\Column(name="net_price", type="decimal", precision=15, scale=4)
      */
-    private $priceNet;
+    private $netPrice;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="price_gross", type="decimal", precision=15, scale=4)
+     * @ORM\Column(name="gross_price", type="decimal", precision=15, scale=4)
      */
-    private $priceGross;
+    private $grossPrice;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="tax_amount", type="decimal", precision=15, scale=4)
+     */
+    private $taxAmount;
 
     /**
      * Constructor
      *
-     * @param float $quantity
-     * @param float $weight
-     * @param float $priceNet
-     * @param float $priceGross
+     * @param int $quantity
+     * @param int $weight
+     * @param int $netPrice
+     * @param int $grossPrice
+     * @param int $taxAmount
      */
-    public function __construct($quantity = 0, $weight = 0, $priceNet = 0, $priceGross = 0)
+    public function __construct($quantity = 0, $weight = 0, $netPrice = 0, $grossPrice = 0, $taxAmount = 0)
     {
         $this->quantity   = $quantity;
         $this->weight     = $weight;
-        $this->priceNet   = $priceNet;
-        $this->priceGross = $priceGross;
+        $this->netPrice   = $netPrice;
+        $this->grossPrice = $grossPrice;
+        $this->taxAmount  = $taxAmount;
     }
 
     /**
@@ -102,32 +111,48 @@ class CartTotals
     /**
      * @return float
      */
-    public function getPriceNet()
+    public function getNetPrice()
     {
-        return $this->priceNet;
+        return $this->netPrice;
     }
 
     /**
-     * @param float $priceNet
+     * @param float $netPrice
      */
-    public function setPriceNet($priceNet)
+    public function setNetPrice($netPrice)
     {
-        $this->priceNet = $priceNet;
+        $this->netPrice = (float)$netPrice;
     }
 
     /**
      * @return float
      */
-    public function getPriceGross()
+    public function getGrossPrice()
     {
-        return $this->priceGross;
+        return $this->grossPrice;
     }
 
     /**
-     * @param float $priceGross
+     * @param float $grossPrice
      */
-    public function setPriceGross($priceGross)
+    public function setGrossPrice($grossPrice)
     {
-        $this->priceGross = $priceGross;
+        $this->grossPrice = (float)$grossPrice;
+    }
+
+    /**
+     * @return float
+     */
+    public function getTaxAmount()
+    {
+        return $this->taxAmount;
+    }
+
+    /**
+     * @param float $taxAmount
+     */
+    public function setTaxAmount($taxAmount)
+    {
+        $this->taxAmount = (float)$taxAmount;
     }
 }

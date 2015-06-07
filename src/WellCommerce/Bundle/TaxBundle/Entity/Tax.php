@@ -70,10 +70,14 @@ class Tax
     }
 
     /**
+     * Calculates gross price
+     *
+     * @param float $netPrice
+     *
      * @return float
      */
-    public function getValueAsDecimal()
+    public function calculateGrossPrice($netPrice)
     {
-        return $this->value / 100;
+        return $netPrice + ($netPrice * ($this->value / 100));
     }
 }

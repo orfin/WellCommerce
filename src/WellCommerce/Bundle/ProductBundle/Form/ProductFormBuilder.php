@@ -138,12 +138,13 @@ class ProductFormBuilder extends AbstractFormBuilder
         ]));
 
         $buyPriceTax = $buyPriceSettings->addChild($this->getElement('select', [
-            'name'            => 'buyPrice.tax',
+            'name'            => 'buyPriceTax',
             'label'           => $this->trans('product.buy_price.tax.label'),
             'options'         => $vatValues,
             'addable'         => true,
             'onAdd'           => 'onTaxAdd',
             'add_item_prompt' => $this->trans('product.tax.add_item_prompt'),
+            'transformer'     => new EntityToIdentifierTransformer($this->get('tax.repository'))
         ]));
 
         $buyPriceSettings->addChild($this->getElement('price_editor', [
@@ -168,12 +169,13 @@ class ProductFormBuilder extends AbstractFormBuilder
         ]));
 
         $sellPriceTax = $sellPriceSettings->addChild($this->getElement('select', [
-            'name'            => 'sellPrice.tax',
+            'name'            => 'sellPriceTax',
             'label'           => $this->trans('product.sell_price.tax.label'),
             'options'         => $vatValues,
             'addable'         => true,
             'onAdd'           => 'onTaxAdd',
             'add_item_prompt' => $this->trans('product.tax.add_item_prompt'),
+            'transformer'     => new EntityToIdentifierTransformer($this->get('tax.repository'))
         ]));
 
         $sellPriceAmount = $sellPriceSettings->addChild($this->getElement('price_editor', [

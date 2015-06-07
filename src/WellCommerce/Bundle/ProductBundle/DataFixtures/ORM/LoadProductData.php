@@ -76,12 +76,10 @@ class LoadProductData extends AbstractDataFixture
         $buyPrice = new Price();
         $buyPrice->setAmount(rand(1, 100));
         $buyPrice->setCurrency($currency->getCode());
-        $buyPrice->setTax($tax->getId());
 
         $sellPrice = new Price();
         $sellPrice->setAmount(rand(100, 200));
         $sellPrice->setCurrency($currency->getCode());
-        $sellPrice->setTax($tax->getId());
 
         $product = new Product();
         $product->setSKU($sku);
@@ -89,7 +87,9 @@ class LoadProductData extends AbstractDataFixture
         $product->setEnabled(true);
         $product->setAvailability($availability);
         $product->setBuyPrice($buyPrice);
+        $product->setBuyPriceTax($tax);
         $product->setSellPrice($sellPrice);
+        $product->setSellPriceTax($tax);
         $product->setCategories($categories);
         $product->addShop($shop);
         $product->setStatuses($statuses);

@@ -23,7 +23,7 @@
                         <input type="text" value="{{ item.quantity|number_format(0) }}" class="text-center">
                     </td>
                     <td class="text-right">
-                        {{ format_price(item.quantityPrice, item.currency) }}
+                        {{ format_price(item.quantityPrice, item.currency, null, item.tax) }}
                     </td>
                 </tr>
                 {% endfor %}
@@ -34,7 +34,7 @@
                         </a>
                     </td>
                     <td>
-                        <span>{{ format_price(cart.getTotals().getPriceGross()) }}</span>
+                        <span>{{ format_price(cart.getTotals().getGrossPrice()) }}</span>
                     </td>
                 </tr>
                 </tbody>

@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CartBundle\Helper;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\CartBundle\Entity\Cart;
 use WellCommerce\Bundle\CartBundle\Entity\CartProduct;
 use WellCommerce\Bundle\ProductBundle\Entity\Product;
@@ -62,5 +63,4 @@ interface CartHelperInterface
      * @param int              $quantity
      */
     public function addProductToCart(Cart $cart, Product $product, ProductAttribute $attribute = null, $quantity);
-
 }

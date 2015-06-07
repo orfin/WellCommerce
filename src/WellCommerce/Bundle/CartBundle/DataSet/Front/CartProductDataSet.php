@@ -38,7 +38,7 @@ class CartProductDataSet extends AbstractDataSet implements DataSetInterface
             'weight'        => 'product.weight',
             'price'         => 'product.sellPrice.amount',
             'currency'      => 'product.sellPrice.currency',
-            'tax'           => 'product.sellPrice.tax',
+            'tax'           => 'sell_tax.value',
             'stock'         => 'product.stock',
             'photo'         => 'photos.path'
         ]);

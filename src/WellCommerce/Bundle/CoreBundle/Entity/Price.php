@@ -29,11 +29,6 @@ class Price
     protected $amount;
 
     /**
-     * @ORM\Column(type="integer", nullable=false)
-     */
-    protected $tax;
-
-    /**
      * @ORM\Column(type="string", nullable=false, length=16)
      */
     protected $currency;
@@ -52,22 +47,6 @@ class Price
     public function setAmount($amount)
     {
         $this->amount = $amount;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTax()
-    {
-        return $this->tax;
-    }
-
-    /**
-     * @param mixed $tax
-     */
-    public function setTax($tax)
-    {
-        $this->tax = $tax;
     }
 
     /**

@@ -290,6 +290,6 @@ class Cart
      */
     public function isEmpty()
     {
-        return $this->products->count() === 0;
+        return 0 === $this->products->count();
     }
 }

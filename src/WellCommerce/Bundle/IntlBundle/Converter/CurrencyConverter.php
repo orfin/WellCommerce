@@ -59,12 +59,13 @@ class CurrencyConverter implements CurrencyConverterInterface
     /**
      * {@inheritdoc}
      */
-    public function format($amount, $baseCurrency = null, $targetCurrency = null)
+    public function format($amount, $baseCurrency = null, $targetCurrency = null, $taxValue = 0)
     {
         $targetCurrency = $this->getTargetCurrency($targetCurrency);
         if (null === $baseCurrency) {
             $baseCurrency = $targetCurrency;
         }
+        $amount    = $amount + $this->getTaxAmount($amount, $taxValue);
         $amount    = $this->convert($amount, $baseCurrency, $targetCurrency);
         $locale    = $this->requestStack->getMasterRequest()->getLocale();
         $formatter = new \NumberFormatter($locale, \NumberFormatter::CURRENCY);
@@ -79,12 +80,13 @@ class CurrencyConverter implements CurrencyConverterInterface
     /**
      * {@inheritdoc}
      */
-    public function convert($amount, $baseCurrency = null, $targetCurrency = null)
+    public function convert($amount, $baseCurrency = null, $targetCurrency = null, $taxValue = 0)
     {
         $targetCurrency = $this->getTargetCurrency($targetCurrency);
         if (null === $baseCurrency) {
             $baseCurrency = $targetCurrency;
         }
+        $amount = $amount + $this->getTaxAmount($amount, $taxValue);
 
         $this->loadExchangeRates($targetCurrency);
 
@@ -107,6 +109,19 @@ class CurrencyConverter implements CurrencyConverterInterface
         }
 
         return $targetCurrency;
+    }
+
+    /**
+     * Returns calculated tax amount
+     *
+     * @param float $amount
+     * @param float $taxValue
+     *
+     * @return float
+     */
+    protected function getTaxAmount($amount, $taxValue)
+    {
+        return $amount * ($taxValue / 100);
     }
 
     /**

@@ -25,10 +25,11 @@ interface CurrencyConverterInterface
      * @param float  $amount
      * @param string $baseCurrency
      * @param string $targetCurrency
+     * @param float  $taxValue
      *
      * @return float
      */
-    public function convert($amount, $baseCurrency = null, $targetCurrency = null);
+    public function convert($amount, $baseCurrency = null, $targetCurrency = null, $taxValue = 0);
 
     /**
      * Formats amount for given currency
@@ -36,8 +37,9 @@ interface CurrencyConverterInterface
      * @param float  $amount
      * @param string $baseCurrency
      * @param string $targetCurrency
+     * @param float  $taxValue
      *
      * @return string
      */
-    public function format($amount, $baseCurrency = null, $targetCurrency = null);
+    public function format($amount, $baseCurrency = null, $targetCurrency = null, $taxValue = 0);
 }

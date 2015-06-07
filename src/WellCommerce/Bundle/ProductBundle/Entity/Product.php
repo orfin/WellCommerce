@@ -24,6 +24,7 @@ use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\PhotoTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\Dimension;
 use WellCommerce\Bundle\CoreBundle\Entity\Price;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\Shop;
+use WellCommerce\Bundle\TaxBundle\Entity\Tax;
 use WellCommerce\Bundle\UnitBundle\Entity\Unit;
 
 /**
@@ -51,30 +52,30 @@ class Product
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(name="sku", type="string", length=64, unique=false)
      */
-    private $sku;
+    protected $sku;
 
     /**
      * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\ProducerBundle\Entity\Producer")
      * @ORM\JoinColumn(name="producer_id", referencedColumnName="id", onDelete="SET NULL")
      */
-    private $producer;
+    protected $producer;
 
     /**
      * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\UnitBundle\Entity\Unit")
      * @ORM\JoinColumn(name="unit_id", referencedColumnName="id", onDelete="SET NULL")
      */
-    private $unit;
+    protected $unit;
 
     /**
      * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\AvailabilityBundle\Entity\Availability")
      * @ORM\JoinColumn(name="availability_id", referencedColumnName="id", onDelete="SET NULL")
      */
-    private $availability;
+    protected $availability;
 
     /**
      * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\CategoryBundle\Entity\Category", inversedBy="products")
@@ -83,7 +84,7 @@ class Product
      *      inverseJoinColumns={@ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="CASCADE")}
      * )
      */
-    private $categories;
+    protected $categories;
 
     /**
      * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\ProductStatus", inversedBy="products")
@@ -92,7 +93,7 @@ class Product
      *      inverseJoinColumns={@ORM\JoinColumn(name="product_status_id", referencedColumnName="id", onDelete="CASCADE")}
      * )
      */
-    private $statuses;
+    protected $statuses;
 
     /**
      * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\MultiStoreBundle\Entity\Shop", inversedBy="products")
@@ -101,66 +102,78 @@ class Product
      *      inverseJoinColumns={@ORM\JoinColumn(name="shop_id", referencedColumnName="id", onDelete="CASCADE")}
      * )
      */
-    private $shops;
+    protected $shops;
 
     /**
      * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\ProductPhoto", mappedBy="product", cascade={"persist"}, orphanRemoval=true)
      */
-    private $productPhotos;
+    protected $productPhotos;
 
     /**
      * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute", mappedBy="product", cascade={"all"}, orphanRemoval=true)
      */
-    private $attributes;
+    protected $attributes;
 
     /**
      * @var float
      *
      * @ORM\Column(name="stock", type="decimal", precision=15, scale=4)
      */
-    private $stock;
+    protected $stock;
 
     /**
      * @ORM\Embedded(class = "WellCommerce\Bundle\CoreBundle\Entity\Price", columnPrefix = "buy_price_")
      */
-    private $buyPrice;
+    protected $buyPrice;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\TaxBundle\Entity\Tax")
+     * @ORM\JoinColumn(name="buy_tax_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    protected $buyPriceTax;
 
     /**
      * @ORM\Embedded(class = "WellCommerce\Bundle\CoreBundle\Entity\Price", columnPrefix = "sell_price_")
      */
-    private $sellPrice;
+    protected $sellPrice;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\TaxBundle\Entity\Tax")
+     * @ORM\JoinColumn(name="sell_tax_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    protected $sellPriceTax;
 
     /**
      * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroup")
      * @ORM\JoinColumn(name="attribute_group_id", referencedColumnName="id", onDelete="SET NULL")
      */
-    private $attributeGroup;
+    protected $attributeGroup;
 
     /**
      * @var bool
      *
      * @ORM\Column(name="track_stock", type="boolean")
      */
-    private $trackStock;
+    protected $trackStock;
 
     /**
      * @var float
      *
      * @ORM\Column(name="weight", type="decimal", precision=15, scale=4)
      */
-    private $weight;
+    protected $weight;
 
     /**
      * @ORM\Embedded(class = "WellCommerce\Bundle\CoreBundle\Entity\Dimension", columnPrefix = "dimension_")
      */
-    private $dimension;
+    protected $dimension;
 
     /**
      * @var float
      *
      * @ORM\Column(name="package_size", type="decimal", precision=15, scale=4)
      */
-    private $packageSize;
+    protected $packageSize;
 
     /**
      * Constructor
@@ -545,5 +558,37 @@ class Product
     public function addShop(Shop $shop)
     {
         $this->shops[] = $shop;
+    }
+
+    /**
+     * @return Tax
+     */
+    public function getBuyPriceTax()
+    {
+        return $this->buyPriceTax;
+    }
+
+    /**
+     * @param Tax $buyPriceTax
+     */
+    public function setBuyPriceTax(Tax $buyPriceTax)
+    {
+        $this->buyPriceTax = $buyPriceTax;
+    }
+
+    /**
+     * @return Tax
+     */
+    public function getSellPriceTax()
+    {
+        return $this->sellPriceTax;
+    }
+
+    /**
+     * @param Tax $sellPriceTax
+     */
+    public function setSellPriceTax(Tax $sellPriceTax)
+    {
+        $this->sellPriceTax = $sellPriceTax;
     }
 }

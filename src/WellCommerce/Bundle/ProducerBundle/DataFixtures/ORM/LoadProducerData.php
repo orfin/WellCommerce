@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\ProducerBundle\DataFixtures\ORM;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
 use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
 use WellCommerce\Bundle\ProducerBundle\Entity\Producer;
@@ -32,7 +31,7 @@ class LoadProducerData extends AbstractDataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $shop       = $this->getReference('shop');
+        $shop = $this->getReference('shop');
 
         foreach (self::SAMPLES as $name) {
             $producer = new Producer();
@@ -41,7 +40,7 @@ class LoadProducerData extends AbstractDataFixture
             $producer->translate('en')->setSlug(Sluggable::makeSlug($name));
             $producer->mergeNewTranslations();
             $manager->persist($producer);
-            $this->setReference('producer_'.$name, $producer);
+            $this->setReference('producer_' . $name, $producer);
         }
 
         $manager->flush();

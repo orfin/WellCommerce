@@ -28,14 +28,16 @@ class LoadShopData extends AbstractDataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $theme   = $this->getReference('theme');
-        $company = $this->getReference('company');
+        $theme       = $this->getReference('theme');
+        $company     = $this->getReference('company');
+        $orderStatus = $this->getReference('default_order_status');
 
         $shop = new Shop();
         $shop->setName('WellCommerce');
         $shop->setCompany($company);
         $shop->setTheme($theme);
         $shop->setUrl($this->container->getParameter('fallback_hostname'));
+        $shop->setDefaultOrderStatus($orderStatus);
         $manager->persist($shop);
         $manager->flush();
 

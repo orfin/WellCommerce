@@ -33,9 +33,13 @@ class PageController extends AbstractFrontController implements FrontControllerI
     {
         $page = $this->findOr404($request);
 
+        if(null !== $page->getParent()){
+            $this->get('breadcrumb.builder')->add(new BreadcrumbItem([
+                'name' => $page->getParent()->translate()->getName(),
+            ]));
+        }
         $this->get('breadcrumb.builder')->add(new BreadcrumbItem([
             'name' => $page->translate()->getName(),
-            'link' => $this->get('router')->generate((string)$page->translate()->getRoute()->getId())
         ]));
 
         return [

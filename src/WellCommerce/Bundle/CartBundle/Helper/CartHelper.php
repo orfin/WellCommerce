@@ -142,60 +142,96 @@ class CartHelper implements CartHelperInterface
      */
     public function recalculateCartTotals(Cart $cart)
     {
-        $products   = $cart->getProducts();
-        $weight     = 0;
-        $quantity   = 0;
-        $totalNet   = 0;
-        $totalGross = 0;
+        $products       = $cart->getProducts();
+        $quantityTotal  = $this->calculateCartTotalQuantity($products);
+        $weightTotal    = $this->calculateCartTotalWeight($products);
+        $netTotal       = $this->calculateCartTotalNetPrice($products);
+        $grossTotal     = $this->calculateCartTotalGrossPrice($products);
+        $taxAmountTotal = $grossTotal - $netTotal;
 
-        foreach ($products as $item) {
-            $product = $item->getProduct();
-            $weight += $product->getWeight() * $item->getQuantity();
-            $quantity += $item->getQuantity();
-            $totalNet += $this->calculateTotalNet($item, $product);
-            $totalGross += $this->calculateTotalGross($item, $product);
-        }
-
-        $cartTotals = new CartTotals($quantity, $weight, $totalNet, $totalGross);
+        $cartTotals = new CartTotals($quantityTotal, $weightTotal, $netTotal, $grossTotal, $taxAmountTotal);
         $cart->setTotals($cartTotals);
     }
 
     /**
-     * Calculates net total for cart item
+     * Calculates total quantity of all products in cart
      *
-     * @param CartProduct $cartProduct
-     * @param Product     $product
+     * @param CartProduct[] $collection
      *
      * @return float
      */
-    protected function calculateTotalNet(CartProduct $cartProduct, Product $product)
+    private function calculateCartTotalQuantity($collection)
     {
-        $quantity      = $cartProduct->getQuantity();
-        $sellPriceNet  = $product->getSellPrice()->getAmount();
-        $baseCurrency  = $product->getSellPrice()->getCurrency();
-        $quantityPrice = $quantity * $sellPriceNet;
+        $quantity = 0;
+        foreach ($collection as $item) {
+            $quantity += $item->getQuantity();
+        }
 
-        return $this->currencyConverter->convert($quantityPrice, $baseCurrency);
+        return $quantity;
     }
 
     /**
-     * Calculates gross total for cart item
+     * Calculates total weight of all products in cart
      *
-     * @param CartProduct $cartProduct
-     * @param Product     $product
+     * @param CartProduct[] $collection
      *
      * @return float
      */
-    protected function calculateTotalGross(CartProduct $cartProduct, Product $product)
+    private function calculateCartTotalWeight($collection)
     {
-        $quantity       = $cartProduct->getQuantity();
-        $sellPriceNet   = $product->getSellPrice()->getAmount();
-        $baseCurrency   = $product->getSellPrice()->getCurrency();
-        $vat            = 0.23;
-        $vatValue       = $sellPriceNet * $vat;
-        $sellPriceGross = $sellPriceNet + $vatValue;
-        $quantityPrice  = $quantity * $sellPriceGross;
+        $weight = 0;
+        foreach ($collection as $item) {
+            $product = $item->getProduct();
 
-        return $this->currencyConverter->convert($quantityPrice, $baseCurrency);
+            $weight += $product->getWeight() * $item->getQuantity();
+        }
+
+        return $weight;
+    }
+
+    /**
+     * Calculates total net price of all products in cart
+     *
+     * @param CartProduct[] $collection
+     *
+     * @return float
+     */
+    private function calculateCartTotalNetPrice($collection)
+    {
+        $totalNetPrice = 0;
+        foreach ($collection as $item) {
+            $product       = $item->getProduct();
+            $baseCurrency  = $product->getSellPrice()->getCurrency();
+            $priceNet      = $product->getSellPrice()->getAmount();
+            $quantityPrice = $item->getQuantity() * $priceNet;
+
+            $totalNetPrice += $this->currencyConverter->convert($quantityPrice, $baseCurrency);
+        }
+
+        return $totalNetPrice;
+    }
+
+    /**
+     * Calculates total net price of all products in cart
+     *
+     * @param CartProduct[] $collection
+     *
+     * @return float
+     */
+    private function calculateCartTotalGrossPrice($collection)
+    {
+        $totalGrossPrice = 0;
+        foreach ($collection as $item) {
+            $product       = $item->getProduct();
+            $baseCurrency  = $product->getSellPrice()->getCurrency();
+            $tax           = $product->getSellPriceTax();
+            $priceNet      = $product->getSellPrice()->getAmount();
+            $priceGross    = $tax->calculateGrossPrice($priceNet);
+            $quantityPrice = $item->getQuantity() * $priceGross;
+
+            $totalGrossPrice += $this->currencyConverter->convert($quantityPrice, $baseCurrency);
+        }
+
+        return $totalGrossPrice;
     }
 }

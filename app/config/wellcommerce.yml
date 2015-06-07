@@ -4,6 +4,8 @@ parameters:
       WellCommerce\Bundle\MultiStoreBundle\DataFixtures\ORM\LoadCompanyData: 20
       WellCommerce\Bundle\IntlBundle\DataFixtures\ORM\LoadCurrencyData: 30
       WellCommerce\Bundle\IntlBundle\DataFixtures\ORM\LoadLocaleData: 40
+      WellCommerce\Bundle\OrderBundle\DataFixtures\ORM\LoadOrderStatusGroupData: 41
+      WellCommerce\Bundle\OrderBundle\DataFixtures\ORM\LoadOrderStatusData: 42
       WellCommerce\Bundle\ThemeBundle\DataFixtures\ORM\LoadShopData: 50
       WellCommerce\Bundle\UserBundle\DataFixtures\ORM\LoadUserData: 60
       WellCommerce\Bundle\TaxBundle\DataFixtures\ORM\LoadTaxData: 70
