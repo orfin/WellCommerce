@@ -14,8 +14,6 @@ namespace WellCommerce\Bundle\ProductBundle\Controller\Box;
 
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
-use WellCommerce\Bundle\DataSetBundle\Conditions\Condition\Eq;
-use WellCommerce\Bundle\DataSetBundle\Conditions\ConditionsCollection;
 
 /**
  * Class ProductShowcaseBoxController
@@ -31,48 +29,23 @@ class ProductStatusBoxController extends AbstractBoxController implements BoxCon
      */
     public function indexAction()
     {
-        $productProvider   = $this->getManager()->getProvider('product');
+        /**
+         * @var $manager \WellCommerce\Bundle\ProductBundle\Manager\Front\ProductStatusManager
+         */
+        $manager           = $this->getManager();
+        $productProvider   = $manager->getProvider('product');
         $collectionBuilder = $productProvider->getCollectionBuilder();
-        $requestHelper     = $this->getManager()->getRequestHelper();
+        $requestHelper     = $manager->getRequestHelper();
 
         $dataset = $collectionBuilder->getDataSet([
             'limit'      => $requestHelper->getQueryAttribute('limit', $this->getBoxParam('per_page', 12)),
             'order_by'   => $requestHelper->getQueryAttribute('order_by', 'price'),
             'order_dir'  => $requestHelper->getQueryAttribute('order_dir', 'asc'),
-            'conditions' => $this->getConditions($this->getCurrentStatus()),
+            'conditions' => $manager->getStatusConditions($this->getBoxParam('status', null)),
         ]);
 
         return [
             'dataset' => $dataset
         ];
-    }
-
-    /**
-     * Return additional conditions for QueryBuilder
-     *
-     * @return ConditionsCollection
-     */
-    protected function getConditions($status)
-    {
-        $conditions = new ConditionsCollection();
-        $conditions->add(new Eq('status', $status));
-
-        return $conditions;
-    }
-
-    /**
-     * Returns current status from provider or from box settings
-     *
-     * @return int
-     */
-    protected function getCurrentStatus()
-    {
-        if (null !== $this->getBoxParam('status', null)) {
-            return $this->getBoxParam('status', null);
-        }
-
-        $productStatusProvider = $this->getManager()->getProductStatusProvider();
-
-        return $productStatusProvider->getCurrentProductStatusId();
     }
 }
