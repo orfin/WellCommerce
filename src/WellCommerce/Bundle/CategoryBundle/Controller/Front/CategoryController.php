@@ -35,7 +35,7 @@ class CategoryController extends AbstractFrontController implements FrontControl
             'enabled' => 1
         ]);
 
-        $this->get('breadcrumb.builder')->add(new BreadcrumbItem([
+        $this->addBreadCrumbItem(new BreadcrumbItem([
             'name' => $category->translate()->getName(),
         ]));
 

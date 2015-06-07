@@ -36,7 +36,7 @@ class ProductStatusController extends AbstractFrontController implements FrontCo
 
         if ($status instanceof ProductStatus) {
 
-            $this->get('breadcrumb.builder')->add(new BreadcrumbItem([
+            $this->addBreadCrumbItem(new BreadcrumbItem([
                 'name' => $status->translate()->getName(),
             ]));
 

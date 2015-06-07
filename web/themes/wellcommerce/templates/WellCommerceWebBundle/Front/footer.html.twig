@@ -21,7 +21,7 @@
                     {%  else %}
                         <li><a href="{{ path('front.client.login') }}">{% trans %}client.link.login{% endtrans %}</a></li>
                         <li><a href="{{ path('front.client.register') }}">{% trans %}client.link.register{% endtrans %}</a></li>
-                        <li><a href="{{ path('front.client.password') }}">{% trans %}client.link.password_forgotten{% endtrans %}</a></li>
+                        <li><a href="{{ path('front.client.password') }}" class="coming-soon">{% trans %}client.link.password_forgotten{% endtrans %}</a></li>
                     {% endif %}
                 </ul>
             </div>
@@ -36,7 +36,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 left">
-                    {{ "now"|date("Y") }} © Demo store / All rights reserved
+                    {{ "now"|date("Y") }} © {{ currentShop().name }} / All rights reserved
                 </div>
                 <div class="col-lg-6 right text-right">
                     Powered by <a href="http://wellcommerce.org" title="WellCommerce - an open-source e-commerce solution">
