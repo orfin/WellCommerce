@@ -29,22 +29,37 @@ class ClientRegisterFormBuilder extends AbstractFormBuilder implements FormBuild
     {
         $form->addChild($this->getElement('text_field', [
             'name'  => 'firstName',
-            'label' => $this->trans('client.label.first_name'),
+            'label' => $this->trans('client.first_name.label'),
         ]));
 
         $form->addChild($this->getElement('text_field', [
             'name'  => 'lastName',
-            'label' => $this->trans('client.label.last_name'),
+            'label' => $this->trans('client.last_name.label'),
+        ]));
+
+        $form->addChild($this->getElement('text_field', [
+            'name'  => 'phone',
+            'label' => $this->trans('client.phone.label'),
         ]));
 
         $form->addChild($this->getElement('text_field', [
             'name'  => 'email',
-            'label' => $this->trans('client.label.email'),
+            'label' => $this->trans('client.email.label'),
         ]));
 
         $form->addChild($this->getElement('password', [
             'name'  => 'password',
-            'label' => $this->trans('client.label.password'),
+            'label' => $this->trans('client.password.label'),
+        ]));
+
+        $form->addChild($this->getElement('checkbox', [
+            'name'  => 'conditionsAccepted',
+            'label' => $this->trans('client.accept_conditions.label'),
+        ]));
+
+        $form->addChild($this->getElement('checkbox', [
+            'name'  => 'newsletterAccepted',
+            'label' => $this->trans('client.accept_newsletter.label'),
         ]));
 
         $form->addFilter($this->getFilter('no_code'));

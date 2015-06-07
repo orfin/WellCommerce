@@ -97,6 +97,20 @@ class Client implements \Serializable, UserInterface, EquatableInterface
     protected $group;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="conditions_accepted", type="boolean")
+     */
+    protected $conditionsAccepted;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="newsletter_accepted", type="boolean")
+     */
+    protected $newsletterAccepted;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -285,5 +299,37 @@ class Client implements \Serializable, UserInterface, EquatableInterface
         }
 
         return true;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isConditionsAccepted()
+    {
+        return $this->conditionsAccepted;
+    }
+
+    /**
+     * @param boolean $conditionsAccepted
+     */
+    public function setConditionsAccepted($conditionsAccepted)
+    {
+        $this->conditionsAccepted = (int)$conditionsAccepted;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isNewsletterAccepted()
+    {
+        return $this->newsletterAccepted;
+    }
+
+    /**
+     * @param boolean $newsletterAccepted
+     */
+    public function setNewsletterAccepted($newsletterAccepted)
+    {
+        $this->newsletterAccepted = (int)$newsletterAccepted;
     }
 }

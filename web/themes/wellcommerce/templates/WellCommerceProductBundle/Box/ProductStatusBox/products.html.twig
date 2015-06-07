@@ -1,0 +1,25 @@
+<div class="products-grid inline clearfix">
+    <div class="thumbnail">
+        <div class="body">
+            <a href="{{ path(item.route) }}" class="photo">
+                <img src="{{ image(item.photo, 'normal') }}" alt="{{ item.name }}"/>
+            </a>
+
+            <a href="{{ path(item.route) }}" class="caption">
+                <div class="labels">
+                    {% for status in item.status %}
+                        <span class="label {{ status.css_class }}">{{ status.name }}</span>
+                    {% endfor %}
+                </div>
+                <span class="price">{{ format_price(item.price, item.currency, null, item.tax) }}</span>
+                <span class="name">{{ item.name }}</span>
+            </a>
+
+            <a href="{{ path('front.cart.add') }}" class="btn btn-primary text-left add-cart" data-id="{{ item.id }}" data-qty="1"
+               data-attribute="0">
+                {% trans %}cart.button.add{% endtrans %}
+                <i class="pull-right"><img src="{{ asset('themes/wellcommerce/assets/img/add-to-cart.png') }}"></i>
+            </a>
+        </div>
+    </div>
+</div>

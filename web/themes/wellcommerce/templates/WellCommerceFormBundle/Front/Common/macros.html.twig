@@ -42,6 +42,25 @@
     {% endautoescape %}
 {% endmacro %}
 
+{% macro checkbox(element, class) %}
+    {% set options = element.getOptions() %}
+    {% set classes = ['form-control', options.class, class] %}
+    {% set fieldNameParts = options.name|split('.') %}
+    {% if fieldNameParts|length > 1 %}
+        {% set fieldName = fieldNameParts[0] ~ '['~ options.name ~']' %}
+    {% else %}
+        {% set fieldName = options.name %}
+    {% endif %}
+    {% autoescape true %}
+    <div class="checkbox">
+        <label for="{{ options.name }}">
+            <input type="checkbox" id="{{ options.name }}" name="{{ fieldName }}" value="{{ element.getValue() }}">
+            {{ options.label }}
+        </label>
+    </div>
+    {% endautoescape %}
+{% endmacro %}
+
 {% macro text_area(element, class) %}
     {% set options = element.getOptions() %}
     {% set classes = ['form-control', options.class, class] %}

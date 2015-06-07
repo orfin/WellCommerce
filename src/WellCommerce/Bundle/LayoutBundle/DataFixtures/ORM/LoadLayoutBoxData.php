@@ -127,22 +127,24 @@ class LoadLayoutBoxData extends AbstractDataFixture
     protected function createProductStatusesBoxes()
     {
         $boxes = [
-            'ProductStatusBox'    => [
-                'identifier' => 'product_status',
-                'name'       => 'Dynamic product status',
-                'settings'   => []
+            0 => [
+                'type'       => 'ProductStatusBox',
+                'identifier' => 'product_bestseller',
+                'name'       => 'Bestsellers',
+                'settings'   => [
+                    'status' => $this->getReference('product_status_Bestsellers')->getId()
+                ]
             ],
-            'ProductPromotionBox' => [
-                'identifier' => 'product_promotion',
-                'name'       => 'Promotions',
-                'settings'   => []
-            ],
-            'ProductNewBox'       => [
+            1 => [
+                'type'       => 'ProductStatusBox',
                 'identifier' => 'product_new_arrivals',
                 'name'       => 'New arrivals',
-                'settings'   => []
+                'settings'   => [
+                    'status' => $this->getReference('product_status_New arrivals')->getId()
+                ]
             ],
-            'ProductShowcaseBox'  => [
+            2 => [
+                'type'       => 'ProductShowcaseBox',
                 'identifier' => 'product_showcase',
                 'name'       => 'Showcase',
                 'settings'   => [
@@ -151,8 +153,8 @@ class LoadLayoutBoxData extends AbstractDataFixture
             ],
         ];
 
-        foreach ($boxes as $type => $params) {
-            $this->createLayoutBox($type, $params['identifier'], $params['name'], $params['settings']);
+        foreach ($boxes as $index => $params) {
+            $this->createLayoutBox($params['type'], $params['identifier'], $params['name'], $params['settings']);
         }
     }
 

@@ -31,7 +31,6 @@ class ProductStatusBoxController extends AbstractBoxController implements BoxCon
      */
     public function indexAction()
     {
-        $productStatusProvider = $this->getManager()->getProductStatusProvider();
         $productProvider       = $this->getManager()->getProvider('product');
         $collectionBuilder     = $productProvider->getCollectionBuilder();
         $requestHelper         = $this->getManager()->getRequestHelper();
@@ -40,7 +39,7 @@ class ProductStatusBoxController extends AbstractBoxController implements BoxCon
             'limit'      => $requestHelper->getQueryAttribute('limit', $this->getBoxParam('per_page', 12)),
             'order_by'   => $requestHelper->getQueryAttribute('order_by', 'price'),
             'order_dir'  => $requestHelper->getQueryAttribute('order_dir', 'asc'),
-            'conditions' => $this->getConditions($productStatusProvider->getCurrentProductStatusId()),
+            'conditions' => $this->getConditions($this->getCurrentStatus()),
         ]);
 
         return [
@@ -59,5 +58,23 @@ class ProductStatusBoxController extends AbstractBoxController implements BoxCon
         $conditions->add(new Eq('status', $status));
 
         return $conditions;
+    }
+
+    /**
+     * Returns current status from provider or from box settings
+     *
+     * @return int
+     */
+    protected function getCurrentStatus()
+    {
+        $productStatusProvider = $this->getManager()->getProductStatusProvider();
+        $currentStatus         = $productStatusProvider->getCurrentProductStatus();
+        if (null === $currentStatus) {
+            $status = $this->getBoxParam('status');
+        } else {
+            $status = $productStatusProvider->getCurrentProductStatusId();
+        }
+
+        return $status;
     }
 }

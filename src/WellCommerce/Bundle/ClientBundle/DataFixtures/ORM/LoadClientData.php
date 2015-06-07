@@ -39,6 +39,8 @@ class LoadClientData extends AbstractDataFixture
             $client->setPhone($fakerGenerator->phoneNumber);
             $client->setDiscount(25);
             $client->setPassword(time());
+            $client->setConditionsAccepted(true);
+            $client->setNewsletterAccepted(true);
             $client->setGroup($clientGroup);
             $manager->persist($client);
         }
