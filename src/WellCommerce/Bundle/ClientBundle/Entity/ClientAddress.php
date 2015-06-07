@@ -25,7 +25,6 @@ class ClientAddress
 {
     use ORMBehaviors\Timestampable\Timestampable;
     use ORMBehaviors\Blameable\Blameable;
-    use AddressTrait;
 
     /**
      * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\ClientBundle\Entity\Client", inversedBy="addresses")
@@ -40,7 +39,12 @@ class ClientAddress
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
+
+    /**
+     * @ORM\Embedded(class = "WellCommerce\Bundle\CoreBundle\Entity\Address", columnPrefix = "address_")
+     */
+    protected $address;
 
     /**
      * @return int
@@ -66,5 +70,19 @@ class ClientAddress
         $this->client = $client;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
 
+    /**
+     * @param mixed $address
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+    }
 }
