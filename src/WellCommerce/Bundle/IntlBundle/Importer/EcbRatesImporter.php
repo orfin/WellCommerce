@@ -38,6 +38,31 @@ class EcbRatesImporter extends AbstractExchangeRatesImporter implements Exchange
     }
 
     /**
+     * Downloads exchange rates table from ECB
+     */
+    protected function downloadExchangeRatesTable()
+    {
+
+        try {
+            $this->table[$this->baseCurrency] = 1;
+
+            $xml = simplexml_load_file($this->url, 'SimpleXMLElement', LIBXML_NOWARNING);
+
+            if ($xml instanceof \SimpleXMLElement) {
+                $data = $xml->xpath('//gesmes:Envelope/*[3]/*');
+                foreach ($data[0]->children() as $child) {
+                    $currency               = (string)$child->attributes()->currency;
+                    $exchangeRate           = (string)$child->attributes()->rate;
+                    $this->table[$currency] = $exchangeRate;
+                }
+            }
+        } catch (\Exception $e) {
+            throw new \RuntimeException('Cannot download rates from ECB.');
+        }
+
+    }
+
+    /**
      * Updates managed currency with exchange rates
      *
      * @param Currency $currency
@@ -65,23 +90,5 @@ class EcbRatesImporter extends AbstractExchangeRatesImporter implements Exchange
     protected function calculateExchangeRate($baseExchangeRate, $currencySymbol)
     {
         return (1 / $baseExchangeRate) * $this->table[$currencySymbol];
-    }
-
-    /**
-     * Downloads exchange rates table from ECB
-     */
-    protected function downloadExchangeRatesTable()
-    {
-        $this->table[$this->baseCurrency] = 1;
-
-        $xml = @simplexml_load_file($this->url);
-        if ($xml instanceof \SimpleXMLElement) {
-            $data = $xml->xpath('//gesmes:Envelope/*[3]/*');
-            foreach ($data[0]->children() as $child) {
-                $currency               = (string)$child->attributes()->currency;
-                $exchangeRate           = (string)$child->attributes()->rate;
-                $this->table[$currency] = $exchangeRate;
-            }
-        }
     }
 }
