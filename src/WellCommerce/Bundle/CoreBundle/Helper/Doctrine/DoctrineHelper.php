@@ -88,7 +88,11 @@ class DoctrineHelper implements DoctrineHelperInterface
             $connection->beginTransaction();
 
             try {
-                $connection->query('DELETE FROM ' . $metadata->getTableName());
+                $sql  = 'DELETE FROM :table';
+                $stmt = $connection->prepare($sql);
+                $stmt->bindValue('table', $metadata->getTableName());
+                $stmt->execute();
+
                 $connection->commit();
 
                 return true;
