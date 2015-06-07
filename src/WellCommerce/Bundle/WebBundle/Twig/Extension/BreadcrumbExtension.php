@@ -54,13 +54,6 @@ class BreadcrumbExtension extends \Twig_Extension
 
     public function getBreadcrumbs()
     {
-        $item = new BreadcrumbItem([
-            'name' => 'Home',
-            'link' => ''
-        ]);
-
-        $this->builder->add($item);
-
         return $this->builder->all();
     }
 }

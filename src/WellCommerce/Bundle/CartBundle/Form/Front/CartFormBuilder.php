@@ -30,13 +30,43 @@ class CartFormBuilder extends AbstractFormBuilder implements FormBuilderInterfac
     {
         $form->addChild($this->getElement('radio_group', [
             'name'        => 'shippingMethod',
-            'label'       => $this->trans('cart.label.shipping_method'),
-            'options'     => $this->get('shipping_method.collection.front')->getSelect(),
+            'label'       => $this->trans('cart.shipping_method.label'),
+            'options'     => $this->getShippingMethodOptions(),
             'transformer' => new EntityToIdentifierTransformer($this->get('shipping_method.repository'))
         ]));
+
+        $form->addChild($this->getElement('radio_group', [
+            'name'        => 'paymentMethod',
+            'label'       => $this->trans('cart.payment_method.label'),
+            'options'     => $this->get('payment_method.collection.front')->getSelect(),
+            'transformer' => new EntityToIdentifierTransformer($this->get('payment_method.repository'))
+        ]));
+
 
         $form->addFilter($this->getFilter('no_code'));
         $form->addFilter($this->getFilter('trim'));
         $form->addFilter($this->getFilter('secure'));
+    }
+
+    public function getShippingMethodOptions()
+    {
+        $options     = [];
+        $converter   = $this->container->get('currency.converter');
+        $calculators = $this->container->get('shipping_method.calculator.collection');
+        $dataset     = $this->get('shipping_method.collection.front')->getDataSet([
+            'order_by'  => 'hierarchy',
+            'order_dir' => 'asc'
+        ]);
+
+        foreach ($dataset['rows'] as $shippingMethod) {
+            $calculator                     = $calculators->get($shippingMethod['calculator']);
+            $shippingCost                   = $calculator->calculate();
+            $options[$shippingMethod['id']] = [
+                'name'    => $shippingMethod['name'],
+                'comment' => $converter->format($shippingCost)
+            ];
+        }
+
+        return $options;
     }
 }

@@ -12,9 +12,9 @@
 
 namespace WellCommerce\Bundle\ShippingBundle\DataFixtures\ORM;
 
-use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod;
 
 /**
  * Class LoadShippingData
@@ -28,5 +28,22 @@ class LoadShippingMethodData extends AbstractDataFixture
      */
     public function load(ObjectManager $manager)
     {
+        $fedEx = new ShippingMethod();
+        $fedEx->setEnabled(1);
+        $fedEx->setHierarchy(0);
+        $fedEx->setCalculator('fixed_price');
+        $fedEx->translate('en')->setName('FedEx');
+        $fedEx->mergeNewTranslations();
+        $manager->persist($fedEx);
+
+        $ups = new ShippingMethod();
+        $ups->setEnabled(1);
+        $ups->setHierarchy(0);
+        $ups->setCalculator('fixed_price');
+        $ups->translate('en')->setName('UPS');
+        $ups->mergeNewTranslations();
+        $manager->persist($ups);
+
+        $manager->flush();
     }
 }

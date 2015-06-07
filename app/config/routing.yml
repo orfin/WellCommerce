@@ -51,7 +51,6 @@ wellcommerce_client:
 
 wellcommerce_order:
     resource: "@WellCommerceOrderBundle/Resources/config/routing.xml"
-    prefix:   /admin/sales/order
 
 wellcommerce_company:
     resource: "@WellCommerceMultiStoreBundle/Resources/config/routing.xml"

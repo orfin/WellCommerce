@@ -49,6 +49,10 @@
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
+        <service id="order_status.collection" parent="dataset.collection_builder.factory">
+            <argument type="service" id="order_status.dataset"/>
+        </service>
+
         <service id="order_status.datagrid" class="WellCommerce\Bundle\OrderBundle\DataGrid\OrderStatusDataGrid">
             <argument key="identifier">order_status</argument>
             <argument type="service" id="order_status.dataset"/>

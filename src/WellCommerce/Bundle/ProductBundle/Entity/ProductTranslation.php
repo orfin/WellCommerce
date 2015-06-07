@@ -37,12 +37,14 @@ class ProductTranslation implements LocaleAwareInterface, RoutableSubjectInterfa
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
+
     /**
      * @var string
      *
      * @ORM\Column(name="short_description", type="text", nullable=true)
      */
     private $shortDescription;
+
     /**
      * @var string
      *

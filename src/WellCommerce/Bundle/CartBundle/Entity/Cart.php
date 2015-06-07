@@ -16,6 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
 use WellCommerce\Bundle\ClientBundle\Entity\Client;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\Timestampable\TimestampableTrait;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\Shop;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod;
 
 /**
  * Class Cart
@@ -57,13 +58,13 @@ class Cart
     protected $client;
 
     /**
-     * @ORM\OneToOne(targetEntity="WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod")
+     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod")
      * @ORM\JoinColumn(name="payment_method_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     protected $paymentMethod;
 
     /**
-     * @ORM\OneToOne(targetEntity="WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod")
+     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod")
      * @ORM\JoinColumn(name="shipping_method_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     protected $shippingMethod;
@@ -75,11 +76,32 @@ class Cart
     protected $shop;
 
     /**
+     * @ORM\Embedded(class = "WellCommerce\Bundle\CartBundle\Entity\CartTotals", columnPrefix = "total_")
+     */
+    protected $totals;
+
+    /**
+     * @ORM\Embedded(class = "WellCommerce\Bundle\CoreBundle\Entity\Address", columnPrefix = "billing_address_")
+     */
+    protected $billingAddress;
+
+    /**
+     * @ORM\Embedded(class = "WellCommerce\Bundle\CoreBundle\Entity\Address", columnPrefix = "shipping_address_")
+     */
+    protected $shippingAddress;
+    
+    /**
+     * @ORM\Embedded(class = "WellCommerce\Bundle\CoreBundle\Entity\ContactDetails", columnPrefix = "contact_details_")
+     */
+    protected $contactDetails;
+    
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->products = new ArrayCollection();
+        $this->totals   = new CartTotals();
     }
 
     /**
@@ -88,22 +110,6 @@ class Cart
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @return ArrayCollection
-     */
-    public function getProducts()
-    {
-        return $this->products;
-    }
-
-    /**
-     * @param ArrayCollection $products
-     */
-    public function setProducts(ArrayCollection $products)
-    {
-        $this->products = $products;
     }
 
     /**
@@ -184,7 +190,7 @@ class Cart
     }
 
     /**
-     * @return mixed
+     * @return null|ShippingMethod
      */
     public function getShippingMethod()
     {
@@ -194,8 +200,96 @@ class Cart
     /**
      * @param mixed $shippingMethod
      */
-    public function setShippingMethod($shippingMethod)
+    public function setShippingMethod(ShippingMethod $shippingMethod = null)
     {
         $this->shippingMethod = $shippingMethod;
+    }
+
+    /**
+     * @return CartTotals
+     */
+    public function getTotals()
+    {
+        return $this->totals;
+    }
+
+    /**
+     * @param CartTotals $cartTotals
+     */
+    public function setTotals(CartTotals $cartTotals)
+    {
+        $this->totals = $cartTotals;
+    }
+
+    /**
+     * @return ArrayCollection|\WellCommerce\Bundle\CartBundle\Entity\CartProduct[]
+     */
+    public function getProducts()
+    {
+        return $this->products;
+    }
+
+    /**
+     * @param ArrayCollection $products
+     */
+    public function setProducts(ArrayCollection $products)
+    {
+        $this->products = $products;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBillingAddress()
+    {
+        return $this->billingAddress;
+    }
+
+    /**
+     * @param mixed $billingAddress
+     */
+    public function setBillingAddress($billingAddress)
+    {
+        $this->billingAddress = $billingAddress;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getShippingAddress()
+    {
+        return $this->shippingAddress;
+    }
+
+    /**
+     * @param mixed $shippingAddress
+     */
+    public function setShippingAddress($shippingAddress)
+    {
+        $this->shippingAddress = $shippingAddress;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getContactDetails()
+    {
+        return $this->contactDetails;
+    }
+
+    /**
+     * @param mixed $contactDetails
+     */
+    public function setContactDetails($contactDetails)
+    {
+        $this->contactDetails = $contactDetails;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEmpty()
+    {
+        return $this->products->count() === 0;
     }
 }

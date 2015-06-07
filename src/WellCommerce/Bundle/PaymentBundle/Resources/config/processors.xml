@@ -4,17 +4,11 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="bank_transfer.processor" class="WellCommerce\Bundle\PaymentBundle\Processor\BankTransfer\BankTransferProcessor">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
+        <service id="bank_transfer.processor" class="WellCommerce\Bundle\PaymentBundle\Processor\BankTransfer">
             <tag name="payment_method.processor"/>
         </service>
 
-        <service id="paypal.processor" class="WellCommerce\Bundle\PaymentBundle\Processor\PayPal\PayPalProcessor">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
+        <service id="cod.processor" class="WellCommerce\Bundle\PaymentBundle\Processor\CashOnDelivery">
             <tag name="payment_method.processor"/>
         </service>
     </services>

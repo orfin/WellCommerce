@@ -26,17 +26,17 @@ class Price
     /**
      * @ORM\Column(type="decimal", precision=15, scale=4, nullable=false)
      */
-    private $amount;
+    protected $amount;
 
     /**
      * @ORM\Column(type="integer", nullable=false)
      */
-    private $tax;
+    protected $tax;
 
     /**
      * @ORM\Column(type="string", nullable=false, length=16)
      */
-    private $currency;
+    protected $currency;
 
     /**
      * @return mixed

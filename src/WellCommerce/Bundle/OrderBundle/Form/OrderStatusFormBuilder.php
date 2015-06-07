@@ -43,17 +43,19 @@ class OrderStatusFormBuilder extends AbstractFormBuilder implements FormBuilderI
         ]));
 
         $orderStatusGroupSelectBuilder = new SelectBuilder($this->get('order_status_group.dataset'));
+        $orderStatusGroups             = $orderStatusGroupSelectBuilder->getItems();
 
         $requiredData->addChild($this->getElement('select', [
             'name'        => 'orderStatusGroup',
             'label'       => $this->trans('order_status.order_status_group.label'),
-            'options'     => $orderStatusGroupSelectBuilder->getItems(),
+            'options'     => $orderStatusGroups,
+            'default'     => current(array_keys($orderStatusGroups)),
             'transformer' => new EntityToIdentifierTransformer($this->get('order_status_group.repository'))
         ]));
 
         $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
-            'name'  => 'translations',
-            'label' => $this->trans('fieldset.translations.label'),
+            'name'        => 'translations',
+            'label'       => $this->trans('fieldset.translations.label'),
             'transformer' => new TranslationTransformer($this->get('order_status.repository'))
         ]));
 

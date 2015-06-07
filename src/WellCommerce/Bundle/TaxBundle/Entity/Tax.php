@@ -68,4 +68,12 @@ class Tax
     {
         $this->value = $value;
     }
+
+    /**
+     * @return float
+     */
+    public function getValueAsDecimal()
+    {
+        return $this->value / 100;
+    }
 }

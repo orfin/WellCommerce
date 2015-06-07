@@ -30,10 +30,14 @@ class ShippingMethodFormBuilder extends AbstractFormBuilder implements FormBuild
      */
     public function buildForm(FormInterface $form)
     {
-        $calculators = $this->getCalculators();
-        $options     = [];
+        $calculators       = $this->getCalculators();
+        $options           = [];
+        $defaultCalculator = null;
 
         foreach ($calculators as $calculator) {
+            if (null === $defaultCalculator) {
+                $defaultCalculator = $calculator->getAlias();
+            }
             $options[$calculator->getAlias()] = $calculator->getName();
         }
 
@@ -56,7 +60,8 @@ class ShippingMethodFormBuilder extends AbstractFormBuilder implements FormBuild
         $requiredData->addChild($this->getElement('select', [
             'name'    => 'calculator',
             'label'   => $this->trans('Processor'),
-            'options' => $options
+            'options' => $options,
+            'default' => $defaultCalculator
         ]));
 
         $requiredData->addChild($this->getElement('checkbox', [

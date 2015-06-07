@@ -49,6 +49,7 @@ class BreadcrumbItem implements BreadcrumbItemInterface
 
         $resolver->setDefaults([
             'class' => '',
+            'link' => ''
         ]);
 
         $resolver->setAllowedTypes([

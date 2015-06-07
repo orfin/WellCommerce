@@ -16,6 +16,7 @@ use WellCommerce\Bundle\CartBundle\Entity\Cart;
 use WellCommerce\Bundle\CartBundle\Entity\CartProduct;
 use WellCommerce\Bundle\CoreBundle\Provider\AbstractProvider;
 use WellCommerce\Bundle\IntlBundle\Converter\CurrencyConverterInterface;
+use WellCommerce\Bundle\ShippingBundle\Calculator\ShippingMethodCalculatorCollection;
 
 /**
  * Class CartSummaryProvider
@@ -30,80 +31,147 @@ class CartSummaryProvider extends AbstractProvider implements CartSummaryProvide
     protected $converter;
 
     /**
+     * @var float
+     */
+    protected $totalProductsWeight = 0;
+
+    /**
+     * @var float
+     */
+    protected $totalProductsPrice = 0;
+
+    /**
+     * @var float
+     */
+    protected $totalProductsQuantity = 0;
+
+    /**
+     * @var float
+     */
+    protected $totalCartPrice = 0;
+
+    /**
      * @var Cart
      */
-    private $cart;
+    protected $cart;
+
+    /**
+     * @var array
+     */
+    protected $shippingMethodCalculatorCollection;
 
     /**
      * Constructor
      *
-     * @param CurrencyConverterInterface $converter
+     * @param CurrencyConverterInterface         $converter
+     * @param ShippingMethodCalculatorCollection $shippingMethodCalculatorCollection
      */
-    public function __construct(CurrencyConverterInterface $converter)
-    {
-        $this->converter = $converter;
+    public function __construct(
+        CurrencyConverterInterface $converter,
+        ShippingMethodCalculatorCollection $shippingMethodCalculatorCollection
+    ) {
+        $this->converter                          = $converter;
+        $this->shippingMethodCalculatorCollection = $shippingMethodCalculatorCollection;
     }
 
     /**
-     * @param Cart $cart
+     * {@inheritdoc}
+     */
+    public function getCart()
+    {
+        return $this->cart;
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function setCart(Cart $cart)
     {
         $this->cart = $cart;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getQuantity()
-    {
-        $quantity = 0;
-        $this->cart->getProducts()->forAll(function ($key, CartProduct $cartProduct) use (&$quantity) {
-            $quantity += $cartProduct->getQuantity();
-        });
-
-        return $quantity;
-    }
 
     /**
      * {@inheritdoc}
      */
-    public function getWeight()
+    public function getTotalProductsPrice()
     {
-        $weight = 0;
-        $this->cart->getProducts()->forAll(function ($key, CartProduct $cartProduct) use (&$weight) {
-            $weight += $cartProduct->getProduct()->getWeight() * $cartProduct->getQuantity();
-        });
+        $this->totalProductsPrice = 0;
 
-        return $weight;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPrice()
-    {
-        $price = 0;
-        $this->cart->getProducts()->forAll(function ($key, CartProduct $cartProduct) use (&$price) {
+        $this->cart->getProducts()->forAll(function ($key, CartProduct $cartProduct) {
             $sellPrice     = $cartProduct->getProduct()->getSellPrice();
             $quantityPrice = $sellPrice->getAmount() * $cartProduct->getQuantity();
 
-            $price += $this->converter->convert($quantityPrice, $sellPrice->getCurrency());
+            $this->totalProductsPrice += $this->converter->convert($quantityPrice, $sellPrice->getCurrency());
         });
 
-        return $price;
+        return $this->totalProductsPrice;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getTotals()
+    public function getSummary()
     {
         return [
-            'quantity' => $this->getQuantity(),
-            'weight'   => $this->getWeight(),
-            'price'    => $this->getPrice(),
+            'price'    => 1,
+            'quantity' => 2,
+            'weight'   => 3,
+            'total'    => 4
         ];
     }
 
+    /**
+     * Returns cart total price with shipping cost
+     *
+     * @return float|int
+     */
+    public function getTotalCartPrice()
+    {
+        $shippingCost   = 0;
+        $shippingMethod = $this->cart->getShippingMethod();
+
+        if (null !== $shippingMethod) {
+            $calculatorAlias = $shippingMethod->getCalculator();
+            $shippingCost    = $this->calculateShippingCost($calculatorAlias);
+        }
+
+        $this->totalCartPrice = $this->totalProductsPrice + $shippingCost;
+
+        return $this->totalCartPrice;
+    }
+
+    /**
+     * Calculates shipping cost using provided calculator
+     *
+     * @param string $alias
+     *
+     * @return float
+     */
+    protected function calculateShippingCost($alias)
+    {
+        $calculator = $this->getShippingCalculator($alias);
+
+        if (null !== $calculator) {
+            return $calculator->calculate($this);
+        }
+
+        return 0;
+    }
+
+    /**
+     * Returns the calculator object
+     *
+     * @param null $alias
+     *
+     * @return bool|\WellCommerce\Bundle\ShippingBundle\Calculator\ShippingMethodCalculatorInterface
+     */
+    protected function getShippingCalculator($alias)
+    {
+        if (!$this->shippingMethodCalculatorCollection->has($alias)) {
+            return null;
+        }
+
+        return $this->shippingMethodCalculatorCollection->get($alias);
+    }
 }

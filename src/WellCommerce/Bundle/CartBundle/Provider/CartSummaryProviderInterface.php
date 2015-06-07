@@ -23,33 +23,13 @@ use WellCommerce\Bundle\CoreBundle\Provider\ProviderInterface;
 interface CartSummaryProviderInterface extends ProviderInterface
 {
     /**
+     * @return Cart
+     */
+    public function getCart();
+
+    /**
      * @param Cart $cart
      */
     public function setCart(Cart $cart);
 
-    /**
-     * Returns total quantity
-     *
-     * @return float
-     */
-    public function getQuantity();
-
-    /**
-     * Returns total weight
-     *
-     * @return float
-     */
-    public function getWeight();
-
-    /**
-     * Returns converted total cart price
-     *
-     * @return float
-     */
-    public function getPrice();
-
-    /**
-     * @return array
-     */
-    public function getTotals();
 }

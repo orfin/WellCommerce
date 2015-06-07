@@ -12,15 +12,14 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Repository;
 
+use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\DataSetAwareRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
-use WellCommerce\Bundle\DataGridBundle\Repository\DataGridAwareRepositoryInterface;
 
 /**
  * Interface PaymentMethodRepositoryInterface
  *
- * @package WellCommerce\Bundle\PaymentBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface PaymentMethodRepositoryInterface extends RepositoryInterface, DataGridAwareRepositoryInterface
+interface PaymentMethodRepositoryInterface extends RepositoryInterface, DataSetAwareRepositoryInterface
 {
 }

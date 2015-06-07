@@ -28,6 +28,7 @@
 
         <service id="cart.helper" class="WellCommerce\Bundle\CartBundle\Helper\CartHelper">
             <argument type="service" id="cart_product.repository"/>
+            <argument type="service" id="currency.converter"/>
             <argument type="service" id="doctrine_helper"/>
         </service>
 
@@ -86,6 +87,14 @@
             </call>
         </service>
 
+        <service id="cart_address.form_builder" class="WellCommerce\Bundle\CartBundle\Form\Front\CartAddressFormBuilder">
+            <argument type="service" id="form.resolver.factory"/>
+            <argument type="service" id="form.handler"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
         <service id="cart_product.provider" class="WellCommerce\Bundle\CartBundle\Provider\CartProductProvider">
             <call method="setCollectionBuilder">
                 <argument type="service" id="cart_product.collection.front"/>
@@ -99,13 +108,13 @@
 
         <service id="cart_summary.provider" class="WellCommerce\Bundle\CartBundle\Provider\CartSummaryProvider">
             <argument type="service" id="currency.converter"/>
+            <argument type="service" id="shipping_method.calculator.collection"/>
             <tag name="resource.provider" alias="cart_summary"/>
         </service>
 
         <service id="twig.extension.cart" class="WellCommerce\Bundle\CartBundle\Twig\Extension\CartExtension">
             <argument type="service" id="cart.provider"/>
             <argument type="service" id="cart_product.provider"/>
-            <argument type="service" id="cart_summary.provider"/>
             <tag name="twig.extension"/>
         </service>
 

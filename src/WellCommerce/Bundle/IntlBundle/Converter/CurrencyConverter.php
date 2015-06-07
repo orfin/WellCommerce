@@ -103,11 +103,22 @@ class CurrencyConverter implements CurrencyConverterInterface
     protected function getTargetCurrency($targetCurrency = null)
     {
         if (null === $targetCurrency) {
-            $session        = $this->requestStack->getMasterRequest()->getSession();
-            $targetCurrency = $session->get('_currency');
+            $targetCurrency = $this->getCurrentSessionCurrency();
         }
 
         return $targetCurrency;
+    }
+
+    /**
+     * Returns currency code from session
+     *
+     * @return string
+     */
+    protected function getCurrentSessionCurrency()
+    {
+        $session = $this->requestStack->getMasterRequest()->getSession();
+
+        return $session->get('_currency');
     }
 
     /**

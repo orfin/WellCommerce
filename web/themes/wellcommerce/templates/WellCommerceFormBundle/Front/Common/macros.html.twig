@@ -24,10 +24,16 @@
 {% macro text_field(element, class) %}
     {% set options = element.getOptions() %}
     {% set classes = ['form-control', options.class, class] %}
+    {% set fieldNameParts = options.name|split('.') %}
+    {% if fieldNameParts|length > 1 %}
+        {% set fieldName = fieldNameParts[0] ~ '['~ options.name ~']' %}
+    {% else %}
+        {% set fieldName = options.name %}
+    {% endif %}
     {% autoescape true %}
     <div class="form-group {% if element.getError()|length %}has-error has-feedback{% endif %}">
         <label for="{{ options.name }}">{{ options.label }}</label>
-        <input type="text" class="{{ classes|join(' ')|trim }}" id="{{ options.name }}" name="{{ options.name }}" value="{{ element.getValue() }}">
+        <input type="text" class="{{ classes|join(' ')|trim }}" id="{{ options.name }}" name="{{ fieldName }}" value="{{ element.getValue() }}">
         {% if element.getError()|length %}
         <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
         <span>{{ element.getError()|join(' ') }}</span>
@@ -36,28 +42,80 @@
     {% endautoescape %}
 {% endmacro %}
 
+{% macro text_area(element, class) %}
+    {% set options = element.getOptions() %}
+    {% set classes = ['form-control', options.class, class] %}
+    {% set fieldNameParts = options.name|split('.') %}
+    {% if fieldNameParts|length > 1 %}
+        {% set fieldName = fieldNameParts[0] ~ '['~ options.name ~']' %}
+    {% else %}
+        {% set fieldName = options.name %}
+    {% endif %}
+    {% autoescape true %}
+    <h4>{{ options.label }}</h4>
+    <textarea class="form-control" id="{{ options.name }}" name="{{ fieldName }}" rows="{{ options.rows }}" cols="{{ options.cols }}">{{ element.getValue() }}</textarea>
+    {% endautoescape %}
+{% endmacro %}
+
 {% macro radio_group(element, class) %}
     {% set options = element.getOptions() %}
     {% set classes = ['form-control', options.class, class] %}
+    {% set fieldNameParts = options.name|split('.') %}
+    {% if fieldNameParts|length > 1 %}
+        {% set fieldName = fieldNameParts[0] ~ '['~ options.name ~']' %}
+    {% else %}
+        {% set fieldName = options.name %}
+    {% endif %}
     {% autoescape true %}
         {% for key, label in options.options %}
             <div class="radio">
                 <label class="block">
-                    <input type="radio" name="{{ options.name }}" value="{{ key }}" id="{{ options.name }}_{{ key }}" {% if element.getValue() == key %}checked{% endif %}>
-                    {{ label }} <strong class="pull-right">$0.00</strong>
+                    <input type="radio" name="{{ fieldName }}" value="{{ key }}" id="{{ options.name }}_{{ key }}" {% if element.getValue() == key %}checked{% endif %}>
+                    {% if label is iterable %}
+                        {{ label.name }} <strong class="pull-right">{{ label.comment }}</strong>
+                    {% else %}
+                        {{ label }}
+                    {% endif %}
                 </label>
             </div>
         {% endfor %}
     {% endautoescape %}
 {% endmacro %}
 
-{% macro password(element, class) %}
+{% macro select(element, class) %}
     {% set options = element.getOptions() %}
     {% set classes = ['form-control', options.class, class] %}
+    {% set fieldNameParts = options.name|split('.') %}
+    {% if fieldNameParts|length > 1 %}
+        {% set fieldName = fieldNameParts[0] ~ '['~ options.name ~']' %}
+    {% else %}
+        {% set fieldName = options.name %}
+    {% endif %}
     {% autoescape true %}
     <div class="form-group {% if element.getError()|length %}has-error has-feedback{% endif %}">
         <label for="{{ options.name }}">{{ options.label }}</label>
-        <input type="password" class="{{ classes|join(' ')|trim }}" id="{{ options.name }}" name="{{ options.name }}" value="{{ element.getValue() }}">
+        <select class="{{ classes|join(' ')|trim }}" id="{{ options.name }}" name="{{ fieldName }}">
+        {% for key, label in options.options %}
+            <option value="{{ key }}" {% if element.getValue() == key %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+        </select>
+    </div>
+    {% endautoescape %}
+{% endmacro %}
+
+{% macro password(element, class) %}
+    {% set options = element.getOptions() %}
+    {% set classes = ['form-control', options.class, class] %}
+    {% set fieldNameParts = options.name|split('.') %}
+    {% if fieldNameParts|length > 1 %}
+        {% set fieldName = fieldNameParts[0] ~ '['~ options.name ~']' %}
+    {% else %}
+        {% set fieldName = options.name %}
+    {% endif %}
+    {% autoescape true %}
+    <div class="form-group {% if element.getError()|length %}has-error has-feedback{% endif %}">
+        <label for="{{ options.name }}">{{ options.label }}</label>
+        <input type="password" class="{{ classes|join(' ')|trim }}" id="{{ options.name }}" name="{{ fieldName }}" value="{{ element.getValue() }}">
         {% if element.getError()|length %}
             <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
             <span>{{ element.getError()|join(' ') }}</span>

@@ -32,6 +32,7 @@ class ShippingMethodDataSet extends AbstractDataSet implements DataSetInterface
             'id'         => 'shipping_method.id',
             'name'       => 'shipping_method_translation.name',
             'calculator' => 'shipping_method.calculator',
+            'hierarchy'  => 'shipping_method.hierarchy',
         ]);
     }
 }

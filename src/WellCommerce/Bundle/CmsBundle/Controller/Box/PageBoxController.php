@@ -27,17 +27,6 @@ class PageBoxController extends AbstractBoxController implements BoxControllerIn
 {
     public function indexAction(Request $request)
     {
-        $page = $this->findOr404($request, [
-            'publish' => 1
-        ]);
 
-        $translations = $page->translate();
-
-        return [
-            'page' => [
-                'name'    => $translations->getName(),
-                'content' => $translations->getContent(),
-            ]
-        ];
     }
 }

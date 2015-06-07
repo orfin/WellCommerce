@@ -12,6 +12,9 @@
 
 namespace WellCommerce\Bundle\ShippingBundle\Calculator;
 
+use WellCommerce\Bundle\CartBundle\Provider\CartProviderInterface;
+use WellCommerce\Bundle\CartBundle\Provider\CartSummaryProviderInterface;
+
 /**
  * Class AbstractShippingMethodCalculator
  *
@@ -20,6 +23,21 @@ namespace WellCommerce\Bundle\ShippingBundle\Calculator;
 abstract class AbstractShippingMethodCalculator implements ShippingMethodCalculatorInterface
 {
     protected $alias = null;
+
+    /**
+     * @var CartProviderInterface
+     */
+    protected $cartProvider;
+
+    /**
+     * Constructor
+     *
+     * @param CartProviderInterface $cartProvider
+     */
+    public function __construct(CartProviderInterface $cartProvider)
+    {
+        $this->cartProvider = $cartProvider;
+    }
 
     /**
      * {@inheritdoc}
@@ -32,5 +50,13 @@ abstract class AbstractShippingMethodCalculator implements ShippingMethodCalcula
     public function getAlias()
     {
         return $this->alias;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function calculate()
+    {
+        return 0;
     }
 }

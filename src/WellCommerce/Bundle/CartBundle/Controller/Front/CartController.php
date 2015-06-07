@@ -19,6 +19,7 @@ use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
 use WellCommerce\Bundle\DataSetBundle\Conditions\Condition\Eq;
 use WellCommerce\Bundle\DataSetBundle\Conditions\ConditionsCollection;
+use WellCommerce\Bundle\WebBundle\Breadcrumb\BreadcrumbItem;
 
 /**
  * Class CartController
@@ -34,6 +35,10 @@ class CartController extends AbstractFrontController implements FrontControllerI
      */
     public function indexAction(Request $request)
     {
+        $this->addBreadCrumbItem(new BreadcrumbItem([
+            'name' => $this->trans('cart.heading.index')
+        ]));
+
         $manager  = $this->getManager();
         $resource = $this->getManager()->getCartProvider()->getCurrentCart();
         $form     = $this->get('cart.form_builder')->createForm([
@@ -44,7 +49,7 @@ class CartController extends AbstractFrontController implements FrontControllerI
             if ($form->isValid()) {
                 $manager->updateResource($resource, $request);
 
-                return $manager->getRedirectHelper()->redirectToAction('index');
+                return $manager->getRedirectHelper()->redirectTo('front.cart.index');
             }
 
             if (count($form->getError())) {

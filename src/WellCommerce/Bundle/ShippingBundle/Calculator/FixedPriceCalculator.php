@@ -12,8 +12,6 @@
 
 namespace WellCommerce\Bundle\ShippingBundle\Calculator;
 
-use WellCommerce\Bundle\ShippingBundle\Calculator\AbstractShippingMethodCalculator;
-
 /**
  * Class FixedPriceCalculator
  *
@@ -26,5 +24,16 @@ class FixedPriceCalculator extends AbstractShippingMethodCalculator
     public function getName()
     {
         return 'Fixed price';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function calculate()
+    {
+        $cart   = $this->cartProvider->getCurrentCart();
+        $totals = $cart->getTotals();
+
+        return $totals->getQuantity() * 9;
     }
 }

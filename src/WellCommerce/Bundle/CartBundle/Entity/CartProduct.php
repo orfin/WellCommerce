@@ -13,6 +13,7 @@ use WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute;
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * @ORM\Table(name="cart_product")
+ * @ORM\HasLifecycleCallbacks
  * @ORM\Entity(repositoryClass="WellCommerce\Bundle\CartBundle\Repository\CartProductRepository")
  */
 class CartProduct
@@ -134,5 +135,14 @@ class CartProduct
     public function setCart(Cart $cart)
     {
         $this->cart = $cart;
+    }
+
+    /**
+     * @ORM\PostPersist
+     * @ORM\PostUpdate
+     */
+    protected function recalculateCartTotals()
+    {
+        $this->getCart()->recalculateCartTotals();
     }
 }

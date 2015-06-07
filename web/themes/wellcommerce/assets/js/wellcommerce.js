@@ -14,4 +14,8 @@ $(document).ready(function () {
         $('#coming-soon-modal').modal('show');
         return false;
     });
+
+    $("form.cart input[type='radio']").change(function(){
+        $('form.cart').submit();
+    });
 });

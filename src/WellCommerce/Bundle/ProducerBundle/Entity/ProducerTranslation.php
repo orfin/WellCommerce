@@ -36,29 +36,32 @@ class ProducerTranslation implements RoutableSubjectInterface, LocaleAwareInterf
      * @ORM\JoinColumn(name="route_id", referencedColumnName="id", onDelete="CASCADE")
      **/
     protected $route;
+    
     /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
      */
-    private $name;
+    protected $name;
+    
     /**
      * @var string
      *
      * @ORM\Column(name="short_description", type="text", nullable=true)
      */
-    private $shortDescription;
+    protected $shortDescription;
+    
     /**
      * @var string
      *
      * @ORM\Column(name="description", type="text", nullable=true)
      */
-    private $description;
+    protected $description;
 
     /**
      * @ORM\Embedded(class = "WellCommerce\Bundle\CoreBundle\Entity\Meta", columnPrefix = "meta_")
      */
-    private $meta;
+    protected $meta;
 
     /**
      * Constructor
