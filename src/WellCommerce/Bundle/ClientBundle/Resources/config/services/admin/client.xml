@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="client.manager.admin" class="WellCommerce\Bundle\ClientBundle\Manager\Admin\ClientManager">
+            <argument type="service" id="flash_helper"/>
+            <argument type="service" id="redirect_helper"/>
+            <argument type="service" id="image_helper"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="doctrine_helper"/>
+            <argument type="service" id="translator"/>
+            <argument type="service" id="request_helper"/>
+            <call method="setRepository">
+                <argument type="service" id="client.repository"/>
+            </call>
+            <call method="setFormBuilder">
+                <argument type="service" id="client.form_builder.admin"/>
+            </call>
+            <call method="setDataGrid">
+                <argument type="service" id="client.datagrid"/>
+            </call>
+        </service>
+
+        <service id="client.controller.admin" class="WellCommerce\Bundle\ClientBundle\Controller\Admin\ClientController">
+            <argument type="service" id="client.manager.admin"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="client.form_builder.admin" class="WellCommerce\Bundle\ClientBundle\Form\Admin\ClientFormBuilder">
+            <argument type="service" id="form.resolver.factory"/>
+            <argument type="service" id="form.handler"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="client.datagrid" class="WellCommerce\Bundle\ClientBundle\DataGrid\ClientDataGrid">
+            <argument key="identifier">client</argument>
+            <argument type="service" id="client.dataset"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+    </services>
+</container>

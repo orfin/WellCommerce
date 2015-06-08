@@ -23,7 +23,7 @@ use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
  *
  * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
-class ClientRegistrationBoxController extends AbstractBoxController implements BoxControllerInterface
+class ClientRegistrationBoxController extends AbstractBoxController
 {
     public function indexAction(Request $request)
     {

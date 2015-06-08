@@ -58,6 +58,20 @@ abstract class AbstractLayoutBoxConfigurator extends AbstractContainer implement
     /**
      * {@inheritdoc}
      */
+    public function addFormFields(FormBuilderInterface $builder, FormInterface $form, $defaults)
+    {
+        $fieldset = $this->getFieldset($builder, $form);
+
+        $fieldset->addChild($builder->getElement('tip', [
+            'tip' => '<p>' . $this->trans('layout_box.configuration') . '</p>'
+        ]));
+
+        return $fieldset;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getFieldset(FormBuilderInterface $builder, FormInterface $form)
     {
         $boxTypeSelect = $this->getBoxTypeSelect($form);

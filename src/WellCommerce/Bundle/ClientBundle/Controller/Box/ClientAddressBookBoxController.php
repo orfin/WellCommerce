@@ -16,26 +16,16 @@ use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
 
 /**
- * Class ClientLoginBoxController
+ * Class ClientAddressBookBoxController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
-class ClientLoginBoxController extends AbstractBoxController
+class ClientAddressBookBoxController extends AbstractBoxController
 {
     public function indexAction()
     {
-        $form = $this->get('client_login.form_builder.front')->createForm([
-            'name'         => 'login',
-            'ajax_enabled' => false,
-            'action'       => $this->generateUrl('front.client.login_check')
-        ], null);
 
-        return [
-            'form'     => $form,
-            'elements' => $form->getChildren(),
-            'error'    => $this->get('security.authentication_utils')->getLastAuthenticationError()
-        ];
     }
 }

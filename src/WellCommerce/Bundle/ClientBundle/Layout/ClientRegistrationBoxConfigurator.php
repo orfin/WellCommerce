@@ -12,27 +12,14 @@
 
 namespace WellCommerce\Bundle\ClientBundle\Layout;
 
-use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
-use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 use WellCommerce\Bundle\LayoutBundle\Configurator\AbstractLayoutBoxConfigurator;
-use WellCommerce\Bundle\LayoutBundle\Configurator\LayoutBoxConfiguratorInterface;
 
 /**
  * Class ClientRegistrationBoxConfigurator
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientRegistrationBoxConfigurator extends AbstractLayoutBoxConfigurator implements LayoutBoxConfiguratorInterface
+class ClientRegistrationBoxConfigurator extends AbstractLayoutBoxConfigurator
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function addFormFields(FormBuilderInterface $builder, FormInterface $form, $defaults)
-    {
-        $fieldset = $this->getFieldset($builder, $form);
 
-        $fieldset->addChild($builder->getElement('tip', [
-            'tip' => '<p>' . $this->trans('layout_box.configuration') . '</p>'
-        ]));
-    }
 }

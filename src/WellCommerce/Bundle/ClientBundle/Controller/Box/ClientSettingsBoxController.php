@@ -10,16 +10,21 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ClientBundle\Layout;
+namespace WellCommerce\Bundle\ClientBundle\Controller\Box;
 
-use WellCommerce\Bundle\LayoutBundle\Configurator\AbstractLayoutBoxConfigurator;
+use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 
 /**
- * Class ClientLoginBoxConfigurator
+ * Class ClientSettingsBoxController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
+ *
+ * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
-class ClientLoginBoxConfigurator extends AbstractLayoutBoxConfigurator
+class ClientSettingsBoxController extends AbstractBoxController
 {
+    public function indexAction()
+    {
 
+    }
 }

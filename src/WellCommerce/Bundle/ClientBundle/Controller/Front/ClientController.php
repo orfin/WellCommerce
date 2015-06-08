@@ -43,4 +43,24 @@ class ClientController extends AbstractFrontController implements FrontControlle
     {
         return [];
     }
+
+    public function settingsAction()
+    {
+        return [];
+    }
+
+    public function wishListAction()
+    {
+        return [];
+    }
+
+    public function addressBookAction()
+    {
+        return [];
+    }
+
+    public function ordersAction()
+    {
+        return [];
+    }
 }
