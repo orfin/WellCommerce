@@ -86,7 +86,7 @@
                                 <span class="text">Summary<small>Payment method: {{ cart.getPaymentMethod().translate().getName() }}</small></span>
                             </div>
                             <div class="col-lg-3">
-                                <span class="value">{{ format_price(cart.getTotals().getPriceGross()) }}</span>
+                                <span class="value">{{ format_price(cart.getTotals().getGrossPrice()) }}</span>
                             </div>
                         </div>
                     </div>
