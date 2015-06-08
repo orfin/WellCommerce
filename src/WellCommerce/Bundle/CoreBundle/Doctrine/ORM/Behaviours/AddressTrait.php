@@ -25,49 +25,49 @@ trait AddressTrait
      *
      * @ORM\Column(name="street", type="string", length=255, nullable=true)
      */
-    private $street;
+    protected $street;
 
     /**
      * @var string
      *
      * @ORM\Column(name="street_no", type="string", length=255, nullable=true)
      */
-    private $streetNo;
+    protected $streetNo;
 
     /**
      * @var string
      *
      * @ORM\Column(name="flat_no", type="string", length=255, nullable=true)
      */
-    private $flatNo;
+    protected $flatNo;
 
     /**
      * @var string
      *
      * @ORM\Column(name="post_code", type="string", length=255, nullable=true)
      */
-    private $postCode;
+    protected $postCode;
 
     /**
      * @var string
      *
      * @ORM\Column(name="province", type="string", length=255, nullable=true)
      */
-    private $province;
+    protected $province;
 
     /**
      * @var string
      *
      * @ORM\Column(name="city", type="string", length=255, nullable=true)
      */
-    private $city;
+    protected $city;
 
     /**
      * @var string
      *
      * @ORM\Column(name="country", type="string", length=3, nullable=true)
      */
-    private $country;
+    protected $country;
 
     /**
      * Get street.
