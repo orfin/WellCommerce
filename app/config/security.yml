@@ -22,7 +22,7 @@ security:
             form_login:
                 login_path: front.client.login
                 check_path: front.client.login_check
-                default_target_path: front.client.index
+                default_target_path: front.client.orders
                 failure_handler: client.failure.handler
             logout:
                 path:   front.client.logout
