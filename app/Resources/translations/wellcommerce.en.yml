@@ -68,7 +68,36 @@ user:
     button:
         log_in: Log in
         add: Add new user
-
+client:
+    heading:
+        login: 'Sign in'
+        register: 'Sign up'
+    form:
+        label:
+            first_name: Firstname
+            last_name: Lastname
+            email: E-mail
+            phone: Phone
+            password: Password
+            client_group: Group
+            discount: Discount
+        error:
+            first_name:
+                empty: 'Firstname cannot be empty'
+            last_name:
+                empty: 'Firstname cannot be empty'
+        button:
+            login: 'Sign in'
+            register: 'Sign up'
+    link:
+        login: Sign in
+        register: Sign up
+        logout: Logout
+        orders: Orders
+        address_book: Addressess
+        settings: Settings
+        wishlist: Wishlist
+        password_forgotten: Reset password
 
 
 package:
@@ -109,32 +138,6 @@ dictionary:
         edit: 'Edit translation'
     label:
         identifier: Identifier
-client:
-    heading:
-        login: 'Sign in'
-        register: 'Sign up'
-    form:
-        label:
-            first_name: Firstname
-            last_name: Lastname
-            email: E-mail
-            phone: Phone
-            password: Password
-            client_group: Group
-            discount: Discount
-        error:
-            first_name:
-                empty: 'Firstname cannot be empty'
-            last_name:
-                empty: 'Firstname cannot be empty'
-        button:
-            login: 'Sign in'
-            register: 'Sign up'
-    link:
-        my_account: 'My account'
-        login: 'Sign in / Sign up'
-        logout: Logout
-        reset_password: 'Reset password'
 cart:
     button:
         add: 'Add to cart'
