@@ -24,26 +24,36 @@ class LayoutBox
     use ORMBehaviors\Timestampable\Timestampable;
     use ORMBehaviors\Translatable\Translatable;
     use ORMBehaviors\Blameable\Blameable;
-
+    
     /**
-     * @var int
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
-
-    /**
-     * @var string
-     */
-    private $boxType;
-
-    /**
-     * @var array
-     */
-    private $settings;
+    protected $id;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="box_type", type="string", length=255, nullable=false)
      */
-    private $identifier;
+    protected $boxType;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="settings", type="json_array", nullable=false)
+     */
+    protected $settings;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="identifier", type="string", length=255, nullable=false)
+     */
+    protected $identifier;
 
     /**
      * @return int
