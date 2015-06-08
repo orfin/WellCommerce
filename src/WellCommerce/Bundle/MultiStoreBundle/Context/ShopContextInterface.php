@@ -46,4 +46,11 @@ interface ShopContextInterface
      * @param Shop $shop
      */
     public function setCurrentScope(Shop $shop = null);
+
+    /**
+     * Checks whether session contains previous shop data
+     *
+     * @return bool
+     */
+    public function hasSessionPreviousData();
 }

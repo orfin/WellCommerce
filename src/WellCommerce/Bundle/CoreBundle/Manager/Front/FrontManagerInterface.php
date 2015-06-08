@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\CoreBundle\Manager\Front;
 
 use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
 use WellCommerce\Bundle\CoreBundle\Provider\ProviderCollection;
+use WellCommerce\Bundle\MultiStoreBundle\Context\ShopContextInterface;
 
 /**
  * Interface FrontManagerInterface
@@ -44,4 +45,44 @@ interface FrontManagerInterface extends ManagerInterface
      * @return \WellCommerce\Bundle\CoreBundle\Provider\ProviderInterface
      */
     public function getProvider($type);
+
+    /**
+     * @param ShopContextInterface $shopContext
+     */
+    public function setShopContext(ShopContextInterface $shopContext);
+
+    /**
+     * Shorthand to get category provider
+     *
+     * @return \WellCommerce\Bundle\CategoryBundle\Provider\CategoryProviderInterface
+     */
+    public function getCategoryProvider();
+
+    /**
+     * Shorthand to get product provider
+     *
+     * @return \WellCommerce\Bundle\ProductBundle\Provider\ProductProviderInterface
+     */
+    public function getProductProvider();
+
+    /**
+     * Shorthand to get product status provider
+     *
+     * @return \WellCommerce\Bundle\ProductBundle\Provider\ProductStatusProviderInterface
+     */
+    public function getProductStatusProvider();
+
+    /**
+     * Shorthand to get cart provider
+     *
+     * @return \WellCommerce\Bundle\CartBundle\Provider\CartProviderInterface
+     */
+    public function getCartProvider();
+
+    /**
+     * Shorthand to get cart products provider
+     *
+     * @return \WellCommerce\Bundle\CartBundle\Provider\CartProductProviderInterface
+     */
+    public function getCartProductProvider();
 }

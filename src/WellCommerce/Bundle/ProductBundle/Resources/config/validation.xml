@@ -9,21 +9,29 @@
                 <option name="deep">true</option>
             </constraint>
         </property>
+        <property name="sellPrice">
+            <constraint name="Valid">
+                <option name="deep">true</option>
+            </constraint>
+        </property>
+        <property name="dimension">
+            <constraint name="Valid">
+                <option name="deep">true</option>
+            </constraint>
+        </property>
         <property name="sku">
             <constraint name="NotBlank" />
             <constraint name="NotNull" />
         </property>
         <property name="buyPrice">
-            <constraint name="GreaterThanOrEqual">
-                <option name="value">0</option>
+            <constraint name="Valid">
+                <option name="deep">true</option>
             </constraint>
-            <constraint name="NotBlank" />
         </property>
         <property name="sellPrice">
-            <constraint name="GreaterThan">
-                <option name="value">0</option>
+            <constraint name="Valid">
+                <option name="deep">true</option>
             </constraint>
-            <constraint name="NotBlank" />
         </property>
         <property name="stock">
             <constraint name="GreaterThanOrEqual">
@@ -32,24 +40,6 @@
             <constraint name="NotBlank" />
         </property>
         <property name="weight">
-            <constraint name="GreaterThanOrEqual">
-                <option name="value">0</option>
-            </constraint>
-            <constraint name="NotBlank" />
-        </property>
-        <property name="width">
-            <constraint name="GreaterThanOrEqual">
-                <option name="value">0</option>
-            </constraint>
-            <constraint name="NotBlank" />
-        </property>
-        <property name="height">
-            <constraint name="GreaterThanOrEqual">
-                <option name="value">0</option>
-            </constraint>
-            <constraint name="NotBlank" />
-        </property>
-        <property name="depth">
             <constraint name="GreaterThanOrEqual">
                 <option name="value">0</option>
             </constraint>
@@ -64,6 +54,28 @@
     </class>
 
     <class name="WellCommerce\Bundle\ProductBundle\Entity\ProductTranslation">
+        <property name="name">
+            <constraint name="NotBlank" />
+            <constraint name="NotNull" />
+        </property>
+        <property name="slug">
+            <constraint name="NotBlank" />
+            <constraint name="NotNull" />
+        </property>
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">slug</option>
+        </constraint>
+    </class>
+
+    <class name="WellCommerce\Bundle\ProductBundle\Entity\ProductStatus">
+        <property name="translations">
+            <constraint name="Valid">
+                <option name="deep">true</option>
+            </constraint>
+        </property>
+    </class>
+
+    <class name="WellCommerce\Bundle\ProductBundle\Entity\ProductStatusTranslation">
         <property name="name">
             <constraint name="NotBlank" />
             <constraint name="NotNull" />

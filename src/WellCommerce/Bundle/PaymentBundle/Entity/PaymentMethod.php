@@ -20,11 +20,9 @@ use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\HierarchyTrait;
 /**
  * Class PaymentMethod
  *
- * @package WellCommerce\Bundle\PaymentBundle\Entity
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * @ORM\Table(name="payment_method")
- * @ORM\HasLifecycleCallbacks
  * @ORM\Entity(repositoryClass="WellCommerce\Bundle\PaymentBundle\Repository\PaymentMethodRepository")
  */
 class PaymentMethod

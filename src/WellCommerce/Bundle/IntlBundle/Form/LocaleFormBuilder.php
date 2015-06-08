@@ -13,6 +13,7 @@ namespace WellCommerce\Bundle\IntlBundle\Form;
 
 use WellCommerce\Bundle\FormBundle\Builder\AbstractFormBuilder;
 use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\FormBundle\DataTransformer\EntityToIdentifierTransformer;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
@@ -29,13 +30,24 @@ class LocaleFormBuilder extends AbstractFormBuilder implements FormBuilderInterf
     {
         $requiredData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'required_data',
-            'label' => $this->trans('form.required_data.label')
+            'label' => $this->trans('form.label.required')
         ]));
 
         $requiredData->addChild($this->getElement('select', [
             'name'    => 'code',
-            'label'   => $this->trans('locale.code.label'),
+            'label'   => $this->trans('locale.label.code'),
             'options' => $this->get('locale.repository')->getLocaleNames()
+        ]));
+
+        $requiredData->addChild($this->getElement('select', [
+            'name'        => 'currency',
+            'label'       => $this->trans('locale.label.currency'),
+            'options'     => $this->get('currency.collection')->getSelect([
+                'value_key' => 'id',
+                'label_key' => 'code',
+                'order_by'  => 'code'
+            ]),
+            'transformer' => new EntityToIdentifierTransformer($this->get('currency.repository'))
         ]));
 
         $form->addFilter($this->getFilter('no_code'));

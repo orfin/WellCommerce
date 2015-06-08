@@ -15,14 +15,14 @@ namespace WellCommerce\Bundle\LayoutBundle\Configurator;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
 use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\FormBundle\Conditions\Equals;
+use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
  * Class AbstractLayoutBoxConfigurator
  *
- * @package WellCommerce\Bundle\LayoutBundle\Configurator
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractLayoutBoxConfigurator extends AbstractContainer
+abstract class AbstractLayoutBoxConfigurator extends AbstractContainer implements LayoutBoxConfiguratorInterface
 {
     protected $type;
     protected $controllerService;
@@ -50,15 +50,36 @@ abstract class AbstractLayoutBoxConfigurator extends AbstractContainer
     /**
      * {@inheritdoc}
      */
-    protected function getFieldset(FormBuilderInterface $builder)
+    public function getType()
     {
-        $form          = $builder->getForm();
-        $boxTypeSelect = $form->getElement('boxType');
-        $boxTypeSelect->addOption($this->type, $this->type);
+        return $this->type;
+    }
 
-        $fieldset = $form->addChild($builder->getElement('fieldset', [
+    /**
+     * {@inheritdoc}
+     */
+    public function addFormFields(FormBuilderInterface $builder, FormInterface $form, $defaults)
+    {
+        $fieldset = $this->getFieldset($builder, $form);
+
+        $fieldset->addChild($builder->getElement('tip', [
+            'tip' => '<p>' . $this->trans('layout_box.configuration') . '</p>'
+        ]));
+
+        return $fieldset;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getFieldset(FormBuilderInterface $builder, FormInterface $form)
+    {
+        $boxTypeSelect = $this->getBoxTypeSelect($form);
+        $boxTypeSelect->addOptionToSelect($this->type, $this->type);
+
+        $fieldset = $form->addChild($builder->getElement('nested_fieldset', [
             'name'         => $this->getType(),
-            'label'        => $this->trans('Box settings'),
+            'label'        => $this->trans('layout_box.label.settings'),
             'dependencies' => [
                 $builder->getDependency('show', [
                     'field'     => $boxTypeSelect,
@@ -72,10 +93,12 @@ abstract class AbstractLayoutBoxConfigurator extends AbstractContainer
     }
 
     /**
-     * {@inheritdoc}
+     * @param FormInterface $form
+     *
+     * @return \WellCommerce\Bundle\FormBundle\Elements\Optioned\Select
      */
-    public function getType()
+    protected function getBoxTypeSelect(FormInterface $form)
     {
-        return $this->type;
+        return $form->getChildren()->get('required_data')->getChildren()->get('boxType');
     }
 }

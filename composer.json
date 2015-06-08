@@ -40,7 +40,7 @@
         "sensio/framework-extra-bundle": "~3.0",
         "incenteev/composer-parameter-handler": "~2.0",
         "knplabs/doctrine-behaviors": "1.1.*@dev",
-        "fzaninotto/faker": "1.5.x-dev",
+        "fzaninotto/faker": "1.5.0",
         "white-october/pagerfanta-bundle": "2.1.x-dev",
         "friendsofsymfony/jsrouting-bundle": "2.0.*@dev",
         "willdurand/js-translation-bundle": "2.1.*@dev",
@@ -60,8 +60,7 @@
         "react/child-process": "0.5.*@dev",
         "knplabs/packagist-api": "1.*@dev",
         "mcuelenaere/composer-revision-plugin": "0.1.*",
-        "hoa/websocket": "2.*@dev",
-        "wellcommerce/search-bundle": "dev-master"
+        "hoa/websocket": "2.*@dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",

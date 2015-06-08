@@ -53,13 +53,18 @@ class MediaUploader implements MediaUploaderInterface
      */
     protected $repository;
 
+    /**
+     * @var string
+     */
     protected $uploadPath;
 
     /**
      * Constructor
      *
+     * @param string                   $kernelDir
      * @param Filesystem               $filesystem
      * @param EventDispatcherInterface $eventDispatcher
+     * @param MediaRepositoryInterface $repository
      */
     public function __construct(
         $kernelDir,
@@ -86,21 +91,27 @@ class MediaUploader implements MediaUploaderInterface
 
         $media      = $this->repository->save($file, $dir);
         $uploadPath = $this->getUploadRootDir($dir);
-        $file->move(
-            $uploadPath,
-            $media->getPath()
-        );
-
+        $file->move($uploadPath, $media->getPath());
         $this->dispatchEvent(self::POST_UPLOAD_EVENT, $file);
 
         return $media;
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function delete(File $file)
+    {
+        $this->dispatchEvent(self::PRE_DELETE_EVENT, $file);
+
+        $this->dispatchEvent(self::POST_DELETE_EVENT, $file);
+    }
+
+    /**
      * Dispatches file event
      *
-     * @param      $name
-     * @param File $file
+     * @param string $name
+     * @param File   $file
      */
     private function dispatchEvent($name, File $file)
     {
@@ -108,7 +119,14 @@ class MediaUploader implements MediaUploaderInterface
         $this->eventDispatcher->dispatch($name, $event);
     }
 
-    private function getUploadRootDir($dir)
+    /**
+     * Returns upload directory
+     *
+     * @param string $dir
+     *
+     * @return string
+     */
+    public function getUploadRootDir($dir)
     {
         $dir = rtrim($dir, '/\\');
 
@@ -129,15 +147,5 @@ class MediaUploader implements MediaUploaderInterface
             $media->getId(),
             $media->getExtension()
         );
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function delete(File $file)
-    {
-        $this->dispatchEvent(self::PRE_DELETE_EVENT, $file);
-
-        $this->dispatchEvent(self::POST_DELETE_EVENT, $file);
     }
 }

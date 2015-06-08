@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\CmsBundle\Layout;
 
 use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 use WellCommerce\Bundle\LayoutBundle\Configurator\AbstractLayoutBoxConfigurator;
 use WellCommerce\Bundle\LayoutBundle\Configurator\LayoutBoxConfiguratorInterface;
 
@@ -26,9 +27,9 @@ class ContactBoxConfigurator extends AbstractLayoutBoxConfigurator implements La
     /**
      * {@inheritdoc}
      */
-    public function addFormFields(FormBuilderInterface $builder, $defaults)
+    public function addFormFields(FormBuilderInterface $builder, FormInterface $form, $defaults)
     {
-        $fieldset = $this->getFieldset($builder);
+        $fieldset = $this->getFieldset($builder, $form);
 
         $fieldset->addChild($builder->getElement('tip', [
             'tip' => '<p>'.$this->trans('contact.box.help').'</p>'

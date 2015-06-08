@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\MultiStoreBundle\Context;
 
 use Symfony\Component\HttpFoundation\RequestStack;
+use WellCommerce\Bundle\MultiStoreBundle\Entity\Shop;
 use WellCommerce\Bundle\MultiStoreBundle\Repository\ShopRepositoryInterface;
 
 /**
@@ -60,7 +61,23 @@ abstract class AbstractShopContext
     /**
      * {@inheritdoc}
      */
-    abstract public function getSessionBagNamespace();
+    public function setCurrentScope(Shop $shop = null)
+    {
+        $this->currentScope = $shop;
+        $this->setSessionVariables();
+    }
+
+    abstract public function setSessionVariables();
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasSessionPreviousData()
+    {
+        $sessionBag = $this->requestStack->getMasterRequest()->getSession();
+
+        return (bool)$sessionBag->has($this->getSessionBagNamespace());
+    }
 
     /**
      * {@inheritdoc}
@@ -76,4 +93,32 @@ abstract class AbstractShopContext
 
         return isset($scope['id']) ? $scope['id'] : null;
     }
+
+    /**
+     * Sets current shop scope by url
+     *
+     * @param string $host
+     */
+    public function setCurrentScopeByHost($host)
+    {
+        $result = $this->repository->findOneBy(['url' => $host]);
+        if (null !== $result) {
+            $this->setCurrentScope($result);
+        }
+    }
+
+    /**
+     * Determines current scope by host
+     *
+     * @param $host
+     */
+    public function determineCurrentScope($host)
+    {
+        $this->setCurrentScopeByHost($host);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    abstract public function getSessionBagNamespace();
 }

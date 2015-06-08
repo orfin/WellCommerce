@@ -12,14 +12,10 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Processor;
 
-use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
-use WellCommerce\Bundle\FormBundle\Elements\Fieldset;
-use WellCommerce\Bundle\FormBundle\Elements\Form;
 
 /**
  * Interface PaymentMethodProcessorInterface
  *
- * @package WellCommerce\Bundle\PaymentBundle\Processor
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface PaymentMethodProcessorInterface
@@ -27,35 +23,14 @@ interface PaymentMethodProcessorInterface
     /**
      * Returns processor alias
      *
-     * @return mixed
+     * @return string
      */
     public function getAlias();
 
     /**
      * Returns processor name
      *
-     * @return mixed
+     * @return string
      */
     public function getName();
-
-    /**
-     * Adds payment method configuration fieldset
-     *
-     * @param FormBuilderInterface $builder
-     * @param Form                 $form
-     * @param                      $resource
-     *
-     * @return Fieldset
-     */
-    public function addConfigurationFieldset(FormBuilderInterface $builder, Form $form, $resource);
-
-    /**
-     * Adds configuration fields
-     *
-     * @param FormBuilderInterface $builderInterface
-     * @param Fieldset             $fieldset
-     *
-     * @return mixed
-     */
-    public function addFields(FormBuilderInterface $builderInterface, Fieldset $fieldset);
 }

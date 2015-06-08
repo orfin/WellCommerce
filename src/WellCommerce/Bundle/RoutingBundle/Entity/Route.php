@@ -20,11 +20,12 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="type", type="string")
  * @ORM\DiscriminatorMap({
- *      "route"      = "WellCommerce\Bundle\RoutingBundle\Entity\Route",
- *      "product"    = "WellCommerce\Bundle\ProductBundle\Entity\ProductRoute",
- *      "producer"   = "WellCommerce\Bundle\ProducerBundle\Entity\ProducerRoute",
- *      "category"   = "WellCommerce\Bundle\CategoryBundle\Entity\CategoryRoute",
- *      "page"       = "WellCommerce\Bundle\CmsBundle\Entity\PageRoute",
+ *      "route"             = "WellCommerce\Bundle\RoutingBundle\Entity\Route",
+ *      "product"           = "WellCommerce\Bundle\ProductBundle\Entity\ProductRoute",
+ *      "product_status"    = "WellCommerce\Bundle\ProductBundle\Entity\ProductStatusRoute",
+ *      "producer"          = "WellCommerce\Bundle\ProducerBundle\Entity\ProducerRoute",
+ *      "category"          = "WellCommerce\Bundle\CategoryBundle\Entity\CategoryRoute",
+ *      "page"              = "WellCommerce\Bundle\CmsBundle\Entity\PageRoute"
  * })
  */
 class Route implements RouteInterface

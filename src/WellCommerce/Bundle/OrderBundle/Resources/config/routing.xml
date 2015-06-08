@@ -4,6 +4,8 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <import resource="routing/order_status.xml"/>
-    <import resource="routing/order_status_group.xml"/>
+    <import resource="routing/admin/order.xml" prefix="/admin/order/"/>
+    <import resource="routing/admin/order_status.xml" prefix="/admin/order/status/"/>
+    <import resource="routing/admin/order_status_group.xml" prefix="/admin/order/status/group/"/>
+    <import resource="routing/front/order.xml" prefix="/order/"/>
 </routes>

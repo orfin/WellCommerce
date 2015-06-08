@@ -12,6 +12,10 @@
         <default key="_controller">client.controller.front:loginAction</default>
     </route>
 
+    <route id="front.client.password" path="/password">
+        <default key="_controller">client.controller.front:passwordAction</default>
+    </route>
+
     <route id="front.client.register" path="/register">
         <default key="_controller">client.controller.front:registerAction</default>
     </route>
@@ -23,4 +27,8 @@
     <route id="front.client.orders" path="/orders/index">
         <default key="_controller">client.controller.front:ordersAction</default>
     </route>
+
+    <route id="front.client.login_check" path="/login_check" />
+
+    <route id="front.client.logout" path="/logout" />
 </routes>

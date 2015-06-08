@@ -25,19 +25,42 @@ use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
  */
 class ClientController extends AbstractFrontController implements FrontControllerInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
-
+        return [];
     }
 
-    public function loginAction(){
-
+    public function loginAction()
+    {
+        return [];
     }
 
-    public function registerAction(){
+    public function loginCheckAction(Request $request)
+    {
+    }
 
+    public function registerAction()
+    {
+        return [];
+    }
+
+    public function settingsAction()
+    {
+        return [];
+    }
+
+    public function wishListAction()
+    {
+        return [];
+    }
+
+    public function addressBookAction()
+    {
+        return [];
+    }
+
+    public function ordersAction()
+    {
+        return [];
     }
 }

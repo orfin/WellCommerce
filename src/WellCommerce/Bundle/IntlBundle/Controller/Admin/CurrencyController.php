@@ -23,4 +23,16 @@ use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
  */
 class CurrencyController extends AbstractAdminController
 {
+    /**
+     * Synchronizes exchange rates
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function syncExchangeRatesAction()
+    {
+        $this->get('currency.importer.ecb')->importExchangeRates();
+        $this->getManager()->getFlashHelper()->addSuccess('currency.flashes.success.exchange_rates_synchronization');
+
+        return $this->getManager()->getRedirectHelper()->redirectToAction('index');
+    }
 }

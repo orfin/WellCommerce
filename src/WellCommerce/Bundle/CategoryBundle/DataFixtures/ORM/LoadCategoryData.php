@@ -17,70 +17,65 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
+use WellCommerce\Bundle\RoutingBundle\Helper\Sluggable;
 
 /**
  * Class LoadCategoryData
  *
- * @package WellCommerce\Bundle\CategoryBundle\DataFixtures\ORM
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class LoadCategoryData extends AbstractDataFixture implements FixtureInterface, OrderedFixtureInterface
 {
+    const SAMPLES
+        = [
+            'Smart TVs',
+            'Streaming devices',
+            'Accessories',
+            'DVD & Blue-ray players',
+            'Audio players',
+            'Projectors',
+            'Home theater'
+        ];
+
     /**
      * {@inheritDoc}
      */
     public function load(ObjectManager $manager)
     {
-        $shop = $manager->getRepository('WellCommerceMultiStoreBundle:Shop')->findOneBy(['name' => 'WellCommerce']);
+        $shop = $this->getReference('shop');
 
-        foreach ($this->getSampleCategoriesTree() as $hierarchy => $sample) {
+        foreach (self::SAMPLES as $hierarchy => $name) {
             $category = new Category();
             $category->setEnabled(true);
             $category->setHierarchy($hierarchy);
             $category->setParent(null);
             $category->addShop($shop);
-            $category->translate('en')->setName($sample['name']);
+            $category->translate('en')->setName($name);
+            $category->translate('en')->setSlug(Sluggable::makeSlug($name));
             $category->mergeNewTranslations();
             $manager->persist($category);
+            $this->setReference('category_' . $name, $category);
         }
 
         $manager->flush();
-
-    }
-
-    protected function getSampleCategoriesTree()
-    {
-        return [
-            0 => [
-                'name' => 'Smart TVs',
-            ],
-            1 => [
-                'name' => 'Streaming devices',
-            ],
-            2 => [
-                'name' => 'Accessories',
-            ],
-            3 => [
-                'name' => 'DVD & Blue-ray players',
-            ],
-            4 => [
-                'name' => 'Audio players',
-            ],
-            5 => [
-                'name' => 'Projectors',
-            ],
-            6 => [
-                'name' => 'Projectors',
-            ],
-        ];
-
     }
 
     /**
-     * {@inheritDoc}
+     * Sample demo data
+     *
+     * @return array
      */
-    public function getOrder()
+    protected function getSampleCategoriesTree()
     {
-        return 100;
+        return [
+            0 => ['name' => 'Smart TVs'],
+            1 => ['name' => 'Streaming devices'],
+            2 => ['name' => 'Accessories'],
+            3 => ['name' => 'DVD & Blue-ray players'],
+            4 => ['name' => 'Audio players'],
+            5 => ['name' => 'Projectors'],
+            6 => ['name' => 'Home theater'],
+        ];
     }
 }
+

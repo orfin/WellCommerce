@@ -13,13 +13,13 @@
 namespace WellCommerce\Bundle\CategoryBundle\Layout;
 
 use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 use WellCommerce\Bundle\LayoutBundle\Configurator\AbstractLayoutBoxConfigurator;
 use WellCommerce\Bundle\LayoutBundle\Configurator\LayoutBoxConfiguratorInterface;
 
 /**
  * Class CategoryInfoBoxConfigurator
  *
- * @package WellCommerce\Bundle\CategoryBundle\Configurator
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class CategoryInfoBoxConfigurator extends AbstractLayoutBoxConfigurator implements LayoutBoxConfiguratorInterface
@@ -27,12 +27,12 @@ class CategoryInfoBoxConfigurator extends AbstractLayoutBoxConfigurator implemen
     /**
      * {@inheritdoc}
      */
-    public function addFormFields(FormBuilderInterface $builder, $defaults)
+    public function addFormFields(FormBuilderInterface $builder, FormInterface $form, $defaults)
     {
-        $fieldset = $this->getFieldset($builder);
+        $fieldset = $this->getFieldset($builder, $form);
 
         $fieldset->addChild($builder->getElement('tip', [
-            'tip' => '<p>'.$this->trans('Choose categories which should be not visible in box.').'</p>'
+            'tip' => '<p>' . $this->trans('Choose categories which should be not visible in box.') . '</p>'
         ]));
     }
 }

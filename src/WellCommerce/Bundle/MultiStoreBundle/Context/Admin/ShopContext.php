@@ -12,10 +12,8 @@
 
 namespace WellCommerce\Bundle\MultiStoreBundle\Context\Admin;
 
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use WellCommerce\Bundle\MultiStoreBundle\Context\AbstractShopContext;
 use WellCommerce\Bundle\MultiStoreBundle\Context\ShopContextInterface;
-use WellCommerce\Bundle\MultiStoreBundle\Entity\Shop;
 
 /**
  * Class ShopContext
@@ -34,56 +32,17 @@ class ShopContext extends AbstractShopContext implements ShopContextInterface
         return self::SESSION_BAG_NAMESPACE;
     }
 
-    public function determineCurrentScope($host)
-    {
-        $this->setCurrentScopeByHost($host);
-    }
-
     /**
-     * Sets current shop scope by url
-     *
-     * @param string $host
+     * Stores context variables in session
      */
-    public function setCurrentScopeByHost($host)
+    public function setSessionVariables()
     {
-        $result = $this->repository->findOneBy(['url' => $host]);
-        $this->setCurrentScope($result);
-    }
+        $sessionBag = $this->requestStack->getMasterRequest()->getSession();
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setCurrentScope(Shop $shop = null)
-    {
-        $this->currentScope = $shop;
-        $this->setSessionVariables();
-    }
-
-    protected function setSessionVariables()
-    {
-        $sessionBag  = $this->requestStack->getMasterRequest()->getSession();
-        $sessionData = [];
-
-        if (null !== $this->currentScope) {
-            $sessionData = [
-                'id'   => $this->currentScope->getId(),
-                'name' => $this->currentScope->getName(),
-                'url'  => $this->currentScope->getUrl(),
-            ];
-        }
-
-        $sessionBag->set(self::SESSION_BAG_NAMESPACE, $sessionData);
-    }
-
-    /**
-     * Checks whether session contains previous shop data
-     *
-     * @param SessionInterface $sessionBag
-     *
-     * @return bool
-     */
-    protected function hasSessionPreviousData(SessionInterface $sessionBag)
-    {
-        return (bool)$sessionBag->has(self::SESSION_BAG_NAMESPACE);
+        $sessionBag->set(self::SESSION_BAG_NAMESPACE, [
+            'id'   => (null !== $this->currentScope) ? $this->currentScope->getId() : 0,
+            'name' => (null !== $this->currentScope) ? $this->currentScope->getName() : null,
+            'url'  => (null !== $this->currentScope) ? $this->currentScope->getUrl() : null,
+        ]);
     }
 }

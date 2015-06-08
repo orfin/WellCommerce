@@ -12,30 +12,14 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\Provider;
 
-use WellCommerce\Bundle\CoreBundle\Provider\ProviderInterface;
+use WellCommerce\Bundle\CoreBundle\Provider\AbstractProvider;
 
 /**
  * Class CategoryProductsProvider
  *
- * @package WellCommerce\Bundle\CategoryBundle\Provider
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CategoryProductsProvider implements ProviderInterface
+class CategoryProductsProvider extends AbstractProvider
 {
-    protected $resource;
 
-    public function getType()
-    {
-        return 'category_products';
-    }
-
-    public function setCurrentResource($resource)
-    {
-        $this->resource = $resource;
-    }
-
-    public function getCurrentResource()
-    {
-        return $this->resource;
-    }
 }

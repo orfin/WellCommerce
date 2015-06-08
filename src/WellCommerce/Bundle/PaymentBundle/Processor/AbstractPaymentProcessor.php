@@ -12,55 +12,19 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Processor;
 
-use Doctrine\Common\Util\ClassUtils;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
-use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
-use WellCommerce\Bundle\FormBundle\Elements\Fieldset;
-use WellCommerce\Bundle\FormBundle\Elements\Form;
 
 /**
  * Class AbstractPaymentProcessor
  *
- * @package WellCommerce\Bundle\PaymentBundle\Processor
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 abstract class AbstractPaymentProcessor extends AbstractContainer implements PaymentMethodProcessorInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function addConfigurationFieldset(FormBuilderInterface $builder, Form $form, $resource)
-    {
-        $fieldset = $form->addChild($builder->getElement('fieldset', [
-            'name'  => $this->getAlias(),
-            'label' => $this->getName()
-        ]));
-
-        $this->addFields($builder, $fieldset);
-
-        return $fieldset;
-    }
+    protected $alias;
 
     public function getAlias()
     {
-        return strtolower($this->getClass());
-    }
-
-    private function getClass()
-    {
-        $class = ClassUtils::getRealClass(ltrim(get_class($this), '\\'));
-        $parts = explode('\\', $class);
-
-        return end($parts);
-    }
-
-    public function getName()
-    {
-        return $this->getClass();
-    }
-
-    public function addFields(FormBuilderInterface $builderInterface, Fieldset $fieldset)
-    {
-        return false;
+        return $this->alias;
     }
 }

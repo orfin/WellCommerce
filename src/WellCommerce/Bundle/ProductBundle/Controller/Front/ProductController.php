@@ -15,7 +15,7 @@ namespace WellCommerce\Bundle\ProductBundle\Controller\Front;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
-use WellCommerce\Bundle\ProductBundle\Repository\ProductRepositoryInterface;
+use WellCommerce\Bundle\WebBundle\Breadcrumb\BreadcrumbItem;
 
 /**
  * Class ProductController
@@ -26,17 +26,18 @@ use WellCommerce\Bundle\ProductBundle\Repository\ProductRepositoryInterface;
  */
 class ProductController extends AbstractFrontController implements FrontControllerInterface
 {
-    /**
-     * @var ProductRepositoryInterface
-     */
-    protected $repository;
-
     public function indexAction(Request $request)
     {
-        $resource = $this->findOr404($request);
+        $product = $this->findOr404($request);
+
+        $this->addBreadCrumbItem(new BreadcrumbItem([
+            'name' => $product->translate()->getName(),
+        ]));
+
+        $this->getManager()->getProductProvider()->setCurrentProduct($product);
 
         return [
-            'product' => $resource
+            'product' => $product
         ];
     }
 }

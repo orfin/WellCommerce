@@ -20,7 +20,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Class Media
  *
- * @package WellCommerce\Bundle\MediaBundle\Entity
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * @ORM\Table(name="media")
@@ -36,6 +35,7 @@ class Media
      * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\ProductPhoto", mappedBy="photo", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     protected $productPhotos;
+    
     /**
      * @var integer
      *
@@ -43,29 +43,37 @@ class Media
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
+    
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
      */
-    private $name;
+    protected $name;
+    
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $path;
+    protected $path;
+    
     /**
      * @ORM\Column(type="string", length=12, nullable=true)
      */
-    private $extension;
+    protected $extension;
+    
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
      */
-    private $mime;
+    protected $mime;
+    
     /**
      * @ORM\Column(type="string", length=12, nullable=true)
      */
-    private $size;
+    protected $size;
 
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->productPhotos = new ArrayCollection();

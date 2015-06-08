@@ -19,7 +19,6 @@ use Symfony\Component\DependencyInjection\Reference;
 /**
  * Class RegisterPaymentMethodProcessorPass
  *
- * @package WellCommerce\Bundle\PaymentBundle\DependencyInjection\Compiler
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class RegisterPaymentMethodProcessorPass implements CompilerPassInterface

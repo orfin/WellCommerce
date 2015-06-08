@@ -11,6 +11,7 @@
             <argument type="service" id="event_dispatcher"/>
             <argument type="service" id="doctrine_helper"/>
             <argument type="service" id="translator"/>
+            <argument type="service" id="request_helper"/>
             <call method="setRepository">
                 <argument type="service" id="order_status.repository"/>
             </call>
@@ -46,6 +47,10 @@
             <argument key="identifier">order_status</argument>
             <argument type="service" id="order_status.dataset.loader"/>
             <configurator service="dataset.configurator" method="configure"/>
+        </service>
+
+        <service id="order_status.collection" parent="dataset.collection_builder.factory">
+            <argument type="service" id="order_status.dataset"/>
         </service>
 
         <service id="order_status.datagrid" class="WellCommerce\Bundle\OrderBundle\DataGrid\OrderStatusDataGrid">

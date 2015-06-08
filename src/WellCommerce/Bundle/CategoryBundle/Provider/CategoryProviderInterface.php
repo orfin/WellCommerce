@@ -16,43 +16,30 @@ use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CoreBundle\Provider\ProviderInterface;
 
 /**
- * Interface CategoryProviderInterface
+ * Class CategoryProvider
  *
- * @author Adam Piotrowski <adam@wellcommerce.org>
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface CategoryProviderInterface extends ProviderInterface
 {
-    const CATEGORY_TREE_LIMIT = 10;
-    const CATEGORY_ORDER_BY   = 'name';
-    const CATEGORY_ORDER_DIR  = 'asc';
-
     /**
-     * Returns categories tree
-     *
-     * @param array $params
-     *
-     * @return array
-     */
-    public function getCategoriesTree(array $params = []);
-
-    /**
-     * Sets current category as resource
+     * Sets currently viewed category
      *
      * @param Category $category
      */
     public function setCurrentCategory(Category $category);
 
     /**
-     * Returns identifier for currently selected category
-     *
-     * @return int|null
-     */
-    public function getCurrentCategoryId();
-
-    /**
-     * Returns current category
+     * Returns an instance of currently viewed category
      *
      * @return Category
      */
-    public function getCurrentResource();
+    public function getCurrentCategory();
+
+    /**
+     * Checks whether provider contains category object
+     *
+     * @return bool
+     */
+    public function hasCurrentCategory();
 }

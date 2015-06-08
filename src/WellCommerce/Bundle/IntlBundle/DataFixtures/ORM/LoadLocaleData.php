@@ -12,8 +12,6 @@
 
 namespace WellCommerce\Bundle\IntlBundle\DataFixtures\ORM;
 
-use Doctrine\Common\DataFixtures\FixtureInterface;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
 use WellCommerce\Bundle\IntlBundle\Entity\Locale;
@@ -21,28 +19,23 @@ use WellCommerce\Bundle\IntlBundle\Entity\Locale;
 /**
  * Class LoadLocaleData
  *
- * @package WellCommerce\Bundle\IntlBundle\DataFixtures\ORM
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LoadLocaleData extends AbstractDataFixture implements FixtureInterface, OrderedFixtureInterface
+class LoadLocaleData extends AbstractDataFixture
 {
     /**
      * {@inheritDoc}
      */
     public function load(ObjectManager $manager)
     {
+        $currency = $this->getReference('currency_USD');
+
         $en = new Locale();
         $en->setCode('en');
+        $en->setCurrency($currency);
         $manager->persist($en);
-
         $manager->flush();
-    }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function getOrder()
-    {
-        return 0;
+        $this->setReference('locale_en', $en);
     }
 }

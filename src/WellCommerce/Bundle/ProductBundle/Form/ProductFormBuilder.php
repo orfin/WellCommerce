@@ -32,12 +32,8 @@ class ProductFormBuilder extends AbstractFormBuilder
      */
     public function buildForm(FormInterface $form)
     {
-        $currencies = $this->get('currency.collection')->getSelect([
-            'label_key' => 'code',
-            'order_by'  => 'code',
-        ]);
-
-        $vatValues = $this->get('tax.collection')->getSelect();
+        $currencies = $this->get('currency.provider')->getSelect();
+        $vatValues  = $this->get('tax.collection')->getSelect();
 
         $mainData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'main_data',
@@ -78,8 +74,8 @@ class ProductFormBuilder extends AbstractFormBuilder
         $mainData->addChild($this->getElement('select', [
             'name'        => 'producer',
             'label'       => $this->trans('product.producer.label'),
-            'options'     => $this->get('producer.collection')->getSelect(),
-            'transformer' => new EntityToIdentifierTransformer($this->get('producer.repository'))
+            'options'     => $this->get('producer.collection.admin')->getSelect(),
+            'transformer' => new EntityToIdentifierTransformer($this->get('producer.repository')),
         ]));
 
         $metaData = $form->addChild($this->getElement('nested_fieldset', [
@@ -94,17 +90,17 @@ class ProductFormBuilder extends AbstractFormBuilder
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
-            'name'  => 'metaTitle',
+            'name'  => 'meta.title',
             'label' => $this->trans('meta.title.label')
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
-            'name'  => 'metaKeywords',
+            'name'  => 'meta.keywords',
             'label' => $this->trans('meta.keywords.label'),
         ]));
 
         $languageData->addChild($this->getElement('text_area', [
-            'name'  => 'metaDescription',
+            'name'  => 'meta.description',
             'label' => $this->trans('meta.description.label'),
         ]));
 
@@ -129,9 +125,21 @@ class ProductFormBuilder extends AbstractFormBuilder
             'label' => $this->trans('fieldset.prices.label')
         ]));
 
-        $vatField = $pricePane->addChild($this->getElement('select', [
-            'name'            => 'tax',
-            'label'           => $this->trans('product.tax.label'),
+        $buyPriceSettings = $pricePane->addChild($this->getElement('nested_fieldset', [
+            'name'  => 'buy_price_settings',
+            'label' => $this->trans('product.buy_price.settings.label'),
+            'class' => 'priceGroup'
+        ]));
+
+        $buyPriceSettings->addChild($this->getElement('select', [
+            'name'    => 'buyPrice.currency',
+            'label'   => $this->trans('product.buy_price.currency.label'),
+            'options' => $currencies,
+        ]));
+
+        $buyPriceTax = $buyPriceSettings->addChild($this->getElement('select', [
+            'name'            => 'buyPriceTax',
+            'label'           => $this->trans('product.buy_price.tax.label'),
             'options'         => $vatValues,
             'addable'         => true,
             'onAdd'           => 'onTaxAdd',
@@ -139,42 +147,44 @@ class ProductFormBuilder extends AbstractFormBuilder
             'transformer'     => new EntityToIdentifierTransformer($this->get('tax.repository'))
         ]));
 
-        $pricePane->addChild($this->getElement('select', [
-            'name'        => 'sellCurrency',
-            'label'       => $this->trans('Currency for sell prices'),
-            'options'     => $currencies,
-            'transformer' => new EntityToIdentifierTransformer($this->get('currency.repository'))
-        ]));
-
-        $pricePane->addChild($this->getElement('select', [
-            'name'        => 'buyCurrency',
-            'label'       => $this->trans('Currency for buy prices'),
-            'options'     => $currencies,
-            'transformer' => new EntityToIdentifierTransformer($this->get('currency.repository'))
-        ]));
-
-        $pricePane->addChild($this->getElement('price_editor', [
-            'name'      => 'buyPrice',
-            'label'     => $this->trans('product.buy_price.label'),
+        $buyPriceSettings->addChild($this->getElement('price_editor', [
+            'name'      => 'buyPrice.amount',
+            'label'     => $this->trans('product.buy_price.amount.label'),
             'filters'   => [
                 $this->getFilter('comma_to_dot_changer'),
             ],
-            'vat_field' => $vatField,
+            'vat_field' => $buyPriceTax,
         ]));
 
-        $standardPrice = $pricePane->addChild($this->getElement('nested_fieldset', [
-            'name'  => 'standard_price',
-            'label' => $this->trans('Standard sell price'),
+        $sellPriceSettings = $pricePane->addChild($this->getElement('nested_fieldset', [
+            'name'  => 'sell_price_settings',
+            'label' => $this->trans('product.sell_price.settings.label'),
             'class' => 'priceGroup'
         ]));
 
-        $priceField = $standardPrice->addChild($this->getElement('price_editor', [
-            'name'      => 'sellPrice',
-            'label'     => $this->trans('product.sell_price.label'),
+        $sellPriceSettings->addChild($this->getElement('select', [
+            'name'    => 'sellPrice.currency',
+            'label'   => $this->trans('product.sell_price.currency.label'),
+            'options' => $currencies,
+        ]));
+
+        $sellPriceTax = $sellPriceSettings->addChild($this->getElement('select', [
+            'name'            => 'sellPriceTax',
+            'label'           => $this->trans('product.sell_price.tax.label'),
+            'options'         => $vatValues,
+            'addable'         => true,
+            'onAdd'           => 'onTaxAdd',
+            'add_item_prompt' => $this->trans('product.tax.add_item_prompt'),
+            'transformer'     => new EntityToIdentifierTransformer($this->get('tax.repository'))
+        ]));
+
+        $sellPriceAmount = $sellPriceSettings->addChild($this->getElement('price_editor', [
+            'name'      => 'sellPrice.amount',
+            'label'     => $this->trans('product.sell_price.amount.label'),
             'filters'   => [
                 $this->getFilter('comma_to_dot_changer'),
             ],
-            'vat_field' => $vatField,
+            'vat_field' => $sellPriceTax,
         ]));
 
         $stockData = $form->addChild($this->getElement('nested_fieldset', [
@@ -212,24 +222,24 @@ class ProductFormBuilder extends AbstractFormBuilder
         ]));
 
         $stockData->addChild($this->getElement('text_field', [
-            'name'    => 'width',
-            'label'   => $this->trans('product.width.label'),
+            'name'    => 'dimension.width',
+            'label'   => $this->trans('product.dimension.width.label'),
             'filters' => [
                 $this->getFilter('comma_to_dot_changer'),
             ],
         ]));
 
         $stockData->addChild($this->getElement('text_field', [
-            'name'    => 'height',
-            'label'   => $this->trans('product.height.label'),
+            'name'    => 'dimension.height',
+            'label'   => $this->trans('product.dimension.height.label'),
             'filters' => [
                 $this->getFilter('comma_to_dot_changer'),
             ],
         ]));
 
         $stockData->addChild($this->getElement('text_field', [
-            'name'    => 'depth',
-            'label'   => $this->trans('product.depth.label'),
+            'name'    => 'dimension.depth',
+            'label'   => $this->trans('product.dimension.depth.label'),
             'filters' => [
                 $this->getFilter('comma_to_dot_changer'),
             ],
@@ -276,7 +286,7 @@ class ProductFormBuilder extends AbstractFormBuilder
         $statusesData->addChild($this->getElement('multi_select', [
             'name'        => 'statuses',
             'label'       => $this->trans('Statuses'),
-            'options'     => $this->get('product_status.collection')->getSelect(),
+            'options'     => $this->get('product_status.collection.admin')->getSelect(),
             'transformer' => new CollectionToArrayTransformer($this->get('product_status.repository'))
         ]));
 
@@ -288,8 +298,8 @@ class ProductFormBuilder extends AbstractFormBuilder
         $attributesData->addChild($this->getElement('product_variants_editor', [
             'name'               => 'attributes',
             'label'              => $this->trans('Attributes'),
-            'price_field'        => $priceField,
-            'vat_field'          => $vatField,
+            'price_field'        => $sellPriceAmount,
+            'vat_field'          => $sellPriceTax,
             'vat_values'         => $vatValues,
             'category_field'     => $categoriesField,
             'availability_field' => $availabilityField,

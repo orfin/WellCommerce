@@ -18,7 +18,6 @@ use WellCommerce\Bundle\MediaBundle\Entity\Media;
 /**
  * Class MediaRepository
  *
- * @package WellCommerce\Bundle\MediaBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class MediaRepository extends AbstractEntityRepository implements MediaRepositoryInterface

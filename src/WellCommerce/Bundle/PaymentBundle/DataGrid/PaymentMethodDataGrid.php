@@ -33,7 +33,7 @@ class PaymentMethodDataGrid extends AbstractDataGrid implements DataGridInterfac
     {
         $collection->add(new Column([
             'id'         => 'id',
-            'caption'    => $this->trans('payment.id'),
+            'caption'    => $this->trans('payment.id.label'),
             'sorting'    => new Sorting([
                 'default_order' => Sorting::SORT_DIR_DESC,
             ]),
@@ -48,7 +48,13 @@ class PaymentMethodDataGrid extends AbstractDataGrid implements DataGridInterfac
 
         $collection->add(new Column([
             'id'      => 'name',
-            'caption' => $this->trans('payment.name')
+            'caption' => $this->trans('payment.name.label')
         ]));
+
+        $collection->add(new Column([
+            'id'      => 'processor',
+            'caption' => $this->trans('payment.processor.label')
+        ]));
+
     }
 }

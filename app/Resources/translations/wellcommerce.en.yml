@@ -1,4 +1,3 @@
-#This file was auto-generated. Please do not change it directly.
 admin:
     menu:
         attribute_group: 'Variant groups'
@@ -36,43 +35,84 @@ admin:
         user_management: Administrators
         package: Packages
         channel: Channels
-        smuggler: Package management
-        multi_store: Multistore management
+        smuggler: 'Package management'
+        multi_store: 'Multistore management'
         company: Companies
         shop: Shops
         unit: Units
-        order_status: Order statuses
-        order_status_group: Order status groups
-
+        order_status: 'Order statuses'
+        order_status_group: 'Order status groups'
+        user: Administrators
+form:
+    label:
+        required_fields: '* required fields'
 package:
     heading:
-        index:  Packages
+        index: Packages
         install: Install
         update: Update
         remove: Remove
     fieldset:
-        progress: Instalation progress
-        information: Information about package
+        progress: 'Instalation progress'
+        information: 'Information about package'
     button:
-        install:  Install package
-        update:   Update package
-        sync:     Sync packages
-        run:     Run updater
+        install: 'Install package'
+        update: 'Update package'
+        sync: 'Sync packages'
+        run: 'Run updater'
     label:
-        id:  Id
-        name: Short name
-        full_name:  Full name
+        id: Id
+        name: 'Short name'
+        full_name: 'Full name'
         vendor: Vendor
-        local_version: Local version
-        remote_version: Remote version
-        created_at: Created at
-        updated_at: Updated at
-        console_output: Operation progress
-        output: Console output
-        choose_version: Choose version
-        install: Install package
-        update: Update package
-        remove: Remove package
+        local_version: 'Local version'
+        remote_version: 'Remote version'
+        created_at: 'Created at'
+        updated_at: 'Updated at'
+        console_output: 'Operation progress'
+        output: 'Console output'
+        choose_version: 'Choose version'
+        install: 'Install package'
+        update: 'Update package'
+        remove: 'Remove package'
     flashes:
-        sync_success: Package synchronization succeded
+        sync_success: 'Package synchronization succeded'
+dictionary:
+    heading:
+        index: Translations
+        add: 'Add new translation'
+        edit: 'Edit translation'
+    label:
+        identifier: Identifier
+client:
+    heading:
+        login: 'Sign in'
+        register: 'Sign up'
+    form:
+        label:
+            first_name: Firstname
+            last_name: Lastname
+            email: E-mail
+            phone: Phone
+            password: Password
+            client_group: Group
+            discount: Discount
+        error:
+            first_name:
+                empty: 'Firstname cannot be empty'
+            last_name:
+                empty: 'Firstname cannot be empty'
+        button:
+            login: 'Sign in'
+            register: 'Sign up'
+    link:
+        my_account: 'My account'
+        login: 'Sign in / Sign up'
+        logout: Logout
+        reset_password: 'Reset password'
+cart:
+    button:
+        add: 'Add to cart'
+    link:
+        checkout: 'Go to checkout'
 

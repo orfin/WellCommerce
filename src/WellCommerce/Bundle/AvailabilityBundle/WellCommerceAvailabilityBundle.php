@@ -17,7 +17,6 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 /**
  * Class WellCommerceAvailabilityBundle
  *
- * @package WellCommerce\Bundle\AvailabilityBundle
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class WellCommerceAvailabilityBundle extends Bundle

@@ -12,31 +12,32 @@
 
 namespace WellCommerce\Bundle\UnitBundle\DataFixtures\ORM;
 
-use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
 use WellCommerce\Bundle\UnitBundle\Entity\Unit;
 
 /**
  * Class LoadUnitData
  *
- * @package WellCommerce\Bundle\UnitBundle\DataFixtures\ORM
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LoadUnitData implements FixtureInterface
+class LoadUnitData extends AbstractDataFixture
 {
+    const SAMPLES = ['pcs.', 'set'];
+
     /**
      * {@inheritDoc}
      */
     public function load(ObjectManager $manager)
     {
-        $unit = new Unit();
-        $unit->translate('pl')->setName('szt');
-        $unit->translate('en')->setName('pcs');
-        $unit->translate('de')->setName('pcs');
-        $unit->translate('fr')->setName('pcs');
-        $unit->mergeNewTranslations();
+        foreach (self::SAMPLES as $name) {
+            $unit = new Unit();
+            $unit->translate('en')->setName($name);
+            $unit->mergeNewTranslations();
+            $manager->persist($unit);
+            $this->setReference('unit_' . $name, $unit);
+        }
 
-        $manager->persist($unit);
         $manager->flush();
     }
 }

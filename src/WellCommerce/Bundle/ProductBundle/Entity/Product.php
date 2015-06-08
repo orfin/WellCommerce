@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\ProductBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\PersistentCollection;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroup;
 use WellCommerce\Bundle\AvailabilityBundle\Entity\Availability;
@@ -22,7 +21,9 @@ use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\EnableableTrait;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\HierarchyTrait;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\PhotoTrait;
-use WellCommerce\Bundle\IntlBundle\Entity\Currency;
+use WellCommerce\Bundle\CoreBundle\Entity\Dimension;
+use WellCommerce\Bundle\CoreBundle\Entity\Price;
+use WellCommerce\Bundle\MultiStoreBundle\Entity\Shop;
 use WellCommerce\Bundle\TaxBundle\Entity\Tax;
 use WellCommerce\Bundle\UnitBundle\Entity\Unit;
 
@@ -51,36 +52,30 @@ class Product
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(name="sku", type="string", length=64, unique=false)
      */
-    private $sku;
+    protected $sku;
 
     /**
      * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\ProducerBundle\Entity\Producer")
      * @ORM\JoinColumn(name="producer_id", referencedColumnName="id", onDelete="SET NULL")
      */
-    private $producer;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\TaxBundle\Entity\Tax")
-     * @ORM\JoinColumn(name="tax_id", referencedColumnName="id", onDelete="SET NULL")
-     */
-    private $tax;
+    protected $producer;
 
     /**
      * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\UnitBundle\Entity\Unit")
      * @ORM\JoinColumn(name="unit_id", referencedColumnName="id", onDelete="SET NULL")
      */
-    private $unit;
+    protected $unit;
 
     /**
      * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\AvailabilityBundle\Entity\Availability")
      * @ORM\JoinColumn(name="availability_id", referencedColumnName="id", onDelete="SET NULL")
      */
-    private $availability;
+    protected $availability;
 
     /**
      * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\CategoryBundle\Entity\Category", inversedBy="products")
@@ -89,7 +84,7 @@ class Product
      *      inverseJoinColumns={@ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="CASCADE")}
      * )
      */
-    private $categories;
+    protected $categories;
 
     /**
      * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\ProductStatus", inversedBy="products")
@@ -98,7 +93,7 @@ class Product
      *      inverseJoinColumns={@ORM\JoinColumn(name="product_status_id", referencedColumnName="id", onDelete="CASCADE")}
      * )
      */
-    private $statuses;
+    protected $statuses;
 
     /**
      * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\MultiStoreBundle\Entity\Shop", inversedBy="products")
@@ -107,98 +102,78 @@ class Product
      *      inverseJoinColumns={@ORM\JoinColumn(name="shop_id", referencedColumnName="id", onDelete="CASCADE")}
      * )
      */
-    private $shops;
+    protected $shops;
 
     /**
      * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\ProductPhoto", mappedBy="product", cascade={"persist"}, orphanRemoval=true)
      */
-    private $productPhotos;
+    protected $productPhotos;
 
     /**
      * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute", mappedBy="product", cascade={"all"}, orphanRemoval=true)
      */
-    private $attributes;
+    protected $attributes;
 
     /**
      * @var float
      *
      * @ORM\Column(name="stock", type="decimal", precision=15, scale=4)
      */
-    private $stock;
+    protected $stock;
 
     /**
-     * @var float
-     *
-     * @ORM\Column(name="buy_price", type="decimal", precision=15, scale=4)
+     * @ORM\Embedded(class = "WellCommerce\Bundle\CoreBundle\Entity\Price", columnPrefix = "buy_price_")
      */
-    private $buyPrice;
+    protected $buyPrice;
 
     /**
-     * @var float
-     *
-     * @ORM\Column(name="sell_price", type="decimal", precision=15, scale=4)
+     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\TaxBundle\Entity\Tax")
+     * @ORM\JoinColumn(name="buy_tax_id", referencedColumnName="id", onDelete="SET NULL")
      */
-    private $sellPrice;
+    protected $buyPriceTax;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\IntlBundle\Entity\Currency")
-     * @ORM\JoinColumn(name="buy_currency_id", referencedColumnName="id", onDelete="SET NULL")
+     * @ORM\Embedded(class = "WellCommerce\Bundle\CoreBundle\Entity\Price", columnPrefix = "sell_price_")
      */
-    private $buyCurrency;
+    protected $sellPrice;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\TaxBundle\Entity\Tax")
+     * @ORM\JoinColumn(name="sell_tax_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    protected $sellPriceTax;
 
     /**
      * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroup")
      * @ORM\JoinColumn(name="attribute_group_id", referencedColumnName="id", onDelete="SET NULL")
      */
-    private $attributeGroup;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\IntlBundle\Entity\Currency")
-     * @ORM\JoinColumn(name="sell_currency_id", referencedColumnName="id", onDelete="SET NULL")
-     */
-    private $sellCurrency;
+    protected $attributeGroup;
 
     /**
      * @var bool
      *
      * @ORM\Column(name="track_stock", type="boolean")
      */
-    private $trackStock;
+    protected $trackStock;
 
     /**
      * @var float
      *
      * @ORM\Column(name="weight", type="decimal", precision=15, scale=4)
      */
-    private $weight;
+    protected $weight;
 
     /**
-     * @var float
-     *
-     * @ORM\Column(name="width", type="decimal", precision=15, scale=4)
+     * @ORM\Embedded(class = "WellCommerce\Bundle\CoreBundle\Entity\Dimension", columnPrefix = "dimension_")
      */
-    private $width;
-
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="height", type="decimal", precision=15, scale=4)
-     */
-    private $height;
-
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="depth", type="decimal", precision=15, scale=4)
-     */
-    private $depth;
+    protected $dimension;
 
     /**
      * @var float
      *
      * @ORM\Column(name="package_size", type="decimal", precision=15, scale=4)
      */
-    private $packageSize;
+    protected $packageSize;
 
     /**
      * Constructor
@@ -209,6 +184,10 @@ class Product
         $this->productPhotos = new ArrayCollection();
         $this->statuses      = new ArrayCollection();
         $this->attributes    = new ArrayCollection();
+        $this->shops         = new ArrayCollection();
+        $this->dimension     = new Dimension();
+        $this->sellPrice     = new Price();
+        $this->buyPrice      = new Price();
     }
 
     /**
@@ -259,26 +238,6 @@ class Product
     public function setProducer($producer)
     {
         $this->producer = $producer;
-    }
-
-    /**
-     * Returns product tax
-     *
-     * @return mixed
-     */
-    public function getTax()
-    {
-        return $this->tax;
-    }
-
-    /**
-     * Sets product tax
-     *
-     * @param Tax $tax
-     */
-    public function setTax(Tax $tax)
-    {
-        $this->tax = $tax;
     }
 
     /**
@@ -398,7 +357,6 @@ class Product
      */
     public function setProductPhotos(ArrayCollection $photos)
     {
-        $this->synchronizeCollection($this->productPhotos, $photos);
         $this->productPhotos = $photos;
     }
 
@@ -443,49 +401,9 @@ class Product
     }
 
     /**
-     * Returns buy currency
-     *
-     * @return Currency
-     */
-    public function getBuyCurrency()
-    {
-        return $this->buyCurrency;
-    }
-
-    /**
-     * Sets buy currency for product
-     *
-     * @param Currency $buyCurrency
-     */
-    public function setBuyCurrency(Currency $buyCurrency)
-    {
-        $this->buyCurrency = $buyCurrency;
-    }
-
-    /**
-     * Returns sell currency
-     *
-     * @return Currency
-     */
-    public function getSellCurrency()
-    {
-        return $this->sellCurrency;
-    }
-
-    /**
-     * Sets sell currency for product
-     *
-     * @param Currency $sellCurrency
-     */
-    public function setSellCurrency($sellCurrency)
-    {
-        $this->sellCurrency = $sellCurrency;
-    }
-
-    /**
      * Returns product sell price
      *
-     * @return float
+     * @return \WellCommerce\Bundle\CoreBundle\Entity\Price
      */
     public function getSellPrice()
     {
@@ -543,63 +461,19 @@ class Product
     }
 
     /**
-     * Returns product width
-     *
-     * @return float
+     * @return \WellCommerce\Bundle\CoreBundle\Entity\Dimension
      */
-    public function getWidth()
+    public function getDimension()
     {
-        return $this->width;
+        return $this->dimension;
     }
 
     /**
-     * Sets product width
-     *
-     * @param float $width
+     * @param mixed $dimension
      */
-    public function setWidth($width)
+    public function setDimension($dimension)
     {
-        $this->width = $width;
-    }
-
-    /**
-     * Returns product height
-     *
-     * @return float
-     */
-    public function getHeight()
-    {
-        return $this->height;
-    }
-
-    /**
-     * Sets product height
-     *
-     * @param float $height
-     */
-    public function setHeight($height)
-    {
-        $this->height = $height;
-    }
-
-    /**
-     * Returns product depth
-     *
-     * @return float
-     */
-    public function getDepth()
-    {
-        return $this->depth;
-    }
-
-    /**
-     * Sets product depth
-     *
-     * @param float $depth
-     */
-    public function setDepth($depth)
-    {
-        $this->depth = $depth;
+        $this->dimension = $dimension;
     }
 
     /**
@@ -676,5 +550,45 @@ class Product
     public function setShops($shops)
     {
         $this->shops = $shops;
+    }
+
+    /**
+     * @param Shop $shop
+     */
+    public function addShop(Shop $shop)
+    {
+        $this->shops[] = $shop;
+    }
+
+    /**
+     * @return Tax
+     */
+    public function getBuyPriceTax()
+    {
+        return $this->buyPriceTax;
+    }
+
+    /**
+     * @param Tax $buyPriceTax
+     */
+    public function setBuyPriceTax(Tax $buyPriceTax)
+    {
+        $this->buyPriceTax = $buyPriceTax;
+    }
+
+    /**
+     * @return Tax
+     */
+    public function getSellPriceTax()
+    {
+        return $this->sellPriceTax;
+    }
+
+    /**
+     * @param Tax $sellPriceTax
+     */
+    public function setSellPriceTax(Tax $sellPriceTax)
+    {
+        $this->sellPriceTax = $sellPriceTax;
     }
 }

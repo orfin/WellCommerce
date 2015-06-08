@@ -62,6 +62,18 @@ class ShopFormBuilder extends AbstractFormBuilder implements FormBuilderInterfac
             'label' => $this->trans('shop.url.label'),
         ]));
 
+        $cartSettings = $form->addChild($this->getElement('nested_fieldset', [
+            'name'  => 'cart_settings',
+            'label' => $this->trans('shop.cart_settings.label')
+        ]));
+
+        $cartSettings->addChild($this->getElement('select', [
+            'name'        => 'defaultOrderStatus',
+            'label'       => $this->trans('shop.default_order_status.label'),
+            'options'     => $this->get('order_status.collection')->getSelect(),
+            'transformer' => new EntityToIdentifierTransformer($this->get('order_status.repository'))
+        ]));
+        
         $form->addFilter($this->getFilter('no_code'));
         $form->addFilter($this->getFilter('trim'));
         $form->addFilter($this->getFilter('secure'));

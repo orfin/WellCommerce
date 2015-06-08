@@ -12,11 +12,17 @@
                 </div>
             {% endfor %}
             <div class="col-lg-3 menu">
-                <h3>Your account</h3>
+                <h3>{% trans %}footer.client_links.label{% endtrans %}</h3>
                 <ul>
-                    <li><a href="#">Sing in yout account</a></li>
-                    <li><a href="#">Sing up</a></li>
-                    <li><a href="#">Order status</a></li>
+                    {% if app.user and is_granted('ROLE_CLIENT') %}
+                        <li><a href="{{ path('front.client.index') }}">{% trans %}client.link.my_account{% endtrans %}</a></li>
+                        <li><a href="{{ path('front.client.logout') }}">{% trans %}client.link.logout{% endtrans %}</a></li>
+                        <li><a href="{{ path('front.client.orders') }}">{% trans %}client.link.orders{% endtrans %}</a></li>
+                    {%  else %}
+                        <li><a href="{{ path('front.client.login') }}">{% trans %}client.link.login{% endtrans %}</a></li>
+                        <li><a href="{{ path('front.client.register') }}">{% trans %}client.link.register{% endtrans %}</a></li>
+                        <li><a href="{{ path('front.client.password') }}" class="coming-soon">{% trans %}client.link.password_forgotten{% endtrans %}</a></li>
+                    {% endif %}
                 </ul>
             </div>
             <div class="col-lg-3">
@@ -30,14 +36,15 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 left">
-                    {{ "now"|date("Y") }} © Demo store / All rights reserved
+                    {{ "now"|date("Y") }} © {{ currentShop().name }} / All rights reserved
                 </div>
                 <div class="col-lg-6 right text-right">
-                    Powered by <a href="http://wellcommerce.org">
+                    Powered by <a href="http://wellcommerce.org" title="WellCommerce - an open-source e-commerce solution">
                         <img src="{{ asset('themes/wellcommerce/assets/img/footer-print.png') }}"/>
                     </a>
                 </div>
             </div>
         </div>
     </div>
+    {% include 'WellCommerceWebBundle:Front:modals.html.twig' %}
 </footer>

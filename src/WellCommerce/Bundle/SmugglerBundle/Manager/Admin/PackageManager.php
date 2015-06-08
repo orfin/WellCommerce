@@ -120,7 +120,6 @@ class PackageManager extends AbstractAdminManager
          * @var $package \WellCommerce\Bundle\SmugglerBundle\Entity\Package
          */
         $id         = $request->attributes->get('id');
-        $operation  = $request->attributes->get('operation');
         $em         = $this->getDoctrineHelper()->getEntityManager();
         $repository = $this->getRepository();
         $package    = $repository->find($id);

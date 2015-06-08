@@ -26,13 +26,17 @@ class LayoutBoxTranslation implements LocaleAwareInterface
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, nullable=false)
      */
-    private $name;
+    protected $name;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="content", type="text", nullable=true)
      */
-    private $content;
+    protected $content;
 
     /**
      * Returns primary key identifier

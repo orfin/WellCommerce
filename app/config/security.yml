@@ -1,4 +1,5 @@
 security:
+    session_fixation_strategy:  none
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -6,6 +7,7 @@ security:
         admin:
             pattern:   ^/admin
             anonymous: ~
+            provider: administrators
             form_login:
                 login_path: admin.user.login
                 check_path: admin.user.login_check
@@ -14,12 +16,14 @@ security:
                 path:   admin.user.logout
                 target: admin.user.login
         client:
-            pattern:   ^/client
+            pattern:   ^/
             anonymous: ~
+            provider: clients
             form_login:
                 login_path: front.client.login
                 check_path: front.client.login_check
                 default_target_path: front.client.index
+                failure_handler: client.failure.handler
             logout:
                 path:   front.client.logout
                 target: front.client.login
@@ -40,6 +44,9 @@ security:
 
     encoders:
         WellCommerce\Bundle\UserBundle\Entity\User:
+            algorithm: bcrypt
+            cost: 12
+        WellCommerce\Bundle\ClientBundle\Entity\Client:
             algorithm: bcrypt
             cost: 12
 

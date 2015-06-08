@@ -32,7 +32,6 @@ class RoutableSubscriber implements EventSubscriber
     public function prePersist(LifecycleEventArgs $args)
     {
         $entity = $args->getEntity();
-
         if ($entity instanceof RoutableSubjectInterface) {
             $route = $this->addRoute($entity);
             $entity->setRoute($route);

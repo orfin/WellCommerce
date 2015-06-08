@@ -65,7 +65,7 @@ class ProductDataGrid extends AbstractDataGrid implements DataGridInterface
 
         $collection->add(new Column([
             'id'       => 'sellPrice',
-            'caption'  => $this->trans('product.sell_price.label'),
+            'caption'  => $this->trans('product.sell_price_net.label'),
             'editable' => true,
             'filter'   => new Filter([
                 'type' => Filter::FILTER_BETWEEN,

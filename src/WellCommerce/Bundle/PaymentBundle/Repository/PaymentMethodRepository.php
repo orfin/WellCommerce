@@ -16,7 +16,6 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 /**
  * Class PaymentMethodRepository
  *
- * @package WellCommerce\Bundle\PaymentBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class PaymentMethodRepository extends AbstractEntityRepository implements PaymentMethodRepositoryInterface

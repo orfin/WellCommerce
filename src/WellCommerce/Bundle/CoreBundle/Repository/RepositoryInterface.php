@@ -84,6 +84,15 @@ interface RepositoryInterface
     public function findOneBy(array $criteria, array $orderBy = null);
 
     /**
+     * Returns all entities using additional criteria
+     *
+     * @param array $criteria
+     *
+     * @return mixed
+     */
+    public function findBy(array $criteria);
+
+    /**
      * @return \Doctrine\ORM\Mapping\ClassMetadata
      */
     public function getMetaData();

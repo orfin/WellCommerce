@@ -17,7 +17,6 @@ use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
 /**
  * Class PaymentMethodController
  *
- * @package WellCommerce\Bundle\PaymentBundle\Controller
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()

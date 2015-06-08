@@ -33,4 +33,13 @@ interface RouteRepositoryInterface extends RepositoryInterface, DataSetAwareRepo
      * @return string
      */
     public function generateSlug($name, $id, $locale, $values, $iteration = 0);
+
+    /**
+     * Returns route by its path
+     *
+     * @param string $slug
+     *
+     * @return null|\WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface
+     */
+    public function findRouteByPath($slug);
 }

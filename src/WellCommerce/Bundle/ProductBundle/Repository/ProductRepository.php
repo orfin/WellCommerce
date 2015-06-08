@@ -27,8 +27,8 @@ class ProductRepository extends AbstractEntityRepository implements ProductRepos
         $queryBuilder->groupBy('product.id');
         $queryBuilder->leftJoin('product.translations', 'product_translation');
         $queryBuilder->leftJoin('product.categories', 'categories');
+        $queryBuilder->leftJoin('product.sellPriceTax', 'sell_tax');
         $queryBuilder->leftJoin('categories.translations', 'categories_translation');
-        $queryBuilder->leftJoin('product.sellCurrency', 'sell_currency');
         $queryBuilder->leftJoin('product.productPhotos', 'gallery', Expr\Join::WITH, 'gallery.mainPhoto = :mainPhoto');
         $queryBuilder->leftJoin('gallery.photo', 'photos');
         $queryBuilder->leftJoin('product.statuses', 'statuses');
@@ -37,5 +37,16 @@ class ProductRepository extends AbstractEntityRepository implements ProductRepos
         $queryBuilder->setParameter('mainPhoto', 1);
 
         return $queryBuilder;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findEnabledProductById($id)
+    {
+        return $this->findOneBy([
+            'enabled' => true,
+            'id'      => $id
+        ]);
     }
 }

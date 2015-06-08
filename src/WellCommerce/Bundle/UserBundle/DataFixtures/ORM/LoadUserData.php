@@ -22,10 +22,9 @@ use WellCommerce\Bundle\UserBundle\Entity\User;
 /**
  * Class LoadUserData
  *
- * @package WellCommerce\Bundle\CompanyBundle\DataFixtures\ORM
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LoadUserData extends AbstractDataFixture implements FixtureInterface, OrderedFixtureInterface
+class LoadUserData extends AbstractDataFixture
 {
     /**
      * {@inheritDoc}
@@ -49,13 +48,5 @@ class LoadUserData extends AbstractDataFixture implements FixtureInterface, Orde
         $manager->persist($user);
 
         $manager->flush();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getOrder()
-    {
-        return 0;
     }
 }

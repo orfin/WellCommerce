@@ -12,10 +12,8 @@
 
 namespace WellCommerce\Bundle\MediaBundle\Form\DataTransformer;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\PersistentCollection;
-use Symfony\Component\PropertyAccess\PropertyPathInterface;
-use WellCommerce\Bundle\FormBundle\DataTransformer\AbstractDataTransformer;
+use WellCommerce\Bundle\FormBundle\DataTransformer\CollectionToArrayTransformer;
 use WellCommerce\Bundle\FormBundle\DataTransformer\DataTransformerInterface;
 
 /**
@@ -23,7 +21,7 @@ use WellCommerce\Bundle\FormBundle\DataTransformer\DataTransformerInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class MediaCollectionToArrayTransformer extends AbstractDataTransformer implements DataTransformerInterface
+class MediaCollectionToArrayTransformer extends CollectionToArrayTransformer implements DataTransformerInterface
 {
     /**
      * {@inheritdoc}
@@ -31,7 +29,7 @@ class MediaCollectionToArrayTransformer extends AbstractDataTransformer implemen
     public function transform($modelData)
     {
         if (null === $modelData || !$modelData instanceof PersistentCollection) {
-            return;
+            return [];
         }
 
         $items = [];
@@ -43,22 +41,5 @@ class MediaCollectionToArrayTransformer extends AbstractDataTransformer implemen
         }
 
         return $items;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function reverseTransform($modelData, PropertyPathInterface $propertyPath, $values)
-    {
-        $collection = new ArrayCollection();
-
-        foreach ($values as $key => $id) {
-            if (is_int($key)) {
-                $photo = $this->getRepository()->find($id);
-                $collection->add($photo);
-            }
-        }
-
-        $this->propertyAccessor->setValue($modelData, $propertyPath, $collection);
     }
 }

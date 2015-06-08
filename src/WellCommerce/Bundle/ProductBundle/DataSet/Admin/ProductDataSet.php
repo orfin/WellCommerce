@@ -33,7 +33,7 @@ class ProductDataSet extends AbstractDataSet implements DataSetInterface
             'name'      => 'product_translation.name',
             'sku'       => 'product.sku',
             'weight'    => 'product.weight',
-            'sellPrice' => 'product.sellPrice',
+            'sellPrice' => 'product.sellPrice.amount',
             'stock'     => 'product.stock',
             'shop'      => 'product_shops.id',
             'category'  => 'GROUP_CONCAT(DISTINCT categories_translation.name SEPARATOR \', \')',

@@ -19,6 +19,7 @@ use Symfony\Component\Routing\Route as SymfonyRoute;
 use Symfony\Component\Routing\RouteCollection;
 use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;
 use WellCommerce\Bundle\RoutingBundle\Generator\RouteGeneratorCollection;
+use WellCommerce\Bundle\RoutingBundle\Generator\RouteGeneratorInterface;
 use WellCommerce\Bundle\RoutingBundle\Repository\RouteRepositoryInterface;
 
 /**
@@ -47,6 +48,7 @@ class RouteProvider implements RouteProviderInterface
      * Constructor
      *
      * @param RouteGeneratorCollection $generators
+     * @param RouteRepositoryInterface $repository
      */
     public function __construct(RouteGeneratorCollection $generators, RouteRepositoryInterface $repository)
     {
@@ -65,13 +67,10 @@ class RouteProvider implements RouteProviderInterface
     {
         $collection = new RouteCollection();
         $path       = $this->getNormalizedPath($request);
-        $resource   = $this->repository->findOneBy([
-            'path' => $path,
-        ]);
+        $resource   = $this->repository->findRouteByPath($path);
 
         if ($resource) {
             $route = $this->createRoute($resource);
-
             $collection->add(
                 self::DYNAMIC_PREFIX . $resource->getId(),
                 $route
@@ -79,6 +78,36 @@ class RouteProvider implements RouteProviderInterface
         }
 
         return $collection;
+    }
+
+    /**
+     * Returns route by its identifier
+     *
+     * @param string $identifier
+     *
+     * @return SymfonyRoute
+     */
+    public function getRouteByName($identifier)
+    {
+        $id       = str_replace(self::DYNAMIC_PREFIX, '', $identifier);
+        $resource = $this->repository->find($id);
+
+        if (!$resource) {
+            throw new RouteNotFoundException(sprintf('No route found for id "%s"', $id));
+        }
+
+        return $this->createRoute($resource);
+    }
+
+    public function getRoutesByNames($names, $parameters = [])
+    {
+        $collection = $this->repository->findBy([], null, self::CANDIDATES_LIMIT);
+        $routes     = [];
+        foreach ($collection as $item) {
+            $routes[] = $this->getRouteByName($item->getId());
+        }
+
+        return $routes;
     }
 
     /**
@@ -91,29 +120,9 @@ class RouteProvider implements RouteProviderInterface
     private function getNormalizedPath(Request $request)
     {
         $path  = ltrim($request->getPathInfo(), '/');
-        $paths = explode('/', $path);
+        $paths = explode(RouteGeneratorInterface::PATH_PARAMS_SEPARATOR, $path);
 
         return current($paths);
-    }
-
-    /**
-     * Returns route by its identifier
-     *
-     * @param string $identifier
-     *
-     * @return SymfonyRoute
-     */
-    public function getRouteByName($identifier)
-    {
-        $id = str_replace(self::DYNAMIC_PREFIX, '', $identifier);
-
-        $resource = $this->repository->find($id);
-
-        if (!$resource) {
-            throw new RouteNotFoundException(sprintf('No route found for id "%s"', $id));
-        }
-
-        return $this->createRoute($resource);
     }
 
     /**
@@ -130,10 +139,10 @@ class RouteProvider implements RouteProviderInterface
         /**
          * @var \WellCommerce\Bundle\RoutingBundle\Generator\RouteGeneratorInterface $generator
          */
-
         foreach ($this->generators as $generator) {
             if ($generator->supports($resource->getType())) {
                 $route = $generator->generate($resource);
+                break;
             }
         }
 
@@ -142,16 +151,5 @@ class RouteProvider implements RouteProviderInterface
         }
 
         return $route;
-    }
-
-    public function getRoutesByNames($names, $parameters = [])
-    {
-        $collection = $this->repository->findBy([], null, self::CANDIDATES_LIMIT);
-        $routes     = [];
-        foreach ($collection as $item) {
-            $routes[] = $this->getRouteByName($item->getId());
-        }
-
-        return $routes;
     }
 }

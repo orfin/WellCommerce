@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\MultiStoreBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderStatus;
 
 /**
  * Class Shop
@@ -36,53 +37,59 @@ class Shop
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255, nullable=false)
      */
-    private $name;
+    protected $name;
 
     /**
      * @var string
      *
      * @ORM\Column(name="url", type="string", length=255, nullable=false)
      */
-    private $url;
+    protected $url;
 
     /**
      * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\MultiStoreBundle\Entity\Company")
      * @ORM\JoinColumn(name="company_id", referencedColumnName="id", onDelete="SET NULL")
      */
-    private $company;
+    protected $company;
 
     /**
      * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\Product", mappedBy="shops")
      */
-    private $products;
+    protected $products;
 
     /**
      * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\CategoryBundle\Entity\Category", mappedBy="shops")
      */
-    private $categories;
+    protected $categories;
 
     /**
      * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\ProducerBundle\Entity\Producer", mappedBy="shops")
      */
-    private $producers;
+    protected $producers;
 
     /**
      * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\CmsBundle\Entity\Page", mappedBy="shops")
      */
-    private $pages;
+    protected $pages;
 
     /**
      * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\ThemeBundle\Entity\Theme")
      * @ORM\JoinColumn(name="theme_id", referencedColumnName="id", onDelete="SET NULL")
      */
-    private $theme;
+    protected $theme;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\OrderBundle\Entity\OrderStatus")
+     * @ORM\JoinColumn(name="default_order_status_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     */
+    protected $defaultOrderStatus;
 
     /**
      * @return int
@@ -218,5 +225,21 @@ class Shop
     public function setPages($pages)
     {
         $this->pages = $pages;
+    }
+
+    /**
+     * @return OrderStatus
+     */
+    public function getDefaultOrderStatus()
+    {
+        return $this->defaultOrderStatus;
+    }
+
+    /**
+     * @param OrderStatus $defaultOrderStatus
+     */
+    public function setDefaultOrderStatus(OrderStatus $defaultOrderStatus)
+    {
+        $this->defaultOrderStatus = $defaultOrderStatus;
     }
 }

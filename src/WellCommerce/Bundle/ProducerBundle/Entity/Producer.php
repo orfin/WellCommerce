@@ -17,6 +17,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\PhotoTrait;
 use WellCommerce\Bundle\DelivererBundle\Entity\Deliverer;
+use WellCommerce\Bundle\MultiStoreBundle\Entity\Shop;
 
 /**
  * Class Locale
@@ -120,5 +121,13 @@ class Producer
     public function setShops($shops)
     {
         $this->shops = $shops;
+    }
+
+    /**
+     * @param Shop $shop
+     */
+    public function addShop(Shop $shop)
+    {
+        $this->shops[] = $shop;
     }
 }

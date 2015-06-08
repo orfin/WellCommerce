@@ -18,7 +18,6 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 /**
  * Class Locale
  *
- * @package WellCommerce\Bundle\AvailabilityBundle\Entity
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * @ORM\Table(name="availability")

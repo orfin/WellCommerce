@@ -34,18 +34,21 @@ class ContactTranslation implements LocaleAwareInterface
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
+
     /**
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255)
      */
     private $email;
+
     /**
      * @var string
      *
      * @ORM\Column(name="phone", type="string", length=255)
      */
     private $phone;
+
     /**
      * @var string
      *

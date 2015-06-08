@@ -12,7 +12,9 @@
 
 namespace WellCommerce\Bundle\CartBundle\Repository;
 
+use WellCommerce\Bundle\ClientBundle\Entity\Client;
 use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
+use WellCommerce\Bundle\MultiStoreBundle\Entity\Shop;
 
 /**
  * Class CartRepository
@@ -21,4 +23,42 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
  */
 class CartRepository extends AbstractEntityRepository implements CartRepositoryInterface
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function getCart(Client $client = null, $sessionId, Shop $shop)
+    {
+        if (null !== $client) {
+            $cart = $this->getCartForClient($client, $shop);
+            if (null === $cart) {
+                $cart = $this->getCartBySessionId($sessionId, $shop);
+            }
+        } else {
+            $cart = $this->getCartBySessionId($sessionId, $shop);
+        }
+
+        return $cart;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCartForClient(Client $client, Shop $shop)
+    {
+        return $this->findOneBy([
+            'client' => $client,
+            'shop'   => $shop
+        ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCartBySessionId($sessionId, Shop $shop)
+    {
+        return $this->findOneBy([
+            'sessionId' => $sessionId,
+            'shop'      => $shop
+        ]);
+    }
 }

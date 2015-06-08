@@ -30,23 +30,15 @@ class CategoryMenuBoxController extends AbstractBoxController implements BoxCont
      */
     public function indexAction()
     {
-        return [
-            'active' => $this->getCurrentCategoryId()
-        ];
-    }
+        $active         = null;
+        $activeCategory = $this->getManager()->getCategoryProvider()->getCurrentCategory();
 
-    /**
-     * Returns identifier for currently selected category
-     *
-     * @return int|null
-     */
-    private function getCurrentCategoryId()
-    {
-        $resource = $this->get('category.provider')->getCurrentResource();
-        if ($resource instanceof Category) {
-            return $resource->getId();
+        if ($activeCategory instanceof Category) {
+            $active = $activeCategory->getId();
         }
 
-        return;
+        return [
+            'active' => $active
+        ];
     }
 }

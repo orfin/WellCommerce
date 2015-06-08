@@ -17,7 +17,6 @@ use WellCommerce\Bundle\AdminBundle\Manager\AbstractAdminManager;
 /**
  * Class PaymentMethodManager
  *
- * @package WellCommerce\Bundle\PaymentBundle\Manager\Admin
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class PaymentMethodManager extends AbstractAdminManager

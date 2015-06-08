@@ -17,7 +17,6 @@ use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
 /**
  * Class WellCommerceAvailabilityExtension
  *
- * @package WellCommerce\Bundle\AvailabilityBundle\DependencyInjection
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class WellCommerceAvailabilityExtension extends AbstractExtension

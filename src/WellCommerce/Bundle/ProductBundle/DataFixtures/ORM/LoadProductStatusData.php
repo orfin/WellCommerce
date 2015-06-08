@@ -12,22 +12,35 @@
 
 namespace WellCommerce\Bundle\ProductBundle\DataFixtures\ORM;
 
-use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductStatus;
+use WellCommerce\Bundle\RoutingBundle\Helper\Sluggable;
 
 /**
  * Class LoadProductStatusData
  *
- * @package WellCommerce\Bundle\ProductBundle\DataFixtures\ORM
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LoadProductStatusData implements FixtureInterface
+class LoadProductStatusData extends AbstractDataFixture
 {
+    const SAMPLES = ['Featured', 'Bestsellers', 'New arrivals'];
+
     /**
      * {@inheritDoc}
      */
     public function load(ObjectManager $manager)
     {
+        foreach (self::SAMPLES as $name) {
+            $status = new ProductStatus();
+            $status->translate('en')->setName($name);
+            $status->translate('en')->setSlug($slug = Sluggable::makeSlug($name));
+            $status->translate('en')->setCssClass($slug);
+            $status->mergeNewTranslations();
+            $manager->persist($status);
+            $this->addReference('product_status_' . $name, $status);
+        }
 
+        $manager->flush();
     }
 }

@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\CmsBundle\Controller\Front;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
+use WellCommerce\Bundle\WebBundle\Breadcrumb\BreadcrumbItem;
 
 /**
  * Class PageController
@@ -30,6 +31,19 @@ class PageController extends AbstractFrontController implements FrontControllerI
      */
     public function indexAction(Request $request)
     {
-        return [];
+        $page = $this->findOr404($request);
+
+        if(null !== $page->getParent()){
+            $this->get('breadcrumb.builder')->add(new BreadcrumbItem([
+                'name' => $page->getParent()->translate()->getName(),
+            ]));
+        }
+        $this->get('breadcrumb.builder')->add(new BreadcrumbItem([
+            'name' => $page->translate()->getName(),
+        ]));
+
+        return [
+            'page' => $page
+        ];
     }
 }

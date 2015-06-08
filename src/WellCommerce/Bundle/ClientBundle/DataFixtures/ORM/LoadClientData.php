@@ -12,8 +12,6 @@
 
 namespace WellCommerce\Bundle\ClientBundle\DataFixtures\ORM;
 
-use Doctrine\Common\DataFixtures\FixtureInterface;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use WellCommerce\Bundle\ClientBundle\Entity\Client;
 use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
@@ -21,41 +19,32 @@ use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
 /**
  * Class LoadClientData
  *
- * @package WellCommerce\Bundle\ClientBundle\DataFixtures\ORM
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LoadClientData extends AbstractDataFixture implements FixtureInterface, OrderedFixtureInterface
+class LoadClientData extends AbstractDataFixture
 {
     /**
      * {@inheritDoc}
      */
     public function load(ObjectManager $manager)
     {
-        $clientGroup
-            = $manager->getRepository('WellCommerce\Bundle\ClientBundle\Entity\ClientGroup')
-            ->findOneBy(['discount' => 10]);
-
-        for ($i = 1; $i <= 100; $i++) {
+        $fakerGenerator = $this->getFakerGenerator();
+        $clientGroup    = $this->getReference('client_group');
+        
+        for ($i = 1; $i <= 10; $i++) {
             $client = new Client();
-            $client->setFirstName($this->fakerGenerator->firstName);
-            $client->setLastName($this->fakerGenerator->lastName);
-            $client->setUsername($this->fakerGenerator->userName.$i);
-            $client->setEmail($this->fakerGenerator->email);
-            $client->setPhone($this->fakerGenerator->phoneNumber);
-            $client->setDiscount(rand(0, 100));
+            $client->setFirstName($fakerGenerator->firstName);
+            $client->setLastName($fakerGenerator->lastName);
+            $client->setEmail($fakerGenerator->email);
+            $client->setPhone($fakerGenerator->phoneNumber);
+            $client->setDiscount(25);
             $client->setPassword(time());
+            $client->setConditionsAccepted(true);
+            $client->setNewsletterAccepted(true);
             $client->setGroup($clientGroup);
             $manager->persist($client);
         }
-
+        
         $manager->flush();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getOrder()
-    {
-        return 4;
     }
 }

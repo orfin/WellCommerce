@@ -68,4 +68,16 @@ class Tax
     {
         $this->value = $value;
     }
+
+    /**
+     * Calculates gross price
+     *
+     * @param float $netPrice
+     *
+     * @return float
+     */
+    public function calculateGrossPrice($netPrice)
+    {
+        return $netPrice + ($netPrice * ($this->value / 100));
+    }
 }

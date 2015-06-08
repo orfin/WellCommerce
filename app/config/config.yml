@@ -1,5 +1,6 @@
 imports:
     - { resource: parameters.yml }
+    - { resource: wellcommerce.yml }
     - { resource: security.yml }
     - { resource: ../../vendor/knplabs/doctrine-behaviors/config/orm-services.yml }
 
@@ -35,6 +36,7 @@ assetic:
     filters:
         cssrewrite: ~
         less: ~
+
 # Doctrine Configuration
 doctrine:
     dbal:
@@ -58,6 +60,7 @@ doctrine:
                     locale:
                         class:   WellCommerce\Bundle\IntlBundle\ORM\Filter\LocaleFilter
                         enabled: false
+
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -100,6 +103,9 @@ liip_imagine:
         small:
             filters:
                 thumbnail: { size: [120, 120], mode: outbound }
+        normal:
+            filters:
+                thumbnail: { size: [175, 175], mode: outbound }
         medium:
             filters:
                 thumbnail: { size: [240, 240], mode: outbound }
@@ -114,3 +120,9 @@ services:
     cache:
         class: Doctrine\Common\Cache\FilesystemCache
         arguments:  [%kernel.root_dir%/cache/%kernel.environment%/cache]
+
+    client.failure.handler:
+        class: WellCommerce\Bundle\ClientBundle\Handler\LoginFailureHandler
+        arguments:
+          - @router
+          - front.client.login

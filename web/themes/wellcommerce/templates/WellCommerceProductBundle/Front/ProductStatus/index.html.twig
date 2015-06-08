@@ -1,0 +1,22 @@
+{% extends 'WellCommerceWebBundle:Front:layout.html.twig' %}
+{% block content %}
+    <div class="col-lg-12">
+        {% include 'WellCommerceWebBundle:Front:breadcrumbs.html.twig' %}
+        {% include 'WellCommerceCategoryBundle:Front/Common:options.html.twig' %}
+    </div>
+    <div class="col-lg-3 col-md-3">
+        <div class="row">
+            <div class="col-lg-12">
+                {{ layout_box('category_menu') }}
+            </div>
+
+            <div class="col-lg-12">
+                {{ layout_box('layered_navigation') }}
+            </div>
+
+        </div>
+    </div>
+    <div class="col-lg-9 col-md-9">
+        {{ layout_box('product_dynamic_status') }}
+    </div>
+{% endblock %}

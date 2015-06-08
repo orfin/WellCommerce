@@ -14,6 +14,8 @@ namespace WellCommerce\Bundle\ClientBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Symfony\Component\Security\Core\User\EquatableInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Client
@@ -21,10 +23,12 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
  * @ORM\Table(name="client")
  * @ORM\Entity(repositoryClass="WellCommerce\Bundle\ClientBundle\Repository\ClientRepository")
  */
-class Client
+class Client implements \Serializable, UserInterface, EquatableInterface
 {
     use ORMBehaviors\Timestampable\Timestampable;
     use ORMBehaviors\Blameable\Blameable;
+
+    const ROLE_CLIENT = 'ROLE_CLIENT';
 
     /**
      * @var integer
@@ -38,28 +42,23 @@ class Client
     /**
      * @var string
      *
-     * @ORM\Column(name="discount", type="decimal", precision=15, scale=4)
+     * @ORM\Column(name="discount", type="decimal", precision=15, scale=4, nullable=true)
      */
     protected $discount;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="first_name", type="string", length=255)
+     * @ORM\Column(name="first_name", type="string", length=255, nullable=false)
      */
     protected $firstName;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="last_name", type="string", length=255)
+     * @ORM\Column(name="last_name", type="string", length=255, nullable=false)
      */
     protected $lastName;
-
-    /**
-     * @ORM\Column(type="string", length=25, unique=true)
-     */
-    protected $username;
 
     /**
      * @ORM\Column(type="string", length=64)
@@ -67,12 +66,17 @@ class Client
     protected $password;
 
     /**
-     * @ORM\Column(type="string", length=60, unique=true)
+     * @ORM\Column(type="string", length=60, unique=true, nullable=false)
      */
     protected $email;
 
     /**
      * @ORM\Column(type="string", length=60, unique=true)
+     */
+    protected $username;
+
+    /**
+     * @ORM\Column(type="string", length=60, unique=true, nullable=true)
      */
     protected $phone;
 
@@ -91,6 +95,20 @@ class Client
      * @ORM\JoinColumn(name="client_group_id", referencedColumnName="id", onDelete="SET NULL")
      */
     protected $group;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="conditions_accepted", type="boolean")
+     */
+    protected $conditionsAccepted;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="newsletter_accepted", type="boolean")
+     */
+    protected $newsletterAccepted;
 
     /**
      * Constructor
@@ -180,16 +198,6 @@ class Client
         $this->lastName = $lastName;
     }
 
-    public function getUsername()
-    {
-        return $this->username;
-    }
-
-    public function setUsername($username)
-    {
-        $this->username = $username;
-    }
-
     public function getEmail()
     {
         return $this->email;
@@ -197,7 +205,8 @@ class Client
 
     public function setEmail($email)
     {
-        $this->email = $email;
+        $this->email    = $email;
+        $this->username = $email;
     }
 
     public function getPassword()
@@ -207,7 +216,52 @@ class Client
 
     public function setPassword($password)
     {
-        $this->password = $password;
+        if (strlen($password)) {
+            $this->password = password_hash($password, PASSWORD_BCRYPT, ['cost' => 12]);
+        }
+    }
+
+    public function getSalt()
+    {
+        return null;
+    }
+
+    public function setSalt($salt)
+    {
+        $this->salt = $salt;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function eraseCredentials()
+    {
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * @param mixed $username
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getRoles()
+    {
+        return [
+            self::ROLE_CLIENT
+        ];
     }
 
     public function getPhone()
@@ -220,13 +274,62 @@ class Client
         $this->phone = $phone;
     }
 
-    public function getSalt()
+    public function serialize()
     {
-        return null;
+        return serialize([$this->id, $this->username, $this->password]);
     }
 
-    public function setSalt($salt)
+    public function unserialize($serialized)
     {
-        $this->salt = $salt;
+        list($this->id, $this->username, $this->password) = unserialize($serialized);
+    }
+
+    public function isEqualTo(UserInterface $user)
+    {
+        if ($this->password !== $user->getPassword()) {
+            return false;
+        }
+
+        if ($this->salt !== $user->getSalt()) {
+            return false;
+        }
+
+        if ($this->email !== $user->getUsername()) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isConditionsAccepted()
+    {
+        return $this->conditionsAccepted;
+    }
+
+    /**
+     * @param boolean $conditionsAccepted
+     */
+    public function setConditionsAccepted($conditionsAccepted)
+    {
+        $this->conditionsAccepted = (int)$conditionsAccepted;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isNewsletterAccepted()
+    {
+        return $this->newsletterAccepted;
+    }
+
+    /**
+     * @param boolean $newsletterAccepted
+     */
+    public function setNewsletterAccepted($newsletterAccepted)
+    {
+        $this->newsletterAccepted = (int)$newsletterAccepted;
     }
 }

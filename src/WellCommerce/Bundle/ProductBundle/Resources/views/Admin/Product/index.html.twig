@@ -5,5 +5,20 @@
         <li><a href="{{ path('admin.product.add') }}" class="button"
                title="{% trans %}Add{% endtrans %}"><span>{% trans %}Add{% endtrans %}</span></a></li>
     </ul>
+
+    <script>
+        var duplicateProduct = function (dg, id) {
+            return window.location.href = Routing.generate('admin.product.duplicate', {
+                id: id
+            });
+        };
+
+        var action_duplicateProduct = new GF_Action({
+            caption: '{% trans %}product.button.duplicate{% endtrans %}',
+            action: duplicateProduct,
+            img: '{{ asset('bundles/wellcommerceadmin/images/datagrid/duplicate-row.png') }}',
+        });
+    </script>
+
     {{ datagrid_renderer(datagrid) }}
 {% endblock %}

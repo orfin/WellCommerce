@@ -16,7 +16,6 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 /**
  * Class AvailabilityRepository
  *
- * @package WellCommerce\Bundle\AvailabilityBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class AvailabilityRepository extends AbstractEntityRepository implements AvailabilityRepositoryInterface

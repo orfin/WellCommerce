@@ -11,6 +11,7 @@
             <argument type="service" id="event_dispatcher"/>
             <argument type="service" id="doctrine_helper"/>
             <argument type="service" id="translator"/>
+            <argument type="service" id="request_helper"/>
             <call method="setRepository">
                 <argument type="service" id="category.repository"/>
             </call>
@@ -33,6 +34,7 @@
             <argument type="service" id="event_dispatcher"/>
             <argument type="service" id="doctrine_helper"/>
             <argument type="service" id="translator"/>
+            <argument type="service" id="request_helper"/>
             <call method="setRepository">
                 <argument type="service" id="category.repository"/>
             </call>
@@ -129,12 +131,10 @@
         </service>
 
         <service id="category.provider" class="WellCommerce\Bundle\CategoryBundle\Provider\CategoryProvider">
-            <argument type="service" id="category.collection.front" />
+            <call method="setCollectionBuilder">
+                <argument type="service" id="category.collection.front" />
+            </call>
             <tag name="resource.provider" alias="category"/>
-        </service>
-
-        <service id="category_products.provider" class="WellCommerce\Bundle\CategoryBundle\Provider\CategoryProductsProvider">
-            <tag name="resource.provider" alias="category_products"/>
         </service>
 
         <service id="category.form_builder" class="WellCommerce\Bundle\CategoryBundle\Form\CategoryFormBuilder">

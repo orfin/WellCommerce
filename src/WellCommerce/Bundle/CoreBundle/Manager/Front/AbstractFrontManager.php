@@ -12,23 +12,26 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Manager\Front;
 
-use Symfony\Component\HttpFoundation\Request;
-use WellCommerce\Bundle\CoreBundle\Event\ResourceEvent;
-use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
 use WellCommerce\Bundle\CoreBundle\Provider\ProviderCollection;
+use WellCommerce\Bundle\MultiStoreBundle\Context\ShopContextInterface;
 
 /**
  * Class AbstractFrontManager
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AbstractFrontManager extends AbstractManager implements FrontManagerInterface
+abstract class AbstractFrontManager extends AbstractManager implements FrontManagerInterface
 {
     /**
      * @var ProviderCollection
      */
     protected $providers;
+
+    /**
+     * @var ShopContextInterface
+     */
+    protected $shopContext;
 
     /**
      * {@inheritdoc}
@@ -55,30 +58,58 @@ class AbstractFrontManager extends AbstractManager implements FrontManagerInterf
     }
 
     /**
-     * Triggers event
-     *
-     * @param object  $resource
-     * @param Request $request
-     * @param string  $name
+     * {@inheritdoc}
      */
-    protected function dispatchEvent($resource, Request $request, $name)
+    public function getCategoryProvider()
     {
-        $reflection = new \ReflectionClass($resource);
-        $eventName  = $this->getEventName($reflection->getShortName(), $name);
-        $event      = new ResourceEvent($resource, $request);
-        $this->getEventDispatcher()->dispatch($eventName, $event);
+        return $this->getProvider('category');
     }
 
     /**
-     * Returns event name for resource
-     *
-     * @param string $class
-     * @param string $name
-     *
-     * @return string
+     * {@inheritdoc}
      */
-    protected function getEventName($class, $name)
+    public function getProductProvider()
     {
-        return sprintf('%s.%s', Helper::snake($class), $name);
+        return $this->getProvider('product');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getProductStatusProvider()
+    {
+        return $this->getProvider('product_status');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCartProvider()
+    {
+        return $this->getProvider('cart');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCartProductProvider()
+    {
+        return $this->getProvider('cart_product');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setShopContext(ShopContextInterface $shopContext)
+    {
+        $this->shopContext = $shopContext;
+    }
+
+    /**
+     * @return ShopContextInterface
+     */
+    public function getShopContext()
+    {
+        return $this->shopContext;
     }
 }

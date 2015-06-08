@@ -23,8 +23,6 @@ use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
  */
 class LayoutBoxFormBuilder extends AbstractFormBuilder implements FormBuilderInterface
 {
-    const FORM_INIT_EVENT = 'layout_box.form.init';
-
     /**
      * {@inheritdoc}
      */

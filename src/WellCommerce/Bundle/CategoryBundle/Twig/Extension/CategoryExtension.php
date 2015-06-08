@@ -44,19 +44,25 @@ class CategoryExtension extends \Twig_Extension
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'category';
+    }
+
+    /**
      * Returns categories tree
      *
      * @param int    $limit
      * @param string $orderBy
      * @param string $orderDir
      *
-     * @return mixed
+     * @return array
      */
-    public function getCategoriesTree(
-        $limit = CategoryProviderInterface::CATEGORY_TREE_LIMIT,
-        $orderBy = CategoryProviderInterface::CATEGORY_ORDER_BY,
-        $orderDir = CategoryProviderInterface::CATEGORY_ORDER_DIR
-    ) {
+    public function getCategoriesTree($limit = 10, $orderBy = 'hierarchy', $orderDir = 'asc')
+    {
+        $collectionBuilder = $this->provider->getCollectionBuilder();
 
         $params = [
             'limit'     => $limit,
@@ -64,14 +70,6 @@ class CategoryExtension extends \Twig_Extension
             'order_dir' => $orderDir,
         ];
 
-        return $this->provider->getCategoriesTree($params);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'category';
+        return $collectionBuilder->getTree($params);
     }
 }

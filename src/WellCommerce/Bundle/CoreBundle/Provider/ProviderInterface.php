@@ -12,27 +12,26 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Provider;
 
+use WellCommerce\Bundle\DataSetBundle\CollectionBuilder\CollectionBuilderFactoryInterface;
+
 /**
  * Interface ProviderInterface
  *
- * @package WellCommerce\Bundle\CoreBundle\Provider
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface ProviderInterface
 {
     /**
-     * Sets current providers resource
+     * Sets collection builder
      *
-     * @param $resource
-     *
-     * @return mixed
+     * @param CollectionBuilderFactoryInterface $collectionBuilderFactoryInterface
      */
-    public function setCurrentResource($resource);
+    public function setCollectionBuilder(CollectionBuilderFactoryInterface $collectionBuilderFactoryInterface);
 
     /**
-     * Returns current resource
+     * Returns related collection builder
      *
-     * @return mixed
+     * @return CollectionBuilderFactoryInterface
      */
-    public function getCurrentResource();
+    public function getCollectionBuilder();
 }

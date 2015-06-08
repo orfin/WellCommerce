@@ -13,72 +13,41 @@
 namespace WellCommerce\Bundle\CategoryBundle\Provider;
 
 use WellCommerce\Bundle\CategoryBundle\Entity\Category;
-use WellCommerce\Bundle\DataSetBundle\CollectionBuilder\CollectionBuilderFactoryInterface;
+use WellCommerce\Bundle\CoreBundle\Provider\AbstractProvider;
 
 /**
  * Class CategoryProvider
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CategoryProvider implements CategoryProviderInterface
+class CategoryProvider extends AbstractProvider implements CategoryProviderInterface
 {
     /**
      * @var Category
      */
-    protected $resource;
-
-    /**
-     * @var CollectionBuilderFactoryInterface
-     */
-    protected $collectionBuilderFactory;
-
-    /**
-     * Constructor
-     *
-     * @param CollectionBuilderFactoryInterface $collectionBuilderFactory
-     */
-    public function __construct(CollectionBuilderFactoryInterface $collectionBuilderFactory)
-    {
-        $this->collectionBuilderFactory = $collectionBuilderFactory;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCategoriesTree(array $parameters = [])
-    {
-        return $this->collectionBuilderFactory->getTree($parameters);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCurrentResource($resource)
-    {
-        $this->setCurrentCategory($resource);
-    }
-
+    protected $category;
+    
     /**
      * {@inheritdoc}
      */
     public function setCurrentCategory(Category $category)
     {
-        $this->resource = $category;
+        $this->category = $category;
     }
-
+    
     /**
      * {@inheritdoc}
      */
-    public function getCurrentResource()
+    public function getCurrentCategory()
     {
-        return $this->resource;
+        return $this->category;
     }
-
+    
     /**
      * {@inheritdoc}
      */
-    public function getCurrentCategoryId()
+    public function hasCurrentCategory()
     {
-        return $this->resource->getId();
+        return (null !== $this->category);
     }
 }

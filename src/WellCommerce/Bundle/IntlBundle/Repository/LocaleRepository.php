@@ -24,6 +24,19 @@ class LocaleRepository extends AbstractEntityRepository implements LocaleReposit
 {
     private $currentLocales = [];
 
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDataSetQueryBuilder()
+    {
+        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder->groupBy('locale.id');
+        $queryBuilder->leftJoin('locale.currency', 'default_currency');
+
+        return $queryBuilder;
+    }
+
     /**
      * {@inheritdoc}
      */

@@ -11,11 +11,12 @@
  */
 namespace WellCommerce\Bundle\LayoutBundle\EventListener;
 
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 use WellCommerce\Bundle\CoreBundle\Event\ResourceEvent;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 use WellCommerce\Bundle\FormBundle\Event\FormEvent;
 use WellCommerce\Bundle\LayoutBundle\Configurator\LayoutBoxConfiguratorInterface;
-use WellCommerce\Bundle\LayoutBundle\Form\LayoutBoxFormBuilder;
 
 /**
  * Class LayoutBoxSubscriber
@@ -27,8 +28,8 @@ class LayoutBoxSubscriber extends AbstractEventSubscriber
     public static function getSubscribedEvents()
     {
         return parent::getSubscribedEvents() + [
-            LayoutBoxFormBuilder::FORM_INIT_EVENT => 'onLayoutBoxFormInit',
-            'layout_box.pre_update'               => 'onLayoutBoxResourceSave',
+            'layout_box.form_init'  => 'onLayoutBoxFormInit',
+            'layout_box.pre_update' => 'onLayoutBoxResourceSave'
         ];
     }
 
@@ -41,7 +42,8 @@ class LayoutBoxSubscriber extends AbstractEventSubscriber
     public function onLayoutBoxFormInit(FormEvent $event)
     {
         $builder       = $event->getFormBuilder();
-        $resource      = $builder->getData();
+        $form          = $event->getForm();
+        $resource      = $form->getModelData();
         $configurators = $this->container->get('layout_box.configurator.collection')->all();
         $boxSettings   = $resource->getSettings();
 
@@ -52,7 +54,7 @@ class LayoutBoxSubscriber extends AbstractEventSubscriber
                     $defaults = $boxSettings;
                 }
 
-                $configurator->addFormFields($builder, $defaults);
+                $configurator->addFormFields($builder, $form, $defaults);
             }
         }
     }
@@ -64,11 +66,21 @@ class LayoutBoxSubscriber extends AbstractEventSubscriber
      */
     public function onLayoutBoxResourceSave(ResourceEvent $event)
     {
-        $request      = $event->getRequest()->request->all();
-        $resource     = $event->getResource();
-        $accessor     = $this->getPropertyAccessor();
-        $propertyPath = sprintf('[%s]', $request['required_data']['boxType']);
-        $settings     = $accessor->getValue($request, $propertyPath);
+        $settings = $this->getBoxSettingsFromRequest($event->getRequest());
+        $resource = $event->getResource();
         $resource->setSettings($settings);
+    }
+
+    protected function getBoxSettingsFromRequest(Request $request)
+    {
+        $settings   = [];
+        $accessor   = PropertyAccess::createPropertyAccessor();
+        $parameters = $request->request->all();
+        $boxType    = $accessor->getValue($parameters, '[required_data][boxType]');
+        if ($accessor->isReadable($parameters, '[' . $boxType . ']')) {
+            $settings = $accessor->getValue($parameters, '[' . $boxType . ']');
+        }
+
+        return !is_array($settings) ? [] : $settings;
     }
 }

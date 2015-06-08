@@ -13,6 +13,8 @@
 namespace WellCommerce\Bundle\CategoryBundle\Layout;
 
 use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\FormBundle\DataTransformer\EntityToIdentifierTransformer;
+use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 use WellCommerce\Bundle\LayoutBundle\Configurator\AbstractLayoutBoxConfigurator;
 use WellCommerce\Bundle\LayoutBundle\Configurator\LayoutBoxConfiguratorInterface;
 
@@ -27,24 +29,25 @@ class CategoryMenuBoxConfigurator extends AbstractLayoutBoxConfigurator implemen
     /**
      * {@inheritdoc}
      */
-    public function addFormFields(FormBuilderInterface $builder, $defaults)
+    public function addFormFields(FormBuilderInterface $builder, FormInterface $form, $defaults)
     {
-        $fieldset = $this->getFieldset($builder);
+        $fieldset = $this->getFieldset($builder, $form);
         $accessor = $this->getPropertyAccessor();
 
         $fieldset->addChild($builder->getElement('tip', [
-            'tip' => '<p>'.$this->trans('Choose categories which should be not visible in box.').'</p>'
+            'tip' => '<p>' . $this->trans('Choose categories which should be not visible in box.') . '</p>'
         ]));
 
         $fieldset->addChild($builder->getElement('tree', [
-            'name'       => 'exclude',
-            'label'      => $this->trans('category.parent'),
-            'choosable'  => false,
-            'selectable' => true,
-            'sortable'   => false,
-            'clickable'  => false,
-            'items'      => $this->get('category.repository')->getTreeItems(),
-            'default'    => $accessor->getValue($defaults, '[exclude]')
+            'name'        => 'exclude',
+            'label'       => $this->trans('category.label.exclude'),
+            'choosable'   => false,
+            'selectable'  => true,
+            'sortable'    => false,
+            'clickable'   => false,
+            'items'       => $this->get('category.collection.admin')->getFlatTree(),
+            'transformer' => new EntityToIdentifierTransformer($this->get('category.repository')),
+            'default'     => $accessor->getValue($defaults, '[exclude]')
         ]));
     }
 }

@@ -17,7 +17,6 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 /**
  * Interface AttributeGroupRepositoryInterface
  *
- * @package WellCommerce\Bundle\AttributeBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface AttributeGroupRepositoryInterface extends RepositoryInterface
