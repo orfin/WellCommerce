@@ -24,14 +24,14 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderStatusGroup;
 class LoadOrderStatusGroupData extends AbstractDataFixture
 {
 
-    const SAMPLES = ['Processing', 'Prepared', 'Completed'];
+    public static $samples = ['Processing', 'Prepared', 'Completed'];
 
     /**
      * {@inheritDoc}
      */
     public function load(ObjectManager $manager)
     {
-        foreach (self::SAMPLES as $name) {
+        foreach (self::$samples as $name) {
             $orderStatusGroup = new OrderStatusGroup();
             $orderStatusGroup->translate('en')->setName($name);
             $orderStatusGroup->mergeNewTranslations();

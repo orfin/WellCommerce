@@ -24,7 +24,7 @@ use WellCommerce\Bundle\RoutingBundle\Helper\Sluggable;
  */
 class LoadProducerData extends AbstractDataFixture
 {
-    const SAMPLES = ['LG', 'Samsung', 'Sony', 'Panasonic', 'Toshiba'];
+    public static $samples = ['LG', 'Samsung', 'Sony', 'Panasonic', 'Toshiba'];
 
     /**
      * {@inheritDoc}
@@ -33,7 +33,7 @@ class LoadProducerData extends AbstractDataFixture
     {
         $shop = $this->getReference('shop');
 
-        foreach (self::SAMPLES as $name) {
+        foreach (self::$samples as $name) {
             $producer = new Producer();
             $producer->addShop($shop);
             $producer->translate('en')->setName($name);
@@ -44,22 +44,5 @@ class LoadProducerData extends AbstractDataFixture
         }
 
         $manager->flush();
-    }
-    
-    /**
-     * Sample demo data
-     *
-     * @return array
-     */
-    protected function getSampleProducers()
-    {
-        return [
-            'LG',
-            'Samsung',
-            'Sony',
-            'Panasonic',
-            'Toshiba',
-        ];
-        
     }
 }

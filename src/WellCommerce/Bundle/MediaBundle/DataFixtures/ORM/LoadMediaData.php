@@ -25,7 +25,7 @@ use WellCommerce\Bundle\MediaBundle\Entity\Media;
  */
 class LoadMediaData extends AbstractDataFixture
 {
-    const SAMPLES
+    public static $samples
         = [
             'prod1.jpg',
             'prod2.jpg',
@@ -55,7 +55,7 @@ class LoadMediaData extends AbstractDataFixture
         $uploadPath = $uploader->getUploadRootDir('images');
         $filesystem = $this->container->get('filesystem');
 
-        foreach (self::SAMPLES as $photo) {
+        foreach (self::$samples as $photo) {
             $image = new UploadedFile(
                 $rootPath . $photo,
                 $photo,
