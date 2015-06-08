@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <imports>
+        <import resource="admin/client.xml"/>
+        <import resource="front/client.xml"/>
+    </imports>
+
+    <services>
+        <service id="client.repository" class="WellCommerce\Bundle\ClientBundle\Repository\ClientRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceClientBundle:Client</argument>
+        </service>
+
+        <service id="client.dataset.query_builder" class="WellCommerce\Bundle\ClientBundle\DataSet\ClientDataSetQueryBuilder" public="false">
+            <argument type="service" id="client.repository"/>
+        </service>
+
+        <service id="client.dataset.loader" class="%dataset.loader.class%">
+            <argument type="service" id="client.dataset.query_builder"/>
+            <argument type="service" id="dataset.processor"/>
+        </service>
+
+        <service id="client.dataset" class="WellCommerce\Bundle\ClientBundle\DataSet\ClientDataSet">
+            <argument key="identifier">client</argument>
+            <argument type="service" id="client.dataset.loader"/>
+            <configurator service="dataset.configurator" method="configure"/>
+        </service>
+
+        <service id="client.subscriber" class="WellCommerce\Bundle\ClientBundle\EventListener\ClientSubscriber">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <tag name="kernel.event_subscriber"  />
+        </service>
+
+        <service id="client_login.layout_box.controller" class="WellCommerce\Bundle\ClientBundle\Controller\Box\ClientLoginBoxController">
+            <argument type="service" id="client.manager.front"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+    </services>
+</container>
