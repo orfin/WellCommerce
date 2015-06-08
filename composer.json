@@ -25,11 +25,10 @@
         }
     },
     "require": {
-        "php": ">=5.4",
-        "symfony/symfony": "2.6.*",
-        "doctrine/orm": "2.5.*@dev",
-        "doctrine/common": "2.5.*@dev",
-        "doctrine/doctrine-bundle": "~1.2",
+        "php": ">=5.6",
+        "symfony/symfony": "2.7.*",
+        "doctrine/orm": "2.6.*@dev",
+        "doctrine/doctrine-bundle": "1.5.*@dev",
         "doctrine/migrations": "1.0.*@dev",
         "doctrine/doctrine-migrations-bundle": "2.1.*@dev",
         "twig/extensions": "~1.0",
@@ -65,7 +64,7 @@
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
         "doctrine/doctrine-fixtures-bundle": "2.2.x-dev",
-        "codeception/codeception": "*"
+        "phpunit/phpunit":  "5.0.*@dev"
     },
     "scripts": {
         "post-root-package-install": [
