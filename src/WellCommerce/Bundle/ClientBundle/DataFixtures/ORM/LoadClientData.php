@@ -31,20 +31,18 @@ class LoadClientData extends AbstractDataFixture
         $fakerGenerator = $this->getFakerGenerator();
         $clientGroup    = $this->getReference('client_group');
         
-        for ($i = 1; $i <= 10; $i++) {
-            $client = new Client();
-            $client->setFirstName($fakerGenerator->firstName);
-            $client->setLastName($fakerGenerator->lastName);
-            $client->setEmail($fakerGenerator->email);
-            $client->setPhone($fakerGenerator->phoneNumber);
-            $client->setDiscount(25);
-            $client->setPassword(time());
-            $client->setConditionsAccepted(true);
-            $client->setNewsletterAccepted(true);
-            $client->setGroup($clientGroup);
-            $manager->persist($client);
-        }
-        
+        $client = new Client();
+        $client->setFirstName($fakerGenerator->firstName);
+        $client->setLastName($fakerGenerator->lastName);
+        $client->setEmail('demo@wellcommerce.org');
+        $client->setPhone($fakerGenerator->phoneNumber);
+        $client->setDiscount(25);
+        $client->setPassword('demo');
+        $client->setConditionsAccepted(true);
+        $client->setNewsletterAccepted(true);
+        $client->setGroup($clientGroup);
+        $manager->persist($client);
+
         $manager->flush();
     }
 }

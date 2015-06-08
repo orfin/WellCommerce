@@ -27,6 +27,14 @@ class UserLoginFormBuilder extends AbstractFormBuilder implements FormBuilderInt
      */
     public function buildForm(FormInterface $form)
     {
+        $form->addChild($this->getElement('tip', [
+            'tip'  =>
+                '<p>Default credentials:<br/><br/>
+                    <strong>Username:</strong> admin<br/>
+                    <strong>Login:</strong> admin<br/>
+                </p>',
+        ]));
+
         $form->addChild($this->getElement('text_field', [
             'name'  => '_username',
             'label' => $this->trans('user.label.username'),
