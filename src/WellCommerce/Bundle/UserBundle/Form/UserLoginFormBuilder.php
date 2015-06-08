@@ -29,17 +29,17 @@ class UserLoginFormBuilder extends AbstractFormBuilder implements FormBuilderInt
     {
         $form->addChild($this->getElement('text_field', [
             'name'  => '_username',
-            'label' => $this->trans('user_login.username.label'),
+            'label' => $this->trans('user.label.username'),
         ]));
 
         $form->addChild($this->getElement('password', [
             'name'  => '_password',
-            'label' => $this->trans('user_login.password.label'),
+            'label' => $this->trans('user.label.password'),
         ]));
 
         $form->addChild($this->getElement('submit', [
             'name'  => 'log_in',
-            'label' => $this->trans('user_login.log_in.label'),
+            'label' => $this->trans('user.button.log_in'),
         ]));
 
         $form->addFilter($this->getFilter('no_code'));

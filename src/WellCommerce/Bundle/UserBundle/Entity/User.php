@@ -31,7 +31,6 @@ class User implements \Serializable, UserInterface, EquatableInterface
 {
     use Timestampable;
     use Blameable;
-    use PhotoTrait;
     use EnableableTrait;
 
     /**

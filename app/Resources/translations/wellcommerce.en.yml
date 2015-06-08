@@ -32,7 +32,6 @@ admin:
         sales: Sales
         tax: Taxes
         theme: Themes
-        user_management: Administrators
         package: Packages
         channel: Channels
         smuggler: 'Package management'
@@ -42,10 +41,36 @@ admin:
         unit: Units
         order_status: 'Order statuses'
         order_status_group: 'Order status groups'
-        user: Administrators
 form:
     label:
-        required_fields: '* required fields'
+        required_data: 'Required data'
+    button:
+        save_and_finish: Save and finish
+        save_and_continue: Save and continue
+        back: Return
+
+user:
+    admin_menu:
+        user_management: User management
+        user: Administrators
+    label:
+        username: Username
+        password: Password
+        email: E-mail
+        enabled: Enabled
+        first_name: First name
+        last_name: Last name
+    heading:
+        index: Users
+        add: Add new user
+        edit: Edit user
+        delete: Delete user
+    button:
+        log_in: Log in
+        add: Add new user
+
+
+
 package:
     heading:
         index: Packages
