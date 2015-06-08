@@ -12,10 +12,14 @@
 
 namespace WellCommerce\Bundle\LayoutBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 /**
  * Class LayoutBox
+ *
+ * @ORM\Table("layout_box")
+ * @ORM\Entity(repositoryClass="WellCommerce\Bundle\LayoutBundle\Repository\LayoutBoxRepository")
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */

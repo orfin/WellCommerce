@@ -139,14 +139,14 @@
             <tag name="layout_box.configurator" />
         </service>
 
-        <service id="client_wishlist.layout_box.controller" class="WellCommerce\Bundle\ClientBundle\Controller\Box\ClientWishListBoxController">
+        <service id="client_wishlist.layout_box.controller" class="WellCommerce\Bundle\ClientBundle\Controller\Box\ClientWishlistBoxController">
             <argument type="service" id="client.manager.front"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
         </service>
 
-        <service id="client_wishlist.configurator" class="WellCommerce\Bundle\ClientBundle\Layout\ClientWishListBoxConfigurator">
+        <service id="client_wishlist.configurator" class="WellCommerce\Bundle\ClientBundle\Layout\ClientWishlistBoxConfigurator">
             <argument>ClientWishListBox</argument>
             <argument>client_wishlist.layout_box.controller</argument>
             <call method="setContainer">
