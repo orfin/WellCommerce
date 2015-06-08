@@ -4,10 +4,6 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <route id="front.client.index" path="/">
-        <default key="_controller">client.controller.front:indexAction</default>
-    </route>
-
     <route id="front.client.login" path="/login">
         <default key="_controller">client.controller.front:loginAction</default>
     </route>
@@ -24,8 +20,16 @@
         <default key="_controller">client.controller.front:settingsAction</default>
     </route>
 
-    <route id="front.client.orders" path="/orders/index">
+    <route id="front.client.orders" path="/orders">
         <default key="_controller">client.controller.front:ordersAction</default>
+    </route>
+
+    <route id="front.client.wishlist" path="/wishlist">
+        <default key="_controller">client.controller.front:wishlistAction</default>
+    </route>
+
+    <route id="front.client.address_book" path="/addresses">
+        <default key="_controller">client.controller.front:addressBookAction</default>
     </route>
 
     <route id="front.client.login_check" path="/login_check" />

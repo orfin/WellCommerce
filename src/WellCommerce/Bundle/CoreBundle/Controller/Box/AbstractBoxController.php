@@ -22,6 +22,16 @@ use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 abstract class AbstractBoxController extends AbstractFrontController implements BoxControllerInterface
 {
     /**
+     * All box controllers have default index action which returns only an empty array
+     *
+     * @return array
+     */
+    public function indexAction()
+    {
+        return [];
+    }
+
+    /**
      * Returns setting from box configuration
      *
      * @param string $index
