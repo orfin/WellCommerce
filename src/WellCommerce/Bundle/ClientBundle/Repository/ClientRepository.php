@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\ClientBundle\Repository;
 
-use Doctrine\Common\Util\Debug;
 use Doctrine\ORM\NoResultException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;

@@ -36,3 +36,4 @@ class ShippingMethodCalculatorCollection extends AbstractCollection
         $this->items[$alias] = $calculator;
     }
 }
+

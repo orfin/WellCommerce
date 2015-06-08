@@ -12,10 +12,8 @@
 
 namespace WellCommerce\Bundle\MultiStoreBundle\Context\Admin;
 
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use WellCommerce\Bundle\MultiStoreBundle\Context\AbstractShopContext;
 use WellCommerce\Bundle\MultiStoreBundle\Context\ShopContextInterface;
-use WellCommerce\Bundle\MultiStoreBundle\Entity\Shop;
 
 /**
  * Class ShopContext

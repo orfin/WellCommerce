@@ -105,5 +105,4 @@ class Meta
     {
         $this->description = $description;
     }
-
 }

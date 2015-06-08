@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\ShippingBundle\Calculator;
 
 use WellCommerce\Bundle\CartBundle\Provider\CartProviderInterface;
-use WellCommerce\Bundle\CartBundle\Provider\CartSummaryProviderInterface;
 
 /**
  * Class AbstractShippingMethodCalculator

@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\CategoryBundle\Controller\Box;
 
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
-use WellCommerce\Bundle\DataSetBundle\Conditions\Condition;
 
 /**
  * Class CategoryProductsBoxController

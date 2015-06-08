@@ -11,7 +11,6 @@
  */
 namespace WellCommerce\Bundle\MultiStoreBundle\Twig\Extension;
 
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use WellCommerce\Bundle\MultiStoreBundle\Context\ShopContextInterface;
 
 /**

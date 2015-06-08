@@ -12,7 +12,6 @@
 namespace WellCommerce\Bundle\CartBundle\EventListener;
 
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use WellCommerce\Bundle\CartBundle\Entity\Cart;
 use WellCommerce\Bundle\ClientBundle\Entity\Client;
@@ -35,18 +34,20 @@ class CartSubscriber extends AbstractEventSubscriber
 
     public function onKernelController(FilterControllerEvent $event)
     {
-        $requestHelper       = $this->container->get('request_helper');
-        $shop                = $this->container->get('shop.context.front')->getCurrentScope();
-        $sessionId           = $requestHelper->getSessionId();
-        $client              = $requestHelper->getClient();
-        $cartProvider        = $this->container->get('cart.provider');
-        $cart                = $this->getCart($shop, $client, $sessionId);
-        $cartSummaryProvider = $this->container->get('cart_summary.provider');
-        $cartQueryBuilder    = $this->container->get('cart_product.dataset.query_builder.front');
+        if ($event->isMasterRequest()) {
+            $requestHelper       = $this->container->get('request_helper');
+            $shop                = $this->container->get('shop.context.front')->getCurrentScope();
+            $sessionId           = $requestHelper->getSessionId();
+            $client              = $requestHelper->getClient();
+            $cartProvider        = $this->container->get('cart.provider');
+            $cart                = $this->getCart($shop, $client, $sessionId);
+            $cartSummaryProvider = $this->container->get('cart_summary.provider');
+            $cartQueryBuilder    = $this->container->get('cart_product.dataset.query_builder.front');
 
-        $cartProvider->setCurrentCart($cart);
-        $cartSummaryProvider->setCart($cart);
-        $cartQueryBuilder->setCart($cart);
+            $cartProvider->setCurrentCart($cart);
+            $cartSummaryProvider->setCart($cart);
+            $cartQueryBuilder->setCart($cart);
+        }
     }
 
     /**

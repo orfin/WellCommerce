@@ -12,9 +12,6 @@
 
 namespace WellCommerce\Bundle\ShippingBundle\Calculator;
 
-use WellCommerce\Bundle\CartBundle\Provider\CartSummaryProviderInterface;
-use WellCommerce\Bundle\FormBundle\Elements\Fieldset;
-
 /**
  * Interface ShippingMethodCalculatorInterface
  *
@@ -43,3 +40,4 @@ interface ShippingMethodCalculatorInterface
      */
     public function calculate();
 }
+

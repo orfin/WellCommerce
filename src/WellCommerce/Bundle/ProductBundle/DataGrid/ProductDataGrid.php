@@ -16,7 +16,6 @@ use WellCommerce\Bundle\DataGridBundle\Column\Column;
 use WellCommerce\Bundle\DataGridBundle\Column\ColumnCollection;
 use WellCommerce\Bundle\DataGridBundle\Column\Options\Appearance;
 use WellCommerce\Bundle\DataGridBundle\Column\Options\Filter;
-use WellCommerce\Bundle\DataGridBundle\Configuration\EventHandler\CustomRowEventHandler;
 use WellCommerce\Bundle\DataGridBundle\Configuration\EventHandler\UpdateRowEventHandler;
 use WellCommerce\Bundle\DataGridBundle\DataGridInterface;
 use WellCommerce\Bundle\DataGridBundle\Options\OptionsInterface;

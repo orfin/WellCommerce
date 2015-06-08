@@ -42,7 +42,7 @@ class CartProductDataSetQueryBuilder extends AbstractDataSetQueryBuilder impleme
     public function getQueryBuilder()
     {
         $queryBuilder = parent::getQueryBuilder();
-        $cartId       = (null != $this->cart) ? $this->cart->getId() : 0;
+        $cartId       = (null !== $this->cart) ? $this->cart->getId() : 0;
         $expression   = $queryBuilder->expr()->eq('cart_product.cart', ':cart');
         $queryBuilder->andWhere($expression);
         $queryBuilder->setParameter('cart', $cartId);

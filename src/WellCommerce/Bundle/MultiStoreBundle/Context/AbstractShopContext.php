@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\MultiStoreBundle\Context;
 
-use Doctrine\Common\Util\Debug;
 use Symfony\Component\HttpFoundation\RequestStack;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\Shop;
 use WellCommerce\Bundle\MultiStoreBundle\Repository\ShopRepositoryInterface;

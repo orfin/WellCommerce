@@ -41,16 +41,6 @@ class LayoutBox
     private $settings;
 
     /**
-     * @var bool
-     */
-    private $visibility;
-
-    /**
-     * @var bool
-     */
-    private $showHeader;
-
-    /**
      * @var string
      */
     private $identifier;

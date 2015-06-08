@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\IntlBundle\Importer;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
 use WellCommerce\Bundle\CoreBundle\Helper\Doctrine\DoctrineHelperInterface;
 use WellCommerce\Bundle\IntlBundle\Entity\CurrencyRate;
 use WellCommerce\Bundle\IntlBundle\Repository\CurrencyRateRepositoryInterface;

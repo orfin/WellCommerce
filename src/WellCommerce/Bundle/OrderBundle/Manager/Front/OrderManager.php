@@ -53,12 +53,14 @@ class OrderManager extends AbstractFrontManager
         $orderProducts = new ArrayCollection();
 
         foreach ($cartProducts as $cartProduct) {
+            $netPrice     = $cartProduct->getProduct()->getSellPrice()->getAmount();
+            $grossPrice   = $cartProduct->getProduct()->getSellPriceTax()->calculateGrossPrice($netPrice);
             $orderProduct = new OrderProduct();
             $orderProduct->setAttribute($cartProduct->getAttribute());
             $orderProduct->setProduct($cartProduct->getProduct());
-            $orderProduct->setNetPrice($cartProduct->getProduct()->getSellPrice());
-            $orderProduct->setGrossPrice($cartProduct->getProduct()->getSellPrice());
-            $orderProduct->setTaxValue(0.23);
+            $orderProduct->setNetPrice($netPrice);
+            $orderProduct->setGrossPrice($grossPrice);
+            $orderProduct->setTaxValue($grossPrice - $netPrice);
             $orderProduct->setQuantity($cartProduct->getQuantity());
             $orderProduct->setOrder($order);
             $orderProduct->setWeight($cartProduct->getProduct()->getWeight());
@@ -82,7 +84,7 @@ class OrderManager extends AbstractFrontManager
 
         $shippingMethodCostModifier = new OrderModifier();
         $shippingMethodCostModifier->setOrder($order);
-        $shippingMethodCostModifier->setIsIncrease(true);
+        $shippingMethodCostModifier->setIncrease(true);
         $shippingMethodCostModifier->setNetValue(10);
         $shippingMethodCostModifier->setGrossValue(12.30);
         $shippingMethodCostModifier->setTaxValue(2.30);
@@ -97,10 +99,10 @@ class OrderManager extends AbstractFrontManager
 
         $paymentMethodCostModifier = new OrderModifier();
         $paymentMethodCostModifier->setOrder($order);
-        $paymentMethodCostModifier->setIsIncrease(true);
-        $paymentMethodCostModifier->setNetValue($surchargeNet = $cart->getTotals()->getPriceNet() * 0.03);
-        $paymentMethodCostModifier->setGrossValue($surchargeGross = $cart->getTotals()->getPriceNet() * 0.03);
-        $paymentMethodCostModifier->setTaxValue($surchargeTax = $surchargeGross - $surchargeNet);
+        $paymentMethodCostModifier->setIncrease(true);
+        $paymentMethodCostModifier->setNetValue($surchargeNet = $cart->getTotals()->getNetPrice() * 0.03);
+        $paymentMethodCostModifier->setGrossValue($surchargeGross = $cart->getTotals()->getGrossPrice() * 0.03);
+        $paymentMethodCostModifier->setTaxValue($surchargeGross - $surchargeNet);
         $paymentMethodCostModifier->setHierarchy(20);
         $paymentMethodCostModifier->setModifierDetails($paymentMethodCostModifierDetails);
 
@@ -110,8 +112,8 @@ class OrderManager extends AbstractFrontManager
         $clientDiscountModifierDetails->setName('client_discount');
         $clientDiscountModifierDetails->setDescription('Client discount');
 
-        $discountBaseNet   = ($cart->getTotals()->getPriceNet() + $surchargeNet);
-        $discountBaseGross = ($cart->getTotals()->getPriceGross() + $surchargeGross);
+        $discountBaseNet   = ($cart->getTotals()->getNetPrice() + $surchargeNet);
+        $discountBaseGross = ($cart->getTotals()->getGrossPrice() + $surchargeGross);
 
         $clientDiscountNet   = $discountBaseNet * 0.1;
         $clientDiscountGross = $discountBaseGross * 0.1;
@@ -119,7 +121,7 @@ class OrderManager extends AbstractFrontManager
 
         $clientDiscountModifier = new OrderModifier();
         $clientDiscountModifier->setOrder($order);
-        $clientDiscountModifier->setIsIncrease(false);
+        $clientDiscountModifier->setIncrease(false);
         $clientDiscountModifier->setNetValue($clientDiscountNet);
         $clientDiscountModifier->setGrossValue($clientDiscountGross);
         $clientDiscountModifier->setTaxValue($clientDiscountTax);

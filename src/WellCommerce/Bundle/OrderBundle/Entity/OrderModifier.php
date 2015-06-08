@@ -48,9 +48,11 @@ class OrderModifier
     protected $grossValue;
 
     /**
+     * @var bool
+     *
      * @ORM\Column(name="is_increase", type="boolean", nullable=false)
      */
-    protected $isIncrease;
+    protected $increase;
 
     /**
      * @ORM\Embedded(class = "WellCommerce\Bundle\OrderBundle\Entity\OrderModifierDetails", columnPrefix = "modifier_detalils_")
@@ -132,17 +134,17 @@ class OrderModifier
     /**
      * @return bool
      */
-    public function getIsIncrease()
+    public function isIncrease()
     {
-        return $this->isIncrease;
+        return $this->increase;
     }
 
     /**
-     * @param bool $isIncrease
+     * @param bool $increase
      */
-    public function setIsIncrease($isIncrease)
+    public function setIncrease($increase)
     {
-        $this->isIncrease = $isIncrease;
+        $this->increase = $increase;
     }
 
     /**

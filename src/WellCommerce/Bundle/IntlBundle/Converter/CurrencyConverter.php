@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\IntlBundle\Converter;
 
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use WellCommerce\Bundle\IntlBundle\Entity\CurrencyRate;
 use WellCommerce\Bundle\IntlBundle\Repository\CurrencyRateRepositoryInterface;
 

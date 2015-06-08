@@ -13,8 +13,6 @@
 namespace WellCommerce\Bundle\IntlBundle\Purger;
 
 
-use WellCommerce\Bundle\CartBundle\Repository\CartRepositoryInterface;
-use WellCommerce\Bundle\CoreBundle\Helper\Doctrine\DoctrineHelperInterface;
 use WellCommerce\Bundle\CoreBundle\Purger\AbstractPurger;
 use WellCommerce\Bundle\CoreBundle\Purger\PurgerInterface;
 

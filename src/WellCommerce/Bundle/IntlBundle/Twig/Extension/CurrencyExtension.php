@@ -11,7 +11,6 @@
  */
 namespace WellCommerce\Bundle\IntlBundle\Twig\Extension;
 
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use WellCommerce\Bundle\IntlBundle\Converter\CurrencyConverterInterface;
 use WellCommerce\Bundle\IntlBundle\Provider\CurrencyProviderInterface;
 
