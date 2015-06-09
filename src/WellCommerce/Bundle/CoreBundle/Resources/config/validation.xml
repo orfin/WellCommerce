@@ -35,4 +35,19 @@
             <constraint name="NotBlank" />
         </property>
     </class>
+    <class name="WellCommerce\Bundle\CoreBundle\Entity\ContactDetails">
+        <property name="phone">
+            <constraint name="NotNull" />
+            <constraint name="NotBlank" />
+        </property>
+        <property name="secondaryPhone">
+            <constraint name="NotNull" />
+            <constraint name="NotBlank" />
+        </property>
+        <property name="email">
+            <constraint name="NotNull" />
+            <constraint name="NotBlank" />
+            <constraint name="Email" />
+        </property>
+    </class>
 </constraint-mapping>

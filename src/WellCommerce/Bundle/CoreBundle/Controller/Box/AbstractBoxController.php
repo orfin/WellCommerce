@@ -11,6 +11,7 @@
  */
 namespace WellCommerce\Bundle\CoreBundle\Controller\Box;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 
@@ -21,16 +22,6 @@ use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
  */
 abstract class AbstractBoxController extends AbstractFrontController implements BoxControllerInterface
 {
-    /**
-     * All box controllers have default index action which returns only an empty array
-     *
-     * @return array
-     */
-    public function indexAction()
-    {
-        return [];
-    }
-
     /**
      * Returns setting from box configuration
      *

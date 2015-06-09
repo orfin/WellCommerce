@@ -43,6 +43,14 @@
             </call>
         </service>
 
+        <service id="client_contact_details.form_builder.front" class="WellCommerce\Bundle\ClientBundle\Form\Front\ClientContactDetailsFormBuilder">
+            <argument type="service" id="form.resolver.factory"/>
+            <argument type="service" id="form.handler"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
         <service id="client_login.layout_box.controller" class="WellCommerce\Bundle\ClientBundle\Controller\Box\ClientLoginBoxController">
             <argument type="service" id="client.manager.front"/>
             <call method="setContainer">

@@ -12,9 +12,14 @@
             <constraint name="NotBlank" />
             <constraint name="NotNull" />
         </property>
+        <property name="phone">
+            <constraint name="NotBlank" />
+            <constraint name="NotNull" />
+        </property>
         <property name="email">
             <constraint name="NotBlank" />
             <constraint name="NotNull" />
+            <constraint name="Email" />
         </property>
         <property name="password">
             <constraint name="NotBlank" />

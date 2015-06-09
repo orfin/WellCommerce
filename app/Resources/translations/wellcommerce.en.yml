@@ -42,9 +42,12 @@ admin:
         order_status: 'Order statuses'
         order_status_group: 'Order status groups'
 form:
+    help:
+        required_fields: '* required fields'
     label:
         required_data: 'Required data'
     button:
+        save: Save changes
         save_and_finish: Save and finish
         save_and_continue: Save and continue
         back: Return
@@ -72,23 +75,19 @@ client:
     heading:
         login: 'Sign in'
         register: 'Sign up'
-    form:
-        label:
-            first_name: Firstname
-            last_name: Lastname
-            email: E-mail
-            phone: Phone
-            password: Password
-            client_group: Group
-            discount: Discount
-        error:
-            first_name:
-                empty: 'Firstname cannot be empty'
-            last_name:
-                empty: 'Firstname cannot be empty'
-        button:
-            login: 'Sign in'
-            register: 'Sign up'
+        contact_details: Contact details
+    label:
+        first_name: Firstname
+        last_name: Lastname
+        email: E-mail
+        phone: Phone
+        secondary_phone: Secondary phone
+        password: Password
+        client_group: Group
+        discount: Discount
+    button:
+        login: Sign in
+        register: Sign up
     link:
         login: Sign in
         register: Sign up

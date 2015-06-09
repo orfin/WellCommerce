@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\ClientBundle\Controller\Box;
 
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
-use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
 
 /**
  * Class ClientMenuBoxController
@@ -24,5 +23,8 @@ use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
  */
 class ClientMenuBoxController extends AbstractBoxController
 {
-
+    public function indexAction()
+    {
+        return [];
+    }
 }
