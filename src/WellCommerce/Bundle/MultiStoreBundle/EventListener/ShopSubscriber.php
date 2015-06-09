@@ -11,6 +11,7 @@
  */
 namespace WellCommerce\Bundle\MultiStoreBundle\EventListener;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
@@ -58,8 +59,7 @@ class ShopSubscriber extends AbstractEventSubscriber
                 $this->container->get('session')->set('admin/shops', $shops);
             }
 
-            $url          = $request->server->get('HTTP_HOST');
-            $currentHost  = parse_url($url, PHP_URL_HOST);
+            $currentHost  = $request->server->get('SERVER_NAME');
             $adminContext = $this->container->get('shop.context.admin');
             $frontContext = $this->container->get('shop.context.front');
             $themeManager = $this->container->get('theme.manager');
@@ -80,5 +80,21 @@ class ShopSubscriber extends AbstractEventSubscriber
 
             $themeManager->setCurrentTheme($frontContext->getCurrentScope()->getTheme());
         }
+    }
+
+    /**
+     * Returns current host
+     *
+     * @param Request $request
+     *
+     * @return string
+     */
+    private function getCurrentHost(Request $request)
+    {
+        if (null !== $url = $request->server->get('SERVER_NAME')) {
+            return $url;
+        }
+
+        return parse_url($request->server->get('HTTP_HOST'), PHP_URL_HOST);
     }
 }
