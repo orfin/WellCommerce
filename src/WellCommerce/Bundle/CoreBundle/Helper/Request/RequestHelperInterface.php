@@ -115,4 +115,11 @@ interface RequestHelperInterface
      * @return null|\WellCommerce\Bundle\ClientBundle\Entity\Client
      */
     public function getClient();
+
+    /**
+     * Returns current host name
+     *
+     * @return string
+     */
+    public function getCurrentHost();
 }

@@ -61,6 +61,18 @@ class RequestHelper implements RequestHelperInterface
     /**
      * {@inheritdoc}
      */
+    public function getCurrentHost()
+    {
+        if (null !== $url = $this->request->server->get('SERVER_NAME')) {
+            return $url;
+        }
+
+        return parse_url($this->request->server->get('HTTP_HOST'), PHP_URL_HOST);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getSessionAttribute($name, $default = null)
     {
         return $this->session->get($name, $default);
