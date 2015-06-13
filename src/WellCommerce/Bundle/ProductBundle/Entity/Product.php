@@ -133,7 +133,7 @@ class Product
     protected $buyPriceTax;
 
     /**
-     * @ORM\Embedded(class = "WellCommerce\Bundle\CoreBundle\Entity\Price", columnPrefix = "sell_price_")
+     * @ORM\Embedded(class = "WellCommerce\Bundle\CoreBundle\Entity\DiscountablePrice", columnPrefix = "sell_price_")
      */
     protected $sellPrice;
 

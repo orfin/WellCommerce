@@ -13,6 +13,7 @@ namespace WellCommerce\Bundle\ProductBundle\Form;
 
 use WellCommerce\Bundle\FormBundle\Builder\AbstractFormBuilder;
 use WellCommerce\Bundle\FormBundle\DataTransformer\CollectionToArrayTransformer;
+use WellCommerce\Bundle\FormBundle\DataTransformer\DateTransformer;
 use WellCommerce\Bundle\FormBundle\DataTransformer\EntityToIdentifierTransformer;
 use WellCommerce\Bundle\FormBundle\DataTransformer\TranslationTransformer;
 use WellCommerce\Bundle\FormBundle\Elements\ElementInterface;
@@ -185,6 +186,27 @@ class ProductFormBuilder extends AbstractFormBuilder
                 $this->getFilter('comma_to_dot_changer'),
             ],
             'vat_field' => $sellPriceTax,
+        ]));
+
+        $sellPriceSettings->addChild($this->getElement('price_editor', [
+            'name'      => 'sellPrice.discountedAmount',
+            'label'     => $this->trans('product.label.discounted_amount'),
+            'filters'   => [
+                $this->getFilter('comma_to_dot_changer'),
+            ],
+            'vat_field' => $sellPriceTax,
+        ]));
+
+        $sellPriceSettings->addChild($this->getElement('date', [
+            'name'        => 'sellPrice.validFrom',
+            'label'       => $this->trans('product.label.valid_from'),
+            'transformer' => new DateTransformer('m/d/Y'),
+        ]));
+
+        $sellPriceSettings->addChild($this->getElement('date', [
+            'name'        => 'sellPrice.validTo',
+            'label'       => $this->trans('product.label.valid_to'),
+            'transformer' => new DateTransformer('m/d/Y')
         ]));
 
         $stockData = $form->addChild($this->getElement('nested_fieldset', [
