@@ -24,24 +24,29 @@ use WellCommerce\Bundle\FormBundle\DataTransformer\CollectionToArrayTransformer;
 class AttributeCollectionToArrayTransformer extends CollectionToArrayTransformer
 {
     /**
-     * @var \WellCommerce\Bundle\AttributeBundle\Repository\AttributeRepositoryInterface
-     */
-    protected $repository;
-
-    /**
      * {@inheritdoc}
      */
     public function reverseTransform($modelData, PropertyPathInterface $propertyPath, $value)
     {
         $collection = new ArrayCollection();
+        $repository = $this->getRepository();
+
         if (null === $value || empty($value)) {
             return $collection;
         }
         foreach ($value['editor'] as $attribute) {
-            $item = $this->repository->findOrCreate($attribute);
+            $item = $repository->findOrCreate($attribute);
             $collection->add($item);
         }
 
         $this->propertyAccessor->setValue($modelData, $propertyPath, $collection);
+    }
+
+    /**
+     * @return \WellCommerce\Bundle\AttributeBundle\Repository\AttributeRepositoryInterface
+     */
+    protected function getRepository()
+    {
+        return parent::getRepository();
     }
 }
