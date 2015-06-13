@@ -20,7 +20,6 @@ before_script:
     - echo "zend.enable_gc = 0" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
     - echo "memory_limit=4096M" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
 
-    - mysql -e 'create database travis;'
     - cp app/config/parameters.yml.travis app/config/parameters.yml
 
     - composer self-update
