@@ -82,6 +82,11 @@ abstract class AbstractShopContext
     /**
      * {@inheritdoc}
      */
+    abstract public function getSessionBagNamespace();
+
+    /**
+     * {@inheritdoc}
+     */
     public function getCurrentScopeId()
     {
         if (null === $this->requestStack->getMasterRequest()) {
@@ -95,19 +100,6 @@ abstract class AbstractShopContext
     }
 
     /**
-     * Sets current shop scope by url
-     *
-     * @param string $host
-     */
-    public function setCurrentScopeByHost($host)
-    {
-        $result = $this->repository->findOneBy(['url' => $host]);
-        if (null !== $result) {
-            $this->setCurrentScope($result);
-        }
-    }
-
-    /**
      * Determines current scope by host
      *
      * @param $host
@@ -118,7 +110,17 @@ abstract class AbstractShopContext
     }
 
     /**
-     * {@inheritdoc}
+     * Sets current shop scope by url
+     *
+     * @param string $host
      */
-    abstract public function getSessionBagNamespace();
+    public function setCurrentScopeByHost($host)
+    {
+        $shop = $this->repository->findOneBy(['url' => $host]);
+        if (null === $shop) {
+            $shop = $this->repository->findOneBy([]);
+        }
+
+        $this->setCurrentScope($shop);
+    }
 }

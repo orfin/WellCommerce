@@ -54,7 +54,6 @@ class RequestHelper implements RequestHelperInterface
     {
         $this->requestStack    = $requestStack;
         $this->request         = $requestStack->getMasterRequest();
-        $this->session         = $this->request->getSession();
         $this->securityContext = $securityContext;
     }
 
@@ -67,7 +66,11 @@ class RequestHelper implements RequestHelperInterface
             return $url;
         }
 
-        return parse_url($this->request->server->get('HTTP_HOST'), PHP_URL_HOST);
+        if (null !== $url = $this->request->server->get('HTTP_HOST')) {
+            return parse_url($url, PHP_URL_HOST);
+        }
+
+        return null;
     }
 
     /**
@@ -75,7 +78,7 @@ class RequestHelper implements RequestHelperInterface
      */
     public function getSessionAttribute($name, $default = null)
     {
-        return $this->session->get($name, $default);
+        return $this->request->getSession()->get($name, $default);
     }
 
     /**
@@ -83,7 +86,7 @@ class RequestHelper implements RequestHelperInterface
      */
     public function hasSessionAttribute($name)
     {
-        return $this->session->has($name);
+        return $this->request->getSession()->has($name);
     }
 
     /**
@@ -91,7 +94,7 @@ class RequestHelper implements RequestHelperInterface
      */
     public function getSessionId()
     {
-        return $this->session->getId();
+        return $this->request->getSession()->getId();
     }
 
     /**

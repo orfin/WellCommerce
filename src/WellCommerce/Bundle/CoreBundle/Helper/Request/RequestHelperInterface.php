@@ -121,5 +121,12 @@ interface RequestHelperInterface
      *
      * @return string
      */
+    /**
+     * Returns current host
+     *
+     * @param null $fallbackHost
+     *
+     * @return string|null
+     */
     public function getCurrentHost();
 }
