@@ -95,6 +95,17 @@ class PageFormBuilder extends AbstractFormBuilder implements FormBuilderInterfac
             'restrict'    => $this->getParam('id'),
             'transformer' => new EntityToIdentifierTransformer($this->get('page.repository'))
         ]));
+
+        $mainData->addChild($this->getElement('tip', [
+            'tip' => $this->trans('page.tip.client_groups')
+        ]));
+
+        $mainData->addChild($this->getElement('multi_select', [
+            'name'        => 'clientGroups',
+            'label'       => $this->trans('page.label.client_groups'),
+            'options'     => $this->get('client_group.collection')->getSelect(),
+            'transformer' => new CollectionToArrayTransformer($this->get('client_group.repository'))
+        ]));
     }
 
     /**

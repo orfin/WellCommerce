@@ -41,42 +41,51 @@ class Page
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(name="publish", type="boolean", options={"default" = 0})
      *
      */
-    private $publish;
+    protected $publish;
 
     /**
      * @ORM\Column(name="redirect_type", type="integer", options={"default" = 0})
      *
      */
-    private $redirectType;
+    protected $redirectType;
 
     /**
      * @ORM\Column(name="redirect_url", type="string", length=255, nullable=true)
      *
      */
-    private $redirectUrl;
+    protected $redirectUrl;
 
     /**
      * @ORM\Column(name="redirect_route", type="string", length=255, nullable=true)
      *
      */
-    private $redirectRoute;
-
+    protected $redirectRoute;
+    
     /**
      * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\CmsBundle\Entity\Page", inversedBy="children")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    private $parent;
-
+    protected $parent;
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\ClientBundle\Entity\ClientGroup", inversedBy="pages")
+     * @ORM\JoinTable(name="page_client_group",
+     *      joinColumns={@ORM\JoinColumn(name="page_id", referencedColumnName="id", onDelete="CASCADE")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="client_group_id", referencedColumnName="id", onDelete="CASCADE")}
+     * )
+     */
+    protected $clientGroups;
+    
     /**
      * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\CmsBundle\Entity\Page", mappedBy="parent")
      */
-    private $children;
+    protected $children;
 
     /**
      * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\MultiStoreBundle\Entity\Shop", inversedBy="pages")
@@ -85,15 +94,17 @@ class Page
      *      inverseJoinColumns={@ORM\JoinColumn(name="shop_id", referencedColumnName="id", onDelete="CASCADE")}
      * )
      */
-    private $shops;
+    protected $shops;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->children = new ArrayCollection();
-        $this->shops    = new ArrayCollection();
+        $this->children     = new ArrayCollection();
+        $this->shops        = new ArrayCollection();
+        $this->clientGroups = new ArrayCollection();
+        $this->parent       = null;
     }
 
     /**
@@ -178,19 +189,19 @@ class Page
     }
 
     /**
-     * @param Shop $shop
-     */
-    public function addShop(Shop $shop)
-    {
-        $this->shops[] = $shop;
-    }
-
-    /**
      * @param mixed $shops
      */
     public function setShops($shops)
     {
         $this->shops = $shops;
+    }
+
+    /**
+     * @param Shop $shop
+     */
+    public function addShop(Shop $shop)
+    {
+        $this->shops[] = $shop;
     }
 
     /**
@@ -212,22 +223,6 @@ class Page
     /**
      * @return mixed
      */
-    public function getRedirectType()
-    {
-        return $this->redirectType;
-    }
-
-    /**
-     * @param mixed $redirectType
-     */
-    public function setRedirectType($redirectType)
-    {
-        $this->redirectType = $redirectType;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getRedirectUrl()
     {
         return $this->redirectUrl;
@@ -239,6 +234,22 @@ class Page
     public function setRedirectUrl($redirectUrl)
     {
         $this->redirectUrl = $redirectUrl;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getClientGroups()
+    {
+        return $this->clientGroups;
+    }
+
+    /**
+     * @param mixed $clientGroups
+     */
+    public function setClientGroups($clientGroups)
+    {
+        $this->clientGroups = $clientGroups;
     }
 
     /**
@@ -260,5 +271,21 @@ class Page
                 $this->setRedirectUrl(null);
                 break;
         }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRedirectType()
+    {
+        return $this->redirectType;
+    }
+
+    /**
+     * @param mixed $redirectType
+     */
+    public function setRedirectType($redirectType)
+    {
+        $this->redirectType = $redirectType;
     }
 }

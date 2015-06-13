@@ -6,30 +6,37 @@
 
     <route id="front.client.login" path="/login">
         <default key="_controller">client.controller.front:loginAction</default>
+        <option key="allow_page_redirect">true</option>
     </route>
 
     <route id="front.client.password" path="/password">
         <default key="_controller">client.controller.front:passwordAction</default>
+        <option key="allow_page_redirect">true</option>
     </route>
 
     <route id="front.client.register" path="/register">
         <default key="_controller">client.controller.front:registerAction</default>
+        <option key="allow_page_redirect">true</option>
     </route>
 
     <route id="front.client.settings" path="/settings">
         <default key="_controller">client.controller.front:settingsAction</default>
+        <option key="allow_page_redirect">true</option>
     </route>
 
     <route id="front.client.orders" path="/orders">
         <default key="_controller">client.controller.front:ordersAction</default>
+        <option key="allow_page_redirect">true</option>
     </route>
 
     <route id="front.client.wishlist" path="/wishlist">
         <default key="_controller">client.controller.front:wishlistAction</default>
+        <option key="allow_page_redirect">true</option>
     </route>
 
     <route id="front.client.address_book" path="/addresses">
         <default key="_controller">client.controller.front:addressBookAction</default>
+        <option key="allow_page_redirect">true</option>
     </route>
 
     <route id="front.client.login_check" path="/login_check" />

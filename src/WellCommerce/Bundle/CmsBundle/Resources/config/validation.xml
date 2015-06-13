@@ -9,23 +9,57 @@
                 <option name="message">contact.enabled.error.not_null</option>
             </constraint>
         </property>
+        <property name="translations">
+            <constraint name="Valid">
+                <option name="deep">true</option>
+            </constraint>
+        </property>
     </class>
 
     <class name="WellCommerce\Bundle\CmsBundle\Entity\ContactTranslation">
         <property name="name">
             <constraint name="NotBlank">
-                <option name="message">contact.name.error.not_blank</option>
+                <option name="message">contact.error.name.not_blank</option>
             </constraint>
             <constraint name="NotNull">
-                <option name="message">contact.name.error.not_null</option>
+                <option name="message">contact.error.name.not_null</option>
             </constraint>
         </property>
         <property name="email">
             <constraint name="NotBlank">
-                <option name="message">contact.email.error.not_blank</option>
+                <option name="message">contact.error.name.not_blank</option>
             </constraint>
             <constraint name="NotNull">
-                <option name="message">contact.email.error.not_null</option>
+                <option name="message">contact.error.name.not_null</option>
+            </constraint>
+        </property>
+    </class>
+
+    <class name="WellCommerce\Bundle\CmsBundle\Entity\Page">
+        <property name="publish">
+            <constraint name="NotNull">
+                <option name="message">page.error.publish.not_null</option>
+            </constraint>
+        </property>
+        <property name="translations">
+            <constraint name="Valid">
+                <option name="deep">true</option>
+            </constraint>
+        </property>
+    </class>
+
+    <class name="WellCommerce\Bundle\CmsBundle\Entity\PageTranslation">
+        <property name="name">
+            <constraint name="NotBlank">
+                <option name="message">page.error.name.not_blank</option>
+            </constraint>
+            <constraint name="NotNull">
+                <option name="message">page.error.name.not_null</option>
+            </constraint>
+        </property>
+        <property name="content">
+            <constraint name="NotNull">
+                <option name="message">page.error.content.not_null</option>
             </constraint>
         </property>
     </class>

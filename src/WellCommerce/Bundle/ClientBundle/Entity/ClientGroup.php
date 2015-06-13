@@ -33,19 +33,24 @@ class ClientGroup
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="discount", type="decimal", precision=15, scale=4)
      */
-    private $discount;
+    protected $discount;
 
     /**
      * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\ClientBundle\Entity\Client", mappedBy="group")
      */
-    private $clients;
+    protected $clients;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\CmsBundle\Entity\Page", mappedBy="clientGroups")
+     */
+    protected $pages;
 
     /**
      * Get id.
@@ -83,5 +88,13 @@ class ClientGroup
     public function getClients()
     {
         return $this->clients;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPages()
+    {
+        return $this->pages;
     }
 }
