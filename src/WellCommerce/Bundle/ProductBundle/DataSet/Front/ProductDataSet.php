@@ -40,6 +40,7 @@ class ProductDataSet extends AbstractDataSet implements DataSetInterface
             'route'            => 'IDENTITY(product_translation.route)',
             'weight'           => 'product.weight',
             'price'            => 'product.sellPrice.amount',
+            'discountedPrice'  => 'IF_ELSE(:date BETWEEN product.sellPrice.validFrom AND product.sellPrice.validTo, product.sellPrice.discountedAmount, 0)',
             'currency'         => 'product.sellPrice.currency',
             'tax'              => 'sell_tax.value',
             'stock'            => 'product.stock',

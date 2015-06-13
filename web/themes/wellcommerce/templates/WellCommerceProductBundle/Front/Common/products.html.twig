@@ -16,7 +16,11 @@
                                 <span class="label {{ status.css_class }}">{{ status.name }}</span>
                             {% endfor %}
                         </div>
-                        <span class="price">{{ format_price(item.price, item.currency, null, item.tax) }}</span>
+                        {% if item.discountedPrice > 0 %}
+                            <span class="price promo"><small>{{ format_price(item.price, item.currency, null, item.tax) }}</small>{{ format_price(item.discountedPrice, item.currency, null, item.tax) }}</span>
+                        {% else %}
+                            <span class="price">{{ format_price(item.price, item.currency, null, item.tax) }}</span>
+                        {% endif %}
                         <span class="name">{{ item.name }}</span>
                     </a>
 

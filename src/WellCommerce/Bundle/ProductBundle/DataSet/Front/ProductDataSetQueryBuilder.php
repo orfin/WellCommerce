@@ -32,6 +32,8 @@ class ProductDataSetQueryBuilder extends BaseProductDataSetQueryBuilder
         $this->addProductConditions($qb);
         $this->addCategoryConditions($qb);
 
+        $qb->setParameter('date', new \DateTime());
+
         return $qb;
     }
 
