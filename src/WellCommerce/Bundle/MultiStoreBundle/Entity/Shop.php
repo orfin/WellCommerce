@@ -92,6 +92,13 @@ class Shop
     protected $defaultOrderStatus;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="default_country", type="string", length=3, nullable=true)
+     */
+    protected $defaultCountry;
+
+    /**
      * @return int
      */
     public function getId()
@@ -241,5 +248,21 @@ class Shop
     public function setDefaultOrderStatus(OrderStatus $defaultOrderStatus)
     {
         $this->defaultOrderStatus = $defaultOrderStatus;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDefaultCountry()
+    {
+        return $this->defaultCountry;
+    }
+
+    /**
+     * @param string $defaultCountry
+     */
+    public function setDefaultCountry($defaultCountry)
+    {
+        $this->defaultCountry = $defaultCountry;
     }
 }

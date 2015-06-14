@@ -30,6 +30,7 @@ admin:
         promotions: Promotions
         reports: Reports
         sales: Sales
+        shipping_method: 'Shipping methods'
         tax: Taxes
         theme: Themes
         package: Packages
@@ -86,6 +87,16 @@ client:
         discount: Discount
         accept_conditions: Accept store conditions
         accept_newsletter: Subscribe for newsletter
+        street: Street
+        street_no: Street no
+        flat_no: Flat no
+        post_code: Zip code
+        city: City
+        province: Province
+        country: Country
+        billing_address: Billing address
+        shipping_address: Shipping address
+        contact_details: Contact details
     button:
         login: 'Sign in'
         register: 'Sign up'
@@ -110,6 +121,7 @@ cart:
         heading_total: Total
     flash:
         empty: 'Your cart is empty'
+        added: 'was added to cart'
 
 currency:
     label: Currency
@@ -158,3 +170,5 @@ page:
 product:
     label:
         manufactured_by: by
+    heading:
+        recommendations: 'You might also like'

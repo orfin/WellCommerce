@@ -69,9 +69,15 @@ class ShopFormBuilder extends AbstractFormBuilder implements FormBuilderInterfac
 
         $cartSettings->addChild($this->getElement('select', [
             'name'        => 'defaultOrderStatus',
-            'label'       => $this->trans('shop.default_order_status.label'),
+            'label'       => $this->trans('shop.label.default_order_status'),
             'options'     => $this->get('order_status.collection')->getSelect(),
             'transformer' => new EntityToIdentifierTransformer($this->get('order_status.repository'))
+        ]));
+
+        $cartSettings->addChild($this->getElement('select', [
+            'name'    => 'defaultCountry',
+            'label'   => $this->trans('shop.label.default_country'),
+            'options' => $this->get('country.repository')->all()
         ]));
         
         $form->addFilter($this->getFilter('no_code'));

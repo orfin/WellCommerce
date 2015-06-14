@@ -85,4 +85,9 @@ interface FrontManagerInterface extends ManagerInterface
      * @return \WellCommerce\Bundle\CartBundle\Provider\CartProductProviderInterface
      */
     public function getCartProductProvider();
+
+    /**
+     * @return \WellCommerce\Bundle\CartBundle\Entity\Cart
+     */
+    public function getCurrentCart();
 }

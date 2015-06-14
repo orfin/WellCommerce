@@ -87,14 +87,6 @@
             </call>
         </service>
 
-        <service id="cart_address.form_builder" class="WellCommerce\Bundle\CartBundle\Form\Front\CartAddressFormBuilder">
-            <argument type="service" id="form.resolver.factory"/>
-            <argument type="service" id="form.handler"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
-
         <service id="cart_product.provider" class="WellCommerce\Bundle\CartBundle\Provider\CartProductProvider">
             <call method="setCollectionBuilder">
                 <argument type="service" id="cart_product.collection.front"/>

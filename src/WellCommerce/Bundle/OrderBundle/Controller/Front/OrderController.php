@@ -18,7 +18,7 @@ use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
 use WellCommerce\Bundle\WebBundle\Breadcrumb\BreadcrumbItem;
 
 /**
- * Class CartController
+ * Class OrderController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
@@ -42,8 +42,8 @@ class OrderController extends AbstractFrontController implements FrontController
             'name' => $this->trans('order.heading.address'),
         ]));
 
-        $form = $this->get('cart_address.form_builder')->createForm([
-            'name' => 'cart_address'
+        $form = $this->get('order_address.form_builder')->createForm([
+            'name' => 'order_address'
         ], $cart);
 
         if ($form->handleRequest()->isSubmitted()) {
@@ -75,7 +75,7 @@ class OrderController extends AbstractFrontController implements FrontController
     public function confirmAction(Request $request)
     {
         $manager = $this->getManager();
-        $cart    = $this->getManager()->getCartProvider()->getCurrentCart();
+        $cart    = $manager->getCurrentCart();
 
         if (null === $cart || $cart->isEmpty()) {
             return $manager->getRedirectHelper()->redirectTo('front.cart.index');
