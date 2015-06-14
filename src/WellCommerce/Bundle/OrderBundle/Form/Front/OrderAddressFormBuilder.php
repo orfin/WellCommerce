@@ -114,7 +114,7 @@ class OrderAddressFormBuilder extends AbstractFormBuilder implements FormBuilder
 
         $shippingAddress->addChild($this->getElement('text_field', [
             'name'  => 'shippingAddress.postCode',
-            'label' => $this->trans('client.post_code.label'),
+            'label' => $this->trans('client.label.post_code'),
         ]));
 
         $shippingAddress->addChild($this->getElement('text_field', [

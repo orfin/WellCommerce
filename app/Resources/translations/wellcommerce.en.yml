@@ -112,6 +112,7 @@ client:
 cart:
     button:
         add: 'Add to cart'
+        confirm_order: 'Confirm order'
     link:
         checkout: 'Go to checkout'
     table:
@@ -122,7 +123,9 @@ cart:
     flash:
         empty: 'Your cart is empty'
         added: 'was added to cart'
-
+order:
+    label:
+        comment: 'Comments'
 currency:
     label: Currency
 
