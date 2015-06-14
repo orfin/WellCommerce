@@ -29,12 +29,12 @@ class DiscountablePrice extends Price
     protected $discountedAmount;
 
     /**
-     * @ORM\Column(name="valid_from", type="datetime", nullable=false)
+     * @ORM\Column(name="valid_from", type="datetime", nullable=true)
      */
     protected $validFrom;
 
     /**
-     * @ORM\Column(name="valid_to", type="datetime", nullable=false)
+     * @ORM\Column(name="valid_to", type="datetime", nullable=true)
      */
     protected $validTo;
 

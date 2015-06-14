@@ -24,7 +24,7 @@ use WellCommerce\Bundle\RoutingBundle\Helper\Sluggable;
  */
 class LoadProductStatusData extends AbstractDataFixture
 {
-    public static $samples = ['Featured', 'Bestsellers', 'New arrivals'];
+    public static $samples = ['Promotions', 'New arrivals', 'Featured', 'Bestsellers'];
 
     /**
      * {@inheritDoc}
