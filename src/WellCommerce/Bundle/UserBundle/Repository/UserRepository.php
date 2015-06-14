@@ -61,8 +61,11 @@ class UserRepository extends AbstractEntityRepository implements UserRepositoryI
         try {
             $user = $queryBuilder->getSingleResult();
         } catch (NoResultException $e) {
-            throw new UsernameNotFoundException(sprintf('Unable to find an active admin WellCommerceUserBundle:User object identified by "%s".',
-                $username), null, 0, $e);
+            $msg = sprintf(
+                'Unable to find an active admin identified by "%s".',
+                $username);
+
+            throw new UsernameNotFoundException($msg);
         }
 
         return $user;

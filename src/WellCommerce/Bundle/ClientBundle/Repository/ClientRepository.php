@@ -68,10 +68,10 @@ class ClientRepository extends AbstractEntityRepository implements ClientReposit
             $user = $queryBuilder->getSingleResult();
         } catch (NoResultException $e) {
             $msg = sprintf(
-                'Unable to find an active client WellCommerceClientBundle:Client object identified by "%s".',
+                'Unable to find an active client identified by "%s".',
                 $username
             );
-            throw new UsernameNotFoundException($msg, null, 0, $e);
+            throw new UsernameNotFoundException($msg);
         }
 
         return $user;
