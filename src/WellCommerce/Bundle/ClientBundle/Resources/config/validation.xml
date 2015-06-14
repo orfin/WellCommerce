@@ -25,6 +25,11 @@
             <constraint name="NotBlank" />
             <constraint name="NotNull" />
         </property>
+        <property name="conditionsAccepted">
+            <constraint name="EqualTo">
+                <option name="value">1</option>
+            </constraint>
+        </property>
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
             <option name="fields">email</option>
         </constraint>
