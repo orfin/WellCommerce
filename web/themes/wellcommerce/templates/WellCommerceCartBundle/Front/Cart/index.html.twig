@@ -1,5 +1,6 @@
 {% extends 'WellCommerceWebBundle:Front:layout.html.twig' %}
 {% import "WellCommerceFormBundle:Front/Common:macros.html.twig" as macros %}
+{% trans_default_domain "wellcommerce" %}
 {% block content %}
     {% include 'WellCommerceWebBundle:Front:breadcrumbs.html.twig' %}
     <div class="row">
@@ -7,7 +8,7 @@
             {% if cart.isEmpty %}
             <div class="cart">
                 <div class="alert alert-info mtp30">
-                    <strong>{% trans %}cart.empty.info{% endtrans %}</strong>
+                    <strong>{% trans %}cart.flash.empty{% endtrans %}</strong>
                 </div>
             </div>
             {% else %}
