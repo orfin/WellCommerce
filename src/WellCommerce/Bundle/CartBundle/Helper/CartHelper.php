@@ -202,7 +202,7 @@ class CartHelper implements CartHelperInterface
         foreach ($collection as $item) {
             $product       = $item->getProduct();
             $baseCurrency  = $product->getSellPrice()->getCurrency();
-            $priceNet      = $product->getSellPrice()->getAmount();
+            $priceNet      = $product->getSellPrice()->getFinalAmount();
             $quantityPrice = $item->getQuantity() * $priceNet;
 
             $totalNetPrice += $this->currencyConverter->convert($quantityPrice, $baseCurrency);
@@ -225,7 +225,7 @@ class CartHelper implements CartHelperInterface
             $product       = $item->getProduct();
             $baseCurrency  = $product->getSellPrice()->getCurrency();
             $tax           = $product->getSellPriceTax();
-            $priceNet      = $product->getSellPrice()->getAmount();
+            $priceNet      = $product->getSellPrice()->getFinalAmount();
             $priceGross    = $tax->calculateGrossPrice($priceNet);
             $quantityPrice = $item->getQuantity() * $priceGross;
 

@@ -29,18 +29,21 @@ class CartProductDataSet extends AbstractDataSet implements DataSetInterface
     public function configureOptions(DataSetConfiguratorInterface $configurator)
     {
         $configurator->setColumns([
-            'id'            => 'cart_product.id',
-            'quantity'      => 'cart_product.quantity',
-            'quantityPrice' => 'cart_product.quantity * product.sellPrice.amount',
-            'attribute'     => 'IDENTITY(cart_product.attribute)',
-            'name'          => 'product_translation.name',
-            'route'         => 'IDENTITY(product_translation.route)',
-            'weight'        => 'product.weight',
-            'price'         => 'product.sellPrice.amount',
-            'currency'      => 'product.sellPrice.currency',
-            'tax'           => 'sell_tax.value',
-            'stock'         => 'product.stock',
-            'photo'         => 'photos.path'
+            'id'                      => 'cart_product.id',
+            'quantity'                => 'cart_product.quantity',
+            'quantityPrice'           => 'cart_product.quantity * product.sellPrice.amount',
+            'quantityDiscountedPrice' => 'cart_product.quantity * product.sellPrice.discountedAmount',
+            'attribute'               => 'IDENTITY(cart_product.attribute)',
+            'name'                    => 'product_translation.name',
+            'route'                   => 'IDENTITY(product_translation.route)',
+            'weight'                  => 'product.weight',
+            'price'                   => 'product.sellPrice.amount',
+            'discountedPrice'         => 'product.sellPrice.discountedAmount',
+            'isDiscountValid'         => 'IF_ELSE(:date BETWEEN product.sellPrice.validFrom AND product.sellPrice.validTo, 1, 0)',
+            'currency'                => 'product.sellPrice.currency',
+            'tax'                     => 'sell_tax.value',
+            'stock'                   => 'product.stock',
+            'photo'                   => 'photos.path'
         ]);
     }
 }

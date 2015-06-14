@@ -403,7 +403,7 @@ class Product
     /**
      * Returns product sell price
      *
-     * @return \WellCommerce\Bundle\CoreBundle\Entity\Price
+     * @return \WellCommerce\Bundle\CoreBundle\Entity\DiscountablePrice
      */
     public function getSellPrice()
     {

@@ -85,4 +85,27 @@ class DiscountablePrice extends Price
     {
         $this->validTo = $validTo;
     }
+
+    /**
+     * @return float
+     */
+    public function getFinalAmount()
+    {
+        if ($this->isDiscountValid()) {
+            return $this->discountedAmount;
+        }
+
+        return $this->amount;
+    }
+
+    protected function isDiscountValid()
+    {
+        $now = new \DateTime();
+
+        if ($this->validFrom instanceof \DateTime && $this->validTo instanceof \DateTime) {
+            return ($this->validFrom < $now) && ($this->validTo > $now);
+        }
+
+        return false;
+    }
 }
