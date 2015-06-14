@@ -84,11 +84,13 @@ client:
         password: Password
         client_group: Group
         discount: Discount
+        accept_conditions: Accept store conditions
+        accept_newsletter: Subscribe for newsletter
     button:
         login: 'Sign in'
         register: 'Sign up'
     link:
-        login: 'Sign in'
+        login: 'Sign in / Sign up'
         register: 'Sign up'
         logout: Logout
         orders: Orders
@@ -106,6 +108,11 @@ cart:
         heading_price: Price
         heading_quantity: Quantity
         heading_total: Total
+    flash:
+        empty: 'Your cart is empty'
+
+currency:
+    label: Currency
 
 package:
     heading:
