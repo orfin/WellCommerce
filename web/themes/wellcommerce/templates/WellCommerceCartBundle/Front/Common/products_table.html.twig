@@ -16,20 +16,35 @@
                 <td><img src="{{ image(item.photo, 'small') }}" alt="{{ item.name }}"/></td>
                 <td><a href="{{ path(item.route) }}">{{ item.name }}</a></td>
                 <td class="text-center">
-										<span class="price">
-										    {{ format_price(item.price, item.currency) }}
-										</span>
+                    {% if item.isDiscountValid == 1 %}
+                        <span class="price promo">
+					        <small class="block">{{ format_price(item.price, item.currency, null, item.tax) }}</small>
+                            {{ format_price(item.discountedPrice, item.currency, null, item.tax) }}
+					    </span>
+                    {% else %}
+                        <span class="price">
+						    {{ format_price(item.price, item.currency, null, item.tax) }}
+						</span>
+                    {% endif %}
                 </td>
                 <td class="text-center">
                     <input type="text" class="form-control" value="{{ item.quantity|number_format(0) }}"/>
                 </td>
                 <td class="text-center">
-				    <span class="price">
-					    <strong>{{ format_price(item.quantityPrice, item.currency) }}</strong>
-					</span>
+                    {% if item.isDiscountValid == 1 %}
+                        <span class="price promo">
+					        <small class="block">{{ format_price(item.quantityPrice, item.currency, null, item.tax) }}</small>
+                            {{ format_price(item.quantityDiscountedPrice, item.currency, null, item.tax) }}
+					    </span>
+                    {% else %}
+                        <span class="price">
+						    {{ format_price(item.quantityPrice, item.currency, null, item.tax) }}
+						</span>
+                    {% endif %}
                 </td>
                 <td class="text-center">
-                    <a href="{{ path('front.cart.delete',{"id": item.id }) }}" class="btn btn-link light btn-remove"><img src="{{ asset('themes/wellcommerce/assets/img/ico-remove.png') }}"/></a>
+                    <a href="{{ path('front.cart.delete',{"id": item.id }) }}" class="btn btn-link light btn-remove"><img
+                                src="{{ asset('themes/wellcommerce/assets/img/ico-remove.png') }}"/></a>
                 </td>
             </tr>
         {% endfor %}
