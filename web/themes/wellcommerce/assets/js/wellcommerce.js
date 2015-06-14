@@ -15,7 +15,10 @@ $(document).ready(function () {
         return false;
     });
 
-    $("form.cart input[type='radio']").change(function(){
-        $('form.cart').submit();
+    $('.cart').GCart({
+        sChangeQuantityRoute: 'front.cart.edit',
+        sDeleteRoute: 'front.cart.delete',
+        sDeleteButtonClass: 'btn-remove',
+        sQuantitySpinnerClass: 'quantity-spinner'
     });
 });

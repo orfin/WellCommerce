@@ -15,7 +15,12 @@
         <option key="expose">true</option>
     </route>
 
-    <route id="front.cart.delete" path="/cart/delete/{id}">
+    <route id="front.cart.edit" path="/cart/edit">
+        <default key="_controller">cart.controller.front:editAction</default>
+        <option key="expose">true</option>
+    </route>
+
+    <route id="front.cart.delete" path="/cart/delete">
         <default key="_controller">cart.controller.front:deleteAction</default>
         <option key="expose">true</option>
     </route>

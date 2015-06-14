@@ -15,6 +15,8 @@ namespace WellCommerce\Bundle\CartBundle\Helper;
 use WellCommerce\Bundle\CartBundle\Entity\Cart;
 use WellCommerce\Bundle\CartBundle\Entity\CartProduct;
 use WellCommerce\Bundle\CartBundle\Entity\CartTotals;
+use WellCommerce\Bundle\CartBundle\Exception\ChangeCartItemQuantityException;
+use WellCommerce\Bundle\CartBundle\Exception\DeleteCartItemException;
 use WellCommerce\Bundle\CartBundle\Repository\CartProductRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Doctrine\DoctrineHelperInterface;
 use WellCommerce\Bundle\IntlBundle\Converter\CurrencyConverterInterface;
@@ -90,23 +92,34 @@ class CartHelper implements CartHelperInterface
         $cartProduct = $this->getCartProductById($cart, $id);
 
         if (null === $cartProduct) {
-            throw new \InvalidArgumentException(sprintf('Cannot delete item "%s" from cart', $id));
+            throw new DeleteCartItemException($id);
         }
+
         $cart->removeProduct($cartProduct);
         $em->remove($cartProduct);
-
         $this->recalculateCartTotals($cart);
-
         $em->flush();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function changeCartProductQuantity(CartProduct $cartProduct, $quantity)
+    public function changeCartProductQuantity(Cart $cart, $id, $quantity)
     {
-        $em = $this->doctrineHelper->getEntityManager();
+        $em          = $this->doctrineHelper->getEntityManager();
+        $cartProduct = $this->getCartProductById($cart, $id);
+        $quantity    = (int)$quantity;
+
+        if (null === $cartProduct) {
+            throw new ChangeCartItemQuantityException($id);
+        }
+
+        if ($quantity < 1) {
+            $this->deleteCartProduct($cart, $id);
+        }
+
         $cartProduct->setQuantity($quantity);
+        $this->recalculateCartTotals($cart);
         $em->flush();
     }
 
@@ -202,7 +215,7 @@ class CartHelper implements CartHelperInterface
         foreach ($collection as $item) {
             $product       = $item->getProduct();
             $baseCurrency  = $product->getSellPrice()->getCurrency();
-            $priceNet      = $product->getSellPrice()->getFinalAmount();
+            $priceNet      = $product->getSellPrice()->getAmount();
             $quantityPrice = $item->getQuantity() * $priceNet;
 
             $totalNetPrice += $this->currencyConverter->convert($quantityPrice, $baseCurrency);
@@ -225,7 +238,7 @@ class CartHelper implements CartHelperInterface
             $product       = $item->getProduct();
             $baseCurrency  = $product->getSellPrice()->getCurrency();
             $tax           = $product->getSellPriceTax();
-            $priceNet      = $product->getSellPrice()->getFinalAmount();
+            $priceNet      = $product->getSellPrice()->getAmount();
             $priceGross    = $tax->calculateGrossPrice($priceNet);
             $quantityPrice = $item->getQuantity() * $priceGross;
 

@@ -249,3 +249,68 @@ GAjaxRequest = function (sUrl, oRequest, fCallBack) {
         dataType: 'json'
     });
 };
+
+var oCartDefaults = {
+    sChangeQuantityRoute: 'front.cart.edit',
+    sDeleteRoute: 'front.cart.delete',
+    sDeleteButtonClass: 'btn-remove',
+    sQuantitySpinnerClass: 'quantity-spinner'
+};
+
+var GCart = function(oOptions) {
+
+    var gThis = this;
+
+    gThis._Constructor = function() {
+        gThis.m_gForm = $("form", gThis);
+        gThis.InitializeEvents();
+    };
+
+    gThis.InitializeEvents = function(){
+        $("input[type='radio']", gThis.m_gForm).bind('change', gThis.SubmitForm);
+        $('.' + gThis.m_oOptions.sDeleteButtonClass, gThis).bind('click', gThis.DeleteItem);
+        $('.' + gThis.m_oOptions.sQuantitySpinnerClass, gThis).bind('change', gThis.ChangeItemQuantity);
+    };
+
+    gThis.DeleteItem = function(){
+        var oRequest = {
+            id: $(this).data('id')
+        };
+
+        GAjaxRequest(Routing.generate(gThis.m_oOptions.sDeleteRoute), oRequest, gThis.ProcessResponse);
+
+        return false;
+    };
+
+    gThis.ProcessResponse = function(oResponse){
+        if(oResponse.success){
+            return gThis.ReloadCart();
+        }else{
+            alert(oResponse.message);
+        }
+    };
+
+    gThis.ChangeItemQuantity = function(){
+        var oRequest = {
+            id: $(this).data('id'),
+            qty: $(this).val()
+        };
+
+        GAjaxRequest(Routing.generate(gThis.m_oOptions.sChangeQuantityRoute), oRequest, gThis.ProcessResponse);
+
+        return false;
+    };
+
+    gThis.ReloadCart = function(){
+        return window.location.reload(false);
+    };
+
+    gThis.SubmitForm = function(){
+        return gThis.m_gForm.submit();
+    };
+
+    gThis._Constructor();
+
+};
+
+new GPlugin('GCart', oCartDefaults, GCart);

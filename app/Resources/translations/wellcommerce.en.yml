@@ -101,6 +101,12 @@ cart:
         add: 'Add to cart'
     link:
         checkout: 'Go to checkout'
+    table:
+        heading_product: Product
+        heading_price: Price
+        heading_quantity: Quantity
+        heading_total: Total
+
 package:
     heading:
         index: Packages

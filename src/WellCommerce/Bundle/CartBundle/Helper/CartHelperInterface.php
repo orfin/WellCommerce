@@ -48,10 +48,13 @@ interface CartHelperInterface
     public function deleteCartProduct(Cart $cart, $id);
 
     /**
-     * @param CartProduct $cartProduct
-     * @param int         $quantity
+     * Changes item quantity on cart
+     *
+     * @param Cart $cart
+     * @param int  $id
+     * @param int  $quantity
      */
-    public function changeCartProductQuantity(CartProduct $cartProduct, $quantity);
+    public function changeCartProductQuantity(Cart $cart, $id, $quantity);
 
     /**
      * Adds new product to cart

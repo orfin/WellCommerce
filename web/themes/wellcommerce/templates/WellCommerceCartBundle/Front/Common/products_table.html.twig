@@ -1,11 +1,13 @@
+{% trans_default_domain "wellcommerce" %}
+
 <div class="table-responsive">
     <table class="table products-table mbt60">
         <thead>
         <tr>
-            <th class="text-center" colspan="2">{% trans %}cart.table.heading.product{% endtrans %}</th>
-            <th class="text-center">{% trans %}cart.table.heading.price{% endtrans %}</th>
-            <th class="text-center">{% trans %}cart.table.heading.quantity{% endtrans %}</th>
-            <th class="text-center">{% trans %}cart.table.heading.value{% endtrans %}</th>
+            <th class="text-center" colspan="2">{% trans %}cart.table.heading_product{% endtrans %}</th>
+            <th class="text-center">{% trans %}cart.table.heading_price{% endtrans %}</th>
+            <th class="text-center">{% trans %}cart.table.heading_quantity{% endtrans %}</th>
+            <th class="text-center">{% trans %}cart.table.heading_total{% endtrans %}</th>
             <th></th>
         </tr>
         </thead>
@@ -28,7 +30,7 @@
                     {% endif %}
                 </td>
                 <td class="text-center">
-                    <input type="text" class="form-control" value="{{ item.quantity|number_format(0) }}"/>
+                    <input type="text" class="form-control quantity-spinner" value="{{ item.quantity|number_format(0, '.', '') }}" data-id="{{ item.id }}"/>
                 </td>
                 <td class="text-center">
                     {% if item.isDiscountValid == 1 %}
@@ -43,8 +45,7 @@
                     {% endif %}
                 </td>
                 <td class="text-center">
-                    <a href="{{ path('front.cart.delete',{"id": item.id }) }}" class="btn btn-link light btn-remove"><img
-                                src="{{ asset('themes/wellcommerce/assets/img/ico-remove.png') }}"/></a>
+                    <a href="#" class="btn btn-link light btn-remove" data-id="{{ item.id }}"><img src="{{ asset('themes/wellcommerce/assets/img/ico-remove.png') }}"/></a>
                 </td>
             </tr>
         {% endfor %}

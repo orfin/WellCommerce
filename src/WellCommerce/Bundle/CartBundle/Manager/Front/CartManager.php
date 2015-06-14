@@ -89,9 +89,23 @@ class CartManager extends AbstractFrontManager
     public function deleteItem()
     {
         $currentCart = $this->getCartProvider()->getCurrentCart();
-        $id          = $this->getRequestHelper()->getAttribute('id');
+        $id          = (int)$this->getRequestHelper()->getRequestAttribute('id');
 
         return $this->cartHelper->deleteCartProduct($currentCart, $id);
+    }
+
+    /**
+     * Changes item quantity on cart
+     *
+     * @return mixed
+     */
+    public function changeItemQuantity()
+    {
+        $currentCart = $this->getCartProvider()->getCurrentCart();
+        $id          = (int)$this->getRequestHelper()->getRequestAttribute('id');
+        $qty         = (int)$this->getRequestHelper()->getRequestAttribute('qty');
+
+        return $this->cartHelper->changeCartProductQuantity($currentCart, $id, $qty);
     }
 
     /**
@@ -101,7 +115,7 @@ class CartManager extends AbstractFrontManager
      */
     public function findProduct()
     {
-        $id      = $this->getRequestHelper()->getRequestAttribute('id');
+        $id      = (int)$this->getRequestHelper()->getRequestAttribute('id');
         $product = $this->productRepository->findEnabledProductById($id);
 
         return $product;
@@ -116,7 +130,7 @@ class CartManager extends AbstractFrontManager
      */
     public function findProductAttribute(Product $product)
     {
-        $id        = $this->getRequestHelper()->getRequestAttribute('attribute');
+        $id        = (int)$this->getRequestHelper()->getRequestAttribute('attribute');
         $attribute = $this->productAttributeRepository->findProductAttribute($id, $product);
 
         return $attribute;
