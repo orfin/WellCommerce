@@ -45,7 +45,7 @@ class ProductDataSet extends AbstractDataSet implements DataSetInterface
             'currency'         => 'product.sellPrice.currency',
             'tax'              => 'sell_tax.value',
             'stock'            => 'product.stock',
-            'producer'         => 'IDENTITY(product.producer)',
+            'producerName'     => 'producers_translation.name',
             'category'         => 'categories.id',
             'shop'             => 'product_shops.id',
             'photo'            => 'photos.path',

@@ -27,8 +27,10 @@ class ProductRepository extends AbstractEntityRepository implements ProductRepos
         $queryBuilder->groupBy('product.id');
         $queryBuilder->leftJoin('product.translations', 'product_translation');
         $queryBuilder->leftJoin('product.categories', 'categories');
+        $queryBuilder->leftJoin('product.producer', 'producers');
         $queryBuilder->leftJoin('product.sellPriceTax', 'sell_tax');
         $queryBuilder->leftJoin('categories.translations', 'categories_translation');
+        $queryBuilder->leftJoin('producers.translations', 'producers_translation');
         $queryBuilder->leftJoin('product.productPhotos', 'gallery', Expr\Join::WITH, 'gallery.mainPhoto = :mainPhoto');
         $queryBuilder->leftJoin('gallery.photo', 'photos');
         $queryBuilder->leftJoin('product.statuses', 'statuses');

@@ -155,3 +155,6 @@ dictionary:
 page:
     tip:
         client_groups: '<p><strong>Client</strong> groups help</p>'
+product:
+    label:
+        manufactured_by: by
