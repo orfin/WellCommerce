@@ -1,33 +1,38 @@
+{% trans_default_domain "wellcommerce" %}
 <footer>
     <div class="container">
         <div class="row">
-            {% for category in cmsPageTree if category.children|length %}
-                <div class="col-lg-3 menu">
-                    <h3>{{ category.name }}</h3>
-                    <ul>
-                        {% for page in category.children %}
-                            <li><a href="{{ path(page.route) }}">{{ page.name }}</a></li>
-                        {% endfor %}
-                    </ul>
+            <div class="col-sm-9 col-xs-6">
+                <div class="row">
+                    {% for category in cmsPageTree if category.children|length %}
+                        <div class="col-sm-4 menu">
+                            <h3>{{ category.name }}</h3>
+                            <ul>
+                                {% for page in category.children %}
+                                    <li><a href="{{ path(page.route) }}">{{ page.name }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endfor %}
+                    <div class="col-sm-4 menu">
+                        <h3>{% trans %}client.heading.footer_links{% endtrans %}</h3>
+                        <ul>
+                            {% if app.user and is_granted('ROLE_CLIENT') %}
+                                <li><a href="{{ path('front.client.settings') }}">{% trans %}client.link.settings{% endtrans %}</a></li>
+                                <li><a href="{{ path('front.client.logout') }}">{% trans %}client.link.logout{% endtrans %}</a></li>
+                                <li><a href="{{ path('front.client.orders') }}">{% trans %}client.link.orders{% endtrans %}</a></li>
+                                <li><a href="{{ path('front.client.address_book') }}">{% trans %}client.link.address_book{% endtrans %}</a></li>
+                                <li><a href="{{ path('front.client.wishlist') }}">{% trans %}client.link.wishlist{% endtrans %}</a></li>
+                            {%  else %}
+                                <li><a href="{{ path('front.client.login') }}">{% trans %}client.link.login{% endtrans %}</a></li>
+                                <li><a href="{{ path('front.client.password') }}" class="coming-soon">{% trans %}client.link.password_forgotten{% endtrans %}</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
                 </div>
-            {% endfor %}
-            <div class="col-lg-3 menu">
-                <h3>{% trans %}footer.client_links.label{% endtrans %}</h3>
-                <ul>
-                    {% if app.user and is_granted('ROLE_CLIENT') %}
-                        <li><a href="{{ path('front.client.settings') }}">{% trans %}client.link.settings{% endtrans %}</a></li>
-                        <li><a href="{{ path('front.client.logout') }}">{% trans %}client.link.logout{% endtrans %}</a></li>
-                        <li><a href="{{ path('front.client.orders') }}">{% trans %}client.link.orders{% endtrans %}</a></li>
-                    {%  else %}
-                        <li><a href="{{ path('front.client.login') }}">{% trans %}client.link.login{% endtrans %}</a></li>
-                        <li><a href="{{ path('front.client.register') }}">{% trans %}client.link.register{% endtrans %}</a></li>
-                        <li><a href="{{ path('front.client.password') }}" class="coming-soon">{% trans %}client.link.password_forgotten{% endtrans %}</a></li>
-                    {% endif %}
-                </ul>
             </div>
-            <div class="col-lg-3">
-                <div class="fb-like-box" data-href="https://www.facebook.com/FacebookDevelopers" data-colorscheme="dark"
-                     data-show-faces="true" data-header="false" data-stream="false" data-show-border="false"></div>
+            <div class="col-sm-3 col-xs-6">
+                <div class="fb-like-box" data-href="https://www.facebook.com/WellCommerce" data-colorscheme="dark" data-show-faces="true" data-header="false" data-stream="false" data-show-border="false"></div>
             </div>
         </div>
     </div>

@@ -76,6 +76,7 @@ client:
         login: 'Sign in'
         register: 'Sign up'
         contact_details: 'Contact details'
+        footer_links: 'Your account'
     label:
         first_name: Firstname
         last_name: Lastname
