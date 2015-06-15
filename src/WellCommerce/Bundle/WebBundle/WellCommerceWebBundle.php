@@ -17,7 +17,6 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 /**
  * Class WellCommerceWebBundle
  *
- * @package WellCommerce\Bundle\WebBundle
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class WellCommerceWebBundle extends Bundle

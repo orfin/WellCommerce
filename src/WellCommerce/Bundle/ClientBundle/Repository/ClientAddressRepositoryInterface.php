@@ -17,7 +17,6 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 /**
  * Interface ClientAddressRepositoryInterface
  *
- * @package WellCommerce\Bundle\ClientBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface ClientAddressRepositoryInterface extends RepositoryInterface

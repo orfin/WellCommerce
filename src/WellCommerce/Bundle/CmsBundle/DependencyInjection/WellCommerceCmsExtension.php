@@ -17,7 +17,6 @@ use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
 /**
  * Class WellCommerceCmsExtension
  *
- * @package WellCommerce\Bundle\CmsBundle\DependencyInjection
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class WellCommerceCmsExtension extends AbstractExtension

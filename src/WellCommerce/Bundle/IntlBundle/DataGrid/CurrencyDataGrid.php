@@ -23,7 +23,6 @@ use WellCommerce\Bundle\DataGridBundle\DataGridInterface;
 /**
  * Class CurrencyDataGrid
  *
- * @package WellCommerce\Bundle\IntlBundle
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class CurrencyDataGrid extends AbstractDataGrid implements DataGridInterface

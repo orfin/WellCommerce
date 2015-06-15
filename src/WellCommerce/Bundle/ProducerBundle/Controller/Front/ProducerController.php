@@ -19,7 +19,6 @@ use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
 /**
  * Class ProducerController
  *
- * @package WellCommerce\Bundle\WebBundle\Controller\Front
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()

@@ -17,7 +17,6 @@ use WellCommerce\Bundle\MediaBundle\Entity\Media;
 /**
  * Class PhotoTrait
  *
- * @package WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 trait PhotoTrait

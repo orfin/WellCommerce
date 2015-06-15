@@ -19,7 +19,6 @@ use WellCommerce\Bundle\RoutingBundle\DependencyInjection\Compiler\RouteGenerato
 /**
  * Class WellCommerceRoutingBundle
  *
- * @package WellCommerce\Bundle\RoutingBundle
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class WellCommerceRoutingBundle extends Bundle

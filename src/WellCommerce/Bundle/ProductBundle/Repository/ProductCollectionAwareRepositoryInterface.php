@@ -15,7 +15,6 @@ namespace WellCommerce\Bundle\ProductBundle\Repository;
 /**
  * Interface ProductCollectionAwareRepositoryInterface
  *
- * @package WellCommerce\Bundle\ProductBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface ProductCollectionAwareRepositoryInterface

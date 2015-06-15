@@ -16,7 +16,6 @@ use WellCommerce\Bundle\CategoryBundle\Provider\CategoryProviderInterface;
 /**
  * Class CategoryExtension
  *
- * @package WellCommerce\Bundle\CategoryBundle\Twig\Extension
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class CategoryExtension extends \Twig_Extension

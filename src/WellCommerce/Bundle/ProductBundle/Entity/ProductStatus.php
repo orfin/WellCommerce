@@ -19,7 +19,6 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 /**
  * Class ProductStatus
  *
- * @package WellCommerce\Bundle\ProductBundle\Entity
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * @ORM\Table(name="product_status")

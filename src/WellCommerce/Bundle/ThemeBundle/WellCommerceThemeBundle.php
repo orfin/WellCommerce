@@ -20,7 +20,6 @@ use WellCommerce\Bundle\ThemeBundle\DependencyInjection\Compiler\ThemeCompilerPa
 /**
  * Class WellCommerceThemeBundle
  *
- * @package WellCommerce\Bundle\ThemeBundle
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class WellCommerceThemeBundle extends Bundle

@@ -22,7 +22,6 @@ use WellCommerce\Bundle\MultiStoreBundle\Entity\Shop;
 /**
  * Class Locale
  *
- * @package WellCommerce\Bundle\ProducerBundle\Entity
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * @ORM\Table(name="producer")

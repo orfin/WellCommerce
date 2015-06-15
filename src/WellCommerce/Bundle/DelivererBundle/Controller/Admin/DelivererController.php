@@ -17,7 +17,6 @@ use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
 /**
  * Class DelivererController
  *
- * @package WellCommerce\Bundle\DelivererBundle\Controller
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()

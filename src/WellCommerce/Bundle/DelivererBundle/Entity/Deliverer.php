@@ -20,7 +20,6 @@ use WellCommerce\Bundle\ProducerBundle\Entity\Producer;
 /**
  * Class Locale
  *
- * @package WellCommerce\Bundle\DelivererBundle\Entity
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * @ORM\Table(name="deliverer")

@@ -23,7 +23,6 @@ use WellCommerce\Bundle\DataGridBundle\DataGridInterface;
 /**
  * Class UserDataGrid
  *
- * @package WellCommerce\Bundle\UserBundle
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class UserDataGrid extends AbstractDataGrid implements DataGridInterface

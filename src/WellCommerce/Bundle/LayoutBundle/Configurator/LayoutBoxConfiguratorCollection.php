@@ -17,7 +17,6 @@ use WellCommerce\Bundle\CoreBundle\Collection\AbstractCollection;
 /**
  * Class LayoutBoxConfiguratorCollection
  *
- * @package WellCommerce\Bundle\LayoutBundle\Configurator
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class LayoutBoxConfiguratorCollection extends AbstractCollection

@@ -20,7 +20,6 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 /**
  * Class AbstractContainer
  *
- * @package WellCommerce\Bundle\CoreBundle\DependencyInjection
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class AbstractContainer extends ContainerAware

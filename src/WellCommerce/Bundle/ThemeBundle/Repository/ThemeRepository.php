@@ -16,16 +16,9 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 /**
  * Class ThemeRepository
  *
- * @package WellCommerce\Bundle\ThemeBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class ThemeRepository extends AbstractEntityRepository implements ThemeRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getDataGridQueryBuilder()
-    {
-        return parent::getQueryBuilder();
-    }
+
 }

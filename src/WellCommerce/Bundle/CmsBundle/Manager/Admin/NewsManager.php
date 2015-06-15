@@ -17,7 +17,6 @@ use WellCommerce\Bundle\AdminBundle\Manager\AbstractAdminManager;
 /**
  * Class NewsManager
  *
- * @package WellCommerce\Bundle\CmsBundle\Manager\Admin
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class NewsManager extends AbstractAdminManager

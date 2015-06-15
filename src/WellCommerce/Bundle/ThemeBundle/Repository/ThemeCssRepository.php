@@ -16,7 +16,6 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 /**
  * Class ThemeCssRepository
  *
- * @package WellCommerce\Bundle\ThemeBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class ThemeCssRepository extends AbstractEntityRepository implements ThemeCssRepositoryInterface

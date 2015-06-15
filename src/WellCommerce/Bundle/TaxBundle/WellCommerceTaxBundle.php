@@ -17,7 +17,6 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 /**
  * Class WellCommerceTaxBundle
  *
- * @package WellCommerce\Bundle\TaxBundle
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class WellCommerceTaxBundle extends Bundle

@@ -16,7 +16,6 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 /**
  * Class ContactRepository
  *
- * @package WellCommerce\Bundle\CmsBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class ContactRepository extends AbstractEntityRepository implements ContactRepositoryInterface

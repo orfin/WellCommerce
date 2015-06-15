@@ -16,7 +16,6 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 /**
  * Class DelivererRepository
  *
- * @package WellCommerce\Bundle\DelivererBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class DelivererRepository extends AbstractEntityRepository implements DelivererRepositoryInterface

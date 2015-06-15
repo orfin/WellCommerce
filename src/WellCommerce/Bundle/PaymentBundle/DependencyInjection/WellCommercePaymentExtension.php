@@ -17,7 +17,6 @@ use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
 /**
  * Class WellCommercePaymentExtension
  *
- * @package WellCommerce\Bundle\PaymentBundle\DependencyInjection
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class WellCommercePaymentExtension extends AbstractExtension

@@ -15,7 +15,6 @@ namespace WellCommerce\Bundle\LayoutBundle\Renderer;
 /**
  * Interface LayoutBoxRendererInterface
  *
- * @package WellCommerce\Bundle\LayoutBundle\Renderer
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface LayoutBoxRendererInterface

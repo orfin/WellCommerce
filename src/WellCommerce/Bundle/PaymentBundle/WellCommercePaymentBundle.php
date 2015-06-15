@@ -19,7 +19,6 @@ use WellCommerce\Bundle\PaymentBundle\DependencyInjection\Compiler\RegisterPayme
 /**
  * Class WellCommercePaymentBundle
  *
- * @package WellCommerce\Bundle\PaymentBundle
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class WellCommercePaymentBundle extends Bundle

@@ -18,7 +18,6 @@ use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 /**
  * Class MediaForm
  *
- * @package WellCommerce\Media\Form
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class MediaFormBuilder extends AbstractFormBuilder implements FormBuilderInterface

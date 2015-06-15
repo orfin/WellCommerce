@@ -15,7 +15,6 @@ namespace WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours;
 /**
  * Class ActivatableTrait
  *
- * @package WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 trait HierarchyTrait

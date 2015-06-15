@@ -17,7 +17,6 @@ use WellCommerce\Bundle\AdminBundle\Manager\AbstractAdminManager;
 /**
  * Class TaxManager
  *
- * @package WellCommerce\Bundle\TaxBundle\Manager\Admin
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class TaxManager extends AbstractAdminManager

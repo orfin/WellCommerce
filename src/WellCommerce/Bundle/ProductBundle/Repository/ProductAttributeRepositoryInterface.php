@@ -18,7 +18,6 @@ use WellCommerce\Bundle\ProductBundle\Entity\Product;
 /**
  * Interface ProductAttributeRepositoryInterface
  *
- * @package WellCommerce\Bundle\ProductBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface ProductAttributeRepositoryInterface extends RepositoryInterface

@@ -17,7 +17,6 @@ use WellCommerce\Bundle\AdminBundle\Manager\AbstractAdminManager;
 /**
  * Class ClientGroupManager
  *
- * @package WellCommerce\Bundle\ClientBundle\Manager\Admin
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class ClientGroupManager extends AbstractAdminManager

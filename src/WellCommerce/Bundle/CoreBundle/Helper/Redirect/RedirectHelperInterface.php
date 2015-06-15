@@ -15,7 +15,6 @@ namespace WellCommerce\Bundle\CoreBundle\Helper\Redirect;
 /**
  * Interface RedirectHelperInterface
  *
- * @package WellCommerce\Bundle\CoreBundle\Helper\Redirect
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface RedirectHelperInterface

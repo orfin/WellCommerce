@@ -17,7 +17,6 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 /**
  * Interface ProductPhotoRepositoryInterface
  *
- * @package WellCommerce\Bundle\ProductBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface ProductPhotoRepositoryInterface extends RepositoryInterface

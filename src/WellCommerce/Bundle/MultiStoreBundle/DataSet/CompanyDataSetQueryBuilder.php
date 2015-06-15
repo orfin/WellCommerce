@@ -18,7 +18,6 @@ use WellCommerce\Bundle\DataSetBundle\QueryBuilder\QueryBuilderInterface;
 /**
  * Class CompanyDataSetQueryBuilder
  *
- * @package WellCommerce\Bundle\MultiStoreBundle\DataSet
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class CompanyDataSetQueryBuilder extends AbstractDataSetQueryBuilder implements QueryBuilderInterface

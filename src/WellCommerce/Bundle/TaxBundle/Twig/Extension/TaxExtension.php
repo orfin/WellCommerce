@@ -17,7 +17,6 @@ use WellCommerce\Bundle\TaxBundle\DataSet\TaxDataSet;
 /**
  * Class TaxExtension
  *
- * @package WellCommerce\Bundle\TaxBundle\Twig\Extension
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class TaxExtension extends \Twig_Extension

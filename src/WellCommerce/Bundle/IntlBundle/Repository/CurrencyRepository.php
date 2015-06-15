@@ -17,7 +17,6 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 /**
  * Class CurrencyRepository
  *
- * @package WellCommerce\Bundle\IntlBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class CurrencyRepository extends AbstractEntityRepository implements CurrencyRepositoryInterface

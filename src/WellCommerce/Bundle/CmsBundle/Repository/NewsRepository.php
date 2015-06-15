@@ -16,7 +16,6 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 /**
  * Class NewsRepository
  *
- * @package WellCommerce\Bundle\CmsBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class NewsRepository extends AbstractEntityRepository implements NewsRepositoryInterface

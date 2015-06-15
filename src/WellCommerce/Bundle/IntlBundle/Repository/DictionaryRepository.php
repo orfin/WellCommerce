@@ -16,7 +16,6 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 /**
  * Class DictionaryRepository
  *
- * @package WellCommerce\Bundle\IntlBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class DictionaryRepository extends AbstractEntityRepository implements DictionaryRepositoryInterface

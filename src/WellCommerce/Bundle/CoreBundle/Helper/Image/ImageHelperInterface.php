@@ -15,7 +15,6 @@ namespace WellCommerce\Bundle\CoreBundle\Helper\Image;
 /**
  * Interface ImageHelperInterface
  *
- * @package WellCommerce\Bundle\CoreBundle\Helper\Image
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface ImageHelperInterface
