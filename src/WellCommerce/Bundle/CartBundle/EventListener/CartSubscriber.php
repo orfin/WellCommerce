@@ -14,6 +14,8 @@ namespace WellCommerce\Bundle\CartBundle\EventListener;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use WellCommerce\Bundle\CartBundle\Entity\Cart;
+use WellCommerce\Bundle\CartBundle\Event\CartEvent;
+use WellCommerce\Bundle\CartBundle\Manager\Front\CartManager;
 use WellCommerce\Bundle\ClientBundle\Entity\Client;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\Shop;
@@ -28,7 +30,8 @@ class CartSubscriber extends AbstractEventSubscriber
     public static function getSubscribedEvents()
     {
         return parent::getSubscribedEvents() + [
-            KernelEvents::CONTROLLER => ['onKernelController', -256],
+            CartManager::CART_CHANGED_EVENT => ['onCartChangedEvent', 0],
+            KernelEvents::CONTROLLER        => ['onKernelController', -256],
         ];
     }
 
@@ -114,5 +117,13 @@ class CartSubscriber extends AbstractEventSubscriber
     private function getShippingMethodRepository()
     {
         return $this->container->get('shipping_method.repository');
+    }
+
+    public function onCartChangedEvent(CartEvent $cartEvent)
+    {
+        $cart   = $cartEvent->getCart();
+        $helper = $this->container->get('cart.helper');
+
+        return $helper->recalculateCartTotals($cart);
     }
 }

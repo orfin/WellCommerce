@@ -24,12 +24,13 @@
             <call method="setProviders">
                 <argument type="service" id="resource.provider.collection"/>
             </call>
+            <call method="setCartProductRepository">
+                <argument type="service" id="cart_product.repository"/>
+            </call>
         </service>
 
         <service id="cart.helper" class="WellCommerce\Bundle\CartBundle\Helper\CartHelper">
-            <argument type="service" id="cart_product.repository"/>
             <argument type="service" id="currency.converter"/>
-            <argument type="service" id="doctrine_helper"/>
         </service>
 
         <service id="cart.purger" class="WellCommerce\Bundle\CartBundle\Purger\CartPurger">

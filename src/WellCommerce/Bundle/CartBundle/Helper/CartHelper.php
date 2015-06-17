@@ -12,16 +12,11 @@
 
 namespace WellCommerce\Bundle\CartBundle\Helper;
 
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use WellCommerce\Bundle\CartBundle\Entity\Cart;
 use WellCommerce\Bundle\CartBundle\Entity\CartProduct;
 use WellCommerce\Bundle\CartBundle\Entity\CartTotals;
-use WellCommerce\Bundle\CartBundle\Exception\ChangeCartItemQuantityException;
-use WellCommerce\Bundle\CartBundle\Exception\DeleteCartItemException;
-use WellCommerce\Bundle\CartBundle\Repository\CartProductRepositoryInterface;
-use WellCommerce\Bundle\CoreBundle\Helper\Doctrine\DoctrineHelperInterface;
 use WellCommerce\Bundle\IntlBundle\Converter\CurrencyConverterInterface;
-use WellCommerce\Bundle\ProductBundle\Entity\Product;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute;
 
 /**
  * Class CartHelper
@@ -31,16 +26,6 @@ use WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute;
 class CartHelper implements CartHelperInterface
 {
     /**
-     * @var CartProductRepositoryInterface
-     */
-    protected $cartProductRepository;
-
-    /**
-     * @var DoctrineHelperInterface
-     */
-    protected $doctrineHelper;
-
-    /**
      * @var CurrencyConverterInterface
      */
     protected $currencyConverter;
@@ -48,110 +33,15 @@ class CartHelper implements CartHelperInterface
     /**
      * Constructor
      *
-     * @param CartProductRepositoryInterface $cartProductRepository
-     * @param CurrencyConverterInterface     $currencyConverter
-     * @param DoctrineHelperInterface        $doctrineHelper
+     * @param CurrencyConverterInterface $currencyConverter
      */
-    public function __construct(
-        CartProductRepositoryInterface $cartProductRepository,
-        CurrencyConverterInterface $currencyConverter,
-        DoctrineHelperInterface $doctrineHelper
-    ) {
-        $this->cartProductRepository = $cartProductRepository;
-        $this->doctrineHelper        = $doctrineHelper;
-        $this->currencyConverter     = $currencyConverter;
+    public function __construct(CurrencyConverterInterface $currencyConverter)
+    {
+        $this->currencyConverter = $currencyConverter;
     }
 
     /**
      * {@inheritdoc}
-     */
-    public function getCartProductById(Cart $cart, $id)
-    {
-        return $this->cartProductRepository->findOneBy([
-            'cart' => $cart,
-            'id'   => $id
-        ]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function abandonCart(Cart $cart)
-    {
-        $em = $this->doctrineHelper->getEntityManager();
-        $em->remove($cart);
-        $em->flush();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function deleteCartProduct(Cart $cart, $id)
-    {
-        $em          = $this->doctrineHelper->getEntityManager();
-        $cartProduct = $this->getCartProductById($cart, $id);
-
-        if (null === $cartProduct) {
-            throw new DeleteCartItemException($id);
-        }
-
-        $cart->removeProduct($cartProduct);
-        $em->remove($cartProduct);
-        $this->recalculateCartTotals($cart);
-        $em->flush();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function changeCartProductQuantity(Cart $cart, $id, $quantity)
-    {
-        $em          = $this->doctrineHelper->getEntityManager();
-        $cartProduct = $this->getCartProductById($cart, $id);
-        $quantity    = (int)$quantity;
-
-        if (null === $cartProduct) {
-            throw new ChangeCartItemQuantityException($id);
-        }
-
-        if ($quantity < 1) {
-            $this->deleteCartProduct($cart, $id);
-        }
-
-        $cartProduct->setQuantity($quantity);
-        $this->recalculateCartTotals($cart);
-        $em->flush();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addProductToCart(Cart $cart, Product $product, ProductAttribute $attribute = null, $quantity)
-    {
-        $em          = $this->doctrineHelper->getEntityManager();
-        $cartProduct = $this->cartProductRepository->findProductInCart($cart, $product, $attribute);
-
-        if (null === $cartProduct) {
-            $cartProduct = new CartProduct();
-            $cartProduct->setCart($cart);
-            $cartProduct->setProduct($product);
-            $cartProduct->setAttribute($attribute);
-            $cartProduct->setQuantity($quantity);
-            $cart->addProduct($cartProduct);
-            $em->persist($cartProduct);
-        } else {
-            $cartProduct->setQuantity($cartProduct->getQuantity() + (int)$quantity);
-        }
-
-        $this->recalculateCartTotals($cart);
-
-        $em->flush();
-    }
-
-    /**
-     * Recalculates cart totals
-     *
-     * @param Cart $cart
      */
     public function recalculateCartTotals(Cart $cart)
     {
@@ -164,6 +54,8 @@ class CartHelper implements CartHelperInterface
 
         $cartTotals = new CartTotals($quantityTotal, $weightTotal, $netTotal, $grossTotal, $taxAmountTotal);
         $cart->setTotals($cartTotals);
+
+        return true;
     }
 
     /**
