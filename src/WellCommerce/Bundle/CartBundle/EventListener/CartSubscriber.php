@@ -90,19 +90,29 @@ class CartSubscriber extends AbstractEventSubscriber
      */
     protected function initCart(Shop $shop, Client $client = null, $sessionId)
     {
-        $shippingMethodRepository = $this->container->get('shipping_method.repository');
-        $paymentMethodRepository  = $this->container->get('payment_method.repository');
-
-        $defaultShippingMethod      = $shippingMethodRepository->findOneBy([], ['hierarchy' => 'asc']);
-        $defaultPaymentMethodMethod = $paymentMethodRepository->findOneBy([], ['hierarchy' => 'asc']);
-
         $cart = new Cart();
         $cart->setShop($shop);
         $cart->setClient($client);
         $cart->setSessionId($sessionId);
-        $cart->setPaymentMethod($defaultPaymentMethodMethod);
-        $cart->setShippingMethod($defaultShippingMethod);
+        $cart->setPaymentMethod($this->getPaymentMethodRepository()->getDefaultPaymentMethod());
+        $cart->setShippingMethod($this->getShippingMethodRepository()->getDefaultShippingMethod());
 
         return $cart;
+    }
+
+    /**
+     * @return \WellCommerce\Bundle\PaymentBundle\Repository\PaymentMethodRepositoryInterface
+     */
+    private function getPaymentMethodRepository()
+    {
+        return $this->container->get('payment_method.repository');
+    }
+
+    /**
+     * @return \WellCommerce\Bundle\ShippingBundle\Repository\ShippingMethodRepositoryInterface
+     */
+    private function getShippingMethodRepository()
+    {
+        return $this->container->get('shipping_method.repository');
     }
 }

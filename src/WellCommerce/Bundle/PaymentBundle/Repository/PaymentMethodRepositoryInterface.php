@@ -22,4 +22,10 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
  */
 interface PaymentMethodRepositoryInterface extends RepositoryInterface, DataSetAwareRepositoryInterface
 {
+    /**
+     * Returns default shipping method
+     *
+     * @return null|\WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod
+     */
+    public function getDefaultPaymentMethod();
 }
