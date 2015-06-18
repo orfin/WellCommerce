@@ -27,9 +27,6 @@ class ProductDataSet extends AbstractDataSet implements DataSetInterface
     /**
      * {@inheritdoc}
      */
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(DataSetConfiguratorInterface $configurator)
     {
         $configurator->setColumns([
@@ -52,10 +49,18 @@ class ProductDataSet extends AbstractDataSet implements DataSetInterface
             'status'           => 'statuses.id',
         ]);
 
-        $statuses = $this->container->get('product_status.collection.front')->getArray();
-
         $configurator->setTransformers([
-            'status' => new ProductStatusTransformer($statuses)
+            'status' => new ProductStatusTransformer($this->getStatuses())
         ]);
+    }
+
+    /**
+     * Returns the collection of all product statuses
+     *
+     * @return array
+     */
+    private function getStatuses()
+    {
+        return $this->container->get('product_status.collection.front')->getArray();
     }
 }
