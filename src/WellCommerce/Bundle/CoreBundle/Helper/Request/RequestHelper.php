@@ -174,6 +174,39 @@ class RequestHelper implements RequestHelperInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getCurrentOffset($limit)
+    {
+        $page   = $this->getCurrentPage();
+        $offset = ($page * $limit) - $limit;
+
+        return ($offset > 0) ? $offset : 0;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCurrentPage()
+    {
+        $page = (int)$this->getQueryAttribute('page', 1);
+        $page = abs($page);
+
+        return ($page > 0) ? $page : 1;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCurrentLimit($default = 10)
+    {
+        $limit = (int)$this->getQueryAttribute('limit', $default);
+        $limit = abs($limit);
+
+        return ($limit > 0) ? $limit : $default;
+    }
+
+    /**
      * Returns current user from security context
      *
      * @return mixed|null

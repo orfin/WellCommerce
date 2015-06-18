@@ -11,7 +11,6 @@
  */
 namespace WellCommerce\Bundle\CoreBundle\Controller\Box;
 
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 
@@ -41,5 +40,17 @@ abstract class AbstractBoxController extends AbstractFrontController implements 
         }
 
         return $default;
+    }
+
+    protected function getLimit()
+    {
+        $page              = $requestHelper->getQueryAttribute('page', 1);
+        $limit             = $requestHelper->getQueryAttribute('limit', $this->getBoxParam('per_page'));
+        $offset            = ($page * $limit) - $limit;
+    }
+
+    protected function getOffset()
+    {
+
     }
 }
