@@ -15,7 +15,6 @@ namespace WellCommerce\Bundle\CoreBundle\Helper\Flash;
 /**
  * Interface FlashHelperInterface
  *
- * @package WellCommerce\Bundle\CoreBundle\Helper\Flash
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface FlashHelperInterface

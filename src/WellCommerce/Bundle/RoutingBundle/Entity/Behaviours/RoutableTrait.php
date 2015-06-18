@@ -17,7 +17,6 @@ use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;
 /**
  * Class RoutableTrait
  *
- * @package WellCommerce\Bundle\RoutingBundle\Entity\Behaviours
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 trait RoutableTrait

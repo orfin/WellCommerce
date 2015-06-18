@@ -18,7 +18,6 @@ use WellCommerce\Bundle\IntlBundle\Repository\LocaleRepositoryInterface;
 /**
  * Class LocaleExtension
  *
- * @package WellCommerce\Bundle\IntlBundle\Twig\Extension
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class LocaleExtension extends \Twig_Extension

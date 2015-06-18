@@ -1,3 +1,4 @@
+{% trans_default_domain "wellcommerce" %}
 <div class="modal-dialog">
     <div class="modal-content">
         <div class="modal-header noborder">
@@ -9,7 +10,7 @@
                 <strong>"{{ product.translate().name }}"</strong> {% trans %}cart.flash.added{% endtrans %}
             </div>
 
-            <h5 class="text-center">{% trans %}product.recommendations.header{% endtrans %}</h5>
+            <h5 class="text-center">{% trans %}product.heading.recommendations{% endtrans %}</h5>
 
             <div class="products-grid">
                 <div class="row">
@@ -30,8 +31,6 @@
                                         <span class="price">{{ format_price(item.price, item.currency) }}</span>
                                         <span class="name">{{ item.name }}</span>
                                     </a>
-
-                                    <a href="{{ path('front.cart.add') }}" class="btn btn-primary text-left add-cart" data-id="{{ item.id }}" data-qty="1" data-attribute="0">{% trans %}cart.button.add{% endtrans %}<i class="pull-right"><img src="{{ asset('themes/wellcommerce/assets/img/add-to-cart.png') }}"></i></a>
                                 </div>
                             </div>
                         </div>

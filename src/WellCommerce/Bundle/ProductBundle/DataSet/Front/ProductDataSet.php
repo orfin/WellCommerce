@@ -27,9 +27,6 @@ class ProductDataSet extends AbstractDataSet implements DataSetInterface
     /**
      * {@inheritdoc}
      */
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(DataSetConfiguratorInterface $configurator)
     {
         $configurator->setColumns([
@@ -40,20 +37,30 @@ class ProductDataSet extends AbstractDataSet implements DataSetInterface
             'route'            => 'IDENTITY(product_translation.route)',
             'weight'           => 'product.weight',
             'price'            => 'product.sellPrice.amount',
+            'discountedPrice'  => 'product.sellPrice.discountedAmount',
+            'isDiscountValid'  => 'IF_ELSE(:date BETWEEN product.sellPrice.validFrom AND product.sellPrice.validTo, 1, 0)',
             'currency'         => 'product.sellPrice.currency',
             'tax'              => 'sell_tax.value',
             'stock'            => 'product.stock',
-            'producer'         => 'IDENTITY(product.producer)',
+            'producerName'     => 'producers_translation.name',
             'category'         => 'categories.id',
             'shop'             => 'product_shops.id',
             'photo'            => 'photos.path',
             'status'           => 'statuses.id',
         ]);
 
-        $statuses = $this->container->get('product_status.collection.front')->getArray();
-
         $configurator->setTransformers([
-            'status' => new ProductStatusTransformer($statuses)
+            'status' => new ProductStatusTransformer($this->getStatuses())
         ]);
+    }
+
+    /**
+     * Returns the collection of all product statuses
+     *
+     * @return array
+     */
+    private function getStatuses()
+    {
+        return $this->container->get('product_status.collection.front')->getArray();
     }
 }

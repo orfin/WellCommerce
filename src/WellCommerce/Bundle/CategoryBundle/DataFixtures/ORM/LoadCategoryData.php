@@ -26,7 +26,7 @@ use WellCommerce\Bundle\RoutingBundle\Helper\Sluggable;
  */
 class LoadCategoryData extends AbstractDataFixture implements FixtureInterface, OrderedFixtureInterface
 {
-    const SAMPLES
+    public static $samples
         = [
             'Smart TVs',
             'Streaming devices',
@@ -44,7 +44,7 @@ class LoadCategoryData extends AbstractDataFixture implements FixtureInterface, 
     {
         $shop = $this->getReference('shop');
 
-        foreach (self::SAMPLES as $hierarchy => $name) {
+        foreach (self::$samples as $hierarchy => $name) {
             $category = new Category();
             $category->setEnabled(true);
             $category->setHierarchy($hierarchy);
@@ -59,23 +59,4 @@ class LoadCategoryData extends AbstractDataFixture implements FixtureInterface, 
 
         $manager->flush();
     }
-
-    /**
-     * Sample demo data
-     *
-     * @return array
-     */
-    protected function getSampleCategoriesTree()
-    {
-        return [
-            0 => ['name' => 'Smart TVs'],
-            1 => ['name' => 'Streaming devices'],
-            2 => ['name' => 'Accessories'],
-            3 => ['name' => 'DVD & Blue-ray players'],
-            4 => ['name' => 'Audio players'],
-            5 => ['name' => 'Projectors'],
-            6 => ['name' => 'Home theater'],
-        ];
-    }
 }
-

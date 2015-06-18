@@ -18,7 +18,6 @@ use Symfony\Component\Translation\TranslatorInterface;
 /**
  * Class FlashHelper
  *
- * @package WellCommerce\Bundle\CoreBundle\Helper
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class FlashHelper implements FlashHelperInterface

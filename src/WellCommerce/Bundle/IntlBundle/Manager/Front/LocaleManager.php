@@ -17,7 +17,6 @@ use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
 /**
  * Class LocaleManager
  *
- * @package WellCommerce\Bundle\IntlBundle\Manager\Front
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class LocaleManager extends AbstractFrontManager

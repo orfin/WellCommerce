@@ -16,7 +16,6 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 /**
  * Class UnitRepository
  *
- * @package WellCommerce\Bundle\UnitBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class UnitRepository extends AbstractEntityRepository implements UnitRepositoryInterface

@@ -16,7 +16,6 @@ use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
 /**
  * Class WellCommerceThemeExtension
  *
- * @package WellCommerce\Bundle\ThemeBundle\DependencyInjection
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class WellCommerceThemeExtension extends AbstractExtension

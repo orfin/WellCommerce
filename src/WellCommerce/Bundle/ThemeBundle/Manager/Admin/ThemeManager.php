@@ -17,7 +17,6 @@ use WellCommerce\Bundle\AdminBundle\Manager\AbstractAdminManager;
 /**
  * Class ThemeManager
  *
- * @package WellCommerce\Bundle\ThemeBundle\Manager\Admin
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class ThemeManager extends AbstractAdminManager

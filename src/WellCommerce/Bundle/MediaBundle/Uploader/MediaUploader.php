@@ -23,7 +23,6 @@ use WellCommerce\Bundle\MediaBundle\Repository\MediaRepositoryInterface;
 /**
  * Class FileUploader
  *
- * @package WellCommerce\Bundle\CoreBundle\Uploader
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class MediaUploader implements MediaUploaderInterface

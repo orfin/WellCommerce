@@ -16,7 +16,6 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 /**
  * Class PackageRepository
  *
- * @package WellCommerce\Bundle\SmugglerBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class PackageRepository extends AbstractEntityRepository implements PackageRepositoryInterface

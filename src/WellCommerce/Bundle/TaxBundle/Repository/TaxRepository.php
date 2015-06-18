@@ -16,7 +16,6 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 /**
  * Class TaxRepository
  *
- * @package WellCommerce\Bundle\TaxBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class TaxRepository extends AbstractEntityRepository implements TaxRepositoryInterface

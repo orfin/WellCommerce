@@ -17,7 +17,6 @@ use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 /**
  * Class ImageHelper
  *
- * @package WellCommerce\Bundle\CoreBundle\Helper\Image
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class ImageHelper implements ImageHelperInterface

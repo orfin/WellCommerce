@@ -17,7 +17,6 @@ use WellCommerce\Bundle\AdminBundle\Manager\AbstractAdminManager;
 /**
  * Class RoutingManager
  *
- * @package WellCommerce\Bundle\RoutingBundle\Manager\Admin
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class RoutingManager extends AbstractAdminManager

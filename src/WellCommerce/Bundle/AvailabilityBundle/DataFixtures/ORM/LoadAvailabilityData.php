@@ -23,14 +23,14 @@ use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
  */
 class LoadAvailabilityData extends AbstractDataFixture
 {
-    const SAMPLES = ['24h', '72h', '7-14 days'];
+    public static $samples = ['24h', '72h', '7-14 days'];
 
     /**
      * {@inheritDoc}
      */
     public function load(ObjectManager $manager)
     {
-        foreach (self::SAMPLES as $name) {
+        foreach (self::$samples as $name) {
             $availability = new Availability();
             $availability->translate('en')->setName($name);
             $availability->mergeNewTranslations();

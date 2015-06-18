@@ -22,4 +22,10 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
  */
 interface ShippingMethodRepositoryInterface extends RepositoryInterface, DataSetAwareRepositoryInterface
 {
+    /**
+     * Returns default shipping method
+     *
+     * @return null|\WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod
+     */
+    public function getDefaultShippingMethod();
 }

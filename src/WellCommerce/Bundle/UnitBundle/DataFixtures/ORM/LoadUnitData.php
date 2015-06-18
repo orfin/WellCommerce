@@ -23,14 +23,14 @@ use WellCommerce\Bundle\UnitBundle\Entity\Unit;
  */
 class LoadUnitData extends AbstractDataFixture
 {
-    const SAMPLES = ['pcs.', 'set'];
+    public static $samples = ['pcs.', 'set'];
 
     /**
      * {@inheritDoc}
      */
     public function load(ObjectManager $manager)
     {
-        foreach (self::SAMPLES as $name) {
+        foreach (self::$samples as $name) {
             $unit = new Unit();
             $unit->translate('en')->setName($name);
             $unit->mergeNewTranslations();

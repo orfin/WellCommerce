@@ -49,6 +49,10 @@
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
+        <service id="client_group.collection" parent="dataset.collection_builder.factory">
+            <argument type="service" id="client_group.dataset"/>
+        </service>
+
         <service id="client_group.datagrid" class="WellCommerce\Bundle\ClientBundle\DataGrid\ClientGroupDataGrid">
             <argument key="identifier">client_group</argument>
             <argument type="service" id="client_group.dataset"/>

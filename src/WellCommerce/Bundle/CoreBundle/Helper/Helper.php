@@ -16,7 +16,6 @@ use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
 /**
  * Class Helper
  *
- * @package WellCommerce\Bundle\CoreBundle
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class Helper extends AbstractContainer

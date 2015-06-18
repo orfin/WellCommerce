@@ -20,4 +20,11 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
  */
 class ShippingMethodRepository extends AbstractEntityRepository implements ShippingMethodRepositoryInterface
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function getDefaultShippingMethod()
+    {
+        return $this->findOneBy([], ['hierarchy' => 'asc']);
+    }
 }

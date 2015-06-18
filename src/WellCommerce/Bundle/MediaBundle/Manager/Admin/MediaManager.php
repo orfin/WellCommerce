@@ -17,7 +17,6 @@ use WellCommerce\Bundle\AdminBundle\Manager\AbstractAdminManager;
 /**
  * Class MediaManager
  *
- * @package WellCommerce\Bundle\MediaBundle\Manager\Admin
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class MediaManager extends AbstractAdminManager

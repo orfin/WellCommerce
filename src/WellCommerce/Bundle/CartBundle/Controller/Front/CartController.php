@@ -13,6 +13,8 @@
 namespace WellCommerce\Bundle\CartBundle\Controller\Front;
 
 use Symfony\Component\HttpFoundation\Request;
+use WellCommerce\Bundle\CartBundle\Exception\ChangeCartItemQuantityException;
+use WellCommerce\Bundle\CartBundle\Exception\DeleteCartItemException;
 use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
@@ -75,7 +77,7 @@ class CartController extends AbstractFrontController implements FrontControllerI
         $manager         = $this->getManager();
         $product         = $manager->findProduct();
         $attribute       = $manager->findProductAttribute($product);
-        $quantity        = $manager->getRequestHelper()->getRequestAttribute('qty', 1);
+        $quantity        = (int)$manager->getRequestHelper()->getRequestAttribute('qty', 1);
         $category        = $product->getCategories()->first();
         $recommendations = $this->getRecommendations($category);
 
@@ -111,11 +113,43 @@ class CartController extends AbstractFrontController implements FrontControllerI
         return $dataset;
     }
 
+    public function editAction()
+    {
+        $manager = $this->getManager();
+        $message = null;
+        $status  = null;
+
+        try {
+            $manager->changeItemQuantity();
+            $success = true;
+        } catch (ChangeCartItemQuantityException $e) {
+            $success = false;
+            $message = $e->getMessage();
+        }
+
+        return $this->jsonResponse([
+            'success' => $success,
+            'message' => $message,
+        ]);
+    }
+
     public function deleteAction()
     {
         $manager = $this->getManager();
-        $manager->deleteItem();
+        $message = null;
+        $status  = null;
 
-        return $this->redirectToAction('index');
+        try {
+            $manager->deleteItem();
+            $success = true;
+        } catch (DeleteCartItemException $e) {
+            $success = false;
+            $message = $e->getMessage();
+        }
+
+        return $this->jsonResponse([
+            'success' => $success,
+            'message' => $message,
+        ]);
     }
 }

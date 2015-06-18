@@ -18,7 +18,6 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Class ResourceEvent
  *
- * @package WellCommerce\Bundle\CoreBundle\Event
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class ResourceEvent extends Event

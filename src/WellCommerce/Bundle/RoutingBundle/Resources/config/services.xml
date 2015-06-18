@@ -75,5 +75,10 @@
         </service>
 
         <service id="route.generator.collection" class="WellCommerce\Bundle\RoutingBundle\Generator\RouteGeneratorCollection" />
+
+        <service id="twig.extension.routing_helper" class="WellCommerce\Bundle\RoutingBundle\Twig\Extension\RoutingHelperExtension">
+            <argument type="service" id="request_helper"/>
+            <tag name="twig.extension"/>
+        </service>
     </services>
 </container>

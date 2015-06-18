@@ -23,7 +23,12 @@
                         <input type="text" value="{{ item.quantity|number_format(0) }}" class="text-center">
                     </td>
                     <td class="text-right">
-                        {{ format_price(item.quantityPrice, item.currency, null, item.tax) }}
+                        {% if item.isDiscountValid == 1 %}
+                            {{ format_price(item.quantityDiscountedPrice, item.currency, null, item.tax) }}
+                            <small>{{ format_price(item.quantityPrice, item.currency, null, item.tax) }}</small>
+                        {% else %}
+                            {{ format_price(item.quantityPrice, item.currency, null, item.tax) }}
+                        {% endif %}
                     </td>
                 </tr>
                 {% endfor %}

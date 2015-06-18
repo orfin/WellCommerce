@@ -13,8 +13,8 @@
 namespace WellCommerce\Bundle\UserBundle\DataSet;
 
 use WellCommerce\Bundle\DataSetBundle\AbstractDataSet;
-use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
 use WellCommerce\Bundle\DataSetBundle\DataSetConfiguratorInterface;
+use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
 
 /**
  * Class UserDataSet
@@ -29,10 +29,13 @@ class UserDataSet extends AbstractDataSet implements DataSetInterface
     public function configureOptions(DataSetConfiguratorInterface $configurator)
     {
         $configurator->setColumns([
-            'id'       => 'user.id',
-            'username' => 'user.username',
-            'email'    => 'user.email',
-            'enabled'  => 'user.enabled',
+            'id'         => 'user.id',
+            'username'   => 'user.username',
+            'name'       => 'CONCAT(user.firstName,\' \', user.lastName)',
+            'first_name' => 'user.firstName',
+            'last_name'  => 'user.lastName',
+            'email'      => 'user.email',
+            'enabled'    => 'user.enabled',
         ]);
     }
 }

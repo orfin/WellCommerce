@@ -23,14 +23,14 @@ use WellCommerce\Bundle\IntlBundle\Entity\Currency;
  */
 class LoadCurrencyData extends AbstractDataFixture
 {
-    const SAMPLES = ['EUR', 'USD', 'GBP'];
+    public static $samples = ['EUR', 'USD', 'GBP'];
 
     /**
      * {@inheritDoc}
      */
     public function load(ObjectManager $manager)
     {
-        foreach (self::SAMPLES as $name) {
+        foreach (self::$samples as $name) {
             $currency = new Currency();
             $currency->setCode($name);
             $manager->persist($currency);

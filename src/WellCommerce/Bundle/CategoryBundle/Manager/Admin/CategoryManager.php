@@ -17,7 +17,6 @@ use WellCommerce\Bundle\AdminBundle\Manager\AbstractAdminManager;
 /**
  * Class CategoryManager
  *
- * @package WellCommerce\Bundle\CategoryBundle\Manager\Admin
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class CategoryManager extends AbstractAdminManager

@@ -1,5 +1,6 @@
 {% extends 'WellCommerceWebBundle:Front:layout.html.twig' %}
 {% import "WellCommerceFormBundle:Front/Common:macros.html.twig" as macros %}
+{% trans_default_domain "wellcommerce" %}
 {% block content %}
     {% include 'WellCommerceWebBundle:Front:breadcrumbs.html.twig' %}
     <div class="row">
@@ -7,7 +8,7 @@
             {% if cart.isEmpty %}
             <div class="cart">
                 <div class="alert alert-info mtp30">
-                    <strong>{% trans %}cart.empty.info{% endtrans %}</strong>
+                    <strong>{% trans %}cart.flash.empty{% endtrans %}</strong>
                 </div>
             </div>
             {% else %}
@@ -86,7 +87,7 @@
                                 <span class="text">Summary<small>Payment method: {{ cart.getPaymentMethod().translate().getName() }}</small></span>
                             </div>
                             <div class="col-lg-3">
-                                <span class="value">{{ format_price(cart.getTotals().getPriceGross()) }}</span>
+                                <span class="value">{{ format_price(cart.getTotals().getGrossPrice()) }}</span>
                             </div>
                         </div>
                     </div>

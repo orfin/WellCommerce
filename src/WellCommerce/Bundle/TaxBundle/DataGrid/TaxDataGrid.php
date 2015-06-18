@@ -22,7 +22,6 @@ use WellCommerce\Bundle\DataGridBundle\DataGridInterface;
 /**
  * Class TaxDataGrid
  *
- * @package WellCommerce\Bundle\TaxBundle
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class TaxDataGrid extends AbstractDataGrid implements DataGridInterface

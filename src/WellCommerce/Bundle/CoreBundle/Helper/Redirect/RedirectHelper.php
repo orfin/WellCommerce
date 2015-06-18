@@ -18,7 +18,6 @@ use Symfony\Component\Routing\RouterInterface;
 /**
  * Class RedirectHelper
  *
- * @package WellCommerce\Bundle\CoreBundle\Helper\Redirect
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class RedirectHelper implements RedirectHelperInterface

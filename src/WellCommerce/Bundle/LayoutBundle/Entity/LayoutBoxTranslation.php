@@ -12,11 +12,15 @@
 
 namespace WellCommerce\Bundle\LayoutBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Translatable\Translation;
 use WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface;
 
 /**
  * Class LayoutBoxTranslation
+ *
+ * @ORM\Table(name="layout_box_translation")
+ * @ORM\Entity
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */

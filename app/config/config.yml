@@ -56,6 +56,7 @@ doctrine:
                 dql:
                     string_functions:
                         GROUP_CONCAT: DoctrineExtensions\Query\Mysql\GroupConcat
+                        IF_ELSE: DoctrineExtensions\Query\Mysql\IfElse
                 filters:
                     locale:
                         class:   WellCommerce\Bundle\IntlBundle\ORM\Filter\LocaleFilter

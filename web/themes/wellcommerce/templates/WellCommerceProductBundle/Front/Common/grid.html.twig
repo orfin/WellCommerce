@@ -1,3 +1,5 @@
+{% trans_default_domain "wellcommerce" %}
+
 <div class="products-grid">
     <div class="row">
         {% for item in dataset.rows %}
@@ -12,7 +14,11 @@
                         <div class="labels">
                             <span class="label">Bestseller {{ item.status|json_encode }}</span>
                         </div>
-                        <span class="price">{{ format_price(item.price, item.currency) }}</span>
+                        {% if item.discountedPrice is not null %}
+                            <span class="price promo"><small>{{ format_price(item.price, item.currency) }}</small>{{ format_price(item.discountedPrice, item.currency) }}</span>
+                        {% else %}
+                            <span class="price">{{ format_price(item.price, item.currency) }}</span>
+                        {% endif %}
                         <span class="name">{{ item.name }}</span>
                     </a>
 
@@ -23,4 +29,3 @@
         {% endfor %}
     </div>
 </div>
-

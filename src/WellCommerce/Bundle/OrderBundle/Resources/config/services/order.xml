@@ -32,5 +32,14 @@
             </call>
         </service>
 
+        <service id="order_address.form_builder" class="WellCommerce\Bundle\OrderBundle\Form\Front\OrderAddressFormBuilder">
+            <argument type="service" id="form.resolver.factory"/>
+            <argument type="service" id="form.handler"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+
     </services>
 </container>

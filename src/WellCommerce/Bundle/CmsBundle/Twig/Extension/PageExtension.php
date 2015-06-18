@@ -16,7 +16,6 @@ use WellCommerce\Bundle\DataSetBundle\CollectionBuilder\CollectionBuilderFactory
 /**
  * Class PageExtension
  *
- * @package WellCommerce\Bundle\CmsBundle\Twig\Extension
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class PageExtension extends \Twig_Extension

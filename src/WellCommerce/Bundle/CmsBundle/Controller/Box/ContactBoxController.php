@@ -19,7 +19,6 @@ use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
 /**
  * Class ContactBoxController
  *
- * @package WellCommerce\Bundle\CmsBundle\Controller\Box
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()

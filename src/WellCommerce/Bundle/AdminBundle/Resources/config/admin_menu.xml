@@ -97,7 +97,7 @@
 
     <item>
         <id>user_management</id>
-        <name>admin.menu.user_management</name>
+        <name>user.admin_menu.user_management</name>
         <path>menu.configuration.user_management</path>
         <sort_order>30</sort_order>
     </item>

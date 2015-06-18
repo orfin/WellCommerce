@@ -30,42 +30,27 @@ class UserFormBuilder extends AbstractFormBuilder implements FormBuilderInterfac
     {
         $requiredData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'required_data',
-            'label' => $this->trans('form.required_data')
+            'label' => $this->trans('form.label.required_data')
         ]));
 
         $requiredData->addChild($this->getElement('text_field', [
             'name'  => 'firstName',
-            'label' => $this->trans('user.firstName'),
+            'label' => $this->trans('user.label.first_name'),
         ]));
 
         $requiredData->addChild($this->getElement('text_field', [
             'name'  => 'lastName',
-            'label' => $this->trans('user.lastName'),
+            'label' => $this->trans('user.label.last_name'),
         ]));
 
         $requiredData->addChild($this->getElement('text_field', [
             'name'  => 'username',
-            'label' => $this->trans('user.username'),
+            'label' => $this->trans('user.label.username'),
         ]));
 
         $requiredData->addChild($this->getElement('text_field', [
             'name'  => 'email',
-            'label' => $this->trans('user.email'),
-        ]));
-
-        $mediaData = $form->addChild($this->getElement('nested_fieldset', [
-            'name'  => 'media_data',
-            'label' => $this->trans('Media')
-        ]));
-
-        $mediaData->addChild($this->getElement('image', [
-            'name'        => 'photo',
-            'label'       => $this->trans('Avatar'),
-            'load_route'  => $this->generateUrl('admin.media.grid'),
-            'upload_url'  => $this->generateUrl('admin.media.add'),
-            'repeat_min'  => 0,
-            'repeat_max'  => 1,
-            'transformer' => new MediaEntityToIdentifierTransformer($this->get('media.repository'))
+            'label' => $this->trans('user.label.email'),
         ]));
 
         $form->addFilter($this->getFilter('no_code'));

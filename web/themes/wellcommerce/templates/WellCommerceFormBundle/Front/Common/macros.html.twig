@@ -52,11 +52,15 @@
         {% set fieldName = options.name %}
     {% endif %}
     {% autoescape true %}
-    <div class="checkbox">
+    <div class="checkbox {% if element.getError()|length %}has-error has-feedback{% endif %}">
         <label for="{{ options.name }}">
-            <input type="checkbox" id="{{ options.name }}" name="{{ fieldName }}" value="{{ element.getValue() }}">
+            <input type="checkbox" id="{{ options.name }}" name="{{ fieldName }}" value="1" {% if element.getValue() == 1 %}checked{% endif %}>
             {{ options.label }}
         </label>
+        {% if element.getError()|length %}
+            <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+            <span>{{ element.getError()|join(' ') }}</span>
+        {% endif %}
     </div>
     {% endautoescape %}
 {% endmacro %}

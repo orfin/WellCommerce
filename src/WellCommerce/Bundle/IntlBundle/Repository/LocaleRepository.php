@@ -17,7 +17,6 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 /**
  * Class LocaleRepository
  *
- * @package WellCommerce\Bundle\IntlBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class LocaleRepository extends AbstractEntityRepository implements LocaleRepositoryInterface

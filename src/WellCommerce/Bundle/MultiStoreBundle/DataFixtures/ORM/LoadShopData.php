@@ -38,6 +38,7 @@ class LoadShopData extends AbstractDataFixture
         $shop->setTheme($theme);
         $shop->setUrl($this->container->getParameter('fallback_hostname'));
         $shop->setDefaultOrderStatus($orderStatus);
+        $shop->setDefaultCountry('US');
         $manager->persist($shop);
         $manager->flush();
 

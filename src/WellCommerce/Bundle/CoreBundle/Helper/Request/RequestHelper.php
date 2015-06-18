@@ -54,8 +54,23 @@ class RequestHelper implements RequestHelperInterface
     {
         $this->requestStack    = $requestStack;
         $this->request         = $requestStack->getMasterRequest();
-        $this->session         = $this->request->getSession();
         $this->securityContext = $securityContext;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCurrentHost()
+    {
+        if (null !== $url = $this->request->server->get('SERVER_NAME')) {
+            return $url;
+        }
+
+        if (null !== $url = $this->request->server->get('HTTP_HOST')) {
+            return parse_url($url, PHP_URL_HOST);
+        }
+
+        return null;
     }
 
     /**
@@ -63,7 +78,7 @@ class RequestHelper implements RequestHelperInterface
      */
     public function getSessionAttribute($name, $default = null)
     {
-        return $this->session->get($name, $default);
+        return $this->request->getSession()->get($name, $default);
     }
 
     /**
@@ -71,7 +86,7 @@ class RequestHelper implements RequestHelperInterface
      */
     public function hasSessionAttribute($name)
     {
-        return $this->session->has($name);
+        return $this->request->getSession()->has($name);
     }
 
     /**
@@ -79,7 +94,7 @@ class RequestHelper implements RequestHelperInterface
      */
     public function getSessionId()
     {
-        return $this->session->getId();
+        return $this->request->getSession()->getId();
     }
 
     /**
@@ -156,6 +171,39 @@ class RequestHelper implements RequestHelperInterface
         }
 
         return null;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCurrentOffset($limit)
+    {
+        $page   = $this->getCurrentPage();
+        $offset = ($page * $limit) - $limit;
+
+        return ($offset > 0) ? $offset : 0;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCurrentPage()
+    {
+        $page = (int)$this->getQueryAttribute('page', 1);
+        $page = abs($page);
+
+        return ($page > 0) ? $page : 1;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCurrentLimit($default = 10)
+    {
+        $limit = (int)$this->getQueryAttribute('limit', $default);
+        $limit = abs($limit);
+
+        return ($limit > 0) ? $limit : $default;
     }
 
     /**

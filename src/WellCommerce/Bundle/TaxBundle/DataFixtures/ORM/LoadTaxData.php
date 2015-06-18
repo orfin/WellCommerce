@@ -23,14 +23,14 @@ use WellCommerce\Bundle\TaxBundle\Entity\Tax;
  */
 class LoadTaxData extends AbstractDataFixture
 {
-    const SAMPLES = [0, 3, 5, 7, 23];
+    public static $samples = [0, 3, 5, 7, 23];
 
     /**
      * {@inheritDoc}
      */
     public function load(ObjectManager $manager)
     {
-        foreach (self::SAMPLES as $val) {
+        foreach (self::$samples as $val) {
             $name = sprintf('%s%s', $val, '%');
             $tax  = new Tax();
             $tax->setValue($val);

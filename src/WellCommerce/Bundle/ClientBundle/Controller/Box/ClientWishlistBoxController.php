@@ -15,13 +15,13 @@ namespace WellCommerce\Bundle\ClientBundle\Controller\Box;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 
 /**
- * Class ClientWishListBoxController
+ * Class ClientWishlistBoxController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
-class ClientWishListBoxController extends AbstractBoxController
+class ClientWishlistBoxController extends AbstractBoxController
 {
     public function indexAction()
     {

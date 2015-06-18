@@ -17,7 +17,6 @@ use WellCommerce\Bundle\AdminBundle\Manager\AbstractAdminManager;
 /**
  * Class DelivererManager
  *
- * @package WellCommerce\Bundle\DelivererBundle\Manager\Admin
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class DelivererManager extends AbstractAdminManager

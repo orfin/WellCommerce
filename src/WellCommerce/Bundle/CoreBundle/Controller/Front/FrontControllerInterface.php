@@ -15,7 +15,6 @@ namespace WellCommerce\Bundle\CoreBundle\Controller\Front;
 /**
  * Interface FrontControllerInterface
  *
- * @package WellCommerce\Bundle\CoreBundle\Controller\Front
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface FrontControllerInterface

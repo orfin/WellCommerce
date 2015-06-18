@@ -15,7 +15,6 @@ namespace WellCommerce\Bundle\IntlBundle\Provider;
 /**
  * Interface LocaleProviderInterface
  *
- * @package WellCommerce\Bundle\IntlBundle\Provider
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface LocaleProviderInterface

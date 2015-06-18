@@ -21,7 +21,6 @@ use WellCommerce\Bundle\LayoutBundle\Configurator\LayoutBoxConfiguratorInterface
 /**
  * Class CategoryMenuBoxConfigurator
  *
- * @package WellCommerce\Bundle\CategoryBundle\Configurator
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class CategoryMenuBoxConfigurator extends AbstractLayoutBoxConfigurator implements LayoutBoxConfiguratorInterface

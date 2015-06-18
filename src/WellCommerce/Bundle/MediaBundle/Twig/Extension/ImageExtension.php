@@ -16,7 +16,6 @@ use WellCommerce\Bundle\CoreBundle\Helper\Image\ImageHelperInterface;
 /**
  * Class ImageExtension
  *
- * @package WellCommerce\Bundle\MediaBundle\Twig\Extension
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class ImageExtension extends \Twig_Extension

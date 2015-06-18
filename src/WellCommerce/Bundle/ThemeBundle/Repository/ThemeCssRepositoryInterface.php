@@ -17,7 +17,6 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 /**
  * Interface ThemeCssRepositoryInterface
  *
- * @package WellCommerce\Bundle\ThemeBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface ThemeCssRepositoryInterface extends RepositoryInterface

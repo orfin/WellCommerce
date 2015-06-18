@@ -12,6 +12,9 @@
             <argument type="service" id="doctrine_helper"/>
             <argument type="service" id="translator"/>
             <argument type="service" id="request_helper"/>
+            <call method="setProviders">
+                <argument type="service" id="resource.provider.collection" />
+            </call>
         </service>
 
         <service id="web.home_page.controller.front" class="WellCommerce\Bundle\WebBundle\Controller\Front\HomePageController">

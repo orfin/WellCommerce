@@ -29,37 +29,37 @@ class ClientRegisterFormBuilder extends AbstractFormBuilder implements FormBuild
     {
         $form->addChild($this->getElement('text_field', [
             'name'  => 'firstName',
-            'label' => $this->trans('client.first_name.label'),
+            'label' => $this->trans('client.label.first_name'),
         ]));
 
         $form->addChild($this->getElement('text_field', [
             'name'  => 'lastName',
-            'label' => $this->trans('client.last_name.label'),
+            'label' => $this->trans('client.label.last_name'),
         ]));
 
         $form->addChild($this->getElement('text_field', [
             'name'  => 'phone',
-            'label' => $this->trans('client.phone.label'),
+            'label' => $this->trans('client.label.phone'),
         ]));
 
         $form->addChild($this->getElement('text_field', [
             'name'  => 'email',
-            'label' => $this->trans('client.email.label'),
+            'label' => $this->trans('client.label.email'),
         ]));
 
         $form->addChild($this->getElement('password', [
             'name'  => 'password',
-            'label' => $this->trans('client.password.label'),
+            'label' => $this->trans('client.label.password'),
         ]));
 
         $form->addChild($this->getElement('checkbox', [
             'name'  => 'conditionsAccepted',
-            'label' => $this->trans('client.accept_conditions.label'),
+            'label' => $this->trans('client.label.accept_conditions'),
         ]));
 
         $form->addChild($this->getElement('checkbox', [
             'name'  => 'newsletterAccepted',
-            'label' => $this->trans('client.accept_newsletter.label'),
+            'label' => $this->trans('client.label.accept_newsletter'),
         ]));
 
         $form->addFilter($this->getFilter('no_code'));

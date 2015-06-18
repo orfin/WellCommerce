@@ -18,6 +18,7 @@ use WellCommerce\Bundle\AvailabilityBundle\DataFixtures\ORM\LoadAvailabilityData
 use WellCommerce\Bundle\CategoryBundle\DataFixtures\ORM\LoadCategoryData;
 use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
 use WellCommerce\Bundle\CoreBundle\Entity\Dimension;
+use WellCommerce\Bundle\CoreBundle\Entity\DiscountablePrice;
 use WellCommerce\Bundle\CoreBundle\Entity\Price;
 use WellCommerce\Bundle\IntlBundle\DataFixtures\ORM\LoadCurrencyData;
 use WellCommerce\Bundle\MediaBundle\DataFixtures\ORM\LoadMediaData;
@@ -35,7 +36,7 @@ use WellCommerce\Bundle\UnitBundle\DataFixtures\ORM\LoadUnitData;
  */
 class LoadProductData extends AbstractDataFixture
 {
-    const SAMPLES = [];
+    public static $samples = [];
 
     /**
      * {@inheritDoc}
@@ -60,13 +61,13 @@ class LoadProductData extends AbstractDataFixture
         $description      = $faker->text(1000);
         $sku              = $this->getFakerGenerator()->creditCardNumber();
         $shop             = $this->getReference('shop');
-        $currency         = $this->randomizeSamples('currency', LoadCurrencyData::SAMPLES);
-        $producer         = $this->randomizeSamples('producer', LoadProducerData::SAMPLES);
-        $availability     = $this->randomizeSamples('availability', LoadAvailabilityData::SAMPLES);
-        $categories       = $this->randomizeSamples('category', $s = LoadCategoryData::SAMPLES, rand(2, 4));
-        $statuses         = $this->randomizeSamples('product_status', LoadProductStatusData::SAMPLES, rand(2, 3));
-        $tax              = $this->randomizeSamples('tax', LoadTaxData::SAMPLES);
-        $unit             = $this->randomizeSamples('unit', LoadUnitData::SAMPLES);
+        $currency         = $this->randomizeSamples('currency', LoadCurrencyData::$samples);
+        $producer         = $this->randomizeSamples('producer', LoadProducerData::$samples);
+        $availability     = $this->randomizeSamples('availability', LoadAvailabilityData::$samples);
+        $categories       = $this->randomizeSamples('category', $s = LoadCategoryData::$samples, rand(2, 4));
+        $statuses         = $this->randomizeSamples('product_status', LoadProductStatusData::$samples, rand(2, 3));
+        $tax              = $this->randomizeSamples('tax', LoadTaxData::$samples);
+        $unit             = $this->randomizeSamples('unit', LoadUnitData::$samples);
 
         $dimension = new Dimension();
         $dimension->setDepth(rand(10, 100));
@@ -77,9 +78,19 @@ class LoadProductData extends AbstractDataFixture
         $buyPrice->setAmount(rand(1, 100));
         $buyPrice->setCurrency($currency->getCode());
 
-        $sellPrice = new Price();
-        $sellPrice->setAmount(rand(100, 200));
+        $sellPrice = new DiscountablePrice();
+        $sellPrice->setAmount($price = rand(100, 200));
         $sellPrice->setCurrency($currency->getCode());
+        $sellPrice->setValidFrom(null);
+        $sellPrice->setValidTo(null);
+
+        foreach($statuses as $status){
+            if($status->translate()->getName() === 'Promotions'){
+                $sellPrice->setDiscountedAmount($price * (rand(80, 95) / 100));
+                $sellPrice->setValidFrom(new \DateTime());
+                $sellPrice->setValidTo((new \DateTime())->modify('+30 days'));
+            }
+        }
 
         $product = new Product();
         $product->setSKU($sku);
@@ -115,7 +126,7 @@ class LoadProductData extends AbstractDataFixture
     protected function getPhotos(Product $product, ObjectManager $manager)
     {
         $productPhotos = new ArrayCollection();
-        $mediaFiles    = $this->randomizeSamples('photo', LoadMediaData::SAMPLES, 3);
+        $mediaFiles    = $this->randomizeSamples('photo', LoadMediaData::$samples, 3);
         $isMainPhoto   = true;
 
         foreach ($mediaFiles as $media) {

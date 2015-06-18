@@ -2,7 +2,7 @@
 <items>
     <item>
         <id>user</id>
-        <name>admin.menu.user</name>
+        <name>user.admin_menu.user</name>
         <route>admin.user.index</route>
         <path>menu.configuration.user_management.user</path>
         <sort_order>10</sort_order>

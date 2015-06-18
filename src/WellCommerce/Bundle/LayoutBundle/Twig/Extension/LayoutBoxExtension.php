@@ -16,7 +16,6 @@ use WellCommerce\Bundle\LayoutBundle\Renderer\LayoutBoxRendererInterface;
 /**
  * Class LayoutBoxExtension
  *
- * @package WellCommerce\Bundle\CoreBundle\Twig\Extension
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class LayoutBoxExtension extends \Twig_Extension

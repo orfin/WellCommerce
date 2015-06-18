@@ -1,53 +1,37 @@
 language: php
 
+sudo: false
+
 php:
-  - 5.6
-  - 5.5
-  - 5.4
+    - 5.6
+    - 7.0
 
-branches:
-    only:
-        - development
+matrix:
+    allow_failures:
+        - php: 7.0
 
-before_install:
-    - sudo apt-get update > /dev/null
-    - sudo rm -rf /dev/shm && sudo ln -s /run/shm /dev/shm
-
-install:
-   - sudo apt-get install apache2 libapache2-mod-fastcgi
-   - sudo cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf
-   - sudo a2enmod rewrite actions fastcgi alias
-   - echo "cgi.fix_pathinfo = 1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-   - ~/.phpenv/versions/$(phpenv version-name)/sbin/php-fpm
-   - sudo cp -f travis-ci-apache /etc/apache2/sites-available/default
-   - sudo sed -e "s?%TRAVIS_BUILD_DIR%?$(pwd)?g" --in-place /etc/apache2/sites-available/default
-   - echo "127.0.0.1 wellcommerce.dev" | sudo tee -a /etc/hosts
-   - sudo service apache2 restart
+addons:
+    apt:
+        packages:
+            - apache2
 
 before_script:
-    - mysql -e 'create database travis;'
+    - echo '' > ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
+    - echo "zend.enable_gc = 0" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+    - echo "memory_limit=4096M" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+
+    - mysql -e 'CREATE DATABASE travis;'
     - cp app/config/parameters.yml.travis app/config/parameters.yml
+
     - composer self-update
-    - composer update --no-interaction
-    - php app/console doctrine:schema:create --env=test -vvv
-    - php app/console doctrine:fixtures:load --no-interaction -vvv
-    - chmod -R 777 app/cache app/logs
-    - php app/console --env=test cache:warmup
-    - chmod -R 777 app/cache app/logs
-    - php app/console assets:install
-    - php app/console bazinga:js-translation:dump web/js
-    - php app/console fos:js-routing:dump
-    - php app/console assetic:dump
+    - composer install --prefer-source --no-interaction
 
-    - "sh -e /etc/init.d/xvfb start"
-    - "export DISPLAY=:99.0"
-    - "wget http://selenium-release.storage.googleapis.com/2.43/selenium-server-standalone-2.43.1.jar"
-    - "java -jar selenium-server-standalone-2.43.1.jar > /dev/null &"
-    - sleep 20
+    - php app/console doctrine:schema:create --env=test
+    - php app/console cache:warmup --env=test
 
-after_failure:
-    - cat error.log
+script:
+    - bin/phpunit -c app/phpunit.xml.dist --testdox
 
 notifications:
-    email: "travis@wellcommerce.org"
+    email: false
     slack: wellcommerce:5g1PqYtrlI40NVxaiuFzeG9z

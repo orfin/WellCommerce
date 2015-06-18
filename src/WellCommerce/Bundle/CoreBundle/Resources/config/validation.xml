@@ -35,4 +35,87 @@
             <constraint name="NotBlank" />
         </property>
     </class>
+
+    <class name="WellCommerce\Bundle\CoreBundle\Entity\ContactDetails">
+        <property name="phone">
+            <constraint name="NotNull" />
+            <constraint name="NotBlank" />
+        </property>
+        <property name="secondaryPhone">
+            <constraint name="NotNull" />
+            <constraint name="NotBlank" />
+        </property>
+        <property name="email">
+            <constraint name="NotNull" />
+            <constraint name="NotBlank" />
+            <constraint name="Email" />
+        </property>
+    </class>
+
+    <class name="WellCommerce\Bundle\CoreBundle\Entity\Address">
+        <property name="firstName">
+            <constraint name="NotBlank">
+                <option name="message">address.error.first_name.not_blank</option>
+            </constraint>
+            <constraint name="NotNull">
+                <option name="message">address.error.first_name.not_null</option>
+            </constraint>
+        </property>
+        <property name="lastName">
+            <constraint name="NotBlank">
+                <option name="message">address.error.last_name.not_blank</option>
+            </constraint>
+            <constraint name="NotNull">
+                <option name="message">address.error.last_name.not_null</option>
+            </constraint>
+        </property>
+        <property name="street">
+            <constraint name="NotBlank">
+                <option name="message">address.error.street.not_blank</option>
+            </constraint>
+            <constraint name="NotNull">
+                <option name="message">address.error.street.not_null</option>
+            </constraint>
+        </property>
+        <property name="streetNo">
+            <constraint name="NotBlank">
+                <option name="message">address.error.street_no.not_blank</option>
+            </constraint>
+            <constraint name="NotNull">
+                <option name="message">address.error.street_no.not_null</option>
+            </constraint>
+        </property>
+        <property name="flatNo">
+            <constraint name="NotNull">
+                <option name="message">address.error.flat_no.not_blank</option>
+            </constraint>
+        </property>
+        <property name="postCode">
+            <constraint name="NotBlank">
+                <option name="message">address.error.post_code.not_blank</option>
+            </constraint>
+            <constraint name="NotNull">
+                <option name="message">address.error.post_code.not_null</option>
+            </constraint>
+        </property>
+        <property name="province">
+            <constraint name="NotNull">
+                <option name="message">address.error.province.not_null</option>
+            </constraint>
+        </property>
+        <property name="city">
+            <constraint name="NotBlank">
+                <option name="message">address.error.city.not_blank</option>
+            </constraint>
+            <constraint name="NotNull">
+                <option name="message">address.error.city.not_null</option>
+            </constraint>
+        </property>
+        <property name="country">
+            <constraint name="Country">
+                <option name="message">address.error.country</option>
+            </constraint>
+        </property>
+    </class>
+
 </constraint-mapping>

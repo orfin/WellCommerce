@@ -18,7 +18,6 @@ use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 /**
  * Interface LayoutBoxConfiguratorInterface
  *
- * @package WellCommerce\Bundle\LayoutBundle\Configurator
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface LayoutBoxConfiguratorInterface

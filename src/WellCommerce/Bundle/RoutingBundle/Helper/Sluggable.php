@@ -15,7 +15,6 @@ namespace WellCommerce\Bundle\RoutingBundle\Helper;
 /**
  * Class Sluggable
  *
- * @package WellCommerce\Bundle\RoutingBundle\Helper
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class Sluggable

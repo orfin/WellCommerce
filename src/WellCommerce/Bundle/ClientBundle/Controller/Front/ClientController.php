@@ -25,11 +25,6 @@ use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
  */
 class ClientController extends AbstractFrontController implements FrontControllerInterface
 {
-    public function indexAction()
-    {
-        return [];
-    }
-
     public function loginAction()
     {
         return [];

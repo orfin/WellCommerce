@@ -22,7 +22,6 @@ use WellCommerce\Bundle\DataGridBundle\DataGridInterface;
 /**
  * Class PageDataGrid
  *
- * @package WellCommerce\Bundle\CmsBundle\DataGrid
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class PageDataGrid extends AbstractDataGrid implements DataGridInterface

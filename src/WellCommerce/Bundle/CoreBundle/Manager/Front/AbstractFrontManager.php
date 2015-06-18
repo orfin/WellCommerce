@@ -112,4 +112,12 @@ abstract class AbstractFrontManager extends AbstractManager implements FrontMana
     {
         return $this->shopContext;
     }
+
+    /**
+     * @return \WellCommerce\Bundle\CartBundle\Entity\Cart
+     */
+    public function getCurrentCart()
+    {
+        return $this->getCartProvider()->getCurrentCart();
+    }
 }

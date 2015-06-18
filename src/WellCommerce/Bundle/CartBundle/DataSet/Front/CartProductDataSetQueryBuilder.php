@@ -46,6 +46,7 @@ class CartProductDataSetQueryBuilder extends AbstractDataSetQueryBuilder impleme
         $expression   = $queryBuilder->expr()->eq('cart_product.cart', ':cart');
         $queryBuilder->andWhere($expression);
         $queryBuilder->setParameter('cart', $cartId);
+        $queryBuilder->setParameter('date', new \DateTime());
 
         return $queryBuilder;
     }

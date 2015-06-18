@@ -18,7 +18,6 @@ use WellCommerce\Bundle\RoutingBundle\Helper\Sluggable;
 /**
  * Class RouteRepository
  *
- * @package WellCommerce\Bundle\RoutingBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class RouteRepository extends AbstractEntityRepository implements RouteRepositoryInterface

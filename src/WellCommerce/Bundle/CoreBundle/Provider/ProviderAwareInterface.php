@@ -15,7 +15,6 @@ namespace WellCommerce\Bundle\CoreBundle\Provider;
 /**
  * Interface ProviderAwareInterface
  *
- * @package WellCommerce\Bundle\CoreBundle\Provider
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface ProviderAwareInterface

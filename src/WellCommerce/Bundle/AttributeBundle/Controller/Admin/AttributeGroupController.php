@@ -104,7 +104,6 @@ class AttributeGroupController extends AbstractAdminController
      */
     public function ajaxIndexAction(Request $request)
     {
-        // prevent direct access and redirect administrator to index
         if (!$request->isXmlHttpRequest()) {
             return $this->redirectToAction('index');
         }

@@ -15,7 +15,6 @@ namespace WellCommerce\Bundle\RoutingBundle\Entity;
 /**
  * Interface RoutableSubjectInterface
  *
- * @package WellCommerce\Bundle\RoutingBundle\Entity
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface RoutableSubjectInterface

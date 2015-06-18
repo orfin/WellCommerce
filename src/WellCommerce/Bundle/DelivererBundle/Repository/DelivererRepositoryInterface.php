@@ -18,7 +18,6 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 /**
  * Interface LocaleRepositoryInterface
  *
- * @package WellCommerce\Bundle\DelivererBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface DelivererRepositoryInterface extends RepositoryInterface, DataSetAwareRepositoryInterface

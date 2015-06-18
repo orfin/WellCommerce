@@ -24,14 +24,14 @@ use WellCommerce\Bundle\RoutingBundle\Helper\Sluggable;
  */
 class LoadProductStatusData extends AbstractDataFixture
 {
-    const SAMPLES = ['Featured', 'Bestsellers', 'New arrivals'];
+    public static $samples = ['Promotions', 'New arrivals', 'Featured', 'Bestsellers'];
 
     /**
      * {@inheritDoc}
      */
     public function load(ObjectManager $manager)
     {
-        foreach (self::SAMPLES as $name) {
+        foreach (self::$samples as $name) {
             $status = new ProductStatus();
             $status->translate('en')->setName($name);
             $status->translate('en')->setSlug($slug = Sluggable::makeSlug($name));

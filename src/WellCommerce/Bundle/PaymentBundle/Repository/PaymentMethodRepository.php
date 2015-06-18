@@ -20,4 +20,11 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
  */
 class PaymentMethodRepository extends AbstractEntityRepository implements PaymentMethodRepositoryInterface
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function getDefaultPaymentMethod()
+    {
+        return $this->findOneBy([], ['hierarchy' => 'asc']);
+    }
 }

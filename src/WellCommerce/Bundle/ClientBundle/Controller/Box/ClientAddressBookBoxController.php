@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\ClientBundle\Controller\Box;
 
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
-use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
 
 /**
  * Class ClientAddressBookBoxController
@@ -26,6 +25,6 @@ class ClientAddressBookBoxController extends AbstractBoxController
 {
     public function indexAction()
     {
-
+        return [];
     }
 }

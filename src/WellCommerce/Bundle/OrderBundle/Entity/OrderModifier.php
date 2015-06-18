@@ -27,7 +27,7 @@ class OrderModifier
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\OrderBundle\Entity\Order", inversedBy="summary")
+     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\OrderBundle\Entity\Order", inversedBy="modifiers")
      * @ORM\JoinColumn(name="order_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
     protected $order;

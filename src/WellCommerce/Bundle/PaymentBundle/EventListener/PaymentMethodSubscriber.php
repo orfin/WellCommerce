@@ -18,7 +18,6 @@ use WellCommerce\Bundle\FormBundle\Event\FormEvent;
 /**
  * Class PaymentMethodSubscriber
  *
- * @package WellCommerce\Bundle\PaymentBundle\EventListener
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class PaymentMethodSubscriber extends AbstractEventSubscriber

@@ -17,7 +17,6 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 /**
  * Class WellCommerceMediaBundle
  *
- * @package WellCommerce\Bundle\MediaBundle
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class WellCommerceMediaBundle extends Bundle

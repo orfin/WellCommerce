@@ -17,7 +17,6 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 /**
  * Class ClientAddressRepository
  *
- * @package WellCommerce\Bundle\ClientBundle\Repository
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class ClientAddressRepository extends AbstractEntityRepository implements ClientAddressRepositoryInterface

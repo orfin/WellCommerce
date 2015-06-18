@@ -115,4 +115,43 @@ interface RequestHelperInterface
      * @return null|\WellCommerce\Bundle\ClientBundle\Entity\Client
      */
     public function getClient();
+
+    /**
+     * Returns current host name
+     *
+     * @return string
+     */
+    /**
+     * Returns current host
+     *
+     * @param null $fallbackHost
+     *
+     * @return string|null
+     */
+    public function getCurrentHost();
+
+    /**
+     * Returns current offset
+     *
+     * @param number $limit
+     *
+     * @return int|number
+     */
+    public function getCurrentOffset($limit);
+
+    /**
+     * Returns current page
+     *
+     * @return number
+     */
+    public function getCurrentPage();
+
+    /**
+     * Returns current limit
+     *
+     * @param mixed $default
+     *
+     * @return number
+     */
+    public function getCurrentLimit($default);
 }
