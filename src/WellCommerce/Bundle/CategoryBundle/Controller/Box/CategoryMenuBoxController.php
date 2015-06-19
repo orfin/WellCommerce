@@ -20,8 +20,6 @@ use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
  * Class CategoryMenuBoxController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class CategoryMenuBoxController extends AbstractBoxController implements BoxControllerInterface
 {
@@ -37,8 +35,8 @@ class CategoryMenuBoxController extends AbstractBoxController implements BoxCont
             $active = $activeCategory->getId();
         }
 
-        return [
+        return $this->render('WellCommerceCategoryBundle:Box/CategoryMenuBox:index.html.twig', [
             'active' => $active
-        ];
+        ]);
     }
 }

@@ -19,13 +19,11 @@ use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
  * Class HomePageController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class HomePageController extends AbstractFrontController implements FrontControllerInterface
 {
     public function indexAction()
     {
-        return [];
+        return $this->render('WellCommerceWebBundle:Front/HomePage:index.html.twig');
     }
 }

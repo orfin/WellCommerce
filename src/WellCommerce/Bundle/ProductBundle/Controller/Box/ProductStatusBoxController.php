@@ -19,8 +19,6 @@ use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
  * Class ProductShowcaseBoxController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class ProductStatusBoxController extends AbstractBoxController implements BoxControllerInterface
 {
@@ -44,8 +42,8 @@ class ProductStatusBoxController extends AbstractBoxController implements BoxCon
             'conditions' => $manager->getStatusConditions($this->getBoxParam('status', null)),
         ]);
 
-        return [
+        return $this->render('WellCommerceProductBundle:Box/ProductStatusBox:index.html.twig', [
             'dataset' => $dataset
-        ];
+        ]);
     }
 }

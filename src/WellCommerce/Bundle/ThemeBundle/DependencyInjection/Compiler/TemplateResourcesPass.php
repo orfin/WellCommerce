@@ -73,7 +73,6 @@ class TemplateResourcesPass implements CompilerPassInterface
             );
         }
 
-        $container->getDefinition('assetic.' . $engine . '_directory_resource.' . $bundleName)
-            ->replaceArgument(0, $resources);
+        $container->getDefinition('assetic.' . $engine . '_directory_resource.' . $bundleName)->replaceArgument(0, $resources);
     }
 }
