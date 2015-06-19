@@ -12,9 +12,7 @@
 
 namespace WellCommerce\Bundle\ClientBundle\Controller\Box;
 
-use Doctrine\Common\Util\Debug;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
-use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
 
 /**
  * Class ClientLoginBoxController
@@ -33,10 +31,10 @@ class ClientLoginBoxController extends AbstractBoxController
             'action'       => $this->generateUrl('front.client.login_check')
         ], null);
 
-        return [
+        return $this->render('WellCommerceClientBundle:Box/ClientLogin:index.html.twig', [
             'form'     => $form,
             'elements' => $form->getChildren(),
             'error'    => $this->get('security.authentication_utils')->getLastAuthenticationError()
-        ];
+        ]);
     }
 }

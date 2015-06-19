@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\ClientBundle\Controller\Box;
 
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
-use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
 
 /**
  * Class ClientRegistrationBoxController
@@ -47,9 +46,9 @@ class ClientRegistrationBoxController extends AbstractBoxController
             }
         }
 
-        return [
+        return $this->render('WellCommerceClientBundle:Box/ClientRegistration:index.html.twig', [
             'form'     => $form,
             'elements' => $form->getChildren(),
-        ];
+        ]);
     }
 }

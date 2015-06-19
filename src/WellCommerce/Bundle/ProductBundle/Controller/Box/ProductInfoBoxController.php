@@ -19,8 +19,6 @@ use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
  * Class ProductInfoBoxController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class ProductInfoBoxController extends AbstractBoxController implements BoxControllerInterface
 {
@@ -31,8 +29,8 @@ class ProductInfoBoxController extends AbstractBoxController implements BoxContr
     {
         $provider = $this->getManager()->getProductProvider();
 
-        return [
+        return $this->render('WellCommerceProductBundle:Box/ProductInfo:index.html.twig', [
             'product' => $provider->getCurrentProduct()
-        ];
+        ]);
     }
 }

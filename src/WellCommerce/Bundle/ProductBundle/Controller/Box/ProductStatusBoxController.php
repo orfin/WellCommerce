@@ -42,7 +42,7 @@ class ProductStatusBoxController extends AbstractBoxController implements BoxCon
             'conditions' => $manager->getStatusConditions($this->getBoxParam('status', null)),
         ]);
 
-        return $this->render('WellCommerceProductBundle:Box/ProductStatusBox:index.html.twig', [
+        return $this->render('WellCommerceProductBundle:Box/ProductStatus:index.html.twig', [
             'dataset' => $dataset
         ]);
     }

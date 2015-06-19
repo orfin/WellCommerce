@@ -1,0 +1,27 @@
+{% extends 'WellCommerceWebBundle:Front:layout.html.twig' %}
+{% block content %}
+    {% include 'WellCommerceWebBundle:Front:breadcrumbs.html.twig' %}
+    <div class="row">
+        <div class="col-lg-3 col-md-3">
+            <div class="box">
+                <div class="list-group cms-categories">
+                    {% for category in cmsPageTree if category.children|length %}
+                    <a href="{{ path(category.route) }}" class="list-group-item">{{ category.name }}</a>
+                    <div class="list-group subcategories">
+                        {% for page in category.children %}
+                        <a href="{{ path(page.route) }}" class="list-group-item">{{ page.name }}</a>
+                        {% endfor %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-9 col-md-9">
+            <div class="cms box">
+                <h4>{{ page.translate().name }}</h4>
+                {{ page.translate().content }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

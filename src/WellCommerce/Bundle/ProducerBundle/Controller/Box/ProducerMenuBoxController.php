@@ -19,8 +19,6 @@ use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
  * Class ProducerMenuBoxController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class ProducerMenuBoxController extends AbstractBoxController implements BoxControllerInterface
 {
@@ -29,8 +27,8 @@ class ProducerMenuBoxController extends AbstractBoxController implements BoxCont
      */
     public function indexAction()
     {
-        return [
+        return $this->render('WellCommerceProducerBundle:Box/ProducerMenu:index.html.twig', [
             'producers' => $this->get('producer.collection.front')->getSelect()
-        ];
+        ]);
     }
 }

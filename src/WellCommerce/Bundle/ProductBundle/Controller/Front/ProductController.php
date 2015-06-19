@@ -21,8 +21,6 @@ use WellCommerce\Bundle\WebBundle\Breadcrumb\BreadcrumbItem;
  * Class ProductController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class ProductController extends AbstractFrontController implements FrontControllerInterface
 {
@@ -36,8 +34,8 @@ class ProductController extends AbstractFrontController implements FrontControll
 
         $this->getManager()->getProductProvider()->setCurrentProduct($product);
 
-        return [
+        return $this->render('WellCommerceProductBundle:Front/Product:index.html.twig', [
             'product' => $product
-        ];
+        ]);
     }
 }

@@ -20,8 +20,6 @@ use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
  * Class ClientSettingsBoxController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class ClientSettingsBoxController extends AbstractBoxController
 {
@@ -51,9 +49,9 @@ class ClientSettingsBoxController extends AbstractBoxController
             }
         }
 
-        return [
+        return $this->render('WellCommerceClientBundle:Box/ClientSettings:index.html.twig', [
             'form'     => $form,
             'elements' => $form->getChildren(),
-        ];
+        ]);
     }
 }

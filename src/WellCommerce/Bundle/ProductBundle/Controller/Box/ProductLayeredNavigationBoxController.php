@@ -19,8 +19,6 @@ use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
  * Class ProductLayeredNavigationBoxController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class ProductLayeredNavigationBoxController extends AbstractBoxController implements BoxControllerInterface
 {
@@ -29,7 +27,7 @@ class ProductLayeredNavigationBoxController extends AbstractBoxController implem
      */
     public function indexAction()
     {
-        return [];
+        return $this->render('WellCommerceProductBundle:Box/ProductLayeredNavigation:index.html.twig');
     }
 
 }

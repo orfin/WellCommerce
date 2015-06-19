@@ -19,8 +19,6 @@ use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
  * Class CategoryProductsBoxController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class CategoryProductsBoxController extends AbstractBoxController implements BoxControllerInterface
 {
@@ -44,8 +42,8 @@ class CategoryProductsBoxController extends AbstractBoxController implements Box
             'conditions' => $this->getManager()->getConditions(),
         ]);
 
-        return [
+        return $this->render('WellCommerceCategoryBundle:Box/CategoryProducts:index.html.twig', [
             'dataset' => $dataset
-        ];
+        ]);
     }
 }

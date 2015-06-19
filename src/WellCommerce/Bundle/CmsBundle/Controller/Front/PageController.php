@@ -33,7 +33,7 @@ class PageController extends AbstractFrontController implements FrontControllerI
     {
         $page = $this->findOr404($request);
 
-        if(null !== $page->getParent()){
+        if (null !== $page->getParent()) {
             $this->get('breadcrumb.builder')->add(new BreadcrumbItem([
                 'name' => $page->getParent()->translate()->getName(),
             ]));
@@ -42,8 +42,8 @@ class PageController extends AbstractFrontController implements FrontControllerI
             'name' => $page->translate()->getName(),
         ]));
 
-        return [
+        return $this->render('WellCommerceCmsBundle:Front/Page:index.html.twig', [
             'page' => $page
-        ];
+        ]);
     }
 }

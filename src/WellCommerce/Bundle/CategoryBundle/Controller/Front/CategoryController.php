@@ -21,8 +21,6 @@ use WellCommerce\Bundle\WebBundle\Breadcrumb\BreadcrumbItem;
  * Class CategoryController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class CategoryController extends AbstractFrontController implements FrontControllerInterface
 {
@@ -41,8 +39,8 @@ class CategoryController extends AbstractFrontController implements FrontControl
 
         $this->getManager()->getCategoryProvider()->setCurrentCategory($category);
 
-        return [
+        return $this->render('WellCommerceCategoryBundle:Front/Category:index.html.twig', [
             'category' => $category
-        ];
+        ]);
     }
 }

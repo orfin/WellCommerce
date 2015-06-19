@@ -35,7 +35,7 @@ class CategoryMenuBoxController extends AbstractBoxController implements BoxCont
             $active = $activeCategory->getId();
         }
 
-        return $this->render('WellCommerceCategoryBundle:Box/CategoryMenuBox:index.html.twig', [
+        return $this->render('WellCommerceCategoryBundle:Box/CategoryMenu:index.html.twig', [
             'active' => $active
         ]);
     }

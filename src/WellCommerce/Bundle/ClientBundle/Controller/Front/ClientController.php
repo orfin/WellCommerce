@@ -20,14 +20,12 @@ use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
  * Class ClientController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class ClientController extends AbstractFrontController implements FrontControllerInterface
 {
     public function loginAction()
     {
-        return [];
+        return $this->render('WellCommerceClientBundle:Front/Client:login.html.twig');
     }
 
     public function loginCheckAction(Request $request)
@@ -36,26 +34,26 @@ class ClientController extends AbstractFrontController implements FrontControlle
 
     public function registerAction()
     {
-        return [];
+        return $this->render('WellCommerceClientBundle:Front/Client:register.html.twig');
     }
 
     public function settingsAction()
     {
-        return [];
+        return $this->render('WellCommerceClientBundle:Front/Client:settings.html.twig');
     }
 
     public function wishListAction()
     {
-        return [];
+        return $this->render('WellCommerceClientBundle:Front/Client:wishlist.html.twig');
     }
 
     public function addressBookAction()
     {
-        return [];
+        return $this->render('WellCommerceClientBundle:Front/Client:address_book.html.twig');
     }
 
     public function ordersAction()
     {
-        return [];
+        return $this->render('WellCommerceClientBundle:Front/Client:orders.html.twig');
     }
 }

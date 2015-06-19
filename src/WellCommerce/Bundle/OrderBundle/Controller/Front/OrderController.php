@@ -21,8 +21,6 @@ use WellCommerce\Bundle\WebBundle\Breadcrumb\BreadcrumbItem;
  * Class OrderController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class OrderController extends AbstractFrontController implements FrontControllerInterface
 {
@@ -58,10 +56,10 @@ class OrderController extends AbstractFrontController implements FrontController
             }
         }
 
-        return [
+        return $this->render('WellCommerceOrderBundle:Front/Order:address.html.twig', [
             'form'     => $form,
             'elements' => $form->getChildren(),
-        ];
+        ]);
     }
 
     /**
@@ -104,9 +102,9 @@ class OrderController extends AbstractFrontController implements FrontController
             }
         }
 
-        return [
+        return $this->render('WellCommerceOrderBundle:Front/Order:confirm.html.twig', [
             'form'     => $form,
             'elements' => $form->getChildren(),
-        ];
+        ]);
     }
 }

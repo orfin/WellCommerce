@@ -26,8 +26,6 @@ use WellCommerce\Bundle\WebBundle\Breadcrumb\BreadcrumbItem;
  * Class CartController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class CartController extends AbstractFrontController implements FrontControllerInterface
 {
@@ -58,10 +56,10 @@ class CartController extends AbstractFrontController implements FrontControllerI
             }
         }
 
-        return [
+        return $this->render('WellCommerceCartBundle:Front/Cart:index.html.twig', [
             'form'     => $form,
             'elements' => $form->getChildren(),
-        ];
+        ]);
     }
 
     /**

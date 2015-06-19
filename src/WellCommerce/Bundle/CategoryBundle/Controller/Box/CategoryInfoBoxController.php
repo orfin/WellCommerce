@@ -19,8 +19,6 @@ use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
  * Class CategoryInfoBoxController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class CategoryInfoBoxController extends AbstractBoxController implements BoxControllerInterface
 {
@@ -28,8 +26,8 @@ class CategoryInfoBoxController extends AbstractBoxController implements BoxCont
     {
         $provider = $this->getManager()->getCategoryProvider();
 
-        return [
+        return $this->render('WellCommerceCategoryBundle:Box/CategoryInfo:index.html.twig', [
             'category' => $provider->getCurrentCategory()
-        ];
+        ]);
     }
 }

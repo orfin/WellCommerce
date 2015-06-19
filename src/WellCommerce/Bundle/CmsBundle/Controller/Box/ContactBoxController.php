@@ -20,13 +20,11 @@ use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
  * Class ContactBoxController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class ContactBoxController extends AbstractBoxController implements BoxControllerInterface
 {
-    public function indexAction(Request $request)
+    public function indexAction()
     {
-        return [];
+        return $this->render('WellCommerceCmsBundle:Box/Contact:index.html.twig');
     }
 }

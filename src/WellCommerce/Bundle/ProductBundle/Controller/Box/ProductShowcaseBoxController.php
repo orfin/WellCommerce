@@ -42,7 +42,7 @@ class ProductShowcaseBoxController extends AbstractBoxController implements BoxC
             'conditions' => $manager->getStatusConditions($this->getBoxParam('status', null)),
         ]);
 
-        return $this->render('WellCommerceProductBundle:Box/ProductShowcaseBox:index.html.twig', [
+        return $this->render('WellCommerceProductBundle:Box/ProductShowcase:index.html.twig', [
             'dataset' => $dataset
         ]);
     }
