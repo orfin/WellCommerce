@@ -40,11 +40,11 @@ class AppKernel extends Kernel
             new Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
             // WellCommerce bundles
             new WellCommerce\Bundle\CoreBundle\WellCommerceCoreBundle(),
+            new WellCommerce\Bundle\SmugglerBundle\WellCommerceSmugglerBundle(),
             new WellCommerce\Bundle\DataGridBundle\WellCommerceDataGridBundle(),
             new WellCommerce\Bundle\DataSetBundle\WellCommerceDataSetBundle(),
             new WellCommerce\Bundle\FormBundle\WellCommerceFormBundle(),
             new WellCommerce\Bundle\RoutingBundle\WellCommerceRoutingBundle(),
-            new WellCommerce\Bundle\SmugglerBundle\WellCommerceSmugglerBundle(),
             new WellCommerce\Bundle\AdminBundle\WellCommerceAdminBundle(),
             new WellCommerce\Bundle\IntlBundle\WellCommerceIntlBundle(),
             new WellCommerce\Bundle\WebBundle\WellCommerceWebBundle(),
