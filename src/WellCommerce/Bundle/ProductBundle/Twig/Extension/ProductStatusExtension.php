@@ -62,11 +62,15 @@ class ProductStatusExtension extends \Twig_Extension
     public function getProductStatuses($limit = 5, $orderBy = 'name', $orderDir = 'asc')
     {
         $params = [
-            'limit'     => $limit,
-            'order_by'  => $orderBy,
-            'order_dir' => $orderDir,
+            'limit'         => $limit,
+            'order_by'      => $orderBy,
+            'order_dir'     => $orderDir,
+            'cache_enabled' => true,
+            'cache_ttl'     => 3600
         ];
 
-        return $this->provider->getCollectionBuilder()->getArray($params);
+        $statuses = $this->provider->getCollectionBuilder()->getArray($params);
+
+        return $statuses;
     }
 }

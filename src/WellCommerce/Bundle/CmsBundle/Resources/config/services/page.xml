@@ -87,6 +87,7 @@
         <service id="page.dataset.loader.admin" class="%dataset.loader.class%">
             <argument type="service" id="page.dataset.query_builder.admin"/>
             <argument type="service" id="dataset.processor"/>
+            <argument type="service" id="doctrine.cache"/>
         </service>
 
         <service id="page.dataset.loader.front" class="%dataset.loader.class%">
@@ -103,6 +104,9 @@
         <service id="page.dataset.front" class="WellCommerce\Bundle\CmsBundle\DataSet\Front\PageDataSet">
             <argument key="identifier">page</argument>
             <argument type="service" id="page.dataset.loader.front"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
@@ -138,8 +142,16 @@
             <tag name="route.generator" />
         </service>
 
+        <service id="page.provider" class="WellCommerce\Bundle\CmsBundle\Provider\PageProvider">
+            <call method="setCollectionBuilder">
+                <argument type="service" id="page.collection.front" />
+            </call>
+            <tag name="resource.provider" alias="page"/>
+        </service>
+
+
         <service id="twig.extension.page" class="WellCommerce\Bundle\CmsBundle\Twig\Extension\PageExtension">
-            <argument type="service" id="page.collection.front"/>
+            <argument type="service" id="page.provider"/>
             <tag name="twig.extension"/>
         </service>
     </services>

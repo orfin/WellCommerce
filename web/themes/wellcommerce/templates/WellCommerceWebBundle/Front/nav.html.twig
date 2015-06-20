@@ -16,18 +16,18 @@
         <div class="collapse navbar-collapse" id="main-nav">
             <ul class="nav navbar-nav">
                 {% for status in productStatuses() %}
-                    <li><a href="{{ path(status.route) }}">{{ status.name }}</a></li>
+                    <li><a href="{{ status.route }}">{{ status.name }}</a></li>
                 {% endfor %}
-                {% for category in cmsPageTree %}
-                    {% if category.children|length %}
+                {% for page in cmsPages %}
+                    {% if page.children|length %}
                         <li class="dropdown">
-                            <a href="{{ path(category.route) }}" class="dropdown-toggle" data-toggle="dropdown"
+                            <a href="{{ page.route }}" class="dropdown-toggle" data-toggle="dropdown"
                                role="button" aria-expanded="false">
-                                {{ category.name }} <span class="caret"></span>
+                                {{ page.name }} <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" role="menu">
-                                {% for page in category.children %}
-                                    <li><a href="{{ path(page.route) }}">{{ page.name }}</a></li>
+                                {% for childPage in page.children %}
+                                    <li><a href="{{ childPage.route }}">{{ childPage.name }}</a></li>
                                     {% if loop.last == false %}
                                         <li class="divider"></li>
                                     {% endif %}
@@ -36,8 +36,8 @@
                         </li>
                     {% else %}
                         <li>
-                            <a href="{{ path(category.route) }}">
-                                {{ category.name }}
+                            <a href="{{ page.route }}">
+                                {{ page.name }}
                             </a>
                         </li>
                     {% endif %}

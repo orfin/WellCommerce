@@ -74,6 +74,10 @@
             <argument type="service" id="routing.repository" />
         </service>
 
+        <service id="route.transformer" class="WellCommerce\Bundle\RoutingBundle\DataSet\Transformer\RouteTransformer">
+            <argument type="service" id="cmf_routing.generator" />
+        </service>
+
         <service id="route.generator.collection" class="WellCommerce\Bundle\RoutingBundle\Generator\RouteGeneratorCollection" />
 
         <service id="twig.extension.routing_helper" class="WellCommerce\Bundle\RoutingBundle\Twig\Extension\RoutingHelperExtension">

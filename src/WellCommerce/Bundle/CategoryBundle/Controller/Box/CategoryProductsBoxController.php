@@ -35,11 +35,13 @@ class CategoryProductsBoxController extends AbstractBoxController implements Box
         $offset            = $requestHelper->getCurrentOffset($limit);
 
         $dataset = $collectionBuilder->getDataSet([
-            'limit'      => $limit,
-            'offset'     => $offset,
-            'order_by'   => $requestHelper->getQueryAttribute('order_by', 'name'),
-            'order_dir'  => $requestHelper->getQueryAttribute('order_dir', 'asc'),
-            'conditions' => $this->getManager()->getConditions(),
+            'limit'         => $limit,
+            'offset'        => $offset,
+            'order_by'      => $requestHelper->getQueryAttribute('order_by', 'name'),
+            'order_dir'     => $requestHelper->getQueryAttribute('order_dir', 'asc'),
+            'conditions'    => $this->getManager()->getConditions(),
+            'cache_enabled' => true,
+            'cache_ttl'     => 3600
         ]);
 
         return $this->render('WellCommerceCategoryBundle:Box/CategoryProducts:index.html.twig', [

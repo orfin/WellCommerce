@@ -36,10 +36,11 @@ class ProductStatusBoxController extends AbstractBoxController implements BoxCon
         $requestHelper     = $manager->getRequestHelper();
 
         $dataset = $collectionBuilder->getDataSet([
-            'limit'      => $requestHelper->getQueryAttribute('limit', $this->getBoxParam('per_page', 12)),
-            'order_by'   => $requestHelper->getQueryAttribute('order_by', 'price'),
-            'order_dir'  => $requestHelper->getQueryAttribute('order_dir', 'asc'),
-            'conditions' => $manager->getStatusConditions($this->getBoxParam('status', null)),
+            'limit'         => $requestHelper->getQueryAttribute('limit', $this->getBoxParam('per_page', 12)),
+            'order_by'      => $requestHelper->getQueryAttribute('order_by', 'price'),
+            'order_dir'     => $requestHelper->getQueryAttribute('order_dir', 'asc'),
+            'conditions'    => $manager->getStatusConditions($this->getBoxParam('status', null)),
+            'cache_enabled' => true
         ]);
 
         return $this->render('WellCommerceProductBundle:Box/ProductStatus:index.html.twig', [

@@ -64,9 +64,11 @@ class CategoryExtension extends \Twig_Extension
         $collectionBuilder = $this->provider->getCollectionBuilder();
 
         $params = [
-            'limit'     => $limit,
-            'order_by'  => $orderBy,
-            'order_dir' => $orderDir,
+            'limit'         => $limit,
+            'order_by'      => $orderBy,
+            'order_dir'     => $orderDir,
+            'cache_enabled' => true,
+            'cache_ttl'     => 3600
         ];
 
         return $collectionBuilder->getTree($params);

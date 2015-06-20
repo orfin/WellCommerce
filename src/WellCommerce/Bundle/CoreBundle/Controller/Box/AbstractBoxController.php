@@ -11,7 +11,6 @@
  */
 namespace WellCommerce\Bundle\CoreBundle\Controller\Box;
 
-use Symfony\Component\PropertyAccess\PropertyAccess;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 
 /**
@@ -22,35 +21,39 @@ use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 abstract class AbstractBoxController extends AbstractFrontController implements BoxControllerInterface
 {
     /**
-     * Returns setting from box configuration
-     *
+     * @var string
+     */
+    protected $boxId;
+
+    /**
+     * @var array
+     */
+    protected $boxParams;
+
+    /**
      * @param string $index
+     * @param null   $default
      *
-     * @return mixed|null
+     * @return mixed
      */
     protected function getBoxParam($index, $default = null)
     {
-        $request    = $this->get('request_stack')->getCurrentRequest();
-        $accessor   = PropertyAccess::createPropertyAccessor();
-        $parameters = $request->attributes->all();
-        if ($accessor->isReadable($parameters, '[_box][settings][' . $index . ']')) {
-            if (null !== $value = $accessor->getValue($parameters, '[_box][settings][' . $index . ']')) {
-                return $value;
-            }
-        }
-
-        return $default;
+        return isset($this->boxParams[$index]) ? $this->boxParams[$index] : $default;
     }
 
-    protected function getLimit()
+    /**
+     * {@inheritdoc}
+     */
+    public function setBoxId($boxId)
     {
-        $page              = $requestHelper->getQueryAttribute('page', 1);
-        $limit             = $requestHelper->getQueryAttribute('limit', $this->getBoxParam('per_page'));
-        $offset            = ($page * $limit) - $limit;
+        $this->boxId = $boxId;
     }
 
-    protected function getOffset()
+    /**
+     * {@inheritdoc}
+     */
+    public function setBoxParams(array $boxParams = [])
     {
-
+        $this->boxParams = $boxParams;
     }
 }

@@ -14,7 +14,6 @@ framework:
     validation:      { enable_annotations: true }
     templating:
         engines: ['twig']
-        #assets_version: SomeVersionScheme
     default_locale:  "%locale%"
     trusted_hosts:   ~
     trusted_proxies: ~
@@ -128,8 +127,8 @@ liip_imagine:
 
 services:
     doctrine.cache:
-        class: Doctrine\Common\Cache\FilesystemCache
-        arguments:  [%kernel.root_dir%/cache/%kernel.environment%/cache]
+        class: %doctrine_cache.file_system.class%
+        arguments: ["%kernel.root_dir%/cache/%kernel.environment%/doctrine"]
 
     client.failure.handler:
         class: WellCommerce\Bundle\ClientBundle\Handler\LoginFailureHandler

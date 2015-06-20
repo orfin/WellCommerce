@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\LayoutBundle\Renderer;
 
-use Symfony\Component\HttpKernel\HttpKernelInterface;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
 use WellCommerce\Bundle\LayoutBundle\Configurator\LayoutBoxConfiguratorCollection;
 use WellCommerce\Bundle\LayoutBundle\Entity\LayoutBox;
@@ -79,45 +78,14 @@ class LayoutBoxRenderer extends AbstractContainer implements LayoutBoxRendererIn
      */
     private function getControllerContent(LayoutBox $box, $params)
     {
-        $currentRequest         = $this->getRequest();
-        $request                = $currentRequest->attributes->all();
-        $request['_controller'] = $this->getLayoutBoxController($box);
-        $request['_box']        = $this->getBoxTemplateVars($box, $params);
-        $subRequest             = $currentRequest->duplicate($currentRequest->query->all(), null, $request);
-
-        $content = $this->container->get('http_kernel')->handle($subRequest, HttpKernelInterface::SUB_REQUEST);
-
-        return $content->getContent();
-    }
-
-    /**
-     * Returns controller name needed to forward the request
-     *
-     * @param LayoutBox $box
-     *
-     * @return string
-     */
-    private function getLayoutBoxController(LayoutBox $box)
-    {
         $service    = $this->configurators->get($box->getBoxType())->getControllerService();
         $controller = $this->container->get($service);
+        $action     = $this->getControllerAction($controller);
+        $controller->setBoxId($box->getIdentifier());
+        $controller->setBoxParams($box->getSettings());
+        $content = call_user_func_array([$controller, $action], []);
 
-        return sprintf('%s:%s', $service, $this->getControllerAction($controller));
-    }
-
-    /**
-     * Returns variables needed to inject in _template_vars
-     *
-     * @param LayoutBox $box
-     *
-     * @return array
-     */
-    private function getBoxTemplateVars(LayoutBox $box, $params)
-    {
-        return [
-            'id'       => $box->getIdentifier(),
-            'settings' => $box->getSettings()
-        ];
+        return $content->getContent();
     }
 
     /**

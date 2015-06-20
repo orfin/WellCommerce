@@ -16,6 +16,7 @@ use WellCommerce\Bundle\DataSetBundle\AbstractDataSet;
 use WellCommerce\Bundle\DataSetBundle\DataSetConfiguratorInterface;
 use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
 use WellCommerce\Bundle\ProductBundle\DataSet\Transformer\ProductStatusTransformer;
+use WellCommerce\Bundle\RoutingBundle\DataSet\Transformer\RouteTransformer;
 
 /**
  * Class ProductDataSet
@@ -50,7 +51,8 @@ class ProductDataSet extends AbstractDataSet implements DataSetInterface
         ]);
 
         $configurator->setTransformers([
-            'status' => new ProductStatusTransformer($this->getStatuses())
+            'status' => new ProductStatusTransformer($this->getStatuses()),
+            'route'  => $this->container->get('route.transformer')
         ]);
     }
 

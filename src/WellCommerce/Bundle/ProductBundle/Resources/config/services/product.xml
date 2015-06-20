@@ -82,6 +82,7 @@
         <service id="product.dataset.loader.front" class="%dataset.loader.class%">
             <argument type="service" id="product.dataset.query_builder.front"/>
             <argument type="service" id="dataset.processor"/>
+            <argument type="service" id="doctrine.cache"/>
         </service>
 
         <service id="product.dataset.front" class="WellCommerce\Bundle\ProductBundle\DataSet\Front\ProductDataSet">

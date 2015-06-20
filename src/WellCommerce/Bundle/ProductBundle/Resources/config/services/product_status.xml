@@ -73,6 +73,7 @@
         <service id="product_status.dataset.loader.front" class="%dataset.loader.class%">
             <argument type="service" id="product_status.dataset.query_builder.front"/>
             <argument type="service" id="dataset.processor"/>
+            <argument type="service" id="doctrine.cache"/>
         </service>
 
         <service id="product_status.dataset.admin" class="WellCommerce\Bundle\ProductBundle\DataSet\Admin\ProductStatusDataSet">
@@ -84,6 +85,9 @@
         <service id="product_status.dataset.front" class="WellCommerce\Bundle\ProductBundle\DataSet\Front\ProductStatusDataSet">
             <argument key="identifier">product_status</argument>
             <argument type="service" id="product_status.dataset.loader.front"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 

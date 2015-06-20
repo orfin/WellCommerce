@@ -4,7 +4,7 @@
     {% for item in dataset.rows %}
     <div class="row">
         <div class="col-lg-7">
-            <a href="{{ path(item.route) }}" class="photo text-center">
+            <a href="{{ item.route }}" class="photo text-center">
                 <img src="{{ image(item.photo, 'medium') }}" alt="{{ item.name }}" />
             </a>
         </div>

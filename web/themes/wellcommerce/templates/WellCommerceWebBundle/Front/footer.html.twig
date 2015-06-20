@@ -4,12 +4,12 @@
         <div class="row">
             <div class="col-sm-9 col-xs-6">
                 <div class="row">
-                    {% for category in cmsPageTree if category.children|length %}
+                    {% for page in cmsPages if page.children|length %}
                         <div class="col-sm-4 menu">
-                            <h3>{{ category.name }}</h3>
+                            <h3>{{ page.name }}</h3>
                             <ul>
-                                {% for page in category.children %}
-                                    <li><a href="{{ path(page.route) }}">{{ page.name }}</a></li>
+                                {% for childPage in page.children %}
+                                    <li><a href="{{ childPage.route }}">{{ childPage.name }}</a></li>
                                 {% endfor %}
                             </ul>
                         </div>

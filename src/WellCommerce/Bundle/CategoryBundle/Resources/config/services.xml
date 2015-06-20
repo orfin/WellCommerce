@@ -116,11 +116,15 @@
         <service id="category.dataset.loader.front" class="%dataset.loader.class%">
             <argument type="service" id="category.dataset.query_builder.front"/>
             <argument type="service" id="dataset.processor"/>
+            <argument type="service" id="doctrine.cache"/>
         </service>
 
         <service id="category.dataset.front" class="WellCommerce\Bundle\CategoryBundle\DataSet\Front\CategoryDataSet">
             <argument key="identifier">category</argument>
             <argument type="service" id="category.dataset.loader.front"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 

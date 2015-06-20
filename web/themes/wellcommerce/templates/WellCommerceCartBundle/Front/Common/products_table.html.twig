@@ -16,7 +16,7 @@
         {% for item in cartProducts.rows %}
             <tr>
                 <td><img src="{{ image(item.photo, 'small') }}" alt="{{ item.name }}"/></td>
-                <td><a href="{{ path(item.route) }}">{{ item.name }}</a></td>
+                <td><a href="{{ item.route }}">{{ item.name }}</a></td>
                 <td class="text-center">
                     {% if item.isDiscountValid == 1 %}
                         <span class="price promo">

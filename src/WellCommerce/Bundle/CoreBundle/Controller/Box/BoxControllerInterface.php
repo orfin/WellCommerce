@@ -19,4 +19,17 @@ namespace WellCommerce\Bundle\CoreBundle\Controller\Box;
  */
 interface BoxControllerInterface
 {
+    /**
+     * Sets internal box identifier
+     *
+     * @param string $boxId
+     */
+    public function setBoxId($boxId);
+
+    /**
+     * Sets box parameters
+     *
+     * @param array $boxParams
+     */
+    public function setBoxParams(array $boxParams = []);
 }

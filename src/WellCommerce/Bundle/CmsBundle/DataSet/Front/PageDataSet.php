@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\CmsBundle\DataSet\Front;
 
 use WellCommerce\Bundle\CmsBundle\DataSet\Admin\PageDataSet as BaseDataSet;
+use WellCommerce\Bundle\DataSetBundle\DataSetConfiguratorInterface;
 
 /**
  * Class PageDataSet
@@ -21,5 +22,15 @@ use WellCommerce\Bundle\CmsBundle\DataSet\Admin\PageDataSet as BaseDataSet;
  */
 class PageDataSet extends BaseDataSet
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(DataSetConfiguratorInterface $configurator)
+    {
+        parent::configureOptions($configurator);
 
+        $configurator->setTransformers([
+            'route' => $this->container->get('route.transformer')
+        ]);
+    }
 }

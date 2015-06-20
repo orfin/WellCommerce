@@ -6,11 +6,11 @@
         <div class="col-lg-3">
             <div class="thumbnail">
                 <div class="body">
-                    <a href="{{ path(item.route) }}" class="photo">
+                    <a href="{{ item.route }}" class="photo">
                         <img src="{{ image(item.photo, 'normal') }}" alt="{{ item.name }}">
                     </a>
 
-                    <a href="{{ path(item.route) }}" class="caption">
+                    <a href="{{ item.route }}" class="caption">
                         <div class="labels">
                             <span class="label">Bestseller {{ item.status|json_encode }}</span>
                         </div>
