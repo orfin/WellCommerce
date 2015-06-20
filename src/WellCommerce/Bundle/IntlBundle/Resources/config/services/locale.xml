@@ -78,10 +78,6 @@
             <tag name="twig.extension"/>
         </service>
 
-        <service id="locale.orm.listener" class="WellCommerce\Bundle\IntlBundle\EventListener\LocaleORMListener">
-            <tag name="doctrine.event_subscriber" />
-        </service>
-
         <service id="locale.manager.front" class="WellCommerce\Bundle\IntlBundle\Manager\Front\LocaleManager">
             <argument type="service" id="flash_helper"/>
             <argument type="service" id="redirect_helper"/>

@@ -68,14 +68,6 @@
             </call>
         </service>
 
-
-        <service id="media.subscriber" class="WellCommerce\Bundle\MediaBundle\EventListener\MediaSubscriber">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <tag name="kernel.event_subscriber" />
-        </service>
-
         <service id="media.uploader" class="WellCommerce\Bundle\MediaBundle\Uploader\MediaUploader">
             <argument>%kernel.root_dir%</argument>
             <argument type="service" id="filesystem" />

@@ -153,13 +153,6 @@
             </call>
         </service>
 
-        <service id="category.subscriber" class="WellCommerce\Bundle\CategoryBundle\EventListener\CategorySubscriber">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <tag name="kernel.event_subscriber" />
-        </service>
-
         <service id="category.route.generator" class="WellCommerce\Bundle\CategoryBundle\Routing\CategoryRouteGenerator">
             <argument type="collection" key="defaults">
                 <argument key="_controller">category.controller.front:indexAction</argument>

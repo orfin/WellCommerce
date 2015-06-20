@@ -28,13 +28,6 @@
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
-        <service id="client.subscriber" class="WellCommerce\Bundle\ClientBundle\EventListener\ClientSubscriber">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <tag name="kernel.event_subscriber"  />
-        </service>
-
         <service id="client_login.layout_box.controller" class="WellCommerce\Bundle\ClientBundle\Controller\Box\ClientLoginBoxController">
             <argument type="service" id="client.manager.front"/>
             <call method="setContainer">

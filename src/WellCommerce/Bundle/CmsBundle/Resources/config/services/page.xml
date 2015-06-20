@@ -130,13 +130,6 @@
             </call>
         </service>
 
-        <service id="page.subscriber" class="WellCommerce\Bundle\CmsBundle\EventListener\PageSubscriber">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <tag name="kernel.event_subscriber" />
-        </service>
-
         <service id="page.route.generator" class="WellCommerce\Bundle\CmsBundle\Routing\PageRouteGenerator">
             <argument type="collection" key="defaults">
                 <argument key="_controller">page.controller.front:indexAction</argument>
@@ -149,6 +142,5 @@
             <argument type="service" id="page.collection.front"/>
             <tag name="twig.extension"/>
         </service>
-
     </services>
 </container>

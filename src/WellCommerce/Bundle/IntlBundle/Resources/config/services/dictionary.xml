@@ -72,12 +72,5 @@
         <service id="package.command.purge.translations" class="WellCommerce\Bundle\IntlBundle\Command\PurgeTranslationsCommand">
             <tag name="console.command"/>
         </service>
-
-        <service id="dictionary.subscriber" class="WellCommerce\Bundle\IntlBundle\EventListener\DictionarySubscriber">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <tag name="kernel.event_subscriber" />
-        </service>
     </services>
 </container>

@@ -13,13 +13,6 @@
             <argument>WellCommerceProducerBundle:Producer</argument>
         </service>
 
-        <service id="producer.subscriber" class="WellCommerce\Bundle\ProducerBundle\EventListener\ProducerSubscriber">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <tag name="kernel.event_subscriber" />
-        </service>
-
         <service id="producer.route.generator" class="WellCommerce\Bundle\ProducerBundle\Routing\ProducerRouteGenerator">
             <argument type="collection" key="defaults">
                 <argument key="_controller">producer.controller.front:indexAction</argument>

@@ -68,12 +68,5 @@
                 <argument type="service" id="service_container"/>
             </call>
         </service>
-
-        <service id="company.subscriber" class="WellCommerce\Bundle\MultiStoreBundle\EventListener\CompanySubscriber">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <tag name="kernel.event_subscriber" />
-        </service>
     </services>
 </container>

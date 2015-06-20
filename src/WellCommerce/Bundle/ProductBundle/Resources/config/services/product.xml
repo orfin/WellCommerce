@@ -120,13 +120,6 @@
             </call>
         </service>
 
-        <service id="product.subscriber" class="WellCommerce\Bundle\ProductBundle\EventListener\ProductSubscriber">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <tag name="kernel.event_subscriber" />
-        </service>
-
         <service id="product_info.layout_box.controller" class="WellCommerce\Bundle\ProductBundle\Controller\Box\ProductInfoBoxController">
             <argument type="service" id="product.manager.front"/>
             <call method="setContainer">
