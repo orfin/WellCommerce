@@ -18,8 +18,6 @@ use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
  * Class ClientLoginBoxController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class ClientLoginBoxController extends AbstractBoxController
 {

@@ -19,8 +19,6 @@ use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
  * Class ClientRegistrationBoxController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class ClientRegistrationBoxController extends AbstractBoxController
 {
