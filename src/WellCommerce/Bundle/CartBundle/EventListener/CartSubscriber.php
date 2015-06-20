@@ -29,7 +29,7 @@ class CartSubscriber extends AbstractEventSubscriber
 {
     public static function getSubscribedEvents()
     {
-        return parent::getSubscribedEvents() + [
+        return [
             CartManager::CART_CHANGED_EVENT => ['onCartChangedEvent', 0],
             KernelEvents::CONTROLLER        => ['onKernelController', -256],
         ];

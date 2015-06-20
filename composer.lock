@@ -2095,12 +2095,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/packagist-api.git",
-                "reference": "9abd8b3a0246037782c02baeff34bb3628993f43"
+                "reference": "2f6439b3f8df004b47bd30b76a7af715a40bc601"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/packagist-api/zipball/9abd8b3a0246037782c02baeff34bb3628993f43",
-                "reference": "9abd8b3a0246037782c02baeff34bb3628993f43",
+                "url": "https://api.github.com/repos/KnpLabs/packagist-api/zipball/2f6439b3f8df004b47bd30b76a7af715a40bc601",
+                "reference": "2f6439b3f8df004b47bd30b76a7af715a40bc601",
                 "shasum": ""
             },
             "require": {
@@ -2140,7 +2140,7 @@
                 "composer",
                 "packagist"
             ],
-            "time": "2015-05-19 12:50:29"
+            "time": "2015-06-20 08:41:18"
         },
         {
             "name": "kriswallsmith/assetic",
@@ -3878,12 +3878,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/WellCommerce/DataSetBundle.git",
-                "reference": "53d014e6553c11700941b330110c2270b7cd2b4f"
+                "reference": "4f4c8b2c2c072f679d09acc07d046e8bb52edad4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WellCommerce/DataSetBundle/zipball/53d014e6553c11700941b330110c2270b7cd2b4f",
-                "reference": "53d014e6553c11700941b330110c2270b7cd2b4f",
+                "url": "https://api.github.com/repos/WellCommerce/DataSetBundle/zipball/4f4c8b2c2c072f679d09acc07d046e8bb52edad4",
+                "reference": "4f4c8b2c2c072f679d09acc07d046e8bb52edad4",
                 "shasum": ""
             },
             "require": {
@@ -3920,7 +3920,7 @@
                 "open-source",
                 "symfony"
             ],
-            "time": "2015-06-05 09:31:26"
+            "time": "2015-06-20 00:21:16"
         },
         {
             "name": "wellcommerce/form-bundle",
@@ -3978,12 +3978,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/WellCommerce/SmugglerBundle.git",
-                "reference": "35a99521b39064fb242920f96d55a4b0150dacda"
+                "reference": "a69c32071942707752c93070475ac430aa0d81b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WellCommerce/SmugglerBundle/zipball/35a99521b39064fb242920f96d55a4b0150dacda",
-                "reference": "35a99521b39064fb242920f96d55a4b0150dacda",
+                "url": "https://api.github.com/repos/WellCommerce/SmugglerBundle/zipball/a69c32071942707752c93070475ac430aa0d81b4",
+                "reference": "a69c32071942707752c93070475ac430aa0d81b4",
                 "shasum": ""
             },
             "require": {
@@ -4029,7 +4029,7 @@
                 "open-source",
                 "symfony"
             ],
-            "time": "2015-06-19 20:55:02"
+            "time": "2015-06-20 12:44:17"
         },
         {
             "name": "white-october/pagerfanta-bundle",

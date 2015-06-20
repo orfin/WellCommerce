@@ -27,7 +27,7 @@ class CurrencySubscriber extends AbstractEventSubscriber
 {
     public static function getSubscribedEvents()
     {
-        return parent::getSubscribedEvents() + [
+        return [
             KernelEvents::CONTROLLER => ['onKernelController', -100],
         ];
     }

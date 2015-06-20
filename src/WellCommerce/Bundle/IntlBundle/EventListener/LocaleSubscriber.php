@@ -26,7 +26,7 @@ class LocaleSubscriber extends AbstractEventSubscriber
 {
     public static function getSubscribedEvents()
     {
-        return parent::getSubscribedEvents() + [
+        return [
             KernelEvents::REQUEST    => ['onKernelRequest', 15],
             KernelEvents::CONTROLLER => ['onKernelController', -256],
         ];

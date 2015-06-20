@@ -24,7 +24,7 @@ class ShippingMethodSubscriber extends AbstractEventSubscriber
 {
     public static function getSubscribedEvents()
     {
-        return parent::getSubscribedEvents() + [
+        return [
             'shipping_method.form.init' => 'onShippingMethodFormInit',
         ];
     }

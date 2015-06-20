@@ -27,16 +27,6 @@ use WellCommerce\Bundle\AdminBundle\MenuBuilder\XmlLoader;
 abstract class AbstractEventSubscriber extends ContainerAware implements EventSubscriberInterface
 {
     /**
-     * {@inheritdoc}
-     */
-    public static function getSubscribedEvents()
-    {
-        return [
-            AdminMenuEvent::INIT_EVENT => 'onAdminMenuInitEvent',
-        ];
-    }
-
-    /**
      * Returns translator service
      *
      * @return \Symfony\Bundle\FrameworkBundle\Translation\Translator

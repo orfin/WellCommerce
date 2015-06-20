@@ -45,7 +45,7 @@ class ThemeSubscriber extends AbstractEventSubscriber
      */
     public static function getSubscribedEvents()
     {
-        return parent::getSubscribedEvents() + [
+        return [
             ThemeFormBuilder::FORM_INIT_EVENT => 'onThemeFormInit',
         ];
     }

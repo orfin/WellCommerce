@@ -24,7 +24,7 @@ class PaymentMethodSubscriber extends AbstractEventSubscriber
 {
     public static function getSubscribedEvents()
     {
-        return parent::getSubscribedEvents() + [
+        return [
             'payment_method.form.init' => 'onPaymentMethodFormInit',
         ];
     }

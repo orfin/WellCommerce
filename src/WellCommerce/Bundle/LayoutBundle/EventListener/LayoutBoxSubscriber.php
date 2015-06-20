@@ -27,7 +27,7 @@ class LayoutBoxSubscriber extends AbstractEventSubscriber
 {
     public static function getSubscribedEvents()
     {
-        return parent::getSubscribedEvents() + [
+        return [
             'layout_box.form_init'  => 'onLayoutBoxFormInit',
             'layout_box.pre_update' => 'onLayoutBoxResourceSave'
         ];
