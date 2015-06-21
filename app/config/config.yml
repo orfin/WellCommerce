@@ -22,6 +22,12 @@ framework:
         save_path: "%kernel.root_dir%/sessions"
     fragments:       ~
     http_method_override: true
+    profiler:
+        matcher: { ip: "%developer_mode.ip%" }
+
+web_profiler:
+    toolbar: true
+    intercept_redirects: true
 
 # Twig Configuration
 twig:

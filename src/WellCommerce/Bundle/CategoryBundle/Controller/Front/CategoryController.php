@@ -39,8 +39,10 @@ class CategoryController extends AbstractFrontController implements FrontControl
 
         $this->getManager()->getCategoryProvider()->setCurrentCategory($category);
 
-        return $this->render('WellCommerceCategoryBundle:Front/Category:index.html.twig', [
+        $response = $this->render('WellCommerceCategoryBundle:Front/Category:index.html.twig', [
             'category' => $category
         ]);
+
+        return $response;
     }
 }

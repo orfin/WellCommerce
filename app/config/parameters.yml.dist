@@ -23,6 +23,8 @@ parameters:
     fallback_theme: demo
     fallback_hostname: localhost
 
+    developer_mode.ip: 127.0.0.1
+
     pdo.db_options:
       db_table:    session
       db_id_col:   session_id
