@@ -34,5 +34,6 @@ class ThemeCompilerPass implements CompilerPassInterface
     public function process(ContainerBuilder $container)
     {
         $container->setAlias('templating.locator', 'theme.templating_locator');
+        $container->setAlias('templating.cache_warmer.template_paths', 'theme.template_paths.cache_warmer');
     }
 }

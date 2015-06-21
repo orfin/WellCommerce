@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\ThemeBundle\Manager;
 
+use Doctrine\Common\Util\Debug;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use WellCommerce\Bundle\ThemeBundle\Entity\Theme;

@@ -1,0 +1,50 @@
+{% trans_default_domain "wellcommerce" %}
+
+<li class="dropdown">
+    <a href="{{ path('front.cart.index') }}" class="dropdown-toggle cartQty" data-toggle="dropdown" role="button" aria-expanded="true">
+        Cart<span class="cart-qty">{{ cart.getTotals().getQuantity()|number_format }}</span>
+    </a>
+    {% if false == cart.isEmpty %}
+    <ul class="dropdown-menu" role="menu">
+        <li>
+            <table>
+                <tbody>
+                {% for item in cartProducts.rows %}
+                <tr>
+                    <td>
+                        <a href="{{ path('front.cart.delete',{"id": item.id }) }}" class="delete">
+                            <img src="{{ asset('themes/wellcommerce/assets/img/delete-ico.png') }}"/>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ item.route }}">{{ item.name }}</a>
+                    </td>
+                    <td>
+                        <input type="text" value="{{ item.quantity|number_format(0) }}" class="text-center">
+                    </td>
+                    <td class="text-right">
+                        {% if item.isDiscountValid == 1 %}
+                            {{ format_price(item.quantityDiscountedPrice, item.currency, null, item.tax) }}
+                            <small>{{ format_price(item.quantityPrice, item.currency, null, item.tax) }}</small>
+                        {% else %}
+                            {{ format_price(item.quantityPrice, item.currency, null, item.tax) }}
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="3">
+                        <a href="{{ path('front.cart.index') }}">
+                            {% trans %}cart.link.checkout{% endtrans %} <img src="{{ asset('themes/wellcommerce/assets/img/arrow-right-ico.png') }}"/>
+                        </a>
+                    </td>
+                    <td>
+                        <span>{{ format_price(cart.getTotals().getGrossPrice()) }}</span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </li>
+    </ul>
+    {% endif %}
+</li>

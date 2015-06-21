@@ -36,6 +36,20 @@ class TemplateLocator extends BaseTemplateLocator
     }
 
     /**
+     * Returns cache key for a given template
+     *
+     * @param TemplateReferenceInterface $template
+     *
+     * @return string
+     */
+    protected function getCacheKey($template)
+    {
+        $name = $template->getLogicalName();
+
+        return $name;
+    }
+
+    /**
      * Returns a full path for a given file.
      *
      * @param string|TemplateReferenceInterface $template
@@ -50,6 +64,20 @@ class TemplateLocator extends BaseTemplateLocator
             throw new \InvalidArgumentException("The template must be an instance of TemplateReferenceInterface.");
         }
 
-        return $this->locator->locate($template->getPath(), $currentPath);
+        $key = $this->getCacheKey($template);
+
+        if (!isset($this->cache[$key])) {
+            try {
+                $this->cache[$key] = $this->locator->locate($template->getPath(), $currentPath);
+            } catch (\InvalidArgumentException $e) {
+                throw new \InvalidArgumentException(sprintf(
+                    'Unable to find template "%s" in "%s".',
+                    $template,
+                    $e->getMessage()
+                ));
+            }
+        }
+
+        return $this->cache[$key];
     }
 }

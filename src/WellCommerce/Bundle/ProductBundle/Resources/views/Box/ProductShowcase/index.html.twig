@@ -1,0 +1,20 @@
+{% trans_default_domain "wellcommerce" %}
+
+<div class="showcase">
+    {% for item in dataset.rows %}
+    <div class="row">
+        <div class="col-lg-7">
+            <a href="{{ item.route }}" class="photo text-center">
+                <img src="{{ image(item.photo, 'medium') }}" alt="{{ item.name }}" />
+            </a>
+        </div>
+        <div class="col-lg-5">
+            <h3>{{ item.name }}<small>{% trans %}product.label.manufactured_by{% endtrans %} {{ item.producerName }}</small></h3>
+            <span class="price">{{ format_price(item.price, item.currency) }}</span>
+            <a href="{{ path('front.cart.add') }}" class="btn btn-primary text-left add-cart" data-id="{{ item.id }}" data-qty="1" data-attribute="0">
+                {% trans %}cart.button.add{% endtrans %}<i class="pull-right"><img src="{{ asset('themes/wellcommerce/assets/img/add-to-cart.png') }}"></i>
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+</div>

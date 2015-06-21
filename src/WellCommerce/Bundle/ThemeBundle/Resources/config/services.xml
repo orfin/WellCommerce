@@ -96,5 +96,10 @@
                 <argument type="service" id="service_container"/>
             </call>
         </service>
+
+        <service id="theme.template_paths.cache_warmer" class="WellCommerce\Bundle\ThemeBundle\CacheWarmer\TemplatePathsCacheWarmer" public="false">
+            <argument type="service" id="templating.finder" />
+            <argument type="service" id="theme.templating_locator" />
+        </service>
     </services>
 </container>
