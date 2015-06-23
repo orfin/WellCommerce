@@ -159,6 +159,10 @@
             </call>
         </service>
 
+        <service id="product_status.transformer.front" class="WellCommerce\Bundle\ProductBundle\DataSet\Transformer\ProductStatusTransformer">
+            <argument type="service" id="product_status.collection.front"/>
+        </service>
+
         <service id="product_status.layout_box.configurator" class="WellCommerce\Bundle\ProductBundle\Layout\ProductStatusBoxConfigurator">
             <argument>ProductStatusBox</argument>
             <argument>product_status.layout_box.controller</argument>

@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\ProductBundle\DataSet\Front;
 
+use Doctrine\Common\Util\Debug;
 use WellCommerce\Bundle\DataSetBundle\AbstractDataSet;
 use WellCommerce\Bundle\DataSetBundle\DataSetConfiguratorInterface;
 use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
@@ -51,18 +52,7 @@ class ProductDataSet extends AbstractDataSet implements DataSetInterface
         ]);
 
         $configurator->setTransformers([
-            'status' => new ProductStatusTransformer($this->getStatuses()),
             'route'  => $this->container->get('route.transformer')
         ]);
-    }
-
-    /**
-     * Returns the collection of all product statuses
-     *
-     * @return array
-     */
-    private function getStatuses()
-    {
-        return $this->container->get('product_status.collection.front')->getArray();
     }
 }
