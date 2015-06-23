@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\ProductBundle\Controller\Box;
 
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
+use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxSettingsCollection;
 
 /**
  * Class ProductShowcaseBoxController
@@ -25,7 +26,7 @@ class ProductStatusBoxController extends AbstractBoxController implements BoxCon
     /**
      * {@inheritdoc}
      */
-    public function indexAction()
+    public function indexAction(LayoutBoxSettingsCollection $boxSettings)
     {
         /**
          * @var $manager \WellCommerce\Bundle\ProductBundle\Manager\Front\ProductStatusManager
@@ -36,10 +37,10 @@ class ProductStatusBoxController extends AbstractBoxController implements BoxCon
         $requestHelper     = $manager->getRequestHelper();
 
         $dataset = $collectionBuilder->getDataSet([
-            'limit'         => $requestHelper->getQueryAttribute('limit', $this->getBoxParam('per_page', 12)),
+            'limit'         => $requestHelper->getQueryAttribute('limit', $boxSettings->getParam('per_page', 12)),
             'order_by'      => $requestHelper->getQueryAttribute('order_by', 'price'),
             'order_dir'     => $requestHelper->getQueryAttribute('order_dir', 'asc'),
-            'conditions'    => $manager->getStatusConditions($this->getBoxParam('status', null)),
+            'conditions'    => $manager->getStatusConditions($boxSettings->getParam('status')),
             'cache_enabled' => true
         ]);
 

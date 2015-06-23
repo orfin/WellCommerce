@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\ProductBundle\Controller\Box;
 
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
+use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxSettingsCollection;
 
 /**
  * Class ProductShowcaseBoxController
@@ -25,7 +26,7 @@ class ProductShowcaseBoxController extends AbstractBoxController implements BoxC
     /**
      * {@inheritdoc}
      */
-    public function indexAction()
+    public function indexAction(LayoutBoxSettingsCollection $boxSettings)
     {
         /**
          * @var $manager \WellCommerce\Bundle\ProductBundle\Manager\Front\ProductStatusManager
@@ -39,7 +40,7 @@ class ProductShowcaseBoxController extends AbstractBoxController implements BoxC
             'limit'      => $requestHelper->getQueryAttribute('limit', 1),
             'order_by'   => $requestHelper->getQueryAttribute('order_by', 'name'),
             'order_dir'  => $requestHelper->getQueryAttribute('order_dir', 'asc'),
-            'conditions' => $manager->getStatusConditions($this->getBoxParam('status', null)),
+            'conditions' => $manager->getStatusConditions($boxSettings->getParam('status')),
         ]);
 
         return $this->render('WellCommerceProductBundle:Box/ProductShowcase:index.html.twig', [

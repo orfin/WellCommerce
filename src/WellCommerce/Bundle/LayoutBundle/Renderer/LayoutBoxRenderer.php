@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\LayoutBundle\Renderer;
 
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
+use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxSettingsCollection;
 use WellCommerce\Bundle\LayoutBundle\Configurator\LayoutBoxConfiguratorCollection;
 use WellCommerce\Bundle\LayoutBundle\Entity\LayoutBox;
 use WellCommerce\Bundle\LayoutBundle\Repository\LayoutBoxRepositoryInterface;
@@ -81,9 +82,8 @@ class LayoutBoxRenderer extends AbstractContainer implements LayoutBoxRendererIn
         $service    = $this->configurators->get($box->getBoxType())->getControllerService();
         $controller = $this->container->get($service);
         $action     = $this->getControllerAction($controller);
-        $controller->setBoxId($box->getIdentifier());
-        $controller->setBoxParams($box->getSettings());
-        $content = call_user_func_array([$controller, $action], []);
+        $settings   = $this->getSettingsCollection($box, $params);
+        $content    = call_user_func_array([$controller, $action], [$settings]);
 
         return $content->getContent();
     }
@@ -109,6 +109,19 @@ class LayoutBoxRenderer extends AbstractContainer implements LayoutBoxRendererIn
         }
 
         return 'indexAction';
+    }
+
+    private function getSettingsCollection(LayoutBox $layoutBox, array $params = [])
+    {
+        $collection        = new LayoutBoxSettingsCollection();
+        $layoutBoxSettings = $layoutBox->getSettings();
+        $settings          = array_merge($layoutBoxSettings, $params);
+
+        foreach ($settings as $name => $value) {
+            $collection->add($name, $value);
+        }
+
+        return $collection;
     }
 
     /**

@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\CategoryBundle\Controller\Box;
 
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
+use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxSettingsCollection;
 
 /**
  * Class CategoryProductsBoxController
@@ -25,13 +26,13 @@ class CategoryProductsBoxController extends AbstractBoxController implements Box
     /**
      * {@inheritdoc}
      */
-    public function indexAction()
+    public function indexAction(LayoutBoxSettingsCollection $boxSettings)
     {
         $manager           = $this->getManager();
         $provider          = $manager->getProductProvider();
         $collectionBuilder = $provider->getCollectionBuilder();
         $requestHelper     = $manager->getRequestHelper();
-        $limit             = $requestHelper->getCurrentLimit($this->getBoxParam('per_page'));
+        $limit             = $requestHelper->getCurrentLimit($boxSettings->getParam('per_page', 12));
         $offset            = $requestHelper->getCurrentOffset($limit);
 
         $dataset = $collectionBuilder->getDataSet([
