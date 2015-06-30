@@ -21,6 +21,9 @@ class WeightTableCalculator extends AbstractShippingMethodCalculator
 {
     protected $alias = 'weight_table';
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'Weight table';

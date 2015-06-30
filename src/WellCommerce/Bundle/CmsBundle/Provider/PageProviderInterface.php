@@ -14,10 +14,9 @@ namespace WellCommerce\Bundle\CmsBundle\Provider;
 
 use WellCommerce\Bundle\CmsBundle\Entity\Page;
 use WellCommerce\Bundle\CoreBundle\Provider\ProviderInterface;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductStatus;
 
 /**
- * Interface ProductStatusProviderInterface
+ * Interface PageProviderInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */

@@ -23,6 +23,9 @@ class PriceTableCalculator extends AbstractShippingMethodCalculator
 {
     protected $alias = 'price_table';
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'Price table';

@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CartBundle\Helper;
 
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use WellCommerce\Bundle\CartBundle\Entity\Cart;
 use WellCommerce\Bundle\CartBundle\Entity\CartProduct;
 use WellCommerce\Bundle\CartBundle\Entity\CartTotals;

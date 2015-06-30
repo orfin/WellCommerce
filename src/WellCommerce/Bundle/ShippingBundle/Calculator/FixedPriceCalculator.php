@@ -21,6 +21,9 @@ class FixedPriceCalculator extends AbstractShippingMethodCalculator
 {
     protected $alias = 'fixed_price';
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'Fixed price';
@@ -34,6 +37,6 @@ class FixedPriceCalculator extends AbstractShippingMethodCalculator
         $cart   = $this->cartProvider->getCurrentCart();
         $totals = $cart->getTotals();
 
-        return $totals->getQuantity() * 9;
+        return $totals->getQuantity() * 11;
     }
 }

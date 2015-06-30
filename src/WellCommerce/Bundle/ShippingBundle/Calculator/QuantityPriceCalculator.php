@@ -23,6 +23,9 @@ class QuantityPriceCalculator extends AbstractShippingMethodCalculator
 {
     protected $alias = 'quantity_price';
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'Quantity dependent price';

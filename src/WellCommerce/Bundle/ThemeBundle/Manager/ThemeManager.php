@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\ThemeBundle\Manager;
 
-use Doctrine\Common\Util\Debug;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use WellCommerce\Bundle\ThemeBundle\Entity\Theme;
@@ -83,28 +82,6 @@ class ThemeManager implements ThemeManagerInterface
     }
 
     /**
-     * Returns bundle name and path from bundle name
-     *
-     * @param string $name
-     *
-     * @return array
-     */
-    protected function getBundleNameAndPath($name)
-    {
-        $bundleName = substr($name, 1);
-        $path       = '';
-
-        if (false !== strpos($bundleName, '/')) {
-            list($bundleName, $path) = explode('/', $bundleName, 2);
-        }
-
-        return [
-            $bundleName,
-            $path
-        ];
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function locateTemplate($name)
@@ -128,6 +105,49 @@ class ThemeManager implements ThemeManagerInterface
         ];
 
         return $this->locateBundlesResource($bundles, $parameters, $path);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getThemePathPattern()
+    {
+        return '%themes_path%/%current_theme%/templates/%bundle_name%/%template%';
+
+    }
+
+    /**
+     * Validates filename
+     *
+     * @param string $name
+     *
+     * @return bool
+     */
+    protected function isValidFilename($name)
+    {
+        return (false === strpos($name, '..'));
+    }
+
+    /**
+     * Returns bundle name and path from bundle name
+     *
+     * @param string $name
+     *
+     * @return array
+     */
+    protected function getBundleNameAndPath($name)
+    {
+        $bundleName = substr($name, 1);
+        $path       = '';
+
+        if (false !== strpos($bundleName, '/')) {
+            list($bundleName, $path) = explode('/', $bundleName, 2);
+        }
+
+        return [
+            $bundleName,
+            $path
+        ];
     }
 
     /**
@@ -158,21 +178,6 @@ class ThemeManager implements ThemeManagerInterface
     }
 
     /**
-     * Locates default bundle template in Resources/views folder
-     *
-     * @param BundleInterface $bundle
-     * @param string          $path
-     * @param array           $resourcePaths
-     */
-    protected function getDefaultBundleResourcePath(BundleInterface $bundle, $path, &$resourcePaths)
-    {
-        $file = $bundle->getPath() . '/' . $path;
-        if ($this->isValidPath($file)) {
-            $resourcePaths[] = $file;
-        }
-    }
-
-    /**
      * Finds path for bundle theme if exists
      *
      * @param BundleInterface $bundle
@@ -194,6 +199,21 @@ class ThemeManager implements ThemeManagerInterface
     }
 
     /**
+     * Locates default bundle template in Resources/views folder
+     *
+     * @param BundleInterface $bundle
+     * @param string          $path
+     * @param array           $resourcePaths
+     */
+    protected function getDefaultBundleResourcePath(BundleInterface $bundle, $path, &$resourcePaths)
+    {
+        $file = $bundle->getPath() . '/' . $path;
+        if ($this->isValidPath($file)) {
+            $resourcePaths[] = $file;
+        }
+    }
+
+    /**
      * Checks whether filename is valid
      *
      * @param string $path
@@ -203,26 +223,5 @@ class ThemeManager implements ThemeManagerInterface
     protected function isValidPath($path)
     {
         return file_exists($path);
-    }
-
-    /**
-     * Validates filename
-     *
-     * @param string $name
-     *
-     * @return bool
-     */
-    protected function isValidFilename($name)
-    {
-        return (false === strpos($name, '..'));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getThemePathPattern()
-    {
-        return '%themes_path%/%current_theme%/templates/%bundle_name%/%template%';
-
     }
 }

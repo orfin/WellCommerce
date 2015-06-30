@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\CmsBundle\Provider;
 
 use WellCommerce\Bundle\CmsBundle\Entity\Page;
 use WellCommerce\Bundle\CoreBundle\Provider\AbstractProvider;
-use WellCommerce\Bundle\CoreBundle\Provider\ProviderInterface;
 
 class PageProvider extends AbstractProvider implements PageProviderInterface
 {
