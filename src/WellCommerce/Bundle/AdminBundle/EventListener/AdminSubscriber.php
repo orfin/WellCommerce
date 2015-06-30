@@ -46,7 +46,7 @@ class AdminSubscriber extends AbstractEventSubscriber
             $builder   = $this->initAdminMenuBuilder();
             $menuEvent = new AdminMenuEvent($builder);
             $dispatcher->dispatch(AdminMenuEvent::INIT_EVENT, $menuEvent);
-            $menu = $menuEvent->getBuilder()->getMenu();
+            $menu = $menuEvent->getBuilder()->createMenu();
             $this->container->get('session')->set(self::ADMIN_MENU_SESSION_NAMESPACE, $menu);
         }
     }

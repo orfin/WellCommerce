@@ -25,28 +25,20 @@ class AdminMenuBuilder extends AbstractCollection implements AdminMenuBuilderInt
     /**
      * {@inheritdoc}
      */
-    public function getMenu()
+    public function createMenu()
     {
-        $tree = $this->items['menu'];
+        usort($this->items['menu'], function (AdminMenuItemInterface $a, AdminMenuItemInterface $b) {
+            $a->sortChildren();
+            $b->sortChildren();
 
-        usort($tree, [$this, 'sortMenu']);
+            if ($a->getSortOrder() == $b->getSortOrder()) {
+                return 0;
+            }
 
-        return $tree;
-    }
+            return $a->getSortOrder() > $b->getSortOrder() ? 1 : -1;
+        });
 
-    /**
-     * {@inheritdoc}
-     */
-    public function sortMenu(AdminMenuItemInterface $a, AdminMenuItemInterface $b)
-    {
-        $a->sortChildren();
-        $b->sortChildren();
-
-        if ($a->getSortOrder() == $b->getSortOrder()) {
-            return 0;
-        }
-
-        return $a->getSortOrder() > $b->getSortOrder() ? 1 : -1;
+        return $this->items['menu'];
     }
 
     /**
