@@ -41,8 +41,7 @@ class CategoryProductsBoxController extends AbstractBoxController implements Box
             'order_by'      => $requestHelper->getQueryAttribute('order_by', 'name'),
             'order_dir'     => $requestHelper->getQueryAttribute('order_dir', 'asc'),
             'conditions'    => $this->getManager()->getConditions(),
-            'cache_enabled' => true,
-            'cache_ttl'     => 3600
+            'cache_enabled' => true
         ]);
 
         return $this->render('WellCommerceCategoryBundle:Box/CategoryProducts:index.html.twig', [
