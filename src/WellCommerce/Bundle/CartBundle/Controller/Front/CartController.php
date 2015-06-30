@@ -115,7 +115,7 @@ class CartController extends AbstractFrontController implements FrontControllerI
     {
         $manager = $this->getManager();
         $message = null;
-        $status  = null;
+        $success = null;
 
         try {
             $manager->changeItemQuantity();
@@ -135,7 +135,7 @@ class CartController extends AbstractFrontController implements FrontControllerI
     {
         $manager = $this->getManager();
         $message = null;
-        $status  = null;
+        $success = null;
 
         try {
             $manager->deleteItem();
