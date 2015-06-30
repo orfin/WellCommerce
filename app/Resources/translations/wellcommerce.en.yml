@@ -176,3 +176,14 @@ product:
         manufactured_by: by
     heading:
         recommendations: 'You might also like'
+    options:
+        order_by:
+            name: Name
+            price: Price
+        order_dir:
+            ascending: ascending
+            descending: descending
+        limit:  Show per page
+        view_type:
+            list: List view
+            grid: Grid view
