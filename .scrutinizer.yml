@@ -11,3 +11,4 @@ filter:
         - vendor/*
         - web/*
         - bin/*
+        - */DataFixtures/*
