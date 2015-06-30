@@ -14,7 +14,13 @@
 </div>
 <div id="message-bar"></div>
 <div id="content" class="layout-container">
-    {{ error }}
+    {% if error %}
+        <script>
+            $(document).ready(function(){
+                GError('{{ error.messageKey|trans(error.messageData, 'security') }}');
+            });
+        </script>
+    {% endif %}
     {{ form_js(form) }}
 </div>
 </body>
