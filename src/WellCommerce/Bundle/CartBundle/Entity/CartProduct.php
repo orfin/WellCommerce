@@ -136,13 +136,4 @@ class CartProduct
     {
         $this->cart = $cart;
     }
-
-    /**
-     * @ORM\PostPersist
-     * @ORM\PostUpdate
-     */
-    protected function recalculateCartTotals()
-    {
-        $this->getCart()->recalculateCartTotals();
-    }
 }
