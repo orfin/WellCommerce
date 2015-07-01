@@ -11,4 +11,4 @@ filter:
         - vendor/*
         - web/*
         - bin/*
-        - */DataFixtures/*
+        - src/*Bundle/DataFixtures/
