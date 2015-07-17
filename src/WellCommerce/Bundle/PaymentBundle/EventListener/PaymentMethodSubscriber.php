@@ -36,11 +36,11 @@ class PaymentMethodSubscriber extends AbstractEventSubscriber
      */
     public function onPaymentMethodFormInit(FormEvent $event)
     {
-        $builder         = $event->getFormBuilder();
-        $form            = $builder->getForm();
-        $resource        = $builder->getData();
-        $processors      = $this->container->get('payment_method.processor.collection')->all();
-        $processorSelect = $form->getChild('required_data')->getChild('processor');
+        $builder          = $event->getFormBuilder();
+        $form             = $event->getForm();
+        $resource         = $form->getModelData();
+        $processors       = $this->container->get('payment_method.processor.collection')->all();
+        $calculatorSelect = $form->getChildren()->get('required_data');
 
         /**
          * @var $processor \WellCommerce\Bundle\PaymentBundle\Processor\PaymentMethodProcessorInterface

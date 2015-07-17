@@ -12,13 +12,21 @@
 
 namespace WellCommerce\Bundle\ShippingBundle\Calculator;
 
+use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\FormBundle\Dependencies\DependencyInterface;
+use WellCommerce\Bundle\FormBundle\Elements\Fieldset\FieldsetInterface;
+use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
+
 /**
  * Class FixedPriceCalculator
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class FixedPriceCalculator extends AbstractShippingMethodCalculator
+class FixedPriceCalculator extends AbstractShippingMethodCalculator implements ShippingMethodCalculatorInterface
 {
+    /**
+     * @var string
+     */
     protected $alias = 'fixed_price';
 
     /**

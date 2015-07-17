@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\ClientBundle\Controller\Box;
 
-use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 
 /**
@@ -22,9 +21,10 @@ use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
  */
 class ClientRegistrationBoxController extends AbstractBoxController
 {
-    public function indexAction(Request $request)
+    public function indexAction()
     {
         $manager  = $this->getManager();
+        $request  = $manager->getRequestHelper()->getCurrentRequest();
         $resource = $manager->initResource();
         $form     = $this->get('client_register.form_builder.front')->createForm([
             'name' => 'register'

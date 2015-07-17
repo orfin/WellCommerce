@@ -13,8 +13,10 @@ namespace WellCommerce\Bundle\ShippingBundle\Form;
 
 use WellCommerce\Bundle\FormBundle\Builder\AbstractFormBuilder;
 use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\FormBundle\DataTransformer\EntityToIdentifierTransformer;
 use WellCommerce\Bundle\FormBundle\DataTransformer\TranslationTransformer;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
+use WellCommerce\Bundle\ShippingBundle\Form\DataTransformer\ShippingCostCollectionToArrayTransformer;
 
 /**
  * Class ShippingMethodForm
@@ -30,17 +32,6 @@ class ShippingMethodFormBuilder extends AbstractFormBuilder implements FormBuild
      */
     public function buildForm(FormInterface $form)
     {
-        $calculators       = $this->getCalculators();
-        $options           = [];
-        $defaultCalculator = null;
-
-        foreach ($calculators as $calculator) {
-            if (null === $defaultCalculator) {
-                $defaultCalculator = $calculator->getAlias();
-            }
-            $options[$calculator->getAlias()] = $calculator->getName();
-        }
-
         $requiredData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'required_data',
             'label' => $this->trans('Required data')
@@ -54,40 +45,55 @@ class ShippingMethodFormBuilder extends AbstractFormBuilder implements FormBuild
 
         $languageData->addChild($this->getElement('text_field', [
             'name'  => 'name',
-            'label' => $this->trans('Name'),
-        ]));
-
-        $requiredData->addChild($this->getElement('select', [
-            'name'    => 'calculator',
-            'label'   => $this->trans('Processor'),
-            'options' => $options,
-            'default' => $defaultCalculator
+            'label' => $this->trans('shipping_method.label.name'),
         ]));
 
         $requiredData->addChild($this->getElement('checkbox', [
             'name'    => 'enabled',
-            'label'   => $this->trans('Enabled'),
+            'label'   => $this->trans('shipping_method.label.enabled'),
             'default' => 1
         ]));
 
         $requiredData->addChild($this->getElement('text_field', [
             'name'    => 'hierarchy',
-            'label'   => $this->trans('Hierarchy'),
+            'label'   => $this->trans('shipping_method.label.hierarchy'),
             'default' => 0
+        ]));
+
+        $costsData = $form->addChild($this->getElement('nested_fieldset', [
+            'name'  => 'costs_data',
+            'label' => $this->trans('shipping_method.label.costs')
+        ]));
+
+        $costsData->addChild($this->getElement('select', [
+            'name'    => 'calculator',
+            'label'   => $this->trans('shipping_method.label.calculator'),
+            'options' => [],
+        ]));
+
+        $costsData->addChild($this->getElement('select', [
+            'name'    => 'currency',
+            'label'   => $this->trans('product.buy_price.currency.label'),
+            'options' => $this->get('currency.provider')->getSelect(),
+        ]));
+
+        $tax = $costsData->addChild($this->getElement('select', [
+            'name'        => 'tax',
+            'label'       => $this->trans('product.buy_price.tax.label'),
+            'options'     => $this->get('tax.collection')->getSelect(),
+            'transformer' => new EntityToIdentifierTransformer($this->get('tax.repository'))
+        ]));
+
+        $costsData->addChild($this->getElement('range_editor', [
+            'name'            => 'costs',
+            'label'           => $this->trans('shipping_method.label.costs'),
+            'vat_field'       => $tax,
+            'range_precision' => 2,
+            'transformer'     => new ShippingCostCollectionToArrayTransformer($this->get('shipping_method_cost.repository'))
         ]));
 
         $form->addFilter($this->getFilter('no_code'));
         $form->addFilter($this->getFilter('trim'));
         $form->addFilter($this->getFilter('secure'));
-    }
-
-    /**
-     * Returns shipping method calculators as a select
-     *
-     * @return array|\WellCommerce\Bundle\ShippingBundle\Calculator\ShippingMethodCalculatorInterface[]
-     */
-    protected function getCalculators()
-    {
-        return $this->get('shipping_method.calculator.collection')->all();
     }
 }

@@ -20,6 +20,13 @@ namespace WellCommerce\Bundle\CoreBundle\Helper\Request;
 interface RequestHelperInterface
 {
     /**
+     * Returns the master request
+     *
+     * @return null|\Symfony\Component\HttpFoundation\Request
+     */
+    public function getCurrentRequest();
+
+    /**
      * Returns session attribute
      *
      * @param string $name

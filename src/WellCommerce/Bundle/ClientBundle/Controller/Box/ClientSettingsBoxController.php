@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\ClientBundle\Controller\Box;
 
-use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 
 /**
@@ -22,9 +21,10 @@ use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
  */
 class ClientSettingsBoxController extends AbstractBoxController
 {
-    public function indexAction(Request $request)
+    public function indexAction()
     {
         $manager = $this->getManager();
+        $request = $manager->getRequestHelper()->getCurrentRequest();
         $client  = $manager->getRequestHelper()->getClient();
         if (null === $client) {
             return $manager->getRedirectHelper()->redirectTo('front.client.login');

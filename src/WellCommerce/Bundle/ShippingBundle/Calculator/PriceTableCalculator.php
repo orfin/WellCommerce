@@ -12,14 +12,16 @@
 
 namespace WellCommerce\Bundle\ShippingBundle\Calculator;
 
-use WellCommerce\Bundle\ShippingBundle\Calculator\AbstractShippingMethodCalculator;
+use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\FormBundle\Dependencies\DependencyInterface;
+use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
  * Class PriceTableCalculator
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PriceTableCalculator extends AbstractShippingMethodCalculator
+class PriceTableCalculator extends AbstractShippingMethodCalculator implements ShippingMethodCalculatorInterface
 {
     protected $alias = 'price_table';
 

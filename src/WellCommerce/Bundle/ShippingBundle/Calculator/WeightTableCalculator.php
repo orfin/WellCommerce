@@ -12,12 +12,16 @@
 
 namespace WellCommerce\Bundle\ShippingBundle\Calculator;
 
+use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\FormBundle\Dependencies\DependencyInterface;
+use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
+
 /**
  * Class WeightTableCalculator
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class WeightTableCalculator extends AbstractShippingMethodCalculator
+class WeightTableCalculator extends AbstractShippingMethodCalculator implements ShippingMethodCalculatorInterface
 {
     protected $alias = 'weight_table';
 

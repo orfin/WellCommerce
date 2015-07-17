@@ -38,6 +38,10 @@
             <argument>WellCommerceShippingBundle:ShippingMethod</argument>
         </service>
 
+        <service id="shipping_method_cost.repository" class="WellCommerce\Bundle\ShippingBundle\Repository\ShippingMethodCostRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceShippingBundle:ShippingMethodCost</argument>
+        </service>
+
         <service id="shipping_method.dataset.query_builder.admin" class="WellCommerce\Bundle\ShippingBundle\DataSet\Admin\ShippingMethodDataSetQueryBuilder" public="false">
             <argument type="service" id="shipping_method.repository"/>
         </service>

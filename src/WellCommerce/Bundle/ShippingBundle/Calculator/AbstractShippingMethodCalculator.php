@@ -12,15 +12,26 @@
 
 namespace WellCommerce\Bundle\ShippingBundle\Calculator;
 
+use Symfony\Component\PropertyAccess\PropertyAccess;
 use WellCommerce\Bundle\CartBundle\Provider\CartProviderInterface;
+use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\FormBundle\Conditions\Equals;
+use WellCommerce\Bundle\FormBundle\Elements\ElementCollection;
+use WellCommerce\Bundle\FormBundle\Elements\ElementInterface;
+use WellCommerce\Bundle\FormBundle\Elements\Fieldset\FieldsetInterface;
+use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod;
 
 /**
  * Class AbstractShippingMethodCalculator
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractShippingMethodCalculator implements ShippingMethodCalculatorInterface
+abstract class AbstractShippingMethodCalculator
 {
+    /**
+     * @var null
+     */
     protected $alias = null;
 
     /**
@@ -41,7 +52,10 @@ abstract class AbstractShippingMethodCalculator implements ShippingMethodCalcula
     /**
      * {@inheritdoc}
      */
-    abstract public function getName();
+    public function calculate()
+    {
+        return 0;
+    }
 
     /**
      * {@inheritdoc}
@@ -54,8 +68,5 @@ abstract class AbstractShippingMethodCalculator implements ShippingMethodCalcula
     /**
      * {@inheritdoc}
      */
-    public function calculate()
-    {
-        return 0;
-    }
+    abstract public function getName();
 }

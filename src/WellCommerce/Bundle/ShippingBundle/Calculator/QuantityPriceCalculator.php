@@ -12,14 +12,16 @@
 
 namespace WellCommerce\Bundle\ShippingBundle\Calculator;
 
-use WellCommerce\Bundle\ShippingBundle\Calculator\AbstractShippingMethodCalculator;
+use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\FormBundle\Dependencies\DependencyInterface;
+use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
  * Class QuantityPriceCalculator
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class QuantityPriceCalculator extends AbstractShippingMethodCalculator
+class QuantityPriceCalculator extends AbstractShippingMethodCalculator implements ShippingMethodCalculatorInterface
 {
     protected $alias = 'quantity_price';
 

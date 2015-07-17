@@ -11266,6 +11266,7 @@ var GFormProgressBar = GCore.ExtendClass(GFormFile, function() {
 	};
 
 }, oDefaults);
+
 /*
 * RANGE EDITOR
 */
@@ -11308,9 +11309,8 @@ var oDefaults = {
 	aoRules: [],
 	aoOptions: [],
 	sComment: '',
-	iPricePrecision: 2,
-	iRangePrecision: 2,
-	iRangeLimitsPrecision: 0
+	iPricePrecision: 4,
+	iRangePrecision: 4
 };
 
 var GFormRangeEditor = GCore.ExtendClass(GFormField, function() {
@@ -11355,9 +11355,8 @@ var GFormRangeEditor = GCore.ExtendClass(GFormField, function() {
 		for (var i = 0; i < iRanges; i++) {
 			var jTr = $('<tr/>');
 			var jMin = $('<td class="' + gThis._GetClass('RangeColumn') + ' ' + gThis._GetClass('MinColumn') + '"/>');
-//			if (i > 0) {
-				jMin.append(gThis._AddMin(i, gThis.m_aoRanges[i]));
-//			}
+            jMin.append(gThis._AddMin(i, gThis.m_aoRanges[i]));
+
 			var jMax = $('<td class="' + gThis._GetClass('RangeColumn') + ' ' + gThis._GetClass('MaxColumn') + '"/>');
 			if (i < iRanges ) {
 				jMax.append(gThis._AddMax(i, gThis.m_aoRanges[i]));

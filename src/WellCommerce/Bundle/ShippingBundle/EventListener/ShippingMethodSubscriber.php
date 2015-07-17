@@ -12,7 +12,7 @@
 namespace WellCommerce\Bundle\ShippingBundle\EventListener;
 
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
-use WellCommerce\Bundle\FormBundle\Conditions\Equals;
+use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 use WellCommerce\Bundle\FormBundle\Event\FormEvent;
 
 /**
@@ -25,7 +25,7 @@ class ShippingMethodSubscriber extends AbstractEventSubscriber
     public static function getSubscribedEvents()
     {
         return [
-            'shipping_method.form.init' => 'onShippingMethodFormInit',
+            'shipping_method.form_init' => 'onShippingMethodFormInit',
         ];
     }
 
@@ -36,23 +36,34 @@ class ShippingMethodSubscriber extends AbstractEventSubscriber
      */
     public function onShippingMethodFormInit(FormEvent $event)
     {
-        $builder         = $event->getFormBuilder();
-        $form            = $builder->getForm();
-        $resource        = $builder->getData();
-        $processors      = $this->container->get('shipping_method.processor.collection')->all();
-        $processorSelect = $form->getChild('required_data')->getChild('processor');
+        $form                 = $event->getForm();
+        $calculators          = $this->getCalculators();
+        $calculatorTypeSelect = $this->getCalculatorTypeElement($form);
 
-        /**
-         * @var $processor \WellCommerce\Bundle\ShippingBundle\Processor\ShippingMethodProcessorInterface
-         */
-        foreach ($processors as $processor) {
-            $processorSelect->addOption($processor->getAlias(), $processor->getName());
-            $fieldset = $processor->addConfigurationFieldset($builder, $form, $resource);
-            $fieldset->addDependency('show', [
-                'field'     => $processorSelect,
-                'form'      => $form,
-                'condition' => new Equals($processor->getAlias())
-            ]);
+        foreach ($calculators as $calculator) {
+            $calculatorTypeSelect->addOptionToSelect($calculator->getAlias(), $calculator->getName());
         }
+    }
+
+    /**
+     * Returns shipping method calculators as a select
+     *
+     * @return array|\WellCommerce\Bundle\ShippingBundle\Calculator\ShippingMethodCalculatorInterface[]
+     */
+    protected function getCalculators()
+    {
+        return $this->container->get('shipping_method.calculator.collection')->all();
+    }
+
+    /**
+     * Returns calculator select element
+     *
+     * @param FormInterface $form
+     *
+     * @return \WellCommerce\Bundle\FormBundle\Elements\Optioned\Select
+     */
+    private function getCalculatorTypeElement(FormInterface $form)
+    {
+        return $form->getChildren()->get('costs_data')->getChildren()->get('calculator');
     }
 }

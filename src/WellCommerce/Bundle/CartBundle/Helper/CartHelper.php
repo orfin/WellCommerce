@@ -131,6 +131,7 @@ class CartHelper implements CartHelperInterface
             $tax           = $product->getSellPriceTax();
             $priceNet      = $product->getSellPrice()->getAmount();
             $priceGross    = $tax->calculateGrossPrice($priceNet);
+            $priceGross    = $this->currencyConverter->convert($priceGross, $baseCurrency);
             $quantityPrice = $item->getQuantity() * $priceGross;
 
             $totalGrossPrice += $this->currencyConverter->convert($quantityPrice, $baseCurrency);

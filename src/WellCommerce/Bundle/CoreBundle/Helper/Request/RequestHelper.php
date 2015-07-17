@@ -60,6 +60,14 @@ class RequestHelper implements RequestHelperInterface
     /**
      * {@inheritdoc}
      */
+    public function getCurrentRequest()
+    {
+        return $this->request;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getCurrentHost()
     {
         if (null !== $url = $this->request->server->get('SERVER_NAME')) {
