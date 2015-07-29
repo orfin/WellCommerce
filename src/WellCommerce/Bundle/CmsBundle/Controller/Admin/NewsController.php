@@ -18,8 +18,6 @@ use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
  * Class NewsController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class NewsController extends AbstractAdminController
 {

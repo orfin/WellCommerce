@@ -26,14 +26,14 @@ class AttributeGroupRepository extends AbstractEntityRepository implements Attri
     public function findAll()
     {
         $qb = parent::getQueryBuilder();
-        $qb
-            ->addSelect('attribute_group.id, attribute_group_translation.name')
-            ->leftJoin(
-                'WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupTranslation',
-                'attribute_group_translation',
-                'WITH',
-                'attribute_group.id = attribute_group_translation.translatable')
-            ->addOrderBy('attribute_group_translation.name', 'ASC');
+        $qb->addSelect('attribute_group.id, attribute_group_translation.name');
+        $qb->leftJoin(
+            'WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupTranslation',
+            'attribute_group_translation',
+            'WITH',
+            'attribute_group.id = attribute_group_translation.translatable');
+        $qb->addOrderBy('attribute_group_translation.name', 'ASC');
+
         $query  = $qb->getQuery();
         $result = $query->getArrayResult();
 

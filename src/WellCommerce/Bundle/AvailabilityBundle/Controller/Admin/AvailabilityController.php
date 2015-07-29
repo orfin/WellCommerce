@@ -18,8 +18,6 @@ use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
  * Class AvailabilityController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class AvailabilityController extends AbstractAdminController
 {

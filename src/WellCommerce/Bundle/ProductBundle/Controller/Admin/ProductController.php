@@ -19,8 +19,6 @@ use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
  * Class ProductController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class ProductController extends AbstractAdminController
 {

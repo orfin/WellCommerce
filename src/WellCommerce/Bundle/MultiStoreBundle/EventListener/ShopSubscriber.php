@@ -68,11 +68,9 @@ class ShopSubscriber extends AbstractEventSubscriber
             $frontContext = $this->container->get('shop.context.front');
             $themeManager = $this->container->get('theme.manager');
 
-            if (!$adminContext->hasSessionPreviousData()) {
-                $adminContext->determineCurrentScope($currentHost);
-            }
-
+            $adminContext->determineCurrentScope($currentHost);
             $frontContext->setCurrentScopeByHost($currentHost);
+
             if (null === $frontContext->getCurrentScope()) {
                 $message = sprintf(
                     'Cannot load multi-store data for host "%s". Check url settings for shop.',

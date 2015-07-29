@@ -61,6 +61,11 @@ class ShippingMethod
     protected $tax;
 
     /**
+     * @ORM\Column(name="currency", type="string", nullable=false, length=16)
+     */
+    protected $currency;
+
+    /**
      * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCost", mappedBy="shippingMethod", cascade={"persist"}, orphanRemoval=true)
      */
     protected $costs;
@@ -133,5 +138,21 @@ class ShippingMethod
     public function setCosts(ArrayCollection $costs)
     {
         $this->costs = $costs;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCurrency()
+    {
+        return $this->currency;
+    }
+
+    /**
+     * @param string $currency
+     */
+    public function setCurrency($currency)
+    {
+        $this->currency = $currency;
     }
 }

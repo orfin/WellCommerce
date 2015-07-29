@@ -20,8 +20,6 @@ use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
  * Class MediaController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class MediaController extends AbstractAdminController
 {
@@ -55,6 +53,6 @@ class MediaController extends AbstractAdminController
             ];
         }
 
-        return new JsonResponse($response);
+        return $this->jsonResponse($response);
     }
 }

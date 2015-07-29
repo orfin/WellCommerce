@@ -21,8 +21,6 @@ use WellCommerce\Bundle\RoutingBundle\Helper\Sluggable;
  * Class CategoryController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class CategoryController extends AbstractAdminController
 {
@@ -40,14 +38,14 @@ class CategoryController extends AbstractAdminController
 
         $tree = $this->buildTreeForm();
 
-        return [
+        return $this->display('index', [
             'tree' => $tree
-        ];
+        ]);
     }
 
     public function addAction(Request $request)
     {
-        $shop = $this->get('shop.context.admin')->getCurrentScope();
+        $shop          = $this->get('shop.context.admin')->getCurrentScope();
         $currentLocale = $request->getLocale();
         $parameters    = $request->request;
         $name          = $parameters->get('name');
@@ -97,10 +95,10 @@ class CategoryController extends AbstractAdminController
             ]);
         }
 
-        return [
+        return $this->display('edit', [
             'tree' => $tree,
             'form' => $form,
-        ];
+        ]);
     }
 
     /**

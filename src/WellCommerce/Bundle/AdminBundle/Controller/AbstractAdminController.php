@@ -21,15 +21,13 @@ use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
  * Class AbstractAdminController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 abstract class AbstractAdminController extends AbstractController implements AdminControllerInterface
 {
     /**
      * @var AdminManagerInterface
      */
-    private $manager;
+    protected $manager;
 
     /**
      * Constructor
@@ -48,9 +46,9 @@ abstract class AbstractAdminController extends AbstractController implements Adm
      */
     public function indexAction()
     {
-        return [
+        return $this->display('index',[
             'datagrid' => $this->manager->getDataGrid()
-        ];
+        ]);
     }
 
     /**
@@ -78,7 +76,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
      *
      * @param Request $request
      *
-     * @return array|JsonResponse
+     * @return JsonResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function addAction(Request $request)
     {
@@ -90,12 +88,12 @@ abstract class AbstractAdminController extends AbstractController implements Adm
                 $this->manager->createResource($resource, $request);
             }
 
-            return $this->createJsonDefaultResponse($form);
+            return $this->createFormDefaultJsonResponse($form);
         }
 
-        return [
+        return $this->display('add', [
             'form' => $form
-        ];
+        ]);
     }
 
     /**
@@ -103,7 +101,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
      *
      * @param Request $request
      *
-     * @return array|JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
+     * @return array|JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function editAction(Request $request)
     {
@@ -119,12 +117,12 @@ abstract class AbstractAdminController extends AbstractController implements Adm
                 $this->manager->updateResource($resource, $request);
             }
 
-            return $this->createJsonDefaultResponse($form);
+            return $this->createFormDefaultJsonResponse($form);
         }
 
-        return [
-            'form' => $form,
-        ];
+        return $this->display('edit',[
+            'form' => $form
+        ]);
     }
 
     /**
@@ -134,7 +132,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
      *
      * @return JsonResponse
      */
-    protected function createJsonDefaultResponse(FormInterface $form)
+    protected function createFormDefaultJsonResponse(FormInterface $form)
     {
         return $this->jsonResponse([
             'valid'      => $form->isValid(),

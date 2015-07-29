@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\AttributeBundle\Manager\Admin;
 
 use WellCommerce\Bundle\AdminBundle\Manager\AbstractAdminManager;
+use WellCommerce\Bundle\IntlBundle\Repository\LocaleRepositoryInterface;
 
 /**
  * Class AttributeGroupManager
@@ -21,4 +22,16 @@ use WellCommerce\Bundle\AdminBundle\Manager\AbstractAdminManager;
  */
 class AttributeGroupManager extends AbstractAdminManager
 {
+    /**
+     * @var LocaleRepositoryInterface
+     */
+    protected $localeRepository;
+
+    /**
+     * @param LocaleRepositoryInterface $localeRepository
+     */
+    public function setLocaleRepository(LocaleRepositoryInterface $localeRepository)
+    {
+        $this->localeRepository = $localeRepository;
+    }
 }

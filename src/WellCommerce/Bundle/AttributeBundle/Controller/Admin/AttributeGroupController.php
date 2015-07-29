@@ -19,8 +19,6 @@ use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
  * Class AttributeGroupController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class AttributeGroupController extends AbstractAdminController
 {
@@ -39,9 +37,9 @@ class AttributeGroupController extends AbstractAdminController
             ]);
         }
 
-        return [
+        return $this->display('index', [
             'groups' => $groups
-        ];
+        ]);
     }
 
     /**
@@ -49,6 +47,11 @@ class AttributeGroupController extends AbstractAdminController
      */
     public function addAction(Request $request)
     {
+        /**
+         * @var $manager \WellCommerce\Bundle\AttributeBundle\Manager\Admin\AttributeGroupManager
+         */
+        $manager = $this->getManager();
+
         $name     = $request->request->get('name');
         $locales  = $this->get('locale.repository')->findAll();
         $resource = $this->getManager()->initResource();
@@ -88,11 +91,11 @@ class AttributeGroupController extends AbstractAdminController
             return $this->redirectToAction('index');
         }
 
-        return [
+        return $this->display('edit', [
             'currentGroup' => $resource,
             'groups'       => $groups,
             'form'         => $form
-        ];
+        ]);
     }
 
     /**

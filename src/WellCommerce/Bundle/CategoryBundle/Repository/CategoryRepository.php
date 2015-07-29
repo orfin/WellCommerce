@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\Repository;
 
+use Doctrine\Common\Util\Debug;
 use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 
 /**

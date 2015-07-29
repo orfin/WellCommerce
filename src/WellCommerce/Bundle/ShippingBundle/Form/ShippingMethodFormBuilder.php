@@ -34,12 +34,12 @@ class ShippingMethodFormBuilder extends AbstractFormBuilder implements FormBuild
     {
         $requiredData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'required_data',
-            'label' => $this->trans('Required data')
+            'label' => $this->trans('fieldset.label.required_data')
         ]));
 
         $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
-            'label'       => $this->trans('Translations'),
+            'label'       => $this->trans('translation.label.translations'),
             'transformer' => new TranslationTransformer($this->get('shipping_method.repository'))
         ]));
 
@@ -73,13 +73,13 @@ class ShippingMethodFormBuilder extends AbstractFormBuilder implements FormBuild
 
         $costsData->addChild($this->getElement('select', [
             'name'    => 'currency',
-            'label'   => $this->trans('product.buy_price.currency.label'),
-            'options' => $this->get('currency.provider')->getSelect(),
+            'label'   => $this->trans('shipping_method.label.currency'),
+            'options' => $this->get('currency.provider')->getSelect()
         ]));
 
         $tax = $costsData->addChild($this->getElement('select', [
             'name'        => 'tax',
-            'label'       => $this->trans('product.buy_price.tax.label'),
+            'label'       => $this->trans('shipping_method.label.tax'),
             'options'     => $this->get('tax.collection')->getSelect(),
             'transformer' => new EntityToIdentifierTransformer($this->get('tax.repository'))
         ]));

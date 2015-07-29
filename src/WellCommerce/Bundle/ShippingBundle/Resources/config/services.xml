@@ -104,5 +104,9 @@
         </service>
 
         <service id="shipping_method.calculator.collection" class="WellCommerce\Bundle\ShippingBundle\Calculator\ShippingMethodCalculatorCollection" />
+
+        <service id="shipping_method.helper" class="WellCommerce\Bundle\ShippingBundle\Helper\ShippingMethodHelper">
+            <argument type="service" id="currency.converter"/>
+        </service>
     </services>
 </container>

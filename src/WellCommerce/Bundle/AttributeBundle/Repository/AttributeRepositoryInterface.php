@@ -30,15 +30,6 @@ interface AttributeRepositoryInterface extends RepositoryInterface
     public function findAll();
 
     /**
-     * Adds new attribute
-     *
-     * @param string $name
-     *
-     * @return \WellCommerce\Bundle\AttributeBundle\Entity\Attribute
-     */
-    public function addAttribute($name);
-
-    /**
      * Finds attribute entity by its id or creates a new one
      *
      * @param $data
@@ -55,14 +46,4 @@ interface AttributeRepositoryInterface extends RepositoryInterface
      * @return mixed
      */
     public function findAllByAttributeGroupId($id);
-
-    /**
-     * Creates new attribute and binds it to group
-     *
-     * @param AttributeGroup $group
-     * @param string         $name
-     *
-     * @return \WellCommerce\Bundle\AttributeBundle\Entity\Attribute
-     */
-    public function createNewAttribute(AttributeGroup $group, $name);
 }

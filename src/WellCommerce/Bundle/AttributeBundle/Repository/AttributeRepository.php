@@ -88,23 +88,6 @@ class AttributeRepository extends AbstractEntityRepository implements AttributeR
     /**
      * {@inheritdoc}
      */
-    public function createNewAttribute(AttributeGroup $group, $name)
-    {
-        $locales   = $this->getLocales();
-        $attribute = new Attribute();
-        $attribute->addGroup($group);
-
-        foreach ($locales as $locale) {
-            $attribute->translate($locale->getCode())->setName($name);
-        }
-        $attribute->mergeNewTranslations();
-
-        return $attribute;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function findOrCreate($data)
     {
         $accessor = $this->getPropertyAccessor();
@@ -125,22 +108,5 @@ class AttributeRepository extends AbstractEntityRepository implements AttributeR
         }
 
         return $item;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addAttribute($name)
-    {
-        $locales   = $this->getLocales();
-        $attribute = $this->createNew();
-
-        foreach ($locales as $locale) {
-            $attribute->translate($locale->getCode())->setName($name);
-        }
-        $attribute->mergeNewTranslations();
-        $this->getEntityManager()->persist($attribute);
-
-        return $attribute;
     }
 }

@@ -15,7 +15,7 @@ namespace WellCommerce\Bundle\CartBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class Dimension
+ * Class CartTotals
  *
  * @ORM\Embeddable
  *
@@ -28,35 +28,35 @@ class CartTotals
      *
      * @ORM\Column(name="quantity", type="decimal", precision=15, scale=4)
      */
-    private $quantity;
+    protected $quantity;
 
     /**
      * @var float
      *
      * @ORM\Column(name="weight", type="decimal", precision=15, scale=4)
      */
-    private $weight;
+    protected $weight;
 
     /**
      * @var float
      *
      * @ORM\Column(name="net_price", type="decimal", precision=15, scale=4)
      */
-    private $netPrice;
+    protected $netPrice;
 
     /**
      * @var float
      *
      * @ORM\Column(name="gross_price", type="decimal", precision=15, scale=4)
      */
-    private $grossPrice;
+    protected $grossPrice;
 
     /**
      * @var float
      *
      * @ORM\Column(name="tax_amount", type="decimal", precision=15, scale=4)
      */
-    private $taxAmount;
+    protected $taxAmount;
 
     /**
      * Constructor

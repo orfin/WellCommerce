@@ -23,6 +23,11 @@ use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
 class AttributeController extends AbstractAdminController
 {
     /**
+     * @var \WellCommerce\Bundle\AttributeBundle\Manager\Admin\AttributeManager
+     */
+    protected $manager;
+
+    /**
      * Ajax action for listing attributes
      *
      * @param Request $request
@@ -55,16 +60,6 @@ class AttributeController extends AbstractAdminController
     }
 
     /**
-     * Returns attribute repository
-     *
-     * @return \WellCommerce\Bundle\AttributeBundle\Repository\AttributeRepositoryInterface
-     */
-    protected function getRepository()
-    {
-        return $this->getManager()->getRepository();
-    }
-
-    /**
      * Adds new attribute value using ajax request
      *
      * @param Request $request
@@ -77,15 +72,23 @@ class AttributeController extends AbstractAdminController
             return $this->redirectToAction('index');
         }
 
-        $group     = $this->get('attribute_group.repository')->find($request->request->get('set'));
-        $attribute = $this->getRepository()->createNewAttribute($group, $request->request->get('name'));
+        /**
+         * @var $manager \WellCommerce\Bundle\AttributeBundle\Manager\Admin\AttributeManager
+         */
+        $manager = $this->getManager();
 
-        $em = $this->getEntityManager();
-        $em->persist($attribute);
-        $em->flush();
+        try {
+            $attribute = $manager->createAttribute();
 
-        return $this->jsonResponse([
-            'id' => $attribute->getId(),
-        ]);
+            return $this->jsonResponse([
+                'id' => $attribute->getId()
+            ]);
+
+        } catch (\Exception $e) {
+
+            return $this->jsonResponse([
+                'error' => $e->getMessage(),
+            ]);
+        }
     }
 }

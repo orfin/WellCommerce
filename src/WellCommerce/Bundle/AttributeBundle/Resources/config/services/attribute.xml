@@ -20,6 +20,12 @@
             <call method="setRepository">
                 <argument type="service" id="attribute.repository"/>
             </call>
+            <call method="setAttributeGroupRepository">
+                <argument type="service" id="attribute_group.repository"/>
+            </call>
+            <call method="setLocaleRepository">
+                <argument type="service" id="locale.repository"/>
+            </call>
         </service>
 
         <service id="attribute.controller.admin" class="%attribute.controller.admin.class%">

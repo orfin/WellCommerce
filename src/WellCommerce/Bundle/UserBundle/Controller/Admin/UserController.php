@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\UserBundle\Controller\Admin;
 
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
@@ -21,8 +20,6 @@ use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
  * Class UserController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class UserController extends AbstractAdminController
 {
@@ -35,10 +32,10 @@ class UserController extends AbstractAdminController
             'class'        => 'login-form',
         ], null);
 
-        return [
+        return $this->display('login', [
             'error' => $this->getSecurityErrors($request),
             'form'  => $form
-        ];
+        ]);
     }
 
     /**
@@ -71,7 +68,7 @@ class UserController extends AbstractAdminController
     {
         $user = $this->getUser();
         if ($user->getId() == $id) {
-            return new JsonResponse(['error' => 'You cannot delete your own admin account.']);
+            return $this->jsonResponse(['error' => 'You cannot delete your own admin account.']);
         }
 
         $em = $this->getEntityManager();
@@ -80,11 +77,11 @@ class UserController extends AbstractAdminController
             $resource = $this->getManager()->getRepository()->find($id);
             $em->remove($resource);
         } catch (\Exception $e) {
-            return new JsonResponse(['error' => $e->getMessage()]);
+            return $this->jsonResponse(['error' => $e->getMessage()]);
         }
 
         $em->flush();
 
-        return new JsonResponse(['success' => true]);
+        return $this->jsonResponse(['success' => true]);
     }
 }

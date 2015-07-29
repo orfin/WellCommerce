@@ -20,8 +20,6 @@ use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
  * Class LayoutBoxController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class LayoutBoxController extends AbstractAdminController
 {
@@ -37,12 +35,12 @@ class LayoutBoxController extends AbstractAdminController
                 $this->getManager()->createResource($resource, $request);
             }
 
-            return $this->createJsonDefaultResponse($form);
+            return $this->createFormDefaultJsonResponse($form);
         }
 
-        return [
+        return $this->display('add', [
             'form' => $form
-        ];
+        ]);
     }
 
     /**

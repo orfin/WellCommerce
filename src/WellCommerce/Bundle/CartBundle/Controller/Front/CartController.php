@@ -56,7 +56,7 @@ class CartController extends AbstractFrontController implements FrontControllerI
             }
         }
 
-        return $this->render('WellCommerceCartBundle:Front/Cart:index.html.twig', [
+        return $this->display('index', [
             'form'     => $form,
             'elements' => $form->getChildren(),
         ]);

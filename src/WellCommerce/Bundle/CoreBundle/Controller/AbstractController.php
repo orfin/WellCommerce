@@ -100,4 +100,56 @@ abstract class AbstractController extends Controller
      * @return \WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface
      */
     abstract protected function getManager();
+
+    /**
+     * Returns bundle object for class
+     *
+     * @param object $class
+     *
+     * @return \Symfony\Component\HttpKernel\Bundle\BundleInterface
+     */
+    protected function getBundleForClass($class)
+    {
+        $reflectionClass = new \ReflectionClass($class);
+        $bundles         = $this->get('kernel')->getBundles();
+
+        do {
+            $namespace = $reflectionClass->getNamespaceName();
+            foreach ($bundles as $bundle) {
+                if (0 === strpos($namespace, $bundle->getNamespace())) {
+                    return $bundle;
+                }
+            }
+            $reflectionClass = $reflectionClass->getParentClass();
+        } while ($reflectionClass);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function resolveCurrentTemplateName($template)
+    {
+        $reflectionClass = new \ReflectionClass($this);
+        $className       = $reflectionClass->getName();
+        $currentBundle   = $this->getBundleForClass($this);
+        $bundleName      = $currentBundle->getName();
+        preg_match('/Controller\\\(.+)Controller$/', $className, $matchController);
+
+        return sprintf('%s:%s:%s.html.twig', $bundleName, $matchController[1], $template);
+    }
+
+    /**
+     * Renders and displays the template
+     *
+     * @param string $templateName
+     * @param array  $templateVars
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    protected function display($templateName, array $templateVars = [])
+    {
+        $template = $this->resolveCurrentTemplateName($templateName);
+
+        return $this->render($template, $templateVars);
+    }
 }

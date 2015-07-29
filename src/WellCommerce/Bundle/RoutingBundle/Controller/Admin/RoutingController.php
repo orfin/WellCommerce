@@ -20,8 +20,6 @@ use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
  * Class RoutingController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class RoutingController extends AbstractAdminController
 {
@@ -38,13 +36,11 @@ class RoutingController extends AbstractAdminController
             return $this->getManager()->getRedirectHelper()->redirectToAction('index');
         }
 
-        $slug = $this->generateSlugFromRequest($request);
-
         $response = [
-            'slug' => $slug,
+            'slug' => $this->generateSlugFromRequest($request),
         ];
 
-        return new JsonResponse($response);
+        return $this->jsonResponse($response);
     }
 
     /**
