@@ -72,13 +72,8 @@ class AttributeController extends AbstractAdminController
             return $this->redirectToAction('index');
         }
 
-        /**
-         * @var $manager \WellCommerce\Bundle\AttributeBundle\Manager\Admin\AttributeManager
-         */
-        $manager = $this->getManager();
-
         try {
-            $attribute = $manager->createAttribute();
+            $attribute = $this->manager->createAttribute();
 
             return $this->jsonResponse([
                 'id' => $attribute->getId()

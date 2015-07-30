@@ -50,7 +50,7 @@ class ProductController extends AbstractAdminController
             return $this->jsonResponse(['error' => (string)$errors]);
         }
 
-        $this->getManager()->getDoctrineHelper()->getEntityManager()->flush();
+        $this->manager->getDoctrineHelper()->getEntityManager()->flush();
 
         return $this->jsonResponse(['success' => $this->trans('product.flash.success.saved')]);
     }

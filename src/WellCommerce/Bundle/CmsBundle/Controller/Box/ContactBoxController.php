@@ -24,6 +24,6 @@ class ContactBoxController extends AbstractBoxController implements BoxControlle
 {
     public function indexAction()
     {
-        return $this->render('WellCommerceCmsBundle:Box/Contact:index.html.twig');
+        return $this->display('index');
     }
 }

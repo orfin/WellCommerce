@@ -44,7 +44,7 @@ class ClientRegistrationBoxController extends AbstractBoxController
             }
         }
 
-        return $this->render('WellCommerceClientBundle:Box/ClientRegistration:index.html.twig', [
+        return $this->display('index', [
             'form'     => $form,
             'elements' => $form->getChildren(),
         ]);

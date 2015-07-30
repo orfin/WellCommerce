@@ -24,6 +24,6 @@ class PageBoxController extends AbstractBoxController implements BoxControllerIn
 {
     public function indexAction()
     {
-        return $this->render('WellCommerceCmsBundle:Box/Page:index.html.twig');
+        return $this->display('index');
     }
 }

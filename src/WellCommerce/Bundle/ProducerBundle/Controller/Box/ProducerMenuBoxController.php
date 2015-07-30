@@ -27,7 +27,7 @@ class ProducerMenuBoxController extends AbstractBoxController implements BoxCont
      */
     public function indexAction()
     {
-        return $this->render('WellCommerceProducerBundle:Box/ProducerMenu:index.html.twig', [
+        return $this->display('index', [
             'producers' => $this->get('producer.collection.front')->getSelect()
         ]);
     }

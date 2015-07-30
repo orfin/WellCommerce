@@ -23,6 +23,6 @@ class ClientMenuBoxController extends AbstractBoxController
 {
     public function indexAction()
     {
-        return $this->render('WellCommerceClientBundle:Box/ClientMenu:index.html.twig');
+        return $this->display('index');
     }
 }

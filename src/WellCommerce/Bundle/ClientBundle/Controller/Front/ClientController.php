@@ -25,7 +25,7 @@ class ClientController extends AbstractFrontController implements FrontControlle
 {
     public function loginAction()
     {
-        return $this->render('WellCommerceClientBundle:Front/Client:login.html.twig');
+        return $this->display('login');
     }
 
     public function loginCheckAction(Request $request)
@@ -34,7 +34,7 @@ class ClientController extends AbstractFrontController implements FrontControlle
 
     public function registerAction()
     {
-        return $this->render('WellCommerceClientBundle:Front/Client:register.html.twig');
+        return $this->display('register');
     }
 
     public function settingsAction()
@@ -44,16 +44,16 @@ class ClientController extends AbstractFrontController implements FrontControlle
 
     public function wishListAction()
     {
-        return $this->render('WellCommerceClientBundle:Front/Client:wishlist.html.twig');
+        return $this->display('wishlist');
     }
 
     public function addressBookAction()
     {
-        return $this->render('WellCommerceClientBundle:Front/Client:address_book.html.twig');
+        return $this->display('address_book');
     }
 
     public function ordersAction()
     {
-        return $this->render('WellCommerceClientBundle:Front/Client:orders.html.twig');
+        return $this->display('orders');
     }
 }

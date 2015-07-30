@@ -48,7 +48,7 @@ class ClientSettingsBoxController extends AbstractBoxController
             }
         }
 
-        return $this->render('WellCommerceClientBundle:Box/ClientSettings:index.html.twig', [
+        return $this->display('index', [
             'form'     => $form,
             'elements' => $form->getChildren(),
         ]);

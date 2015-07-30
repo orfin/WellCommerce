@@ -23,6 +23,6 @@ class ClientWishlistBoxController extends AbstractBoxController
 {
     public function indexAction()
     {
-        return $this->render('WellCommerceClientBundle:Box/ClientWishlist:index.html.twig');
+        return $this->display('index');
     }
 }

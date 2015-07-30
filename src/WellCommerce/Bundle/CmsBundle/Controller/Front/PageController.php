@@ -40,7 +40,7 @@ class PageController extends AbstractFrontController implements FrontControllerI
             'name' => $page->translate()->getName(),
         ]));
 
-        return $this->render('WellCommerceCmsBundle:Front/Page:index.html.twig', [
+        return $this->display('index', [
             'page' => $page
         ]);
     }

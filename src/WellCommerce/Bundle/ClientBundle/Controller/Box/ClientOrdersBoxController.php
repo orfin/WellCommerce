@@ -23,6 +23,6 @@ class ClientOrdersBoxController extends AbstractBoxController
 {
     public function indexAction()
     {
-        return $this->render('WellCommerceClientBundle:Box/ClientOrder:index.html.twig');
+        return $this->display('index');
     }
 }

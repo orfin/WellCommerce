@@ -23,6 +23,6 @@ class ClientAddressBookBoxController extends AbstractBoxController
 {
     public function indexAction()
     {
-        return $this->render('WellCommerceClientBundle:Box/ClientAddressBook:index.html.twig');
+        return $this->display('index');
     }
 }

@@ -27,7 +27,7 @@ abstract class AbstractFrontController extends AbstractController implements Fro
     /**
      * @var FrontManagerInterface
      */
-    private $manager;
+    protected $manager;
 
     /**
      * Constructor

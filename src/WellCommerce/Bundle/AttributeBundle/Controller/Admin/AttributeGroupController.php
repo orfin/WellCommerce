@@ -23,81 +23,81 @@ use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
 class AttributeGroupController extends AbstractAdminController
 {
     /**
+     * @var \WellCommerce\Bundle\AttributeBundle\Manager\Admin\AttributeGroupManager
+     */
+    protected $manager;
+    
+    /**
      * {@inheritdoc}
      */
     public function indexAction()
     {
-        $groups = $this->getManager()->getRepository()->findAll();
-
+        $groups = $this->manager->getRepository()->findAll();
+        
         if (count($groups) > 0) {
             $firstGroup = current($groups);
-
+            
             return $this->redirectToAction('edit', [
                 'id' => $firstGroup['id']
             ]);
         }
-
+        
         return $this->display('index', [
             'groups' => $groups
         ]);
     }
-
+    
     /**
      * {@inheritdoc}
      */
     public function addAction(Request $request)
     {
-        /**
-         * @var $manager \WellCommerce\Bundle\AttributeBundle\Manager\Admin\AttributeGroupManager
-         */
-        $manager = $this->getManager();
-
         $name     = $request->request->get('name');
         $locales  = $this->get('locale.repository')->findAll();
-        $resource = $this->getManager()->initResource();
-
+        $resource = $this->manager->initResource();
+        
         foreach ($locales as $locale) {
             $resource->translate($locale->getCode())->setName($name);
         }
-
+        
         $resource->mergeNewTranslations();
-
-        $this->getManager()->createResource($resource, $request);
-
+        
+        $this->manager->createResource($resource, $request);
+        
         return $this->jsonResponse([
             'id' => $resource->getId(),
         ]);
     }
-
+    
     /**
      * {@inheritdoc}
      */
     public function editAction(Request $request)
     {
-        $groups   = $this->getManager()->getRepository()->findAll();
-        $resource = $this->getManager()->findResource($request);
-        $form     = $this->getManager()->getForm($resource, [
+        $groups   = $this->manager->getRepository()->findAll();
+        $resource = $this->manager->findResource($request);
+        $form     = $this->manager->getForm($resource, [
             'class' => 'attributeGroupEditor'
         ]);
-
+        
         if ($form->handleRequest()->isValid()) {
-            $this->getManager()->updateResource($resource, $request);
+            $this->manager->updateResource($resource, $request);
             if ($form->isAction('continue')) {
-                return $this->getManager()->getRedirectHelper()->redirectToAction('edit', [
+                return $this->manager->getRedirectHelper()->redirectToAction('edit', [
                     'id' => $resource->getId()
                 ]);
             }
-
+            
             return $this->redirectToAction('index');
         }
-
+        
         return $this->display('edit', [
             'currentGroup' => $resource,
             'groups'       => $groups,
             'form'         => $form
         ]);
     }
-
+    
     /**
      * Returns all attribute groups as json
      *
@@ -110,10 +110,10 @@ class AttributeGroupController extends AbstractAdminController
         if (!$request->isXmlHttpRequest()) {
             return $this->redirectToAction('index');
         }
-
-        $groups = $this->getManager()->getRepository()->findAll();
+        
+        $groups = $this->manager->getRepository()->findAll();
         $sets   = [];
-
+        
         foreach ($groups as $group) {
             $sets[] = [
                 'id'               => $group['id'],
@@ -121,11 +121,11 @@ class AttributeGroupController extends AbstractAdminController
                 'current_category' => false,
             ];
         }
-
+        
         $response = [
             'sets' => $sets,
         ];
-
+        
         return $this->jsonResponse($response);
     }
 }

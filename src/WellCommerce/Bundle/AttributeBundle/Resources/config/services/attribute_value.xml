@@ -15,6 +15,12 @@
             <call method="setRepository">
                 <argument type="service" id="attribute_value.repository"/>
             </call>
+            <call method="setLocaleRepository">
+                <argument type="service" id="locale.repository"/>
+            </call>
+            <call method="setAttributeRepository">
+                <argument type="service" id="attribute.repository"/>
+            </call>
         </service>
 
         <service id="attribute_value.controller.admin" class="WellCommerce\Bundle\AttributeBundle\Controller\Admin\AttributeValueController">
