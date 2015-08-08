@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\Controller\Admin;
 
-use Doctrine\Common\Util\Debug;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
 
@@ -86,11 +85,7 @@ class CategoryController extends AbstractAdminController
                 $this->manager->updateResource($resource, $request);
             }
 
-            return $this->jsonResponse([
-                'valid'      => $valid,
-                'redirectTo' => '',
-                'error'      => $form->getError()
-            ]);
+            return $this->createFormDefaultJsonResponse($form);
         }
 
         return $this->display('edit', [
