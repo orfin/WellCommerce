@@ -12,6 +12,7 @@
             <argument type="service" id="doctrine_helper"/>
             <argument type="service" id="translator"/>
             <argument type="service" id="request_helper"/>
+            <argument type="service" id="validator"/>
             <call method="setProviders">
                 <argument type="service" id="resource.provider.collection" />
             </call>
@@ -24,10 +25,10 @@
             </call>
         </service>
 
-        <service id="breadcrumb.builder" class="WellCommerce\Bundle\WebBundle\Breadcrumb\BreadcrumbBuilder" />
+        <service id="breadcrumb.collection" class="WellCommerce\Bundle\WebBundle\Breadcrumb\BreadcrumbItemCollection" />
 
         <service id="twig.extension.breadcrumb" class="WellCommerce\Bundle\WebBundle\Twig\Extension\BreadcrumbExtension">
-            <argument type="service" id="breadcrumb.builder"/>
+            <argument type="service" id="breadcrumb.collection"/>
             <tag name="twig.extension"/>
         </service>
     </services>

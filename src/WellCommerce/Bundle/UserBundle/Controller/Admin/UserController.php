@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\UserBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Security\Core\Security;
 use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
 
 /**
@@ -50,11 +50,11 @@ class UserController extends AbstractAdminController
         $session = $request->getSession();
         $error   = '';
 
-        if ($request->attributes->has(SecurityContextInterface::AUTHENTICATION_ERROR)) {
-            $error = $request->attributes->get(SecurityContextInterface::AUTHENTICATION_ERROR);
-        } elseif (null !== $session && $session->has(SecurityContextInterface::AUTHENTICATION_ERROR)) {
-            $error = $session->get(SecurityContextInterface::AUTHENTICATION_ERROR);
-            $session->remove(SecurityContextInterface::AUTHENTICATION_ERROR);
+        if ($request->attributes->has(Security::AUTHENTICATION_ERROR)) {
+            $error = $request->attributes->get(Security::AUTHENTICATION_ERROR);
+        } elseif (null !== $session && $session->has(Security::AUTHENTICATION_ERROR)) {
+            $error = $session->get(Security::AUTHENTICATION_ERROR);
+            $session->remove(Security::AUTHENTICATION_ERROR);
         }
 
         return $error;
@@ -67,7 +67,7 @@ class UserController extends AbstractAdminController
     public function deleteAction($id)
     {
         $user = $this->getUser();
-        if ($user->getId() == $id) {
+        if ($user->getId() === $id) {
             return $this->jsonResponse(['error' => 'You cannot delete your own admin account.']);
         }
 

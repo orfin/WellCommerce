@@ -10,26 +10,22 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\WebBundle\Breadcrumb;
+namespace WellCommerce\Bundle\ProductBundle\Exception;
 
 /**
- * Interface BreadcrumbInterface
+ * Class OutOfStockException
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface BreadcrumbBuilderInterface
+class ProductNotFoundException extends \RuntimeException
 {
     /**
-     * Adds new item to breadcrumb
+     * Constructor
      *
-     * @param BreadcrumbItemInterface $item
+     * @param int $id Product identifier
      */
-    public function add(BreadcrumbItemInterface $item);
-
-    /**
-     * Returns all breadcrumbs as an array
-     *
-     * @return array
-     */
-    public function all();
+    public function __construct($id)
+    {
+        parent::__construct(sprintf('Product with ID "%s" was not found.', $id));
+    }
 }

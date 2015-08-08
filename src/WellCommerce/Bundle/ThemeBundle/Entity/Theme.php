@@ -33,29 +33,29 @@ class Theme
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
      */
-    private $name;
+    protected $name;
 
     /**
      * @var string
      *
      * @ORM\Column(name="folder", type="string", length=255)
      */
-    private $folder;
+    protected $folder;
 
     /**
      * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\ThemeBundle\Entity\ThemeCss", mappedBy="theme")
      */
-    private $css;
+    protected $css;
 
     /**
-     * Returns theme identifier
+     * Returns the theme's identifier
      *
      * @return int
      */
@@ -65,7 +65,7 @@ class Theme
     }
 
     /**
-     * Returns theme name
+     * Returns the theme's name
      *
      * @return string
      */
@@ -75,17 +75,21 @@ class Theme
     }
 
     /**
-     * Sets theme name
+     * Sets the theme's name
      *
-     * @param $name
+     * @param string $name
+     *
+     * @return $this
      */
     public function setName($name)
     {
         $this->name = $name;
+
+        return $this;
     }
 
     /**
-     * Returns theme folder name
+     * Returns theme's folder name
      *
      * @return string
      */
@@ -95,17 +99,23 @@ class Theme
     }
 
     /**
-     * Sets theme folder name
+     * Sets theme's folder name
      *
      * @param $folder
+     *
+     * @return $this
      */
     public function setFolder($folder)
     {
         $this->folder = $folder;
+
+        return $this;
     }
 
     /**
-     * @return mixed
+     * Returns the theme's CSS values
+     *
+     * @return ThemeCss[]
      */
     public function getCss()
     {
@@ -113,10 +123,16 @@ class Theme
     }
 
     /**
-     * @param mixed $css
+     * Sets an array of css values for theme
+     *
+     * @param array $css
+     *
+     * @return $this
      */
     public function setCss($css)
     {
         $this->css = $css;
+
+        return $this;
     }
 }

@@ -24,6 +24,6 @@ class HomePageController extends AbstractFrontController implements FrontControl
 {
     public function indexAction()
     {
-        return $this->render('WellCommerceWebBundle:Front/HomePage:index.html.twig');
+        return $this->display('index');
     }
 }

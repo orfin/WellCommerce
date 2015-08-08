@@ -134,14 +134,15 @@ class CartManager extends AbstractFrontManager
     /**
      * Changes item quantity on cart
      *
-     * @return mixed
+     * @param int $id
+     * @param int $qty
+     *
+     * @return bool
      */
-    public function changeItemQuantity()
+    public function changeItemQuantity($id, $qty)
     {
         $entityManager = $this->getDoctrineHelper()->getEntityManager();
         $currentCart   = $this->getCartProvider()->getCurrentCart();
-        $id            = (int)$this->getRequestHelper()->getRequestAttribute('id');
-        $qty           = (int)$this->getRequestHelper()->getRequestAttribute('qty');
         $cartProduct   = $this->getCartProductById($currentCart, $id);
 
         if (null === $cartProduct) {
@@ -149,7 +150,7 @@ class CartManager extends AbstractFrontManager
         }
 
         if ($qty < 1) {
-            return $this->deleteItem();
+            return $this->deleteItem($id);
         }
 
         $cartProduct->setQuantity($qty);
@@ -178,15 +179,16 @@ class CartManager extends AbstractFrontManager
     }
 
     /**
-     * Deletes item from cart
+     * Deletes the item from cart
+     *
+     * @param int $id
      *
      * @return bool
      */
-    public function deleteItem()
+    public function deleteItem($id)
     {
         $entityManager = $this->getDoctrineHelper()->getEntityManager();
         $currentCart   = $this->getCartProvider()->getCurrentCart();
-        $id            = (int)$this->getRequestHelper()->getRequestAttribute('id');
         $cartProduct   = $this->getCartProductById($currentCart, $id);
 
         if (null === $cartProduct) {

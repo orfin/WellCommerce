@@ -30,6 +30,11 @@ interface ManagerInterface
     const POST_REMOVE_EVENT = 'post_remove';
 
     /**
+     * @return \Symfony\Component\Validator\Validator\ValidatorInterface
+     */
+    public function getValidator();
+
+    /**
      * Returns the RedirectHelper
      *
      * @return \WellCommerce\Bundle\CoreBundle\Helper\Redirect\RedirectHelperInterface

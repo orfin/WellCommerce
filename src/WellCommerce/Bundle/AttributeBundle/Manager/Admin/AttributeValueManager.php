@@ -105,6 +105,7 @@ class AttributeValueManager extends AbstractAdminManager
         $value->mergeNewTranslations();
         $value->setAttribute($attribute);
 
+        $entityManager->persist($value);
         $entityManager->flush();
 
         return $value;

@@ -66,10 +66,6 @@ class CategoryFormBuilder extends AbstractFormBuilder implements FormBuilderInte
             'label' => $this->trans('category.hierarchy.label'),
         ]));
 
-        $requiredData->addChild($this->getElement('tip', [
-            'tip' => '<p>'.$this->trans('category.parent.help').'</p>'
-        ]));
-
         $requiredData->addChild($this->getElement('tree', [
             'name'        => 'parent',
             'label'       => $this->trans('category.parent.label'),

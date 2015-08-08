@@ -15,11 +15,11 @@ namespace WellCommerce\Bundle\WebBundle\Breadcrumb;
 use WellCommerce\Bundle\CoreBundle\Collection\AbstractCollection;
 
 /**
- * Class BreadcrumbBuilder
+ * Class BreadcrumbCollection
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class BreadcrumbBuilder extends AbstractCollection implements BreadcrumbBuilderInterface
+class BreadcrumbItemCollection extends AbstractCollection implements BreadcrumbItemCollectionInterface
 {
     /**
      * {@inheritdoc}

@@ -16,7 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 /**
- * Class Locale
+ * Class Unit
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
@@ -36,7 +36,7 @@ class Unit
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * Get id.

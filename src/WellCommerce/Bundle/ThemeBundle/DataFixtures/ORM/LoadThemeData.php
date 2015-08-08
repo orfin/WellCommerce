@@ -31,6 +31,7 @@ class LoadThemeData extends AbstractDataFixture
         $theme = new Theme();
         $theme->setName('WellCommerce Default Theme');
         $theme->setFolder('wellcommerce');
+
         $manager->persist($theme);
         $manager->flush();
 

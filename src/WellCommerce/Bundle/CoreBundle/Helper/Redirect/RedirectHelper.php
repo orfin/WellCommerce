@@ -25,7 +25,7 @@ class RedirectHelper implements RedirectHelperInterface
     /**
      * @var \Symfony\Component\Routing\RouterInterface
      */
-    private $router;
+    protected $router;
 
     /**
      * @param RouterInterface $router

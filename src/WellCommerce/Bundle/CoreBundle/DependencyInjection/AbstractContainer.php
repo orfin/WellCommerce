@@ -57,18 +57,6 @@ class AbstractContainer extends ContainerAware
     }
 
     /**
-     * Returns current locale
-     *
-     * @return mixed
-     */
-    public function getCurrentLocale()
-    {
-        $request = $this->get('request');
-
-        return $request->getLocale();
-    }
-
-    /**
      * Returns true if the service id is defined.
      *
      * @param string $id The service id
@@ -100,16 +88,6 @@ class AbstractContainer extends ContainerAware
     public function getTranslator()
     {
         return $this->container->get('translator.default');
-    }
-
-    /**
-     * Shortcut to return the session service
-     *
-     * @return object Session service
-     */
-    final protected function getSession()
-    {
-        return $this->container->get('session');
     }
 
     /**
@@ -193,7 +171,7 @@ class AbstractContainer extends ContainerAware
      */
     final protected function getCache()
     {
-        return $this->container->get('cache');
+        return $this->container->get('doctrine.cache');
     }
 
     /**
@@ -218,12 +196,12 @@ class AbstractContainer extends ContainerAware
     final protected function getThemeDir($themeFolder = '')
     {
         $kernelDir = $this->get('kernel')->getRootDir();
-        $webDir    = $kernelDir.'/../web';
+        $webDir    = $kernelDir . '/../web';
 
         if (strlen($themeFolder)) {
-            $dir = $webDir.DIRECTORY_SEPARATOR.'themes'.DIRECTORY_SEPARATOR.$themeFolder;
+            $dir = $webDir . DIRECTORY_SEPARATOR . 'themes' . DIRECTORY_SEPARATOR . $themeFolder;
         } else {
-            $dir = $webDir.DIRECTORY_SEPARATOR.'themes';
+            $dir = $webDir . DIRECTORY_SEPARATOR . 'themes';
         }
 
         if (!is_dir($dir)) {

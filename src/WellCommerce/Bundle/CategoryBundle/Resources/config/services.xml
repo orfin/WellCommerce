@@ -12,11 +12,21 @@
             <argument type="service" id="doctrine_helper"/>
             <argument type="service" id="translator"/>
             <argument type="service" id="request_helper"/>
+            <argument type="service" id="validator"/>
             <call method="setRepository">
                 <argument type="service" id="category.repository"/>
             </call>
             <call method="setFormBuilder">
                 <argument type="service" id="category.form_builder"/>
+            </call>
+            <call method="setTreeFormBuilder">
+                <argument type="service" id="category_tree.form_builder"/>
+            </call>
+            <call method="setShopContext">
+                <argument type="service" id="shop.context.admin"/>
+            </call>
+            <call method="setLocaleRepository">
+                <argument type="service" id="locale.repository"/>
             </call>
         </service>
 
@@ -35,6 +45,7 @@
             <argument type="service" id="doctrine_helper"/>
             <argument type="service" id="translator"/>
             <argument type="service" id="request_helper"/>
+            <argument type="service" id="validator"/>
             <call method="setRepository">
                 <argument type="service" id="category.repository"/>
             </call>

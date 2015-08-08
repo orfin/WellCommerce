@@ -37,16 +37,6 @@ interface AttributeValueRepositoryInterface extends RepositoryInterface
     public function findAllByAttributeId($id);
 
     /**
-     * Adds new attribute value and binds it to attribute
-     *
-     * @param Attribute $attribute
-     * @param           $name
-     *
-     * @return \WellCommerce\Bundle\AttributeBundle\Entity\AttributeValue
-     */
-    public function addAttributeValue(Attribute $attribute, $name);
-
-    /**
      * Makes a collection of attribute values
      *
      * @param Attribute $attribute
