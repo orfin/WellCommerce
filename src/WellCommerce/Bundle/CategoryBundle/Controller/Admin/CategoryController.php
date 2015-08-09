@@ -59,9 +59,9 @@ class CategoryController extends AbstractAdminController
      */
     public function addAction(Request $request)
     {
-        $name     = (string)$request->request->get('name');
-        $parent   = (int)$request->request->get('parent');
-        $category = $this->manager->quickAddCategory($name, $parent);
+        $categoriesName = (string)$request->request->get('name');
+        $parentCategory = (int)$request->request->get('parent');
+        $category       = $this->manager->quickAddCategory($categoriesName, $parentCategory);
 
         return $this->jsonResponse([
             'id' => $category->getId(),
