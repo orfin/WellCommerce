@@ -106,13 +106,14 @@ abstract class AbstractManager implements ManagerInterface
         $this->doctrineHelper  = $doctrineHelper;
         $this->translator      = $translator;
         $this->requestHelper   = $requestHelper;
-        $this->validator = $validator;
+        $this->validator       = $validator;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getValidator(){
+    public function getValidator()
+    {
         return $this->validator;
     }
 
