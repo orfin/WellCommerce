@@ -60,7 +60,7 @@
         </service>
 
         <service id="client_login.layout_box.configurator" class="WellCommerce\Bundle\ClientBundle\Layout\ClientLoginBoxConfigurator">
-            <argument>ClientLoginBox</argument>
+            <argument>ClientLogin</argument>
             <argument>client_login.layout_box.controller</argument>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
@@ -76,7 +76,7 @@
         </service>
 
         <service id="client_registration.layout_box.configurator" class="WellCommerce\Bundle\ClientBundle\Layout\ClientRegistrationBoxConfigurator">
-            <argument>ClientRegistrationBox</argument>
+            <argument>ClientRegistration</argument>
             <argument>client_registration.layout_box.controller</argument>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
@@ -92,7 +92,7 @@
         </service>
 
         <service id="client_address_book.layout_box.configurator" class="WellCommerce\Bundle\ClientBundle\Layout\ClientAddressBookBoxConfigurator">
-            <argument>ClientAddressBookBox</argument>
+            <argument>ClientAddressBook</argument>
             <argument>client_address_book.layout_box.controller</argument>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
@@ -108,7 +108,7 @@
         </service>
 
         <service id="client_menu.layout_box.configurator" class="WellCommerce\Bundle\ClientBundle\Layout\ClientMenuBoxConfigurator">
-            <argument>ClientMenuBox</argument>
+            <argument>ClientMenu</argument>
             <argument>client_menu.layout_box.controller</argument>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
@@ -124,7 +124,7 @@
         </service>
 
         <service id="client_orders.configurator" class="WellCommerce\Bundle\ClientBundle\Layout\ClientOrdersBoxConfigurator">
-            <argument>ClientOrdersBox</argument>
+            <argument>ClientOrders</argument>
             <argument>client_orders.layout_box.controller</argument>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
@@ -140,7 +140,7 @@
         </service>
 
         <service id="client_settings.configurator" class="WellCommerce\Bundle\ClientBundle\Layout\ClientSettingsBoxConfigurator">
-            <argument>ClientSettingsBox</argument>
+            <argument>ClientSettings</argument>
             <argument>client_settings.layout_box.controller</argument>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
@@ -156,7 +156,7 @@
         </service>
 
         <service id="client_wishlist.configurator" class="WellCommerce\Bundle\ClientBundle\Layout\ClientWishlistBoxConfigurator">
-            <argument>ClientWishListBox</argument>
+            <argument>ClientWishList</argument>
             <argument>client_wishlist.layout_box.controller</argument>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>

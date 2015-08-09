@@ -59,7 +59,7 @@
         </service>
 
         <service id="page.layout_box.configurator" class="WellCommerce\Bundle\CmsBundle\Layout\PageBoxConfigurator">
-            <argument>PageBox</argument>
+            <argument>Page</argument>
             <argument>page.layout_box.controller</argument>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
