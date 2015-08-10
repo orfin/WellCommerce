@@ -53,7 +53,5 @@ class UnitTranslation implements LocaleAwareInterface
     public function setName($name)
     {
         $this->name = $name;
-
-        return $this;
     }
 }

@@ -12,6 +12,7 @@
             <argument type="service" id="doctrine_helper"/>
             <argument type="service" id="translator"/>
             <argument type="service" id="request_helper"/>
+            <argument type="service" id="validator"/>
             <call method="setRepository">
                 <argument type="service" id="product.repository"/>
             </call>
@@ -31,6 +32,7 @@
             <argument type="service" id="doctrine_helper"/>
             <argument type="service" id="translator"/>
             <argument type="service" id="request_helper"/>
+            <argument type="service" id="validator"/>
             <call method="setRepository">
                 <argument type="service" id="product.repository"/>
             </call>
@@ -129,7 +131,7 @@
         </service>
 
         <service id="product_info.layout_box.configurator" class="WellCommerce\Bundle\ProductBundle\Layout\ProductInfoBoxConfigurator">
-            <argument>ProductInfoBox</argument>
+            <argument>ProductInfo</argument>
             <argument>product_info.layout_box.controller</argument>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
@@ -145,7 +147,7 @@
         </service>
 
         <service id="layered_navigation.layout_box.configurator" class="WellCommerce\Bundle\ProductBundle\Layout\ProductLayeredNavigationBoxConfigurator">
-            <argument>ProductLayeredNavigationBox</argument>
+            <argument>ProductLayeredNavigation</argument>
             <argument>layered_navigation.layout_box.controller</argument>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>

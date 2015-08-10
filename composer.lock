@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/beberlei/DoctrineExtensions.git",
-                "reference": "6f4a04e8c96d687085f54b857708255ccf22a3ba"
+                "reference": "11862cacaf0ea13d1bf311b1c90f39372b4698ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/beberlei/DoctrineExtensions/zipball/6f4a04e8c96d687085f54b857708255ccf22a3ba",
-                "reference": "6f4a04e8c96d687085f54b857708255ccf22a3ba",
+                "url": "https://api.github.com/repos/beberlei/DoctrineExtensions/zipball/11862cacaf0ea13d1bf311b1c90f39372b4698ce",
+                "reference": "11862cacaf0ea13d1bf311b1c90f39372b4698ce",
                 "shasum": ""
             },
             "require": {
@@ -66,7 +66,7 @@
                 "doctrine",
                 "orm"
             ],
-            "time": "2015-04-09 09:13:26"
+            "time": "2015-08-03 08:42:57"
         },
         {
             "name": "behat/transliterator",
@@ -1426,12 +1426,21 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/hoaproject/Socket.git",
+<<<<<<< HEAD
                 "reference": "0b0f4c33b55f7a0fefdb252a02375f3ce49ac9c0"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/hoaproject/Socket/zipball/0b0f4c33b55f7a0fefdb252a02375f3ce49ac9c0",
                 "reference": "0b0f4c33b55f7a0fefdb252a02375f3ce49ac9c0",
+=======
+                "reference": "c851694e7dfb1cf2c52b0bc394e30568fa72382b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hoaproject/Socket/zipball/c851694e7dfb1cf2c52b0bc394e30568fa72382b",
+                "reference": "c851694e7dfb1cf2c52b0bc394e30568fa72382b",
+>>>>>>> origin/development
                 "shasum": ""
             },
             "require": {
@@ -1474,7 +1483,11 @@
                 "tcp",
                 "udp"
             ],
+<<<<<<< HEAD
             "time": "2015-07-22 12:38:42"
+=======
+            "time": "2015-08-03 08:59:01"
+>>>>>>> origin/development
         },
         {
             "name": "hoa/stream",

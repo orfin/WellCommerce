@@ -41,7 +41,7 @@ class UnitFormBuilder extends AbstractFormBuilder implements FormBuilderInterfac
 
         $unitTranslationData->addChild($this->getElement('text_field', [
             'name'  => 'name',
-            'label' => $this->trans('unit.name.label'),
+            'label' => $this->trans('unit.label.name'),
         ]));
 
         $unitForm->addFilter($this->getFilter('no_code'));

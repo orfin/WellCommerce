@@ -48,17 +48,17 @@ class LoadLayoutBoxData extends AbstractDataFixture
     protected function createCategoryBoxes()
     {
         $boxes = [
-            'CategoryMenuBox'     => [
+            'CategoryMenu'     => [
                 'identifier' => 'category_menu',
                 'name'       => 'Categories',
                 'settings'   => []
             ],
-            'CategoryInfoBox'     => [
+            'CategoryInfo'     => [
                 'identifier' => 'category_info',
                 'name'       => 'Category',
                 'settings'   => []
             ],
-            'CategoryProductsBox' => [
+            'CategoryProducts' => [
                 'identifier' => 'category_products',
                 'name'       => 'Category products',
                 'settings'   => [
@@ -75,35 +75,35 @@ class LoadLayoutBoxData extends AbstractDataFixture
     protected function createClientBoxes()
     {
         $boxes = [
-            'ClientRegistrationBox'   => [
+            'ClientRegistration'   => [
                 'identifier' => 'client_registration',
                 'name'       => 'Sign-in'
             ],
-            'ClientLoginBox'          => [
+            'ClientLogin'          => [
                 'identifier' => 'client_login',
                 'name'       => 'Sign-up'
             ],
-            'ClientOrderBox'          => [
+            'ClientOrder'          => [
                 'identifier' => 'client_order',
                 'name'       => 'Orders'
             ],
-            'ClientSettingsBox'       => [
+            'ClientSettings'       => [
                 'identifier' => 'client_settings',
                 'name'       => 'Account settings'
             ],
-            'ClientMenuBox'       => [
+            'ClientMenu'           => [
                 'identifier' => 'client_menu',
                 'name'       => 'Client menu'
             ],
-            'ClientWishlistBox'       => [
+            'ClientWishlist'       => [
                 'identifier' => 'client_wishlist',
                 'name'       => 'Wishlist'
             ],
-            'ClientForgotPasswordBox' => [
+            'ClientForgotPassword' => [
                 'identifier' => 'client_forgot_password',
                 'name'       => 'Password reset'
             ],
-            'ClientAddressBookBox'    => [
+            'ClientAddressBook'    => [
                 'identifier' => 'client_address_book',
                 'name'       => 'Address book'
             ],
@@ -117,11 +117,11 @@ class LoadLayoutBoxData extends AbstractDataFixture
     protected function createProducerBoxes()
     {
         $boxes = [
-            'ProducerMenuBox'     => [
+            'ProducerMenu'     => [
                 'identifier' => 'producer_menu',
                 'name'       => 'Producers'
             ],
-            'ProducerProductsBox' => [
+            'ProducerProducts' => [
                 'identifier' => 'producer_products',
                 'name'       => 'Producer products'
             ],
@@ -136,7 +136,7 @@ class LoadLayoutBoxData extends AbstractDataFixture
     {
         $boxes = [
             0 => [
-                'type'       => 'ProductStatusBox',
+                'type'       => 'ProductStatus',
                 'identifier' => 'product_bestseller',
                 'name'       => 'Bestsellers',
                 'settings'   => [
@@ -144,7 +144,7 @@ class LoadLayoutBoxData extends AbstractDataFixture
                 ]
             ],
             1 => [
-                'type'       => 'ProductStatusBox',
+                'type'       => 'ProductStatus',
                 'identifier' => 'product_new_arrivals',
                 'name'       => 'New arrivals',
                 'settings'   => [
@@ -152,7 +152,7 @@ class LoadLayoutBoxData extends AbstractDataFixture
                 ]
             ],
             2 => [
-                'type'       => 'ProductShowcaseBox',
+                'type'       => 'ProductShowcase',
                 'identifier' => 'product_showcase',
                 'name'       => 'Showcase',
                 'settings'   => [
@@ -160,7 +160,7 @@ class LoadLayoutBoxData extends AbstractDataFixture
                 ]
             ],
             3 => [
-                'type'       => 'ProductStatusBox',
+                'type'       => 'ProductStatus',
                 'identifier' => 'product_dynamic_status',
                 'name'       => 'Dynamic product status box',
                 'settings'   => []
@@ -175,19 +175,19 @@ class LoadLayoutBoxData extends AbstractDataFixture
     protected function createCheckoutBoxes()
     {
         $boxes = [
-            'CartBox'         => [
+            'Cart'         => [
                 'identifier' => 'cart',
                 'name'       => 'Cart'
             ],
-            'CheckoutBox'     => [
+            'Checkout'     => [
                 'identifier' => 'checkout',
                 'name'       => 'Checkout'
             ],
-            'FinalizationBox' => [
+            'Finalization' => [
                 'identifier' => 'finalization',
                 'name'       => 'Summary'
             ],
-            'PaymentBox'      => [
+            'Payment'      => [
                 'identifier' => 'payment',
                 'name'       => 'Payment'
             ],
@@ -201,11 +201,11 @@ class LoadLayoutBoxData extends AbstractDataFixture
     protected function createProductBoxes()
     {
         $boxes = [
-            'ProductInfoBox'              => [
+            'ProductInfo'              => [
                 'identifier' => 'product_info',
                 'name'       => 'Product'
             ],
-            'ProductLayeredNavigationBox' => [
+            'ProductLayeredNavigation' => [
                 'identifier' => 'layered_navigation',
                 'name'       => 'Layered navigation'
             ],

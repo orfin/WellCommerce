@@ -37,13 +37,13 @@ class ThemeFormBuilder extends AbstractFormBuilder implements FormBuilderInterfa
 
         $requiredData->addChild($this->getElement('text_field', [
             'name'  => 'name',
-            'label' => $this->trans('Theme name'),
+            'label' => $this->trans('theme.label.name'),
         ]));
 
         $requiredData->addChild($this->getElement('select', [
             'name'    => 'folder',
-            'label'   => $this->trans('Theme folder'),
-            'comment' => $this->trans('Choose theme folder from list'),
+            'label'   => $this->trans('theme.label.folder'),
+            'comment' => $this->trans('theme.comment.folder'),
             'options' => $this->getFolderDirectories()
         ]));
 

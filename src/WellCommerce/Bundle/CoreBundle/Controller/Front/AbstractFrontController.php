@@ -80,9 +80,7 @@ abstract class AbstractFrontController extends AbstractController implements Fro
      */
     protected function addBreadCrumbItem(BreadcrumbItem $item)
     {
-        $builder = $this->get('breadcrumb.builder');
-
-        $builder->add($item);
+        $this->get('breadcrumb.collection')->add($item);
     }
 
     /**

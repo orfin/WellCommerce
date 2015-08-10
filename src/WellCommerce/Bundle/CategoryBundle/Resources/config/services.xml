@@ -12,11 +12,21 @@
             <argument type="service" id="doctrine_helper"/>
             <argument type="service" id="translator"/>
             <argument type="service" id="request_helper"/>
+            <argument type="service" id="validator"/>
             <call method="setRepository">
                 <argument type="service" id="category.repository"/>
             </call>
             <call method="setFormBuilder">
                 <argument type="service" id="category.form_builder"/>
+            </call>
+            <call method="setTreeFormBuilder">
+                <argument type="service" id="category_tree.form_builder"/>
+            </call>
+            <call method="setShopContext">
+                <argument type="service" id="shop.context.admin"/>
+            </call>
+            <call method="setLocaleRepository">
+                <argument type="service" id="locale.repository"/>
             </call>
         </service>
 
@@ -35,6 +45,7 @@
             <argument type="service" id="doctrine_helper"/>
             <argument type="service" id="translator"/>
             <argument type="service" id="request_helper"/>
+            <argument type="service" id="validator"/>
             <call method="setRepository">
                 <argument type="service" id="category.repository"/>
             </call>
@@ -58,7 +69,7 @@
         </service>
 
         <service id="category_menu.layout_box.configurator" class="WellCommerce\Bundle\CategoryBundle\Layout\CategoryMenuBoxConfigurator">
-            <argument>CategoryMenuBox</argument>
+            <argument>CategoryMenu</argument>
             <argument>category_menu.layout_box.controller</argument>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
@@ -74,7 +85,7 @@
         </service>
 
         <service id="category_info.layout_box.configurator" class="WellCommerce\Bundle\CategoryBundle\Layout\CategoryInfoBoxConfigurator">
-            <argument>CategoryInfoBox</argument>
+            <argument>CategoryInfo</argument>
             <argument>category_info.layout_box.controller</argument>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
@@ -179,7 +190,7 @@
         </service>
 
         <service id="category_products.layout_box.configurator" class="WellCommerce\Bundle\CategoryBundle\Layout\CategoryProductsBoxConfigurator">
-            <argument>CategoryProductsBox</argument>
+            <argument>CategoryProducts</argument>
             <argument>category_products.layout_box.controller</argument>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>

@@ -228,4 +228,12 @@ class RequestHelper implements RequestHelperInterface
 
         return null;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCurrentLocale()
+    {
+        return $this->request->getLocale();
+    }
 }

@@ -161,4 +161,11 @@ interface RequestHelperInterface
      * @return number
      */
     public function getCurrentLimit($default);
+
+    /**
+     * Returns current locale
+     *
+     * @return string
+     */
+    public function getCurrentLocale();
 }

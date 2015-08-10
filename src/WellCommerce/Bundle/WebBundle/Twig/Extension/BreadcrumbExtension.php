@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Bundle\WebBundle\Twig\Extension;
 
-use WellCommerce\Bundle\WebBundle\Breadcrumb\BreadcrumbBuilderInterface;
+use WellCommerce\Bundle\WebBundle\Breadcrumb\BreadcrumbItemCollectionInterface;
 
 /**
  * Class BreadcrumbExtension
@@ -21,18 +21,23 @@ use WellCommerce\Bundle\WebBundle\Breadcrumb\BreadcrumbBuilderInterface;
 class BreadcrumbExtension extends \Twig_Extension
 {
     /**
-     * @var BreadcrumbBuilderInterface
+     * @var
      */
-    protected $builder;
+    protected $collection;
 
     /**
      * Constructor
      *
-     * @param BreadcrumbBuilderInterface $builder
+     * @param BreadcrumbItemCollectionInterface $builder
      */
-    public function __construct(BreadcrumbBuilderInterface $builder)
+    public function __construct(BreadcrumbItemCollectionInterface $collection)
     {
-        $this->builder = $builder;
+        $this->collection = $collection;
+    }
+
+    public function getBreadcrumbs()
+    {
+        return $this->collection->all();
     }
 
     public function getFunctions()
@@ -48,11 +53,5 @@ class BreadcrumbExtension extends \Twig_Extension
     public function getName()
     {
         return 'breadcrumb';
-    }
-
-
-    public function getBreadcrumbs()
-    {
-        return $this->builder->all();
     }
 }

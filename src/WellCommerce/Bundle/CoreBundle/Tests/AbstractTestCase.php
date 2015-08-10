@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\CoreBundle\Tests;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Symfony\Bundle\FrameworkBundle\Tests\Functional\WebTestCase;
 
 /**
  * Class AbstractTest
@@ -49,5 +48,6 @@ abstract class AbstractTestCase extends KernelTestCase
     protected function tearDown()
     {
         parent::tearDown();
+        $this->em->close();
     }
 }

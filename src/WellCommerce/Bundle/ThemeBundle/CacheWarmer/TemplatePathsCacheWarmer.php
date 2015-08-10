@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\ThemeBundle\CacheWarmer;
 
-use Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplateFinderInterface;
 use Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplatePathsCacheWarmer as BaseTemplatePathsCacheWarmer;
 use Symfony\Bundle\FrameworkBundle\Templating\Loader\TemplateLocator;
 use Symfony\Bundle\FrameworkBundle\Templating\TemplateReference;
@@ -29,17 +28,6 @@ use Symfony\Component\Config\FileLocatorInterface;
  */
 class TemplatePathsCacheWarmer extends BaseTemplatePathsCacheWarmer
 {
-    /**
-     * Constructor
-     *
-     * @param TemplateFinderInterface $finder
-     * @param TemplateLocator         $locator
-     */
-    public function __construct(TemplateFinderInterface $finder, TemplateLocator $locator)
-    {
-        parent::__construct($finder, $locator);
-    }
-
     /**
      * Warms up the cache.
      *

@@ -14,8 +14,6 @@ namespace WellCommerce\Bundle\CategoryBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
-use WellCommerce\Bundle\CategoryBundle\Entity\Category;
-use WellCommerce\Bundle\RoutingBundle\Helper\Sluggable;
 
 /**
  * Class CategoryController
@@ -24,9 +22,20 @@ use WellCommerce\Bundle\RoutingBundle\Helper\Sluggable;
  */
 class CategoryController extends AbstractAdminController
 {
+    /**
+     * @var \WellCommerce\Bundle\CategoryBundle\Manager\Admin\CategoryManager
+     */
+    protected $manager;
+
+    /**
+     * List categories action
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function indexAction()
     {
-        $categories = $this->getManager()->getRepository()->findAll();
+        $categories = $this->manager->getRepository()->findAll();
+        $tree       = $this->buildTreeForm();
 
         if (count($categories)) {
             $category = current($categories);
@@ -36,67 +45,51 @@ class CategoryController extends AbstractAdminController
             ]);
         }
 
-        $tree = $this->buildTreeForm();
-
         return $this->display('index', [
             'tree' => $tree
         ]);
     }
 
+    /**
+     * Add category action
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
     public function addAction(Request $request)
     {
-        $shop          = $this->get('shop.context.admin')->getCurrentScope();
-        $currentLocale = $request->getLocale();
-        $parameters    = $request->request;
-        $name          = $parameters->get('name');
-        $parent        = $this->getRepository()->find((int)$parameters->get('parent'));
-        $locales       = $this->getRepository()->getLocales();
-
-        $category = new Category();
-        $category->setHierarchy(0);
-        $category->setEnabled(1);
-        $category->setParent($parent);
-        $category->addShop($shop);
-
-        /** @var $locale \WellCommerce\Bundle\IntlBundle\Entity\Locale */
-        foreach ($locales as $locale) {
-            $slug = Sluggable::makeSlug($name);
-            if ($locale->getCode() != $currentLocale) {
-                $slug = Sluggable::makeSlug(sprintf('%s-%s', $name, $locale->getCode()));
-            }
-            $category->translate($locale->getCode())->setName($name);
-            $category->translate($locale->getCode())->setSlug($slug);
-        }
-        $category->mergeNewTranslations();
-        $this->getEntityManager()->persist($category);
-        $this->getEntityManager()->flush();
+        $categoriesName = (string)$request->request->get('name');
+        $parentCategory = (int)$request->request->get('parent');
+        $category       = $this->manager->quickAddCategory($categoriesName, $parentCategory);
 
         return $this->jsonResponse([
             'id' => $category->getId(),
         ]);
     }
 
+    /**
+     * Edit category action
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\JsonResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function editAction(Request $request)
     {
-        $manager  = $this->getManager();
-        $tree     = $this->buildTreeForm();
-        $resource = $manager->findResource($request);
-        $form     = $manager->getForm($resource);
+        $resource = $this->manager->findResource($request);
+        $form     = $this->manager->getForm($resource);
 
         if ($form->handleRequest()->isSubmitted()) {
             if ($valid = $form->isValid()) {
-                $manager->updateResource($resource, $request);
+                $this->manager->updateResource($resource, $request);
             }
 
-            return $this->jsonResponse([
-                'valid'      => $valid,
-                'redirectTo' => '',
-                'error'      => $form->getError()
-            ]);
+            return $this->createFormDefaultJsonResponse($form);
         }
 
         return $this->display('edit', [
-            'tree' => $tree,
+            'tree' => $this->manager->getTree(),
             'form' => $form,
         ]);
     }
@@ -115,30 +108,15 @@ class CategoryController extends AbstractAdminController
     }
 
     /**
-     * @return \WellCommerce\Bundle\CategoryBundle\Repository\CategoryRepositoryInterface
+     * Sort categories action
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
-    protected function getRepository()
-    {
-        return $this->getManager()->getRepository();
-    }
-
     public function sortAction(Request $request)
     {
-        $items      = $request->request->get('items');
-        $repository = $this->getRepository();
-        $em         = $this->getEntityManager();
-
-        foreach ($items as $item) {
-            $parent = $repository->find($item['parent']);
-            $child  = $repository->find($item['id']);
-            if (null !== $child) {
-                $child->setParent($parent);
-                $child->setHierarchy($item['weight']);
-                $em->persist($child);
-            }
-        }
-
-        $em->flush();
+        $this->manager->sortCategories($request->request->get('items'));
 
         return $this->jsonResponse(['success' => true]);
     }

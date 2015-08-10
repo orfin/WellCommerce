@@ -12,6 +12,7 @@
             <argument type="service" id="doctrine_helper"/>
             <argument type="service" id="translator"/>
             <argument type="service" id="request_helper"/>
+            <argument type="service" id="validator"/>
             <call method="setRepository">
                 <argument type="service" id="availability.repository"/>
             </call>

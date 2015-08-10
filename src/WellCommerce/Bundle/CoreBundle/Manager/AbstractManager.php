@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\CoreBundle\Manager;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 use WellCommerce\Bundle\CoreBundle\Event\ResourceEvent;
 use WellCommerce\Bundle\CoreBundle\Helper\Doctrine\DoctrineHelperInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Flash\FlashHelperInterface;
@@ -72,6 +73,11 @@ abstract class AbstractManager implements ManagerInterface
     private $requestHelper;
 
     /**
+     * @var ValidatorInterface
+     */
+    private $validator;
+
+    /**
      * Constructor
      *
      * @param FlashHelperInterface     $flashHelper
@@ -81,6 +87,7 @@ abstract class AbstractManager implements ManagerInterface
      * @param DoctrineHelperInterface  $doctrineHelper
      * @param TranslatorInterface      $translator
      * @param RequestHelperInterface   $requestHelper
+     * @param ValidatorInterface       $validator
      */
     public function __construct(
         FlashHelperInterface $flashHelper,
@@ -89,7 +96,8 @@ abstract class AbstractManager implements ManagerInterface
         EventDispatcherInterface $eventDispatcher,
         DoctrineHelperInterface $doctrineHelper,
         TranslatorInterface $translator,
-        RequestHelperInterface $requestHelper
+        RequestHelperInterface $requestHelper,
+        ValidatorInterface $validator
     ) {
         $this->flashHelper     = $flashHelper;
         $this->redirectHelper  = $redirectHelper;
@@ -98,6 +106,15 @@ abstract class AbstractManager implements ManagerInterface
         $this->doctrineHelper  = $doctrineHelper;
         $this->translator      = $translator;
         $this->requestHelper   = $requestHelper;
+        $this->validator       = $validator;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getValidator()
+    {
+        return $this->validator;
     }
 
     /**

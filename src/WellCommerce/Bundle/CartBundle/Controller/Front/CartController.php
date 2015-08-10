@@ -30,6 +30,11 @@ use WellCommerce\Bundle\WebBundle\Breadcrumb\BreadcrumbItem;
 class CartController extends AbstractFrontController implements FrontControllerInterface
 {
     /**
+     * @var \WellCommerce\Bundle\CartBundle\Manager\Front\CartManager
+     */
+    protected $manager;
+
+    /**
      * {@inheritdoc}
      */
     public function indexAction(Request $request)
@@ -38,21 +43,20 @@ class CartController extends AbstractFrontController implements FrontControllerI
             'name' => $this->trans('cart.heading.index')
         ]));
 
-        $manager  = $this->getManager();
-        $resource = $this->getManager()->getCartProvider()->getCurrentCart();
+        $resource = $this->manager->getCartProvider()->getCurrentCart();
         $form     = $this->get('cart.form_builder')->createForm([
             'name' => 'cart'
         ], $resource);
 
         if ($form->handleRequest()->isSubmitted()) {
             if ($form->isValid()) {
-                $manager->updateResource($resource, $request);
+                $this->manager->updateResource($resource, $request);
 
-                return $manager->getRedirectHelper()->redirectTo('front.cart.index');
+                return $this->manager->getRedirectHelper()->redirectTo('front.cart.index');
             }
 
             if (count($form->getError())) {
-                $manager->getFlashHelper()->addError('client.form.error.registration');
+                $this->manager->getFlashHelper()->addError('client.form.error.registration');
             }
         }
 
@@ -72,14 +76,13 @@ class CartController extends AbstractFrontController implements FrontControllerI
 
     public function addAction()
     {
-        $manager         = $this->getManager();
-        $product         = $manager->findProduct();
-        $attribute       = $manager->findProductAttribute($product);
-        $quantity        = (int)$manager->getRequestHelper()->getRequestAttribute('qty', 1);
+        $product         = $this->manager->findProduct();
+        $attribute       = $this->manager->findProductAttribute($product);
+        $quantity        = (int)$this->manager->getRequestHelper()->getRequestAttribute('qty', 1);
         $category        = $product->getCategories()->first();
         $recommendations = $this->getRecommendations($category);
 
-        $manager->addItem($product, $attribute, $quantity);
+        $this->manager->addItem($product, $attribute, $quantity);
 
         $basketModalContent = $this->renderView('WellCommerceCartBundle:Front/Cart:add.html.twig', [
             'product'         => $product,
@@ -96,7 +99,7 @@ class CartController extends AbstractFrontController implements FrontControllerI
 
     protected function getRecommendations(Category $category)
     {
-        $provider          = $this->getManager()->getProductProvider();
+        $provider          = $this->manager->getProductProvider();
         $collectionBuilder = $provider->getCollectionBuilder();
         $conditions        = new ConditionsCollection();
         $conditions->add(new Eq('category', $category->getId()));
@@ -111,13 +114,14 @@ class CartController extends AbstractFrontController implements FrontControllerI
         return $dataset;
     }
 
-    public function editAction()
+    public function editAction(Request $request)
     {
-        $manager = $this->getManager();
         $message = null;
+        $id      = (int)$request->request->get('id');
+        $qty     = (int)$request->request->get('qty');
 
         try {
-            $manager->changeItemQuantity();
+            $this->manager->changeItemQuantity($id, $qty);
             $success = true;
         } catch (ChangeCartItemQuantityException $e) {
             $success = false;
@@ -130,13 +134,13 @@ class CartController extends AbstractFrontController implements FrontControllerI
         ]);
     }
 
-    public function deleteAction()
+    public function deleteAction(Request $request)
     {
-        $manager = $this->getManager();
         $message = null;
+        $id      = (int)$request->request->get('id');
 
         try {
-            $manager->deleteItem();
+            $this->manager->deleteItem($id);
             $success = true;
         } catch (DeleteCartItemException $e) {
             $success = false;

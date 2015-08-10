@@ -28,7 +28,11 @@ class LoadShippingMethodData extends AbstractDataFixture
      */
     public function load(ObjectManager $manager)
     {
+<<<<<<< HEAD
 	    return;
+=======
+        return;
+>>>>>>> origin/development
 
         $fedEx = new ShippingMethod();
         $fedEx->setEnabled(1);
