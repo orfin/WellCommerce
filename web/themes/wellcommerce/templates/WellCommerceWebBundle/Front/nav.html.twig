@@ -1,52 +1,49 @@
 <nav class="navbar navbar-default" role="navigation">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
+            <div class="hamburger hidden-lg hidden-md">
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
 
             <a class="navbar-brand" href="{{ path('front.home_page.index') }}">
                 <img alt="Brand" src="{{ asset( 'themes/wellcommerce/assets/img/logo.png') }}">
             </a>
         </div>
 
-        <div class="collapse navbar-collapse" id="main-nav">
-            <ul class="nav navbar-nav">
-                {% for status in productStatuses() %}
-                    <li><a href="{{ status.route }}">{{ status.name }}</a></li>
-                {% endfor %}
-                {% for page in cmsPages %}
-                    {% if page.children|length %}
-                        <li class="dropdown">
-                            <a href="{{ page.route }}" class="dropdown-toggle" data-toggle="dropdown"
-                               role="button" aria-expanded="false">
-                                {{ page.name }} <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu" role="menu">
-                                {% for childPage in page.children %}
-                                    <li><a href="{{ childPage.route }}">{{ childPage.name }}</a></li>
-                                    {% if loop.last == false %}
-                                        <li class="divider"></li>
-                                    {% endif %}
-                                {% endfor %}
-                            </ul>
-                        </li>
-                    {% else %}
-                        <li>
-                            <a href="{{ page.route }}">
-                                {{ page.name }}
-                            </a>
-                        </li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
+        <ul class="nav navbar-nav hidden-sm hidden-xs">
+            {% for status in productStatuses() %}
+                <li><a href="{{ status.route }}">{{ status.name }}</a></li>
+            {% endfor %}
+            {% for page in cmsPages %}
+                {% if page.children|length %}
+                    <li class="dropdown">
+                        <a href="{{ page.route }}" class="dropdown-toggle" data-toggle="dropdown"
+                           role="button" aria-expanded="false">
+                            {{ page.name }} <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            {% for childPage in page.children %}
+                                <li><a href="{{ childPage.route }}">{{ childPage.name }}</a></li>
+                                {% if loop.last == false %}
+                                    <li class="divider"></li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% else %}
+                    <li>
+                        <a href="{{ page.route }}">
+                            {{ page.name }}
+                        </a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
 
-            <ul class="nav navbar-nav navbar-right" id="topCart">
-                {% include 'WellCommerceCartBundle:Front/Common:preview.html.twig' %}
-            </ul>
-        </div>
+        <ul class="nav navbar-nav navbar-right" id="topCart">
+            {% include 'WellCommerceCartBundle:Front/Common:preview.html.twig' %}
+        </ul>
     </div>
 </nav>

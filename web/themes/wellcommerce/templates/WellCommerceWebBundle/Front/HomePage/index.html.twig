@@ -2,30 +2,26 @@
 {% block content %}
     {% include 'WellCommerceWebBundle:Front:breadcrumbs.html.twig' %}
     <div class="row">
-        <div class="col-lg-3">
+        <div class="col-sm-3 hidden-xs">
             {{ layout_box('category_menu') }}
         </div>
 
-        <div class="col-lg-9">
+        <div class="col-sm-9 col-xs-12">
             {{ layout_box('product_showcase') }}
         </div>
-
-        <div class="col-lg-12">
-            <div class="promotions box">
-                <h2 class="box-header">
-                    Bestsellers
-                </h2>
-                {{ layout_box('product_bestseller') }}
-            </div>
-        </div>
-
-        <div class="col-lg-12">
-            <div class="promotions box">
-                <h2 class="box-header">
-                    New arrivals
-                </h2>
-                {{ layout_box('product_new_arrivals') }}
-            </div>
-        </div>
     </div>
+
+	<div class="promotions box">
+	    <h2 class="box-header">
+	        Bestsellers
+	    </h2>
+	    {{ layout_box('product_bestseller') }}
+	</div>
+
+	<div class="promotions box">
+	    <h2 class="box-header">
+	        New arrivals
+	    </h2>
+	    {{ layout_box('product_new_arrivals') }}
+	</div>
 {% endblock %}

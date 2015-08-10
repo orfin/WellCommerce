@@ -102,7 +102,7 @@ client:
         login: 'Sign in'
         register: 'Sign up'
     link:
-        login: 'Sign in / Sign up'
+        login: 'Sign in or Sign up'
         register: 'Sign up'
         logout: Logout
         orders: Orders

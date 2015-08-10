@@ -170,6 +170,7 @@ class ThemeManager implements ThemeManagerInterface
         }
 
         $paths = array_merge($themePaths, $resourcePaths);
+
         if (count($paths)) {
             return current($paths);
         }
