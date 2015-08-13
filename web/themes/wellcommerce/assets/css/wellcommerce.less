@@ -185,6 +185,11 @@ img {
 	font-weight: 500;
 	.radius(0);
 
+	&.btn-default {
+		border: 1px solid #e5e5e5;
+		padding: 8px 15px;
+	}
+
 	&.btn-primary {
 		background: #ffd700;
 		color: #454847;
@@ -253,6 +258,11 @@ img {
 
 	.caret {
 		margin-left: 5px;
+	}
+
+	small {
+		opacity: .8;
+		text-transform: none;
 	}
 }
 
@@ -781,6 +791,65 @@ footer {
 		width: 100% !important;
 	}
 }
+
+/*
+* PAGINATION
+*/
+
+.pagination-wrap {
+	border-top: 1px solid #e5e5e5;
+	padding: 15px 0;
+
+	> span {
+		line-height: 30px;
+		color: #a7a7a7;
+		font-weight: 300;
+	}
+
+	.pagination {
+		margin: 0;
+	}
+}
+
+.pagination {
+	> li > a,
+	> li > span {
+		border: 0;
+		padding: 5px 7px;
+		margin-left: 1px;
+		background-color: #ececec;
+		color: #555b5a;
+
+		&:hover {
+			background-color: #ffd801;
+		}
+	}
+
+	.disabled {
+		display: none;
+	}
+
+	.active > a:hover,
+	.active > span:hover,
+	.active > a,
+	.active > span {
+		color: #555b5a;
+		background-color: #fff;
+	}
+
+	> li:last-child > a,
+	> li:last-child > span,
+	> li:first-child > a,
+	> li:first-child > span {
+		.radius(0) !important;
+
+		.glyphicon {
+			font-size: 7px;
+			top: -1px;
+		}
+	}
+}
+
 
 /*
 * BREADCRUMBS
