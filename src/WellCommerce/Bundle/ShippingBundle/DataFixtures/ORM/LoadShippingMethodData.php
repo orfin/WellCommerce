@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\ShippingBundle\DataFixtures\ORM;
 use Doctrine\Common\Persistence\ObjectManager;
 use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod;
+use WellCommerce\Bundle\TaxBundle\DataFixtures\ORM\LoadTaxData;
 
 /**
  * Class LoadShippingData
@@ -28,16 +29,14 @@ class LoadShippingMethodData extends AbstractDataFixture
      */
     public function load(ObjectManager $manager)
     {
-<<<<<<< HEAD
-	    return;
-=======
-        return;
->>>>>>> origin/development
+        $tax = $this->randomizeSamples('tax', LoadTaxData::$samples);
 
         $fedEx = new ShippingMethod();
         $fedEx->setEnabled(1);
         $fedEx->setHierarchy(0);
         $fedEx->setCalculator('fixed_price');
+        $fedEx->setTax($tax);
+        $fedEx->setCurrency('USD');
         $fedEx->translate('en')->setName('FedEx');
         $fedEx->mergeNewTranslations();
         $manager->persist($fedEx);
@@ -46,6 +45,8 @@ class LoadShippingMethodData extends AbstractDataFixture
         $ups->setEnabled(1);
         $ups->setHierarchy(0);
         $ups->setCalculator('fixed_price');
+        $ups->setTax($tax);
+        $ups->setCurrency('USD');
         $ups->translate('en')->setName('UPS');
         $ups->mergeNewTranslations();
         $manager->persist($ups);
