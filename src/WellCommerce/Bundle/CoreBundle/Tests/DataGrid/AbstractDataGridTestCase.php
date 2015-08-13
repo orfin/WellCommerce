@@ -10,39 +10,46 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CoreBundle\Tests;
+namespace WellCommerce\Bundle\CoreBundle\Tests\DataGrid;
 
+use WellCommerce\Bundle\CoreBundle\Tests\AbstractTestCase;
 use WellCommerce\Bundle\DataGridBundle\Column\Column;
 
 /**
- * Class DataGridTestCase
+ * Class AbstractDataGridTestCase
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class DataGridTestCase extends AbstractTestCase
+abstract class AbstractDataGridTestCase extends AbstractTestCase
 {
-    protected function getDataGridInstance()
+    /**
+     * @return null|\WellCommerce\Bundle\DataGridBundle\DataGridInterface
+     */
+    protected function getService()
     {
         return null;
     }
 
-    protected function getRequiredColumns()
+    /**
+     * @return array
+     */
+    protected function getColumns()
     {
         return [];
     }
 
-    public function testDataGridInstanceIsCreated()
+    public function testServiceIsCreated()
     {
-        $datagrid = $this->getDataGridInstance();
+        $datagrid = $this->getService();
 
         if (null !== $datagrid) {
             $this->assertInstanceOf('WellCommerce\Bundle\DataGridBundle\DataGridInterface', $datagrid);
         }
     }
 
-    public function testDataGridColumnsCollectionIsConfigurable()
+    public function testColumnsCollectionIsConfigurable()
     {
-        $datagrid = $this->getDataGridInstance();
+        $datagrid = $this->getService();
 
         if (null !== $datagrid) {
             $columns       = $datagrid->getColumns();
@@ -61,21 +68,22 @@ abstract class DataGridTestCase extends AbstractTestCase
         }
     }
 
-    public function testDataGridHasRequiredColumns()
+    public function testHasRequiredColumns()
     {
-        $datagrid = $this->getDataGridInstance();
+        $datagrid = $this->getService();
 
         if (null !== $datagrid) {
             $columns         = $datagrid->getColumns();
-            $requiredColumns = $this->getRequiredColumns();
+            $requiredColumns = $this->getColumns();
 
             foreach ($requiredColumns as $identifier) {
+                /**
+                 * @var $column \WellCommerce\Bundle\DataGridBundle\Column\ColumnInterface
+                 */
                 $column = $columns->get($identifier);
                 $this->assertInstanceOf('WellCommerce\Bundle\DataGridBundle\Column\ColumnInterface', $column);
                 $this->assertEquals($identifier, $column->getId());
             }
         }
-
-
     }
 }
