@@ -9,9 +9,12 @@ body {
 	color: #555b5a;
 }
 
-a:hover,
 a {
 	color: #555b5a;
+}
+
+a:hover {
+	color: #222;
 }
 
 input,
@@ -443,6 +446,8 @@ header {
 	.navbar {
 		background-color: #fff;
 		border-color: #e5e5e5;
+		border-left: 0;
+		border-right: 0;
 
 		.navbar-header {
 
@@ -1991,6 +1996,41 @@ footer {
 * HAMBURGER MENU
 */
 
+body {
+	&.hamburger-is-open {
+		overflow-x: hidden;
+
+		> main {
+			.transform(translateX(258px));
+		}
+
+		.hamburger-menu {
+			visibility: visible;
+			.transition(visibility 0s 0s);
+
+			> div {
+				.transform(translateX(0));
+				.transition(transform .5s);
+				-webkit-transition-timing-function: cubic-bezier(0.82, 0.01, 0.77, 0.78);
+			       -moz-transition-timing-function: cubic-bezier(0.82, 0.01, 0.77, 0.78);
+				   	 	transition-timing-function: cubic-bezier(0.82, 0.01, 0.77, 0.78);
+
+			}
+		}
+	}
+
+	main {
+		position: relative;
+		z-index: 1;
+		.transition(transform .7s);
+		-webkit-overflow-scrolling: touch;
+		backface-visibility: hidden;
+		-webkit-transition-timing-function: cubic-bezier(0.91, 0.01, 0.6, 0.99);
+	       -moz-transition-timing-function: cubic-bezier(0.91, 0.01, 0.6, 0.99);
+		   	 	transition-timing-function: cubic-bezier(0.91, 0.01, 0.6, 0.99);
+	}
+}
+
 .hamburger {
 	width: 26px;
 	float: left;
@@ -2007,17 +2047,30 @@ footer {
 }
 
 .hamburger-menu {
-	width: 258px;
-	min-height: 100%;
-	background: #454847;
-	opacity: 1;
 	position: fixed;
-	left: -258px;
 	z-index: 1050;
-	.transition(all .5s ease-in-out);
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	visibility: hidden;
+	z-index: 100;
+	background-color: rgba(0, 0, 0, 0.85);
+	.transition(visibility 0s.7s);
 
-	&.show {
-		left: 0;
+	> div {
+		background: #454847;
+		width: 258px;
+		height: 100%;
+		overflow-y: auto;
+		backface-visibility: hidden;
+		-webkit-overflow-scrolling: touch;
+		.transform(translateX(-100%));
+		.transition(transform .7s);
+		-webkit-transition-timing-function: cubic-bezier(0.86, 0.01, 0.77, 0.78);
+	       -moz-transition-timing-function: cubic-bezier(0.86, 0.01, 0.77, 0.78);
+		   	 	transition-timing-function: cubic-bezier(0.86, 0.01, 0.77, 0.78);
+
 	}
 
 	.hamburger-header {
@@ -2110,21 +2163,5 @@ footer {
 		.subcategories li {
 			border-bottom: 0 !important;
 		}
-	}
-}
-
-.hamburger-back-drop {
-	position: fixed;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	z-index: -1040;
-	background-color: rgba(0, 0, 0, 0.0);
-	.transition(background-color .2s ease);
-
-	&.show {
-		background-color: rgba(0, 0, 0, 0.85);
-		z-index: 1040;
 	}
 }

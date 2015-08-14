@@ -21,4 +21,8 @@ $(document).ready(function () {
         sDeleteButtonClass: 'btn-remove',
         sQuantitySpinnerClass: 'quantity-spinner'
     });
+
+    $('.push-hamburger').click(function() {
+		$('body').toggleClass('hamburger-is-open');
+	});
 });

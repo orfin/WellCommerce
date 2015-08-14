@@ -34,3 +34,10 @@
       -ms-transform: scale(@ratio, @ratio-y);
           transform: scale(@ratio, @ratio-y);
 }
+
+.transform(@string) {
+	-webkit-transform: @string;
+	   -moz-transform: @string;
+	    -ms-transform: @string;
+		 -o-transform: @string;
+}
