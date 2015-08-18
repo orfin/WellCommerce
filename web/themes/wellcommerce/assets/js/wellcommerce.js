@@ -25,4 +25,6 @@ $(document).ready(function () {
     $('.push-hamburger').click(function() {
 		$('body').toggleClass('hamburger-is-open');
 	});
+
+	$('.modal').prependTo('body');
 });
