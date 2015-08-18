@@ -1350,6 +1350,33 @@ footer {
 			margin-left: 60px;
 		}
 	}
+
+	.left,
+	.right {
+		display: block;
+		width: 13px;
+		height: 23px;
+		text-indent: -9999px;
+		position: absolute;
+		background-position: center top;
+		position: absolute;
+		top: 50%;
+		margin-top: -6.5px;
+
+		&:hover {
+			background-position-y: bottom;
+		}
+	}
+
+	.left {
+		background-image: url(../img/carousel_prev.png);
+		left: 20px;
+	}
+
+	.right {
+		background-image: url(../img/carousel_next.png);
+		right: 20px;
+	}
 }
 
 /*
