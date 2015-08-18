@@ -49,21 +49,17 @@ class UserRepository extends AbstractEntityRepository implements UserRepositoryI
 
     public function loadUserByUsername($username)
     {
-        $queryBuilder = $this
-            ->createQueryBuilder('u')
-            ->select('u, r')
-            ->leftJoin('u.roles', 'r')
-            ->where('u.username = :username OR u.email = :email')
-            ->setParameter('username', $username)
-            ->setParameter('email', $username)
-            ->getQuery();
+        $queryBuilder = $this->createQueryBuilder('u');
+        $queryBuilder->select('u, r');
+        $queryBuilder->leftJoin('u.roles', 'r');
+        $queryBuilder->where('u.username = :username OR u.email = :email');
+        $queryBuilder->setParameter('username', $username);
+        $queryBuilder->setParameter('email', $username);
 
         try {
-            $user = $queryBuilder->getSingleResult();
+            $user = $queryBuilder->getQuery()->getSingleResult();
         } catch (NoResultException $e) {
-            $msg = sprintf(
-                'Unable to find an active admin identified by "%s".',
-                $username);
+            $msg = sprintf('Unable to find an active admin identified by "%s".', $username);
 
             throw new UsernameNotFoundException($msg);
         }

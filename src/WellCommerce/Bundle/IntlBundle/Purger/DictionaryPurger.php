@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\IntlBundle\Purger;
 
-
 use WellCommerce\Bundle\CoreBundle\Purger\AbstractPurger;
 use WellCommerce\Bundle\CoreBundle\Purger\PurgerInterface;
 

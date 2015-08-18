@@ -16,6 +16,9 @@
             <call method="setRepository">
                 <argument type="service" id="dictionary.repository"/>
             </call>
+            <call method="setLocaleRepository">
+                <argument type="service" id="locale.repository"/>
+            </call>
             <call method="setFormBuilder">
                 <argument type="service" id="dictionary.form_builder"/>
             </call>

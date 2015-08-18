@@ -24,6 +24,11 @@ use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
 class RoutingController extends AbstractAdminController
 {
     /**
+     * @var \WellCommerce\Bundle\RoutingBundle\Manager\Admin\RoutingManager
+     */
+    protected $manager;
+
+    /**
      * Generates slug using ajax request
      *
      * @param Request $request
@@ -33,40 +38,20 @@ class RoutingController extends AbstractAdminController
     public function generateAction(Request $request)
     {
         if (!$request->isXmlHttpRequest()) {
-            return $this->getManager()->getRedirectHelper()->redirectToAction('index');
+            return $this->manager->getRedirectHelper()->redirectToAction('index');
         }
 
-        $response = [
-            'slug' => $this->generateSlugFromRequest($request),
-        ];
-
-        return $this->jsonResponse($response);
-    }
-
-    /**
-     * Returns route repository
-     *
-     * @return \WellCommerce\Bundle\RoutingBundle\Repository\RouteRepositoryInterface
-     */
-    protected function getRepository()
-    {
-        return $this->getManager()->getRepository();
-    }
-
-    /**
-     * Generates route slug
-     *
-     * @param Request $request
-     *
-     * @return string
-     */
-    protected function generateSlugFromRequest(Request $request)
-    {
-        return $this->getRepository()->generateSlug(
+        $slug = $this->manager->generateSlug(
             $request->get('name'),
             $request->get('id'),
             $request->get('locale'),
             $request->get('fields')
         );
+
+        $response = [
+            'slug' => $slug
+        ];
+
+        return $this->jsonResponse($response);
     }
 }

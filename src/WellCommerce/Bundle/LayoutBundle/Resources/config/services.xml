@@ -24,6 +24,29 @@
             </call>
         </service>
 
+        <service id="layout_box.manager.front" class="WellCommerce\Bundle\LayoutBundle\Manager\Front\LayoutBoxManager">
+            <argument type="service" id="flash_helper"/>
+            <argument type="service" id="redirect_helper"/>
+            <argument type="service" id="image_helper"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="doctrine_helper"/>
+            <argument type="service" id="translator"/>
+            <argument type="service" id="request_helper"/>
+            <argument type="service" id="validator"/>
+            <call method="setRepository">
+                <argument type="service" id="layout_box.repository"/>
+            </call>
+            <call method="setRouterHelper">
+                <argument type="service" id="router_helper" />
+            </call>
+            <call method="setLayoutBoxCollection">
+                <argument type="service" id="layout_box.collection" />
+            </call>
+            <call method="setServiceResolver">
+                <argument type="service" id="layout_box.service_resolver" />
+            </call>
+        </service>
+
         <service id="layout_box.controller.admin" class="WellCommerce\Bundle\LayoutBundle\Controller\Admin\LayoutBoxController">
             <argument type="service" id="layout_box.manager.admin"/>
             <call method="setContainer">
@@ -67,11 +90,11 @@
         </service>
 
         <service id="layout_box.renderer" class="WellCommerce\Bundle\LayoutBundle\Renderer\LayoutBoxRenderer">
+            <argument type="service" id="layout_box.manager.front" />
+        </service>
+
+        <service id="layout_box.collection" class="WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxCollection">
             <argument type="service" id="layout_box.repository" />
-            <argument type="service" id="layout_box.configurator.collection" />
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
         </service>
 
         <service id="layout_box.subscriber" class="WellCommerce\Bundle\LayoutBundle\EventListener\LayoutBoxSubscriber">
@@ -79,6 +102,13 @@
                 <argument type="service" id="service_container"/>
             </call>
             <tag name="kernel.event_subscriber" />
+        </service>
+
+        <service id="layout_box.service_resolver" class="WellCommerce\Bundle\LayoutBundle\Resolver\ServiceResolver">
+            <argument type="service" id="layout_box.configurator.collection" />
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
         </service>
 
         <service id="layout_box.configurator.collection" class="WellCommerce\Bundle\LayoutBundle\Configurator\LayoutBoxConfiguratorCollection" />

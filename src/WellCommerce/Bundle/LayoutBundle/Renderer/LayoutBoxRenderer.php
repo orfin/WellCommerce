@@ -12,139 +12,42 @@
 
 namespace WellCommerce\Bundle\LayoutBundle\Renderer;
 
-use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
-use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxSettingsCollection;
-use WellCommerce\Bundle\LayoutBundle\Configurator\LayoutBoxConfiguratorCollection;
-use WellCommerce\Bundle\LayoutBundle\Entity\LayoutBox;
-use WellCommerce\Bundle\LayoutBundle\Repository\LayoutBoxRepositoryInterface;
+use WellCommerce\Bundle\LayoutBundle\Manager\Front\LayoutBoxManager;
 
 /**
  * Class LayoutBoxRenderer
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LayoutBoxRenderer extends AbstractContainer implements LayoutBoxRendererInterface
+class LayoutBoxRenderer implements LayoutBoxRendererInterface
 {
     /**
-     * @var LayoutBoxRepositoryInterface
+     * @var LayoutBoxManager
      */
-    protected $repository;
-
-    /**
-     * @var \WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxCollection
-     */
-    protected $collection;
-
-    /**
-     * @var LayoutBoxConfiguratorCollection
-     */
-    protected $configurators;
+    protected $layoutBoxManager;
 
     /**
      * Constructor
      *
-     * @param LayoutBoxRepositoryInterface $repository
+     * @param LayoutBoxManager $layoutBoxManager
      */
-    public function __construct(
-        LayoutBoxRepositoryInterface $repository,
-        LayoutBoxConfiguratorCollection $configurators
-    ) {
-        $this->repository    = $repository;
-        $this->collection    = $repository->getLayoutBoxesCollection();
-        $this->configurators = $configurators;
+    public function __construct(LayoutBoxManager $layoutBoxManager)
+    {
+        $this->layoutBoxManager = $layoutBoxManager;
     }
 
     /**
-     * {@inheritdoc}
+     * Renders a layout box
+     *
+     * @param string $identifier
+     * @param array  $params
+     *
+     * @return string
      */
     public function render($identifier, $params)
     {
-        if ($this->collection->has($identifier)) {
-            $box = $this->collection->get($identifier);
-
-            return $this->getControllerContent($box, $params);
-        }
-
-        return '';
-    }
-
-    /**
-     * Forwards request to box controller and returns its contents
-     *
-     * @param LayoutBox $box
-     * @param           $params
-     *
-     * @return string
-     * @throws \Exception
-     */
-    private function getControllerContent(LayoutBox $box, $params)
-    {
-        $service    = $this->configurators->get($box->getBoxType())->getControllerService();
-        $controller = $this->container->get($service);
-        $action     = $this->getControllerAction($controller);
-        $settings   = $this->getSettingsCollection($box, $params);
-        $content    = call_user_func_array([$controller, $action], [$settings]);
+        $content = $this->layoutBoxManager->getLayoutBoxContent($identifier, $params);
 
         return $content->getContent();
-    }
-
-    /**
-     * Checks whether current action is accessible in box controller.
-     * If not, default indexAction will be returned.
-     *
-     * @param $controller
-     *
-     * @return mixed|string
-     */
-    private function getControllerAction($controller)
-    {
-        $currentAction   = $this->getCurrentAction();
-        $reflectionClass = new \ReflectionClass($controller);
-
-        if ($reflectionClass->hasMethod($currentAction)) {
-            $reflectionMethod = new \ReflectionMethod($controller, $currentAction);
-            if ($reflectionMethod->isPublic()) {
-                return $currentAction;
-            }
-        }
-
-        return 'indexAction';
-    }
-
-    private function getSettingsCollection(LayoutBox $layoutBox, array $params = [])
-    {
-        $collection        = new LayoutBoxSettingsCollection();
-        $layoutBoxSettings = $layoutBox->getSettings();
-        $settings          = array_merge($layoutBoxSettings, $params);
-
-        foreach ($settings as $name => $value) {
-            $collection->add($name, $value);
-        }
-
-        return $collection;
-    }
-
-    /**
-     * Returns master request controller action
-     *
-     * @return mixed
-     */
-    private function getCurrentAction()
-    {
-        $currentPath  = $this->getRouterContext()->getPathInfo();
-        $currentRoute = $this->getRouter()->match($currentPath);
-        list(, $action) = explode(':', $currentRoute['_controller']);
-
-        return $action;
-    }
-
-    /**
-     * Returns current router context
-     *
-     * @return \Symfony\Component\Routing\RequestContext
-     */
-    private function getRouterContext()
-    {
-        return $this->getRouter()->getContext();
     }
 }

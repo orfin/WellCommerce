@@ -26,14 +26,6 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
     const TRANSLATIONS_ASSOCIATION_FIELD = 'translatable';
 
     /**
-     * {@inheritdoc}
-     */
-    public function getLocales()
-    {
-        return $this->getRepository('WellCommerce\Bundle\IntlBundle\Entity\Locale')->findAll();
-    }
-
-    /**
      * Returns class metadata
      *
      * @return \Doctrine\ORM\Mapping\ClassMetadata

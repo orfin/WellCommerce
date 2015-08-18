@@ -56,6 +56,13 @@ class TemplatePathsCacheWarmer extends BaseTemplatePathsCacheWarmer
         return false;
     }
 
+    /**
+     * Locates and appends template to an array
+     *
+     * @param FileLocatorInterface $locator
+     * @param TemplateReference    $template
+     * @param array                $templates
+     */
     protected function locateTemplate(FileLocatorInterface $locator, TemplateReference $template, array &$templates)
     {
         $templates[$template->getLogicalName()] = $locator->locate($template->getPath());

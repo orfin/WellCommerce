@@ -59,13 +59,6 @@ interface RepositoryInterface
     public function find($id);
 
     /**
-     * Returns all available and configured locales
-     *
-     * @return array
-     */
-    public function getLocales();
-
-    /**
      * Returns all entities
      *
      * @return mixed

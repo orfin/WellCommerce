@@ -103,7 +103,6 @@ class AttributeManager extends AbstractAdminManager
 
         $attribute->mergeNewTranslations();
 
-
         $em->persist($attribute);
         $em->flush();
 

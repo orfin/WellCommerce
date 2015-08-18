@@ -12,9 +12,9 @@
 
 namespace WellCommerce\Bundle\LayoutBundle\Collection;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\CoreBundle\Collection\AbstractCollection;
 use WellCommerce\Bundle\LayoutBundle\Entity\LayoutBox;
+use WellCommerce\Bundle\LayoutBundle\Repository\LayoutBoxRepositoryInterface;
 
 /**
  * Class LayoutBoxCollection
@@ -26,12 +26,13 @@ class LayoutBoxCollection extends AbstractCollection
     /**
      * Constructor
      *
-     * @param ArrayCollection $collection
+     * @param LayoutBoxRepositoryInterface $layoutBoxRepository
      */
-    public function __construct($collection)
+    public function __construct(LayoutBoxRepositoryInterface $layoutBoxRepository)
     {
-        foreach ($collection as $box) {
-            $this->add($box);
+        $layoutBoxes = $layoutBoxRepository->findAll();
+        foreach ($layoutBoxes as $layoutBox) {
+            $this->add($layoutBox);
         }
     }
 

@@ -21,6 +21,7 @@ use WellCommerce\Bundle\AdminBundle\Manager\AbstractAdminManager;
 use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 use WellCommerce\Bundle\IntlBundle\Entity\Dictionary;
 use WellCommerce\Bundle\IntlBundle\Entity\Locale;
+use WellCommerce\Bundle\IntlBundle\Repository\LocaleRepositoryInterface;
 
 /**
  * Class DictionaryManager
@@ -60,6 +61,19 @@ class DictionaryManager extends AbstractAdminManager
     protected $propertyAccessor;
 
     /**
+     * @var LocaleRepositoryInterface
+     */
+    protected $localeRepository;
+
+    /**
+     * @param LocaleRepositoryInterface $localeRepository
+     */
+    public function setLocaleRepository(LocaleRepositoryInterface $localeRepository)
+    {
+        $this->localeRepository = $localeRepository;
+    }
+
+    /**
      * Synchronizes database and filesystem translations
      *
      * @param Request $request
@@ -68,25 +82,12 @@ class DictionaryManager extends AbstractAdminManager
     {
         $this->kernel           = $kernel;
         $this->currentLocale    = $request->getLocale();
-        $this->locales          = $this->getLocales();
+        $this->locales          = $this->localeRepository->findAll();
         $this->propertyAccessor = PropertyAccess::createPropertyAccessor();
         $this->loadFilesystemTranslations();
         $this->loadDatabaseTranslations();
         $this->mergeAndSaveTranslations();
 
-    }
-
-    /**
-     * Returns all available locales
-     *
-     * @return array|\WellCommerce\Bundle\IntlBundle\Entity\Locale[]
-     */
-    protected function getLocales()
-    {
-        $em         = $this->getDoctrineHelper()->getEntityManager();
-        $repository = $em->getRepository('WellCommerceIntlBundle:Locale');
-
-        return $repository->findAll();
     }
 
     /**

@@ -23,13 +23,6 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 interface AttributeValueRepositoryInterface extends RepositoryInterface
 {
     /**
-     * Returns all groups with translations
-     *
-     * @return array
-     */
-    public function findAll();
-
-    /**
      * Returns all values (with translations) for given attribute
      *
      * @return array

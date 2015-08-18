@@ -22,6 +22,10 @@
             <argument type="service" id="doctrine"/>
         </service>
 
+        <service id="router_helper" class="WellCommerce\Bundle\CoreBundle\Helper\Router\RouterHelper">
+            <argument type="service" id="router"/>
+        </service>
+
         <service id="request_helper" class="WellCommerce\Bundle\CoreBundle\Helper\Request\RequestHelper">
             <argument type="service" id="request_stack"/>
             <argument type="service" id="security.context"/>
