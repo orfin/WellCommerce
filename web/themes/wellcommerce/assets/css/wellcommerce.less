@@ -434,6 +434,7 @@ header {
 			font-weight: 400;
 			color: rgba(255, 255, 255, 0.5);
 			font-size: 13px;
+			text-transform: none;
 		}
 
 		.dropdown.open .dropdown-toggle {
@@ -1305,77 +1306,110 @@ footer {
 */
 
 .showcase {
-	padding: 20px;
-	-webkit-box-shadow: 0 4px 15px rgba(0, 0, 0, .175);
-			box-shadow: 0 4px 15px rgba(0, 0, 0, .175);
 
-	.photo {
-		display: block;
-// 		height: 222px;
-		margin: 20px;
+	> div {
+		padding: 20px;
+		-webkit-box-shadow: 0 4px 15px rgba(0, 0, 0, .175);
+				box-shadow: 0 4px 15px rgba(0, 0, 0, .175);
 
-		img {
-			max-width: 100%;
-			max-height: 100%;
-		}
-	}
-
-	h3 {
-		margin-top: 20px;
-		margin-bottom: 10px;
-		font-size: 34px;
-		color: #454847;
-
-		small {
+		.photo {
 			display: block;
-			margin-top: 5px;
-			font-weight: 300;
-			font-size: 28px;
+	// 		height: 222px;
+			margin: 20px;
+
+			img {
+				max-width: 100%;
+				max-height: 100%;
+			}
+		}
+
+		h3 {
+			margin-top: 20px;
+			margin-bottom: 10px;
+			font-size: 34px;
 			color: #454847;
+
+			small {
+				display: block;
+				margin-top: 5px;
+				font-weight: 300;
+				font-size: 28px;
+				color: #454847;
+			}
+		}
+
+		.price {
+			display: block;
+			margin: 20px 0 40px;
+
+			small {
+				margin-left: 10px;
+				display: inline-block;
+			}
+		}
+
+		.btn {
+			i {
+				margin-left: 60px;
+			}
+		}
+
+		.left,
+		.right {
+			display: block;
+			width: 13px;
+			height: 23px;
+			text-indent: -9999px;
+			position: absolute;
+			background-position: center top;
+			position: absolute;
+			top: 50%;
+			margin-top: -6.5px;
+
+			&:hover {
+				background-position-y: bottom;
+			}
+		}
+
+		.left {
+			background-image: url(../img/carousel_prev.png);
+			left: 20px;
+		}
+
+		.right {
+			background-image: url(../img/carousel_next.png);
+			right: 20px;
 		}
 	}
 
-	.price {
-		display: block;
-		margin: 20px 0 40px;
+	> ul {
+		list-style-type: none;
+		padding: 0;
+		margin: 0;
 
-		small {
-			margin-left: 10px;
-			display: inline-block;
+		> li {
+			position: relative;
+			float: left;
+			border-top: 5px solid transparent;
+
+			&.active {
+				border-color: #ffd700;
+
+				> a {
+					font-weight: 500;
+				}
+			}
+
+			> a {
+				display: block;
+				padding: 10px 35px 15px;
+				line-height: 20px;
+
+				&:hover {
+					text-decoration: none;
+				}
+			}
 		}
-	}
-
-	.btn {
-		i {
-			margin-left: 60px;
-		}
-	}
-
-	.left,
-	.right {
-		display: block;
-		width: 13px;
-		height: 23px;
-		text-indent: -9999px;
-		position: absolute;
-		background-position: center top;
-		position: absolute;
-		top: 50%;
-		margin-top: -6.5px;
-
-		&:hover {
-			background-position-y: bottom;
-		}
-	}
-
-	.left {
-		background-image: url(../img/carousel_prev.png);
-		left: 20px;
-	}
-
-	.right {
-		background-image: url(../img/carousel_next.png);
-		right: 20px;
 	}
 }
 

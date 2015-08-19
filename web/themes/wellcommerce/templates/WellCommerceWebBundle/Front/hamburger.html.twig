@@ -9,6 +9,7 @@
 		</div>
 
 		<ul class="hamburger-nav">
+			{% if categoriesTree()|length > 0 %}
 			<li>
 				<a class="collapsed coll" data-toggle="collapse" href="#categories" aria-expanded="false" aria-controls="#categories">Categories <span class="caret bordered"></span></a>
 				<ul id="categories" class="subcategories collapse">
@@ -17,6 +18,7 @@
 					{% endfor %}
 				</ul>
 			</li>
+			{% endif %}
 
 			{% for status in productStatuses() %}
             <li><a href="{{ status.route }}">{{ status.name }}</a></li>
