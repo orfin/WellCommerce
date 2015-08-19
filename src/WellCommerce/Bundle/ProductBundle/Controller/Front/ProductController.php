@@ -34,7 +34,7 @@ class ProductController extends AbstractFrontController implements FrontControll
 
         $this->getManager()->getProductProvider()->setCurrentProduct($product);
 
-        return $this->render('WellCommerceProductBundle:Front/Product:index.html.twig', [
+        return $this->display('index', [
             'product' => $product
         ]);
     }

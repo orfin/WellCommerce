@@ -34,10 +34,11 @@ class MediaController extends AbstractAdminController
     {
         $file     = $request->files->get('file');
         $uploader = $this->get('media.uploader');
+        $helper   = $this->manager->getImageHelper();
 
         try {
             $media     = $uploader->upload($file, 'images');
-            $thumbnail = $this->getImage($media->getPath(), 'medium');
+            $thumbnail = $helper->getImage($media->getPath(), 'medium');
 
             $response = [
                 'sId'        => $media->getId(),

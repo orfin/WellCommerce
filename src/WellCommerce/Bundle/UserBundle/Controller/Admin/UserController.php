@@ -71,7 +71,7 @@ class UserController extends AbstractAdminController
             return $this->jsonResponse(['error' => 'You cannot delete your own admin account.']);
         }
 
-        $em = $this->getEntityManager();
+        $em = $this->manager->getDoctrineHelper()->getEntityManager();
 
         try {
             $resource = $this->getManager()->getRepository()->find($id);
