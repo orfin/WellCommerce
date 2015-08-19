@@ -44,7 +44,7 @@ class ProductStatusBoxController extends AbstractBoxController implements BoxCon
             'cache_enabled' => true
         ]);
 
-        return $this->render('WellCommerceProductBundle:Box/ProductStatus:index.html.twig', [
+        return $this->display('index', [
             'dataset' => $dataset
         ]);
     }

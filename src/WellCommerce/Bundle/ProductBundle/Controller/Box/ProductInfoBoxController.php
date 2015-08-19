@@ -29,7 +29,7 @@ class ProductInfoBoxController extends AbstractBoxController implements BoxContr
     {
         $provider = $this->getManager()->getProductProvider();
 
-        return $this->render('WellCommerceProductBundle:Box/ProductInfo:index.html.twig', [
+        return $this->display('index', [
             'product' => $provider->getCurrentProduct()
         ]);
     }
