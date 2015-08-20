@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\AvailabilityBundle\Tests\Form;
 
-use WellCommerce\Bundle\CoreBundle\Tests\AbstractTestCase;
+use WellCommerce\Bundle\CoreBundle\Test\AbstractTestCase;
 
 /**
  * Class AvailabilityFormBuilderTest

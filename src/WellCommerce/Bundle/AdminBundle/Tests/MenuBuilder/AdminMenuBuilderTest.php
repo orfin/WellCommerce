@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\AdminBundle\MenuBuilder\Tests;
 
 use Symfony\Bundle\FrameworkBundle\Tests\Functional\WebTestCase;
-use WellCommerce\Bundle\CoreBundle\Tests\AbstractTestCase;
+use WellCommerce\Bundle\CoreBundle\Test\AbstractTestCase;
 
 /**
  * Class AdminMenuBuilderTest

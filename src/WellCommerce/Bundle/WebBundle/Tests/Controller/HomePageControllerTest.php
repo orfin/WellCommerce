@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\WebBundle\Controller\Tests;
 
-use WellCommerce\Bundle\CoreBundle\Tests\AbstractTestCase;
+use WellCommerce\Bundle\CoreBundle\Test\AbstractTestCase;
 
 /**
  * Class HomePageControllerTest
