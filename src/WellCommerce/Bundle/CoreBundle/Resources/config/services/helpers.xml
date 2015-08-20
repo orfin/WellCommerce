@@ -7,7 +7,7 @@
     <services>
         <service id="flash_helper" class="WellCommerce\Bundle\CoreBundle\Helper\Flash\FlashHelper">
             <argument type="service" id="session"/>
-            <argument type="service" id="translator"/>
+            <argument type="service" id="translator_helper"/>
         </service>
 
         <service id="redirect_helper" class="WellCommerce\Bundle\CoreBundle\Helper\Redirect\RedirectHelper">
@@ -34,6 +34,10 @@
 
         <service id="environment_helper" class="WellCommerce\Bundle\CoreBundle\Helper\Environment\EnvironmentHelper">
             <argument type="service" id="kernel"/>
+        </service>
+
+        <service id="translator_helper" class="WellCommerce\Bundle\CoreBundle\Helper\Translator\TranslatorHelper">
+            <argument type="service" id="translator"/>
         </service>
     </services>
 </container>

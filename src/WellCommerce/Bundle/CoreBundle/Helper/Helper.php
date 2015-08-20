@@ -18,7 +18,7 @@ use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Helper extends AbstractContainer
+class Helper
 {
     /**
      * Replaces commas with dots

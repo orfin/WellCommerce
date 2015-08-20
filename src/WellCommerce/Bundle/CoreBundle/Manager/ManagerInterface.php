@@ -79,9 +79,9 @@ interface ManagerInterface
     /**
      * Returns the Translator
      *
-     * @return \Symfony\Component\Translation\TranslatorInterface
+     * @return \WellCommerce\Bundle\CoreBundle\Helper\Translator\TranslatorHelperInterface
      */
-    public function getTranslator();
+    public function getTranslatorHelper();
 
     /**
      * Sets the repository

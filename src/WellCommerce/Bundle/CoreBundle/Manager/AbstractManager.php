@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\CoreBundle\Manager;
 
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use WellCommerce\Bundle\CoreBundle\Event\ResourceEvent;
 use WellCommerce\Bundle\CoreBundle\Helper\Doctrine\DoctrineHelperInterface;
@@ -23,6 +22,7 @@ use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 use WellCommerce\Bundle\CoreBundle\Helper\Image\ImageHelperInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Redirect\RedirectHelperInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Request\RequestHelperInterface;
+use WellCommerce\Bundle\CoreBundle\Helper\Translator\TranslatorHelperInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
@@ -35,59 +35,59 @@ abstract class AbstractManager implements ManagerInterface
     /**
      * @var FlashHelperInterface
      */
-    private $flashHelper;
+    protected $flashHelper;
 
     /**
      * @var RedirectHelperInterface
      */
-    private $redirectHelper;
+    protected $redirectHelper;
 
     /**
      * @var ImageHelperInterface
      */
-    private $imageHelper;
+    protected $imageHelper;
 
     /**
      * @var EventDispatcherInterface
      */
-    private $eventDispatcher;
+    protected $eventDispatcher;
 
     /**
      * @var DoctrineHelperInterface
      */
-    private $doctrineHelper;
+    protected $doctrineHelper;
 
     /**
-     * @var TranslatorInterface
+     * @var TranslatorHelperInterface
      */
-    private $translator;
+    protected $translatorHelper;
 
     /**
      * @var RepositoryInterface
      */
-    private $repository;
+    protected $repository;
 
     /**
      * @var RequestHelperInterface
      */
-    private $requestHelper;
+    protected $requestHelper;
 
     /**
      * @var ValidatorInterface
      */
-    private $validator;
+    protected $validator;
 
     /**
      * Constructor
      *
-     * @param FlashHelperInterface     $flashHelper
-     * @param RedirectHelperInterface  $redirectHelper
-     * @param ImageHelperInterface     $imageHelper
-     * @param EventDispatcherInterface $eventDispatcher
-     * @param DoctrineHelperInterface  $doctrineHelper
-     * @param TranslatorInterface      $translator
-     * @param RequestHelperInterface   $requestHelper
-     * @param ValidatorInterface       $validator
+     * @param FlashHelperInterface      $flashHelper
+     * @param RedirectHelperInterface   $redirectHelper
+     * @param ImageHelperInterface      $imageHelper
+     * @param EventDispatcherInterface  $eventDispatcher
+     * @param DoctrineHelperInterface   $doctrineHelper
+     * @param TranslatorHelperInterface $translatorHelper
+     * @param RequestHelperInterface    $requestHelper
+     * @param ValidatorInterface        $validator
      */
     public function __construct(
         FlashHelperInterface $flashHelper,
@@ -95,18 +95,18 @@ abstract class AbstractManager implements ManagerInterface
         ImageHelperInterface $imageHelper,
         EventDispatcherInterface $eventDispatcher,
         DoctrineHelperInterface $doctrineHelper,
-        TranslatorInterface $translator,
+        TranslatorHelperInterface $translatorHelper,
         RequestHelperInterface $requestHelper,
         ValidatorInterface $validator
     ) {
-        $this->flashHelper     = $flashHelper;
-        $this->redirectHelper  = $redirectHelper;
-        $this->imageHelper     = $imageHelper;
-        $this->eventDispatcher = $eventDispatcher;
-        $this->doctrineHelper  = $doctrineHelper;
-        $this->translator      = $translator;
-        $this->requestHelper   = $requestHelper;
-        $this->validator       = $validator;
+        $this->flashHelper      = $flashHelper;
+        $this->redirectHelper   = $redirectHelper;
+        $this->imageHelper      = $imageHelper;
+        $this->eventDispatcher  = $eventDispatcher;
+        $this->doctrineHelper   = $doctrineHelper;
+        $this->translatorHelper = $translatorHelper;
+        $this->requestHelper    = $requestHelper;
+        $this->validator        = $validator;
     }
 
     /**
@@ -168,9 +168,9 @@ abstract class AbstractManager implements ManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function getTranslator()
+    public function getTranslatorHelper()
     {
-        return $this->translator;
+        return $this->translatorHelper;
     }
 
     /**

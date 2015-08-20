@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\LayoutBundle\Configurator;
 
+use Symfony\Component\DependencyInjection\ContainerAware;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
 use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
 use WellCommerce\Bundle\FormBundle\Conditions\Equals;
@@ -22,16 +23,23 @@ use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractLayoutBoxConfigurator extends AbstractContainer implements LayoutBoxConfiguratorInterface
+abstract class AbstractLayoutBoxConfigurator extends ContainerAware implements LayoutBoxConfiguratorInterface
 {
+    /**
+     * @var string
+     */
     protected $type;
+
+    /**
+     * @var string
+     */
     protected $controllerService;
 
     /**
      * Constructor
      *
-     * @param $type
-     * @param $controllerService
+     * @param string $type
+     * @param string $controllerService
      */
     public function __construct($type, $controllerService)
     {
@@ -100,5 +108,9 @@ abstract class AbstractLayoutBoxConfigurator extends AbstractContainer implement
     protected function getBoxTypeSelect(FormInterface $form)
     {
         return $form->getChildren()->get('required_data')->getChildren()->get('boxType');
+    }
+
+    protected function trans(){
+        return $this->container->get('translator.default')->trans($message);
     }
 }
