@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CoreBundle\Tests;
+namespace WellCommerce\Bundle\CoreBundle\Test;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
