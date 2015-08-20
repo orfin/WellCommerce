@@ -23,11 +23,10 @@ class ClientSettingsBoxController extends AbstractBoxController
 {
     public function indexAction()
     {
-        $manager = $this->getManager();
-        $request = $manager->getRequestHelper()->getCurrentRequest();
-        $client  = $manager->getRequestHelper()->getClient();
+        $request = $this->manager->getRequestHelper()->getCurrentRequest();
+        $client  = $this->manager->getRequestHelper()->getClient();
         if (null === $client) {
-            return $manager->getRedirectHelper()->redirectTo('front.client.login');
+            return $this->manager->getRedirectHelper()->redirectTo('front.client.login');
         }
 
         $form = $this->get('client_contact_details.form_builder.front')->createForm([
@@ -36,19 +35,19 @@ class ClientSettingsBoxController extends AbstractBoxController
 
         if ($form->handleRequest()->isSubmitted()) {
             if ($form->isValid()) {
-                $manager->updateResource($client, $request);
+                $this->manager->updateResource($client, $request);
 
-                $manager->getFlashHelper()->addSuccess('client.flash.contact_details.success');
+                $this->manager->getFlashHelper()->addSuccess('client.flash.contact_details.success');
 
-                return $manager->getRedirectHelper()->redirectTo('front.client.settings');
+                return $this->manager->getRedirectHelper()->redirectTo('front.client.settings');
             }
 
             if (count($form->getError())) {
-                $manager->getFlashHelper()->addError('client.flash.contact_details.error');
+                $this->manager->getFlashHelper()->addError('client.flash.contact_details.error');
             }
         }
 
-        return $this->display('index', [
+        return $this->displayTemplate('index', [
             'form'     => $form,
             'elements' => $form->getChildren(),
         ]);

@@ -25,20 +25,20 @@ class LayoutBoxController extends AbstractAdminController
 {
     public function addAction(Request $request)
     {
-        $resource = $this->getManager()->initResource();
-        $form     = $this->getManager()->getForm($resource);
+        $resource = $this->manager->initResource();
+        $form     = $this->manager->getForm($resource);
 
         if ($form->handleRequest()->isSubmitted()) {
             if ($form->isValid()) {
                 $settings = $this->getBoxSettingsFromRequest($request);
                 $resource->setSettings($settings);
-                $this->getManager()->createResource($resource, $request);
+                $this->manager->createResource($resource, $request);
             }
 
             return $this->createFormDefaultJsonResponse($form);
         }
 
-        return $this->display('add', [
+        return $this->displayTemplate('add', [
             'form' => $form
         ]);
     }

@@ -24,27 +24,28 @@ use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxSettingsCollection;
 class ProductStatusBoxController extends AbstractBoxController implements BoxControllerInterface
 {
     /**
+     * @var \WellCommerce\Bundle\ProductBundle\Manager\Front\ProductStatusManager
+     */
+    protected $manager;
+    
+    /**
      * {@inheritdoc}
      */
     public function indexAction(LayoutBoxSettingsCollection $boxSettings)
     {
-        /**
-         * @var $manager \WellCommerce\Bundle\ProductBundle\Manager\Front\ProductStatusManager
-         */
-        $manager           = $this->getManager();
-        $productProvider   = $manager->getProvider('product');
+        $productProvider   = $this->manager->getProvider('product');
         $collectionBuilder = $productProvider->getCollectionBuilder();
-        $requestHelper     = $manager->getRequestHelper();
+        $requestHelper     = $this->manager->getRequestHelper();
 
         $dataset = $collectionBuilder->getDataSet([
             'limit'         => $requestHelper->getQueryAttribute('limit', $boxSettings->getParam('per_page', 12)),
             'order_by'      => $requestHelper->getQueryAttribute('order_by', 'price'),
             'order_dir'     => $requestHelper->getQueryAttribute('order_dir', 'asc'),
-            'conditions'    => $manager->getStatusConditions($boxSettings->getParam('status')),
+            'conditions'    => $this->manager->getStatusConditions($boxSettings->getParam('status')),
             'cache_enabled' => true
         ]);
 
-        return $this->display('index', [
+        return $this->displayTemplate('index', [
             'dataset' => $dataset
         ]);
     }

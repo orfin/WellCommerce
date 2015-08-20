@@ -29,13 +29,13 @@ class CategoryMenuBoxController extends AbstractBoxController implements BoxCont
     public function indexAction()
     {
         $active         = null;
-        $activeCategory = $this->getManager()->getCategoryProvider()->getCurrentCategory();
+        $activeCategory = $this->manager->getCategoryProvider()->getCurrentCategory();
 
         if ($activeCategory instanceof Category) {
             $active = $activeCategory->getId();
         }
 
-        return $this->render('WellCommerceCategoryBundle:Box/CategoryMenu:index.html.twig', [
+        return $this->displayTemplate('index', [
             'active' => $active
         ]);
     }

@@ -24,9 +24,9 @@ class CategoryInfoBoxController extends AbstractBoxController implements BoxCont
 {
     public function indexAction()
     {
-        $provider = $this->getManager()->getCategoryProvider();
+        $provider = $this->manager->getCategoryProvider();
 
-        return $this->render('WellCommerceCategoryBundle:Box/CategoryInfo:index.html.twig', [
+        return $this->displayTemplate('index', [
             'category' => $provider->getCurrentCategory()
         ]);
     }

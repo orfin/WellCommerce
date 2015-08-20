@@ -32,9 +32,9 @@ class ProductController extends AbstractFrontController implements FrontControll
             'name' => $product->translate()->getName(),
         ]));
 
-        $this->getManager()->getProductProvider()->setCurrentProduct($product);
+        $this->manager->getProductProvider()->setCurrentProduct($product);
 
-        return $this->display('index', [
+        return $this->displayTemplate('index', [
             'product' => $product
         ]);
     }

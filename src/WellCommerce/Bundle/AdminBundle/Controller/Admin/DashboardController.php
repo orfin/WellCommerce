@@ -23,6 +23,6 @@ class DashboardController extends AbstractAdminController
 {
     public function indexAction()
     {
-        return $this->display('index');
+        return $this->displayTemplate('index');
     }
 }

@@ -37,9 +37,9 @@ class CategoryController extends AbstractFrontController implements FrontControl
             'name' => $category->translate()->getName(),
         ]));
 
-        $this->getManager()->getCategoryProvider()->setCurrentCategory($category);
+        $this->manager->getCategoryProvider()->setCurrentCategory($category);
 
-        return $this->display('index', [
+        return $this->displayTemplate('index', [
             'category' => $category
         ]);
     }

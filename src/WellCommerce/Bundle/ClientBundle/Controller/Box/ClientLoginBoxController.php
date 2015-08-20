@@ -29,7 +29,7 @@ class ClientLoginBoxController extends AbstractBoxController
             'action'       => $this->generateUrl('front.client.login_check')
         ], null);
 
-        return $this->display('index', [
+        return $this->displayTemplate('index', [
             'form'     => $form,
             'elements' => $form->getChildren(),
             'error'    => $this->get('security.authentication_utils')->getLastAuthenticationError()

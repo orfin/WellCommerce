@@ -60,7 +60,7 @@ class OrderController extends AbstractFrontController implements FrontController
             }
         }
 
-        return $this->display('address', [
+        return $this->displayTemplate('address', [
             'form'     => $form,
             'elements' => $form->getChildren(),
         ]);
@@ -97,7 +97,7 @@ class OrderController extends AbstractFrontController implements FrontController
             }
         }
 
-        return $this->display('confirm', [
+        return $this->displayTemplate('confirm', [
             'form'     => $form,
             'elements' => $form->getChildren(),
         ]);

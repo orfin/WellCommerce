@@ -29,7 +29,7 @@ class ProductInfoBoxController extends AbstractBoxController implements BoxContr
     {
         $provider = $this->manager->getProductProvider();
 
-        return $this->display('index', [
+        return $this->displayTemplate('index', [
             'product' => $provider->getCurrentProduct()
         ]);
     }

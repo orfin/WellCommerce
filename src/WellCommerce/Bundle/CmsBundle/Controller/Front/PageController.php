@@ -40,7 +40,7 @@ class PageController extends AbstractFrontController implements FrontControllerI
             'name' => $page->translate()->getName(),
         ]));
 
-        return $this->display('index', [
+        return $this->displayTemplate('index', [
             'page' => $page
         ]);
     }

@@ -24,14 +24,18 @@ use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxSettingsCollection;
 class CategoryProductsBoxController extends AbstractBoxController implements BoxControllerInterface
 {
     /**
+     * @var \WellCommerce\Bundle\CategoryBundle\Manager\Front\CategoryManager
+     */
+    protected $manager;
+
+    /**
      * {@inheritdoc}
      */
     public function indexAction(LayoutBoxSettingsCollection $boxSettings)
     {
-        $manager           = $this->getManager();
-        $provider          = $manager->getProductProvider();
+        $provider          = $this->manager->getProductProvider();
         $collectionBuilder = $provider->getCollectionBuilder();
-        $requestHelper     = $manager->getRequestHelper();
+        $requestHelper     = $this->manager->getRequestHelper();
         $limit             = $requestHelper->getCurrentLimit($boxSettings->getParam('per_page', 12));
         $offset            = $requestHelper->getCurrentOffset($limit);
 
@@ -40,11 +44,11 @@ class CategoryProductsBoxController extends AbstractBoxController implements Box
             'offset'        => $offset,
             'order_by'      => $requestHelper->getQueryAttribute('order_by', 'name'),
             'order_dir'     => $requestHelper->getQueryAttribute('order_dir', 'asc'),
-            'conditions'    => $this->getManager()->getConditions(),
+            'conditions'    => $this->manager->getCurrentCategoryConditions(),
             'cache_enabled' => true
         ]);
 
-        return $this->render('WellCommerceCategoryBundle:Box/CategoryProducts:index.html.twig', [
+        return $this->displayTemplate('index', [
             'dataset' => $dataset
         ]);
     }

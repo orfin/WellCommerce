@@ -60,18 +60,10 @@ class CartController extends AbstractFrontController implements FrontControllerI
             }
         }
 
-        return $this->display('index', [
+        return $this->displayTemplate('index', [
             'form'     => $form,
             'elements' => $form->getChildren(),
         ]);
-    }
-
-    /**
-     * @return \WellCommerce\Bundle\CartBundle\Manager\Front\CartManager
-     */
-    protected function getManager()
-    {
-        return parent::getManager();
     }
 
     public function addAction()

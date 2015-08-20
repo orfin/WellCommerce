@@ -23,6 +23,6 @@ class ClientOrdersBoxController extends AbstractBoxController
 {
     public function indexAction()
     {
-        return $this->display('index');
+        return $this->displayTemplate('index');
     }
 }

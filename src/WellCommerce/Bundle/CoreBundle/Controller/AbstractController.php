@@ -13,6 +13,7 @@ namespace WellCommerce\Bundle\CoreBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
 
 /**
  * Class Controller
@@ -21,6 +22,21 @@ use Symfony\Component\HttpFoundation\JsonResponse;
  */
 abstract class AbstractController extends Controller
 {
+    /**
+     * @var ManagerInterface
+     */
+    protected $manager;
+
+    /**
+     * Constructor
+     *
+     * @param ManagerInterface $manager
+     */
+    public function __construct(ManagerInterface $manager)
+    {
+        $this->manager = $manager;
+    }
+
     /**
      * Returns content as json response
      *
@@ -42,7 +58,7 @@ abstract class AbstractController extends Controller
      */
     protected function trans($id)
     {
-        return $this->getManager()->getTranslator()->trans($id);
+        return $this->manager->getTranslator()->trans($id);
     }
 
     /**
@@ -55,7 +71,7 @@ abstract class AbstractController extends Controller
      */
     protected function redirectToAction($actionName = 'index', array $params = [])
     {
-        return $this->getManager()->getRedirectHelper()->redirectToAction($actionName, $params);
+        return $this->manager->getRedirectHelper()->redirectToAction($actionName, $params);
     }
 
     /**
@@ -68,15 +84,8 @@ abstract class AbstractController extends Controller
      */
     protected function getRedirectToActionUrl($actionName = 'index', array $params = [])
     {
-        return $this->getManager()->getRedirectHelper()->getRedirectToActionUrl($actionName, $params);
+        return $this->manager->getRedirectHelper()->getRedirectToActionUrl($actionName, $params);
     }
-
-    /**
-     * Returns manager object
-     *
-     * @return \WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface
-     */
-    abstract protected function getManager();
 
     /**
      * Renders and displays the template
@@ -86,7 +95,7 @@ abstract class AbstractController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    protected function display($templateName, array $templateVars = [])
+    protected function displayTemplate($templateName, array $templateVars = [])
     {
         $templateResolver = $this->get('template_resolver');
         $template         = $templateResolver->resolveControllerTemplate($this, $templateName);

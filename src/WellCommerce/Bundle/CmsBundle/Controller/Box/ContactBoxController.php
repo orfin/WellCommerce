@@ -24,6 +24,6 @@ class ContactBoxController extends AbstractBoxController implements BoxControlle
 {
     public function indexAction()
     {
-        return $this->display('index');
+        return $this->displayTemplate('index');
     }
 }

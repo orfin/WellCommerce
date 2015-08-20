@@ -47,7 +47,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
      */
     public function indexAction()
     {
-        return $this->display('index',[
+        return $this->displayTemplate('index',[
             'datagrid' => $this->manager->getDataGrid()
         ]);
     }
@@ -92,7 +92,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
             return $this->createFormDefaultJsonResponse($form);
         }
 
-        return $this->display('add', [
+        return $this->displayTemplate('add', [
             'form' => $form
         ]);
     }
@@ -121,7 +121,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
             return $this->createFormDefaultJsonResponse($form);
         }
 
-        return $this->display('edit',[
+        return $this->displayTemplate('edit',[
             'form' => $form
         ]);
     }
@@ -163,15 +163,5 @@ abstract class AbstractAdminController extends AbstractController implements Adm
         }
 
         return $this->jsonResponse(['success' => true]);
-    }
-
-    /**
-     * Returns manager object
-     *
-     * @return AdminManagerInterface
-     */
-    protected function getManager()
-    {
-        return $this->manager;
     }
 }

@@ -32,7 +32,7 @@ class UserController extends AbstractAdminController
             'class'        => 'login-form',
         ], null);
 
-        return $this->display('login', [
+        return $this->displayTemplate('login', [
             'error' => $this->getSecurityErrors($request),
             'form'  => $form
         ]);
@@ -74,7 +74,7 @@ class UserController extends AbstractAdminController
         $em = $this->manager->getDoctrineHelper()->getEntityManager();
 
         try {
-            $resource = $this->getManager()->getRepository()->find($id);
+            $resource = $this->manager->getRepository()->find($id);
             $em->remove($resource);
         } catch (\Exception $e) {
             return $this->jsonResponse(['error' => $e->getMessage()]);

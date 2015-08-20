@@ -45,7 +45,7 @@ class CategoryController extends AbstractAdminController
             ]);
         }
 
-        return $this->display('index', [
+        return $this->displayTemplate('index', [
             'tree' => $tree
         ]);
     }
@@ -88,7 +88,7 @@ class CategoryController extends AbstractAdminController
             return $this->createFormDefaultJsonResponse($form);
         }
 
-        return $this->display('edit', [
+        return $this->displayTemplate('edit', [
             'tree' => $this->manager->getTree(),
             'form' => $form,
         ]);

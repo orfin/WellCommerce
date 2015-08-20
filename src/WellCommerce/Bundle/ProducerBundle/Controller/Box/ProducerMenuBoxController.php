@@ -27,7 +27,7 @@ class ProducerMenuBoxController extends AbstractBoxController implements BoxCont
      */
     public function indexAction()
     {
-        return $this->display('index', [
+        return $this->displayTemplate('index', [
             'producers' => $this->get('producer.collection.front')->getSelect()
         ]);
     }

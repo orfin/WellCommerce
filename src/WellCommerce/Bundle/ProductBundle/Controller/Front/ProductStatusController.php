@@ -38,10 +38,10 @@ class ProductStatusController extends AbstractFrontController implements FrontCo
                 'name' => $status->translate()->getName(),
             ]));
 
-            $this->getManager()->getProductStatusProvider()->setCurrentProductStatus($status);
+            $this->manager->getProductStatusProvider()->setCurrentProductStatus($status);
         }
 
-        return $this->render('WellCommerceProductBundle:Front/ProductStatus:index.html.twig', [
+        return $this->displayTemplate('index', [
             'status' => $status
         ]);
     }

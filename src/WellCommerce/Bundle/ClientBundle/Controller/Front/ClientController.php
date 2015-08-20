@@ -25,7 +25,7 @@ class ClientController extends AbstractFrontController implements FrontControlle
 {
     public function loginAction()
     {
-        return $this->display('login');
+        return $this->displayTemplate('login');
     }
 
     public function loginCheckAction(Request $request)
@@ -34,7 +34,7 @@ class ClientController extends AbstractFrontController implements FrontControlle
 
     public function registerAction()
     {
-        return $this->display('register');
+        return $this->displayTemplate('register');
     }
 
     public function settingsAction()
@@ -44,16 +44,16 @@ class ClientController extends AbstractFrontController implements FrontControlle
 
     public function wishListAction()
     {
-        return $this->display('wishlist');
+        return $this->displayTemplate('wishlist');
     }
 
     public function addressBookAction()
     {
-        return $this->display('address_book');
+        return $this->displayTemplate('address_book');
     }
 
     public function ordersAction()
     {
-        return $this->display('orders');
+        return $this->displayTemplate('orders');
     }
 }

@@ -30,7 +30,7 @@ class ShopController extends AbstractAdminController
      */
     public function changeContextAction($id)
     {
-        $shop = $this->getManager()->getRepository()->find($id);
+        $shop = $this->manager->getRepository()->find($id);
         $this->get('shop.context.admin')->setCurrentScope($shop);
 
         return $this->jsonResponse([

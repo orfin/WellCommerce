@@ -24,26 +24,27 @@ use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxSettingsCollection;
 class ProductShowcaseBoxController extends AbstractBoxController implements BoxControllerInterface
 {
     /**
+     * @var \WellCommerce\Bundle\ProductBundle\Manager\Front\ProductStatusManager
+     */
+    protected $manager;
+    
+    /**
      * {@inheritdoc}
      */
     public function indexAction(LayoutBoxSettingsCollection $boxSettings)
     {
-        /**
-         * @var $manager \WellCommerce\Bundle\ProductBundle\Manager\Front\ProductStatusManager
-         */
-        $manager           = $this->getManager();
-        $provider          = $manager->getProvider('product');
+        $provider          = $this->manager->getProvider('product');
         $collectionBuilder = $provider->getCollectionBuilder();
-        $requestHelper     = $manager->getRequestHelper();
+        $requestHelper     = $this->manager->getRequestHelper();
 
         $dataset = $collectionBuilder->getDataSet([
             'limit'      => $requestHelper->getQueryAttribute('limit', 1),
             'order_by'   => $requestHelper->getQueryAttribute('order_by', 'name'),
             'order_dir'  => $requestHelper->getQueryAttribute('order_dir', 'asc'),
-            'conditions' => $manager->getStatusConditions($boxSettings->getParam('status')),
+            'conditions' => $this->manager->getStatusConditions($boxSettings->getParam('status')),
         ]);
 
-        return $this->display('index', [
+        return $this->displayTemplate('index', [
             'dataset' => $dataset
         ]);
     }

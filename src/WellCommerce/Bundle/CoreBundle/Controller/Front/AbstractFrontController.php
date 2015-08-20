@@ -64,16 +64,6 @@ abstract class AbstractFrontController extends AbstractController implements Fro
     }
 
     /**
-     * Returns manager object
-     *
-     * @return FrontManagerInterface
-     */
-    protected function getManager()
-    {
-        return $this->manager;
-    }
-
-    /**
      * Shorthand to add new breadcrumb items to collection
      *
      * @param BreadcrumbItem $item

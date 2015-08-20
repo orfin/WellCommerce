@@ -42,7 +42,7 @@ class AttributeGroupController extends AbstractAdminController
             ]);
         }
         
-        return $this->display('index', [
+        return $this->displayTemplate('index', [
             'groups' => $groups
         ]);
     }
@@ -91,7 +91,7 @@ class AttributeGroupController extends AbstractAdminController
             return $this->redirectToAction('index');
         }
         
-        return $this->display('edit', [
+        return $this->displayTemplate('edit', [
             'currentGroup' => $resource,
             'groups'       => $groups,
             'form'         => $form
