@@ -51,17 +51,6 @@ class RouterHelper implements RouterHelperInterface
         return false;
     }
 
-    public function getControllerAction($controller)
-    {
-        $currentAction = $this->getCurrentAction();
-
-        if ($this->hasControllerAction($controller, $currentAction)) {
-            return $currentAction;
-        }
-
-        return self::DEFAULT_CONTROLLER_ACTION;
-    }
-
     /**
      * {@inheritdoc}
      */

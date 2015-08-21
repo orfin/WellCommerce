@@ -36,9 +36,7 @@
         <service id="producer_menu.layout_box.configurator" class="WellCommerce\Bundle\ProducerBundle\Layout\ProducerMenuBoxConfigurator">
             <argument>ProducerMenu</argument>
             <argument>producer_menu.layout_box.controller</argument>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
+            <argument type="service" id="translator_helper"/>
             <tag name="layout_box.configurator" />
         </service>
     </services>
