@@ -12,3 +12,4 @@ filter:
         - web/*
         - bin/*
         - src/*Bundle/DataFixtures/
+        - src/*Bundle/Tests/
