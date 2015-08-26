@@ -29,8 +29,7 @@ class AvailabilityRepositoryTest extends AbstractRepositoryTestCase
     public function testRepositoryHasDatasetQueryBuilder()
     {
         $repository = $this->getService();
-        $reflection = new \ReflectionObject($repository);
-        if (null !== $repository && $reflection->implementsInterface('WellCommerce\Bundle\CoreBundle\Doctrine\ORM\DataSetAwareRepositoryInterface')) {
+        if (null !== $repository) {
             $this->assertInstanceOf('Doctrine\ORM\QueryBuilder', $repository->getDataSetQueryBuilder());
         }
     }

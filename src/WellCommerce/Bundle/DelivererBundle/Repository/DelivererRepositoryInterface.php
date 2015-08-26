@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\DelivererBundle\Repository;
 
-use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\DataSetAwareRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**

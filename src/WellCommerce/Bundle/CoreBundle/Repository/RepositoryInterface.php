@@ -12,12 +12,14 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Repository;
 
+use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\DataSetAwareRepositoryInterface;
+
 /**
  * Interface RepositoryInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface RepositoryInterface
+interface RepositoryInterface extends DataSetAwareRepositoryInterface
 {
     /**
      * Creates new entity
@@ -34,13 +36,6 @@ interface RepositoryInterface
      * @return \Doctrine\ORM\QueryBuilder
      */
     public function createQueryBuilder($alias);
-
-    /**
-     * Returns entity alias
-     *
-     * @return string
-     */
-    public function getAlias();
 
     /**
      * Returns property accessor
@@ -93,12 +88,4 @@ interface RepositoryInterface
      * @return \Doctrine\ORM\Mapping\ClassMetadataFactory
      */
     public function getMetadataFactory();
-
-    /**
-     * Returns a query builder object used in dataset
-     *
-     * @return \Doctrine\ORM\QueryBuilder
-     * @throws \Doctrine\ORM\Mapping\MappingException
-     */
-    public function getDataSetQueryBuilder();
 }
