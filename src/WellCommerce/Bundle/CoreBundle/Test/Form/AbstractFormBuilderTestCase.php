@@ -29,6 +29,8 @@ abstract class AbstractFormBuilderTestCase extends AbstractTestCase
         return null;
     }
 
+    abstract protected function getSampleFormModelData();
+
     public function testFormBuilderServiceIsCreated()
     {
         $formBuilder = $this->getService();
@@ -56,13 +58,28 @@ abstract class AbstractFormBuilderTestCase extends AbstractTestCase
         $formBuilder = $this->getService();
 
         if (null !== $formBuilder) {
-            $stub = $this->getMockBuilder('SampleEntity')->getMock();
+            $sample = $this->getSampleFormModelData();
 
             $form = $formBuilder->createForm([
                 'name' => 'test'
-            ], $stub);
+            ], $sample);
 
-            $this->assertEquals($stub, $form->getModelData());
+            $this->assertEquals($sample, $form->getModelData());
+        }
+    }
+
+    public function testFormHasNonEmptyElementsCollection()
+    {
+        $formBuilder = $this->getService();
+
+        if (null !== $formBuilder) {
+            $sample = $this->getSampleFormModelData();
+
+            $form = $formBuilder->createForm([
+                'name' => 'test'
+            ], $sample);
+
+            $this->assertGreaterThan(0, $form->getChildren()->count());
         }
     }
 }

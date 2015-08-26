@@ -10,19 +10,24 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AvailabilityBundle\Tests\Repository;
+namespace WellCommerce\Bundle\UnitBundle\Tests\DataGrid;
 
-use WellCommerce\Bundle\CoreBundle\Test\Repository\AbstractRepositoryTestCase;
+use WellCommerce\Bundle\CoreBundle\Test\DataGrid\AbstractDataGridTestCase;
 
 /**
- * Class AvailabilityRepositoryTest
+ * Class UnitDataGridTest
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AvailabilityRepositoryTest extends AbstractRepositoryTestCase
+class UnitDataGridTest extends AbstractDataGridTestCase
 {
     protected function getService()
     {
-        return $this->container->get('availability.repository');
+        return $this->container->get('unit.datagrid')->getInstance();
+    }
+
+    protected function getColumns()
+    {
+        return ['id', 'name'];
     }
 }

@@ -38,4 +38,20 @@ abstract class AbstractRepositoryTestCase extends AbstractTestCase
             $this->assertInstanceOf('WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface', $repository);
         }
     }
+
+    public function testRepositoryHasDatasetQueryBuilder()
+    {
+        $repository = $this->getService();
+        if (null !== $repository) {
+            $this->assertInstanceOf('Doctrine\ORM\QueryBuilder', $repository->getDataSetQueryBuilder());
+        }
+    }
+
+    public function testQueryBuilderReturnsValidQuery()
+    {
+        $repository = $this->getService();
+        if (null !== $repository) {
+            $this->assertInstanceOf('Doctrine\ORM\Query', $repository->getDataSetQueryBuilder()->getQuery());
+        }
+    }
 }

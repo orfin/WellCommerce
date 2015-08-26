@@ -46,7 +46,19 @@ class ThemeManager implements ThemeManagerInterface
     public function __construct(KernelInterface $kernel)
     {
         $this->kernel        = $kernel;
-        $this->fallBackTheme = $kernel->getContainer()->getParameter('fallback_theme');
+        $this->fallBackTheme = $this->getFallBackTheme();
+    }
+
+    /**
+     * @return string|null
+     */
+    protected function getFallBackTheme()
+    {
+        if (null !== $this->kernel->getContainer()) {
+            return $this->kernel->getContainer()->getParameter('fallback_theme');
+        }
+
+        return null;
     }
 
     /**

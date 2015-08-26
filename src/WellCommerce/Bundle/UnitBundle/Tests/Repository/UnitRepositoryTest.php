@@ -10,19 +10,19 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AvailabilityBundle\Tests\Repository;
+namespace WellCommerce\Bundle\UnitBundle\Tests\Repository;
 
 use WellCommerce\Bundle\CoreBundle\Test\Repository\AbstractRepositoryTestCase;
 
 /**
- * Class AvailabilityRepositoryTest
+ * Class UnitRepositoryTest
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AvailabilityRepositoryTest extends AbstractRepositoryTestCase
+class UnitRepositoryTest extends AbstractRepositoryTestCase
 {
     protected function getService()
     {
-        return $this->container->get('availability.repository');
+        return $this->container->get('unit.repository');
     }
 }
