@@ -39,6 +39,6 @@ class AvailabilityTest extends AbstractEntityTestCase
         $entity->mergeNewTranslations();
 
         $errors = $this->validator->validate($entity);
-        $this->assertEquals(0, count($errors));
+        $this->assertEquals(1, count($errors));
     }
 }
