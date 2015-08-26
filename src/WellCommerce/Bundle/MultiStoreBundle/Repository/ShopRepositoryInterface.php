@@ -13,13 +13,12 @@
 namespace WellCommerce\Bundle\MultiStoreBundle\Repository;
 
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
-use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\DataSetAwareRepositoryInterface;
 
 /**
  * Interface ShopRepositoryInterface
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ShopRepositoryInterface extends RepositoryInterface, DataSetAwareRepositoryInterface
+interface ShopRepositoryInterface extends RepositoryInterface
 {
 }

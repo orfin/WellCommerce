@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\CartBundle\Repository;
 
 use WellCommerce\Bundle\CartBundle\Entity\Cart;
-use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\DataSetAwareRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\Product;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute;
@@ -23,7 +22,7 @@ use WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-interface CartProductRepositoryInterface extends RepositoryInterface, DataSetAwareRepositoryInterface
+interface CartProductRepositoryInterface extends RepositoryInterface
 {
     /**
      * Returns product from cart

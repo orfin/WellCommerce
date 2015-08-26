@@ -11,7 +11,6 @@
  */
 namespace WellCommerce\Bundle\AdminBundle\Controller;
 
-use Doctrine\Common\Util\Debug;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\AdminBundle\Manager\AdminManagerInterface;
@@ -47,7 +46,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
      */
     public function indexAction()
     {
-        return $this->displayTemplate('index',[
+        return $this->displayTemplate('index', [
             'datagrid' => $this->manager->getDataGrid()
         ]);
     }
@@ -61,6 +60,10 @@ abstract class AbstractAdminController extends AbstractController implements Adm
      */
     public function gridAction(Request $request)
     {
+        if (!$request->isXmlHttpRequest()) {
+            return $this->manager->getRedirectHelper()->redirectToAction('index');
+        }
+
         $datagrid = $this->manager->getDataGrid();
 
         try {
@@ -121,7 +124,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
             return $this->createFormDefaultJsonResponse($form);
         }
 
-        return $this->displayTemplate('edit',[
+        return $this->displayTemplate('edit', [
             'form' => $form
         ]);
     }

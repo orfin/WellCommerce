@@ -12,32 +12,17 @@
 
 namespace WellCommerce\Bundle\AvailabilityBundle\Tests\Form;
 
-use WellCommerce\Bundle\CoreBundle\Test\AbstractTestCase;
+use WellCommerce\Bundle\CoreBundle\Test\Form\AbstractFormBuilderTestCase;
 
 /**
  * Class AvailabilityFormBuilderTest
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AvailabilityFormBuilderTest extends AbstractTestCase
+class AvailabilityFormBuilderTest extends AbstractFormBuilderTestCase
 {
-    public function testFormIsCreated()
+    protected function getService()
     {
-        $form = $this->container->get('availability.form_builder')->createForm([
-            'name' => 'availability'
-        ], null);
-
-        $this->assertInstanceOf('WellCommerce\Bundle\FormBundle\Elements\FormInterface', $form);
-    }
-
-    public function testFormIsAbleToReturnDefaultModelData()
-    {
-        $resource = $this->container->get('availability.repository')->findOneBy([]);
-
-        $form = $this->container->get('availability.form_builder')->createForm([
-            'name' => 'availability'
-        ], $resource);
-
-        $this->assertEquals($resource, $form->getModelData());
+        return $this->container->get('availability.form_builder');
     }
 }

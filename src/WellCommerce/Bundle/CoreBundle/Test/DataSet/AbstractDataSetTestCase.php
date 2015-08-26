@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\CoreBundle\Test\DataSet;
 
 use WellCommerce\Bundle\CoreBundle\Test\AbstractTestCase;
+use WellCommerce\Bundle\DataSetBundle\Request\DataSetRequest;
 
 /**
  * Class AbstractDataSetTestCase
@@ -37,7 +38,7 @@ abstract class AbstractDataSetTestCase extends AbstractTestCase
         return [];
     }
 
-    public function testServiceIsCreated()
+    public function testDatasetServiceIsCreated()
     {
         $dataset = $this->getService();
 
@@ -46,7 +47,7 @@ abstract class AbstractDataSetTestCase extends AbstractTestCase
         }
     }
 
-    public function testHasRequiredColumns()
+    public function testDatasetHasRequiredColumns()
     {
         $dataset = $this->getService();
 
@@ -67,11 +68,28 @@ abstract class AbstractDataSetTestCase extends AbstractTestCase
         }
     }
 
+    public function testDatasetReturnsResults()
+    {
+        $dataset = $this->getService();
+
+        if (null !== $dataset) {
+            $results = $dataset->getResults($this->getDefaultDataSetRequest());
+
+            $this->assertArrayHasKey('rows', $results);
+            $this->assertArrayHasKey('total', $results);
+        }
+    }
+
     protected function isAggregateColumn($source)
     {
         $aggregates = ['SUM', 'GROUP_CONCAT', 'MIN', 'MAX', 'AVG', 'COUNT'];
         $regex      = '/(' . implode('|', $aggregates) . ')/i';
 
         return (bool)(preg_match($regex, $source));
+    }
+
+    protected function getDefaultDataSetRequest()
+    {
+        return new DataSetRequest(['order_by' => 'id', 'order_dir' => 'asc', 'limit' => 10]);
     }
 }

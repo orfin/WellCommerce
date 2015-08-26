@@ -84,6 +84,9 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
         return $this->getEntityManager()->getRepository($class);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getDataSetQueryBuilder()
     {
         $queryBuilder    = $this->getQueryBuilder();
@@ -91,10 +94,10 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
         $identifierField = sprintf('%s.%s', $metadata->getTableName(), $metadata->getSingleIdentifierFieldName());
 
         if ($metadata->hasAssociation(self::TRANSLATIONS_ASSOCIATION_NAME)) {
-            $association      = $metadata->getAssociationTargetClass(self::TRANSLATIONS_ASSOCIATION_NAME);
+            $association          = $metadata->getAssociationTargetClass(self::TRANSLATIONS_ASSOCIATION_NAME);
             $associationMetaData  = $this->getEntityManager()->getClassMetadata($association);
             $associationTableName = $associationMetaData->getTableName();
-            $translationField = sprintf('%s.%s', $associationTableName, self::TRANSLATIONS_ASSOCIATION_FIELD);
+            $translationField     = sprintf('%s.%s', $associationTableName, self::TRANSLATIONS_ASSOCIATION_FIELD);
 
             $queryBuilder->leftJoin(
                 $association,

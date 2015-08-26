@@ -38,7 +38,7 @@ abstract class AbstractDataGridTestCase extends AbstractTestCase
         return [];
     }
 
-    public function testServiceIsCreated()
+    public function testDatagridServiceIsCreated()
     {
         $datagrid = $this->getService();
 
@@ -47,7 +47,7 @@ abstract class AbstractDataGridTestCase extends AbstractTestCase
         }
     }
 
-    public function testColumnsCollectionIsConfigurable()
+    public function testDatagridColumnsCollectionIsConfigurable()
     {
         $datagrid = $this->getService();
 
@@ -68,7 +68,7 @@ abstract class AbstractDataGridTestCase extends AbstractTestCase
         }
     }
 
-    public function testHasRequiredColumns()
+    public function testDatagridHasRequiredColumns()
     {
         $datagrid = $this->getService();
 

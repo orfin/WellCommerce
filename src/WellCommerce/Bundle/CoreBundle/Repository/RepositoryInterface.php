@@ -93,4 +93,12 @@ interface RepositoryInterface
      * @return \Doctrine\ORM\Mapping\ClassMetadataFactory
      */
     public function getMetadataFactory();
+
+    /**
+     * Returns a query builder object used in dataset
+     *
+     * @return \Doctrine\ORM\QueryBuilder
+     * @throws \Doctrine\ORM\Mapping\MappingException
+     */
+    public function getDataSetQueryBuilder();
 }

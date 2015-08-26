@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\AvailabilityBundle\Tests\DataSet;
 
 use WellCommerce\Bundle\CoreBundle\Test\DataSet\AbstractDataSetTestCase;
+use WellCommerce\Bundle\DataSetBundle\Request\DataSetRequest;
 
 /**
  * Class AvailabilityDataSetTest

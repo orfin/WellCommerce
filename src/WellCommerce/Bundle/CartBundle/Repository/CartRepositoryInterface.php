@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\CartBundle\Repository;
 
 use WellCommerce\Bundle\ClientBundle\Entity\Client;
-use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\DataSetAwareRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\Shop;
 
@@ -22,7 +21,7 @@ use WellCommerce\Bundle\MultiStoreBundle\Entity\Shop;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-interface CartRepositoryInterface extends RepositoryInterface, DataSetAwareRepositoryInterface
+interface CartRepositoryInterface extends RepositoryInterface
 {
     /**
      * Returns client cart

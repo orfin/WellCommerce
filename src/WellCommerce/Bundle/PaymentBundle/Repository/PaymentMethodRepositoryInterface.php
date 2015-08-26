@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Repository;
 
-use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\DataSetAwareRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
@@ -20,7 +19,7 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface PaymentMethodRepositoryInterface extends RepositoryInterface, DataSetAwareRepositoryInterface
+interface PaymentMethodRepositoryInterface extends RepositoryInterface
 {
     /**
      * Returns default shipping method

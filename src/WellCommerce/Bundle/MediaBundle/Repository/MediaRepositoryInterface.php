@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\MediaBundle\Repository;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\DataSetAwareRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
@@ -21,7 +20,7 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-interface MediaRepositoryInterface extends RepositoryInterface, DataSetAwareRepositoryInterface
+interface MediaRepositoryInterface extends RepositoryInterface
 {
     /**
      * Saves uploaded file info
