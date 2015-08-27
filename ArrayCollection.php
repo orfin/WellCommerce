@@ -30,7 +30,7 @@ class ArrayCollection implements CollectionInterface
     /**
      * Initializes a new ArrayCollection.
      *
-     * @param array $elements
+     * @param array $items
      */
     public function __construct(array $items = [])
     {
