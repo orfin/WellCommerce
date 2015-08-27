@@ -50,7 +50,7 @@ class ArrayCollectionTest extends \PHPUnit_Framework_TestCase
         $collection = new ArrayCollection($elements);
 
         foreach ($elements as $key => $val) {
-            $this->assertArrayHasKey($key, $collection->all());
+            $this->assertTrue($collection->has($key));
         }
     }
 
@@ -76,6 +76,7 @@ class ArrayCollectionTest extends \PHPUnit_Framework_TestCase
         foreach ($elements as $key => $val) {
             $collection->remove($key);
             $this->assertArrayNotHasKey($key, $collection->all());
+            $this->assertFalse($collection->has($key));
         }
     }
 
