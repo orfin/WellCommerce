@@ -28,6 +28,16 @@ class ArrayCollection implements CollectionInterface
     protected $items = [];
 
     /**
+     * Initializes a new ArrayCollection.
+     *
+     * @param array $elements
+     */
+    public function __construct(array $items = [])
+    {
+        $this->items = $items;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getIterator()
