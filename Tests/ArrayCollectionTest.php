@@ -23,7 +23,7 @@ use WellCommerce\Common\Collections\ArrayCollection;
 class ArrayCollectionTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @dataProvider provideDifferentElements
+     * @dataProvider provideTestData
      */
     public function testAll($elements)
     {
@@ -33,7 +33,7 @@ class ArrayCollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider provideDifferentElements
+     * @dataProvider provideTestData
      */
     public function testCount($elements)
     {
@@ -43,7 +43,7 @@ class ArrayCollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider provideDifferentElements
+     * @dataProvider provideTestData
      */
     public function testHas($elements)
     {
@@ -55,7 +55,7 @@ class ArrayCollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider provideDifferentElements
+     * @dataProvider provideTestData
      */
     public function testGet($elements)
     {
@@ -67,7 +67,7 @@ class ArrayCollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider provideDifferentElements
+     * @dataProvider provideTestData
      */
     public function testRemove($elements)
     {
@@ -81,7 +81,7 @@ class ArrayCollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider provideDifferentElements
+     * @dataProvider provideTestData
      */
     public function testGetIterator($elements)
     {
@@ -99,7 +99,7 @@ class ArrayCollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * @return array
      */
-    public function provideDifferentElements()
+    public function provideTestData()
     {
         return [
             'indexed'     => [[1, 2, 3, 4, 5]],
