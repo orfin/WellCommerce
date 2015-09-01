@@ -12,11 +12,13 @@
 
 namespace WellCommerce\Bundle\AdminBundle\Controller;
 
+use WellCommerce\Bundle\CoreBundle\Controller\ControllerInterface;
+
 /**
  * Interface AdminControllerInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface AdminControllerInterface
+interface AdminControllerInterface extends ControllerInterface
 {
 }

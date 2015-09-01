@@ -13,11 +13,11 @@
 namespace WellCommerce\Bundle\LayoutBundle\Manager\Front;
 
 use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
-use WellCommerce\Bundle\CoreBundle\Helper\Router\RouterHelperInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
 use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxCollection;
 use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxSettingsCollection;
 use WellCommerce\Bundle\LayoutBundle\Exception\LayoutBoxNotFoundException;
+use WellCommerce\Bundle\LayoutBundle\Repository\LayoutBoxRepositoryInterface;
 use WellCommerce\Bundle\LayoutBundle\Resolver\ServiceResolverInterface;
 
 /**
@@ -27,11 +27,6 @@ use WellCommerce\Bundle\LayoutBundle\Resolver\ServiceResolverInterface;
  */
 class LayoutBoxManager extends AbstractFrontManager
 {
-    /**
-     * @var RouterHelperInterface
-     */
-    protected $routerHelper;
-
     /**
      * @var ServiceResolverInterface
      */
@@ -43,28 +38,19 @@ class LayoutBoxManager extends AbstractFrontManager
     protected $layoutBoxCollection;
 
     /**
-     * @param RouterHelperInterface $routerHelper
+     * Constructor
+     *
+     * @param LayoutBoxRepositoryInterface $layoutBoxRepository
+     * @param ServiceResolverInterface     $serviceResolver
+     * @param LayoutBoxCollection          $layoutBoxCollection
      */
-    public function setRouterHelper(RouterHelperInterface $routerHelper)
+    public function __construct(LayoutBoxRepositoryInterface $layoutBoxRepository, ServiceResolverInterface $serviceResolver, LayoutBoxCollection $layoutBoxCollection)
     {
-        $this->routerHelper = $routerHelper;
-    }
-
-    /**
-     * @param ServiceResolverInterface $serviceResolver
-     */
-    public function setServiceResolver(ServiceResolverInterface $serviceResolver)
-    {
-        $this->serviceResolver = $serviceResolver;
-    }
-
-    /**
-     * @param LayoutBoxCollection $layoutBoxCollection
-     */
-    public function setLayoutBoxCollection(LayoutBoxCollection $layoutBoxCollection)
-    {
+        parent::__construct($layoutBoxRepository);
+        $this->serviceResolver     = $serviceResolver;
         $this->layoutBoxCollection = $layoutBoxCollection;
     }
+
 
     /**
      * Returns a layout box by its identifier
@@ -129,9 +115,9 @@ class LayoutBoxManager extends AbstractFrontManager
      */
     protected function resolveControllerAction(BoxControllerInterface $controller)
     {
-        $currentAction = $this->routerHelper->getCurrentAction();
+        $currentAction = $this->getRouterHelper()->getCurrentAction();
 
-        if ($this->routerHelper->hasControllerAction($controller, $currentAction)) {
+        if ($this->getRouterHelper()->hasControllerAction($controller, $currentAction)) {
             return $currentAction;
         }
 

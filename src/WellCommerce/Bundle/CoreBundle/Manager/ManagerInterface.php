@@ -35,13 +35,6 @@ interface ManagerInterface
     public function getValidator();
 
     /**
-     * Returns the RedirectHelper
-     *
-     * @return \WellCommerce\Bundle\CoreBundle\Helper\Redirect\RedirectHelperInterface
-     */
-    public function getRedirectHelper();
-
-    /**
      * Returns the FlashHelper
      *
      * @return \WellCommerce\Bundle\CoreBundle\Helper\Flash\FlashHelperInterface
@@ -84,13 +77,6 @@ interface ManagerInterface
     public function getTranslatorHelper();
 
     /**
-     * Sets the repository
-     *
-     * @param RepositoryInterface $repository
-     */
-    public function setRepository(RepositoryInterface $repository);
-
-    /**
      * Returns the current repository
      *
      * @return RepositoryInterface
@@ -126,4 +112,9 @@ interface ManagerInterface
      * @param object $resource
      */
     public function removeResource($resource);
+
+    /**
+     * @return \WellCommerce\Bundle\MultiStoreBundle\Context\ShopContextInterface
+     */
+    public function getShopContext();
 }

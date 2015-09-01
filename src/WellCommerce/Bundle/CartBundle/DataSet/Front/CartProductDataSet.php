@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\CartBundle\DataSet\Front;
 
-use WellCommerce\Bundle\DataSetBundle\AbstractDataSet;
-use WellCommerce\Bundle\DataSetBundle\DataSetConfiguratorInterface;
+use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
+use WellCommerce\Bundle\DataSetBundle\Configurator\DataSetConfiguratorInterface;
 use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
 
 /**

@@ -11,20 +11,19 @@
  */
 namespace WellCommerce\Bundle\ProducerBundle\Form;
 
+use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Bundle\DataSetBundle\CollectionBuilder\SelectBuilder;
-use WellCommerce\Bundle\FormBundle\Builder\AbstractFormBuilder;
-use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
-use WellCommerce\Bundle\FormBundle\DataTransformer\CollectionToArrayTransformer;
-use WellCommerce\Bundle\FormBundle\DataTransformer\TranslationTransformer;
-use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
+use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
+use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\TranslationTransformer;
 use WellCommerce\Bundle\MediaBundle\Form\DataTransformer\MediaEntityToIdentifierTransformer;
+use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
  * Class ProducerFormBuilder
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProducerFormBuilder extends AbstractFormBuilder implements FormBuilderInterface
+class ProducerFormBuilder extends AbstractFormBuilder
 {
     /**
      * {@inheritdoc}

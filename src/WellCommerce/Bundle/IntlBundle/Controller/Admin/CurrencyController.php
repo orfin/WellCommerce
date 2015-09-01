@@ -31,6 +31,6 @@ class CurrencyController extends AbstractAdminController
         $this->get('currency.importer.ecb')->importExchangeRates();
         $this->manager->getFlashHelper()->addSuccess('currency.flashes.success.exchange_rates_synchronization');
 
-        return $this->manager->getRedirectHelper()->redirectToAction('index');
+        return $this->redirectToAction('index');
     }
 }

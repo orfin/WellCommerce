@@ -13,14 +13,14 @@
 namespace WellCommerce\Bundle\AdminBundle\MenuBuilder;
 
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use WellCommerce\Bundle\CoreBundle\Collection\AbstractCollection;
+use WellCommerce\Common\Collections\ArrayCollection;
 
 /**
  * Class AdminMenuBuilder
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AdminMenuBuilder extends AbstractCollection implements AdminMenuBuilderInterface
+class AdminMenuBuilder extends ArrayCollection implements AdminMenuBuilderInterface
 {
     /**
      * {@inheritdoc}

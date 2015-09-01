@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\ShippingBundle\Calculator;
 
-use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\FormBundle\FormBuilderInterface;
 use WellCommerce\Bundle\FormBundle\Dependencies\DependencyInterface;
 use WellCommerce\Bundle\FormBundle\Elements\Fieldset\FieldsetInterface;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;

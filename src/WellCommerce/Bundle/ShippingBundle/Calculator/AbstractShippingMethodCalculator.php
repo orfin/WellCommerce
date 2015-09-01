@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\ShippingBundle\Calculator;
 
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use WellCommerce\Bundle\CartBundle\Provider\CartProviderInterface;
-use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\FormBundle\FormBuilderInterface;
 use WellCommerce\Bundle\FormBundle\Conditions\Equals;
 use WellCommerce\Bundle\FormBundle\Elements\ElementCollection;
 use WellCommerce\Bundle\FormBundle\Elements\ElementInterface;

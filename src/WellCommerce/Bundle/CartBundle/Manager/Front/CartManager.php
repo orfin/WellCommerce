@@ -19,6 +19,7 @@ use WellCommerce\Bundle\CartBundle\Exception\ChangeCartItemQuantityException;
 use WellCommerce\Bundle\CartBundle\Exception\DeleteCartItemException;
 use WellCommerce\Bundle\CartBundle\Helper\CartHelperInterface;
 use WellCommerce\Bundle\CartBundle\Repository\CartProductRepositoryInterface;
+use WellCommerce\Bundle\CartBundle\Repository\CartRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
 use WellCommerce\Bundle\ProductBundle\Entity\Product;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute;
@@ -55,35 +56,26 @@ class CartManager extends AbstractFrontManager
     protected $cartProductRepository;
 
     /**
-     * @param CartHelperInterface $cartHelper
+     * Constructor
+     *
+     * @param CartRepositoryInterface             $cartRepository
+     * @param ProductRepositoryInterface          $productRepository
+     * @param ProductAttributeRepositoryInterface $productAttributeRepository
+     * @param CartHelperInterface                 $cartHelper
+     * @param CartProductRepositoryInterface      $cartProductRepository
      */
-    public function setCartHelper(CartHelperInterface $cartHelper)
-    {
-        $this->cartHelper = $cartHelper;
-    }
-
-    /**
-     * @param ProductRepositoryInterface $productRepository
-     */
-    public function setProductRepository(ProductRepositoryInterface $productRepository)
-    {
-        $this->productRepository = $productRepository;
-    }
-
-    /**
-     * @param ProductAttributeRepositoryInterface $productRepository
-     */
-    public function setProductAttributeRepository(ProductAttributeRepositoryInterface $productAttributeRepository)
-    {
+    public function __construct(
+        CartRepositoryInterface $cartRepository,
+        ProductRepositoryInterface $productRepository,
+        ProductAttributeRepositoryInterface $productAttributeRepository,
+        CartHelperInterface $cartHelper,
+        CartProductRepositoryInterface $cartProductRepository
+    ) {
+        parent::__construct($cartRepository);
         $this->productAttributeRepository = $productAttributeRepository;
-    }
-
-    /**
-     * @param CartProductRepositoryInterface $cartProductRepository
-     */
-    public function setCartProductRepository(CartProductRepositoryInterface $cartProductRepository)
-    {
-        $this->cartProductRepository = $cartProductRepository;
+        $this->productRepository          = $productRepository;
+        $this->cartHelper                 = $cartHelper;
+        $this->cartProductRepository      = $cartProductRepository;
     }
 
     /**

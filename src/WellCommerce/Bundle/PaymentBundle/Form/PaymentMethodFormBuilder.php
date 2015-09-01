@@ -11,17 +11,16 @@
  */
 namespace WellCommerce\Bundle\PaymentBundle\Form;
 
-use WellCommerce\Bundle\FormBundle\Builder\AbstractFormBuilder;
-use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
-use WellCommerce\Bundle\FormBundle\DataTransformer\TranslationTransformer;
+use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
+use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\TranslationTransformer;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
- * Class PaymentMethodForm
+ * Class PaymentMethodFormBuilder
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PaymentMethodFormBuilder extends AbstractFormBuilder implements FormBuilderInterface
+class PaymentMethodFormBuilder extends AbstractFormBuilder
 {
     /**
      * {@inheritdoc}

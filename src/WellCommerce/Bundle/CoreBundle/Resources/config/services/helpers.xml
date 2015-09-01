@@ -10,10 +10,6 @@
             <argument type="service" id="translator_helper"/>
         </service>
 
-        <service id="redirect_helper" class="WellCommerce\Bundle\CoreBundle\Helper\Redirect\RedirectHelper">
-            <argument type="service" id="router"/>
-        </service>
-
         <service id="image_helper" class="WellCommerce\Bundle\CoreBundle\Helper\Image\ImageHelper">
             <argument type="service" id="liip_imagine.cache.manager"/>
         </service>

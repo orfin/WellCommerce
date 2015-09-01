@@ -12,14 +12,14 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Processor;
 
-use WellCommerce\Bundle\CoreBundle\Collection\AbstractCollection;
+use WellCommerce\Common\Collections\ArrayCollection;
 
 /**
  * Class PaymentMethodProcessorCollection
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PaymentMethodProcessorCollection extends AbstractCollection
+class PaymentMethodProcessorCollection extends ArrayCollection
 {
     /**
      * {@inheritdoc}

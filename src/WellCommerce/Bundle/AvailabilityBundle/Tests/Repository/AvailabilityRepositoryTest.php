@@ -21,7 +21,7 @@ use WellCommerce\Bundle\CoreBundle\Test\Repository\AbstractRepositoryTestCase;
  */
 class AvailabilityRepositoryTest extends AbstractRepositoryTestCase
 {
-    protected function getService()
+    protected function get()
     {
         return $this->container->get('availability.repository');
     }

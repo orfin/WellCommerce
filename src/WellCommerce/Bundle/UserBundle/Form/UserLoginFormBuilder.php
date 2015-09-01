@@ -11,16 +11,15 @@
  */
 namespace WellCommerce\Bundle\UserBundle\Form;
 
-use WellCommerce\Bundle\FormBundle\Builder\AbstractFormBuilder;
-use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
- * Class UserLoginForm
+ * Class UserLoginFormBuilder
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class UserLoginFormBuilder extends AbstractFormBuilder implements FormBuilderInterface
+class UserLoginFormBuilder extends AbstractFormBuilder
 {
     /**
      * {@inheritdoc}
@@ -28,7 +27,7 @@ class UserLoginFormBuilder extends AbstractFormBuilder implements FormBuilderInt
     public function buildForm(FormInterface $form)
     {
         $form->addChild($this->getElement('tip', [
-            'tip'  =>
+            'tip' =>
                 '<p>Default credentials:<br/><br/>
                     <strong>Username:</strong> admin<br/>
                     <strong>Login:</strong> admin<br/>

@@ -11,20 +11,18 @@
  */
 namespace WellCommerce\Bundle\ClientBundle\DataGrid;
 
-use WellCommerce\Bundle\DataGridBundle\AbstractDataGrid;
+use WellCommerce\Bundle\CoreBundle\DataGrid\AbstractDataGrid;
 use WellCommerce\Bundle\DataGridBundle\Column\Column;
 use WellCommerce\Bundle\DataGridBundle\Column\ColumnCollection;
 use WellCommerce\Bundle\DataGridBundle\Column\Options\Appearance;
 use WellCommerce\Bundle\DataGridBundle\Column\Options\Filter;
-use WellCommerce\Bundle\DataGridBundle\DataGridInterface;
-use WellCommerce\Bundle\DataSetBundle\CollectionBuilder\SelectBuilder;
 
 /**
  * Class ClientDataGrid
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientDataGrid extends AbstractDataGrid implements DataGridInterface
+class ClientDataGrid extends AbstractDataGrid
 {
     /**
      * {@inheritdoc}
@@ -33,7 +31,7 @@ class ClientDataGrid extends AbstractDataGrid implements DataGridInterface
     {
         $collection->add(new Column([
             'id'         => 'id',
-            'caption'    => $this->trans('client.id.label'),
+            'caption'    => $this->trans('admin.client.label.id'),
             'appearance' => new Appearance([
                 'width'   => 90,
                 'visible' => false,
@@ -44,79 +42,64 @@ class ClientDataGrid extends AbstractDataGrid implements DataGridInterface
         ]));
 
         $collection->add(new Column([
-            'id'      => 'firstName',
-            'caption' => $this->trans('client.first_name.label'),
+            'id'         => 'firstName',
+            'caption'    => $this->trans('admin.client.label.first_name'),
             'appearance' => new Appearance([
-                'width'   => 140,
+                'width' => 140,
                 'align' => Appearance::ALIGN_LEFT
             ]),
         ]));
 
         $collection->add(new Column([
-            'id'      => 'lastName',
-            'caption' => $this->trans('client.last_name.label'),
+            'id'         => 'lastName',
+            'caption'    => $this->trans('admin.client.label.last_name'),
             'appearance' => new Appearance([
-                'width'   => 140,
+                'width' => 140,
                 'align' => Appearance::ALIGN_LEFT
             ]),
         ]));
 
         $collection->add(new Column([
-            'id'      => 'email',
-            'caption' => $this->trans('client.email.label'),
+            'id'         => 'email',
+            'caption'    => $this->trans('admin.client.label.email'),
             'appearance' => new Appearance([
-                'width'   => 60,
+                'width' => 60,
                 'align' => Appearance::ALIGN_CENTER
             ]),
         ]));
 
         $collection->add(new Column([
-            'id'      => 'phone',
-            'caption' => $this->trans('client.phone.label'),
+            'id'         => 'phone',
+            'caption'    => $this->trans('admin.client.label.phone'),
             'appearance' => new Appearance([
-                'width'   => 80,
+                'width' => 80,
                 'align' => Appearance::ALIGN_CENTER
             ]),
         ]));
 
         $collection->add(new Column([
-            'id'      => 'groupName',
-            'caption' => $this->trans('client.group.label'),
-            'filter'  => new Filter([
+            'id'         => 'groupName',
+            'caption'    => $this->trans('admin.client.label.client_group'),
+            'filter'     => new Filter([
                 'type'    => Filter::FILTER_SELECT,
-                'options' => $this->getClientGroups()
+                'options' => $this->get('client_group.collection')->getSelect()
             ]),
             'appearance' => new Appearance([
-                'width'   => 140,
+                'width' => 140,
                 'align' => Appearance::ALIGN_CENTER
             ]),
         ]));
 
         $collection->add(new Column([
-            'id'      => 'createdAt',
-            'caption' => $this->trans('client.created_at.label'),
-            'filter'  => new Filter([
+            'id'         => 'createdAt',
+            'caption'    => $this->trans('admin.client.label.created_at'),
+            'filter'     => new Filter([
                 'type' => Filter::FILTER_BETWEEN,
             ]),
             'appearance' => new Appearance([
-                'width'   => 40,
+                'width' => 40,
                 'align' => Appearance::ALIGN_CENTER
             ]),
         ]));
-    }
-
-    /**
-     * Returns client groups to for filter
-     *
-     * @return array
-     */
-    protected function getClientGroups()
-    {
-        $selectBuilder = new SelectBuilder($this->get('client_group.dataset'), [
-            'value_key' => 'name',
-            'label_key' => 'name',
-        ]);
-
-        return $selectBuilder->getItems();
     }
 }

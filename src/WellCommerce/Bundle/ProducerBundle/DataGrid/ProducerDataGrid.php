@@ -11,20 +11,19 @@
  */
 namespace WellCommerce\Bundle\ProducerBundle\DataGrid;
 
-use WellCommerce\Bundle\DataGridBundle\AbstractDataGrid;
+use WellCommerce\Bundle\CoreBundle\DataGrid\AbstractDataGrid;
 use WellCommerce\Bundle\DataGridBundle\Column\Column;
 use WellCommerce\Bundle\DataGridBundle\Column\ColumnCollection;
 use WellCommerce\Bundle\DataGridBundle\Column\Options\Appearance;
 use WellCommerce\Bundle\DataGridBundle\Column\Options\Filter;
 use WellCommerce\Bundle\DataGridBundle\Column\Options\Sorting;
-use WellCommerce\Bundle\DataGridBundle\DataGridInterface;
 
 /**
  * Class ProducerDataGrid
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProducerDataGrid extends AbstractDataGrid implements DataGridInterface
+class ProducerDataGrid extends AbstractDataGrid
 {
     /**
      * {@inheritdoc}
@@ -47,8 +46,8 @@ class ProducerDataGrid extends AbstractDataGrid implements DataGridInterface
         ]));
 
         $collection->add(new Column([
-            'id'         => 'name',
-            'caption'    => $this->trans('producer.name.label'),
+            'id'      => 'name',
+            'caption' => $this->trans('producer.name.label'),
         ]));
     }
 }

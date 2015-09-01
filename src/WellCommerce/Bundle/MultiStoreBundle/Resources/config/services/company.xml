@@ -5,22 +5,11 @@
 
     <services>
         <service id="company.manager.admin" class="WellCommerce\Bundle\MultiStoreBundle\Manager\Admin\CompanyManager">
-            <argument type="service" id="flash_helper"/>
-            <argument type="service" id="redirect_helper"/>
-            <argument type="service" id="image_helper"/>
-            <argument type="service" id="event_dispatcher"/>
-            <argument type="service" id="doctrine_helper"/>
-            <argument type="service" id="translator_helper"/>
-            <argument type="service" id="request_helper"/>
-            <argument type="service" id="validator"/>
-            <call method="setRepository">
-                <argument type="service" id="company.repository"/>
-            </call>
-            <call method="setFormBuilder">
-                <argument type="service" id="company.form_builder"/>
-            </call>
-            <call method="setDataGrid">
-                <argument type="service" id="company.datagrid"/>
+            <argument type="service" id="company.repository"/>
+            <argument type="service" id="company.datagrid"/>
+            <argument type="service" id="company.form_builder"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
             </call>
         </service>
         

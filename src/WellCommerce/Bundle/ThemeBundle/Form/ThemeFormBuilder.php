@@ -12,8 +12,7 @@
 namespace WellCommerce\Bundle\ThemeBundle\Form;
 
 use Symfony\Component\Finder\Finder;
-use WellCommerce\Bundle\FormBundle\Builder\AbstractFormBuilder;
-use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
@@ -21,7 +20,7 @@ use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class ThemeFormBuilder extends AbstractFormBuilder implements FormBuilderInterface
+class ThemeFormBuilder extends AbstractFormBuilder
 {
     const FORM_INIT_EVENT = 'theme.form.init';
 

@@ -26,7 +26,7 @@ class ClientSettingsBoxController extends AbstractBoxController
         $request = $this->manager->getRequestHelper()->getCurrentRequest();
         $client  = $this->manager->getRequestHelper()->getClient();
         if (null === $client) {
-            return $this->manager->getRedirectHelper()->redirectTo('front.client.login');
+            return $this->redirectToRoute('front.client.login');
         }
 
         $form = $this->get('client_contact_details.form_builder.front')->createForm([
@@ -39,7 +39,7 @@ class ClientSettingsBoxController extends AbstractBoxController
 
                 $this->manager->getFlashHelper()->addSuccess('client.flash.contact_details.success');
 
-                return $this->manager->getRedirectHelper()->redirectTo('front.client.settings');
+                return $this->redirectToRoute('front.client.settings');
             }
 
             if (count($form->getError())) {

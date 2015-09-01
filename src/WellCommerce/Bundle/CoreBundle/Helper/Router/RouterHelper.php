@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\CoreBundle\Helper\Router;
 
 use ReflectionClass;
 use ReflectionMethod;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
@@ -38,6 +39,9 @@ class RouterHelper implements RouterHelperInterface
         $this->router = $router;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function hasControllerAction($controller, $action)
     {
         $reflectionClass = new ReflectionClass($controller);
@@ -69,5 +73,55 @@ class RouterHelper implements RouterHelperInterface
     public function getRouterRequestContext()
     {
         return $this->router->getContext();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function redirectToAction($action, array $params = [])
+    {
+        $route = $this->getActionForCurrentController($action);
+
+        return $this->redirectTo($route, $params);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRedirectToActionUrl($action, array $params = [])
+    {
+        $route = $this->getActionForCurrentController($action);
+
+        return $this->router->generate($route, $params, true);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getActionForCurrentController($action)
+    {
+        $currentPath  = $this->getRouterRequestContext()->getPathInfo();
+        $currentRoute = $this->router->match($currentPath);
+        list($mode, $controller) = explode('.', $currentRoute['_route'], 3);
+
+        $route = sprintf('%s.%s.%s', $mode, $controller, $action);
+
+        return $route;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function generateUrl($routeName, array $routeParams = [])
+    {
+        return $this->router->generate($routeName, $routeParams, true);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function redirectTo($route, array $routeParams = [])
+    {
+        return new RedirectResponse($this->router->generate($route, $routeParams, true));
     }
 }

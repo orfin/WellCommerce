@@ -5,22 +5,11 @@
 
     <services>
         <service id="routing.manager.admin" class="WellCommerce\Bundle\RoutingBundle\Manager\Admin\RoutingManager">
-            <argument type="service" id="flash_helper"/>
-            <argument type="service" id="redirect_helper"/>
-            <argument type="service" id="image_helper"/>
-            <argument type="service" id="event_dispatcher"/>
-            <argument type="service" id="doctrine_helper"/>
-            <argument type="service" id="translator_helper"/>
-            <argument type="service" id="request_helper"/>
-            <argument type="service" id="validator"/>
-            <call method="setRepository">
-                <argument type="service" id="routing.repository"/>
-            </call>
-            <call method="setFormBuilder">
-                <argument type="service" id="routing.form_builder"/>
-            </call>
-            <call method="setDataGrid">
-                <argument type="service" id="routing.datagrid"/>
+            <argument type="service" id="routing.repository"/>
+            <argument type="service" id="routing.datagrid"/>
+            <argument type="service" id="routing.form_builder"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
             </call>
         </service>
 

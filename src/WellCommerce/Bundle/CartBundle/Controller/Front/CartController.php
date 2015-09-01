@@ -52,7 +52,7 @@ class CartController extends AbstractFrontController implements FrontControllerI
             if ($form->isValid()) {
                 $this->manager->updateResource($resource, $request);
 
-                return $this->manager->getRedirectHelper()->redirectTo('front.cart.index');
+                return $this->manager->getRouterHelper()->redirectTo('front.cart.index');
             }
 
             if (count($form->getError())) {

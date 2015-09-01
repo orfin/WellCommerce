@@ -24,7 +24,7 @@ abstract class AbstractAdminManagerTestCase extends AbstractTestCase
     /**
      * @return \WellCommerce\Bundle\AdminBundle\Manager\AdminManagerInterface
      */
-    abstract protected function getService();
+    abstract protected function get();
 
     /**
      * @return string
@@ -48,25 +48,25 @@ abstract class AbstractAdminManagerTestCase extends AbstractTestCase
 
     public function testManagerServiceIsValid()
     {
-        $manager = $this->getService();
+        $manager = $this->get();
         $this->assertInstanceOf($this->getServiceClassName(), $manager);
     }
 
     public function testManagerReturnsValidFormBuilder()
     {
-        $manager = $this->getService();
+        $manager = $this->get();
         $this->assertInstanceOf($this->getFormBuilderClassName(), $manager->getFormBuilder());
     }
 
     public function testManagerReturnsValidRepository()
     {
-        $manager = $this->getService();
+        $manager = $this->get();
         $this->assertInstanceOf($this->getRepositoryInterfaceName(), $manager->getRepository());
     }
 
     public function testManagerReturnsValidDataGrid()
     {
-        $manager = $this->getService();
+        $manager = $this->get();
         $this->assertInstanceOf($this->getDataGridClassName(), $manager->getDataGrid());
     }
 }

@@ -12,14 +12,14 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Provider;
 
-use WellCommerce\Bundle\CoreBundle\Collection\AbstractCollection;
+use WellCommerce\Common\Collections\ArrayCollection;
 
 /**
  * Class ProviderCollection
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProviderCollection extends AbstractCollection
+class ProviderCollection extends ArrayCollection
 {
     /**
      * Adds new provider to collection

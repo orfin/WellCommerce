@@ -5,39 +5,18 @@
 
     <services>
         <service id="product.manager.admin" class="WellCommerce\Bundle\ProductBundle\Manager\Admin\ProductManager">
-            <argument type="service" id="flash_helper"/>
-            <argument type="service" id="redirect_helper"/>
-            <argument type="service" id="image_helper"/>
-            <argument type="service" id="event_dispatcher"/>
-            <argument type="service" id="doctrine_helper"/>
-            <argument type="service" id="translator_helper"/>
-            <argument type="service" id="request_helper"/>
-            <argument type="service" id="validator"/>
-            <call method="setRepository">
-                <argument type="service" id="product.repository"/>
-            </call>
-            <call method="setFormBuilder">
-                <argument type="service" id="product.form_builder"/>
-            </call>
-            <call method="setDataGrid">
-                <argument type="service" id="product.datagrid"/>
+            <argument type="service" id="product.repository"/>
+            <argument type="service" id="product.datagrid"/>
+            <argument type="service" id="product.form_builder"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
             </call>
         </service>
 
         <service id="product.manager.front" class="WellCommerce\Bundle\ProductBundle\Manager\Front\ProductManager">
-            <argument type="service" id="flash_helper"/>
-            <argument type="service" id="redirect_helper"/>
-            <argument type="service" id="image_helper"/>
-            <argument type="service" id="event_dispatcher"/>
-            <argument type="service" id="doctrine_helper"/>
-            <argument type="service" id="translator_helper"/>
-            <argument type="service" id="request_helper"/>
-            <argument type="service" id="validator"/>
-            <call method="setRepository">
-                <argument type="service" id="product.repository"/>
-            </call>
-            <call method="setProviders">
-                <argument type="service" id="resource.provider.collection" />
+            <argument type="service" id="product.repository"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
             </call>
         </service>
         

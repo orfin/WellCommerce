@@ -21,7 +21,7 @@ use WellCommerce\Bundle\CoreBundle\Test\DataGrid\AbstractDataGridTestCase;
  */
 class TaxDataGridTest extends AbstractDataGridTestCase
 {
-    protected function getService()
+    protected function get()
     {
         return $this->container->get('tax.datagrid')->getInstance();
     }

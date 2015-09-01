@@ -47,7 +47,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
     public function indexAction()
     {
         return $this->displayTemplate('index', [
-            'datagrid' => $this->manager->getDataGrid()
+            'datagrid' => $this->manager->getDataGrid()->getInstance()
         ]);
     }
 
@@ -61,7 +61,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
     public function gridAction(Request $request)
     {
         if (!$request->isXmlHttpRequest()) {
-            return $this->manager->getRedirectHelper()->redirectToAction('index');
+            return $this->getRouterHelper()->redirectToAction('index');
         }
 
         $datagrid = $this->manager->getDataGrid();
@@ -130,6 +130,27 @@ abstract class AbstractAdminController extends AbstractController implements Adm
     }
 
     /**
+     * Default delete action
+     *
+     * @param int $id
+     *
+     * @return JsonResponse
+     */
+    public function deleteAction($id)
+    {
+        $this->getDoctrineHelper()->disableFilter('locale');
+
+        try {
+            $resource = $this->manager->getRepository()->find($id);
+            $this->manager->removeResource($resource);
+        } catch (\Exception $e) {
+            return $this->jsonResponse(['error' => $e->getMessage()]);
+        }
+
+        return $this->jsonResponse(['success' => true]);
+    }
+
+    /**
      * Creates default response for form instance
      *
      * @param FormInterface $form
@@ -145,26 +166,5 @@ abstract class AbstractAdminController extends AbstractController implements Adm
             'redirectTo' => $this->getRedirectToActionUrl('index'),
             'error'      => $form->getError()
         ]);
-    }
-
-    /**
-     * Default delete action
-     *
-     * @param int $id
-     *
-     * @return JsonResponse
-     */
-    public function deleteAction($id)
-    {
-        $this->manager->getDoctrineHelper()->disableFilter('locale');
-
-        try {
-            $resource = $this->manager->getRepository()->find($id);
-            $this->manager->removeResource($resource);
-        } catch (\Exception $e) {
-            return $this->jsonResponse(['error' => $e->getMessage()]);
-        }
-
-        return $this->jsonResponse(['success' => true]);
     }
 }

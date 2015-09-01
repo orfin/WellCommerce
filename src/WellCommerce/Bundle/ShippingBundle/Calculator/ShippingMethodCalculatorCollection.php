@@ -12,14 +12,14 @@
 
 namespace WellCommerce\Bundle\ShippingBundle\Calculator;
 
-use WellCommerce\Bundle\CoreBundle\Collection\AbstractCollection;
+use WellCommerce\Common\Collections\ArrayCollection;
 
 /**
  * Class ShippingMethodCalculatorCollection
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ShippingMethodCalculatorCollection extends AbstractCollection
+class ShippingMethodCalculatorCollection extends ArrayCollection
 {
     /**
      * {@inheritdoc}

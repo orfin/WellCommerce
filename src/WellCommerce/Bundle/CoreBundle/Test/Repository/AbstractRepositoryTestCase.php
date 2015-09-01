@@ -25,14 +25,14 @@ abstract class AbstractRepositoryTestCase extends AbstractTestCase
     /**
      * @return null|\WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface
      */
-    protected function getService()
+    protected function get()
     {
         return null;
     }
 
     public function testRepositoryServiceIsCreated()
     {
-        $repository = $this->getService();
+        $repository = $this->get();
 
         if (null !== $repository) {
             $this->assertInstanceOf('WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface', $repository);
@@ -41,7 +41,7 @@ abstract class AbstractRepositoryTestCase extends AbstractTestCase
 
     public function testRepositoryHasDatasetQueryBuilder()
     {
-        $repository = $this->getService();
+        $repository = $this->get();
         if (null !== $repository) {
             $this->assertInstanceOf('Doctrine\ORM\QueryBuilder', $repository->getDataSetQueryBuilder());
         }
@@ -49,7 +49,7 @@ abstract class AbstractRepositoryTestCase extends AbstractTestCase
 
     public function testQueryBuilderReturnsValidQuery()
     {
-        $repository = $this->getService();
+        $repository = $this->get();
         if (null !== $repository) {
             $this->assertInstanceOf('Doctrine\ORM\Query', $repository->getDataSetQueryBuilder()->getQuery());
         }

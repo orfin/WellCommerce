@@ -12,14 +12,14 @@
 
 namespace WellCommerce\Bundle\RoutingBundle\Generator;
 
-use WellCommerce\Bundle\CoreBundle\Collection\AbstractCollection;
+use WellCommerce\Common\Collections\ArrayCollection;
 
 /**
  * Class RouteGeneratorCollection
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class RouteGeneratorCollection extends AbstractCollection
+class RouteGeneratorCollection extends ArrayCollection
 {
     /**
      * @param RouteGeneratorInterface $generator

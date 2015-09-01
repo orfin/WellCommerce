@@ -11,12 +11,11 @@
  */
 namespace WellCommerce\Bundle\CmsBundle\Form\Admin;
 
-use WellCommerce\Bundle\FormBundle\Builder\AbstractFormBuilder;
-use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Bundle\FormBundle\Conditions\Equals;
-use WellCommerce\Bundle\FormBundle\DataTransformer\CollectionToArrayTransformer;
-use WellCommerce\Bundle\FormBundle\DataTransformer\EntityToIdentifierTransformer;
-use WellCommerce\Bundle\FormBundle\DataTransformer\TranslationTransformer;
+use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
+use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\EntityToIdentifierTransformer;
+use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\TranslationTransformer;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
@@ -24,7 +23,7 @@ use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class PageFormBuilder extends AbstractFormBuilder implements FormBuilderInterface
+class PageFormBuilder extends AbstractFormBuilder
 {
     /**
      * {@inheritdoc}

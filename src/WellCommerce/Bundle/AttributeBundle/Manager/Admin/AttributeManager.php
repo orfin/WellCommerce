@@ -16,6 +16,7 @@ use WellCommerce\Bundle\AdminBundle\Manager\AbstractAdminManager;
 use WellCommerce\Bundle\AttributeBundle\Entity\Attribute;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroup;
 use WellCommerce\Bundle\AttributeBundle\Repository\AttributeGroupRepositoryInterface;
+use WellCommerce\Bundle\AttributeBundle\Repository\AttributeRepositoryInterface;
 use WellCommerce\Bundle\IntlBundle\Repository\LocaleRepositoryInterface;
 
 /**
@@ -36,19 +37,20 @@ class AttributeManager extends AbstractAdminManager
     protected $localeRepository;
 
     /**
+     * Constructor
+     *
+     * @param AttributeRepositoryInterface      $attributeRepository
      * @param AttributeGroupRepositoryInterface $attributeGroupRepository
+     * @param LocaleRepositoryInterface         $localeRepository
      */
-    public function setAttributeGroupRepository(AttributeGroupRepositoryInterface $attributeGroupRepository)
-    {
+    public function __construct(
+        AttributeRepositoryInterface $attributeRepository,
+        AttributeGroupRepositoryInterface $attributeGroupRepository,
+        LocaleRepositoryInterface $localeRepository
+    ) {
+        parent::__construct($attributeRepository);
         $this->attributeGroupRepository = $attributeGroupRepository;
-    }
-
-    /**
-     * @param LocaleRepositoryInterface $localeRepository
-     */
-    public function setLocaleRepository(LocaleRepositoryInterface $localeRepository)
-    {
-        $this->localeRepository = $localeRepository;
+        $this->localeRepository         = $localeRepository;
     }
 
     /**
@@ -91,13 +93,11 @@ class AttributeManager extends AbstractAdminManager
      */
     protected function createNewAttribute(AttributeGroup $group, $name)
     {
-        $locales = $this->getLocales();
-        $em      = $this->getDoctrineHelper()->getEntityManager();
-
+        $em        = $this->getDoctrineHelper()->getEntityManager();
         $attribute = new Attribute();
         $attribute->addGroup($group);
 
-        foreach ($locales as $locale) {
+        foreach ($this->localeRepository->findAll() as $locale) {
             $attribute->translate($locale->getCode())->setName($name);
         }
 

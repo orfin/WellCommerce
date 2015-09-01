@@ -14,8 +14,9 @@ namespace WellCommerce\Bundle\AdminBundle\Manager;
 
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
+use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 use WellCommerce\Bundle\DataGridBundle\DataGridInterface;
-use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\FormBundle\FormBuilderInterface;
 
 /**
  * Class AbstractAdminManager
@@ -27,19 +28,25 @@ abstract class AbstractAdminManager extends AbstractManager implements AdminMana
     /**
      * @var DataGridInterface
      */
-    private $datagrid;
+    protected $dataGrid;
 
     /**
      * @var FormBuilderInterface
      */
-    private $formBuilder;
+    protected $formBuilder;
 
     /**
-     * {@inheritdoc}
+     * Constructor
+     *
+     * @param RepositoryInterface       $repository
+     * @param DataGridInterface|null    $dataGrid
+     * @param FormBuilderInterface|null $formBuilder
      */
-    public function setDataGrid(DataGridInterface $datagrid)
+    public function __construct(RepositoryInterface $repository, DataGridInterface $dataGrid = null, FormBuilderInterface $formBuilder = null)
     {
-        $this->datagrid = $datagrid;
+        parent::__construct($repository);
+        $this->dataGrid    = $dataGrid;
+        $this->formBuilder = $formBuilder;
     }
 
     /**
@@ -47,15 +54,7 @@ abstract class AbstractAdminManager extends AbstractManager implements AdminMana
      */
     public function getDataGrid()
     {
-        return $this->datagrid->getInstance();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setFormBuilder(FormBuilderInterface $formBuilder)
-    {
-        $this->formBuilder = $formBuilder;
+        return $this->dataGrid;
     }
 
     /**
@@ -95,5 +94,13 @@ abstract class AbstractAdminManager extends AbstractManager implements AdminMana
         $resource = $this->getRepository()->find($id);
 
         return $resource;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getShopContext()
+    {
+        return $this->get('shop.context.admin');
     }
 }

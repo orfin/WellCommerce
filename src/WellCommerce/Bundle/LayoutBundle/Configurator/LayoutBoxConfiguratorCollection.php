@@ -12,14 +12,14 @@
 
 namespace WellCommerce\Bundle\LayoutBundle\Configurator;
 
-use WellCommerce\Bundle\CoreBundle\Collection\AbstractCollection;
+use WellCommerce\Common\Collections\ArrayCollection;
 
 /**
  * Class LayoutBoxConfiguratorCollection
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LayoutBoxConfiguratorCollection extends AbstractCollection
+class LayoutBoxConfiguratorCollection extends ArrayCollection
 {
     /**
      * Adds new configurator to collection

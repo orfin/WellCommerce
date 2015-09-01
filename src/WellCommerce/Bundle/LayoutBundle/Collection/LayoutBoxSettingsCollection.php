@@ -12,14 +12,14 @@
 
 namespace WellCommerce\Bundle\LayoutBundle\Collection;
 
-use WellCommerce\Bundle\CoreBundle\Collection\AbstractCollection;
+use WellCommerce\Common\Collections\ArrayCollection;
 
 /**
  * Class LayoutBoxSettingsCollection
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LayoutBoxSettingsCollection extends AbstractCollection
+class LayoutBoxSettingsCollection extends ArrayCollection
 {
     /**
      * Adds parameter to stack
@@ -33,15 +33,15 @@ class LayoutBoxSettingsCollection extends AbstractCollection
     }
 
     /**
-     * Returns box param or default value
+     * Returns a box parameter or default value
      *
-     * @param      $name
-     * @param null $default
+     * @param string $name
+     * @param null   $default
      *
-     * @return null
+     * @return mixed|null
      */
     public function getParam($name, $default = null)
     {
-        return array_key_exists($name, $this->items) ? $this->items[$name] : $default;
+        return $this->has($name) ? $this->get($name) : $default;
     }
 }

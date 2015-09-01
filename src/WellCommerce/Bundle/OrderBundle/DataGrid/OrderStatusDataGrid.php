@@ -11,12 +11,11 @@
  */
 namespace WellCommerce\Bundle\OrderBundle\DataGrid;
 
-use WellCommerce\Bundle\DataGridBundle\AbstractDataGrid;
+use WellCommerce\Bundle\CoreBundle\DataGrid\AbstractDataGrid;
 use WellCommerce\Bundle\DataGridBundle\Column\Column;
 use WellCommerce\Bundle\DataGridBundle\Column\ColumnCollection;
 use WellCommerce\Bundle\DataGridBundle\Column\Options\Appearance;
 use WellCommerce\Bundle\DataGridBundle\Column\Options\Filter;
-use WellCommerce\Bundle\DataGridBundle\DataGridInterface;
 use WellCommerce\Bundle\DataSetBundle\CollectionBuilder\SelectBuilder;
 
 /**
@@ -24,7 +23,7 @@ use WellCommerce\Bundle\DataSetBundle\CollectionBuilder\SelectBuilder;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderStatusDataGrid extends AbstractDataGrid implements DataGridInterface
+class OrderStatusDataGrid extends AbstractDataGrid
 {
     /**
      * {@inheritdoc}
@@ -44,35 +43,35 @@ class OrderStatusDataGrid extends AbstractDataGrid implements DataGridInterface
         ]));
 
         $collection->add(new Column([
-            'id'      => 'name',
-            'caption' => $this->trans('order_status.name.label'),
+            'id'         => 'name',
+            'caption'    => $this->trans('order_status.name.label'),
             'appearance' => new Appearance([
-                'width'   => 340,
+                'width' => 340,
             ]),
         ]));
 
 
         $collection->add(new Column([
-            'id'      => 'groupName',
-            'caption' => $this->trans('order_status.group.label'),
-            'filter'  => new Filter([
+            'id'         => 'groupName',
+            'caption'    => $this->trans('order_status.group.label'),
+            'filter'     => new Filter([
                 'type'    => Filter::FILTER_SELECT,
                 'options' => $this->getOrderStatusGroups()
             ]),
             'appearance' => new Appearance([
-                'width'   => 140,
+                'width' => 140,
                 'align' => Appearance::ALIGN_CENTER
             ]),
         ]));
 
         $collection->add(new Column([
-            'id'      => 'createdAt',
-            'caption' => $this->trans('order_status.created_at.label'),
-            'filter'  => new Filter([
+            'id'         => 'createdAt',
+            'caption'    => $this->trans('order_status.created_at.label'),
+            'filter'     => new Filter([
                 'type' => Filter::FILTER_BETWEEN,
             ]),
             'appearance' => new Appearance([
-                'width'   => 40,
+                'width' => 40,
                 'align' => Appearance::ALIGN_CENTER
             ]),
         ]));

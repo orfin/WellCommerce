@@ -37,7 +37,7 @@ class OrderController extends AbstractFrontController implements FrontController
         $cart = $this->manager->getCartProvider()->getCurrentCart();
 
         if (null === $cart || $cart->isEmpty()) {
-            return $this->manager->getRedirectHelper()->redirectTo('front.cart.index');
+            return $this->redirectToRoute('front.cart.index');
         }
 
         $this->addBreadCrumbItem(new BreadcrumbItem([
@@ -52,7 +52,7 @@ class OrderController extends AbstractFrontController implements FrontController
             if ($form->isValid()) {
                 $this->manager->updateResource($cart, $request);
 
-                return $this->manager->getRedirectHelper()->redirectToAction('confirm');
+                return $this->redirectToAction('confirm');
             }
 
             if (count($form->getError())) {
@@ -71,7 +71,7 @@ class OrderController extends AbstractFrontController implements FrontController
         $cart = $this->manager->getCurrentCart();
 
         if (null === $cart || $cart->isEmpty()) {
-            return $this->manager->getRedirectHelper()->redirectTo('front.cart.index');
+            return $this->redirectToRoute('front.cart.index');
         }
 
         $this->addBreadCrumbItem(new BreadcrumbItem([
@@ -89,7 +89,7 @@ class OrderController extends AbstractFrontController implements FrontController
 
                 $this->getCartHelper()->abandonCart($cart);
 
-                return $this->manager->getRedirectHelper()->redirectToAction('index');
+                return $this->redirectToAction('index');
             }
 
             if (count($form->getError())) {

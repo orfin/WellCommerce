@@ -11,10 +11,9 @@
  */
 namespace WellCommerce\Bundle\ClientBundle\Form\Admin;
 
+use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Bundle\DataSetBundle\CollectionBuilder\SelectBuilder;
-use WellCommerce\Bundle\FormBundle\Builder\AbstractFormBuilder;
-use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
-use WellCommerce\Bundle\FormBundle\DataTransformer\EntityToIdentifierTransformer;
+use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\EntityToIdentifierTransformer;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
@@ -22,7 +21,7 @@ use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientFormBuilder extends AbstractFormBuilder implements FormBuilderInterface
+class ClientFormBuilder extends AbstractFormBuilder
 {
     /**
      * {@inheritdoc}

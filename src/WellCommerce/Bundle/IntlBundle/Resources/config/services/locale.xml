@@ -5,22 +5,11 @@
 
     <services>
         <service id="locale.manager.admin" class="WellCommerce\Bundle\IntlBundle\Manager\Admin\LocaleManager">
-            <argument type="service" id="flash_helper"/>
-            <argument type="service" id="redirect_helper"/>
-            <argument type="service" id="image_helper"/>
-            <argument type="service" id="event_dispatcher"/>
-            <argument type="service" id="doctrine_helper"/>
-            <argument type="service" id="translator_helper"/>
-            <argument type="service" id="request_helper"/>
-            <argument type="service" id="validator"/>
-            <call method="setRepository">
-                <argument type="service" id="locale.repository"/>
-            </call>
-            <call method="setFormBuilder">
-                <argument type="service" id="locale.form_builder"/>
-            </call>
-            <call method="setDataGrid">
-                <argument type="service" id="locale.datagrid"/>
+            <argument type="service" id="locale.repository"/>
+            <argument type="service" id="locale.datagrid"/>
+            <argument type="service" id="locale.form_builder"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
             </call>
         </service>
 
@@ -80,17 +69,7 @@
         </service>
 
         <service id="locale.manager.front" class="WellCommerce\Bundle\IntlBundle\Manager\Front\LocaleManager">
-            <argument type="service" id="flash_helper"/>
-            <argument type="service" id="redirect_helper"/>
-            <argument type="service" id="image_helper"/>
-            <argument type="service" id="event_dispatcher"/>
-            <argument type="service" id="doctrine_helper"/>
-            <argument type="service" id="translator_helper"/>
-            <argument type="service" id="request_helper"/>
-            <argument type="service" id="validator"/>
-            <call method="setRepository">
-                <argument type="service" id="category.repository"/>
-            </call>
+            <argument type="service" id="locale.repository"/>
         </service>
 
         <service id="locale.controller.front" class="WellCommerce\Bundle\IntlBundle\Controller\Front\LocaleController">

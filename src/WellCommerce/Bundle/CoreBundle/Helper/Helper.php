@@ -11,8 +11,6 @@
  */
 namespace WellCommerce\Bundle\CoreBundle\Helper;
 
-use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
-
 /**
  * Class Helper
  *

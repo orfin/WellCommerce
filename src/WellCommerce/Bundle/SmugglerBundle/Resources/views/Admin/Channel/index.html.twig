@@ -1,0 +1,13 @@
+{% extends 'WellCommerceAdminBundle:Admin:layout.html.twig' %}
+{% block content %}
+    <h2>{% trans %}channel.index.heading{% endtrans %}</h2>
+
+    <ul class="possibilities">
+        <li><a href="{{ path('admin.channel.add') }}" class="button"
+               title="{% trans %}channel.add.button{% endtrans %}"><span>{% trans %}channel.add.button{% endtrans %}</span></a></li>
+    </ul>
+
+    {{ datagrid_renderer(datagrid) }}
+
+{% endblock %}
+

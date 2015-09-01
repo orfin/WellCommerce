@@ -22,7 +22,7 @@ use WellCommerce\Bundle\CoreBundle\Test\Manager\Admin\AbstractAdminManagerTestCa
  */
 class TaxManagerTest extends AbstractAdminManagerTestCase
 {
-    protected function getService()
+    protected function get()
     {
         return $this->container->get('tax.manager.admin');
     }

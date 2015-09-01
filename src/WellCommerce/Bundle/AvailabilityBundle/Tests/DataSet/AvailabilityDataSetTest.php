@@ -22,7 +22,7 @@ use WellCommerce\Bundle\DataSetBundle\Request\DataSetRequest;
  */
 class AvailabilityDataSetTest extends AbstractDataSetTestCase
 {
-    protected function getService()
+    protected function get()
     {
         return $this->container->get('availability.dataset');
     }

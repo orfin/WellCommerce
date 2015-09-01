@@ -83,7 +83,7 @@ class AttributeGroupController extends AbstractAdminController
         if ($form->handleRequest()->isValid()) {
             $this->manager->updateResource($resource, $request);
             if ($form->isAction('continue')) {
-                return $this->manager->getRedirectHelper()->redirectToAction('edit', [
+                return $this->manager->getRouterHelper()->redirectToAction('edit', [
                     'id' => $resource->getId()
                 ]);
             }

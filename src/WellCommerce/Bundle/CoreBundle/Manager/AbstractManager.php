@@ -14,15 +14,9 @@ namespace WellCommerce\Bundle\CoreBundle\Manager;
 
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
 use WellCommerce\Bundle\CoreBundle\Event\ResourceEvent;
-use WellCommerce\Bundle\CoreBundle\Helper\Doctrine\DoctrineHelperInterface;
-use WellCommerce\Bundle\CoreBundle\Helper\Flash\FlashHelperInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Helper;
-use WellCommerce\Bundle\CoreBundle\Helper\Image\ImageHelperInterface;
-use WellCommerce\Bundle\CoreBundle\Helper\Redirect\RedirectHelperInterface;
-use WellCommerce\Bundle\CoreBundle\Helper\Request\RequestHelperInterface;
-use WellCommerce\Bundle\CoreBundle\Helper\Translator\TranslatorHelperInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
@@ -30,153 +24,19 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractManager implements ManagerInterface
+abstract class AbstractManager extends AbstractContainerAware implements ManagerInterface
 {
-    /**
-     * @var FlashHelperInterface
-     */
-    protected $flashHelper;
-
-    /**
-     * @var RedirectHelperInterface
-     */
-    protected $redirectHelper;
-
-    /**
-     * @var ImageHelperInterface
-     */
-    protected $imageHelper;
-
-    /**
-     * @var EventDispatcherInterface
-     */
-    protected $eventDispatcher;
-
-    /**
-     * @var DoctrineHelperInterface
-     */
-    protected $doctrineHelper;
-
-    /**
-     * @var TranslatorHelperInterface
-     */
-    protected $translatorHelper;
-
     /**
      * @var RepositoryInterface
      */
     protected $repository;
 
     /**
-     * @var RequestHelperInterface
-     */
-    protected $requestHelper;
-
-    /**
-     * @var ValidatorInterface
-     */
-    protected $validator;
-
-    /**
      * Constructor
      *
-     * @param FlashHelperInterface      $flashHelper
-     * @param RedirectHelperInterface   $redirectHelper
-     * @param ImageHelperInterface      $imageHelper
-     * @param EventDispatcherInterface  $eventDispatcher
-     * @param DoctrineHelperInterface   $doctrineHelper
-     * @param TranslatorHelperInterface $translatorHelper
-     * @param RequestHelperInterface    $requestHelper
-     * @param ValidatorInterface        $validator
+     * @param RepositoryInterface|null $repository
      */
-    public function __construct(
-        FlashHelperInterface $flashHelper,
-        RedirectHelperInterface $redirectHelper,
-        ImageHelperInterface $imageHelper,
-        EventDispatcherInterface $eventDispatcher,
-        DoctrineHelperInterface $doctrineHelper,
-        TranslatorHelperInterface $translatorHelper,
-        RequestHelperInterface $requestHelper,
-        ValidatorInterface $validator
-    ) {
-        $this->flashHelper      = $flashHelper;
-        $this->redirectHelper   = $redirectHelper;
-        $this->imageHelper      = $imageHelper;
-        $this->eventDispatcher  = $eventDispatcher;
-        $this->doctrineHelper   = $doctrineHelper;
-        $this->translatorHelper = $translatorHelper;
-        $this->requestHelper    = $requestHelper;
-        $this->validator        = $validator;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getValidator()
-    {
-        return $this->validator;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getRedirectHelper()
-    {
-        return $this->redirectHelper;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getFlashHelper()
-    {
-        return $this->flashHelper;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getImageHelper()
-    {
-        return $this->imageHelper;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getEventDispatcher()
-    {
-        return $this->eventDispatcher;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getDoctrineHelper()
-    {
-        return $this->doctrineHelper;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getRequestHelper()
-    {
-        return $this->requestHelper;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getTranslatorHelper()
-    {
-        return $this->translatorHelper;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setRepository(RepositoryInterface $repository)
+    public function __construct(RepositoryInterface $repository = null)
     {
         $this->repository = $repository;
     }

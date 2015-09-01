@@ -11,20 +11,19 @@
  */
 namespace WellCommerce\Bundle\CmsBundle\DataGrid;
 
-use WellCommerce\Bundle\DataGridBundle\AbstractDataGrid;
+use WellCommerce\Bundle\CoreBundle\DataGrid\AbstractDataGrid;
 use WellCommerce\Bundle\DataGridBundle\Column\Column;
 use WellCommerce\Bundle\DataGridBundle\Column\ColumnCollection;
 use WellCommerce\Bundle\DataGridBundle\Column\Options\Appearance;
 use WellCommerce\Bundle\DataGridBundle\Column\Options\Filter;
 use WellCommerce\Bundle\DataGridBundle\Column\Options\Sorting;
-use WellCommerce\Bundle\DataGridBundle\DataGridInterface;
 
 /**
  * Class PageDataGrid
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PageDataGrid extends AbstractDataGrid implements DataGridInterface
+class PageDataGrid extends AbstractDataGrid
 {
     /**
      * {@inheritdoc}
@@ -33,7 +32,7 @@ class PageDataGrid extends AbstractDataGrid implements DataGridInterface
     {
         $collection->add(new Column([
             'id'         => 'id',
-            'caption'    => $this->trans('page.id.label'),
+            'caption'    => $this->trans('admin.page.label.id'),
             'sorting'    => new Sorting([
                 'default_order' => Sorting::SORT_DIR_DESC,
             ]),
@@ -48,12 +47,12 @@ class PageDataGrid extends AbstractDataGrid implements DataGridInterface
 
         $collection->add(new Column([
             'id'      => 'name',
-            'caption' => $this->trans('page.name.label'),
+            'caption' => $this->trans('admin.page.label.name'),
         ]));
 
         $collection->add(new Column([
             'id'         => 'hierarchy',
-            'caption'    => $this->trans('page.hierarchy.label'),
+            'caption'    => $this->trans('admin.page.label.hierarchy'),
             'appearance' => new Appearance([
                 'width' => 90,
             ]),
@@ -62,7 +61,7 @@ class PageDataGrid extends AbstractDataGrid implements DataGridInterface
 
         $collection->add(new Column([
             'id'         => 'publish',
-            'caption'    => $this->trans('page.publish.label'),
+            'caption'    => $this->trans('admin.page.label.publish'),
             'appearance' => new Appearance([
                 'width' => 90,
             ]),

@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\CmsBundle\DataSet\Front;
 
 use WellCommerce\Bundle\CmsBundle\DataSet\Admin\PageDataSet as BaseDataSet;
-use WellCommerce\Bundle\DataSetBundle\DataSetConfiguratorInterface;
+use WellCommerce\Bundle\DataSetBundle\Configurator\DataSetConfiguratorInterface;
 
 /**
  * Class PageDataSet

@@ -24,7 +24,7 @@ abstract class AbstractFormBuilderTestCase extends AbstractTestCase
     /**
      * @return null|\WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface
      */
-    protected function getService()
+    protected function get()
     {
         return null;
     }
@@ -33,7 +33,7 @@ abstract class AbstractFormBuilderTestCase extends AbstractTestCase
 
     public function testFormBuilderServiceIsCreated()
     {
-        $formBuilder = $this->getService();
+        $formBuilder = $this->get();
 
         if (null !== $formBuilder) {
             $this->assertInstanceOf('WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface', $formBuilder);
@@ -42,7 +42,7 @@ abstract class AbstractFormBuilderTestCase extends AbstractTestCase
 
     public function testFormIsCreated()
     {
-        $formBuilder = $this->getService();
+        $formBuilder = $this->get();
 
         if (null !== $formBuilder) {
             $form = $formBuilder->createForm([
@@ -55,7 +55,7 @@ abstract class AbstractFormBuilderTestCase extends AbstractTestCase
 
     public function testFormIsAbleToReturnDefaultModelData()
     {
-        $formBuilder = $this->getService();
+        $formBuilder = $this->get();
 
         if (null !== $formBuilder) {
             $sample = $this->getSampleFormModelData();
@@ -70,7 +70,7 @@ abstract class AbstractFormBuilderTestCase extends AbstractTestCase
 
     public function testFormHasNonEmptyElementsCollection()
     {
-        $formBuilder = $this->getService();
+        $formBuilder = $this->get();
 
         if (null !== $formBuilder) {
             $sample = $this->getSampleFormModelData();

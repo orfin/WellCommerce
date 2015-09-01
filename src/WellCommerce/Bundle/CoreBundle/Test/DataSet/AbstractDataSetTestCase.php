@@ -25,7 +25,7 @@ abstract class AbstractDataSetTestCase extends AbstractTestCase
     /**
      * @return null|\WellCommerce\Bundle\DataSetBundle\DataSetInterface
      */
-    protected function getService()
+    protected function get()
     {
         return null;
     }
@@ -40,7 +40,7 @@ abstract class AbstractDataSetTestCase extends AbstractTestCase
 
     public function testDatasetServiceIsCreated()
     {
-        $dataset = $this->getService();
+        $dataset = $this->get();
 
         if (null !== $dataset) {
             $this->assertInstanceOf('WellCommerce\Bundle\DataSetBundle\DataSetInterface', $dataset);
@@ -49,7 +49,7 @@ abstract class AbstractDataSetTestCase extends AbstractTestCase
 
     public function testDatasetHasRequiredColumns()
     {
-        $dataset = $this->getService();
+        $dataset = $this->get();
 
         if (null !== $dataset) {
             $columns         = $dataset->getColumns();
@@ -70,7 +70,7 @@ abstract class AbstractDataSetTestCase extends AbstractTestCase
 
     public function testDatasetReturnsResults()
     {
-        $dataset = $this->getService();
+        $dataset = $this->get();
 
         if (null !== $dataset) {
             $results = $dataset->getResults($this->getDefaultDataSetRequest());

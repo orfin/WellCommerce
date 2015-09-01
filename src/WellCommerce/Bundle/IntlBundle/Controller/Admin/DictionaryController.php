@@ -39,6 +39,6 @@ class DictionaryController extends AbstractAdminController
         $this->manager->syncDictionary($request, $this->get('kernel'));
         $this->manager->getFlashHelper()->addSuccess('translation.flashes.success.synchronization');
 
-        return $this->manager->getRedirectHelper()->redirectToAction('index');
+        return $this->redirectToAction('index');
     }
 }

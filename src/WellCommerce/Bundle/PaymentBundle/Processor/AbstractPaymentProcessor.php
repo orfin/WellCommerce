@@ -12,14 +12,14 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Processor;
 
-use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
 
 /**
  * Class AbstractPaymentProcessor
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractPaymentProcessor extends AbstractContainer implements PaymentMethodProcessorInterface
+abstract class AbstractPaymentProcessor extends AbstractContainerAware implements PaymentMethodProcessorInterface
 {
     protected $alias;
 

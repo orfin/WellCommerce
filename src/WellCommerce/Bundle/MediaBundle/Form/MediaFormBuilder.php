@@ -11,16 +11,15 @@
  */
 namespace WellCommerce\Bundle\MediaBundle\Form;
 
-use WellCommerce\Bundle\FormBundle\Builder\AbstractFormBuilder;
-use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
- * Class MediaForm
+ * Class MediaFormBuilder
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class MediaFormBuilder extends AbstractFormBuilder implements FormBuilderInterface
+class MediaFormBuilder extends AbstractFormBuilder
 {
     /**
      * {@inheritdoc}

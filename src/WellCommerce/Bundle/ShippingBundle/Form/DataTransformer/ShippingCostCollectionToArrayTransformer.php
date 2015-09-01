@@ -15,8 +15,8 @@ namespace WellCommerce\Bundle\ShippingBundle\Form\DataTransformer;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\PersistentCollection;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
-use WellCommerce\Bundle\FormBundle\DataTransformer\CollectionToArrayTransformer;
-use WellCommerce\Bundle\FormBundle\DataTransformer\DataTransformerInterface;
+use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
+use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\DataTransformerInterface;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCost;
 

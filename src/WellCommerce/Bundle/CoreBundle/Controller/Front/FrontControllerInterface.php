@@ -12,12 +12,14 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Controller\Front;
 
+use WellCommerce\Bundle\CoreBundle\Controller\ControllerInterface;
+
 /**
  * Interface FrontControllerInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface FrontControllerInterface
+interface FrontControllerInterface extends ControllerInterface
 {
     const MASTER_CONTROLLER = 1;
     const SUB_CONTROLLER    = 2;

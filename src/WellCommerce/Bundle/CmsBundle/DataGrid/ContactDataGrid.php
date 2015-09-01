@@ -11,20 +11,19 @@
  */
 namespace WellCommerce\Bundle\CmsBundle\DataGrid;
 
-use WellCommerce\Bundle\DataGridBundle\AbstractDataGrid;
+use WellCommerce\Bundle\CoreBundle\DataGrid\AbstractDataGrid;
 use WellCommerce\Bundle\DataGridBundle\Column\Column;
 use WellCommerce\Bundle\DataGridBundle\Column\ColumnCollection;
 use WellCommerce\Bundle\DataGridBundle\Column\Options\Appearance;
 use WellCommerce\Bundle\DataGridBundle\Column\Options\Filter;
 use WellCommerce\Bundle\DataGridBundle\Column\Options\Sorting;
-use WellCommerce\Bundle\DataGridBundle\DataGridInterface;
 
 /**
  * Class ContactDataGrid
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ContactDataGrid extends AbstractDataGrid implements DataGridInterface
+class ContactDataGrid extends AbstractDataGrid
 {
     /**
      * {@inheritdoc}
@@ -47,8 +46,8 @@ class ContactDataGrid extends AbstractDataGrid implements DataGridInterface
         ]));
 
         $collection->add(new Column([
-            'id'         => 'name',
-            'caption'    => $this->trans('contact.name.label'),
+            'id'      => 'name',
+            'caption' => $this->trans('contact.name.label'),
         ]));
     }
 }

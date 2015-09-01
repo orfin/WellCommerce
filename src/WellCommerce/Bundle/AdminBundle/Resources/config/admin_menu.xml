@@ -153,7 +153,7 @@
 
     <item>
         <id>page</id>
-        <name>admin.menu.page</name>
+        <name>admin.page.menu</name>
         <route>admin.page.index</route>
         <path>menu.cms.page</path>
         <sort_order>30</sort_order>

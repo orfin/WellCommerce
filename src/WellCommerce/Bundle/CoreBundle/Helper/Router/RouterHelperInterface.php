@@ -20,6 +20,8 @@ namespace WellCommerce\Bundle\CoreBundle\Helper\Router;
 interface RouterHelperInterface
 {
     /**
+     * Checks whether controller action is callable
+     *
      * @param object $controller
      * @param string $action
      *
@@ -38,4 +40,53 @@ interface RouterHelperInterface
      * @return \Symfony\Component\Routing\RequestContext
      */
     public function getRouterRequestContext();
+
+    /**
+     * Redirects user to another resource
+     *
+     * @param       $route
+     * @param array $routeParams
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function redirectTo($route, array $routeParams = []);
+
+    /**
+     * Resolves current route and redirects user to given controller action
+     *
+     * @param       $action
+     * @param array $params
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function redirectToAction($action, array $params = []);
+
+    /**
+     * Resolves route for given action
+     *
+     * @param $action
+     *
+     * @return mixed
+     */
+    public function getActionForCurrentController($action);
+
+    /**
+     * Creates absolute url pointing to particular controller action
+     *
+     * @param string $action
+     * @param array  $params
+     *
+     * @return string
+     */
+    public function getRedirectToActionUrl($action, array $params = []);
+
+    /**
+     * Generates an absolute url
+     *
+     * @param string $routeName
+     * @param array  $routeParams
+     *
+     * @return string
+     */
+    public function generateUrl($routeName, array $routeParams = []);
 }

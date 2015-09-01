@@ -14,10 +14,11 @@ namespace WellCommerce\Bundle\CategoryBundle\Manager\Admin;
 
 use WellCommerce\Bundle\AdminBundle\Manager\AbstractAdminManager;
 use WellCommerce\Bundle\CategoryBundle\Entity\Category;
-use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\CategoryBundle\Repository\CategoryRepositoryInterface;
+use WellCommerce\Bundle\DataGridBundle\DataGridInterface;
+use WellCommerce\Bundle\FormBundle\FormBuilderInterface;
 use WellCommerce\Bundle\IntlBundle\Entity\Locale;
 use WellCommerce\Bundle\IntlBundle\Repository\LocaleRepositoryInterface;
-use WellCommerce\Bundle\MultiStoreBundle\Context\ShopContextInterface;
 use WellCommerce\Bundle\RoutingBundle\Helper\Sluggable;
 
 /**
@@ -33,37 +34,21 @@ class CategoryManager extends AbstractAdminManager
     protected $localeRepository;
 
     /**
-     * @var ShopContextInterface
+     * Constructor
+     *
+     * @param CategoryRepositoryInterface $categoryRepository
+     * @param DataGridInterface           $dataGrid
+     * @param FormBuilderInterface        $formBuilder
+     * @param LocaleRepositoryInterface   $localeRepository
      */
-    protected $shopContext;
-
-    /**
-     * @var FormBuilderInterface
-     */
-    protected $treeFormBuilder;
-
-    /**
-     * @param LocaleRepositoryInterface $localeRepository
-     */
-    public function setLocaleRepository(LocaleRepositoryInterface $localeRepository)
-    {
+    public function __construct(
+        CategoryRepositoryInterface $categoryRepository,
+        DataGridInterface $dataGrid,
+        FormBuilderInterface $formBuilder,
+        LocaleRepositoryInterface $localeRepository
+    ) {
+        parent::__construct($categoryRepository, $dataGrid, $formBuilder);
         $this->localeRepository = $localeRepository;
-    }
-
-    /**
-     * @param ShopContextInterface $shopContext
-     */
-    public function setShopContext(ShopContextInterface $shopContext)
-    {
-        $this->shopContext = $shopContext;
-    }
-
-    /**
-     * @param FormBuilderInterface $treeFormBuilder
-     */
-    public function setTreeFormBuilder(FormBuilderInterface $treeFormBuilder)
-    {
-        $this->treeFormBuilder = $treeFormBuilder;
     }
 
     /**
@@ -100,7 +85,7 @@ class CategoryManager extends AbstractAdminManager
     public function quickAddCategory($name, $parent)
     {
         $em             = $this->getDoctrineHelper()->getEntityManager();
-        $currentShop    = $this->shopContext->getCurrentScope();
+        $currentShop    = $this->getShopContext()->getCurrentScope();
         $locales        = $this->localeRepository->findAll();
         $parentCategory = $this->getRepository()->find((int)$parent);
 
@@ -156,18 +141,5 @@ class CategoryManager extends AbstractAdminManager
         }
 
         return $slug;
-    }
-
-    /**
-     * Returns the tree as a form
-     *
-     * @return \WellCommerce\Bundle\FormBundle\Elements\FormInterface
-     */
-    public function getTree()
-    {
-        return $this->treeFormBuilder->createForm([
-            'name'  => 'category_tree',
-            'class' => 'category-select',
-        ]);
     }
 }

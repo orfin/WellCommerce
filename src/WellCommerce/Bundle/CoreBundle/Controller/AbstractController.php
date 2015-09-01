@@ -11,67 +11,61 @@
  */
 namespace WellCommerce\Bundle\CoreBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
 
 /**
- * Class Controller
+ * Class AbstractController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractController extends Controller
+abstract class AbstractController extends AbstractContainerAware implements ControllerInterface
 {
     /**
-     * @var ManagerInterface
+     * {@inheritdoc}
      */
-    protected $manager;
-
-    /**
-     * Constructor
-     *
-     * @param ManagerInterface $manager
-     */
-    public function __construct(ManagerInterface $manager)
-    {
-        $this->manager = $manager;
-    }
-
-    /**
-     * Returns content as json response
-     *
-     * @param mixed $content
-     *
-     * @return JsonResponse
-     */
-    protected function jsonResponse($content)
+    public function jsonResponse(array $content)
     {
         return new JsonResponse($content);
     }
 
     /**
-     * Translates message using Translator service
-     *
-     * @param string $id
-     *
-     * @return string
+     * {@inheritdoc}
      */
-    protected function trans($id)
+    public function redirectResponse($url, $status = RedirectResponse::HTTP_OK)
     {
-        return $this->manager->getTranslator()->trans($id);
+        return new RedirectResponse($url, $status);
     }
 
     /**
-     * Redirects user to another action in scope of current controller
+     * Redirects user to another action of current controller
      *
      * @param string $actionName
      * @param array  $params
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     protected function redirectToAction($actionName = 'index', array $params = [])
     {
-        return $this->manager->getRedirectHelper()->redirectToAction($actionName, $params);
+        $url = $this->getRedirectToActionUrl($actionName, $params);
+
+        return $this->redirectResponse($url);
+    }
+
+    /**
+     * Redirects to URL generated for route
+     *
+     * @param string $routeName
+     * @param array  $routeParams
+     *
+     * @return RedirectResponse
+     */
+    protected function redirectToRoute($routeName, array $routeParams = [])
+    {
+        $url = $this->getRouterHelper()->generateUrl($routeName, $routeParams);
+
+        return $this->redirectResponse($url);
     }
 
     /**
@@ -84,7 +78,7 @@ abstract class AbstractController extends Controller
      */
     protected function getRedirectToActionUrl($actionName = 'index', array $params = [])
     {
-        return $this->manager->getRedirectHelper()->getRedirectToActionUrl($actionName, $params);
+        return $this->getRouterHelper()->getRedirectToActionUrl($actionName, $params);
     }
 
     /**
@@ -97,9 +91,27 @@ abstract class AbstractController extends Controller
      */
     protected function displayTemplate($templateName, array $templateVars = [])
     {
+        $templating       = $this->container->get('templating');
         $templateResolver = $this->get('template_resolver');
         $template         = $templateResolver->resolveControllerTemplate($this, $templateName);
 
-        return $this->render($template, $templateVars);
+        return $templating->renderResponse($template, $templateVars);
+    }
+
+    public function getUser()
+    {
+        if (!$this->container->has('security.token_storage')) {
+            throw new \LogicException('The SecurityBundle is not registered in your application.');
+        }
+
+        if (null === $token = $this->container->get('security.token_storage')->getToken()) {
+            return null;
+        }
+
+        if (!is_object($user = $token->getUser())) {
+            return null;
+        }
+
+        return $user;
     }
 }

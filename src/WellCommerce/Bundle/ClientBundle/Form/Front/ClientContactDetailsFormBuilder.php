@@ -11,8 +11,7 @@
  */
 namespace WellCommerce\Bundle\ClientBundle\Form\Front;
 
-use WellCommerce\Bundle\FormBundle\Builder\AbstractFormBuilder;
-use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
@@ -20,7 +19,7 @@ use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientContactDetailsFormBuilder extends AbstractFormBuilder implements FormBuilderInterface
+class ClientContactDetailsFormBuilder extends AbstractFormBuilder
 {
     /**
      * {@inheritdoc}
@@ -31,12 +30,12 @@ class ClientContactDetailsFormBuilder extends AbstractFormBuilder implements For
             'name'  => 'phone',
             'label' => $this->trans('client.label.phone'),
         ]));
-    
+
         $form->addChild($this->getElement('text_field', [
             'name'  => 'secondaryPhone',
             'label' => $this->trans('client.label.secondary_phone'),
         ]));
-    
+
         $form->addChild($this->getElement('text_field', [
             'name'  => 'email',
             'label' => $this->trans('client.label.email'),

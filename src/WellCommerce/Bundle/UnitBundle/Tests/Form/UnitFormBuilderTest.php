@@ -22,7 +22,7 @@ use WellCommerce\Bundle\CoreBundle\Test\Form\AbstractFormBuilderTestCase;
  */
 class UnitFormBuilderTest extends AbstractFormBuilderTestCase
 {
-    protected function getService()
+    protected function get()
     {
         return $this->container->get('unit.form_builder');
     }

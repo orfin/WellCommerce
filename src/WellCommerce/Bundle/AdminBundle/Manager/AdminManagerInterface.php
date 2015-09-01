@@ -15,7 +15,7 @@ namespace WellCommerce\Bundle\AdminBundle\Manager;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
 use WellCommerce\Bundle\DataGridBundle\DataGridInterface;
-use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\FormBundle\FormBuilderInterface;
 
 /**
  * Interface AdminManagerInterface
@@ -41,25 +41,11 @@ interface AdminManagerInterface extends ManagerInterface
     public function getDataGrid();
 
     /**
-     * Sets datagrid object
-     *
-     * @param DataGridInterface $datagrid
-     */
-    public function setDataGrid(DataGridInterface $datagrid);
-
-    /**
      * Returns form object
      *
      * @return FormBuilderInterface
      */
     public function getFormBuilder();
-
-    /**
-     * Sets form builder object
-     *
-     * @param FormBuilderInterface $formBuilder
-     */
-    public function setFormBuilder(FormBuilderInterface $formBuilder);
 
     /**
      * Returns form instance from builder

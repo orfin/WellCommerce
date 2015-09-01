@@ -5,22 +5,11 @@
 
     <services>
         <service id="news.manager.admin" class="WellCommerce\Bundle\CmsBundle\Manager\Admin\NewsManager">
-            <argument type="service" id="flash_helper"/>
-            <argument type="service" id="redirect_helper"/>
-            <argument type="service" id="image_helper"/>
-            <argument type="service" id="event_dispatcher"/>
-            <argument type="service" id="doctrine_helper"/>
-            <argument type="service" id="translator_helper"/>
-            <argument type="service" id="request_helper"/>
-            <argument type="service" id="validator"/>
-            <call method="setRepository">
-                <argument type="service" id="news.repository"/>
-            </call>
-            <call method="setFormBuilder">
-                <argument type="service" id="news.form_builder"/>
-            </call>
-            <call method="setDataGrid">
-                <argument type="service" id="news.datagrid"/>
+            <argument type="service" id="news.repository"/>
+            <argument type="service" id="news.datagrid"/>
+            <argument type="service" id="news.form_builder"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
             </call>
         </service>
 
@@ -35,7 +24,7 @@
             <argument>WellCommerceCmsBundle:News</argument>
         </service>
 
-        <service id="news.dataset.query_builder" class="WellCommerce\Bundle\CmsBundle\DataSet\NewsDataSetQueryBuilder" public="false">
+        <service id="news.dataset.query_builder" class="WellCommerce\Bundle\CmsBundle\DataSet\Admin\NewsDataSetQueryBuilder" public="false">
             <argument type="service" id="news.repository"/>
         </service>
 
@@ -44,7 +33,7 @@
             <argument type="service" id="dataset.processor"/>
         </service>
 
-        <service id="news.dataset" class="WellCommerce\Bundle\CmsBundle\DataSet\NewsDataSet">
+        <service id="news.dataset" class="WellCommerce\Bundle\CmsBundle\DataSet\Admin\NewsDataSet">
             <argument key="identifier">news</argument>
             <argument type="service" id="news.dataset.loader"/>
             <configurator service="dataset.configurator" method="configure"/>

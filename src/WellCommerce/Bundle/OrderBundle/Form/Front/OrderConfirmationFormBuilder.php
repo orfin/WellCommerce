@@ -11,16 +11,15 @@
  */
 namespace WellCommerce\Bundle\OrderBundle\Form\Front;
 
-use WellCommerce\Bundle\FormBundle\Builder\AbstractFormBuilder;
-use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
- * Class CartFormBuilder
+ * Class OrderConfirmationFormBuilder
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderConfirmationFormBuilder extends AbstractFormBuilder implements FormBuilderInterface
+class OrderConfirmationFormBuilder extends AbstractFormBuilder
 {
     /**
      * {@inheritdoc}

@@ -5,22 +5,11 @@
 
     <services>
         <service id="contact.manager.admin" class="WellCommerce\Bundle\CmsBundle\Manager\Admin\ContactManager">
-            <argument type="service" id="flash_helper"/>
-            <argument type="service" id="redirect_helper"/>
-            <argument type="service" id="image_helper"/>
-            <argument type="service" id="event_dispatcher"/>
-            <argument type="service" id="doctrine_helper"/>
-            <argument type="service" id="translator_helper"/>
-            <argument type="service" id="request_helper"/>
-            <argument type="service" id="validator"/>
-            <call method="setRepository">
-                <argument type="service" id="contact.repository"/>
-            </call>
-            <call method="setFormBuilder">
-                <argument type="service" id="contact.form_builder"/>
-            </call>
-            <call method="setDataGrid">
-                <argument type="service" id="contact.datagrid"/>
+            <argument type="service" id="contact.repository"/>
+            <argument type="service" id="contact.datagrid"/>
+            <argument type="service" id="contact.form_builder"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
             </call>
         </service>
         
@@ -47,7 +36,7 @@
             <argument>WellCommerceCmsBundle:Contact</argument>
         </service>
 
-        <service id="contact.dataset.query_builder" class="WellCommerce\Bundle\CmsBundle\DataSet\ContactDataSetQueryBuilder" public="false">
+        <service id="contact.dataset.query_builder" class="WellCommerce\Bundle\CmsBundle\DataSet\Admin\ContactDataSetQueryBuilder" public="false">
             <argument type="service" id="contact.repository"/>
         </service>
 
@@ -56,7 +45,7 @@
             <argument type="service" id="dataset.processor"/>
         </service>
 
-        <service id="contact.dataset" class="WellCommerce\Bundle\CmsBundle\DataSet\ContactDataSet">
+        <service id="contact.dataset" class="WellCommerce\Bundle\CmsBundle\DataSet\Admin\ContactDataSet">
             <argument key="identifier">contact</argument>
             <argument type="service" id="contact.dataset.loader"/>
             <configurator service="dataset.configurator" method="configure"/>

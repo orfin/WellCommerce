@@ -9,22 +9,11 @@
 
     <services>
         <service id="shipping_method.manager.admin" class="WellCommerce\Bundle\ShippingBundle\Manager\Admin\ShippingMethodManager">
-            <argument type="service" id="flash_helper"/>
-            <argument type="service" id="redirect_helper"/>
-            <argument type="service" id="image_helper"/>
-            <argument type="service" id="event_dispatcher"/>
-            <argument type="service" id="doctrine_helper"/>
-            <argument type="service" id="translator_helper"/>
-            <argument type="service" id="request_helper"/>
-            <argument type="service" id="validator"/>
-            <call method="setRepository">
-                <argument type="service" id="shipping_method.repository"/>
-            </call>
-            <call method="setFormBuilder">
-                <argument type="service" id="shipping_method.form_builder"/>
-            </call>
-            <call method="setDataGrid">
-                <argument type="service" id="shipping_method.datagrid"/>
+            <argument type="service" id="shipping_method.repository"/>
+            <argument type="service" id="shipping_method.datagrid"/>
+            <argument type="service" id="shipping_method.form_builder"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
             </call>
         </service>
         

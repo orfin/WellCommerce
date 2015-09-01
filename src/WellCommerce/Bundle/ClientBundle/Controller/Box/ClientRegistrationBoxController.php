@@ -35,7 +35,7 @@ class ClientRegistrationBoxController extends AbstractBoxController
 
                 $this->manager->getFlashHelper()->addSuccess('client.flash.registration.success');
 
-                return $this->manager->getRedirectHelper()->redirectTo('front.client.login');
+                return $this->getRouterHelper()->redirectTo('front.client.login');
             }
 
             if (count($form->getError())) {

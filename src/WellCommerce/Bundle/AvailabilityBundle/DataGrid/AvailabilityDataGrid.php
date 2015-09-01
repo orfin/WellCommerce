@@ -11,19 +11,18 @@
  */
 namespace WellCommerce\Bundle\AvailabilityBundle\DataGrid;
 
-use WellCommerce\Bundle\DataGridBundle\AbstractDataGrid;
+use WellCommerce\Bundle\CoreBundle\DataGrid\AbstractDataGrid;
 use WellCommerce\Bundle\DataGridBundle\Column\Column;
 use WellCommerce\Bundle\DataGridBundle\Column\ColumnCollection;
 use WellCommerce\Bundle\DataGridBundle\Column\Options\Appearance;
 use WellCommerce\Bundle\DataGridBundle\Column\Options\Filter;
-use WellCommerce\Bundle\DataGridBundle\DataGridInterface;
 
 /**
  * Class AvailabilityDataGrid
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AvailabilityDataGrid extends AbstractDataGrid implements DataGridInterface
+class AvailabilityDataGrid extends AbstractDataGrid
 {
     /**
      * {@inheritdoc}
@@ -32,7 +31,7 @@ class AvailabilityDataGrid extends AbstractDataGrid implements DataGridInterface
     {
         $collection->add(new Column([
             'id'         => 'id',
-            'caption'    => $this->trans('availability.id'),
+            'caption'    => $this->trans('admin.availability.label.id'),
             'appearance' => new Appearance([
                 'width'   => 90,
                 'visible' => false,
@@ -43,8 +42,8 @@ class AvailabilityDataGrid extends AbstractDataGrid implements DataGridInterface
         ]));
 
         $collection->add(new Column([
-            'id'         => 'name',
-            'caption'    => $this->trans('availability.name'),
+            'id'      => 'name',
+            'caption' => $this->trans('admin.availability.label.name'),
         ]));
     }
 }

@@ -11,17 +11,16 @@
  */
 namespace WellCommerce\Bundle\ProductBundle\Form;
 
-use WellCommerce\Bundle\FormBundle\Builder\AbstractFormBuilder;
-use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
-use WellCommerce\Bundle\FormBundle\DataTransformer\TranslationTransformer;
+use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
+use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\TranslationTransformer;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
- * Class ProductStatusForm
+ * Class ProductStatusFormBuilder
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductStatusFormBuilder extends AbstractFormBuilder implements FormBuilderInterface
+class ProductStatusFormBuilder extends AbstractFormBuilder
 {
     /**
      * {@inheritdoc}

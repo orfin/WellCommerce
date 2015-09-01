@@ -38,7 +38,7 @@ class RoutingController extends AbstractAdminController
     public function generateAction(Request $request)
     {
         if (!$request->isXmlHttpRequest()) {
-            return $this->manager->getRedirectHelper()->redirectToAction('index');
+            return $this->redirectToAction('index');
         }
 
         $slug = $this->manager->generateSlug(

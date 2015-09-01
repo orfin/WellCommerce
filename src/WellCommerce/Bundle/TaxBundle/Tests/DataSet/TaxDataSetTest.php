@@ -21,7 +21,7 @@ use WellCommerce\Bundle\CoreBundle\Test\DataSet\AbstractDataSetTestCase;
  */
 class TaxDataSetTest extends AbstractDataSetTestCase
 {
-    protected function getService()
+    protected function get()
     {
         return $this->container->get('tax.dataset');
     }

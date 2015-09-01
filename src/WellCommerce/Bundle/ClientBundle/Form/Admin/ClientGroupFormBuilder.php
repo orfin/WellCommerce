@@ -11,17 +11,16 @@
  */
 namespace WellCommerce\Bundle\ClientBundle\Form\Admin;
 
-use WellCommerce\Bundle\FormBundle\Builder\AbstractFormBuilder;
-use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
-use WellCommerce\Bundle\FormBundle\DataTransformer\TranslationTransformer;
+use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
+use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\TranslationTransformer;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
- * Class ClientGroupForm
+ * Class ClientGroupFormBuilder
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientGroupFormBuilder extends AbstractFormBuilder implements FormBuilderInterface
+class ClientGroupFormBuilder extends AbstractFormBuilder
 {
     /**
      * {@inheritdoc}
@@ -44,8 +43,8 @@ class ClientGroupFormBuilder extends AbstractFormBuilder implements FormBuilderI
         ]));
 
         $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
-            'name'  => 'translations',
-            'label' => $this->trans('form.required_data.language_data.label'),
+            'name'        => 'translations',
+            'label'       => $this->trans('form.required_data.language_data.label'),
             'transformer' => new TranslationTransformer($this->get('client_group.repository'))
         ]));
 

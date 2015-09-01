@@ -24,13 +24,6 @@ use WellCommerce\Bundle\MultiStoreBundle\Context\ShopContextInterface;
 interface FrontManagerInterface extends ManagerInterface
 {
     /**
-     * Sets providers collection
-     *
-     * @param ProviderCollection $providers
-     */
-    public function setProviders(ProviderCollection $providers);
-
-    /**
      * Returns providers collection
      *
      * @return ProviderCollection
@@ -45,11 +38,6 @@ interface FrontManagerInterface extends ManagerInterface
      * @return \WellCommerce\Bundle\CoreBundle\Provider\ProviderInterface
      */
     public function getProvider($type);
-
-    /**
-     * @param ShopContextInterface $shopContext
-     */
-    public function setShopContext(ShopContextInterface $shopContext);
 
     /**
      * Shorthand to get category provider
