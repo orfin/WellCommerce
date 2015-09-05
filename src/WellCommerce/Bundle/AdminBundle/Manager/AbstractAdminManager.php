@@ -13,6 +13,10 @@
 namespace WellCommerce\Bundle\AdminBundle\Manager;
 
 use Symfony\Component\HttpFoundation\Request;
+use WellCommerce\Bundle\CoreBundle\EventDispatcher\EventDispatcherInterface;
+use WellCommerce\Bundle\CoreBundle\Exception\MissingDataGridException;
+use WellCommerce\Bundle\CoreBundle\Exception\MissingFormBuilderException;
+use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 use WellCommerce\Bundle\DataGridBundle\DataGridInterface;
@@ -28,23 +32,30 @@ abstract class AbstractAdminManager extends AbstractManager implements AdminMana
     /**
      * @var DataGridInterface
      */
-    protected $dataGrid;
+    private $dataGrid;
 
     /**
      * @var FormBuilderInterface
      */
-    protected $formBuilder;
+    private $formBuilder;
 
     /**
      * Constructor
      *
-     * @param RepositoryInterface       $repository
-     * @param DataGridInterface|null    $dataGrid
-     * @param FormBuilderInterface|null $formBuilder
+     * @param RepositoryInterface|null      $repository
+     * @param DataGridInterface|null        $dataGrid
+     * @param FormBuilderInterface|null     $formBuilder
+     * @param FactoryInterface|null         $factory
+     * @param EventDispatcherInterface|null $eventDispatcher
      */
-    public function __construct(RepositoryInterface $repository, DataGridInterface $dataGrid = null, FormBuilderInterface $formBuilder = null)
-    {
-        parent::__construct($repository);
+    public function __construct(
+        RepositoryInterface $repository = null,
+        DataGridInterface $dataGrid = null,
+        FormBuilderInterface $formBuilder = null,
+        FactoryInterface $factory = null,
+        EventDispatcherInterface $eventDispatcher = null
+    ) {
+        parent::__construct($repository, $factory, $eventDispatcher);
         $this->dataGrid    = $dataGrid;
         $this->formBuilder = $formBuilder;
     }
@@ -54,6 +65,10 @@ abstract class AbstractAdminManager extends AbstractManager implements AdminMana
      */
     public function getDataGrid()
     {
+        if (null === $this->dataGrid) {
+            throw new MissingDataGridException(get_class($this));
+        }
+
         return $this->dataGrid;
     }
 
@@ -62,6 +77,10 @@ abstract class AbstractAdminManager extends AbstractManager implements AdminMana
      */
     public function getFormBuilder()
     {
+        if (null === $this->formBuilder) {
+            throw new MissingFormBuilderException(get_class($this));
+        }
+
         return $this->formBuilder;
     }
 
@@ -92,6 +111,50 @@ abstract class AbstractAdminManager extends AbstractManager implements AdminMana
 
         $id       = $request->attributes->get('id');
         $resource = $this->getRepository()->find($id);
+
+        return $resource;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createResource($resource)
+    {
+        $this->getEventDispatcher()->dispatchOnPreCreateResource($resource);
+        $this->saveResource($resource);
+        $this->getEventDispatcher()->dispatchOnPostCreateResource($resource);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function updateResource($resource)
+    {
+        $this->getEventDispatcher()->dispatchOnPreUpdateResource($resource);
+        $this->saveResource($resource);
+        $this->getEventDispatcher()->dispatchOnPostUpdateResource($resource);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeResource($resource)
+    {
+        $this->getEventDispatcher()->dispatchOnPreRemoveResource($resource);
+        $em = $this->getDoctrineHelper()->getEntityManager();
+        $em->remove($resource);
+        $em->flush();
+        $this->getEventDispatcher()->dispatchOnPostRemoveResource($resource);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function saveResource($resource)
+    {
+        $em = $this->getDoctrineHelper()->getEntityManager();
+        $em->persist($resource);
+        $em->flush();
 
         return $resource;
     }

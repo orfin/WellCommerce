@@ -21,7 +21,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CartTotals
+class CartTotals implements CartTotalsInterface
 {
     /**
      * @var float

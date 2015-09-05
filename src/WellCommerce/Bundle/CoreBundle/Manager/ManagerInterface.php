@@ -22,13 +22,6 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
  */
 interface ManagerInterface
 {
-    const PRE_UPDATE_EVENT  = 'pre_update';
-    const POST_UPDATE_EVENT = 'post_update';
-    const PRE_CREATE_EVENT  = 'pre_create';
-    const POST_CREATE_EVENT = 'post_create';
-    const PRE_REMOVE_EVENT  = 'pre_remove';
-    const POST_REMOVE_EVENT = 'post_remove';
-
     /**
      * @return \Symfony\Component\Validator\Validator\ValidatorInterface
      */
@@ -51,7 +44,7 @@ interface ManagerInterface
     /**
      * Returns the EventDispatcher
      *
-     * @return \Symfony\Component\EventDispatcher\EventDispatcherInterface
+     * @return \WellCommerce\Bundle\CoreBundle\EventDispatcher\EventDispatcherInterface
      */
     public function getEventDispatcher();
 
@@ -79,9 +72,14 @@ interface ManagerInterface
     /**
      * Returns the current repository
      *
-     * @return RepositoryInterface
+     * @return null|\WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface
      */
     public function getRepository();
+
+    /**
+     * @return null|\WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface
+     */
+    public function getFactory();
 
     /**
      * Initializes new resource object
@@ -89,29 +87,6 @@ interface ManagerInterface
      * @return object
      */
     public function initResource();
-
-    /**
-     * Persists new resource
-     *
-     * @param object  $resource
-     * @param Request $request
-     */
-    public function createResource($resource, Request $request);
-
-    /**
-     * Updates existing resource
-     *
-     * @param object  $resource
-     * @param Request $request
-     */
-    public function updateResource($resource, Request $request);
-
-    /**
-     * Removes a resource
-     *
-     * @param object $resource
-     */
-    public function removeResource($resource);
 
     /**
      * @return \WellCommerce\Bundle\MultiStoreBundle\Context\ShopContextInterface

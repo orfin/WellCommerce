@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\CoreBundle\Form;
 
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
+use WellCommerce\Bundle\CoreBundle\EventDispatcher\EventDispatcherInterface;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 use WellCommerce\Bundle\FormBundle\Event\FormEvent;
 use WellCommerce\Bundle\FormBundle\FormBuilderInterface;
@@ -37,15 +38,22 @@ abstract class AbstractFormBuilder extends AbstractContainerAware implements For
     protected $formHandler;
 
     /**
+     * @var EventDispatcherInterface
+     */
+    protected $eventDispatcher;
+
+    /**
      * Constructor
      *
      * @param FormResolverFactoryInterface $resolverFactory
      * @param FormHandlerInterface         $formHandler
+     * @param EventDispatcherInterface     $eventDispatcher
      */
-    public function __construct(FormResolverFactoryInterface $resolverFactory, FormHandlerInterface $formHandler)
+    public function __construct(FormResolverFactoryInterface $resolverFactory, FormHandlerInterface $formHandler, EventDispatcherInterface $eventDispatcher)
     {
         $this->resolverFactory = $resolverFactory;
         $this->formHandler     = $formHandler;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
@@ -56,7 +64,7 @@ abstract class AbstractFormBuilder extends AbstractContainerAware implements For
         $form = $this->getFormService($options);
         $this->buildForm($form);
         $this->formHandler->initForm($form, $defaultData);
-        $this->dispatchEvent($form);
+        $this->eventDispatcher->dispatchOnFormInitEvent($this, $form);
 
         return $form;
     }
@@ -129,24 +137,5 @@ abstract class AbstractFormBuilder extends AbstractContainerAware implements For
         $service->setOptions($options);
 
         return $service;
-    }
-
-    protected function dispatchEvent(FormInterface $form)
-    {
-        $event     = new FormEvent($this, $form);
-        $eventName = $this->getInitEventName($form);
-        $this->getEventDispatcher()->dispatch($eventName, $event);
-    }
-
-    /**
-     * Returns form.init event name
-     *
-     * @param FormInterface $form
-     *
-     * @return string
-     */
-    protected function getInitEventName(FormInterface $form)
-    {
-        return sprintf('%s.%s', $form->getName(), FormEvent::FORM_INIT_EVENT);
     }
 }

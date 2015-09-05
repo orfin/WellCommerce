@@ -38,24 +38,6 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
     /**
      * {@inheritdoc}
      */
-    public function createNew()
-    {
-        $entity = $this->getClassName();
-
-        return new $entity();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPropertyAccessor()
-    {
-        return PropertyAccess::createPropertyAccessor();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getAlias()
     {
         $parts      = explode('\\', $this->getEntityName());

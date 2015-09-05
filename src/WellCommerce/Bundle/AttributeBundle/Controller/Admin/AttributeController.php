@@ -42,7 +42,7 @@ class AttributeController extends AbstractAdminController
         }
 
         $id         = $request->request->get('id');
-        $attributes = $this->getRepository()->findAllByAttributeGroupId($id);
+        $attributes = $this->manager->getRepository()->findAllByAttributeGroupId($id);
 
         $sets = [];
 

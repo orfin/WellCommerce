@@ -21,7 +21,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Address
+class Address implements AddressInterface
 {
     /**
      * @var string

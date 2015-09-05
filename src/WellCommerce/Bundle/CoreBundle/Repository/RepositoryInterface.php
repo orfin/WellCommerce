@@ -22,13 +22,6 @@ use WellCommerce\Bundle\DataSetBundle\Repository\DataSetAwareRepositoryInterface
 interface RepositoryInterface extends DataSetAwareRepositoryInterface
 {
     /**
-     * Creates new entity
-     *
-     * @return \Doctrine\Entity
-     */
-    public function createNew();
-
-    /**
      * Creates a new QueryBuilder instance that is prepopulated for this entity name.
      *
      * @param string $alias
@@ -36,13 +29,6 @@ interface RepositoryInterface extends DataSetAwareRepositoryInterface
      * @return \Doctrine\ORM\QueryBuilder
      */
     public function createQueryBuilder($alias);
-
-    /**
-     * Returns property accessor
-     *
-     * @return \Symfony\Component\PropertyAccess\PropertyAccessor
-     */
-    public function getPropertyAccessor();
 
     /**
      * Returns a resource for given primary key

@@ -8,6 +8,8 @@
             <argument type="service" id="availability.repository"/>
             <argument type="service" id="availability.datagrid"/>
             <argument type="service" id="availability.form_builder"/>
+            <argument type="service" id="availability.factory"/>
+            <argument type="service" id="availability.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -22,6 +24,12 @@
 
         <service id="availability.repository" class="WellCommerce\Bundle\AvailabilityBundle\Repository\AvailabilityRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument>WellCommerceAvailabilityBundle:Availability</argument>
+        </service>
+
+        <service id="availability.factory" class="WellCommerce\Bundle\AvailabilityBundle\Factory\AvailabilityFactory" />
+
+        <service id="availability.event_dispatcher" class="WellCommerce\Bundle\AvailabilityBundle\EventDispatcher\AvailabilityEventDispatcher">
+            <argument type="service" id="event_dispatcher" />
         </service>
 
         <service id="availability.dataset.query_builder" class="WellCommerce\Bundle\AvailabilityBundle\DataSet\AvailabilityDataSetQueryBuilder" public="false">
@@ -54,9 +62,11 @@
         <service id="availability.form_builder" class="WellCommerce\Bundle\AvailabilityBundle\Form\AvailabilityFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
+            <argument type="service" id="availability.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
+
     </services>
 </container>

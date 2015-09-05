@@ -1,25 +1,25 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- *
+ * 
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- *
+ * 
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AttributeBundle\Manager\Admin;
+namespace WellCommerce\Bundle\AvailabilityBundle\EventDispatcher;
 
-use WellCommerce\Bundle\AdminBundle\Manager\AbstractAdminManager;
-use WellCommerce\Bundle\IntlBundle\Repository\LocaleRepositoryInterface;
+use WellCommerce\Bundle\CoreBundle\EventDispatcher\AbstractEventDispatcher;
 
 /**
- * Class AttributeGroupManager
+ * Class AvailabilityEventDispatcher
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AttributeGroupManager extends AbstractAdminManager
+class AvailabilityEventDispatcher extends AbstractEventDispatcher
 {
+
 }

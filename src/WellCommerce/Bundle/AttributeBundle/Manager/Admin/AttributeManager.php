@@ -32,25 +32,15 @@ class AttributeManager extends AbstractAdminManager
     protected $attributeGroupRepository;
 
     /**
-     * @var LocaleRepositoryInterface
-     */
-    protected $localeRepository;
-
-    /**
      * Constructor
      *
      * @param AttributeRepositoryInterface      $attributeRepository
      * @param AttributeGroupRepositoryInterface $attributeGroupRepository
-     * @param LocaleRepositoryInterface         $localeRepository
      */
-    public function __construct(
-        AttributeRepositoryInterface $attributeRepository,
-        AttributeGroupRepositoryInterface $attributeGroupRepository,
-        LocaleRepositoryInterface $localeRepository
-    ) {
+    public function __construct(AttributeRepositoryInterface $attributeRepository, AttributeGroupRepositoryInterface $attributeGroupRepository)
+    {
         parent::__construct($attributeRepository);
         $this->attributeGroupRepository = $attributeGroupRepository;
-        $this->localeRepository         = $localeRepository;
     }
 
     /**
@@ -76,14 +66,6 @@ class AttributeManager extends AbstractAdminManager
     }
 
     /**
-     * @return \WellCommerce\Bundle\IntlBundle\Entity\Locale[]
-     */
-    protected function getLocales()
-    {
-        return $this->localeRepository->findAll();
-    }
-
-    /**
      * Creates
      *
      * @param AttributeGroup $group
@@ -94,10 +76,9 @@ class AttributeManager extends AbstractAdminManager
     protected function createNewAttribute(AttributeGroup $group, $name)
     {
         $em        = $this->getDoctrineHelper()->getEntityManager();
-        $attribute = new Attribute();
-        $attribute->addGroup($group);
+        $attribute = $this->entityFactory->create();
 
-        foreach ($this->localeRepository->findAll() as $locale) {
+        foreach ($this->getLocales() as $locale) {
             $attribute->translate($locale->getCode())->setName($name);
         }
 

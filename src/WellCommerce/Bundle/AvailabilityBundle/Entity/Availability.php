@@ -13,21 +13,21 @@
 namespace WellCommerce\Bundle\AvailabilityBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Knp\DoctrineBehaviors\Model as Behaviors;
 
 /**
- * Class Locale
+ * Class Availability
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  *
  * @ORM\Table(name="availability")
  * @ORM\Entity(repositoryClass="WellCommerce\Bundle\AvailabilityBundle\Repository\AvailabilityRepository")
  */
-class Availability
+class Availability implements AvailabilityInterface
 {
-    use ORMBehaviors\Translatable\Translatable;
-    use ORMBehaviors\Timestampable\Timestampable;
-    use ORMBehaviors\Blameable\Blameable;
+    use Behaviors\Translatable\Translatable;
+    use Behaviors\Timestampable\Timestampable;
+    use Behaviors\Blameable\Blameable;
 
     /**
      * @var integer
@@ -39,9 +39,7 @@ class Availability
     protected $id;
 
     /**
-     * Get id.
-     *
-     * @return integer
+     * {@inheritdoc}
      */
     public function getId()
     {

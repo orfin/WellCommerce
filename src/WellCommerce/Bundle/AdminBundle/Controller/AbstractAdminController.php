@@ -89,7 +89,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
 
         if ($form->handleRequest()->isSubmitted()) {
             if ($form->isValid()) {
-                $this->manager->createResource($resource, $request);
+                $this->manager->createResource($resource);
             }
 
             return $this->createFormDefaultJsonResponse($form);
@@ -118,7 +118,7 @@ abstract class AbstractAdminController extends AbstractController implements Adm
 
         if ($form->handleRequest()->isSubmitted()) {
             if ($form->isValid()) {
-                $this->manager->updateResource($resource, $request);
+                $this->manager->updateResource($resource);
             }
 
             return $this->createFormDefaultJsonResponse($form);

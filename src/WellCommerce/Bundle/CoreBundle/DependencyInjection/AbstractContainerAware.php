@@ -100,14 +100,6 @@ abstract class AbstractContainerAware extends ContainerAware
     }
 
     /**
-     * @return \Symfony\Component\EventDispatcher\EventDispatcherInterface
-     */
-    public function getEventDispatcher()
-    {
-        return $this->get('event_dispatcher');
-    }
-
-    /**
      * @return \Symfony\Component\HttpKernel\KernelInterface
      */
     public function getKernel()
@@ -177,5 +169,13 @@ abstract class AbstractContainerAware extends ContainerAware
     public function getLocales()
     {
         return $this->get('locale.repository')->findAll();
+    }
+
+    /**
+     * @return \Doctrine\Common\Persistence\ObjectManager|object
+     */
+    protected function getEntityManager()
+    {
+        return $this->getDoctrineHelper()->getEntityManager();
     }
 }
