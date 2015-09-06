@@ -1,0 +1,15 @@
+WellCommerce\Bundle\TaxBundle\Entity\Tax:
+    type: entity
+    table: tax
+    repositoryClass: WellCommerce\Bundle\TaxBundle\Repository\TaxRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        value:
+            type: decimal
+            scale: 4
+            precision: 15
+            nullable: false

@@ -10,14 +10,16 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CartBundle\Event;
+namespace WellCommerce\Bundle\IntlBundle\EventDispatcher;
+
+use WellCommerce\Bundle\CoreBundle\EventDispatcher\AbstractEventDispatcher;
 
 /**
- * Class CartProductOnAddEvent
+ * Class CurrencyEventDispatcher
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CartProductOnAddEvent
+class CurrencyEventDispatcher extends AbstractEventDispatcher
 {
     
 }

@@ -1,0 +1,367 @@
+WellCommerce\Bundle\CartBundle\Entity\Cart:
+    type: entity
+    table: cart
+    repositoryClass: WellCommerce\Bundle\CartBundle\Repository\CartRepository
+    id:
+        id:
+            type: integer
+            scale: 0
+            length: null
+            unique: false
+            nullable: false
+            precision: 0
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        sessionId:
+            type: string
+            scale: 0
+            length: null
+            unique: false
+            nullable: false
+            precision: 0
+            column: session_id
+        totals.quantity:
+            type: decimal
+            scale: 4
+            length: null
+            unique: false
+            nullable: false
+            precision: 15
+            originalClass: WellCommerce\Bundle\CartBundle\Entity\CartTotals
+            declaredField: totals
+            originalField: quantity
+            column: total_quantity
+        totals.weight:
+            type: decimal
+            scale: 4
+            length: null
+            unique: false
+            nullable: false
+            precision: 15
+            originalClass: WellCommerce\Bundle\CartBundle\Entity\CartTotals
+            declaredField: totals
+            originalField: weight
+            column: total_weight
+        totals.netPrice:
+            type: decimal
+            scale: 4
+            length: null
+            unique: false
+            nullable: false
+            precision: 15
+            originalClass: WellCommerce\Bundle\CartBundle\Entity\CartTotals
+            declaredField: totals
+            originalField: netPrice
+            column: total_net_price
+        totals.grossPrice:
+            type: decimal
+            scale: 4
+            length: null
+            unique: false
+            nullable: false
+            precision: 15
+            originalClass: WellCommerce\Bundle\CartBundle\Entity\CartTotals
+            declaredField: totals
+            originalField: grossPrice
+            column: total_gross_price
+        totals.taxAmount:
+            type: decimal
+            scale: 4
+            length: null
+            unique: false
+            nullable: false
+            precision: 15
+            originalClass: WellCommerce\Bundle\CartBundle\Entity\CartTotals
+            declaredField: totals
+            originalField: taxAmount
+            column: total_tax_amount
+        billingAddress.firstName:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: true
+            precision: 0
+            originalClass: WellCommerce\Bundle\CoreBundle\Entity\Address
+            declaredField: billingAddress
+            originalField: firstName
+            column: billing_address_first_name
+        billingAddress.lastName:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: true
+            precision: 0
+            originalClass: WellCommerce\Bundle\CoreBundle\Entity\Address
+            declaredField: billingAddress
+            originalField: lastName
+            column: billing_address_last_name
+        billingAddress.street:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: true
+            precision: 0
+            originalClass: WellCommerce\Bundle\CoreBundle\Entity\Address
+            declaredField: billingAddress
+            originalField: street
+            column: billing_address_street
+        billingAddress.streetNo:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: true
+            precision: 0
+            originalClass: WellCommerce\Bundle\CoreBundle\Entity\Address
+            declaredField: billingAddress
+            originalField: streetNo
+            column: billing_address_street_no
+        billingAddress.flatNo:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: true
+            precision: 0
+            originalClass: WellCommerce\Bundle\CoreBundle\Entity\Address
+            declaredField: billingAddress
+            originalField: flatNo
+            column: billing_address_flat_no
+        billingAddress.postCode:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: true
+            precision: 0
+            originalClass: WellCommerce\Bundle\CoreBundle\Entity\Address
+            declaredField: billingAddress
+            originalField: postCode
+            column: billing_address_post_code
+        billingAddress.province:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: true
+            precision: 0
+            originalClass: WellCommerce\Bundle\CoreBundle\Entity\Address
+            declaredField: billingAddress
+            originalField: province
+            column: billing_address_province
+        billingAddress.city:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: true
+            precision: 0
+            originalClass: WellCommerce\Bundle\CoreBundle\Entity\Address
+            declaredField: billingAddress
+            originalField: city
+            column: billing_address_city
+        billingAddress.country:
+            type: string
+            scale: 0
+            length: 3
+            unique: false
+            nullable: true
+            precision: 0
+            originalClass: WellCommerce\Bundle\CoreBundle\Entity\Address
+            declaredField: billingAddress
+            originalField: country
+            column: billing_address_country
+        shippingAddress.firstName:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: true
+            precision: 0
+            originalClass: WellCommerce\Bundle\CoreBundle\Entity\Address
+            declaredField: shippingAddress
+            originalField: firstName
+            column: shipping_address_first_name
+        shippingAddress.lastName:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: true
+            precision: 0
+            originalClass: WellCommerce\Bundle\CoreBundle\Entity\Address
+            declaredField: shippingAddress
+            originalField: lastName
+            column: shipping_address_last_name
+        shippingAddress.street:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: true
+            precision: 0
+            originalClass: WellCommerce\Bundle\CoreBundle\Entity\Address
+            declaredField: shippingAddress
+            originalField: street
+            column: shipping_address_street
+        shippingAddress.streetNo:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: true
+            precision: 0
+            originalClass: WellCommerce\Bundle\CoreBundle\Entity\Address
+            declaredField: shippingAddress
+            originalField: streetNo
+            column: shipping_address_street_no
+        shippingAddress.flatNo:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: true
+            precision: 0
+            originalClass: WellCommerce\Bundle\CoreBundle\Entity\Address
+            declaredField: shippingAddress
+            originalField: flatNo
+            column: shipping_address_flat_no
+        shippingAddress.postCode:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: true
+            precision: 0
+            originalClass: WellCommerce\Bundle\CoreBundle\Entity\Address
+            declaredField: shippingAddress
+            originalField: postCode
+            column: shipping_address_post_code
+        shippingAddress.province:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: true
+            precision: 0
+            originalClass: WellCommerce\Bundle\CoreBundle\Entity\Address
+            declaredField: shippingAddress
+            originalField: province
+            column: shipping_address_province
+        shippingAddress.city:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: true
+            precision: 0
+            originalClass: WellCommerce\Bundle\CoreBundle\Entity\Address
+            declaredField: shippingAddress
+            originalField: city
+            column: shipping_address_city
+        shippingAddress.country:
+            type: string
+            scale: 0
+            length: 3
+            unique: false
+            nullable: true
+            precision: 0
+            originalClass: WellCommerce\Bundle\CoreBundle\Entity\Address
+            declaredField: shippingAddress
+            originalField: country
+            column: shipping_address_country
+        contactDetails.phone:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: true
+            precision: 0
+            originalClass: WellCommerce\Bundle\CoreBundle\Entity\ContactDetails
+            declaredField: contactDetails
+            originalField: phone
+            column: contact_details_phone
+        contactDetails.secondaryPhone:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: true
+            precision: 0
+            originalClass: WellCommerce\Bundle\CoreBundle\Entity\ContactDetails
+            declaredField: contactDetails
+            originalField: secondaryPhone
+            column: contact_details_secondary_phone
+        contactDetails.email:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: true
+            precision: 0
+            originalClass: WellCommerce\Bundle\CoreBundle\Entity\ContactDetails
+            declaredField: contactDetails
+            originalField: email
+            column: contact_details_email
+    oneToMany:
+        products:
+            targetEntity: WellCommerce\Bundle\CartBundle\Entity\CartProduct
+            cascade:
+                - persist
+            fetch: LAZY
+            mappedBy: cart
+            inversedBy: null
+            orphanRemoval: false
+            orderBy: null
+    manyToOne:
+        shop:
+            targetEntity: WellCommerce\Bundle\MultiStoreBundle\Entity\Shop
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                shop_id:
+                    referencedColumnName: id
+                    onDelete: CASCADE
+            orphanRemoval: false
+        shippingMethod:
+            targetEntity: WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                shipping_method_id:
+                    referencedColumnName: id
+                    onDelete: 'SET NULL'
+            orphanRemoval: false
+        paymentMethod:
+            targetEntity: WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                payment_method_id:
+                    referencedColumnName: id
+                    onDelete: 'SET NULL'
+            orphanRemoval: false
+    oneToOne:
+        client:
+            targetEntity: WellCommerce\Bundle\ClientBundle\Entity\Client
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                client_id:
+                    referencedColumnName: id
+                    onDelete: CASCADE
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

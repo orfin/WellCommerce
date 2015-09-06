@@ -1,0 +1,36 @@
+WellCommerce\Bundle\AttributeBundle\Entity\Attribute:
+    type: entity
+    table: attribute
+    repositoryClass: WellCommerce\Bundle\AttributeBundle\Repository\AttributeRepository
+    id:
+        id:
+            type: integer
+            scale: 0
+            length: null
+            unique: false
+            nullable: false
+            precision: 0
+            id: true
+            generator:
+                strategy: IDENTITY
+    manyToMany:
+        groups:
+            targetEntity: WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroup
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: attributes
+            inversedBy: null
+            joinTable: {  }
+            orderBy: null
+    oneToMany:
+        values:
+            targetEntity: WellCommerce\Bundle\AttributeBundle\Entity\AttributeValue
+            cascade:
+                - remove
+                - persist
+            fetch: LAZY
+            mappedBy: attribute
+            inversedBy: null
+            orphanRemoval: true
+            orderBy: null
+    lifecycleCallbacks: {  }

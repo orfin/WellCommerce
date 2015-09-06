@@ -1,0 +1,36 @@
+WellCommerce\Bundle\OrderBundle\Entity\OrderStatus:
+    type: entity
+    table: order_status
+    repositoryClass: WellCommerce\Bundle\OrderBundle\Repository\OrderStatusRepository
+    id:
+        id:
+            type: integer
+            scale: 0
+            length: null
+            unique: false
+            nullable: false
+            precision: 0
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        enabled:
+            type: boolean
+            scale: 0
+            length: null
+            unique: false
+            nullable: false
+            precision: 0
+    manyToOne:
+        orderStatusGroup:
+            targetEntity: WellCommerce\Bundle\OrderBundle\Entity\OrderStatusGroup
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                order_status_group_id:
+                    referencedColumnName: id
+                    onDelete: CASCADE
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

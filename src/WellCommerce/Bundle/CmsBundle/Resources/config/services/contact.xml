@@ -8,6 +8,8 @@
             <argument type="service" id="contact.repository"/>
             <argument type="service" id="contact.datagrid"/>
             <argument type="service" id="contact.form_builder"/>
+            <argument type="service" id="contact.factory"/>
+            <argument type="service" id="contact.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -48,12 +50,14 @@
         <service id="contact.dataset" class="WellCommerce\Bundle\CmsBundle\DataSet\Admin\ContactDataSet">
             <argument key="identifier">contact</argument>
             <argument type="service" id="contact.dataset.loader"/>
+            <argument type="service" id="contact.event_dispatcher"/>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
         <service id="contact.datagrid" class="WellCommerce\Bundle\CmsBundle\DataGrid\ContactDataGrid">
             <argument key="identifier">contact</argument>
             <argument type="service" id="contact.dataset"/>
+            <argument type="service" id="contact.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -62,9 +66,16 @@
         <service id="contact.form_builder" class="WellCommerce\Bundle\CmsBundle\Form\Admin\ContactFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
+            <argument type="service" id="contact.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
+        </service>
+
+        <service id="contact.factory" class="WellCommerce\Bundle\CmsBundle\Factory\ContactFactory" />
+
+        <service id="contact.event_dispatcher" class="WellCommerce\Bundle\CmsBundle\EventDispatcher\ContactEventDispatcher">
+            <argument type="service" id="event_dispatcher" />
         </service>
     </services>
 </container>

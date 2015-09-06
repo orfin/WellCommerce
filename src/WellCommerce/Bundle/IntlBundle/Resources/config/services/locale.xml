@@ -8,6 +8,8 @@
             <argument type="service" id="locale.repository"/>
             <argument type="service" id="locale.datagrid"/>
             <argument type="service" id="locale.form_builder"/>
+            <argument type="service" id="locale.factory"/>
+            <argument type="service" id="locale.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -36,12 +38,14 @@
         <service id="locale.dataset" class="WellCommerce\Bundle\IntlBundle\DataSet\LocaleDataSet">
             <argument key="identifier">locale</argument>
             <argument type="service" id="locale.dataset.loader"/>
+            <argument type="service" id="locale.event_dispatcher"/>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
         <service id="locale.datagrid" class="WellCommerce\Bundle\IntlBundle\DataGrid\LocaleDataGrid">
             <argument key="identifier">locale</argument>
             <argument type="service" id="locale.dataset"/>
+            <argument type="service" id="locale.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -50,6 +54,7 @@
         <service id="locale.form_builder" class="WellCommerce\Bundle\IntlBundle\Form\LocaleFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
+            <argument type="service" id="locale.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -77,6 +82,12 @@
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
+        </service>
+
+        <service id="locale.factory" class="WellCommerce\Bundle\IntlBundle\Factory\LocaleFactory" />
+
+        <service id="locale.event_dispatcher" class="WellCommerce\Bundle\IntlBundle\EventDispatcher\LocaleEventDispatcher">
+            <argument type="service" id="event_dispatcher" />
         </service>
     </services>
 </container>

@@ -1,0 +1,42 @@
+WellCommerce\Bundle\ClientBundle\Entity\ClientGroup:
+    type: entity
+    table: client_group
+    repositoryClass: WellCommerce\Bundle\ClientBundle\Repository\ClientGroupRepository
+    id:
+        id:
+            type: integer
+            scale: 0
+            length: null
+            unique: false
+            nullable: false
+            precision: 0
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        discount:
+            type: decimal
+            scale: 4
+            length: null
+            unique: false
+            nullable: false
+            precision: 15
+    oneToMany:
+        clients:
+            targetEntity: WellCommerce\Bundle\ClientBundle\Entity\Client
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: group
+            inversedBy: null
+            orphanRemoval: false
+            orderBy: null
+    manyToMany:
+        pages:
+            targetEntity: WellCommerce\Bundle\CmsBundle\Entity\Page
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: clientGroups
+            inversedBy: null
+            joinTable: {  }
+            orderBy: null
+    lifecycleCallbacks: {  }

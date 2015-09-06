@@ -1,0 +1,21 @@
+WellCommerce\Bundle\OrderBundle\Entity\OrderStatusTranslation:
+    type: entity
+    table: order_status_translation
+    id: {  }
+    fields:
+        name:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: false
+            precision: 0
+        defaultComment:
+            type: text
+            scale: 0
+            length: null
+            unique: false
+            nullable: false
+            precision: 0
+            column: default_comment
+    lifecycleCallbacks: {  }

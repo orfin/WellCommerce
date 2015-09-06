@@ -12,102 +12,91 @@
 
 namespace WellCommerce\Bundle\IntlBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
+use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 
 /**
- * CurrencyRate
+ * Class CurrencyRate
  *
- * @ORM\Table("currency_rate")
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\IntlBundle\Repository\CurrencyRateRepository")
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CurrencyRate
+class CurrencyRate implements CurrencyRateInterface
 {
-    use ORMBehaviors\Timestampable\Timestampable;
-
+    use Timestampable, Blameable;
+    
     /**
      * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
-
+    protected $id;
+    
     /**
-     * @var string
-     *
-     * @ORM\Column(name="currency_from", type="string", length=12)
+     * @var CurrencyInterface
      */
-    private $currencyFrom;
-
+    protected $currencyFrom;
+    
     /**
-     * @var string
-     *
-     * @ORM\Column(name="currency_to", type="string", length=12)
+     * @var CurrencyInterface
      */
-    private $currencyTo;
-
+    protected $currencyTo;
+    
     /**
-     * @var string
-     *
-     * @ORM\Column(name="exchange_rate", type="decimal", precision=15, scale=4)
+     * @var float
      */
-    private $exchangeRate;
-
+    protected $exchangeRate;
+    
     /**
-     * @return int
+     * {@inheritdoc}
      */
     public function getId()
     {
         return $this->id;
     }
-
+    
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getCurrencyFrom()
     {
         return $this->currencyFrom;
     }
-
+    
     /**
-     * @param string $currencyFrom
+     * {@inheritdoc}
      */
-    public function setCurrencyFrom($currencyFrom)
+    public function setCurrencyFrom(CurrencyInterface $currencyFrom)
     {
         $this->currencyFrom = $currencyFrom;
     }
-
+    
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getCurrencyTo()
     {
         return $this->currencyTo;
     }
-
+    
     /**
-     * @param string $currencyTo
+     * {@inheritdoc}
      */
-    public function setCurrencyTo($currencyTo)
+    public function setCurrencyTo(CurrencyInterface $currencyTo)
     {
         $this->currencyTo = $currencyTo;
     }
-
+    
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getExchangeRate()
     {
         return $this->exchangeRate;
     }
-
+    
     /**
-     * @param string $exchangeRate
+     * {@inheritdoc}
      */
     public function setExchangeRate($exchangeRate)
     {
-        $this->exchangeRate = $exchangeRate;
+        $this->exchangeRate = (float)$exchangeRate;
     }
 }

@@ -38,5 +38,4 @@ interface TranslatableInterface
     public function setDefaultLocale($locale);
 
     public function getDefaultLocale();
-
 }

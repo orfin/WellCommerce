@@ -1,0 +1,90 @@
+WellCommerce\Bundle\MultiStoreBundle\Entity\Company:
+    type: entity
+    table: Company
+    repositoryClass: WellCommerce\Bundle\MultiStoreBundle\Repository\CompanyRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: false
+            precision: 0
+        shortName:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: true
+            precision: 0
+            column: short_name
+        street:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: true
+            precision: 0
+        streetNo:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: true
+            precision: 0
+            column: street_no
+        flatNo:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: true
+            precision: 0
+            column: flat_no
+        postCode:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: true
+            precision: 0
+            column: post_code
+        province:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: true
+            precision: 0
+        city:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: true
+            precision: 0
+        country:
+            type: string
+            scale: 0
+            length: 3
+            unique: false
+            nullable: true
+            precision: 0
+    manyToOne:
+        photo:
+            targetEntity: WellCommerce\Bundle\MediaBundle\Entity\Media
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                photo_id:
+                    referencedColumnName: id
+                    onDelete: 'SET NULL'
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

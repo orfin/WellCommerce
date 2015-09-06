@@ -1,0 +1,49 @@
+WellCommerce\Bundle\ThemeBundle\Entity\ThemeCss:
+    type: entity
+    table: theme_css
+    repositoryClass: WellCommerce\Bundle\ThemeBundle\Repository\ThemeCssRepository
+    id:
+        id:
+            type: integer
+            scale: 0
+            length: null
+            unique: false
+            nullable: false
+            precision: 0
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        class:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: false
+            precision: 0
+        selector:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: false
+            precision: 0
+        attribute:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: false
+            precision: 0
+    manyToOne:
+        theme:
+            targetEntity: WellCommerce\Bundle\ThemeBundle\Entity\Theme
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: css
+            joinColumns:
+                theme_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

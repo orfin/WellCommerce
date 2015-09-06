@@ -44,6 +44,7 @@
         <service id="availability.dataset" class="WellCommerce\Bundle\AvailabilityBundle\DataSet\AvailabilityDataSet">
             <argument key="identifier">availability</argument>
             <argument type="service" id="availability.dataset.loader"/>
+            <argument type="service" id="availability.event_dispatcher"/>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
@@ -54,6 +55,7 @@
         <service id="availability.datagrid" class="WellCommerce\Bundle\AvailabilityBundle\DataGrid\AvailabilityDataGrid">
             <argument key="identifier">availability</argument>
             <argument type="service" id="availability.dataset"/>
+            <argument type="service" id="availability.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

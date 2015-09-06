@@ -38,7 +38,7 @@ trait ClientTrait
     /**
      * @param null|Client $client
      */
-    public function setClient(Client $client)
+    public function setClient(ClientInterface $client)
     {
         $this->client = $client;
     }

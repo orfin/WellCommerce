@@ -10,14 +10,22 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CategoryBundle\Entity;
+namespace WellCommerce\Bundle\MultiStoreBundle\Factory;
+
+use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\Bundle\MultiStoreBundle\Entity\Company;
 
 /**
- * Interface CategoryInterface
+ * Class CompanyFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface CategoryInterface
+class CompanyFactory extends AbstractFactory
 {
-    
+    public function create()
+    {
+        $company = new Company();
+
+        return $company;
+    }
 }

@@ -13,7 +13,8 @@ namespace WellCommerce\Bundle\ClientBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model as Behaviors;
+use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
+use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -24,8 +25,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class Client implements ClientInterface
 {
-    use Behaviors\Timestampable\Timestampable;
-    use Behaviors\Blameable\Blameable;
+    use Timestampable;
+    use Blameable;
 
     const ROLE_CLIENT = 'ROLE_CLIENT';
 

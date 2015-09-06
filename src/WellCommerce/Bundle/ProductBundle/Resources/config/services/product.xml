@@ -8,6 +8,8 @@
             <argument type="service" id="product.repository"/>
             <argument type="service" id="product.datagrid"/>
             <argument type="service" id="product.form_builder"/>
+            <argument type="service" id="product.factory"/>
+            <argument type="service" id="product.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
@@ -53,6 +55,7 @@
         <service id="product.dataset.admin" class="WellCommerce\Bundle\ProductBundle\DataSet\Admin\ProductDataSet">
             <argument key="identifier">product</argument>
             <argument type="service" id="product.dataset.loader.admin"/>
+            <argument type="service" id="product.event_dispatcher"/>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
@@ -69,10 +72,11 @@
         <service id="product.dataset.front" class="WellCommerce\Bundle\ProductBundle\DataSet\Front\ProductDataSet">
             <argument key="identifier">product</argument>
             <argument type="service" id="product.dataset.loader.front"/>
-            <configurator service="dataset.configurator" method="configure"/>
+            <argument type="service" id="product.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
+            <configurator service="dataset.configurator" method="configure"/>
         </service>
 
         <service id="product.collection.front" parent="dataset.collection_builder.factory">
@@ -128,6 +132,12 @@
             <argument>layered_navigation.layout_box.controller</argument>
             <argument type="service" id="translator_helper"/>
             <tag name="layout_box.configurator" />
+        </service>
+
+        <service id="product.factory" class="WellCommerce\Bundle\ProductBundle\Factory\ProductFactory" />
+
+        <service id="product.event_dispatcher" class="WellCommerce\Bundle\ProductBundle\EventDispatcher\ProductEventDispatcher">
+            <argument type="service" id="event_dispatcher" />
         </service>
 
         <service id="product.route.generator" class="WellCommerce\Bundle\ProductBundle\Routing\ProductRouteGenerator">

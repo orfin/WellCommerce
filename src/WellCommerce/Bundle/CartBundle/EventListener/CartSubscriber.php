@@ -30,8 +30,8 @@ class CartSubscriber extends AbstractEventSubscriber
     public static function getSubscribedEvents()
     {
         return [
-            CartManager::CART_CHANGED_EVENT => ['onCartChangedEvent', 0],
-            KernelEvents::CONTROLLER        => ['onKernelController', -256],
+//            CartManager::CART_CHANGED_EVENT => ['onCartChangedEvent', 0],
+//            KernelEvents::CONTROLLER        => ['onKernelController', -256],
         ];
     }
 
@@ -62,7 +62,7 @@ class CartSubscriber extends AbstractEventSubscriber
      *
      * @return null|object|Cart
      */
-    protected function getCart(Shop $shop, Client $client = null, $sessionId)
+    protected function getCart(Shop $shop, Client $client, $sessionId)
     {
         $doctrineHelper = $this->container->get('doctrine_helper');
         $entityManager  = $doctrineHelper->getEntityManager();
@@ -91,7 +91,7 @@ class CartSubscriber extends AbstractEventSubscriber
      *
      * @return Cart
      */
-    protected function initCart(Shop $shop, Client $client = null, $sessionId)
+    protected function initCart(Shop $shop, Client $client, $sessionId)
     {
         $cart = new Cart();
         $cart->setShop($shop);

@@ -12,76 +12,54 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
-use WellCommerce\Bundle\CategoryBundle\Entity\Extra\CategoryExtraTrait;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\EnableableTrait;
-use WellCommerce\Bundle\MultiStoreBundle\Entity\Shop;
-use WellCommerce\Bundle\ProductBundle\Entity\Product;
+use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 
 /**
  * Class Category
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @ORM\Table("category")
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\CategoryBundle\Repository\CategoryRepository")
  */
-class Category
+class Category implements CategoryInterface
 {
-    use Translatable;
-    use Timestampable;
-    use Blameable;
-    use EnableableTrait;
-    use CategoryExtraTrait;
+    use Translatable, Timestampable, Blameable, EnableableTrait;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="hierarchy", type="integer", options={"default" = 0})
      */
     protected $hierarchy;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\CategoryBundle\Entity\Category", inversedBy="children")
-     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE")
+     * @var null|CategoryInterface
      */
     protected $parent;
 
     /**
-     * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\CategoryBundle\Entity\Category", mappedBy="parent")
+     * @var Collection
      */
     protected $children;
 
     /**
-     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\Product", mappedBy="categories")
+     * @var Collection
      */
     protected $products;
 
     /**
-     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\MultiStoreBundle\Entity\Shop", inversedBy="categories")
-     * @ORM\JoinTable(name="shop_category",
-     *      joinColumns={@ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="CASCADE")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="shop_id", referencedColumnName="id", onDelete="CASCADE")}
-     * )
+     * @var Collection
      */
     protected $shops;
 
     /**
-     * Get id
-     *
      * @return int
      */
     public function getId()
@@ -90,8 +68,6 @@ class Category
     }
 
     /**
-     * Returns hierarchy for category
-     *
      * @return int
      */
     public function getHierarchy()
@@ -100,19 +76,15 @@ class Category
     }
 
     /**
-     * Sets hierarchy for category
-     *
-     * @param $hierarchy
+     * @param int $hierarchy
      */
     public function setHierarchy($hierarchy)
     {
-        $this->hierarchy = $hierarchy;
+        $this->hierarchy = (int)$hierarchy;
     }
 
     /**
-     * Returns category parent
-     *
-     * @return mixed
+     * @return null|CategoryInterface
      */
     public function getParent()
     {
@@ -120,27 +92,23 @@ class Category
     }
 
     /**
-     * Sets category parent
-     *
-     * @param null|Category $parent
+     * @param CategoryInterface|null $parent
      */
-    public function setParent(Category $parent = null)
+    public function setParent(CategoryInterface $parent = null)
     {
         $this->parent = $parent;
     }
 
     /**
-     * @param ArrayCollection $children
+     * @param Collection $children
      */
-    public function setChildren(ArrayCollection $children)
+    public function setChildren(Collection $children)
     {
         $this->children = $children;
     }
 
     /**
-     * Returns category children
-     *
-     * @return mixed
+     * @return Collection
      */
     public function getChildren()
     {
@@ -148,20 +116,16 @@ class Category
     }
 
     /**
-     * Adds new child to category
-     *
-     * @param Category $child
+     * @param CategoryInterface $child
      */
-    public function addChild(Category $child)
+    public function addChild(CategoryInterface $child)
     {
         $this->children[] = $child;
         $child->setParent($this);
     }
 
     /**
-     * Get products in category
-     *
-     * @return mixed
+     * @return Collection
      */
     public function getProducts()
     {
@@ -169,23 +133,23 @@ class Category
     }
 
     /**
-     * @param $products
+     * @param Collection $products
      */
-    public function setProducts(ArrayCollection $products)
+    public function setProducts(Collection $products)
     {
         $this->products = $products;
     }
 
     /**
-     * @param Product $product
+     * @param ProductInterface $product
      */
-    public function addProduct(Product $product)
+    public function addProduct(ProductInterface $product)
     {
         $this->products[] = $product;
     }
 
     /**
-     * @return mixed
+     * @return Collection
      */
     public function getShops()
     {
@@ -193,17 +157,19 @@ class Category
     }
 
     /**
-     * @param mixed $shops
+     * @param Collection $shops
      */
-    public function setShops(ArrayCollection $shops)
+    public function setShops(Collection $shops)
     {
-        $this->shops = $shops;
+        $shops->map(function (ShopInterface $shop) {
+            $this->addShop($shop);
+        });
     }
 
     /**
-     * @param Shop $shop
+     * @param ShopInterface $shop
      */
-    public function addShop(Shop $shop)
+    public function addShop(ShopInterface $shop)
     {
         $this->shops[] = $shop;
     }

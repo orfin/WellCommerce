@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\CoreBundle\DataSet;
 
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
+use WellCommerce\Bundle\CoreBundle\EventDispatcher\EventDispatcherInterface;
 use WellCommerce\Bundle\DataSetBundle\Column\ColumnCollection;
 use WellCommerce\Bundle\DataSetBundle\Configurator\DataSetConfiguratorInterface;
 use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
@@ -38,6 +39,11 @@ abstract class AbstractDataSet extends AbstractContainerAware implements DataSet
     protected $loader;
 
     /**
+     * @var EventDispatcherInterface
+     */
+    protected $eventDispatcher;
+
+    /**
      * @var ColumnCollection
      */
     protected $columns;
@@ -48,17 +54,17 @@ abstract class AbstractDataSet extends AbstractContainerAware implements DataSet
     protected $transformers;
 
     /**
-     * Constructor
-     *
-     * @param string                 $identifier
-     * @param DataSetLoaderInterface $loader
+     * @param string                   $identifier
+     * @param DataSetLoaderInterface   $loader
+     * @param EventDispatcherInterface $eventDispatcher
      */
-    public function __construct($identifier, DataSetLoaderInterface $loader)
+    public function __construct($identifier, DataSetLoaderInterface $loader, EventDispatcherInterface $eventDispatcher)
     {
-        $this->identifier   = $identifier;
-        $this->loader       = $loader;
-        $this->columns      = new ColumnCollection();
-        $this->transformers = new TransformerCollection();
+        $this->identifier      = $identifier;
+        $this->loader          = $loader;
+        $this->eventDispatcher = $eventDispatcher;
+        $this->columns         = new ColumnCollection();
+        $this->transformers    = new TransformerCollection();
     }
 
     /**

@@ -13,25 +13,20 @@
 namespace WellCommerce\Bundle\UnitBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Knp\DoctrineBehaviors\Model\Translatable\Translation;
 use WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface;
 
 /**
  * UnitTranslation
- *
- * @ORM\Table(name="unit_translation")
- * @ORM\Entity
  */
 class UnitTranslation implements LocaleAwareInterface
 {
-    use ORMBehaviors\Translatable\Translation;
+    use Translation;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255)
      */
-    private $name;
+    protected $name;
 
     /**
      * Get name.

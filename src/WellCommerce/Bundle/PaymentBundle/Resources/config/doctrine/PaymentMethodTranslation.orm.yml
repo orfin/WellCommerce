@@ -1,0 +1,13 @@
+WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodTranslation:
+    type: entity
+    table: payment_method_translation
+    id: {  }
+    fields:
+        name:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: false
+            precision: 0
+    lifecycleCallbacks: {  }

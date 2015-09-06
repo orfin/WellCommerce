@@ -1,0 +1,127 @@
+WellCommerce\Bundle\ClientBundle\Entity\ClientAddress:
+    type: entity
+    table: client_address
+    repositoryClass: WellCommerce\Bundle\ClientBundle\Repository\ClientAddressRepository
+    id:
+        id:
+            type: integer
+            scale: 0
+            length: null
+            unique: false
+            nullable: false
+            precision: 0
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        address.firstName:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: true
+            precision: 0
+            originalClass: WellCommerce\Bundle\CoreBundle\Entity\Address
+            declaredField: address
+            originalField: firstName
+            column: address_first_name
+        address.lastName:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: true
+            precision: 0
+            originalClass: WellCommerce\Bundle\CoreBundle\Entity\Address
+            declaredField: address
+            originalField: lastName
+            column: address_last_name
+        address.street:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: true
+            precision: 0
+            originalClass: WellCommerce\Bundle\CoreBundle\Entity\Address
+            declaredField: address
+            originalField: street
+            column: address_street
+        address.streetNo:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: true
+            precision: 0
+            originalClass: WellCommerce\Bundle\CoreBundle\Entity\Address
+            declaredField: address
+            originalField: streetNo
+            column: address_street_no
+        address.flatNo:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: true
+            precision: 0
+            originalClass: WellCommerce\Bundle\CoreBundle\Entity\Address
+            declaredField: address
+            originalField: flatNo
+            column: address_flat_no
+        address.postCode:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: true
+            precision: 0
+            originalClass: WellCommerce\Bundle\CoreBundle\Entity\Address
+            declaredField: address
+            originalField: postCode
+            column: address_post_code
+        address.province:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: true
+            precision: 0
+            originalClass: WellCommerce\Bundle\CoreBundle\Entity\Address
+            declaredField: address
+            originalField: province
+            column: address_province
+        address.city:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: true
+            precision: 0
+            originalClass: WellCommerce\Bundle\CoreBundle\Entity\Address
+            declaredField: address
+            originalField: city
+            column: address_city
+        address.country:
+            type: string
+            scale: 0
+            length: 3
+            unique: false
+            nullable: true
+            precision: 0
+            originalClass: WellCommerce\Bundle\CoreBundle\Entity\Address
+            declaredField: address
+            originalField: country
+            column: address_country
+    manyToOne:
+        client:
+            targetEntity: WellCommerce\Bundle\ClientBundle\Entity\Client
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: addresses
+            joinColumns:
+                client_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

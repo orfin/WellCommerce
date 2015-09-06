@@ -8,6 +8,8 @@
             <argument type="service" id="news.repository"/>
             <argument type="service" id="news.datagrid"/>
             <argument type="service" id="news.form_builder"/>
+            <argument type="service" id="news.factory"/>
+            <argument type="service" id="news.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -36,12 +38,14 @@
         <service id="news.dataset" class="WellCommerce\Bundle\CmsBundle\DataSet\Admin\NewsDataSet">
             <argument key="identifier">news</argument>
             <argument type="service" id="news.dataset.loader"/>
+            <argument type="service" id="news.event_dispatcher"/>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
         <service id="news.datagrid" class="WellCommerce\Bundle\CmsBundle\DataGrid\NewsDataGrid">
             <argument key="identifier">news</argument>
             <argument type="service" id="news.dataset"/>
+            <argument type="service" id="news.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -50,9 +54,16 @@
         <service id="news.form_builder" class="WellCommerce\Bundle\CmsBundle\Form\Admin\NewsFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
+            <argument type="service" id="news.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
+        </service>
+
+        <service id="news.factory" class="WellCommerce\Bundle\CmsBundle\Factory\NewsFactory" />
+
+        <service id="news.event_dispatcher" class="WellCommerce\Bundle\CmsBundle\EventDispatcher\NewsEventDispatcher">
+            <argument type="service" id="event_dispatcher" />
         </service>
     </services>
 </container>

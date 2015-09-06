@@ -1,0 +1,59 @@
+WellCommerce\Bundle\CmsBundle\Entity\News:
+    type: entity
+    table: news
+    repositoryClass: WellCommerce\Bundle\CmsBundle\Repository\NewsRepository
+    id:
+        id:
+            type: integer
+            scale: 0
+            length: null
+            unique: false
+            nullable: false
+            precision: 0
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        publish:
+            type: boolean
+            scale: 0
+            length: null
+            unique: false
+            nullable: false
+            precision: 0
+            options:
+                default: 0
+        startDate:
+            type: datetime
+            scale: 0
+            length: null
+            unique: false
+            nullable: true
+            precision: 0
+        endDate:
+            type: datetime
+            scale: 0
+            length: null
+            unique: false
+            nullable: true
+            precision: 0
+        featured:
+            type: boolean
+            scale: 0
+            length: null
+            unique: false
+            nullable: false
+            precision: 0
+    manyToOne:
+        photo:
+            targetEntity: WellCommerce\Bundle\MediaBundle\Entity\Media
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                photo_id:
+                    referencedColumnName: id
+                    onDelete: 'SET NULL'
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

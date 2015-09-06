@@ -17,10 +17,9 @@ use Knp\DoctrineBehaviors\Model\Translatable\Translation;
 use WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface;
 
 /**
- * DictionaryTranslation
+ * Class DictionaryTranslation
  *
- * @ORM\Table(name="dictionary_translation")
- * @ORM\Entity
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class DictionaryTranslation implements LocaleAwareInterface
 {
@@ -28,10 +27,8 @@ class DictionaryTranslation implements LocaleAwareInterface
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="value", type="string", length=255)
      */
-    private $value;
+    protected $value;
 
     /**
      * Returns translation ID.

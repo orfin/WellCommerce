@@ -1,0 +1,35 @@
+WellCommerce\Bundle\ProductBundle\Entity\ProductStatusRoute:
+    type: entity
+    table: route_product_status
+    id:
+        id:
+            type: integer
+            scale: 0
+            length: null
+            unique: false
+            nullable: false
+            precision: 0
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        locale:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: false
+            precision: 0
+    manyToOne:
+        identifier:
+            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\ProductStatus
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                foreign_id:
+                    referencedColumnName: id
+                    onDelete: CASCADE
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

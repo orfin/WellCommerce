@@ -1,0 +1,117 @@
+WellCommerce\Bundle\OrderBundle\Entity\OrderProduct:
+    type: entity
+    table: orders_product
+    repositoryClass: WellCommerce\Bundle\OrderBundle\Repository\OrderProductRepository
+    id:
+        id:
+            type: integer
+            scale: 0
+            length: null
+            unique: false
+            nullable: false
+            precision: 0
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        quantity:
+            type: decimal
+            scale: 4
+            length: null
+            unique: false
+            nullable: false
+            precision: 15
+        taxValue:
+            type: decimal
+            scale: 4
+            length: null
+            unique: false
+            nullable: false
+            precision: 15
+            column: tax_value
+        weight:
+            type: decimal
+            scale: 4
+            length: null
+            unique: false
+            nullable: false
+            precision: 15
+        netPrice.amount:
+            type: decimal
+            scale: 4
+            length: null
+            unique: false
+            nullable: false
+            precision: 15
+            originalClass: WellCommerce\Bundle\CoreBundle\Entity\Price
+            declaredField: netPrice
+            originalField: amount
+            column: net_price_amount
+        netPrice.currency:
+            type: string
+            scale: 0
+            length: 16
+            unique: false
+            nullable: false
+            precision: 0
+            originalClass: WellCommerce\Bundle\CoreBundle\Entity\Price
+            declaredField: netPrice
+            originalField: currency
+            column: net_price_currency
+        grossPrice.amount:
+            type: decimal
+            scale: 4
+            length: null
+            unique: false
+            nullable: false
+            precision: 15
+            originalClass: WellCommerce\Bundle\CoreBundle\Entity\Price
+            declaredField: grossPrice
+            originalField: amount
+            column: gross_price_amount
+        grossPrice.currency:
+            type: string
+            scale: 0
+            length: 16
+            unique: false
+            nullable: false
+            precision: 0
+            originalClass: WellCommerce\Bundle\CoreBundle\Entity\Price
+            declaredField: grossPrice
+            originalField: currency
+            column: gross_price_currency
+    manyToOne:
+        order:
+            targetEntity: WellCommerce\Bundle\OrderBundle\Entity\Order
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: products
+            joinColumns:
+                order_id:
+                    referencedColumnName: id
+                    onDelete: CASCADE
+            orphanRemoval: false
+        product:
+            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\Product
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                product_id:
+                    referencedColumnName: id
+                    onDelete: RESTRICT
+            orphanRemoval: false
+        attribute:
+            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                attribute_id:
+                    referencedColumnName: id
+                    onDelete: RESTRICT
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

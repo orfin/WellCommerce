@@ -12,40 +12,24 @@
 
 namespace WellCommerce\Bundle\TaxBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Knp\DoctrineBehaviors\Model\Translatable\Translation;
 use WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface;
 
 /**
- * TaxTranslation
+ * Class TaxTranslation
  *
- * @ORM\Table(name="tax_translation")
- * @ORM\Entity
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class TaxTranslation implements LocaleAwareInterface
 {
-    use ORMBehaviors\Translatable\Translation;
+    use Translation;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255)
      */
-    private $name;
+    protected $name;
 
     /**
-     * Returns translation ID.
-     *
-     * @return integer The ID.
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Get name.
-     *
      * @return string
      */
     public function getName()
@@ -54,16 +38,10 @@ class TaxTranslation implements LocaleAwareInterface
     }
 
     /**
-     * Set name.
-     *
      * @param string $name
-     *
-     * @return TaxTranslation
      */
     public function setName($name)
     {
         $this->name = $name;
-
-        return $this;
     }
 }

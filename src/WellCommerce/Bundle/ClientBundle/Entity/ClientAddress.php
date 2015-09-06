@@ -70,7 +70,7 @@ class ClientAddress implements ClientAwareInterface
     /**
      * @param ClientInterface $client
      */
-    public function setClient(ClientInterface $client = null)
+    public function setClient(ClientInterface $client)
     {
         $this->client = $client;
     }

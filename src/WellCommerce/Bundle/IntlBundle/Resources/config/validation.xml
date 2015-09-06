@@ -24,4 +24,14 @@
             <constraint name="NotNull" />
         </property>
     </class>
+
+    <class name="WellCommerce\Bundle\IntlBundle\Entity\Locale">
+        <property name="code">
+            <constraint name="NotBlank" />
+            <constraint name="NotNull" />
+        </property>
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">code</option>
+        </constraint>
+    </class>
 </constraint-mapping>

@@ -8,6 +8,8 @@
             <argument type="service" id="dictionary.repository"/>
             <argument type="service" id="dictionary.datagrid"/>
             <argument type="service" id="dictionary.form_builder"/>
+            <argument type="service" id="dictionary.factory"/>
+            <argument type="service" id="dictionary.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -36,12 +38,14 @@
         <service id="dictionary.dataset" class="WellCommerce\Bundle\IntlBundle\DataSet\DictionaryDataSet">
             <argument key="identifier">dictionary</argument>
             <argument type="service" id="dictionary.dataset.loader"/>
+            <argument type="service" id="dictionary.event_dispatcher"/>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
         <service id="dictionary.datagrid" class="WellCommerce\Bundle\IntlBundle\DataGrid\DictionaryDataGrid">
             <argument key="identifier">dictionary</argument>
             <argument type="service" id="dictionary.dataset"/>
+            <argument type="service" id="dictionary.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -50,9 +54,16 @@
         <service id="dictionary.form_builder" class="WellCommerce\Bundle\IntlBundle\Form\DictionaryFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
+            <argument type="service" id="dictionary.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
+        </service>
+
+        <service id="dictionary.factory" class="WellCommerce\Bundle\IntlBundle\Factory\DictionaryFactory" />
+
+        <service id="dictionary.event_dispatcher" class="WellCommerce\Bundle\IntlBundle\EventDispatcher\DictionaryEventDispatcher">
+            <argument type="service" id="event_dispatcher" />
         </service>
 
         <service id="dictionary.purger" class="WellCommerce\Bundle\IntlBundle\Purger\DictionaryPurger">

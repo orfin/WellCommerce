@@ -56,10 +56,11 @@
         <service id="cart_product.dataset.front" class="WellCommerce\Bundle\CartBundle\DataSet\Front\CartProductDataSet">
             <argument key="identifier">cart_product</argument>
             <argument type="service" id="cart_product.dataset.loader.front"/>
-            <configurator service="dataset.configurator" method="configure"/>
+            <argument type="service" id="cart_product.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
+            <configurator service="dataset.configurator" method="configure"/>
         </service>
 
         <service id="cart_product.collection.front" parent="dataset.collection_builder.factory">
@@ -69,6 +70,7 @@
         <service id="cart.form_builder" class="WellCommerce\Bundle\CartBundle\Form\Front\CartFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
+            <argument type="service" id="cart_product.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -95,6 +97,18 @@
             <argument type="service" id="cart.provider"/>
             <argument type="service" id="cart_product.provider"/>
             <tag name="twig.extension"/>
+        </service>
+
+        <service id="cart.factory" class="WellCommerce\Bundle\CartBundle\Factory\CartFactory" />
+
+        <service id="cart.event_dispatcher" class="WellCommerce\Bundle\CartBundle\EventDispatcher\CartEventDispatcher">
+            <argument type="service" id="event_dispatcher" />
+        </service>
+
+        <service id="cart_product.factory" class="WellCommerce\Bundle\CartBundle\Factory\CartProductFactory" />
+
+        <service id="cart_product.event_dispatcher" class="WellCommerce\Bundle\CartBundle\EventDispatcher\CartProductEventDispatcher">
+            <argument type="service" id="event_dispatcher" />
         </service>
 
         <service id="cart.subscriber" class="WellCommerce\Bundle\CartBundle\EventListener\CartSubscriber">

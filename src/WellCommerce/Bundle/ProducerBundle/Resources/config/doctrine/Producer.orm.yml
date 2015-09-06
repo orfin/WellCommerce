@@ -1,0 +1,81 @@
+WellCommerce\Bundle\ProducerBundle\Entity\Producer:
+    type: entity
+    table: producer
+    repositoryClass: WellCommerce\Bundle\ProducerBundle\Repository\ProducerRepository
+    id:
+        id:
+            type: integer
+            scale: 0
+            length: null
+            unique: false
+            nullable: false
+            precision: 0
+            id: true
+            generator:
+                strategy: IDENTITY
+    manyToMany:
+        deliverers:
+            targetEntity: WellCommerce\Bundle\DelivererBundle\Entity\Deliverer
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: producers
+            joinTable:
+                name: producer_deliverer
+                schema: null
+                joinColumns:
+                    -
+                        name: producer_id
+                        unique: false
+                        nullable: true
+                        onDelete: CASCADE
+                        columnDefinition: null
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    -
+                        name: deliverer_id
+                        unique: false
+                        nullable: true
+                        onDelete: CASCADE
+                        columnDefinition: null
+                        referencedColumnName: id
+            orderBy: null
+        shops:
+            targetEntity: WellCommerce\Bundle\MultiStoreBundle\Entity\Shop
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: producers
+            joinTable:
+                name: shop_producer
+                schema: null
+                joinColumns:
+                    -
+                        name: producer_id
+                        unique: false
+                        nullable: true
+                        onDelete: CASCADE
+                        columnDefinition: null
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    -
+                        name: shop_id
+                        unique: false
+                        nullable: true
+                        onDelete: CASCADE
+                        columnDefinition: null
+                        referencedColumnName: id
+            orderBy: null
+    manyToOne:
+        photo:
+            targetEntity: WellCommerce\Bundle\MediaBundle\Entity\Media
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                photo_id:
+                    referencedColumnName: id
+                    onDelete: 'SET NULL'
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

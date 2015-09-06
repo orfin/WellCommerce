@@ -12,36 +12,26 @@
 
 namespace WellCommerce\Bundle\UnitBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
+use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
+use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 
 /**
  * Class Unit
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @ORM\Table(name="unit")
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\UnitBundle\Repository\UnitRepository")
  */
-class Unit
+class Unit implements UnitInterface
 {
-    use ORMBehaviors\Translatable\Translatable;
-    use ORMBehaviors\Timestampable\Timestampable;
-    use ORMBehaviors\Blameable\Blameable;
+    use Translatable, Timestampable, Blameable;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
     /**
-     * Get id.
-     *
-     * @return integer
+     * {@inheritdoc}
      */
     public function getId()
     {

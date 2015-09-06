@@ -22,6 +22,9 @@ use WellCommerce\Bundle\IntlBundle\Entity\Currency;
  */
 class CurrencyFactory extends AbstractFactory
 {
+    /**
+     * @return \WellCommerce\Bundle\IntlBundle\Entity\CurrencyInterface
+     */
     public function create()
     {
         $currency = new Currency();

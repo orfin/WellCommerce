@@ -10,10 +10,16 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CategoryBundle\Entity\Extra {
+namespace WellCommerce\Bundle\CmsBundle\EventDispatcher;
 
-    trait CategoryExtraTrait
-    {
+use WellCommerce\Bundle\CoreBundle\EventDispatcher\AbstractEventDispatcher;
 
-    }
+/**
+ * Class NewsEventDispatcher
+ *
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
+ */
+class NewsEventDispatcher extends AbstractEventDispatcher
+{
+    
 }

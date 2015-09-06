@@ -1,0 +1,13 @@
+WellCommerce\Bundle\AttributeBundle\Entity\AttributeTranslation:
+    type: entity
+    table: attribute_translation
+    id: {  }
+    fields:
+        name:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: false
+            precision: 0
+    lifecycleCallbacks: {  }
