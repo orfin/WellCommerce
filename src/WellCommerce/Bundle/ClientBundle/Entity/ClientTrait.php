@@ -20,6 +20,8 @@ namespace WellCommerce\Bundle\ClientBundle\Entity;
 trait ClientTrait
 {
     /**
+     * @var Client
+     *
      * @ORM\OneToOne(targetEntity="WellCommerce\Bundle\ClientBundle\Entity\Client")
      * @ORM\JoinColumn(name="client_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
      */
@@ -36,7 +38,7 @@ trait ClientTrait
     /**
      * @param null|Client $client
      */
-    public function setClient(Client $client = null)
+    public function setClient(Client $client)
     {
         $this->client = $client;
     }

@@ -12,20 +12,8 @@
 
 namespace WellCommerce\Bundle\ClientBundle\Entity;
 
-/**
- * Interface ClientAwareInterface
- *
- * @author  Adam Piotrowski <adam@wellcommerce.org>
- */
-interface ClientAwareInterface
-{
-    /**
-     * @param null|ClientInterface $client
-     */
-    public function setClient(ClientInterface $client = null);
 
-    /**
-     * @return null|ClientInterface
-     */
-    public function getClient();
+trait ClientAddressTrait
+{
+    
 }

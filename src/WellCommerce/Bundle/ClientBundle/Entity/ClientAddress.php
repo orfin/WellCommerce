@@ -12,8 +12,9 @@
 namespace WellCommerce\Bundle\ClientBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model as ORMBehaviors;
-use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\AddressTrait;
+use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
+use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
+use WellCommerce\Bundle\CoreBundle\Entity\AddressInterface;
 
 /**
  * Client
@@ -21,16 +22,10 @@ use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\AddressTrait;
  * @ORM\Table(name="client_address")
  * @ORM\Entity(repositoryClass="WellCommerce\Bundle\ClientBundle\Repository\ClientAddressRepository")
  */
-class ClientAddress
+class ClientAddress implements ClientAwareInterface
 {
-    use ORMBehaviors\Timestampable\Timestampable;
-    use ORMBehaviors\Blameable\Blameable;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\ClientBundle\Entity\Client", inversedBy="addresses")
-     * @ORM\JoinColumn(name="client_id", referencedColumnName="id", nullable=false)
-     */
-    protected $client;
+    use Timestampable;
+    use Blameable;
 
     /**
      * @var integer
@@ -42,6 +37,16 @@ class ClientAddress
     protected $id;
 
     /**
+     * @var ClientInterface
+     *
+     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\ClientBundle\Entity\Client", inversedBy="addresses")
+     * @ORM\JoinColumn(name="client_id", referencedColumnName="id", nullable=false)
+     */
+    protected $client;
+
+    /**
+     * @var AddressInterface
+     *
      * @ORM\Embedded(class = "WellCommerce\Bundle\CoreBundle\Entity\Address", columnPrefix = "address_")
      */
     protected $address;
@@ -55,7 +60,7 @@ class ClientAddress
     }
 
     /**
-     * @return Client
+     * @return ClientInterface
      */
     public function getClient()
     {
@@ -63,9 +68,9 @@ class ClientAddress
     }
 
     /**
-     * @param Client $client
+     * @param ClientInterface $client
      */
-    public function setClient(Client $client)
+    public function setClient(ClientInterface $client = null)
     {
         $this->client = $client;
     }
@@ -81,7 +86,7 @@ class ClientAddress
     /**
      * @param mixed $address
      */
-    public function setAddress($address)
+    public function setAddress(AddressInterface $address)
     {
         $this->address = $address;
     }

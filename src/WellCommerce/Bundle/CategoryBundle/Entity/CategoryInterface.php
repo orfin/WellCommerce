@@ -10,16 +10,14 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AvailabilityBundle\EventDispatcher;
-
-use WellCommerce\Bundle\CoreBundle\EventDispatcher\AbstractEventDispatcher;
+namespace WellCommerce\Bundle\CategoryBundle\Entity;
 
 /**
- * Class AvailabilityEventDispatcher
+ * Interface CategoryInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AvailabilityEventDispatcher extends AbstractEventDispatcher
+interface CategoryInterface
 {
-
+    
 }

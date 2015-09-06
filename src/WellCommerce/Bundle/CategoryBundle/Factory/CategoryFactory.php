@@ -29,6 +29,7 @@ class CategoryFactory extends AbstractFactory
     public function create()
     {
         $category = new Category();
+        $category->setChildren(new ArrayCollection());
         $category->setProducts(new ArrayCollection());
         $category->setEnabled(true);
         $category->setHierarchy(0);

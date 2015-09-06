@@ -33,7 +33,7 @@ abstract class AbstractController extends AbstractContainerAware implements Cont
     /**
      * {@inheritdoc}
      */
-    public function redirectResponse($url, $status = RedirectResponse::HTTP_OK)
+    public function redirectResponse($url, $status = RedirectResponse::HTTP_FOUND)
     {
         return new RedirectResponse($url, $status);
     }

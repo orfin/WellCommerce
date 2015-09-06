@@ -45,30 +45,30 @@ class Category
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="hierarchy", type="integer", options={"default" = 0})
      */
-    private $hierarchy;
+    protected $hierarchy;
 
     /**
      * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\CategoryBundle\Entity\Category", inversedBy="children")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    private $parent;
+    protected $parent;
 
     /**
      * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\CategoryBundle\Entity\Category", mappedBy="parent")
      */
-    private $children;
+    protected $children;
 
     /**
      * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\Product", mappedBy="categories")
      */
-    private $products;
+    protected $products;
 
     /**
      * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\MultiStoreBundle\Entity\Shop", inversedBy="categories")
@@ -77,17 +77,7 @@ class Category
      *      inverseJoinColumns={@ORM\JoinColumn(name="shop_id", referencedColumnName="id", onDelete="CASCADE")}
      * )
      */
-    private $shops;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->children = new ArrayCollection();
-        $this->products = new ArrayCollection();
-        $this->shops    = new ArrayCollection();
-    }
+    protected $shops;
 
     /**
      * Get id
@@ -140,6 +130,14 @@ class Category
     }
 
     /**
+     * @param ArrayCollection $children
+     */
+    public function setChildren(ArrayCollection $children)
+    {
+        $this->children = $children;
+    }
+
+    /**
      * Returns category children
      *
      * @return mixed
@@ -173,7 +171,7 @@ class Category
     /**
      * @param $products
      */
-    public function setProducts($products)
+    public function setProducts(ArrayCollection $products)
     {
         $this->products = $products;
     }
@@ -197,7 +195,7 @@ class Category
     /**
      * @param mixed $shops
      */
-    public function setShops($shops)
+    public function setShops(ArrayCollection $shops)
     {
         $this->shops = $shops;
     }

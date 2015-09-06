@@ -82,14 +82,14 @@ class CategoryController extends AbstractAdminController
 
         if ($form->handleRequest()->isSubmitted()) {
             if ($valid = $form->isValid()) {
-                $this->manager->updateResource($resource, $request);
+                $this->manager->updateResource($resource);
             }
 
             return $this->createFormDefaultJsonResponse($form);
         }
 
         return $this->displayTemplate('edit', [
-            'tree' => $this->manager->getTree(),
+            'tree' => $this->buildTreeForm(),
             'form' => $form,
         ]);
     }

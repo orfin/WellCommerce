@@ -45,7 +45,7 @@ class CategoryTreeFormBuilder extends AbstractFormBuilder
             'onAfterAdd'         => 'openCategoryEditor',
             'onDelete'           => 'deleteCategory',
             'onAfterDelete'      => 'openCategoryEditor',
-            'active'             => (int)$this->getRequest()->attributes->get('id')
+            'active'             => (int)$this->getRequestHelper()->getAttribute('id')
         ]));
     }
 }

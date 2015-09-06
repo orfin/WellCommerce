@@ -14,11 +14,7 @@ namespace WellCommerce\Bundle\CategoryBundle\Manager\Admin;
 
 use WellCommerce\Bundle\AdminBundle\Manager\AbstractAdminManager;
 use WellCommerce\Bundle\CategoryBundle\Entity\Category;
-use WellCommerce\Bundle\CategoryBundle\Repository\CategoryRepositoryInterface;
-use WellCommerce\Bundle\DataGridBundle\DataGridInterface;
-use WellCommerce\Bundle\FormBundle\FormBuilderInterface;
 use WellCommerce\Bundle\IntlBundle\Entity\Locale;
-use WellCommerce\Bundle\IntlBundle\Repository\LocaleRepositoryInterface;
 use WellCommerce\Bundle\RoutingBundle\Helper\Sluggable;
 
 /**
@@ -28,29 +24,6 @@ use WellCommerce\Bundle\RoutingBundle\Helper\Sluggable;
  */
 class CategoryManager extends AbstractAdminManager
 {
-    /**
-     * @var LocaleRepositoryInterface
-     */
-    protected $localeRepository;
-
-    /**
-     * Constructor
-     *
-     * @param CategoryRepositoryInterface $categoryRepository
-     * @param DataGridInterface           $dataGrid
-     * @param FormBuilderInterface        $formBuilder
-     * @param LocaleRepositoryInterface   $localeRepository
-     */
-    public function __construct(
-        CategoryRepositoryInterface $categoryRepository,
-        DataGridInterface $dataGrid,
-        FormBuilderInterface $formBuilder,
-        LocaleRepositoryInterface $localeRepository
-    ) {
-        parent::__construct($categoryRepository, $dataGrid, $formBuilder);
-        $this->localeRepository = $localeRepository;
-    }
-
     /**
      * Sorts categories passed in request
      *
@@ -86,16 +59,13 @@ class CategoryManager extends AbstractAdminManager
     {
         $em             = $this->getDoctrineHelper()->getEntityManager();
         $currentShop    = $this->getShopContext()->getCurrentScope();
-        $locales        = $this->localeRepository->findAll();
         $parentCategory = $this->getRepository()->find((int)$parent);
 
-        $category = new Category();
-        $category->setHierarchy(0);
-        $category->setEnabled(1);
+        $category = $this->getFactory()->create();
         $category->setParent($parentCategory);
         $category->addShop($currentShop);
 
-        foreach ($locales as $locale) {
+        foreach ($this->getLocales() as $locale) {
             $this->translateCategory($locale, $category, $name);
         }
 

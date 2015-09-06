@@ -10,22 +10,16 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ClientBundle\Entity;
+namespace WellCommerce\Bundle\ClientBundle\EventDispatcher;
+
+use WellCommerce\Bundle\CoreBundle\EventDispatcher\AbstractEventDispatcher;
 
 /**
- * Interface ClientAwareInterface
+ * Class ClientGroupEventDispatcher
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ClientAwareInterface
+class ClientGroupEventDispatcher extends AbstractEventDispatcher
 {
-    /**
-     * @param null|ClientInterface $client
-     */
-    public function setClient(ClientInterface $client = null);
-
-    /**
-     * @return null|ClientInterface
-     */
-    public function getClient();
+    
 }
