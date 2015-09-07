@@ -10,33 +10,33 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\UnitBundle\Entity;
+namespace WellCommerce\Bundle\ProducerBundle\Entity;
 
 /**
- * Class UnitTrait
+ * Class ProducerAwareTrait
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-trait UnitTrait
+trait ProducerAwareTrait
 {
     /**
-     * @var UnitInterface
+     * @var ProducerInterface
      */
-    protected $unit;
+    protected $producer;
 
     /**
-     * @param UnitInterface $unit
+     * @return ProducerInterface
      */
-    public function setUnit(UnitInterface $unit)
+    public function getProducer()
     {
-        $this->unit = $unit;
+        return $this->producer;
     }
 
     /**
-     * @return UnitInterface
+     * @param ProducerInterface $producer
      */
-    public function getUnit()
+    public function setProducer(ProducerInterface $producer)
     {
-        return $this->unit;
+        $this->producer = $producer;
     }
 }

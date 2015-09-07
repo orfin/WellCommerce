@@ -12,34 +12,22 @@
 
 namespace WellCommerce\Bundle\AvailabilityBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model as Behaviors;
+use Knp\DoctrineBehaviors\Model\Translatable\Translation;
 use WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface;
 
 /**
- * AvailabilityTranslation
+ * Class AvailabilityTranslation
  *
- * @ORM\Table(name="availability_translation")
- * @ORM\Entity
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class AvailabilityTranslation implements LocaleAwareInterface
 {
-    use Behaviors\Translatable\Translation;
+    use Translation;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255)
      */
     protected $name;
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
     /**
      * @return string

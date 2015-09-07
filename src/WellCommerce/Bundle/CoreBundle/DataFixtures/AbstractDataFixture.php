@@ -100,4 +100,9 @@ abstract class AbstractDataFixture extends AbstractFixture implements OrderedFix
             return $collection;
         }
     }
+
+    protected function get($name)
+    {
+        return $this->container->get($name);
+    }
 }

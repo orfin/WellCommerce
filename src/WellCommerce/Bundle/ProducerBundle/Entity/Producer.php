@@ -12,55 +12,35 @@
 
 namespace WellCommerce\Bundle\ProducerBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Doctrine\Common\Collections\Collection;
+use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
+use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
+use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\PhotoTrait;
 use WellCommerce\Bundle\DelivererBundle\Entity\Deliverer;
+use WellCommerce\Bundle\DelivererBundle\Entity\DelivererInterface;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\Shop;
+use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopCollectionAwareTrait;
+use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopInterface;
 
 /**
- * Class Locale
+ * Class Producer
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @ORM\Table(name="producer")
- * @ORM\HasLifecycleCallbacks
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\ProducerBundle\Repository\ProducerRepository")
  */
-class Producer
+class Producer implements ProducerInterface
 {
-    use ORMBehaviors\Translatable\Translatable;
-    use ORMBehaviors\Timestampable\Timestampable;
-    use ORMBehaviors\Blameable\Blameable;
-    use PhotoTrait;
+    use Translatable, Timestampable, Blameable, PhotoTrait, ShopCollectionAwareTrait;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\DelivererBundle\Entity\Deliverer", inversedBy="producers")
-     * @ORM\JoinTable(name="producer_deliverer",
-     *      joinColumns={@ORM\JoinColumn(name="producer_id", referencedColumnName="id", onDelete="CASCADE")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="deliverer_id", referencedColumnName="id", onDelete="CASCADE")}
-     * )
+     * @var Collection
      */
-    private $deliverers;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\MultiStoreBundle\Entity\Shop", inversedBy="producers")
-     * @ORM\JoinTable(name="shop_producer",
-     *      joinColumns={@ORM\JoinColumn(name="producer_id", referencedColumnName="id", onDelete="CASCADE")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="shop_id", referencedColumnName="id", onDelete="CASCADE")}
-     * )
-     */
-    private $shops;
+    protected $deliverers;
 
     /**
      * Constructor
@@ -91,7 +71,7 @@ class Producer
         return $this->deliverers;
     }
 
-    public function setDeliverers(ArrayCollection $collection)
+    public function setDeliverers(Collection $collection)
     {
         $this->deliverers = $collection;
     }
@@ -101,32 +81,8 @@ class Producer
      *
      * @param Deliverer $deliverer
      */
-    public function addDeliverer(Deliverer $deliverer)
+    public function addDeliverer(DelivererInterface $deliverer)
     {
         $this->deliverers = $deliverer;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getShops()
-    {
-        return $this->shops;
-    }
-
-    /**
-     * @param mixed $shops
-     */
-    public function setShops($shops)
-    {
-        $this->shops = $shops;
-    }
-
-    /**
-     * @param Shop $shop
-     */
-    public function addShop(Shop $shop)
-    {
-        $this->shops[] = $shop;
     }
 }

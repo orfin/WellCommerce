@@ -23,7 +23,7 @@ use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 class AvailabilityFactory extends AbstractFactory
 {
     /**
-     * @return Availability
+     * @return \WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityInterface
      */
     public function create()
     {
