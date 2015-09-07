@@ -1,0 +1,10 @@
+WellCommerce\Bundle\CoreBundle\Entity\Meta:
+    type: embeddable
+    fields:
+        title:
+            type: string
+            length: 255
+        keywords:
+            type: text
+        description:
+            type: text
