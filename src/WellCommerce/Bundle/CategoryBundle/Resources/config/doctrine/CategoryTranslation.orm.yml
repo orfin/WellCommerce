@@ -1,23 +1,10 @@
-WellCommerce\Bundle\CoreBundle\Entity\Meta:
-    type: embeddable
-    fields:
-        title:
-            type: string
-            length: 255
-            column: meta_title
-        keywords:
-            type: text
-            column: meta_keywords
-        meta.description:
-            type: text
-            column: meta_description
-
 WellCommerce\Bundle\CategoryBundle\Entity\CategoryTranslation:
     type: entity
     table: category_translation
     embedded:
         meta:
             class: WellCommerce\Bundle\CoreBundle\Entity\Meta
+            columnPrefix: meta_
     fields:
         name:
             type: string
@@ -43,4 +30,3 @@ WellCommerce\Bundle\CategoryBundle\Entity\CategoryTranslation:
                 route_id:
                     referencedColumnName: id
                     onDelete: CASCADE
-            orphanRemoval: false

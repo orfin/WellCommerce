@@ -1,46 +1,42 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- *
+ * 
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- *
+ * 
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AttributeBundle\Entity;
-
-use Knp\DoctrineBehaviors\Model\Translatable\Translation;
+namespace WellCommerce\Bundle\CoreBundle\Entity;
 
 /**
- * Class AttributeValueTranslation
+ * Class HierarchyAwareTrait
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AttributeValueTranslation
+trait HierarchyAwareTrait
 {
-    use Translation;
+    /**
+     * @var int
+     */
+    protected $hierarchy;
 
     /**
-     * @var string
+     * @return int
      */
-    protected $name;
-
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getHierarchy()
     {
-        return $this->name;
+        return $this->hierarchy;
     }
 
     /**
-     * @param $name
+     * @param int $hierarchy
      */
-    public function setName($name)
+    public function setHierarchy($hierarchy)
     {
-        $this->name = $name;
+        $this->hierarchy = (int)$hierarchy;
     }
 }

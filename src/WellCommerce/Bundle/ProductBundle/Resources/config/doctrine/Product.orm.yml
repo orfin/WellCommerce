@@ -5,335 +5,156 @@ WellCommerce\Bundle\ProductBundle\Entity\Product:
     id:
         id:
             type: integer
-            scale: 0
-            length: null
-            unique: false
-            nullable: false
-            precision: 0
-            id: true
             generator:
-                strategy: IDENTITY
+                strategy: AUTO
+    embedded:
+        buyPrice:
+            class: WellCommerce\Bundle\CoreBundle\Entity\Price
+            columnPrefix: buy_price_
+        sellPrice:
+            class: WellCommerce\Bundle\CoreBundle\Entity\DiscountablePrice
+            columnPrefix: sell_price_
+        dimension:
+            class: WellCommerce\Bundle\CoreBundle\Entity\Dimension
+            columnPrefix: dimension_
     fields:
         sku:
             type: string
-            scale: 0
             length: 64
-            unique: false
             nullable: false
-            precision: 0
         stock:
             type: decimal
             scale: 4
-            length: null
-            unique: false
             nullable: false
             precision: 15
         trackStock:
             type: boolean
-            scale: 0
-            length: null
-            unique: false
             nullable: false
-            precision: 0
             column: track_stock
         weight:
             type: decimal
             scale: 4
-            length: null
-            unique: false
             nullable: false
             precision: 15
         packageSize:
             type: decimal
             scale: 4
-            length: null
-            unique: false
             nullable: false
             precision: 15
             column: package_size
         enabled:
             type: boolean
-            scale: 0
-            length: null
-            unique: false
             nullable: false
-            precision: 0
         hierarchy:
             type: integer
-            scale: 0
-            length: null
-            unique: false
             nullable: true
-            precision: 0
             options:
                 default: 0
-        buyPrice.amount:
-            type: decimal
-            scale: 4
-            length: null
-            unique: false
-            nullable: false
-            precision: 15
-            originalClass: WellCommerce\Bundle\CoreBundle\Entity\Price
-            declaredField: buyPrice
-            originalField: amount
-            column: buy_price_amount
-        buyPrice.currency:
-            type: string
-            scale: 0
-            length: 16
-            unique: false
-            nullable: false
-            precision: 0
-            originalClass: WellCommerce\Bundle\CoreBundle\Entity\Price
-            declaredField: buyPrice
-            originalField: currency
-            column: buy_price_currency
-        sellPrice.discountedAmount:
-            type: decimal
-            scale: 4
-            length: null
-            unique: false
-            nullable: true
-            precision: 15
-            originalClass: WellCommerce\Bundle\CoreBundle\Entity\DiscountablePrice
-            declaredField: sellPrice
-            originalField: discountedAmount
-            column: sell_price_discounted_amount
-        sellPrice.validFrom:
-            type: datetime
-            scale: 0
-            length: null
-            unique: false
-            nullable: true
-            precision: 0
-            originalClass: WellCommerce\Bundle\CoreBundle\Entity\DiscountablePrice
-            declaredField: sellPrice
-            originalField: validFrom
-            column: sell_price_valid_from
-        sellPrice.validTo:
-            type: datetime
-            scale: 0
-            length: null
-            unique: false
-            nullable: true
-            precision: 0
-            originalClass: WellCommerce\Bundle\CoreBundle\Entity\DiscountablePrice
-            declaredField: sellPrice
-            originalField: validTo
-            column: sell_price_valid_to
-        sellPrice.amount:
-            type: decimal
-            scale: 4
-            length: null
-            unique: false
-            nullable: false
-            precision: 15
-            originalClass: WellCommerce\Bundle\CoreBundle\Entity\DiscountablePrice
-            declaredField: sellPrice
-            originalField: amount
-            column: sell_price_amount
-        sellPrice.currency:
-            type: string
-            scale: 0
-            length: 16
-            unique: false
-            nullable: false
-            precision: 0
-            originalClass: WellCommerce\Bundle\CoreBundle\Entity\DiscountablePrice
-            declaredField: sellPrice
-            originalField: currency
-            column: sell_price_currency
-        dimension.depth:
-            type: decimal
-            scale: 4
-            length: null
-            unique: false
-            nullable: false
-            precision: 15
-            originalClass: WellCommerce\Bundle\CoreBundle\Entity\Dimension
-            declaredField: dimension
-            originalField: depth
-            column: dimension_depth
-        dimension.width:
-            type: decimal
-            scale: 4
-            length: null
-            unique: false
-            nullable: false
-            precision: 15
-            originalClass: WellCommerce\Bundle\CoreBundle\Entity\Dimension
-            declaredField: dimension
-            originalField: width
-            column: dimension_width
-        dimension.height:
-            type: decimal
-            scale: 4
-            length: null
-            unique: false
-            nullable: false
-            precision: 15
-            originalClass: WellCommerce\Bundle\CoreBundle\Entity\Dimension
-            declaredField: dimension
-            originalField: height
-            column: dimension_height
     manyToOne:
         producer:
             targetEntity: WellCommerce\Bundle\ProducerBundle\Entity\Producer
-            cascade: {  }
             fetch: LAZY
-            mappedBy: null
-            inversedBy: null
             joinColumns:
                 producer_id:
                     referencedColumnName: id
                     onDelete: 'SET NULL'
-            orphanRemoval: false
         unit:
             targetEntity: WellCommerce\Bundle\UnitBundle\Entity\Unit
-            cascade: {  }
             fetch: LAZY
-            mappedBy: null
-            inversedBy: null
             joinColumns:
                 unit_id:
                     referencedColumnName: id
                     onDelete: 'SET NULL'
-            orphanRemoval: false
         availability:
             targetEntity: WellCommerce\Bundle\AvailabilityBundle\Entity\Availability
-            cascade: {  }
             fetch: LAZY
-            mappedBy: null
-            inversedBy: null
             joinColumns:
                 availability_id:
                     referencedColumnName: id
                     onDelete: 'SET NULL'
-            orphanRemoval: false
         buyPriceTax:
             targetEntity: WellCommerce\Bundle\TaxBundle\Entity\Tax
-            cascade: {  }
             fetch: LAZY
-            mappedBy: null
-            inversedBy: null
             joinColumns:
                 buy_tax_id:
                     referencedColumnName: id
                     onDelete: 'SET NULL'
-            orphanRemoval: false
         sellPriceTax:
             targetEntity: WellCommerce\Bundle\TaxBundle\Entity\Tax
-            cascade: {  }
             fetch: LAZY
-            mappedBy: null
-            inversedBy: null
             joinColumns:
                 sell_tax_id:
                     referencedColumnName: id
                     onDelete: 'SET NULL'
-            orphanRemoval: false
         attributeGroup:
             targetEntity: WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroup
-            cascade: {  }
             fetch: LAZY
-            mappedBy: null
-            inversedBy: null
             joinColumns:
                 attribute_group_id:
                     referencedColumnName: id
                     onDelete: 'SET NULL'
-            orphanRemoval: false
         photo:
             targetEntity: WellCommerce\Bundle\MediaBundle\Entity\Media
-            cascade: {  }
             fetch: LAZY
-            mappedBy: null
-            inversedBy: null
             joinColumns:
                 photo_id:
                     referencedColumnName: id
                     onDelete: 'SET NULL'
-            orphanRemoval: false
     manyToMany:
         categories:
             targetEntity: WellCommerce\Bundle\CategoryBundle\Entity\Category
-            cascade: {  }
             fetch: LAZY
-            mappedBy: null
             inversedBy: products
             joinTable:
                 name: category_product
-                schema: null
                 joinColumns:
                     -
                         name: product_id
-                        unique: false
-                        nullable: true
+                        nullable: false
                         onDelete: CASCADE
-                        columnDefinition: null
                         referencedColumnName: id
                 inverseJoinColumns:
                     -
                         name: category_id
-                        unique: false
-                        nullable: true
+                        nullable: false
                         onDelete: CASCADE
-                        columnDefinition: null
                         referencedColumnName: id
-            orderBy: null
         statuses:
             targetEntity: WellCommerce\Bundle\ProductBundle\Entity\ProductStatus
-            cascade: {  }
             fetch: LAZY
-            mappedBy: null
             inversedBy: products
             joinTable:
                 name: product_product_status
-                schema: null
                 joinColumns:
                     -
                         name: product_id
-                        unique: false
-                        nullable: true
+                        nullable: false
                         onDelete: CASCADE
-                        columnDefinition: null
                         referencedColumnName: id
                 inverseJoinColumns:
                     -
                         name: product_status_id
-                        unique: false
-                        nullable: true
+                        nullable: false
                         onDelete: CASCADE
-                        columnDefinition: null
                         referencedColumnName: id
-            orderBy: null
         shops:
             targetEntity: WellCommerce\Bundle\MultiStoreBundle\Entity\Shop
-            cascade: {  }
             fetch: LAZY
-            mappedBy: null
             inversedBy: products
             joinTable:
                 name: shop_product
-                schema: null
                 joinColumns:
                     -
                         name: product_id
-                        unique: false
-                        nullable: true
+                        nullable: false
                         onDelete: CASCADE
-                        columnDefinition: null
                         referencedColumnName: id
                 inverseJoinColumns:
                     -
                         name: shop_id
-                        unique: false
-                        nullable: true
+                        nullable: false
                         onDelete: CASCADE
-                        columnDefinition: null
                         referencedColumnName: id
-            orderBy: null
     oneToMany:
         productPhotos:
             targetEntity: WellCommerce\Bundle\ProductBundle\Entity\ProductPhoto
@@ -342,16 +163,11 @@ WellCommerce\Bundle\ProductBundle\Entity\Product:
                 - persist
             fetch: LAZY
             mappedBy: product
-            inversedBy: null
             orphanRemoval: true
-            orderBy: null
         attributes:
             targetEntity: WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute
             cascade:
                 - all
             fetch: LAZY
             mappedBy: product
-            inversedBy: null
             orphanRemoval: true
-            orderBy: null
-    lifecycleCallbacks: {  }

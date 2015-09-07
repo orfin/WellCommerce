@@ -12,15 +12,27 @@
 
 namespace WellCommerce\Bundle\MultiStoreBundle\Entity;
 
-use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
-use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
+use Doctrine\Common\Collections\Collection;
 
 /**
- * Interface ShopInterface
+ * Interface ShopCollectionAwareInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ShopInterface extends TimestampableInterface, BlameableInterface
+interface ShopCollectionAwareInterface
 {
-    
+    /**
+     * @return Collection
+     */
+    public function getShops();
+
+    /**
+     * @param Collection $shops
+     */
+    public function setShops(Collection $shops);
+
+    /**
+     * @param ShopInterface $shop
+     */
+    public function addShop(ShopInterface $shop);
 }

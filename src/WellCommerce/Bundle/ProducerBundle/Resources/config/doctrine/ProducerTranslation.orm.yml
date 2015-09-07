@@ -1,70 +1,24 @@
 WellCommerce\Bundle\ProducerBundle\Entity\ProducerTranslation:
     type: entity
     table: producer_translation
-    id: {  }
+    embedded:
+        meta:
+            class: WellCommerce\Bundle\CoreBundle\Entity\Meta
     fields:
         name:
             type: string
-            scale: 0
             length: 255
-            unique: false
             nullable: false
-            precision: 0
         shortDescription:
             type: text
-            scale: 0
-            length: null
-            unique: false
-            nullable: true
-            precision: 0
             column: short_description
         description:
             type: text
-            scale: 0
-            length: null
-            unique: false
-            nullable: true
-            precision: 0
         slug:
             type: string
-            scale: 0
             length: 255
-            unique: false
+            unique: true
             nullable: false
-            precision: 0
-        meta.title:
-            type: string
-            scale: 0
-            length: 255
-            unique: false
-            nullable: true
-            precision: 0
-            originalClass: WellCommerce\Bundle\CoreBundle\Entity\Meta
-            declaredField: meta
-            originalField: title
-            column: meta_title
-        meta.keywords:
-            type: text
-            scale: 0
-            length: null
-            unique: false
-            nullable: true
-            precision: 0
-            originalClass: WellCommerce\Bundle\CoreBundle\Entity\Meta
-            declaredField: meta
-            originalField: keywords
-            column: meta_keywords
-        meta.description:
-            type: text
-            scale: 0
-            length: null
-            unique: false
-            nullable: true
-            precision: 0
-            originalClass: WellCommerce\Bundle\CoreBundle\Entity\Meta
-            declaredField: meta
-            originalField: description
-            column: meta_description
     oneToOne:
         route:
             targetEntity: WellCommerce\Bundle\ProducerBundle\Entity\ProducerRoute

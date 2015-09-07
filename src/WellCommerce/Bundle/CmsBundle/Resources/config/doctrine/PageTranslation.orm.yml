@@ -1,62 +1,20 @@
 WellCommerce\Bundle\CmsBundle\Entity\PageTranslation:
     type: entity
     table: page_translation
-    id: {  }
+    embedded:
+        meta:
+            class: WellCommerce\Bundle\CoreBundle\Entity\Meta
     fields:
         name:
             type: string
-            scale: 0
             length: 255
-            unique: false
             nullable: false
-            precision: 0
         content:
             type: text
-            scale: 0
-            length: null
-            unique: false
-            nullable: false
-            precision: 0
         slug:
             type: string
-            scale: 0
             length: 255
-            unique: false
             nullable: false
-            precision: 0
-        meta.title:
-            type: string
-            scale: 0
-            length: 255
-            unique: false
-            nullable: true
-            precision: 0
-            originalClass: WellCommerce\Bundle\CoreBundle\Entity\Meta
-            declaredField: meta
-            originalField: title
-            column: meta_title
-        meta.keywords:
-            type: text
-            scale: 0
-            length: null
-            unique: false
-            nullable: true
-            precision: 0
-            originalClass: WellCommerce\Bundle\CoreBundle\Entity\Meta
-            declaredField: meta
-            originalField: keywords
-            column: meta_keywords
-        meta.description:
-            type: text
-            scale: 0
-            length: null
-            unique: false
-            nullable: true
-            precision: 0
-            originalClass: WellCommerce\Bundle\CoreBundle\Entity\Meta
-            declaredField: meta
-            originalField: description
-            column: meta_description
     oneToOne:
         route:
             targetEntity: WellCommerce\Bundle\CmsBundle\Entity\PageRoute
@@ -64,11 +22,8 @@ WellCommerce\Bundle\CmsBundle\Entity\PageTranslation:
                 - remove
                 - persist
             fetch: LAZY
-            mappedBy: null
-            inversedBy: null
             joinColumns:
                 route_id:
                     referencedColumnName: id
                     onDelete: CASCADE
             orphanRemoval: false
-    lifecycleCallbacks: {  }

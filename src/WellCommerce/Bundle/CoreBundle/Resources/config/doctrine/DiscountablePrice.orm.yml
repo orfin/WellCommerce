@@ -1,0 +1,17 @@
+WellCommerce\Bundle\CoreBundle\Entity\DiscountablePrice:
+    type: embeddable
+    fields:
+        discountedAmount:
+            type: decimal
+            scale: 4
+            nullable: true
+            precision: 15
+            column: discounted_amount
+        validFrom:
+            type: datetime
+            nullable: true
+            column: valid_from
+        validTo:
+            type: datetime
+            nullable: true
+            column: valid_to

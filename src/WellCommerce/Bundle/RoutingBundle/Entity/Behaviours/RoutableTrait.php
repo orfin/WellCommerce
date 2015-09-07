@@ -24,7 +24,7 @@ trait RoutableTrait
     protected $needsFlush = false;
 
     /**
-     * @ORM\Column(name="slug", type="string", length=255, nullable=false)
+     * @var string
      */
     protected $slug;
 

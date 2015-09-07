@@ -12,89 +12,73 @@
 
 namespace WellCommerce\Bundle\MultiStoreBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model as ORMBehaviors;
-use WellCommerce\Bundle\OrderBundle\Entity\OrderStatus;
+use Doctrine\Common\Collections\Collection;
+use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
+use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderStatusInterface;
+use WellCommerce\Bundle\ThemeBundle\Entity\ThemeInterface;
 
 /**
  * Class Shop
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @ORM\Table()
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\MultiStoreBundle\Repository\ShopRepository")
  */
-class Shop
+class Shop implements ShopInterface
 {
-    use ORMBehaviors\Timestampable\Timestampable;
-    use ORMBehaviors\Blameable\Blameable;
+    use Timestampable, Blameable;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255, nullable=false)
      */
     protected $name;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="url", type="string", length=255, nullable=false)
      */
     protected $url;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\MultiStoreBundle\Entity\Company")
-     * @ORM\JoinColumn(name="company_id", referencedColumnName="id", onDelete="SET NULL")
+     * @var CompanyInterface
      */
     protected $company;
 
     /**
-     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\Product", mappedBy="shops")
+     * @var Collection
      */
     protected $products;
 
     /**
-     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\CategoryBundle\Entity\Category", mappedBy="shops")
+     * @var Collection
      */
     protected $categories;
 
     /**
-     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\ProducerBundle\Entity\Producer", mappedBy="shops")
+     * @var Collection
      */
     protected $producers;
 
     /**
-     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\CmsBundle\Entity\Page", mappedBy="shops")
+     * @var Collection
      */
     protected $pages;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\ThemeBundle\Entity\Theme")
-     * @ORM\JoinColumn(name="theme_id", referencedColumnName="id", onDelete="SET NULL")
+     * @var ThemeInterface
      */
     protected $theme;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\OrderBundle\Entity\OrderStatus")
-     * @ORM\JoinColumn(name="default_order_status_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     * @var OrderStatusInterface
      */
     protected $defaultOrderStatus;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="default_country", type="string", length=3, nullable=true)
      */
     protected $defaultCountry;
 
@@ -123,7 +107,7 @@ class Shop
     }
 
     /**
-     * @return mixed
+     * @return Collection
      */
     public function getProducts()
     {
@@ -133,13 +117,13 @@ class Shop
     /**
      * @param mixed $products
      */
-    public function setProducts($products)
+    public function setProducts(Collection $products)
     {
         $this->products = $products;
     }
 
     /**
-     * @return mixed
+     * @return CompanyInterface
      */
     public function getCompany()
     {
@@ -147,15 +131,15 @@ class Shop
     }
 
     /**
-     * @param mixed $company
+     * @param CompanyInterface $company
      */
-    public function setCompany($company)
+    public function setCompany(CompanyInterface $company)
     {
         $this->company = $company;
     }
 
     /**
-     * @return ArrayCollection
+     * @return Collection
      */
     public function getCategories()
     {
@@ -163,9 +147,9 @@ class Shop
     }
 
     /**
-     * @param ArrayCollection $categories
+     * @param Collection $categories
      */
-    public function setCategories(ArrayCollection $categories)
+    public function setCategories(Collection $categories)
     {
         $this->categories = $categories;
     }
@@ -181,7 +165,7 @@ class Shop
     /**
      * @param mixed $producers
      */
-    public function setProducers($producers)
+    public function setProducers(Collection $producers)
     {
         $this->producers = $producers;
     }
@@ -211,15 +195,15 @@ class Shop
     }
 
     /**
-     * @param mixed $theme
+     * @param ThemeInterface $theme
      */
-    public function setTheme($theme)
+    public function setTheme(ThemeInterface $theme)
     {
         $this->theme = $theme;
     }
 
     /**
-     * @return mixed
+     * @return Collection
      */
     public function getPages()
     {
@@ -227,15 +211,15 @@ class Shop
     }
 
     /**
-     * @param mixed $pages
+     * @param Collection $pages
      */
-    public function setPages($pages)
+    public function setPages(Collection $pages)
     {
         $this->pages = $pages;
     }
 
     /**
-     * @return OrderStatus
+     * @return OrderStatusInterface
      */
     public function getDefaultOrderStatus()
     {
@@ -243,9 +227,9 @@ class Shop
     }
 
     /**
-     * @param OrderStatus $defaultOrderStatus
+     * @param OrderStatusInterface $defaultOrderStatus
      */
-    public function setDefaultOrderStatus(OrderStatus $defaultOrderStatus)
+    public function setDefaultOrderStatus(OrderStatusInterface $defaultOrderStatus)
     {
         $this->defaultOrderStatus = $defaultOrderStatus;
     }

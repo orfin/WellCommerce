@@ -1,70 +1,27 @@
 WellCommerce\Bundle\ProductBundle\Entity\ProductTranslation:
     type: entity
     table: product_translation
-    id: {  }
+    embedded:
+        meta:
+            class: WellCommerce\Bundle\CoreBundle\Entity\Meta
     fields:
         name:
             type: string
-            scale: 0
             length: 255
-            unique: false
+            unique: true
             nullable: false
-            precision: 0
         shortDescription:
             type: text
-            scale: 0
-            length: null
-            unique: false
             nullable: true
-            precision: 0
             column: short_description
         description:
             type: text
-            scale: 0
-            length: null
-            unique: false
             nullable: true
-            precision: 0
         slug:
             type: string
-            scale: 0
             length: 255
-            unique: false
+            unique: true
             nullable: false
-            precision: 0
-        meta.title:
-            type: string
-            scale: 0
-            length: 255
-            unique: false
-            nullable: true
-            precision: 0
-            originalClass: WellCommerce\Bundle\CoreBundle\Entity\Meta
-            declaredField: meta
-            originalField: title
-            column: meta_title
-        meta.keywords:
-            type: text
-            scale: 0
-            length: null
-            unique: false
-            nullable: true
-            precision: 0
-            originalClass: WellCommerce\Bundle\CoreBundle\Entity\Meta
-            declaredField: meta
-            originalField: keywords
-            column: meta_keywords
-        meta.description:
-            type: text
-            scale: 0
-            length: null
-            unique: false
-            nullable: true
-            precision: 0
-            originalClass: WellCommerce\Bundle\CoreBundle\Entity\Meta
-            declaredField: meta
-            originalField: description
-            column: meta_description
     oneToOne:
         route:
             targetEntity: WellCommerce\Bundle\ProductBundle\Entity\ProductRoute
@@ -72,11 +29,7 @@ WellCommerce\Bundle\ProductBundle\Entity\ProductTranslation:
                 - remove
                 - persist
             fetch: LAZY
-            mappedBy: null
-            inversedBy: null
             joinColumns:
                 route_id:
                     referencedColumnName: id
                     onDelete: CASCADE
-            orphanRemoval: false
-    lifecycleCallbacks: {  }

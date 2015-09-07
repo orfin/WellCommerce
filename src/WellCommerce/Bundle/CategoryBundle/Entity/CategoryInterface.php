@@ -14,9 +14,10 @@ namespace WellCommerce\Bundle\CategoryBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\HierarchyAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
-use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopInterface;
+use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopCollectionAwareInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 
 /**
@@ -24,22 +25,12 @@ use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface CategoryInterface extends TranslatableInterface, TimestampableInterface, BlameableInterface
+interface CategoryInterface extends TranslatableInterface, TimestampableInterface, BlameableInterface, ShopCollectionAwareInterface, HierarchyAwareInterface
 {
     /**
      * @return int
      */
     public function getId();
-
-    /**
-     * @return int
-     */
-    public function getHierarchy();
-
-    /**
-     * @param int $hierarchy
-     */
-    public function setHierarchy($hierarchy);
 
     /**
      * @return null|CategoryInterface
@@ -80,19 +71,4 @@ interface CategoryInterface extends TranslatableInterface, TimestampableInterfac
      * @param ProductInterface $product
      */
     public function addProduct(ProductInterface $product);
-
-    /**
-     * @return Collection
-     */
-    public function getShops();
-
-    /**
-     * @param Collection $shops
-     */
-    public function setShops(Collection $shops);
-
-    /**
-     * @param ShopInterface $shop
-     */
-    public function addShop(ShopInterface $shop);
 }

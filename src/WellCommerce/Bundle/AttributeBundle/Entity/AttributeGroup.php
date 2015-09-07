@@ -12,55 +12,32 @@
 
 namespace WellCommerce\Bundle\AttributeBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Doctrine\Common\Collections\Collection;
+use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
+use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
+use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 
 /**
  * Class AttributeGroup
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @ORM\Table(name="attribute_group")
- * @ORM\HasLifecycleCallbacks
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\AttributeBundle\Repository\AttributeGroupRepository")
  */
-class AttributeGroup
+class AttributeGroup implements AttributeGroupInterface
 {
-    use ORMBehaviors\Translatable\Translatable;
-    use ORMBehaviors\Timestampable\Timestampable;
-    use ORMBehaviors\Blameable\Blameable;
+    use Translatable, Timestampable, Blameable;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @var int
      */
-    private $id;
+    protected $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\AttributeBundle\Entity\Attribute", inversedBy="groups")
-     * @ORM\JoinTable(name="attribute_group_attribute",
-     *      joinColumns={@ORM\JoinColumn(name="attribute_group_id", referencedColumnName="id", onDelete="CASCADE")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="attribute_id", referencedColumnName="id", onDelete="CASCADE")}
-     * )
+     * @var Collection
      */
-    private $attributes;
+    protected $attributes;
 
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->attributes = new ArrayCollection();
-    }
-
-    /**
-     * Returns group id
-     *
-     * @return int
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -68,9 +45,7 @@ class AttributeGroup
     }
 
     /**
-     * Returns group attributes
-     *
-     * @return ArrayCollection
+     * {@inheritdoc}
      */
     public function getAttributes()
     {
@@ -78,21 +53,17 @@ class AttributeGroup
     }
 
     /**
-     * Sets collection of attributes
-     *
-     * @param ArrayCollection $collection
+     * {@inheritdoc}
      */
-    public function setAttributes(ArrayCollection $collection)
+    public function setAttributes(Collection $collection)
     {
         $this->attributes = $collection;
     }
 
     /**
-     * Adds new attribute to group
-     *
-     * @param Attribute $attribute
+     * {@inheritdoc}
      */
-    public function addAttribute(Attribute $attribute)
+    public function addAttribute(AttributeInterface $attribute)
     {
         $this->attributes[] = $attribute;
     }

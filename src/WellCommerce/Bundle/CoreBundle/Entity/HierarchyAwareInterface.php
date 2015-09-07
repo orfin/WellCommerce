@@ -10,17 +10,22 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\MultiStoreBundle\Entity;
-
-use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
-use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
+namespace WellCommerce\Bundle\CoreBundle\Entity;
 
 /**
- * Interface ShopInterface
+ * Interface HierarchyAwareInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ShopInterface extends TimestampableInterface, BlameableInterface
+interface HierarchyAwareInterface
 {
-    
+    /**
+     * @param int $hierarchy
+     */
+    public function setHierarchy($hierarchy);
+
+    /**
+     * @return int
+     */
+    public function getHierarchy();
 }

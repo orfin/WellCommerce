@@ -16,11 +16,34 @@ use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 
 /**
- * Interface ShopInterface
+ * Interface CompanyInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ShopInterface extends TimestampableInterface, BlameableInterface
+interface CompanyInterface extends TimestampableInterface, BlameableInterface
 {
-    
+    /**
+     * @return int
+     */
+    public function getId();
+
+    /**
+     * @return string
+     */
+    public function getName();
+
+    /**
+     * @param string $name
+     */
+    public function setName($name);
+
+    /**
+     * @return string
+     */
+    public function getShortName();
+
+    /**
+     * @param string $shortName
+     */
+    public function setShortName($shortName);
 }

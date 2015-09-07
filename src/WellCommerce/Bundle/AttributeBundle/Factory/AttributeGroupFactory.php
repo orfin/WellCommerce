@@ -13,25 +13,24 @@
 namespace WellCommerce\Bundle\AttributeBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use WellCommerce\Bundle\AttributeBundle\Entity\Attribute;
+use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroup;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 
 /**
- * Class AttributeFactory
+ * Class AttributeGroupFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AttributeFactory extends AbstractFactory
+class AttributeGroupFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\AttributeBundle\Entity\AttributeInterface
+     * @return \WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupInterface
      */
     public function create()
     {
-        $attribute = new Attribute();
-        $attribute->setValues(new ArrayCollection());
-        $attribute->setGroups(new ArrayCollection());
+        $group = new AttributeGroup();
+        $group->setAttributes(new ArrayCollection());
 
-        return $attribute;
+        return $group;
     }
 }

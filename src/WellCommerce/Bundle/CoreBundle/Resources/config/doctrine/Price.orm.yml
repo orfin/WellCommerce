@@ -1,0 +1,14 @@
+WellCommerce\Bundle\CoreBundle\Entity\Price:
+    type: embeddable
+    fields:
+        amount:
+            type: decimal
+            scale: 4
+            nullable: false
+            precision: 15
+            column: amount
+        currency:
+            type: string
+            length: 16
+            nullable: false
+            column: currency

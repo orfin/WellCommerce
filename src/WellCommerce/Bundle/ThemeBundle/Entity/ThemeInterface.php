@@ -10,17 +10,14 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\MultiStoreBundle\Entity;
-
-use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
-use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
+namespace WellCommerce\Bundle\ThemeBundle\Entity;
 
 /**
- * Interface ShopInterface
+ * Interface ThemeInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ShopInterface extends TimestampableInterface, BlameableInterface
+interface ThemeInterface
 {
     
 }

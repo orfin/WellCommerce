@@ -17,7 +17,8 @@ use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\EnableableTrait;
-use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\HierarchyAwareTrait;
+use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopCollectionAwareTrait;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 
 /**
@@ -27,17 +28,12 @@ use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
  */
 class Category implements CategoryInterface
 {
-    use Translatable, Timestampable, Blameable, EnableableTrait;
+    use Translatable, Timestampable, Blameable, EnableableTrait, ShopCollectionAwareTrait, HierarchyAwareTrait;
 
     /**
      * @var integer
      */
     protected $id;
-
-    /**
-     * @var integer
-     */
-    protected $hierarchy;
 
     /**
      * @var null|CategoryInterface
@@ -55,32 +51,11 @@ class Category implements CategoryInterface
     protected $products;
 
     /**
-     * @var Collection
-     */
-    protected $shops;
-
-    /**
      * @return int
      */
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @return int
-     */
-    public function getHierarchy()
-    {
-        return $this->hierarchy;
-    }
-
-    /**
-     * @param int $hierarchy
-     */
-    public function setHierarchy($hierarchy)
-    {
-        $this->hierarchy = (int)$hierarchy;
     }
 
     /**
@@ -146,31 +121,5 @@ class Category implements CategoryInterface
     public function addProduct(ProductInterface $product)
     {
         $this->products[] = $product;
-    }
-
-    /**
-     * @return Collection
-     */
-    public function getShops()
-    {
-        return $this->shops;
-    }
-
-    /**
-     * @param Collection $shops
-     */
-    public function setShops(Collection $shops)
-    {
-        $shops->map(function (ShopInterface $shop) {
-            $this->addShop($shop);
-        });
-    }
-
-    /**
-     * @param ShopInterface $shop
-     */
-    public function addShop(ShopInterface $shop)
-    {
-        $this->shops[] = $shop;
     }
 }

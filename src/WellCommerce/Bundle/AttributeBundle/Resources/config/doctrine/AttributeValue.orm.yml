@@ -5,33 +5,19 @@ WellCommerce\Bundle\AttributeBundle\Entity\AttributeValue:
     id:
         id:
             type: integer
-            scale: 0
-            length: null
-            unique: false
-            nullable: false
-            precision: 0
-            id: true
             generator:
-                strategy: IDENTITY
+                strategy: AUTO
     manyToOne:
         attribute:
             targetEntity: WellCommerce\Bundle\AttributeBundle\Entity\Attribute
-            cascade: {  }
             fetch: LAZY
-            mappedBy: null
             inversedBy: values
             joinColumns:
                 attribute_id:
                     referencedColumnName: id
                     onDelete: CASCADE
-            orphanRemoval: false
     manyToMany:
         productAttributeValues:
             targetEntity: WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute
-            cascade: {  }
             fetch: LAZY
             mappedBy: attributeValues
-            inversedBy: null
-            joinTable: {  }
-            orderBy: null
-    lifecycleCallbacks: {  }
