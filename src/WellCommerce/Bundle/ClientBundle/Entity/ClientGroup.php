@@ -22,7 +22,7 @@ use WellCommerce\Bundle\CmsBundle\Entity\PageInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientGroup
+class ClientGroup implements ClientGroupInterface
 {
     use Translatable;
     use Timestampable;
