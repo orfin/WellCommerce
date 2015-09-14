@@ -1,11 +1,9 @@
 WellCommerce\Bundle\CmsBundle\Entity\NewsTranslation:
     type: entity
     table: news_translation
-    id: {  }
     fields:
         topic:
             type: string
-            scale: 0
             length: 255
             unique: false
             nullable: false

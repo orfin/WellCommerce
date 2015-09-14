@@ -40,7 +40,7 @@ class LoadClientData extends AbstractDataFixture
         $client->setPassword('demo');
         $client->setConditionsAccepted(true);
         $client->setNewsletterAccepted(true);
-        $client->setGroup($clientGroup);
+        $client->setClientGroup($clientGroup);
         $manager->persist($client);
 
         $manager->flush();
