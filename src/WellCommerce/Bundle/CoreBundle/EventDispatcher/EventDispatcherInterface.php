@@ -22,6 +22,14 @@ use WellCommerce\Bundle\FormBundle\FormBuilderInterface;
  */
 interface EventDispatcherInterface
 {
+    const PRE_RESOURCE_UPDATE_EVENT  = 'pre_update';
+    const POST_RESOURCE_UPDATE_EVENT = 'post_update';
+    const PRE_RESOURCE_CREATE_EVENT  = 'pre_create';
+    const POST_RESOURCE_CREATE_EVENT = 'post_create';
+    const PRE_RESOURCE_REMOVE_EVENT  = 'pre_remove';
+    const POST_RESOURCE_REMOVE_EVENT = 'post_remove';
+    const FORM_INIT_EVENT            = 'form_init';
+
     /**
      * Dispatches the events before new resource is created
      *

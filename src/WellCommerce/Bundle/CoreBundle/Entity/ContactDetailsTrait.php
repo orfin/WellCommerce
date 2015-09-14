@@ -21,8 +21,6 @@ trait ContactDetailsTrait
 {
     /**
      * @var ContactDetailsInterface
-     *
-     * @ORM\Embedded(class = "WellCommerce\Bundle\CoreBundle\Entity\ContactDetails", columnPrefix = "contact_details_")
      */
     protected $contactDetails;
 

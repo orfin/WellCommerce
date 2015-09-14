@@ -13,13 +13,16 @@
 namespace WellCommerce\Bundle\CartBundle\Controller\Front;
 
 use Symfony\Component\HttpFoundation\Request;
-use WellCommerce\Bundle\CartBundle\Exception\ChangeCartItemQuantityException;
+use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
+use WellCommerce\Bundle\CartBundle\Exception\AddCartItemException;
 use WellCommerce\Bundle\CartBundle\Exception\DeleteCartItemException;
 use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
 use WellCommerce\Bundle\DataSetBundle\Conditions\Condition\Eq;
 use WellCommerce\Bundle\DataSetBundle\Conditions\ConditionsCollection;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\WebBundle\Breadcrumb\BreadcrumbItem;
 
 /**
@@ -30,7 +33,7 @@ use WellCommerce\Bundle\WebBundle\Breadcrumb\BreadcrumbItem;
 class CartController extends AbstractFrontController implements FrontControllerInterface
 {
     /**
-     * @var \WellCommerce\Bundle\CartBundle\Manager\Front\CartManager
+     * @var \WellCommerce\Bundle\CartBundle\Manager\Front\CartManagerInterface
      */
     protected $manager;
 
@@ -66,15 +69,27 @@ class CartController extends AbstractFrontController implements FrontControllerI
         ]);
     }
 
-    public function addAction()
+    /**
+     * Add cart item action
+     *
+     * @param ProductInterface               $product
+     * @param ProductAttributeInterface|null $attribute
+     *
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
+    public function addAction(ProductInterface $product, ProductAttributeInterface $attribute = null)
     {
-        $product         = $this->manager->findProduct();
-        $attribute       = $this->manager->findProductAttribute($product);
-        $quantity        = (int)$this->manager->getRequestHelper()->getRequestAttribute('qty', 1);
+        $quantity = (int)$this->manager->getRequestHelper()->getRequestAttribute('qty', 1);
+
+        try {
+            $this->manager->addProductToCart($product, $attribute, $quantity);
+        } catch (AddCartItemException $exception) {
+
+        }
+
         $category        = $product->getCategories()->first();
         $recommendations = $this->getRecommendations($category);
 
-        $this->manager->addItem($product, $attribute, $quantity);
 
         $basketModalContent = $this->renderView('WellCommerceCartBundle:Front/Cart:add.html.twig', [
             'product'         => $product,
@@ -106,16 +121,15 @@ class CartController extends AbstractFrontController implements FrontControllerI
         return $dataset;
     }
 
-    public function editAction(Request $request)
+    public function editAction(CartProductInterface $cartProduct)
     {
-        $message = null;
-        $id      = (int)$request->request->get('id');
-        $qty     = (int)$request->request->get('qty');
+        $message  = null;
+        $quantity = (int)$this->getRequestHelper()->getRequestAttribute('qty', 1);
 
         try {
-            $this->manager->changeItemQuantity($id, $qty);
+            $this->manager->changeCartProductQuantity($cartProduct, $quantity);
             $success = true;
-        } catch (ChangeCartItemQuantityException $e) {
+        } catch (\Exception $e) {
             $success = false;
             $message = $e->getMessage();
         }
@@ -126,17 +140,16 @@ class CartController extends AbstractFrontController implements FrontControllerI
         ]);
     }
 
-    public function deleteAction(Request $request)
+    public function deleteAction(CartProductInterface $cartProduct)
     {
         $message = null;
-        $id      = (int)$request->request->get('id');
 
         try {
-            $this->manager->deleteItem($id);
+            $this->manager->deleteCartProduct($cartProduct);
             $success = true;
-        } catch (DeleteCartItemException $e) {
+        } catch (DeleteCartItemException $exception) {
             $success = false;
-            $message = $e->getMessage();
+            $message = $exception->getMessage();
         }
 
         return $this->jsonResponse([

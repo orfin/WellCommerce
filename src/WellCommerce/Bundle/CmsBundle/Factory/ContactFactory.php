@@ -15,11 +15,20 @@ namespace WellCommerce\Bundle\CmsBundle\Factory;
 use WellCommerce\Bundle\CmsBundle\Entity\Contact;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 
-class ContactFactory extends AbstractFactory
+/**
+ * Class ContactFactory
+ *
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
+ */
+class ContactFactory extends AbstractFactory implements ContactFactoryInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function create()
     {
         $contact = new Contact();
+        $contact->setCreatedAt(new \DateTime());
 
         return $contact;
     }

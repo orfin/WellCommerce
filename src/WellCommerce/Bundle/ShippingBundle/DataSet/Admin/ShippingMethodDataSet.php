@@ -14,14 +14,13 @@ namespace WellCommerce\Bundle\ShippingBundle\DataSet\Admin;
 
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Bundle\DataSetBundle\Configurator\DataSetConfiguratorInterface;
-use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
 
 /**
  * Class ShippingMethodDataSet
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class ShippingMethodDataSet extends AbstractDataSet implements DataSetInterface
+class ShippingMethodDataSet extends AbstractDataSet
 {
     /**
      * {@inheritdoc}

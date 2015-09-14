@@ -13,20 +13,19 @@
 namespace WellCommerce\Bundle\MultiStoreBundle\Entity;
 
 /**
- * Class ShopTrait
+ * Class ShopAwareTrait
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-trait ShopTrait
+trait ShopAwareTrait
 {
     /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\MultiStoreBundle\Entity\Shop")
-     * @ORM\JoinColumn(name="shop_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
+     * @var ShopInterface
      */
     protected $shop;
 
     /**
-     * @return Shop
+     * @return ShopInterface
      */
     public function getShop()
     {
@@ -36,7 +35,7 @@ trait ShopTrait
     /**
      * @param Shop $shop
      */
-    public function setShop(Shop $shop)
+    public function setShop(ShopInterface $shop)
     {
         $this->shop = $shop;
     }

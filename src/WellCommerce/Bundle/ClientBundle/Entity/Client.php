@@ -11,116 +11,79 @@
  */
 namespace WellCommerce\Bundle\ClientBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * Client
+ * Class Client
  *
- * @ORM\Table(name="client")
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\ClientBundle\Repository\ClientRepository")
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class Client implements ClientInterface
 {
-    use Timestampable;
-    use Blameable;
+    use Timestampable, Blameable, ClientAddressAwareTrait;
 
     const ROLE_CLIENT = 'ROLE_CLIENT';
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @var int
      */
     protected $id;
 
     /**
      * @var float
-     *
-     * @ORM\Column(name="discount", type="decimal", precision=15, scale=4, nullable=true)
      */
     protected $discount;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="first_name", type="string", length=255, nullable=false)
      */
     protected $firstName;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="last_name", type="string", length=255, nullable=false)
      */
     protected $lastName;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", length=64)
      */
     protected $password;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", length=60, unique=true, nullable=false)
      */
     protected $email;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", length=60, unique=true)
      */
     protected $username;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", length=60, unique=true, nullable=true)
      */
     protected $phone;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="salt", type="string", length=40)
      */
     protected $salt;
 
     /**
-     * @var ArrayCollection
-     *
-     * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\ClientBundle\Entity\ClientAddress", mappedBy="client", cascade={"persist"}, orphanRemoval=true)
+     * @var ClientGroupInterface
      */
-    protected $addresses;
-
-    /**
-     * @var ClientGroup
-     *
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\ClientBundle\Entity\ClientGroup", inversedBy="clients")
-     * @ORM\JoinColumn(name="client_group_id", referencedColumnName="id", onDelete="SET NULL")
-     */
-    protected $group;
+    protected $clientGroup;
 
     /**
      * @var bool
-     *
-     * @ORM\Column(name="conditions_accepted", type="boolean")
      */
     protected $conditionsAccepted;
 
     /**
      * @var bool
-     *
-     * @ORM\Column(name="newsletter_accepted", type="boolean")
      */
     protected $newsletterAccepted;
 
@@ -159,7 +122,7 @@ class Client implements ClientInterface
     /**
      * @inheritDoc
      */
-    public function setAddresses(ArrayCollection $addresses)
+    public function setAddresses(Collection $addresses)
     {
         $this->addresses = $addresses;
     }
@@ -167,25 +130,25 @@ class Client implements ClientInterface
     /**
      * @inheritDoc
      */
-    public function addAddress(ClientAddress $address)
+    public function addAddress(ClientAddressInterface $address)
     {
         $this->addresses[] = $address;
     }
 
     /**
-     * @return ClientGroup
+     * @return ClientGroupInterface
      */
-    public function getGroup()
+    public function getClientGroup()
     {
-        return $this->group;
+        return $this->clientGroup;
     }
 
     /**
      * @inheritDoc
      */
-    public function setGroup(ClientGroup $clientGroup)
+    public function setClientGroup(ClientGroupInterface $clientGroup)
     {
-        $this->group = $clientGroup;
+        $this->clientGroup = $clientGroup;
     }
 
     /**

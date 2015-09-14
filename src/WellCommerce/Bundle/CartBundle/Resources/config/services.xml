@@ -6,10 +6,10 @@
     <services>
         <service id="cart.manager.front" class="WellCommerce\Bundle\CartBundle\Manager\Front\CartManager">
             <argument type="service" id="cart.repository"/>
-            <argument type="service" id="product.repository"/>
-            <argument type="service" id="product_attribute.repository"/>
-            <argument type="service" id="cart.helper"/>
+            <argument type="service" id="cart.factory"/>
+            <argument type="service" id="cart.event_dispatcher"/>
             <argument type="service" id="cart_product.repository"/>
+            <argument type="service" id="cart_product.factory"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -20,7 +20,7 @@
         </service>
 
         <service id="cart.purger" class="WellCommerce\Bundle\CartBundle\Purger\CartPurger">
-            <argument type="service" id="doctrine_helper"/>
+            <argument type="service" id="service_container"/>
         </service>
 
         <service id="package.command.purge.carts" class="WellCommerce\Bundle\CartBundle\Command\PurgeCartsCommand">
@@ -39,13 +39,13 @@
             <argument>WellCommerceCartBundle:Cart</argument>
         </service>
 
-        <service id="cart_product.repository" class="WellCommerce\Bundle\CartBundle\Repository\CartProductRepository"
-                 factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+        <service id="cart_product.repository" class="WellCommerce\Bundle\CartBundle\Repository\CartProductRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument>WellCommerceCartBundle:CartProduct</argument>
         </service>
 
         <service id="cart_product.dataset.query_builder.front" class="WellCommerce\Bundle\CartBundle\DataSet\Front\CartProductDataSetQueryBuilder">
             <argument type="service" id="cart_product.repository"/>
+            <argument type="service" id="cart.provider"/>
         </service>
 
         <service id="cart_product.dataset.loader.front" class="%dataset.loader.class%">
@@ -99,7 +99,10 @@
             <tag name="twig.extension"/>
         </service>
 
-        <service id="cart.factory" class="WellCommerce\Bundle\CartBundle\Factory\CartFactory" />
+        <service id="cart.factory" class="WellCommerce\Bundle\CartBundle\Factory\CartFactory">
+            <argument type="service" id="payment_method.repository"/>
+            <argument type="service" id="shipping_method.repository"/>
+        </service>
 
         <service id="cart.event_dispatcher" class="WellCommerce\Bundle\CartBundle\EventDispatcher\CartEventDispatcher">
             <argument type="service" id="event_dispatcher" />
@@ -112,10 +115,16 @@
         </service>
 
         <service id="cart.subscriber" class="WellCommerce\Bundle\CartBundle\EventListener\CartSubscriber">
+            <argument type="service" id="cart.manager.front"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
             <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="cart_product.request_param_converter" class="WellCommerce\Bundle\CartBundle\Request\ParamConverter\CartProductParamConverter">
+            <argument type="service" id="cart_product.repository" />
+            <tag name="request.param_converter" converter="cart_product" priority="10"/>
         </service>
     </services>
 </container>

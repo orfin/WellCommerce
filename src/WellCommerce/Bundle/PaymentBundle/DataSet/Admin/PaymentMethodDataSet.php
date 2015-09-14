@@ -14,14 +14,13 @@ namespace WellCommerce\Bundle\PaymentBundle\DataSet\Admin;
 
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Bundle\DataSetBundle\Configurator\DataSetConfiguratorInterface;
-use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
 
 /**
  * Class PaymentMethodDataSet
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class PaymentMethodDataSet extends AbstractDataSet implements DataSetInterface
+class PaymentMethodDataSet extends AbstractDataSet
 {
     /**
      * {@inheritdoc}

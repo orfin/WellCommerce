@@ -18,12 +18,11 @@ use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\EnableableTrait;
 
 /**
- * OrderStatus
+ * Class OrderStatus
  *
- * @ORM\Table(name="order_status")
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\OrderBundle\Repository\OrderStatusRepository")
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderStatus
+class OrderStatus implements OrderStatusInterface
 {
     use Timestampable;
     use Blameable;

@@ -10,10 +10,14 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ClientBundle\Entity;
+namespace WellCommerce\Bundle\ClientBundle\Factory;
 
+use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
 
-trait ClientAddressTrait
+interface ClientFactoryInterface extends FactoryInterface
 {
-    
+    /**
+     * @return \WellCommerce\Bundle\ClientBundle\Entity\ClientInterface
+     */
+    public function create();
 }

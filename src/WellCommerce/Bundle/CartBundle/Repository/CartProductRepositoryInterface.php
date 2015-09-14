@@ -12,10 +12,10 @@
 
 namespace WellCommerce\Bundle\CartBundle\Repository;
 
-use WellCommerce\Bundle\CartBundle\Entity\Cart;
+use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
-use WellCommerce\Bundle\ProductBundle\Entity\Product;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 
 /**
  * Interface CartProductRepositoryInterface
@@ -25,13 +25,13 @@ use WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute;
 interface CartProductRepositoryInterface extends RepositoryInterface
 {
     /**
-     * Returns product from cart
+     * Returns the CartProduct object from cart or null if it was not found
      *
-     * @param Cart             $cart
-     * @param Product          $product
-     * @param ProductAttribute $attribute
+     * @param CartInterface                  $cart
+     * @param ProductInterface               $product
+     * @param ProductAttributeInterface|null $attribute
      *
-     * @return null|\WellCommerce\Bundle\CartBundle\Entity\CartProduct
+     * @return null|\WellCommerce\Bundle\CartBundle\Entity\CartProductInterface
      */
-    public function findProductInCart(Cart $cart, Product $product, ProductAttribute $attribute = null);
+    public function findProductInCart(CartInterface $cart, ProductInterface $product, ProductAttributeInterface $attribute = null);
 }

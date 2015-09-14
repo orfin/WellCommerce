@@ -12,52 +12,41 @@
 
 namespace WellCommerce\Bundle\ThemeBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Doctrine\Common\Collections\Collection;
+use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
+use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 
 /**
- * Theme
+ * Class Theme
  *
- * @ORM\Table("theme")
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\ThemeBundle\Repository\ThemeRepository")
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Theme
+class Theme implements ThemeInterface
 {
-    use ORMBehaviors\Timestampable\Timestampable;
-    use ORMBehaviors\Blameable\Blameable;
+    use Timestampable, Blameable;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @var int
      */
     protected $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255)
      */
     protected $name;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="folder", type="string", length=255)
      */
     protected $folder;
 
     /**
-     * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\ThemeBundle\Entity\ThemeCss", mappedBy="theme")
+     * @var Collection|ThemeCssInterface[]
      */
     protected $css;
 
     /**
-     * Returns the theme's identifier
-     *
-     * @return int
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -65,9 +54,7 @@ class Theme
     }
 
     /**
-     * Returns the theme's name
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getName()
     {
@@ -75,22 +62,14 @@ class Theme
     }
 
     /**
-     * Sets the theme's name
-     *
-     * @param string $name
-     *
-     * @return $this
+     * {@inheritdoc}
      */
     public function setName($name)
     {
         $this->name = $name;
-
-        return $this;
     }
 
     /**
-     * Returns theme's folder name
-     *
      * @return string
      */
     public function getFolder()
@@ -99,23 +78,15 @@ class Theme
     }
 
     /**
-     * Sets theme's folder name
-     *
-     * @param $folder
-     *
-     * @return $this
+     * {@inheritdoc}
      */
     public function setFolder($folder)
     {
         $this->folder = $folder;
-
-        return $this;
     }
 
     /**
-     * Returns the theme's CSS values
-     *
-     * @return ThemeCss[]
+     * {@inheritdoc}
      */
     public function getCss()
     {
@@ -123,16 +94,10 @@ class Theme
     }
 
     /**
-     * Sets an array of css values for theme
-     *
-     * @param array $css
-     *
-     * @return $this
+     * {@inheritdoc}
      */
-    public function setCss($css)
+    public function setCss(Collection $css)
     {
         $this->css = $css;
-
-        return $this;
     }
 }

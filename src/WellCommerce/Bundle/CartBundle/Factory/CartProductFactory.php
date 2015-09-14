@@ -20,10 +20,10 @@ use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CartProductFactory extends AbstractFactory
+class CartProductFactory extends AbstractFactory implements CartProductFactoryInterface
 {
     /**
-     * @return \WellCommerce\Bundle\CartBundle\Entity\CartProduct
+     * {@inheritdoc}
      */
     public function create()
     {

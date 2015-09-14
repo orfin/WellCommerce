@@ -10,6 +10,7 @@ WellCommerce\Bundle\OrderBundle\Entity\OrderModifier:
     embedded:
         modifierDetails:
             class: WellCommerce\Bundle\OrderBundle\Entity\OrderModifierDetails
+            columnPrefix: modifier_details_
     fields:
         netValue:
             type: decimal

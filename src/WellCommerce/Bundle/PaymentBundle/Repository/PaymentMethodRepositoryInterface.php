@@ -24,7 +24,7 @@ interface PaymentMethodRepositoryInterface extends RepositoryInterface
     /**
      * Returns default shipping method
      *
-     * @return null|\WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod
+     * @return null|\WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface
      */
     public function getDefaultPaymentMethod();
 }

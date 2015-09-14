@@ -25,7 +25,7 @@ use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\HierarchyTrait;
  * @ORM\Table(name="payment_method")
  * @ORM\Entity(repositoryClass="WellCommerce\Bundle\PaymentBundle\Repository\PaymentMethodRepository")
  */
-class PaymentMethod
+class PaymentMethod implements PaymentMethodInterface
 {
     use ORMBehaviors\Translatable\Translatable;
     use ORMBehaviors\Timestampable\Timestampable;

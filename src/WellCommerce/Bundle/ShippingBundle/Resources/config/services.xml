@@ -12,6 +12,8 @@
             <argument type="service" id="shipping_method.repository"/>
             <argument type="service" id="shipping_method.datagrid"/>
             <argument type="service" id="shipping_method.form_builder"/>
+            <argument type="service" id="shipping_method.factory"/>
+            <argument type="service" id="shipping_method.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -26,6 +28,12 @@
 
         <service id="shipping_method.repository" class="WellCommerce\Bundle\ShippingBundle\Repository\ShippingMethodRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument>WellCommerceShippingBundle:ShippingMethod</argument>
+        </service>
+
+        <service id="shipping_method.factory" class="WellCommerce\Bundle\ShippingBundle\Factory\ShippingMethodFactory" />
+
+        <service id="shipping_method.event_dispatcher" class="WellCommerce\Bundle\ShippingBundle\EventDispatcher\ShippingMethodEventDispatcher">
+            <argument type="service" id="event_dispatcher"/>
         </service>
 
         <service id="shipping_method_cost.repository" class="WellCommerce\Bundle\ShippingBundle\Repository\ShippingMethodCostRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
@@ -44,6 +52,7 @@
         <service id="shipping_method.dataset.admin" class="WellCommerce\Bundle\ShippingBundle\DataSet\Admin\ShippingMethodDataSet">
             <argument key="identifier">shipping_method</argument>
             <argument type="service" id="shipping_method.dataset.loader.admin"/>
+            <argument type="service" id="shipping_method.event_dispatcher"/>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
@@ -63,6 +72,7 @@
         <service id="shipping_method.dataset.front" class="WellCommerce\Bundle\ShippingBundle\DataSet\Front\ShippingMethodDataSet">
             <argument key="identifier">shipping_method</argument>
             <argument type="service" id="shipping_method.dataset.loader.front"/>
+            <argument type="service" id="shipping_method.event_dispatcher"/>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
@@ -73,6 +83,7 @@
         <service id="shipping_method.datagrid" class="WellCommerce\Bundle\ShippingBundle\DataGrid\ShippingMethodDataGrid">
             <argument key="identifier">shipping_method</argument>
             <argument type="service" id="shipping_method.dataset.admin"/>
+            <argument type="service" id="shipping_method.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -81,6 +92,7 @@
         <service id="shipping_method.form_builder" class="WellCommerce\Bundle\ShippingBundle\Form\ShippingMethodFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
+            <argument type="service" id="shipping_method.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

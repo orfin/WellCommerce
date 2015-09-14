@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\ProductBundle\Exception;
 
 /**
- * Class OutOfStockException
+ * Class ProductNotFoundException
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */

@@ -26,7 +26,7 @@ WellCommerce\Bundle\ClientBundle\Entity\ClientGroup:
             targetEntity: WellCommerce\Bundle\ClientBundle\Entity\Client
             cascade: {  }
             fetch: LAZY
-            mappedBy: group
+            mappedBy: clientGroup
             inversedBy: null
             orphanRemoval: false
             orderBy: null

@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\CoreBundle\EventDispatcher;
 
 use Symfony\Component\EventDispatcher\Event;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface as BaseEventDispatcher;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface as BaseEventDispatcherInterface;
 use WellCommerce\Bundle\CoreBundle\Event\ResourceEvent;
 use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
@@ -27,24 +27,17 @@ use WellCommerce\Bundle\FormBundle\FormBuilderInterface;
  */
 abstract class AbstractEventDispatcher implements EventDispatcherInterface
 {
-    const PRE_RESOURCE_UPDATE_EVENT  = 'pre_update';
-    const POST_RESOURCE_UPDATE_EVENT = 'post_update';
-    const PRE_RESOURCE_CREATE_EVENT  = 'pre_create';
-    const POST_RESOURCE_CREATE_EVENT = 'post_create';
-    const PRE_RESOURCE_REMOVE_EVENT  = 'pre_remove';
-    const POST_RESOURCE_REMOVE_EVENT = 'post_remove';
-    const FORM_INIT_EVENT            = 'form_init';
     /**
-     * @var BaseEventDispatcher
+     * @var BaseEventDispatcherInterface
      */
     protected $eventDispatcher;
     
     /**
      * Constructor
      *
-     * @param BaseEventDispatcher $eventDispatcher
+     * @param BaseEventDispatcherInterface $eventDispatcher
      */
-    public function __construct(BaseEventDispatcher $eventDispatcher)
+    public function __construct(BaseEventDispatcherInterface $eventDispatcher)
     {
         $this->eventDispatcher = $eventDispatcher;
     }
@@ -54,7 +47,7 @@ abstract class AbstractEventDispatcher implements EventDispatcherInterface
      */
     public function dispatchOnPreCreateResource($resource)
     {
-        $this->dispatchResourceEvent($resource, self::PRE_RESOURCE_CREATE_EVENT);
+        $this->dispatchResourceEvent($resource, EventDispatcherInterface::PRE_RESOURCE_CREATE_EVENT);
     }
     
     /**
@@ -62,7 +55,7 @@ abstract class AbstractEventDispatcher implements EventDispatcherInterface
      */
     public function dispatchOnPostCreateResource($resource)
     {
-        $this->dispatchResourceEvent($resource, self::POST_RESOURCE_CREATE_EVENT);
+        $this->dispatchResourceEvent($resource, EventDispatcherInterface::POST_RESOURCE_CREATE_EVENT);
     }
     
     /**
@@ -70,7 +63,7 @@ abstract class AbstractEventDispatcher implements EventDispatcherInterface
      */
     public function dispatchOnPreUpdateResource($resource)
     {
-        $this->dispatchResourceEvent($resource, self::PRE_RESOURCE_UPDATE_EVENT);
+        $this->dispatchResourceEvent($resource, EventDispatcherInterface::PRE_RESOURCE_UPDATE_EVENT);
     }
     
     /**
@@ -78,7 +71,7 @@ abstract class AbstractEventDispatcher implements EventDispatcherInterface
      */
     public function dispatchOnPostUpdateResource($resource)
     {
-        $this->dispatchResourceEvent($resource, self::POST_RESOURCE_UPDATE_EVENT);
+        $this->dispatchResourceEvent($resource, EventDispatcherInterface::POST_RESOURCE_UPDATE_EVENT);
     }
     
     /**
@@ -86,7 +79,7 @@ abstract class AbstractEventDispatcher implements EventDispatcherInterface
      */
     public function dispatchOnPreRemoveResource($resource)
     {
-        $this->dispatchResourceEvent($resource, self::PRE_RESOURCE_REMOVE_EVENT);
+        $this->dispatchResourceEvent($resource, EventDispatcherInterface::PRE_RESOURCE_REMOVE_EVENT);
     }
     
     /**
@@ -94,7 +87,7 @@ abstract class AbstractEventDispatcher implements EventDispatcherInterface
      */
     public function dispatchOnPostRemoveResource($resource)
     {
-        $this->dispatchResourceEvent($resource, self::POST_RESOURCE_REMOVE_EVENT);
+        $this->dispatchResourceEvent($resource, EventDispatcherInterface::POST_RESOURCE_REMOVE_EVENT);
     }
     
     /**
@@ -102,7 +95,7 @@ abstract class AbstractEventDispatcher implements EventDispatcherInterface
      */
     public function dispatchOnFormInitEvent(FormBuilderInterface $builder, FormInterface $form)
     {
-        $this->dispatchFormEvent($builder, $form, self::FORM_INIT_EVENT);
+        $this->dispatchFormEvent($builder, $form, EventDispatcherInterface::FORM_INIT_EVENT);
     }
     
     /**

@@ -116,6 +116,7 @@
         <service id="page.form_builder" class="WellCommerce\Bundle\CmsBundle\Form\Admin\PageFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
+            <argument type="service" id="page.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

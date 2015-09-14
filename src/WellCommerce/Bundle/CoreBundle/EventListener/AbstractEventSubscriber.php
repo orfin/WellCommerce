@@ -13,69 +13,15 @@
 namespace WellCommerce\Bundle\CoreBundle\EventListener;
 
 use Symfony\Component\Config\FileLocator;
-use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\PropertyAccess\PropertyAccess;
-use WellCommerce\Bundle\AdminBundle\Event\AdminMenuEvent;
-use WellCommerce\Bundle\AdminBundle\MenuBuilder\XmlLoader;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
 
 /**
  * Class AbstractEventSubscriber
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractEventSubscriber extends ContainerAware implements EventSubscriberInterface
+abstract class AbstractEventSubscriber extends AbstractContainerAware implements EventSubscriberInterface
 {
-    /**
-     * Returns translator service
-     *
-     * @return \Symfony\Bundle\FrameworkBundle\Translation\Translator
-     */
-    protected function getTranslator()
-    {
-        return $this->container->get('translator');
-    }
 
-    /**
-     * Returns router service
-     *
-     * @return \Symfony\Component\Routing\RouterInterface
-     */
-    protected function getRouter()
-    {
-        return $this->container->get('router');
-    }
-
-    /**
-     * Returns Doctrine helper
-     *
-     * @return \WellCommerce\Bundle\CoreBundle\Helper\Doctrine\DoctrineHelper
-     */
-    protected function getDoctrineHelper()
-    {
-        return $this->container->get('doctrine_helper');
-    }
-
-    /**
-     * Returns property accessor instance
-     *
-     * @return \Symfony\Component\PropertyAccess\PropertyAccessor
-     */
-    protected function getPropertyAccessor()
-    {
-        return PropertyAccess::createPropertyAccessor();
-    }
-
-    /**
-     * Loads admin menu structure for in all subscribers
-     *
-     * @param AdminMenuEvent $event
-     */
-    public function onAdminMenuInitEvent(AdminMenuEvent $event)
-    {
-        $reflection = new \ReflectionClass($this);
-        $directory  = dirname($reflection->getFileName());
-        $loader     = new XmlLoader($event->getBuilder(), new FileLocator($directory.'/../Resources/config'));
-        $loader->load('admin_menu.xml');
-    }
 }

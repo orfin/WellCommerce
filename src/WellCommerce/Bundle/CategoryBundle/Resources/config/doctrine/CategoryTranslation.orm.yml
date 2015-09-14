@@ -13,8 +13,10 @@ WellCommerce\Bundle\CategoryBundle\Entity\CategoryTranslation:
         shortDescription:
             type: text
             column: short_description
+            nullable: true
         description:
             type: text
+            nullable: true
         slug:
             type: string
             length: 255

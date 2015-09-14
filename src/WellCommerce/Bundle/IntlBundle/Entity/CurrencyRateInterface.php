@@ -25,24 +25,24 @@ interface CurrencyRateInterface
     public function getId();
 
     /**
-     * @return CurrencyInterface
+     * @return string
      */
     public function getCurrencyFrom();
 
     /**
-     * @param CurrencyInterface $currencyFrom
+     * @param string $currencyFrom
      */
-    public function setCurrencyFrom(CurrencyInterface $currencyFrom);
+    public function setCurrencyFrom($currencyFrom);
 
     /**
-     * @return CurrencyInterface
+     * @return string
      */
     public function getCurrencyTo();
 
     /**
-     * @param CurrencyInterface $currencyTo
+     * @param string $currencyTo
      */
-    public function setCurrencyTo(CurrencyInterface $currencyTo);
+    public function setCurrencyTo($currencyTo);
 
     /**
      * @return float

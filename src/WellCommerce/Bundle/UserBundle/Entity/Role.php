@@ -12,68 +12,88 @@
 
 namespace WellCommerce\Bundle\UserBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\Role\RoleInterface;
+use Doctrine\Common\Collections\Collection;
 
 /**
- * @ORM\Table(name="roles")
- * @ORM\Entity()
+ * Class Role
+ *
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class Role implements RoleInterface
 {
     /**
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id()
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @var int
      */
     protected $id;
 
     /**
-     * @ORM\Column(name="name", type="string", length=30)
+     * @var string
      */
     protected $name;
 
     /**
-     * @ORM\Column(name="role", type="string", length=20, unique=true)
+     * @var string|null
      */
     protected $role;
 
     /**
-     * @ORM\ManyToMany(targetEntity="User", mappedBy="roles")
+     * @var Collection
      */
     protected $users;
 
-    public function __construct()
+    /**
+     * {@inheritdoc}
+     */
+    public function getId()
     {
-        $this->users = new ArrayCollection();
+        return $this->id;
     }
 
     /**
-     * @see RoleInterface
+     * {@inheritdoc}
      */
     public function getRole()
     {
         return $this->role;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setRole($role)
     {
         $this->role = $role;
     }
 
-    public function getId()
-    {
-        return $this->id;
-    }
-
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return $this->name;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setUsers(Collection $users)
+    {
+        $this->users = $users;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getUsers()
+    {
+        return $this->users;
     }
 }

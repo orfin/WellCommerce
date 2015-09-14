@@ -4,12 +4,12 @@ WellCommerce\Bundle\CoreBundle\Entity\Address:
         firstName:
             type: string
             length: 255
-            nullable: false
+            nullable: true
             column: first_name
         lastName:
             type: string
             length: 255
-            nullable: false
+            nullable: true
             column: last_name
         street:
             type: string

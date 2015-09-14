@@ -12,12 +12,12 @@
 
 namespace WellCommerce\Bundle\CartBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\AddressInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\ContactDetailsAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
-use WellCommerce\Bundle\MultiStoreBundle\Entity\MultiStoreAwareInterface;
+use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopAwareInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodAwareInterface;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodAwareInterface;
 
@@ -27,7 +27,7 @@ use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodAwareInterface;
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface CartInterface extends
-    MultiStoreAwareInterface,
+    ShopAwareInterface,
     PaymentMethodAwareInterface,
     ShippingMethodAwareInterface,
     ClientAwareInterface,
@@ -50,14 +50,14 @@ interface CartInterface extends
     public function setSessionId($sessionId);
 
     /**
-     * @param CartProduct $cartProduct
+     * @param CartProductInterface $cartProduct
      */
-    public function addProduct(CartProduct $cartProduct);
+    public function addProduct(CartProductInterface $cartProduct);
 
     /**
      * @param CartProduct $cartProduct
      */
-    public function removeProduct(CartProduct $cartProduct);
+    public function removeProduct(CartProductInterface $cartProduct);
 
     /**
      * @return CartTotals
@@ -70,14 +70,14 @@ interface CartInterface extends
     public function setTotals(CartTotalsInterface $cartTotals);
 
     /**
-     * @return \WellCommerce\Bundle\CartBundle\Entity\CartProductInterface[]
+     * @return Collection
      */
     public function getProducts();
 
     /**
-     * @param ArrayCollection $products
+     * @param Collection $products
      */
-    public function setProducts(ArrayCollection $products);
+    public function setProducts(Collection $products);
 
     /**
      * @return AddressInterface

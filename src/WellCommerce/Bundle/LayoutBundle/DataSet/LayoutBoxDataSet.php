@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\LayoutBundle\DataSet;
 
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
-use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
 use WellCommerce\Bundle\DataSetBundle\Configurator\DataSetConfiguratorInterface;
 
 /**
@@ -21,7 +20,7 @@ use WellCommerce\Bundle\DataSetBundle\Configurator\DataSetConfiguratorInterface;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class LayoutBoxDataSet extends AbstractDataSet implements DataSetInterface
+class LayoutBoxDataSet extends AbstractDataSet
 {
     /**
      * {@inheritdoc}

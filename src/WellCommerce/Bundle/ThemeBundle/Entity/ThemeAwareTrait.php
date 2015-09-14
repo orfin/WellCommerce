@@ -10,33 +10,33 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\TaxBundle\Entity;
+namespace WellCommerce\Bundle\ThemeBundle\Entity;
 
 /**
- * Class TaxTrait
+ * Class ThemeAwareTrait
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-trait TaxTrait
+trait ThemeAwareTrait
 {
     /**
-     * @var TaxInterface
+     * @var ThemeInterface
      */
-    protected $tax;
+    protected $theme;
 
     /**
-     * @return TaxInterface
+     * @return ThemeInterface
      */
-    public function getTax()
+    public function getTheme()
     {
-        return $this->tax;
+        return $this->theme;
     }
 
     /**
-     * @param TaxInterface $tax
+     * @param ThemeInterface $theme
      */
-    public function setTax(TaxInterface $tax)
+    public function setTheme(ThemeInterface $theme)
     {
-        $this->tax = $tax;
+        $this->theme = $theme;
     }
 }

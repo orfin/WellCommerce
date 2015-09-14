@@ -38,22 +38,11 @@ class Producer implements ProducerInterface
     protected $id;
 
     /**
-     * @var Collection
+     * @var Collection|\WellCommerce\Bundle\DelivererBundle\Entity\DelivererInterface[]
      */
     protected $deliverers;
 
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->deliverers = new ArrayCollection();
-        $this->shops      = new ArrayCollection();
-    }
-
-    /**
-     * Get id.
-     *
      * @return integer
      */
     public function getId()
@@ -62,24 +51,23 @@ class Producer implements ProducerInterface
     }
 
     /**
-     * Returns all available deliverers for producer
-     *
-     * @return ArrayCollection
+     * @return Collection|\WellCommerce\Bundle\DelivererBundle\Entity\DelivererInterface[]
      */
     public function getDeliverers()
     {
         return $this->deliverers;
     }
 
+    /**
+     * @param Collection $collection
+     */
     public function setDeliverers(Collection $collection)
     {
         $this->deliverers = $collection;
     }
 
     /**
-     * Adds new deliverer to producer
-     *
-     * @param Deliverer $deliverer
+     * @param DelivererInterface $deliverer
      */
     public function addDeliverer(DelivererInterface $deliverer)
     {

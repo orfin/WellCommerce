@@ -11,66 +11,56 @@
  */
 namespace WellCommerce\Bundle\CartBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
-use WellCommerce\Bundle\ClientBundle\Entity\ClientTrait;
+use Doctrine\Common\Collections\Collection;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientAwareTrait;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\Timestampable\TimestampableTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\AddressInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\ContactDetailsTrait;
-use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopTrait;
+use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopAwareTrait;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodTrait;
-use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodTrait;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodAwareTrait;
 
 /**
  * Class Cart
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @ORM\Table(name="cart")
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\CartBundle\Repository\CartRepository")
  */
 class Cart implements CartInterface
 {
     use TimestampableTrait;
-    use ShopTrait;
-    use ShippingMethodTrait;
+    use ShopAwareTrait;
+    use ShippingMethodAwareTrait;
     use PaymentMethodTrait;
-    use ClientTrait;
+    use ClientAwareTrait;
     use ContactDetailsTrait;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
     /**
-     * @var ArrayCollection
-     *
-     * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\CartBundle\Entity\CartProduct", mappedBy="cart", cascade={"persist"})
+     * @var Collection
      */
     protected $products;
 
     /**
-     * @ORM\Column(name="session_id", type="string", nullable=false)
+     * @var string
      */
     protected $sessionId;
 
     /**
-     * @ORM\Embedded(class = "WellCommerce\Bundle\CartBundle\Entity\CartTotals", columnPrefix = "total_")
+     * @var CartTotals
      */
     protected $totals;
 
     /**
-     * @ORM\Embedded(class = "WellCommerce\Bundle\CoreBundle\Entity\Address", columnPrefix = "billing_address_")
+     * @var AddressInterface
      */
     protected $billingAddress;
 
     /**
-     * @ORM\Embedded(class = "WellCommerce\Bundle\CoreBundle\Entity\Address", columnPrefix = "shipping_address_")
+     * @var AddressInterface
      */
     protected $shippingAddress;
     
@@ -101,7 +91,7 @@ class Cart implements CartInterface
     /**
      * {@inheritdoc}
      */
-    public function addProduct(CartProduct $cartProduct)
+    public function addProduct(CartProductInterface $cartProduct)
     {
         $this->products->add($cartProduct);
     }
@@ -109,7 +99,7 @@ class Cart implements CartInterface
     /**
      * {@inheritdoc}
      */
-    public function removeProduct(CartProduct $cartProduct)
+    public function removeProduct(CartProductInterface $cartProduct)
     {
         $this->products->removeElement($cartProduct);
     }
@@ -141,7 +131,7 @@ class Cart implements CartInterface
     /**
      * {@inheritdoc}
      */
-    public function setProducts(ArrayCollection $products)
+    public function setProducts(Collection $products)
     {
         $this->products = $products;
     }

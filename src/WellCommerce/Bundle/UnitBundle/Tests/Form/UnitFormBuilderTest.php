@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\UnitBundle\Tests\Form;
 
-use WellCommerce\Bundle\UnitBundle\Entity\Unit;
 use WellCommerce\Bundle\CoreBundle\Test\Form\AbstractFormBuilderTestCase;
 
 /**
@@ -22,13 +21,13 @@ use WellCommerce\Bundle\CoreBundle\Test\Form\AbstractFormBuilderTestCase;
  */
 class UnitFormBuilderTest extends AbstractFormBuilderTestCase
 {
-    protected function get()
+    protected function getFormBuilderService()
     {
         return $this->container->get('unit.form_builder');
     }
 
-    protected function getSampleFormModelData()
+    protected function getFactoryService()
     {
-        return new Unit();
+        return $this->container->get('unit.factory');
     }
 }

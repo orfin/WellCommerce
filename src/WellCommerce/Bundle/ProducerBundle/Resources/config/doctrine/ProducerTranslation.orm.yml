@@ -8,17 +8,17 @@ WellCommerce\Bundle\ProducerBundle\Entity\ProducerTranslation:
         name:
             type: string
             length: 255
-            nullable: false
         shortDescription:
             type: text
             column: short_description
+            nullable: true
         description:
             type: text
+            nullable: true
         slug:
             type: string
             length: 255
             unique: true
-            nullable: false
     oneToOne:
         route:
             targetEntity: WellCommerce\Bundle\ProducerBundle\Entity\ProducerRoute

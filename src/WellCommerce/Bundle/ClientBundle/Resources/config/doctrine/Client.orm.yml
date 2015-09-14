@@ -5,88 +5,55 @@ WellCommerce\Bundle\ClientBundle\Entity\Client:
     id:
         id:
             type: integer
-            scale: 0
-            length: null
-            unique: false
-            nullable: false
-            precision: 0
-            id: true
             generator:
-                strategy: IDENTITY
+                strategy: AUTO
     fields:
         discount:
             type: decimal
             scale: 4
-            length: null
-            unique: false
-            nullable: true
+            nullable: false
             precision: 15
         firstName:
             type: string
-            scale: 0
             length: 255
-            unique: false
             nullable: false
-            precision: 0
             column: first_name
         lastName:
             type: string
-            scale: 0
             length: 255
-            unique: false
             nullable: false
-            precision: 0
             column: last_name
         password:
             type: string
-            scale: 0
             length: 64
-            unique: false
             nullable: false
-            precision: 0
         email:
             type: string
-            scale: 0
             length: 60
             unique: true
             nullable: false
-            precision: 0
         username:
             type: string
-            scale: 0
             length: 60
             unique: true
             nullable: false
-            precision: 0
         phone:
             type: string
-            scale: 0
             length: 60
-            unique: true
-            nullable: true
-            precision: 0
+            unique: false
+            nullable: false
         salt:
             type: string
-            scale: 0
             length: 40
             unique: false
             nullable: false
-            precision: 0
         conditionsAccepted:
             type: boolean
-            scale: 0
-            length: null
-            unique: false
             nullable: false
-            precision: 0
             column: conditions_accepted
         newsletterAccepted:
             type: boolean
-            scale: 0
-            length: null
-            unique: false
             nullable: false
-            precision: 0
             column: newsletter_accepted
     oneToMany:
         addresses:
@@ -96,19 +63,14 @@ WellCommerce\Bundle\ClientBundle\Entity\Client:
                 - persist
             fetch: LAZY
             mappedBy: client
-            inversedBy: null
             orphanRemoval: true
-            orderBy: null
     manyToOne:
-        group:
+        clientGroup:
             targetEntity: WellCommerce\Bundle\ClientBundle\Entity\ClientGroup
-            cascade: {  }
             fetch: LAZY
-            mappedBy: null
             inversedBy: clients
             joinColumns:
                 client_group_id:
                     referencedColumnName: id
                     onDelete: 'SET NULL'
             orphanRemoval: false
-    lifecycleCallbacks: {  }

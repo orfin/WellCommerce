@@ -14,14 +14,13 @@ namespace WellCommerce\Bundle\ProducerBundle\DataSet\Admin;
 
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Bundle\DataSetBundle\Configurator\DataSetConfiguratorInterface;
-use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
 
 /**
  * Class ProducerDataSet
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProducerDataSet extends AbstractDataSet implements DataSetInterface
+class ProducerDataSet extends AbstractDataSet
 {
     /**
      * {@inheritdoc}

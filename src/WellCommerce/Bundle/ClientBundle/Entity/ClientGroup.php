@@ -11,51 +11,45 @@
  */
 namespace WellCommerce\Bundle\ClientBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Doctrine\Common\Collections\Collection;
+use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
+use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
+use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
+use WellCommerce\Bundle\CmsBundle\Entity\PageInterface;
 
 /**
- * ClientGroup
+ * Class ClientGroup
  *
- * @ORM\Table(name="client_group")
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\ClientBundle\Repository\ClientGroupRepository")
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class ClientGroup
 {
-    use ORMBehaviors\Translatable\Translatable;
-    use ORMBehaviors\Timestampable\Timestampable;
-    use ORMBehaviors\Blameable\Blameable;
+    use Translatable;
+    use Timestampable;
+    use Blameable;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @var int
      */
     protected $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="discount", type="decimal", precision=15, scale=4)
+     * @var float
      */
     protected $discount;
 
     /**
-     * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\ClientBundle\Entity\Client", mappedBy="group")
+     * @var Collection
      */
     protected $clients;
 
     /**
-     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\CmsBundle\Entity\Page", mappedBy="clientGroups")
+     * @var Collection
      */
     protected $pages;
 
     /**
-     * Get id.
-     *
-     * @return integer
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -63,9 +57,7 @@ class ClientGroup
     }
 
     /**
-     * Get discount.
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getDiscount()
     {
@@ -73,17 +65,23 @@ class ClientGroup
     }
 
     /**
-     * Set discount.
-     *
-     * @param string $discount
+     * {@inheritdoc}
      */
     public function setDiscount($discount)
     {
-        $this->discount = $discount;
+        $this->discount = (float)$discount;
     }
 
     /**
-     * @return mixed
+     * {@inheritdoc}
+     */
+    public function setClients(Collection $clients)
+    {
+        $this->clients = $clients;
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function getClients()
     {
@@ -91,10 +89,35 @@ class ClientGroup
     }
 
     /**
-     * @return mixed
+     * {@inheritdoc}
+     */
+    public function addClient(ClientInterface $client)
+    {
+        $this->clients[] = $client;
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function getPages()
     {
         return $this->pages;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPages(Collection $pages)
+    {
+        $this->pages = $pages;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addPage(PageInterface $page)
+    {
+        $this->pages[] = $page;
+    }
 }
+

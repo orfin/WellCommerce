@@ -22,13 +22,13 @@ use WellCommerce\Bundle\CoreBundle\Test\Form\AbstractFormBuilderTestCase;
  */
 class AvailabilityFormBuilderTest extends AbstractFormBuilderTestCase
 {
-    protected function get()
+    protected function getFormBuilderService()
     {
         return $this->container->get('availability.form_builder');
     }
 
-    protected function getSampleFormModelData()
+    protected function getFactoryService()
     {
-        return new Availability();
+        return $this->container->get('availability.factory');
     }
 }

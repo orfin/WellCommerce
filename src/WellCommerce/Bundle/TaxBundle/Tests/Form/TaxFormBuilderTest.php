@@ -22,13 +22,13 @@ use WellCommerce\Bundle\CoreBundle\Test\Form\AbstractFormBuilderTestCase;
  */
 class TaxFormBuilderTest extends AbstractFormBuilderTestCase
 {
-    protected function get()
+    protected function getFormBuilderService()
     {
         return $this->container->get('tax.form_builder');
     }
 
-    protected function getSampleFormModelData()
+    protected function getFactoryService()
     {
-        return new Tax();
+        return $this->container->get('tax.factory');
     }
 }

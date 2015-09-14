@@ -21,7 +21,7 @@ use WellCommerce\Bundle\CoreBundle\Test\DataGrid\AbstractDataGridTestCase;
  */
 class AvailabilityDataGridTest extends AbstractDataGridTestCase
 {
-    protected function get()
+    protected function getDataGrid()
     {
         return $this->container->get('availability.datagrid')->getInstance();
     }

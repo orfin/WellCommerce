@@ -33,7 +33,7 @@ class ClientRepository extends AbstractEntityRepository implements ClientReposit
     {
         $queryBuilder = $this->getQueryBuilder();
         $queryBuilder->groupBy('client.id');
-        $queryBuilder->leftJoin('client.group', 'client_group');
+        $queryBuilder->leftJoin('client.clientGroup', 'client_group');
         $queryBuilder->leftJoin('client_group.translations', 'client_group_translation');
 
         return $queryBuilder;

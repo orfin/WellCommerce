@@ -25,7 +25,7 @@ abstract class AbstractDataGridTestCase extends AbstractTestCase
     /**
      * @return null|\WellCommerce\Bundle\DataGridBundle\DataGridInterface
      */
-    protected function get()
+    protected function getDataGrid()
     {
         return null;
     }
@@ -40,7 +40,7 @@ abstract class AbstractDataGridTestCase extends AbstractTestCase
 
     public function testDatagridServiceIsCreated()
     {
-        $datagrid = $this->get();
+        $datagrid = $this->getDataGrid();
 
         if (null !== $datagrid) {
             $this->assertInstanceOf('WellCommerce\Bundle\DataGridBundle\DataGridInterface', $datagrid);
@@ -49,7 +49,7 @@ abstract class AbstractDataGridTestCase extends AbstractTestCase
 
     public function testDatagridColumnsCollectionIsConfigurable()
     {
-        $datagrid = $this->get();
+        $datagrid = $this->getDataGrid();
 
         if (null !== $datagrid) {
             $columns       = $datagrid->getColumns();
@@ -70,7 +70,7 @@ abstract class AbstractDataGridTestCase extends AbstractTestCase
 
     public function testDatagridHasRequiredColumns()
     {
-        $datagrid = $this->get();
+        $datagrid = $this->getDataGrid();
 
         if (null !== $datagrid) {
             $columns         = $datagrid->getColumns();

@@ -5,21 +5,10 @@ WellCommerce\Bundle\DelivererBundle\Entity\Deliverer:
     id:
         id:
             type: integer
-            scale: 0
-            length: null
-            unique: false
-            nullable: false
-            precision: 0
-            id: true
             generator:
-                strategy: IDENTITY
+                strategy: AUTO
     manyToMany:
         producers:
             targetEntity: WellCommerce\Bundle\ProducerBundle\Entity\Producer
-            cascade: {  }
             fetch: LAZY
             mappedBy: deliverers
-            inversedBy: null
-            joinTable: {  }
-            orderBy: null
-    lifecycleCallbacks: {  }

@@ -147,5 +147,10 @@
             <argument type="collection" key="requirements" />
             <tag name="route.generator" />
         </service>
+
+        <service id="product.request_param_converter" class="WellCommerce\Bundle\ProductBundle\Request\ParamConverter\ProductParamConverter">
+            <argument type="service" id="product.repository" />
+            <tag name="request.param_converter" converter="product" priority="10"/>
+        </service>
     </services>
 </container>

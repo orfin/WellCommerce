@@ -1,6 +1,6 @@
 WellCommerce\Bundle\IntlBundle\Entity\Locale:
     type: entity
-    table: Locale
+    table: locale
     repositoryClass: WellCommerce\Bundle\IntlBundle\Repository\LocaleRepository
     id:
         id:

@@ -12,27 +12,14 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Purger;
 
-use WellCommerce\Bundle\CoreBundle\Helper\Doctrine\DoctrineHelperInterface;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
 
 /**
  * Class AbstractPurger
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractPurger
+abstract class AbstractPurger extends AbstractContainerAware
 {
-    /**
-     * @var DoctrineHelperInterface
-     */
-    protected $helper;
-
-    /**
-     * Constructor
-     *
-     * @param DoctrineHelperInterface $helper
-     */
-    public function __construct(DoctrineHelperInterface $helper)
-    {
-        $this->helper = $helper;
-    }
+    abstract public function purge();
 }

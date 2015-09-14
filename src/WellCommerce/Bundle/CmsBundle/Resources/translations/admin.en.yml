@@ -1,6 +1,8 @@
 page:
     heading:
         index: CMS pages
+        add: Add CMS page
+        edit: Edit CMS page
     label:
         id: ID
         name: Name

@@ -63,7 +63,7 @@ class CurrencyRate implements CurrencyRateInterface
     /**
      * {@inheritdoc}
      */
-    public function setCurrencyFrom(CurrencyInterface $currencyFrom)
+    public function setCurrencyFrom($currencyFrom)
     {
         $this->currencyFrom = $currencyFrom;
     }
@@ -79,7 +79,7 @@ class CurrencyRate implements CurrencyRateInterface
     /**
      * {@inheritdoc}
      */
-    public function setCurrencyTo(CurrencyInterface $currencyTo)
+    public function setCurrencyTo($currencyTo)
     {
         $this->currencyTo = $currencyTo;
     }

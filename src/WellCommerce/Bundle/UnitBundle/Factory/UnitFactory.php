@@ -20,14 +20,15 @@ use WellCommerce\Bundle\UnitBundle\Entity\Unit;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class UnitFactory extends AbstractFactory
+class UnitFactory extends AbstractFactory implements UnitFactoryInterface
 {
     /**
-     * @return \WellCommerce\Bundle\UnitBundle\Entity\UnitInterface
+     * {@inheritdoc}
      */
     public function create()
     {
         $unit = new Unit();
+        $unit->setCreatedAt(new \DateTime());
 
         return $unit;
     }

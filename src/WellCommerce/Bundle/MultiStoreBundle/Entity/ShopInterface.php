@@ -14,13 +14,14 @@ namespace WellCommerce\Bundle\MultiStoreBundle\Entity;
 
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
+use WellCommerce\Bundle\ThemeBundle\Entity\ThemeAwareInterface;
 
 /**
  * Interface ShopInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ShopInterface extends TimestampableInterface, BlameableInterface
+interface ShopInterface extends TimestampableInterface, BlameableInterface, ThemeAwareInterface
 {
     
 }

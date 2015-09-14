@@ -11,48 +11,37 @@
  */
 namespace WellCommerce\Bundle\ClientBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use WellCommerce\Bundle\CoreBundle\Entity\AddressInterface;
 
 /**
- * Client
+ * Class ClientAddress
  *
- * @ORM\Table(name="client_address")
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\ClientBundle\Repository\ClientAddressRepository")
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientAddress implements ClientAwareInterface
+class ClientAddress implements ClientAddressInterface
 {
     use Timestampable;
     use Blameable;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @var int
      */
     protected $id;
 
     /**
      * @var ClientInterface
-     *
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\ClientBundle\Entity\Client", inversedBy="addresses")
-     * @ORM\JoinColumn(name="client_id", referencedColumnName="id", nullable=false)
      */
     protected $client;
 
     /**
      * @var AddressInterface
-     *
-     * @ORM\Embedded(class = "WellCommerce\Bundle\CoreBundle\Entity\Address", columnPrefix = "address_")
      */
     protected $address;
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -60,7 +49,7 @@ class ClientAddress implements ClientAwareInterface
     }
 
     /**
-     * @return ClientInterface
+     * {@inheritdoc}
      */
     public function getClient()
     {
@@ -68,7 +57,7 @@ class ClientAddress implements ClientAwareInterface
     }
 
     /**
-     * @param ClientInterface $client
+     * {@inheritdoc}
      */
     public function setClient(ClientInterface $client)
     {
@@ -76,7 +65,7 @@ class ClientAddress implements ClientAwareInterface
     }
 
     /**
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getAddress()
     {
@@ -84,7 +73,7 @@ class ClientAddress implements ClientAwareInterface
     }
 
     /**
-     * @param mixed $address
+     * {@inheritdoc}
      */
     public function setAddress(AddressInterface $address)
     {

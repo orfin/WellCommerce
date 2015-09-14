@@ -12,17 +12,20 @@
 
 namespace WellCommerce\Bundle\ShippingBundle\Entity;
 
-
-trait ShippingMethodTrait
+/**
+ * Class ShippingMethodAwareTrait
+ *
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
+ */
+trait ShippingMethodAwareTrait
 {
     /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod")
-     * @ORM\JoinColumn(name="shipping_method_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     * @var ShippingMethodInterface
      */
     protected $shippingMethod;
 
     /**
-     * @return null|ShippingMethod
+     * @return ShippingMethodInterface
      */
     public function getShippingMethod()
     {
@@ -30,9 +33,9 @@ trait ShippingMethodTrait
     }
 
     /**
-     * @param mixed $shippingMethod
+     * @param ShippingMethodInterface
      */
-    public function setShippingMethod(ShippingMethod $shippingMethod = null)
+    public function setShippingMethod(ShippingMethodInterface $shippingMethod)
     {
         $this->shippingMethod = $shippingMethod;
     }

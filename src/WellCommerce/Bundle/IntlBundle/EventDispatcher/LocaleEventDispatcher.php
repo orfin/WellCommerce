@@ -19,7 +19,7 @@ use WellCommerce\Bundle\CoreBundle\EventDispatcher\AbstractEventDispatcher;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LocaleEventDispatcher extends AbstractEventDispatcher
+class LocaleEventDispatcher extends AbstractEventDispatcher implements LocaleEventDispatcherInterface
 {
     
 }

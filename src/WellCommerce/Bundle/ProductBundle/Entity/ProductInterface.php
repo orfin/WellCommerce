@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\ProductBundle\Entity;
 
+use WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
@@ -24,7 +25,17 @@ use WellCommerce\Bundle\UnitBundle\Entity\UnitAwareInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ProductInterface extends TranslatableInterface, TimestampableInterface, BlameableInterface, ShopCollectionAwareInterface, ProducerAwareInterface, UnitAwareInterface
+interface ProductInterface extends
+    TranslatableInterface,
+    TimestampableInterface,
+    BlameableInterface,
+    ShopCollectionAwareInterface,
+    ProducerAwareInterface,
+    UnitAwareInterface,
+    AvailabilityAwareInterface
 {
-    
+    /**
+     * @return int
+     */
+    public function getId();
 }

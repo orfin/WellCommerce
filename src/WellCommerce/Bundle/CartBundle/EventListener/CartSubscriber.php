@@ -11,11 +11,15 @@
  */
 namespace WellCommerce\Bundle\CartBundle\EventListener;
 
+use Doctrine\Common\Util\Debug;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use WellCommerce\Bundle\CartBundle\Entity\Cart;
+use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
 use WellCommerce\Bundle\CartBundle\Event\CartEvent;
-use WellCommerce\Bundle\CartBundle\Manager\Front\CartManager;
+use WellCommerce\Bundle\CartBundle\EventDispatcher\CartEventDispatcher;
+use WellCommerce\Bundle\CartBundle\Manager\Front\CartManagerInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\Client;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\Shop;
@@ -27,103 +31,41 @@ use WellCommerce\Bundle\MultiStoreBundle\Entity\Shop;
  */
 class CartSubscriber extends AbstractEventSubscriber
 {
+    /**
+     * @var CartManagerInterface
+     */
+    protected $cartManager;
+
+    /**
+     * Constructor
+     *
+     * @param CartManagerInterface $cartManager
+     */
+    public function __construct(CartManagerInterface $cartManager)
+    {
+        $this->cartManager = $cartManager;
+    }
+
     public static function getSubscribedEvents()
     {
         return [
-//            CartManager::CART_CHANGED_EVENT => ['onCartChangedEvent', 0],
-//            KernelEvents::CONTROLLER        => ['onKernelController', -256],
+            CartEventDispatcher::POST_CART_CHANGE_EVENT => ['onCartChangedEvent', 0],
+            KernelEvents::CONTROLLER                    => ['onKernelController', 0],
         ];
     }
 
     public function onKernelController(FilterControllerEvent $event)
     {
-        if ($event->isMasterRequest()) {
-            $requestHelper       = $this->container->get('request_helper');
-            $shop                = $this->container->get('shop.context.front')->getCurrentScope();
-            $sessionId           = $requestHelper->getSessionId();
-            $client              = $requestHelper->getClient();
-            $cartProvider        = $this->container->get('cart.provider');
-            $cart                = $this->getCart($shop, $client, $sessionId);
-            $cartSummaryProvider = $this->container->get('cart_summary.provider');
-            $cartQueryBuilder    = $this->container->get('cart_product.dataset.query_builder.front');
-
-            $cartProvider->setCurrentCart($cart);
-            $cartSummaryProvider->setCart($cart);
-            $cartQueryBuilder->setCart($cart);
-        }
-    }
-
-    /**
-     * Returns current cart from repository and creates a new one in needed
-     *
-     * @param Shop   $shop
-     * @param Client $client
-     * @param string $sessionId
-     *
-     * @return null|object|Cart
-     */
-    protected function getCart(Shop $shop, Client $client, $sessionId)
-    {
-        $doctrineHelper = $this->container->get('doctrine_helper');
-        $entityManager  = $doctrineHelper->getEntityManager();
-        $cartRepository = $this->container->get('cart.repository');
-
-        $cart = $cartRepository->getCart($client, $sessionId, $shop);
-        if (null === $cart) {
-            $cart = $this->initCart($shop, $client, $sessionId);
-            $entityManager->persist($cart);
-        } else {
-            $cart->setClient($client);
-            $cart->setSessionId($sessionId);
-        }
-
-        $entityManager->flush();
-
-        return $cart;
-    }
-
-    /**
-     * Initializes cart
-     *
-     * @param Shop   $shop
-     * @param Client $client
-     * @param string $sessionId
-     *
-     * @return Cart
-     */
-    protected function initCart(Shop $shop, Client $client, $sessionId)
-    {
-        $cart = new Cart();
-        $cart->setShop($shop);
-        $cart->setClient($client);
-        $cart->setSessionId($sessionId);
-        $cart->setPaymentMethod($this->getPaymentMethodRepository()->getDefaultPaymentMethod());
-        $cart->setShippingMethod($this->getShippingMethodRepository()->getDefaultShippingMethod());
-
-        return $cart;
-    }
-
-    /**
-     * @return \WellCommerce\Bundle\PaymentBundle\Repository\PaymentMethodRepositoryInterface
-     */
-    private function getPaymentMethodRepository()
-    {
-        return $this->container->get('payment_method.repository');
-    }
-
-    /**
-     * @return \WellCommerce\Bundle\ShippingBundle\Repository\ShippingMethodRepositoryInterface
-     */
-    private function getShippingMethodRepository()
-    {
-        return $this->container->get('shipping_method.repository');
+        $this->cartManager->initializeCart();
     }
 
     public function onCartChangedEvent(CartEvent $cartEvent)
     {
-        $cart   = $cartEvent->getCart();
-        $helper = $this->container->get('cart.helper');
+        $cart       = $cartEvent->getCart();
+        $products   = $cart->getProducts();
+        $cartTotals = $cart->getTotals();
 
-        return $helper->recalculateCartTotals($cart);
+        $products->map(function (CartProductInterface $cartProduct) use ($cartTotals) {
+        });
     }
 }

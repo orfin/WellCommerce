@@ -17,7 +17,7 @@ use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupInterface;
-use WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityInterface;
+use WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityTrait;
 use WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\EnableableTrait;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\PhotoTrait;
@@ -37,7 +37,7 @@ use WellCommerce\Bundle\UnitBundle\Entity\UnitAwareTrait;
  */
 class Product implements ProductInterface
 {
-    use Translatable, Timestampable, Blameable, PhotoTrait, EnableableTrait, HierarchyAwareTrait, ShopCollectionAwareTrait, ProducerAwareTrait, UnitAwareTrait;
+    use Translatable, Timestampable, Blameable, PhotoTrait, EnableableTrait, HierarchyAwareTrait, ShopCollectionAwareTrait, ProducerAwareTrait, UnitAwareTrait, AvailabilityTrait;
 
     /**
      * @var integer
@@ -48,11 +48,6 @@ class Product implements ProductInterface
      * @var string
      */
     protected $sku;
-
-    /**
-     * @var AvailabilityInterface
-     */
-    protected $availability;
 
     /**
      * @var Collection
@@ -178,22 +173,6 @@ class Product implements ProductInterface
     public function setTrackStock($trackStock)
     {
         $this->trackStock = $trackStock;
-    }
-
-    /**
-     * @return AvailabilityInterface
-     */
-    public function getAvailability()
-    {
-        return $this->availability;
-    }
-
-    /**
-     * @param AvailabilityInterface $availability
-     */
-    public function setAvailability(AvailabilityInterface $availability = null)
-    {
-        $this->availability = $availability;
     }
 
     /**

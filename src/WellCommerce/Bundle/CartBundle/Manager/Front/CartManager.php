@@ -12,100 +12,78 @@
 
 namespace WellCommerce\Bundle\CartBundle\Manager\Front;
 
-use WellCommerce\Bundle\CartBundle\Entity\Cart;
-use WellCommerce\Bundle\CartBundle\Entity\CartProduct;
-use WellCommerce\Bundle\CartBundle\Event\CartEvent;
-use WellCommerce\Bundle\CartBundle\Exception\ChangeCartItemQuantityException;
-use WellCommerce\Bundle\CartBundle\Exception\DeleteCartItemException;
-use WellCommerce\Bundle\CartBundle\Helper\CartHelperInterface;
+use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
+use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
+use WellCommerce\Bundle\CartBundle\EventDispatcher\CartEventDispatcherInterface;
+use WellCommerce\Bundle\CartBundle\Factory\CartFactoryInterface;
+use WellCommerce\Bundle\CartBundle\Factory\CartProductFactoryInterface;
 use WellCommerce\Bundle\CartBundle\Repository\CartProductRepositoryInterface;
 use WellCommerce\Bundle\CartBundle\Repository\CartRepositoryInterface;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
-use WellCommerce\Bundle\ProductBundle\Entity\Product;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute;
-use WellCommerce\Bundle\ProductBundle\Repository\ProductAttributeRepositoryInterface;
-use WellCommerce\Bundle\ProductBundle\Repository\ProductRepositoryInterface;
+use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 
 /**
  * Class CartManager
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class CartManager extends AbstractFrontManager
+class CartManager extends AbstractFrontManager implements CartManagerInterface
 {
-    const CART_CHANGED_EVENT = 'cart_changed';
-
-    /**
-     * @var ProductRepositoryInterface
-     */
-    protected $productRepository;
-
-    /**
-     * @var ProductAttributeRepositoryInterface
-     */
-    protected $productAttributeRepository;
-
-    /**
-     * @var CartHelperInterface
-     */
-    protected $cartHelper;
-
     /**
      * @var CartProductRepositoryInterface
      */
     protected $cartProductRepository;
 
     /**
+     * @var CartProductFactoryInterface
+     */
+    protected $cartProductFactory;
+
+    /**
      * Constructor
      *
-     * @param CartRepositoryInterface             $cartRepository
-     * @param ProductRepositoryInterface          $productRepository
-     * @param ProductAttributeRepositoryInterface $productAttributeRepository
-     * @param CartHelperInterface                 $cartHelper
-     * @param CartProductRepositoryInterface      $cartProductRepository
+     * @param CartRepositoryInterface        $cartRepository
+     * @param CartFactoryInterface           $cartFactory
+     * @param CartEventDispatcherInterface   $eventDispatcher
+     * @param CartProductRepositoryInterface $cartProductRepository
+     * @param CartProductFactoryInterface    $cartProductFactory
      */
     public function __construct(
         CartRepositoryInterface $cartRepository,
-        ProductRepositoryInterface $productRepository,
-        ProductAttributeRepositoryInterface $productAttributeRepository,
-        CartHelperInterface $cartHelper,
-        CartProductRepositoryInterface $cartProductRepository
+        CartFactoryInterface $cartFactory,
+        CartEventDispatcherInterface $eventDispatcher,
+        CartProductRepositoryInterface $cartProductRepository,
+        CartProductFactoryInterface $cartProductFactory
     ) {
-        parent::__construct($cartRepository);
-        $this->productAttributeRepository = $productAttributeRepository;
-        $this->productRepository          = $productRepository;
-        $this->cartHelper                 = $cartHelper;
-        $this->cartProductRepository      = $cartProductRepository;
+        parent::__construct($cartRepository, $cartFactory, $eventDispatcher);
+        $this->cartProductRepository = $cartProductRepository;
+        $this->cartProductFactory    = $cartProductFactory;
     }
 
     /**
-     * Adds new product to cart
-     *
-     * @param Product          $product
-     * @param ProductAttribute $attribute
-     * @param int              $quantity
-     *
-     * @return bool
+     * {@inheritdoc}
      */
-    public function addItem(Product $product, ProductAttribute $attribute = null, $quantity)
+    public function addProductToCart(ProductInterface $product, ProductAttributeInterface $attribute = null, $quantity = 1)
     {
-        $entityManager = $this->getDoctrineHelper()->getEntityManager();
-        $currentCart   = $this->getCartProvider()->getCurrentCart();
-        $cartProduct   = $this->cartProductRepository->findProductInCart($currentCart, $product, $attribute);
+        $entityManager = $this->getEntityManager();
+        $cart          = $this->getCartProvider()->getCurrentCart();
+        $cartProduct   = $this->cartProductRepository->findProductInCart($cart, $product, $attribute);
 
         if (null === $cartProduct) {
-            $cartProduct = new CartProduct();
-            $cartProduct->setCart($currentCart);
+            $cartProduct = $this->cartProductFactory->create();
+            $cartProduct->setCart($cart);
             $cartProduct->setProduct($product);
             $cartProduct->setAttribute($attribute);
             $cartProduct->setQuantity($quantity);
-            $currentCart->addProduct($cartProduct);
+
+            $cart->addProduct($cartProduct);
             $entityManager->persist($cartProduct);
         } else {
-            $cartProduct->setQuantity($cartProduct->getQuantity() + (int)$quantity);
+            $cartProduct->increaseQuantity($quantity);
         }
-
-        $this->dispatchPostUpdateEvent($currentCart);
 
         $entityManager->flush();
 
@@ -113,84 +91,34 @@ class CartManager extends AbstractFrontManager
     }
 
     /**
-     * Broadcasts cart update event
-     *
-     * @param Cart $cart
+     * {@inheritdoc}
      */
-    private function dispatchPostUpdateEvent(Cart $cart)
+    public function deleteCartProduct(CartProductInterface $cartProduct)
     {
-        $event = new CartEvent($cart);
-        $this->getEventDispatcher()->dispatch(self::CART_CHANGED_EVENT, $event);
-    }
-
-    /**
-     * Changes item quantity on cart
-     *
-     * @param int $id
-     * @param int $qty
-     *
-     * @return bool
-     */
-    public function changeItemQuantity($id, $qty)
-    {
-        $entityManager = $this->getDoctrineHelper()->getEntityManager();
+        $entityManager = $this->getEntityManager();
         $currentCart   = $this->getCartProvider()->getCurrentCart();
-        $cartProduct   = $this->getCartProductById($currentCart, $id);
-
-        if (null === $cartProduct) {
-            throw new ChangeCartItemQuantityException($id);
-        }
-
-        if ($qty < 1) {
-            return $this->deleteItem($id);
-        }
-
-        $cartProduct->setQuantity($qty);
-
-        $this->dispatchPostUpdateEvent($currentCart);
-
-        $entityManager->flush();
-
-        return true;
-    }
-
-    /**
-     * Returns the cart product entity
-     *
-     * @param Cart $cart
-     * @param int  $id
-     *
-     * @return null|\WellCommerce\Bundle\CartBundle\Entity\CartProduct
-     */
-    public function getCartProductById(Cart $cart, $id)
-    {
-        return $this->cartProductRepository->findOneBy([
-            'cart' => $cart,
-            'id'   => $id
-        ]);
-    }
-
-    /**
-     * Deletes the item from cart
-     *
-     * @param int $id
-     *
-     * @return bool
-     */
-    public function deleteItem($id)
-    {
-        $entityManager = $this->getDoctrineHelper()->getEntityManager();
-        $currentCart   = $this->getCartProvider()->getCurrentCart();
-        $cartProduct   = $this->getCartProductById($currentCart, $id);
-
-        if (null === $cartProduct) {
-            throw new DeleteCartItemException($id);
-        }
 
         $currentCart->removeProduct($cartProduct);
         $entityManager->remove($cartProduct);
 
-        $this->dispatchPostUpdateEvent($currentCart);
+        $entityManager->flush();
+
+        return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function changeCartProductQuantity(CartProductInterface $cartProduct, $qty)
+    {
+        $entityManager = $this->getDoctrineHelper()->getEntityManager();
+        $qty           = (int)$qty;
+
+        if ($qty < 1) {
+            return $this->deleteCartProduct($cartProduct);
+        }
+
+        $cartProduct->setQuantity($qty);
 
         $entityManager->flush();
 
@@ -198,42 +126,81 @@ class CartManager extends AbstractFrontManager
     }
 
     /**
-     * Clears the entire cart. New empty cart will be initialized during next kernel request.
-     *
-     * @param Cart $cart
+     * {@inheritdoc}
      */
-    public function abandonCart(Cart $cart)
+    public function abandonCart(CartInterface $cart)
     {
-        $em = $this->getDoctrineHelper()->getEntityManager();
-        $em->remove($cart);
-        $em->flush();
+        $entityManager = $this->getEntityManager();
+        $entityManager->remove($cart);
+        $entityManager->flush();
     }
 
     /**
-     * Finds enabled product by id
-     *
-     * @return null|Product
+     * {@inheritdoc}
      */
-    public function findProduct()
+    public function initializeCart()
     {
-        $id      = (int)$this->getRequestHelper()->getRequestAttribute('id');
-        $product = $this->productRepository->findEnabledProductById($id);
+        $requestHelper = $this->getRequestHelper();
+        $sessionId     = $requestHelper->getSessionId();
+        $client        = $requestHelper->getClient();
+        $shop          = $this->getShopContext()->getCurrentScope();
+        $cartProvider  = $this->getCartProvider();
+        $cart          = $this->getCart($shop, $client, $sessionId);
 
-        return $product;
+        $cartProvider->setCurrentCart($cart);
     }
 
     /**
-     * Finds product attribute
+     * Returns an existent cart or creates a new one if needed
      *
-     * @param Product $product
+     * @param ShopInterface        $shop
+     * @param ClientInterface|null $client
+     * @param string               $sessionId
      *
-     * @return null|\WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute
+     * @return CartInterface
      */
-    public function findProductAttribute(Product $product)
+    protected function getCart(ShopInterface $shop, ClientInterface $client = null, $sessionId)
     {
-        $id        = (int)$this->getRequestHelper()->getRequestAttribute('attribute');
-        $attribute = $this->productAttributeRepository->findProductAttribute($id, $product);
+        /** @var $cartRepository CartRepositoryInterface */
+        $cartRepository = $this->getRepository();
+        $cart           = $cartRepository->findCart($client, $sessionId, $shop);
+        $entityManager  = $this->getDoctrineHelper()->getEntityManager();
 
-        return $attribute;
+        if (null === $cart) {
+            $cart = $this->createCart($shop, $client, $sessionId);
+            $entityManager->persist($cart);
+        }
+
+        $cart->setSessionId($sessionId);
+
+        if (null !== $client) {
+            $cart->setClient($client);
+        }
+
+        $entityManager->flush();
+
+        return $cart;
+    }
+
+    /**
+     * Creates cart using factory
+     *
+     * @param ShopInterface        $shop
+     * @param ClientInterface|null $client
+     * @param string               $sessionId
+     *
+     * @return CartInterface
+     */
+    protected function createCart(ShopInterface $shop, ClientInterface $client = null, $sessionId)
+    {
+        $cart = $this->getFactory()->create();
+        $cart->setShop($shop);
+        $cart->setSessionId($sessionId);
+
+        if (null !== $client) {
+            $cart->setClient($client);
+        }
+
+        return $cart;
     }
 }

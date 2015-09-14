@@ -10,22 +10,19 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\MultiStoreBundle\Entity;
+namespace WellCommerce\Bundle\AvailabilityBundle\Factory;
+
+use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
 
 /**
- * Interface MultiStoreAwareInterface
+ * Interface AvailabilityFactoryInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface MultiStoreAwareInterface
+interface AvailabilityFactoryInterface extends FactoryInterface
 {
     /**
-     * @param Shop $shop
+     * @return \WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityInterface
      */
-    public function setShop(Shop $shop);
-
-    /**
-     * @return Shop
-     */
-    public function getShop();
+    public function create();
 }

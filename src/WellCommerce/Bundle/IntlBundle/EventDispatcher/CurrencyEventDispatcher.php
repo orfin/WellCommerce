@@ -19,7 +19,7 @@ use WellCommerce\Bundle\CoreBundle\EventDispatcher\AbstractEventDispatcher;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CurrencyEventDispatcher extends AbstractEventDispatcher
+class CurrencyEventDispatcher extends AbstractEventDispatcher implements CurrencyEventDispatcherInterface
 {
     
 }

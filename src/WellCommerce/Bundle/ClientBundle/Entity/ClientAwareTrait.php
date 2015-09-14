@@ -13,17 +13,14 @@
 namespace WellCommerce\Bundle\ClientBundle\Entity;
 
 /**
- * Class ClientTrait
+ * Class ClientAwareTrait
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-trait ClientTrait
+trait ClientAwareTrait
 {
     /**
-     * @var Client
-     *
-     * @ORM\OneToOne(targetEntity="WellCommerce\Bundle\ClientBundle\Entity\Client")
-     * @ORM\JoinColumn(name="client_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
+     * @var ClientInterface
      */
     protected $client;
 
@@ -36,7 +33,7 @@ trait ClientTrait
     }
 
     /**
-     * @param null|Client $client
+     * @param ClientInterface $client
      */
     public function setClient(ClientInterface $client)
     {

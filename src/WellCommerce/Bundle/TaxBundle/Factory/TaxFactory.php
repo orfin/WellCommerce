@@ -20,15 +20,16 @@ use WellCommerce\Bundle\TaxBundle\Entity\Tax;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class TaxFactory extends AbstractFactory
+class TaxFactory extends AbstractFactory implements TaxFactoryInterface
 {
     /**
-     * @return \WellCommerce\Bundle\TaxBundle\Entity\TaxInterface
+     * {@inheritdoc}
      */
     public function create()
     {
         $tax = new Tax();
         $tax->setValue(0);
+        $tax->setCreatedAt(new \DateTime());
 
         return $tax;
     }

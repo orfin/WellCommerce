@@ -22,27 +22,30 @@ use WellCommerce\Bundle\CoreBundle\Test\AbstractTestCase;
 abstract class AbstractFormBuilderTestCase extends AbstractTestCase
 {
     /**
-     * @return null|\WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface
+     * @return null|\WellCommerce\Bundle\FormBundle\FormBuilderInterface
      */
-    protected function get()
+    protected function getFormBuilderService()
     {
         return null;
     }
 
-    abstract protected function getSampleFormModelData();
+    /**
+     * @return \WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface
+     */
+    abstract protected function getFactoryService();
 
     public function testFormBuilderServiceIsCreated()
     {
-        $formBuilder = $this->get();
+        $formBuilder = $this->getFormBuilderService();
 
         if (null !== $formBuilder) {
-            $this->assertInstanceOf('WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface', $formBuilder);
+            $this->assertInstanceOf('WellCommerce\Bundle\FormBundle\FormBuilderInterface', $formBuilder);
         }
     }
 
     public function testFormIsCreated()
     {
-        $formBuilder = $this->get();
+        $formBuilder = $this->getFormBuilderService();
 
         if (null !== $formBuilder) {
             $form = $formBuilder->createForm([
@@ -55,10 +58,10 @@ abstract class AbstractFormBuilderTestCase extends AbstractTestCase
 
     public function testFormIsAbleToReturnDefaultModelData()
     {
-        $formBuilder = $this->get();
+        $formBuilder = $this->getFormBuilderService();
 
         if (null !== $formBuilder) {
-            $sample = $this->getSampleFormModelData();
+            $sample = $this->getSampleData();
 
             $form = $formBuilder->createForm([
                 'name' => 'test'
@@ -70,10 +73,10 @@ abstract class AbstractFormBuilderTestCase extends AbstractTestCase
 
     public function testFormHasNonEmptyElementsCollection()
     {
-        $formBuilder = $this->get();
+        $formBuilder = $this->getFormBuilderService();
 
         if (null !== $formBuilder) {
-            $sample = $this->getSampleFormModelData();
+            $sample = $this->getSampleData();
 
             $form = $formBuilder->createForm([
                 'name' => 'test'
@@ -81,5 +84,13 @@ abstract class AbstractFormBuilderTestCase extends AbstractTestCase
 
             $this->assertGreaterThan(0, $form->getChildren()->count());
         }
+    }
+
+    /**
+     * @return object
+     */
+    protected function getSampleData()
+    {
+        return $this->getFactoryService()->create();
     }
 }

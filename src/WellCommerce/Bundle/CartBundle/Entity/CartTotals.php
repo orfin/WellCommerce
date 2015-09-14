@@ -17,67 +17,37 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Class CartTotals
  *
- * @ORM\Embeddable
- *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class CartTotals implements CartTotalsInterface
 {
     /**
      * @var float
-     *
-     * @ORM\Column(name="quantity", type="decimal", precision=15, scale=4)
      */
-    protected $quantity;
+    protected $quantity = 0;
 
     /**
      * @var float
-     *
-     * @ORM\Column(name="weight", type="decimal", precision=15, scale=4)
      */
-    protected $weight;
+    protected $weight = 0;
 
     /**
      * @var float
-     *
-     * @ORM\Column(name="net_price", type="decimal", precision=15, scale=4)
      */
-    protected $netPrice;
+    protected $netPrice = 0;
 
     /**
      * @var float
-     *
-     * @ORM\Column(name="gross_price", type="decimal", precision=15, scale=4)
      */
-    protected $grossPrice;
+    protected $grossPrice = 0;
 
     /**
      * @var float
-     *
-     * @ORM\Column(name="tax_amount", type="decimal", precision=15, scale=4)
      */
-    protected $taxAmount;
+    protected $taxAmount = 0;
 
     /**
-     * Constructor
-     *
-     * @param int $quantity
-     * @param int $weight
-     * @param int $netPrice
-     * @param int $grossPrice
-     * @param int $taxAmount
-     */
-    public function __construct($quantity = 0, $weight = 0, $netPrice = 0, $grossPrice = 0, $taxAmount = 0)
-    {
-        $this->quantity   = $quantity;
-        $this->weight     = $weight;
-        $this->netPrice   = $netPrice;
-        $this->grossPrice = $grossPrice;
-        $this->taxAmount  = $taxAmount;
-    }
-
-    /**
-     * @return float
+     * {@inheritdoc}
      */
     public function getQuantity()
     {
@@ -85,7 +55,7 @@ class CartTotals implements CartTotalsInterface
     }
 
     /**
-     * @param float $quantity
+     * {@inheritdoc}
      */
     public function setQuantity($quantity)
     {
@@ -93,7 +63,7 @@ class CartTotals implements CartTotalsInterface
     }
 
     /**
-     * @return float
+     * {@inheritdoc}
      */
     public function getWeight()
     {
@@ -101,7 +71,7 @@ class CartTotals implements CartTotalsInterface
     }
 
     /**
-     * @param float $weight
+     * {@inheritdoc}
      */
     public function setWeight($weight)
     {
@@ -109,7 +79,7 @@ class CartTotals implements CartTotalsInterface
     }
 
     /**
-     * @return float
+     * {@inheritdoc}
      */
     public function getNetPrice()
     {
@@ -117,7 +87,7 @@ class CartTotals implements CartTotalsInterface
     }
 
     /**
-     * @param float $netPrice
+     * {@inheritdoc}
      */
     public function setNetPrice($netPrice)
     {
@@ -125,7 +95,7 @@ class CartTotals implements CartTotalsInterface
     }
 
     /**
-     * @return float
+     * {@inheritdoc}
      */
     public function getGrossPrice()
     {
@@ -133,7 +103,7 @@ class CartTotals implements CartTotalsInterface
     }
 
     /**
-     * @param float $grossPrice
+     * {@inheritdoc}
      */
     public function setGrossPrice($grossPrice)
     {
@@ -141,7 +111,7 @@ class CartTotals implements CartTotalsInterface
     }
 
     /**
-     * @return float
+     * {@inheritdoc}
      */
     public function getTaxAmount()
     {
@@ -149,7 +119,7 @@ class CartTotals implements CartTotalsInterface
     }
 
     /**
-     * @param float $taxAmount
+     * {@inheritdoc}
      */
     public function setTaxAmount($taxAmount)
     {

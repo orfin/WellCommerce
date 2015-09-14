@@ -13,9 +13,8 @@
 namespace WellCommerce\Bundle\MediaBundle\DataSet;
 
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
-use WellCommerce\Bundle\DataSetBundle\Configurator\DataSetConfiguratorInterface;
-use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Image\ImageHelperInterface;
+use WellCommerce\Bundle\DataSetBundle\Configurator\DataSetConfiguratorInterface;
 use WellCommerce\Bundle\MediaBundle\DataSet\Transformer\ImagePathTransformer;
 
 /**
@@ -23,7 +22,7 @@ use WellCommerce\Bundle\MediaBundle\DataSet\Transformer\ImagePathTransformer;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class MediaDataSet extends AbstractDataSet implements DataSetInterface
+class MediaDataSet extends AbstractDataSet
 {
     /**
      * @var ImageHelperInterface

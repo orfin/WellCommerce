@@ -22,7 +22,7 @@ use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\PhotoTrait;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Company
+class Company implements CompanyInterface
 {
     use Timestampable, Blameable, AddressTrait, PhotoTrait;
     

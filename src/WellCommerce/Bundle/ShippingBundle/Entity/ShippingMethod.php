@@ -12,53 +12,34 @@
 
 namespace WellCommerce\Bundle\ShippingBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Doctrine\Common\Collections\Collection;
+use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
+use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
+use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\EnableableTrait;
-use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\HierarchyTrait;
-use WellCommerce\Bundle\TaxBundle\Entity\Tax;
+use WellCommerce\Bundle\CoreBundle\Entity\HierarchyAwareTrait;
+use WellCommerce\Bundle\IntlBundle\Entity\CurrencyInterface;
+use WellCommerce\Bundle\TaxBundle\Entity\TaxAwareTrait;
+use WellCommerce\Bundle\TaxBundle\Entity\TaxInterface;
 
 /**
  * Class ShippingMethod
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @ORM\Table(name="shipping_method")
- * @ORM\HasLifecycleCallbacks
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\ShippingBundle\Repository\ShippingMethodRepository")
  */
-class ShippingMethod
+class ShippingMethod implements ShippingMethodInterface
 {
-    use ORMBehaviors\Translatable\Translatable;
-    use ORMBehaviors\Timestampable\Timestampable;
-    use ORMBehaviors\Blameable\Blameable;
-    use EnableableTrait;
-    use HierarchyTrait;
+    use Translatable, Timestampable, Blameable, EnableableTrait, HierarchyAwareTrait, TaxAwareTrait;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="calculator", type="string", length=64, nullable=true)
      */
     protected $calculator;
-
-    /**
-     * @var Tax
-     *
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\TaxBundle\Entity\Tax")
-     * @ORM\JoinColumn(name="tax_id", referencedColumnName="id", onDelete="SET NULL")
-     */
-    protected $tax;
 
     /**
      * @ORM\Column(name="currency", type="string", nullable=false, length=16)
@@ -69,14 +50,6 @@ class ShippingMethod
      * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCost", mappedBy="shippingMethod", cascade={"persist"}, orphanRemoval=true)
      */
     protected $costs;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->costs = new ArrayCollection();
-    }
 
     /**
      * Get id.
@@ -109,23 +82,7 @@ class ShippingMethod
     }
 
     /**
-     * @return Tax
-     */
-    public function getTax()
-    {
-        return $this->tax;
-    }
-
-    /**
-     * @param Tax $tax
-     */
-    public function setTax(Tax $tax)
-    {
-        $this->tax = $tax;
-    }
-
-    /**
-     * @return ArrayCollection|\WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCost[]
+     * @return Collection
      */
     public function getCosts()
     {
@@ -133,15 +90,15 @@ class ShippingMethod
     }
 
     /**
-     * @param ArrayCollection $costs
+     * @param Collection $costs
      */
-    public function setCosts(ArrayCollection $costs)
+    public function setCosts(Collection $costs)
     {
         $this->costs = $costs;
     }
 
     /**
-     * @return string
+     * @return CurrencyInterface
      */
     public function getCurrency()
     {
@@ -149,9 +106,9 @@ class ShippingMethod
     }
 
     /**
-     * @param string $currency
+     * @param CurrencyInterface $currency
      */
-    public function setCurrency($currency)
+    public function setCurrency(CurrencyInterface $currency)
     {
         $this->currency = $currency;
     }

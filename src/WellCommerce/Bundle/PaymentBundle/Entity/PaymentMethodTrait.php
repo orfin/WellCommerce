@@ -21,9 +21,6 @@ trait PaymentMethodTrait
 {
     /**
      * @var PaymentMethodInterface
-     *
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod")
-     * @ORM\JoinColumn(name="payment_method_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     protected $paymentMethod;
 

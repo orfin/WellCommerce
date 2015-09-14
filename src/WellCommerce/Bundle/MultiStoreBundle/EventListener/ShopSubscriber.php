@@ -29,7 +29,7 @@ class ShopSubscriber extends AbstractEventSubscriber
     public static function getSubscribedEvents()
     {
         return [
-            KernelEvents::CONTROLLER => ['onKernelController', -256],
+            KernelEvents::CONTROLLER => [['onKernelController', 0]],
             'shop.post_update'       => 'onShopListModified',
             'shop.post_create'       => 'onShopListModified',
             'shop.post_remove'       => 'onShopListModified',
@@ -52,10 +52,6 @@ class ShopSubscriber extends AbstractEventSubscriber
     public function onKernelController(FilterControllerEvent $event)
     {
         $request = $event->getRequest();
-
-        if ($event->getRequestType() !== HttpKernelInterface::MASTER_REQUEST || !$request->hasSession()) {
-            return;
-        }
 
         if (!$this->container->get('session')->has('admin/shops')) {
             $shops = $this->container->get('shop.collection')->getSelect();

@@ -20,14 +20,15 @@ use WellCommerce\Bundle\IntlBundle\Entity\Currency;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CurrencyFactory extends AbstractFactory
+class CurrencyFactory extends AbstractFactory implements CurrencyFactoryInterface
 {
     /**
-     * @return \WellCommerce\Bundle\IntlBundle\Entity\CurrencyInterface
+     * {@inheritdoc}
      */
     public function create()
     {
         $currency = new Currency();
+        $currency->setCode('');
 
         return $currency;
     }

@@ -5,54 +5,34 @@ WellCommerce\Bundle\CartBundle\Entity\CartProduct:
     id:
         id:
             type: integer
-            scale: 0
-            length: null
-            unique: false
-            nullable: false
-            precision: 0
-            id: true
             generator:
-                strategy: IDENTITY
+                strategy: AUTO
     fields:
         quantity:
             type: decimal
             scale: 4
-            length: null
-            unique: false
             nullable: false
             precision: 15
     manyToOne:
         cart:
             targetEntity: WellCommerce\Bundle\CartBundle\Entity\Cart
-            cascade: {  }
             fetch: LAZY
-            mappedBy: null
             inversedBy: products
             joinColumns:
                 cart_id:
                     referencedColumnName: id
                     onDelete: CASCADE
-            orphanRemoval: false
         product:
             targetEntity: WellCommerce\Bundle\ProductBundle\Entity\Product
-            cascade: {  }
             fetch: LAZY
-            mappedBy: null
-            inversedBy: null
             joinColumns:
                 product_id:
                     referencedColumnName: id
                     onDelete: CASCADE
-            orphanRemoval: false
         attribute:
             targetEntity: WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute
-            cascade: {  }
             fetch: LAZY
-            mappedBy: null
-            inversedBy: null
             joinColumns:
                 attribute_id:
                     referencedColumnName: id
                     onDelete: CASCADE
-            orphanRemoval: false
-    lifecycleCallbacks: {  }

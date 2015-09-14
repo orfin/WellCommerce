@@ -22,13 +22,13 @@ use WellCommerce\Bundle\CoreBundle\Test\Form\AbstractFormBuilderTestCase;
  */
 class ContactFormBuilderTest extends AbstractFormBuilderTestCase
 {
-    protected function get()
+    protected function getFormBuilderService()
     {
         return $this->container->get('contact.form_builder');
     }
 
-    protected function getSampleFormModelData()
+    protected function getFactoryService()
     {
-        return new Contact();
+        return $this->container->get('contact.factory');
     }
 }

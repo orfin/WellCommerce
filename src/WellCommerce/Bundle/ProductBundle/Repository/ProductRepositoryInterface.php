@@ -21,12 +21,4 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
  */
 interface ProductRepositoryInterface extends RepositoryInterface
 {
-    /**
-     * Returns product by id which is enabled
-     *
-     * @param int $id
-     *
-     * @return null|\WellCommerce\Bundle\ProductBundle\Entity\Product
-     */
-    public function findEnabledProductById($id);
 }

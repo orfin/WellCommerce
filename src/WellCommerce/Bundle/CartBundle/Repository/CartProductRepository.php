@@ -13,10 +13,10 @@
 namespace WellCommerce\Bundle\CartBundle\Repository;
 
 use Doctrine\ORM\Query\Expr;
-use WellCommerce\Bundle\CartBundle\Entity\Cart;
+use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
-use WellCommerce\Bundle\ProductBundle\Entity\Product;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 
 /**
  * Class CartProductRepository
@@ -43,7 +43,7 @@ class CartProductRepository extends AbstractEntityRepository implements CartProd
     /**
      * {@inheritdoc}
      */
-    public function findProductInCart(Cart $cart, Product $product, ProductAttribute $attribute = null)
+    public function findProductInCart(CartInterface $cart, ProductInterface $product, ProductAttributeInterface $attribute = null)
     {
         return $this->findOneBy([
             'cart'      => $cart,

@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\ClientBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * Interface ClientAddressAwareInterface
@@ -22,17 +23,17 @@ use Doctrine\Common\Collections\ArrayCollection;
 interface ClientAddressAwareInterface
 {
     /**
-     * @return ArrayCollection
+     * @return Collection
      */
     public function getAddresses();
 
     /**
-     * @param ArrayCollection $addresses
+     * @param Collection $addresses
      */
-    public function setAddresses(ArrayCollection $addresses);
+    public function setAddresses(Collection $addresses);
 
     /**
      * @param ClientAddress $address
      */
-    public function addAddress(ClientAddress $address);
+    public function addAddress(ClientAddressInterface $address);
 }

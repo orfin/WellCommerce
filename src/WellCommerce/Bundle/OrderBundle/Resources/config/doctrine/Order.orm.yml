@@ -10,8 +10,10 @@ WellCommerce\Bundle\OrderBundle\Entity\Order:
     embedded:
         billingAddress:
             class: WellCommerce\Bundle\CoreBundle\Entity\Address
+            columnPrefix: billing_address_
         shippingAddress:
             class: WellCommerce\Bundle\CoreBundle\Entity\Address
+            columnPrefix: shipping_address_
     fields:
         sessionId:
             type: string

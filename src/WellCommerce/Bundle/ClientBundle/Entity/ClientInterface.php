@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\ClientBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
@@ -23,7 +24,7 @@ use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ClientInterface extends \Serializable, UserInterface, EquatableInterface, TimestampableInterface, BlameableInterface
+interface ClientInterface extends \Serializable, UserInterface, EquatableInterface, TimestampableInterface, BlameableInterface, ClientGroupAwareInterface
 {
     /**
      * @return int
@@ -48,22 +49,12 @@ interface ClientInterface extends \Serializable, UserInterface, EquatableInterfa
     /**
      * @param ArrayCollection $addresses
      */
-    public function setAddresses(ArrayCollection $addresses);
+    public function setAddresses(Collection $addresses);
 
     /**
      * @param ClientAddress $address
      */
-    public function addAddress(ClientAddress $address);
-
-    /**
-     * @return ClientGroup
-     */
-    public function getGroup();
-
-    /**
-     * @param ClientGroup $clientGroup
-     */
-    public function setGroup(ClientGroup $clientGroup);
+    public function addAddress(ClientAddressInterface $address);
 
     /**
      * @return string

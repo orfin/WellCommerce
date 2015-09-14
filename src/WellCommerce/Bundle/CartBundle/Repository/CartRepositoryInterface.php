@@ -12,9 +12,9 @@
 
 namespace WellCommerce\Bundle\CartBundle\Repository;
 
-use WellCommerce\Bundle\ClientBundle\Entity\Client;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
-use WellCommerce\Bundle\MultiStoreBundle\Entity\Shop;
+use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopInterface;
 
 /**
  * Interface CartRepositoryInterface
@@ -24,33 +24,33 @@ use WellCommerce\Bundle\MultiStoreBundle\Entity\Shop;
 interface CartRepositoryInterface extends RepositoryInterface
 {
     /**
+     * Returns the cart for client or for session identifier
+     *
+     * @param ClientInterface|null $client
+     * @param string               $sessionId
+     * @param ShopInterface        $shop
+     *
+     * @return null|\WellCommerce\Bundle\CartBundle\Entity\CartInterface
+     */
+    public function findCart(ClientInterface $client = null, $sessionId, ShopInterface $shop);
+
+    /**
      * Returns client cart
      *
-     * @param Client $client
-     * @param Shop   $shop
+     * @param ClientInterface $client
+     * @param ShopInterface   $shop
      *
-     * @return null|\WellCommerce\Bundle\CartBundle\Entity\Cart
+     * @return null|\WellCommerce\Bundle\CartBundle\Entity\CartInterface
      */
-    public function getCartForClient(Client $client, Shop $shop);
+    public function getCartForClient(ClientInterface $client, ShopInterface $shop);
 
     /**
      * Returns cart by session identifier
      *
-     * @param string $sessionId
-     * @param Shop   $shop
+     * @param string        $sessionId
+     * @param ShopInterface $shop
      *
-     * @return null|\WellCommerce\Bundle\CartBundle\Entity\Cart
+     * @return null|\WellCommerce\Bundle\CartBundle\Entity\CartInterface
      */
-    public function getCartBySessionId($sessionId, Shop $shop);
-
-    /**
-     * Returns current cart by session identifier or by client
-     *
-     * @param Client $client
-     * @param        $sessionId
-     * @param Shop   $shop
-     *
-     * @return null|\WellCommerce\Bundle\CartBundle\Entity\Cart
-     */
-    public function getCart(Client $client = null, $sessionId, Shop $shop);
+    public function getCartBySessionId($sessionId, ShopInterface $shop);
 }

@@ -17,7 +17,7 @@ namespace WellCommerce\Bundle\CoreBundle\Factory;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractFactory implements FactoryInterface
+abstract class AbstractFactory
 {
     /**
      * {@inheritdoc}

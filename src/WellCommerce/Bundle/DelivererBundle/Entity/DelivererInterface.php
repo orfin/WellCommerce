@@ -12,12 +12,37 @@
 
 namespace WellCommerce\Bundle\DelivererBundle\Entity;
 
+use Doctrine\Common\Collections\Collection;
+use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
+use WellCommerce\Bundle\ProducerBundle\Entity\ProducerInterface;
+
 /**
  * Interface DelivererInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface DelivererInterface
+interface DelivererInterface extends TranslatableInterface, TimestampableInterface, BlameableInterface
 {
-    
+    /**
+     *
+     * @return int
+     */
+    public function getId();
+
+    /**
+     * @return Collection
+     */
+    public function getProducers();
+
+    /**
+     * @param Collection $collection
+     */
+    public function setProducers(Collection $collection);
+
+    /**
+     * @param ProducerInterface $producer
+     */
+    public function addProducer(ProducerInterface $producer);
 }

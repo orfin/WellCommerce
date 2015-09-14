@@ -20,10 +20,10 @@ use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AvailabilityFactory extends AbstractFactory
+class AvailabilityFactory extends AbstractFactory implements AvailabilityFactoryInterface
 {
     /**
-     * @return \WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityInterface
+     * {@inheritdoc}
      */
     public function create()
     {

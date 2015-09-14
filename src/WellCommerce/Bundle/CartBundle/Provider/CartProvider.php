@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\CartBundle\Provider;
 
 use WellCommerce\Bundle\CartBundle\Entity\Cart;
+use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\CoreBundle\Provider\AbstractProvider;
 
 /**
@@ -38,7 +39,7 @@ class CartProvider extends AbstractProvider implements CartProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function setCurrentCart(Cart $cart)
+    public function setCurrentCart(CartInterface $cart)
     {
         $this->cart = $cart;
     }

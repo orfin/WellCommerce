@@ -12,12 +12,49 @@
 
 namespace WellCommerce\Bundle\ThemeBundle\Entity;
 
+use Doctrine\Common\Collections\Collection;
+use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
+
 /**
  * Interface ThemeInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ThemeInterface
+interface ThemeInterface extends TimestampableInterface, BlameableInterface
 {
-    
+    /**
+     * @return int
+     */
+    public function getId();
+
+    /**
+     * @return string
+     */
+    public function getName();
+
+    /**
+     * @param string $name
+     */
+    public function setName($name);
+
+    /**
+     * @return string
+     */
+    public function getFolder();
+
+    /**
+     * @param string $folder
+     */
+    public function setFolder($folder);
+
+    /**
+     * @return Collection|ThemeCssInterface[]
+     */
+    public function getCss();
+
+    /**
+     * @param Collection $css
+     */
+    public function setCss(Collection $css);
 }

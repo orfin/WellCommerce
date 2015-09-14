@@ -16,6 +16,7 @@ use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderStatusInterface;
+use WellCommerce\Bundle\ThemeBundle\Entity\ThemeAwareTrait;
 use WellCommerce\Bundle\ThemeBundle\Entity\ThemeInterface;
 
 /**
@@ -25,7 +26,7 @@ use WellCommerce\Bundle\ThemeBundle\Entity\ThemeInterface;
  */
 class Shop implements ShopInterface
 {
-    use Timestampable, Blameable;
+    use Timestampable, Blameable, ThemeAwareTrait;
 
     /**
      * @var integer
@@ -66,11 +67,6 @@ class Shop implements ShopInterface
      * @var Collection
      */
     protected $pages;
-
-    /**
-     * @var ThemeInterface
-     */
-    protected $theme;
 
     /**
      * @var OrderStatusInterface
@@ -184,22 +180,6 @@ class Shop implements ShopInterface
     public function setUrl($url)
     {
         $this->url = $url;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTheme()
-    {
-        return $this->theme;
-    }
-
-    /**
-     * @param ThemeInterface $theme
-     */
-    public function setTheme(ThemeInterface $theme)
-    {
-        $this->theme = $theme;
     }
 
     /**

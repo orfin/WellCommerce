@@ -12,14 +12,30 @@
 
 namespace WellCommerce\Bundle\CmsBundle\Factory;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\CmsBundle\Entity\Page;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 
-class PageFactory extends AbstractFactory
+/**
+ * Class PageFactory
+ *
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
+ */
+class PageFactory extends AbstractFactory implements PageFactoryInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function create()
     {
         $page = new Page();
+        $page->setHierarchy(0);
+        $page->setCreatedAt(new \DateTime());
+        $page->setClientGroups(new ArrayCollection());
+        $page->setShops(new ArrayCollection());
+        $page->setParent(null);
+        $page->setPublish(true);
+        $page->setRedirectType(1);
 
         return $page;
     }

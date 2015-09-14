@@ -23,6 +23,6 @@ class CartPurger extends AbstractPurger implements PurgerInterface
      */
     public function purge()
     {
-        return $this->helper->truncateTable('WellCommerce\Bundle\CartBundle\Entity\Cart');
+        return $this->getDoctrineHelper()->truncateTable('WellCommerce\Bundle\CartBundle\Entity\Cart');
     }
 }

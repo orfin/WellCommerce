@@ -20,12 +20,12 @@ namespace WellCommerce\Bundle\ShippingBundle\Entity;
 interface ShippingMethodAwareInterface
 {
     /**
-     * @param ShippingMethod $shippingMethod
+     * @param ShippingMethodInterface $shippingMethod
      */
-    public function setShippingMethod(ShippingMethod $shippingMethod);
+    public function setShippingMethod(ShippingMethodInterface $shippingMethod);
 
     /**
-     * @return ShippingMethod
+     * @return ShippingMethodInterface
      */
     public function getShippingMethod();
 }

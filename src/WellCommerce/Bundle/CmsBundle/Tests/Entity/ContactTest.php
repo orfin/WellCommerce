@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CmsBundle\Tests\Entity;
 
+use Doctrine\Common\Util\Debug;
 use WellCommerce\Bundle\CoreBundle\Test\Entity\AbstractEntityTestCase;
 use WellCommerce\Bundle\CmsBundle\Entity\Contact;
 
@@ -46,7 +47,7 @@ class ContactTest extends AbstractEntityTestCase
         $this->assertEquals(2, count($errors));
     }
 
-    public function testValidationFailsIfEnabledIsNull()
+    public function testValidationPassesIfEnabledIsNull()
     {
         $entity = new Contact();
         $entity->setEnabled(null);
@@ -55,6 +56,7 @@ class ContactTest extends AbstractEntityTestCase
         $entity->mergeNewTranslations();
 
         $errors = $this->validator->validate($entity);
-        $this->assertEquals(1, count($errors));
+        $this->assertEquals(0, count($errors));
+        $this->assertFalse($entity->getEnabled());
     }
 }
