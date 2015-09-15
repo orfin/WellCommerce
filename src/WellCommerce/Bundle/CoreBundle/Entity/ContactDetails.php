@@ -12,12 +12,8 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Class ContactDetails
- *
- * @ORM\Embeddable
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
@@ -25,22 +21,16 @@ class ContactDetails
 {
     /**
      * @var string
-     *
-     * @ORM\Column(name="phone", type="string", length=255, nullable=true)
      */
     protected $phone;
     
     /**
      * @var string
-     *
-     * @ORM\Column(name="secondary_phone", type="string", length=255, nullable=true)
      */
     protected $secondaryPhone;
     
     /**
      * @var string
-     *
-     * @ORM\Column(name="email", type="string", length=255, nullable=true)
      */
     protected $email;
 

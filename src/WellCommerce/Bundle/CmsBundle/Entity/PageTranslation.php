@@ -12,18 +12,17 @@
 
 namespace WellCommerce\Bundle\CmsBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Translatable\Translation;
+use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\MetaDataTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\Meta;
 use WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface;
 use WellCommerce\Bundle\RoutingBundle\Entity\Behaviours\RoutableTrait;
 use WellCommerce\Bundle\RoutingBundle\Entity\RoutableSubjectInterface;
 
 /**
- * PageTranslation
+ * Class PageTranslation
  *
- * @ORM\Table(name="page_translation")
- * @ORM\Entity
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class PageTranslation implements RoutableSubjectInterface, LocaleAwareInterface
 {
@@ -32,26 +31,21 @@ class PageTranslation implements RoutableSubjectInterface, LocaleAwareInterface
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255)
      */
     protected $name;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="content", type="text")
      */
     protected $content;
 
     /**
-     * @ORM\OneToOne(targetEntity="WellCommerce\Bundle\CmsBundle\Entity\PageRoute", cascade={"persist","remove"})
-     * @ORM\JoinColumn(name="route_id", referencedColumnName="id", onDelete="CASCADE")
-     **/
+     * @var PageRoute
+     */
     protected $route;
 
     /**
-     * @ORM\Embedded(class = "WellCommerce\Bundle\CoreBundle\Entity\Meta", columnPrefix = "meta_")
+     * @var Meta
      */
     protected $meta;
 

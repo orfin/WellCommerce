@@ -12,75 +12,73 @@
 
 namespace WellCommerce\Bundle\ProductBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\HierarchyTrait;
-use WellCommerce\Bundle\MediaBundle\Entity\Media;
+use WellCommerce\Bundle\MediaBundle\Entity\MediaInterface;
 
 /**
- * ProductPhoto
+ * Class ProductPhoto
  *
- * @ORM\Table(name="product_photo")
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\ProductBundle\Repository\ProductPhotoRepository")
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class ProductPhoto
 {
     use Timestampable;
     use HierarchyTrait;
+    use ProductAwareTrait;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\MediaBundle\Entity\Media", inversedBy="productPhotos")
-     * @ORM\JoinColumn(name="photo_id", referencedColumnName="id", nullable=false)
+     * @var int
+     */
+    protected $id;
+
+    /**
+     * @var MediaInterface
      */
     protected $photo;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\Product", inversedBy="productPhotos")
-     * @ORM\JoinColumn(name="product_id", referencedColumnName="id", nullable=false)
+     * @var bool
      */
-    protected $product;
+    protected $mainPhoto;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * {@inheritdoc}
      */
-    private $id;
-
-    /**
-     * @ORM\Column(name="main_photo", type="boolean", options={"default":0})
-     */
-    private $mainPhoto;
-
     public function getId()
     {
         return $this->id;
     }
 
-    public function setProduct(Product $product)
-    {
-        $this->product = $product;
-    }
-
+    /**
+     * {@inheritdoc}
+     */
     public function getPhoto()
     {
         return $this->photo;
     }
 
-    public function setPhoto(Media $photo)
+    /**
+     * {@inheritdoc}
+     */
+    public function setPhoto(MediaInterface $photo)
     {
         $this->photo = $photo;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getMainPhoto()
     {
         return $this->mainPhoto;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setMainPhoto($mainPhoto)
     {
-        $this->mainPhoto = $mainPhoto;
+        $this->mainPhoto = (bool)$mainPhoto;
     }
 }

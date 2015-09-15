@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\Timestampable\TimestampableTrait;
 use WellCommerce\Bundle\ProductBundle\Entity\Product;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareTrait;
 
 /**
  * Class CartProduct
@@ -18,6 +19,7 @@ use WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute;
 class OrderProduct
 {
     use TimestampableTrait;
+    use ProductAwareTrait;
 
     /**
      * @var integer
@@ -33,12 +35,6 @@ class OrderProduct
      * @ORM\JoinColumn(name="order_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
     protected $order;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\Product")
-     * @ORM\JoinColumn(name="product_id", referencedColumnName="id", nullable=false, onDelete="RESTRICT")
-     */
-    protected $product;
 
     /**
      * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute")
@@ -83,22 +79,6 @@ class OrderProduct
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @return Product
-     */
-    public function getProduct()
-    {
-        return $this->product;
-    }
-
-    /**
-     * @param Product $product
-     */
-    public function setProduct(Product $product)
-    {
-        $this->product = $product;
     }
 
     /**

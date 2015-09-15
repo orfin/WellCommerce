@@ -13,11 +13,11 @@
 namespace WellCommerce\Bundle\AvailabilityBundle\Entity;
 
 /**
- * Class AvailabilityTrait
+ * Class AvailabilityAwareTrait
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-trait AvailabilityTrait
+trait AvailabilityAwareTrait
 {
     /**
      * @var AvailabilityInterface

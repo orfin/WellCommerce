@@ -7,6 +7,7 @@ use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\Timestampable\Timesta
 use WellCommerce\Bundle\ProductBundle\Entity\Product;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareTrait;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 
 /**
@@ -17,6 +18,7 @@ use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 class CartProduct implements CartProductInterface
 {
     use TimestampableTrait;
+    use ProductAwareTrait;
 
     /**
      * @var integer
@@ -49,22 +51,6 @@ class CartProduct implements CartProductInterface
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getProduct()
-    {
-        return $this->product;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setProduct(ProductInterface $product)
-    {
-        $this->product = $product;
     }
 
     /**

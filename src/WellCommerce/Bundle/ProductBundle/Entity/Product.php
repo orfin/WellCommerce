@@ -17,7 +17,7 @@ use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupInterface;
-use WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityTrait;
+use WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityAwareTrait;
 use WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\EnableableTrait;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\PhotoTrait;
@@ -37,7 +37,16 @@ use WellCommerce\Bundle\UnitBundle\Entity\UnitAwareTrait;
  */
 class Product implements ProductInterface
 {
-    use Translatable, Timestampable, Blameable, PhotoTrait, EnableableTrait, HierarchyAwareTrait, ShopCollectionAwareTrait, ProducerAwareTrait, UnitAwareTrait, AvailabilityTrait;
+    use Translatable;
+    use Timestampable;
+    use Blameable;
+    use PhotoTrait;
+    use EnableableTrait;
+    use HierarchyAwareTrait;
+    use ShopCollectionAwareTrait;
+    use ProducerAwareTrait;
+    use UnitAwareTrait;
+    use AvailabilityAwareTrait;
 
     /**
      * @var integer

@@ -24,10 +24,6 @@ use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopCollectionAwareTrait;
  * Class Page
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @ORM\Table(name="page")
- * @ORM\HasLifecycleCallbacks
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\CmsBundle\Repository\PageRepository")
  */
 class Page implements PageInterface
 {
