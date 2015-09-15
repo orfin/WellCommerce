@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\MultiStoreBundle\Factory;
 
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\Company;
 
 /**
@@ -20,11 +21,16 @@ use WellCommerce\Bundle\MultiStoreBundle\Entity\Company;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CompanyFactory extends AbstractFactory
+class CompanyFactory extends AbstractFactory implements FactoryInterface
 {
+    /**
+     * @return \WellCommerce\Bundle\MultiStoreBundle\Entity\CompanyInterface
+     */
     public function create()
     {
         $company = new Company();
+        $company->setName('');
+        $company->setShortName('');
 
         return $company;
     }

@@ -17,7 +17,6 @@ use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderStatusInterface;
 use WellCommerce\Bundle\ThemeBundle\Entity\ThemeAwareTrait;
-use WellCommerce\Bundle\ThemeBundle\Entity\ThemeInterface;
 
 /**
  * Class Shop
@@ -79,7 +78,7 @@ class Shop implements ShopInterface
     protected $defaultCountry;
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -87,7 +86,7 @@ class Shop implements ShopInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getName()
     {
@@ -95,7 +94,7 @@ class Shop implements ShopInterface
     }
 
     /**
-     * @param string $name
+     * {@inheritdoc}
      */
     public function setName($name)
     {
@@ -103,7 +102,7 @@ class Shop implements ShopInterface
     }
 
     /**
-     * @return Collection
+     * {@inheritdoc}
      */
     public function getProducts()
     {
@@ -111,7 +110,7 @@ class Shop implements ShopInterface
     }
 
     /**
-     * @param mixed $products
+     * {@inheritdoc}
      */
     public function setProducts(Collection $products)
     {
@@ -119,7 +118,7 @@ class Shop implements ShopInterface
     }
 
     /**
-     * @return CompanyInterface
+     * {@inheritdoc}
      */
     public function getCompany()
     {
@@ -127,7 +126,7 @@ class Shop implements ShopInterface
     }
 
     /**
-     * @param CompanyInterface $company
+     * {@inheritdoc}
      */
     public function setCompany(CompanyInterface $company)
     {
@@ -135,7 +134,7 @@ class Shop implements ShopInterface
     }
 
     /**
-     * @return Collection
+     * {@inheritdoc}
      */
     public function getCategories()
     {
@@ -143,7 +142,7 @@ class Shop implements ShopInterface
     }
 
     /**
-     * @param Collection $categories
+     * {@inheritdoc}
      */
     public function setCategories(Collection $categories)
     {
@@ -151,7 +150,7 @@ class Shop implements ShopInterface
     }
 
     /**
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getProducers()
     {
@@ -159,7 +158,7 @@ class Shop implements ShopInterface
     }
 
     /**
-     * @param mixed $producers
+     * {@inheritdoc}
      */
     public function setProducers(Collection $producers)
     {
@@ -167,7 +166,7 @@ class Shop implements ShopInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getUrl()
     {
@@ -175,7 +174,7 @@ class Shop implements ShopInterface
     }
 
     /**
-     * @param string $url
+     * {@inheritdoc}
      */
     public function setUrl($url)
     {
@@ -183,7 +182,7 @@ class Shop implements ShopInterface
     }
 
     /**
-     * @return Collection
+     * {@inheritdoc}
      */
     public function getPages()
     {
@@ -191,7 +190,7 @@ class Shop implements ShopInterface
     }
 
     /**
-     * @param Collection $pages
+     * {@inheritdoc}
      */
     public function setPages(Collection $pages)
     {
@@ -199,7 +198,7 @@ class Shop implements ShopInterface
     }
 
     /**
-     * @return OrderStatusInterface
+     * {@inheritdoc}
      */
     public function getDefaultOrderStatus()
     {
@@ -207,7 +206,7 @@ class Shop implements ShopInterface
     }
 
     /**
-     * @param OrderStatusInterface $defaultOrderStatus
+     * {@inheritdoc}
      */
     public function setDefaultOrderStatus(OrderStatusInterface $defaultOrderStatus)
     {
@@ -215,7 +214,7 @@ class Shop implements ShopInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getDefaultCountry()
     {
@@ -223,7 +222,7 @@ class Shop implements ShopInterface
     }
 
     /**
-     * @param string $defaultCountry
+     * {@inheritdoc}
      */
     public function setDefaultCountry($defaultCountry)
     {

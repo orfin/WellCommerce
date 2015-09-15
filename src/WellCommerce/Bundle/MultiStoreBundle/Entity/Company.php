@@ -24,7 +24,10 @@ use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\PhotoTrait;
  */
 class Company implements CompanyInterface
 {
-    use Timestampable, Blameable, AddressTrait, PhotoTrait;
+    use Timestampable;
+    use Blameable;
+    use AddressTrait;
+    use PhotoTrait;
     
     /**
      * @var integer
