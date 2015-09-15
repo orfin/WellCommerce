@@ -37,11 +37,6 @@ class ProductAttribute implements ProductAttributeInterface
     protected $id;
 
     /**
-     * @var Product
-     */
-    protected $product;
-
-    /**
      * @var Collection
      */
     protected $attributeValues;

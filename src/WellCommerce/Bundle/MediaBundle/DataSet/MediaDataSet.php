@@ -25,11 +25,6 @@ use WellCommerce\Bundle\MediaBundle\DataSet\Transformer\ImagePathTransformer;
 class MediaDataSet extends AbstractDataSet
 {
     /**
-     * @var ImageHelperInterface
-     */
-    protected $imageHelper;
-
-    /**
      * {@inheritdoc}
      */
     public function configureOptions(DataSetConfiguratorInterface $configurator)
@@ -44,17 +39,7 @@ class MediaDataSet extends AbstractDataSet
         ]);
 
         $configurator->setTransformers([
-            'preview' => new ImagePathTransformer($this->imageHelper, 'medium'),
+            'preview' => new ImagePathTransformer($this->getImageHelper(), 'medium'),
         ]);
-    }
-
-    /**
-     * Sets image helper
-     *
-     * @param ImageHelperInterface $imageHelper
-     */
-    public function setImageHelper(ImageHelperInterface $imageHelper)
-    {
-        $this->imageHelper = $imageHelper;
     }
 }

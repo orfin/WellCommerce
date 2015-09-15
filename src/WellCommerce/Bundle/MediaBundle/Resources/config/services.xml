@@ -8,6 +8,8 @@
             <argument type="service" id="media.repository"/>
             <argument type="service" id="media.datagrid"/>
             <argument type="service" id="media.form_builder"/>
+            <argument type="service" id="media.factory"/>
+            <argument type="service" id="media.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -24,6 +26,12 @@
             <argument>WellCommerceMediaBundle:Media</argument>
         </service>
 
+        <service id="media.factory" class="WellCommerce\Bundle\MediaBundle\Factory\MediaFactory" />
+
+        <service id="media.event_dispatcher" class="WellCommerce\Bundle\MediaBundle\EventDispatcher\MediaEventDispatcher">
+            <argument type="service" id="event_dispatcher"/>
+        </service>
+
         <service id="media.dataset.query_builder" class="WellCommerce\Bundle\MediaBundle\DataSet\MediaDataSetQueryBuilder" public="false">
             <argument type="service" id="media.repository"/>
         </service>
@@ -36,8 +44,9 @@
         <service id="media.dataset" class="WellCommerce\Bundle\MediaBundle\DataSet\MediaDataSet">
             <argument key="identifier">media</argument>
             <argument type="service" id="media.dataset.loader"/>
-            <call method="setImageHelper">
-                <argument type="service" id="image_helper"/>
+            <argument type="service" id="media.event_dispatcher"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
             </call>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
@@ -45,6 +54,7 @@
         <service id="media.datagrid" class="WellCommerce\Bundle\MediaBundle\DataGrid\MediaDataGrid">
             <argument key="identifier">media</argument>
             <argument type="service" id="media.dataset"/>
+            <argument type="service" id="media.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -53,6 +63,7 @@
         <service id="media.form_builder" class="WellCommerce\Bundle\MediaBundle\Form\MediaFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
+            <argument type="service" id="media.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
