@@ -17,9 +17,15 @@ use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 
 class NewsFactory extends AbstractFactory
 {
+    /**
+     * @return \WellCommerce\Bundle\CmsBundle\Entity\NewsInterface
+     */
     public function create()
     {
         $news = new News();
+        $news->setFeatured(false);
+        $news->setPublish(true);
+        $news->setStartDate(new \DateTime());
 
         return $news;
     }

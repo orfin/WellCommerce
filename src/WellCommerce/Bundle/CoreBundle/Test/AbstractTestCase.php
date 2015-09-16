@@ -72,13 +72,4 @@ abstract class AbstractTestCase extends KernelTestCase
 
         return $client;
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    protected function tearDown()
-    {
-        parent::tearDown();
-        $this->em->close();
-    }
 }

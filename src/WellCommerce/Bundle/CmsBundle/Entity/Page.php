@@ -16,7 +16,6 @@ use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
-use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\HierarchyTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\HierarchyAwareTrait;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopCollectionAwareTrait;
 
@@ -27,7 +26,11 @@ use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopCollectionAwareTrait;
  */
 class Page implements PageInterface
 {
-    use Translatable, Timestampable, Blameable, HierarchyAwareTrait, ShopCollectionAwareTrait;
+    use Translatable;
+    use Timestampable;
+    use Blameable;
+    use HierarchyAwareTrait;
+    use ShopCollectionAwareTrait;
 
     /**
      * @var int
@@ -45,8 +48,7 @@ class Page implements PageInterface
     protected $redirectType;
 
     /**
-     * @ORM\Column(name="redirect_url", type="string", length=255, nullable=true)
-     *
+     * @var string
      */
     protected $redirectUrl;
 

@@ -92,11 +92,6 @@ interface PageInterface extends TranslatableInterface, TimestampableInterface, B
     public function setClientGroups(Collection $clientGroups);
 
     /**
-     * @return void
-     */
-    public function prePersist();
-
-    /**
      * @return int
      */
     public function getRedirectType();

@@ -5,83 +5,48 @@ WellCommerce\Bundle\CmsBundle\Entity\ContactTranslation:
     fields:
         name:
             type: string
-            scale: 0
             length: 255
-            unique: false
             nullable: false
-            precision: 0
         email:
             type: string
-            scale: 0
             length: 255
-            unique: false
             nullable: false
-            precision: 0
         phone:
             type: string
-            scale: 0
             length: 255
-            unique: false
             nullable: false
-            precision: 0
         businessHours:
             type: text
-            scale: 0
-            length: null
-            unique: false
-            nullable: false
-            precision: 0
+            nullable: true
             column: business_hours
         street:
             type: string
-            scale: 0
             length: 255
-            unique: false
             nullable: true
-            precision: 0
         streetNo:
             type: string
-            scale: 0
             length: 255
-            unique: false
             nullable: true
-            precision: 0
             column: street_no
         flatNo:
             type: string
-            scale: 0
             length: 255
-            unique: false
             nullable: true
-            precision: 0
             column: flat_no
         postCode:
             type: string
-            scale: 0
             length: 255
-            unique: false
             nullable: true
-            precision: 0
             column: post_code
         province:
             type: string
-            scale: 0
             length: 255
-            unique: false
             nullable: true
-            precision: 0
         city:
             type: string
-            scale: 0
             length: 255
-            unique: false
             nullable: true
-            precision: 0
         country:
             type: string
-            scale: 0
             length: 3
-            unique: false
             nullable: true
-            precision: 0
-    lifecycleCallbacks: {  }

@@ -19,7 +19,7 @@ use WellCommerce\Bundle\CoreBundle\EventDispatcher\AbstractEventDispatcher;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ContactEventDispatcher extends AbstractEventDispatcher implements ContactEventDispatcherInterface
+class ContactEventDispatcher extends AbstractEventDispatcher
 {
     
 }

@@ -6,4 +6,3 @@ WellCommerce\Bundle\AttributeBundle\Entity\AttributeTranslation:
             type: string
             length: 255
             nullable: false
-    lifecycleCallbacks: {  }

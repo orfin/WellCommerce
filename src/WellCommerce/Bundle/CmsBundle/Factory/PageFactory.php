@@ -24,7 +24,7 @@ use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 class PageFactory extends AbstractFactory implements PageFactoryInterface
 {
     /**
-     * {@inheritdoc}
+     * @return \WellCommerce\Bundle\CmsBundle\Entity\PageInterface
      */
     public function create()
     {

@@ -10,19 +10,13 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AvailabilityBundle\Factory;
-
-use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
+namespace WellCommerce\Bundle\CoreBundle\Test\EventDispatcher;
 
 /**
- * Interface AvailabilityFactoryInterface
+ * Class AbstractEventDispatcherTest
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface AvailabilityFactoryInterface extends FactoryInterface
+abstract class AbstractEventDispatcherTest
 {
-    /**
-     * @return \WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityInterface
-     */
-    public function create();
 }

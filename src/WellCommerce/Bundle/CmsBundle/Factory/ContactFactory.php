@@ -14,16 +14,17 @@ namespace WellCommerce\Bundle\CmsBundle\Factory;
 
 use WellCommerce\Bundle\CmsBundle\Entity\Contact;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
 
 /**
  * Class ContactFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ContactFactory extends AbstractFactory implements ContactFactoryInterface
+class ContactFactory extends AbstractFactory implements FactoryInterface
 {
     /**
-     * {@inheritdoc}
+     * @return \WellCommerce\Bundle\CmsBundle\Entity\ContactInterface
      */
     public function create()
     {

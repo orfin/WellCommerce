@@ -25,7 +25,10 @@ use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\PhotoTrait;
  */
 class News implements NewsInterface
 {
-    use Translatable, Timestampable, Blameable, PhotoTrait;
+    use Translatable;
+    use Timestampable;
+    use Blameable;
+    use PhotoTrait;
 
     /**
      * @var int

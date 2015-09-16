@@ -17,15 +17,15 @@ use WellCommerce\Bundle\RoutingBundle\Entity\Route;
 use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;
 
 /**
- * @ORM\Entity
- * @ORM\Table(name="route_category")
+ * Class CategoryRoute
+ *
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class CategoryRoute extends Route implements RouteInterface
 {
     /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\CategoryBundle\Entity\Category")
-     * @ORM\JoinColumn(name="foreign_id", referencedColumnName="id", onDelete="CASCADE")
-     **/
+     * @var CategoryInterface
+     */
     protected $identifier;
 
     public function getType()

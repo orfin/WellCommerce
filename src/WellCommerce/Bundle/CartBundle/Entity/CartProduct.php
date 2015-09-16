@@ -31,11 +31,6 @@ class CartProduct implements CartProductInterface
     protected $cart;
 
     /**
-     * @var ProductInterface
-     */
-    protected $product;
-
-    /**
      * @var ProductAttributeInterface
      */
     protected $attribute;

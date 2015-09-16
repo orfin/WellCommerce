@@ -5,45 +5,23 @@ WellCommerce\Bundle\CmsBundle\Entity\NewsTranslation:
         topic:
             type: string
             length: 255
-            unique: false
             nullable: false
-            precision: 0
         summary:
             type: text
-            scale: 0
-            length: null
-            unique: false
             nullable: false
-            precision: 0
         content:
             type: text
-            scale: 0
-            length: null
-            unique: false
             nullable: false
-            precision: 0
         metaTitle:
             type: string
-            scale: 0
             length: 255
-            unique: false
             nullable: true
-            precision: 0
             column: meta_title
         metaKeywords:
             type: text
-            scale: 0
-            length: null
-            unique: false
             nullable: true
-            precision: 0
             column: meta_keywords
         metaDescription:
             type: text
-            scale: 0
-            length: null
-            unique: false
             nullable: true
-            precision: 0
             column: meta_description
-    lifecycleCallbacks: {  }
