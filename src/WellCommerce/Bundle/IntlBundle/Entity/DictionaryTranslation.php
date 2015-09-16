@@ -31,16 +31,6 @@ class DictionaryTranslation implements LocaleAwareInterface
     protected $value;
 
     /**
-     * Returns translation ID.
-     *
-     * @return integer The ID.
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
      * @return string
      */
     public function getValue()

@@ -1,13 +1,9 @@
 WellCommerce\Bundle\IntlBundle\Entity\DictionaryTranslation:
     type: entity
     table: dictionary_translation
-    id: {  }
     fields:
         value:
             type: string
-            scale: 0
             length: 255
-            unique: false
             nullable: false
             precision: 0
-    lifecycleCallbacks: {  }

@@ -25,7 +25,9 @@ use WellCommerce\Bundle\ProducerBundle\Entity\ProducerInterface;
  */
 class Deliverer implements DelivererInterface
 {
-    use Translatable, Timestampable, Blameable;
+    use Translatable;
+    use Timestampable;
+    use Blameable;
 
     /**
      * @var integer

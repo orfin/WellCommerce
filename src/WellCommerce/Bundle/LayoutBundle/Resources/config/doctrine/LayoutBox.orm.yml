@@ -4,36 +4,19 @@ WellCommerce\Bundle\LayoutBundle\Entity\LayoutBox:
     repositoryClass: WellCommerce\Bundle\LayoutBundle\Repository\LayoutBoxRepository
     id:
         id:
-            type: integer
-            scale: 0
-            length: null
-            unique: false
-            nullable: false
-            precision: 0
-            id: true
             generator:
-                strategy: IDENTITY
+                strategy: AUTO
     fields:
         boxType:
             type: string
-            scale: 0
             length: 255
-            unique: false
             nullable: false
-            precision: 0
             column: box_type
         settings:
             type: json_array
-            scale: 0
-            length: null
-            unique: false
             nullable: false
-            precision: 0
         identifier:
             type: string
-            scale: 0
             length: 255
-            unique: false
+            unique: true
             nullable: false
-            precision: 0
-    lifecycleCallbacks: {  }

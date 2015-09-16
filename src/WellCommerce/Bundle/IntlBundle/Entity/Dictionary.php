@@ -19,9 +19,11 @@ use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 /**
  * Dictionary
  */
-class Dictionary
+class Dictionary implements DictionaryInterface
 {
-    use Timestampable, Translatable, Blameable;
+    use Timestampable;
+    use Translatable;
+    use Blameable;
 
     /**
      * @var integer

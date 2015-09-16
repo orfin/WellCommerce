@@ -10,27 +10,27 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\IntlBundle\Factory;
+namespace WellCommerce\Bundle\LayoutBundle\Factory;
 
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
-use WellCommerce\Bundle\IntlBundle\Entity\Currency;
+use WellCommerce\Bundle\LayoutBundle\Entity\LayoutBox;
 
 /**
- * Class CurrencyFactory
+ * Class LayoutBoxFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CurrencyFactory extends AbstractFactory implements FactoryInterface
+class LayoutBoxFactory extends AbstractFactory implements FactoryInterface
 {
     /**
-     * @return \WellCommerce\Bundle\IntlBundle\Entity\CurrencyInterface
+     * @return \WellCommerce\Bundle\LayoutBundle\Entity\LayoutBoxInterface
      */
     public function create()
     {
-        $currency = new Currency();
-        $currency->setCode('');
+        $box = new LayoutBox();
+        $box->setIdentifier('');
 
-        return $currency;
+        return $box;
     }
 }

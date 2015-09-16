@@ -10,16 +10,16 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\IntlBundle\EventDispatcher;
+namespace WellCommerce\Bundle\LayoutBundle\EventDispatcher;
 
-use WellCommerce\Bundle\CoreBundle\EventDispatcher\EventDispatcherInterface;
+use WellCommerce\Bundle\CoreBundle\EventDispatcher\AbstractEventDispatcher;
 
 /**
- * Interface CurrencyEventDispatcherInterface
+ * Class LayoutBoxEventDispatcher
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface CurrencyEventDispatcherInterface extends EventDispatcherInterface
+class LayoutBoxEventDispatcher extends AbstractEventDispatcher
 {
     
 }

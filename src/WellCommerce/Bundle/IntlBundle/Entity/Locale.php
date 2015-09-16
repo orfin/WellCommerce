@@ -22,7 +22,9 @@ use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
  */
 class Locale implements LocaleInterface
 {
-    use Timestampable, Blameable, CurrencyTrait;
+    use Timestampable;
+    use Blameable;
+    use CurrencyAwareTrait;
 
     /**
      * @var integer

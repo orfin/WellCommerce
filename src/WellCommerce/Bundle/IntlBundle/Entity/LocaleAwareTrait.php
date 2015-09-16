@@ -13,30 +13,30 @@
 namespace WellCommerce\Bundle\IntlBundle\Entity;
 
 /**
- * Class CurrencyTrait
+ * Class LocaleAwareTrait
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-trait CurrencyTrait
+trait LocaleAwareTrait
 {
     /**
-     * @var CurrencyInterface
+     * @var LocaleInterface
      */
-    protected $currency;
+    protected $locale;
 
     /**
-     * @param CurrencyInterface $currency
+     * @param LocaleInterface $locale
      */
-    public function setCurrency(CurrencyInterface $currency)
+    public function setLocale(LocaleInterface $locale)
     {
-        $this->currency = $currency;
+        $this->locale = $locale;
     }
 
     /**
-     * @return CurrencyInterface
+     * @return LocaleInterface
      */
-    public function getCurrency()
+    public function getLocale()
     {
-        return $this->currency;
+        return $this->locale;
     }
 }

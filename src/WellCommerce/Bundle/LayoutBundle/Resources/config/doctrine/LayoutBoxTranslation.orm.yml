@@ -1,20 +1,11 @@
 WellCommerce\Bundle\LayoutBundle\Entity\LayoutBoxTranslation:
     type: entity
     table: layout_box_translation
-    id: {  }
     fields:
         name:
             type: string
-            scale: 0
             length: 255
-            unique: false
             nullable: false
-            precision: 0
         content:
             type: text
-            scale: 0
-            length: null
-            unique: false
             nullable: true
-            precision: 0
-    lifecycleCallbacks: {  }

@@ -12,55 +12,43 @@
 
 namespace WellCommerce\Bundle\LayoutBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
+use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
+use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 
 /**
  * Class LayoutBox
  *
- * @ORM\Table("layout_box")
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\LayoutBundle\Repository\LayoutBoxRepository")
- *
- * @author Adam Piotrowski <adam@wellcommerce.org>
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LayoutBox
+class LayoutBox implements LayoutBoxInterface
 {
-    use ORMBehaviors\Timestampable\Timestampable;
-    use ORMBehaviors\Translatable\Translatable;
-    use ORMBehaviors\Blameable\Blameable;
-    
+    use Timestampable;
+    use Translatable;
+    use Blameable;
+
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @var int
      */
     protected $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="box_type", type="string", length=255, nullable=false)
      */
     protected $boxType;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="settings", type="json_array", nullable=false)
      */
     protected $settings;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="identifier", type="string", length=255, nullable=false)
      */
     protected $identifier;
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -68,7 +56,7 @@ class LayoutBox
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getBoxType()
     {
@@ -76,7 +64,7 @@ class LayoutBox
     }
 
     /**
-     * @param $boxType
+     * {@inheritdoc}
      */
     public function setBoxType($boxType)
     {
@@ -84,7 +72,7 @@ class LayoutBox
     }
 
     /**
-     * @return array
+     * {@inheritdoc}
      */
     public function getSettings()
     {
@@ -92,7 +80,7 @@ class LayoutBox
     }
 
     /**
-     * @param $settings
+     * {@inheritdoc}
      */
     public function setSettings($settings)
     {
@@ -100,7 +88,7 @@ class LayoutBox
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getIdentifier()
     {
@@ -108,7 +96,7 @@ class LayoutBox
     }
 
     /**
-     * @param $identifier
+     * {@inheritdoc}
      */
     public function setIdentifier($identifier)
     {

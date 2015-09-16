@@ -22,7 +22,8 @@ use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
  */
 class CurrencyRate implements CurrencyRateInterface
 {
-    use Timestampable, Blameable;
+    use Timestampable;
+    use Blameable;
     
     /**
      * @var integer
