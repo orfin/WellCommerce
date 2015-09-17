@@ -17,29 +17,27 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Class DiscountablePrice
  *
- * @ORM\Embeddable
- *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class DiscountablePrice extends Price
 {
     /**
-     * @ORM\Column(name="discounted_amount", type="decimal", precision=15, scale=4, nullable=true)
+     * @var float
      */
     protected $discountedAmount;
 
     /**
-     * @ORM\Column(name="valid_from", type="datetime", nullable=true)
+     * @var \DateTime
      */
     protected $validFrom;
 
     /**
-     * @ORM\Column(name="valid_to", type="datetime", nullable=true)
+     * @var \DateTime
      */
     protected $validTo;
 
     /**
-     * @return mixed
+     * @return float
      */
     public function getDiscountedAmount()
     {
@@ -47,15 +45,15 @@ class DiscountablePrice extends Price
     }
 
     /**
-     * @param mixed $discountedAmount
+     * @param float $discountedAmount
      */
     public function setDiscountedAmount($discountedAmount)
     {
-        $this->discountedAmount = $discountedAmount;
+        $this->discountedAmount = (float)$discountedAmount;
     }
 
     /**
-     * @return mixed
+     * @return \DateTime
      */
     public function getValidFrom()
     {
@@ -63,15 +61,15 @@ class DiscountablePrice extends Price
     }
 
     /**
-     * @param mixed $validFrom
+     * @param \DateTime $validFrom
      */
-    public function setValidFrom($validFrom)
+    public function setValidFrom(\DateTime $validFrom)
     {
         $this->validFrom = $validFrom;
     }
 
     /**
-     * @return mixed
+     * @return \DateTime
      */
     public function getValidTo()
     {
@@ -79,9 +77,9 @@ class DiscountablePrice extends Price
     }
 
     /**
-     * @param mixed $validTo
+     * @param \DateTime $validTo
      */
-    public function setValidTo($validTo)
+    public function setValidTo(\DateTime $validTo)
     {
         $this->validTo = $validTo;
     }
@@ -98,6 +96,9 @@ class DiscountablePrice extends Price
         return $this->amount;
     }
 
+    /**
+     * @return bool
+     */
     protected function isDiscountDateValid()
     {
         $now = new \DateTime();

@@ -17,46 +17,24 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Class Dimension
  *
- * @ORM\Embeddable
- *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class Dimension
 {
     /**
      * @var float
-     *
-     * @ORM\Column(name="depth", type="decimal", precision=15, scale=4)
      */
-    private $depth;
+    protected $depth;
 
     /**
      * @var float
-     *
-     * @ORM\Column(name="width", type="decimal", precision=15, scale=4)
      */
-    private $width;
+    protected $width;
 
     /**
      * @var float
-     *
-     * @ORM\Column(name="height", type="decimal", precision=15, scale=4)
      */
-    private $height;
-
-    /**
-     * Constructor
-     *
-     * @param int $depth
-     * @param int $width
-     * @param int $height
-     */
-    public function __construct($depth = 0, $width = 0, $height = 0)
-    {
-        $this->depth  = $depth;
-        $this->width  = $width;
-        $this->height = $height;
-    }
+    protected $height;
 
     /**
      * @return float
@@ -71,7 +49,7 @@ class Dimension
      */
     public function setDepth($depth)
     {
-        $this->depth = $depth;
+        $this->depth = (float)$depth;
     }
 
     /**
@@ -87,7 +65,7 @@ class Dimension
      */
     public function setWidth($width)
     {
-        $this->width = $width;
+        $this->width = (float)$width;
     }
 
     /**
@@ -103,6 +81,6 @@ class Dimension
      */
     public function setHeight($height)
     {
-        $this->height = $height;
+        $this->height = (float)$height;
     }
 }

@@ -13,9 +13,9 @@ namespace WellCommerce\Bundle\ProductBundle\Form;
 
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
-use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\DateTransformer;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\EntityToIdentifierTransformer;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\TranslationTransformer;
+use WellCommerce\Bundle\FormBundle\DataTransformer\DateTransformer;
 use WellCommerce\Bundle\FormBundle\Elements\ElementInterface;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 use WellCommerce\Bundle\ProductBundle\Form\DataTransformer\ProductAttributeCollectionToArrayTransformer;
@@ -291,13 +291,13 @@ class ProductFormBuilder extends AbstractFormBuilder
         $mediaData->addChild($this->getElement('image', [
             'name'         => 'productPhotos',
             'label'        => $this->trans('product.product_photos.label'),
-            'load_route'   => $this->generateUrl('admin.media.grid'),
-            'upload_url'   => $this->generateUrl('admin.media.add'),
+            'load_route'   => $this->getRouterHelper()->generateUrl('admin.media.grid'),
+            'upload_url'   => $this->getRouterHelper()->generateUrl('admin.media.add'),
             'repeat_min'   => 0,
             'repeat_max'   => ElementInterface::INFINITE,
             'transformer'  => new ProductPhotoCollectionToArrayTransformer($this->get('media.repository')),
-            'session_name' => $this->getRequest()->getSession()->getName(),
-            'session_id'   => $this->getRequest()->getSession()->getId(),
+            'session_name' => $this->getRequestHelper()->getCurrentRequest()->getSession()->getName(),
+            'session_id'   => $this->getRequestHelper()->getCurrentRequest()->getSession()->getId(),
         ]));
 
         $statusesData = $form->addChild($this->getElement('nested_fieldset', [

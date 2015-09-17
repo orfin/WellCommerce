@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\MediaBundle\Form\DataTransformer;
 
 use Doctrine\ORM\PersistentCollection;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
-use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\DataTransformerInterface;
+use WellCommerce\Bundle\FormBundle\DataTransformer\DataTransformerInterface;
 
 /**
  * Class CollectionToArrayTransformer

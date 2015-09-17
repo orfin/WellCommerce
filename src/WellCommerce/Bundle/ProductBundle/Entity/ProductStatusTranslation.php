@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\ProductBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Translatable\Translation;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\MetaDataTrait;
 use WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface;
@@ -20,41 +19,42 @@ use WellCommerce\Bundle\RoutingBundle\Entity\Behaviours\RoutableTrait;
 use WellCommerce\Bundle\RoutingBundle\Entity\RoutableSubjectInterface;
 
 /**
- * ProductStatusTranslation
+ * Class ProductStatusTranslation
  *
- * @ORM\Table(name="product_status_translation")
- * @ORM\Entity
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class ProductStatusTranslation implements LocaleAwareInterface, RoutableSubjectInterface
 {
     use Translation;
     use MetaDataTrait;
     use RoutableTrait;
+    
     /**
      * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255)
      */
-    private $name;
+    protected $name;
 
     /**
-     * @ORM\OneToOne(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\ProductStatusRoute", cascade={"persist","remove"})
-     * @ORM\JoinColumn(name="route_id", referencedColumnName="id", onDelete="CASCADE")
-     **/
+     * @var ProductStatusRoute|\WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface
+     */
     protected $route;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="css_class", type="string", length=255)
      */
-    private $cssClass;
+    protected $cssClass;
 
+    /**
+     * @return string
+     */
     public function getName()
     {
         return $this->name;
     }
 
+    /**
+     * @param string $name
+     */
     public function setName($name)
     {
         $this->name = $name;

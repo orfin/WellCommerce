@@ -12,14 +12,25 @@
 
 namespace WellCommerce\Bundle\CartBundle\Exception;
 
+use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 
+/**
+ * Class AddCartItemException
+ *
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
+ */
 class AddCartItemException extends \RuntimeException
 {
-    /**
-     * @param string $id
-     */
-    public function __construct($id)
+    public function __construct(ProductInterface $product, ProductAttributeInterface $attribute = null, $quantity, \Exception $previous)
     {
-        parent::__construct(sprintf('Cannot add item with ID "%s" to cart', $id));
+        $message = sprintf(
+            'Cannot add item with id: "%s", attribute: "%s" and quantity: "%s" to cart',
+            $product->getId(),
+            (null === $attribute) ? 0 : $attribute->getId(),
+            $quantity
+        );
+
+        parent::__construct($message, $previous->getCode(), $previous);
     }
 }

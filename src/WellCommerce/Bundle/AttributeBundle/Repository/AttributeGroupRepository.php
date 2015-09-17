@@ -25,7 +25,7 @@ class AttributeGroupRepository extends AbstractEntityRepository implements Attri
      */
     public function findAll()
     {
-        $queryBuilder = parent::getQueryBuilder();
+        $queryBuilder = $this->getQueryBuilder();
         $queryBuilder->addSelect('attribute_group.id, attribute_group_translation.name');
         $queryBuilder->leftJoin(
             'WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupTranslation',

@@ -20,7 +20,6 @@ use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\EnableableTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\HierarchyAwareTrait;
 use WellCommerce\Bundle\IntlBundle\Entity\CurrencyInterface;
 use WellCommerce\Bundle\TaxBundle\Entity\TaxAwareTrait;
-use WellCommerce\Bundle\TaxBundle\Entity\TaxInterface;
 
 /**
  * Class ShippingMethod
@@ -42,19 +41,17 @@ class ShippingMethod implements ShippingMethodInterface
     protected $calculator;
 
     /**
-     * @ORM\Column(name="currency", type="string", nullable=false, length=16)
+     * @var CurrencyInterface
      */
     protected $currency;
 
     /**
-     * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCost", mappedBy="shippingMethod", cascade={"persist"}, orphanRemoval=true)
+     * @var Collection
      */
     protected $costs;
 
     /**
-     * Get id.
-     *
-     * @return integer
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -62,9 +59,7 @@ class ShippingMethod implements ShippingMethodInterface
     }
 
     /**
-     * Returns shipping method processor
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getCalculator()
     {
@@ -72,9 +67,7 @@ class ShippingMethod implements ShippingMethodInterface
     }
 
     /**
-     * Sets shipping method calculator
-     *
-     * @param $calculator
+     * {@inheritdoc}
      */
     public function setCalculator($calculator)
     {
@@ -82,7 +75,7 @@ class ShippingMethod implements ShippingMethodInterface
     }
 
     /**
-     * @return Collection
+     * {@inheritdoc}
      */
     public function getCosts()
     {
@@ -90,7 +83,7 @@ class ShippingMethod implements ShippingMethodInterface
     }
 
     /**
-     * @param Collection $costs
+     * {@inheritdoc}
      */
     public function setCosts(Collection $costs)
     {
@@ -98,7 +91,7 @@ class ShippingMethod implements ShippingMethodInterface
     }
 
     /**
-     * @return CurrencyInterface
+     * {@inheritdoc}
      */
     public function getCurrency()
     {
@@ -106,7 +99,7 @@ class ShippingMethod implements ShippingMethodInterface
     }
 
     /**
-     * @param CurrencyInterface $currency
+     * {@inheritdoc}
      */
     public function setCurrency(CurrencyInterface $currency)
     {

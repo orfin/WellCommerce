@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\CartBundle\Manager\Front;
 use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
 use WellCommerce\Bundle\CartBundle\EventDispatcher\CartEventDispatcherInterface;
+use WellCommerce\Bundle\CartBundle\Exception\AddCartItemException;
 use WellCommerce\Bundle\CartBundle\Factory\CartFactoryInterface;
 use WellCommerce\Bundle\CartBundle\Factory\CartProductFactoryInterface;
 use WellCommerce\Bundle\CartBundle\Repository\CartProductRepositoryInterface;
@@ -68,24 +69,28 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
      */
     public function addProductToCart(ProductInterface $product, ProductAttributeInterface $attribute = null, $quantity = 1)
     {
-        $entityManager = $this->getEntityManager();
-        $cart          = $this->getCartProvider()->getCurrentCart();
-        $cartProduct   = $this->cartProductRepository->findProductInCart($cart, $product, $attribute);
+        try {
+            $entityManager = $this->getEntityManager();
+            $cart          = $this->getCartProvider()->getCurrentCart();
+            $cartProduct   = $this->cartProductRepository->findProductInCart($cart, $product, $attribute);
 
-        if (null === $cartProduct) {
-            $cartProduct = $this->cartProductFactory->create();
-            $cartProduct->setCart($cart);
-            $cartProduct->setProduct($product);
-            $cartProduct->setAttribute($attribute);
-            $cartProduct->setQuantity($quantity);
+            if (null === $cartProduct) {
+                $cartProduct = $this->cartProductFactory->create();
+                $cartProduct->setCart($cart);
+                $cartProduct->setProduct($product);
+                $cartProduct->setAttribute($attribute);
+                $cartProduct->setQuantity($quantity);
 
-            $cart->addProduct($cartProduct);
-            $entityManager->persist($cartProduct);
-        } else {
-            $cartProduct->increaseQuantity($quantity);
+                $cart->addProduct($cartProduct);
+                $entityManager->persist($cartProduct);
+            } else {
+                $cartProduct->increaseQuantity($quantity);
+            }
+
+            $entityManager->flush();
+        } catch (\Exception $e) {
+            throw new AddCartItemException($product, $attribute, $quantity, $e);
         }
-
-        $entityManager->flush();
 
         return true;
     }

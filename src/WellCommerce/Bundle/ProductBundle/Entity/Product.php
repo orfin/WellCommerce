@@ -129,7 +129,7 @@ class Product implements ProductInterface
     protected $packageSize;
 
     /**
-     * @return integer
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -137,7 +137,7 @@ class Product implements ProductInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getSku()
     {
@@ -145,7 +145,7 @@ class Product implements ProductInterface
     }
 
     /**
-     * @param string $sku
+     * {@inheritdoc}
      */
     public function setSku($sku)
     {
@@ -153,7 +153,7 @@ class Product implements ProductInterface
     }
 
     /**
-     * @return float
+     * {@inheritdoc}
      */
     public function getStock()
     {
@@ -161,7 +161,7 @@ class Product implements ProductInterface
     }
 
     /**
-     * @param float $stock
+     * {@inheritdoc}
      */
     public function setStock($stock)
     {
@@ -169,7 +169,7 @@ class Product implements ProductInterface
     }
 
     /**
-     * @return boolean
+     * {@inheritdoc}
      */
     public function getTrackStock()
     {
@@ -177,7 +177,7 @@ class Product implements ProductInterface
     }
 
     /**
-     * @param boolean $trackStock
+     * {@inheritdoc}
      */
     public function setTrackStock($trackStock)
     {
@@ -185,7 +185,7 @@ class Product implements ProductInterface
     }
 
     /**
-     * @return Collection
+     * {@inheritdoc}
      */
     public function getStatuses()
     {
@@ -193,7 +193,7 @@ class Product implements ProductInterface
     }
 
     /**
-     * @return Collection
+     * {@inheritdoc}
      */
     public function setStatuses(Collection $statuses)
     {
@@ -201,7 +201,7 @@ class Product implements ProductInterface
     }
 
     /**
-     * @return Collection
+     * {@inheritdoc}
      */
     public function getProductPhotos()
     {
@@ -209,7 +209,7 @@ class Product implements ProductInterface
     }
 
     /**
-     * @param Collection $photos
+     * {@inheritdoc}
      */
     public function setProductPhotos(Collection $photos)
     {
@@ -217,7 +217,7 @@ class Product implements ProductInterface
     }
 
     /**
-     * @param ProductPhoto $photo
+     * {@inheritdoc}
      */
     public function addProductPhoto(ProductPhoto $photo)
     {
@@ -225,7 +225,7 @@ class Product implements ProductInterface
     }
 
     /**
-     * @return Collection
+     * {@inheritdoc}
      */
     public function getCategories()
     {
@@ -233,7 +233,7 @@ class Product implements ProductInterface
     }
 
     /**
-     * @param Collection $collection
+     * {@inheritdoc}
      */
     public function setCategories(Collection $collection)
     {
@@ -241,7 +241,7 @@ class Product implements ProductInterface
     }
 
     /**
-     * @param CategoryInterface $category
+     * {@inheritdoc}
      */
     public function addCategory(CategoryInterface $category)
     {
@@ -249,7 +249,7 @@ class Product implements ProductInterface
     }
 
     /**
-     * @return DiscountablePrice
+     * {@inheritdoc}
      */
     public function getSellPrice()
     {
@@ -257,7 +257,7 @@ class Product implements ProductInterface
     }
 
     /**
-     * @param DiscountablePrice $sellPrice
+     * {@inheritdoc}
      */
     public function setSellPrice(DiscountablePrice $sellPrice)
     {
@@ -265,7 +265,7 @@ class Product implements ProductInterface
     }
 
     /**
-     * @return Price
+     * {@inheritdoc}
      */
     public function getBuyPrice()
     {
@@ -273,7 +273,7 @@ class Product implements ProductInterface
     }
 
     /**
-     * @param Price $buyPrice
+     * {@inheritdoc}
      */
     public function setBuyPrice(Price $buyPrice)
     {
@@ -281,7 +281,7 @@ class Product implements ProductInterface
     }
 
     /**
-     * @return float
+     * {@inheritdoc}
      */
     public function getWeight()
     {
@@ -289,7 +289,7 @@ class Product implements ProductInterface
     }
 
     /**
-     * @param float $weight
+     * {@inheritdoc}
      */
     public function setWeight($weight)
     {
@@ -297,7 +297,7 @@ class Product implements ProductInterface
     }
 
     /**
-     * @return Dimension
+     * {@inheritdoc}
      */
     public function getDimension()
     {
@@ -305,7 +305,7 @@ class Product implements ProductInterface
     }
 
     /**
-     * @param Dimension $dimension
+     * {@inheritdoc}
      */
     public function setDimension(Dimension $dimension)
     {
@@ -313,7 +313,7 @@ class Product implements ProductInterface
     }
 
     /**
-     * @return float
+     * {@inheritdoc}
      */
     public function getPackageSize()
     {
@@ -321,7 +321,7 @@ class Product implements ProductInterface
     }
 
     /**
-     * @param float $packageSize
+     * {@inheritdoc}
      */
     public function setPackageSize($packageSize)
     {
@@ -329,7 +329,7 @@ class Product implements ProductInterface
     }
 
     /**
-     * @return AttributeGroupInterface
+     * {@inheritdoc}
      */
     public function getAttributeGroup()
     {
@@ -337,7 +337,7 @@ class Product implements ProductInterface
     }
 
     /**
-     * @param AttributeGroupInterface $attributeGroup
+     * {@inheritdoc}
      */
     public function setAttributeGroup(AttributeGroupInterface $attributeGroup)
     {
@@ -345,7 +345,7 @@ class Product implements ProductInterface
     }
 
     /**
-     * @return Collection
+     * {@inheritdoc}
      */
     public function getAttributes()
     {
@@ -353,7 +353,7 @@ class Product implements ProductInterface
     }
 
     /**
-     * @param Collection $attributes
+     * {@inheritdoc}
      */
     public function setAttributes(Collection $attributes)
     {
@@ -361,7 +361,7 @@ class Product implements ProductInterface
     }
 
     /**
-     * @return TaxInterface
+     * {@inheritdoc}
      */
     public function getBuyPriceTax()
     {
@@ -369,7 +369,7 @@ class Product implements ProductInterface
     }
 
     /**
-     * @param TaxInterface $buyPriceTax
+     * {@inheritdoc}
      */
     public function setBuyPriceTax(TaxInterface $buyPriceTax)
     {
@@ -377,7 +377,7 @@ class Product implements ProductInterface
     }
 
     /**
-     * @return TaxInterface
+     * {@inheritdoc}
      */
     public function getSellPriceTax()
     {
@@ -385,7 +385,7 @@ class Product implements ProductInterface
     }
 
     /**
-     * @param TaxInterface $sellPriceTax
+     * {@inheritdoc}
      */
     public function setSellPriceTax(TaxInterface $sellPriceTax)
     {

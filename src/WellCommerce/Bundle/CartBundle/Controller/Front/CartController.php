@@ -84,12 +84,13 @@ class CartController extends AbstractFrontController implements FrontControllerI
         try {
             $this->manager->addProductToCart($product, $attribute, $quantity);
         } catch (AddCartItemException $exception) {
-
+            return $this->jsonResponse([
+                'error' => $this->trans('cart.error.add_product')
+            ]);
         }
 
         $category        = $product->getCategories()->first();
         $recommendations = $this->getRecommendations($category);
-
 
         $basketModalContent = $this->renderView('WellCommerceCartBundle:Front/Cart:add.html.twig', [
             'product'         => $product,

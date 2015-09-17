@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\ProductBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Translatable\Translation;
 use WellCommerce\Bundle\CoreBundle\Entity\Meta;
 use WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface;
@@ -20,11 +19,9 @@ use WellCommerce\Bundle\RoutingBundle\Entity\Behaviours\RoutableTrait;
 use WellCommerce\Bundle\RoutingBundle\Entity\RoutableSubjectInterface;
 
 /**
- * ProductTranslation
+ * Class ProductTranslation
  *
- * @ORM\Table(name="product_translation")
- * @ORM\HasLifecycleCallbacks
- * @ORM\Entity
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class ProductTranslation implements LocaleAwareInterface, RoutableSubjectInterface
 {
@@ -33,47 +30,30 @@ class ProductTranslation implements LocaleAwareInterface, RoutableSubjectInterfa
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255)
      */
-    private $name;
+    protected $name;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="short_description", type="text", nullable=true)
      */
-    private $shortDescription;
+    protected $shortDescription;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="description", type="text", nullable=true)
      */
-    private $description;
+    protected $description;
 
     /**
-     * @ORM\Embedded(class = "WellCommerce\Bundle\CoreBundle\Entity\Meta", columnPrefix = "meta_")
+     * @var Meta
      */
-    private $meta;
+    protected $meta;
 
     /**
-     * @ORM\OneToOne(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\ProductRoute", cascade={"persist","remove"})
-     * @ORM\JoinColumn(name="route_id", referencedColumnName="id", onDelete="CASCADE")
-     **/
+     * @var ProductRoute|\WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface
+     */
     protected $route;
 
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->meta = new Meta();
-    }
-
-    /**
-     * Get name.
-     *
      * @return string
      */
     public function getName()
@@ -82,11 +62,7 @@ class ProductTranslation implements LocaleAwareInterface, RoutableSubjectInterfa
     }
 
     /**
-     * Set name.
-     *
      * @param string $name
-     *
-     * @return ProductTranslation
      */
     public function setName($name)
     {
@@ -94,8 +70,6 @@ class ProductTranslation implements LocaleAwareInterface, RoutableSubjectInterfa
     }
 
     /**
-     * Get shortDescription
-     *
      * @return string
      */
     public function getShortDescription()
@@ -104,8 +78,6 @@ class ProductTranslation implements LocaleAwareInterface, RoutableSubjectInterfa
     }
 
     /**
-     * Set shortDescription
-     *
      * @param string $shortDescription
      */
     public function setShortDescription($shortDescription)
@@ -114,8 +86,6 @@ class ProductTranslation implements LocaleAwareInterface, RoutableSubjectInterfa
     }
 
     /**
-     * Get description
-     *
      * @return string
      */
     public function getDescription()
@@ -124,8 +94,6 @@ class ProductTranslation implements LocaleAwareInterface, RoutableSubjectInterfa
     }
 
     /**
-     * Set description
-     *
      * @param string $description
      */
     public function setDescription($description)

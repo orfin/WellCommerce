@@ -12,9 +12,11 @@
 
 namespace WellCommerce\Bundle\ShippingBundle\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
+use WellCommerce\Bundle\IntlBundle\Entity\CurrencyInterface;
 use WellCommerce\Bundle\TaxBundle\Entity\TaxAwareInterface;
 
 /**
@@ -24,5 +26,38 @@ use WellCommerce\Bundle\TaxBundle\Entity\TaxAwareInterface;
  */
 interface ShippingMethodInterface extends TimestampableInterface, TranslatableInterface, BlameableInterface, TaxAwareInterface
 {
-    
+    /**
+     * @return integer
+     */
+    public function getId();
+
+    /**
+     * @return string
+     */
+    public function getCalculator();
+
+    /**
+     * @param $calculator
+     */
+    public function setCalculator($calculator);
+
+    /**
+     * @return Collection
+     */
+    public function getCosts();
+
+    /**
+     * @param Collection $costs
+     */
+    public function setCosts(Collection $costs);
+
+    /**
+     * @return CurrencyInterface
+     */
+    public function getCurrency();
+
+    /**
+     * @param CurrencyInterface $currency
+     */
+    public function setCurrency(CurrencyInterface $currency);
 }

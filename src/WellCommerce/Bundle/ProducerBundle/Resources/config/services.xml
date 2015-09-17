@@ -15,6 +15,10 @@
 
         <service id="producer.factory" class="WellCommerce\Bundle\ProducerBundle\Factory\ProducerFactory"/>
 
+        <service id="producer.event_dispatcher" class="WellCommerce\Bundle\ProducerBundle\EventDispatcher\ProducerEventDispatcher">
+            <argument type="service" id="event_dispatcher" />
+        </service>
+
         <service id="producer.route.generator" class="WellCommerce\Bundle\ProducerBundle\Routing\ProducerRouteGenerator">
             <argument type="collection" key="defaults">
                 <argument key="_controller">producer.controller.front:indexAction</argument>

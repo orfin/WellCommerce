@@ -27,7 +27,7 @@ class AttributeRepository extends AbstractEntityRepository implements AttributeR
      */
     public function findAll()
     {
-        $qb = parent::getQueryBuilder()
+        $qb = $this->getQueryBuilder()
             ->addSelect('attribute.id, attribute_translation.name')
             ->leftJoin(
                 'WellCommerce\Bundle\AttributeBundle\Entity\AttributeTranslation',
@@ -61,7 +61,7 @@ class AttributeRepository extends AbstractEntityRepository implements AttributeR
      */
     public function findAllByAttributeGroupId($id)
     {
-        $qb = parent::getQueryBuilder()
+        $qb = $this->getQueryBuilder()
             ->addSelect('attribute.id, attribute_translation.name')
             ->join('attribute.groups', 'ag')
             ->leftJoin(
