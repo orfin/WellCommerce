@@ -20,11 +20,9 @@ use WellCommerce\Bundle\RoutingBundle\Entity\Behaviours\RoutableTrait;
 use WellCommerce\Bundle\RoutingBundle\Entity\RoutableSubjectInterface;
 
 /**
- * ProducerTranslation
+ * Class ProducerTranslation
  *
- * @ORM\Table(name="producer_translation")
- * @ORM\HasLifecycleCallbacks
- * @ORM\Entity
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class ProducerTranslation implements RoutableSubjectInterface, LocaleAwareInterface
 {
@@ -32,44 +30,29 @@ class ProducerTranslation implements RoutableSubjectInterface, LocaleAwareInterf
     use RoutableTrait;
 
     /**
-     * @ORM\OneToOne(targetEntity="WellCommerce\Bundle\ProducerBundle\Entity\ProducerRoute", cascade={"persist","remove"})
-     * @ORM\JoinColumn(name="route_id", referencedColumnName="id", onDelete="CASCADE")
-     **/
+     * @var ProducerRoute
+     */
     protected $route;
     
     /**
      * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255)
      */
     protected $name;
     
     /**
      * @var string
-     *
-     * @ORM\Column(name="short_description", type="text", nullable=true)
      */
     protected $shortDescription;
     
     /**
      * @var string
-     *
-     * @ORM\Column(name="description", type="text", nullable=true)
      */
     protected $description;
 
     /**
-     * @ORM\Embedded(class = "WellCommerce\Bundle\CoreBundle\Entity\Meta", columnPrefix = "meta_")
+     * @var Meta
      */
     protected $meta;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->meta = new Meta();
-    }
 
     /**
      * @return string

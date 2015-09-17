@@ -20,10 +20,10 @@ use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PaymentMethodFactory extends AbstractFactory implements PaymentMethodFactoryInterface
+class PaymentMethodFactory extends AbstractFactory
 {
     /**
-     * {@inheritdoc}
+     * @return \WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface
      */
     public function create()
     {

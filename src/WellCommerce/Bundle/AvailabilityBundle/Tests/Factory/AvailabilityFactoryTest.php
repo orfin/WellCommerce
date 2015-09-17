@@ -26,7 +26,7 @@ class AvailabilityFactoryTest extends AbstractFactoryTestCase
         return $this->container->get('availability.factory');
     }
 
-    protected function getExpectedInstanceInterface()
+    protected function getExpectedInterface()
     {
         return 'WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityInterface';
     }

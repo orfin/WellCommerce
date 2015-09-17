@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\MediaBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
-use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
 use WellCommerce\Bundle\MediaBundle\Entity\Media;
 
 /**
@@ -22,7 +21,7 @@ use WellCommerce\Bundle\MediaBundle\Entity\Media;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class MediaFactory extends AbstractFactory implements FactoryInterface
+class MediaFactory extends AbstractFactory
 {
     /**
      * @return \WellCommerce\Bundle\MediaBundle\Entity\MediaInterface

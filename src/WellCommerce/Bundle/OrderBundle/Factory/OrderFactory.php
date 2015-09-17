@@ -10,26 +10,28 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CmsBundle\Factory;
+namespace WellCommerce\Bundle\OrderBundle\Factory;
 
-use WellCommerce\Bundle\CmsBundle\Entity\Contact;
+use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\Bundle\OrderBundle\Entity\Order;
 
 /**
- * Class ContactFactory
+ * Class OrderFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ContactFactory extends AbstractFactory
+class OrderFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\CmsBundle\Entity\ContactInterface
+     * @return \WellCommerce\Bundle\OrderBundle\Entity\OrderInterface
      */
     public function create()
     {
-        $contact = new Contact();
-        $contact->setCreatedAt(new \DateTime());
+        $order = new Order();
+        $order->setModifiers(new ArrayCollection());
+        $order->setProducts(new ArrayCollection());
 
-        return $contact;
+        return $order;
     }
 }

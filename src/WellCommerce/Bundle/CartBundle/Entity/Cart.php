@@ -17,7 +17,7 @@ use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\Timestampable\Timesta
 use WellCommerce\Bundle\CoreBundle\Entity\AddressInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\ContactDetailsTrait;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopAwareTrait;
-use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodTrait;
+use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodAwareTrait;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodAwareTrait;
 
 /**
@@ -30,7 +30,7 @@ class Cart implements CartInterface
     use TimestampableTrait;
     use ShopAwareTrait;
     use ShippingMethodAwareTrait;
-    use PaymentMethodTrait;
+    use PaymentMethodAwareTrait;
     use ClientAwareTrait;
     use ContactDetailsTrait;
 

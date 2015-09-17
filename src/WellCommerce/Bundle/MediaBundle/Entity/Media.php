@@ -165,10 +165,6 @@ class Media implements MediaInterface
         $this->productPhotos = $productPhotos;
     }
 
-    /**
-     * @ORM\PrePersist()
-     * @ORM\PreUpdate()
-     */
     public function preUpload()
     {
         if (null !== $this->getExtension()) {

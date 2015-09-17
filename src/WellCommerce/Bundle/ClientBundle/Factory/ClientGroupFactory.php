@@ -21,10 +21,10 @@ use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientGroupFactory extends AbstractFactory implements ClientGroupFactoryInterface
+class ClientGroupFactory extends AbstractFactory
 {
     /**
-     * {@inheritdoc}
+     * @return \WellCommerce\Bundle\ClientBundle\Entity\ClientGroupInterface
      */
     public function create()
     {

@@ -20,10 +20,10 @@ use WellCommerce\Bundle\UnitBundle\Entity\Unit;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class UnitFactory extends AbstractFactory implements UnitFactoryInterface
+class UnitFactory extends AbstractFactory
 {
     /**
-     * {@inheritdoc}
+     * @return \WellCommerce\Bundle\UnitBundle\Entity\UnitInterface
      */
     public function create()
     {

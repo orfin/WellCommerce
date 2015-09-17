@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\LayoutBundle\Factory;
 
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
-use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
 use WellCommerce\Bundle\LayoutBundle\Entity\LayoutBox;
 
 /**
@@ -21,7 +20,7 @@ use WellCommerce\Bundle\LayoutBundle\Entity\LayoutBox;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LayoutBoxFactory extends AbstractFactory implements FactoryInterface
+class LayoutBoxFactory extends AbstractFactory
 {
     /**
      * @return \WellCommerce\Bundle\LayoutBundle\Entity\LayoutBoxInterface

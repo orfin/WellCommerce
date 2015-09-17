@@ -13,6 +13,7 @@ namespace WellCommerce\Bundle\CoreBundle\Controller;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
 
 /**
@@ -82,6 +83,20 @@ abstract class AbstractController extends AbstractContainerAware implements Cont
     }
 
     /**
+     * Renders a view.
+     *
+     * @param string   $view       The view name
+     * @param array    $parameters An array of parameters to pass to the view
+     * @param Response $response   A response instance
+     *
+     * @return Response A Response instance
+     */
+    public function render($view, array $parameters = [], Response $response = null)
+    {
+        return $this->container->get('templating')->renderResponse($view, $parameters, $response);
+    }
+
+    /**
      * Returns a rendered view.
      *
      * @param string $view       The view name
@@ -111,7 +126,7 @@ abstract class AbstractController extends AbstractContainerAware implements Cont
         return $templating->renderResponse($template, $templateVars);
     }
 
-    public function getUser()
+    protected function getUser()
     {
         if (!$this->container->has('security.token_storage')) {
             throw new \LogicException('The SecurityBundle is not registered in your application.');

@@ -8,6 +8,8 @@
             <argument type="service" id="order_status.repository"/>
             <argument type="service" id="order_status.datagrid"/>
             <argument type="service" id="order_status.form_builder"/>
+            <argument type="service" id="order_status.factory"/>
+            <argument type="service" id="order_status.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -24,6 +26,12 @@
             <argument>WellCommerceOrderBundle:OrderStatus</argument>
         </service>
 
+        <service id="order_status.factory" class="WellCommerce\Bundle\OrderBundle\Factory\OrderStatusFactory"/>
+
+        <service id="order_status.event_dispatcher" class="WellCommerce\Bundle\OrderBundle\EventDispatcher\OrderStatusEventDispatcher">
+            <argument type="service" id="event_dispatcher"/>
+        </service>
+
         <service id="order_status.dataset.query_builder" class="WellCommerce\Bundle\OrderBundle\DataSet\OrderStatusDataSetQueryBuilder" public="false">
             <argument type="service" id="order_status.repository"/>
         </service>
@@ -36,6 +44,10 @@
         <service id="order_status.dataset" class="WellCommerce\Bundle\OrderBundle\DataSet\OrderStatusDataSet">
             <argument key="identifier">order_status</argument>
             <argument type="service" id="order_status.dataset.loader"/>
+            <argument type="service" id="order_status.event_dispatcher"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
@@ -46,6 +58,7 @@
         <service id="order_status.datagrid" class="WellCommerce\Bundle\OrderBundle\DataGrid\OrderStatusDataGrid">
             <argument key="identifier">order_status</argument>
             <argument type="service" id="order_status.dataset"/>
+            <argument type="service" id="order_status.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -54,6 +67,7 @@
         <service id="order_status.form_builder" class="WellCommerce\Bundle\OrderBundle\Form\OrderStatusFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
+            <argument type="service" id="order_status.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

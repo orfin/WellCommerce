@@ -10,16 +10,22 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\PaymentBundle\EventDispatcher;
-
-use WellCommerce\Bundle\CoreBundle\EventDispatcher\EventDispatcherInterface;
+namespace WellCommerce\Bundle\OrderBundle\Entity;
 
 /**
- * Interface PaymentMethodEventDispatcherInterface
+ * Interface OrderAwareInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface PaymentMethodEventDispatcherInterface extends EventDispatcherInterface
+interface OrderAwareInterface
 {
-    
+    /**
+     * @param OrderInterface $order
+     */
+    public function setOrder(OrderInterface $order);
+
+    /**
+     * @return OrderInterface
+     */
+    public function getOrder();
 }

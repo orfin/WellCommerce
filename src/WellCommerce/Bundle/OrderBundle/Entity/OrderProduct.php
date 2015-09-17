@@ -2,79 +2,56 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\Timestampable\TimestampableTrait;
-use WellCommerce\Bundle\ProductBundle\Entity\Product;
+use WellCommerce\Bundle\CoreBundle\Entity\Price;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeAwareTrait;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareTrait;
 
 /**
- * Class CartProduct
+ * Class OrderProduct
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @ORM\Table(name="orders_product")
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\OrderBundle\Repository\OrderProductRepository")
  */
 class OrderProduct
 {
     use TimestampableTrait;
     use ProductAwareTrait;
+    use ProductAttributeAwareTrait;
+    use OrderAwareTrait;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @var int
      */
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\OrderBundle\Entity\Order", inversedBy="products")
-     * @ORM\JoinColumn(name="order_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
-     */
-    protected $order;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute")
-     * @ORM\JoinColumn(name="attribute_id", referencedColumnName="id", nullable=true, onDelete="RESTRICT")
-     */
-    protected $attribute;
-
-    /**
      * @var float
-     *
-     * @ORM\Column(name="quantity", type="decimal", precision=15, scale=4)
      */
     protected $quantity;
 
     /**
-     * @ORM\Embedded(class = "WellCommerce\Bundle\CoreBundle\Entity\Price", columnPrefix = "net_price_")
+     * @var Price
      */
     protected $netPrice;
 
     /**
-     * @var float
-     *
-     * @ORM\Column(name="tax_value", type="decimal", precision=15, scale=4)
-     */
-    protected $taxValue;
-
-    /**
-     * @ORM\Embedded(class = "WellCommerce\Bundle\CoreBundle\Entity\Price", columnPrefix = "gross_price_")
+     * @var Price
      */
     protected $grossPrice;
 
     /**
      * @var float
-     *
-     * @ORM\Column(name="weight", type="decimal", precision=15, scale=4)
+     */
+    protected $taxValue;
+
+    /**
+     * @var float
      */
     protected $weight;
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -82,23 +59,7 @@ class OrderProduct
     }
 
     /**
-     * @return null|ProductAttribute
-     */
-    public function getAttribute()
-    {
-        return $this->attribute;
-    }
-
-    /**
-     * @param null|ProductAttribute $attribute
-     */
-    public function setAttribute(ProductAttribute $attribute = null)
-    {
-        $this->attribute = $attribute;
-    }
-
-    /**
-     * @return float
+     * {@inheritdoc}
      */
     public function getQuantity()
     {
@@ -106,7 +67,7 @@ class OrderProduct
     }
 
     /**
-     * @param float $quantity
+     * {@inheritdoc}
      */
     public function setQuantity($quantity)
     {
@@ -114,23 +75,7 @@ class OrderProduct
     }
 
     /**
-     * @return Order
-     */
-    public function getOrder()
-    {
-        return $this->order;
-    }
-
-    /**
-     * @param Order $cart
-     */
-    public function setOrder(Order $order)
-    {
-        $this->order = $order;
-    }
-
-    /**
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getNetPrice()
     {
@@ -138,7 +83,7 @@ class OrderProduct
     }
 
     /**
-     * @param mixed $netPrice
+     * {@inheritdoc}
      */
     public function setNetPrice($netPrice)
     {
@@ -146,7 +91,7 @@ class OrderProduct
     }
 
     /**
-     * @return float
+     * {@inheritdoc}
      */
     public function getTaxValue()
     {
@@ -162,7 +107,7 @@ class OrderProduct
     }
 
     /**
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getGrossPrice()
     {
@@ -170,7 +115,7 @@ class OrderProduct
     }
 
     /**
-     * @param mixed $grossPrice
+     * {@inheritdoc}
      */
     public function setGrossPrice($grossPrice)
     {
@@ -178,7 +123,7 @@ class OrderProduct
     }
 
     /**
-     * @return float
+     * {@inheritdoc}
      */
     public function getWeight()
     {
@@ -186,7 +131,7 @@ class OrderProduct
     }
 
     /**
-     * @param float $weight
+     * {@inheritdoc}
      */
     public function setWeight($weight)
     {

@@ -13,11 +13,11 @@
 namespace WellCommerce\Bundle\PaymentBundle\Entity;
 
 /**
- * Class PaymentMethodTrait
+ * Class PaymentMethodAwareTrait
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-trait PaymentMethodTrait
+trait PaymentMethodAwareTrait
 {
     /**
      * @var PaymentMethodInterface

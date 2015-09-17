@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\MultiStoreBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
-use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\Shop;
 
 /**
@@ -22,7 +21,7 @@ use WellCommerce\Bundle\MultiStoreBundle\Entity\Shop;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ShopFactory extends AbstractFactory implements FactoryInterface
+class ShopFactory extends AbstractFactory
 {
     /**
      * @return \WellCommerce\Bundle\MultiStoreBundle\Entity\ShopInterface

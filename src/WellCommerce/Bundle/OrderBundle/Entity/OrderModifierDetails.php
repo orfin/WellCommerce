@@ -12,33 +12,25 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
- * Class OrderModifierType
- *
- * @ORM\Embeddable
+ * Class OrderModifierDetails
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderModifierDetails
+class OrderModifierDetails implements OrderModifierDetailsInterface
 {
     /**
      * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255)
      */
     protected $name;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="description", type="string", length=255)
      */
     protected $description;
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getName()
     {
@@ -46,7 +38,7 @@ class OrderModifierDetails
     }
 
     /**
-     * @param string $name
+     * {@inheritdoc}
      */
     public function setName($name)
     {
@@ -54,7 +46,7 @@ class OrderModifierDetails
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getDescription()
     {
@@ -62,7 +54,7 @@ class OrderModifierDetails
     }
 
     /**
-     * @param string $description
+     * {@inheritdoc}
      */
     public function setDescription($description)
     {

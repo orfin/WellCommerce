@@ -11,7 +11,6 @@
  */
 namespace WellCommerce\Bundle\OrderBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
@@ -30,24 +29,17 @@ class OrderStatus implements OrderStatusInterface
     use EnableableTrait;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @var int
      */
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\OrderBundle\Entity\OrderStatusGroup")
-     * @ORM\JoinColumn(name="order_status_group_id", referencedColumnName="id", onDelete="CASCADE")
+     * @var OrderStatusGroupInterface
      */
     protected $orderStatusGroup;
 
     /**
-     * Get id.
-     *
-     * @return integer
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -55,7 +47,7 @@ class OrderStatus implements OrderStatusInterface
     }
 
     /**
-     * @return OrderStatusGroup
+     * {@inheritdoc}
      */
     public function getOrderStatusGroup()
     {
@@ -63,9 +55,9 @@ class OrderStatus implements OrderStatusInterface
     }
 
     /**
-     * @param OrderStatusGroup $orderStatusGroup
+     * {@inheritdoc}
      */
-    public function setOrderStatusGroup(OrderStatusGroup $orderStatusGroup)
+    public function setOrderStatusGroup(OrderStatusGroupInterface $orderStatusGroup)
     {
         $this->orderStatusGroup = $orderStatusGroup;
     }

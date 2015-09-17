@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Controller;
 
+use Symfony\Component\HttpFoundation\RedirectResponse;
+
 /**
  * Interface ControllerInterface
  *

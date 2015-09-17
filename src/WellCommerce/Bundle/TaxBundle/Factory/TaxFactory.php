@@ -23,7 +23,7 @@ use WellCommerce\Bundle\TaxBundle\Entity\Tax;
 class TaxFactory extends AbstractFactory implements TaxFactoryInterface
 {
     /**
-     * {@inheritdoc}
+     * @return \WellCommerce\Bundle\TaxBundle\Entity\TaxInterface
      */
     public function create()
     {

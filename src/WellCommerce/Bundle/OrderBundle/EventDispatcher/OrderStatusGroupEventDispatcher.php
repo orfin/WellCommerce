@@ -10,19 +10,16 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\UnitBundle\Factory;
+namespace WellCommerce\Bundle\OrderBundle\EventDispatcher;
 
-use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
+use WellCommerce\Bundle\CoreBundle\EventDispatcher\AbstractEventDispatcher;
 
 /**
- * Class UnitFactoryInterface
+ * Class OrderStatusGroupEventDispatcher
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface UnitFactoryInterface extends FactoryInterface
+class OrderStatusGroupEventDispatcher extends AbstractEventDispatcher
 {
-    /**
-     * @return \WellCommerce\Bundle\UnitBundle\Entity\UnitInterface
-     */
-    public function create();
+    
 }

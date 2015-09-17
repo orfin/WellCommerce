@@ -10,26 +10,25 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CmsBundle\Factory;
+namespace WellCommerce\Bundle\OrderBundle\Factory;
 
-use WellCommerce\Bundle\CmsBundle\Entity\Contact;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderStatusGroup;
 
 /**
- * Class ContactFactory
+ * Class OrderStatusGroupFactory
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ContactFactory extends AbstractFactory
+class OrderStatusGroupFactory extends AbstractFactory
 {
     /**
-     * @return \WellCommerce\Bundle\CmsBundle\Entity\ContactInterface
+     * @return \WellCommerce\Bundle\OrderBundle\Entity\OrderStatusGroupInterface
      */
     public function create()
     {
-        $contact = new Contact();
-        $contact->setCreatedAt(new \DateTime());
+        $group = new OrderStatusGroup();
 
-        return $contact;
+        return $group;
     }
 }

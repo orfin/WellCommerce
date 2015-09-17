@@ -19,7 +19,7 @@ use WellCommerce\Bundle\CoreBundle\EventDispatcher\AbstractEventDispatcher;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PaymentMethodEventDispatcher extends AbstractEventDispatcher implements PaymentMethodEventDispatcherInterface
+class PaymentMethodEventDispatcher extends AbstractEventDispatcher
 {
     
 }

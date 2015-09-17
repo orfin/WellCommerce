@@ -12,54 +12,52 @@
 
 namespace WellCommerce\Bundle\ProductBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Doctrine\Common\Collections\Collection;
+use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
+use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
+use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 
 /**
  * Class ProductStatus
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @ORM\Table(name="product_status")
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\ProductBundle\Repository\ProductStatusRepository")
  */
 class ProductStatus
 {
-    use ORMBehaviors\Translatable\Translatable;
-    use ORMBehaviors\Timestampable\Timestampable;
-    use ORMBehaviors\Blameable\Blameable;
+    use Translatable;
+    use Timestampable;
+    use Blameable;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @var int
      */
-    private $id;
+    protected $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\Product", mappedBy="statuses")
+     * @var Collection
      */
-    private $products;
+    protected $products;
 
-    public function __construct()
-    {
-        $this->products = new ArrayCollection();
-    }
-
+    /**
+     * {@inheritdoc}
+     */
     public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getProducts()
     {
         return $this->products;
     }
 
-    public function setProducts(ArrayCollection $collection)
+    /**
+     * {@inheritdoc}
+     */
+    public function setProducts(Collection $collection)
     {
         $this->products = $collection;
     }

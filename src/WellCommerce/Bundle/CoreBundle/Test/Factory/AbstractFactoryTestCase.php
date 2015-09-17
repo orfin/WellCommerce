@@ -26,17 +26,21 @@ abstract class AbstractFactoryTestCase extends AbstractTestCase
      */
     abstract protected function getFactoryService();
 
-    abstract protected function getExpectedInstanceInterface();
+    abstract protected function getExpectedInterface();
 
     public function testImplementsProperInterface()
     {
         $factory = $this->getFactoryService();
-        $this->assertInstanceOf('WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface', $factory);
+        if (null !== $factory) {
+            $this->assertInstanceOf('WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface', $factory);
+        }
     }
 
     public function testExpectedObjectIsReturned()
     {
         $factory = $this->getFactoryService();
-        $this->assertInstanceOf($this->getExpectedInstanceInterface(), $factory->create());
+        if (null !== $factory) {
+            $this->assertInstanceOf($this->getExpectedInterface(), $factory->create());
+        }
     }
 }

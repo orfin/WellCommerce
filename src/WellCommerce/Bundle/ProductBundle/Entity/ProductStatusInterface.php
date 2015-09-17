@@ -10,31 +10,32 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\OrderBundle\Entity;
+namespace WellCommerce\Bundle\ProductBundle\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
 
 /**
- * Interface OrderStatusInterface
+ * Interface ProductStatusInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface OrderStatusInterface extends TimestampableInterface, TranslatableInterface, BlameableInterface
+interface ProductStatusInterface extends TimestampableInterface, TranslatableInterface, BlameableInterface
 {
     /**
-     * @return integer
+     * @return int
      */
     public function getId();
 
     /**
-     * @return OrderStatusGroupInterface
+     * @return Collection
      */
-    public function getOrderStatusGroup();
+    public function getProducts();
 
     /**
-     * @param OrderStatusGroupInterface $orderStatusGroup
+     * @param Collection $collection
      */
-    public function setOrderStatusGroup(OrderStatusGroupInterface $orderStatusGroup);
+    public function setProducts(Collection $collection);
 }

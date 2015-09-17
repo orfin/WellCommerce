@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\IntlBundle\Factory;
 
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
-use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
 use WellCommerce\Bundle\IntlBundle\Entity\Currency;
 
 /**
@@ -21,7 +20,7 @@ use WellCommerce\Bundle\IntlBundle\Entity\Currency;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CurrencyFactory extends AbstractFactory implements FactoryInterface
+class CurrencyFactory extends AbstractFactory
 {
     /**
      * @return \WellCommerce\Bundle\IntlBundle\Entity\CurrencyInterface

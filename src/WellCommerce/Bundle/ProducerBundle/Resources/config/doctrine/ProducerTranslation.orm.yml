@@ -26,11 +26,7 @@ WellCommerce\Bundle\ProducerBundle\Entity\ProducerTranslation:
                 - remove
                 - persist
             fetch: LAZY
-            mappedBy: null
-            inversedBy: null
             joinColumns:
                 route_id:
                     referencedColumnName: id
                     onDelete: CASCADE
-            orphanRemoval: false
-    lifecycleCallbacks: {  }

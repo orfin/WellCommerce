@@ -19,7 +19,7 @@ use WellCommerce\Bundle\CoreBundle\EventDispatcher\AbstractEventDispatcher;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class TaxEventDispatcher extends AbstractEventDispatcher implements TaxEventDispatcherInterface
+class TaxEventDispatcher extends AbstractEventDispatcher
 {
     
 }

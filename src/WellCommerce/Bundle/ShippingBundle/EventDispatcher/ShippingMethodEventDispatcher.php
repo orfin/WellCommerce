@@ -19,7 +19,7 @@ use WellCommerce\Bundle\CoreBundle\EventDispatcher\AbstractEventDispatcher;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ShippingMethodEventDispatcher extends AbstractEventDispatcher implements ShippingMethodEventDispatcherInterface
+class ShippingMethodEventDispatcher extends AbstractEventDispatcher
 {
     
 }

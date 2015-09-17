@@ -10,16 +10,16 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ShippingBundle\EventDispatcher;
+namespace WellCommerce\Bundle\OrderBundle\EventDispatcher;
 
-use WellCommerce\Bundle\CoreBundle\EventDispatcher\EventDispatcherInterface;
+use WellCommerce\Bundle\CoreBundle\EventDispatcher\AbstractEventDispatcher;
 
 /**
- * Interface ShippingMethodEventDispatcherInterface
+ * Class OrderStatusEventDispatcher
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ShippingMethodEventDispatcherInterface extends EventDispatcherInterface
+class OrderStatusEventDispatcher extends AbstractEventDispatcher
 {
     
 }

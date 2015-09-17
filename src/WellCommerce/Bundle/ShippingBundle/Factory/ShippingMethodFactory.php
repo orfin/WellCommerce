@@ -21,10 +21,10 @@ use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ShippingMethodFactory extends AbstractFactory implements ShippingMethodFactoryInterface
+class ShippingMethodFactory extends AbstractFactory
 {
     /**
-     * {@inheritdoc}
+     * @return \WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface
      */
     public function create()
     {

@@ -17,24 +17,14 @@ use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
 
 /**
- * Interface OrderStatusInterface
+ * Interface OrderStatusGroupInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface OrderStatusInterface extends TimestampableInterface, TranslatableInterface, BlameableInterface
+interface OrderStatusGroupInterface extends TranslatableInterface, TimestampableInterface, BlameableInterface
 {
     /**
      * @return integer
      */
     public function getId();
-
-    /**
-     * @return OrderStatusGroupInterface
-     */
-    public function getOrderStatusGroup();
-
-    /**
-     * @param OrderStatusGroupInterface $orderStatusGroup
-     */
-    public function setOrderStatusGroup(OrderStatusGroupInterface $orderStatusGroup);
 }
