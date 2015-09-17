@@ -12,29 +12,25 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Class Price
- *
- * @ORM\Embeddable
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class Price
 {
     /**
-     * @ORM\Column(type="decimal", precision=15, scale=4, nullable=false)
+     * @var float
      */
     protected $amount;
 
     /**
-     * @ORM\Column(type="string", nullable=false, length=16)
+     * @var string
      */
     protected $currency;
 
     /**
-     * @return mixed
+     * @return float
      */
     public function getAmount()
     {
@@ -42,11 +38,11 @@ class Price
     }
 
     /**
-     * @param mixed $amount
+     * @param float $amount
      */
     public function setAmount($amount)
     {
-        $this->amount = $amount;
+        $this->amount = (float)$amount;
     }
 
     /**
@@ -58,7 +54,7 @@ class Price
     }
 
     /**
-     * @param mixed $currency
+     * @param string $currency
      */
     public function setCurrency($currency)
     {

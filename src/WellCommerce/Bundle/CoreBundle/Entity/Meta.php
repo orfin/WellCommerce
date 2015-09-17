@@ -12,12 +12,8 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Class Meta
- *
- * @ORM\Embeddable
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
@@ -25,24 +21,18 @@ class Meta
 {
     /**
      * @var string
-     *
-     * @ORM\Column(name="title", type="string", length=255, nullable=true)
      */
-    private $title;
+    protected $title;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="keywords", type="text", nullable=true)
      */
-    private $keywords;
+    protected $keywords;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="description", type="text", nullable=true)
      */
-    private $description;
+    protected $description;
 
     /**
      * Constructor

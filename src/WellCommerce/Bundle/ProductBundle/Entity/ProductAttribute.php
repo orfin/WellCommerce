@@ -15,8 +15,8 @@ namespace WellCommerce\Bundle\ProductBundle\Entity;
 use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityAwareTrait;
-use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\HierarchyTrait;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\PhotoTrait;
+use WellCommerce\Bundle\CoreBundle\Entity\HierarchyAwareTrait;
 
 /**
  * Class ProductAttribute
@@ -26,7 +26,7 @@ use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\PhotoTrait;
 class ProductAttribute implements ProductAttributeInterface
 {
     use Timestampable;
-    use HierarchyTrait;
+    use HierarchyAwareTrait;
     use PhotoTrait;
     use AvailabilityAwareTrait;
     use ProductAwareTrait;

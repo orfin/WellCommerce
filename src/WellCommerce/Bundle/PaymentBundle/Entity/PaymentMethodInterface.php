@@ -12,12 +12,17 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Entity;
 
+use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\HierarchyAwareInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
+
 /**
  * Interface PaymentMethodInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface PaymentMethodInterface
+interface PaymentMethodInterface extends TimestampableInterface, TranslatableInterface, BlameableInterface, HierarchyAwareInterface
 {
     /**
      * @return integer

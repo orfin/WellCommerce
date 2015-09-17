@@ -12,12 +12,14 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Entity;
 
+use WellCommerce\Bundle\CoreBundle\Entity\HierarchyAwareInterface;
+
 /**
  * Interface OrderModifierInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface OrderModifierInterface extends OrderAwareInterface
+interface OrderModifierInterface extends OrderAwareInterface, HierarchyAwareInterface
 {
     /**
      * @return int

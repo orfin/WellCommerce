@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\ProductBundle\Entity;
 
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
-use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\HierarchyTrait;
+use WellCommerce\Bundle\CoreBundle\Entity\HierarchyAwareTrait;
 use WellCommerce\Bundle\MediaBundle\Entity\MediaInterface;
 
 /**
@@ -21,10 +21,10 @@ use WellCommerce\Bundle\MediaBundle\Entity\MediaInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductPhoto
+class ProductPhoto implements ProductPhotoInterface
 {
     use Timestampable;
-    use HierarchyTrait;
+    use HierarchyAwareTrait;
     use ProductAwareTrait;
 
     /**

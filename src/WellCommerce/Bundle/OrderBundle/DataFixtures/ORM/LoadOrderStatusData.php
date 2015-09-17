@@ -50,20 +50,20 @@ class LoadOrderStatusData extends AbstractDataFixture
     {
         return [
             'new'       => [
-                'name'                         => 'Order received',
+                'name'                         => 'New',
                 'default_comment'              => 'We have received your order.',
                 'order_status_group_reference' => 'order_status_group_Processing',
                 'default'                      => true
             ],
             'prepared'  => [
-                'name'                         => 'Order received',
-                'default_comment'              => 'We have received your order.',
+                'name'                         => 'Prepared',
+                'default_comment'              => 'We are preparing your order.',
                 'order_status_group_reference' => 'order_status_group_Prepared',
                 'default'                      => false
             ],
             'completed' => [
-                'name'                         => 'Order received',
-                'default_comment'              => 'We have received your order.',
+                'name'                         => 'Completed',
+                'default_comment'              => 'Your order has been completed.',
                 'order_status_group_reference' => 'order_status_group_Completed',
                 'default'                      => false
             ]

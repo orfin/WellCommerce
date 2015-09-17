@@ -2,7 +2,7 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Entity;
 
-use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\HierarchyTrait;
+use WellCommerce\Bundle\CoreBundle\Entity\HierarchyAwareTrait;
 
 /**
  * Class OrderModifier
@@ -11,7 +11,7 @@ use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\HierarchyTrait;
  */
 class OrderModifier implements OrderModifierInterface
 {
-    use HierarchyTrait;
+    use HierarchyAwareTrait;
     use OrderAwareTrait;
 
     /**

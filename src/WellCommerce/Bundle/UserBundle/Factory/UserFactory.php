@@ -21,10 +21,10 @@ use WellCommerce\Bundle\UserBundle\Entity\User;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class UserFactory extends AbstractFactory implements UserFactoryInterface
+class UserFactory extends AbstractFactory
 {
     /**
-     * {@inheritdoc}
+     * @return \WellCommerce\Bundle\UserBundle\Entity\UserInterface
      */
     public function create()
     {

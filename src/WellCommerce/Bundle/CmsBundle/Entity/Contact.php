@@ -24,7 +24,10 @@ use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\EnableableTrait;
  */
 class Contact implements ContactInterface
 {
-    use Translatable, Timestampable, Blameable, EnableableTrait;
+    use Translatable;
+    use Timestampable;
+    use Blameable;
+    use EnableableTrait;
 
     /**
      * @var int

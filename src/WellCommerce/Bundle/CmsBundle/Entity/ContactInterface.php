@@ -12,12 +12,16 @@
 
 namespace WellCommerce\Bundle\CmsBundle\Entity;
 
+use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
+
 /**
  * Interface ContactInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ContactInterface
+interface ContactInterface extends TimestampableInterface, TranslatableInterface, BlameableInterface
 {
     /**
      * @return integer
