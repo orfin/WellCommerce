@@ -21,7 +21,7 @@ use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PageFactory extends AbstractFactory implements PageFactoryInterface
+class PageFactory extends AbstractFactory
 {
     /**
      * @return \WellCommerce\Bundle\CmsBundle\Entity\PageInterface
