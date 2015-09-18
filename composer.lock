@@ -718,12 +718,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/inflector.git",
-                "reference": "a081a0c2f14486254464f1a657595f5a6b3092f4"
+                "reference": "3a422c73f7bc556d39571f436b61fd58ccae0eb0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/inflector/zipball/a081a0c2f14486254464f1a657595f5a6b3092f4",
-                "reference": "a081a0c2f14486254464f1a657595f5a6b3092f4",
+                "url": "https://api.github.com/repos/doctrine/inflector/zipball/3a422c73f7bc556d39571f436b61fd58ccae0eb0",
+                "reference": "3a422c73f7bc556d39571f436b61fd58ccae0eb0",
                 "shasum": ""
             },
             "require": {
@@ -777,7 +777,7 @@
                 "singularize",
                 "string"
             ],
-            "time": "2015-09-02 15:55:05"
+            "time": "2015-09-17 13:29:15"
         },
         {
             "name": "doctrine/instantiator",
@@ -2093,12 +2093,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/packagist-api.git",
-                "reference": "9aebf8238943289d3bc3ab51e0014ed94a7a266a"
+                "reference": "2908c75b405fea8a85ac6848bf4d3629d02e670a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/packagist-api/zipball/9aebf8238943289d3bc3ab51e0014ed94a7a266a",
-                "reference": "9aebf8238943289d3bc3ab51e0014ed94a7a266a",
+                "url": "https://api.github.com/repos/KnpLabs/packagist-api/zipball/2908c75b405fea8a85ac6848bf4d3629d02e670a",
+                "reference": "2908c75b405fea8a85ac6848bf4d3629d02e670a",
                 "shasum": ""
             },
             "require": {
@@ -2138,7 +2138,7 @@
                 "composer",
                 "packagist"
             ],
-            "time": "2015-09-07 14:25:16"
+            "time": "2015-09-18 08:27:09"
         },
         {
             "name": "kriswallsmith/assetic",
@@ -3544,12 +3544,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "c67e8b26b3d4b04a5ade55884373f47a75a94d84"
+                "reference": "72f3fe14708b9980bef2a601101886680837622e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/c67e8b26b3d4b04a5ade55884373f47a75a94d84",
-                "reference": "c67e8b26b3d4b04a5ade55884373f47a75a94d84",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/72f3fe14708b9980bef2a601101886680837622e",
+                "reference": "72f3fe14708b9980bef2a601101886680837622e",
                 "shasum": ""
             },
             "require": {
@@ -3658,7 +3658,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2015-09-15 11:37:25"
+            "time": "2015-09-18 18:31:45"
         },
         {
             "name": "twig/extensions",
@@ -4005,12 +4005,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/WellCommerce/FormBundle.git",
-                "reference": "104ce9e923f68d048aa9ecc15f7aa405f38bc2cd"
+                "reference": "3dc77d1fb63c29867e959c8bbc3d9ca83dcfaa04"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WellCommerce/FormBundle/zipball/104ce9e923f68d048aa9ecc15f7aa405f38bc2cd",
-                "reference": "104ce9e923f68d048aa9ecc15f7aa405f38bc2cd",
+                "url": "https://api.github.com/repos/WellCommerce/FormBundle/zipball/3dc77d1fb63c29867e959c8bbc3d9ca83dcfaa04",
+                "reference": "3dc77d1fb63c29867e959c8bbc3d9ca83dcfaa04",
                 "shasum": ""
             },
             "require": {
@@ -4062,7 +4062,7 @@
                 "form",
                 "symfony"
             ],
-            "time": "2015-08-30 11:20:08"
+            "time": "2015-09-18 19:50:14"
         },
         {
             "name": "white-october/pagerfanta-bundle",
@@ -5296,12 +5296,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "7ac5fe1e0c3b91faa94abec117cc47d5a8014cfe"
+                "reference": "c7f424ddbc8ca58d7ceb163306dad629c92f2997"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/7ac5fe1e0c3b91faa94abec117cc47d5a8014cfe",
-                "reference": "7ac5fe1e0c3b91faa94abec117cc47d5a8014cfe",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/c7f424ddbc8ca58d7ceb163306dad629c92f2997",
+                "reference": "c7f424ddbc8ca58d7ceb163306dad629c92f2997",
                 "shasum": ""
             },
             "require": {
@@ -5362,7 +5362,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-09-15 15:02:52"
+            "time": "2015-09-18 15:41:39"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
