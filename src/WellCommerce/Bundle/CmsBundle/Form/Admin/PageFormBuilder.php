@@ -13,9 +13,6 @@ namespace WellCommerce\Bundle\CmsBundle\Form\Admin;
 
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Bundle\FormBundle\Conditions\Equals;
-use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
-use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\EntityToIdentifierTransformer;
-use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\TranslationTransformer;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
@@ -54,7 +51,7 @@ class PageFormBuilder extends AbstractFormBuilder
         $languageData = $mainData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
             'label'       => $this->trans('fieldset.translations.label'),
-            'transformer' => new TranslationTransformer($this->get('page.repository'))
+            'transformer' => $this->getRepositoryTransformer('translation', $this->get('page.repository'))
         ]));
 
         $name = $languageData->addChild($this->getElement('text_field', [
@@ -92,7 +89,7 @@ class PageFormBuilder extends AbstractFormBuilder
             'clickable'   => false,
             'items'       => $this->get('page.collection.admin')->getFlatTree(),
             'restrict'    => $this->getParam('id'),
-            'transformer' => new EntityToIdentifierTransformer($this->get('page.repository'))
+            'transformer' => $this->getRepositoryTransformer('entity', $this->get('page.repository'))
         ]));
 
         $mainData->addChild($this->getElement('tip', [
@@ -103,7 +100,7 @@ class PageFormBuilder extends AbstractFormBuilder
             'name'        => 'clientGroups',
             'label'       => $this->trans('page.label.client_groups'),
             'options'     => $this->get('client_group.collection')->getSelect(),
-            'transformer' => new CollectionToArrayTransformer($this->get('client_group.repository'))
+            'transformer' => $this->getRepositoryTransformer('collection', $this->get('client_group.repository'))
         ]));
     }
 
@@ -122,7 +119,7 @@ class PageFormBuilder extends AbstractFormBuilder
         $languageData = $contentData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
             'label'       => $this->trans('fieldset.translations.label'),
-            'transformer' => new TranslationTransformer($this->get('page.repository'))
+            'transformer' => $this->getRepositoryTransformer('translation', $this->get('page.repository'))
         ]));
 
         $languageData->addChild($this->getElement('rich_text_editor', [
@@ -138,7 +135,7 @@ class PageFormBuilder extends AbstractFormBuilder
         $languageData = $metaData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
             'label'       => $this->trans('fieldset.translations.label'),
-            'transformer' => new TranslationTransformer($this->get('producer.repository'))
+            'transformer' => $this->getRepositoryTransformer('translation', $this->get('page.repository'))
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
@@ -216,7 +213,7 @@ class PageFormBuilder extends AbstractFormBuilder
             'name'        => 'shops',
             'label'       => $this->trans('shops.label'),
             'options'     => $this->get('shop.collection')->getSelect(),
-            'transformer' => new CollectionToArrayTransformer($this->get('shop.repository'))
+            'transformer' => $this->getRepositoryTransformer('collection', $this->get('shop.repository'))
         ]));
     }
 

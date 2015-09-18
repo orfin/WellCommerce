@@ -12,7 +12,6 @@
 namespace WellCommerce\Bundle\CmsBundle\Form\Admin;
 
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
-use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\TranslationTransformer;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
@@ -40,7 +39,7 @@ class ContactFormBuilder extends AbstractFormBuilder
         $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
             'label'       => $this->trans('form.required_data.language_data.label'),
-            'transformer' => new TranslationTransformer($this->get('contact.repository'))
+            'transformer' => $this->getRepositoryTransformer('translation', $this->get('contact.repository'))
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
@@ -71,7 +70,7 @@ class ContactFormBuilder extends AbstractFormBuilder
         $languageData = $addressData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
             'label'       => $this->trans('contact.translations.label'),
-            'transformer' => new TranslationTransformer($this->get('contact.repository'))
+            'transformer' => $this->getRepositoryTransformer('translation', $this->get('contact.repository'))
         ]));
 
         $languageData->addChild($this->getElement('text_field', [

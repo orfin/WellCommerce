@@ -22,7 +22,7 @@ use Symfony\Component\PropertyAccess\PropertyPathInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CollectionToArrayTransformer extends AbstractDataTransformer
+class CollectionToArrayTransformer extends AbstractDataTransformer implements RepositoryAwareDataTransformerInterface
 {
     /**
      * {@inheritdoc}
@@ -64,8 +64,8 @@ class CollectionToArrayTransformer extends AbstractDataTransformer
     /**
      * Removes all elements from old collection which have not been passed in new collection
      *
-     * @param PersistentCollection $oldEntities
-     * @param ArrayCollection      $newEntities
+     * @param Collection $oldEntities
+     * @param Collection $newEntities
      */
     protected function synchronizeCollection(Collection $oldCollection, Collection $newCollection)
     {

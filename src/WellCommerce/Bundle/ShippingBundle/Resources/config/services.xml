@@ -110,5 +110,10 @@
         <service id="shipping_method.helper" class="WellCommerce\Bundle\ShippingBundle\Helper\ShippingMethodHelper">
             <argument type="service" id="currency.converter"/>
         </service>
+
+        <service id="form.shipping_cost_collection.data_transformer" class="WellCommerce\Bundle\ShippingBundle\Form\DataTransformer\ShippingCostCollectionToArrayTransformer" scope="prototype">
+            <argument type="service" id="doctrine_helper"/>
+            <tag name="form.data_transformer" alias="shipping_cost_collection"/>
+        </service>
     </services>
 </container>

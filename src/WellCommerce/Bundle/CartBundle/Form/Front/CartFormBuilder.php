@@ -12,9 +12,7 @@
 namespace WellCommerce\Bundle\CartBundle\Form\Front;
 
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
-use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\EntityToIdentifierTransformer;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
-use WellCommerce\Bundle\FormBundle\FormBuilderInterface;
 
 /**
  * Class CartFormBuilder
@@ -32,14 +30,14 @@ class CartFormBuilder extends AbstractFormBuilder
             'name'        => 'shippingMethod',
             'label'       => $this->trans('cart.shipping_method.label'),
             'options'     => $this->getShippingMethodOptions(),
-            'transformer' => new EntityToIdentifierTransformer($this->get('shipping_method.repository'))
+            'transformer' => $this->getRepositoryTransformer('entity', $this->get('shipping_method.repository'))
         ]));
 
         $form->addChild($this->getElement('radio_group', [
             'name'        => 'paymentMethod',
             'label'       => $this->trans('cart.payment_method.label'),
             'options'     => $this->get('payment_method.collection.front')->getSelect(),
-            'transformer' => new EntityToIdentifierTransformer($this->get('payment_method.repository'))
+            'transformer' => $this->getRepositoryTransformer('entity', $this->get('payment_method.repository'))
         ]));
 
 

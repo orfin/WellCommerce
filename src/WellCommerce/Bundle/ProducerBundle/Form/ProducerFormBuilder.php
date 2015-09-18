@@ -13,9 +13,6 @@ namespace WellCommerce\Bundle\ProducerBundle\Form;
 
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Bundle\DataSetBundle\CollectionBuilder\SelectBuilder;
-use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
-use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\TranslationTransformer;
-use WellCommerce\Bundle\MediaBundle\Form\DataTransformer\MediaEntityToIdentifierTransformer;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
@@ -38,17 +35,17 @@ class ProducerFormBuilder extends AbstractFormBuilder
         $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
             'label'       => $this->trans('form.required_data.language_data.label'),
-            'transformer' => new TranslationTransformer($this->get('product.repository'))
+            'transformer' => $this->getRepositoryTransformer('translation', $this->get('product.repository'))
         ]));
 
         $name = $languageData->addChild($this->getElement('text_field', [
             'name'  => 'name',
-            'label' => $this->trans('producer.name.label'),
+            'label' => $this->trans('producer.label.name'),
         ]));
 
         $languageData->addChild($this->getElement('slug_field', [
             'name'            => 'slug',
-            'label'           => $this->trans('producer.slug.label'),
+            'label'           => $this->trans('producer.label.slug'),
             'name_field'      => $name,
             'generate_route'  => 'admin.routing.generate',
             'translatable_id' => $this->getParam('id')
@@ -62,7 +59,7 @@ class ProducerFormBuilder extends AbstractFormBuilder
         $languageData = $metaData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
             'label'       => $this->trans('fieldset.translations.label'),
-            'transformer' => new TranslationTransformer($this->get('producer.repository'))
+            'transformer' => $this->getRepositoryTransformer('translation', $this->get('producer.repository'))
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
@@ -88,13 +85,13 @@ class ProducerFormBuilder extends AbstractFormBuilder
         $mediaData->addChild($this->getElement('image', [
             'name'         => 'photo',
             'label'        => $this->trans('form.media_data.image_id'),
-            'load_route'   => $this->generateUrl('admin.media.grid'),
-            'upload_url'   => $this->generateUrl('admin.media.add'),
+            'load_route'   => $this->getRouterHelper()->generateUrl('admin.media.grid'),
+            'upload_url'   => $this->getRouterHelper()->generateUrl('admin.media.add'),
             'repeat_min'   => 0,
             'repeat_max'   => 1,
-            'transformer'  => new MediaEntityToIdentifierTransformer($this->get('media.repository')),
-            'session_name' => $this->getRequest()->getSession()->getName(),
-            'session_id'   => $this->getRequest()->getSession()->getId(),
+            'transformer'  => $this->getRepositoryTransformer('media_entity', $this->get('media.repository')),
+            'session_name' => $this->getRequestHelper()->getCurrentRequest()->getSession()->getName(),
+            'session_id'   => $this->getRequestHelper()->getCurrentRequest()->getSession()->getId(),
         ]));
 
         $delivererData = $form->addChild($this->getElement('nested_fieldset', [
@@ -108,7 +105,7 @@ class ProducerFormBuilder extends AbstractFormBuilder
             'name'        => 'deliverers',
             'label'       => $this->trans('deliverers'),
             'options'     => $delivererSelectBuilder->getItems(),
-            'transformer' => new CollectionToArrayTransformer($this->get('deliverer.repository'))
+            'transformer' => $this->getRepositoryTransformer('collection', $this->get('deliverer.repository'))
         ]));
 
         $shopsData = $form->addChild($this->getElement('nested_fieldset', [
@@ -120,7 +117,7 @@ class ProducerFormBuilder extends AbstractFormBuilder
             'name'        => 'shops',
             'label'       => $this->trans('shops.label'),
             'options'     => $this->get('shop.collection')->getSelect(),
-            'transformer' => new CollectionToArrayTransformer($this->get('shop.repository'))
+            'transformer' => $this->getRepositoryTransformer('collection', $this->get('shop.repository'))
         ]));
 
         $form->addFilter($this->getFilter('no_code'));

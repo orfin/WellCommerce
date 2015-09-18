@@ -19,7 +19,7 @@ use Symfony\Component\PropertyAccess\PropertyPathInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class EntityToIdentifierTransformer extends AbstractDataTransformer
+class EntityToIdentifierTransformer extends AbstractDataTransformer implements RepositoryAwareDataTransformerInterface
 {
     /**
      * {@inheritdoc}

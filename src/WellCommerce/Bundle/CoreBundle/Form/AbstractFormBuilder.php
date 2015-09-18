@@ -14,8 +14,8 @@ namespace WellCommerce\Bundle\CoreBundle\Form;
 
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
 use WellCommerce\Bundle\CoreBundle\EventDispatcher\EventDispatcherInterface;
+use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
-use WellCommerce\Bundle\FormBundle\Event\FormEvent;
 use WellCommerce\Bundle\FormBundle\FormBuilderInterface;
 use WellCommerce\Bundle\FormBundle\Handler\FormHandlerInterface;
 use WellCommerce\Bundle\FormBundle\Resolver\FormResolverFactoryInterface;
@@ -137,5 +137,22 @@ abstract class AbstractFormBuilder extends AbstractContainerAware implements For
         $service->setOptions($options);
 
         return $service;
+    }
+
+    /**
+     * Returns an instance of form data transformer
+     *
+     * @param string                     $alias
+     * @param object|RepositoryInterface $repository
+     *
+     * @return DataTransformer\RepositoryAwareDataTransformerInterface
+     */
+    protected function getRepositoryTransformer($alias, RepositoryInterface $repository)
+    {
+        /** @var $transformer \WellCommerce\Bundle\CoreBundle\Form\DataTransformer\RepositoryAwareDataTransformerInterface */
+        $transformer = $this->get('form.data_transformer.factory')->createRepositoryTransformer($alias);
+        $transformer->setRepository($repository);
+
+        return $transformer;
     }
 }

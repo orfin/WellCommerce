@@ -12,7 +12,6 @@
 namespace WellCommerce\Bundle\ProductBundle\Form;
 
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
-use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\TranslationTransformer;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
@@ -35,7 +34,7 @@ class ProductStatusFormBuilder extends AbstractFormBuilder
         $languageData = $mainData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
             'label'       => $this->trans('fieldset.translations.label'),
-            'transformer' => new TranslationTransformer($this->get('product_status.repository'))
+            'transformer' => $this->getRepositoryTransformer('translation', $this->get('product_status.repository'))
         ]));
 
         $name = $languageData->addChild($this->getElement('text_field', [
@@ -65,7 +64,7 @@ class ProductStatusFormBuilder extends AbstractFormBuilder
         $languageData = $metaData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
             'label'       => $this->trans('fieldset.translations.label'),
-            'transformer' => new TranslationTransformer($this->get('product.repository'))
+            'transformer' => $this->getRepositoryTransformer('translation', $this->get('product_status.repository'))
         ]));
 
         $languageData->addChild($this->getElement('text_field', [

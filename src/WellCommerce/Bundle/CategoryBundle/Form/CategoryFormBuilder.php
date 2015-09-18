@@ -12,9 +12,6 @@
 namespace WellCommerce\Bundle\CategoryBundle\Form;
 
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
-use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
-use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\EntityToIdentifierTransformer;
-use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\TranslationTransformer;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
@@ -37,17 +34,17 @@ class CategoryFormBuilder extends AbstractFormBuilder
         $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
             'label'       => $this->trans('fieldset.translations'),
-            'transformer' => new TranslationTransformer($this->get('category.repository'))
+            'transformer' => $this->getRepositoryTransformer('translation', $this->get('category.repository'))
         ]));
 
         $name = $languageData->addChild($this->getElement('text_field', [
             'name'  => 'name',
-            'label' => $this->trans('category.name.label'),
+            'label' => $this->trans('category.label.name'),
         ]));
 
         $languageData->addChild($this->getElement('slug_field', [
             'name'            => 'slug',
-            'label'           => $this->trans('category.slug.label'),
+            'label'           => $this->trans('category.label.slug'),
             'name_field'      => $name,
             'generate_route'  => 'admin.routing.generate',
             'translatable_id' => $this->getParam('id')
@@ -55,26 +52,26 @@ class CategoryFormBuilder extends AbstractFormBuilder
 
         $requiredData->addChild($this->getElement('checkbox', [
             'name'    => 'enabled',
-            'label'   => $this->trans('category.enabled.label'),
-            'comment' => $this->trans('category.enabled.comment'),
+            'label'   => $this->trans('category.label.enabled'),
+            'comment' => $this->trans('category.comment.enabled'),
             'default' => 1
         ]));
 
         $requiredData->addChild($this->getElement('text_field', [
             'name'  => 'hierarchy',
-            'label' => $this->trans('category.hierarchy.label'),
+            'label' => $this->trans('category.label.hierarchy'),
         ]));
 
         $requiredData->addChild($this->getElement('tree', [
             'name'        => 'parent',
-            'label'       => $this->trans('category.parent.label'),
+            'label'       => $this->trans('category.label.parent'),
             'choosable'   => true,
             'selectable'  => false,
             'sortable'    => false,
             'clickable'   => false,
             'items'       => $this->get('category.collection.admin')->getFlatTree(),
             'restrict'    => $this->getParam('id'),
-            'transformer' => new EntityToIdentifierTransformer($this->get('category.repository'))
+            'transformer' => $this->getRepositoryTransformer('entity', $this->get('category.repository'))
         ]));
 
         $descriptionData = $form->addChild($this->getElement('nested_fieldset', [
@@ -85,7 +82,7 @@ class CategoryFormBuilder extends AbstractFormBuilder
         $languageData = $descriptionData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
             'label'       => $this->trans('fieldset.translations'),
-            'transformer' => new TranslationTransformer($this->get('category.repository'))
+            'transformer' => $this->getRepositoryTransformer('translation', $this->get('category.repository'))
         ]));
 
         $languageData->addChild($this->getElement('rich_text_editor', [
@@ -106,7 +103,7 @@ class CategoryFormBuilder extends AbstractFormBuilder
         $languageData = $seoData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
             'label'       => $this->trans('fieldset.translations'),
-            'transformer' => new TranslationTransformer($this->get('category.repository'))
+            'transformer' => $this->getRepositoryTransformer('translation', $this->get('category.repository'))
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
@@ -131,9 +128,9 @@ class CategoryFormBuilder extends AbstractFormBuilder
 
         $shopsData->addChild($this->getElement('multi_select', [
             'name'        => 'shops',
-            'label'       => $this->trans('shops.label'),
+            'label'       => $this->trans('category.label.shops'),
             'options'     => $this->get('shop.collection')->getSelect(),
-            'transformer' => new CollectionToArrayTransformer($this->get('shop.repository'))
+            'transformer' => $this->getRepositoryTransformer('collection', $this->get('shop.repository'))
         ]));
 
         $form->addFilter($this->getFilter('trim'));

@@ -12,7 +12,6 @@
 namespace WellCommerce\Bundle\MultiStoreBundle\Form;
 
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
-use WellCommerce\Bundle\MediaBundle\Form\DataTransformer\MediaEntityToIdentifierTransformer;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
@@ -34,52 +33,52 @@ class CompanyFormBuilder extends AbstractFormBuilder
 
         $requiredData->addChild($this->getElement('text_field', [
             'name'  => 'name',
-            'label' => $this->trans('company.name'),
+            'label' => $this->trans('company.label.name'),
         ]));
 
         $requiredData->addChild($this->getElement('text_field', [
             'name'  => 'shortName',
-            'label' => $this->trans('company.short_name'),
+            'label' => $this->trans('company.label.short_name'),
         ]));
 
         $addressData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'address_data',
-            'label' => $this->trans('Address data')
+            'label' => $this->trans('company.label.address')
         ]));
 
         $addressData->addChild($this->getElement('text_field', [
             'name'  => 'street',
-            'label' => $this->trans('Street'),
+            'label' => $this->trans('company.label.street'),
         ]));
 
         $addressData->addChild($this->getElement('text_field', [
             'name'  => 'streetNo',
-            'label' => $this->trans('Street number'),
+            'label' => $this->trans('company.label.street_no'),
         ]));
 
         $addressData->addChild($this->getElement('text_field', [
             'name'  => 'flatNo',
-            'label' => $this->trans('Flat number'),
+            'label' => $this->trans('company.label.flat_no'),
         ]));
 
         $addressData->addChild($this->getElement('text_field', [
             'name'  => 'province',
-            'label' => $this->trans('Province'),
+            'label' => $this->trans('company.label.province'),
         ]));
 
         $addressData->addChild($this->getElement('text_field', [
             'name'  => 'postCode',
-            'label' => $this->trans('Post code'),
+            'label' => $this->trans('company.label.post_code'),
         ]));
 
         $addressData->addChild($this->getElement('text_field', [
             'name'  => 'city',
-            'label' => $this->trans('City'),
+            'label' => $this->trans('company.label.city'),
         ]));
 
         $addressData->addChild($this->getElement('select', [
             'name'    => 'country',
-            'label'   => $this->trans('Country'),
+            'label'   => $this->trans('company.label.country'),
             'options' => $this->get('country.repository')->all()
         ]));
 
@@ -90,14 +89,14 @@ class CompanyFormBuilder extends AbstractFormBuilder
 
         $mediaData->addChild($this->getElement('image', [
             'name'         => 'photo',
-            'label'        => $this->trans('Company logo'),
-            'load_route'   => $this->generateUrl('admin.media.grid'),
-            'upload_url'   => $this->generateUrl('admin.media.add'),
+            'label'        => $this->trans('company.label.logo'),
+            'load_route'   => $this->getRouterHelper()->generateUrl('admin.media.grid'),
+            'upload_url'   => $this->getRouterHelper()->generateUrl('admin.media.add'),
             'repeat_min'   => 0,
             'repeat_max'   => 1,
-            'transformer'  => new MediaEntityToIdentifierTransformer($this->get('media.repository')),
-            'session_id'   => $this->getRequest()->getSession()->getId(),
-            'session_name' => $this->getRequest()->getSession()->getName(),
+            'transformer'  => $this->getRepositoryTransformer('entity', $this->get('media.repository')),
+            'session_id'   => $this->getRequestHelper()->getCurrentRequest()->getSession()->getId(),
+            'session_name' => $this->getRequestHelper()->getCurrentRequest()->getSession()->getName(),
         ]));
 
         $form->addFilter($this->getFilter('no_code'));

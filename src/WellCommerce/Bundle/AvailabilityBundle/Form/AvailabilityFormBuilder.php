@@ -12,7 +12,6 @@
 namespace WellCommerce\Bundle\AvailabilityBundle\Form;
 
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
-use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\TranslationTransformer;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
@@ -35,12 +34,12 @@ class AvailabilityFormBuilder extends AbstractFormBuilder
         $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
             'label'       => $this->trans('form.required_data.language_data.label'),
-            'transformer' => new TranslationTransformer($this->get('availability.repository'))
+            'transformer' => $this->getRepositoryTransformer('translation', $this->get('availability.repository'))
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
             'name'  => 'name',
-            'label' => $this->trans('availability.name'),
+            'label' => $this->trans('availability.label.name'),
         ]));
 
         $form->addFilter($this->getFilter('no_code'));

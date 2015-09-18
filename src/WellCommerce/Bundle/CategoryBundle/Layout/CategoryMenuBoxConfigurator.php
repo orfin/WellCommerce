@@ -45,7 +45,7 @@ class CategoryMenuBoxConfigurator extends AbstractLayoutBoxConfigurator implemen
             'sortable'    => false,
             'clickable'   => false,
             'items'       => $this->get('category.collection.admin')->getFlatTree(),
-            'transformer' => new EntityToIdentifierTransformer($this->get('category.repository')),
+            'transformer' => $this->getRepositoryTransformer('entity', $this->get('category.repository')),
             'default'     => $accessor->getValue($defaults, '[exclude]')
         ]));
     }

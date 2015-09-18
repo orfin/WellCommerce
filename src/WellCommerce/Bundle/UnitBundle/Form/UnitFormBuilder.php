@@ -12,7 +12,6 @@
 namespace WellCommerce\Bundle\UnitBundle\Form;
 
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
-use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\TranslationTransformer;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
@@ -35,7 +34,7 @@ class UnitFormBuilder extends AbstractFormBuilder
         $unitTranslationData = $unitRequiredData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
             'label'       => $this->trans('form.translations.label'),
-            'transformer' => new TranslationTransformer($this->get('product.repository'))
+            'transformer' => $this->getRepositoryTransformer('translation', $this->get('product.repository'))
         ]));
 
         $unitTranslationData->addChild($this->getElement('text_field', [

@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\CoreBundle\Form\DataTransformer;
 
 use Symfony\Component\PropertyAccess\PropertyAccess;
+use WellCommerce\Bundle\CoreBundle\Helper\Doctrine\DoctrineHelperInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 use WellCommerce\Bundle\FormBundle\DataTransformer\DataTransformerInterface;
 
@@ -34,14 +35,27 @@ abstract class AbstractDataTransformer implements DataTransformerInterface
     private $repository;
 
     /**
+     * @var DoctrineHelperInterface
+     */
+    private $doctrineHelper;
+
+    /**
      * Constructor
      *
-     * @param RepositoryInterface $repository
+     * @param DoctrineHelperInterface|null $doctrineHelper
      */
-    public function __construct(RepositoryInterface $repository = null)
+    public function __construct(DoctrineHelperInterface $doctrineHelper = null)
     {
         $this->propertyAccessor = PropertyAccess::createPropertyAccessor();
-        $this->repository       = $repository;
+        $this->doctrineHelper   = $doctrineHelper;
+    }
+
+    /**
+     * @param RepositoryInterface $repository
+     */
+    public function setRepository(RepositoryInterface $repository)
+    {
+        $this->repository = $repository;
     }
 
     /**
@@ -59,15 +73,29 @@ abstract class AbstractDataTransformer implements DataTransformerInterface
     }
 
     /**
+     * Returns the Doctrine helper
+     *
+     * @return DoctrineHelperInterface
+     */
+    protected function getDoctrineHelper()
+    {
+        if (null === $this->doctrineHelper) {
+            throw new \LogicException('Doctrine helper was not set during class initialization.');
+        }
+
+        return $this->doctrineHelper;
+    }
+
+    /**
      * Returns mapping information for class
      *
-     * @param $class
+     * @param string $class
      *
      * @return \Doctrine\Common\Persistence\Mapping\ClassMetadata
      */
     protected function getClassMetadata($class)
     {
-        $factory = $this->getRepository()->getMetadataFactory();
+        $factory = $this->getDoctrineHelper()->getMetadataFactory();
         if (!$factory->hasMetadataFor($class)) {
             throw new \InvalidArgumentException(sprintf('No metadata found for class "%s"', $class));
         }

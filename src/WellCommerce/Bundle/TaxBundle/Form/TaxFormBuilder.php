@@ -12,7 +12,6 @@
 namespace WellCommerce\Bundle\TaxBundle\Form;
 
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
-use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\TranslationTransformer;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
@@ -34,18 +33,18 @@ class TaxFormBuilder extends AbstractFormBuilder
 
         $taxRequiredData->addChild($this->getElement('text_field', [
             'name'  => 'value',
-            'label' => $this->trans('tax.value.label'),
+            'label' => $this->trans('tax.label.value'),
         ]));
 
         $taxTranslationData = $taxRequiredData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
             'label'       => $this->trans('form.translations.label'),
-            'transformer' => new TranslationTransformer($this->get('tax.repository'))
+            'transformer' => $this->getRepositoryTransformer('translation', $this->get('tax.repository'))
         ]));
 
         $taxTranslationData->addChild($this->getElement('text_field', [
             'name'  => 'name',
-            'label' => $this->trans('tax.name.label'),
+            'label' => $this->trans('tax.label.name'),
         ]));
 
         $taxForm->addFilter($this->getFilter('no_code'));

@@ -8,4 +8,15 @@
         <import resource="services/product_attribute.xml"/>
         <import resource="services/product_status.xml"/>
     </imports>
+    <services>
+        <service id="form.product_attribute_collection.data_transformer" class="WellCommerce\Bundle\ProductBundle\Form\DataTransformer\ProductAttributeCollectionToArrayTransformer" scope="prototype">
+            <argument type="service" id="doctrine_helper"/>
+            <tag name="form.data_transformer" alias="product_attribute_collection"/>
+        </service>
+
+        <service id="form.product_photo_collection.data_transformer" class="WellCommerce\Bundle\ProductBundle\Form\DataTransformer\ProductPhotoCollectionToArrayTransformer" scope="prototype">
+            <argument type="service" id="doctrine_helper"/>
+            <tag name="form.data_transformer" alias="product_photo_collection"/>
+        </service>
+    </services>
 </container>

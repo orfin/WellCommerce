@@ -12,7 +12,6 @@
 namespace WellCommerce\Bundle\IntlBundle\Form;
 
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
-use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\TranslationTransformer;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
@@ -40,7 +39,7 @@ class DictionaryFormBuilder extends AbstractFormBuilder
         $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
             'label'       => $this->trans('form.translations.label'),
-            'transformer' => new TranslationTransformer($this->get('dictionary.repository'))
+            'transformer' => $this->getRepositoryTransformer('translation', $this->get('dictionary.repository'))
         ]));
 
         $languageData->addChild($this->getElement('text_field', [

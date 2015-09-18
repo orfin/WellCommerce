@@ -69,9 +69,4 @@ interface RepositoryInterface extends DataSetAwareRepositoryInterface
      * @return \Doctrine\ORM\Mapping\ClassMetadata
      */
     public function getMetaData();
-
-    /**
-     * @return \Doctrine\ORM\Mapping\ClassMetadataFactory
-     */
-    public function getMetadataFactory();
 }

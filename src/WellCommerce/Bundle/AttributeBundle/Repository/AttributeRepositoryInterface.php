@@ -30,15 +30,6 @@ interface AttributeRepositoryInterface extends RepositoryInterface
     public function findAll();
 
     /**
-     * Finds attribute entity by its id or creates a new one
-     *
-     * @param $data
-     *
-     * @return \WellCommerce\Bundle\AttributeBundle\Entity\Attribute
-     */
-    public function findOrCreate($data);
-
-    /**
      * Returns all attributes by group id
      *
      * @param integer $id Attribute group id

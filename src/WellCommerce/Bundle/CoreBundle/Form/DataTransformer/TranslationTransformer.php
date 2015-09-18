@@ -21,7 +21,7 @@ use WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class TranslationTransformer extends AbstractDataTransformer
+class TranslationTransformer extends AbstractDataTransformer implements RepositoryAwareDataTransformerInterface
 {
     /**
      * {@inheritdoc}

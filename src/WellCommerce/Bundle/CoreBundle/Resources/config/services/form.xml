@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="form.data_transformer.collection" class="WellCommerce\Bundle\CoreBundle\Form\DataTransformer\DataTransformerCollection" />
+
+        <service id="form.data_transformer.factory" class="WellCommerce\Bundle\CoreBundle\Form\DataTransformer\DataTransformerFactory">
+            <argument type="service" id="form.data_transformer.collection"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="form.collection.data_transformer" class="WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer" scope="prototype">
+            <argument type="service" id="doctrine_helper"/>
+            <tag name="form.data_transformer" alias="collection"/>
+        </service>
+
+        <service id="form.entity.data_transformer" class="WellCommerce\Bundle\CoreBundle\Form\DataTransformer\EntityToIdentifierTransformer" scope="prototype">
+            <argument type="service" id="doctrine_helper"/>
+            <tag name="form.data_transformer" alias="entity"/>
+        </service>
+
+        <service id="form.translation.data_transformer" class="WellCommerce\Bundle\CoreBundle\Form\DataTransformer\TranslationTransformer" scope="prototype">
+            <argument type="service" id="doctrine_helper"/>
+            <tag name="form.data_transformer" alias="translation"/>
+        </service>
+    </services>
+</container>

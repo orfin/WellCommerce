@@ -12,7 +12,6 @@
 namespace WellCommerce\Bundle\LayoutBundle\Form;
 
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
-use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\TranslationTransformer;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
@@ -35,7 +34,7 @@ class LayoutBoxFormBuilder extends AbstractFormBuilder
         $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
             'label'       => $this->trans('form.required_data.language_data.label'),
-            'transformer' => new TranslationTransformer($this->get('layout_box.repository'))
+            'transformer' => $this->getRepositoryTransformer('translation', $this->get('layout_box.repository'))
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
@@ -45,13 +44,13 @@ class LayoutBoxFormBuilder extends AbstractFormBuilder
 
         $requiredData->addChild($this->getElement('text_field', [
             'name'    => 'identifier',
-            'label'   => $this->trans('layout_box.identifier.label'),
-            'comment' => $this->trans('layout_box.identifier.comment'),
+            'label'   => $this->trans('layout_box.label.identifier'),
+            'comment' => $this->trans('layout_box.comment.identifier'),
         ]));
 
         $requiredData->addChild($this->getElement('select', [
             'name'  => 'boxType',
-            'label' => $this->trans('layout_box.box_type.label'),
+            'label' => $this->trans('layout_box.label.box_type'),
         ]));
 
         $form->addFilter($this->getFilter('no_code'));

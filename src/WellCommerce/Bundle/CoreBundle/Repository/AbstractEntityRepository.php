@@ -47,14 +47,6 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function getMetadataFactory()
-    {
-        return $this->getEntityManager()->getMetadataFactory();
-    }
-
-    /**
      * Returns a repository by class name
      *
      * @param string $class

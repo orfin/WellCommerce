@@ -12,7 +12,6 @@
 namespace WellCommerce\Bundle\PaymentBundle\Form;
 
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
-use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\TranslationTransformer;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
@@ -46,30 +45,30 @@ class PaymentMethodFormBuilder extends AbstractFormBuilder
         $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
             'label'       => $this->trans('Translations'),
-            'transformer' => new TranslationTransformer($this->get('payment_method.repository'))
+            'transformer' => $this->getRepositoryTransformer('translation', $this->get('payment_method.repository'))
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
             'name'  => 'name',
-            'label' => $this->trans('Name'),
+            'label' => $this->trans('payment_method.label.name'),
         ]));
 
         $requiredData->addChild($this->getElement('select', [
             'name'    => 'processor',
-            'label'   => $this->trans('Processor'),
+            'label'   => $this->trans('payment_method.label.processor'),
             'options' => $options,
             'default' => $defaultProcessor
         ]));
 
         $requiredData->addChild($this->getElement('checkbox', [
             'name'    => 'enabled',
-            'label'   => $this->trans('Enabled'),
+            'label'   => $this->trans('payment_method.label.enabled'),
             'default' => 1
         ]));
 
         $requiredData->addChild($this->getElement('text_field', [
             'name'    => 'hierarchy',
-            'label'   => $this->trans('Hierarchy'),
+            'label'   => $this->trans('payment_method.label.hierarchy'),
             'default' => 0
         ]));
 

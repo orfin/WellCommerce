@@ -12,7 +12,6 @@
 namespace WellCommerce\Bundle\IntlBundle\Form;
 
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
-use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\EntityToIdentifierTransformer;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
@@ -46,7 +45,7 @@ class LocaleFormBuilder extends AbstractFormBuilder
                 'label_key' => 'code',
                 'order_by'  => 'code'
             ]),
-            'transformer' => new EntityToIdentifierTransformer($this->get('currency.repository'))
+            'transformer' => $this->getRepositoryTransformer('entity', $this->get('currency.repository'))
         ]));
 
         $form->addFilter($this->getFilter('no_code'));

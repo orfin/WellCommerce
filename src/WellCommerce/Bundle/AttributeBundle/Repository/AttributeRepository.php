@@ -84,29 +84,4 @@ class AttributeRepository extends AbstractEntityRepository implements AttributeR
 
         return $result;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function findOrCreate($data)
-    {
-        $accessor = $this->getPropertyAccessor();
-        $id       = $accessor->getValue($data, '[id]');
-        $name     = $accessor->getValue($data, '[name]');
-        $values   = $accessor->getValue($data, '[values]');
-        $isNew    = substr($id, 0, 3) == 'new';
-
-        if ($isNew) {
-            $item = $this->addAttribute($name);
-        } else {
-            $item = $this->find($id);
-        }
-
-        if (!empty($values)) {
-            $collection = $this->getAttributeValueRepository()->makeCollection($item, $values);
-            $item->setValues($collection);
-        }
-
-        return $item;
-    }
 }

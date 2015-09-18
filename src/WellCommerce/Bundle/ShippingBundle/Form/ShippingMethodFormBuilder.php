@@ -12,9 +12,6 @@
 namespace WellCommerce\Bundle\ShippingBundle\Form;
 
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
-use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\EntityToIdentifierTransformer;
-use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\TranslationTransformer;
-use WellCommerce\Bundle\ShippingBundle\Form\DataTransformer\ShippingCostCollectionToArrayTransformer;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
@@ -39,7 +36,7 @@ class ShippingMethodFormBuilder extends AbstractFormBuilder
         $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
             'label'       => $this->trans('translation.label.translations'),
-            'transformer' => new TranslationTransformer($this->get('shipping_method.repository'))
+            'transformer' => $this->getRepositoryTransformer('translation', $this->get('shipping_method.repository'))
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
@@ -80,7 +77,7 @@ class ShippingMethodFormBuilder extends AbstractFormBuilder
             'name'        => 'tax',
             'label'       => $this->trans('shipping_method.label.tax'),
             'options'     => $this->get('tax.collection')->getSelect(),
-            'transformer' => new EntityToIdentifierTransformer($this->get('tax.repository'))
+            'transformer' => $this->getRepositoryTransformer('entity', $this->get('tax.repository'))
         ]));
 
         $costsData->addChild($this->getElement('range_editor', [
@@ -88,7 +85,7 @@ class ShippingMethodFormBuilder extends AbstractFormBuilder
             'label'           => $this->trans('shipping_method.label.costs'),
             'vat_field'       => $tax,
             'range_precision' => 2,
-            'transformer'     => new ShippingCostCollectionToArrayTransformer($this->get('shipping_method_cost.repository'))
+            'transformer'     => $this->getRepositoryTransformer('shipping_cost_collection', $this->get('shipping_method_cost.repository'))
         ]));
 
         $form->addFilter($this->getFilter('no_code'));

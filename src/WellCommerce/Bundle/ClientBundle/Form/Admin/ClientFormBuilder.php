@@ -13,7 +13,6 @@ namespace WellCommerce\Bundle\ClientBundle\Form\Admin;
 
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Bundle\DataSetBundle\CollectionBuilder\SelectBuilder;
-use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\EntityToIdentifierTransformer;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
@@ -64,7 +63,7 @@ class ClientFormBuilder extends AbstractFormBuilder
             'name'        => 'group',
             'label'       => $this->trans('client.label.client_group'),
             'options'     => $clientGroupSelectBuilder->getItems(),
-            'transformer' => new EntityToIdentifierTransformer($this->get('client_group.repository'))
+            'transformer' => $this->getRepositoryTransformer('entity', $this->get('client_group.repository'))
         ]));
 
         $requiredData->addChild($this->getElement('text_field', [

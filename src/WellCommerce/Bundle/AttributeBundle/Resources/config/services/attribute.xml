@@ -23,5 +23,10 @@
         <service id="attribute.repository" class="WellCommerce\Bundle\AttributeBundle\Repository\AttributeRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument>WellCommerceAttributeBundle:Attribute</argument>
         </service>
+
+        <service id="form.attribute_collection.data_transformer" class="WellCommerce\Bundle\AttributeBundle\Form\DataTransformer\AttributeCollectionToArrayTransformer" scope="prototype">
+            <argument type="service" id="doctrine_helper"/>
+            <tag name="form.data_transformer" alias="attribute_collection"/>
+        </service>
     </services>
 </container>

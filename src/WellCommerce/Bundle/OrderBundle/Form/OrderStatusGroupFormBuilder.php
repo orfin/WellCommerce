@@ -12,7 +12,6 @@
 namespace WellCommerce\Bundle\OrderBundle\Form;
 
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
-use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\TranslationTransformer;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
@@ -35,12 +34,12 @@ class OrderStatusGroupFormBuilder extends AbstractFormBuilder
         $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
             'label'       => $this->trans('fieldset.translations.label'),
-            'transformer' => new TranslationTransformer($this->get('order_status_group.repository'))
+            'transformer' => $this->getRepositoryTransformer('translation', $this->get('order_status_group.repository'))
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
             'name'  => 'name',
-            'label' => $this->trans('order_status_group.name.label'),
+            'label' => $this->trans('order_status_group.label.name'),
         ]));
 
         $form->addFilter($this->getFilter('no_code'));

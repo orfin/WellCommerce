@@ -12,7 +12,6 @@
 namespace WellCommerce\Bundle\DelivererBundle\Form;
 
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
-use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\TranslationTransformer;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
@@ -35,12 +34,12 @@ class DelivererFormBuilder extends AbstractFormBuilder
         $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
             'label'       => $this->trans('form.translations.label'),
-            'transformer' => new TranslationTransformer($this->get('deliverer.repository'))
+            'transformer' => $this->getRepositoryTransformer('translation', $this->get('deliverer.repository'))
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
             'name'  => 'name',
-            'label' => $this->trans('deliverer.name'),
+            'label' => $this->trans('deliverer.label.name'),
         ]));
 
         $form->addFilter($this->getFilter('no_code'));
