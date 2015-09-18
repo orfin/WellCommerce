@@ -69,9 +69,8 @@ class AppKernel extends Kernel
             new WellCommerce\Bundle\CartBundle\WellCommerceCartBundle(),
         ];
 
-        $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
-
         if (in_array($this->getEnvironment(), ['dev', 'test'])) {
+            $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
         }
 

@@ -11,7 +11,7 @@ framework:
         resource: "%kernel.root_dir%/config/routing.yml"
         strict_requirements: ~
     csrf_protection: ~
-    validation:      { enable_annotations: true }
+    validation:      { enable_annotations: false }
     templating:
         engines: ['twig']
     default_locale:  "%locale%"
@@ -25,10 +25,6 @@ framework:
     profiler:
         matcher: { ip: "%developer_mode.ip%" }
 
-web_profiler:
-    toolbar: true
-    intercept_redirects: true
-
 # Twig Configuration
 twig:
     debug:            "%kernel.debug%"
@@ -36,7 +32,7 @@ twig:
 
 # Assetic Configuration
 assetic:
-    debug:          false
+    debug:          "%kernel.debug%"
     use_controller: false
     filters:
         cssrewrite: ~
@@ -54,7 +50,7 @@ doctrine:
         charset:  UTF8
 
     orm:
-        auto_generate_proxy_classes: false
+        auto_generate_proxy_classes: "%kernel.debug%"
         entity_managers:
             default:
                 #query_cache_driver:
