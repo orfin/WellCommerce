@@ -27,12 +27,12 @@ class DiscountablePrice extends Price
     protected $discountedAmount;
 
     /**
-     * @var \DateTime
+     * @var \DateTime|null
      */
     protected $validFrom;
 
     /**
-     * @var \DateTime
+     * @var \DateTime|null
      */
     protected $validTo;
 
@@ -53,7 +53,7 @@ class DiscountablePrice extends Price
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getValidFrom()
     {
@@ -61,15 +61,15 @@ class DiscountablePrice extends Price
     }
 
     /**
-     * @param \DateTime $validFrom
+     * @param \DateTime|null $validFrom
      */
-    public function setValidFrom(\DateTime $validFrom)
+    public function setValidFrom(\DateTime $validFrom = null)
     {
         $this->validFrom = $validFrom;
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getValidTo()
     {
@@ -77,9 +77,9 @@ class DiscountablePrice extends Price
     }
 
     /**
-     * @param \DateTime $validTo
+     * @param \DateTime|null $validTo
      */
-    public function setValidTo(\DateTime $validTo)
+    public function setValidTo(\DateTime $validTo = null)
     {
         $this->validTo = $validTo;
     }
