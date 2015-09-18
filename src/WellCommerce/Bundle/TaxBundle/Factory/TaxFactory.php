@@ -20,7 +20,7 @@ use WellCommerce\Bundle\TaxBundle\Entity\Tax;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class TaxFactory extends AbstractFactory implements TaxFactoryInterface
+class TaxFactory extends AbstractFactory
 {
     /**
      * @return \WellCommerce\Bundle\TaxBundle\Entity\TaxInterface
