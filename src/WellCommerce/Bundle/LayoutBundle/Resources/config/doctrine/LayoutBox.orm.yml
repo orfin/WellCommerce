@@ -4,6 +4,7 @@ WellCommerce\Bundle\LayoutBundle\Entity\LayoutBox:
     repositoryClass: WellCommerce\Bundle\LayoutBundle\Repository\LayoutBoxRepository
     id:
         id:
+            type: integer
             generator:
                 strategy: AUTO
     fields:
