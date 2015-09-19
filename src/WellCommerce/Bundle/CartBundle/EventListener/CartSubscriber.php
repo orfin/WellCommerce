@@ -11,18 +11,13 @@
  */
 namespace WellCommerce\Bundle\CartBundle\EventListener;
 
-use Doctrine\Common\Util\Debug;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
-use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
-use WellCommerce\Bundle\CartBundle\Entity\Cart;
-use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
+use WellCommerce\Bundle\CartBundle\Calculator\CartTotalsCalculatorInterface;
 use WellCommerce\Bundle\CartBundle\Event\CartEvent;
 use WellCommerce\Bundle\CartBundle\EventDispatcher\CartEventDispatcher;
 use WellCommerce\Bundle\CartBundle\Manager\Front\CartManagerInterface;
-use WellCommerce\Bundle\ClientBundle\Entity\Client;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
-use WellCommerce\Bundle\MultiStoreBundle\Entity\Shop;
 
 /**
  * Class CartSubscriber
@@ -37,13 +32,19 @@ class CartSubscriber extends AbstractEventSubscriber
     protected $cartManager;
 
     /**
+     * @var CartTotalsCalculatorInterface
+     */
+    protected $cartTotalsCalculator;
+
+    /**
      * Constructor
      *
      * @param CartManagerInterface $cartManager
      */
-    public function __construct(CartManagerInterface $cartManager)
+    public function __construct(CartManagerInterface $cartManager, CartTotalsCalculatorInterface $cartTotalsCalculator)
     {
-        $this->cartManager = $cartManager;
+        $this->cartManager          = $cartManager;
+        $this->cartTotalsCalculator = $cartTotalsCalculator;
     }
 
     public static function getSubscribedEvents()
@@ -61,11 +62,6 @@ class CartSubscriber extends AbstractEventSubscriber
 
     public function onCartChangedEvent(CartEvent $cartEvent)
     {
-        $cart       = $cartEvent->getCart();
-        $products   = $cart->getProducts();
-        $cartTotals = $cart->getTotals();
-
-        $products->map(function (CartProductInterface $cartProduct) use ($cartTotals) {
-        });
+        $this->cartTotalsCalculator->calculate($cartEvent->getCart());
     }
 }

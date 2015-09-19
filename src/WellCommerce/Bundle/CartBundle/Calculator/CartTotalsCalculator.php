@@ -10,20 +10,26 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CartBundle\Helper;
+namespace WellCommerce\Bundle\CartBundle\Calculator;
 
-use WellCommerce\Bundle\CartBundle\Entity\Cart;
-use WellCommerce\Bundle\CartBundle\Entity\CartProduct;
-use WellCommerce\Bundle\CartBundle\Entity\CartTotals;
+use Doctrine\Common\Collections\Collection;
+use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
+use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
+use WellCommerce\Bundle\CartBundle\Factory\CartTotalsFactoryInterface;
 use WellCommerce\Bundle\IntlBundle\Converter\CurrencyConverterInterface;
 
 /**
- * Class CartHelper
+ * Class CartTotalsCalculator
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CartHelper implements CartHelperInterface
+class CartTotalsCalculator implements CartTotalsCalculatorInterface
 {
+    /**
+     * @var CartInterface
+     */
+    protected $cart;
+
     /**
      * @var CurrencyConverterInterface
      */
@@ -42,7 +48,7 @@ class CartHelper implements CartHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function recalculateCartTotals(Cart $cart)
+    public function calculate(CartInterface $cart)
     {
         $products       = $cart->getProducts();
         $quantityTotal  = $this->calculateCartTotalQuantity($products);
@@ -51,25 +57,28 @@ class CartHelper implements CartHelperInterface
         $grossTotal     = $this->calculateCartTotalGrossPrice($products);
         $taxAmountTotal = $grossTotal - $netTotal;
 
-        $cartTotals = new CartTotals($quantityTotal, $weightTotal, $netTotal, $grossTotal, $taxAmountTotal);
-        $cart->setTotals($cartTotals);
+        $cartTotals = $cart->getTotals();
+        $cartTotals->setQuantity($quantityTotal);
+        $cartTotals->setWeight($weightTotal);
+        $cartTotals->setNetPrice($netTotal);
+        $cartTotals->setGrossPrice($grossTotal);
+        $cartTotals->setTaxAmount($taxAmountTotal);
 
-        return true;
     }
 
     /**
      * Calculates total quantity of all products in cart
      *
-     * @param CartProduct[] $collection
+     * @param Collection $collection
      *
-     * @return float
+     * @return int
      */
-    private function calculateCartTotalQuantity($collection)
+    private function calculateCartTotalQuantity(Collection $collection)
     {
         $quantity = 0;
-        foreach ($collection as $item) {
-            $quantity += $item->getQuantity();
-        }
+        $collection->map(function (CartProductInterface $cartProduct) use (&$quantity) {
+            $quantity += $cartProduct->getQuantity();
+        });
 
         return $quantity;
     }
@@ -77,18 +86,18 @@ class CartHelper implements CartHelperInterface
     /**
      * Calculates total weight of all products in cart
      *
-     * @param CartProduct[] $collection
+     * @param Collection $collection
      *
      * @return float
      */
-    private function calculateCartTotalWeight($collection)
+    private function calculateCartTotalWeight(Collection $collection)
     {
         $weight = 0;
-        foreach ($collection as $item) {
-            $product = $item->getProduct();
+        $collection->map(function (CartProductInterface $cartProduct) use (&$weight) {
+            $product = $cartProduct->getProduct();
 
-            $weight += $product->getWeight() * $item->getQuantity();
-        }
+            $weight += $product->getWeight() * $cartProduct->getQuantity();
+        });
 
         return $weight;
     }
@@ -96,21 +105,21 @@ class CartHelper implements CartHelperInterface
     /**
      * Calculates total net price of all products in cart
      *
-     * @param CartProduct[] $collection
+     * @param Collection $collection
      *
      * @return float
      */
-    private function calculateCartTotalNetPrice($collection)
+    private function calculateCartTotalNetPrice(Collection $collection)
     {
         $totalNetPrice = 0;
-        foreach ($collection as $item) {
-            $product       = $item->getProduct();
+        $collection->map(function (CartProductInterface $cartProduct) use (&$totalNetPrice) {
+            $product       = $cartProduct->getProduct();
             $baseCurrency  = $product->getSellPrice()->getCurrency();
             $priceNet      = $product->getSellPrice()->getAmount();
-            $quantityPrice = $item->getQuantity() * $priceNet;
+            $quantityPrice = $cartProduct->getQuantity() * $priceNet;
 
             $totalNetPrice += $this->currencyConverter->convert($quantityPrice, $baseCurrency);
-        }
+        });
 
         return $totalNetPrice;
     }
@@ -118,24 +127,24 @@ class CartHelper implements CartHelperInterface
     /**
      * Calculates total net price of all products in cart
      *
-     * @param CartProduct[] $collection
+     * @param Collection $collection
      *
      * @return float
      */
-    private function calculateCartTotalGrossPrice($collection)
+    private function calculateCartTotalGrossPrice(Collection $collection)
     {
         $totalGrossPrice = 0;
-        foreach ($collection as $item) {
-            $product       = $item->getProduct();
+        $collection->map(function (CartProductInterface $cartProduct) use (&$totalGrossPrice) {
+            $product       = $cartProduct->getProduct();
             $baseCurrency  = $product->getSellPrice()->getCurrency();
             $tax           = $product->getSellPriceTax();
             $priceNet      = $product->getSellPrice()->getAmount();
             $priceGross    = $tax->calculateGrossPrice($priceNet);
             $priceGross    = $this->currencyConverter->convert($priceGross, $baseCurrency);
-            $quantityPrice = $item->getQuantity() * $priceGross;
+            $quantityPrice = $cartProduct->getQuantity() * $priceGross;
 
             $totalGrossPrice += $this->currencyConverter->convert($quantityPrice, $baseCurrency);
-        }
+        });
 
         return $totalGrossPrice;
     }

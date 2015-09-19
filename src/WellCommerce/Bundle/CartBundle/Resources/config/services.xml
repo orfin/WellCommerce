@@ -15,7 +15,7 @@
             </call>
         </service>
 
-        <service id="cart.helper" class="WellCommerce\Bundle\CartBundle\Helper\CartHelper">
+        <service id="cart_totals.calculator" class="WellCommerce\Bundle\CartBundle\Calculator\CartTotalsCalculator">
             <argument type="service" id="currency.converter"/>
         </service>
 
@@ -116,6 +116,7 @@
 
         <service id="cart.subscriber" class="WellCommerce\Bundle\CartBundle\EventListener\CartSubscriber">
             <argument type="service" id="cart.manager.front"/>
+            <argument type="service" id="cart_totals.calculator"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

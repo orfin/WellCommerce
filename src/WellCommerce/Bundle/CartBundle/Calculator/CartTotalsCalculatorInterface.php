@@ -10,23 +10,21 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CartBundle\Helper;
+namespace WellCommerce\Bundle\CartBundle\Calculator;
 
-use WellCommerce\Bundle\CartBundle\Entity\Cart;
+use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 
 /**
- * Interface CartHelperInterface
+ * Interface CartTotalsCalculatorInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface CartHelperInterface
+interface CartTotalsCalculatorInterface
 {
     /**
-     * Recalculates cart totals
+     * Calculates the cart totals
      *
-     * @param Cart $cart
-     *
-     * @return bool
+     * @param CartInterface $cart
      */
-    public function recalculateCartTotals(Cart $cart);
+    public function calculate(CartInterface $cart);
 }

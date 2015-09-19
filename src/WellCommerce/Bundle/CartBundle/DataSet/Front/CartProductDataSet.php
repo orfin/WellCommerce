@@ -44,5 +44,9 @@ class CartProductDataSet extends AbstractDataSet
             'stock'                   => 'product.stock',
             'photo'                   => 'photos.path'
         ]);
+
+        $configurator->setTransformers([
+            'route' => $this->container->get('route.transformer')
+        ]);
     }
 }

@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CartBundle\Manager\Front;
 
+use WellCommerce\Bundle\CartBundle\Calculator\CartTotalsCalculatorInterface;
 use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
 use WellCommerce\Bundle\CartBundle\EventDispatcher\CartEventDispatcherInterface;
@@ -51,6 +52,7 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
      * @param CartEventDispatcherInterface   $eventDispatcher
      * @param CartProductRepositoryInterface $cartProductRepository
      * @param CartProductFactoryInterface    $cartProductFactory
+     * @param CartTotalsCalculatorInterface  $cartTotalsCalculator
      */
     public function __construct(
         CartRepositoryInterface $cartRepository,
@@ -87,6 +89,8 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
                 $cartProduct->increaseQuantity($quantity);
             }
 
+            $this->dispatchPostChangeCartEvent($cart);
+
             $entityManager->flush();
         } catch (\Exception $e) {
             throw new AddCartItemException($product, $attribute, $quantity, $e);
@@ -95,16 +99,25 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
         return true;
     }
 
+    protected function dispatchPostChangeCartEvent(CartInterface $cart)
+    {
+        /** @var $dispatcher CartEventDispatcherInterface */
+        $dispatcher = $this->getEventDispatcher();
+        $dispatcher->dispatchOnPostCartChange($cart);
+    }
+
     /**
      * {@inheritdoc}
      */
     public function deleteCartProduct(CartProductInterface $cartProduct)
     {
         $entityManager = $this->getEntityManager();
-        $currentCart   = $this->getCartProvider()->getCurrentCart();
+        $cart          = $this->getCartProvider()->getCurrentCart();
 
-        $currentCart->removeProduct($cartProduct);
+        $cart->removeProduct($cartProduct);
         $entityManager->remove($cartProduct);
+
+        $this->dispatchPostChangeCartEvent($cart);
 
         $entityManager->flush();
 
@@ -117,6 +130,7 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
     public function changeCartProductQuantity(CartProductInterface $cartProduct, $qty)
     {
         $entityManager = $this->getDoctrineHelper()->getEntityManager();
+        $cart          = $this->getCartProvider()->getCurrentCart();
         $qty           = (int)$qty;
 
         if ($qty < 1) {
@@ -124,6 +138,8 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
         }
 
         $cartProduct->setQuantity($qty);
+
+        $this->dispatchPostChangeCartEvent($cart);
 
         $entityManager->flush();
 
