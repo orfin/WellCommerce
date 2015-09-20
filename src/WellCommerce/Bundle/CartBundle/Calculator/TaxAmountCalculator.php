@@ -13,24 +13,32 @@
 namespace WellCommerce\Bundle\CartBundle\Calculator;
 
 use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
-use WellCommerce\Bundle\CartBundle\Visitor\CartVisitorInterface;
 
 /**
  * Class TaxAmountCalculator
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class TaxAmountCalculator implements CartVisitorInterface
+class TaxAmountCalculator implements CartCalculatorInterface
 {
     /**
      * {@inheritdoc}
      */
     public function visitCart(CartInterface $cart)
     {
+        $amount = $this->calculate($cart);
+        $cart->getTotals()->setTaxAmount($amount);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function calculate(CartInterface $cart)
+    {
         $netAmount   = $cart->getTotals()->getNetPrice();
         $grossAmount = $cart->getTotals()->getGrossPrice();
 
-        $cart->getTotals()->setTaxAmount($grossAmount - $netAmount);
+        return $grossAmount - $netAmount;
     }
 
     /**

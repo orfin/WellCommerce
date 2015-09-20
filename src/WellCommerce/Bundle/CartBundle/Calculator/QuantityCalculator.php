@@ -14,26 +14,34 @@ namespace WellCommerce\Bundle\CartBundle\Calculator;
 
 use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
-use WellCommerce\Bundle\CartBundle\Visitor\CartVisitorInterface;
 
 /**
  * Class QuantityCalculator
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class QuantityCalculator implements CartVisitorInterface
+class QuantityCalculator implements CartCalculatorInterface
 {
     /**
      * {@inheritdoc}
      */
     public function visitCart(CartInterface $cart)
     {
+        $quantity = $this->calculate($cart);
+        $cart->getTotals()->setQuantity($quantity);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function calculate(CartInterface $cart)
+    {
         $quantity = 0;
         $cart->getProducts()->map(function (CartProductInterface $cartProduct) use (&$quantity) {
             $quantity += $cartProduct->getQuantity();
         });
 
-        $cart->getTotals()->setQuantity($quantity);
+        return $quantity;
     }
 
     /**

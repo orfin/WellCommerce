@@ -14,19 +14,27 @@ namespace WellCommerce\Bundle\CartBundle\Calculator;
 
 use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
-use WellCommerce\Bundle\CartBundle\Visitor\CartVisitorInterface;
 
 /**
  * Class WeightCalculator
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class WeightCalculator implements CartVisitorInterface
+class WeightCalculator implements CartCalculatorInterface
 {
     /**
      * {@inheritdoc}
      */
     public function visitCart(CartInterface $cart)
+    {
+        $weight = $this->calculate($cart);
+        $cart->getTotals()->setWeight($weight);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function calculate(CartInterface $cart)
     {
         $weight = 0;
         $cart->getProducts()->map(function (CartProductInterface $cartProduct) use (&$weight) {
@@ -35,7 +43,7 @@ class WeightCalculator implements CartVisitorInterface
             $weight += $product->getWeight() * $cartProduct->getQuantity();
         });
 
-        $cart->getTotals()->setWeight($weight);
+        return $weight;
     }
 
     /**

@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\CartBundle\Calculator;
 
 use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
-use WellCommerce\Bundle\CartBundle\Visitor\CartVisitorInterface;
 use WellCommerce\Bundle\IntlBundle\Converter\CurrencyConverterInterface;
 
 /**
@@ -22,7 +21,7 @@ use WellCommerce\Bundle\IntlBundle\Converter\CurrencyConverterInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class NetAmountCalculator implements CartVisitorInterface
+class NetAmountCalculator implements CartCalculatorInterface
 {
     /**
      * @var CurrencyConverterInterface
@@ -44,6 +43,15 @@ class NetAmountCalculator implements CartVisitorInterface
      */
     public function visitCart(CartInterface $cart)
     {
+        $price = $this->calculate($cart);
+        $cart->getTotals()->setNetPrice($price);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function calculate(CartInterface $cart)
+    {
         $price = 0;
         $cart->getProducts()->map(function (CartProductInterface $cartProduct) use (&$price) {
             $product       = $cartProduct->getProduct();
@@ -54,7 +62,7 @@ class NetAmountCalculator implements CartVisitorInterface
             $price += $this->converter->convert($quantityPrice, $baseCurrency);
         });
 
-        $cart->getTotals()->setNetPrice($price);
+        return $price;
     }
 
     /**
