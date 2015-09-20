@@ -12,6 +12,7 @@
 namespace WellCommerce\Bundle\CartBundle\EventListener;
 
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use WellCommerce\Bundle\CartBundle\Calculator\CartTotalsCalculatorInterface;
 use WellCommerce\Bundle\CartBundle\Event\CartEvent;
@@ -57,7 +58,9 @@ class CartSubscriber extends AbstractEventSubscriber
 
     public function onKernelController(FilterControllerEvent $event)
     {
-        $this->cartManager->initializeCart();
+        if ($event->getRequestType() === HttpKernelInterface::MASTER_REQUEST) {
+            $this->cartManager->initializeCart();
+        }
     }
 
     public function onCartChangedEvent(CartEvent $cartEvent)

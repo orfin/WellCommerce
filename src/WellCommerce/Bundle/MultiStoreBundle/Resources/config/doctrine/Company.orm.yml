@@ -1,6 +1,6 @@
 WellCommerce\Bundle\MultiStoreBundle\Entity\Company:
     type: entity
-    table: Company
+    table: company
     repositoryClass: WellCommerce\Bundle\MultiStoreBundle\Repository\CompanyRepository
     id:
         id:

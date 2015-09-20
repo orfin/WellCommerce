@@ -12,6 +12,7 @@
 namespace WellCommerce\Bundle\CartBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
+use WellCommerce\Bundle\CartBundle\Calculator\TotalsVisitor\CartTotalsVisitorInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientAwareTrait;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\Timestampable\TimestampableTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\AddressInterface;
@@ -166,6 +167,14 @@ class Cart implements CartInterface
     public function setShippingAddress(AddressInterface $shippingAddress)
     {
         $this->shippingAddress = $shippingAddress;
+    }
+
+    /**
+     * @param CartTotalsVisitorInterface $visitor
+     */
+    public function acceptVisitor(CartTotalsVisitorInterface $visitor)
+    {
+        $visitor->visitCart($this);
     }
 
     /**

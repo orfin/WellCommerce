@@ -12,7 +12,9 @@
 
 namespace WellCommerce\Bundle\CartBundle;
 
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+use WellCommerce\Bundle\CartBundle\DependencyInjection\Compiler\RegisterCartTotalsVisitorPass;
 
 /**
  * Class WellCommerceCartBundle
@@ -21,4 +23,14 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  */
 class WellCommerceCartBundle extends Bundle
 {
+    /**
+     * Builds the container for bundle
+     *
+     * @param ContainerBuilder $container
+     */
+    public function build(ContainerBuilder $container)
+    {
+        parent::build($container);
+        $container->addCompilerPass(new RegisterCartTotalsVisitorPass());
+    }
 }

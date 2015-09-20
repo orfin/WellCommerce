@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\CartBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
+use WellCommerce\Bundle\CartBundle\Calculator\TotalsVisitor\CartTotalsVisitorInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\AddressInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\ContactDetailsAwareInterface;
@@ -98,6 +99,11 @@ interface CartInterface extends
      * @param AddressInterface $shippingAddress
      */
     public function setShippingAddress(AddressInterface $shippingAddress);
+
+    /**
+     * @param CartTotalsVisitorInterface $visitor
+     */
+    public function acceptVisitor(CartTotalsVisitorInterface $visitor);
 
     /**
      * @return bool

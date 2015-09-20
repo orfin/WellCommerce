@@ -15,10 +15,6 @@
             </call>
         </service>
 
-        <service id="cart_totals.calculator" class="WellCommerce\Bundle\CartBundle\Calculator\CartTotalsCalculator">
-            <argument type="service" id="currency.converter"/>
-        </service>
-
         <service id="cart.purger" class="WellCommerce\Bundle\CartBundle\Purger\CartPurger">
             <argument type="service" id="service_container"/>
         </service>
@@ -121,6 +117,34 @@
                 <argument type="service" id="service_container"/>
             </call>
             <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="cart_totals.visitor.collection" class="WellCommerce\Bundle\CartBundle\Calculator\CartTotalsVisitorCollection" />
+
+        <service id="cart_totals.visitor.gross_amount" class="WellCommerce\Bundle\CartBundle\Calculator\Visitor\GrossAmountVisitor">
+            <argument type="service" id="currency.converter"/>
+            <tag name="cart_totals.visitor"/>
+        </service>
+
+        <service id="cart_totals.visitor.net_amount" class="WellCommerce\Bundle\CartBundle\Calculator\Visitor\NetAmountVisitor">
+            <argument type="service" id="currency.converter"/>
+            <tag name="cart_totals.visitor"/>
+        </service>
+
+        <service id="cart_totals.visitor.tax_amount" class="WellCommerce\Bundle\CartBundle\Calculator\Visitor\TaxAmountVisitor">
+            <tag name="cart_totals.visitor"/>
+        </service>
+
+        <service id="cart_totals.visitor.weight" class="WellCommerce\Bundle\CartBundle\Calculator\Visitor\WeightVisitor">
+            <tag name="cart_totals.visitor"/>
+        </service>
+
+        <service id="cart_totals.visitor.quantity" class="WellCommerce\Bundle\CartBundle\Calculator\Visitor\QuantityVisitor">
+            <tag name="cart_totals.visitor"/>
+        </service>
+
+        <service id="cart_totals.calculator" class="WellCommerce\Bundle\CartBundle\Calculator\CartTotalsCalculator">
+            <argument type="service" id="cart_totals.visitor.collection"/>
         </service>
 
         <service id="cart_product.request_param_converter" class="WellCommerce\Bundle\CartBundle\Request\ParamConverter\CartProductParamConverter">
