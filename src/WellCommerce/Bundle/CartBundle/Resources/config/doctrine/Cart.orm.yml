@@ -11,7 +11,7 @@ WellCommerce\Bundle\CartBundle\Entity\Cart:
     embedded:
         totals:
             class: WellCommerce\Bundle\CartBundle\Entity\CartTotals
-            columnPrefix: totals_
+            columnPrefix: total_
         billingAddress:
             class: WellCommerce\Bundle\CoreBundle\Entity\Address
             columnPrefix: billing_address_

@@ -10,19 +10,19 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CartBundle\Calculator\Visitor;
+namespace WellCommerce\Bundle\CartBundle\Calculator;
 
-use WellCommerce\Bundle\CartBundle\Calculator\CartTotalsVisitorInterface;
 use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
+use WellCommerce\Bundle\CartBundle\Visitor\CartVisitorInterface;
 use WellCommerce\Bundle\IntlBundle\Converter\CurrencyConverterInterface;
 
 /**
- * Class GrossAmountVisitor
+ * Class NetAmountCalculator
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class GrossAmountVisitor implements CartTotalsVisitorInterface
+class NetAmountCalculator implements CartVisitorInterface
 {
     /**
      * @var CurrencyConverterInterface
@@ -48,16 +48,13 @@ class GrossAmountVisitor implements CartTotalsVisitorInterface
         $cart->getProducts()->map(function (CartProductInterface $cartProduct) use (&$price) {
             $product       = $cartProduct->getProduct();
             $baseCurrency  = $product->getSellPrice()->getCurrency();
-            $tax           = $product->getSellPriceTax();
             $priceNet      = $product->getSellPrice()->getAmount();
-            $priceGross    = $tax->calculateGrossPrice($priceNet);
-            $priceGross    = $this->converter->convert($priceGross, $baseCurrency);
-            $quantityPrice = $cartProduct->getQuantity() * $priceGross;
+            $quantityPrice = $cartProduct->getQuantity() * $priceNet;
 
             $price += $this->converter->convert($quantityPrice, $baseCurrency);
         });
 
-        $cart->getTotals()->setGrossPrice($price);
+        $cart->getTotals()->setNetPrice($price);
     }
 
     /**
@@ -65,7 +62,7 @@ class GrossAmountVisitor implements CartTotalsVisitorInterface
      */
     public function getAlias()
     {
-        return 'gross_amount';
+        return 'net_amount';
     }
 
     /**
@@ -73,6 +70,6 @@ class GrossAmountVisitor implements CartTotalsVisitorInterface
      */
     public function getPriority()
     {
-        return 20;
+        return 10;
     }
 }

@@ -10,32 +10,30 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CartBundle\Calculator\Visitor;
+namespace WellCommerce\Bundle\CartBundle\Calculator;
 
-use WellCommerce\Bundle\CartBundle\Calculator\CartTotalsVisitorInterface;
 use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
+use WellCommerce\Bundle\CartBundle\Visitor\CartVisitorInterface;
 
 /**
- * Class WeightVisitor
+ * Class QuantityCalculator
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class WeightVisitor implements CartTotalsVisitorInterface
+class QuantityCalculator implements CartVisitorInterface
 {
     /**
      * {@inheritdoc}
      */
     public function visitCart(CartInterface $cart)
     {
-        $weight = 0;
-        $cart->getProducts()->map(function (CartProductInterface $cartProduct) use (&$weight) {
-            $product = $cartProduct->getProduct();
-
-            $weight += $product->getWeight() * $cartProduct->getQuantity();
+        $quantity = 0;
+        $cart->getProducts()->map(function (CartProductInterface $cartProduct) use (&$quantity) {
+            $quantity += $cartProduct->getQuantity();
         });
 
-        $cart->getTotals()->setWeight($weight);
+        $cart->getTotals()->setQuantity($quantity);
     }
 
     /**
@@ -43,7 +41,7 @@ class WeightVisitor implements CartTotalsVisitorInterface
      */
     public function getAlias()
     {
-        return 'weight';
+        return 'quantity';
     }
 
     /**

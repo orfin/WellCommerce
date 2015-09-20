@@ -17,27 +17,27 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * Class RegisterCartTotalsVisitorPass
+ * Class RegisterCartVisitorPass
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class RegisterCartTotalsVisitorPass implements CompilerPassInterface
+class RegisterCartVisitorPass implements CompilerPassInterface
 {
     /**
      * @param ContainerBuilder $container
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('cart_totals.visitor.collection')) {
+        if (!$container->hasDefinition('cart.visitor.collection')) {
             return;
         }
 
-        $definition = $container->getDefinition('cart_totals.visitor.collection');
+        $definition = $container->getDefinition('cart.visitor.collection');
 
-        foreach ($container->findTaggedServiceIds('cart_totals.visitor') as $id => $attributes) {
+        foreach ($container->findTaggedServiceIds('cart.visitor') as $id => $attributes) {
             $class     = $container->getDefinition($id)->getClass();
             $refClass  = new \ReflectionClass($class);
-            $interface = 'WellCommerce\\Bundle\\CartBundle\\Calculator\\CartTotalsVisitorInterface';
+            $interface = 'WellCommerce\\Bundle\\CartBundle\\Visitor\\CartVisitorInterface';
             if (!$refClass->implementsInterface($interface)) {
                 throw new \InvalidArgumentException(sprintf('Service "%s" must implement interface "%s".', $id,
                     $interface));

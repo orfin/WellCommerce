@@ -10,21 +10,29 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CartBundle\Calculator;
+namespace WellCommerce\Bundle\CartBundle\Visitor;
 
 use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 
 /**
- * Interface CartTotalsCalculatorInterface
+ * Interface CartVisitorInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface CartTotalsCalculatorInterface
+interface CartVisitorInterface
 {
     /**
-     * Calculates the cart totals
-     *
      * @param CartInterface $cart
      */
-    public function calculate(CartInterface $cart);
+    public function visitCart(CartInterface $cart);
+
+    /**
+     * @return int
+     */
+    public function getPriority();
+
+    /**
+     * @return string
+     */
+    public function getAlias();
 }

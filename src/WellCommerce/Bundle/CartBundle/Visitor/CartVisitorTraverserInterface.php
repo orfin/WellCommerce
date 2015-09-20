@@ -10,29 +10,19 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CartBundle\Calculator;
+namespace WellCommerce\Bundle\CartBundle\Visitor;
 
 use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 
 /**
- * Interface CartTotalsVisitorInterface
+ * Interface CartVisitorTraverserInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface CartTotalsVisitorInterface
+interface CartVisitorTraverserInterface
 {
     /**
      * @param CartInterface $cart
      */
-    public function visitCart(CartInterface $cart);
-
-    /**
-     * @return string
-     */
-    public function getAlias();
-
-    /**
-     * @return int
-     */
-    public function getPriority();
+    public function traverse(CartInterface $cart);
 }

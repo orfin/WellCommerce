@@ -10,19 +10,19 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CartBundle\Calculator\Visitor;
+namespace WellCommerce\Bundle\CartBundle\Calculator;
 
-use WellCommerce\Bundle\CartBundle\Calculator\CartTotalsVisitorInterface;
 use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
+use WellCommerce\Bundle\CartBundle\Visitor\CartVisitorInterface;
 use WellCommerce\Bundle\IntlBundle\Converter\CurrencyConverterInterface;
 
 /**
- * Class NetAmountVisitor
+ * Class GrossAmountCalculator
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class NetAmountVisitor implements CartTotalsVisitorInterface
+class GrossAmountCalculator implements CartVisitorInterface
 {
     /**
      * @var CurrencyConverterInterface
@@ -48,13 +48,16 @@ class NetAmountVisitor implements CartTotalsVisitorInterface
         $cart->getProducts()->map(function (CartProductInterface $cartProduct) use (&$price) {
             $product       = $cartProduct->getProduct();
             $baseCurrency  = $product->getSellPrice()->getCurrency();
+            $tax           = $product->getSellPriceTax();
             $priceNet      = $product->getSellPrice()->getAmount();
-            $quantityPrice = $cartProduct->getQuantity() * $priceNet;
+            $priceGross    = $tax->calculateGrossPrice($priceNet);
+            $priceGross    = $this->converter->convert($priceGross, $baseCurrency);
+            $quantityPrice = $cartProduct->getQuantity() * $priceGross;
 
             $price += $this->converter->convert($quantityPrice, $baseCurrency);
         });
 
-        $cart->getTotals()->setNetPrice($price);
+        $cart->getTotals()->setGrossPrice($price);
     }
 
     /**
@@ -62,7 +65,7 @@ class NetAmountVisitor implements CartTotalsVisitorInterface
      */
     public function getAlias()
     {
-        return 'net_amount';
+        return 'gross_amount';
     }
 
     /**
@@ -70,6 +73,6 @@ class NetAmountVisitor implements CartTotalsVisitorInterface
      */
     public function getPriority()
     {
-        return 10;
+        return 20;
     }
 }

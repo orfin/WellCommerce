@@ -17,6 +17,7 @@ use WellCommerce\Bundle\CartBundle\Calculator\CartTotalsCalculatorInterface;
 use WellCommerce\Bundle\CartBundle\Event\CartEvent;
 use WellCommerce\Bundle\CartBundle\EventDispatcher\CartEventDispatcher;
 use WellCommerce\Bundle\CartBundle\Manager\Front\CartManagerInterface;
+use WellCommerce\Bundle\CartBundle\Visitor\CartVisitorTraverserInterface;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 
 /**
@@ -32,19 +33,20 @@ class CartSubscriber extends AbstractEventSubscriber
     protected $cartManager;
 
     /**
-     * @var CartTotalsCalculatorInterface
+     * @var CartVisitorTraverserInterface
      */
-    protected $cartTotalsCalculator;
+    protected $cartVisitorTraverser;
 
     /**
      * Constructor
      *
-     * @param CartManagerInterface $cartManager
+     * @param CartManagerInterface          $cartManager
+     * @param CartVisitorTraverserInterface $cartVisitorTraverser
      */
-    public function __construct(CartManagerInterface $cartManager, CartTotalsCalculatorInterface $cartTotalsCalculator)
+    public function __construct(CartManagerInterface $cartManager, CartVisitorTraverserInterface $cartVisitorTraverser)
     {
         $this->cartManager          = $cartManager;
-        $this->cartTotalsCalculator = $cartTotalsCalculator;
+        $this->cartVisitorTraverser = $cartVisitorTraverser;
     }
 
     public static function getSubscribedEvents()
@@ -60,8 +62,8 @@ class CartSubscriber extends AbstractEventSubscriber
         $this->cartManager->initializeCart();
     }
 
-    public function onCartChangedEvent(CartEvent $cartEvent)
+    public function onCartChangedEvent(CartEvent $event)
     {
-        $this->cartTotalsCalculator->calculate($cartEvent->getCart());
+        $this->cartVisitorTraverser->traverse($event->getCart());
     }
 }

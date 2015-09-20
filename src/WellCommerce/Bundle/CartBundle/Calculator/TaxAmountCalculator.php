@@ -13,36 +13,39 @@
 namespace WellCommerce\Bundle\CartBundle\Calculator;
 
 use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
+use WellCommerce\Bundle\CartBundle\Visitor\CartVisitorInterface;
 
 /**
- * Class CartTotalsCalculator
+ * Class TaxAmountCalculator
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CartTotalsCalculator implements CartTotalsCalculatorInterface
+class TaxAmountCalculator implements CartVisitorInterface
 {
     /**
-     * @var CartTotalsVisitorCollection
+     * {@inheritdoc}
      */
-    protected $visitorCollection;
-
-    /**
-     * Constructor
-     *
-     * @param CartTotalsVisitorCollection $visitorCollection
-     */
-    public function __construct(CartTotalsVisitorCollection $visitorCollection)
+    public function visitCart(CartInterface $cart)
     {
-        $this->visitorCollection = $visitorCollection;
+        $netAmount   = $cart->getTotals()->getNetPrice();
+        $grossAmount = $cart->getTotals()->getGrossPrice();
+
+        $cart->getTotals()->setTaxAmount($grossAmount - $netAmount);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function calculate(CartInterface $cart)
+    public function getAlias()
     {
-        foreach ($this->visitorCollection->all() as $visitor) {
-            $visitor->visitCart($cart);
-        }
+        return 'tax_amount';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPriority()
+    {
+        return 30;
     }
 }

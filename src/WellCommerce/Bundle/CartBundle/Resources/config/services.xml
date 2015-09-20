@@ -112,39 +112,39 @@
 
         <service id="cart.subscriber" class="WellCommerce\Bundle\CartBundle\EventListener\CartSubscriber">
             <argument type="service" id="cart.manager.front"/>
-            <argument type="service" id="cart_totals.calculator"/>
+            <argument type="service" id="cart.visitor.traverser"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
             <tag name="kernel.event_subscriber"/>
         </service>
 
-        <service id="cart_totals.visitor.collection" class="WellCommerce\Bundle\CartBundle\Calculator\CartTotalsVisitorCollection" />
+        <service id="cart.visitor.collection" class="WellCommerce\Bundle\CartBundle\Visitor\CartVisitorCollection" />
 
-        <service id="cart_totals.visitor.gross_amount" class="WellCommerce\Bundle\CartBundle\Calculator\Visitor\GrossAmountVisitor">
+        <service id="cart.visitor.traverser" class="WellCommerce\Bundle\CartBundle\Visitor\CartVisitorTraverser">
+            <argument type="service" id="cart.visitor.collection"/>
+        </service>
+
+        <service id="cart_totals.calculator.gross_amount" class="WellCommerce\Bundle\CartBundle\Calculator\GrossAmountCalculator">
             <argument type="service" id="currency.converter"/>
-            <tag name="cart_totals.visitor"/>
+            <tag name="cart.visitor"/>
         </service>
 
-        <service id="cart_totals.visitor.net_amount" class="WellCommerce\Bundle\CartBundle\Calculator\Visitor\NetAmountVisitor">
+        <service id="cart_totals.calculator.net_amount" class="WellCommerce\Bundle\CartBundle\Calculator\NetAmountCalculator">
             <argument type="service" id="currency.converter"/>
-            <tag name="cart_totals.visitor"/>
+            <tag name="cart.visitor"/>
         </service>
 
-        <service id="cart_totals.visitor.tax_amount" class="WellCommerce\Bundle\CartBundle\Calculator\Visitor\TaxAmountVisitor">
-            <tag name="cart_totals.visitor"/>
+        <service id="cart_totals.calculator.tax_amount" class="WellCommerce\Bundle\CartBundle\Calculator\TaxAmountCalculator">
+            <tag name="cart.visitor"/>
         </service>
 
-        <service id="cart_totals.visitor.weight" class="WellCommerce\Bundle\CartBundle\Calculator\Visitor\WeightVisitor">
-            <tag name="cart_totals.visitor"/>
+        <service id="cart_totals.calculator.weight" class="WellCommerce\Bundle\CartBundle\Calculator\WeightCalculator">
+            <tag name="cart.visitor"/>
         </service>
 
-        <service id="cart_totals.visitor.quantity" class="WellCommerce\Bundle\CartBundle\Calculator\Visitor\QuantityVisitor">
-            <tag name="cart_totals.visitor"/>
-        </service>
-
-        <service id="cart_totals.calculator" class="WellCommerce\Bundle\CartBundle\Calculator\CartTotalsCalculator">
-            <argument type="service" id="cart_totals.visitor.collection"/>
+        <service id="cart_totals.calculator.quantity" class="WellCommerce\Bundle\CartBundle\Calculator\QuantityCalculator">
+            <tag name="cart.visitor"/>
         </service>
 
         <service id="cart_product.request_param_converter" class="WellCommerce\Bundle\CartBundle\Request\ParamConverter\CartProductParamConverter">

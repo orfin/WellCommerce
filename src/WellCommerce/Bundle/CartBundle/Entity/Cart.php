@@ -13,6 +13,7 @@ namespace WellCommerce\Bundle\CartBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\CartBundle\Calculator\CartTotalsVisitorInterface;
+use WellCommerce\Bundle\CartBundle\Visitor\CartVisitorInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientAwareTrait;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\Timestampable\TimestampableTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\AddressInterface;
@@ -170,9 +171,9 @@ class Cart implements CartInterface
     }
 
     /**
-     * @param CartTotalsVisitorInterface $visitor
+     * {@inheritdoc}
      */
-    public function acceptVisitor(CartTotalsVisitorInterface $visitor)
+    public function acceptVisitor(CartVisitorInterface $visitor)
     {
         $visitor->visitCart($this);
     }

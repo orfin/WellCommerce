@@ -10,41 +10,43 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CartBundle\Calculator;
+namespace WellCommerce\Bundle\CartBundle\Visitor;
 
-use WellCommerce\Bundle\CartBundle\Calculator\CartTotalsVisitorInterface;
 use WellCommerce\Common\Collections\ArrayCollection;
 
 /**
- * Class CartTotalsVisitorCollection
+ * Class CartVisitorCollection
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CartTotalsVisitorCollection extends ArrayCollection
+class CartVisitorCollection extends ArrayCollection
 {
     /**
-     * @param CartTotalsVisitorInterface $cartTotalsVisitor
+     * @param CartVisitorInterface $visitor
      */
-    public function add(CartTotalsVisitorInterface $cartTotalsVisitor)
+    public function add(CartVisitorInterface $visitor)
     {
-        $this->items[$cartTotalsVisitor->getAlias()] = $cartTotalsVisitor;
+        $this->items[$visitor->getAlias()] = $visitor;
     }
 
     /**
-     * Returns all visitors sorted by priority
-     *
-     * @return CartTotalsVisitorInterface[]
+     * @return CartVisitorInterface[]
      */
     public function all()
     {
-        usort($this->items, function (CartTotalsVisitorInterface $a, CartTotalsVisitorInterface $b) {
+        $this->sort();
+
+        return $this->items;
+    }
+
+    private function sort()
+    {
+        usort($this->items, function (CartVisitorInterface $a, CartVisitorInterface $b) {
             if ($a->getPriority() === $b->getPriority()) {
                 return 0;
             }
 
             return $a->getPriority() < $b->getPriority() ? -1 : 1;
         });
-
-        return $this->items;
     }
 }
