@@ -12,7 +12,9 @@
 
 namespace WellCommerce\Bundle\CartBundle\Factory;
 
+use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
 use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
+use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopInterface;
 
 /**
  * Interface CartFactoryInterface
@@ -21,5 +23,14 @@ use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
  */
 interface CartFactoryInterface extends FactoryInterface
 {
-    
+    /**
+     * Creates the cart object
+     *
+     * @param ClientInterface|null $client
+     * @param ShopInterface        $shop
+     * @param string               $sessionId
+     *
+     * @return \WellCommerce\Bundle\CartBundle\Entity\CartInterface
+     */
+    public function createCart(ClientInterface $client = null, ShopInterface $shop, $sessionId);
 }

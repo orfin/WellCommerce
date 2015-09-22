@@ -72,14 +72,4 @@ abstract class AbstractFrontController extends AbstractController implements Fro
     {
         $this->get('breadcrumb.collection')->add($item);
     }
-
-    /**
-     * Shorthand for getting cart helper service
-     *
-     * @return \WellCommerce\Bundle\CartBundle\Helper\CartHelper
-     */
-    protected function getCartHelper()
-    {
-        return $this->get('cart.helper');
-    }
 }

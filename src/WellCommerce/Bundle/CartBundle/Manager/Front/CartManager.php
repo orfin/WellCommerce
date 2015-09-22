@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CartBundle\Manager\Front;
 
-use WellCommerce\Bundle\CartBundle\Calculator\CartTotalsCalculatorInterface;
 use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
 use WellCommerce\Bundle\CartBundle\EventDispatcher\CartEventDispatcherInterface;
@@ -72,15 +71,11 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
     {
         try {
             $entityManager = $this->getEntityManager();
-            $cart          = $this->getCartProvider()->getCurrentCart();
+            $cart          = $this->getCurrentCart();
             $cartProduct   = $this->cartProductRepository->findProductInCart($cart, $product, $attribute);
 
             if (null === $cartProduct) {
-                $cartProduct = $this->cartProductFactory->create();
-                $cartProduct->setCart($cart);
-                $cartProduct->setProduct($product);
-                $cartProduct->setAttribute($attribute);
-                $cartProduct->setQuantity($quantity);
+                $cartProduct = $this->cartProductFactory->createCartProduct($cart, $product, $attribute, $quantity);
 
                 $cart->addProduct($cartProduct);
                 $entityManager->persist($cartProduct);
@@ -111,7 +106,7 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
     public function deleteCartProduct(CartProductInterface $cartProduct)
     {
         $entityManager = $this->getEntityManager();
-        $cart          = $this->getCartProvider()->getCurrentCart();
+        $cart          = $this->getCurrentCart();
 
         $cart->removeProduct($cartProduct);
         $entityManager->remove($cartProduct);
@@ -128,8 +123,8 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
      */
     public function changeCartProductQuantity(CartProductInterface $cartProduct, $qty)
     {
-        $entityManager = $this->getDoctrineHelper()->getEntityManager();
-        $cart          = $this->getCartProvider()->getCurrentCart();
+        $entityManager = $this->getEntityManager();
+        $cart          = $this->getCurrentCart();
         $qty           = (int)$qty;
 
         if ($qty < 1) {
@@ -184,7 +179,9 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
         /** @var $cartRepository CartRepositoryInterface */
         $cartRepository = $this->getRepository();
         $cart           = $cartRepository->findCart($client, $sessionId, $shop);
-        $entityManager  = $this->getDoctrineHelper()->getEntityManager();
+        $entityManager  = $this->getEntityManager();
+        /** @var $factory */
+        $factory = $this->getFactory();
 
         if (null === $cart) {
             $cart = $this->createCart($shop, $client, $sessionId);

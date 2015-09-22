@@ -29,6 +29,8 @@ interface EventDispatcherInterface
     const PRE_RESOURCE_REMOVE_EVENT  = 'pre_remove';
     const POST_RESOURCE_REMOVE_EVENT = 'post_remove';
     const FORM_INIT_EVENT            = 'form_init';
+    const DATASET_INIT_EVENT         = 'dataset_init';
+    const DATAGRID_INIT_EVENT        = 'datagrid_init';
 
     /**
      * Dispatches the events before new resource is created

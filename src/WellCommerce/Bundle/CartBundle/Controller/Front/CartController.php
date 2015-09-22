@@ -47,7 +47,7 @@ class CartController extends AbstractFrontController implements FrontControllerI
             'name' => $this->trans('cart.heading.index')
         ]));
 
-        $cart = $this->manager->getCartProvider()->getCurrentCart();
+        $cart = $this->manager->getCurrentCart();
         $form = $this->buildForm($cart);
 
         if ($form->handleRequest()->isSubmitted()) {
@@ -58,7 +58,7 @@ class CartController extends AbstractFrontController implements FrontControllerI
             }
 
             if (count($form->getError())) {
-                $this->manager->getFlashHelper()->addError('client.form.error.registration');
+                $this->getFlashHelper()->addError('client.form.error.registration');
             }
         }
 
@@ -90,7 +90,7 @@ class CartController extends AbstractFrontController implements FrontControllerI
      */
     public function addAction(ProductInterface $product, ProductAttributeInterface $attribute = null)
     {
-        $quantity = (int)$this->manager->getRequestHelper()->getRequestAttribute('qty', 1);
+        $quantity = (int)$this->getRequestHelper()->getRequestAttribute('qty', 1);
 
         try {
             $this->manager->addProductToCart($product, $attribute, $quantity);

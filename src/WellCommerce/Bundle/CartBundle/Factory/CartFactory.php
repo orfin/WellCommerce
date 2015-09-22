@@ -64,8 +64,18 @@ class CartFactory extends AbstractFactory implements CartFactoryInterface
         return $cart;
     }
 
-    public function createCartForClient(ClientInterface $client, ShopInterface $shop)
+    /**
+     * @return \WellCommerce\Bundle\CartBundle\Entity\CartInterface
+     */
+    public function createCart(ClientInterface $client = null, ShopInterface $shop, $sessionId)
     {
+        $cart = $this->create();
+        $cart->setSessionId($sessionId);
+        $cart->setShop($shop);
+        if (null !== $client) {
+            $cart->setClient($client);
+        }
 
+        return $cart;
     }
 }
