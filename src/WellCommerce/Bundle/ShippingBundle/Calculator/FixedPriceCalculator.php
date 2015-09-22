@@ -12,10 +12,9 @@
 
 namespace WellCommerce\Bundle\ShippingBundle\Calculator;
 
-use WellCommerce\Bundle\FormBundle\FormBuilderInterface;
-use WellCommerce\Bundle\FormBundle\Dependencies\DependencyInterface;
-use WellCommerce\Bundle\FormBundle\Elements\Fieldset\FieldsetInterface;
-use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
+use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
 
 /**
  * Class FixedPriceCalculator
@@ -25,11 +24,6 @@ use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 class FixedPriceCalculator extends AbstractShippingMethodCalculator implements ShippingMethodCalculatorInterface
 {
     /**
-     * @var string
-     */
-    protected $alias = 'fixed_price';
-
-    /**
      * {@inheritdoc}
      */
     public function getName()
@@ -37,14 +31,40 @@ class FixedPriceCalculator extends AbstractShippingMethodCalculator implements S
         return 'Fixed price';
     }
 
+    public function getAlias()
+    {
+        return 'fixed_price';
+    }
+
     /**
      * {@inheritdoc}
      */
-    public function calculate()
+    public function supportsProduct(ShippingMethodInterface $shippingMethod, ProductInterface $product)
     {
-        $cart   = $this->cartProvider->getCurrentCart();
-        $totals = $cart->getTotals();
+        return true;
+    }
 
-        return $totals->getQuantity() * 11;
+    /**
+     * {@inheritdoc}
+     */
+    public function supportsCart(ShippingMethodInterface $shippingMethod, CartInterface $cart)
+    {
+        return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function calculateProduct(ShippingMethodInterface $shippingMethod, ProductInterface $product)
+    {
+        return new ShippingCostReference();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function calculateCart(ShippingMethodInterface $shippingMethod, CartInterface $cart)
+    {
+        return new ShippingCostReference();
     }
 }

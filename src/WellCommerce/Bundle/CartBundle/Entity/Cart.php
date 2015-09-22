@@ -181,6 +181,38 @@ class Cart implements CartInterface
     /**
      * {@inheritdoc}
      */
+    public function getShippableQuantity()
+    {
+        return $this->totals->getQuantity();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getShippableWeight()
+    {
+        return $this->totals->getWeight();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getShippableNetPrice()
+    {
+        return $this->totals->getNetPrice();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getShippableGrossPrice()
+    {
+        return $this->totals->getGrossPrice();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function isEmpty()
     {
         return 0 === $this->products->count();

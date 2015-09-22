@@ -107,9 +107,19 @@
 
         <service id="shipping_method.calculator.collection" class="WellCommerce\Bundle\ShippingBundle\Calculator\ShippingMethodCalculatorCollection" />
 
-        <service id="shipping_method.helper" class="WellCommerce\Bundle\ShippingBundle\Helper\ShippingMethodHelper">
-            <argument type="service" id="currency.converter"/>
+        <service id="shipping_method.cart.provider" class="WellCommerce\Bundle\ShippingBundle\Provider\CartShippingMethodProvider">
+            <argument type="service" id="shipping_method.repository"/>
+            <argument type="service" id="shipping_method.calculator.collection"/>
+            <tag name="shipping_method.provider" />
         </service>
+
+        <service id="shipping_method.product.provider" class="WellCommerce\Bundle\ShippingBundle\Provider\ProductShippingMethodProvider">
+            <argument type="service" id="shipping_method.repository"/>
+            <argument type="service" id="shipping_method.calculator.collection"/>
+            <tag name="shipping_method.provider" />
+        </service>
+
+        <service id="shipping_method.provider.chain" class="WellCommerce\Bundle\ShippingBundle\Provider\ShippingMethodProviderChain" />
 
         <service id="form.shipping_cost_collection.data_transformer" class="WellCommerce\Bundle\ShippingBundle\Form\DataTransformer\ShippingCostCollectionToArrayTransformer" scope="prototype">
             <argument type="service" id="doctrine_helper"/>

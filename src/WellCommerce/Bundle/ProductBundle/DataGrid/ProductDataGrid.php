@@ -63,7 +63,7 @@ class ProductDataGrid extends AbstractDataGrid
         ]));
 
         $collection->add(new Column([
-            'id'       => 'sellPrice',
+            'id'       => 'sellPriceNet',
             'caption'  => $this->trans('product.sell_price_net.label'),
             'editable' => true,
             'filter'   => new Filter([

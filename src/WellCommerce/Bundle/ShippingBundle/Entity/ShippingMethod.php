@@ -16,9 +16,11 @@ use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
+use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\EnableableTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\HierarchyAwareTrait;
 use WellCommerce\Bundle\IntlBundle\Entity\CurrencyInterface;
+use WellCommerce\Bundle\ShippingBundle\Calculator\ShippingMethodCalculatorInterface;
 use WellCommerce\Bundle\TaxBundle\Entity\TaxAwareTrait;
 
 /**

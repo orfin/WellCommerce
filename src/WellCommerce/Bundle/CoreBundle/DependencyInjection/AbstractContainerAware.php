@@ -172,6 +172,22 @@ abstract class AbstractContainerAware extends ContainerAware
     }
 
     /**
+     * @return \WellCommerce\Bundle\IntlBundle\Converter\CurrencyConverterInterface
+     */
+    public function getCurrencyConverter()
+    {
+        return $this->get('currency.converter');
+    }
+
+    /**
+     * @return \WellCommerce\Bundle\IntlBundle\Formatter\CurrencyFormatterInterface
+     */
+    public function getCurrencyFormatter()
+    {
+        return $this->get('currency.formatter');
+    }
+
+    /**
      * @return \Doctrine\Common\Persistence\ObjectManager|object
      */
     protected function getEntityManager()

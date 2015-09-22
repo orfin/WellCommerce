@@ -24,7 +24,12 @@ interface ShippingMethodRepositoryInterface extends RepositoryInterface
     /**
      * Returns default shipping method
      *
-     * @return null|\WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod
+     * @return null|\WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface
      */
     public function getDefaultShippingMethod();
+
+    /**
+     * @return array|\WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface[]
+     */
+    public function findAllEnabledShippingMethods();
 }

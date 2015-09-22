@@ -10,21 +10,21 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ShippingBundle\Helper;
-
-use WellCommerce\Bundle\ProductBundle\Entity\Product;
+namespace WellCommerce\Bundle\ShippingBundle\Provider;
 
 /**
- * Interface ShippingMethodHelperInterface
+ * Interface ShippingMethodProviderInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ShippingMethodHelperInterface
+interface ShippingMethodProviderInterface
 {
     /**
-     * @param Product $product
+     * Checks whether provider supports given object
      *
-     * @return mixed
+     * @param object $class
+     *
+     * @return bool
      */
-    public function calculateShippingCostsForProduct(Product $product);
+    public function supports($class);
 }

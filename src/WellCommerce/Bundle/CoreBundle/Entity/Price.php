@@ -20,9 +20,24 @@ namespace WellCommerce\Bundle\CoreBundle\Entity;
 class Price
 {
     /**
-     * @var float
+     * @var int|float
      */
-    protected $amount;
+    protected $netAmount;
+
+    /**
+     * @var int|float
+     */
+    protected $grossAmount;
+
+    /**
+     * @var int|float
+     */
+    protected $taxAmount;
+
+    /**
+     * @var int|float
+     */
+    protected $taxRate;
 
     /**
      * @var string
@@ -30,23 +45,71 @@ class Price
     protected $currency;
 
     /**
-     * @return float
+     * @return float|int
      */
-    public function getAmount()
+    public function getNetAmount()
     {
-        return $this->amount;
+        return $this->netAmount;
     }
 
     /**
-     * @param float $amount
+     * @param float|int $netAmount
      */
-    public function setAmount($amount)
+    public function setNetAmount($netAmount)
     {
-        $this->amount = (float)$amount;
+        $this->netAmount = (float)$netAmount;
     }
 
     /**
-     * @return mixed
+     * @return float|int
+     */
+    public function getGrossAmount()
+    {
+        return (float)$this->grossAmount;
+    }
+
+    /**
+     * @param float|int $grossAmount
+     */
+    public function setGrossAmount($grossAmount)
+    {
+        $this->grossAmount = (float)$grossAmount;
+    }
+
+    /**
+     * @return float|int
+     */
+    public function getTaxAmount()
+    {
+        return (float)$this->taxAmount;
+    }
+
+    /**
+     * @param float|int $taxAmount
+     */
+    public function setTaxAmount($taxAmount)
+    {
+        $this->taxAmount = (float)$taxAmount;
+    }
+
+    /**
+     * @return float|int
+     */
+    public function getTaxRate()
+    {
+        return (float)$this->taxRate;
+    }
+
+    /**
+     * @param float|int $taxRate
+     */
+    public function setTaxRate($taxRate)
+    {
+        $this->taxRate = (float)$taxRate;
+    }
+
+    /**
+     * @return string
      */
     public function getCurrency()
     {

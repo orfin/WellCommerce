@@ -35,11 +35,6 @@ class RequestHelper implements RequestHelperInterface
     protected $request;
 
     /**
-     * @var null|\Symfony\Component\HttpFoundation\Session\SessionInterface
-     */
-    protected $session;
-
-    /**
      * @var TokenStorageInterface
      */
     protected $tokenStorage;
@@ -235,5 +230,13 @@ class RequestHelper implements RequestHelperInterface
     public function getCurrentLocale()
     {
         return $this->request->getLocale();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCurrentCurrency()
+    {
+        return $this->getSessionAttribute('_currency');
     }
 }

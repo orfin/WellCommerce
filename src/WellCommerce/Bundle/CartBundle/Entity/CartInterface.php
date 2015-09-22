@@ -21,6 +21,7 @@ use WellCommerce\Bundle\CoreBundle\Entity\ContactDetailsAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopAwareInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodAwareInterface;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingCalculatorSubjectInterface;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodAwareInterface;
 
 /**
@@ -34,7 +35,8 @@ interface CartInterface extends
     ShippingMethodAwareInterface,
     ClientAwareInterface,
     TimestampableInterface,
-    ContactDetailsAwareInterface
+    ContactDetailsAwareInterface,
+    ShippingCalculatorSubjectInterface
 {
     /**
      * @return int

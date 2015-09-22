@@ -22,9 +22,19 @@ use Doctrine\ORM\Mapping as ORM;
 class DiscountablePrice extends Price
 {
     /**
-     * @var float
+     * @var int|float
      */
-    protected $discountedAmount;
+    protected $discountedNetAmount;
+
+    /**
+     * @var int|float
+     */
+    protected $discountedGrossAmount;
+
+    /**
+     * @var int|float
+     */
+    protected $discountedTaxAmount;
 
     /**
      * @var \DateTime|null
@@ -37,19 +47,51 @@ class DiscountablePrice extends Price
     protected $validTo;
 
     /**
-     * @return float
+     * @return float|int
      */
-    public function getDiscountedAmount()
+    public function getDiscountedNetAmount()
     {
-        return $this->discountedAmount;
+        return (float)$this->discountedNetAmount;
     }
 
     /**
-     * @param float $discountedAmount
+     * @param float|int $discountedNetAmount
      */
-    public function setDiscountedAmount($discountedAmount)
+    public function setDiscountedNetAmount($discountedNetAmount)
     {
-        $this->discountedAmount = (float)$discountedAmount;
+        $this->discountedNetAmount = (float)$discountedNetAmount;
+    }
+
+    /**
+     * @return float|int
+     */
+    public function getDiscountedGrossAmount()
+    {
+        return (float)$this->discountedGrossAmount;
+    }
+
+    /**
+     * @param float|int $discountedGrossAmount
+     */
+    public function setDiscountedGrossAmount($discountedGrossAmount)
+    {
+        $this->discountedGrossAmount = (float)$discountedGrossAmount;
+    }
+
+    /**
+     * @return float|int
+     */
+    public function getDiscountedTaxAmount()
+    {
+        return (float)$this->discountedTaxAmount;
+    }
+
+    /**
+     * @param float|int $discountedTaxAmount
+     */
+    public function setDiscountedTaxAmount($discountedTaxAmount)
+    {
+        $this->discountedTaxAmount = (float)$discountedTaxAmount;
     }
 
     /**
@@ -85,21 +127,45 @@ class DiscountablePrice extends Price
     }
 
     /**
-     * @return float
+     * @return float|int
      */
-    public function getAmount()
+    public function getFinalGrossAmount()
     {
-        if ($this->isDiscountDateValid()) {
-            return $this->discountedAmount;
+        if ($this->isDiscountValid()) {
+            return $this->getDiscountedGrossAmount();
         }
 
-        return $this->amount;
+        return $this->getGrossAmount();
+    }
+
+    /**
+     * @return float|int
+     */
+    public function getFinalNetAmount()
+    {
+        if ($this->isDiscountValid()) {
+            return $this->getDiscountedNetAmount();
+        }
+
+        return $this->getNetAmount();
+    }
+
+    /**
+     * @return float|int
+     */
+    public function getFinalTaxAmount()
+    {
+        if ($this->isDiscountValid()) {
+            return $this->getDiscountedTaxAmount();
+        }
+
+        return $this->getTaxAmount();
     }
 
     /**
      * @return bool
      */
-    protected function isDiscountDateValid()
+    protected function isDiscountValid()
     {
         $now = new \DateTime();
 

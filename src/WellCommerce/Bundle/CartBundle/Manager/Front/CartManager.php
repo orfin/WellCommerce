@@ -52,7 +52,6 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
      * @param CartEventDispatcherInterface   $eventDispatcher
      * @param CartProductRepositoryInterface $cartProductRepository
      * @param CartProductFactoryInterface    $cartProductFactory
-     * @param CartTotalsCalculatorInterface  $cartTotalsCalculator
      */
     public function __construct(
         CartRepositoryInterface $cartRepository,

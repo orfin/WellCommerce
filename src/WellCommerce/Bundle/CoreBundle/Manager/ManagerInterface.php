@@ -89,6 +89,27 @@ interface ManagerInterface
     public function initResource();
 
     /**
+     * Persists new resource
+     *
+     * @param object $resource
+     */
+    public function createResource($resource);
+
+    /**
+     * Updates existing resource
+     *
+     * @param object $resource
+     */
+    public function updateResource($resource);
+
+    /**
+     * Removes a resource
+     *
+     * @param object $resource
+     */
+    public function removeResource($resource);
+
+    /**
      * @return \WellCommerce\Bundle\MultiStoreBundle\Context\ShopContextInterface
      */
     public function getShopContext();

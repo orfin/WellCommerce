@@ -13,6 +13,8 @@
 namespace WellCommerce\Bundle\CartBundle\Calculator;
 
 use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
+use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
+use WellCommerce\Bundle\IntlBundle\Converter\CurrencyConverterInterface;
 
 /**
  * Class TaxAmountCalculator
@@ -21,6 +23,21 @@ use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
  */
 class TaxAmountCalculator implements CartCalculatorInterface
 {
+    /**
+     * @var CurrencyConverterInterface
+     */
+    protected $converter;
+
+    /**
+     * Constructor
+     *
+     * @param CurrencyConverterInterface $converter
+     */
+    public function __construct(CurrencyConverterInterface $converter)
+    {
+        $this->converter = $converter;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -35,10 +52,17 @@ class TaxAmountCalculator implements CartCalculatorInterface
      */
     public function calculate(CartInterface $cart)
     {
-        $netAmount   = $cart->getTotals()->getNetPrice();
-        $grossAmount = $cart->getTotals()->getGrossPrice();
+        $amount = 0;
+        $cart->getProducts()->map(function (CartProductInterface $cartProduct) use (&$amount) {
+            $product      = $cartProduct->getProduct();
+            $baseCurrency = $product->getSellPrice()->getCurrency();
+            $taxAmount    = $product->getSellPrice()->getFinalTaxAmount();
+            $taxAmount    = $this->converter->convert($taxAmount, $baseCurrency);
 
-        return $grossAmount - $netAmount;
+            $amount += $cartProduct->getQuantity() * $taxAmount;
+        });
+
+        return $amount;
     }
 
     /**

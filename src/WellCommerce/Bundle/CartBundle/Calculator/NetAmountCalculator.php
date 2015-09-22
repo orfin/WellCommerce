@@ -54,12 +54,12 @@ class NetAmountCalculator implements CartCalculatorInterface
     {
         $price = 0;
         $cart->getProducts()->map(function (CartProductInterface $cartProduct) use (&$price) {
-            $product       = $cartProduct->getProduct();
-            $baseCurrency  = $product->getSellPrice()->getCurrency();
-            $priceNet      = $product->getSellPrice()->getAmount();
-            $quantityPrice = $cartProduct->getQuantity() * $priceNet;
+            $product      = $cartProduct->getProduct();
+            $baseCurrency = $product->getSellPrice()->getCurrency();
+            $priceNet     = $product->getSellPrice()->getFinalNetAmount();
+            $priceNet     = $this->converter->convert($priceNet, $baseCurrency);
 
-            $price += $this->converter->convert($quantityPrice, $baseCurrency);
+            $price += $cartProduct->getQuantity() * $priceNet;
         });
 
         return $price;

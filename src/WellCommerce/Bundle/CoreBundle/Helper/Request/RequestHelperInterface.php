@@ -168,4 +168,11 @@ interface RequestHelperInterface
      * @return string
      */
     public function getCurrentLocale();
+
+    /**
+     * Returns current currency
+     *
+     * @return string
+     */
+    public function getCurrentCurrency();
 }

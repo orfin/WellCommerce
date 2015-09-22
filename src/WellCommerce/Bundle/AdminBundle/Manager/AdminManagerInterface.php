@@ -34,27 +34,6 @@ interface AdminManagerInterface extends ManagerInterface
     public function findResource(Request $request);
 
     /**
-     * Persists new resource
-     *
-     * @param object $resource
-     */
-    public function createResource($resource);
-
-    /**
-     * Updates existing resource
-     *
-     * @param object $resource
-     */
-    public function updateResource($resource);
-
-    /**
-     * Removes a resource
-     *
-     * @param object $resource
-     */
-    public function removeResource($resource);
-
-    /**
      * Returns datagrid object
      *
      * @return DataGridInterface

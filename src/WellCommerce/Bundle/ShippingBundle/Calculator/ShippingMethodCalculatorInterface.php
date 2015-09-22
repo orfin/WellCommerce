@@ -12,6 +12,10 @@
 
 namespace WellCommerce\Bundle\ShippingBundle\Calculator;
 
+use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
+
 /**
  * Interface ShippingMethodCalculatorInterface
  *
@@ -34,10 +38,43 @@ interface ShippingMethodCalculatorInterface
     public function getName();
 
     /**
-     * Returns calculated shipping cost
+     * Checks whether calculator can handle product
      *
-     * @return float
+     * @param ShippingMethodInterface $shippingMethod
+     * @param ProductInterface        $product
+     *
+     * @return bool
      */
-    public function calculate();
+    public function supportsProduct(ShippingMethodInterface $shippingMethod, ProductInterface $product);
+
+    /**
+     * Checks whether calculator can handle cart
+     *
+     * @param ShippingMethodInterface $shippingMethod
+     * @param CartInterface           $cart
+     *
+     * @return bool
+     */
+    public function supportsCart(ShippingMethodInterface $shippingMethod, CartInterface $cart);
+
+    /**
+     * Calculates the costs of product for particular shipping method
+     *
+     * @param ShippingMethodInterface $shippingMethod
+     * @param ProductInterface        $product
+     *
+     * @return \WellCommerce\Bundle\ShippingBundle\Calculator\ShippingCostReference
+     */
+    public function calculateProduct(ShippingMethodInterface $shippingMethod, ProductInterface $product);
+
+    /**
+     * Calculates the costs of cart for particular shipping method
+     *
+     * @param ShippingMethodInterface $shippingMethod
+     * @param CartInterface           $cart
+     *
+     * @return \WellCommerce\Bundle\ShippingBundle\Calculator\ShippingCostReference
+     */
+    public function calculateCart(ShippingMethodInterface $shippingMethod, CartInterface $cart);
 }
 

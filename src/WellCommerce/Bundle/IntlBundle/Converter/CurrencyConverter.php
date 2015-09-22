@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\IntlBundle\Converter;
 
-use Symfony\Component\HttpFoundation\RequestStack;
+use WellCommerce\Bundle\CoreBundle\Helper\Request\RequestHelperInterface;
 use WellCommerce\Bundle\IntlBundle\Entity\CurrencyRate;
 use WellCommerce\Bundle\IntlBundle\Repository\CurrencyRateRepositoryInterface;
 
@@ -34,105 +34,40 @@ class CurrencyConverter implements CurrencyConverterInterface
     protected $exchangeRates = [];
 
     /**
-     * @var RequestStack
+     * @var RequestHelperInterface
      */
-    protected $requestStack;
-
-    /**
-     * @var string
-     */
-    protected $targetCurrency;
+    protected $requestHelper;
 
     /**
      * Constructor
      *
      * @param CurrencyRateRepositoryInterface $currencyRateRepository
-     * @param RequestStack                    $requestStack
+     * @param RequestHelperInterface          $requestHelper
      */
-    public function __construct(CurrencyRateRepositoryInterface $currencyRateRepository, RequestStack $requestStack)
+    public function __construct(CurrencyRateRepositoryInterface $currencyRateRepository, RequestHelperInterface $requestHelper)
     {
         $this->currencyRateRepository = $currencyRateRepository;
-        $this->requestStack           = $requestStack;
+        $this->requestHelper          = $requestHelper;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function format($amount, $baseCurrency = null, $targetCurrency = null, $taxValue = 0)
+    public function convert($amount, $baseCurrency = null, $targetCurrency = null)
     {
-        $targetCurrency = $this->getTargetCurrency($targetCurrency);
         if (null === $baseCurrency) {
-            $baseCurrency = $targetCurrency;
-        }
-        $amount    = $amount + $this->getTaxAmount($amount, $taxValue);
-        $amount    = $this->convert($amount, $baseCurrency, $targetCurrency);
-        $locale    = $this->requestStack->getMasterRequest()->getLocale();
-        $formatter = new \NumberFormatter($locale, \NumberFormatter::CURRENCY);
-        if (false === $result = $formatter->formatCurrency($amount, $targetCurrency)) {
-            $e = sprintf('Cannot format price with amount "%s" and currency "%s"', $amount, $targetCurrency);
-            throw new \InvalidArgumentException($e);
+            $baseCurrency = $this->requestHelper->getCurrentCurrency();
         }
 
-        return $result;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function convert($amount, $baseCurrency = null, $targetCurrency = null, $taxValue = 0)
-    {
-        $targetCurrency = $this->getTargetCurrency($targetCurrency);
-        if (null === $baseCurrency) {
-            $baseCurrency = $targetCurrency;
+        if (null === $targetCurrency) {
+            $targetCurrency = $this->requestHelper->getCurrentCurrency();
         }
-        $amount = $amount + $this->getTaxAmount($amount, $taxValue);
 
         $this->loadExchangeRates($targetCurrency);
 
         $exchangeRate = $this->exchangeRates[$targetCurrency][$baseCurrency];
 
         return $amount * $exchangeRate;
-    }
-
-    /**
-     * Returns target currency from passed argument or from session
-     *
-     * @param null|string $targetCurrency
-     *
-     * @return string
-     */
-    protected function getTargetCurrency($targetCurrency = null)
-    {
-        if (null === $targetCurrency) {
-            $targetCurrency = $this->getCurrentSessionCurrency();
-        }
-
-        return $targetCurrency;
-    }
-
-    /**
-     * Returns calculated tax amount
-     *
-     * @param float $amount
-     * @param float $taxValue
-     *
-     * @return float
-     */
-    protected function getTaxAmount($amount, $taxValue)
-    {
-        return $amount * ($taxValue / 100);
-    }
-
-    /**
-     * Returns currency code from session
-     *
-     * @return string
-     */
-    protected function getCurrentSessionCurrency()
-    {
-        $session = $this->requestStack->getMasterRequest()->getSession();
-
-        return $session->get('_currency');
     }
 
     /**

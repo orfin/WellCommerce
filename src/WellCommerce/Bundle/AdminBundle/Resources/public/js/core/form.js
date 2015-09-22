@@ -10482,7 +10482,7 @@ var GFormPriceEditor = GCore.ExtendClass(GFormTextField, function() {
 		gThis.m_jNode.append(jLabel);
 		gThis.m_jNode.append(gThis._AddField());
 		$(window).bind('OnVatChange', function(){
-			gThis._CalculateGrossPrice();
+			gThis._CalculateNetPrice();
 		});
 	};
 
@@ -10490,19 +10490,20 @@ var GFormPriceEditor = GCore.ExtendClass(GFormTextField, function() {
 		if (gThis.m_jField == undefined) {
 			return '';
 		}
-		return gThis.m_jField.eq(0).val();
+		return gThis.m_jField.eq(1).val();
 	};
 
 	gThis.SetValue = function(mValue, sRepetition) {
 		if (gThis.m_jField == undefined) {
 			return;
 		}
-		gThis.m_jField.eq(0).val(mValue).change();
+
+		gThis.m_jField.eq(1).val(mValue).change();
 	};
 
 	gThis._AddField = function(sId) {
-		var jFieldNet = $('<input type="text" name="' + gThis.GetName() + '" id="' + gThis.GetId() + '"/>');
-		var jFieldGross = $('<input type="text" id="' + gThis.GetId() + '__gross"/>');
+		var jFieldNet = $('<input type="text" id="' + gThis.GetId() + '__net"/>');
+		var jFieldGross = $('<input type="text" name="' + gThis.GetName() + '" id="' + gThis.GetId() + '"/>');
 		var jRepetitionNode = $('<span class="' + gThis._GetClass('FieldRepetition') + '"/>');
 		var jNetNode = $('<span class="' + gThis._GetClass('NetPrice') + '"/>');
 		var jGrossNode = $('<span class="' + gThis._GetClass('GrossPrice') + '"/>');
@@ -10580,20 +10581,22 @@ var GFormPriceEditor = GCore.ExtendClass(GFormTextField, function() {
 			fVat = parseFloat(GCore.aoVatValues[iVatId]);
 		}
 		if (sPrice == undefined) {
-			var sPrice = gThis.m_jField.eq(0).val();
+			var sPrice = gThis.m_jField.eq(1).val();
 		}
 		var fPrice = parseFloat(sPrice.replace(/,/, '.'));
 		fPrice = isNaN(fPrice) ? 0 : fPrice;
-		gThis.m_jField.eq(0).val((fPrice / (1 + fVat / 100)).toFixed(4));
+		gThis.m_jField.eq(0).val((fPrice / (1 + fVat / 100)).toFixed(2));
 	};
 
 	gThis._Initialize = function() {
+
 		var fHandler = GEventHandler(function(eEvent) {
 			setTimeout(function() {
 				gThis._CalculateGrossPrice($(eEvent.currentTarget).val());
 			}, 5);
 		});
 		gThis.m_jField.eq(0).keypress(fHandler).blur(fHandler).change(gThis.ValidateField);
+
 		fHandler = GEventHandler(function(eEvent) {
 			setTimeout(function() {
 				gThis._CalculateNetPrice($(eEvent.currentTarget).val());
@@ -10601,21 +10604,21 @@ var GFormPriceEditor = GCore.ExtendClass(GFormTextField, function() {
 		});
 		gThis.m_jField.eq(1).keypress(fHandler).blur(fHandler).change(gThis.ValidateField);
 		gThis.m_gForm.GetField(gThis.m_oOptions.sVatField).m_jField.change(GEventHandler(function(eEvent) {
-			gThis._CalculateGrossPrice();
+			gThis._CalculateNetPrice();
 		}));
-		gThis._CalculateGrossPrice();
-		gThis.m_jField.eq(0).change();
+		gThis._CalculateNetPrice();
+		gThis.m_jField.eq(1).change();
 	};
 
 	gThis.ValidateField = GEventHandler(function(eEvent) {
 		var fPrice = parseFloat($(eEvent.currentTarget).val().replace(/,/, '.'));
 		fPrice = isNaN(fPrice) ? 0 : fPrice;
-		$(eEvent.currentTarget).val(fPrice.toFixed(4));
+		$(eEvent.currentTarget).val(fPrice.toFixed(2));
 	});
 
 	gThis.Reset = function() {
-		gThis.m_jField.eq(0).val(gThis.m_oOptions.sDefault).change();
-		gThis._CalculateGrossPrice();
+		gThis.m_jField.eq(1).val(gThis.m_oOptions.sDefault).change();
+		gThis._CalculateNetPrice();
 	};
 
 

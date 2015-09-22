@@ -144,8 +144,8 @@ class ProductFormBuilder extends AbstractFormBuilder
         ]));
 
         $buyPriceSettings->addChild($this->getElement('price_editor', [
-            'name'      => 'buyPrice.amount',
-            'label'     => $this->trans('product.buy_price.amount.label'),
+            'name'      => 'buyPrice.grossAmount',
+            'label'     => $this->trans('product.label.buy_price.amount.gross'),
             'filters'   => [
                 $this->getFilter('comma_to_dot_changer'),
             ],
@@ -175,8 +175,8 @@ class ProductFormBuilder extends AbstractFormBuilder
         ]));
 
         $sellPriceAmount = $sellPriceSettings->addChild($this->getElement('price_editor', [
-            'name'      => 'sellPrice.amount',
-            'label'     => $this->trans('product.sell_price.amount.label'),
+            'name'      => 'sellPrice.grossAmount',
+            'label'     => $this->trans('product.label.sell_price.amount.gross'),
             'filters'   => [
                 $this->getFilter('comma_to_dot_changer'),
             ],
@@ -184,8 +184,8 @@ class ProductFormBuilder extends AbstractFormBuilder
         ]));
 
         $sellPriceSettings->addChild($this->getElement('price_editor', [
-            'name'      => 'sellPrice.discountedAmount',
-            'label'     => $this->trans('product.label.discounted_amount'),
+            'name'      => 'sellPrice.discountedGrossAmount',
+            'label'     => $this->trans('product.label.discounted_amount.gross'),
             'filters'   => [
                 $this->getFilter('comma_to_dot_changer'),
             ],

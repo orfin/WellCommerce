@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\CartBundle\DataSet\Front;
 
-use Doctrine\Common\Util\Debug;
+use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\CartBundle\Provider\CartProviderInterface;
 use WellCommerce\Bundle\CartBundle\Repository\CartProductRepositoryInterface;
 use WellCommerce\Bundle\DataSetBundle\QueryBuilder\AbstractDataSetQueryBuilder;
@@ -47,13 +47,21 @@ class CartProductDataSetQueryBuilder extends AbstractDataSetQueryBuilder impleme
      */
     public function getQueryBuilder()
     {
-        $cartIdentifier = $this->cartProvider->getCurrentCart()->getId();
-        $queryBuilder   = parent::getQueryBuilder();
-        $expression     = $queryBuilder->expr()->eq('cart_product.cart', ':cart');
+        $queryBuilder = parent::getQueryBuilder();
+        $expression   = $queryBuilder->expr()->eq('cart_product.cart', ':cart');
         $queryBuilder->andWhere($expression);
-        $queryBuilder->setParameter('cart', $cartIdentifier);
+        $queryBuilder->setParameter('cart', $this->getCartIdentifier());
         $queryBuilder->setParameter('date', new \DateTime());
 
         return $queryBuilder;
+    }
+
+    protected function getCartIdentifier()
+    {
+        if ($this->cartProvider->getCurrentCart() instanceof CartInterface) {
+            return $this->cartProvider->getCurrentCart()->getId();
+        }
+
+        return 0;
     }
 }

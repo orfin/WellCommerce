@@ -12,15 +12,10 @@
 
 namespace WellCommerce\Bundle\ShippingBundle\Calculator;
 
-use Symfony\Component\PropertyAccess\PropertyAccess;
-use WellCommerce\Bundle\CartBundle\Provider\CartProviderInterface;
-use WellCommerce\Bundle\FormBundle\FormBuilderInterface;
-use WellCommerce\Bundle\FormBundle\Conditions\Equals;
-use WellCommerce\Bundle\FormBundle\Elements\ElementCollection;
-use WellCommerce\Bundle\FormBundle\Elements\ElementInterface;
-use WellCommerce\Bundle\FormBundle\Elements\Fieldset\FieldsetInterface;
-use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
-use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod;
+use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
+use WellCommerce\Bundle\IntlBundle\Converter\CurrencyConverterInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
 
 /**
  * Class AbstractShippingMethodCalculator
@@ -35,38 +30,27 @@ abstract class AbstractShippingMethodCalculator
     protected $alias = null;
 
     /**
-     * @var CartProviderInterface
+     * @var CurrencyConverterInterface
      */
-    protected $cartProvider;
+    protected $currencyConverter;
 
     /**
      * Constructor
      *
-     * @param CartProviderInterface $cartProvider
+     * @param CurrencyConverterInterface $currencyConverter
      */
-    public function __construct(CartProviderInterface $cartProvider)
+    public function __construct(CurrencyConverterInterface $currencyConverter)
     {
-        $this->cartProvider = $cartProvider;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function calculate()
-    {
-        return 0;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAlias()
-    {
-        return $this->alias;
+        $this->currencyConverter = $currencyConverter;
     }
 
     /**
      * {@inheritdoc}
      */
     abstract public function getName();
+
+    /**
+     * {@inheritdoc}
+     */
+    abstract public function getAlias();
 }

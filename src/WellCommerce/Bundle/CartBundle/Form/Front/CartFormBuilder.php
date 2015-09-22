@@ -29,7 +29,7 @@ class CartFormBuilder extends AbstractFormBuilder
         $form->addChild($this->getElement('radio_group', [
             'name'        => 'shippingMethod',
             'label'       => $this->trans('cart.shipping_method.label'),
-            'options'     => $this->getShippingMethodOptions(),
+            'options'     => [],
             'transformer' => $this->getRepositoryTransformer('entity', $this->get('shipping_method.repository'))
         ]));
 
@@ -40,31 +40,8 @@ class CartFormBuilder extends AbstractFormBuilder
             'transformer' => $this->getRepositoryTransformer('entity', $this->get('payment_method.repository'))
         ]));
 
-
         $form->addFilter($this->getFilter('no_code'));
         $form->addFilter($this->getFilter('trim'));
         $form->addFilter($this->getFilter('secure'));
-    }
-
-    public function getShippingMethodOptions()
-    {
-        $options     = [];
-        $converter   = $this->container->get('currency.converter');
-        $calculators = $this->container->get('shipping_method.calculator.collection');
-        $dataset     = $this->get('shipping_method.collection.front')->getDataSet([
-            'order_by'  => 'hierarchy',
-            'order_dir' => 'asc'
-        ]);
-
-        foreach ($dataset['rows'] as $shippingMethod) {
-            $calculator                     = $calculators->get($shippingMethod['calculator']);
-            $shippingCost                   = $calculator->calculate();
-            $options[$shippingMethod['id']] = [
-                'name'    => $shippingMethod['name'],
-                'comment' => $converter->format($shippingCost)
-            ];
-        }
-
-        return $options;
     }
 }

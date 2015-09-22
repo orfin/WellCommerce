@@ -28,14 +28,15 @@ class ProductDataSet extends AbstractDataSet
     public function configureOptions(DataSetConfiguratorInterface $configurator)
     {
         $configurator->setColumns([
-            'id'        => 'product.id',
-            'name'      => 'product_translation.name',
-            'sku'       => 'product.sku',
-            'weight'    => 'product.weight',
-            'sellPrice' => 'product.sellPrice.amount',
-            'stock'     => 'product.stock',
-            'shop'      => 'product_shops.id',
-            'category'  => 'GROUP_CONCAT(DISTINCT categories_translation.name SEPARATOR \', \')',
+            'id'             => 'product.id',
+            'name'           => 'product_translation.name',
+            'sku'            => 'product.sku',
+            'weight'         => 'product.weight',
+            'sellPriceNet'   => 'product.sellPrice.netAmount',
+            'sellPriceGross' => 'product.sellPrice.grossAmount',
+            'stock'          => 'product.stock',
+            'shop'           => 'product_shops.id',
+            'category'       => 'GROUP_CONCAT(DISTINCT categories_translation.name SEPARATOR \', \')',
         ]);
     }
 }

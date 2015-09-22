@@ -12,9 +12,9 @@
 
 namespace WellCommerce\Bundle\ShippingBundle\Calculator;
 
-use WellCommerce\Bundle\FormBundle\FormBuilderInterface;
-use WellCommerce\Bundle\FormBundle\Dependencies\DependencyInterface;
-use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
+use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
 
 /**
  * Class WeightTableCalculator
@@ -23,13 +23,51 @@ use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
  */
 class WeightTableCalculator extends AbstractShippingMethodCalculator implements ShippingMethodCalculatorInterface
 {
-    protected $alias = 'weight_table';
-
     /**
      * {@inheritdoc}
      */
     public function getName()
     {
         return 'Weight table';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAlias()
+    {
+        return 'weight_table';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function supportsProduct(ShippingMethodInterface $shippingMethod, ProductInterface $product)
+    {
+        return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function supportsCart(ShippingMethodInterface $shippingMethod, CartInterface $cart)
+    {
+        return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function calculateProduct(ShippingMethodInterface $shippingMethod, ProductInterface $product)
+    {
+        return new ShippingCostReference();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function calculateCart(ShippingMethodInterface $shippingMethod, CartInterface $cart)
+    {
+        return new ShippingCostReference();
     }
 }

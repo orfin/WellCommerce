@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\CartBundle\Controller\Front;
 
 use Symfony\Component\HttpFoundation\Request;
+use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
 use WellCommerce\Bundle\CartBundle\Exception\AddCartItemException;
 use WellCommerce\Bundle\CartBundle\Exception\DeleteCartItemException;
@@ -46,16 +47,14 @@ class CartController extends AbstractFrontController implements FrontControllerI
             'name' => $this->trans('cart.heading.index')
         ]));
 
-        $resource = $this->manager->getCartProvider()->getCurrentCart();
-        $form     = $this->get('cart.form_builder')->createForm([
-            'name' => 'cart'
-        ], $resource);
+        $cart = $this->manager->getCartProvider()->getCurrentCart();
+        $form = $this->buildForm($cart);
 
         if ($form->handleRequest()->isSubmitted()) {
             if ($form->isValid()) {
-                $this->manager->updateResource($resource, $request);
+                $this->manager->updateResource($cart);
 
-                return $this->manager->getRouterHelper()->redirectTo('front.cart.index');
+                return $this->getRouterHelper()->redirectTo('front.cart.index');
             }
 
             if (count($form->getError())) {
@@ -67,6 +66,18 @@ class CartController extends AbstractFrontController implements FrontControllerI
             'form'     => $form,
             'elements' => $form->getChildren(),
         ]);
+    }
+
+    /**
+     * @param CartInterface $cart
+     *
+     * @return \WellCommerce\Bundle\FormBundle\Elements\FormInterface
+     */
+    protected function buildForm(CartInterface $cart)
+    {
+        return $this->get('cart.form_builder')->createForm([
+            'name' => 'cart'
+        ], $cart);
     }
 
     /**

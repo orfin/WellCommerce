@@ -37,13 +37,4 @@ interface TaxInterface extends TranslatableInterface, TimestampableInterface, Bl
      * @param float $value
      */
     public function setValue($value);
-
-    /**
-     * Calculates gross price
-     *
-     * @param float $netPrice
-     *
-     * @return float
-     */
-    public function calculateGrossPrice($netPrice);
 }

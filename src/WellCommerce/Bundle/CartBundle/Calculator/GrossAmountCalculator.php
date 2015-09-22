@@ -54,15 +54,12 @@ class GrossAmountCalculator implements CartCalculatorInterface
     {
         $price = 0;
         $cart->getProducts()->map(function (CartProductInterface $cartProduct) use (&$price) {
-            $product       = $cartProduct->getProduct();
-            $baseCurrency  = $product->getSellPrice()->getCurrency();
-            $tax           = $product->getSellPriceTax();
-            $priceNet      = $product->getSellPrice()->getAmount();
-            $priceGross    = $tax->calculateGrossPrice($priceNet);
-            $priceGross    = $this->converter->convert($priceGross, $baseCurrency);
-            $quantityPrice = $cartProduct->getQuantity() * $priceGross;
+            $product      = $cartProduct->getProduct();
+            $baseCurrency = $product->getSellPrice()->getCurrency();
+            $priceGross   = $product->getSellPrice()->getFinalGrossAmount();
+            $priceGross   = $this->converter->convert($priceGross, $baseCurrency);
 
-            $price += $this->converter->convert($quantityPrice, $baseCurrency);
+            $price += $cartProduct->getQuantity() * $priceGross;
         });
 
         return $price;

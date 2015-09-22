@@ -12,6 +12,7 @@
 namespace WellCommerce\Bundle\TaxBundle\Twig\Extension;
 
 use WellCommerce\Bundle\DataSetBundle\CollectionBuilder\SelectBuilder;
+use WellCommerce\Bundle\TaxBundle\Calculator\TaxCalculator;
 use WellCommerce\Bundle\TaxBundle\DataSet\TaxDataSet;
 
 /**

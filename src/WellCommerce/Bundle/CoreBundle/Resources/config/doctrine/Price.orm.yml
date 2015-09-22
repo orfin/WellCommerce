@@ -1,12 +1,30 @@
 WellCommerce\Bundle\CoreBundle\Entity\Price:
     type: embeddable
     fields:
-        amount:
+        netAmount:
             type: decimal
-            scale: 4
+            scale: 2
             nullable: false
             precision: 15
-            column: amount
+            column: net_amount
+        grossAmount:
+            type: decimal
+            scale: 2
+            nullable: false
+            precision: 15
+            column: gross_amount
+        taxAmount:
+            type: decimal
+            scale: 2
+            nullable: false
+            precision: 15
+            column: tax_amount
+        taxRate:
+            type: decimal
+            scale: 2
+            nullable: false
+            precision: 15
+            column: tax_rate
         currency:
             type: string
             length: 16

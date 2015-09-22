@@ -35,5 +35,17 @@ class ShippingMethodCalculatorCollection extends ArrayCollection
 
         $this->items[$alias] = $calculator;
     }
+
+    /**
+     * Returns the calculator by its alias
+     *
+     * @param string $alias
+     *
+     * @return ShippingMethodCalculatorInterface
+     */
+    public function get($alias)
+    {
+        return $this->items[$alias];
+    }
 }
 

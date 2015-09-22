@@ -58,12 +58,4 @@ class Tax implements TaxInterface
     {
         $this->value = $value;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function calculateGrossPrice($netPrice)
-    {
-        return $netPrice + ($netPrice * ($this->value / 100));
-    }
 }

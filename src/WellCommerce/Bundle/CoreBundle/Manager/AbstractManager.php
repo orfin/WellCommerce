@@ -99,4 +99,48 @@ abstract class AbstractManager extends AbstractContainerAware implements Manager
     {
         return $this->getFactory()->create();
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createResource($resource)
+    {
+        $this->getEventDispatcher()->dispatchOnPreCreateResource($resource);
+        $this->saveResource($resource);
+        $this->getEventDispatcher()->dispatchOnPostCreateResource($resource);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function updateResource($resource)
+    {
+        $this->getEventDispatcher()->dispatchOnPreUpdateResource($resource);
+        $this->saveResource($resource);
+        $this->getEventDispatcher()->dispatchOnPostUpdateResource($resource);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeResource($resource)
+    {
+        $this->getEventDispatcher()->dispatchOnPreRemoveResource($resource);
+        $em = $this->getDoctrineHelper()->getEntityManager();
+        $em->remove($resource);
+        $em->flush();
+        $this->getEventDispatcher()->dispatchOnPostRemoveResource($resource);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function saveResource($resource)
+    {
+        $em = $this->getDoctrineHelper()->getEntityManager();
+        $em->persist($resource);
+        $em->flush();
+
+        return $resource;
+    }
 }

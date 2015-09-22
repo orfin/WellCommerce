@@ -107,7 +107,11 @@
 
         <service id="currency.converter" class="WellCommerce\Bundle\IntlBundle\Converter\CurrencyConverter">
             <argument type="service" id="currency_rate.repository" />
-            <argument type="service" id="request_stack" />
+            <argument type="service" id="request_helper"/>
+        </service>
+
+        <service id="currency.formatter" class="WellCommerce\Bundle\IntlBundle\Formatter\CurrencyFormatter">
+            <argument type="service" id="request_helper"/>
         </service>
 
         <service id="currency.factory" class="WellCommerce\Bundle\IntlBundle\Factory\CurrencyFactory" />
@@ -119,6 +123,7 @@
         <service id="twig.extension.currency" class="WellCommerce\Bundle\IntlBundle\Twig\Extension\CurrencyExtension">
             <argument type="service" id="currency.converter"/>
             <argument type="service" id="currency.provider"/>
+            <argument type="service" id="currency.formatter"/>
             <tag name="twig.extension"/>
         </service>
     </services>
