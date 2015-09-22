@@ -21,11 +21,11 @@
                     {% if item.isDiscountValid == 1 %}
                         <span class="price promo">
 					        <small class="block">{{ format_price(item.price, item.currency, null, item.tax) }}</small>
-                            {{ format_price(item.discountedPrice, item.currency, null, item.tax) }}
+                            {{ format_price(item.discountedPrice, item.currency) }}
 					    </span>
                     {% else %}
                         <span class="price">
-						    {{ format_price(item.price, item.currency, null, item.tax) }}
+						    {{ format_price(item.price, item.currency) }}
 						</span>
                     {% endif %}
                 </td>
@@ -35,12 +35,12 @@
                 <td class="text-center">
                     {% if item.isDiscountValid == 1 %}
                         <span class="price promo">
-					        <small class="block">{{ format_price(item.quantityPrice, item.currency, null, item.tax) }}</small>
-                            {{ format_price(item.quantityDiscountedPrice, item.currency, null, item.tax) }}
+					        <small class="block">{{ format_price(item.quantityPrice, item.currency) }}</small>
+                            {{ format_price(item.quantityDiscountedPrice, item.currency) }}
 					    </span>
                     {% else %}
                         <span class="price">
-						    {{ format_price(item.quantityPrice, item.currency, null, item.tax) }}
+						    {{ format_price(item.quantityPrice, item.currency) }}
 						</span>
                     {% endif %}
                 </td>
