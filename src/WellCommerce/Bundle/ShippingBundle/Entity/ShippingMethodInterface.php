@@ -60,4 +60,14 @@ interface ShippingMethodInterface extends TimestampableInterface, TranslatableIn
      * @param CurrencyInterface $currency
      */
     public function setCurrency(CurrencyInterface $currency);
+
+    /**
+     * @return Collection
+     */
+    public function getPaymentMethods();
+
+    /**
+     * @param Collection $paymentMethods
+     */
+    public function setPaymentMethods(Collection $paymentMethods);
 }

@@ -22,3 +22,22 @@ WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod:
             nullable: false
             options:
                 default: 0
+    manyToMany:
+        shippingMethods:
+            targetEntity: WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod
+            fetch: LAZY
+            inversedBy: paymentMethods
+            joinTable:
+                name: payment_method_shipping_method
+                joinColumns:
+                    -
+                        name: payment_method_id
+                        nullable: false
+                        onDelete: CASCADE
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    -
+                        name: shipping_method_id
+                        nullable: false
+                        onDelete: CASCADE
+                        referencedColumnName: id

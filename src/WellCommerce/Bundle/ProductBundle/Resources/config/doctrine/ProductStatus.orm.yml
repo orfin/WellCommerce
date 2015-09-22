@@ -16,10 +16,5 @@ WellCommerce\Bundle\ProductBundle\Entity\ProductStatus:
     manyToMany:
         products:
             targetEntity: WellCommerce\Bundle\ProductBundle\Entity\Product
-            cascade: {  }
             fetch: LAZY
             mappedBy: statuses
-            inversedBy: null
-            joinTable: {  }
-            orderBy: null
-    lifecycleCallbacks: {  }

@@ -72,6 +72,18 @@ class PaymentMethodFormBuilder extends AbstractFormBuilder
             'default' => 0
         ]));
 
+        $shippingMethodData = $form->addChild($this->getElement('nested_fieldset', [
+            'name'  => 'shops_data',
+            'label' => $this->trans('payment_method.label.shipping_methods')
+        ]));
+
+        $shippingMethodData->addChild($this->getElement('multi_select', [
+            'name'        => 'shippingMethods',
+            'label'       => $this->trans('payment_method.label.shipping_methods'),
+            'options'     => $this->get('shipping_method.collection.admin')->getSelect(),
+            'transformer' => $this->getRepositoryTransformer('collection', $this->get('shipping_method.repository'))
+        ]));
+
         $form->addFilter($this->getFilter('no_code'));
         $form->addFilter($this->getFilter('trim'));
         $form->addFilter($this->getFilter('secure'));

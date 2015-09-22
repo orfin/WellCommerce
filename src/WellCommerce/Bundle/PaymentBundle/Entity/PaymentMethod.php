@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
@@ -42,9 +43,12 @@ class PaymentMethod implements PaymentMethodInterface
     protected $processor;
 
     /**
-     * Get id.
-     *
-     * @return integer
+     * @var Collection
+     */
+    protected $shippingMethods;
+
+    /**
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -52,7 +56,7 @@ class PaymentMethod implements PaymentMethodInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getProcessor()
     {
@@ -60,10 +64,26 @@ class PaymentMethod implements PaymentMethodInterface
     }
 
     /**
-     * @param string $processor
+     * {@inheritdoc}
      */
     public function setProcessor($processor)
     {
         $this->processor = $processor;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getShippingMethods()
+    {
+        return $this->shippingMethods;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setShippingMethods(Collection $shippingMethods)
+    {
+        $this->shippingMethods = $shippingMethods;
     }
 }

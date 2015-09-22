@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\HierarchyAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
@@ -42,4 +43,14 @@ interface PaymentMethodInterface extends TimestampableInterface, TranslatableInt
      * @param string $processor
      */
     public function setProcessor($processor);
+
+    /**
+     * @return Collection
+     */
+    public function getShippingMethods();
+
+    /**
+     * @param Collection $shippingMethods
+     */
+    public function setShippingMethods(Collection $shippingMethods);
 }

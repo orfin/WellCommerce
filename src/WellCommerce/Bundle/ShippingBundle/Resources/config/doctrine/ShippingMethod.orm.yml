@@ -44,3 +44,8 @@ WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod:
             fetch: LAZY
             mappedBy: shippingMethod
             orphanRemoval: true
+    manyToMany:
+        paymentMethods:
+            targetEntity: WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod
+            fetch: LAZY
+            mappedBy: shippingMethods

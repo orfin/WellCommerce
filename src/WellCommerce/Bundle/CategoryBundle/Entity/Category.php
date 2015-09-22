@@ -28,7 +28,12 @@ use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
  */
 class Category implements CategoryInterface
 {
-    use Translatable, Timestampable, Blameable, EnableableTrait, ShopCollectionAwareTrait, HierarchyAwareTrait;
+    use Translatable;
+    use Timestampable;
+    use Blameable;
+    use EnableableTrait;
+    use ShopCollectionAwareTrait;
+    use HierarchyAwareTrait;
 
     /**
      * @var integer
@@ -51,7 +56,7 @@ class Category implements CategoryInterface
     protected $products;
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -59,7 +64,7 @@ class Category implements CategoryInterface
     }
 
     /**
-     * @return null|CategoryInterface
+     * {@inheritdoc}
      */
     public function getParent()
     {
@@ -67,7 +72,7 @@ class Category implements CategoryInterface
     }
 
     /**
-     * @param CategoryInterface|null $parent
+     * {@inheritdoc}
      */
     public function setParent(CategoryInterface $parent = null)
     {
@@ -75,7 +80,7 @@ class Category implements CategoryInterface
     }
 
     /**
-     * @param Collection $children
+     * {@inheritdoc}
      */
     public function setChildren(Collection $children)
     {
@@ -83,7 +88,7 @@ class Category implements CategoryInterface
     }
 
     /**
-     * @return Collection
+     * {@inheritdoc}
      */
     public function getChildren()
     {
@@ -91,7 +96,7 @@ class Category implements CategoryInterface
     }
 
     /**
-     * @param CategoryInterface $child
+     * {@inheritdoc}
      */
     public function addChild(CategoryInterface $child)
     {
@@ -100,7 +105,7 @@ class Category implements CategoryInterface
     }
 
     /**
-     * @return Collection
+     * {@inheritdoc}
      */
     public function getProducts()
     {
@@ -108,7 +113,7 @@ class Category implements CategoryInterface
     }
 
     /**
-     * @param Collection $products
+     * {@inheritdoc}
      */
     public function setProducts(Collection $products)
     {
@@ -116,7 +121,7 @@ class Category implements CategoryInterface
     }
 
     /**
-     * @param ProductInterface $product
+     * {@inheritdoc}
      */
     public function addProduct(ProductInterface $product)
     {
