@@ -23,10 +23,10 @@ WellCommerce\Bundle\ProductBundle\Entity\Product:
             length: 64
             nullable: false
         stock:
-            type: decimal
-            scale: 4
+            type: integer
             nullable: false
-            precision: 15
+            options:
+                default: 0
         trackStock:
             type: boolean
             nullable: false

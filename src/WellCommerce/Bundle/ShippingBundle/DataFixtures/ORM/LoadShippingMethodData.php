@@ -34,7 +34,7 @@ class LoadShippingMethodData extends AbstractDataFixture
         $factory  = $this->container->get('shipping_method.factory');
 
         $fedEx = $factory->create();
-        $fedEx->setCalculator('fixed_price');
+        $fedEx->setCalculator('price_table');
         $fedEx->setTax($tax);
         $fedEx->setCurrency($currency);
         $fedEx->translate('en')->setName('FedEx');
@@ -42,7 +42,7 @@ class LoadShippingMethodData extends AbstractDataFixture
         $manager->persist($fedEx);
 
         $ups = $factory->create();
-        $ups->setCalculator('fixed_price');
+        $ups->setCalculator('price_table');
         $ups->setTax($tax);
         $ups->setCurrency($currency);
         $ups->translate('en')->setName('UPS');

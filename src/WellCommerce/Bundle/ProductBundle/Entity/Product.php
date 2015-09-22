@@ -167,7 +167,7 @@ class Product implements ProductInterface
      */
     public function setStock($stock)
     {
-        $this->stock = (float)$stock;
+        $this->stock = (int)$stock;
     }
 
     /**
@@ -175,7 +175,7 @@ class Product implements ProductInterface
      */
     public function getTrackStock()
     {
-        return $this->trackStock;
+        return (bool)$this->trackStock;
     }
 
     /**

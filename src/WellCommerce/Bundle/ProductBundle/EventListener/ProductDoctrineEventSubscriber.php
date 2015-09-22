@@ -1,43 +1,54 @@
 <?php
 /*
  * WellCommerce Open-Source E-Commerce Platform
- *
+ * 
  * This file is part of the WellCommerce package.
  *
  * (c) Adam Piotrowski <adam@wellcommerce.org>
- *
+ * 
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
+
 namespace WellCommerce\Bundle\ProductBundle\EventListener;
 
-use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
-use Symfony\Component\HttpKernel\KernelEvents;
-use WellCommerce\Bundle\CoreBundle\Event\ResourceEvent;
-use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
+use Doctrine\Common\EventSubscriber;
+use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\TaxBundle\Helper\TaxHelper;
 
 /**
- * Class CurrencySubscriber
+ * Class ProductDoctrineEventSubscriber
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductSubscriber extends AbstractEventSubscriber
+class ProductDoctrineEventSubscriber implements EventSubscriber
 {
-    public static function getSubscribedEvents()
+    public function getSubscribedEvents()
     {
         return [
-            'product.pre_create' => ['onProductSave', 0],
-            'product.pre_update' => ['onProductSave', 0],
+            'prePersist',
+            'preUpdate',
         ];
     }
 
-    public function onProductSave(ResourceEvent $event)
+    public function preUpdate(LifecycleEventArgs $args)
     {
-        if (($product = $event->getResource()) instanceof ProductInterface) {
-            $this->refreshProductSellPrices($product);
-            $this->refreshProductBuyPrices($product);
+        $this->onProductBeforeSave($args);
+    }
+
+    public function prePersist(LifecycleEventArgs $args)
+    {
+        $this->onProductBeforeSave($args);
+    }
+
+    public function onProductBeforeSave(LifecycleEventArgs $args)
+    {
+        $entity = $args->getObject();
+        if ($entity instanceof ProductInterface) {
+            $this->refreshProductSellPrices($entity);
+            $this->refreshProductBuyPrices($entity);
+            $this->syncProductStock($entity);
         }
     }
 
@@ -77,5 +88,14 @@ class ProductSubscriber extends AbstractEventSubscriber
         $buyPrice->setTaxRate($taxRate);
         $buyPrice->setTaxAmount($grossAmount - $netAmount);
         $buyPrice->setNetAmount($netAmount);
+    }
+
+    protected function syncProductStock(ProductInterface $product)
+    {
+        $trackStock = $product->getTrackStock();
+
+        if (true === $trackStock) {
+            $product->setEnabled(($product->getStock() > 0));
+        }
     }
 }
