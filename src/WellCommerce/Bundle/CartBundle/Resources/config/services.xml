@@ -126,26 +126,12 @@
             <argument type="service" id="cart.visitor.collection"/>
         </service>
 
-        <service id="cart_totals.calculator.gross_amount" class="WellCommerce\Bundle\CartBundle\Calculator\GrossAmountCalculator">
+        <service id="cart_totals.collector" class="WellCommerce\Bundle\CartBundle\Collector\CartTotalsCollector">
             <argument type="service" id="currency.converter"/>
-            <tag name="cart.visitor"/>
         </service>
 
-        <service id="cart_totals.calculator.net_amount" class="WellCommerce\Bundle\CartBundle\Calculator\NetAmountCalculator">
-            <argument type="service" id="currency.converter"/>
-            <tag name="cart.visitor"/>
-        </service>
-
-        <service id="cart_totals.calculator.tax_amount" class="WellCommerce\Bundle\CartBundle\Calculator\TaxAmountCalculator">
-            <argument type="service" id="currency.converter"/>
-            <tag name="cart.visitor"/>
-        </service>
-
-        <service id="cart_totals.calculator.weight" class="WellCommerce\Bundle\CartBundle\Calculator\WeightCalculator">
-            <tag name="cart.visitor"/>
-        </service>
-
-        <service id="cart_totals.calculator.quantity" class="WellCommerce\Bundle\CartBundle\Calculator\QuantityCalculator">
+        <service id="cart_totals.visitor" class="WellCommerce\Bundle\CartBundle\Visitor\CartTotalsVisitor">
+            <argument type="service" id="cart_totals.collector"/>
             <tag name="cart.visitor"/>
         </service>
 
