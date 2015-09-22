@@ -26,7 +26,7 @@ class ClientLoginBoxController extends AbstractBoxController
         $form = $this->get('client_login.form_builder.front')->createForm([
             'name'         => 'login',
             'ajax_enabled' => false,
-            'action'       => $this->generateUrl('front.client.login_check')
+            'action'       => $this->getRouterHelper()->generateUrl('front.client.login_check')
         ], null);
 
         return $this->displayTemplate('index', [

@@ -25,10 +25,15 @@
         <service id="client.dataset" class="WellCommerce\Bundle\ClientBundle\DataSet\ClientDataSet">
             <argument key="identifier">client</argument>
             <argument type="service" id="client.dataset.loader"/>
+            <argument type="service" id="client.event_dispatcher"/>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
         <service id="client.factory" class="WellCommerce\Bundle\ClientBundle\Factory\ClientFactory" />
+
+        <service id="client.event_dispatcher" class="WellCommerce\Bundle\ClientBundle\EventDispatcher\ClientEventDispatcher">
+            <argument type="service" id="event_dispatcher"/>
+        </service>
 
         <service id="client_login.layout_box.controller" class="WellCommerce\Bundle\ClientBundle\Controller\Box\ClientLoginBoxController">
             <argument type="service" id="client.manager.front"/>

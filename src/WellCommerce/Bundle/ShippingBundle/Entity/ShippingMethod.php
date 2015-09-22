@@ -46,7 +46,7 @@ class ShippingMethod implements ShippingMethodInterface
     protected $calculator;
 
     /**
-     * @var CurrencyInterface
+     * @var string
      */
     protected $currency;
 
@@ -122,13 +122,5 @@ class ShippingMethod implements ShippingMethodInterface
     public function getPaymentMethods()
     {
         return $this->paymentMethods;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setPaymentMethods(Collection $paymentMethods)
-    {
-        $this->paymentMethods = $paymentMethods;
     }
 }

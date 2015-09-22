@@ -68,9 +68,14 @@ class ShippingMethodFormBuilder extends AbstractFormBuilder
         ]));
 
         $costsData->addChild($this->getElement('select', [
-            'name'    => 'currency',
-            'label'   => $this->trans('shipping_method.label.currency'),
-            'options' => $this->get('currency.provider')->getSelect()
+            'name'        => 'currency',
+            'label'       => $this->trans('shipping_method.label.currency'),
+            'options'     => $this->get('currency.collection')->getSelect([
+                'value_key' => 'id',
+                'label_key' => 'code',
+                'order_by'  => 'code',
+            ]),
+            'transformer' => $this->getRepositoryTransformer('entity', $this->get('currency.repository'))
         ]));
 
         $tax = $costsData->addChild($this->getElement('select', [

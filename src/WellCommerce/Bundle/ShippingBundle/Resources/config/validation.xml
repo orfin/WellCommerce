@@ -22,7 +22,8 @@
             </constraint>
         </property>
         <property name="currency">
-            <constraint name="Currency" />
+            <constraint name="NotBlank" />
+            <constraint name="NotNull" />
         </property>
         <property name="tax">
             <constraint name="NotBlank" />

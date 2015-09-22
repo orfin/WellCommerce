@@ -72,12 +72,12 @@ class PaymentMethodFormBuilder extends AbstractFormBuilder
             'default' => 0
         ]));
 
-        $shippingMethodData = $form->addChild($this->getElement('nested_fieldset', [
-            'name'  => 'shops_data',
+        $shippingMethodsData = $form->addChild($this->getElement('nested_fieldset', [
+            'name'  => 'shipping_methods_data',
             'label' => $this->trans('payment_method.label.shipping_methods')
         ]));
 
-        $shippingMethodData->addChild($this->getElement('multi_select', [
+        $shippingMethodsData->addChild($this->getElement('multi_select', [
             'name'        => 'shippingMethods',
             'label'       => $this->trans('payment_method.label.shipping_methods'),
             'options'     => $this->get('shipping_method.collection.admin')->getSelect(),
