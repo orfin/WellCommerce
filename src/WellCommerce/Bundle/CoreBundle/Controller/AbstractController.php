@@ -40,14 +40,9 @@ abstract class AbstractController extends AbstractContainerAware implements Cont
     }
 
     /**
-     * Redirects user to another action of current controller
-     *
-     * @param string $actionName
-     * @param array  $params
-     *
-     * @return RedirectResponse
+     * {@inheritdoc}
      */
-    protected function redirectToAction($actionName = 'index', array $params = [])
+    public function redirectToAction($actionName = 'index', array $params = [])
     {
         $url = $this->getRedirectToActionUrl($actionName, $params);
 
@@ -55,14 +50,9 @@ abstract class AbstractController extends AbstractContainerAware implements Cont
     }
 
     /**
-     * Redirects to URL generated for route
-     *
-     * @param string $routeName
-     * @param array  $routeParams
-     *
-     * @return RedirectResponse
+     * {@inheritdoc}
      */
-    protected function redirectToRoute($routeName, array $routeParams = [])
+    public function redirectToRoute($routeName, array $routeParams = [])
     {
         $url = $this->getRouterHelper()->generateUrl($routeName, $routeParams);
 
@@ -70,26 +60,15 @@ abstract class AbstractController extends AbstractContainerAware implements Cont
     }
 
     /**
-     * Creates absolute url pointing to particular controller action
-     *
-     * @param string $actionName
-     * @param array  $params
-     *
-     * @return string
+     * {@inheritdoc}
      */
-    protected function getRedirectToActionUrl($actionName = 'index', array $params = [])
+    public function getRedirectToActionUrl($actionName = 'index', array $params = [])
     {
         return $this->getRouterHelper()->getRedirectToActionUrl($actionName, $params);
     }
 
     /**
-     * Renders a view.
-     *
-     * @param string   $view       The view name
-     * @param array    $parameters An array of parameters to pass to the view
-     * @param Response $response   A response instance
-     *
-     * @return Response A Response instance
+     * {@inheritdoc}
      */
     public function render($view, array $parameters = [], Response $response = null)
     {
@@ -97,12 +76,7 @@ abstract class AbstractController extends AbstractContainerAware implements Cont
     }
 
     /**
-     * Returns a rendered view.
-     *
-     * @param string $view       The view name
-     * @param array  $parameters An array of parameters to pass to the view
-     *
-     * @return string The rendered view
+     * {@inheritdoc}
      */
     public function renderView($view, array $parameters = [])
     {
@@ -110,36 +84,14 @@ abstract class AbstractController extends AbstractContainerAware implements Cont
     }
 
     /**
-     * Renders and displays the template
-     *
-     * @param string $templateName
-     * @param array  $templateVars
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * {@inheritdoc}
      */
-    protected function displayTemplate($templateName, array $templateVars = [])
+    public function displayTemplate($templateName, array $templateVars = [])
     {
         $templating       = $this->container->get('templating');
         $templateResolver = $this->get('template_resolver');
         $template         = $templateResolver->resolveControllerTemplate($this, $templateName);
 
         return $templating->renderResponse($template, $templateVars);
-    }
-
-    protected function getUser()
-    {
-        if (!$this->container->has('security.token_storage')) {
-            throw new \LogicException('The SecurityBundle is not registered in your application.');
-        }
-
-        if (null === $token = $this->container->get('security.token_storage')->getToken()) {
-            return null;
-        }
-
-        if (!is_object($user = $token->getUser())) {
-            return null;
-        }
-
-        return $user;
     }
 }
