@@ -50,6 +50,9 @@ class CartController extends AbstractFrontController implements FrontControllerI
         $cart = $this->manager->getCurrentCart();
         $form = $this->buildForm($cart);
 
+//        $calculator = $this->get('price_table.calculator');
+//        $calculator->calculateCart($cart);
+
         if ($form->handleRequest()->isSubmitted()) {
             if ($form->isValid()) {
                 $this->manager->updateResource($cart);
@@ -96,7 +99,7 @@ class CartController extends AbstractFrontController implements FrontControllerI
             $this->manager->addProductToCart($product, $attribute, $quantity);
         } catch (AddCartItemException $exception) {
             return $this->jsonResponse([
-                'error' => $this->trans('cart.error.add_product')
+                'error' => $exception->getMessage()
             ]);
         }
 

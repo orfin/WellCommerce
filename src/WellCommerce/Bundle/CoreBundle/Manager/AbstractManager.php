@@ -137,7 +137,7 @@ abstract class AbstractManager extends AbstractContainerAware implements Manager
      */
     protected function saveResource($resource)
     {
-        $em = $this->getDoctrineHelper()->getEntityManager();
+        $em = $this->getEntityManager();
         $em->persist($resource);
         $em->flush();
 

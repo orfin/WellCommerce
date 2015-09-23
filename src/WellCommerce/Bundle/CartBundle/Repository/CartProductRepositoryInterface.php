@@ -24,14 +24,5 @@ use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
  */
 interface CartProductRepositoryInterface extends RepositoryInterface
 {
-    /**
-     * Returns the CartProduct object from cart or null if it was not found
-     *
-     * @param CartInterface                  $cart
-     * @param ProductInterface               $product
-     * @param ProductAttributeInterface|null $attribute
-     *
-     * @return null|\WellCommerce\Bundle\CartBundle\Entity\CartProductInterface
-     */
-    public function findProductInCart(CartInterface $cart, ProductInterface $product, ProductAttributeInterface $attribute = null);
+
 }

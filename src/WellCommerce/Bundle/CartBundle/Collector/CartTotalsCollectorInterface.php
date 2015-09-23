@@ -43,26 +43,29 @@ interface CartTotalsCollectorInterface
      * Collects net amounts
      *
      * @param CartInterface $cart
+     * @param null|string   $targetCurrency
      *
      * @return int|float
      */
-    public function collectTotalNetAmount(CartInterface $cart);
+    public function collectTotalNetAmount(CartInterface $cart, $targetCurrency = null);
 
     /**
      * Collects gross amounts
      *
      * @param CartInterface $cart
+     * @param null|string   $targetCurrency
      *
      * @return int|float
      */
-    public function collectTotalGrossAmount(CartInterface $cart);
+    public function collectTotalGrossAmount(CartInterface $cart, $targetCurrency = null);
 
     /**
      * Collects tax amounts
      *
      * @param CartInterface $cart
+     * @param null|string   $targetCurrency
      *
      * @return int|float
      */
-    public function collectTotalTaxAmount(CartInterface $cart);
+    public function collectTotalTaxAmount(CartInterface $cart, $targetCurrency = null);
 }

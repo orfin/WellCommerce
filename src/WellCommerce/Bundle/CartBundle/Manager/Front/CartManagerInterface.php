@@ -56,13 +56,6 @@ interface CartManagerInterface extends FrontManagerInterface
     public function changeCartProductQuantity(CartProductInterface $cartProduct, $qty);
 
     /**
-     * Resets the cart. It will be reinitialized during next kernel request
-     *
-     * @param CartInterface $cart
-     */
-    public function abandonCart(CartInterface $cart);
-
-    /**
      * Initializes the cart for current request
      *
      * @return void

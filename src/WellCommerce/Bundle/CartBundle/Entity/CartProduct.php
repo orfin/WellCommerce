@@ -4,11 +4,8 @@ namespace WellCommerce\Bundle\CartBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\Timestampable\TimestampableTrait;
-use WellCommerce\Bundle\ProductBundle\Entity\Product;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareTrait;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 
 /**
  * Class CartProduct

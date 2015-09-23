@@ -13,10 +13,9 @@ namespace WellCommerce\Bundle\CartBundle\EventListener;
 
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
-use WellCommerce\Bundle\CartBundle\Event\CartEvent;
-use WellCommerce\Bundle\CartBundle\EventDispatcher\CartEventDispatcher;
 use WellCommerce\Bundle\CartBundle\Manager\Front\CartManagerInterface;
 use WellCommerce\Bundle\CartBundle\Visitor\CartVisitorTraverserInterface;
+use WellCommerce\Bundle\CoreBundle\Event\ResourceEvent;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 use WellCommerce\Bundle\FormBundle\Event\FormEvent;
 use WellCommerce\Bundle\ShippingBundle\Provider\CartShippingMethodProvider;
@@ -66,9 +65,10 @@ class CartSubscriber extends AbstractEventSubscriber
     public static function getSubscribedEvents()
     {
         return [
-            CartEventDispatcher::POST_CART_CHANGE_EVENT => ['onCartChangedEvent', 0],
-            KernelEvents::CONTROLLER                    => ['onKernelController', 0],
-            'cart.form_init'                            => ['onFormInit', 0],
+            KernelEvents::CONTROLLER => ['onKernelController', 0],
+            'cart.form_init'         => ['onFormInit', 0],
+            'cart.pre_create'        => ['onCartChangedEvent', 0],
+            'cart.pre_update'        => ['onCartChangedEvent', 0],
         ];
     }
 
@@ -77,9 +77,9 @@ class CartSubscriber extends AbstractEventSubscriber
         $this->cartManager->initializeCart();
     }
 
-    public function onCartChangedEvent(CartEvent $event)
+    public function onCartChangedEvent(ResourceEvent $event)
     {
-        $this->cartVisitorTraverser->traverse($event->getCart());
+        $this->cartVisitorTraverser->traverse($event->getResource());
     }
 
     public function onFormInit(FormEvent $event)
@@ -93,7 +93,7 @@ class CartSubscriber extends AbstractEventSubscriber
         foreach ($shippingMethodOptions->all() as $option) {
             $shippingMethodSelect->addOptionToSelect($option->getId(), [
                     'name'    => $option->getName(),
-                    'comment' => $formatter->format($option->getGrossPrice())
+                    'comment' => $formatter->format($option->getPrice())
                 ]
             );
         }

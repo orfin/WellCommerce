@@ -17,10 +17,9 @@ use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
 use WellCommerce\Bundle\CartBundle\EventDispatcher\CartEventDispatcherInterface;
 use WellCommerce\Bundle\CartBundle\Exception\AddCartItemException;
 use WellCommerce\Bundle\CartBundle\Factory\CartFactoryInterface;
-use WellCommerce\Bundle\CartBundle\Factory\CartProductFactoryInterface;
-use WellCommerce\Bundle\CartBundle\Repository\CartProductRepositoryInterface;
 use WellCommerce\Bundle\CartBundle\Repository\CartRepositoryInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
+use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface;
@@ -34,34 +33,26 @@ use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 class CartManager extends AbstractFrontManager implements CartManagerInterface
 {
     /**
-     * @var CartProductRepositoryInterface
+     * @var CartProductManagerInterface
      */
-    protected $cartProductRepository;
-
-    /**
-     * @var CartProductFactoryInterface
-     */
-    protected $cartProductFactory;
+    protected $cartProductManager;
 
     /**
      * Constructor
      *
-     * @param CartRepositoryInterface        $cartRepository
-     * @param CartFactoryInterface           $cartFactory
-     * @param CartEventDispatcherInterface   $eventDispatcher
-     * @param CartProductRepositoryInterface $cartProductRepository
-     * @param CartProductFactoryInterface    $cartProductFactory
+     * @param CartRepositoryInterface      $cartRepository
+     * @param FactoryInterface             $cartFactory
+     * @param CartEventDispatcherInterface $eventDispatcher
+     * @param CartProductManagerInterface  $cartProductManager
      */
     public function __construct(
         CartRepositoryInterface $cartRepository,
-        CartFactoryInterface $cartFactory,
+        FactoryInterface $cartFactory,
         CartEventDispatcherInterface $eventDispatcher,
-        CartProductRepositoryInterface $cartProductRepository,
-        CartProductFactoryInterface $cartProductFactory
+        CartProductManagerInterface $cartProductManager
     ) {
         parent::__construct($cartRepository, $cartFactory, $eventDispatcher);
-        $this->cartProductRepository = $cartProductRepository;
-        $this->cartProductFactory    = $cartProductFactory;
+        $this->cartProductManager = $cartProductManager;
     }
 
     /**
@@ -70,22 +61,18 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
     public function addProductToCart(ProductInterface $product, ProductAttributeInterface $attribute = null, $quantity = 1)
     {
         try {
-            $entityManager = $this->getEntityManager();
-            $cart          = $this->getCurrentCart();
-            $cartProduct   = $this->cartProductRepository->findProductInCart($cart, $product, $attribute);
+            $cart        = $this->getCurrentCart();
+            $cartProduct = $this->cartProductManager->findProductInCart($cart, $product, $attribute);
 
             if (null === $cartProduct) {
-                $cartProduct = $this->cartProductFactory->createCartProduct($cart, $product, $attribute, $quantity);
-
+                $cartProduct = $this->cartProductManager->initCartProduct($cart, $product, $attribute, $quantity);
                 $cart->addProduct($cartProduct);
-                $entityManager->persist($cartProduct);
             } else {
                 $cartProduct->increaseQuantity($quantity);
             }
 
-            $this->dispatchPostChangeCartEvent($cart);
+            $this->updateResource($cart);
 
-            $entityManager->flush();
         } catch (\Exception $e) {
             throw new AddCartItemException($product, $attribute, $quantity, $e);
         }
@@ -93,27 +80,13 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
         return true;
     }
 
-    protected function dispatchPostChangeCartEvent(CartInterface $cart)
-    {
-        /** @var $dispatcher CartEventDispatcherInterface */
-        $dispatcher = $this->getEventDispatcher();
-        $dispatcher->dispatchOnPostCartChange($cart);
-    }
-
     /**
      * {@inheritdoc}
      */
     public function deleteCartProduct(CartProductInterface $cartProduct)
     {
-        $entityManager = $this->getEntityManager();
-        $cart          = $this->getCurrentCart();
-
-        $cart->removeProduct($cartProduct);
-        $entityManager->remove($cartProduct);
-
-        $this->dispatchPostChangeCartEvent($cart);
-
-        $entityManager->flush();
+        $this->cartProductManager->removeResource($cartProduct);
+        $this->updateResource($this->getCurrentCart());
 
         return true;
     }
@@ -123,31 +96,10 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
      */
     public function changeCartProductQuantity(CartProductInterface $cartProduct, $qty)
     {
-        $entityManager = $this->getEntityManager();
-        $cart          = $this->getCurrentCart();
-        $qty           = (int)$qty;
-
-        if ($qty < 1) {
-            return $this->deleteCartProduct($cartProduct);
-        }
-
-        $cartProduct->setQuantity($qty);
-
-        $this->dispatchPostChangeCartEvent($cart);
-
-        $entityManager->flush();
+        $this->cartProductManager->changeCartProductQuantity($cartProduct, $qty);
+        $this->updateResource($this->getCurrentCart());
 
         return true;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function abandonCart(CartInterface $cart)
-    {
-        $entityManager = $this->getEntityManager();
-        $entityManager->remove($cart);
-        $entityManager->flush();
     }
 
     /**
@@ -159,9 +111,9 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
         $sessionId     = $requestHelper->getSessionId();
         $client        = $requestHelper->getClient();
         $shop          = $this->getShopContext()->getCurrentScope();
-        $cartProvider  = $this->getCartProvider();
         $cart          = $this->getCart($shop, $client, $sessionId);
 
+        $cartProvider = $this->getCartProvider();
         $cartProvider->setCurrentCart($cart);
     }
 
@@ -179,24 +131,28 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
         /** @var $cartRepository CartRepositoryInterface */
         $cartRepository = $this->getRepository();
         $cart           = $cartRepository->findCart($client, $sessionId, $shop);
-        $entityManager  = $this->getEntityManager();
-        /** @var $factory */
-        $factory = $this->getFactory();
 
         if (null === $cart) {
             $cart = $this->createCart($shop, $client, $sessionId);
-            $entityManager->persist($cart);
+        } else {
+            $this->updateCartClient($cart, $client);
         }
-
-        $cart->setSessionId($sessionId);
-
-        if (null !== $client) {
-            $cart->setClient($client);
-        }
-
-        $entityManager->flush();
 
         return $cart;
+    }
+
+    /**
+     * Updates client relation only when changed and not null
+     *
+     * @param CartInterface        $cart
+     * @param ClientInterface|null $client
+     */
+    protected function updateCartClient(CartInterface $cart, ClientInterface $client = null)
+    {
+        if (null !== $client && null === $cart->getClient()) {
+            $cart->setClient($client);
+            $this->updateResource($cart);
+        }
     }
 
     /**
@@ -210,13 +166,15 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
      */
     protected function createCart(ShopInterface $shop, ClientInterface $client = null, $sessionId)
     {
-        $cart = $this->getFactory()->create();
+        $cart = $this->initResource();
         $cart->setShop($shop);
         $cart->setSessionId($sessionId);
 
         if (null !== $client) {
             $cart->setClient($client);
         }
+
+        $this->createResource($cart);
 
         return $cart;
     }

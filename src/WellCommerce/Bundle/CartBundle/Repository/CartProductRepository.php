@@ -39,16 +39,4 @@ class CartProductRepository extends AbstractEntityRepository implements CartProd
 
         return $queryBuilder;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function findProductInCart(CartInterface $cart, ProductInterface $product, ProductAttributeInterface $attribute = null)
-    {
-        return $this->findOneBy([
-            'cart'      => $cart,
-            'product'   => $product,
-            'attribute' => $attribute
-        ]);
-    }
 }

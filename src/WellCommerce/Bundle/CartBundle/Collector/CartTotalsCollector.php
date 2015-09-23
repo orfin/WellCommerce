@@ -69,14 +69,14 @@ class CartTotalsCollector implements CartTotalsCollectorInterface
     /**
      * {@inheritdoc}
      */
-    public function collectTotalNetAmount(CartInterface $cart)
+    public function collectTotalNetAmount(CartInterface $cart, $targetCurrency = null)
     {
         $price = 0;
-        $cart->getProducts()->map(function (CartProductInterface $cartProduct) use (&$price) {
+        $cart->getProducts()->map(function (CartProductInterface $cartProduct) use (&$price, &$targetCurrency) {
             $product      = $cartProduct->getProduct();
             $baseCurrency = $product->getSellPrice()->getCurrency();
             $priceNet     = $product->getSellPrice()->getFinalNetAmount();
-            $priceNet     = $this->converter->convert($priceNet, $baseCurrency);
+            $priceNet     = $this->converter->convert($priceNet, $baseCurrency, $targetCurrency);
 
             $price += $cartProduct->getQuantity() * $priceNet;
         });
@@ -87,14 +87,14 @@ class CartTotalsCollector implements CartTotalsCollectorInterface
     /**
      * {@inheritdoc}
      */
-    public function collectTotalGrossAmount(CartInterface $cart)
+    public function collectTotalGrossAmount(CartInterface $cart, $targetCurrency = null)
     {
         $price = 0;
-        $cart->getProducts()->map(function (CartProductInterface $cartProduct) use (&$price) {
+        $cart->getProducts()->map(function (CartProductInterface $cartProduct) use (&$price, &$targetCurrency) {
             $product      = $cartProduct->getProduct();
             $baseCurrency = $product->getSellPrice()->getCurrency();
             $priceGross   = $product->getSellPrice()->getFinalGrossAmount();
-            $priceGross   = $this->converter->convert($priceGross, $baseCurrency);
+            $priceGross   = $this->converter->convert($priceGross, $baseCurrency, $targetCurrency);
 
             $price += $cartProduct->getQuantity() * $priceGross;
         });
@@ -105,14 +105,14 @@ class CartTotalsCollector implements CartTotalsCollectorInterface
     /**
      * {@inheritdoc}
      */
-    public function collectTotalTaxAmount(CartInterface $cart)
+    public function collectTotalTaxAmount(CartInterface $cart, $targetCurrency = null)
     {
         $amount = 0;
-        $cart->getProducts()->map(function (CartProductInterface $cartProduct) use (&$amount) {
+        $cart->getProducts()->map(function (CartProductInterface $cartProduct) use (&$amount, &$targetCurrency) {
             $product      = $cartProduct->getProduct();
             $baseCurrency = $product->getSellPrice()->getCurrency();
             $taxAmount    = $product->getSellPrice()->getFinalTaxAmount();
-            $taxAmount    = $this->converter->convert($taxAmount, $baseCurrency);
+            $taxAmount    = $this->converter->convert($taxAmount, $baseCurrency, $targetCurrency);
 
             $amount += $cartProduct->getQuantity() * $taxAmount;
         });

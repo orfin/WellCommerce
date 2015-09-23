@@ -31,9 +31,10 @@ WellCommerce\Bundle\CartBundle\Entity\Cart:
         products:
             targetEntity: WellCommerce\Bundle\CartBundle\Entity\CartProduct
             cascade:
-                - persist
+                - all
             fetch: LAZY
             mappedBy: cart
+            orphanRemoval: true
     manyToOne:
         shop:
             targetEntity: WellCommerce\Bundle\MultiStoreBundle\Entity\Shop
