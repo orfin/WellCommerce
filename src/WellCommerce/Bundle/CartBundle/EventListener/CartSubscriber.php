@@ -47,12 +47,6 @@ class CartSubscriber extends AbstractEventSubscriber
      *
      * @param CartManagerInterface          $cartManager
      * @param CartVisitorTraverserInterface $cartVisitorTraverser
-     */
-    /**
-     * Constructor
-     *
-     * @param CartManagerInterface          $cartManager
-     * @param CartVisitorTraverserInterface $cartVisitorTraverser
      * @param CartShippingMethodProvider    $cartShippingMethodProvider
      */
     public function __construct(CartManagerInterface $cartManager, CartVisitorTraverserInterface $cartVisitorTraverser, CartShippingMethodProvider $cartShippingMethodProvider)
@@ -101,11 +95,12 @@ class CartSubscriber extends AbstractEventSubscriber
             $baseCurrency   = $shippingMethod->getCurrency()->getCode();
             $grossAmount    = $cost->getCost()->getGrossAmount();
 
-            $shippingMethodSelect->addOptionToSelect($cost->getId(), [
-                    'name'    => $shippingMethod->translate()->getName(),
-                    'comment' => $currencyHelper->convertAndFormat($grossAmount, $baseCurrency)
-                ]
-            );
+            $label = [
+                'name'    => $shippingMethod->translate()->getName(),
+                'comment' => $currencyHelper->convertAndFormat($grossAmount, $baseCurrency)
+            ];
+
+            $shippingMethodSelect->addOptionToSelect($cost->getId(), $label);
         }
     }
 }

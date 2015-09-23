@@ -36,8 +36,6 @@ class CartProductManager extends AbstractFrontManager implements CartProductMana
         $cartProduct->setAttribute($attribute);
         $cartProduct->setQuantity($quantity);
 
-        $this->createResource($cartProduct);
-
         return $cartProduct;
     }
 

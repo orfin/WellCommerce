@@ -70,18 +70,6 @@ class CartController extends AbstractFrontController implements FrontControllerI
     }
 
     /**
-     * @param CartInterface $cart
-     *
-     * @return \WellCommerce\Bundle\FormBundle\Elements\FormInterface
-     */
-    protected function buildForm(CartInterface $cart)
-    {
-        return $this->get('cart.form_builder')->createForm([
-            'name' => 'cart'
-        ], $cart);
-    }
-
-    /**
      * Add cart item action
      *
      * @param ProductInterface               $product
