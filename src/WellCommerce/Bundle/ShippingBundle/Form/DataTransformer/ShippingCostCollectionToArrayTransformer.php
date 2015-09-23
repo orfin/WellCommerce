@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\ShippingBundle\Form\DataTransformer;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\PersistentCollection;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\Price;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
 use WellCommerce\Bundle\FormBundle\DataTransformer\DataTransformerInterface;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod;
@@ -56,7 +57,7 @@ class ShippingCostCollectionToArrayTransformer extends CollectionToArrayTransfor
         return [
             'min'   => $cost->getRangeFrom(),
             'max'   => $cost->getRangeTo(),
-            'price' => $cost->getCost(),
+            'price' => $cost->getCost()->getGrossAmount(),
         ];
     }
 
@@ -83,13 +84,15 @@ class ShippingCostCollectionToArrayTransformer extends CollectionToArrayTransfor
 
         $collection = new ArrayCollection();
 
-        foreach ($values['ranges'] as $range) {
-            $cost = new ShippingMethodCost();
-            $cost->setCost($range['price']);
-            $cost->setRangeFrom($range['min']);
-            $cost->setRangeTo($range['max']);
-            $cost->setShippingMethod($shippingMethod);
-            $collection->add($cost);
+        foreach ($values['ranges'] as $value) {
+            $cost = new Price();
+            $cost->setGrossAmount($value['price']);
+            $range = new ShippingMethodCost();
+            $range->setCost($cost);
+            $range->setRangeFrom($value['min']);
+            $range->setRangeTo($value['max']);
+            $range->setShippingMethod($shippingMethod);
+            $collection->add($range);
         }
 
         return $collection;

@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\ShippingBundle\Entity;
 
+use WellCommerce\Bundle\CoreBundle\Entity\Price;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 
 /**
@@ -47,12 +48,12 @@ interface ShippingMethodCostInterface extends TimestampableInterface, ShippingMe
     public function setRangeTo($rangeTo);
 
     /**
-     * @return float
+     * @return Price
      */
     public function getCost();
 
     /**
-     * @param float $cost
+     * @param Price $cost
      */
-    public function setCost($cost);
+    public function setCost(Price $cost);
 }

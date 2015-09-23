@@ -53,12 +53,5 @@
                 <option name="value">0</option>
             </constraint>
         </property>
-        <property name="cost">
-            <constraint name="NotBlank" />
-            <constraint name="NotNull" />
-            <constraint name="GreaterThanOrEqual">
-                <option name="value">0</option>
-            </constraint>
-        </property>
     </class>
 </constraint-mapping>

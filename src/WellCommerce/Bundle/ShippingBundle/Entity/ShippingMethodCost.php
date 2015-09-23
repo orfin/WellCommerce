@@ -3,6 +3,7 @@
 namespace WellCommerce\Bundle\ShippingBundle\Entity;
 
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\Timestampable\TimestampableTrait;
+use WellCommerce\Bundle\CoreBundle\Entity\Price;
 
 /**
  * Class ShippingMethodCost
@@ -30,7 +31,7 @@ class ShippingMethodCost implements ShippingMethodCostInterface
     protected $rangeTo;
 
     /**
-     * @var float
+     * @var Price
      */
     protected $cost;
 
@@ -75,7 +76,7 @@ class ShippingMethodCost implements ShippingMethodCostInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return Price
      */
     public function getCost()
     {
@@ -83,10 +84,10 @@ class ShippingMethodCost implements ShippingMethodCostInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param Price $cost
      */
-    public function setCost($cost)
+    public function setCost(Price $cost)
     {
-        $this->cost = (float)$cost;
+        $this->cost = $cost;
     }
 }

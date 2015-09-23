@@ -7,6 +7,10 @@ WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCost:
             type: integer
             generator:
                 strategy: AUTO
+    embedded:
+        cost:
+            class: WellCommerce\Bundle\CoreBundle\Entity\Price
+            columnPrefix: cost_
     fields:
         rangeFrom:
             type: decimal
@@ -20,11 +24,6 @@ WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCost:
             nullable: false
             precision: 15
             column: range_to
-        cost:
-            type: decimal
-            scale: 4
-            nullable: false
-            precision: 15
     manyToOne:
         shippingMethod:
             targetEntity: WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod

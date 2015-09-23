@@ -125,6 +125,10 @@
             <tag name="shipping_method.provider" />
         </service>
 
+        <service id="shipping_method_cost.doctrine.event_subscriber" class="WellCommerce\Bundle\ShippingBundle\EventListener\ShippingMethodCostEventSubscriber">
+            <tag name="doctrine.event_subscriber" connection="default" />
+        </service>
+
         <service id="form.shipping_cost_collection.data_transformer" class="WellCommerce\Bundle\ShippingBundle\Form\DataTransformer\ShippingCostCollectionToArrayTransformer" scope="prototype">
             <argument type="service" id="doctrine_helper"/>
             <tag name="form.data_transformer" alias="shipping_cost_collection"/>
