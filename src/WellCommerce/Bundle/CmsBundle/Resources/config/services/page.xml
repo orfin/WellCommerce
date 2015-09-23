@@ -6,6 +6,8 @@
     <services>
         <service id="page.manager.front" class="WellCommerce\Bundle\CmsBundle\Manager\Front\PageManager">
             <argument type="service" id="page.repository"/>
+            <argument type="service" id="page.event_dispatcher"/>
+            <argument type="service" id="page.factory"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -27,10 +29,10 @@
 
         <service id="page.manager.admin" class="WellCommerce\Bundle\CmsBundle\Manager\Admin\PageManager">
             <argument type="service" id="page.repository"/>
-            <argument type="service" id="page.datagrid"/>
-            <argument type="service" id="page.form_builder"/>
-            <argument type="service" id="page.factory"/>
             <argument type="service" id="page.event_dispatcher"/>
+            <argument type="service" id="page.factory"/>
+            <argument type="service" id="page.form_builder"/>
+            <argument type="service" id="page.datagrid"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

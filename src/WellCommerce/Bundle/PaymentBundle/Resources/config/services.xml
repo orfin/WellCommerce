@@ -10,10 +10,10 @@
     <services>
         <service id="payment_method.manager.admin" class="WellCommerce\Bundle\PaymentBundle\Manager\Admin\PaymentMethodManager">
             <argument type="service" id="payment_method.repository"/>
-            <argument type="service" id="payment_method.datagrid"/>
-            <argument type="service" id="payment_method.form_builder"/>
-            <argument type="service" id="payment_method.factory"/>
             <argument type="service" id="payment_method.event_dispatcher"/>
+            <argument type="service" id="payment_method.factory"/>
+            <argument type="service" id="payment_method.form_builder"/>
+            <argument type="service" id="payment_method.datagrid"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

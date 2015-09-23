@@ -11,8 +11,7 @@
  */
 namespace WellCommerce\Bundle\IntlBundle\Twig\Extension;
 
-use WellCommerce\Bundle\IntlBundle\Converter\CurrencyConverterInterface;
-use WellCommerce\Bundle\IntlBundle\Formatter\CurrencyFormatterInterface;
+use WellCommerce\Bundle\IntlBundle\Helper\CurrencyHelperInterface;
 use WellCommerce\Bundle\IntlBundle\Provider\CurrencyProviderInterface;
 
 /**
@@ -23,9 +22,9 @@ use WellCommerce\Bundle\IntlBundle\Provider\CurrencyProviderInterface;
 class CurrencyExtension extends \Twig_Extension
 {
     /**
-     * @var CurrencyConverterInterface
+     * @var CurrencyHelperInterface
      */
-    protected $converter;
+    protected $helper;
 
     /**
      * @var CurrencyProviderInterface
@@ -33,22 +32,15 @@ class CurrencyExtension extends \Twig_Extension
     protected $provider;
 
     /**
-     * @var CurrencyFormatterInterface
-     */
-    protected $formatter;
-
-    /**
      * Constructor
      *
-     * @param CurrencyConverterInterface $converter
-     * @param CurrencyProviderInterface  $provider
-     * @param CurrencyFormatterInterface $currencyFormatter
+     * @param CurrencyHelperInterface   $helper
+     * @param CurrencyProviderInterface $provider
      */
-    public function __construct(CurrencyConverterInterface $converter, CurrencyProviderInterface $provider, CurrencyFormatterInterface $currencyFormatter)
+    public function __construct(CurrencyHelperInterface $helper, CurrencyProviderInterface $provider)
     {
-        $this->converter = $converter;
-        $this->provider  = $provider;
-        $this->formatter = $currencyFormatter;
+        $this->helper   = $helper;
+        $this->provider = $provider;
     }
 
     public function getGlobals()
@@ -84,11 +76,9 @@ class CurrencyExtension extends \Twig_Extension
      *
      * @return string
      */
-    public function formatPrice($price, $baseCurrency = null, $targetCurrency = null, $locale = null)
+    public function formatPrice($price, $baseCurrency = null, $targetCurrency = null, $locale = null, $quantity = 1)
     {
-        $price = $this->convertPrice($price, $baseCurrency, $targetCurrency);
-
-        return $this->formatter->format($price, $targetCurrency, $locale);
+        return $this->helper->convertAndFormat($price, $baseCurrency, $targetCurrency, $quantity, $locale);
     }
 
     /**
@@ -100,8 +90,8 @@ class CurrencyExtension extends \Twig_Extension
      *
      * @return string
      */
-    public function convertPrice($price, $baseCurrency = null, $targetCurrency = null)
+    public function convertPrice($price, $baseCurrency = null, $targetCurrency = null, $quantity = 1)
     {
-        return $this->converter->convert($price, $baseCurrency, $targetCurrency);
+        return $this->helper->convert($price, $baseCurrency, $targetCurrency, $quantity);
     }
 }

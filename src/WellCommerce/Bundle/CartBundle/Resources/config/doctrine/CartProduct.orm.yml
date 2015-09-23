@@ -9,10 +9,8 @@ WellCommerce\Bundle\CartBundle\Entity\CartProduct:
                 strategy: AUTO
     fields:
         quantity:
-            type: decimal
-            scale: 4
+            type: integer
             nullable: false
-            precision: 15
     manyToOne:
         cart:
             targetEntity: WellCommerce\Bundle\CartBundle\Entity\Cart

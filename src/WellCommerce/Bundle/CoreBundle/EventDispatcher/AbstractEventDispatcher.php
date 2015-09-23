@@ -41,7 +41,15 @@ abstract class AbstractEventDispatcher implements EventDispatcherInterface
     {
         $this->eventDispatcher = $eventDispatcher;
     }
-    
+
+    /**
+     * {@inheritdoc}
+     */
+    public function dispatchOnPostInitResource($resource)
+    {
+        $this->dispatchResourceEvent($resource, EventDispatcherInterface::POST_RESOURCE_INIT_EVENT);
+    }
+
     /**
      * {@inheritdoc}
      */

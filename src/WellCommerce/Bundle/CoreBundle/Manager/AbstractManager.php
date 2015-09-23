@@ -14,11 +14,10 @@ namespace WellCommerce\Bundle\CoreBundle\Manager;
 
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
 use WellCommerce\Bundle\CoreBundle\EventDispatcher\EventDispatcherInterface;
-use WellCommerce\Bundle\CoreBundle\Exception\MissingEventDispatcherException;
-use WellCommerce\Bundle\CoreBundle\Exception\MissingFactoryException;
-use WellCommerce\Bundle\CoreBundle\Exception\MissingRepositoryException;
+use WellCommerce\Bundle\CoreBundle\Exception\MissingFormBuilderException;
 use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
+use WellCommerce\Bundle\FormBundle\FormBuilderInterface;
 
 /**
  * Class AbstractManager
@@ -30,30 +29,41 @@ abstract class AbstractManager extends AbstractContainerAware implements Manager
     /**
      * @var RepositoryInterface
      */
-    private $repository;
-
-    /**
-     * @var FactoryInterface
-     */
-    private $factory;
+    protected $repository;
 
     /**
      * @var EventDispatcherInterface
      */
-    private $eventDispatcher;
+    protected $eventDispatcher;
+
+    /**
+     * @var FactoryInterface
+     */
+    protected $factory;
+
+    /**
+     * @var FormBuilderInterface
+     */
+    private $formBuilder;
 
     /**
      * Constructor
      *
-     * @param RepositoryInterface|null      $repository
-     * @param FactoryInterface|null         $factory
-     * @param EventDispatcherInterface|null $eventDispatcher
+     * @param RepositoryInterface       $repository
+     * @param EventDispatcherInterface  $eventDispatcher
+     * @param FactoryInterface          $factory
+     * @param FormBuilderInterface|null $formBuilder
      */
-    public function __construct(RepositoryInterface $repository = null, FactoryInterface $factory = null, EventDispatcherInterface $eventDispatcher = null)
-    {
+    public function __construct(
+        RepositoryInterface $repository,
+        EventDispatcherInterface $eventDispatcher,
+        FactoryInterface $factory,
+        FormBuilderInterface $formBuilder = null
+    ) {
         $this->repository      = $repository;
-        $this->factory         = $factory;
         $this->eventDispatcher = $eventDispatcher;
+        $this->factory         = $factory;
+        $this->formBuilder     = $formBuilder;
     }
 
     /**
@@ -61,23 +71,7 @@ abstract class AbstractManager extends AbstractContainerAware implements Manager
      */
     public function getRepository()
     {
-        if (null === $this->repository) {
-            throw new MissingRepositoryException(get_class($this));
-        }
-
         return $this->repository;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getFactory()
-    {
-        if (null === $this->factory) {
-            throw new MissingFactoryException(get_class($this));
-        }
-
-        return $this->factory;
     }
 
     /**
@@ -85,11 +79,39 @@ abstract class AbstractManager extends AbstractContainerAware implements Manager
      */
     public function getEventDispatcher()
     {
-        if (null === $this->eventDispatcher) {
-            throw new MissingEventDispatcherException(get_class($this));
+        return $this->eventDispatcher;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFactory()
+    {
+        return $this->factory;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFormBuilder()
+    {
+        if (null === $this->formBuilder) {
+            throw new MissingFormBuilderException(get_class($this));
         }
 
-        return $this->eventDispatcher;
+        return $this->formBuilder;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getForm($resource, array $config = [])
+    {
+        $builder       = $this->getFormBuilder();
+        $defaultConfig = ['name' => $this->repository->getAlias()];
+        $config        = array_merge($defaultConfig, $config);
+
+        return $builder->createForm($config, $resource);
     }
 
     /**
@@ -97,7 +119,10 @@ abstract class AbstractManager extends AbstractContainerAware implements Manager
      */
     public function initResource()
     {
-        return $this->getFactory()->create();
+        $resource = $this->factory->create();
+        $this->eventDispatcher->dispatchOnPostInitResource($resource);
+
+        return $resource;
     }
 
     /**
@@ -105,9 +130,9 @@ abstract class AbstractManager extends AbstractContainerAware implements Manager
      */
     public function createResource($resource)
     {
-        $this->getEventDispatcher()->dispatchOnPreCreateResource($resource);
+        $this->eventDispatcher->dispatchOnPreCreateResource($resource);
         $this->saveResource($resource);
-        $this->getEventDispatcher()->dispatchOnPostCreateResource($resource);
+        $this->eventDispatcher->dispatchOnPostCreateResource($resource);
     }
 
     /**
@@ -115,9 +140,9 @@ abstract class AbstractManager extends AbstractContainerAware implements Manager
      */
     public function updateResource($resource)
     {
-        $this->getEventDispatcher()->dispatchOnPreUpdateResource($resource);
+        $this->eventDispatcher->dispatchOnPreUpdateResource($resource);
         $this->saveResource($resource);
-        $this->getEventDispatcher()->dispatchOnPostUpdateResource($resource);
+        $this->eventDispatcher->dispatchOnPostUpdateResource($resource);
     }
 
     /**
@@ -125,11 +150,11 @@ abstract class AbstractManager extends AbstractContainerAware implements Manager
      */
     public function removeResource($resource)
     {
-        $this->getEventDispatcher()->dispatchOnPreRemoveResource($resource);
+        $this->eventDispatcher->dispatchOnPreRemoveResource($resource);
         $em = $this->getDoctrineHelper()->getEntityManager();
         $em->remove($resource);
         $em->flush();
-        $this->getEventDispatcher()->dispatchOnPostRemoveResource($resource);
+        $this->eventDispatcher->dispatchOnPostRemoveResource($resource);
     }
 
     /**

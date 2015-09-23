@@ -16,6 +16,7 @@ use WellCommerce\Bundle\CartBundle\Entity\Cart;
 use WellCommerce\Bundle\CartBundle\Entity\CartProduct;
 use WellCommerce\Bundle\CoreBundle\Provider\AbstractProvider;
 use WellCommerce\Bundle\IntlBundle\Converter\CurrencyConverterInterface;
+use WellCommerce\Bundle\IntlBundle\Helper\CurrencyHelperInterface;
 use WellCommerce\Bundle\ShippingBundle\Calculator\ShippingMethodCalculatorCollection;
 
 /**
@@ -67,10 +68,10 @@ class CartSummaryProvider extends AbstractProvider implements CartSummaryProvide
      * @param ShippingMethodCalculatorCollection $shippingMethodCalculatorCollection
      */
     public function __construct(
-        CurrencyConverterInterface $converter,
+        CurrencyHelperInterface $helper,
         ShippingMethodCalculatorCollection $shippingMethodCalculatorCollection
     ) {
-        $this->converter                          = $converter;
+        $this->converter                          = $helper;
         $this->shippingMethodCalculatorCollection = $shippingMethodCalculatorCollection;
     }
 

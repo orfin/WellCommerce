@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\LayoutBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
+use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
  * Class LayoutBoxController
@@ -32,7 +32,7 @@ class LayoutBoxController extends AbstractAdminController
             if ($form->isValid()) {
                 $settings = $this->getBoxSettingsFromRequest($request);
                 $resource->setSettings($settings);
-                $this->manager->createResource($resource, $request);
+                $this->manager->createResource($resource);
             }
 
             return $this->createFormDefaultJsonResponse($form);

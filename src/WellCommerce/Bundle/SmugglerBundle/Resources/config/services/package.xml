@@ -9,14 +9,23 @@
 
         <service id="package.manager.admin" class="WellCommerce\Bundle\SmugglerBundle\Manager\Admin\PackageManager">
             <argument type="service" id="package.repository"/>
-            <argument type="service" id="package.datagrid"/>
+            <argument type="service" id="package.event_dispatcher"/>
+            <argument type="service" id="package.factory"/>
             <argument type="service" id="package.form_builder"/>
+            <argument type="service" id="package.datagrid"/>
+
             <call method="setHelper">
                 <argument type="service" id="package.helper"/>
             </call>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
+        </service>
+
+        <service id="package.factory" class="WellCommerce\Bundle\SmugglerBundle\Factory\PackageFactory"/>
+
+        <service id="package.event_dispatcher" class="WellCommerce\Bundle\SmugglerBundle\EventDispatcher\PackageEventDispatcher">
+            <argument type="service" id="event_dispatcher"/>
         </service>
 
         <service id="package.helper" class="WellCommerce\Bundle\SmugglerBundle\Helper\PackageHelper">

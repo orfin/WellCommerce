@@ -10,14 +10,16 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ShippingBundle\Options;
+namespace WellCommerce\Bundle\SmugglerBundle\Entity;
+
+use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 
 /**
- * Interface ShippingOptionInterface
+ * Interface ChannelInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ShippingOptionInterface
+interface ChannelInterface extends TimestampableInterface
 {
     /**
      * @return int
@@ -30,17 +32,17 @@ interface ShippingOptionInterface
     public function getName();
 
     /**
-     * @return float
+     * @param string $name
      */
-    public function getTaxAmount();
+    public function setName($name);
 
     /**
-     * @return float
+     * @return string
      */
-    public function getNetPrice();
+    public function getUrl();
 
     /**
-     * @return float
+     * @param string $url
      */
-    public function getGrossPrice();
+    public function setUrl($url);
 }

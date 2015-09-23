@@ -6,10 +6,10 @@
     <services>
         <service id="client_group.manager.admin" class="WellCommerce\Bundle\ClientBundle\Manager\Admin\ClientGroupManager">
             <argument type="service" id="client_group.repository"/>
-            <argument type="service" id="client_group.datagrid"/>
-            <argument type="service" id="client_group.form_builder.admin"/>
-            <argument type="service" id="client_group.factory"/>
             <argument type="service" id="client_group.event_dispatcher"/>
+            <argument type="service" id="client_group.factory"/>
+            <argument type="service" id="client_group.form_builder.admin"/>
+            <argument type="service" id="client_group.datagrid"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

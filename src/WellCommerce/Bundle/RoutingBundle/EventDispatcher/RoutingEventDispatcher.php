@@ -10,17 +10,16 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CartBundle\EventDispatcher;
+namespace WellCommerce\Bundle\RoutingBundle\EventDispatcher;
 
-use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
-use WellCommerce\Bundle\CoreBundle\EventDispatcher\EventDispatcherInterface;
+use WellCommerce\Bundle\CoreBundle\EventDispatcher\AbstractEventDispatcher;
 
 /**
- * Interface CartProductEventDispatcherInterface
+ * Class RoutingEventDispatcher
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface CartProductEventDispatcherInterface
+class RoutingEventDispatcher extends AbstractEventDispatcher
 {
-
+    
 }

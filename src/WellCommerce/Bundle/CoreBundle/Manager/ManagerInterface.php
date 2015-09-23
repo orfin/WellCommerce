@@ -12,9 +12,6 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Manager;
 
-use Symfony\Component\HttpFoundation\Request;
-use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
-
 /**
  * Interface ManagerInterface
  *
@@ -42,13 +39,6 @@ interface ManagerInterface
     public function getImageHelper();
 
     /**
-     * Returns the EventDispatcher
-     *
-     * @return \WellCommerce\Bundle\CoreBundle\EventDispatcher\EventDispatcherInterface
-     */
-    public function getEventDispatcher();
-
-    /**
      * Returns the DoctrineHelper
      *
      * @return \WellCommerce\Bundle\CoreBundle\Helper\Doctrine\DoctrineHelperInterface
@@ -70,16 +60,36 @@ interface ManagerInterface
     public function getTranslatorHelper();
 
     /**
-     * Returns the current repository
-     *
-     * @return null|\WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface
+     * @return \WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface
      */
     public function getRepository();
 
     /**
-     * @return null|\WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface
+     * @return \WellCommerce\Bundle\CoreBundle\EventDispatcher\EventDispatcherInterface
+     */
+    public function getEventDispatcher();
+
+    /**
+     * @return \WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface
      */
     public function getFactory();
+
+    /**
+     * Returns form object
+     *
+     * @return \WellCommerce\Bundle\FormBundle\FormBuilderInterface
+     */
+    public function getFormBuilder();
+
+    /**
+     * Returns form instance from builder
+     *
+     * @param object $resource
+     * @param array  $config
+     *
+     * @return \WellCommerce\Bundle\FormBundle\Elements\FormInterface
+     */
+    public function getForm($resource, array $config = []);
 
     /**
      * Initializes new resource object

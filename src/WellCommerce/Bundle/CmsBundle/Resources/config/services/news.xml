@@ -6,10 +6,10 @@
     <services>
         <service id="news.manager.admin" class="WellCommerce\Bundle\CmsBundle\Manager\Admin\NewsManager">
             <argument type="service" id="news.repository"/>
-            <argument type="service" id="news.datagrid"/>
-            <argument type="service" id="news.form_builder"/>
-            <argument type="service" id="news.factory"/>
             <argument type="service" id="news.event_dispatcher"/>
+            <argument type="service" id="news.factory"/>
+            <argument type="service" id="news.form_builder"/>
+            <argument type="service" id="news.datagrid"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

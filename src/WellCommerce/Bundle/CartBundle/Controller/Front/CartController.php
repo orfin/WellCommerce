@@ -48,10 +48,7 @@ class CartController extends AbstractFrontController implements FrontControllerI
         ]));
 
         $cart = $this->manager->getCurrentCart();
-        $form = $this->buildForm($cart);
-
-//        $calculator = $this->get('price_table.calculator');
-//        $calculator->calculateCart($cart);
+        $form = $this->manager->getForm($cart);
 
         if ($form->handleRequest()->isSubmitted()) {
             if ($form->isValid()) {

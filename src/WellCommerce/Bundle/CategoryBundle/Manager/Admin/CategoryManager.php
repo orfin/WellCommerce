@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\Manager\Admin;
 
-use WellCommerce\Bundle\AdminBundle\Manager\AbstractAdminManager;
+use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
 use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\IntlBundle\Entity\Locale;
 use WellCommerce\Bundle\RoutingBundle\Helper\Sluggable;

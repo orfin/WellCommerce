@@ -53,7 +53,7 @@ class CurrencyConverter implements CurrencyConverterInterface
     /**
      * {@inheritdoc}
      */
-    public function convert($amount, $baseCurrency = null, $targetCurrency = null)
+    public function convert($amount, $baseCurrency = null, $targetCurrency = null, $quantity = 1)
     {
         if (null === $baseCurrency) {
             $baseCurrency = $this->requestHelper->getCurrentCurrency();
@@ -65,9 +65,10 @@ class CurrencyConverter implements CurrencyConverterInterface
 
         $this->loadExchangeRates($targetCurrency);
 
-        $exchangeRate = $this->exchangeRates[$targetCurrency][$baseCurrency];
+        $exchangeRate    = $this->exchangeRates[$targetCurrency][$baseCurrency];
+        $exchangedAmount = round($amount * $exchangeRate, 2);
 
-        return round($amount * $exchangeRate, 2);
+        return round($exchangedAmount * $quantity, 2);
     }
 
     /**

@@ -6,9 +6,12 @@
     <services>
         <service id="cart.manager.front" class="WellCommerce\Bundle\CartBundle\Manager\Front\CartManager">
             <argument type="service" id="cart.repository"/>
-            <argument type="service" id="cart.factory"/>
             <argument type="service" id="cart.event_dispatcher"/>
-            <argument type="service" id="cart_product.manager.front"/>
+            <argument type="service" id="cart.factory"/>
+            <argument type="service" id="cart.form_builder"/>
+            <call method="setCartProductManager">
+                <argument type="service" id="cart_product.manager.front"/>
+            </call>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -16,8 +19,8 @@
 
         <service id="cart_product.manager.front" class="WellCommerce\Bundle\CartBundle\Manager\Front\CartProductManager">
             <argument type="service" id="cart_product.repository"/>
-            <argument type="service" id="cart_product.factory"/>
             <argument type="service" id="cart_product.event_dispatcher"/>
+            <argument type="service" id="cart_product.factory"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -92,7 +95,7 @@
         </service>
 
         <service id="cart_summary.provider" class="WellCommerce\Bundle\CartBundle\Provider\CartSummaryProvider">
-            <argument type="service" id="currency.converter"/>
+            <argument type="service" id="currency.helper"/>
             <argument type="service" id="shipping_method.calculator.collection"/>
             <tag name="resource.provider" alias="cart_summary"/>
         </service>
@@ -132,7 +135,7 @@
         </service>
 
         <service id="cart_totals.collector" class="WellCommerce\Bundle\CartBundle\Collector\CartTotalsCollector">
-            <argument type="service" id="currency.converter"/>
+            <argument type="service" id="currency.helper"/>
         </service>
 
         <service id="cart_totals.cart.visitor" class="WellCommerce\Bundle\CartBundle\Visitor\CartTotalsVisitor">
@@ -142,6 +145,10 @@
 
         <service id="shipping_method.cart.visitor" class="WellCommerce\Bundle\CartBundle\Visitor\CartShippingMethodVisitor">
             <argument type="service" id="shipping_method.cart.provider"/>
+            <tag name="cart.visitor"/>
+        </service>
+
+        <service id="payment_method.cart.visitor" class="WellCommerce\Bundle\CartBundle\Visitor\CartPaymentMethodVisitor">
             <tag name="cart.visitor"/>
         </service>
 

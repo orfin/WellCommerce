@@ -6,10 +6,10 @@
     <services>
         <service id="locale.manager.admin" class="WellCommerce\Bundle\IntlBundle\Manager\Admin\LocaleManager">
             <argument type="service" id="locale.repository"/>
-            <argument type="service" id="locale.datagrid"/>
-            <argument type="service" id="locale.form_builder"/>
-            <argument type="service" id="locale.factory"/>
             <argument type="service" id="locale.event_dispatcher"/>
+            <argument type="service" id="locale.factory"/>
+            <argument type="service" id="locale.form_builder"/>
+            <argument type="service" id="locale.datagrid"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -39,6 +39,9 @@
             <argument key="identifier">locale</argument>
             <argument type="service" id="locale.dataset.loader"/>
             <argument type="service" id="locale.event_dispatcher"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
@@ -75,6 +78,11 @@
 
         <service id="locale.manager.front" class="WellCommerce\Bundle\IntlBundle\Manager\Front\LocaleManager">
             <argument type="service" id="locale.repository"/>
+            <argument type="service" id="locale.event_dispatcher"/>
+            <argument type="service" id="locale.factory"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
         </service>
 
         <service id="locale.controller.front" class="WellCommerce\Bundle\IntlBundle\Controller\Front\LocaleController">

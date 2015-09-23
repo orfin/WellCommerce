@@ -6,10 +6,10 @@
     <services>
         <service id="media.manager.admin" class="WellCommerce\Bundle\MediaBundle\Manager\Admin\MediaManager">
             <argument type="service" id="media.repository"/>
-            <argument type="service" id="media.datagrid"/>
-            <argument type="service" id="media.form_builder"/>
-            <argument type="service" id="media.factory"/>
             <argument type="service" id="media.event_dispatcher"/>
+            <argument type="service" id="media.factory"/>
+            <argument type="service" id="media.form_builder"/>
+            <argument type="service" id="media.datagrid"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

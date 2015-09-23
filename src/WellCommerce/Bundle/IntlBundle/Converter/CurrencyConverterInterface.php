@@ -25,8 +25,9 @@ interface CurrencyConverterInterface
      * @param float       $amount
      * @param null|string $baseCurrency
      * @param null|string $targetCurrency
+     * @param int         $quantity
      *
      * @return float
      */
-    public function convert($amount, $baseCurrency = null, $targetCurrency = null);
+    public function convert($amount, $baseCurrency = null, $targetCurrency = null, $quantity = 1);
 }

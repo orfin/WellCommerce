@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\ShippingBundle\Calculator;
 
 use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCostInterface;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
 
 /**
@@ -68,6 +69,17 @@ class PriceTableCalculator extends AbstractShippingMethodCalculator implements S
      */
     public function calculateCart(ShippingMethodInterface $shippingMethod, CartInterface $cart)
     {
-        return new ShippingCostReference();
+        $targetCurrency   = $shippingMethod->getCurrency()->getCode();
+        $totalGrossAmount = $this->cartTotalsCollector->collectTotalGrossAmount($cart, $targetCurrency);
+        $ranges           = $shippingMethod->getCosts();
+        $supportedRanges  = $ranges->filter(function (ShippingMethodCostInterface $cost) use ($totalGrossAmount) {
+            return ($cost->getRangeFrom() <= $totalGrossAmount && $cost->getRangeTo() >= $totalGrossAmount);
+        });
+
+        if ($supportedRanges->count()) {
+            return $supportedRanges->first();
+        }
+
+        return false;
     }
 }

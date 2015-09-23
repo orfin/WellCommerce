@@ -6,10 +6,10 @@
     <services>
         <service id="order_status.manager.admin" class="WellCommerce\Bundle\OrderBundle\Manager\Admin\OrderStatusManager">
             <argument type="service" id="order_status.repository"/>
-            <argument type="service" id="order_status.datagrid"/>
-            <argument type="service" id="order_status.form_builder"/>
-            <argument type="service" id="order_status.factory"/>
             <argument type="service" id="order_status.event_dispatcher"/>
+            <argument type="service" id="order_status.factory"/>
+            <argument type="service" id="order_status.form_builder"/>
+            <argument type="service" id="order_status.datagrid"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

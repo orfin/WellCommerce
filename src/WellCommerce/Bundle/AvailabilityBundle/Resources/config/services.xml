@@ -6,10 +6,10 @@
     <services>
         <service id="availability.manager.admin" class="WellCommerce\Bundle\AvailabilityBundle\Manager\Admin\AvailabilityManager">
             <argument type="service" id="availability.repository"/>
-            <argument type="service" id="availability.datagrid"/>
-            <argument type="service" id="availability.form_builder"/>
-            <argument type="service" id="availability.factory"/>
             <argument type="service" id="availability.event_dispatcher"/>
+            <argument type="service" id="availability.factory"/>
+            <argument type="service" id="availability.form_builder"/>
+            <argument type="service" id="availability.datagrid"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -45,6 +45,9 @@
             <argument key="identifier">availability</argument>
             <argument type="service" id="availability.dataset.loader"/>
             <argument type="service" id="availability.event_dispatcher"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 

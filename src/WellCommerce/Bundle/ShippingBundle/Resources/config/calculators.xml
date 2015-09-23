@@ -5,12 +5,12 @@
 
     <services>
         <service id="weight_table.calculator" class="WellCommerce\Bundle\ShippingBundle\Calculator\WeightTableCalculator">
-            <argument type="service" id="currency.converter"/>
+            <argument type="service" id="cart_totals.collector"/>
             <tag name="shipping_method.calculator"/>
         </service>
 
         <service id="price_table.calculator" class="WellCommerce\Bundle\ShippingBundle\Calculator\PriceTableCalculator">
-            <argument type="service" id="currency.converter"/>
+            <argument type="service" id="cart_totals.collector"/>
             <tag name="shipping_method.calculator"/>
         </service>
     </services>

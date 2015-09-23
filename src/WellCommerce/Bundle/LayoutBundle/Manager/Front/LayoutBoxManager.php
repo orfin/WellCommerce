@@ -17,7 +17,6 @@ use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
 use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxCollection;
 use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxSettingsCollection;
 use WellCommerce\Bundle\LayoutBundle\Exception\LayoutBoxNotFoundException;
-use WellCommerce\Bundle\LayoutBundle\Repository\LayoutBoxRepositoryInterface;
 use WellCommerce\Bundle\LayoutBundle\Resolver\ServiceResolverInterface;
 
 /**
@@ -38,19 +37,20 @@ class LayoutBoxManager extends AbstractFrontManager
     protected $layoutBoxCollection;
 
     /**
-     * Constructor
-     *
-     * @param LayoutBoxRepositoryInterface $layoutBoxRepository
-     * @param ServiceResolverInterface     $serviceResolver
-     * @param LayoutBoxCollection          $layoutBoxCollection
+     * @param ServiceResolverInterface $serviceResolver
      */
-    public function __construct(LayoutBoxRepositoryInterface $layoutBoxRepository, ServiceResolverInterface $serviceResolver, LayoutBoxCollection $layoutBoxCollection)
+    public function setServiceResolver(ServiceResolverInterface $serviceResolver)
     {
-        parent::__construct($layoutBoxRepository);
-        $this->serviceResolver     = $serviceResolver;
-        $this->layoutBoxCollection = $layoutBoxCollection;
+        $this->serviceResolver = $serviceResolver;
     }
 
+    /**
+     * @param LayoutBoxCollection $layoutBoxCollection
+     */
+    public function setLayoutBoxesCollection(LayoutBoxCollection $layoutBoxCollection)
+    {
+        $this->layoutBoxCollection = $layoutBoxCollection;
+    }
 
     /**
      * Returns a layout box by its identifier

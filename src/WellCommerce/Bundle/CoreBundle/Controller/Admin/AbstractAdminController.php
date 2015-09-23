@@ -9,12 +9,12 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Bundle\AdminBundle\Controller;
+namespace WellCommerce\Bundle\CoreBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use WellCommerce\Bundle\AdminBundle\Manager\AdminManagerInterface;
 use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
+use WellCommerce\Bundle\CoreBundle\Manager\Admin\AdminManagerInterface;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**

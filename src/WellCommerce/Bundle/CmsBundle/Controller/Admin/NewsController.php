@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\CmsBundle\Controller\Admin;
 
-use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
+use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
  * Class NewsController

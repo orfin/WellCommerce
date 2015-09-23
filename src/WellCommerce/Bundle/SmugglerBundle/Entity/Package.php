@@ -19,7 +19,7 @@ use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Package
+class Package implements PackageInterface
 {
     use Timestampable;
 
@@ -54,7 +54,7 @@ class Package
     protected $remoteVersion;
 
     /**
-     * @return integer
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -62,7 +62,7 @@ class Package
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getFullName()
     {
@@ -70,7 +70,7 @@ class Package
     }
 
     /**
-     * @param string $fullName
+     * {@inheritdoc}
      */
     public function setFullName($fullName)
     {
@@ -78,7 +78,7 @@ class Package
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getName()
     {
@@ -86,7 +86,7 @@ class Package
     }
 
     /**
-     * @param string $name
+     * {@inheritdoc}
      */
     public function setName($name)
     {
@@ -94,7 +94,7 @@ class Package
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getVendor()
     {
@@ -102,7 +102,7 @@ class Package
     }
 
     /**
-     * @param string $vendor
+     * {@inheritdoc}
      */
     public function setVendor($vendor)
     {
@@ -110,7 +110,7 @@ class Package
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getLocalVersion()
     {
@@ -118,7 +118,7 @@ class Package
     }
 
     /**
-     * @param string $localVersion
+     * {@inheritdoc}
      */
     public function setLocalVersion($localVersion)
     {
@@ -126,7 +126,7 @@ class Package
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getRemoteVersion()
     {
@@ -134,7 +134,7 @@ class Package
     }
 
     /**
-     * @param string $remoteVersion
+     * {@inheritdoc}
      */
     public function setRemoteVersion($remoteVersion)
     {

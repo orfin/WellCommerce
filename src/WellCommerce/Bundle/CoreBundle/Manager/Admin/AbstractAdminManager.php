@@ -10,12 +10,11 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AdminBundle\Manager;
+namespace WellCommerce\Bundle\CoreBundle\Manager\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\EventDispatcher\EventDispatcherInterface;
 use WellCommerce\Bundle\CoreBundle\Exception\MissingDataGridException;
-use WellCommerce\Bundle\CoreBundle\Exception\MissingFormBuilderException;
 use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
@@ -35,29 +34,23 @@ abstract class AbstractAdminManager extends AbstractManager implements AdminMana
     private $dataGrid;
 
     /**
-     * @var FormBuilderInterface
-     */
-    private $formBuilder;
-
-    /**
      * Constructor
      *
-     * @param RepositoryInterface|null      $repository
-     * @param DataGridInterface|null        $dataGrid
-     * @param FormBuilderInterface|null     $formBuilder
-     * @param FactoryInterface|null         $factory
-     * @param EventDispatcherInterface|null $eventDispatcher
+     * @param RepositoryInterface       $repository
+     * @param EventDispatcherInterface  $eventDispatcher
+     * @param FactoryInterface          $factory
+     * @param FormBuilderInterface|null $formBuilder
+     * @param DataGridInterface|null    $dataGrid
      */
     public function __construct(
-        RepositoryInterface $repository = null,
-        DataGridInterface $dataGrid = null,
+        RepositoryInterface $repository,
+        EventDispatcherInterface $eventDispatcher,
+        FactoryInterface $factory,
         FormBuilderInterface $formBuilder = null,
-        FactoryInterface $factory = null,
-        EventDispatcherInterface $eventDispatcher = null
+        DataGridInterface $dataGrid = null
     ) {
-        parent::__construct($repository, $factory, $eventDispatcher);
-        $this->dataGrid    = $dataGrid;
-        $this->formBuilder = $formBuilder;
+        parent::__construct($repository, $eventDispatcher, $factory, $formBuilder);
+        $this->dataGrid = $dataGrid;
     }
 
     /**
@@ -70,32 +63,6 @@ abstract class AbstractAdminManager extends AbstractManager implements AdminMana
         }
 
         return $this->dataGrid;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getFormBuilder()
-    {
-        if (null === $this->formBuilder) {
-            throw new MissingFormBuilderException(get_class($this));
-        }
-
-        return $this->formBuilder;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getForm($resource, array $config = [])
-    {
-        $defaultConfig = [
-            'name' => $this->getRepository()->getAlias(),
-        ];
-
-        $config = array_merge($defaultConfig, $config);
-
-        return $this->formBuilder->createForm($config, $resource);
     }
 
     /**

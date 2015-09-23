@@ -24,7 +24,7 @@ use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
 class CartProductFactory extends AbstractFactory implements FactoryInterface
 {
     /**
-     * {@inheritdoc}
+     * @return \WellCommerce\Bundle\CartBundle\Entity\CartProductInterface
      */
     public function create()
     {

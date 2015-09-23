@@ -6,10 +6,10 @@
     <services>
         <service id="currency.manager.admin" class="WellCommerce\Bundle\IntlBundle\Manager\Admin\CurrencyManager">
             <argument type="service" id="currency.repository"/>
-            <argument type="service" id="currency.datagrid"/>
-            <argument type="service" id="currency.form_builder"/>
-            <argument type="service" id="currency.factory"/>
             <argument type="service" id="currency.event_dispatcher"/>
+            <argument type="service" id="currency.factory"/>
+            <argument type="service" id="currency.form_builder"/>
+            <argument type="service" id="currency.datagrid"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
@@ -17,6 +17,8 @@
 
         <service id="currency.manager.front" class="WellCommerce\Bundle\IntlBundle\Manager\Front\CurrencyManager">
             <argument type="service" id="currency.repository"/>
+            <argument type="service" id="currency.event_dispatcher"/>
+            <argument type="service" id="currency.factory"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
@@ -114,6 +116,11 @@
             <argument type="service" id="request_helper"/>
         </service>
 
+        <service id="currency.helper" class="WellCommerce\Bundle\IntlBundle\Helper\CurrencyHelper">
+            <argument type="service" id="currency.converter" />
+            <argument type="service" id="currency.formatter"/>
+        </service>
+
         <service id="currency.factory" class="WellCommerce\Bundle\IntlBundle\Factory\CurrencyFactory" />
 
         <service id="currency.event_dispatcher" class="WellCommerce\Bundle\IntlBundle\EventDispatcher\CurrencyEventDispatcher">
@@ -121,9 +128,8 @@
         </service>
 
         <service id="twig.extension.currency" class="WellCommerce\Bundle\IntlBundle\Twig\Extension\CurrencyExtension">
-            <argument type="service" id="currency.converter"/>
+            <argument type="service" id="currency.helper"/>
             <argument type="service" id="currency.provider"/>
-            <argument type="service" id="currency.formatter"/>
             <tag name="twig.extension"/>
         </service>
     </services>

@@ -6,10 +6,10 @@
     <services>
         <service id="unit.manager.admin" class="WellCommerce\Bundle\UnitBundle\Manager\Admin\UnitManager">
             <argument type="service" id="unit.repository"/>
-            <argument type="service" id="unit.datagrid"/>
-            <argument type="service" id="unit.form_builder"/>
-            <argument type="service" id="unit.factory"/>
             <argument type="service" id="unit.event_dispatcher"/>
+            <argument type="service" id="unit.factory"/>
+            <argument type="service" id="unit.form_builder"/>
+            <argument type="service" id="unit.datagrid"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -39,6 +39,9 @@
             <argument key="identifier">unit</argument>
             <argument type="service" id="unit.dataset.loader"/>
             <argument type="service" id="unit.event_dispatcher"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 

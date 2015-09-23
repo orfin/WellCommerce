@@ -6,10 +6,10 @@
     <services>
         <service id="product.manager.admin" class="WellCommerce\Bundle\ProductBundle\Manager\Admin\ProductManager">
             <argument type="service" id="product.repository"/>
-            <argument type="service" id="product.datagrid"/>
-            <argument type="service" id="product.form_builder"/>
-            <argument type="service" id="product.factory"/>
             <argument type="service" id="product.event_dispatcher"/>
+            <argument type="service" id="product.factory"/>
+            <argument type="service" id="product.form_builder"/>
+            <argument type="service" id="product.datagrid"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
@@ -17,6 +17,8 @@
 
         <service id="product.manager.front" class="WellCommerce\Bundle\ProductBundle\Manager\Front\ProductManager">
             <argument type="service" id="product.repository"/>
+            <argument type="service" id="product.event_dispatcher"/>
+            <argument type="service" id="product.factory"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>

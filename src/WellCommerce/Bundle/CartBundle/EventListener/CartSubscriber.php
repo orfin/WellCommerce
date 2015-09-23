@@ -69,12 +69,18 @@ class CartSubscriber extends AbstractEventSubscriber
             'cart.form_init'         => ['onFormInit', 0],
             'cart.pre_create'        => ['onCartChangedEvent', 0],
             'cart.pre_update'        => ['onCartChangedEvent', 0],
+            'cart.post_init'         => ['onCartInitEvent', 0],
         ];
     }
 
     public function onKernelController(FilterControllerEvent $event)
     {
         $this->cartManager->initializeCart();
+    }
+
+    public function onCartInitEvent(ResourceEvent $event)
+    {
+        $this->cartVisitorTraverser->traverse($event->getResource());
     }
 
     public function onCartChangedEvent(ResourceEvent $event)
@@ -84,16 +90,19 @@ class CartSubscriber extends AbstractEventSubscriber
 
     public function onFormInit(FormEvent $event)
     {
-        $form                  = $event->getForm();
-        $cart                  = $this->cartManager->getCurrentCart();
-        $formatter             = $this->getCurrencyFormatter();
-        $shippingMethodSelect  = $form->getChildren()->get('shippingMethod');
-        $shippingMethodOptions = $this->cartShippingMethodProvider->getShippingMethodOptions($cart);
+        $form                 = $event->getForm();
+        $cart                 = $this->cartManager->getCurrentCart();
+        $currencyHelper       = $this->getCurrencyHelper();
+        $shippingMethodSelect = $form->getChildren()->get('shippingMethod');
+        $collection           = $this->cartShippingMethodProvider->getShippingMethodCostsCollection($cart);
 
-        foreach ($shippingMethodOptions->all() as $option) {
-            $shippingMethodSelect->addOptionToSelect($option->getId(), [
-                    'name'    => $option->getName(),
-                    'comment' => $formatter->format($option->getPrice())
+        foreach ($collection->all() as $cost) {
+            $shippingMethod = $cost->getShippingMethod();
+            $baseCurrency   = $shippingMethod->getCurrency()->getCode();
+
+            $shippingMethodSelect->addOptionToSelect($shippingMethod->getId(), [
+                    'name'    => $shippingMethod->translate()->getName(),
+                    'comment' => $currencyHelper->convertAndFormat($cost->getCost(), $baseCurrency)
                 ]
             );
         }

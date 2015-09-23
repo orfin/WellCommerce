@@ -6,10 +6,10 @@
     <services>
         <service id="company.manager.admin" class="WellCommerce\Bundle\MultiStoreBundle\Manager\Admin\CompanyManager">
             <argument type="service" id="company.repository"/>
-            <argument type="service" id="company.datagrid"/>
-            <argument type="service" id="company.form_builder"/>
-            <argument type="service" id="company.factory"/>
             <argument type="service" id="company.event_dispatcher"/>
+            <argument type="service" id="company.factory"/>
+            <argument type="service" id="company.form_builder"/>
+            <argument type="service" id="company.datagrid"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

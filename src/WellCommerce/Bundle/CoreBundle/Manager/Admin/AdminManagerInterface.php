@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AdminBundle\Manager;
+namespace WellCommerce\Bundle\CoreBundle\Manager\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
@@ -39,21 +39,4 @@ interface AdminManagerInterface extends ManagerInterface
      * @return DataGridInterface
      */
     public function getDataGrid();
-
-    /**
-     * Returns form object
-     *
-     * @return FormBuilderInterface
-     */
-    public function getFormBuilder();
-
-    /**
-     * Returns form instance from builder
-     *
-     * @param object $resource
-     * @param array  $config
-     *
-     * @return \WellCommerce\Bundle\FormBundle\Elements\FormInterface
-     */
-    public function getForm($resource, array $config = []);
 }

@@ -13,11 +13,9 @@
 namespace WellCommerce\Bundle\ShippingBundle\Provider;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use WellCommerce\Bundle\ShippingBundle\Calculator\ShippingCostReference;
 use WellCommerce\Bundle\ShippingBundle\Calculator\ShippingMethodCalculatorCollection;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
 use WellCommerce\Bundle\ShippingBundle\Exception\CalculatorNotFoundException;
-use WellCommerce\Bundle\ShippingBundle\Options\ShippingOption;
 use WellCommerce\Bundle\ShippingBundle\Repository\ShippingMethodRepositoryInterface;
 
 /**
@@ -77,26 +75,5 @@ abstract class AbstractShippingMethodProvider
         }
 
         return $this->shippingMethodCalculatorCollection->get($calculator);
-    }
-
-    /**
-     * Creates a new shipping option
-     *
-     * @param ShippingMethodInterface $shippingMethod
-     * @param ShippingCostReference   $cost
-     *
-     * @return ShippingOption
-     */
-    protected function createShippingOption(ShippingMethodInterface $shippingMethod, ShippingCostReference $cost)
-    {
-        $options = [
-            'id'          => $shippingMethod->getId(),
-            'name'        => $shippingMethod->translate()->getName(),
-            'tax_amount'  => $cost->getTaxAmount(),
-            'net_price'   => $cost->getNetPrice(),
-            'gross_price' => $cost->getGrossPrice(),
-        ];
-
-        return new ShippingOption($options);
     }
 }

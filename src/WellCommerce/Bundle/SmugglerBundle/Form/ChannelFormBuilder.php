@@ -11,8 +11,7 @@
  */
 namespace WellCommerce\Bundle\SmugglerBundle\Form;
 
-use WellCommerce\Bundle\FormBundle\Builder\AbstractFormBuilder;
-use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
@@ -20,7 +19,7 @@ use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class ChannelFormBuilder extends AbstractFormBuilder implements FormBuilderInterface
+class ChannelFormBuilder extends AbstractFormBuilder
 {
     /**
      * {@inheritdoc}

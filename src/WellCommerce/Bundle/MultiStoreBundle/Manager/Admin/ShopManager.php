@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\MultiStoreBundle\Manager\Admin;
 
-use WellCommerce\Bundle\AdminBundle\Manager\AbstractAdminManager;
+use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
 
 /**
  * Class ShopManager

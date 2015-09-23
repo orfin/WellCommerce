@@ -6,8 +6,10 @@
     <services>
         <service id="routing.manager.admin" class="WellCommerce\Bundle\RoutingBundle\Manager\Admin\RoutingManager">
             <argument type="service" id="routing.repository"/>
-            <argument type="service" id="routing.datagrid"/>
+            <argument type="service" id="routing.event_dispatcher"/>
+            <argument type="service" id="routing.factory"/>
             <argument type="service" id="routing.form_builder"/>
+            <argument type="service" id="routing.datagrid"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -22,6 +24,12 @@
 
         <service id="routing.repository" class="WellCommerce\Bundle\RoutingBundle\Repository\RouteRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument>WellCommerceRoutingBundle:Route</argument>
+        </service>
+
+        <service id="routing.factory" class="WellCommerce\Bundle\RoutingBundle\Factory\RouteFactory" />
+
+        <service id="routing.event_dispatcher" class="WellCommerce\Bundle\RoutingBundle\EventDispatcher\RoutingEventDispatcher">
+            <argument type="service" id="event_dispatcher"/>
         </service>
 
         <service id="routing.dataset.query_builder" class="WellCommerce\Bundle\RoutingBundle\DataSet\RoutingDataSetQueryBuilder" public="false">

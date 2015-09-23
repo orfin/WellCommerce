@@ -12,12 +12,9 @@
 
 namespace WellCommerce\Bundle\AttributeBundle\Manager\Admin;
 
-use WellCommerce\Bundle\AdminBundle\Manager\AbstractAdminManager;
 use WellCommerce\Bundle\AttributeBundle\Entity\Attribute;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroup;
-use WellCommerce\Bundle\AttributeBundle\Repository\AttributeGroupRepositoryInterface;
-use WellCommerce\Bundle\AttributeBundle\Repository\AttributeRepositoryInterface;
-use WellCommerce\Bundle\IntlBundle\Repository\LocaleRepositoryInterface;
+use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
 
 /**
  * Class AttributeManager
@@ -27,20 +24,16 @@ use WellCommerce\Bundle\IntlBundle\Repository\LocaleRepositoryInterface;
 class AttributeManager extends AbstractAdminManager
 {
     /**
-     * @var AttributeGroupRepositoryInterface
+     * @var AttributeGroupManager
      */
-    protected $attributeGroupRepository;
+    protected $attributeGroupManager;
 
     /**
-     * Constructor
-     *
-     * @param AttributeRepositoryInterface      $attributeRepository
-     * @param AttributeGroupRepositoryInterface $attributeGroupRepository
+     * @param AttributeGroupManager $attributeGroupManager
      */
-    public function __construct(AttributeRepositoryInterface $attributeRepository, AttributeGroupRepositoryInterface $attributeGroupRepository)
+    public function setAttributeGroupManager(AttributeGroupManager $attributeGroupManager)
     {
-        parent::__construct($attributeRepository);
-        $this->attributeGroupRepository = $attributeGroupRepository;
+        $this->attributeGroupManager = $attributeGroupManager;
     }
 
     /**
@@ -60,7 +53,7 @@ class AttributeManager extends AbstractAdminManager
     protected function findAttributeGroup()
     {
         $set   = (int)$this->getRequestHelper()->getRequestAttribute('set');
-        $group = $this->attributeGroupRepository->find($set);
+        $group = $this->repository->find($set);
 
         return $group;
     }
@@ -76,7 +69,7 @@ class AttributeManager extends AbstractAdminManager
     protected function createNewAttribute(AttributeGroup $group, $name)
     {
         $em        = $this->getDoctrineHelper()->getEntityManager();
-        $attribute = $this->entityFactory->create();
+        $attribute = $this->factory->create();
 
         foreach ($this->getLocales() as $locale) {
             $attribute->translate($locale->getCode())->setName($name);

@@ -6,10 +6,10 @@
     <services>
         <service id="layout_box.manager.admin" class="WellCommerce\Bundle\LayoutBundle\Manager\Admin\LayoutBoxManager">
             <argument type="service" id="layout_box.repository"/>
-            <argument type="service" id="layout_box.datagrid"/>
-            <argument type="service" id="layout_box.form_builder"/>
-            <argument type="service" id="layout_box.factory"/>
             <argument type="service" id="layout_box.event_dispatcher"/>
+            <argument type="service" id="layout_box.factory"/>
+            <argument type="service" id="layout_box.form_builder"/>
+            <argument type="service" id="layout_box.datagrid"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -17,8 +17,14 @@
 
         <service id="layout_box.manager.front" class="WellCommerce\Bundle\LayoutBundle\Manager\Front\LayoutBoxManager">
             <argument type="service" id="layout_box.repository"/>
-            <argument type="service" id="layout_box.service_resolver" />
-            <argument type="service" id="layout_box.collection" />
+            <argument type="service" id="layout_box.event_dispatcher"/>
+            <argument type="service" id="layout_box.factory"/>
+            <call method="setServiceResolver">
+                <argument type="service" id="layout_box.service_resolver"/>
+            </call>
+            <call method="setLayoutBoxesCollection">
+                <argument type="service" id="layout_box.collection"/>
+            </call>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

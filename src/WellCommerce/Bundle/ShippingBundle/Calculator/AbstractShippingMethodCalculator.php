@@ -12,10 +12,8 @@
 
 namespace WellCommerce\Bundle\ShippingBundle\Calculator;
 
-use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
+use WellCommerce\Bundle\CartBundle\Collector\CartTotalsCollectorInterface;
 use WellCommerce\Bundle\IntlBundle\Converter\CurrencyConverterInterface;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
-use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
 
 /**
  * Class AbstractShippingMethodCalculator
@@ -30,18 +28,18 @@ abstract class AbstractShippingMethodCalculator
     protected $alias = null;
 
     /**
-     * @var CurrencyConverterInterface
+     * @var CartTotalsCollectorInterface
      */
-    protected $currencyConverter;
+    protected $cartTotalsCollector;
 
     /**
      * Constructor
      *
-     * @param CurrencyConverterInterface $currencyConverter
+     * @param CartTotalsCollectorInterface $cartTotalsCollector
      */
-    public function __construct(CurrencyConverterInterface $currencyConverter)
+    public function __construct(CartTotalsCollectorInterface $cartTotalsCollector)
     {
-        $this->currencyConverter = $currencyConverter;
+        $this->cartTotalsCollector = $cartTotalsCollector;
     }
 
     /**

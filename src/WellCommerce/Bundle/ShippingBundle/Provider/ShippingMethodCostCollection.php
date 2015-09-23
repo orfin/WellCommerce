@@ -12,32 +12,37 @@
 
 namespace WellCommerce\Bundle\ShippingBundle\Provider;
 
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCostInterface;
 use WellCommerce\Common\Collections\ArrayCollection;
 
 /**
- * Class ShippingMethodProviderChain
+ * Class ShippingMethodCostCollection
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ShippingMethodProviderChain extends ArrayCollection
+class ShippingMethodCostCollection extends ArrayCollection
 {
     /**
-     * @param ShippingMethodProviderInterface $provider
+     * @param ShippingMethodCostInterface $shippingOption
      */
-    public function add(ShippingMethodProviderInterface $provider)
+    public function add(ShippingMethodCostInterface $shippingMethodCost)
     {
-        $this->items[] = $provider;
+        $this->items[] = $shippingMethodCost;
     }
 
     /**
-     * @return ShippingMethodProviderInterface[]
+     * @return ShippingMethodCostInterface[]
      */
     public function all()
     {
         return $this->items;
     }
 
-    public function findProvider(){
-
+    /**
+     * @return ShippingMethodCostInterface
+     */
+    public function first()
+    {
+        return reset($this->items);
     }
 }

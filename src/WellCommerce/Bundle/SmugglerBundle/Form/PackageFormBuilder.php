@@ -12,8 +12,7 @@
 namespace WellCommerce\Bundle\SmugglerBundle\Form;
 
 use Packagist\Api\Result\Package\Version;
-use WellCommerce\Bundle\FormBundle\Builder\AbstractFormBuilder;
-use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 use WellCommerce\Bundle\SmugglerBundle\Helper\PackageHelperInterface;
 
@@ -22,17 +21,17 @@ use WellCommerce\Bundle\SmugglerBundle\Helper\PackageHelperInterface;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class PackageFormBuilder extends AbstractFormBuilder implements FormBuilderInterface
+class PackageFormBuilder extends AbstractFormBuilder
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormInterface $packageForm)
     {
-        $router    = $this->getRouter();
+        $router    = $this->getRouterHelper();
         $helper    = $this->get('environment_helper');
-        $package   = $this->getRequest()->get('id');
-        $operation = $this->getRequest()->get('operation');
+        $package   = $this->getRequestHelper()->getRequestAttribute('id');
+        $operation = $this->getRequestHelper()->getRequestAttribute('operation');
         $port      = $helper->getFreePort();
         $versions  = $this->getPackageVersions($package);
 
@@ -65,7 +64,7 @@ class PackageFormBuilder extends AbstractFormBuilder implements FormBuilderInter
             'name'        => 'console_output',
             'label'       => $this->trans('package.label.console_output'),
             'port'        => $port,
-            'console_url' => $router->generate(
+            'console_url' => $router->generateUrl(
                 'admin.package.console', [
                     'id'        => $package,
                     'operation' => $operation,

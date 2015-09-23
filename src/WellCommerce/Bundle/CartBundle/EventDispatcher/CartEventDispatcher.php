@@ -12,8 +12,6 @@
 
 namespace WellCommerce\Bundle\CartBundle\EventDispatcher;
 
-use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
-use WellCommerce\Bundle\CartBundle\Event\CartEvent;
 use WellCommerce\Bundle\CoreBundle\EventDispatcher\AbstractEventDispatcher;
 
 /**
@@ -21,23 +19,7 @@ use WellCommerce\Bundle\CoreBundle\EventDispatcher\AbstractEventDispatcher;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CartEventDispatcher extends AbstractEventDispatcher implements CartEventDispatcherInterface
+class CartEventDispatcher extends AbstractEventDispatcher
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function dispatchOnPreCartChange(CartInterface $cart)
-    {
-        $event = new CartEvent($cart);
-        $this->dispatch(CartEventDispatcherInterface::PRE_CART_CHANGE_EVENT, $event);
-    }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function dispatchOnPostCartChange(CartInterface $cart)
-    {
-        $event = new CartEvent($cart);
-        $this->dispatch(CartEventDispatcherInterface::POST_CART_CHANGE_EVENT, $event);
-    }
 }

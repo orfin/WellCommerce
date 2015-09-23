@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\CartBundle\Collector;
 
 use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
-use WellCommerce\Bundle\IntlBundle\Converter\CurrencyConverterInterface;
+use WellCommerce\Bundle\IntlBundle\Helper\CurrencyHelperInterface;
 
 /**
  * Class CartTotalsCollector
@@ -24,18 +24,18 @@ use WellCommerce\Bundle\IntlBundle\Converter\CurrencyConverterInterface;
 class CartTotalsCollector implements CartTotalsCollectorInterface
 {
     /**
-     * @var CurrencyConverterInterface
+     * @var CurrencyHelperInterface
      */
-    protected $converter;
+    protected $helper;
 
     /**
      * Constructor
      *
-     * @param CurrencyConverterInterface $converter
+     * @param CurrencyHelperInterface $helper
      */
-    public function __construct(CurrencyConverterInterface $converter)
+    public function __construct(CurrencyHelperInterface $helper)
     {
-        $this->converter = $converter;
+        $this->helper = $helper;
     }
 
     /**
@@ -76,9 +76,8 @@ class CartTotalsCollector implements CartTotalsCollectorInterface
             $product      = $cartProduct->getProduct();
             $baseCurrency = $product->getSellPrice()->getCurrency();
             $priceNet     = $product->getSellPrice()->getFinalNetAmount();
-            $priceNet     = $this->converter->convert($priceNet, $baseCurrency, $targetCurrency);
 
-            $price += $cartProduct->getQuantity() * $priceNet;
+            $price += $this->helper->convert($priceNet, $baseCurrency, $targetCurrency, $cartProduct->getQuantity());
         });
 
         return $price;
@@ -94,9 +93,8 @@ class CartTotalsCollector implements CartTotalsCollectorInterface
             $product      = $cartProduct->getProduct();
             $baseCurrency = $product->getSellPrice()->getCurrency();
             $priceGross   = $product->getSellPrice()->getFinalGrossAmount();
-            $priceGross   = $this->converter->convert($priceGross, $baseCurrency, $targetCurrency);
 
-            $price += $cartProduct->getQuantity() * $priceGross;
+            $price += $this->helper->convert($priceGross, $baseCurrency, $targetCurrency, $cartProduct->getQuantity());
         });
 
         return $price;
@@ -112,9 +110,8 @@ class CartTotalsCollector implements CartTotalsCollectorInterface
             $product      = $cartProduct->getProduct();
             $baseCurrency = $product->getSellPrice()->getCurrency();
             $taxAmount    = $product->getSellPrice()->getFinalTaxAmount();
-            $taxAmount    = $this->converter->convert($taxAmount, $baseCurrency, $targetCurrency);
 
-            $amount += $cartProduct->getQuantity() * $taxAmount;
+            $amount += $this->helper->convert($taxAmount, $baseCurrency, $targetCurrency, $cartProduct->getQuantity());
         });
 
         return $amount;

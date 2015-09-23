@@ -22,6 +22,7 @@ use WellCommerce\Bundle\FormBundle\FormBuilderInterface;
  */
 interface EventDispatcherInterface
 {
+    const POST_RESOURCE_INIT_EVENT   = 'post_init';
     const PRE_RESOURCE_UPDATE_EVENT  = 'pre_update';
     const POST_RESOURCE_UPDATE_EVENT = 'post_update';
     const PRE_RESOURCE_CREATE_EVENT  = 'pre_create';
@@ -31,6 +32,13 @@ interface EventDispatcherInterface
     const FORM_INIT_EVENT            = 'form_init';
     const DATASET_INIT_EVENT         = 'dataset_init';
     const DATAGRID_INIT_EVENT        = 'datagrid_init';
+
+    /**
+     * Dispatches the events after new resource is initialized
+     *
+     * @param $resource
+     */
+    public function dispatchOnPostInitResource($resource);
 
     /**
      * Dispatches the events before new resource is created

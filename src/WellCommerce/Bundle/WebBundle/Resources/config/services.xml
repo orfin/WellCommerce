@@ -4,10 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="home_page.manager.front" class="WellCommerce\Bundle\CategoryBundle\Manager\Front\CategoryManager" />
-
         <service id="web.home_page.controller.front" class="WellCommerce\Bundle\WebBundle\Controller\Front\HomePageController">
-            <argument type="service" id="home_page.manager.front" />
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>

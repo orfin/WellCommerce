@@ -6,10 +6,10 @@
     <services>
         <service id="contact.manager.admin" class="WellCommerce\Bundle\CmsBundle\Manager\Admin\ContactManager">
             <argument type="service" id="contact.repository"/>
-            <argument type="service" id="contact.datagrid"/>
-            <argument type="service" id="contact.form_builder"/>
-            <argument type="service" id="contact.factory"/>
             <argument type="service" id="contact.event_dispatcher"/>
+            <argument type="service" id="contact.factory"/>
+            <argument type="service" id="contact.form_builder"/>
+            <argument type="service" id="contact.datagrid"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

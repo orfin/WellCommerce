@@ -19,7 +19,7 @@ use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Channel
+class Channel implements ChannelInterface
 {
     use Timestampable;
 
@@ -39,7 +39,7 @@ class Channel
     protected $url;
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -47,7 +47,7 @@ class Channel
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getName()
     {
@@ -55,7 +55,7 @@ class Channel
     }
 
     /**
-     * @param string $name
+     * {@inheritdoc}
      */
     public function setName($name)
     {
@@ -63,7 +63,7 @@ class Channel
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getUrl()
     {
@@ -71,7 +71,7 @@ class Channel
     }
 
     /**
-     * @param string $url
+     * {@inheritdoc}
      */
     public function setUrl($url)
     {

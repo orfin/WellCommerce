@@ -13,8 +13,8 @@
 namespace WellCommerce\Bundle\ShippingBundle\Provider;
 
 use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCostInterface;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
-use WellCommerce\Bundle\ShippingBundle\Options\ShippingOptionsCollection;
 
 /**
  * Class CartShippingMethodProvider
@@ -26,19 +26,20 @@ class CartShippingMethodProvider extends AbstractShippingMethodProvider implemen
     /**
      * {@inheritdoc}
      */
-    public function getShippingMethodOptions(CartInterface $cart)
+    public function getShippingMethodCostsCollection(CartInterface $cart)
     {
-        $shippingOptionsCollection = new ShippingOptionsCollection();
-        $shippingMethods           = $this->getSupportedShippingMethods($cart);
+        $shippingMethodCostCollection = new ShippingMethodCostCollection();
+        $shippingMethods              = $this->getSupportedShippingMethods($cart);
 
-        $shippingMethods->map(function (ShippingMethodInterface $shippingMethod) use ($cart, $shippingOptionsCollection) {
+        $shippingMethods->map(function (ShippingMethodInterface $shippingMethod) use ($cart, $shippingMethodCostCollection) {
             $calculator = $this->getCalculator($shippingMethod);
             $costs      = $calculator->calculateCart($shippingMethod, $cart);
-            $option     = $this->createShippingOption($shippingMethod, $costs);
-            $shippingOptionsCollection->add($option);
+            if ($costs instanceof ShippingMethodCostInterface) {
+                $shippingMethodCostCollection->add($costs);
+            }
         });
 
-        return $shippingOptionsCollection;
+        return $shippingMethodCostCollection;
     }
 
     /**
@@ -52,11 +53,13 @@ class CartShippingMethodProvider extends AbstractShippingMethodProvider implemen
     {
         $methods = $this->getEnabledMethods();
 
-        return $methods->filter(function (ShippingMethodInterface $shippingMethod) use ($cart) {
+        $supportedMethods = $methods->filter(function (ShippingMethodInterface $shippingMethod) use ($cart) {
             $calculator = $this->getCalculator($shippingMethod);
 
-            return $calculator->supportsCart($shippingMethod, $cart);
+            return $calculator->supportsCart($shippingMethod, $cart) && $shippingMethod->getPaymentMethods()->count();
         });
+
+        return $supportedMethods;
     }
 
     /**

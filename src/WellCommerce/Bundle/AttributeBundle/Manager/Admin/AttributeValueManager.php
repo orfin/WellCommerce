@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\AttributeBundle\Manager\Admin;
 
-use WellCommerce\Bundle\AdminBundle\Manager\AbstractAdminManager;
+use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
 use WellCommerce\Bundle\AttributeBundle\Entity\Attribute;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeValue;
 use WellCommerce\Bundle\AttributeBundle\Repository\AttributeRepositoryInterface;

@@ -58,7 +58,7 @@ interface CartManagerInterface extends FrontManagerInterface
     /**
      * Initializes the cart for current request
      *
-     * @return void
+     * @return CartInterface
      */
     public function initializeCart();
 }

@@ -14,12 +14,9 @@ namespace WellCommerce\Bundle\CartBundle\Manager\Front;
 
 use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
-use WellCommerce\Bundle\CartBundle\EventDispatcher\CartEventDispatcherInterface;
 use WellCommerce\Bundle\CartBundle\Exception\AddCartItemException;
-use WellCommerce\Bundle\CartBundle\Factory\CartFactoryInterface;
 use WellCommerce\Bundle\CartBundle\Repository\CartRepositoryInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
-use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface;
@@ -33,25 +30,20 @@ use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 class CartManager extends AbstractFrontManager implements CartManagerInterface
 {
     /**
+     * @var CartRepositoryInterface
+     */
+    protected $repository;
+
+    /**
      * @var CartProductManagerInterface
      */
     protected $cartProductManager;
 
     /**
-     * Constructor
-     *
-     * @param CartRepositoryInterface      $cartRepository
-     * @param FactoryInterface             $cartFactory
-     * @param CartEventDispatcherInterface $eventDispatcher
-     * @param CartProductManagerInterface  $cartProductManager
+     * @param CartProductManagerInterface $cartProductManager
      */
-    public function __construct(
-        CartRepositoryInterface $cartRepository,
-        FactoryInterface $cartFactory,
-        CartEventDispatcherInterface $eventDispatcher,
-        CartProductManagerInterface $cartProductManager
-    ) {
-        parent::__construct($cartRepository, $cartFactory, $eventDispatcher);
+    public function setCartProductManager(CartProductManagerInterface $cartProductManager)
+    {
         $this->cartProductManager = $cartProductManager;
     }
 
@@ -85,8 +77,9 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
      */
     public function deleteCartProduct(CartProductInterface $cartProduct)
     {
+        $cart = $this->getCurrentCart();
         $this->cartProductManager->removeResource($cartProduct);
-        $this->updateResource($this->getCurrentCart());
+        $this->updateResource($cart);
 
         return true;
     }
@@ -96,8 +89,9 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
      */
     public function changeCartProductQuantity(CartProductInterface $cartProduct, $qty)
     {
+        $cart = $this->getCurrentCart();
         $this->cartProductManager->changeCartProductQuantity($cartProduct, $qty);
-        $this->updateResource($this->getCurrentCart());
+        $this->updateResource($cart);
 
         return true;
     }
@@ -115,6 +109,8 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
 
         $cartProvider = $this->getCartProvider();
         $cartProvider->setCurrentCart($cart);
+
+        return $cart;
     }
 
     /**
@@ -128,9 +124,7 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
      */
     protected function getCart(ShopInterface $shop, ClientInterface $client = null, $sessionId)
     {
-        /** @var $cartRepository CartRepositoryInterface */
-        $cartRepository = $this->getRepository();
-        $cart           = $cartRepository->findCart($client, $sessionId, $shop);
+        $cart = $this->repository->findCart($client, $sessionId, $shop);
 
         if (null === $cart) {
             $cart = $this->createCart($shop, $client, $sessionId);
