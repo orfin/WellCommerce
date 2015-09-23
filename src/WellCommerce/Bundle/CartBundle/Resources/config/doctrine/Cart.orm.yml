@@ -27,6 +27,11 @@ WellCommerce\Bundle\CartBundle\Entity\Cart:
             unique: true
             nullable: false
             column: session_id
+        currency:
+            type: string
+            length: 16
+            nullable: false
+            column: currency
     oneToMany:
         products:
             targetEntity: WellCommerce\Bundle\CartBundle\Entity\CartProduct

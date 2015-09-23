@@ -24,10 +24,10 @@
                     </td>
                     <td class="text-right">
                         {% if item.isDiscountValid == 1 %}
-                            {{ format_price(item.quantityDiscountedPrice, item.currency) }}
-                            <small>{{ format_price(item.quantityPrice, item.currency) }}</small>
+                            {{ format_price(item.discountedPrice, item.currency, null, null, item.quantity) }}
+                            <small>{{ format_price(item.price, item.currency, null, null, item.quantity) }}</small>
                         {% else %}
-                            {{ format_price(item.quantityPrice, item.currency) }}
+                            {{ format_price(item.price, item.currency, null, null, item.quantity) }}
                         {% endif %}
                     </td>
                 </tr>

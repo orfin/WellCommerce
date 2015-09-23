@@ -32,8 +32,6 @@ class CartProductDataSet extends AbstractDataSet
             'price'                   => 'product.sellPrice.grossAmount',
             'discountedPrice'         => 'product.sellPrice.discountedGrossAmount',
             'quantity'                => 'cart_product.quantity',
-            'quantityPrice'           => 'cart_product.quantity * product.sellPrice.grossAmount',
-            'quantityDiscountedPrice' => 'cart_product.quantity * product.sellPrice.discountedGrossAmount',
             'attribute'               => 'IDENTITY(cart_product.attribute)',
             'name'                    => 'product_translation.name',
             'route'                   => 'IDENTITY(product_translation.route)',

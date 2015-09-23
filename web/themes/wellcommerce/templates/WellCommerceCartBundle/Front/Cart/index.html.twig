@@ -74,7 +74,7 @@
                                 <span class="text">Summary<small>Payment method: {{ cart.getPaymentMethod().translate().getName() }}</small></span>
                             </div>
                             <div class="col-sm-3 col-xs-6">
-                                <span class="value">{{ format_price(cart.getTotals().getGrossPrice()) }}</span>
+                                <span class="value">{{ format_price(summary) }}</span>
                             </div>
                         </div>
                     </div>

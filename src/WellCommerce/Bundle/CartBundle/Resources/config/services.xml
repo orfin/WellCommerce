@@ -94,12 +94,6 @@
             <tag name="resource.provider" alias="cart"/>
         </service>
 
-        <service id="cart_summary.provider" class="WellCommerce\Bundle\CartBundle\Provider\CartSummaryProvider">
-            <argument type="service" id="currency.helper"/>
-            <argument type="service" id="shipping_method.calculator.collection"/>
-            <tag name="resource.provider" alias="cart_summary"/>
-        </service>
-
         <service id="twig.extension.cart" class="WellCommerce\Bundle\CartBundle\Twig\Extension\CartExtension">
             <argument type="service" id="cart.provider"/>
             <argument type="service" id="cart_product.provider"/>
@@ -141,6 +135,10 @@
         <service id="cart_totals.cart.visitor" class="WellCommerce\Bundle\CartBundle\Visitor\CartTotalsVisitor">
             <argument type="service" id="cart_totals.collector"/>
             <tag name="cart.visitor"/>
+        </service>
+
+        <service id="cart_summary.collector" class="WellCommerce\Bundle\CartBundle\Collector\CartSummaryCollector">
+            <argument type="service" id="currency.helper"/>
         </service>
 
         <service id="shipping_method.cart.visitor" class="WellCommerce\Bundle\CartBundle\Visitor\CartShippingMethodVisitor">

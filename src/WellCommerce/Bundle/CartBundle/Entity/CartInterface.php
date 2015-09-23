@@ -115,6 +115,16 @@ interface CartInterface extends
     public function setShippingMethodCost(ShippingMethodCostInterface $shippingMethodCost = null);
 
     /**
+     * @return string
+     */
+    public function getCurrency();
+
+    /**
+     * @param string $currency
+     */
+    public function setCurrency($currency);
+
+    /**
      * @return bool
      */
     public function isEmpty();

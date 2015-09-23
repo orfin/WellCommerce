@@ -111,8 +111,9 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
         $requestHelper = $this->getRequestHelper();
         $sessionId     = $requestHelper->getSessionId();
         $client        = $requestHelper->getClient();
+        $currency      = $requestHelper->getCurrentCurrency();
         $shop          = $this->getShopContext()->getCurrentScope();
-        $cart          = $this->getCart($shop, $client, $sessionId);
+        $cart          = $this->getCart($shop, $client, $sessionId, $currency);
 
         $cartProvider = $this->getCartProvider();
         $cartProvider->setCurrentCart($cart);
@@ -126,32 +127,45 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
      * @param ShopInterface        $shop
      * @param ClientInterface|null $client
      * @param string               $sessionId
+     * @param string               $currency
      *
      * @return CartInterface
      */
-    protected function getCart(ShopInterface $shop, ClientInterface $client = null, $sessionId)
+    protected function getCart(ShopInterface $shop, ClientInterface $client = null, $sessionId, $currency)
     {
         $cart = $this->repository->findCart($client, $sessionId, $shop);
 
         if (null === $cart) {
             $cart = $this->createCart($shop, $client, $sessionId);
         } else {
-            $this->updateCartClient($cart, $client);
+            $this->updateCart($cart, $client, $currency);
         }
 
         return $cart;
     }
 
     /**
-     * Updates client relation only when changed and not null
+     * Updates client and/or currency if changed
      *
      * @param CartInterface        $cart
      * @param ClientInterface|null $client
+     * @param string               $currency
      */
-    protected function updateCartClient(CartInterface $cart, ClientInterface $client = null)
+    protected function updateCart(CartInterface $cart, ClientInterface $client = null, $currency)
     {
+        $needsUpdate = false;
+
         if (null !== $client && null === $cart->getClient()) {
             $cart->setClient($client);
+            $needsUpdate = true;
+        }
+
+        if ($currency !== $cart->getCurrency()) {
+            $cart->setCurrency($currency);
+            $needsUpdate = true;
+        }
+
+        if ($needsUpdate) {
             $this->updateResource($cart);
         }
     }
@@ -162,14 +176,16 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
      * @param ShopInterface        $shop
      * @param ClientInterface|null $client
      * @param string               $sessionId
+     * @param string               $currency
      *
      * @return CartInterface
      */
-    protected function createCart(ShopInterface $shop, ClientInterface $client = null, $sessionId)
+    protected function createCart(ShopInterface $shop, ClientInterface $client = null, $sessionId, $currency)
     {
         $cart = $this->initResource();
         $cart->setShop($shop);
         $cart->setSessionId($sessionId);
+        $cart->setCurrency($currency);
 
         if (null !== $client) {
             $cart->setClient($client);

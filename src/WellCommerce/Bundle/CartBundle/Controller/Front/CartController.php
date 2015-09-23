@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\CartBundle\Controller\Front;
 
 use Symfony\Component\HttpFoundation\Request;
-use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
 use WellCommerce\Bundle\CartBundle\Exception\AddCartItemException;
 use WellCommerce\Bundle\CartBundle\Exception\DeleteCartItemException;
@@ -66,6 +65,7 @@ class CartController extends AbstractFrontController implements FrontControllerI
             'form'         => $form,
             'shippingCost' => $cart->getShippingMethodCost()->getCost(),
             'elements'     => $form->getChildren(),
+            'summary'      => $this->get('cart_summary.collector')->collect($cart)
         ]);
     }
 

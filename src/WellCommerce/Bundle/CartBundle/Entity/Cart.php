@@ -52,6 +52,11 @@ class Cart implements CartInterface
     protected $sessionId;
 
     /**
+     * @var string
+     */
+    protected $currency;
+
+    /**
      * @var CartTotals
      */
     protected $totals;
@@ -197,6 +202,22 @@ class Cart implements CartInterface
     public function setShippingMethodCost(ShippingMethodCostInterface $shippingMethodCost = null)
     {
         $this->shippingMethodCost = $shippingMethodCost;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCurrency()
+    {
+        return $this->currency;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCurrency($currency)
+    {
+        $this->currency = $currency;
     }
 
     /**
