@@ -11405,7 +11405,7 @@ var GFormRangeEditor = GCore.ExtendClass(GFormField, function() {
 		var fOffset = 1 / Math.pow(10, gThis.m_oOptions.iRangePrecision);
 		var oRange = {
 			min: (parseFloat(gThis.m_aoRanges[iAfterWhich].max) + fOffset).toFixed(gThis.m_oOptions.iRangePrecision),
-			max: (0).toFixed(gThis.m_oOptions.iRangePrecision),
+			max: (9999).toFixed(gThis.m_oOptions.iRangePrecision),
 			price: (gThis.m_oOptions.aoOptions.length) ? gThis.m_oOptions.aoOptions[0].sValue : (0).toFixed(gThis.m_oOptions.iPricePrecision)
 		};
 		if (gThis.m_aoRanges[iAfterWhich + 1] != undefined) {

@@ -8,8 +8,16 @@
             <argument type="service" id="cart.repository"/>
             <argument type="service" id="cart.factory"/>
             <argument type="service" id="cart.event_dispatcher"/>
+            <argument type="service" id="cart_product.manager.front"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="cart_product.manager.front" class="WellCommerce\Bundle\CartBundle\Manager\Front\CartProductManager">
             <argument type="service" id="cart_product.repository"/>
             <argument type="service" id="cart_product.factory"/>
+            <argument type="service" id="cart_product.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -95,10 +103,7 @@
             <tag name="twig.extension"/>
         </service>
 
-        <service id="cart.factory" class="WellCommerce\Bundle\CartBundle\Factory\CartFactory">
-            <argument type="service" id="payment_method.repository"/>
-            <argument type="service" id="shipping_method.repository"/>
-        </service>
+        <service id="cart.factory" class="WellCommerce\Bundle\CartBundle\Factory\CartFactory" />
 
         <service id="cart.event_dispatcher" class="WellCommerce\Bundle\CartBundle\EventDispatcher\CartEventDispatcher">
             <argument type="service" id="event_dispatcher" />
@@ -130,8 +135,13 @@
             <argument type="service" id="currency.converter"/>
         </service>
 
-        <service id="cart_totals.visitor" class="WellCommerce\Bundle\CartBundle\Visitor\CartTotalsVisitor">
+        <service id="cart_totals.cart.visitor" class="WellCommerce\Bundle\CartBundle\Visitor\CartTotalsVisitor">
             <argument type="service" id="cart_totals.collector"/>
+            <tag name="cart.visitor"/>
+        </service>
+
+        <service id="shipping_method.cart.visitor" class="WellCommerce\Bundle\CartBundle\Visitor\CartShippingMethodVisitor">
+            <argument type="service" id="shipping_method.cart.provider"/>
             <tag name="cart.visitor"/>
         </service>
 

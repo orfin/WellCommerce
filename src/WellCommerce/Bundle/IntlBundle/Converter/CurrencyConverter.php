@@ -67,7 +67,7 @@ class CurrencyConverter implements CurrencyConverterInterface
 
         $exchangeRate = $this->exchangeRates[$targetCurrency][$baseCurrency];
 
-        return $amount * $exchangeRate;
+        return round($amount * $exchangeRate, 2);
     }
 
     /**
