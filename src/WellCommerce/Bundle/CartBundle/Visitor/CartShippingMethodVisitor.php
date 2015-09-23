@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CartBundle\Visitor;
 
-use Doctrine\Common\Util\Debug;
 use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\ShippingBundle\Provider\CartShippingMethodProviderInterface;
 
@@ -43,31 +42,19 @@ class CartShippingMethodVisitor implements CartVisitorInterface
      */
     public function visitCart(CartInterface $cart)
     {
-        if (null === $cart->getShippingMethod()) {
-            $defaultMethod = $this->getDefaultShippingMethod($cart);
-            if (null !== $defaultMethod) {
-                $cart->setShippingMethod($defaultMethod);
+        $cartShippingMethodCost = $cart->getShippingMethodCost();
+
+        if (null === $cartShippingMethodCost) {
+            $shippingMethodCostCollection = $this->getShippingMethodCostCollection($cart);
+            if ($shippingMethodCostCollection->count()) {
+                $cart->setShippingMethodCost($shippingMethodCostCollection->first());
             }
         }
     }
 
-    /**
-     * Resolves default shipping method for cart after initialization
-     *
-     * @param CartInterface $cart
-     *
-     * @return null|\WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface
-     */
-    protected function getDefaultShippingMethod(CartInterface $cart)
+    protected function getShippingMethodCostCollection(CartInterface $cart)
     {
-        $shippingMethodCostCollection = $this->cartShippingMethodProvider->getShippingMethodCostsCollection($cart);
-        if ($shippingMethodCostCollection->count()) {
-            $defaultShippingMethodCost = $shippingMethodCostCollection->first();
-
-            return $defaultShippingMethodCost->getShippingMethod();
-        }
-
-        return null;
+        return $this->cartShippingMethodProvider->getShippingMethodCostsCollection($cart);
     }
 
     /**

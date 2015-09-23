@@ -35,7 +35,7 @@
 
                                     <div class="row">
                                         <div class="col-lg-10">
-                                            {{ macros.element(form.getChildren().get('shippingMethod')) }}
+                                            {{ macros.element(form.getChildren().get('shippingMethodCost')) }}
                                         </div>
                                     </div>
                                 </div>
@@ -60,7 +60,7 @@
                                     <h4><br/><br/>Cost of delivery</h4>
                                 </div>
                                 <div class="col-xs-6">
-                                    <h4><strong><br/><br/>$9.00</strong></h4>
+                                    <h4><strong><br/><br/>{{ format_price(shippingCost.getGrossAmount(), shippingCost.getCurrency()) }}</strong></h4>
                                 </div>
                             </div>
                         </div>

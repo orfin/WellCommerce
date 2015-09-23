@@ -45,4 +45,16 @@ class ShippingMethodCostCollection extends ArrayCollection
     {
         return reset($this->items);
     }
+
+    /**
+     * Checks whether cost exists in collection
+     *
+     * @param ShippingMethodCostInterface $shippingMethodCost
+     *
+     * @return bool
+     */
+    public function contains(ShippingMethodCostInterface $shippingMethodCost)
+    {
+        return in_array($shippingMethodCost, $this->items, true);
+    }
 }

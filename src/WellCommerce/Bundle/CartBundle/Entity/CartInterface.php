@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\CartBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
-use WellCommerce\Bundle\CartBundle\Calculator\CartTotalsVisitorInterface;
 use WellCommerce\Bundle\CartBundle\Visitor\CartVisitorInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\AddressInterface;
@@ -21,8 +20,7 @@ use WellCommerce\Bundle\CoreBundle\Entity\ContactDetailsAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopAwareInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodAwareInterface;
-use WellCommerce\Bundle\ShippingBundle\Entity\ShippingCalculatorSubjectInterface;
-use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodAwareInterface;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCostInterface;
 
 /**
  * Interface CartInterface
@@ -32,11 +30,9 @@ use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodAwareInterface;
 interface CartInterface extends
     ShopAwareInterface,
     PaymentMethodAwareInterface,
-    ShippingMethodAwareInterface,
     ClientAwareInterface,
     TimestampableInterface,
-    ContactDetailsAwareInterface,
-    ShippingCalculatorSubjectInterface
+    ContactDetailsAwareInterface
 {
     /**
      * @return int
@@ -107,6 +103,16 @@ interface CartInterface extends
      * @param CartVisitorInterface $visitor
      */
     public function acceptVisitor(CartVisitorInterface $visitor);
+
+    /**
+     * @return null|ShippingMethodCostInterface
+     */
+    public function getShippingMethodCost();
+
+    /**
+     * @param null|ShippingMethodCostInterface $shippingMethodCost
+     */
+    public function setShippingMethodCost(ShippingMethodCostInterface $shippingMethodCost = null);
 
     /**
      * @return bool

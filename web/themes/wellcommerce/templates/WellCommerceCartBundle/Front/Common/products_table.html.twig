@@ -20,7 +20,7 @@
                 <td class="text-center">
                     {% if item.isDiscountValid == 1 %}
                         <span class="price promo">
-					        <small class="block">{{ format_price(item.price, item.currency, null, item.tax) }}</small>
+					        <small class="block">{{ format_price(item.price, item.currency) }}</small>
                             {{ format_price(item.discountedPrice, item.currency) }}
 					    </span>
                     {% else %}

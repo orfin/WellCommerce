@@ -93,16 +93,17 @@ class CartSubscriber extends AbstractEventSubscriber
         $form                 = $event->getForm();
         $cart                 = $this->cartManager->getCurrentCart();
         $currencyHelper       = $this->getCurrencyHelper();
-        $shippingMethodSelect = $form->getChildren()->get('shippingMethod');
+        $shippingMethodSelect = $form->getChildren()->get('shippingMethodCost');
         $collection           = $this->cartShippingMethodProvider->getShippingMethodCostsCollection($cart);
 
         foreach ($collection->all() as $cost) {
             $shippingMethod = $cost->getShippingMethod();
             $baseCurrency   = $shippingMethod->getCurrency()->getCode();
+            $grossAmount    = $cost->getCost()->getGrossAmount();
 
-            $shippingMethodSelect->addOptionToSelect($shippingMethod->getId(), [
+            $shippingMethodSelect->addOptionToSelect($cost->getId(), [
                     'name'    => $shippingMethod->translate()->getName(),
-                    'comment' => $currencyHelper->convertAndFormat($cost->getCost(), $baseCurrency)
+                    'comment' => $currencyHelper->convertAndFormat($grossAmount, $baseCurrency)
                 ]
             );
         }

@@ -27,10 +27,10 @@ class CartFormBuilder extends AbstractFormBuilder
     public function buildForm(FormInterface $form)
     {
         $form->addChild($this->getElement('radio_group', [
-            'name'        => 'shippingMethod',
+            'name'        => 'shippingMethodCost',
             'label'       => $this->trans('cart.shipping_method.label'),
             'options'     => [],
-            'transformer' => $this->getRepositoryTransformer('entity', $this->get('shipping_method.repository'))
+            'transformer' => $this->getRepositoryTransformer('entity', $this->get('shipping_method_cost.repository'))
         ]));
 
         $form->addChild($this->getElement('radio_group', [

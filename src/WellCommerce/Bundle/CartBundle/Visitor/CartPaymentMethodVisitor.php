@@ -26,9 +26,9 @@ class CartPaymentMethodVisitor implements CartVisitorInterface
      */
     public function visitCart(CartInterface $cart)
     {
-        $shippingMethod = $cart->getShippingMethod();
-        $paymentMethod  = $cart->getPaymentMethod();
-        if (null !== $shippingMethod && null === $paymentMethod) {
+        $paymentMethod = $cart->getPaymentMethod();
+        if (null === $paymentMethod) {
+            $shippingMethod       = $cart->getShippingMethodCost()->getShippingMethod();
             $defaultPaymentMethod = $shippingMethod->getPaymentMethods()->first();
             $cart->setPaymentMethod($defaultPaymentMethod);
         }

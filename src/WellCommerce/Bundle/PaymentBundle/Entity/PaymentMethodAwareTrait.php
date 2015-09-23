@@ -25,7 +25,7 @@ trait PaymentMethodAwareTrait
     protected $paymentMethod;
 
     /**
-     * @return PaymentMethodInterface
+     * @return null|PaymentMethodInterface
      */
     public function getPaymentMethod()
     {
@@ -33,9 +33,9 @@ trait PaymentMethodAwareTrait
     }
 
     /**
-     * @param PaymentMethodInterface $paymentMethod
+     * @param null|PaymentMethodInterface $paymentMethod
      */
-    public function setPaymentMethod(PaymentMethodInterface $paymentMethod)
+    public function setPaymentMethod(PaymentMethodInterface $paymentMethod = null)
     {
         $this->paymentMethod = $paymentMethod;
     }

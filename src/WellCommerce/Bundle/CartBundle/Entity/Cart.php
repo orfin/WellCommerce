@@ -21,6 +21,7 @@ use WellCommerce\Bundle\CoreBundle\Entity\ContactDetailsTrait;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopAwareTrait;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodAwareTrait;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodAwareTrait;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCostInterface;
 
 /**
  * Class Cart
@@ -31,7 +32,6 @@ class Cart implements CartInterface
 {
     use TimestampableTrait;
     use ShopAwareTrait;
-    use ShippingMethodAwareTrait;
     use PaymentMethodAwareTrait;
     use ClientAwareTrait;
     use ContactDetailsTrait;
@@ -65,7 +65,12 @@ class Cart implements CartInterface
      * @var AddressInterface
      */
     protected $shippingAddress;
-    
+
+    /**
+     * @var ShippingMethodCostInterface
+     */
+    protected $shippingMethodCost;
+
     /**
      * {@inheritdoc}
      */
@@ -181,33 +186,17 @@ class Cart implements CartInterface
     /**
      * {@inheritdoc}
      */
-    public function getShippableQuantity()
+    public function getShippingMethodCost()
     {
-        return $this->totals->getQuantity();
+        return $this->shippingMethodCost;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getShippableWeight()
+    public function setShippingMethodCost(ShippingMethodCostInterface $shippingMethodCost = null)
     {
-        return $this->totals->getWeight();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getShippableNetPrice()
-    {
-        return $this->totals->getNetPrice();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getShippableGrossPrice()
-    {
-        return $this->totals->getGrossPrice();
+        $this->shippingMethodCost = $shippingMethodCost;
     }
 
     /**

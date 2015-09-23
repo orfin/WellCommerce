@@ -25,7 +25,7 @@ trait ShippingMethodAwareTrait
     protected $shippingMethod;
 
     /**
-     * @return ShippingMethodInterface
+     * @return null|ShippingMethodInterface
      */
     public function getShippingMethod()
     {
@@ -33,9 +33,9 @@ trait ShippingMethodAwareTrait
     }
 
     /**
-     * @param ShippingMethodInterface
+     * @param null|ShippingMethodInterface
      */
-    public function setShippingMethod(ShippingMethodInterface $shippingMethod)
+    public function setShippingMethod(ShippingMethodInterface $shippingMethod = null)
     {
         $this->shippingMethod = $shippingMethod;
     }

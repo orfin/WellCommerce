@@ -24,9 +24,30 @@ use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
 class CartShippingMethodProvider extends AbstractShippingMethodProvider implements CartShippingMethodProviderInterface
 {
     /**
+     * @var \WellCommerce\Bundle\ShippingBundle\Provider\ShippingMethodCostCollection
+     */
+    protected $collection;
+
+    /**
      * {@inheritdoc}
      */
     public function getShippingMethodCostsCollection(CartInterface $cart)
+    {
+        if (null === $this->collection) {
+            $this->collection = $this->getCollection($cart);
+        }
+
+        return $this->collection;
+    }
+
+    /**
+     * Returns the collection of all shipping method costs for cart
+     *
+     * @param CartInterface $cart
+     *
+     * @return ShippingMethodCostCollection
+     */
+    protected function getCollection(CartInterface $cart)
     {
         $shippingMethodCostCollection = new ShippingMethodCostCollection();
         $shippingMethods              = $this->getSupportedShippingMethods($cart);

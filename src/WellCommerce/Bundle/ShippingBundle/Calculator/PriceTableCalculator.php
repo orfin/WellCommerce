@@ -61,7 +61,6 @@ class PriceTableCalculator extends AbstractShippingMethodCalculator implements S
      */
     public function calculateProduct(ShippingMethodInterface $shippingMethod, ProductInterface $product)
     {
-        return new ShippingCostReference();
     }
 
     /**

@@ -63,6 +63,8 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
                 $cartProduct->increaseQuantity($quantity);
             }
 
+            $cart->setShippingMethodCost(null);
+            $cart->setPaymentMethod(null);
             $this->updateResource($cart);
 
         } catch (\Exception $e) {
@@ -79,6 +81,8 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
     {
         $cart = $this->getCurrentCart();
         $this->cartProductManager->removeResource($cartProduct);
+        $cart->setShippingMethodCost(null);
+        $cart->setPaymentMethod(null);
         $this->updateResource($cart);
 
         return true;
@@ -91,6 +95,9 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
     {
         $cart = $this->getCurrentCart();
         $this->cartProductManager->changeCartProductQuantity($cartProduct, $qty);
+
+        $cart->setShippingMethodCost(null);
+        $cart->setPaymentMethod(null);
         $this->updateResource($cart);
 
         return true;
