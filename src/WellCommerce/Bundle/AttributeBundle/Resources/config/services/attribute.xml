@@ -3,34 +3,39 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <parameters>
-        <parameter key="attribute.controller.admin.class">WellCommerce\Bundle\AttributeBundle\Controller\Admin\AttributeController</parameter>
-        <parameter key="attribute.repository.class">WellCommerce\Bundle\AttributeBundle\Repository\AttributeRepository</parameter>
-    </parameters>
-
     <services>
         <service id="attribute.manager.admin" class="WellCommerce\Bundle\AttributeBundle\Manager\Admin\AttributeManager">
-            <argument type="service" id="flash_helper"/>
-            <argument type="service" id="redirect_helper"/>
-            <argument type="service" id="image_helper"/>
-            <argument type="service" id="event_dispatcher"/>
-            <argument type="service" id="doctrine_helper"/>
-            <argument type="service" id="translator"/>
-            <argument type="service" id="request_helper"/>
-            <call method="setRepository">
-                <argument type="service" id="attribute.repository"/>
+            <argument type="service" id="attribute.repository"/>
+            <argument type="service" id="attribute.event_dispatcher"/>
+            <argument type="service" id="attribute.factory"/>
+            <call method="setAttributeGroupManager">
+                <argument type="service" id="attribute_group.manager.admin"/>
+            </call>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="attribute.controller.admin" class="%attribute.controller.admin.class%">
+        <service id="attribute.controller.admin" class="WellCommerce\Bundle\AttributeBundle\Controller\Admin\AttributeController">
             <argument type="service" id="attribute.manager.admin"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="attribute.repository" class="%attribute.repository.class%" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+        <service id="attribute.repository" class="WellCommerce\Bundle\AttributeBundle\Repository\AttributeRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument>WellCommerceAttributeBundle:Attribute</argument>
+        </service>
+
+        <service id="attribute.factory" class="WellCommerce\Bundle\AttributeBundle\Factory\AttributeFactory" />
+
+        <service id="attribute.event_dispatcher" class="WellCommerce\Bundle\AttributeBundle\EventDispatcher\AttributeEventDispatcher">
+            <argument type="service" id="event_dispatcher"/>
+        </service>
+
+        <service id="form.attribute_collection.data_transformer" class="WellCommerce\Bundle\AttributeBundle\Form\DataTransformer\AttributeCollectionToArrayTransformer" scope="prototype">
+            <argument type="service" id="doctrine_helper"/>
+            <tag name="form.data_transformer" alias="attribute_collection"/>
         </service>
     </services>
 </container>

@@ -12,8 +12,7 @@
 namespace WellCommerce\Bundle\ThemeBundle\Form;
 
 use Symfony\Component\Finder\Finder;
-use WellCommerce\Bundle\FormBundle\Builder\AbstractFormBuilder;
-use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
@@ -21,7 +20,7 @@ use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class ThemeFormBuilder extends AbstractFormBuilder implements FormBuilderInterface
+class ThemeFormBuilder extends AbstractFormBuilder
 {
     const FORM_INIT_EVENT = 'theme.form.init';
 
@@ -37,13 +36,13 @@ class ThemeFormBuilder extends AbstractFormBuilder implements FormBuilderInterfa
 
         $requiredData->addChild($this->getElement('text_field', [
             'name'  => 'name',
-            'label' => $this->trans('Theme name'),
+            'label' => $this->trans('theme.label.name'),
         ]));
 
         $requiredData->addChild($this->getElement('select', [
             'name'    => 'folder',
-            'label'   => $this->trans('Theme folder'),
-            'comment' => $this->trans('Choose theme folder from list'),
+            'label'   => $this->trans('theme.label.folder'),
+            'comment' => $this->trans('theme.comment.folder'),
             'options' => $this->getFolderDirectories()
         ]));
 

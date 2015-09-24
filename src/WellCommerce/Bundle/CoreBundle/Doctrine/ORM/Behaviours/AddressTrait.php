@@ -21,56 +21,40 @@ trait AddressTrait
 {
     /**
      * @var string
-     *
-     * @ORM\Column(name="street", type="string", length=255, nullable=true)
      */
     protected $street;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="street_no", type="string", length=255, nullable=true)
      */
     protected $streetNo;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="flat_no", type="string", length=255, nullable=true)
      */
     protected $flatNo;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="post_code", type="string", length=255, nullable=true)
      */
     protected $postCode;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="province", type="string", length=255, nullable=true)
      */
     protected $province;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="city", type="string", length=255, nullable=true)
      */
     protected $city;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="country", type="string", length=3, nullable=true)
      */
     protected $country;
 
     /**
-     * Get street.
-     *
      * @return string
      */
     public function getStreet()
@@ -79,8 +63,6 @@ trait AddressTrait
     }
 
     /**
-     * Set street.
-     *
      * @param string $street
      */
     public function setStreet($street)
@@ -89,8 +71,6 @@ trait AddressTrait
     }
 
     /**
-     * Get streetNo.
-     *
      * @return string
      */
     public function getStreetNo()
@@ -99,8 +79,6 @@ trait AddressTrait
     }
 
     /**
-     * Set streetNo.
-     *
      * @param string $streetNo
      */
     public function setStreetNo($streetNo)
@@ -109,8 +87,6 @@ trait AddressTrait
     }
 
     /**
-     * Get flatNo.
-     *
      * @return string
      */
     public function getFlatNo()
@@ -119,8 +95,6 @@ trait AddressTrait
     }
 
     /**
-     * Set flatNo.
-     *
      * @param string $flatNo
      */
     public function setFlatNo($flatNo)
@@ -129,8 +103,6 @@ trait AddressTrait
     }
 
     /**
-     * Get postCode.
-     *
      * @return string
      */
     public function getPostCode()
@@ -139,8 +111,6 @@ trait AddressTrait
     }
 
     /**
-     * Set postCode.
-     *
      * @param string $postCode
      */
     public function setPostCode($postCode)
@@ -149,8 +119,6 @@ trait AddressTrait
     }
 
     /**
-     * Get city.
-     *
      * @return string
      */
     public function getCity()
@@ -159,8 +127,6 @@ trait AddressTrait
     }
 
     /**
-     * Set city.
-     *
      * @param string $city
      */
     public function setCity($city)
@@ -169,8 +135,6 @@ trait AddressTrait
     }
 
     /**
-     * Get province.
-     *
      * @return string
      */
     public function getProvince()
@@ -179,8 +143,6 @@ trait AddressTrait
     }
 
     /**
-     * Set province.
-     *
      * @param string $province
      */
     public function setProvince($province)
@@ -189,8 +151,6 @@ trait AddressTrait
     }
 
     /**
-     * Get country.
-     *
      * @return string
      */
     public function getCountry()
@@ -199,8 +159,6 @@ trait AddressTrait
     }
 
     /**
-     * Set country.
-     *
      * @param string $country
      */
     public function setCountry($country)

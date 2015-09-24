@@ -12,39 +12,31 @@
 
 namespace WellCommerce\Bundle\IntlBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 
 /**
  * Dictionary
- *
- * @ORM\Table(name="dictionary", uniqueConstraints={@ORM\UniqueConstraint(name="dictionary_unique_idx", columns={"identifier"})})
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\IntlBundle\Repository\DictionaryRepository")
  */
-class Dictionary
+class Dictionary implements DictionaryInterface
 {
     use Timestampable;
     use Translatable;
+    use Blameable;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="identifier", type="string", length=255)
      */
-    private $identifier;
+    protected $identifier;
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -52,7 +44,7 @@ class Dictionary
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getIdentifier()
     {
@@ -60,7 +52,7 @@ class Dictionary
     }
 
     /**
-     * @param string $identifier
+     * {@inheritdoc}
      */
     public function setIdentifier($identifier)
     {

@@ -12,14 +12,12 @@
 
 namespace WellCommerce\Bundle\ThemeBundle\Controller\Admin;
 
-use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
+use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
  * Class ThemeController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class ThemeController extends AbstractAdminController
 {

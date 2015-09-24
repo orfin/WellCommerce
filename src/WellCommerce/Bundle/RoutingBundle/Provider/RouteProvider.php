@@ -67,7 +67,7 @@ class RouteProvider implements RouteProviderInterface
     {
         $collection = new RouteCollection();
         $path       = $this->getNormalizedPath($request);
-        $resource   = $this->repository->findRouteByPath($path);
+        $resource   = $this->repository->findOneBy(['path' => $path]);
 
         if ($resource) {
             $route = $this->createRoute($resource);

@@ -12,16 +12,15 @@
 
 namespace WellCommerce\Bundle\ProductBundle\DataSet\Front;
 
-use WellCommerce\Bundle\DataSetBundle\AbstractDataSet;
-use WellCommerce\Bundle\DataSetBundle\DataSetConfiguratorInterface;
-use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
+use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
+use WellCommerce\Bundle\DataSetBundle\Configurator\DataSetConfiguratorInterface;
 
 /**
  * Class ProductStatusDataSet
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductStatusDataSet extends AbstractDataSet implements DataSetInterface
+class ProductStatusDataSet extends AbstractDataSet
 {
     /**
      * {@inheritdoc}
@@ -33,6 +32,10 @@ class ProductStatusDataSet extends AbstractDataSet implements DataSetInterface
             'name'      => 'product_status_translation.name',
             'route'     => 'IDENTITY(product_status_translation.route)',
             'css_class' => 'product_status_translation.cssClass',
+        ]);
+
+        $configurator->setTransformers([
+            'route' => $this->container->get('route.transformer')
         ]);
     }
 }

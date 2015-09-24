@@ -12,16 +12,15 @@
 
 namespace WellCommerce\Bundle\RoutingBundle\DataSet;
 
-use WellCommerce\Bundle\DataSetBundle\AbstractDataSet;
-use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
-use WellCommerce\Bundle\DataSetBundle\DataSetConfiguratorInterface;
+use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
+use WellCommerce\Bundle\DataSetBundle\Configurator\DataSetConfiguratorInterface;
 
 /**
  * Class RoutingDataSet
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class RoutingDataSet extends AbstractDataSet implements DataSetInterface
+class RoutingDataSet extends AbstractDataSet
 {
     /**
      * {@inheritdoc}

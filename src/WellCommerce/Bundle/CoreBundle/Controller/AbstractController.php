@@ -11,93 +11,87 @@
  */
 namespace WellCommerce\Bundle\CoreBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
 
 /**
- * Class Controller
+ * Class AbstractController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractController extends Controller
+abstract class AbstractController extends AbstractContainerAware implements ControllerInterface
 {
     /**
-     * Returns content as json response
-     *
-     * @param mixed $content
-     *
-     * @return JsonResponse
+     * {@inheritdoc}
      */
-    protected function jsonResponse($content)
+    public function jsonResponse(array $content)
     {
         return new JsonResponse($content);
     }
 
     /**
-     * Translates message using Translator service
-     *
-     * @param string $id
-     *
-     * @return string
+     * {@inheritdoc}
      */
-    protected function trans($id)
+    public function redirectResponse($url, $status = RedirectResponse::HTTP_FOUND)
     {
-        return $this->getManager()->getTranslator()->trans($id);
+        return new RedirectResponse($url, $status);
     }
 
     /**
-     * Returns image path
-     *
-     * @param string $path
-     * @param string $filter
-     *
-     * @return string
+     * {@inheritdoc}
      */
-    protected function getImage($path, $filter)
+    public function redirectToAction($actionName = 'index', array $params = [])
     {
-        return $this->getManager()->getImageHelper()->getImage($path, $filter);
+        $url = $this->getRedirectToActionUrl($actionName, $params);
+
+        return $this->redirectResponse($url);
     }
 
     /**
-     * Returns default entity manager
-     *
-     * @return \Doctrine\Common\Persistence\ObjectManager|object
+     * {@inheritdoc}
      */
-    protected function getEntityManager()
+    public function redirectToRoute($routeName, array $routeParams = [])
     {
-        return $this->getManager()->getDoctrineHelper()->getEntityManager();
+        $url = $this->getRouterHelper()->generateUrl($routeName, $routeParams);
+
+        return $this->redirectResponse($url);
     }
 
     /**
-     * Redirects user to another action in scope of current controller
-     *
-     * @param string $actionName
-     * @param array  $params
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * {@inheritdoc}
      */
-    protected function redirectToAction($actionName = 'index', array $params = [])
+    public function getRedirectToActionUrl($actionName = 'index', array $params = [])
     {
-        return $this->getManager()->getRedirectHelper()->redirectToAction($actionName, $params);
+        return $this->getRouterHelper()->getRedirectToActionUrl($actionName, $params);
     }
 
     /**
-     * Creates absolute url pointing to particular controller action
-     *
-     * @param string $actionName
-     * @param array  $params
-     *
-     * @return string
+     * {@inheritdoc}
      */
-    protected function getRedirectToActionUrl($actionName = 'index', array $params = [])
+    public function render($view, array $parameters = [], Response $response = null)
     {
-        return $this->getManager()->getRedirectHelper()->getRedirectToActionUrl($actionName, $params);
+        return $this->container->get('templating')->renderResponse($view, $parameters, $response);
     }
 
     /**
-     * Returns manager object
-     *
-     * @return \WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface
+     * {@inheritdoc}
      */
-    abstract protected function getManager();
+    public function renderView($view, array $parameters = [])
+    {
+        return $this->container->get('templating')->render($view, $parameters);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function displayTemplate($templateName, array $templateVars = [])
+    {
+        $templating       = $this->container->get('templating');
+        $templateResolver = $this->get('template_resolver');
+        $template         = $templateResolver->resolveControllerTemplate($this, $templateName);
+
+        return $templating->renderResponse($template, $templateVars);
+    }
 }

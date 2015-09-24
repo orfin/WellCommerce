@@ -5,37 +5,22 @@
 
     <services>
         <service id="currency.manager.admin" class="WellCommerce\Bundle\IntlBundle\Manager\Admin\CurrencyManager">
-            <argument type="service" id="flash_helper"/>
-            <argument type="service" id="redirect_helper"/>
-            <argument type="service" id="image_helper"/>
-            <argument type="service" id="event_dispatcher"/>
-            <argument type="service" id="doctrine_helper"/>
-            <argument type="service" id="translator"/>
-            <argument type="service" id="request_helper"/>
-            <call method="setRepository">
-                <argument type="service" id="currency.repository"/>
-            </call>
-            <call method="setFormBuilder">
-                <argument type="service" id="currency.form_builder"/>
-            </call>
-            <call method="setDataGrid">
-                <argument type="service" id="currency.datagrid"/>
+            <argument type="service" id="currency.repository"/>
+            <argument type="service" id="currency.event_dispatcher"/>
+            <argument type="service" id="currency.factory"/>
+            <argument type="service" id="currency.form_builder"/>
+            <argument type="service" id="currency.datagrid"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
             </call>
         </service>
 
         <service id="currency.manager.front" class="WellCommerce\Bundle\IntlBundle\Manager\Front\CurrencyManager">
-            <argument type="service" id="flash_helper"/>
-            <argument type="service" id="redirect_helper"/>
-            <argument type="service" id="image_helper"/>
-            <argument type="service" id="event_dispatcher"/>
-            <argument type="service" id="doctrine_helper"/>
-            <argument type="service" id="translator"/>
-            <argument type="service" id="request_helper"/>
-            <call method="setRepository">
-                <argument type="service" id="currency.repository"/>
-            </call>
-            <call method="setProviders">
-                <argument type="service" id="resource.provider.collection" />
+            <argument type="service" id="currency.repository"/>
+            <argument type="service" id="currency.event_dispatcher"/>
+            <argument type="service" id="currency.factory"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
             </call>
         </service>
 
@@ -73,6 +58,7 @@
         <service id="currency.dataset" class="WellCommerce\Bundle\IntlBundle\DataSet\CurrencyDataSet">
             <argument key="identifier">currency</argument>
             <argument type="service" id="currency.dataset.loader"/>
+            <argument type="service" id="currency.event_dispatcher"/>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
@@ -83,6 +69,7 @@
         <service id="currency.datagrid" class="WellCommerce\Bundle\IntlBundle\DataGrid\CurrencyDataGrid">
             <argument key="identifier">currency</argument>
             <argument type="service" id="currency.dataset"/>
+            <argument type="service" id="currency.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -91,6 +78,7 @@
         <service id="currency.form_builder" class="WellCommerce\Bundle\IntlBundle\Form\CurrencyFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
+            <argument type="service" id="currency.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -121,11 +109,26 @@
 
         <service id="currency.converter" class="WellCommerce\Bundle\IntlBundle\Converter\CurrencyConverter">
             <argument type="service" id="currency_rate.repository" />
-            <argument type="service" id="request_stack" />
+            <argument type="service" id="request_helper"/>
+        </service>
+
+        <service id="currency.formatter" class="WellCommerce\Bundle\IntlBundle\Formatter\CurrencyFormatter">
+            <argument type="service" id="request_helper"/>
+        </service>
+
+        <service id="currency.helper" class="WellCommerce\Bundle\IntlBundle\Helper\CurrencyHelper">
+            <argument type="service" id="currency.converter" />
+            <argument type="service" id="currency.formatter"/>
+        </service>
+
+        <service id="currency.factory" class="WellCommerce\Bundle\IntlBundle\Factory\CurrencyFactory" />
+
+        <service id="currency.event_dispatcher" class="WellCommerce\Bundle\IntlBundle\EventDispatcher\CurrencyEventDispatcher">
+            <argument type="service" id="event_dispatcher" />
         </service>
 
         <service id="twig.extension.currency" class="WellCommerce\Bundle\IntlBundle\Twig\Extension\CurrencyExtension">
-            <argument type="service" id="currency.converter"/>
+            <argument type="service" id="currency.helper"/>
             <argument type="service" id="currency.provider"/>
             <tag name="twig.extension"/>
         </service>

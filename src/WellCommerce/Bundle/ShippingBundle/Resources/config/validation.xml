@@ -7,6 +7,9 @@
         <property name="translations">
             <constraint name="Valid" />
         </property>
+        <property name="costs">
+            <constraint name="Valid" />
+        </property>
         <property name="calculator">
             <constraint name="NotBlank" />
             <constraint name="NotNull" />
@@ -18,12 +21,37 @@
                 <option name="value">0</option>
             </constraint>
         </property>
+        <property name="currency">
+            <constraint name="NotBlank" />
+            <constraint name="NotNull" />
+        </property>
+        <property name="tax">
+            <constraint name="NotBlank" />
+            <constraint name="NotNull" />
+        </property>
     </class>
 
     <class name="WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodTranslation">
         <property name="name">
             <constraint name="NotBlank" />
             <constraint name="NotNull" />
+        </property>
+    </class>
+
+    <class name="WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCost">
+        <property name="rangeFrom">
+            <constraint name="NotBlank" />
+            <constraint name="NotNull" />
+            <constraint name="GreaterThanOrEqual">
+                <option name="value">0</option>
+            </constraint>
+        </property>
+        <property name="rangeTo">
+            <constraint name="NotBlank" />
+            <constraint name="NotNull" />
+            <constraint name="GreaterThanOrEqual">
+                <option name="value">0</option>
+            </constraint>
         </property>
     </class>
 </constraint-mapping>

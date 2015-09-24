@@ -31,12 +31,12 @@ class LoadUserData extends AbstractDataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $role = new Role();
+        $role = $this->container->get('role.factory')->create();
         $role->setName('admin');
         $role->setRole('ROLE_ADMIN');
         $manager->persist($role);
 
-        $user = new User();
+        $user = $this->container->get('user.factory')->create();
         $user->setFirstName('John');
         $user->setLastName('Doe');
         $user->setUsername('admin');

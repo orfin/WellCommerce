@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\ShippingBundle\Repository;
 
-use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\DataSetAwareRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
@@ -20,12 +19,17 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ShippingMethodRepositoryInterface extends RepositoryInterface, DataSetAwareRepositoryInterface
+interface ShippingMethodRepositoryInterface extends RepositoryInterface
 {
     /**
      * Returns default shipping method
      *
-     * @return null|\WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod
+     * @return null|\WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface
      */
     public function getDefaultShippingMethod();
+
+    /**
+     * @return array|\WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface[]
+     */
+    public function findAllEnabledShippingMethods();
 }

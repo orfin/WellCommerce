@@ -12,17 +12,13 @@
 
 namespace WellCommerce\Bundle\LayoutBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Translatable\Translation;
 use WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface;
 
 /**
  * Class LayoutBoxTranslation
  *
- * @ORM\Table(name="layout_box_translation")
- * @ORM\Entity
- *
- * @author Adam Piotrowski <adam@wellcommerce.org>
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class LayoutBoxTranslation implements LocaleAwareInterface
 {
@@ -30,31 +26,15 @@ class LayoutBoxTranslation implements LocaleAwareInterface
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255, nullable=false)
      */
     protected $name;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="content", type="text", nullable=true)
      */
     protected $content;
 
     /**
-     * Returns primary key identifier
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Returns name for current translation
-     *
      * @return string
      */
     public function getName()
@@ -63,9 +43,7 @@ class LayoutBoxTranslation implements LocaleAwareInterface
     }
 
     /**
-     * Sets name for current translation
-     *
-     * @param $name
+     * @param string $name
      */
     public function setName($name)
     {
@@ -73,8 +51,6 @@ class LayoutBoxTranslation implements LocaleAwareInterface
     }
 
     /**
-     * Returns content for current translation
-     *
      * @return string
      */
     public function getContent()
@@ -83,9 +59,7 @@ class LayoutBoxTranslation implements LocaleAwareInterface
     }
 
     /**
-     * Sets content for current translation
-     *
-     * @param $content
+     * @param string $content
      */
     public function setContent($content)
     {

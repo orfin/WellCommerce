@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours;
 
-use WellCommerce\Bundle\MediaBundle\Entity\Media;
+use WellCommerce\Bundle\MediaBundle\Entity\MediaInterface;
 
 /**
  * Class PhotoTrait
@@ -22,15 +22,12 @@ use WellCommerce\Bundle\MediaBundle\Entity\Media;
 trait PhotoTrait
 {
     /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\MediaBundle\Entity\Media")
-     * @ORM\JoinColumn(name="photo_id", referencedColumnName="id", onDelete="SET NULL")
+     * @var MediaInterface
      */
-    private $photo;
+    protected $photo;
 
     /**
-     * Returns photo
-     *
-     * @return mixed
+     * @return MediaInterface
      */
     public function getPhoto()
     {
@@ -38,11 +35,9 @@ trait PhotoTrait
     }
 
     /**
-     * Sets photo
-     *
-     * @param Media $photo
+     * @param MediaInterface $photo
      */
-    public function setPhoto(Media $photo = null)
+    public function setPhoto(MediaInterface $photo)
     {
         $this->photo = $photo;
     }

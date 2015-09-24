@@ -13,66 +13,50 @@
 namespace WellCommerce\Bundle\CmsBundle\Entity;
 
 use DateTime;
-use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
+use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
+use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\PhotoTrait;
 
 /**
  * Class News
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @ORM\Table(name="news")
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\CmsBundle\Repository\NewsRepository")
  */
-class News
+class News implements NewsInterface
 {
-    use ORMBehaviors\Translatable\Translatable;
-    use ORMBehaviors\Timestampable\Timestampable;
-    use ORMBehaviors\Blameable\Blameable;
+    use Translatable;
+    use Timestampable;
+    use Blameable;
     use PhotoTrait;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @var int
      */
-    private $id;
+    protected $id;
 
     /**
      * @var bool
-     *
-     * @ORM\Column(name="publish", type="boolean", options={"default" = 0})
      */
-    private $publish;
+    protected $publish;
 
     /**
      * @var DateTime $startDate
-     *
-     * @ORM\Column(type="datetime", nullable=true)
-     *
      */
-    private $startDate;
+    protected $startDate;
 
     /**
      * @var DateTime $endDate
-     *
-     * @ORM\Column(type="datetime", nullable=true)
-     *
      */
-    private $endDate;
+    protected $endDate;
 
     /**
      * @var bool
-     *
-     * @ORM\Column(name="featured", type="boolean")
      */
-    private $featured;
+    protected $featured;
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -80,7 +64,7 @@ class News
     }
 
     /**
-     * @return bool
+     * {@inheritdoc}
      */
     public function getPublish()
     {
@@ -88,15 +72,15 @@ class News
     }
 
     /**
-     * @param bool $publish
+     * {@inheritdoc}
      */
     public function setPublish($publish)
     {
-        $this->publish = $publish;
+        $this->publish = (bool)$publish;
     }
 
     /**
-     * @return DateTime
+     * {@inheritdoc}
      */
     public function getStartDate()
     {
@@ -104,7 +88,7 @@ class News
     }
 
     /**
-     * @param DateTime $startDate
+     * {@inheritdoc}
      */
     public function setStartDate(DateTime $startDate)
     {
@@ -112,7 +96,7 @@ class News
     }
 
     /**
-     * @return DateTime
+     * {@inheritdoc}
      */
     public function getEndDate()
     {
@@ -120,7 +104,7 @@ class News
     }
 
     /**
-     * @param DateTime $endDate
+     * {@inheritdoc}
      */
     public function setEndDate(DateTime $endDate)
     {
@@ -128,7 +112,7 @@ class News
     }
 
     /**
-     * @return bool
+     * {@inheritdoc}
      */
     public function getFeatured()
     {
@@ -136,10 +120,10 @@ class News
     }
 
     /**
-     * @param bool $featured
+     * {@inheritdoc}
      */
     public function setFeatured($featured)
     {
-        $this->featured = $featured;
+        $this->featured = (bool)$featured;
     }
 }

@@ -12,40 +12,24 @@
 
 namespace WellCommerce\Bundle\AttributeBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Knp\DoctrineBehaviors\Model\Translatable\Translation;
 use WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface;
 
 /**
- * AttributeGroupTranslation
+ * Class AttributeGroupTranslation
  *
- * @ORM\Table(name="attribute_group_translation")
- * @ORM\Entity
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class AttributeGroupTranslation implements LocaleAwareInterface
 {
-    use ORMBehaviors\Translatable\Translation;
+    use Translation;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255)
      */
-    private $name;
+    protected $name;
 
     /**
-     * Returns translation ID.
-     *
-     * @return integer The ID.
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Returns group name
-     *
      * @return string
      */
     public function getName()
@@ -54,16 +38,10 @@ class AttributeGroupTranslation implements LocaleAwareInterface
     }
 
     /**
-     * Sets group name
-     *
-     * @param $name
-     *
-     * @return $this
+     * @param string $name
      */
     public function setName($name)
     {
         $this->name = $name;
-
-        return $this;
     }
 }

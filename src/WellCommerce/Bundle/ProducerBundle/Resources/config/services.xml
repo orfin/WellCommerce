@@ -13,11 +13,10 @@
             <argument>WellCommerceProducerBundle:Producer</argument>
         </service>
 
-        <service id="producer.subscriber" class="WellCommerce\Bundle\ProducerBundle\EventListener\ProducerSubscriber">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <tag name="kernel.event_subscriber" />
+        <service id="producer.factory" class="WellCommerce\Bundle\ProducerBundle\Factory\ProducerFactory"/>
+
+        <service id="producer.event_dispatcher" class="WellCommerce\Bundle\ProducerBundle\EventDispatcher\ProducerEventDispatcher">
+            <argument type="service" id="event_dispatcher" />
         </service>
 
         <service id="producer.route.generator" class="WellCommerce\Bundle\ProducerBundle\Routing\ProducerRouteGenerator">
@@ -41,11 +40,9 @@
         </service>
 
         <service id="producer_menu.layout_box.configurator" class="WellCommerce\Bundle\ProducerBundle\Layout\ProducerMenuBoxConfigurator">
-            <argument>ProducerMenuBox</argument>
+            <argument>ProducerMenu</argument>
             <argument>producer_menu.layout_box.controller</argument>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
+            <argument type="service" id="translator_helper"/>
             <tag name="layout_box.configurator" />
         </service>
     </services>

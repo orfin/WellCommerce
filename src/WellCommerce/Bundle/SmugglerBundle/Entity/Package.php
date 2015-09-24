@@ -12,69 +12,49 @@
 
 namespace WellCommerce\Bundle\SmugglerBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 
 /**
  * Class Package
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @ORM\Table(name="smuggler_package")
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\SmugglerBundle\Repository\PackageRepository")
  */
-class Package
+class Package implements PackageInterface
 {
-    use ORMBehaviors\Timestampable\Timestampable;
+    use Timestampable;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @var int
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="full_name", type="string", length=255, nullable=false, unique=true)
      */
-    private $fullName;
+    protected $fullName;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255, nullable=false)
      */
-    private $name;
+    protected $name;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="vendor", type="string", length=255, nullable=false)
      */
-    private $vendor;
+    protected $vendor;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="local_version", type="string", length=255, nullable=true)
      */
-    private $localVersion;
+    protected $localVersion;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="remote_version", type="string", length=255, nullable=true)
      */
-    private $remoteVersion;
+    protected $remoteVersion;
 
     /**
-     * Get id.
-     *
-     * @return integer
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -82,7 +62,7 @@ class Package
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getFullName()
     {
@@ -90,7 +70,7 @@ class Package
     }
 
     /**
-     * @param string $fullName
+     * {@inheritdoc}
      */
     public function setFullName($fullName)
     {
@@ -98,7 +78,7 @@ class Package
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getName()
     {
@@ -106,7 +86,7 @@ class Package
     }
 
     /**
-     * @param string $name
+     * {@inheritdoc}
      */
     public function setName($name)
     {
@@ -114,7 +94,7 @@ class Package
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getVendor()
     {
@@ -122,7 +102,7 @@ class Package
     }
 
     /**
-     * @param string $vendor
+     * {@inheritdoc}
      */
     public function setVendor($vendor)
     {
@@ -130,7 +110,7 @@ class Package
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getLocalVersion()
     {
@@ -138,7 +118,7 @@ class Package
     }
 
     /**
-     * @param string $localVersion
+     * {@inheritdoc}
      */
     public function setLocalVersion($localVersion)
     {
@@ -146,7 +126,7 @@ class Package
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getRemoteVersion()
     {
@@ -154,7 +134,7 @@ class Package
     }
 
     /**
-     * @param string $remoteVersion
+     * {@inheritdoc}
      */
     public function setRemoteVersion($remoteVersion)
     {

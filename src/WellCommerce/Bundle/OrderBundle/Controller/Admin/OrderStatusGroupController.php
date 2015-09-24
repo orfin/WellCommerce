@@ -12,14 +12,12 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Controller\Admin;
 
-use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
+use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
  * Class OrderStatusGroupController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class OrderStatusGroupController extends AbstractAdminController
 {

@@ -12,9 +12,6 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Manager;
 
-use Symfony\Component\HttpFoundation\Request;
-use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
-
 /**
  * Interface ManagerInterface
  *
@@ -22,19 +19,10 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
  */
 interface ManagerInterface
 {
-    const PRE_UPDATE_EVENT  = 'pre_update';
-    const POST_UPDATE_EVENT = 'post_update';
-    const PRE_CREATE_EVENT  = 'pre_create';
-    const POST_CREATE_EVENT = 'post_create';
-    const PRE_REMOVE_EVENT  = 'pre_remove';
-    const POST_REMOVE_EVENT = 'post_remove';
-
     /**
-     * Returns the RedirectHelper
-     *
-     * @return \WellCommerce\Bundle\CoreBundle\Helper\Redirect\RedirectHelperInterface
+     * @return \Symfony\Component\Validator\Validator\ValidatorInterface
      */
-    public function getRedirectHelper();
+    public function getValidator();
 
     /**
      * Returns the FlashHelper
@@ -49,13 +37,6 @@ interface ManagerInterface
      * @return \WellCommerce\Bundle\CoreBundle\Helper\Image\ImageHelperInterface
      */
     public function getImageHelper();
-
-    /**
-     * Returns the EventDispatcher
-     *
-     * @return \Symfony\Component\EventDispatcher\EventDispatcherInterface
-     */
-    public function getEventDispatcher();
 
     /**
      * Returns the DoctrineHelper
@@ -74,23 +55,41 @@ interface ManagerInterface
     /**
      * Returns the Translator
      *
-     * @return \Symfony\Component\Translation\TranslatorInterface
+     * @return \WellCommerce\Bundle\CoreBundle\Helper\Translator\TranslatorHelperInterface
      */
-    public function getTranslator();
+    public function getTranslatorHelper();
 
     /**
-     * Sets the repository
-     *
-     * @param RepositoryInterface $repository
-     */
-    public function setRepository(RepositoryInterface $repository);
-
-    /**
-     * Returns the current repository
-     *
-     * @return RepositoryInterface
+     * @return \WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface
      */
     public function getRepository();
+
+    /**
+     * @return \WellCommerce\Bundle\CoreBundle\EventDispatcher\EventDispatcherInterface
+     */
+    public function getEventDispatcher();
+
+    /**
+     * @return \WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface
+     */
+    public function getFactory();
+
+    /**
+     * Returns form object
+     *
+     * @return \WellCommerce\Bundle\FormBundle\FormBuilderInterface
+     */
+    public function getFormBuilder();
+
+    /**
+     * Returns form instance from builder
+     *
+     * @param object $resource
+     * @param array  $config
+     *
+     * @return \WellCommerce\Bundle\FormBundle\Elements\FormInterface
+     */
+    public function getForm($resource, array $config = []);
 
     /**
      * Initializes new resource object
@@ -102,18 +101,16 @@ interface ManagerInterface
     /**
      * Persists new resource
      *
-     * @param object  $resource
-     * @param Request $request
+     * @param object $resource
      */
-    public function createResource($resource, Request $request);
+    public function createResource($resource);
 
     /**
      * Updates existing resource
      *
-     * @param object  $resource
-     * @param Request $request
+     * @param object $resource
      */
-    public function updateResource($resource, Request $request);
+    public function updateResource($resource);
 
     /**
      * Removes a resource
@@ -121,4 +118,9 @@ interface ManagerInterface
      * @param object $resource
      */
     public function removeResource($resource);
+
+    /**
+     * @return \WellCommerce\Bundle\MultiStoreBundle\Context\ShopContextInterface
+     */
+    public function getShopContext();
 }

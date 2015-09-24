@@ -61,6 +61,6 @@ class RoutingHelperExtension extends \Twig_Extension
     {
         $currentRoute = $this->requestHelper->getAttribute('_route');
 
-        return $route === $currentRoute;;
+        return $route === $currentRoute;
     }
 }

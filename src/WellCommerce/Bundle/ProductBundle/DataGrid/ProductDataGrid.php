@@ -11,13 +11,12 @@
  */
 namespace WellCommerce\Bundle\ProductBundle\DataGrid;
 
-use WellCommerce\Bundle\DataGridBundle\AbstractDataGrid;
+use WellCommerce\Bundle\CoreBundle\DataGrid\AbstractDataGrid;
 use WellCommerce\Bundle\DataGridBundle\Column\Column;
 use WellCommerce\Bundle\DataGridBundle\Column\ColumnCollection;
 use WellCommerce\Bundle\DataGridBundle\Column\Options\Appearance;
 use WellCommerce\Bundle\DataGridBundle\Column\Options\Filter;
 use WellCommerce\Bundle\DataGridBundle\Configuration\EventHandler\UpdateRowEventHandler;
-use WellCommerce\Bundle\DataGridBundle\DataGridInterface;
 use WellCommerce\Bundle\DataGridBundle\Options\OptionsInterface;
 
 /**
@@ -25,7 +24,7 @@ use WellCommerce\Bundle\DataGridBundle\Options\OptionsInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductDataGrid extends AbstractDataGrid implements DataGridInterface
+class ProductDataGrid extends AbstractDataGrid
 {
     /**
      * {@inheritdoc}
@@ -64,7 +63,7 @@ class ProductDataGrid extends AbstractDataGrid implements DataGridInterface
         ]));
 
         $collection->add(new Column([
-            'id'       => 'sellPrice',
+            'id'       => 'sellPriceNet',
             'caption'  => $this->trans('product.sell_price_net.label'),
             'editable' => true,
             'filter'   => new Filter([
@@ -102,7 +101,7 @@ class ProductDataGrid extends AbstractDataGrid implements DataGridInterface
 
         $eventHandlers->add(new UpdateRowEventHandler([
             'function' => $this->getJavascriptFunctionName('update'),
-            'route'    => $this->getRouteForAction('update'),
+            'route'    => $this->getActionUrl('update'),
         ]));
     }
 }

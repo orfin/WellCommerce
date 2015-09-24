@@ -4,12 +4,12 @@
         <div class="row">
             <div class="col-sm-9 col-xs-6">
                 <div class="row">
-                    {% for category in cmsPageTree if category.children|length %}
+                    {% for page in cmsPages if page.children|length %}
                         <div class="col-sm-4 menu">
-                            <h3>{{ category.name }}</h3>
+                            <h3>{{ page.name }}</h3>
                             <ul>
-                                {% for page in category.children %}
-                                    <li><a href="{{ path(page.route) }}">{{ page.name }}</a></li>
+                                {% for childPage in page.children %}
+                                    <li><a href="{{ childPage.route }}">{{ childPage.name }}</a></li>
                                 {% endfor %}
                             </ul>
                         </div>
@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div class="col-sm-3 col-xs-6">
-                <div class="fb-like-box" data-href="https://www.facebook.com/WellCommerce" data-colorscheme="dark" data-show-faces="true" data-header="false" data-stream="false" data-show-border="false"></div>
+                <div class="fb-page" data-href="https://www.facebook.com/WellCommerce" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="true" data-show-posts="true"></div>
             </div>
         </div>
     </div>

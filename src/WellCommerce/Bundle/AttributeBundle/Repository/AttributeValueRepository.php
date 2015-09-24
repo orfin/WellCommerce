@@ -13,7 +13,6 @@ namespace WellCommerce\Bundle\AttributeBundle\Repository;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\AttributeBundle\Entity\Attribute;
-use WellCommerce\Bundle\AttributeBundle\Entity\AttributeValue;
 use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 
 /**
@@ -28,7 +27,7 @@ class AttributeValueRepository extends AbstractEntityRepository implements Attri
      */
     public function findAll()
     {
-        $qb = parent::getQueryBuilder()
+        $qb = $this->getQueryBuilder()
             ->addSelect('attribute_group.id, attribute_value_translation.name')
             ->leftJoin(
                 'WellCommerce\Bundle\AttributeBundle\Entity\AttributeValueTranslation',
@@ -48,7 +47,7 @@ class AttributeValueRepository extends AbstractEntityRepository implements Attri
      */
     public function findAllByAttributeId($id)
     {
-        $qb = parent::getQueryBuilder()
+        $qb = $this->getQueryBuilder()
             ->addSelect('attribute_value.id, attribute_value_translation.name')
             ->leftJoin(
                 'WellCommerce\Bundle\AttributeBundle\Entity\AttributeValueTranslation',
@@ -87,24 +86,5 @@ class AttributeValueRepository extends AbstractEntityRepository implements Attri
         }
 
         return $collection;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addAttributeValue(Attribute $attribute, $name)
-    {
-        $locales = $this->getLocales();
-        $value   = new AttributeValue();
-
-        foreach ($locales as $locale) {
-            $value->translate($locale->getCode())->setName($name);
-        }
-        $value->mergeNewTranslations();
-        $value->setAttribute($attribute);
-
-        $this->getEntityManager()->persist($value);
-
-        return $value;
     }
 }

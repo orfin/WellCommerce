@@ -11,101 +11,72 @@
  */
 namespace WellCommerce\Bundle\CartBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
-use WellCommerce\Bundle\ClientBundle\Entity\Client;
+use Doctrine\Common\Collections\Collection;
+use WellCommerce\Bundle\CartBundle\Visitor\CartVisitorInterface;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientAwareTrait;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\Timestampable\TimestampableTrait;
-use WellCommerce\Bundle\MultiStoreBundle\Entity\Shop;
-use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod;
+use WellCommerce\Bundle\CoreBundle\Entity\AddressInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\ContactDetailsTrait;
+use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopAwareTrait;
+use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodAwareTrait;
+use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCostInterface;
 
 /**
  * Class Cart
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @ORM\Table(name="cart")
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\CartBundle\Repository\CartRepository")
  */
-class Cart
+class Cart implements CartInterface
 {
     use TimestampableTrait;
+    use ShopAwareTrait;
+    use PaymentMethodAwareTrait;
+    use ClientAwareTrait;
+    use ContactDetailsTrait;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\CartBundle\Entity\CartProduct", mappedBy="cart", cascade={"persist"})
+     * @var Collection
      */
     protected $products;
 
     /**
-     * @var float
-     *
-     * @ORM\Column(name="session_id", type="string", nullable=false)
+     * @var string
      */
     protected $sessionId;
 
     /**
-     * @ORM\OneToOne(targetEntity="WellCommerce\Bundle\ClientBundle\Entity\Client")
-     * @ORM\JoinColumn(name="client_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
+     * @var string
      */
-    protected $client;
+    protected $currency;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod")
-     * @ORM\JoinColumn(name="payment_method_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
-     */
-    protected $paymentMethod;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod")
-     * @ORM\JoinColumn(name="shipping_method_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
-     */
-    protected $shippingMethod;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\MultiStoreBundle\Entity\Shop")
-     * @ORM\JoinColumn(name="shop_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
-     */
-    protected $shop;
-
-    /**
-     * @ORM\Embedded(class = "WellCommerce\Bundle\CartBundle\Entity\CartTotals", columnPrefix = "total_")
+     * @var CartTotals
      */
     protected $totals;
 
     /**
-     * @ORM\Embedded(class = "WellCommerce\Bundle\CoreBundle\Entity\Address", columnPrefix = "billing_address_")
+     * @var AddressInterface
      */
     protected $billingAddress;
 
     /**
-     * @ORM\Embedded(class = "WellCommerce\Bundle\CoreBundle\Entity\Address", columnPrefix = "shipping_address_")
+     * @var AddressInterface
      */
     protected $shippingAddress;
-    
-    /**
-     * @ORM\Embedded(class = "WellCommerce\Bundle\CoreBundle\Entity\ContactDetails", columnPrefix = "contact_details_")
-     */
-    protected $contactDetails;
-    
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->products = new ArrayCollection();
-        $this->totals   = new CartTotals();
-    }
 
     /**
-     * @return int
+     * @var ShippingMethodCostInterface
+     */
+    protected $shippingMethodCost;
+
+    /**
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -113,7 +84,7 @@ class Cart
     }
 
     /**
-     * @return float
+     * {@inheritdoc}
      */
     public function getSessionId()
     {
@@ -121,7 +92,7 @@ class Cart
     }
 
     /**
-     * @param float $sessionId
+     * {@inheritdoc}
      */
     public function setSessionId($sessionId)
     {
@@ -129,84 +100,23 @@ class Cart
     }
 
     /**
-     * @param CartProduct $cartProduct
+     * {@inheritdoc}
      */
-    public function addProduct(CartProduct $cartProduct)
+    public function addProduct(CartProductInterface $cartProduct)
     {
         $this->products->add($cartProduct);
     }
 
-    public function removeProduct(CartProduct $cartProduct)
+    /**
+     * {@inheritdoc}
+     */
+    public function removeProduct(CartProductInterface $cartProduct)
     {
         $this->products->removeElement($cartProduct);
     }
 
     /**
-     * @return mixed
-     */
-    public function getClient()
-    {
-        return $this->client;
-    }
-
-    /**
-     * @param null|Client $client
-     */
-    public function setClient(Client $client = null)
-    {
-        $this->client = $client;
-    }
-
-    /**
-     * @return Shop
-     */
-    public function getShop()
-    {
-        return $this->shop;
-    }
-
-    /**
-     * @param Shop $shop
-     */
-    public function setShop(Shop $shop)
-    {
-        $this->shop = $shop;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPaymentMethod()
-    {
-        return $this->paymentMethod;
-    }
-
-    /**
-     * @param mixed $paymentMethod
-     */
-    public function setPaymentMethod($paymentMethod)
-    {
-        $this->paymentMethod = $paymentMethod;
-    }
-
-    /**
-     * @return null|ShippingMethod
-     */
-    public function getShippingMethod()
-    {
-        return $this->shippingMethod;
-    }
-
-    /**
-     * @param mixed $shippingMethod
-     */
-    public function setShippingMethod(ShippingMethod $shippingMethod = null)
-    {
-        $this->shippingMethod = $shippingMethod;
-    }
-
-    /**
-     * @return CartTotals
+     * {@inheritdoc}
      */
     public function getTotals()
     {
@@ -214,15 +124,15 @@ class Cart
     }
 
     /**
-     * @param CartTotals $cartTotals
+     * {@inheritdoc}
      */
-    public function setTotals(CartTotals $cartTotals)
+    public function setTotals(CartTotalsInterface $cartTotals)
     {
         $this->totals = $cartTotals;
     }
 
     /**
-     * @return ArrayCollection|\WellCommerce\Bundle\CartBundle\Entity\CartProduct[]
+     * {@inheritdoc}
      */
     public function getProducts()
     {
@@ -230,15 +140,15 @@ class Cart
     }
 
     /**
-     * @param ArrayCollection $products
+     * {@inheritdoc}
      */
-    public function setProducts(ArrayCollection $products)
+    public function setProducts(Collection $products)
     {
         $this->products = $products;
     }
 
     /**
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getBillingAddress()
     {
@@ -246,15 +156,15 @@ class Cart
     }
 
     /**
-     * @param mixed $billingAddress
+     * {@inheritdoc}
      */
-    public function setBillingAddress($billingAddress)
+    public function setBillingAddress(AddressInterface $billingAddress)
     {
         $this->billingAddress = $billingAddress;
     }
 
     /**
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getShippingAddress()
     {
@@ -262,31 +172,63 @@ class Cart
     }
 
     /**
-     * @param mixed $shippingAddress
+     * {@inheritdoc}
      */
-    public function setShippingAddress($shippingAddress)
+    public function setShippingAddress(AddressInterface $shippingAddress)
     {
         $this->shippingAddress = $shippingAddress;
     }
 
     /**
-     * @return mixed
+     * {@inheritdoc}
      */
-    public function getContactDetails()
+    public function acceptVisitor(CartVisitorInterface $visitor)
     {
-        return $this->contactDetails;
+        $visitor->visitCart($this);
     }
 
     /**
-     * @param mixed $contactDetails
+     * {@inheritdoc}
      */
-    public function setContactDetails($contactDetails)
+    public function getShippingMethodCost()
     {
-        $this->contactDetails = $contactDetails;
+        return $this->shippingMethodCost;
     }
 
     /**
-     * @return bool
+     * {@inheritdoc}
+     */
+    public function setShippingMethodCost(ShippingMethodCostInterface $shippingMethodCost = null)
+    {
+        $this->shippingMethodCost = $shippingMethodCost;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCurrency()
+    {
+        return $this->currency;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCurrency($currency)
+    {
+        $this->currency = $currency;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasMethods()
+    {
+        return (bool)($this->getShippingMethodCost() instanceof ShippingMethodCostInterface && $this->getPaymentMethod() instanceof PaymentMethodInterface);
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function isEmpty()
     {

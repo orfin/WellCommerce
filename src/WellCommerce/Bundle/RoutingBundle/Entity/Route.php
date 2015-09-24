@@ -12,45 +12,35 @@
 
 namespace WellCommerce\Bundle\RoutingBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\RoutingBundle\Repository\RouteRepository")
- * @ORM\Table(name="route")
- * @ORM\InheritanceType("JOINED")
- * @ORM\DiscriminatorColumn(name="type", type="string")
- * @ORM\DiscriminatorMap({
- *      "route"             = "WellCommerce\Bundle\RoutingBundle\Entity\Route",
- *      "product"           = "WellCommerce\Bundle\ProductBundle\Entity\ProductRoute",
- *      "product_status"    = "WellCommerce\Bundle\ProductBundle\Entity\ProductStatusRoute",
- *      "producer"          = "WellCommerce\Bundle\ProducerBundle\Entity\ProducerRoute",
- *      "category"          = "WellCommerce\Bundle\CategoryBundle\Entity\CategoryRoute",
- *      "page"              = "WellCommerce\Bundle\CmsBundle\Entity\PageRoute"
- * })
+ * Class Route
+ *
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class Route implements RouteInterface
 {
     /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @var int
      */
     protected $id;
 
     /**
-     * @ORM\Column(name="path", type="string")
+     * @var string
      */
-    private $path;
+    protected $path;
 
     /**
-     * @ORM\Column(name="locale", type="string", length=255, nullable=false)
+     * @var string
      */
     protected $locale;
 
+    /**
+     * @var object
+     */
     protected $identifier;
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getId()
     {
@@ -58,7 +48,7 @@ class Route implements RouteInterface
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getPath()
     {
@@ -66,7 +56,7 @@ class Route implements RouteInterface
     }
 
     /**
-     * @param mixed $path
+     * @param string $path
      */
     public function setPath($path)
     {
@@ -74,7 +64,7 @@ class Route implements RouteInterface
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getLocale()
     {
@@ -82,7 +72,7 @@ class Route implements RouteInterface
     }
 
     /**
-     * @param mixed $locale
+     * @param string $locale
      */
     public function setLocale($locale)
     {
@@ -90,7 +80,7 @@ class Route implements RouteInterface
     }
 
     /**
-     * @return mixed
+     * @return object
      */
     public function getIdentifier()
     {
@@ -98,7 +88,7 @@ class Route implements RouteInterface
     }
 
     /**
-     * @param mixed $identifier
+     * @param object $identifier
      */
     public function setIdentifier($identifier)
     {

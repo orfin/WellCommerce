@@ -1,0 +1,50 @@
+WellCommerce\Bundle\OrderBundle\Entity\OrderModifier:
+    type: entity
+    table: orders_modifier
+    repositoryClass: WellCommerce\Bundle\OrderBundle\Repository\OrderModifierRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    embedded:
+        modifierDetails:
+            class: WellCommerce\Bundle\OrderBundle\Entity\OrderModifierDetails
+            columnPrefix: modifier_details_
+    fields:
+        netValue:
+            type: decimal
+            scale: 4
+            nullable: false
+            precision: 15
+            column: net_value
+        taxValue:
+            type: decimal
+            scale: 4
+            nullable: false
+            precision: 15
+            column: tax_value
+        grossValue:
+            type: decimal
+            scale: 4
+            nullable: false
+            precision: 15
+            column: gross_value
+        increase:
+            type: boolean
+            nullable: false
+            column: is_increase
+        hierarchy:
+            type: integer
+            nullable: false
+            options:
+                default: 0
+    manyToOne:
+        order:
+            targetEntity: WellCommerce\Bundle\OrderBundle\Entity\Order
+            fetch: LAZY
+            inversedBy: modifiers
+            joinColumns:
+                order_id:
+                    referencedColumnName: id
+                    onDelete: CASCADE

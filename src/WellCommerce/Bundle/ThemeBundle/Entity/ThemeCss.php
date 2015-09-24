@@ -12,58 +12,38 @@
 
 namespace WellCommerce\Bundle\ThemeBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 
 /**
- * ThemeCss
+ * Class ThemeCss
  *
- * @ORM\Table("theme_css")
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\ThemeBundle\Repository\ThemeCssRepository")
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ThemeCss
+class ThemeCss implements ThemeCssInterface
 {
-    use ORMBehaviors\Timestampable\Timestampable;
+    use Timestampable, ThemeAwareTrait;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @var int
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="class", type="string", length=255)
      */
-    private $class;
+    protected $class;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="selector", type="string", length=255)
      */
-    private $selector;
+    protected $selector;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="attribute", type="string", length=255)
      */
-    private $attribute;
+    protected $attribute;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\ThemeBundle\Entity\Theme", inversedBy="css")
-     * @ORM\JoinColumn(name="theme_id", referencedColumnName="id", nullable=false)
-     */
-    private $theme;
-
-    /**
-     * Returns identifier
-     *
      * @return int
      */
     public function getId()
@@ -72,8 +52,6 @@ class ThemeCss
     }
 
     /**
-     * Returns css atribute name
-     *
      * @return string
      */
     public function getAttribute()
@@ -82,8 +60,6 @@ class ThemeCss
     }
 
     /**
-     * Sets css atribute name
-     *
      * @param string $attribute
      */
     public function setAttribute($attribute)
@@ -92,8 +68,6 @@ class ThemeCss
     }
 
     /**
-     * Returns css class
-     *
      * @return string
      */
     public function getClass()
@@ -102,8 +76,6 @@ class ThemeCss
     }
 
     /**
-     * Sets css class
-     *
      * @param string $class
      */
     public function setClass($class)
@@ -112,8 +84,6 @@ class ThemeCss
     }
 
     /**
-     * Returns css selector name
-     *
      * @return string
      */
     public function getSelector()
@@ -122,32 +92,10 @@ class ThemeCss
     }
 
     /**
-     * Sets css selector name
-     *
      * @param string $selector
      */
     public function setSelector($selector)
     {
         $this->selector = $selector;
-    }
-
-    /**
-     * Returns theme object
-     *
-     * @return mixed
-     */
-    public function getTheme()
-    {
-        return $this->theme;
-    }
-
-    /**
-     * Sets theme object
-     *
-     * @param Theme $theme
-     */
-    public function setTheme(Theme $theme)
-    {
-        $this->theme = $theme;
     }
 }

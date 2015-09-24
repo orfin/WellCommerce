@@ -20,17 +20,23 @@ namespace WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours;
 trait EnableableTrait
 {
     /**
-     * @ORM\Column(name="enabled", type="boolean")
+     * @var bool
      */
-    private $enabled;
+    protected $enabled;
 
+    /**
+     * @return bool
+     */
     public function getEnabled()
     {
         return $this->enabled;
     }
 
+    /**
+     * @param bool $enabled
+     */
     public function setEnabled($enabled)
     {
-        $this->enabled = $enabled;
+        $this->enabled = (bool)$enabled;
     }
 }

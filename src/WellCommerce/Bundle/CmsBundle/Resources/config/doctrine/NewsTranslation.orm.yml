@@ -1,0 +1,27 @@
+WellCommerce\Bundle\CmsBundle\Entity\NewsTranslation:
+    type: entity
+    table: news_translation
+    fields:
+        topic:
+            type: string
+            length: 255
+            nullable: false
+        summary:
+            type: text
+            nullable: false
+        content:
+            type: text
+            nullable: false
+        metaTitle:
+            type: string
+            length: 255
+            nullable: true
+            column: meta_title
+        metaKeywords:
+            type: text
+            nullable: true
+            column: meta_keywords
+        metaDescription:
+            type: text
+            nullable: true
+            column: meta_description

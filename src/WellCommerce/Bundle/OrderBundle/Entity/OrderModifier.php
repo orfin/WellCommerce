@@ -2,65 +2,50 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\HierarchyTrait;
+use WellCommerce\Bundle\CoreBundle\Entity\HierarchyAwareTrait;
 
 /**
  * Class OrderModifier
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @ORM\Table(name="orders_modifier")
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\OrderBundle\Repository\OrderModifierRepository")
  */
-class OrderModifier
+class OrderModifier implements OrderModifierInterface
 {
-    use HierarchyTrait;
+    use HierarchyAwareTrait;
+    use OrderAwareTrait;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @var int
      */
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\OrderBundle\Entity\Order", inversedBy="modifiers")
-     * @ORM\JoinColumn(name="order_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
-     */
-    protected $order;
-
-    /**
-     * @ORM\Column(name="net_value", type="decimal", precision=15, scale=4, nullable=false)
+     * @var float
      */
     protected $netValue;
 
     /**
-     * @ORM\Column(name="tax_value", type="decimal", precision=15, scale=4, nullable=false)
+     * @var float
      */
     protected $taxValue;
 
     /**
-     * @ORM\Column(name="gross_value", type="decimal", precision=15, scale=4, nullable=false)
+     * @var float
      */
     protected $grossValue;
 
     /**
      * @var bool
-     *
-     * @ORM\Column(name="is_increase", type="boolean", nullable=false)
      */
     protected $increase;
 
     /**
-     * @ORM\Embedded(class = "WellCommerce\Bundle\OrderBundle\Entity\OrderModifierDetails", columnPrefix = "modifier_detalils_")
+     * @var OrderModifierDetailsInterface
      */
     protected $modifierDetails;
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -68,23 +53,7 @@ class OrderModifier
     }
 
     /**
-     * @return Order
-     */
-    public function getOrder()
-    {
-        return $this->order;
-    }
-
-    /**
-     * @param Order $order
-     */
-    public function setOrder(Order $order)
-    {
-        $this->order = $order;
-    }
-
-    /**
-     * @return float
+     * {@inheritdoc}
      */
     public function getNetValue()
     {
@@ -92,15 +61,15 @@ class OrderModifier
     }
 
     /**
-     * @param float $netValue
+     * {@inheritdoc}
      */
     public function setNetValue($netValue)
     {
-        $this->netValue = $netValue;
+        $this->netValue = (float)$netValue;
     }
 
     /**
-     * @return float
+     * {@inheritdoc}
      */
     public function getTaxValue()
     {
@@ -108,15 +77,15 @@ class OrderModifier
     }
 
     /**
-     * @param float $taxValue
+     * {@inheritdoc}
      */
     public function setTaxValue($taxValue)
     {
-        $this->taxValue = $taxValue;
+        $this->taxValue = (float)$taxValue;
     }
 
     /**
-     * @return float
+     * {@inheritdoc}
      */
     public function getGrossValue()
     {
@@ -124,15 +93,15 @@ class OrderModifier
     }
 
     /**
-     * @param float $grossValue
+     * {@inheritdoc}
      */
     public function setGrossValue($grossValue)
     {
-        $this->grossValue = $grossValue;
+        $this->grossValue = (float)$grossValue;
     }
 
     /**
-     * @return bool
+     * {@inheritdoc}
      */
     public function isIncrease()
     {
@@ -140,15 +109,15 @@ class OrderModifier
     }
 
     /**
-     * @param bool $increase
+     * {@inheritdoc}
      */
     public function setIncrease($increase)
     {
-        $this->increase = $increase;
+        $this->increase = (bool)$increase;
     }
 
     /**
-     * @return OrderModifierDetails
+     * {@inheritdoc}
      */
     public function getModifierDetails()
     {
@@ -156,9 +125,9 @@ class OrderModifier
     }
 
     /**
-     * @param OrderModifierDetails $modifierDetails
+     * {@inheritdoc}
      */
-    public function setModifierDetails(OrderModifierDetails $modifierDetails)
+    public function setModifierDetails(OrderModifierDetailsInterface $modifierDetails)
     {
         $this->modifierDetails = $modifierDetails;
     }

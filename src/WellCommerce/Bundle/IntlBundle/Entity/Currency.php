@@ -12,40 +12,30 @@
 
 namespace WellCommerce\Bundle\IntlBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
+use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 
 /**
- * Currency
+ * Class Currency
  *
- * @ORM\Table("currency")
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\IntlBundle\Repository\CurrencyRepository")
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Currency
+class Currency implements CurrencyInterface
 {
-    use ORMBehaviors\Timestampable\Timestampable;
-    use ORMBehaviors\Blameable\Blameable;
+    use Timestampable, Blameable;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="code", type="string", length=12)
      */
-    private $code;
+    protected $code;
 
     /**
-     * Get id.
-     *
-     * @return integer
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -53,9 +43,7 @@ class Currency
     }
 
     /**
-     * Set code.
-     *
-     * @param string $code
+     * {@inheritdoc}
      */
     public function setCode($code)
     {
@@ -63,9 +51,7 @@ class Currency
     }
 
     /**
-     * Get code.
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getCode()
     {

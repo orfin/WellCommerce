@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\AvailabilityBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use WellCommerce\Bundle\AvailabilityBundle\Entity\Availability;
 use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
 
 /**
@@ -31,7 +30,7 @@ class LoadAvailabilityData extends AbstractDataFixture
     public function load(ObjectManager $manager)
     {
         foreach (self::$samples as $name) {
-            $availability = new Availability();
+            $availability = $this->get('availability.factory')->create();
             $availability->translate('en')->setName($name);
             $availability->mergeNewTranslations();
             $manager->persist($availability);

@@ -40,13 +40,22 @@ interface RouteInterface
     public function getLocale();
 
     /**
-     * @param mixed $locale
+     * @param string $locale
      */
     public function setLocale($locale);
 
+    /**
+     * @param object $identifier
+     */
     public function setIdentifier($identifier);
 
+    /**
+     * @return object
+     */
     public function getIdentifier();
 
+    /**
+     * @return string
+     */
     public function getType();
 }

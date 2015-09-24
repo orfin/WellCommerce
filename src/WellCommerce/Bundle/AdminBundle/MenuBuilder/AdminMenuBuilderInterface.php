@@ -24,17 +24,7 @@ interface AdminMenuBuilderInterface
      *
      * @return array
      */
-    public function getMenu();
-
-    /**
-     * Sorting function for admin menu items
-     *
-     * @param AdminMenuItemInterface $a
-     * @param AdminMenuItemInterface $b
-     *
-     * @return integer
-     */
-    public function sortMenu(AdminMenuItemInterface $a, AdminMenuItemInterface $b);
+    public function createMenu();
 
     /**
      * Adds new element to menu

@@ -52,8 +52,10 @@ class XmlLoader
      */
     public function load($file)
     {
-        $path = $this->locateFile($file);
-        $xml  = $this->parseFile($path);
+        $path     = $this->locateFile($file);
+        $filePath = is_array($path) ? current($path) : $path;
+        $xml      = $this->parseFile($filePath);
+
         $this->parseItems($xml);
     }
 

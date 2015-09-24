@@ -12,41 +12,31 @@
 
 namespace WellCommerce\Bundle\TaxBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
+use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
+use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 
 /**
  * Class Tax
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @ORM\Table(name="tax")
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\TaxBundle\Repository\TaxRepository")
  */
-class Tax
+class Tax implements TaxInterface
 {
-    use ORMBehaviors\Translatable\Translatable;
-    use ORMBehaviors\Timestampable\Timestampable;
-    use ORMBehaviors\Blameable\Blameable;
+    use Translatable, Timestampable, Blameable;
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var float
-     *
-     * @ORM\Column(name="value", type="decimal", precision=15, scale=4)
      */
-    private $value;
+    protected $value;
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -54,7 +44,7 @@ class Tax
     }
 
     /**
-     * @return float
+     * {@inheritdoc}
      */
     public function getValue()
     {
@@ -62,22 +52,10 @@ class Tax
     }
 
     /**
-     * @param float $value
+     * {@inheritdoc}
      */
     public function setValue($value)
     {
         $this->value = $value;
-    }
-
-    /**
-     * Calculates gross price
-     *
-     * @param float $netPrice
-     *
-     * @return float
-     */
-    public function calculateGrossPrice($netPrice)
-    {
-        return $netPrice + ($netPrice * ($this->value / 100));
     }
 }

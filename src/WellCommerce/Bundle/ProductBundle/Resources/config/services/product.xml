@@ -5,37 +5,22 @@
 
     <services>
         <service id="product.manager.admin" class="WellCommerce\Bundle\ProductBundle\Manager\Admin\ProductManager">
-            <argument type="service" id="flash_helper"/>
-            <argument type="service" id="redirect_helper"/>
-            <argument type="service" id="image_helper"/>
-            <argument type="service" id="event_dispatcher"/>
-            <argument type="service" id="doctrine_helper"/>
-            <argument type="service" id="translator"/>
-            <argument type="service" id="request_helper"/>
-            <call method="setRepository">
-                <argument type="service" id="product.repository"/>
-            </call>
-            <call method="setFormBuilder">
-                <argument type="service" id="product.form_builder"/>
-            </call>
-            <call method="setDataGrid">
-                <argument type="service" id="product.datagrid"/>
+            <argument type="service" id="product.repository"/>
+            <argument type="service" id="product.event_dispatcher"/>
+            <argument type="service" id="product.factory"/>
+            <argument type="service" id="product.form_builder"/>
+            <argument type="service" id="product.datagrid"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
             </call>
         </service>
 
         <service id="product.manager.front" class="WellCommerce\Bundle\ProductBundle\Manager\Front\ProductManager">
-            <argument type="service" id="flash_helper"/>
-            <argument type="service" id="redirect_helper"/>
-            <argument type="service" id="image_helper"/>
-            <argument type="service" id="event_dispatcher"/>
-            <argument type="service" id="doctrine_helper"/>
-            <argument type="service" id="translator"/>
-            <argument type="service" id="request_helper"/>
-            <call method="setRepository">
-                <argument type="service" id="product.repository"/>
-            </call>
-            <call method="setProviders">
-                <argument type="service" id="resource.provider.collection" />
+            <argument type="service" id="product.repository"/>
+            <argument type="service" id="product.event_dispatcher"/>
+            <argument type="service" id="product.factory"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
             </call>
         </service>
         
@@ -72,6 +57,10 @@
         <service id="product.dataset.admin" class="WellCommerce\Bundle\ProductBundle\DataSet\Admin\ProductDataSet">
             <argument key="identifier">product</argument>
             <argument type="service" id="product.dataset.loader.admin"/>
+            <argument type="service" id="product.event_dispatcher"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
@@ -82,15 +71,17 @@
         <service id="product.dataset.loader.front" class="%dataset.loader.class%">
             <argument type="service" id="product.dataset.query_builder.front"/>
             <argument type="service" id="dataset.processor"/>
+            <argument type="service" id="doctrine.cache"/>
         </service>
 
         <service id="product.dataset.front" class="WellCommerce\Bundle\ProductBundle\DataSet\Front\ProductDataSet">
             <argument key="identifier">product</argument>
             <argument type="service" id="product.dataset.loader.front"/>
-            <configurator service="dataset.configurator" method="configure"/>
+            <argument type="service" id="product.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
+            <configurator service="dataset.configurator" method="configure"/>
         </service>
 
         <service id="product.collection.front" parent="dataset.collection_builder.factory">
@@ -107,24 +98,19 @@
         <service id="product.datagrid" class="WellCommerce\Bundle\ProductBundle\DataGrid\ProductDataGrid">
             <argument key="identifier">product</argument>
             <argument type="service" id="product.dataset.admin"/>
+            <argument type="service" id="product.event_dispatcher"/>
             <call method="setContainer">
-                <argument type="service" id="service_container"/>
+                <argument type="service" id="service_container" />
             </call>
         </service>
 
         <service id="product.form_builder" class="WellCommerce\Bundle\ProductBundle\Form\ProductFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
+            <argument type="service" id="product.event_dispatcher"/>
             <call method="setContainer">
-                <argument type="service" id="service_container"/>
+                <argument type="service" id="service_container" />
             </call>
-        </service>
-
-        <service id="product.subscriber" class="WellCommerce\Bundle\ProductBundle\EventListener\ProductSubscriber">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <tag name="kernel.event_subscriber" />
         </service>
 
         <service id="product_info.layout_box.controller" class="WellCommerce\Bundle\ProductBundle\Controller\Box\ProductInfoBoxController">
@@ -135,11 +121,9 @@
         </service>
 
         <service id="product_info.layout_box.configurator" class="WellCommerce\Bundle\ProductBundle\Layout\ProductInfoBoxConfigurator">
-            <argument>ProductInfoBox</argument>
+            <argument>ProductInfo</argument>
             <argument>product_info.layout_box.controller</argument>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
+            <argument type="service" id="translator_helper"/>
             <tag name="layout_box.configurator" />
         </service>
 
@@ -151,12 +135,16 @@
         </service>
 
         <service id="layered_navigation.layout_box.configurator" class="WellCommerce\Bundle\ProductBundle\Layout\ProductLayeredNavigationBoxConfigurator">
-            <argument>ProductLayeredNavigationBox</argument>
+            <argument>ProductLayeredNavigation</argument>
             <argument>layered_navigation.layout_box.controller</argument>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
+            <argument type="service" id="translator_helper"/>
             <tag name="layout_box.configurator" />
+        </service>
+
+        <service id="product.factory" class="WellCommerce\Bundle\ProductBundle\Factory\ProductFactory" />
+
+        <service id="product.event_dispatcher" class="WellCommerce\Bundle\ProductBundle\EventDispatcher\ProductEventDispatcher">
+            <argument type="service" id="event_dispatcher" />
         </service>
 
         <service id="product.route.generator" class="WellCommerce\Bundle\ProductBundle\Routing\ProductRouteGenerator">
@@ -165,6 +153,15 @@
             </argument>
             <argument type="collection" key="requirements" />
             <tag name="route.generator" />
+        </service>
+
+        <service id="product.doctrine.event_subscriber" class="WellCommerce\Bundle\ProductBundle\EventListener\ProductDoctrineEventSubscriber">
+            <tag name="doctrine.event_subscriber" connection="default" />
+        </service>
+
+        <service id="product.request_param_converter" class="WellCommerce\Bundle\ProductBundle\Request\ParamConverter\ProductParamConverter">
+            <argument type="service" id="product.repository" />
+            <tag name="request.param_converter" converter="product" priority="10"/>
         </service>
     </services>
 </container>

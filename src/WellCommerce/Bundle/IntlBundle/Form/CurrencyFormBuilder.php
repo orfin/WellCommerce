@@ -11,17 +11,16 @@
  */
 namespace WellCommerce\Bundle\IntlBundle\Form;
 
-use WellCommerce\Bundle\FormBundle\Builder\AbstractFormBuilder;
-use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
-use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
+use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Bundle\IntlBundle\Repository\CurrencyRepositoryInterface;
+use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
  * Class CurrencyFormBuilder
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class CurrencyFormBuilder extends AbstractFormBuilder implements FormBuilderInterface
+class CurrencyFormBuilder extends AbstractFormBuilder
 {
     /**
      * @var CurrencyRepositoryInterface

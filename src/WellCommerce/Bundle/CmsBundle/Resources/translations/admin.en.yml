@@ -1,0 +1,13 @@
+page:
+    heading:
+        index: CMS pages
+        add: Add CMS page
+        edit: Edit CMS page
+    label:
+        id: ID
+        name: Name
+        hierarchy: Hierarchy
+        publish: Published
+    menu: CMS Pages
+    tip:
+        client_groups: '<p><strong>Client</strong> groups help</p>'

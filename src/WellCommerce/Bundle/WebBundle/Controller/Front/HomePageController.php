@@ -12,20 +12,17 @@
 
 namespace WellCommerce\Bundle\WebBundle\Controller\Front;
 
-use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
-use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
+use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
 
 /**
  * Class HomePageController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
-class HomePageController extends AbstractFrontController implements FrontControllerInterface
+class HomePageController extends AbstractController
 {
     public function indexAction()
     {
-        return [];
+        return $this->displayTemplate('index');
     }
 }

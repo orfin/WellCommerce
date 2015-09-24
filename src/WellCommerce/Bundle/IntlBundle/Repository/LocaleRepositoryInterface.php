@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\IntlBundle\Repository;
 
-use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\DataSetAwareRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
@@ -20,19 +19,19 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-interface LocaleRepositoryInterface extends DataSetAwareRepositoryInterface, RepositoryInterface
+interface LocaleRepositoryInterface extends RepositoryInterface
 {
     /**
      * Returns an array of locales fetched from intl component
      *
-     * @return mixed
+     * @return array
      */
     public function getLocaleNames();
 
     /**
      * Returns defined locales as an array
      *
-     * @return mixed
+     * @return array
      */
     public function getAvailableLocales();
 }

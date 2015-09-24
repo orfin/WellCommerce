@@ -18,13 +18,11 @@ use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
  * Class ClientMenuBoxController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class ClientMenuBoxController extends AbstractBoxController
 {
     public function indexAction()
     {
-        return [];
+        return $this->displayTemplate('index');
     }
 }

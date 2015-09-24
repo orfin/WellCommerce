@@ -19,17 +19,15 @@ use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
  * Class CategoryInfoBoxController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class CategoryInfoBoxController extends AbstractBoxController implements BoxControllerInterface
 {
     public function indexAction()
     {
-        $provider = $this->getManager()->getCategoryProvider();
+        $provider = $this->manager->getCategoryProvider();
 
-        return [
+        return $this->displayTemplate('index', [
             'category' => $provider->getCurrentCategory()
-        ];
+        ]);
     }
 }

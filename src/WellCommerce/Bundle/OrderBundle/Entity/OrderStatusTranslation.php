@@ -12,41 +12,27 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Translatable\Translation;
 use WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface;
 
 /**
- * OrderStatusTranslation
+ * Class OrderStatusTranslation
  *
- * @ORM\Table(name="order_status_translation")
- * @ORM\Entity
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class OrderStatusTranslation implements LocaleAwareInterface
 {
     use Translation;
 
     /**
- * @var string
- *
- * @ORM\Column(name="name", type="string", length=255)
- */
-    private $name;
+     * @var string
+     */
+    protected $name;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="default_comment", type="text")
      */
-    private $defaultComment;
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+    protected $defaultComment;
 
     /**
      * @return string
@@ -57,7 +43,7 @@ class OrderStatusTranslation implements LocaleAwareInterface
     }
 
     /**
-     * @param $name
+     * @param string $name
      */
     public function setName($name)
     {

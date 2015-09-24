@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\AttributeBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
-use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
+use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
  * Class AttributeValueController
@@ -23,18 +23,13 @@ use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
 class AttributeValueController extends AbstractAdminController
 {
     /**
-     * @var \WellCommerce\Bundle\AttributeBundle\Repository\AttributeValueRepositoryInterface
+     * @var \WellCommerce\Bundle\AttributeBundle\Manager\Admin\AttributeValueManager
      */
-    protected $repository;
+    protected $manager;
 
     /**
      * Adds new attribute value using ajax request
      *
-     * @param Request $request
-     *
-     * @return \Symfony\Component\HttpFoundation\JsonResponse
-     */
-    /**
      * @param Request $request
      *
      * @return \Symfony\Component\HttpFoundation\JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
@@ -45,20 +40,10 @@ class AttributeValueController extends AbstractAdminController
             return $this->redirectToAction('index');
         }
 
-        $attribute = $this->get('attribute.repository')->find($request->request->get('attribute'));
-        $value     = $this->getRepository()->addAttributeValue($attribute, $request->request->get('name'));
-        $this->getEntityManager()->flush();
+        $value = $this->manager->addAttributeValue();
 
         return $this->jsonResponse([
             'id' => $value->getId(),
         ]);
-    }
-
-    /**
-     * @return \WellCommerce\Bundle\AttributeBundle\Repository\AttributeValueRepository
-     */
-    protected function getRepository()
-    {
-        return $this->getManager()->getRepository();
     }
 }

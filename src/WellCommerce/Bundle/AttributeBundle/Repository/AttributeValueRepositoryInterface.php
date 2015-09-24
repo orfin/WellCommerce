@@ -23,28 +23,11 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 interface AttributeValueRepositoryInterface extends RepositoryInterface
 {
     /**
-     * Returns all groups with translations
-     *
-     * @return array
-     */
-    public function findAll();
-
-    /**
      * Returns all values (with translations) for given attribute
      *
      * @return array
      */
     public function findAllByAttributeId($id);
-
-    /**
-     * Adds new attribute value and binds it to attribute
-     *
-     * @param Attribute $attribute
-     * @param           $name
-     *
-     * @return \WellCommerce\Bundle\AttributeBundle\Entity\AttributeValue
-     */
-    public function addAttributeValue(Attribute $attribute, $name);
 
     /**
      * Makes a collection of attribute values

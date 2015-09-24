@@ -26,7 +26,7 @@ class LocaleSubscriber extends AbstractEventSubscriber
 {
     public static function getSubscribedEvents()
     {
-        return parent::getSubscribedEvents() + [
+        return [
             KernelEvents::REQUEST    => ['onKernelRequest', 15],
             KernelEvents::CONTROLLER => ['onKernelController', -256],
         ];
@@ -34,6 +34,10 @@ class LocaleSubscriber extends AbstractEventSubscriber
 
     public function onKernelRequest(GetResponseEvent $event)
     {
+        if ($event->getRequestType() == HttpKernelInterface::SUB_REQUEST) {
+            return;
+        }
+
         $request = $event->getRequest();
         $filter  = $this->getDoctrineHelper()->enableFilter('locale');
 

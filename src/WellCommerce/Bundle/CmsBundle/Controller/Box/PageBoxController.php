@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CmsBundle\Controller\Box;
 
-use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
 
@@ -20,13 +19,11 @@ use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
  * Class PageBoxController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class PageBoxController extends AbstractBoxController implements BoxControllerInterface
 {
-    public function indexAction(Request $request)
+    public function indexAction()
     {
-
+        return $this->displayTemplate('index');
     }
 }

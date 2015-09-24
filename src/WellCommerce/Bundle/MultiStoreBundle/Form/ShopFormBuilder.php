@@ -11,17 +11,15 @@
  */
 namespace WellCommerce\Bundle\MultiStoreBundle\Form;
 
-use WellCommerce\Bundle\FormBundle\Builder\AbstractFormBuilder;
-use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
-use WellCommerce\Bundle\FormBundle\DataTransformer\EntityToIdentifierTransformer;
+use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
- * Class CompanyFormBuilder
+ * Class ShopFormBuilder
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class ShopFormBuilder extends AbstractFormBuilder implements FormBuilderInterface
+class ShopFormBuilder extends AbstractFormBuilder
 {
     /**
      * {@inheritdoc}
@@ -35,21 +33,21 @@ class ShopFormBuilder extends AbstractFormBuilder implements FormBuilderInterfac
 
         $requiredData->addChild($this->getElement('text_field', [
             'name'  => 'name',
-            'label' => $this->trans('shop.name.label'),
+            'label' => $this->trans('shop.label.name'),
         ]));
 
         $requiredData->addChild($this->getElement('select', [
             'name'        => 'company',
-            'label'       => $this->trans('shop.company.label'),
+            'label'       => $this->trans('shop.label.company'),
             'options'     => $this->get('company.collection')->getSelect(),
-            'transformer' => new EntityToIdentifierTransformer($this->get('company.repository'))
+            'transformer' => $this->getRepositoryTransformer('entity', $this->get('company.repository'))
         ]));
 
         $requiredData->addChild($this->getElement('select', [
             'name'        => 'theme',
-            'label'       => $this->trans('shop.theme.label'),
+            'label'       => $this->trans('shop.label.theme'),
             'options'     => $this->get('theme.collection')->getSelect(),
-            'transformer' => new EntityToIdentifierTransformer($this->get('theme.repository'))
+            'transformer' => $this->getRepositoryTransformer('entity', $this->get('theme.repository'))
         ]));
 
         $urlData = $form->addChild($this->getElement('nested_fieldset', [
@@ -59,7 +57,7 @@ class ShopFormBuilder extends AbstractFormBuilder implements FormBuilderInterfac
 
         $urlData->addChild($this->getElement('text_field', [
             'name'  => 'url',
-            'label' => $this->trans('shop.url.label'),
+            'label' => $this->trans('shop.label.url'),
         ]));
 
         $cartSettings = $form->addChild($this->getElement('nested_fieldset', [
@@ -71,7 +69,7 @@ class ShopFormBuilder extends AbstractFormBuilder implements FormBuilderInterfac
             'name'        => 'defaultOrderStatus',
             'label'       => $this->trans('shop.label.default_order_status'),
             'options'     => $this->get('order_status.collection')->getSelect(),
-            'transformer' => new EntityToIdentifierTransformer($this->get('order_status.repository'))
+            'transformer' => $this->getRepositoryTransformer('entity', $this->get('order_status.repository'))
         ]));
 
         $cartSettings->addChild($this->getElement('select', [

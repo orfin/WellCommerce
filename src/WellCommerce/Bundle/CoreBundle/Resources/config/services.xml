@@ -7,6 +7,7 @@
     <imports>
         <import resource="services/helpers.xml"/>
         <import resource="services/twig.xml"/>
+        <import resource="services/form.xml"/>
     </imports>
     <services>
         <service id="doctrine.orm.timestampable.subscriber" class="WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\Timestampable\TimestampableSubscriber">
@@ -14,5 +15,9 @@
         </service>
 
         <service id="resource.provider.collection" class="WellCommerce\Bundle\CoreBundle\Provider\ProviderCollection"/>
+
+        <service id="template_resolver" class="WellCommerce\Bundle\CoreBundle\Templating\TemplateResolver">
+             <argument type="service" id="kernel"/>
+        </service>
     </services>
 </container>

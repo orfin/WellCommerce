@@ -12,188 +12,126 @@
 
 namespace WellCommerce\Bundle\ProductBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model as ORMBehaviors;
-use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroup;
-use WellCommerce\Bundle\AvailabilityBundle\Entity\Availability;
-use WellCommerce\Bundle\CategoryBundle\Entity\Category;
+use Doctrine\Common\Collections\Collection;
+use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
+use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
+use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
+use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupInterface;
+use WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityAwareTrait;
+use WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\EnableableTrait;
-use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\HierarchyTrait;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\PhotoTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\Dimension;
+use WellCommerce\Bundle\CoreBundle\Entity\DiscountablePrice;
+use WellCommerce\Bundle\CoreBundle\Entity\HierarchyAwareTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\Price;
-use WellCommerce\Bundle\MultiStoreBundle\Entity\Shop;
-use WellCommerce\Bundle\TaxBundle\Entity\Tax;
-use WellCommerce\Bundle\UnitBundle\Entity\Unit;
+use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopCollectionAwareTrait;
+use WellCommerce\Bundle\ProducerBundle\Entity\ProducerAwareTrait;
+use WellCommerce\Bundle\TaxBundle\Calculator\TaxCalculator;
+use WellCommerce\Bundle\TaxBundle\Entity\TaxInterface;
+use WellCommerce\Bundle\TaxBundle\Helper\TaxHelper;
+use WellCommerce\Bundle\UnitBundle\Entity\UnitAwareTrait;
 
 /**
  * Class Product
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @ORM\Table(name="product")
- * @ORM\HasLifecycleCallbacks
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\ProductBundle\Repository\ProductRepository")
  */
-class Product
+class Product implements ProductInterface
 {
-    use ORMBehaviors\Translatable\Translatable;
-    use ORMBehaviors\Timestampable\Timestampable;
-    use ORMBehaviors\Blameable\Blameable;
+    use Translatable;
+    use Timestampable;
+    use Blameable;
     use PhotoTrait;
     use EnableableTrait;
-    use HierarchyTrait;
+    use HierarchyAwareTrait;
+    use ShopCollectionAwareTrait;
+    use ProducerAwareTrait;
+    use UnitAwareTrait;
+    use AvailabilityAwareTrait;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
     /**
-     * @ORM\Column(name="sku", type="string", length=64, unique=false)
+     * @var string
      */
     protected $sku;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\ProducerBundle\Entity\Producer")
-     * @ORM\JoinColumn(name="producer_id", referencedColumnName="id", onDelete="SET NULL")
-     */
-    protected $producer;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\UnitBundle\Entity\Unit")
-     * @ORM\JoinColumn(name="unit_id", referencedColumnName="id", onDelete="SET NULL")
-     */
-    protected $unit;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\AvailabilityBundle\Entity\Availability")
-     * @ORM\JoinColumn(name="availability_id", referencedColumnName="id", onDelete="SET NULL")
-     */
-    protected $availability;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\CategoryBundle\Entity\Category", inversedBy="products")
-     * @ORM\JoinTable(name="category_product",
-     *      joinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id", onDelete="CASCADE")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="CASCADE")}
-     * )
+     * @var Collection
      */
     protected $categories;
 
     /**
-     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\ProductStatus", inversedBy="products")
-     * @ORM\JoinTable(name="product_product_status",
-     *      joinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id", onDelete="CASCADE")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="product_status_id", referencedColumnName="id", onDelete="CASCADE")}
-     * )
+     * @var Collection
      */
     protected $statuses;
 
     /**
-     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\MultiStoreBundle\Entity\Shop", inversedBy="products")
-     * @ORM\JoinTable(name="shop_product",
-     *      joinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id", onDelete="CASCADE")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="shop_id", referencedColumnName="id", onDelete="CASCADE")}
-     * )
-     */
-    protected $shops;
-
-    /**
-     * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\ProductPhoto", mappedBy="product", cascade={"persist"}, orphanRemoval=true)
+     * @var Collection
      */
     protected $productPhotos;
 
     /**
-     * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute", mappedBy="product", cascade={"all"}, orphanRemoval=true)
+     * @var Collection
      */
     protected $attributes;
 
     /**
      * @var float
-     *
-     * @ORM\Column(name="stock", type="decimal", precision=15, scale=4)
      */
     protected $stock;
 
     /**
-     * @ORM\Embedded(class = "WellCommerce\Bundle\CoreBundle\Entity\Price", columnPrefix = "buy_price_")
+     * @var Price
      */
     protected $buyPrice;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\TaxBundle\Entity\Tax")
-     * @ORM\JoinColumn(name="buy_tax_id", referencedColumnName="id", onDelete="SET NULL")
+     * @var TaxInterface
      */
     protected $buyPriceTax;
 
     /**
-     * @ORM\Embedded(class = "WellCommerce\Bundle\CoreBundle\Entity\DiscountablePrice", columnPrefix = "sell_price_")
+     * @var DiscountablePrice
      */
     protected $sellPrice;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\TaxBundle\Entity\Tax")
-     * @ORM\JoinColumn(name="sell_tax_id", referencedColumnName="id", onDelete="SET NULL")
+     * @var TaxInterface
      */
     protected $sellPriceTax;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroup")
-     * @ORM\JoinColumn(name="attribute_group_id", referencedColumnName="id", onDelete="SET NULL")
+     * @var AttributeGroupInterface
      */
     protected $attributeGroup;
 
     /**
      * @var bool
-     *
-     * @ORM\Column(name="track_stock", type="boolean")
      */
     protected $trackStock;
 
     /**
      * @var float
-     *
-     * @ORM\Column(name="weight", type="decimal", precision=15, scale=4)
      */
     protected $weight;
 
     /**
-     * @ORM\Embedded(class = "WellCommerce\Bundle\CoreBundle\Entity\Dimension", columnPrefix = "dimension_")
+     * @var Dimension
      */
     protected $dimension;
 
     /**
      * @var float
-     *
-     * @ORM\Column(name="package_size", type="decimal", precision=15, scale=4)
      */
     protected $packageSize;
 
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->categories    = new ArrayCollection();
-        $this->productPhotos = new ArrayCollection();
-        $this->statuses      = new ArrayCollection();
-        $this->attributes    = new ArrayCollection();
-        $this->shops         = new ArrayCollection();
-        $this->dimension     = new Dimension();
-        $this->sellPrice     = new Price();
-        $this->buyPrice      = new Price();
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -201,9 +139,7 @@ class Product
     }
 
     /**
-     * Returns product sku
-     *
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getSku()
     {
@@ -211,9 +147,7 @@ class Product
     }
 
     /**
-     * Returns products sku
-     *
-     * @param $sku
+     * {@inheritdoc}
      */
     public function setSku($sku)
     {
@@ -221,29 +155,7 @@ class Product
     }
 
     /**
-     * Returns product producer
-     *
-     * @return mixed
-     */
-    public function getProducer()
-    {
-        return $this->producer;
-    }
-
-    /**
-     * Sets product producer
-     *
-     * @param $producer
-     */
-    public function setProducer($producer)
-    {
-        $this->producer = $producer;
-    }
-
-    /**
-     * Returns product stock
-     *
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getStock()
     {
@@ -251,29 +163,23 @@ class Product
     }
 
     /**
-     * Sets product stock
-     *
-     * @param string $stock
+     * {@inheritdoc}
      */
     public function setStock($stock)
     {
-        $this->stock = (float)$stock;
+        $this->stock = (int)$stock;
     }
 
     /**
-     * Returns product stock
-     *
-     * @return boolean
+     * {@inheritdoc}
      */
     public function getTrackStock()
     {
-        return $this->trackStock;
+        return (bool)$this->trackStock;
     }
 
     /**
-     * Sets product stock tracking status
-     *
-     * @param boolean $trackStock
+     * {@inheritdoc}
      */
     public function setTrackStock($trackStock)
     {
@@ -281,49 +187,7 @@ class Product
     }
 
     /**
-     * Returns product producer
-     *
-     * @return Unit
-     */
-    public function getUnit()
-    {
-        return $this->unit;
-    }
-
-    /**
-     * Sets product unit
-     *
-     * @param Unit $unit
-     */
-    public function setUnit(Unit $unit = null)
-    {
-        $this->unit = $unit;
-    }
-
-    /**
-     * Returns product availability
-     *
-     * @return Availability
-     */
-    public function getAvailability()
-    {
-        return $this->availability;
-    }
-
-    /**
-     * Sets product availability
-     *
-     * @param Availability $availability
-     */
-    public function setAvailability(Availability $availability = null)
-    {
-        $this->availability = $availability;
-    }
-
-    /**
-     * Returns product statuses
-     *
-     * @return ArrayCollection
+     * {@inheritdoc}
      */
     public function getStatuses()
     {
@@ -331,19 +195,15 @@ class Product
     }
 
     /**
-     * Sets product statuses
-     *
-     * @param ArrayCollection $statuses
+     * {@inheritdoc}
      */
-    public function setStatuses(ArrayCollection $statuses)
+    public function setStatuses(Collection $statuses)
     {
         $this->statuses = $statuses;
     }
 
     /**
-     * Get product photos
-     *
-     * @return ArrayCollection
+     * {@inheritdoc}
      */
     public function getProductPhotos()
     {
@@ -351,19 +211,15 @@ class Product
     }
 
     /**
-     * Sets product photos
-     *
-     * @param ArrayCollection $photos
+     * {@inheritdoc}
      */
-    public function setProductPhotos(ArrayCollection $photos)
+    public function setProductPhotos(Collection $photos)
     {
         $this->productPhotos = $photos;
     }
 
     /**
-     * Adds product photo
-     *
-     * @param ProductPhoto $photo
+     * {@inheritdoc}
      */
     public function addProductPhoto(ProductPhoto $photo)
     {
@@ -371,9 +227,7 @@ class Product
     }
 
     /**
-     * Returns all available categories for product
-     *
-     * @return ArrayCollection
+     * {@inheritdoc}
      */
     public function getCategories()
     {
@@ -381,29 +235,23 @@ class Product
     }
 
     /**
-     * Sets product category collection
-     *
-     * @param ArrayCollection $collection
+     * {@inheritdoc}
      */
-    public function setCategories(ArrayCollection $collection)
+    public function setCategories(Collection $collection)
     {
         $this->categories = $collection;
     }
 
     /**
-     * Adds new category to product
-     *
-     * @param Category $category
+     * {@inheritdoc}
      */
-    public function addCategory(Category $category)
+    public function addCategory(CategoryInterface $category)
     {
         $this->categories[] = $category;
     }
 
     /**
-     * Returns product sell price
-     *
-     * @return \WellCommerce\Bundle\CoreBundle\Entity\DiscountablePrice
+     * {@inheritdoc}
      */
     public function getSellPrice()
     {
@@ -411,19 +259,15 @@ class Product
     }
 
     /**
-     * Sets product sell price
-     *
-     * @param float $sellPrice
+     * {@inheritdoc}
      */
-    public function setSellPrice($sellPrice)
+    public function setSellPrice(DiscountablePrice $sellPrice)
     {
         $this->sellPrice = $sellPrice;
     }
 
     /**
-     * Returns product buy price
-     *
-     * @return float
+     * {@inheritdoc}
      */
     public function getBuyPrice()
     {
@@ -431,19 +275,15 @@ class Product
     }
 
     /**
-     * Sets product buy price
-     *
-     * @param float $buyPrice
+     * {@inheritdoc}
      */
-    public function setBuyPrice($buyPrice)
+    public function setBuyPrice(Price $buyPrice)
     {
         $this->buyPrice = $buyPrice;
     }
 
     /**
-     * Returns product weight
-     *
-     * @return float
+     * {@inheritdoc}
      */
     public function getWeight()
     {
@@ -451,17 +291,15 @@ class Product
     }
 
     /**
-     * Sets product weight
-     *
-     * @param float $weight
+     * {@inheritdoc}
      */
     public function setWeight($weight)
     {
-        $this->weight = $weight;
+        $this->weight = (float)$weight;
     }
 
     /**
-     * @return \WellCommerce\Bundle\CoreBundle\Entity\Dimension
+     * {@inheritdoc}
      */
     public function getDimension()
     {
@@ -469,17 +307,15 @@ class Product
     }
 
     /**
-     * @param mixed $dimension
+     * {@inheritdoc}
      */
-    public function setDimension($dimension)
+    public function setDimension(Dimension $dimension)
     {
         $this->dimension = $dimension;
     }
 
     /**
-     * Returns product package size
-     *
-     * @return float
+     * {@inheritdoc}
      */
     public function getPackageSize()
     {
@@ -487,19 +323,15 @@ class Product
     }
 
     /**
-     * Sets product package size
-     *
-     * @param float $packageSize
+     * {@inheritdoc}
      */
     public function setPackageSize($packageSize)
     {
-        $this->packageSize = $packageSize;
+        $this->packageSize = (float)$packageSize;
     }
 
     /**
-     * Returns attribute group to which product is bound
-     *
-     * @return AttributeGroup
+     * {@inheritdoc}
      */
     public function getAttributeGroup()
     {
@@ -507,19 +339,15 @@ class Product
     }
 
     /**
-     * Sets attribute group for product
-     *
-     * @param AttributeGroup $attributeGroup
+     * {@inheritdoc}
      */
-    public function setAttributeGroup(AttributeGroup $attributeGroup)
+    public function setAttributeGroup(AttributeGroupInterface $attributeGroup)
     {
         $this->attributeGroup = $attributeGroup;
     }
 
     /**
-     * Returns product attributes
-     *
-     * @return ArrayCollection
+     * {@inheritdoc}
      */
     public function getAttributes()
     {
@@ -527,41 +355,15 @@ class Product
     }
 
     /**
-     * Sets product attributes and removes unneeded ones
-     *
-     * @param ArrayCollection $attributes
+     * {@inheritdoc}
      */
-    public function setAttributes(ArrayCollection $attributes)
+    public function setAttributes(Collection $attributes)
     {
         $this->attributes = $attributes;
     }
 
     /**
-     * @return mixed
-     */
-    public function getShops()
-    {
-        return $this->shops;
-    }
-
-    /**
-     * @param mixed $shops
-     */
-    public function setShops($shops)
-    {
-        $this->shops = $shops;
-    }
-
-    /**
-     * @param Shop $shop
-     */
-    public function addShop(Shop $shop)
-    {
-        $this->shops[] = $shop;
-    }
-
-    /**
-     * @return Tax
+     * {@inheritdoc}
      */
     public function getBuyPriceTax()
     {
@@ -569,15 +371,15 @@ class Product
     }
 
     /**
-     * @param Tax $buyPriceTax
+     * {@inheritdoc}
      */
-    public function setBuyPriceTax(Tax $buyPriceTax)
+    public function setBuyPriceTax(TaxInterface $buyPriceTax)
     {
         $this->buyPriceTax = $buyPriceTax;
     }
 
     /**
-     * @return Tax
+     * {@inheritdoc}
      */
     public function getSellPriceTax()
     {
@@ -585,10 +387,40 @@ class Product
     }
 
     /**
-     * @param Tax $sellPriceTax
+     * {@inheritdoc}
      */
-    public function setSellPriceTax(Tax $sellPriceTax)
+    public function setSellPriceTax(TaxInterface $sellPriceTax)
     {
         $this->sellPriceTax = $sellPriceTax;
+    }
+
+    public function beforeProductSave()
+    {
+        $sellPrice   = $this->getSellPrice();
+        $grossAmount = $sellPrice->getGrossAmount();
+        $taxRate     = $this->getSellPriceTax()->getValue();
+        $netAmount   = TaxHelper::calculateNetPrice($grossAmount, $taxRate);
+
+        $sellPrice->setTaxRate($taxRate);
+        $sellPrice->setTaxAmount($grossAmount - $netAmount);
+        $sellPrice->setNetAmount($netAmount);
+
+        print_r($sellPrice);
+        die();
+        $sellPrice  = $this->getSellPrice();
+        $netAmount  = $sellPrice->getNetAmount();
+        $taxRate    = $this->getSellPriceTax()->getValue();
+        $calculator = new TaxCalculator($netAmount, $taxRate);
+
+        $sellPrice->setTaxAmount($calculator->getTaxAmount());
+        $sellPrice->setTaxRate($taxRate);
+        $sellPrice->setGrossAmount($calculator->getGrossPrice());
+
+        $discountedNetAmount  = $sellPrice->getDiscountedNetAmount();
+        $discountedCalculator = new TaxCalculator($discountedNetAmount, $taxRate);
+
+        $sellPrice->setDiscountedTaxAmount($discountedCalculator->getTaxAmount());
+        $sellPrice->setDiscountedTaxRate($taxRate);
+        $sellPrice->setDiscountedGrossAmount($discountedCalculator->getGrossPrice());
     }
 }

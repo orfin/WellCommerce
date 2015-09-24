@@ -12,14 +12,14 @@
 
 namespace WellCommerce\Bundle\ShippingBundle\Calculator;
 
-use WellCommerce\Bundle\CoreBundle\Collection\AbstractCollection;
+use WellCommerce\Common\Collections\ArrayCollection;
 
 /**
  * Class ShippingMethodCalculatorCollection
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ShippingMethodCalculatorCollection extends AbstractCollection
+class ShippingMethodCalculatorCollection extends ArrayCollection
 {
     /**
      * {@inheritdoc}
@@ -34,6 +34,18 @@ class ShippingMethodCalculatorCollection extends AbstractCollection
         }
 
         $this->items[$alias] = $calculator;
+    }
+
+    /**
+     * Returns the calculator by its alias
+     *
+     * @param string $alias
+     *
+     * @return ShippingMethodCalculatorInterface
+     */
+    public function get($alias)
+    {
+        return $this->items[$alias];
     }
 }
 

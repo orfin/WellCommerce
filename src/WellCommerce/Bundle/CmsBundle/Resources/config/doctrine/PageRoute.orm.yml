@@ -1,0 +1,11 @@
+WellCommerce\Bundle\CmsBundle\Entity\PageRoute:
+    type: entity
+    table: route_page
+    manyToOne:
+        identifier:
+            targetEntity: WellCommerce\Bundle\CmsBundle\Entity\Page
+            fetch: LAZY
+            joinColumns:
+                foreign_id:
+                    referencedColumnName: id
+                    onDelete: CASCADE

@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Bundle\IntlBundle\Twig\Extension;
 
-use WellCommerce\Bundle\IntlBundle\Converter\CurrencyConverterInterface;
+use WellCommerce\Bundle\IntlBundle\Helper\CurrencyHelperInterface;
 use WellCommerce\Bundle\IntlBundle\Provider\CurrencyProviderInterface;
 
 /**
@@ -22,9 +22,9 @@ use WellCommerce\Bundle\IntlBundle\Provider\CurrencyProviderInterface;
 class CurrencyExtension extends \Twig_Extension
 {
     /**
-     * @var CurrencyConverterInterface
+     * @var CurrencyHelperInterface
      */
-    protected $converter;
+    protected $helper;
 
     /**
      * @var CurrencyProviderInterface
@@ -34,13 +34,13 @@ class CurrencyExtension extends \Twig_Extension
     /**
      * Constructor
      *
-     * @param CurrencyConverterInterface $converter
-     * @param CurrencyProviderInterface  $provider
+     * @param CurrencyHelperInterface   $helper
+     * @param CurrencyProviderInterface $provider
      */
-    public function __construct(CurrencyConverterInterface $converter, CurrencyProviderInterface $provider)
+    public function __construct(CurrencyHelperInterface $helper, CurrencyProviderInterface $provider)
     {
-        $this->converter = $converter;
-        $this->provider  = $provider;
+        $this->helper   = $helper;
+        $this->provider = $provider;
     }
 
     public function getGlobals()
@@ -66,13 +66,32 @@ class CurrencyExtension extends \Twig_Extension
         return 'currency';
     }
 
-    public function formatPrice($price, $currencyFrom = null, $currencyTo = null, $taxValue = 0)
+    /**
+     * Formats the amount
+     *
+     * @param int|float   $price
+     * @param null|string $baseCurrency
+     * @param null|string $targetCurrency
+     * @param null|string $locale
+     *
+     * @return string
+     */
+    public function formatPrice($price, $baseCurrency = null, $targetCurrency = null, $locale = null, $quantity = 1)
     {
-        return $this->converter->format($price, $currencyFrom, $currencyTo, $taxValue);
+        return $this->helper->convertAndFormat($price, $baseCurrency, $targetCurrency, $quantity, $locale);
     }
 
-    public function convertPrice($price, $currencyFrom = null, $currencyTo = null, $taxValue = 0)
+    /**
+     * Converts the amount
+     *
+     * @param int|float   $price
+     * @param null|string $baseCurrency
+     * @param null|string $targetCurrency
+     *
+     * @return string
+     */
+    public function convertPrice($price, $baseCurrency = null, $targetCurrency = null, $quantity = 1)
     {
-        return $this->converter->convert($price, $currencyFrom, $currencyTo, $taxValue);
+        return $this->helper->convert($price, $baseCurrency, $targetCurrency, $quantity);
     }
 }

@@ -12,16 +12,15 @@
 
 namespace WellCommerce\Bundle\ProductBundle\DataSet\Admin;
 
-use WellCommerce\Bundle\DataSetBundle\AbstractDataSet;
-use WellCommerce\Bundle\DataSetBundle\DataSetConfiguratorInterface;
-use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
+use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
+use WellCommerce\Bundle\DataSetBundle\Configurator\DataSetConfiguratorInterface;
 
 /**
  * Class ProductDataSet
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductDataSet extends AbstractDataSet implements DataSetInterface
+class ProductDataSet extends AbstractDataSet
 {
     /**
      * {@inheritdoc}
@@ -29,14 +28,15 @@ class ProductDataSet extends AbstractDataSet implements DataSetInterface
     public function configureOptions(DataSetConfiguratorInterface $configurator)
     {
         $configurator->setColumns([
-            'id'        => 'product.id',
-            'name'      => 'product_translation.name',
-            'sku'       => 'product.sku',
-            'weight'    => 'product.weight',
-            'sellPrice' => 'product.sellPrice.amount',
-            'stock'     => 'product.stock',
-            'shop'      => 'product_shops.id',
-            'category'  => 'GROUP_CONCAT(DISTINCT categories_translation.name SEPARATOR \', \')',
+            'id'             => 'product.id',
+            'name'           => 'product_translation.name',
+            'sku'            => 'product.sku',
+            'weight'         => 'product.weight',
+            'sellPriceNet'   => 'product.sellPrice.netAmount',
+            'sellPriceGross' => 'product.sellPrice.grossAmount',
+            'stock'          => 'product.stock',
+            'shop'           => 'product_shops.id',
+            'category'       => 'GROUP_CONCAT(DISTINCT categories_translation.name SEPARATOR \', \')',
         ]);
     }
 }

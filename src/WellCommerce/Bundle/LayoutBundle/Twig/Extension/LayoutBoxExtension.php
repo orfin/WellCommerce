@@ -45,8 +45,8 @@ class LayoutBoxExtension extends \Twig_Extension
     /**
      * Returns layout box content
      *
-     * @param       $identifier
-     * @param array $params
+     * @param string $identifier
+     * @param array  $params
      *
      * @return string
      */

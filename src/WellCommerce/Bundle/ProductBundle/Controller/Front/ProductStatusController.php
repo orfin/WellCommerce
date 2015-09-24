@@ -22,8 +22,6 @@ use WellCommerce\Bundle\WebBundle\Breadcrumb\BreadcrumbItem;
  * Class ProductStatusController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class ProductStatusController extends AbstractFrontController implements FrontControllerInterface
 {
@@ -40,11 +38,11 @@ class ProductStatusController extends AbstractFrontController implements FrontCo
                 'name' => $status->translate()->getName(),
             ]));
 
-            $this->getManager()->getProductStatusProvider()->setCurrentProductStatus($status);
+            $this->manager->getProductStatusProvider()->setCurrentProductStatus($status);
         }
 
-        return [
+        return $this->displayTemplate('index', [
             'status' => $status
-        ];
+        ]);
     }
 }

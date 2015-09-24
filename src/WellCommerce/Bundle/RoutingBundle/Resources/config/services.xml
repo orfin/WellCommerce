@@ -5,21 +5,13 @@
 
     <services>
         <service id="routing.manager.admin" class="WellCommerce\Bundle\RoutingBundle\Manager\Admin\RoutingManager">
-            <argument type="service" id="flash_helper"/>
-            <argument type="service" id="redirect_helper"/>
-            <argument type="service" id="image_helper"/>
-            <argument type="service" id="event_dispatcher"/>
-            <argument type="service" id="doctrine_helper"/>
-            <argument type="service" id="translator"/>
-            <argument type="service" id="request_helper"/>
-            <call method="setRepository">
-                <argument type="service" id="routing.repository"/>
-            </call>
-            <call method="setFormBuilder">
-                <argument type="service" id="routing.form_builder"/>
-            </call>
-            <call method="setDataGrid">
-                <argument type="service" id="routing.datagrid"/>
+            <argument type="service" id="routing.repository"/>
+            <argument type="service" id="routing.event_dispatcher"/>
+            <argument type="service" id="routing.factory"/>
+            <argument type="service" id="routing.form_builder"/>
+            <argument type="service" id="routing.datagrid"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
             </call>
         </service>
 
@@ -32,6 +24,12 @@
 
         <service id="routing.repository" class="WellCommerce\Bundle\RoutingBundle\Repository\RouteRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument>WellCommerceRoutingBundle:Route</argument>
+        </service>
+
+        <service id="routing.factory" class="WellCommerce\Bundle\RoutingBundle\Factory\RouteFactory" />
+
+        <service id="routing.event_dispatcher" class="WellCommerce\Bundle\RoutingBundle\EventDispatcher\RoutingEventDispatcher">
+            <argument type="service" id="event_dispatcher"/>
         </service>
 
         <service id="routing.dataset.query_builder" class="WellCommerce\Bundle\RoutingBundle\DataSet\RoutingDataSetQueryBuilder" public="false">
@@ -72,6 +70,10 @@
         <service id="router.provider.endpoint" class="WellCommerce\Bundle\RoutingBundle\Provider\RouteProvider">
             <argument type="service" id="route.generator.collection" />
             <argument type="service" id="routing.repository" />
+        </service>
+
+        <service id="route.transformer" class="WellCommerce\Bundle\RoutingBundle\DataSet\Transformer\RouteTransformer">
+            <argument type="service" id="cmf_routing.generator" />
         </service>
 
         <service id="route.generator.collection" class="WellCommerce\Bundle\RoutingBundle\Generator\RouteGeneratorCollection" />

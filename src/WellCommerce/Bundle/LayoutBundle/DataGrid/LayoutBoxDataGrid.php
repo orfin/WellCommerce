@@ -11,20 +11,19 @@
  */
 namespace WellCommerce\Bundle\LayoutBundle\DataGrid;
 
-use WellCommerce\Bundle\DataGridBundle\AbstractDataGrid;
+use WellCommerce\Bundle\CoreBundle\DataGrid\AbstractDataGrid;
 use WellCommerce\Bundle\DataGridBundle\Column\Column;
 use WellCommerce\Bundle\DataGridBundle\Column\ColumnCollection;
 use WellCommerce\Bundle\DataGridBundle\Column\Options\Appearance;
 use WellCommerce\Bundle\DataGridBundle\Column\Options\Filter;
 use WellCommerce\Bundle\DataGridBundle\Column\Options\Sorting;
-use WellCommerce\Bundle\DataGridBundle\DataGridInterface;
 
 /**
  * Class LayoutBoxDataGrid
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class LayoutBoxDataGrid extends AbstractDataGrid implements DataGridInterface
+class LayoutBoxDataGrid extends AbstractDataGrid
 {
     /**
      * {@inheritdoc}
@@ -47,18 +46,18 @@ class LayoutBoxDataGrid extends AbstractDataGrid implements DataGridInterface
         ]));
 
         $collection->add(new Column([
-            'id'         => 'name',
-            'caption'    => $this->trans('layout_box.name.label'),
+            'id'      => 'name',
+            'caption' => $this->trans('layout_box.name.label'),
         ]));
 
         $collection->add(new Column([
-            'id'         => 'identifier',
-            'caption'    => $this->trans('layout_box.identifier.label'),
+            'id'      => 'identifier',
+            'caption' => $this->trans('layout_box.identifier.label'),
         ]));
 
         $collection->add(new Column([
-            'id'         => 'boxType',
-            'caption'    => $this->trans('layout_box.type.label'),
+            'id'      => 'boxType',
+            'caption' => $this->trans('layout_box.type.label'),
         ]));
     }
 }

@@ -12,7 +12,9 @@
 
 namespace WellCommerce\Bundle\CartBundle\DataSet\Front;
 
-use WellCommerce\Bundle\CartBundle\Entity\Cart;
+use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
+use WellCommerce\Bundle\CartBundle\Provider\CartProviderInterface;
+use WellCommerce\Bundle\CartBundle\Repository\CartProductRepositoryInterface;
 use WellCommerce\Bundle\DataSetBundle\QueryBuilder\AbstractDataSetQueryBuilder;
 use WellCommerce\Bundle\DataSetBundle\QueryBuilder\QueryBuilderInterface;
 
@@ -24,16 +26,20 @@ use WellCommerce\Bundle\DataSetBundle\QueryBuilder\QueryBuilderInterface;
 class CartProductDataSetQueryBuilder extends AbstractDataSetQueryBuilder implements QueryBuilderInterface
 {
     /**
-     * @var Cart
+     * @var CartProviderInterface
      */
-    protected $cart;
+    protected $cartProvider;
 
     /**
-     * @param Cart $cart
+     * Constructor
+     *
+     * @param CartProductRepositoryInterface $cartProductRepository
+     * @param CartProviderInterface          $cartProvider
      */
-    public function setCart(Cart $cart)
+    public function __construct(CartProductRepositoryInterface $cartProductRepository, CartProviderInterface $cartProvider)
     {
-        $this->cart = $cart;
+        parent::__construct($cartProductRepository);
+        $this->cartProvider = $cartProvider;
     }
 
     /**
@@ -42,12 +48,20 @@ class CartProductDataSetQueryBuilder extends AbstractDataSetQueryBuilder impleme
     public function getQueryBuilder()
     {
         $queryBuilder = parent::getQueryBuilder();
-        $cartId       = (null !== $this->cart) ? $this->cart->getId() : 0;
         $expression   = $queryBuilder->expr()->eq('cart_product.cart', ':cart');
         $queryBuilder->andWhere($expression);
-        $queryBuilder->setParameter('cart', $cartId);
+        $queryBuilder->setParameter('cart', $this->getCartIdentifier());
         $queryBuilder->setParameter('date', new \DateTime());
 
         return $queryBuilder;
+    }
+
+    protected function getCartIdentifier()
+    {
+        if ($this->cartProvider->getCurrentCart() instanceof CartInterface) {
+            return $this->cartProvider->getCurrentCart()->getId();
+        }
+
+        return 0;
     }
 }

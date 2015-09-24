@@ -11,62 +11,115 @@
  */
 namespace WellCommerce\Bundle\CartBundle\Form\Front;
 
-use WellCommerce\Bundle\FormBundle\Builder\AbstractFormBuilder;
-use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
-use WellCommerce\Bundle\FormBundle\DataTransformer\EntityToIdentifierTransformer;
+use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
+use WellCommerce\Bundle\CartBundle\Provider\CartProviderInterface;
+use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
+use WellCommerce\Bundle\FormBundle\Elements\Optioned\RadioGroup;
+use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCostInterface;
+use WellCommerce\Bundle\ShippingBundle\Provider\CartShippingMethodProviderInterface;
 
 /**
  * Class CartFormBuilder
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CartFormBuilder extends AbstractFormBuilder implements FormBuilderInterface
+class CartFormBuilder extends AbstractFormBuilder
 {
+    /**
+     * @var CartShippingMethodProviderInterface
+     */
+    protected $cartShippingMethodProvider;
+
+    /**
+     * @var CartProviderInterface
+     */
+    protected $cartProvider;
+
+    /**
+     * @param CartShippingMethodProviderInterface $cartShippingMethodProvider
+     */
+    public function setShippingMethodProvider(CartShippingMethodProviderInterface $cartShippingMethodProvider)
+    {
+        $this->cartShippingMethodProvider = $cartShippingMethodProvider;
+    }
+
+    /**
+     * @param CartProviderInterface $cartProvider
+     */
+    public function setCartManager(CartProviderInterface $cartProvider)
+    {
+        $this->cartProvider = $cartProvider;
+    }
+
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormInterface $form)
     {
-        $form->addChild($this->getElement('radio_group', [
-            'name'        => 'shippingMethod',
+        $cart = $this->cartProvider->getCurrentCart();
+
+        $shippingMethod = $form->addChild($this->getElement('radio_group', [
+            'name'        => 'shippingMethodCost',
             'label'       => $this->trans('cart.shipping_method.label'),
-            'options'     => $this->getShippingMethodOptions(),
-            'transformer' => new EntityToIdentifierTransformer($this->get('shipping_method.repository'))
+            'options'     => [],
+            'transformer' => $this->getRepositoryTransformer('entity', $this->get('shipping_method_cost.repository'))
         ]));
 
-        $form->addChild($this->getElement('radio_group', [
+        $this->addShippingOptions($shippingMethod, $cart);
+
+        $paymentMethod = $form->addChild($this->getElement('radio_group', [
             'name'        => 'paymentMethod',
             'label'       => $this->trans('cart.payment_method.label'),
-            'options'     => $this->get('payment_method.collection.front')->getSelect(),
-            'transformer' => new EntityToIdentifierTransformer($this->get('payment_method.repository'))
+            'options'     => [],
+            'transformer' => $this->getRepositoryTransformer('entity', $this->get('payment_method.repository'))
         ]));
 
+        $this->addPaymentOptions($paymentMethod, $cart);
 
         $form->addFilter($this->getFilter('no_code'));
         $form->addFilter($this->getFilter('trim'));
         $form->addFilter($this->getFilter('secure'));
     }
 
-    public function getShippingMethodOptions()
+    /**
+     * Adds shipping method options to select
+     *
+     * @param RadioGroup    $radioGroup
+     * @param CartInterface $cart
+     */
+    protected function addShippingOptions(RadioGroup $radioGroup, CartInterface $cart)
     {
-        $options     = [];
-        $converter   = $this->container->get('currency.converter');
-        $calculators = $this->container->get('shipping_method.calculator.collection');
-        $dataset     = $this->get('shipping_method.collection.front')->getDataSet([
-            'order_by'  => 'hierarchy',
-            'order_dir' => 'asc'
-        ]);
+        $collection = $this->cartShippingMethodProvider->getShippingMethodCostsCollection($cart);
 
-        foreach ($dataset['rows'] as $shippingMethod) {
-            $calculator                     = $calculators->get($shippingMethod['calculator']);
-            $shippingCost                   = $calculator->calculate();
-            $options[$shippingMethod['id']] = [
-                'name'    => $shippingMethod['name'],
-                'comment' => $converter->format($shippingCost)
+        $collection->map(function (ShippingMethodCostInterface $shippingMethodCost) use ($radioGroup) {
+            $shippingMethod = $shippingMethodCost->getShippingMethod();
+            $baseCurrency   = $shippingMethod->getCurrency()->getCode();
+            $grossAmount    = $shippingMethodCost->getCost()->getGrossAmount();
+
+            $label = [
+                'name'    => $shippingMethod->translate()->getName(),
+                'comment' => $this->getCurrencyHelper()->convertAndFormat($grossAmount, $baseCurrency)
             ];
-        }
 
-        return $options;
+            $radioGroup->addOptionToSelect($shippingMethodCost->getId(), $label);
+        });
+    }
+
+    /**
+     * Adds payment method options to select
+     *
+     * @param RadioGroup    $radioGroup
+     * @param CartInterface $cart
+     */
+    protected function addPaymentOptions(RadioGroup $radioGroup, CartInterface $cart)
+    {
+        $shippingMethod = $cart->getShippingMethodCost()->getShippingMethod();
+        $collection     = $shippingMethod->getPaymentMethods();
+
+        $collection->map(function (PaymentMethodInterface $paymentMethod) use ($radioGroup) {
+            $radioGroup->addOptionToSelect($paymentMethod->getId(), $paymentMethod->translate()->getName());
+        });
     }
 }

@@ -11,14 +11,12 @@
  */
 namespace WellCommerce\Bundle\CoreBundle\Helper;
 
-use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
-
 /**
  * Class Helper
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Helper extends AbstractContainer
+class Helper
 {
     /**
      * Replaces commas with dots

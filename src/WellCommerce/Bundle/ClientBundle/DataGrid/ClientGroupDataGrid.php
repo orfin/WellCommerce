@@ -11,21 +11,20 @@
  */
 namespace WellCommerce\Bundle\ClientBundle\DataGrid;
 
-use WellCommerce\Bundle\DataGridBundle\AbstractDataGrid;
+use WellCommerce\Bundle\CoreBundle\DataGrid\AbstractDataGrid;
 use WellCommerce\Bundle\DataGridBundle\Column\Column;
 use WellCommerce\Bundle\DataGridBundle\Column\ColumnCollection;
 use WellCommerce\Bundle\DataGridBundle\Column\ColumnInterface;
 use WellCommerce\Bundle\DataGridBundle\Column\Options\Appearance;
 use WellCommerce\Bundle\DataGridBundle\Column\Options\Filter;
 use WellCommerce\Bundle\DataGridBundle\Column\Options\Sorting;
-use WellCommerce\Bundle\DataGridBundle\DataGridInterface;
 
 /**
  * Class ClientGroupDataGrid
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientGroupDataGrid extends AbstractDataGrid implements DataGridInterface
+class ClientGroupDataGrid extends AbstractDataGrid
 {
     /**
      * {@inheritdoc}
@@ -48,21 +47,21 @@ class ClientGroupDataGrid extends AbstractDataGrid implements DataGridInterface
         ]));
 
         $collection->add(new Column([
-            'id'      => 'name',
-            'caption' => $this->trans('client_group.name.label'),
+            'id'         => 'name',
+            'caption'    => $this->trans('client_group.name.label'),
             'appearance' => new Appearance([
-                'width'   => 290,
+                'width' => 290,
             ]),
         ]));
 
         $collection->add(new Column([
-            'id'       => 'totalClients',
-            'caption'  => $this->trans('client_group.total_clients.label'),
-            'filter'   => new Filter([
+            'id'         => 'totalClients',
+            'caption'    => $this->trans('client_group.total_clients.label'),
+            'filter'     => new Filter([
                 'type' => Filter::FILTER_BETWEEN,
             ]),
             'appearance' => new Appearance([
-                'width'   => 90,
+                'width' => 90,
             ]),
         ]));
     }

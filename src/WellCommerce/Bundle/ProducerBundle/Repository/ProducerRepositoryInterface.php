@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\ProducerBundle\Repository;
 
-use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\DataSetAwareRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
@@ -20,6 +19,6 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ProducerRepositoryInterface extends RepositoryInterface, DataSetAwareRepositoryInterface
+interface ProducerRepositoryInterface extends RepositoryInterface
 {
 }

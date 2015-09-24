@@ -5,21 +5,13 @@
 
     <services>
         <service id="company.manager.admin" class="WellCommerce\Bundle\MultiStoreBundle\Manager\Admin\CompanyManager">
-            <argument type="service" id="flash_helper"/>
-            <argument type="service" id="redirect_helper"/>
-            <argument type="service" id="image_helper"/>
-            <argument type="service" id="event_dispatcher"/>
-            <argument type="service" id="doctrine_helper"/>
-            <argument type="service" id="translator"/>
-            <argument type="service" id="request_helper"/>
-            <call method="setRepository">
-                <argument type="service" id="company.repository"/>
-            </call>
-            <call method="setFormBuilder">
-                <argument type="service" id="company.form_builder"/>
-            </call>
-            <call method="setDataGrid">
-                <argument type="service" id="company.datagrid"/>
+            <argument type="service" id="company.repository"/>
+            <argument type="service" id="company.event_dispatcher"/>
+            <argument type="service" id="company.factory"/>
+            <argument type="service" id="company.form_builder"/>
+            <argument type="service" id="company.datagrid"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
             </call>
         </service>
         
@@ -34,6 +26,12 @@
             <argument>WellCommerceMultiStoreBundle:Company</argument>
         </service>
 
+        <service id="company.factory" class="WellCommerce\Bundle\MultiStoreBundle\Factory\CompanyFactory" />
+
+        <service id="company.event_dispatcher" class="WellCommerce\Bundle\MultiStoreBundle\EventDispatcher\CompanyEventDispatcher">
+            <argument type="service" id="event_dispatcher" />
+        </service>
+
         <service id="company.dataset.query_builder" class="WellCommerce\Bundle\MultiStoreBundle\DataSet\CompanyDataSetQueryBuilder" public="false">
             <argument type="service" id="company.repository"/>
         </service>
@@ -46,6 +44,10 @@
         <service id="company.dataset" class="WellCommerce\Bundle\MultiStoreBundle\DataSet\CompanyDataSet">
             <argument key="identifier">company</argument>
             <argument type="service" id="company.dataset.loader"/>
+            <argument type="service" id="company.event_dispatcher"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
@@ -56,6 +58,7 @@
         <service id="company.datagrid" class="WellCommerce\Bundle\MultiStoreBundle\DataGrid\CompanyDataGrid">
             <argument key="identifier">company</argument>
             <argument type="service" id="company.dataset"/>
+            <argument type="service" id="company.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -64,16 +67,10 @@
         <service id="company.form_builder" class="WellCommerce\Bundle\MultiStoreBundle\Form\CompanyFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
+            <argument type="service" id="company.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
-        </service>
-
-        <service id="company.subscriber" class="WellCommerce\Bundle\MultiStoreBundle\EventListener\CompanySubscriber">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <tag name="kernel.event_subscriber" />
         </service>
     </services>
 </container>

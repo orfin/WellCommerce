@@ -1,6 +1,6 @@
 {% trans_default_domain "wellcommerce" %}
 {% if currencies|length > 1 %}
-    <div class="dropdown">
+    <div class="dropdown pull-left">
         <button class="btn btn-default dropdown-toggle btn-sm" type="button" id="CurrencyMenu" data-toggle="dropdown" aria-expanded="true">
             {% trans %}currency.label{% endtrans %}: {{ app.request.session.get('_currency')|upper }}
             <span class="caret"></span>

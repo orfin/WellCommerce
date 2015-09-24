@@ -12,103 +12,75 @@
 
 namespace WellCommerce\Bundle\ProductBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
-use WellCommerce\Bundle\AvailabilityBundle\Entity\Availability;
-use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\HierarchyTrait;
+use WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityAwareTrait;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\PhotoTrait;
+use WellCommerce\Bundle\CoreBundle\Entity\HierarchyAwareTrait;
 
 /**
- * ProductAttribute
+ * Class ProductAttribute
  *
- * @ORM\Table(name="product_attribute")
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\ProductBundle\Repository\ProductAttributeRepository")
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductAttribute
+class ProductAttribute implements ProductAttributeInterface
 {
     use Timestampable;
-    use HierarchyTrait;
+    use HierarchyAwareTrait;
     use PhotoTrait;
+    use AvailabilityAwareTrait;
+    use ProductAwareTrait;
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
-     * @var Product
-     *
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\Product", inversedBy="attributes")
-     * @ORM\JoinColumn(name="product_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
+     * @var Collection
      */
-    protected $product;
-
-    /**
-     * @var ArrayCollection
-     *
-     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\AttributeBundle\Entity\AttributeValue", inversedBy="productAttributeValues")
-     * @ORM\JoinTable(name="product_attribute_value",
-     *      joinColumns={@ORM\JoinColumn(name="product_attribute_id", referencedColumnName="id", onDelete="CASCADE")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="attribute_value_id", referencedColumnName="id", onDelete="CASCADE")}
-     * )
-     */
-    private $attributeValues;
+    protected $attributeValues;
 
     /**
      * @var float
-     *
-     * @ORM\Column(name="sell_price", type="decimal", precision=15, scale=4)
      */
-    private $sellPrice;
+    protected $sellPrice;
 
     /**
      * @var float
-     *
-     * @ORM\Column(name="weight", type="decimal", precision=15, scale=4)
      */
-    private $weight;
+    protected $weight;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="symbol", type="string")
      */
-    private $symbol;
+    protected $symbol;
 
     /**
      * @var float
-     *
-     * @ORM\Column(name="stock", type="decimal", precision=15, scale=4)
      */
-    private $stock;
+    protected $stock;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="modifier_type", type="string")
      */
-    private $modifierType;
+    protected $modifierType;
 
     /**
      * @var float
-     *
-     * @ORM\Column(name="modifier_value", type="decimal", precision=15, scale=4)
      */
-    private $modifierValue;
+    protected $modifierValue;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\AvailabilityBundle\Entity\Availability")
-     * @ORM\JoinColumn(name="availability_id", referencedColumnName="id", onDelete="SET NULL")
+     * @return int
      */
-    private $availability;
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
-     * @return ArrayCollection
+     * @return Collection
      */
     public function getAttributeValues()
     {
@@ -116,27 +88,11 @@ class ProductAttribute
     }
 
     /**
-     * @param ArrayCollection $attributeValues
+     * @param Collection $attributeValues
      */
-    public function setAttributeValues(ArrayCollection $attributeValues)
+    public function setAttributeValues(Collection $attributeValues)
     {
         $this->attributeValues = $attributeValues;
-    }
-
-    /**
-     * @return Availability|null
-     */
-    public function getAvailability()
-    {
-        return $this->availability;
-    }
-
-    /**
-     * @param Availability|null $availability
-     */
-    public function setAvailability(Availability $availability = null)
-    {
-        $this->availability = $availability;
     }
 
     /**
@@ -204,22 +160,6 @@ class ProductAttribute
     }
 
     /**
-     * @return Product
-     */
-    public function getProduct()
-    {
-        return $this->product;
-    }
-
-    /**
-     * @param Product $product
-     */
-    public function setProduct(Product $product)
-    {
-        $this->product = $product;
-    }
-
-    /**
      * @return string
      */
     public function getModifierValue()
@@ -249,13 +189,5 @@ class ProductAttribute
     public function setModifierType($modifierType)
     {
         $this->modifierType = $modifierType;
-    }
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 }

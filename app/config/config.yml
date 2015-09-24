@@ -11,10 +11,9 @@ framework:
         resource: "%kernel.root_dir%/config/routing.yml"
         strict_requirements: ~
     csrf_protection: ~
-    validation:      { enable_annotations: true }
+    validation:      { enable_annotations: false }
     templating:
         engines: ['twig']
-        #assets_version: SomeVersionScheme
     default_locale:  "%locale%"
     trusted_hosts:   ~
     trusted_proxies: ~
@@ -23,6 +22,8 @@ framework:
         save_path: "%kernel.root_dir%/sessions"
     fragments:       ~
     http_method_override: true
+    profiler:
+        matcher: { ip: "%developer_mode.ip%" }
 
 # Twig Configuration
 twig:
@@ -32,7 +33,7 @@ twig:
 # Assetic Configuration
 assetic:
     debug:          false
-    use_controller: false
+    use_controller: true
     filters:
         cssrewrite: ~
         less: ~
@@ -49,9 +50,18 @@ doctrine:
         charset:  UTF8
 
     orm:
-        auto_generate_proxy_classes: false
+        auto_generate_proxy_classes: "%kernel.debug%"
         entity_managers:
             default:
+                #query_cache_driver:
+                #    type: service
+                #    id: doctrine.cache
+                #metadata_cache_driver:
+                #    type: service
+                #    id: doctrine.cache
+                #result_cache_driver:
+                #    type: service
+                #    id: doctrine.cache
                 auto_mapping: true
                 dql:
                     string_functions:
@@ -118,9 +128,9 @@ liip_imagine:
                 thumbnail: { size: [1200, 1200], mode: outbound }
 
 services:
-    cache:
-        class: Doctrine\Common\Cache\FilesystemCache
-        arguments:  [%kernel.root_dir%/cache/%kernel.environment%/cache]
+    doctrine.cache:
+        class: %doctrine_cache.file_system.class%
+        arguments: ["%kernel.root_dir%/cache/%kernel.environment%/doctrine"]
 
     client.failure.handler:
         class: WellCommerce\Bundle\ClientBundle\Handler\LoginFailureHandler

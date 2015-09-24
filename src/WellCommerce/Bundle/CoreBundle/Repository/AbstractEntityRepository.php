@@ -26,14 +26,6 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
     const TRANSLATIONS_ASSOCIATION_FIELD = 'translatable';
 
     /**
-     * {@inheritdoc}
-     */
-    public function getLocales()
-    {
-        return $this->getRepository('WellCommerce\Bundle\IntlBundle\Entity\Locale')->findAll();
-    }
-
-    /**
      * Returns class metadata
      *
      * @return \Doctrine\ORM\Mapping\ClassMetadata
@@ -41,24 +33,6 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
     public function getMetadata()
     {
         return $this->_class;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function createNew()
-    {
-        $entity = $this->getClassName();
-
-        return new $entity();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPropertyAccessor()
-    {
-        return PropertyAccess::createPropertyAccessor();
     }
 
     /**
@@ -73,14 +47,6 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function getMetadataFactory()
-    {
-        return $this->getEntityManager()->getMetadataFactory();
-    }
-
-    /**
      * Returns a repository by class name
      *
      * @param string $class
@@ -92,6 +58,9 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
         return $this->getEntityManager()->getRepository($class);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getDataSetQueryBuilder()
     {
         $queryBuilder    = $this->getQueryBuilder();
@@ -99,10 +68,10 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
         $identifierField = sprintf('%s.%s', $metadata->getTableName(), $metadata->getSingleIdentifierFieldName());
 
         if ($metadata->hasAssociation(self::TRANSLATIONS_ASSOCIATION_NAME)) {
-            $association      = $metadata->getAssociationTargetClass(self::TRANSLATIONS_ASSOCIATION_NAME);
+            $association          = $metadata->getAssociationTargetClass(self::TRANSLATIONS_ASSOCIATION_NAME);
             $associationMetaData  = $this->getEntityManager()->getClassMetadata($association);
             $associationTableName = $associationMetaData->getTableName();
-            $translationField = sprintf('%s.%s', $associationTableName, self::TRANSLATIONS_ASSOCIATION_FIELD);
+            $translationField     = sprintf('%s.%s', $associationTableName, self::TRANSLATIONS_ASSOCIATION_FIELD);
 
             $queryBuilder->leftJoin(
                 $association,

@@ -12,19 +12,17 @@
 
 namespace WellCommerce\Bundle\AdminBundle\Controller\Admin;
 
-use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
+use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
  * Class DashboardController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class DashboardController extends AbstractAdminController
 {
     public function indexAction()
     {
-        return [];
+        return $this->displayTemplate('index');
     }
 }

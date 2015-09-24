@@ -11,112 +11,74 @@
  */
 namespace WellCommerce\Bundle\OrderBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
-use WellCommerce\Bundle\ClientBundle\Entity\Client;
+use Doctrine\Common\Collections\Collection;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientAwareTrait;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\Timestampable\TimestampableTrait;
-use WellCommerce\Bundle\MultiStoreBundle\Entity\Shop;
-use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod;
+use WellCommerce\Bundle\CoreBundle\Entity\AddressInterface;
+use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopAwareTrait;
+use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodAwareTrait;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodAwareTrait;
 
 /**
  * Class Order
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @ORM\Table(name="orders")
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\OrderBundle\Repository\OrderRepository")
  */
-class Order
+class Order implements OrderInterface
 {
     use TimestampableTrait;
+    use ShopAwareTrait;
+    use ShippingMethodAwareTrait;
+    use PaymentMethodAwareTrait;
+    use ClientAwareTrait;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @var int
      */
     protected $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\OrderBundle\Entity\OrderProduct", mappedBy="order", cascade={"persist"})
+     * @var Collection
      */
     protected $products;
 
     /**
-     * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\OrderBundle\Entity\OrderModifier", mappedBy="order", cascade={"persist"})
+     * @var Collection
      */
     protected $modifiers;
 
     /**
-     * @var float
-     *
-     * @ORM\Column(name="session_id", type="string", nullable=false)
+     * @var string
      */
     protected $sessionId;
 
     /**
-     * @ORM\OneToOne(targetEntity="WellCommerce\Bundle\ClientBundle\Entity\Client")
-     * @ORM\JoinColumn(name="client_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
-     */
-    protected $client;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod")
-     * @ORM\JoinColumn(name="payment_method_id", referencedColumnName="id", nullable=true, onDelete="RESTRICT")
-     */
-    protected $paymentMethod;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\OrderBundle\Entity\OrderStatus")
-     * @ORM\JoinColumn(name="order_status_id", referencedColumnName="id", nullable=false, onDelete="RESTRICT")
+     * @var OrderStatusInterface
      */
     protected $currentStatus;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod")
-     * @ORM\JoinColumn(name="shipping_method_id", referencedColumnName="id", nullable=true, onDelete="RESTRICT")
-     */
-    protected $shippingMethod;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\MultiStoreBundle\Entity\Shop")
-     * @ORM\JoinColumn(name="shop_id", referencedColumnName="id", nullable=false, onDelete="RESTRICT")
-     */
-    protected $shop;
-
-    /**
-     * @ORM\Embedded(class = "WellCommerce\Bundle\CoreBundle\Entity\Address", columnPrefix = "billing_address_")
+     * @var AddressInterface
      */
     protected $billingAddress;
 
     /**
-     * @ORM\Embedded(class = "WellCommerce\Bundle\CoreBundle\Entity\Address", columnPrefix = "shipping_address_")
+     * @var AddressInterface
      */
     protected $shippingAddress;
     
     /**
-     * @ORM\Column(type="string", nullable=false, length=16)
+     * @var string
      */
     protected $currency;
 
     /**
-     * @ORM\Column(type="string", nullable=false, length=1000)
+     * @var string
      */
     protected $comment;
     
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->products = new ArrayCollection();
-        $this->modifiers  = new ArrayCollection();
-    }
-
-    /**
-     * @return int
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -124,7 +86,7 @@ class Order
     }
 
     /**
-     * @return float
+     * {@inheritdoc}
      */
     public function getSessionId()
     {
@@ -132,7 +94,7 @@ class Order
     }
 
     /**
-     * @param float $sessionId
+     * {@inheritdoc}
      */
     public function setSessionId($sessionId)
     {
@@ -140,87 +102,23 @@ class Order
     }
 
     /**
-     * @param OrderProduct $orderProduct
+     * {@inheritdoc}
      */
-    public function addProduct(OrderProduct $orderProduct)
+    public function addProduct(OrderProductInterface $orderProduct)
     {
         $this->products->add($orderProduct);
     }
 
     /**
-     * @param OrderProduct $orderProduct
+     * {@inheritdoc}
      */
-    public function removeProduct(OrderProduct $orderProduct)
+    public function removeProduct(OrderProductInterface $orderProduct)
     {
         $this->products->removeElement($orderProduct);
     }
 
     /**
-     * @return mixed
-     */
-    public function getClient()
-    {
-        return $this->client;
-    }
-
-    /**
-     * @param null|Client $client
-     */
-    public function setClient(Client $client = null)
-    {
-        $this->client = $client;
-    }
-
-    /**
-     * @return Shop
-     */
-    public function getShop()
-    {
-        return $this->shop;
-    }
-
-    /**
-     * @param Shop $shop
-     */
-    public function setShop(Shop $shop)
-    {
-        $this->shop = $shop;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPaymentMethod()
-    {
-        return $this->paymentMethod;
-    }
-
-    /**
-     * @param mixed $paymentMethod
-     */
-    public function setPaymentMethod($paymentMethod)
-    {
-        $this->paymentMethod = $paymentMethod;
-    }
-
-    /**
-     * @return null|ShippingMethod
-     */
-    public function getShippingMethod()
-    {
-        return $this->shippingMethod;
-    }
-
-    /**
-     * @param mixed $shippingMethod
-     */
-    public function setShippingMethod(ShippingMethod $shippingMethod = null)
-    {
-        $this->shippingMethod = $shippingMethod;
-    }
-
-    /**
-     * @return ArrayCollection|\WellCommerce\Bundle\OrderBundle\Entity\OrderProduct[]
+     * {@inheritdoc}
      */
     public function getProducts()
     {
@@ -228,15 +126,15 @@ class Order
     }
 
     /**
-     * @param ArrayCollection $products
+     * {@inheritdoc}
      */
-    public function setProducts(ArrayCollection $products)
+    public function setProducts(Collection $products)
     {
         $this->products = $products;
     }
 
     /**
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getBillingAddress()
     {
@@ -244,15 +142,15 @@ class Order
     }
 
     /**
-     * @param mixed $billingAddress
+     * {@inheritdoc}
      */
-    public function setBillingAddress($billingAddress)
+    public function setBillingAddress(AddressInterface $billingAddress)
     {
         $this->billingAddress = $billingAddress;
     }
 
     /**
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getShippingAddress()
     {
@@ -260,15 +158,15 @@ class Order
     }
 
     /**
-     * @param mixed $shippingAddress
+     * {@inheritdoc}
      */
-    public function setShippingAddress($shippingAddress)
+    public function setShippingAddress(AddressInterface $shippingAddress)
     {
         $this->shippingAddress = $shippingAddress;
     }
 
     /**
-     * @return ArrayCollection|\WellCommerce\Bundle\OrderBundle\Entity\OrderModifier[]
+     * {@inheritdoc}
      */
     public function getModifiers()
     {
@@ -276,23 +174,23 @@ class Order
     }
 
     /**
-     * @param ArrayCollection $modifiers
+     * {@inheritdoc}
      */
-    public function setModifiers(ArrayCollection $modifiers)
+    public function setModifiers(Collection $modifiers)
     {
         $this->modifiers = $modifiers;
     }
 
     /**
-     * @param OrderModifier $orderModifier
+     * {@inheritdoc}
      */
-    public function addModifier(OrderModifier $orderModifier)
+    public function addModifier(OrderModifierInterface $orderModifier)
     {
         $this->modifiers->add($orderModifier);
     }
 
     /**
-     * @return OrderStatus
+     * {@inheritdoc}
      */
     public function getCurrentStatus()
     {
@@ -300,15 +198,15 @@ class Order
     }
 
     /**
-     * @param OrderStatus $currentStatus
+     * {@inheritdoc}
      */
-    public function setCurrentStatus(OrderStatus $currentStatus)
+    public function setCurrentStatus(OrderStatusInterface $currentStatus)
     {
         $this->currentStatus = $currentStatus;
     }
 
     /**
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getCurrency()
     {
@@ -316,7 +214,7 @@ class Order
     }
 
     /**
-     * @param mixed $currency
+     * {@inheritdoc}
      */
     public function setCurrency($currency)
     {
@@ -324,7 +222,7 @@ class Order
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getComment()
     {
@@ -332,7 +230,7 @@ class Order
     }
 
     /**
-     * @param string $comment
+     * {@inheritdoc}
      */
     public function setComment($comment)
     {

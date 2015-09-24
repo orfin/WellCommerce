@@ -17,77 +17,57 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Class Address
  *
- * @ORM\Embeddable
- *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Address
+class Address implements AddressInterface
 {
     /**
      * @var string
-     *
-     * @ORM\Column(name="first_name", type="string", length=255, nullable=true)
      */
     protected $firstName;
     
     /**
      * @var string
-     *
-     * @ORM\Column(name="last_name", type="string", length=255, nullable=true)
      */
     protected $lastName;
     
     /**
      * @var string
-     *
-     * @ORM\Column(name="street", type="string", length=255, nullable=true)
      */
     protected $street;
     
     /**
      * @var string
-     *
-     * @ORM\Column(name="street_no", type="string", length=255, nullable=true)
      */
     protected $streetNo;
     
     /**
      * @var string
-     *
-     * @ORM\Column(name="flat_no", type="string", length=255, nullable=true)
      */
     protected $flatNo;
     
     /**
      * @var string
-     *
-     * @ORM\Column(name="post_code", type="string", length=255, nullable=true)
      */
     protected $postCode;
     
     /**
      * @var string
-     *
-     * @ORM\Column(name="province", type="string", length=255, nullable=true)
      */
     protected $province;
     
     /**
      * @var string
-     *
-     * @ORM\Column(name="city", type="string", length=255, nullable=true)
      */
     protected $city;
     
     /**
      * @var string
-     *
-     * @ORM\Column(name="country", type="string", length=3, nullable=true)
      */
     protected $country;
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getFirstName()
     {
@@ -95,7 +75,7 @@ class Address
     }
 
     /**
-     * @param string $firstName
+     * {@inheritdoc}
      */
     public function setFirstName($firstName)
     {
@@ -103,7 +83,7 @@ class Address
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getLastName()
     {
@@ -111,7 +91,7 @@ class Address
     }
 
     /**
-     * @param string $lastName
+     * {@inheritdoc}
      */
     public function setLastName($lastName)
     {
@@ -119,7 +99,7 @@ class Address
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getStreet()
     {
@@ -127,7 +107,7 @@ class Address
     }
 
     /**
-     * @param string $street
+     * {@inheritdoc}
      */
     public function setStreet($street)
     {
@@ -135,7 +115,7 @@ class Address
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getStreetNo()
     {
@@ -143,7 +123,7 @@ class Address
     }
 
     /**
-     * @param string $streetNo
+     * {@inheritdoc}
      */
     public function setStreetNo($streetNo)
     {
@@ -151,7 +131,7 @@ class Address
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getFlatNo()
     {
@@ -159,7 +139,7 @@ class Address
     }
 
     /**
-     * @param string $flatNo
+     * {@inheritdoc}
      */
     public function setFlatNo($flatNo)
     {
@@ -167,7 +147,7 @@ class Address
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getPostCode()
     {
@@ -175,7 +155,7 @@ class Address
     }
 
     /**
-     * @param string $postCode
+     * {@inheritdoc}
      */
     public function setPostCode($postCode)
     {
@@ -183,7 +163,7 @@ class Address
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getProvince()
     {
@@ -191,7 +171,7 @@ class Address
     }
 
     /**
-     * @param string $province
+     * {@inheritdoc}
      */
     public function setProvince($province)
     {
@@ -199,7 +179,7 @@ class Address
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getCity()
     {
@@ -207,7 +187,7 @@ class Address
     }
 
     /**
-     * @param string $city
+     * {@inheritdoc}
      */
     public function setCity($city)
     {
@@ -215,7 +195,7 @@ class Address
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getCountry()
     {
@@ -223,7 +203,7 @@ class Address
     }
 
     /**
-     * @param string $country
+     * {@inheritdoc}
      */
     public function setCountry($country)
     {

@@ -12,17 +12,15 @@
 
 namespace WellCommerce\Bundle\ProductBundle\DataSet\Front;
 
-use WellCommerce\Bundle\DataSetBundle\AbstractDataSet;
-use WellCommerce\Bundle\DataSetBundle\DataSetConfiguratorInterface;
-use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
-use WellCommerce\Bundle\ProductBundle\DataSet\Transformer\ProductStatusTransformer;
+use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
+use WellCommerce\Bundle\DataSetBundle\Configurator\DataSetConfiguratorInterface;
 
 /**
  * Class ProductDataSet
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductDataSet extends AbstractDataSet implements DataSetInterface
+class ProductDataSet extends AbstractDataSet
 {
     /**
      * {@inheritdoc}
@@ -36,8 +34,8 @@ class ProductDataSet extends AbstractDataSet implements DataSetInterface
             'description'      => 'product_translation.description',
             'route'            => 'IDENTITY(product_translation.route)',
             'weight'           => 'product.weight',
-            'price'            => 'product.sellPrice.amount',
-            'discountedPrice'  => 'product.sellPrice.discountedAmount',
+            'price'            => 'product.sellPrice.grossAmount',
+            'discountedPrice'  => 'product.sellPrice.discountedGrossAmount',
             'isDiscountValid'  => 'IF_ELSE(:date BETWEEN product.sellPrice.validFrom AND product.sellPrice.validTo, 1, 0)',
             'currency'         => 'product.sellPrice.currency',
             'tax'              => 'sell_tax.value',
@@ -50,17 +48,7 @@ class ProductDataSet extends AbstractDataSet implements DataSetInterface
         ]);
 
         $configurator->setTransformers([
-            'status' => new ProductStatusTransformer($this->getStatuses())
+            'route' => $this->container->get('route.transformer')
         ]);
-    }
-
-    /**
-     * Returns the collection of all product statuses
-     *
-     * @return array
-     */
-    private function getStatuses()
-    {
-        return $this->container->get('product_status.collection.front')->getArray();
     }
 }

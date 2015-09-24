@@ -5,21 +5,13 @@
 
     <services>
         <service id="dictionary.manager.admin" class="WellCommerce\Bundle\IntlBundle\Manager\Admin\DictionaryManager">
-            <argument type="service" id="flash_helper"/>
-            <argument type="service" id="redirect_helper"/>
-            <argument type="service" id="image_helper"/>
-            <argument type="service" id="event_dispatcher"/>
-            <argument type="service" id="doctrine_helper"/>
-            <argument type="service" id="translator"/>
-            <argument type="service" id="request_helper"/>
-            <call method="setRepository">
-                <argument type="service" id="dictionary.repository"/>
-            </call>
-            <call method="setFormBuilder">
-                <argument type="service" id="dictionary.form_builder"/>
-            </call>
-            <call method="setDataGrid">
-                <argument type="service" id="dictionary.datagrid"/>
+            <argument type="service" id="dictionary.repository"/>
+            <argument type="service" id="dictionary.event_dispatcher"/>
+            <argument type="service" id="dictionary.factory"/>
+            <argument type="service" id="dictionary.form_builder"/>
+            <argument type="service" id="dictionary.datagrid"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
             </call>
         </service>
 
@@ -46,12 +38,17 @@
         <service id="dictionary.dataset" class="WellCommerce\Bundle\IntlBundle\DataSet\DictionaryDataSet">
             <argument key="identifier">dictionary</argument>
             <argument type="service" id="dictionary.dataset.loader"/>
+            <argument type="service" id="dictionary.event_dispatcher"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
         <service id="dictionary.datagrid" class="WellCommerce\Bundle\IntlBundle\DataGrid\DictionaryDataGrid">
             <argument key="identifier">dictionary</argument>
             <argument type="service" id="dictionary.dataset"/>
+            <argument type="service" id="dictionary.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -60,9 +57,16 @@
         <service id="dictionary.form_builder" class="WellCommerce\Bundle\IntlBundle\Form\DictionaryFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
+            <argument type="service" id="dictionary.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
+        </service>
+
+        <service id="dictionary.factory" class="WellCommerce\Bundle\IntlBundle\Factory\DictionaryFactory" />
+
+        <service id="dictionary.event_dispatcher" class="WellCommerce\Bundle\IntlBundle\EventDispatcher\DictionaryEventDispatcher">
+            <argument type="service" id="event_dispatcher" />
         </service>
 
         <service id="dictionary.purger" class="WellCommerce\Bundle\IntlBundle\Purger\DictionaryPurger">
@@ -71,13 +75,6 @@
 
         <service id="package.command.purge.translations" class="WellCommerce\Bundle\IntlBundle\Command\PurgeTranslationsCommand">
             <tag name="console.command"/>
-        </service>
-
-        <service id="dictionary.subscriber" class="WellCommerce\Bundle\IntlBundle\EventListener\DictionarySubscriber">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <tag name="kernel.event_subscriber" />
         </service>
     </services>
 </container>

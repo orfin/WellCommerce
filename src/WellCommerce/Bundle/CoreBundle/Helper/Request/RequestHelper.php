@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\CoreBundle\Helper\Request;
 
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Security\Core\SecurityContext;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\Client;
 use WellCommerce\Bundle\UserBundle\Entity\User;
 
@@ -35,26 +35,29 @@ class RequestHelper implements RequestHelperInterface
     protected $request;
 
     /**
-     * @var null|\Symfony\Component\HttpFoundation\Session\SessionInterface
+     * @var TokenStorageInterface
      */
-    protected $session;
-
-    /**
-     * @var SecurityContext
-     */
-    protected $securityContext;
+    protected $tokenStorage;
 
     /**
      * Constructor
      *
-     * @param RequestStack    $requestStack
-     * @param SecurityContext $securityContext
+     * @param RequestStack          $requestStack
+     * @param TokenStorageInterface $tokenStorage
      */
-    public function __construct(RequestStack $requestStack, SecurityContext $securityContext)
+    public function __construct(RequestStack $requestStack, TokenStorageInterface $tokenStorage)
     {
-        $this->requestStack    = $requestStack;
-        $this->request         = $requestStack->getMasterRequest();
-        $this->securityContext = $securityContext;
+        $this->requestStack = $requestStack;
+        $this->request      = $requestStack->getMasterRequest();
+        $this->tokenStorage = $tokenStorage;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCurrentRequest()
+    {
+        return $this->request;
     }
 
     /**
@@ -213,11 +216,27 @@ class RequestHelper implements RequestHelperInterface
      */
     protected function getUser()
     {
-        $token = $this->securityContext->getToken();
+        $token = $this->tokenStorage->getToken();
         if (null !== $token) {
             return $token->getUser();
         }
 
         return null;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCurrentLocale()
+    {
+        return $this->request->getLocale();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCurrentCurrency()
+    {
+        return $this->getSessionAttribute('_currency');
     }
 }

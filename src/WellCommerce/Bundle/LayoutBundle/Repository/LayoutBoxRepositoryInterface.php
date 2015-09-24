@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\LayoutBundle\Repository;
 
-use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\DataSetAwareRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
@@ -20,7 +19,7 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface LayoutBoxRepositoryInterface extends RepositoryInterface, DataSetAwareRepositoryInterface
+interface LayoutBoxRepositoryInterface extends RepositoryInterface
 {
     /**
      * Returns boxes collection

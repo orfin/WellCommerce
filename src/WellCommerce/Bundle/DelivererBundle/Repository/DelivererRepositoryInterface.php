@@ -12,14 +12,13 @@
 
 namespace WellCommerce\Bundle\DelivererBundle\Repository;
 
-use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\DataSetAwareRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
- * Interface LocaleRepositoryInterface
+ * Interface DelivererRepositoryInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface DelivererRepositoryInterface extends RepositoryInterface, DataSetAwareRepositoryInterface
+interface DelivererRepositoryInterface extends RepositoryInterface
 {
 }

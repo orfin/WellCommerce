@@ -13,14 +13,12 @@
 namespace WellCommerce\Bundle\IntlBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
-use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
+use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
  * Class LocaleController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class LocaleController extends AbstractAdminController
 {

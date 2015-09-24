@@ -21,10 +21,4 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
  */
 interface AttributeGroupRepositoryInterface extends RepositoryInterface
 {
-    /**
-     * Returns all groups with translations
-     *
-     * @return mixed
-     */
-    public function findAll();
 }

@@ -27,7 +27,7 @@ class AttributeRepository extends AbstractEntityRepository implements AttributeR
      */
     public function findAll()
     {
-        $qb = parent::getQueryBuilder()
+        $qb = $this->getQueryBuilder()
             ->addSelect('attribute.id, attribute_translation.name')
             ->leftJoin(
                 'WellCommerce\Bundle\AttributeBundle\Entity\AttributeTranslation',
@@ -61,7 +61,7 @@ class AttributeRepository extends AbstractEntityRepository implements AttributeR
      */
     public function findAllByAttributeGroupId($id)
     {
-        $qb = parent::getQueryBuilder()
+        $qb = $this->getQueryBuilder()
             ->addSelect('attribute.id, attribute_translation.name')
             ->join('attribute.groups', 'ag')
             ->leftJoin(
@@ -83,64 +83,5 @@ class AttributeRepository extends AbstractEntityRepository implements AttributeR
         }
 
         return $result;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function createNewAttribute(AttributeGroup $group, $name)
-    {
-        $locales   = $this->getLocales();
-        $attribute = new Attribute();
-        $attribute->addGroup($group);
-
-        foreach ($locales as $locale) {
-            $attribute->translate($locale->getCode())->setName($name);
-        }
-        $attribute->mergeNewTranslations();
-
-        return $attribute;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function findOrCreate($data)
-    {
-        $accessor = $this->getPropertyAccessor();
-        $id       = $accessor->getValue($data, '[id]');
-        $name     = $accessor->getValue($data, '[name]');
-        $values   = $accessor->getValue($data, '[values]');
-        $isNew    = substr($id, 0, 3) == 'new';
-
-        if ($isNew) {
-            $item = $this->addAttribute($name);
-        } else {
-            $item = $this->find($id);
-        }
-
-        if (!empty($values)) {
-            $collection = $this->getAttributeValueRepository()->makeCollection($item, $values);
-            $item->setValues($collection);
-        }
-
-        return $item;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addAttribute($name)
-    {
-        $locales   = $this->getLocales();
-        $attribute = $this->createNew();
-
-        foreach ($locales as $locale) {
-            $attribute->translate($locale->getCode())->setName($name);
-        }
-        $attribute->mergeNewTranslations();
-        $this->getEntityManager()->persist($attribute);
-
-        return $attribute;
     }
 }

@@ -19,6 +19,7 @@ namespace WellCommerce\Bundle\CoreBundle\Helper\Flash;
  */
 interface FlashHelperInterface
 {
+    const FLASHES_NAME       = 'flashes';
     const FLASH_TYPE_SUCCESS = 'success';
     const FLASH_TYPE_ERROR   = 'error';
     const FLASH_TYPE_NOTICE  = 'notice';

@@ -11,17 +11,15 @@
  */
 namespace WellCommerce\Bundle\ShippingBundle\Form;
 
-use WellCommerce\Bundle\FormBundle\Builder\AbstractFormBuilder;
-use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
-use WellCommerce\Bundle\FormBundle\DataTransformer\TranslationTransformer;
+use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
- * Class ShippingMethodForm
+ * Class ShippingMethodFormBuilder
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ShippingMethodFormBuilder extends AbstractFormBuilder implements FormBuilderInterface
+class ShippingMethodFormBuilder extends AbstractFormBuilder
 {
     protected $calculators;
 
@@ -30,64 +28,73 @@ class ShippingMethodFormBuilder extends AbstractFormBuilder implements FormBuild
      */
     public function buildForm(FormInterface $form)
     {
-        $calculators       = $this->getCalculators();
-        $options           = [];
-        $defaultCalculator = null;
-
-        foreach ($calculators as $calculator) {
-            if (null === $defaultCalculator) {
-                $defaultCalculator = $calculator->getAlias();
-            }
-            $options[$calculator->getAlias()] = $calculator->getName();
-        }
-
         $requiredData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'required_data',
-            'label' => $this->trans('Required data')
+            'label' => $this->trans('fieldset.label.required_data')
         ]));
 
         $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
-            'label'       => $this->trans('Translations'),
-            'transformer' => new TranslationTransformer($this->get('shipping_method.repository'))
+            'label'       => $this->trans('translation.label.translations'),
+            'transformer' => $this->getRepositoryTransformer('translation', $this->get('shipping_method.repository'))
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
             'name'  => 'name',
-            'label' => $this->trans('Name'),
-        ]));
-
-        $requiredData->addChild($this->getElement('select', [
-            'name'    => 'calculator',
-            'label'   => $this->trans('Processor'),
-            'options' => $options,
-            'default' => $defaultCalculator
+            'label' => $this->trans('shipping_method.label.name'),
         ]));
 
         $requiredData->addChild($this->getElement('checkbox', [
             'name'    => 'enabled',
-            'label'   => $this->trans('Enabled'),
+            'label'   => $this->trans('shipping_method.label.enabled'),
             'default' => 1
         ]));
 
         $requiredData->addChild($this->getElement('text_field', [
             'name'    => 'hierarchy',
-            'label'   => $this->trans('Hierarchy'),
+            'label'   => $this->trans('shipping_method.label.hierarchy'),
             'default' => 0
+        ]));
+
+        $costsData = $form->addChild($this->getElement('nested_fieldset', [
+            'name'  => 'costs_data',
+            'label' => $this->trans('shipping_method.label.costs')
+        ]));
+
+        $costsData->addChild($this->getElement('select', [
+            'name'    => 'calculator',
+            'label'   => $this->trans('shipping_method.label.calculator'),
+            'options' => [],
+        ]));
+
+        $costsData->addChild($this->getElement('select', [
+            'name'        => 'currency',
+            'label'       => $this->trans('shipping_method.label.currency'),
+            'options'     => $this->get('currency.collection')->getSelect([
+                'value_key' => 'id',
+                'label_key' => 'code',
+                'order_by'  => 'code',
+            ]),
+            'transformer' => $this->getRepositoryTransformer('entity', $this->get('currency.repository'))
+        ]));
+
+        $tax = $costsData->addChild($this->getElement('select', [
+            'name'        => 'tax',
+            'label'       => $this->trans('shipping_method.label.tax'),
+            'options'     => $this->get('tax.collection')->getSelect(),
+            'transformer' => $this->getRepositoryTransformer('entity', $this->get('tax.repository'))
+        ]));
+
+        $costsData->addChild($this->getElement('range_editor', [
+            'name'            => 'costs',
+            'label'           => $this->trans('shipping_method.label.costs'),
+            'vat_field'       => $tax,
+            'range_precision' => 2,
+            'transformer'     => $this->getRepositoryTransformer('shipping_cost_collection', $this->get('shipping_method_cost.repository'))
         ]));
 
         $form->addFilter($this->getFilter('no_code'));
         $form->addFilter($this->getFilter('trim'));
         $form->addFilter($this->getFilter('secure'));
-    }
-
-    /**
-     * Returns shipping method calculators as a select
-     *
-     * @return array|\WellCommerce\Bundle\ShippingBundle\Calculator\ShippingMethodCalculatorInterface[]
-     */
-    protected function getCalculators()
-    {
-        return $this->get('shipping_method.calculator.collection')->all();
     }
 }

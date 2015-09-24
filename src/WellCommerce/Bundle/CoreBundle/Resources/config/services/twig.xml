@@ -12,7 +12,6 @@
         <service id="twig.extension.address_formatter" class="WellCommerce\Bundle\CoreBundle\Twig\AddressFormatterExtension">
             <tag name="twig.extension"/>
         </service>
-
     </services>
 </container>
 

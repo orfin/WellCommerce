@@ -12,16 +12,15 @@
 
 namespace WellCommerce\Bundle\ProductBundle\DataSet\Admin;
 
-use WellCommerce\Bundle\DataSetBundle\AbstractDataSet;
-use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
-use WellCommerce\Bundle\DataSetBundle\DataSetConfiguratorInterface;
+use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
+use WellCommerce\Bundle\DataSetBundle\Configurator\DataSetConfiguratorInterface;
 
 /**
  * Class ProductStatusDataSet
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductStatusDataSet extends AbstractDataSet implements DataSetInterface
+class ProductStatusDataSet extends AbstractDataSet
 {
     /**
      * {@inheritdoc}

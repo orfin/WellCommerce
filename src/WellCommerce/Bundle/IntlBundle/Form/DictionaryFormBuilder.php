@@ -11,9 +11,7 @@
  */
 namespace WellCommerce\Bundle\IntlBundle\Form;
 
-use WellCommerce\Bundle\FormBundle\Builder\AbstractFormBuilder;
-use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
-use WellCommerce\Bundle\FormBundle\DataTransformer\TranslationTransformer;
+use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
@@ -21,7 +19,7 @@ use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class DictionaryFormBuilder extends AbstractFormBuilder implements FormBuilderInterface
+class DictionaryFormBuilder extends AbstractFormBuilder
 {
     /**
      * {@inheritdoc}
@@ -41,7 +39,7 @@ class DictionaryFormBuilder extends AbstractFormBuilder implements FormBuilderIn
         $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
             'label'       => $this->trans('form.translations.label'),
-            'transformer' => new TranslationTransformer($this->get('dictionary.repository'))
+            'transformer' => $this->getRepositoryTransformer('translation', $this->get('dictionary.repository'))
         ]));
 
         $languageData->addChild($this->getElement('text_field', [

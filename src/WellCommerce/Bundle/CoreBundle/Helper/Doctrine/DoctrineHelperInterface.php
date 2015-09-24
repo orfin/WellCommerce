@@ -64,4 +64,9 @@ interface DoctrineHelperInterface
      * @param string $className
      */
     public function truncateTable($className);
+
+    /**
+     * @return \Doctrine\Common\Persistence\Mapping\ClassMetadataFactory
+     */
+    public function getMetadataFactory();
 }

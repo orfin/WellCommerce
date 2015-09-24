@@ -14,17 +14,20 @@ namespace WellCommerce\Bundle\RoutingBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
+use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
  * Class RoutingController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class RoutingController extends AbstractAdminController
 {
+    /**
+     * @var \WellCommerce\Bundle\RoutingBundle\Manager\Admin\RoutingManager
+     */
+    protected $manager;
+
     /**
      * Generates slug using ajax request
      *
@@ -35,42 +38,20 @@ class RoutingController extends AbstractAdminController
     public function generateAction(Request $request)
     {
         if (!$request->isXmlHttpRequest()) {
-            return $this->getManager()->getRedirectHelper()->redirectToAction('index');
+            return $this->redirectToAction('index');
         }
 
-        $slug = $this->generateSlugFromRequest($request);
-
-        $response = [
-            'slug' => $slug,
-        ];
-
-        return new JsonResponse($response);
-    }
-
-    /**
-     * Returns route repository
-     *
-     * @return \WellCommerce\Bundle\RoutingBundle\Repository\RouteRepositoryInterface
-     */
-    protected function getRepository()
-    {
-        return $this->getManager()->getRepository();
-    }
-
-    /**
-     * Generates route slug
-     *
-     * @param Request $request
-     *
-     * @return string
-     */
-    protected function generateSlugFromRequest(Request $request)
-    {
-        return $this->getRepository()->generateSlug(
+        $slug = $this->manager->generateSlug(
             $request->get('name'),
             $request->get('id'),
             $request->get('locale'),
             $request->get('fields')
         );
+
+        $response = [
+            'slug' => $slug
+        ];
+
+        return $this->jsonResponse($response);
     }
 }

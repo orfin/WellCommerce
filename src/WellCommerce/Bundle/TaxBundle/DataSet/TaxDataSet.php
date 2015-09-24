@@ -12,16 +12,15 @@
 
 namespace WellCommerce\Bundle\TaxBundle\DataSet;
 
-use WellCommerce\Bundle\DataSetBundle\AbstractDataSet;
-use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
-use WellCommerce\Bundle\DataSetBundle\DataSetConfiguratorInterface;
+use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
+use WellCommerce\Bundle\DataSetBundle\Configurator\DataSetConfiguratorInterface;
 
 /**
  * Class TaxDataSet
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class TaxDataSet extends AbstractDataSet implements DataSetInterface
+class TaxDataSet extends AbstractDataSet
 {
     /**
      * {@inheritdoc}

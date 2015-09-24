@@ -21,8 +21,6 @@ use WellCommerce\Bundle\WebBundle\Breadcrumb\BreadcrumbItem;
  * Class PageController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class PageController extends AbstractFrontController implements FrontControllerInterface
 {
@@ -33,7 +31,7 @@ class PageController extends AbstractFrontController implements FrontControllerI
     {
         $page = $this->findOr404($request);
 
-        if(null !== $page->getParent()){
+        if (null !== $page->getParent()) {
             $this->get('breadcrumb.builder')->add(new BreadcrumbItem([
                 'name' => $page->getParent()->translate()->getName(),
             ]));
@@ -42,8 +40,8 @@ class PageController extends AbstractFrontController implements FrontControllerI
             'name' => $page->translate()->getName(),
         ]));
 
-        return [
+        return $this->displayTemplate('index', [
             'page' => $page
-        ];
+        ]);
     }
 }

@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Bundle\CmsBundle\Twig\Extension;
 
-use WellCommerce\Bundle\DataSetBundle\CollectionBuilder\CollectionBuilderFactoryInterface;
+use WellCommerce\Bundle\CmsBundle\Provider\PageProviderInterface;
 
 /**
  * Class PageExtension
@@ -20,25 +20,26 @@ use WellCommerce\Bundle\DataSetBundle\CollectionBuilder\CollectionBuilderFactory
  */
 class PageExtension extends \Twig_Extension
 {
+
     /**
-     * @var CollectionBuilderFactoryInterface
+     * @var PageProviderInterface
      */
-    protected $collectionBuilder;
+    protected $provider;
 
     /**
      * Constructor
      *
-     * @param CollectionBuilderFactoryInterface $collectionBuilder
+     * @param PageProviderInterface $provider
      */
-    public function __construct(CollectionBuilderFactoryInterface $collectionBuilder)
+    public function __construct(PageProviderInterface $provider)
     {
-        $this->collectionBuilder = $collectionBuilder;
+        $this->provider = $provider;
     }
 
     public function getGlobals()
     {
         return [
-            'cmsPageTree' => $this->collectionBuilder->getTree()
+            'cmsPages' => $this->getCmsPages()
         ];
     }
 
@@ -48,5 +49,16 @@ class PageExtension extends \Twig_Extension
     public function getName()
     {
         return 'cms_page';
+    }
+
+    /**
+     * @return array
+     */
+    public function getCmsPages()
+    {
+        return $this->provider->getCollectionBuilder()->getTree([
+            'cache_enabled' => true,
+            'cache_ttl'     => 3600
+        ]);
     }
 }

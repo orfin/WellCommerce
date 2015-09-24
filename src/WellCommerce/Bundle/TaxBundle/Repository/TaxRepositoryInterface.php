@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\TaxBundle\Repository;
 
-use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\DataSetAwareRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
@@ -20,6 +19,6 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-interface TaxRepositoryInterface extends RepositoryInterface, DataSetAwareRepositoryInterface
+interface TaxRepositoryInterface extends RepositoryInterface
 {
 }

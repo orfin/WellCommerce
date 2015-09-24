@@ -80,6 +80,14 @@ class DoctrineHelper implements DoctrineHelperInterface
     /**
      * {@inheritdoc}
      */
+    public function getMetadataFactory()
+    {
+        return $this->getEntityManager()->getMetadataFactory();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function truncateTable($className)
     {
         $metadata = $this->getClassMetadata($className);

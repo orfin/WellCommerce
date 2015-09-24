@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\ThemeBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
-use WellCommerce\Bundle\MultiStoreBundle\Entity\Shop;
 
 /**
  * Class LoadThemeData
@@ -28,11 +27,16 @@ class LoadShopData extends AbstractDataFixture
      */
     public function load(ObjectManager $manager)
     {
+        /**
+         * @var $theme       \WellCommerce\Bundle\ThemeBundle\Entity\ThemeInterface
+         * @var $company     \WellCommerce\Bundle\MultiStoreBundle\Entity\CompanyInterface
+         * @var $orderStatus \WellCommerce\Bundle\OrderBundle\Entity\OrderStatusInterface
+         */
         $theme       = $this->getReference('theme');
         $company     = $this->getReference('company');
         $orderStatus = $this->getReference('default_order_status');
 
-        $shop = new Shop();
+        $shop = $this->container->get('shop.factory')->create();
         $shop->setName('WellCommerce');
         $shop->setCompany($company);
         $shop->setTheme($theme);

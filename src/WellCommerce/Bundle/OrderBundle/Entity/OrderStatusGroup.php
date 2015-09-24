@@ -11,36 +11,28 @@
  */
 namespace WellCommerce\Bundle\OrderBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 
 /**
- * OrderStatusGroup
+ * Class OrderStatusGroup
  *
- * @ORM\Table(name="order_status_group")
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\OrderBundle\Repository\OrderStatusGroupRepository")
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderStatusGroup
+class OrderStatusGroup implements OrderStatusGroupInterface
 {
     use Timestampable;
     use Blameable;
     use Translatable;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @var int
      */
-    private $id;
+    protected $id;
 
     /**
-     * Get id.
-     *
-     * @return integer
+     * {@inheritdoc}
      */
     public function getId()
     {

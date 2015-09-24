@@ -22,18 +22,15 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class ResourceEvent extends Event
 {
-    private $resource;
-    private $request;
+    protected $resource;
 
     /**
      * Constructor
      *
-     * @param         $resource
-     * @param Request $request
+     * @param object $resource
      */
-    public function __construct($resource, Request $request = null)
+    public function __construct($resource)
     {
-        $this->request  = $request;
         $this->resource = $resource;
     }
 
@@ -45,15 +42,5 @@ class ResourceEvent extends Event
     public function getResource()
     {
         return $this->resource;
-    }
-
-    /**
-     * Returns request object passed from manager
-     *
-     * @return Request
-     */
-    public function getRequest()
-    {
-        return $this->request;
     }
 }

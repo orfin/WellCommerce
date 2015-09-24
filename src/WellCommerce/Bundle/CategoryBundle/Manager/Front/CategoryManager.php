@@ -29,7 +29,7 @@ class CategoryManager extends AbstractFrontManager
      *
      * @return ConditionsCollection
      */
-    public function getConditions()
+    public function getCurrentCategoryConditions()
     {
         $conditions = new ConditionsCollection();
         $conditions->add(new Eq('category', $this->getCurrentCategoryId()));

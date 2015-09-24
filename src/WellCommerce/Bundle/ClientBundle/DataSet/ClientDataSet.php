@@ -12,9 +12,8 @@
 
 namespace WellCommerce\Bundle\ClientBundle\DataSet;
 
-use WellCommerce\Bundle\DataSetBundle\AbstractDataSet;
-use WellCommerce\Bundle\DataSetBundle\DataSetConfiguratorInterface;
-use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
+use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
+use WellCommerce\Bundle\DataSetBundle\Configurator\DataSetConfiguratorInterface;
 use WellCommerce\Bundle\DataSetBundle\Transformer\DateTransformer;
 
 /**
@@ -22,7 +21,7 @@ use WellCommerce\Bundle\DataSetBundle\Transformer\DateTransformer;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientDataSet extends AbstractDataSet implements DataSetInterface
+class ClientDataSet extends AbstractDataSet
 {
     /**
      * {@inheritdoc}

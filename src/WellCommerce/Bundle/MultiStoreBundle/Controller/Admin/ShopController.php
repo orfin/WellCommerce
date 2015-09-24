@@ -12,14 +12,12 @@
 
 namespace WellCommerce\Bundle\MultiStoreBundle\Controller\Admin;
 
-use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
+use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
  * Class ShopController
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class ShopController extends AbstractAdminController
 {
@@ -32,7 +30,7 @@ class ShopController extends AbstractAdminController
      */
     public function changeContextAction($id)
     {
-        $shop = $this->getManager()->getRepository()->find($id);
+        $shop = $this->manager->getRepository()->find($id);
         $this->get('shop.context.admin')->setCurrentScope($shop);
 
         return $this->jsonResponse([

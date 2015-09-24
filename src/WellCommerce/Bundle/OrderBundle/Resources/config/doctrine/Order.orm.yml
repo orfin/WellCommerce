@@ -1,0 +1,79 @@
+WellCommerce\Bundle\OrderBundle\Entity\Order:
+    type: entity
+    table: orders
+    repositoryClass: WellCommerce\Bundle\OrderBundle\Repository\OrderRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    embedded:
+        billingAddress:
+            class: WellCommerce\Bundle\CoreBundle\Entity\Address
+            columnPrefix: billing_address_
+        shippingAddress:
+            class: WellCommerce\Bundle\CoreBundle\Entity\Address
+            columnPrefix: shipping_address_
+    fields:
+        sessionId:
+            type: string
+            nullable: false
+            column: session_id
+        currency:
+            type: string
+            length: 16
+            nullable: false
+        comment:
+            type: string
+            length: 1000
+            nullable: false
+    oneToMany:
+        products:
+            targetEntity: WellCommerce\Bundle\OrderBundle\Entity\OrderProduct
+            cascade:
+                - persist
+            fetch: LAZY
+            mappedBy: order
+        modifiers:
+            targetEntity: WellCommerce\Bundle\OrderBundle\Entity\OrderModifier
+            cascade:
+                - persist
+            fetch: LAZY
+            mappedBy: order
+    oneToOne:
+        client:
+            targetEntity: WellCommerce\Bundle\ClientBundle\Entity\Client
+            fetch: LAZY
+            joinColumns:
+                client_id:
+                    referencedColumnName: id
+                    onDelete: CASCADE
+    manyToOne:
+        paymentMethod:
+            targetEntity: WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod
+            fetch: LAZY
+            joinColumns:
+                payment_method_id:
+                    referencedColumnName: id
+                    onDelete: RESTRICT
+        currentStatus:
+            targetEntity: WellCommerce\Bundle\OrderBundle\Entity\OrderStatus
+            fetch: LAZY
+            joinColumns:
+                order_status_id:
+                    referencedColumnName: id
+                    onDelete: RESTRICT
+        shippingMethod:
+            targetEntity: WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod
+            fetch: LAZY
+            joinColumns:
+                shipping_method_id:
+                    referencedColumnName: id
+                    onDelete: RESTRICT
+        shop:
+            targetEntity: WellCommerce\Bundle\MultiStoreBundle\Entity\Shop
+            fetch: LAZY
+            joinColumns:
+                shop_id:
+                    referencedColumnName: id
+                    onDelete: RESTRICT

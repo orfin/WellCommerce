@@ -13,31 +13,32 @@
 namespace WellCommerce\Bundle\IntlBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
-use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
+use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
  * Class DictionaryController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class DictionaryController extends AbstractAdminController
 {
-    public function syncAction(Request $request)
-    {
-        $manager = $this->getManager();
-        $manager->syncDictionary($request, $this->get('kernel'));
-        $manager->getFlashHelper()->addSuccess('translation.flashes.success.synchronization');
-
-        return $manager->getRedirectHelper()->redirectToAction('index');
-    }
+    /**
+     * @var \WellCommerce\Bundle\IntlBundle\Manager\Admin\DictionaryManager
+     */
+    protected $manager;
 
     /**
-     * @return \WellCommerce\Bundle\IntlBundle\Manager\Admin\DictionaryManager
+     * Synchronizes translations to filesystem and database
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    protected function getManager()
+    public function syncAction(Request $request)
     {
-        return parent::getManager();
+        $this->manager->syncDictionary($request, $this->get('kernel'));
+        $this->manager->getFlashHelper()->addSuccess('translation.flashes.success.synchronization');
+
+        return $this->redirectToAction('index');
     }
 }

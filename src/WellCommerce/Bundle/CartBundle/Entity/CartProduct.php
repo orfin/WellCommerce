@@ -4,58 +4,41 @@ namespace WellCommerce\Bundle\CartBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\Timestampable\TimestampableTrait;
-use WellCommerce\Bundle\ProductBundle\Entity\Product;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareTrait;
 
 /**
  * Class CartProduct
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @ORM\Table(name="cart_product")
- * @ORM\HasLifecycleCallbacks
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\CartBundle\Repository\CartProductRepository")
  */
-class CartProduct
+class CartProduct implements CartProductInterface
 {
     use TimestampableTrait;
+    use ProductAwareTrait;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\CartBundle\Entity\Cart", inversedBy="products")
-     * @ORM\JoinColumn(name="cart_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
+     * @var CartInterface
      */
     protected $cart;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\Product")
-     * @ORM\JoinColumn(name="product_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
-     */
-    protected $product;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute")
-     * @ORM\JoinColumn(name="attribute_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
+     * @var ProductAttributeInterface
      */
     protected $attribute;
 
     /**
      * @var float
-     *
-     * @ORM\Column(name="quantity", type="decimal", precision=15, scale=4)
      */
     protected $quantity;
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -63,23 +46,7 @@ class CartProduct
     }
 
     /**
-     * @return Product
-     */
-    public function getProduct()
-    {
-        return $this->product;
-    }
-
-    /**
-     * @param Product $product
-     */
-    public function setProduct(Product $product)
-    {
-        $this->product = $product;
-    }
-
-    /**
-     * @return null|ProductAttribute
+     * {@inheritdoc}
      */
     public function getAttribute()
     {
@@ -87,16 +54,15 @@ class CartProduct
     }
 
     /**
-     * @param null|ProductAttribute $attribute
+     * {@inheritdoc}
      */
-    public function setAttribute(ProductAttribute $attribute = null)
+    public function setAttribute(ProductAttributeInterface $attribute = null)
     {
         $this->attribute = $attribute;
     }
 
-
     /**
-     * @return float
+     * {@inheritdoc}
      */
     public function getQuantity()
     {
@@ -104,25 +70,31 @@ class CartProduct
     }
 
     /**
-     * @param float $quantity
+     * {@inheritdoc}
      */
     public function setQuantity($quantity)
     {
         $this->quantity = (int)$quantity;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function increaseQuantity($increase)
     {
         $this->quantity += (int)$increase;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function decreaseQuantity($decrease)
     {
         $this->quantity -= (int)$decrease;
     }
 
     /**
-     * @return Cart
+     * {@inheritdoc}
      */
     public function getCart()
     {
@@ -130,19 +102,10 @@ class CartProduct
     }
 
     /**
-     * @param Cart $cart
+     * {@inheritdoc}
      */
-    public function setCart(Cart $cart)
+    public function setCart(CartInterface $cart)
     {
         $this->cart = $cart;
-    }
-
-    /**
-     * @ORM\PostPersist
-     * @ORM\PostUpdate
-     */
-    protected function recalculateCartTotals()
-    {
-        $this->getCart()->recalculateCartTotals();
     }
 }

@@ -12,48 +12,34 @@
 
 namespace WellCommerce\Bundle\SmugglerBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 
 /**
  * Class Channel
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @ORM\Table(name="smuggler_channel")
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\SmugglerBundle\Repository\ChannelRepository")
  */
-class Channel
+class Channel implements ChannelInterface
 {
-    use ORMBehaviors\Timestampable\Timestampable;
+    use Timestampable;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @var int
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255, nullable=false)
      */
-    private $name;
+    protected $name;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="url", type="string", length=255, nullable=false)
      */
-    private $url;
+    protected $url;
 
     /**
-     * Get id.
-     *
-     * @return integer
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -61,7 +47,7 @@ class Channel
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getName()
     {
@@ -69,7 +55,7 @@ class Channel
     }
 
     /**
-     * @param string $name
+     * {@inheritdoc}
      */
     public function setName($name)
     {
@@ -77,7 +63,7 @@ class Channel
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getUrl()
     {
@@ -85,7 +71,7 @@ class Channel
     }
 
     /**
-     * @param string $url
+     * {@inheritdoc}
      */
     public function setUrl($url)
     {

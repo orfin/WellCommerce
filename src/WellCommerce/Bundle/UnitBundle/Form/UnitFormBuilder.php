@@ -11,9 +11,7 @@
  */
 namespace WellCommerce\Bundle\UnitBundle\Form;
 
-use WellCommerce\Bundle\FormBundle\Builder\AbstractFormBuilder;
-use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
-use WellCommerce\Bundle\FormBundle\DataTransformer\TranslationTransformer;
+use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
@@ -21,7 +19,7 @@ use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class UnitFormBuilder extends AbstractFormBuilder implements FormBuilderInterface
+class UnitFormBuilder extends AbstractFormBuilder
 {
     /**
      * {@inheritdoc}
@@ -36,12 +34,12 @@ class UnitFormBuilder extends AbstractFormBuilder implements FormBuilderInterfac
         $unitTranslationData = $unitRequiredData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
             'label'       => $this->trans('form.translations.label'),
-            'transformer' => new TranslationTransformer($this->get('product.repository'))
+            'transformer' => $this->getRepositoryTransformer('translation', $this->get('product.repository'))
         ]));
 
         $unitTranslationData->addChild($this->getElement('text_field', [
             'name'  => 'name',
-            'label' => $this->trans('unit.name.label'),
+            'label' => $this->trans('unit.label.name'),
         ]));
 
         $unitForm->addFilter($this->getFilter('no_code'));

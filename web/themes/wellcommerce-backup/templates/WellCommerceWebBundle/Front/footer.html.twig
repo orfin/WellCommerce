@@ -1,0 +1,43 @@
+<footer>
+    <div class="container">
+        <div class="row">
+            {% for category in cmsPageTree if category.children|length %}
+                <div class="col-lg-3 menu">
+                    <h3>{{ category.name }}</h3>
+                    <ul>
+                        {% for page in category.children %}
+                            <li><a href="{{ path(page.route) }}">{{ page.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endfor %}
+            <div class="col-lg-3 menu">
+                <h3>Your account</h3>
+                <ul>
+                    <li><a href="#">Sing in yout account</a></li>
+                    <li><a href="#">Sing up</a></li>
+                    <li><a href="#">Order status</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3">
+                <div class="fb-like-box" data-href="https://www.facebook.com/FacebookDevelopers" data-colorscheme="dark"
+                     data-show-faces="true" data-header="false" data-stream="false" data-show-border="false"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="copy">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 left">
+                    {{ "now"|date("Y") }} © Demo store / All rights reserved
+                </div>
+                <div class="col-lg-6 right text-right">
+                    Powered by <a href="http://wellcommerce.org">
+                        <img src="{{ asset('themes/wellcommerce/assets/img/footer-print.png') }}"/>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

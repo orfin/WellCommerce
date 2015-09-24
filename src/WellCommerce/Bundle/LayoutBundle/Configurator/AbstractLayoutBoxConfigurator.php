@@ -12,8 +12,9 @@
 
 namespace WellCommerce\Bundle\LayoutBundle\Configurator;
 
-use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainer;
-use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
+use Symfony\Component\DependencyInjection\ContainerAware;
+use WellCommerce\Bundle\CoreBundle\Helper\Translator\TranslatorHelperInterface;
+use WellCommerce\Bundle\FormBundle\FormBuilderInterface;
 use WellCommerce\Bundle\FormBundle\Conditions\Equals;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
@@ -22,21 +23,35 @@ use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractLayoutBoxConfigurator extends AbstractContainer implements LayoutBoxConfiguratorInterface
+abstract class AbstractLayoutBoxConfigurator implements LayoutBoxConfiguratorInterface
 {
+    /**
+     * @var string
+     */
     protected $type;
+
+    /**
+     * @var string
+     */
     protected $controllerService;
+
+    /**
+     * @var TranslatorHelperInterface
+     */
+    protected $translatorHelper;
 
     /**
      * Constructor
      *
-     * @param $type
-     * @param $controllerService
+     * @param string                    $type
+     * @param string                    $controllerService
+     * @param TranslatorHelperInterface $translatorHelper
      */
-    public function __construct($type, $controllerService)
+    public function __construct($type, $controllerService, TranslatorHelperInterface $translatorHelper)
     {
         $this->type              = $type;
         $this->controllerService = $controllerService;
+        $this->translatorHelper  = $translatorHelper;
     }
 
     /**
@@ -100,5 +115,10 @@ abstract class AbstractLayoutBoxConfigurator extends AbstractContainer implement
     protected function getBoxTypeSelect(FormInterface $form)
     {
         return $form->getChildren()->get('required_data')->getChildren()->get('boxType');
+    }
+
+    protected function trans($message)
+    {
+        return $this->translatorHelper->trans($message);
     }
 }

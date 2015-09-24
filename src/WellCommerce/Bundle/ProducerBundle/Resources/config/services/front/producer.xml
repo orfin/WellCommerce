@@ -5,15 +5,11 @@
 
     <services>
         <service id="producer.manager.front" class="WellCommerce\Bundle\ProducerBundle\Manager\Front\ProducerManager">
-            <argument type="service" id="flash_helper"/>
-            <argument type="service" id="redirect_helper"/>
-            <argument type="service" id="image_helper"/>
-            <argument type="service" id="event_dispatcher"/>
-            <argument type="service" id="doctrine_helper"/>
-            <argument type="service" id="translator"/>
-            <argument type="service" id="request_helper"/>
-            <call method="setRepository">
-                <argument type="service" id="producer.repository"/>
+            <argument type="service" id="producer.repository"/>
+            <argument type="service" id="producer.event_dispatcher"/>
+            <argument type="service" id="producer.factory"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
             </call>
         </service>
 

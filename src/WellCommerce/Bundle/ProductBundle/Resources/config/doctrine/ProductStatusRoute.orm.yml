@@ -1,0 +1,11 @@
+WellCommerce\Bundle\ProductBundle\Entity\ProductStatusRoute:
+    type: entity
+    table: route_product_status
+    manyToOne:
+        identifier:
+            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\ProductStatus
+            fetch: LAZY
+            joinColumns:
+                foreign_id:
+                    referencedColumnName: id
+                    onDelete: CASCADE

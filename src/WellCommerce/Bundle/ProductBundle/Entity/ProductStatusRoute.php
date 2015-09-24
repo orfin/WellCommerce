@@ -12,22 +12,24 @@
 
 namespace WellCommerce\Bundle\ProductBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use WellCommerce\Bundle\RoutingBundle\Entity\Route;
 use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;
 
 /**
- * @ORM\Entity
- * @ORM\Table(name="route_product_status")
+ * Class ProductStatusRoute
+ *
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class ProductStatusRoute extends Route implements RouteInterface
 {
     /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\ProductStatus")
-     * @ORM\JoinColumn(name="foreign_id", referencedColumnName="id", onDelete="CASCADE")
+     * @var ProductStatusInterface
      */
     protected $identifier;
 
+    /**
+     * @return string
+     */
     public function getType()
     {
         return 'product_status';

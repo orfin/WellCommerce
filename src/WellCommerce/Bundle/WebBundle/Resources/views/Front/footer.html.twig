@@ -1,1 +1,55 @@
-</html>
+{% trans_default_domain "wellcommerce" %}
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-9 col-xs-6">
+                <div class="row">
+                    {% for page in cmsPages if page.children|length %}
+                        <div class="col-sm-4 menu">
+                            <h3>{{ page.name }}</h3>
+                            <ul>
+                                {% for childPage in page.children %}
+                                    <li><a href="{{ childPage.route }}">{{ childPage.name }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endfor %}
+                    <div class="col-sm-4 menu">
+                        <h3>{% trans %}client.heading.footer_links{% endtrans %}</h3>
+                        <ul>
+                            {% if app.user and is_granted('ROLE_CLIENT') %}
+                                <li><a href="{{ path('front.client.settings') }}">{% trans %}client.link.settings{% endtrans %}</a></li>
+                                <li><a href="{{ path('front.client.logout') }}">{% trans %}client.link.logout{% endtrans %}</a></li>
+                                <li><a href="{{ path('front.client.orders') }}">{% trans %}client.link.orders{% endtrans %}</a></li>
+                                <li><a href="{{ path('front.client.address_book') }}">{% trans %}client.link.address_book{% endtrans %}</a></li>
+                                <li><a href="{{ path('front.client.wishlist') }}">{% trans %}client.link.wishlist{% endtrans %}</a></li>
+                            {%  else %}
+                                <li><a href="{{ path('front.client.login') }}">{% trans %}client.link.login{% endtrans %}</a></li>
+                                <li><a href="{{ path('front.client.password') }}" class="coming-soon">{% trans %}client.link.password_forgotten{% endtrans %}</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3 col-xs-6">
+                <div class="fb-like-box" data-href="https://www.facebook.com/WellCommerce" data-colorscheme="dark" data-show-faces="true" data-header="false" data-stream="false" data-show-border="false"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="copy">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 left">
+                    {{ "now"|date("Y") }} © {{ currentShop().name }} / All rights reserved
+                </div>
+                <div class="col-lg-6 right text-right">
+                    Powered by <a href="http://wellcommerce.org" title="WellCommerce - an open-source e-commerce solution">
+                        <img src="{{ asset('themes/wellcommerce/assets/img/footer-print.png') }}"/>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include 'WellCommerceWebBundle:Front:modals.html.twig' %}
+</footer>

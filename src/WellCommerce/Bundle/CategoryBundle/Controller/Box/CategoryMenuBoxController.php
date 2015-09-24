@@ -20,8 +20,6 @@ use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
  * Class CategoryMenuBoxController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class CategoryMenuBoxController extends AbstractBoxController implements BoxControllerInterface
 {
@@ -31,14 +29,14 @@ class CategoryMenuBoxController extends AbstractBoxController implements BoxCont
     public function indexAction()
     {
         $active         = null;
-        $activeCategory = $this->getManager()->getCategoryProvider()->getCurrentCategory();
+        $activeCategory = $this->manager->getCategoryProvider()->getCurrentCategory();
 
         if ($activeCategory instanceof Category) {
             $active = $activeCategory->getId();
         }
 
-        return [
+        return $this->displayTemplate('index', [
             'active' => $active
-        ];
+        ]);
     }
 }

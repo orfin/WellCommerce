@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\AttributeBundle\Form\DataTransformer;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
-use WellCommerce\Bundle\FormBundle\DataTransformer\CollectionToArrayTransformer;
+use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
 
 /**
  * Class AttributeCollectionToArrayTransformer
@@ -28,14 +28,15 @@ class AttributeCollectionToArrayTransformer extends CollectionToArrayTransformer
      */
     public function reverseTransform($modelData, PropertyPathInterface $propertyPath, $value)
     {
-        $collection = new ArrayCollection();
+        /** @var $repository \WellCommerce\Bundle\AttributeBundle\Repository\AttributeRepositoryInterface */
         $repository = $this->getRepository();
+        $collection = new ArrayCollection();
 
         if (null === $value || empty($value)) {
             return $collection;
         }
         foreach ($value['editor'] as $attribute) {
-            $item = $repository->findOrCreate($attribute);
+            $item = $this->findOrCreate($attribute);
             $collection->add($item);
         }
 
@@ -43,10 +44,26 @@ class AttributeCollectionToArrayTransformer extends CollectionToArrayTransformer
     }
 
     /**
-     * @return \WellCommerce\Bundle\AttributeBundle\Repository\AttributeRepositoryInterface
+     * {@inheritdoc}
      */
-    protected function getRepository()
+    public function findOrCreate($data)
     {
-        return parent::getRepository();
+        $id       = $this->propertyAccessor->getValue($data, '[id]');
+        $name     = $this->propertyAccessor->getValue($data, '[name]');
+        $values   = $this->propertyAccessor->getValue($data, '[values]');
+        $isNew    = substr($id, 0, 3) == 'new';
+
+        if ($isNew) {
+            $item = $this->addAttribute($name);
+        } else {
+            $item = $this->find($id);
+        }
+
+        if (!empty($values)) {
+            $collection = $this->getAttributeValueRepository()->makeCollection($item, $values);
+            $item->setValues($collection);
+        }
+
+        return $item;
     }
 }

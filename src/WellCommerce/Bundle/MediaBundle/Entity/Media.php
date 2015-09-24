@@ -12,77 +12,57 @@
 
 namespace WellCommerce\Bundle\MediaBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model as ORMBehaviors;
-use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\Collection;
+use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
+use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 
 /**
  * Class Media
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @ORM\Table(name="media")
- * @ORM\HasLifecycleCallbacks
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\MediaBundle\Repository\MediaRepository")
  */
-class Media
+class Media implements MediaInterface
 {
-    use ORMBehaviors\Timestampable\Timestampable;
-    use ORMBehaviors\Blameable\Blameable;
+    use Timestampable;
+    use Blameable;
 
     /**
-     * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\ProductPhoto", mappedBy="photo", cascade={"persist", "remove"}, orphanRemoval=true)
-     */
-    protected $productPhotos;
-    
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @var int
      */
     protected $id;
-    
+
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
+     * @var Collection
+     */
+    protected $productPhotos;
+
+    /**
+     * @var string
      */
     protected $name;
     
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string
      */
     protected $path;
     
     /**
-     * @ORM\Column(type="string", length=12, nullable=true)
+     * @var string
      */
     protected $extension;
     
     /**
-     * @ORM\Column(type="string", length=64, nullable=true)
+     * @var string
      */
     protected $mime;
     
     /**
-     * @ORM\Column(type="string", length=12, nullable=true)
+     * @var string
      */
     protected $size;
 
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->productPhotos = new ArrayCollection();
-    }
-
-    /**
-     * Get id.
-     *
-     * @return integer
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -90,9 +70,7 @@ class Media
     }
 
     /**
-     * Returns real file name
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getName()
     {
@@ -100,9 +78,7 @@ class Media
     }
 
     /**
-     * Sets file name
-     *
-     * @param $name
+     * {@inheritdoc}
      */
     public function setName($name)
     {
@@ -110,9 +86,7 @@ class Media
     }
 
     /**
-     * Returns path
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getPath()
     {
@@ -120,9 +94,7 @@ class Media
     }
 
     /**
-     * Sets path
-     *
-     * @param $path
+     * {@inheritdoc}
      */
     public function setPath($path)
     {
@@ -130,9 +102,7 @@ class Media
     }
 
     /**
-     * Returns mime type
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getMime()
     {
@@ -140,9 +110,7 @@ class Media
     }
 
     /**
-     * Sets mime type
-     *
-     * @param $mime
+     * {@inheritdoc}
      */
     public function setMime($mime)
     {
@@ -150,9 +118,7 @@ class Media
     }
 
     /**
-     * Returns file size in bytes
-     *
-     * @return integer
+     * {@inheritdoc}
      */
     public function getSize()
     {
@@ -160,24 +126,45 @@ class Media
     }
 
     /**
-     * Sets file size in bytes
-     *
-     * @param $size
+     * {@inheritdoc}
      */
     public function setSize($size)
     {
         $this->size = $size;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getFullName()
     {
         return sprintf('%s.%s', $this->id, $this->extension);
     }
 
     /**
-     * @ORM\PrePersist()
-     * @ORM\PreUpdate()
+     * {@inheritdoc}
      */
+    public function getExtension()
+    {
+        return $this->extension;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setExtension($extension)
+    {
+        $this->extension = $extension;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setProductPhotos(Collection $productPhotos)
+    {
+        $this->productPhotos = $productPhotos;
+    }
+
     public function preUpload()
     {
         if (null !== $this->getExtension()) {
@@ -186,23 +173,4 @@ class Media
         }
     }
 
-    /**
-     * Returns extension
-     *
-     * @return string
-     */
-    public function getExtension()
-    {
-        return $this->extension;
-    }
-
-    /**
-     * Sets extension
-     *
-     * @param $extension
-     */
-    public function setExtension($extension)
-    {
-        $this->extension = $extension;
-    }
 }

@@ -14,7 +14,7 @@ namespace WellCommerce\Bundle\CartBundle\Tests\Provider;
 
 
 use WellCommerce\Bundle\CartBundle\Entity\Cart;
-use WellCommerce\Bundle\CoreBundle\Tests\AbstractTestCase;
+use WellCommerce\Bundle\CoreBundle\Test\AbstractTestCase;
 
 class CartProviderTest extends AbstractTestCase
 {

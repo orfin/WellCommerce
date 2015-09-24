@@ -12,85 +12,71 @@
 
 namespace WellCommerce\Bundle\UserBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
-use Symfony\Component\Security\Core\User\EquatableInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\UserInterface as BaseUserInterface;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\EnableableTrait;
-use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\PhotoTrait;
 
 /**
- * User
+ * Class User
  *
- * @ORM\Table("users")
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\UserBundle\Repository\UserRepository")
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class User implements \Serializable, UserInterface, EquatableInterface
+class User implements UserInterface
 {
-    use Timestampable;
-    use Blameable;
-    use EnableableTrait;
+    use Timestampable, Blameable, EnableableTrait;
 
     /**
-     * @ORM\Column(type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @var int
      */
-    private $id;
+    protected $id;
 
     /**
-     * @ORM\Column(name="first_name", type="string", length=64, unique=false)
+     * @var string
      */
-    private $firstName;
+    protected $firstName;
 
     /**
-     * @ORM\Column(name="last_name", type="string", length=64, unique=false)
+     * @var string
      */
-    private $lastName;
+    protected $lastName;
 
     /**
-     * @ORM\Column(type="string", length=25, unique=true)
+     * @var string
      */
-    private $username;
+    protected $username;
 
     /**
-     * @ORM\Column(type="string", length=64)
+     * @var string
      */
-    private $password;
+    protected $password;
 
     /**
-     * @ORM\Column(type="string", length=60, unique=true)
+     * @var string
      */
-    private $email;
+    protected $email;
 
     /**
-     * @ORM\Column(name="salt", type="string", length=40)
+     * @var string
      */
-    private $salt;
+    protected $salt;
 
     /**
-     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\UserBundle\Entity\Role", inversedBy="users")
+     * @var Collection
      */
-    private $roles;
+    protected $roles;
 
-    public function __construct()
-    {
-        $this->enabled = true;
-        $this->roles   = new ArrayCollection();
-        $this->salt    = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
-    }
-
+    /**
+     * @return int
+     */
     public function getId()
     {
         return $this->id;
     }
 
     /**
-     * Returns first name
-     *
-     * @return mixed
+     * @return string
      */
     public function getFirstName()
     {
@@ -98,9 +84,7 @@ class User implements \Serializable, UserInterface, EquatableInterface
     }
 
     /**
-     * Sets first name
-     *
-     * @param $firstName
+     * @param string $firstName
      */
     public function setFirstName($firstName)
     {
@@ -108,9 +92,7 @@ class User implements \Serializable, UserInterface, EquatableInterface
     }
 
     /**
-     * Returns last name
-     *
-     * @return mixed
+     * @return string
      */
     public function getLastName()
     {
@@ -118,33 +100,51 @@ class User implements \Serializable, UserInterface, EquatableInterface
     }
 
     /**
-     * Sets first name
-     *
-     * @param $lastName
+     * @param string $lastName
      */
     public function setLastName($lastName)
     {
         $this->lastName = $lastName;
     }
 
+    /**
+     * @return string
+     */
     public function getUsername()
     {
         return $this->username;
     }
 
+    /**
+     * @param string $username
+     */
     public function setUsername($username)
     {
         $this->username = $username;
     }
 
+    /**
+     * @return string
+     */
     public function getEmail()
     {
         return $this->email;
     }
 
+    /**
+     * @param string $email
+     */
     public function setEmail($email)
     {
         $this->email = $email;
+    }
+
+    /**
+     * @param string $salt
+     */
+    public function setSalt($salt)
+    {
+        $this->salt = $salt;
     }
 
     /**
@@ -156,29 +156,43 @@ class User implements \Serializable, UserInterface, EquatableInterface
     }
 
     /**
-     * @inheritDoc
+     * @return string
      */
     public function getPassword()
     {
         return $this->password;
     }
 
+    /**
+     * @param string $password
+     */
     public function setPassword($password)
     {
         $this->password = $password;
     }
 
     /**
-     * @inheritDoc
+     * @return array
      */
     public function getRoles()
     {
         return $this->roles->toArray();
     }
 
-    public function addRole(Role $role)
+    /**
+     * @param RoleInterface $role
+     */
+    public function addRole(RoleInterface $role)
     {
         $this->roles[] = $role;
+    }
+
+    /**
+     * @param Collection $roles
+     */
+    public function setRoles(Collection $roles)
+    {
+        $this->roles = $roles;
     }
 
     /**
@@ -189,7 +203,7 @@ class User implements \Serializable, UserInterface, EquatableInterface
     }
 
     /**
-     * @see \Serializable::serialize()
+     * @return string
      */
     public function serialize()
     {
@@ -197,14 +211,19 @@ class User implements \Serializable, UserInterface, EquatableInterface
     }
 
     /**
-     * @see \Serializable::unserialize()
+     * @param string $serialized
      */
     public function unserialize($serialized)
     {
         list($this->id, $this->username, $this->password) = unserialize($serialized);
     }
 
-    public function isEqualTo(UserInterface $user)
+    /**
+     * @param BaseUserInterface $user
+     *
+     * @return bool
+     */
+    public function isEqualTo(BaseUserInterface $user)
     {
         if ($this->password !== $user->getPassword()) {
             return false;

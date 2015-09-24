@@ -20,8 +20,10 @@ parameters:
 
     doctrine.server_version: 5.6
 
-    fallback_theme: demo
+    fallback_theme: wellcommerce
     fallback_hostname: localhost
+
+    developer_mode.ip: 127.0.0.1
 
     pdo.db_options:
       db_table:    session

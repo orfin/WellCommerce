@@ -27,4 +27,12 @@ class ShippingMethodRepository extends AbstractEntityRepository implements Shipp
     {
         return $this->findOneBy([], ['hierarchy' => 'asc']);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findAllEnabledShippingMethods()
+    {
+        return $this->findBy(['enabled' => true], ['hierarchy' => 'asc']);
+    }
 }

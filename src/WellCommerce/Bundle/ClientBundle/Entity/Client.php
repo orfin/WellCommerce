@@ -11,118 +11,84 @@
  */
 namespace WellCommerce\Bundle\ClientBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model as ORMBehaviors;
-use Symfony\Component\Security\Core\User\EquatableInterface;
+use Doctrine\Common\Collections\Collection;
+use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
+use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * Client
+ * Class Client
  *
- * @ORM\Table(name="client")
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\ClientBundle\Repository\ClientRepository")
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class Client implements \Serializable, UserInterface, EquatableInterface
+class Client implements ClientInterface
 {
-    use ORMBehaviors\Timestampable\Timestampable;
-    use ORMBehaviors\Blameable\Blameable;
+    use Timestampable, Blameable, ClientAddressAwareTrait;
 
     const ROLE_CLIENT = 'ROLE_CLIENT';
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @var int
      */
     protected $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="discount", type="decimal", precision=15, scale=4, nullable=true)
+     * @var float
      */
     protected $discount;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="first_name", type="string", length=255, nullable=false)
      */
     protected $firstName;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="last_name", type="string", length=255, nullable=false)
      */
     protected $lastName;
 
     /**
-     * @ORM\Column(type="string", length=64)
+     * @var string
      */
     protected $password;
 
     /**
-     * @ORM\Column(type="string", length=60, unique=true, nullable=false)
+     * @var string
      */
     protected $email;
 
     /**
-     * @ORM\Column(type="string", length=60, unique=true)
+     * @var string
      */
     protected $username;
 
     /**
-     * @ORM\Column(type="string", length=60, unique=true, nullable=true)
+     * @var string
      */
     protected $phone;
 
     /**
-     * @ORM\Column(name="salt", type="string", length=40)
+     * @var string
      */
     protected $salt;
 
     /**
-     * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\ClientBundle\Entity\ClientAddress", mappedBy="client", cascade={"persist"}, orphanRemoval=true)
+     * @var ClientGroupInterface
      */
-    protected $addresses;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\ClientBundle\Entity\ClientGroup", inversedBy="clients")
-     * @ORM\JoinColumn(name="client_group_id", referencedColumnName="id", onDelete="SET NULL")
-     */
-    protected $group;
+    protected $clientGroup;
 
     /**
      * @var bool
-     *
-     * @ORM\Column(name="conditions_accepted", type="boolean")
      */
     protected $conditionsAccepted;
 
     /**
      * @var bool
-     *
-     * @ORM\Column(name="newsletter_accepted", type="boolean")
      */
     protected $newsletterAccepted;
 
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->addresses = new ArrayCollection();
-        $this->salt      = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
-    }
-
-    /**
-     * Get id.
-     *
-     * @return integer
+     * @inheritDoc
      */
     public function getId()
     {
@@ -130,9 +96,7 @@ class Client implements \Serializable, UserInterface, EquatableInterface
     }
 
     /**
-     * Get discount.
-     *
-     * @return string
+     * @inheritDoc
      */
     public function getDiscount()
     {
@@ -140,80 +104,113 @@ class Client implements \Serializable, UserInterface, EquatableInterface
     }
 
     /**
-     * Set discount.
-     *
-     * @param string $discount
-     *
-     * @return ClientGroup
+     * @inheritDoc
      */
     public function setDiscount($discount)
     {
-        $this->discount = $discount;
-
-        return $this;
+        $this->discount = (float)$discount;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getAddresses()
     {
         return $this->addresses;
     }
 
-    public function setAddresses(ArrayCollection $addresses)
+    /**
+     * @inheritDoc
+     */
+    public function setAddresses(Collection $addresses)
     {
         $this->addresses = $addresses;
     }
 
-    public function addAddress(ClientAddress $address)
+    /**
+     * @inheritDoc
+     */
+    public function addAddress(ClientAddressInterface $address)
     {
         $this->addresses[] = $address;
     }
 
-    public function getGroup()
+    /**
+     * @return ClientGroupInterface
+     */
+    public function getClientGroup()
     {
-        return $this->group;
+        return $this->clientGroup;
     }
 
-    public function setGroup(ClientGroup $clientGroup)
+    /**
+     * @inheritDoc
+     */
+    public function setClientGroup(ClientGroupInterface $clientGroup)
     {
-        $this->group = $clientGroup;
+        $this->clientGroup = $clientGroup;
     }
 
+    /**
+     * @return string
+     */
     public function getFirstName()
     {
         return $this->firstName;
     }
 
+    /**
+     * @param string $firstName
+     */
     public function setFirstName($firstName)
     {
-        $this->firstName = $firstName;
+        $this->firstName = (string)$firstName;
     }
 
+    /**
+     * @return string
+     */
     public function getLastName()
     {
         return $this->lastName;
     }
 
+    /**
+     * @param string $lastName
+     */
     public function setLastName($lastName)
     {
-        $this->lastName = $lastName;
+        $this->lastName = (string)$lastName;
     }
 
+    /**
+     * @return string
+     */
     public function getEmail()
     {
         return $this->email;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function setEmail($email)
     {
-        $this->email    = $email;
-        $this->username = $email;
+        $this->email    = (string)$email;
+        $this->username = (string)$email;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getPassword()
     {
         return $this->password;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function setPassword($password)
     {
         if (strlen($password)) {
@@ -221,14 +218,20 @@ class Client implements \Serializable, UserInterface, EquatableInterface
         }
     }
 
+    /**
+     * @return null
+     */
     public function getSalt()
     {
         return null;
     }
 
+    /**
+     * @param string $salt
+     */
     public function setSalt($salt)
     {
-        $this->salt = $salt;
+        $this->salt = (string)$salt;
     }
 
     /**
@@ -239,7 +242,7 @@ class Client implements \Serializable, UserInterface, EquatableInterface
     }
 
     /**
-     * @return mixed
+     * @inheritDoc
      */
     public function getUsername()
     {
@@ -247,11 +250,11 @@ class Client implements \Serializable, UserInterface, EquatableInterface
     }
 
     /**
-     * @param mixed $username
+     * @inheritDoc
      */
     public function setUsername($username)
     {
-        $this->username = $username;
+        $this->username = (string)$username;
     }
 
     /**
@@ -264,26 +267,41 @@ class Client implements \Serializable, UserInterface, EquatableInterface
         ];
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getPhone()
     {
         return $this->phone;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function setPhone($phone)
     {
-        $this->phone = $phone;
+        $this->phone = (string)$phone;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function serialize()
     {
         return serialize([$this->id, $this->username, $this->password]);
     }
 
+    /**
+     * @inheritDoc
+     */
     public function unserialize($serialized)
     {
         list($this->id, $this->username, $this->password) = unserialize($serialized);
     }
 
+    /**
+     * @inheritDoc
+     */
     public function isEqualTo(UserInterface $user)
     {
         if ($this->password !== $user->getPassword()) {
@@ -302,7 +320,7 @@ class Client implements \Serializable, UserInterface, EquatableInterface
     }
 
     /**
-     * @return boolean
+     * @inheritDoc
      */
     public function isConditionsAccepted()
     {
@@ -310,15 +328,15 @@ class Client implements \Serializable, UserInterface, EquatableInterface
     }
 
     /**
-     * @param boolean $conditionsAccepted
+     * @inheritDoc
      */
     public function setConditionsAccepted($conditionsAccepted)
     {
-        $this->conditionsAccepted = (int)$conditionsAccepted;
+        $this->conditionsAccepted = (bool)$conditionsAccepted;
     }
 
     /**
-     * @return boolean
+     * @inheritDoc
      */
     public function isNewsletterAccepted()
     {
@@ -326,10 +344,10 @@ class Client implements \Serializable, UserInterface, EquatableInterface
     }
 
     /**
-     * @param boolean $newsletterAccepted
+     * @inheritDoc
      */
     public function setNewsletterAccepted($newsletterAccepted)
     {
-        $this->newsletterAccepted = (int)$newsletterAccepted;
+        $this->newsletterAccepted = (bool)$newsletterAccepted;
     }
 }

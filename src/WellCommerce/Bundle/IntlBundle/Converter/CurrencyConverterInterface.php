@@ -22,24 +22,12 @@ interface CurrencyConverterInterface
     /**
      * Converts amount from base currency to target currency
      *
-     * @param float  $amount
-     * @param string $baseCurrency
-     * @param string $targetCurrency
-     * @param float  $taxValue
+     * @param float       $amount
+     * @param null|string $baseCurrency
+     * @param null|string $targetCurrency
+     * @param int         $quantity
      *
      * @return float
      */
-    public function convert($amount, $baseCurrency = null, $targetCurrency = null, $taxValue = 0);
-
-    /**
-     * Formats amount for given currency
-     *
-     * @param float  $amount
-     * @param string $baseCurrency
-     * @param string $targetCurrency
-     * @param float  $taxValue
-     *
-     * @return string
-     */
-    public function format($amount, $baseCurrency = null, $targetCurrency = null, $taxValue = 0);
+    public function convert($amount, $baseCurrency = null, $targetCurrency = null, $quantity = 1);
 }

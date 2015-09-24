@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Bundle\MediaBundle\DataGrid;
 
-use WellCommerce\Bundle\DataGridBundle\AbstractDataGrid;
+use WellCommerce\Bundle\CoreBundle\DataGrid\AbstractDataGrid;
 use WellCommerce\Bundle\DataGridBundle\Column\Column;
 use WellCommerce\Bundle\DataGridBundle\Column\ColumnCollection;
 use WellCommerce\Bundle\DataGridBundle\Column\Options\Appearance;
@@ -19,7 +19,6 @@ use WellCommerce\Bundle\DataGridBundle\Column\Options\Filter;
 use WellCommerce\Bundle\DataGridBundle\Column\Options\Sorting;
 use WellCommerce\Bundle\DataGridBundle\Configuration\EventHandler\LoadedEventHandler;
 use WellCommerce\Bundle\DataGridBundle\Configuration\EventHandler\ProcessEventHandler;
-use WellCommerce\Bundle\DataGridBundle\DataGridInterface;
 use WellCommerce\Bundle\DataGridBundle\Options\OptionsInterface;
 
 /**
@@ -27,7 +26,7 @@ use WellCommerce\Bundle\DataGridBundle\Options\OptionsInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class MediaDataGrid extends AbstractDataGrid implements DataGridInterface
+class MediaDataGrid extends AbstractDataGrid
 {
     /**
      * {@inheritdoc}
@@ -58,23 +57,23 @@ class MediaDataGrid extends AbstractDataGrid implements DataGridInterface
         ]));
 
         $collection->add(new Column([
-            'id'         => 'name',
-            'caption'    => $this->trans('media.name'),
+            'id'      => 'name',
+            'caption' => $this->trans('media.name'),
         ]));
 
         $collection->add(new Column([
-            'id'         => 'mime',
-            'caption'    => $this->trans('media.mime'),
+            'id'      => 'mime',
+            'caption' => $this->trans('media.mime'),
         ]));
 
         $collection->add(new Column([
-            'id'         => 'extension',
-            'caption'    => $this->trans('media.extension'),
+            'id'      => 'extension',
+            'caption' => $this->trans('media.extension'),
         ]));
 
         $collection->add(new Column([
-            'id'         => 'size',
-            'caption'    => $this->trans('media.size'),
+            'id'      => 'size',
+            'caption' => $this->trans('media.size'),
         ]));
     }
 

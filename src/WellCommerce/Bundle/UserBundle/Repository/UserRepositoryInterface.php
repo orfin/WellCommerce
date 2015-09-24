@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\UserBundle\Repository;
 
 use Symfony\Component\Security\Core\User\UserProviderInterface;
-use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\DataSetAwareRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
@@ -21,6 +20,6 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface UserRepositoryInterface extends DataSetAwareRepositoryInterface, RepositoryInterface, UserProviderInterface
+interface UserRepositoryInterface extends RepositoryInterface, UserProviderInterface
 {
 }

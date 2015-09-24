@@ -13,40 +13,32 @@
 namespace WellCommerce\Bundle\AdminBundle\MenuBuilder;
 
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use WellCommerce\Bundle\CoreBundle\Collection\AbstractCollection;
+use WellCommerce\Common\Collections\ArrayCollection;
 
 /**
  * Class AdminMenuBuilder
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AdminMenuBuilder extends AbstractCollection implements AdminMenuBuilderInterface
+class AdminMenuBuilder extends ArrayCollection implements AdminMenuBuilderInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function getMenu()
+    public function createMenu()
     {
-        $tree = $this->items['menu'];
+        usort($this->items['menu'], function (AdminMenuItemInterface $a, AdminMenuItemInterface $b) {
+            $a->sortChildren();
+            $b->sortChildren();
 
-        usort($tree, [$this, 'sortMenu']);
+            if ($a->getSortOrder() == $b->getSortOrder()) {
+                return 0;
+            }
 
-        return $tree;
-    }
+            return $a->getSortOrder() > $b->getSortOrder() ? 1 : -1;
+        });
 
-    /**
-     * {@inheritdoc}
-     */
-    public function sortMenu(AdminMenuItemInterface $a, AdminMenuItemInterface $b)
-    {
-        $a->sortChildren();
-        $b->sortChildren();
-
-        if ($a->getSortOrder() == $b->getSortOrder()) {
-            return 0;
-        }
-
-        return $a->getSortOrder() > $b->getSortOrder() ? 1 : -1;
+        return $this->items['menu'];
     }
 
     /**

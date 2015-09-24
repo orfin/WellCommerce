@@ -34,5 +34,10 @@
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
             <option name="fields">slug</option>
         </constraint>
+        <property name="route">
+            <constraint name="Valid">
+                <option name="deep">true</option>
+            </constraint>
+        </property>
     </class>
 </constraint-mapping>

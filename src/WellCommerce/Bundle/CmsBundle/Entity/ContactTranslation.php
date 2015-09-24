@@ -12,63 +12,41 @@
 
 namespace WellCommerce\Bundle\CmsBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Knp\DoctrineBehaviors\Model\Translatable\Translation;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\AddressTrait;
 use WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface;
 
 /**
- * ContactTranslation
+ * Class ContactTranslation
  *
- * @ORM\Table("contact_translation")
- * @ORM\Entity
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class ContactTranslation implements LocaleAwareInterface
 {
-    use ORMBehaviors\Translatable\Translation;
+    use Translation;
     use AddressTrait;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255)
      */
-    private $name;
+    protected $name;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="email", type="string", length=255)
      */
-    private $email;
+    protected $email;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="phone", type="string", length=255)
      */
-    private $phone;
+    protected $phone;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="business_hours", type="text")
      */
-    private $businessHours;
+    protected $businessHours;
 
     /**
-     * Returns translation ID.
-     *
-     * @return integer The ID.
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Get name
-     *
      * @return string
      */
     public function getName()
@@ -77,8 +55,6 @@ class ContactTranslation implements LocaleAwareInterface
     }
 
     /**
-     * Set name
-     *
      * @param string $name
      */
     public function setName($name)
@@ -87,8 +63,6 @@ class ContactTranslation implements LocaleAwareInterface
     }
 
     /**
-     * Get email
-     *
      * @return string
      */
     public function getEmail()
@@ -97,8 +71,6 @@ class ContactTranslation implements LocaleAwareInterface
     }
 
     /**
-     * Set email
-     *
      * @param string $email
      */
     public function setEmail($email)
@@ -107,8 +79,6 @@ class ContactTranslation implements LocaleAwareInterface
     }
 
     /**
-     * Get phone
-     *
      * @return string
      */
     public function getPhone()
@@ -117,8 +87,6 @@ class ContactTranslation implements LocaleAwareInterface
     }
 
     /**
-     * Set phone
-     *
      * @param string $phone
      */
     public function setPhone($phone)
@@ -127,8 +95,6 @@ class ContactTranslation implements LocaleAwareInterface
     }
 
     /**
-     * Get businessHours
-     *
      * @return string
      */
     public function getBusinessHours()
@@ -137,8 +103,6 @@ class ContactTranslation implements LocaleAwareInterface
     }
 
     /**
-     * Set businessHours
-     *
      * @param string $businessHours
      */
     public function setBusinessHours($businessHours)

@@ -11,9 +11,7 @@
  */
 namespace WellCommerce\Bundle\CmsBundle\Form\Admin;
 
-use WellCommerce\Bundle\FormBundle\Builder\AbstractFormBuilder;
-use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
-use WellCommerce\Bundle\FormBundle\DataTransformer\TranslationTransformer;
+use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
@@ -21,7 +19,7 @@ use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class NewsFormBuilder extends AbstractFormBuilder implements FormBuilderInterface
+class NewsFormBuilder extends AbstractFormBuilder
 {
     /**
      * {@inheritdoc}
@@ -36,22 +34,22 @@ class NewsFormBuilder extends AbstractFormBuilder implements FormBuilderInterfac
         $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
             'label'       => $this->trans('form.translations.label'),
-            'transformer' => new TranslationTransformer($this->get('news.repository'))
+            'transformer' => $this->getRepositoryTransformer('translation', $this->get('news.repository'))
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
             'name'  => 'topic',
-            'label' => $this->trans('news.topic.label'),
+            'label' => $this->trans('news.label.topic'),
         ]));
 
         $languageData->addChild($this->getElement('text_area', [
             'name'  => 'summary',
-            'label' => $this->trans('news.summary.label'),
+            'label' => $this->trans('news.label.summary'),
         ]));
 
         $languageData->addChild($this->getElement('text_area', [
             'name'  => 'content',
-            'label' => $this->trans('news.content.label'),
+            'label' => $this->trans('news.label.content'),
         ]));
 
         $form->addFilter($this->getFilter('trim'));

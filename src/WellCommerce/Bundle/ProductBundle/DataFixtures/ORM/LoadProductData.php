@@ -75,18 +75,16 @@ class LoadProductData extends AbstractDataFixture
         $dimension->setWidth(rand(10, 100));
 
         $buyPrice = new Price();
-        $buyPrice->setAmount(rand(1, 100));
+        $buyPrice->setGrossAmount(rand(50, 80));
         $buyPrice->setCurrency($currency->getCode());
 
         $sellPrice = new DiscountablePrice();
-        $sellPrice->setAmount($price = rand(100, 200));
+        $sellPrice->setGrossAmount($price = rand(100, 200));
         $sellPrice->setCurrency($currency->getCode());
-        $sellPrice->setValidFrom(null);
-        $sellPrice->setValidTo(null);
 
         foreach($statuses as $status){
             if($status->translate()->getName() === 'Promotions'){
-                $sellPrice->setDiscountedAmount($price * (rand(80, 95) / 100));
+                $sellPrice->setDiscountedGrossAmount($price * (rand(80, 95) / 100));
                 $sellPrice->setValidFrom(new \DateTime());
                 $sellPrice->setValidTo((new \DateTime())->modify('+30 days'));
             }

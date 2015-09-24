@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\ProductBundle\Repository;
 
-use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\DataSetAwareRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
@@ -20,14 +19,6 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ProductRepositoryInterface extends RepositoryInterface, DataSetAwareRepositoryInterface
+interface ProductRepositoryInterface extends RepositoryInterface
 {
-    /**
-     * Returns product by id which is enabled
-     *
-     * @param int $id
-     *
-     * @return null|\WellCommerce\Bundle\ProductBundle\Entity\Product
-     */
-    public function findEnabledProductById($id);
 }

@@ -12,11 +12,13 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Controller\Box;
 
+use WellCommerce\Bundle\CoreBundle\Controller\ControllerInterface;
+
 /**
  * Interface BoxControllerInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface BoxControllerInterface
+interface BoxControllerInterface extends ControllerInterface
 {
 }

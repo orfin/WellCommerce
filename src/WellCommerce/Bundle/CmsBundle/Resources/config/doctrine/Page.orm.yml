@@ -1,0 +1,139 @@
+WellCommerce\Bundle\CmsBundle\Entity\Page:
+    type: entity
+    table: page
+    repositoryClass: WellCommerce\Bundle\CmsBundle\Repository\PageRepository
+    id:
+        id:
+            type: integer
+            scale: 0
+            length: null
+            unique: false
+            nullable: false
+            precision: 0
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        publish:
+            type: boolean
+            scale: 0
+            length: null
+            unique: false
+            nullable: false
+            precision: 0
+            options:
+                default: 0
+        redirectType:
+            type: integer
+            scale: 0
+            length: null
+            unique: false
+            nullable: false
+            precision: 0
+            options:
+                default: 0
+            column: redirect_type
+        redirectUrl:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: true
+            precision: 0
+            column: redirect_url
+        redirectRoute:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: true
+            precision: 0
+            column: redirect_route
+        hierarchy:
+            type: integer
+            scale: 0
+            length: null
+            unique: false
+            nullable: true
+            precision: 0
+            options:
+                default: 0
+    manyToOne:
+        parent:
+            targetEntity: WellCommerce\Bundle\CmsBundle\Entity\Page
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: children
+            joinColumns:
+                parent_id:
+                    referencedColumnName: id
+                    onDelete: CASCADE
+            orphanRemoval: false
+    manyToMany:
+        clientGroups:
+            targetEntity: WellCommerce\Bundle\ClientBundle\Entity\ClientGroup
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: pages
+            joinTable:
+                name: page_client_group
+                schema: null
+                joinColumns:
+                    -
+                        name: page_id
+                        unique: false
+                        nullable: true
+                        onDelete: CASCADE
+                        columnDefinition: null
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    -
+                        name: client_group_id
+                        unique: false
+                        nullable: true
+                        onDelete: CASCADE
+                        columnDefinition: null
+                        referencedColumnName: id
+            orderBy: null
+        shops:
+            targetEntity: WellCommerce\Bundle\MultiStoreBundle\Entity\Shop
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: pages
+            joinTable:
+                name: shop_page
+                schema: null
+                joinColumns:
+                    -
+                        name: page_id
+                        unique: false
+                        nullable: true
+                        onDelete: CASCADE
+                        columnDefinition: null
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    -
+                        name: shop_id
+                        unique: false
+                        nullable: true
+                        onDelete: CASCADE
+                        columnDefinition: null
+                        referencedColumnName: id
+            orderBy: null
+    oneToMany:
+        children:
+            targetEntity: WellCommerce\Bundle\CmsBundle\Entity\Page
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: parent
+            inversedBy: null
+            orphanRemoval: false
+            orderBy: null
+    lifecycleCallbacks:
+        prePersist:
+            - prePersist
+        preUpdate:
+            - prePersist

@@ -12,56 +12,37 @@
 
 namespace WellCommerce\Bundle\AttributeBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Doctrine\Common\Collections\Collection;
+use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
+use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
+use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 
 /**
  * Class AttributeValue
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @ORM\Table(name="attribute_value")
- * @ORM\HasLifecycleCallbacks
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\AttributeBundle\Repository\AttributeValueRepository")
  */
-class AttributeValue
+class AttributeValue implements AttributeValueInterface
 {
-    use ORMBehaviors\Translatable\Translatable;
-    use ORMBehaviors\Timestampable\Timestampable;
-    use ORMBehaviors\Blameable\Blameable;
+    use Translatable, Timestampable, Blameable;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\AttributeBundle\Entity\Attribute", inversedBy="values")
-     * @ORM\JoinColumn(name="attribute_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
-     */
-    protected $attribute;
     /**
      * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute", mappedBy="attributeValues")
+     * @var AttributeInterface
      */
-    private $productAttributeValues;
+    protected $attribute;
 
     /**
-     * Constructor
+     * @var Collection
      */
-    public function __construct()
-    {
-        $this->productAttributeValues = new ArrayCollection();
-    }
+    protected $productAttributeValues;
 
     /**
-     * Returns attribute value id
-     *
-     * @return int
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -69,9 +50,7 @@ class AttributeValue
     }
 
     /**
-     * Returns value attribute
-     *
-     * @return Attribute
+     * {@inheritdoc}
      */
     public function getAttribute()
     {
@@ -79,17 +58,15 @@ class AttributeValue
     }
 
     /**
-     * Sets an attribute
-     *
-     * @param Attribute $attribute
+     * {@inheritdoc}
      */
-    public function setAttribute(Attribute $attribute)
+    public function setAttribute(AttributeInterface $attribute)
     {
         $this->attribute = $attribute;
     }
 
     /**
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getProductAttributeValues()
     {
@@ -97,11 +74,10 @@ class AttributeValue
     }
 
     /**
-     * @param mixed $productAttributeValues
+     * {@inheritdoc}
      */
-    public function setProductAttributeValues($productAttributeValues)
+    public function setProductAttributeValues(Collection $productAttributeValues)
     {
         $this->productAttributeValues = $productAttributeValues;
     }
-
 }

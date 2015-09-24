@@ -12,14 +12,12 @@
 
 namespace WellCommerce\Bundle\IntlBundle\Controller\Admin;
 
-use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
+use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
  * Class CurrencyController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class CurrencyController extends AbstractAdminController
 {
@@ -31,8 +29,8 @@ class CurrencyController extends AbstractAdminController
     public function syncExchangeRatesAction()
     {
         $this->get('currency.importer.ecb')->importExchangeRates();
-        $this->getManager()->getFlashHelper()->addSuccess('currency.flashes.success.exchange_rates_synchronization');
+        $this->manager->getFlashHelper()->addSuccess('currency.flashes.success.exchange_rates_synchronization');
 
-        return $this->getManager()->getRedirectHelper()->redirectToAction('index');
+        return $this->redirectToAction('index');
     }
 }

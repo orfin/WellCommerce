@@ -12,49 +12,32 @@
 
 namespace WellCommerce\Bundle\IntlBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
+use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 
 /**
  * Class Locale
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @ORM\Table()
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\IntlBundle\Repository\LocaleRepository")
- * @ORM\Cache(usage="READ_ONLY", region="intl_locale")
  */
-class Locale
+class Locale implements LocaleInterface
 {
-    use ORMBehaviors\Timestampable\Timestampable;
-    use ORMBehaviors\Blameable\Blameable;
+    use Timestampable;
+    use Blameable;
+    use CurrencyAwareTrait;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="code", type="string", length=12)
      */
-    private $code;
+    protected $code;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\IntlBundle\Entity\Currency")
-     * @ORM\JoinColumn(name="currency_id", referencedColumnName="id", onDelete="SET NULL")
-     */
-    private $currency;
-
-    /**
-     * Get id.
-     *
-     * @return integer
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -62,9 +45,7 @@ class Locale
     }
 
     /**
-     * Get code.
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getCode()
     {
@@ -72,32 +53,10 @@ class Locale
     }
 
     /**
-     * Set code.
-     *
-     * @param string $code
-     *
-     * @return Locale
+     * {@inheritdoc}
      */
     public function setCode($code)
     {
         $this->code = $code;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCurrency()
-    {
-        return $this->currency;
-    }
-
-    /**
-     * @param mixed $currency
-     */
-    public function setCurrency($currency)
-    {
-        $this->currency = $currency;
     }
 }

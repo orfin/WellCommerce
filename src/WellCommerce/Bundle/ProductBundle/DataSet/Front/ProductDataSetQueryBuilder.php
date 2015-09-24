@@ -50,7 +50,7 @@ class ProductDataSetQueryBuilder extends BaseProductDataSetQueryBuilder
         $queryBuilder->setParameter('enabled1', true);
 
         // show only products with prices greater than 0
-        $expression = $queryBuilder->expr()->gt('product.sellPrice.amount', ':price');
+        $expression = $queryBuilder->expr()->gt('product.sellPrice.grossAmount', ':price');
         $queryBuilder->andWhere($expression);
         $queryBuilder->setParameter('price', 0);
     }

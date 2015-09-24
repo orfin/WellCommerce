@@ -12,17 +12,15 @@
 
 namespace WellCommerce\Bundle\CmsBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Sluggable\Sluggable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translation;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\MetaDataTrait;
 use WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface;
 
 /**
- * NewsTranslation
+ * Class NewsTranslation
  *
- * @ORM\Table(name="news_translation")
- * @ORM\Entity
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class NewsTranslation implements LocaleAwareInterface
 {
@@ -32,34 +30,18 @@ class NewsTranslation implements LocaleAwareInterface
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="topic", type="string", length=255)
      */
-    private $topic;
+    protected $topic;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="summary", type="text")
      */
-    private $summary;
+    protected $summary;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="content", type="text")
      */
-    private $content;
-
-    /**
-     * Returns translation ID.
-     *
-     * @return integer The ID.
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+    protected $content;
 
     /**
      * @return string
@@ -109,6 +91,9 @@ class NewsTranslation implements LocaleAwareInterface
         $this->topic = $topic;
     }
 
+    /**
+     * @return array
+     */
     public function getSluggableFields()
     {
         return ['topic'];

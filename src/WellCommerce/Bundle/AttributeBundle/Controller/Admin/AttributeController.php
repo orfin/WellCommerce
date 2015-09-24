@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\AttributeBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
-use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
+use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
  * Class AttributeController
@@ -22,6 +22,11 @@ use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
  */
 class AttributeController extends AbstractAdminController
 {
+    /**
+     * @var \WellCommerce\Bundle\AttributeBundle\Manager\Admin\AttributeManager
+     */
+    protected $manager;
+
     /**
      * Ajax action for listing attributes
      *
@@ -37,7 +42,7 @@ class AttributeController extends AbstractAdminController
         }
 
         $id         = $request->request->get('id');
-        $attributes = $this->getRepository()->findAllByAttributeGroupId($id);
+        $attributes = $this->manager->getRepository()->findAllByAttributeGroupId($id);
 
         $sets = [];
 
@@ -55,16 +60,6 @@ class AttributeController extends AbstractAdminController
     }
 
     /**
-     * Returns attribute repository
-     *
-     * @return \WellCommerce\Bundle\AttributeBundle\Repository\AttributeRepositoryInterface
-     */
-    protected function getRepository()
-    {
-        return $this->getManager()->getRepository();
-    }
-
-    /**
      * Adds new attribute value using ajax request
      *
      * @param Request $request
@@ -77,15 +72,18 @@ class AttributeController extends AbstractAdminController
             return $this->redirectToAction('index');
         }
 
-        $group     = $this->get('attribute_group.repository')->find($request->request->get('set'));
-        $attribute = $this->getRepository()->createNewAttribute($group, $request->request->get('name'));
+        try {
+            $attribute = $this->manager->createAttribute();
 
-        $em = $this->getEntityManager();
-        $em->persist($attribute);
-        $em->flush();
+            return $this->jsonResponse([
+                'id' => $attribute->getId()
+            ]);
 
-        return $this->jsonResponse([
-            'id' => $attribute->getId(),
-        ]);
+        } catch (\Exception $e) {
+
+            return $this->jsonResponse([
+                'error' => $e->getMessage(),
+            ]);
+        }
     }
 }

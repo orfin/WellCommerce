@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\ProductBundle\DataSet\Transformer;
 
+use WellCommerce\Bundle\DataSetBundle\CollectionBuilder\CollectionBuilderFactoryInterface;
 use WellCommerce\Bundle\DataSetBundle\Transformer\TransformerInterface;
 
 /**
@@ -22,6 +23,11 @@ use WellCommerce\Bundle\DataSetBundle\Transformer\TransformerInterface;
 class ProductStatusTransformer implements TransformerInterface
 {
     /**
+     * @var CollectionBuilderFactoryInterface
+     */
+    protected $factory;
+
+    /**
      * @var array
      */
     protected $statuses;
@@ -29,11 +35,12 @@ class ProductStatusTransformer implements TransformerInterface
     /**
      * Constructor
      *
-     * @param array $statuses
+     * @param CollectionBuilderFactoryInterface $factory
      */
-    public function __construct(array $statuses = [])
+    public function __construct(CollectionBuilderFactoryInterface $factory)
     {
-        $this->statuses = $statuses;
+        $this->factory  = $factory;
+        $this->statuses = $factory->getArray();
     }
 
     /**

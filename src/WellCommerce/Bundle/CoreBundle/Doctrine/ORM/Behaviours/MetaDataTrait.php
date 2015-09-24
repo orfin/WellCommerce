@@ -21,28 +21,20 @@ trait MetaDataTrait
 {
     /**
      * @var string
-     *
-     * @ORM\Column(name="meta_title", type="string", length=255, nullable=true)
      */
     private $metaTitle;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="meta_keywords", type="text", nullable=true)
      */
     private $metaKeywords;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="meta_description", type="text", nullable=true)
      */
     private $metaDescription;
 
     /**
-     * Get metaTitle
-     *
      * @return string
      */
     public function getMetaTitle()
@@ -51,8 +43,6 @@ trait MetaDataTrait
     }
 
     /**
-     * Set metaTitle
-     *
      * @param string $metaTitle
      */
     public function setMetaTitle($metaTitle)
@@ -61,8 +51,6 @@ trait MetaDataTrait
     }
 
     /**
-     * Get metaKeywords
-     *
      * @return string
      */
     public function getMetaKeywords()
@@ -71,8 +59,6 @@ trait MetaDataTrait
     }
 
     /**
-     * Set metaKeywords
-     *
      * @param string $metaKeywords
      */
     public function setMetaKeywords($metaKeywords)
@@ -81,8 +67,6 @@ trait MetaDataTrait
     }
 
     /**
-     * Get metaDescription
-     *
      * @return string
      */
     public function getMetaDescription()
@@ -91,8 +75,6 @@ trait MetaDataTrait
     }
 
     /**
-     * Set metaDescription
-     *
      * @param string $metaDescription
      */
     public function setMetaDescription($metaDescription)

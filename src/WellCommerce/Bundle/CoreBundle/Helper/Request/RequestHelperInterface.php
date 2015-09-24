@@ -20,6 +20,13 @@ namespace WellCommerce\Bundle\CoreBundle\Helper\Request;
 interface RequestHelperInterface
 {
     /**
+     * Returns the master request
+     *
+     * @return null|\Symfony\Component\HttpFoundation\Request
+     */
+    public function getCurrentRequest();
+
+    /**
      * Returns session attribute
      *
      * @param string $name
@@ -154,4 +161,18 @@ interface RequestHelperInterface
      * @return number
      */
     public function getCurrentLimit($default);
+
+    /**
+     * Returns current locale
+     *
+     * @return string
+     */
+    public function getCurrentLocale();
+
+    /**
+     * Returns current currency
+     *
+     * @return string
+     */
+    public function getCurrentCurrency();
 }

@@ -11,17 +11,15 @@
  */
 namespace WellCommerce\Bundle\PaymentBundle\Form;
 
-use WellCommerce\Bundle\FormBundle\Builder\AbstractFormBuilder;
-use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
-use WellCommerce\Bundle\FormBundle\DataTransformer\TranslationTransformer;
+use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
- * Class PaymentMethodForm
+ * Class PaymentMethodFormBuilder
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PaymentMethodFormBuilder extends AbstractFormBuilder implements FormBuilderInterface
+class PaymentMethodFormBuilder extends AbstractFormBuilder
 {
     /**
      * {@inheritdoc}
@@ -47,31 +45,43 @@ class PaymentMethodFormBuilder extends AbstractFormBuilder implements FormBuilde
         $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
             'label'       => $this->trans('Translations'),
-            'transformer' => new TranslationTransformer($this->get('payment_method.repository'))
+            'transformer' => $this->getRepositoryTransformer('translation', $this->get('payment_method.repository'))
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
             'name'  => 'name',
-            'label' => $this->trans('Name'),
+            'label' => $this->trans('payment_method.label.name'),
         ]));
 
         $requiredData->addChild($this->getElement('select', [
             'name'    => 'processor',
-            'label'   => $this->trans('Processor'),
+            'label'   => $this->trans('payment_method.label.processor'),
             'options' => $options,
             'default' => $defaultProcessor
         ]));
 
         $requiredData->addChild($this->getElement('checkbox', [
             'name'    => 'enabled',
-            'label'   => $this->trans('Enabled'),
+            'label'   => $this->trans('payment_method.label.enabled'),
             'default' => 1
         ]));
 
         $requiredData->addChild($this->getElement('text_field', [
             'name'    => 'hierarchy',
-            'label'   => $this->trans('Hierarchy'),
+            'label'   => $this->trans('payment_method.label.hierarchy'),
             'default' => 0
+        ]));
+
+        $shippingMethodsData = $form->addChild($this->getElement('nested_fieldset', [
+            'name'  => 'shipping_methods_data',
+            'label' => $this->trans('payment_method.label.shipping_methods')
+        ]));
+
+        $shippingMethodsData->addChild($this->getElement('multi_select', [
+            'name'        => 'shippingMethods',
+            'label'       => $this->trans('payment_method.label.shipping_methods'),
+            'options'     => $this->get('shipping_method.collection.admin')->getSelect(),
+            'transformer' => $this->getRepositoryTransformer('collection', $this->get('shipping_method.repository'))
         ]));
 
         $form->addFilter($this->getFilter('no_code'));

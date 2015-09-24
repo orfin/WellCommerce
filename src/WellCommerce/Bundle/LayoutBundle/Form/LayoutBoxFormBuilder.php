@@ -11,9 +11,7 @@
  */
 namespace WellCommerce\Bundle\LayoutBundle\Form;
 
-use WellCommerce\Bundle\FormBundle\Builder\AbstractFormBuilder;
-use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
-use WellCommerce\Bundle\FormBundle\DataTransformer\TranslationTransformer;
+use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
@@ -21,7 +19,7 @@ use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class LayoutBoxFormBuilder extends AbstractFormBuilder implements FormBuilderInterface
+class LayoutBoxFormBuilder extends AbstractFormBuilder
 {
     /**
      * {@inheritdoc}
@@ -36,7 +34,7 @@ class LayoutBoxFormBuilder extends AbstractFormBuilder implements FormBuilderInt
         $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
             'label'       => $this->trans('form.required_data.language_data.label'),
-            'transformer' => new TranslationTransformer($this->get('layout_box.repository'))
+            'transformer' => $this->getRepositoryTransformer('translation', $this->get('layout_box.repository'))
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
@@ -46,13 +44,13 @@ class LayoutBoxFormBuilder extends AbstractFormBuilder implements FormBuilderInt
 
         $requiredData->addChild($this->getElement('text_field', [
             'name'    => 'identifier',
-            'label'   => $this->trans('layout_box.identifier.label'),
-            'comment' => $this->trans('layout_box.identifier.comment'),
+            'label'   => $this->trans('layout_box.label.identifier'),
+            'comment' => $this->trans('layout_box.comment.identifier'),
         ]));
 
         $requiredData->addChild($this->getElement('select', [
             'name'  => 'boxType',
-            'label' => $this->trans('layout_box.box_type.label'),
+            'label' => $this->trans('layout_box.label.box_type'),
         ]));
 
         $form->addFilter($this->getFilter('no_code'));

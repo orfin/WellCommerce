@@ -9,7 +9,8 @@
     <h2>{% trans from "admin" %}category.edit{% endtrans %}</h2>
     <ul class="possibilities">
         <li><a href="{{ path('admin.category.index') }}" class="button return"><span></span></a></li>
-        <li><a href="#{{ form.getName() }}" rel="submit" class="button"><span>{% trans %}wellcommerce.save_and_finish{% endtrans %}</span></a></li>
+        <li><a href="#{{ form.getName() }}" rel="submit" class="button"><span>{% trans %}Save and finish{% endtrans %}</span></a></li>
+        <li><a href="#{{ form.getName() }}" rel="submit[continue]" class="button"><span>{% trans %}Save and continue{% endtrans %}</span></a></li>
     </ul>
     <div class="layout-two-columns">
         <div class="column narrow-collapsed">

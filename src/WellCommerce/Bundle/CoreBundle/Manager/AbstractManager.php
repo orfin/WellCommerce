@@ -12,156 +12,58 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Manager;
 
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Translation\TranslatorInterface;
-use WellCommerce\Bundle\CoreBundle\Event\ResourceEvent;
-use WellCommerce\Bundle\CoreBundle\Helper\Doctrine\DoctrineHelperInterface;
-use WellCommerce\Bundle\CoreBundle\Helper\Flash\FlashHelperInterface;
-use WellCommerce\Bundle\CoreBundle\Helper\Helper;
-use WellCommerce\Bundle\CoreBundle\Helper\Image\ImageHelperInterface;
-use WellCommerce\Bundle\CoreBundle\Helper\Redirect\RedirectHelperInterface;
-use WellCommerce\Bundle\CoreBundle\Helper\Request\RequestHelperInterface;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
+use WellCommerce\Bundle\CoreBundle\EventDispatcher\EventDispatcherInterface;
+use WellCommerce\Bundle\CoreBundle\Exception\MissingFormBuilderException;
+use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
+use WellCommerce\Bundle\FormBundle\FormBuilderInterface;
 
 /**
  * Class AbstractManager
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-abstract class AbstractManager implements ManagerInterface
+abstract class AbstractManager extends AbstractContainerAware implements ManagerInterface
 {
     /**
-     * @var FlashHelperInterface
+     * @var RepositoryInterface
      */
-    private $flashHelper;
-
-    /**
-     * @var RedirectHelperInterface
-     */
-    private $redirectHelper;
-
-    /**
-     * @var ImageHelperInterface
-     */
-    private $imageHelper;
+    protected $repository;
 
     /**
      * @var EventDispatcherInterface
      */
-    private $eventDispatcher;
+    protected $eventDispatcher;
 
     /**
-     * @var DoctrineHelperInterface
+     * @var FactoryInterface
      */
-    private $doctrineHelper;
+    protected $factory;
 
     /**
-     * @var TranslatorInterface
+     * @var FormBuilderInterface
      */
-    private $translator;
-
-    /**
-     * @var RepositoryInterface
-     */
-    private $repository;
-
-    /**
-     * @var RequestHelperInterface
-     */
-    private $requestHelper;
+    private $formBuilder;
 
     /**
      * Constructor
      *
-     * @param FlashHelperInterface     $flashHelper
-     * @param RedirectHelperInterface  $redirectHelper
-     * @param ImageHelperInterface     $imageHelper
-     * @param EventDispatcherInterface $eventDispatcher
-     * @param DoctrineHelperInterface  $doctrineHelper
-     * @param TranslatorInterface      $translator
-     * @param RequestHelperInterface   $requestHelper
+     * @param RepositoryInterface       $repository
+     * @param EventDispatcherInterface  $eventDispatcher
+     * @param FactoryInterface          $factory
+     * @param FormBuilderInterface|null $formBuilder
      */
     public function __construct(
-        FlashHelperInterface $flashHelper,
-        RedirectHelperInterface $redirectHelper,
-        ImageHelperInterface $imageHelper,
+        RepositoryInterface $repository,
         EventDispatcherInterface $eventDispatcher,
-        DoctrineHelperInterface $doctrineHelper,
-        TranslatorInterface $translator,
-        RequestHelperInterface $requestHelper
+        FactoryInterface $factory,
+        FormBuilderInterface $formBuilder = null
     ) {
-        $this->flashHelper     = $flashHelper;
-        $this->redirectHelper  = $redirectHelper;
-        $this->imageHelper     = $imageHelper;
+        $this->repository      = $repository;
         $this->eventDispatcher = $eventDispatcher;
-        $this->doctrineHelper  = $doctrineHelper;
-        $this->translator      = $translator;
-        $this->requestHelper   = $requestHelper;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getRedirectHelper()
-    {
-        return $this->redirectHelper;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getFlashHelper()
-    {
-        return $this->flashHelper;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getImageHelper()
-    {
-        return $this->imageHelper;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getEventDispatcher()
-    {
-        return $this->eventDispatcher;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getDoctrineHelper()
-    {
-        return $this->doctrineHelper;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getRequestHelper()
-    {
-        return $this->requestHelper;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getTranslator()
-    {
-        return $this->translator;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setRepository(RepositoryInterface $repository)
-    {
-        $this->repository = $repository;
+        $this->factory         = $factory;
+        $this->formBuilder     = $formBuilder;
     }
 
     /**
@@ -175,54 +77,50 @@ abstract class AbstractManager implements ManagerInterface
     /**
      * {@inheritdoc}
      */
+    public function getEventDispatcher()
+    {
+        return $this->eventDispatcher;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFactory()
+    {
+        return $this->factory;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFormBuilder()
+    {
+        if (null === $this->formBuilder) {
+            throw new MissingFormBuilderException(get_class($this));
+        }
+
+        return $this->formBuilder;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getForm($resource, array $config = [])
+    {
+        $builder       = $this->getFormBuilder();
+        $defaultConfig = ['name' => $this->repository->getAlias()];
+        $config        = array_merge($defaultConfig, $config);
+
+        return $builder->createForm($config, $resource);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function initResource()
     {
-        return $this->repository->createNew();
-    }
-
-    /**
-     * Dispatches resource event
-     *
-     * @param object  $resource
-     * @param Request $request
-     * @param string  $name
-     */
-    protected function dispatchEvent($resource, Request $request = null, $name)
-    {
-        $reflection = new \ReflectionClass($resource);
-        $eventName  = $this->getEventName($reflection->getShortName(), $name);
-        $event      = new ResourceEvent($resource, $request);
-        $this->getEventDispatcher()->dispatch($eventName, $event);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function createResource($resource, Request $request)
-    {
-        $this->dispatchEvent($resource, $request, ManagerInterface::PRE_CREATE_EVENT);
-        $this->saveResource($resource);
-        $this->dispatchEvent($resource, $request, ManagerInterface::POST_CREATE_EVENT);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function updateResource($resource, Request $request)
-    {
-        $this->dispatchEvent($resource, $request, ManagerInterface::PRE_UPDATE_EVENT);
-        $this->saveResource($resource);
-        $this->dispatchEvent($resource, $request, ManagerInterface::POST_UPDATE_EVENT);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function saveResource($resource)
-    {
-        $em = $this->getDoctrineHelper()->getEntityManager();
-        $em->persist($resource);
-        $em->flush();
+        $resource = $this->factory->create();
+        $this->eventDispatcher->dispatchOnPostInitResource($resource);
 
         return $resource;
     }
@@ -230,25 +128,44 @@ abstract class AbstractManager implements ManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function removeResource($resource)
+    public function createResource($resource)
     {
-        $this->dispatchEvent($resource, null, ManagerInterface::PRE_REMOVE_EVENT);
-        $em = $this->getDoctrineHelper()->getEntityManager();
-        $em->remove($resource);
-        $em->flush();
-        $this->dispatchEvent($resource, null, ManagerInterface::POST_REMOVE_EVENT);
+        $this->eventDispatcher->dispatchOnPreCreateResource($resource);
+        $this->saveResource($resource);
+        $this->eventDispatcher->dispatchOnPostCreateResource($resource);
     }
 
     /**
-     * Returns event name for particular resource
-     *
-     * @param string $class
-     * @param string $name
-     *
-     * @return string
+     * {@inheritdoc}
      */
-    protected function getEventName($class, $name)
+    public function updateResource($resource)
     {
-        return sprintf('%s.%s', Helper::snake($class), $name);
+        $this->eventDispatcher->dispatchOnPreUpdateResource($resource);
+        $this->saveResource($resource);
+        $this->eventDispatcher->dispatchOnPostUpdateResource($resource);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeResource($resource)
+    {
+        $this->eventDispatcher->dispatchOnPreRemoveResource($resource);
+        $em = $this->getDoctrineHelper()->getEntityManager();
+        $em->remove($resource);
+        $em->flush();
+        $this->eventDispatcher->dispatchOnPostRemoveResource($resource);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function saveResource($resource)
+    {
+        $em = $this->getEntityManager();
+        $em->persist($resource);
+        $em->flush();
+
+        return $resource;
     }
 }

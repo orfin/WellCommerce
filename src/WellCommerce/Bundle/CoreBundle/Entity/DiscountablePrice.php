@@ -17,45 +17,85 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Class DiscountablePrice
  *
- * @ORM\Embeddable
- *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class DiscountablePrice extends Price
 {
     /**
-     * @ORM\Column(name="discounted_amount", type="decimal", precision=15, scale=4, nullable=true)
+     * @var int|float
      */
-    protected $discountedAmount;
+    protected $discountedNetAmount;
 
     /**
-     * @ORM\Column(name="valid_from", type="datetime", nullable=true)
+     * @var int|float
+     */
+    protected $discountedGrossAmount;
+
+    /**
+     * @var int|float
+     */
+    protected $discountedTaxAmount;
+
+    /**
+     * @var \DateTime|null
      */
     protected $validFrom;
 
     /**
-     * @ORM\Column(name="valid_to", type="datetime", nullable=true)
+     * @var \DateTime|null
      */
     protected $validTo;
 
     /**
-     * @return mixed
+     * @return float|int
      */
-    public function getDiscountedAmount()
+    public function getDiscountedNetAmount()
     {
-        return $this->discountedAmount;
+        return (float)$this->discountedNetAmount;
     }
 
     /**
-     * @param mixed $discountedAmount
+     * @param float|int $discountedNetAmount
      */
-    public function setDiscountedAmount($discountedAmount)
+    public function setDiscountedNetAmount($discountedNetAmount)
     {
-        $this->discountedAmount = $discountedAmount;
+        $this->discountedNetAmount = (float)$discountedNetAmount;
     }
 
     /**
-     * @return mixed
+     * @return float|int
+     */
+    public function getDiscountedGrossAmount()
+    {
+        return (float)$this->discountedGrossAmount;
+    }
+
+    /**
+     * @param float|int $discountedGrossAmount
+     */
+    public function setDiscountedGrossAmount($discountedGrossAmount)
+    {
+        $this->discountedGrossAmount = (float)$discountedGrossAmount;
+    }
+
+    /**
+     * @return float|int
+     */
+    public function getDiscountedTaxAmount()
+    {
+        return (float)$this->discountedTaxAmount;
+    }
+
+    /**
+     * @param float|int $discountedTaxAmount
+     */
+    public function setDiscountedTaxAmount($discountedTaxAmount)
+    {
+        $this->discountedTaxAmount = (float)$discountedTaxAmount;
+    }
+
+    /**
+     * @return \DateTime|null
      */
     public function getValidFrom()
     {
@@ -63,15 +103,15 @@ class DiscountablePrice extends Price
     }
 
     /**
-     * @param mixed $validFrom
+     * @param \DateTime|null $validFrom
      */
-    public function setValidFrom($validFrom)
+    public function setValidFrom(\DateTime $validFrom = null)
     {
         $this->validFrom = $validFrom;
     }
 
     /**
-     * @return mixed
+     * @return \DateTime|null
      */
     public function getValidTo()
     {
@@ -79,26 +119,53 @@ class DiscountablePrice extends Price
     }
 
     /**
-     * @param mixed $validTo
+     * @param \DateTime|null $validTo
      */
-    public function setValidTo($validTo)
+    public function setValidTo(\DateTime $validTo = null)
     {
         $this->validTo = $validTo;
     }
 
     /**
-     * @return float
+     * @return float|int
      */
-    public function getAmount()
+    public function getFinalGrossAmount()
     {
-        if ($this->isDiscountDateValid()) {
-            return $this->discountedAmount;
+        if ($this->isDiscountValid()) {
+            return $this->getDiscountedGrossAmount();
         }
 
-        return $this->amount;
+        return $this->getGrossAmount();
     }
 
-    protected function isDiscountDateValid()
+    /**
+     * @return float|int
+     */
+    public function getFinalNetAmount()
+    {
+        if ($this->isDiscountValid()) {
+            return $this->getDiscountedNetAmount();
+        }
+
+        return $this->getNetAmount();
+    }
+
+    /**
+     * @return float|int
+     */
+    public function getFinalTaxAmount()
+    {
+        if ($this->isDiscountValid()) {
+            return $this->getDiscountedTaxAmount();
+        }
+
+        return $this->getTaxAmount();
+    }
+
+    /**
+     * @return bool
+     */
+    protected function isDiscountValid()
     {
         $now = new \DateTime();
 

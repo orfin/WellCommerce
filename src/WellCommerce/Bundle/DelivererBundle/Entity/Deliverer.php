@@ -12,44 +12,35 @@
 
 namespace WellCommerce\Bundle\DelivererBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model as ORMBehaviors;
-use WellCommerce\Bundle\ProducerBundle\Entity\Producer;
+use Doctrine\Common\Collections\Collection;
+use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
+use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
+use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
+use WellCommerce\Bundle\ProducerBundle\Entity\ProducerInterface;
 
 /**
- * Class Locale
+ * Class Deliverer
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @ORM\Table(name="deliverer")
- * @ORM\HasLifecycleCallbacks
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\DelivererBundle\Repository\DelivererRepository")
  */
-class Deliverer
+class Deliverer implements DelivererInterface
 {
-    use ORMBehaviors\Translatable\Translatable;
-    use ORMBehaviors\Timestampable\Timestampable;
-    use ORMBehaviors\Blameable\Blameable;
+    use Translatable;
+    use Timestampable;
+    use Blameable;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\ProducerBundle\Entity\Producer", mappedBy="deliverers")
+     * @var Collection
      */
-    private $producers;
+    protected $producers;
 
     /**
-     * Get id.
-     *
-     * @return integer
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -57,9 +48,7 @@ class Deliverer
     }
 
     /**
-     * Get producers for deliverer
-     *
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getProducers()
     {
@@ -67,16 +56,17 @@ class Deliverer
     }
 
     /**
-     * Sets producers for deliverer
-     *
-     * @param $collection
+     * {@inheritdoc}
      */
-    public function setProducers(ArrayCollection $collection)
+    public function setProducers(Collection $collection)
     {
         $this->producers = $collection;
     }
 
-    public function addProducer(Producer $producer)
+    /**
+     * {@inheritdoc}
+     */
+    public function addProducer(ProducerInterface $producer)
     {
         $this->producers[] = $producer;
     }

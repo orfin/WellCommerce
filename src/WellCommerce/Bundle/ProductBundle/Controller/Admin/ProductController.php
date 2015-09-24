@@ -13,17 +13,20 @@
 namespace WellCommerce\Bundle\ProductBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
-use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
+use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
  * Class ProductController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class ProductController extends AbstractAdminController
 {
+    /**
+     * @var \WellCommerce\Bundle\ProductBundle\Manager\Admin\ProductManager
+     */
+    protected $manager;
+
     /**
      * Updates product data from DataGrid request
      *
@@ -33,27 +36,16 @@ class ProductController extends AbstractAdminController
      */
     public function updateAction(Request $request)
     {
-        $id        = $request->request->get('id');
-        $data      = $request->request->get('row');
-        $product   = $this->getManager()->getRepository()->find($id);
-        $validator = $this->get('validator');
+        $id   = $request->request->get('id');
+        $data = $request->request->get('row');
 
-        if (null === $product) {
-            return $this->jsonResponse(['error' => $this->trans('product.flash.error.not_found')]);
+        try {
+            $this->manager->quickUpdateProduct($id, $data);
+            $result = ['success' => $this->trans('product.flash.success.saved')];
+        } catch (\Exception $e) {
+            $result = ['error' => $e->getMessage()];
         }
 
-        $product->setSku($data['sku']);
-        $product->setWeight($data['weight']);
-        $product->setStock($data['stock']);
-        $product->getSellPrice()->setAmount($data['sellPrice']);
-
-        $errors = $validator->validate($product);
-        if ($errors->count()) {
-            return $this->jsonResponse(['error' => (string)$errors]);
-        }
-
-        $this->getManager()->getDoctrineHelper()->getEntityManager()->flush();
-
-        return $this->jsonResponse(['success' => $this->trans('product.flash.success.saved')]);
+        return $this->jsonResponse($result);
     }
 }

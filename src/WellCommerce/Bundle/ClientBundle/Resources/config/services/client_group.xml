@@ -5,21 +5,13 @@
 
     <services>
         <service id="client_group.manager.admin" class="WellCommerce\Bundle\ClientBundle\Manager\Admin\ClientGroupManager">
-            <argument type="service" id="flash_helper"/>
-            <argument type="service" id="redirect_helper"/>
-            <argument type="service" id="image_helper"/>
-            <argument type="service" id="event_dispatcher"/>
-            <argument type="service" id="doctrine_helper"/>
-            <argument type="service" id="translator"/>
-            <argument type="service" id="request_helper"/>
-            <call method="setRepository">
-                <argument type="service" id="client_group.repository"/>
-            </call>
-            <call method="setFormBuilder">
-                <argument type="service" id="client_group.form_builder.admin"/>
-            </call>
-            <call method="setDataGrid">
-                <argument type="service" id="client_group.datagrid"/>
+            <argument type="service" id="client_group.repository"/>
+            <argument type="service" id="client_group.event_dispatcher"/>
+            <argument type="service" id="client_group.factory"/>
+            <argument type="service" id="client_group.form_builder.admin"/>
+            <argument type="service" id="client_group.datagrid"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
             </call>
         </service>
 
@@ -34,6 +26,12 @@
             <argument>WellCommerceClientBundle:ClientGroup</argument>
         </service>
 
+        <service id="client_group.factory" class="WellCommerce\Bundle\ClientBundle\Factory\ClientGroupFactory" />
+
+        <service id="client_group.event_dispatcher" class="WellCommerce\Bundle\ClientBundle\EventDispatcher\ClientGroupEventDispatcher">
+            <argument type="service" id="event_dispatcher"/>
+        </service>
+
         <service id="client_group.dataset.query_builder" class="WellCommerce\Bundle\ClientBundle\DataSet\ClientGroupDataSetQueryBuilder" public="false">
             <argument type="service" id="client_group.repository"/>
         </service>
@@ -46,6 +44,10 @@
         <service id="client_group.dataset" class="WellCommerce\Bundle\ClientBundle\DataSet\ClientGroupDataSet">
             <argument key="identifier">client_group</argument>
             <argument type="service" id="client_group.dataset.loader"/>
+            <argument type="service" id="client_group.event_dispatcher"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
@@ -56,6 +58,7 @@
         <service id="client_group.datagrid" class="WellCommerce\Bundle\ClientBundle\DataGrid\ClientGroupDataGrid">
             <argument key="identifier">client_group</argument>
             <argument type="service" id="client_group.dataset"/>
+            <argument type="service" id="client_group.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -64,6 +67,7 @@
         <service id="client_group.form_builder.admin" class="WellCommerce\Bundle\ClientBundle\Form\Admin\ClientGroupFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
+            <argument type="service" id="client_group.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

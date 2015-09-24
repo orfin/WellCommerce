@@ -12,17 +12,14 @@
 
 namespace WellCommerce\Bundle\UserBundle\Controller\Admin;
 
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\SecurityContextInterface;
-use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
+use Symfony\Component\Security\Core\Security;
+use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
  * Class UserController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class UserController extends AbstractAdminController
 {
@@ -31,14 +28,14 @@ class UserController extends AbstractAdminController
         $form = $this->get('user_login.form_builder')->createForm([
             'name'         => 'login',
             'ajax_enabled' => false,
-            'action'       => $this->generateUrl('admin.user.login_check'),
+            'action'       => $this->getRouterHelper()->generateUrl('admin.user.login_check'),
             'class'        => 'login-form',
         ], null);
 
-        return [
+        return $this->displayTemplate('login', [
             'error' => $this->getSecurityErrors($request),
             'form'  => $form
-        ];
+        ]);
     }
 
     /**
@@ -53,11 +50,11 @@ class UserController extends AbstractAdminController
         $session = $request->getSession();
         $error   = '';
 
-        if ($request->attributes->has(SecurityContextInterface::AUTHENTICATION_ERROR)) {
-            $error = $request->attributes->get(SecurityContextInterface::AUTHENTICATION_ERROR);
-        } elseif (null !== $session && $session->has(SecurityContextInterface::AUTHENTICATION_ERROR)) {
-            $error = $session->get(SecurityContextInterface::AUTHENTICATION_ERROR);
-            $session->remove(SecurityContextInterface::AUTHENTICATION_ERROR);
+        if ($request->attributes->has(Security::AUTHENTICATION_ERROR)) {
+            $error = $request->attributes->get(Security::AUTHENTICATION_ERROR);
+        } elseif (null !== $session && $session->has(Security::AUTHENTICATION_ERROR)) {
+            $error = $session->get(Security::AUTHENTICATION_ERROR);
+            $session->remove(Security::AUTHENTICATION_ERROR);
         }
 
         return $error;
@@ -70,21 +67,21 @@ class UserController extends AbstractAdminController
     public function deleteAction($id)
     {
         $user = $this->getUser();
-        if ($user->getId() == $id) {
-            return new JsonResponse(['error' => 'You cannot delete your own admin account.']);
+        if ($user->getId() === $id) {
+            return $this->jsonResponse(['error' => 'You cannot delete your own admin account.']);
         }
 
-        $em = $this->getEntityManager();
+        $em = $this->manager->getDoctrineHelper()->getEntityManager();
 
         try {
-            $resource = $this->getManager()->getRepository()->find($id);
+            $resource = $this->manager->getRepository()->find($id);
             $em->remove($resource);
         } catch (\Exception $e) {
-            return new JsonResponse(['error' => $e->getMessage()]);
+            return $this->jsonResponse(['error' => $e->getMessage()]);
         }
 
         $em->flush();
 
-        return new JsonResponse(['success' => true]);
+        return $this->jsonResponse(['success' => true]);
     }
 }

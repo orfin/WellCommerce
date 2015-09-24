@@ -6,21 +6,13 @@
     <services>
 
         <service id="channel.manager.admin" class="WellCommerce\Bundle\SmugglerBundle\Manager\Admin\ChannelManager">
-            <argument type="service" id="flash_helper"/>
-            <argument type="service" id="redirect_helper"/>
-            <argument type="service" id="image_helper"/>
-            <argument type="service" id="event_dispatcher"/>
-            <argument type="service" id="doctrine_helper"/>
-            <argument type="service" id="translator"/>
-            <argument type="service" id="request_helper"/>
-            <call method="setRepository">
-                <argument type="service" id="channel.repository"/>
-            </call>
-            <call method="setFormBuilder">
-                <argument type="service" id="channel.form_builder"/>
-            </call>
-            <call method="setDataGrid">
-                <argument type="service" id="channel.datagrid"/>
+            <argument type="service" id="channel.repository"/>
+            <argument type="service" id="channel.event_dispatcher"/>
+            <argument type="service" id="channel.factory"/>
+            <argument type="service" id="channel.form_builder"/>
+            <argument type="service" id="channel.datagrid"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
             </call>
         </service>
         
@@ -33,6 +25,12 @@
 
         <service id="channel.repository" class="WellCommerce\Bundle\SmugglerBundle\Repository\ChannelRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument>WellCommerceSmugglerBundle:Channel</argument>
+        </service>
+
+        <service id="channel.factory" class="WellCommerce\Bundle\SmugglerBundle\Factory\ChannelFactory"/>
+
+        <service id="channel.event_dispatcher" class="WellCommerce\Bundle\SmugglerBundle\EventDispatcher\ChannelEventDispatcher">
+            <argument type="service" id="event_dispatcher"/>
         </service>
 
         <service id="channel.dataset.query_builder" class="WellCommerce\Bundle\SmugglerBundle\DataSet\ChannelDataSetQueryBuilder" public="false">
@@ -68,13 +66,6 @@
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
-        </service>
-
-        <service id="channel.subscriber" class="WellCommerce\Bundle\SmugglerBundle\EventListener\ChannelSubscriber">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <tag name="kernel.event_subscriber" />
         </service>
     </services>
 </container>

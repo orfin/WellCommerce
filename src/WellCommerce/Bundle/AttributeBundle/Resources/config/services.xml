@@ -8,17 +8,4 @@
         <import resource="services/attribute_group.xml"/>
         <import resource="services/attribute_value.xml"/>
     </imports>
-
-    <parameters>
-        <parameter key="attribute.subscriber.class">WellCommerce\Bundle\AttributeBundle\EventListener\AttributeSubscriber</parameter>
-    </parameters>
-
-    <services>
-        <service id="attribute.subscriber" class="%attribute.subscriber.class%">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <tag name="kernel.event_subscriber" />
-        </service>
-    </services>
 </container>

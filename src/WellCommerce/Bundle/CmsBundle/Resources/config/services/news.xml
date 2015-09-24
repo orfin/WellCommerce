@@ -5,21 +5,13 @@
 
     <services>
         <service id="news.manager.admin" class="WellCommerce\Bundle\CmsBundle\Manager\Admin\NewsManager">
-            <argument type="service" id="flash_helper"/>
-            <argument type="service" id="redirect_helper"/>
-            <argument type="service" id="image_helper"/>
-            <argument type="service" id="event_dispatcher"/>
-            <argument type="service" id="doctrine_helper"/>
-            <argument type="service" id="translator"/>
-            <argument type="service" id="request_helper"/>
-            <call method="setRepository">
-                <argument type="service" id="news.repository"/>
-            </call>
-            <call method="setFormBuilder">
-                <argument type="service" id="news.form_builder"/>
-            </call>
-            <call method="setDataGrid">
-                <argument type="service" id="news.datagrid"/>
+            <argument type="service" id="news.repository"/>
+            <argument type="service" id="news.event_dispatcher"/>
+            <argument type="service" id="news.factory"/>
+            <argument type="service" id="news.form_builder"/>
+            <argument type="service" id="news.datagrid"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
             </call>
         </service>
 
@@ -34,7 +26,7 @@
             <argument>WellCommerceCmsBundle:News</argument>
         </service>
 
-        <service id="news.dataset.query_builder" class="WellCommerce\Bundle\CmsBundle\DataSet\NewsDataSetQueryBuilder" public="false">
+        <service id="news.dataset.query_builder" class="WellCommerce\Bundle\CmsBundle\DataSet\Admin\NewsDataSetQueryBuilder" public="false">
             <argument type="service" id="news.repository"/>
         </service>
 
@@ -43,15 +35,17 @@
             <argument type="service" id="dataset.processor"/>
         </service>
 
-        <service id="news.dataset" class="WellCommerce\Bundle\CmsBundle\DataSet\NewsDataSet">
+        <service id="news.dataset" class="WellCommerce\Bundle\CmsBundle\DataSet\Admin\NewsDataSet">
             <argument key="identifier">news</argument>
             <argument type="service" id="news.dataset.loader"/>
+            <argument type="service" id="news.event_dispatcher"/>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
         <service id="news.datagrid" class="WellCommerce\Bundle\CmsBundle\DataGrid\NewsDataGrid">
             <argument key="identifier">news</argument>
             <argument type="service" id="news.dataset"/>
+            <argument type="service" id="news.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -60,16 +54,16 @@
         <service id="news.form_builder" class="WellCommerce\Bundle\CmsBundle\Form\Admin\NewsFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
+            <argument type="service" id="news.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="news.subscriber" class="WellCommerce\Bundle\CmsBundle\EventListener\NewsSubscriber">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <tag name="kernel.event_subscriber" />
+        <service id="news.factory" class="WellCommerce\Bundle\CmsBundle\Factory\NewsFactory" />
+
+        <service id="news.event_dispatcher" class="WellCommerce\Bundle\CmsBundle\EventDispatcher\NewsEventDispatcher">
+            <argument type="service" id="event_dispatcher" />
         </service>
     </services>
 </container>

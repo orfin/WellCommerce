@@ -23,7 +23,6 @@ class LocaleRepository extends AbstractEntityRepository implements LocaleReposit
 {
     private $currentLocales = [];
 
-
     /**
      * {@inheritdoc}
      */

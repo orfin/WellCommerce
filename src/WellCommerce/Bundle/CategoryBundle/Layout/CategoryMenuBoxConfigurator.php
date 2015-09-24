@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\Layout;
 
-use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
-use WellCommerce\Bundle\FormBundle\DataTransformer\EntityToIdentifierTransformer;
+use WellCommerce\Bundle\FormBundle\FormBuilderInterface;
+use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\EntityToIdentifierTransformer;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 use WellCommerce\Bundle\LayoutBundle\Configurator\AbstractLayoutBoxConfigurator;
 use WellCommerce\Bundle\LayoutBundle\Configurator\LayoutBoxConfiguratorInterface;
@@ -45,7 +45,7 @@ class CategoryMenuBoxConfigurator extends AbstractLayoutBoxConfigurator implemen
             'sortable'    => false,
             'clickable'   => false,
             'items'       => $this->get('category.collection.admin')->getFlatTree(),
-            'transformer' => new EntityToIdentifierTransformer($this->get('category.repository')),
+            'transformer' => $this->getRepositoryTransformer('entity', $this->get('category.repository')),
             'default'     => $accessor->getValue($defaults, '[exclude]')
         ]));
     }

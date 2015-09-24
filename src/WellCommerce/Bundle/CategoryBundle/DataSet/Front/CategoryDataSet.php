@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\CategoryBundle\DataSet\Front;
 
 use WellCommerce\Bundle\CategoryBundle\DataSet\Admin\CategoryDataSet as BaseDataSet;
+use WellCommerce\Bundle\DataSetBundle\Configurator\DataSetConfiguratorInterface;
 
 /**
  * Class CategoryDataSet
@@ -21,4 +22,12 @@ use WellCommerce\Bundle\CategoryBundle\DataSet\Admin\CategoryDataSet as BaseData
  */
 class CategoryDataSet extends BaseDataSet
 {
+    public function configureOptions(DataSetConfiguratorInterface $configurator)
+    {
+        parent::configureOptions($configurator);
+
+        $configurator->setTransformers([
+            'route' => $this->container->get('route.transformer')
+        ]);
+    }
 }

@@ -18,13 +18,11 @@ use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
  * Class ClientWishlistBoxController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class ClientWishlistBoxController extends AbstractBoxController
 {
     public function indexAction()
     {
-
+        return $this->displayTemplate('index');
     }
 }

@@ -12,47 +12,43 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Doctrine\Common\Collections\Collection;
+use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
+use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
+use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\EnableableTrait;
-use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\HierarchyTrait;
+use WellCommerce\Bundle\CoreBundle\Entity\HierarchyAwareTrait;
 
 /**
  * Class PaymentMethod
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @ORM\Table(name="payment_method")
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\PaymentBundle\Repository\PaymentMethodRepository")
  */
-class PaymentMethod
+class PaymentMethod implements PaymentMethodInterface
 {
-    use ORMBehaviors\Translatable\Translatable;
-    use ORMBehaviors\Timestampable\Timestampable;
-    use ORMBehaviors\Blameable\Blameable;
+    use Translatable;
+    use Timestampable;
+    use Blameable;
+    use HierarchyAwareTrait;
     use EnableableTrait;
-    use HierarchyTrait;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @var int
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="processor", type="string", length=64)
      */
-    private $processor;
+    protected $processor;
 
     /**
-     * Get id.
-     *
-     * @return integer
+     * @var Collection
+     */
+    protected $shippingMethods;
+
+    /**
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -60,9 +56,7 @@ class PaymentMethod
     }
 
     /**
-     * Returns payment method processor
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getProcessor()
     {
@@ -70,12 +64,26 @@ class PaymentMethod
     }
 
     /**
-     * Sets payment method processor
-     *
-     * @param $processor
+     * {@inheritdoc}
      */
     public function setProcessor($processor)
     {
         $this->processor = $processor;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getShippingMethods()
+    {
+        return $this->shippingMethods;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setShippingMethods(Collection $shippingMethods)
+    {
+        $this->shippingMethods = $shippingMethods;
     }
 }

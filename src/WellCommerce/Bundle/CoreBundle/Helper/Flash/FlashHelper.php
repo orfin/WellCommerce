@@ -13,7 +13,7 @@
 namespace WellCommerce\Bundle\CoreBundle\Helper\Flash;
 
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use WellCommerce\Bundle\CoreBundle\Helper\Translator\TranslatorHelperInterface;
 
 /**
  * Class FlashHelper
@@ -25,28 +25,23 @@ class FlashHelper implements FlashHelperInterface
     /**
      * @var SessionInterface
      */
-    private $session;
+    protected $session;
 
     /**
-     * @var TranslatorInterface
+     * @var TranslatorHelperInterface
      */
-    private $translator;
-
-    /**
-     * @var string
-     */
-    private $flashesName = 'flashes';
+    protected $translatorHelper;
 
     /**
      * Constructor
      *
-     * @param SessionInterface    $session
-     * @param TranslatorInterface $translator
+     * @param SessionInterface          $session
+     * @param TranslatorHelperInterface $translatorHelper
      */
-    public function __construct(SessionInterface $session, TranslatorInterface $translator)
+    public function __construct(SessionInterface $session, TranslatorHelperInterface $translatorHelper)
     {
-        $this->session    = $session;
-        $this->translator = $translator;
+        $this->session          = $session;
+        $this->translatorHelper = $translatorHelper;
     }
 
     /**
@@ -83,7 +78,7 @@ class FlashHelper implements FlashHelperInterface
      */
     private function translate($message, $params)
     {
-        return $this->translator->trans($message, $params, 'wellcommerce');
+        return $this->translatorHelper->trans($message, $params, 'wellcommerce');
     }
 
     /**
@@ -93,7 +88,7 @@ class FlashHelper implements FlashHelperInterface
      */
     private function getFlashBag()
     {
-        return $this->session->getBag($this->flashesName);
+        return $this->session->getBag(FlashHelperInterface::FLASHES_NAME);
     }
 
     /**

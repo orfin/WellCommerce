@@ -5,21 +5,13 @@
 
     <services>
         <service id="unit.manager.admin" class="WellCommerce\Bundle\UnitBundle\Manager\Admin\UnitManager">
-            <argument type="service" id="flash_helper"/>
-            <argument type="service" id="redirect_helper"/>
-            <argument type="service" id="image_helper"/>
-            <argument type="service" id="event_dispatcher"/>
-            <argument type="service" id="doctrine_helper"/>
-            <argument type="service" id="translator"/>
-            <argument type="service" id="request_helper"/>
-            <call method="setRepository">
-                <argument type="service" id="unit.repository"/>
-            </call>
-            <call method="setFormBuilder">
-                <argument type="service" id="unit.form_builder"/>
-            </call>
-            <call method="setDataGrid">
-                <argument type="service" id="unit.datagrid"/>
+            <argument type="service" id="unit.repository"/>
+            <argument type="service" id="unit.event_dispatcher"/>
+            <argument type="service" id="unit.factory"/>
+            <argument type="service" id="unit.form_builder"/>
+            <argument type="service" id="unit.datagrid"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
             </call>
         </service>
         
@@ -46,6 +38,10 @@
         <service id="unit.dataset" class="WellCommerce\Bundle\UnitBundle\DataSet\UnitDataSet">
             <argument key="identifier">unit</argument>
             <argument type="service" id="unit.dataset.loader"/>
+            <argument type="service" id="unit.event_dispatcher"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
@@ -56,24 +52,25 @@
         <service id="unit.datagrid" class="WellCommerce\Bundle\UnitBundle\DataGrid\UnitDataGrid">
             <argument key="identifier">unit</argument>
             <argument type="service" id="unit.dataset"/>
+            <argument type="service" id="unit.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
+        </service>
+
+        <service id="unit.factory" class="WellCommerce\Bundle\UnitBundle\Factory\UnitFactory" />
+
+        <service id="unit.event_dispatcher" class="WellCommerce\Bundle\UnitBundle\EventDispatcher\UnitEventDispatcher">
+            <argument type="service" id="event_dispatcher" />
         </service>
 
         <service id="unit.form_builder" class="WellCommerce\Bundle\UnitBundle\Form\UnitFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
+            <argument type="service" id="unit.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
-        </service>
-
-        <service id="unit.subscriber" class="WellCommerce\Bundle\UnitBundle\EventListener\UnitSubscriber">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <tag name="kernel.event_subscriber" />
         </service>
     </services>
 </container>

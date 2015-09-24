@@ -27,7 +27,7 @@ abstract class AbstractFrontController extends AbstractController implements Fro
     /**
      * @var FrontManagerInterface
      */
-    private $manager;
+    protected $manager;
 
     /**
      * Constructor
@@ -64,34 +64,12 @@ abstract class AbstractFrontController extends AbstractController implements Fro
     }
 
     /**
-     * Returns manager object
-     *
-     * @return FrontManagerInterface
-     */
-    protected function getManager()
-    {
-        return $this->manager;
-    }
-
-    /**
      * Shorthand to add new breadcrumb items to collection
      *
      * @param BreadcrumbItem $item
      */
     protected function addBreadCrumbItem(BreadcrumbItem $item)
     {
-        $builder = $this->get('breadcrumb.builder');
-
-        $builder->add($item);
-    }
-
-    /**
-     * Shorthand for getting cart helper service
-     *
-     * @return \WellCommerce\Bundle\CartBundle\Helper\CartHelper
-     */
-    protected function getCartHelper()
-    {
-        return $this->get('cart.helper');
+        $this->get('breadcrumb.collection')->add($item);
     }
 }

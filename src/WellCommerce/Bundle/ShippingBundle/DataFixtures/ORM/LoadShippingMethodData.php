@@ -14,7 +14,8 @@ namespace WellCommerce\Bundle\ShippingBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
-use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethod;
+use WellCommerce\Bundle\IntlBundle\DataFixtures\ORM\LoadCurrencyData;
+use WellCommerce\Bundle\TaxBundle\DataFixtures\ORM\LoadTaxData;
 
 /**
  * Class LoadShippingData
@@ -28,18 +29,22 @@ class LoadShippingMethodData extends AbstractDataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $fedEx = new ShippingMethod();
-        $fedEx->setEnabled(1);
-        $fedEx->setHierarchy(0);
-        $fedEx->setCalculator('fixed_price');
+        $tax      = $this->randomizeSamples('tax', LoadTaxData::$samples);
+        $currency = $this->randomizeSamples('currency', LoadCurrencyData::$samples);
+        $factory  = $this->container->get('shipping_method.factory');
+
+        $fedEx = $factory->create();
+        $fedEx->setCalculator('price_table');
+        $fedEx->setTax($tax);
+        $fedEx->setCurrency($currency);
         $fedEx->translate('en')->setName('FedEx');
         $fedEx->mergeNewTranslations();
         $manager->persist($fedEx);
 
-        $ups = new ShippingMethod();
-        $ups->setEnabled(1);
-        $ups->setHierarchy(0);
-        $ups->setCalculator('fixed_price');
+        $ups = $factory->create();
+        $ups->setCalculator('price_table');
+        $ups->setTax($tax);
+        $ups->setCurrency($currency);
         $ups->translate('en')->setName('UPS');
         $ups->mergeNewTranslations();
         $manager->persist($ups);

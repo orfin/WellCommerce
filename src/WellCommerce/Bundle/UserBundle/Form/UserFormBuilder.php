@@ -11,17 +11,15 @@
  */
 namespace WellCommerce\Bundle\UserBundle\Form;
 
-use WellCommerce\Bundle\FormBundle\Builder\AbstractFormBuilder;
-use WellCommerce\Bundle\FormBundle\Builder\FormBuilderInterface;
+use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
-use WellCommerce\Bundle\MediaBundle\Form\DataTransformer\MediaEntityToIdentifierTransformer;
 
 /**
  * Class UserFormBuilder
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class UserFormBuilder extends AbstractFormBuilder implements FormBuilderInterface
+class UserFormBuilder extends AbstractFormBuilder
 {
     /**
      * {@inheritdoc}

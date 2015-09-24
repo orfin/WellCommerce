@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\AdminBundle\MenuBuilder\Tests;
 
-use WellCommerce\Bundle\CoreBundle\Tests\AbstractTestCase;
+use WellCommerce\Bundle\CoreBundle\Test\AbstractTestCase;
 
 /**
  * Class AdminMenuItemTest

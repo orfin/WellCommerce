@@ -12,48 +12,56 @@
 
 namespace WellCommerce\Bundle\ShippingBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Doctrine\Common\Collections\Collection;
+use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
+use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
+use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\EnableableTrait;
-use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\HierarchyTrait;
+use WellCommerce\Bundle\CoreBundle\Entity\HierarchyAwareTrait;
+use WellCommerce\Bundle\IntlBundle\Entity\CurrencyInterface;
+use WellCommerce\Bundle\TaxBundle\Entity\TaxAwareTrait;
 
 /**
  * Class ShippingMethod
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @ORM\Table(name="shipping_method")
- * @ORM\HasLifecycleCallbacks
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\ShippingBundle\Repository\ShippingMethodRepository")
  */
-class ShippingMethod
+class ShippingMethod implements ShippingMethodInterface
 {
-    use ORMBehaviors\Translatable\Translatable;
-    use ORMBehaviors\Timestampable\Timestampable;
-    use ORMBehaviors\Blameable\Blameable;
+    use Translatable;
+    use Timestampable;
+    use Blameable;
     use EnableableTrait;
-    use HierarchyTrait;
+    use HierarchyAwareTrait;
+    use TaxAwareTrait;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="calculator", type="string", length=64, nullable=true)
      */
-    private $calculator;
+    protected $calculator;
 
     /**
-     * Get id.
-     *
-     * @return integer
+     * @var string
+     */
+    protected $currency;
+
+    /**
+     * @var Collection
+     */
+    protected $costs;
+
+    /**
+     * @var Collection
+     */
+    protected $paymentMethods;
+
+    /**
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -61,9 +69,7 @@ class ShippingMethod
     }
 
     /**
-     * Returns shipping method processor
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getCalculator()
     {
@@ -71,12 +77,50 @@ class ShippingMethod
     }
 
     /**
-     * Sets shipping method calculator
-     *
-     * @param $calculator
+     * {@inheritdoc}
      */
     public function setCalculator($calculator)
     {
         $this->calculator = $calculator;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCosts()
+    {
+        return $this->costs;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCosts(Collection $costs)
+    {
+        $this->costs = $costs;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCurrency()
+    {
+        return $this->currency;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCurrency(CurrencyInterface $currency)
+    {
+        $this->currency = $currency;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPaymentMethods()
+    {
+        return $this->paymentMethods;
     }
 }

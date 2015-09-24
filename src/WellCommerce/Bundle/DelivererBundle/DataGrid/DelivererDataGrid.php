@@ -11,20 +11,19 @@
  */
 namespace WellCommerce\Bundle\DelivererBundle\DataGrid;
 
-use WellCommerce\Bundle\DataGridBundle\AbstractDataGrid;
+use WellCommerce\Bundle\CoreBundle\DataGrid\AbstractDataGrid;
 use WellCommerce\Bundle\DataGridBundle\Column\Column;
 use WellCommerce\Bundle\DataGridBundle\Column\ColumnCollection;
 use WellCommerce\Bundle\DataGridBundle\Column\Options\Appearance;
 use WellCommerce\Bundle\DataGridBundle\Column\Options\Filter;
 use WellCommerce\Bundle\DataGridBundle\Column\Options\Sorting;
-use WellCommerce\Bundle\DataGridBundle\DataGridInterface;
 
 /**
  * Class DelivererDataGrid
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class DelivererDataGrid extends AbstractDataGrid implements DataGridInterface
+class DelivererDataGrid extends AbstractDataGrid
 {
     /**
      * {@inheritdoc}

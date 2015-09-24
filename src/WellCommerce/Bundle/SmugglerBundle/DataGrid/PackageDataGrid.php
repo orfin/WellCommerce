@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Bundle\SmugglerBundle\DataGrid;
 
-use WellCommerce\Bundle\DataGridBundle\AbstractDataGrid;
+use WellCommerce\Bundle\CoreBundle\DataGrid\AbstractDataGrid;
 use WellCommerce\Bundle\DataGridBundle\Column\Column;
 use WellCommerce\Bundle\DataGridBundle\Column\ColumnCollection;
 use WellCommerce\Bundle\DataGridBundle\Column\Options\Appearance;
@@ -20,7 +20,6 @@ use WellCommerce\Bundle\DataGridBundle\Column\Options\Sorting;
 use WellCommerce\Bundle\DataGridBundle\Configuration\EventHandler\ClickRowEventHandler;
 use WellCommerce\Bundle\DataGridBundle\Configuration\EventHandler\CustomRowEventHandler;
 use WellCommerce\Bundle\DataGridBundle\Configuration\EventHandler\LoadEventHandler;
-use WellCommerce\Bundle\DataGridBundle\DataGridInterface;
 use WellCommerce\Bundle\DataGridBundle\Options\OptionsInterface;
 
 /**
@@ -28,7 +27,7 @@ use WellCommerce\Bundle\DataGridBundle\Options\OptionsInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class PackageDataGrid extends AbstractDataGrid implements DataGridInterface
+class PackageDataGrid extends AbstractDataGrid
 {
     /**
      * {@inheritdoc}

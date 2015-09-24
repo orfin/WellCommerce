@@ -1,0 +1,76 @@
+WellCommerce\Bundle\ClientBundle\Entity\Client:
+    type: entity
+    table: client
+    repositoryClass: WellCommerce\Bundle\ClientBundle\Repository\ClientRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        discount:
+            type: decimal
+            scale: 4
+            nullable: false
+            precision: 15
+        firstName:
+            type: string
+            length: 255
+            nullable: false
+            column: first_name
+        lastName:
+            type: string
+            length: 255
+            nullable: false
+            column: last_name
+        password:
+            type: string
+            length: 64
+            nullable: false
+        email:
+            type: string
+            length: 60
+            unique: true
+            nullable: false
+        username:
+            type: string
+            length: 60
+            unique: true
+            nullable: false
+        phone:
+            type: string
+            length: 60
+            unique: false
+            nullable: false
+        salt:
+            type: string
+            length: 40
+            unique: false
+            nullable: false
+        conditionsAccepted:
+            type: boolean
+            nullable: false
+            column: conditions_accepted
+        newsletterAccepted:
+            type: boolean
+            nullable: false
+            column: newsletter_accepted
+    oneToMany:
+        addresses:
+            targetEntity: WellCommerce\Bundle\ClientBundle\Entity\ClientAddress
+            cascade:
+                - remove
+                - persist
+            fetch: LAZY
+            mappedBy: client
+            orphanRemoval: true
+    manyToOne:
+        clientGroup:
+            targetEntity: WellCommerce\Bundle\ClientBundle\Entity\ClientGroup
+            fetch: LAZY
+            inversedBy: clients
+            joinColumns:
+                client_group_id:
+                    referencedColumnName: id
+                    onDelete: 'SET NULL'
+            orphanRemoval: false

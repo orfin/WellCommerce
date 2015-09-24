@@ -11,20 +11,19 @@
  */
 namespace WellCommerce\Bundle\UnitBundle\DataGrid;
 
-use WellCommerce\Bundle\DataGridBundle\AbstractDataGrid;
+use WellCommerce\Bundle\CoreBundle\DataGrid\AbstractDataGrid;
 use WellCommerce\Bundle\DataGridBundle\Column\Column;
 use WellCommerce\Bundle\DataGridBundle\Column\ColumnCollection;
 use WellCommerce\Bundle\DataGridBundle\Column\Options\Appearance;
 use WellCommerce\Bundle\DataGridBundle\Column\Options\Filter;
 use WellCommerce\Bundle\DataGridBundle\Column\Options\Sorting;
-use WellCommerce\Bundle\DataGridBundle\DataGridInterface;
 
 /**
  * Class UnitDataGrid
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class UnitDataGrid extends AbstractDataGrid implements DataGridInterface
+class UnitDataGrid extends AbstractDataGrid
 {
     /**
      * {@inheritdoc}
@@ -47,8 +46,8 @@ class UnitDataGrid extends AbstractDataGrid implements DataGridInterface
         ]));
 
         $collection->add(new Column([
-            'id'         => 'name',
-            'caption'    => $this->trans('unit.name.label'),
+            'id'      => 'name',
+            'caption' => $this->trans('unit.name.label'),
         ]));
     }
 }

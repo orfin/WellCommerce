@@ -12,16 +12,15 @@
 
 namespace WellCommerce\Bundle\AvailabilityBundle\DataSet;
 
-use WellCommerce\Bundle\DataSetBundle\AbstractDataSet;
-use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
-use WellCommerce\Bundle\DataSetBundle\DataSetConfiguratorInterface;
+use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
+use WellCommerce\Bundle\DataSetBundle\Configurator\DataSetConfiguratorInterface;
 
 /**
  * Class AvailabilityDataSet
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AvailabilityDataSet extends AbstractDataSet implements DataSetInterface
+class AvailabilityDataSet extends AbstractDataSet
 {
     /**
      * {@inheritdoc}

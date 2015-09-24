@@ -1,0 +1,21 @@
+WellCommerce\Bundle\ClientBundle\Entity\ClientAddress:
+    type: entity
+    table: client_address
+    repositoryClass: WellCommerce\Bundle\ClientBundle\Repository\ClientAddressRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    embedded:
+        address:
+            class: WellCommerce\Bundle\CoreBundle\Entity\Address
+    manyToOne:
+        client:
+            targetEntity: WellCommerce\Bundle\ClientBundle\Entity\Client
+            fetch: LAZY
+            inversedBy: addresses
+            joinColumns:
+                client_id:
+                    referencedColumnName: id
+            orphanRemoval: false

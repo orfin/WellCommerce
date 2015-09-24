@@ -8,25 +8,24 @@
         <service id="knp.packagist_api.client" class="Packagist\Api\Client"/>
 
         <service id="package.manager.admin" class="WellCommerce\Bundle\SmugglerBundle\Manager\Admin\PackageManager">
-            <argument type="service" id="flash_helper"/>
-            <argument type="service" id="redirect_helper"/>
-            <argument type="service" id="image_helper"/>
-            <argument type="service" id="event_dispatcher"/>
-            <argument type="service" id="doctrine_helper"/>
-            <argument type="service" id="translator"/>
-            <argument type="service" id="request_helper"/>
-            <call method="setRepository">
-                <argument type="service" id="package.repository"/>
-            </call>
-            <call method="setFormBuilder">
-                <argument type="service" id="package.form_builder"/>
-            </call>
-            <call method="setDataGrid">
-                <argument type="service" id="package.datagrid"/>
-            </call>
+            <argument type="service" id="package.repository"/>
+            <argument type="service" id="package.event_dispatcher"/>
+            <argument type="service" id="package.factory"/>
+            <argument type="service" id="package.form_builder"/>
+            <argument type="service" id="package.datagrid"/>
+
             <call method="setHelper">
                 <argument type="service" id="package.helper"/>
             </call>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="package.factory" class="WellCommerce\Bundle\SmugglerBundle\Factory\PackageFactory"/>
+
+        <service id="package.event_dispatcher" class="WellCommerce\Bundle\SmugglerBundle\EventDispatcher\PackageEventDispatcher">
+            <argument type="service" id="event_dispatcher"/>
         </service>
 
         <service id="package.helper" class="WellCommerce\Bundle\SmugglerBundle\Helper\PackageHelper">
@@ -77,13 +76,6 @@
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
-        </service>
-
-        <service id="package.subscriber" class="WellCommerce\Bundle\SmugglerBundle\EventListener\PackageSubscriber">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <tag name="kernel.event_subscriber" />
         </service>
 
         <service id="package.command.plugin.require" class="WellCommerce\Bundle\SmugglerBundle\Command\Package\RequireCommand">

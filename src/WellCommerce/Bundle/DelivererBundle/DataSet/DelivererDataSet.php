@@ -12,16 +12,15 @@
 
 namespace WellCommerce\Bundle\DelivererBundle\DataSet;
 
-use WellCommerce\Bundle\DataSetBundle\AbstractDataSet;
-use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
-use WellCommerce\Bundle\DataSetBundle\DataSetConfiguratorInterface;
+use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
+use WellCommerce\Bundle\DataSetBundle\Configurator\DataSetConfiguratorInterface;
 
 /**
  * Class DelivererDataSet
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class DelivererDataSet extends AbstractDataSet implements DataSetInterface
+class DelivererDataSet extends AbstractDataSet
 {
     /**
      * {@inheritdoc}

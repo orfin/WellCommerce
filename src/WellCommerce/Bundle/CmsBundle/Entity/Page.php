@@ -12,103 +12,68 @@
 
 namespace WellCommerce\Bundle\CmsBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model as ORMBehaviors;
-use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\HierarchyTrait;
-use WellCommerce\Bundle\MultiStoreBundle\Entity\Shop;
+use Doctrine\Common\Collections\Collection;
+use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
+use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
+use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
+use WellCommerce\Bundle\CoreBundle\Entity\HierarchyAwareTrait;
+use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopCollectionAwareTrait;
 
 /**
  * Class Page
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @ORM\Table(name="page")
- * @ORM\HasLifecycleCallbacks
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\CmsBundle\Repository\PageRepository")
  */
-class Page
+class Page implements PageInterface
 {
-    use ORMBehaviors\Translatable\Translatable;
-    use ORMBehaviors\Timestampable\Timestampable;
-    use ORMBehaviors\Blameable\Blameable;
-    use HierarchyTrait;
+    use Translatable;
+    use Timestampable;
+    use Blameable;
+    use HierarchyAwareTrait;
+    use ShopCollectionAwareTrait;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @var int
      */
     protected $id;
 
     /**
-     * @ORM\Column(name="publish", type="boolean", options={"default" = 0})
-     *
+     * @var bool
      */
     protected $publish;
 
     /**
-     * @ORM\Column(name="redirect_type", type="integer", options={"default" = 0})
-     *
+     * @var int
      */
     protected $redirectType;
 
     /**
-     * @ORM\Column(name="redirect_url", type="string", length=255, nullable=true)
-     *
+     * @var string
      */
     protected $redirectUrl;
 
     /**
-     * @ORM\Column(name="redirect_route", type="string", length=255, nullable=true)
-     *
+     * @var string
      */
     protected $redirectRoute;
     
     /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\CmsBundle\Entity\Page", inversedBy="children")
-     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE")
+     * @var PageInterface|null
      */
     protected $parent;
     
     /**
-     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\ClientBundle\Entity\ClientGroup", inversedBy="pages")
-     * @ORM\JoinTable(name="page_client_group",
-     *      joinColumns={@ORM\JoinColumn(name="page_id", referencedColumnName="id", onDelete="CASCADE")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="client_group_id", referencedColumnName="id", onDelete="CASCADE")}
-     * )
+     * @var Collection
      */
     protected $clientGroups;
     
     /**
-     * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\CmsBundle\Entity\Page", mappedBy="parent")
+     * @var Collection
      */
     protected $children;
 
     /**
-     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\MultiStoreBundle\Entity\Shop", inversedBy="pages")
-     * @ORM\JoinTable(name="shop_page",
-     *      joinColumns={@ORM\JoinColumn(name="page_id", referencedColumnName="id", onDelete="CASCADE")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="shop_id", referencedColumnName="id", onDelete="CASCADE")}
-     * )
-     */
-    protected $shops;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->children     = new ArrayCollection();
-        $this->shops        = new ArrayCollection();
-        $this->clientGroups = new ArrayCollection();
-        $this->parent       = null;
-    }
-
-    /**
-     * @return int
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -116,15 +81,7 @@ class Page
     }
 
     /**
-     * @param int $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getPublish()
     {
@@ -132,7 +89,7 @@ class Page
     }
 
     /**
-     * @param mixed $publish
+     * {@inheritdoc}
      */
     public function setPublish($publish)
     {
@@ -140,9 +97,7 @@ class Page
     }
 
     /**
-     * Returns page parent
-     *
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getParent()
     {
@@ -150,19 +105,15 @@ class Page
     }
 
     /**
-     * Sets page parent
-     *
-     * @param null|Page $parent
+     * {@inheritdoc}
      */
-    public function setParent(Page $parent = null)
+    public function setParent(PageInterface $parent = null)
     {
         $this->parent = $parent;
     }
 
     /**
-     * Returns page children
-     *
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getChildren()
     {
@@ -170,42 +121,16 @@ class Page
     }
 
     /**
-     * Adds new child to page
-     *
-     * @param Page $child
+     * {@inheritdoc}
      */
-    public function addChild(Page $child)
+    public function addChild(PageInterface $child)
     {
         $this->children[] = $child;
         $child->setParent($this);
     }
 
     /**
-     * @return mixed
-     */
-    public function getShops()
-    {
-        return $this->shops;
-    }
-
-    /**
-     * @param mixed $shops
-     */
-    public function setShops($shops)
-    {
-        $this->shops = $shops;
-    }
-
-    /**
-     * @param Shop $shop
-     */
-    public function addShop(Shop $shop)
-    {
-        $this->shops[] = $shop;
-    }
-
-    /**
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getRedirectRoute()
     {
@@ -213,7 +138,7 @@ class Page
     }
 
     /**
-     * @param mixed $redirectRoute
+     * {@inheritdoc}
      */
     public function setRedirectRoute($redirectRoute)
     {
@@ -221,7 +146,7 @@ class Page
     }
 
     /**
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getRedirectUrl()
     {
@@ -229,7 +154,7 @@ class Page
     }
 
     /**
-     * @param mixed $redirectUrl
+     * {@inheritdoc}
      */
     public function setRedirectUrl($redirectUrl)
     {
@@ -237,7 +162,7 @@ class Page
     }
 
     /**
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getClientGroups()
     {
@@ -245,16 +170,15 @@ class Page
     }
 
     /**
-     * @param mixed $clientGroups
+     * {@inheritdoc}
      */
-    public function setClientGroups($clientGroups)
+    public function setClientGroups(Collection $clientGroups)
     {
         $this->clientGroups = $clientGroups;
     }
 
     /**
-     * @ORM\PrePersist
-     * @ORM\PreUpdate
+     * {@inheritdoc}
      */
     public function prePersist()
     {
@@ -274,7 +198,7 @@ class Page
     }
 
     /**
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getRedirectType()
     {
@@ -282,7 +206,7 @@ class Page
     }
 
     /**
-     * @param mixed $redirectType
+     * {@inheritdoc}
      */
     public function setRedirectType($redirectType)
     {

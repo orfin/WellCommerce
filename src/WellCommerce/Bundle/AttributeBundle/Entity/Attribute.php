@@ -12,8 +12,7 @@
 
 namespace WellCommerce\Bundle\AttributeBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
@@ -22,49 +21,28 @@ use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
  * Class Attribute
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @ORM\Table(name="attribute")
- * @ORM\HasLifecycleCallbacks
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\AttributeBundle\Repository\AttributeRepository")
  */
-class Attribute
+class Attribute implements AttributeInterface
 {
-    use Translatable;
-    use Timestampable;
-    use Blameable;
+    use Translatable, Timestampable, Blameable;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @var int
      */
-    private $id;
+    protected $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroup", mappedBy="attributes")
+     * @var Collection
      */
-    private $groups;
+    protected $groups;
 
     /**
-     * @ORM\OneToMany(targetEntity="WellCommerce\Bundle\AttributeBundle\Entity\AttributeValue", mappedBy="attribute", cascade={"persist"}, orphanRemoval=true)
+     * @var Collection
      */
-    private $values;
+    protected $values;
 
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->groups = new ArrayCollection();
-        $this->values = new ArrayCollection();
-    }
-
-    /**
-     * Returns attribute id
-     *
-     * @return int
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -72,9 +50,7 @@ class Attribute
     }
 
     /**
-     * Returns all attribute groups bound to attribute
-     *
-     * @return ArrayCollection
+     * {@inheritdoc}
      */
     public function getGroups()
     {
@@ -82,30 +58,24 @@ class Attribute
     }
 
     /**
-     * Sets attribute groups for attribute
-     *
-     * @param ArrayCollection $collection
+     * {@inheritdoc}
      */
-    public function setGroups(ArrayCollection $collection)
+    public function setGroups(Collection $collection)
     {
         $this->groups = $collection;
     }
 
     /**
-     * Adds new attribute group to attribute
-     *
-     * @param AttributeGroup $group
+     * {@inheritdoc}
      */
-    public function addGroup(AttributeGroup $group)
+    public function addGroup(AttributeGroupInterface $group)
     {
         $group->addAttribute($this);
         $this->groups[] = $group;
     }
 
     /**
-     * Returns all attribute values
-     *
-     * @return ArrayCollection
+     * {@inheritdoc}
      */
     public function getValues()
     {
@@ -113,14 +83,10 @@ class Attribute
     }
 
     /**
-     * Sets new attribute values.
-     * Earlier deletes old values as they are not needed.
-     *
-     * @param ArrayCollection $collection
+     * {@inheritdoc}
      */
-    public function setValues(ArrayCollection $collection)
+    public function setValues(Collection $collection)
     {
-        // remove old values
         foreach ($this->values as $value) {
             if (!$collection->contains($value)) {
                 $this->values->removeElement($value);

@@ -1,7 +1,7 @@
 {% trans_default_domain "wellcommerce" %}
 
 <li class="dropdown">
-    <a href="{{ path('front.cart.index') }}" class="dropdown-toggle cartQty" data-toggle="dropdown" role="button" aria-expanded="true">
+    <a href="{{ path('front.cart.index') }}" class="dropdown-toggle cartQty" {% if false == cart.isEmpty %}data-toggle="dropdown"{% endif %} role="button" aria-expanded="true">
         Cart<span class="cart-qty">{{ cart.getTotals().getQuantity()|number_format }}</span>
     </a>
     {% if false == cart.isEmpty %}
@@ -17,17 +17,17 @@
                         </a>
                     </td>
                     <td>
-                        <a href="{{ path(item.route) }}">{{ item.name }}</a>
+                        <a href="{{ item.route }}">{{ item.name }}</a>
                     </td>
                     <td>
                         <input type="text" value="{{ item.quantity|number_format(0) }}" class="text-center">
                     </td>
                     <td class="text-right">
                         {% if item.isDiscountValid == 1 %}
-                            {{ format_price(item.quantityDiscountedPrice, item.currency, null, item.tax) }}
-                            <small>{{ format_price(item.quantityPrice, item.currency, null, item.tax) }}</small>
+                            {{ format_price(item.discountedPrice, item.currency, null, null, item.quantity) }}
+                            <small>{{ format_price(item.price, item.currency, null, null, item.quantity) }}</small>
                         {% else %}
-                            {{ format_price(item.quantityPrice, item.currency, null, item.tax) }}
+                            {{ format_price(item.price, item.currency, null, null, item.quantity) }}
                         {% endif %}
                     </td>
                 </tr>

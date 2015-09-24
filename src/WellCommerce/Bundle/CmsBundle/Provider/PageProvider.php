@@ -13,36 +13,28 @@
 namespace WellCommerce\Bundle\CmsBundle\Provider;
 
 use WellCommerce\Bundle\CmsBundle\Entity\Page;
-use WellCommerce\Bundle\CoreBundle\Provider\ProviderInterface;
+use WellCommerce\Bundle\CoreBundle\Provider\AbstractProvider;
 
-class PageProvider implements ProviderInterface
+class PageProvider extends AbstractProvider implements PageProviderInterface
 {
     /**
      * @var Page
      */
-    protected $resource;
+    protected $page;
 
     /**
-     * @return mixed
+     * {@inheritdoc}
      */
-    public function getCurrentResource()
+    public function getCurrentPage()
     {
-        return $this->resource;
+        return $this->page;
     }
 
     /**
-     * @param mixed $resource
+     * {@inheritdoc}
      */
-    public function setCurrentResource($resource)
+    public function setCurrentPage(Page $page)
     {
-        $this->setCurrentPage($resource);
-    }
-
-    /**
-     * @param Page $page
-     */
-    protected function setCurrentPage(Page $page)
-    {
-        $this->resource = $page;
+        $this->page = $page;
     }
 }

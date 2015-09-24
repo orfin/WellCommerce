@@ -12,30 +12,24 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Knp\DoctrineBehaviors\Model\Translatable\Translation;
 use WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface;
 
 /**
- * PaymentTranslation
+ * Class PaymentMethodTranslation
  *
- * @ORM\Table(name="payment_method_translation")
- * @ORM\Entity
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class PaymentMethodTranslation implements LocaleAwareInterface
 {
-    use ORMBehaviors\Translatable\Translation;
+    use Translation;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255)
      */
-    private $name;
+    protected $name;
 
     /**
-     * Returns payment method name
-     *
      * @return string
      */
     public function getName()
@@ -44,11 +38,7 @@ class PaymentMethodTranslation implements LocaleAwareInterface
     }
 
     /**
-     * Sets payment method name
-     *
-     * @param $name
-     *
-     * @return $this
+     * @param string $name
      */
     public function setName($name)
     {

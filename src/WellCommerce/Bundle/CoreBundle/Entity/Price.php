@@ -12,45 +12,104 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Class Price
- *
- * @ORM\Embeddable
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 class Price
 {
     /**
-     * @ORM\Column(type="decimal", precision=15, scale=4, nullable=false)
+     * @var int|float
      */
-    protected $amount;
+    protected $netAmount;
 
     /**
-     * @ORM\Column(type="string", nullable=false, length=16)
+     * @var int|float
+     */
+    protected $grossAmount;
+
+    /**
+     * @var int|float
+     */
+    protected $taxAmount;
+
+    /**
+     * @var int|float
+     */
+    protected $taxRate;
+
+    /**
+     * @var string
      */
     protected $currency;
 
     /**
-     * @return mixed
+     * @return float|int
      */
-    public function getAmount()
+    public function getNetAmount()
     {
-        return $this->amount;
+        return $this->netAmount;
     }
 
     /**
-     * @param mixed $amount
+     * @param float|int $netAmount
      */
-    public function setAmount($amount)
+    public function setNetAmount($netAmount)
     {
-        $this->amount = $amount;
+        $this->netAmount = (float)$netAmount;
     }
 
     /**
-     * @return mixed
+     * @return float|int
+     */
+    public function getGrossAmount()
+    {
+        return (float)$this->grossAmount;
+    }
+
+    /**
+     * @param float|int $grossAmount
+     */
+    public function setGrossAmount($grossAmount)
+    {
+        $this->grossAmount = (float)$grossAmount;
+    }
+
+    /**
+     * @return float|int
+     */
+    public function getTaxAmount()
+    {
+        return (float)$this->taxAmount;
+    }
+
+    /**
+     * @param float|int $taxAmount
+     */
+    public function setTaxAmount($taxAmount)
+    {
+        $this->taxAmount = (float)$taxAmount;
+    }
+
+    /**
+     * @return float|int
+     */
+    public function getTaxRate()
+    {
+        return (float)$this->taxRate;
+    }
+
+    /**
+     * @param float|int $taxRate
+     */
+    public function setTaxRate($taxRate)
+    {
+        $this->taxRate = (float)$taxRate;
+    }
+
+    /**
+     * @return string
      */
     public function getCurrency()
     {
@@ -58,7 +117,7 @@ class Price
     }
 
     /**
-     * @param mixed $currency
+     * @param string $currency
      */
     public function setCurrency($currency)
     {

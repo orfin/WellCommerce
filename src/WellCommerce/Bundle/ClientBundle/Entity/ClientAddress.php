@@ -11,43 +11,37 @@
  */
 namespace WellCommerce\Bundle\ClientBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model as ORMBehaviors;
-use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\AddressTrait;
+use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
+use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
+use WellCommerce\Bundle\CoreBundle\Entity\AddressInterface;
 
 /**
- * Client
+ * Class ClientAddress
  *
- * @ORM\Table(name="client_address")
- * @ORM\Entity(repositoryClass="WellCommerce\Bundle\ClientBundle\Repository\ClientAddressRepository")
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientAddress
+class ClientAddress implements ClientAddressInterface
 {
-    use ORMBehaviors\Timestampable\Timestampable;
-    use ORMBehaviors\Blameable\Blameable;
+    use Timestampable;
+    use Blameable;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WellCommerce\Bundle\ClientBundle\Entity\Client", inversedBy="addresses")
-     * @ORM\JoinColumn(name="client_id", referencedColumnName="id", nullable=false)
-     */
-    protected $client;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @var int
      */
     protected $id;
 
     /**
-     * @ORM\Embedded(class = "WellCommerce\Bundle\CoreBundle\Entity\Address", columnPrefix = "address_")
+     * @var ClientInterface
+     */
+    protected $client;
+
+    /**
+     * @var AddressInterface
      */
     protected $address;
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -55,7 +49,7 @@ class ClientAddress
     }
 
     /**
-     * @return Client
+     * {@inheritdoc}
      */
     public function getClient()
     {
@@ -63,15 +57,15 @@ class ClientAddress
     }
 
     /**
-     * @param Client $client
+     * {@inheritdoc}
      */
-    public function setClient(Client $client)
+    public function setClient(ClientInterface $client)
     {
         $this->client = $client;
     }
 
     /**
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getAddress()
     {
@@ -79,9 +73,9 @@ class ClientAddress
     }
 
     /**
-     * @param mixed $address
+     * {@inheritdoc}
      */
-    public function setAddress($address)
+    public function setAddress(AddressInterface $address)
     {
         $this->address = $address;
     }

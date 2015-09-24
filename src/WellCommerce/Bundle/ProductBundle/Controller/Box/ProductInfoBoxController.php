@@ -19,8 +19,6 @@ use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
  * Class ProductInfoBoxController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class ProductInfoBoxController extends AbstractBoxController implements BoxControllerInterface
 {
@@ -29,10 +27,10 @@ class ProductInfoBoxController extends AbstractBoxController implements BoxContr
      */
     public function indexAction()
     {
-        $provider = $this->getManager()->getProductProvider();
+        $provider = $this->manager->getProductProvider();
 
-        return [
+        return $this->displayTemplate('index', [
             'product' => $provider->getCurrentProduct()
-        ];
+        ]);
     }
 }

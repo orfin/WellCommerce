@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\ProducerBundle\Controller\Front;
 
-use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
 
@@ -20,15 +19,11 @@ use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
  * Class ProducerController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class ProducerController extends AbstractFrontController implements FrontControllerInterface
 {
-    public function indexAction(Request $request)
+    public function indexAction()
     {
-        return [
-            'layout' => ''
-        ];
+        return $this->render('WellCommerceProducerBundle:Front/Producer:index.html.twig');
     }
 }

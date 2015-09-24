@@ -14,38 +14,42 @@ namespace WellCommerce\Bundle\CategoryBundle\Controller\Box;
 
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
+use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxSettingsCollection;
 
 /**
  * Class CategoryProductsBoxController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class CategoryProductsBoxController extends AbstractBoxController implements BoxControllerInterface
 {
     /**
+     * @var \WellCommerce\Bundle\CategoryBundle\Manager\Front\CategoryManager
+     */
+    protected $manager;
+
+    /**
      * {@inheritdoc}
      */
-    public function indexAction()
+    public function indexAction(LayoutBoxSettingsCollection $boxSettings)
     {
-        $manager           = $this->getManager();
-        $provider          = $manager->getProductProvider();
+        $provider          = $this->manager->getProductProvider();
         $collectionBuilder = $provider->getCollectionBuilder();
-        $requestHelper     = $manager->getRequestHelper();
-        $limit             = $requestHelper->getCurrentLimit($this->getBoxParam('per_page'));
+        $requestHelper     = $this->manager->getRequestHelper();
+        $limit             = $requestHelper->getCurrentLimit($boxSettings->getParam('per_page', 12));
         $offset            = $requestHelper->getCurrentOffset($limit);
 
         $dataset = $collectionBuilder->getDataSet([
-            'limit'      => $limit,
-            'offset'     => $offset,
-            'order_by'   => $requestHelper->getQueryAttribute('order_by', 'name'),
-            'order_dir'  => $requestHelper->getQueryAttribute('order_dir', 'asc'),
-            'conditions' => $this->getManager()->getConditions(),
+            'limit'         => $limit,
+            'offset'        => $offset,
+            'order_by'      => $requestHelper->getQueryAttribute('order_by', 'name'),
+            'order_dir'     => $requestHelper->getQueryAttribute('order_dir', 'asc'),
+            'conditions'    => $this->manager->getCurrentCategoryConditions(),
+            'cache_enabled' => true
         ]);
 
-        return [
+        return $this->displayTemplate('index', [
             'dataset' => $dataset
-        ];
+        ]);
     }
 }

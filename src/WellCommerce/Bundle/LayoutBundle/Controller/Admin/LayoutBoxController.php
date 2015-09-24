@@ -14,35 +14,33 @@ namespace WellCommerce\Bundle\LayoutBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use WellCommerce\Bundle\AdminBundle\Controller\AbstractAdminController;
+use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
  * Class LayoutBoxController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
- *
- * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Template()
  */
 class LayoutBoxController extends AbstractAdminController
 {
     public function addAction(Request $request)
     {
-        $resource = $this->getManager()->initResource();
-        $form     = $this->getManager()->getForm($resource);
+        $resource = $this->manager->initResource();
+        $form     = $this->manager->getForm($resource);
 
         if ($form->handleRequest()->isSubmitted()) {
             if ($form->isValid()) {
                 $settings = $this->getBoxSettingsFromRequest($request);
                 $resource->setSettings($settings);
-                $this->getManager()->createResource($resource, $request);
+                $this->manager->createResource($resource);
             }
 
-            return $this->createJsonDefaultResponse($form);
+            return $this->createFormDefaultJsonResponse($form);
         }
 
-        return [
+        return $this->displayTemplate('add', [
             'form' => $form
-        ];
+        ]);
     }
 
     /**

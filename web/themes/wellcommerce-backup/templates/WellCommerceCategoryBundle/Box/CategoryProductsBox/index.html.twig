@@ -1,0 +1,7 @@
+{% if dataset.filtered > 0 %}
+    {% include 'WellCommerceWebBundle:Front/Common:products.html.twig' %}
+{% else %}
+    <div class="alert alert-info" role="alert">
+        <strong>{% trans %}category.flash.empty_category{% endtrans %}</strong>
+    </div>
+{% endif %}
