@@ -50,6 +50,16 @@ interface CartInterface extends
     public function setSessionId($sessionId);
 
     /**
+     * @return boolean
+     */
+    public function getCopyAddress();
+
+    /**
+     * @param boolean $copyAddress
+     */
+    public function setCopyAddress($copyAddress);
+
+    /**
      * @param CartProductInterface $cartProduct
      */
     public function addProduct(CartProductInterface $cartProduct);

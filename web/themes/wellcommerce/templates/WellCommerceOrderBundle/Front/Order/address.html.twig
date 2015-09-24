@@ -47,12 +47,7 @@
                     </div>
                 </div>
 
-				<div class="checkbox mtp30 mbt0">
-					<label>
-						<input type="checkbox" id="shipping-collapse">
-						Delivery address is other than billing address
-					</label>
-				</div>
+                {{ macros.element(form.getChildren().get('copyAddress')) }}
 
                 <div class="collapse" id="shipping-wrap">
                     <h4>{% trans %}client.label.shipping_address{% endtrans %}</h4>
@@ -142,9 +137,11 @@
 			}
 		});
 
-		$('#shipping-collapse').unbind('change').bind('change', function(){
-			$('#shipping-wrap').collapse($(this).is(':checked') ? 'show' : 'hide');
+		$('#copyAddress').unbind('change').bind('change', function(){
+			$('#shipping-wrap').collapse($(this).is(':checked') ? 'hide' : 'show');
 		});
+
+        $('#copyAddress').change();
 
 		$('#password-collapse').unbind('change').bind('change', function(){
 			$('#password-wrap').collapse($(this).is(':checked') ? 'show' : 'hide');

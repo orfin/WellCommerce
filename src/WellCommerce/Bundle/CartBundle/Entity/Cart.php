@@ -51,6 +51,11 @@ class Cart implements CartInterface
     protected $sessionId;
 
     /**
+     * @var bool
+     */
+    protected $copyAddress;
+
+    /**
      * @var string
      */
     protected $currency;
@@ -97,6 +102,22 @@ class Cart implements CartInterface
     public function setSessionId($sessionId)
     {
         $this->sessionId = $sessionId;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCopyAddress()
+    {
+        return $this->copyAddress;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCopyAddress($copyAddress)
+    {
+        $this->copyAddress = $copyAddress;
     }
 
     /**

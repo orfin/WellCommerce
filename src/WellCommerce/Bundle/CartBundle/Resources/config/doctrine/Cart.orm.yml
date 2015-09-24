@@ -32,6 +32,12 @@ WellCommerce\Bundle\CartBundle\Entity\Cart:
             length: 16
             nullable: false
             column: currency
+        copyAddress:
+            type: integer
+            nullable: false
+            column: copy_address
+            options:
+                default: 1
     oneToMany:
         products:
             targetEntity: WellCommerce\Bundle\CartBundle\Entity\CartProduct

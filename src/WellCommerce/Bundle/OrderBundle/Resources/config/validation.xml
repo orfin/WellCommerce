@@ -3,18 +3,13 @@
                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
 
-    <class name="WellCommerce\Bundle\CartBundle\Entity\Cart">
+    <class name="WellCommerce\Bundle\OrderBundle\Entity\Order">
         <property name="billingAddress">
             <constraint name="Valid">
                 <option name="deep">true</option>
             </constraint>
         </property>
         <property name="shippingAddress">
-            <constraint name="Valid">
-                <option name="deep">true</option>
-            </constraint>
-        </property>
-        <property name="contactDetails">
             <constraint name="Valid">
                 <option name="deep">true</option>
             </constraint>

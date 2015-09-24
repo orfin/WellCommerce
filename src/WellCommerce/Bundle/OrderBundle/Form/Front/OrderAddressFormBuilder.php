@@ -81,6 +81,11 @@ class OrderAddressFormBuilder extends AbstractFormBuilder
             'default' => $defaultCountry
         ]));
 
+        $form->addChild($this->getElement('checkbox', [
+            'name'  => 'copyAddress',
+            'label' => $this->trans('client.label.copy_address'),
+        ]));
+
         $shippingAddress = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'shippingAddress',
             'label' => $this->trans('client.label.shipping_address'),

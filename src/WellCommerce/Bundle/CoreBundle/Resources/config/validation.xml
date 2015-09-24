@@ -104,11 +104,6 @@
                 <option name="message">address.error.post_code.not_null</option>
             </constraint>
         </property>
-        <property name="province">
-            <constraint name="NotNull">
-                <option name="message">address.error.province.not_null</option>
-            </constraint>
-        </property>
         <property name="city">
             <constraint name="NotBlank">
                 <option name="message">address.error.city.not_blank</option>
