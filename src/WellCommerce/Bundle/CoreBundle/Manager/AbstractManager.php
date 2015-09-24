@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\CoreBundle\Manager;
 
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
 use WellCommerce\Bundle\CoreBundle\EventDispatcher\EventDispatcherInterface;
+use WellCommerce\Bundle\CoreBundle\Exception\MissingFactoryException;
 use WellCommerce\Bundle\CoreBundle\Exception\MissingFormBuilderException;
 use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
@@ -51,13 +52,13 @@ abstract class AbstractManager extends AbstractContainerAware implements Manager
      *
      * @param RepositoryInterface       $repository
      * @param EventDispatcherInterface  $eventDispatcher
-     * @param FactoryInterface          $factory
+     * @param FactoryInterface|null     $factory
      * @param FormBuilderInterface|null $formBuilder
      */
     public function __construct(
         RepositoryInterface $repository,
         EventDispatcherInterface $eventDispatcher,
-        FactoryInterface $factory,
+        FactoryInterface $factory = null,
         FormBuilderInterface $formBuilder = null
     ) {
         $this->repository      = $repository;
@@ -87,6 +88,10 @@ abstract class AbstractManager extends AbstractContainerAware implements Manager
      */
     public function getFactory()
     {
+        if (null === $this->factory) {
+            throw new MissingFactoryException(get_class($this));
+        }
+
         return $this->factory;
     }
 

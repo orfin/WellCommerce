@@ -60,6 +60,10 @@ wellcommerce_unit:
     resource: "@WellCommerceUnitBundle/Resources/config/routing.xml"
     prefix:   /admin/configuration/unit
 
+wellcommerce_report:
+    resource: "@WellCommerceReportBundle/Resources/config/routing.xml"
+    prefix:   /admin/report
+
 wellcommerce_tax:
     resource: "@WellCommerceTaxBundle/Resources/config/routing.xml"
     prefix:   /admin/configuration/tax

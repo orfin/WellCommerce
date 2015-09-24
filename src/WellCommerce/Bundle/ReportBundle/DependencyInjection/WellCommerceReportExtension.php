@@ -10,20 +10,15 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AdminBundle\Controller\Admin;
+namespace WellCommerce\Bundle\ReportBundle\DependencyInjection;
 
-use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
+use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractExtension;
 
 /**
- * Class DashboardController
+ * Class WellCommerceReportExtension
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class DashboardController extends AbstractController
+class WellCommerceReportExtension extends AbstractExtension
 {
-    public function indexAction()
-    {
-
-        return $this->displayTemplate('index');
-    }
 }

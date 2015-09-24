@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Repository;
 
+use Doctrine\Common\Collections\Criteria;
 use WellCommerce\Bundle\DataSetBundle\Repository\DataSetAwareRepositoryInterface;
 
 /**
@@ -69,4 +70,14 @@ interface RepositoryInterface extends DataSetAwareRepositoryInterface
      * @return \Doctrine\ORM\Mapping\ClassMetadata
      */
     public function getMetaData();
+
+    /**
+     * Select all elements from a selectable that match the expression and
+     * return a new collection containing these elements.
+     *
+     * @param \Doctrine\Common\Collections\Criteria $criteria
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function matching(Criteria $criteria);
 }

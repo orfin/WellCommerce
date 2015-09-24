@@ -14,3 +14,4 @@ WellCommerce\Bundle\PaymentBundle\Entity\Payment:
             joinColumn:
                 name: order_id
                 referencedColumnName: id
+                onDelete: CASCADE

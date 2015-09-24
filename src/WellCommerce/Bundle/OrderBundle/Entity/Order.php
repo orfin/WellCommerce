@@ -15,6 +15,7 @@ use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientAwareTrait;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\Timestampable\TimestampableTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\AddressInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\ContactDetailsTrait;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopAwareTrait;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodAwareTrait;
@@ -32,6 +33,7 @@ class Order implements OrderInterface
     use ShippingMethodAwareTrait;
     use PaymentMethodAwareTrait;
     use ClientAwareTrait;
+    use ContactDetailsTrait;
 
     /**
      * @var int
@@ -42,6 +44,16 @@ class Order implements OrderInterface
      * @var Collection
      */
     protected $products;
+
+    /**
+     * @var OrderProductTotalsInterface
+     */
+    protected $productTotals;
+
+    /**
+     * @var OrderShippingDetailsInterface
+     */
+    protected $shippingDetails;
 
     /**
      * @var Collection
@@ -265,5 +277,37 @@ class Order implements OrderInterface
     public function addPayment(PaymentInterface $payment)
     {
         $this->payments[] = $payment;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getProductTotals()
+    {
+        return $this->productTotals;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setProductTotals(OrderProductTotalsInterface $productTotals)
+    {
+        $this->productTotals = $productTotals;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getShippingDetails()
+    {
+        return $this->shippingDetails;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setShippingDetails(OrderShippingDetailsInterface $shippingDetails)
+    {
+        $this->shippingDetails = $shippingDetails;
     }
 }

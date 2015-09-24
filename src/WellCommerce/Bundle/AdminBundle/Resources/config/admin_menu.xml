@@ -350,4 +350,13 @@
         <path>menu.configuration.smuggler.channel</path>
         <sort_order>20</sort_order>
     </item>
+
+    <item>
+        <id>sales_report</id>
+        <name>admin.menu.report.sales</name>
+        <route>admin.sales_report.index</route>
+        <path>menu.reports.sales</path>
+        <sort_order>50</sort_order>
+    </item>
+
 </items>

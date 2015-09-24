@@ -10,20 +10,17 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AdminBundle\Controller\Admin;
+namespace WellCommerce\Bundle\ReportBundle\Manager\Admin;
 
-use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
+use Doctrine\Common\Collections\Criteria;
+use WellCommerce\Bundle\CoreBundle\Manager\Admin\AdminManagerInterface;
 
 /**
- * Class DashboardController
+ * Interface SalesReportManagerInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class DashboardController extends AbstractController
+interface SalesReportManagerInterface extends AdminManagerInterface
 {
-    public function indexAction()
-    {
-
-        return $this->displayTemplate('index');
-    }
+    public function getSummaryStats(Criteria $criteria);
 }

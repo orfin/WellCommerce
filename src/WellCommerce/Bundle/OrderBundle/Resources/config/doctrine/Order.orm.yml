@@ -14,6 +14,15 @@ WellCommerce\Bundle\OrderBundle\Entity\Order:
         shippingAddress:
             class: WellCommerce\Bundle\CoreBundle\Entity\Address
             columnPrefix: shipping_address_
+        contactDetails:
+            class: WellCommerce\Bundle\CoreBundle\Entity\ContactDetails
+            columnPrefix: contact_details_
+        productTotals:
+            class: WellCommerce\Bundle\OrderBundle\Entity\OrderProductTotals
+            columnPrefix: product_total_
+        shippingDetails:
+            class: WellCommerce\Bundle\OrderBundle\Entity\OrderShippingDetails
+            columnPrefix: shipping_
     fields:
         sessionId:
             type: string

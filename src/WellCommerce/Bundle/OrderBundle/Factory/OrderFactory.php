@@ -16,6 +16,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 use WellCommerce\Bundle\OrderBundle\Entity\Order;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderProductTotals;
 
 /**
  * Class OrderFactory
@@ -47,6 +48,7 @@ class OrderFactory extends AbstractFactory implements OrderFactoryInterface
         $order->setShippingMethod($cart->getShippingMethodCost()->getShippingMethod());
         $order->setBillingAddress($cart->getBillingAddress());
         $order->setShippingAddress($cart->getShippingAddress());
+        $order->setContactDetails($cart->getContactDetails());
         $order->setShop($cart->getShop());
         $order->setSessionId($cart->getSessionId());
         $order->setClient($cart->getClient());

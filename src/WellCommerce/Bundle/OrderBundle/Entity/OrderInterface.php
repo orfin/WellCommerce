@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\OrderBundle\Entity;
 use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\AddressInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\ContactDetailsAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopAwareInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
@@ -26,7 +27,13 @@ use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodAwareInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface OrderInterface extends TimestampableInterface, ShopAwareInterface, ShippingMethodAwareInterface, PaymentMethodAwareInterface, ClientAwareInterface
+interface OrderInterface extends
+    TimestampableInterface,
+    ShopAwareInterface,
+    ShippingMethodAwareInterface,
+    PaymentMethodAwareInterface,
+    ClientAwareInterface,
+    ContactDetailsAwareInterface
 {
     /**
      * @return int
@@ -142,4 +149,24 @@ interface OrderInterface extends TimestampableInterface, ShopAwareInterface, Shi
      * @param PaymentInterface $payment
      */
     public function addPayment(PaymentInterface $payment);
+
+    /**
+     * @return OrderProductTotalsInterface
+     */
+    public function getProductTotals();
+
+    /**
+     * @param OrderProductTotalsInterface $productTotals
+     */
+    public function setProductTotals(OrderProductTotalsInterface $productTotals);
+
+    /**
+     * @return OrderShippingDetailsInterface
+     */
+    public function getShippingDetails();
+
+    /**
+     * @param OrderShippingDetailsInterface $shippingDetails
+     */
+    public function setShippingDetails(OrderShippingDetailsInterface $shippingDetails);
 }

@@ -10,20 +10,15 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AdminBundle\Controller\Admin;
+namespace WellCommerce\Bundle\ReportBundle;
 
-use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Class DashboardController
+ * Class WellCommerceReportBundle
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class DashboardController extends AbstractController
+class WellCommerceReportBundle extends Bundle
 {
-    public function indexAction()
-    {
-
-        return $this->displayTemplate('index');
-    }
 }
