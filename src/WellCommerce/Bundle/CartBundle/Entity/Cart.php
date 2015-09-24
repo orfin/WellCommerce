@@ -12,7 +12,6 @@
 namespace WellCommerce\Bundle\CartBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
-use WellCommerce\Bundle\CartBundle\Calculator\CartTotalsVisitorInterface;
 use WellCommerce\Bundle\CartBundle\Visitor\CartVisitorInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientAwareTrait;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\Timestampable\TimestampableTrait;
@@ -20,7 +19,7 @@ use WellCommerce\Bundle\CoreBundle\Entity\AddressInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\ContactDetailsTrait;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopAwareTrait;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodAwareTrait;
-use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodAwareTrait;
+use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCostInterface;
 
 /**
@@ -218,6 +217,14 @@ class Cart implements CartInterface
     public function setCurrency($currency)
     {
         $this->currency = $currency;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasMethods()
+    {
+        return (bool)($this->getShippingMethodCost() instanceof ShippingMethodCostInterface && $this->getPaymentMethod() instanceof PaymentMethodInterface);
     }
 
     /**

@@ -50,12 +50,16 @@ class CartSummaryCollector implements CartSummaryCollectorInterface
         return round($totalGrossPrice + $shippingCost, 2);
     }
 
-    protected function collectShippingCost(ShippingMethodCostInterface $shippingMethodCost)
+    protected function collectShippingCost(ShippingMethodCostInterface $shippingMethodCost = null)
     {
-        $cost         = $shippingMethodCost->getCost();
-        $baseCurrency = $cost->getCurrency();
-        $grossAmount  = $cost->getGrossAmount();
+        if (null !== $shippingMethodCost) {
+            $cost         = $shippingMethodCost->getCost();
+            $baseCurrency = $cost->getCurrency();
+            $grossAmount  = $cost->getGrossAmount();
 
-        return $this->helper->convert($grossAmount, $baseCurrency);
+            return $this->helper->convert($grossAmount, $baseCurrency);
+        }
+
+        return 0;
     }
 }

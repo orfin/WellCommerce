@@ -63,7 +63,7 @@ class CartController extends AbstractFrontController implements FrontControllerI
 
         return $this->displayTemplate('index', [
             'form'         => $form,
-            'shippingCost' => $cart->getShippingMethodCost()->getCost(),
+            'shippingCost' => (null !== $cart->getShippingMethodCost()) ? $cart->getShippingMethodCost()->getCost() : null,
             'elements'     => $form->getChildren(),
             'summary'      => $this->get('cart_summary.collector')->collect($cart)
         ]);

@@ -17,73 +17,26 @@
                     <a href="{{ path('front.home_page.index') }}" class="btn btn-link light btn-lg notransform nopadding">Back to shopping</a>
                     <a href="{{ path('front.order.address') }}" class="btn btn-primary btn-lg pull-right">Place an order</a>
                 </div>
-                {% include 'WellCommerceCartBundle:Front/Common:discounts.html.twig' %}
-
+                {% if cart.hasMethods %}
+                    {% include 'WellCommerceCartBundle:Front/Common:discounts.html.twig' %}
+                {% endif %}
+                
                 {% include 'WellCommerceCartBundle:Front/Common:products_table.html.twig' %}
 
-                <div class="methods">
-                    <div class="row mbt60">
-                        {% include 'WellCommerceCartBundle:Front/Common:coupon.html.twig' %}
+                {% if cart.hasMethods %}
+                    {% include 'WellCommerceCartBundle:Front/Common:methods.html.twig' %}
+
+                    {% include 'WellCommerceCartBundle:Front/Common:summary.html.twig' %}
+
+                    <div class="clearfix">
+                        <a href="{{ path('front.home_page.index') }}" class="btn btn-link light btn-lg notransform nopadding">Back to shopping</a>
+                        <a href="{{ path('front.order.address') }}" class="btn btn-primary btn-lg pull-right">Place an order</a>
                     </div>
-
-                    <div class="row">
-                        <div class="col-lg-7 col-sm-6 col-xs-12">
-                            {{ macros.form_begin(form, 'cart') }}
-                            <div class="row mbt30">
-                                <div class="col-lg-6 col-xs-12">
-                                    <h4>Choose delivery</h4>
-
-                                    <div class="row">
-                                        <div class="col-lg-10">
-                                            {{ macros.element(form.getChildren().get('shippingMethodCost')) }}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mbt30">
-                                <div class="col-lg-6 col-xs-12">
-                                    <h4>Choose payment</h4>
-
-                                    <div class="row">
-                                        <div class="col-lg-10">
-                                            {{ macros.element(form.getChildren().get('paymentMethod')) }}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            {{ macros.form_end(form) }}
-                        </div>
-
-                        <div class="col-lg-5 col-sm-6 col-xs-12">
-                            <div class="row">
-                                <div class="col-xs-6 text-right">
-                                    <h4><br/><br/>Cost of delivery</h4>
-                                </div>
-                                <div class="col-xs-6">
-                                    <h4><strong><br/><br/>{{ format_price(shippingCost.getGrossAmount(), shippingCost.getCurrency()) }}</strong></h4>
-                                </div>
-                            </div>
-                        </div>
+                {% else %}
+                    <div class="alert alert-error mtp30">
+                        <strong>{% trans %}cart.error.no_available_methods{% endtrans %}</strong>
                     </div>
-                </div>
-
-                <div class="summary mbt60">
-                    <div class="row">
-                        <div class="col-lg-10 col-lg-offset-2 col-xs-12">
-                            <div class="col-sm-9 col-xs-6 text-right">
-                                <span class="text">Summary<small>Payment method: {{ cart.getPaymentMethod().translate().getName() }}</small></span>
-                            </div>
-                            <div class="col-sm-3 col-xs-6">
-                                <span class="value">{{ format_price(summary) }}</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="clearfix">
-                    <a href="{{ path('front.home_page.index') }}" class="btn btn-link light btn-lg notransform nopadding">Back to shopping</a>
-                    <a href="{{ path('front.order.address') }}" class="btn btn-primary btn-lg pull-right">Place an order</a>
-                </div>
+                {% endif %}
             </div>
             {% endif %}
         </div>

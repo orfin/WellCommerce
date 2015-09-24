@@ -125,6 +125,13 @@ interface CartInterface extends
     public function setCurrency($currency);
 
     /**
+     * Checks whether cart has shipping and payment method
+     *
+     * @return bool
+     */
+    public function hasMethods();
+
+    /**
      * @return bool
      */
     public function isEmpty();
