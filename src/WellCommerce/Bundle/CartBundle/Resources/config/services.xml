@@ -78,6 +78,12 @@
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
             <argument type="service" id="cart_product.event_dispatcher"/>
+            <call method="setShippingMethodProvider">
+                <argument type="service" id="shipping_method.cart.provider"/>
+            </call>
+            <call method="setCartManager">
+                <argument type="service" id="cart.provider"/>
+            </call>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -115,7 +121,6 @@
         <service id="cart.subscriber" class="WellCommerce\Bundle\CartBundle\EventListener\CartSubscriber">
             <argument type="service" id="cart.manager.front"/>
             <argument type="service" id="cart.visitor.traverser"/>
-            <argument type="service" id="shipping_method.cart.provider"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
