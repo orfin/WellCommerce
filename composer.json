@@ -1,6 +1,6 @@
 {
     "name": "wellcommerce/wellcommerce",
-    "license": "OSL-3.0",
+    "license": "MIT",
     "minimum-stability": "dev",
     "description": "WellCommerce Open-Source edition",
     "keywords": ["symfony","e-commerce","open-source"],
