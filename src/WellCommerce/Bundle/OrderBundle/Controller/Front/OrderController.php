@@ -127,7 +127,7 @@ class OrderController extends AbstractFrontController implements FrontController
             if ($form->isValid()) {
                 $this->manager->saveOrder($order);
 
-                return $this->redirectToAction('index');
+                return $this->redirectToRoute('front.payment.index');
             }
 
             if (count($form->getError())) {

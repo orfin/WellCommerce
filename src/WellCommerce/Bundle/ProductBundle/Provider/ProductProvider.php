@@ -12,7 +12,10 @@
 
 namespace WellCommerce\Bundle\ProductBundle\Provider;
 
+use WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface;
 use WellCommerce\Bundle\CoreBundle\Provider\AbstractProvider;
+use WellCommerce\Bundle\DataSetBundle\Conditions\Condition\Eq;
+use WellCommerce\Bundle\DataSetBundle\Conditions\ConditionsCollection;
 use WellCommerce\Bundle\ProductBundle\Entity\Product;
 
 /**
@@ -41,6 +44,26 @@ class ProductProvider extends AbstractProvider implements ProductProviderInterfa
     public function getCurrentProduct()
     {
         return $this->product;
+    }
+
+    /**
+     * Returns a dataset of products recommended for category
+     *
+     * @param CategoryInterface $category
+     *
+     * @return array
+     */
+    public function getProductRecommendationsForCategory(CategoryInterface $category)
+    {
+        $conditions = new ConditionsCollection();
+        $conditions->add(new Eq('category', $category->getId()));
+
+        return $this->getCollectionBuilder()->getDataSet([
+            'limit'      => 3,
+            'order_by'   => 'name',
+            'order_dir'  => 'asc',
+            'conditions' => $conditions
+        ]);
     }
 
     /**

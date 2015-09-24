@@ -16,11 +16,8 @@ use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
 use WellCommerce\Bundle\CartBundle\Exception\AddCartItemException;
 use WellCommerce\Bundle\CartBundle\Exception\DeleteCartItemException;
-use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
-use WellCommerce\Bundle\DataSetBundle\Conditions\Condition\Eq;
-use WellCommerce\Bundle\DataSetBundle\Conditions\ConditionsCollection;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\WebBundle\Breadcrumb\BreadcrumbItem;
@@ -40,7 +37,7 @@ class CartController extends AbstractFrontController implements FrontControllerI
     /**
      * {@inheritdoc}
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
         $this->addBreadCrumbItem(new BreadcrumbItem([
             'name' => $this->trans('cart.heading.index')
@@ -90,7 +87,7 @@ class CartController extends AbstractFrontController implements FrontControllerI
         }
 
         $category        = $product->getCategories()->first();
-        $recommendations = $this->getRecommendations($category);
+        $recommendations = $this->manager->getProductProvider()->getProductRecommendationsForCategory($category);
 
         $basketModalContent = $this->renderView('WellCommerceCartBundle:Front/Cart:add.html.twig', [
             'product'         => $product,
@@ -103,23 +100,6 @@ class CartController extends AbstractFrontController implements FrontControllerI
             'basketModalContent' => $basketModalContent,
             'cartPreviewContent' => $cartPreviewContent
         ]);
-    }
-
-    protected function getRecommendations(Category $category)
-    {
-        $provider          = $this->manager->getProductProvider();
-        $collectionBuilder = $provider->getCollectionBuilder();
-        $conditions        = new ConditionsCollection();
-        $conditions->add(new Eq('category', $category->getId()));
-
-        $dataset = $collectionBuilder->getDataSet([
-            'limit'      => 3,
-            'order_by'   => 'name',
-            'order_dir'  => 'asc',
-            'conditions' => $conditions
-        ]);
-
-        return $dataset;
     }
 
     public function editAction(CartProductInterface $cartProduct)

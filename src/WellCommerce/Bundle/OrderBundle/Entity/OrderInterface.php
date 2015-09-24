@@ -17,6 +17,7 @@ use WellCommerce\Bundle\ClientBundle\Entity\ClientAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\AddressInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopAwareInterface;
+use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodAwareInterface;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodAwareInterface;
 
@@ -126,4 +127,19 @@ interface OrderInterface extends TimestampableInterface, ShopAwareInterface, Shi
      * @param string $comment
      */
     public function setComment($comment);
+
+    /**
+     * @return Collection
+     */
+    public function getPayments();
+
+    /**
+     * @param Collection $payments
+     */
+    public function setPayments(Collection $payments);
+
+    /**
+     * @param PaymentInterface $payment
+     */
+    public function addPayment(PaymentInterface $payment);
 }

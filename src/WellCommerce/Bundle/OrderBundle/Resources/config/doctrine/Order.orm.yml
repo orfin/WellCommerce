@@ -40,6 +40,9 @@ WellCommerce\Bundle\OrderBundle\Entity\Order:
                 - persist
             fetch: LAZY
             mappedBy: order
+        payments:
+            targetEntity:  WellCommerce\Bundle\PaymentBundle\Entity\Payment
+            mappedBy: order
     oneToOne:
         client:
             targetEntity: WellCommerce\Bundle\ClientBundle\Entity\Client

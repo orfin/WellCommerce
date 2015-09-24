@@ -32,6 +32,7 @@ class OrderFactory extends AbstractFactory implements OrderFactoryInterface
         $order = new Order();
         $order->setModifiers(new ArrayCollection());
         $order->setProducts(new ArrayCollection());
+        $order->setPayments(new ArrayCollection());
 
         return $order;
     }

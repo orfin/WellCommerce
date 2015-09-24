@@ -16,6 +16,7 @@ use WellCommerce\Bundle\ClientBundle\Entity\ClientAwareTrait;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\Timestampable\TimestampableTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\AddressInterface;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopAwareTrait;
+use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodAwareTrait;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodAwareTrait;
 
@@ -46,6 +47,11 @@ class Order implements OrderInterface
      * @var Collection
      */
     protected $modifiers;
+
+    /**
+     * @var Collection
+     */
+    protected $payments;
 
     /**
      * @var string
@@ -235,5 +241,29 @@ class Order implements OrderInterface
     public function setComment($comment)
     {
         $this->comment = $comment;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPayments()
+    {
+        return $this->payments;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPayments(Collection $payments)
+    {
+        $this->payments = $payments;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addPayment(PaymentInterface $payment)
+    {
+        $this->payments[] = $payment;
     }
 }

@@ -37,6 +37,16 @@ interface RequestHelperInterface
     public function getSessionAttribute($name, $default = null);
 
     /**
+     * Sets session attribute
+     *
+     * @param $name
+     * @param $value
+     *
+     * @return mixed
+     */
+    public function setSessionAttribute($name, $value);
+
+    /**
      * Returns true if session has attribute, else otherwise
      *
      * @param string $name

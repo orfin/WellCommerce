@@ -79,6 +79,8 @@ class OrderManager extends AbstractFrontManager
     {
         $this->createResource($order);
         $this->cartManager->abandonCart($this->getCurrentCart());
+
+        $this->getRequestHelper()->setSessionAttribute('orderId', $order->getId());
     }
 
     /**

@@ -19,8 +19,27 @@
             </call>
         </service>
 
+        <service id="payment.manager.front" class="WellCommerce\Bundle\PaymentBundle\Manager\Front\PaymentManager">
+            <argument type="service" id="payment.repository"/>
+            <argument type="service" id="payment.event_dispatcher"/>
+            <argument type="service" id="payment.factory"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setOrderRepository">
+                <argument type="service" id="order.repository"/>
+            </call>
+        </service>
+
         <service id="payment_method.controller.admin" class="WellCommerce\Bundle\PaymentBundle\Controller\Admin\PaymentMethodController">
             <argument type="service" id="payment_method.manager.admin"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="payment.controller.front" class="WellCommerce\Bundle\PaymentBundle\Controller\Front\PaymentController">
+            <argument type="service" id="payment.manager.front"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -30,11 +49,19 @@
             <argument>WellCommercePaymentBundle:PaymentMethod</argument>
         </service>
 
-        <service id="payment_method.factory" class="WellCommerce\Bundle\PaymentBundle\Factory\PaymentMethodFactory">
-            <argument>WellCommercePaymentBundle:PaymentMethod</argument>
+        <service id="payment.repository" class="WellCommerce\Bundle\PaymentBundle\Repository\PaymentRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommercePaymentBundle:Payment</argument>
         </service>
 
+        <service id="payment_method.factory" class="WellCommerce\Bundle\PaymentBundle\Factory\PaymentMethodFactory" />
+
+        <service id="payment.factory" class="WellCommerce\Bundle\PaymentBundle\Factory\PaymentFactory" />
+
         <service id="payment_method.event_dispatcher" class="WellCommerce\Bundle\PaymentBundle\EventDispatcher\PaymentMethodEventDispatcher">
+            <argument type="service" id="event_dispatcher"/>
+        </service>
+
+        <service id="payment.event_dispatcher" class="WellCommerce\Bundle\PaymentBundle\EventDispatcher\PaymentEventDispatcher">
             <argument type="service" id="event_dispatcher"/>
         </service>
 
