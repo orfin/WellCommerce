@@ -122,6 +122,15 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function abandonCart(CartInterface $cart)
+    {
+        $this->removeResource($cart);
+        $this->initializeCart();
+    }
+
+    /**
      * Returns an existent cart or creates a new one if needed
      *
      * @param ShopInterface        $shop
@@ -136,7 +145,7 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
         $cart = $this->repository->findCart($client, $sessionId, $shop);
 
         if (null === $cart) {
-            $cart = $this->createCart($shop, $client, $sessionId);
+            $cart = $this->createCart($shop, $client, $sessionId, $currency);
         } else {
             $this->updateCart($cart, $client, $currency);
         }
@@ -155,7 +164,7 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
     {
         $needsUpdate = false;
 
-        if (null !== $client && null === $cart->getClient()) {
+        if ($client !== $cart->getClient()) {
             $cart->setClient($client);
             $needsUpdate = true;
         }
@@ -186,10 +195,7 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
         $cart->setShop($shop);
         $cart->setSessionId($sessionId);
         $cart->setCurrency($currency);
-
-        if (null !== $client) {
-            $cart->setClient($client);
-        }
+        $cart->setClient($client);
 
         $this->createResource($cart);
 

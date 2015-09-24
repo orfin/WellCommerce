@@ -19,12 +19,12 @@
                                     <tbody>
                                     <tr>
                                         <td>Shipping</td>
-                                        <td>{{ cart.getShippingMethod().translate().name }}</td>
+                                        <td>{{ order.getShippingMethod().translate().name }}</td>
                                     </tr>
 
                                     <tr>
                                         <td>Payment</td>
-                                        <td>{{ cart.getPaymentMethod().translate().name }}</td>
+                                        <td>{{ order.getPaymentMethod().translate().name }}</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -37,7 +37,7 @@
                                     <h4><br/><br/><br/>Cost of delivery</h4>
                                 </div>
                                 <div class="col-lg-6">
-                                    <h4><strong><br/><br/><br/>$9.00</strong></h4>
+                                    <h4><strong><br/><br/><br/>{{ format_price(shippingCost.getGrossAmount(), shippingCost.getCurrency()) }}</strong></h4>
                                 </div>
                             </div>
                         </div>
@@ -88,7 +88,7 @@
                                 <span class="text">Summary</span>
                             </div>
                             <div class="col-lg-3">
-                                <span class="value">$2125.00</span>
+                                <span class="value">{{ format_price(summary) }}</span>
                             </div>
                         </div>
                     </div>

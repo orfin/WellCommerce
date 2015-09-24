@@ -8,6 +8,12 @@
             <argument type="service" id="order.repository"/>
             <argument type="service" id="order.event_dispatcher"/>
             <argument type="service" id="order.factory"/>
+            <call method="setOrderProductFactory">
+                <argument type="service" id="order_product.factory"/>
+            </call>
+            <call method="setCartManager">
+                <argument type="service" id="cart.manager.front"/>
+            </call>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -25,6 +31,8 @@
         </service>
 
         <service id="order.factory" class="WellCommerce\Bundle\OrderBundle\Factory\OrderFactory" />
+
+        <service id="order_product.factory" class="WellCommerce\Bundle\OrderBundle\Factory\OrderProductFactory" />
 
         <service id="order.event_dispatcher" class="WellCommerce\Bundle\OrderBundle\EventDispatcher\OrderEventDispatcher">
             <argument type="service" id="event_dispatcher" />

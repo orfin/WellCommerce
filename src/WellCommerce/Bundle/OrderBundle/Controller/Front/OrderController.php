@@ -125,9 +125,7 @@ class OrderController extends AbstractFrontController implements FrontController
 
         if ($form->handleRequest()->isSubmitted()) {
             if ($form->isValid()) {
-                $this->manager->createResource($order);
-
-                $this->getCartHelper()->abandonCart($cart);
+                $this->manager->saveOrder($order);
 
                 return $this->redirectToAction('index');
             }
@@ -138,8 +136,11 @@ class OrderController extends AbstractFrontController implements FrontController
         }
 
         return $this->displayTemplate('confirm', [
-            'form'     => $form,
-            'elements' => $form->getChildren(),
+            'form'         => $form,
+            'elements'     => $form->getChildren(),
+            'shippingCost' => (null !== $cart->getShippingMethodCost()) ? $cart->getShippingMethodCost()->getCost() : null,
+            'summary'      => $this->get('cart_summary.collector')->collect($cart),
+            'order'        => $order,
         ]);
     }
 

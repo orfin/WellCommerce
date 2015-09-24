@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Factory;
 
+use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderProduct;
 
@@ -20,10 +21,10 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderProduct;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderProductFactory extends AbstractFactory
+class OrderProductFactory extends AbstractFactory implements OrderProductFactoryInterface
 {
     /**
-     * @return \WellCommerce\Bundle\OrderBundle\Entity\OrderProductInterface
+     * {@inheritdoc}
      */
     public function create()
     {
@@ -33,6 +34,25 @@ class OrderProductFactory extends AbstractFactory
         $orderProduct->setQuantity(0);
         $orderProduct->setTaxValue(0);
         $orderProduct->setWeight(0);
+
+        return $orderProduct;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createFromCartProduct(CartProductInterface $cartProduct)
+    {
+        $orderProduct = new OrderProduct();
+        $product      = $cartProduct->getProduct();
+        $attribute    = $cartProduct->getAttribute();
+
+        $orderProduct->setProductAttribute($attribute);
+        $orderProduct->setProduct($product);
+        $orderProduct->setSellPrice($product->getSellPrice());
+        $orderProduct->setBuyPrice($product->getBuyPrice());
+        $orderProduct->setQuantity($cartProduct->getQuantity());
+        $orderProduct->setWeight($product->getWeight());
 
         return $orderProduct;
     }

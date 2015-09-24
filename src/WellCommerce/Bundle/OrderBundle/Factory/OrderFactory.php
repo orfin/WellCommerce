@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\OrderBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 use WellCommerce\Bundle\OrderBundle\Entity\Order;
 
@@ -21,7 +22,7 @@ use WellCommerce\Bundle\OrderBundle\Entity\Order;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderFactory extends AbstractFactory
+class OrderFactory extends AbstractFactory implements OrderFactoryInterface
 {
     /**
      * @return \WellCommerce\Bundle\OrderBundle\Entity\OrderInterface
@@ -31,6 +32,25 @@ class OrderFactory extends AbstractFactory
         $order = new Order();
         $order->setModifiers(new ArrayCollection());
         $order->setProducts(new ArrayCollection());
+
+        return $order;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createOrderFromCart(CartInterface $cart)
+    {
+        $order = $this->create();
+        $order->setPaymentMethod($cart->getPaymentMethod());
+        $order->setShippingMethod($cart->getShippingMethodCost()->getShippingMethod());
+        $order->setBillingAddress($cart->getBillingAddress());
+        $order->setShippingAddress($cart->getShippingAddress());
+        $order->setShop($cart->getShop());
+        $order->setSessionId($cart->getSessionId());
+        $order->setClient($cart->getClient());
+        $order->setCurrency($cart->getCurrency());
+        $order->setCurrentStatus($cart->getShop()->getDefaultOrderStatus());
 
         return $order;
     }

@@ -3,6 +3,7 @@
 namespace WellCommerce\Bundle\OrderBundle\Entity;
 
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\Timestampable\TimestampableTrait;
+use WellCommerce\Bundle\CoreBundle\Entity\DiscountablePrice;
 use WellCommerce\Bundle\CoreBundle\Entity\Price;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeAwareTrait;
@@ -13,7 +14,7 @@ use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareTrait;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderProduct
+class OrderProduct implements OrderProductInterface
 {
     use TimestampableTrait;
     use ProductAwareTrait;
@@ -33,17 +34,12 @@ class OrderProduct
     /**
      * @var Price
      */
-    protected $netPrice;
+    protected $buyPrice;
 
     /**
-     * @var Price
+     * @var DiscountablePrice
      */
-    protected $grossPrice;
-
-    /**
-     * @var float
-     */
-    protected $taxValue;
+    protected $sellPrice;
 
     /**
      * @var float
@@ -77,49 +73,33 @@ class OrderProduct
     /**
      * {@inheritdoc}
      */
-    public function getNetPrice()
+    public function getSellPrice()
     {
-        return $this->netPrice;
+        return $this->sellPrice;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setNetPrice($netPrice)
+    public function setSellPrice(DiscountablePrice $sellPrice)
     {
-        $this->netPrice = $netPrice;
+        $this->sellPrice = $sellPrice;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getTaxValue()
+    public function getBuyPrice()
     {
-        return $this->taxValue;
-    }
-
-    /**
-     * @param float $taxValue
-     */
-    public function setTaxValue($taxValue)
-    {
-        $this->taxValue = $taxValue;
+        return $this->buyPrice;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getGrossPrice()
+    public function setBuyPrice(Price $buyPrice)
     {
-        return $this->grossPrice;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setGrossPrice($grossPrice)
-    {
-        $this->grossPrice = $grossPrice;
+        $this->buyPrice = $buyPrice;
     }
 
     /**

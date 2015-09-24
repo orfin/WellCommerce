@@ -16,20 +16,20 @@ namespace WellCommerce\Bundle\ProductBundle\Entity;
 trait ProductAttributeAwareTrait
 {
     /**
-     * @var ProductAttributeInterface
+     * @var null|ProductAttributeInterface
      */
     protected $productAttribute;
 
     /**
-     * @param ProductAttributeInterface $productAttribute
+     * @param null|ProductAttributeInterface $productAttribute
      */
-    public function setProductAttribute(ProductAttributeInterface $productAttribute)
+    public function setProductAttribute(ProductAttributeInterface $productAttribute = null)
     {
         $this->productAttribute = $productAttribute;
     }
 
     /**
-     * @return ProductAttributeInterface
+     * @return null|ProductAttributeInterface
      */
     public function getProductAttribute()
     {

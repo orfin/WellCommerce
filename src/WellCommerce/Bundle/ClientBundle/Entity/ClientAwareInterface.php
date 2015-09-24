@@ -20,12 +20,12 @@ namespace WellCommerce\Bundle\ClientBundle\Entity;
 interface ClientAwareInterface
 {
     /**
-     * @param ClientInterface $client
+     * @param null|ClientInterface $client
      */
-    public function setClient(ClientInterface $client);
+    public function setClient(ClientInterface $client = null);
 
     /**
-     * @return ClientInterface
+     * @return null|ClientInterface
      */
     public function getClient();
 }
