@@ -17,6 +17,7 @@ use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 use WellCommerce\Bundle\FormBundle\Elements\Optioned\RadioGroup;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCostInterface;
 use WellCommerce\Bundle\ShippingBundle\Provider\CartShippingMethodProviderInterface;
 
 /**
@@ -90,20 +91,20 @@ class CartFormBuilder extends AbstractFormBuilder
      */
     protected function addShippingOptions(RadioGroup $radioGroup, CartInterface $cart)
     {
-        $currencyHelper = $this->getCurrencyHelper();
-        $collection     = $this->cartShippingMethodProvider->getShippingMethodCostsCollection($cart);
-        foreach ($collection->all() as $cost) {
-            $shippingMethod = $cost->getShippingMethod();
+        $collection = $this->cartShippingMethodProvider->getShippingMethodCostsCollection($cart);
+
+        $collection->map(function (ShippingMethodCostInterface $shippingMethodCost) use ($radioGroup) {
+            $shippingMethod = $shippingMethodCost->getShippingMethod();
             $baseCurrency   = $shippingMethod->getCurrency()->getCode();
-            $grossAmount    = $cost->getCost()->getGrossAmount();
+            $grossAmount    = $shippingMethodCost->getCost()->getGrossAmount();
 
             $label = [
                 'name'    => $shippingMethod->translate()->getName(),
-                'comment' => $currencyHelper->convertAndFormat($grossAmount, $baseCurrency)
+                'comment' => $this->getCurrencyHelper()->convertAndFormat($grossAmount, $baseCurrency)
             ];
 
-            $radioGroup->addOptionToSelect($cost->getId(), $label);
-        }
+            $radioGroup->addOptionToSelect($shippingMethodCost->getId(), $label);
+        });
     }
 
     /**
@@ -115,9 +116,9 @@ class CartFormBuilder extends AbstractFormBuilder
     protected function addPaymentOptions(RadioGroup $radioGroup, CartInterface $cart)
     {
         $shippingMethod = $cart->getShippingMethodCost()->getShippingMethod();
-        $paymentMethods = $shippingMethod->getPaymentMethods();
+        $collection     = $shippingMethod->getPaymentMethods();
 
-        $paymentMethods->map(function (PaymentMethodInterface $paymentMethod) use ($radioGroup) {
+        $collection->map(function (PaymentMethodInterface $paymentMethod) use ($radioGroup) {
             $radioGroup->addOptionToSelect($paymentMethod->getId(), $paymentMethod->translate()->getName());
         });
     }

@@ -26,7 +26,7 @@ interface CartShippingMethodProviderInterface extends ShippingMethodProviderInte
      *
      * @param CartInterface $cart
      *
-     * @return \WellCommerce\Bundle\ShippingBundle\Provider\ShippingMethodCostCollection
+     * @return \Doctrine\Common\Collections\ArrayCollection
      */
     public function getShippingMethodCostsCollection(CartInterface $cart);
 }

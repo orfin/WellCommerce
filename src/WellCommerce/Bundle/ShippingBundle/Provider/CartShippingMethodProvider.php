@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\ShippingBundle\Provider;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCostInterface;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
@@ -24,7 +25,7 @@ use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
 class CartShippingMethodProvider extends AbstractShippingMethodProvider implements CartShippingMethodProviderInterface
 {
     /**
-     * @var \WellCommerce\Bundle\ShippingBundle\Provider\ShippingMethodCostCollection
+     * @var ArrayCollection
      */
     protected $collection;
 
@@ -45,11 +46,11 @@ class CartShippingMethodProvider extends AbstractShippingMethodProvider implemen
      *
      * @param CartInterface $cart
      *
-     * @return ShippingMethodCostCollection
+     * @return ArrayCollection
      */
     protected function getCollection(CartInterface $cart)
     {
-        $shippingMethodCostCollection = new ShippingMethodCostCollection();
+        $shippingMethodCostCollection = new ArrayCollection();
         $shippingMethods              = $this->getSupportedShippingMethods($cart);
 
         $shippingMethods->map(function (ShippingMethodInterface $shippingMethod) use ($cart, $shippingMethodCostCollection) {
