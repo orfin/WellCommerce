@@ -17,6 +17,7 @@ use WellCommerce\Bundle\CoreBundle\Provider\AbstractProvider;
 use WellCommerce\Bundle\DataSetBundle\Conditions\Condition\Eq;
 use WellCommerce\Bundle\DataSetBundle\Conditions\ConditionsCollection;
 use WellCommerce\Bundle\ProductBundle\Entity\Product;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 
 /**
  * Class ProductsProvider
@@ -33,7 +34,7 @@ class ProductProvider extends AbstractProvider implements ProductProviderInterfa
     /**
      * {@inheritdoc}
      */
-    public function setCurrentProduct(Product $product)
+    public function setCurrentProduct(ProductInterface $product)
     {
         $this->product = $product;
     }
