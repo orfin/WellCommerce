@@ -272,16 +272,6 @@ var GCart = function(oOptions) {
         $('.' + gThis.m_oOptions.sQuantitySpinnerClass, gThis).bind('change', gThis.ChangeItemQuantity);
     };
 
-    gThis.DeleteItem = function(){
-        var oRequest = {
-            id: $(this).data('id')
-        };
-
-        GAjaxRequest(Routing.generate(gThis.m_oOptions.sDeleteRoute), oRequest, gThis.ProcessResponse);
-
-        return false;
-    };
-
     gThis.ProcessResponse = function(oResponse){
         if(oResponse.success){
             return gThis.ReloadCart();

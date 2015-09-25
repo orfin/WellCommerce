@@ -17,8 +17,6 @@ $(document).ready(function () {
 
     $('.cart').GCart({
         sChangeQuantityRoute: 'front.cart.edit',
-        sDeleteRoute: 'front.cart.delete',
-        sDeleteButtonClass: 'btn-remove',
         sQuantitySpinnerClass: 'quantity-spinner'
     });
 

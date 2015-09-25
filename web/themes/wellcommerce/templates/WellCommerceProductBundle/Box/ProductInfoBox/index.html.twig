@@ -104,7 +104,7 @@
                             <input type="text" id="quantity" class="form-control" value="1" />
                         </div>
                     </div>
-                    <a href="{{ path('front.cart.add') }}" class="btn btn-primary btn-block text-left add-cart" data-id="{{ product.id }}" data-qty="#quantity" data-attribute="0">{% trans %}cart.button.add{% endtrans %}<i class="pull-right"><img src="{{ asset('themes/wellcommerce/assets/img/add-to-cart.png') }}"></i></a>
+                    <a href="{{ path('front.cart.add',{"id": product.id}) }}" class="btn btn-primary btn-block text-left add-cart" data-id="{{ product.id }}" data-qty="#quantity" data-attribute="0">{% trans %}cart.button.add{% endtrans %}<i class="pull-right"><img src="{{ asset('themes/wellcommerce/assets/img/add-to-cart.png') }}"></i></a>
                 </form>
             </div>
 

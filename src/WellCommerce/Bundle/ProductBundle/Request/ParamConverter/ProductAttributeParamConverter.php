@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\ProductBundle\Request\ParamConverter;
 
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
+use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Request\ParamConverter\AbstractEntityParamConverter;
 
 /**
@@ -22,7 +23,10 @@ use WellCommerce\Bundle\CoreBundle\Request\ParamConverter\AbstractEntityParamCon
  */
 class ProductAttributeParamConverter extends AbstractEntityParamConverter
 {
-    protected $requestParameter = 'attribute';
+    protected function findByRequestParameter(Request $request)
+    {
+        return $this->repository->find((int)$request->attributes->get('attribute'));
+    }
 
     protected function getSupportedTypes()
     {

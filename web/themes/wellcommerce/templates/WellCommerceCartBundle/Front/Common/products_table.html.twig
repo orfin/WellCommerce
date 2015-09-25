@@ -45,7 +45,7 @@
                     {% endif %}
                 </td>
                 <td class="text-center">
-                    <a href="#" class="btn btn-link light btn-remove" data-id="{{ item.id }}"><img src="{{ asset('themes/wellcommerce/assets/img/ico-remove.png') }}"/></a>
+                    <a href="{{ path('front.cart.delete',{"id": item.id}) }}" class="btn btn-link light btn-remove"><img src="{{ asset('themes/wellcommerce/assets/img/ico-remove.png') }}"/></a>
                 </td>
             </tr>
         {% endfor %}

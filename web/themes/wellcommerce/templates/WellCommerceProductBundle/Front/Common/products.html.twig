@@ -24,7 +24,7 @@
                         <span class="name">{{ item.name }}</span>
                     </a>
 
-                    <a href="{{ path('front.cart.add') }}" class="btn btn-primary text-left add-cart" data-id="{{ item.id }}" data-qty="1" data-attribute="0">
+                    <a href="{{ path('front.cart.add',{"id": item.id}) }}" class="btn btn-primary text-left add-cart">
                         {% trans %}cart.button.add{% endtrans %}
                         <i class="pull-right"><img src="{{ asset('themes/wellcommerce/assets/img/add-to-cart.png') }}"></i>
                     </a>

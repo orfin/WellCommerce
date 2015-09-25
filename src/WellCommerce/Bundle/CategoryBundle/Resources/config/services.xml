@@ -178,6 +178,11 @@
             <tag name="layout_box.configurator" />
         </service>
 
+        <service id="category.request_param_converter" class="WellCommerce\Bundle\CategoryBundle\Request\ParamConverter\CategoryParamConverter">
+            <argument type="service" id="category.repository" />
+            <tag name="request.param_converter" converter="category" priority="0"/>
+        </service>
+
         <service id="twig.extension.category" class="WellCommerce\Bundle\CategoryBundle\Twig\Extension\CategoryExtension">
             <argument type="service" id="category.provider"/>
             <tag name="twig.extension"/>

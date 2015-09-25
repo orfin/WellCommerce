@@ -10,18 +10,18 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ProductBundle\Request\ParamConverter;
+namespace WellCommerce\Bundle\CategoryBundle\Request\ParamConverter;
 
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Request\ParamConverter\AbstractEntityParamConverter;
 
 /**
- * Class CartProductParamConverter
+ * Class CategoryParamConverter
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductParamConverter extends AbstractEntityParamConverter
+class CategoryParamConverter extends AbstractEntityParamConverter
 {
     protected function findByRequestParameter(Request $request)
     {
@@ -34,8 +34,8 @@ class ProductParamConverter extends AbstractEntityParamConverter
     protected function getSupportedTypes()
     {
         return [
-            'WellCommerce\Bundle\ProductBundle\Entity\Product',
-            'WellCommerce\Bundle\ProductBundle\Entity\ProductInterface'
+            'WellCommerce\Bundle\CategoryBundle\Entity\Category',
+            'WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface'
         ];
     }
 }

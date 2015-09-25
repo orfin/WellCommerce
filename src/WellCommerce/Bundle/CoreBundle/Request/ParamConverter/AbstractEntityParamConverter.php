@@ -31,11 +31,6 @@ abstract class AbstractEntityParamConverter implements ParamConverterInterface
     protected $repository;
 
     /**
-     * @var int
-     */
-    protected $requestParameter = 'id';
-
-    /**
      * @param RepositoryInterface $repository
      */
     public function __construct(RepositoryInterface $repository)
@@ -48,7 +43,9 @@ abstract class AbstractEntityParamConverter implements ParamConverterInterface
         $entity = $this->findByRequestParameter($request);
 
         if (!$configuration->isOptional() && null === $entity) {
-            throw new NotFoundHttpException(sprintf('Entity of type "%s" was not found for parameter "%s"', $configuration->getClass(), $this->requestParameter));
+            throw new NotFoundHttpException(sprintf(
+                'Entity of type "%s" was not found ', $configuration->getClass()
+            ));
         }
 
         $param = $configuration->getName();
@@ -57,12 +54,7 @@ abstract class AbstractEntityParamConverter implements ParamConverterInterface
         return true;
     }
 
-    protected function findByRequestParameter(Request $request)
-    {
-        $id = (int)$request->request->get($this->requestParameter);
-
-        return $this->repository->find($id);
-    }
+    abstract protected function findByRequestParameter(Request $request);
 
     public function supports(ParamConverter $configuration)
     {
@@ -73,8 +65,5 @@ abstract class AbstractEntityParamConverter implements ParamConverterInterface
         return in_array($configuration->getClass(), $this->getSupportedTypes());
     }
 
-    protected function getSupportedTypes()
-    {
-        return [];
-    }
+    abstract protected function getSupportedTypes();
 }

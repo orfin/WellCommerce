@@ -55,7 +55,6 @@ class CartController extends AbstractFrontController implements FrontControllerI
             }
 
             if (count($form->getError())) {
-                print_r($form->getError());
                 $this->getFlashHelper()->addError('client.form.error.registration');
             }
         }
@@ -125,19 +124,12 @@ class CartController extends AbstractFrontController implements FrontControllerI
 
     public function deleteAction(CartProductInterface $cartProduct)
     {
-        $message = null;
-
         try {
             $this->manager->deleteCartProduct($cartProduct);
-            $success = true;
         } catch (DeleteCartItemException $exception) {
-            $success = false;
-            $message = $exception->getMessage();
+            $this->getFlashHelper()->addError($exception->getMessage());
         }
 
-        return $this->jsonResponse([
-            'success' => $success,
-            'message' => $message,
-        ]);
+        return $this->redirectToAction('index');
     }
 }

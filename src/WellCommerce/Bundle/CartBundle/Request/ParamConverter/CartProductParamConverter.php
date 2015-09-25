@@ -25,11 +25,7 @@ class CartProductParamConverter extends AbstractEntityParamConverter
 {
     protected function findByRequestParameter(Request $request)
     {
-        $id = (int)$request->request->get($this->requestParameter);
-
-        return $this->repository->findOneBy([
-            'id' => $id
-        ]);
+        return $this->repository->find((int)$request->attributes->get('id'));
     }
 
     protected function getSupportedTypes()
