@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CartBundle\Controller\Front;
 
-use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
 use WellCommerce\Bundle\CartBundle\Exception\AddCartItemException;
 use WellCommerce\Bundle\CartBundle\Exception\DeleteCartItemException;
@@ -44,7 +43,9 @@ class CartController extends AbstractFrontController implements FrontControllerI
         ]));
 
         $cart = $this->manager->getCurrentCart();
-        $form = $this->manager->getForm($cart);
+        $form = $this->manager->getForm($cart, [
+            'validation_groups' => ['cart']
+        ]);
 
         if ($form->handleRequest()->isSubmitted()) {
             if ($form->isValid()) {
@@ -54,6 +55,7 @@ class CartController extends AbstractFrontController implements FrontControllerI
             }
 
             if (count($form->getError())) {
+                print_r($form->getError());
                 $this->getFlashHelper()->addError('client.form.error.registration');
             }
         }

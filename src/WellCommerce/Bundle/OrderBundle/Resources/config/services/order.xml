@@ -8,6 +8,26 @@
             <argument type="service" id="order.repository"/>
             <argument type="service" id="order.event_dispatcher"/>
             <argument type="service" id="order.factory"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="order_address.manager.front" class="WellCommerce\Bundle\OrderBundle\Manager\Front\OrderAddressManager">
+            <argument type="service" id="order.repository"/>
+            <argument type="service" id="order.event_dispatcher"/>
+            <argument type="service" id="order.factory"/>
+            <argument type="service" id="order_address.form_builder"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="order_confirmation.manager.front" class="WellCommerce\Bundle\OrderBundle\Manager\Front\OrderConfirmationManager">
+            <argument type="service" id="order.repository"/>
+            <argument type="service" id="order.event_dispatcher"/>
+            <argument type="service" id="order.factory"/>
+            <argument type="service" id="order_confirmation.form_builder"/>
             <call method="setOrderProductFactory">
                 <argument type="service" id="order_product.factory"/>
             </call>
@@ -19,8 +39,15 @@
             </call>
         </service>
 
-        <service id="order.controller.front" class="WellCommerce\Bundle\OrderBundle\Controller\Front\OrderController">
-            <argument type="service" id="order.manager.front"/>
+        <service id="order_address.controller.front" class="WellCommerce\Bundle\OrderBundle\Controller\Front\OrderAddressController">
+            <argument type="service" id="order_address.manager.front"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="order_confirmation.controller.front" class="WellCommerce\Bundle\OrderBundle\Controller\Front\OrderConfirmationController">
+            <argument type="service" id="order_confirmation.manager.front"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

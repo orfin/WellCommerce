@@ -14,18 +14,16 @@ namespace WellCommerce\Bundle\OrderBundle\Controller\Front;
 
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
-use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
-use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\WebBundle\Breadcrumb\BreadcrumbItem;
 
 /**
- * Class OrderController
+ * Class OrderAddressController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderController extends AbstractFrontController implements FrontControllerInterface
+class OrderAddressController extends AbstractFrontController implements FrontControllerInterface
 {
     /**
      * @var \WellCommerce\Bundle\OrderBundle\Manager\Front\OrderManager
@@ -35,7 +33,7 @@ class OrderController extends AbstractFrontController implements FrontController
     /**
      * {@inheritdoc}
      */
-    public function addressAction(Request $request)
+    public function indexAction(Request $request)
     {
         $cart = $this->manager->getCurrentCart();
 
@@ -47,7 +45,9 @@ class OrderController extends AbstractFrontController implements FrontController
             'name' => $this->trans('order.heading.address'),
         ]));
 
-        $form = $this->buildAddressForm($cart);
+        $form = $this->manager->getForm($cart, [
+            'validation_groups' => ['address', 'contact_details']
+        ]);
 
         if ($form->isSubmitted()) {
             $this->checkCopyAddress($request->request);
@@ -65,7 +65,7 @@ class OrderController extends AbstractFrontController implements FrontController
             }
         }
 
-        return $this->displayTemplate('address', [
+        return $this->displayTemplate('index', [
             'form'     => $form,
             'elements' => $form->getChildren(),
         ]);
@@ -92,69 +92,5 @@ class OrderController extends AbstractFrontController implements FrontController
                 'shippingAddress.country'   => $billingAddress['billingAddress.country']
             ]);
         }
-    }
-
-    /**
-     * Builds address form
-     *
-     * @param CartInterface $cart
-     *
-     * @return \WellCommerce\Bundle\FormBundle\Elements\FormInterface
-     */
-    protected function buildAddressForm(CartInterface $cart)
-    {
-        return $this->get('order_address.form_builder')->createForm([
-            'name' => 'order_address'
-        ], $cart);
-    }
-
-    public function confirmAction()
-    {
-        $cart = $this->manager->getCurrentCart();
-
-        if (null === $cart || $cart->isEmpty()) {
-            return $this->redirectToRoute('front.cart.index');
-        }
-
-        $this->addBreadCrumbItem(new BreadcrumbItem([
-            'name' => $this->trans('order.heading.confirmation'),
-        ]));
-
-        $order = $this->manager->prepareOrder($cart);
-        $form  = $this->buildConfirmationForm($order);
-
-        if ($form->handleRequest()->isSubmitted()) {
-            if ($form->isValid()) {
-                $this->manager->saveOrder($order);
-
-                return $this->redirectToRoute('front.payment.index');
-            }
-
-            if (count($form->getError())) {
-                $this->manager->getFlashHelper()->addError('order.form.error.confirmation');
-            }
-        }
-
-        return $this->displayTemplate('confirm', [
-            'form'         => $form,
-            'elements'     => $form->getChildren(),
-            'shippingCost' => (null !== $cart->getShippingMethodCost()) ? $cart->getShippingMethodCost()->getCost() : null,
-            'summary'      => $this->get('cart_summary.collector')->collect($cart),
-            'order'        => $order,
-        ]);
-    }
-
-    /**
-     * Builds confirmation form
-     *
-     * @param OrderInterface $order
-     *
-     * @return \WellCommerce\Bundle\FormBundle\Elements\FormInterface
-     */
-    protected function buildConfirmationForm(OrderInterface $order)
-    {
-        return $form = $this->get('order_confirmation.form_builder')->createForm([
-            'name' => 'order'
-        ], $order);
     }
 }
