@@ -8,13 +8,13 @@
         <div class="col-lg-4 text-center">
             {% set productPhotos = product.getProductPhotos() %}
 
-            {% for photo in productPhotos if photo.getMainPhoto() == 1 %}
-                <a href="#" class="mainphoto"><img src="{{ image(photo.getPhoto().getPath(), 'large') }}" /></a>
+            {% for photo in productPhotos if photo.mainPhoto == 1 %}
+                <a href="#" class="mainphoto"><img src="{{ image(photo.photo.path, 'large') }}" /></a>
             {% endfor %}
 
             <div class="thumbnails">
-                {% for photo in productPhotos if photo.getMainPhoto() == 0 %}
-                    <a href="#"><img src="{{ image(photo.getPhoto().getPath(), 'large') }}" /></a>
+                {% for photo in productPhotos if photo.mainPhoto == 0 %}
+                    <a href="#"><img src="{{ image(photo.photo.path, 'large') }}" /></a>
                 {% endfor %}
             </div>
         </div>
@@ -44,12 +44,10 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="delivery-info">
-                            <h5>Delivery</h5>
-
-                            <span>Delivery in 48h</span>
-                            <span>Free delivery from $200</span>
-                            <span>DHL $10.00</span>
-                            <span>FedEx $12.00</span>
+                            <h5>{% trans %}product.label.shipping_cost{% endtrans %}</h5>
+                            {% for shippingCost in shippingCosts %}
+                            <span>{{ shippingCost.shippingMethod.translate().name }} {{ format_price(shippingCost.cost.grossAmount, shippingCost.cost.currency) }}</span>
+                            {% endfor %}
                         </div>
                     </div>
                     <div class="col-lg-4 col-lg-offset-2">
@@ -65,7 +63,7 @@
         <div class="col-lg-3">
             <div class="add-to-cart">
 						<span class="price">
-							{{ format_price(sellPrice.amount, sellPrice.currency) }}
+							{{ format_price(sellPrice.grossAmount, sellPrice.currency) }}
 						</span>
 
                 <div class="labels">
@@ -104,7 +102,7 @@
                             <input type="text" id="quantity" class="form-control" value="1" />
                         </div>
                     </div>
-                    <a href="{{ path('front.cart.add',{"id": product.id}) }}" class="btn btn-primary btn-block text-left add-cart" data-id="{{ product.id }}" data-qty="#quantity" data-attribute="0">{% trans %}cart.button.add{% endtrans %}<i class="pull-right"><img src="{{ asset('themes/wellcommerce/assets/img/add-to-cart.png') }}"></i></a>
+                    <a href="{{ path('front.cart.add',{"id": product.id}) }}" class="btn btn-primary btn-block text-left add-cart">{% trans %}cart.button.add{% endtrans %}<i class="pull-right"><img src="{{ asset('themes/wellcommerce/assets/img/add-to-cart.png') }}"></i></a>
                 </form>
             </div>
 

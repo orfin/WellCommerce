@@ -157,6 +157,11 @@
 
         <service id="cart_product.request_param_converter" class="WellCommerce\Bundle\CartBundle\Request\ParamConverter\CartProductParamConverter">
             <argument type="service" id="cart_product.repository" />
+            <argument>id</argument>
+            <argument type="collection">
+                <argument>WellCommerce\Bundle\CartBundle\Entity\CartProduct</argument>
+                <argument>WellCommerce\Bundle\CartBundle\Entity\CartProductInterface</argument>
+            </argument>
             <tag name="request.param_converter" converter="cart_product" priority="10"/>
         </service>
     </services>

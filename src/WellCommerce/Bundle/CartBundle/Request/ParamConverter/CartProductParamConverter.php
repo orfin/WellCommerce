@@ -23,16 +23,5 @@ use WellCommerce\Bundle\CoreBundle\Request\ParamConverter\AbstractEntityParamCon
  */
 class CartProductParamConverter extends AbstractEntityParamConverter
 {
-    protected function findByRequestParameter(Request $request)
-    {
-        return $this->repository->find((int)$request->attributes->get('id'));
-    }
 
-    protected function getSupportedTypes()
-    {
-        return [
-            'WellCommerce\Bundle\CartBundle\Entity\CartProduct',
-            'WellCommerce\Bundle\CartBundle\Entity\CartProductInterface'
-        ];
-    }
 }

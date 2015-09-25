@@ -30,12 +30,4 @@ class CategoryParamConverter extends AbstractEntityParamConverter
             'enabled' => true
         ]);
     }
-
-    protected function getSupportedTypes()
-    {
-        return [
-            'WellCommerce\Bundle\CategoryBundle\Entity\Category',
-            'WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface'
-        ];
-    }
 }

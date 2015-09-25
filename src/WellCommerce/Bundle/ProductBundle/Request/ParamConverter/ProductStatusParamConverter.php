@@ -10,16 +10,17 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ShippingBundle\Checker;
+namespace WellCommerce\Bundle\ProductBundle\Request\ParamConverter;
 
-use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
+use WellCommerce\Bundle\CoreBundle\Request\ParamConverter\AbstractEntityParamConverter;
 
 /**
- * Interface ShippingMethodSupportCheckerInterface
+ * Class ProductStatusParamConverter
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface CartSupportCheckerInterface
+class ProductStatusParamConverter extends AbstractEntityParamConverter
 {
-    public function supportsCart(CartInterface $cart);
+
 }

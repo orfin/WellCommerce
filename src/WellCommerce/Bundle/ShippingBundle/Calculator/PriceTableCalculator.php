@@ -43,28 +43,31 @@ class PriceTableCalculator extends AbstractShippingMethodCalculator implements S
     /**
      * {@inheritdoc}
      */
-    public function supportsProduct(ShippingMethodInterface $shippingMethod, ProductInterface $product)
-    {
-        return true;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function supportsCart(ShippingMethodInterface $shippingMethod, CartInterface $cart)
-    {
-        return true;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function calculateProduct(ShippingMethodInterface $shippingMethod, ProductInterface $product)
     {
+        $baseCurrency     = $product->getSellPrice()->getCurrency();
+        $targetCurrency   = $shippingMethod->getCurrency()->getCode();
+        $totalGrossAmount = $this->currencyHelper->convert($product->getSellPrice()->getFinalGrossAmount(), $baseCurrency, $targetCurrency);
+        $ranges           = $shippingMethod->getCosts();
+        $supportedRanges  = $ranges->filter(function (ShippingMethodCostInterface $cost) use ($totalGrossAmount) {
+            return ($cost->getRangeFrom() <= $totalGrossAmount && $cost->getRangeTo() >= $totalGrossAmount);
+        });
+
+        if ($supportedRanges->count()) {
+            return $supportedRanges->first();
+        }
+
+        return null;
     }
 
     /**
      * {@inheritdoc}
+     */
+    /**
+     * @param ShippingMethodInterface $shippingMethod
+     * @param CartInterface           $cart
+     *
+     * @return bool|mixed
      */
     public function calculateCart(ShippingMethodInterface $shippingMethod, CartInterface $cart)
     {
@@ -79,6 +82,6 @@ class PriceTableCalculator extends AbstractShippingMethodCalculator implements S
             return $supportedRanges->first();
         }
 
-        return false;
+        return null;
     }
 }

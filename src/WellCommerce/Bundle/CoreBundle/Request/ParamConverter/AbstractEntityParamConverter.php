@@ -26,16 +26,32 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 abstract class AbstractEntityParamConverter implements ParamConverterInterface
 {
     /**
+     * @var string
+     */
+    protected $requestAttributeName;
+
+    /**
      * @var RepositoryInterface
      */
     protected $repository;
 
     /**
-     * @param RepositoryInterface $repository
+     * @var array
      */
-    public function __construct(RepositoryInterface $repository)
+    protected $supportedTypes;
+
+    /**
+     * Constructor
+     *
+     * @param RepositoryInterface $repository
+     * @param string              $requestAttributeName
+     * @param array               $supportedTypes
+     */
+    public function __construct(RepositoryInterface $repository, $requestAttributeName = 'id', $supportedTypes = [])
     {
-        $this->repository = $repository;
+        $this->repository           = $repository;
+        $this->requestAttributeName = $requestAttributeName;
+        $this->supportedTypes       = $supportedTypes;
     }
 
     public function apply(Request $request, ParamConverter $configuration)
@@ -44,7 +60,7 @@ abstract class AbstractEntityParamConverter implements ParamConverterInterface
 
         if (!$configuration->isOptional() && null === $entity) {
             throw new NotFoundHttpException(sprintf(
-                'Entity of type "%s" was not found ', $configuration->getClass()
+                'Entity of type "%s" was not found', $configuration->getClass()
             ));
         }
 
@@ -54,7 +70,10 @@ abstract class AbstractEntityParamConverter implements ParamConverterInterface
         return true;
     }
 
-    abstract protected function findByRequestParameter(Request $request);
+    protected function findByRequestParameter(Request $request)
+    {
+        return $this->repository->find((int)$request->attributes->get($this->requestAttributeName));
+    }
 
     public function supports(ParamConverter $configuration)
     {
@@ -62,8 +81,6 @@ abstract class AbstractEntityParamConverter implements ParamConverterInterface
             return false;
         }
 
-        return in_array($configuration->getClass(), $this->getSupportedTypes());
+        return in_array($configuration->getClass(), $this->supportedTypes);
     }
-
-    abstract protected function getSupportedTypes();
 }

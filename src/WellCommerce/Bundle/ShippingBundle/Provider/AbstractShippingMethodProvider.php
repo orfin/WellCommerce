@@ -76,4 +76,20 @@ abstract class AbstractShippingMethodProvider
 
         return $this->shippingMethodCalculatorCollection->get($calculator);
     }
+
+    /**
+     * Returns all enabled shipping methods which are supporting product calculations
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    protected function getSupportedShippingMethods()
+    {
+        $methods = $this->getEnabledMethods();
+
+        $supportedMethods = $methods->filter(function (ShippingMethodInterface $shippingMethod) {
+            return $shippingMethod->getPaymentMethods()->count();
+        });
+
+        return $supportedMethods;
+    }
 }

@@ -10,6 +10,11 @@
 
         <service id="product_attribute.request_param_converter" class="WellCommerce\Bundle\ProductBundle\Request\ParamConverter\ProductAttributeParamConverter">
             <argument type="service" id="product_attribute.repository" />
+            <argument>attribute</argument>
+            <argument type="collection">
+                <argument>WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute</argument>
+                <argument>WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface</argument>
+            </argument>
             <tag name="request.param_converter" converter="product_attribute" priority="10"/>
         </service>
     </services>

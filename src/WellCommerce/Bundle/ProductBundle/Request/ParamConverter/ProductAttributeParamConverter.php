@@ -23,16 +23,5 @@ use WellCommerce\Bundle\CoreBundle\Request\ParamConverter\AbstractEntityParamCon
  */
 class ProductAttributeParamConverter extends AbstractEntityParamConverter
 {
-    protected function findByRequestParameter(Request $request)
-    {
-        return $this->repository->find((int)$request->attributes->get('attribute'));
-    }
 
-    protected function getSupportedTypes()
-    {
-        return [
-            'WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute',
-            'WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface',
-        ];
-    }
 }

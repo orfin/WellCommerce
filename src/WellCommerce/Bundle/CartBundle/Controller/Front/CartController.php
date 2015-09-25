@@ -72,13 +72,12 @@ class CartController extends AbstractFrontController implements FrontControllerI
      *
      * @param ProductInterface               $product
      * @param ProductAttributeInterface|null $attribute
+     * @param int                            $quantity
      *
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function addAction(ProductInterface $product, ProductAttributeInterface $attribute = null)
+    public function addAction(ProductInterface $product, ProductAttributeInterface $attribute = null, $quantity = 1)
     {
-        $quantity = (int)$this->getRequestHelper()->getRequestAttribute('qty', 1);
-
         try {
             $this->manager->addProductToCart($product, $attribute, $quantity);
         } catch (AddCartItemException $exception) {
