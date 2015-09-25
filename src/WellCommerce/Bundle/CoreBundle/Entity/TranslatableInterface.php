@@ -27,6 +27,14 @@ interface TranslatableInterface
 
     public function removeTranslation($translation);
 
+    /**
+     * Translates an entity
+     *
+     * @param null      $locale
+     * @param bool|true $fallbackToDefault
+     *
+     * @return object
+     */
     public function translate($locale = null, $fallbackToDefault = true);
 
     public function mergeNewTranslations();
