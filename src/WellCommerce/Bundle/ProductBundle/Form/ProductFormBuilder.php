@@ -315,6 +315,7 @@ class ProductFormBuilder extends AbstractFormBuilder
         $attributesData->addChild($this->getElement('product_variants_editor', [
             'name'               => 'attributes',
             'label'              => $this->trans('Attributes'),
+            'suffixes'           => ['+', '-', '%'],
             'price_field'        => $sellPriceAmount,
             'vat_field'          => $sellPriceTax,
             'vat_values'         => $vatValues,

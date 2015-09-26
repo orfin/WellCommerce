@@ -4,8 +4,27 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+
+        <service id="product_attribute.manager.admin" class="WellCommerce\Bundle\ProductBundle\Manager\Admin\ProductAttributeManager">
+            <argument type="service" id="product_attribute.repository"/>
+            <argument type="service" id="product_attribute.event_dispatcher"/>
+            <argument type="service" id="product_attribute.factory"/>
+            <call method="setAttributeValueRepository">
+                <argument type="service" id="attribute_value.repository"/>
+            </call>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
         <service id="product_attribute.repository" class="WellCommerce\Bundle\ProductBundle\Repository\ProductAttributeRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument>WellCommerceProductBundle:ProductAttribute</argument>
+        </service>
+
+        <service id="product_attribute.factory" class="WellCommerce\Bundle\ProductBundle\Factory\ProductAttributeFactory"/>
+
+        <service id="product_attribute.event_dispatcher" class="WellCommerce\Bundle\ProductBundle\EventDispatcher\ProductAttributeEventDispatcher">
+            <argument type="service" id="event_dispatcher"/>
         </service>
 
         <service id="product_attribute.request_param_converter" class="WellCommerce\Bundle\ProductBundle\Request\ParamConverter\ProductAttributeParamConverter">

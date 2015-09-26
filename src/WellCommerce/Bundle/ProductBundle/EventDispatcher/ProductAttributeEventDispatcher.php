@@ -12,14 +12,14 @@
 
 namespace WellCommerce\Bundle\ProductBundle\EventDispatcher;
 
-use WellCommerce\Bundle\CoreBundle\EventDispatcher\EventDispatcherInterface;
+use WellCommerce\Bundle\CoreBundle\EventDispatcher\AbstractEventDispatcher;
 
 /**
- * Interface ProductStatusEventDispatcherInterface
+ * Class ProductAttributeEventDispatcher
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ProductStatusEventDispatcherInterface extends EventDispatcherInterface
+class ProductAttributeEventDispatcher extends AbstractEventDispatcher
 {
     
 }

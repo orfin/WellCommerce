@@ -12,12 +12,15 @@
 
 namespace WellCommerce\Bundle\ProductBundle\Form\DataTransformer;
 
-use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\PersistentCollection;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
+use WellCommerce\Bundle\AttributeBundle\Entity\AttributeValueInterface;
+use WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityInterface;
 use WellCommerce\Bundle\CoreBundle\Form\DataTransformer\CollectionToArrayTransformer;
-use WellCommerce\Bundle\ProductBundle\Entity\Product;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
+use WellCommerce\Bundle\ProductBundle\Manager\Admin\ProductAttributeManager;
 
 /**
  * Class ProductAttributeCollectionToArrayTransformer
@@ -27,59 +30,50 @@ use WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute;
 class ProductAttributeCollectionToArrayTransformer extends CollectionToArrayTransformer
 {
     /**
+     * @var ProductAttributeManager
+     */
+    protected $productAttributeManager;
+
+    /**
+     * @param ProductAttributeManager $productAttributeManager
+     */
+    public function setProductAttributeManager(ProductAttributeManager $productAttributeManager)
+    {
+        $this->productAttributeManager = $productAttributeManager;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function transform($modelData)
     {
-        $items = [];
+        $values = [];
 
-        if ($modelData instanceof PersistentCollection) {
-            foreach ($modelData as $item) {
-                $items[] = $this->convertItemToArray($item);
-            }
+        if ($modelData instanceof Collection) {
+            $modelData->map(function (ProductAttributeInterface $productAttribute) use (&$values) {
+                $values[] = [
+                    'id'           => $productAttribute->getId(),
+                    'suffix'       => $productAttribute->getModifierType(),
+                    'modifier'     => $productAttribute->getModifierValue(),
+                    'stock'        => $productAttribute->getStock(),
+                    'symbol'       => $productAttribute->getSymbol(),
+                    'weight'       => $productAttribute->getWeight(),
+                    'availability' => $this->transformAvailability($productAttribute->getAvailability()),
+                    'attributes'   => $this->transformValues($productAttribute->getAttributeValues()),
+                ];
+            });
         }
 
-        return $items;
+        return $values;
     }
 
-    /**
-     * Converts collection item to array representation
-     *
-     * @param ProductAttribute $item
-     *
-     * @return array
-     */
-    protected function convertItemToArray(ProductAttribute $item)
+    private function transformAvailability(AvailabilityInterface $availability = null)
     {
-        return [
-            'id'           => $item->getId(),
-            'suffix'       => $item->getModifierType(),
-            'modifier'     => $item->getModifierValue(),
-            'stock'        => $item->getStock(),
-            'symbol'       => $item->getSymbol(),
-            'weight'       => $item->getWeight(),
-            'deletable'    => true,
-            'availability' => $this->transformAvailability($item->getAvailability()),
-            'attributes'   => $this->transformValues($item->getAttributeValues()),
-        ];
-    }
-
-    /**
-     * Transforms availability identifier into entity
-     *
-     * @param $entity
-     *
-     * @return int
-     */
-    private function transformAvailability($entity)
-    {
-        if (null === $entity) {
-            return 0;
+        if (null !== $availability) {
+            return $availability->getId();
         }
-        $meta       = $this->getRepository()->getMetadata();
-        $identifier = $meta->getSingleIdentifierFieldName();
 
-        return $this->propertyAccessor->getValue($entity, $identifier);
+        return null;
     }
 
     /**
@@ -89,16 +83,16 @@ class ProductAttributeCollectionToArrayTransformer extends CollectionToArrayTran
      *
      * @return array
      */
-    public function transformValues(PersistentCollection $collection)
+    public function transformValues(Collection $collection = null)
     {
         if (null === $collection) {
             return [];
         }
 
         $values = [];
-        foreach ($collection as $item) {
-            $values[$item->getAttribute()->getId()] = $item->getId();
-        }
+        $collection->map(function (AttributeValueInterface $attributeValue) use (&$values) {
+            $values[$attributeValue->getAttribute()->getId()] = $attributeValue->getId();
+        });
 
         return $values;
     }
@@ -108,59 +102,9 @@ class ProductAttributeCollectionToArrayTransformer extends CollectionToArrayTran
      */
     public function reverseTransform($modelData, PropertyPathInterface $propertyPath, $values)
     {
-        $attributes = $this->propertyAccessor->getValue($modelData, 'attributes');
-        $collection = $this->createAttributesCollection($modelData, $values);
-        $this->synchronizeCollection($attributes, $collection);
-        $modelData->setAttributes($collection);
-    }
-
-    /**
-     * Creates attributes collection
-     *
-     * @param Product $product
-     * @param array   $values
-     *
-     * @return ArrayCollection
-     */
-    protected function createAttributesCollection(Product $product, $values)
-    {
-        $collection = new ArrayCollection();
-        $values     = $this->filterValues($values);
-
-        foreach ($values as $id => $value) {
-            $item = $this->createAttribute($id, $value);
-            $item->setProduct($product);
-            $collection->add($item);
+        if ($modelData instanceof ProductInterface) {
+            $collection = $this->productAttributeManager->getAttributesCollectionForProduct($modelData, $values);
+            $modelData->setAttributes($collection);
         }
-
-        return $collection;
     }
-
-    /**
-     * Filters passed data and strips non-array values
-     *
-     * @param array $values
-     *
-     * @return array
-     */
-    private function filterValues($values)
-    {
-        return array_filter($values, function ($value) {
-            return is_array($value);
-        });
-    }
-
-    /**
-     * Creates an attribute
-     *
-     * @param int    $id
-     * @param string $value
-     *
-     * @return \WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute
-     */
-    protected function createAttribute($id, $value)
-    {
-        return $this->getRepository()->findOrCreate($id, $value);
-    }
-
 }

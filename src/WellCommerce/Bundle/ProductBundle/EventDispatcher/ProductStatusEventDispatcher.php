@@ -19,7 +19,7 @@ use WellCommerce\Bundle\CoreBundle\EventDispatcher\AbstractEventDispatcher;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductStatusEventDispatcher extends AbstractEventDispatcher implements ProductStatusEventDispatcherInterface
+class ProductStatusEventDispatcher extends AbstractEventDispatcher
 {
     
 }

@@ -8,12 +8,6 @@ WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute:
             generator:
                 strategy: AUTO
     fields:
-        sellPrice:
-            type: decimal
-            scale: 4
-            nullable: false
-            precision: 15
-            column: sell_price
         weight:
             type: decimal
             scale: 4

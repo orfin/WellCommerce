@@ -17919,9 +17919,6 @@ var oDefaults = {
     fAddAttribute: GCore.NULL,
     fAddValue: GCore.NULL,
     sCategoryField: '',
-    sPriceField: '',
-    sVatField: '',
-    sCurrency: 'PLN'
 };
 
 /**
@@ -17977,83 +17974,12 @@ var GFormProductVariantsEditor = GCore.ExtendClass(GFormField, function () {
         gThis.m_jVariantEditorOptions.find('.save').fadeOut(150);
     };
 
-    gThis._UpdatePrice = function (sModifier, fModifierValue) {
-        if (sModifier == undefined) {
-            sModifier = $('#' + gThis.GetId() + '__modifier_type option:selected').text();
-        }
-        if (fModifierValue == undefined) {
-            fModifierValue = parseFloat($('#' + gThis.GetId() + '__modifier_value').val().replace(/,/, '.'));
-        }
-        else {
-            fModifierValue = parseFloat(('' + fModifierValue).replace(/,/, '.'));
-        }
-        var fBasePrice = parseFloat(gThis.m_gForm.GetField(gThis.m_oOptions.sPriceField).GetValue().replace(/,/, '.'));
-        fModifierValue = isNaN(fModifierValue) ? 0 : fModifierValue;
-        fBasePrice = isNaN(fBasePrice) ? 0 : fBasePrice;
-        var fPrice = 0;
-        switch (sModifier) {
-            case '%':
-                fPrice = fBasePrice * (fModifierValue / 100);
-                break;
-            case '+':
-                fPrice = fBasePrice + fModifierValue;
-                break;
-            case '-':
-                fPrice = fBasePrice - fModifierValue;
-                break;
-            case '=':
-                fPrice = fModifierValue;
-                break;
-        }
-        $('#' + gThis.GetId() + '__net_price').val(fPrice.toFixed(4)).attr("disabled", "disabled");
-        var iVatId = parseInt(gThis.m_gForm.GetField(gThis.m_oOptions.sVatField).m_jNode.find('option:selected').val());
-        var fVatValue = 0;
-        if (gThis.m_oOptions.aoVatValues[iVatId] != undefined) {
-            fVatValue = parseFloat(gThis.m_oOptions.aoVatValues[iVatId]);
-        }
-        fVatValue = isNaN(fVatValue) ? 0 : fVatValue;
-        var fGrossPrice = fPrice * (1 + fVatValue / 100);
-        $('#' + gThis.GetId() + '__gross_price').val(fGrossPrice.toFixed(4)).attr("disabled", "disabled");
-    };
-
-    gThis._UpdateModifierValue = function (fPrice) {
-        var sModifier = $('#' + gThis.GetId() + '__modifier_type option:selected').text();
-        if (fPrice == undefined) {
-            fPrice = parseFloat($('#' + gThis.GetId() + '__net_price').val().replace(/,/, '.'));
-        }
-        else {
-            fPrice = parseFloat(('' + fPrice).replace(/,/, '.'));
-        }
-        var fBasePrice = parseFloat(gThis.m_gForm.GetField(gThis.m_oOptions.sPriceField).GetValue().replace(/,/, '.'));
-        fPrice = isNaN(fPrice) ? 0 : fPrice;
-        fBasePrice = isNaN(fBasePrice) ? 0 : fBasePrice;
-        var fModifierValue = 0;
-        if (fBasePrice > 0) {
-            switch (sModifier) {
-                case '%':
-                    fModifierValue = (fPrice / fBasePrice) * 100;
-                    break;
-                case '+':
-                    fModifierValue = fPrice - fBasePrice;
-                    break;
-                case '-':
-                    fModifierValue = fBasePrice - fPrice;
-                    break;
-                case '=':
-                    fModifierValue = fPrice;
-                    break;
-            }
-        }
-        $('#' + gThis.GetId() + '__modifier_value').val(fModifierValue.toFixed(4));
-    };
-
-
     gThis.Validation = GEventHandler(function (eEvent) {
         var fValue = parseFloat($(eEvent.currentTarget).val().replace(/,/, '.'));
         if (isNaN(fValue) || fValue < 0) {
             fValue = 0;
         }
-        $(eEvent.currentTarget).val(fValue.toFixed(4));
+        $(eEvent.currentTarget).val(fValue.toFixed(2));
     });
 
     gThis._InitVariantEditor = function (sId, oVariant) {
@@ -18068,20 +17994,6 @@ var GFormProductVariantsEditor = GCore.ExtendClass(GFormField, function () {
 
         gThis.m_jVariantEditor.append(jSpecification);
 
-        var fBasePrice = parseFloat(gThis.m_gForm.GetField(gThis.m_oOptions.sPriceField).GetValue().replace(/,/, '.'));
-        fBasePrice = isNaN(fBasePrice) ? 0 : fBasePrice;
-        var jBasePrice = $('<input type="text" disabled="disabled" value="' + fBasePrice.toFixed(4) + '"/>').css('cursor', 'default');
-        jSpecification.append($('<div class="field-text"/>').append('<label>' + GForm.Language.product_variants_editor_variant_editor_base_net_price + '</label>').append($('<span class="field"/>').append(jBasePrice)));
-
-        var iVatId = parseInt(gThis.m_gForm.GetField(gThis.m_oOptions.sVatField).m_jNode.find('option:selected').val());
-        var fVatValue = 0;
-        if (gThis.m_oOptions.aoVatValues[iVatId] != undefined) {
-            fVatValue = parseFloat(gThis.m_oOptions.aoVatValues[iVatId]);
-        }
-        var fGrossPrice = fBasePrice * (1 + fVatValue / 100);
-        var jBaseGrossPrice = $('<input type="text" disabled="disabled" value="' + fGrossPrice.toFixed(4) + '"/>').css('cursor', 'default');
-        jSpecification.append($('<div class="field-text"/>').append('<label>' + GForm.Language.product_variants_editor_variant_editor_base_gross_price + '</label>').append($('<span class="field"/>').append(jBaseGrossPrice)));
-
         var jModifierType = $('<select id="' + gThis.GetId() + '__modifier_type"/>').focus(function () {
             $(this).closest('.field').addClass('focus');
         }).blur(function () {
@@ -18092,9 +18004,6 @@ var GFormProductVariantsEditor = GCore.ExtendClass(GFormField, function () {
         }
         jSpecification.append($('<div class="field-select"/>').append('<label for="' + gThis.GetId() + '__modifier_type">' + GForm.Language.product_variants_editor_variant_editor_modifier_type + '</label>').append($('<span class="field"/>').append(jModifierType)));
         jModifierType.GSelect();
-        jModifierType.change(GEventHandler(function (eEvent) {
-            gThis._UpdatePrice();
-        }));
 
         var jModifierValue = $('<input type="text" id="' + gThis.GetId() + '__modifier_value"/>').focus(function () {
             $(this).closest('.field').addClass('focus');
@@ -18109,71 +18018,9 @@ var GFormProductVariantsEditor = GCore.ExtendClass(GFormField, function () {
                 eEvent.stopImmediatePropagation();
                 gThis.SaveVariant();
             }
-            setTimeout(function () {
-                gThis._UpdatePrice(undefined, $(eEvent.currentTarget).val());
-            }, 5);
         });
 
         jModifierValue.val(oVariant.modifier_value).keypress(fHandler).blur(fHandler).blur(gThis.Validation);
-
-        var jPrice = $('<input type="text" id="' + gThis.GetId() + '__net_price"/>').focus(function () {
-            $(this).closest('.field').addClass('focus');
-        }).blur(function () {
-            $(this).closest('.field').removeClass('focus');
-        });
-        jSpecification.append($('<div class="field-text"/>').append('<label for="' + gThis.GetId() + '__price">' + GForm.Language.product_variants_editor_variant_editor_net_price + '</label>').append($('<span class="field"/>').append(jPrice)));
-
-        var jGrossPrice = $('<input type="text" id="' + gThis.GetId() + '__gross_price"/>').focus(function () {
-            $(this).closest('.field').addClass('focus');
-        }).blur(function () {
-            $(this).closest('.field').removeClass('focus');
-        });
-        jSpecification.append($('<div class="field-text"/>').append('<label for="' + gThis.GetId() + '__price">' + GForm.Language.product_variants_editor_variant_editor_gross_price + '</label>').append($('<span class="field"/>').append(jGrossPrice)));
-
-        fHandler = GEventHandler(function (eEvent) {
-            if (eEvent.keyCode == 13) {
-                eEvent.preventDefault();
-                eEvent.stopImmediatePropagation();
-                gThis.SaveVariant();
-            }
-            setTimeout(function () {
-                var fNetPrice = parseFloat($(eEvent.currentTarget).val().replace(/,/, '.'));
-                fNetPrice = isNaN(fNetPrice) ? 0 : fNetPrice;
-                var iVatId = parseInt(gThis.m_gForm.GetField(gThis.m_oOptions.sVatField).m_jNode.find('option:selected').val());
-                var fVatValue = 0;
-                if (gThis.m_oOptions.aoVatValues[iVatId] != undefined) {
-                    fVatValue = parseFloat(gThis.m_oOptions.aoVatValues[iVatId]);
-                }
-                fVatValue = isNaN(fVatValue) ? 0 : fVatValue;
-                var fGrossPrice = fNetPrice * (1 + fVatValue / 100);
-                jGrossPrice.val(fGrossPrice.toFixed(4));
-                gThis._UpdateModifierValue(fNetPrice);
-            }, 5);
-        });
-        jPrice.keypress(fHandler).blur(fHandler).blur(gThis.Validation);
-
-        fHandler = GEventHandler(function (eEvent) {
-            if (eEvent.keyCode == 13) {
-                eEvent.preventDefault();
-                eEvent.stopImmediatePropagation();
-                gThis.SaveVariant();
-            }
-            setTimeout(function () {
-                var fGrossPrice = parseFloat($(eEvent.currentTarget).val().replace(/,/, '.'));
-                fGrossPrice = isNaN(fGrossPrice) ? 0 : fGrossPrice;
-                var iVatId = parseInt(gThis.m_gForm.GetField(gThis.m_oOptions.sVatField).m_jNode.find('option:selected').val());
-                var fVatValue = 0;
-                if (gThis.m_oOptions.aoVatValues[iVatId] != undefined) {
-                    fVatValue = parseFloat(gThis.m_oOptions.aoVatValues[iVatId]);
-                }
-                fVatValue = isNaN(fVatValue) ? 0 : fVatValue;
-                var fNetPrice = fGrossPrice / (1 + fVatValue / 100);
-                jPrice.val(fNetPrice.toFixed(4));
-                gThis._UpdateModifierValue(fNetPrice);
-            }, 5);
-        });
-
-        jGrossPrice.keypress(fHandler).blur(fHandler).blur(gThis.Validation);
 
         var jStock = $('<input type="text" id="' + gThis.GetId() + '__stock"/>').focus(function () {
             $(this).closest('.field').addClass('focus');
@@ -18207,14 +18054,6 @@ var GFormProductVariantsEditor = GCore.ExtendClass(GFormField, function () {
                 gThis.SaveVariant();
             }
         });
-
-        var jDeletable = $('<input type="hidden" id="' + gThis.GetId() + '__deletable"/>').focus(function () {
-            $(this).closest('.field').addClass('focus');
-        }).blur(function () {
-            $(this).closest('.field').removeClass('focus');
-        });
-        jSpecification.append(jDeletable);
-        jDeletable.val(oVariant.deletable);
 
         var jStatusType = $('<select id="' + gThis.GetId() + '__status"/>').focus(function () {
             $(this).closest('.field').addClass('focus');
@@ -18290,7 +18129,6 @@ var GFormProductVariantsEditor = GCore.ExtendClass(GFormField, function () {
         gThis.m_jVariantEditor.append(jAttributes);
 
         gThis.m_jVariantEditor.slideDown(200);
-        gThis._UpdatePrice();
     };
 
     gThis._GetNewAttributeSelector = function (asExistingAttributes) {
@@ -18380,7 +18218,6 @@ var GFormProductVariantsEditor = GCore.ExtendClass(GFormField, function () {
         return jLi;
     };
 
-
     gThis.AddVariant = function (oVariant) {
         if (oVariant == undefined) {
             var sId = 'new-' + gThis.m_sRepetitionCounter++;
@@ -18400,7 +18237,6 @@ var GFormProductVariantsEditor = GCore.ExtendClass(GFormField, function () {
         var oRow = {
             id: gThis.m_sEditedVariant,
             modifier_type: modifierField.text(),
-            modifier_type_id: modifierField.attr('value'),
             modifier_value: $('#' + gThis.GetId() + '__modifier_value').val(),
             photo: $('#' + gThis.GetId() + '__photo').val(),
             availability: $('#' + gThis.GetId() + '__availability').val(),
@@ -18433,7 +18269,6 @@ var GFormProductVariantsEditor = GCore.ExtendClass(GFormField, function () {
         gThis.m_jDatagrid = $('<div/>');
         gThis.m_jNode.append(gThis.m_jDatagrid);
         gThis.m_jNode.append(gThis.m_jField);
-
     };
 
     gThis._PrepareVariantEditor = function () {
@@ -18510,14 +18345,12 @@ var GFormProductVariantsEditor = GCore.ExtendClass(GFormField, function () {
             var oRow = {
                 id: sId,
                 modifier_type: '%',
-                modifier_type_id: 1,
                 modifier_value: 100,
                 stock: 0,
                 photo: 0,
                 availability: 0,
                 symbol: '',
                 status: 1,
-                deletable: 1,
                 weight: 0
             };
             $.each(key, function (a, attribute) {
@@ -18761,7 +18594,6 @@ var GFormProductVariantsEditor = GCore.ExtendClass(GFormField, function () {
                 }
                 var oVariant = {
                     id: mValue[i].id,
-                    modifier_type_id: mValue[i].suffix,
                     modifier_type: sSuffixSymbol,
                     modifier_value: mValue[i].modifier,
                     stock: mValue[i].stock,
@@ -18769,7 +18601,6 @@ var GFormProductVariantsEditor = GCore.ExtendClass(GFormField, function () {
                     photo: mValue[i].photo,
                     symbol: mValue[i].symbol,
                     status: mValue[i].status,
-                    deletable: mValue[i].deletable,
                     weight: mValue[i].weight,
                 };
                 if (mValue[i]['attributes'] != undefined) {
@@ -18821,18 +18652,6 @@ var GFormProductVariantsEditor = GCore.ExtendClass(GFormField, function () {
 
         var column_id = new GF_Datagrid_Column({
             id: 'id',
-            caption: GForm.Language.product_variants_editor_id,
-            appearance: {
-                width: 40,
-                visible: false
-            },
-            filter: {
-                type: GF_Datagrid.FILTER_BETWEEN
-            }
-        });
-
-        var column_deletable = new GF_Datagrid_Column({
-            id: 'deletable',
             caption: GForm.Language.product_variants_editor_id,
             appearance: {
                 width: 40,
@@ -18900,26 +18719,13 @@ var GFormProductVariantsEditor = GCore.ExtendClass(GFormField, function () {
             }
         });
 
-        var column_price = new GF_Datagrid_Column({
-            id: 'price',
-            caption: GForm.Language.product_variants_editor_price,
-            appearance: {
-                width: 70
-            },
-            filter: {
-                type: GF_Datagrid.FILTER_BETWEEN
-            }
-        });
-
         var aoColumns = [column_id];
         aoColumns = aoColumns.concat(aoAttributeColumns, [
             column_stock,
             column_symbol,
             column_status,
             column_weight,
-            column_modifier,
-            column_price,
-            column_deletable
+            column_modifier
         ]);
 
         return aoColumns;
@@ -18933,16 +18739,12 @@ var GFormProductVariantsEditor = GCore.ExtendClass(GFormField, function () {
         }
         for (var i = 0; i < mId.length; i++) {
             var oRow = gThis.m_gDataProvider.GetRow(mId);
-            if (oRow.deletable == 1) {
-                if (mId == gThis.m_sEditedVariant) {
-                    gThis.m_sEditedVariant = GCore.NULL;
-                    gThis.m_jVariantEditor.empty();
-                    gThis.m_jVariantEditorOptions.find('.save').fadeOut(150);
-                }
-                gThis.m_gDataProvider.DeleteRow(mId[i]);
-            } else {
-                GError('Nie można skasować wariantu', 'Wybrany wariant występuje w zamówieniach. Możesz go tylko wyłączyć aby nie był wyświetlany w sklepie.');
+            if (mId == gThis.m_sEditedVariant) {
+                gThis.m_sEditedVariant = GCore.NULL;
+                gThis.m_jVariantEditor.empty();
+                gThis.m_jVariantEditorOptions.find('.save').fadeOut(150);
             }
+            gThis.m_gDataProvider.DeleteRow(mId[i]);
         }
         gThis.m_gDatagrid.LoadData();
     };
@@ -18957,12 +18759,10 @@ var GFormProductVariantsEditor = GCore.ExtendClass(GFormField, function () {
         return {
             id: sId,
             modifier_type: '%',
-            modifier_type_id: sSuffixId,
             modifier_value: '100.00',
             stock: '0',
             symbol: '',
             status: 1,
-            deletable: 1,
             weight: 0
         }
     };
@@ -18987,12 +18787,11 @@ var GFormProductVariantsEditor = GCore.ExtendClass(GFormField, function () {
         }
         for (var i = 0; i < gThis.m_aoVariants.length; i++) {
             var oVariant = gThis.m_aoVariants[i];
-            gThis.m_jField.append('<input value="' + oVariant['modifier_type_id'] + '" name="' + gThis.GetName() + '[' + oVariant.id + '][suffix]" type="hidden"/>');
+            gThis.m_jField.append('<input value="' + oVariant['modifier_type'] + '" name="' + gThis.GetName() + '[' + oVariant.id + '][suffix]" type="hidden"/>');
             gThis.m_jField.append('<input value="' + oVariant['modifier_value'] + '" name="' + gThis.GetName() + '[' + oVariant.id + '][modifier]" type="hidden"/>');
             gThis.m_jField.append('<input value="' + oVariant['stock'] + '" name="' + gThis.GetName() + '[' + oVariant.id + '][stock]" type="hidden"/>');
             gThis.m_jField.append('<input value="' + oVariant['symbol'] + '" name="' + gThis.GetName() + '[' + oVariant.id + '][symbol]" type="hidden"/>');
-            gThis.m_jField.append('<input value="' + oVariant['status'] + '" name="' + gThis.GetName() + '[' + oVariant.id + '][status]" type="hidden"/>');
-            gThis.m_jField.append('<input value="' + oVariant['deletable'] + '" name="' + gThis.GetName() + '[' + oVariant.id + '][deletable]" type="hidden"/>');
+            gThis.m_jField.append('<input value="' + oVariant['status'] + '" name="' + gThis.GetName() + '[' + oVariant.id + '][status]" type="hidden"/>');;
             gThis.m_jField.append('<input value="' + oVariant['weight'] + '" name="' + gThis.GetName() + '[' + oVariant.id + '][weight]" type="hidden"/>');
             gThis.m_jField.append('<input value="' + oVariant['availability'] + '" name="' + gThis.GetName() + '[' + oVariant.id + '][availability]" type="hidden"/>');
             gThis.m_jField.append('<input value="' + oVariant['photo'] + '" name="' + gThis.GetName() + '[' + oVariant.id + '][photo]" type="hidden"/>');
@@ -19034,47 +18833,32 @@ var GFormProductVariantsEditor = GCore.ExtendClass(GFormField, function () {
     };
 
     gThis.PreProcessVariants = function (oRow) {
-        var sBasePrice = $(gThis.m_gForm).find('input[name*="[' + gThis.m_oOptions.sPriceField + ']"]').val();
-        var iBasePrice = 0;
-        if (!isNaN(parseFloat(sBasePrice)) && (parseFloat(sBasePrice) >= 0)) {
-            iBasePrice = parseInt('' + (parseFloat(sBasePrice) * 100));
-        }
-        oRow.base_price = (iBasePrice / 100).toFixed(4);
-        var iPrice = iBasePrice;
-        oRow.modifier_value = (!isNaN(parseFloat(oRow.modifier_value))) ? parseFloat(oRow.modifier_value).toFixed(4) : '0.00';
-        switch (oRow.modifier_type) {
-            case '=':
-                if (!isNaN(parseFloat(oRow.modifier_value)) && (parseFloat(oRow.modifier_value) >= 0)) {
-                    iPrice = parseInt('' + (parseFloat(oRow.modifier_value) * 100));
-                    oRow.modifier = '=' + parseFloat(oRow.modifier_value).toFixed(4);
-                }
-                break;
-            case '%':
-                if (!isNaN(parseFloat(oRow.modifier_value))) {
-                    iPrice = parseInt('' + (iPrice * (parseFloat(oRow.modifier_value) / 100)));
-                    oRow.modifier = parseFloat(oRow.modifier_value).toFixed(4) + '%';
-                }
-                break;
-            case '+':
-                if (!isNaN(parseFloat(oRow.modifier_value))) {
-                    iPrice += parseInt('' + (parseFloat(oRow.modifier_value) * 100));
-                    oRow.modifier = '+' + parseFloat(oRow.modifier_value).toFixed(4);
-                }
-                break;
-            case '-':
-                if (!isNaN(parseFloat(oRow.modifier_value))) {
-                    iPrice -= parseInt('' + (parseFloat(oRow.modifier_value) * 100));
-                    oRow.modifier = '-' + parseFloat(oRow.modifier_value).toFixed(4);
-                }
-                break;
-        }
-        var iDifference = iPrice - iBasePrice;
-        oRow.price = (iPrice / 100).toFixed(4);
+        oRow.modifier_value = (!isNaN(parseFloat(oRow.modifier_value))) ? parseFloat(oRow.modifier_value).toFixed(2) : '0.00';
+
         return oRow;
     };
 
     gThis.ProcessVariant = function (oRow) {
         oRow.status = (oRow.status == 1) ? 'Aktywny' : 'Nieaktywny';
+        oRow.modifier_value = (!isNaN(parseFloat(oRow.modifier_value))) ? parseFloat(oRow.modifier_value).toFixed(2) : '0.00';
+        switch (oRow.modifier_type) {
+			case '%':
+				if (!isNaN(parseFloat(oRow.modifier_value))) {
+					oRow.modifier = parseFloat(oRow.modifier_value).toFixed(2) + '%';
+				}
+				break;
+			case '+':
+				if (!isNaN(parseFloat(oRow.modifier_value))) {
+					oRow.modifier = '+' + parseFloat(oRow.modifier_value).toFixed(2);
+				}
+				break;
+			case '-':
+				if (!isNaN(parseFloat(oRow.modifier_value))) {
+					oRow.modifier = '-' + parseFloat(oRow.modifier_value).toFixed(2);
+				}
+				break;
+		}
+
         return oRow;
     };
 

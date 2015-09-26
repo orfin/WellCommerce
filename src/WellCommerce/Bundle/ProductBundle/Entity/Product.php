@@ -359,7 +359,23 @@ class Product implements ProductInterface
      */
     public function setAttributes(Collection $attributes)
     {
+        if (null !== $this->attributes) {
+            $this->attributes->map(function (ProductAttributeInterface $productAttribute) use ($attributes) {
+                if (false === $attributes->contains($productAttribute)) {
+                    $this->removeAttribute($productAttribute);
+                }
+            });
+        }
+
         $this->attributes = $attributes;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeAttribute(ProductAttributeInterface $productAttribute)
+    {
+        $this->attributes->removeElement($productAttribute);
     }
 
     /**
