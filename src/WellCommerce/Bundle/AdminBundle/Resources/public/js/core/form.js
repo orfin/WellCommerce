@@ -4116,7 +4116,7 @@ var GForm = GCore.ExtendClass(GFormContainer, function() {
 			}
 
 			if(oResponse.next == false && oResponse.continue == true){
-				GNotification('Changes saved!');
+                window.location.reload(false);
 			}
 		}
 	};
