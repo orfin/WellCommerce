@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\ProductBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityAwareInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\DiscountablePrice;
 use WellCommerce\Bundle\CoreBundle\Entity\HierarchyAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 
@@ -70,22 +71,22 @@ interface ProductAttributeInterface extends TimestampableInterface, Availability
     public function setStock($stock);
 
     /**
-     * @return float
+     * @return DiscountablePrice
      */
     public function getSellPrice();
 
     /**
-     * @param float $sellPrice
+     * @param DiscountablePrice $sellPrice
      */
-    public function setSellPrice($sellPrice);
+    public function setSellPrice(DiscountablePrice $sellPrice);
 
     /**
-     * @return string
+     * @return float
      */
     public function getModifierValue();
 
     /**
-     * @param string $modifierValue
+     * @param float $modifierValue
      */
     public function setModifierValue($modifierValue);
 

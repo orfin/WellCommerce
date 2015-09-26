@@ -18002,6 +18002,7 @@ var GFormProductVariantsEditor = GCore.ExtendClass(GFormField, function () {
         for (var i = 0; i < gThis.m_oOptions.aoSuffixes.length; i++) {
             jModifierType.append('<option' + ((gThis.m_oOptions.aoSuffixes[i] == oVariant.modifier_type) ? ' selected="selected"' : '') + ' value="' + gThis.m_oOptions.aoSuffixes[i] + '">' + gThis.m_oOptions.aoSuffixes[i] + '</option>');
         }
+        console.log(oVariant);
         jSpecification.append($('<div class="field-select"/>').append('<label for="' + gThis.GetId() + '__modifier_type">' + GForm.Language.product_variants_editor_variant_editor_modifier_type + '</label>').append($('<span class="field"/>').append(jModifierType)));
         jModifierType.GSelect();
 
@@ -18586,15 +18587,9 @@ var GFormProductVariantsEditor = GCore.ExtendClass(GFormField, function () {
             }
             var aoData = [];
             for (var i in mValue) {
-                var sSuffixSymbol = '%';
-                for (var j in gThis.m_oOptions.aoSuffixes) {
-                    if (gThis.m_oOptions.aoSuffixes[j].id == mValue[i].suffix) {
-                        sSuffixSymbol = gThis.m_oOptions.aoSuffixes[j].symbol;
-                    }
-                }
                 var oVariant = {
                     id: mValue[i].id,
-                    modifier_type: sSuffixSymbol,
+                    modifier_type: mValue[i].suffix,
                     modifier_value: mValue[i].modifier,
                     stock: mValue[i].stock,
                     availability: mValue[i].availability,
