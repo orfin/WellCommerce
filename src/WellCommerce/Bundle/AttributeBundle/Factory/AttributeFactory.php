@@ -30,7 +30,6 @@ class AttributeFactory extends AbstractFactory
     {
         $attribute = new Attribute();
         $attribute->setValues(new ArrayCollection());
-        $attribute->setGroups(new ArrayCollection());
 
         return $attribute;
     }

@@ -12,7 +12,9 @@
 
 namespace WellCommerce\Bundle\AttributeBundle\Repository;
 
+use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroup;
+use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
@@ -23,18 +25,11 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 interface AttributeRepositoryInterface extends RepositoryInterface
 {
     /**
-     * Returns all groups with translations
+     * Returns all attributes for group
      *
-     * @return array
+     * @param AttributeGroupInterface $attributeGroup
+     *
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function findAll();
-
-    /**
-     * Returns all attributes by group id
-     *
-     * @param integer $id Attribute group id
-     *
-     * @return mixed
-     */
-    public function findAllByAttributeGroupId($id);
+    public function getCollectionByAttributeGroup(AttributeGroupInterface $attributeGroup);
 }

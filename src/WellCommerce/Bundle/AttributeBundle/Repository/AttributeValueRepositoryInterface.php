@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\AttributeBundle\Repository;
 
 use WellCommerce\Bundle\AttributeBundle\Entity\Attribute;
+use WellCommerce\Bundle\AttributeBundle\Entity\AttributeInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
@@ -23,19 +24,11 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 interface AttributeValueRepositoryInterface extends RepositoryInterface
 {
     /**
-     * Returns all values (with translations) for given attribute
+     * Returns all attributes values
      *
-     * @return array
+     * @param AttributeInterface $attribute
+     *
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function findAllByAttributeId($id);
-
-    /**
-     * Makes a collection of attribute values
-     *
-     * @param Attribute $attribute
-     * @param           $values
-     *
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    public function makeCollection(Attribute $attribute, $values);
+    public function getCollectionByAttribute(AttributeInterface $attribute);
 }

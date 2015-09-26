@@ -8,8 +8,11 @@
             <argument type="service" id="attribute.repository"/>
             <argument type="service" id="attribute.event_dispatcher"/>
             <argument type="service" id="attribute.factory"/>
-            <call method="setAttributeGroupManager">
-                <argument type="service" id="attribute_group.manager.admin"/>
+            <call method="setAttributeGroupRepository">
+                <argument type="service" id="attribute_group.repository"/>
+            </call>
+            <call method="setAttributeValueRepository">
+                <argument type="service" id="attribute_value.repository"/>
             </call>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>

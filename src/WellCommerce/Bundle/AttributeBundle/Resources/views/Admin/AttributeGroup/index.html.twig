@@ -11,7 +11,7 @@
             <div class="scrollable-tabs">
                 <ul>
                     {% for group in groups %}
-                        <li><a href="{{ path('admin.attribute_group.edit',{'id': group.id}) }}">{{ group.name }}</a>
+                        <li><a href="{{ path('admin.attribute_group.edit',{'id': group.id}) }}">{{ group.translate().name }}</a>
                         </li>
                     {% endfor %}
                 </ul>

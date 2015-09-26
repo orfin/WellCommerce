@@ -7,22 +7,12 @@ WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroup:
             type: integer
             generator:
                 strategy: AUTO
-    manyToMany:
+    oneToMany:
         attributes:
             targetEntity: WellCommerce\Bundle\AttributeBundle\Entity\Attribute
+            cascade:
+                - all
             fetch: LAZY
-            inversedBy: groups
-            joinTable:
-                name: attribute_group_attribute
-                joinColumns:
-                    -
-                        name: attribute_group_id
-                        nullable: false
-                        onDelete: CASCADE
-                        referencedColumnName: id
-                inverseJoinColumns:
-                    -
-                        name: attribute_id
-                        nullable: false
-                        onDelete: CASCADE
-                        referencedColumnName: id
+            mappedBy: attributeGroup
+            orphanRemoval: true
+

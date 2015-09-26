@@ -30,19 +30,14 @@ interface AttributeInterface extends TimestampableInterface, TranslatableInterfa
     public function getId();
 
     /**
-     * @return Collection
+     * @return AttributeGroupInterface
      */
-    public function getGroups();
+    public function getAttributeGroup();
 
     /**
-     * @param Collection $collection
+     * @param AttributeGroupInterface $attributeGroup
      */
-    public function setGroups(Collection $collection);
-
-    /**
-     * @param AttributeGroupInterface $group
-     */
-    public function addGroup(AttributeGroupInterface $group);
+    public function setAttributeGroup(AttributeGroupInterface $attributeGroup);
 
     /**
      * @return Collection

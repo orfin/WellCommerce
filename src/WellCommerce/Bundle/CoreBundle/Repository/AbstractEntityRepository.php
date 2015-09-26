@@ -47,18 +47,6 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
     }
 
     /**
-     * Returns a repository by class name
-     *
-     * @param string $class
-     *
-     * @return RepositoryInterface
-     */
-    protected function getRepository($class)
-    {
-        return $this->getEntityManager()->getRepository($class);
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function getDataSetQueryBuilder()
