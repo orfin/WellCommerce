@@ -409,34 +409,4 @@ class Product implements ProductInterface
     {
         $this->sellPriceTax = $sellPriceTax;
     }
-
-    public function beforeProductSave()
-    {
-        $sellPrice   = $this->getSellPrice();
-        $grossAmount = $sellPrice->getGrossAmount();
-        $taxRate     = $this->getSellPriceTax()->getValue();
-        $netAmount   = TaxHelper::calculateNetPrice($grossAmount, $taxRate);
-
-        $sellPrice->setTaxRate($taxRate);
-        $sellPrice->setTaxAmount($grossAmount - $netAmount);
-        $sellPrice->setNetAmount($netAmount);
-
-        print_r($sellPrice);
-        die();
-        $sellPrice  = $this->getSellPrice();
-        $netAmount  = $sellPrice->getNetAmount();
-        $taxRate    = $this->getSellPriceTax()->getValue();
-        $calculator = new TaxCalculator($netAmount, $taxRate);
-
-        $sellPrice->setTaxAmount($calculator->getTaxAmount());
-        $sellPrice->setTaxRate($taxRate);
-        $sellPrice->setGrossAmount($calculator->getGrossPrice());
-
-        $discountedNetAmount  = $sellPrice->getDiscountedNetAmount();
-        $discountedCalculator = new TaxCalculator($discountedNetAmount, $taxRate);
-
-        $sellPrice->setDiscountedTaxAmount($discountedCalculator->getTaxAmount());
-        $sellPrice->setDiscountedTaxRate($taxRate);
-        $sellPrice->setDiscountedGrossAmount($discountedCalculator->getGrossPrice());
-    }
 }
