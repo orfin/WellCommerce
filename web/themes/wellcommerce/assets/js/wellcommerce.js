@@ -1,13 +1,31 @@
 $(document).ready(function () {
-    $('.add-cart').click(function (e) {
-        e.stopImmediatePropagation();
-        GAjaxRequest($(this).attr('href'), $(this).data(), function(oResponse){
-            $('#basket-modal').html(oResponse.basketModalContent).modal('show');
-            $('#topCart').html(oResponse.cartPreviewContent);
-        });
 
-        return false;
+    var oBasketModal = $('#basket-modal');
+    var oCartPreview = $('#topCart');
+
+    $('.add-cart').GProductAddCartButton({
+        oBasketModal: oBasketModal,
+        oCartPreview: oCartPreview
     });
+
+    var fProductAddCartFormHandler = function(oObject){
+        oObject.GProductAddCartForm({
+            oProduct: $('#product', oObject),
+            oQuantity: $('#quantity', oObject),
+            oAttributes: $('.attributes', oObject),
+            oBasketModal: oBasketModal,
+            oCartPreview: oCartPreview
+        });
+    };
+
+    oBasketModal.on('shown.bs.modal', function (e) {
+        var oSelector = $(this).find('.add-to-cart');
+        if(oSelector.length){
+            fProductAddCartFormHandler(oSelector);
+        }
+    });
+
+    fProductAddCartFormHandler($('.product-details .add-to-cart'));
 
     $('.coming-soon').click(function(e){
         e.stopImmediatePropagation();
@@ -19,6 +37,7 @@ $(document).ready(function () {
         sChangeQuantityRoute: 'front.cart.edit',
         sQuantitySpinnerClass: 'quantity-spinner'
     });
+
 
     $('.push-hamburger').click(function() {
 		$('body').toggleClass('hamburger-is-open');

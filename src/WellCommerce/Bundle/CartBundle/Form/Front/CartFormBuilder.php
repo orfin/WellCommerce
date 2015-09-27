@@ -115,11 +115,14 @@ class CartFormBuilder extends AbstractFormBuilder
      */
     protected function addPaymentOptions(RadioGroup $radioGroup, CartInterface $cart)
     {
-        $shippingMethod = $cart->getShippingMethodCost()->getShippingMethod();
-        $collection     = $shippingMethod->getPaymentMethods();
+        $shippingMethodCost = $cart->getShippingMethodCost();
+        if (null !== $shippingMethodCost) {
+            $shippingMethod = $shippingMethodCost->getShippingMethod();
+            $collection     = $shippingMethod->getPaymentMethods();
 
-        $collection->map(function (PaymentMethodInterface $paymentMethod) use ($radioGroup) {
-            $radioGroup->addOptionToSelect($paymentMethod->getId(), $paymentMethod->translate()->getName());
-        });
+            $collection->map(function (PaymentMethodInterface $paymentMethod) use ($radioGroup) {
+                $radioGroup->addOptionToSelect($paymentMethod->getId(), $paymentMethod->translate()->getName());
+            });
+        }
     }
 }

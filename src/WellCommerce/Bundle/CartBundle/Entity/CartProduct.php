@@ -108,4 +108,28 @@ class CartProduct implements CartProductInterface
     {
         $this->cart = $cart;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSellPrice()
+    {
+        if (null === $this->attribute) {
+            return $this->product->getSellPrice();
+        }
+
+        return $this->attribute->getSellPrice();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getWeight()
+    {
+        if (null === $this->attribute) {
+            return $this->product->getWeight();
+        }
+
+        return $this->attribute->getWeight();
+    }
 }

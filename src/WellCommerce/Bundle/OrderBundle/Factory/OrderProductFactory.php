@@ -29,10 +29,7 @@ class OrderProductFactory extends AbstractFactory implements OrderProductFactory
     public function create()
     {
         $orderProduct = new OrderProduct();
-        $orderProduct->setGrossPrice(0);
-        $orderProduct->setNetPrice(0);
         $orderProduct->setQuantity(0);
-        $orderProduct->setTaxValue(0);
         $orderProduct->setWeight(0);
 
         return $orderProduct;
@@ -49,10 +46,10 @@ class OrderProductFactory extends AbstractFactory implements OrderProductFactory
 
         $orderProduct->setProductAttribute($attribute);
         $orderProduct->setProduct($product);
-        $orderProduct->setSellPrice($product->getSellPrice());
+        $orderProduct->setSellPrice($cartProduct->getSellPrice());
         $orderProduct->setBuyPrice($product->getBuyPrice());
         $orderProduct->setQuantity($cartProduct->getQuantity());
-        $orderProduct->setWeight($product->getWeight());
+        $orderProduct->setWeight($cartProduct->getWeight());
 
         return $orderProduct;
     }

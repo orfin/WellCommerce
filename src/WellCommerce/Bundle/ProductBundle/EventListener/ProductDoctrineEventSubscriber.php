@@ -35,22 +35,25 @@ class ProductDoctrineEventSubscriber implements EventSubscriber
 
     public function preUpdate(LifecycleEventArgs $args)
     {
-        $this->onProductBeforeSave($args);
+        $this->onProductDataBeforeSave($args);
     }
 
     public function prePersist(LifecycleEventArgs $args)
     {
-        $this->onProductBeforeSave($args);
+        $this->onProductDataBeforeSave($args);
     }
 
-    public function onProductBeforeSave(LifecycleEventArgs $args)
+    public function onProductDataBeforeSave(LifecycleEventArgs $args)
     {
         $entity = $args->getObject();
         if ($entity instanceof ProductInterface) {
             $this->refreshProductSellPrices($entity);
-            $this->refreshProductAttributeSellPrices($entity);
             $this->refreshProductBuyPrices($entity);
             $this->syncProductStock($entity);
+        }
+
+        if ($entity instanceof ProductAttributeInterface) {
+            $this->refreshProductAttributeSellPrice($entity);
         }
     }
 
@@ -76,26 +79,13 @@ class ProductDoctrineEventSubscriber implements EventSubscriber
     }
 
     /**
-     * Recalculates sell prices for product attributes
-     *
-     * @param ProductInterface $product
-     */
-    protected function refreshProductAttributeSellPrices(ProductInterface $product)
-    {
-        $productAttributes = $product->getAttributes();
-        $productAttributes->map(function (ProductAttributeInterface $productAttribute) use ($product) {
-            $this->refreshProductAttributeSellPrice($productAttribute, $product);
-        });
-    }
-
-    /**
      * Recalculates sell prices for single product attribute
      *
      * @param ProductAttributeInterface $productAttribute
-     * @param ProductInterface          $product
      */
-    protected function refreshProductAttributeSellPrice(ProductAttributeInterface $productAttribute, ProductInterface $product)
+    protected function refreshProductAttributeSellPrice(ProductAttributeInterface $productAttribute)
     {
+        $product               = $productAttribute->getProduct();
         $sellPrice             = $product->getSellPrice();
         $grossAmount           = $this->calculateAttributePrice($productAttribute, $sellPrice->getGrossAmount());
         $discountedGrossAmount = $this->calculateAttributePrice($productAttribute, $sellPrice->getDiscountedGrossAmount());

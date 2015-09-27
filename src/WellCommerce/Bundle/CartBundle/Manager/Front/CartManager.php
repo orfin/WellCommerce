@@ -80,7 +80,7 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
     public function deleteCartProduct(CartProductInterface $cartProduct)
     {
         $cart = $this->getCurrentCart();
-        $this->cartProductManager->removeResource($cartProduct);
+        $this->cartProductManager->deleteCartProductFromCart($cartProduct, $cart);
         $cart->setShippingMethodCost(null);
         $cart->setPaymentMethod(null);
         $this->updateResource($cart);
@@ -94,7 +94,7 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
     public function changeCartProductQuantity(CartProductInterface $cartProduct, $qty)
     {
         $cart = $this->getCurrentCart();
-        $this->cartProductManager->changeCartProductQuantity($cartProduct, $qty);
+        $this->cartProductManager->changeCartProductQuantity($cart, $cartProduct, $qty);
 
         $cart->setShippingMethodCost(null);
         $cart->setPaymentMethod(null);

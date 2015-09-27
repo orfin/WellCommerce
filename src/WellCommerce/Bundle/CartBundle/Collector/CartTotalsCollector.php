@@ -58,9 +58,7 @@ class CartTotalsCollector implements CartTotalsCollectorInterface
     {
         $weight = 0;
         $cart->getProducts()->map(function (CartProductInterface $cartProduct) use (&$weight) {
-            $product = $cartProduct->getProduct();
-
-            $weight += $product->getWeight() * $cartProduct->getQuantity();
+            $weight += $cartProduct->getWeight() * $cartProduct->getQuantity();
         });
 
         return $weight;
@@ -73,9 +71,9 @@ class CartTotalsCollector implements CartTotalsCollectorInterface
     {
         $price = 0;
         $cart->getProducts()->map(function (CartProductInterface $cartProduct) use (&$price, &$targetCurrency) {
-            $product      = $cartProduct->getProduct();
-            $baseCurrency = $product->getSellPrice()->getCurrency();
-            $priceNet     = $product->getSellPrice()->getFinalNetAmount();
+            $sellPrice    = $cartProduct->getSellPrice();
+            $baseCurrency = $sellPrice->getCurrency();
+            $priceNet     = $sellPrice->getFinalNetAmount();
 
             $price += $this->helper->convert($priceNet, $baseCurrency, $targetCurrency, $cartProduct->getQuantity());
         });
@@ -90,9 +88,9 @@ class CartTotalsCollector implements CartTotalsCollectorInterface
     {
         $price = 0;
         $cart->getProducts()->map(function (CartProductInterface $cartProduct) use (&$price, &$targetCurrency) {
-            $product      = $cartProduct->getProduct();
-            $baseCurrency = $product->getSellPrice()->getCurrency();
-            $priceGross   = $product->getSellPrice()->getFinalGrossAmount();
+            $sellPrice    = $cartProduct->getSellPrice();
+            $baseCurrency = $sellPrice->getCurrency();
+            $priceGross   = $sellPrice->getFinalGrossAmount();
 
             $price += $this->helper->convert($priceGross, $baseCurrency, $targetCurrency, $cartProduct->getQuantity());
         });
@@ -107,13 +105,14 @@ class CartTotalsCollector implements CartTotalsCollectorInterface
     {
         $amount = 0;
         $cart->getProducts()->map(function (CartProductInterface $cartProduct) use (&$amount, &$targetCurrency) {
-            $product      = $cartProduct->getProduct();
-            $baseCurrency = $product->getSellPrice()->getCurrency();
-            $taxAmount    = $product->getSellPrice()->getFinalTaxAmount();
+            $sellPrice    = $cartProduct->getSellPrice();
+            $baseCurrency = $sellPrice->getCurrency();
+            $taxAmount    = $sellPrice->getFinalTaxAmount();
 
             $amount += $this->helper->convert($taxAmount, $baseCurrency, $targetCurrency, $cartProduct->getQuantity());
         });
 
         return $amount;
     }
+
 }

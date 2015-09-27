@@ -37,6 +37,15 @@ interface CartProductManagerInterface extends FrontManagerInterface
      */
     public function initCartProduct(CartInterface $cart, ProductInterface $product, ProductAttributeInterface $attribute = null, $quantity = 1);
 
+
+    /**
+     * Removes a product from cart
+     *
+     * @param CartProductInterface $cartProduct
+     * @param CartInterface        $cart
+     */
+    public function deleteCartProductFromCart(CartProductInterface $cartProduct, CartInterface $cart);
+
     /**
      * Returns the CartProduct object from cart or null if it was not found
      *
@@ -54,5 +63,5 @@ interface CartProductManagerInterface extends FrontManagerInterface
      * @param CartProductInterface $cartProduct
      * @param int                  $qty
      */
-    public function changeCartProductQuantity(CartProductInterface $cartProduct, $qty);
+    public function changeCartProductQuantity(CartInterface $cart, CartProductInterface $cartProduct, $qty);
 }

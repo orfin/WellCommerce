@@ -78,6 +78,10 @@ class CartController extends AbstractFrontController implements FrontControllerI
      */
     public function addAction(ProductInterface $product, ProductAttributeInterface $attribute = null, $quantity = 1)
     {
+        if ($product->getAttributes()->count() && null === $attribute) {
+            return $this->quickAddAction($product);
+        }
+
         try {
             $this->manager->addProductToCart($product, $attribute, $quantity);
         } catch (AddCartItemException $exception) {
@@ -102,10 +106,23 @@ class CartController extends AbstractFrontController implements FrontControllerI
         ]);
     }
 
-    public function editAction(CartProductInterface $cartProduct)
+    public function quickAddAction(ProductInterface $product, ProductAttributeInterface $attribute = null)
+    {
+        $shippingMethodCosts = $this->get('shipping_method.product.provider')->getShippingMethodCostsCollection($product);
+
+        $basketModalContent = $this->renderView('WellCommerceCartBundle:Front/Cart:quick_add.html.twig', [
+            'product'       => $product,
+            'shippingCosts' => $shippingMethodCosts,
+        ]);
+
+        return $this->jsonResponse([
+            'basketModalContent' => $basketModalContent
+        ]);
+    }
+
+    public function editAction(CartProductInterface $cartProduct, $quantity)
     {
         $message  = null;
-        $quantity = (int)$this->getRequestHelper()->getRequestAttribute('qty', 1);
 
         try {
             $this->manager->changeCartProductQuantity($cartProduct, $quantity);

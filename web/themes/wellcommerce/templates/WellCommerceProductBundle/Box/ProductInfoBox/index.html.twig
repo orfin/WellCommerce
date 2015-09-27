@@ -78,23 +78,14 @@
                 </div>
 
                 <form class="form-horizontal">
-                    <div class="form-group">
-                        <label for="size" class="col-lg-5 control-label">Color</label>
-                        <div class="col-lg-7">
-                            <select class="form-control">
-                                <option>Silver</option>
-                                <option>Black</option>
-                                <option>Blue</option>
-                            </select>
-                        </div>
-                    </div>
+                    <input type="hidden" id="product" value="{{ product.id }}"/>
                     <div class="form-group">
                         <label for="size" class="col-lg-5 control-label">Size</label>
                         <div class="col-lg-7">
-                            <select class="form-control">
-                                <option>Small</option>
-                                <option>Medium</option>
-                                <option>Large</option>
+                            <select class="form-control attributes">
+                                {% for attribute in product.attributes %}
+                                    <option value="{{ attribute.id }}">{{ attribute.id }}</option>
+                                {% endfor %}
                             </select>
                         </div>
                     </div>
@@ -104,7 +95,7 @@
                             <input type="text" id="quantity" class="form-control" value="1" />
                         </div>
                     </div>
-                    <a href="{{ path('front.cart.add',{"id": product.id}) }}" class="btn btn-primary btn-block text-left add-cart">{% trans %}cart.button.add{% endtrans %}<i class="pull-right"><img src="{{ asset('themes/wellcommerce/assets/img/add-to-cart.png') }}"></i></a>
+                    <button class="btn btn-primary btn-block text-left" id="add-cart">{% trans %}cart.button.add{% endtrans %}<img src="{{ asset('themes/wellcommerce/assets/img/add-to-cart.png') }}" class="pull-right" /></button>
                 </form>
             </div>
 

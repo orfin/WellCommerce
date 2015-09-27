@@ -253,8 +253,6 @@ GAjaxRequest = function (sUrl, oRequest, fCallBack) {
 var oCartDefaults = {
     sChangeQuantityRoute: 'front.cart.edit',
     sDeleteRoute: 'front.cart.delete',
-    sDeleteButtonClass: 'btn-remove',
-    sQuantitySpinnerClass: 'quantity-spinner'
 };
 
 var GCart = function(oOptions) {
@@ -268,7 +266,6 @@ var GCart = function(oOptions) {
 
     gThis.InitializeEvents = function(){
         $("input[type='radio']", gThis.m_gForm).bind('change', gThis.SubmitForm);
-        $('.' + gThis.m_oOptions.sDeleteButtonClass, gThis).bind('click', gThis.DeleteItem);
         $('.' + gThis.m_oOptions.sQuantitySpinnerClass, gThis).bind('change', gThis.ChangeItemQuantity);
     };
 
@@ -281,12 +278,12 @@ var GCart = function(oOptions) {
     };
 
     gThis.ChangeItemQuantity = function(){
-        var oRequest = {
+        var routeParams = {
             id: $(this).data('id'),
-            qty: $(this).val()
+            quantity: $(this).val()
         };
 
-        GAjaxRequest(Routing.generate(gThis.m_oOptions.sChangeQuantityRoute), oRequest, gThis.ProcessResponse);
+        GAjaxRequest(Routing.generate(gThis.m_oOptions.sChangeQuantityRoute, routeParams), {}, gThis.ProcessResponse);
 
         return false;
     };
@@ -304,3 +301,86 @@ var GCart = function(oOptions) {
 };
 
 new GPlugin('GCart', oCartDefaults, GCart);
+
+/**
+ * GProductAddCartForm
+ */
+var oProductCartAddFormDefaults = {
+    sAddProductRoute: 'front.cart.add'
+};
+
+var GProductAddCartForm = function(oOptions) {
+
+    var gThis = this;
+
+    gThis._Constructor = function() {
+        gThis.m_gForm = $("form", gThis);
+        gThis.m_gForm.submit(gThis.OnFormSubmit);
+
+        console.log(gThis.m_gForm.attr('class'));
+        console.log(gThis.m_oOptions.sAddProductRoute);
+    };
+
+    gThis.OnFormSubmit = function(e){
+        var routeParams = {};
+
+        if(null == gThis.m_oOptions.oAttributes.val()){
+            routeParams = {
+                id: gThis.m_oOptions.oProduct.val(),
+                quantity: gThis.m_oOptions.oQuantity.val()
+            };
+        }
+        else{
+            routeParams = {
+                id: gThis.m_oOptions.oProduct.val(),
+                attribute: gThis.m_oOptions.oAttributes.val(),
+                quantity: gThis.m_oOptions.oQuantity.val()
+            };
+        }
+
+        GAjaxRequest(Routing.generate(gThis.m_oOptions.sAddProductRoute, routeParams), {}, gThis.ProcessResponse);
+
+        return false;
+    };
+
+    gThis.ProcessResponse = function(oResponse){
+        gThis.m_oOptions.oBasketModal.html(oResponse.basketModalContent).modal('show');
+        if(oResponse.cartPreviewContent != undefined) {
+            gThis.m_oOptions.oCartPreview.html(oResponse.cartPreviewContent);
+        }
+    };
+
+    gThis._Constructor();
+};
+
+new GPlugin('GProductAddCartForm', oProductCartAddFormDefaults, GProductAddCartForm);
+
+/**
+ * GProductAddCartButton
+ */
+var GProductAddCartButton = function(oOptions) {
+
+    var gThis = this;
+
+    gThis._Constructor = function() {
+        $(gThis).click(gThis.OnClick);
+    };
+
+    gThis.OnClick = function(eEvent){
+        eEvent.stopImmediatePropagation();
+        GAjaxRequest($(gThis).attr('href'), {}, gThis.ProcessResponse);
+
+        return false;
+    };
+
+    gThis.ProcessResponse = function(oResponse){
+        gThis.m_oOptions.oBasketModal.html(oResponse.basketModalContent).modal('show');
+        if(oResponse.cartPreviewContent != undefined) {
+            gThis.m_oOptions.oCartPreview.html(oResponse.cartPreviewContent);
+        }
+    };
+
+    gThis._Constructor();
+};
+
+new GPlugin('GProductAddCartButton', {}, GProductAddCartButton);

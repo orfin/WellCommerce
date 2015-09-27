@@ -28,19 +28,19 @@ class CartProductDataSet extends AbstractDataSet
     public function configureOptions(DataSetConfiguratorInterface $configurator)
     {
         $configurator->setColumns([
-            'id'                      => 'cart_product.id',
-            'price'                   => 'product.sellPrice.grossAmount',
-            'discountedPrice'         => 'product.sellPrice.discountedGrossAmount',
-            'quantity'                => 'cart_product.quantity',
-            'attribute'               => 'IDENTITY(cart_product.attribute)',
-            'name'                    => 'product_translation.name',
-            'route'                   => 'IDENTITY(product_translation.route)',
-            'weight'                  => 'product.weight',
-            'isDiscountValid'         => 'IF_ELSE(:date BETWEEN product.sellPrice.validFrom AND product.sellPrice.validTo, 1, 0)',
-            'currency'                => 'product.sellPrice.currency',
-            'tax'                     => 'sell_tax.value',
-            'stock'                   => 'product.stock',
-            'photo'                   => 'photos.path'
+            'id'              => 'cart_product.id',
+            'price'           => 'IF_ELSE(cart_product.attribute IS NOT NULL, product_attribute.sellPrice.grossAmount, product.sellPrice.grossAmount)',
+            'discountedPrice' => 'IF_ELSE(cart_product.attribute IS NOT NULL, product_attribute.sellPrice.discountedGrossAmount, product.sellPrice.discountedGrossAmount)',
+            'currency'        => 'IF_ELSE(cart_product.attribute IS NOT NULL, product_attribute.sellPrice.currency, product.sellPrice.currency)',
+            'stock'           => 'IF_ELSE(cart_product.attribute IS NOT NULL, product_attribute.stock, product.stock)',
+            'weight'          => 'IF_ELSE(cart_product.attribute IS NOT NULL, product_attribute.weight, product.weight)',
+            'quantity'        => 'cart_product.quantity',
+            'attribute'       => 'IDENTITY(cart_product.attribute)',
+            'name'            => 'product_translation.name',
+            'route'           => 'IDENTITY(product_translation.route)',
+            'isDiscountValid' => 'IF_ELSE(:date BETWEEN product.sellPrice.validFrom AND product.sellPrice.validTo, 1, 0)',
+            'tax'             => 'sell_tax.value',
+            'photo'           => 'photos.path'
         ]);
 
         $configurator->setTransformers([

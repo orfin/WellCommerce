@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\ProductBundle\Factory;
 
+use WellCommerce\Bundle\CoreBundle\Entity\DiscountablePrice;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute;
 
@@ -31,6 +32,7 @@ class ProductAttributeFactory extends AbstractFactory
         $productAttribute->setHierarchy(0);
         $productAttribute->setModifierType('%');
         $productAttribute->setModifierValue(100);
+        $productAttribute->setSellPrice(new DiscountablePrice());
 
         return $productAttribute;
     }
