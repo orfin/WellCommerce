@@ -36,7 +36,7 @@ class OrderConfirmationController extends AbstractFrontController implements Fro
     {
         $cart = $this->manager->getCurrentCart();
 
-        if (null === $cart || $cart->isEmpty()) {
+        if ($cart->isEmpty()) {
             return $this->redirectToRoute('front.cart.index');
         }
 
