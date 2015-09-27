@@ -78,7 +78,7 @@ class CartController extends AbstractFrontController implements FrontControllerI
      */
     public function addAction(ProductInterface $product, ProductAttributeInterface $attribute = null, $quantity = 1)
     {
-        if ($product->getAttributes()->count() && null === $attribute) {
+        if ($product->getAttributes()->count() && !$product->getAttributes()->contains($attribute)) {
             return $this->quickAddAction($product);
         }
 
@@ -122,7 +122,7 @@ class CartController extends AbstractFrontController implements FrontControllerI
 
     public function editAction(CartProductInterface $cartProduct, $quantity)
     {
-        $message  = null;
+        $message = null;
 
         try {
             $this->manager->changeCartProductQuantity($cartProduct, $quantity);

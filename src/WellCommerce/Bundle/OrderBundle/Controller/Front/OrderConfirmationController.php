@@ -12,12 +12,8 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Controller\Front;
 
-use Symfony\Component\HttpFoundation\ParameterBag;
-use Symfony\Component\HttpFoundation\Request;
-use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
-use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\WebBundle\Breadcrumb\BreadcrumbItem;
 
 /**
@@ -62,9 +58,9 @@ class OrderConfirmationController extends AbstractFrontController implements Fro
         return $this->displayTemplate('index', [
             'form'         => $form,
             'elements'     => $form->getChildren(),
-            'shippingCost' => (null !== $cart->getShippingMethodCost()) ? $cart->getShippingMethodCost()->getCost() : null,
+            'shippingCost' => $cart->getShippingCost(),
             'summary'      => $this->get('cart_summary.collector')->collect($cart),
-            'order'        => $order,
+            'order'        => $order
         ]);
     }
 }

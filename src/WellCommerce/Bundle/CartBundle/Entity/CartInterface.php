@@ -142,6 +142,11 @@ interface CartInterface extends
     public function hasMethods();
 
     /**
+     * @return null|\WellCommerce\Bundle\CoreBundle\Entity\Price
+     */
+    public function getShippingCost();
+
+    /**
      * @return bool
      */
     public function isEmpty();

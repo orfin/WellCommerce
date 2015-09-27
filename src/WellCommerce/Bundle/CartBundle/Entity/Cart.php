@@ -251,6 +251,18 @@ class Cart implements CartInterface
     /**
      * {@inheritdoc}
      */
+    public function getShippingCost()
+    {
+        if (null !== $this->getShippingMethodCost()) {
+            return $this->getShippingMethodCost()->getCost();
+        }
+
+        return null;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function isEmpty()
     {
         return 0 === $this->products->count();
