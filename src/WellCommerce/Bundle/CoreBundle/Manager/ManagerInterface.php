@@ -84,7 +84,7 @@ interface ManagerInterface
     /**
      * Returns form instance from builder
      *
-     * @param object $resource
+     * @param null|object $resource
      * @param array  $config
      *
      * @return \WellCommerce\Bundle\FormBundle\Elements\FormInterface

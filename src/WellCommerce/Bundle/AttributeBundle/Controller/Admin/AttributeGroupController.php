@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\AttributeBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
-use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupInterface;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
 /**
@@ -66,9 +65,13 @@ class AttributeGroupController extends AbstractAdminController
      */
     public function editAction(Request $request)
     {
-        $groups   = $this->manager->getGroupsCollection();
         $resource = $this->manager->findResource($request);
-        $form     = $this->manager->getForm($resource, [
+        if (null === $resource) {
+            return $this->redirectToAction('index');
+        }
+
+        $groups = $this->manager->getGroupsCollection();
+        $form   = $this->manager->getForm($resource, [
             'class' => 'attributeGroupEditor'
         ]);
         
