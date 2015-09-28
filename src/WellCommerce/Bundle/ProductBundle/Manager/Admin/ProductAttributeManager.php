@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\ProductBundle\Manager\Admin;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Util\Debug;
 use WellCommerce\Bundle\AttributeBundle\Repository\AttributeValueRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
@@ -73,7 +72,6 @@ class ProductAttributeManager extends AbstractAdminManager
         $productAttribute->setStock($value['stock']);
         $productAttribute->setSymbol($value['symbol']);
         $productAttribute->setWeight($value['weight']);
-//        $productAttribute->setAvailability(null);
         $productAttribute->setAttributeValues($this->makeAttributeValuesCollection($value['attributes']));
 
         return $productAttribute;

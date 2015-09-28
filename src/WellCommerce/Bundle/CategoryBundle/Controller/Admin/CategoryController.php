@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\Controller\Admin;
 
-use Doctrine\Common\Util\Debug;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 

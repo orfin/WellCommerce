@@ -64,9 +64,9 @@
         </div>
         <div class="col-lg-3">
             <div class="add-to-cart">
-						<span class="price">
-							{{ format_price(sellPrice.grossAmount, sellPrice.currency) }}
-						</span>
+                <span class="price" id="price">
+                    {{ format_price(sellPrice.grossAmount, sellPrice.currency) }}
+                </span>
 
                 <div class="labels">
                     <span class="label label-promotion">Promotion</span>
@@ -79,16 +79,19 @@
 
                 <form class="form-horizontal">
                     <input type="hidden" id="product" value="{{ product.id }}"/>
+                    <input type="hidden" id="attribute" value="0"/>
+                    {% for group in attributeGroups %}
                     <div class="form-group">
-                        <label for="size" class="col-lg-5 control-label">Size</label>
+                        <label for="size" class="col-lg-5 control-label">{{ group.name }}</label>
                         <div class="col-lg-7">
-                            <select class="form-control attributes">
-                                {% for attribute in product.attributes %}
-                                    <option value="{{ attribute.id }}">{{ attribute.id }}</option>
+                            <select class="form-control attribute">
+                                {% for valueId, valueName in group.values %}
+                                    <option value="{{ valueId }}">{{ valueName }}</option>
                                 {% endfor %}
                             </select>
                         </div>
                     </div>
+                    {% endfor %}
                     <div class="form-group">
                         <label for="quantity" class="col-lg-5 control-label">Quantity</label>
                         <div class="col-lg-7">
@@ -130,3 +133,18 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.product-details .add-to-cart').GProductAddCartForm({
+            sAddProductRoute: 'front.cart.add',
+            oProduct: $('#product', $(this)),
+            oQuantity: $('#quantity', $(this)),
+            oAttribute: $('#attribute', $(this)),
+            oPrice: $('#price', $(this)),
+            oBasketModal: $('#basket-modal'),
+            oCartPreview: $('#topCart'),
+            sAttributesSelectClass: '.attribute',
+            aoAttributes: {{ attributes|raw }}
+        });
+    });
+</script>

@@ -79,7 +79,7 @@ class CartController extends AbstractFrontController implements FrontControllerI
     public function addAction(ProductInterface $product, ProductAttributeInterface $attribute = null, $quantity = 1)
     {
         if ($product->getAttributes()->count() && !$product->getAttributes()->contains($attribute)) {
-            return $this->quickAddAction($product);
+            return $this->redirectToRoute('front.product.view', ['id' => $product->getId()]);
         }
 
         try {
@@ -103,20 +103,6 @@ class CartController extends AbstractFrontController implements FrontControllerI
         return $this->jsonResponse([
             'basketModalContent' => $basketModalContent,
             'cartPreviewContent' => $cartPreviewContent
-        ]);
-    }
-
-    public function quickAddAction(ProductInterface $product, ProductAttributeInterface $attribute = null)
-    {
-        $shippingMethodCosts = $this->get('shipping_method.product.provider')->getShippingMethodCostsCollection($product);
-
-        $basketModalContent = $this->renderView('WellCommerceCartBundle:Front/Cart:quick_add.html.twig', [
-            'product'       => $product,
-            'shippingCosts' => $shippingMethodCosts,
-        ]);
-
-        return $this->jsonResponse([
-            'basketModalContent' => $basketModalContent
         ]);
     }
 

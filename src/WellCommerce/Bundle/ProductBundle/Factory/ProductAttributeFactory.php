@@ -33,6 +33,7 @@ class ProductAttributeFactory extends AbstractFactory
         $productAttribute->setModifierType('%');
         $productAttribute->setModifierValue(100);
         $productAttribute->setSellPrice(new DiscountablePrice());
+        $productAttribute->setAvailability(null);
 
         return $productAttribute;
     }

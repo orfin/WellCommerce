@@ -12,7 +12,6 @@
 namespace WellCommerce\Bundle\CoreBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Symfony\Component\PropertyAccess\PropertyAccess;
 use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 
 /**

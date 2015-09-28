@@ -26,7 +26,6 @@ class SalesReportManager extends AbstractAdminManager implements SalesReportMana
     {
         $collection = $this->repository->matching($criteria);
 
-        echo $collection->count();
-        die();
+        return $collection->count();
     }
 }

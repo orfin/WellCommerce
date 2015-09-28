@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\ProducerBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use WellCommerce\Bundle\RoutingBundle\Entity\Route;
 use WellCommerce\Bundle\RoutingBundle\Entity\RouteInterface;
 

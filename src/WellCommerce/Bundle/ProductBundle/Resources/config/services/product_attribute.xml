@@ -27,6 +27,10 @@
             <argument type="service" id="event_dispatcher"/>
         </service>
 
+        <service id="product_attribute.helper" class="WellCommerce\Bundle\ProductBundle\Helper\ProductAttributeHelper">
+            <argument type="service" id="currency.helper"/>
+        </service>
+
         <service id="product_attribute.request_param_converter" class="WellCommerce\Bundle\ProductBundle\Request\ParamConverter\ProductAttributeParamConverter">
             <argument type="service" id="product_attribute.repository" />
             <argument>attribute</argument>

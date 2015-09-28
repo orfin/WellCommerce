@@ -13,8 +13,6 @@
 namespace WellCommerce\Bundle\CoreBundle\Manager\Front;
 
 use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
-use WellCommerce\Bundle\CoreBundle\Provider\ProviderCollection;
-use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 use WellCommerce\Bundle\MultiStoreBundle\Context\ShopContextInterface;
 
 /**

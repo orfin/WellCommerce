@@ -48,6 +48,13 @@ interface ProductProviderInterface extends ProviderInterface
     public function getProductRecommendationsForCategory(CategoryInterface $category);
 
     /**
+     * Returns an array of product defaults used in templates
+     *
+     * @return array
+     */
+    public function getProductDefaultTemplateData();
+
+    /**
      * Checks whether provider contains product object
      *
      * @return bool

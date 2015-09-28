@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\MediaBundle\DataSet;
 
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
-use WellCommerce\Bundle\CoreBundle\Helper\Image\ImageHelperInterface;
 use WellCommerce\Bundle\DataSetBundle\Configurator\DataSetConfiguratorInterface;
 use WellCommerce\Bundle\MediaBundle\DataSet\Transformer\ImagePathTransformer;
 

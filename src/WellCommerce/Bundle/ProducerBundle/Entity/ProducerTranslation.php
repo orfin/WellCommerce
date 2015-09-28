@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\ProducerBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Translatable\Translation;
 use WellCommerce\Bundle\CoreBundle\Entity\Meta;
 use WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface;

@@ -12,8 +12,6 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Class Address
  *

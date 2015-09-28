@@ -12,8 +12,6 @@
 
 namespace WellCommerce\Bundle\ProductBundle\Controller\Front;
 
-use Doctrine\Common\Util\Debug;
-use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
@@ -36,6 +34,19 @@ class ProductController extends AbstractFrontController implements FrontControll
 
         return $this->displayTemplate('index', [
             'product' => $product
+        ]);
+    }
+
+    public function viewAction(ProductInterface $product)
+    {
+        $this->manager->getProductProvider()->setCurrentProduct($product);
+
+        $defaultTemplateData = $this->manager->getProductProvider()->getProductDefaultTemplateData();
+        $basketModalContent  = $this->renderView('WellCommerceProductBundle:Front/Product:view.html.twig', $defaultTemplateData);
+
+        return $this->jsonResponse([
+            'basketModalContent' => $basketModalContent,
+            'attributes'         => $defaultTemplateData['attributes']
         ]);
     }
 }

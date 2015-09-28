@@ -316,27 +316,34 @@ var GProductAddCartForm = function(oOptions) {
     gThis._Constructor = function() {
         gThis.m_gForm = $("form", gThis);
         gThis.m_gForm.submit(gThis.OnFormSubmit);
+        $(gThis).find(gThis.m_oOptions.sAttributesSelectClass).change(function(){
+            gThis.UpdateAttributes();
+        });
+        gThis.UpdateAttributes();
+    };
 
-        console.log(gThis.m_gForm.attr('class'));
-        console.log(gThis.m_oOptions.sAddProductRoute);
+    gThis.UpdateAttributes = function(){
+        var attributes = [];
+        $(gThis).find(gThis.m_oOptions.sAttributesSelectClass).find('option:selected').each(function() {
+            attributes.push(this.value);
+        });
+        attributes.sort(function(a,b){return a - b});
+        var checkedVariant = attributes.join(',');
+
+        if(gThis.m_oOptions.aoAttributes[checkedVariant] != undefined){
+            var variant = gThis.m_oOptions.aoAttributes[checkedVariant];
+            gThis.m_oOptions.oAttribute.val(variant.id);
+            gThis.m_oOptions.oPrice.text(variant.finalPriceGross);
+        }
     };
 
     gThis.OnFormSubmit = function(e){
-        var routeParams = {};
-
-        if(null == gThis.m_oOptions.oAttributes.val()){
-            routeParams = {
-                id: gThis.m_oOptions.oProduct.val(),
-                quantity: gThis.m_oOptions.oQuantity.val()
-            };
-        }
-        else{
-            routeParams = {
-                id: gThis.m_oOptions.oProduct.val(),
-                attribute: gThis.m_oOptions.oAttributes.val(),
-                quantity: gThis.m_oOptions.oQuantity.val()
-            };
-        }
+        e.stopImmediatePropagation();
+        var routeParams = {
+            id: gThis.m_oOptions.oProduct.val(),
+            attribute: gThis.m_oOptions.oAttribute.val(),
+            quantity: gThis.m_oOptions.oQuantity.val()
+        };
 
         GAjaxRequest(Routing.generate(gThis.m_oOptions.sAddProductRoute, routeParams), {}, gThis.ProcessResponse);
 
@@ -345,6 +352,11 @@ var GProductAddCartForm = function(oOptions) {
 
     gThis.ProcessResponse = function(oResponse){
         gThis.m_oOptions.oBasketModal.html(oResponse.basketModalContent).modal('show');
+        if(oResponse.attributes != undefined) {
+            gThis.m_oOptions.oBasketModal.GProductAttributes({
+                aoAttributes: $.parseJSON(oResponse.attributes)
+            });
+        }
         if(oResponse.cartPreviewContent != undefined) {
             gThis.m_oOptions.oCartPreview.html(oResponse.cartPreviewContent);
         }
@@ -374,7 +386,23 @@ var GProductAddCartButton = function(oOptions) {
     };
 
     gThis.ProcessResponse = function(oResponse){
+        var attributes = {};
+        if(oResponse.attributes != undefined) {
+            attributes = $.parseJSON(oResponse.attributes)
+        }
         gThis.m_oOptions.oBasketModal.html(oResponse.basketModalContent).modal('show');
+        gThis.m_oOptions.oBasketModal.on('shown.bs.modal', function (e) {
+            var oSelector = $(this).find(gThis.m_oOptions.sAddProductFormClass);
+            if(oSelector.length){
+                fProductAddCartFormHandler(oSelector);
+            }
+        });
+
+        if(oResponse.attributes != undefined) {
+            gThis.m_oOptions.oBasketModal.GProductAttributes({
+                aoAttributes: $.parseJSON(oResponse.attributes)
+            });
+        }
         if(oResponse.cartPreviewContent != undefined) {
             gThis.m_oOptions.oCartPreview.html(oResponse.cartPreviewContent);
         }
@@ -384,3 +412,7 @@ var GProductAddCartButton = function(oOptions) {
 };
 
 new GPlugin('GProductAddCartButton', {}, GProductAddCartButton);
+
+var oProductAttributesDefaults = {
+    aoAttributes: {}
+};

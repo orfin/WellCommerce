@@ -12,8 +12,6 @@
 
 namespace WellCommerce\Bundle\CartBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Class CartTotals
  *

@@ -89,6 +89,8 @@
         </service>
 
         <service id="product.provider" class="WellCommerce\Bundle\ProductBundle\Provider\ProductProvider">
+            <argument type="service" id="shipping_method.product.provider"/>
+            <argument type="service" id="product_attribute.helper"/>
             <call method="setCollectionBuilder">
                 <argument type="service" id="product.collection.front" />
             </call>

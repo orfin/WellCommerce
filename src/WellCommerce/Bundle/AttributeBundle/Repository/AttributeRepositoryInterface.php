@@ -12,8 +12,6 @@
 
 namespace WellCommerce\Bundle\AttributeBundle\Repository;
 
-use Doctrine\Common\Collections\Collection;
-use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroup;
 use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 

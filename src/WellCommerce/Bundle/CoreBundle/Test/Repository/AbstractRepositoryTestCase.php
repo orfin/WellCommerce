@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\CoreBundle\Test\Repository;
 
 use WellCommerce\Bundle\CoreBundle\Test\AbstractTestCase;
-use WellCommerce\Bundle\DataSetBundle\Request\DataSetRequest;
 
 /**
  * Class AbstractRepositoryTestCase

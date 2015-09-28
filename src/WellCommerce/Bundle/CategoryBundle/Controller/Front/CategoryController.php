@@ -12,8 +12,6 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\Controller\Front;
 
-use Doctrine\Common\Util\Debug;
-use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;

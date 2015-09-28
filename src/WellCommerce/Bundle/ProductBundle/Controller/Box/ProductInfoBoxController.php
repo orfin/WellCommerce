@@ -24,13 +24,8 @@ class ProductInfoBoxController extends AbstractBoxController implements BoxContr
 {
     public function indexAction()
     {
-        $provider            = $this->manager->getProductProvider();
-        $product             = $provider->getCurrentProduct();
-        $shippingMethodCosts = $this->get('shipping_method.product.provider')->getShippingMethodCostsCollection($product);
+        $defaultTemplateData = $this->manager->getProductProvider()->getProductDefaultTemplateData();
 
-        return $this->displayTemplate('index', [
-            'product'       => $provider->getCurrentProduct(),
-            'shippingCosts' => $shippingMethodCosts,
-        ]);
+        return $this->displayTemplate('index', $defaultTemplateData);
     }
 }

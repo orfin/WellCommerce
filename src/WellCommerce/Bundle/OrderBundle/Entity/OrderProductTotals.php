@@ -12,8 +12,6 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Class OrderProductTotals
  *
