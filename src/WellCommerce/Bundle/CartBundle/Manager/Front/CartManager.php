@@ -52,17 +52,10 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
      */
     public function addProductToCart(ProductInterface $product, ProductAttributeInterface $attribute = null, $quantity = 1)
     {
+        $cart = $this->getCurrentCart();
+
         try {
-            $cart        = $this->getCurrentCart();
-            $cartProduct = $this->cartProductManager->findProductInCart($cart, $product, $attribute);
-
-            if (null === $cartProduct) {
-                $cartProduct = $this->cartProductManager->initCartProduct($cart, $product, $attribute, $quantity);
-                $cart->addProduct($cartProduct);
-            } else {
-                $cartProduct->increaseQuantity($quantity);
-            }
-
+            $this->cartProductManager->addProductToCart($cart, $product, $attribute, $quantity);
             $cart->setShippingMethodCost(null);
             $cart->setPaymentMethod(null);
             $this->updateResource($cart);
@@ -81,6 +74,7 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
     {
         $cart = $this->getCurrentCart();
         $this->cartProductManager->deleteCartProductFromCart($cartProduct, $cart);
+
         $cart->setShippingMethodCost(null);
         $cart->setPaymentMethod(null);
         $this->updateResource($cart);

@@ -55,6 +55,21 @@ class CartProductManager extends AbstractFrontManager implements CartProductMana
     /**
      * {@inheritdoc}
      */
+    public function addProductToCart(CartInterface $cart, ProductInterface $product, ProductAttributeInterface $attribute = null, $quantity = 1)
+    {
+        $cartProduct = $this->findProductInCart($cart, $product, $attribute);
+
+        if (null === $cartProduct) {
+            $cartProduct = $this->initCartProduct($cart, $product, $attribute, $quantity);
+            $cart->addProduct($cartProduct);
+        } else {
+            $cartProduct->increaseQuantity($quantity);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function deleteCartProductFromCart(CartProductInterface $cartProduct, CartInterface $cart)
     {
         $resource = $this->getCartProductInCart($cartProduct, $cart);
