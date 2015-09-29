@@ -392,17 +392,22 @@ var GProductAddCartButton = function(oOptions) {
         }
         gThis.m_oOptions.oBasketModal.html(oResponse.basketModalContent).modal('show');
         gThis.m_oOptions.oBasketModal.on('shown.bs.modal', function (e) {
-            var oSelector = $(this).find(gThis.m_oOptions.sAddProductFormClass);
-            if(oSelector.length){
-                fProductAddCartFormHandler(oSelector);
+            var oForm = $(this).find(gThis.m_oOptions.sAddProductFormClass);
+            if(oForm.length){
+                oForm.GProductAddCartForm({
+                    sAddProductRoute: gThis.m_oOptions.sAddProductRoute,
+                    oProduct: $(gThis.m_oOptions.sProductSelector, gThis.m_oOptions.oBasketModal),
+                    oQuantity: $(gThis.m_oOptions.sQuantitySelector, gThis.m_oOptions.oBasketModal),
+                    oAttribute: $(gThis.m_oOptions.sAttributeSelector, gThis.m_oOptions.oBasketModal),
+                    oPrice: $(gThis.m_oOptions.sPriceSelector, gThis.m_oOptions.oBasketModal),
+                    oBasketModal: gThis.m_oOptions.oBasketModal,
+                    oCartPreview: gThis.m_oOptions.oCartPreview,
+                    sAttributesSelectClass: gThis.m_oOptions.sAttributesSelectClass,
+                    aoAttributes: attributes
+                });
             }
         });
 
-        if(oResponse.attributes != undefined) {
-            gThis.m_oOptions.oBasketModal.GProductAttributes({
-                aoAttributes: $.parseJSON(oResponse.attributes)
-            });
-        }
         if(oResponse.cartPreviewContent != undefined) {
             gThis.m_oOptions.oCartPreview.html(oResponse.cartPreviewContent);
         }

@@ -28,8 +28,6 @@ class AttributeCollectionToArrayTransformer extends CollectionToArrayTransformer
      */
     public function reverseTransform($modelData, PropertyPathInterface $propertyPath, $value)
     {
-        /** @var $repository \WellCommerce\Bundle\AttributeBundle\Repository\AttributeRepositoryInterface */
-        $repository = $this->getRepository();
         $collection = new ArrayCollection();
 
         if (null === $value || empty($value)) {

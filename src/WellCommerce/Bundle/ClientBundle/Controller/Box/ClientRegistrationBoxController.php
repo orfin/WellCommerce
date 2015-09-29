@@ -31,7 +31,7 @@ class ClientRegistrationBoxController extends AbstractBoxController
 
         if ($form->handleRequest()->isSubmitted()) {
             if ($form->isValid()) {
-                $this->manager->createResource($resource, $request);
+                $this->manager->createResource($resource);
 
                 $this->manager->getFlashHelper()->addSuccess('client.flash.registration.success');
 

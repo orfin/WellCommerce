@@ -38,7 +38,17 @@ class ProductShippingMethodProvider extends AbstractShippingMethodProvider imple
             $this->collection = $this->getCollection($cart);
         }
 
-        return $this->collection;
+        return $this->sortCollection();
+    }
+
+    protected function sortCollection()
+    {
+        $iterator = $this->collection->getIterator();
+        $iterator->uasort(function (ShippingMethodCostInterface $a, ShippingMethodCostInterface $b) {
+            return ($a->getCost()->getGrossAmount() < $b->getCost()->getGrossAmount()) ? -1 : 1;
+        });
+
+        return new ArrayCollection(iterator_to_array($iterator));
     }
 
     /**

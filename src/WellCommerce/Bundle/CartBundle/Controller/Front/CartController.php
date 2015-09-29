@@ -68,13 +68,13 @@ class CartController extends AbstractFrontController implements FrontControllerI
     }
 
     /**
-     * Add cart item action
+     * Adds item to cart or redirects to quick-view
      *
      * @param ProductInterface               $product
      * @param ProductAttributeInterface|null $attribute
      * @param int                            $quantity
      *
-     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     * @return \Symfony\Component\HttpFoundation\JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function addAction(ProductInterface $product, ProductAttributeInterface $attribute = null, $quantity = 1)
     {

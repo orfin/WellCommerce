@@ -163,7 +163,7 @@ class DiscountablePrice extends Price
     /**
      * @return bool
      */
-    protected function isDiscountValid()
+    public function isDiscountValid()
     {
         $now = new \DateTime();
 

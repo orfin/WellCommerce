@@ -1,19 +1,16 @@
 {% trans_default_domain "wellcommerce" %}
-{% set productPhotos = product.getProductPhotos() %}
-{% set translations = product.translate() %}
-{% set sellPrice = product.getSellPrice() %}
 
 <div class="product-details">
     <div class="row">
         <div class="col-lg-4 text-center">
             {% set productPhotos = product.getProductPhotos() %}
 
-            {% for photo in productPhotos if photo.mainPhoto == 1 %}
+            {% for photo in product.productPhotos if photo.mainPhoto == 1 %}
                 <a href="#" class="mainphoto"><img src="{{ image(photo.photo.path, 'large') }}" /></a>
             {% endfor %}
 
             <div class="thumbnails">
-                {% for photo in productPhotos if photo.mainPhoto == 0 %}
+                {% for photo in product.productPhotos if photo.mainPhoto == 0 %}
                     <a href="#"><img src="{{ image(photo.photo.path, 'large') }}" /></a>
                 {% endfor %}
             </div>
@@ -25,7 +22,7 @@
                     <a href="#" class="pull-right coming-soon">Next product</a>
                 </div>
 
-                <h1>{{ translations.name }}</h1>
+                <h1>{{ product.translate().name }}</h1>
 
                 <div class="reviews">
                     <div class="stars rat rat3">
@@ -39,16 +36,14 @@
                     <span>4.3 / see 12 reviews</span>
                 </div>
 
-                <p>{{ translations.shortDescription|striptags }}</p>
+                <p>{{ product.translate().shortDescription|striptags }}</p>
 
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="delivery-info">
-                            <h5>{% trans %}product.label.availability{% endtrans %}</h5>
-                            <span>{{ product.availability.translate().name }}</span>
                             <h5>{% trans %}product.label.shipping_cost{% endtrans %}</h5>
-                            {% for shippingCost in shippingCosts %}
-                            <span>{{ shippingCost.shippingMethod.translate().name }} {{ format_price(shippingCost.cost.grossAmount, shippingCost.cost.currency) }}</span>
+                            {% for shipping in shippingCosts %}
+                            <span>{{ shipping.shippingMethod.translate().name }} {{ format_price(shipping.cost.grossAmount, shipping.cost.currency) }}</span>
                             {% endfor %}
                         </div>
                     </div>
@@ -64,42 +59,25 @@
         </div>
         <div class="col-lg-3">
             <div class="add-to-cart">
-                <span class="price" id="price">
-                    {{ format_price(sellPrice.grossAmount, sellPrice.currency) }}
-                </span>
-
-                <div class="labels">
-                    <span class="label label-promotion">Promotion</span>
-                </div>
+                {% if product.sellPrice.isDiscountValid() %}
+                    <span class="price promo">
+                        <small id="price">{{ format_price(product.sellPrice.grossAmount, product.sellPrice.currency) }}</small>
+                        <span>{{ format_price(product.sellPrice.discountedGrossAmount, product.sellPrice.currency) }}</span>
+                    </span>
+                    <div class="labels">
+                        <span class="label label-promotion">Promotion</span>
+                    </div>
+                {% else %}
+                    <span class="price" id="price">
+                        {{ format_price(product.sellPrice.grossAmount, product.sellPrice.currency) }}
+                    </span>
+                {% endif %}
 
                 <div class="available text-center">
-                    Product is <span class="grn">available</span><br />
-                    Shipping from: $25.00
+                    {% trans %}product.label.availability{% endtrans %}: <span class="grn">{{ product.availability.translate().name }}</span><br />
+                    {% trans %}product.label.shipping_cost{% endtrans %}: {{ format_price(shippingCosts.first.cost.grossAmount, shippingCosts.first.cost.currency) }}
                 </div>
-
-                <form class="form-horizontal">
-                    <input type="hidden" id="product" value="{{ product.id }}"/>
-                    <input type="hidden" id="attribute" value="0"/>
-                    {% for group in attributeGroups %}
-                    <div class="form-group">
-                        <label for="size" class="col-lg-5 control-label">{{ group.name }}</label>
-                        <div class="col-lg-7">
-                            <select class="form-control attribute">
-                                {% for valueId, valueName in group.values %}
-                                    <option value="{{ valueId }}">{{ valueName }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                    </div>
-                    {% endfor %}
-                    <div class="form-group">
-                        <label for="quantity" class="col-lg-5 control-label">Quantity</label>
-                        <div class="col-lg-7">
-                            <input type="text" id="quantity" class="form-control" value="1" />
-                        </div>
-                    </div>
-                    <button class="btn btn-primary btn-block text-left" id="add-cart">{% trans %}cart.button.add{% endtrans %}<img src="{{ asset('themes/wellcommerce/assets/img/add-to-cart.png') }}" class="pull-right" /></button>
-                </form>
+                {% include 'WellCommerceProductBundle:Front/Common:add_cart_form.html.twig' %}
             </div>
 
             <div class="additional text-center">
@@ -115,7 +93,7 @@
         <div class="col-lg-9">
             <div class="description-block">
                 <h2>Description</h2>
-                <p>{{ translations.description }}</p>
+                <p>{{ product.translate().description }}</p>
             </div>
 
             <div class="description-block">
