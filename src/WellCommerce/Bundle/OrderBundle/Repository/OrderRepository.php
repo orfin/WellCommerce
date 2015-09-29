@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Repository;
 
+use Doctrine\Common\Util\Debug;
 use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 
 /**
@@ -21,5 +22,16 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
  */
 class OrderRepository extends AbstractEntityRepository implements OrderRepositoryInterface
 {
-    
+    public function getDataSetQueryBuilder()
+    {
+        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder->groupBy('orders.id');
+
+        return $queryBuilder;
+    }
+
+    public function getAlias()
+    {
+        return 'orders';
+    }
 }

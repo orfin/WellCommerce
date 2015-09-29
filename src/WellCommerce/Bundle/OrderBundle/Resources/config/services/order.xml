@@ -4,6 +4,24 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+        <service id="order.manager.admin" class="WellCommerce\Bundle\OrderBundle\Manager\Admin\OrderManager">
+            <argument type="service" id="order.repository"/>
+            <argument type="service" id="order.event_dispatcher"/>
+            <argument type="service" id="order.factory"/>
+            <argument type="service" id="order.form_builder"/>
+            <argument type="service" id="order.datagrid"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="order.controller.admin" class="WellCommerce\Bundle\OrderBundle\Controller\Admin\OrderController">
+            <argument type="service" id="order.manager.admin"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
         <service id="order.manager.front" class="WellCommerce\Bundle\OrderBundle\Manager\Front\OrderManager">
             <argument type="service" id="order.repository"/>
             <argument type="service" id="order.event_dispatcher"/>
@@ -65,6 +83,15 @@
             <argument type="service" id="event_dispatcher" />
         </service>
 
+        <service id="order.form_builder" class="WellCommerce\Bundle\OrderBundle\Form\Admin\OrderFormBuilder">
+            <argument type="service" id="form.resolver.factory"/>
+            <argument type="service" id="form.handler"/>
+            <argument type="service" id="order.event_dispatcher"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
         <service id="order_confirmation.form_builder" class="WellCommerce\Bundle\OrderBundle\Form\Front\OrderConfirmationFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
@@ -77,6 +104,34 @@
         <service id="order_address.form_builder" class="WellCommerce\Bundle\OrderBundle\Form\Front\OrderAddressFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
+            <argument type="service" id="order.event_dispatcher"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="order.dataset.query_builder" class="WellCommerce\Bundle\OrderBundle\DataSet\OrderDataSetQueryBuilder" public="false">
+            <argument type="service" id="order.repository"/>
+        </service>
+
+        <service id="order.dataset.loader" class="%dataset.loader.class%">
+            <argument type="service" id="order.dataset.query_builder"/>
+            <argument type="service" id="dataset.processor"/>
+        </service>
+
+        <service id="order.dataset" class="WellCommerce\Bundle\OrderBundle\DataSet\OrderDataSet">
+            <argument key="identifier">orders</argument>
+            <argument type="service" id="order.dataset.loader"/>
+            <argument type="service" id="order.event_dispatcher"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <configurator service="dataset.configurator" method="configure"/>
+        </service>
+
+        <service id="order.datagrid" class="WellCommerce\Bundle\OrderBundle\DataGrid\OrderDataGrid">
+            <argument key="identifier">orders</argument>
+            <argument type="service" id="order.dataset"/>
             <argument type="service" id="order.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>

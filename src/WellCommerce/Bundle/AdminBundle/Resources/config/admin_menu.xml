@@ -232,6 +232,14 @@
     </item>
 
     <item>
+        <id>order</id>
+        <name>admin.menu.order</name>
+        <route>admin.order.index</route>
+        <path>menu.sales.order</path>
+        <sort_order>0</sort_order>
+    </item>
+
+    <item>
         <id>order_status</id>
         <name>admin.menu.order_status</name>
         <route>admin.order_status.index</route>
