@@ -79,7 +79,7 @@ class OrderFactory extends AbstractFactory implements OrderFactoryInterface
         $order->setShop($cart->getShop());
         $order->setSessionId($cart->getSessionId());
         $order->setClient($cart->getClient());
-        $order->setCurrentStatus($cart->getShop()->getDefaultOrderStatus());
+        $order->setCurrentStatus($cart->getPaymentMethod()->getDefaultOrderStatus());
 
         $this->prepareOrderProducts($cart, $order);
         $this->prepareShippingTotals($order, $cart->getShippingMethodCost());

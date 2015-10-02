@@ -68,11 +68,6 @@ class Shop implements ShopInterface
     protected $pages;
 
     /**
-     * @var OrderStatusInterface
-     */
-    protected $defaultOrderStatus;
-
-    /**
      * @var string
      */
     protected $defaultCountry;
@@ -195,22 +190,6 @@ class Shop implements ShopInterface
     public function setPages(Collection $pages)
     {
         $this->pages = $pages;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getDefaultOrderStatus()
-    {
-        return $this->defaultOrderStatus;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setDefaultOrderStatus(OrderStatusInterface $defaultOrderStatus)
-    {
-        $this->defaultOrderStatus = $defaultOrderStatus;
     }
 
     /**

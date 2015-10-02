@@ -72,6 +72,13 @@ class PaymentMethodFormBuilder extends AbstractFormBuilder
             'default' => 0
         ]));
 
+        $requiredData->addChild($this->getElement('select', [
+            'name'        => 'defaultOrderStatus',
+            'label'       => $this->trans('payment_method.label.default_order_status'),
+            'options'     => $this->get('order_status.collection')->getSelect(),
+            'transformer' => $this->getRepositoryTransformer('entity', $this->get('order_status.repository'))
+        ]));
+
         $shippingMethodsData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'shipping_methods_data',
             'label' => $this->trans('payment_method.label.shipping_methods')

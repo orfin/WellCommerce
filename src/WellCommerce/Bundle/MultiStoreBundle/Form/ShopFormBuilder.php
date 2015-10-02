@@ -66,13 +66,6 @@ class ShopFormBuilder extends AbstractFormBuilder
         ]));
 
         $cartSettings->addChild($this->getElement('select', [
-            'name'        => 'defaultOrderStatus',
-            'label'       => $this->trans('shop.label.default_order_status'),
-            'options'     => $this->get('order_status.collection')->getSelect(),
-            'transformer' => $this->getRepositoryTransformer('entity', $this->get('order_status.repository'))
-        ]));
-
-        $cartSettings->addChild($this->getElement('select', [
             'name'    => 'defaultCountry',
             'label'   => $this->trans('shop.label.default_country'),
             'options' => $this->get('country.repository')->all()
