@@ -30,8 +30,9 @@ class OrderDataSet extends AbstractDataSet
     {
         $configurator->setColumns([
             'id'                 => 'orders.id',
-            'productsGrossPrice' => 'CONCAT_WS(\' \', orders.productTotals.grossAmount, orders.currency)',
-            'shippingGrossPrice' => 'CONCAT_WS(\' \', orders.shippingDetails.grossPrice, orders.currency)',
+            'productsGrossPrice' => 'orders.productTotals.grossAmount',
+            'shippingGrossPrice' => 'orders.shippingDetails.grossPrice',
+            'currency'           => 'orders.currency',
             'createdAt'          => 'orders.createdAt',
         ]);
 

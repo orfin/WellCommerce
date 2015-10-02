@@ -10,32 +10,29 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\OrderBundle\Entity;
+namespace WellCommerce\Bundle\OrderBundle\Visitor;
+
+use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 
 /**
- * Interface OrderModifierDetailsInterface
+ * Interface OrderVisitorInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface OrderModifierDetailsInterface
+interface OrderVisitorInterface
 {
     /**
+     * @param OrderInterface $order
+     */
+    public function visitOrder(OrderInterface $order);
+
+    /**
+     * @return int
+     */
+    public function getPriority();
+
+    /**
      * @return string
      */
-    public function getName();
-
-    /**
-     * @param string $name
-     */
-    public function setName($name);
-
-    /**
-     * @return string
-     */
-    public function getDescription();
-
-    /**
-     * @param string $description
-     */
-    public function setDescription($description);
+    public function getAlias();
 }

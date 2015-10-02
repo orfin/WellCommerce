@@ -65,6 +65,18 @@ class OrderDataGrid extends AbstractDataGrid
         ]));
 
         $collection->add(new Column([
+            'id'         => 'currency',
+            'caption'    => $this->trans('order.label.currency'),
+            'filter'     => new Filter([
+                'type' => Filter::FILTER_BETWEEN,
+            ]),
+            'appearance' => new Appearance([
+                'width' => 40,
+                'align' => Appearance::ALIGN_CENTER
+            ]),
+        ]));
+
+        $collection->add(new Column([
             'id'         => 'createdAt',
             'caption'    => $this->trans('order.label.created_at'),
             'filter'     => new Filter([

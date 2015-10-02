@@ -41,6 +41,16 @@ interface OrderInterface extends
     public function getId();
 
     /**
+     * @return string
+     */
+    public function getCurrency();
+
+    /**
+     * @param string $currency
+     */
+    public function setCurrency($currency);
+
+    /**
      * @return float
      */
     public function getSessionId();
@@ -71,6 +81,36 @@ interface OrderInterface extends
     public function setProducts(Collection $products);
 
     /**
+     * @return OrderTotal
+     */
+    public function getOrderTotal();
+
+    /**
+     * @param OrderTotal $orderTotal
+     */
+    public function setOrderTotal(OrderTotal $orderTotal);
+
+    /**
+     * @return OrderTotal
+     */
+    public function getProductTotal();
+
+    /**
+     * @param OrderTotal $productTotal
+     */
+    public function setProductTotal(OrderTotal $productTotal);
+
+    /**
+     * @return OrderTotal
+     */
+    public function getShippingTotal();
+
+    /**
+     * @param OrderTotal $shippingTotal
+     */
+    public function setShippingTotal(OrderTotal $shippingTotal);
+
+    /**
      * @return AddressInterface
      */
     public function getBillingAddress();
@@ -93,17 +133,17 @@ interface OrderInterface extends
     /**
      * @return Collection
      */
-    public function getModifiers();
+    public function getTotals();
 
     /**
-     * @param Collection $modifiers
+     * @param Collection $totals
      */
-    public function setModifiers(Collection $modifiers);
+    public function setTotals(Collection $totals);
 
     /**
-     * @param OrderModifierInterface $orderModifier
+     * @param OrderTotalDetailInterface $total
      */
-    public function addModifier(OrderModifierInterface $orderModifier);
+    public function addTotal(OrderTotalDetailInterface $total);
 
     /**
      * @return OrderStatusInterface
@@ -114,16 +154,6 @@ interface OrderInterface extends
      * @param OrderStatus $currentStatus
      */
     public function setCurrentStatus(OrderStatusInterface $currentStatus);
-
-    /**
-     * @return string
-     */
-    public function getCurrency();
-
-    /**
-     * @param string $currency
-     */
-    public function setCurrency($currency);
 
     /**
      * @return string
@@ -149,24 +179,4 @@ interface OrderInterface extends
      * @param PaymentInterface $payment
      */
     public function addPayment(PaymentInterface $payment);
-
-    /**
-     * @return OrderProductTotalsInterface
-     */
-    public function getProductTotals();
-
-    /**
-     * @param OrderProductTotalsInterface $productTotals
-     */
-    public function setProductTotals(OrderProductTotalsInterface $productTotals);
-
-    /**
-     * @return OrderShippingDetailsInterface
-     */
-    public function getShippingDetails();
-
-    /**
-     * @param OrderShippingDetailsInterface $shippingDetails
-     */
-    public function setShippingDetails(OrderShippingDetailsInterface $shippingDetails);
 }

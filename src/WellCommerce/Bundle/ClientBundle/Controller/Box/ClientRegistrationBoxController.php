@@ -23,7 +23,6 @@ class ClientRegistrationBoxController extends AbstractBoxController
 {
     public function indexAction()
     {
-        $request  = $this->manager->getRequestHelper()->getCurrentRequest();
         $resource = $this->manager->initResource();
         $form     = $this->get('client_register.form_builder.front')->createForm([
             'name' => 'register'

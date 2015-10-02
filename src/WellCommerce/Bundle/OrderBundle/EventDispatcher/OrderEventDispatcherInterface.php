@@ -12,20 +12,19 @@
 
 namespace WellCommerce\Bundle\OrderBundle\EventDispatcher;
 
-use WellCommerce\Bundle\CoreBundle\EventDispatcher\AbstractEventDispatcher;
-
 /**
- * Class OrderEventDispatcher
+ * Interface OrderEventDispatcherInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderEventDispatcher extends AbstractEventDispatcher implements OrderEventDispatcherInterface
+interface OrderEventDispatcherInterface
 {
+    const POST_ORDER_PREPARED_EVENT = 'post_prepared';
+
     /**
-     * {@inheritdoc}
+     * Dispatches an event soon after order is prepared in checkout process
+     *
+     * @param object $resource
      */
-    public function dispatchOnPostOrderPrepared($resource)
-    {
-        $this->dispatchResourceEvent($resource, OrderEventDispatcherInterface::POST_ORDER_PREPARED_EVENT);
-    }
+    public function dispatchOnPostOrderPrepared($resource);
 }

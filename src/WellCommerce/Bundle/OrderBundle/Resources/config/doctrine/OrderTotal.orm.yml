@@ -1,18 +1,18 @@
-WellCommerce\Bundle\OrderBundle\Entity\OrderShippingDetails:
+WellCommerce\Bundle\OrderBundle\Entity\OrderTotal:
     type: embeddable
     fields:
-        netPrice:
+        netAmount:
             type: decimal
             scale: 2
             nullable: false
             precision: 15
-            column: net_price
-        grossPrice:
+            column: net_amount
+        grossAmount:
             type: decimal
             scale: 2
             nullable: false
             precision: 15
-            column: gross_price
+            column: gross_amount
         taxAmount:
             type: decimal
             scale: 2
@@ -22,7 +22,11 @@ WellCommerce\Bundle\OrderBundle\Entity\OrderShippingDetails:
         taxRate:
             type: decimal
             scale: 2
-            nullable: false
+            nullable: true
             precision: 15
             column: tax_rate
-
+        currency:
+            type: string
+            length: 16
+            nullable: false
+            column: currency

@@ -82,13 +82,30 @@
                 </div>
 
                 <div class="summary mbt60">
+                    {% for total in order.totals %}
+                    <div class="row">
+                        <div class="col-lg-10 col-lg-offset-2">
+                            <div class="col-lg-9 text-right">
+                                <span class="text">{{ total.collector }}</span>
+                            </div>
+                            <div class="col-lg-3">
+                                {% if total.isSubtraction() %}
+                                    <span class="value subtraction">-{{ format_price(total.orderTotal.grossAmount) }}</span>
+                                {% else %}
+                                    <span class="value addition">{{ format_price(total.orderTotal.grossAmount) }}</span>
+                                {% endif %}
+
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
                     <div class="row">
                         <div class="col-lg-10 col-lg-offset-2">
                             <div class="col-lg-9 text-right">
                                 <span class="text">Summary</span>
                             </div>
                             <div class="col-lg-3">
-                                <span class="value">{{ format_price(summary) }}</span>
+                                <span class="value">{{ format_price(order.orderTotal.grossAmount, order.orderTotal.currency) }}</span>
                             </div>
                         </div>
                     </div>
