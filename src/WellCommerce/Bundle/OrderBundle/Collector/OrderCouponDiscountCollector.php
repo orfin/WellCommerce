@@ -34,20 +34,20 @@ class OrderCouponDiscountCollector extends AbstractDataCollector
             $modifier     = $this->calculateModifierValue($coupon, $productTotal->getGrossAmount(), $order->getCurrency());
 
             if ($modifier > 0) {
-                $discountTotal = new OrderTotal();
-                $discountTotal->setCurrency($order->getCurrency());
-                $discountTotal->setGrossAmount($productTotal->getGrossAmount() * $modifier);
-                $discountTotal->setNetAmount($productTotal->getNetAmount() * $modifier);
-                $discountTotal->setTaxAmount($productTotal->getTaxAmount() * $modifier);
+                $orderTotal = new OrderTotal();
+                $orderTotal->setCurrency($order->getCurrency());
+                $orderTotal->setGrossAmount($productTotal->getGrossAmount() * $modifier);
+                $orderTotal->setNetAmount($productTotal->getNetAmount() * $modifier);
+                $orderTotal->setTaxAmount($productTotal->getTaxAmount() * $modifier);
 
-                $clientDiscountDetail = $this->initResource();
-                $clientDiscountDetail->setOrderTotal($discountTotal);
-                $clientDiscountDetail->setModifierType($coupon->getModifierType());
-                $clientDiscountDetail->setModifierValue($modifier);
-                $clientDiscountDetail->setOrder($order);
-                $clientDiscountDetail->setSubtraction(true);
+                $orderTotalDetail = $this->initResource();
+                $orderTotalDetail->setOrderTotal($total);
+                $orderTotalDetail->setModifierType($coupon->getModifierType());
+                $orderTotalDetail->setModifierValue($modifier);
+                $orderTotalDetail->setOrder($order);
+                $orderTotalDetail->setSubtraction(true);
 
-                $order->addTotal($clientDiscountDetail);
+                $order->addTotal($orderTotalDetail);
             }
         }
     }
