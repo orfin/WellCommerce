@@ -26,13 +26,13 @@ class OrderCartTotalCollector extends AbstractDataCollector
      */
     public function visitOrder(OrderInterface $order)
     {
-        $orderProductTotal  = $order->getProductTotal();
-        $orderProductDetail = $this->initResource();
+        $orderProductTotal = $order->getProductTotal();
+        $orderTotalDetail  = $this->initResource();
 
-        $orderProductDetail->setOrderTotal($orderProductTotal);
-        $orderProductDetail->setOrder($order);
+        $orderTotalDetail->setOrderTotal($orderProductTotal);
+        $orderTotalDetail->setOrder($order);
 
-        $order->addTotal($orderProductDetail);
+        $order->addTotal($orderTotalDetail);
     }
 
     /**

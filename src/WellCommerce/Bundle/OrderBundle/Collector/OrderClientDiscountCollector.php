@@ -28,24 +28,25 @@ class OrderClientDiscountCollector extends AbstractDataCollector
      */
     public function visitOrder(OrderInterface $order)
     {
-        $discountTotal        = new OrderTotal();
-        $productTotal         = $order->getProductTotal();
-        $clientDiscountDetail = $this->initResource();
-        $discount             = $this->getDiscountForClient($order->getClient());
+        $orderTotal = new OrderTotal();
+        $discount   = $this->getDiscountForClient($order->getClient());
 
         if ($discount > 0) {
-            $discountTotal->setCurrency($order->getCurrency());
-            $discountTotal->setGrossAmount($productTotal->getGrossAmount() * $discount);
-            $discountTotal->setNetAmount($productTotal->getNetAmount() * $discount);
-            $discountTotal->setTaxAmount($productTotal->getTaxAmount() * $discount);
+            $productTotal = $order->getProductTotal();
 
-            $clientDiscountDetail->setOrderTotal($discountTotal);
-            $clientDiscountDetail->setModifierType('%');
-            $clientDiscountDetail->setModifierValue($discount);
-            $clientDiscountDetail->setOrder($order);
-            $clientDiscountDetail->setSubtraction(true);
+            $orderTotal->setCurrency($order->getCurrency());
+            $orderTotal->setGrossAmount($productTotal->getGrossAmount() * $discount);
+            $orderTotal->setNetAmount($productTotal->getNetAmount() * $discount);
+            $orderTotal->setTaxAmount($productTotal->getTaxAmount() * $discount);
 
-            $order->addTotal($clientDiscountDetail);
+            $orderTotalDetail = $this->initResource();
+            $orderTotalDetail->setOrderTotal($orderTotal);
+            $orderTotalDetail->setModifierType('%');
+            $orderTotalDetail->setModifierValue($discount);
+            $orderTotalDetail->setOrder($order);
+            $orderTotalDetail->setSubtraction(true);
+
+            $order->addTotal($orderTotalDetail);
         }
     }
 
