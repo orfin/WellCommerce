@@ -41,7 +41,7 @@ class OrderCouponDiscountCollector extends AbstractDataCollector
                 $orderTotal->setTaxAmount($productTotal->getTaxAmount() * $modifier);
 
                 $orderTotalDetail = $this->initResource();
-                $orderTotalDetail->setOrderTotal($total);
+                $orderTotalDetail->setOrderTotal($orderTotal);
                 $orderTotalDetail->setModifierType($coupon->getModifierType());
                 $orderTotalDetail->setModifierValue($modifier);
                 $orderTotalDetail->setOrder($order);
@@ -70,7 +70,7 @@ class OrderCouponDiscountCollector extends AbstractDataCollector
         switch ($modifierType) {
             case '-':
                 $modifierValue = $this->currencyHelper->convert($modifierValue, $baseCurrency, $targetCurrency);
-                $modifier      = $modifierValue / $amount;
+                $modifier      = ($modifierValue >= $amount) ? 1 : $modifierValue / $amount;
                 break;
             case '%':
                 $modifier = $modifierValue / 100;
