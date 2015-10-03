@@ -33,7 +33,7 @@ class OrderDataGrid extends AbstractDataGrid
             'id'         => 'id',
             'caption'    => $this->trans('order.label.id'),
             'appearance' => new Appearance([
-                'width' => 90
+                'width' => 40
             ]),
             'filter'     => new Filter([
                 'type' => Filter::FILTER_BETWEEN,
@@ -41,8 +41,8 @@ class OrderDataGrid extends AbstractDataGrid
         ]));
 
         $collection->add(new Column([
-            'id'         => 'productsGrossPrice',
-            'caption'    => $this->trans('order.label.products_gross_price'),
+            'id'         => 'productTotal',
+            'caption'    => $this->trans('order.label.product_total'),
             'filter'     => new Filter([
                 'type' => Filter::FILTER_BETWEEN,
             ]),
@@ -53,8 +53,20 @@ class OrderDataGrid extends AbstractDataGrid
         ]));
 
         $collection->add(new Column([
-            'id'         => 'shippingGrossPrice',
-            'caption'    => $this->trans('order.label.shipping_gross_price'),
+            'id'         => 'shippingTotal',
+            'caption'    => $this->trans('order.label.shipping_total'),
+            'filter'     => new Filter([
+                'type' => Filter::FILTER_BETWEEN,
+            ]),
+            'appearance' => new Appearance([
+                'width' => 40,
+                'align' => Appearance::ALIGN_CENTER
+            ]),
+        ]));
+
+        $collection->add(new Column([
+            'id'         => 'orderTotal',
+            'caption'    => $this->trans('order.label.order_total'),
             'filter'     => new Filter([
                 'type' => Filter::FILTER_BETWEEN,
             ]),
@@ -69,6 +81,19 @@ class OrderDataGrid extends AbstractDataGrid
             'caption'    => $this->trans('order.label.currency'),
             'filter'     => new Filter([
                 'type' => Filter::FILTER_BETWEEN,
+            ]),
+            'appearance' => new Appearance([
+                'width'   => 40,
+                'visible' => false,
+                'align'   => Appearance::ALIGN_CENTER
+            ]),
+        ]));
+
+        $collection->add(new Column([
+            'id'         => 'currentStatus',
+            'caption'    => $this->trans('order.label.current_status'),
+            'filter'     => new Filter([
+                'type' => Filter::FILTER_INPUT,
             ]),
             'appearance' => new Appearance([
                 'width' => 40,

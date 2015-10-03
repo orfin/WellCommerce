@@ -17,6 +17,7 @@ use WellCommerce\Bundle\ClientBundle\Entity\ClientAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\AddressInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\ContactDetailsAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
+use WellCommerce\Bundle\CouponBundle\Entity\CouponAwareInterface;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopAwareInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodAwareInterface;
@@ -33,7 +34,8 @@ interface OrderInterface extends
     ShippingMethodAwareInterface,
     PaymentMethodAwareInterface,
     ClientAwareInterface,
-    ContactDetailsAwareInterface
+    ContactDetailsAwareInterface,
+    CouponAwareInterface
 {
     /**
      * @return int

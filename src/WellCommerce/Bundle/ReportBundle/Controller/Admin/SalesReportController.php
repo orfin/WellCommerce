@@ -29,12 +29,14 @@ class SalesReportController extends AbstractAdminController
 
     public function indexAction()
     {
-        $date     = new \DateTime();
         $criteria = new Criteria();
-        $criteria->where($criteria->expr()->gte('createdAt', $date->modify('first day of this month 00:00:00')));
-        $criteria->andWhere($criteria->expr()->lte('createdAt', $date->modify('last day of this month 23:59:59')));
+        $criteria->where($criteria->expr()->gte('createdAt', (new \DateTime())->modify('first day of this month 00:00:00')));
+        $criteria->andWhere($criteria->expr()->lte('createdAt', (new \DateTime())->modify('last day of this month 23:59:59')));
 
         $summaryStats = $this->manager->getSummaryStats($criteria);
+
+        print_r($summaryStats);
+        die();
 
         return $this->displayTemplate('index');
     }

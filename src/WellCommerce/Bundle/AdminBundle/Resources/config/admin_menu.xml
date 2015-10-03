@@ -367,4 +367,12 @@
         <sort_order>50</sort_order>
     </item>
 
+    <item>
+        <id>coupon</id>
+        <name>admin.menu.coupon</name>
+        <route>admin.coupon.index</route>
+        <path>menu.promotions.coupon</path>
+        <sort_order>10</sort_order>
+    </item>
+
 </items>

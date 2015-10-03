@@ -86,8 +86,16 @@ class OrderTotalCollector extends AbstractDataCollector
     /**
      * {@inheritdoc}
      */
+    public function getDescription()
+    {
+        return 'order.label.total_description';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getPriority()
     {
-        return 400;
+        return 500;
     }
 }

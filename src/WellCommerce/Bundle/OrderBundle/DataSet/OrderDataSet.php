@@ -29,11 +29,13 @@ class OrderDataSet extends AbstractDataSet
     public function configureOptions(DataSetConfiguratorInterface $configurator)
     {
         $configurator->setColumns([
-            'id'                 => 'orders.id',
-            'productsGrossPrice' => 'orders.productTotals.grossAmount',
-            'shippingGrossPrice' => 'orders.shippingDetails.grossPrice',
-            'currency'           => 'orders.currency',
-            'createdAt'          => 'orders.createdAt',
+            'id'            => 'orders.id',
+            'productTotal'  => 'orders.productTotal.grossAmount',
+            'shippingTotal' => 'orders.shippingTotal.grossAmount',
+            'orderTotal'    => 'orders.orderTotal.grossAmount',
+            'currentStatus' => 'status_translation.name',
+            'currency'      => 'orders.currency',
+            'createdAt'     => 'orders.createdAt',
         ]);
 
         $configurator->setTransformers([

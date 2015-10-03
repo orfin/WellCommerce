@@ -47,6 +47,8 @@ abstract class AbstractDataCollector implements OrderDataCollectorInterface
 
     abstract public function getPriority();
 
+    abstract public function getDescription();
+
     /**
      * @return \WellCommerce\Bundle\OrderBundle\Entity\OrderTotalDetailInterface
      */
@@ -58,4 +60,6 @@ abstract class AbstractDataCollector implements OrderDataCollectorInterface
 
         return $resource;
     }
+
+
 }

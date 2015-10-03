@@ -57,6 +57,13 @@ WellCommerce\Bundle\OrderBundle\Entity\Order:
             targetEntity:  WellCommerce\Bundle\PaymentBundle\Entity\Payment
             mappedBy: order
     manyToOne:
+        coupon:
+            targetEntity: WellCommerce\Bundle\CouponBundle\Entity\Coupon
+            fetch: LAZY
+            joinColumns:
+                coupon_id:
+                    referencedColumnName: id
+                    onDelete: SET NULL
         client:
             targetEntity: WellCommerce\Bundle\ClientBundle\Entity\Client
             fetch: LAZY

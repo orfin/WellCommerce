@@ -17,6 +17,7 @@ use WellCommerce\Bundle\ClientBundle\Entity\ClientAwareTrait;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\Timestampable\TimestampableTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\AddressInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\ContactDetailsTrait;
+use WellCommerce\Bundle\CouponBundle\Entity\CouponAwareTrait;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopAwareTrait;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodAwareTrait;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface;
@@ -34,6 +35,7 @@ class Cart implements CartInterface
     use PaymentMethodAwareTrait;
     use ClientAwareTrait;
     use ContactDetailsTrait;
+    use CouponAwareTrait;
 
     /**
      * @var integer

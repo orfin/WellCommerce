@@ -47,6 +47,13 @@ WellCommerce\Bundle\CartBundle\Entity\Cart:
             mappedBy: cart
             orphanRemoval: true
     manyToOne:
+        coupon:
+            targetEntity: WellCommerce\Bundle\CouponBundle\Entity\Coupon
+            fetch: LAZY
+            joinColumns:
+                coupon_id:
+                    referencedColumnName: id
+                    onDelete: SET NULL
         shop:
             targetEntity: WellCommerce\Bundle\MultiStoreBundle\Entity\Shop
             fetch: LAZY

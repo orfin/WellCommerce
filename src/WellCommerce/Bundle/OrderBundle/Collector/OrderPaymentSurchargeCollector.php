@@ -40,6 +40,14 @@ class OrderPaymentSurchargeCollector implements OrderDataCollectorInterface
     /**
      * {@inheritdoc}
      */
+    public function getDescription()
+    {
+        return 'order.label.payment_surcharge_description';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getPriority()
     {
         return 200;

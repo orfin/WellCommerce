@@ -171,6 +171,12 @@
             <tag name="order.visitor"/>
         </service>
 
+        <service id="order_coupon_discount.visitor" class="WellCommerce\Bundle\OrderBundle\Collector\OrderCouponDiscountCollector">
+            <argument type="service" id="order_total_detail.factory"/>
+            <argument type="service" id="currency.helper"/>
+            <tag name="order.visitor"/>
+        </service>
+
         <service id="order_total.visitor" class="WellCommerce\Bundle\OrderBundle\Collector\OrderTotalCollector">
             <argument type="service" id="order_total_detail.factory"/>
             <argument type="service" id="currency.helper"/>

@@ -17,6 +17,7 @@ use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\Timestampable\Timesta
 use WellCommerce\Bundle\CoreBundle\Entity\AddressInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\ContactDetailsTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\Price;
+use WellCommerce\Bundle\CouponBundle\Entity\CouponAwareTrait;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopAwareTrait;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodAwareTrait;
@@ -35,6 +36,7 @@ class Order implements OrderInterface
     use PaymentMethodAwareTrait;
     use ClientAwareTrait;
     use ContactDetailsTrait;
+    use CouponAwareTrait;
 
     /**
      * @var int

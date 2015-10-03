@@ -33,28 +33,30 @@ class OrderClientDiscountCollector extends AbstractDataCollector
         $clientDiscountDetail = $this->initResource();
         $discount             = $this->getDiscountForClient($order->getClient());
 
-        $discountTotal->setCurrency($order->getCurrency());
-        $discountTotal->setGrossAmount($productTotal->getGrossAmount() * $discount);
-        $discountTotal->setNetAmount($productTotal->getNetAmount() * $discount);
-        $discountTotal->setTaxAmount($productTotal->getTaxAmount() * $discount);
+        if ($discount > 0) {
+            $discountTotal->setCurrency($order->getCurrency());
+            $discountTotal->setGrossAmount($productTotal->getGrossAmount() * $discount);
+            $discountTotal->setNetAmount($productTotal->getNetAmount() * $discount);
+            $discountTotal->setTaxAmount($productTotal->getTaxAmount() * $discount);
 
-        $clientDiscountDetail->setOrderTotal($discountTotal);
-        $clientDiscountDetail->setModifierType('%');
-        $clientDiscountDetail->setModifierValue($discount);
-        $clientDiscountDetail->setOrder($order);
-        $clientDiscountDetail->setSubtraction(true);
+            $clientDiscountDetail->setOrderTotal($discountTotal);
+            $clientDiscountDetail->setModifierType('%');
+            $clientDiscountDetail->setModifierValue($discount);
+            $clientDiscountDetail->setOrder($order);
+            $clientDiscountDetail->setSubtraction(true);
 
-        $order->addTotal($clientDiscountDetail);
+            $order->addTotal($clientDiscountDetail);
+        }
     }
 
     /**
      * Returns client's discount
      *
-     * @param ClientInterface $client
+     * @param null|ClientInterface $client
      *
      * @return float|int
      */
-    protected function getDiscountForClient(ClientInterface $client)
+    protected function getDiscountForClient(ClientInterface $client = null)
     {
         if (null !== $client && null !== $client->getClientGroup()) {
             return round((float)$client->getClientGroup()->getDiscount() / 100, 2);
@@ -69,6 +71,14 @@ class OrderClientDiscountCollector extends AbstractDataCollector
     public function getAlias()
     {
         return 'client_discount';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDescription()
+    {
+        return 'order.label.client_discount_description';
     }
 
     /**

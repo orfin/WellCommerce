@@ -86,13 +86,13 @@
                     <div class="row">
                         <div class="col-lg-10 col-lg-offset-2">
                             <div class="col-lg-9 text-right">
-                                <span class="text">{{ total.collector }}</span>
+                                <span class="text">{{ 'order.description.' ~ total.collector|trans }}</span>
                             </div>
                             <div class="col-lg-3">
                                 {% if total.isSubtraction() %}
-                                    <span class="value subtraction">-{{ format_price(total.orderTotal.grossAmount) }}</span>
+                                    <span class="text subtraction">-{{ format_price(total.orderTotal.grossAmount) }}</span>
                                 {% else %}
-                                    <span class="value addition">{{ format_price(total.orderTotal.grossAmount) }}</span>
+                                    <span class="text addition">{{ format_price(total.orderTotal.grossAmount) }}</span>
                                 {% endif %}
 
                             </div>

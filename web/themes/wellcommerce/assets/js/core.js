@@ -418,6 +418,65 @@ var GProductAddCartButton = function(oOptions) {
 
 new GPlugin('GProductAddCartButton', {}, GProductAddCartButton);
 
-var oProductAttributesDefaults = {
-    aoAttributes: {}
+var oCouponDefaults = {
+    sAddCouponRoute:      'front.coupon.add',
+    sRemoveCouponRoute:   'front.coupon.delete',
+    sCodeInputIdentifier: 'coupon_code',
+    sAddButtonIdentifier: 'use_coupon',
+    sRemoveButtonIdentifier: 'use_coupon'
 };
+
+var GCoupon = function(oOptions) {
+
+    var gThis = this;
+
+    gThis._Constructor = function() {
+        gThis.InitializeEvents();
+    };
+
+    gThis.InitializeEvents = function(){
+        $('#' + gThis.m_oOptions.sAddButtonIdentifier, gThis).bind('click', gThis.AddCoupon);
+        $('#' + gThis.m_oOptions.sRemoveButtonIdentifier, gThis).bind('click', gThis.RemoveCoupon);
+    };
+
+    gThis.ProcessResponse = function(oResponse){
+        if(oResponse.success){
+            return gThis.ReloadCart();
+        }else{
+            alert(oResponse.message);
+        }
+    };
+
+    gThis.AddCoupon = function(){
+        var oRequestParams = {
+            code: $('#' + gThis.m_oOptions.sCodeInputIdentifier, gThis).val()
+        };
+
+        GAjaxRequest(Routing.generate(gThis.m_oOptions.sAddCouponRoute), oRequestParams, function(oResponse){
+            if(oResponse.success){
+                return window.location.reload(false);
+            }else{
+                alert(oResponse.message);
+            }
+        });
+
+        return false;
+    };
+
+    gThis.RemoveCoupon = function(){
+        GAjaxRequest(Routing.generate(gThis.m_oOptions.sRemoveCouponRoute), {}, function(oResponse){
+            if(oResponse.success){
+                return window.location.reload(false);
+            }else{
+                alert(oResponse.message);
+            }
+        });
+
+        return false;
+    };
+
+    gThis._Constructor();
+
+};
+
+new GPlugin('GCoupon', oCouponDefaults, GCoupon);

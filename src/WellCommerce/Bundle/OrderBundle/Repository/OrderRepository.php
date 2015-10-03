@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Repository;
 
-use Doctrine\Common\Util\Debug;
 use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 
 /**
@@ -25,6 +24,8 @@ class OrderRepository extends AbstractEntityRepository implements OrderRepositor
     public function getDataSetQueryBuilder()
     {
         $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder->leftJoin('orders.currentStatus', 'status');
+        $queryBuilder->leftJoin('status.translations', 'status_translation');
         $queryBuilder->groupBy('orders.id');
 
         return $queryBuilder;

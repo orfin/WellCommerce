@@ -46,6 +46,14 @@ class OrderShippingCostCollector extends AbstractDataCollector
     /**
      * {@inheritdoc}
      */
+    public function getDescription()
+    {
+        return 'order.label.shipping_cost_description';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getPriority()
     {
         return 100;

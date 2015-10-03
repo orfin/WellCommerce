@@ -8,10 +8,10 @@
                 <div class="alert alert-info mtp30">
                     <p><strong>{% trans %}payment.flash.success{% endtrans %}</strong></p>
                     <p>{% trans %}order.label.id{% endtrans %}: <strong>{{ order.getId() }}</strong></p>
-                    <p>{% trans %}order.label.payment_method{% endtrans %}: <strong>{{ order.getPaymentMethod().translate().getName() }}</strong></p>
-                    <p>{% trans %}order.label.product_total{% endtrans %}: <strong>{{ format_price(order.getProductTotals().getGrossAmount(), order.getCurrency()) }}</strong></p>
-                    <p>{% trans %}order.label.shipping_details{% endtrans %}: <strong>{{ format_price(order.getShippingDetails().getGrossPrice(), order.getCurrency()) }}</strong></p>
-                    <p>{% trans %}order.label.currency{% endtrans %}: <strong>{{ order.getCurrency() }}</strong></p>
+                    <p>{% trans %}order.label.payment_method{% endtrans %}: <strong>{{ order.paymentMethod.translate().name }}</strong></p>
+                    <p>{% trans %}order.label.order_total{% endtrans %}: <strong>{{ format_price(order.orderTotal.grossAmount, order.currency) }}</strong></p>
+                    <p>{% trans %}order.label.shipping_details{% endtrans %}: <strong>{{ format_price(order.shippingTotal.grossAmount, order.currency) }}</strong></p>
+                    <p>{% trans %}order.label.currency{% endtrans %}: <strong>{{ order.currency }}</strong></p>
                 </div>
 
                 <div class="clearfix">
