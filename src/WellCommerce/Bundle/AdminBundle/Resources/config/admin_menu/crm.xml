@@ -4,12 +4,14 @@
         <identifier>crm</identifier>
         <css_class>crm</css_class>
         <name>admin_menu.label.crm</name>
-        <parent>null</parent>
+        <route_name>admin.client.index</route_name>
+        <parent/>
         <hierarchy>60</hierarchy>
     </item>
 
     <item>
         <identifier>client</identifier>
+        <css_class/>
         <name>admin_menu.label.client</name>
         <route_name>admin.client.index</route_name>
         <parent>crm</parent>
@@ -18,6 +20,7 @@
 
     <item>
         <identifier>client_group</identifier>
+        <css_class/>
         <name>admin_menu.label.client_group</name>
         <route_name>admin.client_group.index</route_name>
         <parent>crm</parent>

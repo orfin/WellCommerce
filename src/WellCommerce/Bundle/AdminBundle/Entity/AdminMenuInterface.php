@@ -33,7 +33,7 @@ interface AdminMenuInterface
     public function getHierarchy();
 
     /**
-     * @param int $hierarchy
+     * @param $hierarchy
      */
     public function setHierarchy($hierarchy);
 

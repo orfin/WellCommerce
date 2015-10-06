@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\AdminBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
-use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 use WellCommerce\Bundle\CoreBundle\Entity\HierarchyAwareTrait;
 
 /**
@@ -81,7 +80,7 @@ class AdminMenu implements AdminMenuInterface
      */
     public function setIdentifier($identifier)
     {
-        $this->identifier = $identifier;
+        $this->identifier = (string)$identifier;
     }
 
     /**
@@ -97,7 +96,7 @@ class AdminMenu implements AdminMenuInterface
      */
     public function setName($name)
     {
-        $this->name = $name;
+        $this->name = (string)$name;
     }
 
     /**

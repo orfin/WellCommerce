@@ -4,12 +4,14 @@
         <identifier>reports</identifier>
         <css_class>reports</css_class>
         <name>admin_menu.label.reports</name>
-        <parent>null</parent>
+        <route_name/>
+        <parent/>
         <hierarchy>50</hierarchy>
     </item>
 
     <item>
         <identifier>sales_report</identifier>
+        <css_class/>
         <name>admin_menu.label.sales_report</name>
         <route_name>admin.sales_report.index</route_name>
         <parent>reports</parent>

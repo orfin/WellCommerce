@@ -2,30 +2,34 @@
 <items>
     <item>
         <identifier>cms</identifier>
+        <route_name>admin.page.index</route_name>
         <css_class>cms</css_class>
         <name>admin_menu.label.cms</name>
-        <parent>null</parent>
+        <parent/>
         <hierarchy>70</hierarchy>
     </item>
 
     <item>
-        <identifier>news</identifier>
-        <name>admin_menu.label.news</name>
-        <route_name>admin.news.index</route_name>
+        <identifier>page</identifier>
+        <css_class/>
+        <name>admin_menu.label.page</name>
+        <route_name>admin.page.index</route_name>
         <parent>cms</parent>
         <hierarchy>10</hierarchy>
     </item>
 
     <item>
-        <identifier>page</identifier>
-        <name>admin_menu.label.page</name>
-        <route_name>admin.page.index</route_name>
+        <identifier>news</identifier>
+        <css_class/>
+        <name>admin_menu.label.news</name>
+        <route_name>admin.news.index</route_name>
         <parent>cms</parent>
         <hierarchy>20</hierarchy>
     </item>
 
     <item>
         <identifier>contact</identifier>
+        <css_class/>
         <name>admin_menu.label.contact</name>
         <route_name>admin.contact.index</route_name>
         <parent>cms</parent>
@@ -34,6 +38,7 @@
 
     <item>
         <identifier>media</identifier>
+        <css_class/>
         <name>admin_menu.label.media</name>
         <route_name>admin.media.index</route_name>
         <parent>cms</parent>

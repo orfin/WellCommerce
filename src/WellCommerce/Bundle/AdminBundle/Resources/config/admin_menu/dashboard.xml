@@ -2,9 +2,10 @@
 <items>
     <item>
         <identifier>dashboard</identifier>
+        <css_class/>
         <name>admin_menu.label.dashboard</name>
         <route_name>admin.dashboard.index</route_name>
-        <parent>null</parent>
+        <parent/>
         <hierarchy>10</hierarchy>
     </item>
 </items>
