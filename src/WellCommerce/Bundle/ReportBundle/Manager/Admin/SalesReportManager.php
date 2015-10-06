@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\ReportBundle\Manager\Admin;
 
-use Doctrine\Common\Collections\Criteria;
 use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
 
 /**
@@ -20,12 +19,7 @@ use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class SalesReportManager extends AbstractAdminManager implements SalesReportManagerInterface
+class SalesReportManager extends AbstractAdminManager
 {
-    public function getSummaryStats(Criteria $criteria)
-    {
-        $collection = $this->repository->matching($criteria);
 
-        return $collection->count();
-    }
 }

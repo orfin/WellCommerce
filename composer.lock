@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "01588dca4df8d9022510dbb7dd8fb09d",
+    "hash": "41bbf5927a94dbd8a5baebb9be08605b",
     "packages": [
         {
             "name": "beberlei/DoctrineExtensions",
@@ -2470,6 +2470,53 @@
             "time": "2015-08-31 09:17:37"
         },
         {
+            "name": "nesbot/carbon",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/briannesbitt/Carbon.git",
+                "reference": "74711084ac7fdcc9ec13b802d7af030617f3b168"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/74711084ac7fdcc9ec13b802d7af030617f3b168",
+                "reference": "74711084ac7fdcc9ec13b802d7af030617f3b168",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "symfony/translation": "~2.6|~3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Carbon": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Brian Nesbitt",
+                    "email": "brian@nesbot.com",
+                    "homepage": "http://nesbot.com"
+                }
+            ],
+            "description": "A simple API extension for DateTime.",
+            "homepage": "http://carbon.nesbot.com",
+            "keywords": [
+                "date",
+                "datetime",
+                "time"
+            ],
+            "time": "2015-08-06 15:19:27"
+        },
+        {
             "name": "pagerfanta/pagerfanta",
             "version": "dev-master",
             "source": {
@@ -3547,7 +3594,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/2e386b3ca174ee47277877d4e98d5e9a29141977",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/d1f50c5deecd6830ca30062e21b32c722272ca62",
                 "reference": "2e386b3ca174ee47277877d4e98d5e9a29141977",
                 "shasum": ""
             },
@@ -3721,7 +3768,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/d6740f36827f88a7ecda923f71ce0bb28525a9b1",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/efaf5036e6857616379b78648ffdb5fdafb92c87",
                 "reference": "d6740f36827f88a7ecda923f71ce0bb28525a9b1",
                 "shasum": ""
             },
@@ -5909,6 +5956,7 @@
         "knplabs/packagist-api": 20,
         "hoa/websocket": 20,
         "devristo/phpws": 20,
+        "nesbot/carbon": 20,
         "doctrine/doctrine-fixtures-bundle": 20,
         "phpunit/phpunit": 20
     },

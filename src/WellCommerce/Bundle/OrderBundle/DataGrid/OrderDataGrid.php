@@ -33,7 +33,8 @@ class OrderDataGrid extends AbstractDataGrid
             'id'         => 'id',
             'caption'    => $this->trans('order.label.id'),
             'appearance' => new Appearance([
-                'width' => 40
+                'width' => 40,
+                'align' => Appearance::ALIGN_CENTER
             ]),
             'filter'     => new Filter([
                 'type' => Filter::FILTER_BETWEEN,

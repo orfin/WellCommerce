@@ -12,7 +12,11 @@
 
 namespace WellCommerce\Bundle\AdminBundle\Controller\Admin;
 
+use Carbon\Carbon;
+use DateInterval;
 use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
+use WellCommerce\Bundle\ReportBundle\Configuration\ReportConfiguration;
+use WellCommerce\Bundle\ReportBundle\Context\LineChartContext;
 
 /**
  * Class DashboardController
@@ -23,7 +27,21 @@ class DashboardController extends AbstractController
 {
     public function indexAction()
     {
+        return $this->displayTemplate('index', [
+                'salesChart' => $this->getSalesChart(),
+                'currency'   => $this->getRequestHelper()->getCurrentCurrency()
+            ]
+        );
+    }
 
-        return $this->displayTemplate('index');
+    /**
+     * @return LineChartContext
+     */
+    protected function getSalesChart()
+    {
+        $configuration = new ReportConfiguration(Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth(), new DateInterval('P1D'), 'd', 'Y-m-d');
+        $report        = $this->get('sales_report.provider')->getReport($configuration);
+
+        return new LineChartContext($report, $configuration);
     }
 }

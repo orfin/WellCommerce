@@ -68,6 +68,11 @@ doctrine:
                         CONCAT_WS: DoctrineExtensions\Query\Mysql\ConcatWs
                         GROUP_CONCAT: DoctrineExtensions\Query\Mysql\GroupConcat
                         IF_ELSE: DoctrineExtensions\Query\Mysql\IfElse
+                        DAY: DoctrineExtensions\Query\Mysql\Day
+                        MONTH: DoctrineExtensions\Query\Mysql\Month
+                        QUARTER: DoctrineExtensions\Query\Mysql\Quarter
+                        YEAR: DoctrineExtensions\Query\Mysql\Year
+                        DATE_FORMAT: DoctrineExtensions\Query\Mysql\DateFormat
                 filters:
                     locale:
                         class:   WellCommerce\Bundle\IntlBundle\ORM\Filter\LocaleFilter

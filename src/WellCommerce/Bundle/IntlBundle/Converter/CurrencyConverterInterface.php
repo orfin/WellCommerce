@@ -30,4 +30,14 @@ interface CurrencyConverterInterface
      * @return float
      */
     public function convert($amount, $baseCurrency = null, $targetCurrency = null, $quantity = 1);
+
+    /**
+     * Returns an exchange rate
+     *
+     * @param string|null $baseCurrency
+     * @param string|null $targetCurrency
+     *
+     * @return int|float
+     */
+    public function getExchangeRate($baseCurrency = null, $targetCurrency = null);
 }

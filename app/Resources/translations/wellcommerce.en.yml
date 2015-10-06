@@ -21,6 +21,8 @@ admin:
         availability: Availability
         catalog: Catalog
         category: Categories
+        coupon: Coupons
+        client: Clients
         client_group: 'Client groups'
         cms: CMS
         configuration: Configuration
@@ -37,6 +39,7 @@ admin:
         localization: Internationalization
         media: 'Media management'
         news: News
+        order: Orders
         payment_method: 'Payment methods'
         producer: Producers
         product: Products
@@ -44,6 +47,7 @@ admin:
         promotion: Promotions
         promotions: Promotions
         reports: Reports
+        routing: Routing configuration
         sales: Sales
         shipping_method: 'Shipping methods'
         tax: Taxes
@@ -57,6 +61,8 @@ admin:
         unit: Units
         order_status: 'Order statuses'
         order_status_group: 'Order status groups'
+        report:
+            sales: Sales report
 form:
     help:
         required_fields: '* required fields'
@@ -141,7 +147,15 @@ cart:
         added: 'was added to cart'
 order:
     label:
+        id: ID
+        product_total: Products total
+        shipping_total: Shipping costs
+        order_total: Total
+        current_status: Status
+        created_at: Date
         comment: 'Comments'
+    heading:
+        index: Orders
 currency:
     label: Currency
 
@@ -202,3 +216,4 @@ product:
         view_type:
             list: List view
             grid: Grid view
+

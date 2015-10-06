@@ -4,47 +4,18 @@
 
     <div class="block" id="desktop">
         <div class="simple-stats layout-two-columns">
+            <h2>{% trans %}sales_report.heading.sales{% endtrans %}</h2>
             <div class="column narrow">
                 <dl class="stats-summary">
-                    <dt>{% trans %}TXT_SALES{% endtrans %} ({% trans %}TXT_TODAY{% endtrans %} / {% trans %}TXT_CURRENT_MONTH{% endtrans %})</dt><dd>{{ summaryStats.todaysales.total }} {% trans %}TXT_CURRENCY{% endtrans %} / {{ summaryStats.summarysales.total }} {% trans %}TXT_CURRENCY{% endtrans %}</dd>
-                    <dt>{% trans %}TXT_ORDERS{% endtrans %} ({% trans %}TXT_TODAY{% endtrans %} / {% trans %}TXT_CURRENT_MONTH{% endtrans %})</dt><dd>{{ summaryStats.todaysales.orders }} / {{ summaryStats.summarysales.orders }}</dd>
-                    <dt>{% trans %}TXT_CLIENTS{% endtrans %} ({% trans %}TXT_TODAY{% endtrans %} / {% trans %}TXT_CURRENT_MONTH{% endtrans %})</dt><dd>{{ summaryStats.todayclients.totalclients }} / {{ summaryStats.summaryclients.totalclients }} </dd>
+                    <dt>{% trans %}sales_report.label.sales{% endtrans %} ({% trans %}sales_report.label.today{% endtrans %} / {% trans %}sales_report.label.current_month{% endtrans %})</dt><dd> {% trans %}TXT_CURRENCY{% endtrans %} / {% trans %}TXT_CURRENCY{% endtrans %}</dd>
+                    <dt>{% trans %}sales_report.label.orders{% endtrans %} ({% trans %}sales_report.label.today{% endtrans %} / {% trans %}sales_report.label.current_month{% endtrans %})</dt><dd> / </dd>
+                    <dt>{% trans %}sales_report.label.clients{% endtrans %} ({% trans %}sales_report.label.today{% endtrans %} / {% trans %}sales_report.label.current_month{% endtrans %})</dt><dd> /  </dd>
                 </dl>
             </div>
-            <div class="column wide">
-                <div class="tabs">
-                    <ul>
-                        <li><a href="#desktop-simple-stats-sales">{% trans %}TXT_SALES{% endtrans %}</a></li>
-                        <li><a href="#desktop-simple-stats-orders">{% trans %}TXT_ORDERS{% endtrans %}</a></li>
-                        <li><a href="#desktop-simple-stats-customers">{% trans %}TXT_CLIENTS{% endtrans %}</a></li>
-                    </ul>
-                </div>
+            <div class="column wide" style="width: 850px;">
                 <div class="box">
-                    <div class="field-text" >
-                        <label for="desktop-simple-stats-orders-range">{% trans %}TXT_PERIOD_LIST{% endtrans %}:</label>
-					<span class="field" style="width: 150px;">
-						<input type="text" id="period" class="period" style="width:142px" value="{{ from }} - {{ to }}" />
-					</span>
-
-
-                    </div>
-                    <div id="desktop-simple-stats-sales">
-                        <div style="margin-bottom:10px; margin-top:5px;">
-                            Sprzedaż w tym zakresie: <strong><span id="desktop-simple-stats-sales-val"></span> zł</strong>
-                        </div>
-                        <div class="chart" id="desktop-simple-stats-sales-chart"></div>
-                    </div>
-                    <div id="desktop-simple-stats-orders">
-                        <div style="margin-bottom:10px; margin-top:5px;">
-                            Zamówienia w tym zakresie: <strong><span id="desktop-simple-stats-orders-val"></span></strong>
-                        </div>
-                        <div class="chart" id="desktop-simple-stats-orders-chart"></div>
-                    </div>
-                    <div id="desktop-simple-stats-customers">
-                        <div style="margin-bottom:10px; margin-top:5px;">
-                            Klienci w tym zakresie: <strong><span id="desktop-simple-stats-clients-val"></span></strong>
-                        </div>
-                        <div class="chart" id="desktop-simple-stats-customers-chart"></div>
+                    <div>
+                        <div class="chart sales-chart"></div>
                     </div>
                 </div>
             </div>
@@ -53,7 +24,7 @@
         <div class="layout-four-columns">
             <div class="column">
                 <div class="box simple">
-                    <h3><img src="{{ DESIGNPATH }}_images_panel/icons/blocks/recent-orders.png" alt=""/>{% trans %}TXT_LAST_OPINIONS{% endtrans %}</h3>
+                    <h3>{% trans %}TXT_LAST_OPINIONS{% endtrans %}</h3>
                     <table cellspacing="0" class="full-size">
                         <thead>
                         <tr>
@@ -65,13 +36,13 @@
 
                         </tbody>
                     </table>
-                    <p class="more"><a class="btnMore" href="{{ URL }}productrange"><span>{% trans %}TXT_SHOW_ALL{% endtrans %}</span></a></p>
+                    <p class="more"><a class="btnMore" href="productrange"><span>{% trans %}TXT_SHOW_ALL{% endtrans %}</span></a></p>
                 </div>
             </div>
 
             <div class="column">
                 <div class="box simple">
-                    <h3><img src="{{ DESIGNPATH }}_images_panel/icons/blocks/recent-orders.png" alt=""/>{% trans %}TXT_LAST_ORDERS{% endtrans %}</h3>
+                    <h3>{% trans %}TXT_LAST_ORDERS{% endtrans %}</h3>
                     <table cellspacing="0" class="full-size">
                         <thead>
                         <tr>
@@ -83,14 +54,14 @@
 
                         </tbody>
                     </table>
-                    <p class="more"><a class="btnMore" href="{{ URL }}order"><span>{% trans %}TXT_SHOW_ALL{% endtrans %}</span></a></p>
+                    <p class="more"><a class="btnMore" href="order"><span>{% trans %}TXT_SHOW_ALL{% endtrans %}</span></a></p>
                 </div>
             </div>
 
             <!-- begin: New customers -->
             <div class="column">
                 <div class="box simple">
-                    <h3><img src="{{ DESIGNPATH }}_images_panel/icons/blocks/new-customers.png" alt=""/>{% trans %}TXT_NEW_CUSTOMERS{% endtrans %}</h3>
+                    <h3>{% trans %}TXT_NEW_CUSTOMERS{% endtrans %}</h3>
                     <table cellspacing="0" class="full-size">
                         <thead>
                         <tr>
@@ -102,7 +73,7 @@
 
                         </tbody>
                     </table>
-                    <p class="more"><a class="btnMore" href="{{ URL }}client"><span>{% trans %}TXT_SHOW_ALL{% endtrans %}</span></a></p>
+                    <p class="more"><a class="btnMore" href="client"><span>{% trans %}TXT_SHOW_ALL{% endtrans %}</span></a></p>
                 </div>
             </div>
             <!-- end: New customers -->
@@ -110,7 +81,7 @@
             <!-- begin: Bestsellers -->
             <div class="column">
                 <div class="box simple">
-                    <h3><img src="{{ DESIGNPATH }}_images_panel/icons/blocks/bestsellers.png" alt=""/>{% trans %}TXT_BESTSELLERS{% endtrans %}</h3>
+                    <h3>{% trans %}TXT_BESTSELLERS{% endtrans %}</h3>
                     <table cellspacing="0" class="full-size">
                         <thead>
                         <tr>
@@ -122,7 +93,7 @@
 
                         </tbody>
                     </table>
-                    <p class="more"><a class="btnMore" href="{{ URL }}statsproducts"><span>{% trans %}TXT_SHOW_RAPORTS{% endtrans %}</span></a></p>
+                    <p class="more"><a class="btnMore" href="statsproducts"><span>{% trans %}TXT_SHOW_RAPORTS{% endtrans %}</span></a></p>
                 </div>
             </div>
             <!-- end: Bestsellers -->
@@ -130,7 +101,7 @@
             <!-- begin: Most popular -->
             <div class="column">
                 <div class="box simple">
-                    <h3><img src="{{ DESIGNPATH }}_images_panel/icons/blocks/users-online.png" alt=""/>{% trans %}TXT_CLIENT_ONLINE{% endtrans %}</h3>
+                    <h3>{% trans %}TXT_CLIENT_ONLINE{% endtrans %}</h3>
                     <table cellspacing="0" class="full-size">
                         <thead>
                         <tr>
@@ -142,7 +113,7 @@
 
                         </tbody>
                     </table>
-                    <p class="more"><a class="btnMore" href="{{ URL }}spy"><span>{% trans %}TXT_SHOW_RAPORTS{% endtrans %}</span></a></p>
+                    <p class="more"><a class="btnMore" href="spy"><span>{% trans %}TXT_SHOW_RAPORTS{% endtrans %}</span></a></p>
                 </div>
             </div>
             <!-- end: Most popular -->
@@ -150,4 +121,26 @@
         </div>
         <!-- end: Four columns -->
     </div>
+    <script>
+        var defaultOptions = {
+            currency: '{{ currency }} '
+        };
+
+        new Chartist.Line('.sales-chart', {
+            fullWidth: true,
+            labels: {{ salesChart.labels|json_encode|raw }},
+            series: [
+                {{ salesChart.values|json_encode|raw }}
+            ]
+        }, {
+            plugins: [
+                Chartist.plugins.tooltip(defaultOptions)
+            ],
+            low: 0,
+            showArea: true,
+            lineSmooth: Chartist.Interpolation.simple({
+                divisor: 2
+            })
+        });
+    </script>
 {% endblock %}

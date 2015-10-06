@@ -28,25 +28,27 @@ class OrderClientDiscountCollector extends AbstractDataCollector
      */
     public function visitOrder(OrderInterface $order)
     {
-        $orderTotal = new OrderTotal();
-        $discount   = $this->getDiscountForClient($order->getClient());
+        if (null === $order->getCoupon()) {
+            $orderTotal = new OrderTotal();
+            $discount   = $this->getDiscountForClient($order->getClient());
 
-        if ($discount > 0) {
-            $productTotal = $order->getProductTotal();
+            if ($discount > 0) {
+                $productTotal = $order->getProductTotal();
 
-            $orderTotal->setCurrency($order->getCurrency());
-            $orderTotal->setGrossAmount($productTotal->getGrossAmount() * $discount);
-            $orderTotal->setNetAmount($productTotal->getNetAmount() * $discount);
-            $orderTotal->setTaxAmount($productTotal->getTaxAmount() * $discount);
+                $orderTotal->setCurrency($order->getCurrency());
+                $orderTotal->setGrossAmount($productTotal->getGrossAmount() * $discount);
+                $orderTotal->setNetAmount($productTotal->getNetAmount() * $discount);
+                $orderTotal->setTaxAmount($productTotal->getTaxAmount() * $discount);
 
-            $orderTotalDetail = $this->initResource();
-            $orderTotalDetail->setOrderTotal($orderTotal);
-            $orderTotalDetail->setModifierType('%');
-            $orderTotalDetail->setModifierValue($discount);
-            $orderTotalDetail->setOrder($order);
-            $orderTotalDetail->setSubtraction(true);
+                $orderTotalDetail = $this->initResource();
+                $orderTotalDetail->setOrderTotal($orderTotal);
+                $orderTotalDetail->setModifierType('%');
+                $orderTotalDetail->setModifierValue($discount);
+                $orderTotalDetail->setOrder($order);
+                $orderTotalDetail->setSubtraction(true);
 
-            $order->addTotal($orderTotalDetail);
+                $order->addTotal($orderTotalDetail);
+            }
         }
     }
 

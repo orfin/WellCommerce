@@ -35,7 +35,7 @@ WellCommerce\Bundle\OrderBundle\Entity\Order:
             type: string
             length: 16
             nullable: false
-            dcolumn: currency
+            column: currency
         comment:
             type: string
             length: 1000

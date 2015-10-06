@@ -11,9 +11,16 @@
                 <argument type="service" id="service_container"/>
             </call>
         </service>
-        
+
         <service id="sales_report.controller.admin" class="WellCommerce\Bundle\ReportBundle\Controller\Admin\SalesReportController">
             <argument type="service" id="sales_report.manager.admin"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="sales_report.provider" class="WellCommerce\Bundle\ReportBundle\Provider\SalesReportProvider">
+            <argument type="service" id="order.repository"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

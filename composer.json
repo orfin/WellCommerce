@@ -58,7 +58,8 @@
         "knplabs/packagist-api": "1.*@dev",
         "mcuelenaere/composer-revision-plugin": "0.1.*",
         "hoa/websocket": "2.*@dev",
-        "devristo/phpws": "dev-master"
+        "devristo/phpws": "dev-master",
+        "nesbot/carbon": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",

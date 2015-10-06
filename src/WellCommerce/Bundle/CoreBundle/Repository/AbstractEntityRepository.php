@@ -76,7 +76,7 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
      *
      * @return \Doctrine\ORM\QueryBuilder
      */
-    protected function getQueryBuilder()
+    public function getQueryBuilder()
     {
         return $this->createQueryBuilder($this->getAlias());
     }

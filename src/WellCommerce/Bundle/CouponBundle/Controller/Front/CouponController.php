@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CouponBundle\Controller\Front;
 
+use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CouponBundle\Entity\CouponInterface;
 use WellCommerce\Bundle\CouponBundle\Exception\CouponCodeNotFoundException;
@@ -30,7 +31,10 @@ class CouponController extends AbstractFrontController
      */
     protected $manager;
 
-    public function addAction()
+    /**
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
+    public function addAction(Request $request)
     {
         $code = $this->getRequestHelper()->getRequestAttribute('code');
 
@@ -50,6 +54,9 @@ class CouponController extends AbstractFrontController
         return $this->jsonResponse($result);
     }
 
+    /**
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
     public function deleteAction()
     {
         try {

@@ -67,6 +67,13 @@ interface RepositoryInterface extends DataSetAwareRepositoryInterface
     public function findBy(array $criteria);
 
     /**
+     * Creates QueryBuilder instance
+     *
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function getQueryBuilder();
+
+    /**
      * @return \Doctrine\ORM\Mapping\ClassMetadata
      */
     public function getMetaData();

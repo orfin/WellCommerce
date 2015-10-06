@@ -68,8 +68,7 @@
             </call>
         </service>
 
-        <service id="order.repository" class="WellCommerce\Bundle\OrderBundle\Repository\OrderRepository" factory-service="doctrine.orm.entity_manager"
-                 factory-method="getRepository">
+        <service id="order.repository" class="WellCommerce\Bundle\OrderBundle\Repository\OrderRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument>WellCommerceOrderBundle:Order</argument>
         </service>
 
