@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<items>
+    <item>
+        <identifier>integration</identifier>
+        <css_class>integration</css_class>
+        <name>admin_menu.label.integration</name>
+        <parent>null</parent>
+        <hierarchy>90</hierarchy>
+    </item>
+
+    <item>
+        <identifier>smuggler</identifier>
+        <name>admin_menu.label.smuggler</name>
+        <route_name>admin.package.index</route_name>
+        <parent>integration</parent>
+        <hierarchy>10</hierarchy>
+    </item>
+
+    <item>
+        <identifier>package</identifier>
+        <name>admin_menu.label.package</name>
+        <route_name>admin.package.index</route_name>
+        <parent>smuggler</parent>
+        <hierarchy>10</hierarchy>
+    </item>
+
+    <item>
+        <identifier>channel</identifier>
+        <name>admin_menu.label.channel</name>
+        <route_name>admin.channel.index</route_name>
+        <parent>smuggler</parent>
+        <hierarchy>20</hierarchy>
+    </item>
+</items>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<items>
+    <item>
+        <identifier>catalog</identifier>
+        <css_class>catalog</css_class>
+        <name>admin_menu.label.catalog</name>
+        <parent>null</parent>
+        <hierarchy>20</hierarchy>
+    </item>
+
+    <item>
+        <identifier>product</identifier>
+        <name>admin_menu.label.product</name>
+        <route_name>admin.product.index</route_name>
+        <parent>catalog</parent>
+        <hierarchy>10</hierarchy>
+    </item>
+
+    <item>
+        <identifier>category</identifier>
+        <name>admin_menu.label.category</name>
+        <route_name>admin.category.index</route_name>
+        <parent>catalog</parent>
+        <hierarchy>20</hierarchy>
+    </item>
+
+    <item>
+        <identifier>producer</identifier>
+        <name>admin_menu.label.producer</name>
+        <route_name>admin.producer.index</route_name>
+        <parent>catalog</parent>
+        <hierarchy>30</hierarchy>
+    </item>
+
+    <item>
+        <identifier>deliverer</identifier>
+        <name>admin_menu.label.deliverer</name>
+        <route_name>admin.deliverer.index</route_name>
+        <parent>catalog</parent>
+        <hierarchy>40</hierarchy>
+    </item>
+
+    <item>
+        <identifier>availability</identifier>
+        <name>admin_menu.label.availability</name>
+        <route_name>admin.availability.index</route_name>
+        <parent>catalog</parent>
+        <hierarchy>50</hierarchy>
+    </item>
+
+    <item>
+        <identifier>attribute_group</identifier>
+        <name>admin_menu.label.attribute_group</name>
+        <route_name>admin.attribute_group.index</route_name>
+        <parent>catalog</parent>
+        <hierarchy>60</hierarchy>
+    </item>
+
+
+    <item>
+        <identifier>product_status</identifier>
+        <name>admin_menu.label.product_status</name>
+        <route_name>admin.product_status.index</route_name>
+        <parent>catalog</parent>
+        <hierarchy>70</hierarchy>
+    </item>
+</items>

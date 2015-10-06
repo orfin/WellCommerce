@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<items>
+    <item>
+        <identifier>promotions</identifier>
+        <css_class>promotions</css_class>
+        <name>admin_menu.label.promotions</name>
+        <parent>null</parent>
+        <hierarchy>30</hierarchy>
+    </item>
+
+    <item>
+        <identifier>coupon</identifier>
+        <name>admin_menu.label.coupon</name>
+        <route_name>admin.coupon.index</route_name>
+        <parent>promotions</parent>
+        <hierarchy>10</hierarchy>
+    </item>
+</items>

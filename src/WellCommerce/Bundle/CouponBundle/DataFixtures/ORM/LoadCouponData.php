@@ -28,15 +28,6 @@ class LoadCouponData extends AbstractDataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $fakerGenerator = $this->getFakerGenerator();
 
-        $deliverer = new Coupon();
-        $name      = $fakerGenerator->company;
-        $deliverer->translate('en')->setName($name);
-        $deliverer->mergeNewTranslations();
-        $manager->persist($deliverer);
-        $manager->flush();
-
-        $this->setReference('deliverer', $deliverer);
     }
 }

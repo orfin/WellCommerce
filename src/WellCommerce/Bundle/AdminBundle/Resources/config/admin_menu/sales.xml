@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<items>
+    <item>
+        <identifier>sales</identifier>
+        <css_class>sales</css_class>
+        <name>admin_menu.label.sales</name>
+        <parent>null</parent>
+        <hierarchy>40</hierarchy>
+    </item>
+
+    <item>
+        <identifier>order</identifier>
+        <name>admin_menu.label.order</name>
+        <route_name>admin.order.index</route_name>
+        <parent>sales</parent>
+        <hierarchy>10</hierarchy>
+    </item>
+
+    <item>
+        <identifier>order_status</identifier>
+        <name>admin_menu.label.order_status</name>
+        <route_name>admin.order_status.index</route_name>
+        <parent>sales</parent>
+        <hierarchy>20</hierarchy>
+    </item>
+
+    <item>
+        <identifier>order_status_group</identifier>
+        <name>admin_menu.label.order_status_group</name>
+        <route_name>admin.order_status_group.index</route_name>
+        <parent>sales</parent>
+        <hierarchy>30</hierarchy>
+    </item>
+</items>

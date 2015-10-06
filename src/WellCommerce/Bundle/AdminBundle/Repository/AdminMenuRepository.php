@@ -10,22 +10,16 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AdminBundle\MenuBuilder\Tests;
+namespace WellCommerce\Bundle\AdminBundle\Repository;
 
-use WellCommerce\Bundle\CoreBundle\Test\AbstractTestCase;
+use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 
 /**
- * Class AdminMenuItemTest
+ * Class AdminMenuRepository
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AdminMenuItemTest extends AbstractTestCase
+class AdminMenuRepository extends AbstractEntityRepository implements AdminMenuRepositoryInterface
 {
-    public function testItemIsConfigurable()
-    {
-    }
 
-    public function testItemIsImmutableAfterInitialization()
-    {
-    }
 }

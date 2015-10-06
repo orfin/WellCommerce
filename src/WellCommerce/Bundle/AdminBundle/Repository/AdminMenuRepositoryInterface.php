@@ -10,19 +10,16 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AdminBundle\MenuBuilder\Tests;
+namespace WellCommerce\Bundle\AdminBundle\Repository;
 
-use Symfony\Bundle\FrameworkBundle\Tests\Functional\WebTestCase;
-use WellCommerce\Bundle\CoreBundle\Test\AbstractTestCase;
+use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 
 /**
- * Class AdminMenuBuilderTest
+ * Interface AdminMenuRepositoryInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AdminMenuBuilderTest extends WebTestCase
+interface AdminMenuRepositoryInterface extends RepositoryInterface
 {
-    public function testAddItem()
-    {
-    }
+
 }

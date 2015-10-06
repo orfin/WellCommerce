@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<items>
+    <item>
+        <identifier>configuration</identifier>
+        <css_class>configuration</css_class>
+        <name>admin_menu.label.configuration</name>
+        <parent>null</parent>
+        <hierarchy>100</hierarchy>
+    </item>
+
+    <item>
+        <identifier>localization</identifier>
+        <css_class>localization</css_class>
+        <name>admin_menu.label.localization</name>
+        <parent>configuration</parent>
+        <hierarchy>10</hierarchy>
+    </item>
+
+    <item>
+        <identifier>locale</identifier>
+        <name>admin_menu.label.locale</name>
+        <route_name>admin.locale.index</route_name>
+        <parent>localization</parent>
+        <hierarchy>10</hierarchy>
+    </item>
+
+    <item>
+        <identifier>currency</identifier>
+        <name>admin_menu.label.currency</name>
+        <route_name>admin.currency.index</route_name>
+        <parent>localization</parent>
+        <hierarchy>20</hierarchy>
+    </item>
+
+    <item>
+        <identifier>dictionary</identifier>
+        <name>admin_menu.label.dictionary</name>
+        <route_name>admin.dictionary.index</route_name>
+        <parent>localization</parent>
+        <hierarchy>30</hierarchy>
+    </item>
+
+    <item>
+        <identifier>multi_store</identifier>
+        <css_class>store_management</css_class>
+        <name>admin_menu.label.multi_store</name>
+        <parent>configuration</parent>
+        <hierarchy>20</hierarchy>
+    </item>
+
+    <item>
+        <identifier>company</identifier>
+        <name>admin_menu.label.company</name>
+        <route_name>admin.company.index</route_name>
+        <parent>multi_store</parent>
+        <hierarchy>10</hierarchy>
+    </item>
+
+    <item>
+        <identifier>shop</identifier>
+        <name>admin_menu.label.shop</name>
+        <route_name>admin.shop.index</route_name>
+        <parent>multi_store</parent>
+        <hierarchy>20</hierarchy>
+    </item>
+
+    <item>
+        <identifier>user_management</identifier>
+        <name>admin_menu.label.user_management</name>
+        <parent>configuration</parent>
+        <hierarchy>30</hierarchy>
+    </item>
+
+    <item>
+        <identifier>user</identifier>
+        <name>admin_menu.label.user</name>
+        <route_name>admin.user.index</route_name>
+        <parent>user_management</parent>
+        <hierarchy>10</hierarchy>
+    </item>
+
+    <item>
+        <identifier>payment_method</identifier>
+        <name>admin_menu.label.payment_method</name>
+        <route_name>admin.payment_method.index</route_name>
+        <parent>configuration</parent>
+        <hierarchy>30</hierarchy>
+    </item>
+
+    <item>
+        <identifier>shipping_method</identifier>
+        <name>admin_menu.label.shipping_method</name>
+        <route_name>admin.shipping_method.index</route_name>
+        <parent>configuration</parent>
+        <hierarchy>40</hierarchy>
+    </item>
+
+    <item>
+        <identifier>routing</identifier>
+        <name>admin_menu.label.routing</name>
+        <route_name>admin.routing.index</route_name>
+        <parent>configuration</parent>
+        <hierarchy>50</hierarchy>
+    </item>
+
+    <item>
+        <identifier>tax</identifier>
+        <name>admin_menu.label.tax</name>
+        <route_name>admin.tax.index</route_name>
+        <parent>configuration</parent>
+        <hierarchy>60</hierarchy>
+    </item>
+
+    <item>
+        <identifier>unit</identifier>
+        <name>admin_menu.label.unit</name>
+        <route_name>admin.unit.index</route_name>
+        <parent>configuration</parent>
+        <hierarchy>70</hierarchy>
+    </item>
+</items>

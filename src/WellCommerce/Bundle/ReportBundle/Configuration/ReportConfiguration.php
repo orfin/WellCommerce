@@ -55,8 +55,13 @@ class ReportConfiguration
      * @param string       $groupByDateFormat
      * @param string       $datePresentationFormat
      */
-    public function __construct(DateTime $startDate, DateTime $endDate, DateInterval $interval, $groupByDateFormat, $datePresentationFormat)
-    {
+    public function __construct(
+        DateTime $startDate,
+        DateTime $endDate,
+        DateInterval $interval,
+        $groupByDateFormat,
+        $datePresentationFormat
+    ) {
         $this->startDate              = $startDate;
         $this->endDate                = $endDate;
         $this->interval               = $interval;

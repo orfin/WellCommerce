@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<items>
+    <item>
+        <identifier>dashboard</identifier>
+        <name>admin_menu.label.dashboard</name>
+        <route_name>admin.dashboard.index</route_name>
+        <parent>null</parent>
+        <hierarchy>10</hierarchy>
+    </item>
+</items>
