@@ -39,7 +39,10 @@ class DashboardController extends AbstractController
      */
     protected function getSalesChart()
     {
-        $configuration = new ReportConfiguration(Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth(), new DateInterval('P1D'), 'd', 'Y-m-d');
+        $startDate     = Carbon::now()->startOfMonth();
+        $endDate       = Carbon::now()->endOfMonth();
+        $interval      = new DateInterval('P1D');
+        $configuration = new ReportConfiguration($startDate, $endDate, $interval, 'd', 'Y-m-d');
         $report        = $this->get('sales_report.provider')->getReport($configuration);
 
         return new LineChartContext($report, $configuration);
