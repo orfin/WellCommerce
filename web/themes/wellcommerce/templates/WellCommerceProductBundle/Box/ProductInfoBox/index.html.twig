@@ -75,7 +75,9 @@
 
                 <div class="available text-center">
                     {% trans %}product.label.availability{% endtrans %}: <span class="grn">{{ product.availability.translate().name }}</span><br />
-                    {% trans %}product.label.shipping_cost{% endtrans %}: {{ format_price(shippingCosts.first.cost.grossAmount, shippingCosts.first.cost.currency) }}
+                    {% if shippingCosts.count > 0 %}
+                        {% trans %}product.label.shipping_cost{% endtrans %}: {{ format_price(shippingCosts.first.cost.grossAmount, shippingCosts.first.cost.currency) }}
+                    {% endif %}
                 </div>
                 {% include 'WellCommerceProductBundle:Front/Common:add_cart_form.html.twig' %}
             </div>

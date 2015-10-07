@@ -24,6 +24,5 @@ class SalesReportController extends AbstractAdminController
 {
     public function index()
     {
-        $configuration = new ReportConfiguration();
     }
 }

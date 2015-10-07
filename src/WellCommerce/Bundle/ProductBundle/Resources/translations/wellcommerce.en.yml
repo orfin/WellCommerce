@@ -1,0 +1,29 @@
+product:
+    admin_menu: Products
+    comment:
+        enabled: Enable product's visibility
+    label:
+        id: ID
+        name: Name
+        slug: Slug
+        enabled: Enabled
+        sku: SKU
+        categories: Categories
+        gross_amount: Gross price
+        stock: Stock
+        weight: Weight
+        producer: Producer
+        manufactured_by: by
+    heading:
+        recommendations: 'You might also like'
+    options:
+        order_by:
+            name: Name
+            price: Price
+        order_dir:
+            ascending: ascending
+            descending: descending
+        limit:  Show per page
+        view_type:
+            list: List view
+            grid: Grid view

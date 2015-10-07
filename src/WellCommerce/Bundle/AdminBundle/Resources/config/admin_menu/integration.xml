@@ -3,7 +3,7 @@
     <item>
         <identifier>integration</identifier>
         <css_class>integration</css_class>
-        <name>admin_menu.label.integration</name>
+        <name>admin.menu.integration</name>
         <route_name/>
         <parent/>
         <hierarchy>90</hierarchy>
@@ -12,7 +12,7 @@
     <item>
         <identifier>smuggler</identifier>
         <css_class/>
-        <name>admin_menu.label.smuggler</name>
+        <name>admin.menu.smuggler</name>
         <route_name>admin.package.index</route_name>
         <parent>integration</parent>
         <hierarchy>10</hierarchy>
@@ -21,7 +21,7 @@
     <item>
         <identifier>package</identifier>
         <css_class/>
-        <name>admin_menu.label.package</name>
+        <name>admin.menu.package</name>
         <route_name>admin.package.index</route_name>
         <parent>smuggler</parent>
         <hierarchy>10</hierarchy>
@@ -30,7 +30,7 @@
     <item>
         <identifier>channel</identifier>
         <css_class/>
-        <name>admin_menu.label.channel</name>
+        <name>admin.menu.channel</name>
         <route_name>admin.channel.index</route_name>
         <parent>smuggler</parent>
         <hierarchy>20</hierarchy>

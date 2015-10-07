@@ -27,8 +27,8 @@ class AvailabilityFormBuilder extends AbstractFormBuilder
     public function buildForm(FormInterface $form)
     {
         $requiredData = $form->addChild($this->getElement('nested_fieldset', [
-            'name'  => 'required_data',
-            'label' => $this->trans('form.required_data.label')
+            'name'  => 'general_settings',
+            'label' => $this->trans('admin.form.fieldset.required_data')
         ]));
 
         $languageData = $requiredData->addChild($this->getElement('language_fieldset', [

@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\AdminBundle\Controller\Admin;
 use Carbon\Carbon;
 use DateInterval;
 use WellCommerce\Bundle\CoreBundle\Controller\AbstractController;
+use WellCommerce\Bundle\ReportBundle\Calculator\SalesSummaryCalculator;
 use WellCommerce\Bundle\ReportBundle\Configuration\ReportConfiguration;
 use WellCommerce\Bundle\ReportBundle\Context\LineChartContext;
 
@@ -27,9 +28,12 @@ class DashboardController extends AbstractController
 {
     public function indexAction()
     {
+        $salesSummary = $this->getSalesSummary();
+
         return $this->displayTemplate('index', [
-                'salesChart' => $this->getSalesChart(),
-                'currency'   => $this->getRequestHelper()->getCurrentCurrency()
+                'salesChart'   => $this->getSalesChart(),
+                'salesSummary' => $salesSummary->getSummary(),
+                'currency'     => $this->getRequestHelper()->getCurrentCurrency()
             ]
         );
     }
@@ -46,5 +50,16 @@ class DashboardController extends AbstractController
         $report        = $this->get('sales_report.provider')->getReport($configuration);
 
         return new LineChartContext($report, $configuration);
+    }
+
+    protected function getSalesSummary()
+    {
+        $startDate     = Carbon::now()->startOfMonth();
+        $endDate       = Carbon::now()->endOfMonth();
+        $interval      = new DateInterval('P1D');
+        $configuration = new ReportConfiguration($startDate, $endDate, $interval, 'Y-m-d', 'Y-m-d');
+        $report        = $this->get('sales_report.provider')->getReport($configuration);
+
+        return new SalesSummaryCalculator($report, $configuration);
     }
 }

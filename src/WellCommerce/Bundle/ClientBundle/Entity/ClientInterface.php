@@ -24,7 +24,9 @@ use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ClientInterface extends \Serializable, UserInterface, EquatableInterface, TimestampableInterface, BlameableInterface, ClientGroupAwareInterface
+interface ClientInterface
+    extends \Serializable, UserInterface, EquatableInterface, TimestampableInterface, BlameableInterface,
+            ClientGroupAwareInterface
 {
     /**
      * @return int
@@ -130,4 +132,9 @@ interface ClientInterface extends \Serializable, UserInterface, EquatableInterfa
      * @param bool $newsletterAccepted
      */
     public function setNewsletterAccepted($newsletterAccepted);
+
+    /**
+     * @return Collection
+     */
+    public function getOrders();
 }

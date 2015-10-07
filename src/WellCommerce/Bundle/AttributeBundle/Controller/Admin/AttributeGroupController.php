@@ -52,6 +52,10 @@ class AttributeGroupController extends AbstractAdminController
      */
     public function addAction(Request $request)
     {
+        if (!$request->isXmlHttpRequest()) {
+            return $this->redirectToAction('index');
+        }
+
         $name     = $request->request->get('name');
         $resource = $this->manager->createGroup($name);
         
@@ -71,7 +75,9 @@ class AttributeGroupController extends AbstractAdminController
         }
 
         $groups = $this->manager->getGroupsCollection();
-        $form   = $this->manager->getForm($resource, ['class' => 'attributeGroupEditor']);
+        $form   = $this->manager->getForm($resource, [
+            'class' => 'attributeGroupEditor'
+        ]);
         
         if ($form->handleRequest()->isValid()) {
             $this->manager->updateResource($resource);

@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\ReportBundle\Data;
 
-use WellCommerce\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Class ReportRowCollection
@@ -21,19 +21,5 @@ use WellCommerce\Common\Collections\ArrayCollection;
  */
 class ReportRowCollection extends ArrayCollection
 {
-    /**
-     * @param ReportRow $reportRow
-     */
-    public function add(ReportRow $reportRow)
-    {
-        $this->items[] = $reportRow;
-    }
 
-    /**
-     * @return ReportRow[]
-     */
-    public function all()
-    {
-        return $this->items;
-    }
 }

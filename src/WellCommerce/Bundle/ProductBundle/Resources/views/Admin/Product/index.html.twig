@@ -1,9 +1,10 @@
 {% extends 'WellCommerceAdminBundle:Admin:layout.html.twig' %}
+{% trans_default_domain "wellcommerce" %}
 {% block content %}
-    <h2>{% trans %}Products{% endtrans %}</h2>
+    <h2>{% trans %}product.heading.index{% endtrans %}</h2>
     <ul class="possibilities">
         <li><a href="{{ path('admin.product.add') }}" class="button"
-               title="{% trans %}Add{% endtrans %}"><span>{% trans %}Add{% endtrans %}</span></a></li>
+               title="{% trans %}admin.button.add{% endtrans %}"><span>{% trans %}admin.button.add{% endtrans %}</span></a></li>
     </ul>
 
     <script>
@@ -14,7 +15,7 @@
         };
 
         var action_duplicateProduct = new GF_Action({
-            caption: '{% trans %}product.button.duplicate{% endtrans %}',
+            caption: Translator.trans('product.button.duplicate', {}, 'wellcommerce'),
             action: duplicateProduct,
             img: '{{ asset('bundles/wellcommerceadmin/images/datagrid/duplicate-row.png') }}',
         });

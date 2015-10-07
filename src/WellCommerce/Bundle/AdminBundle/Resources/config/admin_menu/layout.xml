@@ -3,7 +3,7 @@
     <item>
         <identifier>layout</identifier>
         <css_class>layout</css_class>
-        <name>admin_menu.label.layout</name>
+        <name>admin.menu.layout</name>
         <route_name/>
         <parent/>
         <hierarchy>80</hierarchy>
@@ -12,7 +12,7 @@
     <item>
         <identifier>layout_box</identifier>
         <css_class/>
-        <name>admin_menu.label.layout_box</name>
+        <name>admin.menu.layout_box</name>
         <route_name>admin.layout_box.index</route_name>
         <parent>layout</parent>
         <hierarchy>10</hierarchy>
@@ -21,7 +21,7 @@
     <item>
         <identifier>theme</identifier>
         <css_class/>
-        <name>admin_menu.label.theme</name>
+        <name>admin.menu.theme</name>
         <route_name>admin.theme.index</route_name>
         <parent>layout</parent>
         <hierarchy>20</hierarchy>

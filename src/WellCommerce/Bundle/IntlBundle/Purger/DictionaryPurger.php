@@ -22,6 +22,6 @@ class DictionaryPurger extends AbstractPurger implements PurgerInterface
      */
     public function purge()
     {
-        return $this->helper->truncateTable('WellCommerce\Bundle\IntlBundle\Entity\Dictionary');
+        return $this->getDoctrineHelper()->truncateTable('WellCommerce\Bundle\IntlBundle\Entity\Dictionary');
     }
 }

@@ -1,15 +1,15 @@
 {% extends 'WellCommerceAdminBundle:Admin:layout.html.twig' %}
+{% trans_default_domain "wellcommerce" %}
 {% block content %}
     <h2>{% trans %}Dashboard{% endtrans %}</h2>
 
     <div class="block" id="desktop">
         <div class="simple-stats layout-two-columns">
-            <h2>{% trans %}sales_report.heading.sales{% endtrans %}</h2>
             <div class="column narrow">
                 <dl class="stats-summary">
-                    <dt>{% trans %}sales_report.label.sales{% endtrans %} ({% trans %}sales_report.label.today{% endtrans %} / {% trans %}sales_report.label.current_month{% endtrans %})</dt><dd> {% trans %}TXT_CURRENCY{% endtrans %} / {% trans %}TXT_CURRENCY{% endtrans %}</dd>
-                    <dt>{% trans %}sales_report.label.orders{% endtrans %} ({% trans %}sales_report.label.today{% endtrans %} / {% trans %}sales_report.label.current_month{% endtrans %})</dt><dd> / </dd>
-                    <dt>{% trans %}sales_report.label.clients{% endtrans %} ({% trans %}sales_report.label.today{% endtrans %} / {% trans %}sales_report.label.current_month{% endtrans %})</dt><dd> /  </dd>
+                    <dt>{% trans %}sales_report.label.summary_sales{% endtrans %} ({% trans %}sales_report.label.today{% endtrans %} / {% trans %}sales_report.label.current_month{% endtrans %})</dt><dd> {{ format_price(salesSummary.currentValue) }} / {{ format_price(salesSummary.totalValue) }}</dd>
+                    <dt>{% trans %}sales_report.label.summary_orders{% endtrans %} ({% trans %}sales_report.label.today{% endtrans %} / {% trans %}sales_report.label.current_month{% endtrans %})</dt><dd> {{ salesSummary.currentCount }} / {{ salesSummary.totalCount }}</dd>
+                    <dt>{% trans %}sales_report.label.summary_clients{% endtrans %} ({% trans %}sales_report.label.today{% endtrans %} / {% trans %}sales_report.label.current_month{% endtrans %})</dt><dd> /  </dd>
                 </dl>
             </div>
             <div class="column wide" style="width: 850px;">
@@ -128,6 +128,7 @@
 
         new Chartist.Line('.sales-chart', {
             fullWidth: true,
+            onlyInteger: true,
             labels: {{ salesChart.labels|json_encode|raw }},
             series: [
                 {{ salesChart.values|json_encode|raw }}

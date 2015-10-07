@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\ReportBundle\Context;
 
 use WellCommerce\Bundle\ReportBundle\Configuration\ReportConfiguration;
+use WellCommerce\Bundle\ReportBundle\Data\ReportRow;
 use WellCommerce\Bundle\ReportBundle\Data\ReportRowCollection;
 
 /**
@@ -53,9 +54,9 @@ class LineChartContext implements ReportContextInterface
     protected function prepareData()
     {
         $this->items = $this->prepareValues();
-        foreach ($this->collection->all() as $row) {
+        $this->collection->map(function (ReportRow $row) {
             $this->items[$row->getIdentifier()]['value'] += $row->getValue();
-        }
+        });
     }
 
     /**

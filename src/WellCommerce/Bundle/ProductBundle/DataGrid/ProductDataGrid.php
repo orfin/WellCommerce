@@ -33,7 +33,7 @@ class ProductDataGrid extends AbstractDataGrid
     {
         $collection->add(new Column([
             'id'         => 'id',
-            'caption'    => $this->trans('product.id'),
+            'caption'    => $this->trans('product.label.id'),
             'appearance' => new Appearance([
                 'width'   => 90,
                 'visible' => false,
@@ -45,7 +45,7 @@ class ProductDataGrid extends AbstractDataGrid
 
         $collection->add(new Column([
             'id'         => 'name',
-            'caption'    => $this->trans('product.name.label'),
+            'caption'    => $this->trans('product.label.name'),
             'appearance' => new Appearance([
                 'width' => 200,
             ]),
@@ -54,17 +54,17 @@ class ProductDataGrid extends AbstractDataGrid
         $collection->add(new Column([
             'id'       => 'sku',
             'editable' => true,
-            'caption'  => $this->trans('product.sku.label'),
+            'caption'  => $this->trans('product.label.sku'),
         ]));
 
         $collection->add(new Column([
-            'id'      => 'category',
-            'caption' => $this->trans('product.category.label'),
+            'id'      => 'categories',
+            'caption' => $this->trans('product.label.categories'),
         ]));
 
         $collection->add(new Column([
-            'id'       => 'sellPriceNet',
-            'caption'  => $this->trans('product.sell_price_net.label'),
+            'id'       => 'grossAmount',
+            'caption'  => $this->trans('product.label.gross_amount'),
             'editable' => true,
             'filter'   => new Filter([
                 'type' => Filter::FILTER_BETWEEN,
@@ -73,7 +73,7 @@ class ProductDataGrid extends AbstractDataGrid
 
         $collection->add(new Column([
             'id'       => 'stock',
-            'caption'  => $this->trans('product.stock.label'),
+            'caption'  => $this->trans('product.label.stock'),
             'editable' => true,
             'filter'   => new Filter([
                 'type' => Filter::FILTER_BETWEEN,
@@ -82,7 +82,7 @@ class ProductDataGrid extends AbstractDataGrid
 
         $collection->add(new Column([
             'id'       => 'weight',
-            'caption'  => $this->trans('product.weight.label'),
+            'caption'  => $this->trans('product.label.weight'),
             'editable' => true,
             'filter'   => new Filter([
                 'type' => Filter::FILTER_BETWEEN,

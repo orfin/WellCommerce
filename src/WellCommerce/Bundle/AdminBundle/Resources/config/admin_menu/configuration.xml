@@ -3,7 +3,7 @@
     <item>
         <identifier>configuration</identifier>
         <css_class>configuration</css_class>
-        <name>admin_menu.label.configuration</name>
+        <name>admin.menu.configuration</name>
         <route_name/>
         <parent/>
         <hierarchy>100</hierarchy>
@@ -12,7 +12,7 @@
     <item>
         <identifier>localization</identifier>
         <css_class/>
-        <name>admin_menu.label.localization</name>
+        <name>admin.menu.localization</name>
         <route_name/>
         <parent>configuration</parent>
         <hierarchy>10</hierarchy>
@@ -21,7 +21,7 @@
     <item>
         <identifier>locale</identifier>
         <css_class/>
-        <name>admin_menu.label.locale</name>
+        <name>admin.menu.locale</name>
         <route_name>admin.locale.index</route_name>
         <parent>localization</parent>
         <hierarchy>10</hierarchy>
@@ -30,7 +30,7 @@
     <item>
         <identifier>currency</identifier>
         <css_class/>
-        <name>admin_menu.label.currency</name>
+        <name>admin.menu.currency</name>
         <route_name>admin.currency.index</route_name>
         <parent>localization</parent>
         <hierarchy>20</hierarchy>
@@ -39,7 +39,7 @@
     <item>
         <identifier>dictionary</identifier>
         <css_class/>
-        <name>admin_menu.label.dictionary</name>
+        <name>admin.menu.dictionary</name>
         <route_name>admin.dictionary.index</route_name>
         <parent>localization</parent>
         <hierarchy>30</hierarchy>
@@ -48,7 +48,7 @@
     <item>
         <identifier>multi_store</identifier>
         <css_class>store_management</css_class>
-        <name>admin_menu.label.multi_store</name>
+        <name>admin.menu.multi_store</name>
         <route_name/>
         <parent>configuration</parent>
         <hierarchy>20</hierarchy>
@@ -57,7 +57,7 @@
     <item>
         <identifier>company</identifier>
         <css_class/>
-        <name>admin_menu.label.company</name>
+        <name>admin.menu.company</name>
         <route_name>admin.company.index</route_name>
         <parent>multi_store</parent>
         <hierarchy>10</hierarchy>
@@ -66,7 +66,7 @@
     <item>
         <identifier>shop</identifier>
         <css_class/>
-        <name>admin_menu.label.shop</name>
+        <name>admin.menu.shop</name>
         <route_name>admin.shop.index</route_name>
         <parent>multi_store</parent>
         <hierarchy>20</hierarchy>
@@ -75,7 +75,7 @@
     <item>
         <identifier>user_management</identifier>
         <css_class/>
-        <name>admin_menu.label.user_management</name>
+        <name>admin.menu.user_management</name>
         <route_name/>
         <parent>configuration</parent>
         <hierarchy>30</hierarchy>
@@ -84,7 +84,7 @@
     <item>
         <identifier>user</identifier>
         <css_class/>
-        <name>admin_menu.label.user</name>
+        <name>admin.menu.user</name>
         <route_name>admin.user.index</route_name>
         <parent>user_management</parent>
         <hierarchy>10</hierarchy>
@@ -93,7 +93,7 @@
     <item>
         <identifier>payment_method</identifier>
         <css_class/>
-        <name>admin_menu.label.payment_method</name>
+        <name>admin.menu.payment_method</name>
         <route_name>admin.payment_method.index</route_name>
         <parent>configuration</parent>
         <hierarchy>30</hierarchy>
@@ -102,7 +102,7 @@
     <item>
         <identifier>shipping_method</identifier>
         <css_class/>
-        <name>admin_menu.label.shipping_method</name>
+        <name>admin.menu.shipping_method</name>
         <route_name>admin.shipping_method.index</route_name>
         <parent>configuration</parent>
         <hierarchy>40</hierarchy>
@@ -111,7 +111,7 @@
     <item>
         <identifier>routing</identifier>
         <css_class/>
-        <name>admin_menu.label.routing</name>
+        <name>admin.menu.routing</name>
         <route_name>admin.routing.index</route_name>
         <parent>configuration</parent>
         <hierarchy>50</hierarchy>
@@ -120,7 +120,7 @@
     <item>
         <identifier>tax</identifier>
         <css_class/>
-        <name>admin_menu.label.tax</name>
+        <name>admin.menu.tax</name>
         <route_name>admin.tax.index</route_name>
         <parent>configuration</parent>
         <hierarchy>60</hierarchy>
@@ -129,7 +129,7 @@
     <item>
         <identifier>unit</identifier>
         <css_class/>
-        <name>admin_menu.label.unit</name>
+        <name>admin.menu.unit</name>
         <route_name>admin.unit.index</route_name>
         <parent>configuration</parent>
         <hierarchy>70</hierarchy>
