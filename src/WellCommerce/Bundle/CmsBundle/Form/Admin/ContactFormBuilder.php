@@ -28,84 +28,84 @@ class ContactFormBuilder extends AbstractFormBuilder
     {
         $requiredData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'requiredData',
-            'label' => $this->trans('form.required_data.label')
+            'label' => $this->trans('admin.form.label.required_data')
         ]));
 
         $requiredData->addChild($this->getElement('checkbox', [
             'name'  => 'enabled',
-            'label' => $this->trans('contact.enabled.label'),
+            'label' => $this->trans('admin.form.label.enabled'),
         ]));
 
         $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
-            'label'       => $this->trans('form.required_data.language_data.label'),
+            'label'       => $this->trans('admin.form.translations'),
             'transformer' => $this->getRepositoryTransformer('translation', $this->get('contact.repository'))
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
             'name'  => 'name',
-            'label' => $this->trans('contact.name.label'),
+            'label' => $this->trans('contact.label.name'),
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
             'name'  => 'email',
-            'label' => $this->trans('contact.email.label'),
+            'label' => $this->trans('contact.label.email'),
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
             'name'  => 'phone',
-            'label' => $this->trans('contact.phone.label'),
+            'label' => $this->trans('contact.label.phone'),
         ]));
 
         $languageData->addChild($this->getElement('text_area', [
             'name'  => 'businessHours',
-            'label' => $this->trans('contact.business_hours.label'),
+            'label' => $this->trans('contact.label.business_hours'),
         ]));
 
         $addressData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'addressData',
-            'label' => $this->trans('contact.address.label')
+            'label' => $this->trans('contact.label.address')
         ]));
 
         $languageData = $addressData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
-            'label'       => $this->trans('contact.translations.label'),
+            'label'       => $this->trans('admin.form.label.translations'),
             'transformer' => $this->getRepositoryTransformer('translation', $this->get('contact.repository'))
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
             'name'  => 'street',
-            'label' => $this->trans('contact.street.label'),
+            'label' => $this->trans('address.label.street'),
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
             'name'  => 'streetNo',
-            'label' => $this->trans('contact.street_no.label'),
+            'label' => $this->trans('address.label.street_no'),
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
             'name'  => 'flatNo',
-            'label' => $this->trans('contact.flat_no.label'),
+            'label' => $this->trans('address.label.flat_no'),
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
             'name'  => 'province',
-            'label' => $this->trans('contact.province.label'),
+            'label' => $this->trans('address.label.province'),
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
             'name'  => 'postCode',
-            'label' => $this->trans('contact.post_code.label'),
+            'label' => $this->trans('address.label.post_code'),
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
             'name'  => 'city',
-            'label' => $this->trans('contact.city.label'),
+            'label' => $this->trans('address.label.city'),
         ]));
 
         $languageData->addChild($this->getElement('select', [
             'name'    => 'country',
-            'label'   => $this->trans('contact.country.label'),
+            'label'   => $this->trans('address.label.country'),
             'options' => $this->get('country.repository')->all()
         ]));
 

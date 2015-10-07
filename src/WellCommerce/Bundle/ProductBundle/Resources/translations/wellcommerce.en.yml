@@ -1,7 +1,10 @@
 product:
-    admin_menu: Products
     comment:
         enabled: Enable product's visibility
+    heading:
+        index: Products
+        add: Add a product
+        edit: Edit a product
     label:
         id: ID
         name: Name

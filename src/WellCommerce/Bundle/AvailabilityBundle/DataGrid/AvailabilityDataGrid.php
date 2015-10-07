@@ -31,7 +31,7 @@ class AvailabilityDataGrid extends AbstractDataGrid
     {
         $collection->add(new Column([
             'id'         => 'id',
-            'caption'    => $this->trans('availability.label.id'),
+            'caption'    => $this->trans('common.label.id'),
             'appearance' => new Appearance([
                 'width'   => 90,
                 'visible' => false,
@@ -43,7 +43,7 @@ class AvailabilityDataGrid extends AbstractDataGrid
 
         $collection->add(new Column([
             'id'      => 'name',
-            'caption' => $this->trans('availability.label.name'),
+            'caption' => $this->trans('common.label.name'),
         ]));
     }
 }

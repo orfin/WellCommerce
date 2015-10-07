@@ -32,7 +32,7 @@ class ContactDataGrid extends AbstractDataGrid
     {
         $collection->add(new Column([
             'id'         => 'id',
-            'caption'    => $this->trans('contact.id.label'),
+            'caption'    => $this->trans('contact.label.id'),
             'sorting'    => new Sorting([
                 'default_order' => Sorting::SORT_DIR_DESC,
             ]),
@@ -47,7 +47,7 @@ class ContactDataGrid extends AbstractDataGrid
 
         $collection->add(new Column([
             'id'      => 'name',
-            'caption' => $this->trans('contact.name.label'),
+            'caption' => $this->trans('contact.label.name'),
         ]));
     }
 }

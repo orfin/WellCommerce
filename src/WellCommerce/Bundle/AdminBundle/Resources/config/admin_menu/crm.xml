@@ -3,7 +3,7 @@
     <item>
         <identifier>crm</identifier>
         <css_class>crm</css_class>
-        <name>admin.menu.crm</name>
+        <name>crm</name>
         <route_name>admin.client.index</route_name>
         <parent/>
         <hierarchy>60</hierarchy>
@@ -12,7 +12,7 @@
     <item>
         <identifier>client</identifier>
         <css_class/>
-        <name>admin.menu.client</name>
+        <name>client</name>
         <route_name>admin.client.index</route_name>
         <parent>crm</parent>
         <hierarchy>10</hierarchy>
@@ -21,7 +21,7 @@
     <item>
         <identifier>client_group</identifier>
         <css_class/>
-        <name>admin.menu.client_group</name>
+        <name>client_group</name>
         <route_name>admin.client_group.index</route_name>
         <parent>crm</parent>
         <hierarchy>20</hierarchy>

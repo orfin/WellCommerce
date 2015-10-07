@@ -1,0 +1,12 @@
+user:
+    heading:
+        index: Users
+        add: Add user
+        edit: Edit user
+    label:
+        id: ID
+        username: Username
+        email: E-mail
+        first_name: First name
+        last_name: Last name
+        enabled: Enabled

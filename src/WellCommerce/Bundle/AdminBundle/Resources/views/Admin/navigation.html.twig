@@ -1,21 +1,22 @@
+{% trans_default_domain "admin_menu" %}
 <ul id="navigation">
     {% for firstLevel in menu %}
         {% if firstLevel.children is empty %}
             <li>
-                <a {% if firstLevel.routeName != '' %}href="{{ path(firstLevel.routeName) }}"{% endif %} id="menu-{{ firstLevel.cssClass }}"><span class="icon {{ firstLevel.cssClass }}"></span>{{ firstLevel.name|trans({},'wellcommerce') }}</a>
+                <a {% if firstLevel.routeName != '' %}href="{{ path(firstLevel.routeName) }}"{% endif %} id="menu-{{ firstLevel.cssClass }}"><span class="icon {{ firstLevel.cssClass }}"></span>{{ firstLevel.name|trans }}</a>
             </li>
         {% else %}
             <li>
-                <a {% if firstLevel.routeName != '' %}href="{{ path(firstLevel.routeName) }}"{% endif %} id="menu-{{ firstLevel.cssClass }}"><span class="icon {{ firstLevel.cssClass }}"></span>{{ firstLevel.name|trans({},'wellcommerce') }}</a>
+                <a {% if firstLevel.routeName != '' %}href="{{ path(firstLevel.routeName) }}"{% endif %} id="menu-{{ firstLevel.cssClass }}"><span class="icon {{ firstLevel.cssClass }}"></span>{{ firstLevel.name|trans }}</a>
                 <ul>
                     {% for secondLevel in firstLevel.children %}
                         <li>
-                            <a {% if secondLevel.routeName != '' %}href="{{ path(secondLevel.routeName) }}"{% else %}style="cursor: pointer;"{% endif %}>{{ secondLevel.name|trans({},'wellcommerce') }}</a>
+                            <a {% if secondLevel.routeName != '' %}href="{{ path(secondLevel.routeName) }}"{% else %}style="cursor: pointer;"{% endif %}>{{ secondLevel.name|trans }}</a>
                             {% if secondLevel.children is not empty %}
                                 <ul>
                                     {% for thirdLevel in secondLevel.children %}
                                         <li>
-                                            <a href="{{ path(thirdLevel.routeName) }}">{{ thirdLevel.name|trans({},'wellcommerce') }}</a>
+                                            <a href="{{ path(thirdLevel.routeName) }}">{{ thirdLevel.name|trans }}</a>
                                         </li>
                                     {% endfor %}
                                 </ul>

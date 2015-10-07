@@ -3,7 +3,7 @@
     <item>
         <identifier>catalog</identifier>
         <css_class>catalog</css_class>
-        <name>admin.menu.catalog</name>
+        <name>catalog</name>
         <route_name>admin.product.index</route_name>
         <parent/>
         <hierarchy>20</hierarchy>
@@ -12,7 +12,7 @@
     <item>
         <identifier>product</identifier>
         <css_class/>
-        <name>admin.menu.product</name>
+        <name>product</name>
         <route_name>admin.product.index</route_name>
         <parent>catalog</parent>
         <hierarchy>10</hierarchy>
@@ -21,7 +21,7 @@
     <item>
         <identifier>category</identifier>
         <css_class/>
-        <name>admin.menu.category</name>
+        <name>category</name>
         <route_name>admin.category.index</route_name>
         <parent>catalog</parent>
         <hierarchy>20</hierarchy>
@@ -30,7 +30,7 @@
     <item>
         <identifier>producer</identifier>
         <css_class/>
-        <name>admin.menu.producer</name>
+        <name>producer</name>
         <route_name>admin.producer.index</route_name>
         <parent>catalog</parent>
         <hierarchy>30</hierarchy>
@@ -39,7 +39,7 @@
     <item>
         <identifier>deliverer</identifier>
         <css_class/>
-        <name>admin.menu.deliverer</name>
+        <name>deliverer</name>
         <route_name>admin.deliverer.index</route_name>
         <parent>catalog</parent>
         <hierarchy>40</hierarchy>
@@ -48,7 +48,7 @@
     <item>
         <identifier>availability</identifier>
         <css_class/>
-        <name>admin.menu.availability</name>
+        <name>availability</name>
         <route_name>admin.availability.index</route_name>
         <parent>catalog</parent>
         <hierarchy>50</hierarchy>
@@ -57,7 +57,7 @@
     <item>
         <identifier>attribute_group</identifier>
         <css_class/>
-        <name>admin.menu.attribute_group</name>
+        <name>attribute_group</name>
         <route_name>admin.attribute_group.index</route_name>
         <parent>catalog</parent>
         <hierarchy>60</hierarchy>
@@ -67,7 +67,7 @@
     <item>
         <identifier>product_status</identifier>
         <css_class/>
-        <name>admin.menu.product_status</name>
+        <name>product_status</name>
         <route_name>admin.product_status.index</route_name>
         <parent>catalog</parent>
         <hierarchy>70</hierarchy>

@@ -11,262 +11,77 @@ admin:
             required_data: General settings
             general_settings: General settings
             translations: Translations
-        help:
-            required_fields: '* required fields'
-    menu:
-        attribute_group: 'Variant groups'
-        availability: Availability
-        catalog: Catalog
-        category: Categories
-        coupon: Coupons
-        client: Clients
-        client_group: 'Client groups'
-        cms: CMS
-        configuration: Configuration
-        contact: Contacts
-        crm: CRM
-        currency: Currencies
-        dashboard: Dashboard
-        deliverer: Deliverers
-        dictionary: Translations
-        integration: Integrations
-        layout: Layout
-        layout_box: Boxes
-        locale: Languages
-        localization: Internationalization
-        media: 'Media management'
-        news: News
-        order: Orders
-        payment_method: 'Payment methods'
-        producer: Producers
-        product: Products
-        product_status: 'Product statuses'
-        promotion: Promotions
-        promotions: Promotions
-        reports: Reports
-        routing: Routing configuration
-        sales: Sales
-        shipping_method: 'Shipping methods'
-        tax: Taxes
-        theme: Themes
-        package: Packages
-        channel: Channels
-        smuggler: 'Package management'
-        multi_store: 'Multistore management'
-        company: Companies
-        shop: Shops
-        unit: Units
-        order_status: 'Order statuses'
-        order_status_group: 'Order status groups'
-        sales_report: Sales report
-        page: Pages
-        user_management: Users management
-        user: Users
-
-attribute_group:
-    heading:
-        index: Attribute groups
-        edit: Edit group
-    label:
-        name: Group's name
-        attributes: Attributes
-    flash:
-        new_group: Enter group's name
-        empty_group: Add new group to edit its attributes
-availability:
-    heading:
-        index: Availability statuses
-        edit: Edit availability status
-    label:
-        id: ID
-        name: Name
-client:
-
-    heading:
-        index: Clients
-        add: Add new client
-        edit: Edit client details
-    label:
-        id: ID
-        first_name: First name
-        last_name: Last name
-        email: E-mail
-        phone: Phone number
-        client_group: Group
-        created_at: Registration
-user:
-    label:
-        username: Username
-        password: Password
-        email: E-mail
-        enabled: Enabled
-        first_name: 'First name'
-        last_name: 'Last name'
-    heading:
-        index: Users
-        add: 'Add new user'
-        edit: 'Edit user'
-        delete: 'Delete user'
-    button:
-        log_in: 'Log in'
-        add: 'Add new user'
-client:
-    heading:
-        login: 'Sign in'
-        register: 'Sign up'
-        contact_details: 'Contact details'
-        footer_links: 'Your account'
-    label:
-        first_name: Firstname
-        last_name: Lastname
-        email: E-mail
-        phone: Phone
-        secondary_phone: 'Secondary phone'
-        password: Password
-        client_group: Group
-        discount: Discount
-        accept_conditions: Accept store conditions
-        accept_newsletter: Subscribe for newsletter
-        street: Street
-        street_no: Street no
-        flat_no: Flat no
-        post_code: Zip code
-        city: City
-        province: Province
-        country: Country
-        billing_address: Billing address
-        shipping_address: Shipping address
-        contact_details: Contact details
-    button:
-        add: Add new client
-        delete: Delete client
-        login: 'Sign in'
-        register: 'Sign up'
-    link:
-        login: 'Sign in or Sign up'
-        register: 'Sign up'
-        logout: Logout
-        orders: Orders
-        address_book: Addressess
-        settings: Settings
-        wishlist: Wishlist
-        password_forgotten: 'Reset password'
-cart:
-    button:
-        add: 'Add to cart'
-        confirm_order: 'Confirm order'
-    link:
-        checkout: 'Go to checkout'
-    table:
-        heading_product: Product
-        heading_price: Price
-        heading_quantity: Quantity
-        heading_total: Total
-    flash:
-        empty: 'Your cart is empty'
-        added: 'was added to cart'
-order:
-    label:
-        id: ID
-        product_total: Products total
-        shipping_total: Shipping costs
-        order_total: Total
-        current_status: Status
-        created_at: Date
-        comment: 'Comments'
-    heading:
-        index: Orders
-currency:
-    label: Currency
-
-package:
-    heading:
-        index: Packages
-        install: Install
-        update: Update
-        remove: Remove
-    fieldset:
-        progress: 'Instalation progress'
-        information: 'Information about package'
-    button:
-        install: 'Install package'
-        update: 'Update package'
-        sync: 'Sync packages'
-        run: 'Run updater'
-    label:
-        id: Id
-        name: 'Short name'
-        full_name: 'Full name'
-        vendor: Vendor
-        local_version: 'Local version'
-        remote_version: 'Remote version'
-        created_at: 'Created at'
-        updated_at: 'Updated at'
-        console_output: 'Operation progress'
-        output: 'Console output'
-        choose_version: 'Choose version'
-        install: 'Install package'
-        update: 'Update package'
-        remove: 'Remove package'
-    flashes:
-        sync_success: 'Package synchronization succeded'
-dictionary:
-    heading:
-        index: Translations
-        add: 'Add new translation'
-        edit: 'Edit translation'
-    label:
-        identifier: Identifier
-meta:
-    fieldset:
-        name: Meta settings
-    label:
-        title: Meta title
-        keywords: Meta keywords
-        description: Meta description
-category:
-    fieldset:
-        name: Categories
-page:
-    tip:
-        client_groups: '<p><strong>Client</strong> groups help</p>'
-
-producer:
-
-product:
-    comment:
-        enabled: Enable product's visibility
+            shops: Shops
+common:
     label:
         id: ID
         name: Name
         slug: Slug
+        created_at: Created at
+        updated_at: Updated at
         enabled: Enabled
-        sku: SKU
-        categories: Categories
-        gross_amount: Gross price
-        stock: Stock
-        weight: Weight
-        producer: Producer
-        manufactured_by: by
-    heading:
-        recommendations: 'You might also like'
-    options:
-        order_by:
-            name: Name
-            price: Price
-        order_dir:
-            ascending: ascending
-            descending: descending
-        limit:  Show per page
-        view_type:
-            list: List view
-            grid: Grid view
-sales_report:
-    heading:
-        sales: Sales summary
-    label:
-        summary_sales: Sales
-        summary_orders: Orders
-        today: today
-        current_month: current month
+        hierarchy: Hierarchy
+        address:
+            addresses: Addresses
+            street: Street
+            street_no: Street no.
+            flat_no: Flat no.
+            province: Province
+            post_code: Post code
+            country: Country
+        contact_details:
+            phone: Phone
+            secondary_phone: Secondary phone
+            email: E-mail
+        meta:
+            title: Meta title
+            description: Meta description
+            keywords: Meta keywords
+        dimension:
+            width: Width
+            height: Height
+            depth: Depth
+            length: Length
+            weight: Weight
 
+attribute:
+    heading:
+        index: Attributes
+        add: Add attribute
+        edit: Edit attribute
+
+attribute_group:
+    heading:
+        index: Attribute groups
+        add: Add group
+        edit: Edit group
+
+attribute_value:
+    heading:
+        index: Attribute values
+        add: Add values
+        edit: Edit values
+
+availability:
+    heading:
+        index: Product availability statuses
+        add: Add new availability status
+        edit: Edit the availability status
+
+category:
+    heading:
+        index: Categories
+        add: Create a new category
+        edit: Edit category
+
+client:
+    heading:
+        index: Clients
+        add: Create a new client
+        edit: Edit client data
+
+client_group:
+    heading:
+        index: Client groups
+        add: Create a new client group
+        edit: Edit a client group

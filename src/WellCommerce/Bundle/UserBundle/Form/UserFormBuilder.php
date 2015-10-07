@@ -28,7 +28,7 @@ class UserFormBuilder extends AbstractFormBuilder
     {
         $requiredData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'required_data',
-            'label' => $this->trans('form.label.required_data')
+            'label' => $this->trans('admin.fieldset.required_data')
         ]));
 
         $requiredData->addChild($this->getElement('text_field', [

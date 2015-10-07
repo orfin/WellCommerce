@@ -186,6 +186,9 @@ abstract class AbstractContainerAware extends ContainerAware
         return $this->getDoctrineHelper()->getEntityManager();
     }
 
+    /**
+     * @return \WellCommerce\Bundle\UserBundle\Entity\UserInterface|null
+     */
     protected function getUser()
     {
         if (!$this->container->has('security.token_storage')) {

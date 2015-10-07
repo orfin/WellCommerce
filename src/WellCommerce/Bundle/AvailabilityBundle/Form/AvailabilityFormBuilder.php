@@ -39,7 +39,7 @@ class AvailabilityFormBuilder extends AbstractFormBuilder
 
         $languageData->addChild($this->getElement('text_field', [
             'name'  => 'name',
-            'label' => $this->trans('availability.label.name'),
+            'label' => $this->trans('common.label.name'),
         ]));
 
         $form->addFilter($this->getFilter('no_code'));

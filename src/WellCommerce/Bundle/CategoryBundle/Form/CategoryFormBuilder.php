@@ -28,12 +28,12 @@ class CategoryFormBuilder extends AbstractFormBuilder
     {
         $requiredData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'required_data',
-            'label' => $this->trans('fieldset.required')
+            'label' => $this->trans('form.fieldset.required_data')
         ]));
 
         $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
-            'label'       => $this->trans('fieldset.translations'),
+            'label'       => $this->trans('form.fieldset.translations'),
             'transformer' => $this->getRepositoryTransformer('translation', $this->get('category.repository'))
         ]));
 
@@ -108,17 +108,17 @@ class CategoryFormBuilder extends AbstractFormBuilder
 
         $languageData->addChild($this->getElement('text_field', [
             'name'  => 'meta.title',
-            'label' => $this->trans('meta.title.label')
+            'label' => $this->trans('meta.label.title')
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
             'name'  => 'meta.keywords',
-            'label' => $this->trans('meta.keywords.label'),
+            'label' => $this->trans('meta.label.keywords'),
         ]));
 
         $languageData->addChild($this->getElement('text_area', [
             'name'  => 'meta.description',
-            'label' => $this->trans('meta.description.label'),
+            'label' => $this->trans('meta.label.description'),
         ]));
 
         $shopsData = $form->addChild($this->getElement('nested_fieldset', [
@@ -128,7 +128,7 @@ class CategoryFormBuilder extends AbstractFormBuilder
 
         $shopsData->addChild($this->getElement('multi_select', [
             'name'        => 'shops',
-            'label'       => $this->trans('category.label.shops'),
+            'label'       => $this->trans('shop.label.shops'),
             'options'     => $this->get('shop.collection')->getSelect(),
             'transformer' => $this->getRepositoryTransformer('collection', $this->get('shop.repository'))
         ]));

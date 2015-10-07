@@ -125,7 +125,8 @@ abstract class AbstractAdminController extends AbstractController implements Adm
         }
 
         return $this->displayTemplate('edit', [
-            'form' => $form
+            'form'     => $form,
+            'resource' => $resource
         ]);
     }
 
