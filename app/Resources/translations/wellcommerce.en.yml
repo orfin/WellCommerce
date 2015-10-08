@@ -57,6 +57,7 @@ address:
         province: Province
         post_code: Post code
         country: Country
+        city: City
 contact_details:
     heading:
         details: Contact details

@@ -7,7 +7,7 @@
         <div class="col-md-9 col-xs-12">
             {{ macros.form_begin(form, 'cart-address') }}
             <div class="well-form">
-                <h4>{% trans %}client.label.billing_address{% endtrans %}</h4>
+                <h4>{% trans %}address.heading.billing_address{% endtrans %}</h4>
 
                 <div class="row">
                     <div class="col-sm-6 col-xs-12">
@@ -50,7 +50,7 @@
                 {{ macros.element(form.getChildren().get('copyAddress')) }}
 
                 <div class="collapse" id="shipping-wrap">
-                    <h4>{% trans %}client.label.shipping_address{% endtrans %}</h4>
+                    <h4>{% trans %}address.heading.shipping_address{% endtrans %}</h4>
 
                     <div class="row">
                         <div class="col-sm-6 col-xs-12">
@@ -91,7 +91,7 @@
                     </div>
                 </div>
 
-                <h4 class="mtp30">{% trans %}client.label.contact_details{% endtrans %}</h4>
+                <h4 class="mtp30">{% trans %}contact_details.heading.details{% endtrans %}</h4>
 
                 <div class="row">
                     <div class="col-sm-6 col-xs-12">
@@ -114,7 +114,7 @@
 
             <div class="clearfix mtp60">
                 <a href="{{ path('front.home_page.index') }}" class="btn btn-link light btn-lg notransform nopadding">Back to shopping</a>
-                <button class="btn btn-primary btn-lg pull-right">{% trans %}cart.button.confirm_order{% endtrans %}</button>
+                <button class="btn btn-primary btn-lg pull-right">{% trans %}order.button.confirm{% endtrans %}</button>
             </div>
 
             {{ macros.form_end(form) }}
