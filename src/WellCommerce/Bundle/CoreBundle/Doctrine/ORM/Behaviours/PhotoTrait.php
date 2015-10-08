@@ -35,9 +35,9 @@ trait PhotoTrait
     }
 
     /**
-     * @param MediaInterface $photo
+     * @param null|MediaInterface $photo
      */
-    public function setPhoto(MediaInterface $photo)
+    public function setPhoto(MediaInterface $photo = null)
     {
         $this->photo = $photo;
     }

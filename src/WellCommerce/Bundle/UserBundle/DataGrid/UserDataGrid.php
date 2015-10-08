@@ -33,7 +33,7 @@ class UserDataGrid extends AbstractDataGrid
     {
         $collection->add(new Column([
             'id'         => 'id',
-            'caption'    => $this->trans('user.id.label'),
+            'caption'    => $this->trans('user.label.id'),
             'sorting'    => new Sorting([
                 'default_order' => ColumnInterface::SORT_DIR_DESC,
             ]),

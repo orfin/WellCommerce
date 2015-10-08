@@ -6,6 +6,20 @@
 # For the full copyright and license information,
 # please view the LICENSE file that was distributed with this source code.
 
-admin:
-  menu:
-    attribute_group:  Attributes
+attribute:
+    heading:
+        index: Attributes
+        add: Add attribute
+        edit: Edit attribute
+
+attribute_group:
+    heading:
+        index: Attribute groups
+        add: Add group
+        edit: Edit group
+
+attribute_value:
+    heading:
+        index: Attribute values
+        add: Add values
+        edit: Edit values

@@ -31,7 +31,7 @@ class ClientDataGrid extends AbstractDataGrid
     {
         $collection->add(new Column([
             'id'         => 'id',
-            'caption'    => $this->trans('admin.client.label.id'),
+            'caption'    => $this->trans('common.label.id'),
             'appearance' => new Appearance([
                 'width'   => 90,
                 'visible' => false,
@@ -43,7 +43,7 @@ class ClientDataGrid extends AbstractDataGrid
 
         $collection->add(new Column([
             'id'         => 'firstName',
-            'caption'    => $this->trans('admin.client.label.first_name'),
+            'caption'    => $this->trans('common.label.first_name'),
             'appearance' => new Appearance([
                 'width' => 140,
                 'align' => Appearance::ALIGN_LEFT

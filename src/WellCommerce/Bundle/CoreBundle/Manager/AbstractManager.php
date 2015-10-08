@@ -113,7 +113,10 @@ abstract class AbstractManager extends AbstractContainerAware implements Manager
     public function getForm($resource, array $config = [])
     {
         $builder       = $this->getFormBuilder();
-        $defaultConfig = ['name' => $this->repository->getAlias()];
+        $defaultConfig = [
+            'name'              => $this->repository->getAlias(),
+            'validation_groups' => ['Default']
+        ];
         $config        = array_merge($defaultConfig, $config);
 
         return $builder->createForm($config, $resource);

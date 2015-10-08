@@ -37,7 +37,7 @@ class OrderAddressController extends AbstractFrontController implements FrontCon
     {
         $cart = $this->manager->getCurrentCart();
 
-        if ($cart->isEmpty()) {
+        if ($cart->isEmpty() || false === $cart->hasMethods()) {
             return $this->redirectToRoute('front.cart.index');
         }
 

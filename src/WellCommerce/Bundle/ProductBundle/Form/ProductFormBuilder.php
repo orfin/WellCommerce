@@ -118,7 +118,7 @@ class ProductFormBuilder extends AbstractFormBuilder
 
         $pricePane = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'price_pane',
-            'label' => $this->trans('fieldset.prices.label')
+            'label' => $this->trans('form.fieldset.prices')
         ]));
 
         $buyPriceSettings = $pricePane->addChild($this->getElement('nested_fieldset', [

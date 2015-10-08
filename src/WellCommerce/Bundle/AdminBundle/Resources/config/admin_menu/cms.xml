@@ -4,7 +4,7 @@
         <identifier>cms</identifier>
         <route_name>admin.page.index</route_name>
         <css_class>cms</css_class>
-        <name>admin.menu.cms</name>
+        <name>cms</name>
         <parent/>
         <hierarchy>70</hierarchy>
     </item>
@@ -12,7 +12,7 @@
     <item>
         <identifier>page</identifier>
         <css_class/>
-        <name>admin.menu.page</name>
+        <name>page</name>
         <route_name>admin.page.index</route_name>
         <parent>cms</parent>
         <hierarchy>10</hierarchy>
@@ -21,7 +21,7 @@
     <item>
         <identifier>news</identifier>
         <css_class/>
-        <name>admin.menu.news</name>
+        <name>news</name>
         <route_name>admin.news.index</route_name>
         <parent>cms</parent>
         <hierarchy>20</hierarchy>
@@ -30,7 +30,7 @@
     <item>
         <identifier>contact</identifier>
         <css_class/>
-        <name>admin.menu.contact</name>
+        <name>contact</name>
         <route_name>admin.contact.index</route_name>
         <parent>cms</parent>
         <hierarchy>30</hierarchy>
@@ -39,7 +39,7 @@
     <item>
         <identifier>media</identifier>
         <css_class/>
-        <name>admin.menu.media</name>
+        <name>media</name>
         <route_name>admin.media.index</route_name>
         <parent>cms</parent>
         <hierarchy>40</hierarchy>

@@ -54,6 +54,14 @@ class ProducerTranslation implements RoutableSubjectInterface, LocaleAwareInterf
     protected $meta;
 
     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->meta = new Meta();
+    }
+
+    /**
      * @return string
      */
     public function getName()

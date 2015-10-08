@@ -3,7 +3,7 @@
     <item>
         <identifier>dashboard</identifier>
         <css_class/>
-        <name>admin.menu.dashboard</name>
+        <name>dashboard</name>
         <route_name>admin.dashboard.index</route_name>
         <parent/>
         <hierarchy>10</hierarchy>

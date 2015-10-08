@@ -1,0 +1,41 @@
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
+
+client:
+    label:
+        first_name: First name
+        last_name: Last name
+    heading:
+        index: Clients
+        add: Create a client
+        edit: Edit client
+        login: 'Sign in'
+        register: 'Sign up'
+        contact_details: 'Contact details'
+        footer_links: 'Your account'
+    link:
+        login: 'Sign in or Sign up'
+        register: 'Sign up'
+        logout: Logout
+        orders: Orders
+        address_book: Addressess
+        settings: Settings
+        wishlist: Wishlist
+        password_forgotten: 'Reset password'
+    button:
+        login: 'Sign in'
+        register: 'Sign up'
+    label:
+        accept_conditions: Accept store conditions
+        accept_newsletter: Sign up for our newsletter
+
+client_group:
+    heading:
+        index: Client groups
+        add: Create a client group
+        edit: Edit group

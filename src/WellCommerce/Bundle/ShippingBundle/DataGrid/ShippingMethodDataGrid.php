@@ -32,7 +32,7 @@ class ShippingMethodDataGrid extends AbstractDataGrid
     {
         $collection->add(new Column([
             'id'         => 'id',
-            'caption'    => $this->trans('shipping.label.id'),
+            'caption'    => $this->trans('common.label.id'),
             'sorting'    => new Sorting([
                 'default_order' => Sorting::SORT_DIR_DESC,
             ]),
@@ -47,12 +47,15 @@ class ShippingMethodDataGrid extends AbstractDataGrid
 
         $collection->add(new Column([
             'id'      => 'name',
-            'caption' => $this->trans('shipping.label.name')
+            'caption' => $this->trans('common.label.name'),
+            'appearance' => new Appearance([
+                'width'   => 90,
+            ]),
         ]));
 
         $collection->add(new Column([
             'id'         => 'calculator',
-            'caption'    => $this->trans('shipping.label.calculator'),
+            'caption'    => $this->trans('shipping_method.label.calculator'),
             'appearance' => new Appearance([
                 'width' => 120,
                 'align' => Appearance::ALIGN_CENTER

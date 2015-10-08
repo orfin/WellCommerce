@@ -89,9 +89,9 @@ class AttributeGroupController extends AbstractAdminController
         }
         
         return $this->displayTemplate('edit', [
-            'currentGroup' => $resource,
-            'groups'       => $groups,
-            'form'         => $form
+            'resource' => $resource,
+            'groups'   => $groups,
+            'form'     => $form
         ]);
     }
     

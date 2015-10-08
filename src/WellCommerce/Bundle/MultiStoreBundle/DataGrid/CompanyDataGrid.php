@@ -32,7 +32,7 @@ class CompanyDataGrid extends AbstractDataGrid
     {
         $collection->add(new Column([
             'id'         => 'id',
-            'caption'    => $this->trans('company.id'),
+            'caption'    => $this->trans('common.label.id'),
             'sorting'    => new Sorting([
                 'default_order' => Sorting::SORT_DIR_ASC,
             ]),
@@ -47,20 +47,7 @@ class CompanyDataGrid extends AbstractDataGrid
 
         $collection->add(new Column([
             'id'      => 'name',
-            'caption' => $this->trans('company.name'),
-        ]));
-
-        $collection->add(new Column([
-            'id'      => 'shortName',
-            'caption' => $this->trans('company.short_name'),
-        ]));
-
-        $collection->add(new Column([
-            'id'      => 'createdAt',
-            'caption' => $this->trans('company.created_at'),
-            'filter'  => new Filter([
-                'type' => Filter::FILTER_BETWEEN,
-            ]),
+            'caption' => $this->trans('common.label.name'),
         ]));
     }
 }

@@ -58,7 +58,7 @@ class ProductDataGrid extends AbstractDataGrid
         ]));
 
         $collection->add(new Column([
-            'id'      => 'categories',
+            'id'      => 'category',
             'caption' => $this->trans('product.label.categories'),
         ]));
 

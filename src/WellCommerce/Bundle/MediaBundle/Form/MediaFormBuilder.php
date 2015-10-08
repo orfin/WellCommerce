@@ -28,12 +28,12 @@ class MediaFormBuilder extends AbstractFormBuilder
     {
         $requiredData = $form->addChild($this->getElement('fieldset', [
             'name'  => 'required_data',
-            'label' => $this->trans('form.required_data.label')
+            'label' => $this->trans('form.fieldset.required_data')
         ]));
 
         $requiredData->addChild($this->getElement('image', [
             'name'     => 'required_data',
-            'label'    => $this->trans('form.required_data.label'),
+            'label'    => $this->trans('form.fieldset.required_data'),
             'datagrid' => $this->get('media.datagrid')
         ]));
 
