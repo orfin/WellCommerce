@@ -17,6 +17,9 @@ product:
         weight: Weight
         producer: Producer
         manufactured_by: by
+        shipping_cost: Shipping costs
+        availability: Product's availability
+        quantity: Quantity
     heading:
         recommendations: 'You might also like'
     options:
