@@ -10,6 +10,6 @@ WellCommerce\Bundle\TaxBundle\Entity\Tax:
     fields:
         value:
             type: decimal
-            scale: 4
+            scale: 2
             precision: 15
             nullable: false

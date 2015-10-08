@@ -125,15 +125,6 @@ client:
         delete: Delete client
         login: 'Sign in'
         register: 'Sign up'
-    link:
-        login: 'Sign in or Sign up'
-        register: 'Sign up'
-        logout: Logout
-        orders: Orders
-        address_book: Addressess
-        settings: Settings
-        wishlist: Wishlist
-        password_forgotten: 'Reset password'
 cart:
     button:
         add: 'Add to cart'

@@ -1,87 +1,85 @@
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
+
 admin:
-    form:
-        button:
-            add: Add
-            save: 'Save changes'
-            save_and_finish: 'Save and finish'
-            save_and_continue: 'Save and continue'
-            save_and_add_another: 'Save and add another'
-            back: Return
-        fieldset:
-            required_data: General settings
-            general_settings: General settings
-            translations: Translations
-            shops: Shops
+    button:
+        add: Add
+        save: 'Save changes'
+        save_and_finish: 'Save and finish'
+        save_and_continue: 'Save and continue'
+        save_and_add_another: 'Save and add another'
+        back: Return
+form:
+    help:
+        required_fields: '* required fields'
+    fieldset:
+        required_data: General settings
+        general_settings: General settings
+        translations: Translations
+        shops: Shops
+        prices: Prices
+        discount_settings: Discount settings
 common:
     label:
         id: ID
         name: Name
+        currency: Currency
+        description: Description
+        code: Code
         slug: Slug
+        discount: Discount
         created_at: Created at
         updated_at: Updated at
+        valid_from: Valid from
+        valid_to: Valid to
         enabled: Enabled
+        publish: Published
         hierarchy: Hierarchy
-        address:
-            addresses: Addresses
-            street: Street
-            street_no: Street no.
-            flat_no: Flat no.
-            province: Province
-            post_code: Post code
-            country: Country
-        contact_details:
-            phone: Phone
-            secondary_phone: Secondary phone
-            email: E-mail
-        meta:
-            title: Meta title
-            description: Meta description
-            keywords: Meta keywords
-        dimension:
-            width: Width
-            height: Height
-            depth: Depth
-            length: Length
-            weight: Weight
+        password: Password
+        tax: Tax
+        default_order_status: Default order status
+        url: URL address
+address:
+    label:
+        addresses: Addresses
+        street: Street
+        street_no: Street no.
+        flat_no: Flat no.
+        province: Province
+        post_code: Post code
+        country: Country
+contact_details:
+    label:
+        phone: Phone
+        secondary_phone: Secondary phone
+        email: E-mail
+meta:
+    label:
+        title: Meta title
+        description: Meta description
+        keywords: Meta keywords
 
-attribute:
-    heading:
-        index: Attributes
-        add: Add attribute
-        edit: Edit attribute
+dimension:
+    label:
+        width: Width
+        height: Height
+        depth: Depth
+        length: Length
+        weight: Weight
+price:
+    sell_price:
+        net:    Sell price net
+        gross:  Sell price gross
+    buy_price:
+        net: Buy price net
+        gross: Buy price gross
+    discounted_price:
+        net: Discounted price net
+        gross: Discounted price gross
+        discount:   Discount
 
-attribute_group:
-    heading:
-        index: Attribute groups
-        add: Add group
-        edit: Edit group
-
-attribute_value:
-    heading:
-        index: Attribute values
-        add: Add values
-        edit: Edit values
-
-availability:
-    heading:
-        index: Product availability statuses
-        add: Add new availability status
-        edit: Edit the availability status
-
-category:
-    heading:
-        index: Categories
-        add: Create a new category
-        edit: Edit category
-
-client:
-    heading:
-        index: Clients
-        add: Create a new client
-        edit: Edit client data
-
-client_group:
-    heading:
-        index: Client groups
-        add: Create a new client group
-        edit: Edit a client group

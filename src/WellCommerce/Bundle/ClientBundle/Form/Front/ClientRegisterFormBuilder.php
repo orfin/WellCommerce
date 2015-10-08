@@ -38,17 +38,17 @@ class ClientRegisterFormBuilder extends AbstractFormBuilder
 
         $form->addChild($this->getElement('text_field', [
             'name'  => 'phone',
-            'label' => $this->trans('client.label.phone'),
+            'label' => $this->trans('contact_details.label.phone'),
         ]));
 
         $form->addChild($this->getElement('text_field', [
             'name'  => 'email',
-            'label' => $this->trans('client.label.email'),
+            'label' => $this->trans('contact_details.label.email'),
         ]));
 
         $form->addChild($this->getElement('password', [
             'name'  => 'password',
-            'label' => $this->trans('client.label.password'),
+            'label' => $this->trans('common.label.password'),
         ]));
 
         $form->addChild($this->getElement('checkbox', [

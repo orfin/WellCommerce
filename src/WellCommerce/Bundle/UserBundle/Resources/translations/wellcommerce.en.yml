@@ -3,9 +3,12 @@ user:
         index: Users
         add: Add user
         edit: Edit user
+    button:
+        log_in: Log in
     label:
         id: ID
         username: Username
+        password: Password
         email: E-mail
         first_name: First name
         last_name: Last name

@@ -39,18 +39,18 @@ class PaymentMethodFormBuilder extends AbstractFormBuilder
 
         $requiredData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'required_data',
-            'label' => $this->trans('Required data')
+            'label' => $this->trans('form.fieldset.required_data')
         ]));
 
         $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
-            'label'       => $this->trans('Translations'),
+            'label'       => $this->trans('form.fieldset.translations'),
             'transformer' => $this->getRepositoryTransformer('translation', $this->get('payment_method.repository'))
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
             'name'  => 'name',
-            'label' => $this->trans('payment_method.label.name'),
+            'label' => $this->trans('common.label.name'),
         ]));
 
         $requiredData->addChild($this->getElement('select', [
@@ -62,26 +62,26 @@ class PaymentMethodFormBuilder extends AbstractFormBuilder
 
         $requiredData->addChild($this->getElement('checkbox', [
             'name'    => 'enabled',
-            'label'   => $this->trans('payment_method.label.enabled'),
+            'label'   => $this->trans('common.label.enabled'),
             'default' => 1
         ]));
 
         $requiredData->addChild($this->getElement('text_field', [
             'name'    => 'hierarchy',
-            'label'   => $this->trans('payment_method.label.hierarchy'),
+            'label'   => $this->trans('common.label.hierarchy'),
             'default' => 0
         ]));
 
         $requiredData->addChild($this->getElement('select', [
             'name'        => 'defaultOrderStatus',
-            'label'       => $this->trans('payment_method.label.default_order_status'),
+            'label'       => $this->trans('common.label.default_order_status'),
             'options'     => $this->get('order_status.collection')->getSelect(),
             'transformer' => $this->getRepositoryTransformer('entity', $this->get('order_status.repository'))
         ]));
 
         $shippingMethodsData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'shipping_methods_data',
-            'label' => $this->trans('payment_method.label.shipping_methods')
+            'label' => $this->trans('payment_method.fieldset.shipping_methods')
         ]));
 
         $shippingMethodsData->addChild($this->getElement('multi_select', [
