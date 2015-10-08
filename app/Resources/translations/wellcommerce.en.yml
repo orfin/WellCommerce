@@ -45,7 +45,11 @@ common:
         default_order_status: Default order status
         url: URL address
 address:
+    heading:
+        billing_address: Billing address
+        shipping_address: Shipping address
     label:
+        copy_address: Shipping address same as billing address
         addresses: Addresses
         street: Street
         street_no: Street no.
@@ -54,6 +58,8 @@ address:
         post_code: Post code
         country: Country
 contact_details:
+    heading:
+        details: Contact details
     label:
         phone: Phone
         secondary_phone: Secondary phone
