@@ -11,3 +11,8 @@ order:
         confirm: Go to confirmation
     heading:
         address: Billing & shipping address
+    label:
+        comment: Additional comments
+    description:
+        cart_total: Total products value
+        shipping_cost: Shipping costs
