@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\ProductBundle\DataSet\Transformer;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
 use WellCommerce\Bundle\DataSetBundle\Transformer\AbstractDataSetTransformer;
 
 /**

@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CoreBundle\EventListener;
 
-use Symfony\Component\Config\FileLocator;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
 

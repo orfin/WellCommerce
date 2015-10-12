@@ -105,13 +105,6 @@
             </call>
         </service>
 
-        <service id="payment_method.subscriber" class="WellCommerce\Bundle\PaymentBundle\EventListener\PaymentMethodSubscriber">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <tag name="kernel.event_subscriber" />
-        </service>
-
         <service id="payment_method.processor.collection" class="WellCommerce\Bundle\PaymentBundle\Processor\PaymentMethodProcessorCollection" />
     </services>
 </container>

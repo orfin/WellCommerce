@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\CmsBundle\DataSet\Front;
 
 use WellCommerce\Bundle\CmsBundle\DataSet\Admin\PageDataSetQueryBuilder as BaseQueryBuilder;
 use WellCommerce\Bundle\DataSetBundle\Column\ColumnCollection;
-use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
 use WellCommerce\Bundle\DataSetBundle\Request\DataSetRequestInterface;
 
 /**

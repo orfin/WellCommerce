@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\MultiStoreBundle\DataSet\Admin;
 
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Bundle\DataSetBundle\Configurator\DataSetConfiguratorInterface;
-use WellCommerce\Bundle\DataSetBundle\Transformer\DateTransformer;
 
 /**
  * Class CompanyDataSet

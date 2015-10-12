@@ -12,6 +12,9 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Processor;
 
+use WellCommerce\Bundle\FormBundle\Elements\ElementInterface;
+use WellCommerce\Bundle\FormBundle\FormBuilderInterface;
+
 /**
  * Class BankTransfer
  *
@@ -22,8 +25,14 @@ class BankTransfer extends AbstractPaymentProcessor
     protected $name  = 'Bank transfer';
     protected $alias = 'bank_transfer';
 
-    public function getName()
+    /**
+     * {@inheritdoc}
+     */
+    public function addConfigurationFields(FormBuilderInterface $builder, ElementInterface $fieldset)
     {
-        return $this->name;
+        $fieldset->addChild($builder->getElement('text_field', [
+            'name'  => 'account',
+            'label' => $this->trans('payment_method.bank_transfer.account'),
+        ]))->setValue(111);
     }
 }

@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CartBundle\Provider;
 
-use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\CoreBundle\Provider\ResourceProvider;
 
 /**

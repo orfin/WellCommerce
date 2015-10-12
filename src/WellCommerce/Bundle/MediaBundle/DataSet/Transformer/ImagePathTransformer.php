@@ -15,7 +15,6 @@ namespace WellCommerce\Bundle\MediaBundle\DataSet\Transformer;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use WellCommerce\Bundle\CoreBundle\Helper\Image\ImageHelperInterface;
 use WellCommerce\Bundle\DataSetBundle\Transformer\AbstractDataSetTransformer;
-use WellCommerce\Bundle\DataSetBundle\Transformer\TransformerInterface;
 
 /**
  * Class ImagePathTransformer

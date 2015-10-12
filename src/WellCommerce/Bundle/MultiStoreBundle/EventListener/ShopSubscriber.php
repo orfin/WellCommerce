@@ -50,8 +50,6 @@ class ShopSubscriber extends AbstractEventSubscriber
      */
     public function onKernelController(FilterControllerEvent $event)
     {
-        $request = $event->getRequest();
-
         if (!$this->container->get('session')->has('admin/shops')) {
             $shops = $this->container->get('shop.dataset.admin')->getResult('select');
             $this->container->get('session')->set('admin/shops', $shops);

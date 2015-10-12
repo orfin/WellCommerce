@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\ShippingBundle\Provider;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Util\Debug;
 use WellCommerce\Bundle\ShippingBundle\Calculator\ShippingMethodCalculatorCollection;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
 use WellCommerce\Bundle\ShippingBundle\Exception\CalculatorNotFoundException;

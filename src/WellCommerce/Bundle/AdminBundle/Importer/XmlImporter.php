@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\AdminBundle\Importer;
 
 use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\Config\Util\XmlUtils;
-use Symfony\Component\HttpKernel\Config\FileLocator;
 use WellCommerce\Bundle\AdminBundle\Factory\AdminMenuFactory;
 use WellCommerce\Bundle\AdminBundle\Repository\AdminMenuRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Doctrine\DoctrineHelperInterface;

@@ -24,7 +24,6 @@ use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopCollectionAwareInterface;
 use WellCommerce\Bundle\ProducerBundle\Entity\ProducerAwareInterface;
-use WellCommerce\Bundle\ShippingBundle\Entity\ShippingCalculatorSubjectInterface;
 use WellCommerce\Bundle\TaxBundle\Entity\TaxInterface;
 use WellCommerce\Bundle\UnitBundle\Entity\UnitAwareInterface;
 

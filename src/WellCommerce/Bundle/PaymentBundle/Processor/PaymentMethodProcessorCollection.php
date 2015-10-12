@@ -22,10 +22,18 @@ use WellCommerce\Common\Collections\ArrayCollection;
 class PaymentMethodProcessorCollection extends ArrayCollection
 {
     /**
-     * {@inheritdoc}
+     * @param PaymentMethodProcessorInterface $processor
      */
     public function add(PaymentMethodProcessorInterface $processor)
     {
         $this->items[$processor->getAlias()] = $processor;
+    }
+
+    /**
+     * @return PaymentMethodProcessorInterface[]
+     */
+    public function all()
+    {
+        return $this->items;
     }
 }

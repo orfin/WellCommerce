@@ -35,7 +35,7 @@ class ClientReportProvider extends AbstractReportProvider implements ReportProvi
         $collection = $this->repository->matching($criteria);
         $report     = new ReportRowCollection();
 
-        $collection->map(function (ClientInterface $client) use ($configuration, $report) {
+        $collection->map(function (ClientInterface $client) use ($report) {
             $ordersTotal = $this->calculateOrdersAmountForClient($client);
             $identifier  = $client->getFirstName() . ' ' . $client->getLastName();
             $report->add(new ReportRow($identifier, $ordersTotal));

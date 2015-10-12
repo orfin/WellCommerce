@@ -13,10 +13,7 @@
 namespace WellCommerce\Bundle\CartBundle\Repository;
 
 use Doctrine\ORM\Query\Expr;
-use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 
 /**
  * Class CartProductRepository

@@ -11,7 +11,6 @@
  */
 namespace WellCommerce\Bundle\CategoryBundle\Twig\Extension;
 
-use WellCommerce\Bundle\CategoryBundle\Provider\CategoryProviderInterface;
 use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
 
 /**

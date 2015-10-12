@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\ReportBundle\Controller\Admin;
 
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
-use WellCommerce\Bundle\ReportBundle\Configuration\ReportConfiguration;
 
 /**
  * Class SalesReportController
@@ -22,7 +21,7 @@ use WellCommerce\Bundle\ReportBundle\Configuration\ReportConfiguration;
  */
 class SalesReportController extends AbstractAdminController
 {
-    public function index()
+    public function indexAction()
     {
     }
 }

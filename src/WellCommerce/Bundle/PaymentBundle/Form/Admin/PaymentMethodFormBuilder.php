@@ -26,7 +26,7 @@ class PaymentMethodFormBuilder extends AbstractFormBuilder
      */
     public function buildForm(FormInterface $form)
     {
-        $processors       = $this->getProcessors();
+        $processors       = $this->getProcessorCollection();
         $options          = [];
         $defaultProcessor = null;
 
@@ -53,7 +53,7 @@ class PaymentMethodFormBuilder extends AbstractFormBuilder
             'label' => $this->trans('common.label.name'),
         ]));
 
-        $requiredData->addChild($this->getElement('select', [
+        $processorType = $requiredData->addChild($this->getElement('select', [
             'name'    => 'processor',
             'label'   => $this->trans('payment_method.label.processor'),
             'options' => $options,
@@ -91,17 +91,19 @@ class PaymentMethodFormBuilder extends AbstractFormBuilder
             'transformer' => $this->getRepositoryTransformer('collection', $this->get('shipping_method.repository'))
         ]));
 
+        foreach ($processors as $processor) {
+            $processor->addConfigurationFieldset($this, $form, $processorType);
+        }
+
         $form->addFilter($this->getFilter('no_code'));
         $form->addFilter($this->getFilter('trim'));
         $form->addFilter($this->getFilter('secure'));
     }
-    
+
     /**
-     * Returns shipping method calculators as a select
-     *
-     * @return array|\WellCommerce\Bundle\PaymentBundle\Processor\PaymentMethodProcessorInterface[]
+     * @return \WellCommerce\Bundle\PaymentBundle\Processor\PaymentMethodProcessorInterface[]
      */
-    protected function getProcessors()
+    protected function getProcessorCollection()
     {
         return $this->get('payment_method.processor.collection')->all();
     }

@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\ProductBundle\Request\ParamConverter;
 
-use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
 use WellCommerce\Bundle\CoreBundle\Request\ParamConverter\AbstractEntityParamConverter;
 
 /**

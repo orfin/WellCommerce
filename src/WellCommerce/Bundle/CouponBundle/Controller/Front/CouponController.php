@@ -14,10 +14,7 @@ namespace WellCommerce\Bundle\CouponBundle\Controller\Front;
 
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
-use WellCommerce\Bundle\CouponBundle\Entity\CouponInterface;
-use WellCommerce\Bundle\CouponBundle\Exception\CouponCodeNotFoundException;
 use WellCommerce\Bundle\CouponBundle\Exception\CouponException;
-use WellCommerce\Bundle\CouponBundle\Exception\CouponExpiredException;
 
 /**
  * Class CouponController
@@ -32,10 +29,16 @@ class CouponController extends AbstractFrontController
     protected $manager;
 
     /**
-     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function addAction(Request $request)
     {
+        if (!$request->isXmlHttpRequest()) {
+            return $this->redirectToRoute('cart.front.index');
+        }
+
         $code = $this->getRequestHelper()->getRequestAttribute('code');
 
         try {
@@ -57,8 +60,12 @@ class CouponController extends AbstractFrontController
     /**
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function deleteAction()
+    public function deleteAction(Request $request)
     {
+        if (!$request->isXmlHttpRequest()) {
+            return $this->redirectToRoute('cart.front.index');
+        }
+
         try {
             $this->manager->removeCartCoupon();
 

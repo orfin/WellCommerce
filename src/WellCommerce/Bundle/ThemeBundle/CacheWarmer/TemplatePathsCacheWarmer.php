@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\ThemeBundle\CacheWarmer;
 
 use Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplatePathsCacheWarmer as BaseTemplatePathsCacheWarmer;
-use Symfony\Bundle\FrameworkBundle\Templating\Loader\TemplateLocator;
 use Symfony\Bundle\FrameworkBundle\Templating\TemplateReference;
 use Symfony\Component\Config\FileLocatorInterface;
 

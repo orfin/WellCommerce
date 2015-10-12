@@ -11,7 +11,6 @@
  */
 namespace WellCommerce\Bundle\ProductBundle\Repository;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 use WellCommerce\Bundle\ProductBundle\Entity\Product;
 

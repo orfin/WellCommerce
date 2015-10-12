@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\CategoryBundle\DataSet\Front;
 
 use WellCommerce\Bundle\CategoryBundle\DataSet\Admin\CategoryDataSetQueryBuilder as BaseQueryBuilder;
 use WellCommerce\Bundle\DataSetBundle\Conditions\Condition\Eq;
-use WellCommerce\Bundle\DataSetBundle\Request\DataSetRequestInterface;
 
 /**
  * Class CategoryDataSetQueryBuilder

@@ -12,6 +12,9 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Processor;
 
+use WellCommerce\Bundle\FormBundle\Elements\ElementInterface;
+use WellCommerce\Bundle\FormBundle\FormBuilderInterface;
+
 /**
  * Class CashOnDelivery
  *
@@ -21,9 +24,15 @@ class CashOnDelivery extends AbstractPaymentProcessor
 {
     protected $name  = 'Cash on delivery';
     protected $alias = 'cod';
-    
-    public function getName()
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addConfigurationFields(FormBuilderInterface $builder, ElementInterface $fieldset)
     {
-        return $this->name;
+        $fieldset->addChild($builder->getElement('text_field', [
+            'name'  => 'account',
+            'label' => $this->trans('payment_method.cod.account'),
+        ]));
     }
 }

@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\ReportBundle\Generator;
 
 use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Collections\Criteria;
 use WellCommerce\Bundle\ReportBundle\Configuration\ReportConfiguration;
 
 /**
