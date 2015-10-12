@@ -20,23 +20,4 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
  */
 class AttributeGroupRepository extends AbstractEntityRepository implements AttributeGroupRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function findAll()
-    {
-        $queryBuilder = $this->getQueryBuilder();
-        $queryBuilder->addSelect('attribute_group.id, attribute_group_translation.name');
-        $queryBuilder->leftJoin(
-            'WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupTranslation',
-            'attribute_group_translation',
-            'WITH',
-            'attribute_group.id = attribute_group_translation.translatable');
-        $queryBuilder->addOrderBy('attribute_group_translation.name', 'ASC');
-
-        $query  = $queryBuilder->getQuery();
-        $result = $query->getArrayResult();
-
-        return $result;
-    }
 }

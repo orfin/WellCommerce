@@ -14,8 +14,8 @@ namespace WellCommerce\Bundle\CoreBundle\Helper\Request;
 
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use WellCommerce\Bundle\ClientBundle\Entity\Client;
-use WellCommerce\Bundle\UserBundle\Entity\User;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
+use WellCommerce\Bundle\UserBundle\Entity\UserInterface;
 
 /**
  * Class RequestHelper
@@ -82,6 +82,14 @@ class RequestHelper implements RequestHelperInterface
     public function getSessionAttribute($name, $default = null)
     {
         return $this->request->getSession()->get($name, $default);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setSessionAttribute($name, $value)
+    {
+        return $this->request->getSession()->set($name, $value);
     }
 
     /**
@@ -155,7 +163,7 @@ class RequestHelper implements RequestHelperInterface
     {
         $admin = $this->getUser();
 
-        if ($admin instanceof User) {
+        if ($admin instanceof UserInterface) {
             return $admin;
         }
 
@@ -169,7 +177,7 @@ class RequestHelper implements RequestHelperInterface
     {
         $client = $this->getUser();
 
-        if ($client instanceof Client) {
+        if ($client instanceof ClientInterface) {
             return $client;
         }
 

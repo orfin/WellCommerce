@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\Provider;
 
-use WellCommerce\Bundle\CategoryBundle\Entity\Category;
+use WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface;
 use WellCommerce\Bundle\CoreBundle\Provider\ProviderInterface;
 
 /**
@@ -25,14 +25,14 @@ interface CategoryProviderInterface extends ProviderInterface
     /**
      * Sets currently viewed category
      *
-     * @param Category $category
+     * @param CategoryInterface $category
      */
-    public function setCurrentCategory(Category $category);
+    public function setCurrentCategory(CategoryInterface $category);
 
     /**
      * Returns an instance of currently viewed category
      *
-     * @return Category
+     * @return CategoryInterface
      */
     public function getCurrentCategory();
 

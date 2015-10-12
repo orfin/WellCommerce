@@ -166,6 +166,16 @@
             <argument type="service" id="event_dispatcher" />
         </service>
 
+        <service id="product_status.request_param_converter" class="WellCommerce\Bundle\ProductBundle\Request\ParamConverter\ProductStatusParamConverter">
+            <argument type="service" id="product_status.repository" />
+            <argument>id</argument>
+            <argument type="collection">
+                <argument>WellCommerce\Bundle\ProductBundle\Entity\ProductStatus</argument>
+                <argument>WellCommerce\Bundle\ProductBundle\Entity\ProductStatusInterface</argument>
+            </argument>
+            <tag name="request.param_converter" converter="product" priority="0"/>
+        </service>
+
         <service id="twig.extension.product_status" class="WellCommerce\Bundle\ProductBundle\Twig\Extension\ProductStatusExtension">
             <argument type="service" id="product_status.provider"/>
             <tag name="twig.extension"/>

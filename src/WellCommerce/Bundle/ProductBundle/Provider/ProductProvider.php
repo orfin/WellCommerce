@@ -12,8 +12,14 @@
 
 namespace WellCommerce\Bundle\ProductBundle\Provider;
 
+use WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface;
 use WellCommerce\Bundle\CoreBundle\Provider\AbstractProvider;
+use WellCommerce\Bundle\DataSetBundle\Conditions\Condition\Eq;
+use WellCommerce\Bundle\DataSetBundle\Conditions\ConditionsCollection;
 use WellCommerce\Bundle\ProductBundle\Entity\Product;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
+use WellCommerce\Bundle\ProductBundle\Helper\ProductAttributeHelperInterface;
+use WellCommerce\Bundle\ShippingBundle\Provider\ProductShippingMethodProviderInterface;
 
 /**
  * Class ProductsProvider
@@ -23,6 +29,28 @@ use WellCommerce\Bundle\ProductBundle\Entity\Product;
 class ProductProvider extends AbstractProvider implements ProductProviderInterface
 {
     /**
+     * @var ProductShippingMethodProviderInterface
+     */
+    protected $productShippingMethodProvider;
+
+    /**
+     * @var ProductAttributeHelperInterface
+     */
+    protected $productAttributeHelper;
+
+    /**
+     * Constructor
+     *
+     * @param ProductShippingMethodProviderInterface $productShippingMethodProvider
+     * @param ProductAttributeHelperInterface        $productAttributeHelper
+     */
+    public function __construct(ProductShippingMethodProviderInterface $productShippingMethodProvider, ProductAttributeHelperInterface $productAttributeHelper)
+    {
+        $this->productShippingMethodProvider = $productShippingMethodProvider;
+        $this->productAttributeHelper        = $productAttributeHelper;
+    }
+
+    /**
      * @var Product
      */
     protected $product;
@@ -30,7 +58,7 @@ class ProductProvider extends AbstractProvider implements ProductProviderInterfa
     /**
      * {@inheritdoc}
      */
-    public function setCurrentProduct(Product $product)
+    public function setCurrentProduct(ProductInterface $product)
     {
         $this->product = $product;
     }
@@ -41,6 +69,45 @@ class ProductProvider extends AbstractProvider implements ProductProviderInterfa
     public function getCurrentProduct()
     {
         return $this->product;
+    }
+
+    /**
+     * Returns a dataset of products recommended for category
+     *
+     * @param CategoryInterface $category
+     *
+     * @return array
+     */
+    public function getProductRecommendationsForCategory(CategoryInterface $category)
+    {
+        $conditions = new ConditionsCollection();
+        $conditions->add(new Eq('category', $category->getId()));
+
+        return $this->getCollectionBuilder()->getDataSet([
+            'limit'      => 3,
+            'order_by'   => 'name',
+            'order_dir'  => 'asc',
+            'conditions' => $conditions
+        ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getProductDefaultTemplateData()
+    {
+        $product             = $this->getCurrentProduct();
+        $shippingMethodCosts = $this->productShippingMethodProvider->getShippingMethodCostsCollection($product);
+        $productAttributes   = $product->getAttributes();
+        $groups              = $this->productAttributeHelper->getAttributeGroups($productAttributes);
+        $attributes          = $this->productAttributeHelper->getAttributes($productAttributes);
+
+        return [
+            'product'         => $product,
+            'shippingCosts'   => $shippingMethodCosts,
+            'attributeGroups' => $groups,
+            'attributes'      => json_encode($attributes)
+        ];
     }
 
     /**

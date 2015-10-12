@@ -32,7 +32,7 @@ class UnitDataGrid extends AbstractDataGrid
     {
         $collection->add(new Column([
             'id'         => 'id',
-            'caption'    => $this->trans('unit.id.label'),
+            'caption'    => $this->trans('common.id.label'),
             'sorting'    => new Sorting([
                 'default_order' => Sorting::SORT_DIR_DESC,
             ]),
@@ -47,7 +47,7 @@ class UnitDataGrid extends AbstractDataGrid
 
         $collection->add(new Column([
             'id'      => 'name',
-            'caption' => $this->trans('unit.name.label'),
+            'caption' => $this->trans('common.label.name'),
         ]));
     }
 }

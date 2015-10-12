@@ -11,6 +11,9 @@
     <services>
         <service id="form.product_attribute_collection.data_transformer" class="WellCommerce\Bundle\ProductBundle\Form\DataTransformer\ProductAttributeCollectionToArrayTransformer" scope="prototype">
             <argument type="service" id="doctrine_helper"/>
+            <call method="setProductAttributeManager">
+                <argument type="service" id="product_attribute.manager.admin"/>
+            </call>
             <tag name="form.data_transformer" alias="product_attribute_collection"/>
         </service>
 

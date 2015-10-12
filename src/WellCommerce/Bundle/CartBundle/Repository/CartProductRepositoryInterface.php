@@ -12,10 +12,7 @@
 
 namespace WellCommerce\Bundle\CartBundle\Repository;
 
-use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 
 /**
  * Interface CartProductRepositoryInterface

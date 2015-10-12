@@ -11,8 +11,8 @@
  */
 namespace WellCommerce\Bundle\AttributeBundle\Repository;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use WellCommerce\Bundle\AttributeBundle\Entity\Attribute;
+use Doctrine\Common\Collections\Criteria;
+use WellCommerce\Bundle\AttributeBundle\Entity\AttributeInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 
 /**
@@ -25,66 +25,11 @@ class AttributeValueRepository extends AbstractEntityRepository implements Attri
     /**
      * {@inheritdoc}
      */
-    public function findAll()
+    public function getCollectionByAttribute(AttributeInterface $attribute)
     {
-        $qb = $this->getQueryBuilder()
-            ->addSelect('attribute_group.id, attribute_value_translation.name')
-            ->leftJoin(
-                'WellCommerce\Bundle\AttributeBundle\Entity\AttributeValueTranslation',
-                'attribute_value_translation',
-                'WITH',
-                'attribute_group.id = attribute_value_translation.translatable')
-            ->addOrderBy('attribute_value_translation.name', 'ASC');
+        $criteria = new Criteria();
+        $criteria->where($criteria->expr()->eq('attribute', $attribute));
 
-        $query  = $qb->getQuery();
-        $result = $query->getArrayResult();
-
-        return $result;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function findAllByAttributeId($id)
-    {
-        $qb = $this->getQueryBuilder()
-            ->addSelect('attribute_value.id, attribute_value_translation.name')
-            ->leftJoin(
-                'WellCommerce\Bundle\AttributeBundle\Entity\AttributeValueTranslation',
-                'attribute_value_translation',
-                'WITH',
-                'attribute_value.id = attribute_value_translation.translatable')
-            ->addOrderBy('attribute_value_translation.name', 'ASC');
-        $qb->addGroupBy('attribute_value.id');
-        // filter by attribute id
-        $where = $qb->expr()->eq('attribute_value.attribute', ':attribute');
-        $qb->setParameter('attribute', $id);
-        $qb->add('where', $where);
-
-        $query  = $qb->getQuery();
-        $result = $query->getArrayResult();
-
-        return $result;
-    }
-
-    public function makeCollection(Attribute $attribute, $values)
-    {
-        $accessor   = $this->getPropertyAccessor();
-        $collection = new ArrayCollection();
-
-        foreach ($values as $value) {
-            $id    = $accessor->getValue($value, '[id]');
-            $name  = $accessor->getValue($value, '[name]');
-            $isNew = substr($id, 0, 3) == 'new';
-            if ($isNew) {
-                $item = $this->addAttributeValue($attribute, $name);
-            } else {
-                $item = $this->find($id);
-            }
-
-            $collection->add($item);
-        }
-
-        return $collection;
+        return $this->matching($criteria);
     }
 }

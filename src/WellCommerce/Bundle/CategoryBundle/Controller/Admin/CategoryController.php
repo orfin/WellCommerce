@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\Controller\Admin;
 
+use Doctrine\Common\Collections\Criteria;
 use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Admin\AbstractAdminController;
 
@@ -34,11 +35,11 @@ class CategoryController extends AbstractAdminController
      */
     public function indexAction()
     {
-        $categories = $this->manager->getRepository()->findAll();
+        $categories = $this->manager->getRepository()->matching(new Criteria());
         $tree       = $this->buildTreeForm();
 
-        if (count($categories)) {
-            $category = current($categories);
+        if ($categories->count()) {
+            $category = $categories->first();
 
             return $this->redirectToAction('edit', [
                 'id' => $category->getId()
@@ -59,6 +60,10 @@ class CategoryController extends AbstractAdminController
      */
     public function addAction(Request $request)
     {
+        if (!$request->isXmlHttpRequest()) {
+            return $this->redirectToAction('index');
+        }
+
         $categoriesName = (string)$request->request->get('name');
         $parentCategory = (int)$request->request->get('parent');
         $category       = $this->manager->quickAddCategory($categoriesName, $parentCategory);
@@ -81,7 +86,7 @@ class CategoryController extends AbstractAdminController
         $form     = $this->manager->getForm($resource);
 
         if ($form->handleRequest()->isSubmitted()) {
-            if ($valid = $form->isValid()) {
+            if ($form->isValid()) {
                 $this->manager->updateResource($resource);
             }
 
@@ -89,8 +94,9 @@ class CategoryController extends AbstractAdminController
         }
 
         return $this->displayTemplate('edit', [
-            'tree' => $this->buildTreeForm(),
-            'form' => $form,
+            'tree'     => $this->buildTreeForm(),
+            'form'     => $form,
+            'resource' => $resource
         ]);
     }
 
@@ -99,25 +105,11 @@ class CategoryController extends AbstractAdminController
      *
      * @return \WellCommerce\Bundle\FormBundle\Elements\FormInterface
      */
-    private function buildTreeForm()
+    protected function buildTreeForm()
     {
         return $this->get('category_tree.form_builder')->createForm([
             'name'  => 'category_tree',
             'class' => 'category-select',
         ]);
-    }
-
-    /**
-     * Sort categories action
-     *
-     * @param Request $request
-     *
-     * @return \Symfony\Component\HttpFoundation\JsonResponse
-     */
-    public function sortAction(Request $request)
-    {
-        $this->manager->sortCategories($request->request->get('items'));
-
-        return $this->jsonResponse(['success' => true]);
     }
 }

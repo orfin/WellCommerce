@@ -32,7 +32,7 @@ class ShopDataGrid extends AbstractDataGrid
     {
         $collection->add(new Column([
             'id'         => 'id',
-            'caption'    => $this->trans('shop.id.label'),
+            'caption'    => $this->trans('common.label.id'),
             'sorting'    => new Sorting([
                 'default_order' => Sorting::SORT_DIR_ASC,
             ]),
@@ -47,12 +47,12 @@ class ShopDataGrid extends AbstractDataGrid
 
         $collection->add(new Column([
             'id'      => 'name',
-            'caption' => $this->trans('shop.name.label'),
+            'caption' => $this->trans('common.label.name'),
         ]));
 
         $collection->add(new Column([
             'id'         => 'url',
-            'caption'    => $this->trans('shop.url.label'),
+            'caption'    => $this->trans('common.label.url'),
             'appearance' => new Appearance([
                 'width' => 180,
                 'align' => Appearance::ALIGN_CENTER
@@ -61,7 +61,7 @@ class ShopDataGrid extends AbstractDataGrid
 
         $collection->add(new Column([
             'id'         => 'company',
-            'caption'    => $this->trans('shop.company.label'),
+            'caption'    => $this->trans('shop.label.company'),
             'appearance' => new Appearance([
                 'width' => 140,
                 'align' => Appearance::ALIGN_CENTER
@@ -70,7 +70,7 @@ class ShopDataGrid extends AbstractDataGrid
 
         $collection->add(new Column([
             'id'         => 'theme',
-            'caption'    => $this->trans('shop.theme.label'),
+            'caption'    => $this->trans('shop.label.theme'),
             'appearance' => new Appearance([
                 'width' => 140,
                 'align' => Appearance::ALIGN_CENTER

@@ -12,9 +12,9 @@
 
 namespace WellCommerce\Bundle\ProductBundle\Controller\Front;
 
-use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\WebBundle\Breadcrumb\BreadcrumbItem;
 
 /**
@@ -24,10 +24,8 @@ use WellCommerce\Bundle\WebBundle\Breadcrumb\BreadcrumbItem;
  */
 class ProductController extends AbstractFrontController implements FrontControllerInterface
 {
-    public function indexAction(Request $request)
+    public function indexAction(ProductInterface $product)
     {
-        $product = $this->findOr404($request);
-
         $this->addBreadCrumbItem(new BreadcrumbItem([
             'name' => $product->translate()->getName(),
         ]));
@@ -36,6 +34,19 @@ class ProductController extends AbstractFrontController implements FrontControll
 
         return $this->displayTemplate('index', [
             'product' => $product
+        ]);
+    }
+
+    public function viewAction(ProductInterface $product)
+    {
+        $this->manager->getProductProvider()->setCurrentProduct($product);
+
+        $defaultTemplateData = $this->manager->getProductProvider()->getProductDefaultTemplateData();
+        $basketModalContent  = $this->renderView('WellCommerceProductBundle:Front/Product:view.html.twig', $defaultTemplateData);
+
+        return $this->jsonResponse([
+            'basketModalContent' => $basketModalContent,
+            'attributes'         => $defaultTemplateData['attributes']
         ]);
     }
 }

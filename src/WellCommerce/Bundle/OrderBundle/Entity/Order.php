@@ -15,7 +15,11 @@ use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientAwareTrait;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\Timestampable\TimestampableTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\AddressInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\ContactDetailsTrait;
+use WellCommerce\Bundle\CoreBundle\Entity\Price;
+use WellCommerce\Bundle\CouponBundle\Entity\CouponAwareTrait;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopAwareTrait;
+use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodAwareTrait;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodAwareTrait;
 
@@ -31,6 +35,8 @@ class Order implements OrderInterface
     use ShippingMethodAwareTrait;
     use PaymentMethodAwareTrait;
     use ClientAwareTrait;
+    use ContactDetailsTrait;
+    use CouponAwareTrait;
 
     /**
      * @var int
@@ -38,14 +44,39 @@ class Order implements OrderInterface
     protected $id;
 
     /**
+     * @var string
+     */
+    protected $currency;
+
+    /**
      * @var Collection
      */
     protected $products;
 
     /**
+     * @var Price
+     */
+    protected $orderTotal;
+
+    /**
+     * @var Price
+     */
+    protected $productTotal;
+
+    /**
+     * @var Price
+     */
+    protected $shippingTotal;
+
+    /**
      * @var Collection
      */
-    protected $modifiers;
+    protected $totals;
+
+    /**
+     * @var Collection
+     */
+    protected $payments;
 
     /**
      * @var string
@@ -70,11 +101,6 @@ class Order implements OrderInterface
     /**
      * @var string
      */
-    protected $currency;
-
-    /**
-     * @var string
-     */
     protected $comment;
     
     /**
@@ -83,6 +109,22 @@ class Order implements OrderInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCurrency()
+    {
+        return $this->currency;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCurrency($currency)
+    {
+        $this->currency = $currency;
     }
 
     /**
@@ -134,6 +176,54 @@ class Order implements OrderInterface
     }
 
     /**
+     * @return OrderTotal
+     */
+    public function getOrderTotal()
+    {
+        return $this->orderTotal;
+    }
+
+    /**
+     * @param OrderTotal $orderTotal
+     */
+    public function setOrderTotal(OrderTotal $orderTotal)
+    {
+        $this->orderTotal = $orderTotal;
+    }
+
+    /**
+     * @return OrderTotal
+     */
+    public function getProductTotal()
+    {
+        return $this->productTotal;
+    }
+
+    /**
+     * @param OrderTotal $productTotal
+     */
+    public function setProductTotal(OrderTotal $productTotal)
+    {
+        $this->productTotal = $productTotal;
+    }
+
+    /**
+     * @return OrderTotal
+     */
+    public function getShippingTotal()
+    {
+        return $this->shippingTotal;
+    }
+
+    /**
+     * @param OrderTotal $shippingTotal
+     */
+    public function setShippingTotal(OrderTotal $shippingTotal)
+    {
+        $this->shippingTotal = $shippingTotal;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getBillingAddress()
@@ -168,25 +258,25 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getModifiers()
+    public function getTotals()
     {
-        return $this->modifiers;
+        return $this->totals;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setModifiers(Collection $modifiers)
+    public function setTotals(Collection $totals)
     {
-        $this->modifiers = $modifiers;
+        $this->totals = $totals;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function addModifier(OrderModifierInterface $orderModifier)
+    public function addTotal(OrderTotalDetailInterface $orderTotal)
     {
-        $this->modifiers->add($orderModifier);
+        $this->totals->add($orderTotal);
     }
 
     /**
@@ -208,22 +298,6 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getCurrency()
-    {
-        return $this->currency;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCurrency($currency)
-    {
-        $this->currency = $currency;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getComment()
     {
         return $this->comment;
@@ -235,5 +309,29 @@ class Order implements OrderInterface
     public function setComment($comment)
     {
         $this->comment = $comment;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPayments()
+    {
+        return $this->payments;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPayments(Collection $payments)
+    {
+        $this->payments = $payments;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addPayment(PaymentInterface $payment)
+    {
+        $this->payments[] = $payment;
     }
 }

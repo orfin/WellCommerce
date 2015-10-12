@@ -14,7 +14,7 @@
 				        <div class="col-md-5 col-sm-6 col-xs-7">
 				            <h3>{{ item.name }}<small>{% trans %}product.label.manufactured_by{% endtrans %} {{ item.producerName }}</small></h3>
 				            <span class="price">{{ format_price(item.price, item.currency) }}</span>
-				            <a href="{{ path('front.cart.add') }}" class="btn btn-primary text-left add-cart" data-id="{{ item.id }}" data-qty="1" data-attribute="0">
+				            <a href="{{ path('front.cart.add',{"id": item.id}) }}" class="btn btn-primary text-left add-cart">
 				                {% trans %}cart.button.add{% endtrans %}<i class="pull-right"><img src="{{ asset('themes/wellcommerce/assets/img/add-to-cart.png') }}"></i>
 				            </a>
 				        </div>

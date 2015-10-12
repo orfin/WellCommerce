@@ -40,7 +40,6 @@ wellcommerce_producer:
 
 wellcommerce_product:
     resource: "@WellCommerceProductBundle/Resources/config/routing.xml"
-    prefix:   /admin/catalog/product
 
 wellcommerce_category:
     resource: "@WellCommerceCategoryBundle/Resources/config/routing.xml"
@@ -52,6 +51,9 @@ wellcommerce_client:
 wellcommerce_order:
     resource: "@WellCommerceOrderBundle/Resources/config/routing.xml"
 
+wellcommerce_coupon:
+    resource: "@WellCommerceCouponBundle/Resources/config/routing.xml"
+
 wellcommerce_company:
     resource: "@WellCommerceMultiStoreBundle/Resources/config/routing.xml"
     prefix:   /admin/configuration/multi
@@ -59,6 +61,10 @@ wellcommerce_company:
 wellcommerce_unit:
     resource: "@WellCommerceUnitBundle/Resources/config/routing.xml"
     prefix:   /admin/configuration/unit
+
+wellcommerce_report:
+    resource: "@WellCommerceReportBundle/Resources/config/routing.xml"
+    prefix:   /admin/report
 
 wellcommerce_tax:
     resource: "@WellCommerceTaxBundle/Resources/config/routing.xml"
@@ -82,7 +88,6 @@ wellcommerce_cms:
 
 wellcommerce_payment:
     resource: "@WellCommercePaymentBundle/Resources/config/routing.xml"
-    prefix:   /admin/payment
 
 wellcommerce_shipping:
     resource: "@WellCommerceShippingBundle/Resources/config/routing.xml"

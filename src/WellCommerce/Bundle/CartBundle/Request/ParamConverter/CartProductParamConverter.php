@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\CartBundle\Request\ParamConverter;
 
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
-use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Request\ParamConverter\AbstractEntityParamConverter;
 
 /**
@@ -23,20 +22,5 @@ use WellCommerce\Bundle\CoreBundle\Request\ParamConverter\AbstractEntityParamCon
  */
 class CartProductParamConverter extends AbstractEntityParamConverter
 {
-    protected function findByRequestParameter(Request $request)
-    {
-        $id = (int)$request->request->get($this->requestParameter);
 
-        return $this->repository->findOneBy([
-            'id' => $id
-        ]);
-    }
-
-    protected function getSupportedTypes()
-    {
-        return [
-            'WellCommerce\Bundle\CartBundle\Entity\CartProduct',
-            'WellCommerce\Bundle\CartBundle\Entity\CartProductInterface'
-        ];
-    }
 }

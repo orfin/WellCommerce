@@ -89,6 +89,8 @@
         </service>
 
         <service id="product.provider" class="WellCommerce\Bundle\ProductBundle\Provider\ProductProvider">
+            <argument type="service" id="shipping_method.product.provider"/>
+            <argument type="service" id="product_attribute.helper"/>
             <call method="setCollectionBuilder">
                 <argument type="service" id="product.collection.front" />
             </call>
@@ -161,7 +163,12 @@
 
         <service id="product.request_param_converter" class="WellCommerce\Bundle\ProductBundle\Request\ParamConverter\ProductParamConverter">
             <argument type="service" id="product.repository" />
-            <tag name="request.param_converter" converter="product" priority="10"/>
+            <argument>id</argument>
+            <argument type="collection">
+                <argument>WellCommerce\Bundle\ProductBundle\Entity\Product</argument>
+                <argument>WellCommerce\Bundle\ProductBundle\Entity\ProductInterface</argument>
+            </argument>
+            <tag name="request.param_converter" converter="product" priority="0"/>
         </service>
     </services>
 </container>

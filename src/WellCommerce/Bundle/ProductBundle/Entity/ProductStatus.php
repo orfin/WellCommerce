@@ -22,7 +22,7 @@ use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductStatus
+class ProductStatus implements ProductStatusInterface
 {
     use Translatable;
     use Timestampable;

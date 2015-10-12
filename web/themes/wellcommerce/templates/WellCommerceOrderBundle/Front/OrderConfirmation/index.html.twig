@@ -1,0 +1,126 @@
+{% extends 'WellCommerceWebBundle:Front:layout.html.twig' %}
+{% trans_default_domain "wellcommerce" %}
+{% import "WellCommerceFormBundle:Front/Common:macros.html.twig" as macros %}
+{% block content %}
+    {% include 'WellCommerceWebBundle:Front:breadcrumbs.html.twig' %}
+    <div class="row">
+        <div class="col-lg-9">
+            {{ macros.form_begin(form, 'cart-address') }}
+            <div class="cart">
+                {% include 'WellCommerceOrderBundle:Front/Common:products_table.html.twig' %}
+
+                <div class="methods">
+                    <div class="row mbt60">
+                        <div class="col-lg-5">
+                            <div class="order-details">
+                                <h4 class="mbt20">Shipping and payment method</h4>
+
+                                <table class="table">
+                                    <tbody>
+                                    <tr>
+                                        <td>Shipping</td>
+                                        <td>{{ order.getShippingMethod().translate().name }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Payment</td>
+                                        <td>{{ order.getPaymentMethod().translate().name }}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-5 col-lg-offset-2">
+                            <div class="row">
+                                <div class="col-lg-6 text-right">
+                                    <h4><br/><br/><br/>Cost of delivery</h4>
+                                </div>
+                                <div class="col-lg-6">
+                                    <h4><strong><br/><br/><br/>{{ format_price(shippingCost.getGrossAmount(), shippingCost.getCurrency()) }}</strong></h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mbt60">
+                        <div class="col-lg-12">
+                            <div class="client-details">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <h4>Delivery address <a class="coming-soon" href="#address-change">Change</a></h4>
+
+                                        <p>
+                                            {{ format_address(cart.billingAddress) }}
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <h4>Contact info <a class="coming-soon" href="#address-change">Change</a></h4>
+
+                                        <p>
+                                            {{ format_contact_details(cart.contactDetails) }}
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <h4>Billing data <a class="coming-soon" href="#address-change">Change</a></h4>
+
+                                        <p>
+                                            {{ format_address(cart.shippingAddress) }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mbt60">
+                        <div class="col-lg-12">
+                            {{ macros.element(form.getChildren().get('comment')) }}
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="summary mbt60">
+                    {% for total in order.totals %}
+                    <div class="row">
+                        <div class="col-lg-10 col-lg-offset-2">
+                            <div class="col-lg-9 text-right">
+                                <span class="text">{{ 'order.description.' ~ total.collector|trans }}</span>
+                            </div>
+                            <div class="col-lg-3">
+                                {% if total.isSubtraction() %}
+                                    <span class="text subtraction">-{{ format_price(total.orderTotal.grossAmount) }}</span>
+                                {% else %}
+                                    <span class="text addition">{{ format_price(total.orderTotal.grossAmount) }}</span>
+                                {% endif %}
+
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <div class="row">
+                        <div class="col-lg-10 col-lg-offset-2">
+                            <div class="col-lg-9 text-right">
+                                <span class="text">Summary</span>
+                            </div>
+                            <div class="col-lg-3">
+                                <span class="value">{{ format_price(order.orderTotal.grossAmount, order.orderTotal.currency) }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clearfix">
+                    <a href="{{ path('front.order.address') }}" class="btn btn-link light btn-lg notransform nopadding">Back to address details</a>
+                    <button class="btn btn-primary btn-lg pull-right">Place an order</button>
+                </div>
+            </div>
+        </div>
+        {{ macros.form_end(form) }}
+
+        <div class="col-lg-3">
+            {% include 'WellCommerceCmsBundle:Front/Common:sidebar_contact.html.twig' %}
+        </div>
+    </div>
+{% endblock %}

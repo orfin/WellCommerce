@@ -1363,7 +1363,7 @@ a.button-green span img,span.button-green span img {
 }
 
 .GForm .field-tree .tree-wrapper ul li .expander:hover {
-	
+
 }
 
 .GForm .field-tree .tree-wrapper ul li.temporarly-expanded>.expander,.GForm .field-tree .tree-wrapper ul li.expanded>.expander
@@ -2898,8 +2898,6 @@ table.list td.align-right {
 	height: 400px;
 	margin: 0 0 30px;
 	clear: both;
-	background: url('../images/icons/loading/big-dots.gif') center center
-		no-repeat;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -3046,7 +3044,7 @@ form {
 }
 
 .GForm>.GBlock>fieldset {
-	
+
 }
 
 .GForm>.GBlock>fieldset>legend {
@@ -3423,7 +3421,7 @@ form {
 */
 .GForm .field-product-select .category-selector,.GForm .field-product-select .params-selector
 	{
-	
+
 }
 
 .GForm .field-product-select .category-selector,.GForm .field-product-select .params-selector
@@ -6788,7 +6786,7 @@ form {
 
 .GF_Datagrid .header table tbody td label span {
 	vertical-align: middle;
-	margin-right: 4px;
+	margin-right: 2px;
 	display: inline;
 }
 
@@ -6967,7 +6965,7 @@ form {
 }
 
 .GF_Datagrid .body { /*min-height: 28px;*/
-	
+
 }
 
 .GF_Datagrid .body th {
@@ -7374,7 +7372,7 @@ td.GF_Datagrid_Col_categoriesname span.GF_Datagrid_filter_tree {
 
 .GF_Datagrid .GF_Datagrid_filter_tree .trigger-reset:hover,.GF_Datagrid .GF_Datagrid_filter_tree .trigger-reset:focus,.GF_Datagrid .GF_Datagrid_filter_tree .trigger-reset:active,.GF_Datagrid .GF_Datagrid_filter_tree .trigger-expand:hover,.GF_Datagrid .GF_Datagrid_filter_tree .trigger-expand:focus,.GF_Datagrid .GF_Datagrid_filter_tree .trigger-expand:active,.GF_Datagrid_filter_tree_panel .trigger-retract:hover,.GF_Datagrid_filter_tree_panel .trigger-retract:focus,.GF_Datagrid_filter_tree_panel .trigger-retract:active
 	{
-	
+
 }
 
 .GF_Datagrid_filter_tree_panel {
@@ -7495,7 +7493,7 @@ td.GF_Datagrid_Col_categoriesname span.GF_Datagrid_filter_tree {
 }
 
 .GF_Datagrid_filter_tree_panel ul li .expander:hover {
-	
+
 }
 
 .GF_Datagrid_filter_tree_panel ul li.temporarly-expanded>.expander,.GF_Datagrid_filter_tree_panel ul li.expanded>.expander
@@ -9162,4 +9160,35 @@ span.field+span.required,span.field+*+span.required {
 .field-console-output .field-console-output strong {
     font-weight: 400!important;
     color: #00a0aa;
+}
+
+.ct-chart {
+	display: block;
+	position: relative;
+    width: 95%;
+    height: 400px;
+}
+
+.chartist-tooltip {
+    position: absolute;
+    display: inline-block;
+    min-width: 5em;
+    padding: .5em;
+    background: #3d3d3d;
+    color: #D7D7D7;
+    font-size: 13px;
+    font-family: 'UbuntuRegular', sans-serif;
+    text-align: center;
+    pointer-events: none;
+    z-index: 1;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.ct-series-a .ct-bar,
+.ct-series-a .ct-line,
+.ct-series-a .ct-point,
+.ct-series-a .ct-slice-donut {
+    stroke: #00A0AB;
 }

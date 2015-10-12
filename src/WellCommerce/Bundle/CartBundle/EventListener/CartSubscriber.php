@@ -50,7 +50,7 @@ class CartSubscriber extends AbstractEventSubscriber
     public static function getSubscribedEvents()
     {
         return [
-            KernelEvents::CONTROLLER => ['onKernelController', 0],
+            KernelEvents::CONTROLLER => ['onKernelController', -150],
             'cart.pre_create'        => ['onCartChangedEvent', 0],
             'cart.pre_update'        => ['onCartChangedEvent', 0],
             'cart.post_init'         => ['onCartInitEvent', 0],

@@ -31,7 +31,7 @@ class OrderAddressFormBuilder extends AbstractFormBuilder
 
         $billingAddress = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'billingAddress',
-            'label' => $this->trans('client.label.billing_address'),
+            'label' => $this->trans('address.heading.billing_address'),
         ]));
 
         $billingAddress->addChild($this->getElement('text_field', [
@@ -46,44 +46,49 @@ class OrderAddressFormBuilder extends AbstractFormBuilder
 
         $billingAddress->addChild($this->getElement('text_field', [
             'name'  => 'billingAddress.street',
-            'label' => $this->trans('client.label.street'),
+            'label' => $this->trans('address.label.street'),
         ]));
 
         $billingAddress->addChild($this->getElement('text_field', [
             'name'  => 'billingAddress.streetNo',
-            'label' => $this->trans('client.label.street_no'),
+            'label' => $this->trans('address.label.street_no'),
         ]));
 
         $billingAddress->addChild($this->getElement('text_field', [
             'name'  => 'billingAddress.flatNo',
-            'label' => $this->trans('client.label.flat_no'),
+            'label' => $this->trans('address.label.flat_no'),
         ]));
 
         $billingAddress->addChild($this->getElement('text_field', [
             'name'  => 'billingAddress.postCode',
-            'label' => $this->trans('client.label.post_code'),
+            'label' => $this->trans('address.label.post_code'),
         ]));
 
         $billingAddress->addChild($this->getElement('text_field', [
             'name'  => 'billingAddress.province',
-            'label' => $this->trans('client.label.province'),
+            'label' => $this->trans('address.label.province'),
         ]));
 
         $billingAddress->addChild($this->getElement('text_field', [
             'name'  => 'billingAddress.city',
-            'label' => $this->trans('client.label.city'),
+            'label' => $this->trans('address.label.city'),
         ]));
 
         $billingAddress->addChild($this->getElement('select', [
             'name'    => 'billingAddress.country',
-            'label'   => $this->trans('client.label.country'),
+            'label'   => $this->trans('address.label.country'),
             'options' => $countries,
             'default' => $defaultCountry
         ]));
 
+        $form->addChild($this->getElement('checkbox', [
+            'name'  => 'copyAddress',
+            'label' => $this->trans('address.label.copy_address'),
+        ]));
+
         $shippingAddress = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'shippingAddress',
-            'label' => $this->trans('client.label.shipping_address'),
+            'label' => $this->trans('address.heading.shipping_address'),
         ]));
 
         $shippingAddress->addChild($this->getElement('text_field', [
@@ -98,59 +103,59 @@ class OrderAddressFormBuilder extends AbstractFormBuilder
 
         $shippingAddress->addChild($this->getElement('text_field', [
             'name'  => 'shippingAddress.street',
-            'label' => $this->trans('client.label.street'),
+            'label' => $this->trans('address.label.street'),
         ]));
 
         $shippingAddress->addChild($this->getElement('text_field', [
             'name'  => 'shippingAddress.streetNo',
-            'label' => $this->trans('client.label.street_no'),
+            'label' => $this->trans('address.label.street_no'),
         ]));
 
         $shippingAddress->addChild($this->getElement('text_field', [
             'name'  => 'shippingAddress.flatNo',
-            'label' => $this->trans('client.label.flat_no'),
+            'label' => $this->trans('address.label.flat_no'),
         ]));
 
         $shippingAddress->addChild($this->getElement('text_field', [
             'name'  => 'shippingAddress.postCode',
-            'label' => $this->trans('client.label.post_code'),
+            'label' => $this->trans('address.label.post_code'),
         ]));
 
         $shippingAddress->addChild($this->getElement('text_field', [
             'name'  => 'shippingAddress.province',
-            'label' => $this->trans('client.label.province'),
+            'label' => $this->trans('address.label.province'),
         ]));
 
         $shippingAddress->addChild($this->getElement('text_field', [
             'name'  => 'shippingAddress.city',
-            'label' => $this->trans('client.label.city'),
+            'label' => $this->trans('address.label.city'),
         ]));
 
         $shippingAddress->addChild($this->getElement('select', [
             'name'    => 'shippingAddress.country',
-            'label'   => $this->trans('client.label.country'),
+            'label'   => $this->trans('address.label.country'),
             'options' => $countries,
             'default' => $defaultCountry
         ]));
 
         $contactDetails = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'contactDetails',
-            'label' => $this->trans('client.label.contact_details'),
+            'label' => $this->trans('contact_details.heading.details'),
         ]));
 
         $contactDetails->addChild($this->getElement('text_field', [
             'name'  => 'contactDetails.phone',
-            'label' => $this->trans('client.label.phone'),
+            'label' => $this->trans('contact_details.label.phone'),
         ]));
 
         $contactDetails->addChild($this->getElement('text_field', [
             'name'  => 'contactDetails.secondaryPhone',
-            'label' => $this->trans('client.label.secondary_phone'),
+            'label' => $this->trans('contact_details.label.secondary_phone'),
         ]));
 
         $contactDetails->addChild($this->getElement('text_field', [
             'name'  => 'contactDetails.email',
-            'label' => $this->trans('client.label.email'),
+            'label' => $this->trans('contact_details.label.email'),
         ]));
 
         $form->addFilter($this->getFilter('no_code'));

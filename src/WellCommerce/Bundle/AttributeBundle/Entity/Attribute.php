@@ -24,7 +24,9 @@ use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
  */
 class Attribute implements AttributeInterface
 {
-    use Translatable, Timestampable, Blameable;
+    use Translatable;
+    use Timestampable;
+    use Blameable;
 
     /**
      * @var int
@@ -32,9 +34,9 @@ class Attribute implements AttributeInterface
     protected $id;
 
     /**
-     * @var Collection
+     * @var AttributeGroupInterface
      */
-    protected $groups;
+    protected $attributeGroup;
 
     /**
      * @var Collection
@@ -52,26 +54,17 @@ class Attribute implements AttributeInterface
     /**
      * {@inheritdoc}
      */
-    public function getGroups()
+    public function getAttributeGroup()
     {
-        return $this->groups;
+        return $this->attributeGroup;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setGroups(Collection $collection)
+    public function setAttributeGroup(AttributeGroupInterface $attributeGroup)
     {
-        $this->groups = $collection;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addGroup(AttributeGroupInterface $group)
-    {
-        $group->addAttribute($this);
-        $this->groups[] = $group;
+        $this->attributeGroup = $attributeGroup;
     }
 
     /**
@@ -87,12 +80,6 @@ class Attribute implements AttributeInterface
      */
     public function setValues(Collection $collection)
     {
-        foreach ($this->values as $value) {
-            if (!$collection->contains($value)) {
-                $this->values->removeElement($value);
-            }
-        }
-
         $this->values = $collection;
     }
 }

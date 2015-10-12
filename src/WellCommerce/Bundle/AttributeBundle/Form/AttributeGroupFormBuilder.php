@@ -34,7 +34,7 @@ class AttributeGroupFormBuilder extends AbstractFormBuilder
 
         $languageData = $groupData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
-            'label'       => $this->trans('form.required_data.language_data.label'),
+            'label'       => $this->trans('admin.fieldset.translations'),
             'transformer' => $this->getRepositoryTransformer('translation', $this->get('attribute_group.repository'))
         ]));
 

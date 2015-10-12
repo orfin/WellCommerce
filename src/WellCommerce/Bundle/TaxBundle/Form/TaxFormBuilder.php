@@ -28,7 +28,7 @@ class TaxFormBuilder extends AbstractFormBuilder
     {
         $taxRequiredData = $taxForm->addChild($this->getElement('nested_fieldset', [
             'name'  => 'required_data',
-            'label' => $this->trans('form.required_data.label')
+            'label' => $this->trans('form.fieldset.required_data')
         ]));
 
         $taxRequiredData->addChild($this->getElement('text_field', [
@@ -38,13 +38,13 @@ class TaxFormBuilder extends AbstractFormBuilder
 
         $taxTranslationData = $taxRequiredData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
-            'label'       => $this->trans('form.translations.label'),
+            'label'       => $this->trans('form.fieldset.translations'),
             'transformer' => $this->getRepositoryTransformer('translation', $this->get('tax.repository'))
         ]));
 
         $taxTranslationData->addChild($this->getElement('text_field', [
             'name'  => 'name',
-            'label' => $this->trans('tax.label.name'),
+            'label' => $this->trans('common.label.name'),
         ]));
 
         $taxForm->addFilter($this->getFilter('no_code'));

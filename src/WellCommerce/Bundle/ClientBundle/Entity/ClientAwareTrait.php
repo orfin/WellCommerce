@@ -20,12 +20,12 @@ namespace WellCommerce\Bundle\ClientBundle\Entity;
 trait ClientAwareTrait
 {
     /**
-     * @var ClientInterface
+     * @var null|ClientInterface
      */
     protected $client;
 
     /**
-     * @return mixed
+     * @return null|ClientInterface
      */
     public function getClient()
     {
@@ -33,9 +33,9 @@ trait ClientAwareTrait
     }
 
     /**
-     * @param ClientInterface $client
+     * @param null|ClientInterface $client
      */
-    public function setClient(ClientInterface $client)
+    public function setClient(ClientInterface $client = null)
     {
         $this->client = $client;
     }

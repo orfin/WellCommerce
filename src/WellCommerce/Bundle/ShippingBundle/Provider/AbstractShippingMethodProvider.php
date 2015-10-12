@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\ShippingBundle\Provider;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Util\Debug;
 use WellCommerce\Bundle\ShippingBundle\Calculator\ShippingMethodCalculatorCollection;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
 use WellCommerce\Bundle\ShippingBundle\Exception\CalculatorNotFoundException;
@@ -41,8 +42,10 @@ abstract class AbstractShippingMethodProvider
      * @param ShippingMethodRepositoryInterface  $shippingMethodRepository
      * @param ShippingMethodCalculatorCollection $shippingMethodCalculatorCollection
      */
-    public function __construct(ShippingMethodRepositoryInterface $shippingMethodRepository, ShippingMethodCalculatorCollection $shippingMethodCalculatorCollection)
-    {
+    public function __construct(
+        ShippingMethodRepositoryInterface $shippingMethodRepository,
+        ShippingMethodCalculatorCollection $shippingMethodCalculatorCollection
+    ) {
         $this->shippingMethodRepository           = $shippingMethodRepository;
         $this->shippingMethodCalculatorCollection = $shippingMethodCalculatorCollection;
     }
@@ -75,5 +78,24 @@ abstract class AbstractShippingMethodProvider
         }
 
         return $this->shippingMethodCalculatorCollection->get($calculator);
+    }
+
+    /**
+     * Returns all enabled shipping methods which are supporting product calculations
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    protected function getSupportedShippingMethods()
+    {
+        $methods = $this->getEnabledMethods();
+
+        $supportedMethods = $methods->filter(function (ShippingMethodInterface $shippingMethod) {
+            $paymentMethodsCount     = $shippingMethod->getPaymentMethods()->count();
+            $shippingMethodCostCount = $shippingMethod->getCosts()->count();
+
+            return $paymentMethodsCount > 0 && $shippingMethodCostCount > 0;
+        });
+
+        return $supportedMethods;
     }
 }

@@ -18,6 +18,7 @@ use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\EnableableTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\HierarchyAwareTrait;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderStatusInterface;
 
 /**
  * Class PaymentMethod
@@ -46,6 +47,11 @@ class PaymentMethod implements PaymentMethodInterface
      * @var Collection
      */
     protected $shippingMethods;
+
+    /**
+     * @var OrderStatusInterface
+     */
+    protected $defaultOrderStatus;
 
     /**
      * {@inheritdoc}
@@ -85,5 +91,21 @@ class PaymentMethod implements PaymentMethodInterface
     public function setShippingMethods(Collection $shippingMethods)
     {
         $this->shippingMethods = $shippingMethods;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDefaultOrderStatus()
+    {
+        return $this->defaultOrderStatus;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDefaultOrderStatus(OrderStatusInterface $defaultOrderStatus)
+    {
+        $this->defaultOrderStatus = $defaultOrderStatus;
     }
 }

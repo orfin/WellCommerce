@@ -6,8 +6,58 @@
             {{ layout_box('client_menu') }}
         </div>
 
-        <div class="col-lg-7 col-sm-9">
-            {{ layout_box('client_settings') }}
+        <div class="col-sm-9">
+            <div class="well-form mbt60">
+				<h4>Orders history</h4>
+
+				<div class="table-responsive">
+					<table class="table orders-table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Date</th>
+								<th>Summary</th>
+								<th>Payment method</th>
+								<th>Status</th>
+								<th></th>
+							</tr>
+						</thead>
+
+						<tbody>
+							<tr>
+								<td>1410</td>
+								<td>2015-05-29 08:20:16</td>
+								<td><strong>$89.90</strong></td>
+								<td>Bank transfer</td>
+								<td>Waiting for payment</td>
+								<!-- ORDER DETAILS VIEW IN ORDER-DETAILS.HTML.TWIG FILE -->
+								<td><a href="#" class="btn btn-link light">Show details</a></td>
+							</tr>
+
+							<tr>
+								<td>973</td>
+								<td>2015-04-01 15:12:31</td>
+								<td><strong>$329.90</strong></td>
+								<td>On delivery</td>
+								<td>Sent via FedEx</td>
+								<!-- ORDER DETAILS VIEW IN ORDER-DETAILS.HTML.TWIG FILE -->
+								<td><a href="#" class="btn btn-link light">Show details</a></td>
+							</tr>
+
+
+							<tr>
+								<td>728</td>
+								<td>2015-02-19 11:50:04</td>
+								<td><strong>$1229.90</strong></td>
+								<td>PayPal</td>
+								<td>Sent via FedEx</td>
+								<!-- ORDER DETAILS VIEW IN ORDER-DETAILS.HTML.TWIG FILE -->
+								<td><a href="#" class="btn btn-link light">Show details</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
         </div>
     </div>
 {% endblock %}

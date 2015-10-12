@@ -14,6 +14,18 @@ WellCommerce\Bundle\OrderBundle\Entity\Order:
         shippingAddress:
             class: WellCommerce\Bundle\CoreBundle\Entity\Address
             columnPrefix: shipping_address_
+        contactDetails:
+            class: WellCommerce\Bundle\CoreBundle\Entity\ContactDetails
+            columnPrefix: contact_details_
+        orderTotal:
+            class: WellCommerce\Bundle\OrderBundle\Entity\OrderTotal
+            columnPrefix: order_total_
+        productTotal:
+            class: WellCommerce\Bundle\OrderBundle\Entity\OrderTotal
+            columnPrefix: product_total_
+        shippingTotal:
+            class: WellCommerce\Bundle\OrderBundle\Entity\OrderTotal
+            columnPrefix: shipping_total_
     fields:
         sessionId:
             type: string
@@ -23,6 +35,7 @@ WellCommerce\Bundle\OrderBundle\Entity\Order:
             type: string
             length: 16
             nullable: false
+            column: currency
         comment:
             type: string
             length: 1000
@@ -34,13 +47,23 @@ WellCommerce\Bundle\OrderBundle\Entity\Order:
                 - persist
             fetch: LAZY
             mappedBy: order
-        modifiers:
-            targetEntity: WellCommerce\Bundle\OrderBundle\Entity\OrderModifier
+        totals:
+            targetEntity: WellCommerce\Bundle\OrderBundle\Entity\OrderTotalDetail
             cascade:
                 - persist
             fetch: LAZY
             mappedBy: order
-    oneToOne:
+        payments:
+            targetEntity:  WellCommerce\Bundle\PaymentBundle\Entity\Payment
+            mappedBy: order
+    manyToOne:
+        coupon:
+            targetEntity: WellCommerce\Bundle\CouponBundle\Entity\Coupon
+            fetch: LAZY
+            joinColumns:
+                coupon_id:
+                    referencedColumnName: id
+                    onDelete: SET NULL
         client:
             targetEntity: WellCommerce\Bundle\ClientBundle\Entity\Client
             fetch: LAZY
@@ -48,7 +71,6 @@ WellCommerce\Bundle\OrderBundle\Entity\Order:
                 client_id:
                     referencedColumnName: id
                     onDelete: CASCADE
-    manyToOne:
         paymentMethod:
             targetEntity: WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod
             fetch: LAZY

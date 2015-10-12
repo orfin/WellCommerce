@@ -1,12 +1,18 @@
 $(document).ready(function () {
-    $('.add-cart').click(function (e) {
-        e.stopImmediatePropagation();
-        GAjaxRequest($(this).attr('href'), $(this).data(), function(oResponse){
-            $('#basket-modal').html(oResponse.basketModalContent).modal('show');
-            $('#topCart').html(oResponse.cartPreviewContent);
-        });
 
-        return false;
+    var oBasketModal = $('#basket-modal');
+    var oCartPreview = $('#topCart');
+
+    $('.add-cart').GProductAddCartButton({
+        oBasketModal: oBasketModal,
+        oCartPreview: oCartPreview,
+        sAddProductFormClass: '.add-to-cart',
+        sProductSelector: '#product',
+        sQuantitySelector: '#quantity',
+        sAttributeSelector: '#attribute',
+        sPriceSelector: '#price',
+        sAddProductRoute: 'front.cart.add',
+        sAttributesSelectClass: '.attribute'
     });
 
     $('.coming-soon').click(function(e){
@@ -17,9 +23,15 @@ $(document).ready(function () {
 
     $('.cart').GCart({
         sChangeQuantityRoute: 'front.cart.edit',
-        sDeleteRoute: 'front.cart.delete',
-        sDeleteButtonClass: 'btn-remove',
         sQuantitySpinnerClass: 'quantity-spinner'
+    });
+
+    $('.cart .coupon').GCoupon({
+        sAddCouponRoute:      'front.coupon.add',
+        sRemoveCouponRoute:      'front.coupon.delete',
+        sCodeInputIdentifier: 'coupon_code',
+        sAddButtonIdentifier: 'use_coupon',
+        sRemoveButtonIdentifier: 'remove_coupon'
     });
 
     $('.push-hamburger').click(function() {

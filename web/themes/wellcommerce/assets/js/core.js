@@ -253,8 +253,6 @@ GAjaxRequest = function (sUrl, oRequest, fCallBack) {
 var oCartDefaults = {
     sChangeQuantityRoute: 'front.cart.edit',
     sDeleteRoute: 'front.cart.delete',
-    sDeleteButtonClass: 'btn-remove',
-    sQuantitySpinnerClass: 'quantity-spinner'
 };
 
 var GCart = function(oOptions) {
@@ -268,18 +266,7 @@ var GCart = function(oOptions) {
 
     gThis.InitializeEvents = function(){
         $("input[type='radio']", gThis.m_gForm).bind('change', gThis.SubmitForm);
-        $('.' + gThis.m_oOptions.sDeleteButtonClass, gThis).bind('click', gThis.DeleteItem);
         $('.' + gThis.m_oOptions.sQuantitySpinnerClass, gThis).bind('change', gThis.ChangeItemQuantity);
-    };
-
-    gThis.DeleteItem = function(){
-        var oRequest = {
-            id: $(this).data('id')
-        };
-
-        GAjaxRequest(Routing.generate(gThis.m_oOptions.sDeleteRoute), oRequest, gThis.ProcessResponse);
-
-        return false;
     };
 
     gThis.ProcessResponse = function(oResponse){
@@ -291,12 +278,12 @@ var GCart = function(oOptions) {
     };
 
     gThis.ChangeItemQuantity = function(){
-        var oRequest = {
+        var routeParams = {
             id: $(this).data('id'),
-            qty: $(this).val()
+            quantity: $(this).val()
         };
 
-        GAjaxRequest(Routing.generate(gThis.m_oOptions.sChangeQuantityRoute), oRequest, gThis.ProcessResponse);
+        GAjaxRequest(Routing.generate(gThis.m_oOptions.sChangeQuantityRoute, routeParams), {}, gThis.ProcessResponse);
 
         return false;
     };
@@ -314,3 +301,182 @@ var GCart = function(oOptions) {
 };
 
 new GPlugin('GCart', oCartDefaults, GCart);
+
+/**
+ * GProductAddCartForm
+ */
+var oProductCartAddFormDefaults = {
+    sAddProductRoute: 'front.cart.add'
+};
+
+var GProductAddCartForm = function(oOptions) {
+
+    var gThis = this;
+
+    gThis._Constructor = function() {
+        gThis.m_gForm = $("form", gThis);
+        gThis.m_gForm.submit(gThis.OnFormSubmit);
+        $(gThis).find(gThis.m_oOptions.sAttributesSelectClass).change(function(){
+            gThis.UpdateAttributes();
+        });
+        gThis.UpdateAttributes();
+    };
+
+    gThis.UpdateAttributes = function(){
+        var attributes = [];
+        $(gThis).find(gThis.m_oOptions.sAttributesSelectClass).find('option:selected').each(function() {
+            attributes.push(this.value);
+        });
+        attributes.sort(function(a,b){return a - b});
+        var checkedVariant = attributes.join(',');
+
+        if(gThis.m_oOptions.aoAttributes[checkedVariant] != undefined){
+            var variant = gThis.m_oOptions.aoAttributes[checkedVariant];
+            gThis.m_oOptions.oAttribute.val(variant.id);
+            gThis.m_oOptions.oPrice.text(variant.finalPriceGross);
+        }
+    };
+
+    gThis.OnFormSubmit = function(e){
+        e.stopImmediatePropagation();
+        var routeParams = {
+            id: gThis.m_oOptions.oProduct.val(),
+            attribute: gThis.m_oOptions.oAttribute.val(),
+            quantity: gThis.m_oOptions.oQuantity.val()
+        };
+
+        GAjaxRequest(Routing.generate(gThis.m_oOptions.sAddProductRoute, routeParams), {}, gThis.ProcessResponse);
+
+        return false;
+    };
+
+    gThis.ProcessResponse = function(oResponse){
+        gThis.m_oOptions.oBasketModal.html(oResponse.basketModalContent).modal('show');
+        if(oResponse.attributes != undefined) {
+            gThis.m_oOptions.oBasketModal.GProductAttributes({
+                aoAttributes: $.parseJSON(oResponse.attributes)
+            });
+        }
+        if(oResponse.cartPreviewContent != undefined) {
+            gThis.m_oOptions.oCartPreview.html(oResponse.cartPreviewContent);
+        }
+    };
+
+    gThis._Constructor();
+};
+
+new GPlugin('GProductAddCartForm', oProductCartAddFormDefaults, GProductAddCartForm);
+
+/**
+ * GProductAddCartButton
+ */
+var GProductAddCartButton = function(oOptions) {
+
+    var gThis = this;
+
+    gThis._Constructor = function() {
+        $(gThis).click(gThis.OnClick);
+    };
+
+    gThis.OnClick = function(eEvent){
+        eEvent.stopImmediatePropagation();
+        GAjaxRequest($(gThis).attr('href'), {}, gThis.ProcessResponse);
+
+        return false;
+    };
+
+    gThis.ProcessResponse = function(oResponse){
+        var attributes = {};
+        if(oResponse.attributes != undefined) {
+            attributes = $.parseJSON(oResponse.attributes)
+        }
+        gThis.m_oOptions.oBasketModal.html(oResponse.basketModalContent).modal('show');
+        gThis.m_oOptions.oBasketModal.on('shown.bs.modal', function (e) {
+            var oForm = $(this).find(gThis.m_oOptions.sAddProductFormClass);
+            if(oForm.length){
+                oForm.GProductAddCartForm({
+                    sAddProductRoute: gThis.m_oOptions.sAddProductRoute,
+                    oProduct: $(gThis.m_oOptions.sProductSelector, gThis.m_oOptions.oBasketModal),
+                    oQuantity: $(gThis.m_oOptions.sQuantitySelector, gThis.m_oOptions.oBasketModal),
+                    oAttribute: $(gThis.m_oOptions.sAttributeSelector, gThis.m_oOptions.oBasketModal),
+                    oPrice: $(gThis.m_oOptions.sPriceSelector, gThis.m_oOptions.oBasketModal),
+                    oBasketModal: gThis.m_oOptions.oBasketModal,
+                    oCartPreview: gThis.m_oOptions.oCartPreview,
+                    sAttributesSelectClass: gThis.m_oOptions.sAttributesSelectClass,
+                    aoAttributes: attributes
+                });
+            }
+        });
+
+        if(oResponse.cartPreviewContent != undefined) {
+            gThis.m_oOptions.oCartPreview.html(oResponse.cartPreviewContent);
+        }
+    };
+
+    gThis._Constructor();
+};
+
+new GPlugin('GProductAddCartButton', {}, GProductAddCartButton);
+
+var oCouponDefaults = {
+    sAddCouponRoute:      'front.coupon.add',
+    sRemoveCouponRoute:   'front.coupon.delete',
+    sCodeInputIdentifier: 'coupon_code',
+    sAddButtonIdentifier: 'use_coupon',
+    sRemoveButtonIdentifier: 'use_coupon'
+};
+
+var GCoupon = function(oOptions) {
+
+    var gThis = this;
+
+    gThis._Constructor = function() {
+        gThis.InitializeEvents();
+    };
+
+    gThis.InitializeEvents = function(){
+        $('#' + gThis.m_oOptions.sAddButtonIdentifier, gThis).bind('click', gThis.AddCoupon);
+        $('#' + gThis.m_oOptions.sRemoveButtonIdentifier, gThis).bind('click', gThis.RemoveCoupon);
+    };
+
+    gThis.ProcessResponse = function(oResponse){
+        if(oResponse.success){
+            return gThis.ReloadCart();
+        }else{
+            alert(oResponse.message);
+        }
+    };
+
+    gThis.AddCoupon = function(){
+        var oRequestParams = {
+            code: $('#' + gThis.m_oOptions.sCodeInputIdentifier, gThis).val()
+        };
+
+        GAjaxRequest(Routing.generate(gThis.m_oOptions.sAddCouponRoute), oRequestParams, function(oResponse){
+            if(oResponse.success){
+                return window.location.reload(false);
+            }else{
+                alert(oResponse.message);
+            }
+        });
+
+        return false;
+    };
+
+    gThis.RemoveCoupon = function(){
+        GAjaxRequest(Routing.generate(gThis.m_oOptions.sRemoveCouponRoute), {}, function(oResponse){
+            if(oResponse.success){
+                return window.location.reload(false);
+            }else{
+                alert(oResponse.message);
+            }
+        });
+
+        return false;
+    };
+
+    gThis._Constructor();
+
+};
+
+new GPlugin('GCoupon', oCouponDefaults, GCoupon);

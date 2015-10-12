@@ -20,12 +20,12 @@ namespace WellCommerce\Bundle\AvailabilityBundle\Entity;
 interface AvailabilityAwareInterface
 {
     /**
-     * @param AvailabilityInterface $availability
+     * @param null|AvailabilityInterface $availability
      */
-    public function setAvailability(AvailabilityInterface $availability);
+    public function setAvailability(AvailabilityInterface $availability = null);
 
     /**
-     * @return AvailabilityInterface
+     * @return null|AvailabilityInterface
      */
     public function getAvailability();
 }

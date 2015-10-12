@@ -16,7 +16,7 @@
         };
 
         var action_installPackage = new GF_Action({
-            caption: '{% trans %}package.label.require{% endtrans %}',
+            caption: Translator.trans('package.button.install', {}, 'wellcommerce'),
             action: installPackage,
             img: '{{ asset('bundles/wellcommerceadmin/images/icons/datagrid/_add.png') }}',
             condition: function (oR) {
@@ -31,7 +31,7 @@
         };
 
         var action_updatePackage = new GF_Action({
-            caption: '{% trans %}package.label.update{% endtrans %}',
+            caption: Translator.trans('package.button.update', {}, 'wellcommerce'),
             action: updatePackage,
             img: '{{ asset('bundles/wellcommerceadmin/images/datagrid/update.png') }}',
             condition: function (oR) {
@@ -46,7 +46,7 @@
         };
 
         var action_removePackage = new GF_Action({
-            caption: '{% trans %}package.label.remove{% endtrans %}',
+            caption: Translator.trans('package.button.remove', {}, 'wellcommerce'),
             action: removePackage,
             img: '{{ asset('bundles/wellcommerceadmin/images/icons/datagrid/delete.png') }}',
             condition: function (oR) {
@@ -54,7 +54,5 @@
             }
         });
     </script>
-
     {{ datagrid_renderer(datagrid) }}
-
 {% endblock %}

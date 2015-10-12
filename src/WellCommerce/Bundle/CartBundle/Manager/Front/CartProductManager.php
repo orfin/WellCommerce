@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\CartBundle\Manager\Front;
 
 use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
+use WellCommerce\Bundle\CartBundle\Exception\DeleteCartItemException;
 use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
@@ -54,15 +55,59 @@ class CartProductManager extends AbstractFrontManager implements CartProductMana
     /**
      * {@inheritdoc}
      */
-    public function changeCartProductQuantity(CartProductInterface $cartProduct, $qty)
+    public function addProductToCart(CartInterface $cart, ProductInterface $product, ProductAttributeInterface $attribute = null, $quantity = 1)
+    {
+        $cartProduct = $this->findProductInCart($cart, $product, $attribute);
+
+        if (null === $cartProduct) {
+            $cartProduct = $this->initCartProduct($cart, $product, $attribute, $quantity);
+            $cart->addProduct($cartProduct);
+        } else {
+            $cartProduct->increaseQuantity($quantity);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function deleteCartProductFromCart(CartProductInterface $cartProduct, CartInterface $cart)
+    {
+        $resource = $this->getCartProductInCart($cartProduct, $cart);
+        if (null === $resource) {
+            throw new DeleteCartItemException($cartProduct->getId());
+        }
+        $this->removeResource($resource);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function changeCartProductQuantity(CartInterface $cart, CartProductInterface $cartProduct, $qty)
     {
         $qty = (int)$qty;
 
         if ($qty < 1) {
-            $this->removeResource($cartProduct);
+            $this->deleteCartProductFromCart($cartProduct, $cart);
         } else {
-            $cartProduct->setQuantity($qty);
-            $this->updateResource($cartProduct);
+            $resource = $this->getCartProductInCart($cartProduct, $cart);
+            $resource->setQuantity($qty);
+            $this->updateResource($resource);
         }
+    }
+
+    /**
+     * Returns an item from cart
+     *
+     * @param CartProductInterface $cartProduct
+     * @param CartInterface        $cart
+     *
+     * @return null|CartProductInterface
+     */
+    protected function getCartProductInCart(CartProductInterface $cartProduct, CartInterface $cart)
+    {
+        return $this->getRepository()->findOneBy([
+            'id'   => $cartProduct->getId(),
+            'cart' => $cart
+        ]);
     }
 }

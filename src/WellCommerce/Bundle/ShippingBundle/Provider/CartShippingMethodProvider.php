@@ -51,7 +51,7 @@ class CartShippingMethodProvider extends AbstractShippingMethodProvider implemen
     protected function getCollection(CartInterface $cart)
     {
         $shippingMethodCostCollection = new ArrayCollection();
-        $shippingMethods              = $this->getSupportedShippingMethods($cart);
+        $shippingMethods              = $this->getSupportedShippingMethods();
 
         $shippingMethods->map(function (ShippingMethodInterface $shippingMethod) use ($cart, $shippingMethodCostCollection) {
             $calculator = $this->getCalculator($shippingMethod);
@@ -62,33 +62,5 @@ class CartShippingMethodProvider extends AbstractShippingMethodProvider implemen
         });
 
         return $shippingMethodCostCollection;
-    }
-
-    /**
-     * Returns all enabled shipping methods which are supporting cart calculations
-     *
-     * @param CartInterface $cart
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    protected function getSupportedShippingMethods(CartInterface $cart)
-    {
-        $methods = $this->getEnabledMethods();
-
-        $supportedMethods = $methods->filter(function (ShippingMethodInterface $shippingMethod) use ($cart) {
-            $calculator = $this->getCalculator($shippingMethod);
-
-            return $calculator->supportsCart($shippingMethod, $cart) && $shippingMethod->getPaymentMethods()->count();
-        });
-
-        return $supportedMethods;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function supports($class)
-    {
-        return ($class instanceof CartInterface);
     }
 }

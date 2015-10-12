@@ -15,8 +15,11 @@ namespace WellCommerce\Bundle\OrderBundle\Entity;
 use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\AddressInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\ContactDetailsAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
+use WellCommerce\Bundle\CouponBundle\Entity\CouponAwareInterface;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopAwareInterface;
+use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodAwareInterface;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodAwareInterface;
 
@@ -25,12 +28,29 @@ use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodAwareInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface OrderInterface extends TimestampableInterface, ShopAwareInterface, ShippingMethodAwareInterface, PaymentMethodAwareInterface, ClientAwareInterface
+interface OrderInterface extends
+    TimestampableInterface,
+    ShopAwareInterface,
+    ShippingMethodAwareInterface,
+    PaymentMethodAwareInterface,
+    ClientAwareInterface,
+    ContactDetailsAwareInterface,
+    CouponAwareInterface
 {
     /**
      * @return int
      */
     public function getId();
+
+    /**
+     * @return string
+     */
+    public function getCurrency();
+
+    /**
+     * @param string $currency
+     */
+    public function setCurrency($currency);
 
     /**
      * @return float
@@ -63,6 +83,36 @@ interface OrderInterface extends TimestampableInterface, ShopAwareInterface, Shi
     public function setProducts(Collection $products);
 
     /**
+     * @return OrderTotal
+     */
+    public function getOrderTotal();
+
+    /**
+     * @param OrderTotal $orderTotal
+     */
+    public function setOrderTotal(OrderTotal $orderTotal);
+
+    /**
+     * @return OrderTotal
+     */
+    public function getProductTotal();
+
+    /**
+     * @param OrderTotal $productTotal
+     */
+    public function setProductTotal(OrderTotal $productTotal);
+
+    /**
+     * @return OrderTotal
+     */
+    public function getShippingTotal();
+
+    /**
+     * @param OrderTotal $shippingTotal
+     */
+    public function setShippingTotal(OrderTotal $shippingTotal);
+
+    /**
      * @return AddressInterface
      */
     public function getBillingAddress();
@@ -85,17 +135,17 @@ interface OrderInterface extends TimestampableInterface, ShopAwareInterface, Shi
     /**
      * @return Collection
      */
-    public function getModifiers();
+    public function getTotals();
 
     /**
-     * @param Collection $modifiers
+     * @param Collection $totals
      */
-    public function setModifiers(Collection $modifiers);
+    public function setTotals(Collection $totals);
 
     /**
-     * @param OrderModifierInterface $orderModifier
+     * @param OrderTotalDetailInterface $total
      */
-    public function addModifier(OrderModifierInterface $orderModifier);
+    public function addTotal(OrderTotalDetailInterface $total);
 
     /**
      * @return OrderStatusInterface
@@ -110,20 +160,25 @@ interface OrderInterface extends TimestampableInterface, ShopAwareInterface, Shi
     /**
      * @return string
      */
-    public function getCurrency();
-
-    /**
-     * @param string $currency
-     */
-    public function setCurrency($currency);
-
-    /**
-     * @return string
-     */
     public function getComment();
 
     /**
      * @param string $comment
      */
     public function setComment($comment);
+
+    /**
+     * @return Collection
+     */
+    public function getPayments();
+
+    /**
+     * @param Collection $payments
+     */
+    public function setPayments(Collection $payments);
+
+    /**
+     * @param PaymentInterface $payment
+     */
+    public function addPayment(PaymentInterface $payment);
 }

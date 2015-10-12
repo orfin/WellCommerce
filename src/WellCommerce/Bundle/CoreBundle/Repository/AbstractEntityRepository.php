@@ -12,7 +12,6 @@
 namespace WellCommerce\Bundle\CoreBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Symfony\Component\PropertyAccess\PropertyAccess;
 use WellCommerce\Bundle\CoreBundle\Helper\Helper;
 
 /**
@@ -47,18 +46,6 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
     }
 
     /**
-     * Returns a repository by class name
-     *
-     * @param string $class
-     *
-     * @return RepositoryInterface
-     */
-    protected function getRepository($class)
-    {
-        return $this->getEntityManager()->getRepository($class);
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function getDataSetQueryBuilder()
@@ -89,7 +76,7 @@ abstract class AbstractEntityRepository extends EntityRepository implements Repo
      *
      * @return \Doctrine\ORM\QueryBuilder
      */
-    protected function getQueryBuilder()
+    public function getQueryBuilder()
     {
         return $this->createQueryBuilder($this->getAlias());
     }

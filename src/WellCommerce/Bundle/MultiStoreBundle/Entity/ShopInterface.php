@@ -101,16 +101,6 @@ interface ShopInterface extends TimestampableInterface, BlameableInterface, Them
     public function setPages(Collection $pages);
 
     /**
-     * @return OrderStatusInterface
-     */
-    public function getDefaultOrderStatus();
-
-    /**
-     * @param OrderStatusInterface $defaultOrderStatus
-     */
-    public function setDefaultOrderStatus(OrderStatusInterface $defaultOrderStatus);
-
-    /**
      * @return string
      */
     public function getDefaultCountry();

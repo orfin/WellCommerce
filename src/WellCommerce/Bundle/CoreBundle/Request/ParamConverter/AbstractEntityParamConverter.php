@@ -26,21 +26,32 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 abstract class AbstractEntityParamConverter implements ParamConverterInterface
 {
     /**
+     * @var string
+     */
+    protected $requestAttributeName;
+
+    /**
      * @var RepositoryInterface
      */
     protected $repository;
 
     /**
-     * @var int
+     * @var array
      */
-    protected $requestParameter = 'id';
+    protected $supportedTypes;
 
     /**
+     * Constructor
+     *
      * @param RepositoryInterface $repository
+     * @param string              $requestAttributeName
+     * @param array               $supportedTypes
      */
-    public function __construct(RepositoryInterface $repository)
+    public function __construct(RepositoryInterface $repository, $requestAttributeName = 'id', $supportedTypes = [])
     {
-        $this->repository = $repository;
+        $this->repository           = $repository;
+        $this->requestAttributeName = $requestAttributeName;
+        $this->supportedTypes       = $supportedTypes;
     }
 
     public function apply(Request $request, ParamConverter $configuration)
@@ -48,7 +59,9 @@ abstract class AbstractEntityParamConverter implements ParamConverterInterface
         $entity = $this->findByRequestParameter($request);
 
         if (!$configuration->isOptional() && null === $entity) {
-            throw new NotFoundHttpException(sprintf('Entity of type "%s" was not found for parameter "%s"', $configuration->getClass(), $this->requestParameter));
+            throw new NotFoundHttpException(sprintf(
+                'Entity of type "%s" was not found', $configuration->getClass()
+            ));
         }
 
         $param = $configuration->getName();
@@ -59,9 +72,7 @@ abstract class AbstractEntityParamConverter implements ParamConverterInterface
 
     protected function findByRequestParameter(Request $request)
     {
-        $id = (int)$request->request->get($this->requestParameter);
-
-        return $this->repository->find($id);
+        return $this->repository->find((int)$request->attributes->get($this->requestAttributeName));
     }
 
     public function supports(ParamConverter $configuration)
@@ -70,11 +81,6 @@ abstract class AbstractEntityParamConverter implements ParamConverterInterface
             return false;
         }
 
-        return in_array($configuration->getClass(), $this->getSupportedTypes());
-    }
-
-    protected function getSupportedTypes()
-    {
-        return [];
+        return in_array($configuration->getClass(), $this->supportedTypes);
     }
 }

@@ -30,35 +30,35 @@ class ShippingMethodFormBuilder extends AbstractFormBuilder
     {
         $requiredData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'required_data',
-            'label' => $this->trans('fieldset.label.required_data')
+            'label' => $this->trans('form.fieldset.required_data')
         ]));
 
         $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
-            'label'       => $this->trans('translation.label.translations'),
+            'label'       => $this->trans('form.fieldset..translations'),
             'transformer' => $this->getRepositoryTransformer('translation', $this->get('shipping_method.repository'))
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
             'name'  => 'name',
-            'label' => $this->trans('shipping_method.label.name'),
+            'label' => $this->trans('common.label.name'),
         ]));
 
         $requiredData->addChild($this->getElement('checkbox', [
             'name'    => 'enabled',
-            'label'   => $this->trans('shipping_method.label.enabled'),
+            'label'   => $this->trans('common.label.enabled'),
             'default' => 1
         ]));
 
         $requiredData->addChild($this->getElement('text_field', [
             'name'    => 'hierarchy',
-            'label'   => $this->trans('shipping_method.label.hierarchy'),
+            'label'   => $this->trans('common.label.hierarchy'),
             'default' => 0
         ]));
 
         $costsData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'costs_data',
-            'label' => $this->trans('shipping_method.label.costs')
+            'label' => $this->trans('shipping_method.fieldset.costs')
         ]));
 
         $costsData->addChild($this->getElement('select', [
@@ -69,7 +69,7 @@ class ShippingMethodFormBuilder extends AbstractFormBuilder
 
         $costsData->addChild($this->getElement('select', [
             'name'        => 'currency',
-            'label'       => $this->trans('shipping_method.label.currency'),
+            'label'       => $this->trans('common.label.currency'),
             'options'     => $this->get('currency.collection')->getSelect([
                 'value_key' => 'id',
                 'label_key' => 'code',
@@ -80,7 +80,7 @@ class ShippingMethodFormBuilder extends AbstractFormBuilder
 
         $tax = $costsData->addChild($this->getElement('select', [
             'name'        => 'tax',
-            'label'       => $this->trans('shipping_method.label.tax'),
+            'label'       => $this->trans('common.label.tax'),
             'options'     => $this->get('tax.collection')->getSelect(),
             'transformer' => $this->getRepositoryTransformer('entity', $this->get('tax.repository'))
         ]));

@@ -1,7 +1,7 @@
 <script type="text/javascript">
     GCore.OnLoad(function() {
         $('#add_group').click(function() {
-            GPrompt('{% trans %}Enter group name{% endtrans %}', function(sName) {
+            GPrompt(Translator.trans('attribute_group.flash.new_group', {}, 'wellcommerce'), function(sName) {
                 var oRequest = {
                     name: sName
                 };

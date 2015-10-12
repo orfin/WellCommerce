@@ -12,8 +12,6 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Test\DependencyInjection;
 
-use Symfony\Component\Config\FileLocator;
-use Symfony\Component\DependencyInjection\Loader;
 use WellCommerce\Bundle\CoreBundle\Test\AbstractTestCase;
 
 /**

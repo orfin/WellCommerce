@@ -56,7 +56,7 @@ abstract class AbstractRouteGenerator implements RouteGeneratorInterface
      */
     public function generate(RouteInterface $resource)
     {
-        $this->defaults['id']      = $resource->getIdentifier();
+        $this->defaults['id']      = $resource->getIdentifier()->getId();
         $this->defaults['_locale'] = $resource->getLocale();
 
         return new SymfonyRoute(

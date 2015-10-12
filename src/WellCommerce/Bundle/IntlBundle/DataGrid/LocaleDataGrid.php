@@ -33,7 +33,7 @@ class LocaleDataGrid extends AbstractDataGrid
     {
         $collection->add(new Column([
             'id'         => 'id',
-            'caption'    => $this->trans('locale.label.id'),
+            'caption'    => $this->trans('common.label.id'),
             'sorting'    => new Sorting([
                 'default_order' => ColumnInterface::SORT_DIR_DESC,
             ]),
@@ -48,12 +48,12 @@ class LocaleDataGrid extends AbstractDataGrid
 
         $collection->add(new Column([
             'id'      => 'code',
-            'caption' => $this->trans('locale.label.code'),
+            'caption' => $this->trans('common.label.code'),
         ]));
 
         $collection->add(new Column([
             'id'         => 'currency',
-            'caption'    => $this->trans('locale.label.currency'),
+            'caption'    => $this->trans('common.label.currency'),
             'appearance' => new Appearance([
                 'width' => 140,
                 'align' => Appearance::ALIGN_CENTER

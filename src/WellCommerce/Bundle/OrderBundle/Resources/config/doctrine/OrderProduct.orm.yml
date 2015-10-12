@@ -8,24 +8,18 @@ WellCommerce\Bundle\OrderBundle\Entity\OrderProduct:
             generator:
                 strategy: AUTO
     embedded:
-        netPrice:
+        buyPrice:
             class: WellCommerce\Bundle\CoreBundle\Entity\Price
-            columnPrefix: net_price_
-        grossPrice:
-            class: WellCommerce\Bundle\CoreBundle\Entity\Price
-            columnPrefix: gross_price_
+            columnPrefix: buy_price_
+        sellPrice:
+            class: WellCommerce\Bundle\CoreBundle\Entity\DiscountablePrice
+            columnPrefix: sell_price_
     fields:
         quantity:
             type: decimal
             scale: 4
             nullable: false
             precision: 15
-        taxValue:
-            type: decimal
-            scale: 4
-            nullable: false
-            precision: 15
-            column: tax_value
         weight:
             type: decimal
             scale: 4

@@ -42,22 +42,6 @@ class WeightTableCalculator extends AbstractShippingMethodCalculator implements 
     /**
      * {@inheritdoc}
      */
-    public function supportsProduct(ShippingMethodInterface $shippingMethod, ProductInterface $product)
-    {
-        return true;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function supportsCart(ShippingMethodInterface $shippingMethod, CartInterface $cart)
-    {
-        return true;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function calculateProduct(ShippingMethodInterface $shippingMethod, ProductInterface $product)
     {
         return new ShippingCostReference();

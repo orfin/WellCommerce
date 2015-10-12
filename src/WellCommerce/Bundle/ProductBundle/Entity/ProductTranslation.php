@@ -54,6 +54,14 @@ class ProductTranslation implements LocaleAwareInterface, RoutableSubjectInterfa
     protected $route;
 
     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->meta = new Meta();
+    }
+
+    /**
      * @return string
      */
     public function getName()

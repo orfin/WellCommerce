@@ -19,12 +19,5 @@ namespace WellCommerce\Bundle\ShippingBundle\Provider;
  */
 interface ShippingMethodProviderInterface
 {
-    /**
-     * Checks whether provider supports given object
-     *
-     * @param object $class
-     *
-     * @return bool
-     */
-    public function supports($class);
+
 }

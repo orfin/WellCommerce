@@ -1,5 +1,6 @@
 parameters:
     fixtures_load_order:
+      WellCommerce\Bundle\AdminBundle\DataFixtures\ORM\LoadAdminMenuData: 0
       WellCommerce\Bundle\ThemeBundle\DataFixtures\ORM\LoadThemeData: 10
       WellCommerce\Bundle\MultiStoreBundle\DataFixtures\ORM\LoadCompanyData: 20
       WellCommerce\Bundle\IntlBundle\DataFixtures\ORM\LoadCurrencyData: 30

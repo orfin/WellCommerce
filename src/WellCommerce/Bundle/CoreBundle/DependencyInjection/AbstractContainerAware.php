@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\CoreBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use WellCommerce\Bundle\CoreBundle\Helper\Translator\TranslatorHelperInterface;
 
 /**
@@ -187,6 +186,9 @@ abstract class AbstractContainerAware extends ContainerAware
         return $this->getDoctrineHelper()->getEntityManager();
     }
 
+    /**
+     * @return \WellCommerce\Bundle\UserBundle\Entity\UserInterface|null
+     */
     protected function getUser()
     {
         if (!$this->container->has('security.token_storage')) {

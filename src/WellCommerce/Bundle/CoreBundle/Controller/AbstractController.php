@@ -24,25 +24,39 @@ use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
 abstract class AbstractController extends AbstractContainerAware implements ControllerInterface
 {
     /**
-     * {@inheritdoc}
+     * Returns content as json response
+     *
+     * @param array $content
+     *
+     * @return JsonResponse
      */
-    public function jsonResponse(array $content)
+    protected function jsonResponse(array $content)
     {
         return new JsonResponse($content);
     }
 
     /**
-     * {@inheritdoc}
+     * Redirect to another url
+     *
+     * @param string $url
+     * @param int    $status
+     *
+     * @return RedirectResponse
      */
-    public function redirectResponse($url, $status = RedirectResponse::HTTP_FOUND)
+    protected function redirectResponse($url, $status = RedirectResponse::HTTP_FOUND)
     {
         return new RedirectResponse($url, $status);
     }
 
     /**
-     * {@inheritdoc}
+     * Redirects user to another action of current controller
+     *
+     * @param string $actionName
+     * @param array  $params
+     *
+     * @return RedirectResponse
      */
-    public function redirectToAction($actionName = 'index', array $params = [])
+    protected function redirectToAction($actionName = 'index', array $params = [])
     {
         $url = $this->getRedirectToActionUrl($actionName, $params);
 
@@ -50,9 +64,14 @@ abstract class AbstractController extends AbstractContainerAware implements Cont
     }
 
     /**
-     * {@inheritdoc}
+     * Redirects to URL generated for route
+     *
+     * @param string $routeName
+     * @param array  $routeParams
+     *
+     * @return RedirectResponse
      */
-    public function redirectToRoute($routeName, array $routeParams = [])
+    protected function redirectToRoute($routeName, array $routeParams = [])
     {
         $url = $this->getRouterHelper()->generateUrl($routeName, $routeParams);
 
@@ -60,33 +79,54 @@ abstract class AbstractController extends AbstractContainerAware implements Cont
     }
 
     /**
-     * {@inheritdoc}
+     * Creates absolute url pointing to particular controller action
+     *
+     * @param string $actionName
+     * @param array  $params
+     *
+     * @return string
      */
-    public function getRedirectToActionUrl($actionName = 'index', array $params = [])
+    protected function getRedirectToActionUrl($actionName = 'index', array $params = [])
     {
         return $this->getRouterHelper()->getRedirectToActionUrl($actionName, $params);
     }
 
     /**
-     * {@inheritdoc}
+     * Renders a view.
+     *
+     * @param string   $view       The view name
+     * @param array    $parameters An array of parameters to pass to the view
+     * @param Response $response   A response instance
+     *
+     * @return Response A Response instance
      */
-    public function render($view, array $parameters = [], Response $response = null)
+    protected function render($view, array $parameters = [], Response $response = null)
     {
         return $this->container->get('templating')->renderResponse($view, $parameters, $response);
     }
 
     /**
-     * {@inheritdoc}
+     * Returns a rendered view.
+     *
+     * @param string $view       The view name
+     * @param array  $parameters An array of parameters to pass to the view
+     *
+     * @return string The rendered view
      */
-    public function renderView($view, array $parameters = [])
+    protected function renderView($view, array $parameters = [])
     {
         return $this->container->get('templating')->render($view, $parameters);
     }
 
     /**
-     * {@inheritdoc}
+     * Renders and displays the template
+     *
+     * @param string $templateName
+     * @param array  $templateVars
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function displayTemplate($templateName, array $templateVars = [])
+    protected function displayTemplate($templateName, array $templateVars = [])
     {
         $templating       = $this->container->get('templating');
         $templateResolver = $this->get('template_resolver');

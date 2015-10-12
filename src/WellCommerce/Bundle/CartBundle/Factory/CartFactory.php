@@ -35,6 +35,8 @@ class CartFactory extends AbstractFactory implements FactoryInterface
         $cart->setTotals(new CartTotals());
         $cart->setShippingMethodCost(null);
         $cart->setPaymentMethod(null);
+        $cart->setCopyAddress(true);
+        $cart->setCoupon(null);
 
         return $cart;
     }

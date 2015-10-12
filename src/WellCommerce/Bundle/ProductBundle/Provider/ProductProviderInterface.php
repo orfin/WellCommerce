@@ -12,8 +12,10 @@
 
 namespace WellCommerce\Bundle\ProductBundle\Provider;
 
+use WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface;
 use WellCommerce\Bundle\CoreBundle\Provider\ProviderInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\Product;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 
 /**
  * Interface ProductProviderInterface
@@ -25,16 +27,32 @@ interface ProductProviderInterface extends ProviderInterface
     /**
      * Sets currently viewed product
      *
-     * @param Product $product
+     * @param ProductInterface $product
      */
-    public function setCurrentProduct(Product $product);
+    public function setCurrentProduct(ProductInterface $product);
 
     /**
      * Returns an instance of currently viewed product
      *
-     * @return Product
+     * @return ProductInterface
      */
     public function getCurrentProduct();
+
+    /**
+     * Returns a dataset of products recommended for category
+     *
+     * @param CategoryInterface $category
+     *
+     * @return array
+     */
+    public function getProductRecommendationsForCategory(CategoryInterface $category);
+
+    /**
+     * Returns an array of product defaults used in templates
+     *
+     * @return array
+     */
+    public function getProductDefaultTemplateData();
 
     /**
      * Checks whether provider contains product object

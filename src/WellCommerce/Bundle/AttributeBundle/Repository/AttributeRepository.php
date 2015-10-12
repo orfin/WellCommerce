@@ -11,8 +11,8 @@
  */
 namespace WellCommerce\Bundle\AttributeBundle\Repository;
 
-use WellCommerce\Bundle\AttributeBundle\Entity\Attribute;
-use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroup;
+use Doctrine\Common\Collections\Criteria;
+use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupInterface;
 use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 
 /**
@@ -25,63 +25,11 @@ class AttributeRepository extends AbstractEntityRepository implements AttributeR
     /**
      * {@inheritdoc}
      */
-    public function findAll()
+    public function getCollectionByAttributeGroup(AttributeGroupInterface $attributeGroup)
     {
-        $qb = $this->getQueryBuilder()
-            ->addSelect('attribute.id, attribute_translation.name')
-            ->leftJoin(
-                'WellCommerce\Bundle\AttributeBundle\Entity\AttributeTranslation',
-                'attribute_translation',
-                'WITH',
-                'attribute.id = attribute_translation.translatable')
-            ->addOrderBy('attribute_translation.name', 'ASC')
-            ->addGroupBy('attribute.id');
+        $criteria = new Criteria();
+        $criteria->where($criteria->expr()->eq('attributeGroup', $attributeGroup));
 
-        $query  = $qb->getQuery();
-        $result = $query->getArrayResult();
-        foreach ($result as $key => $attribute) {
-            $result[$key]['values'] = $this->getAttributeValueRepository()->findAllByAttributeId($attribute['id']);
-        }
-
-        return $result;
-    }
-
-    /**
-     * Returns attribute value repository
-     *
-     * @return \WellCommerce\Bundle\AttributeBundle\Repository\AttributeValueRepository
-     */
-    private function getAttributeValueRepository()
-    {
-        return $this->getRepository('WellCommerce\Bundle\AttributeBundle\Entity\AttributeValue');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function findAllByAttributeGroupId($id)
-    {
-        $qb = $this->getQueryBuilder()
-            ->addSelect('attribute.id, attribute_translation.name')
-            ->join('attribute.groups', 'ag')
-            ->leftJoin(
-                'WellCommerce\Bundle\AttributeBundle\Entity\AttributeTranslation',
-                'attribute_translation',
-                'WITH',
-                'attribute.id = attribute_translation.translatable')
-            ->addOrderBy('attribute_translation.name', 'ASC')
-            ->addGroupBy('attribute.id');
-
-        // filter by attribute id
-        $qb->add('where', $qb->expr()->eq('ag.id', ':groups'));
-        $qb->setParameter('groups', [$id]);
-
-        $query  = $qb->getQuery();
-        $result = $query->getArrayResult();
-        foreach ($result as $key => $attribute) {
-            $result[$key]['values'] = $this->getAttributeValueRepository()->findAllByAttributeId($attribute['id']);
-        }
-
-        return $result;
+        return $this->matching($criteria);
     }
 }

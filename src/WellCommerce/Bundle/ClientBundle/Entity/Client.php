@@ -78,6 +78,11 @@ class Client implements ClientInterface
     protected $clientGroup;
 
     /**
+     * @var Collection
+     */
+    protected $orders;
+
+    /**
      * @var bool
      */
     protected $conditionsAccepted;
@@ -349,5 +354,13 @@ class Client implements ClientInterface
     public function setNewsletterAccepted($newsletterAccepted)
     {
         $this->newsletterAccepted = (bool)$newsletterAccepted;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getOrders()
+    {
+        return $this->orders;
     }
 }

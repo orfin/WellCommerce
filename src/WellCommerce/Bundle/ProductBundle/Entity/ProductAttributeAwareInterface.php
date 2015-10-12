@@ -20,12 +20,12 @@ namespace WellCommerce\Bundle\ProductBundle\Entity;
 interface ProductAttributeAwareInterface
 {
     /**
-     * @param ProductAttributeInterface $productAttribute
+     * @param null|ProductAttributeInterface $productAttribute
      */
-    public function setProductAttribute(ProductAttributeInterface $productAttribute);
+    public function setProductAttribute(ProductAttributeInterface $productAttribute = null);
 
     /**
-     * @return ProductAttributeInterface
+     * @return null|ProductAttributeInterface
      */
     public function getProductAttribute();
 }

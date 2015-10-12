@@ -21,4 +21,13 @@ use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
  */
 class DashboardManager extends AbstractAdminManager
 {
+    public function getSummarySales()
+    {
+
+    }
+
+    public function getSalesReport()
+    {
+
+    }
 }

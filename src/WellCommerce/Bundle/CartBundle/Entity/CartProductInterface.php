@@ -47,4 +47,14 @@ interface CartProductInterface extends TimestampableInterface, ProductAwareInter
      * @param $decrease
      */
     public function decreaseQuantity($decrease);
+
+    /**
+     * @return \WellCommerce\Bundle\CoreBundle\Entity\DiscountablePrice
+     */
+    public function getSellPrice();
+
+    /**
+     * @return float
+     */
+    public function getWeight();
 }

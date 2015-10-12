@@ -16,7 +16,7 @@ WellCommerce\Bundle\ClientBundle\Entity\ClientGroup:
     fields:
         discount:
             type: decimal
-            scale: 4
+            scale: 2
             length: null
             unique: false
             nullable: false

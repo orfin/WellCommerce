@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\CategoryBundle\Provider;
 
 use WellCommerce\Bundle\CategoryBundle\Entity\Category;
+use WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface;
 use WellCommerce\Bundle\CoreBundle\Provider\AbstractProvider;
 
 /**
@@ -23,14 +24,14 @@ use WellCommerce\Bundle\CoreBundle\Provider\AbstractProvider;
 class CategoryProvider extends AbstractProvider implements CategoryProviderInterface
 {
     /**
-     * @var Category
+     * @var CategoryInterface
      */
     protected $category;
     
     /**
      * {@inheritdoc}
      */
-    public function setCurrentCategory(Category $category)
+    public function setCurrentCategory(CategoryInterface $category)
     {
         $this->category = $category;
     }

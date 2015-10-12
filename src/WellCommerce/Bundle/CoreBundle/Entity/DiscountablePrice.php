@@ -12,8 +12,6 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Class DiscountablePrice
  *
@@ -165,7 +163,7 @@ class DiscountablePrice extends Price
     /**
      * @return bool
      */
-    protected function isDiscountValid()
+    public function isDiscountValid()
     {
         $now = new \DateTime();
 

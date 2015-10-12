@@ -2,7 +2,6 @@
 
 namespace WellCommerce\Bundle\CartBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\Timestampable\TimestampableTrait;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareTrait;
@@ -107,5 +106,29 @@ class CartProduct implements CartProductInterface
     public function setCart(CartInterface $cart)
     {
         $this->cart = $cart;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSellPrice()
+    {
+        if (null === $this->attribute) {
+            return $this->product->getSellPrice();
+        }
+
+        return $this->attribute->getSellPrice();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getWeight()
+    {
+        if (null === $this->attribute) {
+            return $this->product->getWeight();
+        }
+
+        return $this->attribute->getWeight();
     }
 }

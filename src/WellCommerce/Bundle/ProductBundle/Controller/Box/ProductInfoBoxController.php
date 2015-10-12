@@ -22,15 +22,10 @@ use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
  */
 class ProductInfoBoxController extends AbstractBoxController implements BoxControllerInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function indexAction()
     {
-        $provider = $this->manager->getProductProvider();
+        $defaultTemplateData = $this->manager->getProductProvider()->getProductDefaultTemplateData();
 
-        return $this->displayTemplate('index', [
-            'product' => $provider->getCurrentProduct()
-        ]);
+        return $this->displayTemplate('index', $defaultTemplateData);
     }
 }

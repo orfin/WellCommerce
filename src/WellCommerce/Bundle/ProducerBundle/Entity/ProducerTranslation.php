@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\ProducerBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Translatable\Translation;
 use WellCommerce\Bundle\CoreBundle\Entity\Meta;
 use WellCommerce\Bundle\IntlBundle\ORM\LocaleAwareInterface;
@@ -53,6 +52,14 @@ class ProducerTranslation implements RoutableSubjectInterface, LocaleAwareInterf
      * @var Meta
      */
     protected $meta;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->meta = new Meta();
+    }
 
     /**
      * @return string

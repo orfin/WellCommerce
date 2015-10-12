@@ -36,26 +36,14 @@ class AttributeController extends AbstractAdminController
      */
     public function ajaxIndexAction(Request $request)
     {
-        // prevent direct access and redirect administrator to index
         if (!$request->isXmlHttpRequest()) {
             return $this->redirectToAction('index');
         }
 
-        $id         = $request->request->get('id');
-        $attributes = $this->manager->getRepository()->findAllByAttributeGroupId($id);
-
-        $sets = [];
-
-        foreach ($attributes as $attribute) {
-            $sets[] = [
-                'id'     => $attribute['id'],
-                'name'   => $attribute['name'],
-                'values' => $attribute['values'],
-            ];
-        }
+        $attributeGroupId = (int)$request->request->get('id');
 
         return $this->jsonResponse([
-            'attributes' => $sets,
+            'attributes' => $this->manager->getAttributeSet($attributeGroupId),
         ]);
     }
 
@@ -72,8 +60,11 @@ class AttributeController extends AbstractAdminController
             return $this->redirectToAction('index');
         }
 
+        $attributeName    = $request->request->get('name');
+        $attributeGroupId = (int)$request->request->get('set');
+
         try {
-            $attribute = $this->manager->createAttribute();
+            $attribute = $this->manager->createAttribute($attributeName, $attributeGroupId);
 
             return $this->jsonResponse([
                 'id' => $attribute->getId()

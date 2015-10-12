@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\Controller\Front;
 
-use Symfony\Component\HttpFoundation\Request;
+use WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
 use WellCommerce\Bundle\WebBundle\Breadcrumb\BreadcrumbItem;
@@ -27,12 +27,8 @@ class CategoryController extends AbstractFrontController implements FrontControl
     /**
      * {@inheritdoc}
      */
-    public function indexAction(Request $request)
+    public function indexAction(CategoryInterface $category)
     {
-        $category = $this->findOr404($request, [
-            'enabled' => 1
-        ]);
-
         $this->addBreadCrumbItem(new BreadcrumbItem([
             'name' => $category->translate()->getName(),
         ]));

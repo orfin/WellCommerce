@@ -12,6 +12,7 @@
 namespace WellCommerce\Bundle\AdminBundle\Twig\Extension;
 
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use WellCommerce\Bundle\AdminBundle\Provider\AdminMenuProvider;
 
 /**
  * Class AdminExtension
@@ -26,13 +27,20 @@ class AdminExtension extends \Twig_Extension
     protected $session;
 
     /**
+     * @var AdminMenuProvider
+     */
+    protected $adminMenuProvider;
+
+    /**
      * Constructor
      *
-     * @param SessionInterface $session
+     * @param SessionInterface  $session
+     * @param AdminMenuProvider $adminMenuProvider
      */
-    public function __construct(SessionInterface $session)
+    public function __construct(SessionInterface $session, AdminMenuProvider $adminMenuProvider)
     {
-        $this->session = $session;
+        $this->session           = $session;
+        $this->adminMenuProvider = $adminMenuProvider;
     }
 
     /**
@@ -44,7 +52,7 @@ class AdminExtension extends \Twig_Extension
 
         return [
             'user'            => $this->session->get('admin/user'),
-            'menu'            => $this->session->get('admin/menu'),
+            'menu'            => $this->adminMenuProvider->getMenu(),
             'shops'           => $this->session->get('admin/shops'),
             'activeContextId' => $scope['id'],
             'flashbag'        => $this->session->getFlashBag(),

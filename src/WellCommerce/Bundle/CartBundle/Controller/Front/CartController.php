@@ -12,15 +12,11 @@
 
 namespace WellCommerce\Bundle\CartBundle\Controller\Front;
 
-use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
 use WellCommerce\Bundle\CartBundle\Exception\AddCartItemException;
 use WellCommerce\Bundle\CartBundle\Exception\DeleteCartItemException;
-use WellCommerce\Bundle\CategoryBundle\Entity\Category;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
-use WellCommerce\Bundle\DataSetBundle\Conditions\Condition\Eq;
-use WellCommerce\Bundle\DataSetBundle\Conditions\ConditionsCollection;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\WebBundle\Breadcrumb\BreadcrumbItem;
@@ -40,14 +36,16 @@ class CartController extends AbstractFrontController implements FrontControllerI
     /**
      * {@inheritdoc}
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
         $this->addBreadCrumbItem(new BreadcrumbItem([
             'name' => $this->trans('cart.heading.index')
         ]));
 
         $cart = $this->manager->getCurrentCart();
-        $form = $this->manager->getForm($cart);
+        $form = $this->manager->getForm($cart, [
+            'validation_groups' => ['cart']
+        ]);
 
         if ($form->handleRequest()->isSubmitted()) {
             if ($form->isValid()) {
@@ -63,23 +61,26 @@ class CartController extends AbstractFrontController implements FrontControllerI
 
         return $this->displayTemplate('index', [
             'form'         => $form,
-            'shippingCost' => (null !== $cart->getShippingMethodCost()) ? $cart->getShippingMethodCost()->getCost() : null,
             'elements'     => $form->getChildren(),
+            'shippingCost' => (null !== $cart->getShippingMethodCost()) ? $cart->getShippingMethodCost()->getCost() : null,
             'summary'      => $this->get('cart_summary.collector')->collect($cart)
         ]);
     }
 
     /**
-     * Add cart item action
+     * Adds item to cart or redirects to quick-view
      *
      * @param ProductInterface               $product
      * @param ProductAttributeInterface|null $attribute
+     * @param int                            $quantity
      *
-     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     * @return \Symfony\Component\HttpFoundation\JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function addAction(ProductInterface $product, ProductAttributeInterface $attribute = null)
+    public function addAction(ProductInterface $product, ProductAttributeInterface $attribute = null, $quantity = 1)
     {
-        $quantity = (int)$this->getRequestHelper()->getRequestAttribute('qty', 1);
+        if ($product->getAttributes()->count() && !$product->getAttributes()->contains($attribute)) {
+            return $this->redirectToRoute('front.product.view', ['id' => $product->getId()]);
+        }
 
         try {
             $this->manager->addProductToCart($product, $attribute, $quantity);
@@ -90,7 +91,7 @@ class CartController extends AbstractFrontController implements FrontControllerI
         }
 
         $category        = $product->getCategories()->first();
-        $recommendations = $this->getRecommendations($category);
+        $recommendations = $this->manager->getProductProvider()->getProductRecommendationsForCategory($category);
 
         $basketModalContent = $this->renderView('WellCommerceCartBundle:Front/Cart:add.html.twig', [
             'product'         => $product,
@@ -105,27 +106,9 @@ class CartController extends AbstractFrontController implements FrontControllerI
         ]);
     }
 
-    protected function getRecommendations(Category $category)
+    public function editAction(CartProductInterface $cartProduct, $quantity)
     {
-        $provider          = $this->manager->getProductProvider();
-        $collectionBuilder = $provider->getCollectionBuilder();
-        $conditions        = new ConditionsCollection();
-        $conditions->add(new Eq('category', $category->getId()));
-
-        $dataset = $collectionBuilder->getDataSet([
-            'limit'      => 3,
-            'order_by'   => 'name',
-            'order_dir'  => 'asc',
-            'conditions' => $conditions
-        ]);
-
-        return $dataset;
-    }
-
-    public function editAction(CartProductInterface $cartProduct)
-    {
-        $message  = null;
-        $quantity = (int)$this->getRequestHelper()->getRequestAttribute('qty', 1);
+        $message = null;
 
         try {
             $this->manager->changeCartProductQuantity($cartProduct, $quantity);
@@ -143,19 +126,12 @@ class CartController extends AbstractFrontController implements FrontControllerI
 
     public function deleteAction(CartProductInterface $cartProduct)
     {
-        $message = null;
-
         try {
             $this->manager->deleteCartProduct($cartProduct);
-            $success = true;
         } catch (DeleteCartItemException $exception) {
-            $success = false;
-            $message = $exception->getMessage();
+            $this->getFlashHelper()->addError($exception->getMessage());
         }
 
-        return $this->jsonResponse([
-            'success' => $success,
-            'message' => $message,
-        ]);
+        return $this->redirectToAction('index');
     }
 }

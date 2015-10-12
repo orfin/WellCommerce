@@ -22,9 +22,11 @@ use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 interface ProductShippingMethodProviderInterface extends ShippingMethodProviderInterface
 {
     /**
-     * @param ProductInterface $product
+     * Returns all shipping methods that can handle product
      *
-     * @return mixed
+     * @param ProductInterface $cart
+     *
+     * @return \Doctrine\Common\Collections\ArrayCollection
      */
-    public function getShippingMethodOptions(ProductInterface $product);
+    public function getShippingMethodCostsCollection(ProductInterface $cart);
 }

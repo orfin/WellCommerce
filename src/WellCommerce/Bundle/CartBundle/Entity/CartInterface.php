@@ -18,6 +18,7 @@ use WellCommerce\Bundle\ClientBundle\Entity\ClientAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\AddressInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\ContactDetailsAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
+use WellCommerce\Bundle\CouponBundle\Entity\CouponAwareInterface;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopAwareInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodAwareInterface;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCostInterface;
@@ -32,7 +33,8 @@ interface CartInterface extends
     PaymentMethodAwareInterface,
     ClientAwareInterface,
     TimestampableInterface,
-    ContactDetailsAwareInterface
+    ContactDetailsAwareInterface,
+    CouponAwareInterface
 {
     /**
      * @return int
@@ -48,6 +50,16 @@ interface CartInterface extends
      * @param float $sessionId
      */
     public function setSessionId($sessionId);
+
+    /**
+     * @return boolean
+     */
+    public function getCopyAddress();
+
+    /**
+     * @param boolean $copyAddress
+     */
+    public function setCopyAddress($copyAddress);
 
     /**
      * @param CartProductInterface $cartProduct
@@ -130,6 +142,11 @@ interface CartInterface extends
      * @return bool
      */
     public function hasMethods();
+
+    /**
+     * @return null|\WellCommerce\Bundle\CoreBundle\Entity\Price
+     */
+    public function getShippingCost();
 
     /**
      * @return bool

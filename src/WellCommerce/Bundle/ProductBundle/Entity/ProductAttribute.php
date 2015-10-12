@@ -16,6 +16,7 @@ use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityAwareTrait;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\PhotoTrait;
+use WellCommerce\Bundle\CoreBundle\Entity\DiscountablePrice;
 use WellCommerce\Bundle\CoreBundle\Entity\HierarchyAwareTrait;
 
 /**
@@ -42,7 +43,7 @@ class ProductAttribute implements ProductAttributeInterface
     protected $attributeValues;
 
     /**
-     * @var float
+     * @var DiscountablePrice
      */
     protected $sellPrice;
 
@@ -144,7 +145,7 @@ class ProductAttribute implements ProductAttributeInterface
     }
 
     /**
-     * @return float
+     * @return DiscountablePrice
      */
     public function getSellPrice()
     {
@@ -152,9 +153,9 @@ class ProductAttribute implements ProductAttributeInterface
     }
 
     /**
-     * @param float $sellPrice
+     * @param DiscountablePrice $sellPrice
      */
-    public function setSellPrice($sellPrice)
+    public function setSellPrice(DiscountablePrice $sellPrice)
     {
         $this->sellPrice = $sellPrice;
     }

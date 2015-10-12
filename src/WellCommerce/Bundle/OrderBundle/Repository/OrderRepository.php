@@ -21,5 +21,18 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
  */
 class OrderRepository extends AbstractEntityRepository implements OrderRepositoryInterface
 {
-    
+    public function getDataSetQueryBuilder()
+    {
+        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder->leftJoin('orders.currentStatus', 'status');
+        $queryBuilder->leftJoin('status.translations', 'status_translation');
+        $queryBuilder->groupBy('orders.id');
+
+        return $queryBuilder;
+    }
+
+    public function getAlias()
+    {
+        return 'orders';
+    }
 }

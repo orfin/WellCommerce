@@ -17,7 +17,7 @@ namespace WellCommerce\Bundle\CoreBundle\Entity;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ContactDetails
+class ContactDetails implements ContactDetailsInterface
 {
     /**
      * @var string

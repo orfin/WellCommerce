@@ -10,17 +10,19 @@
         <option key="allow_page_redirect">true</option>
     </route>
 
-    <route id="front.cart.add" path="/cart/add">
+    <route id="front.cart.add" path="/cart/add/{id},{attribute},{quantity}">
         <default key="_controller">cart.controller.front:addAction</default>
+        <default key="attribute">null</default>
+        <default key="quantity">1</default>
         <option key="expose">true</option>
     </route>
 
-    <route id="front.cart.edit" path="/cart/edit">
+    <route id="front.cart.edit" path="/cart/edit/{id},{quantity}">
         <default key="_controller">cart.controller.front:editAction</default>
         <option key="expose">true</option>
     </route>
 
-    <route id="front.cart.delete" path="/cart/delete">
+    <route id="front.cart.delete" path="/cart/delete/{id}">
         <default key="_controller">cart.controller.front:deleteAction</default>
         <option key="expose">true</option>
     </route>

@@ -29,32 +29,32 @@ class ClientFormBuilder extends AbstractFormBuilder
     {
         $requiredData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'required_data',
-            'label' => $this->trans('form.required_data.label')
+            'label' => $this->trans('form.fieldset.required_data')
         ]));
 
         $requiredData->addChild($this->getElement('text_field', [
             'name'  => 'firstName',
-            'label' => $this->trans('client.label.first_name'),
+            'label' => $this->trans('common.label.address.first_name'),
         ]));
 
         $requiredData->addChild($this->getElement('text_field', [
             'name'  => 'lastName',
-            'label' => $this->trans('client.label.last_name'),
+            'label' => $this->trans('common.label.address.last_name'),
         ]));
 
         $requiredData->addChild($this->getElement('text_field', [
             'name'  => 'email',
-            'label' => $this->trans('client.label.email'),
+            'label' => $this->trans('common.label.contact_details.email'),
         ]));
 
         $requiredData->addChild($this->getElement('password', [
             'name'  => 'password',
-            'label' => $this->trans('client.label.password'),
+            'label' => $this->trans('common.label.password'),
         ]));
 
         $requiredData->addChild($this->getElement('text_field', [
             'name'  => 'phone',
-            'label' => $this->trans('client.label.phone'),
+            'label' => $this->trans('common.label.contact_details.phone'),
         ]));
 
         $clientGroupSelectBuilder = new SelectBuilder($this->get('client_group.dataset'));

@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 use WellCommerce\Bundle\CoreBundle\Request\ParamConverter\AbstractEntityParamConverter;
 
 /**
- * Class CartProductParamConverter
+ * Class ProductParamConverter
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
@@ -25,19 +25,9 @@ class ProductParamConverter extends AbstractEntityParamConverter
 {
     protected function findByRequestParameter(Request $request)
     {
-        $id = (int)$request->request->get($this->requestParameter);
-
         return $this->repository->findOneBy([
-            'enabled' => true,
-            'id'      => $id
+            'id'      => (int)$request->attributes->get($this->requestAttributeName),
+            'enabled' => true
         ]);
-    }
-
-    protected function getSupportedTypes()
-    {
-        return [
-            'WellCommerce\Bundle\ProductBundle\Entity\Product',
-            'WellCommerce\Bundle\ProductBundle\Entity\ProductInterface'
-        ];
     }
 }

@@ -12,8 +12,13 @@
 
 namespace WellCommerce\Bundle\AttributeBundle\Manager\Admin;
 
-use WellCommerce\Bundle\AttributeBundle\Entity\Attribute;
-use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroup;
+use Doctrine\Common\Collections\Criteria;
+use WellCommerce\Bundle\AttributeBundle\Entity\AttributeGroupInterface;
+use WellCommerce\Bundle\AttributeBundle\Entity\AttributeInterface;
+use WellCommerce\Bundle\AttributeBundle\Entity\AttributeValueInterface;
+use WellCommerce\Bundle\AttributeBundle\Exception\AttributeGroupNotFoundException;
+use WellCommerce\Bundle\AttributeBundle\Repository\AttributeGroupRepositoryInterface;
+use WellCommerce\Bundle\AttributeBundle\Repository\AttributeValueRepositoryInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
 
 /**
@@ -24,52 +29,128 @@ use WellCommerce\Bundle\CoreBundle\Manager\Admin\AbstractAdminManager;
 class AttributeManager extends AbstractAdminManager
 {
     /**
-     * @var AttributeGroupManager
+     * @var \WellCommerce\Bundle\AttributeBundle\Repository\AttributeRepositoryInterface
      */
-    protected $attributeGroupManager;
+    protected $repository;
 
     /**
-     * @param AttributeGroupManager $attributeGroupManager
+     * @var AttributeGroupRepositoryInterface
      */
-    public function setAttributeGroupManager(AttributeGroupManager $attributeGroupManager)
+    protected $attributeGroupRepository;
+
+    /**
+     * @var AttributeValueRepositoryInterface
+     */
+    protected $attributeValueRepository;
+
+    /**
+     * @param AttributeGroupRepositoryInterface $attributeGroupRepository
+     */
+    public function setAttributeGroupRepository(AttributeGroupRepositoryInterface $attributeGroupRepository)
     {
-        $this->attributeGroupManager = $attributeGroupManager;
+        $this->attributeGroupRepository = $attributeGroupRepository;
     }
 
     /**
-     * @return Attribute
+     * @param AttributeValueRepositoryInterface $attributeValueRepository
      */
-    public function createAttribute()
+    public function setAttributeValueRepository(AttributeValueRepositoryInterface $attributeValueRepository)
     {
-        $attributeGroup = $this->findAttributeGroup();
-        $attributeName  = $this->getRequestHelper()->getRequestAttribute('name');
-
-        return $this->createNewAttribute($attributeGroup, $attributeName);
+        $this->attributeValueRepository = $attributeValueRepository;
     }
 
     /**
-     * @return null|AttributeGroup
+     * @return AttributeInterface
      */
-    protected function findAttributeGroup()
+    public function createAttribute($attributeName, $attributeGroupId)
     {
-        $set   = (int)$this->getRequestHelper()->getRequestAttribute('set');
-        $group = $this->repository->find($set);
+        $attributeGroup = $this->findAttributeGroup($attributeGroupId);
 
-        return $group;
+        return $this->createNewAttribute($attributeName, $attributeGroup);
+    }
+
+    public function getAttributeSet($attributeGroupId)
+    {
+        $attributesCollection = $this->findAttributesByAttributeGroupId($attributeGroupId);
+        $sets                 = [];
+
+        $attributesCollection->map(function (AttributeInterface $attribute) use (&$sets) {
+            $sets[] = [
+                'id'     => $attribute->getId(),
+                'name'   => $attribute->translate()->getName(),
+                'values' => $this->getAttributeValuesSet($attribute)
+            ];
+        });
+
+        return $sets;
     }
 
     /**
-     * Creates
+     * Returns all attribute's values as array
      *
-     * @param AttributeGroup $group
-     * @param string         $name
+     * @param AttributeInterface $attribute
      *
-     * @return Attribute
+     * @return array
      */
-    protected function createNewAttribute(AttributeGroup $group, $name)
+    protected function getAttributeValuesSet(AttributeInterface $attribute)
     {
-        $em        = $this->getDoctrineHelper()->getEntityManager();
-        $attribute = $this->factory->create();
+        $attributeValuesCollection = $this->attributeValueRepository->getCollectionByAttribute($attribute);
+        $values                    = [];
+        $attributeValuesCollection->map(function (AttributeValueInterface $attributeValue) use (&$values) {
+            $values[] = [
+                'id'   => $attributeValue->getId(),
+                'name' => $attributeValue->translate()->getName()
+            ];
+        });
+
+        return $values;
+    }
+
+    /**
+     * Returns all attributes in group
+     *
+     * @param int $id
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function findAttributesByAttributeGroupId($id)
+    {
+        $attributeGroup = $this->findAttributeGroup($id);
+        $criteria       = new Criteria();
+        $criteria->where($criteria->expr()->eq('attributeGroup', $attributeGroup));
+
+        return $this->repository->matching($criteria);
+    }
+
+    /**
+     * Returns an attribute's group or throws an exception
+     *
+     * @param int $id
+     *
+     * @return AttributeGroupInterface
+     */
+    protected function findAttributeGroup($id)
+    {
+        $attributeGroup = $this->attributeGroupRepository->find($id);
+        if (null === $attributeGroup) {
+            throw new AttributeGroupNotFoundException($id);
+        }
+
+        return $attributeGroup;
+    }
+
+    /**
+     * Creates an attribute
+     *
+     * @param string                  $name
+     * @param AttributeGroupInterface $group
+     *
+     * @return \WellCommerce\Bundle\AttributeBundle\Entity\AttributeInterface
+     */
+    protected function createNewAttribute($name, AttributeGroupInterface $group)
+    {
+        $attribute = $this->initResource();
+        $attribute->setAttributeGroup($group);
 
         foreach ($this->getLocales() as $locale) {
             $attribute->translate($locale->getCode())->setName($name);
@@ -77,8 +158,7 @@ class AttributeManager extends AbstractAdminManager
 
         $attribute->mergeNewTranslations();
 
-        $em->persist($attribute);
-        $em->flush();
+        $this->saveResource($attribute);
 
         return $attribute;
     }

@@ -19,7 +19,13 @@ use WellCommerce\Bundle\CoreBundle\EventDispatcher\AbstractEventDispatcher;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class OrderEventDispatcher extends AbstractEventDispatcher
+class OrderEventDispatcher extends AbstractEventDispatcher implements OrderEventDispatcherInterface
 {
-    
+    /**
+     * {@inheritdoc}
+     */
+    public function dispatchOnPostOrderPrepared($resource)
+    {
+        $this->dispatchResourceEvent($resource, OrderEventDispatcherInterface::POST_ORDER_PREPARED_EVENT);
+    }
 }

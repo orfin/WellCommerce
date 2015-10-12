@@ -38,14 +38,14 @@ abstract class AbstractAdminManager extends AbstractManager implements AdminMana
      *
      * @param RepositoryInterface       $repository
      * @param EventDispatcherInterface  $eventDispatcher
-     * @param FactoryInterface          $factory
+     * @param FactoryInterface|null     $factory
      * @param FormBuilderInterface|null $formBuilder
      * @param DataGridInterface|null    $dataGrid
      */
     public function __construct(
         RepositoryInterface $repository,
         EventDispatcherInterface $eventDispatcher,
-        FactoryInterface $factory,
+        FactoryInterface $factory = null,
         FormBuilderInterface $formBuilder = null,
         DataGridInterface $dataGrid = null
     ) {

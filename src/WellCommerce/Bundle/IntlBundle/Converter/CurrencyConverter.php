@@ -55,20 +55,27 @@ class CurrencyConverter implements CurrencyConverterInterface
      */
     public function convert($amount, $baseCurrency = null, $targetCurrency = null, $quantity = 1)
     {
-        if (null === $baseCurrency) {
-            $baseCurrency = $this->requestHelper->getCurrentCurrency();
-        }
-
-        if (null === $targetCurrency) {
-            $targetCurrency = $this->requestHelper->getCurrentCurrency();
-        }
-
-        $this->loadExchangeRates($targetCurrency);
-
-        $exchangeRate    = $this->exchangeRates[$targetCurrency][$baseCurrency];
+        $exchangeRate    = $this->getExchangeRate($baseCurrency, $targetCurrency);
         $exchangedAmount = round($amount * $exchangeRate, 2);
 
         return round($exchangedAmount * $quantity, 2);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getExchangeRate($baseCurrency = null, $targetCurrency = null)
+    {
+        $baseCurrency   = (null === $baseCurrency) ? $this->requestHelper->getCurrentCurrency() : $baseCurrency;
+        $targetCurrency = (null === $targetCurrency) ? $this->requestHelper->getCurrentCurrency() : $targetCurrency;
+
+        $this->loadExchangeRates($targetCurrency);
+
+        if (!isset($this->exchangeRates[$targetCurrency][$baseCurrency])) {
+            throw new \InvalidArgumentException(sprintf('No exchange rate found for base "%s" and target "%s" currency.', $baseCurrency, $targetCurrency));
+        }
+
+        return $this->exchangeRates[$targetCurrency][$baseCurrency];
     }
 
     /**

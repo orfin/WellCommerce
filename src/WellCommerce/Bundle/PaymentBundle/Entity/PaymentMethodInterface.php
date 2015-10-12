@@ -17,6 +17,7 @@ use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\HierarchyAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderStatusInterface;
 
 /**
  * Interface PaymentMethodInterface
@@ -53,4 +54,14 @@ interface PaymentMethodInterface extends TimestampableInterface, TranslatableInt
      * @param Collection $shippingMethods
      */
     public function setShippingMethods(Collection $shippingMethods);
+
+    /**
+     * @return OrderStatusInterface
+     */
+    public function getDefaultOrderStatus();
+
+    /**
+     * @param OrderStatusInterface $defaultOrderStatus
+     */
+    public function setDefaultOrderStatus(OrderStatusInterface $defaultOrderStatus);
 }

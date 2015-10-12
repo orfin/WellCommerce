@@ -17,6 +17,7 @@ use WellCommerce\Bundle\ClientBundle\Entity\ClientAwareTrait;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\Timestampable\TimestampableTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\AddressInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\ContactDetailsTrait;
+use WellCommerce\Bundle\CouponBundle\Entity\CouponAwareTrait;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopAwareTrait;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodAwareTrait;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface;
@@ -34,6 +35,7 @@ class Cart implements CartInterface
     use PaymentMethodAwareTrait;
     use ClientAwareTrait;
     use ContactDetailsTrait;
+    use CouponAwareTrait;
 
     /**
      * @var integer
@@ -49,6 +51,11 @@ class Cart implements CartInterface
      * @var string
      */
     protected $sessionId;
+
+    /**
+     * @var bool
+     */
+    protected $copyAddress;
 
     /**
      * @var string
@@ -97,6 +104,22 @@ class Cart implements CartInterface
     public function setSessionId($sessionId)
     {
         $this->sessionId = $sessionId;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCopyAddress()
+    {
+        return $this->copyAddress;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCopyAddress($copyAddress)
+    {
+        $this->copyAddress = $copyAddress;
     }
 
     /**
@@ -225,6 +248,18 @@ class Cart implements CartInterface
     public function hasMethods()
     {
         return (bool)($this->getShippingMethodCost() instanceof ShippingMethodCostInterface && $this->getPaymentMethod() instanceof PaymentMethodInterface);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getShippingCost()
+    {
+        if (null !== $this->getShippingMethodCost()) {
+            return $this->getShippingMethodCost()->getCost();
+        }
+
+        return null;
     }
 
     /**

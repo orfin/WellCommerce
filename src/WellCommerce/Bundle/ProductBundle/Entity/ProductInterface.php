@@ -188,6 +188,11 @@ interface ProductInterface extends
     public function setAttributes(Collection $attributes);
 
     /**
+     * @param ProductAttributeInterface $productAttribute
+     */
+    public function removeAttribute(ProductAttributeInterface $productAttribute);
+
+    /**
      * @return TaxInterface
      */
     public function getBuyPriceTax();

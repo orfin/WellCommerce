@@ -12,11 +12,10 @@
 
 namespace WellCommerce\Bundle\LayoutBundle\Configurator;
 
-use Symfony\Component\DependencyInjection\ContainerAware;
 use WellCommerce\Bundle\CoreBundle\Helper\Translator\TranslatorHelperInterface;
-use WellCommerce\Bundle\FormBundle\FormBuilderInterface;
 use WellCommerce\Bundle\FormBundle\Conditions\Equals;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
+use WellCommerce\Bundle\FormBundle\FormBuilderInterface;
 
 /**
  * Class AbstractLayoutBoxConfigurator

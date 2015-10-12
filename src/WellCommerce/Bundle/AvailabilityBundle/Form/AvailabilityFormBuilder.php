@@ -27,19 +27,19 @@ class AvailabilityFormBuilder extends AbstractFormBuilder
     public function buildForm(FormInterface $form)
     {
         $requiredData = $form->addChild($this->getElement('nested_fieldset', [
-            'name'  => 'required_data',
-            'label' => $this->trans('form.required_data.label')
+            'name'  => 'general_settings',
+            'label' => $this->trans('form.fieldset.required_data')
         ]));
 
         $languageData = $requiredData->addChild($this->getElement('language_fieldset', [
             'name'        => 'translations',
-            'label'       => $this->trans('form.required_data.language_data.label'),
+            'label'       => $this->trans('form.fieldset.translations'),
             'transformer' => $this->getRepositoryTransformer('translation', $this->get('availability.repository'))
         ]));
 
         $languageData->addChild($this->getElement('text_field', [
             'name'  => 'name',
-            'label' => $this->trans('availability.label.name'),
+            'label' => $this->trans('common.label.name'),
         ]));
 
         $form->addFilter($this->getFilter('no_code'));

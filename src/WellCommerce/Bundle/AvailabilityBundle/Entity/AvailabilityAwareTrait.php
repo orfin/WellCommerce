@@ -20,12 +20,12 @@ namespace WellCommerce\Bundle\AvailabilityBundle\Entity;
 trait AvailabilityAwareTrait
 {
     /**
-     * @var AvailabilityInterface
+     * @var null|AvailabilityInterface
      */
     protected $availability;
 
     /**
-     * @return AvailabilityInterface
+     * @return null|AvailabilityInterface
      */
     public function getAvailability()
     {
@@ -33,9 +33,9 @@ trait AvailabilityAwareTrait
     }
 
     /**
-     * @param AvailabilityInterface $availability
+     * @param null|AvailabilityInterface $availability
      */
-    public function setAvailability(AvailabilityInterface $availability)
+    public function setAvailability(AvailabilityInterface $availability = null)
     {
         $this->availability = $availability;
     }

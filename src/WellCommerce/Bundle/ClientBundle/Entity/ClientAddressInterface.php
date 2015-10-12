@@ -21,7 +21,7 @@ use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ClientAddressInterface extends TimestampableInterface, BlameableInterface, ClientAwareInterface
+interface ClientAddressInterface extends TimestampableInterface, BlameableInterface
 {
     /**
      * @return int
@@ -37,4 +37,14 @@ interface ClientAddressInterface extends TimestampableInterface, BlameableInterf
      * @param AddressInterface $address
      */
     public function setAddress(AddressInterface $address);
+
+    /**
+     * @param ClientInterface $client
+     */
+    public function setClient(ClientInterface $client);
+
+    /**
+     * @return ClientInterface
+     */
+    public function getClient();
 }

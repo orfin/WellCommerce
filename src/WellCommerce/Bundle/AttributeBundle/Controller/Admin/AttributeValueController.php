@@ -40,7 +40,9 @@ class AttributeValueController extends AbstractAdminController
             return $this->redirectToAction('index');
         }
 
-        $value = $this->manager->addAttributeValue();
+        $attributeValueName = $request->request->get('name');
+        $attributeId        = (int)$request->request->get('attribute');
+        $value              = $this->manager->addAttributeValue($attributeValueName, $attributeId);
 
         return $this->jsonResponse([
             'id' => $value->getId(),
