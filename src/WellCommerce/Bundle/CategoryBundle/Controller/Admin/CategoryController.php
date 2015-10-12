@@ -107,7 +107,7 @@ class CategoryController extends AbstractAdminController
      */
     protected function buildTreeForm()
     {
-        return $this->get('category_tree.form_builder')->createForm([
+        return $this->get('category_tree.form_builder.admin')->createForm([
             'name'  => 'category_tree',
             'class' => 'category-select',
         ]);

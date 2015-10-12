@@ -13,25 +13,6 @@
             <argument>WellCommerceClientBundle:Client</argument>
         </service>
 
-        <service id="client.dataset.query_builder" class="WellCommerce\Bundle\ClientBundle\DataSet\ClientDataSetQueryBuilder" public="false">
-            <argument type="service" id="client.repository"/>
-        </service>
-
-        <service id="client.dataset.loader" class="%dataset.loader.class%">
-            <argument type="service" id="client.dataset.query_builder"/>
-            <argument type="service" id="dataset.processor"/>
-        </service>
-
-        <service id="client.dataset" class="WellCommerce\Bundle\ClientBundle\DataSet\ClientDataSet">
-            <argument key="identifier">client</argument>
-            <argument type="service" id="client.dataset.loader"/>
-            <argument type="service" id="client.event_dispatcher"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-            <configurator service="dataset.configurator" method="configure"/>
-        </service>
-
         <service id="client.factory" class="WellCommerce\Bundle\ClientBundle\Factory\ClientFactory" />
 
         <service id="client.event_dispatcher" class="WellCommerce\Bundle\ClientBundle\EventDispatcher\ClientEventDispatcher">

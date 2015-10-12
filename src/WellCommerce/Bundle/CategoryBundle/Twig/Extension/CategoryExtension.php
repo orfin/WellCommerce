@@ -12,6 +12,7 @@
 namespace WellCommerce\Bundle\CategoryBundle\Twig\Extension;
 
 use WellCommerce\Bundle\CategoryBundle\Provider\CategoryProviderInterface;
+use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
 
 /**
  * Class CategoryExtension
@@ -21,18 +22,18 @@ use WellCommerce\Bundle\CategoryBundle\Provider\CategoryProviderInterface;
 class CategoryExtension extends \Twig_Extension
 {
     /**
-     * @var CategoryProviderInterface
+     * @var DataSetInterface
      */
-    protected $provider;
+    protected $dataset;
 
     /**
      * Constructor
      *
-     * @param CategoryProviderInterface $provider
+     * @param DataSetInterface $dataset
      */
-    public function __construct(CategoryProviderInterface $provider)
+    public function __construct(DataSetInterface $dataset)
     {
-        $this->provider = $provider;
+        $this->dataset = $dataset;
     }
 
     public function getFunctions()
@@ -61,16 +62,10 @@ class CategoryExtension extends \Twig_Extension
      */
     public function getCategoriesTree($limit = 10, $orderBy = 'hierarchy', $orderDir = 'asc')
     {
-        $collectionBuilder = $this->provider->getCollectionBuilder();
-
-        $params = [
-            'limit'         => $limit,
-            'order_by'      => $orderBy,
-            'order_dir'     => $orderDir,
-            'cache_enabled' => true,
-            'cache_ttl'     => 3600
-        ];
-
-        return $collectionBuilder->getTree($params);
+        return $this->dataset->getResult('tree', [
+            'limit'     => $limit,
+            'order_by'  => $orderBy,
+            'order_dir' => $orderDir
+        ]);
     }
 }

@@ -21,11 +21,11 @@ class CartProviderTest extends AbstractTestCase
     public function testCartIsAccessible()
     {
         $provider = $this->container->get('cart.manager.front')->getCartProvider();
-        $provider->setCurrentCart(new Cart());
+        $provider->setCurrentResource(new Cart());
 
         $this->assertInstanceOf(
             'WellCommerce\Bundle\CartBundle\Entity\Cart',
-            $provider->getCurrentCart()
+            $provider->getCurrentResource()
         );
     }
 }

@@ -12,8 +12,11 @@
 
 namespace WellCommerce\Bundle\CmsBundle\DataSet\Admin;
 
+use WellCommerce\Bundle\DataSetBundle\Column\ColumnCollection;
+use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
 use WellCommerce\Bundle\DataSetBundle\QueryBuilder\AbstractDataSetQueryBuilder;
-use WellCommerce\Bundle\DataSetBundle\QueryBuilder\QueryBuilderInterface;
+use WellCommerce\Bundle\DataSetBundle\QueryBuilder\DataSetQueryBuilderInterface;
+use WellCommerce\Bundle\DataSetBundle\Request\DataSetRequestInterface;
 use WellCommerce\Bundle\MultiStoreBundle\Context\ShopContextInterface;
 
 /**
@@ -21,7 +24,7 @@ use WellCommerce\Bundle\MultiStoreBundle\Context\ShopContextInterface;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class PageDataSetQueryBuilder extends AbstractDataSetQueryBuilder implements QueryBuilderInterface
+class PageDataSetQueryBuilder extends AbstractDataSetQueryBuilder implements DataSetQueryBuilderInterface
 {
     /**
      * @var ShopContextInterface
@@ -39,19 +42,22 @@ class PageDataSetQueryBuilder extends AbstractDataSetQueryBuilder implements Que
     /**
      * Adds additional criteria to query builder. Filters dataset by current shop scope
      *
+     * @param ColumnCollection        $columns
+     * @param DataSetRequestInterface $request
+     *
      * @return \Doctrine\ORM\QueryBuilder
      */
-    public function getQueryBuilder()
+    public function getQueryBuilder(ColumnCollection $columns, DataSetRequestInterface $request)
     {
-        $qb = parent::getQueryBuilder();
+        $queryBuilder = parent::getQueryBuilder($columns, $request);
 
         if (null !== $this->context && 0 !== $this->context->getCurrentScopeId()) {
-            $expression = $qb->expr()->eq('page_shops.id', ':shop');
-            $qb->andWhere($expression);
-            $qb->setParameter('shop', $this->context->getCurrentScopeId());
+            $expression = $queryBuilder->expr()->eq('page_shops.id', ':shop');
+            $queryBuilder->andWhere($expression);
+            $queryBuilder->setParameter('shop', $this->context->getCurrentScopeId());
         }
 
-        return $qb;
+        return $queryBuilder;
     }
 
 }

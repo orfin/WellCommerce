@@ -13,13 +13,13 @@
 namespace WellCommerce\Bundle\ClientBundle\DataSet;
 
 use WellCommerce\Bundle\DataSetBundle\QueryBuilder\AbstractDataSetQueryBuilder;
-use WellCommerce\Bundle\DataSetBundle\QueryBuilder\QueryBuilderInterface;
+use WellCommerce\Bundle\DataSetBundle\QueryBuilder\DataSetQueryBuilderInterface;
 
 /**
  * Class ClientGroupDataSetQueryBuilder
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientGroupDataSetQueryBuilder extends AbstractDataSetQueryBuilder implements QueryBuilderInterface
+class ClientGroupDataSetQueryBuilder extends AbstractDataSetQueryBuilder implements DataSetQueryBuilderInterface
 {
 }

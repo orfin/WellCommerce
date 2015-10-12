@@ -4,9 +4,7 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <import resource="routing/admin/currency.xml" prefix="admin/currency" />
-    <import resource="routing/admin/locale.xml" prefix="admin/locale" />
-    <import resource="routing/front/locale.xml" prefix="locale" />
-    <import resource="routing/front/currency.xml" prefix="currency" />
-    <import resource="routing/admin/dictionary.xml" prefix="admin/dictionary" />
+    <import resource="routing/currency.xml"/>
+    <import resource="routing/locale.xml"/>
+    <import resource="routing/dictionary.xml"/>
 </routes>

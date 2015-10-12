@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\ClientBundle\DataSet;
 
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Bundle\DataSetBundle\Configurator\DataSetConfiguratorInterface;
-use WellCommerce\Bundle\DataSetBundle\Transformer\DateTransformer;
 
 /**
  * Class ClientDataSet
@@ -38,8 +37,8 @@ class ClientDataSet extends AbstractDataSet
             'createdAt' => 'client.createdAt',
         ]);
 
-        $configurator->setTransformers([
-            'createdAt' => new DateTransformer('Y-m-d H:i:s'),
+        $configurator->setColumnTransformers([
+            'createdAt' => $this->getDataSetTransformer('date', ['format' => 'Y-m-d H:i:s'])
         ]);
     }
 }

@@ -12,46 +12,21 @@
 
 namespace WellCommerce\Bundle\ProductBundle\DataSet\Transformer;
 
-use WellCommerce\Bundle\DataSetBundle\CollectionBuilder\CollectionBuilderFactoryInterface;
-use WellCommerce\Bundle\DataSetBundle\Transformer\TransformerInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
+use WellCommerce\Bundle\DataSetBundle\Transformer\AbstractDataSetTransformer;
 
 /**
  * Class ProductStatusTransformer
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductStatusTransformer implements TransformerInterface
+class ProductStatusTransformer extends AbstractDataSetTransformer
 {
     /**
-     * @var CollectionBuilderFactoryInterface
+     * {@inheritdoc}
      */
-    protected $factory;
-
-    /**
-     * @var array
-     */
-    protected $statuses;
-
-    /**
-     * Constructor
-     *
-     * @param CollectionBuilderFactoryInterface $factory
-     */
-    public function __construct(CollectionBuilderFactoryInterface $factory)
-    {
-        $this->factory  = $factory;
-        $this->statuses = $factory->getArray();
-    }
-
-    /**
-     * Formats passed DateTime object to format
-     *
-     * @param string $value
-     *
-     * @return string
-     */
-
-    public function transform($value)
+    public function transformValue($value)
     {
         $productStatuses = explode(',', $value);
         $value           = [];
@@ -68,6 +43,24 @@ class ProductStatusTransformer implements TransformerInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setRequired([
+            'statuses'
+        ]);
+
+        $resolver->setDefaults([
+            'statuses' => []
+        ]);
+
+        $resolver->setAllowedTypes([
+            'statuses' => ['array']
+        ]);
+    }
+
+    /**
      * Returns status information
      *
      * @param int $identifier
@@ -76,7 +69,7 @@ class ProductStatusTransformer implements TransformerInterface
      */
     protected function getStatusData($identifier)
     {
-        foreach ($this->statuses as $status) {
+        foreach ($this->options['statuses'] as $status) {
             if ((int)$status['id'] === (int)$identifier) {
                 return $status;
             }

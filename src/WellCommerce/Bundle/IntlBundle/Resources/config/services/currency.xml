@@ -3,88 +3,18 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
+    <imports>
+        <import resource="admin/currency.xml"/>
+        <import resource="front/currency.xml"/>
+    </imports>
+
     <services>
-        <service id="currency.manager.admin" class="WellCommerce\Bundle\IntlBundle\Manager\Admin\CurrencyManager">
-            <argument type="service" id="currency.repository"/>
-            <argument type="service" id="currency.event_dispatcher"/>
-            <argument type="service" id="currency.factory"/>
-            <argument type="service" id="currency.form_builder"/>
-            <argument type="service" id="currency.datagrid"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
-
-        <service id="currency.manager.front" class="WellCommerce\Bundle\IntlBundle\Manager\Front\CurrencyManager">
-            <argument type="service" id="currency.repository"/>
-            <argument type="service" id="currency.event_dispatcher"/>
-            <argument type="service" id="currency.factory"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
-
-        <service id="currency.controller.front" class="WellCommerce\Bundle\IntlBundle\Controller\Front\CurrencyController">
-            <argument type="service" id="currency.manager.front"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
-
-        <service id="currency.controller.admin" class="WellCommerce\Bundle\IntlBundle\Controller\Admin\CurrencyController">
-            <argument type="service" id="currency.manager.admin"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
-
         <service id="currency.repository" class="WellCommerce\Bundle\IntlBundle\Repository\CurrencyRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument>WellCommerceIntlBundle:Currency</argument>
         </service>
 
         <service id="currency_rate.repository" class="WellCommerce\Bundle\IntlBundle\Repository\CurrencyRateRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument>WellCommerceIntlBundle:CurrencyRate</argument>
-        </service>
-
-        <service id="currency.dataset.query_builder" class="WellCommerce\Bundle\IntlBundle\DataSet\CurrencyDataSetQueryBuilder" public="false">
-            <argument type="service" id="currency.repository"/>
-        </service>
-
-        <service id="currency.dataset.loader" class="%dataset.loader.class%">
-            <argument type="service" id="currency.dataset.query_builder"/>
-            <argument type="service" id="dataset.processor"/>
-        </service>
-
-        <service id="currency.dataset" class="WellCommerce\Bundle\IntlBundle\DataSet\CurrencyDataSet">
-            <argument key="identifier">currency</argument>
-            <argument type="service" id="currency.dataset.loader"/>
-            <argument type="service" id="currency.event_dispatcher"/>
-            <configurator service="dataset.configurator" method="configure"/>
-        </service>
-
-        <service id="currency.collection" parent="dataset.collection_builder.factory">
-            <argument type="service" id="currency.dataset"/>
-        </service>
-
-        <service id="currency.datagrid" class="WellCommerce\Bundle\IntlBundle\DataGrid\CurrencyDataGrid">
-            <argument key="identifier">currency</argument>
-            <argument type="service" id="currency.dataset"/>
-            <argument type="service" id="currency.event_dispatcher"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
-
-        <service id="currency.form_builder" class="WellCommerce\Bundle\IntlBundle\Form\CurrencyFormBuilder">
-            <argument type="service" id="form.resolver.factory"/>
-            <argument type="service" id="form.handler"/>
-            <argument type="service" id="currency.event_dispatcher"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <call method="setRepository">
-                <argument type="service" id="currency.repository"/>
-            </call>
         </service>
 
         <service id="currency.subscriber" class="WellCommerce\Bundle\IntlBundle\EventListener\CurrencySubscriber">
@@ -98,13 +28,6 @@
             <argument type="service" id="currency.repository"/>
             <argument type="service" id="currency_rate.repository"/>
             <argument type="service" id="doctrine_helper"/>
-        </service>
-
-        <service id="currency.provider" class="WellCommerce\Bundle\IntlBundle\Provider\CurrencyProvider">
-            <call method="setCollectionBuilder">
-                <argument type="service" id="currency.collection" />
-            </call>
-            <tag name="resource.provider" alias="currency"/>
         </service>
 
         <service id="currency.converter" class="WellCommerce\Bundle\IntlBundle\Converter\CurrencyConverter">
@@ -125,12 +48,6 @@
 
         <service id="currency.event_dispatcher" class="WellCommerce\Bundle\IntlBundle\EventDispatcher\CurrencyEventDispatcher">
             <argument type="service" id="event_dispatcher" />
-        </service>
-
-        <service id="twig.extension.currency" class="WellCommerce\Bundle\IntlBundle\Twig\Extension\CurrencyExtension">
-            <argument type="service" id="currency.helper"/>
-            <argument type="service" id="currency.provider"/>
-            <tag name="twig.extension"/>
         </service>
     </services>
 </container>

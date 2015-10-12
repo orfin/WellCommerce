@@ -11,8 +11,8 @@
  */
 namespace WellCommerce\Bundle\IntlBundle\Twig\Extension;
 
+use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
 use WellCommerce\Bundle\IntlBundle\Helper\CurrencyHelperInterface;
-use WellCommerce\Bundle\IntlBundle\Provider\CurrencyProviderInterface;
 
 /**
  * Class CurrencyExtension
@@ -27,26 +27,26 @@ class CurrencyExtension extends \Twig_Extension
     protected $helper;
 
     /**
-     * @var CurrencyProviderInterface
+     * @var DataSetInterface
      */
-    protected $provider;
+    protected $dataset;
 
     /**
      * Constructor
      *
-     * @param CurrencyHelperInterface   $helper
-     * @param CurrencyProviderInterface $provider
+     * @param CurrencyHelperInterface $helper
+     * @param DataSetInterface        $dataset
      */
-    public function __construct(CurrencyHelperInterface $helper, CurrencyProviderInterface $provider)
+    public function __construct(CurrencyHelperInterface $helper, DataSetInterface $dataset)
     {
-        $this->helper   = $helper;
-        $this->provider = $provider;
+        $this->helper  = $helper;
+        $this->dataset = $dataset;
     }
 
     public function getGlobals()
     {
         return [
-            'currencies' => $this->provider->getSelect()
+            'currencies' => $this->dataset->getResult('select', ['order_by' => 'code'], ['label_column' => 'code'])
         ];
     }
 

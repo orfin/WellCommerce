@@ -16,7 +16,6 @@ use WellCommerce\Bundle\DataGridBundle\Column\Column;
 use WellCommerce\Bundle\DataGridBundle\Column\ColumnCollection;
 use WellCommerce\Bundle\DataGridBundle\Column\Options\Appearance;
 use WellCommerce\Bundle\DataGridBundle\Column\Options\Filter;
-use WellCommerce\Bundle\DataSetBundle\CollectionBuilder\SelectBuilder;
 
 /**
  * Class OrderStatusDataGrid
@@ -84,11 +83,9 @@ class OrderStatusDataGrid extends AbstractDataGrid
      */
     protected function getOrderStatusGroups()
     {
-        $selectBuilder = new SelectBuilder($this->get('order_status_group.dataset'), [
-            'value_key' => 'name',
-            'label_key' => 'name',
+        return $this->get('order_status_group.dataset')->getResult('select', [], [
+            'value_column' => 'name',
+            'label_column' => 'name',
         ]);
-
-        return $selectBuilder->getItems();
     }
 }

@@ -13,7 +13,7 @@ namespace WellCommerce\Bundle\IntlBundle\Twig\Extension;
 
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use WellCommerce\Bundle\IntlBundle\Repository\LocaleRepositoryInterface;
+use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
 
 /**
  * Class LocaleExtension
@@ -28,19 +28,25 @@ class LocaleExtension extends \Twig_Extension
     protected $session;
 
     /**
-     * @var LocaleRepositoryInterface
+     * @var DataSetInterface
      */
-    protected $repository;
+    protected $dataset;
 
     /**
      * Constructor
      *
      * @param SessionInterface $session
      */
-    public function __construct(SessionInterface $session, LocaleRepositoryInterface $repository)
+    /**
+     * Constructor
+     *
+     * @param SessionInterface $session
+     * @param DataSetInterface $dataset
+     */
+    public function __construct(SessionInterface $session, DataSetInterface $dataset)
     {
-        $this->session    = $session;
-        $this->repository = $repository;
+        $this->session = $session;
+        $this->dataset = $dataset;
     }
 
     /**
@@ -49,7 +55,7 @@ class LocaleExtension extends \Twig_Extension
     public function getGlobals()
     {
         return [
-            'locales' => $this->repository->getAvailableLocales()
+            'locales' => $this->dataset->getResult('select')
         ];
     }
 

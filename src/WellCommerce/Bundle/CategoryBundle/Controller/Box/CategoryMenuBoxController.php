@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\CategoryBundle\Controller\Box;
 
 use WellCommerce\Bundle\CategoryBundle\Entity\Category;
+use WellCommerce\Bundle\CategoryBundle\Entity\CategoryInterface;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
 
@@ -29,9 +30,9 @@ class CategoryMenuBoxController extends AbstractBoxController implements BoxCont
     public function indexAction()
     {
         $active         = null;
-        $activeCategory = $this->manager->getCategoryProvider()->getCurrentCategory();
+        $activeCategory = $this->manager->getResourceProvider('category')->getCurrentResource();
 
-        if ($activeCategory instanceof Category) {
+        if ($activeCategory instanceof CategoryInterface) {
             $active = $activeCategory->getId();
         }
 

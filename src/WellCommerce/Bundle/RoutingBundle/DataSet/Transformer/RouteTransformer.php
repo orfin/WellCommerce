@@ -13,6 +13,8 @@
 namespace WellCommerce\Bundle\RoutingBundle\DataSet\Transformer;
 
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use WellCommerce\Bundle\DataSetBundle\Transformer\AbstractDataSetTransformer;
+use WellCommerce\Bundle\DataSetBundle\Transformer\DataSetTransformerInterface;
 use WellCommerce\Bundle\DataSetBundle\Transformer\TransformerInterface;
 
 /**
@@ -20,7 +22,7 @@ use WellCommerce\Bundle\DataSetBundle\Transformer\TransformerInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class RouteTransformer implements TransformerInterface
+class RouteTransformer extends AbstractDataSetTransformer
 {
     /**
      * @var UrlGeneratorInterface
@@ -38,14 +40,9 @@ class RouteTransformer implements TransformerInterface
     }
 
     /**
-     * Formats passed DateTime object to format
-     *
-     * @param string $value
-     *
-     * @return string
+     * {@inheritdoc}
      */
-
-    public function transform($value)
+    public function transformValue($value)
     {
         return $this->generator->generate($value);
     }

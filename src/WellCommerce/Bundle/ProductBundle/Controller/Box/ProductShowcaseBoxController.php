@@ -33,11 +33,9 @@ class ProductShowcaseBoxController extends AbstractBoxController implements BoxC
      */
     public function indexAction(LayoutBoxSettingsCollection $boxSettings)
     {
-        $provider          = $this->manager->getProvider('product');
-        $collectionBuilder = $provider->getCollectionBuilder();
-        $requestHelper     = $this->manager->getRequestHelper();
+        $requestHelper = $this->manager->getRequestHelper();
 
-        $dataset = $collectionBuilder->getDataSet([
+        $products = $this->get('product.dataset.front')->getResult('datagrid', [
             'limit'      => $requestHelper->getQueryAttribute('limit', 1),
             'order_by'   => $requestHelper->getQueryAttribute('order_by', 'name'),
             'order_dir'  => $requestHelper->getQueryAttribute('order_dir', 'asc'),
@@ -45,7 +43,7 @@ class ProductShowcaseBoxController extends AbstractBoxController implements BoxC
         ]);
 
         return $this->displayTemplate('index', [
-            'dataset' => $dataset
+            'dataset' => $products
         ]);
     }
 }

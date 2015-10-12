@@ -13,6 +13,8 @@
 namespace WellCommerce\Bundle\CategoryBundle\DataSet\Front;
 
 use WellCommerce\Bundle\CategoryBundle\DataSet\Admin\CategoryDataSetQueryBuilder as BaseQueryBuilder;
+use WellCommerce\Bundle\DataSetBundle\Conditions\Condition\Eq;
+use WellCommerce\Bundle\DataSetBundle\Request\DataSetRequestInterface;
 
 /**
  * Class CategoryDataSetQueryBuilder
@@ -21,16 +23,11 @@ use WellCommerce\Bundle\CategoryBundle\DataSet\Admin\CategoryDataSetQueryBuilder
  */
 class CategoryDataSetQueryBuilder extends BaseQueryBuilder
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getQueryBuilder()
+    protected function getConditions()
     {
-        $qb         = parent::getQueryBuilder();
-        $expression = $qb->expr()->eq('category.enabled', ':enabled');
-        $qb->andWhere($expression);
-        $qb->setParameter('enabled', true);
+        $conditions = parent::getConditions();
+        $conditions->add(new Eq('enabled', true));
 
-        return $qb;
+        return $conditions;
     }
 }

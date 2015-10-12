@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\ThemeBundle\Manager;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use WellCommerce\Bundle\ThemeBundle\Entity\Theme;
+use WellCommerce\Bundle\ThemeBundle\Entity\ThemeInterface;
 
 /**
  * Class ThemeManager
@@ -80,7 +81,7 @@ class ThemeManager implements ThemeManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function setCurrentTheme(Theme $theme)
+    public function setCurrentTheme(ThemeInterface $theme)
     {
         $this->theme = $theme;
     }

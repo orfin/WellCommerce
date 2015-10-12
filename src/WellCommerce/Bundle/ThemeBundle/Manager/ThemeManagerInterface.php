@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\ThemeBundle\Manager;
 
 use WellCommerce\Bundle\ThemeBundle\Entity\Theme;
+use WellCommerce\Bundle\ThemeBundle\Entity\ThemeInterface;
 
 /**
  * Interface ThemeManagerInterface
@@ -24,11 +25,9 @@ interface ThemeManagerInterface
     /**
      * Sets current theme object
      *
-     * @param Theme $theme
-     *
-     * @return void
+     * @param ThemeInterface $theme
      */
-    public function setCurrentTheme(Theme $theme);
+    public function setCurrentTheme(ThemeInterface $theme);
 
     /**
      * Returns current theme object

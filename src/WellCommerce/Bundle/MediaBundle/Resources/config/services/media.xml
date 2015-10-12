@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <imports>
+        <import resource="admin/media.xml"/>
+    </imports>
+
+    <services>
+        <service id="media.repository" class="WellCommerce\Bundle\MediaBundle\Repository\MediaRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommerceMediaBundle:Media</argument>
+        </service>
+
+        <service id="media.factory" class="WellCommerce\Bundle\MediaBundle\Factory\MediaFactory" />
+
+        <service id="media.event_dispatcher" class="WellCommerce\Bundle\MediaBundle\EventDispatcher\MediaEventDispatcher">
+            <argument type="service" id="event_dispatcher"/>
+        </service>
+
+        <service id="media.uploader" class="WellCommerce\Bundle\MediaBundle\Uploader\MediaUploader">
+            <argument>%kernel.root_dir%</argument>
+            <argument type="service" id="filesystem" />
+            <argument type="service" id="event_dispatcher" />
+            <argument type="service" id="media.repository" />
+        </service>
+
+        <service id="twig.extension.image" class="WellCommerce\Bundle\MediaBundle\Twig\Extension\ImageExtension">
+            <argument type="service" id="image_helper"/>
+            <tag name="twig.extension"/>
+        </service>
+
+        <service id="dataset.transformer.image_path" class="WellCommerce\Bundle\MediaBundle\DataSet\Transformer\ImagePathTransformer">
+            <argument type="service" id="image_helper"/>
+            <tag name="dataset.transformer" alias="image_path"/>
+        </service>
+    </services>
+</container>

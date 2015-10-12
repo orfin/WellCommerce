@@ -14,8 +14,6 @@ namespace WellCommerce\Bundle\SmugglerBundle\DataSet;
 
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Bundle\DataSetBundle\Configurator\DataSetConfiguratorInterface;
-use WellCommerce\Bundle\DataSetBundle\Transformer\DateTransformer;
-use WellCommerce\Bundle\SmugglerBundle\DataSet\Transformer\VersionReferenceTransformer;
 
 /**
  * Class PackageDataSet
@@ -40,11 +38,11 @@ class PackageDataSet extends AbstractDataSet
             'updatedAt'     => 'package.updatedAt',
         ]);
 
-        $configurator->setTransformers([
-            'createdAt'     => new DateTransformer('Y-m-d H:i:s'),
-            'updatedAt'     => new DateTransformer('Y-m-d H:i:s'),
-            'localVersion'  => new VersionReferenceTransformer(),
-            'remoteVersion' => new VersionReferenceTransformer(),
+        $configurator->setColumnTransformers([
+            'createdAt'     => $this->getDataSetTransformer('date', ['format' => 'Y-m-d H:i:s']),
+            'updatedAt'     => $this->getDataSetTransformer('date', ['format' => 'Y-m-d H:i:s']),
+            'localVersion'  => $this->getDataSetTransformer('package_version_reference'),
+            'remoteVersion' => $this->getDataSetTransformer('package_version_reference')
         ]);
     }
 }

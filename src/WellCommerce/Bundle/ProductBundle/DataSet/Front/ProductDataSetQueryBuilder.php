@@ -13,6 +13,9 @@
 namespace WellCommerce\Bundle\ProductBundle\DataSet\Front;
 
 use Doctrine\ORM\QueryBuilder;
+use WellCommerce\Bundle\DataSetBundle\Column\ColumnCollection;
+use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
+use WellCommerce\Bundle\DataSetBundle\Request\DataSetRequestInterface;
 use WellCommerce\Bundle\ProductBundle\DataSet\Admin\ProductDataSetQueryBuilder as BaseProductDataSetQueryBuilder;
 
 /**
@@ -25,9 +28,9 @@ class ProductDataSetQueryBuilder extends BaseProductDataSetQueryBuilder
     /**
      * {@inheritdoc}
      */
-    public function getQueryBuilder()
+    public function getQueryBuilder(ColumnCollection $columns, DataSetRequestInterface $request)
     {
-        $qb = parent::getQueryBuilder();
+        $qb = parent::getQueryBuilder($columns, $request);
 
         $this->addProductConditions($qb);
         $this->addCategoryConditions($qb);

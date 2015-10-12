@@ -14,7 +14,7 @@
             <tag name="doctrine.event_subscriber" />
         </service>
 
-        <service id="resource.provider.collection" class="WellCommerce\Bundle\CoreBundle\Provider\ProviderCollection"/>
+        <service id="resource.provider.collection" class="WellCommerce\Bundle\CoreBundle\Provider\ResourceProviderCollection"/>
 
         <service id="template_resolver" class="WellCommerce\Bundle\CoreBundle\Templating\TemplateResolver">
              <argument type="service" id="kernel"/>

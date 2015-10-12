@@ -3,125 +3,14 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
+    <imports>
+        <import resource="admin/page.xml"/>
+        <import resource="front/page.xml"/>
+    </imports>
+
     <services>
-        <service id="page.manager.front" class="WellCommerce\Bundle\CmsBundle\Manager\Front\PageManager">
-            <argument type="service" id="page.repository"/>
-            <argument type="service" id="page.event_dispatcher"/>
-            <argument type="service" id="page.factory"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
-
-        <service id="page.controller.front" class="WellCommerce\Bundle\CmsBundle\Controller\Front\PageController">
-            <argument type="service" id="page.manager.front"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
-
-        <service id="page.layout_box.controller" class="WellCommerce\Bundle\CmsBundle\Controller\Box\PageBoxController">
-            <argument type="service" id="page.manager.front"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
-
-        <service id="page.manager.admin" class="WellCommerce\Bundle\CmsBundle\Manager\Admin\PageManager">
-            <argument type="service" id="page.repository"/>
-            <argument type="service" id="page.event_dispatcher"/>
-            <argument type="service" id="page.factory"/>
-            <argument type="service" id="page.form_builder"/>
-            <argument type="service" id="page.datagrid"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
-
-        <service id="page.controller.admin" class="WellCommerce\Bundle\CmsBundle\Controller\Admin\PageController">
-            <argument type="service" id="page.manager.admin"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
-
-        <service id="page.layout_box.configurator" class="WellCommerce\Bundle\CmsBundle\Layout\PageBoxConfigurator">
-            <argument>Page</argument>
-            <argument>page.layout_box.controller</argument>
-            <argument type="service" id="translator_helper"/>
-            <tag name="layout_box.configurator" />
-        </service>
-
         <service id="page.repository" class="WellCommerce\Bundle\CmsBundle\Repository\PageRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument>WellCommerceCmsBundle:Page</argument>
-        </service>
-
-        <service id="page.dataset.query_builder.admin" class="WellCommerce\Bundle\CmsBundle\DataSet\Admin\PageDataSetQueryBuilder" public="false">
-            <argument type="service" id="page.repository"/>
-            <call method="setShopContext">
-                <argument type="service" id="shop.context.admin"/>
-            </call>
-        </service>
-
-        <service id="page.dataset.query_builder.front" class="WellCommerce\Bundle\CmsBundle\DataSet\Front\PageDataSetQueryBuilder" public="false">
-            <argument type="service" id="page.repository"/>
-            <call method="setShopContext">
-                <argument type="service" id="shop.context.front"/>
-            </call>
-        </service>
-
-        <service id="page.dataset.loader.admin" class="%dataset.loader.class%">
-            <argument type="service" id="page.dataset.query_builder.admin"/>
-            <argument type="service" id="dataset.processor"/>
-            <argument type="service" id="doctrine.cache"/>
-        </service>
-
-        <service id="page.dataset.loader.front" class="%dataset.loader.class%">
-            <argument type="service" id="page.dataset.query_builder.front"/>
-            <argument type="service" id="dataset.processor"/>
-        </service>
-
-        <service id="page.dataset.admin" class="WellCommerce\Bundle\CmsBundle\DataSet\Admin\PageDataSet">
-            <argument key="identifier">page</argument>
-            <argument type="service" id="page.dataset.loader.admin"/>
-            <argument type="service" id="page.event_dispatcher"/>
-            <configurator service="dataset.configurator" method="configure"/>
-        </service>
-
-        <service id="page.dataset.front" class="WellCommerce\Bundle\CmsBundle\DataSet\Front\PageDataSet">
-            <argument key="identifier">page</argument>
-            <argument type="service" id="page.dataset.loader.front"/>
-            <argument type="service" id="page.event_dispatcher"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <configurator service="dataset.configurator" method="configure"/>
-        </service>
-
-        <service id="page.collection.admin" parent="dataset.collection_builder.factory">
-            <argument type="service" id="page.dataset.admin"/>
-        </service>
-
-        <service id="page.collection.front" parent="dataset.collection_builder.factory">
-            <argument type="service" id="page.dataset.front"/>
-        </service>
-
-        <service id="page.datagrid" class="WellCommerce\Bundle\CmsBundle\DataGrid\PageDataGrid">
-            <argument key="identifier">page</argument>
-            <argument type="service" id="page.dataset.admin"/>
-            <argument type="service" id="page.event_dispatcher"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-        </service>
-
-        <service id="page.form_builder" class="WellCommerce\Bundle\CmsBundle\Form\Admin\PageFormBuilder">
-            <argument type="service" id="form.resolver.factory"/>
-            <argument type="service" id="form.handler"/>
-            <argument type="service" id="page.event_dispatcher"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
         </service>
 
         <service id="page.route.generator" class="WellCommerce\Bundle\CmsBundle\Routing\PageRouteGenerator">
@@ -132,22 +21,10 @@
             <tag name="route.generator" />
         </service>
 
-        <service id="page.provider" class="WellCommerce\Bundle\CmsBundle\Provider\PageProvider">
-            <call method="setCollectionBuilder">
-                <argument type="service" id="page.collection.front" />
-            </call>
-            <tag name="resource.provider" alias="page"/>
-        </service>
-
         <service id="page.factory" class="WellCommerce\Bundle\CmsBundle\Factory\PageFactory" />
 
         <service id="page.event_dispatcher" class="WellCommerce\Bundle\CmsBundle\EventDispatcher\PageEventDispatcher">
             <argument type="service" id="event_dispatcher" />
-        </service>
-
-        <service id="twig.extension.page" class="WellCommerce\Bundle\CmsBundle\Twig\Extension\PageExtension">
-            <argument type="service" id="page.provider"/>
-            <tag name="twig.extension"/>
         </service>
     </services>
 </container>

@@ -109,8 +109,8 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
         $shop          = $this->getShopContext()->getCurrentScope();
         $cart          = $this->getCart($shop, $client, $sessionId, $currency);
 
-        $cartProvider = $this->getCartProvider();
-        $cartProvider->setCurrentCart($cart);
+        $cartProvider = $this->getResourceProvider('cart');
+        $cartProvider->setCurrentResource($cart);
 
         return $cart;
     }

@@ -12,9 +12,9 @@
 
 namespace WellCommerce\Bundle\CategoryBundle\DataSet\Admin;
 
+use WellCommerce\Bundle\DataSetBundle\Conditions\Condition\Eq;
 use WellCommerce\Bundle\DataSetBundle\QueryBuilder\AbstractDataSetQueryBuilder;
-use WellCommerce\Bundle\DataSetBundle\QueryBuilder\QueryBuilderInterface;
-use WellCommerce\Bundle\MultiStoreBundle\Context\ShopContext;
+use WellCommerce\Bundle\DataSetBundle\QueryBuilder\DataSetQueryBuilderInterface;
 use WellCommerce\Bundle\MultiStoreBundle\Context\ShopContextInterface;
 
 /**
@@ -22,7 +22,7 @@ use WellCommerce\Bundle\MultiStoreBundle\Context\ShopContextInterface;
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class CategoryDataSetQueryBuilder extends AbstractDataSetQueryBuilder implements QueryBuilderInterface
+class CategoryDataSetQueryBuilder extends AbstractDataSetQueryBuilder implements DataSetQueryBuilderInterface
 {
     /**
      * @var ShopContextInterface
@@ -37,21 +37,14 @@ class CategoryDataSetQueryBuilder extends AbstractDataSetQueryBuilder implements
         $this->context = $context;
     }
 
-    /**
-     * Adds additional criteria to query builder. Filters dataset by current shop scope
-     *
-     * @return \Doctrine\ORM\QueryBuilder
-     */
-    public function getQueryBuilder()
+    protected function getConditions()
     {
-        $qb = parent::getQueryBuilder();
+        $conditions = parent::getConditions();
 
         if (null !== $this->context && null !== $this->context->getCurrentScopeId()) {
-            $expression = $qb->expr()->eq('category_shops.id', ':shop');
-            $qb->andWhere($expression);
-            $qb->setParameter('shop', $this->context->getCurrentScopeId());
+            $conditions->add(new Eq('shop', $this->context->getCurrentScopeId()));
         }
 
-        return $qb;
+        return $conditions;
     }
 }

@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\CouponBundle\DataSet;
 
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Bundle\DataSetBundle\Configurator\DataSetConfiguratorInterface;
-use WellCommerce\Bundle\DataSetBundle\Transformer\DateTransformer;
 
 /**
  * Class CouponDataSet
@@ -38,10 +37,10 @@ class CouponDataSet extends AbstractDataSet
             'discount'  => 'IF_ELSE(coupon.modifierType = \'%\', CONCAT_WS(\'\', coupon.modifierValue, coupon.modifierType), CONCAT_WS(\' \', coupon.modifierValue, coupon.currency))',
         ]);
 
-        $configurator->setTransformers([
-            'createdAt' => new DateTransformer('Y-m-d H:i:s'),
-            'validFrom' => new DateTransformer('Y-m-d'),
-            'validTo'   => new DateTransformer('Y-m-d'),
+        $configurator->setColumnTransformers([
+            'createdAt' => $this->getDataSetTransformer('date', ['format' => 'Y-m-d H:i:s']),
+            'validFrom' => $this->getDataSetTransformer('date', ['format' => 'Y-m-d']),
+            'validTo'   => $this->getDataSetTransformer('date', ['format' => 'Y-m-d']),
         ]);
     }
 }

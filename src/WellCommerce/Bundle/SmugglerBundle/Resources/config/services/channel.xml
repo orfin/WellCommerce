@@ -37,24 +37,19 @@
             <argument type="service" id="channel.repository"/>
         </service>
 
-        <service id="channel.dataset.loader" class="%dataset.loader.class%">
-            <argument type="service" id="channel.dataset.query_builder"/>
-            <argument type="service" id="dataset.processor"/>
-        </service>
-
         <service id="channel.dataset" class="WellCommerce\Bundle\SmugglerBundle\DataSet\ChannelDataSet">
-            <argument key="identifier">channel</argument>
-            <argument type="service" id="channel.dataset.loader"/>
+            <argument type="service" id="channel.dataset.query_builder"/>
+            <argument type="service" id="channel.event_dispatcher"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
             <configurator service="dataset.configurator" method="configure"/>
-        </service>
-
-        <service id="channel.collection" parent="dataset.collection_builder.factory">
-            <argument type="service" id="channel.dataset"/>
         </service>
 
         <service id="channel.datagrid" class="WellCommerce\Bundle\SmugglerBundle\DataGrid\ChannelDataGrid">
             <argument key="identifier">channel</argument>
             <argument type="service" id="channel.dataset"/>
+            <argument type="service" id="channel.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -63,6 +58,7 @@
         <service id="channel.form_builder" class="WellCommerce\Bundle\SmugglerBundle\Form\ChannelFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
+            <argument type="service" id="channel.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

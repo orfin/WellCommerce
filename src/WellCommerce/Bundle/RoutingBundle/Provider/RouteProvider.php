@@ -136,10 +136,7 @@ class RouteProvider implements RouteProviderInterface
     {
         $route = null;
 
-        /**
-         * @var \WellCommerce\Bundle\RoutingBundle\Generator\RouteGeneratorInterface $generator
-         */
-        foreach ($this->generators as $generator) {
+        foreach ($this->generators->all() as $generator) {
             if ($generator->supports($resource->getType())) {
                 $route = $generator->generate($resource);
                 break;

@@ -24,19 +24,23 @@
             <argument type="service" id="producer.repository"/>
         </service>
 
-        <service id="producer.dataset.loader.front" class="%dataset.loader.class%">
-            <argument type="service" id="producer.dataset.query_builder.front"/>
-            <argument type="service" id="dataset.processor"/>
-        </service>
-
         <service id="producer.dataset.front" class="WellCommerce\Bundle\ProducerBundle\DataSet\Front\ProducerDataSet">
-            <argument key="identifier">producer</argument>
-            <argument type="service" id="producer.dataset.loader.front"/>
+            <argument type="service" id="producer.dataset.query_builder.front"/>
+            <argument type="service" id="dataset.manager"/>
+            <argument type="service" id="producer.event_dispatcher"/>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
-        <service id="producer.collection.front" parent="dataset.collection_builder.factory">
+        <service id="producer.provider" class="WellCommerce\Bundle\CoreBundle\Provider\ResourceProvider">
             <argument type="service" id="producer.dataset.front"/>
+            <tag name="resource.provider" alias="producer"/>
+        </service>
+
+        <service id="producer_menu.layout_box.controller" class="WellCommerce\Bundle\CategoryBundle\Controller\Box\ProducerMenuBoxController">
+            <argument type="service" id="producer.manager.front"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
         </service>
     </services>
 </container>

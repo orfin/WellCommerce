@@ -12,7 +12,6 @@
 namespace WellCommerce\Bundle\ClientBundle\Form\Admin;
 
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
-use WellCommerce\Bundle\DataSetBundle\CollectionBuilder\SelectBuilder;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
@@ -57,12 +56,10 @@ class ClientFormBuilder extends AbstractFormBuilder
             'label' => $this->trans('common.label.contact_details.phone'),
         ]));
 
-        $clientGroupSelectBuilder = new SelectBuilder($this->get('client_group.dataset'));
-
         $requiredData->addChild($this->getElement('select', [
             'name'        => 'group',
             'label'       => $this->trans('client.label.client_group'),
-            'options'     => $clientGroupSelectBuilder->getItems(),
+            'options'     => $this->get('client_group.dataset')->getResult('select'),
             'transformer' => $this->getRepositoryTransformer('entity', $this->get('client_group.repository'))
         ]));
 

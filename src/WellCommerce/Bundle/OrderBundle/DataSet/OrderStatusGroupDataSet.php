@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\OrderBundle\DataSet;
 
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Bundle\DataSetBundle\Configurator\DataSetConfiguratorInterface;
-use WellCommerce\Bundle\DataSetBundle\Transformer\DateTransformer;
 
 /**
  * Class OrderStatusGroupDataSet
@@ -34,8 +33,8 @@ class OrderStatusGroupDataSet extends AbstractDataSet
             'createdAt' => 'order_status_group.createdAt',
         ]);
 
-        $configurator->setTransformers([
-            'createdAt' => new DateTransformer('Y-m-d H:i:s'),
+        $configurator->setColumnTransformers([
+            'createdAt' => $this->getDataSetTransformer('date', ['format' => 'Y-m-d H:i:s']),
         ]);
     }
 }

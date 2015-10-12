@@ -41,8 +41,7 @@
             </call>
         </service>
 
-        <service id="cart.repository" class="WellCommerce\Bundle\CartBundle\Repository\CartRepository"
-                 factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+        <service id="cart.repository" class="WellCommerce\Bundle\CartBundle\Repository\CartRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument>WellCommerceCartBundle:Cart</argument>
         </service>
 
@@ -50,31 +49,19 @@
             <argument>WellCommerceCartBundle:CartProduct</argument>
         </service>
 
-        <service id="cart_product.dataset.query_builder.front" class="WellCommerce\Bundle\CartBundle\DataSet\Front\CartProductDataSetQueryBuilder">
+        <service id="cart_product.dataset.query_builder" class="WellCommerce\Bundle\CartBundle\DataSet\CartProductDataSetQueryBuilder">
             <argument type="service" id="cart_product.repository"/>
             <argument type="service" id="cart.provider"/>
         </service>
 
-        <service id="cart_product.dataset.loader.front" class="%dataset.loader.class%">
-            <argument type="service" id="cart_product.dataset.query_builder.front"/>
-            <argument type="service" id="dataset.processor"/>
-        </service>
-
-        <service id="cart_product.dataset.front" class="WellCommerce\Bundle\CartBundle\DataSet\Front\CartProductDataSet">
-            <argument key="identifier">cart_product</argument>
-            <argument type="service" id="cart_product.dataset.loader.front"/>
+        <service id="cart_product.dataset" class="WellCommerce\Bundle\CartBundle\DataSet\CartProductDataSet">
+            <argument type="service" id="cart_product.dataset.query_builder"/>
+            <argument type="service" id="dataset.manager"/>
             <argument type="service" id="cart_product.event_dispatcher"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
-        <service id="cart_product.collection.front" parent="dataset.collection_builder.factory">
-            <argument type="service" id="cart_product.dataset.front"/>
-        </service>
-
-        <service id="cart.form_builder" class="WellCommerce\Bundle\CartBundle\Form\Front\CartFormBuilder">
+        <service id="cart.form_builder" class="WellCommerce\Bundle\CartBundle\Form\CartFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
             <argument type="service" id="cart_product.event_dispatcher"/>
@@ -89,20 +76,13 @@
             </call>
         </service>
 
-        <service id="cart_product.provider" class="WellCommerce\Bundle\CartBundle\Provider\CartProductProvider">
-            <call method="setCollectionBuilder">
-                <argument type="service" id="cart_product.collection.front"/>
-            </call>
-            <tag name="resource.provider" alias="cart_product"/>
-        </service>
-
         <service id="cart.provider" class="WellCommerce\Bundle\CartBundle\Provider\CartProvider">
             <tag name="resource.provider" alias="cart"/>
         </service>
 
         <service id="twig.extension.cart" class="WellCommerce\Bundle\CartBundle\Twig\Extension\CartExtension">
             <argument type="service" id="cart.provider"/>
-            <argument type="service" id="cart_product.provider"/>
+            <argument type="service" id="cart_product.dataset"/>
             <tag name="twig.extension"/>
         </service>
 

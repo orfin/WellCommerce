@@ -11,9 +11,7 @@
  */
 namespace WellCommerce\Bundle\TaxBundle\Twig\Extension;
 
-use WellCommerce\Bundle\DataSetBundle\CollectionBuilder\SelectBuilder;
-use WellCommerce\Bundle\TaxBundle\Calculator\TaxCalculator;
-use WellCommerce\Bundle\TaxBundle\DataSet\TaxDataSet;
+use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
 
 /**
  * Class TaxExtension
@@ -23,18 +21,18 @@ use WellCommerce\Bundle\TaxBundle\DataSet\TaxDataSet;
 class TaxExtension extends \Twig_Extension
 {
     /**
-     * @var TaxDataSet
+     * @var DataSetInterface
      */
-    protected $dataSet;
+    protected $dataset;
 
     /**
      * Constructor
      *
-     * @param TaxDataSet $dataSet
+     * @param DataSetInterface $dataset
      */
-    public function __construct(TaxDataSet $dataSet)
+    public function __construct(DataSetInterface $dataset)
     {
-        $this->dataSet = $dataSet;
+        $this->dataset = $dataset;
     }
 
     /**
@@ -42,13 +40,8 @@ class TaxExtension extends \Twig_Extension
      */
     public function getGlobals()
     {
-        $taxSelectBuilder = new SelectBuilder($this->dataSet, [
-            'label_key' => 'value',
-            'order_by'  => 'value',
-        ]);
-
         return [
-            'taxes' => $taxSelectBuilder->getItems()
+            'taxes' => $this->dataset->getResult('select')
         ];
     }
 

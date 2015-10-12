@@ -33,23 +33,21 @@ class CategoryProductsBoxController extends AbstractBoxController implements Box
      */
     public function indexAction(LayoutBoxSettingsCollection $boxSettings)
     {
-        $provider          = $this->manager->getProductProvider();
-        $collectionBuilder = $provider->getCollectionBuilder();
-        $requestHelper     = $this->manager->getRequestHelper();
-        $limit             = $requestHelper->getCurrentLimit($boxSettings->getParam('per_page', 12));
-        $offset            = $requestHelper->getCurrentOffset($limit);
+        $dataset       = $this->get('product.dataset.front');
+        $requestHelper = $this->manager->getRequestHelper();
+        $limit         = $requestHelper->getCurrentLimit($boxSettings->getParam('per_page', 12));
+        $offset        = $requestHelper->getCurrentOffset($limit);
 
-        $dataset = $collectionBuilder->getDataSet([
-            'limit'         => $limit,
-            'offset'        => $offset,
-            'order_by'      => $requestHelper->getQueryAttribute('order_by', 'name'),
-            'order_dir'     => $requestHelper->getQueryAttribute('order_dir', 'asc'),
-            'conditions'    => $this->manager->getCurrentCategoryConditions(),
-            'cache_enabled' => true
+        $products = $dataset->getResult('datagrid', [
+            'limit'      => $limit,
+            'offset'     => $offset,
+            'order_by'   => $requestHelper->getQueryAttribute('order_by', 'name'),
+            'order_dir'  => $requestHelper->getQueryAttribute('order_dir', 'asc'),
+            'conditions' => $this->manager->getCurrentCategoryConditions(),
         ]);
 
         return $this->displayTemplate('index', [
-            'dataset' => $dataset
+            'dataset' => $products
         ]);
     }
 }

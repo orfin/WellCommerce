@@ -40,55 +40,24 @@
             <argument>WellCommerceShippingBundle:ShippingMethodCost</argument>
         </service>
 
-        <service id="shipping_method.dataset.query_builder.admin" class="WellCommerce\Bundle\ShippingBundle\DataSet\Admin\ShippingMethodDataSetQueryBuilder" public="false">
+        <service id="shipping_method.dataset.query_builder.admin" class="WellCommerce\Bundle\ShippingBundle\DataSet\ShippingMethodDataSetQueryBuilder" public="false">
             <argument type="service" id="shipping_method.repository"/>
         </service>
 
-        <service id="shipping_method.dataset.loader.admin" class="%dataset.loader.class%">
+        <service id="shipping_method.dataset" class="WellCommerce\Bundle\ShippingBundle\DataSet\ShippingMethodDataSet">
             <argument type="service" id="shipping_method.dataset.query_builder.admin"/>
-            <argument type="service" id="dataset.processor"/>
-        </service>
-
-        <service id="shipping_method.dataset.admin" class="WellCommerce\Bundle\ShippingBundle\DataSet\Admin\ShippingMethodDataSet">
-            <argument key="identifier">shipping_method</argument>
-            <argument type="service" id="shipping_method.dataset.loader.admin"/>
+            <argument type="service" id="dataset.manager"/>
             <argument type="service" id="shipping_method.event_dispatcher"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
-        <service id="shipping_method.collection.admin" parent="dataset.collection_builder.factory">
-            <argument type="service" id="shipping_method.dataset.admin"/>
-        </service>
-
-        <service id="shipping_method.dataset.query_builder.front" class="WellCommerce\Bundle\ShippingBundle\DataSet\Front\ShippingMethodDataSetQueryBuilder" public="false">
+        <service id="shipping_method.dataset.query_builder" class="WellCommerce\Bundle\ShippingBundle\DataSet\ShippingMethodDataSetQueryBuilder" public="false">
             <argument type="service" id="shipping_method.repository"/>
-        </service>
-
-        <service id="shipping_method.dataset.loader.front" class="%dataset.loader.class%">
-            <argument type="service" id="shipping_method.dataset.query_builder.front"/>
-            <argument type="service" id="dataset.processor"/>
-        </service>
-
-        <service id="shipping_method.dataset.front" class="WellCommerce\Bundle\ShippingBundle\DataSet\Front\ShippingMethodDataSet">
-            <argument key="identifier">shipping_method</argument>
-            <argument type="service" id="shipping_method.dataset.loader.front"/>
-            <argument type="service" id="shipping_method.event_dispatcher"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
-            <configurator service="dataset.configurator" method="configure"/>
-        </service>
-
-        <service id="shipping_method.collection.front" parent="dataset.collection_builder.factory">
-            <argument type="service" id="shipping_method.dataset.front"/>
         </service>
 
         <service id="shipping_method.datagrid" class="WellCommerce\Bundle\ShippingBundle\DataGrid\ShippingMethodDataGrid">
             <argument key="identifier">shipping_method</argument>
-            <argument type="service" id="shipping_method.dataset.admin"/>
+            <argument type="service" id="shipping_method.dataset"/>
             <argument type="service" id="shipping_method.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>

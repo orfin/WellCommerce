@@ -11,7 +11,7 @@
  */
 namespace WellCommerce\Bundle\ProductBundle\Twig\Extension;
 
-use WellCommerce\Bundle\ProductBundle\Provider\ProductStatusProviderInterface;
+use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
 
 /**
  * Class ProductStatusExtension
@@ -21,18 +21,18 @@ use WellCommerce\Bundle\ProductBundle\Provider\ProductStatusProviderInterface;
 class ProductStatusExtension extends \Twig_Extension
 {
     /**
-     * @var ProductStatusProviderInterface
+     * @var DataSetInterface
      */
-    protected $provider;
+    protected $dataset;
 
     /**
      * Constructor
      *
-     * @param ProductStatusProviderInterface $provider
+     * @param DataSetInterface $dataset
      */
-    public function __construct(ProductStatusProviderInterface $provider)
+    public function __construct(DataSetInterface $dataset)
     {
-        $this->provider = $provider;
+        $this->dataset = $dataset;
     }
 
     public function getFunctions()
@@ -61,16 +61,10 @@ class ProductStatusExtension extends \Twig_Extension
      */
     public function getProductStatuses($limit = 5, $orderBy = 'name', $orderDir = 'asc')
     {
-        $params = [
-            'limit'         => $limit,
-            'order_by'      => $orderBy,
-            'order_dir'     => $orderDir,
-            'cache_enabled' => true,
-            'cache_ttl'     => 3600
-        ];
-
-        $statuses = $this->provider->getCollectionBuilder()->getArray($params);
-
-        return $statuses;
+        return $this->dataset->getResult('array', [
+            'limit'     => $limit,
+            'order_by'  => $orderBy,
+            'order_dir' => $orderDir,
+        ]);
     }
 }

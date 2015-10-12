@@ -47,24 +47,19 @@
             <argument type="service" id="package.repository"/>
         </service>
 
-        <service id="package.dataset.loader" class="%dataset.loader.class%">
-            <argument type="service" id="package.dataset.query_builder"/>
-            <argument type="service" id="dataset.processor"/>
-        </service>
-
         <service id="package.dataset" class="WellCommerce\Bundle\SmugglerBundle\DataSet\PackageDataSet">
-            <argument key="identifier">package</argument>
-            <argument type="service" id="package.dataset.loader"/>
+            <argument type="service" id="package.dataset.query_builder"/>
+            <argument type="service" id="package.event_dispatcher"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
             <configurator service="dataset.configurator" method="configure"/>
-        </service>
-
-        <service id="package.collection" parent="dataset.collection_builder.factory">
-            <argument type="service" id="package.dataset"/>
         </service>
 
         <service id="package.datagrid" class="WellCommerce\Bundle\SmugglerBundle\DataGrid\PackageDataGrid">
             <argument key="identifier">package</argument>
             <argument type="service" id="package.dataset"/>
+            <argument type="service" id="package.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -73,6 +68,7 @@
         <service id="package.form_builder" class="WellCommerce\Bundle\SmugglerBundle\Form\PackageFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
+            <argument type="service" id="package.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -88,6 +84,10 @@
 
         <service id="package.command.plugin.remove" class="WellCommerce\Bundle\SmugglerBundle\Command\Package\RemoveCommand">
             <tag name="console.command" />
+        </service>
+
+        <service id="dataset.transformer.package_version_reference" class="WellCommerce\Bundle\SmugglerBundle\DataSet\Transformer\VersionReferenceTransformer">
+            <tag name="dataset.transformer" alias="package_version_reference"/>
         </service>
 
     </services>

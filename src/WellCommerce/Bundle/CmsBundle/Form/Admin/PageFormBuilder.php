@@ -87,7 +87,7 @@ class PageFormBuilder extends AbstractFormBuilder
             'selectable'  => false,
             'sortable'    => false,
             'clickable'   => false,
-            'items'       => $this->get('page.collection.admin')->getFlatTree(),
+            'items'       => $this->get('page.dataset.admin')->getResult('flat_tree'),
             'restrict'    => $this->getParam('id'),
             'transformer' => $this->getRepositoryTransformer('entity', $this->get('page.repository'))
         ]));
@@ -99,7 +99,7 @@ class PageFormBuilder extends AbstractFormBuilder
         $mainData->addChild($this->getElement('multi_select', [
             'name'        => 'clientGroups',
             'label'       => $this->trans('page.label.client_groups'),
-            'options'     => $this->get('client_group.collection')->getSelect(),
+            'options'     => $this->get('client_group.dataset')->getResult('select'),
             'transformer' => $this->getRepositoryTransformer('collection', $this->get('client_group.repository'))
         ]));
     }
@@ -212,7 +212,7 @@ class PageFormBuilder extends AbstractFormBuilder
         $shopsData->addChild($this->getElement('multi_select', [
             'name'        => 'shops',
             'label'       => $this->trans('shops.label'),
-            'options'     => $this->get('shop.collection')->getSelect(),
+            'options'     => $this->get('shop.dataset.admin')->getResult('select'),
             'transformer' => $this->getRepositoryTransformer('collection', $this->get('shop.repository'))
         ]));
     }

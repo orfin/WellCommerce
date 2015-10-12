@@ -12,7 +12,6 @@
 namespace WellCommerce\Bundle\OrderBundle\Form\Admin;
 
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
-use WellCommerce\Bundle\DataSetBundle\CollectionBuilder\SelectBuilder;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**

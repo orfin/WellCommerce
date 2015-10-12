@@ -30,6 +30,7 @@ class CategoryDataSet extends AbstractDataSet
         $configurator->setColumns([
             'id'        => 'category.id',
             'hierarchy' => 'category.hierarchy',
+            'enabled'   => 'category.enabled',
             'parent'    => 'IDENTITY(category.parent)',
             'children'  => 'COUNT(category_children.id)',
             'products'  => 'COUNT(category_products.id)',

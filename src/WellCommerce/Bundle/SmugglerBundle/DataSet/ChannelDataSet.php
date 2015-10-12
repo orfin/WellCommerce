@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\SmugglerBundle\DataSet;
 
 use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Bundle\DataSetBundle\Configurator\DataSetConfiguratorInterface;
-use WellCommerce\Bundle\DataSetBundle\Transformer\DateTransformer;
 
 /**
  * Class ChannelDataSet
@@ -36,9 +35,9 @@ class ChannelDataSet extends AbstractDataSet
             'updatedAt' => 'channel.updatedAt',
         ]);
 
-        $configurator->setTransformers([
-            'createdAt' => new DateTransformer('Y-m-d H:i:s'),
-            'updatedAt' => new DateTransformer('Y-m-d H:i:s'),
+        $configurator->setColumnTransformers([
+            'createdAt' => $this->getDataSetTransformer('date', ['format' => 'Y-m-d H:i:s']),
+            'updatedAt' => $this->getDataSetTransformer('date', ['format' => 'Y-m-d H:i:s']),
         ]);
     }
 }

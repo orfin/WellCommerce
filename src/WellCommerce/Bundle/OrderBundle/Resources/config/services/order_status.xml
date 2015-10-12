@@ -36,23 +36,11 @@
             <argument type="service" id="order_status.repository"/>
         </service>
 
-        <service id="order_status.dataset.loader" class="%dataset.loader.class%">
-            <argument type="service" id="order_status.dataset.query_builder"/>
-            <argument type="service" id="dataset.processor"/>
-        </service>
-
         <service id="order_status.dataset" class="WellCommerce\Bundle\OrderBundle\DataSet\OrderStatusDataSet">
-            <argument key="identifier">order_status</argument>
-            <argument type="service" id="order_status.dataset.loader"/>
+            <argument type="service" id="order_status.dataset.query_builder"/>
+            <argument type="service" id="dataset.manager"/>
             <argument type="service" id="order_status.event_dispatcher"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
             <configurator service="dataset.configurator" method="configure"/>
-        </service>
-
-        <service id="order_status.collection" parent="dataset.collection_builder.factory">
-            <argument type="service" id="order_status.dataset"/>
         </service>
 
         <service id="order_status.datagrid" class="WellCommerce\Bundle\OrderBundle\DataGrid\OrderStatusDataGrid">

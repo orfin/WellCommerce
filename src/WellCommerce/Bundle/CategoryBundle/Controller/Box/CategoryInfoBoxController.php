@@ -24,10 +24,8 @@ class CategoryInfoBoxController extends AbstractBoxController implements BoxCont
 {
     public function indexAction()
     {
-        $provider = $this->manager->getCategoryProvider();
-
         return $this->displayTemplate('index', [
-            'category' => $provider->getCurrentCategory()
+            'category' => $this->manager->getResourceProvider('category')->getCurrentResource()
         ]);
     }
 }

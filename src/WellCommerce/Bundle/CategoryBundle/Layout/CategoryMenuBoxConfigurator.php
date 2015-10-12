@@ -43,7 +43,7 @@ class CategoryMenuBoxConfigurator extends AbstractLayoutBoxConfigurator implemen
             'selectable'  => true,
             'sortable'    => false,
             'clickable'   => false,
-            'items'       => $this->get('category.collection.admin')->getFlatTree(),
+            'items'       => $this->get('category.dataset.admin')->getResult('flat_tree'),
             'transformer' => $this->getRepositoryTransformer('entity', $this->get('category.repository')),
             'default'     => $accessor->getValue($defaults, '[exclude]')
         ]));

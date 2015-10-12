@@ -47,8 +47,8 @@ class ProductDataSet extends AbstractDataSet
             'status'           => 'statuses.id',
         ]);
 
-        $configurator->setTransformers([
-            'route' => $this->container->get('route.transformer')
+        $configurator->setColumnTransformers([
+            'route' => $this->getDataSetTransformer('route')
         ]);
     }
 }

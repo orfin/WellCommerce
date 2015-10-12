@@ -28,4 +28,12 @@ class RouteGeneratorCollection extends ArrayCollection
     {
         $this->items[] = $generator;
     }
+
+    /**
+     * @return RouteGeneratorInterface[]
+     */
+    public function all()
+    {
+        return $this->items;
+    }
 }

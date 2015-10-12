@@ -12,7 +12,7 @@
             <argument type="service" id="payment_method.repository"/>
             <argument type="service" id="payment_method.event_dispatcher"/>
             <argument type="service" id="payment_method.factory"/>
-            <argument type="service" id="payment_method.form_builder"/>
+            <argument type="service" id="payment_method.form_builder.admin"/>
             <argument type="service" id="payment_method.datagrid"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
@@ -69,47 +69,22 @@
             <argument type="service" id="payment_method.repository"/>
         </service>
 
-        <service id="payment_method.dataset.loader.admin" class="%dataset.loader.class%">
-            <argument type="service" id="payment_method.dataset.query_builder.admin"/>
-            <argument type="service" id="dataset.processor"/>
-        </service>
-
         <service id="payment_method.dataset.admin" class="WellCommerce\Bundle\PaymentBundle\DataSet\Admin\PaymentMethodDataSet">
-            <argument key="identifier">payment_method</argument>
-            <argument type="service" id="payment_method.dataset.loader.admin"/>
+            <argument type="service" id="payment_method.dataset.query_builder.admin"/>
+            <argument type="service" id="dataset.manager"/>
             <argument type="service" id="payment_method.event_dispatcher"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
             <configurator service="dataset.configurator" method="configure"/>
-        </service>
-
-        <service id="payment_method.collection.admin" parent="dataset.collection_builder.factory">
-            <argument type="service" id="payment_method.dataset.admin"/>
         </service>
 
         <service id="payment_method.dataset.query_builder.front" class="WellCommerce\Bundle\PaymentBundle\DataSet\Front\PaymentMethodDataSetQueryBuilder" public="false">
             <argument type="service" id="payment_method.repository"/>
         </service>
 
-        <service id="payment_method.dataset.loader.front" class="%dataset.loader.class%">
-            <argument type="service" id="payment_method.dataset.query_builder.front"/>
-            <argument type="service" id="dataset.processor"/>
-        </service>
-
         <service id="payment_method.dataset.front" class="WellCommerce\Bundle\PaymentBundle\DataSet\Front\PaymentMethodDataSet">
-            <argument key="identifier">payment_method</argument>
-            <argument type="service" id="payment_method.dataset.loader.front"/>
+            <argument type="service" id="payment_method.dataset.query_builder.front"/>
+            <argument type="service" id="dataset.manager"/>
             <argument type="service" id="payment_method.event_dispatcher"/>
-            <argument type="service" id="payment_method.event_dispatcher"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
             <configurator service="dataset.configurator" method="configure"/>
-        </service>
-
-        <service id="payment_method.collection.front" parent="dataset.collection_builder.factory">
-            <argument type="service" id="payment_method.dataset.front"/>
         </service>
 
         <service id="payment_method.datagrid" class="WellCommerce\Bundle\PaymentBundle\DataGrid\PaymentMethodDataGrid">
@@ -121,7 +96,7 @@
             </call>
         </service>
 
-        <service id="payment_method.form_builder" class="WellCommerce\Bundle\PaymentBundle\Form\PaymentMethodFormBuilder">
+        <service id="payment_method.form_builder.admin" class="WellCommerce\Bundle\PaymentBundle\Form\Admin\PaymentMethodFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
             <argument type="service" id="payment_method.event_dispatcher"/>

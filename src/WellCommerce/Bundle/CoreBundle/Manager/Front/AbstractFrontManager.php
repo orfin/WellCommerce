@@ -25,7 +25,7 @@ abstract class AbstractFrontManager extends AbstractManager implements FrontMana
     /**
      * {@inheritdoc}
      */
-    public function getProviders()
+    public function getResourceProviders()
     {
         return $this->get('resource.provider.collection');
     }
@@ -33,49 +33,9 @@ abstract class AbstractFrontManager extends AbstractManager implements FrontMana
     /**
      * {@inheritdoc}
      */
-    public function getProvider($type)
+    public function getResourceProvider($type)
     {
-        return $this->getProviders()->get($type);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCategoryProvider()
-    {
-        return $this->getProvider('category');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getProductProvider()
-    {
-        return $this->getProvider('product');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getProductStatusProvider()
-    {
-        return $this->getProvider('product_status');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCartProvider()
-    {
-        return $this->getProvider('cart');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCartProductProvider()
-    {
-        return $this->getProvider('cart_product');
+        return $this->getResourceProviders()->get($type);
     }
 
     /**
@@ -87,10 +47,10 @@ abstract class AbstractFrontManager extends AbstractManager implements FrontMana
     }
 
     /**
-     * @return \WellCommerce\Bundle\CartBundle\Entity\Cart
+     * @return \WellCommerce\Bundle\CartBundle\Entity\CartInterface
      */
     public function getCurrentCart()
     {
-        return $this->getCartProvider()->getCurrentCart();
+        return $this->getResourceProvider('cart')->getCurrentResource();
     }
 }

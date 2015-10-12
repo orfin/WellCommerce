@@ -39,8 +39,7 @@ class OrderStatusFormBuilder extends AbstractFormBuilder
             'default' => 1
         ]));
 
-        $orderStatusGroupSelectBuilder = new SelectBuilder($this->get('order_status_group.dataset'));
-        $orderStatusGroups             = $orderStatusGroupSelectBuilder->getItems();
+        $orderStatusGroups = $this->get('order_status_group.dataset')->getResult('select');
 
         $requiredData->addChild($this->getElement('select', [
             'name'        => 'orderStatusGroup',

@@ -12,10 +12,17 @@
 
 namespace WellCommerce\Bundle\MediaBundle\DataSet\Transformer;
 
-use WellCommerce\Bundle\DataSetBundle\Transformer\TransformerInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use WellCommerce\Bundle\CoreBundle\Helper\Image\ImageHelperInterface;
+use WellCommerce\Bundle\DataSetBundle\Transformer\AbstractDataSetTransformer;
+use WellCommerce\Bundle\DataSetBundle\Transformer\TransformerInterface;
 
-class ImagePathTransformer implements TransformerInterface
+/**
+ * Class ImagePathTransformer
+ *
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
+ */
+class ImagePathTransformer extends AbstractDataSetTransformer
 {
     /**
      * @var ImageHelperInterface
@@ -23,31 +30,38 @@ class ImagePathTransformer implements TransformerInterface
     protected $imageHelper;
 
     /**
-     * @var string
-     */
-    protected $filter;
-
-    /**
      * Constructor
      *
      * @param ImageHelperInterface $imageHelper
-     * @param                      $filter
      */
-    public function __construct(ImageHelperInterface $imageHelper, $filter)
+    public function __construct(ImageHelperInterface $imageHelper)
     {
         $this->imageHelper = $imageHelper;
-        $this->filter      = $filter;
     }
 
     /**
-     * Transforms image name to full browser path
-     *
-     * @param $value
-     *
-     * @return string
+     * {@inheritdoc}
      */
-    public function transform($value)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        return $this->imageHelper->getImage($value, $this->filter);
+        $resolver->setRequired([
+            'filter'
+        ]);
+
+        $resolver->setDefaults([
+            'filter' => 'medium'
+        ]);
+
+        $resolver->setAllowedTypes([
+            'filter' => ['string']
+        ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function transformValue($value)
+    {
+        return $this->imageHelper->getImage($value, $this->options['filter']);
     }
 }

@@ -35,8 +35,8 @@ class OrderStatusDataSet extends AbstractDataSet
             'groupName' => 'order_status_group_translation.name',
         ]);
 
-        $configurator->setTransformers([
-            'createdAt' => new DateTransformer('Y-m-d H:i:s'),
+        $configurator->setColumnTransformers([
+            'createdAt' => $this->getDataSetTransformer('date', ['format' => 'Y-m-d H:i:s']),
         ]);
     }
 }

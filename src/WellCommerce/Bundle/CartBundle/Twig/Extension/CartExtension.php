@@ -11,8 +11,8 @@
  */
 namespace WellCommerce\Bundle\CartBundle\Twig\Extension;
 
-use WellCommerce\Bundle\CartBundle\Provider\CartProductProviderInterface;
 use WellCommerce\Bundle\CartBundle\Provider\CartProviderInterface;
+use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
 
 /**
  * Class CategoryExtension
@@ -27,30 +27,27 @@ class CartExtension extends \Twig_Extension
     protected $cartProvider;
 
     /**
-     * @var CartProductProviderInterface
+     * @var DataSetInterface
      */
-    protected $cartProductProvider;
+    protected $cartProductDataSet;
 
     /**
      * Constructor
      *
-     * @param CartProviderInterface        $cartProvider
-     * @param CartProductProviderInterface $cartProductProvider
+     * @param CartProviderInterface $cartProvider
+     * @param DataSetInterface      $dataset
      */
-    public function __construct(CartProviderInterface $cartProvider, CartProductProviderInterface $cartProductProvider)
+    public function __construct(CartProviderInterface $cartProvider, DataSetInterface $dataset)
     {
-        $this->cartProvider        = $cartProvider;
-        $this->cartProductProvider = $cartProductProvider;
+        $this->cartProvider       = $cartProvider;
+        $this->cartProductDataSet = $dataset;
     }
 
     public function getGlobals()
     {
-        $cart     = $this->cartProvider->getCurrentCart();
-        $products = $this->cartProductProvider->getProducts();
-
         return [
-            'cart'         => $cart,
-            'cartProducts' => $products
+            'cart'         => $this->cartProvider->getCurrentResource(),
+            'cartProducts' => $this->cartProductDataSet->getResult('array')
         ];
     }
 

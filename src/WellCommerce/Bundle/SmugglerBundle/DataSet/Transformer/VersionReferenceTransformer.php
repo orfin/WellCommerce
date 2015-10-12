@@ -12,16 +12,16 @@
 
 namespace WellCommerce\Bundle\SmugglerBundle\DataSet\Transformer;
 
-use WellCommerce\Bundle\DataSetBundle\Transformer\TransformerInterface;
+use WellCommerce\Bundle\DataSetBundle\Transformer\AbstractDataSetTransformer;
 
 /**
  * Class VersionReferenceTransformer
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class VersionReferenceTransformer implements TransformerInterface
+class VersionReferenceTransformer extends AbstractDataSetTransformer
 {
-    public function transform($reference)
+    public function transformValue($reference)
     {
         if (null !== $reference) {
             return substr($reference, 0, 10);
