@@ -14,6 +14,7 @@ app/logs/*
 /vendor/
 /bin/
 /composer.phar
+/composer.lock
 /php-cs-fixer.phar
 /application/.idea
 *.idea
