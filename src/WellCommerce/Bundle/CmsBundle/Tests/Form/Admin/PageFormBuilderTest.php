@@ -10,24 +10,24 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\UnitBundle\Tests\Form;
+namespace WellCommerce\Bundle\CmsBundle\Tests\Form\Admin;
 
 use WellCommerce\Bundle\CoreBundle\Test\Form\AbstractFormBuilderTestCase;
 
 /**
- * Class UnitFormBuilderTest
+ * Class PageFormBuilderTest
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class UnitFormBuilderTest extends AbstractFormBuilderTestCase
+class PageFormBuilderTest extends AbstractFormBuilderTestCase
 {
     protected function getFormBuilderService()
     {
-        return $this->container->get('unit.form_builder');
+        return $this->container->get('page.form_builder.admin');
     }
 
     protected function getFactoryService()
     {
-        return $this->container->get('unit.factory');
+        return $this->container->get('page.factory');
     }
 }

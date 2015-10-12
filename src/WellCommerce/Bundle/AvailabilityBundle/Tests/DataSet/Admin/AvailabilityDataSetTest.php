@@ -10,28 +10,28 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\TaxBundle\Tests\DataSet;
+namespace WellCommerce\Bundle\AvailabilityBundle\Tests\DataSet\Admin;
 
 use WellCommerce\Bundle\CoreBundle\Test\DataSet\AbstractDataSetTestCase;
+use WellCommerce\Bundle\DataSetBundle\Request\DataSetRequest;
 
 /**
- * Class TaxDataSetTest
+ * Class AvailabilityDataSetTest
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class TaxDataSetTest extends AbstractDataSetTestCase
+class AvailabilityDataSetTest extends AbstractDataSetTestCase
 {
     protected function get()
     {
-        return $this->container->get('tax.dataset');
+        return $this->container->get('availability.dataset.admin');
     }
 
     protected function getColumns()
     {
         return [
-            'id'    => 'tax.id',
-            'name'  => 'tax_translation.name',
-            'value' => 'tax.value',
+            'id'   => 'availability.id',
+            'name' => 'availability_translation.name',
         ];
     }
 }

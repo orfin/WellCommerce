@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\ProducerBundle\DataSet\Front;
 
+use WellCommerce\Bundle\DataSetBundle\Configurator\DataSetConfiguratorInterface;
 use WellCommerce\Bundle\ProducerBundle\DataSet\Admin\ProducerDataSet as BaseDataSet;
 
 /**
@@ -21,5 +22,16 @@ use WellCommerce\Bundle\ProducerBundle\DataSet\Admin\ProducerDataSet as BaseData
  */
 class ProducerDataSet extends BaseDataSet
 {
-
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(DataSetConfiguratorInterface $configurator)
+    {
+        $configurator->setColumns([
+            'id'       => 'producer.id',
+            'name'     => 'producer_translation.name',
+            'route'    => 'IDENTITY(producer_translation.route)',
+            'products' => 'COUNT(producer_products.id)',
+        ]);
+    }
 }

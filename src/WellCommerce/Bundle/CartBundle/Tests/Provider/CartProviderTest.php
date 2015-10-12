@@ -12,20 +12,22 @@
 
 namespace WellCommerce\Bundle\CartBundle\Tests\Provider;
 
-
 use WellCommerce\Bundle\CartBundle\Entity\Cart;
 use WellCommerce\Bundle\CoreBundle\Test\AbstractTestCase;
 
+/**
+ * Class CartProviderTest
+ *
+ * @author  Adam Piotrowski <adam@wellcommerce.org>
+ */
 class CartProviderTest extends AbstractTestCase
 {
     public function testCartIsAccessible()
     {
-        $provider = $this->container->get('cart.manager.front')->getCartProvider();
-        $provider->setCurrentResource(new Cart());
+        $provider = $this->container->get('cart.provider');
+        $this->assertNull($provider->getCurrentResource());
 
-        $this->assertInstanceOf(
-            'WellCommerce\Bundle\CartBundle\Entity\Cart',
-            $provider->getCurrentResource()
-        );
+        $provider->setCurrentResource(new Cart());
+        $this->assertInstanceOf('WellCommerce\Bundle\CartBundle\Entity\CartInterface', $provider->getCurrentResource());
     }
 }

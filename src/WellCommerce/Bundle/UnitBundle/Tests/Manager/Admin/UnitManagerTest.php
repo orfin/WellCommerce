@@ -34,7 +34,7 @@ class UnitManagerTest extends AbstractAdminManagerTestCase
 
     protected function getFormBuilderClassName()
     {
-        return 'WellCommerce\Bundle\UnitBundle\Form\UnitFormBuilder';
+        return 'WellCommerce\Bundle\UnitBundle\Form\Admin\UnitFormBuilder';
     }
 
     protected function getDataGridClassName()

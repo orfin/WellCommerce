@@ -38,12 +38,17 @@ class Producer implements ProducerInterface
     protected $id;
 
     /**
+     * @var Collection|\WellCommerce\Bundle\ProductBundle\Entity\ProductInterface[]
+     */
+    protected $products;
+
+    /**
      * @var Collection|\WellCommerce\Bundle\DelivererBundle\Entity\DelivererInterface[]
      */
     protected $deliverers;
 
     /**
-     * @return integer
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -51,7 +56,15 @@ class Producer implements ProducerInterface
     }
 
     /**
-     * @return Collection|\WellCommerce\Bundle\DelivererBundle\Entity\DelivererInterface[]
+     * {@inheritdoc}
+     */
+    public function getProducts()
+    {
+        return $this->products;
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function getDeliverers()
     {
@@ -59,7 +72,7 @@ class Producer implements ProducerInterface
     }
 
     /**
-     * @param Collection $collection
+     * {@inheritdoc}
      */
     public function setDeliverers(Collection $collection)
     {
@@ -67,7 +80,7 @@ class Producer implements ProducerInterface
     }
 
     /**
-     * @param DelivererInterface $deliverer
+     * {@inheritdoc}
      */
     public function addDeliverer(DelivererInterface $deliverer)
     {

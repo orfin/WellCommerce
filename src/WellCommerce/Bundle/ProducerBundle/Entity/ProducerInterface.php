@@ -32,6 +32,11 @@ interface ProducerInterface extends TranslatableInterface, TimestampableInterfac
     public function getId();
 
     /**
+     * @return Collection|\WellCommerce\Bundle\ProductBundle\Entity\ProductInterface[]
+     */
+    public function getProducts();
+
+    /**
      * @return Collection|\WellCommerce\Bundle\DelivererBundle\Entity\DelivererInterface[]
      */
     public function getDeliverers();

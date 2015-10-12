@@ -21,38 +21,23 @@ use WellCommerce\Bundle\CoreBundle\Test\DependencyInjection\AbstractExtensionTes
  */
 class TaxExtensionTest extends AbstractExtensionTestCase
 {
-    public function testContainerHasRepositoryService()
+    /**
+     * @return array
+     */
+    public function getRequiredServices()
     {
-        $this->assertTrue($this->container->has('tax.repository'));
-    }
-
-    public function testContainerHasAdminManagerService()
-    {
-        $this->assertTrue($this->container->has('tax.manager.admin'));
-    }
-
-    public function testContainerHasAdminControllerService()
-    {
-        $this->assertTrue($this->container->has('tax.controller.admin'));
-    }
-
-    public function testContainerHasDatasetLoaderService()
-    {
-        $this->assertTrue($this->container->has('tax.dataset.loader'));
-    }
-
-    public function testContainerHasDatasetService()
-    {
-        $this->assertTrue($this->container->has('tax.dataset'));
-    }
-
-    public function testContainerHasDatagridService()
-    {
-        $this->assertTrue($this->container->has('tax.datagrid'));
-    }
-
-    public function testContainerHasFormBuilderService()
-    {
-        $this->assertTrue($this->container->has('tax.form_builder'));
+        return [
+            'services' => [
+                [
+                    'tax.repository',
+                    'tax.factory',
+                    'tax.event_dispatcher',
+                    'tax.form_builder.admin',
+                    'tax.dataset.admin',
+                    'tax.datagrid',
+                    'tax.controller.admin',
+                ]
+            ],
+        ];
     }
 }

@@ -21,5 +21,20 @@ use WellCommerce\Bundle\CoreBundle\Test\AbstractTestCase;
  */
 abstract class AbstractExtensionTestCase extends AbstractTestCase
 {
+    /**
+     * @dataProvider getRequiredServices
+     */
+    public function testRequiredServices($services)
+    {
+        foreach ($services as $service) {
+            $this->assertTrue($this->container->has($service), sprintf('Container does not have %s service', $service));
+        }
+    }
 
+    public function getRequiredServices()
+    {
+        return [
+            'services' => [[]]
+        ];
+    }
 }

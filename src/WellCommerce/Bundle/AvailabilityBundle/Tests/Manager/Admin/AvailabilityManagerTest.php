@@ -34,7 +34,7 @@ class AvailabilityManagerTest extends AbstractAdminManagerTestCase
 
     protected function getFormBuilderClassName()
     {
-        return 'WellCommerce\Bundle\AvailabilityBundle\Form\AvailabilityFormBuilder';
+        return 'WellCommerce\Bundle\AvailabilityBundle\Form\Admin\AvailabilityFormBuilder';
     }
 
     protected function getDataGridClassName()

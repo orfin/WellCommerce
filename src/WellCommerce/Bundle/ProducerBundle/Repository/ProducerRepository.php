@@ -20,4 +20,17 @@ use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
  */
 class ProducerRepository extends AbstractEntityRepository implements ProducerRepositoryInterface
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function getDataSetQueryBuilder()
+    {
+        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder->groupBy('producer.id');
+        $queryBuilder->leftJoin('producer.translations', 'producer_translation');
+        $queryBuilder->leftJoin('producer.products', 'producer_products');
+        $queryBuilder->leftJoin('producer.shops', 'producer_shops');
+
+        return $queryBuilder;
+    }
 }

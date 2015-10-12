@@ -7,6 +7,14 @@ WellCommerce\Bundle\ProducerBundle\Entity\Producer:
             type: integer
             generator:
                 strategy: AUTO
+    oneToMany:
+        products:
+            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\Product
+            cascade:
+                - remove
+                - persist
+            fetch: LAZY
+            mappedBy: producer
     manyToMany:
         deliverers:
             targetEntity: WellCommerce\Bundle\DelivererBundle\Entity\Deliverer

@@ -64,11 +64,15 @@ abstract class AbstractContainerAware extends ContainerAware
      *
      * @param string $index
      *
-     * @return mixed
+     * @return int|string|null
      */
     protected function getParam($index)
     {
-        return $this->container->get('request')->attributes->get($index);
+        if ($this->container->isScopeActive('request')) {
+            return $this->container->get('request')->attributes->get($index);
+        }
+
+        return null;
     }
 
     /**

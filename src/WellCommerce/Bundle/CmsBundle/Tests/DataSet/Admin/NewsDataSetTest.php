@@ -10,28 +10,27 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AvailabilityBundle\Tests\DataSet;
+namespace WellCommerce\Bundle\CmsBundle\Tests\DataSet\Admin;
 
 use WellCommerce\Bundle\CoreBundle\Test\DataSet\AbstractDataSetTestCase;
-use WellCommerce\Bundle\DataSetBundle\Request\DataSetRequest;
 
 /**
- * Class AvailabilityDataSetTest
+ * Class NewsDataSetTest
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AvailabilityDataSetTest extends AbstractDataSetTestCase
+class NewsDataSetTest extends AbstractDataSetTestCase
 {
     protected function get()
     {
-        return $this->container->get('availability.dataset');
+        return $this->container->get('news.dataset.admin');
     }
 
     protected function getColumns()
     {
         return [
-            'id'   => 'availability.id',
-            'name' => 'availability_translation.name',
+            'id'   => 'news.id',
+            'name' => 'news_translation.topic',
         ];
     }
 }

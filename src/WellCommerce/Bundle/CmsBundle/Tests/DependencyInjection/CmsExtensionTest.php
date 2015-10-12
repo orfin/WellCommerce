@@ -21,56 +21,38 @@ use WellCommerce\Bundle\CoreBundle\Test\DependencyInjection\AbstractExtensionTes
  */
 class ContactExtensionTest extends AbstractExtensionTestCase
 {
-    public function testContainerHasRepositoryService()
+    /**
+     * @return array
+     */
+    public function getRequiredServices()
     {
-        $this->assertTrue($this->container->has('contact.repository'));
-        $this->assertTrue($this->container->has('page.repository'));
-        $this->assertTrue($this->container->has('news.repository'));
-    }
-
-    public function testContainerHasAdminManagerService()
-    {
-        $this->assertTrue($this->container->has('contact.manager.admin'));
-        $this->assertTrue($this->container->has('page.manager.admin'));
-        $this->assertTrue($this->container->has('page.manager.front'));
-        $this->assertTrue($this->container->has('news.manager.admin'));
-    }
-
-    public function testContainerHasAdminControllerService()
-    {
-        $this->assertTrue($this->container->has('contact.controller.admin'));
-        $this->assertTrue($this->container->has('page.controller.admin'));
-        $this->assertTrue($this->container->has('page.controller.front'));
-        $this->assertTrue($this->container->has('news.controller.admin'));
-    }
-
-    public function testContainerHasDatasetLoaderService()
-    {
-        $this->assertTrue($this->container->has('contact.dataset.loader'));
-        $this->assertTrue($this->container->has('page.dataset.loader.admin'));
-        $this->assertTrue($this->container->has('page.dataset.loader.front'));
-        $this->assertTrue($this->container->has('news.dataset.loader'));
-    }
-
-    public function testContainerHasDatasetService()
-    {
-        $this->assertTrue($this->container->has('contact.dataset'));
-        $this->assertTrue($this->container->has('page.dataset.admin'));
-        $this->assertTrue($this->container->has('page.dataset.front'));
-        $this->assertTrue($this->container->has('news.dataset'));
-    }
-
-    public function testContainerHasDatagridService()
-    {
-        $this->assertTrue($this->container->has('contact.datagrid'));
-        $this->assertTrue($this->container->has('page.datagrid'));
-        $this->assertTrue($this->container->has('news.datagrid'));
-    }
-
-    public function testContainerHasFormBuilderService()
-    {
-        $this->assertTrue($this->container->has('contact.form_builder'));
-        $this->assertTrue($this->container->has('page.form_builder'));
-        $this->assertTrue($this->container->has('news.form_builder'));
+        return [
+            'services' => [
+                [
+                    'contact.repository',
+                    'contact.factory',
+                    'contact.event_dispatcher',
+                    'contact.form_builder.admin',
+                    'contact.dataset.admin',
+                    'contact.datagrid',
+                    'contact.controller.admin',
+                    'news.repository',
+                    'news.factory',
+                    'news.event_dispatcher',
+                    'news.form_builder.admin',
+                    'news.dataset.admin',
+                    'news.datagrid',
+                    'news.controller.admin',
+                    'page.repository',
+                    'page.factory',
+                    'page.event_dispatcher',
+                    'page.form_builder.admin',
+                    'page.dataset.admin',
+                    'page.datagrid',
+                    'page.controller.admin',
+                    'page.controller.front',
+                ]
+            ],
+        ];
     }
 }

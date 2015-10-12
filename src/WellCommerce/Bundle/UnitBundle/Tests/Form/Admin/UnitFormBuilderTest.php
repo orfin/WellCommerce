@@ -10,25 +10,24 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\AvailabilityBundle\Tests\Form;
+namespace WellCommerce\Bundle\UnitBundle\Tests\Form;
 
-use WellCommerce\Bundle\AvailabilityBundle\Entity\Availability;
 use WellCommerce\Bundle\CoreBundle\Test\Form\AbstractFormBuilderTestCase;
 
 /**
- * Class AvailabilityFormBuilderTest
+ * Class UnitFormBuilderTest
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class AvailabilityFormBuilderTest extends AbstractFormBuilderTestCase
+class UnitFormBuilderTest extends AbstractFormBuilderTestCase
 {
     protected function getFormBuilderService()
     {
-        return $this->container->get('availability.form_builder.admin');
+        return $this->container->get('unit.form_builder.admin');
     }
 
     protected function getFactoryService()
     {
-        return $this->container->get('availability.factory');
+        return $this->container->get('unit.factory');
     }
 }

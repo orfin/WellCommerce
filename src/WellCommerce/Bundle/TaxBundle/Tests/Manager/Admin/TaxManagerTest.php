@@ -34,7 +34,7 @@ class TaxManagerTest extends AbstractAdminManagerTestCase
 
     protected function getFormBuilderClassName()
     {
-        return 'WellCommerce\Bundle\TaxBundle\Form\TaxFormBuilder';
+        return 'WellCommerce\Bundle\TaxBundle\Form\Admin\TaxFormBuilder';
     }
 
     protected function getDataGridClassName()

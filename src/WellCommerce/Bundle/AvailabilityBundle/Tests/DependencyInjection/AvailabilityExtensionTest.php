@@ -21,43 +21,23 @@ use WellCommerce\Bundle\CoreBundle\Test\DependencyInjection\AbstractExtensionTes
  */
 class AvailabilityExtensionTest extends AbstractExtensionTestCase
 {
-    public function testContainerHasRepositoryService()
+    /**
+     * @return array
+     */
+    public function getRequiredServices()
     {
-        $this->assertTrue($this->container->has('availability.repository'));
-    }
-
-    public function testContainerHasAdminManagerService()
-    {
-        $this->assertTrue($this->container->has('availability.manager.admin'));
-    }
-
-    public function testContainerHasAdminControllerService()
-    {
-        $this->assertTrue($this->container->has('availability.controller.admin'));
-    }
-
-    public function testContainerHasDatasetLoaderService()
-    {
-        $this->assertTrue($this->container->has('availability.dataset.loader'));
-    }
-
-    public function testContainerHasDatasetService()
-    {
-        $this->assertTrue($this->container->has('availability.dataset'));
-    }
-
-    public function testContainerHasCollectionService()
-    {
-        $this->assertTrue($this->container->has('availability.dataset'));
-    }
-
-    public function testContainerHasDatagridService()
-    {
-        $this->assertTrue($this->container->has('availability.datagrid'));
-    }
-
-    public function testContainerHasFormBuilderService()
-    {
-        $this->assertTrue($this->container->has('availability.form_builder'));
+        return [
+            'services' => [
+                [
+                    'availability.repository',
+                    'availability.factory',
+                    'availability.event_dispatcher',
+                    'availability.form_builder.admin',
+                    'availability.dataset.admin',
+                    'availability.datagrid',
+                    'availability.controller.admin',
+                ]
+            ],
+        ];
     }
 }

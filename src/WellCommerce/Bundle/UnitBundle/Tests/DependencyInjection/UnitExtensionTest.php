@@ -21,38 +21,23 @@ use WellCommerce\Bundle\CoreBundle\Test\DependencyInjection\AbstractExtensionTes
  */
 class UnitExtensionTest extends AbstractExtensionTestCase
 {
-    public function testContainerHasRepositoryService()
+    /**
+     * @return array
+     */
+    public function getRequiredServices()
     {
-        $this->assertTrue($this->container->has('unit.repository'));
-    }
-
-    public function testContainerHasAdminManagerService()
-    {
-        $this->assertTrue($this->container->has('unit.manager.admin'));
-    }
-
-    public function testContainerHasAdminControllerService()
-    {
-        $this->assertTrue($this->container->has('unit.controller.admin'));
-    }
-
-    public function testContainerHasDatasetLoaderService()
-    {
-        $this->assertTrue($this->container->has('unit.dataset.loader'));
-    }
-
-    public function testContainerHasDatasetService()
-    {
-        $this->assertTrue($this->container->has('unit.dataset'));
-    }
-
-    public function testContainerHasDatagridService()
-    {
-        $this->assertTrue($this->container->has('unit.datagrid'));
-    }
-
-    public function testContainerHasFormBuilderService()
-    {
-        $this->assertTrue($this->container->has('unit.form_builder'));
+        return [
+            'services' => [
+                [
+                    'unit.repository',
+                    'unit.factory',
+                    'unit.event_dispatcher',
+                    'unit.form_builder.admin',
+                    'unit.dataset.admin',
+                    'unit.datagrid',
+                    'unit.controller.admin',
+                ]
+            ],
+        ];
     }
 }

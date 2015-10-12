@@ -10,27 +10,27 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CmsBundle\Tests\DataSet\Admin;
+namespace WellCommerce\Bundle\UnitBundle\Tests\DataSet\Admin;
 
 use WellCommerce\Bundle\CoreBundle\Test\DataSet\AbstractDataSetTestCase;
 
 /**
- * Class ContactDataSetTest
+ * Class UnitDataSetTest
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ContactDataSetTest extends AbstractDataSetTestCase
+class UnitDataSetTest extends AbstractDataSetTestCase
 {
     protected function get()
     {
-        return $this->container->get('contact.dataset.admin');
+        return $this->container->get('unit.dataset.admin');
     }
 
     protected function getColumns()
     {
         return [
-            'id'   => 'contact.id',
-            'name' => 'contact_translation.name',
+            'id'   => 'unit.id',
+            'name' => 'unit_translation.name',
         ];
     }
 }

@@ -27,7 +27,7 @@ class UnitControllerTest extends AbstractAdminControllerTestCase
         $crawler = $this->client->request('GET', $url);
 
         $this->assertTrue($this->client->getResponse()->isSuccessful());
-        $this->assertEquals(1, $crawler->filter('html:contains("' . $this->trans('heading.unit.list') . '")')->count());
+        $this->assertEquals(1, $crawler->filter('html:contains("' . $this->trans('unit.heading.index') . '")')->count());
         $this->assertEquals(1, $crawler->filter('html:contains("' . $this->jsDataGridClass . '")')->count());
         $this->assertEquals(0, $crawler->filter('html:contains("' . $this->jsFormClass . '")')->count());
     }
@@ -38,21 +38,20 @@ class UnitControllerTest extends AbstractAdminControllerTestCase
         $crawler = $this->client->request('GET', $url);
 
         $this->assertTrue($this->client->getResponse()->isSuccessful());
-        $this->assertEquals(1, $crawler->filter('html:contains("' . $this->trans('heading.unit.add') . '")')->count());
+        $this->assertEquals(1, $crawler->filter('html:contains("' . $this->trans('unit.heading.add') . '")')->count());
         $this->assertEquals(0, $crawler->filter('html:contains("' . $this->jsDataGridClass . '")')->count());
         $this->assertEquals(1, $crawler->filter('html:contains("' . $this->jsFormClass . '")')->count());
     }
 
     public function testEditAction()
     {
-        $entity = $this->container->get('unit.repository')->findOneBy([]);
-        $name   = $entity->translate()->getName();
-        $url    = $this->generateUrl('admin.unit.edit', ['id' => $entity->getId()]);
-
+        $entity  = $this->container->get('unit.repository')->findOneBy([]);
+        $name    = $entity->translate()->getName();
+        $url     = $this->generateUrl('admin.unit.edit', ['id' => $entity->getId()]);
         $crawler = $this->client->request('GET', $url);
 
         $this->assertTrue($this->client->getResponse()->isSuccessful());
-        $this->assertEquals(1, $crawler->filter('html:contains("' . $this->trans('heading.unit.edit') . '")')->count());
+        $this->assertEquals(1, $crawler->filter('html:contains("' . $this->trans('unit.heading.edit') . '")')->count());
         $this->assertEquals(0, $crawler->filter('html:contains("' . $this->jsDataGridClass . '")')->count());
         $this->assertEquals(1, $crawler->filter('html:contains("' . $this->jsFormClass . '")')->count());
         $this->assertEquals(1, $crawler->filter('html:contains("' . $name . '")')->count());

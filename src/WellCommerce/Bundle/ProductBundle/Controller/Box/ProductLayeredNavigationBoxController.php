@@ -27,7 +27,9 @@ class ProductLayeredNavigationBoxController extends AbstractBoxController implem
      */
     public function indexAction()
     {
-        return $this->render('WellCommerceProductBundle:Box/ProductLayeredNavigation:index.html.twig');
+        return $this->displayTemplate('index', [
+            'producers' => $this->get('producer.dataset.front')->getResult('array')
+        ]);
     }
 
 }
