@@ -28,7 +28,11 @@ class ProductFormBuilder extends AbstractFormBuilder
      */
     public function buildForm(FormInterface $form)
     {
-        $currencies = $this->get('currency.dataset.admin')->getResult('select');
+        $currencies = $this->get('currency.dataset.admin')->getResult('select', ['order_by' => 'code'], [
+            'label_column' => 'code',
+            'value_column' => 'code'
+        ]);
+
         $vatValues  = $this->get('tax.dataset.admin')->getResult('select');
 
         $mainData = $form->addChild($this->getElement('nested_fieldset', [
@@ -322,7 +326,8 @@ class ProductFormBuilder extends AbstractFormBuilder
             'category_field'     => $categoriesField,
             'availability_field' => $availabilityField,
             'availability'       => $availabilityField->getOption('options'),
-            'transformer'        => $this->getRepositoryTransformer('product_attribute_collection', $this->get('product_attribute.repository'))
+            'transformer'        => $this->getRepositoryTransformer('product_attribute_collection',
+                $this->get('product_attribute.repository'))
         ]));
 
         $shopsData = $form->addChild($this->getElement('nested_fieldset', [

@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Processor;
 
+use WellCommerce\Bundle\FormBundle\Dependencies\DependencyInterface;
 use WellCommerce\Bundle\FormBundle\Elements\ElementInterface;
 use WellCommerce\Bundle\FormBundle\FormBuilderInterface;
 
@@ -28,11 +29,18 @@ class BankTransfer extends AbstractPaymentProcessor
     /**
      * {@inheritdoc}
      */
-    public function addConfigurationFields(FormBuilderInterface $builder, ElementInterface $fieldset)
+    public function addConfigurationFields(FormBuilderInterface $builder, ElementInterface $fieldset, DependencyInterface $dependency)
     {
         $fieldset->addChild($builder->getElement('text_field', [
-            'name'  => 'account',
-            'label' => $this->trans('payment_method.bank_transfer.account'),
-        ]))->setValue(111);
+            'name'         => $this->getFieldName('account'),
+            'label'        => $this->trans('payment_method.bank_transfer.account'),
+            'dependencies' => [$dependency]
+        ]));
+
+        $fieldset->addChild($builder->getElement('text_field', [
+            'name'         => $this->getFieldName('sort_number'),
+            'label'        => $this->trans('payment_method.bank_transfer.sort_number'),
+            'dependencies' => [$dependency]
+        ]));
     }
 }

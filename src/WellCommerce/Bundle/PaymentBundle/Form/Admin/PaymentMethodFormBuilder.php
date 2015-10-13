@@ -11,7 +11,9 @@
  */
 namespace WellCommerce\Bundle\PaymentBundle\Form\Admin;
 
+use Symfony\Component\PropertyAccess\PropertyPath;
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
+use WellCommerce\Bundle\FormBundle\Conditions\Equals;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 
 /**
@@ -26,14 +28,9 @@ class PaymentMethodFormBuilder extends AbstractFormBuilder
      */
     public function buildForm(FormInterface $form)
     {
-        $processors       = $this->getProcessorCollection();
-        $options          = [];
-        $defaultProcessor = null;
-
+        $options    = [];
+        $processors = $this->getProcessors();
         foreach ($processors as $processor) {
-            if (null === $defaultProcessor) {
-                $defaultProcessor = $processor->getAlias();
-            }
             $options[$processor->getAlias()] = $processor->getName();
         }
 
@@ -57,7 +54,7 @@ class PaymentMethodFormBuilder extends AbstractFormBuilder
             'name'    => 'processor',
             'label'   => $this->trans('payment_method.label.processor'),
             'options' => $options,
-            'default' => $defaultProcessor
+            'default' => current(array_keys($options)),
         ]));
 
         $requiredData->addChild($this->getElement('checkbox', [
@@ -91,8 +88,24 @@ class PaymentMethodFormBuilder extends AbstractFormBuilder
             'transformer' => $this->getRepositoryTransformer('collection', $this->get('shipping_method.repository'))
         ]));
 
+        $repository = $this->get('payment_method_configuration.repository');
+
+        $configurationData = $form->addChild($this->getElement('nested_fieldset', [
+            'name'          => 'configuration',
+            'property_path' => new PropertyPath('configuration'),
+            'label'         => $this->trans('form.fieldset.required_data'),
+            'transformer'   => $this->getRepositoryTransformer('payment_method_configuration', $repository)
+        ]));
+
         foreach ($processors as $processor) {
-            $processor->addConfigurationFieldset($this, $form, $processorType);
+
+            $dependency = $this->getDependency('show', [
+                'form'      => $form,
+                'field'     => $processorType,
+                'condition' => new Equals($processor->getAlias())
+            ]);
+
+            $processor->addConfigurationFields($this, $configurationData, $dependency);
         }
 
         $form->addFilter($this->getFilter('no_code'));
@@ -101,9 +114,11 @@ class PaymentMethodFormBuilder extends AbstractFormBuilder
     }
 
     /**
+     * Returns the collection of payment method processors
+     *
      * @return \WellCommerce\Bundle\PaymentBundle\Processor\PaymentMethodProcessorInterface[]
      */
-    protected function getProcessorCollection()
+    protected function getProcessors()
     {
         return $this->get('payment_method.processor.collection')->all();
     }

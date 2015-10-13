@@ -54,6 +54,11 @@ class PaymentMethod implements PaymentMethodInterface
     protected $defaultOrderStatus;
 
     /**
+     * @var Collection
+     */
+    protected $configuration;
+
+    /**
      * {@inheritdoc}
      */
     public function getId()
@@ -107,5 +112,21 @@ class PaymentMethod implements PaymentMethodInterface
     public function setDefaultOrderStatus(OrderStatusInterface $defaultOrderStatus)
     {
         $this->defaultOrderStatus = $defaultOrderStatus;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getConfiguration()
+    {
+        return $this->configuration;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setConfiguration(Collection $configuration)
+    {
+        $this->configuration = $configuration;
     }
 }

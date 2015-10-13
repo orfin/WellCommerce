@@ -22,6 +22,15 @@ WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod:
             nullable: false
             options:
                 default: 0
+    oneToMany:
+        configuration:
+            targetEntity: WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodConfiguration
+            cascade:
+                - remove
+                - persist
+            fetch: LAZY
+            mappedBy: paymentMethod
+            orphanRemoval: true
     manyToOne:
         defaultOrderStatus:
             targetEntity: WellCommerce\Bundle\OrderBundle\Entity\OrderStatus

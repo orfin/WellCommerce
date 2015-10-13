@@ -49,11 +49,17 @@
             <argument>WellCommercePaymentBundle:PaymentMethod</argument>
         </service>
 
+        <service id="payment_method_configuration.repository" class="WellCommerce\Bundle\PaymentBundle\Repository\PaymentMethodConfigurationRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>WellCommercePaymentBundle:PaymentMethodConfiguration</argument>
+        </service>
+
         <service id="payment.repository" class="WellCommerce\Bundle\PaymentBundle\Repository\PaymentRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument>WellCommercePaymentBundle:Payment</argument>
         </service>
 
         <service id="payment_method.factory" class="WellCommerce\Bundle\PaymentBundle\Factory\PaymentMethodFactory" />
+
+        <service id="payment_method_configuration.factory" class="WellCommerce\Bundle\PaymentBundle\Factory\PaymentMethodConfigurationFactory" />
 
         <service id="payment.factory" class="WellCommerce\Bundle\PaymentBundle\Factory\PaymentFactory" />
 
@@ -103,6 +109,14 @@
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
+        </service>
+
+        <service id="form.payment_method_configuration.data_transformer" class="WellCommerce\Bundle\PaymentBundle\Form\DataTransformer\PaymentMethodConfigurationTransformer" scope="prototype">
+            <argument type="service" id="doctrine_helper"/>
+            <call method="setFactory">
+                <argument type="service" id="payment_method_configuration.factory"/>
+            </call>
+            <tag name="form.data_transformer" alias="payment_method_configuration"/>
         </service>
 
         <service id="payment_method.processor.collection" class="WellCommerce\Bundle\PaymentBundle\Processor\PaymentMethodProcessorCollection" />

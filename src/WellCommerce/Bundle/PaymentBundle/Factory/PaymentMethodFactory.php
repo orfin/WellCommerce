@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Factory;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod;
 
@@ -30,7 +31,8 @@ class PaymentMethodFactory extends AbstractFactory
         $paymentMethod = new PaymentMethod();
         $paymentMethod->setHierarchy(0);
         $paymentMethod->setEnabled(true);
-        $paymentMethod->setProcessor('');
+        $paymentMethod->setConfiguration(new ArrayCollection());
+        $paymentMethod->setShippingMethods(new ArrayCollection());
 
         return $paymentMethod;
     }

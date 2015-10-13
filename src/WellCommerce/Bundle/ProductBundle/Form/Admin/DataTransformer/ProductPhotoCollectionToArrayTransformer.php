@@ -13,12 +13,13 @@
 namespace WellCommerce\Bundle\ProductBundle\Form\Admin\DataTransformer;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\PersistentCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 use WellCommerce\Bundle\FormBundle\DataTransformer\DataTransformerInterface;
-use WellCommerce\Bundle\MediaBundle\Entity\Media;
+use WellCommerce\Bundle\MediaBundle\Entity\MediaInterface;
 use WellCommerce\Bundle\MediaBundle\Form\Admin\DataTransformer\MediaCollectionToArrayTransformer;
 use WellCommerce\Bundle\ProductBundle\Entity\Product;
+use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductPhoto;
 
 /**
@@ -44,7 +45,7 @@ class ProductPhotoCollectionToArrayTransformer extends MediaCollectionToArrayTra
         $previousCollection = $this->propertyAccessor->getValue($modelData, $propertyPath);
         $this->clearPreviousCollection($previousCollection);
 
-        $collection = $this->createPhotosCollection($modelData, $values, $previousCollection);
+        $collection = $this->createPhotosCollection($modelData, $values);
 
         if (0 === $collection->count()) {
             $modelData->setPhoto(null);
@@ -68,9 +69,9 @@ class ProductPhotoCollectionToArrayTransformer extends MediaCollectionToArrayTra
     /**
      * Resets previous photo collection
      *
-     * @param PersistentCollection $collection
+     * @param Collection $collection
      */
-    protected function clearPreviousCollection(PersistentCollection $collection)
+    protected function clearPreviousCollection(Collection $collection)
     {
         if ($collection->count()) {
             foreach ($collection as $item) {
@@ -87,7 +88,7 @@ class ProductPhotoCollectionToArrayTransformer extends MediaCollectionToArrayTra
      *
      * @return ArrayCollection
      */
-    protected function createPhotosCollection(Product $product, $values, PersistentCollection $previousCollection)
+    protected function createPhotosCollection(Product $product, $values)
     {
         $photos      = new ArrayCollection();
         $identifiers = $this->getMediaIdentifiers($values);
@@ -138,13 +139,13 @@ class ProductPhotoCollectionToArrayTransformer extends MediaCollectionToArrayTra
     /**
      * Returns product photo model
      *
-     * @param Media   $media
-     * @param Product $modelData
-     * @param array   $values
+     * @param MediaInterface   $media
+     * @param ProductInterface $modelData
+     * @param array            $values
      *
      * @return ProductPhoto
      */
-    protected function getProductPhoto(Media $media, Product $modelData, $values)
+    protected function getProductPhoto(MediaInterface $media, ProductInterface $modelData, $values)
     {
         $mainPhoto    = $this->isMainPhoto($media, $values['main']);
         $productPhoto = new ProductPhoto();
@@ -162,12 +163,12 @@ class ProductPhotoCollectionToArrayTransformer extends MediaCollectionToArrayTra
     /**
      * Checks whether photo was chosen as main product photo
      *
-     * @param Media $photo
-     * @param int   $mainId
+     * @param MediaInterface $photo
+     * @param int            $mainId
      *
      * @return bool
      */
-    private function isMainPhoto(Media $photo, $mainId)
+    private function isMainPhoto(MediaInterface $photo, $mainId)
     {
         return $photo->getId() === (int)$mainId;
     }

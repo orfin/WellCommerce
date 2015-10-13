@@ -64,4 +64,14 @@ interface PaymentMethodInterface extends TimestampableInterface, TranslatableInt
      * @param OrderStatusInterface $defaultOrderStatus
      */
     public function setDefaultOrderStatus(OrderStatusInterface $defaultOrderStatus);
+
+    /**
+     * @return Collection
+     */
+    public function getConfiguration();
+
+    /**
+     * @param Collection $configuration
+     */
+    public function setConfiguration(Collection $configuration);
 }

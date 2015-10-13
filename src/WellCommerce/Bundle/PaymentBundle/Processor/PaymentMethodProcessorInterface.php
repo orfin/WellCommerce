@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Processor;
 
+use WellCommerce\Bundle\FormBundle\Dependencies\DependencyInterface;
 use WellCommerce\Bundle\FormBundle\Elements\ElementInterface;
-use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 use WellCommerce\Bundle\FormBundle\FormBuilderInterface;
 
 
@@ -39,11 +39,11 @@ interface PaymentMethodProcessorInterface
     public function getName();
 
     /**
-     * Returns the configuration fieldset for payment method
+     * Adds configuration fields to form fieldset
      *
      * @param FormBuilderInterface $builder
-     * @param FormInterface        $form
-     * @param ElementInterface     $processorTypeSelect
+     * @param ElementInterface     $fieldset
+     * @param DependencyInterface  $dependency
      */
-    public function addConfigurationFieldset(FormBuilderInterface $builder, FormInterface $form, ElementInterface $processorTypeSelect);
+    public function addConfigurationFields(FormBuilderInterface $builder, ElementInterface $fieldset, DependencyInterface $dependency);
 }

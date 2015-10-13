@@ -12,11 +12,9 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Processor;
 
-use Doctrine\Common\Util\Debug;
 use WellCommerce\Bundle\CoreBundle\DependencyInjection\AbstractContainerAware;
-use WellCommerce\Bundle\FormBundle\Conditions\Equals;
+use WellCommerce\Bundle\FormBundle\Dependencies\DependencyInterface;
 use WellCommerce\Bundle\FormBundle\Elements\ElementInterface;
-use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 use WellCommerce\Bundle\FormBundle\FormBuilderInterface;
 
 /**
@@ -45,31 +43,16 @@ abstract class AbstractPaymentProcessor extends AbstractContainerAware implement
         return $this->name;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function addConfigurationFieldset(FormBuilderInterface $builder, FormInterface $form, ElementInterface $processorTypeSelect)
+    protected function getFieldName($name)
     {
-        $configurationData = $form->addChild($builder->getElement('nested_fieldset', [
-            'name'         => $this->alias,
-            'label'        => $this->trans($this->getName()),
-            'dependencies' => [
-                $builder->getDependency('show', [
-                    'form'      => $form,
-                    'field'     => $processorTypeSelect,
-                    'condition' => new Equals($this->alias)
-                ])
-            ]
-        ]));
-
-        $this->addConfigurationFields($builder, $configurationData);
+        return sprintf('%s_%s', $this->alias, $name);
     }
 
     /**
-     * Adds configuration fields
-     *
-     * @param FormBuilderInterface $builder
-     * @param ElementInterface     $configurationData
+     * {@inheritdoc}
      */
-    abstract protected function addConfigurationFields(FormBuilderInterface $builder, ElementInterface $configurationData);
+    public function addConfigurationFields(FormBuilderInterface $builder, ElementInterface $fieldset, DependencyInterface $dependency)
+    {
+
+    }
 }
