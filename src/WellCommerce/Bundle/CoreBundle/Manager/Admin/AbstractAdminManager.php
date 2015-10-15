@@ -20,6 +20,7 @@ use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
 use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
 use WellCommerce\Bundle\DataGridBundle\DataGridInterface;
 use WellCommerce\Bundle\FormBundle\FormBuilderInterface;
+use WellCommerce\Bundle\UserBundle\Entity\UserInterface;
 
 /**
  * Class AbstractAdminManager
@@ -88,5 +89,19 @@ abstract class AbstractAdminManager extends AbstractManager implements AdminMana
     public function getShopContext()
     {
         return $this->get('shop.context.admin');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAdmin()
+    {
+        $user = $this->getUser();
+
+        if ($user instanceof UserInterface) {
+            return $user;
+        }
+
+        return null;
     }
 }

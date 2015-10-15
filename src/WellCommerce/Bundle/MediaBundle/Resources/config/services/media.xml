@@ -26,12 +26,12 @@
         </service>
 
         <service id="twig.extension.image" class="WellCommerce\Bundle\MediaBundle\Twig\Extension\ImageExtension">
-            <argument type="service" id="image_helper"/>
+            <argument type="service" id="image.helper"/>
             <tag name="twig.extension"/>
         </service>
 
         <service id="dataset.transformer.image_path" class="WellCommerce\Bundle\MediaBundle\DataSet\Transformer\ImagePathTransformer">
-            <argument type="service" id="image_helper"/>
+            <argument type="service" id="image.helper"/>
             <tag name="dataset.transformer" alias="image_path"/>
         </service>
     </services>

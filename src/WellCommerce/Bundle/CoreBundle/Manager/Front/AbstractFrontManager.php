@@ -12,8 +12,8 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Manager\Front;
 
+use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
 use WellCommerce\Bundle\CoreBundle\Manager\AbstractManager;
-use WellCommerce\Bundle\MultiStoreBundle\Context\ShopContextInterface;
 
 /**
  * Class AbstractFrontManager
@@ -39,7 +39,7 @@ abstract class AbstractFrontManager extends AbstractManager implements FrontMana
     }
 
     /**
-     * @return ShopContextInterface
+     * {@inheritdoc}
      */
     public function getShopContext()
     {
@@ -47,10 +47,64 @@ abstract class AbstractFrontManager extends AbstractManager implements FrontMana
     }
 
     /**
-     * @return \WellCommerce\Bundle\CartBundle\Entity\CartInterface
+     * {@inheritdoc}
+     */
+    public function getCartProvider()
+    {
+        return $this->getResourceProvider('cart');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCategoryProvider()
+    {
+        return $this->getResourceProvider('category');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getProductProvider()
+    {
+        return $this->getResourceProvider('product');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getProductStatusProvider()
+    {
+        return $this->getResourceProvider('product_status');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getProducerProvider()
+    {
+        return $this->getResourceProvider('producer');
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function getCurrentCart()
     {
-        return $this->getResourceProvider('cart')->getCurrentResource();
+        return $this->getCartProvider()->getResource();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getClient()
+    {
+        $user = $this->getUser();
+
+        if ($user instanceof ClientInterface) {
+            return $user;
+        }
+
+        return null;
     }
 }

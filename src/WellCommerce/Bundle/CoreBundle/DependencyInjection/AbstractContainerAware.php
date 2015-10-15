@@ -30,7 +30,7 @@ abstract class AbstractContainerAware extends ContainerAware
      *
      * @return bool true if the service id is defined, false otherwise
      */
-    protected function has($id)
+    public function has($id)
     {
         return $this->container->has($id);
     }
@@ -42,7 +42,7 @@ abstract class AbstractContainerAware extends ContainerAware
      *
      * @return object Service
      */
-    protected function get($id)
+    public function get($id)
     {
         return $this->container->get($id);
     }
@@ -54,7 +54,7 @@ abstract class AbstractContainerAware extends ContainerAware
      *
      * @return string The message
      */
-    protected function trans($id, $params = [], $domain = TranslatorHelperInterface::DEFAULT_TRANSLATION_DOMAIN)
+    public function trans($id, $params = [], $domain = TranslatorHelperInterface::DEFAULT_TRANSLATION_DOMAIN)
     {
         return $this->getTranslatorHelper()->trans($id, $params, $domain);
     }
@@ -66,7 +66,7 @@ abstract class AbstractContainerAware extends ContainerAware
      *
      * @return int|string|null
      */
-    protected function getParam($index)
+    public function getParam($index)
     {
         if ($this->container->isScopeActive('request')) {
             return $this->container->get('request')->attributes->get($index);
@@ -84,7 +84,7 @@ abstract class AbstractContainerAware extends ContainerAware
      * @return string
      * @throws \Symfony\Component\HttpFoundation\File\Exception\FileException
      */
-    protected function getThemeDir($themeFolder = '')
+    public function getThemeDir($themeFolder = '')
     {
         $kernelDir = $this->getKernel()->getRootDir();
         $webDir    = $kernelDir . '/../web';
@@ -115,7 +115,7 @@ abstract class AbstractContainerAware extends ContainerAware
      */
     public function getTranslatorHelper()
     {
-        return $this->get('translator_helper');
+        return $this->get('translator.helper');
     }
 
     /**
@@ -123,7 +123,7 @@ abstract class AbstractContainerAware extends ContainerAware
      */
     public function getFlashHelper()
     {
-        return $this->get('flash_helper');
+        return $this->get('flash.helper');
     }
 
     /**
@@ -131,7 +131,7 @@ abstract class AbstractContainerAware extends ContainerAware
      */
     public function getDoctrineHelper()
     {
-        return $this->get('doctrine_helper');
+        return $this->get('doctrine.helper');
     }
 
     /**
@@ -139,7 +139,7 @@ abstract class AbstractContainerAware extends ContainerAware
      */
     public function getRequestHelper()
     {
-        return $this->get('request_helper');
+        return $this->get('request.helper');
     }
 
     /**
@@ -147,7 +147,7 @@ abstract class AbstractContainerAware extends ContainerAware
      */
     public function getRouterHelper()
     {
-        return $this->get('router_helper');
+        return $this->get('router.helper');
     }
 
     /**
@@ -155,15 +155,7 @@ abstract class AbstractContainerAware extends ContainerAware
      */
     public function getImageHelper()
     {
-        return $this->get('image_helper');
-    }
-
-    /**
-     * @return \Symfony\Component\Validator\Validator\ValidatorInterface
-     */
-    public function getValidator()
-    {
-        return $this->get('validator');
+        return $this->get('image.helper');
     }
 
     /**
@@ -183,30 +175,34 @@ abstract class AbstractContainerAware extends ContainerAware
     }
 
     /**
+     * @return \WellCommerce\Bundle\CoreBundle\Helper\Security\SecurityHelperInterface
+     */
+    public function getSecurityHelper()
+    {
+        return $this->get('security.helper');
+    }
+
+    /**
+     * @return \WellCommerce\Bundle\CoreBundle\Helper\Validator\ValidatorHelperInterface
+     */
+    public function getValidatorHelper()
+    {
+        return $this->get('validator.helper');
+    }
+
+    /**
      * @return \Doctrine\Common\Persistence\ObjectManager|object
      */
-    protected function getEntityManager()
+    public function getEntityManager()
     {
         return $this->getDoctrineHelper()->getEntityManager();
     }
 
     /**
-     * @return \WellCommerce\Bundle\UserBundle\Entity\UserInterface|null
+     * @return object|null
      */
-    protected function getUser()
+    public function getUser()
     {
-        if (!$this->container->has('security.token_storage')) {
-            throw new \LogicException('The SecurityBundle is not registered in your application.');
-        }
-
-        if (null === $token = $this->container->get('security.token_storage')->getToken()) {
-            return null;
-        }
-
-        if (!is_object($user = $token->getUser())) {
-            return null;
-        }
-
-        return $user;
+        return $this->getSecurityHelper()->getUser();
     }
 }

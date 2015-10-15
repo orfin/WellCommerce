@@ -21,8 +21,5 @@ use WellCommerce\Bundle\CoreBundle\Provider\ResourceProviderInterface;
  */
 interface CartProviderInterface extends ResourceProviderInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getCartIdentifier();
+
 }

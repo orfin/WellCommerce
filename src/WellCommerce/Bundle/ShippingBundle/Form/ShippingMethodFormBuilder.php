@@ -70,7 +70,7 @@ class ShippingMethodFormBuilder extends AbstractFormBuilder
         $costsData->addChild($this->getElement('select', [
             'name'        => 'currency',
             'label'       => $this->trans('common.label.currency'),
-            'options'     => $this->get('currency.dataset.admin')->getResult('select'),
+            'options'     => $this->get('currency.dataset.admin')->getResult('select', [], ['label_column' => 'code']),
             'transformer' => $this->getRepositoryTransformer('entity', $this->get('currency.repository'))
         ]));
 

@@ -27,7 +27,7 @@ class CartManagerTest extends AbstractTestCase
         $manager = $this->container->get('cart.manager.front');
         $this->assertInstanceOf(
             'WellCommerce\Bundle\CartBundle\Provider\CartProviderInterface',
-            $manager->getResourceProvider('cart')
+            $manager->getCartProvider()
         );
     }
 }

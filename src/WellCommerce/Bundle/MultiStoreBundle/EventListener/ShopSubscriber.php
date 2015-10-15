@@ -55,7 +55,7 @@ class ShopSubscriber extends AbstractEventSubscriber
             $this->container->get('session')->set('admin/shops', $shops);
         }
 
-        $currentHost  = $this->container->get('request_helper')->getCurrentHost();
+        $currentHost  = $this->container->get('request.helper')->getCurrentHost();
         $adminContext = $this->container->get('shop.context.admin');
         $frontContext = $this->container->get('shop.context.front');
         $themeManager = $this->container->get('theme.manager');

@@ -12,24 +12,14 @@
 
 namespace WellCommerce\Bundle\CartBundle\Provider;
 
-use WellCommerce\Bundle\CoreBundle\Provider\ResourceProvider;
+use WellCommerce\Bundle\CoreBundle\Provider\AbstractResourceProvider;
 
 /**
  * Class CartProvider
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CartProvider extends ResourceProvider implements CartProviderInterface
+class CartProvider extends AbstractResourceProvider implements CartProviderInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getCartIdentifier()
-    {
-        if (null !== $this->currentResource) {
-            return $this->currentResource->getId();
-        }
 
-        return 0;
-    }
 }

@@ -25,7 +25,7 @@
         <service id="page.layout_box.configurator" class="WellCommerce\Bundle\CmsBundle\Layout\PageBoxConfigurator">
             <argument>Page</argument>
             <argument>page.layout_box.controller</argument>
-            <argument type="service" id="translator_helper"/>
+            <argument type="service" id="translator.helper"/>
             <tag name="layout_box.configurator" />
         </service>
 

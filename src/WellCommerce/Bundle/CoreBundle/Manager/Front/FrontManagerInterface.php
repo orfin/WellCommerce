@@ -38,7 +38,37 @@ interface FrontManagerInterface extends ManagerInterface
     public function getResourceProvider($alias);
 
     /**
+     * @return \WellCommerce\Bundle\CartBundle\Provider\CartProviderInterface
+     */
+    public function getCartProvider();
+
+    /**
      * @return \WellCommerce\Bundle\CartBundle\Entity\CartInterface
      */
     public function getCurrentCart();
+
+    /**
+     * @return mixed|\WellCommerce\Bundle\CoreBundle\Provider\ResourceProviderInterface
+     */
+    public function getCategoryProvider();
+
+    /**
+     * @return \WellCommerce\Bundle\ProductBundle\Provider\ProductProviderInterface
+     */
+    public function getProductProvider();
+
+    /**
+     * @return \WellCommerce\Bundle\ProductBundle\Provider\ProductStatusProviderInterface
+     */
+    public function getProductStatusProvider();
+
+    /**
+     * @return \WellCommerce\Bundle\ProducerBundle\Provider\ProducerProviderInterface
+     */
+    public function getProducerProvider();
+
+    /**
+     * @return null|\WellCommerce\Bundle\ClientBundle\Entity\ClientInterface
+     */
+    public function getClient();
 }

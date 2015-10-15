@@ -48,8 +48,7 @@
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
-        <service id="category.provider.front" class="WellCommerce\Bundle\CoreBundle\Provider\ResourceProvider">
-            <argument type="service" id="category.dataset.front" />
+        <service id="category.provider" class="WellCommerce\Bundle\CategoryBundle\Provider\CategoryProvider">
             <tag name="resource.provider" alias="category"/>
         </service>
 

@@ -113,13 +113,14 @@ class ProductAttributeHelper implements ProductAttributeHelperInterface
      */
     protected function getAttributeData(ProductAttributeInterface $productAttribute)
     {
-        $baseCurrency = $productAttribute->getSellPrice()->getCurrency();
+        $sellPrice    = $productAttribute->getSellPrice();
+        $baseCurrency = $sellPrice->getCurrency();
 
         return [
             'id'                 => $productAttribute->getId(),
-            'finalPriceGross'    => $this->currencyHelper->convertAndFormat($productAttribute->getSellPrice()->getFinalGrossAmount(), $baseCurrency),
-            'sellPriceGross'     => $this->currencyHelper->convertAndFormat($productAttribute->getSellPrice()->getGrossAmount(), $baseCurrency),
-            'discountPriceGross' => $this->currencyHelper->convertAndFormat($productAttribute->getSellPrice()->getDiscountedGrossAmount(), $baseCurrency),
+            'finalPriceGross'    => $this->currencyHelper->convertAndFormat($sellPrice->getFinalGrossAmount(), $baseCurrency),
+            'sellPriceGross'     => $this->currencyHelper->convertAndFormat($sellPrice->getGrossAmount(), $baseCurrency),
+            'discountPriceGross' => $this->currencyHelper->convertAndFormat($sellPrice->getDiscountedGrossAmount(), $baseCurrency),
             'stock'              => $productAttribute->getStock(),
             'symbol'             => $productAttribute->getSymbol()
         ];

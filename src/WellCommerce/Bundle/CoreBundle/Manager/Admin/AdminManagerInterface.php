@@ -38,4 +38,9 @@ interface AdminManagerInterface extends ManagerInterface
      * @return DataGridInterface
      */
     public function getDataGrid();
+
+    /**
+     * @return null|\WellCommerce\Bundle\UserBundle\Entity\UserInterface
+     */
+    public function getAdmin();
 }

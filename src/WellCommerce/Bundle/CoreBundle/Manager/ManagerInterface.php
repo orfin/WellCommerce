@@ -20,9 +20,9 @@ namespace WellCommerce\Bundle\CoreBundle\Manager;
 interface ManagerInterface
 {
     /**
-     * @return \Symfony\Component\Validator\Validator\ValidatorInterface
+     * @return \WellCommerce\Bundle\CoreBundle\Helper\Flash\FlashHelperInterface
      */
-    public function getValidator();
+    public function getValidatorHelper();
 
     /**
      * Returns the FlashHelper
@@ -123,4 +123,9 @@ interface ManagerInterface
      * @return \WellCommerce\Bundle\MultiStoreBundle\Context\ShopContextInterface
      */
     public function getShopContext();
+
+    /**
+     * @return null|object
+     */
+    public function getUser();
 }

@@ -31,8 +31,7 @@
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
-        <service id="producer.provider" class="WellCommerce\Bundle\CoreBundle\Provider\ResourceProvider">
-            <argument type="service" id="producer.dataset.front"/>
+        <service id="producer.provider" class="WellCommerce\Bundle\ProducerBundle\Provider\ProducerProvider">
             <tag name="resource.provider" alias="producer"/>
         </service>
 

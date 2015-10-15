@@ -68,6 +68,6 @@ class AbstractAdminControllerTestCase extends AbstractTestCase
      */
     protected function trans($message, $domain = 'wellcommerce')
     {
-        return $this->container->get('translator_helper')->trans($message, [], $domain);
+        return $this->container->get('translator.helper')->trans($message, [], $domain);
     }
 }

@@ -31,8 +31,8 @@
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
-        <service id="product.provider" class="WellCommerce\Bundle\CoreBundle\Provider\ResourceProvider">
-            <argument type="service" id="product.dataset.front" />
+        <service id="product.provider" class="WellCommerce\Bundle\ProductBundle\Provider\ProductProvider">
+            <argument type="service" id="product.dataset.front"/>
             <argument type="service" id="shipping_method.product.provider"/>
             <argument type="service" id="product_attribute.helper"/>
             <tag name="resource.provider" alias="product"/>

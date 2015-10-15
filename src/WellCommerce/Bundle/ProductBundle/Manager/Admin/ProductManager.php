@@ -32,7 +32,6 @@ class ProductManager extends AbstractAdminManager
     public function quickUpdateProduct($id, array $data)
     {
         $product       = $this->findProduct($id);
-        $validator     = $this->getValidator();
         $entityManager = $this->getDoctrineHelper()->getEntityManager();
 
         $product->setSku($data['sku']);
@@ -40,7 +39,7 @@ class ProductManager extends AbstractAdminManager
         $product->setStock($data['stock']);
         $product->getSellPrice()->setAmount($data['sellPrice']);
 
-        $errors = $validator->validate($product);
+        $errors = $this->getValidatorHelper()->validate($product);
         if ($errors->count()) {
             throw new ValidatorException('Product data is not valid: ' . (string)$errors);
         }

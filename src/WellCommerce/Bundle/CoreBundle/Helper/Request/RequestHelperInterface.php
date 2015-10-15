@@ -120,25 +120,6 @@ interface RequestHelperInterface
     public function hasAttribute($name);
 
     /**
-     * Returns the signed-in admin from security context
-     *
-     * @return null|\WellCommerce\Bundle\UserBundle\Entity\User
-     */
-    public function getAdmin();
-
-    /**
-     * Returns the signed-in client from security context
-     *
-     * @return null|\WellCommerce\Bundle\ClientBundle\Entity\Client
-     */
-    public function getClient();
-
-    /**
-     * Returns current host name
-     *
-     * @return string
-     */
-    /**
      * Returns current host
      *
      * @param null $fallbackHost

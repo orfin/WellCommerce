@@ -33,7 +33,7 @@ class CategoryController extends AbstractFrontController implements FrontControl
             'name' => $category->translate()->getName(),
         ]));
 
-        $this->manager->getResourceProvider('category')->setCurrentResource($category);
+        $this->manager->getResourceProvider('category')->setResource($category);
 
         return $this->displayTemplate('index', [
             'category' => $category

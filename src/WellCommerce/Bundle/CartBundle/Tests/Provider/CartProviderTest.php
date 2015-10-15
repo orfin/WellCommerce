@@ -25,9 +25,9 @@ class CartProviderTest extends AbstractTestCase
     public function testCartIsAccessible()
     {
         $provider = $this->container->get('cart.provider');
-        $this->assertNull($provider->getCurrentResource());
+        $this->assertNull($provider->getResource());
 
-        $provider->setCurrentResource(new Cart());
-        $this->assertInstanceOf('WellCommerce\Bundle\CartBundle\Entity\CartInterface', $provider->getCurrentResource());
+        $provider->setResource(new Cart());
+        $this->assertInstanceOf('WellCommerce\Bundle\CartBundle\Entity\CartInterface', $provider->getResource());
     }
 }

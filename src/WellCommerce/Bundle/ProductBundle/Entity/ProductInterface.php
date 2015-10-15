@@ -20,6 +20,7 @@ use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\Dimension;
 use WellCommerce\Bundle\CoreBundle\Entity\DiscountablePrice;
 use WellCommerce\Bundle\CoreBundle\Entity\Price;
+use WellCommerce\Bundle\CoreBundle\Entity\ResourceInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopCollectionAwareInterface;
@@ -33,6 +34,7 @@ use WellCommerce\Bundle\UnitBundle\Entity\UnitAwareInterface;
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface ProductInterface extends
+    ResourceInterface,
     TranslatableInterface,
     TimestampableInterface,
     BlameableInterface,
@@ -41,11 +43,6 @@ interface ProductInterface extends
     UnitAwareInterface,
     AvailabilityAwareInterface
 {
-    /**
-     * @return integer
-     */
-    public function getId();
-
     /**
      * @return string
      */

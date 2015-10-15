@@ -30,7 +30,7 @@ class ProductController extends AbstractFrontController implements FrontControll
             'name' => $product->translate()->getName(),
         ]));
 
-        $this->manager->getProductProvider()->setCurrentProduct($product);
+        $this->manager->getProductProvider()->setResource($product);
 
         return $this->displayTemplate('index', [
             'product' => $product
@@ -39,7 +39,7 @@ class ProductController extends AbstractFrontController implements FrontControll
 
     public function viewAction(ProductInterface $product)
     {
-        $this->manager->getProductProvider()->setCurrentProduct($product);
+        $this->manager->getProductProvider()->setResource($product);
 
         $defaultTemplateData = $this->manager->getProductProvider()->getProductDefaultTemplateData();
         $basketModalContent  = $this->renderView('WellCommerceProductBundle:Front/Product:view.html.twig', $defaultTemplateData);

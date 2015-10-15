@@ -21,4 +21,7 @@ use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
  */
 class ClientManager extends AbstractFrontManager
 {
+    public function findClientOrders(){
+
+    }
 }

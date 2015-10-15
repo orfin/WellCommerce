@@ -11,6 +11,7 @@
  */
 namespace WellCommerce\Bundle\CartBundle\Form;
 
+use Doctrine\Common\Util\Debug;
 use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\CartBundle\Provider\CartProviderInterface;
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
@@ -58,7 +59,7 @@ class CartFormBuilder extends AbstractFormBuilder
      */
     public function buildForm(FormInterface $form)
     {
-        $cart = $this->cartProvider->getCurrentResource();
+        $cart = $this->cartProvider->getResource();
 
         $shippingMethod = $form->addChild($this->getElement('radio_group', [
             'name'        => 'shippingMethodCost',

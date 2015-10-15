@@ -5,26 +5,25 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="flash_helper" class="WellCommerce\Bundle\CoreBundle\Helper\Flash\FlashHelper">
+        <service id="flash.helper" class="WellCommerce\Bundle\CoreBundle\Helper\Flash\FlashHelper">
             <argument type="service" id="session"/>
-            <argument type="service" id="translator_helper"/>
+            <argument type="service" id="translator.helper"/>
         </service>
 
-        <service id="image_helper" class="WellCommerce\Bundle\CoreBundle\Helper\Image\ImageHelper">
+        <service id="image.helper" class="WellCommerce\Bundle\CoreBundle\Helper\Image\ImageHelper">
             <argument type="service" id="liip_imagine.cache.manager"/>
         </service>
 
-        <service id="doctrine_helper" class="WellCommerce\Bundle\CoreBundle\Helper\Doctrine\DoctrineHelper">
+        <service id="doctrine.helper" class="WellCommerce\Bundle\CoreBundle\Helper\Doctrine\DoctrineHelper">
             <argument type="service" id="doctrine"/>
         </service>
 
-        <service id="router_helper" class="WellCommerce\Bundle\CoreBundle\Helper\Router\RouterHelper">
+        <service id="router.helper" class="WellCommerce\Bundle\CoreBundle\Helper\Router\RouterHelper">
             <argument type="service" id="router"/>
         </service>
 
-        <service id="request_helper" class="WellCommerce\Bundle\CoreBundle\Helper\Request\RequestHelper">
+        <service id="request.helper" class="WellCommerce\Bundle\CoreBundle\Helper\Request\RequestHelper">
             <argument type="service" id="request_stack"/>
-            <argument type="service" id="security.context"/>
             <argument type="service" id="shop.context.front"/>
         </service>
 
@@ -32,7 +31,15 @@
             <argument type="service" id="kernel"/>
         </service>
 
-        <service id="translator_helper" class="WellCommerce\Bundle\CoreBundle\Helper\Translator\TranslatorHelper">
+        <service id="security.helper" class="WellCommerce\Bundle\CoreBundle\Helper\Security\SecurityHelper">
+            <argument type="service" id="security.token_storage"/>
+        </service>
+
+        <service id="validator.helper" class="WellCommerce\Bundle\CoreBundle\Helper\Validator\ValidatorHelper">
+            <argument type="service" id="validator"/>
+        </service>
+
+        <service id="translator.helper" class="WellCommerce\Bundle\CoreBundle\Helper\Translator\TranslatorHelper">
             <argument type="service" id="translator"/>
         </service>
     </services>

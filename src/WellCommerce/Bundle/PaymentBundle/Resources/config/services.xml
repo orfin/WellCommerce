@@ -112,7 +112,7 @@
         </service>
 
         <service id="form.payment_method_configuration.data_transformer" class="WellCommerce\Bundle\PaymentBundle\Form\DataTransformer\PaymentMethodConfigurationTransformer" scope="prototype">
-            <argument type="service" id="doctrine_helper"/>
+            <argument type="service" id="doctrine.helper"/>
             <call method="setFactory">
                 <argument type="service" id="payment_method_configuration.factory"/>
             </call>

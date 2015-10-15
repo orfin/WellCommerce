@@ -9,7 +9,7 @@
         <li>
             <table>
                 <tbody>
-                {% for item in cartProducts.rows %}
+                {% for item in cartProducts %}
                 <tr>
                     <td>
                         <a href="{{ path('front.cart.delete',{"id": item.id }) }}" class="delete">

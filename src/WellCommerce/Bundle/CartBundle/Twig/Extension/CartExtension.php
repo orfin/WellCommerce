@@ -46,7 +46,7 @@ class CartExtension extends \Twig_Extension
     public function getGlobals()
     {
         return [
-            'cart'         => $this->cartProvider->getCurrentResource(),
+            'cart'         => $this->cartProvider->getResource(),
             'cartProducts' => $this->cartProductDataSet->getResult('array')
         ];
     }

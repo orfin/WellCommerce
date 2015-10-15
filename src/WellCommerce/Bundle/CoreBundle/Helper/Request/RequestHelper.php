@@ -35,21 +35,14 @@ class RequestHelper implements RequestHelperInterface
     protected $request;
 
     /**
-     * @var TokenStorageInterface
-     */
-    protected $tokenStorage;
-
-    /**
      * Constructor
      *
      * @param RequestStack          $requestStack
-     * @param TokenStorageInterface $tokenStorage
      */
-    public function __construct(RequestStack $requestStack, TokenStorageInterface $tokenStorage)
+    public function __construct(RequestStack $requestStack)
     {
         $this->requestStack = $requestStack;
         $this->request      = $requestStack->getMasterRequest();
-        $this->tokenStorage = $tokenStorage;
     }
 
     /**
@@ -159,34 +152,6 @@ class RequestHelper implements RequestHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function getAdmin()
-    {
-        $admin = $this->getUser();
-
-        if ($admin instanceof UserInterface) {
-            return $admin;
-        }
-
-        return null;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getClient()
-    {
-        $client = $this->getUser();
-
-        if ($client instanceof ClientInterface) {
-            return $client;
-        }
-
-        return null;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getCurrentOffset($limit)
     {
         $page   = $this->getCurrentPage();
@@ -215,21 +180,6 @@ class RequestHelper implements RequestHelperInterface
         $limit = abs($limit);
 
         return ($limit > 0) ? $limit : $default;
-    }
-
-    /**
-     * Returns current user from security context
-     *
-     * @return mixed|null
-     */
-    protected function getUser()
-    {
-        $token = $this->tokenStorage->getToken();
-        if (null !== $token) {
-            return $token->getUser();
-        }
-
-        return null;
     }
 
     /**

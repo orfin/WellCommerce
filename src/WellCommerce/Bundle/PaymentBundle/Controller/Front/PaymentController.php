@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\Controller\Front;
 
+use Doctrine\Common\Util\Debug;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
 

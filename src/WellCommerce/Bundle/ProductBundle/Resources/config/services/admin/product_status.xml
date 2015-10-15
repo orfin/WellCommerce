@@ -54,14 +54,14 @@
         <service id="product_showcase.layout_box.configurator" class="WellCommerce\Bundle\ProductBundle\Layout\ProductShowcaseBoxConfigurator">
             <argument>ProductShowcase</argument>
             <argument>product_showcase.layout_box.controller</argument>
-            <argument type="service" id="translator_helper"/>
+            <argument type="service" id="translator.helper"/>
             <tag name="layout_box.configurator" />
         </service>
 
         <service id="product_status.layout_box.configurator" class="WellCommerce\Bundle\ProductBundle\Layout\ProductStatusBoxConfigurator">
             <argument>ProductStatus</argument>
             <argument>product_status.layout_box.controller</argument>
-            <argument type="service" id="translator_helper"/>
+            <argument type="service" id="translator.helper"/>
             <tag name="layout_box.configurator" />
         </service>
     </services>

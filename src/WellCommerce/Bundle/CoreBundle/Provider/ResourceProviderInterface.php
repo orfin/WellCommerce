@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Provider;
 
+use WellCommerce\Bundle\CoreBundle\Entity\ResourceInterface;
+
 /**
  * Interface ProviderInterface
  *
@@ -20,23 +22,33 @@ namespace WellCommerce\Bundle\CoreBundle\Provider;
 interface ResourceProviderInterface
 {
     /**
-     * Returns the current resource if set
+     * Returns the current resource if set.
+     * May throw an exception if strict mode is set to true
      *
-     * @return object|null
+     * @param bool|true $strict
+     *
+     * @return ResourceInterface|null
      */
-    public function getCurrentResource();
+    public function getResource($strict = true);
 
     /**
      * Sets current resource instance
      *
-     * @param object $resource
+     * @param object|ResourceInterface $resource
      */
-    public function setCurrentResource($resource);
+    public function setResource(ResourceInterface $resource);
 
     /**
-     * Checks whether current resource has been set
+     * Checks whether resource has been set
      *
      * @return bool
      */
-    public function hasCurrentResource();
+    public function hasResource();
+
+    /**
+     * Returns the resource's identifier
+     *
+     * @return int
+     */
+    public function getResourceIdentifier();
 }

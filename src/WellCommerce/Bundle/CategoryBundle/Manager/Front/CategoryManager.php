@@ -33,24 +33,8 @@ class CategoryManager extends AbstractFrontManager
     public function getCurrentCategoryConditions()
     {
         $conditions = new ConditionsCollection();
-        $conditions->add(new Eq('category', $this->getCurrentCategoryId()));
+        $conditions->add(new Eq('category', $this->getCategoryProvider()->getResourceIdentifier()));
 
         return $conditions;
-    }
-
-    /**
-     * Returns categories id from provider service
-     *
-     * @return int
-     */
-    public function getCurrentCategoryId()
-    {
-        $category = $this->getResourceProvider('category')->getCurrentResource();
-
-        if ($category instanceof CategoryInterface) {
-            return $category->getId();
-        }
-
-        return null;
     }
 }

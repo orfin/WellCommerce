@@ -17,6 +17,7 @@ use WellCommerce\Bundle\CartBundle\Visitor\CartVisitorInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\AddressInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\ContactDetailsAwareInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\ResourceInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CouponBundle\Entity\CouponAwareInterface;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopAwareInterface;
@@ -29,6 +30,7 @@ use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCostInterface;
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface CartInterface extends
+    ResourceInterface,
     ShopAwareInterface,
     PaymentMethodAwareInterface,
     ClientAwareInterface,
@@ -36,11 +38,6 @@ interface CartInterface extends
     ContactDetailsAwareInterface,
     CouponAwareInterface
 {
-    /**
-     * @return int
-     */
-    public function getId();
-
     /**
      * @return float
      */

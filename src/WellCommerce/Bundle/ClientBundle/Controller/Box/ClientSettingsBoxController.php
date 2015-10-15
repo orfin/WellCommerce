@@ -24,7 +24,7 @@ class ClientSettingsBoxController extends AbstractBoxController
     public function indexAction()
     {
         $request = $this->manager->getRequestHelper()->getCurrentRequest();
-        $client  = $this->manager->getRequestHelper()->getClient();
+        $client  = $this->manager->getClient();
         if (null === $client) {
             return $this->redirectToRoute('front.client.login');
         }

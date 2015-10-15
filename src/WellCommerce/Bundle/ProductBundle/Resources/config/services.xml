@@ -10,7 +10,7 @@
     </imports>
     <services>
         <service id="form.product_attribute_collection.data_transformer" class="WellCommerce\Bundle\ProductBundle\Form\Admin\DataTransformer\ProductAttributeCollectionToArrayTransformer" scope="prototype">
-            <argument type="service" id="doctrine_helper"/>
+            <argument type="service" id="doctrine.helper"/>
             <call method="setProductAttributeManager">
                 <argument type="service" id="product_attribute.manager.admin"/>
             </call>
@@ -18,7 +18,7 @@
         </service>
 
         <service id="form.product_photo_collection.data_transformer" class="WellCommerce\Bundle\ProductBundle\Form\Admin\DataTransformer\ProductPhotoCollectionToArrayTransformer" scope="prototype">
-            <argument type="service" id="doctrine_helper"/>
+            <argument type="service" id="doctrine.helper"/>
             <tag name="form.data_transformer" alias="product_photo_collection"/>
         </service>
     </services>

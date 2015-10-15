@@ -54,6 +54,7 @@ WellCommerce\Bundle\ProductBundle\Entity\Product:
         producer:
             targetEntity: WellCommerce\Bundle\ProducerBundle\Entity\Producer
             fetch: LAZY
+            inversedBy: products
             joinColumns:
                 producer_id:
                     referencedColumnName: id
