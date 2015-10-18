@@ -27,7 +27,7 @@ class OrderProduct implements OrderProductInterface
     protected $id;
 
     /**
-     * @var float
+     * @var int
      */
     protected $quantity;
 

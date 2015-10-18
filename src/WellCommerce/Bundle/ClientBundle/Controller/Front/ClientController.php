@@ -36,24 +36,4 @@ class ClientController extends AbstractFrontController implements FrontControlle
     {
         return $this->displayTemplate('register');
     }
-
-    public function settingsAction()
-    {
-        return $this->render('WellCommerceClientBundle:Front/Client:settings.html.twig');
-    }
-
-    public function wishListAction()
-    {
-        return $this->displayTemplate('wishlist');
-    }
-
-    public function addressBookAction()
-    {
-        return $this->displayTemplate('address_book');
-    }
-
-    public function ordersAction()
-    {
-        return $this->displayTemplate('orders');
-    }
 }

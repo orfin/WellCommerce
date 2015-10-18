@@ -52,7 +52,11 @@ class AddressFormatterExtension extends \Twig_Extension
     {
         $lines   = [];
         $lines[] = sprintf('%s %s', $address->getFirstName(), $address->getLastName());
-        $lines[] = sprintf('%s %s%s', $address->getStreet(), $address->getStreetNo(), '/' . $address->getFlatNo());
+        if (strlen($address->getFlatNo())) {
+            $lines[] = sprintf('%s %s/%s', $address->getStreet(), $address->getStreetNo(), $address->getFlatNo());
+        } else {
+            $lines[] = sprintf('%s %s', $address->getStreet(), $address->getStreetNo(), '/' . $address->getFlatNo());
+        }
         $lines[] = sprintf('%s, %s %s', $address->getCountry(), $address->getPostCode(), $address->getCity());
 
         return implode($lineSeparator, $lines);

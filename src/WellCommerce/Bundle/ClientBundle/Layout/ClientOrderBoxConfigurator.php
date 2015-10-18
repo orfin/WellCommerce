@@ -15,11 +15,11 @@ namespace WellCommerce\Bundle\ClientBundle\Layout;
 use WellCommerce\Bundle\LayoutBundle\Configurator\AbstractLayoutBoxConfigurator;
 
 /**
- * Class ClientAddressBookBoxConfigurator
+ * Class ClientOrderBoxConfigurator
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientOrdersBoxConfigurator extends AbstractLayoutBoxConfigurator
+class ClientOrderBoxConfigurator extends AbstractLayoutBoxConfigurator
 {
 
 }

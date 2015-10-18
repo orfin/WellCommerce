@@ -12,7 +12,10 @@
 
 namespace WellCommerce\Bundle\ClientBundle\Controller\Box;
 
+use WellCommerce\Bundle\ClientBundle\Entity\ClientWishlistInterface;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
+use WellCommerce\Bundle\DataSetBundle\Conditions\Condition\In;
+use WellCommerce\Bundle\DataSetBundle\Conditions\ConditionsCollection;
 
 /**
  * Class ClientWishlistBoxController
@@ -23,6 +26,32 @@ class ClientWishlistBoxController extends AbstractBoxController
 {
     public function indexAction()
     {
-        return $this->displayTemplate('index');
+        $dataset = $this->get('product.dataset.front')->getResult('array', [
+            'order_by'   => 'name',
+            'order_dir'  => 'asc',
+            'conditions' => $this->getConditions()
+        ]);
+
+        return $this->displayTemplate('index', [
+            'dataset' => $dataset
+        ]);
+    }
+
+    /**
+     * @return ConditionsCollection
+     */
+    protected function getConditions()
+    {
+        $wishlist   = $this->manager->getClient()->getWishlist();
+        $productIds = [];
+
+        $wishlist->map(function (ClientWishlistInterface $clientWishlist) use (&$productIds) {
+            $productIds[] = $clientWishlist->getProduct()->getId();
+        });
+
+        $conditions = new ConditionsCollection();
+        $conditions->add(new In('id', $productIds));
+
+        return $conditions;
     }
 }

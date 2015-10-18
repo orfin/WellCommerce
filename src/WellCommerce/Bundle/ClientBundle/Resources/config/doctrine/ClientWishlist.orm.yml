@@ -1,0 +1,24 @@
+WellCommerce\Bundle\ClientBundle\Entity\ClientWishlist:
+    type: entity
+    table: client_wishlist
+    repositoryClass: WellCommerce\Bundle\ClientBundle\Repository\ClientWishlistRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    manyToOne:
+        client:
+            targetEntity: WellCommerce\Bundle\ClientBundle\Entity\Client
+            fetch: LAZY
+            inversedBy: wishlist
+            joinColumns:
+                client_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        product:
+            targetEntity: WellCommerce\Bundle\ProductBundle\Entity\Product
+            fetch: LAZY
+            joinColumns:
+                product_id:
+                    referencedColumnName: id

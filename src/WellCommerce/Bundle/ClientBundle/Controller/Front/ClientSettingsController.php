@@ -14,36 +14,21 @@ namespace WellCommerce\Bundle\ClientBundle\Controller\Front;
 
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 
 /**
- * Class ClientWishlistController
+ * Class ClientSettingsController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ClientWishlistController extends AbstractFrontController implements FrontControllerInterface
+class ClientSettingsController extends AbstractFrontController implements FrontControllerInterface
 {
-    /**
-     * @var \WellCommerce\Bundle\ClientBundle\Manager\Front\ClientWishlistManager
-     */
-    protected $manager;
-
     public function indexAction()
     {
         return $this->displayTemplate('index');
     }
 
-    public function addAction(ProductInterface $product)
+    public function viewAction()
     {
-        $this->manager->addProductToWishlist($product);
-
-        return $this->redirectToAction('index');
-    }
-
-    public function deleteAction(ProductInterface $product)
-    {
-        $this->manager->deleteProductFromWishlist($product);
-
-        return $this->redirectToAction('index');
+        return $this->displayTemplate('view');
     }
 }

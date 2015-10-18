@@ -137,4 +137,14 @@ interface ClientInterface
      * @return Collection
      */
     public function getOrders();
+
+    /**
+     * @return Collection
+     */
+    public function getWishlist();
+
+    /**
+     * @param Collection $wishlist
+     */
+    public function setWishlist(Collection $wishlist);
 }

@@ -5,6 +5,7 @@
 
     <imports>
         <import resource="services/client.xml"/>
+        <import resource="services/client_wishlist.xml"/>
         <import resource="services/client_group.xml"/>
     </imports>
 </container>

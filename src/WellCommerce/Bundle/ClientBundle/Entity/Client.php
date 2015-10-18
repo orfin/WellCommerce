@@ -83,6 +83,11 @@ class Client implements ClientInterface
     protected $orders;
 
     /**
+     * @var Collection
+     */
+    protected $wishlist;
+
+    /**
      * @var bool
      */
     protected $conditionsAccepted;
@@ -362,5 +367,21 @@ class Client implements ClientInterface
     public function getOrders()
     {
         return $this->orders;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getWishlist()
+    {
+        return $this->wishlist;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setWishlist(Collection $wishlist)
+    {
+        $this->wishlist = $wishlist;
     }
 }

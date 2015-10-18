@@ -31,7 +31,7 @@ interface OrderProductInterface extends ProductAwareInterface, ProductAttributeA
     public function getId();
 
     /**
-     * @return float
+     * @return int
      */
     public function getQuantity();
 

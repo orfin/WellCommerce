@@ -64,9 +64,16 @@ WellCommerce\Bundle\ClientBundle\Entity\Client:
             fetch: LAZY
             mappedBy: client
             orphanRemoval: true
-    oneToMany:
+        wishlist:
+            targetEntity: WellCommerce\Bundle\ClientBundle\Entity\ClientWishlist
+            cascade:
+                - remove
+                - persist
+            fetch: LAZY
+            mappedBy: client
+            orphanRemoval: true
         orders:
-            targetEntity: WellCommerce\Bundle\ClientBundle\Entity\ClientAddress
+            targetEntity: WellCommerce\Bundle\OrderBundle\Entity\Order
             cascade:
                 - remove
                 - persist

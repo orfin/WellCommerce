@@ -17,8 +17,8 @@
         <ul class="dropdown-menu" role="menu" aria-labelledby="CurrencyMenu">
             <li><a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'order_by': 'name','order_dir': 'asc'})) }}">Name - ascending</a></li>
             <li><a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'order_by': 'name','order_dir': 'desc'})) }}">Name - descending</a></li>
-            <li><a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'order_by': 'price','order_dir': 'asc'})) }}">Price - ascending</a></li>
-            <li><a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'order_by': 'price','order_dir': 'desc'})) }}">Price - descending</a></li>
+            <li><a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'order_by': 'finalPrice','order_dir': 'asc'})) }}">Price - ascending</a></li>
+            <li><a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'order_by': 'finalPrice','order_dir': 'desc'})) }}">Price - descending</a></li>
         </ul>
     </div>
 
