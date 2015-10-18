@@ -28,7 +28,7 @@ class CategoryMenuBoxController extends AbstractBoxController implements BoxCont
     public function indexAction()
     {
         return $this->displayTemplate('index', [
-            'active' => $this->manager->getCategoryProvider()->getResourceIdentifier()
+            'active' => $this->manager->getCategoryContext()->getCurrentCategoryIdentifier()
         ]);
     }
 }

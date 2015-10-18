@@ -58,7 +58,7 @@ class CategoryManager extends AbstractAdminManager
     public function quickAddCategory($name, $parent)
     {
         $em             = $this->getDoctrineHelper()->getEntityManager();
-        $currentShop    = $this->getShopContext()->getCurrentScope();
+        $currentShop    = $this->getShopContext()->getCurrentShop();
         $parentCategory = $this->getRepository()->find((int)$parent);
 
         $category = $this->getFactory()->create();

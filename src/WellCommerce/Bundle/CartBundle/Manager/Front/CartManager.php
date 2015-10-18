@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CartBundle\Manager\Front;
 
+use Doctrine\Common\Util\Debug;
 use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
 use WellCommerce\Bundle\CartBundle\Exception\AddCartItemException;
@@ -52,7 +53,7 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
      */
     public function addProductToCart(ProductInterface $product, ProductAttributeInterface $attribute = null, $quantity = 1)
     {
-        $cart = $this->getCurrentCart();
+        $cart = $this->getCartContext()->getCurrentCart();
 
         try {
             $this->cartProductManager->addProductToCart($cart, $product, $attribute, $quantity);
@@ -72,7 +73,7 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
      */
     public function deleteCartProduct(CartProductInterface $cartProduct)
     {
-        $cart = $this->getCurrentCart();
+        $cart = $this->getCartContext()->getCurrentCart();
         $this->cartProductManager->deleteCartProductFromCart($cartProduct, $cart);
 
         $cart->setShippingMethodCost(null);
@@ -87,7 +88,7 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
      */
     public function changeCartProductQuantity(CartProductInterface $cartProduct, $qty)
     {
-        $cart = $this->getCurrentCart();
+        $cart = $this->getCartContext()->getCurrentCart();
         $this->cartProductManager->changeCartProductQuantity($cart, $cartProduct, $qty);
 
         $cart->setShippingMethodCost(null);
@@ -106,11 +107,10 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
         $sessionId     = $requestHelper->getSessionId();
         $client        = $this->getClient();
         $currency      = $requestHelper->getCurrentCurrency();
-        $shop          = $this->getShopContext()->getCurrentScope();
+        $shop          = $this->getShopContext()->getCurrentShop();
         $cart          = $this->getCart($shop, $client, $sessionId, $currency);
 
-        $cartProvider = $this->getCartProvider();
-        $cartProvider->setResource($cart);
+        $this->getCartContext()->setCurrentCart($cart);
 
         return $cart;
     }

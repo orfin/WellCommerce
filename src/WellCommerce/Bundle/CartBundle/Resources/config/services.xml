@@ -51,7 +51,7 @@
 
         <service id="cart_product.dataset.query_builder" class="WellCommerce\Bundle\CartBundle\DataSet\CartProductDataSetQueryBuilder">
             <argument type="service" id="cart_product.repository"/>
-            <argument type="service" id="cart.provider"/>
+            <argument type="service" id="cart.context.front"/>
         </service>
 
         <service id="cart_product.dataset" class="WellCommerce\Bundle\CartBundle\DataSet\CartProductDataSet">
@@ -68,20 +68,16 @@
             <call method="setShippingMethodProvider">
                 <argument type="service" id="shipping_method.cart.provider"/>
             </call>
-            <call method="setCartManager">
-                <argument type="service" id="cart.provider"/>
+            <call method="setCartContext">
+                <argument type="service" id="cart.context.front"/>
             </call>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
         </service>
 
-        <service id="cart.provider" class="WellCommerce\Bundle\CartBundle\Provider\CartProvider">
-            <tag name="resource.provider" alias="cart"/>
-        </service>
-
         <service id="twig.extension.cart" class="WellCommerce\Bundle\CartBundle\Twig\Extension\CartExtension">
-            <argument type="service" id="cart.provider"/>
+            <argument type="service" id="cart.context.front"/>
             <argument type="service" id="cart_product.dataset"/>
             <tag name="twig.extension"/>
         </service>
@@ -144,5 +140,7 @@
             </argument>
             <tag name="request.param_converter" converter="cart_product" priority="10"/>
         </service>
+
+        <service id="cart.context.front" class="WellCommerce\Bundle\CartBundle\Context\Front\CartContext"/>
     </services>
 </container>

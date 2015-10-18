@@ -22,50 +22,49 @@ use WellCommerce\Bundle\CoreBundle\Manager\ManagerInterface;
 interface FrontManagerInterface extends ManagerInterface
 {
     /**
-     * Returns providers collection
-     *
-     * @return \WellCommerce\Bundle\CoreBundle\Provider\ResourceProviderCollection
+     * @return \WellCommerce\Bundle\CartBundle\Context\Front\CartContextInterface
      */
-    public function getResourceProviders();
+    public function getCartContext();
 
     /**
-     * Returns single provider by type
-     *
-     * @param string $alias
-     *
-     * @return \WellCommerce\Bundle\CoreBundle\Provider\ResourceProviderInterface
+     * @return \WellCommerce\Bundle\CategoryBundle\Context\Front\CategoryContextInterface
      */
-    public function getResourceProvider($alias);
+    public function getCategoryContext();
 
     /**
-     * @return \WellCommerce\Bundle\CartBundle\Provider\CartProviderInterface
+     * @return \WellCommerce\Bundle\CmsBundle\Context\Front\ContactContextInterface
      */
-    public function getCartProvider();
+    public function getContactContext();
 
     /**
-     * @return \WellCommerce\Bundle\CartBundle\Entity\CartInterface
+     * @return \WellCommerce\Bundle\CmsBundle\Context\Front\NewsContextInterface
      */
-    public function getCurrentCart();
+    public function getNewsContext();
 
     /**
-     * @return mixed|\WellCommerce\Bundle\CoreBundle\Provider\ResourceProviderInterface
+     * @return \WellCommerce\Bundle\CmsBundle\Context\Front\PageContextInterface
      */
-    public function getCategoryProvider();
+    public function getPageContext();
 
     /**
-     * @return \WellCommerce\Bundle\ProductBundle\Provider\ProductProviderInterface
+     * @return \WellCommerce\Bundle\ProductBundle\Context\Front\ProductContextInterface
      */
-    public function getProductProvider();
+    public function getProductContext();
 
     /**
-     * @return \WellCommerce\Bundle\ProductBundle\Provider\ProductStatusProviderInterface
+     * @return \WellCommerce\Bundle\ProductBundle\Context\Front\ProductStatusContextInterface
      */
-    public function getProductStatusProvider();
+    public function getProductStatusContext();
 
     /**
-     * @return \WellCommerce\Bundle\ProducerBundle\Provider\ProducerProviderInterface
+     * @return \WellCommerce\Bundle\ProducerBundle\Context\Front\ProducerContextInterface
      */
-    public function getProducerProvider();
+    public function getProducerContext();
+
+    /**
+     * @return \WellCommerce\Bundle\ThemeBundle\Context\Front\ThemeContextInterface
+     */
+    public function getThemeContext();
 
     /**
      * @return null|\WellCommerce\Bundle\ClientBundle\Entity\ClientInterface

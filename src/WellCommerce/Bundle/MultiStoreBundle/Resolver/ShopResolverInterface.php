@@ -10,16 +10,14 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\CartBundle\Provider;
-
-use WellCommerce\Bundle\CoreBundle\Provider\AbstractResourceProvider;
+namespace WellCommerce\Bundle\MultiStoreBundle\Resolver;
 
 /**
- * Class CartProvider
+ * Interface ShopResolverInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CartProvider extends AbstractResourceProvider implements CartProviderInterface
+interface ShopResolverInterface
 {
-
+    public function resolve();
 }

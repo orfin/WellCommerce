@@ -30,12 +30,12 @@ class ProductStatusManager extends AbstractFrontManager
      */
     public function getStatusConditions($status = null)
     {
-        if (null === $status && null !== $this->getProductStatusProvider()->getCurrentProductStatus()) {
-            $status = $this->getProductStatusProvider()->getCurrentProductStatus()->getId();
+        if (null === $status) {
+            $status = $this->getProductStatusContext()->getCurrentProductStatusIdentifier();
         }
 
         $conditions = new ConditionsCollection();
-        $conditions->add(new Eq('status', (int)$status));
+        $conditions->add(new Eq('status', $status));
 
         return $conditions;
     }

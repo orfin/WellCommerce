@@ -31,9 +31,7 @@
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
-        <service id="producer.provider" class="WellCommerce\Bundle\ProducerBundle\Provider\ProducerProvider">
-            <tag name="resource.provider" alias="producer"/>
-        </service>
+        <service id="producer.context.front" class="WellCommerce\Bundle\ProducerBundle\Context\Front\ProducerContext"/>
 
         <service id="producer_menu.layout_box.controller" class="WellCommerce\Bundle\CategoryBundle\Controller\Box\ProducerMenuBoxController">
             <argument type="service" id="producer.manager.front"/>

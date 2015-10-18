@@ -27,7 +27,7 @@ class OrderAddressFormBuilder extends AbstractFormBuilder
     public function buildForm(FormInterface $form)
     {
         $countries      = $this->get('country.repository')->all();
-        $defaultCountry = $this->get('shop.context.front')->getCurrentScope()->getDefaultCountry();
+        $defaultCountry = $this->get('shop.context.front')->getCurrentShop()->getDefaultCountry();
 
         $billingAddress = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'billingAddress',

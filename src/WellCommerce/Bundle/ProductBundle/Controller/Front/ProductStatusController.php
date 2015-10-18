@@ -33,7 +33,7 @@ class ProductStatusController extends AbstractFrontController implements FrontCo
             'name' => $productStatus->translate()->getName(),
         ]));
 
-        $this->manager->getProductStatusProvider()->setResource($productStatus);
+        $this->manager->getProductStatusContext()->setCurrentProductStatus($productStatus);
 
         return $this->displayTemplate('index', [
             'status' => $productStatus

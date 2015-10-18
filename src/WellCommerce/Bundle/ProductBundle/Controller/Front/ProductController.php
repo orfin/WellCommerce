@@ -30,7 +30,7 @@ class ProductController extends AbstractFrontController implements FrontControll
             'name' => $product->translate()->getName(),
         ]));
 
-        $this->manager->getProductProvider()->setResource($product);
+        $this->manager->getProductContext()->setCurrentProduct($product);
 
         return $this->displayTemplate('index', [
             'product' => $product
@@ -39,14 +39,14 @@ class ProductController extends AbstractFrontController implements FrontControll
 
     public function viewAction(ProductInterface $product)
     {
-        $this->manager->getProductProvider()->setResource($product);
+        $this->manager->getProductContext()->setCurrentProduct($product);
 
-        $defaultTemplateData = $this->manager->getProductProvider()->getProductDefaultTemplateData();
-        $basketModalContent  = $this->renderView('WellCommerceProductBundle:Front/Product:view.html.twig', $defaultTemplateData);
+        $templateData       = $this->get('product.helper')->getProductDefaultTemplateData($product);
+        $basketModalContent = $this->renderView('WellCommerceProductBundle:Front/Product:view.html.twig', $templateData);
 
         return $this->jsonResponse([
             'basketModalContent' => $basketModalContent,
-            'attributes'         => $defaultTemplateData['attributes']
+            'attributes'         => $templateData['attributes']
         ]);
     }
 }

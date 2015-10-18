@@ -12,15 +12,9 @@
             <argument type="service" id="news.dataset.query_builder.front"/>
             <argument type="service" id="dataset.manager"/>
             <argument type="service" id="news.event_dispatcher"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
-        <service id="news.provider.front" class="WellCommerce\Bundle\CmsBundle\Provider\Front\NewsProvider">
-            <argument type="service" id="contact.dataset.front"/>
-            <tag name="provider" alias="news.front"/>
-        </service>
+        <service id="news.context.front" class="WellCommerce\Bundle\CmsBundle\Context\Front\NewsContext"/>
     </services>
 </container>

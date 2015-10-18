@@ -31,6 +31,12 @@
             <tag name="doctrine.event_subscriber" connection="default" />
         </service>
 
+        <service id="product.helper" class="WellCommerce\Bundle\ProductBundle\Helper\ProductHelper">
+            <argument type="service" id="product.dataset.front"/>
+            <argument type="service" id="shipping_method.product.provider"/>
+            <argument type="service" id="product_attribute.helper"/>
+        </service>
+
         <service id="product.request_param_converter" class="WellCommerce\Bundle\ProductBundle\Request\ParamConverter\ProductParamConverter">
             <argument type="service" id="product.repository" />
             <argument>id</argument>

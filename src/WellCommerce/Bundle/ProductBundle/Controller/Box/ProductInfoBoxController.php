@@ -24,8 +24,9 @@ class ProductInfoBoxController extends AbstractBoxController implements BoxContr
 {
     public function indexAction()
     {
-        $defaultTemplateData = $this->manager->getProductProvider()->getProductDefaultTemplateData();
+        $product      = $this->manager->getProductContext()->getCurrentProduct();
+        $templateData = $this->get('product.helper')->getProductDefaultTemplateData($product);
 
-        return $this->displayTemplate('index', $defaultTemplateData);
+        return $this->displayTemplate('index', $templateData);
     }
 }

@@ -48,15 +48,13 @@
             <configurator service="dataset.configurator" method="configure"/>
         </service>
 
-        <service id="category.provider" class="WellCommerce\Bundle\CategoryBundle\Provider\CategoryProvider">
-            <tag name="resource.provider" alias="category"/>
-        </service>
-
         <service id="category_products.layout_box.controller" class="WellCommerce\Bundle\CategoryBundle\Controller\Box\CategoryProductsBoxController">
             <argument type="service" id="category.manager.front"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
         </service>
+
+        <service id="category.context.front" class="WellCommerce\Bundle\CategoryBundle\Context\Front\CategoryContext"/>
     </services>
 </container>

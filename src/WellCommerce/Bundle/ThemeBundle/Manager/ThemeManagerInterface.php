@@ -23,20 +23,6 @@ use WellCommerce\Bundle\ThemeBundle\Entity\ThemeInterface;
 interface ThemeManagerInterface
 {
     /**
-     * Sets current theme object
-     *
-     * @param ThemeInterface $theme
-     */
-    public function setCurrentTheme(ThemeInterface $theme);
-
-    /**
-     * Returns current theme object
-     *
-     * @return Theme
-     */
-    public function getCurrentTheme();
-
-    /**
      * Returns path patterns to theme folder
      *
      * @return string

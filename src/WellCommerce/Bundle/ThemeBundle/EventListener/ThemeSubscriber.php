@@ -11,6 +11,8 @@
  */
 namespace WellCommerce\Bundle\ThemeBundle\EventListener;
 
+use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
+use Symfony\Component\HttpKernel\KernelEvents;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 use WellCommerce\Bundle\FormBundle\Event\FormEvent;
 use WellCommerce\Bundle\ThemeBundle\Form\ThemeFormBuilder;
@@ -44,8 +46,21 @@ class ThemeSubscriber extends AbstractEventSubscriber
     public static function getSubscribedEvents()
     {
         return [
+            KernelEvents::CONTROLLER          => ['onKernelController', -10],
             ThemeFormBuilder::FORM_INIT_EVENT => 'onThemeFormInit',
         ];
+    }
+
+    /**
+     * Sets shop context related session variables
+     *
+     * @param FilterControllerEvent $event
+     */
+    public function onKernelController(FilterControllerEvent $event)
+    {
+        $frontContext = $this->container->get('shop.context.front');
+        $themeContext = $this->container->get('theme.context.front');
+        $themeContext->setCurrentTheme($frontContext->getCurrentShop()->getTheme());
     }
 
     /**

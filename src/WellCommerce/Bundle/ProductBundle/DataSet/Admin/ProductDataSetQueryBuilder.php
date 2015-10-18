@@ -50,10 +50,10 @@ class ProductDataSetQueryBuilder extends AbstractDataSetQueryBuilder implements 
     {
         $qb = parent::getQueryBuilder($columns, $request);
 
-        if (null !== $this->context && 0 !== $this->context->getCurrentScopeId()) {
+        if (null !== $this->context) {
             $expression = $qb->expr()->eq('product_shops.id', ':shop');
             $qb->andWhere($expression);
-            $qb->setParameter('shop', $this->context->getCurrentScopeId());
+            $qb->setParameter('shop', $this->context->getCurrentShopIdentifier());
         }
 
         return $qb;

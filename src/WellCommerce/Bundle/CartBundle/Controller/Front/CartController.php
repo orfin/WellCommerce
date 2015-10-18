@@ -42,7 +42,7 @@ class CartController extends AbstractFrontController implements FrontControllerI
             'name' => $this->trans('cart.heading.index')
         ]));
 
-        $cart = $this->manager->getCurrentCart();
+        $cart = $this->manager->getCartContext()->getCurrentCart();
         $form = $this->manager->getForm($cart, [
             'validation_groups' => ['cart']
         ]);
@@ -91,7 +91,7 @@ class CartController extends AbstractFrontController implements FrontControllerI
         }
 
         $category        = $product->getCategories()->first();
-        $recommendations = $this->manager->getProductProvider()->getProductRecommendationsForCategory($category);
+        $recommendations = $this->get('product.helper')->getProductRecommendationsForCategory($category);
 
         $basketModalContent = $this->renderView('WellCommerceCartBundle:Front/Cart:add.html.twig', [
             'product'         => $product,

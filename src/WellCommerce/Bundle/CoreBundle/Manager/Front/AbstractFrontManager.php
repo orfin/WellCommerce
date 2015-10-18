@@ -25,22 +25,6 @@ abstract class AbstractFrontManager extends AbstractManager implements FrontMana
     /**
      * {@inheritdoc}
      */
-    public function getResourceProviders()
-    {
-        return $this->get('resource.provider.collection');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getResourceProvider($type)
-    {
-        return $this->getResourceProviders()->get($type);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getShopContext()
     {
         return $this->get('shop.context.front');
@@ -49,49 +33,73 @@ abstract class AbstractFrontManager extends AbstractManager implements FrontMana
     /**
      * {@inheritdoc}
      */
-    public function getCartProvider()
+    public function getCartContext()
     {
-        return $this->getResourceProvider('cart');
+        return $this->get('cart.context.front');
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getCategoryProvider()
+    public function getCategoryContext()
     {
-        return $this->getResourceProvider('category');
+        return $this->get('category.context.front');
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getProductProvider()
+    public function getProductContext()
     {
-        return $this->getResourceProvider('product');
+        return $this->get('product.context.front');
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getProductStatusProvider()
+    public function getProductStatusContext()
     {
-        return $this->getResourceProvider('product_status');
+        return $this->get('product_status.context.front');
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getProducerProvider()
+    public function getProducerContext()
     {
-        return $this->getResourceProvider('producer');
+        return $this->get('producer.context.front');
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getCurrentCart()
+    public function getContactContext()
     {
-        return $this->getCartProvider()->getResource();
+        return $this->get('contact.context.front');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getNewsContext()
+    {
+        return $this->get('news.context.front');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPageContext()
+    {
+        return $this->get('page.context.front');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getThemeContext()
+    {
+        return $this->get('theme.context.front');
     }
 
     /**

@@ -28,7 +28,6 @@ class WellCommerceCoreBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         parent::build($container);
-        $container->addCompilerPass(new ResourceProviderPass());
         $container->addCompilerPass(new FormResolverPass());
         $container->addCompilerPass(new FormDataTransformerPass());
     }

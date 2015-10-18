@@ -12,7 +12,7 @@
 
 namespace WellCommerce\Bundle\MultiStoreBundle\Context;
 
-use WellCommerce\Bundle\MultiStoreBundle\Entity\Shop;
+use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopInterface;
 
 /**
  * Interface ShopContextInterface
@@ -22,35 +22,27 @@ use WellCommerce\Bundle\MultiStoreBundle\Entity\Shop;
 interface ShopContextInterface
 {
     /**
-     * @return \WellCommerce\Bundle\MultiStoreBundle\Entity\Shop
+     * @return \WellCommerce\Bundle\MultiStoreBundle\Entity\ShopInterface
      */
-    public function getCurrentScope();
+    public function getCurrentShop();
 
     /**
-     * Returns current scopes identifier or null if global scope was set
-     *
-     * @return null|integer
+     * @return null|int
      */
-    public function getCurrentScopeId();
+    public function getCurrentShopIdentifier();
 
     /**
-     * Returns session bag name for context
-     *
-     * @return string
+     * @param ShopInterface $shop
      */
-    public function getSessionBagNamespace();
+    public function setCurrentShop(ShopInterface $shop);
 
     /**
-     * Sets current context or null
-     *
-     * @param Shop $shop
-     */
-    public function setCurrentScope(Shop $shop = null);
-
-    /**
-     * Checks whether session contains previous shop data
-     *
      * @return bool
      */
-    public function hasSessionPreviousData();
+    public function hasCurrentShop();
+
+    /**
+     * @return string
+     */
+    public function getSessionAttributeName();
 }

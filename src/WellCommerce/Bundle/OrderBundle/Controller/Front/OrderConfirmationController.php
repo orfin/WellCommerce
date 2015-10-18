@@ -30,7 +30,7 @@ class OrderConfirmationController extends AbstractFrontController implements Fro
 
     public function indexAction()
     {
-        $cart = $this->manager->getCurrentCart();
+        $cart = $this->manager->getCartContext()->getCurrentCart();
 
         if ($cart->isEmpty()) {
             return $this->redirectToRoute('front.cart.index');

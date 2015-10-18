@@ -17,15 +17,7 @@
             <argument type="service" id="contact.dataset.query_builder.front"/>
             <argument type="service" id="dataset.manager"/>
             <argument type="service" id="contact.event_dispatcher"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
             <configurator service="dataset.configurator" method="configure"/>
-        </service>
-
-        <service id="contact.provider.front" class="WellCommerce\Bundle\CmsBundle\Provider\Front\ContactProvider">
-            <argument type="service" id="contact.dataset.front"/>
-            <tag name="provider" alias="contact.front"/>
         </service>
 
         <service id="contact.form_builder.front" class="WellCommerce\Bundle\CmsBundle\Form\Front\ContactFormBuilder">
@@ -36,5 +28,7 @@
                 <argument type="service" id="service_container"/>
             </call>
         </service>
+
+        <service id="contact.context.front" class="WellCommerce\Bundle\CmsBundle\Context\Front\ContactContext"/>
     </services>
 </container>

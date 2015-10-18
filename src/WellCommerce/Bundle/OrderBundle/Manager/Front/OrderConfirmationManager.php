@@ -69,7 +69,8 @@ class OrderConfirmationManager extends AbstractFrontManager
     public function saveOrder(OrderInterface $order)
     {
         $this->createResource($order);
-        $this->cartManager->abandonCart($this->getCurrentCart());
+        $cart = $this->getCartContext()->getCurrentCart();
+        $this->cartManager->abandonCart($cart);
 
         $this->getRequestHelper()->setSessionAttribute('orderId', $order->getId());
     }

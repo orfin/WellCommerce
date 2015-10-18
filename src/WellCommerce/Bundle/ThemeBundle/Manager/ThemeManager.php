@@ -12,9 +12,10 @@
 
 namespace WellCommerce\Bundle\ThemeBundle\Manager;
 
+use Doctrine\Common\Util\Debug;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
-use WellCommerce\Bundle\ThemeBundle\Entity\Theme;
+use WellCommerce\Bundle\ThemeBundle\Context\Front\ThemeContextInterface;
 use WellCommerce\Bundle\ThemeBundle\Entity\ThemeInterface;
 
 /**
@@ -25,9 +26,9 @@ use WellCommerce\Bundle\ThemeBundle\Entity\ThemeInterface;
 class ThemeManager implements ThemeManagerInterface
 {
     /**
-     * @var Theme
+     * @var ThemeContextInterface
      */
-    protected $theme;
+    protected $themeContext;
 
     /**
      * @var KernelInterface
@@ -44,10 +45,17 @@ class ThemeManager implements ThemeManagerInterface
      *
      * @param KernelInterface $kernel
      */
-    public function __construct(KernelInterface $kernel)
+    /**
+     * Constructor
+     *
+     * @param KernelInterface       $kernel
+     * @param ThemeContextInterface $themeContext
+     */
+    public function __construct(KernelInterface $kernel, ThemeContextInterface $themeContext)
     {
         $this->kernel        = $kernel;
         $this->fallBackTheme = $this->getFallBackTheme();
+        $this->themeContext  = $themeContext;
     }
 
     /**
@@ -67,7 +75,9 @@ class ThemeManager implements ThemeManagerInterface
      */
     public function getCurrentThemeFolder()
     {
-        return (null === $this->theme) ? $this->fallBackTheme : $this->theme->getFolder();
+        $folder = $this->themeContext->getCurrentThemeFolder();
+
+        return (null === $folder) ? $this->fallBackTheme : $folder;
     }
 
     /**
@@ -84,14 +94,6 @@ class ThemeManager implements ThemeManagerInterface
     public function setCurrentTheme(ThemeInterface $theme)
     {
         $this->theme = $theme;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCurrentTheme()
-    {
-        return $this->theme;
     }
 
     /**

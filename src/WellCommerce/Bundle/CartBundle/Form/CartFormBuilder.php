@@ -11,9 +11,8 @@
  */
 namespace WellCommerce\Bundle\CartBundle\Form;
 
-use Doctrine\Common\Util\Debug;
+use WellCommerce\Bundle\CartBundle\Context\Front\CartContextInterface;
 use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
-use WellCommerce\Bundle\CartBundle\Provider\CartProviderInterface;
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 use WellCommerce\Bundle\FormBundle\Elements\Optioned\RadioGroup;
@@ -34,9 +33,9 @@ class CartFormBuilder extends AbstractFormBuilder
     protected $cartShippingMethodProvider;
 
     /**
-     * @var CartProviderInterface
+     * @var CartContextInterface
      */
-    protected $cartProvider;
+    protected $cartContext;
 
     /**
      * @param CartShippingMethodProviderInterface $cartShippingMethodProvider
@@ -47,11 +46,11 @@ class CartFormBuilder extends AbstractFormBuilder
     }
 
     /**
-     * @param CartProviderInterface $cartProvider
+     * @param CartContextInterface $cartContext
      */
-    public function setCartManager(CartProviderInterface $cartProvider)
+    public function setCartContext(CartContextInterface $cartContext)
     {
-        $this->cartProvider = $cartProvider;
+        $this->cartContext = $cartContext;
     }
 
     /**
@@ -59,7 +58,7 @@ class CartFormBuilder extends AbstractFormBuilder
      */
     public function buildForm(FormInterface $form)
     {
-        $cart = $this->cartProvider->getResource();
+        $cart = $this->cartContext->getCurrentCart();
 
         $shippingMethod = $form->addChild($this->getElement('radio_group', [
             'name'        => 'shippingMethodCost',

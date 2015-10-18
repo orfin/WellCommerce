@@ -24,6 +24,7 @@
 
         <service id="theme.manager" class="WellCommerce\Bundle\ThemeBundle\Manager\ThemeManager">
             <argument type="service" id="kernel"/>
+            <argument type="service" id="theme.context.front"/>
         </service>
 
         <service id="theme.subscriber" class="WellCommerce\Bundle\ThemeBundle\EventListener\ThemeSubscriber">
@@ -82,6 +83,8 @@
                 <argument type="service" id="service_container"/>
             </call>
         </service>
+
+        <service id="theme.context.front" class="WellCommerce\Bundle\ThemeBundle\Context\Front\ThemeContext"/>
 
         <service id="theme.fields_generator" class="WellCommerce\Bundle\ThemeBundle\Generator\ThemeFieldsGenerator">
             <call method="setContainer">

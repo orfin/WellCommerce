@@ -52,6 +52,6 @@ class ShopExtension extends \Twig_Extension
 
     public function getCurrentShop()
     {
-        return $this->shopContext->getCurrentScope();
+        return $this->shopContext->getCurrentShop();
     }
 }

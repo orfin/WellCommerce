@@ -41,8 +41,8 @@ class CategoryDataSetQueryBuilder extends AbstractDataSetQueryBuilder implements
     {
         $conditions = parent::getConditions();
 
-        if (null !== $this->context && null !== $this->context->getCurrentScopeId()) {
-            $conditions->add(new Eq('shop', $this->context->getCurrentScopeId()));
+        if (null !== $this->context) {
+            $conditions->add(new Eq('shop', $this->context->getCurrentShopIdentifier()));
         }
 
         return $conditions;

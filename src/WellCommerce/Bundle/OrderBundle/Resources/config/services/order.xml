@@ -181,5 +181,7 @@
             </call>
             <tag name="kernel.event_subscriber"/>
         </service>
+
+        <service id="order.context.front" class="WellCommerce\Bundle\OrderBundle\Context\Front\OrderContext"/>
     </services>
 </container>

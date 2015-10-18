@@ -22,12 +22,4 @@ use WellCommerce\Bundle\CoreBundle\Test\AbstractTestCase;
 class CartManagerTest extends AbstractTestCase
 {
 
-    public function testGetCartProvider()
-    {
-        $manager = $this->container->get('cart.manager.front');
-        $this->assertInstanceOf(
-            'WellCommerce\Bundle\CartBundle\Provider\CartProviderInterface',
-            $manager->getCartProvider()
-        );
-    }
 }

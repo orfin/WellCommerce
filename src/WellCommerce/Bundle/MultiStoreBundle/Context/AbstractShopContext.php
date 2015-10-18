@@ -12,9 +12,7 @@
 
 namespace WellCommerce\Bundle\MultiStoreBundle\Context;
 
-use Symfony\Component\HttpFoundation\RequestStack;
-use WellCommerce\Bundle\MultiStoreBundle\Entity\Shop;
-use WellCommerce\Bundle\MultiStoreBundle\Repository\ShopRepositoryInterface;
+use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopInterface;
 
 /**
  * Class AbstractShopContext
@@ -24,103 +22,43 @@ use WellCommerce\Bundle\MultiStoreBundle\Repository\ShopRepositoryInterface;
 abstract class AbstractShopContext
 {
     /**
-     * @var RequestStack
+     * @var ShopInterface
      */
-    protected $requestStack;
+    protected $currentShop;
 
     /**
-     * @var ShopRepositoryInterface
+     * {@inheritdoc}
      */
-    protected $repository;
-
-    /**
-     * @var \WellCommerce\Bundle\MultiStoreBundle\Entity\Shop
-     */
-    protected $currentScope;
-
-    /**
-     * Constructor
-     *
-     * @param RequestStack            $requestStack
-     * @param ShopRepositoryInterface $repository
-     */
-    public function __construct(RequestStack $requestStack, ShopRepositoryInterface $repository)
+    public function setCurrentShop(ShopInterface $shop)
     {
-        $this->requestStack = $requestStack;
-        $this->repository   = $repository;
+        $this->currentShop = $shop;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getCurrentScope()
+    public function getCurrentShop()
     {
-        return $this->currentScope;
+        return $this->currentShop;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setCurrentScope(Shop $shop = null)
+    public function hasCurrentShop()
     {
-        $this->currentScope = $shop;
-        $this->setSessionVariables();
-    }
-
-    abstract public function setSessionVariables();
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasSessionPreviousData()
-    {
-        $sessionBag = $this->requestStack->getMasterRequest()->getSession();
-
-        return (bool)$sessionBag->has($this->getSessionBagNamespace());
+        return $this->currentShop instanceof ShopInterface;
     }
 
     /**
      * {@inheritdoc}
      */
-    abstract public function getSessionBagNamespace();
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCurrentScopeId()
+    public function getCurrentShopIdentifier()
     {
-        if (null === $this->requestStack->getMasterRequest()) {
-            return null;
+        if ($this->hasCurrentShop()) {
+            return $this->currentShop->getId();
         }
 
-        $sessionBag = $this->requestStack->getMasterRequest()->getSession();
-        $scope      = $sessionBag->get($this->getSessionBagNamespace());
-
-        return isset($scope['id']) ? $scope['id'] : null;
-    }
-
-    /**
-     * Determines current scope by host
-     *
-     * @param $host
-     */
-    public function determineCurrentScope($host)
-    {
-        $this->setCurrentScopeByHost($host);
-    }
-
-    /**
-     * Sets current shop scope by url
-     *
-     * @param string $host
-     */
-    public function setCurrentScopeByHost($host)
-    {
-        $shop = $this->repository->findOneBy(['url' => $host]);
-        if (null === $shop) {
-            $shop = $this->repository->findOneBy([]);
-        }
-
-        $this->setCurrentScope($shop);
+        return null;
     }
 }

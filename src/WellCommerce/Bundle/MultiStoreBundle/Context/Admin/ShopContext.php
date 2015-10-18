@@ -22,27 +22,13 @@ use WellCommerce\Bundle\MultiStoreBundle\Context\ShopContextInterface;
  */
 class ShopContext extends AbstractShopContext implements ShopContextInterface
 {
-    const SESSION_BAG_NAMESPACE = 'admin/shop';
+    const SHOP_CONTEXT_SESSION_ATTRIBUTE = 'admin/shop/id';
 
     /**
      * {@inheritdoc}
      */
-    public function getSessionBagNamespace()
+    public function getSessionAttributeName()
     {
-        return self::SESSION_BAG_NAMESPACE;
-    }
-
-    /**
-     * Stores context variables in session
-     */
-    public function setSessionVariables()
-    {
-        $sessionBag = $this->requestStack->getMasterRequest()->getSession();
-
-        $sessionBag->set(self::SESSION_BAG_NAMESPACE, [
-            'id'   => (null !== $this->currentScope) ? $this->currentScope->getId() : 0,
-            'name' => (null !== $this->currentScope) ? $this->currentScope->getName() : null,
-            'url'  => (null !== $this->currentScope) ? $this->currentScope->getUrl() : null,
-        ]);
+        return self::SHOP_CONTEXT_SESSION_ATTRIBUTE;
     }
 }
