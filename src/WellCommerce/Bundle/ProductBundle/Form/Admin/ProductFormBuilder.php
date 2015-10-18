@@ -33,7 +33,7 @@ class ProductFormBuilder extends AbstractFormBuilder
             'value_column' => 'code'
         ]);
 
-        $vatValues  = $this->get('tax.dataset.admin')->getResult('select');
+        $vatValues = $this->get('tax.dataset.admin')->getResult('select');
 
         $mainData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'main_data',
@@ -295,8 +295,8 @@ class ProductFormBuilder extends AbstractFormBuilder
             'repeat_min'   => 0,
             'repeat_max'   => ElementInterface::INFINITE,
             'transformer'  => $this->getRepositoryTransformer('product_photo_collection', $this->get('media.repository')),
-            'session_name' => $this->getRequestHelper()->getCurrentRequest()->getSession()->getName(),
-            'session_id'   => $this->getRequestHelper()->getCurrentRequest()->getSession()->getId(),
+            'session_id'   => $this->getRequestHelper()->getSessionId(),
+            'session_name' => $this->getRequestHelper()->getSessionName(),
         ]));
 
         $statusesData = $form->addChild($this->getElement('nested_fieldset', [

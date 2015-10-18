@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Bundle\ClientBundle\Tests\Controller\Admin;
 
+use Doctrine\Common\Collections\Criteria;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
 use WellCommerce\Bundle\CoreBundle\Test\Controller\Admin\AbstractAdminControllerTestCase;
 
 /**
@@ -45,15 +47,18 @@ class ClientControllerTest extends AbstractAdminControllerTestCase
 
     public function testEditAction()
     {
-        $entity  = $this->container->get('client.repository')->findOneBy([]);
-        $url     = $this->generateUrl('admin.client.edit', ['id' => $entity->getId()]);
-        $crawler = $this->client->request('GET', $url);
+        $collection = $this->container->get('client.repository')->matching(new Criteria());
 
-        $this->assertTrue($this->client->getResponse()->isSuccessful());
-        $this->assertEquals(1, $crawler->filter('html:contains("' . $this->trans('client.heading.edit') . '")')->count());
-        $this->assertEquals(0, $crawler->filter('html:contains("' . $this->jsDataGridClass . '")')->count());
-        $this->assertEquals(1, $crawler->filter('html:contains("' . $this->jsFormClass . '")')->count());
-        $this->assertEquals(1, $crawler->filter('html:contains("' . $entity->getLastName() . '")')->count());
+        $collection->map(function (ClientInterface $client) {
+            $url     = $this->generateUrl('admin.client.edit', ['id' => $client->getId()]);
+            $crawler = $this->client->request('GET', $url);
+
+            $this->assertTrue($this->client->getResponse()->isSuccessful());
+            $this->assertEquals(1, $crawler->filter('html:contains("' . $this->trans('client.heading.edit') . '")')->count());
+            $this->assertEquals(0, $crawler->filter('html:contains("' . $this->jsDataGridClass . '")')->count());
+            $this->assertEquals(1, $crawler->filter('html:contains("' . $this->jsFormClass . '")')->count());
+            $this->assertEquals(1, $crawler->filter('html:contains("' . $client->getLastName() . '")')->count());
+        });
     }
 
     public function testGridAction()

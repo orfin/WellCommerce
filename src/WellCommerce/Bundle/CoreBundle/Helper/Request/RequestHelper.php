@@ -14,8 +14,6 @@ namespace WellCommerce\Bundle\CoreBundle\Helper\Request;
 
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
-use WellCommerce\Bundle\UserBundle\Entity\UserInterface;
 
 /**
  * Class RequestHelper
@@ -37,7 +35,7 @@ class RequestHelper implements RequestHelperInterface
     /**
      * Constructor
      *
-     * @param RequestStack          $requestStack
+     * @param RequestStack $requestStack
      */
     public function __construct(RequestStack $requestStack)
     {
@@ -74,7 +72,11 @@ class RequestHelper implements RequestHelperInterface
      */
     public function getSessionAttribute($name, $default = null)
     {
-        return $this->request->getSession()->get($name, $default);
+        if (null !== $this->request && $this->request->hasSession()) {
+            return $this->request->getSession()->get($name, $default);
+        }
+
+        return $default;
     }
 
     /**
@@ -82,6 +84,10 @@ class RequestHelper implements RequestHelperInterface
      */
     public function setSessionAttribute($name, $value)
     {
+        if (null === $this->request || false === $this->request->hasSession()) {
+            throw new \LogicException('Cannot set session attributes without valid session.');
+        }
+
         return $this->request->getSession()->set($name, $value);
     }
 
@@ -90,7 +96,11 @@ class RequestHelper implements RequestHelperInterface
      */
     public function hasSessionAttribute($name)
     {
-        return $this->request->getSession()->has($name);
+        if (null !== $this->request && $this->request->hasSession()) {
+            return $this->request->getSession()->has($name);
+        }
+
+        return false;
     }
 
     /**
@@ -98,7 +108,23 @@ class RequestHelper implements RequestHelperInterface
      */
     public function getSessionId()
     {
-        return $this->request->getSession()->getId();
+        if (null !== $this->request && $this->request->hasSession()) {
+            return $this->request->getSession()->getId();
+        }
+
+        return '';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSessionName()
+    {
+        if (null !== $this->request && $this->request->hasSession()) {
+            return $this->request->getSession()->getName();
+        }
+
+        return '';
     }
 
     /**

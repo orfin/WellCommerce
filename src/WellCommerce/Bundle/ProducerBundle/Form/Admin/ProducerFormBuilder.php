@@ -89,8 +89,8 @@ class ProducerFormBuilder extends AbstractFormBuilder
             'repeat_min'   => 0,
             'repeat_max'   => 1,
             'transformer'  => $this->getRepositoryTransformer('media_entity', $this->get('media.repository')),
-            'session_name' => $this->getRequestHelper()->getCurrentRequest()->getSession()->getName(),
-            'session_id'   => $this->getRequestHelper()->getCurrentRequest()->getSession()->getId(),
+            'session_id'   => $this->getRequestHelper()->getSessionId(),
+            'session_name' => $this->getRequestHelper()->getSessionName(),
         ]));
 
         $delivererData = $form->addChild($this->getElement('nested_fieldset', [

@@ -31,11 +31,11 @@
             </call>
         </service>
 
-        <service id="client.dataset.query_builder.admin" class="WellCommerce\Bundle\ClientBundle\DataSet\ClientDataSetQueryBuilder" public="false">
+        <service id="client.dataset.query_builder.admin" class="WellCommerce\Bundle\ClientBundle\DataSet\Admin\ClientDataSetQueryBuilder" public="false">
             <argument type="service" id="client.repository"/>
         </service>
 
-        <service id="client.dataset.admin" class="WellCommerce\Bundle\ClientBundle\DataSet\ClientDataSet">
+        <service id="client.dataset.admin" class="WellCommerce\Bundle\ClientBundle\DataSet\Admin\ClientDataSet">
             <argument type="service" id="client.dataset.query_builder.admin"/>
             <argument type="service" id="dataset.manager"/>
             <argument type="service" id="client.event_dispatcher"/>

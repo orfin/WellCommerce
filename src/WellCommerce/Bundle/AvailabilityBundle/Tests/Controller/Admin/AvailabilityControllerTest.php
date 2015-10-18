@@ -12,6 +12,9 @@
 
 namespace WellCommerce\Bundle\AvailabilityBundle\Tests\Controller\Admin;
 
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\Criteria;
+use WellCommerce\Bundle\AvailabilityBundle\Entity\AvailabilityInterface;
 use WellCommerce\Bundle\CoreBundle\Test\Controller\Admin\AbstractAdminControllerTestCase;
 
 /**
@@ -45,16 +48,18 @@ class AvailabilityControllerTest extends AbstractAdminControllerTestCase
 
     public function testEditAction()
     {
-        $entity  = $this->container->get('availability.repository')->findOneBy([]);
-        $name    = $entity->translate()->getName();
-        $url     = $this->generateUrl('admin.availability.edit', ['id' => $entity->getId()]);
-        $crawler = $this->client->request('GET', $url);
+        $collection = $this->container->get('availability.repository')->matching(new Criteria());
 
-        $this->assertTrue($this->client->getResponse()->isSuccessful());
-        $this->assertEquals(1, $crawler->filter('html:contains("' . $this->trans('availability.heading.edit') . '")')->count());
-        $this->assertEquals(0, $crawler->filter('html:contains("' . $this->jsDataGridClass . '")')->count());
-        $this->assertEquals(1, $crawler->filter('html:contains("' . $this->jsFormClass . '")')->count());
-        $this->assertEquals(1, $crawler->filter('html:contains("' . $name . '")')->count());
+        $collection->map(function (AvailabilityInterface $availability) {
+            $url     = $this->generateUrl('admin.availability.edit', ['id' => $availability->getId()]);
+            $crawler = $this->client->request('GET', $url);
+
+            $this->assertTrue($this->client->getResponse()->isSuccessful());
+            $this->assertEquals(1, $crawler->filter('html:contains("' . $this->trans('availability.heading.edit') . '")')->count());
+            $this->assertEquals(0, $crawler->filter('html:contains("' . $this->jsDataGridClass . '")')->count());
+            $this->assertEquals(1, $crawler->filter('html:contains("' . $this->jsFormClass . '")')->count());
+            $this->assertEquals(1, $crawler->filter('html:contains("' . $availability->translate()->getName() . '")')->count());
+        });
     }
 
     public function testGridAction()
@@ -62,4 +67,5 @@ class AvailabilityControllerTest extends AbstractAdminControllerTestCase
         $this->client->request('GET', $this->generateUrl('admin.availability.grid'));
         $this->assertTrue($this->client->getResponse()->isRedirect($this->generateUrl('admin.availability.index', [], true)));
     }
+
 }

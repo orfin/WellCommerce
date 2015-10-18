@@ -82,7 +82,7 @@ class ClientDataGrid extends AbstractDataGrid
             'caption'    => $this->trans('admin.client.label.client_group'),
             'filter'     => new Filter([
                 'type'    => Filter::FILTER_SELECT,
-                'options' => $this->get('client_group.dataset')->getResult('select')
+                'options' => $this->get('client_group.dataset.admin')->getResult('select')
             ]),
             'appearance' => new Appearance([
                 'width' => 140,

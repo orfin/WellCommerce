@@ -72,4 +72,10 @@ abstract class AbstractTestCase extends KernelTestCase
 
         return $client;
     }
+
+    protected function tearDown()
+    {
+        parent::tearDown();
+        $this->em->getConnection()->close();
+    }
 }

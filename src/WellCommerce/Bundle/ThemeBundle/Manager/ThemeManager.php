@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\ThemeBundle\Manager;
 
-use Doctrine\Common\Util\Debug;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use WellCommerce\Bundle\ThemeBundle\Context\Front\ThemeContextInterface;
@@ -40,11 +39,6 @@ class ThemeManager implements ThemeManagerInterface
      */
     protected $fallBackTheme;
 
-    /**
-     * Constructor
-     *
-     * @param KernelInterface $kernel
-     */
     /**
      * Constructor
      *

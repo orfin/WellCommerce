@@ -95,8 +95,8 @@ class CompanyFormBuilder extends AbstractFormBuilder
             'repeat_min'   => 0,
             'repeat_max'   => 1,
             'transformer'  => $this->getRepositoryTransformer('entity', $this->get('media.repository')),
-            'session_id'   => $this->getRequestHelper()->getCurrentRequest()->getSession()->getId(),
-            'session_name' => $this->getRequestHelper()->getCurrentRequest()->getSession()->getName(),
+            'session_id'   => $this->getRequestHelper()->getSessionId(),
+            'session_name' => $this->getRequestHelper()->getSessionName(),
         ]));
 
         $form->addFilter($this->getFilter('no_code'));

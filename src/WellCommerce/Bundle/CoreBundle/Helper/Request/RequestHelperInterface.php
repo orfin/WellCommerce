@@ -56,11 +56,18 @@ interface RequestHelperInterface
     public function hasSessionAttribute($name);
 
     /**
-     * Returns the session identifier
+     * Returns the session's identifier
      *
      * @return string
      */
     public function getSessionId();
+
+    /**
+     * Returns the session's name
+     *
+     * @return string
+     */
+    public function getSessionName();
 
     /**
      * Returns the request attribute from request

@@ -12,7 +12,9 @@
 
 namespace WellCommerce\Bundle\TaxBundle\Tests\Controller\Admin;
 
+use Doctrine\Common\Collections\Criteria;
 use WellCommerce\Bundle\CoreBundle\Test\Controller\Admin\AbstractAdminControllerTestCase;
+use WellCommerce\Bundle\TaxBundle\Entity\TaxInterface;
 
 /**
  * Class TaxControllerTest
@@ -45,16 +47,18 @@ class TaxControllerTest extends AbstractAdminControllerTestCase
 
     public function testEditAction()
     {
-        $entity  = $this->container->get('tax.repository')->findOneBy([]);
-        $name    = $entity->translate()->getName();
-        $url     = $this->generateUrl('admin.tax.edit', ['id' => $entity->getId()]);
-        $crawler = $this->client->request('GET', $url);
+        $collection = $this->container->get('tax.repository')->matching(new Criteria());
 
-        $this->assertTrue($this->client->getResponse()->isSuccessful());
-        $this->assertEquals(1, $crawler->filter('html:contains("' . $this->trans('tax.heading.edit') . '")')->count());
-        $this->assertEquals(0, $crawler->filter('html:contains("' . $this->jsDataGridClass . '")')->count());
-        $this->assertEquals(1, $crawler->filter('html:contains("' . $this->jsFormClass . '")')->count());
-        $this->assertEquals(1, $crawler->filter('html:contains("' . $name . '")')->count());
+        $collection->map(function (TaxInterface $tax) {
+            $url     = $this->generateUrl('admin.tax.edit', ['id' => $tax->getId()]);
+            $crawler = $this->client->request('GET', $url);
+
+            $this->assertTrue($this->client->getResponse()->isSuccessful());
+            $this->assertEquals(1, $crawler->filter('html:contains("' . $this->trans('tax.heading.edit') . '")')->count());
+            $this->assertEquals(0, $crawler->filter('html:contains("' . $this->jsDataGridClass . '")')->count());
+            $this->assertEquals(1, $crawler->filter('html:contains("' . $this->jsFormClass . '")')->count());
+            $this->assertEquals(1, $crawler->filter('html:contains("' . $tax->translate()->getName() . '")')->count());
+        });
     }
 
     public function testGridAction()

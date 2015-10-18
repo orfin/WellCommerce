@@ -99,7 +99,7 @@ class PageFormBuilder extends AbstractFormBuilder
         $mainData->addChild($this->getElement('multi_select', [
             'name'        => 'clientGroups',
             'label'       => $this->trans('page.label.client_groups'),
-            'options'     => $this->get('client_group.dataset')->getResult('select'),
+            'options'     => $this->get('client_group.dataset.admin')->getResult('select'),
             'transformer' => $this->getRepositoryTransformer('collection', $this->get('client_group.repository'))
         ]));
     }

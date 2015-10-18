@@ -36,6 +36,14 @@ class ClientExtensionTest extends AbstractExtensionTestCase
                     'client.dataset.admin',
                     'client.datagrid',
                     'client.controller.admin',
+
+                    'client_group.repository',
+                    'client_group.factory',
+                    'client_group.event_dispatcher',
+                    'client_group.form_builder.admin',
+                    'client_group.dataset.admin',
+                    'client_group.datagrid',
+                    'client_group.controller.admin',
                 ]
             ],
         ];

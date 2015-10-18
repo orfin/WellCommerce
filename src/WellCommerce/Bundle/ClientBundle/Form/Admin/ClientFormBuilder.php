@@ -59,7 +59,7 @@ class ClientFormBuilder extends AbstractFormBuilder
         $requiredData->addChild($this->getElement('select', [
             'name'        => 'group',
             'label'       => $this->trans('client.label.client_group'),
-            'options'     => $this->get('client_group.dataset')->getResult('select'),
+            'options'     => $this->get('client_group.dataset.admin')->getResult('select'),
             'transformer' => $this->getRepositoryTransformer('entity', $this->get('client_group.repository'))
         ]));
 

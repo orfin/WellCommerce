@@ -58,4 +58,16 @@
             <option name="message">client.error.email.unique</option>
         </constraint>
     </class>
+
+    <class name="WellCommerce\Bundle\ClientBundle\Entity\ClientGroup">
+        <property name="discount">
+            <constraint name="NotBlank">
+                <option name="message">client_group.validation.error.not_blank</option>
+            </constraint>
+            <constraint name="Range">
+                <option name="min">0</option>
+                <option name="max">100</option>
+            </constraint>
+        </property>
+    </class>
 </constraint-mapping>

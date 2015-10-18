@@ -49,12 +49,12 @@
             <argument>WellCommerceCartBundle:CartProduct</argument>
         </service>
 
-        <service id="cart_product.dataset.query_builder" class="WellCommerce\Bundle\CartBundle\DataSet\CartProductDataSetQueryBuilder">
+        <service id="cart_product.dataset.query_builder" class="WellCommerce\Bundle\CartBundle\DataSet\Front\CartProductDataSetQueryBuilder">
             <argument type="service" id="cart_product.repository"/>
             <argument type="service" id="cart.context.front"/>
         </service>
 
-        <service id="cart_product.dataset" class="WellCommerce\Bundle\CartBundle\DataSet\CartProductDataSet">
+        <service id="cart_product.dataset" class="WellCommerce\Bundle\CartBundle\DataSet\Front\CartProductDataSet">
             <argument type="service" id="cart_product.dataset.query_builder"/>
             <argument type="service" id="dataset.manager"/>
             <argument type="service" id="cart_product.event_dispatcher"/>
