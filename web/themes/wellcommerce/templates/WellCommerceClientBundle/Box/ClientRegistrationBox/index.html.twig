@@ -6,14 +6,10 @@
 
     {{ macros.form_begin(form, 'signup-form') }}
 
-        {{ macros.element(form.getChildren().get('firstName')) }}
-
-        {{ macros.element(form.getChildren().get('lastName')) }}
-
-        {{ macros.element(form.getChildren().get('phone')) }}
-
-        {{ macros.element(form.getChildren().get('email')) }}
-
+        {{ macros.element(form.getChildren().get('billingAddress').getChildren().get('billingAddress.firstName')) }}
+        {{ macros.element(form.getChildren().get('billingAddress').getChildren().get('billingAddress.lastName')) }}
+        {{ macros.element(form.getChildren().get('contactDetails').getChildren().get('contactDetails.phone')) }}
+        {{ macros.element(form.getChildren().get('username')) }}
         {{ macros.element(form.getChildren().get('password')) }}
 
         <div class="alert alert-sm mtp30">

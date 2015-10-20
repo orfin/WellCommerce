@@ -28,6 +28,11 @@ use Symfony\Component\Config\FileLocatorInterface;
 class TemplatePathsCacheWarmer extends BaseTemplatePathsCacheWarmer
 {
     /**
+     * @var \WellCommerce\Bundle\ThemeBundle\Locator\TemplateLocator
+     */
+    protected $locator;
+
+    /**
      * Warms up the cache.
      *
      * @param string $cacheDir The cache directory

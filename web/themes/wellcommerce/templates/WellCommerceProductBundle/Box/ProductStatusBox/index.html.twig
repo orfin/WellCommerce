@@ -1,7 +1,5 @@
 {% if dataset.filtered > 0 %}
-
-	{% set currentPath = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
-	{% if currentPath|replace({'/app_dev.php':''}) == '/' %}
+	{% if app.request.attributes.get('_route') == 'front.home_page.index' %}
 	{% include 'WellCommerceProductBundle:Front/ProductStatus:products.html.twig' %}
 	{% else %}
 	{% include 'WellCommerceProductBundle:Front/Common:products.html.twig' %}

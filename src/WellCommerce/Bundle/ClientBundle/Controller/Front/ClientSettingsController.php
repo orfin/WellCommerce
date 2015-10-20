@@ -26,9 +26,4 @@ class ClientSettingsController extends AbstractFrontController implements FrontC
     {
         return $this->displayTemplate('index');
     }
-
-    public function viewAction()
-    {
-        return $this->displayTemplate('view');
-    }
 }

@@ -29,6 +29,7 @@ class OrderDataSet extends AbstractDataSet
     {
         $configurator->setColumns([
             'id'            => 'orders.id',
+            'client'        => 'CONCAT_WS(\' \', orders.billingAddress.firstName, orders.billingAddress.lastName)',
             'productTotal'  => 'orders.productTotal.grossAmount',
             'shippingTotal' => 'orders.shippingTotal.grossAmount',
             'orderTotal'    => 'orders.orderTotal.grossAmount',

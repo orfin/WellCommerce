@@ -6,6 +6,8 @@
     <imports>
         <import resource="admin/client.xml"/>
         <import resource="front/client.xml"/>
+        <import resource="front/client_wishlist.xml"/>
+        <import resource="front/client_settings.xml"/>
     </imports>
 
     <services>

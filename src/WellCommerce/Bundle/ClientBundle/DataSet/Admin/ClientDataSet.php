@@ -29,10 +29,10 @@ class ClientDataSet extends AbstractDataSet
     {
         $configurator->setColumns([
             'id'        => 'client.id',
-            'firstName' => 'client.firstName',
-            'lastName'  => 'client.lastName',
-            'email'     => 'client.email',
-            'phone'     => 'client.phone',
+            'firstName' => 'client.billingAddress.firstName',
+            'lastName'  => 'client.billingAddress.lastName',
+            'email'     => 'client.contactDetails.email',
+            'phone'     => 'client.contactDetails.phone',
             'groupName' => 'client_group_translation.name',
             'createdAt' => 'client.createdAt',
         ]);

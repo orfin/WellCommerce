@@ -25,7 +25,6 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationFailureHandlerI
  */
 class LoginFailureHandler implements AuthenticationFailureHandlerInterface
 {
-
     /**
      * @var RouterInterface
      */

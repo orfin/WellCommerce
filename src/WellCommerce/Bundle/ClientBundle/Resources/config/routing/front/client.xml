@@ -19,41 +19,6 @@
         <option key="allow_page_redirect">true</option>
     </route>
 
-    <route id="front.client.settings" path="/settings">
-        <default key="_controller">client.controller.front:settingsAction</default>
-        <option key="allow_page_redirect">true</option>
-    </route>
-
-    <route id="front.client_order.index" path="/order">
-        <default key="_controller">client_order.controller.front:indexAction</default>
-        <option key="allow_page_redirect">true</option>
-    </route>
-
-    <route id="front.client_order.view" path="/order/view/{id}">
-        <default key="_controller">client_order.controller.front:viewAction</default>
-        <default key="id">null</default>
-    </route>
-
-    <route id="front.client_wishlist.index" path="/wishlist">
-        <default key="_controller">client_wishlist.controller.front:indexAction</default>
-        <option key="allow_page_redirect">true</option>
-    </route>
-
-    <route id="front.client_wishlist.add" path="/wishlist/add/{id}">
-        <default key="_controller">client_wishlist.controller.front:addAction</default>
-        <option key="id">null</option>
-    </route>
-
-    <route id="front.client_wishlist.delete" path="/wishlist/delete/{id}">
-        <default key="_controller">client_wishlist.controller.front:deleteAction</default>
-        <option key="id">null</option>
-    </route>
-
-    <route id="front.client.address_book" path="/addresses">
-        <default key="_controller">client.controller.front:addressBookAction</default>
-        <option key="allow_page_redirect">true</option>
-    </route>
-
     <route id="front.client.login_check" path="/login_check" />
 
     <route id="front.client.logout" path="/logout" />

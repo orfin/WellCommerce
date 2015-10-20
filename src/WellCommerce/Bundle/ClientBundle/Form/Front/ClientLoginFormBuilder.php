@@ -28,7 +28,7 @@ class ClientLoginFormBuilder extends AbstractFormBuilder
     {
         $form->addChild($this->getElement('text_field', [
             'name'  => '_username',
-            'label' => $this->trans('common.label.email'),
+            'label' => $this->trans('common.label.username'),
         ]));
 
         $form->addChild($this->getElement('password', [

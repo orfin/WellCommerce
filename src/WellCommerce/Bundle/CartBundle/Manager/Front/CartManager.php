@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CartBundle\Manager\Front;
 
-use Doctrine\Common\Util\Debug;
 use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
 use WellCommerce\Bundle\CartBundle\Exception\AddCartItemException;
@@ -189,10 +188,26 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
         $cart->setShop($shop);
         $cart->setSessionId($sessionId);
         $cart->setCurrency($currency);
-        $cart->setClient($client);
+        $this->setCartClientData($cart, $client);
 
         $this->createResource($cart);
 
         return $cart;
+    }
+
+    /**
+     * Sets client data
+     *
+     * @param object|CartInterface $cart
+     * @param ClientInterface|null $client
+     */
+    protected function setCartClientData(CartInterface $cart, ClientInterface $client = null)
+    {
+        $cart->setClient($client);
+        if (null !== $client) {
+            $cart->setBillingAddress($client->getBillingAddress());
+            $cart->setShippingAddress($client->getShippingAddress());
+            $cart->setContactDetails($client->getContactDetails());
+        }
     }
 }

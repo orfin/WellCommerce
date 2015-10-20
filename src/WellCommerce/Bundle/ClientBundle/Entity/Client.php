@@ -15,6 +15,8 @@ use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Symfony\Component\Security\Core\User\UserInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\AddressInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\ContactDetailsTrait;
 
 /**
  * Class Client
@@ -23,9 +25,11 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class Client implements ClientInterface
 {
-    use Timestampable, Blameable, ClientAddressAwareTrait;
-
     const ROLE_CLIENT = 'ROLE_CLIENT';
+
+    use Timestampable;
+    use Blameable;
+    use ContactDetailsTrait;
 
     /**
      * @var int
@@ -40,32 +44,12 @@ class Client implements ClientInterface
     /**
      * @var string
      */
-    protected $firstName;
-
-    /**
-     * @var string
-     */
-    protected $lastName;
-
-    /**
-     * @var string
-     */
     protected $password;
 
     /**
      * @var string
      */
-    protected $email;
-
-    /**
-     * @var string
-     */
     protected $username;
-
-    /**
-     * @var string
-     */
-    protected $phone;
 
     /**
      * @var string
@@ -98,6 +82,16 @@ class Client implements ClientInterface
     protected $newsletterAccepted;
 
     /**
+     * @var AddressInterface
+     */
+    protected $billingAddress;
+
+    /**
+     * @var AddressInterface
+     */
+    protected $shippingAddress;
+
+    /**
      * @inheritDoc
      */
     public function getId()
@@ -122,30 +116,6 @@ class Client implements ClientInterface
     }
 
     /**
-     * @inheritDoc
-     */
-    public function getAddresses()
-    {
-        return $this->addresses;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function setAddresses(Collection $addresses)
-    {
-        $this->addresses = $addresses;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function addAddress(ClientAddressInterface $address)
-    {
-        $this->addresses[] = $address;
-    }
-
-    /**
      * @return ClientGroupInterface
      */
     public function getClientGroup()
@@ -159,55 +129,6 @@ class Client implements ClientInterface
     public function setClientGroup(ClientGroupInterface $clientGroup)
     {
         $this->clientGroup = $clientGroup;
-    }
-
-    /**
-     * @return string
-     */
-    public function getFirstName()
-    {
-        return $this->firstName;
-    }
-
-    /**
-     * @param string $firstName
-     */
-    public function setFirstName($firstName)
-    {
-        $this->firstName = (string)$firstName;
-    }
-
-    /**
-     * @return string
-     */
-    public function getLastName()
-    {
-        return $this->lastName;
-    }
-
-    /**
-     * @param string $lastName
-     */
-    public function setLastName($lastName)
-    {
-        $this->lastName = (string)$lastName;
-    }
-
-    /**
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function setEmail($email)
-    {
-        $this->email    = (string)$email;
-        $this->username = (string)$email;
     }
 
     /**
@@ -280,22 +201,6 @@ class Client implements ClientInterface
     /**
      * @inheritDoc
      */
-    public function getPhone()
-    {
-        return $this->phone;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function setPhone($phone)
-    {
-        $this->phone = (string)$phone;
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function serialize()
     {
         return serialize([$this->id, $this->username, $this->password]);
@@ -322,7 +227,7 @@ class Client implements ClientInterface
             return false;
         }
 
-        if ($this->email !== $user->getUsername()) {
+        if ($this->username !== $user->getUsername()) {
             return false;
         }
 
@@ -378,10 +283,34 @@ class Client implements ClientInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
-    public function setWishlist(Collection $wishlist)
+    public function getBillingAddress()
     {
-        $this->wishlist = $wishlist;
+        return $this->billingAddress;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setBillingAddress(AddressInterface $billingAddress)
+    {
+        $this->billingAddress = $billingAddress;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getShippingAddress()
+    {
+        return $this->shippingAddress;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setShippingAddress(AddressInterface $shippingAddress)
+    {
+        $this->shippingAddress = $shippingAddress;
     }
 }

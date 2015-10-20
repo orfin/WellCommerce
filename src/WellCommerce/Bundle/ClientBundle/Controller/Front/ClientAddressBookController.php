@@ -26,9 +26,4 @@ class ClientAddressBookController extends AbstractFrontController implements Fro
     {
         return $this->displayTemplate('index');
     }
-
-    public function viewAction()
-    {
-        return $this->displayTemplate('view');
-    }
 }

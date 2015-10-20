@@ -26,18 +26,23 @@ class ClientContactDetailsFormBuilder extends AbstractFormBuilder
      */
     public function buildForm(FormInterface $form)
     {
-        $form->addChild($this->getElement('text_field', [
-            'name'  => 'phone',
+        $contactDetails = $form->addChild($this->getElement('nested_fieldset', [
+            'name'  => 'contactDetails',
+            'label' => $this->trans('contact_details.heading.details'),
+        ]));
+
+        $contactDetails->addChild($this->getElement('text_field', [
+            'name'  => 'contactDetails.phone',
             'label' => $this->trans('client.label.phone'),
         ]));
 
-        $form->addChild($this->getElement('text_field', [
-            'name'  => 'secondaryPhone',
+        $contactDetails->addChild($this->getElement('text_field', [
+            'name'  => 'contactDetails.secondaryPhone',
             'label' => $this->trans('client.label.secondary_phone'),
         ]));
 
-        $form->addChild($this->getElement('text_field', [
-            'name'  => 'email',
+        $contactDetails->addChild($this->getElement('text_field', [
+            'name'  => 'contactDetails.email',
             'label' => $this->trans('client.label.email'),
         ]));
 
