@@ -89,4 +89,9 @@ interface RouterHelperInterface
      * @return string
      */
     public function generateUrl($routeName, array $routeParams = []);
+
+    /**
+     * @return \Symfony\Component\Routing\Route
+     */
+    public function getCurrentRoute();
 }

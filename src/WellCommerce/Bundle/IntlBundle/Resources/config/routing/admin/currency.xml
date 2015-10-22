@@ -6,29 +6,35 @@
 
     <route id="admin.currency.index" path="/index">
         <default key="_controller">currency.controller.admin:indexAction</default>
+        <option key="require_admin_permission">currency.index</option>
     </route>
 
     <route id="admin.currency.grid" path="/grid">
         <default key="_controller">currency.controller.admin:gridAction</default>
         <option key="expose">true</option>
+        <option key="require_admin_permission">currency.index</option>
     </route>
 
     <route id="admin.currency.add" path="/add">
         <default key="_controller">currency.controller.admin:addAction</default>
+        <option key="require_admin_permission">currency.add</option>
     </route>
 
     <route id="admin.currency.edit" path="/edit/{id}">
         <default key="_controller">currency.controller.admin:editAction</default>
         <option key="expose">true</option>
+        <option key="require_admin_permission">currency.edit</option>
     </route>
 
     <route id="admin.currency.sync" path="/sync">
         <default key="_controller">currency.controller.admin:syncExchangeRatesAction</default>
         <option key="expose">true</option>
+        <option key="require_admin_permission">currency.edit</option>
     </route>
 
     <route id="admin.currency.delete" path="/delete/{id}">
         <default key="_controller">currency.controller.admin:deleteAction</default>
         <option key="expose">true</option>
+        <option key="require_admin_permission">currency.delete</option>
     </route>
 </routes>

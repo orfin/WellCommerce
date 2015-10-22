@@ -28,7 +28,7 @@ class LocaleFormBuilder extends AbstractFormBuilder
     {
         $requiredData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'required_data',
-            'label' => $this->trans('form.label.required')
+            'label' => $this->trans('form.fieldset.required_data')
         ]));
 
         $requiredData->addChild($this->getElement('select', [
@@ -40,7 +40,7 @@ class LocaleFormBuilder extends AbstractFormBuilder
         $requiredData->addChild($this->getElement('select', [
             'name'        => 'currency',
             'label'       => $this->trans('locale.label.currency'),
-            'options'     => $this->get('currency.dataset.admin')->getResult('select'),
+            'options'     => $this->get('currency.dataset.admin')->getResult('select', [], ['label_column' => 'code']),
             'transformer' => $this->getRepositoryTransformer('entity', $this->get('currency.repository'))
         ]));
 

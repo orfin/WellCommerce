@@ -6,24 +6,29 @@
 
     <route id="admin.channel.index" path="/index">
         <default key="_controller">channel.controller.admin:indexAction</default>
+        <option key="require_admin_permission">channel.index</option>
     </route>
 
     <route id="admin.channel.grid" path="/grid">
         <default key="_controller">channel.controller.admin:gridAction</default>
         <option key="expose">true</option>
+        <option key="require_admin_permission">channel.index</option>
     </route>
 
     <route id="admin.channel.add" path="/add">
         <default key="_controller">channel.controller.admin:addAction</default>
+        <option key="require_admin_permission">channel.add</option>
     </route>
 
     <route id="admin.channel.edit" path="/edit/{id}">
         <default key="_controller">channel.controller.admin:editAction</default>
         <option key="expose">true</option>
+        <option key="require_admin_permission">channel.edit</option>
     </route>
 
     <route id="admin.channel.delete" path="/delete/{id}">
         <default key="_controller">channel.controller.admin:deleteAction</default>
         <option key="expose">true</option>
+        <option key="require_admin_permission">channel.delete</option>
     </route>
 </routes>

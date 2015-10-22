@@ -10,16 +10,16 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\UserBundle\Provider;
+namespace WellCommerce\Bundle\UserBundle\EventDispatcher;
 
-use WellCommerce\Bundle\CoreBundle\Provider\ResourceProviderInterface;
+use WellCommerce\Bundle\CoreBundle\EventDispatcher\AbstractEventDispatcher;
 
 /**
- * Interface UserProviderInterface
+ * Class UserGroupEventDispatcher
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface UserProviderInterface extends ResourceProviderInterface
+class UserGroupEventDispatcher extends AbstractEventDispatcher
 {
-
+    
 }

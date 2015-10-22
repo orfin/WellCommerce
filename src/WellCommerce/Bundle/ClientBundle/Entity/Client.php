@@ -186,6 +186,7 @@ class Client implements ClientInterface
     public function setUsername($username)
     {
         $this->username = (string)$username;
+        $this->contactDetails->setEmail((string)$username);
     }
 
     /**

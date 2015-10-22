@@ -12,12 +12,11 @@
 
 namespace WellCommerce\Bundle\UserBundle\DataFixtures\ORM;
 
-use Doctrine\Common\DataFixtures\FixtureInterface;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
 use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
-use WellCommerce\Bundle\UserBundle\Entity\Role;
-use WellCommerce\Bundle\UserBundle\Entity\User;
+use WellCommerce\Bundle\UserBundle\Entity\UserGroupInterface;
+use WellCommerce\Bundle\UserBundle\Entity\UserGroupPermission;
 
 /**
  * Class LoadUserData
@@ -36,6 +35,11 @@ class LoadUserData extends AbstractDataFixture
         $role->setRole('ROLE_ADMIN');
         $manager->persist($role);
 
+        $group = $this->container->get('user_group.factory')->create();
+        $group->setName('Administration');
+        $group->setPermissions($this->getPermissions($group));
+        $manager->persist($group);
+
         $user = $this->container->get('user.factory')->create();
         $user->setFirstName('John');
         $user->setLastName('Doe');
@@ -45,8 +49,25 @@ class LoadUserData extends AbstractDataFixture
         $password = password_hash('admin', PASSWORD_BCRYPT, ['cost' => 12]);
         $user->setPassword($password);
         $user->addRole($role);
+        $user->getGroups()->add($group);
         $manager->persist($user);
 
         $manager->flush();
+    }
+
+    protected function getPermissions(UserGroupInterface $group)
+    {
+        $collection = new ArrayCollection();
+        foreach ($this->container->get('router')->getRouteCollection()->all() as $name => $route) {
+            if ($route->hasOption('require_admin_permission')) {
+                $permission = new UserGroupPermission();
+                $permission->setEnabled(true);
+                $permission->setName($route->getOption('require_admin_permission'));
+                $permission->setGroup($group);
+                $collection->add($permission);
+            }
+        }
+
+        return $collection;
     }
 }

@@ -9,53 +9,40 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-namespace WellCommerce\Bundle\IntlBundle\EventListener;
+namespace WellCommerce\Bundle\ClientBundle\EventListener;
 
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientInterface;
+use WellCommerce\Bundle\CoreBundle\Event\ResourceEvent;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
 
 /**
- * Class CurrencySubscriber
+ * Class ClientSubscriber
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class CurrencySubscriber extends AbstractEventSubscriber
+class ClientSubscriber extends AbstractEventSubscriber
 {
-    protected $tokenStorage;
-
-    /**
-     * Constructor
-     *
-     * @param TokenStorageInterface $tokenStorage
-     */
-    public function __construct(TokenStorageInterface $tokenStorage)
-    {
-        $this->tokenStorage = $tokenStorage;
-    }
-
     public static function getSubscribedEvents()
     {
         return [
-            KernelEvents::CONTROLLER => ['onKernelController', -100],
+            'client.post_create' => ['onClientPostCreate']
         ];
     }
 
-    public function onKernelController(FilterControllerEvent $event)
+    public function onClientPostCreate(ResourceEvent $event)
     {
-        $user = $this->getSecurityHelper()->getUser();
+        $client = $event->getResource();
+        if ($client instanceof ClientInterface) {
 
-    }
-
-    protected function getCurrentClient()
-    {
-        $token = $this->tokenStorage->getToken();
-        if (null !== $token && $token->getUser() instanceof ClientInterface) {
-            return $token->getUser();
+            $this->get('mailer.helper')->sendEmail(
+                $client->getContactDetails()->getEmail(),
+                'Hello',
+                'WellCommerceClientBundle:Front/Email:register.html.twig',
+                $client
+            );
         }
-
-        return null;
     }
 }

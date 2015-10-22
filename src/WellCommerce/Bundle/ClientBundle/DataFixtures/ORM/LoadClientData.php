@@ -13,7 +13,6 @@
 namespace WellCommerce\Bundle\ClientBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use WellCommerce\Bundle\ClientBundle\Entity\Client;
 use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
 
 /**
@@ -28,15 +27,17 @@ class LoadClientData extends AbstractDataFixture
      */
     public function load(ObjectManager $manager)
     {
+        $email          = 'demo@wellcommerce.org';
         $fakerGenerator = $this->getFakerGenerator();
         $clientGroup    = $this->getReference('client_group');
-        
-        $client = $this->container->get('client.factory')->create();
-        $client->setFirstName($fakerGenerator->firstName);
-        $client->setLastName($fakerGenerator->lastName);
-        $client->setEmail('demo@wellcommerce.org');
-        $client->setPhone($fakerGenerator->phoneNumber);
+        $client         = $this->container->get('client.factory')->create();
+
+        $client->getBillingAddress()->setFirstName($fakerGenerator->firstName);
+        $client->getBillingAddress()->setLastName($fakerGenerator->lastName);
+        $client->getContactDetails()->setEmail($email);
+        $client->getContactDetails()->setPhone($fakerGenerator->phoneNumber);
         $client->setDiscount(25);
+        $client->setUsername($email);
         $client->setPassword('demo');
         $client->setConditionsAccepted(true);
         $client->setNewsletterAccepted(true);

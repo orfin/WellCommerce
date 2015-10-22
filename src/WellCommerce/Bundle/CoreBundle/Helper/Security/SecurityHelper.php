@@ -12,7 +12,10 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Helper\Security;
 
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use WellCommerce\Bundle\UserBundle\Entity\UserInterface;
+use WellCommerce\Bundle\UserBundle\Repository\UserRepositoryInterface;
 
 /**
  * Class SecurityHelper
@@ -27,17 +30,24 @@ class SecurityHelper implements SecurityHelperInterface
     protected $tokenStorage;
 
     /**
+     * @var UserRepositoryInterface
+     */
+    protected $userRepository;
+
+    /**
      * Constructor
      *
-     * @param TokenStorageInterface $tokenStorage
+     * @param TokenStorageInterface   $tokenStorage
+     * @param UserRepositoryInterface $userRepository
      */
-    public function __construct(TokenStorageInterface $tokenStorage)
+    public function __construct(TokenStorageInterface $tokenStorage, UserRepositoryInterface $userRepository)
     {
-        $this->tokenStorage = $tokenStorage;
+        $this->tokenStorage   = $tokenStorage;
+        $this->userRepository = $userRepository;
     }
 
     /**
-     * @return object|null
+     * {@inheritdoc}
      */
     public function getUser()
     {
@@ -47,5 +57,24 @@ class SecurityHelper implements SecurityHelperInterface
         }
 
         return null;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPermission($name, UserInterface $user)
+    {
+        $queryBuilder = $this->userRepository->createQueryBuilder('u');
+        $queryBuilder->select('ugp.id');
+        $queryBuilder->leftJoin('u.groups', 'ug');
+        $queryBuilder->leftJoin('ug.permissions', 'ugp');
+        $queryBuilder->where('u.id = :id');
+        $queryBuilder->andWhere('ugp.name = :name');
+        $queryBuilder->andWhere('ugp.enabled = :enabled');
+        $queryBuilder->setParameter('id', $user->getId());
+        $queryBuilder->setParameter('name', $name);
+        $queryBuilder->setParameter('enabled', 1);
+
+        return $queryBuilder->getQuery()->getResult();
     }
 }

@@ -34,6 +34,5 @@ class LocaleDataSet extends AbstractDataSet
         ]);
 
         $this->setDefaultRequestOption('order_by', 'code');
-        $this->setDefaultContextOption('label_column', 'code');
     }
 }

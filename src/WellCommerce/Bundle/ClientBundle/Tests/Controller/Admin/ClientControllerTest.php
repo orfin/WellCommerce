@@ -57,7 +57,7 @@ class ClientControllerTest extends AbstractAdminControllerTestCase
             $this->assertEquals(1, $crawler->filter('html:contains("' . $this->trans('client.heading.edit') . '")')->count());
             $this->assertEquals(0, $crawler->filter('html:contains("' . $this->jsDataGridClass . '")')->count());
             $this->assertEquals(1, $crawler->filter('html:contains("' . $this->jsFormClass . '")')->count());
-            $this->assertEquals(1, $crawler->filter('html:contains("' . $client->getLastName() . '")')->count());
+            $this->assertEquals(1, $crawler->filter('html:contains("' . $client->getBillingAddress()->getFirstName() . '")')->count());
         });
     }
 

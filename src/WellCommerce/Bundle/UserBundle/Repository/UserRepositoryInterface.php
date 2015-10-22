@@ -22,4 +22,5 @@ use WellCommerce\Bundle\CoreBundle\Repository\RepositoryInterface;
  */
 interface UserRepositoryInterface extends RepositoryInterface, UserProviderInterface
 {
+
 }

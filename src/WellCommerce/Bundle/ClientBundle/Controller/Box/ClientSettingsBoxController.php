@@ -24,16 +24,21 @@ class ClientSettingsBoxController extends AbstractBoxController
     public function indexAction()
     {
         $client             = $this->manager->getClient();
-        $contactDetailsForm = $this->manager->getForm($client);
+        $contactDetailsForm = $this->manager->getForm($client, [
+            'name'              => 'contact_details',
+            'validation_groups' => ['client_settings']
+        ]);
 
         if ($contactDetailsForm->handleRequest()->isSubmitted()) {
             if ($contactDetailsForm->isValid()) {
                 $this->manager->updateResource($client);
+
+                $this->manager->getFlashHelper()->addSuccess('client.flash.contact_details.success');
+
+                return $this->redirectToRoute('front.client_settings.index');
             }
 
-            $this->manager->getFlashHelper()->addSuccess('client.flash.contact_details.success');
-
-            return $this->redirectToRoute('front.client_settings.index');
+            $this->manager->getFlashHelper()->addError('client.flash.contact_details.error');
         }
 
         return $this->displayTemplate('index', [

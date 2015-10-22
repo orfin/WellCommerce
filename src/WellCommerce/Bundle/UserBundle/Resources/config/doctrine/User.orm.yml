@@ -68,9 +68,7 @@ WellCommerce\Bundle\UserBundle\Entity\User:
     manyToMany:
         roles:
             targetEntity: WellCommerce\Bundle\UserBundle\Entity\Role
-            cascade: {  }
             fetch: LAZY
-            mappedBy: null
             inversedBy: users
             joinTable:
                 name: user_role
@@ -84,5 +82,19 @@ WellCommerce\Bundle\UserBundle\Entity\User:
                         name: role_id
                         referencedColumnName: id
                         onDelete: CASCADE
-            orderBy: null
-    lifecycleCallbacks: {  }
+        groups:
+            targetEntity: WellCommerce\Bundle\UserBundle\Entity\UserGroup
+            fetch: LAZY
+            inversedBy: users
+            joinTable:
+                name: user_group_user
+                joinColumns:
+                    -
+                        name: user_id
+                        referencedColumnName: id
+                        onDelete: CASCADE
+                inverseJoinColumns:
+                    -
+                        name: user_group_id
+                        referencedColumnName: id
+                        onDelete: CASCADE

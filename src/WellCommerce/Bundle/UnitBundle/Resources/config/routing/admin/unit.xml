@@ -6,23 +6,28 @@
 
     <route id="admin.unit.index" path="/index">
         <default key="_controller">unit.controller.admin:indexAction</default>
+        <option key="require_admin_permission">unit.index</option>
     </route>
 
     <route id="admin.unit.grid" path="/grid">
         <default key="_controller">unit.controller.admin:gridAction</default>
         <option key="expose">true</option>
+        <option key="require_admin_permission">unit.index</option>
     </route>
 
     <route id="admin.unit.add" path="/add">
         <default key="_controller">unit.controller.admin:addAction</default>
+        <option key="require_admin_permission">unit.add</option>
     </route>
 
     <route id="admin.unit.edit" path="/edit/{id}">
         <default key="_controller">unit.controller.admin:editAction</default>
         <option key="expose">true</option>
+        <option key="require_admin_permission">unit.edit</option>
     </route>
     <route id="admin.unit.delete" path="/delete/{id}">
         <default key="_controller">unit.controller.admin:deleteAction</default>
         <option key="expose">true</option>
+        <option key="require_admin_permission">unit.delete</option>
     </route>
 </routes>

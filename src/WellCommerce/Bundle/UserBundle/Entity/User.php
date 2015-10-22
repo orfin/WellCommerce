@@ -25,7 +25,9 @@ use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\EnableableTrait;
  */
 class User implements UserInterface
 {
-    use Timestampable, Blameable, EnableableTrait;
+    use Timestampable;
+    use Blameable;
+    use EnableableTrait;
 
     /**
      * @var int
@@ -68,7 +70,12 @@ class User implements UserInterface
     protected $roles;
 
     /**
-     * @return int
+     * @var Collection
+     */
+    protected $groups;
+
+    /**
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -76,7 +83,7 @@ class User implements UserInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getFirstName()
     {
@@ -84,7 +91,7 @@ class User implements UserInterface
     }
 
     /**
-     * @param string $firstName
+     * {@inheritdoc}
      */
     public function setFirstName($firstName)
     {
@@ -92,7 +99,7 @@ class User implements UserInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getLastName()
     {
@@ -100,7 +107,7 @@ class User implements UserInterface
     }
 
     /**
-     * @param string $lastName
+     * {@inheritdoc}
      */
     public function setLastName($lastName)
     {
@@ -108,7 +115,7 @@ class User implements UserInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getUsername()
     {
@@ -116,7 +123,7 @@ class User implements UserInterface
     }
 
     /**
-     * @param string $username
+     * {@inheritdoc}
      */
     public function setUsername($username)
     {
@@ -124,7 +131,7 @@ class User implements UserInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getEmail()
     {
@@ -132,7 +139,7 @@ class User implements UserInterface
     }
 
     /**
-     * @param string $email
+     * {@inheritdoc}
      */
     public function setEmail($email)
     {
@@ -140,7 +147,7 @@ class User implements UserInterface
     }
 
     /**
-     * @param string $salt
+     * {@inheritdoc}
      */
     public function setSalt($salt)
     {
@@ -148,7 +155,7 @@ class User implements UserInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getSalt()
     {
@@ -156,7 +163,7 @@ class User implements UserInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getPassword()
     {
@@ -164,7 +171,7 @@ class User implements UserInterface
     }
 
     /**
-     * @param string $password
+     * {@inheritdoc}
      */
     public function setPassword($password)
     {
@@ -172,7 +179,7 @@ class User implements UserInterface
     }
 
     /**
-     * @return array
+     * {@inheritdoc}
      */
     public function getRoles()
     {
@@ -180,7 +187,7 @@ class User implements UserInterface
     }
 
     /**
-     * @param RoleInterface $role
+     * {@inheritdoc}
      */
     public function addRole(RoleInterface $role)
     {
@@ -188,7 +195,7 @@ class User implements UserInterface
     }
 
     /**
-     * @param Collection $roles
+     * {@inheritdoc}
      */
     public function setRoles(Collection $roles)
     {
@@ -203,7 +210,7 @@ class User implements UserInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function serialize()
     {
@@ -211,7 +218,7 @@ class User implements UserInterface
     }
 
     /**
-     * @param string $serialized
+     * {@inheritdoc}
      */
     public function unserialize($serialized)
     {
@@ -219,9 +226,7 @@ class User implements UserInterface
     }
 
     /**
-     * @param BaseUserInterface $user
-     *
-     * @return bool
+     * {@inheritdoc}
      */
     public function isEqualTo(BaseUserInterface $user)
     {
@@ -238,5 +243,21 @@ class User implements UserInterface
         }
 
         return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getGroups()
+    {
+        return $this->groups;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setGroups(Collection $groups)
+    {
+        $this->groups = $groups;
     }
 }

@@ -51,6 +51,13 @@ class UserFormBuilder extends AbstractFormBuilder
             'label' => $this->trans('user.label.email'),
         ]));
 
+        $requiredData->addChild($this->getElement('multi_select', [
+            'name'        => 'groups',
+            'label'       => $this->trans('user.label.user_group'),
+            'options'     => $this->get('user_group.dataset.admin')->getResult('select'),
+            'transformer' => $this->getRepositoryTransformer('collection', $this->get('user_group.repository')),
+        ]));
+
         $form->addFilter($this->getFilter('no_code'));
         $form->addFilter($this->getFilter('trim'));
         $form->addFilter($this->getFilter('secure'));

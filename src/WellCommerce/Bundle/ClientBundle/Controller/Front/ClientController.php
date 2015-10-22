@@ -31,9 +31,4 @@ class ClientController extends AbstractFrontController implements FrontControlle
     public function loginCheckAction(Request $request)
     {
     }
-
-    public function registerAction()
-    {
-        return $this->displayTemplate('register');
-    }
 }

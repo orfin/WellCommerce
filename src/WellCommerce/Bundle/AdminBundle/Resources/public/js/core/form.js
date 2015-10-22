@@ -19037,7 +19037,7 @@ var GFormRightsTable = GCore.ExtendClass(GFormField, function() {
 			jTr = $('<tr/>');
 			jTr.append('<th scope="row">' + gThis.m_oOptions.asControllers[i].name + '</th>');
 			for (j = 0; j < gThis.m_oOptions.asActions.length; j++) {
-				jTr.append('<td><input type="checkbox" value="1" name="' + gThis.GetName() + '[' + gThis.m_oOptions.asControllers[i].id + '][' + gThis.m_oOptions.asActions[j].id + ']"/></td>');
+				jTr.append('<td><input type="hidden" value="0" name="' + gThis.GetName() + '[' + gThis.m_oOptions.asControllers[i].id + '][' + gThis.m_oOptions.asActions[j].id + ']"/><input type="checkbox" value="1" name="' + gThis.GetName() + '[' + gThis.m_oOptions.asControllers[i].id + '][' + gThis.m_oOptions.asActions[j].id + ']"/></td>');
 			}
 			jTr.append('<td class="all"><input type="checkbox"/></td>');
 			jBody.append(jTr);

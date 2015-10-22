@@ -55,6 +55,11 @@ interface ClientInterface extends
     public function setPassword($password);
 
     /**
+     * @param string $username
+     */
+    public function setUsername($username);
+
+    /**
      * @param string $salt
      */
     public function setSalt($salt);

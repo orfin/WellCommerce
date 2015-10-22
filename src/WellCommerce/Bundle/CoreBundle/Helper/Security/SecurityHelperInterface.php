@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Bundle\CoreBundle\Helper\Security;
 
+use WellCommerce\Bundle\UserBundle\Entity\UserInterface;
+
 /**
  * Interface TranslatorHelperInterface
  *
@@ -23,4 +25,14 @@ interface SecurityHelperInterface
      * @return object|null
      */
     public function getUser();
+
+    /**
+     * Returns a permission for given type and user
+     *
+     * @param string               $name
+     * @param object|UserInterface $user
+     *
+     * @return array
+     */
+    public function getPermission($name, UserInterface $user);
 }

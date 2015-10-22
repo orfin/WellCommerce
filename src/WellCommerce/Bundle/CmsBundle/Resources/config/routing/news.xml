@@ -6,23 +6,28 @@
 
     <route id="admin.news.index" path="/index">
         <default key="_controller">news.controller.admin:indexAction</default>
+        <option key="require_admin_permission">news.index</option>
     </route>
 
     <route id="admin.news.grid" path="/grid">
         <default key="_controller">news.controller.admin:gridAction</default>
         <option key="expose">true</option>
+        <option key="require_admin_permission">news.index</option>
     </route>
 
     <route id="admin.news.add" path="/add">
         <default key="_controller">news.controller.admin:addAction</default>
+        <option key="require_admin_permission">news.add</option>
     </route>
 
     <route id="admin.news.edit" path="/edit/{id}">
         <default key="_controller">news.controller.admin:editAction</default>
         <option key="expose">true</option>
+        <option key="require_admin_permission">news.edit</option>
     </route>
     <route id="admin.news.delete" path="/delete/{id}">
         <default key="_controller">news.controller.admin:deleteAction</default>
         <option key="expose">true</option>
+        <option key="require_admin_permission">news.delete</option>
     </route>
 </routes>

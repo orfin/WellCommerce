@@ -6,24 +6,29 @@
 
     <route id="admin.product_status.index" path="/status/index">
         <default key="_controller">product_status.controller.admin:indexAction</default>
+        <option key="require_admin_permission">product_status.index</option>
     </route>
 
     <route id="admin.product_status.grid" path="/status/grid">
         <default key="_controller">product_status.controller.admin:gridAction</default>
         <option key="expose">true</option>
+        <option key="require_admin_permission">product_status.index</option>
     </route>
 
     <route id="admin.product_status.add" path="/status/add">
         <default key="_controller">product_status.controller.admin:addAction</default>
+        <option key="require_admin_permission">product_status.add</option>
     </route>
 
     <route id="admin.product_status.edit" path="/status/edit/{id}">
         <default key="_controller">product_status.controller.admin:editAction</default>
         <option key="expose">true</option>
+        <option key="require_admin_permission">product_status.edit</option>
     </route>
 
     <route id="admin.product_status.delete" path="/status/delete/{id}">
         <default key="_controller">product_status.controller.admin:deleteAction</default>
         <option key="expose">true</option>
+        <option key="require_admin_permission">product_status.delete</option>
     </route>
 </routes>

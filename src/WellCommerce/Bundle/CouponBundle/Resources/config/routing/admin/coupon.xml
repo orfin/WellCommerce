@@ -6,23 +6,29 @@
 
     <route id="admin.coupon.index" path="/index">
         <default key="_controller">coupon.controller.admin:indexAction</default>
+        <option key="require_admin_permission">coupon.index</option>
     </route>
 
     <route id="admin.coupon.grid" path="/grid">
         <default key="_controller">coupon.controller.admin:gridAction</default>
         <option key="expose">true</option>
+        <option key="require_admin_permission">coupon.index</option>
     </route>
 
     <route id="admin.coupon.add" path="/add">
         <default key="_controller">coupon.controller.admin:addAction</default>
+        <option key="require_admin_permission">coupon.add</option>
     </route>
 
     <route id="admin.coupon.edit" path="/edit/{id}">
         <default key="_controller">coupon.controller.admin:editAction</default>
         <option key="expose">true</option>
+        <option key="require_admin_permission">coupon.edit</option>
     </route>
+
     <route id="admin.coupon.delete" path="/delete/{id}">
         <default key="_controller">coupon.controller.admin:deleteAction</default>
         <option key="expose">true</option>
+        <option key="require_admin_permission">coupon.delete</option>
     </route>
 </routes>

@@ -6,5 +6,6 @@
 
     <route id="admin.dashboard.index" path="/index">
         <default key="_controller">dashboard.controller.admin:indexAction</default>
+        <option key="require_admin_permission">dashboard.index</option>
     </route>
 </routes>

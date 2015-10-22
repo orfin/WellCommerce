@@ -31,6 +31,7 @@ class UserFactory extends AbstractFactory
         $user = new User();
         $user->setEnabled(true);
         $user->setRoles(new ArrayCollection());
+        $user->setGroups(new ArrayCollection());
         $user->setSalt(base_convert(sha1(uniqid(mt_rand(), true)), 16, 36));
         $user->setCreatedAt(new \DateTime());
 

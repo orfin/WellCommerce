@@ -84,4 +84,9 @@ class UserController extends AbstractAdminController
 
         return $this->jsonResponse(['success' => true]);
     }
+
+    public function accessDeniedAction()
+    {
+        return $this->displayTemplate('access_denied');
+    }
 }

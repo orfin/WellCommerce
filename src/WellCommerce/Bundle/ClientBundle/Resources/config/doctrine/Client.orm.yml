@@ -20,7 +20,7 @@ WellCommerce\Bundle\ClientBundle\Entity\Client:
     fields:
         discount:
             type: decimal
-            scale: 4
+            scale: 2
             nullable: false
             precision: 15
         password:

@@ -91,6 +91,15 @@
     </item>
 
     <item>
+        <identifier>user_group</identifier>
+        <css_class/>
+        <name>user_group</name>
+        <route_name>admin.user_group.index</route_name>
+        <parent>user_management</parent>
+        <hierarchy>20</hierarchy>
+    </item>
+
+    <item>
         <identifier>payment_method</identifier>
         <css_class/>
         <name>payment_method</name>
