@@ -2,62 +2,64 @@
 
 <div class="product-details">
     <div class="row">
-        <div class="col-lg-4 text-center">
-            {% set productPhotos = product.getProductPhotos() %}
+        <div class="col-md-9 col-xs-12">
+	        <div class="col-sm-5 col-xs-12 text-center">
+		            {% set productPhotos = product.getProductPhotos() %}
 
-            {% for photo in product.productPhotos if photo.mainPhoto == 1 %}
-                <a href="#" class="mainphoto"><img src="{{ image(photo.photo.path, 'large') }}" /></a>
-            {% endfor %}
+					{% for photo in product.productPhotos if photo.mainPhoto == 1 %}
+	                <a href="#" class="mainphoto"><img src="{{ image(photo.photo.path, 'large') }}" /></a>
+					{% endfor %}
 
-            <div class="thumbnails">
-                {% for photo in product.productPhotos if photo.mainPhoto == 0 %}
-                    <a href="#"><img src="{{ image(photo.photo.path, 'large') }}" /></a>
-                {% endfor %}
-            </div>
+		            <div class="thumbnails">
+		                {% for photo in product.productPhotos if photo.mainPhoto == 0 %}
+		                    <a href="#"><img src="{{ image(photo.photo.path, 'large') }}" /></a>
+		                {% endfor %}
+		            </div>
+	        </div>
+	        <div class="col-sm-7 col-xs-12">
+	            <div class="description">
+	                <div class="controls clearfix">
+	                    <a href="#" class="pull-left coming-soon">Previous product</a>
+	                    <a href="#" class="pull-right coming-soon">Next product</a>
+	                </div>
+
+	                <h1>{{ product.translate().name }}</h1>
+
+	                <div class="reviews">
+	                    <div class="stars rat rat3">
+	                        <img src="{{ asset('themes/wellcommerce/assets/img/star-on.png') }}" />
+	                        <img src="{{ asset('themes/wellcommerce/assets/img/star-on.png') }}" />
+	                        <img src="{{ asset('themes/wellcommerce/assets/img/star-on.png') }}" />
+	                        <img src="{{ asset('themes/wellcommerce/assets/img/star-on.png') }}" />
+	                        <img src="{{ asset('themes/wellcommerce/assets/img/star-on.png') }}" />
+	                    </div>
+
+	                    <span>4.3 / see 12 reviews</span>
+	                </div>
+
+	                <p>{{ product.translate().shortDescription|striptags }}</p>
+
+	                <div class="row">
+	                    <div class="col-sm-6 col-xs-6">
+	                        <div class="delivery-info">
+	                            <h5>{% trans %}product.label.shipping_cost{% endtrans %}</h5>
+	                            {% for shipping in shippingCosts %}
+	                            <span>{{ shipping.shippingMethod.translate().name }} {{ format_price(shipping.cost.grossAmount, shipping.cost.currency) }}</span>
+	                            {% endfor %}
+	                        </div>
+	                    </div>
+	                    <div class="col-md-4 col-sm-5 col-xs-6 col-lg-offset-2 col-md-offset-2 col-sm-offset-1">
+	                        <div class="producer">
+	                            <h5>Producer</h5>
+
+	                            <a href="{{ path('dynamic_' ~ product.getProducer().translate.getRoute().getId()) }}"><img src="{{ asset('themes/wellcommerce/assets/prod/producer.png') }}" /></a>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
         </div>
-        <div class="col-lg-5">
-            <div class="description">
-                <div class="controls clearfix">
-                    <a href="#" class="pull-left coming-soon">Previous product</a>
-                    <a href="#" class="pull-right coming-soon">Next product</a>
-                </div>
-
-                <h1>{{ product.translate().name }}</h1>
-
-                <div class="reviews">
-                    <div class="stars rat rat3">
-                        <img src="{{ asset('themes/wellcommerce/assets/img/star-on.png') }}" />
-                        <img src="{{ asset('themes/wellcommerce/assets/img/star-on.png') }}" />
-                        <img src="{{ asset('themes/wellcommerce/assets/img/star-on.png') }}" />
-                        <img src="{{ asset('themes/wellcommerce/assets/img/star-on.png') }}" />
-                        <img src="{{ asset('themes/wellcommerce/assets/img/star-on.png') }}" />
-                    </div>
-
-                    <span>4.3 / see 12 reviews</span>
-                </div>
-
-                <p>{{ product.translate().shortDescription|striptags }}</p>
-
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="delivery-info">
-                            <h5>{% trans %}product.label.shipping_cost{% endtrans %}</h5>
-                            {% for shipping in shippingCosts %}
-                            <span>{{ shipping.shippingMethod.translate().name }} {{ format_price(shipping.cost.grossAmount, shipping.cost.currency) }}</span>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-lg-offset-2">
-                        <div class="producer">
-                            <h5>Producer</h5>
-
-                            <a href="{{ path('dynamic_' ~ product.getProducer().translate.getRoute().getId()) }}"><img src="{{ asset('themes/wellcommerce/assets/prod/producer.png') }}" /></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3">
+        <div class="col-md-3 col-xs-12">
             <div class="add-to-cart">
                 {% if product.sellPrice.isDiscountValid() %}
                     <span class="price promo">
@@ -94,7 +96,7 @@
 
 <div class="product-description">
     <div class="row">
-        <div class="col-lg-9">
+        <div class="col-md-9 col-xs-12">
             <div class="description-block">
                 <h2>Description</h2>
                 <p>{{ product.translate().description }}</p>
@@ -110,7 +112,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-3">
+        <div class="col-md-3 hidden-sm hidden-xs">
             {% include 'WellCommerceCmsBundle:Front/Common:sidebar_contact.html.twig' %}
         </div>
     </div>

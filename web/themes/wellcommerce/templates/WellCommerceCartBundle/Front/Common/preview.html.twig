@@ -1,7 +1,7 @@
 {% trans_default_domain "wellcommerce" %}
 
-<li class="dropdown">
-    <a href="{{ path('front.cart.index') }}" class="dropdown-toggle cartQty" {% if false == cart.isEmpty %}data-toggle="dropdown"{% endif %} role="button" aria-expanded="true">
+<li class="dropdown" id="cart-preview">
+    <a href="{{ path('front.cart.index') }}" class="dropdown-toggle cartQty" data-target="#" {% if false == cart.isEmpty %}data-toggle="dropdown"{% endif %} role="button" aria-expanded="true">
         Cart<span class="cart-qty">{{ cart.getTotals().getQuantity()|number_format }}</span>
     </a>
     {% if false == cart.isEmpty %}
@@ -11,8 +11,8 @@
                 <tbody>
                 {% for item in cartProducts %}
                 <tr>
-                    <td>
-                        <a href="{{ path('front.cart.delete',{"id": item.id }) }}" class="delete">
+                	<td>
+                        <a href="{{ path('front.cart.delete',{"id": item.id }) }}" class="delete" title="Remove item">
                             <img src="{{ asset('themes/wellcommerce/assets/img/delete-ico.png') }}"/>
                         </a>
                     </td>
@@ -20,7 +20,7 @@
                         <a href="{{ item.route }}">{{ item.name }}</a>
                     </td>
                     <td>
-                        <input type="text" value="{{ item.quantity|number_format(0) }}" class="text-center">
+						{{ item.quantity|number_format(0) }}
                     </td>
                     <td class="text-right">
                         {% if item.isDiscountValid == 1 %}

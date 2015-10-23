@@ -4,8 +4,8 @@
     <input type="hidden" id="attribute" value="0"/>
     {% for group in attributeGroups %}
         <div class="form-group">
-            <label for="size" class="col-lg-5 control-label">{{ group.name }}</label>
-            <div class="col-lg-7">
+            <label class="col-md-4 col-sm-3 control-label">{{ group.name }}</label>
+            <div class="col-md-8 col-sm-9">
                 <select class="form-control attribute">
                     {% for valueId, valueName in group.values %}
                         <option value="{{ valueId }}">{{ valueName }}</option>
@@ -15,9 +15,9 @@
         </div>
     {% endfor %}
     <div class="form-group">
-        <label for="quantity" class="col-lg-5 control-label">{% trans %}product.label.quantity{% endtrans %}</label>
-        <div class="col-lg-7">
-            <input type="text" id="quantity" class="form-control" value="1" />
+        <label for="quantity" class="col-md-4 col-sm-3 control-label">{% trans %}product.label.quantity{% endtrans %}</label>
+        <div class="col-md-8 col-sm-9">
+            <input type="number" id="quantity" class="form-control" value="1" />
         </div>
     </div>
     <button class="btn btn-primary btn-block text-left" id="add-cart">{% trans %}cart.button.add{% endtrans %}<img src="{{ asset('themes/wellcommerce/assets/img/add-to-cart.png') }}" class="pull-right" /></button>

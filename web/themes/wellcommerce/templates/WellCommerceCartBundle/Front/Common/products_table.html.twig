@@ -30,7 +30,7 @@
                     {% endif %}
                 </td>
                 <td class="text-center">
-                    <input type="text" class="form-control quantity-spinner" value="{{ item.quantity }}" data-id="{{ item.id }}"/>
+                    <input type="number" class="form-control quantity-spinner" value="{{ item.quantity }}" data-id="{{ item.id }}"/>
                 </td>
                 <td class="text-center">
                     {% if item.isDiscountValid == 1 %}
