@@ -12,8 +12,9 @@
 
 namespace WellCommerce\Bundle\PaymentBundle\DataFixtures\ORM;
 
-use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
+use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod;
 
 /**
@@ -21,18 +22,23 @@ use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethod;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class LoadPaymentMethodData implements FixtureInterface
+class LoadPaymentMethodData extends AbstractDataFixture
 {
     /**
      * {@inheritDoc}
      */
     public function load(ObjectManager $manager)
     {
+        $shippingMethods = new ArrayCollection();
+        $shippingMethods->add($this->getReference('shipping_method_fedex'));
+        $shippingMethods->add($this->getReference('shipping_method_ups'));
+
         $cod = new PaymentMethod();
         $cod->setEnabled(1);
         $cod->setHierarchy(0);
         $cod->setProcessor('cod');
         $cod->translate('en')->setName('Cash on delivery');
+        $cod->setShippingMethods($shippingMethods);
         $cod->mergeNewTranslations();
         $manager->persist($cod);
 
@@ -41,6 +47,7 @@ class LoadPaymentMethodData implements FixtureInterface
         $bankTransfer->setHierarchy(0);
         $bankTransfer->setProcessor('bank_transfer');
         $bankTransfer->translate('en')->setName('Bank transfer');
+        $cod->setShippingMethods($shippingMethods);
         $bankTransfer->mergeNewTranslations();
         $manager->persist($bankTransfer);
 

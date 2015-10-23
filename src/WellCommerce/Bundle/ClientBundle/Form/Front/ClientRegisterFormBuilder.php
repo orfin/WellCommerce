@@ -28,37 +28,37 @@ class ClientRegisterFormBuilder extends AbstractFormBuilder
     {
         $billingAddress = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'billingAddress',
-            'label' => $this->trans('address.heading.billing_address'),
+            'label' => $this->trans('client.heading.billing_address'),
         ]));
 
         $billingAddress->addChild($this->getElement('text_field', [
             'name'  => 'billingAddress.firstName',
-            'label' => $this->trans('address.label.first_name'),
+            'label' => $this->trans('client.label.address.first_name'),
         ]));
 
         $billingAddress->addChild($this->getElement('text_field', [
             'name'  => 'billingAddress.lastName',
-            'label' => $this->trans('address.label.last_name'),
+            'label' => $this->trans('client.label.address.last_name'),
         ]));
 
         $contactDetails = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'contactDetails',
-            'label' => $this->trans('contact_details.heading.details'),
+            'label' => $this->trans('client.heading.contact_details'),
         ]));
 
         $contactDetails->addChild($this->getElement('text_field', [
             'name'  => 'contactDetails.phone',
-            'label' => $this->trans('contact_details.label.phone'),
+            'label' => $this->trans('client.label.contact_details.phone'),
         ]));
 
         $form->addChild($this->getElement('text_field', [
             'name'  => 'username',
-            'label' => $this->trans('contact_details.label.username'),
+            'label' => $this->trans('client.label.username'),
         ]));
 
         $form->addChild($this->getElement('password', [
             'name'  => 'password',
-            'label' => $this->trans('common.label.password'),
+            'label' => $this->trans('client.label.password'),
         ]));
 
         $form->addChild($this->getElement('checkbox', [

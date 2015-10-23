@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\AdminBundle\EventListener;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
+use WellCommerce\Bundle\UserBundle\Entity\UserInterface;
 
 /**
  * Class AdminSubscriber
@@ -31,13 +32,15 @@ class AdminSubscriber extends AbstractEventSubscriber
 
     public function onKernelController(FilterControllerEvent $event)
     {
-        $user  = $this->getUser();
-        $route = $this->getRouterHelper()->getCurrentRoute();
-        if ($route->hasOption('require_admin_permission')) {
-            $name       = $route->getOption('require_admin_permission');
-            $permission = $this->getSecurityHelper()->getPermission($name, $user);
-            if (empty($permission)) {
-                $event->setController([$this->get('user.controller.admin'), 'accessDeniedAction']);
+        $user = $this->getUser();
+        if ($user instanceof UserInterface) {
+            $route = $this->getRouterHelper()->getCurrentRoute();
+            if ($route->hasOption('require_admin_permission')) {
+                $name       = $route->getOption('require_admin_permission');
+                $permission = $this->getSecurityHelper()->getPermission($name, $user);
+                if (empty($permission)) {
+                    $event->setController([$this->get('user.controller.admin'), 'accessDeniedAction']);
+                }
             }
         }
     }

@@ -28,22 +28,22 @@ class ClientContactDetailsFormBuilder extends AbstractFormBuilder
     {
         $contactDetails = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'contactDetails',
-            'label' => $this->trans('contact_details.heading.details'),
+            'label' => $this->trans('client.heading.contact_details'),
         ]));
 
         $contactDetails->addChild($this->getElement('text_field', [
             'name'  => 'contactDetails.phone',
-            'label' => $this->trans('client.label.phone'),
+            'label' => $this->trans('client.label.contact_details.phone'),
         ]));
 
         $contactDetails->addChild($this->getElement('text_field', [
             'name'  => 'contactDetails.secondaryPhone',
-            'label' => $this->trans('client.label.secondary_phone'),
+            'label' => $this->trans('client.label.contact_details.secondary_phone'),
         ]));
 
         $contactDetails->addChild($this->getElement('text_field', [
             'name'  => 'contactDetails.email',
-            'label' => $this->trans('client.label.email'),
+            'label' => $this->trans('client.label.contact_details.email'),
         ]));
 
         $form->addFilter($this->getFilter('no_code'));

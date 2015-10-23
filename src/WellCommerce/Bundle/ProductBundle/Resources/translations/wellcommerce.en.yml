@@ -1,4 +1,23 @@
+# WellCommerce Open-Source E-Commerce Platform
+#
+# This file is part of the WellCommerce package.
+# (c) Adam Piotrowski <adam@wellcommerce.org>
+#
+# For the full copyright and license information,
+# please view the LICENSE file that was distributed with this source code.
+
 product:
+    form:
+        fieldset:
+            general: General
+            meta: Meta
+            categories: Categories
+            prices: Prices
+            stock: Stock settings
+            photos: Photos
+            statuses: Statuses
+            attributes: Variants
+            shops: Shops
     comment:
         enabled: Enable product's visibility
     heading:
@@ -20,6 +39,11 @@ product:
         shipping_cost: Shipping costs
         availability: Product's availability
         quantity: Quantity
+        unit: Unit
+        dimension:
+            width: Width
+            height: Height
+            depth: Depth
     heading:
         recommendations: 'You might also like'
     options:

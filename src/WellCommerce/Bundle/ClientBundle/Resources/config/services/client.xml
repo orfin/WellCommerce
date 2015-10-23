@@ -9,6 +9,7 @@
         <import resource="front/client_wishlist.xml"/>
         <import resource="front/client_settings.xml"/>
         <import resource="front/client_registration.xml"/>
+        <import resource="front/client_address_book.xml"/>
     </imports>
 
     <services>

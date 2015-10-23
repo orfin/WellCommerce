@@ -25,21 +25,22 @@ class ClientTest extends AbstractEntityTestCase
     public function testNewEntityFailsValidation()
     {
         $entity = new Client();
-        $errors = $this->validator->validate($entity);
+        $errors = $this->validator->validate($entity, null, ['registration']);
         $this->assertFalse(0 === count($errors));
     }
 
     public function testNewEntityPassesValidation()
     {
-        $entity = new Client();
+        $entity = $this->container->get('client.factory')->create();
         $entity->setConditionsAccepted(true);
         $entity->setDiscount(0);
-        $entity->setEmail('foo@bar.com');
-        $entity->setFirstName('John');
-        $entity->setLastName('Doe');
-        $entity->setPhone('555666777');
+        $entity->getContactDetails()->setEmail('foo@bar.com');
+        $entity->getBillingAddress()->setFirstName('John');
+        $entity->getBillingAddress()->setLastName('Doe');
+        $entity->getContactDetails()->setPhone('555666777');
+        $entity->setUsername('foo@bar.com');
         $entity->setPassword('password');
-        $errors = $this->validator->validate($entity);
+        $errors = $this->validator->validate($entity, null, ['registration']);
         $this->assertEquals(0, count($errors));
     }
 }

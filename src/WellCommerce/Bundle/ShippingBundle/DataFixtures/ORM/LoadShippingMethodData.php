@@ -12,9 +12,13 @@
 
 namespace WellCommerce\Bundle\ShippingBundle\DataFixtures\ORM;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
 use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
+use WellCommerce\Bundle\CoreBundle\Entity\Price;
 use WellCommerce\Bundle\IntlBundle\DataFixtures\ORM\LoadCurrencyData;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCost;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
 use WellCommerce\Bundle\TaxBundle\DataFixtures\ORM\LoadTaxData;
 
 /**
@@ -29,9 +33,9 @@ class LoadShippingMethodData extends AbstractDataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $tax      = $this->randomizeSamples('tax', LoadTaxData::$samples);
-        $currency = $this->randomizeSamples('currency', LoadCurrencyData::$samples);
-        $factory  = $this->container->get('shipping_method.factory');
+        $tax             = $this->randomizeSamples('tax', LoadTaxData::$samples);
+        $currency        = $this->randomizeSamples('currency', LoadCurrencyData::$samples);
+        $factory         = $this->container->get('shipping_method.factory');
 
         $fedEx = $factory->create();
         $fedEx->setCalculator('price_table');
@@ -39,6 +43,7 @@ class LoadShippingMethodData extends AbstractDataFixture
         $fedEx->setCurrency($currency);
         $fedEx->translate('en')->setName('FedEx');
         $fedEx->mergeNewTranslations();
+        $fedEx->setCosts($this->getShippingCostsCollection($fedEx));
         $manager->persist($fedEx);
 
         $ups = $factory->create();
@@ -47,8 +52,34 @@ class LoadShippingMethodData extends AbstractDataFixture
         $ups->setCurrency($currency);
         $ups->translate('en')->setName('UPS');
         $ups->mergeNewTranslations();
+        $ups->setCosts($this->getShippingCostsCollection($ups));
         $manager->persist($ups);
 
         $manager->flush();
+
+        $this->setReference('shipping_method_fedex', $fedEx);
+        $this->setReference('shipping_method_ups', $ups);
+    }
+
+    protected function getShippingCostsCollection(ShippingMethodInterface $shippingMethod)
+    {
+        $collection = new ArrayCollection();
+
+        $cost = new ShippingMethodCost();
+        $cost->setRangeFrom(0);
+        $cost->setRangeTo(100000);
+
+        $price = new Price();
+        $price->setCurrency('EUR');
+        $price->setNetAmount(10);
+        $price->setTaxAmount(2.3);
+        $price->setTaxRate(23);
+        $price->setGrossAmount(12.3);
+
+        $cost->setCost($price);
+        $cost->setShippingMethod($shippingMethod);
+        $collection->add($cost);
+
+        return $collection;
     }
 }

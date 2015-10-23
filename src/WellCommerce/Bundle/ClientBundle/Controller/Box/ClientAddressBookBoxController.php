@@ -23,6 +23,26 @@ class ClientAddressBookBoxController extends AbstractBoxController
 {
     public function indexAction()
     {
-        return $this->displayTemplate('index');
+        $client          = $this->manager->getClient();
+        $addressBookForm = $this->manager->getForm($client, [
+            'name'              => 'address_book',
+            'validation_groups' => ['address_book']
+        ]);
+
+        if ($addressBookForm->handleRequest()->isSubmitted()) {
+            if ($addressBookForm->isValid()) {
+                $this->manager->updateResource($client);
+
+                $this->manager->getFlashHelper()->addSuccess('client.flash.address_book.success');
+
+                return $this->redirectToRoute('front.client_address_book.index');
+            }
+
+            $this->manager->getFlashHelper()->addError('client.flash.contact_details.error');
+        }
+
+        return $this->displayTemplate('index', [
+            'addressBookForm' => $addressBookForm,
+        ]);
     }
 }

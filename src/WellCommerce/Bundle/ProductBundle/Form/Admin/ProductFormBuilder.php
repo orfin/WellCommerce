@@ -37,7 +37,7 @@ class ProductFormBuilder extends AbstractFormBuilder
 
         $mainData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'main_data',
-            'label' => $this->trans('admin.form.label.main_data')
+            'label' => $this->trans('product.form.fieldset.general')
         ]));
 
         $languageData = $mainData->addChild($this->getElement('language_fieldset', [
@@ -80,7 +80,7 @@ class ProductFormBuilder extends AbstractFormBuilder
 
         $metaData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'meta_data',
-            'label' => $this->trans('meta.fieldset.name')
+            'label' => $this->trans('product.form.fieldset.meta')
         ]));
 
         $languageData = $metaData->addChild($this->getElement('language_fieldset', [
@@ -106,7 +106,7 @@ class ProductFormBuilder extends AbstractFormBuilder
 
         $categoryPane = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'category_pane',
-            'label' => $this->trans('fieldset.categories.label')
+            'label' => $this->trans('product.form.fieldset.categories')
         ]));
 
         $categoriesField = $categoryPane->addChild($this->getElement('tree', [
@@ -122,7 +122,7 @@ class ProductFormBuilder extends AbstractFormBuilder
 
         $pricePane = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'price_pane',
-            'label' => $this->trans('form.fieldset.prices')
+            'label' => $this->trans('product.form.fieldset.prices')
         ]));
 
         $buyPriceSettings = $pricePane->addChild($this->getElement('nested_fieldset', [
@@ -210,7 +210,7 @@ class ProductFormBuilder extends AbstractFormBuilder
 
         $stockData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'stock_data',
-            'label' => $this->trans('product.label.stock.settings')
+            'label' => $this->trans('product.form.fieldset.stock')
         ]));
 
         $stockData->addChild($this->getElement('text_field', [
@@ -284,7 +284,7 @@ class ProductFormBuilder extends AbstractFormBuilder
 
         $mediaData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'media_data',
-            'label' => $this->trans('product.label.product_photos')
+            'label' => $this->trans('product.form.fieldset.photos')
         ]));
 
         $mediaData->addChild($this->getElement('image', [
@@ -313,7 +313,7 @@ class ProductFormBuilder extends AbstractFormBuilder
 
         $attributesData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'attributes_data',
-            'label' => $this->trans('product.label.attributes')
+            'label' => $this->trans('product.form.fieldset.attributes')
         ]));
 
         $attributesData->addChild($this->getElement('product_variants_editor', [
@@ -332,7 +332,7 @@ class ProductFormBuilder extends AbstractFormBuilder
 
         $shopsData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'shops_data',
-            'label' => $this->trans('shop.label.shops')
+            'label' => $this->trans('product.form.fieldset.shops')
         ]));
 
         $shopsData->addChild($this->getElement('multi_select', [

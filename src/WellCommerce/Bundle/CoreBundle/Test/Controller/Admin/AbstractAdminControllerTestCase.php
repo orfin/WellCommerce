@@ -34,15 +34,19 @@ class AbstractAdminControllerTestCase extends AbstractTestCase
 
     protected function logIn()
     {
+        $user     = $this->container->get('user.repository')->findOneBy([]);
         $session  = $this->client->getContainer()->get('session');
         $firewall = 'admin';
         $token    = new UsernamePasswordToken('admin', 'admin', $firewall, ['ROLE_ADMIN']);
+        $token->setUser($user);
 
         $session->set('_security_' . $firewall, serialize($token));
         $session->save();
 
         $cookie = new Cookie($session->getName(), $session->getId());
         $this->client->getCookieJar()->set($cookie);
+
+        $this->container->get('security.token_storage')->setToken($token);
     }
 
     /**

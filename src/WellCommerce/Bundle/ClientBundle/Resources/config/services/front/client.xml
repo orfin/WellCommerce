@@ -27,13 +27,6 @@
             </call>
         </service>
 
-        <service id="client_address_book.controller.front" class="WellCommerce\Bundle\ClientBundle\Controller\Front\ClientAddressBookController">
-            <argument type="service" id="client.manager.front"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
-
         <service id="client_login.form_builder.front" class="WellCommerce\Bundle\ClientBundle\Form\Front\ClientLoginFormBuilder">
             <argument type="service" id="form.resolver.factory"/>
             <argument type="service" id="form.handler"/>
@@ -53,20 +46,6 @@
         <service id="client_login.layout_box.configurator" class="WellCommerce\Bundle\ClientBundle\Layout\ClientLoginBoxConfigurator">
             <argument>ClientLogin</argument>
             <argument>client_login.layout_box.controller</argument>
-            <argument type="service" id="translator.helper"/>
-            <tag name="layout_box.configurator" />
-        </service>
-
-        <service id="client_address_book.layout_box.controller" class="WellCommerce\Bundle\ClientBundle\Controller\Box\ClientAddressBookBoxController">
-            <argument type="service" id="client.manager.front"/>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
-
-        <service id="client_address_book.layout_box.configurator" class="WellCommerce\Bundle\ClientBundle\Layout\ClientAddressBookBoxConfigurator">
-            <argument>ClientAddressBook</argument>
-            <argument>client_address_book.layout_box.controller</argument>
             <argument type="service" id="translator.helper"/>
             <tag name="layout_box.configurator" />
         </service>

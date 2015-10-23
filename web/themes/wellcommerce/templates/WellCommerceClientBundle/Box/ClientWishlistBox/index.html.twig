@@ -1,3 +1,13 @@
+{% trans_default_domain "wellcommerce" %}
+<div class="well-form mbt60">
+    <h4>{% trans %}client.heading.wishlist{% endtrans %}</h4>
+    {% if dataset is empty %}
+        <div class="alert alert-info" role="alert">
+            {% trans %}client.notice.empty_wishlist{% endtrans %}
+        </div>
+    {% endif %}
+</div>
+
 <div class="products-list">
     {% for item in dataset %}
     <div class="item">
