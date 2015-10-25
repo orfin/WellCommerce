@@ -9,13 +9,13 @@ WellCommerce\Bundle\ClientBundle\Entity\Client:
                 strategy: AUTO
     embedded:
         billingAddress:
-            class: WellCommerce\Bundle\CoreBundle\Entity\Address
+            class: WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddress
             columnPrefix: billing_address_
         shippingAddress:
-            class: WellCommerce\Bundle\CoreBundle\Entity\Address
+            class: WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddress
             columnPrefix: shipping_address_
         contactDetails:
-            class: WellCommerce\Bundle\CoreBundle\Entity\ContactDetails
+            class: WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetails
             columnPrefix: contact_details_
     fields:
         discount:

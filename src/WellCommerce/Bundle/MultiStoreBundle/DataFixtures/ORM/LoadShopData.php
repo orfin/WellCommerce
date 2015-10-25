@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\ThemeBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
+use WellCommerce\Bundle\IntlBundle\DataFixtures\ORM\LoadCurrencyData;
 
 /**
  * Class LoadThemeData
@@ -32,9 +33,9 @@ class LoadShopData extends AbstractDataFixture
          * @var $company     \WellCommerce\Bundle\MultiStoreBundle\Entity\CompanyInterface
          * @var $orderStatus \WellCommerce\Bundle\OrderBundle\Entity\OrderStatusInterface
          */
-        $theme       = $this->getReference('theme');
-        $company     = $this->getReference('company');
-        $orderStatus = $this->getReference('default_order_status');
+        $theme    = $this->getReference('theme');
+        $company  = $this->getReference('company');
+        $currency = $this->randomizeSamples('currency', LoadCurrencyData::$samples);
 
         $shop = $this->container->get('shop.factory')->create();
         $shop->setName('WellCommerce');
@@ -42,6 +43,7 @@ class LoadShopData extends AbstractDataFixture
         $shop->setTheme($theme);
         $shop->setUrl($this->container->getParameter('fallback_hostname'));
         $shop->setDefaultCountry('US');
+        $shop->setDefaultCurrency($currency->getCode());
         $manager->persist($shop);
         $manager->flush();
 

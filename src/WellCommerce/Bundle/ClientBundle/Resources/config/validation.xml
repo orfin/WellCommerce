@@ -8,10 +8,15 @@
             <option name="fields">username</option>
             <option name="message">client.error.email.unique</option>
             <option name="groups">
-                <value>registration</value>
+                <value>client_registration</value>
             </option>
         </constraint>
         <property name="billingAddress">
+            <constraint name="Valid">
+                <option name="deep">true</option>
+            </constraint>
+        </property>
+        <property name="shippingAddress">
             <constraint name="Valid">
                 <option name="deep">true</option>
             </constraint>
@@ -26,24 +31,24 @@
                 <option name="value">1</option>
                 <option name="message">client.validation.error.conditions_not_accepted</option>
                 <option name="groups">
-                    <value>registration</value>
+                    <value>client_registration</value>
                 </option>
             </constraint>
         </property>
         <property name="username">
             <constraint name="NotNull">
                 <option name="groups">
-                    <value>registration</value>
+                    <value>client_registration</value>
                 </option>
             </constraint>
             <constraint name="NotBlank">
                 <option name="groups">
-                    <value>registration</value>
+                    <value>client_registration</value>
                 </option>
             </constraint>
             <constraint name="Email">
                 <option name="groups">
-                    <value>registration</value>
+                    <value>client_registration</value>
                 </option>
             </constraint>
         </property>
@@ -52,7 +57,7 @@
                 <option name="min">0</option>
                 <option name="max">100</option>
                 <option name="groups">
-                    <value>registration</value>
+                    <value>client_registration</value>
                 </option>
             </constraint>
         </property>
@@ -66,6 +71,79 @@
             <constraint name="Range">
                 <option name="min">0</option>
                 <option name="max">100</option>
+            </constraint>
+        </property>
+    </class>
+
+    <class name="WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetails">
+        <property name="firstName">
+            <constraint name="NotBlank">
+                <option name="groups">
+                    <value>client_registration</value>
+                    <value>client_settings</value>
+                </option>
+            </constraint>
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>client_registration</value>
+                    <value>client_settings</value>
+                </option>
+            </constraint>
+        </property>
+        <property name="lastName">
+            <constraint name="NotBlank">
+                <option name="groups">
+                    <value>client_registration</value>
+                    <value>client_settings</value>
+                </option>
+            </constraint>
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>client_registration</value>
+                    <value>client_settings</value>
+                </option>
+            </constraint>
+        </property>
+        <property name="phone">
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>client_registration</value>
+                    <value>client_settings</value>
+                </option>
+            </constraint>
+            <constraint name="NotBlank">
+                <option name="groups">
+                    <value>client_registration</value>
+                    <value>client_settings</value>
+                </option>
+            </constraint>
+        </property>
+        <property name="secondaryPhone">
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>client_settings</value>
+                </option>
+            </constraint>
+            <constraint name="NotBlank" />
+        </property>
+        <property name="email">
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>client_registration</value>
+                    <value>client_settings</value>
+                </option>
+            </constraint>
+            <constraint name="NotBlank">
+                <option name="groups">
+                    <value>client_registration</value>
+                    <value>client_settings</value>
+                </option>
+            </constraint>
+            <constraint name="Email">
+                <option name="groups">
+                    <value>client_registration</value>
+                    <value>client_settings</value>
+                </option>
             </constraint>
         </property>
     </class>

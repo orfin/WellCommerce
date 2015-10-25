@@ -70,63 +70,6 @@ interface RequestHelperInterface
     public function getSessionName();
 
     /**
-     * Returns the request attribute from request
-     *
-     * @param string $name
-     * @param null   $default
-     *
-     * @return mixed
-     */
-    public function getRequestAttribute($name, $default = null);
-
-    /**
-     * Checks whether request contains request attribute
-     *
-     * @param string $name
-     *
-     * @return mixed
-     */
-    public function hasRequestAttribute($name);
-
-    /**
-     * Returns the attribute from query string
-     *
-     * @param string $name
-     * @param null   $default
-     *
-     * @return mixed
-     */
-    public function getQueryAttribute($name, $default = null);
-
-    /**
-     * Checks whether query string contains attribute
-     *
-     * @param string $name
-     *
-     * @return mixed
-     */
-    public function hasQueryAttribute($name);
-
-    /**
-     * Returns the attribute from request
-     *
-     * @param string $name
-     * @param null   $default
-     *
-     * @return mixed
-     */
-    public function getAttribute($name, $default = null);
-
-    /**
-     * Checks whether request contains attribute
-     *
-     * @param string $name
-     *
-     * @return mixed
-     */
-    public function hasAttribute($name);
-
-    /**
      * Returns current host
      *
      * @param null $fallbackHost
@@ -173,4 +116,34 @@ interface RequestHelperInterface
      * @return string
      */
     public function getCurrentCurrency();
+
+    /**
+     * Returns a param from query bag
+     *
+     * @param string $name
+     * @param null   $default
+     *
+     * @return mixed
+     */
+    public function getQueryBagParam($name, $default = null);
+
+    /**
+     * Returns a param from request bag
+     *
+     * @param string $name
+     * @param null   $default
+     *
+     * @return mixed
+     */
+    public function getRequestBagParam($name, $default = null);
+
+    /**
+     * Returns a param from attributes bag
+     *
+     * @param string $name
+     * @param null   $default
+     *
+     * @return mixed
+     */
+    public function getAttributesBagParam($name, $default = null);
 }

@@ -7,6 +7,10 @@ WellCommerce\Bundle\MultiStoreBundle\Entity\Company:
             type: integer
             generator:
                 strategy: AUTO
+    embedded:
+        address:
+            class: WellCommerce\Bundle\MultiStoreBundle\Entity\CompanyAddress
+            columnPrefix: address_
     fields:
         name:
             type: string
@@ -17,37 +21,6 @@ WellCommerce\Bundle\MultiStoreBundle\Entity\Company:
             length: 255
             nullable: false
             column: short_name
-        street:
-            type: string
-            length: 255
-            nullable: true
-        streetNo:
-            type: string
-            length: 255
-            nullable: true
-            column: street_no
-        flatNo:
-            type: string
-            length: 255
-            nullable: true
-            column: flat_no
-        postCode:
-            type: string
-            length: 255
-            nullable: true
-            column: post_code
-        province:
-            type: string
-            length: 255
-            nullable: true
-        city:
-            type: string
-            length: 255
-            nullable: true
-        country:
-            type: string
-            length: 3
-            nullable: true
     manyToOne:
         photo:
             targetEntity: WellCommerce\Bundle\MediaBundle\Entity\Media

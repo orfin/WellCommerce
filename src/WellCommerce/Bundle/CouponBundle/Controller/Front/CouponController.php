@@ -39,7 +39,7 @@ class CouponController extends AbstractFrontController
             return $this->redirectToRoute('cart.front.index');
         }
 
-        $code = $this->getRequestHelper()->getRequestAttribute('code');
+        $code = $this->getRequestHelper()->getRequestBagParam('code');
 
         try {
             $this->manager->useCoupon($code);

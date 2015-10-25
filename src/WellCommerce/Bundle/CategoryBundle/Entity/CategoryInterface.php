@@ -15,7 +15,6 @@ namespace WellCommerce\Bundle\CategoryBundle\Entity;
 use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\HierarchyAwareInterface;
-use WellCommerce\Bundle\CoreBundle\Entity\ResourceInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TranslatableInterface;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopCollectionAwareInterface;
@@ -26,8 +25,14 @@ use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface CategoryInterface extends ResourceInterface, TranslatableInterface, TimestampableInterface, BlameableInterface, ShopCollectionAwareInterface, HierarchyAwareInterface
+interface CategoryInterface
+    extends TranslatableInterface, TimestampableInterface, BlameableInterface, ShopCollectionAwareInterface, HierarchyAwareInterface
 {
+    /**
+     * @return int
+     */
+    public function getId();
+
     /**
      * @return null|CategoryInterface
      */

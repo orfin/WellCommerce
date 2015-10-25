@@ -32,7 +32,7 @@ class ClientOrderBoxController extends AbstractBoxController
 
     public function viewAction()
     {
-        $id     = (int)$this->getRequestHelper()->getAttribute('id');
+        $id     = (int)$this->getRequestHelper()->getAttributesBagParam('id');
         $client = $this->manager->getClient();
         $order  = $this->get('order.repository')->findOneBy(['id' => $id, 'client' => $client]);
 

@@ -26,7 +26,7 @@ class ClientAddressBookBoxController extends AbstractBoxController
         $client          = $this->manager->getClient();
         $addressBookForm = $this->manager->getForm($client, [
             'name'              => 'address_book',
-            'validation_groups' => ['address_book']
+            'validation_groups' => ['address']
         ]);
 
         if ($addressBookForm->handleRequest()->isSubmitted()) {
@@ -42,7 +42,7 @@ class ClientAddressBookBoxController extends AbstractBoxController
         }
 
         return $this->displayTemplate('index', [
-            'addressBookForm' => $addressBookForm,
+            'form' => $addressBookForm,
         ]);
     }
 }

@@ -38,6 +38,7 @@ class ProductDataSetTest extends AbstractDataSetTestCase
             'price'            => 'product.sellPrice.grossAmount',
             'discountedPrice'  => 'product.sellPrice.discountedGrossAmount',
             'isDiscountValid'  => 'IF_ELSE(:date BETWEEN product.sellPrice.validFrom AND product.sellPrice.validTo, 1, 0)',
+            'finalPrice'       => 'IF_ELSE(:date BETWEEN product.sellPrice.validFrom AND product.sellPrice.validTo, product.sellPrice.discountedGrossAmount, product.sellPrice.grossAmount) * currency_rate.exchangeRate',
             'currency'         => 'product.sellPrice.currency',
             'tax'              => 'sell_tax.value',
             'stock'            => 'product.stock',

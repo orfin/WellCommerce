@@ -22,7 +22,7 @@
                     <tr>
                         <td>Billing address:</td>
                         <td>
-                            {{ format_address(order.billingAddress,'<br />') }}
+                            {{ format_billing_address(order.billingAddress,'<br />') }}
                         </td>
                     </tr>
                     </tbody>
@@ -38,7 +38,7 @@
                     <tr>
                         <td>Delivery address:</td>
                         <td>
-                            {{ format_address(order.shippingAddress,'<br />') }}
+                            {{ format_shipping_address(order.shippingAddress,'<br />') }}
                         </td>
                     </tr>
                     </tbody>

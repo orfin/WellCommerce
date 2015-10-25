@@ -15,9 +15,11 @@ namespace WellCommerce\Bundle\CartBundle\Entity;
 use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\CartBundle\Visitor\CartVisitorInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientAwareInterface;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddressInterface;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetailsInterface;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddressInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\AddressInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\ContactDetailsAwareInterface;
-use WellCommerce\Bundle\CoreBundle\Entity\ResourceInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\CouponBundle\Entity\CouponAwareInterface;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopAwareInterface;
@@ -30,14 +32,17 @@ use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCostInterface;
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
 interface CartInterface extends
-    ResourceInterface,
     ShopAwareInterface,
     PaymentMethodAwareInterface,
     ClientAwareInterface,
     TimestampableInterface,
-    ContactDetailsAwareInterface,
     CouponAwareInterface
 {
+    /**
+     * @return int
+     */
+    public function getId();
+
     /**
      * @return float
      */
@@ -89,24 +94,34 @@ interface CartInterface extends
     public function setProducts(Collection $products);
 
     /**
-     * @return AddressInterface
+     * @return ClientContactDetailsInterface
+     */
+    public function getContactDetails();
+
+    /**
+     * @param ClientContactDetailsInterface $contactDetails
+     */
+    public function setContactDetails(ClientContactDetailsInterface $contactDetails);
+
+    /**
+     * @return ClientBillingAddressInterface
      */
     public function getBillingAddress();
 
     /**
-     * @param AddressInterface $billingAddress
+     * @param ClientBillingAddressInterface $billingAddress
      */
-    public function setBillingAddress(AddressInterface $billingAddress);
+    public function setBillingAddress(ClientBillingAddressInterface $billingAddress);
 
     /**
-     * @return AddressInterface
+     * @return ClientShippingAddressInterface
      */
     public function getShippingAddress();
 
     /**
-     * @param AddressInterface $shippingAddress
+     * @param ClientShippingAddressInterface $shippingAddress
      */
-    public function setShippingAddress(AddressInterface $shippingAddress);
+    public function setShippingAddress(ClientShippingAddressInterface $shippingAddress);
 
     /**
      * @param CartVisitorInterface $visitor

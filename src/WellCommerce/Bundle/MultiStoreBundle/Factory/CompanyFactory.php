@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\MultiStoreBundle\Factory;
 
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\Company;
+use WellCommerce\Bundle\MultiStoreBundle\Entity\CompanyAddress;
 
 /**
  * Class CompanyFactory
@@ -30,6 +31,7 @@ class CompanyFactory extends AbstractFactory
         $company = new Company();
         $company->setName('');
         $company->setShortName('');
+        $company->setAddress(new CompanyAddress());
 
         return $company;
     }

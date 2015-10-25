@@ -30,8 +30,8 @@ class PackageFormBuilder extends AbstractFormBuilder
     {
         $router    = $this->getRouterHelper();
         $helper    = $this->get('environment_helper');
-        $package   = $this->getRequestHelper()->getRequestAttribute('id');
-        $operation = $this->getRequestHelper()->getRequestAttribute('operation');
+        $package   = $this->getRequestHelper()->getRequestBagParam('id');
+        $operation = $this->getRequestHelper()->getRequestBagParam('operation');
         $port      = $helper->getFreePort();
         $versions  = $this->getPackageVersions($package);
 

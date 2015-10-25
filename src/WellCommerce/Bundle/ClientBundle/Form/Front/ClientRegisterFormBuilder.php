@@ -26,24 +26,19 @@ class ClientRegisterFormBuilder extends AbstractFormBuilder
      */
     public function buildForm(FormInterface $form)
     {
-        $billingAddress = $form->addChild($this->getElement('nested_fieldset', [
-            'name'  => 'billingAddress',
-            'label' => $this->trans('client.heading.billing_address'),
-        ]));
-
-        $billingAddress->addChild($this->getElement('text_field', [
-            'name'  => 'billingAddress.firstName',
-            'label' => $this->trans('client.label.address.first_name'),
-        ]));
-
-        $billingAddress->addChild($this->getElement('text_field', [
-            'name'  => 'billingAddress.lastName',
-            'label' => $this->trans('client.label.address.last_name'),
-        ]));
-
         $contactDetails = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'contactDetails',
             'label' => $this->trans('client.heading.contact_details'),
+        ]));
+
+        $contactDetails->addChild($this->getElement('text_field', [
+            'name'  => 'contactDetails.firstName',
+            'label' => $this->trans('client.label.contact_details.first_name'),
+        ]));
+
+        $contactDetails->addChild($this->getElement('text_field', [
+            'name'  => 'contactDetails.lastName',
+            'label' => $this->trans('client.label.contact_details.last_name'),
         ]));
 
         $contactDetails->addChild($this->getElement('text_field', [

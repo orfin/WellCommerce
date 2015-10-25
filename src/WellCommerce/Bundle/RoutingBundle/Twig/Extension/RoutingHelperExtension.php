@@ -59,7 +59,7 @@ class RoutingHelperExtension extends \Twig_Extension
      */
     public function checkRouteIsActive($route)
     {
-        $currentRoute = $this->requestHelper->getAttribute('_route');
+        $currentRoute = $this->requestHelper->getAttributesBagParam('_route');
 
         return $route === $currentRoute;
     }

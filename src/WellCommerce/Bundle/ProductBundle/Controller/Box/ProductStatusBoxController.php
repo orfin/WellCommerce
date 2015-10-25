@@ -36,9 +36,9 @@ class ProductStatusBoxController extends AbstractBoxController implements BoxCon
         $requestHelper = $this->manager->getRequestHelper();
 
         $products = $this->get('product.dataset.front')->getResult('datagrid', [
-            'limit'      => $requestHelper->getQueryAttribute('limit', $boxSettings->getParam('per_page', 12)),
-            'order_by'   => $requestHelper->getQueryAttribute('order_by', 'price'),
-            'order_dir'  => $requestHelper->getQueryAttribute('order_dir', 'asc'),
+            'limit'      => $requestHelper->getQueryBagParam('limit', $boxSettings->getParam('per_page', 12)),
+            'order_by'   => $requestHelper->getQueryBagParam('orderBy', 'price'),
+            'order_dir'  => $requestHelper->getQueryBagParam('orderDir', 'asc'),
             'conditions' => $this->manager->getStatusConditions($boxSettings->getParam('status')),
         ]);
 

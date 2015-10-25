@@ -46,4 +46,14 @@ interface CompanyInterface extends TimestampableInterface, BlameableInterface
      * @param string $shortName
      */
     public function setShortName($shortName);
+
+    /**
+     * @return CompanyAddressInterface
+     */
+    public function getAddress();
+
+    /**
+     * @param CompanyAddressInterface $address
+     */
+    public function setAddress(CompanyAddressInterface $address);
 }

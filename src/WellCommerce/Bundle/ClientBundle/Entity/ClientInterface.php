@@ -31,8 +31,7 @@ interface ClientInterface extends
     EquatableInterface,
     TimestampableInterface,
     BlameableInterface,
-    ClientGroupAwareInterface,
-    ContactDetailsAwareInterface
+    ClientGroupAwareInterface
 {
     /**
      * @return int
@@ -95,22 +94,32 @@ interface ClientInterface extends
     public function getWishlist();
 
     /**
-     * @return AddressInterface
+     * @return ClientContactDetailsInterface
+     */
+    public function getContactDetails();
+
+    /**
+     * @param ClientContactDetailsInterface $contactDetails
+     */
+    public function setContactDetails(ClientContactDetailsInterface $contactDetails);
+
+    /**
+     * @return ClientBillingAddressInterface
      */
     public function getBillingAddress();
 
     /**
-     * @param AddressInterface $billingAddress
+     * @param ClientBillingAddressInterface $billingAddress
      */
-    public function setBillingAddress(AddressInterface $billingAddress);
+    public function setBillingAddress(ClientBillingAddressInterface $billingAddress);
 
     /**
-     * @return AddressInterface
+     * @return ClientShippingAddressInterface
      */
     public function getShippingAddress();
 
     /**
-     * @param AddressInterface $shippingAddress
+     * @param ClientShippingAddressInterface $shippingAddress
      */
-    public function setShippingAddress(AddressInterface $shippingAddress);
+    public function setShippingAddress(ClientShippingAddressInterface $shippingAddress);
 }

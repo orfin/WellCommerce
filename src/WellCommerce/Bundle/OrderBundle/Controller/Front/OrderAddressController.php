@@ -26,7 +26,7 @@ use WellCommerce\Bundle\WebBundle\Breadcrumb\BreadcrumbItem;
 class OrderAddressController extends AbstractFrontController implements FrontControllerInterface
 {
     /**
-     * @var \WellCommerce\Bundle\OrderBundle\Manager\Front\OrderManager
+     * @var \WellCommerce\Bundle\OrderBundle\Manager\Front\OrderAddressManager
      */
     protected $manager;
 
@@ -36,6 +36,7 @@ class OrderAddressController extends AbstractFrontController implements FrontCon
     public function indexAction(Request $request)
     {
         $cart = $this->manager->getCartContext()->getCurrentCart();
+        $this->manager->setAddresses();
 
         if ($cart->isEmpty() || false === $cart->hasMethods()) {
             return $this->redirectToRoute('front.cart.index');
@@ -46,7 +47,7 @@ class OrderAddressController extends AbstractFrontController implements FrontCon
         ]));
 
         $form = $this->manager->getForm($cart, [
-            'validation_groups' => ['address', 'contact_details']
+            'validation_groups' => ['address', 'order_contact_details']
         ]);
 
         if ($form->isSubmitted()) {

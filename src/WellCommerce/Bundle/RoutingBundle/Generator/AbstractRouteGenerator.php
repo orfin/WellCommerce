@@ -38,17 +38,24 @@ abstract class AbstractRouteGenerator implements RouteGeneratorInterface
     protected $requirements;
 
     /**
+     * @var array
+     */
+    protected $pattern;
+
+    /**
      * Constructor
      *
      * @param array  $defaults
-     * @param array  $options
      * @param array  $requirements
+     * @param string $pattern
+     * @param array  $options
      */
-    public function __construct(array $defaults = [], array $options = [], array $requirements = [])
+    public function __construct(array $defaults = [], array $requirements = [], array $pattern = [], array $options = [])
     {
         $this->defaults     = $defaults;
         $this->options      = $options;
         $this->requirements = $requirements;
+        $this->pattern      = $this->generateStaticPattern($pattern);
     }
 
     /**
@@ -60,11 +67,40 @@ abstract class AbstractRouteGenerator implements RouteGeneratorInterface
         $this->defaults['_locale'] = $resource->getLocale();
 
         return new SymfonyRoute(
-            $resource->getPath(),
+            $this->getPath($resource),
             $this->defaults,
             $this->requirements,
             $this->options
         );
+    }
+
+    /**
+     * Returns a concatenated path
+     *
+     * @param RouteInterface $resource
+     *
+     * @return string
+     */
+    protected function getPath(RouteInterface $resource)
+    {
+        if (strlen($this->pattern)) {
+            return $resource->getPath() . RouteGeneratorInterface::PATH_PARAMS_SEPARATOR . $this->pattern;
+        }
+
+        return $resource->getPath();
+    }
+
+    /**
+     * @return string
+     */
+    protected function generateStaticPattern(array $pattern = [])
+    {
+        $parts = [];
+        foreach ($pattern as $key => $val) {
+            $parts[] = '{' . $key . '}';
+        }
+
+        return implode(RouteGeneratorInterface::PATH_PARAMS_SEPARATOR, $parts);
     }
 
     /**

@@ -6,11 +6,9 @@
     {% include 'WellCommerceWebBundle:Front/Common:flashes.html.twig' %}
 
     {{ macros.form_begin(contactDetailsForm, 'form-horizontal') }}
-
-        {{ macros.element(contactDetailsForm.getChildren().get('contactDetails').getChildren().get('contactDetails.phone')) }}
-        {{ macros.element(contactDetailsForm.getChildren().get('contactDetails').getChildren().get('contactDetails.secondaryPhone')) }}
-        {{ macros.element(contactDetailsForm.getChildren().get('contactDetails').getChildren().get('contactDetails.email')) }}
-
+        {% for element in contactDetailsForm.getChildren().get('contactDetails').getChildren() %}
+            {{ macros.element(element) }}
+        {% endfor %}
         <div class="row mtp20">
             <div class="col-sm-5 col-sm-offset-3">
                 <button type="submit" class="btn btn-primary">{% trans %}form.button.save{% endtrans %}</button>

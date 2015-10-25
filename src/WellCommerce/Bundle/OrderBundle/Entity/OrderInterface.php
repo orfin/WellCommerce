@@ -14,6 +14,9 @@ namespace WellCommerce\Bundle\OrderBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientAwareInterface;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddressInterface;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetailsInterface;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddressInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\AddressInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\ContactDetailsAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
@@ -34,7 +37,6 @@ interface OrderInterface extends
     ShippingMethodAwareInterface,
     PaymentMethodAwareInterface,
     ClientAwareInterface,
-    ContactDetailsAwareInterface,
     CouponAwareInterface
 {
     /**
@@ -113,24 +115,34 @@ interface OrderInterface extends
     public function setShippingTotal(OrderTotal $shippingTotal);
 
     /**
-     * @return AddressInterface
+     * @return ClientContactDetailsInterface
+     */
+    public function getContactDetails();
+
+    /**
+     * @param ClientContactDetailsInterface $contactDetails
+     */
+    public function setContactDetails(ClientContactDetailsInterface $contactDetails);
+
+    /**
+     * @return ClientBillingAddressInterface
      */
     public function getBillingAddress();
 
     /**
-     * @param AddressInterface $billingAddress
+     * @param ClientBillingAddressInterface $billingAddress
      */
-    public function setBillingAddress(AddressInterface $billingAddress);
+    public function setBillingAddress(ClientBillingAddressInterface $billingAddress);
 
     /**
-     * @return AddressInterface
+     * @return ClientShippingAddressInterface
      */
     public function getShippingAddress();
 
     /**
-     * @param AddressInterface $shippingAddress
+     * @param ClientShippingAddressInterface $shippingAddress
      */
-    public function setShippingAddress(AddressInterface $shippingAddress);
+    public function setShippingAddress(ClientShippingAddressInterface $shippingAddress);
 
     /**
      * @return Collection

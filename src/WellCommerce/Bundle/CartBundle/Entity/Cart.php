@@ -14,10 +14,12 @@ namespace WellCommerce\Bundle\CartBundle\Entity;
 use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\CartBundle\Visitor\CartVisitorInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientAwareTrait;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddressInterface;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetailsInterface;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddressInterface;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\Timestampable\TimestampableTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\AddressInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\ContactDetailsTrait;
-use WellCommerce\Bundle\CoreBundle\Entity\ResourceInterface;
 use WellCommerce\Bundle\CouponBundle\Entity\CouponAwareTrait;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopAwareTrait;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodAwareTrait;
@@ -35,7 +37,6 @@ class Cart implements CartInterface
     use ShopAwareTrait;
     use PaymentMethodAwareTrait;
     use ClientAwareTrait;
-    use ContactDetailsTrait;
     use CouponAwareTrait;
 
     /**
@@ -69,12 +70,17 @@ class Cart implements CartInterface
     protected $totals;
 
     /**
-     * @var AddressInterface
+     * @var ClientContactDetailsInterface
+     */
+    protected $contactDetails;
+
+    /**
+     * @var ClientBillingAddressInterface
      */
     protected $billingAddress;
 
     /**
-     * @var AddressInterface
+     * @var ClientShippingAddressInterface
      */
     protected $shippingAddress;
 
@@ -174,6 +180,22 @@ class Cart implements CartInterface
     /**
      * {@inheritdoc}
      */
+    public function getContactDetails()
+    {
+        return $this->contactDetails;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setContactDetails(ClientContactDetailsInterface $contactDetails)
+    {
+        $this->contactDetails = $contactDetails;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getBillingAddress()
     {
         return $this->billingAddress;
@@ -182,7 +204,7 @@ class Cart implements CartInterface
     /**
      * {@inheritdoc}
      */
-    public function setBillingAddress(AddressInterface $billingAddress)
+    public function setBillingAddress(ClientBillingAddressInterface $billingAddress)
     {
         $this->billingAddress = $billingAddress;
     }
@@ -198,7 +220,7 @@ class Cart implements CartInterface
     /**
      * {@inheritdoc}
      */
-    public function setShippingAddress(AddressInterface $shippingAddress)
+    public function setShippingAddress(ClientShippingAddressInterface $shippingAddress)
     {
         $this->shippingAddress = $shippingAddress;
     }
@@ -248,7 +270,8 @@ class Cart implements CartInterface
      */
     public function hasMethods()
     {
-        return (bool)($this->getShippingMethodCost() instanceof ShippingMethodCostInterface && $this->getPaymentMethod() instanceof PaymentMethodInterface);
+        return (bool)($this->getShippingMethodCost() instanceof ShippingMethodCostInterface
+            && $this->getPaymentMethod() instanceof PaymentMethodInterface);
     }
 
     /**

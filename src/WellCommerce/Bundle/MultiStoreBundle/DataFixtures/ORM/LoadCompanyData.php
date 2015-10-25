@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\MultiStoreBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
-use WellCommerce\Bundle\MultiStoreBundle\Entity\Company;
 
 /**
  * Class LoadCompanyData
@@ -29,16 +28,15 @@ class LoadCompanyData extends AbstractDataFixture
     public function load(ObjectManager $manager)
     {
         $fakerGenerator = $this->getFakerGenerator();
-
-        $company = new Company();
+        $company        = $this->container->get('company.factory')->create();
         $company->setName($fakerGenerator->company . ' ' . $fakerGenerator->companySuffix);
         $company->setShortName($fakerGenerator->company);
-        $company->setCountry($fakerGenerator->countryCode);
-        $company->setStreet($fakerGenerator->streetName);
-        $company->setStreetNo($fakerGenerator->streetSuffix);
-        $company->setFlatNo($fakerGenerator->randomNumber());
-        $company->setPostCode($fakerGenerator->postcode);
-        $company->setCity($fakerGenerator->city);
+        $company->getAddress()->setCountry($fakerGenerator->countryCode);
+        $company->getAddress()->setStreet($fakerGenerator->streetName);
+        $company->getAddress()->setStreetNo($fakerGenerator->streetSuffix);
+        $company->getAddress()->setFlatNo($fakerGenerator->randomNumber());
+        $company->getAddress()->setPostCode($fakerGenerator->postcode);
+        $company->getAddress()->setCity($fakerGenerator->city);
         $manager->persist($company);
         $manager->flush();
 

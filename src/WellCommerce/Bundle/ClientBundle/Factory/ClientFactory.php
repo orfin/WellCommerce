@@ -13,8 +13,7 @@
 namespace WellCommerce\Bundle\ClientBundle\Factory;
 
 use WellCommerce\Bundle\ClientBundle\Entity\Client;
-use WellCommerce\Bundle\CoreBundle\Entity\Address;
-use WellCommerce\Bundle\CoreBundle\Entity\ContactDetails;
+use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetails;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 
 /**
@@ -30,9 +29,7 @@ class ClientFactory extends AbstractFactory
     public function create()
     {
         $client = new Client();
-        $client->setContactDetails(new ContactDetails());
-        $client->setBillingAddress(new Address());
-        $client->setShippingAddress(new Address());
+        $client->setContactDetails(new ClientContactDetails());
         $client->setConditionsAccepted(true);
         $client->setDiscount(0);
         $client->setNewsletterAccepted(true);

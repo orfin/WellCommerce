@@ -26,6 +26,11 @@ class ShopFormBuilder extends AbstractFormBuilder
      */
     public function buildForm(FormInterface $form)
     {
+        $currencies = $this->get('currency.dataset.admin')->getResult('select', ['order_by' => 'code'], [
+            'label_column' => 'code',
+            'value_column' => 'code'
+        ]);
+
         $requiredData = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'required_data',
             'label' => $this->trans('form.required_data')
@@ -70,7 +75,13 @@ class ShopFormBuilder extends AbstractFormBuilder
             'label'   => $this->trans('shop.label.default_country'),
             'options' => $this->get('country.repository')->all()
         ]));
-        
+
+        $cartSettings->addChild($this->getElement('select', [
+            'name'    => 'defaultCurrency',
+            'label'   => $this->trans('shop.label.default_currency'),
+            'options' => $currencies,
+        ]));
+
         $form->addFilter($this->getFilter('no_code'));
         $form->addFilter($this->getFilter('trim'));
         $form->addFilter($this->getFilter('secure'));

@@ -138,7 +138,7 @@ class RouterHelper implements RouterHelperInterface
      */
     public function getCurrentRoute()
     {
-        $routeName = $this->requestHelper->getAttribute('_route');
+        $routeName = $this->requestHelper->getAttributesBagParam('_route');
         $route     = $this->router->getRouteCollection()->get($routeName);
         if (null === $route) {
             throw new \RuntimeException('Cannot determine current route from request');

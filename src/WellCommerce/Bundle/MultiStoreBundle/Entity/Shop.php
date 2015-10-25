@@ -73,6 +73,11 @@ class Shop implements ShopInterface
     protected $defaultCountry;
 
     /**
+     * @var string
+     */
+    protected $defaultCurrency;
+
+    /**
      * {@inheritdoc}
      */
     public function getId()
@@ -206,5 +211,21 @@ class Shop implements ShopInterface
     public function setDefaultCountry($defaultCountry)
     {
         $this->defaultCountry = $defaultCountry;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDefaultCurrency()
+    {
+        return $this->defaultCurrency;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDefaultCurrency($defaultCurrency)
+    {
+        $this->defaultCurrency = $defaultCurrency;
     }
 }

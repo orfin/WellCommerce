@@ -62,7 +62,7 @@ class AttributeValueManager extends AbstractAdminManager
      */
     protected function findAttribute($attributeId)
     {
-        $id        = $this->getRequestHelper()->getRequestAttribute('attribute');
+        $id        = $this->getRequestHelper()->getRequestBagParam('attribute');
         $attribute = $this->attributeRepository->find($id);
 
         if (null === $attribute) {

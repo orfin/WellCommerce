@@ -26,7 +26,7 @@ class ClientRegistrationBoxController extends AbstractBoxController
         $resource = $this->manager->initResource();
         $form     = $this->manager->getForm($resource, [
             'name'              => 'register',
-            'validation_groups' => ['registration']
+            'validation_groups' => ['client_registration']
         ]);
 
         if ($form->handleRequest()->isSubmitted()) {
@@ -38,7 +38,7 @@ class ClientRegistrationBoxController extends AbstractBoxController
                 return $this->getRouterHelper()->redirectTo('front.client.login');
             }
 
-            $this->manager->getFlashHelper()->addError('client.form.error.registration');
+            $this->manager->getFlashHelper()->addError('client.flash.registration.error');
         }
 
         return $this->displayTemplate('index', [

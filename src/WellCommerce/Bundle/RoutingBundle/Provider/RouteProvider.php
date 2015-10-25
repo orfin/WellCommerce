@@ -101,7 +101,7 @@ class RouteProvider implements RouteProviderInterface
 
     public function getRoutesByNames($names, $parameters = [])
     {
-        $collection = $this->repository->findBy([], null, self::CANDIDATES_LIMIT);
+        $collection = $this->repository->findAll();
         $routes     = [];
         foreach ($collection as $item) {
             $routes[] = $this->getRouteByName($item->getId());

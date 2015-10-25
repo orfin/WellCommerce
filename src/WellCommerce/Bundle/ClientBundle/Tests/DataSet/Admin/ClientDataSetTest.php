@@ -30,8 +30,8 @@ class ClientDataSetTest extends AbstractDataSetTestCase
     {
         return [
             'id'        => 'client.id',
-            'firstName' => 'client.billingAddress.firstName',
-            'lastName'  => 'client.billingAddress.lastName',
+            'firstName' => 'client.contactDetails.firstName',
+            'lastName'  => 'client.contactDetails.lastName',
             'email'     => 'client.contactDetails.email',
             'phone'     => 'client.contactDetails.phone',
             'groupName' => 'client_group_translation.name',

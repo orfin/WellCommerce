@@ -188,26 +188,10 @@ class CartManager extends AbstractFrontManager implements CartManagerInterface
         $cart->setShop($shop);
         $cart->setSessionId($sessionId);
         $cart->setCurrency($currency);
-        $this->setCartClientData($cart, $client);
+        $cart->setClient($client);
 
         $this->createResource($cart);
 
         return $cart;
-    }
-
-    /**
-     * Sets client data
-     *
-     * @param object|CartInterface $cart
-     * @param ClientInterface|null $client
-     */
-    protected function setCartClientData(CartInterface $cart, ClientInterface $client = null)
-    {
-        $cart->setClient($client);
-        if (null !== $client) {
-            $cart->setBillingAddress($client->getBillingAddress());
-            $cart->setShippingAddress($client->getShippingAddress());
-            $cart->setContactDetails($client->getContactDetails());
-        }
     }
 }

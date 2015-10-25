@@ -29,7 +29,6 @@ class Client implements ClientInterface
 
     use Timestampable;
     use Blameable;
-    use ContactDetailsTrait;
 
     /**
      * @var int
@@ -82,12 +81,17 @@ class Client implements ClientInterface
     protected $newsletterAccepted;
 
     /**
-     * @var AddressInterface
+     * @var ClientContactDetailsInterface
+     */
+    protected $contactDetails;
+
+    /**
+     * @var ClientBillingAddressInterface
      */
     protected $billingAddress;
 
     /**
-     * @var AddressInterface
+     * @var ClientShippingAddressInterface
      */
     protected $shippingAddress;
 
@@ -286,6 +290,22 @@ class Client implements ClientInterface
     /**
      * {@inheritdoc}
      */
+    public function getContactDetails()
+    {
+        return $this->contactDetails;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setContactDetails(ClientContactDetailsInterface $contactDetails)
+    {
+        $this->contactDetails = $contactDetails;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getBillingAddress()
     {
         return $this->billingAddress;
@@ -294,7 +314,7 @@ class Client implements ClientInterface
     /**
      * {@inheritdoc}
      */
-    public function setBillingAddress(AddressInterface $billingAddress)
+    public function setBillingAddress(ClientBillingAddressInterface $billingAddress)
     {
         $this->billingAddress = $billingAddress;
     }
@@ -310,7 +330,7 @@ class Client implements ClientInterface
     /**
      * {@inheritdoc}
      */
-    public function setShippingAddress(AddressInterface $shippingAddress)
+    public function setShippingAddress(ClientShippingAddressInterface $shippingAddress)
     {
         $this->shippingAddress = $shippingAddress;
     }

@@ -130,49 +130,37 @@ class RequestHelper implements RequestHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function getRequestAttribute($name, $default = null)
+    public function getRequestBagParam($name, $default = null)
     {
+        if (false === $this->request->request->has($name)) {
+            return $default;
+        }
+
         return $this->request->request->get($name, $default);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hasRequestAttribute($name)
+    public function getQueryBagParam($name, $default = null)
     {
-        return $this->request->request->has($name);
-    }
+        if (false === $this->request->query->has($name)) {
+            return $default;
+        }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getQueryAttribute($name, $default = null)
-    {
         return $this->request->query->get($name, $default);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hasQueryAttribute($name)
+    public function getAttributesBagParam($name, $default = null)
     {
-        return $this->request->query->has($name);
-    }
+        if (false === $this->request->attributes->has($name)) {
+            return $default;
+        }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getAttribute($name, $default = null)
-    {
         return $this->request->attributes->get($name, $default);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasAttribute($name)
-    {
-        return $this->request->attributes->has($name);
     }
 
     /**
@@ -191,7 +179,7 @@ class RequestHelper implements RequestHelperInterface
      */
     public function getCurrentPage()
     {
-        $page = (int)$this->getQueryAttribute('page', 1);
+        $page = (int)$this->getQueryBagParam('page', 1);
         $page = abs($page);
 
         return ($page > 0) ? $page : 1;
@@ -202,7 +190,7 @@ class RequestHelper implements RequestHelperInterface
      */
     public function getCurrentLimit($default = 10)
     {
-        $limit = (int)$this->getQueryAttribute('limit', $default);
+        $limit = $this->getQueryBagParam('limit', $default);
         $limit = abs($limit);
 
         return ($limit > 0) ? $limit : $default;

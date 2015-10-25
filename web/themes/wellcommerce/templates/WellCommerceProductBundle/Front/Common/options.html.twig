@@ -13,27 +13,28 @@
 
     <div class="dropdown pull-right">
         <button class="btn btn-default dropdown-toggle btn-sm" type="button" id="CurrencyMenu" data-toggle="dropdown" aria-expanded="true">
-            {% trans %}product.list.options.sort{% endtrans %}: {{ app.request.query.get('sort') }}
+            {% trans %}product.list.options.sort{% endtrans %}: {{ app.request.get('orderBy') }}
             <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" role="menu" aria-labelledby="CurrencyMenu">
             <li>
-                <a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'order_by': 'name','order_dir': 'asc'})) }}">
+
+                <a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'page': app.request.get('page'), 'limit': app.request.get('limit'), 'orderBy': 'name','orderDir': 'asc'})) }}">
                     {% trans %}product.options.order_by.name{% endtrans %} - {% trans %}product.options.order_dir.ascending{% endtrans %}
                 </a>
             </li>
             <li>
-                <a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'order_by': 'name','order_dir': 'desc'})) }}">
+                <a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'page': app.request.get('page'), 'limit': app.request.get('limit'), 'orderBy': 'name','orderDir': 'desc'})) }}">
                     {% trans %}product.options.order_by.name{% endtrans %} - {% trans %}product.options.order_dir.descending{% endtrans %}
                 </a>
             </li>
             <li>
-                <a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'order_by': 'finalPrice','order_dir': 'asc'})) }}">
+                <a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'page': app.request.get('page'), 'limit': app.request.get('limit'), 'orderBy': 'finalPrice','orderDir': 'asc'})) }}">
                     {% trans %}product.options.order_by.price{% endtrans %} - {% trans %}product.options.order_dir.ascending{% endtrans %}
                 </a>
             </li>
             <li>
-                <a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'order_by': 'finalPrice','order_dir': 'desc'})) }}">
+                <a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'page': app.request.get('page'), 'limit': app.request.get('limit'), 'orderBy': 'finalPrice','orderDir': 'desc'})) }}">
                     {% trans %}product.options.order_by.price{% endtrans %} - {% trans %}product.options.order_dir.descending{% endtrans %}
                 </a>
             </li>
@@ -42,14 +43,13 @@
 
     <div class="dropdown pull-right">
         <button class="btn btn-default dropdown-toggle btn-sm" type="button" id="LimitMenu" data-toggle="dropdown" aria-expanded="true">
-            {% trans %}product.list.options.limit{% endtrans %}: {{ app.request.query.get('limit', 10) }}
+            {% trans %}product.list.options.limit{% endtrans %}: {{ app.request.get('limit') }}
             <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" role="menu" aria-labelledby="LimitMenu">
-            <li><a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'limit': '10'})) }}">10</a></li>
-            <li><a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'limit': '25'})) }}">25</a></li>
-            <li><a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'limit': '50'})) }}">50</a></li>
-            <li><a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'limit': '100'})) }}">100</a></li>
+            <li><a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'page': app.request.get('page'), 'limit': 10, 'orderBy': app.request.get('orderBy'),'orderDir': app.request.get('orderDir')})) }}">10</a></li>
+            <li><a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'page': app.request.get('page'), 'limit': 25, 'orderBy': app.request.get('orderBy'),'orderDir': app.request.get('orderDir')})) }}">25</a></li>
+            <li><a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'page': app.request.get('page'), 'limit': 50, 'orderBy': app.request.get('orderBy'),'orderDir': app.request.get('orderDir')})) }}">50</a></li>
         </ul>
     </div>
 </div>

@@ -22,13 +22,22 @@
         <service id="category.route.generator" class="WellCommerce\Bundle\CategoryBundle\Routing\CategoryRouteGenerator">
             <argument type="collection" key="defaults">
                 <argument key="_controller">category.controller.front:indexAction</argument>
+                <argument key="limit">10</argument>
                 <argument key="page">1</argument>
-                <argument key="orderBy">null</argument>
-                <argument key="orderDir">null</argument>
+                <argument key="orderBy">name</argument>
+                <argument key="orderDir">asc</argument>
             </argument>
             <argument type="collection" key="requirements">
+                <argument key="limit">\d{1,10}</argument>
                 <argument key="page">\d{1,10}</argument>
+                <argument key="orderBy">name|finalPrice</argument>
                 <argument key="orderDir">asc|desc</argument>
+            </argument>
+            <argument type="collection" key="pattern">
+                <argument key="page" />
+                <argument key="limit" />
+                <argument key="orderBy" />
+                <argument key="orderDir" />
             </argument>
             <tag name="route.generator" />
         </service>

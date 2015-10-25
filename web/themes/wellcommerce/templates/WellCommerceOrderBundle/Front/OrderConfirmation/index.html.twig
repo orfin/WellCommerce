@@ -51,7 +51,7 @@
                                         <h4>Delivery address <a class="coming-soon" href="#address-change">Change</a></h4>
 
                                         <p>
-                                            {{ format_address(cart.billingAddress) }}
+                                            {{ format_billing_address(cart.billingAddress) }}
                                         </p>
                                     </div>
                                     <div class="col-sm-4">
@@ -65,7 +65,7 @@
                                         <h4>Billing data <a class="coming-soon" href="#address-change">Change</a></h4>
 
                                         <p>
-                                            {{ format_address(cart.shippingAddress) }}
+                                            {{ format_shipping_address(cart.shippingAddress) }}
                                         </p>
                                     </div>
                                 </div>

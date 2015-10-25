@@ -30,7 +30,7 @@ class OrderConfirmationFormBuilder extends AbstractFormBuilder
             'name'  => 'comment',
             'rows'  => 5,
             'cols'  => 20,
-            'label' => $this->trans('order.comment.label'),
+            'label' => $this->trans('order.label.comment'),
         ]));
 
         $form->addFilter($this->getFilter('no_code'));

@@ -24,7 +24,7 @@
 
     <div class="dropdown pull-right">
         <button class="btn btn-default dropdown-toggle btn-sm" type="button" id="LimitMenu" data-toggle="dropdown" aria-expanded="true">
-            {% trans %}product.list.options.limit{% endtrans %}: {{ app.request.query.get('limit', 10) }}
+            {% trans %}product.list.options.limit{% endtrans %}: {{ currentLimit }}
             <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" role="menu" aria-labelledby="LimitMenu">

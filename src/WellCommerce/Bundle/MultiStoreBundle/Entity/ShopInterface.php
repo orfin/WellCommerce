@@ -108,4 +108,14 @@ interface ShopInterface extends TimestampableInterface, BlameableInterface, Them
      * @param string $defaultCountry
      */
     public function setDefaultCountry($defaultCountry);
+
+    /**
+     * @return string
+     */
+    public function getDefaultCurrency();
+
+    /**
+     * @param string $defaultCurrency
+     */
+    public function setDefaultCurrency($defaultCurrency);
 }

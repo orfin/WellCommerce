@@ -28,11 +28,13 @@ class ShopDataSet extends AbstractDataSet
     public function configureOptions(DataSetConfiguratorInterface $configurator)
     {
         $configurator->setColumns([
-            'id'      => 'shop.id',
-            'name'    => 'shop.name',
-            'url'     => 'shop.url',
-            'theme'   => 'shop_theme.name',
-            'company' => 'shop_company.name',
+            'id'       => 'shop.id',
+            'name'     => 'shop.name',
+            'url'      => 'shop.url',
+            'theme'    => 'shop_theme.name',
+            'company'  => 'shop_company.name',
+            'currency' => 'shop.defaultCurrency',
+            'country'  => 'shop.defaultCountry',
         ]);
     }
 }

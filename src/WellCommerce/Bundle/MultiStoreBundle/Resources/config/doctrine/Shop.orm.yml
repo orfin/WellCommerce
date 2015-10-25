@@ -21,6 +21,11 @@ WellCommerce\Bundle\MultiStoreBundle\Entity\Shop:
             length: 3
             nullable: true
             column: default_country
+        defaultCurrency:
+            type: string
+            length: 16
+            nullable: false
+            column: default_currency
     manyToOne:
         company:
             targetEntity: WellCommerce\Bundle\MultiStoreBundle\Entity\Company

@@ -36,5 +36,9 @@
             </call>
             <tag name="kernel.event_subscriber"/>
         </service>
+
+        <service id="twig.extension.client_address_formatter" class="WellCommerce\Bundle\ClientBundle\Twig\ClientAddressFormatterExtension">
+            <tag name="twig.extension"/>
+        </service>
     </services>
 </container>

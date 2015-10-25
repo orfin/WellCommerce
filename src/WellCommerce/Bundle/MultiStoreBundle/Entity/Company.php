@@ -14,7 +14,6 @@ namespace WellCommerce\Bundle\MultiStoreBundle\Entity;
 
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
-use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\AddressTrait;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\PhotoTrait;
 
 /**
@@ -26,7 +25,6 @@ class Company implements CompanyInterface
 {
     use Timestampable;
     use Blameable;
-    use AddressTrait;
     use PhotoTrait;
     
     /**
@@ -43,7 +41,12 @@ class Company implements CompanyInterface
      * @var string
      */
     protected $shortName;
-    
+
+    /**
+     * @var CompanyAddressInterface
+     */
+    protected $address;
+
     /**
      * {@inheritdoc}
      */
@@ -82,5 +85,21 @@ class Company implements CompanyInterface
     public function setShortName($shortName)
     {
         $this->shortName = $shortName;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setAddress(CompanyAddressInterface $address)
+    {
+        $this->address = $address;
     }
 }

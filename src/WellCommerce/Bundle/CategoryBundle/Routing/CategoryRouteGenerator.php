@@ -31,7 +31,7 @@ class CategoryRouteGenerator extends AbstractRouteGenerator
         $this->defaults['_locale'] = $resource->getLocale();
 
         return new SymfonyRoute(
-            $resource->getPath().',{orderBy},{orderDir}',
+            $this->getPath($resource),
             $this->defaults,
             $this->requirements,
             $this->options

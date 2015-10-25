@@ -22,6 +22,9 @@
 
         <service id="product.dataset.query_builder.front" class="WellCommerce\Bundle\ProductBundle\DataSet\Front\ProductDataSetQueryBuilder" public="false">
             <argument type="service" id="product.repository"/>
+            <call method="setRequestHelper">
+                <argument type="service" id="request.helper"/>
+            </call>
         </service>
 
         <service id="product.dataset.front" class="WellCommerce\Bundle\ProductBundle\DataSet\Front\ProductDataSet">
