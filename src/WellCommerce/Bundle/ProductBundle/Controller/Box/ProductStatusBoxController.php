@@ -35,8 +35,8 @@ class ProductStatusBoxController extends AbstractBoxController implements BoxCon
     {
         $dataset       = $this->get('product.dataset.front');
         $requestHelper = $this->manager->getRequestHelper();
-        $limit         = $requestHelper->getAttributesBagParam('limit', $boxSettings->getParam('per_page', 10));
-        $offset        = $requestHelper->getAttributesBagParam('page', $limit);
+        $limit         = $requestHelper->getQueryBagParam('limit', $boxSettings->getParam('per_page', 10));
+        $offset        = $requestHelper->getQueryBagParam('page', 1);
 
         $products = $dataset->getResult('array', [
             'limit'      => $limit,
