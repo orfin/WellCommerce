@@ -13,7 +13,7 @@
         </thead>
 
         <tbody>
-        {% for item in cartProducts %}
+        {% for item in cartProducts.rows %}
             <tr>
                 <td><img src="{{ image(item.photo, 'small') }}" alt="{{ item.name }}"/></td>
                 <td><a href="{{ item.route }}">{{ item.name }} {{ item.attribute }}</a></td>

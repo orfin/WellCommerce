@@ -1,41 +1,32 @@
 {% trans_default_domain "wellcommerce" %}
 
 <div class="category-tools">
-    <div class="dropdown pull-right">
-        <button class="btn btn-default dropdown-toggle btn-sm" type="button" id="ViewMenu" data-toggle="dropdown" aria-expanded="true">
-            {% trans %}product.options.options.view{% endtrans %}
-            <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" role="menu" aria-labelledby="ViewMenu">
-            <li><a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'view': 'list'})) }}">Products list</a></li>
-        </ul>
-    </div>
 
     <div class="dropdown pull-right">
         <button class="btn btn-default dropdown-toggle btn-sm" type="button" id="CurrencyMenu" data-toggle="dropdown" aria-expanded="true">
-            {% trans %}product.list.options.sort{% endtrans %}: {{ app.request.get('orderBy') }}
+            {% trans %}product.options.label.order{% endtrans %}: {{ ('product.options.order_by.' ~ app.request.get('orderBy'))|trans({}, 'wellcommerce') }} - {{ ('product.options.order_dir.' ~ app.request.get('orderDir'))|trans({}, 'wellcommerce') }}
             <span class="caret"></span>
         </button>
+
         <ul class="dropdown-menu" role="menu" aria-labelledby="CurrencyMenu">
             <li>
-
-                <a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'page': app.request.get('page'), 'limit': app.request.get('limit'), 'orderBy': 'name','orderDir': 'asc'})) }}">
-                    {% trans %}product.options.order_by.name{% endtrans %} - {% trans %}product.options.order_dir.ascending{% endtrans %}
+                <a href="{{ dynamic_path({'orderBy': 'name','orderDir': 'asc'}) }}">
+                    {% trans %}product.options.order_by.name{% endtrans %} - {% trans %}product.options.order_dir.asc{% endtrans %}
                 </a>
             </li>
             <li>
-                <a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'page': app.request.get('page'), 'limit': app.request.get('limit'), 'orderBy': 'name','orderDir': 'desc'})) }}">
-                    {% trans %}product.options.order_by.name{% endtrans %} - {% trans %}product.options.order_dir.descending{% endtrans %}
+                <a href="{{ dynamic_path({'orderBy': 'name','orderDir': 'desc'}) }}">
+                    {% trans %}product.options.order_by.name{% endtrans %} - {% trans %}product.options.order_dir.desc{% endtrans %}
                 </a>
             </li>
             <li>
-                <a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'page': app.request.get('page'), 'limit': app.request.get('limit'), 'orderBy': 'finalPrice','orderDir': 'asc'})) }}">
-                    {% trans %}product.options.order_by.price{% endtrans %} - {% trans %}product.options.order_dir.ascending{% endtrans %}
+                <a href="{{ dynamic_path({'orderBy': 'finalPrice','orderDir': 'asc'}) }}">
+                    {% trans %}product.options.order_by.finalPrice{% endtrans %} - {% trans %}product.options.order_dir.asc{% endtrans %}
                 </a>
             </li>
             <li>
-                <a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'page': app.request.get('page'), 'limit': app.request.get('limit'), 'orderBy': 'finalPrice','orderDir': 'desc'})) }}">
-                    {% trans %}product.options.order_by.price{% endtrans %} - {% trans %}product.options.order_dir.descending{% endtrans %}
+                <a href="{{ dynamic_path({'orderBy': 'finalPrice','orderDir': 'desc'}) }}">
+                    {% trans %}product.options.order_by.finalPrice{% endtrans %} - {% trans %}product.options.order_dir.desc{% endtrans %}
                 </a>
             </li>
         </ul>
@@ -43,13 +34,13 @@
 
     <div class="dropdown pull-right">
         <button class="btn btn-default dropdown-toggle btn-sm" type="button" id="LimitMenu" data-toggle="dropdown" aria-expanded="true">
-            {% trans %}product.list.options.limit{% endtrans %}: {{ app.request.get('limit') }}
+            {% trans %}product.options.label.limit{% endtrans %}: {{ app.request.get('limit') }}
             <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" role="menu" aria-labelledby="LimitMenu">
-            <li><a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'page': app.request.get('page'), 'limit': 10, 'orderBy': app.request.get('orderBy'),'orderDir': app.request.get('orderDir')})) }}">10</a></li>
-            <li><a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'page': app.request.get('page'), 'limit': 25, 'orderBy': app.request.get('orderBy'),'orderDir': app.request.get('orderDir')})) }}">25</a></li>
-            <li><a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'page': app.request.get('page'), 'limit': 50, 'orderBy': app.request.get('orderBy'),'orderDir': app.request.get('orderDir')})) }}">50</a></li>
+            <li><a href="{{ dynamic_path({'limit': 10, 'page': 1}) }}">10</a></li>
+            <li><a href="{{ dynamic_path({'limit': 25, 'page': 1}) }}">25</a></li>
+            <li><a href="{{ dynamic_path({'limit': 50, 'page': 1}) }}">50</a></li>
         </ul>
     </div>
 </div>

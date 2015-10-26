@@ -21,7 +21,7 @@
 			</li>
 			{% endif %}
 
-			{% for status in productStatuses() %}
+			{% for status in productStatuses().rows %}
             <li><a href="{{ status.route }}">{{ status.name }}</a></li>
             {% endfor %}
 

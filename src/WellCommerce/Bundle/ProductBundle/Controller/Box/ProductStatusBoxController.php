@@ -33,17 +33,21 @@ class ProductStatusBoxController extends AbstractBoxController implements BoxCon
      */
     public function indexAction(LayoutBoxSettingsCollection $boxSettings)
     {
+        $dataset       = $this->get('product.dataset.front');
         $requestHelper = $this->manager->getRequestHelper();
+        $limit         = $requestHelper->getAttributesBagParam('limit', $boxSettings->getParam('per_page', 10));
+        $offset        = $requestHelper->getAttributesBagParam('page', $limit);
 
-        $products = $this->get('product.dataset.front')->getResult('datagrid', [
-            'limit'      => $requestHelper->getQueryBagParam('limit', $boxSettings->getParam('per_page', 12)),
-            'order_by'   => $requestHelper->getQueryBagParam('orderBy', 'price'),
-            'order_dir'  => $requestHelper->getQueryBagParam('orderDir', 'asc'),
+        $products = $dataset->getResult('array', [
+            'limit'      => $limit,
+            'offset'     => ($offset * $limit) - $limit,
+            'order_by'   => $requestHelper->getAttributesBagParam('orderBy', 'name'),
+            'order_dir'  => $requestHelper->getAttributesBagParam('orderDir', 'asc'),
             'conditions' => $this->manager->getStatusConditions($boxSettings->getParam('status')),
         ]);
 
         return $this->displayTemplate('index', [
-            'dataset' => $products
+            'dataset' => $products,
         ]);
     }
 }

@@ -1,35 +1,42 @@
 <div class="box">
     <div class="panel panel-default filters">
         <div class="panel-body">
-            <fieldset>
-                <h5>{% trans %}layered_navigation.label.price{% endtrans %}
-                    <small>({{ app.request.session.get('_currency')|upper }})</small>
-                </h5>
-
-                <form class="form-inline price" role="form">
-                    <input type="number" class="form-control" id="price-from" placeholder="from">
+            <form id="filter-form">
+                <fieldset>
+                    <h5>{% trans %}layered_navigation.label.price{% endtrans %}
+                        <small>({{ app.request.session.get('_currency')|upper }})</small>
+                    </h5>
+                    <input type="number" class="form-control" id="price-from" name="priceFrom" placeholder="from">
                     <span class="divider">-</span>
-                    <input type="number" class="form-control" id="price-to" placeholder="to">
-                </form>
-            </fieldset>
+                    <input type="number" class="form-control" id="price-to" name="priceTo" placeholder="to">
+                </fieldset>
 
-            <fieldset>
-                <h5>{% trans %}layered_navigation.label.brands{% endtrans %}</h5>
-                {% for producer in producers %}
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" value="{{ producer.id }}">
-                        {{ producer.name }} <span>({{ producer.products }})</span>
-                    </label>
+                <fieldset>
+                    <h5>{% trans %}layered_navigation.label.brands{% endtrans %}</h5>
+                    {% for producer in producers.rows %}
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="producer[]" value="{{ producer.id }}">
+                                {{ producer.name }} <span>({{ producer.products }})</span>
+                            </label>
+                        </div>
+                    {% endfor %}
+                </fieldset>
+                <div class="clearfix">
+                    <button class="btn btn-primary btn-block text-left" type="submit">{% trans %}product.button.filter{% endtrans %}</button>
                 </div>
-                {% endfor %}
-            </fieldset>
+            </form>
         </div>
     </div>
 </div>
 
 <script type="text/javascript">
-    $(document).ready(function(){
+    $(document).ready(function () {
+        $('#filter-form').submit(function () {
+            var queryString = $(this).serialize();
+            var currentRoute = '{{ dynamic_path() }}';
 
+            return false;
+        });
     });
 </script>

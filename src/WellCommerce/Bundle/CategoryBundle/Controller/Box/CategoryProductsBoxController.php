@@ -35,12 +35,12 @@ class CategoryProductsBoxController extends AbstractBoxController implements Box
     {
         $dataset       = $this->get('product.dataset.front');
         $requestHelper = $this->manager->getRequestHelper();
-        $limit         = $requestHelper->getAttributesBagParam('limit', $boxSettings->getParam('per_page', 12));
+        $limit         = $requestHelper->getAttributesBagParam('limit', $boxSettings->getParam('per_page', 10));
         $offset        = $requestHelper->getAttributesBagParam('page', $limit);
 
-        $products = $dataset->getResult('datagrid', [
+        $products = $dataset->getResult('array', [
             'limit'      => $limit,
-            'offset'     => $offset,
+            'offset'     => ($offset * $limit) - $limit,
             'order_by'   => $requestHelper->getAttributesBagParam('orderBy', 'name'),
             'order_dir'  => $requestHelper->getAttributesBagParam('orderDir', 'asc'),
             'conditions' => $this->manager->getCurrentCategoryConditions(),

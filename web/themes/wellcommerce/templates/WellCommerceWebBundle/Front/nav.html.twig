@@ -32,7 +32,7 @@
 		</ul>
 		{% else %}
         <ul class="nav navbar-nav hidden-sm hidden-xs">
-            {% for status in productStatuses() %}
+            {% for status in productStatuses().rows %}
                 <li><a href="{{ status.route }}">{{ status.name }}</a></li>
             {% endfor %}
             {% for page in cmsPages %}

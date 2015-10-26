@@ -47,12 +47,16 @@ product:
     heading:
         recommendations: 'You might also like'
     options:
+        label:
+            order: Sort by
+            view: View as
+            limit: Show per page
         order_by:
             name: Name
-            price: Price
+            finalPrice: Price
         order_dir:
-            ascending: ascending
-            descending: descending
+            asc: ascending
+            desc: descending
         limit:  Show per page
         view_type:
             list: List view
