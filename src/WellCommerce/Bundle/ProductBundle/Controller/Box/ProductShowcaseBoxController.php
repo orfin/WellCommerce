@@ -36,7 +36,7 @@ class ProductShowcaseBoxController extends AbstractBoxController implements BoxC
         $requestHelper = $this->manager->getRequestHelper();
 
         $products = $this->get('product.dataset.front')->getResult('datagrid', [
-            'limit'      => $requestHelper->getQueryBagParam('limit', 1),
+            'limit'      => $requestHelper->getQueryBagParam('limit', 10),
             'order_by'   => $requestHelper->getQueryBagParam('orderBy', 'name'),
             'order_dir'  => $requestHelper->getQueryBagParam('orderDir', 'asc'),
             'conditions' => $this->manager->getStatusConditions($boxSettings->getParam('status')),
