@@ -59,7 +59,14 @@ class DynamicRoutingExtension extends \Twig_Extension
         return 'dynamic_path';
     }
 
-    public function getDynamicPath($replacements = [])
+    /**
+     * Generates a dynamic route with replaced parameters
+     *
+     * @param array $replacements
+     *
+     * @return string
+     */
+    public function getDynamicPath(array $replacements = [])
     {
         $route                   = $this->requestHelper->getAttributesBagParam('_route');
         $currentAttributesParams = $this->requestHelper->getAttributesBagParam('_route_params');

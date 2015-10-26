@@ -27,8 +27,6 @@ class ProductLayeredNavigationBoxController extends AbstractBoxController implem
      */
     public function indexAction()
     {
-        print_r($this->getRequestHelper()->getQueryBagParam('producer'));
-
         return $this->displayTemplate('index', [
             'producers' => $this->get('producer.dataset.front')->getResult('array')
         ]);
