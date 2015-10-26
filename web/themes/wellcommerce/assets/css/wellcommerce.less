@@ -304,6 +304,12 @@ img {
 		color: #2d8ea6;
 	}
 
+	&.alert-danger {
+		background-color: #FBE4E4;
+	    border-color: #F1BDC5;
+	    color: #ed1c24;
+	}
+
 	&.alert-sm {
 		padding: 20px;
 	}
@@ -1021,9 +1027,11 @@ footer {
 			font-size: 14px;
 		}
 
-		.price {
-			> input {
-				width: 76px;
+		.price-range {
+			input[type="number"] {
+				width: 75px;
+				display: inline-block;
+				font-weight: 300;
 			}
 
 			.divider {

@@ -2,7 +2,7 @@
     <div class="panel panel-default filters">
         <div class="panel-body">
             <form id="filter-form">
-                <fieldset>
+                <fieldset class="price-range">
                     <h5>{% trans %}layered_navigation.label.price{% endtrans %}
                         <small>({{ app.request.session.get('_currency')|upper }})</small>
                     </h5>
