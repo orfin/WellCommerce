@@ -1326,9 +1326,12 @@ footer {
 		-webkit-box-shadow: 0 4px 15px rgba(0, 0, 0, .175);
 				box-shadow: 0 4px 15px rgba(0, 0, 0, .175);
 
+		.carousel {
+			min-height: 250px;
+		}
+
 		.photo {
 			display: block;
-	// 		height: 222px;
 			margin: 20px;
 
 			img {
@@ -1368,14 +1371,9 @@ footer {
 			}
 		}
 
-		.left,
-		.right {
-			display: block;
+		.showcase-control {
 			width: 13px;
 			height: 23px;
-			text-indent: -9999px;
-			position: absolute;
-			background-position: center top;
 			position: absolute;
 			top: 50%;
 			margin-top: -6.5px;
@@ -1383,16 +1381,23 @@ footer {
 			&:hover {
 				background-position-y: bottom;
 			}
-		}
 
-		.left {
-			background-image: url(../img/carousel_prev.png);
-			left: 20px;
-		}
+			&.left {
+				background-image: url(../img/carousel_prev.png);
+				left: 20px;
+			}
 
-		.right {
-			background-image: url(../img/carousel_next.png);
-			right: 20px;
+			&.right {
+				background-image: url(../img/carousel_next.png);
+				right: 20px;
+			}
+
+			span {
+				overflow: hidden;
+				width: 1px;
+				height: 1px;
+				position: absolute;
+			}
 		}
 	}
 
