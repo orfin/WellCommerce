@@ -37,13 +37,15 @@ class ProductStatusBoxController extends AbstractBoxController implements BoxCon
         $requestHelper = $this->manager->getRequestHelper();
         $limit         = $requestHelper->getQueryBagParam('limit', $boxSettings->getParam('per_page', 10));
         $offset        = $requestHelper->getQueryBagParam('page', 1);
+        $conditions    = $this->manager->getStatusConditions($boxSettings->getParam('status'));
+        $conditions    = $this->get('product_layered_navigation.manager.front')->addLayeredNavigationConditions($conditions);
 
         $products = $dataset->getResult('array', [
             'limit'      => $limit,
             'offset'     => ($offset * $limit) - $limit,
             'order_by'   => $requestHelper->getAttributesBagParam('orderBy', 'name'),
             'order_dir'  => $requestHelper->getAttributesBagParam('orderDir', 'asc'),
-            'conditions' => $this->manager->getStatusConditions($boxSettings->getParam('status')),
+            'conditions' => $conditions,
         ]);
 
         return $this->displayTemplate('index', [
