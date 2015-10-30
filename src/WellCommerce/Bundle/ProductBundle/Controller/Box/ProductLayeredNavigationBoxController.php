@@ -14,6 +14,8 @@ namespace WellCommerce\Bundle\ProductBundle\Controller\Box;
 
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
+use WellCommerce\Bundle\DataSetBundle\Conditions\Condition\Gt;
+use WellCommerce\Bundle\DataSetBundle\Conditions\ConditionsCollection;
 
 /**
  * Class ProductLayeredNavigationBoxController
@@ -27,8 +29,13 @@ class ProductLayeredNavigationBoxController extends AbstractBoxController implem
      */
     public function indexAction()
     {
+        $producers = $this->get('producer.dataset.front')->getResult('array', [
+            'order_by'   => 'name',
+            'order_dir'  => 'asc',
+        ]);
+
         return $this->displayTemplate('index', [
-            'producers' => $this->get('producer.dataset.front')->getResult('array')
+            'producers' => $producers
         ]);
     }
 }

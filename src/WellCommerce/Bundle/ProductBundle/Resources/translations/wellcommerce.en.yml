@@ -44,6 +44,11 @@ product:
             width: Width
             height: Height
             depth: Depth
+        layered_navigation:
+            price: Filter by price
+            brand: Filter by brand
+    button:
+        filter: Filter results
     heading:
         recommendations: 'You might also like'
     options:

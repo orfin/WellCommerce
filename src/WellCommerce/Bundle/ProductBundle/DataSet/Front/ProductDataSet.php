@@ -41,6 +41,7 @@ class ProductDataSet extends AbstractDataSet
             'currency'         => 'product.sellPrice.currency',
             'tax'              => 'sell_tax.value',
             'stock'            => 'product.stock',
+            'producerId'       => 'IDENTITY(product.producer)',
             'producerName'     => 'producers_translation.name',
             'category'         => 'categories.id',
             'shop'             => 'product_shops.id',

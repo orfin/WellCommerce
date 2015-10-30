@@ -480,3 +480,44 @@ var GCoupon = function(oOptions) {
 };
 
 new GPlugin('GCoupon', oCouponDefaults, GCoupon);
+
+var oLayeredNavigationDefaults = {
+    sFilterRoute:      'front.product_layered.filter',
+    sCurrentRoute:      '',
+    sCurrentRouteParams:      'front.product_layered.filter'
+};
+
+var GLayeredNavigation = function(oOptions) {
+
+    var gThis = this;
+
+    gThis._Constructor = function() {
+        gThis.InitializeEvents();
+    };
+
+    gThis.InitializeEvents = function(){
+        $(gThis).bind('submit', gThis.OnSubmit);
+    };
+
+    gThis.OnSubmit = function(){
+        var oRequest = {
+            form: $(gThis).serialize(),
+            route: gThis.m_oOptions.sCurrentRoute,
+            route_params: gThis.m_oOptions.sCurrentRouteParams
+        };
+
+        GAjaxRequest(Routing.generate(gThis.m_oOptions.sFilterRoute), oRequest, function(oResponse){
+            if(oResponse.success){
+                return window.location.href = oResponse.redirectUrl;
+            }else{
+                alert(oResponse.message);
+            }
+        });
+
+        return false;
+    };
+
+    gThis._Constructor();
+};
+
+new GPlugin('GLayeredNavigation', oLayeredNavigationDefaults, GLayeredNavigation);

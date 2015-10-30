@@ -12,9 +12,25 @@
                 <argument type="service" id="service_container" />
             </call>
         </service>
+
+        <service id="product_layered_navigation.manager.front" class="WellCommerce\Bundle\ProductBundle\Manager\Front\ProductLayeredNavigationManager">
+            <argument type="service" id="product.repository"/>
+            <argument type="service" id="product.event_dispatcher"/>
+            <argument type="service" id="product.factory"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
         
         <service id="product.controller.front" class="WellCommerce\Bundle\ProductBundle\Controller\Front\ProductController">
             <argument type="service" id="product.manager.front"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="product_layered_navigation.controller.front" class="WellCommerce\Bundle\ProductBundle\Controller\Front\ProductLayeredNavigationController">
+            <argument type="service" id="product_layered_navigation.manager.front"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>

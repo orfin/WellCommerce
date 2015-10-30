@@ -26,18 +26,30 @@
                 <argument key="page">1</argument>
                 <argument key="orderBy">name</argument>
                 <argument key="orderDir">asc</argument>
+                <argument key="priceFrom">0</argument>
+                <argument key="priceTo">9999</argument>
+                <argument key="producers">null</argument>
+                <argument key="attributes">null</argument>
             </argument>
             <argument type="collection" key="requirements">
                 <argument key="limit">\d{1,10}</argument>
                 <argument key="page">\d{1,10}</argument>
                 <argument key="orderBy">name|finalPrice</argument>
                 <argument key="orderDir">asc|desc</argument>
+                <argument key="priceFrom">\d{1,10}</argument>
+                <argument key="priceTo">\d{1,10}</argument>
+                <argument key="producers">[\d+_]+</argument>
+                <argument key="attributes">[\d+_]+</argument>
             </argument>
             <argument type="collection" key="pattern">
                 <argument key="page" />
                 <argument key="limit" />
                 <argument key="orderBy" />
                 <argument key="orderDir" />
+                <argument key="priceFrom" />
+                <argument key="priceTo" />
+                <argument key="producers" />
+                <argument key="attributes" />
             </argument>
             <tag name="route.generator" />
         </service>

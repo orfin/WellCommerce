@@ -137,9 +137,9 @@ abstract class AbstractDataSet implements DataSetInterface
         $requestOptions = $this->getRequestOptions($requestOptions);
         $context        = $this->manager->createContext($contextType, $contextOptions);
         $request        = $this->manager->createRequest($requestOptions);
-        $query          = $this->getQuery($request);
+        $queryBuilder   = $this->getQueryBuilder($request);
 
-        return $context->getResult($query, $request);
+        return $context->getResult($queryBuilder, $request, $this->columns);
     }
 
     public function setContext(ContextInterface $context)
@@ -188,17 +188,6 @@ abstract class AbstractDataSet implements DataSetInterface
     protected function getDataSetTransformer($type, array $options = [])
     {
         return $this->manager->createTransformer($type, $options);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getQuery(DataSetRequestInterface $request)
-    {
-        $queryBuilder = $this->getQueryBuilder($request);
-        $query        = $queryBuilder->getQuery();
-
-        return $query;
     }
 
     /**

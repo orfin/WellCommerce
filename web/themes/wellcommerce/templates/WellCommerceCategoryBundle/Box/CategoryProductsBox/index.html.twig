@@ -1,4 +1,4 @@
-{% if dataset.total > 0 %}
+{% if dataset.pagination.totalRows > 0 %}
     {% include 'WellCommerceProductBundle:Front/Common:products.html.twig' %}
 {% else %}
     <div class="alert alert-info" role="alert">

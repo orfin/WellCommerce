@@ -15,6 +15,7 @@ namespace WellCommerce\Bundle\CategoryBundle\Controller\Box;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
 use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxSettingsCollection;
+use WellCommerce\Bundle\ProductBundle\Conditions\ProductLayeredNavigationConditions;
 
 /**
  * Class CategoryProductsBoxController
@@ -37,13 +38,15 @@ class CategoryProductsBoxController extends AbstractBoxController implements Box
         $requestHelper = $this->manager->getRequestHelper();
         $limit         = $requestHelper->getAttributesBagParam('limit', $boxSettings->getParam('per_page', 10));
         $offset        = $requestHelper->getAttributesBagParam('page', $limit);
+        $conditions    = $this->manager->getCurrentCategoryConditions();
+        $conditions    = $this->get('product_layered_navigation.manager.front')->addLayeredNavigationConditions($conditions);
 
         $products = $dataset->getResult('array', [
             'limit'      => $limit,
             'offset'     => ($offset * $limit) - $limit,
             'order_by'   => $requestHelper->getAttributesBagParam('orderBy', 'name'),
             'order_dir'  => $requestHelper->getAttributesBagParam('orderDir', 'asc'),
-            'conditions' => $this->manager->getCurrentCategoryConditions(),
+            'conditions' => $conditions,
         ]);
 
         return $this->displayTemplate('index', [

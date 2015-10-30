@@ -39,4 +39,9 @@ class CategoryController extends AbstractFrontController implements FrontControl
             'category' => $category
         ]);
     }
+
+    public function filterAction()
+    {
+
+    }
 }
