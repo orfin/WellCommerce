@@ -73,7 +73,7 @@ class CartProduct implements CartProductInterface
      */
     public function setQuantity($quantity)
     {
-        $this->quantity = (int)$quantity;
+        $this->quantity = abs((int)$quantity);
     }
 
     /**
@@ -81,7 +81,7 @@ class CartProduct implements CartProductInterface
      */
     public function increaseQuantity($increase)
     {
-        $this->quantity += (int)$increase;
+        $this->quantity += abs((int)$increase);
     }
 
     /**
@@ -89,7 +89,7 @@ class CartProduct implements CartProductInterface
      */
     public function decreaseQuantity($decrease)
     {
-        $this->quantity -= (int)$decrease;
+        $this->quantity -= abs((int)$decrease);
     }
 
     /**

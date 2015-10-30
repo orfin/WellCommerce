@@ -12,6 +12,7 @@
 
 namespace WellCommerce\Bundle\CartBundle\Manager\Front;
 
+use Symfony\Component\Validator\Exception\ValidatorException;
 use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
 use WellCommerce\Bundle\CartBundle\Exception\DeleteCartItemException;
@@ -29,8 +30,12 @@ class CartProductManager extends AbstractFrontManager implements CartProductMana
     /**
      * {@inheritdoc}
      */
-    public function initCartProduct(CartInterface $cart, ProductInterface $product, ProductAttributeInterface $attribute = null, $quantity = 1)
-    {
+    public function initCartProduct(
+        CartInterface $cart,
+        ProductInterface $product,
+        ProductAttributeInterface $attribute = null,
+        $quantity = 1
+    ) {
         $cartProduct = $this->initResource();
         $cartProduct->setCart($cart);
         $cartProduct->setProduct($product);
@@ -55,8 +60,12 @@ class CartProductManager extends AbstractFrontManager implements CartProductMana
     /**
      * {@inheritdoc}
      */
-    public function addProductToCart(CartInterface $cart, ProductInterface $product, ProductAttributeInterface $attribute = null, $quantity = 1)
-    {
+    public function addProductToCart(
+        CartInterface $cart,
+        ProductInterface $product,
+        ProductAttributeInterface $attribute = null,
+        $quantity = 1
+    ) {
         $cartProduct = $this->findProductInCart($cart, $product, $attribute);
 
         if (null === $cartProduct) {

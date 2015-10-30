@@ -42,7 +42,7 @@
             <argument type="collection" key="defaults">
                 <argument key="_controller">product_status.controller.front:indexAction</argument>
                 <argument key="page">1</argument>
-                <argument key="limit">10</argument>
+                <argument key="limit">12</argument>
                 <argument key="orderBy">name</argument>
                 <argument key="orderDir">asc</argument>
                 <argument key="priceFrom">0</argument>
