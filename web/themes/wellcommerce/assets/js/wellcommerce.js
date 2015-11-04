@@ -34,6 +34,15 @@ $(document).ready(function () {
         sRemoveButtonIdentifier: 'remove_coupon'
     });
 
+	$('.push-search, .sliding-search > div').click(function() {
+		$('body').toggleClass('sliding-search-is-open');
+	});
+
+	 $('.sliding-search > div > form').click(function(event){
+	     event.stopPropagation();
+	 });
+
+
     $('.push-hamburger').click(function() {
 		$('body').toggleClass('hamburger-is-open');
 	});

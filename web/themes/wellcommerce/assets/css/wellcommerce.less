@@ -2094,6 +2094,105 @@ footer {
 }
 
 /*
+* SLIDING SEARCH
+*/
+
+body {
+	&.sliding-search-is-open {
+		overflow-y: hidden;
+
+		> main {
+// 			opacity: .7;
+		}
+
+		.sliding-search {
+			visibility: visible;
+			.transition(visibility 0s 0s);
+
+			> div {
+				.transform(translateY(0));
+				.transition(transform .5s);
+				-webkit-transition-timing-function: cubic-bezier(0.82, 0.01, 0.77, 0.78);
+			       -moz-transition-timing-function: cubic-bezier(0.82, 0.01, 0.77, 0.78);
+				   	 	transition-timing-function: cubic-bezier(0.82, 0.01, 0.77, 0.78);
+
+			}
+		}
+	}
+
+	main {
+		position: relative;
+		z-index: 1;
+		.transition(all .7s);
+		-webkit-overflow-scrolling: touch;
+		backface-visibility: hidden;
+		-webkit-transition-timing-function: cubic-bezier(0.91, 0.01, 0.6, 0.99);
+	       -moz-transition-timing-function: cubic-bezier(0.91, 0.01, 0.6, 0.99);
+		   	 	transition-timing-function: cubic-bezier(0.91, 0.01, 0.6, 0.99);
+	}
+}
+
+.sliding-search {
+	position: fixed;
+	z-index: 1050;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	visibility: hidden;
+	z-index: 100;
+	.transition(visibility 0s.7s);
+
+	> div {
+		background-color: transparent;
+		height: 100%;
+		padding: 0 25vw;
+		overflow-y: auto;
+		backface-visibility: hidden;
+		-webkit-overflow-scrolling: touch;
+		.transform(translateY(-100%));
+		.transition(transform .7s);
+		-webkit-transition-timing-function: cubic-bezier(0.86, 0.01, 0.77, 0.78);
+	       -moz-transition-timing-function: cubic-bezier(0.86, 0.01, 0.77, 0.78);
+		   	 	transition-timing-function: cubic-bezier(0.86, 0.01, 0.77, 0.78);
+
+		form {
+			position: absolute;
+		    top: 25%;
+			background-color: #555b5a;
+			border: 0;
+		    width: 50vw;
+		    -webkit-box-shadow: 0 4px 35px rgba(0, 0, 0, 0.6);
+					box-shadow: 0 4px 35px rgba(0, 0, 0, 0.6);
+
+			.form-control,
+			.input-group-addon {
+				background-color: transparent;
+				border: 0;
+				font-size: 18px;
+			}
+
+			.input-group-addon {
+				padding-left: 15px;
+				padding-right: 15px;
+				color: rgba(255,255,255,0.5);
+			}
+
+			.form-control {
+				height: 50px;
+				font-weight: 300;
+				color: #fff;
+
+				&:focus {
+					-webkit-box-shadow: none;
+							box-shadow: none;
+				}
+			}
+		}
+	}
+}
+
+/*
 * HAMBURGER MENU
 */
 
@@ -2160,7 +2259,7 @@ body {
 	.transition(visibility 0s.7s);
 
 	> div {
-		background: #454847;
+		background-color: #454847;
 		width: 258px;
 		height: 100%;
 		overflow-y: auto;
@@ -2171,7 +2270,8 @@ body {
 		-webkit-transition-timing-function: cubic-bezier(0.86, 0.01, 0.77, 0.78);
 	       -moz-transition-timing-function: cubic-bezier(0.86, 0.01, 0.77, 0.78);
 		   	 	transition-timing-function: cubic-bezier(0.86, 0.01, 0.77, 0.78);
-
+		-webkit-box-shadow: 0 4px 15px rgba(0, 0, 0, 0.175);
+				box-shadow: 0 4px 15px rgba(0, 0, 0, 0.175);
 	}
 
 	.hamburger-header {
