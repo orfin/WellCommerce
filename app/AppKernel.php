@@ -38,6 +38,7 @@ class AppKernel extends Kernel
             new Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
             new Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
+            new Ivory\LuceneSearchBundle\IvoryLuceneSearchBundle(),
             // WellCommerce bundles
             new WellCommerce\Bundle\CoreBundle\WellCommerceCoreBundle(),
             new WellCommerce\Bundle\FormBundle\WellCommerceFormBundle(),
@@ -69,6 +70,7 @@ class AppKernel extends Kernel
             new WellCommerce\Bundle\OrderBundle\WellCommerceOrderBundle(),
             new WellCommerce\Bundle\CouponBundle\WellCommerceCouponBundle(),
             new WellCommerce\Bundle\CartBundle\WellCommerceCartBundle(),
+            new WellCommerce\Bundle\SearchBundle\WellCommerceSearchBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'])) {

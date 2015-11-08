@@ -4,6 +4,7 @@ web/js/
 web/js/compiled/
 app/bootstrap.php.cache*
 app/cache/*
+app/store/*
 app/cache/dev/*
 app/config/parameters.yml
 app/phpunit.xml

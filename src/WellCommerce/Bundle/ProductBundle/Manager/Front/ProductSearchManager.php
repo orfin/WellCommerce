@@ -13,8 +13,10 @@
 namespace WellCommerce\Bundle\ProductBundle\Manager\Front;
 
 use WellCommerce\Bundle\CoreBundle\Manager\Front\AbstractFrontManager;
+use WellCommerce\Bundle\DataSetBundle\Conditions\Condition\In;
 use WellCommerce\Bundle\DataSetBundle\Conditions\ConditionsCollection;
-use WellCommerce\Bundle\ProductBundle\Provider\ProductSearchProviderInterface;
+use WellCommerce\Bundle\SearchBundle\Provider\ProductSearchProviderInterface;
+use WellCommerce\Bundle\SearchBundle\Query\SimpleQuery;
 
 /**
  * Class ProductSearchManager
@@ -45,6 +47,12 @@ class ProductSearchManager extends AbstractFrontManager
      */
     public function addSearchConditions(ConditionsCollection $conditions)
     {
-        return $this->provider->addSearchConditions($conditions);
+        $requestHelper = $this->getRequestHelper();
+        $phrase        = $requestHelper->getAttributesBagParam('phrase');
+        $query         = new SimpleQuery($phrase);
+        $identifiers   = $this->provider->searchProducts($query);
+        $conditions->add(new In('id', $identifiers));
+
+        return $conditions;
     }
 }

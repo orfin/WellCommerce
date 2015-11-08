@@ -18,7 +18,7 @@ use WellCommerce\Bundle\DataSetBundle\Conditions\ConditionsCollection;
 use WellCommerce\Bundle\LayoutBundle\Collection\LayoutBoxSettingsCollection;
 
 /**
- * Class ProductShowcaseBoxController
+ * Class ProductSearchBoxController
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
@@ -37,14 +37,13 @@ class ProductSearchBoxController extends AbstractBoxController implements BoxCon
         $dataset       = $this->get('product.dataset.front');
         $conditions    = new ConditionsCollection();
         $requestHelper = $this->getRequestHelper();
-        $offset        = $requestHelper->getAttributesBagParam('page', 1);
         $limit         = $this->manager->getRequestHelper()->getAttributesBagParam('limit', $boxSettings->getParam('per_page', 12));
         $conditions    = $this->manager->addSearchConditions($conditions);
         $conditions    = $this->getLayeredNavigationHelper()->addLayeredNavigationConditions($conditions);
 
         $products = $dataset->getResult('array', [
             'limit'      => $limit,
-            'offset'     => ($offset * $limit) - $limit,
+            'page'       => $requestHelper->getAttributesBagParam('page', 1),
             'order_by'   => $requestHelper->getAttributesBagParam('orderBy', 'name'),
             'order_dir'  => $requestHelper->getAttributesBagParam('orderDir', 'asc'),
             'conditions' => $conditions,

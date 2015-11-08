@@ -10,9 +10,9 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ProductBundle\Provider;
+namespace WellCommerce\Bundle\SearchBundle\Provider;
 
-use WellCommerce\Bundle\DataSetBundle\Conditions\ConditionsCollection;
+use WellCommerce\Bundle\SearchBundle\Query\SimpleQuery;
 
 /**
  * Interface ProductSearchProviderInterface
@@ -22,9 +22,7 @@ use WellCommerce\Bundle\DataSetBundle\Conditions\ConditionsCollection;
 interface ProductSearchProviderInterface
 {
     /**
-     * @param ConditionsCollection $collection
-     *
-     * @return ConditionsCollection
+     * @param SimpleQuery $query
      */
-    public function addSearchConditions(ConditionsCollection $collection);
+    public function searchProducts(SimpleQuery $query);
 }
