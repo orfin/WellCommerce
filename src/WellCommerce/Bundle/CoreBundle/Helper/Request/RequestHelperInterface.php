@@ -79,31 +79,6 @@ interface RequestHelperInterface
     public function getCurrentHost();
 
     /**
-     * Returns current offset
-     *
-     * @param number $limit
-     *
-     * @return int|number
-     */
-    public function getCurrentOffset($limit);
-
-    /**
-     * Returns current page
-     *
-     * @return number
-     */
-    public function getCurrentPage();
-
-    /**
-     * Returns current limit
-     *
-     * @param mixed $default
-     *
-     * @return number
-     */
-    public function getCurrentLimit($default);
-
-    /**
      * Returns current locale
      *
      * @return string

@@ -9,15 +9,26 @@
         </button>
 
         <ul class="dropdown-menu" role="menu" aria-labelledby="SortingMenu">
-            {% for sortColumn, directions in sorting %}
-                {% for direction, translation in directions %}
-                    <li>
-                        <a href="{{ dynamic_path({'orderBy': sortColumn,'orderDir': direction}) }}">
-                            {{ translation }}
-                        </a>
-                    </li>
-                {% endfor %}
-            {% endfor %}
+            <li>
+                <a href="{{ dynamic_path({'orderBy': 'name','orderDir': 'asc'}) }}">
+                    {% trans %}product.options.order_by.name{% endtrans %} - {% trans %}product.options.order_dir.asc{% endtrans %}
+                </a>
+            </li>
+            <li>
+                <a href="{{ dynamic_path({'orderBy': 'name','orderDir': 'desc'}) }}">
+                    {% trans %}product.options.order_by.name{% endtrans %} - {% trans %}product.options.order_dir.desc{% endtrans %}
+                </a>
+            </li>
+            <li>
+                <a href="{{ dynamic_path({'orderBy': 'finalPrice','orderDir': 'asc'}) }}">
+                    {% trans %}product.options.order_by.finalPrice{% endtrans %} - {% trans %}product.options.order_dir.asc{% endtrans %}
+                </a>
+            </li>
+            <li>
+                <a href="{{ dynamic_path({'orderBy': 'finalPrice','orderDir': 'desc'}) }}">
+                    {% trans %}product.options.order_by.finalPrice{% endtrans %} - {% trans %}product.options.order_dir.desc{% endtrans %}
+                </a>
+            </li>
         </ul>
     </div>
 
