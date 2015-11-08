@@ -268,6 +268,38 @@ class Cart implements CartInterface
     /**
      * {@inheritdoc}
      */
+    public function getShippingCostQuantity()
+    {
+        return $this->totals->getQuantity();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getShippingCostWeight()
+    {
+        return $this->totals->getWeight();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getShippingCostGrossPrice()
+    {
+        return $this->totals->getGrossPrice();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getShippingCostCurrency()
+    {
+        return $this->getCurrency();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function hasMethods()
     {
         return (bool)($this->getShippingMethodCost() instanceof ShippingMethodCostInterface

@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Entity;
 
+use WellCommerce\Bundle\TaxBundle\Helper\TaxHelper;
+
 /**
  * Class OrderTotal
  *
@@ -53,14 +55,6 @@ class OrderTotal
     }
 
     /**
-     * @param float|int $netAmount
-     */
-    public function setNetAmount($netAmount)
-    {
-        $this->netAmount = (float)$netAmount;
-    }
-
-    /**
      * @return float|int
      */
     public function getGrossAmount()
@@ -82,14 +76,6 @@ class OrderTotal
     public function getTaxAmount()
     {
         return (float)$this->taxAmount;
-    }
-
-    /**
-     * @param float|int $taxAmount
-     */
-    public function setTaxAmount($taxAmount)
-    {
-        $this->taxAmount = (float)$taxAmount;
     }
 
     /**
@@ -122,6 +108,34 @@ class OrderTotal
     public function setCurrency($currency)
     {
         $this->currency = $currency;
+    }
+
+    /**
+     * @param float|int $netAmount
+     */
+    public function setNetAmount($netAmount)
+    {
+        $this->netAmount = $netAmount;
+    }
+
+    /**
+     * @param float|int $taxAmount
+     */
+    public function setTaxAmount($taxAmount)
+    {
+        $this->taxAmount = $taxAmount;
+    }
+
+    /**
+     * Recalculates the net and tax amount
+     *
+     * @param int|float $grossAmount
+     * @param int|float $taxRate
+     */
+    public function recalculate()
+    {
+        $this->netAmount = TaxHelper::calculateNetPrice($this->grossAmount, $this->taxRate);
+        $this->taxAmount = $this->grossAmount - $this->netAmount;
     }
 }
 

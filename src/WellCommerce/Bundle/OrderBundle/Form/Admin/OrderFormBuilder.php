@@ -11,8 +11,15 @@
  */
 namespace WellCommerce\Bundle\OrderBundle\Form\Admin;
 
+use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\CoreBundle\Form\AbstractFormBuilder;
+use WellCommerce\Bundle\FormBundle\Elements\ElementInterface;
 use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
+use WellCommerce\Bundle\OrderBundle\Context\Admin\OrderContextInterface;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
+use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCostInterface;
+use WellCommerce\Bundle\ShippingBundle\Provider\ShippingMethodProviderInterface;
 
 /**
  * Class OrderFormBuilder
@@ -22,24 +29,93 @@ use WellCommerce\Bundle\FormBundle\Elements\FormInterface;
 class OrderFormBuilder extends AbstractFormBuilder
 {
     /**
+     * @var ShippingMethodProviderInterface
+     */
+    protected $shippingMethodProvider;
+
+    /**
+     * @var OrderContextInterface
+     */
+    protected $orderContext;
+
+    /**
+     * @param ShippingMethodProviderInterface $shippingMethodProvider
+     */
+    public function setShippingMethodProvider(ShippingMethodProviderInterface $shippingMethodProvider)
+    {
+        $this->shippingMethodProvider = $shippingMethodProvider;
+    }
+
+    /**
+     * @param OrderContextInterface $orderContext
+     */
+    public function setOrderContext(OrderContextInterface $orderContext)
+    {
+        $this->orderContext = $orderContext;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function buildForm(FormInterface $form)
     {
-        $countries = $this->get('country.repository')->all();
+        $currentOrder              = $this->orderContext->getCurrentOrder();
+        $shippingMethodsCollection = $this->shippingMethodProvider->getShippingMethodCostsCollection($currentOrder);
+        $countries                 = $this->get('country.repository')->all();
 
-        $addresses = $form->addChild($this->getElement('nested_fieldset', [
-            'name'  => 'addresses',
-            'label' => $this->trans('order.heading.addresses'),
+        $requiredData = $form->addChild($this->getElement('nested_fieldset', [
+            'name'  => 'required_data',
+            'label' => $this->trans('order.form.fieldset.products'),
         ]));
 
-        $contactDetails = $addresses->addChild($this->getElement('nested_fieldset', [
+        $requiredData->addChild($this->getElement('order_editor', [
+            'name'                => 'products',
+            'label'               => $this->trans('order.heading.products'),
+            'repeat_min'          => 1,
+            'repeat_max'          => ElementInterface::INFINITE,
+            'load_products_route' => 'admin.product.grid',
+            'on_change'           => 'OnProductListChange',
+            'on_before_change'    => 'OnProductListBeforeChange',
+            'transformer'         => $this->getRepositoryTransformer('order_product_collection', $this->get('order_product.repository'))
+        ]));
+
+        $orderDetails = $form->addChild($this->getElement('columns', [
+            'name'  => 'orderMethodsDetails',
+            'label' => $this->trans('order.heading.order_methods_details'),
+        ]));
+
+        $paymentShippingData = $orderDetails->addChild($this->getElement('nested_fieldset', [
+            'name'  => 'methods',
+            'label' => $this->trans('client.heading.billing_address'),
+        ]));
+
+        $shippingMethod = $paymentShippingData->addChild($this->getElement('select', [
+            'name'        => 'shippingMethod',
+            'label'       => $this->trans('order.label.shipping_method'),
+            'options'     => $this->getShippingMethodOptions($shippingMethodsCollection, $currentOrder),
+            'transformer' => $this->getRepositoryTransformer('entity', $this->get('shipping_method.repository'))
+        ]));
+
+        $paymentMethod = $paymentShippingData->addChild($this->getElement('select', [
+            'name'        => 'paymentMethod',
+            'label'       => $this->trans('order.label.payment_method'),
+            'options'     => $this->getPaymentMethodOptions($shippingMethodsCollection, $currentOrder),
+            'transformer' => $this->getRepositoryTransformer('entity', $this->get('payment_method.repository'))
+        ]));
+
+        $orderTotalData = $orderDetails->addChild($this->getElement('nested_fieldset', [
+            'name'  => 'orderTotalData',
+            'label' => $this->trans('order.heading.order_total'),
+        ]));
+
+        $orderTotalData->addChild($this->getElement('text_field', [
+            'name'  => 'shippingTotal.grossAmount',
+            'label' => $this->trans('order.label.order_total.shipping'),
+        ]));
+
+        $contactDetails = $form->addChild($this->getElement('nested_fieldset', [
             'name'  => 'contactDetails',
-            'label' => '',
-        ]));
-
-        $contactDetails->addChild($this->getElement('tip', [
-            'tip' => '<p>' . $this->trans('client.heading.contact_details') . '</p>',
+            'label' => $this->trans('order.heading.contact_details'),
         ]));
 
         $contactDetails->addChild($this->getElement('text_field', [
@@ -67,13 +143,14 @@ class OrderFormBuilder extends AbstractFormBuilder
             'label' => $this->trans('client.label.contact_details.email'),
         ]));
 
-        $billingAddress = $addresses->addChild($this->getElement('nested_fieldset', [
-            'name'  => 'billingAddress',
-            'label' => '',
+        $addresses = $form->addChild($this->getElement('columns', [
+            'name'  => 'addresses',
+            'label' => $this->trans('order.heading.addresses'),
         ]));
 
-        $billingAddress->addChild($this->getElement('tip', [
-            'tip' => '<p>' . $this->trans('client.heading.billing_address') . '</p>',
+        $billingAddress = $addresses->addChild($this->getElement('nested_fieldset', [
+            'name'  => 'billingAddress',
+            'label' => $this->trans('client.heading.billing_address'),
         ]));
 
         $billingAddress->addChild($this->getElement('text_field', [
@@ -124,11 +201,7 @@ class OrderFormBuilder extends AbstractFormBuilder
 
         $shippingAddress = $addresses->addChild($this->getElement('nested_fieldset', [
             'name'  => 'shippingAddress',
-            'label' => '',
-        ]));
-
-        $shippingAddress->addChild($this->getElement('tip', [
-            'tip' => '<p>' . $this->trans('client.heading.shipping_address') . '</p>',
+            'label' => $this->trans('client.heading.shipping_address'),
         ]));
 
         $shippingAddress->addChild($this->getElement('text_field', [
@@ -180,5 +253,49 @@ class OrderFormBuilder extends AbstractFormBuilder
         $form->addFilter($this->getFilter('no_code'));
         $form->addFilter($this->getFilter('trim'));
         $form->addFilter($this->getFilter('secure'));
+    }
+
+    /**
+     * Returns shipping options for given order
+     *
+     * @param OrderInterface $order
+     *
+     * @return array
+     */
+    protected function getShippingMethodOptions(Collection $shippingMethodsCollection, OrderInterface $order)
+    {
+        $targetCurrency = $order->getCurrency();
+        $options        = [];
+
+        $shippingMethodsCollection->map(function (ShippingMethodCostInterface $shippingMethodCost) use (&$options, $targetCurrency) {
+            $shippingMethod = $shippingMethodCost->getShippingMethod();
+
+            $options[$shippingMethod->getId()] = $shippingMethod->translate()->getName();
+        });
+
+        return $options;
+    }
+
+    /**
+     * Returns shipping options for given order
+     *
+     * @param OrderInterface $order
+     *
+     * @return array
+     */
+    protected function getPaymentMethodOptions(Collection $shippingMethodsCollection, OrderInterface $order)
+    {
+        $options = [];
+
+        $shippingMethodsCollection->map(function (ShippingMethodCostInterface $shippingMethodCost) use (&$options) {
+            $shippingMethod = $shippingMethodCost->getShippingMethod();
+            $collection     = $shippingMethod->getPaymentMethods();
+
+            $collection->map(function (PaymentMethodInterface $paymentMethod) use (&$options) {
+                $options[$paymentMethod->getId()] = $paymentMethod->translate()->getName();
+            });
+        });
+
+        return $options;
     }
 }

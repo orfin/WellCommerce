@@ -15,6 +15,18 @@
             </call>
         </service>
 
+        <service id="order_product.manager.admin" class="WellCommerce\Bundle\OrderBundle\Manager\Admin\OrderProductManager">
+            <argument type="service" id="order_product.repository"/>
+            <argument type="service" id="order_product.event_dispatcher"/>
+            <argument type="service" id="order_product.factory"/>
+            <call method="setProductRepository">
+                <argument type="service" id="product.repository"/>
+            </call>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
         <service id="order.controller.admin" class="WellCommerce\Bundle\OrderBundle\Controller\Admin\OrderController">
             <argument type="service" id="order.manager.admin"/>
             <call method="setContainer">
@@ -28,6 +40,12 @@
             <argument type="service" id="order.event_dispatcher"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
+            </call>
+            <call method="setShippingMethodProvider">
+                <argument type="service" id="shipping_method.provider"/>
+            </call>
+            <call method="setOrderContext">
+                <argument type="service" id="order.context.admin"/>
             </call>
         </service>
 
@@ -54,5 +72,15 @@
         <service id="order.dataset.transformer.client" class="WellCommerce\Bundle\OrderBundle\DataSet\Transformer\ClientTransformer">
             <tag name="dataset.transformer" alias="order_client"/>
         </service>
+
+        <service id="form.order_product_collection.data_transformer" class="WellCommerce\Bundle\OrderBundle\Form\Admin\DataTransformer\OrderProductCollectionToArrayTransformer" scope="prototype">
+            <argument type="service" id="doctrine.helper"/>
+            <call method="setOrderProductManager">
+                <argument type="service" id="order_product.manager.admin"/>
+            </call>
+            <tag name="form.data_transformer" alias="order_product_collection"/>
+        </service>
+
+        <service id="order.context.admin" class="WellCommerce\Bundle\OrderBundle\Context\Admin\OrderContext"/>
     </services>
 </container>

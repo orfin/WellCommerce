@@ -6,5 +6,41 @@
         <li><a href="{{ path('admin.order.index') }}" class="button return"><span></span></a></li>
         <li><a href="#{{ form.getName() }}" rel="submit" class="button"><span>{% trans %}admin.button.save_and_finish{% endtrans %}</span></a></li>
     </ul>
-    {{ form_js(form) }}
+
+    <div class="view-order GForm">
+
+        <fieldset class="no-margin">
+            <legend><span>{% trans %}TXT_VIEW_ORDER_BASIC_DATA{% endtrans %}</span></legend>
+            {{ form_js(form) }}
+        </fieldset>
+
+        <fieldset class="no-margin">
+            <legend><span>{% trans %}TXT_VIEW_ORDER_INVOICES{% endtrans %}</span></legend>
+
+        </fieldset>
+
+    </div>
+
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+            $('.view-order').GTabs();
+        });
+
+        var RecalculateOrder = function(eEvent){
+
+        };
+
+        var OnProductListChange = GEventHandler(function(eEvent) {
+            var gSelectedDatagrid = $('.field-order-editor').get(0).gNode.m_gSelectedDatagrid;
+            if(gSelectedDatagrid.m_aoRows.length){
+                RecalculateOrder(eEvent, true);
+            }
+            gSelectedDatagrid.m_jBody.find('.show-thumb').mouseenter(GTooltip.ShowThumbForThis).mouseleave(GTooltip.HideThumbForThis);
+        });
+
+        var OnProductListBeforeChange = GEventHandler(function(eEvent) {
+
+        });
+    </script>
 {% endblock %}

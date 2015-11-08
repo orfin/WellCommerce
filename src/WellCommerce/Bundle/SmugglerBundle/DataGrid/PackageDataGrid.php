@@ -119,12 +119,12 @@ class PackageDataGrid extends AbstractDataGrid
 
         $eventHandlers->add(new LoadEventHandler([
             'function' => $this->getJavascriptFunctionName('load'),
-            'route'    => $this->getRouteForAction('grid'),
+            'route'    => $this->getActionUrl('grid'),
         ]));
 
         $eventHandlers->add(new ClickRowEventHandler([
             'function' => $this->getJavascriptFunctionName('click'),
-            'route'    => $this->getRouteForAction('edit'),
+            'route'    => $this->getActionUrl('edit'),
         ]));
 
         $eventHandlers->add(new CustomRowEventHandler([

@@ -407,4 +407,36 @@ class Product implements ProductInterface
     {
         $this->sellPriceTax = $sellPriceTax;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getShippingCostQuantity()
+    {
+        return 1;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getShippingCostWeight()
+    {
+        return $this->weight;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getShippingCostGrossPrice()
+    {
+        return $this->sellPrice->getFinalGrossAmount();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getShippingCostCurrency()
+    {
+        return $this->sellPrice->getCurrency();
+    }
 }

@@ -17,7 +17,6 @@ use WellCommerce\Bundle\DataSetBundle\Conditions\Condition\Eq;
 use WellCommerce\Bundle\DataSetBundle\Conditions\ConditionsCollection;
 use WellCommerce\Bundle\DataSetBundle\DataSetInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
-use WellCommerce\Bundle\ShippingBundle\Provider\ProductShippingMethodProviderInterface;
 use WellCommerce\Bundle\ShippingBundle\Provider\ShippingMethodProviderInterface;
 
 /**
@@ -30,7 +29,7 @@ class ProductHelper implements ProductHelperInterface
     /**
      * @var ShippingMethodProviderInterface
      */
-    protected $productShippingMethodProvider;
+    protected $shippingMethodProvider;
 
     /**
      * @var ProductAttributeHelperInterface
@@ -45,18 +44,18 @@ class ProductHelper implements ProductHelperInterface
     /**
      * Constructor
      *
-     * @param DataSetInterface                       $dataset
-     * @param ProductShippingMethodProviderInterface $productShippingMethodProvider
-     * @param ProductAttributeHelperInterface        $productAttributeHelper
+     * @param DataSetInterface                $dataset
+     * @param ShippingMethodProviderInterface $shippingMethodProviderInterface
+     * @param ProductAttributeHelperInterface $productAttributeHelper
      */
     public function __construct(
         DataSetInterface $dataset,
-        ProductShippingMethodProviderInterface $productShippingMethodProvider,
+        ShippingMethodProviderInterface $shippingMethodProvider,
         ProductAttributeHelperInterface $productAttributeHelper
     ) {
-        $this->productShippingMethodProvider = $productShippingMethodProvider;
-        $this->productAttributeHelper        = $productAttributeHelper;
-        $this->dataset                       = $dataset;
+        $this->shippingMethodProvider = $shippingMethodProvider;
+        $this->productAttributeHelper = $productAttributeHelper;
+        $this->dataset                = $dataset;
     }
 
     /**
@@ -64,7 +63,7 @@ class ProductHelper implements ProductHelperInterface
      */
     public function getProductDefaultTemplateData(ProductInterface $product)
     {
-        $shippingMethodCosts = $this->productShippingMethodProvider->getShippingMethodCostsCollection($product);
+        $shippingMethodCosts = $this->shippingMethodProvider->getShippingMethodCostsCollection($product);
         $productAttributes   = $product->getAttributes();
         $groups              = $this->productAttributeHelper->getAttributeGroups($productAttributes);
         $attributes          = $this->productAttributeHelper->getAttributes($productAttributes);

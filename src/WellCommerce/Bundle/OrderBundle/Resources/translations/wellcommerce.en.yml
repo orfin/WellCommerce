@@ -7,12 +7,33 @@
 # please view the LICENSE file that was distributed with this source code.
 
 order:
+    heading:
+        index: Orders
+        edit: Edit order
     button:
         confirm: Go to confirmation
     heading:
         address: Billing & shipping address
     label:
+        id: ID
+        client: Client
+        product_total: Products value
+        shipping_total: Shipping cost
+        order_total: Total value
+        variant: Variant
+        weight: Weight
+        quantity: Qty
+        stock: Stock
+        tax_rate: Tax rate
+        current_status: Status
+        created_at: Placed on
         comment: Additional comments
+        shipping_method: Shipping method
+        payment_method: Payment method
+        product_name: Product
+        tax_value: Tax
+        gross_amount: Price
+        gross_total: Total
     description:
         cart_total: Total products value
         shipping_cost: Shipping costs

@@ -3,9 +3,7 @@
 namespace WellCommerce\Bundle\OrderBundle\Entity;
 
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\Timestampable\TimestampableTrait;
-use WellCommerce\Bundle\CoreBundle\Entity\DiscountablePrice;
 use WellCommerce\Bundle\CoreBundle\Entity\Price;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductAttribute;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeAwareTrait;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAwareTrait;
 
@@ -37,7 +35,7 @@ class OrderProduct implements OrderProductInterface
     protected $buyPrice;
 
     /**
-     * @var DiscountablePrice
+     * @var Price
      */
     protected $sellPrice;
 
@@ -81,7 +79,7 @@ class OrderProduct implements OrderProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setSellPrice(DiscountablePrice $sellPrice)
+    public function setSellPrice(Price $sellPrice)
     {
         $this->sellPrice = $sellPrice;
     }

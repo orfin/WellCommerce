@@ -521,3 +521,41 @@ var GLayeredNavigation = function(oOptions) {
 };
 
 new GPlugin('GLayeredNavigation', oLayeredNavigationDefaults, GLayeredNavigation);
+
+var oSearchDefaultParams = {
+    sProductSearchRoute:      'front.product_search.index',
+    sPhraseInputSelector:      'form#search #phrase'
+};
+
+var GSearch = function(oOptions) {
+
+    var gThis = this;
+
+    gThis._Constructor = function() {
+        gThis.InitializeEvents();
+    };
+
+    gThis.InitializeEvents = function(){
+        $(gThis).bind('submit', gThis.OnSubmit);
+    };
+
+    gThis.OnSubmit = function(eEvent){
+        eEvent.stopImmediatePropagation();
+
+        var oRouteParams = {
+            phrase: $(gThis.m_oOptions.sPhraseInputSelector, gThis).val()
+        };
+
+        var url = Routing.generate(gThis.m_oOptions.sProductSearchRoute, oRouteParams, true);
+
+        console.log(url);
+
+        window.location.href = Routing.generate(gThis.m_oOptions.sProductSearchRoute, oRouteParams, true);
+
+        return false;
+    };
+
+    gThis._Constructor();
+};
+
+new GPlugin('GSearch', oSearchDefaultParams, GSearch);

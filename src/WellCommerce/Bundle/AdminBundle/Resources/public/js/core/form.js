@@ -1014,46 +1014,7 @@ var GMenu = function() {
 };
 
 new GPlugin('GMenu', oDefaults, GMenu);
-/*
-* STICKY
-*/
 
-var oDefaults = {
-};
-
-var GSticky = function() {
-
-	var gThis = this;
-
-	gThis._Constructor = function() {
-		gThis.m_jSticky = $(gThis);
-		gThis.sStickyId = gThis.m_jSticky.attr('id');
-		sCookie = GCookie(gThis.sStickyId);
-		if(sCookie != undefined && sCookie){
-			gThis.m_jSticky.hide();
-		}
-
-		if(GCore.sCurrentController == 'mainside'){
-			setTimeout(function() {
-				for(var i = 0; i < 2; i++) {
-					gThis.m_jSticky.animate({opacity: 0.2}, 250, 'linear').animate({opacity: 1}, 250, 'linear');
-				}
-			}, 1500);
-		}
-
-		gThis.m_jSticky.find('.task-completed a').click(function(){
-			gThis.m_jSticky.fadeOut('slow');
-			GCookie(gThis.sStickyId, true, {
-				expires: GCore.p_oParams.iCookieLifetime
-			});
-		});
-	};
-
-	gThis._Constructor();
-
-};
-
-new GPlugin('GSticky', oDefaults, GSticky);
 /*
 * MESSAGE BAR
 */
@@ -1916,14 +1877,10 @@ var GTabs = function() {
 		for (var i = 0; i < jPanels.length; i++) {
 			var jPanel = jPanels.eq(i);
 			var sId = jPanel.attr('id');
-			if (!sId.length) {
+			if (undefined == sId || !sId.length) {
 				sId = 'GTabs-auto-panel-' + GTabs.s_iId++;
 			}
 			jPanel.attr('id', '');
-			var jWrapper = $('<div/>').attr('id', sId).addClass(gThis._GetClass('Block'));
-			jPanel.replaceWith(jWrapper);
-			jWrapper.append(jPanel);
-			jWrapper.GBlock();
 			jTabs.append('<li><a href="#' + sId + '">' + jPanel.find('legend span').eq(0).text() + '</a></li>');
 			var jNavigation = $('<ul class="' + gThis._GetClass('Navigation') + '"/>');
 			if (i > 0) {
@@ -1931,7 +1888,7 @@ var GTabs = function() {
 			}
 			if (i < jPanels.length - 1) {
 				var sNextId = jPanels.eq(i + 1).attr('id');
-				if (!sNextId.length) {
+				if (undefined === sNextId || !sNextId.length) {
 					sNextId = 'GTabs-auto-panel-' + GTabs.s_iId;
 				}
 				jNavigation.append('<li class="' + gThis._GetClass('Next') + '"><a tabindex="-1" class="' + gThis._GetClass('Button') + ' next" href="#next-tab"><span><img class="' + gThis._GetClass('ButtonImageRight') + '" src="' + gThis._GetImage('ArrowRightGreen') + '" alt=""/>' + GForm.Language.next + '</span></a></li>');
@@ -1941,6 +1898,12 @@ var GTabs = function() {
 			}
 			jPanel.append(jNavigation);
 			sLastId = sId;
+
+            jPanel.wrap(function() {
+                return '<div id="'+ sId +'" class="' + gThis._GetClass('Block') + '"></div>';
+            });
+			jPanel.parent().GBlock();
+
 		}
 		$(gThis).prepend(jTabs).tabs();
 		var jAs = $(gThis).find('.navigation a');
@@ -1986,23 +1949,23 @@ var GTabs = function() {
 	};
 
 	gThis._SolveAllProblems = function() {
-		$(gThis).css({
-			opacity: 0,
-			height: 0,
-			overflow: 'hidden'
-		}).tabs('add', '#a', '', 0).tabs('select', 0);
-
-		setTimeout(function() {
-			$(gThis).tabs('select', 1);
-			$(gThis).tabs('remove', 0);
-			$(gThis).find('.ui-tabs-panel').eq(0).children('fieldset').triggerHandler('GFormShow');
-			$(gThis).wrap('<div style="clear: both;"/>').css('height', 'auto');
-			$(gThis).parent().css('display', 'none').slideDown(350);
-			$(gThis).css({
-				opacity: 1,
-				overflow: 'visible'
-			});
-		}, 10);
+		// $(gThis).css({
+		// 	opacity: 0,
+		// 	height: 0,
+		// 	overflow: 'hidden'
+		// }).tabs('add', '#a', '', 0).tabs('select', 0);
+        //
+		// setTimeout(function() {
+		// 	$(gThis).tabs('select', 1);
+		// 	$(gThis).tabs('remove', 0);
+		// 	$(gThis).find('.ui-tabs-panel').eq(0).children('fieldset').triggerHandler('GFormShow');
+		// 	$(gThis).wrap('<div style="clear: both;"/>').css('height', 'auto');
+		// 	$(gThis).parent().css('display', 'none').slideDown(350);
+		// 	$(gThis).css({
+		// 		opacity: 1,
+		// 		overflow: 'visible'
+		// 	});
+		// }, 10);
 	};
 
 	gThis._Constructor();
@@ -11925,6 +11888,7 @@ var GFormCodeEditor = GCore.ExtendClass(GFormTextField, function() {
 	};
 
 }, oDefaults);
+
 /*
 * CLIENT SELECT
 */
@@ -11953,8 +11917,8 @@ var oDefaults = {
 	sDefault: '',
 	aoRules: [],
 	sComment: '',
-	fLoadClients: GCore.NULL,
-	fLoadClientData: GCore.NULL
+	sLoadClientsRoute: GCore.NULL,
+	sGetClientDetailsRoute: GCore.NULL
 };
 
 var GFormClientSelect = GCore.ExtendClass(GFormField, function() {
@@ -12085,7 +12049,7 @@ var GFormClientSelect = GCore.ExtendClass(GFormField, function() {
 		gThis.m_jTrigger = $('<p class="' + gThis._GetClass('Trigger') + '"/>');
 
 		var jA = $('<a href="#" id="__select" class="' + gThis._GetClass('Button') + '"/>');
-		jA.append('<span><img src="' + gThis._GetImage('AddIcon') + '" alt=""/>' + GForm.Language.client_select_select_client + '</span>');
+		jA.append('<span><img src="' + gThis._GetImage('AddIcon') + '" alt=""/>' + Translator.trans('client.button.client_select_expand', {}, 'wellcommerce') + '</span>');
 		jA.click(GEventHandler(function(eEvent) {
 			var jImg = gThis.m_jTrigger.find('a#__select span img');
 			if (gThis.m_jDatagridWrapper.hasClass(gThis._GetClass('Hidden'))) {
@@ -12094,11 +12058,11 @@ var GFormClientSelect = GCore.ExtendClass(GFormField, function() {
 			if (!gThis.m_jDatagridWrapper.get(0).bHidden) {
 				gThis.m_gDatagrid.LoadData();
 				gThis.m_jDatagridWrapper.get(0).bHidden = true;
-				gThis.m_jTrigger.find('a#__select span').empty().append(jImg).append(GForm.Language.product_select_close_selection);
+				gThis.m_jTrigger.find('a#__select span').empty().append(jImg).append(Translator.trans('client.button.client_select_collapse', {}, 'wellcommerce'));
 			}
 			else {
 				gThis.m_jDatagridWrapper.get(0).bHidden = false;
-				gThis.m_jTrigger.find('a#__select span').empty().append(jImg).append(GForm.Language.client_select_select_client);
+				gThis.m_jTrigger.find('a#__select span').empty().append(jImg).append(Translator.trans('client.button.client_select_expand', {}, 'wellcommerce'));
 			}
 			gThis.m_jDatagridWrapper.slideToggle(250);
 			return false;
@@ -12120,11 +12084,11 @@ var GFormClientSelect = GCore.ExtendClass(GFormField, function() {
 		var jLeftColumn = $('<div class="column"/>');
 		jColumns.append(jLeftColumn);
 		gThis.m_jClientName = $('<span class="constant"/>');
-		jLeftColumn.append($('<div class="field-text"/>').append('<label>' + GForm.Language.client_select_client_name + '</label>').append($('<span class="repetition"/>').append(gThis.m_jClientName)));
+		jLeftColumn.append($('<div class="field-text"/>').append('<label>' + Translator.trans('client.label.client_name', {}, 'wellcommerce') + '</label>').append($('<span class="repetition"/>').append(gThis.m_jClientName)));
 		gThis.m_jClientEmail = $('<span class="constant"/>');
-		jLeftColumn.append($('<div class="field-text"/>').append('<label>' + GForm.Language.client_select_client_email + '</label>').append($('<span class="repetition"/>').append(gThis.m_jClientEmail)));
+		jLeftColumn.append($('<div class="field-text"/>').append('<label>' + Translator.trans('client.label.email', {}, 'wellcommerce') + '</label>').append($('<span class="repetition"/>').append(gThis.m_jClientEmail)));
 		gThis.m_jClientGroup = $('<span class="constant"/>');
-		jLeftColumn.append($('<div class="field-text"/>').append('<label>' + GForm.Language.client_select_client_group + '</label>').append($('<span class="repetition"/>').append(gThis.m_jClientGroup)));
+		jLeftColumn.append($('<div class="field-text"/>').append('<label>' + Translator.trans('client.label.group_name', {}, 'wellcommerce') + '</label>').append($('<span class="repetition"/>').append(gThis.m_jClientGroup)));
 		gThis.m_jNode.append(jColumns);
 	};
 
@@ -12180,27 +12144,18 @@ var GFormClientSelect = GCore.ExtendClass(GFormField, function() {
 			}
 			gThis.m_bShown = true;
 			if (gThis.GetValue()) {
-				gThis.m_oOptions.fLoadClientData({
-					client: gThis.GetValue()
-				}, GCallback(gThis._OnDataLoaded));
+				// gThis.m_oOptions.fLoadClientData({
+				// 	client: gThis.GetValue()
+				// }, GCallback(gThis._OnDataLoaded));
 			}
 		}
-	};
-
-	gThis._ProcessProduct = function(oProduct) {
-		return oProduct;
-	};
-
-	gThis._ProcessSelectedProduct = function(oProduct) {
-		oProduct = gThis.m_fProcessProduct(oProduct);
-		return oProduct;
 	};
 
 	gThis._InitColumns = function() {
 
 		var column_id = new GF_Datagrid_Column({
-			id: 'idclient',
-			caption: GForm.Language.client_select_id,
+			id: 'id',
+			caption: Translator.trans('client.label.id', {}, 'wellcommerce'),
 			appearance: {
 				width: 90
 			},
@@ -12209,9 +12164,9 @@ var GFormClientSelect = GCore.ExtendClass(GFormField, function() {
 			}
 		});
 
-		var column_firstname = new GF_Datagrid_Column({
-			id: 'firstname',
-			caption: GForm.Language.client_select_first_name,
+		var column_first_name = new GF_Datagrid_Column({
+			id: 'firstName',
+			caption: Translator.trans('client.label.first_name', {}, 'wellcommerce'),
 			appearance: {
 				width: 200
 			},
@@ -12220,9 +12175,9 @@ var GFormClientSelect = GCore.ExtendClass(GFormField, function() {
 			}
 		});
 
-		var column_surname = new GF_Datagrid_Column({
-			id: 'surname',
-			caption: GForm.Language.client_select_surname,
+		var column_last_name = new GF_Datagrid_Column({
+			id: 'lastName',
+			caption: Translator.trans('client.label.last_name', {}, 'wellcommerce'),
 			appearance: {
 				width: 200
 			},
@@ -12233,7 +12188,7 @@ var GFormClientSelect = GCore.ExtendClass(GFormField, function() {
 
 		var column_email = new GF_Datagrid_Column({
 			id: 'email',
-			caption: GForm.Language.client_select_email,
+			caption: Translator.trans('client.label.email', {}, 'wellcommerce'),
 			appearance: {
 				width: 180,
 				visible: false
@@ -12242,63 +12197,45 @@ var GFormClientSelect = GCore.ExtendClass(GFormField, function() {
 
 		var column_phone = new GF_Datagrid_Column({
 			id: 'phone',
-			caption: GForm.Language.client_select_phone,
+			caption: Translator.trans('client.label.phone', {}, 'wellcommerce'),
 			appearance: {
-				width: 110,
-				visible: false
+				width: 110
 			}
 		});
 
-		var column_group = new GF_Datagrid_Column({
-			id: 'groupname',
-			caption: GForm.Language.client_select_group
-		});
-
-		var column_adddate = new GF_Datagrid_Column({
-			id: 'adddate',
-			caption: GForm.Language.client_select_adddate,
-			appearance: {
-				width: 140,
-				visible: false
-			},
-			filter: {
-				type: GF_Datagrid.FILTER_BETWEEN
-			}
+		var column_group_name = new GF_Datagrid_Column({
+			id: 'groupName',
+			caption: Translator.trans('client.label.group_name', {}, 'wellcommerce'),
 		});
 
 		return [
 			column_id,
-			column_surname,
-			column_firstname,
-			column_group,
+			column_last_name,
+			column_first_name,
+			column_group_name,
 			column_email,
-			column_phone,
-			column_adddate
+			column_phone
 		];
 
 	};
 
 	gThis._InitDatagrid = function() {
-
-		gThis.m_fProcessProduct = gThis._ProcessProduct;
-		gThis.m_fLoadClients = gThis.m_oOptions.fLoadClients;
-
 		var aoColumns = gThis._InitColumns();
 
-    var oOptions = {
+        var oOptions = {
 			id: gThis.GetId(),
 			mechanics: {
 				rows_per_page: 15,
-				key: 'idclient',
+				key: 'id',
 				only_one_selected: !gThis.m_bRepeatable,
 				persistent: false
 			},
 			event_handlers: {
-				load: gThis.m_fLoadClients,
-				process: gThis.m_fProcessProduct,
+                load: function(oRequest){
+                    gThis.m_gDatagrid.MakeRequest(Routing.generate(gThis.m_oOptions.sLoadClientsRoute), oRequest, GF_Datagrid.ProcessIncomingData);
+                },
 				select: gThis._OnSelect,
-				deselect: gThis._OnDeselect//,
-				//selection_changed: gThis._OnChange
+				deselect: gThis._OnDeselect
 			},
 			columns: aoColumns
     };
@@ -12321,7 +12258,7 @@ var GFormClientSelect = GCore.ExtendClass(GFormField, function() {
 	gThis._InitSelectedDatagrid = function() {
 
 		gThis.m_gDataProvider = new GF_Datagrid_Data_Provider({
-			key: 'idclient',
+			key: 'id',
 			event_handlers: {
 				change: gThis._OnChange
 			}
@@ -12335,11 +12272,11 @@ var GFormClientSelect = GCore.ExtendClass(GFormField, function() {
 			action: gThis._Deselect
 		});
 
-    var oOptions = {
+        var oOptions = {
 			id: gThis.GetId() + '_selected',
 			mechanics: {
 				rows_per_page: 15,
-				key: 'idclient',
+				key: 'id',
 				persistent: false
 			},
 			event_handlers: {
@@ -12367,35 +12304,23 @@ var GFormClientSelect = GCore.ExtendClass(GFormField, function() {
 			group_actions: [
 				gActionDeselect
 			]
-    };
+        };
 
 		gThis.m_gSelectedDatagrid = new GF_Datagrid(gThis.m_jSelectedDatagrid, oOptions);
 
 	};
 
 	gThis._LoadSelected = function(oRequest, sResponseHandler) {
-		if (gThis.m_oOptions.bAdvancedEditor) {
-			var asDefaults = [];
-			for (var i in gThis.m_oOptions.asDefaults) {
-				asDefaults.push(gThis.m_oOptions.asDefaults[i].id);
-			}
-			oRequest.where = [{
-				column: 'idclient',
-				value: asDefaults,
-				operator: 'IN'
-			}];
-		}
-		else {
-			oRequest.where = [{
-				column: 'idclient',
-				value: gThis.m_oOptions.asDefaults,
-				operator: 'IN'
-			}];
-		}
-		gThis.m_fLoadClients(oRequest, GCallback(function(eEvent) {
-			gThis.m_gDataProvider.ChangeData(eEvent.rows);
+		oRequest.where = [{
+			column: 'id',
+			value: gThis.m_oOptions.asDefaults,
+			operator: 'IN'
+		}];
+
+        GF_Ajax_Request(Routing.generate(gThis.m_oOptions.sLoadClientsRoute), oRequest, function(eEvent){
+            gThis.m_gDataProvider.ChangeData(eEvent.rows);
 			gThis.m_gSelectedDatagrid.LoadData();
-		}));
+        });
 	};
 
 	gThis.GetAddress = function(sAddress) {
@@ -12412,6 +12337,7 @@ var GFormClientSelect = GCore.ExtendClass(GFormField, function() {
 	};
 
 }, oDefaults);
+
 /*
 * DATAGRID SELECT
 */
@@ -17226,7 +17152,7 @@ var oDefaults = {
 	sDefault: '',
 	aoRules: [],
 	sComment: '',
-	fLoadProducts: GCore.NULL,
+	sLoadProductsRoute: GCore.NULL,
 	bAdvancedEditor: false
 };
 
@@ -17236,18 +17162,17 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 
 	gThis.m_bShown = false;
 
-	gThis.m_fLoadProducts;
+	gThis.m_sLoadProductsRoute;
 	gThis.m_fProcessProduct;
 	gThis.m_jDatagrid;
 	gThis.m_jSelectedDatagrid;
 	gThis.m_jTrigger;
+    gThis.m_jTriggerButton;
 	gThis.m_gDatagrid;
 	gThis.m_gSelectedDatagrid;
 	gThis.m_gDataProvider;
 	gThis.m_bFirstLoad = true;
-
 	gThis.m_oRequest = {};
-
 	gThis.m_iCounter = 0;
 
 	gThis.GetValue = function(sRepetition) {
@@ -17259,14 +17184,16 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 		for (var i = 0; i < jValues.length / 4; i++) {
 			aValues.push({
 				id: gThis.m_jField.find('input[name="' + gThis.GetName(sRepetition) + '[id]"]:eq(' + i + ')').val(),
+                product_id: gThis.m_jField.find('input[name="' + gThis.GetName(sRepetition) + '[product_id]"]:eq(' + i + ')').val(),
 				quantity: gThis.m_jField.find('input[name="' + gThis.GetName(sRepetition) + '[quantity]"]:eq(' + i + ')').val(),
-				price: gThis.m_jField.find('input[name="' + gThis.GetName(sRepetition) + '[price]"]:eq(' + i + ')').val(),
+				gross_amount: gThis.m_jField.find('input[name="' + gThis.GetName(sRepetition) + '[gross_amount]"]:eq(' + i + ')').val(),
 				variant: gThis.m_jField.find('input[name="' + gThis.GetName(sRepetition) + '[variant]"]:eq(' + i + ')').val(),
 				trackstock: gThis.m_jField.find('input[name="' + gThis.GetName(sRepetition) + '[trackstock]"]:eq(' + i + ')').val(),
 				stock: gThis.m_jField.find('input[name="' + gThis.GetName(sRepetition) + '[stock]"]:eq(' + i + ')').val(),
 				weight: gThis.m_jField.find('input[name="' + gThis.GetName(sRepetition) + '[weight]"]:eq(' + i + ')').val(),
 			});
 		}
+
 		return aValues;
 	};
 
@@ -17278,13 +17205,15 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 			if (mValue[i]['id'] == undefined) {
 				continue;
 			}
-			gThis.m_jField.append('<input type="hidden" name="' + gThis.GetName() + '[' + mValue[i]['id'] + '][idproduct]" value="' + mValue[i]['idproduct'] + '"/>');
+            gThis.m_jField.append('<input type="hidden" name="' + gThis.GetName() + '[' + mValue[i]['id'] + '][id]" value="' + mValue[i]['id'] + '"/>');
+			gThis.m_jField.append('<input type="hidden" name="' + gThis.GetName() + '[' + mValue[i]['id'] + '][product_id]" value="' + mValue[i]['product_id'] + '"/>');
 			gThis.m_jField.append('<input type="hidden" name="' + gThis.GetName() + '[' + mValue[i]['id'] + '][quantity]" value="' + mValue[i]['quantity'] + '"/>');
 			gThis.m_jField.append('<input type="hidden" name="' + gThis.GetName() + '[' + mValue[i]['id'] + '][previousquantity]" value="' + mValue[i]['previousquantity'] + '"/>');
 			gThis.m_jField.append('<input type="hidden" name="' + gThis.GetName() + '[' + mValue[i]['id'] + '][trackstock]" value="' + mValue[i]['trackstock'] + '"/>');
 			gThis.m_jField.append('<input type="hidden" name="' + gThis.GetName() + '[' + mValue[i]['id'] + '][stock]" value="' + mValue[i]['stock'] + '"/>');
-			gThis.m_jField.append('<input type="hidden" name="' + gThis.GetName() + '[' + mValue[i]['id'] + '][sellprice]" value="' + mValue[i]['sellprice'] + '"/>');
+			gThis.m_jField.append('<input type="hidden" name="' + gThis.GetName() + '[' + mValue[i]['id'] + '][gross_amount]" value="' + mValue[i]['gross_amount'] + '"/>');
 			gThis.m_jField.append('<input type="hidden" name="' + gThis.GetName() + '[' + mValue[i]['id'] + '][variant]" value="' + mValue[i]['variant'] + '"/>');
+            gThis.m_jField.append('<input type="hidden" name="' + gThis.GetName() + '[' + mValue[i]['id'] + '][weight]" value="' + mValue[i]['weight'] + '"/>');
 		}
 	};
 
@@ -17301,11 +17230,14 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 		GAlert.DestroyAll();
 		GMessage('Dodano wybrany produkt do zamówienia.');
 		oSelectedRow = $.extend({
-			id: 'new-' + (gThis.m_iCounter++),
+            product_id: oSelectedRow.id,
+            product_name: oSelectedRow.name,
+            tax_rate: oSelectedRow.tax,
 			quantity: 1,
 			variant: '',
-			sellprice: '0.00'
+			gross_amount: oSelectedRow.grossAmount
 		}, oSelectedRow);
+        oSelectedRow.id = 'new-' + (gThis.m_iCounter++);
 		gThis.m_gDataProvider.AddRow(oSelectedRow);
 		return oSelectedRow;
 	};
@@ -17327,11 +17259,6 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 	};
 
 	gThis._PrepareNode = function() {
-		gThis.m_oOptions.oParsedFilterData = {};
-		for (var i in gThis.m_oOptions.oFilterData) {
-			$.globalEval('var oParsed = [' + gThis.m_oOptions.oFilterData[i] + '];');
-			gThis.m_oOptions.oParsedFilterData[i] = $.extend({}, oParsed);
-		}
 		gThis.m_jNode = $('<div/>').addClass(gThis._GetClass('Field'));
 		gThis.m_jDatagridWrapper = $('<div class="existing-products"/>');
 		if (gThis.m_bRepeatable) {
@@ -17350,25 +17277,26 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 		gThis.m_jNode.append(gThis.m_jField);
 		gThis.m_jDatagridWrapper.addClass(gThis._GetClass('Hidden'));
 		gThis.m_jTrigger = $('<p class="' + gThis._GetClass('Trigger') + '"/>');
-		var jA = $('<a href="#" class="' + gThis._GetClass('Button') + '"/>');
-		jA.append('<span><img src="' + gThis._GetImage('AddIcon') + '" alt=""/>' + GForm.Language.product_select_add + '</span>');
-		jA.click(GEventHandler(function(eEvent) {
+		gThis.m_jTriggerButton = $('<a href="#" class="' + gThis._GetClass('Button') + '" />');
+		gThis.m_jTriggerButton.append('<span><img src="' + gThis._GetImage('AddIcon') + '" alt=""/>' + Translator.trans('order.button.add_product', {}, 'wellcommerce'), + '</span>');
+
+		gThis.m_jTriggerButton.click(GEventHandler(function(eEvent) {
 			var jImg = gThis.m_jTrigger.find('a span img');
 			if (gThis.m_jDatagridWrapper.hasClass(gThis._GetClass('Hidden'))) {
 				gThis.m_jDatagridWrapper.css('display', 'none').removeClass(gThis._GetClass('Hidden'));
 			}
 			if (!gThis.m_jDatagridWrapper.get(0).bHidden) {
 				gThis.m_jDatagridWrapper.get(0).bHidden = true;
-				gThis.m_jTrigger.find('a span').empty().append(jImg).append(GForm.Language.product_select_close_add);
+				gThis.m_jTrigger.find('a span').empty().append(jImg).append(Translator.trans('order.button.close_product_selector', {}, 'wellcommerce'));
 			}
 			else {
 				gThis.m_jDatagridWrapper.get(0).bHidden = false;
-				gThis.m_jTrigger.find('a span').empty().append(jImg).append(GForm.Language.product_select_add);
+				gThis.m_jTrigger.find('a span').empty().append(jImg).append(Translator.trans('order.button.add_product', {}, 'wellcommerce'));
 			}
 			gThis.m_jDatagridWrapper.slideToggle(250);
 			return false;
 		}));
-		gThis.m_jTrigger.append(jA);
+		gThis.m_jTrigger.append(gThis.m_jTriggerButton);
 		gThis.m_jNode.append(gThis.m_jTrigger);
 	};
 
@@ -17405,19 +17333,13 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 	};
 
 	gThis._ProcessSelectedProduct = function(oProduct) {
-		oProduct = gThis.m_fProcessProduct(oProduct);
-		if (oProduct.thumb != '') {
-			oProduct.name = '<a title="" href="' + oProduct.thumb + '" class="show-thumb"><img src="' + GCore.DESIGN_PATH + 'images/icons/datagrid/details.png" style="vertical-align: middle;" /></a> '+ oProduct.name + ((oProduct.ean != '') ? '<br /><small>EAN: ' + oProduct.ean + '</small>' : '');
-		}else{
-			oProduct.name = '<img style="opacity: 0.2;vertical-align: middle;" src="' + GCore.DESIGN_PATH + 'images/icons/datagrid/details.png" style="vertical-align: middle;" /> '+ oProduct.name + ((oProduct.ean != '') ? '<br /><small>EAN: ' + oProduct.ean + '</small>' : '');
-		}
-		return oProduct;
+		return gThis.m_fProcessProduct(oProduct);
 	};
 
 	gThis._InitColumns = function() {
 
 		var column_id = new GF_Datagrid_Column({
-			id: 'idproduct',
+			id: 'id',
 			caption: GForm.Language.product_select_id,
 			appearance: {
 				width: 40,
@@ -17441,10 +17363,22 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 		});
 
 		var column_price = new GF_Datagrid_Column({
-			id: 'sellprice',
+			id: 'grossAmount',
 			caption: GForm.Language.product_select_price,
 			appearance: {
 				width: 90
+			},
+			filter: {
+				type: GF_Datagrid.FILTER_BETWEEN
+			}
+		});
+
+        var column_tax_rate = new GF_Datagrid_Column({
+			id: 'tax',
+			caption: GForm.Language.product_select_price,
+			appearance: {
+				width: 90,
+                visible: false
 			},
 			filter: {
 				type: GF_Datagrid.FILTER_BETWEEN
@@ -17469,23 +17403,19 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 				width: 150
 			},
 			filter: {
-				type: GF_Datagrid.FILTER_SELECT,
-				options: gThis.m_oOptions.oParsedFilterData['producer'],
+				type: GF_Datagrid.FILTER_INPUT
 			}
 		});
 
 		var column_category = new GF_Datagrid_Column({
-			id: 'categoriesname',
+			id: 'category',
 			caption: GForm.Language.product_select_categories,
 			appearance: {
 				width: 200,
 				align: GF_Datagrid.ALIGN_LEFT
 			},
 			filter: {
-				type: GF_Datagrid.FILTER_TREE,
-				filtered_column: 'ancestorcategoryid',
-				options: gThis.m_oOptions.oParsedFilterData['categoryid'],
-				load_children: gThis.m_oOptions.fLoadCategoryChildren
+				type: GF_Datagrid.FILTER_INPUT
 			}
 		});
 
@@ -17495,6 +17425,7 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 			column_category,
 			column_producer,
 			column_price,
+            column_tax_rate,
 			column_weight,
 		];
 
@@ -17504,61 +17435,43 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 
 		var column_id = new GF_Datagrid_Column({
 			id: 'id',
-			caption: GForm.Language.product_select_id,
+			caption: Translator.trans('order.label.id', {}, 'wellcommerce'),
 			appearance: {
 				width: 40,
 				visible: false
 			}
 		});
 
-		var column_idproduct = new GF_Datagrid_Column({
-			id: 'idproduct',
-			caption: GForm.Language.product_select_product_id,
+		var column_product_id = new GF_Datagrid_Column({
+			id: 'product_id',
+			caption: Translator.trans('order.label.product_id', {}, 'wellcommerce'),
 			appearance: {
 				width: 40,
 				visible: false
 			}
 		});
 
-		var column_name = new GF_Datagrid_Column({
-			id: 'name',
-			caption: GForm.Language.product_select_name,
+		var column_product_name = new GF_Datagrid_Column({
+			id: 'product_name',
+			caption: Translator.trans('order.label.product_name', {}, 'wellcommerce'),
 			appearance: {
 				align: GF_Datagrid.ALIGN_LEFT
 			}
 		});
 
-		var column_barcode = new GF_Datagrid_Column({
-			id: 'barcode',
-			caption: GForm.Language.product_select_barcode,
-			appearance: {
-				width: 60,
-				visible: false
-			}
-		});
-
 		var column_variant = new GF_Datagrid_Column({
 			id: 'variant',
-			caption: GForm.Language.product_select_variant,
-			selectable: true,
+			caption: Translator.trans('order.label.variant', {}, 'wellcommerce'),
+			//selectable: true,
 			appearance: {
 				width: 140
 			}
 		});
 
-		var column_price = new GF_Datagrid_Column({
-			id: 'sellprice',
-			caption: GForm.Language.product_select_price,
-			editable: true,
-			appearance: {
-				width: 70,
-				align: GF_Datagrid.ALIGN_RIGHT
-			}
-		});
-
-		var column_price_gross = new GF_Datagrid_Column({
-			id: 'sellprice_gross',
-			caption: GForm.Language.product_select_price_gross,
+		var column_gross_amount = new GF_Datagrid_Column({
+			id: 'gross_amount',
+			caption: Translator.trans('order.label.gross_amount', {}, 'wellcommerce'),
+            editable: true,
 			appearance: {
 				width: 70,
 				align: GF_Datagrid.ALIGN_CENTER
@@ -17567,70 +17480,52 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 
 		var column_weight = new GF_Datagrid_Column({
 			id: 'weight',
-			caption: 'Waga',
+			caption: Translator.trans('order.label.weight', {}, 'wellcommerce'),
+            editable: true,
 			appearance: {
 				width: 70,
 				align: GF_Datagrid.ALIGN_CENTER
-			}
-		});
-
-		var column_weight_total = new GF_Datagrid_Column({
-			id: 'weight_total',
-			caption: 'Waga w sumie',
-			appearance: {
-				width: 70,
-				align: GF_Datagrid.ALIGN_CENTER,
-				visible: false
 			}
 		});
 
 		var column_quantity = new GF_Datagrid_Column({
 			id: 'quantity',
-			caption: GForm.Language.product_select_quantity,
+			caption: Translator.trans('order.label.quantity', {}, 'wellcommerce'),
 			editable: true,
 			appearance: {
-			width: 50
-		}
+		       width: 50
+		    }
 		});
 
 		var column_stock = new GF_Datagrid_Column({
 			id: 'stock',
-			caption: GForm.Language.product_variants_editor_stock,
+			caption: Translator.trans('order.label.stock', {}, 'wellcommerce'),
 			appearance: {
 				width: 80
 			}
 		});
 
-		var column_net_subsum = new GF_Datagrid_Column({
-			id: 'net_subsum',
-			caption: GForm.Language.product_select_net_subsum,
-			appearance: {
-				width: 70,
-				align: GF_Datagrid.ALIGN_CENTER
-			}
-		});
-
-		var column_vat = new GF_Datagrid_Column({
-			id: 'vat',
-			caption: GForm.Language.product_select_vat,
+		var column_tax_value = new GF_Datagrid_Column({
+			id: 'tax_value',
+			caption: Translator.trans('order.label.tax_value', {}, 'wellcommerce'),
 			appearance: {
 				width: 50,
 				align: GF_Datagrid.ALIGN_CENTER
 			}
 		});
 
-		var column_vat_value = new GF_Datagrid_Column({
-			id: 'vat_value',
-			caption: GForm.Language.product_select_vat_value,
+		var column_tax_rate = new GF_Datagrid_Column({
+			id: 'tax_rate',
+			caption: Translator.trans('order.label.tax_rate', {}, 'wellcommerce'),
 			appearance: {
 				width: 70,
 				align: GF_Datagrid.ALIGN_CENTER
 			}
 		});
 
-		var column_subsum = new GF_Datagrid_Column({
-			id: 'subsum',
-			caption: GForm.Language.product_select_subsum,
+		var column_gross_total = new GF_Datagrid_Column({
+			id: 'gross_total',
+			caption: Translator.trans('order.label.gross_total', {}, 'wellcommerce'),
 			appearance: {
 				width: 70,
 				align: GF_Datagrid.ALIGN_CENTER
@@ -17639,7 +17534,7 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 
 		var column_variant_options = new GF_Datagrid_Column({
 			id: 'variant_options',
-			caption: 'Warianty',
+			caption: Translator.trans('order.label.variant_options', {}, 'wellcommerce'),
 			appearance: {
 				width: 70,
 				visible: false
@@ -17648,53 +17543,50 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 
 		return [
 			column_id,
-			column_idproduct,
-			column_name,
-			column_barcode,
+			column_product_id,
+			column_product_name,
 			column_variant,
-			column_price,
-			column_price_gross,
+			column_gross_amount,
 			column_weight,
-			column_weight_total,
 			column_quantity,
 			column_stock,
-			column_net_subsum,
-			column_vat,
-			column_vat_value,
-			column_subsum,
+			column_tax_rate,
+			column_tax_value,
+			column_gross_total,
 			column_variant_options
 		];
 
 	};
 
 	gThis._InitDatagrid = function() {
-
 		gThis.m_fProcessProduct = gThis._ProcessProduct;
-		gThis.m_fLoadProducts = gThis.m_oOptions.fLoadProducts;
+		gThis.m_sLoadProductsRoute = gThis.m_oOptions.sLoadProductsRoute;
 		var aoColumns = gThis._InitColumns();
 
-    var oOptions = {
-			id: gThis.GetId(),
-			appearance: {
-				column_select: false
+        var oOptions = {
+    		id: gThis.GetId(),
+    		appearance: {
+    			column_select: false
 			},
-			mechanics: {
-				rows_per_page: 15,
-				key: 'idproduct',
+            mechanics: {
+    			rows_per_page: 15,
+    			key: 'id',
 				only_one_selected: !gThis.m_bRepeatable,
 				no_column_modification: true,
-				persistent: false
-			},
-			event_handlers: {
-				load: gThis.m_fLoadProducts,
-				process: gThis.m_fProcessProduct,
-				select: gThis._OnSelect,
-				deselect: gThis._OnDeselect//,
-			},
-			columns: aoColumns
-    };
+    			persistent: false
+    		},
+    		event_handlers: {
+    			load: function(oRequest){
+                    gThis.m_gDatagrid.MakeRequest(Routing.generate(gThis.m_sLoadProductsRoute), oRequest, GF_Datagrid.ProcessIncomingData);
+                },
+    			process: gThis.m_fProcessProduct,
+    			select: gThis._OnSelect,
+    			deselect: gThis._OnDeselect
+    		},
+    		columns: aoColumns
+        };
 
-    gThis.m_gDatagrid = new GF_Datagrid(gThis.m_jDatagrid, oOptions);
+        gThis.m_gDatagrid = new GF_Datagrid(gThis.m_jDatagrid, oOptions);
 
 	};
 
@@ -17710,42 +17602,40 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 	};
 
 	gThis._CalculateRow = function(oRow) {
-		oRow.quantity = isNaN(parseFloat(oRow.quantity)) ? 0 : parseFloat(oRow.quantity);
-		oRow.sellprice = oRow.sellprice.replace(/,/, '.');
-		oRow.sellprice = isNaN(parseFloat(oRow.sellprice)) ? 0 : parseFloat(oRow.sellprice);
-		oRow.vat = isNaN(parseFloat(oRow.vat)) ? 0 : parseFloat(oRow.vat);
-		var fPrice = parseFloat(oRow.sellprice);
-		oRow.net_subsum = oRow.quantity * oRow.sellprice;
-		oRow.weight_total = oRow.quantity * oRow.weight;
-		oRow.sellprice_gross = oRow.sellprice * (1 + (oRow.vat / 100));
-		oRow.sellprice_gross = oRow.sellprice_gross.toFixed(2);
-		oRow.vat_value = oRow.net_subsum * (oRow.vat / 100);
-		oRow.subsum = (oRow.net_subsum + oRow.vat_value).toFixed(2);
-		oRow.sellprice = oRow.sellprice.toFixed(4);
-		oRow.net_subsum = oRow.net_subsum.toFixed(2);
-		oRow.weight_total = oRow.weight_total.toFixed(2);
-		oRow.vat = oRow.vat.toFixed(2) + '%';
-		oRow.vat_value = oRow.vat_value.toFixed(2);
+        oRow.weight           = isNaN(parseFloat(oRow.weight)) ? 0 : parseFloat(oRow.weight);
+		oRow.quantity         = isNaN(parseFloat(oRow.quantity)) ? 0 : parseFloat(oRow.quantity);
+		oRow.gross_amount     = String(oRow.gross_amount).replace(/,/, '.');
+		oRow.gross_amount     = isNaN(parseFloat(oRow.gross_amount)) ? 0 : parseFloat(oRow.gross_amount);
+		oRow.gross_amount     = oRow.gross_amount.toFixed(2);
+        oRow.net_amount       = parseFloat(oRow.gross_amount) / (1 + (parseFloat(oRow.tax_rate) / 100)).toFixed(2);
+        oRow.net_amount       = oRow.net_amount.toFixed(2);
+        oRow.gross_total      = oRow.gross_amount * oRow.quantity;
+		oRow.gross_total      = oRow.gross_total.toFixed(2);
+        oRow.tax_rate         = isNaN(parseFloat(oRow.tax_rate)) ? 0 : parseFloat(oRow.tax_rate);
+        oRow.net_total        = oRow.net_amount * oRow.quantity;
+        oRow.tax_value        = oRow.gross_total - oRow.net_total;
+		oRow.tax_rate         = oRow.tax_rate.toFixed(2) + '%';
+		oRow.tax_value        = oRow.tax_value.toFixed(2);
+
+console.log(oRow);
+
 		return oRow;
 	};
 
 	gThis._CalculateTotal = function(aoRows) {
-		var net_subsum = 0;
-		var vat_value = 0;
-		var subsum = 0;
-		var weight = 0;
+		var tax_value     = 0;
+		var gross_total   = 0;
+		var weight        = 0;
 		for (var i in aoRows) {
-			net_subsum += parseFloat(aoRows[i].net_subsum);
-			vat_value += parseFloat(aoRows[i].vat_value);
-			subsum += parseFloat(aoRows[i].subsum);
-			weight += parseFloat(aoRows[i].weight_total);
+			tax_value    += parseFloat(aoRows[i].tax_value);
+			gross_total  += parseFloat(aoRows[i].gross_total);
+			weight       += parseFloat(aoRows[i].weight * aoRows[i].quantity);
 		}
 		return {
-			name: 'Suma',
-			net_subsum: net_subsum.toFixed(2),
-			vat_value: vat_value.toFixed(2),
-			subsum: subsum.toFixed(2),
-			weight: weight.toFixed(2),
+			product_name:    Translator.trans('order.label.gross_total', {}, 'wellcommerce'),
+			gross_total:     gross_total.toFixed(2),
+			tax_value:       tax_value.toFixed(2),
+			weight:          weight.toFixed(2),
 		};
 	};
 
@@ -17774,7 +17664,7 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 					id: 'total',
 					className: 'total',
 					source: gThis._CalculateTotal,
-					caption: GForm.Language.product_select_sum
+					caption: Translator.trans('order.label.gross_total', {}, 'wellcommerce')
 				})
 			],
 			event_handlers: {
@@ -17791,7 +17681,7 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 			action: gThis._Deselect
 		});
 
-    var oOptions = {
+        var oOptions = {
 			id: gThis.GetId() + '_selected',
 			appearance: {
 				column_select: false,
@@ -17831,7 +17721,7 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 			group_actions: [
 				gActionDeselect
 			]
-    };
+        };
 
 		gThis.m_gSelectedDatagrid = new GF_Datagrid(gThis.m_jSelectedDatagrid, oOptions);
 
@@ -17844,12 +17734,15 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 			}
 			mIds = [mIds];
 		}
+
 		var oRequest = GCore.Duplicate(gThis.m_oRequest, true);
+
 		oRequest.where = [{
-			column: 'idproduct',
+			column: 'id',
 			value: mIds,
 			operator: 'IN'
 		}];
+
 		gThis.m_fLoadProducts(oRequest, GCallback(function(eEvent) {
 			for (var j in eEvent.rows) {
 				gThis._AddRow(eEvent.rows[j]);
@@ -17862,27 +17755,29 @@ var GFormOrderEditor = GCore.ExtendClass(GFormField, function() {
 		gThis.m_oRequest = oRequest;
 		var asDefaults = [];
 		for (var i in gThis.m_oOptions.asDefaults) {
-			asDefaults.push(gThis.m_oOptions.asDefaults[i].idproduct);
+			asDefaults.push(gThis.m_oOptions.asDefaults[i].product_id);
 		}
 		oRequest.where = [{
-			column: 'idproduct',
+			column: 'id',
 			value: asDefaults,
 			operator: 'IN'
 		}];
-		gThis.m_fLoadProducts(oRequest, GCallback(function(eEvent) {
-			var aoRows = [];
+
+        GF_Ajax_Request(Routing.generate(gThis.m_oOptions.sLoadProductsRoute), oRequest, function(eEvent){
+            var aoRows = [];
 			for (var i in gThis.m_oOptions.asDefaults) {
-				var sId = gThis.m_oOptions.asDefaults[i].idproduct;
+				var sId = gThis.m_oOptions.asDefaults[i].product_id;
 				for (var j in eEvent.rows) {
-					if (eEvent.rows[j].idproduct == sId) {
+					if (eEvent.rows[j].id == sId) {
 						aoRows.push($.extend(true, {id: i}, eEvent.rows[j], gThis.m_oOptions.asDefaults[i]));
 						break;
 					}
 				}
 			}
+
 			gThis.m_gDataProvider.ChangeData(aoRows);
 			gThis.m_gSelectedDatagrid.LoadData();
-		}));
+        });
 	};
 
 }, oDefaults);

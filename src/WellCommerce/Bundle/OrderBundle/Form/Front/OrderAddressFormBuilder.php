@@ -144,6 +144,16 @@ class OrderAddressFormBuilder extends AbstractFormBuilder
         ]));
 
         $contactDetails->addChild($this->getElement('text_field', [
+            'name'  => 'contactDetails.firstName',
+            'label' => $this->trans('client.label.contact_details.first_name'),
+        ]));
+
+        $contactDetails->addChild($this->getElement('text_field', [
+            'name'  => 'contactDetails.lastName',
+            'label' => $this->trans('client.label.contact_details.last_name'),
+        ]));
+
+        $contactDetails->addChild($this->getElement('text_field', [
             'name'  => 'contactDetails.phone',
             'label' => $this->trans('client.label.contact_details.phone'),
         ]));

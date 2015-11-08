@@ -92,7 +92,7 @@ WellCommerce\Bundle\OrderBundle\Entity\Order:
             joinColumns:
                 shipping_method_id:
                     referencedColumnName: id
-                    onDelete: RESTRICT
+                    onDelete: 'SET NULL'
         shop:
             targetEntity: WellCommerce\Bundle\MultiStoreBundle\Entity\Shop
             fetch: LAZY

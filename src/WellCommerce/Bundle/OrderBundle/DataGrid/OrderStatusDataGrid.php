@@ -83,7 +83,7 @@ class OrderStatusDataGrid extends AbstractDataGrid
      */
     protected function getOrderStatusGroups()
     {
-        return $this->get('order_status_group.dataset')->getResult('select', [], [
+        return $this->get('order_status_group.dataset.admin')->getResult('select', [], [
             'value_column' => 'name',
             'label_column' => 'name',
         ]);

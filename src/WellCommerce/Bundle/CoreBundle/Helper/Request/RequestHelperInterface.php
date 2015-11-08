@@ -128,6 +128,24 @@ interface RequestHelperInterface
     public function getQueryBagParam($name, $default = null);
 
     /**
+     * Checks whether request has given attribute
+     *
+     * @param string $name
+     *
+     * @return bool
+     */
+    public function hasRequestBagParam($name);
+
+    /**
+     * Checks whether request has given attributes
+     *
+     * @param array $params
+     *
+     * @return bool
+     */
+    public function hasRequestBagParams(array $params = []);
+
+    /**
      * Returns a param from request bag
      *
      * @param string $name
@@ -136,6 +154,24 @@ interface RequestHelperInterface
      * @return mixed
      */
     public function getRequestBagParam($name, $default = null);
+
+    /**
+     * Checks whether request has given attribute
+     *
+     * @param string $name
+     *
+     * @return bool
+     */
+    public function hasAttributesBagParam($name);
+
+    /**
+     * Checks whether request has given attributes
+     *
+     * @param array $params
+     *
+     * @return bool
+     */
+    public function hasAttributesBagParams(array $params = []);
 
     /**
      * Returns a param from attributes bag

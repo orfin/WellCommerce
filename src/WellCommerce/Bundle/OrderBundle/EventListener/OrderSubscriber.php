@@ -13,6 +13,9 @@ namespace WellCommerce\Bundle\OrderBundle\EventListener;
 
 use WellCommerce\Bundle\CoreBundle\Event\ResourceEvent;
 use WellCommerce\Bundle\CoreBundle\EventListener\AbstractEventSubscriber;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderTotalDetailInterface;
+use WellCommerce\Bundle\OrderBundle\Factory\OrderTotalFactory;
 use WellCommerce\Bundle\OrderBundle\Visitor\OrderVisitorTraverserInterface;
 
 /**
@@ -28,24 +31,71 @@ class OrderSubscriber extends AbstractEventSubscriber
     protected $orderVisitorTraverser;
 
     /**
-     * Constructor
+     * @var OrderTotalFactory
+     */
+    protected $orderTotalFactory;
+
+    /**
+     * OrderSubscriber constructor.
      *
      * @param OrderVisitorTraverserInterface $orderVisitorTraverser
+     * @param OrderTotalFactory              $orderTotalFactory
      */
-    public function __construct(OrderVisitorTraverserInterface $orderVisitorTraverser)
+    public function __construct(OrderVisitorTraverserInterface $orderVisitorTraverser, OrderTotalFactory $orderTotalFactory)
     {
         $this->orderVisitorTraverser = $orderVisitorTraverser;
+        $this->orderTotalFactory     = $orderTotalFactory;
     }
 
     public static function getSubscribedEvents()
     {
         return [
             'order.post_prepared' => ['onOrderPostPreparedEvent', 0],
+            'order.pre_update'    => ['onOrderPreUpdateEvent', 0],
         ];
     }
 
     public function onOrderPostPreparedEvent(ResourceEvent $event)
     {
-        $this->orderVisitorTraverser->traverse($event->getResource());
+        $order = $event->getResource();
+        if ($order instanceof OrderInterface) {
+            $this->traverseOrder($order);
+        }
+    }
+
+    public function onOrderPreUpdateEvent(ResourceEvent $event)
+    {
+        $order = $event->getResource();
+        if ($order instanceof OrderInterface) {
+            $this->removeTotals($order);
+            $this->recalculateShippingTotal($order);
+            $this->traverseOrder($order);
+        }
+    }
+
+    protected function recalculateShippingTotal(OrderInterface $order)
+    {
+        $grossAmount = $order->getShippingTotal()->getGrossAmount();
+        $taxRate     = $order->getShippingMethod()->getTax()->getValue();
+        $currency    = $order->getCurrency();
+        $orderTotal  = $this->orderTotalFactory->createFromSpecifiedValues($grossAmount, $taxRate, $currency);
+
+        $order->setShippingTotal($orderTotal);
+    }
+
+    protected function removeTotals(OrderInterface $order)
+    {
+        $em     = $this->getDoctrineHelper()->getEntityManager();
+        $totals = $order->getTotals();
+        $totals->map(function (OrderTotalDetailInterface $total) use ($em) {
+            $em->remove($total);
+        });
+
+        $em->flush();
+    }
+
+    protected function traverseOrder(OrderInterface $order)
+    {
+        $this->orderVisitorTraverser->traverse($order);
     }
 }

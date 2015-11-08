@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\CartBundle\Manager\Front;
 
-use Symfony\Component\Validator\Exception\ValidatorException;
 use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
 use WellCommerce\Bundle\CartBundle\Exception\DeleteCartItemException;

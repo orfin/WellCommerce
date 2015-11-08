@@ -130,9 +130,31 @@ class RequestHelper implements RequestHelperInterface
     /**
      * {@inheritdoc}
      */
+    public function hasRequestBagParam($name)
+    {
+        return $this->request->request->has($name);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasRequestBagParams(array $params = [])
+    {
+        foreach ($params as $param) {
+            if (!$this->hasRequestBagParam($param)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getRequestBagParam($name, $default = null)
     {
-        if (false === $this->request->request->has($name)) {
+        if (false === $this->hasRequestBagParam($name)) {
             return $default;
         }
 
@@ -154,9 +176,31 @@ class RequestHelper implements RequestHelperInterface
     /**
      * {@inheritdoc}
      */
+    public function hasAttributesBagParam($name)
+    {
+        return $this->request->attributes->has($name);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasAttributesBagParams(array $params = [])
+    {
+        foreach ($params as $param) {
+            if (!$this->hasAttributesBagParam($param)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getAttributesBagParam($name, $default = null)
     {
-        if (false === $this->request->attributes->has($name)) {
+        if (false === $this->hasAttributesBagParam($name)) {
             return $default;
         }
 

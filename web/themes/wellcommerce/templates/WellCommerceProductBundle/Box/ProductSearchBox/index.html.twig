@@ -1,0 +1,8 @@
+{% trans_default_domain "wellcommerce" %}
+{% if dataset.pagination.totalRows > 0 %}
+	{% include 'WellCommerceProductBundle:Front/Common:products.html.twig' %}
+{% else %}
+    <div class="alert alert-info" role="alert">
+        <strong>{% trans %}product_search.flash.no_results{% endtrans %}</strong>
+    </div>
+{% endif %}

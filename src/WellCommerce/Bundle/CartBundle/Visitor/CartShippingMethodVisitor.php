@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\CartBundle\Visitor;
 
 use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
 use WellCommerce\Bundle\ShippingBundle\Provider\CartShippingMethodProviderInterface;
+use WellCommerce\Bundle\ShippingBundle\Provider\ShippingMethodProviderInterface;
 
 /**
  * Class CartShippingMethodVisitor
@@ -23,18 +24,18 @@ use WellCommerce\Bundle\ShippingBundle\Provider\CartShippingMethodProviderInterf
 class CartShippingMethodVisitor implements CartVisitorInterface
 {
     /**
-     * @var CartShippingMethodProviderInterface
+     * @var ShippingMethodProviderInterface
      */
-    protected $cartShippingMethodProvider;
+    protected $shippingMethodProvider;
 
     /**
      * Constructor
      *
-     * @param CartShippingMethodProviderInterface $cartShippingMethodProvider
+     * @param ShippingMethodProviderInterface $shippingMethodProvider
      */
-    public function __construct(CartShippingMethodProviderInterface $cartShippingMethodProvider)
+    public function __construct(ShippingMethodProviderInterface $shippingMethodProvider)
     {
-        $this->cartShippingMethodProvider = $cartShippingMethodProvider;
+        $this->shippingMethodProvider = $shippingMethodProvider;
     }
 
     /**
@@ -54,7 +55,7 @@ class CartShippingMethodVisitor implements CartVisitorInterface
 
     protected function getShippingMethodCostCollection(CartInterface $cart)
     {
-        return $this->cartShippingMethodProvider->getShippingMethodCostsCollection($cart);
+        return $this->shippingMethodProvider->getShippingMethodCostsCollection($cart);
     }
 
     /**

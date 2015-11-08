@@ -10,7 +10,7 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ShippingBundle\Entity;
+namespace WellCommerce\Bundle\ShippingBundle\Calculator;
 
 /**
  * Interface ShippingCalculatorSubjectInterface
@@ -22,20 +22,20 @@ interface ShippingCalculatorSubjectInterface
     /**
      * @return float
      */
-    public function getShippableQuantity();
+    public function getShippingCostQuantity();
 
     /**
      * @return float
      */
-    public function getShippableWeight();
+    public function getShippingCostWeight();
 
     /**
      * @return float
      */
-    public function getShippableNetPrice();
+    public function getShippingCostGrossPrice();
 
     /**
-     * @return float
+     * @return string
      */
-    public function getShippableGrossPrice();
+    public function getShippingCostCurrency();
 }

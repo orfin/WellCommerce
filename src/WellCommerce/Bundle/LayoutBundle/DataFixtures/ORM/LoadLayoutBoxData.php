@@ -165,6 +165,12 @@ class LoadLayoutBoxData extends AbstractDataFixture
                 'name'       => 'Dynamic product status box',
                 'settings'   => []
             ],
+            4 => [
+                'type'       => 'ProductSearch',
+                'identifier' => 'product_search',
+                'name'       => 'Product search box',
+                'settings'   => []
+            ],
         ];
 
         foreach ($boxes as $index => $params) {

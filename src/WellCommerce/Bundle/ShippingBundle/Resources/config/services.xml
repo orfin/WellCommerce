@@ -82,16 +82,9 @@
 
         <service id="shipping_method.calculator.collection" class="WellCommerce\Bundle\ShippingBundle\Calculator\ShippingMethodCalculatorCollection" />
 
-        <service id="shipping_method.cart.provider" class="WellCommerce\Bundle\ShippingBundle\Provider\CartShippingMethodProvider">
+        <service id="shipping_method.provider" class="WellCommerce\Bundle\ShippingBundle\Provider\ShippingMethodProvider">
             <argument type="service" id="shipping_method.repository"/>
             <argument type="service" id="shipping_method.calculator.collection"/>
-            <tag name="shipping_method.provider" />
-        </service>
-
-        <service id="shipping_method.product.provider" class="WellCommerce\Bundle\ShippingBundle\Provider\ProductShippingMethodProvider">
-            <argument type="service" id="shipping_method.repository"/>
-            <argument type="service" id="shipping_method.calculator.collection"/>
-            <tag name="shipping_method.provider" />
         </service>
 
         <service id="shipping_method_cost.doctrine.event_subscriber" class="WellCommerce\Bundle\ShippingBundle\EventListener\ShippingMethodCostEventSubscriber">

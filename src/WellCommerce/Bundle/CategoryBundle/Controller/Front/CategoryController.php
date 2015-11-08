@@ -36,12 +36,24 @@ class CategoryController extends AbstractFrontController implements FrontControl
         $this->manager->getCategoryContext()->setCurrentCategory($category);
 
         return $this->displayTemplate('index', [
-            'category' => $category
+            'category' => $category,
+            'sorting'  => $this->createCategorySorting()
         ]);
     }
 
-    public function filterAction()
+    protected function createCategorySorting()
     {
+        $sorting  = [
+            'name'       => [
+                'asc'  => $this->trans('product.options.order_by.name.asc'),
+                'desc' => $this->trans('product.options.order_by.name.desc')
+            ],
+            'finalPrice' => [
+                'asc'  => $this->trans('product.options.order_by.final_price.asc'),
+                'desc' => $this->trans('product.options.order_by.final_price.desc')
+            ]
+        ];
 
+        return $sorting;
     }
 }

@@ -12,19 +12,19 @@
 
 namespace WellCommerce\Bundle\ProductBundle\Provider;
 
-use WellCommerce\Bundle\CoreBundle\Provider\ResourceProviderInterface;
+use WellCommerce\Bundle\DataSetBundle\Conditions\ConditionsCollection;
 
 /**
- * Interface ProductProviderInterface
+ * Interface ProductSearchProviderInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ProductProviderInterface extends ResourceProviderInterface
+interface ProductSearchProviderInterface
 {
     /**
-     * Returns default product's template variables
+     * @param ConditionsCollection $collection
      *
-     * @return array
+     * @return ConditionsCollection
      */
-    public function getProductDefaultTemplateData();
+    public function addSearchConditions(ConditionsCollection $collection);
 }

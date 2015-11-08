@@ -13,7 +13,10 @@
 namespace WellCommerce\Bundle\OrderBundle\Factory;
 
 use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\Price;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
+use WellCommerce\Bundle\IntlBundle\Helper\CurrencyHelperInterface;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 use WellCommerce\Bundle\OrderBundle\Entity\OrderProduct;
 
 /**
@@ -23,6 +26,21 @@ use WellCommerce\Bundle\OrderBundle\Entity\OrderProduct;
  */
 class OrderProductFactory extends AbstractFactory implements OrderProductFactoryInterface
 {
+    /**
+     * @var CurrencyHelperInterface
+     */
+    protected $currencyHelper;
+
+    /**
+     * OrderProductFactory constructor.
+     *
+     * @param CurrencyHelperInterface $currencyHelper
+     */
+    public function __construct(CurrencyHelperInterface $currencyHelper)
+    {
+        $this->currencyHelper    = $currencyHelper;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -38,18 +56,32 @@ class OrderProductFactory extends AbstractFactory implements OrderProductFactory
     /**
      * {@inheritdoc}
      */
-    public function createFromCartProduct(CartProductInterface $cartProduct)
+    public function createFromCartProduct(CartProductInterface $cartProduct, OrderInterface $order)
     {
-        $orderProduct = new OrderProduct();
-        $product      = $cartProduct->getProduct();
-        $attribute    = $cartProduct->getAttribute();
+        $orderProduct   = new OrderProduct();
+        $product        = $cartProduct->getProduct();
+        $attribute      = $cartProduct->getAttribute();
+        $sellPrice      = $cartProduct->getSellPrice();
+        $baseCurrency   = $sellPrice->getCurrency();
+        $targetCurrency = $order->getCurrency();
 
-        $orderProduct->setProductAttribute($attribute);
-        $orderProduct->setProduct($product);
-        $orderProduct->setSellPrice($cartProduct->getSellPrice());
+        $grossAmount = $this->currencyHelper->convert($sellPrice->getFinalGrossAmount(), $baseCurrency, $targetCurrency);
+        $netAmount   = $this->currencyHelper->convert($sellPrice->getFinalNetAmount(), $baseCurrency, $targetCurrency);
+        $taxAmount   = $this->currencyHelper->convert($sellPrice->getFinalTaxAmount(), $baseCurrency, $targetCurrency);
+
+        $sellPrice = new Price();
+        $sellPrice->setGrossAmount($grossAmount);
+        $sellPrice->setNetAmount($netAmount);
+        $sellPrice->setTaxAmount($taxAmount);
+        $sellPrice->setTaxRate($sellPrice->getTaxRate());
+        $sellPrice->setCurrency($targetCurrency);
+
+        $orderProduct->setSellPrice($sellPrice);
         $orderProduct->setBuyPrice($product->getBuyPrice());
         $orderProduct->setQuantity($cartProduct->getQuantity());
         $orderProduct->setWeight($cartProduct->getWeight());
+        $orderProduct->setProductAttribute($attribute);
+        $orderProduct->setProduct($product);
 
         return $orderProduct;
     }

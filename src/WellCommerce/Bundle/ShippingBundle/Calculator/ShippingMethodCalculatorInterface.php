@@ -12,8 +12,7 @@
 
 namespace WellCommerce\Bundle\ShippingBundle\Calculator;
 
-use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingCostSubjectInterface;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
 
 /**
@@ -38,23 +37,13 @@ interface ShippingMethodCalculatorInterface
     public function getName();
 
     /**
-     * Calculates the costs of cart for particular shipping method
+     * Returns shipping costs for given amount
      *
-     * @param ShippingMethodInterface $shippingMethod
-     * @param ProductInterface        $product
-     *
-     * @return null|\WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCostInterface
-     */
-    public function calculateProduct(ShippingMethodInterface $shippingMethod, ProductInterface $product);
-
-    /**
-     * Calculates the costs of cart for particular shipping method
-     *
-     * @param ShippingMethodInterface $shippingMethod
-     * @param CartInterface           $cart
+     * @param ShippingMethodInterface            $shippingMethod
+     * @param ShippingCalculatorSubjectInterface $subject
      *
      * @return null|\WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCostInterface
      */
-    public function calculateCart(ShippingMethodInterface $shippingMethod, CartInterface $cart);
+    public function calculate(ShippingMethodInterface $shippingMethod, ShippingCalculatorSubjectInterface $subject);
 }
 
