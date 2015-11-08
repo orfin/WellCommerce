@@ -53,7 +53,7 @@ class ProductLayeredNavigationHelper extends AbstractContainerAware implements P
      */
     public function generateRedirectUrl()
     {
-        $formParams              = $this->parseFormParameters($this->getRequestHelper()->getRequestBagParam('form', ''));
+        $formParams              = $this->parseFormParameters($this->getRequestHelper()->getRequestBagParam('form', '', FILTER_DEFAULT));
         $route                   = $this->getRequestHelper()->getRequestBagParam('route', 0);
         $currentAttributesParams = $this->getRequestHelper()->getRequestBagParam('route_params', []);
         $producers               = isset($formParams['producer']) ? $this->filterProducers((array)$formParams['producer']) : [];

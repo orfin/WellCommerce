@@ -152,25 +152,25 @@ class RequestHelper implements RequestHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function getRequestBagParam($name, $default = null)
+    public function getRequestBagParam($name, $default = null, $filter = FILTER_SANITIZE_SPECIAL_CHARS)
     {
         if (false === $this->hasRequestBagParam($name)) {
             return $default;
         }
 
-        return $this->request->request->filter($name, $default, false, FILTER_SANITIZE_SPECIAL_CHARS);
+        return $this->request->request->filter($name, $default, false, $filter);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getQueryBagParam($name, $default = null)
+    public function getQueryBagParam($name, $default = null, $filter = FILTER_SANITIZE_SPECIAL_CHARS)
     {
         if (false === $this->request->query->has($name)) {
             return $default;
         }
 
-        return $this->request->query->filter($name, $default, false, FILTER_SANITIZE_SPECIAL_CHARS);
+        return $this->request->query->filter($name, $default, false, $filter);
     }
 
     /**
@@ -198,13 +198,13 @@ class RequestHelper implements RequestHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function getAttributesBagParam($name, $default = null)
+    public function getAttributesBagParam($name, $default = null, $filter = FILTER_SANITIZE_SPECIAL_CHARS)
     {
         if (false === $this->hasAttributesBagParam($name)) {
             return $default;
         }
 
-        return $this->request->attributes->filter($name, $default, false, FILTER_SANITIZE_SPECIAL_CHARS);
+        return $this->request->attributes->filter($name, $default, false, $filter);
     }
 
     /**

@@ -97,10 +97,11 @@ interface RequestHelperInterface
      *
      * @param string $name
      * @param null   $default
+     * @param int    $filter
      *
      * @return mixed
      */
-    public function getQueryBagParam($name, $default = null);
+    public function getQueryBagParam($name, $default = null, $filter = FILTER_SANITIZE_SPECIAL_CHARS);
 
     /**
      * Checks whether request has given attribute
@@ -125,10 +126,11 @@ interface RequestHelperInterface
      *
      * @param string $name
      * @param null   $default
+     * @param int    $filter
      *
      * @return mixed
      */
-    public function getRequestBagParam($name, $default = null);
+    public function getRequestBagParam($name, $default = null, $filter = FILTER_SANITIZE_SPECIAL_CHARS);
 
     /**
      * Checks whether request has given attribute
@@ -153,8 +155,9 @@ interface RequestHelperInterface
      *
      * @param string $name
      * @param null   $default
+     * @param int    $filter
      *
      * @return mixed
      */
-    public function getAttributesBagParam($name, $default = null);
+    public function getAttributesBagParam($name, $default = null, $filter = FILTER_SANITIZE_SPECIAL_CHARS);
 }
