@@ -539,12 +539,20 @@ var GSearch = function(oOptions) {
 
     gThis.InitializeEvents = function(){
         $(gThis).bind('submit', gThis.OnSubmit);
-        $(gThis.m_oOptions.sPhraseInputSelector, gThis).keyup(gThis.OnLiveSearch);
+
+        var options = {
+            callback: gThis.OnLiveSearch,
+            wait: 250,
+            highlight: true,
+            captureLength: 2
+        };
+
+        $(gThis.m_oOptions.sPhraseInputSelector, gThis).typeWatch(options);
     };
 
-    gThis.OnLiveSearch = function(eEvent){
+    gThis.OnLiveSearch = function(sPhrase){
         var oRouteParams = {
-            phrase: $(gThis.m_oOptions.sPhraseInputSelector, gThis).val()
+            phrase: sPhrase
         };
 
         var url = Routing.generate(gThis.m_oOptions.sProductLiveSearchRoute, oRouteParams, true);
