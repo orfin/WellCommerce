@@ -1,10 +1,10 @@
 {% trans_default_domain "wellcommerce" %}
 <div id="sliding-search" class="sliding-search">
 	<div>
-		<form>
+		<form id="search">
 			<div class="input-group">
 				<span class="input-group-addon" id="search-phrase"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
-				<input type="text" class="form-control" placeholder="WellCommerce searching" aria-describedby="search-phrase">
+				<input type="text" class="form-control" placeholder="{% trans %}search.label.search{% endtrans %}" aria-describedby="search-phrase" id="phrase" autocomplete="off">
 			</div>
 		</form>
 

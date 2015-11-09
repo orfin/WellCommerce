@@ -79,31 +79,6 @@ interface RequestHelperInterface
     public function getCurrentHost();
 
     /**
-     * Returns current offset
-     *
-     * @param number $limit
-     *
-     * @return int|number
-     */
-    public function getCurrentOffset($limit);
-
-    /**
-     * Returns current page
-     *
-     * @return number
-     */
-    public function getCurrentPage();
-
-    /**
-     * Returns current limit
-     *
-     * @param mixed $default
-     *
-     * @return number
-     */
-    public function getCurrentLimit($default);
-
-    /**
      * Returns current locale
      *
      * @return string
@@ -122,28 +97,67 @@ interface RequestHelperInterface
      *
      * @param string $name
      * @param null   $default
+     * @param int    $filter
      *
      * @return mixed
      */
-    public function getQueryBagParam($name, $default = null);
+    public function getQueryBagParam($name, $default = null, $filter = FILTER_SANITIZE_SPECIAL_CHARS);
+
+    /**
+     * Checks whether request has given attribute
+     *
+     * @param string $name
+     *
+     * @return bool
+     */
+    public function hasRequestBagParam($name);
+
+    /**
+     * Checks whether request has given attributes
+     *
+     * @param array $params
+     *
+     * @return bool
+     */
+    public function hasRequestBagParams(array $params = []);
 
     /**
      * Returns a param from request bag
      *
      * @param string $name
      * @param null   $default
+     * @param int    $filter
      *
      * @return mixed
      */
-    public function getRequestBagParam($name, $default = null);
+    public function getRequestBagParam($name, $default = null, $filter = FILTER_SANITIZE_SPECIAL_CHARS);
+
+    /**
+     * Checks whether request has given attribute
+     *
+     * @param string $name
+     *
+     * @return bool
+     */
+    public function hasAttributesBagParam($name);
+
+    /**
+     * Checks whether request has given attributes
+     *
+     * @param array $params
+     *
+     * @return bool
+     */
+    public function hasAttributesBagParams(array $params = []);
 
     /**
      * Returns a param from attributes bag
      *
      * @param string $name
      * @param null   $default
+     * @param int    $filter
      *
      * @return mixed
      */
-    public function getAttributesBagParam($name, $default = null);
+    public function getAttributesBagParam($name, $default = null, $filter = FILTER_SANITIZE_SPECIAL_CHARS);
 }

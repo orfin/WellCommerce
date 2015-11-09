@@ -10,23 +10,25 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ShippingBundle\Provider;
+namespace WellCommerce\Bundle\SearchBundle\Indexer;
 
 use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 
 /**
- * Interface ProductShippingMethodProviderInterface
+ * Interface ProductIndexerInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ProductShippingMethodProviderInterface extends ShippingMethodProviderInterface
+interface ProductIndexerInterface
 {
+    const DEFAULT_INDEX_NAME = 'products';
+
     /**
-     * Returns all shipping methods that can handle product
+     * Adds a product to index
      *
-     * @param ProductInterface $cart
-     *
-     * @return \Doctrine\Common\Collections\ArrayCollection
+     * @param ProductInterface $product
      */
-    public function getShippingMethodCostsCollection(ProductInterface $cart);
+    public function addProduct(ProductInterface $product, $indexName = self::DEFAULT_INDEX_NAME);
+
+    public function reindexProducts();
 }

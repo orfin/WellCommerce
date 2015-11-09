@@ -191,6 +191,14 @@ abstract class AbstractContainerAware extends ContainerAware
     }
 
     /**
+     * @return \WellCommerce\Bundle\ProductBundle\Helper\ProductLayeredNavigationHelperInterface
+     */
+    public function getLayeredNavigationHelper()
+    {
+        return $this->get('product_layered_navigation.helper');
+    }
+
+    /**
      * @return \Doctrine\Common\Persistence\ObjectManager|object
      */
     public function getEntityManager()

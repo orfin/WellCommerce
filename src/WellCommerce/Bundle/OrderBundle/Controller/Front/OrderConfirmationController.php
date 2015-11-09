@@ -58,7 +58,6 @@ class OrderConfirmationController extends AbstractFrontController implements Fro
         return $this->displayTemplate('index', [
             'form'         => $form,
             'elements'     => $form->getChildren(),
-            'shippingCost' => $cart->getShippingCost(),
             'summary'      => $this->get('cart_summary.collector')->collect($cart),
             'order'        => $order
         ]);

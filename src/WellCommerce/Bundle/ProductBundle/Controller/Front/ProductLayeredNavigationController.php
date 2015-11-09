@@ -23,16 +23,11 @@ use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
 class ProductLayeredNavigationController extends AbstractFrontController implements FrontControllerInterface
 {
     /**
-     * @var \WellCommerce\Bundle\ProductBundle\Manager\Front\ProductLayeredNavigationManager
-     */
-    protected $manager;
-
-    /**
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
     public function filterAction()
     {
-        $redirectUrl = $this->manager->generateRedirectUrl();
+        $redirectUrl = $this->get('product_layered_navigation.helper')->generateRedirectUrl();
 
         return $this->jsonResponse([
             'success'     => true,

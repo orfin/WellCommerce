@@ -86,7 +86,8 @@ class CartController extends AbstractFrontController implements FrontControllerI
             $this->manager->addProductToCart($product, $attribute, $quantity);
         } catch (AddCartItemException $exception) {
             return $this->jsonResponse([
-                'error' => $exception->getMessage()
+                'error'         => $exception->getMessage(),
+                'previousError' => $exception->getPrevious()->getMessage(),
             ]);
         }
 

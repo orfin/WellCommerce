@@ -12,6 +12,8 @@
 
 namespace WellCommerce\Bundle\ShippingBundle\Provider;
 
+use WellCommerce\Bundle\ShippingBundle\Calculator\ShippingCalculatorSubjectInterface;
+
 /**
  * Interface ShippingMethodProviderInterface
  *
@@ -19,5 +21,12 @@ namespace WellCommerce\Bundle\ShippingBundle\Provider;
  */
 interface ShippingMethodProviderInterface
 {
-
+    /**
+     * Returns all shipping methods that can handle given subject
+     *
+     * @param ShippingCalculatorSubjectInterface $subject
+     *
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getShippingMethodCostsCollection(ShippingCalculatorSubjectInterface $subject);
 }

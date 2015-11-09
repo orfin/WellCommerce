@@ -12,8 +12,7 @@
 
 namespace WellCommerce\Bundle\ShippingBundle\Calculator;
 
-use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingCostSubjectInterface;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
 
 /**
@@ -42,16 +41,8 @@ class WeightTableCalculator extends AbstractShippingMethodCalculator implements 
     /**
      * {@inheritdoc}
      */
-    public function calculateProduct(ShippingMethodInterface $shippingMethod, ProductInterface $product)
+    public function calculate(ShippingMethodInterface $shippingMethod, ShippingCalculatorSubjectInterface $subject)
     {
-        return new ShippingCostReference();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function calculateCart(ShippingMethodInterface $shippingMethod, CartInterface $cart)
-    {
-        return new ShippingCostReference();
+        return null;
     }
 }

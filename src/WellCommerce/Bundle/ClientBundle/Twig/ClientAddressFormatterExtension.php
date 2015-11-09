@@ -96,8 +96,8 @@ class ClientAddressFormatterExtension extends \Twig_Extension
     public function formatContactDetails(ClientContactDetailsInterface $details, $lineSeparator = self::LINES_SEPARATOR)
     {
         $lines   = [];
-        $lines[] = $details->getPhone();
-        $lines[] = $details->getSecondaryPhone();
+        $lines[] = sprintf('%s %s', $details->getFirstName(), $details->getLastName());
+        $lines[] = sprintf('%s %s', $details->getPhone(), $details->getSecondaryPhone());
         $lines[] = $details->getEmail();
 
         return implode($lineSeparator, $lines);

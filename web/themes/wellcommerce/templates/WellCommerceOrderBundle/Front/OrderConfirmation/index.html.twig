@@ -37,7 +37,7 @@
                                     <h4><br/><br/><br/>Cost of delivery</h4>
                                 </div>
                                 <div class="col-xs-6">
-                                    <h4><strong><br/><br/><br/>{{ format_price(shippingCost.getGrossAmount(), shippingCost.getCurrency()) }}</strong></h4>
+                                    <h4><strong><br/><br/><br/>{{ format_price(order.getShippingTotal().getGrossAmount(), order.getShippingTotal().getCurrency()) }}</strong></h4>
                                 </div>
                             </div>
                         </div>

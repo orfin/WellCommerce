@@ -14,8 +14,6 @@ namespace WellCommerce\Bundle\ProductBundle\Controller\Box;
 
 use WellCommerce\Bundle\CoreBundle\Controller\Box\AbstractBoxController;
 use WellCommerce\Bundle\CoreBundle\Controller\Box\BoxControllerInterface;
-use WellCommerce\Bundle\DataSetBundle\Conditions\Condition\Gt;
-use WellCommerce\Bundle\DataSetBundle\Conditions\ConditionsCollection;
 
 /**
  * Class ProductLayeredNavigationBoxController

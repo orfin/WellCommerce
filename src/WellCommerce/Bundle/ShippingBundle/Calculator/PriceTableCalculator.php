@@ -12,8 +12,6 @@
 
 namespace WellCommerce\Bundle\ShippingBundle\Calculator;
 
-use WellCommerce\Bundle\CartBundle\Entity\CartInterface;
-use WellCommerce\Bundle\ProductBundle\Entity\ProductInterface;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCostInterface;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
 
@@ -43,39 +41,14 @@ class PriceTableCalculator extends AbstractShippingMethodCalculator implements S
     /**
      * {@inheritdoc}
      */
-    public function calculateProduct(ShippingMethodInterface $shippingMethod, ProductInterface $product)
+    public function calculate(ShippingMethodInterface $shippingMethod, ShippingCalculatorSubjectInterface $subject)
     {
-        $baseCurrency     = $product->getSellPrice()->getCurrency();
-        $targetCurrency   = $shippingMethod->getCurrency()->getCode();
-        $totalGrossAmount = $this->currencyHelper->convert($product->getSellPrice()->getFinalGrossAmount(), $baseCurrency, $targetCurrency);
-        $ranges           = $shippingMethod->getCosts();
-        $supportedRanges  = $ranges->filter(function (ShippingMethodCostInterface $cost) use ($totalGrossAmount) {
-            return ($cost->getRangeFrom() <= $totalGrossAmount && $cost->getRangeTo() >= $totalGrossAmount);
-        });
-
-        if ($supportedRanges->count()) {
-            return $supportedRanges->first();
-        }
-
-        return null;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    /**
-     * @param ShippingMethodInterface $shippingMethod
-     * @param CartInterface           $cart
-     *
-     * @return bool|mixed
-     */
-    public function calculateCart(ShippingMethodInterface $shippingMethod, CartInterface $cart)
-    {
-        $targetCurrency   = $shippingMethod->getCurrency()->getCode();
-        $totalGrossAmount = $this->cartTotalsCollector->collectTotalGrossAmount($cart, $targetCurrency);
-        $ranges           = $shippingMethod->getCosts();
-        $supportedRanges  = $ranges->filter(function (ShippingMethodCostInterface $cost) use ($totalGrossAmount) {
-            return ($cost->getRangeFrom() <= $totalGrossAmount && $cost->getRangeTo() >= $totalGrossAmount);
+        $ranges          = $shippingMethod->getCosts();
+        $baseCurrency    = $subject->getShippingCostCurrency();
+        $targetCurrency  = $shippingMethod->getCurrency()->getCode();
+        $grossAmount     = $this->currencyHelper->convert($subject->getShippingCostGrossPrice(), $baseCurrency, $targetCurrency);
+        $supportedRanges = $ranges->filter(function (ShippingMethodCostInterface $cost) use ($grossAmount) {
+            return ($cost->getRangeFrom() <= $grossAmount && $cost->getRangeTo() >= $grossAmount);
         });
 
         if ($supportedRanges->count()) {

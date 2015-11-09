@@ -12,7 +12,6 @@
 
 namespace WellCommerce\Bundle\OrderBundle\Entity;
 
-use WellCommerce\Bundle\CoreBundle\Entity\DiscountablePrice;
 use WellCommerce\Bundle\CoreBundle\Entity\Price;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\ProductBundle\Entity\ProductAttributeAwareInterface;
@@ -41,14 +40,14 @@ interface OrderProductInterface extends ProductAwareInterface, ProductAttributeA
     public function setQuantity($quantity);
 
     /**
-     * @return DiscountablePrice
+     * @return Price
      */
     public function getSellPrice();
 
     /**
-     * @param DiscountablePrice $sellPrice
+     * @param Price $sellPrice
      */
-    public function setSellPrice(DiscountablePrice $sellPrice);
+    public function setSellPrice(Price $sellPrice);
 
     /**
      * @return Price

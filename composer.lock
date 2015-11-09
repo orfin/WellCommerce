@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "41bbf5927a94dbd8a5baebb9be08605b",
+    "hash": "f54707803f646ba3767ee107f19cc899",
     "packages": [
         {
             "name": "beberlei/DoctrineExtensions",
@@ -719,12 +719,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/inflector.git",
-                "reference": "097e7ba84f64a427e55008117ef2bb94096731dc"
+                "reference": "90b2128806bfde671b6952ab8bea493942c1fdae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/inflector/zipball/097e7ba84f64a427e55008117ef2bb94096731dc",
-                "reference": "097e7ba84f64a427e55008117ef2bb94096731dc",
+                "url": "https://api.github.com/repos/doctrine/inflector/zipball/90b2128806bfde671b6952ab8bea493942c1fdae",
+                "reference": "90b2128806bfde671b6952ab8bea493942c1fdae",
                 "shasum": ""
             },
             "require": {
@@ -736,7 +736,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev"
+                    "dev-master": "1.1.x-dev"
                 }
             },
             "autoload": {
@@ -778,7 +778,7 @@
                 "singularize",
                 "string"
             ],
-            "time": "2015-10-07 18:00:26"
+            "time": "2015-11-06 14:35:42"
         },
         {
             "name": "doctrine/instantiator",
@@ -962,12 +962,21 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/doctrine2.git",
+<<<<<<< HEAD
                 "reference": "9e085ca0b383fbdb99b7781d86954266e52efdae"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/9e085ca0b383fbdb99b7781d86954266e52efdae",
                 "reference": "9e085ca0b383fbdb99b7781d86954266e52efdae",
+=======
+                "reference": "ada97d55ced7f376700c19bcb50603897f8d66de"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/ada97d55ced7f376700c19bcb50603897f8d66de",
+                "reference": "ada97d55ced7f376700c19bcb50603897f8d66de",
+>>>>>>> origin/development
                 "shasum": ""
             },
             "require": {
@@ -1031,7 +1040,65 @@
                 "database",
                 "orm"
             ],
+<<<<<<< HEAD
             "time": "2015-11-05 20:10:43"
+=======
+            "time": "2015-11-07 16:44:02"
+        },
+        {
+            "name": "egeloen/lucene-search-bundle",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/egeloen/IvoryLuceneSearchBundle.git",
+                "reference": "d0fbbbf9d0f90076b5ec328ddbd272828a08fe66"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/egeloen/IvoryLuceneSearchBundle/zipball/d0fbbbf9d0f90076b5ec328ddbd272828a08fe66",
+                "reference": "d0fbbbf9d0f90076b5ec328ddbd272828a08fe66",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "symfony/config": "^2.0.5",
+                "symfony/dependency-injection": "^2.0.5",
+                "symfony/filesystem": "~2.0",
+                "symfony/framework-bundle": "~2.0",
+                "zendframework/zendsearch": "dev-master"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0",
+                "satooshi/php-coveralls": "~0.7@dev",
+                "symfony/yaml": "^2.0.5"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ivory\\LuceneSearchBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Eric GELOEN",
+                    "email": "geloen.eric@gmail.com"
+                }
+            ],
+            "description": "Provides a zend lucene search integration for your Symfony2 Project.",
+            "keywords": [
+                "lucene search"
+            ],
+            "time": "2015-01-03 21:22:20"
+>>>>>>> origin/development
         },
         {
             "name": "evenement/evenement",
@@ -3186,16 +3253,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/security-checker.git",
-                "reference": "7735fd97ff7303d9df776b8dbc970f949399abc9"
+                "reference": "21696b0daa731064c23cfb694c60a2584a7b6e93"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/security-checker/zipball/7735fd97ff7303d9df776b8dbc970f949399abc9",
-                "reference": "7735fd97ff7303d9df776b8dbc970f949399abc9",
+                "url": "https://api.github.com/repos/sensiolabs/security-checker/zipball/21696b0daa731064c23cfb694c60a2584a7b6e93",
+                "reference": "21696b0daa731064c23cfb694c60a2584a7b6e93",
                 "shasum": ""
             },
             "require": {
-                "symfony/console": "~2.0"
+                "symfony/console": "~2.0|~3.0"
             },
             "bin": [
                 "security-checker"
@@ -3222,7 +3289,7 @@
                 }
             ],
             "description": "A security checker for your composer.lock",
-            "time": "2015-08-11 12:11:25"
+            "time": "2015-11-07 08:07:40"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -3593,12 +3660,21 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
+<<<<<<< HEAD
                 "reference": "814c2727defdd8922851e7450626e18530192f43"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/symfony/zipball/814c2727defdd8922851e7450626e18530192f43",
                 "reference": "814c2727defdd8922851e7450626e18530192f43",
+=======
+                "reference": "da95b53604686e9a4170e260c6c43bcef608cdf5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/da95b53604686e9a4170e260c6c43bcef608cdf5",
+                "reference": "da95b53604686e9a4170e260c6c43bcef608cdf5",
+>>>>>>> origin/development
                 "shasum": ""
             },
             "require": {
@@ -3709,7 +3785,11 @@
             "keywords": [
                 "framework"
             ],
+<<<<<<< HEAD
             "time": "2015-11-05 13:42:58"
+=======
+            "time": "2015-11-07 08:26:45"
+>>>>>>> origin/development
         },
         {
             "name": "twig/extensions",
@@ -3769,12 +3849,21 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
+<<<<<<< HEAD
                 "reference": "bf326dbb75d06a467a48e8dc4cf7261cd5fdf581"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/twigphp/Twig/zipball/bf326dbb75d06a467a48e8dc4cf7261cd5fdf581",
                 "reference": "bf326dbb75d06a467a48e8dc4cf7261cd5fdf581",
+=======
+                "reference": "b7c124bae00ab0a019a084c6b99f1df023bcb996"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/b7c124bae00ab0a019a084c6b99f1df023bcb996",
+                "reference": "b7c124bae00ab0a019a084c6b99f1df023bcb996",
+>>>>>>> origin/development
                 "shasum": ""
             },
             "require": {
@@ -3822,7 +3911,11 @@
             "keywords": [
                 "templating"
             ],
+<<<<<<< HEAD
             "time": "2015-11-05 12:52:08"
+=======
+            "time": "2015-11-08 09:55:30"
+>>>>>>> origin/development
         },
         {
             "name": "wellcommerce/collections",
@@ -3932,12 +4025,21 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/WellCommerce/DataGridBundle.git",
+<<<<<<< HEAD
                 "reference": "d87e7f8f5749f334ed10a9dd1c04cda9488b46e6"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/WellCommerce/DataGridBundle/zipball/d87e7f8f5749f334ed10a9dd1c04cda9488b46e6",
                 "reference": "d87e7f8f5749f334ed10a9dd1c04cda9488b46e6",
+=======
+                "reference": "5a2fc82eabb569675c3bba66c9468ae70bf0460a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/WellCommerce/DataGridBundle/zipball/5a2fc82eabb569675c3bba66c9468ae70bf0460a",
+                "reference": "5a2fc82eabb569675c3bba66c9468ae70bf0460a",
+>>>>>>> origin/development
                 "shasum": ""
             },
             "require": {
@@ -3988,7 +4090,11 @@
                 "symfony",
                 "wellcommerce"
             ],
+<<<<<<< HEAD
             "time": "2015-11-06 11:51:44"
+=======
+            "time": "2015-11-08 13:17:31"
+>>>>>>> origin/development
         },
         {
             "name": "wellcommerce/dataset-bundle",
@@ -3996,12 +4102,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/WellCommerce/DataSetBundle.git",
-                "reference": "1f805faeb9c35b7392f316bf6e6c9f10b13e6e90"
+                "reference": "6396939755c2893c6a272b40e74507dde5135e45"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WellCommerce/DataSetBundle/zipball/1f805faeb9c35b7392f316bf6e6c9f10b13e6e90",
-                "reference": "1f805faeb9c35b7392f316bf6e6c9f10b13e6e90",
+                "url": "https://api.github.com/repos/WellCommerce/DataSetBundle/zipball/6396939755c2893c6a272b40e74507dde5135e45",
+                "reference": "6396939755c2893c6a272b40e74507dde5135e45",
                 "shasum": ""
             },
             "require": {
@@ -4048,7 +4154,7 @@
                 "symfony",
                 "wellcommerce"
             ],
-            "time": "2015-10-30 21:39:11"
+            "time": "2015-11-08 13:07:33"
         },
         {
             "name": "wellcommerce/form-bundle",
@@ -4056,12 +4162,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/WellCommerce/FormBundle.git",
-                "reference": "462dbf3439fdf7d6c69c689280674e1fa8061bbf"
+                "reference": "337bfaef142638c4a722d1b067cc2612f1e69906"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WellCommerce/FormBundle/zipball/462dbf3439fdf7d6c69c689280674e1fa8061bbf",
-                "reference": "462dbf3439fdf7d6c69c689280674e1fa8061bbf",
+                "url": "https://api.github.com/repos/WellCommerce/FormBundle/zipball/337bfaef142638c4a722d1b067cc2612f1e69906",
+                "reference": "337bfaef142638c4a722d1b067cc2612f1e69906",
                 "shasum": ""
             },
             "require": {
@@ -4113,7 +4219,7 @@
                 "form",
                 "symfony"
             ],
-            "time": "2015-10-13 10:22:13"
+            "time": "2015-11-08 13:11:28"
         },
         {
             "name": "white-october/pagerfanta-bundle",
@@ -4833,6 +4939,42 @@
                 "zf2"
             ],
             "time": "2015-03-12 13:58:47"
+        },
+        {
+            "name": "zendframework/zendsearch",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/ZendSearch.git",
+                "reference": "c8de2508d3413bf9d701b40c1092c1ffbdd8fc63"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/ZendSearch/zipball/c8de2508d3413bf9d701b40c1092c1ffbdd8fc63",
+                "reference": "c8de2508d3413bf9d701b40c1092c1ffbdd8fc63",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "zendframework/zend-stdlib": "2.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "ZendSearch": "library/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "a general purpose text search engine written entirely in PHP 5",
+            "homepage": "http://packages.zendframework.com/",
+            "keywords": [
+                "lucene",
+                "zf2"
+            ],
+            "time": "2015-01-21 16:24:14"
         }
     ],
     "packages-dev": [
@@ -4952,16 +5094,16 @@
         },
         {
             "name": "myclabs/deep-copy",
-            "version": "1.4.0",
+            "version": "1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/DeepCopy.git",
-                "reference": "d8093b631a31628342d0703764935f8bac2c56b1"
+                "reference": "e3abefcd7f106677fd352cd7c187d6c969aa9ddc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/d8093b631a31628342d0703764935f8bac2c56b1",
-                "reference": "d8093b631a31628342d0703764935f8bac2c56b1",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/e3abefcd7f106677fd352cd7c187d6c969aa9ddc",
+                "reference": "e3abefcd7f106677fd352cd7c187d6c969aa9ddc",
                 "shasum": ""
             },
             "require": {
@@ -4990,7 +5132,7 @@
                 "object",
                 "object graph"
             ],
-            "time": "2015-10-05 15:07:09"
+            "time": "2015-11-07 22:20:37"
         },
         {
             "name": "phpdocumentor/reflection-docblock",
@@ -5107,12 +5249,21 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
+<<<<<<< HEAD
                 "reference": "bb588928441579cc7cdffc69124898a6b44bb198"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/bb588928441579cc7cdffc69124898a6b44bb198",
                 "reference": "bb588928441579cc7cdffc69124898a6b44bb198",
+=======
+                "reference": "3e8e8c5b7cc76a1199e251ded7b417dfcf7684a5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/3e8e8c5b7cc76a1199e251ded7b417dfcf7684a5",
+                "reference": "3e8e8c5b7cc76a1199e251ded7b417dfcf7684a5",
+>>>>>>> origin/development
                 "shasum": ""
             },
             "require": {
@@ -5161,7 +5312,11 @@
                 "testing",
                 "xunit"
             ],
+<<<<<<< HEAD
             "time": "2015-11-06 10:11:30"
+=======
+            "time": "2015-11-06 13:55:10"
+>>>>>>> origin/development
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -5347,12 +5502,21 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
+<<<<<<< HEAD
                 "reference": "db97606671f435e099a556b5439be7d4f7be831b"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/db97606671f435e099a556b5439be7d4f7be831b",
                 "reference": "db97606671f435e099a556b5439be7d4f7be831b",
+=======
+                "reference": "c19349623f7aef33c7e3dc83d38cedccaf850385"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/c19349623f7aef33c7e3dc83d38cedccaf850385",
+                "reference": "c19349623f7aef33c7e3dc83d38cedccaf850385",
+>>>>>>> origin/development
                 "shasum": ""
             },
             "require": {
@@ -5413,7 +5577,11 @@
                 "testing",
                 "xunit"
             ],
+<<<<<<< HEAD
             "time": "2015-11-06 08:15:59"
+=======
+            "time": "2015-11-06 15:17:42"
+>>>>>>> origin/development
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -5962,6 +6130,7 @@
         "hoa/websocket": 20,
         "devristo/phpws": 20,
         "nesbot/carbon": 20,
+        "egeloen/lucene-search-bundle": 20,
         "doctrine/doctrine-fixtures-bundle": 20,
         "phpunit/phpunit": 20
     },

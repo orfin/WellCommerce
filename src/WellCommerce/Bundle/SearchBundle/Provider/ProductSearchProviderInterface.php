@@ -10,21 +10,19 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ProductBundle\Provider;
+namespace WellCommerce\Bundle\SearchBundle\Provider;
 
-use WellCommerce\Bundle\CoreBundle\Provider\ResourceProviderInterface;
+use WellCommerce\Bundle\SearchBundle\Query\SimpleQuery;
 
 /**
- * Interface ProductProviderInterface
+ * Interface ProductSearchProviderInterface
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-interface ProductProviderInterface extends ResourceProviderInterface
+interface ProductSearchProviderInterface
 {
     /**
-     * Returns default product's template variables
-     *
-     * @return array
+     * @param SimpleQuery $query
      */
-    public function getProductDefaultTemplateData();
+    public function searchProducts(SimpleQuery $query);
 }

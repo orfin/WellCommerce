@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\OrderBundle\Factory;
 
 use WellCommerce\Bundle\CartBundle\Entity\CartProductInterface;
 use WellCommerce\Bundle\CoreBundle\Factory\FactoryInterface;
+use WellCommerce\Bundle\OrderBundle\Entity\OrderInterface;
 
 /**
  * Interface OrderProductFactoryInterface
@@ -28,11 +29,12 @@ interface OrderProductFactoryInterface extends FactoryInterface
     public function create();
 
     /**
-     * Creates an order product from passed cart product
+     * Creates an order product from given cart product
      *
      * @param CartProductInterface $cartProduct
+     * @param OrderInterface       $order
      *
      * @return \WellCommerce\Bundle\OrderBundle\Entity\OrderProductInterface
      */
-    public function createFromCartProduct(CartProductInterface $cartProduct);
+    public function createFromCartProduct(CartProductInterface $cartProduct, OrderInterface $order);
 }

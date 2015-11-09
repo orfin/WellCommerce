@@ -1669,7 +1669,7 @@ a.button-green span img,span.button-green span img {
 	margin: 0;
 	position: absolute;
 	top: -48px;
-	right: 13px;
+	right: 33px;
 }
 
 .GForm .field-order-editor .trigger .button {
@@ -1731,6 +1731,9 @@ a.button-green span img,span.button-green span img {
 	border-bottom: 0;
 }
 
+.GForm.view-order {
+	clear: both;
+}
 .GForm.view-order .field-client-select .layout-two-columns {
 	border-width: 0;
 	border-right-width: 1px;
@@ -5697,7 +5700,21 @@ form {
 }
 
 .GForm.view-order fieldset fieldset legend+.GFormNode {
-	margin-top: 0;
+	margin-top: -1px;
+}
+
+.GForm.view-order fieldset fieldset#contactDetails legend+.GFormNode {
+	margin-top: 8px;
+}
+
+.GForm>.GBlock>fieldset .editOrder fieldset#contactDetails {
+    border-left: 1px solid #dfdfdf;
+	border-right: 1px solid #dfdfdf;
+}
+
+.GForm.view-order fieldset fieldset#contactDetails legend {
+    left: -1px;
+	width: 800px;
 }
 
 .GForm.view-order .GForm {
@@ -5752,6 +5769,10 @@ form {
 	margin: 0;
 }
 
+.GForm..view-order .block {
+	clear: none!important;
+}
+
 .GForm.view-order fieldset .layout-two-columns fieldset legend span {
 	width: 407px; /*440px;*/
 	margin-left: -2px;
@@ -5787,7 +5808,7 @@ form {
 
 .view-order .editOrder .layout-two-columns .column .field-text .repetition,.view-order .editOrder .layout-two-columns .column .field-select .repetition
 	{
-	padding: 3px 0 4px 189px;
+	padding: 10px 0 4px 189px;
 	margin-left: 0;
 	margin-bottom: 0;
 }

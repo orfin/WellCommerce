@@ -92,11 +92,11 @@ class RouteProvider implements RouteProviderInterface
         $id       = str_replace(self::DYNAMIC_PREFIX, '', $identifier);
         $resource = $this->repository->find($id);
 
-        if (null === $resource) {
-            throw new RouteNotFoundException(sprintf('No route found for id "%s"', $id));
+        if ($resource instanceof RouteInterface) {
+            return $this->createRoute($resource);
         }
 
-        return $this->createRoute($resource);
+        return null;
     }
 
     public function getRoutesByNames($names, $parameters = [])

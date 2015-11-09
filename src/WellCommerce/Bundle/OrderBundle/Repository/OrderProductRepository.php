@@ -10,16 +10,16 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-namespace WellCommerce\Bundle\ProductBundle\Provider;
+namespace WellCommerce\Bundle\OrderBundle\Repository;
 
-use WellCommerce\Bundle\CoreBundle\Provider\AbstractResourceProvider;
+use WellCommerce\Bundle\CoreBundle\Repository\AbstractEntityRepository;
 
 /**
- * Class ProductStatusProvider
+ * Class OrderProductRepository
  *
  * @author  Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductStatusProvider extends AbstractResourceProvider implements ProductStatusProviderInterface
+class OrderProductRepository extends AbstractEntityRepository implements OrderRepositoryInterface
 {
 
 }

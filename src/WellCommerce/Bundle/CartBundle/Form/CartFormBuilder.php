@@ -19,6 +19,7 @@ use WellCommerce\Bundle\FormBundle\Elements\Optioned\RadioGroup;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodInterface;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCostInterface;
 use WellCommerce\Bundle\ShippingBundle\Provider\CartShippingMethodProviderInterface;
+use WellCommerce\Bundle\ShippingBundle\Provider\ShippingMethodProviderInterface;
 
 /**
  * Class CartFormBuilder
@@ -28,9 +29,9 @@ use WellCommerce\Bundle\ShippingBundle\Provider\CartShippingMethodProviderInterf
 class CartFormBuilder extends AbstractFormBuilder
 {
     /**
-     * @var CartShippingMethodProviderInterface
+     * @var ShippingMethodProviderInterface
      */
-    protected $cartShippingMethodProvider;
+    protected $shippingMethodProvider;
 
     /**
      * @var CartContextInterface
@@ -38,11 +39,11 @@ class CartFormBuilder extends AbstractFormBuilder
     protected $cartContext;
 
     /**
-     * @param CartShippingMethodProviderInterface $cartShippingMethodProvider
+     * @param ShippingMethodProviderInterface $shippingMethodProvider
      */
-    public function setShippingMethodProvider(CartShippingMethodProviderInterface $cartShippingMethodProvider)
+    public function setShippingMethodProvider(ShippingMethodProviderInterface $shippingMethodProvider)
     {
-        $this->cartShippingMethodProvider = $cartShippingMethodProvider;
+        $this->shippingMethodProvider = $shippingMethodProvider;
     }
 
     /**
@@ -91,7 +92,7 @@ class CartFormBuilder extends AbstractFormBuilder
      */
     protected function addShippingOptions(RadioGroup $radioGroup, CartInterface $cart)
     {
-        $collection = $this->cartShippingMethodProvider->getShippingMethodCostsCollection($cart);
+        $collection = $this->shippingMethodProvider->getShippingMethodCostsCollection($cart);
 
         $collection->map(function (ShippingMethodCostInterface $shippingMethodCost) use ($radioGroup) {
             $shippingMethod = $shippingMethodCost->getShippingMethod();

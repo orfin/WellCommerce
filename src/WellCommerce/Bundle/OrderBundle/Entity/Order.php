@@ -17,14 +17,13 @@ use WellCommerce\Bundle\ClientBundle\Entity\ClientBillingAddressInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientContactDetailsInterface;
 use WellCommerce\Bundle\ClientBundle\Entity\ClientShippingAddressInterface;
 use WellCommerce\Bundle\CoreBundle\Doctrine\ORM\Behaviours\Timestampable\TimestampableTrait;
-use WellCommerce\Bundle\CoreBundle\Entity\AddressInterface;
-use WellCommerce\Bundle\CoreBundle\Entity\ContactDetailsTrait;
 use WellCommerce\Bundle\CoreBundle\Entity\Price;
 use WellCommerce\Bundle\CouponBundle\Entity\CouponAwareTrait;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopAwareTrait;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentInterface;
 use WellCommerce\Bundle\PaymentBundle\Entity\PaymentMethodAwareTrait;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodAwareTrait;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCostInterface;
 
 /**
  * Class Order
@@ -84,6 +83,11 @@ class Order implements OrderInterface
      * @var string
      */
     protected $sessionId;
+
+    /**
+     * @var ShippingMethodCostInterface
+     */
+    protected $shippingMethodCost;
 
     /**
      * @var OrderStatusInterface
@@ -356,5 +360,47 @@ class Order implements OrderInterface
     public function addPayment(PaymentInterface $payment)
     {
         $this->payments[] = $payment;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getShippingCostQuantity()
+    {
+        $quantity = 0;
+        $this->products->map(function (OrderProduct $orderProduct) use (&$quantity) {
+            $quantity += $orderProduct->getQuantity();
+        });
+
+        return $quantity;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getShippingCostWeight()
+    {
+        $weight = 0;
+        $this->products->map(function (OrderProduct $orderProduct) use (&$weight) {
+            $weight += $orderProduct->getQuantity() * $orderProduct->getWeight();
+        });
+
+        return $weight;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getShippingCostGrossPrice()
+    {
+        return $this->productTotal->getGrossAmount();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getShippingCostCurrency()
+    {
+        return $this->productTotal->getCurrency();
     }
 }

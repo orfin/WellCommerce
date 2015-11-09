@@ -37,13 +37,12 @@ class CategoryProductsBoxController extends AbstractBoxController implements Box
         $dataset       = $this->get('product.dataset.front');
         $requestHelper = $this->manager->getRequestHelper();
         $limit         = $requestHelper->getAttributesBagParam('limit', $boxSettings->getParam('per_page', 12));
-        $offset        = $requestHelper->getAttributesBagParam('page', $limit);
         $conditions    = $this->manager->getCurrentCategoryConditions();
-        $conditions    = $this->get('product_layered_navigation.manager.front')->addLayeredNavigationConditions($conditions);
+        $conditions    = $this->get('product_layered_navigation.helper')->addLayeredNavigationConditions($conditions);
 
         $products = $dataset->getResult('array', [
             'limit'      => $limit,
-            'offset'     => ($offset * $limit) - $limit,
+            'page'       => $requestHelper->getAttributesBagParam('page', 1),
             'order_by'   => $requestHelper->getAttributesBagParam('orderBy', 'name'),
             'order_dir'  => $requestHelper->getAttributesBagParam('orderDir', 'asc'),
             'conditions' => $conditions,

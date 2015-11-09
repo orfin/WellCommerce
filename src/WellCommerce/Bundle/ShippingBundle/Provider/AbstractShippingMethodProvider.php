@@ -13,7 +13,9 @@
 namespace WellCommerce\Bundle\ShippingBundle\Provider;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use WellCommerce\Bundle\ShippingBundle\Calculator\ShippingCalculatorSubjectInterface;
 use WellCommerce\Bundle\ShippingBundle\Calculator\ShippingMethodCalculatorCollection;
+use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodCostInterface;
 use WellCommerce\Bundle\ShippingBundle\Entity\ShippingMethodInterface;
 use WellCommerce\Bundle\ShippingBundle\Exception\CalculatorNotFoundException;
 use WellCommerce\Bundle\ShippingBundle\Repository\ShippingMethodRepositoryInterface;
@@ -25,6 +27,11 @@ use WellCommerce\Bundle\ShippingBundle\Repository\ShippingMethodRepositoryInterf
  */
 abstract class AbstractShippingMethodProvider
 {
+    /**
+     * @var ArrayCollection
+     */
+    protected $collection;
+
     /**
      * @var ShippingMethodRepositoryInterface
      */
@@ -96,5 +103,43 @@ abstract class AbstractShippingMethodProvider
         });
 
         return $supportedMethods;
+    }
+
+    /**
+     * Returns sorted costs collection
+     *
+     * @return ArrayCollection
+     */
+    protected function sortCollection()
+    {
+        $iterator = $this->collection->getIterator();
+        $iterator->uasort(function (ShippingMethodCostInterface $a, ShippingMethodCostInterface $b) {
+            return ($a->getCost()->getGrossAmount() < $b->getCost()->getGrossAmount()) ? -1 : 1;
+        });
+
+        return new ArrayCollection(iterator_to_array($iterator));
+    }
+
+    /**
+     * Returns the collection of all shipping method costs for cart
+     *
+     * @param ShippingCalculatorSubjectInterface $subject
+     *
+     * @return ArrayCollection
+     */
+    protected function getCollection(ShippingCalculatorSubjectInterface $subject)
+    {
+        $shippingMethodCostCollection = new ArrayCollection();
+        $shippingMethods              = $this->getSupportedShippingMethods();
+
+        $shippingMethods->map(function (ShippingMethodInterface $shippingMethod) use ($subject, $shippingMethodCostCollection) {
+            $calculator = $this->getCalculator($shippingMethod);
+            $costs      = $calculator->calculate($shippingMethod, $subject);
+            if ($costs instanceof ShippingMethodCostInterface) {
+                $shippingMethodCostCollection->add($costs);
+            }
+        });
+
+        return $shippingMethodCostCollection;
     }
 }

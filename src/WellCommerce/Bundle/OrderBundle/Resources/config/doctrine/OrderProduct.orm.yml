@@ -12,7 +12,7 @@ WellCommerce\Bundle\OrderBundle\Entity\OrderProduct:
             class: WellCommerce\Bundle\CoreBundle\Entity\Price
             columnPrefix: buy_price_
         sellPrice:
-            class: WellCommerce\Bundle\CoreBundle\Entity\DiscountablePrice
+            class: WellCommerce\Bundle\CoreBundle\Entity\Price
             columnPrefix: sell_price_
     fields:
         quantity:

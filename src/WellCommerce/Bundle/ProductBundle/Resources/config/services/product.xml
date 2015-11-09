@@ -33,7 +33,7 @@
 
         <service id="product.helper" class="WellCommerce\Bundle\ProductBundle\Helper\ProductHelper">
             <argument type="service" id="product.dataset.front"/>
-            <argument type="service" id="shipping_method.product.provider"/>
+            <argument type="service" id="shipping_method.provider"/>
             <argument type="service" id="product_attribute.helper"/>
         </service>
 

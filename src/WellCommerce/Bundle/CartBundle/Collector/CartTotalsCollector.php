@@ -114,5 +114,4 @@ class CartTotalsCollector implements CartTotalsCollectorInterface
 
         return $amount;
     }
-
 }

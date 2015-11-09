@@ -26,6 +26,11 @@ $(document).ready(function () {
         sQuantitySpinnerClass: 'quantity-spinner'
     });
 
+    $('form#search').GSearch({
+        sProductSearchRoute: 'front.product_search.index',
+        sPhraseInputSelector: '#phrase'
+    });
+
     $('.cart .coupon').GCoupon({
         sAddCouponRoute:      'front.coupon.add',
         sRemoveCouponRoute:      'front.coupon.delete',
@@ -36,6 +41,7 @@ $(document).ready(function () {
 
 	$('.push-search, .sliding-search > div').click(function() {
 		$('body').toggleClass('sliding-search-is-open');
+        $('form#search #phrase').focus();
 	});
 
 	 $('.sliding-search > div > form').click(function(event){

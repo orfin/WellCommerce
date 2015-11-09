@@ -26,10 +26,10 @@ class OrderShippingCostCollector extends AbstractDataCollector
      */
     public function visitOrder(OrderInterface $order)
     {
-        $orderTotal       = $order->getShippingTotal();
         $orderTotalDetail = $this->initResource();
+        $shippingTotal    = $order->getShippingTotal();
 
-        $orderTotalDetail->setOrderTotal($orderTotal);
+        $orderTotalDetail->setOrderTotal($shippingTotal);
         $orderTotalDetail->setOrder($order);
 
         $order->addTotal($orderTotalDetail);

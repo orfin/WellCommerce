@@ -16,6 +16,8 @@ use WellCommerce\Bundle\DataGridBundle\Column\Column;
 use WellCommerce\Bundle\DataGridBundle\Column\ColumnCollection;
 use WellCommerce\Bundle\DataGridBundle\Column\Options\Appearance;
 use WellCommerce\Bundle\DataGridBundle\Column\Options\Filter;
+use WellCommerce\Bundle\DataGridBundle\Configuration\EventHandler\ProcessEventHandler;
+use WellCommerce\Bundle\DataGridBundle\Options\OptionsInterface;
 
 /**
  * Class OrderDataGrid
@@ -124,6 +126,20 @@ class OrderDataGrid extends AbstractDataGrid
                 'width' => 40,
                 'align' => Appearance::ALIGN_CENTER
             ]),
+        ]));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function configureOptions(OptionsInterface $options)
+    {
+        parent::configureOptions($options);
+
+        $eventHandlers = $options->getEventHandlers();
+
+        $eventHandlers->add(new ProcessEventHandler([
+            'function' => $this->getJavascriptFunctionName('process'),
         ]));
     }
 }

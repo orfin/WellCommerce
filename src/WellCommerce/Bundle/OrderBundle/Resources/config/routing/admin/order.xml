@@ -15,6 +15,12 @@
         <option key="require_admin_permission">order.index</option>
     </route>
 
+    <route id="admin.order.products.grid" path="/products/grid">
+        <default key="_controller">order.controller.admin:viewProductsGridAction</default>
+        <option key="expose">true</option>
+        <option key="require_admin_permission">order.edit</option>
+    </route>
+
     <route id="admin.order.add" path="/add">
         <default key="_controller">order.controller.admin:addAction</default>
         <option key="require_admin_permission">order.add</option>

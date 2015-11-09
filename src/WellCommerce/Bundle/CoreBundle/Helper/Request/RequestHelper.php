@@ -130,70 +130,81 @@ class RequestHelper implements RequestHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function getRequestBagParam($name, $default = null)
+    public function hasRequestBagParam($name)
     {
-        if (false === $this->request->request->has($name)) {
-            return $default;
-        }
-
-        return $this->request->request->get($name, $default);
+        return $this->request->request->has($name);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getQueryBagParam($name, $default = null)
+    public function hasRequestBagParams(array $params = [])
+    {
+        foreach ($params as $param) {
+            if (!$this->hasRequestBagParam($param)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRequestBagParam($name, $default = null, $filter = FILTER_SANITIZE_SPECIAL_CHARS)
+    {
+        if (false === $this->hasRequestBagParam($name)) {
+            return $default;
+        }
+
+        return $this->request->request->filter($name, $default, false, $filter);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getQueryBagParam($name, $default = null, $filter = FILTER_SANITIZE_SPECIAL_CHARS)
     {
         if (false === $this->request->query->has($name)) {
             return $default;
         }
 
-        return $this->request->query->get($name, $default);
+        return $this->request->query->filter($name, $default, false, $filter);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getAttributesBagParam($name, $default = null)
+    public function hasAttributesBagParam($name)
     {
-        if (false === $this->request->attributes->has($name)) {
+        return $this->request->attributes->has($name);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasAttributesBagParams(array $params = [])
+    {
+        foreach ($params as $param) {
+            if (!$this->hasAttributesBagParam($param)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAttributesBagParam($name, $default = null, $filter = FILTER_SANITIZE_SPECIAL_CHARS)
+    {
+        if (false === $this->hasAttributesBagParam($name)) {
             return $default;
         }
 
-        return $this->request->attributes->get($name, $default);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCurrentOffset($limit)
-    {
-        $page   = $this->getCurrentPage();
-        $offset = ($page * $limit) - $limit;
-
-        return ($offset > 0) ? $offset : 0;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCurrentPage()
-    {
-        $page = (int)$this->getQueryBagParam('page', 1);
-        $page = abs($page);
-
-        return ($page > 0) ? $page : 1;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCurrentLimit($default = 10)
-    {
-        $limit = $this->getQueryBagParam('limit', $default);
-        $limit = abs($limit);
-
-        return ($limit > 0) ? $limit : $default;
+        return $this->request->attributes->filter($name, $default, false, $filter);
     }
 
     /**
