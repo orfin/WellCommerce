@@ -524,7 +524,9 @@ new GPlugin('GLayeredNavigation', oLayeredNavigationDefaults, GLayeredNavigation
 
 var oSearchDefaultParams = {
     sProductSearchRoute:      'front.product_search.index',
-    sPhraseInputSelector:      'form#search #phrase'
+    sProductLiveSearchRoute:  'front.product_search.view',
+    sPhraseInputSelector:     'form#search #phrase',
+    sSearchResultsSelector:   'div#search-results'
 };
 
 var GSearch = function(oOptions) {
@@ -537,6 +539,20 @@ var GSearch = function(oOptions) {
 
     gThis.InitializeEvents = function(){
         $(gThis).bind('submit', gThis.OnSubmit);
+        $(gThis.m_oOptions.sPhraseInputSelector, gThis).keyup(gThis.OnLiveSearch);
+    };
+
+    gThis.OnLiveSearch = function(eEvent){
+        var oRouteParams = {
+            phrase: $(gThis.m_oOptions.sPhraseInputSelector, gThis).val()
+        };
+
+        var url = Routing.generate(gThis.m_oOptions.sProductLiveSearchRoute, oRouteParams, true);
+        GAjaxRequest(url, {}, function(oResponse){
+            if(oResponse.liveSearchContent != undefined) {
+                $(gThis.m_oOptions.sSearchResultsSelector).html(oResponse.liveSearchContent);
+            }
+        });
     };
 
     gThis.OnSubmit = function(eEvent){
@@ -547,8 +563,6 @@ var GSearch = function(oOptions) {
         };
 
         var url = Routing.generate(gThis.m_oOptions.sProductSearchRoute, oRouteParams, true);
-
-        console.log(url);
 
         window.location.href = Routing.generate(gThis.m_oOptions.sProductSearchRoute, oRouteParams, true);
 

@@ -26,4 +26,11 @@
         <requirement key="attributes">[\d+_]+</requirement>
         <option key="expose">true</option>
     </route>
+
+    <route id="front.product_search.view" path="/view/{phrase}">
+        <default key="_controller">product_search.controller.front:viewAction</default>
+        <default key="phrase">null</default>
+        <requirement key="phrase">[^,]+</requirement>
+        <option key="expose">true</option>
+    </route>
 </routes>

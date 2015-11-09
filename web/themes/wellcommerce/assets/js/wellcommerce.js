@@ -28,7 +28,9 @@ $(document).ready(function () {
 
     $('form#search').GSearch({
         sProductSearchRoute: 'front.product_search.index',
-        sPhraseInputSelector: '#phrase'
+        sProductLiveSearchRoute: 'front.product_search.view',
+        sPhraseInputSelector: '#phrase',
+        sSearchResultsSelector: 'div#search-results'
     });
 
     $('.cart .coupon').GCoupon({

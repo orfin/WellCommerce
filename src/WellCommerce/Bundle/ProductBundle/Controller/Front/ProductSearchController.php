@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\ProductBundle\Controller\Front;
 
 use WellCommerce\Bundle\CoreBundle\Controller\Front\AbstractFrontController;
 use WellCommerce\Bundle\CoreBundle\Controller\Front\FrontControllerInterface;
+use WellCommerce\Bundle\DataSetBundle\Conditions\ConditionsCollection;
 use WellCommerce\Bundle\WebBundle\Breadcrumb\BreadcrumbItem;
 
 /**
@@ -23,6 +24,11 @@ use WellCommerce\Bundle\WebBundle\Breadcrumb\BreadcrumbItem;
  */
 class ProductSearchController extends AbstractFrontController implements FrontControllerInterface
 {
+    /**
+     * @var \WellCommerce\Bundle\ProductBundle\Manager\Front\ProductSearchManager
+     */
+    protected $manager;
+
     /**
      * {@inheritdoc}
      */
@@ -41,6 +47,31 @@ class ProductSearchController extends AbstractFrontController implements FrontCo
 
         return $this->displayTemplate('index', [
             'phrase' => $phrase,
+        ]);
+    }
+
+    public function viewAction()
+    {
+        $dataset       = $this->get('product_search.dataset.front');
+        $conditions    = new ConditionsCollection();
+        $requestHelper = $this->getRequestHelper();
+        $conditions    = $this->manager->addSearchConditions($conditions);
+        $conditions    = $this->getLayeredNavigationHelper()->addLayeredNavigationConditions($conditions);
+
+        $products = $dataset->getResult('array', [
+            'limit'      => 20,
+            'page'       => 1,
+            'order_by'   => $requestHelper->getAttributesBagParam('orderBy', 'score'),
+            'order_dir'  => $requestHelper->getAttributesBagParam('orderDir', 'asc'),
+            'conditions' => $conditions,
+        ]);
+
+        $liveSearchContent = $this->renderView('WellCommerceProductBundle:Front/ProductSearch:view.html.twig', [
+            'dataset' => $products,
+        ]);
+
+        return $this->jsonResponse([
+            'liveSearchContent' => $liveSearchContent
         ]);
     }
 
