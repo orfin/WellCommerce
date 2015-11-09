@@ -6,6 +6,9 @@
 # For the full copyright and license information,
 # please view the LICENSE file that was distributed with this source code.
 
+product_search:
+    heading:
+        index: Search results
 product:
     form:
         fieldset:
@@ -57,11 +60,14 @@ product:
             view: View as
             limit: Show per page
         order_by:
-            name: Name
-            finalPrice: Price
-        order_dir:
-            asc: ascending
-            desc: descending
+            name:
+                asc: Name - from A to Z
+                desc: Name - from Z to A
+            final_price:
+                asc: Price - from lowest to highest
+                desc: Price - from highest to lowest
+            score:
+                asc: Best match
         limit:  Show per page
         view_type:
             list: List view

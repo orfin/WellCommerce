@@ -25,6 +25,8 @@ parameters:
 
     developer_mode.ip: 127.0.0.1
 
+    search_engine: lucene
+
     pdo.db_options:
       db_table:    session
       db_id_col:   session_id

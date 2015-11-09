@@ -51,7 +51,7 @@ class LoadProductData extends AbstractDataFixture
 
         $manager->flush();
 
-        $this->container->get('product.indexer.lucene')->reindexProducts();
+        $this->container->get('product_search.indexer')->reindexProducts();
     }
 
     protected function createRandomProduct(ObjectManager $manager)

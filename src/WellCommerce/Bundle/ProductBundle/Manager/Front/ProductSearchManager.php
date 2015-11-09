@@ -50,7 +50,7 @@ class ProductSearchManager extends AbstractFrontManager
         $requestHelper = $this->getRequestHelper();
         $phrase        = $requestHelper->getAttributesBagParam('phrase');
         $query         = new SimpleQuery($phrase);
-        $identifiers   = $this->provider->searchProducts($query);
+        $identifiers   = $this->provider->searchProducts($query)->getResultIdentifiers();
         $conditions->add(new In('id', $identifiers));
 
         return $conditions;

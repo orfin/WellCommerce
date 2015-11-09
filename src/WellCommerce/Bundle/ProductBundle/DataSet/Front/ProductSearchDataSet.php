@@ -16,11 +16,11 @@ use WellCommerce\Bundle\CoreBundle\DataSet\AbstractDataSet;
 use WellCommerce\Bundle\DataSetBundle\Configurator\DataSetConfiguratorInterface;
 
 /**
- * Class ProductDataSet
+ * Class ProductSearchDataSet
  *
  * @author Adam Piotrowski <adam@wellcommerce.org>
  */
-class ProductDataSet extends AbstractDataSet
+class ProductSearchDataSet extends AbstractDataSet
 {
     /**
      * {@inheritdoc}
@@ -47,6 +47,7 @@ class ProductDataSet extends AbstractDataSet
             'shop'             => 'product_shops.id',
             'photo'            => 'photos.path',
             'status'           => 'statuses.id',
+            'score'            => 'FIELD(product.id, :scores)',
         ]);
 
         $configurator->setColumnTransformers([

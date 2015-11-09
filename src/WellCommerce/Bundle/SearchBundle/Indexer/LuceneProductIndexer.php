@@ -54,8 +54,8 @@ class LuceneProductIndexer implements ProductIndexerInterface
         $index = $this->searchIndexManager->getIndex(ProductIndexerInterface::DEFAULT_INDEX_NAME);
 
         $document = new Document();
-        $document->addField(Field::keyword('identifier', $product->getId()));
-        $document->addField(Field::keyword('name', $product->translate()->getName()));
+        $document->addField(Field::unIndexed('identifier', $product->getId()));
+        $document->addField(Field::text('name', $product->translate('en')->getName()));
         $document->addField(Field::text('shortDescription', $product->translate()->getShortDescription()));
         $document->addField(Field::text('description', $product->translate()->getDescription()));
         $index->addDocument($document);

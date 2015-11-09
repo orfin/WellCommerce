@@ -9,7 +9,7 @@
             <argument type="service" id="kernel"/>
         </service>
 
-        <service id="product.indexer.lucene" class="WellCommerce\Bundle\SearchBundle\Indexer\LuceneProductIndexer">
+        <service id="product_search.indexer.lucene" class="WellCommerce\Bundle\SearchBundle\Indexer\LuceneProductIndexer">
             <argument type="service" id="search_index.manager.lucene"/>
             <argument type="service" id="product.repository"/>
         </service>

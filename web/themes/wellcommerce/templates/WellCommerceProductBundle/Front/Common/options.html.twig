@@ -2,33 +2,24 @@
 
 <div class="category-tools">
 
+    {% set sortingOptions = sortingOptions({'name':['asc','desc'],'finalPrice':['asc','desc']}) %}
+
     <div class="dropdown pull-right">
         <button class="btn btn-default dropdown-toggle btn-sm" type="button" id="CurrencyMenu" data-toggle="dropdown" aria-expanded="true">
-            {% trans %}product.options.label.order{% endtrans %}: {{ ('product.options.order_by.' ~ app.request.get('orderBy'))|trans({}, 'wellcommerce') }} - {{ ('product.options.order_dir.' ~ app.request.get('orderDir'))|trans({}, 'wellcommerce') }}
+            {% for sort in sortingOptions if sort.active %}
+                {% trans %}product.options.label.order{% endtrans %}: {{ sort.label }}
+            {% endfor %}
             <span class="caret"></span>
         </button>
 
         <ul class="dropdown-menu" role="menu" aria-labelledby="SortingMenu">
-            <li>
-                <a href="{{ dynamic_path({'orderBy': 'name','orderDir': 'asc'}) }}">
-                    {% trans %}product.options.order_by.name{% endtrans %} - {% trans %}product.options.order_dir.asc{% endtrans %}
-                </a>
-            </li>
-            <li>
-                <a href="{{ dynamic_path({'orderBy': 'name','orderDir': 'desc'}) }}">
-                    {% trans %}product.options.order_by.name{% endtrans %} - {% trans %}product.options.order_dir.desc{% endtrans %}
-                </a>
-            </li>
-            <li>
-                <a href="{{ dynamic_path({'orderBy': 'finalPrice','orderDir': 'asc'}) }}">
-                    {% trans %}product.options.order_by.finalPrice{% endtrans %} - {% trans %}product.options.order_dir.asc{% endtrans %}
-                </a>
-            </li>
-            <li>
-                <a href="{{ dynamic_path({'orderBy': 'finalPrice','orderDir': 'desc'}) }}">
-                    {% trans %}product.options.order_by.finalPrice{% endtrans %} - {% trans %}product.options.order_dir.desc{% endtrans %}
-                </a>
-            </li>
+            {% for sort in sortingOptions %}
+                <li>
+                    <a href="{{ dynamic_path({'orderBy': sort.orderBy,'orderDir':  sort.orderDir}) }}">
+                        {{ sort.label }}
+                    </a>
+                </li>
+            {% endfor %}
         </ul>
     </div>
 

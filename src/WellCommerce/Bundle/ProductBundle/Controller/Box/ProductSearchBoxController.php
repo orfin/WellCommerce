@@ -34,7 +34,7 @@ class ProductSearchBoxController extends AbstractBoxController implements BoxCon
      */
     public function indexAction(LayoutBoxSettingsCollection $boxSettings)
     {
-        $dataset       = $this->get('product.dataset.front');
+        $dataset       = $this->get('product_search.dataset.front');
         $conditions    = new ConditionsCollection();
         $requestHelper = $this->getRequestHelper();
         $limit         = $this->manager->getRequestHelper()->getAttributesBagParam('limit', $boxSettings->getParam('per_page', 12));
@@ -44,11 +44,10 @@ class ProductSearchBoxController extends AbstractBoxController implements BoxCon
         $products = $dataset->getResult('array', [
             'limit'      => $limit,
             'page'       => $requestHelper->getAttributesBagParam('page', 1),
-            'order_by'   => $requestHelper->getAttributesBagParam('orderBy', 'name'),
+            'order_by'   => $requestHelper->getAttributesBagParam('orderBy', 'score'),
             'order_dir'  => $requestHelper->getAttributesBagParam('orderDir', 'asc'),
             'conditions' => $conditions,
         ]);
-
 
         return $this->displayTemplate('index', [
             'dataset' => $products,

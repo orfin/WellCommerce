@@ -73,6 +73,7 @@ doctrine:
                         QUARTER: DoctrineExtensions\Query\Mysql\Quarter
                         YEAR: DoctrineExtensions\Query\Mysql\Year
                         DATE_FORMAT: DoctrineExtensions\Query\Mysql\DateFormat
+                        FIELD: DoctrineExtensions\Query\Mysql\Field
                 filters:
                     locale:
                         class:   WellCommerce\Bundle\IntlBundle\ORM\Filter\LocaleFilter

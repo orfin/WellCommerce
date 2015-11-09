@@ -8,11 +8,28 @@
             <argument type="service" id="product.repository"/>
             <argument type="service" id="product_search.event_dispatcher"/>
             <call method="setProductSearchProvider">
-                <argument type="service" id="product_search.provider.lucene"/>
+                <argument type="service" id="product_search.provider"/>
             </call>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
+        </service>
+
+        <service id="product_search.dataset.query_builder.front" class="WellCommerce\Bundle\ProductBundle\DataSet\Front\ProductSearchDataSetQueryBuilder">
+            <argument type="service" id="product.repository"/>
+            <call method="setProductSearchProvider">
+                <argument type="service" id="product_search.provider"/>
+            </call>
+            <call method="setRequestHelper">
+                <argument type="service" id="request.helper"/>
+            </call>
+        </service>
+
+        <service id="product_search.dataset.front" class="WellCommerce\Bundle\ProductBundle\DataSet\Front\ProductSearchDataSet">
+            <argument type="service" id="product_search.dataset.query_builder.front"/>
+            <argument type="service" id="dataset.manager"/>
+            <argument type="service" id="product.event_dispatcher"/>
+            <configurator service="dataset.configurator" method="configure"/>
         </service>
 
         <service id="product_search.controller.front" class="WellCommerce\Bundle\ProductBundle\Controller\Front\ProductSearchController">

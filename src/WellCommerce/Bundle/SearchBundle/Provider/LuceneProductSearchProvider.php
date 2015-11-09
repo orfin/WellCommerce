@@ -31,6 +31,11 @@ class LuceneProductSearchProvider implements ProductSearchProviderInterface
     protected $searchIndexManager;
 
     /**
+     * @var array
+     */
+    protected $currentIdentifiers = [];
+
+    /**
      * ProductSearchProvider constructor.
      *
      * @param SearchIndexManagerInterface $searchIndexManager
@@ -43,18 +48,32 @@ class LuceneProductSearchProvider implements ProductSearchProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function searchProducts(SimpleQuery $query)
+    /**
+     * @param SimpleQuery $simpleQuery
+     *
+     * @return $this
+     */
+    public function searchProducts(SimpleQuery $simpleQuery)
     {
-        $index       = $this->searchIndexManager->getIndex(ProductIndexerInterface::DEFAULT_INDEX_NAME);
-        $term        = new Term($query->getSearchPhrase());
-        $query       = new Fuzzy($term);
-        $results     = $index->find($query);
-        $identifiers = [];
+        $index   = $this->searchIndexManager->getIndex(ProductIndexerInterface::DEFAULT_INDEX_NAME);
+        $term    = new Term($simpleQuery->getSearchPhrase());
+        $query   = new Fuzzy($term);
+        $results = $index->find($query);
 
         foreach ($results as $result) {
-            $identifiers[] = $result->identifier;
+            if ($result->score >= .1) {
+                $this->currentIdentifiers[] = $result->identifier;
+            }
         }
 
-        return $identifiers;
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getResultIdentifiers()
+    {
+        return $this->currentIdentifiers;
     }
 }

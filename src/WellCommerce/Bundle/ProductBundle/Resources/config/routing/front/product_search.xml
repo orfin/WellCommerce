@@ -9,7 +9,7 @@
         <default key="phrase">null</default>
         <default key="page">1</default>
         <default key="limit">12</default>
-        <default key="orderBy">name</default>
+        <default key="orderBy">score</default>
         <default key="orderDir">asc</default>
         <default key="priceFrom">0</default>
         <default key="priceTo">9999</default>

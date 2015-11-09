@@ -23,6 +23,13 @@ interface ProductSearchProviderInterface
 {
     /**
      * @param SimpleQuery $query
+     *
+     * @return ProductSearchProviderInterface
      */
     public function searchProducts(SimpleQuery $query);
+
+    /**
+     * @return array
+     */
+    public function getResultIdentifiers();
 }

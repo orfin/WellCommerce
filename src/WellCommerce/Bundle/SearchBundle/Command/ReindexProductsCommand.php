@@ -32,7 +32,7 @@ class ReindexProductsCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $indexer = $this->getContainer()->get('product.indexer.lucene');
+        $indexer = $this->getContainer()->get('product_search.indexer');
         $indexer->reindexProducts();
 
         $output->write('Reindexing done.', true);

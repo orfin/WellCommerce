@@ -40,7 +40,38 @@ class ProductSearchController extends AbstractFrontController implements FrontCo
         ]));
 
         return $this->displayTemplate('index', [
-            'phrase' => $phrase
+            'phrase' => $phrase,
         ]);
+    }
+
+    protected function getSortOptions()
+    {
+        $sorting = [
+            'name'       => [
+                'asc'  => [
+                    'label' => $this->trans('product.options.order_by.name.asc'),
+                ],
+                'desc' => [
+                    'label' => $this->trans('product.options.order_by.name.desc')
+                ],
+            ],
+            'finalPrice' => [
+                'asc'  => [
+                    'label' => $this->trans('product.options.order_by.final_price.asc')
+                ],
+                'desc' => [
+                    'label' => $this->trans('product.options.order_by.final_price.desc')
+                ],
+            ],
+            'score'      => [
+                'asc' => [
+                    'label' => $this->trans('product.options.order_by.score.asc')
+                ],
+            ],
+        ];
+
+        foreach ($sorting as $column => $directions) {
+
+        }
     }
 }

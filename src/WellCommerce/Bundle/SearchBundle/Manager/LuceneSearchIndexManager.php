@@ -58,7 +58,7 @@ class LuceneSearchIndexManager implements SearchIndexManagerInterface
         $this->luceneManager->setIndex(
             $name,
             $indexDir,
-            'ZendSearch\Lucene\Analysis\Analyzer\Common\Text\CaseInsensitive'
+            'ZendSearch\Lucene\Analysis\Analyzer\Common\Utf8\CaseInsensitive'
         );
     }
 
