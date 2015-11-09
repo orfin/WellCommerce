@@ -1,7 +1,0 @@
-{% if app.user and is_granted('ROLE_CLIENT') %}
-    <a href="{{ path('front.client.index') }}" class="btn btn-default btn-sm">My account</a>
-    <a href="{{ path('front.client.logout') }}" class="btn btn-default btn-sm">Logout</a>
-{%  else %}
-    <a href="{{ path('front.client.login') }}" class="btn btn-default btn-sm">Sign in</a>
-    <a href="{{ path('front.client.register') }}" class="btn btn-default btn-sm">Sign up</a>
-{% endif %}
