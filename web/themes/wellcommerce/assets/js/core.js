@@ -543,24 +543,28 @@ var GSearch = function(oOptions) {
         var options = {
             callback: gThis.OnLiveSearch,
             wait: 250,
-            highlight: true,
-            captureLength: 2
+            highlight: false,
+            captureLength: 3
         };
 
         $(gThis.m_oOptions.sPhraseInputSelector, gThis).typeWatch(options);
     };
 
     gThis.OnLiveSearch = function(sPhrase){
-        var oRouteParams = {
-            phrase: sPhrase
-        };
+        if(sPhrase.length > 2){
+            var oRouteParams = {
+                phrase: sPhrase
+            };
 
-        var url = Routing.generate(gThis.m_oOptions.sProductLiveSearchRoute, oRouteParams, true);
-        GAjaxRequest(url, {}, function(oResponse){
-            if(oResponse.liveSearchContent != undefined) {
-                $(gThis.m_oOptions.sSearchResultsSelector).html(oResponse.liveSearchContent);
-            }
-        });
+            var url = Routing.generate(gThis.m_oOptions.sProductLiveSearchRoute, oRouteParams, true);
+            GAjaxRequest(url, {}, function(oResponse){
+                if(oResponse.liveSearchContent != undefined) {
+                    $(gThis.m_oOptions.sSearchResultsSelector).html(oResponse.liveSearchContent);
+                }
+            });
+        }else{
+            $(gThis.m_oOptions.sSearchResultsSelector).html('');
+        }
     };
 
     gThis.OnSubmit = function(eEvent){
