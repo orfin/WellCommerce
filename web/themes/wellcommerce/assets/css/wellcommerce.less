@@ -275,6 +275,11 @@ img {
 	}
 }
 
+.btns {
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+
 /*
 * ALERTS
 */
@@ -666,6 +671,13 @@ header {
 					width: 12px;
 				}
 			}
+		}
+
+		.push-search {
+			line-height: 60px;
+		    font-size: 16px;
+		    padding-top: 0;
+		    padding-bottom: 0;
 		}
 	}
 
@@ -2111,7 +2123,7 @@ body {
 
 			> div {
 				.transform(translateY(0));
-				.transition(transform .5s);
+				.transition(transform .38s);
 				-webkit-transition-timing-function: cubic-bezier(0.82, 0.01, 0.77, 0.78);
 			       -moz-transition-timing-function: cubic-bezier(0.82, 0.01, 0.77, 0.78);
 				   	 	transition-timing-function: cubic-bezier(0.82, 0.01, 0.77, 0.78);
@@ -2138,16 +2150,15 @@ body {
 	top: 0;
 	left: 0;
 	width: 100%;
-	height: 100%;
 	visibility: hidden;
 	z-index: 100;
 	.transition(visibility 0s.7s);
 
 	> div {
 		background-color: transparent;
-		height: 100%;
-		padding: 0 25vw;
-		overflow-y: auto;
+		height: 100vh;
+		padding: 0;
+		overflow-y: scroll;
 		backface-visibility: hidden;
 		-webkit-overflow-scrolling: touch;
 		.transform(translateY(-100%));
@@ -2156,12 +2167,17 @@ body {
 	       -moz-transition-timing-function: cubic-bezier(0.86, 0.01, 0.77, 0.78);
 		   	 	transition-timing-function: cubic-bezier(0.86, 0.01, 0.77, 0.78);
 
+		> .products-list,
 		form {
-			position: absolute;
-		    top: 25%;
-			background-color: #555b5a;
+			width: 760px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		form {
+		    margin-top: 15vh;
+			background-color: rgba(85,91,90,0.95);
 			border: 0;
-		    width: 50vw;
 		    -webkit-box-shadow: 0 4px 35px rgba(0, 0, 0, 0.6);
 					box-shadow: 0 4px 35px rgba(0, 0, 0, 0.6);
 
@@ -2189,6 +2205,16 @@ body {
 				}
 			}
 		}
+
+		> .products-list {
+			background-color: #fff;
+			padding: 0 15px;
+			margin-bottom: 10vh;
+			-webkit-box-shadow: 0 4px 35px rgba(0, 0, 0, 0.6);
+					box-shadow: 0 4px 35px rgba(0, 0, 0, 0.6);
+
+		}
+
 	}
 }
 
@@ -2201,7 +2227,9 @@ body {
 		overflow-x: hidden;
 
 		> main {
-			opacity: .5;
+			height: 100vh;
+			overflow-y: hidden;
+			opacity: .7;
 			.transform(translateX(258px));
 		}
 

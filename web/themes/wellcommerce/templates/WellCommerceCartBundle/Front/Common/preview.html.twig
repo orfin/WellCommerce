@@ -1,6 +1,7 @@
 {% trans_default_domain "wellcommerce" %}
 
 <li class="dropdown" id="cart-preview">
+	<span class="push-search btn btn-link hidden-md hidden-lg"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
     <a href="{{ path('front.cart.index') }}" class="dropdown-toggle cartQty" data-target="#" {% if false == cart.isEmpty %}data-toggle="dropdown"{% endif %} role="button" aria-expanded="true">
         Cart<span class="cart-qty">{{ cart.getTotals().getQuantity()|number_format }}</span>
     </a>

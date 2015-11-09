@@ -42,7 +42,6 @@ $(document).ready(function () {
 	     event.stopPropagation();
 	 });
 
-
     $('.push-hamburger').click(function() {
 		$('body').toggleClass('hamburger-is-open');
 	});
