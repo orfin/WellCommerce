@@ -15,8 +15,6 @@ namespace WellCommerce\Bundle\SearchBundle\Provider;
 use WellCommerce\Bundle\SearchBundle\Indexer\ProductIndexerInterface;
 use WellCommerce\Bundle\SearchBundle\Manager\SearchIndexManagerInterface;
 use WellCommerce\Bundle\SearchBundle\Query\SimpleQuery;
-use ZendSearch\Lucene\Index\Term;
-use ZendSearch\Lucene\Search\Query\Fuzzy;
 
 /**
  * Class LuceneProductSearchProvider
@@ -56,9 +54,7 @@ class LuceneProductSearchProvider implements ProductSearchProviderInterface
     public function searchProducts(SimpleQuery $simpleQuery)
     {
         $index   = $this->searchIndexManager->getIndex(ProductIndexerInterface::DEFAULT_INDEX_NAME);
-        $term    = new Term($simpleQuery->getSearchPhrase());
-        $query   = new Fuzzy($term);
-        $results = $index->find($query);
+        $results = $index->find($simpleQuery->getSearchPhrase() . '~');
 
         foreach ($results as $result) {
             if ($result->score >= .1) {

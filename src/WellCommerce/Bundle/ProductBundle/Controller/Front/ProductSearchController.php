@@ -52,23 +52,28 @@ class ProductSearchController extends AbstractFrontController implements FrontCo
 
     public function viewAction()
     {
-        $dataset       = $this->get('product_search.dataset.front');
-        $conditions    = new ConditionsCollection();
         $requestHelper = $this->getRequestHelper();
-        $conditions    = $this->manager->addSearchConditions($conditions);
-        $conditions    = $this->getLayeredNavigationHelper()->addLayeredNavigationConditions($conditions);
+        $phrase        = $requestHelper->getAttributesBagParam('phrase');
+        if (strlen($phrase) < $this->container->getParameter('search_term_min_length')) {
+            $liveSearchContent = '';
+        } else {
+            $dataset    = $this->get('product_search.dataset.front');
+            $conditions = new ConditionsCollection();
+            $conditions = $this->manager->addSearchConditions($conditions);
+            $conditions = $this->getLayeredNavigationHelper()->addLayeredNavigationConditions($conditions);
 
-        $products = $dataset->getResult('array', [
-            'limit'      => 20,
-            'page'       => 1,
-            'order_by'   => $requestHelper->getAttributesBagParam('orderBy', 'score'),
-            'order_dir'  => $requestHelper->getAttributesBagParam('orderDir', 'asc'),
-            'conditions' => $conditions,
-        ]);
+            $products = $dataset->getResult('array', [
+                'limit'      => 20,
+                'page'       => 1,
+                'order_by'   => 'score',
+                'order_dir'  => 'asc',
+                'conditions' => $conditions,
+            ]);
 
-        $liveSearchContent = $this->renderView('WellCommerceProductBundle:Front/ProductSearch:view.html.twig', [
-            'dataset' => $products,
-        ]);
+            $liveSearchContent = $this->renderView('WellCommerceProductBundle:Front/ProductSearch:view.html.twig', [
+                'dataset' => $products,
+            ]);
+        }
 
         return $this->jsonResponse([
             'liveSearchContent' => $liveSearchContent
