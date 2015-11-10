@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
     "hash": "f54707803f646ba3767ee107f19cc899",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/beberlei/DoctrineExtensions.git",
-                "reference": "7d3caed1f666260a6d9046a0bee4366e7eede35b"
+                "reference": "b2cd9db7f15a974b6656ba74eb6c8c9d80293c8e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/beberlei/DoctrineExtensions/zipball/7d3caed1f666260a6d9046a0bee4366e7eede35b",
-                "reference": "7d3caed1f666260a6d9046a0bee4366e7eede35b",
+                "url": "https://api.github.com/repos/beberlei/DoctrineExtensions/zipball/b2cd9db7f15a974b6656ba74eb6c8c9d80293c8e",
+                "reference": "b2cd9db7f15a974b6656ba74eb6c8c9d80293c8e",
                 "shasum": ""
             },
             "require": {
@@ -66,7 +66,7 @@
                 "doctrine",
                 "orm"
             ],
-            "time": "2015-09-01 10:30:33"
+            "time": "2015-11-09 13:44:50"
         },
         {
             "name": "behat/transliterator",
@@ -962,21 +962,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/doctrine2.git",
-<<<<<<< HEAD
-                "reference": "9e085ca0b383fbdb99b7781d86954266e52efdae"
+                "reference": "1187c51a89e14d892191f9147deb4bb9d3b72c3d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/9e085ca0b383fbdb99b7781d86954266e52efdae",
-                "reference": "9e085ca0b383fbdb99b7781d86954266e52efdae",
-=======
-                "reference": "ada97d55ced7f376700c19bcb50603897f8d66de"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/ada97d55ced7f376700c19bcb50603897f8d66de",
-                "reference": "ada97d55ced7f376700c19bcb50603897f8d66de",
->>>>>>> origin/development
+                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/1187c51a89e14d892191f9147deb4bb9d3b72c3d",
+                "reference": "1187c51a89e14d892191f9147deb4bb9d3b72c3d",
                 "shasum": ""
             },
             "require": {
@@ -1040,10 +1031,7 @@
                 "database",
                 "orm"
             ],
-<<<<<<< HEAD
-            "time": "2015-11-05 20:10:43"
-=======
-            "time": "2015-11-07 16:44:02"
+            "time": "2015-11-09 03:54:20"
         },
         {
             "name": "egeloen/lucene-search-bundle",
@@ -1098,7 +1086,6 @@
                 "lucene search"
             ],
             "time": "2015-01-03 21:22:20"
->>>>>>> origin/development
         },
         {
             "name": "evenement/evenement",
@@ -1357,12 +1344,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/hoaproject/Core.git",
-                "reference": "dc70340db06de1c1a0e54f55521eea279ad4f151"
+                "reference": "5538b1e90e2c66c90df5cc45e03fb85d047be900"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hoaproject/Core/zipball/dc70340db06de1c1a0e54f55521eea279ad4f151",
-                "reference": "dc70340db06de1c1a0e54f55521eea279ad4f151",
+                "url": "https://api.github.com/repos/hoaproject/Core/zipball/5538b1e90e2c66c90df5cc45e03fb85d047be900",
+                "reference": "5538b1e90e2c66c90df5cc45e03fb85d047be900",
                 "shasum": ""
             },
             "require": {
@@ -1416,7 +1403,7 @@
                 "parameter",
                 "protocol"
             ],
-            "time": "2015-10-29 21:03:18"
+            "time": "2015-11-09 06:51:06"
         },
         {
             "name": "hoa/http",
@@ -1424,12 +1411,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/hoaproject/Http.git",
-                "reference": "dcb26446c4004ae65876794edf94c806ae8715e7"
+                "reference": "7ec7c6ebb2088352d7cf0c9c833dc1e60e36a199"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hoaproject/Http/zipball/dcb26446c4004ae65876794edf94c806ae8715e7",
-                "reference": "dcb26446c4004ae65876794edf94c806ae8715e7",
+                "url": "https://api.github.com/repos/hoaproject/Http/zipball/7ec7c6ebb2088352d7cf0c9c833dc1e60e36a199",
+                "reference": "7ec7c6ebb2088352d7cf0c9c833dc1e60e36a199",
                 "shasum": ""
             },
             "require": {
@@ -1483,7 +1470,7 @@
                 "rfc7237",
                 "runtime"
             ],
-            "time": "2015-09-08 13:33:12"
+            "time": "2015-11-01 20:04:52"
         },
         {
             "name": "hoa/socket",
@@ -1491,12 +1478,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/hoaproject/Socket.git",
-                "reference": "1df6b6a0b9230dacdfa43d7501050db77e42edd8"
+                "reference": "7dba807b6c309d4df628e225a5c8db381854c849"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hoaproject/Socket/zipball/1df6b6a0b9230dacdfa43d7501050db77e42edd8",
-                "reference": "1df6b6a0b9230dacdfa43d7501050db77e42edd8",
+                "url": "https://api.github.com/repos/hoaproject/Socket/zipball/7dba807b6c309d4df628e225a5c8db381854c849",
+                "reference": "7dba807b6c309d4df628e225a5c8db381854c849",
                 "shasum": ""
             },
             "require": {
@@ -1539,7 +1526,7 @@
                 "tcp",
                 "udp"
             ],
-            "time": "2015-09-08 11:21:04"
+            "time": "2015-11-10 12:27:41"
         },
         {
             "name": "hoa/stream",
@@ -3350,12 +3337,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony-cmf/Routing.git",
-                "reference": "8c41a43c31977fdeb5feee09cd450725bdc9bb8e"
+                "reference": "e2122f2564dfd65e61ad91f73345a6bdcb0246bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony-cmf/Routing/zipball/8c41a43c31977fdeb5feee09cd450725bdc9bb8e",
-                "reference": "8c41a43c31977fdeb5feee09cd450725bdc9bb8e",
+                "url": "https://api.github.com/repos/symfony-cmf/Routing/zipball/e2122f2564dfd65e61ad91f73345a6bdcb0246bc",
+                "reference": "e2122f2564dfd65e61ad91f73345a6bdcb0246bc",
                 "shasum": ""
             },
             "require": {
@@ -3400,7 +3387,7 @@
                 "database",
                 "routing"
             ],
-            "time": "2015-10-16 22:20:58"
+            "time": "2015-11-08 22:16:09"
         },
         {
             "name": "symfony-cmf/routing-bundle",
@@ -3660,21 +3647,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-<<<<<<< HEAD
-                "reference": "814c2727defdd8922851e7450626e18530192f43"
+                "reference": "6f1d5068241039d4b844d792e24b257e5653cfc7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/814c2727defdd8922851e7450626e18530192f43",
-                "reference": "814c2727defdd8922851e7450626e18530192f43",
-=======
-                "reference": "da95b53604686e9a4170e260c6c43bcef608cdf5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/da95b53604686e9a4170e260c6c43bcef608cdf5",
-                "reference": "da95b53604686e9a4170e260c6c43bcef608cdf5",
->>>>>>> origin/development
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/6f1d5068241039d4b844d792e24b257e5653cfc7",
+                "reference": "6f1d5068241039d4b844d792e24b257e5653cfc7",
                 "shasum": ""
             },
             "require": {
@@ -3785,11 +3763,7 @@
             "keywords": [
                 "framework"
             ],
-<<<<<<< HEAD
-            "time": "2015-11-05 13:42:58"
-=======
-            "time": "2015-11-07 08:26:45"
->>>>>>> origin/development
+            "time": "2015-11-09 16:22:45"
         },
         {
             "name": "twig/extensions",
@@ -3849,21 +3823,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-<<<<<<< HEAD
-                "reference": "bf326dbb75d06a467a48e8dc4cf7261cd5fdf581"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/bf326dbb75d06a467a48e8dc4cf7261cd5fdf581",
-                "reference": "bf326dbb75d06a467a48e8dc4cf7261cd5fdf581",
-=======
                 "reference": "b7c124bae00ab0a019a084c6b99f1df023bcb996"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/twigphp/Twig/zipball/b7c124bae00ab0a019a084c6b99f1df023bcb996",
                 "reference": "b7c124bae00ab0a019a084c6b99f1df023bcb996",
->>>>>>> origin/development
                 "shasum": ""
             },
             "require": {
@@ -3911,11 +3876,7 @@
             "keywords": [
                 "templating"
             ],
-<<<<<<< HEAD
-            "time": "2015-11-05 12:52:08"
-=======
             "time": "2015-11-08 09:55:30"
->>>>>>> origin/development
         },
         {
             "name": "wellcommerce/collections",
@@ -4025,21 +3986,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/WellCommerce/DataGridBundle.git",
-<<<<<<< HEAD
-                "reference": "d87e7f8f5749f334ed10a9dd1c04cda9488b46e6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/WellCommerce/DataGridBundle/zipball/d87e7f8f5749f334ed10a9dd1c04cda9488b46e6",
-                "reference": "d87e7f8f5749f334ed10a9dd1c04cda9488b46e6",
-=======
                 "reference": "5a2fc82eabb569675c3bba66c9468ae70bf0460a"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/WellCommerce/DataGridBundle/zipball/5a2fc82eabb569675c3bba66c9468ae70bf0460a",
                 "reference": "5a2fc82eabb569675c3bba66c9468ae70bf0460a",
->>>>>>> origin/development
                 "shasum": ""
             },
             "require": {
@@ -4090,11 +4042,7 @@
                 "symfony",
                 "wellcommerce"
             ],
-<<<<<<< HEAD
-            "time": "2015-11-06 11:51:44"
-=======
             "time": "2015-11-08 13:17:31"
->>>>>>> origin/development
         },
         {
             "name": "wellcommerce/dataset-bundle",
@@ -5249,21 +5197,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-<<<<<<< HEAD
-                "reference": "bb588928441579cc7cdffc69124898a6b44bb198"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/bb588928441579cc7cdffc69124898a6b44bb198",
-                "reference": "bb588928441579cc7cdffc69124898a6b44bb198",
-=======
                 "reference": "3e8e8c5b7cc76a1199e251ded7b417dfcf7684a5"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/3e8e8c5b7cc76a1199e251ded7b417dfcf7684a5",
                 "reference": "3e8e8c5b7cc76a1199e251ded7b417dfcf7684a5",
->>>>>>> origin/development
                 "shasum": ""
             },
             "require": {
@@ -5312,11 +5251,7 @@
                 "testing",
                 "xunit"
             ],
-<<<<<<< HEAD
-            "time": "2015-11-06 10:11:30"
-=======
             "time": "2015-11-06 13:55:10"
->>>>>>> origin/development
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -5502,21 +5437,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-<<<<<<< HEAD
-                "reference": "db97606671f435e099a556b5439be7d4f7be831b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/db97606671f435e099a556b5439be7d4f7be831b",
-                "reference": "db97606671f435e099a556b5439be7d4f7be831b",
-=======
                 "reference": "c19349623f7aef33c7e3dc83d38cedccaf850385"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/c19349623f7aef33c7e3dc83d38cedccaf850385",
                 "reference": "c19349623f7aef33c7e3dc83d38cedccaf850385",
->>>>>>> origin/development
                 "shasum": ""
             },
             "require": {
@@ -5577,11 +5503,7 @@
                 "testing",
                 "xunit"
             ],
-<<<<<<< HEAD
-            "time": "2015-11-06 08:15:59"
-=======
             "time": "2015-11-06 15:17:42"
->>>>>>> origin/development
         },
         {
             "name": "phpunit/phpunit-mock-objects",
