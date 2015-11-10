@@ -33,17 +33,18 @@ class ProductShowcaseBoxController extends AbstractBoxController implements BoxC
      */
     public function indexAction(LayoutBoxSettingsCollection $boxSettings)
     {
-        $requestHelper = $this->manager->getRequestHelper();
-
-        $products = $this->get('product.dataset.front')->getResult('datagrid', [
-            'limit'      => $requestHelper->getQueryBagParam('limit', 10),
-            'order_by'   => $requestHelper->getQueryBagParam('orderBy', 'name'),
-            'order_dir'  => $requestHelper->getQueryBagParam('orderDir', 'asc'),
-            'conditions' => $this->manager->getStatusConditions($boxSettings->getParam('status')),
+        $categories = $this->get('category.dataset.front')->getResult('array', [
+            'limit'     => 5,
+            'order_by'  => 'name',
+            'order_dir' => 'asc'
         ]);
 
+        foreach ($categories['rows'] as &$category) {
+            $category['dataset'] = $this->manager->getShowcaseCategoryProducts($category['id'], $boxSettings->getParam('status'));
+        }
+
         return $this->displayTemplate('index', [
-            'dataset' => $products
+            'showcase' => $categories,
         ]);
     }
 }

@@ -39,4 +39,22 @@ class ProductStatusManager extends AbstractFrontManager
 
         return $conditions;
     }
+
+    /**
+     * Returns a collection of dynamic conditions
+     *
+     * @return ConditionsCollection
+     */
+    public function getShowcaseCategoryProducts($id, $status)
+    {
+        $conditions = $this->getStatusConditions($status);
+        $conditions->add(new Eq('category', $id));
+
+        return $this->get('product.dataset.front')->getResult('datagrid', [
+            'limit'      => 10,
+            'order_by'   => 'name',
+            'order_dir'  => 'asc',
+            'conditions' => $conditions
+        ]);
+    }
 }

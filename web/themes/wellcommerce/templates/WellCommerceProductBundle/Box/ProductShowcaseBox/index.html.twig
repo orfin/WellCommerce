@@ -1,10 +1,11 @@
 {% trans_default_domain "wellcommerce" %}
 <div class="showcase box">
 	<div class="tab-content">
-		<div role="tabpanel" class="tab-pane active" id="category-1">
-			<div id="showcase" class="carousel slide" data-ride="carousel">
+		{% for category in showcase.rows %}
+		<div role="tabpanel" class="tab-pane {% if loop.first %}active{% endif %}" id="category-{{ category.id }}">
+			<div id="showcase-{{ category.id }}" class="carousel slide" data-ride="carousel">
 				<div class="carousel-inner" role="listbox">
-				    {% for item in dataset.rows %}
+				    {% for item in category.dataset.rows %}
 				    <div class="item {% if loop.first %}active{% endif %}">
 						<div class="row">
 					        <div class="col-md-7 col-xs-6">
@@ -24,58 +25,21 @@
 				    {% endfor %}
 				</div>
 
-				<a class="left showcase-control" href="#showcase" role="button" data-slide="prev">
+				<a class="left showcase-control" href="#showcase-{{ category.id }}" role="button" data-slide="prev">
 					<span>Previous slide</span>
 				</a>
 
-				<a class="right showcase-control" href="#showcase" role="button" data-slide="next">
+				<a class="right showcase-control" href="#showcase-{{ category.id }}" role="button" data-slide="next">
 					<span>Next slide</span>
 				</a>
 			</div>
 		</div>
-
-		<!-- TAB WITH CATEGORY PRODUCTS -->
-		<div role="tabpanel" class="tab-pane" id="category-2">
-			<div id="showcase-2" class="carousel slide" data-ride="carousel">
-				<div class="carousel-inner" role="listbox">
-				    {% for item in dataset.rows %}
-				    <div class="item {% if loop.first %}active{% endif %}">
-						<div class="row">
-					        <div class="col-md-7 col-xs-6">
-					            <a href="{{ item.route }}" class="photo text-center">
-					                <img src="{{ image(item.photo, 'large') }}" alt="{{ item.name }}" />
-					            </a>
-					        </div>
-					        <div class="col-md-5 col-xs-6 info">
-					            <h3>{{ item.name }}<small>{% trans %}product.label.manufactured_by{% endtrans %} {{ item.producerName }}</small></h3>
-					            <span class="price">{{ format_price(item.price, item.currency) }}</span>
-					            <a href="{{ path('front.cart.add',{"id": item.id}) }}" class="btn btn-primary text-left add-cart">
-					                {% trans %}cart.button.add{% endtrans %}<i class="pull-right"><img src="{{ asset('themes/wellcommerce/assets/img/add-to-cart.png') }}"></i>
-					            </a>
-					        </div>
-					    </div>
-				    </div>
-				    {% endfor %}
-				</div>
-
-				<a class="left showcase-control" href="#showcase-2" role="button" data-slide="prev">
-					<span>Previous slide</span>
-				</a>
-
-				<a class="right showcase-control" href="#showcase-2" role="button" data-slide="next">
-					<span>Next slide</span>
-				</a>
-			</div>
-		</div>
-		<!-- END -->
-
+		{% endfor %}
 	</div>
 
 	<ul class="clearfix" role="tablist">
-		<li role="presentation" class="active"><a href="#category-1" aria-controls="category-1" role="tab" data-toggle="tab">Smartphones</a></li>
-		<li role="presentation" ><a href="#category-2" aria-controls="category-2" role="tab" data-toggle="tab">Drones</a></li>
-		<li role="presentation" ><a href="#category-3" aria-controls="category-3" role="tab" data-toggle="tab">Smart TVs</a></li>
-		<li role="presentation" ><a href="#category-4" aria-controls="category-4" role="tab" data-toggle="tab">Watches</a></li>
-		<li role="presentation" ><a href="#category-5" aria-controls="category-5" role="tab" data-toggle="tab">Fitness</a></li>
+		{% for category in showcase.rows %}
+		<li role="presentation" {% if loop.first %}class="active"{% endif %}><a href="#category-{{ category.id }}" aria-controls="category-{{ category.id }}" role="tab" data-toggle="tab">{{ category.name }}</a></li>
+		{% endfor %}
 	</ul>
 </div>
