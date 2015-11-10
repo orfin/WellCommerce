@@ -1315,6 +1315,7 @@ footer {
 		font-size: 13px;
 		text-transform: none;
 		color: #555b5a;
+		border: none;
 
 		.caret {
 			color: #555b5a
@@ -1613,8 +1614,6 @@ footer {
 	}
 }
 
-
-
 .product-description {
 
 	.description-block {
@@ -1654,6 +1653,41 @@ footer {
 
 		}
 
+	}
+}
+
+.product-opinions {
+	.stars {
+		padding-top: 5px;
+	}
+}
+
+.product-opinion {
+	margin-top: 20px;
+	padding-top: 20px;
+	padding-left: 30px;
+    padding-right: 30px;
+    border-top: 1px solid #F8F8F8;
+
+	.media-left,
+	.media-body {
+		vertical-align: middle;
+	}
+
+	.media-left {
+		padding-right: 30px;
+
+		.glyphicon {
+			color: #F8F8F8;
+			font-size: 55px;
+		}
+	}
+
+	.media-body {
+		.glyphicon {
+			font-size: 12px;
+			color: #E5E5E5;
+		}
 	}
 }
 
@@ -1726,65 +1760,62 @@ footer {
 
 .stars {
 	&.rat {
-		position: relative;
 		display: inline-block;
 
-		&:after {
+		> span {
+			display: inline-block;
+		}
+
+		> span.not-quite-full {
+			position: relative;
+		}
+
+		> span.not-quite-full:after {
 			display: block;
-			width: 19px;
 			height: 18px;
 			content: 'star';
 			text-indent: -99999px;
-			background: url(../img/star-on.png) no-repeat;
+			background: #fff url(../img/star-off.png) no-repeat right top;
 			position: absolute;
 			right: 0;
 			top: 2px;
 		}
 	}
 
-	&.rat1:after {
+	&.rat9 .not-quite-full:after {
 		width: 1.9px;
-		right: 17.1px;
 	}
 
-	&.rat2:after {
+	&.rat8 .not-quite-full:after {
 		width: 3.8px;
-		right: 15.2px;
 	}
 
-	&.rat3:after {
+	&.rat7 .not-quite-full:after {
 		width: 5.7px;
-		right: 13.3px;
 	}
 
-	&.rat4:after {
+	&.rat6 .not-quite-full:after {
 		width: 7.6px;
-		right: 11.4px;
 	}
 
-	&.rat5:after {
+	&.rat5 .not-quite-full:after {
 		width: 9.5px;
-		right: 9.5px;
 	}
 
-	&.rat6:after {
+	&.rat4 .not-quite-full:after {
 		width: 11.4px;
-		right: 7.6px;
 	}
 
-	&.rat7:after {
+	&.rat3 .not-quite-full:after {
 		width: 13.3px;
-		right: 5.7px;
 	}
 
-	&.rat8:after {
+	&.rat2 .not-quite-full:after {
 		width: 15.2px;
-		right: 3.8px;
 	}
 
-	&.rat9:after {
+	&.rat1 .not-quite-full:after {
 		width: 17.1px;
-		right: 1.9px;
 	}
 }
 
