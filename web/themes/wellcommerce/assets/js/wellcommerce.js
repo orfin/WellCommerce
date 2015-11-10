@@ -3,16 +3,18 @@ $(document).ready(function () {
     var oBasketModal = $('#basket-modal');
     var oCartPreview = $('#topCart');
 
-    $('.add-cart').GProductAddCartButton({
-        oBasketModal: oBasketModal,
-        oCartPreview: oCartPreview,
-        sAddProductFormClass: '.add-to-cart',
-        sProductSelector: '#product',
-        sQuantitySelector: '#quantity',
-        sAttributeSelector: '#attribute',
-        sPriceSelector: '#price',
-        sAddProductRoute: 'front.cart.add',
-        sAttributesSelectClass: '.attribute'
+    $(document).delegate('.add-cart', 'focus', function() {
+        $(this).GProductAddCartButton({
+            oBasketModal: oBasketModal,
+            oCartPreview: oCartPreview,
+            sAddProductFormClass: '.add-to-cart',
+            sProductSelector: '#product',
+            sQuantitySelector: '#quantity',
+            sAttributeSelector: '#attribute',
+            sPriceSelector: '#price',
+            sAddProductRoute: 'front.cart.add',
+            sAttributesSelectClass: '.attribute'
+        });
     });
 
     $('.coming-soon').click(function(e){

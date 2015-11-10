@@ -9,6 +9,8 @@
 product_search:
     heading:
         index: Search results
+    label:
+        phrase: Enter search phrase
 product:
     form:
         fieldset:
