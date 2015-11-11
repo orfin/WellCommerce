@@ -13,6 +13,7 @@
 namespace WellCommerce\Bundle\MultiStoreBundle\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use WellCommerce\Bundle\CoreBundle\Entity\MailerConfiguration;
 use WellCommerce\Bundle\CoreBundle\Factory\AbstractFactory;
 use WellCommerce\Bundle\MultiStoreBundle\Entity\Shop;
 
@@ -33,6 +34,7 @@ class ShopFactory extends AbstractFactory
         $shop->setCategories(new ArrayCollection());
         $shop->setPages(new ArrayCollection());
         $shop->setProducers(new ArrayCollection());
+        $shop->setMailerConfiguration(new MailerConfiguration());
 
         return $shop;
     }

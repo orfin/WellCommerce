@@ -82,6 +82,31 @@ class ShopFormBuilder extends AbstractFormBuilder
             'options' => $currencies,
         ]));
 
+        $mailerConfiguration = $form->addChild($this->getElement('nested_fieldset', [
+            'name'  => 'mailer_configuration',
+            'label' => $this->trans('shop.form.fieldset.mailer_configuration')
+        ]));
+
+        $mailerConfiguration->addChild($this->getElement('text_field', [
+            'name'  => 'mailerConfiguration.host',
+            'label' => $this->trans('shop.label.mailer_configuration.host'),
+        ]));
+
+        $mailerConfiguration->addChild($this->getElement('text_field', [
+            'name'  => 'mailerConfiguration.port',
+            'label' => $this->trans('shop.label.mailer_configuration.port'),
+        ]));
+
+        $mailerConfiguration->addChild($this->getElement('text_field', [
+            'name'  => 'mailerConfiguration.user',
+            'label' => $this->trans('shop.label.mailer_configuration.user'),
+        ]));
+
+        $mailerConfiguration->addChild($this->getElement('password', [
+            'name'  => 'mailerConfiguration.pass',
+            'label' => $this->trans('shop.label.mailer_configuration.pass'),
+        ]));
+
         $form->addFilter($this->getFilter('no_code'));
         $form->addFilter($this->getFilter('trim'));
         $form->addFilter($this->getFilter('secure'));

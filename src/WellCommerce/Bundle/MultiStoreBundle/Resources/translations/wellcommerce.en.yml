@@ -17,8 +17,16 @@ shop:
         index: Shops
         add: Add a shop
         edit: Edit a shop
+    form:
+        fieldset:
+            mailer_configuration: Mailer configuration
     label:
         company: Company
         theme: Default theme
         default_country: Default country
         default_currency: Default currency
+        mailer_configuration:
+            host: SMTP host
+            port: SMTP port
+            user: SMTP username
+            pass: SMTP password

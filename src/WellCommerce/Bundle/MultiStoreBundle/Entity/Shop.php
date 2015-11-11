@@ -15,7 +15,7 @@ namespace WellCommerce\Bundle\MultiStoreBundle\Entity;
 use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
-use WellCommerce\Bundle\OrderBundle\Entity\OrderStatusInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\MailerConfiguration;
 use WellCommerce\Bundle\ThemeBundle\Entity\ThemeAwareTrait;
 
 /**
@@ -25,7 +25,9 @@ use WellCommerce\Bundle\ThemeBundle\Entity\ThemeAwareTrait;
  */
 class Shop implements ShopInterface
 {
-    use Timestampable, Blameable, ThemeAwareTrait;
+    use Timestampable;
+    use Blameable;
+    use ThemeAwareTrait;
 
     /**
      * @var integer
@@ -76,6 +78,11 @@ class Shop implements ShopInterface
      * @var string
      */
     protected $defaultCurrency;
+
+    /**
+     * @var MailerConfiguration
+     */
+    protected $mailerConfiguration;
 
     /**
      * {@inheritdoc}
@@ -227,5 +234,14 @@ class Shop implements ShopInterface
     public function setDefaultCurrency($defaultCurrency)
     {
         $this->defaultCurrency = $defaultCurrency;
+    }
+
+    public function setMailerConfiguration(MailerConfiguration $configuration)
+    {
+        $this->mailerConfiguration = $configuration;
+    }
+
+    public function getMailerConfiguration(){
+        return $this->mailerConfiguration;
     }
 }

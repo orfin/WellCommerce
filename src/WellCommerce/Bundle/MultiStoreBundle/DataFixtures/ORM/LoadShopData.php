@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\ThemeBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use WellCommerce\Bundle\CoreBundle\DataFixtures\AbstractDataFixture;
+use WellCommerce\Bundle\CoreBundle\Entity\MailerConfiguration;
 use WellCommerce\Bundle\IntlBundle\DataFixtures\ORM\LoadCurrencyData;
 
 /**
@@ -44,6 +45,15 @@ class LoadShopData extends AbstractDataFixture
         $shop->setUrl($this->container->getParameter('fallback_hostname'));
         $shop->setDefaultCountry('US');
         $shop->setDefaultCurrency($currency->getCode());
+
+        $mailerConfiguration = new MailerConfiguration();
+        $mailerConfiguration->setHost($this->container->getParameter('mailer_host'));
+        $mailerConfiguration->setPort($this->container->getParameter('mailer_port'));
+        $mailerConfiguration->setUser($this->container->getParameter('mailer_user'));
+        $mailerConfiguration->setPass($this->container->getParameter('mailer_password'));
+
+        $shop->setMailerConfiguration($mailerConfiguration);
+
         $manager->persist($shop);
         $manager->flush();
 

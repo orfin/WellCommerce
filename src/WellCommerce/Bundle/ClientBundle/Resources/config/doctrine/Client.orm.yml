@@ -63,6 +63,13 @@ WellCommerce\Bundle\ClientBundle\Entity\Client:
             mappedBy: client
             orphanRemoval: true
     manyToOne:
+        shop:
+            targetEntity: WellCommerce\Bundle\MultiStoreBundle\Entity\Shop
+            fetch: LAZY
+            joinColumns:
+                shop_id:
+                    referencedColumnName: id
+                    onDelete: CASCADE
         clientGroup:
             targetEntity: WellCommerce\Bundle\ClientBundle\Entity\ClientGroup
             fetch: LAZY

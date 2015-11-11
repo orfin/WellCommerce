@@ -24,7 +24,9 @@ class ClientRegistrationBoxController extends AbstractBoxController
     public function indexAction()
     {
         $resource = $this->manager->initResource();
-        $form     = $this->manager->getForm($resource, [
+        $resource->setShop($this->manager->getShopContext()->getCurrentShop());
+
+        $form = $this->manager->getForm($resource, [
             'name'              => 'register',
             'validation_groups' => ['client_registration']
         ]);

@@ -19,6 +19,7 @@ use WellCommerce\Bundle\CoreBundle\Entity\AddressInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\ContactDetailsAwareInterface;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
+use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopAwareInterface;
 
 /**
  * Interface ClientInterface
@@ -31,7 +32,8 @@ interface ClientInterface extends
     EquatableInterface,
     TimestampableInterface,
     BlameableInterface,
-    ClientGroupAwareInterface
+    ClientGroupAwareInterface,
+    ShopAwareInterface
 {
     /**
      * @return int

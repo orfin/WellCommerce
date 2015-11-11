@@ -1,0 +1,1113 @@
+dynamic_394:
+    path: /lg
+    defaults:
+        _controller: 'producer.controller.front:indexAction'
+        page: 1
+        sort: 1
+        id: 16
+        _locale: en
+    requirements:
+        page: '\d{1,10}'
+        sort: asc|desc
+dynamic_395:
+    path: /samsung
+    defaults:
+        _controller: 'producer.controller.front:indexAction'
+        page: 1
+        sort: 1
+        id: 17
+        _locale: en
+    requirements:
+        page: '\d{1,10}'
+        sort: asc|desc
+dynamic_396:
+    path: /sony
+    defaults:
+        _controller: 'producer.controller.front:indexAction'
+        page: 1
+        sort: 1
+        id: 18
+        _locale: en
+    requirements:
+        page: '\d{1,10}'
+        sort: asc|desc
+dynamic_397:
+    path: /panasonic
+    defaults:
+        _controller: 'producer.controller.front:indexAction'
+        page: 1
+        sort: 1
+        id: 19
+        _locale: en
+    requirements:
+        page: '\d{1,10}'
+        sort: asc|desc
+dynamic_398:
+    path: /toshiba
+    defaults:
+        _controller: 'producer.controller.front:indexAction'
+        page: 1
+        sort: 1
+        id: 20
+        _locale: en
+    requirements:
+        page: '\d{1,10}'
+        sort: asc|desc
+dynamic_399:
+    path: '/smart-tvs,{page},{limit},{orderBy},{orderDir},{priceFrom},{priceTo},{producers},{attributes}'
+    defaults:
+        _controller: 'category.controller.front:indexAction'
+        limit: 12
+        page: 1
+        orderBy: name
+        orderDir: asc
+        priceFrom: 0
+        priceTo: 9999
+        producers: null
+        attributes: null
+        id: 22
+        _locale: en
+    requirements:
+        limit: '\d{1,10}'
+        page: '\d{1,10}'
+        orderBy: name|finalPrice
+        orderDir: asc|desc
+        priceFrom: '\d{1,10}'
+        priceTo: '\d{1,10}'
+        producers: '[\d+_]+'
+        attributes: '[\d+_]+'
+dynamic_400:
+    path: '/streaming-devices,{page},{limit},{orderBy},{orderDir},{priceFrom},{priceTo},{producers},{attributes}'
+    defaults:
+        _controller: 'category.controller.front:indexAction'
+        limit: 12
+        page: 1
+        orderBy: name
+        orderDir: asc
+        priceFrom: 0
+        priceTo: 9999
+        producers: null
+        attributes: null
+        id: 23
+        _locale: en
+    requirements:
+        limit: '\d{1,10}'
+        page: '\d{1,10}'
+        orderBy: name|finalPrice
+        orderDir: asc|desc
+        priceFrom: '\d{1,10}'
+        priceTo: '\d{1,10}'
+        producers: '[\d+_]+'
+        attributes: '[\d+_]+'
+dynamic_401:
+    path: '/accessories,{page},{limit},{orderBy},{orderDir},{priceFrom},{priceTo},{producers},{attributes}'
+    defaults:
+        _controller: 'category.controller.front:indexAction'
+        limit: 12
+        page: 1
+        orderBy: name
+        orderDir: asc
+        priceFrom: 0
+        priceTo: 9999
+        producers: null
+        attributes: null
+        id: 24
+        _locale: en
+    requirements:
+        limit: '\d{1,10}'
+        page: '\d{1,10}'
+        orderBy: name|finalPrice
+        orderDir: asc|desc
+        priceFrom: '\d{1,10}'
+        priceTo: '\d{1,10}'
+        producers: '[\d+_]+'
+        attributes: '[\d+_]+'
+dynamic_402:
+    path: '/dvd-blue-ray-players,{page},{limit},{orderBy},{orderDir},{priceFrom},{priceTo},{producers},{attributes}'
+    defaults:
+        _controller: 'category.controller.front:indexAction'
+        limit: 12
+        page: 1
+        orderBy: name
+        orderDir: asc
+        priceFrom: 0
+        priceTo: 9999
+        producers: null
+        attributes: null
+        id: 25
+        _locale: en
+    requirements:
+        limit: '\d{1,10}'
+        page: '\d{1,10}'
+        orderBy: name|finalPrice
+        orderDir: asc|desc
+        priceFrom: '\d{1,10}'
+        priceTo: '\d{1,10}'
+        producers: '[\d+_]+'
+        attributes: '[\d+_]+'
+dynamic_403:
+    path: '/audio-players,{page},{limit},{orderBy},{orderDir},{priceFrom},{priceTo},{producers},{attributes}'
+    defaults:
+        _controller: 'category.controller.front:indexAction'
+        limit: 12
+        page: 1
+        orderBy: name
+        orderDir: asc
+        priceFrom: 0
+        priceTo: 9999
+        producers: null
+        attributes: null
+        id: 26
+        _locale: en
+    requirements:
+        limit: '\d{1,10}'
+        page: '\d{1,10}'
+        orderBy: name|finalPrice
+        orderDir: asc|desc
+        priceFrom: '\d{1,10}'
+        priceTo: '\d{1,10}'
+        producers: '[\d+_]+'
+        attributes: '[\d+_]+'
+dynamic_404:
+    path: '/projectors,{page},{limit},{orderBy},{orderDir},{priceFrom},{priceTo},{producers},{attributes}'
+    defaults:
+        _controller: 'category.controller.front:indexAction'
+        limit: 12
+        page: 1
+        orderBy: name
+        orderDir: asc
+        priceFrom: 0
+        priceTo: 9999
+        producers: null
+        attributes: null
+        id: 27
+        _locale: en
+    requirements:
+        limit: '\d{1,10}'
+        page: '\d{1,10}'
+        orderBy: name|finalPrice
+        orderDir: asc|desc
+        priceFrom: '\d{1,10}'
+        priceTo: '\d{1,10}'
+        producers: '[\d+_]+'
+        attributes: '[\d+_]+'
+dynamic_405:
+    path: '/home-theater,{page},{limit},{orderBy},{orderDir},{priceFrom},{priceTo},{producers},{attributes}'
+    defaults:
+        _controller: 'category.controller.front:indexAction'
+        limit: 12
+        page: 1
+        orderBy: name
+        orderDir: asc
+        priceFrom: 0
+        priceTo: 9999
+        producers: null
+        attributes: null
+        id: 28
+        _locale: en
+    requirements:
+        limit: '\d{1,10}'
+        page: '\d{1,10}'
+        orderBy: name|finalPrice
+        orderDir: asc|desc
+        priceFrom: '\d{1,10}'
+        priceTo: '\d{1,10}'
+        producers: '[\d+_]+'
+        attributes: '[\d+_]+'
+dynamic_406:
+    path: '/promotions,{page},{limit},{orderBy},{orderDir},{priceFrom},{priceTo},{producers},{attributes}'
+    defaults:
+        _controller: 'product_status.controller.front:indexAction'
+        page: 1
+        limit: 12
+        orderBy: name
+        orderDir: asc
+        priceFrom: 0
+        priceTo: 9999
+        producers: null
+        attributes: null
+        id: 13
+        _locale: en
+    requirements:
+        limit: '\d{1,10}'
+        page: '\d{1,10}'
+        orderBy: name|finalPrice
+        orderDir: asc|desc
+        priceFrom: '\d{1,10}'
+        priceTo: '\d{1,10}'
+        producers: '[\d+_]+'
+        attributes: '[\d+_]+'
+dynamic_407:
+    path: '/new-arrivals,{page},{limit},{orderBy},{orderDir},{priceFrom},{priceTo},{producers},{attributes}'
+    defaults:
+        _controller: 'product_status.controller.front:indexAction'
+        page: 1
+        limit: 12
+        orderBy: name
+        orderDir: asc
+        priceFrom: 0
+        priceTo: 9999
+        producers: null
+        attributes: null
+        id: 14
+        _locale: en
+    requirements:
+        limit: '\d{1,10}'
+        page: '\d{1,10}'
+        orderBy: name|finalPrice
+        orderDir: asc|desc
+        priceFrom: '\d{1,10}'
+        priceTo: '\d{1,10}'
+        producers: '[\d+_]+'
+        attributes: '[\d+_]+'
+dynamic_408:
+    path: '/featured,{page},{limit},{orderBy},{orderDir},{priceFrom},{priceTo},{producers},{attributes}'
+    defaults:
+        _controller: 'product_status.controller.front:indexAction'
+        page: 1
+        limit: 12
+        orderBy: name
+        orderDir: asc
+        priceFrom: 0
+        priceTo: 9999
+        producers: null
+        attributes: null
+        id: 15
+        _locale: en
+    requirements:
+        limit: '\d{1,10}'
+        page: '\d{1,10}'
+        orderBy: name|finalPrice
+        orderDir: asc|desc
+        priceFrom: '\d{1,10}'
+        priceTo: '\d{1,10}'
+        producers: '[\d+_]+'
+        attributes: '[\d+_]+'
+dynamic_409:
+    path: '/bestsellers,{page},{limit},{orderBy},{orderDir},{priceFrom},{priceTo},{producers},{attributes}'
+    defaults:
+        _controller: 'product_status.controller.front:indexAction'
+        page: 1
+        limit: 12
+        orderBy: name
+        orderDir: asc
+        priceFrom: 0
+        priceTo: 9999
+        producers: null
+        attributes: null
+        id: 16
+        _locale: en
+    requirements:
+        limit: '\d{1,10}'
+        page: '\d{1,10}'
+        orderBy: name|finalPrice
+        orderDir: asc|desc
+        priceFrom: '\d{1,10}'
+        priceTo: '\d{1,10}'
+        producers: '[\d+_]+'
+        attributes: '[\d+_]+'
+dynamic_410:
+    path: /qui-hic-laudantium-adipisci
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 304
+        _locale: en
+    requirements: {  }
+dynamic_411:
+    path: /iste-et-ab-voluptatem
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 305
+        _locale: en
+    requirements: {  }
+dynamic_412:
+    path: /voluptate-similique-sunt-laboriosam
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 306
+        _locale: en
+    requirements: {  }
+dynamic_413:
+    path: /placeat-mollitia-sequi-non
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 307
+        _locale: en
+    requirements: {  }
+dynamic_414:
+    path: /quasi-similique-iure
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 308
+        _locale: en
+    requirements: {  }
+dynamic_415:
+    path: /libero-natus-beatae-vitae
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 309
+        _locale: en
+    requirements: {  }
+dynamic_416:
+    path: /amet-earum-et-cumque
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 310
+        _locale: en
+    requirements: {  }
+dynamic_417:
+    path: /ratione-adipisci-hic-accusantium
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 311
+        _locale: en
+    requirements: {  }
+dynamic_418:
+    path: /voluptate-et-culpa
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 312
+        _locale: en
+    requirements: {  }
+dynamic_419:
+    path: /minima-sunt-quaerat
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 313
+        _locale: en
+    requirements: {  }
+dynamic_420:
+    path: /temporibus-expedita-necessitatibus
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 314
+        _locale: en
+    requirements: {  }
+dynamic_421:
+    path: /autem-minus-modi
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 315
+        _locale: en
+    requirements: {  }
+dynamic_422:
+    path: /animi-quisquam-labore-delectus
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 316
+        _locale: en
+    requirements: {  }
+dynamic_423:
+    path: /voluptas-incidunt-est
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 317
+        _locale: en
+    requirements: {  }
+dynamic_424:
+    path: /commodi-doloremque-in-quaerat
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 318
+        _locale: en
+    requirements: {  }
+dynamic_425:
+    path: /molestias-magni-voluptatem
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 319
+        _locale: en
+    requirements: {  }
+dynamic_426:
+    path: /nisi-impedit-at-qui-tempore
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 320
+        _locale: en
+    requirements: {  }
+dynamic_427:
+    path: /assumenda-nihil-necessitatibus
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 321
+        _locale: en
+    requirements: {  }
+dynamic_428:
+    path: /ipsa-dolorum-et
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 322
+        _locale: en
+    requirements: {  }
+dynamic_429:
+    path: /soluta-vel-ducimus
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 323
+        _locale: en
+    requirements: {  }
+dynamic_430:
+    path: /est-id-eligendi
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 324
+        _locale: en
+    requirements: {  }
+dynamic_431:
+    path: /aut-sit-consequatur-soluta
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 325
+        _locale: en
+    requirements: {  }
+dynamic_432:
+    path: /aliquid-voluptas-rerum-aut
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 326
+        _locale: en
+    requirements: {  }
+dynamic_433:
+    path: /sit-nesciunt-dolore-magni
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 327
+        _locale: en
+    requirements: {  }
+dynamic_434:
+    path: /quis-et-ut-est
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 328
+        _locale: en
+    requirements: {  }
+dynamic_435:
+    path: /corporis-molestiae-ut
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 329
+        _locale: en
+    requirements: {  }
+dynamic_436:
+    path: /et-dolores-natus-debitis-ea
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 330
+        _locale: en
+    requirements: {  }
+dynamic_437:
+    path: /natus-cum-at
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 331
+        _locale: en
+    requirements: {  }
+dynamic_438:
+    path: /id-repellat-sint-doloribus-placeat
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 332
+        _locale: en
+    requirements: {  }
+dynamic_439:
+    path: /perspiciatis-ut-omnis-vel
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 333
+        _locale: en
+    requirements: {  }
+dynamic_440:
+    path: /vitae-sunt-numquam
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 334
+        _locale: en
+    requirements: {  }
+dynamic_441:
+    path: /consectetur-adipisci-qui
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 335
+        _locale: en
+    requirements: {  }
+dynamic_442:
+    path: /est-ipsa
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 336
+        _locale: en
+    requirements: {  }
+dynamic_443:
+    path: /et-occaecati-nam
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 337
+        _locale: en
+    requirements: {  }
+dynamic_444:
+    path: /earum-et
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 338
+        _locale: en
+    requirements: {  }
+dynamic_445:
+    path: /eaque-velit-dolorem-dolores
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 339
+        _locale: en
+    requirements: {  }
+dynamic_446:
+    path: /ea-sint-ratione-minus
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 340
+        _locale: en
+    requirements: {  }
+dynamic_447:
+    path: /minus-eligendi-quis
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 341
+        _locale: en
+    requirements: {  }
+dynamic_448:
+    path: /rem-illo-fugiat
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 342
+        _locale: en
+    requirements: {  }
+dynamic_449:
+    path: /voluptatem-ea-inventore
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 343
+        _locale: en
+    requirements: {  }
+dynamic_450:
+    path: /suscipit-et-nulla-vitae-ut
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 344
+        _locale: en
+    requirements: {  }
+dynamic_451:
+    path: /inventore-et
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 345
+        _locale: en
+    requirements: {  }
+dynamic_452:
+    path: /quia-vel-magnam-iste
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 346
+        _locale: en
+    requirements: {  }
+dynamic_453:
+    path: /quod-qui
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 347
+        _locale: en
+    requirements: {  }
+dynamic_454:
+    path: /ea-fuga
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 348
+        _locale: en
+    requirements: {  }
+dynamic_455:
+    path: /quis-in-molestias
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 349
+        _locale: en
+    requirements: {  }
+dynamic_456:
+    path: /minima-et-vel
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 350
+        _locale: en
+    requirements: {  }
+dynamic_457:
+    path: /voluptates-et
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 351
+        _locale: en
+    requirements: {  }
+dynamic_458:
+    path: /harum-voluptatem-doloribus
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 352
+        _locale: en
+    requirements: {  }
+dynamic_459:
+    path: /voluptatem-aliquid-consequuntur-recusandae-aut
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 353
+        _locale: en
+    requirements: {  }
+dynamic_460:
+    path: /et-amet-autem-temporibus-vitae
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 354
+        _locale: en
+    requirements: {  }
+dynamic_461:
+    path: /vel-in-fugiat
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 355
+        _locale: en
+    requirements: {  }
+dynamic_462:
+    path: /sit-vel-non-minima
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 356
+        _locale: en
+    requirements: {  }
+dynamic_463:
+    path: /aut-illo-incidunt
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 357
+        _locale: en
+    requirements: {  }
+dynamic_464:
+    path: /corporis-quos-maiores
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 358
+        _locale: en
+    requirements: {  }
+dynamic_465:
+    path: /sint-aperiam-asperiores
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 359
+        _locale: en
+    requirements: {  }
+dynamic_466:
+    path: /ab-dolor-rerum
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 360
+        _locale: en
+    requirements: {  }
+dynamic_467:
+    path: /omnis-suscipit-perferendis-nihil
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 361
+        _locale: en
+    requirements: {  }
+dynamic_468:
+    path: /porro-cumque-voluptas-aliquam
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 362
+        _locale: en
+    requirements: {  }
+dynamic_469:
+    path: /eum-aut-dolor
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 363
+        _locale: en
+    requirements: {  }
+dynamic_470:
+    path: /harum-sint-impedit-illum
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 364
+        _locale: en
+    requirements: {  }
+dynamic_471:
+    path: /corrupti-incidunt-voluptate
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 365
+        _locale: en
+    requirements: {  }
+dynamic_472:
+    path: /est-sit-debitis-sed-atque
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 366
+        _locale: en
+    requirements: {  }
+dynamic_473:
+    path: /et-excepturi
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 367
+        _locale: en
+    requirements: {  }
+dynamic_474:
+    path: /atque-dolor-et
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 368
+        _locale: en
+    requirements: {  }
+dynamic_475:
+    path: /nulla-molestiae-maxime
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 369
+        _locale: en
+    requirements: {  }
+dynamic_476:
+    path: /pariatur-expedita-totam
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 370
+        _locale: en
+    requirements: {  }
+dynamic_477:
+    path: /ratione-aut-sit
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 371
+        _locale: en
+    requirements: {  }
+dynamic_478:
+    path: /nisi-et-fugiat-aut
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 372
+        _locale: en
+    requirements: {  }
+dynamic_479:
+    path: /dolores-ea-ducimus
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 373
+        _locale: en
+    requirements: {  }
+dynamic_480:
+    path: /aut-ea-modi-est
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 374
+        _locale: en
+    requirements: {  }
+dynamic_481:
+    path: /similique-dignissimos-et-saepe-debitis
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 375
+        _locale: en
+    requirements: {  }
+dynamic_482:
+    path: /non-eum-voluptate-nisi-qui
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 376
+        _locale: en
+    requirements: {  }
+dynamic_483:
+    path: /architecto-et-tempore
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 377
+        _locale: en
+    requirements: {  }
+dynamic_484:
+    path: /error-laboriosam
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 378
+        _locale: en
+    requirements: {  }
+dynamic_485:
+    path: /qui-ut-consequuntur-aut-iste
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 379
+        _locale: en
+    requirements: {  }
+dynamic_486:
+    path: /soluta-libero
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 380
+        _locale: en
+    requirements: {  }
+dynamic_487:
+    path: /sunt-quo-placeat
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 381
+        _locale: en
+    requirements: {  }
+dynamic_488:
+    path: /ipsa-deserunt-et
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 382
+        _locale: en
+    requirements: {  }
+dynamic_489:
+    path: /ipsam-et-veritatis
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 383
+        _locale: en
+    requirements: {  }
+dynamic_490:
+    path: /nobis-neque-rerum-quo-dolorem
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 384
+        _locale: en
+    requirements: {  }
+dynamic_491:
+    path: /temporibus-mollitia-saepe
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 385
+        _locale: en
+    requirements: {  }
+dynamic_492:
+    path: /doloribus-et
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 386
+        _locale: en
+    requirements: {  }
+dynamic_493:
+    path: /qui-laboriosam-fugit
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 387
+        _locale: en
+    requirements: {  }
+dynamic_494:
+    path: /labore-sit-dolorem-blanditiis
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 388
+        _locale: en
+    requirements: {  }
+dynamic_495:
+    path: /ducimus-corporis-blanditiis-consequatur
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 389
+        _locale: en
+    requirements: {  }
+dynamic_496:
+    path: /et-ullam-dolor
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 390
+        _locale: en
+    requirements: {  }
+dynamic_497:
+    path: /aliquam-aut
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 391
+        _locale: en
+    requirements: {  }
+dynamic_498:
+    path: /impedit-et-expedita-consectetur
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 392
+        _locale: en
+    requirements: {  }
+dynamic_499:
+    path: /laboriosam-aut-consectetur-asperiores
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 393
+        _locale: en
+    requirements: {  }
+dynamic_500:
+    path: /sit-dolores-rerum
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 394
+        _locale: en
+    requirements: {  }
+dynamic_501:
+    path: /laboriosam-nesciunt-quaerat-enim
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 395
+        _locale: en
+    requirements: {  }
+dynamic_502:
+    path: /eum-consequatur-velit
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 396
+        _locale: en
+    requirements: {  }
+dynamic_503:
+    path: /aspernatur-architecto-quia
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 397
+        _locale: en
+    requirements: {  }
+dynamic_504:
+    path: /ducimus-earum-et
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 398
+        _locale: en
+    requirements: {  }
+dynamic_505:
+    path: /nihil-at-aut-est-quas
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 399
+        _locale: en
+    requirements: {  }
+dynamic_506:
+    path: /quos-eum-maxime-dignissimos
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 400
+        _locale: en
+    requirements: {  }
+dynamic_507:
+    path: /unde-eum-rem-quis
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 401
+        _locale: en
+    requirements: {  }
+dynamic_508:
+    path: /quis-dolor-et-et
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 402
+        _locale: en
+    requirements: {  }
+dynamic_509:
+    path: /magnam-dolore-deleniti
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 403
+        _locale: en
+    requirements: {  }
+dynamic_510:
+    path: /ea-corporis-nihil
+    defaults:
+        _controller: 'product.controller.front:indexAction'
+        id: 404
+        _locale: en
+    requirements: {  }
+dynamic_511:
+    path: /about-us
+    defaults:
+        _controller: 'page.controller.front:indexAction'
+        id: 43
+        _locale: en
+    requirements: {  }
+dynamic_512:
+    path: /news-feed
+    defaults:
+        _controller: 'page.controller.front:indexAction'
+        id: 44
+        _locale: en
+    requirements: {  }
+dynamic_513:
+    path: /stores
+    defaults:
+        _controller: 'page.controller.front:indexAction'
+        id: 45
+        _locale: en
+    requirements: {  }
+dynamic_514:
+    path: /brands
+    defaults:
+        _controller: 'page.controller.front:indexAction'
+        id: 46
+        _locale: en
+    requirements: {  }
+dynamic_515:
+    path: /our-brand
+    defaults:
+        _controller: 'page.controller.front:indexAction'
+        id: 47
+        _locale: en
+    requirements: {  }
+dynamic_516:
+    path: /about-company
+    defaults:
+        _controller: 'page.controller.front:indexAction'
+        id: 48
+        _locale: en
+    requirements: {  }
+dynamic_517:
+    path: /wholesale
+    defaults:
+        _controller: 'page.controller.front:indexAction'
+        id: 49
+        _locale: en
+    requirements: {  }
+dynamic_518:
+    path: /help
+    defaults:
+        _controller: 'page.controller.front:indexAction'
+        id: 50
+        _locale: en
+    requirements: {  }
+dynamic_519:
+    path: /conditions
+    defaults:
+        _controller: 'page.controller.front:indexAction'
+        id: 51
+        _locale: en
+    requirements: {  }
+dynamic_520:
+    path: /returns-warranty
+    defaults:
+        _controller: 'page.controller.front:indexAction'
+        id: 52
+        _locale: en
+    requirements: {  }
+dynamic_521:
+    path: /shipping
+    defaults:
+        _controller: 'page.controller.front:indexAction'
+        id: 53
+        _locale: en
+    requirements: {  }
+dynamic_522:
+    path: /availability-delivery-times
+    defaults:
+        _controller: 'page.controller.front:indexAction'
+        id: 54
+        _locale: en
+    requirements: {  }
+dynamic_523:
+    path: /payment
+    defaults:
+        _controller: 'page.controller.front:indexAction'
+        id: 55
+        _locale: en
+    requirements: {  }
+dynamic_524:
+    path: /site-map
+    defaults:
+        _controller: 'page.controller.front:indexAction'
+        id: 56
+        _locale: en
+    requirements: {  }

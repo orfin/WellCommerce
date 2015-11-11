@@ -1949,23 +1949,23 @@ var GTabs = function() {
 	};
 
 	gThis._SolveAllProblems = function() {
-		// $(gThis).css({
-		// 	opacity: 0,
-		// 	height: 0,
-		// 	overflow: 'hidden'
-		// }).tabs('add', '#a', '', 0).tabs('select', 0);
-        //
-		// setTimeout(function() {
-		// 	$(gThis).tabs('select', 1);
-		// 	$(gThis).tabs('remove', 0);
-		// 	$(gThis).find('.ui-tabs-panel').eq(0).children('fieldset').triggerHandler('GFormShow');
-		// 	$(gThis).wrap('<div style="clear: both;"/>').css('height', 'auto');
-		// 	$(gThis).parent().css('display', 'none').slideDown(350);
-		// 	$(gThis).css({
-		// 		opacity: 1,
-		// 		overflow: 'visible'
-		// 	});
-		// }, 10);
+		$(gThis).css({
+			opacity: 0,
+			height: 0,
+			overflow: 'hidden'
+		}).tabs('add', '#a', '', 0).tabs('select', 0);
+
+		setTimeout(function() {
+			$(gThis).tabs('select', 1);
+			$(gThis).tabs('remove', 0);
+			$(gThis).find('.ui-tabs-panel').eq(0).children('fieldset').triggerHandler('GFormShow');
+			$(gThis).wrap('<div style="clear: both;"/>').css('height', 'auto');
+			$(gThis).parent().css('display', 'none').slideDown(350);
+			$(gThis).css({
+				opacity: 1,
+				overflow: 'visible'
+			});
+		}, 10);
 	};
 
 	gThis._Constructor();

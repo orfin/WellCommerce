@@ -1,3 +1,6 @@
+_dynamic_routing:
+    resource: dynamic_routing.yml
+
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
 

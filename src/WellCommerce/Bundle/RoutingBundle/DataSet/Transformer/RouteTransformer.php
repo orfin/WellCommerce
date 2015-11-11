@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\RoutingBundle\DataSet\Transformer;
 
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use WellCommerce\Bundle\DataSetBundle\Transformer\AbstractDataSetTransformer;
+use WellCommerce\Bundle\RoutingBundle\Provider\RouteProvider;
 
 /**
  * Class RouteTransformer

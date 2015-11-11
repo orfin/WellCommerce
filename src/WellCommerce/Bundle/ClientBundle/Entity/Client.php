@@ -15,8 +15,7 @@ use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Model\Blameable\Blameable;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Symfony\Component\Security\Core\User\UserInterface;
-use WellCommerce\Bundle\CoreBundle\Entity\AddressInterface;
-use WellCommerce\Bundle\CoreBundle\Entity\ContactDetailsTrait;
+use WellCommerce\Bundle\MultiStoreBundle\Entity\ShopAwareTrait;
 
 /**
  * Class Client
@@ -29,6 +28,7 @@ class Client implements ClientInterface
 
     use Timestampable;
     use Blameable;
+    use ShopAwareTrait;
 
     /**
      * @var int

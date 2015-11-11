@@ -14,6 +14,7 @@ namespace WellCommerce\Bundle\MultiStoreBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
 use WellCommerce\Bundle\CoreBundle\Entity\BlameableInterface;
+use WellCommerce\Bundle\CoreBundle\Entity\MailerConfiguration;
 use WellCommerce\Bundle\CoreBundle\Entity\TimestampableInterface;
 use WellCommerce\Bundle\ThemeBundle\Entity\ThemeAwareInterface;
 
@@ -118,4 +119,14 @@ interface ShopInterface extends TimestampableInterface, BlameableInterface, Them
      * @param string $defaultCurrency
      */
     public function setDefaultCurrency($defaultCurrency);
+
+    /**
+     * @param MailerConfiguration $configuration
+     */
+    public function setMailerConfiguration(MailerConfiguration $configuration);
+
+    /**
+     * @return MailerConfiguration
+     */
+    public function getMailerConfiguration();
 }

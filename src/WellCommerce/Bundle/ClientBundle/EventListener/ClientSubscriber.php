@@ -39,9 +39,12 @@ class ClientSubscriber extends AbstractEventSubscriber
 
             $this->get('mailer.helper')->sendEmail(
                 $client->getContactDetails()->getEmail(),
-                'Hello',
-                'WellCommerceClientBundle:Front/Email:register.html.twig',
-                $client
+                $this->getTranslatorHelper()->trans('client.email.heading.register'),
+                'WellCommerceClientBundle:Email:register.html.twig',
+                [
+                    'client' => $client
+                ],
+                $client->getShop()->getMailerConfiguration()
             );
         }
     }

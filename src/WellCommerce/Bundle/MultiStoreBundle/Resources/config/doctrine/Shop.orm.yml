@@ -7,6 +7,10 @@ WellCommerce\Bundle\MultiStoreBundle\Entity\Shop:
             type: integer
             generator:
                 strategy: IDENTITY
+    embedded:
+        mailerConfiguration:
+            class: WellCommerce\Bundle\CoreBundle\Entity\MailerConfiguration
+            columnPrefix: mailer_configuration_
     fields:
         name:
             type: string

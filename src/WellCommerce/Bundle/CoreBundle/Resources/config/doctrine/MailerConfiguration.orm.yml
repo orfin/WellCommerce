@@ -1,0 +1,18 @@
+WellCommerce\Bundle\CoreBundle\Entity\MailerConfiguration:
+    type: embeddable
+    fields:
+        host:
+            type: string
+            length: 64
+            nullable: false
+        port:
+            type: integer
+            nullable: false
+        user:
+            type: string
+            length: 64
+            nullable: false
+        pass:
+            type: string
+            length: 64
+            nullable: false
